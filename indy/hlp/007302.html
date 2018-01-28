@@ -1,0 +1,214 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+<TITLE>TIdDNSResolver</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <META name="GENERATOR" content="Doc-O-Matic">
+    <LINK rel="STYLESHEET" href="default.css" type="text/css">
+
+<SCRIPT LANGUAGE="JavaScript1.2" SRC="scripts.js"></SCRIPT>
+</HEAD>
+<BODY CLASS="Element57">
+<TABLE BORDER="0" BGCOLOR="#AACCFF" WIDTH="100%" CELLSPACING="0" CELLPADDING="0">
+<TR><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element1">
+Indy 9</DIV>
+</TD><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element2">
+<A HREF="content.html" CLASS="Element59">Content</A> | <A HREF="idx.html" CLASS="Element59">Index</A> | <A HREF="symref.html" CLASS="Element59">Reference</A></DIV>
+</TD></TR></TABLE><DIV CLASS="Element58">
+<DIV CLASS="Element5">
+TIdDNSResolver</DIV>
+<DIV CLASS="Element7">
+<A HREF="010740.html" CLASS="Element59">Hierarchy</A>, <A HREF="010741.html" CLASS="Element59">Properties</A>, <A HREF="010742.html" CLASS="Element59">Methods</A>, <A HREF="010743.html" CLASS="Element59">Events</A>, <A HREF="010744.html" CLASS="Element59">See Also</A>, <A HREF="002173.html" CLASS="Element59">Unit: IdDNSResolver</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Implements a UDP-based resolver for DNS queries.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12">TIdDNSResolver = <STRONG>class</STRONG>(<A HREF="007874.html" CLASS="Element59">TIdUDPClient</A>)</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Unit</DIV>
+<DIV CLASS="Element69">
+<A HREF="002173.html" CLASS="Element59">IdDNSResolver</A></DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+TIdDNSResolver is a <A HREF="007874.html" CLASS="Element59">TIdUDPClient</A> descendant that provides a stateless UDP-based implementation of a resolver for DNS (Domain Name Server) queries using the DNS protocol. The DNS protocol is described in the Internet Standards documents:<P CLASS="Element10">
+<UL>
+<LI>RFC 1034 - Domain Names Concepts and Facilities (http://www.rfc-editor.org/rfc/rfc1034.txt)<P CLASS="Element10">
+<LI>RFC 1035 - Domain Names Implementation and Specification (http://www.rfc-editor.org/rfc/rfc1035.txt)<P CLASS="Element10">
+<LI>RFC 1591 - Domain Name System Structure and Delegation (http://www.rfc-editor.org/rfc/rfc1591.txt)<P CLASS="Element10">
+<LI>RFC 1183 - New DNS RR Definitions. (http://www.rfc-editor.org/rfc/rfc1183.txt)<P CLASS="Element10">
+<LI>RFC 2181 - Clarifications to the DNS Specification. (http://www.rfc-editor.org/rfc/rfc2181.txt)</UL>
+<P CLASS="Element10">
+TIdDNSResolver provides facilities for accessing the Domain Name Space and Resource Records retrieved from a DNS Server using queries for specified domain names, resource types, and resource classes.<P CLASS="Element10">
+TIdDNSResolver provides properties and methods that simplify the process of creating a valid DNS query, and accessing the resource records returned in the query results.<P CLASS="Element10">
+Use <A HREF="007302.html#0003" CLASS="Element59">QueryRecords</A> to indicate DNS Resource Record types to be returned by the DNS Query. <A HREF="007302.html#0003" CLASS="Element59">QueryRecords</A> must contain on or more of the values from <A HREF="008045.html" CLASS="Element59">TQueryRecordTypes</A>.<P CLASS="Element10">
+Set <A HREF="007302.html#0000" CLASS="Element59">AllowRecursiveQueries</A> to the value to be used in the DNS Query header. <A HREF="007302.html#0000" CLASS="Element59">AllowRecursiveQueries</A> permits a DNS server to pursue the query for DNS resource records on another name server. <A HREF="007302.html#0000" CLASS="Element59">AllowRecursiveQueries</A> has no effect if the DNS server does not implement recursive queries.<P CLASS="Element10">
+Use the <A HREF="007302.html#0005" CLASS="Element59">Resolve</A> method to peform a DNS Query for the specified domain name. <A HREF="007302.html#0005" CLASS="Element59">Resolve</A> creates the DNS Query packet, including the DNS header, transmits the request to the DNS host, and captures and parses the query results.<P CLASS="Element10">
+Use <A HREF="007302.html#0004" CLASS="Element59">QueryResult</A> to determine the number of resource records returned by the QueryClass, QueryType, and <A HREF="000339.html" CLASS="Element59">DomainName</A> in the DNS Query, and to access the <A HREF="008059.html" CLASS="Element59">TResultRecord</A> object instances containing the data for the resource records. Items in QueryResults may also be cast to an instance of a <A HREF="008059.html" CLASS="Element59">TResultRecord</A> descendant class to access additional properties and methods based on its resource record type and class.<P CLASS="Element10">
+<STRONG>Note</STRONG>: Currently, the TIdDNSResolver implementation does not support all aspects of the DNS protocol, and includes the following limitations:<P CLASS="Element10">
+<UL>
+<LI>The DNS query type is limited to standard queries, where the DNS Header OPCODE is 0. Inverse queries (OPCODE=1) and Status queries (OPCODE=2) are not supported at this time.<P CLASS="Element10">
+<LI>The DNS query class field is limited to examing resource records for the IN (Internet) class only. CS (CSNet), CH (CHAOS), and HS (Hesiod) are not supported at this time.</UL>
+</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0000">TIdDNSResolver.AllowRecursiveQueries</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007302.html" CLASS="Element59">TIdDNSResolver</A>, <A HREF="010745.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Indicates if recursive DNS queries are desired on the DNS server.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> AllowRecursiveQueries: Boolean;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+AllowRecursiveQueries is a Boolean property that indicates if the DNS server should persue client queries which require resource records from another DNS name server. AllowRecursiveQueries is stored in the DNS Header for the request to the DNS server.<P CLASS="Element10">
+AllowRecursiveQueries will have no effect when the DNS does not implement recursive queries, as indicated in the DNS Header RA field from the server response.<P CLASS="Element10">
+The default value for AllowRecursiveQueries is True, as assigned in the <A HREF="007302.html#0001" CLASS="Element59">Create</A> constructor. Set the desired value for AllowRecursiveQueries prior to calling <A HREF="007302.html#0005" CLASS="Element59">Resolve</A>.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0003">TIdDNSResolver.QueryRecords</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007302.html" CLASS="Element59">TIdDNSResolver</A>, <A HREF="010746.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Identifies the resource record types to examine using the DNS query.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> QueryRecords: <A HREF="008047.html" CLASS="Element59">TQueryType</A>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+QueryRecords is a <A HREF="008047.html" CLASS="Element59">TQueryType</A> property that represents the resource record types desired in the answer to a DNS Query. QueryRecords is used to construct the Question portion of the DNS packet sent to the DNS server.<P CLASS="Element10">
+QueryRecords may contain one or more of the <A HREF="008047.html" CLASS="Element59">TQueryType</A> values, including the following:<P CLASS="Element10">
+<UL>
+<LI>qtA - Host address<P CLASS="Element10">
+<LI>qtNS - Authoritative name server<P CLASS="Element10">
+<LI>qtMD - Mail destination (Obsolete - use MX)<P CLASS="Element10">
+<LI>qtMF - Mail forwarder (Obsolete - use MX)<P CLASS="Element10">
+<LI>qtName - Canonical name for an alias<P CLASS="Element10">
+<LI>qtSOA - Start of a zone of authority marker<P CLASS="Element10">
+<LI>qtMB - Mailbox domain name (EXPERIMENTAL)<P CLASS="Element10">
+<LI>qtMG - Mail group member (EXPERIMENTAL)<P CLASS="Element10">
+<LI>qtMR - Mail rename domain name (EXPERIMENTAL)<P CLASS="Element10">
+<LI>qtNull - Null resource record (EXPERIMENTAL)<P CLASS="Element10">
+<LI>qtWKS - Well known service description<P CLASS="Element10">
+<LI>qtPTR - Domain name pointer<P CLASS="Element10">
+<LI>qtHINFO - Host information<P CLASS="Element10">
+<LI>qtMINFO - Mailbox or mail list information<P CLASS="Element10">
+<LI>qtMX - Mail exchange<P CLASS="Element10">
+<LI>qtTXT - Text strings<P CLASS="Element10">
+<LI>qtSTAR - All resource record types</UL>
+<P CLASS="Element10">
+Update QueryRecords to include the values desired prior to calling the <A HREF="007302.html#0005" CLASS="Element59">Resolve</A> method.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0004">TIdDNSResolver.QueryResult</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007302.html" CLASS="Element59">TIdDNSResolver</A>, <A HREF="010747.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Container for values and resource records in a DNS response.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> QueryResult: <A HREF="008046.html" CLASS="Element59">TQueryResult</A>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+QueryResult is a read-only <A HREF="008046.html" CLASS="Element59">TQueryResult</A> property acts as a container for the results from a DNS query. QueryResult will indicate the class, type, and domain name used in the DNS query, as well as any DNS resource records returned in the query response.<P CLASS="Element10">
+QueryResult is updated when the <A HREF="007302.html#0005" CLASS="Element59">Resolve</A> method parses values found in the Answer portion of the DNS response.<P CLASS="Element10">
+QueryResult is a collection for <A HREF="008059.html" CLASS="Element59">TResultRecord</A> resource records, and Items in the collection can be accessed using their integer position. Items in QueryResult may also be cast to a <A HREF="008059.html" CLASS="Element59">TResultRecord</A> descendant class instance to allow access to additional properties and method specific to the resource record type.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0001">TIdDNSResolver.Create</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007302.html" CLASS="Element59">TIdDNSResolver</A>, <A HREF="010748.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Constructor for the object instance.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>constructor</STRONG> Create(AOwner: TComponent); <STRONG>override</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+AOwner: TComponent</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Owner of the object instance.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Create is the constructor for the object instance, and calls the inherited Create method using the value specified in AOwner. Create initializes Port to the constant value <A HREF="002431.html" CLASS="Element59">IdPORT_DOMAIN</A>, as required by the DNS Protocol, and sets the default value of <A HREF="007302.html#0000" CLASS="Element59">AllowRecursiveQueries</A> to True. Create also allocates resources required for the <A HREF="007302.html#0004" CLASS="Element59">QueryResult</A> and DNSHeader properties.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0002">TIdDNSResolver.Destroy</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007302.html" CLASS="Element59">TIdDNSResolver</A>, <A HREF="010749.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Frees the object instance.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>destructor</STRONG> Destroy; <STRONG>override</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Destroy is the destructor for the object instance. Destroy frees and release resources allocated in <A HREF="007302.html#0001" CLASS="Element59">Create</A> for the <A HREF="007302.html#0004" CLASS="Element59">QueryResult</A> property. Destroy calls the inherited Destroy method prior to exiting.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0005">TIdDNSResolver.Resolve</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007302.html" CLASS="Element59">TIdDNSResolver</A>, <A HREF="010750.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Performs a DNS query to resolve a domain name, and parses the response.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>procedure</STRONG> Resolve(ADomain: <STRONG>string</STRONG>);</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+ADomain: string</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Domain Name to resolve using the DNS query.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Resolve is a Procedure that implements the processing required to perform a DNS query for the requested resource record types, and handle the response from the DNS server.<P CLASS="Element10">
+ADomain is the domain name to be resolved in the DNS query using the values specified in <A HREF="007302.html#0000" CLASS="Element59">AllowRecursiveQueries</A> and <A HREF="007302.html#0003" CLASS="Element59">QueryRecords</A>. Update <A HREF="007302.html#0003" CLASS="Element59">QueryRecords</A> and <A HREF="007302.html#0000" CLASS="Element59">AllowRecursiveQueries</A> prior to calling the Resolve method.<P CLASS="Element10">
+Resolve creates a DNS query packet, including the DNS header, using the value specified in ADomain. Resolve can raise an <A HREF="000372.html" CLASS="Element59">EIdDnsResolverError</A> exception if a valid DNS query cannot be created using the values in ADomain, <A HREF="007302.html#0000" CLASS="Element59">AllowRecursiveQueries</A>, and <A HREF="007302.html#0003" CLASS="Element59">QueryRecords</A>.<P CLASS="Element10">
+Resolve <A HREF="006944.html" CLASS="Element59">send</A> the DNS query packet to the server, and reads the DNS response. Resolve handles parsing of values in the DNS response into the DNS header and <A HREF="007302.html#0004" CLASS="Element59">QueryResult</A>. Resolve can raise an <A HREF="000372.html" CLASS="Element59">EIdDnsResolverError</A> if a timeout occurs, or an incomplete data packet is received, while waiting for a DNS server response.</DIV>
+</DIV>
+<DIV CLASS="Element62">
+<HR>Created with Doc-O-Matic 2 donated to <STRONG><A HREF="http://www.delphi-jedi.org">Project JEDI</A></STRONG>. Commercial license available from the <STRONG><A HREF="http://www.doc-o-matic.com">Doc-O-Matic site</A></STRONG>.</DIV>
+</DIV></BODY></HTML>

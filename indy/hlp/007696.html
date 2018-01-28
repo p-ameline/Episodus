@@ -1,0 +1,152 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+<TITLE>TIdServerIOHandlerSSL</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <META name="GENERATOR" content="Doc-O-Matic">
+    <LINK rel="STYLESHEET" href="default.css" type="text/css">
+
+<SCRIPT LANGUAGE="JavaScript1.2" SRC="scripts.js"></SCRIPT>
+</HEAD>
+<BODY CLASS="Element57">
+<TABLE BORDER="0" BGCOLOR="#AACCFF" WIDTH="100%" CELLSPACING="0" CELLPADDING="0">
+<TR><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element1">
+Indy 9</DIV>
+</TD><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element2">
+<A HREF="content.html" CLASS="Element59">Content</A> | <A HREF="idx.html" CLASS="Element59">Index</A> | <A HREF="symref.html" CLASS="Element59">Reference</A></DIV>
+</TD></TR></TABLE><DIV CLASS="Element58">
+<DIV CLASS="Element5">
+TIdServerIOHandlerSSL</DIV>
+<DIV CLASS="Element7">
+<A HREF="013507.html" CLASS="Element59">Hierarchy</A>, <A HREF="013508.html" CLASS="Element59">Properties</A>, <A HREF="013509.html" CLASS="Element59">Methods</A>, <A HREF="013510.html" CLASS="Element59">Events</A>, <A HREF="002875.html" CLASS="Element59">Unit: IdSSLOpenSSL</A></DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12">TIdServerIOHandlerSSL = <STRONG>class</STRONG>(<A HREF="007685.html" CLASS="Element59">TIdServerIOHandler</A>)</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Unit</DIV>
+<DIV CLASS="Element69">
+<A HREF="002875.html" CLASS="Element59">IdSSLOpenSSL</A></DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+TIdServerIOHandlerSSL</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0007">TIdServerIOHandlerSSL.SSLOptions</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007696.html" CLASS="Element59">TIdServerIOHandlerSSL</A></DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> SSLOptions: <A HREF="007733.html" CLASS="Element59">TIdSSLOptions</A>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+SSLOptions</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0000">TIdServerIOHandlerSSL.Accept</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007696.html" CLASS="Element59">TIdServerIOHandlerSSL</A></DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>function</STRONG> Accept(ASocket: <A HREF="007743.html" CLASS="Element59">TIdStackSocketHandle</A>; AThread: <A HREF="007846.html" CLASS="Element59">TIdThread</A> = <STRONG>nil</STRONG>): <A HREF="007421.html" CLASS="Element59">TIdIOHandler</A>; <STRONG>override</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Accept</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0001">TIdServerIOHandlerSSL.Create</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007696.html" CLASS="Element59">TIdServerIOHandlerSSL</A></DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>constructor</STRONG> Create(AOwner: TComponent); <STRONG>override</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Create</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0002">TIdServerIOHandlerSSL.Destroy</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007696.html" CLASS="Element59">TIdServerIOHandlerSSL</A></DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>destructor</STRONG> Destroy; <STRONG>override</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Destroy</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0003">TIdServerIOHandlerSSL.Init</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007696.html" CLASS="Element59">TIdServerIOHandlerSSL</A></DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>procedure</STRONG> Init; <STRONG>override</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Init</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0004">TIdServerIOHandlerSSL.OnGetPassword</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007696.html" CLASS="Element59">TIdServerIOHandlerSSL</A></DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> OnGetPassword: <A HREF="008031.html" CLASS="Element59">TPasswordEvent</A>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+OnGetPassword</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0005">TIdServerIOHandlerSSL.OnStatusInfo</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007696.html" CLASS="Element59">TIdServerIOHandlerSSL</A></DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> OnStatusInfo: <A HREF="007143.html" CLASS="Element59">TCallbackEvent</A>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+OnStatusInfo</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0006">TIdServerIOHandlerSSL.OnVerifyPeer</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007696.html" CLASS="Element59">TIdServerIOHandlerSSL</A></DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> OnVerifyPeer: <A HREF="008108.html" CLASS="Element59">TVerifyPeerEvent</A>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+OnVerifyPeer</DIV>
+</DIV>
+<DIV CLASS="Element62">
+<HR>Created with Doc-O-Matic 2 donated to <STRONG><A HREF="http://www.delphi-jedi.org">Project JEDI</A></STRONG>. Commercial license available from the <STRONG><A HREF="http://www.doc-o-matic.com">Doc-O-Matic site</A></STRONG>.</DIV>
+</DIV></BODY></HTML>

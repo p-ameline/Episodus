@@ -1,0 +1,45 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+<TITLE>SearchMailBox</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <META name="GENERATOR" content="Doc-O-Matic">
+    <LINK rel="STYLESHEET" href="default.css" type="text/css">
+
+<SCRIPT LANGUAGE="JavaScript1.2" SRC="scripts.js"></SCRIPT>
+</HEAD>
+<BODY CLASS="Element57">
+<TABLE BORDER="0" BGCOLOR="#AACCFF" WIDTH="100%" CELLSPACING="0" CELLPADDING="0">
+<TR><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element1">
+Indy 9</DIV>
+</TD><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element2">
+<A HREF="content.html" CLASS="Element59">Content</A> | <A HREF="idx.html" CLASS="Element59">Index</A> | <A HREF="symref.html" CLASS="Element59">Reference</A></DIV>
+</TD></TR></TABLE><DIV CLASS="Element58">
+<DIV CLASS="Element5">
+SearchMailBox</DIV>
+<DIV CLASS="Element7">
+<A HREF="008568.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Searches for messages in the current mailbox using the specified search criteria.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Return Value</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Boolean - True on success.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+SearchMailBox is a Boolean function that searches for messages in the currently selected mailbox using the specified search criteria specified in ASearchInfo.<P CLASS="Element10">
+SearchMailBox requires that ConnectionState contain the value csSelected, or an <A HREF="000366.html" CLASS="Element59">EIdConnectionStateError</A> exception will be raised.<P CLASS="Element10">
+SearchMailBox constructs a search query, using the search keys in ASearchInfo, and calls SendCmd using the IMAP4 SEARCH command using the specified search criteria. Date values in the <A HREF="007411.html" CLASS="Element59">TIdIMAP4SearchRec</A> specified by ASearchInfo are represented using the ShortDateFormat 'dd-MMM-yyyy' and the date separator '-'. SearchMailBox calls ParseSearchResultDetails to load values in CmdResultDetails into Mailbox.<P CLASS="Element10">
+SearchMailBox sets the reurn value for the method to True when numeric protocol response in LastCmdResult contains the value <A HREF="008477.html" CLASS="Element59">wsOk</A>.</DIV>
+</DIV>
+<DIV CLASS="Element62">
+<HR>Created with Doc-O-Matic 2 donated to <STRONG><A HREF="http://www.delphi-jedi.org">Project JEDI</A></STRONG>. Commercial license available from the <STRONG><A HREF="http://www.doc-o-matic.com">Doc-O-Matic site</A></STRONG>.</DIV>
+</DIV></BODY></HTML>

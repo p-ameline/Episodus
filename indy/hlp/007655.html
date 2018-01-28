@@ -1,0 +1,240 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+<TITLE>TIdResponseHeaderInfo</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <META name="GENERATOR" content="Doc-O-Matic">
+    <LINK rel="STYLESHEET" href="default.css" type="text/css">
+
+<SCRIPT LANGUAGE="JavaScript1.2" SRC="scripts.js"></SCRIPT>
+</HEAD>
+<BODY CLASS="Element57">
+<TABLE BORDER="0" BGCOLOR="#AACCFF" WIDTH="100%" CELLSPACING="0" CELLPADDING="0">
+<TR><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element1">
+Indy 9</DIV>
+</TD><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element2">
+<A HREF="content.html" CLASS="Element59">Content</A> | <A HREF="idx.html" CLASS="Element59">Index</A> | <A HREF="symref.html" CLASS="Element59">Reference</A></DIV>
+</TD></TR></TABLE><DIV CLASS="Element58">
+<DIV CLASS="Element5">
+TIdResponseHeaderInfo</DIV>
+<DIV CLASS="Element7">
+<A HREF="013315.html" CLASS="Element59">Hierarchy</A>, <A HREF="013316.html" CLASS="Element59">Properties</A>, <A HREF="013317.html" CLASS="Element59">Methods</A>, <A HREF="013318.html" CLASS="Element59">See Also</A>, <A HREF="002252.html" CLASS="Element59">Unit: IdHTTPHeaderInfo</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Implements message headers for an HTTP response.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12">TIdResponseHeaderInfo = <STRONG>class</STRONG>(<A HREF="007317.html" CLASS="Element59">TIdEntityHeaderInfo</A>)</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Unit</DIV>
+<DIV CLASS="Element69">
+<A HREF="002252.html" CLASS="Element59">IdHTTPHeaderInfo</A></DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+TIdResponseHeaderInfo is a <A HREF="007317.html" CLASS="Element59">TIdEntityHeaderInfo</A> descendant that implements properties and methods needed to represent message headers for a HTTP response, as described in the Internet Standards document:<P CLASS="Element10">
+<UL>
+<LI>RFC 2616 - Hypertext Transfer Protocol version 1.1 [HTTP/1.1] (http://www.rfc-editor.org/rfc/rfc2616.txt)</UL>
+<P CLASS="Element10">
+The response headers allow the server to provide additional information about the response, or the requested resource, on the server.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0000">TIdResponseHeaderInfo.Location</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007655.html" CLASS="Element59">TIdResponseHeaderInfo</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Redirects the user agent to a new location for a requested resource.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> Location: <STRONG>string</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Location is a String property used to redirect the recipient of the HTTP response to a location other than the request URI when accessing a new or exisitng server resource. Location contains a valid URI expressed in the form:<P CLASS="Element10">
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12">  http://www.w3.org/pub/WWW/People.html</PRE></DIV>
+</DIV>
+</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0002">TIdResponseHeaderInfo.ProxyAuthenticate</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007655.html" CLASS="Element59">TIdResponseHeaderInfo</A>, <A HREF="013319.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Represents Proxy Authentication headers and values for a connection.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> ProxyAuthenticate: <A HREF="007369.html" CLASS="Element59">TIdHeaderList</A>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+ProxyAuthenticate is a <A HREF="007369.html" CLASS="Element59">TIdHeaderList</A> property that contains header names and values for a Proxy Authentication challenge. ProxyAuthenticate values indicate the authentication scheme and parameters applicable to the proxy for the requested server resource. ProxyAuthenticate header values apply to the current proxy connection and should not be passed to a user agent.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0003">TIdResponseHeaderInfo.ProxyConnection</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007655.html" CLASS="Element59">TIdResponseHeaderInfo</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Indicates the action to perform for a proxied connection after an HTTP response.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> ProxyConnection: <STRONG>string</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+ProxyConnection is a String property that represents the value received in an HTTP response for the 'Proxy-connection' header. ProxyConnection indicates that an HTTP response using a proxied connection should perform the indicated action after completion of the HTTP Response. ProxyConnection can contain one of the values:<P CLASS="Element10">
+<UL>
+<LI>KEEP—ALIVE - The connection should be maintained for subsequent use.<P CLASS="Element10">
+<LI>CLOSE - The connection should be closed.</UL>
+</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0004">TIdResponseHeaderInfo.Server</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007655.html" CLASS="Element59">TIdResponseHeaderInfo</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Identifies the software used on the server.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> Server: <STRONG>string</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Server is a String property that contains information about the software used by the server to handle the HTTP request. Server can contain multiple product tokens and comments identifying the server and any significant subproducts. For example:<P CLASS="Element10">
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12">  Server: CERN/3.0 libwww/2.17</PRE></DIV>
+</DIV>
+</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Notes</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Revealing the specific software version of the server might allow the server machine to become more vulnerable to attacks against software that is known to contain security holes. Server implementors are encouraged to make this field a configurable option.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0005">TIdResponseHeaderInfo.WWWAuthenticate</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007655.html" CLASS="Element59">TIdResponseHeaderInfo</A>, <A HREF="013320.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Identifies authentication schemes and parameters for a server realm.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> WWWAuthenticate: <A HREF="007369.html" CLASS="Element59">TIdHeaderList</A>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+WWWAuthenticate is a <A HREF="007369.html" CLASS="Element59">TIdHeaderList</A> property that contains header names and values used to indicate at least one authentication scheme and parameters for a requested server resource. Unlike <A HREF="007655.html#0002" CLASS="Element59">ProxyAuthenticate</A> headers, WWWAuthenticate values apply to any connection using the relevant server realm.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0000">TIdResponseHeaderInfo.Clear</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007655.html" CLASS="Element59">TIdResponseHeaderInfo</A>, <A HREF="013321.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Resets response header properties to their default values.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>procedure</STRONG> Clear; <STRONG>override</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Clear is an overridden procedure in <A HREF="007655.html" CLASS="Element59">TIdResponseHeaderInfo</A>. Clear resets the property values that represent the response headers to their default empty values, including <A HREF="007655.html#0000" CLASS="Element59">Location</A> and <A HREF="007655.html#0004" CLASS="Element59">Server</A>. Clear also resets the values in the <A HREF="007655.html#0002" CLASS="Element59">ProxyAuthenticate</A> and <A HREF="007655.html#0005" CLASS="Element59">WWWAuthenticate</A> properties by calling their respective Clear methods. Clear calls the inherited Clear method prior to exiting the method.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0001">TIdResponseHeaderInfo.Create</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007655.html" CLASS="Element59">TIdResponseHeaderInfo</A>, <A HREF="013322.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Constructor for the object instance.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>constructor</STRONG> Create; <STRONG>override</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Create is the constructor for the object instance. Create initializes the object instances used to represent the <A HREF="007655.html#0005" CLASS="Element59">WWWAuthenticate</A> and <A HREF="007655.html#0002" CLASS="Element59">ProxyAuthenticate</A> properties prior to calling the inherited Create method. Create also calls <A HREF="007655.html#0000" CLASS="Element59">Clear</A> to insure that header properties contain their default empty values.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0002">TIdResponseHeaderInfo.Destroy</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007655.html" CLASS="Element59">TIdResponseHeaderInfo</A>, <A HREF="013323.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Frees the object instance.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>destructor</STRONG> Destroy; <STRONG>override</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Destroy is the destructor for the object instance. Destroy frees the object instances used to represent the <A HREF="007655.html#0005" CLASS="Element59">WWWAuthenticate</A> and <A HREF="007655.html#0002" CLASS="Element59">ProxyAuthenticate</A> properties. Destroy calls the inherited Destroy method prior to exiting the method.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0001">TIdResponseHeaderInfo.ProcessHeaders</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007655.html" CLASS="Element59">TIdResponseHeaderInfo</A>, <A HREF="013324.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Loads headers values into their object properties.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>procedure</STRONG> ProcessHeaders; <STRONG>override</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+Headers</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Header names and values to be processed.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+ProcessHeaders is an overridden procedure that load the header names and values in Headers into their corresponding object properties. RawHeaders is updated to contain the initial data in Headers. Values in Headers are assigned to the corresponding property, and subsequently removed the <A HREF="007369.html" CLASS="Element59">TIdHeaderList</A>.<P CLASS="Element10">
+ProcessHeaders determines the values for ContentRangeStart and ContentRangeEnd when Headers contains the 'Range' header. ProcessHeaders also adds the 'WWW-Authenticate' header to the <A HREF="007655.html#0005" CLASS="Element59">WWWAuthenticate</A> object property, and the 'Proxy-Authenticate' header to the <A HREF="007655.html#0002" CLASS="Element59">ProxyAuthenticate</A> object property.<P CLASS="Element10">
+ProcessHeaders calls the inherited ProcessHeaders method to allow handing of Entity headers, and headers that are stored in ExtraHeaders.</DIV>
+</DIV>
+<DIV CLASS="Element62">
+<HR>Created with Doc-O-Matic 2 donated to <STRONG><A HREF="http://www.delphi-jedi.org">Project JEDI</A></STRONG>. Commercial license available from the <STRONG><A HREF="http://www.doc-o-matic.com">Doc-O-Matic site</A></STRONG>.</DIV>
+</DIV></BODY></HTML>

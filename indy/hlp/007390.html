@@ -1,0 +1,167 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+<TITLE>TIdHTTPResponse</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <META name="GENERATOR" content="Doc-O-Matic">
+    <LINK rel="STYLESHEET" href="default.css" type="text/css">
+
+<SCRIPT LANGUAGE="JavaScript1.2" SRC="scripts.js"></SCRIPT>
+</HEAD>
+<BODY CLASS="Element57">
+<TABLE BORDER="0" BGCOLOR="#AACCFF" WIDTH="100%" CELLSPACING="0" CELLPADDING="0">
+<TR><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element1">
+Indy 9</DIV>
+</TD><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element2">
+<A HREF="content.html" CLASS="Element59">Content</A> | <A HREF="idx.html" CLASS="Element59">Index</A> | <A HREF="symref.html" CLASS="Element59">Reference</A></DIV>
+</TD></TR></TABLE><DIV CLASS="Element58">
+<DIV CLASS="Element5">
+TIdHTTPResponse</DIV>
+<DIV CLASS="Element7">
+<A HREF="011548.html" CLASS="Element59">Hierarchy</A>, <A HREF="011549.html" CLASS="Element59">Properties</A>, <A HREF="011550.html" CLASS="Element59">Methods</A>, <A HREF="011551.html" CLASS="Element59">See Also</A>, <A HREF="002251.html" CLASS="Element59">Unit: IdHTTP</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Provides access to headers and properties for an HTTP response.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12">TIdHTTPResponse = <STRONG>class</STRONG>(<A HREF="007655.html" CLASS="Element59">TIdResponseHeaderInfo</A>)</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Unit</DIV>
+<DIV CLASS="Element69">
+<A HREF="002251.html" CLASS="Element59">IdHTTP</A></DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+TIdHTTPResponse is a <A HREF="007655.html" CLASS="Element59">TIdResponseHeaderInfo</A> descendant that provides properties and methods used to define and manipulate header values used in an HTTP response.<P CLASS="Element10">
+TIdHTTPResponse is the type used to represent the TIdHTTP.Response property, and is used in when <A HREF="007375.html" CLASS="Element59">TIdHTTP</A> receives a response to an HTTP request, and indicates both the numeric and textual responses from the host server, and the connection headers for the HTTP response.<P CLASS="Element10">
+A TIdHTTPResponse instance is provided as an argument to <A HREF="007375.html" CLASS="Element59">TIdHTTP</A> event handlers that use or update valued in the HTTP response, including OnRedirect, OnSelectAuthorization, OnSelectProxyAuthorization, OnAuthorization, OnProxyAuthorization.<P CLASS="Element10">
+TIdHTTPResponse is also the type used to represent the <A HREF="007386.html#0005" CLASS="Element59">TIdHTTPProtocol.Response</A> property, and allows the protocol handler to store a reference to the response received in HTTP protocol exchanges.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0000">TIdHTTPResponse.ContentStream</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007390.html" CLASS="Element59">TIdHTTPResponse</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Contains the streamed content for the HTTP response.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> ContentStream: TStream;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+ContentStream is a TStream property that represents the stream used when TIdHTTP.ReadResult is used to read the response content for an HTTP Get or Post request. When specified, the size of ContentStream should match the ContentLength for the response. Otherwise, response content is read until the connection is closed. ContentStream may also be used to retrieve &quot;chunked&quot; response content when the transfer encoding for the response indicates that &quot;chunked&quot; retrieval is supported.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0002">TIdHTTPResponse.KeepAlive</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007390.html" CLASS="Element59">TIdHTTPResponse</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Indicates if the client connection should be maintained during request/ response protocol exchanges.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> KeepAlive: Boolean;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+KeepAlive is a Boolean property that indicates if the HTTP response supports and uses the HTTP Keep-Alive header for connection control. Reading the value in KeepAlive causes the value in <A HREF="007390.html#0004" CLASS="Element59">ResponseText</A> to be examined for a valid HTTP protocol version.<P CLASS="Element10">
+For HTTP 1.1 clients, the value for KeepAlive will contain True if the HTTP client connection is still intact, and Connetion and ProxyConnection header values do not contain the 'CLOSE' directive.<P CLASS="Element10">
+For HTTP 1.0 clients, the value for KeepAlive will contain False unless the HTTP Keep-Alive header is used for the HTTP Connection or ProxyConnection.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0003">TIdHTTPResponse.ResponseCode</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007390.html" CLASS="Element59">TIdHTTPResponse</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Indicates the numeric response code in an HTTP response.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> ResponseCode: Integer;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+ResponseCode is an Integer property that represents the numeric HTTP response code received in the HTTP response message. Reading the value in ResponseCode cause the numeric return value to be extracted from the textual value in <A HREF="007390.html#0004" CLASS="Element59">ResponseText</A>.<P CLASS="Element10">
+ResponseCode is updates when a request is executed using TIdHTTP.FoRequest, and when <A HREF="007386.html#0003" CLASS="Element59">TIdHTTPProtocol.ProcessResponse</A> is used to examine result values for state-dependencies during HTTP protocol exchanges.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0004">TIdHTTPResponse.ResponseText</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007390.html" CLASS="Element59">TIdHTTPResponse</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Represents the textual messages received in an HTTP response.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> ResponseText: <STRONG>string</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+ResponseText is a String property that represents the textual values retrieved in an HTTP reponse, and contains the numeric response code and associated message string. ResponseText is used to extract the numeric HTTP response code in <A HREF="007390.html#0003" CLASS="Element59">ResponseCode</A>.<P CLASS="Element10">
+ResponseText is updated in TIdHTTP.ConnectToHost and TIdHTTP.DoRequest, when the HTTP client established a connection to the host server, or receives an HTTP response from the server.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0005">TIdHTTPResponse.ResponseVersion</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007390.html" CLASS="Element59">TIdHTTPResponse</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+HHTP version used and supported in the HTTP response.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> ResponseVersion: <A HREF="007387.html" CLASS="Element59">TIdHTTPProtocolVersion</A>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+ResponseVersion is a <A HREF="007387.html" CLASS="Element59">TIdHTTPProtocolVersion</A> property that represents the HTTP protocol version supported in a response received from an HTTP server. ResponseVersion is used to help determine the value used in the <A HREF="007390.html#0002" CLASS="Element59">KeepAlive</A> property.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0001">TIdHTTPResponse.Create</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007390.html" CLASS="Element59">TIdHTTPResponse</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Constructor for the object instance.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>constructor</STRONG> Create(AParent: <A HREF="007270.html" CLASS="Element59">TIdCustomHTTP</A>); <STRONG>virtual</STRONG>; <STRONG>reintroduce</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+AParent: TIdCustomHTTP</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+HTTP Client that owns the response.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Create is the constructor for the object instance. Create calls the inherited Create method, and assign AParent to the private member that represents the owner of the HTTP response.</DIV>
+</DIV>
+<DIV CLASS="Element62">
+<HR>Created with Doc-O-Matic 2 donated to <STRONG><A HREF="http://www.delphi-jedi.org">Project JEDI</A></STRONG>. Commercial license available from the <STRONG><A HREF="http://www.doc-o-matic.com">Doc-O-Matic site</A></STRONG>.</DIV>
+</DIV></BODY></HTML>

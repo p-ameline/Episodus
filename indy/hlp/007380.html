@@ -1,0 +1,78 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+<TITLE>TIdHTTPInvalidSessionEvent</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <META name="GENERATOR" content="Doc-O-Matic">
+    <LINK rel="STYLESHEET" href="default.css" type="text/css">
+
+<SCRIPT LANGUAGE="JavaScript1.2" SRC="scripts.js"></SCRIPT>
+</HEAD>
+<BODY CLASS="Element57">
+<TABLE BORDER="0" BGCOLOR="#AACCFF" WIDTH="100%" CELLSPACING="0" CELLPADDING="0">
+<TR><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element1">
+Indy 9</DIV>
+</TD><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element2">
+<A HREF="content.html" CLASS="Element59">Content</A> | <A HREF="idx.html" CLASS="Element59">Index</A> | <A HREF="symref.html" CLASS="Element59">Reference</A></DIV>
+</TD></TR></TABLE><DIV CLASS="Element58">
+<DIV CLASS="Element5">
+TIdHTTPInvalidSessionEvent</DIV>
+<DIV CLASS="Element7">
+<A HREF="002147.html" CLASS="Element59">Unit: IdCustomHTTPServer</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Event type signalled when an HTTP session cannot be restored using the session ID Cookie.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12">TIdHTTPInvalidSessionEvent = <STRONG>procedure</STRONG> (Thread: <A HREF="007613.html" CLASS="Element59">TIdPeerThread</A>; ARequestInfo: <A HREF="007389.html" CLASS="Element59">TIdHTTPRequestInfo</A>; AResponseInfo: <A HREF="007391.html" CLASS="Element59">TIdHTTPResponseInfo</A>; <STRONG>var</STRONG> VContinueProcessing: Boolean; <STRONG>const</STRONG> AInvalidSessionID: <STRONG>String</STRONG>) <STRONG>of</STRONG> <STRONG>object</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Unit</DIV>
+<DIV CLASS="Element69">
+<A HREF="002147.html" CLASS="Element59">IdCustomHTTPServer</A></DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+ARequestInfo</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Header sent in the client request.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+AResponseInfo</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Header to include in a response.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+ContinueProcessing</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Indicates that a new session can be created.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+InvalidSessionID</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Session ID found in a Request Cookie.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+Thread</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Client connection generating the event notification.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+TIdHTTPInvalidSessionEvent is an event type signalled when an HTTP server cannot locate an existing <A HREF="007393.html" CLASS="Element59">TIdHTTPSession</A> for a threaded client connection having the session identifier specified in InvalidSessionID.<P CLASS="Element10">
+TIdHTTPInvalidSessionEvent is the type used to represent the TIdHTTPServer.OnInvalidSession property, and is signalled when a threaded client attempts to execute using an existing session in the TIdHTTPSessionList. Sessions are restored using the GSessionID Cookie in the HTTP Request.<P CLASS="Element10">
+An event handler for the TIdHTTPInvalidSessionEvent notification can set ContinueProcessing to True to allow the HTTP server to create a new HTTP session for the client.</DIV>
+</DIV>
+<DIV CLASS="Element62">
+<HR>Created with Doc-O-Matic 2 donated to <STRONG><A HREF="http://www.delphi-jedi.org">Project JEDI</A></STRONG>. Commercial license available from the <STRONG><A HREF="http://www.doc-o-matic.com">Doc-O-Matic site</A></STRONG>.</DIV>
+</DIV></BODY></HTML>

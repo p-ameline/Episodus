@@ -1,0 +1,59 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+<TITLE>TCNRecord</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <META name="GENERATOR" content="Doc-O-Matic">
+    <LINK rel="STYLESHEET" href="default.css" type="text/css">
+
+<SCRIPT LANGUAGE="JavaScript1.2" SRC="scripts.js"></SCRIPT>
+</HEAD>
+<BODY CLASS="Element57">
+<TABLE BORDER="0" BGCOLOR="#AACCFF" WIDTH="100%" CELLSPACING="0" CELLPADDING="0">
+<TR><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element1">
+Indy 9</DIV>
+</TD><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element2">
+<A HREF="content.html" CLASS="Element59">Content</A> | <A HREF="idx.html" CLASS="Element59">Index</A> | <A HREF="symref.html" CLASS="Element59">Reference</A></DIV>
+</TD></TR></TABLE><DIV CLASS="Element58">
+<DIV CLASS="Element5">
+TCNRecord</DIV>
+<DIV CLASS="Element7">
+<A HREF="009838.html" CLASS="Element59">Hierarchy</A>, <A HREF="009839.html" CLASS="Element59">Properties</A>, <A HREF="009840.html" CLASS="Element59">Methods</A>, <A HREF="002173.html" CLASS="Element59">Unit: IdDNSResolver</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Represents a resource record returned from a DNS query that includes Canonical Name resource record types.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12">TCNRecord = <STRONG>class</STRONG>(<A HREF="007938.html" CLASS="Element59">TNAMERecord</A>)</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Unit</DIV>
+<DIV CLASS="Element69">
+<A HREF="002173.html" CLASS="Element59">IdDNSResolver</A></DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+TCNRecord is a TNameRecord descendant that represents a resource record returned in the results for a DNS query. TCNRecord is a collection item created to represent a resource resource returned when TIDNSResolver.QueryRecords includes the value qtCN for Mail Exchange resource records.<P CLASS="Element10">
+Canonical Name resoure records are used to indicate the canonical or primary name for the owner. Canonical Name resoure records cause no additional section processing, but Canonical Names may choose to restart the query at the Canonical Name in certain cases. See the description of Canonical Name logic in RFC 1034 for details.<P CLASS="Element10">
+Canonical Name resoure records uses the same DNS packet layout as other <A HREF="008059.html" CLASS="Element59">TResultRecord</A>-based responses, but extends the use of RData to include the following definition and format:<P CLASS="Element10">
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12">  +--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+
+  .                                               .
+  .                      CNAME                    .
+  .                                               .
+  +--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+</PRE></DIV>
+</DIV>
+<P CLASS="Element10">
+<UL>
+<LI>CNAME - Domain name which specifies the canonical or primary name for the owner. The owner name is an alias.</UL>
+<P CLASS="Element10">
+TCNRecord extends TNameRecord to implement the specifics of accessing RData values as properties, including HostName. HostName is used to store the CNAMe value from the resource record. TCNRecord also overrides the Parse method to read the values in RData into their property counterparts.</DIV>
+</DIV>
+<DIV CLASS="Element62">
+<HR>Created with Doc-O-Matic 2 donated to <STRONG><A HREF="http://www.delphi-jedi.org">Project JEDI</A></STRONG>. Commercial license available from the <STRONG><A HREF="http://www.doc-o-matic.com">Doc-O-Matic site</A></STRONG>.</DIV>
+</DIV></BODY></HTML>

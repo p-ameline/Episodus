@@ -1,0 +1,291 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+<TITLE>TIdIOHandlerStream</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <META name="GENERATOR" content="Doc-O-Matic">
+    <LINK rel="STYLESHEET" href="default.css" type="text/css">
+
+<SCRIPT LANGUAGE="JavaScript1.2" SRC="scripts.js"></SCRIPT>
+</HEAD>
+<BODY CLASS="Element57">
+<TABLE BORDER="0" BGCOLOR="#AACCFF" WIDTH="100%" CELLSPACING="0" CELLPADDING="0">
+<TR><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element1">
+Indy 9</DIV>
+</TD><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element2">
+<A HREF="content.html" CLASS="Element59">Content</A> | <A HREF="idx.html" CLASS="Element59">Index</A> | <A HREF="symref.html" CLASS="Element59">Reference</A></DIV>
+</TD></TR></TABLE><DIV CLASS="Element58">
+<DIV CLASS="Element5">
+TIdIOHandlerStream</DIV>
+<DIV CLASS="Element7">
+<A HREF="011832.html" CLASS="Element59">Hierarchy</A>, <A HREF="011833.html" CLASS="Element59">Properties</A>, <A HREF="011834.html" CLASS="Element59">Methods</A>, <A HREF="011835.html" CLASS="Element59">Events</A>, <A HREF="011836.html" CLASS="Element59">See Also</A>, <A HREF="002265.html" CLASS="Element59">Unit: IdIOHandlerStream</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Implements an input and output handler that uses a stream.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12">TIdIOHandlerStream = <STRONG>class</STRONG>(<A HREF="007421.html" CLASS="Element59">TIdIOHandler</A>)</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Unit</DIV>
+<DIV CLASS="Element69">
+<A HREF="002265.html" CLASS="Element59">IdIOHandlerStream</A></DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+TIdIOHandlerStream is a <A HREF="007421.html" CLASS="Element59">TIdIOHandler</A> descendant that implements the framework used to perform input and output operations for Indy components using a TStream as the source or destination.<P CLASS="Element10">
+TIdIOHandlerStream implements abstract virtual methods inherited from <A HREF="007421.html" CLASS="Element59">TIdIOHandler</A> that allow the handler to determine when the handler is ready to perform an IO operation, and perform the data transmission or receipt required for a component.<P CLASS="Element10">
+TIdIOHandlerStream also exposes the <A HREF="007427.html#0004" CLASS="Element59">ReadStream</A> and <A HREF="007427.html#0008" CLASS="Element59">WriteStream</A> properties that allow acccess to the methods and properties of TStream instance used for input and output operations.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0004">TIdIOHandlerStream.ReadStream</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007427.html" CLASS="Element59">TIdIOHandlerStream</A>, <A HREF="011837.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Represents the mechanism used for stream-based input.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> ReadStream: TStream;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+ReadStream is a TStream property that represents the underlying mechanism used to perform read operations in the input/output handler class. An Application must assign a valid TStream instance to the property to allow input operations using the handler.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0007">TIdIOHandlerStream.StreamType</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007427.html" CLASS="Element59">TIdIOHandlerStream</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Indicates the input and/or output operations allowed for the stream-based IOHandler.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> StreamType: <A HREF="007428.html" CLASS="Element59">TIdIOHandlerStreamType</A>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+StreamType is a <A HREF="007428.html" CLASS="Element59">TIdIOHandlerStreamType</A> property that indicates the input and/or output operations allowed for the stream-based IOHandler.<P CLASS="Element10">
+StreamType can be updated in the overloaded <A HREF="007427.html#0001" CLASS="Element59">Create</A> constructor.<P CLASS="Element10">
+The value of StreamType is used in the <A HREF="007427.html#0000" CLASS="Element59">Connected</A> method to indicate if <A HREF="007427.html#0004" CLASS="Element59">ReadStream</A>, <A HREF="007427.html#0008" CLASS="Element59">WriteStream</A>, or both are assigned and available for input and/or output operations.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0008">TIdIOHandlerStream.WriteStream</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007427.html" CLASS="Element59">TIdIOHandlerStream</A>, <A HREF="011838.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Represents the mechanism used for stream-based input.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> WriteStream: TStream;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+WriteStream is a TStream property that represents the underlying mechanism used to perform Write operations in the input/output handler class. An Application must assign a valid TStream instance to the property to allow output operations using the handler.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0000">TIdIOHandlerStream.Connected</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007427.html" CLASS="Element59">TIdIOHandlerStream</A>, <A HREF="011839.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Indicates that the input and output targets are valid for the handler.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>function</STRONG> Connected: Boolean; <STRONG>override</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Return Value</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Boolean - True when input and output streams have been assigned.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Connected is an overriden Boolean function that indicates when both <A HREF="007427.html#0004" CLASS="Element59">ReadStream</A> and <A HREF="007427.html#0008" CLASS="Element59">WriteStream</A> contain valid TStream instances to be used for input and output using the handler. Applications must assign instances of a TStream descendant to <A HREF="007427.html#0004" CLASS="Element59">ReadStream</A> and <A HREF="007427.html#0008" CLASS="Element59">WriteStream</A>, or the method will return False.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0001">TIdIOHandlerStream.Create</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007427.html" CLASS="Element59">TIdIOHandlerStream</A>, <A HREF="011840.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Constructor for the object instance.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>constructor</STRONG> Create(AOwner: TComponent); <STRONG>override</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+AStreamType</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Stream operation(s) allowed for the IOHandler.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+axOwner</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Component that owns the object instance.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Create is the constructor for the object instance, and is overloaded in <A HREF="007427.html" CLASS="Element59">TIdIOHandlerStream</A>.<P CLASS="Element10">
+The default constructor is intended for use when the object instance will be a child control owned by the component specified in axOwner, and simply calls the inherited Create method.<P CLASS="Element10">
+The overloaded constructor is intended for use when the <A HREF="007427.html" CLASS="Element59">TIdIOHandlerStream</A> needs to be created for the specific read or write operations specified in AStreamType. This constructor calls the inherited Create method with Nil in the owner value. It also assigns the value in AStreamType to the <A HREF="007427.html#0007" CLASS="Element59">StreamType</A> property.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0002">TIdIOHandlerStream.Destroy</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007427.html" CLASS="Element59">TIdIOHandlerStream</A>, <A HREF="011841.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Frees the object instance.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>destructor</STRONG> Destroy; <STRONG>override</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Destroy is the destructor for the object instance. Destroy calls the Close method, prior to calling the inherited destructor.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0003">TIdIOHandlerStream.Readable</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007427.html" CLASS="Element59">TIdIOHandlerStream</A>, <A HREF="011842.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Indicates if the handler is ready to perform an input operation.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>function</STRONG> Readable(AMSec: integer = <A HREF="002932.html" CLASS="Element59">IdTimeoutDefault</A>): boolean; <STRONG>override</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+AMSec: integer = IdTimeoutDefault</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Milliseconds to wait for a ready state. Default value is <A HREF="002932.html" CLASS="Element59">IdTimeoutDefault</A>.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Return Value</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Boolean - True when the handelr is ready to read or write.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Readable is an overriden Boolean function that indicates if the handler is ready to perform an input operation. The return value for the method is True when <A HREF="007427.html#0004" CLASS="Element59">ReadStream</A> contains a valid TStream instance, and the current position is not at the end of the stream.<P CLASS="Element10">
+<STRONG>Note</STRONG>: The AMSec input parameter is not used for a strean-based input/output handler, and is provided for interface compatibility with the inherited method in the ancestor class.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0005">TIdIOHandlerStream.Recv</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007427.html" CLASS="Element59">TIdIOHandlerStream</A>, <A HREF="011843.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Performs stream-based input operations for the handler.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>function</STRONG> Recv(<STRONG>var</STRONG> ABuf; ALen: integer): integer; <STRONG>override</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+var ABuf</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Buffer to receive values read from the stream.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+ALen: integer</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Number of bytes to read from the stream.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Return Value</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Integer - Actual nmumber of bytes read from the stream.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Recv is an overridden Integer function that implements read operations using the <A HREF="007427.html#0004" CLASS="Element59">ReadStream</A> for the input/output handler. If <A HREF="007427.html#0004" CLASS="Element59">ReadStream</A> does not a valid TSTream instance, the return value for the method is 0 (zero).<P CLASS="Element10">
+Recv uses the <A HREF="007427.html#0004" CLASS="Element59">ReadStream</A> object instance to load the number of bytes specified in ALen into the buffer specified in ABuf. The return value for the method is the actual number of bytes read from the stream.<P CLASS="Element10">
+Use <A HREF="007427.html#0006" CLASS="Element59">Send</A> to perform output operations using the handler.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0006">TIdIOHandlerStream.Send</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007427.html" CLASS="Element59">TIdIOHandlerStream</A>, <A HREF="011844.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Performs stream-based output operations for the handler.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>function</STRONG> Send(<STRONG>var</STRONG> ABuf; ALen: integer): integer; <STRONG>override</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+var ABuf</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Buffer containg values to write to the stream.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+ALen: integer</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Number of bytes to write to the stream.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Return Value</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Integer - Actual nmumber of bytes written to the stream.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Send is an overridden Integer function that implements write operations using the <A HREF="007427.html#0008" CLASS="Element59">WriteStream</A> for the input/output handler. If <A HREF="007427.html#0008" CLASS="Element59">WriteStream</A> does not a valid TSTream instance, the return value for the method is 0 (zero).<P CLASS="Element10">
+Send uses the <A HREF="007427.html#0008" CLASS="Element59">WriteStream</A> object instance to write the number of bytes specified in ALen from the buffer specified in ABuf. The return value for the method is the actual number of bytes written to the stream.<P CLASS="Element10">
+Use <A HREF="007427.html#0005" CLASS="Element59">Recv</A> to perform input operations using the handler.</DIV>
+</DIV>
+<DIV CLASS="Element62">
+<HR>Created with Doc-O-Matic 2 donated to <STRONG><A HREF="http://www.delphi-jedi.org">Project JEDI</A></STRONG>. Commercial license available from the <STRONG><A HREF="http://www.doc-o-matic.com">Doc-O-Matic site</A></STRONG>.</DIV>
+</DIV></BODY></HTML>

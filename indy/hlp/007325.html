@@ -1,0 +1,120 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+<TITLE>TIdFingerServer</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <META name="GENERATOR" content="Doc-O-Matic">
+    <LINK rel="STYLESHEET" href="default.css" type="text/css">
+
+<SCRIPT LANGUAGE="JavaScript1.2" SRC="scripts.js"></SCRIPT>
+</HEAD>
+<BODY CLASS="Element57">
+<TABLE BORDER="0" BGCOLOR="#AACCFF" WIDTH="100%" CELLSPACING="0" CELLPADDING="0">
+<TR><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element1">
+Indy 9</DIV>
+</TD><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element2">
+<A HREF="content.html" CLASS="Element59">Content</A> | <A HREF="idx.html" CLASS="Element59">Index</A> | <A HREF="symref.html" CLASS="Element59">Reference</A></DIV>
+</TD></TR></TABLE><DIV CLASS="Element58">
+<DIV CLASS="Element5">
+TIdFingerServer</DIV>
+<DIV CLASS="Element7">
+<A HREF="010993.html" CLASS="Element59">Hierarchy</A>, <A HREF="010994.html" CLASS="Element59">Properties</A>, <A HREF="010995.html" CLASS="Element59">Methods</A>, <A HREF="010996.html" CLASS="Element59">Events</A>, <A HREF="010997.html" CLASS="Element59">See Also</A>, <A HREF="002188.html" CLASS="Element59">Unit: IdFingerServer</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Specifies a FInger protocol server.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12">TIdFingerServer = <STRONG>class</STRONG>(<A HREF="007831.html" CLASS="Element59">TIdTCPServer</A>)</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Unit</DIV>
+<DIV CLASS="Element69">
+<A HREF="002188.html" CLASS="Element59">IdFingerServer</A></DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+The TIdFingerServer helps to implement the Finger User Information Protocol or Finger (RFC 1288) as a server. The finger protocol is an interface for a database of information about users on a remote system and could include information such as if they were logged in to the system, when they last read their E-Mail or sometimes information the user wishes to make available publicly (.plan file).</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0001">TIdFingerServer.DefaultPort</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007325.html" CLASS="Element59">TIdFingerServer</A>, <A HREF="010998.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Default port number for the server.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> DefaultPort: integer;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+DefaultPort is a published Integer property for <A HREF="007325.html" CLASS="Element59">TIdFingerServer</A> that identifies the default port number for the server, as described in the Finger User Information Protocol specification. DefaultPort indicates the port number used for listening for client connections during execution of the IdTCPServer decendant class. The default value for DefaultPort is <A HREF="002449.html" CLASS="Element59">IdPORT_FINGER</A>, as assigned in the <A HREF="007325.html#0000" CLASS="Element59">Create</A> method.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0000">TIdFingerServer.Create</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007325.html" CLASS="Element59">TIdFingerServer</A>, <A HREF="010999.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Constructor for the object instance.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>constructor</STRONG> Create(AOwner: TComponent); <STRONG>override</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Create is the constructor for the object instance. Create calls the inherited Create method, and initializes the <A HREF="007325.html" CLASS="Element59">TIdFingerServer</A> instance by setting the default value for <A HREF="007325.html#0001" CLASS="Element59">DefaultPort</A> to the standard port number used for the Finger protocol (<A HREF="002449.html" CLASS="Element59">IdPORT_FINGER</A>).</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0002">TIdFingerServer.OnCommandFinger</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007325.html" CLASS="Element59">TIdFingerServer</A>, <A HREF="011000.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Represents the event handler for resolving Finger requests.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> OnCommandFinger: <A HREF="007324.html" CLASS="Element59">TIdFingerGetEvent</A>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+OnCommandFinger is a <A HREF="007324.html" CLASS="Element59">TIdFingerGetEvent</A> property that represents the event handler triggered when a threaded client connection makes a Finger request. OnCommandFinger expects an AUserName argument that is the query the client is making. This event does not occur in the main program thread but in the threaded client connection specified by AThread.<P CLASS="Element10">
+OnCommandFinger is used during execution of the threaded client in AThread, and allows the server to implement resolution of the Finger query. Applications must assign a procedure to the event handler to allow responding to the event notification. The event handler should be used to locate user information for the Finger query, and write any reponse or error messages to the client connection in AThread.<P CLASS="Element10">
+Use <A HREF="007325.html#0003" CLASS="Element59">OnCommandVerboseFinger</A> to resolve Finger queries that require verbose output.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0003">TIdFingerServer.OnCommandVerboseFinger</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007325.html" CLASS="Element59">TIdFingerServer</A>, <A HREF="011001.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Represents the event handler for resolving verbose Finger requests.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> OnCommandVerboseFinger: <A HREF="007324.html" CLASS="Element59">TIdFingerGetEvent</A>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+OnCommandVerboseFinger is a <A HREF="007324.html" CLASS="Element59">TIdFingerGetEvent</A> property that represents the event handler triggered when a threaded client connection makes a verbose Finger request. OnCommandVerboseFinger expects an AUserName argument that is the query the client is making. This event does not occur in the main program thread but in the threaded client connection specified by AThread.<P CLASS="Element10">
+OnCommandVerboseFinger is used during execution of the threaded client in AThread, and allows the server to implement resolution of the Finger query using verbose output. Applications must assign a procedure to the event handler to allow responding to the event notification. The event handler should be used to locate user information for the Finger query, and write any reponse or error messages to the client connection in AThread.<P CLASS="Element10">
+When OnCommandVerboseFinger is unassigned, <A HREF="007325.html#0002" CLASS="Element59">OnCommandFinger</A> will be used to resolve the Finger query.</DIV>
+</DIV>
+<DIV CLASS="Element62">
+<HR>Created with Doc-O-Matic 2 donated to <STRONG><A HREF="http://www.delphi-jedi.org">Project JEDI</A></STRONG>. Commercial license available from the <STRONG><A HREF="http://www.doc-o-matic.com">Doc-O-Matic site</A></STRONG>.</DIV>
+</DIV></BODY></HTML>

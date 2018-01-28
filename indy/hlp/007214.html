@@ -1,0 +1,147 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+<TITLE>TIdBaseThread</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <META name="GENERATOR" content="Doc-O-Matic">
+    <LINK rel="STYLESHEET" href="default.css" type="text/css">
+
+<SCRIPT LANGUAGE="JavaScript1.2" SRC="scripts.js"></SCRIPT>
+</HEAD>
+<BODY CLASS="Element57">
+<TABLE BORDER="0" BGCOLOR="#AACCFF" WIDTH="100%" CELLSPACING="0" CELLPADDING="0">
+<TR><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element1">
+Indy 9</DIV>
+</TD><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element2">
+<A HREF="content.html" CLASS="Element59">Content</A> | <A HREF="idx.html" CLASS="Element59">Index</A> | <A HREF="symref.html" CLASS="Element59">Reference</A></DIV>
+</TD></TR></TABLE><DIV CLASS="Element58">
+<DIV CLASS="Element5">
+TIdBaseThread</DIV>
+<DIV CLASS="Element7">
+<A HREF="010016.html" CLASS="Element59">Hierarchy</A>, <A HREF="010017.html" CLASS="Element59">Properties</A>, <A HREF="010018.html" CLASS="Element59">Methods</A>, <A HREF="010019.html" CLASS="Element59">See Also</A>, <A HREF="002923.html" CLASS="Element59">Unit: IdThread</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Implements the ancestor for Indy thread classes.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12">TIdBaseThread = <STRONG>class</STRONG>(TThread)</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Unit</DIV>
+<DIV CLASS="Element69">
+<A HREF="002923.html" CLASS="Element59">IdThread</A></DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+TIdBaseThread is a TThread descendant that implements the ancestor for Indy thread classes. TIdBaseThread exposes protected properties of the ancestor class including <A HREF="007214.html#0000" CLASS="Element59">ReturnValue</A> and <A HREF="007214.html#0003" CLASS="Element59">Terminated</A>. TIdBaseThread also provides overloaded implementations of the <A HREF="007214.html#0001" CLASS="Element59">Synchronize</A> method.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0000">TIdBaseThread.ReturnValue</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007214.html" CLASS="Element59">TIdBaseThread</A>, <A HREF="010020.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Numeric result from the executing thread.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> ReturnValue;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+ReturnValue is a public Integer property that represents the value returned to other threads or the application main thread when the thread completes executing. ReturnValue indicates success, failure, or the simple numeric result for the thread. ReturnValue is the value returned by the WaitFor method.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0003">TIdBaseThread.Terminated</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007214.html" CLASS="Element59">TIdBaseThread</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Indicates the thread has been asked to terminate.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> Terminated;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Terminated is a Boolean property used to indicate that the thread has been asked to abort thread execution using Terminate. The Execute method, and any methods that Execute calls, should check Terminated periodically and exit when it's True.<P CLASS="Element10">
+The Terminate method sets the Terminated property to True. The Terminate method is the polite way to abort the execution of a thread, but it requires cooperation from the thread’s Execute code. Using Terminate is recommended over the TerminateThread Win32 API call.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0002">TIdBaseThread.Synchronize</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007214.html" CLASS="Element59">TIdBaseThread</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Executes a method call within the main VCL thread.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>procedure</STRONG> <A HREF="007214.html#0001" CLASS="Element59">Synchronize</A>(Method: TThreadMethod); <STRONG>overload</STRONG>;
+<STRONG>procedure</STRONG> <A HREF="007214.html#0001" CLASS="Element59">Synchronize</A>(Method: TMethod); <STRONG>overload</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+Method: TThreadMethod</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Method or thread method to be executed.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Synchronize is an overloaded method in <A HREF="007214.html" CLASS="Element59">TIdBaseThread</A> that causes the code in Method to be executed in the context of the the main VCL thread. Synchronize is used to avoid conflicts in multithreaded applications by insuring that a non-thread-safe method is called from the main thread of execution. Execution of the thread is suspended while Method is executing in the main VCL thread.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Notes</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+You can also protect unsafe methods using critical sections or the multi-read exclusive-write synchronizer.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0001">TIdBaseThread.Synchronize</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007214.html" CLASS="Element59">TIdBaseThread</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Executes a method call within the main VCL thread.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>procedure</STRONG> Synchronize(Method: TThreadMethod); <STRONG>overload</STRONG>;
+<STRONG>procedure</STRONG> Synchronize(Method: TMethod); <STRONG>overload</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+Method: TThreadMethod</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Method or thread method to be executed.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Synchronize is an overloaded method in <A HREF="007214.html" CLASS="Element59">TIdBaseThread</A> that causes the code in Method to be executed in the context of the the main VCL thread. Synchronize is used to avoid conflicts in multithreaded applications by insuring that a non-thread-safe method is called from the main thread of execution. Execution of the thread is suspended while Method is executing in the main VCL thread.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Notes</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+You can also protect unsafe methods using critical sections or the multi-read exclusive-write synchronizer.</DIV>
+</DIV>
+<DIV CLASS="Element62">
+<HR>Created with Doc-O-Matic 2 donated to <STRONG><A HREF="http://www.delphi-jedi.org">Project JEDI</A></STRONG>. Commercial license available from the <STRONG><A HREF="http://www.doc-o-matic.com">Doc-O-Matic site</A></STRONG>.</DIV>
+</DIV></BODY></HTML>

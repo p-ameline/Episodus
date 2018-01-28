@@ -1,0 +1,214 @@
+// NSBROWSE.H : Définition des objets dialogues contenant ie4/////////////////////////////////////////////////////////////
+#if !defined(__NSWHOISTHERE_H)#define __NSWHOISTHERE_H
+# include <owl/listwind.h># include <owl/panespli.h># include <owl/mdichild.h>
+
+class NSProgressDlg ;
+
+// #include "nautilus\nssuper.h"#include "partage\ns_vector.h"
+#include "partage\NTArray.h"
+#include "nsbb\nsutidlg.h"
+#include "nautilus\nsbrowseSvce.h"
+
+class NSInsidePersonInformation{
+  private:
+
+    static long lObjectCount ;
+
+  public:
+
+    NSInsidePersonInformation() ;
+    ~NSInsidePersonInformation() ;
+
+    NSInsidePersonInformation(const NSInsidePersonInformation& rv) ;
+
+    NSInsidePersonInformation& operator=(const NSInsidePersonInformation& src) ;
+
+    string getPath() { return _sPath ; }
+    string getData() { return _sData ; }
+
+  protected:
+
+    string _sPath ;
+    string _sData ;
+} ;
+
+typedef vector<NSInsidePersonInformation*>    NSInPersonInformationVector ;
+typedef NSInPersonInformationVector::iterator NSInPersonInformationIter ;
+typedef NTArray<NSInsidePersonInformation>    NSInPersonInformationArray ;
+
+class NSInsidePerson
+{
+  private:
+
+    static long lObjectCount ;
+
+  public:
+
+    NSInsidePerson() ;
+    ~NSInsidePerson() ;
+
+    NSInsidePerson(const NSInsidePerson& rv) ;
+
+    NSInsidePerson& operator=(const NSInsidePerson& src) ;
+
+    string getName() { return _sName ; }
+
+    NSInsidePersonInformation*  getInformation(size_t iIndex) ;
+    NSInPersonInformationArray* getInformations() { return &_aInformation ; }
+
+    string getInformationData(size_t iIndex) ;
+    string getInformationPath(size_t iIndex) ;
+
+  protected:
+
+    NSInPersonInformationArray _aInformation ;
+    string                     _sName ;
+} ;
+
+typedef vector<NSInsidePerson*>            NSInPersonVector ;
+typedef NSInPersonVector::iterator         NSInPersonIter ;
+typedef NSInPersonVector::reverse_iterator NSInPersonReverseIter ;
+typedef NTArray<NSInsidePerson>            NSInPersonArray ;
+
+class NSInPersonsWindow ;
+
+class NSInPersonsListWindow : public TListWindow, public NSRoot
+{
+  public:
+
+    // constructors / destructor
+    NSInPersonsListWindow() ;
+    NSInPersonsListWindow(NSContexte* pCtx, NSInPersonsWindow *parent, int id, int x, int y, int w, int h, TModule* module = (TModule*) 0) ;
+    ~NSInPersonsListWindow() ;
+
+    // Loading mails list
+    void    loadInPersons() ;
+    void    initPersonsList() ;
+
+    // réponse aux événements
+    bool    VnIsWindow(HWND hWnd) ;
+    void    EvLButtonDown(uint modKeys, NS_CLASSLIB::TPoint& point) ;
+    void    EvRButtonDown(uint modkeys, NS_CLASSLIB::TPoint& point) ;
+    void    EvLButtonDblClk(uint modKeys, NS_CLASSLIB::TPoint& point) ;
+    void    EvKeyDown(uint key, uint repeatCount, uint flags) ;
+    void    EvSetFocus(HWND hWndLostFocus) ;
+    void    EvLButtonUp(uint modKeys, NS_CLASSLIB::TPoint& pt) ;
+    void    DispInfoListe(TLwDispInfoNotify& dispInfo) ;
+
+    void    sortAgain() ;
+    void    LVNColumnclick(TLwNotify& lwn) ;
+    void    changeSortOrder(int iCol) ;
+    void    sortBy(int iCol) ;
+
+    int     IndexItemSelect() ;
+
+    void    SetupToolBar() ;
+    void    SetupWindow() ;
+    void    SetupColumns() ;
+    void    AfficheListe() ;
+    void    EvKillFocus(HWND hWndGetFocus) ;
+
+    void    processSelectionChange() ;
+    void    selectCurrentPatientInList() ;
+
+    void    CmOpenPatient() ;
+    void    openPatient(NSInsidePerson* pInPerson) ;
+
+    void    CmSetDocParams() ;
+
+    bool    bSetupToolBar ;
+
+  protected:
+
+    string             _sDirectory ;
+
+    NSInPersonArray    _aInPersons ;
+
+    int                _iPreviousSelection ;
+
+    bool               _bNaturallySorted ;
+    int                _iSortedColumn ;
+
+    int                _iRes ;
+    NSInPersonsWindow* _pParentWindow ;
+    NSProgressDlg*     _pProgressDlg ;
+
+  DECLARE_RESPONSE_TABLE(NSInPersonsListWindow) ;
+} ;
+
+class NSInPersonsWindow ;
+
+class NSInPersonsGadgetWindow : public TGadgetWindow, public NSRoot
+{
+  public:
+
+    NSInPersonsGadgetWindow(NSContexte* pCtx, TWindow* parent, bool bAddButtons = false, const char far* title = 0 ) ;
+    ~NSInPersonsGadgetWindow() ;
+
+    void EvSetFocus(HWND hWndLostFocus) ;
+
+    void activateParent() ;
+
+    int  getGadgetsHeight() ;
+    void setPaneSplitter(NSInPersonsWindow* pPS) { _pPaneSplitter = pPS ; }
+
+  protected:
+
+    void               SetupWindow() ;
+
+    NSInPersonsWindow* _pPaneSplitter ;
+
+	DECLARE_RESPONSE_TABLE(NSInPersonsGadgetWindow) ;
+} ;
+
+class NSInPersonsWindow : public TPaneSplitter, public NSRoot
+{
+  public:
+
+    // NSClientWindow(TWindow* parent, TSplitDirection splitDir, float percent = .50);
+    NSInPersonsWindow(NSContexte* pCtx, TWindow* parent, string sDescFile, const char far* title = 0, TModule* module = 0) ;
+    ~NSInPersonsWindow() ;
+
+    void  CmOk() ;
+    void  CmHelp() ;
+    void  CmCancel() ;
+
+    NSInPersonsListWindow* getList() { return _pListWindow ; }
+
+    void  openPatient(NSInsidePerson* pMailObject) ;
+
+  protected:
+
+    void  EvClose() ;
+    void  SetupWindow() ;
+    void  EvSize(uint sizeType, ClassLib::TSize& size) ;
+    void  setGadgetWindowLayout() ;
+
+    TMDIChild*               _pMDIChild ;
+
+    NSInPersonsGadgetWindow* _pGadgetPanelWindow ;
+    NSInPersonsListWindow*   _pListWindow ;
+
+    NSLocalChapterArray*     _pFileDescriptor ;
+
+  DECLARE_RESPONSE_TABLE(NSInPersonsWindow) ;
+};
+
+// Classe TMDIChild pour la redéfinition de EvClose
+/////////////////////////////////////////////////////////
+class NSInPersonsChild : public TMDIChild, public NSRoot
+{
+	public :
+
+		NSInPersonsChild(NSContexte* pCtx, TMDIClient& parent, const char far* title = 0, TWindow *clientWnd = (TWindow*) 0) ;
+		~NSInPersonsChild() ;
+
+		void EvClose() ;
+
+	DECLARE_RESPONSE_TABLE(NSInPersonsChild) ;
+};
+
+#endif  // __NSWHOISTHERE_H
+
+// fin de nsWhoIsThere.h///////////////////////////////////////////////////////////////
+

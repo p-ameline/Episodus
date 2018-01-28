@@ -1,0 +1,107 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+<TITLE>TReplyStatus</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <META name="GENERATOR" content="Doc-O-Matic">
+    <LINK rel="STYLESHEET" href="default.css" type="text/css">
+
+<SCRIPT LANGUAGE="JavaScript1.2" SRC="scripts.js"></SCRIPT>
+</HEAD>
+<BODY CLASS="Element57">
+<TABLE BORDER="0" BGCOLOR="#AACCFF" WIDTH="100%" CELLSPACING="0" CELLPADDING="0">
+<TR><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element1">
+Indy 9</DIV>
+</TD><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element2">
+<A HREF="content.html" CLASS="Element59">Content</A> | <A HREF="idx.html" CLASS="Element59">Index</A> | <A HREF="symref.html" CLASS="Element59">Reference</A></DIV>
+</TD></TR></TABLE><DIV CLASS="Element58">
+<DIV CLASS="Element5">
+TReplyStatus</DIV>
+<DIV CLASS="Element7">
+<A HREF="015405.html" CLASS="Element59">See Also</A>, <A HREF="002254.html" CLASS="Element59">Unit: IdIcmpClient</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Response to an echo request.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12">TReplyStatus = <STRONG>record</STRONG>
+  BytesReceived: integer;
+  FromIpAddress: <STRONG>string</STRONG>;
+  MsgType: byte;
+  SequenceId: word;
+  MsRoundTripTime: longword;
+  TimeToLive: byte;
+  ReplyStatusType: <A HREF="008057.html" CLASS="Element59">TReplyStatusTypes</A>;
+  <STRONG>end</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Unit</DIV>
+<DIV CLASS="Element69">
+<A HREF="002254.html" CLASS="Element59">IdIcmpClient</A></DIV>
+<DIV CLASS="Element14">
+Members</DIV>
+<DIV CLASS="Element20">
+BytesReceived: integer;</DIV>
+<DIV CLASS="Element22">
+<DIV CLASS="Element21">
+BytesReceived is an <STRONG>Integer</STRONG> value in TReplyStaus used to store the number of bytes received in the response to an echo request. BytesReceived can be <STRONG>0</STRONG> to indicate an error condition, or when a time-out occurs prior to receiving a response to an echo request.</DIV>
+</DIV>
+<DIV CLASS="Element20">
+FromIpAddress: string;</DIV>
+<DIV CLASS="Element22">
+<DIV CLASS="Element21">
+FromIpAddress is <STRONG>String</STRONG> value in <A HREF="008056.html" CLASS="Element59">TReplyStatus</A> used to store the IP address received in a Ping response. FromIPAddress identifies the host responding to the ping request.<P CLASS="Element21">
+FromIPAddress can have the value '<STRONG>0.0.0.0</STRONG>' to indicate an error condition, or when a time-out occurs prior to receiving a response to an echo request.</DIV>
+</DIV>
+<DIV CLASS="Element20">
+MsgType: byte;</DIV>
+<DIV CLASS="Element22">
+<DIV CLASS="Element21">
+MsgType is a <STRONG>byte</STRONG> value in <A HREF="008056.html" CLASS="Element59">TReplyStatus</A> that identifies the message type received in response to an echo request. MsgType can have the following values:<P CLASS="Element21">
+0 - net unreachable<P CLASS="Element21">
+1 - host unreachable<P CLASS="Element21">
+2 - protocol unreachable<P CLASS="Element21">
+3 - port unreachable<P CLASS="Element21">
+4 - fragmentation needed<P CLASS="Element21">
+5 - source route failed<P CLASS="Element21">
+MsgType can have the value <STRONG>0</STRONG> when a time-out occurs prior to receiving a response to an echo request.</DIV>
+</DIV>
+<DIV CLASS="Element20">
+SequenceId: word;</DIV>
+<DIV CLASS="Element22">
+<DIV CLASS="Element21">
+SequenceId is a <STRONG>Word</STRONG> value in <A HREF="008056.html" CLASS="Element59">TReplyStatus</A> that identifies the sequence identifier of the response to an echo request.<P CLASS="Element21">
+SequenceId can be assigned the internal sequence number of <A HREF="007395.html" CLASS="Element59">TIdIcmpClient</A> when a time-out occurs prior to receiving a response to an echo request.</DIV>
+</DIV>
+<DIV CLASS="Element20">
+MsRoundTripTime: longword;</DIV>
+<DIV CLASS="Element22">
+<DIV CLASS="Element21">
+MsRoundTripTime is a <STRONG>LongWord</STRONG> value in <A HREF="008056.html" CLASS="Element59">TReplyStatus</A> that indicates the total number of milliseconds required to return the response to the echo request.<P CLASS="Element21">
+MsRoundTripTime is calculated using the originate timestamp in the echo request and the number of milliseconds since midnight on the local computer.</DIV>
+</DIV>
+<DIV CLASS="Element20">
+TimeToLive: byte;</DIV>
+<DIV CLASS="Element22">
+<DIV CLASS="Element21">
+TimeToLive is a Byte value in <A HREF="008056.html" CLASS="Element59">TReplyStatus</A> used to indicate the Time to Live, in seconds, returned in the response to an echo request. TimeToLive is decremented at each machine in which the datagram is processed. TimeToLive is updated when <A HREF="007395.html" CLASS="Element59">TIdIcmpClient</A> decodes the <A HREF="007395.html#0008" CLASS="Element59">TIdIcmpClient.ReplyData</A> response to an echo request.</DIV>
+</DIV>
+<DIV CLASS="Element20">
+ReplyStatusType: TReplyStatusTypes;</DIV>
+<DIV CLASS="Element22">
+<DIV CLASS="Element21">
+ReplyStatusType is a TReplyStatusType member variable that contains the type of replay decoded in the response to a TIdICMPClient echo request.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+TReplyStatus is a record structure used to store the response to an echo request in the Ping method of <A HREF="007395.html" CLASS="Element59">TIdIcmpClient</A>.<P CLASS="Element10">
+TReplyStatus contains diagnostic information received as a result of the Ping request. TReplyStatus is also provided as a parameter to OnReply event handler in <A HREF="007395.html" CLASS="Element59">TIdIcmpClient</A>.</DIV>
+</DIV>
+<DIV CLASS="Element62">
+<HR>Created with Doc-O-Matic 2 donated to <STRONG><A HREF="http://www.delphi-jedi.org">Project JEDI</A></STRONG>. Commercial license available from the <STRONG><A HREF="http://www.doc-o-matic.com">Doc-O-Matic site</A></STRONG>.</DIV>
+</DIV></BODY></HTML>

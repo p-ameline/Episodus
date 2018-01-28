@@ -1,0 +1,71 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+<TITLE>TUserHandler</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <META name="GENERATOR" content="Doc-O-Matic">
+    <LINK rel="STYLESHEET" href="default.css" type="text/css">
+
+<SCRIPT LANGUAGE="JavaScript1.2" SRC="scripts.js"></SCRIPT>
+</HEAD>
+<BODY CLASS="Element57">
+<TABLE BORDER="0" BGCOLOR="#AACCFF" WIDTH="100%" CELLSPACING="0" CELLPADDING="0">
+<TR><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element1">
+Indy 9</DIV>
+</TD><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element2">
+<A HREF="content.html" CLASS="Element59">Content</A> | <A HREF="idx.html" CLASS="Element59">Index</A> | <A HREF="symref.html" CLASS="Element59">Reference</A></DIV>
+</TD></TR></TABLE><DIV CLASS="Element58">
+<DIV CLASS="Element5">
+TUserHandler</DIV>
+<DIV CLASS="Element7">
+<A HREF="002819.html" CLASS="Element59">Unit: IdSMTPServer</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Event type signalled to perform account authentication.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12">TUserHandler = <STRONG>procedure</STRONG> (ASender: <A HREF="007242.html" CLASS="Element59">TIdCommand</A>; <STRONG>var</STRONG> Accept: Boolean; Username, Password: <STRONG>string</STRONG>) <STRONG>of</STRONG> <STRONG>object</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Unit</DIV>
+<DIV CLASS="Element69">
+<A HREF="002819.html" CLASS="Element59">IdSMTPServer</A></DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+Accept</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Indicates if the authentication is successful.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+ASender</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Command generating the event notification.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+Password</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Client credentials used for authorization.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+Username</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Client identity used for authorization.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+TUserHandler is an event type signalled when a threaded client is authenticated during connection. TUserHandler is the event type generated for the <A HREF="007707.html#0002" CLASS="Element59">TIdSMTPServer.CheckUser</A> event handler, and allows the SMTP server to perform validation of Username and Password values read from the client connection.<P CLASS="Element10">
+An event handler for the TUserHandler event type can be used to access the data store for account identities and credentials to perform authentication for the values in Username and Password. The event handler may also set the value in Accepted to True, to indicate that authentication is successful, or False to indicate that authentication has failed.</DIV>
+</DIV>
+<DIV CLASS="Element62">
+<HR>Created with Doc-O-Matic 2 donated to <STRONG><A HREF="http://www.delphi-jedi.org">Project JEDI</A></STRONG>. Commercial license available from the <STRONG><A HREF="http://www.doc-o-matic.com">Doc-O-Matic site</A></STRONG>.</DIV>
+</DIV></BODY></HTML>

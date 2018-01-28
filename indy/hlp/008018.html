@@ -1,0 +1,67 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+<TITLE>TOnListDirectoryEvent</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <META name="GENERATOR" content="Doc-O-Matic">
+    <LINK rel="STYLESHEET" href="default.css" type="text/css">
+
+<SCRIPT LANGUAGE="JavaScript1.2" SRC="scripts.js"></SCRIPT>
+</HEAD>
+<BODY CLASS="Element57">
+<TABLE BORDER="0" BGCOLOR="#AACCFF" WIDTH="100%" CELLSPACING="0" CELLPADDING="0">
+<TR><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element1">
+Indy 9</DIV>
+</TD><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element2">
+<A HREF="content.html" CLASS="Element59">Content</A> | <A HREF="idx.html" CLASS="Element59">Index</A> | <A HREF="symref.html" CLASS="Element59">Reference</A></DIV>
+</TD></TR></TABLE><DIV CLASS="Element58">
+<DIV CLASS="Element5">
+TOnListDirectoryEvent</DIV>
+<DIV CLASS="Element7">
+<A HREF="002192.html" CLASS="Element59">Unit: IdFTPServer</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Event type signalled when a directory listing is needed for an FTP client connection.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12">TOnListDirectoryEvent = <STRONG>procedure</STRONG> (ASender: <A HREF="007343.html" CLASS="Element59">TIdFTPServerThread</A>; <STRONG>const</STRONG> APath: <STRONG>string</STRONG>; ADirectoryListing: <A HREF="007337.html" CLASS="Element59">TIdFTPListItems</A>) <STRONG>of</STRONG> <STRONG>object</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Unit</DIV>
+<DIV CLASS="Element69">
+<A HREF="002192.html" CLASS="Element59">IdFTPServer</A></DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+ADirectoryListing</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Collection of file items for the listing.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+APath</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+File system directory for the listing.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+ASender</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Client connection for the event notification.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+TOnListDirectoryEvent is an event type signalled when an FTP server implementation needs to prepare and process a directory listing for the client connection.<P CLASS="Element10">
+TOnListDirectoryEvent is the event type signalled to the <A HREF="007342.html#000D" CLASS="Element59">TIdFTPServer.OnListDirectory</A> event handler when the command event handler for the FTP LIST command verb is executed. TOnListDirectoryEvent allows the server to examine, validate, or maintain items that appear in the directory listing.<P CLASS="Element10">
+The event handler allows the server to use properties from the connection for the thread client specified in ASender, the current directory in APath, and the collection with file information in ADirectoryListing. The event handler can also add or delete <A HREF="007333.html" CLASS="Element59">TIdFTPListItem</A> entries in ADirectoryListing prior to constructing the text returned in to the client connection.<P CLASS="Element10">
+An FTP server implementation must assign a procedure to the event handler for the TOnListDirectoryEvent event to allow responding to the event notification.</DIV>
+</DIV>
+<DIV CLASS="Element62">
+<HR>Created with Doc-O-Matic 2 donated to <STRONG><A HREF="http://www.delphi-jedi.org">Project JEDI</A></STRONG>. Commercial license available from the <STRONG><A HREF="http://www.doc-o-matic.com">Doc-O-Matic site</A></STRONG>.</DIV>
+</DIV></BODY></HTML>

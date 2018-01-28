@@ -1,0 +1,160 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+<TITLE>TReceiver</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <META name="GENERATOR" content="Doc-O-Matic">
+    <LINK rel="STYLESHEET" href="default.css" type="text/css">
+
+<SCRIPT LANGUAGE="JavaScript1.2" SRC="scripts.js"></SCRIPT>
+</HEAD>
+<BODY CLASS="Element57">
+<TABLE BORDER="0" BGCOLOR="#AACCFF" WIDTH="100%" CELLSPACING="0" CELLPADDING="0">
+<TR><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element1">
+Indy 9</DIV>
+</TD><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element2">
+<A HREF="content.html" CLASS="Element59">Content</A> | <A HREF="idx.html" CLASS="Element59">Index</A> | <A HREF="symref.html" CLASS="Element59">Reference</A></DIV>
+</TD></TR></TABLE><DIV CLASS="Element58">
+<DIV CLASS="Element5">
+TReceiver</DIV>
+<DIV CLASS="Element7">
+<A HREF="015092.html" CLASS="Element59">Hierarchy</A>, <A HREF="015093.html" CLASS="Element59">Properties</A>, <A HREF="015094.html" CLASS="Element59">Methods</A>, <A HREF="015095.html" CLASS="Element59">See Also</A>, <A HREF="002941.html" CLASS="Element59">Unit: IdTunnelCommon</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Implements encapsulated tunnel message receipt and processing.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12">TReceiver = <STRONG>class</STRONG>(TObject)</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Unit</DIV>
+<DIV CLASS="Element69">
+<A HREF="002941.html" CLASS="Element59">IdTunnelCommon</A></DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+TReceiver is a class that implements for receipt and processing of encapsulated tunnel messages for Indy Tunnel components. <A HREF="007871.html" CLASS="Element59">TIdTunnelMaster</A> uses TReceiver to handle message types and data from tunnel client connections.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0000">TReceiver.CRCFailed</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="008055.html" CLASS="Element59">TReceiver</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Indicates an error in the CRC value for a message.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> CRCFailed: Boolean;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+CRCFailed is a read-only Boolean property that indicates when the CRC checksum value for a tunnel message does not match the calculated CRC checksum value on receipt.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0002">TReceiver.Data</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="008055.html" CLASS="Element59">TReceiver</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Represents data for the encapsulated tunnel message.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> Data: <STRONG>String</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Data is a String property that represents the contents of an encapsulated Tunnel message. Changing the value in Data results in updating the pBuffer message buffer including recalculation of the CRC value and detecting the message type.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0004">TReceiver.NewMessage</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="008055.html" CLASS="Element59">TReceiver</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Indicates a change to the <A HREF="008055.html#0002" CLASS="Element59">Data</A> for the message.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> NewMessage: Boolean;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+NewMessage is a read-only Boolean property that indicates when the message or header has been updated as a result of changes to <A HREF="008055.html#0002" CLASS="Element59">Data</A>.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0001">TReceiver.Create</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="008055.html" CLASS="Element59">TReceiver</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Constructor for the object instance.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>constructor</STRONG> Create;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+AOwner</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Owner of the object instance.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Create is the constructor for the object instance, and relies on the inherited Create method. Create also initializes object properties for the CRC calculator, HeaderLen, and MsgLen used by the object. Create allocates the buffers used for pBuffer and Msg.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0003">TReceiver.Destroy</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="008055.html" CLASS="Element59">TReceiver</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Free the object instance.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>destructor</STRONG> Destroy; <STRONG>override</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Destroy is the destructor for the object instance. Destroy frees pBuffer and Msg, as well as the CRC calculator for the object instance prior to calling the inherited Destroy method.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0005">TReceiver.ShiftData</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="008055.html" CLASS="Element59">TReceiver</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Handles multiple messages in the message buffer.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>procedure</STRONG> ShiftData;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+ShiftData is a procedure used to access, align, and calculate CRC values for multiple messages in pBuffer.</DIV>
+</DIV>
+<DIV CLASS="Element62">
+<HR>Created with Doc-O-Matic 2 donated to <STRONG><A HREF="http://www.delphi-jedi.org">Project JEDI</A></STRONG>. Commercial license available from the <STRONG><A HREF="http://www.doc-o-matic.com">Doc-O-Matic site</A></STRONG>.</DIV>
+</DIV></BODY></HTML>

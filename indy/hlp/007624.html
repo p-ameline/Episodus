@@ -1,0 +1,149 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+<TITLE>TIdPOP3ServerThread</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <META name="GENERATOR" content="Doc-O-Matic">
+    <LINK rel="STYLESHEET" href="default.css" type="text/css">
+
+<SCRIPT LANGUAGE="JavaScript1.2" SRC="scripts.js"></SCRIPT>
+</HEAD>
+<BODY CLASS="Element57">
+<TABLE BORDER="0" BGCOLOR="#AACCFF" WIDTH="100%" CELLSPACING="0" CELLPADDING="0">
+<TR><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element1">
+Indy 9</DIV>
+</TD><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element2">
+<A HREF="content.html" CLASS="Element59">Content</A> | <A HREF="idx.html" CLASS="Element59">Index</A> | <A HREF="symref.html" CLASS="Element59">Reference</A></DIV>
+</TD></TR></TABLE><DIV CLASS="Element58">
+<DIV CLASS="Element5">
+TIdPOP3ServerThread</DIV>
+<DIV CLASS="Element7">
+<A HREF="013113.html" CLASS="Element59">Hierarchy</A>, <A HREF="013114.html" CLASS="Element59">Properties</A>, <A HREF="013115.html" CLASS="Element59">Methods</A>, <A HREF="013116.html" CLASS="Element59">Events</A>, <A HREF="013117.html" CLASS="Element59">See Also</A>, <A HREF="002310.html" CLASS="Element59">Unit: IdPOP3Server</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Thread class used for client connections in a POP3 server implementation.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12">TIdPOP3ServerThread = <STRONG>class</STRONG>(<A HREF="007613.html" CLASS="Element59">TIdPeerThread</A>)</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Unit</DIV>
+<DIV CLASS="Element69">
+<A HREF="002310.html" CLASS="Element59">IdPOP3Server</A></DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+TIdPOP3ServerThread is a <A HREF="007613.html" CLASS="Element59">TIdPeerThread</A> that represents the thread class created for POP3 client connections in a <A HREF="007618.html" CLASS="Element59">TIdPOP3Server</A> server implementation. TIdPOP3ServerThread exposes properties that represents the identity and authentication credentials for the client connection, as well as the <A HREF="007623.html" CLASS="Element59">TIdPOP3ServerState</A> fotr the connection.<P CLASS="Element10">
+TIdPOP3ServerThread is the class type assigned to the TIdPOP3Server.ThreadClass property in the constructor for <A HREF="007618.html" CLASS="Element59">TIdPOP3Server</A>.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0002">TIdPOP3ServerThread.Password</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007624.html" CLASS="Element59">TIdPOP3ServerThread</A>, <A HREF="013118.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Authentication credentials for the client connection.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> Password: <STRONG>String</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Password is a String property that represents the authentication credentials for the threaded client connection to the POP3 server. Password is updated when the command handler for the POP3 PASS command reads the value from the client connection.<P CLASS="Element10">
+<A HREF="007624.html#0004" CLASS="Element59">Username</A> and Password are used in the <A HREF="007618.html#0000" CLASS="Element59">TIdPOP3Server.CheckUser</A> method to verify the identity and authentication for the client connection, and set the POP3 state.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0003">TIdPOP3ServerThread.State</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007624.html" CLASS="Element59">TIdPOP3ServerThread</A>, <A HREF="013119.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Indicates the POP3 state for the threaded client connection.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> State: <A HREF="007623.html" CLASS="Element59">TIdPOP3ServerState</A>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+State is a <A HREF="007623.html" CLASS="Element59">TIdPOP3ServerState</A> property that represents the POP3 state for the threaded client connection. State is updated by various event handlers during the lifetime of the threaded client connection.<P CLASS="Element10">
+When the client connection is established, State is set to Auth and the session enters the AUTHORIZATION state. In this state, the client must identify itself to the POP3 server to gain access to the associated maildrop.<P CLASS="Element10">
+When the client is successfully authorized, the client session enters the the TRANSACTION state, and State is set to Trans. In this state, the client requests actions on the maildrop on the POP3 server.<P CLASS="Element10">
+When the client has issued the QUIT command, the session enters the UPDATE state and STate is set to Update. In this state, the POP3 server releases any resources acquired during the TRANSACTION state and says goodbye. The client connection is then closed.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0004">TIdPOP3ServerThread.Username</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007624.html" CLASS="Element59">TIdPOP3ServerThread</A>, <A HREF="013120.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Identity for the client connection.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> Username: <STRONG>String</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Username is a String property that represents the identification credentials for the threaded client connection to the POP3 server. Username is updated when the command handler for the POP3 USER command reads the value from the client connection.<P CLASS="Element10">
+Username and <A HREF="007624.html#0002" CLASS="Element59">Password</A> are used in the <A HREF="007618.html#0000" CLASS="Element59">TIdPOP3Server.CheckUser</A> method to verify the identity and authentication for the client connection, and set the POP3 state.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0000">TIdPOP3ServerThread.Create</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007624.html" CLASS="Element59">TIdPOP3ServerThread</A>, <A HREF="013121.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Constructor for the thread instance.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>constructor</STRONG> Create(ACreateSuspended: Boolean = True); <STRONG>override</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+ACreateSuspended: Boolean = True</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Indicates if the thread is created in a suspended state.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Create is the constructor for the object instance, and creates a new client connection thread in the server implementation. Create calls the inherited Create method, and sets the default values for User to an empty string ('') and <A HREF="007624.html#0003" CLASS="Element59">State</A> to the <A HREF="007623.html" CLASS="Element59">TIdPOP3ServerState</A> Auth.<P CLASS="Element10">
+When ACreateSuspended is False, the thread is executed immediately. If ACreateSuspended is True, the thread will not be executed until Resume is called.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0001">TIdPOP3ServerThread.Destroy</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007624.html" CLASS="Element59">TIdPOP3ServerThread</A>, <A HREF="013122.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Frees a thread instance.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>destructor</STRONG> Destroy; <STRONG>override</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Destroy is the destructor for the thread instance. Destroy calls the inherited Destroy method prior to exiting from the method.</DIV>
+</DIV>
+<DIV CLASS="Element62">
+<HR>Created with Doc-O-Matic 2 donated to <STRONG><A HREF="http://www.delphi-jedi.org">Project JEDI</A></STRONG>. Commercial license available from the <STRONG><A HREF="http://www.doc-o-matic.com">Doc-O-Matic site</A></STRONG>.</DIV>
+</DIV></BODY></HTML>

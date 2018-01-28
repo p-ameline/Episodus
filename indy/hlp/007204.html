@@ -1,0 +1,243 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+<TITLE>TIdAttachment</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <META name="GENERATOR" content="Doc-O-Matic">
+    <LINK rel="STYLESHEET" href="default.css" type="text/css">
+
+<SCRIPT LANGUAGE="JavaScript1.2" SRC="scripts.js"></SCRIPT>
+</HEAD>
+<BODY CLASS="Element57">
+<TABLE BORDER="0" BGCOLOR="#AACCFF" WIDTH="100%" CELLSPACING="0" CELLPADDING="0">
+<TR><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element1">
+Indy 9</DIV>
+</TD><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element2">
+<A HREF="content.html" CLASS="Element59">Content</A> | <A HREF="idx.html" CLASS="Element59">Index</A> | <A HREF="symref.html" CLASS="Element59">Reference</A></DIV>
+</TD></TR></TABLE><DIV CLASS="Element58">
+<DIV CLASS="Element5">
+TIdAttachment</DIV>
+<DIV CLASS="Element7">
+<A HREF="009924.html" CLASS="Element59">Hierarchy</A>, <A HREF="009925.html" CLASS="Element59">Properties</A>, <A HREF="009926.html" CLASS="Element59">Methods</A>, <A HREF="009927.html" CLASS="Element59">Events</A>, <A HREF="009928.html" CLASS="Element59">See Also</A>, <A HREF="002286.html" CLASS="Element59">Unit: IdMessage</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Encapsulates a MIME-encoded attachment or inline graphic.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12">TIdAttachment = <STRONG>class</STRONG>(<A HREF="007573.html" CLASS="Element59">TIdMessagePart</A>)</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Unit</DIV>
+<DIV CLASS="Element69">
+<A HREF="002286.html" CLASS="Element59">IdMessage</A></DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+TIdAttachment is a <A HREF="007573.html" CLASS="Element59">TIdMessagePart</A> descendant that encapsulates a MIME-encoded attachment or inline graphic. TIdAttachment and <A HREF="007844.html" CLASS="Element59">TIdText</A> are used as collection items in a <A HREF="007575.html" CLASS="Element59">TIdMessageParts</A> collection.<P CLASS="Element10">
+TIdAttachment provides methods and properties relevant to Internet Message attachments including <A HREF="007204.html#0001" CLASS="Element59">ContentDisposition</A>, <A HREF="007204.html#0006" CLASS="Element59">FileName</A>, and <A HREF="007204.html#0007" CLASS="Element59">SaveToFile</A>. TIdAttachment also reintroduces the <A HREF="007204.html#0002" CLASS="Element59">Create</A> constructor to specify the owner Collection and the file used to store the attachment. TIdAttachment also provides an <A HREF="007204.html#0004" CLASS="Element59">Encode</A> method to allow encoding of a message part to a TStream descendant.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0001">TIdAttachment.ContentDisposition</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007204.html" CLASS="Element59">TIdAttachment</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Indicates presentation and storage parameters for the message part.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> ContentDisposition: <STRONG>string</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+ContentDisposition is a String property that represents the value for the Internet Message header &quot;Content-Disposition&quot; as described in RFC 2183. ContentDisposition indicates presentation information for the message part and can contain values and optional parameters.<P CLASS="Element10">
+ContentDisposition can contain the value &quot;inline&quot; for an Internet Message where the body part should be display immediately, and in the order in which it occurs.<P CLASS="Element10">
+ContentDisposition can contain the value &quot;attachment&quot; followed by additional parameters to indicate that the message part is separate from the main body of the message. The parameter &quot;filename&quot; can be used to suggest a filename where the message part is detached and stored in a separate file. Other parameters can include &quot;creation-date&quot;, &quot;modification-date&quot;, &quot;read-date&quot;, and &quot;size&quot;.<P CLASS="Element10">
+When ContentDisposition contains &quot;attachment&quot;, the <A HREF="007204.html#0006" CLASS="Element59">FileName</A> property reflects the file where the message part is stored.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0005">TIdAttachment.FileIsTempFile</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007204.html" CLASS="Element59">TIdAttachment</A>, <A HREF="009929.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Indicates the storage for the message part is a temporary file.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> FileIsTempFile: boolean;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+FileIsTempFile is a Boolean property that indicates that storage file indicated in <A HREF="007204.html#0006" CLASS="Element59">FileName</A> is a temporary file. FileIsTempFile is used in <A HREF="007204.html#0003" CLASS="Element59">Destroy</A> to determine if the storage file should be deleted when the object instance is freed.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0006">TIdAttachment.FileName</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007204.html" CLASS="Element59">TIdAttachment</A>, <A HREF="009930.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+File name used to the store the attachment.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> FileName: TFileName;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+FileName is a String property that represents the file name where the message part is stored. FileName contains the parameter value from the Internet Message header &quot;Content-Dispositon: attachment; filename=&quot;.<P CLASS="Element10">
+Set <A HREF="007204.html#0005" CLASS="Element59">FileIsTempFile</A> to True to indicate that the file should be deleted when the attachment is freed in <A HREF="007204.html#0003" CLASS="Element59">Destroy</A>.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0000">TIdAttachment.Assign</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007204.html" CLASS="Element59">TIdAttachment</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Copy the property values from an object to the current instance.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>procedure</STRONG> Assign(Source: TPersistent); <STRONG>override</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+Source: TPersistent</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Persistent class that contains values to be copied.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Assign is a procedure used to store the properties values from the object instance specified by Source in the current object instance. If source is an instance of the same ClassType as the current object, Assign will copy the value of the following properties:<P CLASS="Element10">
+<UL>
+<LI>ContentTransfer<P CLASS="Element10">
+<LI>ContentType<P CLASS="Element10">
+<LI>ExtraHeaders<P CLASS="Element10">
+<LI><A HREF="007204.html#0001" CLASS="Element59">ContentDisposition</A><P CLASS="Element10">
+<LI><A HREF="007204.html#0006" CLASS="Element59">FileName</A></UL>
+<P CLASS="Element10">
+When Source is not the same ClassType as the current object instance, Assign calls the inherited Assign method.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0002">TIdAttachment.Create</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007204.html" CLASS="Element59">TIdAttachment</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Constructor for the collection item.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>constructor</STRONG> Create(Collection: <A HREF="007575.html" CLASS="Element59">TIdMessageParts</A>; <STRONG>const</STRONG> AFileName: TFileName = ''); <STRONG>reintroduce</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+Collection: TIdMessageParts</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Collection that owns the collection item.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+const AFileName: TFileName = ''</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+File name for the attachment. Default values is ''.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Create is the constructor for the collection item, and is used to create a new <A HREF="007204.html" CLASS="Element59">TIdAttachment</A> object and add it to the <A HREF="007575.html" CLASS="Element59">TIdMessageParts</A> collection specified by the Collection parameter.<P CLASS="Element10">
+AFileName is an optional parameter that specifies the initial name of the file to be attached with the <A HREF="007204.html" CLASS="Element59">TIdAttachment</A>.<P CLASS="Element10">
+Create calls the inherited Create method to initialize the object instance, and assigns AFileName to the <A HREF="007204.html#0006" CLASS="Element59">FileName</A> property.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0003">TIdAttachment.Destroy</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007204.html" CLASS="Element59">TIdAttachment</A>, <A HREF="009931.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Destructor for the object instance.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>destructor</STRONG> Destroy; <STRONG>override</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Destroy is the Destructor for the object instance. If the <A HREF="007204.html#0005" CLASS="Element59">FileIsTempFile</A> property contains True, Destroy calls DeleteFile using the Filename property to remove the temporary file for the attachment. Destroy calls the inherited method to finalize destruction of the object instance.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0004">TIdAttachment.Encode</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007204.html" CLASS="Element59">TIdAttachment</A>, <A HREF="009932.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>procedure</STRONG> Encode(ADest: TStream);</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+ADest: TStream</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Stream to receive the encoded value for the message part.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Encode is a procedure used to create and store the encoded values for a message part in the TStream identified by ADest. Encode uses the <A HREF="007558.html" CLASS="Element59">TIdMessageEncoderInfo</A> for the owner Collection to create an encoder instance for the message part, which reads the message part from the stored file and captures the values in the specified stream.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0007">TIdAttachment.SaveToFile</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007204.html" CLASS="Element59">TIdAttachment</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Stores a message part to a disk file.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>function</STRONG> SaveToFile(<STRONG>const</STRONG> <A HREF="007204.html#0006" CLASS="Element59">FileName</A>: TFileName): Boolean;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+const FileName: TFileName</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+File name where the message part will be stored.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Return Value</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Boolean - True when the message parts is stored.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+SaveToFile is a Boolean function used to store the attachment that represents the message part to the file specified in Filename.</DIV>
+</DIV>
+<DIV CLASS="Element62">
+<HR>Created with Doc-O-Matic 2 donated to <STRONG><A HREF="http://www.delphi-jedi.org">Project JEDI</A></STRONG>. Commercial license available from the <STRONG><A HREF="http://www.doc-o-matic.com">Doc-O-Matic site</A></STRONG>.</DIV>
+</DIV></BODY></HTML>

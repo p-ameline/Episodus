@@ -1,0 +1,60 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+<TITLE>TNSRecord</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <META name="GENERATOR" content="Doc-O-Matic">
+    <LINK rel="STYLESHEET" href="default.css" type="text/css">
+
+<SCRIPT LANGUAGE="JavaScript1.2" SRC="scripts.js"></SCRIPT>
+</HEAD>
+<BODY CLASS="Element57">
+<TABLE BORDER="0" BGCOLOR="#AACCFF" WIDTH="100%" CELLSPACING="0" CELLPADDING="0">
+<TR><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element1">
+Indy 9</DIV>
+</TD><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element2">
+<A HREF="content.html" CLASS="Element59">Content</A> | <A HREF="idx.html" CLASS="Element59">Index</A> | <A HREF="symref.html" CLASS="Element59">Reference</A></DIV>
+</TD></TR></TABLE><DIV CLASS="Element58">
+<DIV CLASS="Element5">
+TNSRecord</DIV>
+<DIV CLASS="Element7">
+<A HREF="015048.html" CLASS="Element59">Hierarchy</A>, <A HREF="015049.html" CLASS="Element59">Properties</A>, <A HREF="015050.html" CLASS="Element59">Methods</A>, <A HREF="002173.html" CLASS="Element59">Unit: IdDNSResolver</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Represents a resource record returned from a DNS query that includes Name Server resource record types.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12">TNSRecord = <STRONG>class</STRONG>(<A HREF="007938.html" CLASS="Element59">TNAMERecord</A>)</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Unit</DIV>
+<DIV CLASS="Element69">
+<A HREF="002173.html" CLASS="Element59">IdDNSResolver</A></DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+TNSRecord is a TNameRecord descendant that represents a resource record returned in the results for a DNS query. TNSRecord is a collection item created to represent a resource resource returned when TIDNSResolver.QueryRecords includes the value qtNS for Name Server resource records.<P CLASS="Element10">
+Name Server resoure records are used to represent the host name which can act as an authoritative name server for resource records having the class and domain name specified in the owner. Name Server resoure records can result in additional processing to locate an Address resource record, or when used in a referral, a special search of the zone in which they reside for glue information.<P CLASS="Element10">
+A Name Server resource record indicates that the named host should be expected to have a zone starting at owner name of the specified class. Note that the class may not indicate the protocol family which should be used to communicate with the host, although it is typically a strong hint. For example, hosts which are name servers for either Internet (IN) or Hesiod (HS) class information are normally queried using IN class protocols.<P CLASS="Element10">
+A Name Server resoure record usea the same DNS packet layout as other <A HREF="008059.html" CLASS="Element59">TResultRecord</A>-based responses, but extends the use of RData to include the following definition and format:<P CLASS="Element10">
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12">  +--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+
+  .                                               .
+  .                    NSDNAME                    .
+  .                                               .
+  +--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+</PRE></DIV>
+</DIV>
+<P CLASS="Element10">
+<UL>
+<LI>NSDNAME - Domain name which specifies a host which should be authoritative for the specified class and domain.</UL>
+<P CLASS="Element10">
+TNSRecord extends TNameRecord to implement the specifics of accessing RData values as properties, including HostName. HostName is used to store the NSDNAME value from the resource record. TNSRecord also overrides the Parse method to read the values in RData into their property counterparts.</DIV>
+</DIV>
+<DIV CLASS="Element62">
+<HR>Created with Doc-O-Matic 2 donated to <STRONG><A HREF="http://www.delphi-jedi.org">Project JEDI</A></STRONG>. Commercial license available from the <STRONG><A HREF="http://www.doc-o-matic.com">Doc-O-Matic site</A></STRONG>.</DIV>
+</DIV></BODY></HTML>

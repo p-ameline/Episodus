@@ -1,0 +1,405 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+<TITLE>TIdGopherServer</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <META name="GENERATOR" content="Doc-O-Matic">
+    <LINK rel="STYLESHEET" href="default.css" type="text/css">
+
+<SCRIPT LANGUAGE="JavaScript1.2" SRC="scripts.js"></SCRIPT>
+</HEAD>
+<BODY CLASS="Element57">
+<TABLE BORDER="0" BGCOLOR="#AACCFF" WIDTH="100%" CELLSPACING="0" CELLPADDING="0">
+<TR><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element1">
+Indy 9</DIV>
+</TD><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element2">
+<A HREF="content.html" CLASS="Element59">Content</A> | <A HREF="idx.html" CLASS="Element59">Index</A> | <A HREF="symref.html" CLASS="Element59">Reference</A></DIV>
+</TD></TR></TABLE><DIV CLASS="Element58">
+<DIV CLASS="Element5">
+TIdGopherServer</DIV>
+<DIV CLASS="Element7">
+<A HREF="011231.html" CLASS="Element59">Hierarchy</A>, <A HREF="011232.html" CLASS="Element59">Properties</A>, <A HREF="011233.html" CLASS="Element59">Methods</A>, <A HREF="011234.html" CLASS="Element59">Events</A>, <A HREF="011235.html" CLASS="Element59">See Also</A>, <A HREF="002239.html" CLASS="Element59">Unit: IdGopherServer</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Implements a Gopher server.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12">TIdGopherServer = <STRONG>class</STRONG>(<A HREF="007831.html" CLASS="Element59">TIdTCPServer</A>)</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Unit</DIV>
+<DIV CLASS="Element69">
+<A HREF="002239.html" CLASS="Element59">IdGopherServer</A></DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+The TIdGopherServer is a server implementation of the Internet Gopher protocol (RFC 1436) as described in the Internet Standards document:<P CLASS="Element10">
+<UL>
+<LI>RFC 1436 - The Internet Gopher Protocol (http://www.rfc-editor.org/rfc/rfc1436.txt)</UL>
+<P CLASS="Element10">
+TIdGopherServer also implements partial support for the Gopher+ protocol as described in the document:<P CLASS="Element10">
+<UL>
+<LI>Gopher+, Upward-Compatible Enhancements to the Internet Gopher protocol (http://boombox.micro.umn.edu/pub/gopher/gopher_protocol/Gopher+/Gopher+.txt)</UL>
+<P CLASS="Element10">
+Gopher is a distributed document system developed at the University of Minnesota as an attempt to make locating information resources intuitive for users through a series of structured menus leading to documents or pointers to other protocols such as Telnet and TN3270. While this has been succeeded by the World Wide Web, this is still useful for accessing legacy systems and has a low overhead due to its simplicity and structure.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0000">TIdGopherServer.AdminEmail</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007356.html" CLASS="Element59">TIdGopherServer</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+E-Mail address of the Gopher server maintainer.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> AdminEmail: <STRONG>String</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+AdminEmail is a String property that identifies the name and/or email address for the maintainer of the Gopher server. For example:<P CLASS="Element10">
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12">    &lt;admin@mygopher.com&gt;
+    Admin &lt;admin@mygopher.com&gt;</PRE></DIV>
+</DIV>
+</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0008">TIdGopherServer.TruncateLength</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007356.html" CLASS="Element59">TIdGopherServer</A>, <A HREF="011236.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Maximum length of a Gopher menu item.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> TruncateLength: Integer;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+TruncateLength is an Integer property that identifies the maximum length of the display text for a Gopher menu item.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0009">TIdGopherServer.TruncateUserFriendlyName</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007356.html" CLASS="Element59">TIdGopherServer</A>, <A HREF="011237.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Indicates that display text can be truncated.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> TruncateUserFriendlyName: Boolean;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+TruncateUserFriendlyName is a Boolean property that indicates if the display text for a Gopher menu item can be truncated to the length in <A HREF="007356.html#0008" CLASS="Element59">TruncateLength</A>.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0001">TIdGopherServer.Create</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007356.html" CLASS="Element59">TIdGopherServer</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Constructor for the object instance.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>constructor</STRONG> Create(AOwner: TComponent); <STRONG>override</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+AOwner: TComponent</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Owner of the object instance.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Create is the constructor for the object instance. Create relies on the inherited Create method, and sets DefaultPort to the standard Gopher port (<A HREF="002464.html" CLASS="Element59">IdPORT_GOPHER</A>).<P CLASS="Element10">
+The application must set the <A HREF="007356.html#0000" CLASS="Element59">AdminEmail</A> property to a valid e-mail address for the administrator of the server.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0004">TIdGopherServer.ReturnGopherItem</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007356.html" CLASS="Element59">TIdGopherServer</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Formats a Gopher menu item for display.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>function</STRONG> ReturnGopherItem(ItemType: Char; UserFriendlyName: <STRONG>String</STRONG>; RealResourceName: <STRONG>String</STRONG>; HostServer: <STRONG>String</STRONG>; HostPort: Integer): <STRONG>String</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+ItemType: Char</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+GOpher item type.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+UserFriendlyName: String</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Display name for the menu item.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+RealResourceName: String</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Item selector or TN3270 hint.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+HostServer: String</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+The server hosting the Gopher menu item.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+HostPort: Integer</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+The port number for the Gopher server.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Return Value</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+String - Display values for the Gopher menu item.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+ReturnGopherItem is a String function that returns a properly formatted Gopher menu item provided with the information from the parameters.<P CLASS="Element10">
+ItemType should be one of the following constants defined in GopherConsts.<P CLASS="Element10">
+<UL>
+<LI><A HREF="002201.html" CLASS="Element59">IdGopherItem_Document</A> - Item is a file<P CLASS="Element10">
+<LI><A HREF="002200.html" CLASS="Element59">IdGopherItem_Directory</A> - Item is a directory<P CLASS="Element10">
+<LI><A HREF="002199.html" CLASS="Element59">IdGopherItem_CSO</A> - Item is a CSO phone-book server<P CLASS="Element10">
+<LI><A HREF="002202.html" CLASS="Element59">IdGopherItem_Error</A> - Error<P CLASS="Element10">
+<LI><A HREF="002198.html" CLASS="Element59">IdGopherItem_BinHex</A> - Item is a BinHexed Macintosh file.<P CLASS="Element10">
+<LI><A HREF="002197.html" CLASS="Element59">IdGopherItem_BinDOS</A> - Item is DOS binary archive of some sort. Client must read until the TCP connection closes. Beware.<P CLASS="Element10">
+<LI><A HREF="002216.html" CLASS="Element59">IdGopherItem_UUE</A> - Item is a UNIX uuencoded file.<P CLASS="Element10">
+<LI><A HREF="002211.html" CLASS="Element59">IdGopherItem_Search</A> - Item is an Index-Search server.<P CLASS="Element10">
+<LI><A HREF="002214.html" CLASS="Element59">IdGopherItem_Telnet</A> - Item points to a text-based telnet session.<P CLASS="Element10">
+<LI><A HREF="002196.html" CLASS="Element59">IdGopherItem_Binary</A> - Item is a binary file. Client must read until the TCP connection closes. Beware.<P CLASS="Element10">
+<LI><A HREF="002210.html" CLASS="Element59">IdGopherItem_Redundant</A> - Item is a redundant server<P CLASS="Element10">
+<LI><A HREF="002215.html" CLASS="Element59">IdGopherItem_TN3270</A> - Item points to a text-based tn3270 session.<P CLASS="Element10">
+<LI><A HREF="002203.html" CLASS="Element59">IdGopherItem_GIF</A> - Item is a GIF format graphics file.<P CLASS="Element10">
+<LI><A HREF="002205.html" CLASS="Element59">IdGopherItem_Image</A> - Item is some kind of image file. Client decides how to display<P CLASS="Element10">
+<LI><A HREF="002204.html" CLASS="Element59">IdGopherItem_HTML</A> - Website<P CLASS="Element10">
+<LI><A HREF="002208.html" CLASS="Element59">IdGopherItem_MIME</A> - Mime encoded file<P CLASS="Element10">
+<LI><A HREF="002207.html" CLASS="Element59">IdGopherItem_Information</A> - Not a file, just information</UL>
+</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0005">TIdGopherServer.SendDirectoryEntry</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007356.html" CLASS="Element59">TIdGopherServer</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Send a Gopher menu item to the client.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>procedure</STRONG> SendDirectoryEntry(Thread: <A HREF="007613.html" CLASS="Element59">TIdPeerThread</A>; ItemType: Char; UserFriendlyName: <STRONG>String</STRONG>; RealResourceName: <STRONG>String</STRONG>; HostServer: <STRONG>String</STRONG>; HostPort: Integer);</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+Thread: TIdPeerThread</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+The client connection to receive the Gopher item.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+ItemType: Char</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+The Gopher item type constant.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+UserFriendlyName: String</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Name to display on client menus.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+RealResourceName: String</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Item selector or a hint for logging into a Telnet or TN3270 service.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+HostServer: String</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Gopher Server hosting the item.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+HostPort: Integer</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Port number for the host.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+SendDirectoryEntry is a procedure used to <A HREF="006944.html" CLASS="Element59">send</A> a Gopher menu item to the client connection specified in AThread.<P CLASS="Element10">
+ItemType contains a constant that identifies the item type, as defined in GopherConsts.pas, and normally contains of the following values:<P CLASS="Element10">
+<UL>
+<LI><A HREF="002201.html" CLASS="Element59">IdGopherItem_Document</A> - Item is a file<P CLASS="Element10">
+<LI><A HREF="002200.html" CLASS="Element59">IdGopherItem_Directory</A> - Item is a directory<P CLASS="Element10">
+<LI><A HREF="002199.html" CLASS="Element59">IdGopherItem_CSO</A> - Item is a CSO phone-book server<P CLASS="Element10">
+<LI><A HREF="002202.html" CLASS="Element59">IdGopherItem_Error</A> - Error<P CLASS="Element10">
+<LI><A HREF="002198.html" CLASS="Element59">IdGopherItem_BinHex</A> - Item is a BinHexed Macintosh file.<P CLASS="Element10">
+<LI><A HREF="002197.html" CLASS="Element59">IdGopherItem_BinDOS</A> - Item is DOS binary archive of some sort. Client must read until the TCP connection closes. Beware.<P CLASS="Element10">
+<LI><A HREF="002216.html" CLASS="Element59">IdGopherItem_UUE</A> - Item is a UNIX uuencoded file.<P CLASS="Element10">
+<LI><A HREF="002211.html" CLASS="Element59">IdGopherItem_Search</A> - Item is an Index-Search server.<P CLASS="Element10">
+<LI><A HREF="002214.html" CLASS="Element59">IdGopherItem_Telnet</A> - Item points to a text-based telnet session.<P CLASS="Element10">
+<LI><A HREF="002196.html" CLASS="Element59">IdGopherItem_Binary</A> - Item is a binary file. Client must read until the TCP connection closes. Beware.<P CLASS="Element10">
+<LI><A HREF="002210.html" CLASS="Element59">IdGopherItem_Redundant</A> - Item is a redundant server<P CLASS="Element10">
+<LI><A HREF="002215.html" CLASS="Element59">IdGopherItem_TN3270</A> - Item points to a text-based tn3270 session.<P CLASS="Element10">
+<LI><A HREF="002203.html" CLASS="Element59">IdGopherItem_GIF</A> - Item is a GIF format graphics file.<P CLASS="Element10">
+<LI><A HREF="002205.html" CLASS="Element59">IdGopherItem_Image</A> - Item is some kind of image file. Client decides how to display<P CLASS="Element10">
+<LI><A HREF="002204.html" CLASS="Element59">IdGopherItem_HTML</A> - Website<P CLASS="Element10">
+<LI><A HREF="002208.html" CLASS="Element59">IdGopherItem_MIME</A> - 'Mime encoded file<P CLASS="Element10">
+<LI><A HREF="002207.html" CLASS="Element59">IdGopherItem_Information</A> - Not a file, just information</UL>
+</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0006">TIdGopherServer.SetTruncateLength</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007356.html" CLASS="Element59">TIdGopherServer</A>, <A HREF="011238.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Write method for the <A HREF="007356.html#0008" CLASS="Element59">TruncateLength</A> property.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>procedure</STRONG> SetTruncateLength(length: Integer);</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+SetTruncateLength is a procedure that provides write acess to the <A HREF="007356.html#0008" CLASS="Element59">TruncateLength</A> property, and updates the maximum length of a Gopher menu item line.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0007">TIdGopherServer.SetTruncateUserFriendlyName</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007356.html" CLASS="Element59">TIdGopherServer</A>, <A HREF="011239.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Write method for the UserFriendlyName property.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>procedure</STRONG> SetTruncateUserFriendlyName(truncate: Boolean);</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+SetTruncateUserFriendlyName is a procedure that provides write access to the <A HREF="007356.html#0009" CLASS="Element59">TruncateUserFriendlyName</A> property, and updates the value for the property.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0002">TIdGopherServer.OnPlusRequest</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007356.html" CLASS="Element59">TIdGopherServer</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Server event handler for a Gopher+ request.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> OnPlusRequest: <A HREF="008038.html" CLASS="Element59">TPlusRequestEvent</A>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+APlusData</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+The Gopher+ command and additional information for the request.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+ARequest</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+The Gopher selector for the requested item.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+AThread</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Client connection making the request.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+OnPlusRequest is a <A HREF="008038.html" CLASS="Element59">TPlusRequestEvent</A> event handler that allows the server application to respond to Gopher+ requests.<P CLASS="Element10">
+APlusData can includes the Gopher+ command in the first byte and additional information such as a requested View for an item and sometimes ASK block data sent from the client.<P CLASS="Element10">
+The command byte in APlusData can be one of the following:<P CLASS="Element10">
+<UL>
+<LI><A HREF="002234.html" CLASS="Element59">IdGopherPlusIndicator</A> - Get the item with a Gopher+ reply code<P CLASS="Element10">
+<LI><A HREF="002236.html" CLASS="Element59">IdGopherPlusInformation</A> - Get the information about the Gopher+ item<P CLASS="Element10">
+<LI><A HREF="002230.html" CLASS="Element59">IdGopherPlusDirectoryInformation</A> - Get the extended directory for an Gopher+ item.</UL>
+</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0003">TIdGopherServer.OnRequest</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007356.html" CLASS="Element59">TIdGopherServer</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Server event handler for Gopher requests.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> OnRequest: <A HREF="008058.html" CLASS="Element59">TRequestEvent</A>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+ARequest</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+The Gopher selector from the client.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+AThread</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+The client connection making the request.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+OnRequest is a <A HREF="008058.html" CLASS="Element59">TRequestEvent</A> event handler that allows the server application to respond to Gopher requests from the client connection in AThread.<P CLASS="Element10">
+ARequest is the selector read from the client connection.</DIV>
+</DIV>
+<DIV CLASS="Element62">
+<HR>Created with Doc-O-Matic 2 donated to <STRONG><A HREF="http://www.delphi-jedi.org">Project JEDI</A></STRONG>. Commercial license available from the <STRONG><A HREF="http://www.doc-o-matic.com">Doc-O-Matic site</A></STRONG>.</DIV>
+</DIV></BODY></HTML>

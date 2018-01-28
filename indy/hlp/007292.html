@@ -1,0 +1,79 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+<TITLE>TIdDICTMatchEvent</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <META name="GENERATOR" content="Doc-O-Matic">
+    <LINK rel="STYLESHEET" href="default.css" type="text/css">
+
+<SCRIPT LANGUAGE="JavaScript1.2" SRC="scripts.js"></SCRIPT>
+</HEAD>
+<BODY CLASS="Element57">
+<TABLE BORDER="0" BGCOLOR="#AACCFF" WIDTH="100%" CELLSPACING="0" CELLPADDING="0">
+<TR><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element1">
+Indy 9</DIV>
+</TD><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element2">
+<A HREF="content.html" CLASS="Element59">Content</A> | <A HREF="idx.html" CLASS="Element59">Index</A> | <A HREF="symref.html" CLASS="Element59">Reference</A></DIV>
+</TD></TR></TABLE><DIV CLASS="Element58">
+<DIV CLASS="Element5">
+TIdDICTMatchEvent</DIV>
+<DIV CLASS="Element7">
+<A HREF="002170.html" CLASS="Element59">Unit: IdDICTServer</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Specifies the event type for the DICT MATCH command.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12">TIdDICTMatchEvent = <STRONG>procedure</STRONG> ( Thread: <A HREF="007613.html" CLASS="Element59">TIdPeerThread</A>; Database, Strategy,WordToFind : <STRONG>String</STRONG> ) <STRONG>of</STRONG> <STRONG>object</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Unit</DIV>
+<DIV CLASS="Element69">
+<A HREF="002170.html" CLASS="Element59">IdDICTServer</A></DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+Database</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Name or wildcard identifying the database(s) to be searched.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+Strategy</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Desired Search algorithm.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+Thread</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Execution Thread performing the command.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+WordToFind</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Word to locate in the dictionary database(s).</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+TIdDICTMatchEvent specifies the event type for the DICT MATCH command, and is used by the <A HREF="007294.html" CLASS="Element59">TIdDICTServer</A> OnCommandMatch event handler to search the dictionary index and report the words found using a particular strategy.<P CLASS="Element10">
+All DICT servers <STRONG>must</STRONG> implement the MATCH command, and <STRONG>must</STRONG> support the &quot;exact&quot; and &quot;prefix&quot; strategies.<P CLASS="Element10">
+The &quot;exact&quot; strategy performs a case-insensitive comparison. The &quot;prefix&quot; strategy is similar to &quot;exact&quot;, except that it only compares the first part of the word. These strategies are easily implemented and are generally the most useful. Other strategies are server dependent.<P CLASS="Element10">
+Other strategies that might be considered are matches based on substring, suffix, regular expressions, soundex [KNUTH73], and Levenshtein [PZ85] algorithms. These last two are especially useful for correcting spelling errors. Other useful strategies perform some sort of &quot;reverse&quot; lookup (i.e., by searching definitions to find the word that the query suggests).<P CLASS="Element10">
+Strategy may also contain the special character &quot;.&quot;, which indicates that the server should use the default strategy for that server. This is usually a derivative of the Levenshtein algorithm [PZ85].<P CLASS="Element10">
+Database contains the name of the database to be searched, in a form returned by SHOW DB, or one the following wildcard characters:<P CLASS="Element10">
+<UL>
+<LI>&quot;!&quot; - Search all databases until a match is found.<P CLASS="Element10">
+<LI>&quot;*&quot; - Search for all matches in the current database.</UL>
+</DIV>
+</DIV>
+<DIV CLASS="Element62">
+<HR>Created with Doc-O-Matic 2 donated to <STRONG><A HREF="http://www.delphi-jedi.org">Project JEDI</A></STRONG>. Commercial license available from the <STRONG><A HREF="http://www.doc-o-matic.com">Doc-O-Matic site</A></STRONG>.</DIV>
+</DIV></BODY></HTML>

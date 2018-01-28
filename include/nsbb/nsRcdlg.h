@@ -1,0 +1,156 @@
+//---------------------------------------------------------------------------//      NSRCDLG.H
+//---------------------------------------------------------------------------
+#ifndef __NSRCDLG_H
+#define __NSRCDLG_H
+
+#include "nsbb\nsdlg.h"
+#include "nsbb\nsradiob.h"
+#include "nssavoir\nsvarray.h"
+
+//---------------------------------------------------------------------------
+//----------------------------------------------------------------------------
+class NSRCElement
+{
+    public :
+
+        int     iOrder ;
+        string  sLexique ;
+        string  sLibelle ;
+
+	    NSRCElement(int iOrd, string sLex, string sLibel) ;
+        NSRCElement(const NSRCElement& rv) ;
+
+	    ~NSRCElement() ;
+        NSRCElement& operator=(const NSRCElement& src) ;
+        int operator == ( const NSRCElement& o ) ;
+} ;
+
+typedef vector<NSRCElement*>            ArrayRCElements ;
+typedef ArrayRCElements::iterator       RCElemIter ;
+typedef ArrayRCElements::const_iterator RCElemConstIter ;
+
+class _NSBBCLASSE ArrayRCElems : public ArrayRCElements
+{
+  public:
+
+    // Constructeurs - Destructeur
+    ArrayRCElems() : ArrayRCElements() {}
+    ArrayRCElems(const ArrayRCElems& rv) ;
+    ~ArrayRCElems() ;
+
+    void    vider() ;
+
+    RCElemIter  findByLib(string sLibelle) ;
+    RCElemIter  findByCode(string sCode) ;
+
+    ArrayRCElems& operator=(const ArrayRCElems& src) ;
+} ;
+
+class NSPosDiagButton : public TRadioButton
+{
+    public:
+
+	    // Constructeur et destructeur
+	    NSPosDiagButton(TWindow* parent, int resId, TGroupBox* group) ;
+        NSPosDiagButton(TWindow* parent, int resId, const char far* title, int x,
+                      int y, int w, int h, TGroupBox *group = 0,
+                      TModule* module = 0) ;
+	    ~NSPosDiagButton() ;
+
+        void        GetWindowClass(WNDCLASS far& wc) ;
+        char far*   GetClassName() ;
+        void        SetupWindow() ;
+        bool        canWeClose() ;
+
+        void        setOn() ;
+        void        setOff() ;
+
+	DECLARE_RESPONSE_TABLE(NSPosDiagButton) ;
+};
+
+//---------------------------------------------------------------------------
+//----------------------------------------------------------------------------
+class _NSBBCLASSE NSRCDialog : public NSDialog
+{
+  public :
+
+    string              sCurrentLex ;
+    string              sCurrentArchetype ;
+
+    int                 iLargeurColonne ;
+    int                 iHauteurColonne ;
+    int                 iMinimalHeight ;
+
+    TEdit*              pRCEdit ;
+
+    TGroupBox*          pRCGroup ;
+    TListBox*           pRCList ;
+    ArrayRCElems        aRCs ;
+
+    TGroupBox*          pVAGroup ;
+    TListBox*           pVoirAussi ;
+    ArrayRCElems        aRCAussi ;
+
+    TGroupBox*          pRCEGroup ;
+    TListBox*           pRCE ;
+    VectString          aRCE ;
+
+    TGroupBox*          pPosDiagGroup ;
+    NSRadioButton*      pPosDiag[5] ;
+
+    bool                bSettedUp ;
+    bool                bRcSelected ;
+
+    NSPatPathoArray*    pFiche ;
+
+    VecteurString       aRcHistory ;
+
+	    // Constructeurs
+#ifdef __OB1__
+    NSRCDialog(NSContexte* pCtx, TWindow* AParent, TResId ResourceID, TResId ConfigRes = 0, BBItem* pItem = 0, TModule* pNSResModule = 0, NsMultiDialog* pControl = 0) ;
+    NSRCDialog(NSContexte* pCtx, TWindow* AParent, BBItem* pItem = 0, TModule* pNSResModule = 0, NsMultiDialog* pControl = 0) ;
+#else
+    NSRCDialog(NSContexte* pCtx, TWindow* AParent, TResId ResourceID, TResId ConfigRes = 0, BBItem* pItem = 0, TModule* pNSResModule = 0, NsMultiDialog* pControl = 0, bool initFromBbk = false) ;
+    NSRCDialog(NSContexte* pCtx, TWindow* AParent, BBItem* pItem = 0, TModule* pNSResModule = 0, NsMultiDialog* pControl = 0, bool initFromBbk = false) ;
+#endif
+    NSRCDialog(NSContexte* pCtx, BBItem* pItem, TWindow* AParent) ;
+
+    // Destructeur
+    virtual ~NSRCDialog() ;
+
+  protected :
+
+    // Fonctions d'ouverture et de fermeture
+    virtual void SetupWindow() ;
+
+    void        initRCList() ;
+    void        actifRCList() ;
+    void        initVoirAussi() ;
+    void        initRCE() ;
+    void        initPosDiag() ;
+    void        donneFiche() ;
+    void        donneArchetype(string sLexique) ;
+    void        switchArchetype(string sArchetype) ;
+    void        initRCArray() ;
+
+    void        dblClickRC() ;
+    void        dblClickVA() ;
+    void        selChangeRC() ;
+    void        selChangeVA() ;
+
+    void        changeRC(string sLexique) ;
+    void        addCurrentRcToHistory() ;
+
+    void        EvChar(uint key, uint repeatCount, uint flags) ;
+
+    void        EvTimer(uint id) ;
+
+  DECLARE_RESPONSE_TABLE(NSRCDialog) ;
+
+    // Fonction de repositionnement des objets créés par nsdlg
+	static bool FAR PASCAL _export RCDlgConfigCtrl(HWND hWnd, LPARAM lParam) ;
+  static bool FAR PASCAL _export RCDlgUnconfigCtrl(HWND hWnd, LPARAM lParam) ;
+};
+
+#endif
+

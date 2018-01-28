@@ -1,0 +1,74 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+<TITLE>TIdHTTPOnRedirectEvent</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <META name="GENERATOR" content="Doc-O-Matic">
+    <LINK rel="STYLESHEET" href="default.css" type="text/css">
+
+<SCRIPT LANGUAGE="JavaScript1.2" SRC="scripts.js"></SCRIPT>
+</HEAD>
+<BODY CLASS="Element57">
+<TABLE BORDER="0" BGCOLOR="#AACCFF" WIDTH="100%" CELLSPACING="0" CELLPADDING="0">
+<TR><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element1">
+Indy 9</DIV>
+</TD><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element2">
+<A HREF="content.html" CLASS="Element59">Content</A> | <A HREF="idx.html" CLASS="Element59">Index</A> | <A HREF="symref.html" CLASS="Element59">Reference</A></DIV>
+</TD></TR></TABLE><DIV CLASS="Element58">
+<DIV CLASS="Element5">
+TIdHTTPOnRedirectEvent</DIV>
+<DIV CLASS="Element7">
+<A HREF="002251.html" CLASS="Element59">Unit: IdHTTP</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Event type triggered for a HTTP redirection request.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12">TIdHTTPOnRedirectEvent = <STRONG>procedure</STRONG> (Sender: TObject; <STRONG>var</STRONG> dest: <STRONG>string</STRONG>; <STRONG>var</STRONG> NumRedirect: Integer; <STRONG>var</STRONG> Handled: boolean; <STRONG>var</STRONG> VMethod: <A HREF="007381.html" CLASS="Element59">TIdHTTPMethod</A>) <STRONG>of</STRONG> <STRONG>object</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Unit</DIV>
+<DIV CLASS="Element69">
+<A HREF="002251.html" CLASS="Element59">IdHTTP</A></DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+dest</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+URL for the new resource location.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+Handled</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Indicated that redirects should be handled.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+NumRedirect</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+An accumulator for the number of redirection requests.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+Sender</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+HTTP client to query for redirection.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+TIdHTTPOnRedirectEvent is a event type triggered when an HTTP client is notified of a redirection request from the HTTP server. TIdHTTPOnRedirectEvent is used in conjunction with an event handler to respond to the event.<P CLASS="Element10">
+Sender is the HTTP client that has received the redirection request.<P CLASS="Element10">
+Dest is the new location or URL for the resource. Dest is often used to update a GUI application with the current URL.<P CLASS="Element10">
+NumRedirects is a variable used to accumulate the number of redirection requests that the HTTP client has received.<P CLASS="Element10">
+Handled indicates that the event handler should respond to the redirection request. Set Handled to False if the application is unable to respond to the redirection request.</DIV>
+</DIV>
+<DIV CLASS="Element62">
+<HR>Created with Doc-O-Matic 2 donated to <STRONG><A HREF="http://www.delphi-jedi.org">Project JEDI</A></STRONG>. Commercial license available from the <STRONG><A HREF="http://www.doc-o-matic.com">Doc-O-Matic site</A></STRONG>.</DIV>
+</DIV></BODY></HTML>

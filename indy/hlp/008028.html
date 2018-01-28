@@ -1,0 +1,72 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+<TITLE>TOnStoreFileEvent</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <META name="GENERATOR" content="Doc-O-Matic">
+    <LINK rel="STYLESHEET" href="default.css" type="text/css">
+
+<SCRIPT LANGUAGE="JavaScript1.2" SRC="scripts.js"></SCRIPT>
+</HEAD>
+<BODY CLASS="Element57">
+<TABLE BORDER="0" BGCOLOR="#AACCFF" WIDTH="100%" CELLSPACING="0" CELLPADDING="0">
+<TR><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element1">
+Indy 9</DIV>
+</TD><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element2">
+<A HREF="content.html" CLASS="Element59">Content</A> | <A HREF="idx.html" CLASS="Element59">Index</A> | <A HREF="symref.html" CLASS="Element59">Reference</A></DIV>
+</TD></TR></TABLE><DIV CLASS="Element58">
+<DIV CLASS="Element5">
+TOnStoreFileEvent</DIV>
+<DIV CLASS="Element7">
+<A HREF="002192.html" CLASS="Element59">Unit: IdFTPServer</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Event signalled to allow an FTP server to load a file onto the local file system.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12">TOnStoreFileEvent = <STRONG>procedure</STRONG> (ASender: <A HREF="007343.html" CLASS="Element59">TIdFTPServerThread</A>; <STRONG>const</STRONG> AFileName: <STRONG>string</STRONG>; AAppend: Boolean; <STRONG>var</STRONG> VStream: TStream) <STRONG>of</STRONG> <STRONG>object</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Unit</DIV>
+<DIV CLASS="Element69">
+<A HREF="002192.html" CLASS="Element59">IdFTPServer</A></DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+AAppend</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Indicates data should be appended to an existing file.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+AFilename</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+File to be loaded onto the local file system.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+ASender</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Client thread for the event notification.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+AStream</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Data read by the event handler.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+TOnStoreFileEvent is an event type signalled when an FTP server implementation needs to store a file on the local file system after receiving either the FTP STOR, STOU, or APPE command verb.<P CLASS="Element10">
+TOnStoreFileEvent is the event type signalled to the <A HREF="007342.html#0012" CLASS="Element59">TIdFTPServer.OnStoreFile</A> event handler, and allows the server to perform processing required to load the data for the file specified in AFilename using a stream constructed by the event handler. The event ahdnaler is responsible for determining if the authenticated client can store files on the local file systyem, and creating the stream used to load the contents of the file.<P CLASS="Element10">
+The FTP server implementation must assign a procedure to the event handler to allow responding to the event notification.</DIV>
+</DIV>
+<DIV CLASS="Element62">
+<HR>Created with Doc-O-Matic 2 donated to <STRONG><A HREF="http://www.delphi-jedi.org">Project JEDI</A></STRONG>. Commercial license available from the <STRONG><A HREF="http://www.doc-o-matic.com">Doc-O-Matic site</A></STRONG>.</DIV>
+</DIV></BODY></HTML>

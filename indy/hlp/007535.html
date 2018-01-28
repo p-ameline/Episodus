@@ -1,0 +1,129 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+<TITLE>TIdMappedPortThread</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <META name="GENERATOR" content="Doc-O-Matic">
+    <LINK rel="STYLESHEET" href="default.css" type="text/css">
+
+<SCRIPT LANGUAGE="JavaScript1.2" SRC="scripts.js"></SCRIPT>
+</HEAD>
+<BODY CLASS="Element57">
+<TABLE BORDER="0" BGCOLOR="#AACCFF" WIDTH="100%" CELLSPACING="0" CELLPADDING="0">
+<TR><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element1">
+Indy 9</DIV>
+</TD><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element2">
+<A HREF="content.html" CLASS="Element59">Content</A> | <A HREF="idx.html" CLASS="Element59">Index</A> | <A HREF="symref.html" CLASS="Element59">Reference</A></DIV>
+</TD></TR></TABLE><DIV CLASS="Element58">
+<DIV CLASS="Element5">
+TIdMappedPortThread</DIV>
+<DIV CLASS="Element7">
+<A HREF="012351.html" CLASS="Element59">Hierarchy</A>, <A HREF="012352.html" CLASS="Element59">Properties</A>, <A HREF="012353.html" CLASS="Element59">Methods</A>, <A HREF="012354.html" CLASS="Element59">Events</A>, <A HREF="012355.html" CLASS="Element59">See Also</A>, <A HREF="002283.html" CLASS="Element59">Unit: IdMappedPortTCP</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Thread created for client connections to a port-based proxy server.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12">TIdMappedPortThread = <STRONG>class</STRONG>(<A HREF="007613.html" CLASS="Element59">TIdPeerThread</A>)</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Unit</DIV>
+<DIV CLASS="Element69">
+<A HREF="002283.html" CLASS="Element59">IdMappedPortTCP</A></DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+TIdMappedPortThread is a <A HREF="007613.html" CLASS="Element59">TIdPeerThread</A> descendant that implements a thread used to service connections to a port-based proxy server. TIdMappedPortThread is the class type created to represent threaded client connections to <A HREF="007533.html" CLASS="Element59">TIdMappedPortTCP</A>, and descendants.<P CLASS="Element10">
+TIdMappedPortThread provides properties that allow the client connection to maintain a connection timeout, the <A HREF="007071.html" CLASS="Element59">socket</A> connection used from the proxy to the remote host, and data read from the local connection and forwarded to the remote host.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0000">TIdMappedPortThread.ConnectTimeOut</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007535.html" CLASS="Element59">TIdMappedPortThread</A></DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> ConnectTimeOut: Integer;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+ConnectTimeOut</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0003">TIdMappedPortThread.NetData</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007535.html" CLASS="Element59">TIdMappedPortThread</A></DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> NetData: <STRONG>String</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+NetData</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0004">TIdMappedPortThread.OutboundClient</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007535.html" CLASS="Element59">TIdMappedPortThread</A></DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> OutboundClient: <A HREF="007828.html" CLASS="Element59">TIdTCPConnection</A>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+OutboundClient</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0005">TIdMappedPortThread.ReadList</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007535.html" CLASS="Element59">TIdMappedPortThread</A></DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> ReadList: TList;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+ReadList</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0001">TIdMappedPortThread.Create</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007535.html" CLASS="Element59">TIdMappedPortThread</A></DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>constructor</STRONG> Create(ACreateSuspended: Boolean = True); <STRONG>override</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Create</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0002">TIdMappedPortThread.Destroy</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007535.html" CLASS="Element59">TIdMappedPortThread</A></DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>destructor</STRONG> Destroy; <STRONG>override</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Destroy</DIV>
+</DIV>
+<DIV CLASS="Element62">
+<HR>Created with Doc-O-Matic 2 donated to <STRONG><A HREF="http://www.delphi-jedi.org">Project JEDI</A></STRONG>. Commercial license available from the <STRONG><A HREF="http://www.doc-o-matic.com">Doc-O-Matic site</A></STRONG>.</DIV>
+</DIV></BODY></HTML>

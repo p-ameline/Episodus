@@ -1,0 +1,309 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+<TITLE>TIdBlockCipherIntercept</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <META name="GENERATOR" content="Doc-O-Matic">
+    <LINK rel="STYLESHEET" href="default.css" type="text/css">
+
+<SCRIPT LANGUAGE="JavaScript1.2" SRC="scripts.js"></SCRIPT>
+</HEAD>
+<BODY CLASS="Element57">
+<TABLE BORDER="0" BGCOLOR="#AACCFF" WIDTH="100%" CELLSPACING="0" CELLPADDING="0">
+<TR><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element1">
+Indy 9</DIV>
+</TD><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element2">
+<A HREF="content.html" CLASS="Element59">Content</A> | <A HREF="idx.html" CLASS="Element59">Index</A> | <A HREF="symref.html" CLASS="Element59">Reference</A></DIV>
+</TD></TR></TABLE><DIV CLASS="Element58">
+<DIV CLASS="Element5">
+TIdBlockCipherIntercept</DIV>
+<DIV CLASS="Element7">
+<A HREF="010041.html" CLASS="Element59">Hierarchy</A>, <A HREF="010042.html" CLASS="Element59">Properties</A>, <A HREF="010043.html" CLASS="Element59">Methods</A>, <A HREF="010044.html" CLASS="Element59">Events</A>, <A HREF="010045.html" CLASS="Element59">See Also</A>, <A HREF="002130.html" CLASS="Element59">Unit: IdBlockCipherIntercept</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Implements an Indy intercept for encryption and decryption of data blocks.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12">TIdBlockCipherIntercept = <STRONG>class</STRONG>(<A HREF="007248.html" CLASS="Element59">TIdConnectionIntercept</A>)</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Unit</DIV>
+<DIV CLASS="Element69">
+<A HREF="002130.html" CLASS="Element59">IdBlockCipherIntercept</A></DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+TIdBlockCipherIntercept is a <A HREF="007248.html" CLASS="Element59">TIdConnectionIntercept</A> descendant that implements an Indy intercept for encryption and decryption of blocks of data using a specified block size. TIdBlockCipherIntercept overrides the inherited <A HREF="007217.html#0008" CLASS="Element59">Send</A> and <A HREF="007217.html#0007" CLASS="Element59">Receive</A> methods to allow encyption of block data prior to transmission, and decryption of block data after receipt. TIdBlockCipherIntercept also implements the <A HREF="007217.html#0005" CLASS="Element59">OnReceive</A> and <A HREF="007217.html#0006" CLASS="Element59">OnSend</A> event handlers to provide access to external encryption and decryption routines.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0000">TIdBlockCipherIntercept.BlockSize</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007217.html" CLASS="Element59">TIdBlockCipherIntercept</A>, <A HREF="010046.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Indicates the number of bytes to handle in decryption/encryption in <A HREF="007217.html#0008" CLASS="Element59">Send</A> or <A HREF="007217.html#0007" CLASS="Element59">Receive</A> operations.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> BlockSize: Integer;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+BlockSize is an integer property that indicates the number of bytes to handle in <A HREF="007217.html#0008" CLASS="Element59">Send</A> or <A HREF="007217.html#0007" CLASS="Element59">Receive</A> operations. BlockSize is the number of bytes extracted from the output buffer in <A HREF="007217.html#0008" CLASS="Element59">Send</A>, and passed to the Encrypt method. BlockSize is also the number of bytes extracted from the input buffer in <A HREF="007217.html#0007" CLASS="Element59">Receive</A>, and passed to the Decrypt method.<P CLASS="Element10">
+BlockSize is used to determine when an <A HREF="000356.html" CLASS="Element59">EIdBlockCipherInterceptException</A> exception shopuld be raised when a block exceeeds the indicated value.<P CLASS="Element10">
+The default value for BlockSize is <A HREF="002128.html" CLASS="Element59">IdBlockCipherBlockSizeDefault</A> as assigned in the <A HREF="007217.html#0002" CLASS="Element59">Create</A> constructor.<P CLASS="Element10">
+BlockSize can be changed at runtime as long as the new block size value is greater than 0 and does not exceed <A HREF="002129.html" CLASS="Element59">IdBlockCipherBlockSizeMax</A>. ANy change to the value in BlockSize outside this acceptable range is ignored.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0003">TIdBlockCipherIntercept.Data</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007217.html" CLASS="Element59">TIdBlockCipherIntercept</A>, <A HREF="010047.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Provides access to cipher-specific data required for encryption or decryption algorithms.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> Data: TObject;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Data is a Pointer property used to provide cipher-specific data to the <A HREF="007217.html#0006" CLASS="Element59">OnSend</A> and <A HREF="007217.html#0005" CLASS="Element59">OnReceive</A> event handlers. Data can be used to store a pointer to any record, data type, or class instance required by the encryption or decryption alogrithms implemented in these event handlers.<P CLASS="Element10">
+Data is set to the corresponding property value from the <A HREF="007217.html" CLASS="Element59">TIdBlockCipherIntercept</A> passed as an argument in <A HREF="007217.html#0001" CLASS="Element59">CopySettingsFrom</A>.<P CLASS="Element10">
+<STRONG>Note</STRONG>: Data is not maintained by the <A HREF="007217.html#0002" CLASS="Element59">Create</A> or <A HREF="007217.html#0004" CLASS="Element59">Destroy</A> methods. Applications must provide memory and/or resource protection required to initailize and free the contents of the Data property.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0001">TIdBlockCipherIntercept.CopySettingsFrom</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007217.html" CLASS="Element59">TIdBlockCipherIntercept</A>, <A HREF="010048.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Initializes a block intercept using property values from another block intercept instance.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>procedure</STRONG> CopySettingsFrom(ASrcBlockCipherIntercept: <A HREF="007217.html" CLASS="Element59">TIdBlockCipherIntercept</A>);</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+ASrcBlockCipherIntercept: TIdBlockCipherIntercept</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Object instance containing properties to be used for the current object instance.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+CopySettingsFrom is a procedure used to initialize a block intercept using values from another block intercept instance. ASrcBlockCipherIntercept is the block intercept to be used as the source for initializing properties in the object instance. CopySettingsFrom will set the following properties and event handlers to the values in ASrcBlockCipherIntercept:<P CLASS="Element10">
+<UL>
+<LI><A HREF="007217.html#0000" CLASS="Element59">BlockSize</A><P CLASS="Element10">
+<LI><A HREF="007217.html#0003" CLASS="Element59">Data</A><P CLASS="Element10">
+<LI>OnConnect<P CLASS="Element10">
+<LI>OnDisconnect<P CLASS="Element10">
+<LI><A HREF="007217.html#0005" CLASS="Element59">OnReceive</A><P CLASS="Element10">
+<LI><A HREF="007217.html#0006" CLASS="Element59">OnSend</A></UL>
+</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0002">TIdBlockCipherIntercept.Create</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007217.html" CLASS="Element59">TIdBlockCipherIntercept</A>, <A HREF="010049.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Constructor for the object instance.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>constructor</STRONG> Create(AOwner: TComponent); <STRONG>override</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+AOwner: TComponent</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Owner of the object instance.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Create is the constructor for the object instance. Create calls the inherited Create method using AOwner as the owner of the object instance. Create also sets the <A HREF="007217.html#0000" CLASS="Element59">BlockSize</A> property to its default value <A HREF="002128.html" CLASS="Element59">IdBlockCipherBlockSizeDefault</A>. Create also allocates resources required for the internal TMemoryStream buffers used in <A HREF="007217.html#0008" CLASS="Element59">Send</A> and <A HREF="007217.html#0007" CLASS="Element59">Receive</A>.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0004">TIdBlockCipherIntercept.Destroy</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007217.html" CLASS="Element59">TIdBlockCipherIntercept</A>, <A HREF="010050.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Frees the object instance.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>destructor</STRONG> Destroy; <STRONG>override</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Destroy is the destructor for the object instance. Destroy frees resources allocated to the internal <A HREF="007217.html#0008" CLASS="Element59">Send</A> and <A HREF="007217.html#0007" CLASS="Element59">Receive</A> buffers. Destroy calls the inherited Destroy method prior to exiting.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0007">TIdBlockCipherIntercept.Receive</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007217.html" CLASS="Element59">TIdBlockCipherIntercept</A>, <A HREF="010051.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Decrypts received data for the block intercept.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>procedure</STRONG> Receive(ABuffer: TStream); <STRONG>override</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+ABuffer: TStream</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Stream containing the encrypted values, and decrypted bytes after Receive.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Receive is an overidden procedure in <A HREF="007217.html" CLASS="Element59">TIdBlockCipherIntercept</A> that implements decrypting a stream-based receive buffer for the block intercept instance. ABuffer is the TStream containing the initial encrypted receive buffer contents for the operation, and the transformed values after the Receive operation. Receive appends the contents of ABuffer to the internal receive buffer, and sets the current position to the beginning of the internal buffer prior to processing its contents.<P CLASS="Element10">
+The Receive method will exit immediately if the size of the internal buffer is zero (or a negative number).<P CLASS="Element10">
+Receive attempts to read and process blocks of data from the internal receive buffer, using <A HREF="007217.html#0000" CLASS="Element59">BlockSize</A> as the size of each data block. Receive will continue to read and process data blocks until all data has been read, or the remaining content in the internal receive buffer is smaller than <A HREF="007217.html#0000" CLASS="Element59">BlockSize</A>. Specifics of the decryption algorithm can be implemented using the <A HREF="007217.html#0005" CLASS="Element59">OnReceive</A> event handler and the CipherData property.<P CLASS="Element10">
+If a block is read from the internal buffer that is larger than <A HREF="007217.html#0000" CLASS="Element59">BlockSize</A>, an <A HREF="000356.html" CLASS="Element59">EIdBlockCipherInterceptException</A> will be raised.<P CLASS="Element10">
+Receive calls the protected virtual Decrypt method for each data block read from the internal receive buffer. Unprocessed bytes from the buffer smaller than <A HREF="007217.html#0000" CLASS="Element59">BlockSize</A> bytes are cached in the internal receive buffer for subsequent Receive operations. The internal receive buffer is truncated to the number of unprocessed bytes remaining.<P CLASS="Element10">
+The decrypted values for all data blocks are returned in the ABuffer argument, and the length of ABuffer is set to the number of decrypted bytes returned to the stream.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0008">TIdBlockCipherIntercept.Send</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007217.html" CLASS="Element59">TIdBlockCipherIntercept</A>, <A HREF="010052.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Encrypts data for the block intercept prior to transmission.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>procedure</STRONG> Send(ABuffer: TStream); <STRONG>override</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+ABuffer: TStream</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Stream containing the unencrypted values, and encrypted bytes after Send.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Send is an overridden procedure in <A HREF="007217.html" CLASS="Element59">TIdBlockCipherIntercept</A> that implements encrypting a stream-based <A HREF="006944.html" CLASS="Element59">send</A> buffer for the block intercept instance. ABuffer is the TStream containing the initial values to be encrypted during the operation, and the transformed values after the Send operation. Send loads the contents of ABuffer to the internal <A HREF="006944.html" CLASS="Element59">send</A> buffer, and sets the current position to the beginning of the internal buffer prior to processing its contents.<P CLASS="Element10">
+The Send method will exit immediately if the size of the internal buffer is zero (or a negative number).<P CLASS="Element10">
+Send attempts to read and process blocks of data from the internal <A HREF="006944.html" CLASS="Element59">send</A> buffer, using <A HREF="007217.html#0000" CLASS="Element59">BlockSize</A> as the size for each data block. Send will continue to read and process data blocks until all data has been read, or the remaining content in the internal <A HREF="006944.html" CLASS="Element59">send</A> buffer is smaller than <A HREF="007217.html#0000" CLASS="Element59">BlockSize</A>. Unprocessed bytes from the buffer smaller than <A HREF="007217.html#0000" CLASS="Element59">BlockSize</A> bytes are read from the buffer, padded to the length indicated in <A HREF="007217.html#0000" CLASS="Element59">BlockSize</A>, and Encrypted to complete the transformation of data. Specifics of the encryption algorithm can be implemented using the <A HREF="007217.html#0006" CLASS="Element59">OnSend</A> event handler and the CipherData property.<P CLASS="Element10">
+Send calls the protected virtual Encrypt method for each data block in the internal Send buffer. The encrypted values for all data blocks are returned in the ABuffer argument, and the length of ABuffer is set to the number of encrypted bytes returned to the stream.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0005">TIdBlockCipherIntercept.OnReceive</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007217.html" CLASS="Element59">TIdBlockCipherIntercept</A>, <A HREF="010053.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Implements access to a decryption algorithm for the block intercept.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> OnReceive: <A HREF="007218.html" CLASS="Element59">TIdBlockCipherInterceptDataEvent</A>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+ADstData</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Pointer to data after transformation.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+ASender</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Block intercept for the event notification.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+ASrcData</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Pointer to data to use as input for the transformation.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+OnReceive is a <A HREF="007218.html" CLASS="Element59">TIdBlockCipherInterceptDataEvent</A> property that represents the event handler triggered when the block intercept needs to use it's decryption algorithm to transform received data. OnReceive is used, along with the <A HREF="007217.html#0003" CLASS="Element59">Data</A> property, to provide access to the decryption algorithm implemented for the block intercept instance.<P CLASS="Element10">
+ASender is the <A HREF="007217.html" CLASS="Element59">TIdBlockCipherIntercept</A> instance for the event notification.<P CLASS="Element10">
+ASrcData is a Pointer to the encrypted data to use as input for the transformation.<P CLASS="Element10">
+ADstData is a Pointer to the unencrypted data after transformation.<P CLASS="Element10">
+Applications must assign a procedure to the event handler to allow implementation of a specific decryption algorithm, and to perform data transformation.<P CLASS="Element10">
+Use <A HREF="007217.html#0006" CLASS="Element59">OnSend</A> to implement the encryption algorithm used for the block intercept.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0006">TIdBlockCipherIntercept.OnSend</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007217.html" CLASS="Element59">TIdBlockCipherIntercept</A>, <A HREF="010054.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Implements access to a decryption algorithm for the block intercept.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> OnSend: <A HREF="007218.html" CLASS="Element59">TIdBlockCipherInterceptDataEvent</A>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+ADstData</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Pointer to data after transformation.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+ASender</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Block intercept for the event notification.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+ASrcData</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Pointer to data to use as input for the transformation.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+OnSend is a <A HREF="007218.html" CLASS="Element59">TIdBlockCipherInterceptDataEvent</A> property that represents the event handler triggered when the block intercept needs to use it's encryption algorithm to transform data prior to transmission. OnSend is used, along with the CipherData property, to provide access to the encryption algorithm implemented for the block intercept instance.<P CLASS="Element10">
+ASender is the <A HREF="007217.html" CLASS="Element59">TIdBlockCipherIntercept</A> instance for the event notification.<P CLASS="Element10">
+ASrcData is a Pointer to the unencrypted data to use as input for the transformation.<P CLASS="Element10">
+ADstData is a Pointer to the encrypted data after transformation.<P CLASS="Element10">
+Applications must assign a procedure to the event handler to allow implementation of a specific encryption algorithm, and to perform data transformation.<P CLASS="Element10">
+Use <A HREF="007217.html#0005" CLASS="Element59">OnReceive</A> to implement the decryption algorithm used for the block intercept.</DIV>
+</DIV>
+<DIV CLASS="Element62">
+<HR>Created with Doc-O-Matic 2 donated to <STRONG><A HREF="http://www.delphi-jedi.org">Project JEDI</A></STRONG>. Commercial license available from the <STRONG><A HREF="http://www.doc-o-matic.com">Doc-O-Matic site</A></STRONG>.</DIV>
+</DIV></BODY></HTML>

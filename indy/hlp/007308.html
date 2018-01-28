@@ -1,0 +1,145 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+<TITLE>TIdEMailAddressList</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <META name="GENERATOR" content="Doc-O-Matic">
+    <LINK rel="STYLESHEET" href="default.css" type="text/css">
+
+<SCRIPT LANGUAGE="JavaScript1.2" SRC="scripts.js"></SCRIPT>
+</HEAD>
+<BODY CLASS="Element57">
+<TABLE BORDER="0" BGCOLOR="#AACCFF" WIDTH="100%" CELLSPACING="0" CELLPADDING="0">
+<TR><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element1">
+Indy 9</DIV>
+</TD><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element2">
+<A HREF="content.html" CLASS="Element59">Content</A> | <A HREF="idx.html" CLASS="Element59">Index</A> | <A HREF="symref.html" CLASS="Element59">Reference</A></DIV>
+</TD></TR></TABLE><DIV CLASS="Element58">
+<DIV CLASS="Element5">
+TIdEMailAddressList</DIV>
+<DIV CLASS="Element7">
+<A HREF="010837.html" CLASS="Element59">Hierarchy</A>, <A HREF="010838.html" CLASS="Element59">Properties</A>, <A HREF="010839.html" CLASS="Element59">Methods</A>, <A HREF="010840.html" CLASS="Element59">See Also</A>, <A HREF="002181.html" CLASS="Element59">Unit: IdEMailAddress</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Represents a collection of EMail addresses.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12">TIdEMailAddressList = <STRONG>class</STRONG>(TOwnedCollection)</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Unit</DIV>
+<DIV CLASS="Element69">
+<A HREF="002181.html" CLASS="Element59">IdEMailAddress</A></DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+TIdEMailAddressList is a TOwnedCollection descendant that contains a list of E-Mail addresses, or <A HREF="007307.html" CLASS="Element59">TIdEMailAddressItem</A> object instances. TIdEMailAddressList allows <A HREF="007308.html#0004" CLASS="Element59">Items</A> to be added or maintained in the collection, and can be used to access the list as a TString value or in a comma delimited form which is used in many E-Mail messages.<P CLASS="Element10">
+TIdEMailAddressList is the type used to represent <A HREF="007544.html" CLASS="Element59">TIdMessage</A> properties that can <A HREF="000027.html" CLASS="Element59">accept</A> one or more EMail addresses, like Receipients, CCList, and BCCList.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0002">TIdEMailAddressList.EMailAddresses</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007308.html" CLASS="Element59">TIdEMailAddressList</A>, <A HREF="010841.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Represents the contents of the collection as a comma-delimited list of email addresses.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> EMailAddresses: <STRONG>String</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+EMailAddresses is a String property that represents the contents of the collection as a comma-delimited list of email addresses in RFC 822-compliant form.<P CLASS="Element10">
+Reading EMailAddresses results in a string that contains a comma-delimited list of values for each TIdEmailAddressItem in collection.<P CLASS="Element10">
+Writing to EMailAddresses will Clear the collection, and add each parsed EMail address to the collection. <STRONG>Note</STRONG>: Group EMail addresses, delimited with the &quot;:&quot; (colon) and &quot;;&quot; (semi-colon) characters, are ignored when email addresses are added to the collection.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0004">TIdEMailAddressList.Items</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007308.html" CLASS="Element59">TIdEMailAddressList</A>, <A HREF="010842.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Allows indexed access to email addresses in the collection.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> Items [ <STRONG>Index</STRONG>: Integer ]: <A HREF="007307.html" CLASS="Element59">TIdEMailAddressItem</A>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Items is an indexed <A HREF="007307.html" CLASS="Element59">TIdEMailAddressItem</A> property that allows access to <A HREF="007307.html" CLASS="Element59">TIdEMailAddressItem</A> entries in the collection using an Integer index value. Index positions in the collection are zero-based. Accessing an index position larger than the length of the collection will raise an exception.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0000">TIdEMailAddressList.Add</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007308.html" CLASS="Element59">TIdEMailAddressList</A>, <A HREF="010843.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Creates and returns a new Email Address item.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>function</STRONG> Add: <A HREF="007307.html" CLASS="Element59">TIdEMailAddressItem</A>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Add is a function that returns a new <A HREF="007307.html" CLASS="Element59">TIdEMailAddressItem</A> which is added to the <A HREF="007308.html" CLASS="Element59">TIdEMailAddressList</A> collection. Add calls the inherited Add method, and returns the value as a <A HREF="007307.html" CLASS="Element59">TIdEMailAddressItem</A> object instance.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0001">TIdEMailAddressList.Create</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007308.html" CLASS="Element59">TIdEMailAddressList</A>, <A HREF="010844.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Constructor for the object instance.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>constructor</STRONG> Create(AOwner: TPersistent); <STRONG>reintroduce</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+AOwner: TPersistent</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Owner of the object instance.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Create is the constructor for the object instance, and is reintroduced to allow assignment of the owner of the list and the class type of the item added to the collection. Create calls the inherited constructor with AOwner and a <A HREF="007307.html" CLASS="Element59">TIdEMailAddressItem</A> class instance parameters.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0003">TIdEMailAddressList.FillTStrings</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007308.html" CLASS="Element59">TIdEMailAddressList</A>, <A HREF="010845.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Fills a string list with email addresses in the collection.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>procedure</STRONG> FillTStrings(AStrings: TStrings);</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+FillTStrings is a procedure used to fill the TStrings instance, specified by AStrings, with the formatted EMail addresses and names from the collection. Each TIdEmailAddressItem in the collection will result in a single line being added to AStrings that contains the Text value for the email address. FillTStrings does <STRONG>NOT</STRONG> clear the contents of AStrings before adding values from the collection.</DIV>
+</DIV>
+<DIV CLASS="Element62">
+<HR>Created with Doc-O-Matic 2 donated to <STRONG><A HREF="http://www.delphi-jedi.org">Project JEDI</A></STRONG>. Commercial license available from the <STRONG><A HREF="http://www.doc-o-matic.com">Doc-O-Matic site</A></STRONG>.</DIV>
+</DIV></BODY></HTML>

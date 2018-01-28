@@ -1,0 +1,68 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+<TITLE>TIdDICTOtherEvent</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <META name="GENERATOR" content="Doc-O-Matic">
+    <LINK rel="STYLESHEET" href="default.css" type="text/css">
+
+<SCRIPT LANGUAGE="JavaScript1.2" SRC="scripts.js"></SCRIPT>
+</HEAD>
+<BODY CLASS="Element57">
+<TABLE BORDER="0" BGCOLOR="#AACCFF" WIDTH="100%" CELLSPACING="0" CELLPADDING="0">
+<TR><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element1">
+Indy 9</DIV>
+</TD><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element2">
+<A HREF="content.html" CLASS="Element59">Content</A> | <A HREF="idx.html" CLASS="Element59">Index</A> | <A HREF="symref.html" CLASS="Element59">Reference</A></DIV>
+</TD></TR></TABLE><DIV CLASS="Element58">
+<DIV CLASS="Element5">
+TIdDICTOtherEvent</DIV>
+<DIV CLASS="Element7">
+<A HREF="002170.html" CLASS="Element59">Unit: IdDICTServer</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Specifies the event type for the DICT OPTION or other unrecognized commands.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12">TIdDICTOtherEvent = <STRONG>procedure</STRONG> ( Thread: <A HREF="007613.html" CLASS="Element59">TIdPeerThread</A>; Command, Parm:<STRONG>String</STRONG> ) <STRONG>of</STRONG> <STRONG>object</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Unit</DIV>
+<DIV CLASS="Element69">
+<A HREF="002170.html" CLASS="Element59">IdDICTServer</A></DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+Command</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Command to be performed.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+Parm</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Parameters for the command.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+Thread</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Execution thread performing the command.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+TIdDICTOtherEvent specifies the event type for the DICT OPTION or other unrecognized commands.<P CLASS="Element10">
+<A HREF="007294.html" CLASS="Element59">TIdDICTServer</A> uses the OnCommandOption event handler to respond to the DICT OPTION command, which informs the server that the client wishes to utilize one of the defined protocol options.<P CLASS="Element10">
+At the current time, OPTION MIME is the only recognized option. In the future, standard extensions to this protocol should be proposed which allow the client to request certain content types or encodings.<P CLASS="Element10">
+OPTION MIME requests that all text responses be prefaced by a MIME header, as described in RFC2045, and followed by a single blank line (CRLF). If a client requests this option, then the client MUST be able to parse Content-Type and Content-transfer-encoding headers, and MUST be able to ignore textual responses which have an unsupported content or encoding. A client MUST support the UTF-8 encoding described in RFC2044.<P CLASS="Element10">
+OPTION MIME is a REQUIRED server capability, and all DICT servers MUST implement this command.</DIV>
+</DIV>
+<DIV CLASS="Element62">
+<HR>Created with Doc-O-Matic 2 donated to <STRONG><A HREF="http://www.delphi-jedi.org">Project JEDI</A></STRONG>. Commercial license available from the <STRONG><A HREF="http://www.doc-o-matic.com">Doc-O-Matic site</A></STRONG>.</DIV>
+</DIV></BODY></HTML>

@@ -1,0 +1,305 @@
+//---------------------------------------------------------------------------//     NSAGADOC.H
+//
+//  Contient la définition de l'objet RefDocument AGA
+//	 destiné à récupérer les donnees du AgaDocument et à générer un html
+//
+//  1ere version : RS Octobre 98
+//---------------------------------------------------------------------------
+
+#ifndef __NSDOCAGA_H
+#define __NSDOCAGA_H
+
+class NSResultReqDialog ;
+class NSVarConvoc;
+
+#include "nautilus\nsdocref.h"
+#include "nscompta\nsagadlg.h"
+#include "nscompta\nsgendlg.h"
+#include "nscompta\nsimpdlg.h"
+#include "nscompta\nsactdlg.h"
+#include "nscompta\nsfsedlg.h"		// pour NSVarCompta
+#include "nautilus\nshistdo.h"
+#include "partage\nsperson.h"       // pour doc sécu
+#include "nscompta\nsvitale.h"      // pour doc sécu
+#include "nautilus\nsperary.h"//// Classe document convoc pour les lettres de reconvocation
+//
+class NSConvocRefDocument : public NSRefDocument
+{
+	public:
+
+  	NSVarConvoc* pVarConvoc ;
+    int*         pTabSelect ;
+    int          nbConvoc ;
+
+    NSConvocRefDocument(NSVarConvoc* pVar, int* pTab, int n, NSContexte* pCtx) ;
+    ~NSConvocRefDocument() ;
+    // Génération du html correspondant au document    bool GenereHtml(string sPathHtml, string& sNomHtml, OperationType typeOperation,
+        				string sAdresseCorresp = "", string sPathDest = "") ;
+};
+
+//// Classe document sécu pour les feuilles de soins
+//
+class NSSecuRefDocument : public NSRefDocument
+{
+	public:
+
+  	NSPatInfo*     pAssuInfo ;
+    NSVitale2Info* pCarteMalade ;
+    NSVitale1Info* pCarte ;
+    bool           bNonAssure ;
+    bool           bInitOk ;
+
+    NSSecuRefDocument(NSContexte* pCtx) ;
+    ~NSSecuRefDocument() ;
+
+    // Initialisation des données du document
+    bool InitDonneesMalade() ;
+
+    // Génération du html correspondant au document
+    bool GenereHtml(string sPathHtml, string& sNomHtml, OperationType typeOperation,
+        				string sAdresseCorresp = "", string sPathDest = "") ;
+};
+
+//
+// Classe document historique pour la publication
+//
+class NSHistoRefDocument : public NSRefDocument
+{
+	public:
+
+  	NSHtml*	pHtmlCS ; // html représentant la TreeView
+    string	sImportance ;
+
+    NSHistoRefDocument(NSHISTODocument *pDocHis, string sImp) ;
+    ~NSHistoRefDocument() ;
+
+    // Génération du html correspondant au document
+    bool GenereHtml(string sPathHtml, string& sNomHtml, OperationType typeOperation,
+        				string sAdresseCorresp = "", string sPathDest = "") ;
+};
+
+//
+// Classe document AGA pour la publication
+//
+class NSAgaRefDocument : public NSRefDocument
+{
+	public:
+
+  	NSVarCompta*	 pVar ;
+    NSCriteres*		 pCriteres ;
+    NSEncaissData* pTotaux ;
+    NSEncaissData* pPartiels ;
+
+    NSAgaArray*		 pAgaArray ;
+		int	 					 nbAga ;
+    bool           bAgaCumules ;
+    NSAgaRefDocument(NSAgaDocument *pAgaDoc) ;    ~NSAgaRefDocument() ;
+    // Génération du html correspondant au document    bool GenereHtml(string sPathHtml, string& sNomHtml, OperationType typeOperation,
+      							string sAdresseCorresp = "", string sPathDest = "") ;
+
+    // bool IsOpen();
+};
+
+//
+// Classe document REQ pour la publication
+//
+class NSReqRefDocument : public NSRefDocument
+{
+	public:
+
+  	bool            bReqModeDoc ;
+    int             nbPatTotal ;
+    int             nbPatCritPat ;
+    int             nbPatCritDoc ;
+    int             nbPatResult ;
+    int             nbDocCritPat ;
+    int             nbDocCritDoc ;
+    int             nbDocResult ;
+    NSDocHistoArray VectDocResultat ;    // vecteur des documents résultat
+    NSPatientArray  VectPatResultat ;    // vecteur des patients résultat
+    NSReqRefDocument(NSResultReqDialog *pDlg) ;    ~NSReqRefDocument() ;
+    // Génération du html correspondant au document    bool 		GenereHtml(string sPathHtml, string& sNomHtml, OperationType typeOperation,
+      							string sAdresseCorresp = "", string sPathDest = "") ;
+
+    // bool IsOpen();
+};
+
+//
+// Classe document Depenses pour la publication
+//
+
+class NSDepRefDocument : public NSRefDocument{
+	public:
+
+    NSVarCompta*      pVar ;    NSCriteres*       pCriteres ;
+    NSEncaissData*    pTotaux ;
+
+    NSAffDepensArray* pDepensArray ;
+		int               nbDepens ;
+    NSDepRefDocument(NSDepensDocument *pDepDoc) ;    ~NSDepRefDocument() ;
+
+    // Génération du html correspondant au document    bool  GenereHtml(string sPathHtml, string& sNomHtml, OperationType typeOperation,
+      							string sAdresseCorresp = "", string sPathDest = "") ;
+
+    // bool IsOpen();};
+
+//
+// Classe document Impayés pour la publication
+//
+class NSImpRefDocument : public NSRefDocument
+{
+	public:
+
+   	NSVarCompta*     pVar ;
+    NSMultiCriteres* pCriteres ;
+    bool             bEuro ;
+
+    NSImpArray*      pImpArray ;
+		int              nbImp ;
+
+    NSImpRefDocument(NSImpDocument *pImpDoc) ;
+   	~NSImpRefDocument() ;
+
+    // Génération du html correspondant au document
+    bool GenereHtml(string sPathHtml, string& sNomHtml, OperationType typeOperation,
+      							string sAdresseCorresp = "", string sPathDest = "") ;
+
+    // bool IsOpen() ;
+};
+
+//// Classe document ListActes pour la publication
+//
+class NSListActRefDocument : public NSRefDocument
+{
+	public:
+
+    NSVarCompta*     pVar ;
+    NSMultiCriteres* pCriteres ;
+
+    NSListActArray*  pActArray ;
+		int              nbAct ;
+
+    NSListActRefDocument(NSActDocument *pActDoc) ;
+    ~NSListActRefDocument() ;
+
+    // Génération du html correspondant au document
+    bool GenereHtml(string sPathHtml, string& sNomHtml, OperationType typeOperation,
+      							string sAdresseCorresp = "", string sPathDest = "") ;
+};
+
+//
+// Classe document SomActes pour la publication
+//
+class NSSomActRefDocument : public NSRefDocument
+{
+	public:
+
+    NSVarCompta*     pVar ;
+    NSMultiCriteres* pCriteres ;
+
+    NSExamArray*     pExamArray ;
+		int              nbExam ;
+    NSSomActData     totaux ;
+
+    NSSomActRefDocument(NSActDocument *pActDoc) ;
+    ~NSSomActRefDocument() ;
+
+    // Génération du html correspondant au document
+    bool GenereHtml(string sPathHtml, string& sNomHtml, OperationType typeOperation,
+      							string sAdresseCorresp = "", string sPathDest = "") ;
+};
+
+//
+// Classe document SomEncaiss pour la publication
+//
+class NSSomEncaissRefDocument : public NSRefDocument
+{
+	public:
+
+    NSVarCompta*     pVar ;
+    NSMultiCriteres* pCriteres ;
+
+		NSEncaissData*   pTotaux ;
+    NSEncaissData*   pPartiels ;
+
+    NSSomEncaissRefDocument(NSEncaissDocument *pEncaissDoc) ;
+    ~NSSomEncaissRefDocument() ;
+
+    // Génération du html correspondant au document
+    bool GenereHtml(string sPathHtml, string& sNomHtml, OperationType typeOperation,
+      							string sAdresseCorresp = "", string sPathDest = "") ;
+};
+
+//
+// Classe document pour la publication d'une "facturette"
+//
+class NSFactDocument : public NSRefDocument
+{
+	public:
+
+    NSFactData* _pFactData ;
+
+    NSFactDocument(NSFactData *pFactData) ;
+    ~NSFactDocument() ;
+
+    // Génération du html correspondant au document
+    bool GenereHtml(string sPathHtml, string& sNomHtml, OperationType typeOperation,
+      							string sAdresseCorresp = "", string sPathDest = "") ;
+};
+
+/***********************************************************************//**        On définit une classe générique de document publication    **/
+/***********************************************************************/
+
+//
+// Définition de NSVoidArray (Array de pointeurs void)
+//
+typedef vector<void*> NSVoidVector ;
+typedef NSVoidVector::iterator       VoidIter ;
+typedef NSVoidVector::const_iterator VoidConstIter ;
+
+class NSVoidArray : public NSVoidVector
+{
+  public :
+
+    // Constructeurs	  NSVoidArray() : NSVoidVector() {}
+	  NSVoidArray(const NSVoidArray& rv) ;
+	  // Destructeur
+	  virtual ~NSVoidArray() ;
+    void vider() ;
+};
+
+class NSPubliRefDocument : public NSRefDocument{
+  public:
+
+    NSVoidArray* pVoidArray ;
+
+    NSPubliRefDocument(NSVoidArray* pVarArray, string sType, NSContexte* pCtx) ;
+    ~NSPubliRefDocument() ;
+
+    // Génération du html correspondant au document
+    bool GenereHtml(string sPathHtml, string& sNomHtml, OperationType typeOperation,
+                        string sAdresseCorresp = "", string sPathDest = "") ;
+};
+
+// classe des documents compta pour l'utilisateur
+class NSDocCompta{
+  protected:
+
+    static long _lObjectCount ;
+
+  public:
+
+    NSAgaRefDocument* 		   pAgaRefDoc ;    NSDepRefDocument*        pDepRefDoc ;
+    NSImpRefDocument* 		   pImpRefDoc ;
+    NSListActRefDocument* 	 pListActRefDoc ;
+    NSSomActRefDocument*		 pSomActRefDoc ;
+    NSSomEncaissRefDocument* pSomEncaissRefDoc ;
+
+    NSDocCompta() ;    ~NSDocCompta() ;
+
+    static long getNbInstance()	 { return _lObjectCount ; }
+    static void initNbInstance() { _lObjectCount = 0 ; }
+};
+
+#endif // fin de nsdocaga.h
+

@@ -1,0 +1,134 @@
+/*
+** Copyright Nautilus, (10/9/2004)
+** david.giocanti@nautilus-info.com
+
+** Ce logiciel est un programme informatique servant à [rappeler les
+** caractéristiques techniques de votre logiciel].
+
+** Ce logiciel est régi par la licence CeCILL soumise au droit français et
+** respectant les principes de diffusion des logiciels libres. Vous pouvez
+** utiliser, modifier et/ou redistribuer ce programme sous les conditions
+** de la licence CeCILL telle que diffusée par le CEA, le CNRS et l'INRIA
+** sur le site "http://www.cecill.info".
+
+** En contrepartie de l'accessibilité au code source et des droits de copie,
+** de modification et de redistribution accordés par cette licence, il n'est
+** offert aux utilisateurs qu'une garantie limitée.  Pour les mêmes raisons,
+** seule une responsabilité restreinte pèse sur l'auteur du programme,  le
+** titulaire des droits patrimoniaux et les concédants successifs.
+
+** A cet égard  l'attention de l'utilisateur est attirée sur les risques
+** associés au chargement,  à l'utilisation,  à la modification et/ou au
+** développement et à la reproduction du logiciel par l'utilisateur étant
+** donné sa spécificité de logiciel libre, qui peut le rendre complexe à
+** manipuler et qui le réserve donc à des développeurs et des professionnels
+** avertis possédant  des  connaissances  informatiques approfondies.  Les
+** utilisateurs sont donc invités à charger  et  tester  l'adéquation  du
+** logiciel à leurs besoins dans des conditions permettant d'assurer la
+** sécurité de leurs systèmes et ou de leurs données et, plus généralement,
+** à l'utiliser et l'exploiter dans les mêmes conditions de sécurité.
+
+** Le fait que vous puissiez accéder à cet en-tête signifie que vous avez
+** pris connaissance de la licence CeCILL, et que vous en avez accepté les
+** termes.
+*/
+
+#ifndef   ABSTRACTKS_H_
+# define   ABSTRACTKS_H_
+
+// #include "ns_ob1\InitStructure.h"
+// #include "ns_ob1\BB1BB.h"
+#include "ns_ob1\BB1Event.h"
+
+/**
+* \brief knowledge source blackboard representation
+*/
+/**
+* AbstractsKS class is the abstraction of a knowledge source.  <BR>
+* Classe représentant les méthodes a implementer pour déclarer une
+* source de connaissances. Certaines de ces fonctions ne sont plus
+* utilisé et n'ont été laissé que pour tenter de conserver une compatilité
+* avec  BBK (Cette compatibilité n'est pas assuré)
+*/
+class AbstractKS
+{
+  public :
+  /**
+	* \brief  Not used in OB1
+  */
+  /**
+  * This method is used to keep the idea of BBK but she's not used  <BR>
+  * Cette méthode est conservé pour une compatibilité ascendante avec BBK
+  * @param event Event that have to be tested
+  * @return return true if the trigger can pass in pre condition and false else
+  */
+  virtual bool				      TriggerCondition(const BB1Event& event) = 0 ;
+
+  /**
+  * \brief Declaration of KS'trigger for controler
+  */
+  /**
+  * Functions which gives trigger's data to Blackboard controler
+  * Transmet une structure contenant ses triggers au blackboard
+  * @return Triggers for BB
+  */
+  virtual KsInitStructure*  Publication() = 0;
+
+  /**
+  * \brief test if the Knowledge source can be run in the contexte  
+  */
+  /**
+  * Function wich test if the Knowledge source can be run in the contexte  <BR>
+  * Test la validité du Ks en fonction du contexte
+  * @param bb 		Pointer to acceed BB functions
+  * @param trans  Data that is needed to compute
+  * @return true if the data can be run and false else
+  */
+  virtual int              ContextValidity(const BB1BB& bb, Transfert* trans) = 0 ;
+
+  /**
+  * \brief not used in OB1
+  */
+  /**
+  * Test if a KS continue to be executable.
+  * Not used now
+  * Non utilisé actuellement : Guarder pour assurer une compatibilité ascendante
+  * @param bb  		Pointer to use BB function's
+  * @param ksar   ksar The KSar to test
+  * @return true if the ks can be executed and false else
+  */
+	virtual bool				      ObviationCondition(const BB1BB& bb, BB1KSAR& ksar) = 0 ;
+
+  /**
+  * \brief Not used in OB1
+  */
+  /**
+  * Deep test to know if a KS can be execute.   <BR>
+  * Not used now                                    <BR>
+  * Non utilisé actuellement : Guarder pour assurer une compatibilité ascendante <BR>
+  * Cette fonction sert a indiquer si le KS peut être executé. Il s'agit de
+  * la dernier étape de test avant l'execution (en mode BBK)
+  * @param bb   	Pointer to use BB function's
+  * @param trans  Data to compute for  saying if the KS is executable
+  * @return  true if the ks can be executed and false else
+  */
+  virtual bool				      Precondition(const BB1BB& bb, Transfert* trans) = 0 ;
+
+  /**
+  * \brief Execute the KS
+  */
+  /**
+  * Execute the knowledge source with the data's contained in trans <BR>
+  * Execute la source de connaissance. La structure transfert contient
+  * les informations necessaire a l'execution. Une execution peut être declenche en deux
+  * mode opportuniste ou deterministe (Nous n'avons pas encore éprouvé le besoin d'utiliser
+  * ce paramètre.
+  * @param bb  ointer to use BB function's
+  * @param trans Data used in computation
+  * @param isOpportuniste  Indite the execution's mode
+  * @return  a code that indicate how the execution has been done
+  */
+  virtual Errcode			      Action(BB1BB& bb, Transfert* trans, bool isOpportuniste) = 0 ;
+};
+
+#endif

@@ -1,0 +1,238 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+<TITLE>TIdProxyConnectionInfo</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <META name="GENERATOR" content="Doc-O-Matic">
+    <LINK rel="STYLESHEET" href="default.css" type="text/css">
+
+<SCRIPT LANGUAGE="JavaScript1.2" SRC="scripts.js"></SCRIPT>
+</HEAD>
+<BODY CLASS="Element57">
+<TABLE BORDER="0" BGCOLOR="#AACCFF" WIDTH="100%" CELLSPACING="0" CELLPADDING="0">
+<TR><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element1">
+Indy 9</DIV>
+</TD><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element2">
+<A HREF="content.html" CLASS="Element59">Content</A> | <A HREF="idx.html" CLASS="Element59">Index</A> | <A HREF="symref.html" CLASS="Element59">Reference</A></DIV>
+</TD></TR></TABLE><DIV CLASS="Element58">
+<DIV CLASS="Element5">
+TIdProxyConnectionInfo</DIV>
+<DIV CLASS="Element7">
+<A HREF="013130.html" CLASS="Element59">Hierarchy</A>, <A HREF="013131.html" CLASS="Element59">Properties</A>, <A HREF="013132.html" CLASS="Element59">Methods</A>, <A HREF="013133.html" CLASS="Element59">See Also</A>, <A HREF="002252.html" CLASS="Element59">Unit: IdHTTPHeaderInfo</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Represents headers in a HTTP request using a Proxy connection.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12">TIdProxyConnectionInfo = <STRONG>class</STRONG>(TPersistent)</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Unit</DIV>
+<DIV CLASS="Element69">
+<A HREF="002252.html" CLASS="Element59">IdHTTPHeaderInfo</A></DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+TIdProxyConnectionInfo is a TPersistent descendant that represents headers used in a HTTP request that requires a Proxy connection. TIdProxyConnectionInfo contains properties that represent the headers used to establish the proxy connection, and to authenticate the client connection using the authorization scheme(s) supported on the Proxy server.<P CLASS="Element10">
+TIdProxyConnectionInfo is the type used to represent the <A HREF="007654.html" CLASS="Element59">TIdRequestHeaderInfo.ProxyParams</A> property.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0000">TIdProxyConnectionInfo.Authentication</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007626.html" CLASS="Element59">TIdProxyConnectionInfo</A>, <A HREF="013134.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Used to calculate HTTP Authentication credentials for a Proxy connection.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> Authentication: <A HREF="007205.html" CLASS="Element59">TIdAuthentication</A>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Authentication is a public <A HREF="007205.html" CLASS="Element59">TIdAuthentication</A> member that contains the object instance to be used to perform HTTP Access Authentication for the Proxy connection. Authentication will normally contain an instance of a <A HREF="007205.html" CLASS="Element59">TIdAuthentication</A> descendant like <A HREF="007215.html" CLASS="Element59">TIdBasicAuthentication</A> or <A HREF="007296.html" CLASS="Element59">TIdDigestAuthentication</A>.<P CLASS="Element10">
+Applications can assign the Authentication class to be used for the request. If Authentication has not been assigned, and <A HREF="007626.html#0001" CLASS="Element59">BasicAuthentication</A> is True, a <A HREF="007215.html" CLASS="Element59">TIdBasicAuthentication</A> object instance will be automatically created in <A HREF="007626.html#0009" CLASS="Element59">SetHeaders</A>.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0001">TIdProxyConnectionInfo.BasicAuthentication</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007626.html" CLASS="Element59">TIdProxyConnectionInfo</A>, <A HREF="013135.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Indicates that HTTP Basic Access authentication should be used.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> BasicAuthentication: boolean;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+BasicAuthentication is a Boolean property that indicates if the HTTP Basic Access authentication algorithm should be used to calculate authorization credentials for the HTTP proxy connection. Set BasicAuthentication to True to allow <A HREF="007215.html" CLASS="Element59">TIdBasicAuthentication</A> to be assigned to <A HREF="007626.html#0000" CLASS="Element59">Authentication</A> in <A HREF="007626.html#0009" CLASS="Element59">SetHeaders</A>.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0005">TIdProxyConnectionInfo.ProxyPassword</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007626.html" CLASS="Element59">TIdProxyConnectionInfo</A>, <A HREF="013136.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Represents the password for the proxy authorization credentials.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> ProxyPassword: <STRONG>string</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+ProxyPassword is a String property that identifies the password, used in conjunction with <A HREF="007626.html#0008" CLASS="Element59">ProxyUsername</A>, to construct authorization credentials for the proxy connection.<P CLASS="Element10">
+ProxyPassword is supplied as the value for Password in the <A HREF="007626.html#0000" CLASS="Element59">Authentication</A> object instance in <A HREF="007626.html#0009" CLASS="Element59">SetHeaders</A>.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0006">TIdProxyConnectionInfo.ProxyPort</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007626.html" CLASS="Element59">TIdProxyConnectionInfo</A>, <A HREF="013137.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Port number used by the proxy server program.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> ProxyPort: Integer;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+ProxyPort is an Integer property that represents the port number where a Proxy Server will <A HREF="003177.html" CLASS="Element59">listen</A> for connections, and perform proxy authentication. <A HREF="007626.html#0007" CLASS="Element59">ProxyServer</A> and ProxyPort specify the address for the proxy connection.<P CLASS="Element10">
+Changing the value in ProxyPort will result in the freeing and releasing of the instance in <A HREF="007626.html#0000" CLASS="Element59">Authentication</A> prior to assigning the new value for the ProxyPort property.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0007">TIdProxyConnectionInfo.ProxyServer</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007626.html" CLASS="Element59">TIdProxyConnectionInfo</A>, <A HREF="013138.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+IP Address or host name for the proxy server program.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> ProxyServer: <STRONG>string</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+ProxyServer is a String property that represents the IP address or host name where a Proxy Server will <A HREF="003177.html" CLASS="Element59">listen</A> for connections, and perform proxy authentication. ProxyServer and <A HREF="007626.html#0006" CLASS="Element59">ProxyPort</A> specify the complete address for the proxy connection.<P CLASS="Element10">
+Changing the value in ProxyServer will result in the freeing and releasing of the instance in <A HREF="007626.html#0000" CLASS="Element59">Authentication</A> prior to assigning the new value for the ProxyServer property.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0008">TIdProxyConnectionInfo.ProxyUsername</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007626.html" CLASS="Element59">TIdProxyConnectionInfo</A>, <A HREF="013139.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Represents the user name for the proxy authorization credentials.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> ProxyUsername: <STRONG>string</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+ProxyUsername is a String property that contains the identity, used in conjunction with ProxyUsername, to construct authorization credentials for the proxy connection.<P CLASS="Element10">
+ProxyUsername is supplied as the value for Username in the <A HREF="007626.html#0000" CLASS="Element59">Authentication</A> object instance in <A HREF="007626.html#0009" CLASS="Element59">SetHeaders</A>.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0002">TIdProxyConnectionInfo.Clear</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007626.html" CLASS="Element59">TIdProxyConnectionInfo</A>, <A HREF="013140.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Resets the header properties for the proxy connection.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>procedure</STRONG> Clear;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Clear is a procedure that resets the header properties for a proxy connection to their default blank values, including <A HREF="007626.html#0007" CLASS="Element59">ProxyServer</A>, <A HREF="007626.html#0008" CLASS="Element59">ProxyUsername</A>, <A HREF="007626.html#0005" CLASS="Element59">ProxyPassword</A>, and <A HREF="007626.html#0006" CLASS="Element59">ProxyPort</A>.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0003">TIdProxyConnectionInfo.Create</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007626.html" CLASS="Element59">TIdProxyConnectionInfo</A>, <A HREF="013141.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Constructor for the object instance.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>constructor</STRONG> Create;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Create is the constructor for the object instance. Create calls the inherited Create method, and calls <A HREF="007626.html#0002" CLASS="Element59">Clear</A> prior to exiting from the method.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0004">TIdProxyConnectionInfo.Destroy</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007626.html" CLASS="Element59">TIdProxyConnectionInfo</A>, <A HREF="013142.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Frees the object instance.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>destructor</STRONG> Destroy; <STRONG>override</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Destroy is the destructor for the object instance. Destroy will free the object instance in the <A HREF="007626.html#0000" CLASS="Element59">Authentication</A> property when an instance has been assigned. Destroy calls the inherited Destroy method prior to exiting the method.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0009">TIdProxyConnectionInfo.SetHeaders</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007626.html" CLASS="Element59">TIdProxyConnectionInfo</A>, <A HREF="013143.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Loads header names and values from object properties.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>procedure</STRONG> SetHeaders(Headers: <A HREF="007369.html" CLASS="Element59">TIdHeaderList</A>);</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+Headers: TIdHeaderList</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Destination for the header names and values.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+SetHeaders is a procedure used to populate the <A HREF="007369.html" CLASS="Element59">TIdHeaderList</A> specified in Headers with the names and values needed to represent the properties of the object instance. SetHeaders creates a 'Proxy-Authorization:' header using the value of the <A HREF="007626.html#0000" CLASS="Element59">Authentication</A> object property, when assigned. When <A HREF="007626.html#0000" CLASS="Element59">Authentication</A> is not assigned and <A HREF="007626.html#0001" CLASS="Element59">BasicAuthentication</A> is True, SetHeaders creates a <A HREF="007215.html" CLASS="Element59">TIdBasicAuthentication</A> object instance that is used in <A HREF="007626.html#0000" CLASS="Element59">Authentication</A> to create the 'Proxy-Authorization:' header values.</DIV>
+</DIV>
+<DIV CLASS="Element62">
+<HR>Created with Doc-O-Matic 2 donated to <STRONG><A HREF="http://www.delphi-jedi.org">Project JEDI</A></STRONG>. Commercial license available from the <STRONG><A HREF="http://www.doc-o-matic.com">Doc-O-Matic site</A></STRONG>.</DIV>
+</DIV></BODY></HTML>

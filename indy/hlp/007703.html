@@ -1,0 +1,214 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+<TITLE>TIdSMTPGreeting</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <META name="GENERATOR" content="Doc-O-Matic">
+    <LINK rel="STYLESHEET" href="default.css" type="text/css">
+
+<SCRIPT LANGUAGE="JavaScript1.2" SRC="scripts.js"></SCRIPT>
+</HEAD>
+<BODY CLASS="Element57">
+<TABLE BORDER="0" BGCOLOR="#AACCFF" WIDTH="100%" CELLSPACING="0" CELLPADDING="0">
+<TR><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element1">
+Indy 9</DIV>
+</TD><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element2">
+<A HREF="content.html" CLASS="Element59">Content</A> | <A HREF="idx.html" CLASS="Element59">Index</A> | <A HREF="symref.html" CLASS="Element59">Reference</A></DIV>
+</TD></TR></TABLE><DIV CLASS="Element58">
+<DIV CLASS="Element5">
+TIdSMTPGreeting</DIV>
+<DIV CLASS="Element7">
+<A HREF="013598.html" CLASS="Element59">Hierarchy</A>, <A HREF="013599.html" CLASS="Element59">Properties</A>, <A HREF="013600.html" CLASS="Element59">Methods</A>, <A HREF="013601.html" CLASS="Element59">See Also</A>, <A HREF="002819.html" CLASS="Element59">Unit: IdSMTPServer</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Implements greeting messages used by the SMTP server.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12">TIdSMTPGreeting = <STRONG>class</STRONG>(TPersistent)</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Unit</DIV>
+<DIV CLASS="Element69">
+<A HREF="002819.html" CLASS="Element59">IdSMTPServer</A></DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+TIdSMTPGreeting is a TPersistent descendant that specifies properties and methods need to implement greeting messages used by the <A HREF="007707.html" CLASS="Element59">TIdSMTPServer</A>. TIdSMTPGreeting is the type used to represent the <A HREF="007704.html#0005" CLASS="Element59">TIdSMTPMessages.Greeting</A> property.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0001">TIdSMTPGreeting.AuthFailed</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007703.html" CLASS="Element59">TIdSMTPGreeting</A>, <A HREF="013602.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Authentication error message.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> AuthFailed: <STRONG>string</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+AuthFailed is a String property that contains the message written to the client connection when an Authentication attempt to the SMTP server is not successful.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0004">TIdSMTPGreeting.EHLONotSupported</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007703.html" CLASS="Element59">TIdSMTPGreeting</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Represents the message used when the EHLO command is not supported.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> EHLONotSupported: <STRONG>string</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+EHLONotSupported is a String property that represents the message written to client connection when the SMTP EHLO command verb is not supported in the SMTP server implementation. EHLONotSupported is used in the TIdSMTPServer.CommandEHLO action handler. <A HREF="007703.html#0005" CLASS="Element59">EHLOReply</A> is the message sent to the client when the EHLO command is supported.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0005">TIdSMTPGreeting.EHLOReply</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007703.html" CLASS="Element59">TIdSMTPGreeting</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+SMTP service extentions to be include in the EHLO command response.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> EHLOReply: TStrings;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+EHLOReply is a TStrings property that represents one or more lines of text to be sent in response to the SMTP EHLO command verb. EHLO is an alternate form of the SMTP HELO command verb that provides additional information about SMTP service exstensions in the server response.<P CLASS="Element10">
+EHLOReply is used in the TIdSMTPServer.CommandEHLO action handler when the command object contains parameter values.<P CLASS="Element10">
+The default values in EHLOReply are assigned in the <A HREF="007703.html#0002" CLASS="Element59">Create</A> constructor, and represent the SMTP service extensions availble in the default server implementation. For example:<P CLASS="Element10">
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12">    250-localhost
+    250-AUTH LOGIN
+    250 HELP</PRE></DIV>
+</DIV>
+<P CLASS="Element10">
+If additional SMTP service extensions are added to the server implementation, their keywords should be added to the lines in EHLOReply.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0006">TIdSMTPGreeting.HelloReply</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007703.html" CLASS="Element59">TIdSMTPGreeting</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Server response message for the SMTP HLO command verb.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> HelloReply: <STRONG>string</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+HelloReply is a String property that specifies the server response message used for the SMTP HELO command verb. HelloReply is used in the TIdSMTPServer.CommandHELO action handler when the command object contains parameter values.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0007">TIdSMTPGreeting.NoHello</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007703.html" CLASS="Element59">TIdSMTPGreeting</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Represents the error response message used prior to HELO or EHLO commands.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> NoHello: <STRONG>string</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+NoHello is a String property to specifies the server response issued to a client requesting a SMTP command verb prior to issuing a HELO or EHLO command. NoHello is used in the <A HREF="007707.html" CLASS="Element59">TIdSMTPServer</A> action handlers invoked for the SMTP MAIL, RCPT or DATA command verbs.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0000">TIdSMTPGreeting.Assign</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007703.html" CLASS="Element59">TIdSMTPGreeting</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Copies the properties of one Object instance to another.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>procedure</STRONG> Assign(Source: TPersistent); <STRONG>override</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+Source: TPersistent</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Object instance containing values to be copied.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Assign is an overridden procedure that copies the property values in Source to the current object instance. Assign calls the inherited Assign method.<P CLASS="Element10">
+Assign checks whether the Source parameter specifies another <A HREF="007703.html" CLASS="Element59">TIdSMTPGreeting</A> instance, and if so, copies the values of the <A HREF="007703.html#0004" CLASS="Element59">EHLONotSupported</A>, <A HREF="007703.html#0006" CLASS="Element59">HelloReply</A>, <A HREF="007703.html#0007" CLASS="Element59">NoHello</A>, and <A HREF="007703.html#0005" CLASS="Element59">EHLOReply</A> properties.<P CLASS="Element10">
+If Source is not a <A HREF="007703.html" CLASS="Element59">TIdSMTPGreeting</A> instance, Assign calls the inherited method, which assigns properties from any object that specifies how to copy using the AssignTo method.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0002">TIdSMTPGreeting.Create</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007703.html" CLASS="Element59">TIdSMTPGreeting</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Constructor for the object instance.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>constructor</STRONG> Create;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Create is the constructor for the object instance, anc calls the inherited Create method to initialize object properties. Create allocates resources for the <A HREF="007703.html#0005" CLASS="Element59">EHLOReply</A> property, and sets the following properties to their default values:<P CLASS="Element10">
+<UL>
+<LI><A HREF="007703.html#0006" CLASS="Element59">HelloReply</A> - <A HREF="006616.html" CLASS="Element59">RSSMTPSvrHello</A><P CLASS="Element10">
+<LI><A HREF="007703.html#0007" CLASS="Element59">NoHello</A> - <A HREF="006617.html" CLASS="Element59">RSSMTPSvrNoHello</A><P CLASS="Element10">
+<LI><A HREF="007703.html#0004" CLASS="Element59">EHLONotSupported</A> - <A HREF="006615.html" CLASS="Element59">RSSMTPSvrCmdNotRecognized</A><P CLASS="Element10">
+<LI><A HREF="007703.html#0001" CLASS="Element59">AuthFailed</A> - <A HREF="006613.html" CLASS="Element59">RSSMTPSvrAuthFailed</A></UL>
+</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0003">TIdSMTPGreeting.Destroy</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007703.html" CLASS="Element59">TIdSMTPGreeting</A>, <A HREF="013603.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Frees the object instance.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>destructor</STRONG> Destroy; <STRONG>override</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Destroy is the destructor for the object instance. Destroy frees resources allocated to the <A HREF="007703.html#0005" CLASS="Element59">EHLOReply</A>, and calls the inherited Destroy method.</DIV>
+</DIV>
+<DIV CLASS="Element62">
+<HR>Created with Doc-O-Matic 2 donated to <STRONG><A HREF="http://www.delphi-jedi.org">Project JEDI</A></STRONG>. Commercial license available from the <STRONG><A HREF="http://www.doc-o-matic.com">Doc-O-Matic site</A></STRONG>.</DIV>
+</DIV></BODY></HTML>

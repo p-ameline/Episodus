@@ -1,0 +1,53 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+<TITLE>TIdMessageCoderPartType</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <META name="GENERATOR" content="Doc-O-Matic">
+    <LINK rel="STYLESHEET" href="default.css" type="text/css">
+
+<SCRIPT LANGUAGE="JavaScript1.2" SRC="scripts.js"></SCRIPT>
+</HEAD>
+<BODY CLASS="Element57">
+<TABLE BORDER="0" BGCOLOR="#AACCFF" WIDTH="100%" CELLSPACING="0" CELLPADDING="0">
+<TR><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element1">
+Indy 9</DIV>
+</TD><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element2">
+<A HREF="content.html" CLASS="Element59">Content</A> | <A HREF="idx.html" CLASS="Element59">Index</A> | <A HREF="symref.html" CLASS="Element59">Reference</A></DIV>
+</TD></TR></TABLE><DIV CLASS="Element58">
+<DIV CLASS="Element5">
+TIdMessageCoderPartType</DIV>
+<DIV CLASS="Element7">
+<A HREF="015376.html" CLASS="Element59">See Also</A>, <A HREF="002288.html" CLASS="Element59">Unit: IdMessageCoder</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Specifies the type of RFC message part handled by an Indy message decoder.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12">TIdMessageCoderPartType = (mcptUnknown, mcptText, mcptAttachment);</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Unit</DIV>
+<DIV CLASS="Element69">
+<A HREF="002288.html" CLASS="Element59">IdMessageCoder</A></DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+TIdMessageCoderPartType is an enumerated type that specifies the type of RFC message part handled by an Indy message decoder. TIdMessageCoderPartType may contain one of the following values:<P CLASS="Element10">
+<UL>
+<LI>ptUnknown - the type of Message Part is unknown.<P CLASS="Element10">
+<LI>ptText - indicates a <A HREF="007844.html" CLASS="Element59">TIdText</A> Message Part.<P CLASS="Element10">
+<LI>ptAttachment - indicates a <A HREF="007204.html" CLASS="Element59">TIdAttachment</A> Message Part.</UL>
+<P CLASS="Element10">
+ptUnknown indicates that the type for the message part could not be determined. Indy classes, like <A HREF="007546.html" CLASS="Element59">TIdMessageClient</A>, will raise an <A HREF="000375.html" CLASS="Element59">EIdException</A> exception with the constant <A HREF="006560.html" CLASS="Element59">RSMsgClientUnkownMessagePartType</A> error message when an unknown message part is encountered.<P CLASS="Element10">
+ptText indicates that the RFC-822 message headers for a message part have been examined, and the message body contains textual content.<P CLASS="Element10">
+ptAttachment indicates that the RFC-822 message headers for a message part have been examined, and the message body contains an attachment.<P CLASS="Element10">
+<A HREF="007549.html" CLASS="Element59">TIdMessageDecoder</A> is used to access a message to determine the TIdMessageCoderPartType value used for a message part by using the <A HREF="007549.html#0006" CLASS="Element59">TIdMessageDecoder.ReadHeader</A> method. Based on the value of TIdMessageCoderPartType, the appropriate <A HREF="007844.html" CLASS="Element59">TIdText</A> or <A HREF="007204.html" CLASS="Element59">TIdAttachment</A> instance is created to receive the message part headers and contents.</DIV>
+</DIV>
+<DIV CLASS="Element62">
+<HR>Created with Doc-O-Matic 2 donated to <STRONG><A HREF="http://www.delphi-jedi.org">Project JEDI</A></STRONG>. Commercial license available from the <STRONG><A HREF="http://www.doc-o-matic.com">Doc-O-Matic site</A></STRONG>.</DIV>
+</DIV></BODY></HTML>

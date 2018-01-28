@@ -1,0 +1,118 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+<TITLE>TIdMappedFTP</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <META name="GENERATOR" content="Doc-O-Matic">
+    <LINK rel="STYLESHEET" href="default.css" type="text/css">
+
+<SCRIPT LANGUAGE="JavaScript1.2" SRC="scripts.js"></SCRIPT>
+</HEAD>
+<BODY CLASS="Element57">
+<TABLE BORDER="0" BGCOLOR="#AACCFF" WIDTH="100%" CELLSPACING="0" CELLPADDING="0">
+<TR><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element1">
+Indy 9</DIV>
+</TD><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element2">
+<A HREF="content.html" CLASS="Element59">Content</A> | <A HREF="idx.html" CLASS="Element59">Index</A> | <A HREF="symref.html" CLASS="Element59">Reference</A></DIV>
+</TD></TR></TABLE><DIV CLASS="Element58">
+<DIV CLASS="Element5">
+TIdMappedFTP</DIV>
+<DIV CLASS="Element7">
+<A HREF="012265.html" CLASS="Element59">Hierarchy</A>, <A HREF="012266.html" CLASS="Element59">Properties</A>, <A HREF="012267.html" CLASS="Element59">Methods</A>, <A HREF="012268.html" CLASS="Element59">Events</A>, <A HREF="012269.html" CLASS="Element59">See Also</A>, <A HREF="002282.html" CLASS="Element59">Unit: IdMappedFTP</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Implements a port-based proxy for FTP connections.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12">TIdMappedFTP = <STRONG>class</STRONG>(<A HREF="007533.html" CLASS="Element59">TIdMappedPortTCP</A>)</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Unit</DIV>
+<DIV CLASS="Element69">
+<A HREF="002282.html" CLASS="Element59">IdMappedFTP</A></DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+TIdMappedFTP is a <A HREF="007533.html" CLASS="Element59">TIdMappedPortTCP</A> descendant that implements a port-based proxy for FTP connections. TIdMappedFTP allows threaded client connections to a local <A HREF="007342.html" CLASS="Element59">TIdFTPServer</A> to be redirected to remote FTP systems using port-mapping. TIdMappedFTP creates instances of <A HREF="007529.html" CLASS="Element59">TIdMappedFtpThread</A> and <A HREF="007527.html" CLASS="Element59">TIdMappedFtpDataThread</A> to service local connections to the proxy server, and establish the remote connection using the specified port number.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0001">TIdMappedFTP.DefaultPort</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007526.html" CLASS="Element59">TIdMappedFTP</A></DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> DefaultPort: integer;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+DefaultPort</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0002">TIdMappedFTP.MappedPort</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007526.html" CLASS="Element59">TIdMappedFTP</A></DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> MappedPort: Integer;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+MappedPort</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0003">TIdMappedFTP.OutboundDcMode</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007526.html" CLASS="Element59">TIdMappedFTP</A></DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> OutboundDcMode: <A HREF="007528.html" CLASS="Element59">TIdMappedFtpOutboundDcMode</A>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+OutboundDcMode</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0000">TIdMappedFTP.Create</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007526.html" CLASS="Element59">TIdMappedFTP</A>, <A HREF="012270.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Constructor for the object instance.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>constructor</STRONG> Create(AOwner: TComponent); <STRONG>override</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+AOwner: TComponent</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Owner of the object instance.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Create is the constructor for the object instance. Create calls the inherited Create method using AOwner as the owner of the object instance. Create also sets the following properties to their default values:<P CLASS="Element10">
+<UL>
+<LI><A HREF="007526.html#0001" CLASS="Element59">DefaultPort</A> - <A HREF="002452.html" CLASS="Element59">IdPORT_FTP</A><P CLASS="Element10">
+<LI><A HREF="007526.html#0002" CLASS="Element59">MappedPort</A> - <A HREF="002452.html" CLASS="Element59">IdPORT_FTP</A><P CLASS="Element10">
+<LI>ThreadClass - <A HREF="007529.html" CLASS="Element59">TIdMappedFtpThread</A><P CLASS="Element10">
+<LI>FOutboundDcMode - fdcmClient</UL>
+</DIV>
+</DIV>
+<DIV CLASS="Element62">
+<HR>Created with Doc-O-Matic 2 donated to <STRONG><A HREF="http://www.delphi-jedi.org">Project JEDI</A></STRONG>. Commercial license available from the <STRONG><A HREF="http://www.doc-o-matic.com">Doc-O-Matic site</A></STRONG>.</DIV>
+</DIV></BODY></HTML>

@@ -1,0 +1,108 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+<TITLE>TIdDayTimeUDP</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <META name="GENERATOR" content="Doc-O-Matic">
+    <LINK rel="STYLESHEET" href="default.css" type="text/css">
+
+<SCRIPT LANGUAGE="JavaScript1.2" SRC="scripts.js"></SCRIPT>
+</HEAD>
+<BODY CLASS="Element57">
+<TABLE BORDER="0" BGCOLOR="#AACCFF" WIDTH="100%" CELLSPACING="0" CELLPADDING="0">
+<TR><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element1">
+Indy 9</DIV>
+</TD><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element2">
+<A HREF="content.html" CLASS="Element59">Content</A> | <A HREF="idx.html" CLASS="Element59">Index</A> | <A HREF="symref.html" CLASS="Element59">Reference</A></DIV>
+</TD></TR></TABLE><DIV CLASS="Element58">
+<DIV CLASS="Element5">
+TIdDayTimeUDP</DIV>
+<DIV CLASS="Element7">
+<A HREF="010556.html" CLASS="Element59">Hierarchy</A>, <A HREF="010557.html" CLASS="Element59">Properties</A>, <A HREF="010558.html" CLASS="Element59">Methods</A>, <A HREF="010559.html" CLASS="Element59">Events</A>, <A HREF="010560.html" CLASS="Element59">See Also</A>, <A HREF="002163.html" CLASS="Element59">Unit: IdDayTimeUDP</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Implements a UDP-based DayTime protocol client.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12">TIdDayTimeUDP = <STRONG>class</STRONG>(<A HREF="007874.html" CLASS="Element59">TIdUDPClient</A>)</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Unit</DIV>
+<DIV CLASS="Element69">
+<A HREF="002163.html" CLASS="Element59">IdDayTimeUDP</A></DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+<A HREF="007277.html" CLASS="Element59">TIdDayTime</A> implements a UDP-based variant of the DayTime protocol (RFC 867) as a client. In this protocol, a DayTime server sends the current day and time in a human readable format and is sometimes used for debugging.<P CLASS="Element10">
+If you need a time-synchronization solution, we recommend that you use the Time protocol encapsulated by <A HREF="007864.html" CLASS="Element59">TIdTime</A>, <A HREF="007866.html" CLASS="Element59">TIdTimeUDP</A>, <A HREF="007865.html" CLASS="Element59">TIdTimeServer</A>, and <A HREF="007867.html" CLASS="Element59">TIdTimeUDPServer</A>.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0001">TIdDayTimeUDP.DayTimeStr</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007279.html" CLASS="Element59">TIdDayTimeUDP</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Retrieves the Date and Time from a server.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> DayTimeStr: <STRONG>String</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+DayTimeStr is a String property that cause the component to <A HREF="000295.html" CLASS="Element59">connect</A> to the Host server and retrieve the date and time. Since this can be returned in a free-form format, this is not converted to a TDateTime and there is no time synchronization performed.<P CLASS="Element10">
+You must set the Host property to the DayTime server before using this property.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0002">TIdDayTimeUDP.Port</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007279.html" CLASS="Element59">TIdDayTimeUDP</A>, <A HREF="010561.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Specifies the port number used by the DayTime protocol.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> Port: Integer;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Port is an Integer property and is redefined in <A HREF="007277.html" CLASS="Element59">TIdDayTime</A> to specify the default value used by the DayTime protocol. (<A HREF="002406.html" CLASS="Element59">IdPORT_DAYTIME</A>). The default value for Port is assigned in the <A HREF="007279.html#0000" CLASS="Element59">Create</A> constructor. Port is used when accessing the value in <A HREF="007279.html#0001" CLASS="Element59">DayTimeStr</A>, and a datagram is used to retrieve the property value from the DayTime server.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0000">TIdDayTimeUDP.Create</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007279.html" CLASS="Element59">TIdDayTimeUDP</A>, <A HREF="010562.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Constructor for the object instance.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>constructor</STRONG> Create(AOwner: TComponent); <STRONG>override</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+AOwner: TComponent</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Owner of the object instance.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Create is the constructor for the object instance, and calls the inherited Create constructor. Create initializes <A HREF="007279.html#0002" CLASS="Element59">Port</A> to the constant value <A HREF="002406.html" CLASS="Element59">IdPORT_DAYTIME</A> as required by the DayTime Protocol.</DIV>
+</DIV>
+<DIV CLASS="Element62">
+<HR>Created with Doc-O-Matic 2 donated to <STRONG><A HREF="http://www.delphi-jedi.org">Project JEDI</A></STRONG>. Commercial license available from the <STRONG><A HREF="http://www.doc-o-matic.com">Doc-O-Matic site</A></STRONG>.</DIV>
+</DIV></BODY></HTML>

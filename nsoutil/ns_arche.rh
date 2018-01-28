@@ -1,0 +1,45 @@
+//// Ns_arche.rh
+//
+
+// Dialogue IDD_CREAT_REFERENTIAL
+
+#define IDC_TXT_TITLE		   101
+#define IDC_EDIT_TITLE	   102
+#define IDC_TXT_ID		     103
+#define IDC_EDIT_ID			   104
+#define IDC_TXT_CONCEPT	   105
+#define IDC_EDIT_CONCEPT   106
+#define IDC_RISK_CONCEPT   107
+#define IDC_HEALTH_CONCEPT 108
+#define IDC_SOCIAL_CONCEPT 109
+
+// Dialogue IDD_CREAT_REFERENTIAL
+
+#define IDC_TXT_NAME		101
+#define IDC_EDIT_NAME   102
+#define IDC_TXT_GROUP		103
+#define IDC_EDIT_GROUP	104
+#define IDC_TXT_HELP    105
+#define IDC_EDIT_HELP   106
+#define IDC_TXT_UNCHCK  107
+#define IDC_EDIT_UNCHCK 108
+#define IDC_TXT_LONG    109
+#define IDC_TXT_SHORT   110
+#define IDC_TXT_AUTOSEL 111
+#define IDR_AUTO_YES    112
+#define IDR_AUTO_NO     113
+#define IDC_TXT_LEVEL   114
+#define IDR_LEVEL_A     115
+#define IDR_LEVEL_B     116
+#define IDR_LEVEL_C     117
+#define IDR_LEVEL_PRO   118
+#define IDR_LEVEL_UNKNOWN 119
+
+// Dialogue IDD_LISTMAT
+
+#define IDC_LM_LW		  101#define IDC_LM_CREER	102
+#define IDC_LM_SUPPR	103
+#define IDC_LM_MODIF	104
+#define IDC_LM_SETDEF	105
+#define IDC_LM_LW_T		106
+

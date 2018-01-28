@@ -1,0 +1,268 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+<TITLE>TIdIPMCastServer</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <META name="GENERATOR" content="Doc-O-Matic">
+    <LINK rel="STYLESHEET" href="default.css" type="text/css">
+
+<SCRIPT LANGUAGE="JavaScript1.2" SRC="scripts.js"></SCRIPT>
+</HEAD>
+<BODY CLASS="Element57">
+<TABLE BORDER="0" BGCOLOR="#AACCFF" WIDTH="100%" CELLSPACING="0" CELLPADDING="0">
+<TR><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element1">
+Indy 9</DIV>
+</TD><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element2">
+<A HREF="content.html" CLASS="Element59">Content</A> | <A HREF="idx.html" CLASS="Element59">Index</A> | <A HREF="symref.html" CLASS="Element59">Reference</A></DIV>
+</TD></TR></TABLE><DIV CLASS="Element58">
+<DIV CLASS="Element5">
+TIdIPMCastServer</DIV>
+<DIV CLASS="Element7">
+<A HREF="011931.html" CLASS="Element59">Hierarchy</A>, <A HREF="011932.html" CLASS="Element59">Properties</A>, <A HREF="011933.html" CLASS="Element59">Methods</A>, <A HREF="011934.html" CLASS="Element59">Events</A>, <A HREF="011935.html" CLASS="Element59">See Also</A>, <A HREF="002269.html" CLASS="Element59">Unit: IdIPMCastServer</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Implements an IP Multicast server.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12">TIdIPMCastServer = <STRONG>class</STRONG>(<A HREF="007432.html" CLASS="Element59">TIdIPMCastBase</A>)</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Unit</DIV>
+<DIV CLASS="Element69">
+<A HREF="002269.html" CLASS="Element59">IdIPMCastServer</A></DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+TIdIPMCastServer is a <A HREF="007432.html" CLASS="Element59">TIdIPMCastBase</A> descendant that implements an IP multicast server component using the UDP transport, as described in the Internet Standards documents:<P CLASS="Element10">
+<UL>
+<LI>RFC 1112 - Host Extensions for IP Multicasting. (http://www.rfc-editor.org/rfc/rfc1112.txt)<P CLASS="Element10">
+<LI>RFC 1458 - Requirements for Multicast Protocols. (http://www.rfc-editor.org/rfc/rfc1458.txt)</UL>
+<P CLASS="Element10">
+TIdIPMCastServer implements abstract methods from the ancestor class, and provides additional methods and properties used for loopback diagnostics, <A HREF="007071.html" CLASS="Element59">socket</A> options, and transmission of Multicast datagrams.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0000">TIdIPMCastServer.Active</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007435.html" CLASS="Element59">TIdIPMCastServer</A>, <A HREF="011936.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Indicates if the multicast server is active and able to transmit datagram packets.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> Active;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Active is a published Boolean property in <A HREF="007435.html" CLASS="Element59">TIdIPMCastServer</A> that indicates if the multicast server is active and able to transmit datagram packets. Active uses an overriden read access specifier that insures that the <A HREF="007435.html#0001" CLASS="Element59">Binding</A> for the server has been initialized and the <A HREF="007071.html" CLASS="Element59">socket</A> handle has been allocated. Active is set to False when the server is freed using <A HREF="007435.html#0003" CLASS="Element59">Destroy</A>.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0001">TIdIPMCastServer.Binding</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007435.html" CLASS="Element59">TIdIPMCastServer</A>, <A HREF="011937.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Socket descriptor for multicast server transmissions.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> Binding: <A HREF="007713.html" CLASS="Element59">TIdSocketHandle</A>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Return Value</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+<A HREF="007713.html" CLASS="Element59">TIdSocketHandle</A> - Socket descriptor for the multicast server.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Binding is a read-only <A HREF="007713.html" CLASS="Element59">TIdSocketHandle</A> property that represents the <A HREF="007071.html" CLASS="Element59">socket</A> descriptor used by the multicast server to <A HREF="006944.html" CLASS="Element59">send</A> datagram packets to multicast clients. The read access specifier for the property insures that the Binding has been initialized, and a datagram <A HREF="007071.html" CLASS="Element59">socket</A> handle has been allocated and bound using the <A HREF="007435.html#0005" CLASS="Element59">MulticastGroup</A> address and group membership <A HREF="007071.html" CLASS="Element59">socket</A> options, as well as the <A HREF="007435.html#0009" CLASS="Element59">TimeToLive</A> options indicated in the property values. <STRONG>Note</STRONG>: <A HREF="007435.html#0004" CLASS="Element59">Loopback</A> is set to True during Binding initialization to allow diagnostics.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0004">TIdIPMCastServer.Loopback</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007435.html" CLASS="Element59">TIdIPMCastServer</A>, <A HREF="011938.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Indicates if datagrams for the local network module are used for the server.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> Loopback: Boolean;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Loopback is a Boolean property that indicates if Loopback <A HREF="007071.html" CLASS="Element59">socket</A> options are used on the <A HREF="007435.html#0001" CLASS="Element59">Binding</A> for the multicast server. Loopback indicates if the local network module can deliver multicast datagram packets that were transmitted from that network module. Changing the value of the Loopback property will result in a change to the <A HREF="007071.html" CLASS="Element59">socket</A> options for <A HREF="007435.html#0001" CLASS="Element59">Binding</A> to reflect the new property value. The default value for the Loopback is <A HREF="000316.html" CLASS="Element59">DEF_IMP_LOOPBACK</A> as assigned in the <A HREF="007435.html#0002" CLASS="Element59">Create</A> constructor.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0005">TIdIPMCastServer.MulticastGroup</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007435.html" CLASS="Element59">TIdIPMCastServer</A>, <A HREF="011939.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Represents the multicast group IP address.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> MulticastGroup;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+MulticastGroup is a published property in <A HREF="007435.html" CLASS="Element59">TIdIPMCastServer</A> that identifies the dotted-decimal representation of the multicast group address for the server. MulticastGroup is used when setting <A HREF="007071.html" CLASS="Element59">socket</A> options for a binding used by the multicast server, and when transmitting datagram packets to network interface.<P CLASS="Element10">
+MulticastGroup must contain an IP address acceptable to IsValidMulticastGroup, or an exception can be raised when creating, accessing, or releasing the <A HREF="007435.html#0001" CLASS="Element59">Binding</A> used by the multicast server.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0006">TIdIPMCastServer.Port</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007435.html" CLASS="Element59">TIdIPMCastServer</A>, <A HREF="011940.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Port number used to <A HREF="006944.html" CLASS="Element59">send</A> datagram transmissions.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> Port;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Port is a published Integer property in <A HREF="007435.html" CLASS="Element59">TIdIPMCastServer</A> that represents the port number used when sending datagram transmissions using the <A HREF="007435.html#0007" CLASS="Element59">Send</A> or <A HREF="007435.html#0008" CLASS="Element59">SendBuffer</A> method.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0009">TIdIPMCastServer.TimeToLive</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007435.html" CLASS="Element59">TIdIPMCastServer</A>, <A HREF="011941.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Numberof hops allowed across routers and gateways for the datagram transmission.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> TimeToLive: Byte;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+TimeToLive is a Byte property that indicates the number of hops permitted in routers and gateways that must handle the datagram transmission. TimeToLive is used to set the <A HREF="007071.html" CLASS="Element59">socket</A> options for the <A HREF="007435.html#0001" CLASS="Element59">Binding</A> used by the multicast server. Changing the value of TimeToLive forces an update to the <A HREF="007071.html" CLASS="Element59">socket</A> options for <A HREF="007435.html#0001" CLASS="Element59">Binding</A>. The default value of TimeToLive is <A HREF="000318.html" CLASS="Element59">DEF_IMP_TTL</A> as assigned by the <A HREF="007435.html#0002" CLASS="Element59">Create</A> constructor.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0002">TIdIPMCastServer.Create</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007435.html" CLASS="Element59">TIdIPMCastServer</A>, <A HREF="011942.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Constructor for the object instance.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>constructor</STRONG> Create(AOwner: TComponent); <STRONG>override</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+AOwner: TComponent</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Owner of the object instance.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Create is the overridden constructor for the object instance. Create calls the inherited Create method using AOwner as the owner of the object instance. Create also assigns the default values for the <A HREF="007435.html#0004" CLASS="Element59">Loopback</A> (<A HREF="000316.html" CLASS="Element59">DEF_IMP_LOOPBACK</A>) and <A HREF="007435.html#0009" CLASS="Element59">TimeToLive</A> (<A HREF="000318.html" CLASS="Element59">DEF_IMP_TTL</A>) properties.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0003">TIdIPMCastServer.Destroy</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007435.html" CLASS="Element59">TIdIPMCastServer</A>, <A HREF="011943.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Frees the object instance.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>destructor</STRONG> Destroy; <STRONG>override</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Destroy is the destructor for the object instance. Destroy sets the <A HREF="007435.html#0000" CLASS="Element59">Active</A> property to False, to insure that the IP address for the local binding is removed as a member of the MultiCast Group address. Destroy calls the inherited Destroy method prior to exiting.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0007">TIdIPMCastServer.Send</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007435.html" CLASS="Element59">TIdIPMCastServer</A>, <A HREF="011944.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Sends a datagram containing a string value.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>procedure</STRONG> Send(AData: <STRONG>string</STRONG>);</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+AData: string</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+String value to be sent in the datagram.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Send is a procedure that allows the multicast server to <A HREF="006944.html" CLASS="Element59">send</A> a datagram containing the value in AData to the group address specified in the <A HREF="007435.html#0005" CLASS="Element59">MulticastGroup</A> property. Send calls the MulticastBuffer method using values in the <A HREF="007435.html#0005" CLASS="Element59">MulticastGroup</A> and <A HREF="007435.html#0006" CLASS="Element59">Port</A> properties, as well as the value and length indicated in AData.<P CLASS="Element10">
+Use <A HREF="007435.html#0008" CLASS="Element59">SendBuffer</A> to transmit a datagram containing non-string values.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0008">TIdIPMCastServer.SendBuffer</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007435.html" CLASS="Element59">TIdIPMCastServer</A>, <A HREF="011945.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Sends a datagram containing a non-string value.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>procedure</STRONG> SendBuffer(<STRONG>var</STRONG> ABuffer; <STRONG>const</STRONG> AByteCount: integer);</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+var ABuffer</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Buffer containing the content for the datagram.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+const AByteCount: integer</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Number of bytes in the buffer to be sent in the datagram.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+SendBuffer is a procedure that allows the multicast server to <A HREF="006944.html" CLASS="Element59">send</A> a datagram containing the non-string value in ABuffer to the group address specified in the <A HREF="007435.html#0005" CLASS="Element59">MulticastGroup</A> property. <A HREF="007435.html#0007" CLASS="Element59">Send</A> calls the MulticastBuffer method using values in the <A HREF="007435.html#0005" CLASS="Element59">MulticastGroup</A> and <A HREF="007435.html#0006" CLASS="Element59">Port</A> properties, as well as the value and length indicated in ABuffer and AByteCount.<P CLASS="Element10">
+Use <A HREF="007435.html#0007" CLASS="Element59">Send</A> to transmit a datagram containing a string value.</DIV>
+</DIV>
+<DIV CLASS="Element62">
+<HR>Created with Doc-O-Matic 2 donated to <STRONG><A HREF="http://www.delphi-jedi.org">Project JEDI</A></STRONG>. Commercial license available from the <STRONG><A HREF="http://www.doc-o-matic.com">Doc-O-Matic site</A></STRONG>.</DIV>
+</DIV></BODY></HTML>

@@ -1,0 +1,358 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+<TITLE>TIdFTPServerThread</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <META name="GENERATOR" content="Doc-O-Matic">
+    <LINK rel="STYLESHEET" href="default.css" type="text/css">
+
+<SCRIPT LANGUAGE="JavaScript1.2" SRC="scripts.js"></SCRIPT>
+</HEAD>
+<BODY CLASS="Element57">
+<TABLE BORDER="0" BGCOLOR="#AACCFF" WIDTH="100%" CELLSPACING="0" CELLPADDING="0">
+<TR><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element1">
+Indy 9</DIV>
+</TD><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element2">
+<A HREF="content.html" CLASS="Element59">Content</A> | <A HREF="idx.html" CLASS="Element59">Index</A> | <A HREF="symref.html" CLASS="Element59">Reference</A></DIV>
+</TD></TR></TABLE><DIV CLASS="Element58">
+<DIV CLASS="Element5">
+TIdFTPServerThread</DIV>
+<DIV CLASS="Element7">
+<A HREF="011163.html" CLASS="Element59">Hierarchy</A>, <A HREF="011164.html" CLASS="Element59">Properties</A>, <A HREF="011165.html" CLASS="Element59">Methods</A>, <A HREF="011166.html" CLASS="Element59">Events</A>, <A HREF="011167.html" CLASS="Element59">See Also</A>, <A HREF="002192.html" CLASS="Element59">Unit: IdFTPServer</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Implements a thread of execution for client connections to the FTP server.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12">TIdFTPServerThread = <STRONG>class</STRONG>(<A HREF="007613.html" CLASS="Element59">TIdPeerThread</A>)</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Unit</DIV>
+<DIV CLASS="Element69">
+<A HREF="002192.html" CLASS="Element59">IdFTPServer</A></DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+TIdFTPServerThread is a <A HREF="007613.html" CLASS="Element59">TIdPeerThread</A> descendant that implements the thread of execution created for FTP client on the FTP server. TIdFTPServerThread is used in TIdFTPServer.ThreadClass to indicate the class used to create new thread instances using the <A HREF="007853.html" CLASS="Element59">TIdThreadMgr</A> for the FTP server implementation.<P CLASS="Element10">
+TIdFTPServerThread provides properties and methods that set or retrieve connection and transfer parameters for the FTP client connection. TIdFTPServerThread implements the inherited Connection property as the Control channel for the FTP client, and also specifies a <A HREF="007828.html" CLASS="Element59">TIdTCPConnection</A> to be used as the DataChannel for FTP data transfer operations.<P CLASS="Element10">
+TIdFTPServerThread is used to access the Thread of execution in the <A HREF="007242.html" CLASS="Element59">TIdCommand</A> reply handlers used in the FTP server implementation.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0000">TIdFTPServerThread.ALLOSize</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007343.html" CLASS="Element59">TIdFTPServerThread</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Indicates space tpo reserve for new files stored on the FTP server.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> ALLOSize: Integer;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+ALLOSize is an Integer property that indicates the optional requested storage space to reserve for new files transferred to the FTP server. ALLOSize is updated in the command reply handler for the FTP ALLO command, and accessed in the command reply handler executed for the FTP STOR or APPE commands.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0001">TIdFTPServerThread.Authenticated</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007343.html" CLASS="Element59">TIdFTPServerThread</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Indicates if the FTP client has successfully authenticated the user account for the connection.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> Authenticated: Boolean;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Authenticated is a Boolean property that the client has successfully used the FTP USER and PASS commands to authenticate the user account for the connection. Authenticated is updated in the command reply handler for the FTP PASS command. Authenticated is read prior to executing other FTP command reply handlers, and prevents the handle form executing if the value is False.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0003">TIdFTPServerThread.CurrentDir</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007343.html" CLASS="Element59">TIdFTPServerThread</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Indicates the currently selected directory path for the FTP client.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> CurrentDir: <STRONG>string</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+CurrentDir is a String property that indicates the currently selected directory path for the FTP client connection. CurrentDir is updated when the command reply handler for the FTP CWD or CDUP command is executed. CurrentDir is read when performing FTP operations that require file or directory handling.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0004">TIdFTPServerThread.DataChannelThread</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007343.html" CLASS="Element59">TIdFTPServerThread</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Represents the threaded data channel used for data transmission for an FTP client connection.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> DataChannelThread: <A HREF="007275.html" CLASS="Element59">TIdDataChannelThread</A>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+DataChannelThread is a <A HREF="007275.html" CLASS="Element59">TIdDataChannelThread</A> property that represents the threaded data channel used when a threaded FTP client connection needs to read or write data using the FTP STOR, STOU, APPE, RETR, LIST, or NLST command verbs.<P CLASS="Element10">
+DataChannelThread allows the client connection to create and access either an active or a passive connection used for the data channel in the FTP client.<P CLASS="Element10">
+During execution, DataChannelThread uses the Data property to access the TStrings or TStream values used during the data transfer operation. After performing the transfer operation, the <A HREF="007071.html" CLASS="Element59">socket</A> for the data channel in the thread is disconnected, and the Success or Error message is written using the control channel for the threaded client connection. The data channel thread is stopped after execution of the transfer operation.<P CLASS="Element10">
+DataChannelThread exists for the lifetime of the threaded client connection. It is initalized and started prior to data transfer operations, and suspended when the data transfer operation is completed.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0005">TIdFTPServerThread.DataMode</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007343.html" CLASS="Element59">TIdFTPServerThread</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Represents the transmission mode requested for an FTP client connection.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> DataMode: <A HREF="007349.html" CLASS="Element59">TIdFTPTransferMode</A>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+DataMode is a <A HREF="007349.html" CLASS="Element59">TIdFTPTransferMode</A> property that represents the transmission mode requested for data transfers on the FTP client connection. DataMode is updated in the command reply handler for the FTP MODE command.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0006">TIdFTPServerThread.DataPort</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007343.html" CLASS="Element59">TIdFTPServerThread</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Indicates the port number for the DataChannel in an FTP client connection.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> DataPort: Integer;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+DataPort is an Integer property that represents the port number used for the DataChannel for an FTP client connection. The default value for DataPort is 20, as required by the FTP protocol. DataPort can be updated in the command reply handler for the FTP <A HREF="007343.html#0001" CLASS="Element59">PASV</A> command, when the DataChannel is create and bound for listening for client connections.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0007">TIdFTPServerThread.DataStruct</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007343.html" CLASS="Element59">TIdFTPServerThread</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Indicates the data storage representation used for FTP data transfers on the client connection.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> DataStruct: <A HREF="007331.html" CLASS="Element59">TIdFTPDataStructure</A>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+DataStruct is a <A HREF="007331.html" CLASS="Element59">TIdFTPDataStructure</A> property that represents the data storage representation used during FTP data transfer. DataStruct is updated when the command reply handler is executed for the FTP STRU command.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0008">TIdFTPServerThread.DataType</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007343.html" CLASS="Element59">TIdFTPServerThread</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Represents the file transfer type for the client connection.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> DataType: <A HREF="007350.html" CLASS="Element59">TIdFTPTransferType</A>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+DataType is a <A HREF="007350.html" CLASS="Element59">TIdFTPTransferType</A> property that represents the file transfer type requested for sending and receiving data to/from the FTP client connection.<P CLASS="Element10">
+DataType is updated when the command reply handler is executed for the FTP TYPE command.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="000A">TIdFTPServerThread.HomeDir</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007343.html" CLASS="Element59">TIdFTPServerThread</A>, <A HREF="011168.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Represents the home directory for the FTP client connection.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> HomeDir: <STRONG>string</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+HomeDir is a String property that represents the directory path to use as the parent directory for the user account making the FTP client connection. HomeDir is used in the command reply handler that implement the CDUP command.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0000">TIdFTPServerThread.Password</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007343.html" CLASS="Element59">TIdFTPServerThread</A>, <A HREF="011169.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Represents the account authorization for client connection authentication.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> Password: <STRONG>string</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Password is a String property that represents the account authorization used for authenticating the FTP client connection. Password is read from the client connection and provided to the FTP PASS command reply handler used in the FTP server implementation, or to the OnCommandPASS event handler when UserAccounts are not maintained by the FTP server.<P CLASS="Element10">
+When <A HREF="007343.html#0000" CLASS="Element59">Username</A> contains the value &quot;anonymous&quot; or &quot;guest&quot;, the AccessLevel for the client connection is set to idaAnonymousUser. Otherwise, UserAccounts on the FTP server are used to perform account authorization and determine the AccessLevel for the account.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0001">TIdFTPServerThread.PASV</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007343.html" CLASS="Element59">TIdFTPServerThread</A>, <A HREF="011170.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Inducates if the DataChannel should <A HREF="003177.html" CLASS="Element59">listen</A> for client connections.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> PASV: Boolean;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+PASV is a Boolean property that indicates that the <A HREF="007343.html" CLASS="Element59">TIdFTPServerThread</A> should <A HREF="003177.html" CLASS="Element59">listen</A> on a non-standard <A HREF="007343.html#0006" CLASS="Element59">DataPort</A> for the FTP DataChannel connection. PASV is used in the command reply handler for the FTP PASV command to create and initialize the DataChannel for the <A HREF="007343.html#0001" CLASS="Element59">Authenticated</A> FTP connection, and starts listening for the Client connection on the DataChannel.<P CLASS="Element10">
+PASV is read in the RETR command reply handler to determine if the DataChannel should Connect (when Passive is False) or Listen for the client connection (when Passive is True) prior to transferring FTP data.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0002">TIdFTPServerThread.RESTPos</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007343.html" CLASS="Element59">TIdFTPServerThread</A>, <A HREF="011171.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Indicates the position of a restart marker in the FTP data stream.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> RESTPos: Integer;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+RESTPos is an Integer property that indicates the position of a restart marker in the FTP data stream, and is used when the FTP server executes the command and reply handlers for the FTP REST or RETR commands.<P CLASS="Element10">
+RESTPos is updated in the command reply handler for the REST command for an <A HREF="007343.html#0001" CLASS="Element59">Authenticated</A> FTP client connection. The default value for RESTPos is 0. RESTPos is read in the command reply handler for the RETR command, and the FTP Data stream is moved to the indicated position prior to beginning the transfer operation on the DataChannel.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0000">TIdFTPServerThread.Username</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007343.html" CLASS="Element59">TIdFTPServerThread</A>, <A HREF="011172.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Represents the account identity for client connection authentication.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> Username: <STRONG>string</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Username is a String property that represents the account identity used for authenticating the FTP client connection. UserName is read from the client connection and provided to the FTP USER command reply handler used in the FTP server implementation, or to the OnCommandUSER event handler when UserAccounts are not maintained by the FTP server.<P CLASS="Element10">
+When Username contains the value &quot;anonymous&quot; or &quot;guest&quot;, the AccessLevel for the client connection is set to idaAnonymousUser. Otherwise, UserAccounts on the FTP server are used to perform account authorization and determine the AccessLevel for the account.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0001">TIdFTPServerThread.UserType</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007343.html" CLASS="Element59">TIdFTPServerThread</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Indicate the user account type and processing to perform during account authentication.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> UserType: <A HREF="007351.html" CLASS="Element59">TIdFTPUserType</A>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+UserType is a <A HREF="007351.html" CLASS="Element59">TIdFTPUserType</A> property that represents the type of user account used to open the threaded client connection to the FTP server. UserType is updated when the command event handler for the FTP USER command verb receives and processes the account identity for the client connection.<P CLASS="Element10">
+UserType will be given the value utAnonymousUser when AllowAnonymousLogin is True, and AnonymousAccounts contains the account identitity provided as a parameter to the command event handler. <A HREF="007343.html#0000" CLASS="Element59">Username</A> is given the value in the parameter to the command event handler.<P CLASS="Element10">
+If AllowAnonymousLogin is False or the account identity is not present in AnonymousAccounts, UserType is assigned the value utNormalUser and <A HREF="007343.html#0000" CLASS="Element59">Username</A> is given the contents of the parameter for the FTP USER command.<P CLASS="Element10">
+UserType will contain the value utNone when an account identity is not provided.<P CLASS="Element10">
+UserType is subsequently used when the FTP PASS command verb is received from the client connection, and the account must be authorized using the credentials provided for the user account. UserType will control the authorization mechanism used for the threaded client connection.<P CLASS="Element10">
+When UserType contains the value utAnonymousUser, the server implementation will require that the password for an anonymous account contain a valid email address when <A HREF="007342.html#0002" CLASS="Element59">TIdFTPServer.AnonymousPassStrictCheck</A> is True. Otherwise the anonymous account must provide a non-blank password containing any value. When these condition are met, <A HREF="007343.html#0001" CLASS="Element59">Authenticated</A> will contain True and the parameter value for the command event handler is assigned to the <A HREF="007343.html#0000" CLASS="Element59">Password</A> property. If either condition is not met, UserType will revert to the value utNone and <A HREF="007343.html#0001" CLASS="Element59">Authenticated</A> will contain False.<P CLASS="Element10">
+When UserType contains the value utNormalUser, the server implementation will authenticate using the account information in <A HREF="007342.html#0015" CLASS="Element59">TIdFTPServer.UserAccounts</A> when assigned. The UserAccounts collection is used to perform TIdUserAccounts.AuthenticateUser for the account identity and credentials specified in the <A HREF="007343.html#0000" CLASS="Element59">Username</A> and <A HREF="007343.html#0000" CLASS="Element59">Password</A> properties. <A HREF="007343.html#0001" CLASS="Element59">Authenticated</A> will indicate the results of the authorization process.<P CLASS="Element10">
+Use <A HREF="007342.html#0013" CLASS="Element59">TIdFTPServer.OnUserLogin</A> to perform account authentication when TIdAccount object instance are not used in the server implementation. Use <A HREF="007342.html#0008" CLASS="Element59">TIdFTPServer.OnAfterUserLogin</A> to perform additional logging or to extend the authorization process for the threaded client connection.<P CLASS="Element10">
+The default value for UserType is utNone, as assigned in the <A HREF="007343.html#0002" CLASS="Element59">Create</A> constructor.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0002">TIdFTPServerThread.Create</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007343.html" CLASS="Element59">TIdFTPServerThread</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Constructor for the object instance</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>constructor</STRONG> Create(ACreateSuspended: Boolean = True; <STRONG>const</STRONG> ADefaultDataPort: Integer = <A HREF="002454.html" CLASS="Element59">IdPORT_FTP_DATA</A>); <STRONG>reintroduce</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+ACreateSuspended: Boolean = True</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Indicates that the thread is Suspended prior to execution.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Create is the constructor for the object instance. Create calls the inherited Create method using the value in ACreateSuspended to indicate the is the thread is Suspended prior to execution. Create calso constructs and initializes the DataChannel for the client connection, and calls ReInitialize to insure that the default values for the thread are established.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0009">TIdFTPServerThread.Destroy</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007343.html" CLASS="Element59">TIdFTPServerThread</A>, <A HREF="011173.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Frees the object instance.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>destructor</STRONG> Destroy; <STRONG>override</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Destroy is the destructor for the object instance. Destroy frees and releases resources allocated to the DataChannel property prior to calling the inherited Destroy method.</DIV>
+</DIV>
+<DIV CLASS="Element62">
+<HR>Created with Doc-O-Matic 2 donated to <STRONG><A HREF="http://www.delphi-jedi.org">Project JEDI</A></STRONG>. Commercial license available from the <STRONG><A HREF="http://www.doc-o-matic.com">Doc-O-Matic site</A></STRONG>.</DIV>
+</DIV></BODY></HTML>

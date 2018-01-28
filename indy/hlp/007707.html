@@ -1,0 +1,720 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+<TITLE>TIdSMTPServer</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <META name="GENERATOR" content="Doc-O-Matic">
+    <LINK rel="STYLESHEET" href="default.css" type="text/css">
+
+<SCRIPT LANGUAGE="JavaScript1.2" SRC="scripts.js"></SCRIPT>
+</HEAD>
+<BODY CLASS="Element57">
+<TABLE BORDER="0" BGCOLOR="#AACCFF" WIDTH="100%" CELLSPACING="0" CELLPADDING="0">
+<TR><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element1">
+Indy 9</DIV>
+</TD><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element2">
+<A HREF="content.html" CLASS="Element59">Content</A> | <A HREF="idx.html" CLASS="Element59">Index</A> | <A HREF="symref.html" CLASS="Element59">Reference</A></DIV>
+</TD></TR></TABLE><DIV CLASS="Element58">
+<DIV CLASS="Element5">
+TIdSMTPServer</DIV>
+<DIV CLASS="Element7">
+<A HREF="013650.html" CLASS="Element59">Hierarchy</A>, <A HREF="013651.html" CLASS="Element59">Properties</A>, <A HREF="013652.html" CLASS="Element59">Methods</A>, <A HREF="013653.html" CLASS="Element59">Events</A>, <A HREF="013654.html" CLASS="Element59">See Also</A>, <A HREF="002819.html" CLASS="Element59">Unit: IdSMTPServer</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Implements a multi-thread SMTP Server.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12">TIdSMTPServer = <STRONG>class</STRONG>(<A HREF="007831.html" CLASS="Element59">TIdTCPServer</A>)</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Unit</DIV>
+<DIV CLASS="Element69">
+<A HREF="002819.html" CLASS="Element59">IdSMTPServer</A></DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+TIdSMTPServer is a <A HREF="007831.html" CLASS="Element59">TIdTCPServer</A> descendant that specifies properties and methods needed to implement a multi-threaded SMTP (Simple Mail Transfer Protocol) server, as described in the Internet Standrds documents:<P CLASS="Element10">
+<UL>
+<LI>RFC 2821 - Simple Mail Transfer Protocol [SMTP] (http://www.rfc-editor.org/rfc/rfc2821.txt)<P CLASS="Element10">
+<LI>RFC 1869 - SMTP Service Extensions (http://www.rfc-editor.org/rfc/rfc1869.txt)<P CLASS="Element10">
+<LI>RFC 2554 - SMTP Service Extension for Authentication (http://www.rfc-editor.org/rfc/rfc2554.txt)</UL>
+<P CLASS="Element10">
+TIdSMTPServer allows control over basic server options and configuration using properties like <A HREF="007707.html#0000" CLASS="Element59">AllowEHLO</A>, <A HREF="007707.html#0006" CLASS="Element59">NoDecode</A>, <A HREF="007707.html#0016" CLASS="Element59">ReceiveMode</A>, and <A HREF="007707.html#0005" CLASS="Element59">Messages</A>. TIdSMTPServer also exposes event handlers used for receiving incoming mail data like <A HREF="007707.html#0014" CLASS="Element59">OnReceiveRaw</A>, <A HREF="007707.html#0012" CLASS="Element59">OnReceiveMessage</A>, and <A HREF="007707.html#0013" CLASS="Element59">OnReceiveMessageParsed</A>.<P CLASS="Element10">
+TIdSMTPServer allows control over operational features of the server implementation using the command handler architecture and optional event handlers, including:<P CLASS="Element10">
+<UL>
+<LI><A HREF="007707.html#0008" CLASS="Element59">OnCommandAUTH</A><P CLASS="Element10">
+<LI><A HREF="007707.html#0009" CLASS="Element59">OnCommandEXPN</A><P CLASS="Element10">
+<LI><A HREF="007707.html#000A" CLASS="Element59">OnCommandHELP</A><P CLASS="Element10">
+<LI><A HREF="007707.html#000B" CLASS="Element59">OnCommandMAIL</A><P CLASS="Element10">
+<LI><A HREF="007707.html#000C" CLASS="Element59">OnCommandRCPT</A><P CLASS="Element10">
+<LI><A HREF="007707.html#000D" CLASS="Element59">OnCommandSAML</A><P CLASS="Element10">
+<LI><A HREF="007707.html#000E" CLASS="Element59">OnCommandSEND</A><P CLASS="Element10">
+<LI><A HREF="007707.html#000F" CLASS="Element59">OnCommandSOML</A><P CLASS="Element10">
+<LI><A HREF="007707.html#0010" CLASS="Element59">OnCommandTURN</A><P CLASS="Element10">
+<LI><A HREF="007707.html#0011" CLASS="Element59">OnCommandVRFY</A></UL>
+</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0000">TIdSMTPServer.AllowEHLO</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007707.html" CLASS="Element59">TIdSMTPServer</A>, <A HREF="013655.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Indicates if the server implements the EHLO command.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> AllowEHLO: boolean;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+AllowEHLO is a Boolean property that indicates if the SMTP server implements the Extended HELLO (EHLO) command verb used to identify the SMTP client to the SMTP server. When AllowEHLO is True, it is implied that the SMTP server implements one or more of the SMTP service extensions.<P CLASS="Element10">
+AllowEHLO is used in the TIdSMTPServer.CommandEHLO command event handler when the SMTP client has issues the SMTP EHLO command. When AllowEHLO is True, the server will <A HREF="006944.html" CLASS="Element59">send</A> the values in Messages.Greeting.EHLOReply that indicate the server capabilities. When AllowEHLO is False, the server will <A HREF="006944.html" CLASS="Element59">send</A> the value in Messages.Greeting.EHLONotSupported to the SMTP client connection.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0001">TIdSMTPServer.AuthMode</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007707.html" CLASS="Element59">TIdSMTPServer</A>, <A HREF="013656.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Indicates Authorization is used for the client connection prior to accepting MAIL data from the client connection.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> AuthMode: Boolean;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+AuthMode is a Boolean property that indicates if the SMTP server implementation requires authorization and/or authentication for client connections. AuthMode is used in the command handler for the SMTP MAIL command to determine if the threaded client has identified itself to the server using HELO or EHLO, and must be logged in prior to sending SMTP mail data. When AuthMode is True, the server will <A HREF="006944.html" CLASS="Element59">send</A> the Messages.NotLoggedIn protocol reply if the client connection is not logged in after the <A HREF="007707.html#0008" CLASS="Element59">OnCommandAUTH</A> event handler is triggered.<P CLASS="Element10">
+The default value for AuthMode is False as assigned in the <A HREF="007707.html#0003" CLASS="Element59">Create</A> constructor. The server implementation can change the value in AuthMode prior to setting Active to True.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0005">TIdSMTPServer.Messages</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007707.html" CLASS="Element59">TIdSMTPServer</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Represents replies that can be sent in responses to SMTP command verbs.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> Messages: <A HREF="007704.html" CLASS="Element59">TIdSMTPMessages</A>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Messages is a <A HREF="007704.html" CLASS="Element59">TIdSMTPMessages</A> property that represents various replies that can be sent by the SMTP server in responses to SMTP command verbs. Messages is used to assign the text for the ReplyNormal property in CommandHandler instances. Messages is also used in various command action handlers to construct response to the client connection.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0006">TIdSMTPServer.NoDecode</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007707.html" CLASS="Element59">TIdSMTPServer</A>, <A HREF="013657.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Indicates if the server can parse incoming message headers.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> NoDecode: Boolean;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+NoDecode is a Boolean property that indicates if the SMTP server should parse headers in incoming messages into <A HREF="007544.html" CLASS="Element59">TIdMessage</A> instances. NoDecode is used in the command action handler for the SMTP DATA command verb<P CLASS="Element10">
+NoDecode has significance when <A HREF="007707.html#0016" CLASS="Element59">ReceiveMode</A> contains the value rmMessageParsed, indicating that incoming messages are loaded and processed into a <A HREF="007544.html" CLASS="Element59">TIdMessage</A> instance. NoDecode is he default vaLue that the processed message will have assigned to the <A HREF="007544.html#0009" CLASS="Element59">TIdMessage.NoDecode</A> property for the incoming message.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Notes</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+NoDecode does not apply to values in the message body.<P CLASS="Element10">
+Applications must assign a procedure to the <A HREF="007707.html#0013" CLASS="Element59">OnReceiveMessageParsed</A> event handler to allow subsequent handling of the message instance or email addresses in the message recipient list.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0007">TIdSMTPServer.NoEncode</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007707.html" CLASS="Element59">TIdSMTPServer</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Indicates if encoding is allowed when processing mail data from a client connection.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> NoEncode: Boolean;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+NoEncode is a Boolean property that indicates if encoding is allowed when processing data received from a threaded SMTP client connection using the SMTP DATA command. NoEncode indicates the value that be used in the <A HREF="007544.html#000A" CLASS="Element59">TIdMessage.NoEncode</A> property for the parsed mail message when <A HREF="007707.html#0016" CLASS="Element59">ReceiveMode</A> is rmMessageParsed. Set <A HREF="007707.html#0006" CLASS="Element59">NoDecode</A> to indicate if decoding is allowed for parsed mail messages.<P CLASS="Element10">
+<STRONG>Note</STRONG>: NoEncode and <A HREF="007707.html#0006" CLASS="Element59">NoDecode</A> are not used when <A HREF="007707.html#0016" CLASS="Element59">ReceiveMode</A> contains a value other than rmMessageParsed.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0015">TIdSMTPServer.RawStreamType</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007707.html" CLASS="Element59">TIdSMTPServer</A>, <A HREF="013658.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Indicates the stream class used when reading mail data from a client connection.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> RawStreamType: <A HREF="007811.html" CLASS="Element59">TIdStreamType</A>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+RawStreamType is a <A HREF="007811.html" CLASS="Element59">TIdStreamType</A> property that indicates the TStream descendant class type to be used when reading mail data from a client connection. RawStreamType is used in the command handler for the SMTP DATA Command, and allows the server to determine the TStream descendant to use when capturing mail data from the threaded client connection.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0016">TIdSMTPServer.ReceiveMode</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007707.html" CLASS="Element59">TIdSMTPServer</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Indicates the method used to receive and process incoming mail data.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> ReceiveMode: <A HREF="007706.html" CLASS="Element59">TIdSMTPReceiveMode</A>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+ReceiveMode is a <A HREF="007706.html" CLASS="Element59">TIdSMTPReceiveMode</A> property that indicates the method used when handling incoming messages on the SMTP server. ReceiveMode is used in the command action handler for the SMTP DATA command verb.<P CLASS="Element10">
+When ReceiveMode contains rmRaw, incoming mail is read from the threaded client connection using the Capture method to store RFC message data in a TStream. Using rmRaw requires that a procedure be assigned to the <A HREF="007707.html#0014" CLASS="Element59">OnReceiveRaw</A> event handler to allow processing the stream for email addresses in the recipient list. If <A HREF="007707.html#0014" CLASS="Element59">OnReceiveRaw</A> is unassigned, an <A HREF="000474.html" CLASS="Element59">EIdTCPServerError</A> exception will be raised.<P CLASS="Element10">
+When ReceiveMode contains rmMessage, incoming mail is read from the threaded client connection using the Capture method to store RFC message headers in a <A HREF="007544.html" CLASS="Element59">TIdMessage</A> instance. Using rmMessage requires that a procedure be assigned to the <A HREF="007707.html#0012" CLASS="Element59">OnReceiveMessage</A> event handler to allow processing the TidMessage instance for email addresses in the recipient list. If <A HREF="007707.html#0012" CLASS="Element59">OnReceiveMessage</A> is unassigned, an <A HREF="000474.html" CLASS="Element59">EIdTCPServerError</A> exception will be raised.<P CLASS="Element10">
+When ReceiveMode contains rmMessageParsed, incoming mail is read from the threaded client connection using a method similar to rmMessage. rmMessageParsed sets the <A HREF="007707.html#0006" CLASS="Element59">NoDecode</A> property for the <A HREF="007544.html" CLASS="Element59">TIdMessage</A> instance to the value used in the SMTP server <A HREF="007707.html#0006" CLASS="Element59">NoDecode</A> property. rmMessageParsed also reconciles email addresses in the recipient list to determine the addresses which are stored in the BCCList for the <A HREF="007544.html" CLASS="Element59">TIdMessage</A> instance. Using rmMessageParse requires that a procedure be assigned to the <A HREF="007707.html#0013" CLASS="Element59">OnReceiveMessageParsed</A> event handler to allow processing the <A HREF="007544.html" CLASS="Element59">TIdMessage</A> instance for email addresses in the recipient list. If <A HREF="007707.html#0013" CLASS="Element59">OnReceiveMessageParsed</A> is unassigned, an <A HREF="000474.html" CLASS="Element59">EIdTCPServerError</A> exception will be raised.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0003">TIdSMTPServer.Create</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007707.html" CLASS="Element59">TIdSMTPServer</A>, <A HREF="013659.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Constructor for the object instance.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>constructor</STRONG> Create(AOwner: TComponent); <STRONG>override</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+AOwner: TComponent</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Owner of the object instance.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Create is the constructor for the object instance, and calls the inherited Create method to initialize property values. Create sets the value of DefaultPort to 25 as used by convention in the SMTP protocol.<P CLASS="Element10">
+Create assigns <A HREF="007708.html" CLASS="Element59">TIdSMTPServerThread</A> to ThreadClass to indicate the class used to create threads of execution for new SMTP client connections.<P CLASS="Element10">
+Create assigns the default values for the Greeting property, used when new client connections are established, and the ReplyUnknownCommand property, used when an unknown SMTP command is received by the SMTP server.<P CLASS="Element10">
+Create also initializes a group of <A HREF="007244.html" CLASS="Element59">TIdCommandHandler</A> instances in CommandHandlers used to implement SMTP server commands when CommandHandlersEnabled is True. The commands and command event procedures in the default SMTP server implementation include:<P CLASS="Element10">
+<UL>
+<LI>HELP - CommandHELP<P CLASS="Element10">
+<LI>SOML - CommandSOML<P CLASS="Element10">
+<LI>SEND - CommandSEND<P CLASS="Element10">
+<LI>SAML - CommandSAML<P CLASS="Element10">
+<LI>VRFY - CommandVRFY<P CLASS="Element10">
+<LI>EXPN - CommandEXPN<P CLASS="Element10">
+<LI>TURN - CommandTURN<P CLASS="Element10">
+<LI>RSET - CommandRSET<P CLASS="Element10">
+<LI>DATA - CommandData<P CLASS="Element10">
+<LI>HELO - CommandHELO<P CLASS="Element10">
+<LI>EHLO - CommandEHLO<P CLASS="Element10">
+<LI>MAIL - CommandMail<P CLASS="Element10">
+<LI>NOOP - (None Required)<P CLASS="Element10">
+<LI>QUIT - (Sets Disconnect to True)<P CLASS="Element10">
+<LI>RCPT - CommandRcpt</UL>
+</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0004">TIdSMTPServer.Destroy</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007707.html" CLASS="Element59">TIdSMTPServer</A>, <A HREF="013660.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Frees the object instance.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>destructor</STRONG> Destroy; <STRONG>override</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Destroy is the destructor for the object instance. Destroy frees resources allocated to the Message property in the <A HREF="007707.html#0003" CLASS="Element59">Create</A> constructor, and calls the inherited Destroy method.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0017">TIdSMTPServer.SetMessages</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007707.html" CLASS="Element59">TIdSMTPServer</A>, <A HREF="013661.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Assigns new values to the Message property.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>procedure</STRONG> SetMessages(AValue: <A HREF="007704.html" CLASS="Element59">TIdSMTPMessages</A>);</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+AValue: TIdSMTPMessages</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+<A HREF="007707.html#0005" CLASS="Element59">Messages</A> to be assigned to the property.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+SetMessages is a public procedure used as the write access specifier for the <A HREF="007707.html#0005" CLASS="Element59">Messages</A> property. SetMessages calls the Assign method for the <A HREF="007704.html" CLASS="Element59">TIdSMTPMessages</A> instance using the values specified in AValue.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0002">TIdSMTPServer.CheckUser</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007707.html" CLASS="Element59">TIdSMTPServer</A>, <A HREF="013662.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Event handler signalled when authenticating a client connection.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> CheckUser: <A HREF="008107.html" CLASS="Element59">TUserHandler</A>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+CheckUser is a <A HREF="008107.html" CLASS="Element59">TUserHandler</A> property that represents the event handler signalled when a <A HREF="007244.html" CLASS="Element59">TIdCommandHandler</A> is used to perform authentication for a threaded SMTP client connection. CheckUser receives arguments that include the <A HREF="007242.html" CLASS="Element59">TIdCommand</A> being executed, the Username and Password from the client thread, and an Accepted flag to indicate if the user authentication is valid.<P CLASS="Element10">
+Applications must assign a propcedure to the event handler to allow responding to the event notification, and to implement the processing required to perform authorization of the client account.<P CLASS="Element10">
+Set the value of the Accepted argument to True to indicate successful authentication, or False when the Username or Password cannot be authenticated. When CheckUser is not assigned, the account authentication is always accepted.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0008">TIdSMTPServer.OnCommandAUTH</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007707.html" CLASS="Element59">TIdSMTPServer</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Event handler signalled to allow authentication using custom protocols and methods.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> OnCommandAUTH: <A HREF="007139.html" CLASS="Element59">TBasicHandler</A>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+ASender</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Command generating the event notification.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+OnCommandAUTH is a <A HREF="007139.html" CLASS="Element59">TBasicHandler</A> property that represents the command event handler used to implement the SMTP AUTH command verb, and allows the server to perform custom authentication methods or protocols not found in the default server implementation in CommandHandlers.<P CLASS="Element10">
+OnCommandAUTH is used in the AUTH Command event handler when the client connection has provided identication using the EHLO command. Applications must assign a procedure to the OnCommandAUTH event handler to allow responding to the event notification. When OnCommandAUTH is not assigned, the server uses the internal authorization mechanism, equivalent to AUTH LOGIN, and the <A HREF="007707.html#0002" CLASS="Element59">CheckUser</A> event handler.<P CLASS="Element10">
+<STRONG>Note</STRONG>: When the client connection uses the HELO command, authentication is not performed according to the SMTP protocol.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0009">TIdSMTPServer.OnCommandEXPN</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007707.html" CLASS="Element59">TIdSMTPServer</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Event handler signalled to implement expanding email addresses or mailing list membership.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> OnCommandEXPN: <A HREF="007139.html" CLASS="Element59">TBasicHandler</A>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+ASender</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Command generating the event notification.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+OnCommandEXPN is a <A HREF="007139.html" CLASS="Element59">TBasicHandler</A> property that represents the event handler signalled when executing the SMTP EXPN command verb using CommandHandlers. OnCommandEXPN allows the server to implement the processing needed to expand the email or mailing list address provided in the <A HREF="007242.html" CLASS="Element59">TIdCommand</A> in ASender a return the email addresses that are members of the list.<P CLASS="Element10">
+Application must assign a procedure to the OnCommandEXPN event handler to allow responding to the event notification. When OnCommandEXPN is unassigned, the server will <A HREF="006944.html" CLASS="Element59">send</A> the text in Messages.ErrorReply to the client connection.<P CLASS="Element10">
+An SMTP server may choose to disable EXPN for security reasons. EXPN has been used by spammers to harvest email addresses. An SMTP server should also use some type of authentication mechanism, like <A HREF="007707.html#0008" CLASS="Element59">OnCommandAUTH</A>, to prevent this type of abuse.<P CLASS="Element10">
+When EXPN is enabled, the implementation must not indicate an email address as verified when it has not been tested.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="000A">TIdSMTPServer.OnCommandHELP</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007707.html" CLASS="Element59">TIdSMTPServer</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Event handler signalled to implement the SMTP Help command.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> OnCommandHELP: <A HREF="007139.html" CLASS="Element59">TBasicHandler</A>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+ASender</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Command generating the event notification.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+OnCommandHELP is a <A HREF="007139.html" CLASS="Element59">TBasicHandler</A> property that represents the event handler signalled when executing the SMTP HELP command verb using a CommandHandler. OnCommandHELP implements the processign needed to <A HREF="006944.html" CLASS="Element59">send</A> the list of commands supported by the SMTP server to an SMTP client connection.<P CLASS="Element10">
+The server implementation must assign a procedure to the OnCommandHELP event handler to allow responding to the event notification. When OnCommandHELP is unassigned, the text in Messages.ErrorReply is sent to the client connection.<P CLASS="Element10">
+OnCommandHELP can be used to request more specific help detail by including an optional parameter value in the <A HREF="007242.html#0003" CLASS="Element59">TIdCommand.Params</A> found in ASender.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="000B">TIdSMTPServer.OnCommandMAIL</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007707.html" CLASS="Element59">TIdSMTPServer</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Event handler signalled during execution of the SMTP MAIL command.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> OnCommandMAIL: <A HREF="007184.html" CLASS="Element59">THasAddress2</A>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+Accept</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Indicates if the email address is accepted or rejected.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+ASender</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Command generating the event noticication.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+EMailAddress</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Origin email address for the message.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+OnCommandMAIL is a <A HREF="007184.html" CLASS="Element59">THasAddress2</A> property that represents the event handler signalled when executing the SMTP MAIL command using CommandHandlers for the threaded client connection.<P CLASS="Element10">
+The SMTP MAIL command is used to initiate a mail transaction for dellivery of mail data to the SMTP server. The SMTP server will then decide if the mail data can be deliverd to mailboxes or passed to another SMTP server. If service extensions were negotiated, using <A HREF="007707.html#0000" CLASS="Element59">AllowEHLO</A>, the MAIL command may also carry parameters associated with a particular service extension.<P CLASS="Element10">
+The SMTP server provides an internal MAIL command action handler that insures that the client connection has been identified using the EHLO or HELO command prior to processing arguments in the MAIL command. When no client identification has been provided, the text in the Messages.Greeting.NoHello is sent to the client connection.<P CLASS="Element10">
+If the client connection has been identified to the SMTP server, the command action handler parses the origin email address from <A HREF="007242.html#000B" CLASS="Element59">TIdCommand.UnparsedParams</A> values found in ASender. When no client identification has been provided, the text in the Messages.Greeting.NoHello is sent to the client connection.<P CLASS="Element10">
+The SMTP server implementation must assign a procedure to the OnCommandMail event handler to allow responding to the <A HREF="007184.html" CLASS="Element59">THasAddress2</A> event notification. The event handler is used to validate the email address that will be used in the TIdSMTPServerThread.From property for the threaded client connection, and indicate if the address has been accepted. The event handler must assign the email address to the ASender.From property when Accepted is True. If the email address for thesender is not accepted, the text in Messages.RcpReplies.AddressErrorReply is sent to the client connection.<P CLASS="Element10">
+When OnCommandMail is unassigned, the email address parsed by the command action handler is assigned to the ASender.FRom property, and the text in Messages.RcpReplies.AddressOKReply is sent to the client connection.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="000C">TIdSMTPServer.OnCommandRCPT</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007707.html" CLASS="Element59">TIdSMTPServer</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Event handler signalled during execution of the SMTP RCPT command.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> OnCommandRCPT: <A HREF="007183.html" CLASS="Element59">THasAddress</A>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+Accept</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Indicates if the address is accepted.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+ASender</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+The command instance generating the event.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+CustomError</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Message to use when a protocol error occurs.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+EMailAddress</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Email address received in the command.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+ToForward</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Indicates if the address requires forwarding.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+OnCommandRCPT is a <A HREF="007183.html" CLASS="Element59">THasAddress</A> property that represents the event handler signalled when executing the SMTP RCPT command using CommandHandlers for the threaded client connection.<P CLASS="Element10">
+The SMTP RCPT command is used to identify an individual recipient of the mail data. Multiple recipients are specified by multiple use of this command. The argument field contains an email address that is the destination mailbox for the mail data, and may contain optional parameters.<P CLASS="Element10">
+If service extensions were negotiated, when ALlowEHLO is True, the RCPT command may also carry parameters associated with a particular service extension offered by the server. The client must not transmit parameters other than those associated with a service extension offered by the server in its EHLO response.<P CLASS="Element10">
+The SMTP server implementation provides a RCPT command action handler that performs processing required prior to signalling the OnCommandRCPT event handler. The command action handler insures that the client connection has been identified using the HELO or EHLO command. If the client has not been identified, the text in Messages.Greeting.NoHello is sent to the client connection.<P CLASS="Element10">
+The RCPT command action handler parses values in ASender.UnparsedParams, and constructs a email address that can be used in the OnCommandRCPT event handler.<P CLASS="Element10">
+The SMTP server implementation must assign a procedure to the OnCommandRCPT event handler top allow responding to the TIdHasAddress event notification. The OnCOmmandRCPT event handler is responsible for determining if subsequent mail data can be Accepted, if delivery of mail data requires Forwarding, and assigning any CustomError messages that occur during the event handler.<P CLASS="Element10">
+When no error messages are generated in OnCommanRCPT, the email addresses are assigned to ASender.RcptList for the threaded client connection. If error messages are detected, the text in the errror message is sent to the client connection.<P CLASS="Element10">
+When OnCommandRCPT is unassigned, the parsed email addresses are assigned to ASender.RcptList, and the text in Messages.RcpReplies.AddressOkReply is sent to client connection.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="000D">TIdSMTPServer.OnCommandSAML</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007707.html" CLASS="Element59">TIdSMTPServer</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Event handler signalled to implement the SMTP SAML command.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> OnCommandSAML: <A HREF="007139.html" CLASS="Element59">TBasicHandler</A>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+ASender</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Command generating the event notification.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+OnCommandSAML is a <A HREF="007139.html" CLASS="Element59">TBasicHandler</A> property that represents the event handler signalled to initiate a mail transaction in which the mail data is delivered to one or more terminals or mailboxes. The SMTP SAML command allows delivery of mail data to a terminal, when the user is connected to the host and accepts terminal messages, or to a recipient's mailbox.<P CLASS="Element10">
+OnCommandSAML will use the list of hosts or email addresses and the sender mailbox provided in the <A HREF="007242.html#0003" CLASS="Element59">TIdCommand.Params</A> found in ASender. When a list of hosts is present, they represent the reverse source route used to relay the mail message., and is used to return non-delivery notices for the message. The first host in the list is the most recent relay.<P CLASS="Element10">
+The server implementation must assign a procedure to the OnCommandSAML event handler to allow responding to the event notification. When OnCommandSAML is unassigned, the text in Message.ErrorReply is sent to the client connection.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="000E">TIdSMTPServer.OnCommandSEND</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007707.html" CLASS="Element59">TIdSMTPServer</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Event handler signalled to implement the SMTP SEND command.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> OnCommandSEND: <A HREF="007139.html" CLASS="Element59">TBasicHandler</A>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+ASender</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Command generating the event notification.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+OnCommandSEND is a <A HREF="007139.html" CLASS="Element59">TBasicHandler</A> property that represents the event handler signalled when executing the SMTP SEND command verb using CommandHandlers. OnCommandSEND allows the SMTP server to initate a mail transaction where mail data is delivered to one or more terminals.<P CLASS="Element10">
+OnCommandSEND is used with the list of hosts and the sender email address found in the <A HREF="007242.html#0003" CLASS="Element59">TIdCommand.Params</A> values found in ASender.<P CLASS="Element10">
+When the list of hosts is present, it is a reverse source route and indicates that the mail was relayed through each host on the list. The first host in the list was the most recent relay. This list is used as a source route to return non-delivery notices to the sender.<P CLASS="Element10">
+An SMTP server implementation must assign a preocedure to the OnCommandSEND event handler to allow responding to the event noticication. When OnCommandSEND is unassigned, the text in Messages.ErrorReply is sent to the client connection.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="000F">TIdSMTPServer.OnCommandSOML</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007707.html" CLASS="Element59">TIdSMTPServer</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Event handler signalled to implement the SMTP SOML command.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> OnCommandSOML: <A HREF="007139.html" CLASS="Element59">TBasicHandler</A>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+ASender</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Command generating the event notification.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+OnCommandSOML is a <A HREF="007139.html" CLASS="Element59">TBasicHandler</A> property that represents the event handler signalled to initiate a mail transaction in which the mail data is delivered to one or more terminals or mailboxes. The SMTP SOML command allows delivery of mail data to a terminal, when the user is connected to the host and accepts terminal messages, or to a recipient's mailbox.<P CLASS="Element10">
+OnCommandSOML will use the list of hosts or email addresses and the sender mailbox provided in the <A HREF="007242.html#0003" CLASS="Element59">TIdCommand.Params</A> found in ASender. When a list of hosts is present, they represent the reverse source route used to relay the mail message., and is used to return non-delivery notices for the message. The first host in the list is the most recent relay.<P CLASS="Element10">
+The server implementation must assign a procedure to the OnCommandSOML event handler to allow responding to the event notification. When OnCommandSOML is unassigned, the text in Message.ErrorReply is sent to the client connection.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0010">TIdSMTPServer.OnCommandTURN</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007707.html" CLASS="Element59">TIdSMTPServer</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Event handler signalled to implement the SMTP TURN command.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> OnCommandTURN: <A HREF="007139.html" CLASS="Element59">TBasicHandler</A>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+ASender</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Command generating the event notification.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+OnCommandTURN is a <A HREF="007139.html" CLASS="Element59">TBasicHandler</A> property that represents the event handler signalled when executing the SMTP TURN command verb. OnCommandTURN allows the server to perform role negotiation with another SMTP host, where the receiving server will begin to act as a sending server, or refuse the role negotioation.<P CLASS="Element10">
+The SMTP TURN command, described in RFC 821, raises important security issues since, in the absence of strong authentication of the host requesting that the client and server switch roles, it can easily be used to divert mail from its correct destination. Its use is deprecated in RFC 2821. SMTP systems should not use it unless the server can authenticate the client.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0011">TIdSMTPServer.OnCommandVRFY</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007707.html" CLASS="Element59">TIdSMTPServer</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Event handler signalled to implement the SMTP VRFY command.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> OnCommandVRFY: <A HREF="007139.html" CLASS="Element59">TBasicHandler</A>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+ASender</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Command generating the event notification.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+OnCommandVRFY is a <A HREF="007139.html" CLASS="Element59">TBasicHandler</A> property that represents the event handle signalled when executing the SMTP VRFY command using CommandHandlers. OnCommandVRFY allows the SMTP server to verify that the <A HREF="007242.html#0003" CLASS="Element59">TIdCommand.Params</A> value specified in ASender contains a valid user name or email address for a mailbox on the SMTP server.<P CLASS="Element10">
+The SMTP server implementation must assign a procedure to the OnCommandVRFY event handler to allow responding to the event notification. When OnCommandVRFY is unassigned, the text in Messages.ErrorReply is sent to the client connection.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0012">TIdSMTPServer.OnReceiveMessage</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007707.html" CLASS="Element59">TIdSMTPServer</A>, <A HREF="013663.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Event handler signalled when reading and parsin incoming mail into a message instance.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> OnReceiveMessage: <A HREF="008021.html" CLASS="Element59">TOnReceiveMessage</A>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+OnReceiveMessage is a <A HREF="008021.html" CLASS="Element59">TOnReceiveMessage</A> property that represents the event handler signalled when a threaded client connection reads and processes incoming mail data. OnReceiveMessage is used in the SMTP DATA command event handler when <A HREF="007707.html#0016" CLASS="Element59">ReceiveMode</A> contains the value rmMessage.<P CLASS="Element10">
+The command event handler creates a <A HREF="007544.html" CLASS="Element59">TIdMessage</A> instance to hold the values in the incoming data, and captures message headers found in the incoming mail.<P CLASS="Element10">
+Applications must assign a procedure to the OnReceiveMessage event handler to allow processing of the message header data or email addresses in the recipient list for the client connection. If OnReceiveMessage is unassigned, an <A HREF="000474.html" CLASS="Element59">EIdTCPServerError</A> exception will be raised.<P CLASS="Element10">
+OnReceiveMessage must fully process the message instance containing the message headers, since the message instance will be freed prior to exiting from the DATA command action handler.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0013">TIdSMTPServer.OnReceiveMessageParsed</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007707.html" CLASS="Element59">TIdSMTPServer</A>, <A HREF="013664.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Event handler signalled when reading and parsing incoming mail into a message instance, including message headers.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> OnReceiveMessageParsed: <A HREF="008021.html" CLASS="Element59">TOnReceiveMessage</A>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+OnReceiveMessageParsed is a <A HREF="008021.html" CLASS="Element59">TOnReceiveMessage</A> property that represents the event handler signalled when a threaded client connection reads and processes incoming mail data. OnReceiveMessageParsed is used in the SMTP DATA command event handler when <A HREF="007707.html#0016" CLASS="Element59">ReceiveMode</A> contains the value rmMessageParsed.<P CLASS="Element10">
+The command event handler creates a <A HREF="007544.html" CLASS="Element59">TIdMessage</A> instance to hold the values in the incoming data, and sets the value of <A HREF="007707.html#0006" CLASS="Element59">NoDecode</A> property in the message instance to the value used by the SMTP server. The command event handler also reads and parses message headers into their corresponding property values. The command event handler reconciles email addresses in the recipient list for the client connection to determine the addresses to include in the BCCList for the message instance.<P CLASS="Element10">
+Applications must assign a procedure to the OnReceiveMessageParsed event handler to allow processing of the message data or email addresses in the recipient list for the client connection. If OnReceiveMessageParsed is unassigned, an <A HREF="000474.html" CLASS="Element59">EIdTCPServerError</A> exception will be raised.<P CLASS="Element10">
+OnReceiveMessageParsed must fully process the message instance containing the message headers and message body, since the message instance will be freed prior to exiting from the DATA command action handler.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0014">TIdSMTPServer.OnReceiveRaw</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007707.html" CLASS="Element59">TIdSMTPServer</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Event handler signalled for incoming mail in a TMemoryStream.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> OnReceiveRaw: <A HREF="008022.html" CLASS="Element59">TOnReceiveRaw</A>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+ASender</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Command generating the event notification.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+RCPT</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Recipients for the message.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+VStream</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Memory streamcontaining the message headers and body.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+OnReceiveRaw is a <A HREF="008022.html" CLASS="Element59">TOnReceiveRaw</A> property that represents the event handler signalled to handle incoming mail from the command action handler for the SMTP DATA command. OnReceiveRaw allows the SMTP server to process RFC message data read using a TStream when <A HREF="007707.html#0016" CLASS="Element59">ReceiveMode</A> is rmRaw.<P CLASS="Element10">
+The DATA command action handler reads data from the threaded client connection using Capture to store message data prior to signalling the event handler.<P CLASS="Element10">
+Applications must assign a procedure to the OnReceiveRaw event handler to allow processing of the message data or email addresses in the recipient list for the client connection. If OnReceiveRaw is unassigned, an <A HREF="000474.html" CLASS="Element59">EIdTCPServerError</A> exception will be raised.<P CLASS="Element10">
+OnReceiveRaw must fully process the stream containing the message headers and message body, since the stream will be freed prior to exiting from the DATA command action handler.</DIV>
+</DIV>
+<DIV CLASS="Element62">
+<HR>Created with Doc-O-Matic 2 donated to <STRONG><A HREF="http://www.delphi-jedi.org">Project JEDI</A></STRONG>. Commercial license available from the <STRONG><A HREF="http://www.doc-o-matic.com">Doc-O-Matic site</A></STRONG>.</DIV>
+</DIV></BODY></HTML>

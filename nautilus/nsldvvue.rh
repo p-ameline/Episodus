@@ -1,0 +1,200 @@
+// Ligne de vie
+#define IDC_NEWPREOCCUP     800
+
+#define IDC_CHG_PREOCCUP    801
+#define IDC_CHG_PREO_TYP    802
+#define IDC_CHG_PREO_DAT    803
+#define IDC_CHG_PREO_IDX    804
+
+#define IDC_EVOL_PREOCCUP   805
+#define IDC_EVOL_PREO_TYP   806
+#define IDC_EVOL_PREO_IDX   807
+#define IDC_ADD_PREO_OBJ    834
+
+#define IDC_SUPPRESS_PREO   808
+#define IDC_MANAGE_RIGHTS   809
+
+#define IDM_PREOCCUP        810
+
+#define IDC_NEWRISK         820
+#define IDC_NEWSOCIAL       825
+
+#define CM_LDV_PIXSECOND    828
+#define CM_LDV_PIXMINUTE    829
+#define CM_LDV_PIXHOUR      830
+#define CM_LDV_PIXDAY       831
+#define CM_LDV_PIXWEEK      832
+#define CM_LDV_PIXMONTH     833
+
+#define ID_SEVERITY         840
+#define ID_DRUG_DISPLAY     841
+#define ID_COMPRESS         842
+#define ID_PIXEL_PU         843
+
+#define ID_SHOW_DRUGS       860
+#define ID_SHOW_GOALS       861
+#define ID_SHOW_FOLLOW_UP   862
+#define ID_SHOW_CURVES      863
+#define ID_SHOW_PROJECT     864
+#define ID_SHOW_QOFLIFE     865
+
+// Dialogue NEW_PROBLEM
+#define PREOCCUP_EDIT	      101
+#define PROB_DATE_DEB	      102
+#define PROB_DATE_FIN	      103
+#define IDR_CHRONIQUE	      104
+#define IDC_NBJOURS	        105
+#define IDR_DANS	          106
+#define IDR_DUREE	          107
+#define IDR_LE	            108
+#define IDC_GRAVITE	        109
+#define IDC_RISQUE	        110
+#define IDC_PROGRESSGRAV	  111
+#define IDC_PROGRESSRISK	  112
+#define IDC_DETAILS	        114
+#define DATE_DEB_TEXT       115
+#define DATE_FIN_TEXT       116
+#define JOURS_TEXT          117
+#define SEVER_TEXT          118
+#define DUSOI_BTN           119
+#define IDC_COC             120
+
+// Dialogue NEW_DRUG
+#define DRUG_EDIT           101
+#define DRUG_DATE_DEB	      102
+#define DRUG_DATE_FIN	      103
+#define IDR_DRG_CHRONIQUE   104
+#define IDC_DRG_NBJOURS	    105
+#define IDR_DRG_DANS        106
+#define IDR_DRG_DUREE       107
+#define IDR_DRG_LE          108
+#define IDC_DRG_NBJOURS_TXT 109
+#define DATE_DEB_DRG_TEXT   110
+#define DATE_FIN_DRG_GROUP  111
+#define DATE_DEBPRESC_TEXT  112
+#define DATE_FINPRESC_TEXT  113
+#define PRESC_DATE_DEB      114
+#define PRESC_DATE_FIN      115
+#define TRT_GROUP           116
+#define DRG_UNIT            117
+#define DRG_UNIT_TXT        118
+#define PRESCR_GROUP        119
+#define PRESCR_DURA_TXT     120
+#define PRESCR_DURA         121
+#define PRESCR_DURA_UPDN    122
+#define PRESCR_DURA_UNIT    123
+#define PRESCR_RENEW_TXT    124
+#define PRESCR_RENEW        125
+#define PRESCR_RENEW_UPDN   126
+#define PRESCR_RENEW_NBTXT  127
+#define POSO_GROUP          128
+#define POSO_MORNING_TXT    129
+#define POSO_MORNING        130
+#define POSO_MORNING_UPDN   131
+#define POSO_NOON_TXT       132
+#define POSO_NOON           133
+#define POSO_NOON_UPDN      134
+#define POSO_NIGHT_TXT      135
+#define POSO_NIGHT          136
+#define POSO_NIGHT_UPDN     137
+#define POSO_BED_TXT        138
+#define POSO_BED            139
+#define POSO_BED_UPDN       140
+#define DRUG_COMPLEX_MODE   141
+#define FREE_TEXT_BUTTON    142
+#define ALD_BUTTON          143
+#define NS_BUTTON           144
+#define NR_BUTTON           145
+
+// Dialogue PROP_PREO
+#define IDC_LISTVIEW_ACTUEL	101
+#define IDC_LISTVIEW_ANCIEN	102
+#define IDC_LISTVIEW_GOALS	103
+#define IDC_NOUVEAU	        104
+#define IDC_RENOUV	        105
+#define IDC_MODIFIER	      106
+#define IDC_ARRETER	        107
+#define IDC_LIST_GROUP	    108
+#define IDC_GLOBAL	        109
+#define IDC_LOCAL	          110
+#define IDC_ORDONNANCE	    111
+#define IDC_ORDO_SEL  	    112
+#define IDC_NEW_REF    	    113
+#define IDC_ADD_TO_REF    	114
+
+// Dialogue NEW_MEDIC
+#define IDC_MEDIC_EDIT      101
+
+// Dialogue OPEN_MULTIDOCS
+#define IDC_LISTVIEW_DOCS	  101
+#define IDC_SELECT_ALL	    102
+
+// Dialogue NEW_CURVE
+#define CURVE_EDIT	        101
+#define CURVE_TEXT	        102
+#define COLOR_RED_EDIT	    103
+#define COLOR_RED_TEXT	    104
+#define COLOR_RED_UPDN	    105
+#define COLOR_GRE_EDIT	    106
+#define COLOR_GRE_TEXT	    107
+#define COLOR_GRE_UPDN	    108
+#define COLOR_BLU_EDIT	    109
+#define COLOR_BLU_TEXT	    110
+#define COLOR_BLU_UPDN	    111
+#define SIZE_EDIT	          112
+#define SIZE_TEXT	          113
+#define SIZE_UPDN	          114
+#define TYPE_SOLID	        115
+#define TYPE_DASH	          116
+#define TYPE_DOT	          117
+#define TYPE_DASHDOT	      118
+#define TYPE_DASHDOTDOT	    119
+#define SHADE_CURVE	        120
+#define SHADE_TYPE	        121
+#define SHADE_SAMPLE	      122
+#define INCLUDE_ZERO	      123
+#define POINT_CIRCLE	      124
+#define POINT_SQUARE	      125
+#define POINT_TRIANGLE	    126
+#define POINT_STAR	        127
+#define UPPER_AXIS_EDIT	    128
+#define UPPER_AXIS_TEXT	    129
+#define UPPER_AXIS_UPDN	    130
+#define LOWER_AXIS_EDIT	    131
+#define LOWER_AXIS_TEXT	    132
+#define LOWER_AXIS_UPDN	    133
+#define DYNAMIC_COLOURING	  134
+#define UNIT_EDIT	          135
+#define UNIT_TEXT	          136
+#define SHADE_POINT	        137
+#define SHADE_AXIS	        138
+#define COLORSAMPLE_RED	    139
+#define COLORSAMPLE_GREEN	  140
+#define COLORSAMPLE_YELLOW	141
+#define COLORSAMPLE_BLUE	  142
+#define COLORSAMPLE_MAGENTA	143
+#define COLORSAMPLE_CYAN	  144
+#define SHADE_LINE_TYPE	    145
+#define POINT_RADIUS_EDIT	  146
+#define POINT_RADIUS_TEXT	  147
+#define POINT_RADIUS_UPDN	  148
+
+// Ammorce -> Libellés
+#define IDI_LDVOBJET16	    6171
+#define IDI_LDVSSOBJ16	    6172
+#define	IDI_LDVCURS16	      6173
+#define	IDI_LDVZOOM16	      6174
+#define IDC_ZOOMCURSOR	    6175
+
+// 
+#define GOAL_RED            1001
+#define GOAL_YELLOW         1002
+#define GOAL_GREEN          1003
+#define GOAL_BLUE           1004
+#define GOAL_EARLY_GREEN    1005
+#define GOAL_EARLY_YELLOW   1006
+#define GOAL_EARLY_RED      1007
+
+#define DRUG_ORDER_YES      1008
+#define DRUG_ORDER_NO       1009
+

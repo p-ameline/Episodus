@@ -1,0 +1,150 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+<TITLE>TIdEcho</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <META name="GENERATOR" content="Doc-O-Matic">
+    <LINK rel="STYLESHEET" href="default.css" type="text/css">
+
+<SCRIPT LANGUAGE="JavaScript1.2" SRC="scripts.js"></SCRIPT>
+</HEAD>
+<BODY CLASS="Element57">
+<TABLE BORDER="0" BGCOLOR="#AACCFF" WIDTH="100%" CELLSPACING="0" CELLPADDING="0">
+<TR><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element1">
+Indy 9</DIV>
+</TD><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element2">
+<A HREF="content.html" CLASS="Element59">Content</A> | <A HREF="idx.html" CLASS="Element59">Index</A> | <A HREF="symref.html" CLASS="Element59">Reference</A></DIV>
+</TD></TR></TABLE><DIV CLASS="Element58">
+<DIV CLASS="Element5">
+TIdEcho</DIV>
+<DIV CLASS="Element7">
+<A HREF="010759.html" CLASS="Element59">Hierarchy</A>, <A HREF="010760.html" CLASS="Element59">Properties</A>, <A HREF="010761.html" CLASS="Element59">Methods</A>, <A HREF="010762.html" CLASS="Element59">Events</A>, <A HREF="010763.html" CLASS="Element59">See Also</A>, <A HREF="002175.html" CLASS="Element59">Unit: IdEcho</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Implements an <A HREF="007303.html#0001" CLASS="Element59">Echo</A> client.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12">TIdEcho = <STRONG>class</STRONG>(<A HREF="007827.html" CLASS="Element59">TIdTCPClient</A>)</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Unit</DIV>
+<DIV CLASS="Element69">
+<A HREF="002175.html" CLASS="Element59">IdEcho</A></DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+TIdEcho implements the TCP-based variant of the <A HREF="007303.html#0001" CLASS="Element59">Echo</A> Protocol as described in the Internet Standards document RFC 862 - <A HREF="007303.html#0001" CLASS="Element59">Echo</A> Protocol (http://www.rfc-editor.org/rfc/rfc862.txt) .<P CLASS="Element10">
+TIdEcho is a <A HREF="007827.html" CLASS="Element59">TIdTCPClient</A> descendant that is a useful debugging and measurement protocol where the data sent to the server is simply sent back to the originating client. TIdEcho is provided as a measure of the time it takes to <A HREF="006944.html" CLASS="Element59">send</A> and receive data from an <A HREF="007303.html#0001" CLASS="Element59">Echo</A> Server (<A HREF="007304.html" CLASS="Element59">TIdECHOServer</A>).<P CLASS="Element10">
+The TCP-based implementation of the <A HREF="007303.html#0001" CLASS="Element59">Echo</A> Protocol is a connection based application. An <A HREF="007303.html#0001" CLASS="Element59">Echo</A> Server listens for TCP connections on TCP <A HREF="007303.html#0003" CLASS="Element59">Port</A> 7. When a connection is established, any received data is returned to the originating client. The connection continues until the client application closes the connection.<P CLASS="Element10">
+To use TIdEcho, perform the following actions in your application:<P CLASS="Element10">
+<UL>
+<LI>Call Connect to <A HREF="000295.html" CLASS="Element59">connect</A> to the <A HREF="007303.html#0001" CLASS="Element59">Echo</A> Server.<P CLASS="Element10">
+<LI>Call <A HREF="007303.html#0001" CLASS="Element59">Echo</A> to <A HREF="006944.html" CLASS="Element59">send</A> data to the server and receive the server response.<P CLASS="Element10">
+<LI>Use <A HREF="007303.html#0002" CLASS="Element59">EchoTime</A> to retrieve the number of milliseconds needed to <A HREF="006944.html" CLASS="Element59">send</A> and receive data from the server.<P CLASS="Element10">
+<LI>Call Disconnect to close the connection to the server.</UL>
+</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0002">TIdEcho.EchoTime</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007303.html" CLASS="Element59">TIdEcho</A>, <A HREF="010764.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Indicates the elapsed time needed to <A HREF="006944.html" CLASS="Element59">send</A> and receive echo data.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> EchoTime: Cardinal;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+EchoTime is a Cardinal property that indicates the number of milliseconds required to <A HREF="006944.html" CLASS="Element59">send</A> and receive data using the <A HREF="007303.html#0001" CLASS="Element59">Echo</A> method. Use EchoTime to determine when there may be problems with the network or connection.<P CLASS="Element10">
+EchoTime is calculated using <A HREF="000669.html" CLASS="Element59">GetTickDiff</A>, from <A HREF="002193.html" CLASS="Element59">IdGlobal.pas</A>, and represents the elapsed milliseconds from the start of the echo request until completion of the echo response. EchoTime is adjusted to reflect situations where the elapsed time reverts to a 0 (zero) value after the <A HREF="007303.html#0001" CLASS="Element59">Echo</A> transmission has been started.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0003">TIdEcho.Port</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007303.html" CLASS="Element59">TIdEcho</A>, <A HREF="010765.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Port number for the ECHO protocol.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> Port: integer;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Port is an Integer property that represents the port number used by the ECHO protocol. Port is redefined in <A HREF="007303.html" CLASS="Element59">TIdEcho</A> to establish the default port number for the protocol (<A HREF="002438.html" CLASS="Element59">IdPORT_ECHO</A>). The default value for Port is assigned in the <A HREF="007303.html#0000" CLASS="Element59">Create</A> constructor.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0000">TIdEcho.Create</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007303.html" CLASS="Element59">TIdEcho</A>, <A HREF="010766.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Creates a <A HREF="007303.html" CLASS="Element59">TIdEcho</A> instance.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>constructor</STRONG> Create(AOwner: TComponent); <STRONG>override</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+AOwner: TComponent</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Owner of the object instance.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Create constructs a properly initialized instance of <A HREF="007303.html" CLASS="Element59">TIdEcho</A> using the inherited Create constructor, and initializes <A HREF="007303.html#0003" CLASS="Element59">Port</A> to the constant value <A HREF="002438.html" CLASS="Element59">IdPORT_ECHO</A> (Decimal <STRONG>7</STRONG>) as required by the <A HREF="007303.html#0001" CLASS="Element59">Echo</A> Protocol.<P CLASS="Element10">
+An application must initialize Host and call Connect prior to sending data using the <A HREF="007303.html#0001" CLASS="Element59">Echo</A> method. Call Disconnect prior to freeing the object instance.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0001">TIdEcho.Echo</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007303.html" CLASS="Element59">TIdEcho</A>, <A HREF="010767.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Sends and receives echo data.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>function</STRONG> Echo(AText: <STRONG>String</STRONG>): <STRONG>String</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+AText: String</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Data to <A HREF="006944.html" CLASS="Element59">send</A> to the echo server.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Return Value</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+String - Data received from the echo server.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Echo is a String function that sends the text in AText to the echo server, and returns the text received from the echo server. If the returned value is not the same as the text in AText, there may be a problem with the server or the TCP connection.<P CLASS="Element10">
+Echo monitors the time needed to <A HREF="006944.html" CLASS="Element59">send</A> the echo request and receive the echo response, and stores the elapsed time in <A HREF="007303.html#0002" CLASS="Element59">EchoTime</A>. Echo uses <A HREF="000669.html" CLASS="Element59">GetTickDiff</A>, from <A HREF="002193.html" CLASS="Element59">IdGlobal.pas</A>, to retrieve both the starting and ending milliseconds measurements used to determine <A HREF="007303.html#0002" CLASS="Element59">EchoTime</A>. Echo can account for the elapsed time reverting to a 0 (zero) value after starting the Echo transmission.</DIV>
+</DIV>
+<DIV CLASS="Element62">
+<HR>Created with Doc-O-Matic 2 donated to <STRONG><A HREF="http://www.delphi-jedi.org">Project JEDI</A></STRONG>. Commercial license available from the <STRONG><A HREF="http://www.doc-o-matic.com">Doc-O-Matic site</A></STRONG>.</DIV>
+</DIV></BODY></HTML>

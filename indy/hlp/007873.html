@@ -1,0 +1,532 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+<TITLE>TIdUDPBase</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <META name="GENERATOR" content="Doc-O-Matic">
+    <LINK rel="STYLESHEET" href="default.css" type="text/css">
+
+<SCRIPT LANGUAGE="JavaScript1.2" SRC="scripts.js"></SCRIPT>
+</HEAD>
+<BODY CLASS="Element57">
+<TABLE BORDER="0" BGCOLOR="#AACCFF" WIDTH="100%" CELLSPACING="0" CELLPADDING="0">
+<TR><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element1">
+Indy 9</DIV>
+</TD><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element2">
+<A HREF="content.html" CLASS="Element59">Content</A> | <A HREF="idx.html" CLASS="Element59">Index</A> | <A HREF="symref.html" CLASS="Element59">Reference</A></DIV>
+</TD></TR></TABLE><DIV CLASS="Element58">
+<DIV CLASS="Element5">
+TIdUDPBase</DIV>
+<DIV CLASS="Element7">
+<A HREF="014629.html" CLASS="Element59">Hierarchy</A>, <A HREF="014630.html" CLASS="Element59">Properties</A>, <A HREF="014631.html" CLASS="Element59">Methods</A>, <A HREF="014632.html" CLASS="Element59">Events</A>, <A HREF="014633.html" CLASS="Element59">See Also</A>, <A HREF="002944.html" CLASS="Element59">Unit: IdUDPBase</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Specifies a UDP base class.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12">TIdUDPBase = <STRONG>class</STRONG>(<A HREF="007246.html" CLASS="Element59">TIdComponent</A>)</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Unit</DIV>
+<DIV CLASS="Element69">
+<A HREF="002944.html" CLASS="Element59">IdUDPBase</A></DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+TIdUDPBase specifies an encapsulation of the User Datagram Protocol (UDP), and provides properties and methods common to both UDP clients and UDP servers. <A HREF="007877.html" CLASS="Element59">TIdUDPServer</A> and <A HREF="007874.html" CLASS="Element59">TIdUDPClient</A> are descendants of TIdUDPBase.<P CLASS="Element10">
+For more information on the User Datagram Protocol (UDP), refer to the Internet Standards document:<P CLASS="Element10">
+<UL>
+<LI>RFC 768 - User Datagram Protocol (UDP) (http://www.rfc-editor.org/rfc/rfc768.txt)</UL>
+<P CLASS="Element10">
+TIdUDPBase implements the common UDP facilities required to create a <A HREF="007071.html" CLASS="Element59">socket</A> binding using the Socket Datagram protocol family, perform datagram Broadcasts, and handle Host and Port assignments for the connection-less protocol.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0000">TIdUDPBase.Active</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007873.html" CLASS="Element59">TIdUDPBase</A>, <A HREF="014634.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Indicates that the <A HREF="007071.html" CLASS="Element59">socket</A> binding has been allocated.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> Active: Boolean;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Active is a Boolean property used to indicate that the <A HREF="007071.html" CLASS="Element59">socket</A> binding has been allocated. Note that Active will always return False when using the IDE.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0001">TIdUDPBase.Binding</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007873.html" CLASS="Element59">TIdUDPBase</A>, <A HREF="014635.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Socket handle for the read or write transaction.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> Binding: <A HREF="007713.html" CLASS="Element59">TIdSocketHandle</A>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Binding is a read-only <A HREF="007713.html" CLASS="Element59">TIdSocketHandle</A> property that represents the <A HREF="007071.html" CLASS="Element59">socket</A> binding used to <A HREF="006944.html" CLASS="Element59">send</A> and receive data. Unlike TCP, UDP does not create a permanent connection to the remote computer.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0003">TIdUDPBase.BroadcastEnabled</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007873.html" CLASS="Element59">TIdUDPBase</A>, <A HREF="014636.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Indicates that the <A HREF="007071.html" CLASS="Element59">socket</A> binding can perform broadcast transmissions.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> BroadcastEnabled: Boolean;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+BroadcastEnabled is a Boolean property used to indicate when the protocol handler is transmitting a datagram destined for all computers on the network. BroadcastEnabled is updated by the <A HREF="007873.html#0002" CLASS="Element59">Broadcast</A> method, and is used to notify the protocol stack that <A HREF="007873.html#0001" CLASS="Element59">Binding</A> must include or exclude the <A HREF="007071.html" CLASS="Element59">socket</A> option for broadcast transmissions.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0004">TIdUDPBase.BufferSize</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007873.html" CLASS="Element59">TIdUDPBase</A>, <A HREF="014637.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Specifies the largest UDP packet size.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> BufferSize: Integer;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+BufferSize is an Integer property used to specify the largest UDP packet that can be sent or received using <A HREF="007873.html#0001" CLASS="Element59">Binding</A>. The default value for BufferSize is 8192, and is assigned in <A HREF="007873.html#0005" CLASS="Element59">Create</A>.<P CLASS="Element10">
+An <A HREF="000451.html" CLASS="Element59">EIdSocketError</A> exception will be raised if <A HREF="007873.html#0009" CLASS="Element59">ReceiveString</A> encounters a packet larger than BufferSize.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="000B">TIdUDPBase.ReceiveTimeout</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007873.html" CLASS="Element59">TIdUDPBase</A>, <A HREF="014638.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Timeout value for reading from a peer.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> ReceiveTimeout: Integer;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+ReceiveTimeout is an Integer property used to reflect the number of milliseconds to wait for the <A HREF="007071.html" CLASS="Element59">socket</A> <A HREF="007873.html#0001" CLASS="Element59">Binding</A> to become readable in the <A HREF="007873.html#0009" CLASS="Element59">ReceiveString</A> method. The default value for ReceiveTimeout is TIdTimeoutInfinite as assigned in <A HREF="007873.html#0005" CLASS="Element59">Create</A>.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0002">TIdUDPBase.Broadcast</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007873.html" CLASS="Element59">TIdUDPBase</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+<A HREF="007873.html#000C" CLASS="Element59">Send</A> data to all computers on the network.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>procedure</STRONG> Broadcast(<STRONG>const</STRONG> AData: <STRONG>string</STRONG>; <STRONG>const</STRONG> APort: integer);</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+const AData: string</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Values to <A HREF="006944.html" CLASS="Element59">send</A> in the datagram.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+const APort: integer</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Port number for the transmission.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Broadcast is a procedure used to <A HREF="006944.html" CLASS="Element59">send</A> the data specified in AData using the port number specified in APort. Broadcast sends the data to all computers on the network. Note: Many network routers will not forward UDP broadcasts beyond the boundaries of the local network.<P CLASS="Element10">
+Broadcast calls the <A HREF="007873.html#000C" CLASS="Element59">Send</A> method using the reserved network address '255.255.255.255' as the destination. Broadcast also maintains <A HREF="007873.html#0003" CLASS="Element59">BroadcastEnabled</A> to indicate the current transaction state.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0005">TIdUDPBase.Create</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007873.html" CLASS="Element59">TIdUDPBase</A>, <A HREF="014639.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Constructor for the object instance.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>constructor</STRONG> Create(AOwner: TComponent); <STRONG>override</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+AOwner: TComponent</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Owner of the object instance.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Create is the constructor for the object instance, and relies on the inherited Create method to initialize object properties. Create sets the default value for <A HREF="007873.html#0004" CLASS="Element59">BufferSize</A> to 8192, and <A HREF="007873.html#000B" CLASS="Element59">ReceiveTimeout</A> to <A HREF="002933.html" CLASS="Element59">IdTimeoutInfinite</A>.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0006">TIdUDPBase.Destroy</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007873.html" CLASS="Element59">TIdUDPBase</A>, <A HREF="014640.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Frees an object instance.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>destructor</STRONG> Destroy; <STRONG>override</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Destroy is the destructor for the object instance. Destroy insures that the <A HREF="007873.html#0000" CLASS="Element59">Active</A> property is set to False, and calls the inherited Destroy method to finalize object destruction.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0007">TIdUDPBase.ReceiveBuffer</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007873.html" CLASS="Element59">TIdUDPBase</A>, <A HREF="014641.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Reads data from a remote connection.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>function</STRONG> ReceiveBuffer(<STRONG>var</STRONG> ABuffer; <STRONG>const</STRONG> ABufferSize: Integer; <STRONG>const</STRONG> AMSec: Integer = <A HREF="002932.html" CLASS="Element59">IdTimeoutDefault</A>): integer; <STRONG>overload</STRONG>;
+<STRONG>function</STRONG> ReceiveBuffer(<STRONG>var</STRONG> ABuffer; <STRONG>const</STRONG> ABufferSize: Integer; <STRONG>var</STRONG> VPeerIP: <STRONG>string</STRONG>; <STRONG>var</STRONG> VPeerPort: integer; AMSec: Integer = <A HREF="002932.html" CLASS="Element59">IdTimeoutDefault</A>): integer; <STRONG>overload</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+var ABuffer</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Buffer where received data is stored.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+const ABufferSize: Integer</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Number of bytes to read from the remote connection.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+const AMSec: Integer = IdTimeoutDefault</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Milliseconds to wait for a readable connection. The default value is <A HREF="002932.html" CLASS="Element59">IdTimeoutDefault</A>.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+var VPeerIP: string</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+IP address for the remote connection.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+var VPeerPort: integer</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Port number for the remote connection.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Return Value</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Integer - Bytes read from the remote connection.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+<A HREF="007873.html#0007" CLASS="Element59">ReceiveBuffer</A> is an Integer function used to read data from the remote connection specified in VPeerIP and VPeerPort into the buffer ABuffer.<P CLASS="Element10">
+ABufferSize indicates the number of bytes to read from the remote connection.<P CLASS="Element10">
+AMSec indicates the number of milliseconds to delay while waiting for the <A HREF="007071.html" CLASS="Element59">socket</A> <A HREF="007873.html#0001" CLASS="Element59">Binding</A> to become Readable. The default value for AMSec is <A HREF="002932.html" CLASS="Element59">IdTimeoutDefault</A>, and indicates that ReceiveTimeOut will be used as the timeout value.<P CLASS="Element10">
+If a timeout occurs while waiting for the <A HREF="007873.html#0001" CLASS="Element59">Binding</A> to become ready for the read operation, RecvBuffer will set the following values before exiting the method:<P CLASS="Element10">
+<UL>
+<LI>Result - zero (0),<P CLASS="Element10">
+<LI>VPeerIP - empty string ('')<P CLASS="Element10">
+<LI>VPeerPort - zero (0)</UL>
+<P CLASS="Element10">
+If RecvBuffer is unable to read data from the remote connection, an <A HREF="000505.html" CLASS="Element59">EIdUDPReceiveErrorZeroBytes</A> exception will be raised.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0008">TIdUDPBase.ReceiveBuffer</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007873.html" CLASS="Element59">TIdUDPBase</A>, <A HREF="014642.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Reads data from a remote connection.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>function</STRONG> <A HREF="007873.html#0007" CLASS="Element59">ReceiveBuffer</A>(<STRONG>var</STRONG> ABuffer; <STRONG>const</STRONG> ABufferSize: Integer; <STRONG>const</STRONG> AMSec: Integer = <A HREF="002932.html" CLASS="Element59">IdTimeoutDefault</A>): integer; <STRONG>overload</STRONG>;
+<STRONG>function</STRONG> <A HREF="007873.html#0007" CLASS="Element59">ReceiveBuffer</A>(<STRONG>var</STRONG> ABuffer; <STRONG>const</STRONG> ABufferSize: Integer; <STRONG>var</STRONG> VPeerIP: <STRONG>string</STRONG>; <STRONG>var</STRONG> VPeerPort: integer; AMSec: Integer = <A HREF="002932.html" CLASS="Element59">IdTimeoutDefault</A>): integer; <STRONG>overload</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+var ABuffer</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Buffer where received data is stored.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+const ABufferSize: Integer</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Number of bytes to read from the remote connection.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+const AMSec: Integer = IdTimeoutDefault</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Milliseconds to wait for a readable connection. The default value is <A HREF="002932.html" CLASS="Element59">IdTimeoutDefault</A>.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+var VPeerIP: string</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+IP address for the remote connection.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+var VPeerPort: integer</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Port number for the remote connection.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Return Value</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Integer - Bytes read from the remote connection.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+<A HREF="007873.html#0007" CLASS="Element59">ReceiveBuffer</A> is an Integer function used to read data from the remote connection specified in VPeerIP and VPeerPort into the buffer ABuffer.<P CLASS="Element10">
+ABufferSize indicates the number of bytes to read from the remote connection.<P CLASS="Element10">
+AMSec indicates the number of milliseconds to delay while waiting for the <A HREF="007071.html" CLASS="Element59">socket</A> <A HREF="007873.html#0001" CLASS="Element59">Binding</A> to become Readable. The default value for AMSec is <A HREF="002932.html" CLASS="Element59">IdTimeoutDefault</A>, and indicates that ReceiveTimeOut will be used as the timeout value.<P CLASS="Element10">
+If a timeout occurs while waiting for the <A HREF="007873.html#0001" CLASS="Element59">Binding</A> to become ready for the read operation, RecvBuffer will set the following values before exiting the method:<P CLASS="Element10">
+<UL>
+<LI>Result - zero (0),<P CLASS="Element10">
+<LI>VPeerIP - empty string ('')<P CLASS="Element10">
+<LI>VPeerPort - zero (0)</UL>
+<P CLASS="Element10">
+If RecvBuffer is unable to read data from the remote connection, an <A HREF="000505.html" CLASS="Element59">EIdUDPReceiveErrorZeroBytes</A> exception will be raised.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0009">TIdUDPBase.ReceiveString</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007873.html" CLASS="Element59">TIdUDPBase</A>, <A HREF="014643.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Reads data from the remote computer.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>function</STRONG> ReceiveString(<STRONG>const</STRONG> AMSec: Integer = <A HREF="002932.html" CLASS="Element59">IdTimeoutDefault</A>): <STRONG>string</STRONG>; <STRONG>overload</STRONG>;
+<STRONG>function</STRONG> ReceiveString(<STRONG>var</STRONG> VPeerIP: <STRONG>string</STRONG>; <STRONG>var</STRONG> VPeerPort: integer; <STRONG>const</STRONG> AMSec: Integer = <A HREF="002932.html" CLASS="Element59">IdTimeoutDefault</A>): <STRONG>string</STRONG>; <STRONG>overload</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+const AMSec: Integer = IdTimeoutDefault</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Timeout value for the read operation. Default value is <A HREF="002932.html" CLASS="Element59">IdTimeoutDefault</A>.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+var VPeerIP: string</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Address of the remote computer.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+var VPeerPort: integer</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Port number of the remote computer.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Return Value</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+String - Data received from the remote computer.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+<A HREF="007873.html#0009" CLASS="Element59">ReceiveString</A> is a String function used to receive data from a remote computer system.<P CLASS="Element10">
+VPeerIP is updated to reflect the IP address on the remote computer where the data originated. VPeerPort is updated to reflect the port number on the remote computer where the data originated.<P CLASS="Element10">
+If AMSec is omitted, the default timeout value used is <A HREF="007873.html#000B" CLASS="Element59">ReceiveTimeout</A>. Use TIdTimeoutInfinite to disable read timeout. If a timeout occurs while waiting for the <A HREF="007071.html" CLASS="Element59">socket</A> <A HREF="007873.html#0001" CLASS="Element59">Binding</A> to become readable, VPeerIP is set to '' and VPeerPort is set to 0 before exiting from the method.<P CLASS="Element10">
+<A HREF="007873.html#0009" CLASS="Element59">ReceiveString</A> will read up to <A HREF="007873.html#0004" CLASS="Element59">BufferSize</A> bytes from the remote computer.<P CLASS="Element10">
+<A HREF="007873.html#0009" CLASS="Element59">ReceiveString</A> will raise an <A HREF="000375.html" CLASS="Element59">EIdException</A> exception if the number of bytes read from the remote computer is 0.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="000A">TIdUDPBase.ReceiveString</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007873.html" CLASS="Element59">TIdUDPBase</A>, <A HREF="014644.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Reads data from the remote computer.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>function</STRONG> <A HREF="007873.html#0009" CLASS="Element59">ReceiveString</A>(<STRONG>const</STRONG> AMSec: Integer = <A HREF="002932.html" CLASS="Element59">IdTimeoutDefault</A>): <STRONG>string</STRONG>; <STRONG>overload</STRONG>;
+<STRONG>function</STRONG> <A HREF="007873.html#0009" CLASS="Element59">ReceiveString</A>(<STRONG>var</STRONG> VPeerIP: <STRONG>string</STRONG>; <STRONG>var</STRONG> VPeerPort: integer; <STRONG>const</STRONG> AMSec: Integer = <A HREF="002932.html" CLASS="Element59">IdTimeoutDefault</A>): <STRONG>string</STRONG>; <STRONG>overload</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+const AMSec: Integer = IdTimeoutDefault</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Timeout value for the read operation. Default value is <A HREF="002932.html" CLASS="Element59">IdTimeoutDefault</A>.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+var VPeerIP: string</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Address of the remote computer.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+var VPeerPort: integer</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Port number of the remote computer.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Return Value</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+String - Data received from the remote computer.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+<A HREF="007873.html#0009" CLASS="Element59">ReceiveString</A> is a String function used to receive data from a remote computer system.<P CLASS="Element10">
+VPeerIP is updated to reflect the IP address on the remote computer where the data originated. VPeerPort is updated to reflect the port number on the remote computer where the data originated.<P CLASS="Element10">
+If AMSec is omitted, the default timeout value used is <A HREF="007873.html#000B" CLASS="Element59">ReceiveTimeout</A>. Use TIdTimeoutInfinite to disable read timeout. If a timeout occurs while waiting for the <A HREF="007071.html" CLASS="Element59">socket</A> <A HREF="007873.html#0001" CLASS="Element59">Binding</A> to become readable, VPeerIP is set to '' and VPeerPort is set to 0 before exiting from the method.<P CLASS="Element10">
+<A HREF="007873.html#0009" CLASS="Element59">ReceiveString</A> will read up to <A HREF="007873.html#0004" CLASS="Element59">BufferSize</A> bytes from the remote computer.<P CLASS="Element10">
+<A HREF="007873.html#0009" CLASS="Element59">ReceiveString</A> will raise an <A HREF="000375.html" CLASS="Element59">EIdException</A> exception if the number of bytes read from the remote computer is 0.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="000C">TIdUDPBase.Send</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007873.html" CLASS="Element59">TIdUDPBase</A>, <A HREF="014645.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Sends data to a remote computer system.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>procedure</STRONG> Send(AHost: <STRONG>string</STRONG>; <STRONG>const</STRONG> APort: Integer; <STRONG>const</STRONG> AData: <STRONG>string</STRONG>);</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+AHost: string</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Address of the remote computer.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+const APort: Integer</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Port number on the remote computer.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+const AData: string</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Value to <A HREF="006944.html" CLASS="Element59">send</A> to the remote computer.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Send is a procedure used to <A HREF="006944.html" CLASS="Element59">send</A> the data specified in AData to the remote computer system specified in AHost and APort. Send will resolve the address in AHost to a host name prior to sending AData to the remote system.<P CLASS="Element10">
+Send calls Binding.SendTo to transmit AData to the remote system. UDP does not guarantee delivery of data packets, so the values in AData may not arrive at the remote computer system.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="000D">TIdUDPBase.SendBuffer</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007873.html" CLASS="Element59">TIdUDPBase</A>, <A HREF="014646.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Sends data to a remote host.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>procedure</STRONG> SendBuffer(AHost: <STRONG>string</STRONG>; <STRONG>const</STRONG> APort: Integer; <STRONG>var</STRONG> ABuffer; <STRONG>const</STRONG> AByteCount: integer);</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+AHost: string</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Address for the remote connection.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+const APort: Integer</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Port number for the remote connection.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+var ABuffer</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Data to be sent to the remote connection.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+const AByteCount: integer</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Number of bytes to <A HREF="006944.html" CLASS="Element59">send</A> to the remote connection.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+SendBuffer is a procedure used to transmit data to a remote connection. AHost and APort identify the remote system that is the endpoint for the connection. Before transmitting data, SendBuffer will use the protocol stack to resolve the host name in AHost to an IP address.<P CLASS="Element10">
+ABuffer contains the data to be transmitted to the remote host.<P CLASS="Element10">
+SendBuffer uses the <A HREF="007713.html#0018" CLASS="Element59">TIdSocketHandle.SendTo</A> method for the <A HREF="007071.html" CLASS="Element59">socket</A> binding to transmit data.</DIV>
+</DIV>
+<DIV CLASS="Element62">
+<HR>Created with Doc-O-Matic 2 donated to <STRONG><A HREF="http://www.delphi-jedi.org">Project JEDI</A></STRONG>. Commercial license available from the <STRONG><A HREF="http://www.doc-o-matic.com">Doc-O-Matic site</A></STRONG>.</DIV>
+</DIV></BODY></HTML>

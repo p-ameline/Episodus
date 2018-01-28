@@ -1,0 +1,94 @@
+// -----------------------------------------------------------------------------
+// ns_search.h
+// -----------------------------------------------------------------------------
+// $Revision: 1.7 $
+// $Author: pameline $
+// $Date: 2015/02/07 14:37:51 $
+// -----------------------------------------------------------------------------
+// Contient les définitions des objets PATIENT et UTILISATEUR de NAUTILUS
+// -----------------------------------------------------------------------------
+// PK  - 01/1992
+// -----------------------------------------------------------------------------
+
+// -----------------------------------------------------------------------------
+// Copyright Nautilus, 2001-2005
+// http://www.nautilus-info.com
+// -----------------------------------------------------------------------------
+// Ce logiciel est un programme informatique servant à [rappeler les
+// caractéristiques techniques de votre logiciel].
+//
+// Ce logiciel est régi par la licence CeCILL soumise au droit français et
+// respectant les principes de diffusion des logiciels libres. Vous pouvez
+// utiliser, modifier et/ou redistribuer ce programme sous les conditions de la
+// licence CeCILL telle que diffusée par le CEA, le CNRS et l'INRIA sur le site
+// "http://www.cecill.info".
+//
+// En contrepartie de l'accessibilité au code source et des droits de copie, de
+// modification et de redistribution accordés par cette licence, il n'est offert
+// aux utilisateurs qu'une garantie limitée. Pour les mêmes raisons, seule une
+// responsabilité restreinte pèse sur l'auteur du programme, le titulaire des
+// droits patrimoniaux et les concédants successifs.
+//
+// A cet égard  l'attention de l'utilisateur est attirée sur les risques
+// associés au chargement, à l'utilisation, à la modification et/ou au
+// développement et à la reproduction du logiciel par l'utilisateur étant donné
+// sa spécificité de logiciel libre, qui peut le rendre complexe à manipuler et
+// qui le réserve donc à des développeurs et des professionnels avertis
+// possédant des connaissances informatiques approfondies. Les utilisateurs sont
+// donc invités à charger et tester l'adéquation du logiciel à leurs besoins
+// dans des conditions permettant d'assurer la sécurité de leurs systèmes et ou
+// de leurs données et, plus généralement, à l'utiliser et l'exploiter dans les
+// mêmes conditions de sécurité.
+//
+// Le fait que vous puissiez accéder à cet en-tête signifie que vous avez pris
+// connaissance de la licence CeCILL, et que vous en avez accepté les termes.
+// -----------------------------------------------------------------------------
+// This software is a computer program whose purpose is to [describe
+// functionalities and technical features of your software].
+//
+// This software is governed by the CeCILL  license under French law and abiding
+// by the rules of distribution of free software. You can use, modify and/ or
+// redistribute the software under the terms of the CeCILL license as circulated
+// by CEA, CNRS and INRIA at the following URL "http://www.cecill.info".
+//
+// As a counterpart to the access to the source code and  rights to copy, modify
+// and redistribute granted by the license, users are provided only with a
+// limited warranty and the software's author, the holder of the economic
+// rights, and the successive licensors have only limited liability.
+//
+// In this respect, the user's attention is drawn to the risks associated with
+// loading, using, modifying and/or developing or reproducing the software by
+// the user in light of its specific status of free software, that may mean that
+// it is complicated to manipulate, and that also therefore means that it is
+// reserved for developers and experienced professionals having in-depth
+// computer knowledge. Users are therefore encouraged to load and test the
+// software's suitability as regards their requirements in conditions enabling
+// the security of their systems and/or data to be ensured and, more generally,
+// to use and operate it in the same conditions as regards security.
+//
+// The fact that you are presently reading this means that you have had
+// knowledge of the CeCILL license and that you accept its terms.
+// -----------------------------------------------------------------------------
+
+#ifndef __NS_SEARCH_H
+#define __NS_SEARCH_H
+
+#include "partage\ns_vector.h"
+
+#if defined(_DANSLEXIDLL)
+  #define _CLASSELEXI __export
+#else
+	#define _CLASSELEXI __import
+#endif
+
+/*
+** MappingNSSearchResult contains the result of the class NSSearchStruct** All the result element are sorted by date** For accessing the result there two method possible with iterator:**  -  une methode qui permet de parcourir de la plus ancienne valeur a la plus recente   (begin() end())**  -  une mthode qui premt de parcourir de la plus recente a la plus ancienne (rbegin() et rend())** Pour pouvoir recuper les valeurs vous devez utiliser la fonction fullData prenant un iterateur en parametre*/class _CLASSELEXI MappingNSSearchResult{  private:    static long lObjectCount ;  protected:    std::multimap< std::string, std::string, less<std::string> > _data ;  public:    typedef std::multimap< std::string, std::string, less<std::string> >::reverse_iterator MMapRevIt ;    typedef std::multimap< std::string, std::string, less<std::string> >::iterator MMapIt ;    MappingNSSearchResult() /*: _data()*/ {}    ~MappingNSSearchResult() {}    MappingNSSearchResult(const MappingNSSearchResult& rv) ;    void reinit() ;    int getNunberOfResultBeforeDate(std::string dat) ;    void insert(std::string date, std::string node) ;    bool empty() ;    int  size() ;    MMapRevIt rbegin() ;    MMapRevIt rend() ;
+    MMapIt    begin() ;
+    MMapIt    end() ;
+    void fullRData(MMapIt  it, std::string& date, std::string& node) ;    void fullData(MMapRevIt it, std::string& date, std::string& node) ;    MappingNSSearchResult& operator=(const MappingNSSearchResult& src) ;    static long getNbInstance()  { return lObjectCount ; }    static void initNbInstance() { lObjectCount = 0 ; }};
+/*
+** Structure de requête au sein du dossier patient** Patient's file query structure*/class _CLASSELEXI NSSearchStruct{  private:    static long lObjectCount ;  public :    enum SEARCHMODE    {      modeAsIs      = 1,  /* recherche des concepts exacts*/      modeSemantic  = 2   /* recherche des concpets semantiquement equivalent */    } _iMode ;    enum SEARCHTYPE    {      typeAsIs      = 1, /* recherche sans verification de la personne concernee */      typePersoAnt  = 2, /* recherche en s'assurant que les donnees sont bien celle du patient*/      typeFamilyAnt = 3  /* recherche d'un antecdant familial */    } _iType ;    enum SEARCHPOSIT    {      positFirstInTime  = 1,  /* */      positMiddle       = 2,  /* */      positLastInTime   = 3   /* */    } _iNodesPosit, _iMandatoryPosit ;    enum FOUNDSTATUS    {      foundFull    = 1, /* */      foundPartial = 2, /* */      foundNothing = 3  /* */    } _iStatus ;    enum EPISODESTATUS    {      episodeUndefined = 0, /* */      episodeClosed    = 1, /* */      episodeOpened    = 2, /* */      episodeFuture    = 3  /* */    } _iEpisodeStatus ;    std::string  _sMandatoryPath ;       // Path that must exist for doc to be valid    bool         _bMandatoryForYesOrNo ; // Path tested for yes or no    std::string  _sMandatoryArchetype ;  // Archetype the path must get found into    std::string  _sStartingDatePattern ;    std::string  _sEndingDatePattern ;    std::string  _sStartingDate ;    std::string  _sEndingDate ;    std::string* _psStartingNode ;    std::string* _psStopNode ;    int          _iNbNodes ;  /* Nimber of node needed ,  if 0 we take all the value found */    std::string  _sUnit ; /* result(s) must be convertible */    MappingNSSearchResult _aFoundNodes ;    MappingNSSearchResult* getFoundNodes() { return &_aFoundNodes ; }    NSSearchStruct(SEARCHMODE imode = modeAsIs,                  SEARCHTYPE itype = typePersoAnt ,                  SEARCHPOSIT inodesposit = positFirstInTime,                  int inbnodes = 0 ,                  std::string   startingdatePattern = std::string(""),                  std::string   startingdate        = std::string(""),                  std::string   endingdatePattern   = std::string(""),                  std::string   endingdate          = std::string(""),                  std::string*  psstartingnode      = NULL,                  EPISODESTATUS episodeStatus       = episodeUndefined,                  std::string   mandatoryPath       = std::string(""),                  std::string   archetypeId         = std::string(""),                  bool          bmandatoryesorno    = false,                  SEARCHPOSIT   mandatoryposit      = positFirstInTime) ;    ~NSSearchStruct() {}    NSSearchStruct(const NSSearchStruct& rv) ;    void init(string sParams) ;    void reinit() ; /* reinit the search place */    bool accept_date(std::string sDate) ;    bool accept_episode(std::string sOpeningDate, std::string sClosingDate) ;    void create_result() ;    NSSearchStruct& operator=(const NSSearchStruct& src) ;    int             operator==(const NSSearchStruct& x) ;    bool            isSameAs(const NSSearchStruct& x) ;    bool            isDefault() ;    EPISODESTATUS   getEpisodeStatus()      { return _iEpisodeStatus ; }    string          getMandatoryArchetype() { return _sMandatoryArchetype ; }    string          getMandatoryPath()      { return _sMandatoryPath ; }    bool            isEmpty()               { return _aFoundNodes.empty() ; }    FOUNDSTATUS     getFoundStatus()        { return _iStatus ; }    static long getNbInstance()  { return lObjectCount ; }    static void initNbInstance() { lObjectCount = 0 ; }};
+bool _CLASSELEXI areSameSearchStruct(NSSearchStruct *pStruct1, NSSearchStruct *pStruct2) ;
+
+#endif // !__NS_SEARCH_H
+

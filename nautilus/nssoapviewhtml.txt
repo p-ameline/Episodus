@@ -1,0 +1,34 @@
+<html>
+ 
+<head>
+</head>
+
+<body>
+
+<center>
+<h1>NSSOAPVIEW.CPP</h1>
+<br>
+Liste des objets<br>
+<br>
+<font size="4">
+   
+
+</center>
+ Classe des objets : <U>class ClassificationPrinciple </U>: <br><br>
+<center>
+<table border=1>
+  <tr>
+	<td> string  sCase;</td> 
+           <td>  // case : S, A, P...</td> 
+</tr>
+<tr>
+        <td> string  sClassification;</td>  
+ 		<td> // classification utilisée</td>
+</tr>
+<tr> 
+       <td>  bool    bUnique;</td> 
+        <td>  // code unique (ou multiple)</td>
+</tr>
+
+</table border=1>
+</center>  

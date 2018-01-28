@@ -1,0 +1,211 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+<TITLE>TIdDataChannelThread</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <META name="GENERATOR" content="Doc-O-Matic">
+    <LINK rel="STYLESHEET" href="default.css" type="text/css">
+
+<SCRIPT LANGUAGE="JavaScript1.2" SRC="scripts.js"></SCRIPT>
+</HEAD>
+<BODY CLASS="Element57">
+<TABLE BORDER="0" BGCOLOR="#AACCFF" WIDTH="100%" CELLSPACING="0" CELLPADDING="0">
+<TR><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element1">
+Indy 9</DIV>
+</TD><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element2">
+<A HREF="content.html" CLASS="Element59">Content</A> | <A HREF="idx.html" CLASS="Element59">Index</A> | <A HREF="symref.html" CLASS="Element59">Reference</A></DIV>
+</TD></TR></TABLE><DIV CLASS="Element58">
+<DIV CLASS="Element5">
+TIdDataChannelThread</DIV>
+<DIV CLASS="Element7">
+<A HREF="010437.html" CLASS="Element59">Hierarchy</A>, <A HREF="010438.html" CLASS="Element59">Properties</A>, <A HREF="010439.html" CLASS="Element59">Methods</A>, <A HREF="010440.html" CLASS="Element59">Events</A>, <A HREF="010441.html" CLASS="Element59">See Also</A>, <A HREF="002192.html" CLASS="Element59">Unit: IdFTPServer</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Implements a threaded data channel for an FTP client thread,</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12">TIdDataChannelThread = <STRONG>class</STRONG>(<A HREF="007846.html" CLASS="Element59">TIdThread</A>)</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Unit</DIV>
+<DIV CLASS="Element69">
+<A HREF="002192.html" CLASS="Element59">IdFTPServer</A></DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+TIdDataChannelThread is a <A HREF="007846.html" CLASS="Element59">TIdThread</A> descendant that implements the data channel used when a threaded FTP client connection needs to read or write data using the FTP STOR, STOU, APPE, RETR, LIST, or NLST command verbs.<P CLASS="Element10">
+TIdDataChannelThread provides properties that represent the connection used for an acive or passive data channel for the FTP client, the control channel from the threaded client, and <A HREF="007663.html" CLASS="Element59">TIdRFCReply</A> properties representing the success and error messages used when performing data transfer. TIdDataChannelThread provides methods that create the active or passive connection, initialize the data channel, or start the thread of execution.<P CLASS="Element10">
+TIdDataChannelThread can represent an active or a passive connection type on the data channel. When passive connections are used, the connection is constructed as a <A HREF="007700.html" CLASS="Element59">TIdSimpleServer</A> object instance. When the TIdDataChannelThread thread is started, the data channel will be used to <A HREF="003177.html" CLASS="Element59">listen</A> for a client connection.<P CLASS="Element10">
+When active connections are opened by the client thread, the connection is constructed using a <A HREF="007827.html" CLASS="Element59">TIdTCPClient</A> object instance bound to the FTP data port 20. When the TIdDataChannelThread thread is started, the data channel will be connected.<P CLASS="Element10">
+During execution, the data channel thread uses the Data property to access the TStrings or TStream values used during the data transfer operation. After performing the transfer operation, the <A HREF="007071.html" CLASS="Element59">socket</A> for the data channel in the thread is disconnected, and the Success or Error message is written using the control channel for the threaded client connection. The data channel thread is stopped after execution of the transfer operation.<P CLASS="Element10">
+TIdDataChannelThread is the thread type created for use in the TIdFTPServerThread.DataChannel property in a threaded client connection. The data channel thread exists for the lifetime of the threaded client connection. It is initalized and started prior to data transfer operations, and suspended when the data transfer operation is completed.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0002">TIdDataChannelThread.ErrorReply</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007275.html" CLASS="Element59">TIdDataChannelThread</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Error message used during data transfer operations.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> ErrorReply: <A HREF="007663.html" CLASS="Element59">TIdRFCReply</A>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+ErrorReply is a <A HREF="007663.html" CLASS="Element59">TIdRFCReply</A> property that represents the message sent to a client connection when an error occurs during startup of the threaded data channel, or when the thread executes to perform data transfer.<P CLASS="Element10">
+Use <A HREF="007275.html#0003" CLASS="Element59">OKReply</A> to specify the message used when a data transfer operation is successful.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0003">TIdDataChannelThread.OKReply</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007275.html" CLASS="Element59">TIdDataChannelThread</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Success message used during data transfer operations.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> OKReply: <A HREF="007663.html" CLASS="Element59">TIdRFCReply</A>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+OKReply is a <A HREF="007663.html" CLASS="Element59">TIdRFCReply</A> property that represents the message sent to a client connection when a data transfer operation has been successfully completed during execution of the threaded data channel. or when the thread executes to perform data transfer.<P CLASS="Element10">
+Use <A HREF="007275.html#0002" CLASS="Element59">ErrorReply</A> to specify the message used when an error occurs during a data transfer operation.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0000">TIdDataChannelThread.Create</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007275.html" CLASS="Element59">TIdDataChannelThread</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Constructor for the object instance.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>constructor</STRONG> Create(APASV: Boolean; AControlConnection: <A HREF="007832.html" CLASS="Element59">TIdTCPServerConnection</A>; <STRONG>const</STRONG> ADefaultDataPort: Integer = <A HREF="002454.html" CLASS="Element59">IdPORT_FTP_DATA</A>); <STRONG>reintroduce</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+APASV: Boolean</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Indicate if passive connections are used to open the data channel.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+AControlConnection: TIdTCPServerConnection</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Threaded FTP client connection that is the control channel for the FTP session.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Create is the constructor for the object instance, and calls the inherited Create method. Create also sets properties for the threaded data channel, including the following:<P CLASS="Element10">
+<UL>
+<LI>StopMode - smSuspend<P CLASS="Element10">
+<LI>ControlChannel - Control channel for the client connection.</UL>
+<P CLASS="Element10">
+Create also allocates resources need for object properties, including:<P CLASS="Element10">
+<UL>
+<LI><A HREF="007275.html#0003" CLASS="Element59">OKReply</A><P CLASS="Element10">
+<LI><A HREF="007275.html#0002" CLASS="Element59">ErrorReply</A><P CLASS="Element10">
+<LI>DataChannel</UL>
+<P CLASS="Element10">
+When the threaded data channel uses Passive connections, as indicated in APASV, DataChannel will refer to a <A HREF="007700.html" CLASS="Element59">TIdSimpleServer</A> object instance bound to the IP address used in the ControlChannel for the thread. When active connections are used, DataChannel will refer to a <A HREF="007827.html" CLASS="Element59">TIdTCPClient</A> bound to port number 20, as required by the FTP protocol.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0001">TIdDataChannelThread.Destroy</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007275.html" CLASS="Element59">TIdDataChannelThread</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Frees an object instance.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>destructor</STRONG> Destroy; <STRONG>override</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Destroy is the destructor for the object instance. Destroy frees and releases resources allocated in the <A HREF="007275.html#0000" CLASS="Element59">Create</A> constructor, including <A HREF="007275.html#0003" CLASS="Element59">OKReply</A>, <A HREF="007275.html#0002" CLASS="Element59">ErrorReply</A>, and DataChannel. Destroy calls the inherited method prior to exiting.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0004">TIdDataChannelThread.SetupDataChannel</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007275.html" CLASS="Element59">TIdDataChannelThread</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Configures the IP address and Port number used for the data channel.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>procedure</STRONG> SetupDataChannel(<STRONG>const</STRONG> AIP: <STRONG>string</STRONG>; APort: Integer);</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+const AIP: string</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+IP Address for the data channel.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+APort: Integer</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Port number for the data channel.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+SetupDataChannel is a procedure that allows the threaded data channel to be configure the <A HREF="007071.html" CLASS="Element59">socket</A> connection used when the data channel is started or executed. When passive connections are used, SetupDataChannel will assign the IP address and Port number specified in AIP and APort to the BoundIP and BoundPort properties in the <A HREF="007700.html" CLASS="Element59">TIdSimpleServer</A> object instance that represents the data channel. When active connections are used, SetupDataChannel will assign AIP and APort to the Host and Port properties in the <A HREF="007827.html" CLASS="Element59">TIdTCPClient</A> object instance that represents the data channel.<P CLASS="Element10">
+SetupDataChannel is used when <A HREF="007342.html" CLASS="Element59">TIdFTPServer</A> responds to the FTP PORT or PASV command verbs from a thread FTP client connection.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0005">TIdDataChannelThread.StartThread</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007275.html" CLASS="Element59">TIdDataChannelThread</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Prepares and executes the data channel thread.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>procedure</STRONG> StartThread(AOperation: <A HREF="007339.html" CLASS="Element59">TIdFTPOperation</A>);</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+AOperation: TIdFTPOperation</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Action to be performed on the data channel.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+StartThread is a procedure that allows the threaded data channel to be prepared and executed to perform the data transfer operation identified in AOperation. The data channel thread exists for the lifetime of the threaded client connection. It is initalized and started prior to data transfer operations, and suspended when the data transfer operation is completed.<P CLASS="Element10">
+StartThread determines the <A HREF="007071.html" CLASS="Element59">socket</A> connection type required for the active or passive client connection, and performs the actions needed to allow the client connection for the DataChannel. When passive connections are used, the <A HREF="007700.html" CLASS="Element59">TIdSimpleServer</A> object instance in DataChannel will be used to <A HREF="003177.html" CLASS="Element59">listen</A> for the client connection. When active connections are used, the <A HREF="007827.html" CLASS="Element59">TIdTCPClient</A> object instance in DataChannel will be connected.<P CLASS="Element10">
+Use <A HREF="007275.html#0004" CLASS="Element59">SetupDataChannel</A> to configure the IP address and port number to used for the differing client connection types.<P CLASS="Element10">
+If an exceptionm occurs while establishing the connection for DataChannel, the values in <A HREF="007275.html#0002" CLASS="Element59">ErrorReply</A> are written to the FTP client using the ControlChannel.<P CLASS="Element10">
+When successfully completed, StartThread will begin execution of the threaded data channel for use with FTP data transfer operation.</DIV>
+</DIV>
+<DIV CLASS="Element62">
+<HR>Created with Doc-O-Matic 2 donated to <STRONG><A HREF="http://www.delphi-jedi.org">Project JEDI</A></STRONG>. Commercial license available from the <STRONG><A HREF="http://www.doc-o-matic.com">Doc-O-Matic site</A></STRONG>.</DIV>
+</DIV></BODY></HTML>

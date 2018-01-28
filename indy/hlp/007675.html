@@ -1,0 +1,102 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+<TITLE>TIdServerIntercept</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <META name="GENERATOR" content="Doc-O-Matic">
+    <LINK rel="STYLESHEET" href="default.css" type="text/css">
+
+<SCRIPT LANGUAGE="JavaScript1.2" SRC="scripts.js"></SCRIPT>
+</HEAD>
+<BODY CLASS="Element57">
+<TABLE BORDER="0" BGCOLOR="#AACCFF" WIDTH="100%" CELLSPACING="0" CELLPADDING="0">
+<TR><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element1">
+Indy 9</DIV>
+</TD><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element2">
+<A HREF="content.html" CLASS="Element59">Content</A> | <A HREF="idx.html" CLASS="Element59">Index</A> | <A HREF="symref.html" CLASS="Element59">Reference</A></DIV>
+</TD></TR></TABLE><DIV CLASS="Element58">
+<DIV CLASS="Element5">
+TIdServerIntercept</DIV>
+<DIV CLASS="Element7">
+<A HREF="013469.html" CLASS="Element59">Hierarchy</A>, <A HREF="013470.html" CLASS="Element59">Properties</A>, <A HREF="013471.html" CLASS="Element59">Methods</A>, <A HREF="013472.html" CLASS="Element59">See Also</A>, <A HREF="002261.html" CLASS="Element59">Unit: IdIntercept</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Specifies a <A HREF="007071.html" CLASS="Element59">socket</A> handler for use with peer connections create by the listener thread in a TCP server.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12">TIdServerIntercept = <STRONG>class</STRONG>(<A HREF="007213.html" CLASS="Element59">TIdBaseComponent</A>)</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Unit</DIV>
+<DIV CLASS="Element69">
+<A HREF="002261.html" CLASS="Element59">IdIntercept</A></DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+TIdServerIntercept is an abstract class that creates instances of <A HREF="007248.html" CLASS="Element59">TIdConnectionIntercept</A> <A HREF="007071.html" CLASS="Element59">socket</A> handlers for peer connections created by the listener thread in a TCP Server.<P CLASS="Element10">
+<A HREF="007248.html" CLASS="Element59">TIdConnectionIntercept</A> descendants will be used by peer connection to act as an intermediary between the <A HREF="007071.html" CLASS="Element59">socket</A> binding for the connection and low-level operations that communicate with the protocol stack.<P CLASS="Element10">
+TIdServerIntercept provides virtual methods to initialize the server <A HREF="007071.html" CLASS="Element59">socket</A> handler, and to provide new <A HREF="007248.html" CLASS="Element59">TIdConnectionIntercept</A> handlers for peer connections when the connection is accepted.<P CLASS="Element10">
+Call <A HREF="007675.html#0001" CLASS="Element59">Init</A> to perform initialization tasks prior to using the TIdServerIntercept instance to accepting connections. Call <A HREF="007675.html#0000" CLASS="Element59">Accept</A> to create the <A HREF="007248.html" CLASS="Element59">TIdConnectionIntercept</A> handler used by the peer connection.<P CLASS="Element10">
+<STRONG>Note</STRONG>: Do not create instances of TIdServerIntercept. Use descendant classes, like <A HREF="007676.html" CLASS="Element59">TIdServerInterceptOpenSSL</A>, or create custom descendants that implement the virtual methods of TIdServerIntercept.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0000">TIdServerIntercept.Accept</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007675.html" CLASS="Element59">TIdServerIntercept</A>, <A HREF="013473.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Creates a <A HREF="007071.html" CLASS="Element59">socket</A> handler for a peer connection.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>function</STRONG> Accept(AConnection: TComponent): <A HREF="007248.html" CLASS="Element59">TIdConnectionIntercept</A>; <STRONG>virtual</STRONG>; <STRONG>abstract</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+ABinding</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Socket handle for the peer connection.<P CLASS="Element19">
+Return Values:</DIV>
+</DIV>
+<DIV CLASS="Element17">
+TIdConnectionIntercept</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Socket handler for the peer connection.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Accept is an abstract virtual <STRONG><A HREF="007248.html" CLASS="Element59">TIdConnectionIntercept</A></STRONG> function that creates the <A HREF="007071.html" CLASS="Element59">socket</A> handler to be used for a peer connection. Accept is used by <A HREF="007507.html" CLASS="Element59">TIdListenerThread</A> descendants to create a <A HREF="007071.html" CLASS="Element59">socket</A> handler for threads that must access a server using a <A HREF="007071.html" CLASS="Element59">socket</A> handler.<P CLASS="Element10">
+<I>ABinding</I> is the <A HREF="007071.html" CLASS="Element59">socket</A> handle used to communicate with the peer connection.<P CLASS="Element10">
+Descendant of <A HREF="007675.html" CLASS="Element59">TIdServerIntercept</A> must implement the abstract Accept method to provide the <A HREF="007248.html" CLASS="Element59">TIdConnectionIntercept</A> descendant that is appropriate for the <A HREF="007675.html" CLASS="Element59">TIdServerIntercept</A>.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0001">TIdServerIntercept.Init</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007675.html" CLASS="Element59">TIdServerIntercept</A>, <A HREF="013474.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Performs initialization tasks for the server <A HREF="007071.html" CLASS="Element59">socket</A> handler.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>procedure</STRONG> Init; <STRONG>virtual</STRONG>; <STRONG>abstract</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Init is an abstract virtual procedure that allows the <A HREF="007675.html" CLASS="Element59">TIdServerIntercept</A> instance to perform initialization tasks that are needed by the server <A HREF="007071.html" CLASS="Element59">socket</A> handler. Descendant classes should implement Init to perform the actions appropriate to the server <A HREF="007071.html" CLASS="Element59">socket</A> handler.<P CLASS="Element10">
+For example, <A HREF="007676.html" CLASS="Element59">TIdServerInterceptOpenSSL</A> implements Init to load the SSL (Secure SOcket Layer) context needed to access the Root Certificate, the Certificate file, and the Key file needed to authorize SSL peer connections.</DIV>
+</DIV>
+<DIV CLASS="Element62">
+<HR>Created with Doc-O-Matic 2 donated to <STRONG><A HREF="http://www.delphi-jedi.org">Project JEDI</A></STRONG>. Commercial license available from the <STRONG><A HREF="http://www.doc-o-matic.com">Doc-O-Matic site</A></STRONG>.</DIV>
+</DIV></BODY></HTML>

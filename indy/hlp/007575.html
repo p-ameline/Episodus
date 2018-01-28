@@ -1,0 +1,239 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+<TITLE>TIdMessageParts</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <META name="GENERATOR" content="Doc-O-Matic">
+    <LINK rel="STYLESHEET" href="default.css" type="text/css">
+
+<SCRIPT LANGUAGE="JavaScript1.2" SRC="scripts.js"></SCRIPT>
+</HEAD>
+<BODY CLASS="Element57">
+<TABLE BORDER="0" BGCOLOR="#AACCFF" WIDTH="100%" CELLSPACING="0" CELLPADDING="0">
+<TR><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element1">
+Indy 9</DIV>
+</TD><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element2">
+<A HREF="content.html" CLASS="Element59">Content</A> | <A HREF="idx.html" CLASS="Element59">Index</A> | <A HREF="symref.html" CLASS="Element59">Reference</A></DIV>
+</TD></TR></TABLE><DIV CLASS="Element58">
+<DIV CLASS="Element5">
+TIdMessageParts</DIV>
+<DIV CLASS="Element7">
+<A HREF="012771.html" CLASS="Element59">Hierarchy</A>, <A HREF="012772.html" CLASS="Element59">Properties</A>, <A HREF="012773.html" CLASS="Element59">Methods</A>, <A HREF="012774.html" CLASS="Element59">See Also</A>, <A HREF="002286.html" CLASS="Element59">Unit: IdMessage</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Collection for individual message parts in the message.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12">TIdMessageParts = <STRONG>class</STRONG>(TOwnedCollection)</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Unit</DIV>
+<DIV CLASS="Element69">
+<A HREF="002286.html" CLASS="Element59">IdMessage</A></DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+TIdMessageParts is a collection which contains the individual message parts for a MIME message, and contains ancestors of <A HREF="007573.html" CLASS="Element59">TIdMessagePart</A> such as <A HREF="007844.html" CLASS="Element59">TIdText</A> and <A HREF="007204.html" CLASS="Element59">TIdAttachment</A>.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0001">TIdMessageParts.AttachmentCount</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007575.html" CLASS="Element59">TIdMessageParts</A>, <A HREF="012775.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Indicates the number of attachments in the message part collection.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> AttachmentCount: integer;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+AttachmentCount is a read-only Integer property that identifies the number of attachments in the message parts collection. AttachmentCount is updated in <A HREF="007544.html#0013" CLASS="Element59">TIdMessage.GenerateHeader</A>, and indicates the number of <A HREF="007204.html" CLASS="Element59">TIdAttachment</A> items that do not contain a Content-Id header in the ExtraHeaders property. Attachments with a Content-Id are included in <A HREF="007575.html#0007" CLASS="Element59">RelatedPartCount</A>.<P CLASS="Element10">
+<STRONG>Note</STRONG>: AttachmentCount, <A HREF="007575.html#0007" CLASS="Element59">RelatedPartCount</A>, and <A HREF="007575.html#0008" CLASS="Element59">TextPartCount</A> are be used when headers are generated for an outgoing mail message. You should be able to update the values prior to transmission (or on receipt) by calling <A HREF="007575.html#0003" CLASS="Element59">CountParts</A>.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0002">TIdMessageParts.AttachmentEncoding</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007575.html" CLASS="Element59">TIdMessageParts</A>, <A HREF="012776.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Identifies the default encoding mechanism used for a message part.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> AttachmentEncoding: <STRONG>string</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+AttachmentEncoding is a String property that identifies the encoding mechanism used for attachment message parts in the message. Changing the value of AttachmentEncoding for the message part collection also updates the default encoding used for all message parts in the collection, and updates <A HREF="007575.html#0006" CLASS="Element59">MessageEncoderInfo</A> to the encoder that handles the AttachmentEncoding .<P CLASS="Element10">
+Default value for AttachmentEncoding is 'MIME', as assigned in the <A HREF="007575.html#0004" CLASS="Element59">Create</A> constructor.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0005">TIdMessageParts.Items</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007575.html" CLASS="Element59">TIdMessageParts</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Represents the message parts in the collection.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> Items [<STRONG>Index</STRONG>: Integer]: <A HREF="007573.html" CLASS="Element59">TIdMessagePart</A>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+Index</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Position of the message part in the collection.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Return Value</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+<A HREF="007573.html" CLASS="Element59">TIdMessagePart</A> - Collection item at the specified position.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Items is an indexed <A HREF="007573.html" CLASS="Element59">TIdMessagePart</A> property used to access the individual message parts in the collection. Index values must be in the range 0..Count-1.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0006">TIdMessageParts.MessageEncoderInfo</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007575.html" CLASS="Element59">TIdMessageParts</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Represents encoder information for the message parts collection.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> MessageEncoderInfo: TObject;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+MessageEncoderInfo is a TObject property that represents encoder information for the message parts collection. MessageEncoderInfo is updated to reflect the coder need to represent the <A HREF="007575.html#0002" CLASS="Element59">AttachmentEncoding</A>. MessageEncoderInfo is used in <A HREF="007544.html#0013" CLASS="Element59">TIdMessage.GenerateHeader</A> to initalize headers for a message based on the encoding schema. MessageEncoderInfo is also used in <A HREF="007204.html#0004" CLASS="Element59">TIdAttachment.Encode</A> to instantiate an encoder for writing an attachment to a stream.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0007">TIdMessageParts.RelatedPartCount</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007575.html" CLASS="Element59">TIdMessageParts</A>, <A HREF="012777.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Indicates the number of attachments in the message part collection.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> RelatedPartCount: integer;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+RelatedPartCount is a read-only Integer property that identifies the number of dependent attachments in the message parts collection. RelatedPartCount is updated in <A HREF="007544.html#0013" CLASS="Element59">TIdMessage.GenerateHeader</A>, and indicates the number of <A HREF="007204.html" CLASS="Element59">TIdAttachment</A> items that contain a Content-Id header in the ExtraHeaders property. Attachments without a Content-Id are included in <A HREF="007575.html#0001" CLASS="Element59">AttachmentCount</A>.<P CLASS="Element10">
+<STRONG>Note</STRONG>: <A HREF="007575.html#0001" CLASS="Element59">AttachmentCount</A>, RelatedPartCount, and <A HREF="007575.html#0008" CLASS="Element59">TextPartCount</A> are be used when headers are generated for an outgoing mail message. You should be able to update the values prior to transmission (or on receipt) by calling <A HREF="007575.html#0003" CLASS="Element59">CountParts</A>.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0008">TIdMessageParts.TextPartCount</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007575.html" CLASS="Element59">TIdMessageParts</A>, <A HREF="012778.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Indicates the number of text message parts in the collection.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> TextPartCount: integer;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+TextPartCount is a read-only Integer property that identifies the number of text parts in the message parts collection. TextPartCount is updated in <A HREF="007575.html#0003" CLASS="Element59">CountParts</A>, and indicates the number of <A HREF="007844.html" CLASS="Element59">TIdText</A> items in <A HREF="007575.html#0005" CLASS="Element59">Items</A>.<P CLASS="Element10">
+<STRONG>Note</STRONG>: <A HREF="007575.html#0001" CLASS="Element59">AttachmentCount</A>, <A HREF="007575.html#0007" CLASS="Element59">RelatedPartCount</A>, and TextPartCount are be used when headers are generated for an outgoing mail message. You should be able to update the values prior to transmission (or on receipt) by calling <A HREF="007575.html#0003" CLASS="Element59">CountParts</A>.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0000">TIdMessageParts.Add</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007575.html" CLASS="Element59">TIdMessageParts</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Adds a message part to the collection.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>function</STRONG> Add: <A HREF="007573.html" CLASS="Element59">TIdMessagePart</A>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Return Value</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+<A HREF="007573.html" CLASS="Element59">TIdMessagePart</A> - Message part added to the collection.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Add is a <A HREF="007573.html" CLASS="Element59">TIdMessagePart</A> function that is disabled for the collection. Add always returns Nil as the return value. Add is disabled to prevent adding the ancestor class <A HREF="007573.html" CLASS="Element59">TIdMessagePart</A> to the collection. Use <A HREF="007844.html#0002" CLASS="Element59">TIdText.Create</A> and <A HREF="007204.html#0002" CLASS="Element59">TIdAttachment.Create</A> to add the new collection item to the collection identified by the Collection parameter.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0003">TIdMessageParts.CountParts</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007575.html" CLASS="Element59">TIdMessageParts</A>, <A HREF="012779.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Determines the number of specific message parts in the collection.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>procedure</STRONG> CountParts;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+CountParts is procedure that Determines the number of specific message parts in the collection, and updates the <A HREF="007575.html#0008" CLASS="Element59">TextPartCount</A>, <A HREF="007575.html#0001" CLASS="Element59">AttachmentCount</A>, and <A HREF="007575.html#0007" CLASS="Element59">RelatedPartCount</A> properties to indicate the calculated values.<P CLASS="Element10">
+CountParts is used during generation of headers for a mail message proper to transmission.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0004">TIdMessageParts.Create</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007575.html" CLASS="Element59">TIdMessageParts</A>, <A HREF="012780.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Constructor for the object instance.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>constructor</STRONG> Create(AOwner: TPersistent); <STRONG>reintroduce</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+AOwner: TPersistent</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Owner of object instance.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Create is the constructor for the object instance. Create calls the inherited Create method using AOwner and <A HREF="007573.html" CLASS="Element59">TIdMessagePart</A> as the owner and class instance for the collection.</DIV>
+</DIV>
+<DIV CLASS="Element62">
+<HR>Created with Doc-O-Matic 2 donated to <STRONG><A HREF="http://www.delphi-jedi.org">Project JEDI</A></STRONG>. Commercial license available from the <STRONG><A HREF="http://www.doc-o-matic.com">Doc-O-Matic site</A></STRONG>.</DIV>
+</DIV></BODY></HTML>

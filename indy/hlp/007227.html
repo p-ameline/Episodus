@@ -1,0 +1,128 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+<TITLE>TIdCardPhoneNumber</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <META name="GENERATOR" content="Doc-O-Matic">
+    <LINK rel="STYLESHEET" href="default.css" type="text/css">
+
+<SCRIPT LANGUAGE="JavaScript1.2" SRC="scripts.js"></SCRIPT>
+</HEAD>
+<BODY CLASS="Element57">
+<TABLE BORDER="0" BGCOLOR="#AACCFF" WIDTH="100%" CELLSPACING="0" CELLPADDING="0">
+<TR><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element1">
+Indy 9</DIV>
+</TD><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element2">
+<A HREF="content.html" CLASS="Element59">Content</A> | <A HREF="idx.html" CLASS="Element59">Index</A> | <A HREF="symref.html" CLASS="Element59">Reference</A></DIV>
+</TD></TR></TABLE><DIV CLASS="Element58">
+<DIV CLASS="Element5">
+TIdCardPhoneNumber</DIV>
+<DIV CLASS="Element7">
+<A HREF="010082.html" CLASS="Element59">Hierarchy</A>, <A HREF="010083.html" CLASS="Element59">Properties</A>, <A HREF="010084.html" CLASS="Element59">Methods</A>, <A HREF="010085.html" CLASS="Element59">See Also</A>, <A HREF="002949.html" CLASS="Element59">Unit: IdVCard</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Encapsulates a VCard telphone number.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12">TIdCardPhoneNumber = <STRONG>class</STRONG>(TCollectionItem)</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Unit</DIV>
+<DIV CLASS="Element69">
+<A HREF="002949.html" CLASS="Element59">IdVCard</A></DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+TIdCardPhoneNumber encapsulates a VCard telephone number in the <A HREF="007886.html" CLASS="Element59">TIdVCard</A> component.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0001">TIdCardPhoneNumber.Number</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007227.html" CLASS="Element59">TIdCardPhoneNumber</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Respresents the contents for the VCard telephone number.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> Number: <STRONG>String</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Number respresents the contents for the VCard telephone number.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0002">TIdCardPhoneNumber.PhoneAttributes</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007227.html" CLASS="Element59">TIdCardPhoneNumber</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Describes a VCard telephone number.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> PhoneAttributes: <A HREF="007615.html" CLASS="Element59">TIdPhoneAttributes</A>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+PhoneAttributes describes a VCard telephone number and can include the following values:<P CLASS="Element10">
+<UL>
+<LI>tpaHome - home telephone number<P CLASS="Element10">
+<LI>tpaVoiceMessaging - voice messaging is available<P CLASS="Element10">
+<LI>tpaWork - work telephone number<P CLASS="Element10">
+<LI>tpaPreferred - preferred telephone number<P CLASS="Element10">
+<LI>tpaVoice - voice telephone number<P CLASS="Element10">
+<LI>tpaFax - facsimile telephone number<P CLASS="Element10">
+<LI>tpaCellular - cellular telephone number<P CLASS="Element10">
+<LI>tpaVideo - video-phone number<P CLASS="Element10">
+<LI>tpaBBS - Bulletin Board System<P CLASS="Element10">
+<LI>tpaModem - Modem telephone number<P CLASS="Element10">
+<LI>tpaCar - Car telephone<P CLASS="Element10">
+<LI>tpaISDN - ISDN telephone number<P CLASS="Element10">
+<LI>tpaPCS - personal communication services telephone number<P CLASS="Element10">
+<LI>tpaPager - pager telephone number</UL>
+</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0000">TIdCardPhoneNumber.Assign</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007227.html" CLASS="Element59">TIdCardPhoneNumber</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Copy the property values of an object.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>procedure</STRONG> Assign(Source: TPersistent); <STRONG>override</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+Source: TPersistent</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Object containing values to be copied.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Assign is a procedure used to copy the properties of the persistent object in Source to the current object instance. When the current object and the object in Source are the same ClassType, Assign will copy the following property values:<P CLASS="Element10">
+<UL>
+<LI>Phone<P CLASS="Element10">
+<LI><A HREF="007227.html#0002" CLASS="Element59">PhoneAttributes</A><P CLASS="Element10">
+<LI><A HREF="007227.html#0001" CLASS="Element59">Number</A></UL>
+<P CLASS="Element10">
+When the current object and Source do not sahre the same ClassType, Assign calls the inherited Assign method.</DIV>
+</DIV>
+<DIV CLASS="Element62">
+<HR>Created with Doc-O-Matic 2 donated to <STRONG><A HREF="http://www.delphi-jedi.org">Project JEDI</A></STRONG>. Commercial license available from the <STRONG><A HREF="http://www.doc-o-matic.com">Doc-O-Matic site</A></STRONG>.</DIV>
+</DIV></BODY></HTML>

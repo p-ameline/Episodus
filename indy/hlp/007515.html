@@ -1,0 +1,82 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+<TITLE>TIdLogStream</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <META name="GENERATOR" content="Doc-O-Matic">
+    <LINK rel="STYLESHEET" href="default.css" type="text/css">
+
+<SCRIPT LANGUAGE="JavaScript1.2" SRC="scripts.js"></SCRIPT>
+</HEAD>
+<BODY CLASS="Element57">
+<TABLE BORDER="0" BGCOLOR="#AACCFF" WIDTH="100%" CELLSPACING="0" CELLPADDING="0">
+<TR><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element1">
+Indy 9</DIV>
+</TD><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element2">
+<A HREF="content.html" CLASS="Element59">Content</A> | <A HREF="idx.html" CLASS="Element59">Index</A> | <A HREF="symref.html" CLASS="Element59">Reference</A></DIV>
+</TD></TR></TABLE><DIV CLASS="Element58">
+<DIV CLASS="Element5">
+TIdLogStream</DIV>
+<DIV CLASS="Element7">
+<A HREF="012161.html" CLASS="Element59">Hierarchy</A>, <A HREF="012162.html" CLASS="Element59">Properties</A>, <A HREF="012163.html" CLASS="Element59">Methods</A>, <A HREF="012164.html" CLASS="Element59">Events</A>, <A HREF="012165.html" CLASS="Element59">See Also</A>, <A HREF="002279.html" CLASS="Element59">Unit: IdLogStream</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Implements an Indy logging class for stream-based <A HREF="006944.html" CLASS="Element59">send</A> and receive operations.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12">TIdLogStream = <STRONG>class</STRONG>(<A HREF="007510.html" CLASS="Element59">TIdLogBase</A>)</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Unit</DIV>
+<DIV CLASS="Element69">
+<A HREF="002279.html" CLASS="Element59">IdLogStream</A></DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+TIdLogStream is a <A HREF="007510.html" CLASS="Element59">TIdLogBase</A> descendant that implements a stream-based member of the Indy logging framework.<P CLASS="Element10">
+TIdLogStream implements <A HREF="007515.html#0000" CLASS="Element59">InputStream</A> and <A HREF="007515.html#0001" CLASS="Element59">OutputStream</A> properties used as the targets for incoming and outgoing data from the logging class instance. TIdLogStream provides overridden protected methods that implement passing incoming and outgoing data to the assigned <A HREF="007515.html#0000" CLASS="Element59">InputStream</A> and <A HREF="007515.html#0001" CLASS="Element59">OutputStream</A> properties.<P CLASS="Element10">
+TIdLogStream also specifies an overriden protected method that writes status messages for logging <A HREF="006944.html" CLASS="Element59">send</A> and receive operations using the logging class instance. It is an empty implementation. Descendant classes shoulf reimplement the method to specify the destination for status messages.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0000">TIdLogStream.InputStream</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007515.html" CLASS="Element59">TIdLogStream</A>, <A HREF="012166.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Destination for incoming data passsing through the logging class instance.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> InputStream: TStream;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+InputStream is a TStream property that represents the input stream for the logging class instance. InputStream is the destination for incoming data as it passes through the logging class instance. InputStream is <STRONG>NOT</STRONG> used aS the destination of logging status messages.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0001">TIdLogStream.OutputStream</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007515.html" CLASS="Element59">TIdLogStream</A>, <A HREF="012167.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Destination for outgoing data passsing through the logging class instance.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> OutputStream: TStream;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+OutputStream is a TStream property that represents the output stream for the logging class instance. OututStream is the destination for outgoing data as it passes through the logging class instance. OutputStream is <STRONG>NOT</STRONG> used aS the destination of logging status messages.</DIV>
+</DIV>
+<DIV CLASS="Element62">
+<HR>Created with Doc-O-Matic 2 donated to <STRONG><A HREF="http://www.delphi-jedi.org">Project JEDI</A></STRONG>. Commercial license available from the <STRONG><A HREF="http://www.doc-o-matic.com">Doc-O-Matic site</A></STRONG>.</DIV>
+</DIV></BODY></HTML>

@@ -1,0 +1,229 @@
+<html>
+ 
+<head>
+</head>
+
+<body>
+
+<center>
+<h1>NSSOAPVIEW.CPP</h1>
+<br>
+Liste des objets<br>
+<br>
+<font size="4">
+   
+
+</center>
+ Classe des objets : <U>class ClassificationPrinciple </U>: <br><br>
+<center>
+<table border=1>
+  <tr>
+	<td> string  sCase;</td> 
+           <td>  // case : S, A, P...</td> 
+</tr>
+<tr>
+        <td> string  sClassification;</td>  
+ 		<td> // classification utilisée</td>
+</tr>
+<tr> 
+       <td>  bool    bUnique;</td> 
+        <td>  // code unique (ou multiple)</td>
+</tr>
+
+</table border=1>
+</center><br><br>
+Classe des objets : <U>class PrinciplesArray   </U>: <br><br>
+<center>
+<table border=1>
+  <tr>
+</tr>
+
+</table>
+</center><br><br>
+Classe des objets : <U>class SOAPObject  </U>: <br><br>
+<center>
+<table border=1>
+  <tr> 
+  <td> string  sTexteInitial; </td>     <td>  // texte capturé</td>
+ </tr> 
+<tr>     
+       <td>  string  sCode; </td>               <td>    // code dans la classification</td>
+</tr>
+<tr>       
+       <td>  string  sClassification;</td>       <td>   // classification utilisée</td>
+</tr> 
+<tr>      
+         <td> int     iConfidence;</td>     <td>         // degré de certitude du codage</td>
+</tr> 
+<tr>      
+
+        <td> string  sCase;</td>                  <td>  // case S, A, P...</td>
+</tr> 
+<tr>      
+        <td> int     iImageIndex;</td>     
+</tr> 
+<tr> 
+        <td> int     iListParam, iOldListParam;</td>      // index ListWindow</td>     
+</tr> 
+<tr> 
+        // Le SOAPObject peut se référer à un élément capturé OU à un noeud
+        //
+</tr> 
+<tr> 
+        <td> NSCapture* pCaptElemnt;</td>
+</tr> 
+<tr>      
+        <td> string     sNoeud;</td>     
+</tr>
+
+</table>
+</center><br><br>
+Classe des objets : <U>class SOAPBasket   </U>: <br><br>
+<center>
+<table border=1>
+  <tr> 
+  <td>PrinciplesArray* pPrincipes;</td>
+</tr>
+</table>
+</center><br><br>
+Classe des objets : <U>class SOAPBasketArray    </U>: <br><br>
+Classe des objets : <U>class NSSOAPListWindow;       </U>: <br><br>
+Classe des objets : <U>class  NSSOAPDocument</U>: <br><br>
+<center>
+<table border=1>
+  <tr> 
+  <td> NSEpisodus*         pEpisodus;</td>
+</tr> 
+<tr> 
+       <td>  NSDocumentInfo*     pDocInfo;</td>
+</tr> 
+<tr> 
+       <td>  SOAPBasketArray*    pBasketList;</td>
+</tr>
+<tr>  
+       <td>  SOAPObjectArray*    pTankObjectList;</td>
+</tr>
+<tr>  
+       <td> PrinciplesArray*    pPrincipes;</td>
+</tr>
+<tr>  
+       <td>  OWL::TImageList*    pMainImgList;</td>
+</tr> 
+<tr> 
+       <td>  OWL::TImageList*    pSmImageList;</td>
+</tr> 
+<tr> 
+        // Drag And Drop
+      <td>   bool			    bDragAndDrop;</td>      <td>  // flag of drag-and-drop activation</td>
+</tr> 
+<tr> 
+        <td> OWL::TImageList*    ImgDragDrop;</td>       <td>  // ImageList of the drag-and-drop</td>
+</tr> 
+<tr> 
+        <td> NSSOAPListWindow*   pSrcDragDrop;</td>     <td>  // ListWindow source</td>
+</tr> 
+<tr> 
+        <td> NSSOAPListWindow*   pDstDragDrop;</td>      <td> // ListWindow destination</td>
+</tr> 
+<tr> 
+        <td> SOAPObject*         pObject2Drop;</td>     <td>  // object to drop;</td>
+
+</tr>
+<tr> 
+        <td>int     nProblems; </td>     
+</tr>
+<tr>	
+       <td>      int     nCategory;</td> 
+</tr>    
+</table>
+</center><br><br>
+Classe des objets : <U>class NSSOAPView;</U>: <br><br>
+Classe des objets : <U>class NSSOAPTankView;</U>: <br><br>
+
+Classe des objets : <U>class NSSOAPListWindow   </U>: <br><br>
+<center>
+<table border=1>
+  <tr> 
+  <td> OWL::TWindowView*        pParentWindow;</td>
+</tr>  
+<tr>     
+    <td>     NSSOAPDocument*          pDocSOAP;</td>
+</tr> 
+<tr>      
+      <td>   SOAPBasket*              pBasket;</td>
+</tr> 
+<tr>      
+
+       <td>  ClassificationPrinciple* pPrincipe;</td>
+</tr> 
+<tr>      
+       <td>  SOAPObjectArray*         pObjectList;</td>
+</tr>      
+<tr> 
+       <td>  int                      iColumn;</td>
+</tr> 
+<tr>      
+        <td> int                      iLine;</td>
+</tr> 
+<tr>      
+
+       <td> OWL::TImageList*         pLgImageList;</td>
+</tr>
+<tr>       
+        <td> OWL::TImageList*         pSmImageList;</td>     
+</tr>
+</td>
+</table>
+</center><br><br>
+Classe des objets : <U>class SOAPListWinArray   </U>: <br><br>
+<center>
+<table border=1>
+  <tr> 
+  <td> bool bOwner;</td>   <td> // L'array est-elle propriétaire des objets référencés</td> 
+ </tr>
+</table>
+</center><br><br>
+Classe des objets : <U>class NSSOAPView    </U>: <br><br>
+<center>
+<table border=1>
+  <tr>
+   <td> NSSOAPDocument*     pDocSOAP; </td> 	          <td>   // Pointeur sur document soap</td>
+ </tr>
+  <tr>	          
+    <td>     SOAPListWinArray*   pArraySOAPListWindows;</td> 	           <td>  // ListWindow</td>
+ </tr>
+ <tr> 	          
+     <td>    int                 nSOAPWindowList;</td>
+ </tr> 	          
+ <tr>
+      <td>   bool	            bSetupToolBar;</td> 	          
+</tr>
+</table>
+</center><br><br>
+Classe des objets : <U>class NSSOAPTankView   </U> <br><br>
+<center>
+<table border=1>
+  <tr>
+       <td>  NSSOAPDocument *pDocSOAP;</td> 	          
+ </tr>
+  <tr>	
+       <td>  bool	       bSetupToolBar;</td> 
+</tr>
+</table>
+</center><br><br>
+Classe des objets : <U>class NSSOAPDlg    </U> <br><br>
+<center>
+<table border=1>
+  <tr>
+       <td> OWL::TEdit  *pSOAPEdit1;</td> 
+</tr>
+  <tr>	
+       <td> OWL::TEdit  *pSOAPEdit2;</td>
+</tr>
+  <tr>	 
+        <td> OWL::TEdit  *pSOAPEdit3;</td>
+</tr>
+  <tr>	 
+        <td> string      *psSOAPEdit;</td> 
+	</tr>
+            

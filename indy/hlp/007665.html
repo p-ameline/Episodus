@@ -1,0 +1,183 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+<TITLE>TIdRSH</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <META name="GENERATOR" content="Doc-O-Matic">
+    <LINK rel="STYLESHEET" href="default.css" type="text/css">
+
+<SCRIPT LANGUAGE="JavaScript1.2" SRC="scripts.js"></SCRIPT>
+</HEAD>
+<BODY CLASS="Element57">
+<TABLE BORDER="0" BGCOLOR="#AACCFF" WIDTH="100%" CELLSPACING="0" CELLPADDING="0">
+<TR><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element1">
+Indy 9</DIV>
+</TD><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element2">
+<A HREF="content.html" CLASS="Element59">Content</A> | <A HREF="idx.html" CLASS="Element59">Index</A> | <A HREF="symref.html" CLASS="Element59">Reference</A></DIV>
+</TD></TR></TABLE><DIV CLASS="Element58">
+<DIV CLASS="Element5">
+TIdRSH</DIV>
+<DIV CLASS="Element7">
+<A HREF="013408.html" CLASS="Element59">Hierarchy</A>, <A HREF="013409.html" CLASS="Element59">Properties</A>, <A HREF="013410.html" CLASS="Element59">Methods</A>, <A HREF="013411.html" CLASS="Element59">Events</A>, <A HREF="013412.html" CLASS="Element59">See Also</A>, <A HREF="002806.html" CLASS="Element59">Unit: IdRSH</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+This class implements Unix Remote Shell (RSH) as a client.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12">TIdRSH = <STRONG>class</STRONG>(<A HREF="007648.html" CLASS="Element59">TIdRemoteCMDClient</A>)</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Unit</DIV>
+<DIV CLASS="Element69">
+<A HREF="002806.html" CLASS="Element59">IdRSH</A></DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+This class implements Unix Remote Shell (RSH) as a client. The RSH protocol is sometimes used to run tasks from remote locations without having to <A HREF="006944.html" CLASS="Element59">send</A> passwords to a remote system. This protocol was originally intended as a temporary &quot;hack&quot; in some older Berkeley Unix Distributions that came into wide usage.<P CLASS="Element10">
+Note that this protocol can pose a security hazard on the Internet as it only uses user ID's which are sent in plain-text, IP Addresses that are used as part of the server authentication can be falsified, a port number restriction can easily be overcome by using a single-user operating system or by someone with administrative privileges on a multi-user operating system, and this protocol is not compatible with some firewall-proxy configurations.<P CLASS="Element10">
+To use this component:<P CLASS="Element10">
+<UL>
+<LI>Set the TIdRSH.Host to the I.P. Address or name of the remote machine.<P CLASS="Element10">
+<LI>Set the <A HREF="007665.html#0000" CLASS="Element59">TIdRSH.ClientUserName</A> to the user's local User ID.<P CLASS="Element10">
+<LI>Set the <A HREF="007665.html#0003" CLASS="Element59">TIdRSH.HostUserName</A> to the user's remote User ID.<P CLASS="Element10">
+<LI>Use the <A HREF="007665.html#0002" CLASS="Element59">TIdRSH.Execute</A> method with the command to run on the remote machine.</UL>
+</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0000">TIdRSH.ClientUserName</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007665.html" CLASS="Element59">TIdRSH</A>, <A HREF="013413.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+This property is the user's current name on their machine.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> ClientUserName: <STRONG>String</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+This property is the user's current name on their machine that will be sent to the RSH Deamon for authentication along with the <A HREF="007665.html#0003" CLASS="Element59">TIdRSH.HostUserName</A> whenever the <A HREF="007665.html#0002" CLASS="Element59">TIdRSH.Execute</A> method is called. For Windows RSH Clients, this is usually set with the value obtained with the GetUserName Win32 API function.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0003">TIdRSH.HostUserName</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007665.html" CLASS="Element59">TIdRSH</A>, <A HREF="013414.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+User ID on the remote host.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> HostUserName: <STRONG>String</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+HostUserName is the uUser ID on the remote host. HostUserName is sent along with the local user name (IdRSH.<A HREF="007665.html#0000" CLASS="Element59">ClientUserName</A>) for authentication when the <A HREF="007665.html#0002" CLASS="Element59">TIdRSH.Execute</A> method is called.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0004">TIdRSH.Port</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007665.html" CLASS="Element59">TIdRSH</A>, <A HREF="013415.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Port number for the RSH client connection.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> Port: integer;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Port is an Integer property that identifies the Port number for the RSH client connection. The default value for Port is <A HREF="002381.html" CLASS="Element59">IdPORT_cmd</A> (514), as assigned in the constructor for the object instance.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0005">TIdRSH.UseReservedPorts</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007665.html" CLASS="Element59">TIdRSH</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Indicates that connections are restricted to a fixed range of port numbers.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> UseReservedPorts: Boolean;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+UseReservedPorts is a Boolean property that indicates if the RSH client is required to use a fixed range of reserved port numbers for connections to the RDH daemon. The default value for UseReservedPorts is <A HREF="002800.html" CLASS="Element59">IDRemoteFixPort</A>, as assigned in the <A HREF="007665.html#0001" CLASS="Element59">Create</A> constructor.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0001">TIdRSH.Create</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007665.html" CLASS="Element59">TIdRSH</A>, <A HREF="013416.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Instantiates a <A HREF="007665.html" CLASS="Element59">TIdRSH</A> instance.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>constructor</STRONG> Create(AOwner: TComponent); <STRONG>override</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+AOwner: TComponent</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Owner of the object instance.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Create constructs a properly initialized instance of <A HREF="007665.html" CLASS="Element59">TIdRSH</A> using the inherited Create constructor, and initializes <A HREF="007665.html#0004" CLASS="Element59">Port</A> to the constant value <A HREF="002381.html" CLASS="Element59">IdPORT_cmd</A> (Decimal <STRONG>514</STRONG>) as required by the RSH Protocol.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0002">TIdRSH.Execute</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007665.html" CLASS="Element59">TIdRSH</A>, <A HREF="013417.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+This method executes a command (ACommand) on the RSH Deamon.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>function</STRONG> Execute(ACommand: <STRONG>String</STRONG>): <STRONG>String</STRONG>; <STRONG>override</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+ACommand: String</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+The command to execute on the remote system.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Return Value</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+String - The results from the command that was executed or no value if an error occurred.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+This method authenticates to the RSH Deamon with the <A HREF="007665.html#0000" CLASS="Element59">TIdRSH.ClientUserName</A> and the <A HREF="007665.html#0003" CLASS="Element59">TIdRSH.HostUserName</A> and than executes a command (ACommand) on the RSH Deamon. This is only intended for non-interactive processes where the no input is expected from the user.<P CLASS="Element10">
+If an error occurred, TIdRemoteCMD.ErrorReply is set to true and the TIdRemoteCMD.ErrorMessage contains the message returned from the RSH Deamon. The inherited <A HREF="007648.html#0000" CLASS="Element59">TIdRemoteCMDClient.UseStdError</A> property effects how error messages are sent from the RSH Deamon.</DIV>
+</DIV>
+<DIV CLASS="Element62">
+<HR>Created with Doc-O-Matic 2 donated to <STRONG><A HREF="http://www.delphi-jedi.org">Project JEDI</A></STRONG>. Commercial license available from the <STRONG><A HREF="http://www.doc-o-matic.com">Doc-O-Matic site</A></STRONG>.</DIV>
+</DIV></BODY></HTML>

@@ -1,0 +1,171 @@
+// -----------------------------------------------------------------------------
+// nsstructure.h
+// -----------------------------------------------------------------------------
+// gestion de structure (au sens Unités Fonctionnelles)
+// -----------------------------------------------------------------------------
+// $Revision: 1.2 $
+// $Author: pameline $
+// $Date: 2009/07/23 17:08:10 $
+// -----------------------------------------------------------------------------
+
+// -----------------------------------------------------------------------------
+// Copyright Nautilus, 2004
+// http://www.nautilus-info.com
+// -----------------------------------------------------------------------------
+// Ce logiciel est un programme informatique servant à gérer et traiter les
+// informations de santé d'une personne.
+//
+// Ce logiciel est régi par la licence CeCILL soumise au droit français et
+// respectant les principes de diffusion des logiciels libres. Vous pouvez
+// utiliser, modifier et/ou redistribuer ce programme sous les conditions de la
+// licence CeCILL telle que diffusée par le CEA, le CNRS et l'INRIA sur le site
+// "http://www.cecill.info".
+//
+// En contrepartie de l'accessibilité au code source et des droits de copie, de
+// modification et de redistribution accordés par cette licence, il n'est offert
+// aux utilisateurs qu'une garantie limitée. Pour les mêmes raisons, seule une
+// responsabilité restreinte pèse sur l'auteur du programme, le titulaire des
+// droits patrimoniaux et les concédants successifs.
+//
+// A cet égard  l'attention de l'utilisateur est attirée sur les risques
+// associés au chargement, à l'utilisation, à la modification et/ou au
+// développement et à la reproduction du logiciel par l'utilisateur étant donné
+// sa spécificité de logiciel libre, qui peut le rendre complexe à manipuler et
+// qui le réserve donc à des développeurs et des professionnels avertis
+// possédant des connaissances informatiques approfondies. Les utilisateurs sont
+// donc invités à charger et tester l'adéquation du logiciel à leurs besoins
+// dans des conditions permettant d'assurer la sécurité de leurs systèmes et ou
+// de leurs données et, plus généralement, à l'utiliser et l'exploiter dans les
+// mêmes conditions de sécurité.
+//
+// Le fait que vous puissiez accéder à cet en-tête signifie que vous avez pris
+// connaissance de la licence CeCILL, et que vous en avez accepté les termes.
+// -----------------------------------------------------------------------------
+// This software is a computer program whose purpose is to manage and process
+// a person's health data.
+//
+// This software is governed by the CeCILL  license under French law and abiding
+// by the rules of distribution of free software. You can use, modify and/ or
+// redistribute the software under the terms of the CeCILL license as circulated
+// by CEA, CNRS and INRIA at the following URL "http://www.cecill.info".
+//
+// As a counterpart to the access to the source code and  rights to copy, modify
+// and redistribute granted by the license, users are provided only with a
+// limited warranty and the software's author, the holder of the economic
+// rights, and the successive licensors have only limited liability.
+//
+// In this respect, the user's attention is drawn to the risks associated with
+// loading, using, modifying and/or developing or reproducing the software by
+// the user in light of its specific status of free software, that may mean that
+// it is complicated to manipulate, and that also therefore means that it is
+// reserved for developers and experienced professionals having in-depth
+// computer knowledge. Users are therefore encouraged to load and test the
+// software's suitability as regards their requirements in conditions enabling
+// the security of their systems and/or data to be ensured and, more generally,
+// to use and operate it in the same conditions as regards security.
+//
+// The fact that you are presently reading this means that you have had
+// knowledge of the CeCILL license and that you accept its terms.
+// -----------------------------------------------------------------------------
+
+
+#ifndef __NSSTRUCTURE_H__
+# define __NSSTRUCTURE_H__
+
+# include <vector>
+# include <string>
+
+# ifdef _NSUTILDLL
+#  define _CLASSUTIL __export
+# else
+#  define _CLASSUTIL __import
+# endif // _NSUTILDLL
+
+using namespace std ;
+
+class NSSuper ;
+
+class _CLASSUTIL NSStructure
+{
+ public:
+ 	//! \brief default constructor
+    //! \param sOID Episodus Global object ID
+    //! \param sSID Structure Local ID
+    //! \param sType structure type
+ 	NSStructure(string sName, string sOID, string sSID, string sType) { _structureLabel = sName ; _objectId = sOID ; _structureId = sSID ; _structureType = sType ; }
+
+    //! \simple structure constructor
+    //! \param sOID Episodus Global object ID
+    //! \param pCtx Episodus Global context
+    NSStructure(string sOID, NSSuper* pSuper);
+
+    //! \brief destructor
+    ~NSStructure() {}
+
+    //! \brief operator =
+    NSStructure& operator=(const NSStructure& src) { if (this == &src) return (*this) ; _objectId = src.getObjectId() ; _structureId = src.getStructureId() ; _structureType = src.getStructureType() ; return (*this) ; }
+
+    //! \brief operator==
+	int operator==(const NSStructure& src) const { if ((getObjectId() == src.getObjectId()) && (getStructureId() == src.getStructureId()) && (getStructureType() == src.getStructureType())) return 1 ; return 0 ; }
+
+    //! \brief  get Episodus Global object ID
+    //! \return Episodus Global object ID
+    const string getObjectId() const { return _objectId ; }
+
+    //! \brief  get Structure Local ID
+    //! \return Structure Local ID
+    const string getStructureId() const { return _structureId ; }
+
+    //! \brief
+    const string getStructureType() const { return _structureType ; }
+
+ protected:
+
+ 	string _structureLabel ;		//!< Structure label
+ 	string _objectId ;				//!< Episodus Global object ID
+  string _structureId ;			//!< Structure Local ID
+  string _structureType ;		//!< Structure Local Type
+} ;
+
+
+typedef vector<NSStructure>								NSStructureVector ;
+typedef NSStructureVector::iterator				NSStructureIter ;
+typedef NSStructureVector::const_iterator	NSStructureCIter ;
+
+
+class _CLASSUTIL NSStructureArray : public NSStructureVector
+{
+ public:
+ 	//! default constructor
+ 	NSStructureArray() : NSStructureVector() {}
+
+  //! destructor
+  ~NSStructureArray() { clear() ; }
+
+  //! initialization method
+  bool init(NSSuper* pSuper) ;
+
+  //! \brief  get Structure which has an Object ID
+  //! \param  sObjectID Episodus Global object ID
+  //! \return Structure element which has Episodus Global object ID sObjectID
+  const NSStructure& getStructureFromObjectID(const string sObjectID) const ;
+
+  //! \brief  get Structure which has a Structure ID
+  //! \param  sStructureID Structure Local ID
+  //! \return Structure which has Structure Local ID sStructureID
+  const NSStructure& getStructureFromStructureID(const string sStructureID) const ;
+
+  //! \brief  get Episodus Global object ID from a Structure Local ID
+  //! \param  sStructureID Structure Local ID
+  //! \return Episodus Global object ID
+	const string getObjectIDFromStructureID(const string sStructureID) const ;
+
+  //! \brief  get a Structure Local ID from Episodus Global object ID
+  //! \param  sObjectID Episodus Global object ID
+  //! \return Structure Local ID
+  const string getStructureIDFromObjectID(const string sObjectID) const ;
+} ;
+
+
+#endif // !__NSSTRUCTURE_H__
+

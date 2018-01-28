@@ -1,0 +1,248 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+<TITLE>TIdRFCReplies</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <META name="GENERATOR" content="Doc-O-Matic">
+    <LINK rel="STYLESHEET" href="default.css" type="text/css">
+
+<SCRIPT LANGUAGE="JavaScript1.2" SRC="scripts.js"></SCRIPT>
+</HEAD>
+<BODY CLASS="Element57">
+<TABLE BORDER="0" BGCOLOR="#AACCFF" WIDTH="100%" CELLSPACING="0" CELLPADDING="0">
+<TR><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element1">
+Indy 9</DIV>
+</TD><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element2">
+<A HREF="content.html" CLASS="Element59">Content</A> | <A HREF="idx.html" CLASS="Element59">Index</A> | <A HREF="symref.html" CLASS="Element59">Reference</A></DIV>
+</TD></TR></TABLE><DIV CLASS="Element58">
+<DIV CLASS="Element5">
+TIdRFCReplies</DIV>
+<DIV CLASS="Element7">
+<A HREF="013367.html" CLASS="Element59">Hierarchy</A>, <A HREF="013368.html" CLASS="Element59">Properties</A>, <A HREF="013369.html" CLASS="Element59">Methods</A>, <A HREF="013370.html" CLASS="Element59">See Also</A>, <A HREF="002805.html" CLASS="Element59">Unit: IdRFCReply</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Implements a container for RFC-compliant protocol responses.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12">TIdRFCReplies = <STRONG>class</STRONG>(TOwnedCollection)</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Unit</DIV>
+<DIV CLASS="Element69">
+<A HREF="002805.html" CLASS="Element59">IdRFCReply</A></DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+TIdRFCReplies is a TOwnedCollection descendant that implements a container for maintenance and storage of <A HREF="007663.html" CLASS="Element59">TIdRFCReply</A> collection items. TIdRFCReplies is used in server applications that generate RFC-compliant protocol response messages that include a numeric response code and associated descriptive text.<P CLASS="Element10">
+The TIdRFCReplies collection provides methods that locate specific response collection items, and update the associated numeric response code and descriptive text for an existing reply.<P CLASS="Element10">
+TIdRFCReplies is the type used to represent the <A HREF="007831.html#0019" CLASS="Element59">TIdTCPServer.ReplyTexts</A> property.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0004">TIdRFCReplies.Items</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007662.html" CLASS="Element59">TIdRFCReplies</A>, <A HREF="013371.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Provides indexed access to the items in the collection.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> Items [<STRONG>Index</STRONG>: Integer]: <A HREF="007663.html" CLASS="Element59">TIdRFCReply</A>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Items is an indexed <A HREF="007663.html" CLASS="Element59">TIdRFCReply</A> property used to access individual items in the collection by the ordinal position specified in Index. Items is also the default property accessed when referring to <A HREF="007662.html" CLASS="Element59">TIdRFCReplies</A>. For example, the following statements return the same values:<P CLASS="Element10">
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12">      <A HREF="007662.html" CLASS="Element59">TIdRFCReplies</A>[0]
+      TIdRFCReplies.Items[0];</PRE></DIV>
+</DIV>
+<P CLASS="Element10">
+Read access to the Items property insures that the return value is cast to a <A HREF="007663.html" CLASS="Element59">TIdRFCReply</A> object instance.<P CLASS="Element10">
+Items is used in <A HREF="007662.html#0003" CLASS="Element59">FindByNumber</A> to locate and return a collection item having a specific numeric code.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0000">TIdRFCReplies.Add</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007662.html" CLASS="Element59">TIdRFCReplies</A>, <A HREF="013372.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Creates a new protocol response item for the collection.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>function</STRONG> Add: <A HREF="007663.html" CLASS="Element59">TIdRFCReply</A>; <STRONG>overload</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+ANumericCode</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Numeric code for the protocol response.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+AText</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Descriptive text for the protocol response.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Add is an overloaded <A HREF="007663.html" CLASS="Element59">TIdRFCReply</A> function in <A HREF="007662.html" CLASS="Element59">TIdRFCReplies</A> used to create a new <A HREF="007663.html" CLASS="Element59">TIdRFCReply</A> protocol reponse item for the collection. Add calls the inherited Add method and casts the return value to a <A HREF="007663.html" CLASS="Element59">TIdRFCReply</A> instance as required in <A HREF="007662.html#0004" CLASS="Element59">Items</A>.<P CLASS="Element10">
+When Add is called with the arguments ANumericCode and AText, Add attempts locate an exist <A HREF="007663.html" CLASS="Element59">TIdRFCReply</A> instance having the specified values. If a collection item with the numeric code in ANumericCode already exists, add performs no action and returns Nil. Otherwise, a new collection item is created containing the specified values.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0001">TIdRFCReplies.Add</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007662.html" CLASS="Element59">TIdRFCReplies</A>, <A HREF="013373.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Creates a new protocol response item for the collection.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>function</STRONG> <A HREF="007662.html#0000" CLASS="Element59">Add</A>(<STRONG>const</STRONG> ANumericCode: Integer; <STRONG>const</STRONG> AText: <STRONG>string</STRONG>): <A HREF="007663.html" CLASS="Element59">TIdRFCReply</A>; <STRONG>overload</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+const ANumericCode: Integer</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Numeric code for the protocol response.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+const AText: string</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Descriptive text for the protocol response.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+<A HREF="007662.html#0000" CLASS="Element59">Add</A> is an overloaded <A HREF="007663.html" CLASS="Element59">TIdRFCReply</A> function in <A HREF="007662.html" CLASS="Element59">TIdRFCReplies</A> used to create a new <A HREF="007663.html" CLASS="Element59">TIdRFCReply</A> protocol reponse item for the collection. <A HREF="007662.html#0000" CLASS="Element59">Add</A> calls the inherited <A HREF="007662.html#0000" CLASS="Element59">Add</A> method and casts the return value to a <A HREF="007663.html" CLASS="Element59">TIdRFCReply</A> instance as required in <A HREF="007662.html#0004" CLASS="Element59">Items</A>.<P CLASS="Element10">
+When <A HREF="007662.html#0000" CLASS="Element59">Add</A> is called with the arguments ANumericCode and AText, <A HREF="007662.html#0000" CLASS="Element59">Add</A> attempts locate an exist <A HREF="007663.html" CLASS="Element59">TIdRFCReply</A> instance having the specified values. If a collection item with the numeric code in ANumericCode already exists, add performs no action and returns Nil. Otherwise, a new collection item is created containing the specified values.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0002">TIdRFCReplies.Create</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007662.html" CLASS="Element59">TIdRFCReplies</A>, <A HREF="013374.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Constructor for the object instance.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>constructor</STRONG> Create(AOwner: TPersistent); <STRONG>reintroduce</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+AOwner: TPersistent</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Owner of the collection.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Create is the constructor for the object instance. Create calls the inherited constructor using AOwner as the owner of the collection and <A HREF="007663.html" CLASS="Element59">TIdRFCReply</A> as the ItemClass for new <A HREF="007662.html#0004" CLASS="Element59">Items</A> added to the collection.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0003">TIdRFCReplies.FindByNumber</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007662.html" CLASS="Element59">TIdRFCReplies</A>, <A HREF="013375.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Locates an item in the collection having a specific numeric code.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>function</STRONG> FindByNumber(<STRONG>const</STRONG> ANo: Integer): <A HREF="007663.html" CLASS="Element59">TIdRFCReply</A>; <STRONG>virtual</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+const ANo: Integer</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Numeric response to locate in the collection.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+FindByNumber is a <A HREF="007663.html" CLASS="Element59">TIdRFCReply</A> function used to locate an existing <A HREF="007663.html" CLASS="Element59">TIdRFCReply</A> protocol reponse in the collection <A HREF="007662.html#0004" CLASS="Element59">Items</A> that has the numeric code specified in ANo. FindByNumber will return Nil if a collection tem cannot be found in <A HREF="007662.html#0004" CLASS="Element59">Items</A> that matches the numeric code in ANo.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0005">TIdRFCReplies.UpdateReply</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007662.html" CLASS="Element59">TIdRFCReplies</A>, <A HREF="013376.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Ensures a collection item having the specified numeric code and text.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>function</STRONG> UpdateReply(<STRONG>const</STRONG> ANumericCode: Integer; <STRONG>const</STRONG> AText: <STRONG>string</STRONG>): <A HREF="007663.html" CLASS="Element59">TIdRFCReply</A>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+const ANumericCode: Integer</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Numeric code for the protocol response.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+const AText: string</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Descriptive text for the protocol response.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+UpdateReply is a <A HREF="007663.html" CLASS="Element59">TIdRFCReply</A> function used to ensure that the collection contains a <A HREF="007663.html" CLASS="Element59">TIdRFCReply</A> in <A HREF="007662.html#0004" CLASS="Element59">Items</A> having the numeric code and text specified in the ANumericCode and AText parameters. UpdateReply calls <A HREF="007662.html#0003" CLASS="Element59">FindByNumber</A> to locate a collection item with the value in ANumericCode, and calls <A HREF="007662.html#0000" CLASS="Element59">Add</A> if none can be located in <A HREF="007662.html#0004" CLASS="Element59">Items</A>. UpdateReply sets property values in the <A HREF="007663.html" CLASS="Element59">TIdRFCReply</A> instance to the numeric code and text specified in the ANumericCode and AText parameters.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0006">TIdRFCReplies.UpdateText</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007662.html" CLASS="Element59">TIdRFCReplies</A>, <A HREF="013377.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Updates text for an RFC response using values from the collection.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>procedure</STRONG> UpdateText(AReply: <A HREF="007663.html" CLASS="Element59">TIdRFCReply</A>);</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+AReply: TIdRFCReply</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+RFC response to be updated.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+UpdateText is a procedure used to update the descriptive text for the RFC response indicated in AReply using values from a collection item having the same numeric code. UpdateText checks AReply for blank text values, and calls <A HREF="007662.html#0003" CLASS="Element59">FindByNumber</A> to get a <A HREF="007663.html" CLASS="Element59">TIdRFCReply</A> from <A HREF="007662.html#0004" CLASS="Element59">Items</A> having a matching numeric code. If a collection item exists, it is used to assigned the decriptive text to the <A HREF="007663.html#000A" CLASS="Element59">TIdRFCReply.Text</A> in AReply.</DIV>
+</DIV>
+<DIV CLASS="Element62">
+<HR>Created with Doc-O-Matic 2 donated to <STRONG><A HREF="http://www.delphi-jedi.org">Project JEDI</A></STRONG>. Commercial license available from the <STRONG><A HREF="http://www.doc-o-matic.com">Doc-O-Matic site</A></STRONG>.</DIV>
+</DIV></BODY></HTML>

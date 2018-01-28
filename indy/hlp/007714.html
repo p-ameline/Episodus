@@ -1,0 +1,179 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+<TITLE>TIdSocketHandles</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <META name="GENERATOR" content="Doc-O-Matic">
+    <LINK rel="STYLESHEET" href="default.css" type="text/css">
+
+<SCRIPT LANGUAGE="JavaScript1.2" SRC="scripts.js"></SCRIPT>
+</HEAD>
+<BODY CLASS="Element57">
+<TABLE BORDER="0" BGCOLOR="#AACCFF" WIDTH="100%" CELLSPACING="0" CELLPADDING="0">
+<TR><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element1">
+Indy 9</DIV>
+</TD><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element2">
+<A HREF="content.html" CLASS="Element59">Content</A> | <A HREF="idx.html" CLASS="Element59">Index</A> | <A HREF="symref.html" CLASS="Element59">Reference</A></DIV>
+</TD></TR></TABLE><DIV CLASS="Element58">
+<DIV CLASS="Element5">
+TIdSocketHandles</DIV>
+<DIV CLASS="Element7">
+<A HREF="013769.html" CLASS="Element59">Hierarchy</A>, <A HREF="013770.html" CLASS="Element59">Properties</A>, <A HREF="013771.html" CLASS="Element59">Methods</A>, <A HREF="013772.html" CLASS="Element59">See Also</A>, <A HREF="002823.html" CLASS="Element59">Unit: IdSocketHandle</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Collection of <A HREF="007071.html" CLASS="Element59">socket</A> handles.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12">TIdSocketHandles = <STRONG>class</STRONG>(TOwnedCollection)</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Unit</DIV>
+<DIV CLASS="Element69">
+<A HREF="002823.html" CLASS="Element59">IdSocketHandle</A></DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+The TIdSocketHandles collection contains <A HREF="007713.html" CLASS="Element59">TIdSocketHandle</A> objects for the <A HREF="007831.html" CLASS="Element59">TIdTCPServer</A> and <A HREF="007877.html" CLASS="Element59">TIdUDPServer</A> components in their Bindings property. This permits a server to <A HREF="003177.html" CLASS="Element59">listen</A> on more than one Port and IP address.<P CLASS="Element10">
+The bindings must meet the following criterion:<P CLASS="Element10">
+<UL>
+<LI>The binding must contain a port.<P CLASS="Element10">
+<LI>The bindings for a server must<STRONG>NEVER</STRONG> allow duplicates for port or IP/port assignments. (e.g. :30 - :30, 127.0.0.1:30, 127.0.0.1:30)</UL>
+<P CLASS="Element10">
+TIdSocketHandles is a TOwnedCollection descendant that maintains additional information about the ItemClass (<A HREF="007713.html" CLASS="Element59">TIdSocketHandle</A>) for <A HREF="007714.html#0004" CLASS="Element59">Items</A> contained in the collection.<P CLASS="Element10">
+TIdSocketHandles contains the <A HREF="007714.html#0003" CLASS="Element59">DefaultPort</A> number to assign to new <A HREF="007713.html" CLASS="Element59">TIdSocketHandle</A> instances added to the collection.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0003">TIdSocketHandles.DefaultPort</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007714.html" CLASS="Element59">TIdSocketHandles</A>, <A HREF="013773.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Specifies the default port number used to identify a <A HREF="007071.html" CLASS="Element59">socket</A> connection.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> DefaultPort: integer;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+DefaultPort is an <STRONG>Integer</STRONG> property that identifies the default port number to assign to a new collection item. DefaultPort will be the value assigned to <A HREF="007713.html#0011" CLASS="Element59">TIdSocketHandle.Port</A> when the instance is added to the collection.<P CLASS="Element10">
+<STRONG>Note</STRONG>: Many values of DefaultPort are associated, by convention, with a particular service such as ftp or http.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0004">TIdSocketHandles.Items</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007714.html" CLASS="Element59">TIdSocketHandles</A>, <A HREF="013774.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Provides indexed access to the binding items in the collection.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> Items [<STRONG>Index</STRONG>: Integer]: <A HREF="007713.html" CLASS="Element59">TIdSocketHandle</A>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+Index</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Position of the binding collection item in the collection.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Return Value</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+<A HREF="007713.html" CLASS="Element59">TIdSocketHandle</A> - The binding found at Index in the collection.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Items is an indexed <A HREF="007713.html" CLASS="Element59">TIdSocketHandle</A> property. Use Items to access an individual binding item in the collection. The value of the Index parameter corresponds to the Index property of the collection item.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0000">TIdSocketHandles.Add</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007714.html" CLASS="Element59">TIdSocketHandles</A>, <A HREF="013775.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Creates a new collection item instance and adds it to <A HREF="007714.html#0004" CLASS="Element59">Items</A>.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>function</STRONG> Add: <A HREF="007713.html" CLASS="Element59">TIdSocketHandle</A>; <STRONG>reintroduce</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Return Value</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+<A HREF="007713.html" CLASS="Element59">TIdSocketHandle</A> - The binding added to the collection.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Add is a function that creates a new instance of <A HREF="007713.html" CLASS="Element59">TIdSocketHandle</A>, and adds the instance to the collection <A HREF="007714.html#0004" CLASS="Element59">Items</A>.<P CLASS="Element10">
+Add relies on the inherited Add method, and casts the new instance to the appropriate ItemClass (<A HREF="007713.html" CLASS="Element59">TIdSocketHandle</A>) prior to exiting the method. Add assigns the value in <A HREF="007714.html#0003" CLASS="Element59">DefaultPort</A> to Port property of the new instance. Add returns the new collection item.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0001">TIdSocketHandles.BindingByHandle</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007714.html" CLASS="Element59">TIdSocketHandles</A>, <A HREF="013776.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Retrieve an Indy <A HREF="007071.html" CLASS="Element59">socket</A> handle for the <A HREF="007071.html" CLASS="Element59">socket</A> binding.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>function</STRONG> BindingByHandle(<STRONG>const</STRONG> AHandle: <A HREF="007743.html" CLASS="Element59">TIdStackSocketHandle</A>): <A HREF="007713.html" CLASS="Element59">TIdSocketHandle</A>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+const AHandle: TIdStackSocketHandle</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+The protocol stack <A HREF="007071.html" CLASS="Element59">socket</A> handle binding to locate.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Return Value</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+<A HREF="007713.html" CLASS="Element59">TIdSocketHandle</A> - The Indy <A HREF="007071.html" CLASS="Element59">socket</A> handle for the <A HREF="007071.html" CLASS="Element59">socket</A> binding, or <STRONG>Nil</STRONG>.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+BindingByHandle is a <A HREF="007713.html" CLASS="Element59">TIdSocketHandle</A> function used to retrieve an Indy <A HREF="007071.html" CLASS="Element59">socket</A> from the <A HREF="007071.html" CLASS="Element59">socket</A> handle collection. BindingByHandle examines <A HREF="007714.html#0004" CLASS="Element59">Items</A> starting with the most recently created item in the collection, and navigates towards the oldest of the collection <A HREF="007714.html#0004" CLASS="Element59">Items</A>.<P CLASS="Element10">
+The return value for BindingByHandle will be <STRONG>Nil</STRONG> if the <A HREF="007071.html" CLASS="Element59">socket</A> binding specified by <I>AHandle</I> does not exist in the collection.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0002">TIdSocketHandles.Create</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007714.html" CLASS="Element59">TIdSocketHandles</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Constructs and initializes the collection before use.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>constructor</STRONG> Create(AOwner: TComponent); <STRONG>reintroduce</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Create constructs a properly initialized instance of the <A HREF="007714.html" CLASS="Element59">TIdSocketHandles</A> collection. Create relies on the inherited Create constructor to assign both the Owner and the ItemClass (<A HREF="007713.html" CLASS="Element59">TIdSocketHandle</A>) of the owned collection.<P CLASS="Element10">
+<STRONG>Note</STRONG>: If an exception is raised in the constructor, the Destroy destructor is called to clean up the failed instance.</DIV>
+</DIV>
+<DIV CLASS="Element62">
+<HR>Created with Doc-O-Matic 2 donated to <STRONG><A HREF="http://www.delphi-jedi.org">Project JEDI</A></STRONG>. Commercial license available from the <STRONG><A HREF="http://www.doc-o-matic.com">Doc-O-Matic site</A></STRONG>.</DIV>
+</DIV></BODY></HTML>

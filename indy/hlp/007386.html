@@ -1,0 +1,189 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+<TITLE>TIdHTTPProtocol</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <META name="GENERATOR" content="Doc-O-Matic">
+    <LINK rel="STYLESHEET" href="default.css" type="text/css">
+
+<SCRIPT LANGUAGE="JavaScript1.2" SRC="scripts.js"></SCRIPT>
+</HEAD>
+<BODY CLASS="Element57">
+<TABLE BORDER="0" BGCOLOR="#AACCFF" WIDTH="100%" CELLSPACING="0" CELLPADDING="0">
+<TR><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element1">
+Indy 9</DIV>
+</TD><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element2">
+<A HREF="content.html" CLASS="Element59">Content</A> | <A HREF="idx.html" CLASS="Element59">Index</A> | <A HREF="symref.html" CLASS="Element59">Reference</A></DIV>
+</TD></TR></TABLE><DIV CLASS="Element58">
+<DIV CLASS="Element5">
+TIdHTTPProtocol</DIV>
+<DIV CLASS="Element7">
+<A HREF="011489.html" CLASS="Element59">Hierarchy</A>, <A HREF="011490.html" CLASS="Element59">Properties</A>, <A HREF="011491.html" CLASS="Element59">Methods</A>, <A HREF="011492.html" CLASS="Element59">See Also</A>, <A HREF="002251.html" CLASS="Element59">Unit: IdHTTP</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Implements a HTTP protocol handler for connection and request/response processing.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12">TIdHTTPProtocol = <STRONG>class</STRONG>(TObject)</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Unit</DIV>
+<DIV CLASS="Element69">
+<A HREF="002251.html" CLASS="Element59">IdHTTP</A></DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+TIdHTTPProtocol is a TObject decendant that implements a HTTP protocol handler for an HTTP <A HREF="007386.html#0004" CLASS="Element59">Request</A> or HTTP <A HREF="007386.html#0005" CLASS="Element59">Response</A>. TIdHTTPProtocol is the type used to represent the internal protocol handler for <A HREF="007375.html" CLASS="Element59">TIdHTTP</A>, and allows the client to perform state-dependant protocol exchanges used during client connection and servicing of the request/response chain.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0004">TIdHTTPProtocol.Request</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007386.html" CLASS="Element59">TIdHTTPProtocol</A>, <A HREF="011493.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Represents HTTP request items used by the HTTP protocol handler.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> Request: <A HREF="007388.html" CLASS="Element59">TIdHTTPRequest</A>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Request is a read-only <A HREF="007388.html" CLASS="Element59">TIdHTTPRequest</A> property that represents the client connection and connection type, the HTTP method, the URL, and the input stream used by the HTTP protocol handler. The Request property is used in TIdHTTP.SetHeaders and TIdHTTP.SetCookies, and allows the protocol handler to provide the values used in a generated HTTP request to various event handlers in the <A HREF="007375.html" CLASS="Element59">TIdHTTP</A> client.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0005">TIdHTTPProtocol.Response</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007386.html" CLASS="Element59">TIdHTTPProtocol</A>, <A HREF="011494.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Represents HTTP response values captured by the HTTP protocol handler.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> Response: <A HREF="007390.html" CLASS="Element59">TIdHTTPResponse</A>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Response is a read-only <A HREF="007390.html" CLASS="Element59">TIdHTTPResponse</A> property that represents the HTTP client connection and connection flags, the numeric reponse code and text, and the content stream used by the HTTP protocol handler. The Response property is used in GetResponseHeaders, and allows the protocol handler to provide the values received in a HTTP response. Values in the Response property are updated using the <A HREF="007386.html#0006" CLASS="Element59">RetrieveHeaders</A> method when ConnectToHost or DoRequest is used.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0000">TIdHTTPProtocol.BuildAndSendRequest</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007386.html" CLASS="Element59">TIdHTTPProtocol</A>, <A HREF="011495.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Constructs and sends a HTTP request message using headers and cookies.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>procedure</STRONG> BuildAndSendRequest(AURI: <A HREF="007878.html" CLASS="Element59">TIdURI</A>);</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+AURI: TIdURI</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Optional Universal Resource Locator for the request.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+BuildAndSendRequest is a procedure that allows the protocol handler to set header values for the HTTP request, and to <A HREF="006944.html" CLASS="Element59">send</A> the request to the HTTP server. BuildAndSendRequest will insure that ProxyParams is updated from the raw headers in <A HREF="007386.html#0004" CLASS="Element59">Request</A>, and sets cookie values for the optional domain in AURI.<P CLASS="Element10">
+BuildAndSendRequest also generates the HTTP request message packet, including header values, and writes the values using the connection for the <A HREF="007375.html" CLASS="Element59">TIdHTTP</A> client. BuildAndSendRequest is called from ConnectToHost.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0001">TIdHTTPProtocol.Create</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007386.html" CLASS="Element59">TIdHTTPProtocol</A>, <A HREF="011496.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Constructor for the object instance.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>constructor</STRONG> Create(AConnection: <A HREF="007270.html" CLASS="Element59">TIdCustomHTTP</A>);</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Create is the constructor for the object instance. Create calls the inherited Create method to initialize the object instance. Create sets the internal member used to represent the <A HREF="007375.html" CLASS="Element59">TIdHTTP</A> connection for the protocol handler. Create also allocates resources used to represent the <A HREF="007386.html#0004" CLASS="Element59">Request</A> and <A HREF="007386.html#0005" CLASS="Element59">Response</A> headers generated during HTTP protocol exchanges.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0002">TIdHTTPProtocol.Destroy</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007386.html" CLASS="Element59">TIdHTTPProtocol</A>, <A HREF="011497.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Frees the object instance.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>destructor</STRONG> Destroy; <STRONG>override</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Destroy is the destructor for the object instance. Destroy frees resources allocted in the <A HREF="007386.html#0001" CLASS="Element59">Create</A> constructor, including <A HREF="007386.html#0004" CLASS="Element59">Request</A> and <A HREF="007386.html#0005" CLASS="Element59">Response</A>. Destroy calls the inherited Destroy method prior to exiting.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0003">TIdHTTPProtocol.ProcessResponse</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007386.html" CLASS="Element59">TIdHTTPProtocol</A>, <A HREF="011498.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Handles the state-dependent processing of requests and responses for an HTTP client.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>function</STRONG> ProcessResponse: <A HREF="007394.html" CLASS="Element59">TIdHTTPWhatsNext</A>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+ProcessResponse is a <A HREF="007394.html" CLASS="Element59">TIdHTTPWhatsNext</A> function that allows the HTTP protocol handler to perform state-dependent protocol exchanges using the <A HREF="007386.html#0004" CLASS="Element59">Request</A> and <A HREF="007386.html#0005" CLASS="Element59">Response</A> properties. ProcessResponse is, in essence, the state machine used to control actions of a <A HREF="007375.html" CLASS="Element59">TIdHTTP</A> client during connection and request/response processing.<P CLASS="Element10">
+ProcessResponse allows the protocol handler to detect and response to various conditions that include :<P CLASS="Element10">
+<UL>
+<LI>Redirection in a HTTP response.<P CLASS="Element10">
+<LI>Use of Keep-Alive for Secure Socket Layer transport.<P CLASS="Element10">
+<LI>HTTP Server and Proxy Server authorization.<P CLASS="Element10">
+<LI><A HREF="007386.html#0005" CLASS="Element59">Response</A> content stream handling.<P CLASS="Element10">
+<LI>Exception processing.</UL>
+<P CLASS="Element10">
+ProcessResponse is used when the HTTP client attempts to <A HREF="000295.html" CLASS="Element59">connect</A> to the remote server to perform an HTTP request or receive an HTTP response. The <A HREF="007394.html" CLASS="Element59">TIdHTTPWhatsNext</A> return value for ProcessResponse is updated often during execution of the method based on the numeric HTTP result codes or exceptions encountered during the request/response protocol exchange.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0006">TIdHTTPProtocol.RetrieveHeaders</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007386.html" CLASS="Element59">TIdHTTPProtocol</A>, <A HREF="011499.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Captures and processes headers in an HTTP response.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>procedure</STRONG> RetrieveHeaders;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+RetrieveHeaders is a procedure that allows the HTTP protocol handler to read header values in an HTTP <A HREF="007386.html#0005" CLASS="Element59">Response</A>, and to store the raw headers in the <A HREF="007386.html#0005" CLASS="Element59">Response</A> for the protocol handler. RetrieveHeaders clears all headers in <A HREF="007386.html#0005" CLASS="Element59">Response</A> prior to reading new values.<P CLASS="Element10">
+RetrieveHeaders repeatedly calls ReadLn until no more header data is available on the HTTP client connection, or an <A HREF="000364.html" CLASS="Element59">EIdConnClosedGracefully</A> is raised. If an exception is raised, the HTTP client connection is closed. When all headers have been read from the client, RetrieveHeaders calls Response.ProcessHeaders to move the read headers to their corresponding properties.</DIV>
+</DIV>
+<DIV CLASS="Element62">
+<HR>Created with Doc-O-Matic 2 donated to <STRONG><A HREF="http://www.delphi-jedi.org">Project JEDI</A></STRONG>. Commercial license available from the <STRONG><A HREF="http://www.doc-o-matic.com">Doc-O-Matic site</A></STRONG>.</DIV>
+</DIV></BODY></HTML>

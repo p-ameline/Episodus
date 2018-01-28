@@ -1,0 +1,61 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+<TITLE>TIdHTTPMethod</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <META name="GENERATOR" content="Doc-O-Matic">
+    <LINK rel="STYLESHEET" href="default.css" type="text/css">
+
+<SCRIPT LANGUAGE="JavaScript1.2" SRC="scripts.js"></SCRIPT>
+</HEAD>
+<BODY CLASS="Element57">
+<TABLE BORDER="0" BGCOLOR="#AACCFF" WIDTH="100%" CELLSPACING="0" CELLPADDING="0">
+<TR><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element1">
+Indy 9</DIV>
+</TD><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element2">
+<A HREF="content.html" CLASS="Element59">Content</A> | <A HREF="idx.html" CLASS="Element59">Index</A> | <A HREF="symref.html" CLASS="Element59">Reference</A></DIV>
+</TD></TR></TABLE><DIV CLASS="Element58">
+<DIV CLASS="Element5">
+TIdHTTPMethod</DIV>
+<DIV CLASS="Element7">
+<A HREF="002251.html" CLASS="Element59">Unit: IdHTTP</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Represents the HTTP Method for a request.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12">TIdHTTPMethod = (hmHead, hmGet, hmPost, hmOptions, hmTrace, hmPut, hmDelete, hmConnect);</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Unit</DIV>
+<DIV CLASS="Element69">
+<A HREF="002251.html" CLASS="Element59">IdHTTP</A></DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+TIdHTTPMethod is an enumerated type used to represent the HTTP method for a request. TIdHTTPMethod can be one of the following values:<P CLASS="Element10">
+<UL>
+<LI>hmHead - Request for Headers for the resource.<P CLASS="Element10">
+<LI>hmGet - Request to Get the content for the resource.<P CLASS="Element10">
+<LI>hmPost - Request to Post headers and data to a resource.<P CLASS="Element10">
+<LI>hmOptions - Request for communication Options supported by the server or resource.<P CLASS="Element10">
+<LI>hmTrace - Request for remote application-layer testing and diagnostic messages.<P CLASS="Element10">
+<LI>hmPut - Request to creater or replace a resource.<P CLASS="Element10">
+<LI>hmDelete - Request to Delete a server resource.<P CLASS="Element10">
+<LI>hmConnect - Request for connection to a proxy server.</UL>
+</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Notes</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+hmHead, hmGet, and hmPost are supported for HTTP 1.0. Other HTTP methods require HTTP 1.1.<P CLASS="Element10">
+TIdHTTPMethod is used by <A HREF="007375.html" CLASS="Element59">TIdHTTP</A> in the DoRequest method, and is the type used to represent the <A HREF="007388.html#0001" CLASS="Element59">TIdHTTPRequest.Method</A> property.</DIV>
+</DIV>
+<DIV CLASS="Element62">
+<HR>Created with Doc-O-Matic 2 donated to <STRONG><A HREF="http://www.delphi-jedi.org">Project JEDI</A></STRONG>. Commercial license available from the <STRONG><A HREF="http://www.doc-o-matic.com">Doc-O-Matic site</A></STRONG>.</DIV>
+</DIV></BODY></HTML>

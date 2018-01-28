@@ -1,0 +1,79 @@
+#------------------------------------------------------------------------------
+VERSION = BWS.01
+#------------------------------------------------------------------------------
+!ifndef ROOT
+ROOT = $(MAKEDIR)\..
+!endif
+#------------------------------------------------------------------------------
+MAKE = $(ROOT)\bin\make.exe -$(MAKEFLAGS) -f$**
+DCC = $(ROOT)\bin\dcc32.exe $**
+BRCC = $(ROOT)\bin\brcc32.exe $**
+#------------------------------------------------------------------------------
+PROJECTS = nsmutil nsm_sgbd nsmsavoir nsmbb nsmdecode nsmdn nsmepisod nsmoutil \
+  nsmcompta nsmdzz nsmclient dclusr40.bpl nsm_ocr.dll nsm_grab.dll nsm_ob1.dll \
+  nsm_apicr.dll nsm_hunspell.dll caldav.dll EpiPump.exe ns_capture
+#------------------------------------------------------------------------------
+default: $(PROJECTS)
+#------------------------------------------------------------------------------
+
+nsmutil: nsmutil.bpr
+  $(MAKE)
+
+nsm_sgbd: nsm_sgbd.bpr
+  $(MAKE)
+
+nsmsavoir: nsmsavoir.bpr
+  $(MAKE)
+
+nsmbb: nsmbb.bpr
+  $(MAKE)
+
+nsmdecode: nsmdecode.bpr
+  $(MAKE)
+
+nsmdn: nsmdn.bpr
+  $(MAKE)
+
+nsmepisod: nsmepisod.bpr
+  $(MAKE)
+
+nsmoutil: nsmoutil.bpr
+  $(MAKE)
+
+nsmcompta: nsmcompta.bpr
+  $(MAKE)
+
+nsmdzz: nsmdzz.bpr
+  $(MAKE)
+
+nsmclient: nsmclient.bpr
+  $(MAKE)
+
+dclusr40.bpl: ..\..\Program Files (x86)\Borland\CBuilder4\Lib\dclusr40.bpk
+  $(MAKE)
+
+nsm_ocr.dll: nsm_ocr.bpr
+  $(MAKE)
+
+nsm_grab.dll: nsm_grab.bpr
+  $(MAKE)
+
+nsm_ob1.dll: nsm_ob1.bpr
+  $(MAKE)
+
+nsm_apicr.dll: nsm_apicr.bpr
+  $(MAKE)
+
+nsm_hunspell.dll: nsm_hunspell.bpr
+  $(MAKE)
+
+caldav.dll: caldav.bpr
+  $(MAKE)
+
+EpiPump.exe: EpiPump.bpr
+  $(MAKE)
+
+ns_capture: ns_capture.bpr
+  $(MAKE)
+
+

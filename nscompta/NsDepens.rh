@@ -1,0 +1,75 @@
+// nscompta.rh : identificateurs du fichier de ressources
+// Dialogue IDD_2035
+#define IDC_2035_1	101#define IDC_2035_2	102
+#define IDC_2035_3	103
+#define IDC_2035_4	104
+#define IDC_2035_5	105
+#define IDC_2035_6	106
+#define IDC_2035_7	107
+#define IDC_2035_8	108
+#define IDC_2035_9	109
+#define IDC_2035_10	110
+#define IDC_2035_11	111
+#define IDC_2035_12	112
+#define IDC_2035_13	113
+#define IDC_2035_14	114
+#define IDC_2035_15	115
+#define IDC_2035_16	116
+#define IDC_2035_17	117
+#define IDC_2035_18	118
+#define IDC_2035_19	119
+#define IDC_2035_20	120
+#define IDC_2035_21	121
+#define IDC_2035_22	122
+#define IDC_2035_23	123
+#define IDC_2035_24	124
+#define IDC_2035_25	125
+#define IDC_2035_26	126
+#define IDC_2035_27	127
+#define IDC_2035_28	128
+#define IDC_2035_29	129
+#define IDC_2035_30	130
+#define IDC_2035_31	131
+#define IDC_2035_32 132
+#define IDC_2035_BH	133
+#define IDC_2035_BM	134
+#define IDC_2035_BJ	135
+#define IDC_2035_FERMER	136
+#define IDC_2035_IMPRIMER	137
+
+// Dialogue IDD_ANNEE2035
+
+#define IDC_A2035_ANNEE	101
+
+// dialogue IDD_DEPENSES_DIALOG
+
+#define IDC_DEPS_DATE	        101
+#define IDC_DEPS_LIBELLE        102
+#define IDC_DEPS_PLUS	        103
+#define IDC_DEPS_MOINS	        104
+#define IDC_DEPS_SOMME          105
+#define IDC_DEPS_LIGNE		    106
+#define IDC_DEPS_BANQUE		    107#define IDC_DEPS_MODE           108
+#define IDC_DEPS_ESPECES        109
+#define IDC_DEPS_CHEQUE         110
+#define IDC_DEPS_VIREMENT       111
+#define IDC_DEPS_CB             112
+
+////////////////////////////////////////////////////
+
+// dialogue IDD_RECETTES DIALOG
+
+#define IDC_REC_DATE            101
+#define IDC_REC_LIBELLE	        102
+#define IDC_REC_SOMME	        103
+#define IDC_MODE                104
+#define IDC_REC_ESPECES         105
+#define IDC_REC_CHEQUE          106
+#define IDC_REC_VIREMENT        107
+#define IDC_REC_CB              108
+#define IDC_ANALYSER            109
+#define IDC_REC_LIGNE		    110
+#define IDC_REC_BANQUE		    111
+
+// fin de nscompta.rh
+////////////////////////////////////////////

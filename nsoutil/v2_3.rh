@@ -1,0 +1,21 @@
+// Conversion de fichiers
+//
+#define IDC_CVT_PAT    101
+#define IDC_CVT_COR    102
+#define IDC_CVT_UTIL   103
+#define IDC_CVT_MAT    104
+#define IDC_CVT_PATSUP 105
+#define IDC_CVT_AUTRE  106
+
+#define IDC_CVA_LILLE  101
+
+// Conversion patients
+//
+#define IDC_CVT_NSS	   101
+#define IDC_CVT_CODE   102
+#define IDC_CVT_NOM	   103
+#define IDC_CVT_PRENOM 104
+
+#define IDC_CVT_START  105
+#define IDC_CVT_STOP   106
+

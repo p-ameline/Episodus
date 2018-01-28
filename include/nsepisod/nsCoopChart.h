@@ -1,0 +1,290 @@
+// --------------------------------------------------------------------------// NSCOOPCHART.H		Coop Charts scores over time
+// --------------------------------------------------------------------------
+// PA October 2010
+// --------------------------------------------------------------------------
+
+#ifndef __NSCOOPCHART_H
+# define __NSCOOPCHART_H
+
+#if defined(_EPISODUSDLL)
+	#define _EPISODUS __export
+#else
+	#define _EPISODUS __import
+#endif
+
+class NSPatPathoArray ;
+class NSLocalisedChapter ;
+class NSLocalChapterArray ;
+
+class _EPISODUS NSCoopCardButton
+{
+  public:
+
+    NSCoopCardButton(string sParams) ;
+    NSCoopCardButton(const NSCoopCardButton& rv) ;
+    NSCoopCardButton& operator=(const NSCoopCardButton& src) ;
+    ~NSCoopCardButton() { lObjectCount-- ; }
+
+    void parseParams(string sParams) ;
+    void parseParamsRect(string sParams) ;
+    bool parseParamsPoint(string *psParams, NS_CLASSLIB::TPoint *pPoint) ;
+
+    bool contains(NS_CLASSLIB::TPoint *pPoint) ;
+
+    NS_CLASSLIB::TRect* getButtonRect() { return &_buttonRect ; }
+    int                 getScore()      { return _iScore ; }
+    string              getLabel()      { return _sButtonName ; }
+
+    static long getNbInstance()  { return lObjectCount ; }
+    static void initNbInstance() { lObjectCount = 0 ; }
+
+  protected:
+
+    string             _sButtonName ;
+    NS_CLASSLIB::TRect _buttonRect ;
+    int                _iScore ;
+
+    static long lObjectCount ;
+} ;
+
+typedef vector<NSCoopCardButton*>              NSCoopCardButtonVector ;
+typedef NSCoopCardButtonVector::iterator       CoopCardButtonIter ;
+typedef NSCoopCardButtonVector::const_iterator CoopCardButtonConstIter ;
+typedef NTArray<NSCoopCardButton>              NSCoopCardButtonArray ;
+
+class _EPISODUS NSCoopCard
+{
+  public:
+
+    NSCoopCard(NSLocalisedChapter *pChapter) ;
+    NSCoopCard(const NSCoopCard& rv) ;
+    NSCoopCard& operator=(const NSCoopCard& src) ;
+    ~NSCoopCard() { lObjectCount-- ; }
+
+    string                 getTitle()    { return _sTitle ; }
+    string                 getFileName() { return _sFileName ; }
+    string                 getLabel()    { return _sQuestionLabel ; }
+    NSCoopCardButtonArray* getButtons()  { return &_aCardButtons ; }
+    int                    getScore()    { return _iScore ; }
+    string                 getSpecific() { return _sSpecificConcept ; }
+    string                 getGeneric()  { return _sGenericConcept ; }
+    string                 getCode()     { return _sConceptCode ; }
+    string                 getUnit()     { return _sUnit ; }
+
+    bool                   isEmpty()     { return _aCardButtons.empty() ; }
+
+    void                   setTitle(string sT) { _sTitle = sT ; }
+    void                   setScore(int iS)    { _iScore = iS ; }
+
+    NSCoopCardButton*      hitButtonTest(NS_CLASSLIB::TPoint *pPoint) ;
+    NSCoopCardButton*      getButtonForScore(int iScore) ;
+
+    bool                   iCardSet()             { return _bIsScoreSet ; }
+    void                   setScoreIsSet(bool bI) { _bIsScoreSet = bI ; }
+
+    static long getNbInstance()  { return lObjectCount ; }
+    static void initNbInstance() { lObjectCount = 0 ; }
+
+  protected:
+
+    string                _sTitle ;
+    string                _sFileName ;
+    string                _sQuestionLabel ;
+    NSCoopCardButtonArray _aCardButtons ;
+
+    string                _sSpecificConcept ;
+
+    string                _sGenericConcept ;
+    string                _sConceptCode ;
+
+    string                _sUnit ;
+
+    int                   _iScore ;
+    bool                  _bIsScoreSet ;
+
+    static long lObjectCount ;
+} ;
+
+typedef vector<NSCoopCard*>              NSCoopCardVector ;
+typedef NSCoopCardVector::iterator       CoopCardIter ;
+typedef NSCoopCardVector::const_iterator CoopCardConstIter ;
+typedef NTArray<NSCoopCard>              NSCoopCardArray ;
+
+enum LINECOLOR { colorNone = 0, colorBlue, colorGreen, colorYellow, colorOrange, colorRed } ;
+LINECOLOR getColorFromChar(char cColor) ;
+char      getCharFromColor(LINECOLOR iColor) ;
+
+LINECOLOR getColorFromScore(int iScore, string sColorIntervals) ;
+
+class _EPISODUS NSCoopLine
+{
+  public:
+
+    NSCoopLine(NSLocalisedChapter *pChapter) ;
+    NSCoopLine(const NSCoopLine& rv) ;
+    NSCoopLine& operator=(const NSCoopLine& src) ;
+    ~NSCoopLine() { lObjectCount-- ; }
+
+    int                    getLineNumber()       { return _iLineNumber ; }
+    void                   setLineNumber(int iL) { _iLineNumber = iL ; }
+
+    string                 getTitle()                   { return _sTitle ; }
+    void                   setTitle(string sL)          { _sTitle = sL ; }
+    string                 getElements()                { return _sElements ; }
+    void                   setElements(string sE)       { _sElements = sE ; }
+    string                 getOperation()               { return _sOperation ; }
+    void                   setOperation(string sO)      { _sOperation = sO ; }
+    string                 getColorIntervals()          { return _sColorIntervals ; }
+    void                   setColorIntervals(string sC) { _sColorIntervals = sC ; }
+
+    void                   setScore(int iScore) ;
+
+    int                    getScore()     { return _iScore ; }
+    LINECOLOR              getLineColor() { return _iLineColor ; }
+
+    static long getNbInstance()  { return lObjectCount ; }
+    static void initNbInstance() { lObjectCount = 0 ; }
+
+  protected:
+
+    int                   _iLineNumber ;
+
+    string                _sTitle ;
+
+    string                _sElements ;
+    string                _sOperation ;
+    string                _sColorIntervals ;
+
+    int                   _iScore ;
+    LINECOLOR             _iLineColor ;
+
+    static long lObjectCount ;
+} ;
+
+typedef vector<NSCoopLine*>              NSCoopLineVector ;
+typedef NSCoopLineVector::iterator       CoopLineIter ;
+typedef NSCoopLineVector::const_iterator CoopLineConstIter ;
+typedef NTArray<NSCoopLine>              NSCoopLineArray ;
+
+class _EPISODUS NSQualityOfLifeInformation : public NSRoot
+{
+  public:
+
+    NSQualityOfLifeInformation(NSContexte *pCtx, string sFileName) ;
+    ~NSQualityOfLifeInformation() ;
+
+    NSQualityOfLifeInformation(const NSQualityOfLifeInformation& rv) ;
+    NSQualityOfLifeInformation& operator=(const NSQualityOfLifeInformation& src) ;
+
+    void setRootFileName(string sFN) { _sRootFileName = sFN ; }
+
+    string getRootFileName()    { return _sRootFileName ; }
+    string getRootConcept()     { return _sRootConcept ; }    string getScoreLexique()    { return _sScoreLexique ; }    string getScoreUnit()       { return _sScoreUnit ; }    string getScoreEquation()   { return _sScoreEquation ; }    int    getDurationValue()   { return _iDurationValue ; }    string getDurationUnit()    { return _sDurationUnit ; }    string getColorIntervals()      { return _sColorIntervals ; }    string getIconForColor(char cC) { return _iconsForColors[cC] ; }    NSCoopCardArray* getCards() { return &_aCards ; }    NSCoopLineArray* getLines() { return &_aLines ; }
+
+    NSCoopCard*      getCardFromTitle(string sTitle) ;
+    NSCoopLine*      getLineFromNumber(int iCardNb) ;
+
+    static long getNbInstance()  { return lObjectCount ; }
+    static void initNbInstance() { lObjectCount = 0 ; }
+
+  protected:
+    string          _sRootFileName ;    string          _sRootConcept ;    string          _sScoreLexique ;    string          _sScoreUnit ;    string          _sScoreEquation ;    int             _iDurationValue ;    string          _sDurationUnit ;    string          _sColorIntervals ;    std::map<char, std::string> _iconsForColors ;    NSCoopCardArray _aCards ;    NSCoopLineArray _aLines ;    static long lObjectCount ;    void initFromFile() ;    void getFileInformation(NSLocalChapterArray *pCards) ;} ;
+
+class _EPISODUS NSQualityOfLifeChart : public NSRoot
+{
+  public:
+
+    NSQualityOfLifeChart(NSContexte *pCtx, NVLdVTemps tpsInfo, NSPatPathoArray* pPPT) ;
+    ~NSQualityOfLifeChart() ;
+
+    NSQualityOfLifeChart(const NSQualityOfLifeChart& rv) ;
+    NSQualityOfLifeChart& operator=(const NSQualityOfLifeChart& src) ;
+
+    void initCoreInformation(NSPatPathoArray* pPPT) ;
+    virtual void initChart(NSPatPathoArray* pPPT) ;
+    void initQolInformation() ;
+    void initLines() ;
+
+    string getScoreIcon() ;
+
+    int  getScoreValueForCard(NSCoopCard *pCard) ;
+    int  getMeanScore(string sImpliedCards) ;
+    int  getMaxScore(string sImpliedCards) ;
+    int  getMinScore(string sImpliedCards) ;
+    int  getSumScore(string sImpliedCards) ;
+
+    void addScore(string sSpecificLexique, string sUnit, int iScore) ;
+    void addScore(string sGenericLexique, string sCode, string sUnit, int iScore) ;
+
+    int  getScore(string sSpecificLexique, string sUnit) ;
+    int  getScore(string sGenericLexique, string sCode, string sUnit) ;
+    int  getMainScore() ;
+
+    NVLdVTemps getTpsInfo()  { return _tpsInfo ; }
+    NVLdVTemps getTpsStart() { return _tpsStart ; }
+
+    string     getDocId()    { return _sDocumentId ; }
+
+    NSQualityOfLifeInformation* getQolInfo() { return _pQolInfo ; }
+
+    static long getNbInstance()  { return lObjectCount ; }
+    static void initNbInstance() { lObjectCount = 0 ; }
+
+  protected:
+
+    std::map<std::string, int> _subScores ;
+
+    NVLdVTemps _tpsInfo ;
+    NVLdVTemps _tpsStart ;
+
+    string     _sDocumentConcept ;
+    string     _sMainScoreConcept ;
+    string     _sMainScoreUnit ;
+    string     _sDocumentId ;
+
+    LINECOLOR  _iGlobalColor ;
+
+    NSQualityOfLifeInformation* _pQolInfo ;
+
+    static long lObjectCount ;
+
+    void copyFrom(const NSQualityOfLifeChart& src) ;
+    void getScoreConceptFromDocConcept() ;
+    void setGlobalColor() ;
+} ;
+
+typedef vector<NSQualityOfLifeChart*>              NSQualityOfLifeChartVector ;
+typedef NSQualityOfLifeChartVector::iterator       QualityOfLifeChartIter ;
+typedef NSQualityOfLifeChartVector::const_iterator QualityOfLifeChartConstIter ;
+typedef NTArray<NSQualityOfLifeChart>              NSQualityOfLifeChartArray ;
+
+class _EPISODUS NSCoopChart : public NSQualityOfLifeChart{
+  public:
+
+    NSCoopChart(NSContexte *pCtx, NVLdVTemps tpsInfo, NSPatPathoArray* pPPT) ;
+    ~NSCoopChart() ;
+
+    NSCoopChart(const NSCoopChart& rv) ;
+    NSCoopChart& operator=(const NSCoopChart& src) ;
+
+    int getPhysicalScore()   { return getScore(string("VCWCP1"), string("2SUR51")) ; }
+    int getEmotionsScore()   { return getScore(string("VCWEE1"), string("2SUR51")) ; }
+    int getDaylyTasksScore() { return getScore(string("VCWAQ1"), string("2SUR51")) ; }
+    int getSocialScore()     { return getScore(string("VCWAS1"), string("2SUR51")) ; }
+    int getChangeScore()     { return getScore(string("VCWCH1"), string("2SUR51")) ; }
+    int getHealthScore()     { return getScore(string("VCWSG1"), string("2SUR51")) ; }
+
+    static long getNbInstance()  { return lObjectCount ; }
+    static void initNbInstance() { lObjectCount = 0 ; }
+
+  protected:
+
+    static long lObjectCount ;
+} ;
+
+typedef vector<NSCoopChart*>        NSCoopChartVector ;
+typedef NSCoopChartVector::iterator       CoopChartIter ;
+typedef NSCoopChartVector::const_iterator CoopChartConstIter ;
+typedef NTArray<NSCoopChart>        NSCoopChartArray ;
+
+#endif		// __NSCOOPCHART_H

@@ -1,0 +1,202 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+<TITLE>TIdMultiPartFormDataStream</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <META name="GENERATOR" content="Doc-O-Matic">
+    <LINK rel="STYLESHEET" href="default.css" type="text/css">
+
+<SCRIPT LANGUAGE="JavaScript1.2" SRC="scripts.js"></SCRIPT>
+</HEAD>
+<BODY CLASS="Element57">
+<TABLE BORDER="0" BGCOLOR="#AACCFF" WIDTH="100%" CELLSPACING="0" CELLPADDING="0">
+<TR><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element1">
+Indy 9</DIV>
+</TD><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element2">
+<A HREF="content.html" CLASS="Element59">Content</A> | <A HREF="idx.html" CLASS="Element59">Index</A> | <A HREF="symref.html" CLASS="Element59">Reference</A></DIV>
+</TD></TR></TABLE><DIV CLASS="Element58">
+<DIV CLASS="Element5">
+TIdMultiPartFormDataStream</DIV>
+<DIV CLASS="Element7">
+<A HREF="012825.html" CLASS="Element59">Hierarchy</A>, <A HREF="012826.html" CLASS="Element59">Properties</A>, <A HREF="012827.html" CLASS="Element59">Methods</A>, <A HREF="012828.html" CLASS="Element59">See Also</A>, <A HREF="002303.html" CLASS="Element59">Unit: IdMultipartFormData</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Implements support for MIME-like multipart form responses.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12">TIdMultiPartFormDataStream = <STRONG>class</STRONG>(TStream)</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Unit</DIV>
+<DIV CLASS="Element69">
+<A HREF="002303.html" CLASS="Element59">IdMultipartFormData</A></DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+TIdMultiPartFormDataStream is a TStream descendant that implements support for encapsulation of MIME-like &quot;multipart&quot; types in the content of an HTTP message body, as described in the Internet Standards document:<P CLASS="Element10">
+<UL>
+<LI>RFC 1867 - Form-based File Upload in HTML (http://www.rfc-editor.org/rfc/rfc1867.txt)</UL>
+<P CLASS="Element10">
+TIdMultiPartFormDataStream is oriented towards handling HTTP messages specifically defined to carry HTML FORM data suitable for processing via the POST request method. TIdMultiPartFormDataStream includes support for uniformly representing both field and file upload requests, and a MIME compatible representation for field and file upload responses.<P CLASS="Element10">
+Multipart form content for the stream can include values for the HTML INPUT types:<P CLASS="Element10">
+<UL>
+<LI>CHECKBOX<P CLASS="Element10">
+<LI>HIDDEN<P CLASS="Element10">
+<LI>IMAGE<P CLASS="Element10">
+<LI>PASSWORD<P CLASS="Element10">
+<LI>RADIO<P CLASS="Element10">
+<LI>RESET<P CLASS="Element10">
+<LI>SUBMIT<P CLASS="Element10">
+<LI>TEXT<P CLASS="Element10">
+<LI>FILE</UL>
+<P CLASS="Element10">
+TIdMultiPartFormDataStream utilizes the MIME media type &quot;multipart/form-data&quot; to specify the content-type for values in the HTTP message sent from a client to a server. <STRONG>Note</STRONG>: The content-type &quot;multipart/mixed&quot; may be used when multiple files are included the multipart response.<P CLASS="Element10">
+TIdMultiPartFormDataStream is used in the overloaded TIdHTTP.Post method when sending a &quot;multipart/form-data&quot; request to an HTTP server.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0003">TIdMultiPartFormDataStream.Boundary</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007579.html" CLASS="Element59">TIdMultiPartFormDataStream</A></DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> Boundary: <STRONG>string</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Boundary</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0007">TIdMultiPartFormDataStream.RequestContentType</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007579.html" CLASS="Element59">TIdMultiPartFormDataStream</A></DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> RequestContentType: <STRONG>string</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+RequestContentType</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0000">TIdMultiPartFormDataStream.AddFile</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007579.html" CLASS="Element59">TIdMultiPartFormDataStream</A></DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>procedure</STRONG> AddFile(<STRONG>const</STRONG> AFieldName: <STRONG>string</STRONG>; <STRONG>const</STRONG> AFileName: <STRONG>string</STRONG>; <STRONG>const</STRONG> AContentType: <STRONG>string</STRONG>);</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+AddFile</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0001">TIdMultiPartFormDataStream.AddFormField</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007579.html" CLASS="Element59">TIdMultiPartFormDataStream</A></DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>procedure</STRONG> AddFormField(<STRONG>const</STRONG> AFieldName: <STRONG>string</STRONG>; <STRONG>const</STRONG> AFieldValue: <STRONG>string</STRONG>);</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+AddFormField</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0002">TIdMultiPartFormDataStream.AddObject</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007579.html" CLASS="Element59">TIdMultiPartFormDataStream</A></DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>procedure</STRONG> AddObject(<STRONG>const</STRONG> AFieldName: <STRONG>string</STRONG>; <STRONG>const</STRONG> AContentType: <STRONG>string</STRONG>; AFileData: TObject; <STRONG>const</STRONG> AFileName: <STRONG>string</STRONG> = '');</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+AddObject</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0004">TIdMultiPartFormDataStream.Create</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007579.html" CLASS="Element59">TIdMultiPartFormDataStream</A></DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>constructor</STRONG> Create;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Create</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0005">TIdMultiPartFormDataStream.Destroy</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007579.html" CLASS="Element59">TIdMultiPartFormDataStream</A></DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>destructor</STRONG> Destroy; <STRONG>override</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Destroy</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0006">TIdMultiPartFormDataStream.Read</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007579.html" CLASS="Element59">TIdMultiPartFormDataStream</A></DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>function</STRONG> <STRONG>Read</STRONG>(<STRONG>var</STRONG> Buffer; Count: Longint): Longint; <STRONG>override</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Read</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0008">TIdMultiPartFormDataStream.Seek</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007579.html" CLASS="Element59">TIdMultiPartFormDataStream</A></DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>function</STRONG> Seek(Offset: Longint; Origin: Word): Longint; <STRONG>override</STRONG>; <STRONG>overload</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Seek</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0009">TIdMultiPartFormDataStream.Write</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007579.html" CLASS="Element59">TIdMultiPartFormDataStream</A></DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>function</STRONG> <STRONG>Write</STRONG>(<STRONG>const</STRONG> Buffer; Count: Longint): Longint; <STRONG>override</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Write</DIV>
+</DIV>
+<DIV CLASS="Element62">
+<HR>Created with Doc-O-Matic 2 donated to <STRONG><A HREF="http://www.delphi-jedi.org">Project JEDI</A></STRONG>. Commercial license available from the <STRONG><A HREF="http://www.doc-o-matic.com">Doc-O-Matic site</A></STRONG>.</DIV>
+</DIV></BODY></HTML>

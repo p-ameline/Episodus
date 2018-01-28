@@ -1,0 +1,142 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+<TITLE>TIdNotify</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <META name="GENERATOR" content="Doc-O-Matic">
+    <LINK rel="STYLESHEET" href="default.css" type="text/css">
+
+<SCRIPT LANGUAGE="JavaScript1.2" SRC="scripts.js"></SCRIPT>
+</HEAD>
+<BODY CLASS="Element57">
+<TABLE BORDER="0" BGCOLOR="#AACCFF" WIDTH="100%" CELLSPACING="0" CELLPADDING="0">
+<TR><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element1">
+Indy 9</DIV>
+</TD><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element2">
+<A HREF="content.html" CLASS="Element59">Content</A> | <A HREF="idx.html" CLASS="Element59">Index</A> | <A HREF="symref.html" CLASS="Element59">Reference</A></DIV>
+</TD></TR></TABLE><DIV CLASS="Element58">
+<DIV CLASS="Element5">
+TIdNotify</DIV>
+<DIV CLASS="Element7">
+<A HREF="012999.html" CLASS="Element59">Hierarchy</A>, <A HREF="013000.html" CLASS="Element59">Properties</A>, <A HREF="013001.html" CLASS="Element59">Methods</A>, <A HREF="013002.html" CLASS="Element59">See Also</A>, <A HREF="002913.html" CLASS="Element59">Unit: IdSync</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Implements the ancestor for Indy notification classes.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12">TIdNotify = <STRONG>class</STRONG>(TObject)</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Unit</DIV>
+<DIV CLASS="Element69">
+<A HREF="002913.html" CLASS="Element59">IdSync</A></DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+TIdNotify is a TObject descendant that implements an ancestor class for posting notification messages using methods in the main thread of execution, or in threads.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0002">TIdNotify.MainThreadUsesNotify</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007601.html" CLASS="Element59">TIdNotify</A>, <A HREF="013003.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Indicates that the main application thread performs notification messages.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> MainThreadUsesNotify: Boolean;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+MainThreadUsesNotify is a Boolean property that indicates if the Main application thread uses Notification messages, or if <A HREF="007601.html" CLASS="Element59">TIdNotify</A> is allowed to perform the operation. When the Main thread is active and MainThreadUsesNotify is False, <A HREF="007601.html" CLASS="Element59">TIdNotify</A> triggers the OnNotify event handler. Under all other circumstances, the current object instance is added to a global notification thread to perform the operation.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0000">TIdNotify.Create</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007601.html" CLASS="Element59">TIdNotify</A>, <A HREF="013004.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Constructor for the object instance.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>constructor</STRONG> Create; <STRONG>virtual</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Create is the constructor for the object instance. Create is declared as a virtual method in <A HREF="007601.html" CLASS="Element59">TIdNotify</A> to allow descendant classes to reimplement the Create method. Create calls the inherited Create method prior to exiting from the constructor.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0001">TIdNotify.DoNotify</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007601.html" CLASS="Element59">TIdNotify</A>, <A HREF="013005.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Specifies the implementation of the <A HREF="007601.html#0003" CLASS="Element59">Notify</A> method.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>procedure</STRONG> DoNotify; <STRONG>virtual</STRONG>; <STRONG>abstract</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+DoNotify is a virtual abstract procedure in <A HREF="007601.html" CLASS="Element59">TIdNotify</A>. Descendant classes must implement the DoNotify method to allow the <A HREF="007601.html#0003" CLASS="Element59">Notify</A> method to execute it's notification mechanism.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0003">TIdNotify.Notify</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007601.html" CLASS="Element59">TIdNotify</A>, <A HREF="013006.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Implements posting of notifications for threaded and non-thread descendant classes.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>procedure</STRONG> Notify;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Notify is a procedure that implements posting of notifications using the mechanism required for threaded and non-thread descendant classes. Notify calls <A HREF="007601.html#0001" CLASS="Element59">DoNotify</A> when the main thread of execution is active, or creates a TIdNotifyThread instance and adds it to the global NotifyThread when the main thread is not active.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0004">TIdNotify.NotifyMethod</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007601.html" CLASS="Element59">TIdNotify</A>, <A HREF="013007.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Implements notifications using a thread method.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>class</STRONG> <STRONG>procedure</STRONG> NotifyMethod(AMethod: TThreadMethod);</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+AMethod: TThreadMethod</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Thread method for the notification.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+NotifyMethod is a class procedure in <A HREF="007601.html" CLASS="Element59">TIdNotify</A> that allows posting of notifications using a method in a thread, as opposed to synchronizing to a noticiation method in the main thread of execution. NotifyMethod calls creates an instance of <A HREF="007602.html" CLASS="Element59">TIdNotifyMethod</A> using the address for the TThreadMethod in AMethod to perform the <A HREF="007601.html#0003" CLASS="Element59">Notify</A> procedure.</DIV>
+</DIV>
+<DIV CLASS="Element62">
+<HR>Created with Doc-O-Matic 2 donated to <STRONG><A HREF="http://www.delphi-jedi.org">Project JEDI</A></STRONG>. Commercial license available from the <STRONG><A HREF="http://www.doc-o-matic.com">Doc-O-Matic site</A></STRONG>.</DIV>
+</DIV></BODY></HTML>

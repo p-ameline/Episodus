@@ -1,0 +1,224 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+<TITLE>TIdVCardName</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <META name="GENERATOR" content="Doc-O-Matic">
+    <LINK rel="STYLESHEET" href="default.css" type="text/css">
+
+<SCRIPT LANGUAGE="JavaScript1.2" SRC="scripts.js"></SCRIPT>
+</HEAD>
+<BODY CLASS="Element57">
+<TABLE BORDER="0" BGCOLOR="#AACCFF" WIDTH="100%" CELLSPACING="0" CELLPADDING="0">
+<TR><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element1">
+Indy 9</DIV>
+</TD><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element2">
+<A HREF="content.html" CLASS="Element59">Content</A> | <A HREF="idx.html" CLASS="Element59">Index</A> | <A HREF="symref.html" CLASS="Element59">Reference</A></DIV>
+</TD></TR></TABLE><DIV CLASS="Element58">
+<DIV CLASS="Element5">
+TIdVCardName</DIV>
+<DIV CLASS="Element7">
+<A HREF="014887.html" CLASS="Element59">Hierarchy</A>, <A HREF="014888.html" CLASS="Element59">Properties</A>, <A HREF="014889.html" CLASS="Element59">Methods</A>, <A HREF="014890.html" CLASS="Element59">See Also</A>, <A HREF="002949.html" CLASS="Element59">Unit: IdVCard</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Encapsulates a VCard name.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12">TIdVCardName = <STRONG>class</STRONG>(TPersistent)</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Unit</DIV>
+<DIV CLASS="Element69">
+<A HREF="002949.html" CLASS="Element59">IdVCard</A></DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+The TIdVCardName object encapsulates a VCard name.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0002">TIdVCardName.FirstName</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007896.html" CLASS="Element59">TIdVCardName</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+First name for VCard name instance.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> FirstName: <STRONG>String</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+FirstName is the person's first name, in the case of &quot;J. Peter Mugaas&quot;, this would be &quot;J.&quot;</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0003">TIdVCardName.FormattedName</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007896.html" CLASS="Element59">TIdVCardName</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Person's name as written in a signature.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> FormattedName: <STRONG>String</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+FormattedName is the VCard owner's name as it is written on mailing labels, signed, or used in correspondences. Often this is the person's first and last name although this can vary by custom.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0004">TIdVCardName.NickNames</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007896.html" CLASS="Element59">TIdVCardName</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Shortened or familiar names for the person.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> NickNames: TStrings;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+NickNames represents shortened or familiar names for the person, such as &quot;Bill&quot; or &quot;Billy&quot; for William or a name that a person is informally known as such as Kudzu for Chad Z. Hower.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0005">TIdVCardName.OtherNames</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007896.html" CLASS="Element59">TIdVCardName</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Middle or maiden names for the person.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> OtherNames: TStrings;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+OtherNames is a TStrings property that contains a middle name and some other names such as a woman's maiden name. In the case of &quot;J. Peter Mugaas&quot;, this would be &quot;Peter&quot;.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0006">TIdVCardName.Prefix</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007896.html" CLASS="Element59">TIdVCardName</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Salutation or honorary added to the beginning of a name.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> Prefix: <STRONG>String</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Prefix is the salutation or honorary added to the beginning of a name, such as &quot;Mr.&quot;, &quot;Dr.&quot;, &quot;Hon.&quot;, &quot;Prof.&quot;, &quot;Reverend&quot;, etc.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0007">TIdVCardName.SortName</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007896.html" CLASS="Element59">TIdVCardName</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Value use to sort a name.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> SortName: <STRONG>String</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+SortName is a string value used for sorting a name. It may not always be the person's last name or <A HREF="007896.html#0009" CLASS="Element59">SurName</A>.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0008">TIdVCardName.Suffix</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007896.html" CLASS="Element59">TIdVCardName</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Lineage or profession for the person.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> Suffix: <STRONG>String</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Suffix is a postfix that indicates lineage, credential, or profession, such as &quot;Ph.D.&quot;, &quot;M.D.&quot;, &quot;Esq.&quot;, &quot;Jr.&quot;, &quot;Sr.&quot;, &quot;III&quot;, etc.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0009">TIdVCardName.SurName</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007896.html" CLASS="Element59">TIdVCardName</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Last name of the person.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> SurName: <STRONG>String</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+SurName is the person's last name, in the case of &quot;J. Peter Mugaas&quot;, this would be &quot;Mugaas&quot;.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0000">TIdVCardName.Create</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007896.html" CLASS="Element59">TIdVCardName</A>, <A HREF="014891.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Constructor for the object instance.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>constructor</STRONG> Create;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Create is the constructor for the object instance, and relies on the inherited Create method to initialize the object. Create also initializes the TStringList properties <A HREF="007896.html#0005" CLASS="Element59">OtherNames</A> and <A HREF="007896.html#0004" CLASS="Element59">NickNames</A>.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0001">TIdVCardName.Destroy</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007896.html" CLASS="Element59">TIdVCardName</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Frees an object instance.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>destructor</STRONG> Destroy; <STRONG>override</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Destroy is the destructor for the object instance. Destroy clears and releases the Nicknames and <A HREF="007896.html#0005" CLASS="Element59">OtherNames</A> properties prior to calling the inherited Destroy method.</DIV>
+</DIV>
+<DIV CLASS="Element62">
+<HR>Created with Doc-O-Matic 2 donated to <STRONG><A HREF="http://www.delphi-jedi.org">Project JEDI</A></STRONG>. Commercial license available from the <STRONG><A HREF="http://www.doc-o-matic.com">Doc-O-Matic site</A></STRONG>.</DIV>
+</DIV></BODY></HTML>

@@ -1,0 +1,429 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+<TITLE>TIdGopherMenuItem</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <META name="GENERATOR" content="Doc-O-Matic">
+    <LINK rel="STYLESHEET" href="default.css" type="text/css">
+
+<SCRIPT LANGUAGE="JavaScript1.2" SRC="scripts.js"></SCRIPT>
+</HEAD>
+<BODY CLASS="Element57">
+<TABLE BORDER="0" BGCOLOR="#AACCFF" WIDTH="100%" CELLSPACING="0" CELLPADDING="0">
+<TR><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element1">
+Indy 9</DIV>
+</TD><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element2">
+<A HREF="content.html" CLASS="Element59">Content</A> | <A HREF="idx.html" CLASS="Element59">Index</A> | <A HREF="symref.html" CLASS="Element59">Reference</A></DIV>
+</TD></TR></TABLE><DIV CLASS="Element58">
+<DIV CLASS="Element5">
+TIdGopherMenuItem</DIV>
+<DIV CLASS="Element7">
+<A HREF="011209.html" CLASS="Element59">Hierarchy</A>, <A HREF="011210.html" CLASS="Element59">Properties</A>, <A HREF="011211.html" CLASS="Element59">Methods</A>, <A HREF="011212.html" CLASS="Element59">See Also</A>, <A HREF="002194.html" CLASS="Element59">Unit: IdGopher</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Implements a Gopher menu item.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12">TIdGopherMenuItem = <STRONG>class</STRONG>(TCollectionItem)</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Unit</DIV>
+<DIV CLASS="Element69">
+<A HREF="002194.html" CLASS="Element59">IdGopher</A></DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+TIdGopherMenuItem implements an Internet Gopher menu item as described in the Internet Standards document:<P CLASS="Element10">
+<UL>
+<LI>RFC 1436 - The Internet Gopher Protocol (http://www.rfc-editor.org/rfc/rfc1436.txt)</UL>
+<P CLASS="Element10">
+TIdGopherMenuItem also implements support for the Gopher+ item block as described in the document:<P CLASS="Element10">
+<UL>
+<LI>Gopher+, Upward-Compatible Enhancements to the Internet Gopher protocol (http://boombox.micro.umn.edu/pub/gopher/gopher_protocol/Gopher+/Gopher+.txt)</UL>
+</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0000">TIdGopherMenuItem.AAbstract</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007355.html" CLASS="Element59">TIdGopherMenuItem</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Summary for the Gopher item.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> AAbstract: TStringList;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+AAbstract is a read-only TStringList property that contains a summary for the Gopher item; e.g. &quot;Read about our great products&quot;. AAbstract is available if you use the GetExtendedMenu method and the Gopher <A HREF="007355.html#000F" CLASS="Element59">Server</A> supports the Gopher+ protocol.<P CLASS="Element10">
+We had to name this property AAbstract because Abstract is a reserved word.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0001">TIdGopherMenuItem.AdminEMail</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007355.html" CLASS="Element59">TIdGopherMenuItem</A>, <A HREF="011213.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+E-Mail address of the gopher item maintainer.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> AdminEMail: <A HREF="007307.html" CLASS="Element59">TIdEMailAddressItem</A>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+AdminEMail is a read-only String property that identifies the E-Mail address of the person responsible for maintaining the gopher item. AdminEMail is available only when you use the <A HREF="007352.html#0001" CLASS="Element59">TIdGopher.GetExtendedMenu</A> method and the Gopher <A HREF="007355.html#000F" CLASS="Element59">Server</A> supports the Gopher+ protocol.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0002">TIdGopherMenuItem.Ask</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007355.html" CLASS="Element59">TIdGopherMenuItem</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Values used to prompt the user for specific actions.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> Ask: <A HREF="007369.html" CLASS="Element59">TIdHeaderList</A>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Ask is a read-only <A HREF="007369.html" CLASS="Element59">TIdHeaderList</A> property that contains Gopher+ information used to prompt users for query values. <A HREF="007352.html" CLASS="Element59">TIdGopher</A> does not support ASK block usage. Ask is available if you use the GetExtendedMenu method and the Gopher <A HREF="007355.html#000F" CLASS="Element59">Server</A> supports the Gopher+ protocol.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0006">TIdGopherMenuItem.Geog</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007355.html" CLASS="Element59">TIdGopherMenuItem</A>, <A HREF="011214.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Geographic coordinates for the Gopher server.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> Geog: <STRONG>String</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Geog is a read-only String property used to identify the latitude and longitude of the Gopher server, and is normally found on the Root item. Geog is available if you use the <A HREF="007352.html#0001" CLASS="Element59">TIdGopher.GetExtendedMenu</A> method and the Gopher <A HREF="007355.html#000F" CLASS="Element59">Server</A> supports the Gopher+ protocol.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0007">TIdGopherMenuItem.GopherBlock</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007355.html" CLASS="Element59">TIdGopherMenuItem</A>, <A HREF="011215.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+The Gopher+ information block.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> GopherBlock: <A HREF="007369.html" CLASS="Element59">TIdHeaderList</A>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+GopherBlock is a read-only <A HREF="007369.html" CLASS="Element59">TIdHeaderList</A> property that contains complete extended Gopher+ information block. GopherBlock is available only when using the <A HREF="007352.html#0001" CLASS="Element59">TIdGopher.GetExtendedMenu</A> method and the Gopher <A HREF="007355.html#000F" CLASS="Element59">Server</A> supports the Gopher+ protocol.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0008">TIdGopherMenuItem.GopherPlusItem</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007355.html" CLASS="Element59">TIdGopherMenuItem</A>, <A HREF="011216.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Indicates the item is on a Gopher+ server.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> GopherPlusItem: Boolean;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+GopherPlusItem is a Boolean property that indicates if the item is on a Gopher+ server. When GopherPlusItem is True, use <A HREF="007352.html#0001" CLASS="Element59">TIdGopher.GetExtendedMenu</A> to access the Gopher menus.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0009">TIdGopherMenuItem.ItemType</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007355.html" CLASS="Element59">TIdGopherMenuItem</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Indicates the Gopher menu type.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> ItemType: Char;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+ItemType is a Char property that indicates the Gopher menu item type. The menu item types are defined in the IdGopherConsts unit are usually the following:<P CLASS="Element10">
+<UL>
+<LI><A HREF="002201.html" CLASS="Element59">IdGopherItem_Document</A> - Item is a file<P CLASS="Element10">
+<LI><A HREF="002200.html" CLASS="Element59">IdGopherItem_Directory</A> - Item is a directory<P CLASS="Element10">
+<LI><A HREF="002199.html" CLASS="Element59">IdGopherItem_CSO</A> - Item is a CSO phone-book server<P CLASS="Element10">
+<LI><A HREF="002202.html" CLASS="Element59">IdGopherItem_Error</A> - Error<P CLASS="Element10">
+<LI><A HREF="002198.html" CLASS="Element59">IdGopherItem_BinHex</A> - Item is a BinHexed Macintosh file.<P CLASS="Element10">
+<LI><A HREF="002197.html" CLASS="Element59">IdGopherItem_BinDOS</A> - Item is DOS binary archive of some sort.<P CLASS="Element10">
+<LI><A HREF="002216.html" CLASS="Element59">IdGopherItem_UUE</A> - Item is a UNIX UUEncoded file.<P CLASS="Element10">
+<LI><A HREF="002211.html" CLASS="Element59">IdGopherItem_Search</A> - Item is an Index-Search server.<P CLASS="Element10">
+<LI><A HREF="002214.html" CLASS="Element59">IdGopherItem_Telnet</A> - Item points to a text-based telnet session.<P CLASS="Element10">
+<LI><A HREF="002196.html" CLASS="Element59">IdGopherItem_Binary</A> - Item is a binary file.<P CLASS="Element10">
+<LI><A HREF="002210.html" CLASS="Element59">IdGopherItem_Redundant</A> - Item is a redundant server<P CLASS="Element10">
+<LI><A HREF="002215.html" CLASS="Element59">IdGopherItem_TN3270</A> - Item points to a text-based tn3270 session.<P CLASS="Element10">
+<LI><A HREF="002203.html" CLASS="Element59">IdGopherItem_GIF</A> - Item is a GIF format graphics file.<P CLASS="Element10">
+<LI><A HREF="002205.html" CLASS="Element59">IdGopherItem_Image</A> - Item is some kind of image file.<P CLASS="Element10">
+<LI><A HREF="002206.html" CLASS="Element59">IdGopherItem_Image2</A> - Item is some kind of image file<P CLASS="Element10">
+<LI><A HREF="002212.html" CLASS="Element59">IdGopherItem_Sound</A> - An audio file<P CLASS="Element10">
+<LI><A HREF="002213.html" CLASS="Element59">IdGopherItem_Sound2</A> - An audio file<P CLASS="Element10">
+<LI><A HREF="002209.html" CLASS="Element59">IdGopherItem_Movie</A> - A movie file<P CLASS="Element10">
+<LI>IdGopherItem_Movie2 - A movie file<P CLASS="Element10">
+<LI><A HREF="002204.html" CLASS="Element59">IdGopherItem_HTML</A> - Item is a link to the web-site<P CLASS="Element10">
+<LI><A HREF="002208.html" CLASS="Element59">IdGopherItem_MIME</A> - Item is a Base64 encoded file or occasionally, a movie<P CLASS="Element10">
+<LI><A HREF="002207.html" CLASS="Element59">IdGopherItem_Information</A> - Item is just some information</UL>
+</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="000A">TIdGopherMenuItem.LastModified</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007355.html" CLASS="Element59">TIdGopherMenuItem</A>, <A HREF="011217.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Date the Gopher item was last modified.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> LastModified: <STRONG>String</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+LastModified is a read-only String property that indicates the date that the Gopher item was last modified. LastModified is available if you use the <A HREF="007352.html#0001" CLASS="Element59">TIdGopher.GetExtendedMenu</A> method and the Gopher <A HREF="007355.html#000F" CLASS="Element59">Server</A> supports the Gopher+ protocol.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="000B">TIdGopherMenuItem.Location</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007355.html" CLASS="Element59">TIdGopherMenuItem</A>, <A HREF="011218.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Location of the Gopher item.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> Location: <STRONG>String</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Location is a read-only String property that identifies the location of the Gopher item, and is normally found in the Root item. Location is only available if you use the <A HREF="007352.html#0001" CLASS="Element59">TIdGopher.GetExtendedMenu</A> method and the Gopher <A HREF="007355.html#000F" CLASS="Element59">Server</A> supports the Gopher+ protocol.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="000C">TIdGopherMenuItem.Organization</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007355.html" CLASS="Element59">TIdGopherMenuItem</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Organization hosting the Gopher item.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> Organization: <STRONG>String</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Organization is a read-only String property that indicates the organization running the Gopher server for the Gopher item. Organization is normally found in the Root item. Organization is only available if you use the GetExtendedMenu method and the Gopher <A HREF="007355.html#000F" CLASS="Element59">Server</A> supports the Gopher+ protocol.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="000D">TIdGopherMenuItem.Port</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007355.html" CLASS="Element59">TIdGopherMenuItem</A>, <A HREF="011219.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Port number for the Gopher item.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> Port: Integer;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Port is an Integer property that indicates the port number to use when requesting the Gopher item. Set the <A HREF="007352.html#0006" CLASS="Element59">TIdGopher.Port</A> property to this value to retrieve the item.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="000E">TIdGopherMenuItem.Selector</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007355.html" CLASS="Element59">TIdGopherMenuItem</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Value used to <A HREF="006943.html" CLASS="Element59">select</A> the Gopher item.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> Selector: <STRONG>String</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Selector is a String property that indicates the Gopher query to use when retrieving the Gopher item. Set the TIdGopher.Selector property to this value to retrieve the Gopher item.<P CLASS="Element10">
+For telnet (<A HREF="002214.html" CLASS="Element59">IdGopherItem_Telnet</A>) and Telnet 3270 (<A HREF="002215.html" CLASS="Element59">IdGopherItem_TN3270</A>) menu items, this is text which should be displayed to the user because it can provide information for logging into those systems such as a User ID and Password.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="000F">TIdGopherMenuItem.Server</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007355.html" CLASS="Element59">TIdGopherMenuItem</A>, <A HREF="011220.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Server hosting the Gopher item.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> Server: <STRONG>String</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Server is a String property that identifies the Gopher server that is hosting the Gopher item. Set the Host property to this value when retrieving the Gopher item.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0010">TIdGopherMenuItem.Title</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007355.html" CLASS="Element59">TIdGopherMenuItem</A>, <A HREF="011221.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Gopher item title.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> Title: <STRONG>String</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Title is a String property that represents the title for the Gopher item. Title is used to display Gopher item information to the user. Use <A HREF="007355.html#0000" CLASS="Element59">AAbstract</A> to get a summary of the Gopher item.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0011">TIdGopherMenuItem.URL</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007355.html" CLASS="Element59">TIdGopherMenuItem</A>, <A HREF="011222.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+HTTP resource location.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> URL: <STRONG>String</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+URL is a String property that represents the HTTP Universal Resource Locator (URL) provided in the Gopher+ information block. URL is available if you use the <A HREF="007352.html#0001" CLASS="Element59">TIdGopher.GetExtendedMenu</A> method and the Gopher <A HREF="007355.html#000F" CLASS="Element59">Server</A> supports the Gopher+ protocol.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0012">TIdGopherMenuItem.Views</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007355.html" CLASS="Element59">TIdGopherMenuItem</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Alternate representations of the GOpher item.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> Views: TStringList;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Views is a read-only TStringList property that contains the Gopher views available for the Gopher item. Gopher Views are alternative forms of a document for different languages or in different formats. Views can be used when requesting the Gopher item with GetFile or GetMenu.<P CLASS="Element10">
+Views are available if you use the GetExtendedMenu method and the Gopher <A HREF="007355.html#000F" CLASS="Element59">Server</A> supports the Gopher+ protocol.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0003">TIdGopherMenuItem.Create</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007355.html" CLASS="Element59">TIdGopherMenuItem</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Constructor for the object instance.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>constructor</STRONG> Create(ACollection: TCollection); <STRONG>override</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+ACollection: TCollection</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Owner of the collection item.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Create is the constructor for the object instance, and adds the new <A HREF="007355.html" CLASS="Element59">TIdGopherMenuItem</A> instance to the collection specified by the ACollection parameter. Create is used internally in <A HREF="007352.html#0003" CLASS="Element59">TIdGopher.GetMenu</A> and <A HREF="007352.html#0001" CLASS="Element59">TIdGopher.GetExtendedMenu</A> methods.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0004">TIdGopherMenuItem.Destroy</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007355.html" CLASS="Element59">TIdGopherMenuItem</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Frees the object instance.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>destructor</STRONG> Destroy; <STRONG>override</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Destroy is the destructor for the object instance. Destroy is responsible for freeing and releasing properties of the Gopher menu item including AdminEmail, <A HREF="007355.html#0002" CLASS="Element59">Ask</A>, Abstract, <A HREF="007355.html#0007" CLASS="Element59">GopherBlock</A>, and <A HREF="007355.html#0012" CLASS="Element59">Views</A>. Destroy calls the inherited Destroy method to complete destruction of the object instance.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0005">TIdGopherMenuItem.DoneSettingInfoBlock</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007355.html" CLASS="Element59">TIdGopherMenuItem</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Updates the Gopher menu item after adding information blocks.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>procedure</STRONG> DoneSettingInfoBlock; <STRONG>virtual</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+DoneSettingInfoBlock is a procedure used to update internal <A HREF="007355.html" CLASS="Element59">TIdGopherMenuItem</A> variables dealing with Gopher+ Information blocks. These Gopher+ blocks supported are '+VIEWS', '+ABSTRACT', and '+ASK'.<P CLASS="Element10">
+DoneSettingInfoBlock should be called only when all data has been added. This is an internal method used by <A HREF="007352.html" CLASS="Element59">TIdGopher</A> and should not be used outside of that component.</DIV>
+</DIV>
+<DIV CLASS="Element62">
+<HR>Created with Doc-O-Matic 2 donated to <STRONG><A HREF="http://www.delphi-jedi.org">Project JEDI</A></STRONG>. Commercial license available from the <STRONG><A HREF="http://www.doc-o-matic.com">Doc-O-Matic site</A></STRONG>.</DIV>
+</DIV></BODY></HTML>

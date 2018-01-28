@@ -1,0 +1,375 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+<TITLE>TIdFTPListItems</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <META name="GENERATOR" content="Doc-O-Matic">
+    <LINK rel="STYLESHEET" href="default.css" type="text/css">
+
+<SCRIPT LANGUAGE="JavaScript1.2" SRC="scripts.js"></SCRIPT>
+</HEAD>
+<BODY CLASS="Element57">
+<TABLE BORDER="0" BGCOLOR="#AACCFF" WIDTH="100%" CELLSPACING="0" CELLPADDING="0">
+<TR><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element1">
+Indy 9</DIV>
+</TD><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element2">
+<A HREF="content.html" CLASS="Element59">Content</A> | <A HREF="idx.html" CLASS="Element59">Index</A> | <A HREF="symref.html" CLASS="Element59">Reference</A></DIV>
+</TD></TR></TABLE><DIV CLASS="Element58">
+<DIV CLASS="Element5">
+TIdFTPListItems</DIV>
+<DIV CLASS="Element7">
+<A HREF="011104.html" CLASS="Element59">Hierarchy</A>, <A HREF="011105.html" CLASS="Element59">Properties</A>, <A HREF="011106.html" CLASS="Element59">Methods</A>, <A HREF="011107.html" CLASS="Element59">Events</A>, <A HREF="011108.html" CLASS="Element59">See Also</A>, <A HREF="002191.html" CLASS="Element59">Unit: IdFTPList</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Collection that encapsulates an FTP directory listing.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12">TIdFTPListItems = <STRONG>class</STRONG>(TCollection)</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Unit</DIV>
+<DIV CLASS="Element69">
+<A HREF="002191.html" CLASS="Element59">IdFTPList</A></DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+TIdFTPListItems is a TCollection descendant that encapsulates an FTP directory listing, and contains individual <A HREF="007333.html" CLASS="Element59">TIdFTPListItem</A> objects for each entry in the listing.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0003">TIdFTPListItems.DirectoryName</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007337.html" CLASS="Element59">TIdFTPListItems</A>, <A HREF="011109.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+File system directory represented by entries in the collection.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> DirectoryName: <STRONG>string</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+DirectoryName is a public String property that indicates the name of the file system directory represented by the entries in the collection. Use <A HREF="007337.html#0001" CLASS="Element59">Items</A> to access the entries in the directory listing. Changing the value in DirectoryName causes the collection to be cleared.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0001">TIdFTPListItems.Items</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007337.html" CLASS="Element59">TIdFTPListItems</A>, <A HREF="011110.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Provides indexed access to directory entries in the collection.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> Items [AIndex: Integer]: <A HREF="007333.html" CLASS="Element59">TIdFTPListItem</A>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+AIndex</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Integer position in the collection to be accessed.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Items is an indexed <A HREF="007333.html" CLASS="Element59">TIdFTPListItem</A> property that provides access to <A HREF="007333.html" CLASS="Element59">TIdFTPListItem</A> objects contained in the collection using the index specified in AIndex. They are usually created by the TIdFTPList.<A HREF="007337.html#0003" CLASS="Element59">LoadList</A> method.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0002">TIdFTPListItems.ListFormat</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007337.html" CLASS="Element59">TIdFTPListItems</A>, <A HREF="011111.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Indicates the directory listing format used when parsing in TIdFTPList.<A HREF="007337.html#0003" CLASS="Element59">LoadList</A>.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> ListFormat: <A HREF="007332.html" CLASS="Element59">TIdFTPListFormat</A>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+ListFormat is a <A HREF="007332.html" CLASS="Element59">TIdFTPListFormat</A> property that indicates the type of directory listing format that should be used when loading the directory listing with the <A HREF="007337.html#0003" CLASS="Element59">LoadList</A> method. ListFormat us ised in <A HREF="007337.html#0006" CLASS="Element59">Parse</A> to determine the appropriate parsing mechanism for directory entries in the collection.<P CLASS="Element10">
+ListFormat normally contains the the value returned by the TIdFTPList.<A HREF="007337.html#0001" CLASS="Element59">CheckListFormat</A> method.<P CLASS="Element10">
+The default value for ListFormat is flfUnix, as assigned in the <A HREF="007337.html#0002" CLASS="Element59">Create</A> constructor.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0000">TIdFTPListItems.Add</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007337.html" CLASS="Element59">TIdFTPListItems</A>, <A HREF="011112.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Creates a new directory listing entry and adds it to the collection.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>function</STRONG> Add: <A HREF="007333.html" CLASS="Element59">TIdFTPListItem</A>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Return Value</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+<A HREF="007333.html" CLASS="Element59">TIdFTPListItem</A> - The new directory list item that was created.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Add is a <A HREF="007333.html" CLASS="Element59">TIdFTPListItem</A> function that creates a new entry for a formatted directory listing, and adds the object instance to the <A HREF="007337.html#0001" CLASS="Element59">Items</A> in the collection.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0001">TIdFTPListItems.CheckListFormat</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007337.html" CLASS="Element59">TIdFTPListItems</A>, <A HREF="011113.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Determines the appropriate directory list type.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>function</STRONG> CheckListFormat(Data: <STRONG>string</STRONG>; <STRONG>const</STRONG> ADetails: Boolean = False): <A HREF="007332.html" CLASS="Element59">TIdFTPListFormat</A>; <STRONG>virtual</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+Data: string</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Directory list data</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Return Value</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+<A HREF="007332.html" CLASS="Element59">TIdFTPListFormat</A> - The appropriate directory listing format type.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+CheckListFormat is a <A HREF="007332.html" CLASS="Element59">TIdFTPListFormat</A> function that determines the appropriate directory list type to be used in the <A HREF="007337.html#0003" CLASS="Element59">LoadList</A> and <A HREF="007337.html#0006" CLASS="Element59">Parse</A> methods. CheckListFormat is called when <A HREF="007328.html" CLASS="Element59">TIdFTP</A> needs to load and parses a directory listing returned from the FTP server. To use this with the <A HREF="007337.html#0003" CLASS="Element59">LoadList</A>, you need to set the <A HREF="007337.html#0002" CLASS="Element59">ListFormat</A> property to the return value.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0002">TIdFTPListItems.Create</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007337.html" CLASS="Element59">TIdFTPListItems</A>, <A HREF="011114.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Constructor for the object instance.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>constructor</STRONG> Create; <STRONG>overload</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Create is the constructor for the object instance. Create calls the inherited constructor using <A HREF="007333.html" CLASS="Element59">TIdFTPListItem</A> as the ItemClass for the collection. Create also sets the default value for the <A HREF="007337.html#0002" CLASS="Element59">ListFormat</A> property to flfUnix.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0000">TIdFTPListItems.IndexOf</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007337.html" CLASS="Element59">TIdFTPListItems</A>, <A HREF="011115.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Returns the position of a directory entry in the collection.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>function</STRONG> IndexOf(AItem: <A HREF="007333.html" CLASS="Element59">TIdFTPListItem</A>): Integer;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+AItem: TIdFTPListItem</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Directory entry to be located in the collection.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Return Value</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Integer - Position of the item in the collection.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+IndexOf is an Integer function that returns the integer position of the directory entry specified in AItem in the <A HREF="007337.html#0001" CLASS="Element59">Items</A> for the collection. IndexOf will return a value in the range 0 to Count - 1, or -1 when <A HREF="007337.html#0001" CLASS="Element59">Items</A> does not contain a directory entry item that matches AItem.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0003">TIdFTPListItems.LoadList</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007337.html" CLASS="Element59">TIdFTPListItems</A>, <A HREF="011116.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Loads the Directory listing from a TStrings and parses it based on the value of TIdFTPList.<A HREF="007337.html#0002" CLASS="Element59">ListFormat</A>.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>procedure</STRONG> LoadList(AData: TStrings);</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+AData: TStrings</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+The directory listing data to be parsed into the TIdFTPList.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+LoadList is a procedure used to load the Directory listing from the TStrings variable AData, and parses directory entries based on the value in TIdFTPList.<A HREF="007337.html#0002" CLASS="Element59">ListFormat</A>. LoadList will create individual <A HREF="007333.html" CLASS="Element59">TIdFTPListItem</A> objects, and call the TIdFTPList.<A HREF="007337.html#0006" CLASS="Element59">Parse</A> method.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0006">TIdFTPListItems.Parse</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007337.html" CLASS="Element59">TIdFTPListItems</A>, <A HREF="011117.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Parses data for a directory entry using the specified <A HREF="007337.html#0002" CLASS="Element59">ListFormat</A>.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>procedure</STRONG> Parse(<A HREF="007337.html#0002" CLASS="Element59">ListFormat</A>: <A HREF="007332.html" CLASS="Element59">TIdFTPListFormat</A>; AItem: <A HREF="007333.html" CLASS="Element59">TIdFTPListItem</A>);</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+ListFormat: TIdFTPListFormat</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+The list item format</DIV>
+</DIV>
+<DIV CLASS="Element17">
+AItem: TIdFTPListItem</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+The item that is to be parsed.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+This parses the data located in the AItem.Data using the specified layout in in the <A HREF="007337.html#0002" CLASS="Element59">ListFormat</A> parameter.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0007">TIdFTPListItems.ParseCustom</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007337.html" CLASS="Element59">TIdFTPListItems</A>, <A HREF="011118.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+This procedure triggers the IdFTPList.<A HREF="007337.html#0005" CLASS="Element59">OnParseCustomListFormat</A> event.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>procedure</STRONG> ParseCustom(AItem: <A HREF="007333.html" CLASS="Element59">TIdFTPListItem</A>); <STRONG>virtual</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+AItem: TIdFTPListItem</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+The item that is to be parsed.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+This procedure triggers the TIdFTPList.<A HREF="007337.html#0005" CLASS="Element59">OnParseCustomListFormat</A> event. This event is used to provide custom parsing code. This is sometimes required if a developer needs to support some unusual directory listing formats.<P CLASS="Element10">
+If no TIdFTPList.<A HREF="007337.html#0005" CLASS="Element59">OnParseCustomListFormat</A> event is provided, an <A HREF="000400.html" CLASS="Element59">EIdInvalidFTPListingFormat</A> exception is raised.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0008">TIdFTPListItems.ParseUnknown</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007337.html" CLASS="Element59">TIdFTPListItems</A>, <A HREF="011119.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+This procedure raises an <A HREF="000400.html" CLASS="Element59">EIdInvalidFTPListingFormat</A> exception.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>procedure</STRONG> ParseUnknown(AItem: <A HREF="007333.html" CLASS="Element59">TIdFTPListItem</A>);</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+AItem: TIdFTPListItem</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+The item that is to be parsed.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+This procedure raises an <A HREF="000400.html" CLASS="Element59">EIdInvalidFTPListingFormat</A> exception. This is done if the <A HREF="007337.html#0002" CLASS="Element59">ListFormat</A> property is set to flfUnknown.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0004">TIdFTPListItems.OnGetCustomListFormat</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007337.html" CLASS="Element59">TIdFTPListItems</A>, <A HREF="011120.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Gets the text representation of an item in a custom directory listing.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> OnGetCustomListFormat: <A HREF="007608.html" CLASS="Element59">TIdOnGetCustomListFormat</A>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+OnGetCustomListFormat is a <A HREF="007608.html" CLASS="Element59">TIdOnGetCustomListFormat</A> property that represents the event handler signalled when a <A HREF="007337.html" CLASS="Element59">TIdFTPListItems</A> collection needs to access the text representation of a custom list format for the contents of an FTP listing. The application may assign a procedure to the event handler to allow creation of a custom directory listing when <A HREF="007337.html#0002" CLASS="Element59">TIdFTPListItems.ListFormat</A> contains the value flfCustom.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0005">TIdFTPListItems.OnParseCustomListFormat</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007337.html" CLASS="Element59">TIdFTPListItems</A>, <A HREF="011121.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Event triggered when custom FTP parsing is desired.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> OnParseCustomListFormat: <A HREF="007609.html" CLASS="Element59">TIdOnParseCustomListFormat</A>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+AItem</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+The <A HREF="007333.html" CLASS="Element59">TIdFTPListItem</A> object that you parse. You parse the Data property and set the other properties as appropriately.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+ASender</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+The object that triggered the event</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+OnParseCustomListFormat is an event handler triggered by the TIdFTPList.<A HREF="007337.html#0007" CLASS="Element59">ParseCustom</A> method, and is normally triggered when the TIdFTPList.<A HREF="007337.html#0002" CLASS="Element59">ListFormat</A> property contains flfCustom.</DIV>
+</DIV>
+<DIV CLASS="Element62">
+<HR>Created with Doc-O-Matic 2 donated to <STRONG><A HREF="http://www.delphi-jedi.org">Project JEDI</A></STRONG>. Commercial license available from the <STRONG><A HREF="http://www.doc-o-matic.com">Doc-O-Matic site</A></STRONG>.</DIV>
+</DIV></BODY></HTML>

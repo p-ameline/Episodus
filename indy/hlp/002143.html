@@ -1,0 +1,86 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+<TITLE>IdCompressionIntercept.pas</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <META name="GENERATOR" content="Doc-O-Matic">
+    <LINK rel="STYLESHEET" href="default.css" type="text/css">
+
+<SCRIPT LANGUAGE="JavaScript1.2" SRC="scripts.js"></SCRIPT>
+</HEAD>
+<BODY CLASS="Element57">
+<TABLE BORDER="0" BGCOLOR="#AACCFF" WIDTH="100%" CELLSPACING="0" CELLPADDING="0">
+<TR><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element1">
+Indy 9</DIV>
+</TD><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element2">
+<A HREF="content.html" CLASS="Element59">Content</A> | <A HREF="idx.html" CLASS="Element59">Index</A> | <A HREF="symref.html" CLASS="Element59">Reference</A></DIV>
+</TD></TR></TABLE><DIV CLASS="Element58">
+<DIV CLASS="Element5">
+IdCompressionIntercept.pas</DIV>
+<DIV CLASS="Element7">
+<A HREF="015717.html" CLASS="Element59">See Also</A>, <A HREF="015718.html" CLASS="Element59">Classes</A>, <A HREF="015719.html" CLASS="Element59">Types</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+<DIV CLASS="Element15">
+Unit: IdCompressionIntercept.pas</DIV>
+<P CLASS="Element10">
+IdCompressionIntercept.pas implements an Indy intercept component that compresses a data stream using the open-source zlib compression library. In order for this file to compile on Windows, the follow .obj files *must* be provided as delivered with this file:<P CLASS="Element10">
+<UL>
+<LI>deflate.obj<P CLASS="Element10">
+<LI>inflate.obj<P CLASS="Element10">
+<LI>inftrees.obj<P CLASS="Element10">
+<LI>trees.obj<P CLASS="Element10">
+<LI>adler32.obj<P CLASS="Element10">
+<LI>infblock.obj<P CLASS="Element10">
+<LI>infcodes.obj<P CLASS="Element10">
+<LI>infutil.obj<P CLASS="Element10">
+<LI>inffast.obj</UL>
+<P CLASS="Element10">
+On Linux, the shared-object file libz.so.1 *must* be available on the system. Most modern Linux distributions include this file.<P CLASS="Element10">
+You may sometimes get the following compiler errors with this file:<P CLASS="Element10">
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12">    IdCompressionIntercept.pas(331) Error: Incompatible types
+    IdCompressionIntercept.pas(152) Error: Unsatisfied forward or external declaration: '_tr_init'
+    IdCompressionIntercept.pas(153) Error: Unsatisfied forward or external declaration: '_tr_tally'
+    IdCompressionIntercept.pas(154) Error: Unsatisfied forward or external declaration: '_tr_flush_block'
+    IdCompressionIntercept.pas(155) Error: Unsatisfied forward or external declaration: '_tr_align'
+    IdCompressionIntercept.pas(156) Error: Unsatisfied forward or external declaration: '_tr_stored_block'
+    IdCompressionIntercept.pas(157) Error: Unsatisfied forward or external declaration: 'adler32'
+    IdCompressionIntercept.pas(158) Error: Unsatisfied forward or external declaration: 'inflate_blocks_new'
+    IdCompressionIntercept.pas(159) Error: Unsatisfied forward or external declaration: 'inflate_blocks'
+    IdCompressionIntercept.pas(160) Error: Unsatisfied forward or external declaration: 'inflate_blocks_reset'
+    IdCompressionIntercept.pas(161) Error: Unsatisfied forward or external declaration: 'inflate_blocks_free'
+    IdCompressionIntercept.pas(162) Error: Unsatisfied forward or external declaration: 'inflate_set_dictionary'
+    IdCompressionIntercept.pas(163) Error: Unsatisfied forward or external declaration: 'inflate_trees_bits'
+    IdCompressionIntercept.pas(164) Error: Unsatisfied forward or external declaration: 'inflate_trees_dynamic'
+    IdCompressionIntercept.pas(165) Error: Unsatisfied forward or external declaration: 'inflate_trees_fixed'
+    IdCompressionIntercept.pas(166) Error: Unsatisfied forward or external declaration: 'inflate_trees_free'
+    IdCompressionIntercept.pas(167) Error: Unsatisfied forward or external declaration: 'inflate_codes_new'
+    IdCompressionIntercept.pas(168) Error: Unsatisfied forward or external declaration: 'inflate_codes'
+    IdCompressionIntercept.pas(169) Error: Unsatisfied forward or external declaration: 'inflate_codes_free'
+    IdCompressionIntercept.pas(170) Error: Unsatisfied forward or external declaration: '_inflate_mask'
+    IdCompressionIntercept.pas(171) Error: Unsatisfied forward or external declaration: 'inflate_flush'
+    IdCompressionIntercept.pas(172) Error: Unsatisfied forward or external declaration: 'inflate_fast'
+    IdCompressionIntercept.pas(189) Error: Unsatisfied forward or external declaration: 'deflateInit_'
+    IdCompressionIntercept.pas(196) Error: Unsatisfied forward or external declaration: 'deflate'
+    IdCompressionIntercept.pas(203) Error: Unsatisfied forward or external declaration: 'deflateEnd'
+    IdCompressionIntercept.pas(213) Error: Unsatisfied forward or external declaration: 'inflateInit_'
+    IdCompressionIntercept.pas(220) Error: Unsatisfied forward or external declaration: 'inflate'
+    IdCompressionIntercept.pas(227) Error: Unsatisfied forward or external declaration: 'inflateEnd'
+    IdCompressionIntercept.pas(234) Error: Unsatisfied forward or external declaration: 'inflateReset'
+    Indy40.dpk(196) Fatal: Could not compile used unit 'IdCompressionIntercept.pas'</PRE></DIV>
+</DIV>
+<P CLASS="Element10">
+Do not be alarmed. This is due to a bug in DCC32 in Delphi 4, 5, 6, plus C++Builder, 4, 5, and 6.<P CLASS="Element10">
+There is a workaround for this issue. The workaround is to compile this unit separately from the other units and than build Indy with a command such as DCC32 using the /M parameter. DO not use the /B parameter as that does force everything to be recompiled triggering the DCC32 error.<P CLASS="Element10">
+The batch files FULLC4.BAT, FULLC5.BAT, FULLC6.BAT, FULLD4.BAT, FULLD5.BAT and FULLD6.BAT now have the workaround in them so we recommend that you use those to build Indy.<P CLASS="Element10">
+Borland is aware of the issue.<P CLASS="Element10">
+Original Author: Allen Bauer<P CLASS="Element10">
+This source file is submitted to the Indy project on behalf of Borland Sofware Corporation. No warranties, express or implied are given with this source file.</DIV>
+</DIV>
+<DIV CLASS="Element62">
+<HR>Created with Doc-O-Matic 2 donated to <STRONG><A HREF="http://www.delphi-jedi.org">Project JEDI</A></STRONG>. Commercial license available from the <STRONG><A HREF="http://www.doc-o-matic.com">Doc-O-Matic site</A></STRONG>.</DIV>
+</DIV></BODY></HTML>

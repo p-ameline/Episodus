@@ -1,0 +1,83 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+<TITLE>TIdSMTPServerThread</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <META name="GENERATOR" content="Doc-O-Matic">
+    <LINK rel="STYLESHEET" href="default.css" type="text/css">
+
+<SCRIPT LANGUAGE="JavaScript1.2" SRC="scripts.js"></SCRIPT>
+</HEAD>
+<BODY CLASS="Element57">
+<TABLE BORDER="0" BGCOLOR="#AACCFF" WIDTH="100%" CELLSPACING="0" CELLPADDING="0">
+<TR><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element1">
+Indy 9</DIV>
+</TD><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element2">
+<A HREF="content.html" CLASS="Element59">Content</A> | <A HREF="idx.html" CLASS="Element59">Index</A> | <A HREF="symref.html" CLASS="Element59">Reference</A></DIV>
+</TD></TR></TABLE><DIV CLASS="Element58">
+<DIV CLASS="Element5">
+TIdSMTPServerThread</DIV>
+<DIV CLASS="Element7">
+<A HREF="013673.html" CLASS="Element59">Hierarchy</A>, <A HREF="013674.html" CLASS="Element59">Properties</A>, <A HREF="013675.html" CLASS="Element59">Methods</A>, <A HREF="013676.html" CLASS="Element59">Events</A>, <A HREF="013677.html" CLASS="Element59">See Also</A>, <A HREF="002819.html" CLASS="Element59">Unit: IdSMTPServer</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Implements a thread of execution for SMTP client connections.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12">TIdSMTPServerThread = <STRONG>class</STRONG>(<A HREF="007613.html" CLASS="Element59">TIdPeerThread</A>)</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Unit</DIV>
+<DIV CLASS="Element69">
+<A HREF="002819.html" CLASS="Element59">IdSMTPServer</A></DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+TIdSMTPServerThread is a <A HREF="007613.html" CLASS="Element59">TIdPeerThread</A> that specifies properties and method needed to implement a thread of execution for SMTP client connections in the multi-threaded SMTP server.<P CLASS="Element10">
+TIdSMTPServerThread implements properties that indicate the current connection and transaction state for the peer connection including the From, HELO, and RCPTList properties.<P CLASS="Element10">
+TIdSMTPServerThread is assigned to TIdSMTPServer.ThreadClass, and represents the class instance used for constructing new threads for connections accepted in the in the listener thread.<P CLASS="Element10">
+TIdSMTPServerThread is used in <A HREF="007242.html" CLASS="Element59">TIdCommand</A> to provide the peer connection thread context an executing command handler. TIdSMTPServerThread is also used in the various procedures that implement the actions performed by command handlers, including CommandData, CommandMail, CommandRcpt, CommandRSET, CommandHELO, and CommandEHLO.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0000">TIdSMTPServerThread.Create</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007708.html" CLASS="Element59">TIdSMTPServerThread</A>, <A HREF="013678.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Constructor for the object instance.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>constructor</STRONG> Create(ACreateSuspended: Boolean = True); <STRONG>override</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Create is the constructor for the object instance, and calls the inherited Create method. Create also allocates the <A HREF="007308.html" CLASS="Element59">TIdEMailAddressList</A> needed to represent the RCPTList property.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0001">TIdSMTPServerThread.Destroy</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007708.html" CLASS="Element59">TIdSMTPServerThread</A>, <A HREF="013679.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Frees the object instance.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>destructor</STRONG> Destroy; <STRONG>override</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Destroy is the destructor for the object instance. Destroy is reponsible for frees resources allocated in the <A HREF="007708.html#0000" CLASS="Element59">Create</A> constructor, and calls the the inherited Destroy method.</DIV>
+</DIV>
+<DIV CLASS="Element62">
+<HR>Created with Doc-O-Matic 2 donated to <STRONG><A HREF="http://www.delphi-jedi.org">Project JEDI</A></STRONG>. Commercial license available from the <STRONG><A HREF="http://www.doc-o-matic.com">Doc-O-Matic site</A></STRONG>.</DIV>
+</DIV></BODY></HTML>

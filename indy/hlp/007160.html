@@ -1,0 +1,411 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+<TITLE>TDNSHeader</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <META name="GENERATOR" content="Doc-O-Matic">
+    <LINK rel="STYLESHEET" href="default.css" type="text/css">
+
+<SCRIPT LANGUAGE="JavaScript1.2" SRC="scripts.js"></SCRIPT>
+</HEAD>
+<BODY CLASS="Element57">
+<TABLE BORDER="0" BGCOLOR="#AACCFF" WIDTH="100%" CELLSPACING="0" CELLPADDING="0">
+<TR><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element1">
+Indy 9</DIV>
+</TD><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element2">
+<A HREF="content.html" CLASS="Element59">Content</A> | <A HREF="idx.html" CLASS="Element59">Index</A> | <A HREF="symref.html" CLASS="Element59">Reference</A></DIV>
+</TD></TR></TABLE><DIV CLASS="Element58">
+<DIV CLASS="Element5">
+TDNSHeader</DIV>
+<DIV CLASS="Element7">
+<A HREF="009869.html" CLASS="Element59">Hierarchy</A>, <A HREF="009870.html" CLASS="Element59">Properties</A>, <A HREF="009871.html" CLASS="Element59">Methods</A>, <A HREF="002173.html" CLASS="Element59">Unit: IdDNSResolver</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Represents the Header section in a DNS message packet.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12">TDNSHeader = <STRONG>class</STRONG></PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Unit</DIV>
+<DIV CLASS="Element69">
+<A HREF="002173.html" CLASS="Element59">IdDNSResolver</A></DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+TDNSHeader is a TObject descendant that represents the Header section in a DNS message packet. A DNS message packet may contain 5 sections:<P CLASS="Element10">
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12">  +------------+
+  |   Header   |
+  +------------+
+  |  Question  |  question for the name server
+  +------------+
+  |   Answer   |  resource records answering the question
+  +------------+
+  | Authority  |  resource records pointing toward an authority
+  +------------+
+  | Additional |  resource records holding additional information
+  +------------+</PRE></DIV>
+</DIV>
+<P CLASS="Element10">
+TDNSHeader is always present in the message packet, and includes values that specify which of the remaining sections are present. TDNSHeader also provides properties specific to the header section or the entire message packet, including:<P CLASS="Element10">
+<UL>
+<LI><A HREF="007160.html#0006" CLASS="Element59">ID</A> - Identifier assigned to a DNS query.<P CLASS="Element10">
+<LI><A HREF="007160.html#000A" CLASS="Element59">Qr</A> - Query (0) or Response (1) flag.<P CLASS="Element10">
+<LI><A HREF="007160.html#0008" CLASS="Element59">OpCode</A> - Indicates the kind of query to be performed.<P CLASS="Element10">
+<LI><A HREF="007160.html#0000" CLASS="Element59">AA</A> - Indicates the responsing DNS server is an authority for the domain.<P CLASS="Element10">
+<LI><A HREF="007160.html#000E" CLASS="Element59">TC</A> - Indicates the message was truncated.<P CLASS="Element10">
+<LI><A HREF="007160.html#000D" CLASS="Element59">RD</A> - Indicates recurive queries are desired on the DNS server.<P CLASS="Element10">
+<LI><A HREF="007160.html#000B" CLASS="Element59">RA</A> - Indicates recurive queries are available on the DNS server.<P CLASS="Element10">
+<LI><A HREF="007160.html#000C" CLASS="Element59">RCode</A> - Response code from the DNS server.<P CLASS="Element10">
+<LI><A HREF="007160.html#0009" CLASS="Element59">QDCount</A> - Number of entries in the DNS Question section.<P CLASS="Element10">
+<LI><A HREF="007160.html#0001" CLASS="Element59">ANCount</A> - Number of resource records in the DNS Answer section.<P CLASS="Element10">
+<LI><A HREF="007160.html#0007" CLASS="Element59">NSCount</A> - Number of resource records in the DNS Authority section.<P CLASS="Element10">
+<LI><A HREF="007160.html#0002" CLASS="Element59">ARCount</A> - Number of resource records in the DNS Additional section.</UL>
+<P CLASS="Element10">
+TDNSHeader is used in the message packet for both a DNS query and a DNS response, although some values are only appropriate in one context.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0000">TDNSHeader.AA</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007160.html" CLASS="Element59">TDNSHeader</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Indicates if the name server is an authority for the requested domain.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> AA: Word;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+AA is a Word property that indicates if the responding Domain Name Server is an authority for the Domain name space in the question section of a DNS query.<P CLASS="Element10">
+AA is used in a DNS response that may contain multiple resource records in the answer section of the DNS response, and each resource record may have a different owner. AA corresponds to the name which matches the Omain name in the query, or the owner name for the first resource record in the answer section.<P CLASS="Element10">
+AA is represented in a DNS header as a bit flag. Changing the value of AA insures that the appropriate bit field is updated in the DNS header for the message packet.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0001">TDNSHeader.ANCount</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007160.html" CLASS="Element59">TDNSHeader</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Number of resource records in the Answer section of a DNS response.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> ANCount: Word;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+ANCount is a Word property that indicates the number of resource records found in the Answer section of a DNS response.<P CLASS="Element10">
+Use <A HREF="007160.html#0007" CLASS="Element59">NSCount</A> to determine the number of name server resource records in the DNS response.<P CLASS="Element10">
+Use <A HREF="007160.html#0002" CLASS="Element59">ARCount</A> to determine the number of additional resource records in in the DNS response.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0002">TDNSHeader.ARCount</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007160.html" CLASS="Element59">TDNSHeader</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Number of resource records in the Additional section of a DNS response.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> ARCount: Word;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+ARCount is a Word property that indicates the number of resource records found in the Additional section of a DNS response.<P CLASS="Element10">
+Use <A HREF="007160.html#0001" CLASS="Element59">ANCount</A> to determine the number of Answer resource records in the DNS response.<P CLASS="Element10">
+Use <A HREF="007160.html#0007" CLASS="Element59">NSCount</A> to determine the number of name server resource records in the DNS response.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0003">TDNSHeader.BitCode</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007160.html" CLASS="Element59">TDNSHeader</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Represents temporary storage for bit fields used in the DNS header.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> BitCode: Word;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+BitCode is a read-only Word property used to represent the individual bit fields that appear in the DNS header. BitCode acts as a temporary storage slot for bit field values.<P CLASS="Element10">
+BitCode is used when updating values for bit fields while creating the DNS query, and when reading the values from bit fields in the DNS response. BitCode is ANDed with the appropriate value to access a particular bit field in the DNS header.<P CLASS="Element10">
+Use <A HREF="007160.html#0004" CLASS="Element59">ClearByteCode</A> to reset the value of all bit fields in BitCode.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0006">TDNSHeader.ID</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007160.html" CLASS="Element59">TDNSHeader</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Identifier assigned to match DNS query and response packets.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> ID: Word;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+ID is a Word property that represents the 16-bit identifier assigned by the DNS Resolver to allow matching a response to the DNS query that generates the message packet. ID is copied from the DNS request to the corresponding reply and can be used by the requester to match up replies to outstanding queries.<P CLASS="Element10">
+The value in ID is assigned in the <A HREF="007160.html#0005" CLASS="Element59">Create</A> constructor, and contains a random value in the range 0 to 65535.<P CLASS="Element10">
+ID is read from the DNS Header returned in a DNS response packet, when the results are parsed after a call to <A HREF="007302.html#0005" CLASS="Element59">TIdDNSResolver.Resolve</A>.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0007">TDNSHeader.NSCount</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007160.html" CLASS="Element59">TDNSHeader</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Number of resource records in the Authority section of a DNS response.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> NSCount: Word;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+NSCount is a Word property that indicates the number of resource records found in the Authority section of a DNS response.<P CLASS="Element10">
+Use <A HREF="007160.html#0002" CLASS="Element59">ARCount</A> to determine the number of Additional resource records in the DNS response.<P CLASS="Element10">
+Use <A HREF="007160.html#0001" CLASS="Element59">ANCount</A> to determine the number of resource records in the Answer scetion of the DNS response.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0008">TDNSHeader.OpCode</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007160.html" CLASS="Element59">TDNSHeader</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Indicates the kind of query to be performed on the DNS server.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> OpCode: Word;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+OpCode is a Word property and contains an Integer value that specifies the kind of query in a DNS request packet. OpCode is specified in the DNS query, and returned in the DNS response. OpCode may contain one of the follwing values and meanings:<P CLASS="Element10">
+<UL>
+<LI>0 - A standard query (QUERY)<P CLASS="Element10">
+<LI>1 - An inverse query (IQUERY)<P CLASS="Element10">
+<LI>2 - A server status request (STATUS)<P CLASS="Element10">
+<LI>3 - Reserved for future use<P CLASS="Element10">
+<LI>4 - Reserved for future use<P CLASS="Element10">
+<LI>5 - Reserved for future use<P CLASS="Element10">
+<LI>6 - Reserved for future use<P CLASS="Element10">
+<LI>7 - Reserved for future use<P CLASS="Element10">
+<LI>8 - Reserved for future use<P CLASS="Element10">
+<LI>9 - Reserved for future use<P CLASS="Element10">
+<LI>10 - Reserved for future use<P CLASS="Element10">
+<LI>11 - Reserved for future use<P CLASS="Element10">
+<LI>12 - Reserved for future use<P CLASS="Element10">
+<LI>13 - Reserved for future use<P CLASS="Element10">
+<LI>14 - Reserved for future use<P CLASS="Element10">
+<LI>15 - Reserved for future use</UL>
+<P CLASS="Element10">
+<STRONG>Note</STRONG>: Currently, the <A HREF="007302.html" CLASS="Element59">TIdDNSResolver</A> implementation does not support all aspects of the DNS protocol, and includes the following limitations:<P CLASS="Element10">
+<UL>
+<LI>The DNS query type is limited to standard queries, where the DNS Header OpCode is 0. Inverse queries (OpCode=1) and Status queries (OpCode=2) are not supported at this time.</UL>
+<P CLASS="Element10">
+OpCode is represented in a DNS header as a 4-bit field. Changing the value of OpCode insures that the appropriate bit field is updated in the DNS header for the message packet.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0009">TDNSHeader.QDCount</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007160.html" CLASS="Element59">TDNSHeader</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Number of Questions in the DNS message packet.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> QDCount: Word;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+QDCount is a Word property that indicates the number of entries in the Question section of a DNS message packet. QDCount is calculated and included in the DNS query when the query is constructed after a call to <A HREF="007302.html#0005" CLASS="Element59">TIdDNSResolver.Resolve</A>. QDCount will indicate the numer of values assigned to <A HREF="007302.html#0003" CLASS="Element59">TIdDNSResolver.QueryRecords</A>.<P CLASS="Element10">
+QDCount is returned in the DNS response to indicate the number of Questions handled by the DNS server.<P CLASS="Element10">
+Use <A HREF="007160.html#0001" CLASS="Element59">ANCount</A> to determine the number of resource records returned in the Answer section of the DNS response.<P CLASS="Element10">
+Use <A HREF="007160.html#0007" CLASS="Element59">NSCount</A> to determine the number of name server resource records returned in the Authoruty section of the DNS response.<P CLASS="Element10">
+Use <A HREF="007160.html#0002" CLASS="Element59">ARCount</A> to determine the number of resource records returned in the Additional section of the DNS response.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="000A">TDNSHeader.Qr</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007160.html" CLASS="Element59">TDNSHeader</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Indicates if the DNS message packet contains a query or a response.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> Qr: Word;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Qr is a Word property that specifies if the contents of the DNS message packet contains a DNS query or DNS a response. Qr will contain the value 0 when the message is a query, and the value 1 when the message is a response.<P CLASS="Element10">
+Qr is represented in a DNS header as a bit field. Changing the value of Qr insures that the appropriate bit field is updated in the DNS header for the message packet.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="000B">TDNSHeader.RA</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007160.html" CLASS="Element59">TDNSHeader</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Indicates if recursive query support is available on a name server.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> RA: Word;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+RA is a Word property that indicates if recursive query support is available on the DNS server responding to the DNS query. RA will contain the value 1 when recursive queries are availabale on the name server, or the value 0 when recursive queries are not supported or allowed for the DNS resolver.<P CLASS="Element10">
+Use <A HREF="007160.html#000D" CLASS="Element59">RD</A> to indicate if recursive query support is desired in a DNS request.<P CLASS="Element10">
+RA is represented in a DNS header as a bit field. Changing the value of RA insures that the appropriate bit field is updated in the DNS header for the message packet.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="000C">TDNSHeader.RCode</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007160.html" CLASS="Element59">TDNSHeader</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Result code returned in a DNS response.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> RCode: Word;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+RCode is a Word property that represents the result code returned by a DNS server as part of a response to a DNS query. RCode may contain one of the following values and meanings:<P CLASS="Element10">
+<UL>
+<LI>0 - No error condition.<P CLASS="Element10">
+<LI>1 - Query Format error. The name server was unable to interpret the query.<P CLASS="Element10">
+<LI>2 - Server failure. The name server was unable to process this query due to a problem with the name server.<P CLASS="Element10">
+<LI>3 - Name Error. Meaningful only for responses from an authoritative name server, this code signifies that the domain name referenced in the query does not exist.<P CLASS="Element10">
+<LI>4 - Not Implemented. The name server does not support the requested kind of query.<P CLASS="Element10">
+<LI>5 - Operation Refused. The name server refuses to perform the specified operation for policy reasons. For example, a name server may not wish to provide the information to the particular requester, or a name server may not wish to perform a particular operation (e.g., zone transfer) for particular data.<P CLASS="Element10">
+<LI>6 - Reserved for future use.<P CLASS="Element10">
+<LI>7 - Reserved for future use.<P CLASS="Element10">
+<LI>8 - Reserved for future use.<P CLASS="Element10">
+<LI>9 - Reserved for future use.<P CLASS="Element10">
+<LI>10 - Reserved for future use.<P CLASS="Element10">
+<LI>11 - Reserved for future use.<P CLASS="Element10">
+<LI>12 - Reserved for future use.<P CLASS="Element10">
+<LI>13 - Reserved for future use.<P CLASS="Element10">
+<LI>14 - Reserved for future use.<P CLASS="Element10">
+<LI>15 - Reserved for future use.</UL>
+<P CLASS="Element10">
+RCode is represented in a DNS header as a 4-bit field. Changing the value of RCode insures that the appropriate bit field is updated in the DNS header for the message packet.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="000D">TDNSHeader.RD</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007160.html" CLASS="Element59">TDNSHeader</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Indicates if recursive query support is desired for DNS request.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> RD: Word;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+RD is a Word property that indicates if recursive query support is desired on the DNS server responding to a DNS query. RD will contain the value 1 when recursive queries are desired on the name server, or the value 0 when recursive queries are not desired by the DNS resolver.<P CLASS="Element10">
+Use <A HREF="007160.html#000B" CLASS="Element59">RA</A> to detgermine if recursive query support is available on a DNS server issuing a response.<P CLASS="Element10">
+RD is represented in a DNS header as a bit field. Changing the value of RD insures that the appropriate bit field is updated in the DNS header for the message packet.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="000E">TDNSHeader.TC</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007160.html" CLASS="Element59">TDNSHeader</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Indicates if a DNS response message packet has been truncated due to excessive length.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> TC: Word;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+TC is a Word property that indicates if a DNS response message packet has been truncated when the length of the message packet exceeds the maximum permitted on the transmission channel. TC will contain the value 1 when the mesaage packet has been truncated, or the value 0 when the packet contains the entire response issued by the name server.<P CLASS="Element10">
+Messages handled by the UDP-based DNS Resolver are restricted to 512 bytes (not counting the UDP headers). Longer messages are truncated and TC is set to 1 in the header. For this reason, the UDP-based <A HREF="007302.html" CLASS="Element59">TIdDNSResolver</A> does not implement DNS zone transfers, but is the recommended method for standard queries in the Internet.<P CLASS="Element10">
+TC is represented in a DNS header as a bit field. Changing the value of TC insures that the appropriate bit field is updated in the DNS header for the message packet.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0004">TDNSHeader.ClearByteCode</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007160.html" CLASS="Element59">TDNSHeader</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Resets the temporary storage for bit field in the DNS header.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>procedure</STRONG> ClearByteCode;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+ClearByteCode is a procedure that resets the temporary storage allocated for the bit fields in <A HREF="007160.html#0003" CLASS="Element59">BitCode</A>. ClearByteCode is used when the DNS resolver creates the DNS query used in <A HREF="007302.html#0005" CLASS="Element59">TIdDNSResolver.Resolve</A>.<P CLASS="Element10">
+Use <A HREF="007160.html#0003" CLASS="Element59">BitCode</A> to access the value for an individual bit field in the DNS Header.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0005">TDNSHeader.Create</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007160.html" CLASS="Element59">TDNSHeader</A>, <A HREF="009872.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Constructor for the object instance.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>constructor</STRONG> Create;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Create is the constructor for the object instance. Create calls the Randomize procedure to initialize the runtime random number generator with an arbitrary value prior to assigning the identifier used in <A HREF="007160.html#0006" CLASS="Element59">ID</A>.</DIV>
+</DIV>
+<DIV CLASS="Element62">
+<HR>Created with Doc-O-Matic 2 donated to <STRONG><A HREF="http://www.delphi-jedi.org">Project JEDI</A></STRONG>. Commercial license available from the <STRONG><A HREF="http://www.doc-o-matic.com">Doc-O-Matic site</A></STRONG>.</DIV>
+</DIV></BODY></HTML>

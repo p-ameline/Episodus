@@ -1,0 +1,66 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+<TITLE>TOnReceiveMessage</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <META name="GENERATOR" content="Doc-O-Matic">
+    <LINK rel="STYLESHEET" href="default.css" type="text/css">
+
+<SCRIPT LANGUAGE="JavaScript1.2" SRC="scripts.js"></SCRIPT>
+</HEAD>
+<BODY CLASS="Element57">
+<TABLE BORDER="0" BGCOLOR="#AACCFF" WIDTH="100%" CELLSPACING="0" CELLPADDING="0">
+<TR><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element1">
+Indy 9</DIV>
+</TD><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element2">
+<A HREF="content.html" CLASS="Element59">Content</A> | <A HREF="idx.html" CLASS="Element59">Index</A> | <A HREF="symref.html" CLASS="Element59">Reference</A></DIV>
+</TD></TR></TABLE><DIV CLASS="Element58">
+<DIV CLASS="Element5">
+TOnReceiveMessage</DIV>
+<DIV CLASS="Element7">
+<A HREF="002819.html" CLASS="Element59">Unit: IdSMTPServer</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Event type for incoming mail in a <A HREF="007544.html" CLASS="Element59">TIdMessage</A> object instance.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12">TOnReceiveMessage = <STRONG>procedure</STRONG> (ASender: <A HREF="007242.html" CLASS="Element59">TIdCommand</A>; <STRONG>var</STRONG> AMsg: <A HREF="007544.html" CLASS="Element59">TIdMessage</A>; RCPT: <A HREF="007308.html" CLASS="Element59">TIdEMailAddressList</A>; <STRONG>var</STRONG> CustomError: <STRONG>string</STRONG>) <STRONG>of</STRONG> <STRONG>object</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Unit</DIV>
+<DIV CLASS="Element69">
+<A HREF="002819.html" CLASS="Element59">IdSMTPServer</A></DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+AMsg</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Message instance containing the incoming mail data.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+ASender</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Command generated the event notification.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+RCPT</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+List of Recipient email addresses.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+TOnReceiveMessage specifies an event type signalled to a <A HREF="007707.html" CLASS="Element59">TIdSMTPServer</A> when a <A HREF="007544.html" CLASS="Element59">TIdMessage</A> instance is constructed for incoming mail data.<P CLASS="Element10">
+TOnReceiveMessage events are signalled by the command instance used to respond to the SMTP DATA command when the ReceiveMode contains rmMessage or rmMessageParsed.<P CLASS="Element10">
+TOnReceiveMessage is the type used for the <A HREF="007707.html#0012" CLASS="Element59">TIdSMTPServer.OnReceiveMessage</A> and <A HREF="007707.html#0013" CLASS="Element59">TIdSMTPServer.OnReceiveMessageParsed</A> event handlers. Applications must assign a procedure to the corresponding event handlers to allow a respond to the event notification.</DIV>
+</DIV>
+<DIV CLASS="Element62">
+<HR>Created with Doc-O-Matic 2 donated to <STRONG><A HREF="http://www.delphi-jedi.org">Project JEDI</A></STRONG>. Commercial license available from the <STRONG><A HREF="http://www.doc-o-matic.com">Doc-O-Matic site</A></STRONG>.</DIV>
+</DIV></BODY></HTML>

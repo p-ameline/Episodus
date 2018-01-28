@@ -1,0 +1,14 @@
+//
+// ns_bbk.rh
+//
+
+// Dialogue BBK
+
+#define IDC_STOPBBK	104
+#define IDC_DPIO	105
+#define IDC_BWCCGROUP1	106
+#define IDC_VIDAL	107
+#define IDC_GO	103
+#define IDC_GO1CYCLE	102
+#define IDC_INITBBK	101
+

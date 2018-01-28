@@ -1,0 +1,95 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+<TITLE>TIdWhois</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <META name="GENERATOR" content="Doc-O-Matic">
+    <LINK rel="STYLESHEET" href="default.css" type="text/css">
+
+<SCRIPT LANGUAGE="JavaScript1.2" SRC="scripts.js"></SCRIPT>
+</HEAD>
+<BODY CLASS="Element57">
+<TABLE BORDER="0" BGCOLOR="#AACCFF" WIDTH="100%" CELLSPACING="0" CELLPADDING="0">
+<TR><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element1">
+Indy 9</DIV>
+</TD><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element2">
+<A HREF="content.html" CLASS="Element59">Content</A> | <A HREF="idx.html" CLASS="Element59">Index</A> | <A HREF="symref.html" CLASS="Element59">Reference</A></DIV>
+</TD></TR></TABLE><DIV CLASS="Element58">
+<DIV CLASS="Element5">
+TIdWhois</DIV>
+<DIV CLASS="Element7">
+<A HREF="014909.html" CLASS="Element59">Hierarchy</A>, <A HREF="014910.html" CLASS="Element59">Properties</A>, <A HREF="014911.html" CLASS="Element59">Methods</A>, <A HREF="014912.html" CLASS="Element59">Events</A>, <A HREF="014913.html" CLASS="Element59">See Also</A>, <A HREF="002951.html" CLASS="Element59">Unit: IdWhois</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Implements a <A HREF="007898.html#0001" CLASS="Element59">WhoIs</A> or Nickname client.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12">TIdWhois = <STRONG>class</STRONG>(<A HREF="007827.html" CLASS="Element59">TIdTCPClient</A>)</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Unit</DIV>
+<DIV CLASS="Element69">
+<A HREF="002951.html" CLASS="Element59">IdWhois</A></DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+TIdWhois implements the Nickname or Whois protocol (RFC 954) as a client. Whois is a simple database query system that is commonly used for consulting domain registration records although it can be used for other simple directory services.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0000">TIdWhois.Create</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007898.html" CLASS="Element59">TIdWhois</A>, <A HREF="014914.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Constructor for the object instance.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>constructor</STRONG> Create(AOwner: TComponent); <STRONG>override</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Create is the constructor for the object instance. Creates initializes a new TIdWhoIs component and sets the default values for the port property (<A HREF="002760.html" CLASS="Element59">IdPORT_WHOIS</A>) and the host property ('whois.internic.net').</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0001">TIdWhois.WhoIs</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007898.html" CLASS="Element59">TIdWhois</A>, <A HREF="014915.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Performs a query for a domain name.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>function</STRONG> WhoIs(<STRONG>const</STRONG> ADomain: <STRONG>string</STRONG>): <STRONG>string</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+const ADomain: string</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Domain query to <A HREF="006944.html" CLASS="Element59">send</A> to the server.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Return Value</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+String - Results from the WhoIs server.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+WhoIs is a String function that queries the WhoIs server using the query value specified in the ADomain argument. Assign values to the Host and Port properties for the appropriate server before calling this method.<P CLASS="Element10">
+WhoIs calls Connect to open the connection to the WhoIs server identified in Host and Port, and writes the query in ADomain to the WhoIs server. WhoIs reads pending resuilts using the AllData method prior to calling Disconnect.</DIV>
+</DIV>
+<DIV CLASS="Element62">
+<HR>Created with Doc-O-Matic 2 donated to <STRONG><A HREF="http://www.delphi-jedi.org">Project JEDI</A></STRONG>. Commercial license available from the <STRONG><A HREF="http://www.doc-o-matic.com">Doc-O-Matic site</A></STRONG>.</DIV>
+</DIV></BODY></HTML>

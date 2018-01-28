@@ -1,0 +1,110 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+<TITLE>TIdQotdUDPServer</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <META name="GENERATOR" content="Doc-O-Matic">
+    <LINK rel="STYLESHEET" href="default.css" type="text/css">
+
+<SCRIPT LANGUAGE="JavaScript1.2" SRC="scripts.js"></SCRIPT>
+</HEAD>
+<BODY CLASS="Element57">
+<TABLE BORDER="0" BGCOLOR="#AACCFF" WIDTH="100%" CELLSPACING="0" CELLPADDING="0">
+<TR><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element1">
+Indy 9</DIV>
+</TD><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element2">
+<A HREF="content.html" CLASS="Element59">Content</A> | <A HREF="idx.html" CLASS="Element59">Index</A> | <A HREF="symref.html" CLASS="Element59">Reference</A></DIV>
+</TD></TR></TABLE><DIV CLASS="Element58">
+<DIV CLASS="Element5">
+TIdQotdUDPServer</DIV>
+<DIV CLASS="Element7">
+<A HREF="013196.html" CLASS="Element59">Hierarchy</A>, <A HREF="013197.html" CLASS="Element59">Properties</A>, <A HREF="013198.html" CLASS="Element59">Methods</A>, <A HREF="013199.html" CLASS="Element59">Events</A>, <A HREF="013200.html" CLASS="Element59">See Also</A>, <A HREF="002779.html" CLASS="Element59">Unit: IdQOTDUDPServer</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Defines an implementation framework for a Quote of the Day Protocol server.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12">TIdQotdUDPServer = <STRONG>class</STRONG>(<A HREF="007877.html" CLASS="Element59">TIdUDPServer</A>)</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Unit</DIV>
+<DIV CLASS="Element69">
+<A HREF="002779.html" CLASS="Element59">IdQOTDUDPServer</A></DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+TIdQotdUDPServer defines an implementation framework for a UDP-based Quote of the Day Protocol or QUOTD server as described in the Internet Standards document:<P CLASS="Element10">
+<UL>
+<LI>RFC 865 - Quote of the Day Protocol (http://www.rfc-editor.org/rfc/rfc865.txt)</UL>
+<P CLASS="Element10">
+QUOTD is a simple protocol for retrieving a short quote from a server.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0001">TIdQotdUDPServer.DefaultPort</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007633.html" CLASS="Element59">TIdQotdUDPServer</A>, <A HREF="013201.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Default port number for the server.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> DefaultPort: integer;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+DefaultPort is a published property in TIdQOTDUDPServer that identifies the default port number for the server, as described in the Quote of the Day Protocol specification. The default value for DefaultPort is <A HREF="002634.html" CLASS="Element59">IdPORT_QOTD</A>.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0000">TIdQotdUDPServer.Create</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007633.html" CLASS="Element59">TIdQotdUDPServer</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Constructor for the object instance.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>constructor</STRONG> Create(axOwner: TComponent); <STRONG>override</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+AOwner</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Owner of the object instance.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Create is the constructor for the object instance that creates a new TIdQOTDUDPServer instance and sets the default port to the standard port number used by the Quote of the Day protocol (<A HREF="002634.html" CLASS="Element59">IdPORT_QOTD</A>).</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0002">TIdQotdUDPServer.OnCommandQOTD</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007633.html" CLASS="Element59">TIdQotdUDPServer</A>, <A HREF="013202.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Event triggered when a client queries for the current Quote of the Day.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> OnCommandQOTD: <A HREF="007632.html" CLASS="Element59">TIdQotdUDPGetEvent</A>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+OnCommandQOTD is an event triggered when a client queries for the current Quote of the Day. You set the AQuote string to the quote of the day that you wish to <A HREF="006944.html" CLASS="Element59">send</A> to the client.</DIV>
+</DIV>
+<DIV CLASS="Element62">
+<HR>Created with Doc-O-Matic 2 donated to <STRONG><A HREF="http://www.delphi-jedi.org">Project JEDI</A></STRONG>. Commercial license available from the <STRONG><A HREF="http://www.doc-o-matic.com">Doc-O-Matic site</A></STRONG>.</DIV>
+</DIV></BODY></HTML>

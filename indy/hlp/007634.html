@@ -1,0 +1,437 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+<TITLE>TIdRawBase</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <META name="GENERATOR" content="Doc-O-Matic">
+    <LINK rel="STYLESHEET" href="default.css" type="text/css">
+
+<SCRIPT LANGUAGE="JavaScript1.2" SRC="scripts.js"></SCRIPT>
+</HEAD>
+<BODY CLASS="Element57">
+<TABLE BORDER="0" BGCOLOR="#AACCFF" WIDTH="100%" CELLSPACING="0" CELLPADDING="0">
+<TR><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element1">
+Indy 9</DIV>
+</TD><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element2">
+<A HREF="content.html" CLASS="Element59">Content</A> | <A HREF="idx.html" CLASS="Element59">Index</A> | <A HREF="symref.html" CLASS="Element59">Reference</A></DIV>
+</TD></TR></TABLE><DIV CLASS="Element58">
+<DIV CLASS="Element5">
+TIdRawBase</DIV>
+<DIV CLASS="Element7">
+<A HREF="013211.html" CLASS="Element59">Hierarchy</A>, <A HREF="013212.html" CLASS="Element59">Properties</A>, <A HREF="013213.html" CLASS="Element59">Methods</A>, <A HREF="013214.html" CLASS="Element59">Events</A>, <A HREF="002780.html" CLASS="Element59">Unit: IdRawBase</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Ancestor class for Raw <A HREF="007071.html" CLASS="Element59">socket</A> clients.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12">TIdRawBase = <STRONG>class</STRONG>(<A HREF="007246.html" CLASS="Element59">TIdComponent</A>)</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Unit</DIV>
+<DIV CLASS="Element69">
+<A HREF="002780.html" CLASS="Element59">IdRawBase</A></DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+The TIdRawBase is an ancestor of components which use raw sockets. This allows the programmer to code for protocols that are not supported by the standard stack (ICMP, IGMP or any custom protocol).<P CLASS="Element10">
+Depending on the underlying operating system and on the security privilege of the user, it might also allow the programmer to build the IP header (currently, this is only supported by Windows 2000). http://www.microsoft.com/windows95/downloads/contents/wuadmintools/s_wunetworkingtools/w95sockets2/default.asp . For Windows98, no updates are required because that included Winsock 2. For WindowsNT, you need administrative rights and Service Pack 3. --&gt;</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0000">TIdRawBase.Binding</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007634.html" CLASS="Element59">TIdRawBase</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Represents the <A HREF="007071.html" CLASS="Element59">socket</A> handle for the connection.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> Binding: <A HREF="007713.html" CLASS="Element59">TIdSocketHandle</A>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Binding is a read-only <A HREF="007713.html" CLASS="Element59">TIdSocketHandle</A> property that represents the <A HREF="007071.html" CLASS="Element59">socket</A> handle binding for the connection. When accessed, Binding.AllocateSocket is called to insure that the connection uses raw sockets for the <A HREF="007634.html#0006" CLASS="Element59">Protocol</A> selected. In addition, <A HREF="007071.html" CLASS="Element59">socket</A> options for the Binding are updated to use <A HREF="001276.html" CLASS="Element59">Id_IPPROTO_IP</A> protocol family with the specified <A HREF="007634.html#000C" CLASS="Element59">TTL</A> (Time-To-Live).</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0001">TIdRawBase.BufferSize</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007634.html" CLASS="Element59">TIdRawBase</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Size of the internal Indy buffer.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> BufferSize: Integer;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+BufferSize is an Integer property that indicates the size of the internal Indy buffer for the <A HREF="007071.html" CLASS="Element59">socket</A> connection. Changing the value of BufferSize force the Indy buffer to be enlarged or contracted to the specified number of bytes.<P CLASS="Element10">
+The default value for BufferSize is <A HREF="002075.html" CLASS="Element59">Id_TIdRawBase_BufferSize</A>.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0004">TIdRawBase.Host</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007634.html" CLASS="Element59">TIdRawBase</A>, <A HREF="013215.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Specifies the endpoint for the <A HREF="007071.html" CLASS="Element59">socket</A> connection.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> Host: <STRONG>string</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Host is a String property that specifies the IP address or host name that is the endpoint for the <A HREF="007071.html" CLASS="Element59">socket</A> connection.<P CLASS="Element10">
+Use <A HREF="007634.html#0005" CLASS="Element59">Port</A> to indicate the port number used for the <A HREF="007071.html" CLASS="Element59">socket</A> connection.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0005">TIdRawBase.Port</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007634.html" CLASS="Element59">TIdRawBase</A>, <A HREF="013216.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Identifies the port number for the endpoint of the <A HREF="007071.html" CLASS="Element59">socket</A> connection.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> Port: Integer;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Port is an Integer property that identifies the port number for the endpoint of the <A HREF="007071.html" CLASS="Element59">socket</A> connection.<P CLASS="Element10">
+Use host to specify the IP address or host name for the connection.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0006">TIdRawBase.Protocol</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007634.html" CLASS="Element59">TIdRawBase</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Identifies the protocol option for the <A HREF="007071.html" CLASS="Element59">socket</A> connection.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> Protocol: Integer;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Protocol is an Integer property that identifies the protocol used for the <A HREF="007071.html" CLASS="Element59">socket</A> connection. The default value for Protocol is <A HREF="001278.html" CLASS="Element59">Id_IPPROTO_RAW</A>, as established in <A HREF="007634.html#0002" CLASS="Element59">Create</A>.<P CLASS="Element10">
+Binding.AllocateSocket uses the Protocol property to <A HREF="000175.html" CLASS="Element59">bind</A> both the protocol family and protocol options for the <A HREF="007071.html" CLASS="Element59">socket</A> handle.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0008">TIdRawBase.ReceiveTimeout</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007634.html" CLASS="Element59">TIdRawBase</A>, <A HREF="013217.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Identifies the timeout for receive operations.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> ReceiveTimeout: integer;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+ReceiveTimeout is an Integer property that indicate the number of milliseconds that receive operations must wait for the <A HREF="007071.html" CLASS="Element59">socket</A> to become readable.<P CLASS="Element10">
+The default value for ReceiveTimeout is GFReceiveTimeout, as established in <A HREF="007634.html#0002" CLASS="Element59">Create</A>. When ReceiveTimeout is 0, no timeout will occur while waiting for the <A HREF="007071.html" CLASS="Element59">socket</A> to become readable.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="000C">TIdRawBase.TTL</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007634.html" CLASS="Element59">TIdRawBase</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Specifies the Time-To-Live for raw <A HREF="007071.html" CLASS="Element59">socket</A> packets.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> TTL: Integer;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+TTL is an Integer property that identifies the Time-To-Live for routers and gateways that must handle the raw <A HREF="007071.html" CLASS="Element59">socket</A> transmission. TTL is used to set the <A HREF="007071.html" CLASS="Element59">socket</A> options for the <A HREF="007634.html#0000" CLASS="Element59">Binding</A>. Changing the value of TTL forces an update to the <A HREF="007071.html" CLASS="Element59">socket</A> options for <A HREF="007634.html#0000" CLASS="Element59">Binding</A>.<P CLASS="Element10">
+The default value of TTL is <A HREF="000673.html" CLASS="Element59">GFTTL</A>.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0002">TIdRawBase.Create</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007634.html" CLASS="Element59">TIdRawBase</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Constructor for the object instance.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>constructor</STRONG> Create(AOwner: TComponent); <STRONG>override</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+AOwner: TComponent</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Owner of the object instance.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Create is the constructor for the object instance. Create initializes object properties to their default values, including:<P CLASS="Element10">
+<UL>
+<LI><A HREF="007634.html#0000" CLASS="Element59">Binding</A><P CLASS="Element10">
+<LI><A HREF="007634.html#0001" CLASS="Element59">BufferSize</A> - <A HREF="002075.html" CLASS="Element59">Id_TIdRawBase_BufferSize</A> bytes<P CLASS="Element10">
+<LI><A HREF="007634.html#0008" CLASS="Element59">ReceiveTimeout</A> - <A HREF="000680.html" CLASS="Element59">GReceiveTimeout</A><P CLASS="Element10">
+<LI><A HREF="007634.html#0006" CLASS="Element59">Protocol</A> - <A HREF="001278.html" CLASS="Element59">Id_IPPROTO_RAW</A><P CLASS="Element10">
+<LI><A HREF="007634.html#000C" CLASS="Element59">TTL</A> - <A HREF="000673.html" CLASS="Element59">GFTTL</A></UL>
+</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0003">TIdRawBase.Destroy</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007634.html" CLASS="Element59">TIdRawBase</A>, <A HREF="013218.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Frees the object instance.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>destructor</STRONG> Destroy; <STRONG>override</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Destroy is the destructor for the object instance. Destroy clears, frees, and releases the <A HREF="007634.html#0000" CLASS="Element59">Binding</A> for the <A HREF="007071.html" CLASS="Element59">socket</A> connection and the internal Indy read buffer.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0007">TIdRawBase.ReceiveBuffer</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007634.html" CLASS="Element59">TIdRawBase</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Reads and buffers data from the <A HREF="007071.html" CLASS="Element59">socket</A> connection.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>function</STRONG> ReceiveBuffer(<STRONG>var</STRONG> ABuffer; <STRONG>const</STRONG> AByteCount: Integer; ATimeOut: integer = -1): integer;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+var ABuffer</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Buffer for data read from the connection.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+const AByteCount: Integer</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Number of bytes to read in to the buffer.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+ATimeOut: integer = -1</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Timeout value. Default value is -1.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Return Value</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Integer - Number of bytes read from the connection.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+ReceiveBuffer is an Integer function used to receive and store data arriving on the <A HREF="007071.html" CLASS="Element59">socket</A> connection.<P CLASS="Element10">
+ABuffer is the destination for data read from the connection. AByteCount indicates the number of bytes anticipated to be read from the <A HREF="007071.html" CLASS="Element59">socket</A> connection. ATimeOut is the number of milliseconds to wait for the <A HREF="007634.html#0000" CLASS="Element59">Binding</A> to become readable.<P CLASS="Element10">
+When ATimeOut is less than 0, the value in <A HREF="007634.html#0008" CLASS="Element59">ReceiveTimeout</A> is used.<P CLASS="Element10">
+If the specified timeout period elapses, AByteCount is less than 1, or ABuffer is nil, then the return value for ReceiveBuffer is 0.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0009">TIdRawBase.Send</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007634.html" CLASS="Element59">TIdRawBase</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Transmits data to remote computer system.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>procedure</STRONG> Send(AData: <STRONG>string</STRONG>); <STRONG>overload</STRONG>;
+<STRONG>procedure</STRONG> Send(AHost: <STRONG>string</STRONG>; <STRONG>const</STRONG> APort: Integer; AData: <STRONG>string</STRONG>); <STRONG>overload</STRONG>;
+<STRONG>procedure</STRONG> Send(AHost: <STRONG>string</STRONG>; <STRONG>const</STRONG> APort: integer; <STRONG>var</STRONG> ABuffer; <STRONG>const</STRONG> ABufferSize: integer); <STRONG>overload</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+AData: string</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Value to be sent over the connection.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+AHost: string</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Destination address for the <A HREF="006944.html" CLASS="Element59">send</A> operation.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+const APort: Integer</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Destination port number for the <A HREF="006944.html" CLASS="Element59">send</A> operation.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+var ABuffer</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Buffer containing values to be sent over the connection.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+const ABufferSize: integer</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Size of the buffer to be sent.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+<A HREF="007634.html#0009" CLASS="Element59">Send</A> is an overloaded procedure that allows the connection to transmit the specified data or buffer to the address identified in AHost and APort.<P CLASS="Element10">
+When the <A HREF="007634.html#0009" CLASS="Element59">Send</A>(AData) variant is called, the values from <A HREF="007634.html#0004" CLASS="Element59">Host</A> and <A HREF="007634.html#0005" CLASS="Element59">Port</A> are used for the destination.<P CLASS="Element10">
+<A HREF="007634.html#0009" CLASS="Element59">Send</A> resolves the address in AHost prior to transmitting data.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="000B">TIdRawBase.Send</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007634.html" CLASS="Element59">TIdRawBase</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Transmits data to remote computer system.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>procedure</STRONG> <A HREF="007634.html#0009" CLASS="Element59">Send</A>(AData: <STRONG>string</STRONG>); <STRONG>overload</STRONG>;
+<STRONG>procedure</STRONG> <A HREF="007634.html#0009" CLASS="Element59">Send</A>(AHost: <STRONG>string</STRONG>; <STRONG>const</STRONG> APort: Integer; AData: <STRONG>string</STRONG>); <STRONG>overload</STRONG>;
+<STRONG>procedure</STRONG> <A HREF="007634.html#0009" CLASS="Element59">Send</A>(AHost: <STRONG>string</STRONG>; <STRONG>const</STRONG> APort: integer; <STRONG>var</STRONG> ABuffer; <STRONG>const</STRONG> ABufferSize: integer); <STRONG>overload</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+AData: string</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Value to be sent over the connection.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+AHost: string</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Destination address for the <A HREF="006944.html" CLASS="Element59">send</A> operation.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+const APort: Integer</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Destination port number for the <A HREF="006944.html" CLASS="Element59">send</A> operation.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+var ABuffer</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Buffer containing values to be sent over the connection.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+const ABufferSize: integer</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Size of the buffer to be sent.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+<A HREF="007634.html#0009" CLASS="Element59">Send</A> is an overloaded procedure that allows the connection to transmit the specified data or buffer to the address identified in AHost and APort.<P CLASS="Element10">
+When the <A HREF="007634.html#0009" CLASS="Element59">Send</A>(AData) variant is called, the values from <A HREF="007634.html#0004" CLASS="Element59">Host</A> and <A HREF="007634.html#0005" CLASS="Element59">Port</A> are used for the destination.<P CLASS="Element10">
+<A HREF="007634.html#0009" CLASS="Element59">Send</A> resolves the address in AHost prior to transmitting data.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="000A">TIdRawBase.Send</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007634.html" CLASS="Element59">TIdRawBase</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Transmits data to remote computer system.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>procedure</STRONG> <A HREF="007634.html#0009" CLASS="Element59">Send</A>(AData: <STRONG>string</STRONG>); <STRONG>overload</STRONG>;
+<STRONG>procedure</STRONG> <A HREF="007634.html#0009" CLASS="Element59">Send</A>(AHost: <STRONG>string</STRONG>; <STRONG>const</STRONG> APort: Integer; AData: <STRONG>string</STRONG>); <STRONG>overload</STRONG>;
+<STRONG>procedure</STRONG> <A HREF="007634.html#0009" CLASS="Element59">Send</A>(AHost: <STRONG>string</STRONG>; <STRONG>const</STRONG> APort: integer; <STRONG>var</STRONG> ABuffer; <STRONG>const</STRONG> ABufferSize: integer); <STRONG>overload</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+AData: string</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Value to be sent over the connection.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+AHost: string</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Destination address for the <A HREF="006944.html" CLASS="Element59">send</A> operation.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+const APort: Integer</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Destination port number for the <A HREF="006944.html" CLASS="Element59">send</A> operation.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+var ABuffer</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Buffer containing values to be sent over the connection.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+const ABufferSize: integer</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Size of the buffer to be sent.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+<A HREF="007634.html#0009" CLASS="Element59">Send</A> is an overloaded procedure that allows the connection to transmit the specified data or buffer to the address identified in AHost and APort.<P CLASS="Element10">
+When the <A HREF="007634.html#0009" CLASS="Element59">Send</A>(AData) variant is called, the values from <A HREF="007634.html#0004" CLASS="Element59">Host</A> and <A HREF="007634.html#0005" CLASS="Element59">Port</A> are used for the destination.<P CLASS="Element10">
+<A HREF="007634.html#0009" CLASS="Element59">Send</A> resolves the address in AHost prior to transmitting data.</DIV>
+</DIV>
+<DIV CLASS="Element62">
+<HR>Created with Doc-O-Matic 2 donated to <STRONG><A HREF="http://www.delphi-jedi.org">Project JEDI</A></STRONG>. Commercial license available from the <STRONG><A HREF="http://www.doc-o-matic.com">Doc-O-Matic site</A></STRONG>.</DIV>
+</DIV></BODY></HTML>

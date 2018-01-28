@@ -1,0 +1,111 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+<TITLE>TIdTimeServer</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <META name="GENERATOR" content="Doc-O-Matic">
+    <LINK rel="STYLESHEET" href="default.css" type="text/css">
+
+<SCRIPT LANGUAGE="JavaScript1.2" SRC="scripts.js"></SCRIPT>
+</HEAD>
+<BODY CLASS="Element57">
+<TABLE BORDER="0" BGCOLOR="#AACCFF" WIDTH="100%" CELLSPACING="0" CELLPADDING="0">
+<TR><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element1">
+Indy 9</DIV>
+</TD><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element2">
+<A HREF="content.html" CLASS="Element59">Content</A> | <A HREF="idx.html" CLASS="Element59">Index</A> | <A HREF="symref.html" CLASS="Element59">Reference</A></DIV>
+</TD></TR></TABLE><DIV CLASS="Element58">
+<DIV CLASS="Element5">
+TIdTimeServer</DIV>
+<DIV CLASS="Element7">
+<A HREF="014523.html" CLASS="Element59">Hierarchy</A>, <A HREF="014524.html" CLASS="Element59">Properties</A>, <A HREF="014525.html" CLASS="Element59">Methods</A>, <A HREF="014526.html" CLASS="Element59">Events</A>, <A HREF="014527.html" CLASS="Element59">See Also</A>, <A HREF="002934.html" CLASS="Element59">Unit: IdTimeServer</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Implements a Time protocol server.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12">TIdTimeServer = <STRONG>class</STRONG>(<A HREF="007831.html" CLASS="Element59">TIdTCPServer</A>)</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Unit</DIV>
+<DIV CLASS="Element69">
+<A HREF="002934.html" CLASS="Element59">IdTimeServer</A></DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+TIdTimeServer is a <A HREF="007831.html" CLASS="Element59">TIdTCPServer</A> descendant that provides a server implementation of the Time Protocol as described in the Internet Standard document:<P CLASS="Element10">
+<UL>
+<LI>RFC 868 - Time Protocol (http://www.rfc-editor.org/rfc/rfc868.txt)</UL>
+<P CLASS="Element10">
+Time is a simple protocol for synchronizing time on a local network. If you need the time and day only in a human readable form, we recommend that you use the <A HREF="007278.html" CLASS="Element59">TIdDayTimeServer</A> component.<P CLASS="Element10">
+<STRONG>Note</STRONG>: The Time protocol in its current form cannot handle most dates after the year 2035. This limitation is stated in RFC 868.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0000">TIdTimeServer.BaseDate</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007865.html" CLASS="Element59">TIdTimeServer</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Base date used for Time calculations.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> BaseDate: TDateTime;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+BaseDate is a TDateTime property used to establish the initial Date for Time server calculations. If both the server and client are based from the same date which is higher than the original date, you can extend its use beyond the year 2035. You should change this property only when sure that the time client uses the same value for calculating the date and time.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0002">TIdTimeServer.DefaultPort</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007865.html" CLASS="Element59">TIdTimeServer</A>, <A HREF="014528.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Port number for the Time protocol.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> DefaultPort: integer;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+DefaultPort is an Integer property that represents the port number used by the Time protocol. DefaultPort is redefined in <A HREF="007865.html" CLASS="Element59">TIdTimeServer</A> to establish the default port number for the protocol (<A HREF="002728.html" CLASS="Element59">IdPORT_TIME</A>).</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0001">TIdTimeServer.Create</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007865.html" CLASS="Element59">TIdTimeServer</A>, <A HREF="014529.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Constructor for the object instance.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>constructor</STRONG> Create(AOwner: TComponent); <STRONG>override</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+AOwner: TComponent</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Owner of the object instance.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Create is the constructor for the object instance., and initializes a new <A HREF="007865.html" CLASS="Element59">TIdTimeServer</A> component. Create sets the default port to the standard port number used for the Time protocol (<A HREF="002728.html" CLASS="Element59">IdPORT_TIME</A>). Create also sets the BaseTime property to Jan 1, 1900 which is specified by the Time protocol.</DIV>
+</DIV>
+<DIV CLASS="Element62">
+<HR>Created with Doc-O-Matic 2 donated to <STRONG><A HREF="http://www.delphi-jedi.org">Project JEDI</A></STRONG>. Commercial license available from the <STRONG><A HREF="http://www.doc-o-matic.com">Doc-O-Matic site</A></STRONG>.</DIV>
+</DIV></BODY></HTML>

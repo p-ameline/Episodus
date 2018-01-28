@@ -1,0 +1,13 @@
+#if !defined(OWL_GADGET_H)
+  #define IDG_FIRST       30000   // first predefined gadget ID
+  #define IDG_LAST        31000   // last predefined gadget ID
+#endif
+
+//les buttons de paneSplitter
+
+#define CM_STRIPES_URL    IDG_LAST - 100
+#define CM_STRIPES_ACTION IDG_LAST -  99
+#define CM_STRIPES_CLOSE  IDG_LAST -  98
+
+// fin de stripes.rh
+

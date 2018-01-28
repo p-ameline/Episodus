@@ -1,0 +1,470 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+<TITLE>TIdEntityHeaderInfo</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <META name="GENERATOR" content="Doc-O-Matic">
+    <LINK rel="STYLESHEET" href="default.css" type="text/css">
+
+<SCRIPT LANGUAGE="JavaScript1.2" SRC="scripts.js"></SCRIPT>
+</HEAD>
+<BODY CLASS="Element57">
+<TABLE BORDER="0" BGCOLOR="#AACCFF" WIDTH="100%" CELLSPACING="0" CELLPADDING="0">
+<TR><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element1">
+Indy 9</DIV>
+</TD><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element2">
+<A HREF="content.html" CLASS="Element59">Content</A> | <A HREF="idx.html" CLASS="Element59">Index</A> | <A HREF="symref.html" CLASS="Element59">Reference</A></DIV>
+</TD></TR></TABLE><DIV CLASS="Element58">
+<DIV CLASS="Element5">
+TIdEntityHeaderInfo</DIV>
+<DIV CLASS="Element7">
+<A HREF="010947.html" CLASS="Element59">Hierarchy</A>, <A HREF="010948.html" CLASS="Element59">Properties</A>, <A HREF="010949.html" CLASS="Element59">Methods</A>, <A HREF="010950.html" CLASS="Element59">See Also</A>, <A HREF="002252.html" CLASS="Element59">Unit: IdHTTPHeaderInfo</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Specifies entity and general headers used in the HTTP protocol.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12">TIdEntityHeaderInfo = <STRONG>class</STRONG>(TPersistent)</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Unit</DIV>
+<DIV CLASS="Element69">
+<A HREF="002252.html" CLASS="Element59">IdHTTPHeaderInfo</A></DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+TIdEntityHeaderInfo is a TPersistent descendant that represents message headers from a HTTP request or response, as described in the Internet Standards document:<P CLASS="Element10">
+<UL>
+<LI>RFC 2616 - Hypertext Transfer Protocol version 1.1 [HTTP/1.1] (http://www.rfc-editor.org/rfc/rfc2616.txt)</UL>
+<P CLASS="Element10">
+TIdEntityHeaderInfo is the ancestor class that defines the common headers used in <A HREF="007651.html" CLASS="Element59">TIdRequestHeaderInfo</A> and <A HREF="007655.html" CLASS="Element59">TIdResponseHeaderInfo</A>, and represents header fields that define metainformation about the entity body or, if no body is present, about a resource associated with a request. Some of this metainformation is optional; some headers might be required dependent on the HTTP protocol specification.<P CLASS="Element10">
+Applications will normally create instances of <A HREF="007651.html" CLASS="Element59">TIdRequestHeaderInfo</A> or <A HREF="007655.html" CLASS="Element59">TIdResponseHeaderInfo</A>, which implement the contextual semantic requirements for the HTTP protocol.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0000">TIdEntityHeaderInfo.CacheControl</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007317.html" CLASS="Element59">TIdEntityHeaderInfo</A>, <A HREF="010951.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Specifies the HTTP Cache-Control general message header directives.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> CacheControl: <STRONG>String</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+CacheControl is a String property that contains HTTP Cache-Control general message header directives in an HTTP request or response. CacheControl indicates the behavior that prevents a cache from adversely interfering with the request or response, and generally override the default caching algorithms. Cache directives are unidirectional, and the presence of a directive in a HTTP request does not imply that the same directive will appear in a HTTP response.<P CLASS="Element10">
+Some common values for CacheControl in a HTTP request include the following:<P CLASS="Element10">
+<UL>
+<LI>&quot;no-cache&quot;<P CLASS="Element10">
+<LI>&quot;no-store&quot;<P CLASS="Element10">
+<LI>&quot;max-age=&quot; [delta-seconds]<P CLASS="Element10">
+<LI>&quot;max-stale=&quot; [delta-seconds]<P CLASS="Element10">
+<LI>&quot;min-fresh=&quot; [delta-seconds]<P CLASS="Element10">
+<LI>&quot;no-transform&quot;<P CLASS="Element10">
+<LI>&quot;only-if-cached&quot;</UL>
+<P CLASS="Element10">
+Some common values for CacheControl in a HTTP response include the following:<P CLASS="Element10">
+<UL>
+<LI>&quot;public&quot;<P CLASS="Element10">
+<LI>&quot;private&quot;<P CLASS="Element10">
+<LI>&quot;no-cache&quot;<P CLASS="Element10">
+<LI>&quot;no-store&quot;<P CLASS="Element10">
+<LI>&quot;no-transform&quot;<P CLASS="Element10">
+<LI>&quot;must-revalidate&quot;<P CLASS="Element10">
+<LI>&quot;proxy-revalidate&quot;<P CLASS="Element10">
+<LI>&quot;max-age=&quot; [delta-seconds]<P CLASS="Element10">
+<LI>&quot;s-maxage=&quot; [delta-seconds]</UL>
+<P CLASS="Element10">
+<STRONG>Note</STRONG>: CacheControl might not be implemented for HTTP/1.0, which might contain a header value for storage in the the <A HREF="007317.html#0011" CLASS="Element59">Pragma</A> property that contains the value &quot;no-cache&quot;.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0002">TIdEntityHeaderInfo.Connection</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007317.html" CLASS="Element59">TIdEntityHeaderInfo</A>, <A HREF="010952.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Indicates that the connection will be closed after a response.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> Connection: <STRONG>string</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Connection is a String property that contains the value for the HTTP general message header that indicates the options desired for a particular connection. The Connection header value <STRONG>must not</STRONG> be forwarded by a proxy over further connections.<P CLASS="Element10">
+For HTTP/1.1 applications, Connection may contain the value &quot;close&quot; to indicate that the connection will be closed after completion of the response. HTTP/1.1 applications that do not support persistent connections must include the &quot;close&quot; connection option in every message.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0003">TIdEntityHeaderInfo.ContentEncoding</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007317.html" CLASS="Element59">TIdEntityHeaderInfo</A>, <A HREF="010953.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Indicates transformations applied to the content of an entity.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> ContentEncoding: <STRONG>string</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+ContentEncoding is a String property used as an optional modifier to the <A HREF="007317.html#0008" CLASS="Element59">ContentType</A> for an entity body. ContentEncoding indicates the additional content encoding performed on the entity body, and the decoding mechanisms needed to obtain the media-type referenced by <A HREF="007317.html#0008" CLASS="Element59">ContentType</A>.<P CLASS="Element10">
+ContentEncoding must contain a value that is registered with the Internet Assigned Numbers Authority (IANA), and initially permitted the following values:<P CLASS="Element10">
+<UL>
+<LI>gzip - An encoding format produced by the file compression program &quot;gzip&quot; (GNU zip) as described in RFC 1952. This format is a Lempel-Ziv coding (LZ77) with a 32 bit CRC.<P CLASS="Element10">
+<LI>compress - The encoding format produced by the common UNIX file compression program &quot;compress&quot;. This format is an adaptive Lempel-Ziv-Welch coding (LZW).<P CLASS="Element10">
+<LI>deflate - The &quot;zlib&quot; format defined in RFC 1950 in combination with the &quot;deflate&quot; compression mechanism described in RFC 1951.<P CLASS="Element10">
+<LI>identity - The default (identity) encoding; the use of no transformation whatsoever. This content encoding is used only in the AcceptEncoding header in <A HREF="007651.html" CLASS="Element59">TIdRequestHeaderInfo</A>, and should not be used in the ContentEncoding header.</UL>
+<P CLASS="Element10">
+If multiple encodings have been applied to an entity, then ContentEncoding will list the encodings in the order in which they were applied. Additional information about encoding parameters may be provided by other entity header properties, or in ExtraHeaders.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0004">TIdEntityHeaderInfo.ContentLanguage</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007317.html" CLASS="Element59">TIdEntityHeaderInfo</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Identifies the preferred language for the contents of an entity.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> ContentLanguage: <STRONG>string</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+ContentLanguage is a String property that identifies the preferred language for the contents of an entity. If ContentLanguage not specified, then the content is intended for all language audiences or the default alnguage is unknown. Multiple languages may be listed for content that is intended for multiple audiences by using a comma-delimited list of language values.<P CLASS="Element10">
+The syntax for values in ContentLanguage is defined in the Internet Standards document:<P CLASS="Element10">
+<UL>
+<LI>RFC 1766, Tags for the Identification of Languages</UL>
+</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0005">TIdEntityHeaderInfo.ContentLength</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007317.html" CLASS="Element59">TIdEntityHeaderInfo</A>, <A HREF="010954.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Indicates the size of an entity body.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> ContentLength: Integer;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+ContentLength is an Integer property that indicates the size of an entity body, as a number of octets. ContentLength reflects the transfer length of the content after any encodings specified in <A HREF="007317.html#0003" CLASS="Element59">ContentEncoding</A>.<P CLASS="Element10">
+When ContentLength is given in a message where a message body is allowed, its field value must exactly match the number of octets in the message body. ContentLength should be avaiable whenever the message length can be determined prior to being transferred, unless this is prohibited by the HTTP protocol specification.<P CLASS="Element10">
+For compatibility with HTTP/1.0 applications, HTTP/1.1 requests containing a message body must include a valid ContentLength header field unless the server is known to be HTTP/1.1 compliant. If a request contains a message body and ContentLength is not given, the server should respond with 400 (bad request) if it cannot determine the length of the message, or with 411 (length required) if it wishes to insist on receiving a valid ContentLength.<P CLASS="Element10">
+All HTTP/1.1 applications that receive entities must <A HREF="000027.html" CLASS="Element59">accept</A> &quot;chunked&quot; transfers that allow retrieval of HTP entities when the message length cannot be determined in advance.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0006">TIdEntityHeaderInfo.ContentRangeEnd</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007317.html" CLASS="Element59">TIdEntityHeaderInfo</A>, <A HREF="010955.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Identifies the upper byte range in a partial request.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> ContentRangeEnd: Cardinal;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+ContentRangeEnd is a Cardinal property that identifies the upper byte range requested for a partial entity resource. ContentRangeEnd is used with <A HREF="007317.html#0007" CLASS="Element59">ContentRangeStart</A> to reveal the &quot;Content-Range&quot; message header value.<P CLASS="Element10">
+All ContentRangeEnd values are expressed in bytes.<P CLASS="Element10">
+<STRONG>Note</STRONG>: clients cannot depend on servers to <A HREF="006944.html" CLASS="Element59">send</A> a &quot;416 Requested range not satisfiable&quot; response instead of a &quot;200 (OK)&quot; response for an unsatisfiable request with <A HREF="007317.html#0007" CLASS="Element59">ContentRangeStart</A> and ContentRangeEnd values, since not all servers implement this request-header.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0007">TIdEntityHeaderInfo.ContentRangeStart</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007317.html" CLASS="Element59">TIdEntityHeaderInfo</A>, <A HREF="010956.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Identifies the beginning byte range in a partial request.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> ContentRangeStart: Cardinal;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+ContentRangeStart is a Cardinal property that identifies the beginning byte range requested for a partial entity resource. ContentRangeStart is used with <A HREF="007317.html#0006" CLASS="Element59">ContentRangeEnd</A> to reveal the &quot;Content-Range&quot; message header value.<P CLASS="Element10">
+All ContentRangeStart values are expressed in bytes.<P CLASS="Element10">
+<STRONG>Note</STRONG>: clients cannot depend on servers to <A HREF="006944.html" CLASS="Element59">send</A> a &quot;416 Requested range not satisfiable&quot; response instead of a &quot;200 (OK)&quot; response for an unsatisfiable request with ContentRangeStart and <A HREF="007317.html#0006" CLASS="Element59">ContentRangeEnd</A> values, since not all servers implement this request-header.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0008">TIdEntityHeaderInfo.ContentType</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007317.html" CLASS="Element59">TIdEntityHeaderInfo</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Indicates the type, subtype, and attribute parameters for data in an entity body.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> ContentType: <STRONG>string</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+ContentType is a String property that indicates the media type used to represent an entity body, and contains a registered Internet Assigned Number Authority (IANA) media type. HTTP uses ContentType to provide open and extensible data typing and type negotiation. ContentType contains type, subtype, and parameter attribute name components significant to the processing of a media-type.<P CLASS="Element10">
+<STRONG>Note</STRONG>: Any HTTP/1.1 message containing an entity body should include a ContentType value defining the media type of that body. The default value for media type should be &quot;application/octet-stream&quot;.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0009">TIdEntityHeaderInfo.ContentVersion</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007317.html" CLASS="Element59">TIdEntityHeaderInfo</A>, <A HREF="010957.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Identifies the version tag associated with a server resource.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> ContentVersion: <STRONG>string</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+ContentVersion is a String property that represents the version tag associated with a rendition of an entity. ContentVersion can be used with the &quot;Derived-From&quot; message header in <A HREF="007317.html#0012" CLASS="Element59">RawHeaders</A> to allow access to multiple versions of the same server resource.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="000B">TIdEntityHeaderInfo.CustomHeaders</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007317.html" CLASS="Element59">TIdEntityHeaderInfo</A>, <A HREF="010958.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Represents custom headers names and values for the HTTP message.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> CustomHeaders: <A HREF="007369.html" CLASS="Element59">TIdHeaderList</A>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+CustomHeaders is a <A HREF="007369.html" CLASS="Element59">TIdHeaderList</A> property that contains header names and values that have been added to an HTTP message by the client application. CustomHeaders is used to stored header names and values that are not represented as properties in <A HREF="007317.html" CLASS="Element59">TIdEntityHeaderInfo</A> and descendant classes.<P CLASS="Element10">
+CustomHeaders is initialized in the <A HREF="007317.html#000A" CLASS="Element59">Create</A> constructor, and freed in <A HREF="007317.html#000D" CLASS="Element59">Destroy</A>.<P CLASS="Element10">
+CustomHeaders is used when <A HREF="007317.html" CLASS="Element59">TIdEntityHeaderInfo</A> builds the textual representation of header names and value for an HTTP message prior to transmission. When building the textual header values, headers represented as properties in <A HREF="007317.html" CLASS="Element59">TIdEntityHeaderInfo</A> are added to <A HREF="007317.html#0012" CLASS="Element59">RawHeaders</A>. Any values in CustomHeaders are appended to the text without any additional processsing.<P CLASS="Element10">
+Use CustomHeaders to create HTTP headers that are not represented as properties, since <A HREF="007317.html#0012" CLASS="Element59">RawHeaders</A> is cleared when generating headers for the HTTP message from properties and CustomHeaders.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="000C">TIdEntityHeaderInfo.Date</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007317.html" CLASS="Element59">TIdEntityHeaderInfo</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Indicates the origin date and time for an HTTP message.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> Date: TDateTime;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Date is a TDateTime property that indicates the origin date and time for an HTTP message. Origin servers must include a Date value in all responses, except in the following cases:<P CLASS="Element10">
+<UL>
+<LI>Response status code is 100 (Continue) or 101 (Switching Protocols); Date is an optional header field.<P CLASS="Element10">
+<LI>Response status code is a server error, e.g. 500 (Internal Server Error) or 503 (Service Unavailable), and it is inconvenient or impossible to generate a valid Date.<P CLASS="Element10">
+<LI>Server does not have a clock that can provide a reasonable approximation of the current time, its responses must not include a Date header field.</UL>
+<P CLASS="Element10">
+A received message without a Date header must have a Date header value constructed on the client after receipt.<P CLASS="Element10">
+A message sent by a client can contain an optional Date header value if the message has an entity body, as in HTTP PUT and POST requests.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="000E">TIdEntityHeaderInfo.Expires</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007317.html" CLASS="Element59">TIdEntityHeaderInfo</A>, <A HREF="010959.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Represents the timestamp when an entity is considered stale.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> Expires: TDateTime;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Expires is a TDateTime property that represents the date and time after which the content of an entity is considered stale. A stale cache entry may not normally be returned by a cache unless it is first validated with the origin server. The presence of an Expires field does not imply that the original resource will change or cease to exist at, before, or after the indicated timestamp value.<P CLASS="Element10">
+Expires is read from the headers in an HTTP response, and may originally contain either an integer number of seconds for the expiration value or an actual date and time. When the header is expressed as an integer value, the Expires property will be given a value that corresponds to the current date and time plus the number of seconds in the header.<P CLASS="Element10">
+<STRONG>Note</STRONG>: A response that includes a <A HREF="007317.html#0000" CLASS="Element59">CacheControl</A> header with the max-age directive will override the Expires property.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="000F">TIdEntityHeaderInfo.HasContentLength</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007317.html" CLASS="Element59">TIdEntityHeaderInfo</A>, <A HREF="010960.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Indicates if a value has been assigned to <A HREF="007317.html#0005" CLASS="Element59">ContentLength</A> in the entity headers.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> HasContentLength: Boolean;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+HasContentLength is a read-only Boolean property that indicates if a value has been assigned to <A HREF="007317.html#0005" CLASS="Element59">ContentLength</A> in the entity headers. HasContentLength is updated when ProcessHeaders is called to set property values from the corresponding header values. HasContentLength is True when <A HREF="007317.html#0005" CLASS="Element59">ContentLength</A> contains a non-zero positive integer value. Assigning a value to <A HREF="007317.html#0005" CLASS="Element59">ContentLength</A> will insure that HasContentLength is also updated.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0010">TIdEntityHeaderInfo.LastModified</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007317.html" CLASS="Element59">TIdEntityHeaderInfo</A>, <A HREF="010961.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Indicates the date and time a server resource was modified.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> LastModified: TDateTime;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+LastModified is a TDateTime property that indicates the date and time when the origin server believes the most recent version of a resource was modified. An origin server must not <A HREF="006944.html" CLASS="Element59">send</A> a LastModified date which is later than the server time of message origination in <A HREF="007317.html#000C" CLASS="Element59">Date</A>. An origin server should <A HREF="006944.html" CLASS="Element59">send</A> LastModified whenever possible.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0011">TIdEntityHeaderInfo.Pragma</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007317.html" CLASS="Element59">TIdEntityHeaderInfo</A>, <A HREF="010962.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Represents HTTP server directives in a client request.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> Pragma: <STRONG>string</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Pragma is a string property that contains HTTP server directives, and represent optional behavior for the HTTP protocol. Pragma normally contains the value &quot;no-cache&quot; and indicates that the HTTP request should be forwarded to the server even when the request can be satisfied from the server cache.<P CLASS="Element10">
+Pragma is used in an HTTP client request, and has the same meaning as the <A HREF="007317.html#0000" CLASS="Element59">CacheControl</A> property used in HTTP/1.1. Pragma is defined to provide backward compatibility with HTTP/1.0.<P CLASS="Element10">
+Pragma may also contain implementation-specific extension values which are defined in the HTTP protocol. Pragma directives must be passed by a proxy or gateway application, regardless of their significance to that application, since the directives might be applicable to all recipients along the request/response chain. It is not possible to specify Pragma for a specific client. Any Pragma directive not relevant to the client should be ignored.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Notes</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Use of Pragma in a HTTP response is not defined by the HTTP protocol, and does not provide a reliable replacement for <A HREF="007317.html#0000" CLASS="Element59">CacheControl</A> in the response.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0012">TIdEntityHeaderInfo.RawHeaders</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007317.html" CLASS="Element59">TIdEntityHeaderInfo</A>, <A HREF="010963.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Contains message header names and values in their original form.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> RawHeaders: <A HREF="007369.html" CLASS="Element59">TIdHeaderList</A>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+RawHeaders is a read-only <A HREF="007369.html" CLASS="Element59">TIdHeaderList</A> property that contains the message header names and values in their original form, as received in an HTTP request or response. RawHeaders are used as the origin for header values during processing and storage in their property representation. RawHeaders are used as the destination for property values when generating the headers for an HTTP protocol response.<P CLASS="Element10">
+Use <A HREF="007317.html#000B" CLASS="Element59">CustomHeaders</A> to create new header values that cannot be expressed as a property in the <A HREF="007317.html" CLASS="Element59">TIdEntityHeaderInfo</A> instance.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0001">TIdEntityHeaderInfo.Clear</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007317.html" CLASS="Element59">TIdEntityHeaderInfo</A>, <A HREF="010964.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Resets properties to their default empty values.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>procedure</STRONG> Clear; <STRONG>virtual</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Clear is procedure that resets properties in the object instance to their default empty values, including:<P CLASS="Element10">
+<UL>
+<LI><A HREF="007317.html#0002" CLASS="Element59">Connection</A><P CLASS="Element10">
+<LI><A HREF="007317.html#0009" CLASS="Element59">ContentVersion</A><P CLASS="Element10">
+<LI><A HREF="007317.html#0003" CLASS="Element59">ContentEncoding</A><P CLASS="Element10">
+<LI><A HREF="007317.html#0004" CLASS="Element59">ContentLanguage</A><P CLASS="Element10">
+<LI><A HREF="007317.html#0008" CLASS="Element59">ContentType</A><P CLASS="Element10">
+<LI><A HREF="007317.html#0005" CLASS="Element59">ContentLength</A><P CLASS="Element10">
+<LI><A HREF="007317.html#0007" CLASS="Element59">ContentRangeStart</A><P CLASS="Element10">
+<LI><A HREF="007317.html#0006" CLASS="Element59">ContentRangeEnd</A><P CLASS="Element10">
+<LI><A HREF="007317.html#000C" CLASS="Element59">Date</A><P CLASS="Element10">
+<LI><A HREF="007317.html#0010" CLASS="Element59">LastModified</A><P CLASS="Element10">
+<LI><A HREF="007317.html#000E" CLASS="Element59">Expires</A></UL>
+<P CLASS="Element10">
+Clears sets the default value for the <A HREF="007317.html#0008" CLASS="Element59">ContentType</A> property to the MIME type and subtype '[text/html'. Clear also removes all values in the <A HREF="007317.html#0012" CLASS="Element59">RawHeaders</A> property.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="000A">TIdEntityHeaderInfo.Create</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007317.html" CLASS="Element59">TIdEntityHeaderInfo</A>, <A HREF="010965.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Constructor for the object instance.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>constructor</STRONG> Create; <STRONG>virtual</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Create is the constructor for the object instance. Create relies on the inherited constructor, and initializes the object properties <A HREF="007317.html#000B" CLASS="Element59">CustomHeaders</A> and <A HREF="007317.html#0012" CLASS="Element59">RawHeaders</A> prior to calling <A HREF="007317.html#0001" CLASS="Element59">Clear</A>.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="000D">TIdEntityHeaderInfo.Destroy</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007317.html" CLASS="Element59">TIdEntityHeaderInfo</A>, <A HREF="010966.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Frees the object instance.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>destructor</STRONG> Destroy; <STRONG>override</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Destroy is the destructor for the object instance. Destroy frees the object properties <A HREF="007317.html#000B" CLASS="Element59">CustomHeaders</A> and <A HREF="007317.html#0012" CLASS="Element59">RawHeaders</A> prior to calling the inherited Destroy method.</DIV>
+</DIV>
+<DIV CLASS="Element62">
+<HR>Created with Doc-O-Matic 2 donated to <STRONG><A HREF="http://www.delphi-jedi.org">Project JEDI</A></STRONG>. Commercial license available from the <STRONG><A HREF="http://www.doc-o-matic.com">Doc-O-Matic site</A></STRONG>.</DIV>
+</DIV></BODY></HTML>

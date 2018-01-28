@@ -1,0 +1,10 @@
+//// schillerEcg.rh"
+//
+
+// Main Dialog box
+#define IDC_DEMOGRAPHICS 101
+#define IDC_STORE_ID     102
+#define IDC_NEW_EXAM     103
+#define IDC_GET_RESULTS  104
+#define IDC_PARAMS       105
+

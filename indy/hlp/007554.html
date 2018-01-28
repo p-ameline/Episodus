@@ -1,0 +1,197 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+<TITLE>TIdMessageDecoderMIME</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <META name="GENERATOR" content="Doc-O-Matic">
+    <LINK rel="STYLESHEET" href="default.css" type="text/css">
+
+<SCRIPT LANGUAGE="JavaScript1.2" SRC="scripts.js"></SCRIPT>
+</HEAD>
+<BODY CLASS="Element57">
+<TABLE BORDER="0" BGCOLOR="#AACCFF" WIDTH="100%" CELLSPACING="0" CELLPADDING="0">
+<TR><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element1">
+Indy 9</DIV>
+</TD><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element2">
+<A HREF="content.html" CLASS="Element59">Content</A> | <A HREF="idx.html" CLASS="Element59">Index</A> | <A HREF="symref.html" CLASS="Element59">Reference</A></DIV>
+</TD></TR></TABLE><DIV CLASS="Element58">
+<DIV CLASS="Element5">
+TIdMessageDecoderMIME</DIV>
+<DIV CLASS="Element7">
+<A HREF="012563.html" CLASS="Element59">Hierarchy</A>, <A HREF="012564.html" CLASS="Element59">Properties</A>, <A HREF="012565.html" CLASS="Element59">Methods</A>, <A HREF="012566.html" CLASS="Element59">Events</A>, <A HREF="012567.html" CLASS="Element59">See Also</A>, <A HREF="002289.html" CLASS="Element59">Unit: IdMessageCoderMIME</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Implements a decoder for RFC-822 MIME message parts.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12">TIdMessageDecoderMIME = <STRONG>class</STRONG>(<A HREF="007549.html" CLASS="Element59">TIdMessageDecoder</A>)</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Unit</DIV>
+<DIV CLASS="Element69">
+<A HREF="002289.html" CLASS="Element59">IdMessageCoderMIME</A></DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+TIdMessageDecoderMIME is a <A HREF="007549.html" CLASS="Element59">TIdMessageDecoder</A> descendant that extends the ancestor class to implement a decoder for RFC-822 MIME message parts. TIdMessageDecoderMIME provides methods and properties used to detect the <A HREF="007554.html#0003" CLASS="Element59">MIMEBoundary</A>, as well as read the RFC message headers and body in an encoded RFC message part.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0000">TIdMessageDecoderMIME.BodyEncoded</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007554.html" CLASS="Element59">TIdMessageDecoderMIME</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Indicates if a message has an encoded body.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> BodyEncoded: Boolean;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+BodyEncoded is a Boolean property that indicates if the <A HREF="007554.html" CLASS="Element59">TIdMessageDecoderMIME</A> instance is owned by a <A HREF="007544.html" CLASS="Element59">TIdMessage</A>, and has a non-blank value in the <A HREF="007544.html#000A" CLASS="Element59">TIdMessage.ContentTransferEncoding</A> property for the message that owns the decoder.<P CLASS="Element10">
+BodyEncoded is initialized in the <A HREF="007554.html#0001" CLASS="Element59">Create</A> constructor, and may contain False when the <A HREF="007544.html" CLASS="Element59">TIdMessage</A> has a <A HREF="007554.html#0003" CLASS="Element59">MIMEBoundary</A>. BodyEncoded is also used in <A HREF="007554.html#0005" CLASS="Element59">ReadHeader</A> and <A HREF="007554.html#0004" CLASS="Element59">ReadBody</A> methods to determine if the ContentTransferEncoding, ContentType, and ContentDisposition values are read from mesasage headers or the acutal body of the message.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0003">TIdMessageDecoderMIME.MIMEBoundary</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007554.html" CLASS="Element59">TIdMessageDecoderMIME</A>, <A HREF="012568.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Represents the boundary marker for a MIME-encoded RFC-822 message part.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> MIMEBoundary: <STRONG>string</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+MIMEBoundary is a String property that represents the boundary marker for a MIME-encoded RFC-822 message part. MIMEBoundary is updated by the <A HREF="007554.html#0001" CLASS="Element59">Create</A> Constructor when the owner of the decoder class instance is a <A HREF="007544.html" CLASS="Element59">TIdMessage</A>. The <A HREF="007544.html#0006" CLASS="Element59">TIdMessage.MIMEBoundary</A> property is used as the value of the MIMEBoundary for the decoder class.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0001">TIdMessageDecoderMIME.Create</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007554.html" CLASS="Element59">TIdMessageDecoderMIME</A>, <A HREF="012569.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Constructor for the object instance.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>constructor</STRONG> Create(AOwner: TComponent); <STRONG>overload</STRONG>; <STRONG>reintroduce</STRONG>;
+<STRONG>constructor</STRONG> Create(AOwner: TComponent; ALine: <STRONG>string</STRONG>); <STRONG>overload</STRONG>; <STRONG>reintroduce</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+AOwner: TComponent</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Owner of the object instance.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+<A HREF="007554.html#0001" CLASS="Element59">Create</A> is the Constructor for the object instance, and relies on the inherited <A HREF="007554.html#0001" CLASS="Element59">Create</A> method. When AOwner is a <A HREF="007544.html" CLASS="Element59">TIdMessage</A> instance, <A HREF="007554.html#0001" CLASS="Element59">Create</A> sets the <A HREF="007554.html#0003" CLASS="Element59">MIMEBoundary</A> for the decoder to the <A HREF="007554.html#0003" CLASS="Element59">MIMEBoundary</A> in the <A HREF="007544.html" CLASS="Element59">TIdMessage</A> that owns the decoder class instance.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0002">TIdMessageDecoderMIME.Create</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007554.html" CLASS="Element59">TIdMessageDecoderMIME</A>, <A HREF="012570.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Constructor for the object instance.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>constructor</STRONG> <A HREF="007554.html#0001" CLASS="Element59">Create</A>(AOwner: TComponent); <STRONG>overload</STRONG>; <STRONG>reintroduce</STRONG>;
+<STRONG>constructor</STRONG> <A HREF="007554.html#0001" CLASS="Element59">Create</A>(AOwner: TComponent; ALine: <STRONG>string</STRONG>); <STRONG>overload</STRONG>; <STRONG>reintroduce</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+AOwner: TComponent</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Owner of the object instance.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+<A HREF="007554.html#0001" CLASS="Element59">Create</A> is the Constructor for the object instance, and relies on the inherited <A HREF="007554.html#0001" CLASS="Element59">Create</A> method. When AOwner is a <A HREF="007544.html" CLASS="Element59">TIdMessage</A> instance, <A HREF="007554.html#0001" CLASS="Element59">Create</A> sets the <A HREF="007554.html#0003" CLASS="Element59">MIMEBoundary</A> for the decoder to the <A HREF="007554.html#0003" CLASS="Element59">MIMEBoundary</A> in the <A HREF="007544.html" CLASS="Element59">TIdMessage</A> that owns the decoder class instance.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0004">TIdMessageDecoderMIME.ReadBody</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007554.html" CLASS="Element59">TIdMessageDecoderMIME</A>, <A HREF="012571.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Decodes the contents of a MIME-encode message part.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>function</STRONG> ReadBody(ADestStream: TStream; <STRONG>var</STRONG> VMsgEnd: Boolean): <A HREF="007549.html" CLASS="Element59">TIdMessageDecoder</A>; <STRONG>override</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+ADestStream: TStream</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Stream to receive the decode message part contents.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Return Value</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+<A HREF="007549.html" CLASS="Element59">TIdMessageDecoder</A> - Decoder used for the message part, or Nil.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+ReadBody is a <A HREF="007549.html" CLASS="Element59">TIdMessageDecoder</A> function that is used to convert the MIME-encoded contents of an RFC message part to its textual representation.<P CLASS="Element10">
+ReadBody examines the message part type to determine the <A HREF="007549.html" CLASS="Element59">TIdMessageDecoder</A> used for the encoded message part. ReadBody returns the <A HREF="007549.html" CLASS="Element59">TIdMessageDecoder</A> instance to be used for the message part, or Nil when the message part is not an encoded attachment. When an attachment is detected, the content-transfer-encoding header is used to determine the proper decoder based on the following values of the header:<P CLASS="Element10">
+<UL>
+<LI>base64 - <A HREF="007283.html" CLASS="Element59">TIdDecoderMIME</A><P CLASS="Element10">
+<LI>quoted&amp;ndash;printable - <A HREF="007284.html" CLASS="Element59">TIdDecoderQuotedPrintable</A><P CLASS="Element10">
+<LI>7bit - No decoder is required</UL>
+<P CLASS="Element10">
+When the content-transfer-encoding does not match the preceeding values, an <A HREF="000375.html" CLASS="Element59">EIdException</A> will be raised with the constant message <A HREF="006550.html" CLASS="Element59">RSMessageCoderMIMEUnrecognizedContentTrasnferEncoding</A> and the value for the message header.<P CLASS="Element10">
+ReadBody reads the message part content, on line at a time, using ReadLn. If a <A HREF="007554.html#0003" CLASS="Element59">MIMEBoundary</A> is detected in the line, a new <A HREF="007554.html" CLASS="Element59">TIdMessageDecoderMIME</A> instance is created for the new message part, and the method is exited. ReadBody used the message decoder, when present, to convert the encoded data using <A HREF="007549.html" CLASS="Element59">TIdMessageDecoder</A>. Decoded message part contents are written to ADestStream until a blank line is read from the encoded message part.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0005">TIdMessageDecoderMIME.ReadHeader</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007554.html" CLASS="Element59">TIdMessageDecoderMIME</A>, <A HREF="012572.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Implements the method used to read an RFC message header from a MIME-encoded message part.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>procedure</STRONG> ReadHeader; <STRONG>override</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+ReadHeader is an overridden procedure in <A HREF="007554.html" CLASS="Element59">TIdMessageDecoderMIME</A> that implements the method used to read an RFC-822 compliant message header from a MIME-encoded message part.<P CLASS="Element10">
+When <A HREF="007554.html#0000" CLASS="Element59">BodyEncoded</A> is True, ReadHeader will read header values from the message using the Content-Type and Content-Disposition headers to determine the PartType, ContentType, ContentDisposition, and Filename (for an attachment).<P CLASS="Element10">
+When <A HREF="007554.html#0000" CLASS="Element59">BodyEncoded</A> is False, ReadHeader calls ReadLn to retrieve lines from the message part until a blank line, that signals the end of message headers, is retrieved. Message headers are added to the Headers property, with folded header lines being added to the most recent message header.<P CLASS="Element10">
+When ReadHeader has retrieved all message header line, the content-disposition header is examined to determine if the message part contains an attachment.<P CLASS="Element10">
+ReadHeader will update the message part type to ptText when an attachment is not found. When an attachment is indicated in the content-disposition message header, ReadHeader sets the message part type to ptAttachment and parses an optional filename into the Filename property.</DIV>
+</DIV>
+<DIV CLASS="Element62">
+<HR>Created with Doc-O-Matic 2 donated to <STRONG><A HREF="http://www.delphi-jedi.org">Project JEDI</A></STRONG>. Commercial license available from the <STRONG><A HREF="http://www.doc-o-matic.com">Doc-O-Matic site</A></STRONG>.</DIV>
+</DIV></BODY></HTML>

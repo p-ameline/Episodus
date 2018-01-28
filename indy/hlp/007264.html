@@ -1,0 +1,131 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+<TITLE>TIdCookieRFC2109</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <META name="GENERATOR" content="Doc-O-Matic">
+    <LINK rel="STYLESHEET" href="default.css" type="text/css">
+
+<SCRIPT LANGUAGE="JavaScript1.2" SRC="scripts.js"></SCRIPT>
+</HEAD>
+<BODY CLASS="Element57">
+<TABLE BORDER="0" BGCOLOR="#AACCFF" WIDTH="100%" CELLSPACING="0" CELLPADDING="0">
+<TR><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element1">
+Indy 9</DIV>
+</TD><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element2">
+<A HREF="content.html" CLASS="Element59">Content</A> | <A HREF="idx.html" CLASS="Element59">Index</A> | <A HREF="symref.html" CLASS="Element59">Reference</A></DIV>
+</TD></TR></TABLE><DIV CLASS="Element58">
+<DIV CLASS="Element5">
+TIdCookieRFC2109</DIV>
+<DIV CLASS="Element7">
+<A HREF="010274.html" CLASS="Element59">Hierarchy</A>, <A HREF="010275.html" CLASS="Element59">Properties</A>, <A HREF="010276.html" CLASS="Element59">Methods</A>, <A HREF="010277.html" CLASS="Element59">See Also</A>, <A HREF="002145.html" CLASS="Element59">Unit: IdCookie</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Implements a persistent session mechanism using Cookies with extended headers.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12">TIdCookieRFC2109 = <STRONG>class</STRONG>(<A HREF="007580.html" CLASS="Element59">TIdNetscapeCookie</A>)</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Unit</DIV>
+<DIV CLASS="Element69">
+<A HREF="002145.html" CLASS="Element59">IdCookie</A></DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+TIdCookieRFC2109 is a <A HREF="007580.html" CLASS="Element59">TIdNetscapeCookie</A> descendant that implements a persistent session mechanism using Cookies in HTTP requests and responses, as described in the Internet Standards document:<P CLASS="Element10">
+<UL>
+<LI>RFC 2109 - HTTP State Management Mechanism (http://www.rfc-editor.org/rfc/rfc2109.txt)</UL>
+<P CLASS="Element10">
+TIdCookieRFC2109 extends <A HREF="007580.html" CLASS="Element59">TIdNetscapeCookie</A> by adding extended Cookie headers, and allows additional Cookie attributes to be indicated in the <A HREF="007264.html#0002" CLASS="Element59">MaxAge</A>, <A HREF="007264.html#0000" CLASS="Element59">Comment</A>, and <A HREF="007264.html#0003" CLASS="Element59">Version</A> properties.<P CLASS="Element10">
+TIdCookieRFC2109 differs from the original Netscape Cookie proposal, and uses <A HREF="007264.html#0002" CLASS="Element59">MaxAge</A> to represent the longevity of Cookie data.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0000">TIdCookieRFC2109.Comment</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007264.html" CLASS="Element59">TIdCookieRFC2109</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Represents private data or documentation in a Cookie.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> Comment: <STRONG>String</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Comment is a String property that represents an optional Cookie attribute that can contain private information about the user, or document the intended use of the Cookie. An HTTP Client can inspect values in Comment to decide whether to initiate or continue a session with this Cookie.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0002">TIdCookieRFC2109.MaxAge</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007264.html" CLASS="Element59">TIdCookieRFC2109</A>, <A HREF="010278.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Represents the longevity of the Cookie.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> MaxAge: Int64;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+MaxAge is a Int64 property that represents the optional Cookie attibute that defines the lifetime of the Cookie in seconds. The MaxAge value is a decimal non-negative integer.<P CLASS="Element10">
+When MaxAge seconds elapse, the client should discard the Cookie. A value of zero means the cookie should be discarded immediately. When MaxAge contains the value <A HREF="000671.html" CLASS="Element59">GFMaxAge</A>, a value has not been determined or assigned to the MaxAge property.<P CLASS="Element10">
+Changing the value of the inherited Expires property will result in the MaxAge property being recalculated using the date value in Expires.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0003">TIdCookieRFC2109.Version</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007264.html" CLASS="Element59">TIdCookieRFC2109</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Version of the Cookie specification supported.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> Version: <STRONG>String</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Version is a String property that represents the Cookie attribute that specifies the version number of the state management specification supported by the Cookie. Version is required in <A HREF="007264.html" CLASS="Element59">TIdCookieRFC2109</A>, and assumes the Version value is &quot;1&quot; when no explicit value is supplied in the property.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0001">TIdCookieRFC2109.Create</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007264.html" CLASS="Element59">TIdCookieRFC2109</A>, <A HREF="010279.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Constructor for the object instance.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>constructor</STRONG> Create(ACollection: TCollection); <STRONG>override</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+ACollection: TCollection</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Collection that owns the collection item.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Create is the constructor for the object instance, and calls the inherited Create method using the collection that owns the Cookie specified in ACollection. Create also sets the <A HREF="007264.html#0002" CLASS="Element59">MaxAge</A> property to the default value <A HREF="000671.html" CLASS="Element59">GFMaxAge</A>, indicating that no <A HREF="007264.html#0002" CLASS="Element59">MaxAge</A> value has determined.</DIV>
+</DIV>
+<DIV CLASS="Element62">
+<HR>Created with Doc-O-Matic 2 donated to <STRONG><A HREF="http://www.delphi-jedi.org">Project JEDI</A></STRONG>. Commercial license available from the <STRONG><A HREF="http://www.doc-o-matic.com">Doc-O-Matic site</A></STRONG>.</DIV>
+</DIV></BODY></HTML>

@@ -1,0 +1,245 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+<TITLE>TIdMessageDecoder</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <META name="GENERATOR" content="Doc-O-Matic">
+    <LINK rel="STYLESHEET" href="default.css" type="text/css">
+
+<SCRIPT LANGUAGE="JavaScript1.2" SRC="scripts.js"></SCRIPT>
+</HEAD>
+<BODY CLASS="Element57">
+<TABLE BORDER="0" BGCOLOR="#AACCFF" WIDTH="100%" CELLSPACING="0" CELLPADDING="0">
+<TR><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element1">
+Indy 9</DIV>
+</TD><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element2">
+<A HREF="content.html" CLASS="Element59">Content</A> | <A HREF="idx.html" CLASS="Element59">Index</A> | <A HREF="symref.html" CLASS="Element59">Reference</A></DIV>
+</TD></TR></TABLE><DIV CLASS="Element58">
+<DIV CLASS="Element5">
+TIdMessageDecoder</DIV>
+<DIV CLASS="Element7">
+<A HREF="012488.html" CLASS="Element59">Hierarchy</A>, <A HREF="012489.html" CLASS="Element59">Properties</A>, <A HREF="012490.html" CLASS="Element59">Methods</A>, <A HREF="012491.html" CLASS="Element59">Events</A>, <A HREF="012492.html" CLASS="Element59">See Also</A>, <A HREF="002288.html" CLASS="Element59">Unit: IdMessageCoder</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Implements a decoder for RFC-822 compliant message parts.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12">TIdMessageDecoder = <STRONG>class</STRONG>(<A HREF="007246.html" CLASS="Element59">TIdComponent</A>)</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Unit</DIV>
+<DIV CLASS="Element69">
+<A HREF="002288.html" CLASS="Element59">IdMessageCoder</A></DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+TIdMessageDecoder is a <A HREF="007246.html" CLASS="Element59">TIdComponent</A> descendant that implements a decoder for RFC-822 compliant message parts. TIdMessageDecoder provides properties and methods used to process RFC message header and body lines using a TStream descendant. TIdMessageDecoder is a base class that establishes the framework for Indy message decoders.<P CLASS="Element10">
+TIdMessageDecoder descendants, like <A HREF="007554.html" CLASS="Element59">TIdMessageDecoderMIME</A> and <A HREF="007555.html" CLASS="Element59">TIdMessageDecoderUUE</A>, further refine the message decoder framework by implementing support for encoding schemes.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0002">TIdMessageDecoder.Filename</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007549.html" CLASS="Element59">TIdMessageDecoder</A>, <A HREF="012493.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Represents the file name for RFC-822 message attachments.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> Filename: <STRONG>string</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Filename is a read-only String property that represents the file name for an attachment in a RFC-822 compliant message part. Filename is used by <A HREF="007549.html" CLASS="Element59">TIdMessageDecoder</A> descendants, like <A HREF="007554.html" CLASS="Element59">TIdMessageDecoderMIME</A>, <A HREF="007555.html" CLASS="Element59">TIdMessageDecoderUUE</A>, and <A HREF="007555.html" CLASS="Element59">TIdMessageDecoderUUE</A>.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0003">TIdMessageDecoder.Headers</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007549.html" CLASS="Element59">TIdMessageDecoder</A>, <A HREF="012494.html" CLASS="Element59">See Also</A>, <A HREF="012495.html" CLASS="Element59">Example</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Represents the RFC message headers in an RFC-822 compliant message part .</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> Headers: TStrings;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Headers is a read-only TStrings property that represents the RFC message headers in an RFC-822 compliant message part. Headers is used by <A HREF="007549.html" CLASS="Element59">TIdMessageDecoder</A> descendants to store the header values parsed from the RFC message part.<P CLASS="Element10">
+Headers will contain a TStrings representation of header names and values that orignate in RFC-822 form. For example, the following RFC-822 message header is stored in a Headers in the following form:<P CLASS="Element10">
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12">    RFC-822 Message Header   Content-Transfer-Encoding: base64
+    Header representation    Content-Transfer-Encoding=base64</PRE></DIV>
+</DIV>
+<P CLASS="Element10">
+Use TStrings methods and properties to access Header values in <A HREF="007549.html" CLASS="Element59">TIdMessageDecoder</A>.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0004">TIdMessageDecoder.PartType</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007549.html" CLASS="Element59">TIdMessageDecoder</A>, <A HREF="012496.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Represents the type for an RFC message part.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> PartType: <A HREF="007547.html" CLASS="Element59">TIdMessageCoderPartType</A>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+PartType is a read-only <A HREF="007547.html" CLASS="Element59">TIdMessageCoderPartType</A> property that represents the type detected for an RFC-822 compliant message part. PartType is used in <A HREF="007549.html" CLASS="Element59">TIdMessageDecoder</A> descendants, like <A HREF="007554.html" CLASS="Element59">TIdMessageDecoderMIME</A>, <A HREF="007555.html" CLASS="Element59">TIdMessageDecoderUUE</A>, and <A HREF="007555.html" CLASS="Element59">TIdMessageDecoderUUE</A>. PartType is updated when <A HREF="007549.html#0006" CLASS="Element59">ReadHeader</A> is called to extract the RFC messaage headers in a message part. PartType is used in <A HREF="007549.html#0005" CLASS="Element59">ReadBody</A> to determine the <A HREF="007281.html" CLASS="Element59">TIdDecoder</A> descendant that will be needed to process thte message part.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0008">TIdMessageDecoder.SourceStream</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007549.html" CLASS="Element59">TIdMessageDecoder</A>, <A HREF="012497.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Providess access to a RFC-822 message as a stream construct.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> SourceStream: TStream;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+SourceStream is a TStream property in <A HREF="007549.html" CLASS="Element59">TIdMessageDecoder</A> that provide access to the contents of a RFC-822 message part. SourceStream is used by the <A HREF="007549.html#0007" CLASS="Element59">ReadLn</A> method to retrieve a single line in the RFC-822 message.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0000">TIdMessageDecoder.Create</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007549.html" CLASS="Element59">TIdMessageDecoder</A>, <A HREF="012498.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Constructor for the object instance.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>constructor</STRONG> Create(AOwner: TComponent); <STRONG>override</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+AOwner: TComponent</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Owner of the object instance.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Create is the constructor for the object instance, and relies on the inherited Create method initialize properties to their default values. Create also instantiates a TStringList instance that represents the <A HREF="007549.html#0003" CLASS="Element59">Headers</A> property.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0001">TIdMessageDecoder.Destroy</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007549.html" CLASS="Element59">TIdMessageDecoder</A>, <A HREF="012499.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Destructor for the object instance.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>destructor</STRONG> Destroy; <STRONG>override</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Destroy is the Destructor for the object instance. Destroy frees and releases resources allocated to the <A HREF="007549.html#0003" CLASS="Element59">Headers</A> and <A HREF="007549.html#0008" CLASS="Element59">SourceStream</A> properties prior to calling the inherited Destroy method.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0005">TIdMessageDecoder.ReadBody</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007549.html" CLASS="Element59">TIdMessageDecoder</A>, <A HREF="012500.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Specifies the message decoder method used to extract an RFC-822 message body.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>function</STRONG> ReadBody(ADestStream: TStream; <STRONG>var</STRONG> AMsgEnd: Boolean): <A HREF="007549.html" CLASS="Element59">TIdMessageDecoder</A>; <STRONG>virtual</STRONG>; <STRONG>abstract</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+ADestStream: TStream</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Stream where message body content will be stored.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Return Value</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+<A HREF="007549.html" CLASS="Element59">TIdMessageDecoder</A> - Message decoder used to process the message part.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+ReadBody is an abstract virtual function in <A HREF="007549.html" CLASS="Element59">TIdMessageDecoder</A> that Specifies the method used to extract an RFC-822 message body in <A HREF="007549.html" CLASS="Element59">TIdMessageDecoder</A> descendants to the ADest stream.<P CLASS="Element10">
+<A HREF="007549.html" CLASS="Element59">TIdMessageDecoder</A> descendants must re-implement the ReadBody method to provide support for the appropriate encoding algorithm and/or processing based on specific RFC message header values.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0006">TIdMessageDecoder.ReadHeader</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007549.html" CLASS="Element59">TIdMessageDecoder</A>, <A HREF="012501.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Specifies the method used to read an RFC message body.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>procedure</STRONG> ReadHeader; <STRONG>virtual</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+ReadHeader is a virtual procedure in <A HREF="007549.html" CLASS="Element59">TIdMessageDecoder</A> that specifies the method used to read an RFC-822 compliant message body. <A HREF="007549.html" CLASS="Element59">TIdMessageDecoder</A> descendants, like <A HREF="007554.html" CLASS="Element59">TIdMessageDecoderMIME</A> and <A HREF="007555.html" CLASS="Element59">TIdMessageDecoderUUE</A>, must override ReadHeader to implement storage of parsed header names and values in message <A HREF="007549.html#0003" CLASS="Element59">Headers</A>. ReadHeader must also update <A HREF="007549.html#0004" CLASS="Element59">PartType</A> based on header values specific to the message decoder class. Additional properties in a descendant class may also require updates based on values detected in Header.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0007">TIdMessageDecoder.ReadLn</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007549.html" CLASS="Element59">TIdMessageDecoder</A>, <A HREF="012502.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Reads a line from an RFC message part.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>function</STRONG> ReadLn: <STRONG>string</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Return Value</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+String - Line read from the message part.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+ReadLn is a String function in <A HREF="007549.html" CLASS="Element59">TIdMessageDecoder</A> that a single line from an RFC-822 compliant message part. ReadLn uses <A HREF="007549.html#0008" CLASS="Element59">SourceStream</A>, cast to a <A HREF="007748.html" CLASS="Element59">TIdStream</A> instance, as the origin of data for the <A HREF="007748.html#0004" CLASS="Element59">TIdStream.ReadLn</A> method.<P CLASS="Element10">
+The return value for ReadLn can be an empty string (&quot;&quot;) when the line from <A HREF="007549.html#0008" CLASS="Element59">SourceStream</A> consists of only a line termintaion character sequence, or the end of <A HREF="007549.html#0008" CLASS="Element59">SourceStream</A> has been reached.</DIV>
+</DIV>
+<DIV CLASS="Element62">
+<HR>Created with Doc-O-Matic 2 donated to <STRONG><A HREF="http://www.delphi-jedi.org">Project JEDI</A></STRONG>. Commercial license available from the <STRONG><A HREF="http://www.doc-o-matic.com">Doc-O-Matic site</A></STRONG>.</DIV>
+</DIV></BODY></HTML>

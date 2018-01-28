@@ -1,0 +1,275 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+<TITLE>TIdCommand</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <META name="GENERATOR" content="Doc-O-Matic">
+    <LINK rel="STYLESHEET" href="default.css" type="text/css">
+
+<SCRIPT LANGUAGE="JavaScript1.2" SRC="scripts.js"></SCRIPT>
+</HEAD>
+<BODY CLASS="Element57">
+<TABLE BORDER="0" BGCOLOR="#AACCFF" WIDTH="100%" CELLSPACING="0" CELLPADDING="0">
+<TR><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element1">
+Indy 9</DIV>
+</TD><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element2">
+<A HREF="content.html" CLASS="Element59">Content</A> | <A HREF="idx.html" CLASS="Element59">Index</A> | <A HREF="symref.html" CLASS="Element59">Reference</A></DIV>
+</TD></TR></TABLE><DIV CLASS="Element58">
+<DIV CLASS="Element5">
+TIdCommand</DIV>
+<DIV CLASS="Element7">
+<A HREF="010120.html" CLASS="Element59">Hierarchy</A>, <A HREF="010121.html" CLASS="Element59">Properties</A>, <A HREF="010122.html" CLASS="Element59">Methods</A>, <A HREF="010123.html" CLASS="Element59">See Also</A>, <A HREF="002919.html" CLASS="Element59">Unit: IdTCPServer</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Represents a command to be executed for a threaded peer connection.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12">TIdCommand = <STRONG>class</STRONG>(TObject)</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Unit</DIV>
+<DIV CLASS="Element69">
+<A HREF="002919.html" CLASS="Element59">IdTCPServer</A></DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+TIdCommand is class used to represent information about commands received by a TCP server for an exuting peer thread, and handled using a <A HREF="007244.html" CLASS="Element59">TIdCommandHandler</A>. TIdCommand provides a flexible mechanism for implementing use of command parameters and command responses using command handlers in a multi-thread environment.<P CLASS="Element10">
+TIdCommand provides properties that identify the <A HREF="007242.html#000A" CLASS="Element59">Thread</A> generating the command, and the <A HREF="007242.html#0000" CLASS="Element59">CommandHandler</A> used to service the command. In addition, TIdCommand also implements methods that allow assigning the response for the command, and a mechanism for sending the command reply using the <A HREF="007242.html#000A" CLASS="Element59">Thread</A> connection that generated the command request.<P CLASS="Element10">
+TIdCommand instances are created in <A HREF="007244.html#0000" CLASS="Element59">TIdCommandHandler.Check</A> when a given command can be handled by the CommandHandlers for the server, using the peer thread that is executed in the Server context.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0000">TIdCommand.CommandHandler</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007242.html" CLASS="Element59">TIdCommand</A>, <A HREF="010124.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Represents the command handler that generated the object instance.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> CommandHandler: <A HREF="007244.html" CLASS="Element59">TIdCommandHandler</A>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+CommandHandler is a read-only <A HREF="007244.html" CLASS="Element59">TIdCommandHandler</A> property that represents the command handler that created the <A HREF="007242.html" CLASS="Element59">TIdCommand</A> object instance. CommandHandler is assigned when the object instance is created as the peer thread is executed in <A HREF="007244.html#0000" CLASS="Element59">TIdCommandHandler.Check</A>. CommandHandler provides access to the <A HREF="007244.html" CLASS="Element59">TIdCommandHandler</A> properties that indicates the Command string executed by the peer thread, delimiters for both the command and optional parameters, and reply content and exception codes.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0003">TIdCommand.Params</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007242.html" CLASS="Element59">TIdCommand</A>, <A HREF="010125.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Contains parsed parameter values for the command object.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> Params: TStrings;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Params is a read-only TStrings property that contains parameters parsed from <A HREF="007242.html#000B" CLASS="Element59">UnparsedParams</A> using the parameter delimiter specified by the command handler. When the command handlers indicates that parameters should be parsed, each parameter is added to Params as an individual line. Otherwise, all parameters appear on a single line in Params.<P CLASS="Element10">
+<A HREF="007242.html#000B" CLASS="Element59">UnparsedParams</A> can be used to access the parameter values before parsing was performed.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0004">TIdCommand.PerformReply</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007242.html" CLASS="Element59">TIdCommand</A>, <A HREF="010126.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Indicates that the <A HREF="007242.html#0006" CLASS="Element59">Reply</A> should be sent to the peer prior to the response.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> PerformReply: Boolean;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+PerformReply is a Boolean property that indicates if the <A HREF="007663.html" CLASS="Element59">TIdRFCReply</A> values in <A HREF="007242.html#0006" CLASS="Element59">Reply</A> should be sent to the peer connection using <A HREF="007242.html#0008" CLASS="Element59">SendReply</A>. PerformReply is examine after success completion of the command, and when an exception is raised. Set PerformReply to False to prevent transmission of the <A HREF="007663.html" CLASS="Element59">TIdRFCReply</A> to the peer connection prior to the values in <A HREF="007242.html#0007" CLASS="Element59">Response</A>.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0005">TIdCommand.RawLine</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007242.html" CLASS="Element59">TIdCommand</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Text data read from an executing client connection.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> RawLine: <STRONG>string</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+RawLine is a read-only String property that represents the unparsed text values read from the threaded client connection, and provided to a <A HREF="007244.html" CLASS="Element59">TIdCommandHandler</A> when the thread is executed. RawLine is used by a <A HREF="007242.html" CLASS="Element59">TIdCommand</A> that implements the action performed by the command handler to parse values that are stored in the Command, <A HREF="007242.html#000B" CLASS="Element59">UnparsedParams</A>, and <A HREF="007242.html#0003" CLASS="Element59">Params</A> properties of the object instance.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0006">TIdCommand.Reply</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007242.html" CLASS="Element59">TIdCommand</A>, <A HREF="010127.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Contains the numeric and text content of an RFC reply .</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> Reply: <A HREF="007663.html" CLASS="Element59">TIdRFCReply</A>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Reply is a <A HREF="007663.html" CLASS="Element59">TIdRFCReply</A> property that contains the NumericCode and Text that makes up an RFC response message. Reply is given the value in the ReplyNormal property of the command handler, when it is created by the command handler.<P CLASS="Element10">
+Reply can be altered if an exception is raised during execution of the command. After an exception is raised, Reply will contain the ReplyExceptionCode, from either the server or the command handler that raised the exception, and the exception text.<P CLASS="Element10">
+Reply is sent to the peer connection prior to the <A HREF="007242.html#0007" CLASS="Element59">Response</A> for the command handler when <A HREF="007242.html#0004" CLASS="Element59">PerformReply</A> is True.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0007">TIdCommand.Response</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007242.html" CLASS="Element59">TIdCommand</A>, <A HREF="010128.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Contains the command response for the client connection.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> Response: TStrings;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Response is a TStrings property that contains values to <A HREF="006944.html" CLASS="Element59">send</A> as the command response to the peer connection using WriteRFCStrings. Response values, when present, are sent to the peer connection following any content in the <A HREF="007242.html#0006" CLASS="Element59">Reply</A> for the command. When Respond contain no values, it is ignored.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="000A">TIdCommand.Thread</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007242.html" CLASS="Element59">TIdCommand</A>, <A HREF="010129.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Represents the thread of execution for the peer connection in the command.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> Thread: <A HREF="007613.html" CLASS="Element59">TIdPeerThread</A>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Thread is a read-only <A HREF="007613.html" CLASS="Element59">TIdPeerThread</A> property that represents the thread of execution for the peer connection generating the <A HREF="007242.html" CLASS="Element59">TIdCommand</A>. Thread provides a mechanism for sending the command reply and response to the peer connection. Thread also allows access to properties and methods of the server in the thread of execution using the Server property.<P CLASS="Element10">
+Thread is assigned when the <A HREF="007242.html" CLASS="Element59">TIdCommand</A> instance is created by the command handler for the executing thread.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="000B">TIdCommand.UnparsedParams</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007242.html" CLASS="Element59">TIdCommand</A>, <A HREF="010130.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Represents the unparsed parameter values for the command object.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> UnparsedParams: <STRONG>string</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+UnparsedParams is a read-only String property that represents the unparsed parameter values received by the command handler that generated the command object. UnparsedParams is assigned when the command object is created by a command handler for the current thread of execution.<P CLASS="Element10">
+UnparsedParams is used to determine the values added to the <A HREF="007242.html#0003" CLASS="Element59">Params</A> property when the command handler creates the object instance.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0001">TIdCommand.Create</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007242.html" CLASS="Element59">TIdCommand</A>, <A HREF="010131.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Constructor for the object instance.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>constructor</STRONG> Create; <STRONG>virtual</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Create is the Constructor for the object instance. Create relies on the inherited Create method to initialize properties in the object instance. Create also initializes the object instances used in the <A HREF="007242.html#0003" CLASS="Element59">Params</A>, <A HREF="007242.html#0006" CLASS="Element59">Reply</A>, and <A HREF="007242.html#0007" CLASS="Element59">Response</A> properties.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0002">TIdCommand.Destroy</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007242.html" CLASS="Element59">TIdCommand</A>, <A HREF="010132.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Frees the object instance.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>destructor</STRONG> Destroy; <STRONG>override</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Destroy is the Destructor for the object instance. Destroy frees resources allocates in the <A HREF="007242.html#0001" CLASS="Element59">Create</A> constructor prior to calling the inherited Destroy method.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0008">TIdCommand.SendReply</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007242.html" CLASS="Element59">TIdCommand</A>, <A HREF="010133.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Sends the contents of the RFC reply to the peer connection.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>procedure</STRONG> SendReply;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+SendReply is a procedure used to <A HREF="006944.html" CLASS="Element59">send</A> the generated content of the <A HREF="007663.html" CLASS="Element59">TIdRFCReply</A> values in <A HREF="007242.html#0006" CLASS="Element59">Reply</A> to the peer connection using WriteRFCReply. When the command is executed, SendReply is called prior to transmitting the values in <A HREF="007242.html#0007" CLASS="Element59">Response</A> to the peer connection, but only when <A HREF="007242.html#0004" CLASS="Element59">PerformReply</A> is True. SendReply sets the PeformReply property to False prior to writing the RFC reply to the peer connection.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0009">TIdCommand.SetResponse</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007242.html" CLASS="Element59">TIdCommand</A>, <A HREF="010134.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Assigns values to the <A HREF="007242.html#0007" CLASS="Element59">Response</A> property</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>procedure</STRONG> SetResponse(AValue: TStrings);</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+AValue: TStrings</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Values to assign to the <A HREF="007242.html#0007" CLASS="Element59">Response</A> property.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+SetResponse is a procedure used to assigns the values in AString to to the <A HREF="007242.html#0007" CLASS="Element59">Response</A> property.</DIV>
+</DIV>
+<DIV CLASS="Element62">
+<HR>Created with Doc-O-Matic 2 donated to <STRONG><A HREF="http://www.delphi-jedi.org">Project JEDI</A></STRONG>. Commercial license available from the <STRONG><A HREF="http://www.doc-o-matic.com">Doc-O-Matic site</A></STRONG>.</DIV>
+</DIV></BODY></HTML>

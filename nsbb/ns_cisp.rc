@@ -1,0 +1,118 @@
+// -----------------------------------------------------------------------------// ns_cisp.rc
+// -----------------------------------------------------------------------------
+// -----------------------------------------------------------------------------
+// $Revision: 1.2 $
+// $Author: pameline $
+// $Date: 2009/07/04 09:15:50 $
+// -----------------------------------------------------------------------------
+// -----------------------------------------------------------------------------
+
+// -----------------------------------------------------------------------------
+// Copyright Nautilus, 2004
+// http://www.nautilus-info.com
+// -----------------------------------------------------------------------------
+// Ce logiciel est un programme informatique servant à gérer et traiter les
+// informations de santé d'une personne.
+//
+// Ce logiciel est régi par la licence CeCILL soumise au droit français et
+// respectant les principes de diffusion des logiciels libres. Vous pouvez
+// utiliser, modifier et/ou redistribuer ce programme sous les conditions de la
+// licence CeCILL telle que diffusée par le CEA, le CNRS et l'INRIA sur le site
+// "http://www.cecill.info".
+//
+// En contrepartie de l'accessibilité au code source et des droits de copie, de
+// modification et de redistribution accordés par cette licence, il n'est offert
+// aux utilisateurs qu'une garantie limitée. Pour les mêmes raisons, seule une
+// responsabilité restreinte pèse sur l'auteur du programme, le titulaire des
+// droits patrimoniaux et les concédants successifs.
+//
+// A cet égard  l'attention de l'utilisateur est attirée sur les risques
+// associés au chargement, à l'utilisation, à la modification et/ou au
+// développement et à la reproduction du logiciel par l'utilisateur étant donné
+// sa spécificité de logiciel libre, qui peut le rendre complexe à manipuler et
+// qui le réserve donc à des développeurs et des professionnels avertis
+// possédant des connaissances informatiques approfondies. Les utilisateurs sont
+// donc invités à charger et tester l'adéquation du logiciel à leurs besoins
+// dans des conditions permettant d'assurer la sécurité de leurs systèmes et ou
+// de leurs données et, plus généralement, à l'utiliser et l'exploiter dans les
+// mêmes conditions de sécurité.
+//
+// Le fait que vous puissiez accéder à cet en-tête signifie que vous avez pris
+// connaissance de la licence CeCILL, et que vous en avez accepté les termes.
+// -----------------------------------------------------------------------------
+// This software is a computer program whose purpose is to manage and process
+// a person's health data.
+//
+// This software is governed by the CeCILL  license under French law and abiding
+// by the rules of distribution of free software. You can use, modify and/ or
+// redistribute the software under the terms of the CeCILL license as circulated
+// by CEA, CNRS and INRIA at the following URL "http://www.cecill.info".
+//
+// As a counterpart to the access to the source code and  rights to copy, modify
+// and redistribute granted by the license, users are provided only with a
+// limited warranty and the software's author, the holder of the economic
+// rights, and the successive licensors have only limited liability.
+//
+// In this respect, the user's attention is drawn to the risks associated with
+// loading, using, modifying and/or developing or reproducing the software by
+// the user in light of its specific status of free software, that may mean that
+// it is complicated to manipulate, and that also therefore means that it is
+// reserved for developers and experienced professionals having in-depth
+// computer knowledge. Users are therefore encouraged to load and test the
+// software's suitability as regards their requirements in conditions enabling
+// the security of their systems and/or data to be ensured and, more generally,
+// to use and operate it in the same conditions as regards security.
+//
+// The fact that you are presently reading this means that you have had
+// knowledge of the CeCILL license and that you accept its terms.
+// -----------------------------------------------------------------------------
+// -----------------------------------------------------------------------------// Attention// -----------------------------------------------------------------------------// Les chemins des include doivent être en chemin relatif sur le cvs.// Si vous avez besoin de les modifier en chemin absolu pour pouvoir les// modifier avec Borland 5, vous devez les repasser en chemin relatif avant de// les remettre sur le cvs.// -----------------------------------------------------------------------------#include "ns_cisp.rh"#include <owl\window.rh>
+DUSOI DIALOG 124, 121, 220, 303
+STYLE DS_MODALFRAME | WS_POPUP | WS_VISIBLE | WS_CAPTION | WS_SYSMENU
+CLASS "bordlg"
+CAPTION "Evaluation de la sévérité"
+FONT 8, "MS Sans Serif"
+{
+ CONTROL "", -1, "BorShade", BSS_RGROUP | BSS_CAPTION | BSS_LEFT | WS_CHILD | WS_VISIBLE | WS_GROUP, 8, 4, 208, 16
+ CONTROL "Niveau de sévérité DUSOI (Dukes Severity Of Illness)", DUSOI_TXT, "BorStatic", SS_CENTER | WS_CHILD | WS_VISIBLE | WS_GROUP, 12, 8, 180, 8
+ CONTROL "0", DUSOI_VALUE, "BorStatic", SS_CENTER | WS_CHILD | WS_VISIBLE | WS_GROUP, 192, 8, 20, 8
+ CONTROL "Utilisé grâce à l'aimable autorisation du Dr Georges R. Parkerson de l'Université de Dukes", DUSOI_COURTESY, "BorStatic", SS_CENTER | WS_CHILD | WS_VISIBLE | WS_GROUP, 8, 24, 208, 16
+ CONTROL "SYMPTOMES (semaine écoulée)", SYMPTOMS_TEXT, "BorShade", BSS_GROUP | BSS_CAPTION | BSS_LEFT | WS_CHILD | WS_VISIBLE | WS_GROUP, 8, 48, 208, 44
+ CONTROL "Aucun", SYMPTOMS_LABEL0, "BorStatic", SS_CENTER | WS_CHILD | WS_VISIBLE | WS_GROUP, 12, 62, 40, 8
+ CONTROL "Incertains", SYMPTOMS_LABEL1, "BorStatic", SS_CENTER | WS_CHILD | WS_VISIBLE | WS_GROUP, 52, 62, 40, 8
+ CONTROL "Légers", SYMPTOMS_LABEL2, "BorStatic", SS_CENTER | WS_CHILD | WS_VISIBLE | WS_GROUP, 92, 62, 40, 8
+ CONTROL "Modérés", SYMPTOMS_LABEL3, "BorStatic", SS_CENTER | WS_CHILD | WS_VISIBLE | WS_GROUP, 132, 62, 40, 8
+ CONTROL "Majeurs", SYMPTOMS_LABEL4, "BorStatic", SS_CENTER | WS_CHILD | WS_VISIBLE | WS_GROUP, 172, 62, 40, 8
+// CONTROL "", SYMPTOMS_GAUGE, "msctls_progress32", WS_CHILD | WS_VISIBLE | WS_BORDER, 12, 72, 200, 12
+ CONTROL "", SYMPTOMS_SLIDER, "msctls_trackbar32", TBS_AUTOTICKS | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 12, 72, 200, 15, WS_EX_DLGMODALFRAME
+ CONTROL "COMPLICATIONS (semaine écoulée)", COMPLICA_TEXT, "BorShade", BSS_GROUP | BSS_CAPTION | BSS_LEFT | WS_CHILD | WS_VISIBLE | WS_GROUP, 8, 96, 208, 44
+ CONTROL "Aucune", COMPLICA_LABEL0, "BorStatic", SS_CENTER | WS_CHILD | WS_VISIBLE | WS_GROUP, 12, 110, 40, 8
+ CONTROL "Incertaines", COMPLICA_LABEL1, "BorStatic", SS_CENTER | WS_CHILD | WS_VISIBLE | WS_GROUP, 52, 110, 40, 8
+ CONTROL "Légères", COMPLICA_LABEL2, "BorStatic", SS_CENTER | WS_CHILD | WS_VISIBLE | WS_GROUP, 92, 110, 40, 8
+ CONTROL "Modérées", COMPLICA_LABEL3, "BorStatic", SS_CENTER | WS_CHILD | WS_VISIBLE | WS_GROUP, 132, 110, 40, 8
+ CONTROL "Majeures", COMPLICA_LABEL4, "BorStatic", SS_CENTER | WS_CHILD | WS_VISIBLE | WS_GROUP, 172, 110, 40, 8
+// CONTROL "", COMPLICA_GAUGE, "msctls_progress32", WS_CHILD | WS_VISIBLE | WS_BORDER, 12, 120, 200, 12
+ CONTROL "", COMPLICA_SLIDER, "msctls_trackbar32", TBS_AUTOTICKS | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 12, 120, 200, 15, 1
+ CONTROL "PRONOSTIC (6 prochains mois, en l'absence de traitement)", PROGNOSI_TEXT, "BorShade", BSS_GROUP | BSS_CAPTION | BSS_LEFT | WS_CHILD | WS_VISIBLE | WS_GROUP, 8, 144, 208, 52
+ CONTROL "Séquelles attendues", PROGNOSI_EXPL, "BorStatic", SS_CENTER | WS_CHILD | WS_VISIBLE | WS_GROUP, 56, 156, 84, 8
+ CONTROL "Aucune", PROGNOSI_LABEL0, "BorStatic", SS_CENTER | WS_CHILD | WS_VISIBLE | WS_GROUP, 12, 166, 40, 8
+ CONTROL "Légères", PROGNOSI_LABEL1, "BorStatic", SS_CENTER | WS_CHILD | WS_VISIBLE | WS_GROUP, 52, 166, 40, 8
+ CONTROL "Modérées", PROGNOSI_LABEL2, "BorStatic", SS_CENTER | WS_CHILD | WS_VISIBLE | WS_GROUP, 92, 166, 40, 8
+ CONTROL "Majeures", PROGNOSI_LABEL3, "BorStatic", SS_CENTER | WS_CHILD | WS_VISIBLE | WS_GROUP, 132, 166, 40, 8
+ CONTROL "Péril vital", PROGNOSI_LABEL4, "BorStatic", SS_CENTER | WS_CHILD | WS_VISIBLE | WS_GROUP, 172, 166, 40, 8
+// CONTROL "", PROGNOSI_GAUGE, "msctls_progress32", WS_CHILD | WS_VISIBLE | WS_BORDER, 12, 176, 200, 12
+ CONTROL "", PROGNOSI_SLIDER, "msctls_trackbar32", TBS_AUTOTICKS | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 12, 176, 200, 15, 1
+ CONTROL "POTENTIEL DE TRAITEMENT", TREATABI_TEXT, "BorShade", BSS_GROUP | BSS_CAPTION | BSS_LEFT | WS_CHILD | WS_VISIBLE | WS_GROUP, 8, 200, 208, 52
+ CONTROL "Besoin ?", TREATABI_EXPL0, "BorStatic", SS_CENTER | WS_CHILD | WS_VISIBLE | WS_GROUP, 20, 212, 68, 8
+ CONTROL "Inutile", TREATABI_LABEL0, "BorStatic", SS_CENTER | WS_CHILD | WS_VISIBLE | WS_GROUP, 12, 222, 40, 8
+ CONTROL "Discutable", TREATABI_LABEL1, "BorStatic", SS_CENTER | WS_CHILD | WS_VISIBLE | WS_GROUP, 52, 222, 40, 8
+ CONTROL "Si besoin, réponse espérée", TREATABI_EXPL1, "BorStatic", SS_CENTER | WS_CHILD | WS_VISIBLE | WS_GROUP, 100, 212, 108, 8
+ CONTROL "Bonne", TREATABI_LABEL2, "BorStatic", SS_CENTER | WS_CHILD | WS_VISIBLE | WS_GROUP, 92, 222, 40, 8
+ CONTROL "Discutable", TREATABI_LABEL3, "BorStatic", SS_CENTER | WS_CHILD | WS_VISIBLE | WS_GROUP, 132, 222, 40, 8
+ CONTROL "Faible", TREATABI_LABEL4, "BorStatic", SS_CENTER | WS_CHILD | WS_VISIBLE | WS_GROUP, 172, 222, 40, 8
+// CONTROL "", TREATABI_GAUGE, "msctls_progress32", WS_CHILD | WS_VISIBLE | WS_BORDER, 12, 232, 200, 12
+ CONTROL "", TREATABI_SLIDER, "msctls_trackbar32", TBS_AUTOTICKS | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 12, 232, 200, 15, 1
+ CONTROL "", -1, "BorShade", BSS_HDIP | BSS_CAPTION | BSS_LEFT | WS_CHILD | WS_VISIBLE | WS_GROUP, 8, 264, 208, 8
+ CONTROL "", IDOK, "BorBtn", BS_PUSHBUTTON | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 40, 272, 43, 25
+ CONTROL "", IDCANCEL, "BorBtn", BS_PUSHBUTTON | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 136, 272, 43, 25
+}

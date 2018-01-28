@@ -1,0 +1,177 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+<TITLE>TIdFtpProxySettings</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <META name="GENERATOR" content="Doc-O-Matic">
+    <LINK rel="STYLESHEET" href="default.css" type="text/css">
+
+<SCRIPT LANGUAGE="JavaScript1.2" SRC="scripts.js"></SCRIPT>
+</HEAD>
+<BODY CLASS="Element57">
+<TABLE BORDER="0" BGCOLOR="#AACCFF" WIDTH="100%" CELLSPACING="0" CELLPADDING="0">
+<TR><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element1">
+Indy 9</DIV>
+</TD><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element2">
+<A HREF="content.html" CLASS="Element59">Content</A> | <A HREF="idx.html" CLASS="Element59">Index</A> | <A HREF="symref.html" CLASS="Element59">Reference</A></DIV>
+</TD></TR></TABLE><DIV CLASS="Element58">
+<DIV CLASS="Element5">
+TIdFtpProxySettings</DIV>
+<DIV CLASS="Element7">
+<A HREF="011128.html" CLASS="Element59">Hierarchy</A>, <A HREF="011129.html" CLASS="Element59">Properties</A>, <A HREF="011130.html" CLASS="Element59">Methods</A>, <A HREF="011131.html" CLASS="Element59">See Also</A>, <A HREF="002189.html" CLASS="Element59">Unit: IdFTP</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Represents settings for procied connections to an FTP server.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12">TIdFtpProxySettings = <STRONG>class</STRONG>(TPersistent)</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Unit</DIV>
+<DIV CLASS="Element69">
+<A HREF="002189.html" CLASS="Element59">IdFTP</A></DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+TIdFtpProxySettings is a TPersistent descendant that represents settings used for proxied connections to an FTP server in <A HREF="007328.html" CLASS="Element59">TIdFTP</A>. TIdFtpProxySettings includes properties that identify the proxy connection type, <A HREF="007340.html#0001" CLASS="Element59">Host</A> and <A HREF="007340.html#0003" CLASS="Element59">Port</A> for the control channel connection, and Username and <A HREF="007340.html#0002" CLASS="Element59">Password</A> for login authentication. TIdFtpProxySettings is the type used to represent the <A HREF="007328.html#0004" CLASS="Element59">TIdFTP.ProxySettings</A> property.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0001">TIdFtpProxySettings.Host</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007340.html" CLASS="Element59">TIdFtpProxySettings</A>, <A HREF="011132.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Represents the address of the proxy server for FTP client connections.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> Host: <STRONG>String</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Host is a String property that represents the IP address or host name for the computer acting as a proxy server for FTP client connections. Values in Host and <A HREF="007340.html#0003" CLASS="Element59">Port</A> are used in <A HREF="007328.html#0006" CLASS="Element59">TIdFTP.Connect</A> when <A HREF="007340.html#0004" CLASS="Element59">ProxyType</A> contains a <A HREF="007341.html" CLASS="Element59">TIdFtpProxyType</A> value other than fpcmNone.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0002">TIdFtpProxySettings.Password</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007340.html" CLASS="Element59">TIdFtpProxySettings</A>, <A HREF="011133.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+User identity for authenticating a client connection to an FTP proxy server.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> Password: <STRONG>String</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Password is a String property that represents the user authorization provided for authentication of client connections to an FTP proxy server. Values in <A HREF="007340.html#0005" CLASS="Element59">UserName</A> and Password are used in <A HREF="007328.html#0012" CLASS="Element59">TIdFTP.Login</A> when <A HREF="007340.html#0004" CLASS="Element59">ProxyType</A> contains a <A HREF="007341.html" CLASS="Element59">TIdFtpProxyType</A> value other than fpcmNone.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0003">TIdFtpProxySettings.Port</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007340.html" CLASS="Element59">TIdFtpProxySettings</A>, <A HREF="011134.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Port number used for connection to the FTP proxy server.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> Port: Integer;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Port is an Integer property that represents the port number used for connections to the computer acting as a proxy server for FTP client connections. Values in <A HREF="007340.html#0001" CLASS="Element59">Host</A> and Port are used in <A HREF="007328.html#0006" CLASS="Element59">TIdFTP.Connect</A> when <A HREF="007340.html#0004" CLASS="Element59">ProxyType</A> contains a <A HREF="007341.html" CLASS="Element59">TIdFtpProxyType</A> value other than fpcmNone.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0004">TIdFtpProxySettings.ProxyType</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007340.html" CLASS="Element59">TIdFtpProxySettings</A>, <A HREF="011135.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Connection mode to use for connections to the FTP proxy server.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> ProxyType: <A HREF="007341.html" CLASS="Element59">TIdFtpProxyType</A>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+ProxyType is a <A HREF="007341.html" CLASS="Element59">TIdFtpProxyType</A> property that represents the connection and authentication methods permitted for proxied connections to an FTP server. ProxyType is used in <A HREF="007328.html#0012" CLASS="Element59">TIdFTP.Login</A> to determine the method and values used for authenticating the proxied connection to the FTP server, according to the following proxy type values and methodologies:<P CLASS="Element10">
+<UL>
+<LI>fpcmNone - Sends the FTP client Username and optional <A HREF="007340.html#0002" CLASS="Element59">Password</A>.<P CLASS="Element10">
+<LI>fpcmUserSite - Sends the ProxySettings Username and optional <A HREF="007340.html#0002" CLASS="Element59">Password</A>, followed immediately by the FTP client Username and optional <A HREF="007340.html#0002" CLASS="Element59">Password</A>.<P CLASS="Element10">
+<LI>fpcmSite - Sends the ProxySettings Username and optional <A HREF="007340.html#0002" CLASS="Element59">Password</A>, sends the SITE command and the FTP <A HREF="007340.html#0001" CLASS="Element59">Host</A> property, and the FTP client Username and optional <A HREF="007340.html#0002" CLASS="Element59">Password</A>.<P CLASS="Element10">
+<LI>fpcmOpen - Sends the ProxySettings Username and optional <A HREF="007340.html#0002" CLASS="Element59">Password</A>, sends the OPEN command with the FTP <A HREF="007340.html#0001" CLASS="Element59">Host</A> property, and the FTP client Username and optional <A HREF="007340.html#0002" CLASS="Element59">Password</A>.<P CLASS="Element10">
+<LI>fpcmUserPass - Calls SendCmd with the command USER user@proxyuser@host, calls SendCmd with the command PASS pwd@proxypwd, or optionally PASS pwd.<P CLASS="Element10">
+<LI>fpcmTransparent - Sends the ProxySettings Username and optional <A HREF="007340.html#0002" CLASS="Element59">Password</A>, followed immediately by the FTP client Username and optional password.<P CLASS="Element10">
+<LI>fpcmHttpProxyWithFtp - Not implemented at this time.</UL>
+</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0005">TIdFtpProxySettings.UserName</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007340.html" CLASS="Element59">TIdFtpProxySettings</A>, <A HREF="011136.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+User identity for authenticating a client connection to an FTP proxy server.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> UserName: <STRONG>String</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+UserName is a String property that represents the user name provided for authentication of client connections to an FTP proxy server. Values in UserName and <A HREF="007340.html#0002" CLASS="Element59">Password</A> are used in <A HREF="007328.html#0012" CLASS="Element59">TIdFTP.Login</A> when <A HREF="007340.html#0004" CLASS="Element59">ProxyType</A> contains a <A HREF="007341.html" CLASS="Element59">TIdFtpProxyType</A> value other than fpcmNone.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0000">TIdFtpProxySettings.Assign</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007340.html" CLASS="Element59">TIdFtpProxySettings</A>, <A HREF="011137.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Assigns values from a persistent object to the current object instance.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>procedure</STRONG> Assign(Source: TPersistent); <STRONG>override</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+Source: TPersistent</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Persistent object to use as the source for property values.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Assign is a procedure that assigns values from the persistent object instance in Source to the current object instance. When Source is an instance of <A HREF="007340.html" CLASS="Element59">TIdFtpProxySettings</A>, the following property values are assigned to the current object instance:<P CLASS="Element10">
+<UL>
+<LI><A HREF="007340.html#0004" CLASS="Element59">ProxyType</A><P CLASS="Element10">
+<LI><A HREF="007340.html#0005" CLASS="Element59">UserName</A><P CLASS="Element10">
+<LI><A HREF="007340.html#0002" CLASS="Element59">Password</A><P CLASS="Element10">
+<LI><A HREF="007340.html#0001" CLASS="Element59">Host</A><P CLASS="Element10">
+<LI><A HREF="007340.html#0003" CLASS="Element59">Port</A></UL>
+<P CLASS="Element10">
+When Source is not an instance of <A HREF="007340.html" CLASS="Element59">TIdFtpProxySettings</A>, Assign calls the inherited method using Source as an argument.</DIV>
+</DIV>
+<DIV CLASS="Element62">
+<HR>Created with Doc-O-Matic 2 donated to <STRONG><A HREF="http://www.delphi-jedi.org">Project JEDI</A></STRONG>. Commercial license available from the <STRONG><A HREF="http://www.doc-o-matic.com">Doc-O-Matic site</A></STRONG>.</DIV>
+</DIV></BODY></HTML>

@@ -1,0 +1,152 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+<TITLE>TRDATARecord</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <META name="GENERATOR" content="Doc-O-Matic">
+    <LINK rel="STYLESHEET" href="default.css" type="text/css">
+
+<SCRIPT LANGUAGE="JavaScript1.2" SRC="scripts.js"></SCRIPT>
+</HEAD>
+<BODY CLASS="Element57">
+<TABLE BORDER="0" BGCOLOR="#AACCFF" WIDTH="100%" CELLSPACING="0" CELLPADDING="0">
+<TR><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element1">
+Indy 9</DIV>
+</TD><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element2">
+<A HREF="content.html" CLASS="Element59">Content</A> | <A HREF="idx.html" CLASS="Element59">Index</A> | <A HREF="symref.html" CLASS="Element59">Reference</A></DIV>
+</TD></TR></TABLE><DIV CLASS="Element58">
+<DIV CLASS="Element5">
+TRDATARecord</DIV>
+<DIV CLASS="Element7">
+<A HREF="015080.html" CLASS="Element59">Hierarchy</A>, <A HREF="015081.html" CLASS="Element59">Properties</A>, <A HREF="015082.html" CLASS="Element59">Methods</A>, <A HREF="015083.html" CLASS="Element59">See Also</A>, <A HREF="002173.html" CLASS="Element59">Unit: IdDNSResolver</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Represents a resource record returned from a DNS query that includes Host Address record types.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12">TRDATARecord = <STRONG>class</STRONG>(<A HREF="008059.html" CLASS="Element59">TResultRecord</A>)</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Unit</DIV>
+<DIV CLASS="Element69">
+<A HREF="002173.html" CLASS="Element59">IdDNSResolver</A></DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+TRDATARecord is a <A HREF="008059.html" CLASS="Element59">TResultRecord</A> descendant that represents a resource record returned in the results for a DNS query. TRDATARecord is the collection item created to represent a resource resource returned when TIDNSResolver.QueryRecords includes the value qtA for host address resource records.<P CLASS="Element10">
+TRDATARecord is also the ancestor for the more specialized resource record represented in <A HREF="007135.html" CLASS="Element59">TARecord</A>.<P CLASS="Element10">
+TRDATARecord implements additional properties and the <A HREF="008053.html#0003" CLASS="Element59">Parse</A> method, that allow access to the most common form of resource record: a resource record that contains an IP Address in the RData property.<P CLASS="Element10">
+TRDATARecord also implements the <A HREF="008053.html#0000" CLASS="Element59">Assign</A> method to allow assignment of property values that are copied from another collection item.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0002">TRDATARecord.IPAddress</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="008053.html" CLASS="Element59">TRDATARecord</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Represents an IP address that occurs in the RData field for the resource record.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> IPAddress: <STRONG>string</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+IPAddress is a read-only String property that represents an IP address expressed in dotted-decimal form that occurs in the RData field for the resource record.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0000">TRDATARecord.Assign</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="008053.html" CLASS="Element59">TRDATARecord</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Copies property values into the current object instance.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>procedure</STRONG> Assign(Source: TPersistent); <STRONG>override</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+Source: TPersistent</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Collection item contain value to be copied.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Assign is a procedure that copies the property values from a collection item specified in ASource to the current object instance. If ASource has the same class type as the current object instance, the required properties are copied. Otherwise the inherited Assign method is called using ASource as an argument.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0001">TRDATARecord.Create</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="008053.html" CLASS="Element59">TRDATARecord</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Constructor for the object instance.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>constructor</STRONG> Create(Collection: TCollection); <STRONG>override</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+Collection: TCollection</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Owner of the collection item.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Create is the constructor for the object instance. Create calls the inherited Create method using Collection as the owner of the collection item.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0003">TRDATARecord.Parse</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="008053.html" CLASS="Element59">TRDATARecord</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Parses RData values into properties.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>procedure</STRONG> Parse(CompleteMessage: <STRONG>String</STRONG>; APos: Integer); <STRONG>override</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+CompleteMessage: String</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Contents of the resource record.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+APos: Integer</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Position where RData values begin in the answer.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Parse is an overridden procedure that implements a routine to parse resource record values in the DNS response into their property-based counterparts.<P CLASS="Element10">
+CompleteMessage is the contents of the resource record. Since the DNS message can contain compressed data, the whole message is needed for parsing and pointer location.<P CLASS="Element10">
+APos is the position in the resource record where RData values for this record type are located in the DNS Answer.<P CLASS="Element10">
+Parse calls the inherited Parse method, and retrieves the DNS labels and values for the <A HREF="008053.html#0002" CLASS="Element59">IPAddress</A> property.</DIV>
+</DIV>
+<DIV CLASS="Element62">
+<HR>Created with Doc-O-Matic 2 donated to <STRONG><A HREF="http://www.delphi-jedi.org">Project JEDI</A></STRONG>. Commercial license available from the <STRONG><A HREF="http://www.doc-o-matic.com">Doc-O-Matic site</A></STRONG>.</DIV>
+</DIV></BODY></HTML>

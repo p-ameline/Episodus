@@ -1,0 +1,66 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+<TITLE>TOnRenameFileEvent</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <META name="GENERATOR" content="Doc-O-Matic">
+    <LINK rel="STYLESHEET" href="default.css" type="text/css">
+
+<SCRIPT LANGUAGE="JavaScript1.2" SRC="scripts.js"></SCRIPT>
+</HEAD>
+<BODY CLASS="Element57">
+<TABLE BORDER="0" BGCOLOR="#AACCFF" WIDTH="100%" CELLSPACING="0" CELLPADDING="0">
+<TR><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element1">
+Indy 9</DIV>
+</TD><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element2">
+<A HREF="content.html" CLASS="Element59">Content</A> | <A HREF="idx.html" CLASS="Element59">Index</A> | <A HREF="symref.html" CLASS="Element59">Reference</A></DIV>
+</TD></TR></TABLE><DIV CLASS="Element58">
+<DIV CLASS="Element5">
+TOnRenameFileEvent</DIV>
+<DIV CLASS="Element7">
+<A HREF="002192.html" CLASS="Element59">Unit: IdFTPServer</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Event type signalled to allow an FTP server to rename a file.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12">TOnRenameFileEvent = <STRONG>procedure</STRONG> (ASender: <A HREF="007343.html" CLASS="Element59">TIdFTPServerThread</A>; <STRONG>const</STRONG> ARenameFromFile,ARenameToFile: <STRONG>string</STRONG>) <STRONG>of</STRONG> <STRONG>object</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Unit</DIV>
+<DIV CLASS="Element69">
+<A HREF="002192.html" CLASS="Element59">IdFTPServer</A></DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+ARenameFromFile</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Orignal filename.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+ARenameToFile</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+New file name.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+ASender</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Threaded client connection for the event notification.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+TOnRenameFileEvent is an event type signalled when an FTP server implementation needs to rename a file on the local file system, after receiving both the FTP RNFR and RNTO command verbs from a client connection.<P CLASS="Element10">
+TOnRenameFileEvent is the event type signalled to the <A HREF="007342.html#0010" CLASS="Element59">TIdFTPServer.OnRenameFile</A> event handler. TOnRenameFileEvent informs the server that it needs to perform the platform-specific API function calls needed to rename the file specified in ARenameFromFile to the name specified in ARenameToFile.<P CLASS="Element10">
+Applications must assign a procedure to the event handler for the TOnRenameFileEvent to allow responding to the event notification.</DIV>
+</DIV>
+<DIV CLASS="Element62">
+<HR>Created with Doc-O-Matic 2 donated to <STRONG><A HREF="http://www.delphi-jedi.org">Project JEDI</A></STRONG>. Commercial license available from the <STRONG><A HREF="http://www.doc-o-matic.com">Doc-O-Matic site</A></STRONG>.</DIV>
+</DIV></BODY></HTML>

@@ -1,0 +1,65 @@
+// -----------------------------------------------------------------------------
+// NSRightsDefs.H
+// -----------------------------------------------------------------------------
+// Définitions du manager des droits des utilisateurs
+// -----------------------------------------------------------------------------
+// $Revision: 1.2 $
+// $Author: pameline $
+// $Date: 2009/07/23 17:05:29 $
+// -----------------------------------------------------------------------------
+// FLP - juin 2004
+// CH  - mai 2004
+// -----------------------------------------------------------------------------
+
+#ifndef __NSRIGHTSDEFS_H__
+# define __NSRIGHTSDEFS_H__
+
+enum PetalType		{ PTnotDef = -1, patientType, classicType, focusType } ;
+enum PetalLevel		{ PLnotDef = -1, physicalLevel, moralLevel } ;
+enum PetalUnity		{ PUnotDef = -1, simplex, duplex } ;
+
+// La distance au patient :
+//   patient, proche ou distant
+enum DistanceType	{ DTnotDef = -1, patDist, nearDist, farDist, farAwayDist } ;
+
+// La specialité de l'utilisateur :
+//   la meme specialité ou une specialité différente
+enum SpecialityType { STnotDef = -1, sameSpec, difSpec } ;
+
+// Le metier. Les utilisateurs du personnel de santé ou du social ont encore
+// un parametre (sameTrade) qui mentionne s'ils ont le même métier ou non avec
+// l'utilisateur qui a créé le documment
+enum FonctionType	{ FTnotDef = -1, patient, medecin, medPers, socPers, persSameFonction, family } ;
+
+// acces par personne ou par domaine (personne physique ou personne morale)
+enum AccessType	  	{ ATnotDef = -1, nominative, domain } ;
+
+// l'emplacement dans la rosace
+enum QuarterType  	{ QTnotDef = -1, medecins, medicalPersons, socialPersons, familyPersons } ;
+
+
+# define MASK1GROUP          0xC0        // 11000000
+# define MASK2GROUP          0x30        // 00110000
+# define MASK3GROUP          0x0C        // 00001100
+# define MASK4GROUP          0x03        // 00000011
+
+# define MASK4START          0xF0        // 11110000
+# define MASK4END            0x0F        // 00001111
+
+# define MASK4ANGLE          0x1F        // 00011111
+
+# define NOTCOLOR            0x00        // 00000000
+# define GREEN               0x03        // 00000011
+# define ORANGE              0x02        // 00000010
+# define RED                 0x01        // 00000001
+
+# define PHYSICALACCESS      0x02        // 00000010
+# define MORALACCESS         0x01        // 00000001
+# define PATIENTPETAL        0x40        // 01000000
+# define FOCUSPETAL      	   0x20        // 00100000
+# define SIMPLEPETAL         0x10        // 00010000
+
+# define GROUPEND            0xFF        
+
+#endif // __NSRIGHTSDEFS_H__
+

@@ -1,0 +1,342 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+<TITLE>TIdMailBox</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <META name="GENERATOR" content="Doc-O-Matic">
+    <LINK rel="STYLESHEET" href="default.css" type="text/css">
+
+<SCRIPT LANGUAGE="JavaScript1.2" SRC="scripts.js"></SCRIPT>
+</HEAD>
+<BODY CLASS="Element57">
+<TABLE BORDER="0" BGCOLOR="#AACCFF" WIDTH="100%" CELLSPACING="0" CELLPADDING="0">
+<TR><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element1">
+Indy 9</DIV>
+</TD><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element2">
+<A HREF="content.html" CLASS="Element59">Content</A> | <A HREF="idx.html" CLASS="Element59">Index</A> | <A HREF="symref.html" CLASS="Element59">Reference</A></DIV>
+</TD></TR></TABLE><DIV CLASS="Element58">
+<DIV CLASS="Element5">
+TIdMailBox</DIV>
+<DIV CLASS="Element7">
+<A HREF="012222.html" CLASS="Element59">Hierarchy</A>, <A HREF="012223.html" CLASS="Element59">Properties</A>, <A HREF="012224.html" CLASS="Element59">Methods</A>, <A HREF="012225.html" CLASS="Element59">See Also</A>, <A HREF="002281.html" CLASS="Element59">Unit: IdMailBox</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Represents information about an IMAP4 mailbox.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12">TIdMailBox = <STRONG>class</STRONG>(<A HREF="007213.html" CLASS="Element59">TIdBaseComponent</A>)</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Unit</DIV>
+<DIV CLASS="Element69">
+<A HREF="002281.html" CLASS="Element59">IdMailBox</A></DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+TIdMailBox is a <A HREF="007213.html" CLASS="Element59">TIdBaseComponent</A> descendant that represents information about a mailbox selected using the IMAP4 protocol. TIdMailBox identifies the <A HREF="007521.html#0000" CLASS="Element59">Attributes</A> of the mailbox, updateable flags, state information, and the list of messages in the currently seleted mailbox.<P CLASS="Element10">
+TIdMailBox can also indicate dynamic information, such as message numbers found that meet some search criteria, or a list messages that have been marked for deletion in the mailbox.<P CLASS="Element10">
+TIdMailBox is the type used to represent the <A HREF="007405.html#001B" CLASS="Element59">TIdIMAP4.MailBox</A> property, and is updated when the IMAP4 client performs a Select, Examine, or Status operation using the IMAP4 protocol.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0000">TIdMailBox.Attributes</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007521.html" CLASS="Element59">TIdMailBox</A>, <A HREF="012226.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Indicates mailbox attributes for the currently selected mailbox.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> Attributes: <A HREF="007522.html" CLASS="Element59">TIdMailBoxAttributes</A>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Attributes is a <A HREF="007522.html" CLASS="Element59">TIdMailBoxAttributes</A> property that indicates the mailbox attributes associated with the currently selected mailbox. Attributes can contain values defined in <A HREF="007522.html" CLASS="Element59">TIdMailBoxAttributes</A>. Attributes is updated when the resulting values from <A HREF="007405.html#0019" CLASS="Element59">TIdIMAP4.ListMailBoxes</A> are parsed.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0001">TIdMailBox.ChangeableFlags</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007521.html" CLASS="Element59">TIdMailBox</A>, <A HREF="012227.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Represents the permanent flags for am IMAP4 mailbox.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> ChangeableFlags: <A HREF="007570.html" CLASS="Element59">TIdMessageFlagsSet</A>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+ChangeableFlags is a <A HREF="007570.html" CLASS="Element59">TIdMessageFlagsSet</A> property that represents the permanent flags indicated when a mailbox is selected using <A HREF="007405.html#0001" CLASS="Element59">TIdIMAP4.SelectMailBox</A>.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0005">TIdMailBox.FirstUnseenMsg</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007521.html" CLASS="Element59">TIdMailBox</A>, <A HREF="012228.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Initial message number containing an &quot;Unseen&quot; flag.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> FirstUnseenMsg: LongInt;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+FirstUnseenMsg is a LongInt property that indicates the initial message in <A HREF="007521.html#0007" CLASS="Element59">MessageList</A> that contains the IMAP4 UNSEEN message flag in the <A HREF="007521.html#0006" CLASS="Element59">Flags</A> property. FirstUnseenMsg is determined when the results from <A HREF="007405.html#0001" CLASS="Element59">TIdIMAP4.SelectMailBox</A> are parsed, and can be used by the IMAP4 client to determine which message should be active when the mailbox is loaded.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0006">TIdMailBox.Flags</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007521.html" CLASS="Element59">TIdMailBox</A>, <A HREF="012229.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Indicates IMAP4 flags set for the current message.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> Flags: <A HREF="007570.html" CLASS="Element59">TIdMessageFlagsSet</A>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Flags is a <A HREF="007570.html" CLASS="Element59">TIdMessageFlagsSet</A> property that contains values that indicates the flags set for the current message. Flags is updated when <A HREF="007405.html#0021" CLASS="Element59">TIdIMAP4.Retrieve</A> is used to fetch a message from the IMAP4 server. Flags is used when the message is added or updated on the IMAP4 server.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0007">TIdMailBox.MessageList</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007521.html" CLASS="Element59">TIdMailBox</A>, <A HREF="012230.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Represents messsages and headers retrieved from the current mailbox.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> MessageList: <A HREF="007548.html" CLASS="Element59">TIdMessageCollection</A>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+MessageList is a <A HREF="007548.html" CLASS="Element59">TIdMessageCollection</A> property that contains <A HREF="007571.html" CLASS="Element59">TIdMessageItem</A> object instances. MessageList represents the messages and/or headers retrieved from the IMAP4 server in <A HREF="007405.html#0001" CLASS="Element59">TIdIMAP4.SelectMailBox</A>.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0008">TIdMailBox.Name</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007521.html" CLASS="Element59">TIdMailBox</A>, <A HREF="012231.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Identifies the mailbox in the IMAP4 mailbox hierarchy.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> Name: <STRONG>String</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Name is a String property that identifies the mailbox in the IMAP4 mailbox hierarchy. Name is updated when <A HREF="007405.html#0001" CLASS="Element59">TIdIMAP4.SelectMailBox</A> is used to access a mailbox on the IMAP4 server. Name is also provided as an argument to the <A HREF="007405.html" CLASS="Element59">TIdIMAP4</A> methods CreateMailBox, DeleteMailBox, ExamineMailBox, and StatusMailBox.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0009">TIdMailBox.RecentMsgs</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007521.html" CLASS="Element59">TIdMailBox</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Indicates the number of messages added since the last mailbox access.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> RecentMsgs: LongInt;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+RecentMsgs is a LongInt property that indicates the number of messages in <A HREF="007521.html#0007" CLASS="Element59">MessageList</A> that contain the &quot;Recent&quot; message flag. RecentMsgs are those that have been added to the mailbox since the last time the mailbox was selected.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="000A">TIdMailBox.State</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007521.html" CLASS="Element59">TIdMailBox</A>, <A HREF="012232.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Indicates if the mailbox allows read and write access.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> State: <A HREF="007524.html" CLASS="Element59">TIdMailBoxState</A>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+State is a <A HREF="007524.html" CLASS="Element59">TIdMailBoxState</A> property that indicates the mailbox state detected in the results for <A HREF="007405.html#0001" CLASS="Element59">TIdIMAP4.SelectMailBox</A>.<P CLASS="Element10">
+msReadWrite indicates that the currently selected mailbox allows creating new messages, updating message flags and attributes, and deletion of messasges.<P CLASS="Element10">
+msReadOnly indicates that the currently <A HREF="006943.html" CLASS="Element59">select</A> mailbox will nbot allow updates to the IMAP mailbox.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="000B">TIdMailBox.TotalMsgs</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007521.html" CLASS="Element59">TIdMailBox</A>, <A HREF="012233.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Indicates the number of messages in the currently selected mailbox.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> TotalMsgs: LongInt;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+TotalMsgs is a LongInt property that indicates the number of messages in <A HREF="007521.html#0007" CLASS="Element59">MessageList</A> for the currently selected mailbox. TotalMsgs is updated when the IMAP client performs a call to either the SelectMailBox, ExamineMailBox, or StatusMailBox methods.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="000C">TIdMailBox.UIDNext</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007521.html" CLASS="Element59">TIdMailBox</A>, <A HREF="012234.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Indicates the next UID value for a messaged added to the mailbox.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> UIDNext: <STRONG>String</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+UIDNext is a String property that indicates the next Unique Identifier value (UID) that will be assigned to a new message added to the currently selected mailbox. UIDNext is used with <A HREF="007521.html#000D" CLASS="Element59">UIDValidity</A> to determine the permanent Uniqueness identifier for a message in the currently selected mailbox.<P CLASS="Element10">
+UIDNext is updatd when the IMAP4 client executes the <A HREF="007405.html#0004" CLASS="Element59">TIdIMAP4.StatusMailBox</A> method.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="000D">TIdMailBox.UIDValidity</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007521.html" CLASS="Element59">TIdMailBox</A>, <A HREF="012235.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Indicates the mailbox UID value for a messaged added to the mailbox.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> UIDValidity: <STRONG>String</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+UIDValidity is a String property that indicates the Unique Identifier Validity value for the currently selected mailbox. UIDValidity is used with <A HREF="007521.html#000C" CLASS="Element59">UIDNext</A> to determine the permanent Uniqueness identifier for a message in the currently selected mailbox.<P CLASS="Element10">
+UIDValidity is updatd when the IMAP4 client executes the <A HREF="007405.html#0004" CLASS="Element59">TIdIMAP4.StatusMailBox</A> method, or when a new mailbox is selected using <A HREF="007405.html#0001" CLASS="Element59">TIdIMAP4.SelectMailBox</A>.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="000E">TIdMailBox.UnseenMsgs</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007521.html" CLASS="Element59">TIdMailBox</A>, <A HREF="012236.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Indicates the number of unread messages in the current mailbox.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> UnseenMsgs: LongInt;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+UnseenMsgs is a LongInt property that indicates the number of messages in the currently selected mailbox that have not been read by the IMAP4 client. UnseenMsgs is updated when the resuilts from the <A HREF="007405.html#0004" CLASS="Element59">TIdIMAP4.StatusMailBox</A> method are parsed.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0002">TIdMailBox.Clear</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007521.html" CLASS="Element59">TIdMailBox</A>, <A HREF="012237.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Reset properties of the mailbox to their default values.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>procedure</STRONG> Clear; <STRONG>virtual</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Clear is a procedure used to reset properties of the mailbox to their default values. Clear returns the mailbox to the state that exists prior to selection of the current mailbox using an IMAP4 client. Clear resets the following properties to the indicated values:<P CLASS="Element10">
+<UL>
+<LI><A HREF="007521.html#000B" CLASS="Element59">TotalMsgs</A> - 0<P CLASS="Element10">
+<LI><A HREF="007521.html#0009" CLASS="Element59">RecentMsgs</A> - 0<P CLASS="Element10">
+<LI><A HREF="007521.html#000E" CLASS="Element59">UnseenMsgs</A> - 0<P CLASS="Element10">
+<LI><A HREF="007521.html#0005" CLASS="Element59">FirstUnseenMsg</A> - 0<P CLASS="Element10">
+<LI><A HREF="007521.html#000D" CLASS="Element59">UIDValidity</A> - ''<P CLASS="Element10">
+<LI><A HREF="007521.html#000C" CLASS="Element59">UIDNext</A> - ''<P CLASS="Element10">
+<LI><A HREF="007521.html#0008" CLASS="Element59">Name</A> - ''<P CLASS="Element10">
+<LI><A HREF="007521.html#000A" CLASS="Element59">State</A> - msReadOnly<P CLASS="Element10">
+<LI><A HREF="007521.html#0000" CLASS="Element59">Attributes</A> - maNoselect<P CLASS="Element10">
+<LI><A HREF="007521.html#0006" CLASS="Element59">Flags</A> - [] (empty set)<P CLASS="Element10">
+<LI><A HREF="007521.html#0001" CLASS="Element59">ChangeableFlags</A> - [] (empty set)</UL>
+<P CLASS="Element10">
+Clear also removes the contents of the DeleteMsgs, SearchResult, and <A HREF="007521.html#0007" CLASS="Element59">MessageList</A> container properties.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0003">TIdMailBox.Create</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007521.html" CLASS="Element59">TIdMailBox</A>, <A HREF="012238.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Constructor for the object instance.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>constructor</STRONG> Create(AOwner: TComponent); <STRONG>override</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+AOwner: TComponent</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Owner of the object instance.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Create is the Constructor for the object instance, and relies on the inherited Create method to initialize properties. Create also initializes the <A HREF="007548.html" CLASS="Element59">TIdMessageCollection</A> instance used in the <A HREF="007521.html#0007" CLASS="Element59">MessageList</A> propertie, using <A HREF="007571.html" CLASS="Element59">TIdMessageItem</A> as the collection item class. Create calls <A HREF="007521.html#0002" CLASS="Element59">Clear</A> to insure that other properties in the instance are reset to their default values.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0004">TIdMailBox.Destroy</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007521.html" CLASS="Element59">TIdMailBox</A>, <A HREF="012239.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Frees the object instance.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>destructor</STRONG> Destroy; <STRONG>override</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Destroy is the destructor for the object instance, and frees resources allocated in the object instance like <A HREF="007521.html#0007" CLASS="Element59">MessageList</A>. Destroy calls the inherited Destroy method prior to exiting the method.</DIV>
+</DIV>
+<DIV CLASS="Element62">
+<HR>Created with Doc-O-Matic 2 donated to <STRONG><A HREF="http://www.delphi-jedi.org">Project JEDI</A></STRONG>. Commercial license available from the <STRONG><A HREF="http://www.doc-o-matic.com">Doc-O-Matic site</A></STRONG>.</DIV>
+</DIV></BODY></HTML>

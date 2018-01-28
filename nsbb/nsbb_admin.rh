@@ -1,0 +1,156 @@
+/*** C:\NAUTILUS\NSBB\nsbb_admin.rh ***//*** Dernière maj : RS Dec 02       ***//**************************************/
+
+// Dialogue IDD_DOUBLON_LIST
+#define IDC_GROUP_ROLE_EQUIV	101
+#define IDC_ROLE_EQUIV_TEXT	  102
+#define IDC_ROLE_EQUIV_LIST	  103
+#define IDC_GROUP_ROLE_DIFF	  110
+#define IDC_ROLE_DIFF_TEXT	  111
+#define IDC_ROLE_DIFF_LIST	  112
+#define IDC_ROLE_DIFF_ATTRIB	113
+#define IDC_CREER	            120
+#define IDC_ANNULER	          121
+
+// Dialogue IDD_ENREG_TREEDOC
+#define IDC_ENREGDOC_TEXT     101
+
+// Dialogue IDD_HEADER_MODEL
+#define IDC_LISTBOX           101
+
+// Dialogue IDD_VALHISTORY
+#define IDC_LISTVALHISTORY    101
+#define IDC_LISTVALPATH	      102
+#define IDC_LISTVALMORE	      103
+#define IDC_LISTVALLESS	      104
+
+// Dialogue IDD_TEST_COR_EDIT
+#define IDC_PDS_IDENTCOMP	    100
+#define IDC_IDENT_NOM	        101
+#define IDC_IDENT_PRENOM	    102
+#define IDC_IDENT_CIVILITE    103
+#define IDC_IDENT_SEXE_FEMI   104
+#define IDC_IDENT_CIVIL_MADE	105
+#define IDC_IDENT_CIVIL_MADA	106
+#define IDC_IDENT_SEXE_MASC   107
+#define IDC_IDENT_CIVIL_MONS	108
+
+#define IDC_PDS_METIER	      110
+#define IDC_PDS_SPEC	        111
+#define IDC_PDS_ORIENT	      112
+#define IDC_PDS_TITRE	        120
+#define IDC_PDS_TITRE_DOCT	  121
+#define IDC_PDS_TITRE_PROF	  122
+
+#define IDC_PDS_COORDS	      130
+#define IDC_PDS_ADRBOOK	      131
+#define IDC_PDS_TELP	        132
+#define IDC_PDS_EMAIL	        133
+
+// Dialogue IDD_ADMIN_COORDS
+#define IDC_COORDS_GROUP	    101
+#define IDC_COORDS_ADRBOOK	  102
+#define IDC_COORDS_TELP	      103
+#define IDC_COORDS_EMAIL	    104
+
+// Dialogue IDD_ADR_EDIT
+#define IDC_ADREDIT_TYPE	    101
+#define IDC_ADREDIT_PRINC	    102
+#define IDC_ADREDIT_SECO	    103
+#define IDC_ADREDIT_CHEZ	    104
+#define IDC_ADREDIT_CHEZQUI	  105
+#define IDC_ADREDIT_EDITER	  106
+
+// Dialogue IDD_ADR_PAT_EDIT
+#define IDC_ADRPATEDIT_TYPE   101
+#define IDC_ADRPATEDIT_PRINC  102
+#define IDC_ADRPATEDIT_SECO   103
+#define IDC_ADRPATEDIT_TEMPO	    104
+#define IDC_ADRPATEDIT_TEMPO_VIL	105
+#define IDC_ADRPATEDIT_TEMPO_ARR	106
+#define IDC_ADRPATEDIT_TEMPO_SAN	107
+#define IDC_ADRPATEDIT_TEMPO_NOU	108
+#define IDC_ADRPATEDIT_TEMPO_INT	109
+#define IDC_ADRPATEDIT_TRA	      110
+#define IDC_ADRPATEDIT_TRA_PRO	  111
+#define IDC_ADRPATEDIT_TRA_SCO	  112
+#define IDC_ADRPATEDIT_DOM	      120
+#define IDC_ADRPATEDIT_BCHEZ	    121
+#define IDC_ADRPATEDIT_CHEZ	      122
+#define IDC_ADRPATEDIT_EDITER	    130
+#define IDC_ADRPATEDIT_TAKEADR	  131
+
+// IDD_BBCREAT_PAT : création nouvelle fiche patient
+#define IDC_PAT_NOM				101
+#define IDC_TXT_NOM				201
+#define IDC_PAT_PRENOM    102
+#define IDC_TXT_PRENOM    102
+#define IDC_PAT_CODE			103
+#define IDC_PAT_DATEN			104
+#define IDC_PAT_SEXE1			105
+#define IDC_PAT_SEXE2			106
+#define IDC_PAT_ADR				107
+#define IDC_PAT_COR				108
+#define IDC_PAT_CEL				109
+#define IDC_PAT_VEU				110
+#define IDC_PAT_MAR				111
+#define IDC_PAT_CCB				112
+#define IDC_PAT_DIV				113
+#define IDC_PAT_NBENF			114
+#define IDC_PAT_TELPOR    115
+#define IDC_PAT_TELBUR    116
+#define IDC_PAT_BOR1			117
+#define IDC_PAT_BOR2			118
+#define IDC_PAT_BOR3			119
+
+// Dialogue IDD_ADR_SITE
+#define IDC_SITE_NOM	    101
+#define IDC_SITE_BAT	    102
+#define IDC_SITE_ESC	    103
+#define IDC_SITE_CODEP1   104
+#define IDC_SITE_CODEP2   105
+#define IDC_SITE_NUMVOIE	106
+#define IDC_SITE_TYPEVOIE	107
+#define IDC_SITE_NOMVOIE	108
+#define IDC_SITE_CODEPOST	109
+#define IDC_SITE_COMMUNE	110
+#define IDC_SITE_PAYS	    111
+#define IDC_SITE_CEDEX	  112
+#define IDC_SITE_BP	      113
+#define IDC_SITE_LIEUDIT	114
+#define IDC_SITE_TELPERSO	115
+#define IDC_SITE_FAX      116
+#define IDC_SITE_TELSTAND 117
+#define IDC_SITE_TELSECR  118
+
+// Dialogue IDD_ADR_LIEU
+#define IDC_LIEU_TYPE	    101
+#define IDC_LIEU_COTE	    106
+#define IDC_LIEU_POSTE	  108
+#define IDC_LIEU_FAX	    109
+#define IDC_LIEU_ETAGE	  104
+#define IDC_LIEU_TELE	    107
+#define IDC_LIEU_PORTE	  105
+#define IDC_LIEU_CODE	    104
+#define IDC_LIEU_ESC	    102
+#define IDC_LIEU_NOM	    103
+
+// Dialogue IDD_LISTECORRESP
+#define IDC_LC_NOM	        101
+#define IDC_LCTXT_NOM	      201
+#define IDC_LC_PRENOM	      102
+#define IDC_LCTXT_PRENOM	  202
+#define IDC_LC_ROLE         103
+#define IDC_LCTXT_ROLE      203
+#define IDC_LC_VSCROLL	    104
+#define IDC_LC_LW           105
+#define IDC_LC_CREER	      106
+#define IDC_LC_GROUP	      107
+#define IDC_LC_PIDSPATIENT  108
+#define IDC_LC_PIDSUSER	    109
+#define IDC_LC_PIDSCORRESP	110
+#define IDC_LC_PIDSALL	    111
+#define IDC_LC_SEARCH_NOW	  112
+
+
+// fin de nsbb_admin.rh
+

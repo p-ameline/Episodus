@@ -1,0 +1,158 @@
+//// NsEpiOut.rh
+//
+
+// Dialogue OUTILS_EPISODUS
+#define IDC_FLECHIES    101
+#define IDC_IMP_CISP    102
+#define IDC_IMP_CIM     103
+#define IDC_IMP_LISTE   104
+#define IDC_CLASS_CTRL  105
+
+// Dialogue BUILD_FLECHIES
+#define IDC_EMPTY       101
+#define IDC_ADDLEX      102
+#define IDC_CURRENT     103
+#define IDC_ADDORTHO    104
+#define IDC_ADDEXPRES   105
+#define IDC_ADDLOCAL    106
+#define IDC_CVT_START	107
+#define IDC_CVT_STOP	108
+
+//Classe Promethe : IDD_PROMETHEPARAMSDLG
+#define IDC_USERID                  101
+#define IDC_MAIL                    102
+#define IDC_AUTOFLOCULE_NON	        103
+#define IDC_AUTOFLOCULE_OUI	        104
+#define IDC_PRINCIPE_CIM	        105
+#define IDC_PRINCIPE_CISP	        106
+#define IDC_SEND_NOW_NON	        107
+#define IDC_SEND_NOW_OUI	        108
+#define IDC_HASH_OUI	            109
+#define IDC_HASH_NON	            110
+#define IDC_LOGIN	                111
+#define IDC_USERPASSWORD            112
+#define IDC_URLSERVEUR              113
+#define IDC_CAPTURE_OUI	            114
+#define IDC_CAPTURE_NON	            115
+#define IDC_BABYLON_OUI	            116
+#define IDC_BABYLON_NON	            117
+#define IDC_SAVEPOS_OUI	            118
+#define IDC_SAVEPOS_NON	            119
+#define IDC_AUTOOPEN_OUI	        120
+#define IDC_AUTOOPEN_NON	        121
+#define IDC_OPENMODE_H	            122
+#define IDC_OPENMODE_J	            123
+#define IDC_OPENMODE_S	            124
+#define IDC_OPENMODE_M	            125
+#define IDC_TLCONCERN_OUI	        126
+#define IDC_TLCONCERN_NON	        127
+#define IDC_CAPTURE_KEY             128
+#define IDC_BABYLON_KEY	            129
+#define IDC_URLSERVICE              130
+#define IDC_TITLESERVICE            131
+
+#define  IDS_MAIL            201
+#define  IDS_USERID          202
+#define  IDS_URLSERVEUR      203
+#define  IDS_LOGIN           204
+#define  IDS_USERPASSWORD    205
+#define  IDS_URLSERVICE      206
+#define  IDS_TITLESERVICE    207
+#define  IDS_CLASSIF         208
+#define  IDS_AUTOFLOCULE     209
+#define  IDS_SEND_NOW        210
+#define  IDS_HASH            211
+#define  IDS_SAVEPOS         212
+#define  IDS_GENERAL         213
+#define  IDS_CAPTURE         214
+#define  IDS_CAPTURE_KEY     215
+#define  IDS_BABYLON         216
+#define  IDS_BABYLON_KEY     217
+#define  IDS_PRINCIPE        218
+#define  IDS_LDV             219
+#define  IDS_OPENMODE        220
+#define  IDS_AUTOOPEN        221
+#define  IDS_TLCONCERN       222
+
+//Classe mail : IDD_EMAIL_DAT_File
+#define IDC_CLASSICAL        101
+#define IDC_APICRYPT	       102
+
+//Classe Promethe : IDD_EMAIL_DAT_File
+#define IDC_PORT_SMTP             101
+#define IDC_NAME_FROM	            102
+#define IDC_MAIL_FROM	            103
+#define IDC_MAIL_REPLY_TO	        104
+#define IDC_MAIL_SENDER	          105
+#define IDC_USER_SMTP	            106#define IDC_PASS_SMTP	            107#define IDC_URL_POP3	            108
+#define IDC_PORT_POP3	            109
+#define IDC_USER_POP3	            110
+#define IDC_PASS_POP3	            111
+#define IDC_URL_SMTP              112
+#define IDC_CLASSIQUE	            113
+#define IDC_MAPI                  114
+#define IDC_API_USER              115
+#define IDC_API_DIR               116
+#define IDC_PROXY                 117
+#define IDC_SMTP_LUCKY            118
+#define IDC_SMTP_PASS_YES         119
+#define IDC_SMTP_PASS_NO          120
+
+// Dialogue IDD_LISTECODES
+#define IDC_DATE_DEB                101
+#define IDC_DATE_FIN                102
+#define IDC_LIST_ACTESPERSO         103
+#define IDC_LIST_ACTESTOUS          104
+
+// Dialogue IDD_PRINT_PARAMS_DLG
+#define IDC_TEMPO 					101
+#define IDC_MAIL 					102
+#define IDC_HOOKOUI 				103
+#define IDC_HOOKNON 				104
+#define IDC_VERBOSEOUI 				105
+#define IDC_VERBOSENON				106
+#define IDC_KILLTMPNON 				107
+#define IDC_KILLTMPOUI 				108
+#define IDC_WAITIMPOUI 				109
+#define IDC_WAITIMPNON 				110
+#define IDC_TEMPIMP 				111
+#define IDC_SIMPLEOUI 				112
+#define IDC_SIMPLENON 				113
+#define IDC_TEMPOSTNAV 				114
+
+// Dialogue IDD_UPDATE_PARAMS_DLG
+#define IDC_TXT_IDS          101
+#define IDC_TXT_ID           102
+#define IDC_ED_ID            103
+#define IDC_TXT_PASS         104
+#define IDC_ED_PASS          105
+#define IDC_TXT_LOCATION     106
+#define IDC_TXT_FROM         107
+#define IDC_ED_FROM          108
+#define IDC_TXT_TO           109
+#define IDC_ED_TO            110
+#define IDC_TXT_AUTO         111
+#define IDC_UPDT_YES         112
+#define IDC_UPDT_NO          113
+#define IDC_TXT_EVERY        114
+#define IDC_ED_EVERY         115
+#define IDC_TXT_DAYS         116
+#define IDC_TXT_SILENT       117
+#define IDC_SILENT_YES       118
+#define IDC_SILENT_NO        119
+
+// Dialogue IDD_INIT_PARAMS_DLG
+#define IDC_TXT_IDCG         101
+#define IDC_TXT_IDC          102
+#define IDC_ED_IDC           103
+#define IDC_TXT_IDC2         104
+#define IDC_TXT_PATH         105
+#define IDC_ED_PATH          106
+#define IDC_TXT_TRACES       107
+#define IDC_TRACE_1          108
+#define IDC_TRACE_2          109
+#define IDC_TRACE_3          110
+#define IDC_TRACE_4          111
+#define IDC_TRACE_5          112
+#define IDC_TRACE_6          113
+

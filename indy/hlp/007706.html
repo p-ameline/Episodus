@@ -1,0 +1,50 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+<TITLE>TIdSMTPReceiveMode</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <META name="GENERATOR" content="Doc-O-Matic">
+    <LINK rel="STYLESHEET" href="default.css" type="text/css">
+
+<SCRIPT LANGUAGE="JavaScript1.2" SRC="scripts.js"></SCRIPT>
+</HEAD>
+<BODY CLASS="Element57">
+<TABLE BORDER="0" BGCOLOR="#AACCFF" WIDTH="100%" CELLSPACING="0" CELLPADDING="0">
+<TR><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element1">
+Indy 9</DIV>
+</TD><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element2">
+<A HREF="content.html" CLASS="Element59">Content</A> | <A HREF="idx.html" CLASS="Element59">Index</A> | <A HREF="symref.html" CLASS="Element59">Reference</A></DIV>
+</TD></TR></TABLE><DIV CLASS="Element58">
+<DIV CLASS="Element5">
+TIdSMTPReceiveMode</DIV>
+<DIV CLASS="Element7">
+<A HREF="002819.html" CLASS="Element59">Unit: IdSMTPServer</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Indicates the mechanism used for processing incoming mail data.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12">TIdSMTPReceiveMode = (rmRaw, rmMessage, rmMessageParsed);</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Unit</DIV>
+<DIV CLASS="Element69">
+<A HREF="002819.html" CLASS="Element59">IdSMTPServer</A></DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+TIdSMTPReceiveMode is an enumerated type that identifies the mechanism to be used on the server to handle data received in the incoming mail buffer. TIdSMTPReceiveMode can contain the following values with their associated meanings:<P CLASS="Element10">
+<UL>
+<LI>rmRaw - Data is captured from the client connection as a 7-bit raw data stream. The raw data stream is provided to an event handler to allow processing, and the daa stream is freed on completion of the event handler.<P CLASS="Element10">
+<LI>rmMessage - Data is captured from the client connection and stored in a <A HREF="007544.html" CLASS="Element59">TIdMessage</A> instance. The message instance is given a value in XServer that identifies the current server. The message instance is provided to an event handler to allow additional processing, and freed on completion of the event handler.<P CLASS="Element10">
+<LI>rmMessageParsed - Data is captured from the client connection and stored in a <A HREF="007544.html" CLASS="Element59">TIdMessage</A> instance, like rmMessage. rmMessageParsed adds processing of message headers to determine which recipients are Blind Carbon-Copy recipients. The message instance is provided to an event handler to allow additional processing, and freed on completion of the event handler.</UL>
+<P CLASS="Element10">
+TIdSMTPReceiveMode is the type used to represent the <A HREF="007707.html#0016" CLASS="Element59">TIdSMTPServer.ReceiveMode</A> property, and determines which event handler to use for mail data processing in <A HREF="007707.html" CLASS="Element59">TIdSMTPServer</A>: OnReceiveRaw, OnReceiveMessage, or OnReceiveMessageParsed.</DIV>
+</DIV>
+<DIV CLASS="Element62">
+<HR>Created with Doc-O-Matic 2 donated to <STRONG><A HREF="http://www.delphi-jedi.org">Project JEDI</A></STRONG>. Commercial license available from the <STRONG><A HREF="http://www.doc-o-matic.com">Doc-O-Matic site</A></STRONG>.</DIV>
+</DIV></BODY></HTML>

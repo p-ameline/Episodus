@@ -1,0 +1,145 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+<TITLE>TIdHTTPRequest</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <META name="GENERATOR" content="Doc-O-Matic">
+    <LINK rel="STYLESHEET" href="default.css" type="text/css">
+
+<SCRIPT LANGUAGE="JavaScript1.2" SRC="scripts.js"></SCRIPT>
+</HEAD>
+<BODY CLASS="Element57">
+<TABLE BORDER="0" BGCOLOR="#AACCFF" WIDTH="100%" CELLSPACING="0" CELLPADDING="0">
+<TR><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element1">
+Indy 9</DIV>
+</TD><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element2">
+<A HREF="content.html" CLASS="Element59">Content</A> | <A HREF="idx.html" CLASS="Element59">Index</A> | <A HREF="symref.html" CLASS="Element59">Reference</A></DIV>
+</TD></TR></TABLE><DIV CLASS="Element58">
+<DIV CLASS="Element5">
+TIdHTTPRequest</DIV>
+<DIV CLASS="Element7">
+<A HREF="011508.html" CLASS="Element59">Hierarchy</A>, <A HREF="011509.html" CLASS="Element59">Properties</A>, <A HREF="011510.html" CLASS="Element59">Methods</A>, <A HREF="011511.html" CLASS="Element59">See Also</A>, <A HREF="002251.html" CLASS="Element59">Unit: IdHTTP</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Provides access to headers and properties for an HTTP request.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12">TIdHTTPRequest = <STRONG>class</STRONG>(<A HREF="007651.html" CLASS="Element59">TIdRequestHeaderInfo</A>)</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Unit</DIV>
+<DIV CLASS="Element69">
+<A HREF="002251.html" CLASS="Element59">IdHTTP</A></DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+TIdHTTPRequest is a <A HREF="007651.html" CLASS="Element59">TIdRequestHeaderInfo</A> descendant that provides properties and methods use to define and manipulate header values used in an HTTP request.<P CLASS="Element10">
+TIdHTTPRequest is the type used to represent the <A HREF="007375.html#000F" CLASS="Element59">TIdHTTP.Request</A> property, and is used in when <A HREF="007375.html" CLASS="Element59">TIdHTTP</A> prepares the request by generating request header values that reflect the relative <A HREF="007388.html#0003" CLASS="Element59">URL</A>, user authentication, host, options, protocol version, and content length for the <A HREF="007388.html#0003" CLASS="Element59">URL</A> and source stream in the HTTP request.<P CLASS="Element10">
+A prepared TIdHTTPRequest instance is provided as an argument to <A HREF="007375.html" CLASS="Element59">TIdHTTP</A> event handlers that use or update valued in the HTTP request, including OnRedirect, OnSelectAuthorization, OnSelectProxyAuthorization, OnAuthorization, OnProxyAuthorization.<P CLASS="Element10">
+TIdHTTPRequest is also the type used to represent the <A HREF="007386.html#0004" CLASS="Element59">TIdHTTPProtocol.Request</A> property, and allows the protocol handler to store a reference to the request used in HTTP protocol exchanges.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0001">TIdHTTPRequest.Method</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007388.html" CLASS="Element59">TIdHTTPRequest</A>, <A HREF="011512.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Indicates the HTTP method to use for the request.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> Method: <A HREF="007381.html" CLASS="Element59">TIdHTTPMethod</A>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Method is a <A HREF="007381.html" CLASS="Element59">TIdHTTPMethod</A> property that represents the HTTP method to use for the <A HREF="007388.html#0003" CLASS="Element59">URL</A> in the HTTP request. Method is used when <A HREF="007375.html" CLASS="Element59">TIdHTTP</A> needs to prepares a request, and during execution using the <A HREF="007386.html" CLASS="Element59">TIdHTTPProtocol</A> protocol handler.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0002">TIdHTTPRequest.Source</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007388.html" CLASS="Element59">TIdHTTPRequest</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Represents the input stream for HTTP Put or Post requests.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> Source: TStream;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Source is a TStream property that represents the input stream containing data used during execution an TIdHTTP.Put or TIdHTTP.Post request. Source is also used by the <A HREF="007386.html" CLASS="Element59">TIdHTTPProtocol</A> protocol handler for a <A HREF="007375.html" CLASS="Element59">TIdHTTP</A> client to determine the content length for a request.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0003">TIdHTTPRequest.URL</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007388.html" CLASS="Element59">TIdHTTPRequest</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Represents the Universal Resource Locator for the HTTP request.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> URL: <STRONG>string</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+URL is a String property that represents the Universal Resource Locator to use for the HTTP request. URL is used when <A HREF="007375.html" CLASS="Element59">TIdHTTP</A> prepares a request for execution using the <A HREF="007386.html" CLASS="Element59">TIdHTTPProtocol</A> prtocol handler, and contains the URL value prior to URL-encoding.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0004">TIdHTTPRequest.UseProxy</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007388.html" CLASS="Element59">TIdHTTPRequest</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Indicates the connectionm type and headers for the HTTP request.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> UseProxy: <A HREF="007376.html" CLASS="Element59">TIdHTTPConnectionType</A>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+UseProxy is a read-only <A HREF="007376.html" CLASS="Element59">TIdHTTPConnectionType</A> property that indicates the connection type return when <A HREF="007375.html" CLASS="Element59">TIdHTTP</A> establishes a connection to the host for the request <A HREF="007388.html#0003" CLASS="Element59">URL</A>. UseProxy will indicate if the HTTP requestshould contain values for 'Keep-Alive' or 'No-Cache' headers in the request.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0000">TIdHTTPRequest.Create</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007388.html" CLASS="Element59">TIdHTTPRequest</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Constructor for the object instance.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>constructor</STRONG> Create(AHTTP: <A HREF="007270.html" CLASS="Element59">TIdCustomHTTP</A>); <STRONG>virtual</STRONG>; <STRONG>reintroduce</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+AParent</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+HTTP client that owns the request.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Create is the constructor for the object instance. Create calls the inherited Create method, and stores AParent to the private member that represents the HTTP client for the request.</DIV>
+</DIV>
+<DIV CLASS="Element62">
+<HR>Created with Doc-O-Matic 2 donated to <STRONG><A HREF="http://www.delphi-jedi.org">Project JEDI</A></STRONG>. Commercial license available from the <STRONG><A HREF="http://www.doc-o-matic.com">Doc-O-Matic site</A></STRONG>.</DIV>
+</DIV></BODY></HTML>

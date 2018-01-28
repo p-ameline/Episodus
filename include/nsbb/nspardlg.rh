@@ -1,0 +1,21 @@
+#define 		IDC_SINGULIER 					101
+#define 		IDC_DES 							102
+#define 		IDC_LES 							103
+#define 		IDC_CERTITUDE 					105
+#define 		IDC_INTERET		 				108
+#define		IDD_PARAMETRE					001
+
+#define		IDD_0P							118
+#define		IDD_1P							113
+#define		IDD_2P							116
+#define		IDD_3P							117
+#define		IDD_4P							111
+
+#define		IDD_0_VAL			 			112
+#define		IDD_25_VAL			 			114
+#define		IDD_50_VAL			 			125
+#define		IDD_75_VAL			 			115
+#define		IDD_100_VAL			 			120
+#define		IDD_ABSENT_VAL			 		121
+#define		IDD_EVENTUEL_VAL			 	107
+#define		IDD_PRESENT_VAL			 	109

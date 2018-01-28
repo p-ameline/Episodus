@@ -1,0 +1,39 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+<TITLE>BlockSIGPIPE</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <META name="GENERATOR" content="Doc-O-Matic">
+    <LINK rel="STYLESHEET" href="default.css" type="text/css">
+
+<SCRIPT LANGUAGE="JavaScript1.2" SRC="scripts.js"></SCRIPT>
+</HEAD>
+<BODY CLASS="Element57">
+<TABLE BORDER="0" BGCOLOR="#AACCFF" WIDTH="100%" CELLSPACING="0" CELLPADDING="0">
+<TR><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element1">
+Indy 9</DIV>
+</TD><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element2">
+<A HREF="content.html" CLASS="Element59">Content</A> | <A HREF="idx.html" CLASS="Element59">Index</A> | <A HREF="symref.html" CLASS="Element59">Reference</A></DIV>
+</TD></TR></TABLE><DIV CLASS="Element58">
+<DIV CLASS="Element5">
+BlockSIGPIPE</DIV>
+<DIV CLASS="Element7">
+<A HREF="008500.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Blocks the SIGPIPE signal on the Linux platform.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+BlockSIGPIPE is a procedure defined and used on the Linux platform to suspend the action handler for the SIGPIPE signal. SIGPIPE can be raised when the active listener for a blocking <A HREF="007071.html" CLASS="Element59">socket</A> operation has been disconnected or reset (indicated by the error number ECONNRESET). This condition can occur on some systems during protocol exchanges, or when a thread terminates in a server application.<P CLASS="Element10">
+BlockSIGPIPE is called from the initialization section of the <A HREF="002908.html" CLASS="Element59">IdStackLinux.pas</A> unit after assigning the <A HREF="000690.html" CLASS="Element59">GSocketListClass</A> for the platform.<P CLASS="Element10">
+BlockSIGPIPE creates a signal set that includes the SIGPIPE signal number, and masks the blocked signalled using sigprocmask during the lifetime of the Linux protocol stack handler.<P CLASS="Element10">
+If an application is interested in the SIGPIPE signal, it must call <A HREF="008249.html" CLASS="Element59">UnblockSIGPIPE</A> to re-enable the signal action handler. The application must then handle or ignore signals raised during execution.</DIV>
+</DIV>
+<DIV CLASS="Element62">
+<HR>Created with Doc-O-Matic 2 donated to <STRONG><A HREF="http://www.delphi-jedi.org">Project JEDI</A></STRONG>. Commercial license available from the <STRONG><A HREF="http://www.doc-o-matic.com">Doc-O-Matic site</A></STRONG>.</DIV>
+</DIV></BODY></HTML>

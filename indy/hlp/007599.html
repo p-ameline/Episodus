@@ -1,0 +1,158 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+<TITLE>TIdNNTPThread</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <META name="GENERATOR" content="Doc-O-Matic">
+    <LINK rel="STYLESHEET" href="default.css" type="text/css">
+
+<SCRIPT LANGUAGE="JavaScript1.2" SRC="scripts.js"></SCRIPT>
+</HEAD>
+<BODY CLASS="Element57">
+<TABLE BORDER="0" BGCOLOR="#AACCFF" WIDTH="100%" CELLSPACING="0" CELLPADDING="0">
+<TR><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element1">
+Indy 9</DIV>
+</TD><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element2">
+<A HREF="content.html" CLASS="Element59">Content</A> | <A HREF="idx.html" CLASS="Element59">Index</A> | <A HREF="symref.html" CLASS="Element59">Reference</A></DIV>
+</TD></TR></TABLE><DIV CLASS="Element58">
+<DIV CLASS="Element5">
+TIdNNTPThread</DIV>
+<DIV CLASS="Element7">
+<A HREF="012983.html" CLASS="Element59">Hierarchy</A>, <A HREF="012984.html" CLASS="Element59">Properties</A>, <A HREF="012985.html" CLASS="Element59">Methods</A>, <A HREF="012986.html" CLASS="Element59">Events</A>, <A HREF="012987.html" CLASS="Element59">See Also</A>, <A HREF="002306.html" CLASS="Element59">Unit: IdNNTPServer</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Represents a client connection in an NNTP server implementation.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12">TIdNNTPThread = <STRONG>class</STRONG>(<A HREF="007613.html" CLASS="Element59">TIdPeerThread</A>)</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Unit</DIV>
+<DIV CLASS="Element69">
+<A HREF="002306.html" CLASS="Element59">IdNNTPServer</A></DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+TIdNNTPThread is a <A HREF="007613.html" CLASS="Element59">TIdPeerThread</A> descendant that represents a threaded client connection for the multithreaded NNTP server. TIdNNTPThread contains properties that represent state information for the NNTP client, including <A HREF="007599.html#0002" CLASS="Element59">CurrentArticle</A>, <A HREF="007599.html#0003" CLASS="Element59">CurrentGroup</A>, and <A HREF="007599.html#0004" CLASS="Element59">ModeReader</A>. TIdNNTPThread is used an argument to both general and command event handlers in an NNTP server implementation.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0000">TIdNNTPThread.Authenticated</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007599.html" CLASS="Element59">TIdNNTPThread</A></DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> Authenticated: Boolean;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Authenticated</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0002">TIdNNTPThread.CurrentArticle</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007599.html" CLASS="Element59">TIdNNTPThread</A>, <A HREF="012988.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Represents the currently selected article number in the active newsgroup.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> CurrentArticle: Integer;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+CurrentArticle is a read-only Integer property that represents the message number selected in <A HREF="007599.html#0003" CLASS="Element59">CurrentGroup</A>. CurrentArticle is updated when a threaded NNTP client selects a newsgroup or retrieves an article.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0003">TIdNNTPThread.CurrentGroup</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007599.html" CLASS="Element59">TIdNNTPThread</A>, <A HREF="012989.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Currently active newsgroup for the threaded NNTP client connection.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> CurrentGroup: <STRONG>string</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+CurrentGroup is a read-only String property that indicates the active newsgroup for a threaded NNTP client connection. CurrentGroup is updated when the <A HREF="007244.html" CLASS="Element59">TIdCommandHandler</A> for the NNTP ARTICLE command is triggered during execution of the threaded NNTP client connection.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0004">TIdNNTPThread.ModeReader</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007599.html" CLASS="Element59">TIdNNTPThread</A>, <A HREF="012990.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Indicates the threaded client connection is in reader mode.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> ModeReader: Boolean;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+ModeReader is a Boolean property that indicates the threaded NNTP client connection is using Newsreader mode instead of command streaming. ModeReader is updated an NNTP server responds to the <A HREF="007244.html" CLASS="Element59">TIdCommandHandler</A> used for the NNTP MODE READER command.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0005">TIdNNTPThread.Password</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007599.html" CLASS="Element59">TIdNNTPThread</A></DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> Password: <STRONG>string</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Password</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0006">TIdNNTPThread.UserName</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007599.html" CLASS="Element59">TIdNNTPThread</A></DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> UserName: <STRONG>string</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+UserName</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0001">TIdNNTPThread.Create</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007599.html" CLASS="Element59">TIdNNTPThread</A>, <A HREF="012991.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Constructor for the object instance.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>constructor</STRONG> Create(ACreateSuspended: Boolean = True); <STRONG>override</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Create is the constructor for the object instance. Create calls the inherited Create method using ACreateSuspended to set the initial thread state. Create also sets the default value for the <A HREF="007599.html#0002" CLASS="Element59">CurrentArticle</A> indicator to 0.</DIV>
+</DIV>
+<DIV CLASS="Element62">
+<HR>Created with Doc-O-Matic 2 donated to <STRONG><A HREF="http://www.delphi-jedi.org">Project JEDI</A></STRONG>. Commercial license available from the <STRONG><A HREF="http://www.doc-o-matic.com">Doc-O-Matic site</A></STRONG>.</DIV>
+</DIV></BODY></HTML>

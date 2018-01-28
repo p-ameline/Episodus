@@ -1,0 +1,118 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+<TITLE>TIdThreadSafe</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <META name="GENERATOR" content="Doc-O-Matic">
+    <LINK rel="STYLESHEET" href="default.css" type="text/css">
+
+<SCRIPT LANGUAGE="JavaScript1.2" SRC="scripts.js"></SCRIPT>
+</HEAD>
+<BODY CLASS="Element57">
+<TABLE BORDER="0" BGCOLOR="#AACCFF" WIDTH="100%" CELLSPACING="0" CELLPADDING="0">
+<TR><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element1">
+Indy 9</DIV>
+</TD><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element2">
+<A HREF="content.html" CLASS="Element59">Content</A> | <A HREF="idx.html" CLASS="Element59">Index</A> | <A HREF="symref.html" CLASS="Element59">Reference</A></DIV>
+</TD></TR></TABLE><DIV CLASS="Element58">
+<DIV CLASS="Element5">
+TIdThreadSafe</DIV>
+<DIV CLASS="Element7">
+<A HREF="014420.html" CLASS="Element59">Hierarchy</A>, <A HREF="014421.html" CLASS="Element59">Methods</A>, <A HREF="014422.html" CLASS="Element59">See Also</A>, <A HREF="002930.html" CLASS="Element59">Unit: IdThreadSafe</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Implements the ancestor for thread-safe data types.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12">TIdThreadSafe = <STRONG>class</STRONG></PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Unit</DIV>
+<DIV CLASS="Element69">
+<A HREF="002930.html" CLASS="Element59">IdThreadSafe</A></DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+TIdThreadSafe is a TObject descendant that represents the base class for thread-safe data types in Indy applications. TIdThreadSafe uses a protected TCriticalSection to provide resource protection in multi-threaded applications. TIdThreadSafe also implements the <A HREF="007857.html#0002" CLASS="Element59">Lock</A> and <A HREF="007857.html#0003" CLASS="Element59">Unlock</A> methods to access the resource protection block for the data type.<P CLASS="Element10">
+<STRONG>Note</STRONG>: TIdThreadSafe does not implement a specific data type value, and should not be instantiated in an application. Use one of the descendant classes that realizes a data type, such as <A HREF="007859.html" CLASS="Element59">TIdThreadSafeInteger</A>, <A HREF="007861.html" CLASS="Element59">TIdThreadSafeString</A>, or <A HREF="007862.html" CLASS="Element59">TIdThreadSafeStringList</A>.<P CLASS="Element10">
+TIdThreadSafe and descendant classes are used as an alternative to ThreadVars which does not allow runtime initialization and assignment using C++ Builder. TIdThreadSafe is used in <A HREF="002943.html" CLASS="Element59">IdTunnelSlave.pas</A> to declared UniqueID for use with tunnel slave components.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0000">TIdThreadSafe.Create</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007857.html" CLASS="Element59">TIdThreadSafe</A>, <A HREF="014423.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Constructor for the object instance.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>constructor</STRONG> Create; <STRONG>virtual</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Create is the constructor for the object instance. Create calls the inherited Create method, and allocates the protected TCriticalSection used for resource protection.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0001">TIdThreadSafe.Destroy</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007857.html" CLASS="Element59">TIdThreadSafe</A>, <A HREF="014424.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Frees the object instance.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>destructor</STRONG> Destroy; <STRONG>override</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Destroy is the destructor for the object instance. Destroy frees and releases resources allocated for the critical section created in the constructor for the object instance, and calls the inherited Destroy method prior to exit.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0002">TIdThreadSafe.Lock</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007857.html" CLASS="Element59">TIdThreadSafe</A>, <A HREF="014425.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Enables resource protection for the associated data type.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>procedure</STRONG> Lock;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Lock is a procedure used to engage the resource protection capabilities of the class for the associated data type. Lock executes the TCriticalSection.Enter method to enable the resource protection block. Use <A HREF="007857.html#0003" CLASS="Element59">Unlock</A> to release the resource protection block for the class instance.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0003">TIdThreadSafe.Unlock</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007857.html" CLASS="Element59">TIdThreadSafe</A>, <A HREF="014426.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Disables resource protection for the associated data type.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>procedure</STRONG> Unlock;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Unlock is a procedure used to disengage the resource protection capabilities of the class for the associated data type. Unlock executes the TCriticalSection.Leave method to disable the resource protection block. Use <A HREF="007857.html#0002" CLASS="Element59">Lock</A> to enable the resource protection block for the class instance.</DIV>
+</DIV>
+<DIV CLASS="Element62">
+<HR>Created with Doc-O-Matic 2 donated to <STRONG><A HREF="http://www.delphi-jedi.org">Project JEDI</A></STRONG>. Commercial license available from the <STRONG><A HREF="http://www.doc-o-matic.com">Doc-O-Matic site</A></STRONG>.</DIV>
+</DIV></BODY></HTML>

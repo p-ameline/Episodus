@@ -1,0 +1,257 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+<TITLE>TIdComponent</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <META name="GENERATOR" content="Doc-O-Matic">
+    <LINK rel="STYLESHEET" href="default.css" type="text/css">
+
+<SCRIPT LANGUAGE="JavaScript1.2" SRC="scripts.js"></SCRIPT>
+</HEAD>
+<BODY CLASS="Element57">
+<TABLE BORDER="0" BGCOLOR="#AACCFF" WIDTH="100%" CELLSPACING="0" CELLPADDING="0">
+<TR><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element1">
+Indy 9</DIV>
+</TD><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element2">
+<A HREF="content.html" CLASS="Element59">Content</A> | <A HREF="idx.html" CLASS="Element59">Index</A> | <A HREF="symref.html" CLASS="Element59">Reference</A></DIV>
+</TD></TR></TABLE><DIV CLASS="Element58">
+<DIV CLASS="Element5">
+TIdComponent</DIV>
+<DIV CLASS="Element7">
+<A HREF="010183.html" CLASS="Element59">Hierarchy</A>, <A HREF="010184.html" CLASS="Element59">Properties</A>, <A HREF="010185.html" CLASS="Element59">Methods</A>, <A HREF="010186.html" CLASS="Element59">Events</A>, <A HREF="010187.html" CLASS="Element59">See Also</A>, <A HREF="002142.html" CLASS="Element59">Unit: IdComponent</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Ancestor of all Indy client and server components.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12">TIdComponent = <STRONG>class</STRONG>(<A HREF="007213.html" CLASS="Element59">TIdBaseComponent</A>)</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Unit</DIV>
+<DIV CLASS="Element69">
+<A HREF="002142.html" CLASS="Element59">IdComponent</A></DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+TIdComponent is the ancestor of all Indy components which implement client or server functionality. TIdComponent implements properties used to identify the host name for the local computer system, and event handlers used to signal state change, input, and output operations using the component.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0005">TIdComponent.LocalName</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007246.html" CLASS="Element59">TIdComponent</A>, <A HREF="010188.html" CLASS="Element59">See Also</A>, <A HREF="010189.html" CLASS="Element59">Example</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Name of the local computer.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> LocalName: <STRONG>string</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+LocalName is a read-only String property that contains the host name of the user's computer system.<P CLASS="Element10">
+LocalName uses the <A HREF="007740.html" CLASS="Element59">TIdStack</A> instance variable <A HREF="000691.html" CLASS="Element59">GStack</A> to access the WSHetHostName method in retrieving the LocalName value.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0000">TIdComponent.BeginWork</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007246.html" CLASS="Element59">TIdComponent</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Used to trigger the OnBeginWork event.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>procedure</STRONG> BeginWork(AWorkMode: <A HREF="008114.html" CLASS="Element59">TWorkMode</A>; <STRONG>const</STRONG> ASize: Integer = 0); <STRONG>virtual</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+AWorkMode: TWorkMode</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Work mode for the peer connection.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+const ASize: Integer = 0</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Number of bytes to be read or written.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+BeginWork is a procedure used to trigger the OnBeginWork event. BeginWork maintains the number of reads and writes pending, and size information for the initial read and write operation.<P CLASS="Element10">
+<I>AWorkMode</I> is a <A HREF="008114.html" CLASS="Element59">TWorkMode</A> enumerated type, and can contain the values:<P CLASS="Element10">
+<UL>
+<LI>wmRead - The component is reading data from the peer.<P CLASS="Element10">
+<LI>wmWrite - The component is sending data to the peer.</UL>
+<P CLASS="Element10">
+<I>ASize</I> is the optional value indicating the number of bytes expected by to be received or sent by the connection.<P CLASS="Element10">
+Calls to the BeginWork procedure can be nested, but the OnBeginWork event handler will be invoked only for the initial call to BeginWork.<P CLASS="Element10">
+Applications must assign a procedure to the OnBeginWork event handler in order to respond to the event notification.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0001">TIdComponent.Create</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007246.html" CLASS="Element59">TIdComponent</A>, <A HREF="010190.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Constructor for the object instance.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>constructor</STRONG> Create(axOwner: TComponent); <STRONG>override</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+axOwner: TComponent</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Component that owns the object instance.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Create is the constructor of the object instance, and relies on the inherited Create constructor.<P CLASS="Element10">
+Create updates the variable <A HREF="000691.html" CLASS="Element59">GStack</A> by creating a <A HREF="007740.html" CLASS="Element59">TIdStack</A> instance, if one has not already been assigned, and increments a global instance count variable prior to completion of the constructor. Create uses a TCriticalSection to protect access to the <A HREF="000691.html" CLASS="Element59">GStack</A> instance, which is released prior to exiting the method.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0002">TIdComponent.Destroy</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007246.html" CLASS="Element59">TIdComponent</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Destructor for the object instance.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>destructor</STRONG> Destroy; <STRONG>override</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Destroy is the destructor for the object instance.<P CLASS="Element10">
+Destroy is responsible for decrementing the value of <I>gnInstanceCount</I> prior to completion of the destructor. When <I>gnInstanceCount</I> reaches <STRONG>0</STRONG>, the <A HREF="007740.html" CLASS="Element59">TIdStack</A> instance in <I><A HREF="000691.html" CLASS="Element59">GStack</A></I> is Freed and set to <STRONG>Nil</STRONG>.<P CLASS="Element10">
+Applications should not call the Destroy method, but use Free instead.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0003">TIdComponent.DoWork</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007246.html" CLASS="Element59">TIdComponent</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Triggers the OnWork event handler.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>procedure</STRONG> DoWork(AWorkMode: <A HREF="008114.html" CLASS="Element59">TWorkMode</A>; <STRONG>const</STRONG> ACount: Integer); <STRONG>virtual</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+AWorkMode: TWorkMode</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Work mode for the peer connection.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+const ACount: Integer</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Number of bytes to be handled.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+DoWork is a procedure used to trigger the OnWork event handler. DoWork is used to signal that the indicated work mode will be used to handle the specified number of bytes.<P CLASS="Element10">
+<I>AWorkMode</I> is a <A HREF="008114.html" CLASS="Element59">TWorkMode</A> enumerated type, and can contain the values:<P CLASS="Element10">
+<UL>
+<LI>wmRead - The component is reading data from the peer.<P CLASS="Element10">
+<LI>wmWrite - The component is sending data to the peer.</UL>
+<P CLASS="Element10">
+<I>ACount</I> is the number of bytes to be affected by the AWorkMode operation.<P CLASS="Element10">
+DoWork allows the application to respond to calls to the <A HREF="007246.html#0000" CLASS="Element59">BeginWork</A> method, and maintains the number of bytes available to be process in the OnWork event handler. DoWork will not have any effect unless <A HREF="007246.html#0000" CLASS="Element59">BeginWork</A> is called prior to calling DoWork.<P CLASS="Element10">
+The Application must assign a procedure to the OnWork event handler in order to respond to the event notification.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0004">TIdComponent.EndWork</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007246.html" CLASS="Element59">TIdComponent</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Triggers the OnEndWork event handler.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>procedure</STRONG> EndWork(AWorkMode: <A HREF="008114.html" CLASS="Element59">TWorkMode</A>); <STRONG>virtual</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+AWorkMode: TWorkMode</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Work mode for the peer connection.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+EndWork is a procedure used to trigger the OnEndWork eventhandler. EndWork maintains the number of reads and writes pending, and size information for the initial read and write operations.<P CLASS="Element10">
+<I>AWorkMode</I> is a <A HREF="008114.html" CLASS="Element59">TWorkMode</A> enumerated type, and can contain the values:<P CLASS="Element10">
+<UL>
+<LI>wmRead - The component is reading data from the peer.<P CLASS="Element10">
+<LI>wmWrite - The component is sending data to the peer.</UL>
+<P CLASS="Element10">
+Calls to the EndWork procedure can be nested, but the OnEndWork event handler will be invoked only for the initial call to EndWork.<P CLASS="Element10">
+Applications must assign a procedure to the OnEndWork event handler in order to respond to the event notification.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0006">TIdComponent.OnStatus</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007246.html" CLASS="Element59">TIdComponent</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Represents the current connection status event handler.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> OnStatus: <A HREF="007747.html" CLASS="Element59">TIdStatusEvent</A>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+aaArgs</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Format arguments used to construct the current status text message.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+axStatus</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+The current connection status.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+OnStatus is the <A HREF="007747.html" CLASS="Element59">TIdStatusEvent</A> event handler triggered when the current connection state is changed. OnStatus is triggered by the DoStatus method, which provides the parameters used by the event handler.<P CLASS="Element10">
+axStatus is the <A HREF="007746.html" CLASS="Element59">TIdStatus</A> value for the current connection.<P CLASS="Element10">
+aaArgs is the optional arguments for the Format function, that will be used to construct the text message that represents the current connection state.</DIV>
+</DIV>
+<DIV CLASS="Element62">
+<HR>Created with Doc-O-Matic 2 donated to <STRONG><A HREF="http://www.delphi-jedi.org">Project JEDI</A></STRONG>. Commercial license available from the <STRONG><A HREF="http://www.doc-o-matic.com">Doc-O-Matic site</A></STRONG>.</DIV>
+</DIV></BODY></HTML>

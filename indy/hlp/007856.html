@@ -1,0 +1,52 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+<TITLE>TIdThreadPriority</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <META name="GENERATOR" content="Doc-O-Matic">
+    <LINK rel="STYLESHEET" href="default.css" type="text/css">
+
+<SCRIPT LANGUAGE="JavaScript1.2" SRC="scripts.js"></SCRIPT>
+</HEAD>
+<BODY CLASS="Element57">
+<TABLE BORDER="0" BGCOLOR="#AACCFF" WIDTH="100%" CELLSPACING="0" CELLPADDING="0">
+<TR><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element1">
+Indy 9</DIV>
+</TD><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element2">
+<A HREF="content.html" CLASS="Element59">Content</A> | <A HREF="idx.html" CLASS="Element59">Index</A> | <A HREF="symref.html" CLASS="Element59">Reference</A></DIV>
+</TD></TR></TABLE><DIV CLASS="Element58">
+<DIV CLASS="Element5">
+TIdThreadPriority</DIV>
+<DIV CLASS="Element7">
+<A HREF="015505.html" CLASS="Element59">See Also</A>, <A HREF="002193.html" CLASS="Element59">Unit: IdGlobal</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Indicates the scheduling priority for a thread.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12">TIdThreadPriority = TThreadPriority;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Unit</DIV>
+<DIV CLASS="Element69">
+<A HREF="002193.html" CLASS="Element59">IdGlobal</A></DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+TIdThreadPriority is an enumerated type used when scheduling the priority of a thread relative to other processes on the local computer system. TIdThreadPriority is a platform-specific enumeration, and contains differing values for the Linux or Windows platforms.<P CLASS="Element10">
+On the Windows platform, TIdThreadPriority is defined as a TThreadPriority type, and represents the values for the Priority property of a thread component. Windows schedules CPU cycles to each thread based on a priority scale; the Priority property adjusts a thread's priority higher or lower on the scale.<P CLASS="Element10">
+For the Linux platform, TIdThreadPriority is defined as an enumeration. Values Meaning ------ ------- <A HREF="008035.html" CLASS="Element59">tpIdle</A> The thread executes only when the system is idle. Windows won't interrupt other threads to execute a thread with <A HREF="008035.html" CLASS="Element59">tpIdle</A> priority. <A HREF="008037.html" CLASS="Element59">tpLowest</A> The thread's priority is two points below normal. <A HREF="008036.html" CLASS="Element59">tpLower</A> The thread's priority is one point below normal. <A HREF="008039.html" CLASS="Element59">tpNormal</A> The thread has normal priority. <A HREF="008033.html" CLASS="Element59">tpHigher</A> The thread's priority is one point above normal. <A HREF="008034.html" CLASS="Element59">tpHighest</A> The thread's priority is two points above normal. <A HREF="008042.html" CLASS="Element59">tpTimeCritical</A> The thread gets highest priority.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Notes</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Boosting the thread priority of a CPU intensive operation may adversely affect other threads in the application. Only apply priority boosts to threads that spend most of their time waiting for external events.</DIV>
+</DIV>
+<DIV CLASS="Element62">
+<HR>Created with Doc-O-Matic 2 donated to <STRONG><A HREF="http://www.delphi-jedi.org">Project JEDI</A></STRONG>. Commercial license available from the <STRONG><A HREF="http://www.doc-o-matic.com">Doc-O-Matic site</A></STRONG>.</DIV>
+</DIV></BODY></HTML>

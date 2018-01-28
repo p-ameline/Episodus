@@ -1,0 +1,127 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+<TITLE>TIdHTTPServer</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <META name="GENERATOR" content="Doc-O-Matic">
+    <LINK rel="STYLESHEET" href="default.css" type="text/css">
+
+<SCRIPT LANGUAGE="JavaScript1.2" SRC="scripts.js"></SCRIPT>
+</HEAD>
+<BODY CLASS="Element57">
+<TABLE BORDER="0" BGCOLOR="#AACCFF" WIDTH="100%" CELLSPACING="0" CELLPADDING="0">
+<TR><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element1">
+Indy 9</DIV>
+</TD><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element2">
+<A HREF="content.html" CLASS="Element59">Content</A> | <A HREF="idx.html" CLASS="Element59">Index</A> | <A HREF="symref.html" CLASS="Element59">Reference</A></DIV>
+</TD></TR></TABLE><DIV CLASS="Element58">
+<DIV CLASS="Element5">
+TIdHTTPServer</DIV>
+<DIV CLASS="Element7">
+<A HREF="011581.html" CLASS="Element59">Hierarchy</A>, <A HREF="011582.html" CLASS="Element59">Properties</A>, <A HREF="011583.html" CLASS="Element59">Methods</A>, <A HREF="011584.html" CLASS="Element59">Events</A>, <A HREF="011585.html" CLASS="Element59">See Also</A>, <A HREF="002253.html" CLASS="Element59">Unit: IdHTTPServer</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Implements an HTTP Server.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12">TIdHTTPServer = <STRONG>class</STRONG>(<A HREF="007271.html" CLASS="Element59">TIdCustomHTTPServer</A>)</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Unit</DIV>
+<DIV CLASS="Element69">
+<A HREF="002253.html" CLASS="Element59">IdHTTPServer</A></DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+TIdHTTPServer is a <A HREF="007271.html" CLASS="Element59">TIdCustomHTTPServer</A> descendant that is a server implementation of the Hypertext Transfer Protocol (HTTP) as described in the Internet Standards document:<P CLASS="Element10">
+<UL>
+<LI>RFC 1945 - Hypertext Transfer Protocol (HTTP) version 1.0 (http://www.rfc-editor.org/rfc/rfc1945.txt)<P CLASS="Element10">
+<LI>RFC 2616 - Hypertext Transfer Protocol (HTTP) version 1.1 (http://www.rfc-editor.org/rfc/rfc2616.txt)</UL>
+<P CLASS="Element10">
+TIdHTTPServer publishes the inherited <A HREF="007392.html#0001" CLASS="Element59">OnCreatePostStream</A> and <A HREF="007392.html#0000" CLASS="Element59">OnCommandGet</A> event handlers for the HTTP server implementation.<P CLASS="Element10">
+TIdHTTPServer also supports the Secure Hypertext Transport protocol (HTTPS) as described in the Internet Standards document:<P CLASS="Element10">
+<UL>
+<LI>RFC 2660 - The Secure HyperText Transfer Protocol (http://www.rfc-editor.org/rfc/rfc2660.txt)</UL>
+<P CLASS="Element10">
+Assign an instance of <A HREF="007676.html" CLASS="Element59">TIdServerInterceptOpenSSL</A> to the Intercept property to allow use of the HTTPS protocol. For the Windows platform, you must install the Indy OpenSSL support .DLL's available at http://www.intelicom.si to enable Secure Socket Layer support.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0000">TIdHTTPServer.OnCommandGet</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007392.html" CLASS="Element59">TIdHTTPServer</A>, <A HREF="011586.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Event handler signalled for HTTP server GET, POST, and HEAD requests.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> OnCommandGet;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+AThread</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+The peer thread generating the event.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+RequestInfo</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+The request object reference.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+ResponseInfo</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+The response object reference.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+OnCommandGet is the <A HREF="007379.html" CLASS="Element59">TIdHTTPGetEvent</A> event handler used to respond to events generated for the HTTP server GET, POST, and HEAD commands. OnCommandGet is published in <A HREF="007392.html" CLASS="Element59">TIdHTTPServer</A>, and is used during execution of the client thread to form an HTTP response to the HTTP request from the client connection.<P CLASS="Element10">
+The server implementation may assign a procedure to the OnCommandGet event handler to allow the server to respond to the HTTP commands. <STRONG>Note</STRONG>: When OnCommandGet is unassigned, the HTTP request will be read from the client connection and an HTTP prototcol error will be sent in the HTTP reponse.<P CLASS="Element10">
+OnCommandGet can be used to manipulate properties and methods of the RequestInfo and ResponseInfo parameters prior to allowing the server to <A HREF="006944.html" CLASS="Element59">send</A> the response to the HTTP client.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0001">TIdHTTPServer.OnCreatePostStream</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007392.html" CLASS="Element59">TIdHTTPServer</A>, <A HREF="011587.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Event handler tht allows creation of the POST stream for a client thread.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> OnCreatePostStream;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+ASender</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+theraded client conncetion for the event notification.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+VPostStream</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+steam allocated for the HTTP post request.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+OnCreatePostStream is a <A HREF="008011.html" CLASS="Element59">TOnCreatePostStream</A> property that represents the event handler triggered when a client thread needs to create a stream used in an HTTP POST request. OnCreatePostStream is used during execution of the thread client connection identified by ASender. OnCreatePostStream is a published property in <A HREF="007392.html" CLASS="Element59">TIdHTTPServer</A>.<P CLASS="Element10">
+The server implementation may assign a procedure to the event handler to allow responding to the event notification. The event handler can perform processing required prior to creation of a stream class instance. The event handler can create and assign a stream class instance to VPostStream when appropriate, or retun the value Nil. If VPostStream is unassigned, a TStringStream instance will be created prior to execution of a command handler for the HTTP POST request.</DIV>
+</DIV>
+<DIV CLASS="Element62">
+<HR>Created with Doc-O-Matic 2 donated to <STRONG><A HREF="http://www.delphi-jedi.org">Project JEDI</A></STRONG>. Commercial license available from the <STRONG><A HREF="http://www.doc-o-matic.com">Doc-O-Matic site</A></STRONG>.</DIV>
+</DIV></BODY></HTML>

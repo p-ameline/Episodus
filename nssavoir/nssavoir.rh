@@ -1,0 +1,17 @@
+//// NsSavoir.rh
+//
+
+// Dialogue IDD_CAPTURE
+
+#define IDC_CAPTCTXBOX  101
+#define IDC_LIBELLE	    102
+#define IDC_AUTRE	    103
+#define IDC_LEARN	    104
+
+// Dialogue IDD_CAPTFMT
+
+#define IDC_CAPTFMTBOX  101
+
+#define IDC_ROSACE	    110
+
+

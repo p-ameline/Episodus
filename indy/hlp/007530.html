@@ -1,0 +1,129 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+<TITLE>TIdMappedPop3</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <META name="GENERATOR" content="Doc-O-Matic">
+    <LINK rel="STYLESHEET" href="default.css" type="text/css">
+
+<SCRIPT LANGUAGE="JavaScript1.2" SRC="scripts.js"></SCRIPT>
+</HEAD>
+<BODY CLASS="Element57">
+<TABLE BORDER="0" BGCOLOR="#AACCFF" WIDTH="100%" CELLSPACING="0" CELLPADDING="0">
+<TR><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element1">
+Indy 9</DIV>
+</TD><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element2">
+<A HREF="content.html" CLASS="Element59">Content</A> | <A HREF="idx.html" CLASS="Element59">Index</A> | <A HREF="symref.html" CLASS="Element59">Reference</A></DIV>
+</TD></TR></TABLE><DIV CLASS="Element58">
+<DIV CLASS="Element5">
+TIdMappedPop3</DIV>
+<DIV CLASS="Element7">
+<A HREF="012303.html" CLASS="Element59">Hierarchy</A>, <A HREF="012304.html" CLASS="Element59">Properties</A>, <A HREF="012305.html" CLASS="Element59">Methods</A>, <A HREF="012306.html" CLASS="Element59">Events</A>, <A HREF="012307.html" CLASS="Element59">See Also</A>, <A HREF="002283.html" CLASS="Element59">Unit: IdMappedPortTCP</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Implements a port-based proxy for POP3 connections.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12">TIdMappedPop3 = <STRONG>class</STRONG>(<A HREF="007538.html" CLASS="Element59">TIdMappedTelnet</A>)</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Unit</DIV>
+<DIV CLASS="Element69">
+<A HREF="002283.html" CLASS="Element59">IdMappedPortTCP</A></DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+TIdMappedPop3 is a <A HREF="007538.html" CLASS="Element59">TIdMappedTelnet</A> descendant hat implements a port-based proxy for POP3 connections. TIdMappedPop3 allows threaded client connections to a local <A HREF="007618.html" CLASS="Element59">TIdPOP3Server</A> to be redirected to remote POP3 server using port-mapping. TIdMappedPop3 creates instances of <A HREF="007531.html" CLASS="Element59">TIdMappedPop3Thread</A> to service local outbound connections to the proxy server, and establish the remote connection using the specified host address and port number.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0001">TIdMappedPop3.DefaultPort</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007530.html" CLASS="Element59">TIdMappedPop3</A>, <A HREF="012308.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Default port number used for the local client connection to the port-based proxy.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> DefaultPort: integer;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+DefaultPort is a published property in <A HREF="007530.html" CLASS="Element59">TIdMappedPop3</A> that represents the default port number used for the local client connection in the port-based proxy. DefaultPort is used when the TIdMappedPop3Thread.OutboundConnect method opens a connection from the proxy to the host.<P CLASS="Element10">
+The default value for DefaultPort is <A HREF="002619.html" CLASS="Element59">IdPORT_POP3</A> as assigned in <A HREF="007530.html#0000" CLASS="Element59">Create</A>.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0002">TIdMappedPop3.MappedPort</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007530.html" CLASS="Element59">TIdMappedPop3</A>, <A HREF="012309.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Port number used for connecting to the remote host for the port-based proxy.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> MappedPort: Integer;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+MappedPort is a published property in <A HREF="007530.html" CLASS="Element59">TIdMappedPop3</A> that represents the port number used for connecting to the remote host for the port-based proxy. MappedPort is used when the TIdMappedPop3Thread.OutboundConnect method opens a connection from the proxy to the remote host.<P CLASS="Element10">
+The default value for MappedPort is <A HREF="002619.html" CLASS="Element59">IdPORT_POP3</A> as assigned in <A HREF="007530.html#0000" CLASS="Element59">Create</A>.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0003">TIdMappedPop3.UserHostDelimiter</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007530.html" CLASS="Element59">TIdMappedPop3</A>, <A HREF="012310.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Delimiter character between user name and host information from the local client connection.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> UserHostDelimiter: <STRONG>String</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+UserHostDelimiter is a String property that represents the delimiter character used to separate the User name and host portions of the command read from the local client connection to the port-based proxy. UserHostDelimiter is used when OutboundConnect is called for the executing proxy thread.<P CLASS="Element10">
+The default value for UserHostDelimiter is '#' (Decimal 35) as assigned in <A HREF="007530.html#0000" CLASS="Element59">Create</A>.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0000">TIdMappedPop3.Create</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007530.html" CLASS="Element59">TIdMappedPop3</A>, <A HREF="012311.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Constructor for the object instance.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>constructor</STRONG> Create(AOwner: TComponent); <STRONG>override</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+AOwner: TComponent</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Owner of the object instance.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Create is the constructor for the object instance. Create calls the inherited Create method using AOwner as the owner of the object instance. Create also sets the default values for properties in the POP3 port-based proxy. Create sets the ThreadClass created for local connections to the proxy server to the class type <A HREF="007531.html" CLASS="Element59">TIdMappedPop3Thread</A>, and the <A HREF="007530.html#0001" CLASS="Element59">DefaultPort</A> and <A HREF="007530.html#0002" CLASS="Element59">MappedPort</A> numbers used in the outbound client connection to <A HREF="002619.html" CLASS="Element59">IdPORT_POP3</A>.<P CLASS="Element10">
+Create initializes the Greeting used for client connections to the proxy to the numeric code 0 (zero) and text '+OK ' followed by the resource string RSPop3ProxyGreeting. ReplyUnknownCommand is initialized to contain the numeric code 0 (zero) and the text '-ERR ' followed by the resource string RSPop3UnknownCommand.<P CLASS="Element10">
+Create sets the default value for the <A HREF="007530.html#0003" CLASS="Element59">UserHostDelimiter</A> property to the character '#' (Decimal 35).</DIV>
+</DIV>
+<DIV CLASS="Element62">
+<HR>Created with Doc-O-Matic 2 donated to <STRONG><A HREF="http://www.delphi-jedi.org">Project JEDI</A></STRONG>. Commercial license available from the <STRONG><A HREF="http://www.doc-o-matic.com">Doc-O-Matic site</A></STRONG>.</DIV>
+</DIV></BODY></HTML>

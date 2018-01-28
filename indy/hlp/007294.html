@@ -1,0 +1,365 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+<TITLE>TIdDICTServer</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <META name="GENERATOR" content="Doc-O-Matic">
+    <LINK rel="STYLESHEET" href="default.css" type="text/css">
+
+<SCRIPT LANGUAGE="JavaScript1.2" SRC="scripts.js"></SCRIPT>
+</HEAD>
+<BODY CLASS="Element57">
+<TABLE BORDER="0" BGCOLOR="#AACCFF" WIDTH="100%" CELLSPACING="0" CELLPADDING="0">
+<TR><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element1">
+Indy 9</DIV>
+</TD><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element2">
+<A HREF="content.html" CLASS="Element59">Content</A> | <A HREF="idx.html" CLASS="Element59">Index</A> | <A HREF="symref.html" CLASS="Element59">Reference</A></DIV>
+</TD></TR></TABLE><DIV CLASS="Element58">
+<DIV CLASS="Element5">
+TIdDICTServer</DIV>
+<DIV CLASS="Element7">
+<A HREF="010685.html" CLASS="Element59">Hierarchy</A>, <A HREF="010686.html" CLASS="Element59">Properties</A>, <A HREF="010687.html" CLASS="Element59">Methods</A>, <A HREF="010688.html" CLASS="Element59">Events</A>, <A HREF="010689.html" CLASS="Element59">See Also</A>, <A HREF="002170.html" CLASS="Element59">Unit: IdDICTServer</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Implements a Dictionary Protocol server for dictionary databases.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12">TIdDICTServer = <STRONG>class</STRONG>(<A HREF="007831.html" CLASS="Element59">TIdTCPServer</A>)</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Unit</DIV>
+<DIV CLASS="Element69">
+<A HREF="002170.html" CLASS="Element59">IdDICTServer</A></DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+TIdDICTServer is a server implementation of the Dictionary Server Protocol as described in the Internet Standards document:<P CLASS="Element10">
+<UL>
+<LI>RFC 2229 - A Dictionary Server Protocol (http://www.rfc-editor.org/rfc/rfc2229.txt)</UL>
+<P CLASS="Element10">
+The Dictionary Server Protocol (DICT) is a TCP transaction based query/response protocol that allows a client to access dictionary definitions from a set of natural language dictionary databases.<P CLASS="Element10">
+TIdDICTServer uses an event-based architecture that provides event handlers for the following DICT protocol commands:<P CLASS="Element10">
+<UL>
+<LI>AUTH - <A HREF="007294.html#0002" CLASS="Element59">OnCommandAuth</A><P CLASS="Element10">
+<LI>CLIENT - <A HREF="007294.html#0003" CLASS="Element59">OnCommandClient</A><P CLASS="Element10">
+<LI>DEFINE - <A HREF="007294.html#0004" CLASS="Element59">OnCommandDefine</A><P CLASS="Element10">
+<LI>HELP - <A HREF="007294.html#0005" CLASS="Element59">OnCommandHelp</A><P CLASS="Element10">
+<LI>MATCH - <A HREF="007294.html#0006" CLASS="Element59">OnCommandMatch</A><P CLASS="Element10">
+<LI>OPTION - <A HREF="007294.html#0007" CLASS="Element59">OnCommandOption</A><P CLASS="Element10">
+<LI>QUIT - <A HREF="007294.html#0009" CLASS="Element59">OnCommandQuit</A><P CLASS="Element10">
+<LI>SASLAUTH - <A HREF="007294.html#000A" CLASS="Element59">OnCommandSASLAuth</A><P CLASS="Element10">
+<LI>SHOW - <A HREF="007294.html#000B" CLASS="Element59">OnCommandShow</A><P CLASS="Element10">
+<LI>STATUS - <A HREF="007294.html#000C" CLASS="Element59">OnCommandStatus</A></UL>
+<P CLASS="Element10">
+TIdDICTServer also provides the <A HREF="007294.html#0008" CLASS="Element59">OnCommandOther</A> event handler to respond to unknown DICT commands, or DICT protocol extensions.<P CLASS="Element10">
+TIdDICTServer does not provide an implementation of the event handlers. The application should assign procedures to the event handlers to respond to event notifications, or the result code 500 with the error message <A HREF="006308.html" CLASS="Element59">RSCMDNotRecognized</A> will be generated.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0001">TIdDICTServer.DefaultPort</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007294.html" CLASS="Element59">TIdDICTServer</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Default port number for the server.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> DefaultPort: integer;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+DefaultPort is a published property in <A HREF="007294.html" CLASS="Element59">TIdDICTServer</A> that identifies the default port number for the server, as described in the Dictionary Server Protocol specification. The default value for DefaultPort is <A HREF="002420.html" CLASS="Element59">IdPORT_DICT</A>.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0000">TIdDICTServer.Create</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007294.html" CLASS="Element59">TIdDICTServer</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Creates the new object instance.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>constructor</STRONG> Create(AOwner: TComponent); <STRONG>override</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+AOwner: TComponent</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Owner of the object instance.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Create is the constructor for the new TIdDictServer instance. Create relies on the inherited Create constructor, and sets <A HREF="007294.html#0001" CLASS="Element59">DefaultPort</A> to the standard port number used by the DICT protocol (<A HREF="002420.html" CLASS="Element59">IdPORT_DICT</A>).<P CLASS="Element10">
+SeeAso: <A HREF="007294.html#0001" CLASS="Element59">DefaultPort</A>, <A HREF="002420.html" CLASS="Element59">IdPORT_DICT</A></DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0002">TIdDICTServer.OnCommandAuth</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007294.html" CLASS="Element59">TIdDICTServer</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Specifies the DICT AUTH command event handler.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> OnCommandAuth: <A HREF="007289.html" CLASS="Element59">TIdDICTAuthEvent</A>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+OnCommandAuth specifies the <A HREF="007289.html" CLASS="Element59">TIdDICTAuthEvent</A> event handler used to respond to the DICT AUTH command, as described in RFC 2229. The DICT AUTH command allows a client to be authenticated using a user name and an APOP-style MD5 Checksum as described in RFC 1939.<P CLASS="Element10">
+Authentication is an optional server capability. The AUTH command may be implemented by a DICT server. Applications should assign a procedure to the event handler in order to respond to the DICT command, or the server will return the default message:<P CLASS="Element10">
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12">
+      500 command not recognized
+</PRE></DIV>
+</DIV>
+</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0003">TIdDICTServer.OnCommandClient</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007294.html" CLASS="Element59">TIdDICTServer</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Specifies the DICT CLIENT command event handler.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> OnCommandClient: <A HREF="007295.html" CLASS="Element59">TIdDICTShowEvent</A>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+OnCommandClient specifies the <A HREF="007295.html" CLASS="Element59">TIdDICTShowEvent</A> event handler used to respond to the DICT CLIENT command, as described in RFC 2229.<P CLASS="Element10">
+The CLIENT command allows the client to provide information about itself for possible logging and statistical purposes. All clients should <A HREF="006944.html" CLASS="Element59">send</A> this command after connecting to the server. All DICT servers must implement this command, though, the server doesn't have to do anything with the information provided by the client.<P CLASS="Element10">
+Applications should assign a procedure to the event handler in order to respond to the DICT command, or the server will return the default message:<P CLASS="Element10">
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12">      500 command not recognized</PRE></DIV>
+</DIV>
+</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0004">TIdDICTServer.OnCommandDefine</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007294.html" CLASS="Element59">TIdDICTServer</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Specifies the DICT DEFINE command event handler.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> OnCommandDefine: <A HREF="007290.html" CLASS="Element59">TIdDICTDefineEvent</A>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+OnCommandDefine specifies the <A HREF="007290.html" CLASS="Element59">TIdDICTDefineEvent</A> event handler used to respond to the DICT DEFINE command, as described in RFC 2229.<P CLASS="Element10">
+The DICT DEFINE command is used to perform a search for the specified word in the indicated database(s). Applications should assign a procedure to the event handler in order to respond to the DICT command, or the server will return the default message:<P CLASS="Element10">
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12">    500 command not recognized</PRE></DIV>
+</DIV>
+</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0005">TIdDICTServer.OnCommandHelp</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007294.html" CLASS="Element59">TIdDICTServer</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Specified the DICT HELP command event handler.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> OnCommandHelp: <A HREF="007291.html" CLASS="Element59">TIdDICTGetEvent</A>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+OnCommandHelp specified the <A HREF="007291.html" CLASS="Element59">TIdDICTGetEvent</A> event handler used to respond to the DICT HELP command, as described in RFC 2229.<P CLASS="Element10">
+The DICT HELP command provides a short summary of commands that are understood by this implementation of the DICT server. All DICT servers<STRONG> must</STRONG> implement the HELP command.<P CLASS="Element10">
+Applications should assign a procedure to the event handler in order to respond to the DICT command, or the server will return the default message:<P CLASS="Element10">
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12">      500 command not recognized</PRE></DIV>
+</DIV>
+</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0006">TIdDICTServer.OnCommandMatch</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007294.html" CLASS="Element59">TIdDICTServer</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Specifies the DICT MATCH command event handler.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> OnCommandMatch: <A HREF="007292.html" CLASS="Element59">TIdDICTMatchEvent</A>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+OnCommandMatch specifies the <A HREF="007292.html" CLASS="Element59">TIdDICTMatchEvent</A> event handler used to respond to the DICT MATCH command, as described in RFC 2229.<P CLASS="Element10">
+The DICT MATCH command is used to search the dictionary index and report the words found using a particular strategy. All DICT servers <STRONG> must</STRONG> implement the MATCH command, and <STRONG>must</STRONG> support the &quot;exact&quot; and &quot;prefix&quot; strategies.<P CLASS="Element10">
+The &quot;exact&quot; strategy performs a case-insensitive comparison. The &quot;prefix&quot; strategy is similar to &quot;exact&quot;, except that it only compares the first part of the word. These strategies are easily implemented and are generally the most useful. Other strategies are server dependent.<P CLASS="Element10">
+Other strategies that might be considered are matches based on substring, suffix, regular expressions, soundex [KNUTH73], and Levenshtein [PZ85] algorithms. These last two are especially useful for correcting spelling errors. Other useful strategies perform some sort of &quot;reverse&quot; lookup (i.e., by searching definitions to find the word that the query suggests).<P CLASS="Element10">
+Strategy may also contain the special character &quot;.&quot;, which indicates that the server should use the default strategy for that server. This is usually a derivative of the Levenshtein algorithm [PZ85].<P CLASS="Element10">
+Database contains the name of the database to be searched, in a form returned by SHOW DB, or one the following wildcard characters:<P CLASS="Element10">
+<UL>
+<LI>&quot;!&quot; - Search all databases until a match is found.<P CLASS="Element10">
+<LI>&quot;*&quot; - Search for all matches in the current database.</UL>
+<P CLASS="Element10">
+Applications should assign a procedure to the event handler in order to respond to the DICT command, or the server will return the default message:<P CLASS="Element10">
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12">      500 command not recognized</PRE></DIV>
+</DIV>
+</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0007">TIdDICTServer.OnCommandOption</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007294.html" CLASS="Element59">TIdDICTServer</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Specifies the event handler for the DICT OPTION command.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> OnCommandOption: <A HREF="007293.html" CLASS="Element59">TIdDICTOtherEvent</A>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+<A HREF="007294.html" CLASS="Element59">TIdDICTServer</A> uses the OnCommandOption event handler to respond to the DICT OPTION command, which informs the server that the client wishes to utilize one of the defined protocol options.<P CLASS="Element10">
+At the current time, OPTION MIME is the only recognized option. In the future, standard extensions to this protocol should be proposed which allow the client to request certain content types or encodings.<P CLASS="Element10">
+OPTION MIME requests that all text responses be prefaced by a MIME header, as described in RFC2045, and followed by a single blank line (CRLF). If a client requests this option, then the client MUST be able to parse Content-Type and Content-transfer-encoding headers, and MUST be able to ignore textual responses which have an unsupported content or encoding. A client MUST support the UTF-8 encoding described in RFC2044.<P CLASS="Element10">
+OPTION MIME is a REQUIRED server capability, and all DICT servers MUST implement this command.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0008">TIdDICTServer.OnCommandOther</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007294.html" CLASS="Element59">TIdDICTServer</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Specifies the command event handler for unknown DICT commands.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> OnCommandOther: <A HREF="007293.html" CLASS="Element59">TIdDICTOtherEvent</A>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+OnCommandOther specifies the event type for unrecognized DICT commands, and allows the server to respond to DICT extensions or provide default error handling by using the event handler mechanism.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0009">TIdDICTServer.OnCommandQuit</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007294.html" CLASS="Element59">TIdDICTServer</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Specifies the event handler for the DICT QUIT command.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> OnCommandQuit: <A HREF="007291.html" CLASS="Element59">TIdDICTGetEvent</A>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+<A HREF="007294.html" CLASS="Element59">TIdDICTServer</A> uses the OnCommandQuit event handler to respond to the DICT QUIT command, which informs the server that the client wishes to close the connection to the DICT server.<P CLASS="Element10">
+The DICT server must implement the QUIT command.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="000A">TIdDICTServer.OnCommandSASLAuth</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007294.html" CLASS="Element59">TIdDICTServer</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Specifies the event handler for the DICT SASLAUTH command.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> OnCommandSASLAuth: <A HREF="007289.html" CLASS="Element59">TIdDICTAuthEvent</A>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+<A HREF="007289.html" CLASS="Element59">TIdDICTAuthEvent</A> specifies the event type for the DICT SASLAUTH command, and is used by the <A HREF="007294.html" CLASS="Element59">TIdDICTServer</A> OnCommandSASLAuth event handler to perform user authentication.<P CLASS="Element10">
+OnCommandSASLAuth must provide, as parameters, the name of the user to be authenticated, and the BASE64-encoded initial SASL response as described in RFC 2045. All responses to the SASLAUTH server challenge should use the SASLRESP command and a BASE64-encoded parameter.<P CLASS="Element10">
+Authentication is an optional server capability. The SASLAUTH command may be implemented by a DICT server.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="000B">TIdDICTServer.OnCommandShow</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007294.html" CLASS="Element59">TIdDICTServer</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Specifies the event handler for the DICT SHOW command.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> OnCommandShow: <A HREF="007295.html" CLASS="Element59">TIdDICTShowEvent</A>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+OnCommandShow specifies the event handler for the DICT SHOW command, and is used by the <A HREF="007294.html" CLASS="Element59">TIdDICTServer</A> to implement the DICT command.<P CLASS="Element10">
+OnCommandShow must provide parameters that indicate the thread of execution performing the command, and the SHOW command parameters to be included in the command execution. The command options include:<P CLASS="Element10">
+<UL>
+<LI>SHOW DB - Displays the list of currently accessible databases.<P CLASS="Element10">
+<LI>SHOW DATABASES - Displays the list of currently accessible databases.<P CLASS="Element10">
+<LI>SHOW STRAT - Displays the list of currently supported search strategies.<P CLASS="Element10">
+<LI>SHOW STRATEGIES - Displays the list of currently supported search strategies.<P CLASS="Element10">
+<LI>SHOW INFO database - Displays the source, copyright, and licensing information about the specified database.<P CLASS="Element10">
+<LI>SHOW SERVER - Displays local server herald banner.</UL>
+</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="000C">TIdDICTServer.OnCommandStatus</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007294.html" CLASS="Element59">TIdDICTServer</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Specifies the event handler for the DICT STATUS command.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> OnCommandStatus: <A HREF="007291.html" CLASS="Element59">TIdDICTGetEvent</A>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+OnCommandStatus specifies the event handler for the DICT STATUS command, and is used by the <A HREF="007294.html" CLASS="Element59">TIdDICTServer</A> to implement the DICT command.<P CLASS="Element10">
+The STATUS command returns server-specific timing or debugging information. This information may be useful in debugging or tuning a DICT server. All DICT servers MUST implement this command, although the text part of the response is not specified and may be omitted.</DIV>
+</DIV>
+<DIV CLASS="Element62">
+<HR>Created with Doc-O-Matic 2 donated to <STRONG><A HREF="http://www.delphi-jedi.org">Project JEDI</A></STRONG>. Commercial license available from the <STRONG><A HREF="http://www.doc-o-matic.com">Doc-O-Matic site</A></STRONG>.</DIV>
+</DIV></BODY></HTML>

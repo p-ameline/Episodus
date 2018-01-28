@@ -1,0 +1,227 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+<TITLE>TIdIPMCastClient</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <META name="GENERATOR" content="Doc-O-Matic">
+    <LINK rel="STYLESHEET" href="default.css" type="text/css">
+
+<SCRIPT LANGUAGE="JavaScript1.2" SRC="scripts.js"></SCRIPT>
+</HEAD>
+<BODY CLASS="Element57">
+<TABLE BORDER="0" BGCOLOR="#AACCFF" WIDTH="100%" CELLSPACING="0" CELLPADDING="0">
+<TR><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element1">
+Indy 9</DIV>
+</TD><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element2">
+<A HREF="content.html" CLASS="Element59">Content</A> | <A HREF="idx.html" CLASS="Element59">Index</A> | <A HREF="symref.html" CLASS="Element59">Reference</A></DIV>
+</TD></TR></TABLE><DIV CLASS="Element58">
+<DIV CLASS="Element5">
+TIdIPMCastClient</DIV>
+<DIV CLASS="Element7">
+<A HREF="011893.html" CLASS="Element59">Hierarchy</A>, <A HREF="011894.html" CLASS="Element59">Properties</A>, <A HREF="011895.html" CLASS="Element59">Methods</A>, <A HREF="011896.html" CLASS="Element59">Events</A>, <A HREF="011897.html" CLASS="Element59">See Also</A>, <A HREF="002268.html" CLASS="Element59">Unit: IdIPMCastClient</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Implements an IP Multicast client.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12">TIdIPMCastClient = <STRONG>class</STRONG>(<A HREF="007432.html" CLASS="Element59">TIdIPMCastBase</A>)</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Unit</DIV>
+<DIV CLASS="Element69">
+<A HREF="002268.html" CLASS="Element59">IdIPMCastClient</A></DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+TIdIPMCastClient is a <A HREF="007432.html" CLASS="Element59">TIdIPMCastBase</A> descendant that implements an IP multicast client component using the UDP transport, as described in the Internet Standards documents:<P CLASS="Element10">
+<UL>
+<LI>RFC 1112 - Host Extensions for IP Multicasting. (http://www.rfc-editor.org/rfc/rfc1112.txt)<P CLASS="Element10">
+<LI>RFC 1458 - Requirements for Multicast Protocols. (http://www.rfc-editor.org/rfc/rfc1458.txt)</UL>
+<P CLASS="Element10">
+TIdIPMCastClient implements abstract methods from the ancestor class, and provides additional methods and events that allow use of multiple bindings and an event handler for datagram receipt. TIdIPMCastClient also provides a ListenerThread and an optional threaded read capability for datagram receipt.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0000">TIdIPMCastClient.Active</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007433.html" CLASS="Element59">TIdIPMCastClient</A>, <A HREF="011898.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Indicates that the client has a binding with a valid <A HREF="007071.html" CLASS="Element59">socket</A> handle.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> Active;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Active is a published Boolean property in <A HREF="007433.html" CLASS="Element59">TIdIPMCastClient</A>. The read access specifier for Active calls the inherited read access specifier to keep track of the design-time value for the property. Active will be True when it is active at design-time, or when the client currently has a binding with a valid <A HREF="007071.html" CLASS="Element59">socket</A> handle assigned.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0001">TIdIPMCastClient.Bindings</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007433.html" CLASS="Element59">TIdIPMCastClient</A>, <A HREF="011899.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Represents <A HREF="007071.html" CLASS="Element59">socket</A> descriptor(s) used to <A HREF="003177.html" CLASS="Element59">listen</A> for incoming data.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> Bindings: <A HREF="007714.html" CLASS="Element59">TIdSocketHandles</A>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Bindings is a <A HREF="007714.html" CLASS="Element59">TIdSocketHandles</A> property that represents one or more <A HREF="007071.html" CLASS="Element59">socket</A> descriptors used to <A HREF="003177.html" CLASS="Element59">listen</A> for incoming data packets in the multicast client. Bindings is used when the <A HREF="007434.html" CLASS="Element59">TIdIPMCastListenerThread</A> allocated for the client is executed. Bindings is used to set the <A HREF="007071.html" CLASS="Element59">socket</A> options required when joining or departing the specified <A HREF="007433.html#0006" CLASS="Element59">MulticastGroup</A>.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0002">TIdIPMCastClient.BufferSize</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007433.html" CLASS="Element59">TIdIPMCastClient</A>, <A HREF="011900.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Indicates the buffer size to use for datagram receipt.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> BufferSize: Integer;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+BufferSize is an Integer property that represents the size of the buffer to allocate when the listener thread receives a datagram for the multicast client. The default value for BufferSize is <A HREF="002077.html" CLASS="Element59">ID_UDP_BUFFERSIZE</A>, as assigned in the <A HREF="007433.html#0003" CLASS="Element59">Create</A> constructor.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0004">TIdIPMCastClient.DefaultPort</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007433.html" CLASS="Element59">TIdIPMCastClient</A>, <A HREF="011901.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Default port number for <A HREF="007071.html" CLASS="Element59">socket</A> descriptors created for the multicast client.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> DefaultPort: integer;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+DefaultPort is an Integer property that represents the default port number used when creating <A HREF="007433.html#0001" CLASS="Element59">Bindings</A> for the multicast client. Changing the value of DefaultPort will also update the value in the <A HREF="007714.html#0003" CLASS="Element59">TIdSocketHandles.DefaultPort</A> property in <A HREF="007433.html#0001" CLASS="Element59">Bindings</A>.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0006">TIdIPMCastClient.MulticastGroup</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007433.html" CLASS="Element59">TIdIPMCastClient</A>, <A HREF="011902.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Represents the multicast group IP address.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> MulticastGroup;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+MulticastGroup is a published property in <A HREF="007433.html" CLASS="Element59">TIdIPMCastClient</A> that identifies the dotted-decimal representation of the multicast group address for the client. MulticastGroup is used when setting <A HREF="007071.html" CLASS="Element59">socket</A> options for a binding used by the multicast client.<P CLASS="Element10">
+MulticastGroup must contain an IP address acceptble to IsValidMulticastGroup, or an exception can be raised when creating, accessing, or releasing the <A HREF="007433.html#0001" CLASS="Element59">Bindings</A> used by the multicast client.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0008">TIdIPMCastClient.ThreadedEvent</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007433.html" CLASS="Element59">TIdIPMCastClient</A>, <A HREF="011903.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Indicates if threaded reads are performed using an event handler in multicast client.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> ThreadedEvent: boolean;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+ThreadedEvent is a Boolean property that indicates if the multicast client should allow use of threaded reads from it's listener thread. When ThreadEvent is True, the <A HREF="007434.html" CLASS="Element59">TIdIPMCastListenerThread</A> will use the read method defined in the listener thread to trigger the <A HREF="007433.html#0007" CLASS="Element59">TIdIPMCastClient.OnIPMCastRead</A> event handler. When ThreadEvent is False, the read method is synchronized to the main VCL thread.<P CLASS="Element10">
+The default value for ThreadedEvent is <A HREF="000317.html" CLASS="Element59">DEF_IMP_THREADEDEVENT</A> as assigned in the <A HREF="007433.html#0003" CLASS="Element59">Create</A> constructor.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0003">TIdIPMCastClient.Create</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007433.html" CLASS="Element59">TIdIPMCastClient</A>, <A HREF="011904.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Constructor for the object instance.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>constructor</STRONG> Create(AOwner: TComponent); <STRONG>override</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+AOwner: TComponent</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Owner of the object instance.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Create is the constructor for the object instance. Create calls the inherited Create method using AOwner as the owner of the object instance. Create assigns <A HREF="002077.html" CLASS="Element59">ID_UDP_BUFFERSIZE</A> as the default value for the <A HREF="007433.html#0002" CLASS="Element59">BufferSize</A> property, and <A HREF="000317.html" CLASS="Element59">DEF_IMP_THREADEDEVENT</A> as the default value for the <A HREF="007433.html#0008" CLASS="Element59">ThreadedEvent</A> property. Create also allocates resources required for the <A HREF="007433.html#0001" CLASS="Element59">Bindings</A> property.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0005">TIdIPMCastClient.Destroy</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007433.html" CLASS="Element59">TIdIPMCastClient</A>, <A HREF="011905.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Frees the object instance.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>destructor</STRONG> Destroy; <STRONG>override</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Destroy is the destructor for the object instance. Destroy insures that <A HREF="007433.html#0000" CLASS="Element59">Active</A> is set to False, and frees and releases resources allocated in the <A HREF="007433.html#0001" CLASS="Element59">Bindings</A> property. Destroy calls the inherited method prior to exiting.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0007">TIdIPMCastClient.OnIPMCastRead</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007433.html" CLASS="Element59">TIdIPMCastClient</A>, <A HREF="011906.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Event handler signalled when a datagram is available for the multicast client.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> OnIPMCastRead: <A HREF="007916.html" CLASS="Element59">TIPMCastReadEvent</A>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+OnIPMCastRead is a <A HREF="007916.html" CLASS="Element59">TIPMCastReadEvent</A> property that represents the event handler signalled when a datapacket has been received on the <A HREF="007071.html" CLASS="Element59">socket</A> descriptor for the multicast client. OnIPMCastRead allows the client to implement processing required to read and handle the datagram contents.<P CLASS="Element10">
+Applications must assign a procedure to the <A HREF="007916.html" CLASS="Element59">TIPMCastReadEvent</A> event handler to allow responding to the event notification. The event handler can access arguments that include:<P CLASS="Element10">
+<UL>
+<LI>Sender - Multicast cLient for the event notification.<P CLASS="Element10">
+<LI>AData - Stream containing the contents of the datagram.<P CLASS="Element10">
+<LI>ABinding - Socket descriptor used to read the incoming datagram.</UL>
+</DIV>
+</DIV>
+<DIV CLASS="Element62">
+<HR>Created with Doc-O-Matic 2 donated to <STRONG><A HREF="http://www.delphi-jedi.org">Project JEDI</A></STRONG>. Commercial license available from the <STRONG><A HREF="http://www.doc-o-matic.com">Doc-O-Matic site</A></STRONG>.</DIV>
+</DIV></BODY></HTML>

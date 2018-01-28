@@ -1,0 +1,81 @@
+// -----------------------------------------------------------------------------
+// healthteam.rh
+// -----------------------------------------------------------------------------
+// Définition des identifiants des controles de l'interface de gestion de
+// l'Equipe de Santé.
+// --
+// Definition of controls id in HealthTeam Managment interface.
+// -----------------------------------------------------------------------------
+// $Revision: 1.2 $
+// $Author: pameline $
+// $Date: 2009/07/04 09:41:02 $
+// -----------------------------------------------------------------------------
+// FLP - juin 2004
+// -----------------------------------------------------------------------------
+
+#define CM_NEW_MEMBER						201
+#define CM_DEL_MEMBER						202
+#define CM_MOD_MEMBER						203
+
+#define CM_NEWMANDATE						211
+#define	CM_DELMANDATE                       212
+#define	CM_MODMANDATE						213
+
+// -----------------------------------------------------------------------------
+// IDD_HEALTHTEAM
+
+#define IDC_LABEL							101
+#define IDC_MEMBERSLIST 				    102
+#define IDC_ADDMEMBER						103
+#define IDCG_MANDATE						104
+
+
+// -----------------------------------------------------------------------------
+// IDD_HEALTHTEAMMEMBER
+
+#define IDCG_ADMIN							110
+#define IDC_REMOVEMEMBER	                111
+#define IDCE_ID	                            112
+#define IDC_BUTTON1	                        101
+//#define IDC_ADD_MEMBER	101
+#define IDC_MANDATELIST					    113
+#define IDC_ADDMANDATE					    114
+#define IDC_MODMANDATE					    115
+#define IDC_DELMANDATE					    116
+
+// -----------------------------------------------------------------------------
+// IDD_HEALTHTEAMMANDATE
+
+#define IDC_CIVILITE	                120
+#define IDCE_SPECIALITY					121
+#define IDCE_PROFESSION					122
+#define IDCCB_TYPE						123
+#define IDCG_POSITION                   124
+#define IDCCB_DISTANCE	                125
+#define IDCCB_ANGLE	                    126
+#define IDCG_TEMPORAL                   130
+#define IDCE_BEGINDATE                  131
+#define IDCE_ENDDATE                    132
+#define IDCE_DURATION                   133
+#define IDCCB_DURATIONUNIT              134
+
+//#define IDCE_ROLE			123
+//#define IDC_STATICTEXT1	101
+//#define IDC_EDIT1	102
+
+
+//  IDD_CREATE_MANDAT_DIALOG
+//  Fenetre pour la creation d'un mandat
+#define IDC_MC_LDV									140
+#define IDC_MC_ID_PROS							141
+#define IDC_CHECK_ADMIN							152
+#define IDC_MC_LOGIN								142
+#define	IDC_MC_PASSWORD             143
+#define IDC_DEFINE_MANDAT						144
+#define IDC_STATICTEXT5	101
+#define IDC_LIDEN										145
+
+
+/// graphic interface
+
+#define IDC_ROSACE         150

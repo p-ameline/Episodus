@@ -1,0 +1,83 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+<TITLE>TIdDecoderUUEBase</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <META name="GENERATOR" content="Doc-O-Matic">
+    <LINK rel="STYLESHEET" href="default.css" type="text/css">
+
+<SCRIPT LANGUAGE="JavaScript1.2" SRC="scripts.js"></SCRIPT>
+</HEAD>
+<BODY CLASS="Element57">
+<TABLE BORDER="0" BGCOLOR="#AACCFF" WIDTH="100%" CELLSPACING="0" CELLPADDING="0">
+<TR><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element1">
+Indy 9</DIV>
+</TD><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element2">
+<A HREF="content.html" CLASS="Element59">Content</A> | <A HREF="idx.html" CLASS="Element59">Index</A> | <A HREF="symref.html" CLASS="Element59">Reference</A></DIV>
+</TD></TR></TABLE><DIV CLASS="Element58">
+<DIV CLASS="Element5">
+TIdDecoderUUEBase</DIV>
+<DIV CLASS="Element7">
+<A HREF="010659.html" CLASS="Element59">Hierarchy</A>, <A HREF="010660.html" CLASS="Element59">Properties</A>, <A HREF="010661.html" CLASS="Element59">Methods</A>, <A HREF="010662.html" CLASS="Element59">See Also</A>, <A HREF="002138.html" CLASS="Element59">Unit: IdCoderUUE</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Implements a decoder for data encoded using the UUEncode algorithm.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12">TIdDecoderUUEBase = <STRONG>class</STRONG>(<A HREF="007282.html" CLASS="Element59">TIdDecoder4to3</A>)</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Unit</DIV>
+<DIV CLASS="Element69">
+<A HREF="002138.html" CLASS="Element59">IdCoderUUE</A></DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+TIdDecoderUUEBase is a <A HREF="007282.html" CLASS="Element59">TIdDecoder4to3</A> descendant that implements a decoder for data encoded using the UUEncode algorithm. TIdDecoderUUEBase provides facilities for decoding the 7-bit US-ASCII representation of encoded data into it's original binary format.<P CLASS="Element10">
+TIdDecoderUUEBase uses the 4-byte to 3-byte decoding algorithm defined in <A HREF="007282.html" CLASS="Element59">TIdDecoder4to3</A>. TIdDecoderUUEBase handles the UUEncode body line format, which consists of the encoded length followed by the encoded data.<P CLASS="Element10">
+TIdDecoderUUEBase is used by other Indy coder classes, such as <A HREF="007555.html" CLASS="Element59">TIdMessageDecoderUUE</A>, that handle UUEncode message streams in RFC 822-compliant mail messages.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0000">TIdDecoderUUEBase.DecodeToStream</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007286.html" CLASS="Element59">TIdDecoderUUEBase</A>, <A HREF="010663.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Converts a UUEncoded body line to it's original binary format.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>procedure</STRONG> DecodeToStream(AIn: <STRONG>string</STRONG>; ADest: TStream); <STRONG>override</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+AIn: string</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Values to decoded.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+ADest: TStream</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Destination for decoded values.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+DecodeToStream is an overridden Procedure in <A HREF="007286.html" CLASS="Element59">TIdDecoderUUEBase</A> that re-implements the inherited method to provide support for reading the UUEncode body line format, as well as the specifics of the UUDecode algorithm.<P CLASS="Element10">
+AIn contains the UUEncoded input values that will be restored to their original binary format.<P CLASS="Element10">
+ADest is a TStream descendant that will receive the results of the decoding algorithm.<P CLASS="Element10">
+When the length of AIn is 0, DecodeToStream does not attempt to perform the decoding algorithm. DecodeToStream reads the first byte in AIn to determine the length of the UUencoded data using the ordinal position of the value in the UUEncode alphabet.<P CLASS="Element10">
+The remainder of AIn is the UUEncoded data that will be restored to its original binary representation. When the length of the remaining portion of AIn is not a multiple of 3, AIn is padded with FillChar to the desired length.<P CLASS="Element10">
+Finally, DecodeToStream calls the inherited DecodeToStream method to perform conversion of the UUEncoded data to its binary representation.</DIV>
+</DIV>
+<DIV CLASS="Element62">
+<HR>Created with Doc-O-Matic 2 donated to <STRONG><A HREF="http://www.delphi-jedi.org">Project JEDI</A></STRONG>. Commercial license available from the <STRONG><A HREF="http://www.doc-o-matic.com">Doc-O-Matic site</A></STRONG>.</DIV>
+</DIV></BODY></HTML>

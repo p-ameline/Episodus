@@ -1,0 +1,397 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+<TITLE>TIdIOHandlerSocket</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <META name="GENERATOR" content="Doc-O-Matic">
+    <LINK rel="STYLESHEET" href="default.css" type="text/css">
+
+<SCRIPT LANGUAGE="JavaScript1.2" SRC="scripts.js"></SCRIPT>
+</HEAD>
+<BODY CLASS="Element57">
+<TABLE BORDER="0" BGCOLOR="#AACCFF" WIDTH="100%" CELLSPACING="0" CELLPADDING="0">
+<TR><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element1">
+Indy 9</DIV>
+</TD><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element2">
+<A HREF="content.html" CLASS="Element59">Content</A> | <A HREF="idx.html" CLASS="Element59">Index</A> | <A HREF="symref.html" CLASS="Element59">Reference</A></DIV>
+</TD></TR></TABLE><DIV CLASS="Element58">
+<DIV CLASS="Element5">
+TIdIOHandlerSocket</DIV>
+<DIV CLASS="Element7">
+<A HREF="011809.html" CLASS="Element59">Hierarchy</A>, <A HREF="011810.html" CLASS="Element59">Properties</A>, <A HREF="011811.html" CLASS="Element59">Methods</A>, <A HREF="011812.html" CLASS="Element59">Events</A>, <A HREF="011813.html" CLASS="Element59">See Also</A>, <A HREF="002264.html" CLASS="Element59">Unit: IdIOHandlerSocket</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Implements an input and output handler using <A HREF="007071.html" CLASS="Element59">socket</A> handles.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12">TIdIOHandlerSocket = <STRONG>class</STRONG>(<A HREF="007421.html" CLASS="Element59">TIdIOHandler</A>)</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Unit</DIV>
+<DIV CLASS="Element69">
+<A HREF="002264.html" CLASS="Element59">IdIOHandlerSocket</A></DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+TIdIOHandlerSocket is a <A HREF="007421.html" CLASS="Element59">TIdIOHandler</A> descendant that implements the framework used to perform input and output operations for Indy components using a <A HREF="007071.html" CLASS="Element59">socket</A> handle as the source or destination.<P CLASS="Element10">
+TIdIOHandlerSocket implements abstract virtual methods inherited from <A HREF="007421.html" CLASS="Element59">TIdIOHandler</A> that allow the handler to prepare and establish a connection to remote computer system, determine when the handler is ready to perform an IO operation, and perform the data transmission or receipt required for a component.<P CLASS="Element10">
+TIdIOHandlerSocket also exposes properties that allow acccess to the <A HREF="007426.html#0000" CLASS="Element59">Binding</A> for the <A HREF="007071.html" CLASS="Element59">socket</A> connection, and use of the Nagle algorithm while performing IO operations.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0000">TIdIOHandlerSocket.Binding</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007426.html" CLASS="Element59">TIdIOHandlerSocket</A>, <A HREF="011814.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Represents the <A HREF="007071.html" CLASS="Element59">socket</A> handle used for a connection.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> Binding: <A HREF="007713.html" CLASS="Element59">TIdSocketHandle</A>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Binding is a read-only <A HREF="007713.html" CLASS="Element59">TIdSocketHandle</A> property that represents the <A HREF="007071.html" CLASS="Element59">socket</A> handle used for a connection to another computer system. Binding provides the mechanism used to determine when the handler is ready to perform its IO operation, and the physical conduit used in calls to the <A HREF="007426.html#0009" CLASS="Element59">Send</A> and <A HREF="007426.html#0008" CLASS="Element59">Recv</A> methods.<P CLASS="Element10">
+Use <A HREF="007426.html#0006" CLASS="Element59">Open</A> to insure that the Binding contains a valid <A HREF="007071.html" CLASS="Element59">socket</A> handle data type.<P CLASS="Element10">
+Use <A HREF="007426.html#0002" CLASS="Element59">ConnectClient</A> to allocate the <A HREF="007071.html" CLASS="Element59">socket</A> handle in Binding, and to spawn a TIdConnectThread that establishes the connection using Socks proxy and Timeout input parameters.<P CLASS="Element10">
+Use <A HREF="007426.html#0001" CLASS="Element59">Close</A> to insure that Binding is disconnected and freed.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="000A">TIdIOHandlerSocket.SocksInfo</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007426.html" CLASS="Element59">TIdIOHandlerSocket</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Implements support for proxied client connection in the IO handler.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> SocksInfo: <A HREF="007719.html" CLASS="Element59">TIdSocksInfo</A>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+SocksInfo is a <A HREF="007719.html" CLASS="Element59">TIdSocksInfo</A> property that provides support for proxied client connections for the system identified in Host and Port. SocksInfo is used when <A HREF="007426.html#0002" CLASS="Element59">ConnectClient</A> is called to establish the client connection to a remote computer system, and provides the actual Host address and port number used for the client connection for SOCKS version 4 and 5 support using the <A HREF="007719.html#0005" CLASS="Element59">TIdSocksInfo.MakeSocksConnection</A> method.<P CLASS="Element10">
+Reading the value of SocksInfo will insure that an object instance is created at runtime when a SocksInfo has not been assigned for the IO Handler.<P CLASS="Element10">
+Assigning SocksInfo for the IO Handler will insure that a previous <A HREF="007719.html" CLASS="Element59">TIdSocksInfo</A> object instance, created at runtime or owned by a different form than the current object, is freed and released prior to assigning the new value.<P CLASS="Element10">
+SocksInfo will be freed in <A HREF="007426.html#0005" CLASS="Element59">Destroy</A> when the object instance has been created at runtime and theowner form has not been assigned.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="000B">TIdIOHandlerSocket.UseNagle</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007426.html" CLASS="Element59">TIdIOHandlerSocket</A>, <A HREF="011815.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Indicates the <A HREF="007071.html" CLASS="Element59">socket</A> connection can use the Nagle algorithm.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> UseNagle: boolean;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+UseNagle is a Boolean property that indicates if the <A HREF="007071.html" CLASS="Element59">socket</A> connection in <A HREF="007426.html#0000" CLASS="Element59">Binding</A> can use the Nagle algorithm for <A HREF="006944.html" CLASS="Element59">send</A> coalescing during output operations to the handle. The default value for UseNagle is True, as assigned in the <A HREF="007426.html#0004" CLASS="Element59">Create</A> constructor.<P CLASS="Element10">
+UseNagle is used in <A HREF="007426.html#0002" CLASS="Element59">ConnectClient</A> to determine if the <A HREF="007426.html#0000" CLASS="Element59">Binding</A> must set <A HREF="007071.html" CLASS="Element59">socket</A> options that reflect the use of the algorithm during output operations.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0001">TIdIOHandlerSocket.Close</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007426.html" CLASS="Element59">TIdIOHandlerSocket</A>, <A HREF="011816.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Closes and frees the <A HREF="007071.html" CLASS="Element59">socket</A> handle used for input/output operations.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>procedure</STRONG> Close; <STRONG>override</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Close is an overridden procedure that closes and frees the <A HREF="007071.html" CLASS="Element59">socket</A> handle in <A HREF="007426.html#0000" CLASS="Element59">Binding</A> used for input and output operations. Use <A HREF="007426.html#0006" CLASS="Element59">Open</A> to insure that the <A HREF="007426.html#0000" CLASS="Element59">Binding</A> contains a valid <A HREF="007071.html" CLASS="Element59">socket</A> handle data type. Use <A HREF="007426.html#0002" CLASS="Element59">ConnectClient</A> to allocate the <A HREF="007071.html" CLASS="Element59">socket</A> handle in <A HREF="007426.html#0000" CLASS="Element59">Binding</A>, and to spawn a TIdConnectThread that establishes the connection using Socks proxy and Timeout input parameters.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0002">TIdIOHandlerSocket.ConnectClient</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007426.html" CLASS="Element59">TIdIOHandlerSocket</A>, <A HREF="011817.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Establisheds a remote connection for the input/output handler.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>procedure</STRONG> ConnectClient(<STRONG>const</STRONG> AHost: <STRONG>string</STRONG>; <STRONG>const</STRONG> APort: Integer; <STRONG>const</STRONG> ABoundIP: <STRONG>string</STRONG>; <STRONG>const</STRONG> ABoundPort: Integer; <STRONG>const</STRONG> ABoundPortMin: Integer; <STRONG>const</STRONG> ABoundPortMax: Integer; <STRONG>const</STRONG> ATimeout: Integer = <A HREF="002932.html" CLASS="Element59">IdTimeoutDefault</A>); <STRONG>override</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+const AHost: string</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Address of the remote system for the client connection.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+const APort: Integer</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Port number for the remote connection.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+const ABoundIP: string</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+IP Address bound to the local system.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+const ABoundPort: Integer</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Port number bound to the local computer.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+const ABoundPortMin: Integer</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Minimum bound port number for the local system.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+const ABoundPortMax: Integer</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Maximum bound port number for the local system.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+const ATimeout: Integer = IdTimeoutDefault</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Number of milliseconds to wait before a connection attempt fails. Default value is <A HREF="002932.html" CLASS="Element59">IdTimeoutDefault</A>.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+ConnectClient is an overriden procedure in <A HREF="007426.html" CLASS="Element59">TIdIOHandlerSocket</A> that implements the mechanism that allows an input/output handler to prepare and establish a client connection to a remote computer system using the input parameters.<P CLASS="Element10">
+ConnectClient calls the inherited ConnectClient method, allocates and Binds the <A HREF="007071.html" CLASS="Element59">socket</A> handle in <A HREF="007426.html#0000" CLASS="Element59">Binding</A> using the values specified in ABoundIP, ABoundPort, ABoundPortMin, and ABoundPortMax.<P CLASS="Element10">
+If the value in AHost is a host name instead of an IP address, ConnectClient will trigger the OnStatus event to indicate that the address will be resolved prior to setting the peer address and port number for the physical connection in <A HREF="007426.html#0000" CLASS="Element59">Binding</A>.<P CLASS="Element10">
+ConnectClient will also set the <A HREF="007071.html" CLASS="Element59">socket</A> options required for UseNage support.<P CLASS="Element10">
+ConnectClient also triggers the OnStatus event handler to indicate that the connection will be opened to the peer client connection prior to trying to open the connection with the timeout value specified in ATimeout.<P CLASS="Element10">
+ConnectClient uses a thread to <A HREF="000295.html" CLASS="Element59">connect</A> to the remote computer system to allow use of a timeout value in Connect while respecting the operation of the TIdAntifreeze component when present. If the connection thread is terminated with an exception message, ConnectClient can raise an <A HREF="000365.html" CLASS="Element59">EIdConnectException</A> exception with the exception messasge from the threaded connection. If the connection thread is terminated without an exception message prior to being <A HREF="007426.html#0003" CLASS="Element59">Connected</A>, ConnectClient can raise an <A HREF="000367.html" CLASS="Element59">EIdConnectTimeout</A> exception.<P CLASS="Element10">
+Use <A HREF="007426.html#0003" CLASS="Element59">Connected</A> to detemine if the physical connection has been established after a call to ConnectClient.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0003">TIdIOHandlerSocket.Connected</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007426.html" CLASS="Element59">TIdIOHandlerSocket</A>, <A HREF="011818.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Indicates if the physical connection for the handler is prepared and opened.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>function</STRONG> Connected: Boolean; <STRONG>override</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Return Value</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Boolean - True when the handler connection is prepared and opened.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Connected is an overriden Boolean function in <A HREF="007426.html" CLASS="Element59">TIdIOHandlerSocket</A> that implements the method used to determine when the physical connection for the handler has been established, and is available for input/output operations.<P CLASS="Element10">
+Connected will indicate when the <A HREF="007071.html" CLASS="Element59">socket</A> handle in <A HREF="007426.html#0000" CLASS="Element59">Binding</A> has been assigned and allocated.<P CLASS="Element10">
+Use <A HREF="007426.html#0006" CLASS="Element59">Open</A> to prepare the physical connection for the handler, and <A HREF="007426.html#0002" CLASS="Element59">ConnectClient</A> to establish the connection used by the handler.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0004">TIdIOHandlerSocket.Create</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007426.html" CLASS="Element59">TIdIOHandlerSocket</A>, <A HREF="011819.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Constructor for the object instance.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>constructor</STRONG> Create(AOwner: TComponent); <STRONG>override</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+AOwner: TComponent</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Owner of the object instance.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Create is the Constructor for the object instance, and relies on the inherited Create constructor. Create also sets the default value of <A HREF="007426.html#000B" CLASS="Element59">UseNagle</A> to True, to indicate that use of the Nagle algorithm for <A HREF="006944.html" CLASS="Element59">send</A> coalescing is allowed.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0005">TIdIOHandlerSocket.Destroy</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007426.html" CLASS="Element59">TIdIOHandlerSocket</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Frees the object instance.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>destructor</STRONG> Destroy; <STRONG>override</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Destroy is the destructor for the object instance. Destroy will free and release resources allocated to <A HREF="007426.html#000A" CLASS="Element59">SocksInfo</A> when it has been created at runtime without an owner form. Destroy calls the inherited Destroy method prior to exiting.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0006">TIdIOHandlerSocket.Open</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007426.html" CLASS="Element59">TIdIOHandlerSocket</A>, <A HREF="011820.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Prepares an input/output source for the handler.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>procedure</STRONG> Open; <STRONG>override</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Open is a overridden procedure that prepares an input/output source for the handler. Open calls the inherited Open method, and will insure that the <A HREF="007071.html" CLASS="Element59">socket</A> handle in <A HREF="007426.html#0000" CLASS="Element59">Binding</A> for the physical connection has been assigned.<P CLASS="Element10">
+Use <A HREF="007426.html#0002" CLASS="Element59">ConnectClient</A> to establish the connection on the coket handle used by the handler.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0007">TIdIOHandlerSocket.Readable</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007426.html" CLASS="Element59">TIdIOHandlerSocket</A>, <A HREF="011821.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Indicates that the <A HREF="007071.html" CLASS="Element59">socket</A> handle is ready to read data.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>function</STRONG> Readable(AMSec: integer = <A HREF="002932.html" CLASS="Element59">IdTimeoutDefault</A>): boolean; <STRONG>override</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+AMSec: integer = IdTimeoutDefault</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Milliseconds to wait for the <A HREF="007071.html" CLASS="Element59">socket</A> connection to become ready. Default value is <A HREF="002932.html" CLASS="Element59">IdTimeoutDefault</A>.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Return Value</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Boolean - True when ready.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Readable is an overidden Boolean function that indicates if the <A HREF="007071.html" CLASS="Element59">socket</A> handle in <A HREF="007426.html#0000" CLASS="Element59">Binding</A> is ready for input operations. Readable uses <A HREF="007426.html#0000" CLASS="Element59">Binding</A> to call the Readable method in the <A HREF="007713.html" CLASS="Element59">TIdSocketHandle</A> object property with the value specified in AMSec.<P CLASS="Element10">
+Use <A HREF="007426.html#0008" CLASS="Element59">Recv</A> to perform the input operation using the <A HREF="007071.html" CLASS="Element59">socket</A> handle in <A HREF="007426.html#0000" CLASS="Element59">Binding</A>.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0008">TIdIOHandlerSocket.Recv</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007426.html" CLASS="Element59">TIdIOHandlerSocket</A>, <A HREF="011822.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Performs an input operation using a <A HREF="007071.html" CLASS="Element59">socket</A> handle.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>function</STRONG> Recv(<STRONG>var</STRONG> ABuf; ALen: integer): integer; <STRONG>override</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+var ABuf</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Destination buffer for values read from the connection.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+ALen: integer</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Number of bytes to read from the connection.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Return Value</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Integer - Acutal number of bytes read from the connection.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Recv is an overridden Integer function that performs an input operation using the <A HREF="007071.html" CLASS="Element59">socket</A> handle in <A HREF="007426.html#0000" CLASS="Element59">Binding</A>. Recv calls the <A HREF="007713.html#0013" CLASS="Element59">TIdSocketHandle.Recv</A> method, using the input parameters ABuf and ALen, to perform the read operation.<P CLASS="Element10">
+ABuf is the destination for values read from the <A HREF="007071.html" CLASS="Element59">socket</A> handle in <A HREF="007426.html#0000" CLASS="Element59">Binding</A>.<P CLASS="Element10">
+ALen indicates the number of bytes expected from the input operation.<P CLASS="Element10">
+The return value for the method is the actual number of bytes read using the <A HREF="007071.html" CLASS="Element59">socket</A> handle.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0009">TIdIOHandlerSocket.Send</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007426.html" CLASS="Element59">TIdIOHandlerSocket</A>, <A HREF="011823.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Performs an output operation using a <A HREF="007071.html" CLASS="Element59">socket</A> handle.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>function</STRONG> Send(<STRONG>var</STRONG> ABuf; ALen: integer): integer; <STRONG>override</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+var ABuf</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Values to be written on the connection.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+ALen: integer</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Number of bytes to be written on the connection.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Return Value</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Integer - Acutal number of bytes written using the connection.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Send is an overridden Integer function that performs an output operation using the <A HREF="007071.html" CLASS="Element59">socket</A> handle in <A HREF="007426.html#0000" CLASS="Element59">Binding</A>. Send calls the <A HREF="007713.html#0017" CLASS="Element59">TIdSocketHandle.Send</A> method, using the input parameters ABuf and ALen, to perform the write operation.<P CLASS="Element10">
+ABuf is the buffer containing values to be written to the <A HREF="007071.html" CLASS="Element59">socket</A> handle in <A HREF="007426.html#0000" CLASS="Element59">Binding</A>.<P CLASS="Element10">
+ALen indicates the number of bytes to be written in the output operation.<P CLASS="Element10">
+The return value for the method is the actual number of bytes written using the <A HREF="007071.html" CLASS="Element59">socket</A> handle.</DIV>
+</DIV>
+<DIV CLASS="Element62">
+<HR>Created with Doc-O-Matic 2 donated to <STRONG><A HREF="http://www.delphi-jedi.org">Project JEDI</A></STRONG>. Commercial license available from the <STRONG><A HREF="http://www.doc-o-matic.com">Doc-O-Matic site</A></STRONG>.</DIV>
+</DIV></BODY></HTML>

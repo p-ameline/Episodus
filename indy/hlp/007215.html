@@ -1,0 +1,155 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+<TITLE>TIdBasicAuthentication</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <META name="GENERATOR" content="Doc-O-Matic">
+    <LINK rel="STYLESHEET" href="default.css" type="text/css">
+
+<SCRIPT LANGUAGE="JavaScript1.2" SRC="scripts.js"></SCRIPT>
+</HEAD>
+<BODY CLASS="Element57">
+<TABLE BORDER="0" BGCOLOR="#AACCFF" WIDTH="100%" CELLSPACING="0" CELLPADDING="0">
+<TR><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element1">
+Indy 9</DIV>
+</TD><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element2">
+<A HREF="content.html" CLASS="Element59">Content</A> | <A HREF="idx.html" CLASS="Element59">Index</A> | <A HREF="symref.html" CLASS="Element59">Reference</A></DIV>
+</TD></TR></TABLE><DIV CLASS="Element58">
+<DIV CLASS="Element5">
+TIdBasicAuthentication</DIV>
+<DIV CLASS="Element7">
+<A HREF="010026.html" CLASS="Element59">Hierarchy</A>, <A HREF="010027.html" CLASS="Element59">Properties</A>, <A HREF="010028.html" CLASS="Element59">Methods</A>, <A HREF="010029.html" CLASS="Element59">See Also</A>, <A HREF="002121.html" CLASS="Element59">Unit: IdAuthentication</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Implements the HTTP Basic <A HREF="007215.html#0000" CLASS="Element59">Authentication</A> scheme.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12">TIdBasicAuthentication = <STRONG>class</STRONG>(<A HREF="007205.html" CLASS="Element59">TIdAuthentication</A>)</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Unit</DIV>
+<DIV CLASS="Element69">
+<A HREF="002121.html" CLASS="Element59">IdAuthentication</A></DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+TIdBasicAuthentication is a <A HREF="007205.html" CLASS="Element59">TIdAuthentication</A> descendant that implements the specifics of the HTTP Basic <A HREF="007215.html#0000" CLASS="Element59">Authentication</A> scheme, as described in the Internet Standards document:<P CLASS="Element10">
+<UL>
+<LI>RFC 2617 - HTTP <A HREF="007215.html#0000" CLASS="Element59">Authentication</A>: Basic and Digest Access <A HREF="007215.html#0000" CLASS="Element59">Authentication</A> (http://www.rfc-editor.org/rfc/rfc2617.txt)</UL>
+<P CLASS="Element10">
+TIdBasicAuthentication is based on the model where a client must authenticate for each unique <A HREF="007215.html#0003" CLASS="Element59">Realm</A> on a server. TIdBasicAuthentication is used in response to a challenge header in the form:<P CLASS="Element10">
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12">      WWW-Authenticate: Basic realm=&quot;URISpace&quot;</PRE></DIV>
+</DIV>
+<P CLASS="Element10">
+To receive authorization, the client sends the Username and Password, separated by a single colon (&quot;:&quot;) character, within a base64 encoded string in the Authentiction credentials. Username might be case sensitive.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0003">TIdBasicAuthentication.Realm</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007215.html" CLASS="Element59">TIdBasicAuthentication</A>, <A HREF="010030.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Identifies the proptection space for the authentication scheme.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> Realm: <STRONG>String</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Realm is a String property that identifies the protection space being accessed that has its own authentication scheme and/or authorization database. Realm is assigned by the origin server as a parameter in the WWW-Authenticate challenge header stored in authentication parameters.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0000">TIdBasicAuthentication.Authentication</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007215.html" CLASS="Element59">TIdBasicAuthentication</A>, <A HREF="010031.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Creates the authorization scheme and credentials for the authentication class.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>function</STRONG> Authentication: <STRONG>String</STRONG>; <STRONG>override</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Return Value</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+String - Scheme and Base64-encoded credentials for the process.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Authentication is an overriden String function that implements creation of the authorization credentials for the Basic Authentication scheme, and returned as a Base64-encoded string. Authentication normally returns a value in the form:<P CLASS="Element10">
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12">      Basic QWxhZGRpbjpvcGVuIHNlc2FtZQ==</PRE></DIV>
+</DIV>
+</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0001">TIdBasicAuthentication.Create</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007215.html" CLASS="Element59">TIdBasicAuthentication</A>, <A HREF="010032.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Constructor for the object instance.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>constructor</STRONG> Create; <STRONG>override</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Create is the constructor for the object instance. Create calls the inherited Create method. Create also assigns the default value for the internal property used to maintain the current step in the authentication process.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0002">TIdBasicAuthentication.KeepAlive</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007215.html" CLASS="Element59">TIdBasicAuthentication</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Indicates that Keep-Alive signals are supported for the authentication mechanism.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>function</STRONG> KeepAlive: Boolean; <STRONG>override</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+KeepAlive is an Boolean function that specifies the function used to indicate if the authentication mechanism supports use of the KEEP-ALIVE header. When KeepAlive is True, the authentication mechanism allows use of the header to prevent loss of a connection during authentication processing.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0004">TIdBasicAuthentication.Reset</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007215.html" CLASS="Element59">TIdBasicAuthentication</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Clears the number of retries for the authentication mechanism.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>procedure</STRONG> Reset; <STRONG>override</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Reset is a procedure that clears the number of retry attempts performed using the authentication mechanism. Reset sets the value of the internal status flag to 0 indicating that no authentication has been performed.</DIV>
+</DIV>
+<DIV CLASS="Element62">
+<HR>Created with Doc-O-Matic 2 donated to <STRONG><A HREF="http://www.delphi-jedi.org">Project JEDI</A></STRONG>. Commercial license available from the <STRONG><A HREF="http://www.doc-o-matic.com">Doc-O-Matic site</A></STRONG>.</DIV>
+</DIV></BODY></HTML>

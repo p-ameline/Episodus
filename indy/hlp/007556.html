@@ -1,0 +1,196 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+<TITLE>TIdMessageEncoder</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <META name="GENERATOR" content="Doc-O-Matic">
+    <LINK rel="STYLESHEET" href="default.css" type="text/css">
+
+<SCRIPT LANGUAGE="JavaScript1.2" SRC="scripts.js"></SCRIPT>
+</HEAD>
+<BODY CLASS="Element57">
+<TABLE BORDER="0" BGCOLOR="#AACCFF" WIDTH="100%" CELLSPACING="0" CELLPADDING="0">
+<TR><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element1">
+Indy 9</DIV>
+</TD><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element2">
+<A HREF="content.html" CLASS="Element59">Content</A> | <A HREF="idx.html" CLASS="Element59">Index</A> | <A HREF="symref.html" CLASS="Element59">Reference</A></DIV>
+</TD></TR></TABLE><DIV CLASS="Element58">
+<DIV CLASS="Element5">
+TIdMessageEncoder</DIV>
+<DIV CLASS="Element7">
+<A HREF="012595.html" CLASS="Element59">Hierarchy</A>, <A HREF="012596.html" CLASS="Element59">Properties</A>, <A HREF="012597.html" CLASS="Element59">Methods</A>, <A HREF="012598.html" CLASS="Element59">Events</A>, <A HREF="012599.html" CLASS="Element59">See Also</A>, <A HREF="002288.html" CLASS="Element59">Unit: IdMessageCoder</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Implements an encoder for RFC-822 compliant message parts.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12">TIdMessageEncoder = <STRONG>class</STRONG>(<A HREF="007246.html" CLASS="Element59">TIdComponent</A>)</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Unit</DIV>
+<DIV CLASS="Element69">
+<A HREF="002288.html" CLASS="Element59">IdMessageCoder</A></DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+TIdMessageEncoder is a <A HREF="007246.html" CLASS="Element59">TIdComponent</A> descendant that implements an encoder for RFC-822 compliant message parts. TIdMessageEncoder provides properties and methods used to process RFC message header and body lines using either a file or a TStream descendant. TIdMessageEncoder is a base class that establishes the framework for Indy message encoders.<P CLASS="Element10">
+TIdMessageEncoder descendants, like <A HREF="007563.html" CLASS="Element59">TIdMessageEncoderMIME</A>, <A HREF="007564.html" CLASS="Element59">TIdMessageEncoderUUE</A>, and <A HREF="007566.html" CLASS="Element59">TIdMessageEncoderXXE</A>, further refine the message Encoder framework by implementing support for specific encoding schemes.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0003">TIdMessageEncoder.Filename</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007556.html" CLASS="Element59">TIdMessageEncoder</A>, <A HREF="012600.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Identifies the file name that contains the contents of an RFC-822 message part.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> Filename: <STRONG>string</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Filename is a String property that identifies the file system location that contains the contents of an RFC-822 message part. Filename can be updated to indicate that the RFC message part contents originate from the local file system rather than an inline stream. Use <A HREF="007556.html#0001" CLASS="Element59">Encode</A> with Filename as the input source to perform encoding from a file.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0004">TIdMessageEncoder.PermissionCode</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007556.html" CLASS="Element59">TIdMessageEncoder</A>, <A HREF="012601.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Identifies the Unix user permissions required to acccess an RFC-822 message part.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> PermissionCode: integer;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+PermissionCode is an Integer property that identifies the Unix user permissions required to acccess an RFC-822 message part. PermissionCode is used by <A HREF="007556.html" CLASS="Element59">TIdMessageEncoder</A> like <A HREF="007564.html" CLASS="Element59">TIdMessageEncoderUUE</A> and <A HREF="007566.html" CLASS="Element59">TIdMessageEncoderXXE</A>, which support optional user permissions for encoding operations. PermissionCode is used by these classes to identify, in the encoded contents, the user permissions required for decoding operations only.<P CLASS="Element10">
+PermissionCode is expressed as an Integer, in the form used by the Unix user permission flags. The default value for PermissionCode is 660, as established in the <A HREF="007556.html#0000" CLASS="Element59">Create</A> contructor.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0000">TIdMessageEncoder.Create</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007556.html" CLASS="Element59">TIdMessageEncoder</A>, <A HREF="012602.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Constructor for the object instance.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>constructor</STRONG> Create(AOwner: TComponent); <STRONG>override</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+AOwner: TComponent</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Owner of the object instance.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Create is the Constructor for the object instance, and relies on the inherited Create method. Create also sets <A HREF="007556.html#0004" CLASS="Element59">PermissionCode</A> to the default value 660.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0001">TIdMessageEncoder.Encode</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007556.html" CLASS="Element59">TIdMessageEncoder</A>, <A HREF="012603.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Constructs the encoded contents of an RFC-822 message part.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>procedure</STRONG> Encode(<STRONG>const</STRONG> AFilename: <STRONG>string</STRONG>; ADest: TStream); <STRONG>overload</STRONG>;
+<STRONG>procedure</STRONG> Encode(ASrc: TStream; ADest: TStream); <STRONG>virtual</STRONG>; <STRONG>abstract</STRONG>; <STRONG>overload</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+const AFilename: string</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+File name used to retrieve the un-encoded contents of the message part.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+ADest: TStream</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Stream where the encoder message part will be written.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+ASrc: TStream</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Stream used to retrieve the un-encoded contents of the message part.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+<A HREF="007556.html#0001" CLASS="Element59">Encode</A> is an overloded procedure in <A HREF="007556.html" CLASS="Element59">TIdMessageEncoder</A> that retrieves the un-encoded values of an RFC-822 message part, and constructs the encoded contents of the message part.<P CLASS="Element10">
+AFilename specifies the file name used to retrieve the un-encoded contents of the message part.<P CLASS="Element10">
+ASrc is a TStream descendant used to retrieve the un-encoded contents of the RFC message part.<P CLASS="Element10">
+ADest is a TStream descendant where the encoded message part will be written.<P CLASS="Element10">
+The file-based variant of <A HREF="007556.html#0001" CLASS="Element59">Encode</A> reads the contents of the file specified in AFilename, and writes the encoded contents to the stream specified in ADest. This variant of <A HREF="007556.html#0001" CLASS="Element59">Encode</A> creates a temporary file stream for AFilename, and calls the abstract <A HREF="007556.html#0001" CLASS="Element59">Encode</A> method using the temporary file stream.<P CLASS="Element10">
+The Stream-based variant of <A HREF="007556.html#0001" CLASS="Element59">Encode</A> is an abstract virtual procedure, and specifies the interface for using TStreams as bothe the source of the RFC message part and the destination for the Descendant classes, like <A HREF="007563.html" CLASS="Element59">TIdMessageEncoderMIME</A>, <A HREF="007564.html" CLASS="Element59">TIdMessageEncoderUUE</A>, and <A HREF="007566.html" CLASS="Element59">TIdMessageEncoderXXE</A>, must implement the <A HREF="007556.html#0001" CLASS="Element59">Encode</A> method to provide support for genmerating the encoded message part contents using a specific encoding algorithm.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0002">TIdMessageEncoder.Encode</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007556.html" CLASS="Element59">TIdMessageEncoder</A>, <A HREF="012604.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Constructs the encoded contents of an RFC-822 message part.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>procedure</STRONG> <A HREF="007556.html#0001" CLASS="Element59">Encode</A>(<STRONG>const</STRONG> AFilename: <STRONG>string</STRONG>; ADest: TStream); <STRONG>overload</STRONG>;
+<STRONG>procedure</STRONG> <A HREF="007556.html#0001" CLASS="Element59">Encode</A>(ASrc: TStream; ADest: TStream); <STRONG>virtual</STRONG>; <STRONG>abstract</STRONG>; <STRONG>overload</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+const AFilename: string</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+File name used to retrieve the un-encoded contents of the message part.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+ADest: TStream</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Stream where the encoder message part will be written.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+ASrc: TStream</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Stream used to retrieve the un-encoded contents of the message part.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+<A HREF="007556.html#0001" CLASS="Element59">Encode</A> is an overloded procedure in <A HREF="007556.html" CLASS="Element59">TIdMessageEncoder</A> that retrieves the un-encoded values of an RFC-822 message part, and constructs the encoded contents of the message part.<P CLASS="Element10">
+AFilename specifies the file name used to retrieve the un-encoded contents of the message part.<P CLASS="Element10">
+ASrc is a TStream descendant used to retrieve the un-encoded contents of the RFC message part.<P CLASS="Element10">
+ADest is a TStream descendant where the encoded message part will be written.<P CLASS="Element10">
+The file-based variant of <A HREF="007556.html#0001" CLASS="Element59">Encode</A> reads the contents of the file specified in AFilename, and writes the encoded contents to the stream specified in ADest. This variant of <A HREF="007556.html#0001" CLASS="Element59">Encode</A> creates a temporary file stream for AFilename, and calls the abstract <A HREF="007556.html#0001" CLASS="Element59">Encode</A> method using the temporary file stream.<P CLASS="Element10">
+The Stream-based variant of <A HREF="007556.html#0001" CLASS="Element59">Encode</A> is an abstract virtual procedure, and specifies the interface for using TStreams as bothe the source of the RFC message part and the destination for the Descendant classes, like <A HREF="007563.html" CLASS="Element59">TIdMessageEncoderMIME</A>, <A HREF="007564.html" CLASS="Element59">TIdMessageEncoderUUE</A>, and <A HREF="007566.html" CLASS="Element59">TIdMessageEncoderXXE</A>, must implement the <A HREF="007556.html#0001" CLASS="Element59">Encode</A> method to provide support for genmerating the encoded message part contents using a specific encoding algorithm.</DIV>
+</DIV>
+<DIV CLASS="Element62">
+<HR>Created with Doc-O-Matic 2 donated to <STRONG><A HREF="http://www.delphi-jedi.org">Project JEDI</A></STRONG>. Commercial license available from the <STRONG><A HREF="http://www.doc-o-matic.com">Doc-O-Matic site</A></STRONG>.</DIV>
+</DIV></BODY></HTML>

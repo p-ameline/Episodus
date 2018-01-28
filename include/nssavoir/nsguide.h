@@ -1,0 +1,615 @@
+//---------------------------------------------------------------------------
+//     NSBBFICH.H
+//     PA   juillet 95
+//  Contient les definitions des objets Big Brother
+//---------------------------------------------------------------------------
+#ifndef __NSGUIDE_H
+#define __NSGUIDE_H
+
+#include <cstring>
+
+#ifdef _ENTERPRISE_DLL
+  #include "enterpriseLus/nsglobalLus.h"
+#else
+  #include "partage/nsglobal.h"
+  #include "ns_sgbd\nsfiche.h"
+#endif
+
+#include "nssavoir/nsvarray.h"
+
+#define	GUIDE	 string("GUIDE")  //GUIDE.DB
+#define	DECODE	 string("DECODE") //DECODE.DB
+
+#ifndef __linux__
+#if defined(_DANSLEXIDLL)
+	#define _CLASSELEXI __export
+#else
+	#define _CLASSELEXI __import
+#endif
+#endif
+
+//
+// Taille des champs communs aux fichiers de Chemins
+//
+#define CH_CODE_LEN       6
+#define CH_AUTEUR_LEN 	  3
+#define CH_CHEMIN_LEN 	255
+#define CH_SCENARIO_LEN   6
+//
+// Taille des champs du fichier GUIDES
+//
+#define BB_COMMENTAIRE_LEN 	     20
+#define BB_FICHIER_DIALOGUE_LEN  20
+#define BB_NOM_DIALOGUE_LEN      32
+#define BB_OUVRE_DIALOGUE_LEN 	  1
+#define BB_FICHIER_FONCTION_LEN  20
+#define BB_NOM_FONCTION_LEN 	   10
+#define BB_DECALAGE_NIVEAU_LEN 	  6
+#define BB_FILS_LEN 			      255
+#define BB_EXCLUSION_LEN 		    255
+#define BB_AUTOMATIQUE_LEN   	    1
+#define BB_ACTIF_VIDE_LEN 	   	  1
+#define BB_UNICITE_LESION_LEN     1
+#define BB_IMPOSE_LEN 	          1
+#define BB_TRI_LEN 	   		       20
+//
+// Ordre des champs du fichier GUIDES
+//
+#define BB_AUTEUR_FIELD 		       1
+#define BB_CODE_FIELD 			       2
+#define BB_CHEMIN_FIELD 		       3
+#define BB_COMMENTAIRE_FIELD       4
+#define BB_FICHIER_DIALOGUE_FIELD  5
+#define BB_NOM_DIALOGUE_FIELD 	   6
+#define BB_OUVRE_DIALOGUE_FIELD    7
+#define BB_FICHIER_FONCTION_FIELD  8
+#define BB_NOM_FONCTION_FIELD 	   9
+#define BB_DECALAGE_NIVEAU_FIELD  10
+#define BB_FILS_FIELD 			      11
+#define BB_EXCLUSION_FIELD 		    12
+#define BB_AUTOMATIQUE_FIELD 	    13
+#define BB_ACTIF_VIDE_FIELD 	    14
+#define BB_UNICITE_LESION_FIELD   15
+#define BB_IMPOSE_FIELD 	        16
+#define BB_TRI_FIELD 	   		      17
+#define BB_SCENARIO_FIELD 	   	  18
+
+//
+// Taille des champs du fichier DECODE
+//
+#define DKD_COMMENTAIRE_LEN 	  20
+#define DKD_FICHIER_LEN 		    20
+#define DKD_NOM_FONCTION_LEN 	  10
+//
+// Ordre des champs du fichier DECODE
+//
+#define DKD_AUTEUR_FIELD       1
+#define DKD_CODE_FIELD         2
+#define DKD_CHEMIN_FIELD       3
+#define DKD_COMMENTAIRE_FIELD  4
+#define DKD_FICHIER_FIELD      5
+#define DKD_NOM_FONCTION_FIELD 6
+#define DKD_SCENARIO_FIELD     7
+
+// tailles et indices des champs de GROUPGD.DB
+///////////////////////////////////////////////
+
+#define GRPGD_GROUPE_LEN         3
+#define GRPGD_LIBELLE_LEN       70
+#define GRPGD_DATE_LEN           8
+#define GRPGD_UTIL_LEN           3
+
+#define GRPGD_GROUPE_FIELD      1
+#define GRPGD_LIBELLE_FIELD     2
+#define GRPGD_DATE_FIELD        3
+#define GRPGD_UTIL_FIELD        4
+
+//
+//
+//
+#ifndef __linux__
+class _CLASSELEXI BBChemData
+#else
+class BBChemData
+#endif
+{
+	public :
+
+    //
+    // Variables de stockage des valeurs
+    //
+    char code[CH_CODE_LEN + 1] ;
+    char auteur[CH_AUTEUR_LEN + 1] ;
+    char chemin[CH_CHEMIN_LEN + 1] ;
+    char scenario[CH_SCENARIO_LEN + 1] ;
+
+    void metAZero() ;
+
+    BBChemData() { metAZero() ; }
+    BBChemData(const BBChemData& rv) ;
+    ~BBChemData() ;
+
+    BBChemData& operator=(const BBChemData& src) ;
+    int         operator==(const BBChemData& o) ;
+
+		string getID()           { return string(code) ;     }
+    string getGroupID()      { return string(auteur) ;   }
+    string getSemanticPath() { return string(chemin) ;   }
+    string getValidityCase() { return string(scenario) ; }
+
+    void setID(string sID)              { strcpy(code,     sID.c_str()) ;    }
+    void setGroupID(string sGroup)      { strcpy(auteur,   sGroup.c_str()) ; }
+    void setSemanticPath(string sPath)  { strcpy(chemin,   sPath.c_str()) ;  }
+    void setValidityCase(string sValid) { strcpy(scenario, sValid.c_str()) ; }
+};
+
+#ifndef _ENTERPRISE_DLL
+class _CLASSELEXI BBChem : public NSFiche
+#else
+#ifndef __linux__
+class _CLASSELEXI BBChem : public NSSuperRoot
+#else
+class BBChem : public NSSuperRoot
+#endif
+#endif
+{
+	public :
+
+    BBChem(NSSuper* pSuper) ;
+    virtual ~BBChem() ;
+
+#ifndef _ENTERPRISE_DLL
+    virtual DBIResult open(string tableName) = 0 ;
+    virtual DBIResult open() = 0 ;
+#endif
+    virtual void alimenteFiche() = 0 ;
+    virtual void videFiche() = 0 ;
+
+    string getID()           { return _pData->getID() ;           }
+    string getGroupID()      { return _pData->getGroupID() ;      }
+    string getSemanticPath() { return _pData->getSemanticPath() ; }
+    string getValidityCase() { return _pData->getValidityCase() ; }
+
+    void setChemData(BBChemData* pData) { _pData = pData ; }
+
+  protected :
+
+    BBChemData* _pData ;
+};
+
+//---------------------------------------------------------------------------
+//  Classe BBItemData
+//      ANCETRE : BBChemData
+//---------------------------------------------------------------------------
+//
+// Objet donnees des Objets BBItem et BBFichItem
+//
+#ifndef __linux__
+class _CLASSELEXI BBItemData : public BBChemData
+#else
+class BBItemData : public BBChemData
+#endif
+{
+	public :
+
+		//
+		// Variables de stockage des valeurs
+		//
+    char commentaire[BB_COMMENTAIRE_LEN + 1] ;
+    char fichierDialogue[BB_FICHIER_DIALOGUE_LEN + 1] ;
+    char nomDialogue[BB_NOM_DIALOGUE_LEN + 1] ;
+    char ouvreDialogue[BB_OUVRE_DIALOGUE_LEN + 1] ;
+    char fichierFonction[BB_FICHIER_FONCTION_LEN + 1] ;
+    char nomFonction[BB_NOM_FONCTION_LEN + 1] ;
+    char decalageNiveau[BB_DECALAGE_NIVEAU_LEN + 1] ;
+    char fils[BB_FILS_LEN + 1] ;
+    char exclusion[BB_EXCLUSION_LEN + 1] ;
+    char automatique[BB_AUTOMATIQUE_LEN + 1] ;
+    char actif_vide[BB_ACTIF_VIDE_LEN + 1] ;
+    char unicite_lesion[BB_UNICITE_LESION_LEN + 1] ;
+    char impose[BB_IMPOSE_LEN + 1] ;
+    char tri[BB_TRI_LEN + 1] ;
+
+    bool estAutomatique() { return ((automatique[0] == 'O') || (automatique[0] == 'o')) ; }
+    bool actifVide()      { return ((actif_vide[0] != 'N') && (actif_vide[0] != 'n')) ; }
+    bool uniciteLesion()  { return ((unicite_lesion[0] != 'N') && (unicite_lesion[0] != 'n')) ; }
+    bool ouvreDlg()       { return ((ouvreDialogue[0] == 'O') || (ouvreDialogue[0] == 'o')) ; }
+    bool ouvreArchetype() { return ((ouvreDialogue[0] == 'A') || (ouvreDialogue[0] == 'a')) ; }
+    bool estImpose()      { return ((impose[0] == 'O') || (impose[0] == 'o')) ; }
+
+    void metAZero() ;
+
+    BBItemData() : BBChemData() { metAZero() ; }
+    BBItemData(const BBItemData& rv) ;
+    ~BBItemData() ;
+
+    BBItemData& operator=(const BBItemData& src) ;
+    int         operator==(const BBItemData& o) const ;
+
+		string getLabel()      { return string(commentaire); }
+    string getDialogFile() { return string(fichierDialogue) ; }
+    string getDialogName() { return string(nomDialogue) ; }
+    string getFctFile()    { return string(fichierFonction) ; }
+    string getFctName()    { return string(nomFonction) ; }
+    string getLevelShift() { return string(decalageNiveau) ; }
+    string getSonsList()   { return string(fils) ; }
+    string getSonsRules()  { return string(exclusion) ; }
+    string getSortRules()  { return string(tri) ; }
+
+    void setLabel(string sLabel)      { strcpy(commentaire,     sLabel.c_str()) ; }
+    void setDialogFile(string sDlgF)  { strcpy(fichierDialogue, sDlgF.c_str()) ;  }
+    void setDialogName(string sDlgN)  { strcpy(nomDialogue,     sDlgN.c_str()) ;  }
+    void setFctFile(string sFctF)     { strcpy(fichierFonction, sFctF.c_str()) ;  }
+    void setFctName(string sFctN)     { strcpy(nomFonction,     sFctN.c_str()) ;  }
+    void setLevelShift(string sLevel) { strcpy(decalageNiveau,  sLevel.c_str()) ; }
+    void setSonsList(string sSons)    { strcpy(fils,            sSons.c_str()) ;  }
+    void setSonsRules(string sRules)  { strcpy(exclusion,       sRules.c_str()) ; }
+    void setSortRules(string sSort)   { strcpy(tri,             sSort.c_str()) ;  }
+    void setAutomatic(bool bAuto)     { (true == bAuto) ? strcpy(automatique, "O")     : strcpy(automatique, "N") ; }
+    void setAutomatic(string sAu)     { setYesOrNo(automatique, sAu, string("O")) ; }
+    void setEmptyActivation(bool bEA) { (true == bEA)   ? strcpy(actif_vide, "O")      : strcpy(actif_vide, "N") ; }
+    void setEmptyActivation(string sA){ setYesOrNo(actif_vide, sA, string("O")) ; }
+    void setUnicity(bool bUniq)       { (true == bUniq) ? strcpy(unicite_lesion, "O")  : strcpy(unicite_lesion, "N") ; }
+    void setUnicity(string sUn)       { setYesOrNo(unicite_lesion, sUn, string("O")) ; }
+    void setOpenDialog(string sOD) ;
+    void setOpenDialog(bool bOpen)    { (true == bOpen) ? strcpy(ouvreDialogue, "O")   : strcpy(ouvreDialogue, "N") ; }
+    void setOpenArchetype(bool bOpen) { (true == bOpen) ? strcpy(ouvreDialogue, "A")   : strcpy(ouvreDialogue, "N") ; }
+    void setNeeded(bool bNeed)        { (true == bNeed) ? strcpy(impose, "O")          : strcpy(impose, "N") ; }
+    void setNeeded(string sNe)        { setYesOrNo(impose, sNe, string("N")) ; }
+    void setYesOrNo(char* pField, string sYN, string sDefault) ;
+
+    bool isDialogNameIdem() { return (strlen(nomDialogue) >= 6) && (strncmp(nomDialogue, "__IDEM", 6) == 0) ; }
+    bool isDialogNameAuto() { return (strlen(nomDialogue) >= 6) && (strncmp(nomDialogue, "__AUTO", 6) == 0) ; }
+};
+
+inline void BBItemData::setYesOrNo(char* pField, string sYN, string sDefault)
+{
+  if (string("") == sYN)
+  {
+    strcpy(pField, sDefault.c_str()) ;
+    return ;
+  }
+
+  if ((string("O") == sYN) || (string("o") == sYN))
+    strcpy(pField, "O") ;
+  else
+    strcpy(pField, "N") ;
+}
+
+inline void BBItemData::setOpenDialog(string sOD)
+{
+  if      ((string("O") == sOD) || (string("o") == sOD))
+    strcpy(ouvreDialogue, "O") ;
+  else if ((string("A") == sOD) || (string("a") == sOD))
+    strcpy(ouvreDialogue, "A") ;
+  else
+    strcpy(ouvreDialogue, "N") ;
+}
+
+////////////////////////////////////////////////////////////////////////////////////////
+//
+// Classe BBFiche
+//
+#ifndef __linux__
+class _CLASSELEXI BBFiche : public BBChem
+#else
+class BBFiche : public BBChem
+#endif
+{
+	public :
+
+    BBFiche(NSSuper* pSuper) ;
+    ~BBFiche() ;
+
+#ifndef _ENTERPRISE_DLL
+    DBIResult open(string tableName) ;
+    DBIResult open() ;
+#endif
+    void alimenteFiche() ;
+    void videFiche() ;
+
+    BBItemData* getData() { return &_Data ; }
+
+  protected :
+
+    BBItemData _Data ;
+};
+
+//
+// Objet contenant uniquement un pointeur sur les donnees
+//
+#ifndef __linux__
+class _CLASSELEXI BBItemInfo
+#else
+class BBItemInfo
+#endif
+{
+	public :
+
+    BBItemInfo() ;
+		BBItemInfo(const BBFiche*) ;
+		BBItemInfo(const BBItemInfo& rv) ;
+    ~BBItemInfo() ;
+
+    BBItemInfo& operator=(const BBItemInfo& src) ;
+		int         operator==(const BBItemInfo& o) ;
+
+    // Getters and Setters
+    //
+    bool estAutomatique() { return _Donnees.estAutomatique() ; }
+    bool actifVide()      { return _Donnees.actifVide() ;      }
+    bool uniciteLesion()  { return _Donnees.uniciteLesion() ;  }
+    bool ouvreDlg()       { return _Donnees.ouvreDlg() ;       }
+    bool ouvreArchetype() { return _Donnees.ouvreArchetype() ; }
+    bool estImpose()      { return _Donnees.estImpose() ;      }
+
+    void metAZero()       { _Donnees.metAZero() ; }
+
+    string getID()           { return _Donnees.getID() ;           }
+    string getGroupID()      { return _Donnees.getGroupID() ;      }
+    string getSemanticPath() { return _Donnees.getSemanticPath() ; }
+    string getValidityCase() { return _Donnees.getValidityCase() ; }
+
+    void setID(string sID)              { _Donnees.setID(sID) ;              }
+    void setGroupID(string sGroup)      { _Donnees.setGroupID(sGroup) ;      }
+    void setSemanticPath(string sPath)  { _Donnees.setSemanticPath(sPath) ;  }
+    void setValidityCase(string sValid) { _Donnees.setValidityCase(sValid) ; }
+
+		string getLabel()      { return _Donnees.getLabel() ;      }
+    string getDialogFile() { return _Donnees.getDialogFile() ; }
+    string getDialogName() { return _Donnees.getDialogName() ; }
+    string getFctFile()    { return _Donnees.getFctFile() ;    }
+    string getFctName()    { return _Donnees.getFctName() ;    }
+    string getLevelShift() { return _Donnees.getLevelShift() ; }
+    string getSonsList()   { return _Donnees.getSonsList() ;   }
+    string getSonsRules()  { return _Donnees.getSonsRules() ;  }
+    string getSortRules()  { return _Donnees.getSortRules() ;  }
+
+    void setLabel(string sLabel)      { _Donnees.setLabel(sLabel) ;        }
+    void setDialogFile(string sDlgF)  { _Donnees.setDialogFile(sDlgF) ;    }
+    void setDialogName(string sDlgN)  { _Donnees.setDialogName(sDlgN) ;    }
+    void setFctFile(string sFctF)     { _Donnees.setFctFile(sFctF) ;       }
+    void setFctName(string sFctN)     { _Donnees.setFctName(sFctN) ;       }
+    void setLevelShift(string sLevel) { _Donnees.setLevelShift(sLevel) ;   }
+    void setSonsList(string sSons)    { _Donnees.setSonsList(sSons) ;      }
+    void setSonsRules(string sRules)  { _Donnees.setSonsRules(sRules) ;    }
+    void setSortRules(string sSort)   { _Donnees.setSortRules(sSort) ;     }
+    void setAutomatic(bool bAuto)     { _Donnees.setAutomatic(bAuto) ;     }
+    void setEmptyActivation(bool bEA) { _Donnees.setEmptyActivation(bEA) ; }
+    void setUnicity(bool bUniq)       { _Donnees.setUnicity(bUniq) ;       }
+    void setOpenDialog(bool bOpen)    { _Donnees.setOpenDialog(bOpen) ;    }
+    void setNeeded(bool bNeed)        { _Donnees.setNeeded(bNeed) ;        }
+
+    BBItemData* getData() { return &_Donnees ; }
+
+  protected :
+
+    BBItemData _Donnees ;
+};
+
+//
+// Definition de BBItemArray (Array de BBItemInfo)
+//
+typedef vector<BBItemInfo*>          BBItemVector ;
+typedef BBItemVector::iterator       BBItemIter ;
+typedef BBItemVector::const_iterator BBItemConstIter ;
+
+#ifndef __linux__
+class _CLASSELEXI BBItemArray : public BBItemVector
+#else
+class BBItemArray : public BBItemVector
+#endif
+{
+	public :
+
+		// Constructeurs
+    BBItemArray() : BBItemVector() {}
+    BBItemArray(const BBItemArray& rv) ;
+    // Destructeur
+    virtual ~BBItemArray() ;
+
+    BBItemArray& operator=(const BBItemArray& src) ;
+    void vider() ;
+};
+
+//---------------------------------------------------------------------------
+//  Classe BBDecode
+//      ANCETRE : NSFiche
+//---------------------------------------------------------------------------
+//
+// Objet donnees des Objets BBItem et BBFichItem
+//
+#ifndef __linux__
+class _CLASSELEXI BBDecodeData : public BBChemData
+#else
+class BBDecodeData : public BBChemData
+#endif
+{
+	public :
+
+    //
+    // Variables de stockage des valeurs
+    //
+    char commentaire[DKD_COMMENTAIRE_LEN + 1] ;
+    char fichier[DKD_FICHIER_LEN + 1] ;
+    char nomFonction[DKD_NOM_FONCTION_LEN + 1] ;
+
+    void metAZero() ;
+
+    BBDecodeData() : BBChemData() { metAZero() ; }
+    BBDecodeData(const BBDecodeData& rv) ;
+    ~BBDecodeData() ;
+
+    BBDecodeData& operator=(const BBDecodeData& src) ;
+    int           operator==(const BBDecodeData& o) ;
+
+    string getLabel()        { return string(commentaire) ; }
+    string getFileName()     { return string(fichier) ;     }
+    string getFunctionName() { return string(nomFonction) ; }
+
+    void setLabel(string sLabel)       { strcpy(commentaire, sLabel.c_str()) ; }
+    void setFileName(string sDlgF)     { strcpy(fichier,     sDlgF.c_str()) ;  }
+    void setFunctionName(string sDlgN) { strcpy(nomFonction, sDlgN.c_str()) ;  }
+};
+
+#ifndef __linux__
+class _CLASSELEXI BBDecode : public BBChem
+#else
+class BBDecode : public BBChem
+#endif
+{
+	public :
+
+    BBDecode(NSSuper* pSuper) ;
+    ~BBDecode() ;
+
+#ifndef _ENTERPRISE_DLL
+    DBIResult open(string tableName) ;
+    DBIResult open() ;
+#endif
+    void alimenteFiche() ;
+    void videFiche() ;
+
+    BBDecodeData* getData() { return &_Data ; }
+
+  protected:
+
+    BBDecodeData _Data ;
+};
+
+//////////////////////////////////////////////////////////////////////////////
+// Base GROUPGD.DB (Fichier groupe des fils guide)
+//////////////////////////////////////////////////////////////////////////////
+
+#ifndef __linux__
+class _CLASSELEXI NSGroupGdData
+#else
+class NSGroupGdData
+#endif
+{
+	public :
+  	//
+    // Variables de stockage des valeurs
+    //
+    char groupe[GRPGD_GROUPE_LEN + 1] ;
+    char libelle[GRPGD_LIBELLE_LEN + 1] ;
+    char date[GRPGD_DATE_LEN + 1] ;
+    char util[GRPGD_UTIL_LEN + 1] ;
+
+    NSGroupGdData() ;
+    NSGroupGdData(const NSGroupGdData& rv) ;
+
+    NSGroupGdData& operator=(const NSGroupGdData& src) ;
+    int            operator==(const NSGroupGdData& o) ;
+
+    string getGroup() { return string(groupe) ;  }
+    string getLabel() { return string(libelle) ; }
+    string getDate()  { return string(date) ;    }
+    string getUser()  { return string(util) ;    }
+
+    void setGroup(string sGrpe)  { strcpy(groupe,  sGrpe.c_str()) ;  }
+    void setLabel(string sLabel) { strcpy(libelle, sLabel.c_str()) ; }
+    void setDate(string sDate)   { strcpy(date,    sDate.c_str()) ;  }
+    void setUser(string sUser)   { strcpy(util,    sUser.c_str()) ;  }
+};
+
+//
+// Objet derive de NSFiche utilise pour les operations de base de donnees
+//
+#ifndef _ENTERPRISE_DLL
+class _CLASSELEXI NSGroupGd : public NSFiche
+#else
+#ifndef __linux__
+class _CLASSELEXI NSGroupGd : public NSSuperRoot
+#else
+class NSGroupGd : public NSSuperRoot
+#endif
+#endif
+{
+	public :
+
+	  //
+	  // Variables de stockage des valeurs
+	  //
+	  NSGroupGdData _Donnees ;
+
+	  NSGroupGd(NSSuper* pSuper) ;
+	  ~NSGroupGd() ;
+
+#ifndef _ENTERPRISE_DLL
+	  DBIResult open() ;
+#endif
+	  void alimenteFiche() ;
+	  void videFiche() ;
+
+    string getGroup() { return _Donnees.getGroup() ; }
+    string getLabel() { return _Donnees.getLabel() ; }
+    string getDate()  { return _Donnees.getDate() ;  }
+    string getUser()  { return _Donnees.getUser() ;  }
+
+    void setGroup(string sGrpe)  { _Donnees.setGroup(sGrpe) ;  }
+    void setLabel(string sLabel) { _Donnees.setLabel(sLabel) ; }
+    void setDate(string sDate)   { _Donnees.setDate(sDate) ;   }
+    void setUser(string sUser)   { _Donnees.setUser(sUser) ;   }
+};
+
+//
+// Objet contenant uniquement un pointeur sur les donnees
+//
+#ifndef __linux__
+class _CLASSELEXI NSGroupGdInfo
+#else
+class NSGroupGdInfo
+#endif
+{
+	public :
+  	//
+    // Objet qui contient les donnees
+    //
+    NSGroupGdData _Donnees ;
+
+    NSGroupGdInfo() ;
+		NSGroupGdInfo(const NSGroupGd*) ;
+		NSGroupGdInfo(const NSGroupGdInfo& rv) ;
+    ~NSGroupGdInfo() ;
+
+    NSGroupGdInfo& operator=(const NSGroupGdInfo& src) ;
+		int            operator==(const NSGroupGdInfo& o) ;
+
+    string getGroup() { return _Donnees.getGroup() ; }
+    string getLabel() { return _Donnees.getLabel() ; }
+    string getDate()  { return _Donnees.getDate() ;  }
+    string getUser()  { return _Donnees.getUser() ;  }
+
+    void setGroup(string sGrpe)  { _Donnees.setGroup(sGrpe) ;  }
+    void setLabel(string sLabel) { _Donnees.setLabel(sLabel) ; }
+    void setDate(string sDate)   { _Donnees.setDate(sDate) ;   }
+    void setUser(string sUser)   { _Donnees.setUser(sUser) ;   }
+};
+
+//
+// Definition de NSGroupGdArray (Array de NSGroupGd)
+//
+typedef vector<NSGroupGdInfo*>          NSGroupGdVector ;
+typedef NSGroupGdVector::iterator       NSGroupGdIter ;
+typedef NSGroupGdVector::const_iterator NSGroupGdConstIter ;
+
+#ifndef __linux__
+class _CLASSELEXI NSGroupGdArray : public NSGroupGdVector
+#else
+class NSGroupGdArray : public NSGroupGdVector
+#endif
+{
+	public :
+  	// Constructeurs
+    NSGroupGdArray() : NSGroupGdVector() {}
+    NSGroupGdArray(const NSGroupGdArray& rv) ;
+    // Destructeur
+    virtual ~NSGroupGdArray() ;
+
+    NSGroupGdArray& operator=(const NSGroupGdArray& src) ;
+    void vider() ;
+};
+
+#endif    // __NSGUIDE_H
+

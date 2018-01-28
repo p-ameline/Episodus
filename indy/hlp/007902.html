@@ -1,0 +1,130 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+<TITLE>TIdX509Name</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <META name="GENERATOR" content="Doc-O-Matic">
+    <LINK rel="STYLESHEET" href="default.css" type="text/css">
+
+<SCRIPT LANGUAGE="JavaScript1.2" SRC="scripts.js"></SCRIPT>
+</HEAD>
+<BODY CLASS="Element57">
+<TABLE BORDER="0" BGCOLOR="#AACCFF" WIDTH="100%" CELLSPACING="0" CELLPADDING="0">
+<TR><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element1">
+Indy 9</DIV>
+</TD><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element2">
+<A HREF="content.html" CLASS="Element59">Content</A> | <A HREF="idx.html" CLASS="Element59">Index</A> | <A HREF="symref.html" CLASS="Element59">Reference</A></DIV>
+</TD></TR></TABLE><DIV CLASS="Element58">
+<DIV CLASS="Element5">
+TIdX509Name</DIV>
+<DIV CLASS="Element7">
+<A HREF="014952.html" CLASS="Element59">Hierarchy</A>, <A HREF="014953.html" CLASS="Element59">Properties</A>, <A HREF="014954.html" CLASS="Element59">Methods</A>, <A HREF="014955.html" CLASS="Element59">See Also</A>, <A HREF="002875.html" CLASS="Element59">Unit: IdSSLOpenSSL</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Represents an X.509 Certificate Name.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12">TIdX509Name = <STRONG>class</STRONG>(TObject)</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Unit</DIV>
+<DIV CLASS="Element69">
+<A HREF="002875.html" CLASS="Element59">IdSSLOpenSSL</A></DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+TIdX509Name is a class used to represent an X.509 Name as required for X.509 Certificate usage.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0001">TIdX509Name.Hash</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007902.html" CLASS="Element59">TIdX509Name</A>, <A HREF="014956.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Hash value for the X.509 Name.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> Hash: <A HREF="008106.html" CLASS="Element59">TULong</A>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Hash is a read-only <A HREF="008106.html" CLASS="Element59">TULong</A> property that provides access to the hash value for the X.509 Name represented as an unsigned long integer. Differing Hash representation can be using the Byte, Word, Cardinal, or LongInt member in the return value.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0002">TIdX509Name.HashAsString</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007902.html" CLASS="Element59">TIdX509Name</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Hexadecimal representation of the <A HREF="007902.html#0001" CLASS="Element59">Hash</A> value.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> HashAsString: <STRONG>string</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Return Value</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+String - <A HREF="007902.html#0001" CLASS="Element59">Hash</A> value in hexadecimal.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+HashAsString is a read-only String property that returns the hexadecimal string representation of the has value in <A HREF="007902.html#0001" CLASS="Element59">Hash</A>.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0003">TIdX509Name.OneLine</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007902.html" CLASS="Element59">TIdX509Name</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Single line representation of the X.509 name.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> OneLine: <STRONG>string</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+OneLine is a read-only String property that returns the X.509 certificate name on a single line. OneLine will contain '' (empty string) if the name has never been assigned.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0000">TIdX509Name.Create</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007902.html" CLASS="Element59">TIdX509Name</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Constructor for the object instance.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>constructor</STRONG> Create(aX509Name: <A HREF="006157.html" CLASS="Element59">PX509_NAME</A>);</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+aX509Name: PX509_NAME</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Pointer to the X.509 Name.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Create is the constructor for the object instance. Create relies on the inherited Create method as stores the aX509Name in the internal buffer for the X.509 Name.</DIV>
+</DIV>
+<DIV CLASS="Element62">
+<HR>Created with Doc-O-Matic 2 donated to <STRONG><A HREF="http://www.delphi-jedi.org">Project JEDI</A></STRONG>. Commercial license available from the <STRONG><A HREF="http://www.doc-o-matic.com">Doc-O-Matic site</A></STRONG>.</DIV>
+</DIV></BODY></HTML>

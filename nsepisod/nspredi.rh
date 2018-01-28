@@ -1,0 +1,10 @@
+// Ammorce -> Libellés
+#define IDC_NOUVEAU	    101#define IDC_CREER	    102
+#define IDC_LIBELLES    103
+#define IDC_REPLACE	    104
+#define IDC_REMOVE	    105
+#define IDC_SUBLIBELLES 106
+#define IDC_SUBREMOVE	107
+#define IDC_IMPORT	    108
+
+

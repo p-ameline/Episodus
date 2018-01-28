@@ -1,0 +1,124 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+<TITLE>TIdMessageItem</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <META name="GENERATOR" content="Doc-O-Matic">
+    <LINK rel="STYLESHEET" href="default.css" type="text/css">
+
+<SCRIPT LANGUAGE="JavaScript1.2" SRC="scripts.js"></SCRIPT>
+</HEAD>
+<BODY CLASS="Element57">
+<TABLE BORDER="0" BGCOLOR="#AACCFF" WIDTH="100%" CELLSPACING="0" CELLPADDING="0">
+<TR><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element1">
+Indy 9</DIV>
+</TD><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element2">
+<A HREF="content.html" CLASS="Element59">Content</A> | <A HREF="idx.html" CLASS="Element59">Index</A> | <A HREF="symref.html" CLASS="Element59">Reference</A></DIV>
+</TD></TR></TABLE><DIV CLASS="Element58">
+<DIV CLASS="Element5">
+TIdMessageItem</DIV>
+<DIV CLASS="Element7">
+<A HREF="012739.html" CLASS="Element59">Hierarchy</A>, <A HREF="012740.html" CLASS="Element59">Properties</A>, <A HREF="012741.html" CLASS="Element59">Methods</A>, <A HREF="012742.html" CLASS="Element59">See Also</A>, <A HREF="002292.html" CLASS="Element59">Unit: IdMessageCollection</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Represents a message item in a message collection.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12">TIdMessageItem = <STRONG>class</STRONG>(TCollectionItem)</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Unit</DIV>
+<DIV CLASS="Element69">
+<A HREF="002292.html" CLASS="Element59">IdMessageCollection</A></DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+TIdMessageItem is a TCollectionItem descendant that implements properties and methods needed to represent message items in a <A HREF="007548.html" CLASS="Element59">TIdMessageCollection</A> container.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0000">TIdMessageItem.Attempt</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007571.html" CLASS="Element59">TIdMessageItem</A>, <A HREF="012743.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Indicates the number of attempts allowed when sending or updating a message item.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> Attempt: Integer;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Attempt is an Integer property that indicates the number of attempts allowed when trying to <A HREF="006944.html" CLASS="Element59">send</A> or update a message item in the mailbox. Attempt is used when the message item is <A HREF="007571.html#0003" CLASS="Element59">Queued</A>.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0003">TIdMessageItem.Queued</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007571.html" CLASS="Element59">TIdMessageItem</A>, <A HREF="012744.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Indicates that the message item is queued fro transmission.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> Queued: Boolean;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Queued is a Boolean property that indicates if the message item in the collection has been queued for transmission to a server. Set <A HREF="007571.html#0000" CLASS="Element59">Attempt</A> to indicate the number of retries allowed during transmission.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0001">TIdMessageItem.Create</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007571.html" CLASS="Element59">TIdMessageItem</A>, <A HREF="012745.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Constructor for the object instance.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>constructor</STRONG> Create(Collection: TCollection); <STRONG>override</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+Collection: TCollection</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Collection that owns a message item.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Create is the constructor for the object instance, and relies on the inherited Create method to initialize properties and values. Create also initializes the <A HREF="007544.html" CLASS="Element59">TIdMessage</A> used in the IdMessage property.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0002">TIdMessageItem.Destroy</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007571.html" CLASS="Element59">TIdMessageItem</A>, <A HREF="012746.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Frees the collection item.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>destructor</STRONG> Destroy; <STRONG>override</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Destroy is the destructor for the object instance, and frees resources allocated for the IdMessage property. Destroy calls the inherited Destroy method prior to exiting the method.</DIV>
+</DIV>
+<DIV CLASS="Element62">
+<HR>Created with Doc-O-Matic 2 donated to <STRONG><A HREF="http://www.delphi-jedi.org">Project JEDI</A></STRONG>. Commercial license available from the <STRONG><A HREF="http://www.doc-o-matic.com">Doc-O-Matic site</A></STRONG>.</DIV>
+</DIV></BODY></HTML>

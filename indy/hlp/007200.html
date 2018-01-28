@@ -1,0 +1,59 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+<TITLE>TIdAlertEvent</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <META name="GENERATOR" content="Doc-O-Matic">
+    <LINK rel="STYLESHEET" href="default.css" type="text/css">
+
+<SCRIPT LANGUAGE="JavaScript1.2" SRC="scripts.js"></SCRIPT>
+</HEAD>
+<BODY CLASS="Element57">
+<TABLE BORDER="0" BGCOLOR="#AACCFF" WIDTH="100%" CELLSPACING="0" CELLPADDING="0">
+<TR><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element1">
+Indy 9</DIV>
+</TD><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element2">
+<A HREF="content.html" CLASS="Element59">Content</A> | <A HREF="idx.html" CLASS="Element59">Index</A> | <A HREF="symref.html" CLASS="Element59">Reference</A></DIV>
+</TD></TR></TABLE><DIV CLASS="Element58">
+<DIV CLASS="Element5">
+TIdAlertEvent</DIV>
+<DIV CLASS="Element7">
+<A HREF="015436.html" CLASS="Element59">See Also</A>, <A HREF="002258.html" CLASS="Element59">Unit: IdIMAP4</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Event type signalled when alret messages occur in an IMAP4 response.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12">TIdAlertEvent = <STRONG>procedure</STRONG> (ASender: TObject; <STRONG>const</STRONG> AAlertMsg: <STRONG>String</STRONG>) <STRONG>of</STRONG> <STRONG>object</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Unit</DIV>
+<DIV CLASS="Element69">
+<A HREF="002258.html" CLASS="Element59">IdIMAP4</A></DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+AAlertMsg</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Alert message found in the IMAP4 response.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+Sender</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+IMAP4 client for the event notification.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+TIdAlertEvent is an event type signalled to allow an IMAP4 client to receive alert messages. Alert messages can occur in results from an IMAP4 command that selects the current mailbox, or appends a new message to a mailbox. TIdAlertEvent event are generated when the alert is parsed from the results from the command.<P CLASS="Element10">
+TIdAlertEvent allows the IMAP4 client to perform an operation by signalling the <A HREF="007405.html#001D" CLASS="Element59">TIdIMAP4.OnAlert</A> event handler.</DIV>
+</DIV>
+<DIV CLASS="Element62">
+<HR>Created with Doc-O-Matic 2 donated to <STRONG><A HREF="http://www.delphi-jedi.org">Project JEDI</A></STRONG>. Commercial license available from the <STRONG><A HREF="http://www.doc-o-matic.com">Doc-O-Matic site</A></STRONG>.</DIV>
+</DIV></BODY></HTML>

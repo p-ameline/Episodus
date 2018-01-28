@@ -1,0 +1,206 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+<TITLE>TIdUserAccounts</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <META name="GENERATOR" content="Doc-O-Matic">
+    <LINK rel="STYLESHEET" href="default.css" type="text/css">
+
+<SCRIPT LANGUAGE="JavaScript1.2" SRC="scripts.js"></SCRIPT>
+</HEAD>
+<BODY CLASS="Element57">
+<TABLE BORDER="0" BGCOLOR="#AACCFF" WIDTH="100%" CELLSPACING="0" CELLPADDING="0">
+<TR><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element1">
+Indy 9</DIV>
+</TD><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element2">
+<A HREF="content.html" CLASS="Element59">Content</A> | <A HREF="idx.html" CLASS="Element59">Index</A> | <A HREF="symref.html" CLASS="Element59">Reference</A></DIV>
+</TD></TR></TABLE><DIV CLASS="Element58">
+<DIV CLASS="Element5">
+TIdUserAccounts</DIV>
+<DIV CLASS="Element7">
+<A HREF="014741.html" CLASS="Element59">Hierarchy</A>, <A HREF="014742.html" CLASS="Element59">Properties</A>, <A HREF="014743.html" CLASS="Element59">Methods</A>, <A HREF="014744.html" CLASS="Element59">See Also</A>, <A HREF="002948.html" CLASS="Element59">Unit: IdUserAccounts</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Implements a container for user accounts maintained by a user manager.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12">TIdUserAccounts = <STRONG>class</STRONG>(TOwnedCollection)</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Unit</DIV>
+<DIV CLASS="Element69">
+<A HREF="002948.html" CLASS="Element59">IdUserAccounts</A></DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+TIdUserAccounts is a TOwnedCollection descendant that implements a container for <A HREF="007881.html" CLASS="Element59">TIdUserAccount</A> items maintained for the <A HREF="007883.html" CLASS="Element59">TIdUserManager</A> in a server implementation.<P CLASS="Element10">
+TIdUserAccounts extends the ancestor to provide indexed access to object instances in <A HREF="007882.html#0004" CLASS="Element59">Items</A> using the Username for the account, and reintroduces the <A HREF="007882.html#0000" CLASS="Element59">Add</A> method for creating new <A HREF="007881.html" CLASS="Element59">TIdUserAccount</A> instances to be stored in <A HREF="007882.html#0004" CLASS="Element59">Items</A>.<P CLASS="Element10">
+TIdUserAccounts also includes properties that indicate if case sensitivity is required when accessing Username or Password properties in the <A HREF="007881.html" CLASS="Element59">TIdUserAccount</A> instances in <A HREF="007882.html#0004" CLASS="Element59">Items</A> or <A HREF="007882.html#0005" CLASS="Element59">UserNames</A>.<P CLASS="Element10">
+TIdUserAccounts is the type used to represent the <A HREF="007883.html#0000" CLASS="Element59">TIdUserManager.Accounts</A> property.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0001">TIdUserAccounts.CaseSensitivePasswords</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007882.html" CLASS="Element59">TIdUserAccounts</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Indicates case is significant when verifying passwords for user accounts.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> CaseSensitivePasswords: Boolean;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+CaseSensitivePasswords is a Boolean property that indicates if case is significant when verifying the authentication credentials against the Password stored in a user account. When CaseSensitivePasswords is True, case is significant. When CaseSensitivePasswords is False, case is not significant.<P CLASS="Element10">
+Use <A HREF="007882.html#0002" CLASS="Element59">CaseSensitiveUsernames</A> to indicate if case is significant when accessing user accounts by the identity for the user account.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0002">TIdUserAccounts.CaseSensitiveUsernames</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007882.html" CLASS="Element59">TIdUserAccounts</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Indicates if case is significant when accessing user accounts by user name.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> CaseSensitiveUsernames: Boolean;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+CaseSensitiveUsernames is a Boolean property that indicates if case is significant when accessing user accounts in the collection using <A HREF="007882.html#0005" CLASS="Element59">UserNames</A>.<P CLASS="Element10">
+When CaseSensitiveUsernames is True, the read access specifier for the <A HREF="007882.html#0005" CLASS="Element59">UserNames</A> property will consider case to be significant in comparing the user name values. When CaseSensitiveUsernames is False, <A HREF="000074.html" CLASS="Element59">AnsiSameText</A> is used to perform the name comparison.<P CLASS="Element10">
+Use <A HREF="007882.html#0001" CLASS="Element59">CaseSensitivePasswords</A> to indicate if caser is significant when verifying user account credentials in the collection.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0004">TIdUserAccounts.Items</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007882.html" CLASS="Element59">TIdUserAccounts</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Provides access to user accounts by their position in the collection.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> Items [<STRONG>const</STRONG> AIndex: Integer]: <A HREF="007881.html" CLASS="Element59">TIdUserAccount</A>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+AIndex</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Position of the item in the collection.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Return Value</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+<A HREF="007881.html" CLASS="Element59">TIdUserAccount</A> - User account at the given position in the collection.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Items is an indexed <A HREF="007881.html" CLASS="Element59">TIdUserAccount</A> property that provides access to user accounts in the collection by the integer position specified in AIndex.<P CLASS="Element10">
+Items provides a read access specifier to insure that the collection item is a <A HREF="007881.html" CLASS="Element59">TIdUserAccount</A> object instance. Items provides a write access specifier to store a user account at the specified integer position in the collection.<P CLASS="Element10">
+Use <A HREF="007882.html#0005" CLASS="Element59">UserNames</A> to access user accounts in the collection using the value for the UserName property.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0005">TIdUserAccounts.UserNames</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007882.html" CLASS="Element59">TIdUserAccounts</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Provides indexed access to accounts by user name.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> UserNames [<STRONG>const</STRONG> AUserName: <STRONG>String</STRONG>]: <A HREF="007881.html" CLASS="Element59">TIdUserAccount</A>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+Index</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+User name for the account to be located in the collection.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Return Value</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+<A HREF="007881.html" CLASS="Element59">TIdUserAccount</A> - Account whose UserName matches the index value, or Nil.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+UserNames is a read-only <A HREF="007881.html" CLASS="Element59">TIdUserAccount</A> property that provides indexed access to the user account object instances maintained in the <A HREF="007882.html#0004" CLASS="Element59">Items</A> property. The index specifier is a String that is compared to the <A HREF="007881.html#0007" CLASS="Element59">TIdUserAccount.UserName</A> property to locate a specific object instance.<P CLASS="Element10">
+When <A HREF="007882.html#0002" CLASS="Element59">CaseSensitiveUsernames</A> is True, the read access specifier for the property will consider case to be significant in comparing the user name values. When <A HREF="007882.html#0002" CLASS="Element59">CaseSensitiveUsernames</A> is False, <A HREF="000074.html" CLASS="Element59">AnsiSameText</A> is used to perform the name comparison.<P CLASS="Element10">
+The return value for the property will be Nil when a user account cannot be located having the specified index value.<P CLASS="Element10">
+Use <A HREF="007882.html#0004" CLASS="Element59">Items</A> to access user accounts by their integer position in the collection.<P CLASS="Element10">
+Use <A HREF="007882.html#0000" CLASS="Element59">Add</A> to create a new user account in the collection.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0000">TIdUserAccounts.Add</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007882.html" CLASS="Element59">TIdUserAccounts</A>, <A HREF="014745.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Creates new user account object instances in the collection.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>function</STRONG> Add: <A HREF="007881.html" CLASS="Element59">TIdUserAccount</A>; <STRONG>reintroduce</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Return Value</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+<A HREF="007881.html" CLASS="Element59">TIdUserAccount</A> - User account added to the collection.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Add is a <A HREF="007881.html" CLASS="Element59">TIdUserAccount</A> function, reintroduced in <A HREF="007882.html" CLASS="Element59">TIdUserAccounts</A>, that allows creation of new user account object instances in the collection. Add calls the inherited Add method, and casts the return value to a <A HREF="007881.html" CLASS="Element59">TIdUserAccount</A> object instance.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0003">TIdUserAccounts.Create</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007882.html" CLASS="Element59">TIdUserAccounts</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Constructor for the object instance.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>constructor</STRONG> Create(AOwner: <A HREF="007883.html" CLASS="Element59">TIdUserManager</A>);</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+AOwner: TIdUserManager</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Owner of the object instance.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Create is the constructor for the object instance. Create calls the inherited Create method using AOwner as the owner of the object instance and <A HREF="007881.html" CLASS="Element59">TIdUserAccount</A> as the ItemClass for the collection.</DIV>
+</DIV>
+<DIV CLASS="Element62">
+<HR>Created with Doc-O-Matic 2 donated to <STRONG><A HREF="http://www.delphi-jedi.org">Project JEDI</A></STRONG>. Commercial license available from the <STRONG><A HREF="http://www.doc-o-matic.com">Doc-O-Matic site</A></STRONG>.</DIV>
+</DIV></BODY></HTML>

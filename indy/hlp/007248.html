@@ -1,0 +1,320 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+<TITLE>TIdConnectionIntercept</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <META name="GENERATOR" content="Doc-O-Matic">
+    <LINK rel="STYLESHEET" href="default.css" type="text/css">
+
+<SCRIPT LANGUAGE="JavaScript1.2" SRC="scripts.js"></SCRIPT>
+</HEAD>
+<BODY CLASS="Element57">
+<TABLE BORDER="0" BGCOLOR="#AACCFF" WIDTH="100%" CELLSPACING="0" CELLPADDING="0">
+<TR><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element1">
+Indy 9</DIV>
+</TD><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element2">
+<A HREF="content.html" CLASS="Element59">Content</A> | <A HREF="idx.html" CLASS="Element59">Index</A> | <A HREF="symref.html" CLASS="Element59">Reference</A></DIV>
+</TD></TR></TABLE><DIV CLASS="Element58">
+<DIV CLASS="Element5">
+TIdConnectionIntercept</DIV>
+<DIV CLASS="Element7">
+<A HREF="010214.html" CLASS="Element59">Hierarchy</A>, <A HREF="010215.html" CLASS="Element59">Properties</A>, <A HREF="010216.html" CLASS="Element59">Methods</A>, <A HREF="010217.html" CLASS="Element59">Events</A>, <A HREF="010218.html" CLASS="Element59">See Also</A>, <A HREF="002261.html" CLASS="Element59">Unit: IdIntercept</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Specifies a <A HREF="007071.html" CLASS="Element59">socket</A> handling framework that performs state change and data transformation tasks.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12">TIdConnectionIntercept = <STRONG>class</STRONG>(<A HREF="007213.html" CLASS="Element59">TIdBaseComponent</A>)</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Unit</DIV>
+<DIV CLASS="Element69">
+<A HREF="002261.html" CLASS="Element59">IdIntercept</A></DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+TIdConnectionIntercept is an abstract class that implements a generic framework for servicing sockets during operations that affect the state of the connection, or perform input and output over the <A HREF="007071.html" CLASS="Element59">socket</A> binding.<P CLASS="Element10">
+TIdConnectionIntercept descendants can be used by <A HREF="007828.html" CLASS="Element59">TIdTCPConnection</A> and descendants to act as an intermediary between the <A HREF="007071.html" CLASS="Element59">socket</A> binding for the connection and low-level operations that communicate with the protocol stack.<P CLASS="Element10">
+TIdConnectionIntercept provides virtual methods to respond to <A HREF="007248.html#0000" CLASS="Element59">Connect</A> and <A HREF="007248.html#0003" CLASS="Element59">Disconnect</A> requests for a <A HREF="007071.html" CLASS="Element59">socket</A> binding by capturing or releasing a reference to the <A HREF="007713.html" CLASS="Element59">TIdSocketHandle</A> used by the protocol stack.<P CLASS="Element10">
+The <A HREF="007071.html" CLASS="Element59">socket</A> handle will be used to access data before messages are sent and/or after responses are received. Developers can use TIdConnectionIntercept descendants to encrypt and decrypt data, or to compress and decompress messages.<P CLASS="Element10">
+Additional virtual methods can be used to perform the <A HREF="007248.html#000A" CLASS="Element59">Send</A> or Recv operation in behalf of the original <A HREF="007071.html" CLASS="Element59">socket</A> connection. TIdConnectionIntercept can also allow the <A HREF="007071.html" CLASS="Element59">socket</A> connection to complete the input/output operation by changing the SendHandling and ReceiveHandling properties.<P CLASS="Element10">
+<STRONG>Note</STRONG>: Do not create instances of TIdConnectionIntercept. Use descendant classes, like <A HREF="007249.html" CLASS="Element59">TIdConnectionInterceptOpenSSL</A> or <A HREF="007511.html" CLASS="Element59">TIdLogDebug</A>, or create custom descendants that implement the virtual methods of TIdConnectionIntercept.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0001">TIdConnectionIntercept.Connection</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007248.html" CLASS="Element59">TIdConnectionIntercept</A>, <A HREF="010219.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Socket descriptor to be arbitrated by the connection intercept.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> Connection: TComponent;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Connection is a read-only TComponent property that represents the low-level <A HREF="007071.html" CLASS="Element59">socket</A> descriptor that will be arbitrated using methods in the <A HREF="007248.html" CLASS="Element59">TIdConnectionIntercept</A> framework. Connection is assigned in the <A HREF="007248.html#0000" CLASS="Element59">Connect</A> method, and released in the <A HREF="007248.html#0003" CLASS="Element59">Disconnect</A> method.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0004">TIdConnectionIntercept.IsClient</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007248.html" CLASS="Element59">TIdConnectionIntercept</A>, <A HREF="010220.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Indicates that the <A HREF="007071.html" CLASS="Element59">socket</A> handler is for a client connection.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> IsClient: Boolean;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+IsClient is a read-only Boolean property that indicates the <A HREF="007071.html" CLASS="Element59">socket</A> intercept handler is for a client connection. The default value for IsClient is True, as assigned in the <A HREF="007248.html#0002" CLASS="Element59">Create</A> constructor.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0000">TIdConnectionIntercept.Connect</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007248.html" CLASS="Element59">TIdConnectionIntercept</A>, <A HREF="010221.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Responds to connection notifications.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>procedure</STRONG> Connect(AConnection: TComponent); <STRONG>virtual</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+ABinding</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Socket handle for the connection.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Connect is procedure used to inform the <A HREF="007248.html" CLASS="Element59">TIdConnectionIntercept</A> that the <A HREF="007071.html" CLASS="Element59">socket</A> has successfully completed a connection. <I>ABinding</I> is the <A HREF="007713.html" CLASS="Element59">TIdSocketHandle</A> <A HREF="007071.html" CLASS="Element59">socket</A> descriptor that generates the connection notification, and is stored in Binding.<P CLASS="Element10">
+Connect generates a TNotifyEvent event when the <A HREF="007248.html#0005" CLASS="Element59">OnConnect</A> event handler has been assigned to respond to the connection event.<P CLASS="Element10">
+Connect is a virtual method in <A HREF="007248.html" CLASS="Element59">TIdConnectionIntercept</A>, and can be re-implemented in descendant classes to provide additional connection handling appropriate to the <A HREF="007071.html" CLASS="Element59">socket</A> handler.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0002">TIdConnectionIntercept.Create</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007248.html" CLASS="Element59">TIdConnectionIntercept</A>, <A HREF="010222.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Constructor for the object instance.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>constructor</STRONG> Create(AOwner: TComponent); <STRONG>override</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+AOwner: TComponent</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Owner of the object instance.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Create is the construcor for the object instance. Create call the inherited Create method using AOwner as the owner of the object instance. Create also assigns True as the default value for the <A HREF="007248.html#0004" CLASS="Element59">IsClient</A> property.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0003">TIdConnectionIntercept.Disconnect</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007248.html" CLASS="Element59">TIdConnectionIntercept</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Responds to <A HREF="007071.html" CLASS="Element59">socket</A> disconnection notifications.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>procedure</STRONG> Disconnect; <STRONG>virtual</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Disconnect is a procedure that allows <A HREF="007248.html" CLASS="Element59">TIdConnectionIntercept</A> to respond to notification the <A HREF="007071.html" CLASS="Element59">socket</A> connection is Binding is closing.<P CLASS="Element10">
+Disconnect is a virtual method that sets the value of Binding, assigned in the <A HREF="007248.html#0000" CLASS="Element59">Connect</A> method, to <STRONG>Nil</STRONG>. Clearing the reference in Binding will prevent further <A HREF="007071.html" CLASS="Element59">socket</A> notifications to the <A HREF="007071.html" CLASS="Element59">socket</A> handler.<P CLASS="Element10">
+<A HREF="007248.html" CLASS="Element59">TIdConnectionIntercept</A> descendants should implement Disconnect to perform the operations appropriate to the <A HREF="007071.html" CLASS="Element59">socket</A> handler.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0009">TIdConnectionIntercept.Receive</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007248.html" CLASS="Element59">TIdConnectionIntercept</A>, <A HREF="010223.html" CLASS="Element59">See Also</A>, <A HREF="010224.html" CLASS="Element59">Example</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Performs read operations for the <A HREF="007071.html" CLASS="Element59">socket</A> handler.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>procedure</STRONG> Receive(ABuffer: TStream); <STRONG>virtual</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+ABuf</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Pointer to the buffer for received data.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+ALen</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Number of bytes to read, or size of the memory buffer.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Return Value</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Integer - Number of bytes received. Default Value is <STRONG>0</STRONG>.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Receive is an Integer function that performs read operations for the Binding that represents the <A HREF="007071.html" CLASS="Element59">socket</A> connection. When the <A HREF="007248.html" CLASS="Element59">TIdConnectionIntercept</A> component is enabled and RecvHandling is indicated, Receive is the method used to perform all read operations instead of the Receive method for the Binding.<P CLASS="Element10">
+Receive is used in conjunction with DataReceived to allow the <A HREF="007248.html" CLASS="Element59">TIdConnectionIntercept</A> to perform transformations for any data read from the protocol stack.<P CLASS="Element10">
+<STRONG>Note</STRONG>: Receive is a virtual method in <A HREF="007248.html" CLASS="Element59">TIdConnectionIntercept</A> and always returns <STRONG>0</STRONG> as the result value. Descendant classes should implement Receive to perform <A HREF="007071.html" CLASS="Element59">socket</A> read operations appropriate for the <A HREF="007071.html" CLASS="Element59">socket</A> handler.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="000A">TIdConnectionIntercept.Send</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007248.html" CLASS="Element59">TIdConnectionIntercept</A>, <A HREF="010225.html" CLASS="Element59">Example</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Performs <A HREF="006944.html" CLASS="Element59">send</A> operations for the <A HREF="007071.html" CLASS="Element59">socket</A> handler.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>procedure</STRONG> Send(ABuffer: TStream); <STRONG>virtual</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+ABuf</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Pointer to the buffer for data to <A HREF="006944.html" CLASS="Element59">send</A>.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+ALen</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Number of bytes to <A HREF="006944.html" CLASS="Element59">send</A>, or size of the memory buffer.<P CLASS="Element19">
+Return Values:<P CLASS="Element19">
+<STRONG>Integer</STRONG> - Number of bytes sent. Default Value is <STRONG>0</STRONG>.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Send is an <STRONG>Integer</STRONG> function that performs write operations for the Binding that represents the <A HREF="007071.html" CLASS="Element59">socket</A> connection. When the <A HREF="007248.html" CLASS="Element59">TIdConnectionIntercept</A> component is enabled and SendHandling is indicated, Send is the method used to perform all write operations instead of the Send method for the Binding.<P CLASS="Element10">
+Send is used in conjunction with DataSent to allow the <A HREF="007248.html" CLASS="Element59">TIdConnectionIntercept</A> to perform transformations for any data written to the protocol stack.<P CLASS="Element10">
+<STRONG>Note</STRONG>: Send is a virtual method in <A HREF="007248.html" CLASS="Element59">TIdConnectionIntercept</A> and always returns <STRONG>0</STRONG> as the result value. Descendant classes should implement Send to perform <A HREF="007071.html" CLASS="Element59">socket</A> write operations appropriate for the <A HREF="007071.html" CLASS="Element59">socket</A> handler.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0005">TIdConnectionIntercept.OnConnect</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007248.html" CLASS="Element59">TIdConnectionIntercept</A>, <A HREF="010226.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Specifies the event handler for connection notifications.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> OnConnect: <A HREF="007419.html" CLASS="Element59">TIdInterceptNotifyEvent</A>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+ABinding</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Socket handle for the peer connection.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+OnConnect is a <STRONG>TNotifyEvent</STRONG> property that is the event handler for connection notifications received by the <A HREF="007248.html" CLASS="Element59">TIdConnectionIntercept</A> <A HREF="007071.html" CLASS="Element59">socket</A> handler.<P CLASS="Element10">
+<I>ABinding</I> is the <A HREF="007713.html" CLASS="Element59">TIdSocketHandle</A> <A HREF="007071.html" CLASS="Element59">socket</A> handle for the peer connection, and is stored in Binding for use during read and write operations.<P CLASS="Element10">
+Assign a procedure to OnConnect to perform special processing when a connection notification is received in the <A HREF="007248.html#0000" CLASS="Element59">Connect</A> method. Applications must assign an OnConnect event handler in order to respond to connection notifications.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0006">TIdConnectionIntercept.OnDisconnect</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007248.html" CLASS="Element59">TIdConnectionIntercept</A>, <A HREF="010227.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Event handler signalled when the connection is closing.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> OnDisconnect: <A HREF="007419.html" CLASS="Element59">TIdInterceptNotifyEvent</A>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+OnDisconnect is a <A HREF="007419.html" CLASS="Element59">TIdInterceptNotifyEvent</A> property that represents the event handler signalled when the arbitrated <A HREF="007071.html" CLASS="Element59">socket</A> descriptor in <A HREF="007248.html#0001" CLASS="Element59">Connection</A> should be closed. OnDisconnect is triggered in <A HREF="007248.html#0003" CLASS="Element59">Disconnect</A> prior to releasing the valuein <A HREF="007248.html#0001" CLASS="Element59">Connection</A>.<P CLASS="Element10">
+Applications must assign a procedure to the <A HREF="007419.html" CLASS="Element59">TIdInterceptNotifyEvent</A> event handler to allow responding to the event notification.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0007">TIdConnectionIntercept.OnReceive</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007248.html" CLASS="Element59">TIdConnectionIntercept</A>, <A HREF="010228.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Allows data handling or transformation for intercepted read operations.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> OnReceive: <A HREF="007420.html" CLASS="Element59">TIdInterceptStreamEvent</A>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+OnReceive is a <A HREF="007420.html" CLASS="Element59">TIdInterceptStreamEvent</A> property that represents the event handler signalled when a read operation needs to be performed for the <A HREF="007071.html" CLASS="Element59">socket</A> descriptor in <A HREF="007248.html#0001" CLASS="Element59">Connection</A>. OnReceive is triggered in the <A HREF="007248.html#0009" CLASS="Element59">Receive</A> method, and allows handling or transformation of buffered data in a TStream instance.<P CLASS="Element10">
+Applications must assign a procedure to the <A HREF="007420.html" CLASS="Element59">TIdInterceptStreamEvent</A> event handler to allow responding to the event notification.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0008">TIdConnectionIntercept.OnSend</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007248.html" CLASS="Element59">TIdConnectionIntercept</A>, <A HREF="010229.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Allows data handling or transformation for intercepted write operations.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> OnSend: <A HREF="007420.html" CLASS="Element59">TIdInterceptStreamEvent</A>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+OnSend is a <A HREF="007420.html" CLASS="Element59">TIdInterceptStreamEvent</A> property that represents the event handler signalled when a write operation needs to be performed for the <A HREF="007071.html" CLASS="Element59">socket</A> descriptor in <A HREF="007248.html#0001" CLASS="Element59">Connection</A>. OnSend is triggered in the <A HREF="007248.html#000A" CLASS="Element59">Send</A> method, and allows handling or transformation of buffered data in a TStream instance.<P CLASS="Element10">
+Applications must assign a procedure to the <A HREF="007420.html" CLASS="Element59">TIdInterceptStreamEvent</A> event handler to allow responding to the event notification.</DIV>
+</DIV>
+<DIV CLASS="Element62">
+<HR>Created with Doc-O-Matic 2 donated to <STRONG><A HREF="http://www.delphi-jedi.org">Project JEDI</A></STRONG>. Commercial license available from the <STRONG><A HREF="http://www.doc-o-matic.com">Doc-O-Matic site</A></STRONG>.</DIV>
+</DIV></BODY></HTML>

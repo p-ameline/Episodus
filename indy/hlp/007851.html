@@ -1,0 +1,334 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+<TITLE>TIdThreadComponent</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <META name="GENERATOR" content="Doc-O-Matic">
+    <LINK rel="STYLESHEET" href="default.css" type="text/css">
+
+<SCRIPT LANGUAGE="JavaScript1.2" SRC="scripts.js"></SCRIPT>
+</HEAD>
+<BODY CLASS="Element57">
+<TABLE BORDER="0" BGCOLOR="#AACCFF" WIDTH="100%" CELLSPACING="0" CELLPADDING="0">
+<TR><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element1">
+Indy 9</DIV>
+</TD><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element2">
+<A HREF="content.html" CLASS="Element59">Content</A> | <A HREF="idx.html" CLASS="Element59">Index</A> | <A HREF="symref.html" CLASS="Element59">Reference</A></DIV>
+</TD></TR></TABLE><DIV CLASS="Element58">
+<DIV CLASS="Element5">
+TIdThreadComponent</DIV>
+<DIV CLASS="Element7">
+<A HREF="014334.html" CLASS="Element59">Hierarchy</A>, <A HREF="014335.html" CLASS="Element59">Properties</A>, <A HREF="014336.html" CLASS="Element59">Methods</A>, <A HREF="014337.html" CLASS="Element59">See Also</A>, <A HREF="002924.html" CLASS="Element59">Unit: IdThreadComponent</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Implements a visual component using a thread of execution.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12">TIdThreadComponent = <STRONG>class</STRONG>(<A HREF="007273.html" CLASS="Element59">TIdCustomThreadComponent</A>)</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Unit</DIV>
+<DIV CLASS="Element69">
+<A HREF="002924.html" CLASS="Element59">IdThreadComponent</A></DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+TIdThreadComponent is a <A HREF="007273.html" CLASS="Element59">TIdCustomThreadComponent</A> descendant that exposes properties and event handlers from the ancestor class that reference the protected thread for the component. Read and write access for properties that reference the protected thread are delegated to the internal <A HREF="007846.html" CLASS="Element59">TIdThread</A> instance.<P CLASS="Element10">
+Event handlers published in TIdThreadComponent are provided to the internal thread instance to allow event notifications and synchronization during thread execution.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0000">TIdThreadComponent.Active</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007851.html" CLASS="Element59">TIdThreadComponent</A>, <A HREF="014338.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Indicates the internal thread is running and has not been Stopped.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> Active;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Active is a Boolean property that is published in <A HREF="007851.html" CLASS="Element59">TIdThreadComponent</A>, and indicates when the internal thread for the component is running and has not been Stopped. Changing the value in Active will result in a call to the Start method for the internal thread when Active is True. A call to the Stop method for the internal thread is made when Active is False. The read value for Active is True when the internal thread is not Stopped.<P CLASS="Element10">
+<STRONG>Note</STRONG>: At design-time, the value for Active does not examine the state of the internal thread since it is not started or stopped in the IDE.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0001">TIdThreadComponent.OnAfterExecute</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007851.html" CLASS="Element59">TIdThreadComponent</A>, <A HREF="014339.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Event handler signalled when the internal thread has completed.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> OnAfterExecute;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+Sender</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Threaded component for the event notification.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+OnAfterExecute is a published <A HREF="007603.html" CLASS="Element59">TIdNotifyThreadComponentEvent</A> property in IdThreadComponent that represents the event handler used to signal completion of the internal thread. OnAfterExecute is triggered using the component context in Sender when the internal thread performs its AfterExecute method.<P CLASS="Element10">
+Applications must assigned a procedure to the event handler to allow responding to the event notification.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0002">TIdThreadComponent.OnAfterRun</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007851.html" CLASS="Element59">TIdThreadComponent</A>, <A HREF="014340.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Indicates that thread execution has been Stopped, but may be Resumed.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> OnAfterRun;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+Sender</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Threaded component for the event notification.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+OnAfterRun is a published <A HREF="007603.html" CLASS="Element59">TIdNotifyThreadComponentEvent</A> property in IdThreadComponent that represents the event handler used to signal that execution of the internal thread has been stopped, but the thread is still running. OnAfterRun is triggered using the component context in Sender when the internal thread performs its AfterRun method. OnAfterRun occurs prior to CleanUp and AfterExecute for the internal thread.<P CLASS="Element10">
+Applications must assigned a procedure to the event handler to allow responding to the event notification.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0003">TIdThreadComponent.OnBeforeExecute</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007851.html" CLASS="Element59">TIdThreadComponent</A>, <A HREF="014341.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Indicates the thread is about to enter the inner control loop.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> OnBeforeExecute;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+Sender</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Threaded component for the event notification.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+OnBeforeExecute is a published <A HREF="007603.html" CLASS="Element59">TIdNotifyThreadComponentEvent</A> property in <A HREF="007851.html" CLASS="Element59">TIdThreadComponent</A> that represents the event handler used to signal that the internal thread is about to begin running in the inner control loop. OnBeforeExecute is triggered using the component context in Sender when the internal thread performs its BeforeExecute method. OnBeforeExecute occurs prior to the TIdThread.BeforeRun method and both the <A HREF="007851.html#0004" CLASS="Element59">OnBeforeRun</A> and <A HREF="007851.html#0007" CLASS="Element59">OnRun</A> event handlers.<P CLASS="Element10">
+Applications must assigned a procedure to the event handler to allow responding to the event notification.<P CLASS="Element10">
+Use <A HREF="007851.html#0001" CLASS="Element59">OnAfterExecute</A> to perform application specific processing required when the thread has been completed in it's entirety.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0004">TIdThreadComponent.OnBeforeRun</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007851.html" CLASS="Element59">TIdThreadComponent</A>, <A HREF="014342.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Indicates the thread is about an iteration in the inner control loop.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> OnBeforeRun;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+Sender</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Threaded component for the event notification.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+OnBeforeRun is a published <A HREF="007603.html" CLASS="Element59">TIdNotifyThreadComponentEvent</A> property in <A HREF="007851.html" CLASS="Element59">TIdThreadComponent</A> that represents the event handler used to signal that the thread is about to perform an iteration in the inner control loop. OnBeforeRun is triggered using the component context in Sender when the internal thread performs its BeforeRun method. OnBeforeRun occurs prior to the TIdThread.Run method and the <A HREF="007851.html#0007" CLASS="Element59">OnRun</A> event handler.<P CLASS="Element10">
+Applications must assigned a procedure to the event handler to allow responding to the event notification.<P CLASS="Element10">
+Use <A HREF="007851.html#0002" CLASS="Element59">OnAfterRun</A> to perform application specific processing required when the thread has completed an iteration in the inner control loop.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0005">TIdThreadComponent.OnCleanup</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007851.html" CLASS="Element59">TIdThreadComponent</A>, <A HREF="014343.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Event handler for thread teardown after execution.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> OnCleanup;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+Sender</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Threaded component for the event notification.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+OnCleanup is a published <A HREF="007603.html" CLASS="Element59">TIdNotifyThreadComponentEvent</A> property in <A HREF="007851.html" CLASS="Element59">TIdThreadComponent</A> that represents the event handler signalled after the internal thread instance for the component performs it CleanUp method. OnCleanup is executed just prior to the TIdThread.AfterExecute method and the <A HREF="007851.html#0001" CLASS="Element59">OnAfterExecute</A> event handler.<P CLASS="Element10">
+OnCleanup is triggered by the internal thread instance using the component context in Sender.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0006">TIdThreadComponent.OnException</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007851.html" CLASS="Element59">TIdThreadComponent</A>, <A HREF="014344.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Event handler for an exception raised during internal thread execution.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> OnException;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+AException</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Exception raised during execution of the internal thread.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+Sender</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Threaded component for the exception handler.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+OnException is a published <A HREF="007321.html" CLASS="Element59">TIdExceptionThreadComponentEvent</A> property that represents the event handler signalled when an exception occurs during execution of the internal thread for the component. OnException is triggerd from <A HREF="007846.html#0000" CLASS="Element59">TIdThread.OnException</A> using the component context in Sender. AException is the exception raised from the control loop in TIdThread.Execute.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0007">TIdThreadComponent.OnRun</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007851.html" CLASS="Element59">TIdThreadComponent</A>, <A HREF="014345.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Event handler signalled when the internal thread is Run.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> OnRun;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+Sender</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Threaded component for the event notification.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+OnRun is a published <A HREF="007603.html" CLASS="Element59">TIdNotifyThreadComponentEvent</A> property in <A HREF="007851.html" CLASS="Element59">TIdThreadComponent</A> that represents the event handler signalled when the internal thread is Run. OnRun is triggered from the TIdThread.Run method using the component context in Sender.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0008">TIdThreadComponent.OnStopped</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007851.html" CLASS="Element59">TIdThreadComponent</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Event handler triggered when the internal thread is stopped.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> OnStopped;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+OnStopped is a published <A HREF="007603.html" CLASS="Element59">TIdNotifyThreadComponentEvent</A> property in <A HREF="007851.html" CLASS="Element59">TIdThreadComponent</A> that represents the event handler signalled when execution of the internal thread for the component has been stopped.<P CLASS="Element10">
+OnStopped is triggered after entering the control loop in TIdThread.Execute, and when <A HREF="007846.html#0005" CLASS="Element59">TIdThread.Stopped</A> contains the value True. If the internal thread has also been Terminated, the control loop is exited and the thread calls AfterExecute.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0009">TIdThreadComponent.OnTerminate</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007851.html" CLASS="Element59">TIdThreadComponent</A>, <A HREF="014346.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Event handler triggered when the internal thread is Terminated.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> OnTerminate;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+OnTerminate is a published <A HREF="007603.html" CLASS="Element59">TIdNotifyThreadComponentEvent</A> property in <A HREF="007851.html" CLASS="Element59">TIdThreadComponent</A> that represents the event handler signalled when the internal thread for the component is Terminated. OnTerminate is triggered as a result of calling <A HREF="007846.html#0000" CLASS="Element59">TIdThread.Terminate</A> to exit the control loop in TIdThread.Execute.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="000A">TIdThreadComponent.Priority</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007851.html" CLASS="Element59">TIdThreadComponent</A>, <A HREF="014347.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Indicates the relative scheduling priority for the internal thread.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> Priority;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Priority is a published <A HREF="007856.html" CLASS="Element59">TIdThreadPriority</A> property in <A HREF="007851.html" CLASS="Element59">TIdThreadComponent</A> that indicates the relative scheduling priority of the internal thread instance for the component. Read and write access to value in Priority is delegated to the internal thread instance.<P CLASS="Element10">
+Priority can be changed request or release CPU cycles during thread execution. <STRONG>Warning</STRONG>: Boosting the thread priority of a CPU intensive operation may “starve” the other threads in the application. Only apply priority boosts to threads that spend most of their time waiting for external events.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="000B">TIdThreadComponent.StopMode</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007851.html" CLASS="Element59">TIdThreadComponent</A>, <A HREF="014348.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Indicates the action to be taken when the internal thread is Stopped.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> StopMode;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+StopMode is a published <A HREF="007863.html" CLASS="Element59">TIdThreadStopMode</A> property in <A HREF="007851.html" CLASS="Element59">TIdThreadComponent</A> that indicates the action when the internal thread contains True in the Stopped property. StopMode is updated when the internal thread calls its Stop method.<P CLASS="Element10">
+Read and write access to the value in StopMode is delegated to the internal thread instance for the component.</DIV>
+</DIV>
+<DIV CLASS="Element62">
+<HR>Created with Doc-O-Matic 2 donated to <STRONG><A HREF="http://www.delphi-jedi.org">Project JEDI</A></STRONG>. Commercial license available from the <STRONG><A HREF="http://www.doc-o-matic.com">Doc-O-Matic site</A></STRONG>.</DIV>
+</DIV></BODY></HTML>

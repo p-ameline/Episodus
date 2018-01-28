@@ -1,0 +1,53 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+<TITLE>TNetworkClass</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <META name="GENERATOR" content="Doc-O-Matic">
+    <LINK rel="STYLESHEET" href="default.css" type="text/css">
+
+<SCRIPT LANGUAGE="JavaScript1.2" SRC="scripts.js"></SCRIPT>
+</HEAD>
+<BODY CLASS="Element57">
+<TABLE BORDER="0" BGCOLOR="#AACCFF" WIDTH="100%" CELLSPACING="0" CELLPADDING="0">
+<TR><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element1">
+Indy 9</DIV>
+</TD><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element2">
+<A HREF="content.html" CLASS="Element59">Content</A> | <A HREF="idx.html" CLASS="Element59">Index</A> | <A HREF="symref.html" CLASS="Element59">Reference</A></DIV>
+</TD></TR></TABLE><DIV CLASS="Element58">
+<DIV CLASS="Element5">
+TNetworkClass</DIV>
+<DIV CLASS="Element7">
+<A HREF="002304.html" CLASS="Element59">Unit: IdNetworkCalculator</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Specifies valid network class values used by <A HREF="007582.html" CLASS="Element59">TIdNetworkCalculator</A>.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12">TNetworkClass = (ID_NET_CLASS_A, ID_NET_CLASS_B, ID_NET_CLASS_C, ID_NET_CLASS_D, ID_NET_CLASS_E);</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Unit</DIV>
+<DIV CLASS="Element69">
+<A HREF="002304.html" CLASS="Element59">IdNetworkCalculator</A></DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+TNetwork class is an enumerated type that identifies the valid values that can be used in <A HREF="007582.html" CLASS="Element59">TIdNetworkCalculator</A>. Values in the TNetworkClass enumeration correspond to the network addressing scheme described in the Internet Standards document RFC 1365 - An IP Address Extension Proposal (http://www.rfc-editor.org/rfc/rfc1365.txt) . .<P CLASS="Element10">
+The 32-bit IP address is defined as having a network part and a local address part. The division between the network part and the local address part has been defined in terms of 5 address classes: class A, B, C, D, E. Only class A, B, and C addresses are assigned to hosts. Class D is used for multicasting. Class E is reserved.<P CLASS="Element10">
+The enumerated values and meanings of TNetworkClass are:<P CLASS="Element10">
+<UL>
+<LI>ID_NET_CLASS_A - Class A has the highest order bit set to 0, a 7 bit network number and a 24 bit host address.<P CLASS="Element10">
+<LI>ID_NET_CLASS_B - Class B has the two higher order bits set to 10, a 14 bit network number and a 16 bit host address.<P CLASS="Element10">
+<LI>ID_NET_CLASS_C - Class C has the three higher order bit set to 110, a 21 bit network number and a 8 bit host address.<P CLASS="Element10">
+<LI>ID_NET_CLASS_D - Class D has the four higher order bits set to 1110.<P CLASS="Element10">
+<LI>ID_NET_CLASS_E- Class E has four higher address bits set to 1111.</UL>
+</DIV>
+</DIV>
+<DIV CLASS="Element62">
+<HR>Created with Doc-O-Matic 2 donated to <STRONG><A HREF="http://www.delphi-jedi.org">Project JEDI</A></STRONG>. Commercial license available from the <STRONG><A HREF="http://www.doc-o-matic.com">Doc-O-Matic site</A></STRONG>.</DIV>
+</DIV></BODY></HTML>

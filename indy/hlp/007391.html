@@ -1,0 +1,466 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+<TITLE>TIdHTTPResponseInfo</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <META name="GENERATOR" content="Doc-O-Matic">
+    <LINK rel="STYLESHEET" href="default.css" type="text/css">
+
+<SCRIPT LANGUAGE="JavaScript1.2" SRC="scripts.js"></SCRIPT>
+</HEAD>
+<BODY CLASS="Element57">
+<TABLE BORDER="0" BGCOLOR="#AACCFF" WIDTH="100%" CELLSPACING="0" CELLPADDING="0">
+<TR><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element1">
+Indy 9</DIV>
+</TD><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element2">
+<A HREF="content.html" CLASS="Element59">Content</A> | <A HREF="idx.html" CLASS="Element59">Index</A> | <A HREF="symref.html" CLASS="Element59">Reference</A></DIV>
+</TD></TR></TABLE><DIV CLASS="Element58">
+<DIV CLASS="Element5">
+TIdHTTPResponseInfo</DIV>
+<DIV CLASS="Element7">
+<A HREF="011560.html" CLASS="Element59">Hierarchy</A>, <A HREF="011561.html" CLASS="Element59">Properties</A>, <A HREF="011562.html" CLASS="Element59">Methods</A>, <A HREF="011563.html" CLASS="Element59">See Also</A>, <A HREF="002147.html" CLASS="Element59">Unit: IdCustomHTTPServer</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Implements a HTTP response object.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12">TIdHTTPResponseInfo = <STRONG>class</STRONG>(<A HREF="007655.html" CLASS="Element59">TIdResponseHeaderInfo</A>)</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Unit</DIV>
+<DIV CLASS="Element69">
+<A HREF="002147.html" CLASS="Element59">IdCustomHTTPServer</A></DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+TIdHTTPResponseInfo is a <A HREF="007655.html" CLASS="Element59">TIdResponseHeaderInfo</A> descendant that encapsulates access to information for a HTTP response. TIdHTTPResponseInfo is used by <A HREF="007392.html" CLASS="Element59">TIdHTTPServer</A> to prepare a HTTP response for a peer thread request.<P CLASS="Element10">
+TIdHTTPResponseInfo publishes properties that provide access to various information for a HTTP response. These properties include the HTTP session, the authentication realm, <A HREF="007391.html#0005" CLASS="Element59">Cookies</A>, Headers, and the response content, length, and type.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0000">TIdHTTPResponseInfo.AuthRealm</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007391.html" CLASS="Element59">TIdHTTPResponseInfo</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Identifies the authentication and encryption for the HTTP response.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> AuthRealm: <STRONG>string</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+AuthRealm is a String property that identifies the authentication and encryption scheme used for the HTTP response. AuthRealm is used in when constructing headers for <A HREF="007391.html" CLASS="Element59">TIdHTTPResponseInfo</A> from property values. When AuthRealm contains a non-blank value, the HTTP response will include include a &quot;WWW-Authenticate&quot; header with the value &quot;Basic realm=&quot; and the quoted contents of the AuthRealm property. AuthRealm also insures that the <A HREF="007391.html#000B" CLASS="Element59">ResponseNo</A> for the HTTP Response is 401.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0001">TIdHTTPResponseInfo.CloseConnection</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007391.html" CLASS="Element59">TIdHTTPResponseInfo</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Indicates if the HTTP response should contain a close connection header.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> CloseConnection: Boolean;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+CloseConnection is a Boolean property that indicates if the connection used for the HTTP response should remain open, or close after completed transmission of the the HTTP response. Changing the value in CloseConnection cause the value in Connection property to be updated for use in the generate <A HREF="000295.html" CLASS="Element59">connect</A> header for the response. When CloseConnection contains True, the Connection property is given the value 'close'. Otherwise Connection is set to the value 'keep-alive'.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0003">TIdHTTPResponseInfo.ContentStream</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007391.html" CLASS="Element59">TIdHTTPResponseInfo</A>, <A HREF="011564.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Specifies the stream that contains the content data.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> ContentStream: TStream;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+ContentStream is a TStream property that specifies the stream containing the content data for the HTTP response. <A HREF="007391.html#000F" CLASS="Element59">WriteContent</A> uses ContentStream, when assigned, to generate HTTP response content instead of <A HREF="007391.html#0004" CLASS="Element59">ContentText</A>.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0004">TIdHTTPResponseInfo.ContentText</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007391.html" CLASS="Element59">TIdHTTPResponseInfo</A>, <A HREF="011565.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Specifies the content for the HTTP response.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> ContentText: <STRONG>string</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+ContentText is a String property that specifies the data used for the content of the HTTP response. <A HREF="007391.html#000F" CLASS="Element59">WriteContent</A> uses <A HREF="007391.html#0003" CLASS="Element59">ContentStream</A>, when assigned, to generate HTTP response content instead of ContentText.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0005">TIdHTTPResponseInfo.Cookies</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007391.html" CLASS="Element59">TIdHTTPResponseInfo</A>, <A HREF="011566.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Identifies Cookies for the HTTP response.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> Cookies: <A HREF="007674.html" CLASS="Element59">TIdServerCookies</A>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Cookies is a <A HREF="007674.html" CLASS="Element59">TIdServerCookies</A> property that is a container for cookies values to be included in the HTTP response. Initial values for Cookies are assigned during execution of the client thread in <A HREF="007271.html" CLASS="Element59">TIdCustomHTTPServer</A> when they are read from the HTTP request. Cookies is used to store the <A HREF="000687.html" CLASS="Element59">GSessionIDCookie</A> that represents persistent state information for the HTTP session. Cookies is also used when headers for the HTTP response are constructed and written in <A HREF="007391.html#0010" CLASS="Element59">TIdHTTPResponseInfo.WriteHeader</A>.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0008">TIdHTTPResponseInfo.FreeContentStream</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007391.html" CLASS="Element59">TIdHTTPResponseInfo</A>, <A HREF="011567.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Indicates if the object instance can free its <A HREF="007391.html#0003" CLASS="Element59">ContentStream</A>.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> FreeContentStream: Boolean;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+FreeContentStream is a Boolean property that indicates if the object instance can free the TStream resource allocated in <A HREF="007391.html#0003" CLASS="Element59">ContentStream</A>. FreeContentStream is set to True in the <A HREF="007391.html#0006" CLASS="Element59">Create</A> constructor, and insures that <A HREF="007391.html#0003" CLASS="Element59">ContentStream</A> will be released, if assigned prior to retrieving an HTTP response, in the <A HREF="007391.html#0007" CLASS="Element59">Destroy</A> method.<P CLASS="Element10">
+Under normal circumstances, FreeContentStream is not changed during the lifetime of the HTTP response. Set FreeContentStream to False when <A HREF="007391.html#0003" CLASS="Element59">ContentStream</A> is assigned manually, and the stream must continue to exist even after destruction of the HTTP response.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0009">TIdHTTPResponseInfo.HeaderHasBeenWritten</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007391.html" CLASS="Element59">TIdHTTPResponseInfo</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Indicates that headers have been written in the HTTP response.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> HeaderHasBeenWritten: Boolean;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+HeaderHasBeenWritten ia Boolean property that indicates headers have already been written in the HTTP response. HeaderHasBeenWritten is used in <A HREF="007391.html#0010" CLASS="Element59">WriteHeader</A> to prevent duplication of header values for the HTTP response. HeaderHasBeenWritten is also checked when a threaded connection needs to write a HTTP response in the TIdHTTPServer.OnExecute event handler.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="000B">TIdHTTPResponseInfo.ResponseNo</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007391.html" CLASS="Element59">TIdHTTPResponseInfo</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Numeric response code for the HTTP response.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> ResponseNo: Integer;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+ResponseNo is an Integer property that indicates the numeric response code for the HTTP response. ResponseNo can contain one of the following numeric values, as defined in the HTTP protocol:<P CLASS="Element10">
+<UL>
+<LI>200 - OK<P CLASS="Element10">
+<LI>201 - Created<P CLASS="Element10">
+<LI>202 - Accepted<P CLASS="Element10">
+<LI>203 - Non-authoritative Information<P CLASS="Element10">
+<LI>204 - No Content<P CLASS="Element10">
+<LI>205 - Reset Content -<P CLASS="Element10">
+<LI>206 - Partial Content<P CLASS="Element10">
+<LI>301 - Moved Permanently<P CLASS="Element10">
+<LI>302 - Moved Temporarily<P CLASS="Element10">
+<LI>303 - See Other<P CLASS="Element10">
+<LI>304 - Not Modified<P CLASS="Element10">
+<LI>305 - Use Proxy<P CLASS="Element10">
+<LI>400 - Bad Request<P CLASS="Element10">
+<LI>401 - Unauthorized<P CLASS="Element10">
+<LI>403 - Forbidden<P CLASS="Element10">
+<LI>404 - Not Found<P CLASS="Element10">
+<LI>405 - Method not allowed<P CLASS="Element10">
+<LI>406 - Not Acceptable<P CLASS="Element10">
+<LI>407 - Proxy Authentication Required<P CLASS="Element10">
+<LI>408 - Request Timeout<P CLASS="Element10">
+<LI>409 - Conflict<P CLASS="Element10">
+<LI>410 - Gone<P CLASS="Element10">
+<LI>411 - Length Required<P CLASS="Element10">
+<LI>412 - Precondition Failed<P CLASS="Element10">
+<LI>413 - Request Entity To Long<P CLASS="Element10">
+<LI>414 - Request-URI Too Long. 256 Chars max<P CLASS="Element10">
+<LI>415 - Unsupported Media Type<P CLASS="Element10">
+<LI>500 - Internal Server Error<P CLASS="Element10">
+<LI>501 - Not Implemented<P CLASS="Element10">
+<LI>502 - Bad Gateway<P CLASS="Element10">
+<LI>503 - Service Unavailable<P CLASS="Element10">
+<LI>504 - Gateway timeout<P CLASS="Element10">
+<LI>505 - HTTP version not supported</UL>
+<P CLASS="Element10">
+Use <A HREF="007391.html#000C" CLASS="Element59">ResponseText</A> for the textual respresentation of the HTTP response.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="000C">TIdHTTPResponseInfo.ResponseText</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007391.html" CLASS="Element59">TIdHTTPResponseInfo</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Represents the text for the response message.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> ResponseText: <STRONG>String</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+ResponseText is a String property used to represent the text portion of the HTTP response message. ResponseText normally contains on the of the following messages:<P CLASS="Element10">
+<UL>
+<LI>200 - OK<P CLASS="Element10">
+<LI>201 - Created<P CLASS="Element10">
+<LI>202 - Accepted<P CLASS="Element10">
+<LI>203 - Non-authoritative Information<P CLASS="Element10">
+<LI>204 - No Content<P CLASS="Element10">
+<LI>205 - Reset Content<P CLASS="Element10">
+<LI>206 - Partial Content<P CLASS="Element10">
+<LI>301 - Moved Permanently<P CLASS="Element10">
+<LI>302 - Moved Temporarily<P CLASS="Element10">
+<LI>303 - See Other<P CLASS="Element10">
+<LI>304 - Not Modified<P CLASS="Element10">
+<LI>305 - Use Proxy<P CLASS="Element10">
+<LI>400 - Bad Request<P CLASS="Element10">
+<LI>401 - Unauthorized<P CLASS="Element10">
+<LI>403 - Forbidden<P CLASS="Element10">
+<LI>404 - Not Found<P CLASS="Element10">
+<LI>405 - Method not allowed<P CLASS="Element10">
+<LI>406 - Not Acceptable<P CLASS="Element10">
+<LI>407 - Proxy Authentication Required<P CLASS="Element10">
+<LI>408 - Request Timeout<P CLASS="Element10">
+<LI>409 - Conflict<P CLASS="Element10">
+<LI>410 - Gone<P CLASS="Element10">
+<LI>411 - Length Required<P CLASS="Element10">
+<LI>412 - Precondition Failed<P CLASS="Element10">
+<LI>413 - Request Entity To Long<P CLASS="Element10">
+<LI>414 - Request-URI Too Long. 256 Chars max<P CLASS="Element10">
+<LI>415 - Unsupported Media Type<P CLASS="Element10">
+<LI>500 - Internal Server Error<P CLASS="Element10">
+<LI>501 - Not Implemented<P CLASS="Element10">
+<LI>502 - Bad Gateway<P CLASS="Element10">
+<LI>503 - Service Unavailable<P CLASS="Element10">
+<LI>504 - Gateway timeout<P CLASS="Element10">
+<LI>505 - HTTP version not supported</UL>
+<P CLASS="Element10">
+Use <A HREF="007391.html#000B" CLASS="Element59">ResponseNo</A> for the numeric representation of the HTTP response.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="000D">TIdHTTPResponseInfo.ServerSoftware</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007391.html" CLASS="Element59">TIdHTTPResponseInfo</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Identifies the server software used to generate the HTTP response.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> ServerSoftware: <STRONG>string</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+ServerSoftware is a String property that identifies the server software used to generate the HTTP response. The default value for ServerSoftware is a string containing the values from <A HREF="000686.html" CLASS="Element59">GServerSoftware</A>.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="000E">TIdHTTPResponseInfo.Session</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007391.html" CLASS="Element59">TIdHTTPResponseInfo</A>, <A HREF="011568.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Represents the session for the HTTP response.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> Session: <A HREF="007393.html" CLASS="Element59">TIdHTTPSession</A>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Session is a read-only <A HREF="007393.html" CLASS="Element59">TIdHTTPSession</A> property that represents the HTTP session used for the HTTP response. Session is assigned when the HTTP server calls CreateSession to get or create a persistent session for the client connection.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0002">TIdHTTPResponseInfo.CloseSession</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007391.html" CLASS="Element59">TIdHTTPResponseInfo</A>, <A HREF="011569.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Closes an HTTP session and removes the session cookie.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>procedure</STRONG> CloseSession;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+CloseSession is a procedure that closes a session in the session list for an HTTP server. CloseSession locates the session Cookie with the name specified in <A HREF="000687.html" CLASS="Element59">GSessionIDCookie</A>, and removes the value from the <A HREF="007391.html#0005" CLASS="Element59">Cookies</A> collection. CloseSession also frees and release the <A HREF="007391.html#000E" CLASS="Element59">Session</A> maintained in the object instance.<P CLASS="Element10">
+CloseSession can be used to insure that an HTTP Server closes the session even when the session list is maintained.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0006">TIdHTTPResponseInfo.Create</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007391.html" CLASS="Element59">TIdHTTPResponseInfo</A>, <A HREF="011570.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Constructor for the object instance.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>constructor</STRONG> Create(AConnection: <A HREF="007832.html" CLASS="Element59">TIdTCPServerConnection</A>); <STRONG>reintroduce</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+AConnection: TIdTCPServerConnection</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+The server connection for the HTTP response.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Create is the constructor for the <A HREF="007391.html" CLASS="Element59">TIdHTTPResponseInfo</A> object. Create is responsible for initializing the default values for properties in the instance. Create calls the inherited Create method.<P CLASS="Element10">
+Create sets ContentLength to the value specified in <A HREF="000670.html" CLASS="Element59">GFContentLength</A>, and ContentType to the value in <A HREF="000651.html" CLASS="Element59">GContentType</A>. The RawHeaders property is updated to avoid folding long lines for clients that may not support the feature. <A HREF="007391.html#000D" CLASS="Element59">ServerSoftware</A> is initialized to the values specified in <A HREF="000686.html" CLASS="Element59">GServerSoftware</A>.<P CLASS="Element10">
+Create sets the connection used for the HTTP response to the <A HREF="007832.html" CLASS="Element59">TIdTCPServerConnection</A> instance referenced in AConnection, and assigns to <A HREF="007391.html#000B" CLASS="Element59">ResponseNo</A> the default value from <A HREF="000682.html" CLASS="Element59">GResponseNo</A>.<P CLASS="Element10">
+Create also allocates resources needed for the <A HREF="007391.html#0005" CLASS="Element59">Cookies</A> property.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0007">TIdHTTPResponseInfo.Destroy</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007391.html" CLASS="Element59">TIdHTTPResponseInfo</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Frees the object instance.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>destructor</STRONG> Destroy; <STRONG>override</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Destroy is the destructor for the object instance. Destroy is responsible for releasing the object properties for the instance, including <A HREF="007391.html#0005" CLASS="Element59">Cookies</A> and <A HREF="007391.html#0003" CLASS="Element59">ContentStream</A> when a value has been assigned. Destroy calls the inherited destructor prior to exiting from the method.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="000A">TIdHTTPResponseInfo.Redirect</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007391.html" CLASS="Element59">TIdHTTPResponseInfo</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Updates the location for an HTTP response.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>procedure</STRONG> Redirect(<STRONG>const</STRONG> AURL: <STRONG>string</STRONG>);</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+const AURL: string</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Location of the redirected resource.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Redirect is a procedure that allows <A HREF="007391.html" CLASS="Element59">TIdHTTPResponseInfo</A> to redirect the HTTP client to specific URL. Redirect sets <A HREF="007391.html#000B" CLASS="Element59">ResponseNo</A> to 302, the HTTP response code that indicates a temporary redirection has been performed. To indicate that a resource has been permanently moved, set <A HREF="007391.html#000B" CLASS="Element59">ResponseNo</A> to 301.<P CLASS="Element10">
+Redirect also updates the &quot;Location&quot; Header for the HTTP response to contain the value specified in AURL.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="000F">TIdHTTPResponseInfo.WriteContent</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007391.html" CLASS="Element59">TIdHTTPResponseInfo</A>, <A HREF="011571.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Generates the HTTP response content.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>procedure</STRONG> WriteContent;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+WriteContent is a procedure used to generate the content for the HTTP response. WriteContent generates the content using either <A HREF="007391.html#0004" CLASS="Element59">ContentText</A>, or <A HREF="007391.html#0003" CLASS="Element59">ContentStream</A> when assigned, for <A HREF="007391.html#000B" CLASS="Element59">ResponseNo</A> values in the range 200 - 499 inclusive. If <A HREF="007391.html#000B" CLASS="Element59">ResponseNo</A> is not in this range, only the <A HREF="007391.html#000B" CLASS="Element59">ResponseNo</A> and <A HREF="007391.html#000C" CLASS="Element59">ResponseText</A> is included in the content of the HTTP response.<P CLASS="Element10">
+WriteContent uses Connection to transfer the content of the HTTP response to the HTTP client.<P CLASS="Element10">
+Use <A HREF="007391.html#0010" CLASS="Element59">WriteHeader</A> to generate header values prior to calling WriteContent.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0010">TIdHTTPResponseInfo.WriteHeader</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007391.html" CLASS="Element59">TIdHTTPResponseInfo</A>, <A HREF="011572.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Generates headers for the HTTP response.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>procedure</STRONG> WriteHeader;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+Dest</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Destination stream used as a buffer for the headers. Default value is Nil.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+WriteHeader is a procedure used to generate HTTP headers for the HTTP response. WriteHeader will raise an <A HREF="000384.html" CLASS="Element59">EIdHTTPHeaderAlreadyWritten</A> exception if <A HREF="007391.html#0009" CLASS="Element59">HeaderHasBeenWritten</A> indicates that HTTP headers have already been generated.<P CLASS="Element10">
+WriteHeader generates the following HTTP header values:<P CLASS="Element10">
+<UL>
+<LI>Content-Type<P CLASS="Element10">
+<LI>Content-Length<P CLASS="Element10">
+<LI>WWW-Authenticate<P CLASS="Element10">
+<LI>Set-Cookie</UL>
+<P CLASS="Element10">
+WWW-Authenticate is generated when <A HREF="007391.html#0000" CLASS="Element59">AuthRealm</A> contains a non-empty value. <A HREF="007391.html#000B" CLASS="Element59">ResponseNo</A> is set to 401 when <A HREF="007391.html#0000" CLASS="Element59">AuthRealm</A> is used.<P CLASS="Element10">
+Set-Cookie is generated for each value in <A HREF="007391.html#0005" CLASS="Element59">Cookies</A>.<P CLASS="Element10">
+Dest is an optional TStream used as a local buffer for header values. When Dest is not Nil, headers are written to Dest and not to Connection.<P CLASS="Element10">
+Use <A HREF="007391.html#000F" CLASS="Element59">WriteContent</A> to generate the content for the HTTP response.</DIV>
+</DIV>
+<DIV CLASS="Element62">
+<HR>Created with Doc-O-Matic 2 donated to <STRONG><A HREF="http://www.delphi-jedi.org">Project JEDI</A></STRONG>. Commercial license available from the <STRONG><A HREF="http://www.doc-o-matic.com">Doc-O-Matic site</A></STRONG>.</DIV>
+</DIV></BODY></HTML>

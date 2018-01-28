@@ -1,0 +1,284 @@
+/*
+** Copyright Nautilus, (10/9/2004)
+** david.giocanti@nautilus-info.com
+
+** Ce logiciel est un programme informatique servant à [rappeler les
+** caractéristiques techniques de votre logiciel].
+
+** Ce logiciel est régi par la licence CeCILL soumise au droit français et
+** respectant les principes de diffusion des logiciels libres. Vous pouvez
+** utiliser, modifier et/ou redistribuer ce programme sous les conditions
+** de la licence CeCILL telle que diffusée par le CEA, le CNRS et l'INRIA
+** sur le site "http://www.cecill.info".
+
+** En contrepartie de l'accessibilité au code source et des droits de copie,
+** de modification et de redistribution accordés par cette licence, il n'est
+** offert aux utilisateurs qu'une garantie limitée.  Pour les mêmes raisons,
+** seule une responsabilité restreinte pèse sur l'auteur du programme,  le
+** titulaire des droits patrimoniaux et les concédants successifs.
+
+** A cet égard  l'attention de l'utilisateur est attirée sur les risques
+** associés au chargement,  à l'utilisation,  à la modification et/ou au
+** développement et à la reproduction du logiciel par l'utilisateur étant
+** donné sa spécificité de logiciel libre, qui peut le rendre complexe à
+** manipuler et qui le réserve donc à des développeurs et des professionnels
+** avertis possédant  des  connaissances  informatiques approfondies.  Les
+** utilisateurs sont donc invités à charger  et  tester  l'adéquation  du
+** logiciel à leurs besoins dans des conditions permettant d'assurer la
+** sécurité de leurs systèmes et ou de leurs données et, plus généralement,
+** à l'utiliser et l'exploiter dans les mêmes conditions de sécurité.
+
+** Le fait que vous puissiez accéder à cet en-tête signifie que vous avez
+** pris connaissance de la licence CeCILL, et que vous en avez accepté les
+** termes.
+*/
+
+#ifndef   OB1TOKEN_H_
+# define   OB1TOKEN_H_
+
+#include "ns_ob1\BB1Types.h"
+#include "ns_ob1\OB1Types.h"
+#include "ns_ob1\Visitor.h"
+
+class OB1Node;
+OB1EdgeType getInverseLabel(OB1EdgeType temp);
+
+/**
+* \brief Token : represent an event
+*/
+/**
+* Token : represent an event
+* Represente un evenement
+*/
+class OB1Token
+{
+ protected:
+
+  EventType	      _type ;             /**< Operations type on blackboard \brief Operations type on blackboard */
+  BB1Object*			_pObject ;           /**< Link to the blackboard's object \brief Link to the blackboard's object */
+  AVPSet*         _pAttributesChange ;  /**< The attributes wich change \brief The attributes wich change */
+  LinkSet*        _pLinkChange ;        /**< Link wich have change \brief Link wich have change */
+  OB1Node*        _pWhere_I_am ;        /**< where is the strore the token \brief where is the strore the token */
+  int             _class ;
+
+	OB1Token*       _pLauncherToken ;   /**< The token who created this token to answer a sub-question */
+
+  enum TOKEN_CONTROL { tokenFree = 0, tokenWaitingUser, tokenKsRunning, tokenKsRunned, tokenEnded } ;
+  TOKEN_CONTROL   _iTokenState ;
+
+  bool            _interfaceOpened ;    /**< For KS involved in MMI process ; has the interface already been displayed */
+  HWND            _hInterfaceHandle ;
+
+ private:
+
+  static long     _lTokenCount ;
+
+ public:
+
+  static long int _token_counter ;		 /**< numero of last token \brief numero of last token */
+  long int        _token_numero ;     /**< numero of token \brief numero of token */
+
+  /**
+  * \brief constructor
+  */
+  /**
+  * constructor
+  */
+  OB1Token() ;
+
+  /**
+  * \brief copy constructor
+  */
+  /**
+  * copy constructor
+  *	@param tok token to clone
+  */
+  OB1Token(const OB1Token& tok) ;
+
+  /**
+  * \brief constructor
+  */
+  /**
+  * constructor
+  *	@param type  Event Type
+  * @param pTr information link to the pointer
+  */
+  OB1Token(EventType type, BB1Object* pTr) ;
+
+  /**
+  * \brief constructor
+  */
+  /**
+  * constructor
+  *	@param type  Event Type
+  * @param pTr information link to the pointer
+  * @param Change Changes append in object data
+  * @param chan  Changes append in links
+  */
+  OB1Token(EventType type, BB1Object* pTr, AVPSet* Change, LinkSet* chan) ;
+
+  /**
+  * \brief Return the numero of the token
+  */
+  /**
+  * Return the numero of the token <BR>
+  * @return numero of the token
+  */
+  long int getNumero() { return _token_numero ; }
+
+  /**
+  * \brief Incremente token numero
+  */
+  /**
+  * Incremente token numero <BR>
+  * incremente le numero du token. <br>
+  * Est utilisé pour changer le numero d'un token qui à été modifié
+  */
+  void incNumero() { _token_numero = ++_token_counter ; }
+
+  /**
+  * \brief destructor
+  */
+  /**
+  * copy destructor
+  */
+  ~OB1Token() ;
+
+  /**
+  *  \brief Return the type of the event ADD, MODIF, DELETE
+  */
+  /**
+  *  Return the type of the event ADD, MODIF, DELETE
+  */
+  EventType         getEventType() ;
+
+  /**
+  * \brief Renvoie un pointeur vers le noeud du controler contenant le Token
+  */
+  inline OB1Node*   Node() ;
+
+  /**
+  * \brief Put a pointer to container node
+  */
+  void              PutStorageNode(OB1Node* input) ;
+
+  /**
+	* \brief return the BB1OBject
+	*/
+  /**
+	* return the BB1OBject <BR>
+  * Renvoie l'objet
+	*/
+  inline BB1Object* getObject() ;
+
+  /**
+  * \brief Put object in the token
+  */
+  /**
+  * Put object in the token <BR>
+  * Insere un object dans le token
+  * @param temp object to insert
+  */
+  inline void putObject(BB1Object* temp) ;
+
+  /**
+  * Non used
+  */
+  /**
+  * \warning not implemented
+  */
+  void              TokenAccept() ;
+
+  /**
+  * \brief get Token create cycle
+  */
+  /**
+  * get Token create cycle
+  * @return   Get creation cycle
+  */
+	Cycle             getCreatedCycle() ;
+
+  /**
+  *  \brief Get the data which have been modified
+  */
+  /**
+  *  Get the data which have been modified  <BR>
+  *  Retourne l'ensemble des donnée modifié
+  * @return modified attributes
+  */
+  AVPSet*           getAttributesChange() ;
+
+  /**
+  * \brief Get the links which have been modified
+  */
+  /**
+  *  Get the links which have been modified <BR>
+  *  Renvoie l'ensemble des liens qui ont été modifiés
+  * @return Modified links
+  */
+  LinkSet*          getChangeLinks() ;
+
+  /**
+  * \brief Return the object class
+  */
+  /**
+  * Return the object class
+  * @return class of the object
+  */
+  int               Class() ;
+
+  BB1Object*        getStatusObject() ;
+  BB1Object*        getAnswerObject() ;
+
+  OB1Token*         getMasterToken()                 { return _pLauncherToken ; }
+  void              setMasterToken(OB1Token* pMsTok) { _pLauncherToken = pMsTok ; }
+
+  bool              isFree()    { return _iTokenState == tokenFree ;        }
+  bool              isWaiting() { return _iTokenState == tokenWaitingUser ; }
+  bool              isRunning() { return _iTokenState == tokenKsRunning ;   }
+  bool              hasRunned() { return _iTokenState == tokenKsRunned ;    }
+  bool              isEnded()   { return _iTokenState == tokenEnded ;       }
+
+  void              setFree()    { _iTokenState = tokenFree ;        }
+  void              setWaiting() { _iTokenState = tokenWaitingUser ; }
+  void              setRunning() { _iTokenState = tokenKsRunning ;   }
+  void              setRunned()  { _iTokenState = tokenKsRunned ;    }
+  void              setEnded()   { _iTokenState = tokenEnded ;       }
+
+  bool              isMMIInDuty() { return _interfaceOpened ; }
+  void              setMMIInDuty(bool bMMIStarted) { _interfaceOpened = bMMIStarted ; }
+
+  HWND              getInterfaceWindowHandle()          { return _hInterfaceHandle ; }
+  void              setInterfaceWindowHandle(HWND hWnd) { _hInterfaceHandle = hWnd ; }
+  bool              bIsValidInterface() ;
+
+  OB1Token&         operator=(const OB1Token& src) ;
+
+  static long getNbInstance()  { return _lTokenCount ; }
+  static void initNbInstance() { _lTokenCount = 0 ; }
+};
+
+long int OB1Token::_token_counter ;
+
+inline
+OB1Node*
+OB1Token::Node()
+{
+	return _pWhere_I_am ;
+}
+
+inline
+BB1Object*
+OB1Token::getObject()
+{
+	return _pObject ;
+}
+
+inline
+void
+OB1Token::putObject(BB1Object* temp)
+{
+	_pObject = temp ;
+}
+
+#endif /* end of BB1Token */

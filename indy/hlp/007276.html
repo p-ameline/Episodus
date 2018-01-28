@@ -1,0 +1,2166 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+<TITLE>TIdDateTimeStamp</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <META name="GENERATOR" content="Doc-O-Matic">
+    <LINK rel="STYLESHEET" href="default.css" type="text/css">
+
+<SCRIPT LANGUAGE="JavaScript1.2" SRC="scripts.js"></SCRIPT>
+</HEAD>
+<BODY CLASS="Element57">
+<TABLE BORDER="0" BGCOLOR="#AACCFF" WIDTH="100%" CELLSPACING="0" CELLPADDING="0">
+<TR><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element1">
+Indy 9</DIV>
+</TD><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element2">
+<A HREF="content.html" CLASS="Element59">Content</A> | <A HREF="idx.html" CLASS="Element59">Index</A> | <A HREF="symref.html" CLASS="Element59">Reference</A></DIV>
+</TD></TR></TABLE><DIV CLASS="Element58">
+<DIV CLASS="Element5">
+TIdDateTimeStamp</DIV>
+<DIV CLASS="Element7">
+<A HREF="010449.html" CLASS="Element59">Hierarchy</A>, <A HREF="010450.html" CLASS="Element59">Properties</A>, <A HREF="010451.html" CLASS="Element59">Methods</A>, <A HREF="010452.html" CLASS="Element59">See Also</A>, <A HREF="002148.html" CLASS="Element59">Unit: IdDateTimeStamp</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Provides Date and Time handling for Internet Protocols. Description:<P CLASS="Element10">
+TIdDateTimeStamp is a <A HREF="007213.html" CLASS="Element59">TIdBaseComponent</A> descendant that processes date and time values using the various formats required by some Internet Protocols.<P CLASS="Element10">
+TIdDateTimeStamp methods performs operations based on units of Milliseconds, Seconds, Days, and Years with smaller time units affecting larger time units where necessary. All other common time units are converted to these base units before processing.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12">TIdDateTimeStamp = <STRONG>class</STRONG>(<A HREF="007213.html" CLASS="Element59">TIdBaseComponent</A>)</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Unit</DIV>
+<DIV CLASS="Element69">
+<A HREF="002148.html" CLASS="Element59">IdDateTimeStamp</A></DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="000B">TIdDateTimeStamp.AsISO8601Calendar</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007276.html" CLASS="Element59">TIdDateTimeStamp</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+The Indy timestamp as an ISO 8601 Calendar Date string.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> AsISO8601Calendar: <STRONG>String</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+AsISO8601Calendar is a read-only String property that returns the date/time in ISO 8601 Calendar Date format. For example:<P CLASS="Element10">
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12">  2001-01-01T00:00:01   // New <A HREF="007276.html#005D" CLASS="Element59">Year</A>'s <A HREF="007276.html#0014" CLASS="Element59">Day</A> 2001
+  2001-04-01T00:00:01   // April Fool's <A HREF="007276.html#0014" CLASS="Element59">Day</A> 2001</PRE></DIV>
+</DIV>
+</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="000C">TIdDateTimeStamp.AsISO8601Ordinal</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007276.html" CLASS="Element59">TIdDateTimeStamp</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+The Indy timestamp as an ISO 8601 Ordinal Date string.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> AsISO8601Ordinal: <STRONG>String</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+AsISO8601Ordinal is a read-only String property that returns the date/time as an ISO 8601 Ordinal Date string. For example:<P CLASS="Element10">
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12">  2001-1T00:00:01        // New <A HREF="007276.html#005D" CLASS="Element59">Year</A>'s <A HREF="007276.html#0014" CLASS="Element59">Day</A> 2001
+  2001-365T23:59:59      // New <A HREF="007276.html#005D" CLASS="Element59">Year</A>'s Eve 2001</PRE></DIV>
+</DIV>
+</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="000D">TIdDateTimeStamp.AsISO8601Week</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007276.html" CLASS="Element59">TIdDateTimeStamp</A>, <A HREF="010453.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+The Indy timestamp as an ISO 8601 Week Date string.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> AsISO8601Week: <STRONG>String</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+AsISO8601Week is a read-only String property that returns the date and time value for the timestanmp as an ISO 8601 Week Date string. For example:<P CLASS="Element10">
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12">    2001-W1-2T00:00:01      // New <A HREF="007276.html#005D" CLASS="Element59">Year</A>'s <A HREF="007276.html#0014" CLASS="Element59">Day</A> 2001
+    2001-W52-2T23:59:59     // New <A HREF="007276.html#005D" CLASS="Element59">Year</A>'s Eve 2001</PRE></DIV>
+</DIV>
+</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="000E">TIdDateTimeStamp.AsRFC822</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007276.html" CLASS="Element59">TIdDateTimeStamp</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+The Indy timestamp as an RFC 822 Date string,</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> AsRFC822: <STRONG>String</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+AsRFC822 is a read-only String property that returns the date/time in the date format specified in RFC 822. For example:<P CLASS="Element10">
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12">  // New <A HREF="007276.html#005D" CLASS="Element59">Year</A>'s <A HREF="007276.html#0014" CLASS="Element59">Day</A> 2001 US Eastern
+  Mon, 1 Jan 2001 00:00:01 -0500
+
+  // New <A HREF="007276.html#005D" CLASS="Element59">Year</A>'s Eve 2001 US Eastern
+  Mon, 31 Dec 2001 23:59:59 -0500</PRE></DIV>
+</DIV>
+</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="000F">TIdDateTimeStamp.AsTDateTime</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007276.html" CLASS="Element59">TIdDateTimeStamp</A>, <A HREF="010454.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+The Indy timestamp as a native Delphi TDateTime value.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> AsTDateTime: TDateTime;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+AsTDateTime is a read-only TDateTime property that returns the timestamp as a native Delphi TDateTime value.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0010">TIdDateTimeStamp.AsTimeOfDay</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007276.html" CLASS="Element59">TIdDateTimeStamp</A>, <A HREF="010455.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+The Time of <A HREF="007276.html#0014" CLASS="Element59">Day</A> in 24-hour format.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> AsTimeOfDay: <STRONG>String</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+AsTimeOFDay is a read-only String property that returns the time portion of the timestamp in the 24-hour format HH:MM:SS.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0011">TIdDateTimeStamp.AsTTimeStamp</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007276.html" CLASS="Element59">TIdDateTimeStamp</A>, <A HREF="010456.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+The Indy timestamp as a TTimeStamp value.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> AsTTimeStamp: TTimeStamp;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+AsTTimeStamp is a read-only TTimestamp property that returns the date and time value for the timestamp as a TTimeStamp value. AsTTimeStamp calculates the date value using <A HREF="007276.html#005D" CLASS="Element59">Year</A> and <A HREF="007276.html#0014" CLASS="Element59">Day</A>, and adjusts the TTimestamp to account for Leap years. AsTTimeStamp calculates the time value using <A HREF="007276.html#0040" CLASS="Element59">Second</A> and <A HREF="007276.html#003A" CLASS="Element59">Millisecond</A>.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0012">TIdDateTimeStamp.BeatOfDay</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007276.html" CLASS="Element59">TIdDateTimeStamp</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+The Indy timestamp as a Swatch &quot;Beat&quot; time value.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> BeatOfDay: Integer;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+BeatOFDay is a read-only Integer property that returns the Indy timestamp as a Beat time value. Beat time is defined by Swatch at (http://www.swatch.com/) and called 'Internet Time'.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0014">TIdDateTimeStamp.Day</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007276.html" CLASS="Element59">TIdDateTimeStamp</A>, <A HREF="010457.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+The Day of <A HREF="007276.html#005D" CLASS="Element59">Year</A> for the timestamp.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> Day: Integer;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Day is an Integer property that represents the day of the <A HREF="007276.html#005D" CLASS="Element59">Year</A> for the timestamp value. Use <A HREF="007276.html#0000" CLASS="Element59">AddDays</A> to increment the current day of the <A HREF="007276.html#005D" CLASS="Element59">Year</A> by a specified value.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0015">TIdDateTimeStamp.DayOfMonth</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007276.html" CLASS="Element59">TIdDateTimeStamp</A>, <A HREF="010458.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+<A HREF="007276.html#0014" CLASS="Element59">Day</A> of Month for the Indy timestamp.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> DayOfMonth: Integer;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+DayOfMonth is a read-only Integer property that contains the <A HREF="007276.html#0014" CLASS="Element59">Day</A> of the Month for the timestamp value. DayOfMonth calculates the return value using the values from <A HREF="007276.html#0014" CLASS="Element59">Day</A> and <A HREF="007276.html#003E" CLASS="Element59">MonthOfYear</A>.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0016">TIdDateTimeStamp.DayOfWeek</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007276.html" CLASS="Element59">TIdDateTimeStamp</A>, <A HREF="010459.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+The <A HREF="007276.html#0014" CLASS="Element59">Day</A> of Week for the Indy timestamp.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> DayOfWeek: Integer;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+DayOfWeek is a read-only Integer property that contains the <A HREF="007276.html#0014" CLASS="Element59">Day</A> of the Week for the Indy timestamp. DayOfWeek will contain a value in the range 1..7.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0017">TIdDateTimeStamp.DayOfWeekName</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007276.html" CLASS="Element59">TIdDateTimeStamp</A>, <A HREF="010460.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+The <A HREF="007276.html#0014" CLASS="Element59">Day</A> of Week Name for the Indy timestamp.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> DayOfWeekName: <STRONG>String</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+DayOfWeekName is a read-only String property that contains the long name for the day of the week represented by the Indy timestamp. DayOfWeekName relies on the <A HREF="007276.html#0016" CLASS="Element59">DayOfWeek</A> property to access the correct <A HREF="007276.html#0014" CLASS="Element59">Day</A> name. DayOfWeekName can return one of the following values:<P CLASS="Element10">
+<UL>
+<LI>Sunday<P CLASS="Element10">
+<LI>Monday<P CLASS="Element10">
+<LI>Tuesday<P CLASS="Element10">
+<LI>Wednesday<P CLASS="Element10">
+<LI>Thursday<P CLASS="Element10">
+<LI>Friday<P CLASS="Element10">
+<LI>Saturday</UL>
+</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0018">TIdDateTimeStamp.DayOfWeekShortName</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007276.html" CLASS="Element59">TIdDateTimeStamp</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+The Short <A HREF="007276.html#0014" CLASS="Element59">Day</A> of Week Name for the Indy timestamp.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> DayOfWeekShortName: <STRONG>String</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+DayOfWeekShortName is a read-only String property that contains the first three characters of DayOfWeekname for the Indy timestamp. DayOfWeekShortName relies on the <A HREF="007276.html#0016" CLASS="Element59">DayOfWeek</A> property to access the correct <A HREF="007276.html#0014" CLASS="Element59">Day</A> name.<P CLASS="Element10">
+DayOfWeekShortName can return one of the following values:<P CLASS="Element10">
+<UL>
+<LI>Sun<P CLASS="Element10">
+<LI>Mon<P CLASS="Element10">
+<LI>Tue<P CLASS="Element10">
+<LI>Wed<P CLASS="Element10">
+<LI>Thu<P CLASS="Element10">
+<LI>Fri<P CLASS="Element10">
+<LI>Sat</UL>
+</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0019">TIdDateTimeStamp.DaysInYear</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007276.html" CLASS="Element59">TIdDateTimeStamp</A>, <A HREF="010461.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Number of days in the year for the Indy timestamp.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> DaysInYear: Integer;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+DaysInYear is a read-only Integer property that contains the number of days in the year represented by the Indy timestamp. DaysInYear is calculated and accounts for Leap <A HREF="007276.html#0014" CLASS="Element59">Day</A> in its operation.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0036">TIdDateTimeStamp.HourOf12Day</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007276.html" CLASS="Element59">TIdDateTimeStamp</A>, <A HREF="010462.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Indicates the numeric hour of day in 12-hour format.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> HourOf12Day: Integer;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+HourOf12Day is a read-only Integer property that indicates the hour of the day in 12-hour format for the Indy timestamp. Only the hour in numeric format is presented. For example, the HourOf12Day value for 1:00 AM and 1:00 PM are both 1.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0037">TIdDateTimeStamp.HourOf24Day</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007276.html" CLASS="Element59">TIdDateTimeStamp</A>, <A HREF="010463.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Indicates the numeric hour of day in 24-hour format.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> HourOf24Day: Integer;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+HourOf24Day is a read-only Integer property that indicates the hour of the day in 24-hour format for the Indy timestamp. Only the hour in numeric format is presented. For example, the HourOf24Day value for 1:00 AM is 1, and the HourOf24Day value for 1:00 PM is 13.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0038">TIdDateTimeStamp.IsLeapYear</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007276.html" CLASS="Element59">TIdDateTimeStamp</A>, <A HREF="010464.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Indicates that the year for the Indy timestamp is a Leap year.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> IsLeapYear: Boolean;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+IsLeapYear is a read-only Boolean property that indicates if the value in <A HREF="007276.html#005D" CLASS="Element59">Year</A> for the timestamp is a Leap year.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0039">TIdDateTimeStamp.IsMorning</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007276.html" CLASS="Element59">TIdDateTimeStamp</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Indicates that the time portion of the Indy timestamp is before noon.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> IsMorning: Boolean;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+IsMorning is a read-only Boolean property that indicates the time portion of the Indy timestamp is before noon. IsMorning is False if the time is after noon. Noon is considered to be morning, and Midnight is considered to be afternoon.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="003A">TIdDateTimeStamp.Millisecond</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007276.html" CLASS="Element59">TIdDateTimeStamp</A>, <A HREF="010465.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Number of milliseconds elapsed for the current second of the Indy timestamp.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> Millisecond: Integer;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Millisecond is an Integer property that contains the number of milliseconds elapsed for the current <A HREF="007276.html#0040" CLASS="Element59">Second</A> in the timestamp value.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="003B">TIdDateTimeStamp.MinuteOfDay</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007276.html" CLASS="Element59">TIdDateTimeStamp</A>, <A HREF="010466.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Number of minutes elapsed in the day of the Indy timestamp.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> MinuteOfDay: Integer;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+MinuteOfDay is a read-only integer property that indicates the number of Minutes elapsed in the <A HREF="007276.html#0014" CLASS="Element59">Day</A> for the timestamp value.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="003C">TIdDateTimeStamp.MinuteOfHour</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007276.html" CLASS="Element59">TIdDateTimeStamp</A>, <A HREF="010467.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Number of minutes elapsed in the hour of the Indy timestamp.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> MinuteOfHour: Integer;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+MinuteOfHour is a read-only Integer property that indicates the number of minutes elapsed in the current Hour for the timestamp value.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="003D">TIdDateTimeStamp.MonthName</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007276.html" CLASS="Element59">TIdDateTimeStamp</A>, <A HREF="010468.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+The long name for the month in the Indy timestamp.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> MonthName: <STRONG>String</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+MonthName is a read-only String property that represents the long name for the current month in the timestamp value. MonthName will contain one of the values defined in <A HREF="002300.html" CLASS="Element59">IdMonthNames</A>.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="003E">TIdDateTimeStamp.MonthOfYear</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007276.html" CLASS="Element59">TIdDateTimeStamp</A>, <A HREF="010469.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Numeric month number for the Indy timestamp.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> MonthOfYear: Integer;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+MonthOfYear is a read-only Integer property that represents the numeric month number for the timestamp value. MonthOfYear is calculated using the value in <A HREF="007276.html#0014" CLASS="Element59">Day</A>, and accounts for Leap years in the returned value.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="003F">TIdDateTimeStamp.MonthShortName</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007276.html" CLASS="Element59">TIdDateTimeStamp</A>, <A HREF="010470.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+The short name for the month in the Indy timestamp.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> MonthShortName: <STRONG>String</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+MonthShortName is a read-only String property that represents the short name for the month in the Indy timestamp. MonthShortName returns the first three characters of the month name represented in the Indy timestamp.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0040">TIdDateTimeStamp.Second</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007276.html" CLASS="Element59">TIdDateTimeStamp</A>, <A HREF="010471.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Second of the day.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> Second: Integer;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Second is an Integer property that indicates the current second of the day for the object. Second should always contain a value in the range 0..<A HREF="002808.html" CLASS="Element59">IdSecondsInDay</A>.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0041">TIdDateTimeStamp.SecondOfMinute</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007276.html" CLASS="Element59">TIdDateTimeStamp</A>, <A HREF="010472.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Numeric seconds elapsed in the current minute of the Indy timestamp.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> SecondOfMinute: Integer;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+SecondOfMinute is a read-only Integer property that represents the numeric seconds elapsed in the current minute for the timestamp value.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0042">TIdDateTimeStamp.SecondsInYear</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007276.html" CLASS="Element59">TIdDateTimeStamp</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Total number of seconds in the year for the Indy timestamp.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> SecondsInYear: Integer;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+SecondsInYear is a read-only Integer property that represents the total number of seconds in the year for the Indy timestamp. If the current year is a Leap year, SecondsInYear will contain the value from <A HREF="002811.html" CLASS="Element59">IdSecondsInLeapYear</A>. Otherwise, SecondsInYear will contain the value from <A HREF="002814.html" CLASS="Element59">IdSecondsInYear</A>.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0058">TIdDateTimeStamp.TimeZone</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007276.html" CLASS="Element59">TIdDateTimeStamp</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Identifies the Time Zone for the Indy timestamp.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> TimeZone: Integer;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+TimeZone is an Integer property that Identifies the Time Zone for the Indy timestamp. TimeZone contains a value that reflects the number of hours offset from GMT or UTC. TimeZone is not used when the Indy timestamp is updated, and is generally used in construction of the <A HREF="007276.html#000E" CLASS="Element59">AsRFC822</A> timestamp format.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0059">TIdDateTimeStamp.TimeZoneAsString</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007276.html" CLASS="Element59">TIdDateTimeStamp</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Returns the timezone offset in hours and minutes from GMT.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> TimeZoneAsString: <STRONG>String</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+TimeZoneAsString is a read-only String property that indicates the positive or negative offset hours and minutes for the local timezone from GMT (Greenwich Mean Time). TimeZoneAsString is expressed in a format like '+HHMM' or '-HHMM'.<P CLASS="Element10">
+TimeZoneAsString is used when constructing an RFC-complaint date time value using GetAsRFC882.<P CLASS="Element10">
+TimeZoneAsString implements <A HREF="007276.html#0032" CLASS="Element59">GetTimeZoneAsString</A> as the read access specifier for the property value.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="005A">TIdDateTimeStamp.TimeZoneHour</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007276.html" CLASS="Element59">TIdDateTimeStamp</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Number of hours offset from GMT.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> TimeZoneHour: Integer;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+TimeZoneHour is a read-only Integer property that represents the positive or negative number of hours the local timezone is offset from GMT (Greenwich Mean Time). TimeZoneHour is used in constructing the value for <A HREF="007276.html#0059" CLASS="Element59">TimeZoneAsString</A>. TimeZoneHour implements <A HREF="007276.html#0033" CLASS="Element59">GetTimeZoneHour</A> as the read access specifier for the property value.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="005B">TIdDateTimeStamp.TimeZoneMinutes</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007276.html" CLASS="Element59">TIdDateTimeStamp</A>, <A HREF="010473.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Number of minutes as an offset from GMT.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> TimeZoneMinutes: Integer;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+TimeZoneMinutes is an read-only Integer property that represents the positive or negative offset minutes of the local timezone from GMT (Greenwich Mean Time). TimeZoneMinutes is used with <A HREF="007276.html#005A" CLASS="Element59">TimeZoneHour</A> in constructing the value in <A HREF="007276.html#0059" CLASS="Element59">TimeZoneAsString</A>. TimeZoneMinutes implements <A HREF="007276.html#0034" CLASS="Element59">GetTimeZoneMinutes</A> as the read access specifier for the property value.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="005C">TIdDateTimeStamp.WeekOfYear</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007276.html" CLASS="Element59">TIdDateTimeStamp</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Identifies the week number for the Indy timestamp.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> WeekOfYear: Integer;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+WeekOFYear is a read-only Integer property that Indicates the week number for the current year of the Indy timestamp. A week is considered to begin with Sunday and may overlap a <A HREF="007276.html#005D" CLASS="Element59">Year</A> boundary. It is possible to have 53 weeks in a <A HREF="007276.html#005D" CLASS="Element59">Year</A>, with the 53rd week of a given year also being the 1st week of the following year.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="005D">TIdDateTimeStamp.Year</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007276.html" CLASS="Element59">TIdDateTimeStamp</A>, <A HREF="010474.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Numeric year for the Indy timestamp.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> Year: Integer;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Year is an Integer property that contains the numeric year number for the date in the timestamp value. Changing the value in Year forces the property to contain a value no less than 1, and updates <A HREF="007276.html#0038" CLASS="Element59">IsLeapYear</A> to reflect if the new property value is a Leap year.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0000">TIdDateTimeStamp.AddDays</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007276.html" CLASS="Element59">TIdDateTimeStamp</A>, <A HREF="010475.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Adds a number of days to the timestamp.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>procedure</STRONG> AddDays(ANumber: Cardinal);</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+ANumber: Cardinal</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Number of days to be added.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+AddDays is a procedure that adds the number of days specified in ANumber to the current date and time value for the timestamp. <A HREF="007276.html#005D" CLASS="Element59">Year</A> will be adjusted accordingly.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0001">TIdDateTimeStamp.AddHours</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007276.html" CLASS="Element59">TIdDateTimeStamp</A>, <A HREF="010476.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Adds a number of hours to the timestamp.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>procedure</STRONG> AddHours(ANumber: Cardinal);</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+ANumber: Cardinal</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Number of hours to add.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+AddHours is a procedure that adds the number of hours in ANumber to the current date and time vzalue for the timestamp. <A HREF="007276.html#0040" CLASS="Element59">Second</A>, <A HREF="007276.html#0014" CLASS="Element59">Day</A> and <A HREF="007276.html#005D" CLASS="Element59">Year</A> will be adjusted accordingly.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0002">TIdDateTimeStamp.AddMilliseconds</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007276.html" CLASS="Element59">TIdDateTimeStamp</A>, <A HREF="010477.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Adds a number of milliseconds to the timestamp.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>procedure</STRONG> AddMilliseconds(ANumber: Cardinal);</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+ANumber: Cardinal</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Number of milliseconds to be added.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+AddMilliseconds is a procedure that adds the number of milliseconds to the date and time value in the timestamp. <A HREF="007276.html#0040" CLASS="Element59">Second</A>, <A HREF="007276.html#0014" CLASS="Element59">Day</A> and <A HREF="007276.html#005D" CLASS="Element59">Year</A> will be adjusted accordingly.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0003">TIdDateTimeStamp.AddMinutes</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007276.html" CLASS="Element59">TIdDateTimeStamp</A>, <A HREF="010478.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Adds a number of minutes to the timestamp.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>procedure</STRONG> AddMinutes(ANumber: Cardinal);</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+ANumber: Cardinal</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Number of minutes to add.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+AddMinutes is a procedure that adds the number of minutes in ANumber to the date and time value in the timestamp. <A HREF="007276.html#0040" CLASS="Element59">Second</A>, <A HREF="007276.html#0014" CLASS="Element59">Day</A> and <A HREF="007276.html#005D" CLASS="Element59">Year</A> will be adjusted accordingly.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0004">TIdDateTimeStamp.AddMonths</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007276.html" CLASS="Element59">TIdDateTimeStamp</A>, <A HREF="010479.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Adds a number of months to the timestamp.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>procedure</STRONG> AddMonths(ANumber: Cardinal);</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+ANumber: Cardinal</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Number of months to be added.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+AddMonths is a procedure that adds the number of months in ANumber to the date and time value in the timestamp. <A HREF="007276.html#0014" CLASS="Element59">Day</A> and <A HREF="007276.html#005D" CLASS="Element59">Year</A> will be adjusted accordingly.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0005">TIdDateTimeStamp.AddSeconds</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007276.html" CLASS="Element59">TIdDateTimeStamp</A>, <A HREF="010480.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Adds a number of seconds to the timestamp.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>procedure</STRONG> AddSeconds(ANumber: Cardinal);</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+ANumber: Cardinal</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Number of seconds to be added.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+AddSeconds is a procedure that adds the number of seconds in ANumber to the date and time value in the timestamp. <A HREF="007276.html#0040" CLASS="Element59">Second</A>, <A HREF="007276.html#0014" CLASS="Element59">Day</A> and <A HREF="007276.html#005D" CLASS="Element59">Year</A> will be adjusted accordingly.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0006">TIdDateTimeStamp.AddTDateTime</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007276.html" CLASS="Element59">TIdDateTimeStamp</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Adds a native Delphi date/time to the timestamp.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>procedure</STRONG> AddTDateTime(ADateTime: TDateTime);</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+ADateTime: TDateTime</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Number of days, hours, and seconds to be added in native Delphi format.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+AddTDateTime is a procedure that adds the date/time pair specified in ADateTime to the timestamp. ADateTime is converted to a TTimeStamp and it's component parts are added. Milliseconds, Seconds, <A HREF="007276.html#0014" CLASS="Element59">Day</A> and <A HREF="007276.html#005D" CLASS="Element59">Year</A> are adjusted accordingly.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0007">TIdDateTimeStamp.AddTIdDateTimeStamp</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007276.html" CLASS="Element59">TIdDateTimeStamp</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Adds an Indy timestamp to the object instance.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>procedure</STRONG> AddTIdDateTimeStamp(AIdDateTime: <A HREF="007276.html" CLASS="Element59">TIdDateTimeStamp</A>);</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+AIdDateTime: TIdDateTimeStamp</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Timestamp to be added to the object instance.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+AddTIdDateTimeStamp is a procedure that adds the date and time in ATIdDateTimeStamp to the current date/time for the object instance. Milliseconds, Seconds, <A HREF="007276.html#0014" CLASS="Element59">Day</A> and <A HREF="007276.html#005D" CLASS="Element59">Year</A> are adjusted accordingly.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0008">TIdDateTimeStamp.AddTTimeStamp</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007276.html" CLASS="Element59">TIdDateTimeStamp</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Adds a TTimestamp value to the Indy timestamp.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>procedure</STRONG> AddTTimeStamp(ATimeStamp: TTimeStamp);</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+ATimeStamp: TTimeStamp</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+The TTimestamp to be added to the object instance.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+AddTTimeStamp is a procedure that adds the value of ATimestamp to the date/time for the object instance. Components of the TTimestamp are added to the date/time individually. Milliseconds, Seconds, <A HREF="007276.html#0014" CLASS="Element59">Day</A> and <A HREF="007276.html#005D" CLASS="Element59">Year</A> are adjusted accordingly.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0009">TIdDateTimeStamp.AddWeeks</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007276.html" CLASS="Element59">TIdDateTimeStamp</A>, <A HREF="010481.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Adds a number of weeks to the timestamp.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>procedure</STRONG> AddWeeks(ANumber: Cardinal);</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+ANumber: Cardinal</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Number of weeks to be added.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+AddWeeks is a procedure that adds the number of weeks in ANumber to the date and time value in the timestamp. <A HREF="007276.html#0014" CLASS="Element59">Day</A> and <A HREF="007276.html#005D" CLASS="Element59">Year</A> are adjusted accordingly.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="000A">TIdDateTimeStamp.AddYears</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007276.html" CLASS="Element59">TIdDateTimeStamp</A>, <A HREF="010482.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Adds a number of years to the timestamp.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>procedure</STRONG> AddYears(ANumber: Cardinal);</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+ANumber: Cardinal</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Number of years to be added.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+AddYears is a procedure that adds the number of years specified in ANumber to the date and time value in the timestamp. After adding the specified number of years, <A HREF="007276.html#0038" CLASS="Element59">IsLeapYear</A> will be updated for the new <A HREF="007276.html#005D" CLASS="Element59">Year</A> value.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0013">TIdDateTimeStamp.Create</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007276.html" CLASS="Element59">TIdDateTimeStamp</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Constructor for the object instance.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>constructor</STRONG> Create(AOwner: TComponent); <STRONG>override</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+AOwner: TComponent</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Owner of the object instance.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Create is the constructor for the object instance, and relies on the inherited Create method. Create initializes the internal variables for the object instance to contain values that indicate the date:<P CLASS="Element10">
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12">  1st January 1 AD, 00:00:01.001</PRE></DIV>
+</DIV>
+<P CLASS="Element10">
+<A HREF="007276.html#0058" CLASS="Element59">TimeZone</A> is initially set to the value 0 (zero).</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="001A">TIdDateTimeStamp.Destroy</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007276.html" CLASS="Element59">TIdDateTimeStamp</A>, <A HREF="010483.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Frees the object instance.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>destructor</STRONG> Destroy; <STRONG>override</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Destroy is the destructor for the object instance. Destroy calls the inherited Destroy method to free the object instance.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="001B">TIdDateTimeStamp.GetAsISO8601Calendar</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007276.html" CLASS="Element59">TIdDateTimeStamp</A>, <A HREF="010484.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Provides access to the Indy timestamp in ISO 8601 Calendar format.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>function</STRONG> GetAsISO8601Calendar: <STRONG>String</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+GetAsISO8601Calendar is a String function that acts as the read access specifier for the <A HREF="007276.html#000B" CLASS="Element59">AsISO8601Calendar</A> property.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="001C">TIdDateTimeStamp.GetAsISO8601Ordinal</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007276.html" CLASS="Element59">TIdDateTimeStamp</A>, <A HREF="010485.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Provides access to the Indy timestamp in ISO 8601 Ordinal format.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>function</STRONG> GetAsISO8601Ordinal: <STRONG>String</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+GetAsISO8601Ordinal is a String function that acts as the read access specifier for the <A HREF="007276.html#000C" CLASS="Element59">AsISO8601Ordinal</A> property.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="001D">TIdDateTimeStamp.GetAsISO8601Week</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007276.html" CLASS="Element59">TIdDateTimeStamp</A>, <A HREF="010486.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Provides access to the Indy timestamp in ISO 8601 Week format.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>function</STRONG> GetAsISO8601Week: <STRONG>String</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+GetAsISO8601Week is a String function that acts as the read access specifier for the <A HREF="007276.html#000D" CLASS="Element59">AsISO8601Week</A> property.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="001E">TIdDateTimeStamp.GetAsRFC822</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007276.html" CLASS="Element59">TIdDateTimeStamp</A>, <A HREF="010487.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Provides access to the Indy timestamp in RFC 822 format.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>function</STRONG> GetAsRFC822: <STRONG>String</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+GetAsRFC822 is a String function that acts as the read access specifier for the <A HREF="007276.html#000E" CLASS="Element59">AsRFC822</A> property. The time value is returned in RFC 822-compliant format. For example:<P CLASS="Element10">
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12">      // New <A HREF="007276.html#005D" CLASS="Element59">Year</A>'s <A HREF="007276.html#0014" CLASS="Element59">Day</A> 2001 US Eastern
+      Mon, 1 Jan 2001 00:00:01 -0500
+
+      // New <A HREF="007276.html#005D" CLASS="Element59">Year</A>'s Eve 2001 US Eastern
+      Mon, 31 Dec 2001 23:59:59 -0500</PRE></DIV>
+</DIV>
+</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="001F">TIdDateTimeStamp.GetAsTDateTime</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007276.html" CLASS="Element59">TIdDateTimeStamp</A>, <A HREF="010488.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Provides access to the Indy timestamp as a TDateTime value.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>function</STRONG> GetAsTDateTime: TDateTime;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+GetAsTDateTime is a TDateTime function that acts as the read access specifier for the <A HREF="007276.html#000F" CLASS="Element59">AsTDateTime</A> property.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0020">TIdDateTimeStamp.GetAsTimeOfDay</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007276.html" CLASS="Element59">TIdDateTimeStamp</A>, <A HREF="010489.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Provides access to the Indy timestamp as a 24-hour time string.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>function</STRONG> GetAsTimeOfDay: <STRONG>String</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+GetAsTimeOFDay is a String function that acts as the read access specifier for the <A HREF="007276.html#0010" CLASS="Element59">AsTimeOfDay</A> property.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0021">TIdDateTimeStamp.GetAsTTimeStamp</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007276.html" CLASS="Element59">TIdDateTimeStamp</A>, <A HREF="010490.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Provides access to the Indy timestamp as a TTimeStamp value.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>function</STRONG> GetAsTTimeStamp: TTimeStamp;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+GetAsTTimeStamp is a TTimeStamp function that acts as the read access specifier for the <A HREF="007276.html#0011" CLASS="Element59">AsTTimeStamp</A> property. GetAsTTimeStamp adjusts the date in the TTimestamp return value to account for the presence of Leap <A HREF="007276.html#005D" CLASS="Element59">Year</A> and Leap <A HREF="007276.html#0014" CLASS="Element59">Day</A>. GetAsTTimeStamp also adjusts the time in the TTimestamp return value to set both the number of seconds and milliseconds for the time value.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0022">TIdDateTimeStamp.GetBeatOfDay</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007276.html" CLASS="Element59">TIdDateTimeStamp</A>, <A HREF="010491.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Provides access to the Indy timestamp as a Swatch &quot;Beat Time&quot; value.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>function</STRONG> GetBeatOfDay: Integer;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+GetBeatOFDay is an Integer function that acts as the read access specifier for the <A HREF="007276.html#0012" CLASS="Element59">BeatOfDay</A> property.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0023">TIdDateTimeStamp.GetDayOfMonth</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007276.html" CLASS="Element59">TIdDateTimeStamp</A>, <A HREF="010492.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Provides access to the <A HREF="007276.html#0014" CLASS="Element59">Day</A> of Month for the Indy timestamp.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>function</STRONG> GetDayOfMonth: Integer;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+GetDayOfMonth is an Integer function that acts as the read access specifier for the <A HREF="007276.html#0015" CLASS="Element59">DayOfMonth</A> property.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0024">TIdDateTimeStamp.GetDayOfWeek</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007276.html" CLASS="Element59">TIdDateTimeStamp</A>, <A HREF="010493.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Provides access to the <A HREF="007276.html#0014" CLASS="Element59">Day</A> of Week for the Indy timestamp.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>function</STRONG> GetDayOfWeek: Integer;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+GetDayOfWeek is an Integer function that acts as the read access specifier for the <A HREF="007276.html#0016" CLASS="Element59">DayOfWeek</A> property.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0025">TIdDateTimeStamp.GetDayOfWeekName</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007276.html" CLASS="Element59">TIdDateTimeStamp</A>, <A HREF="010494.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Provides access to the long <A HREF="007276.html#0014" CLASS="Element59">Day</A> of Week name for the Indy timestamp.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>function</STRONG> GetDayOfWeekName: <STRONG>String</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+GetDayOfWeekName is a String function that acts as the read access specifier for the <A HREF="007276.html#0017" CLASS="Element59">DayOfWeekName</A> property.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0026">TIdDateTimeStamp.GetDayOfWeekShortName</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007276.html" CLASS="Element59">TIdDateTimeStamp</A>, <A HREF="010495.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Provides access to the short <A HREF="007276.html#0014" CLASS="Element59">Day</A> of Week name for the Indy timestamp.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>function</STRONG> GetDayOfWeekShortName: <STRONG>String</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+GetDayOfWeekShortName is a String function that acts as the read access specifier for the <A HREF="007276.html#0018" CLASS="Element59">DayOfWeekShortName</A> property.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0027">TIdDateTimeStamp.GetDaysInYear</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007276.html" CLASS="Element59">TIdDateTimeStamp</A>, <A HREF="010496.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Provides access to the number of days in the year of the Indy timestamp.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>function</STRONG> GetDaysInYear: Integer;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+GetDaysInYear is an Integer function to acts as the read access specifier for the <A HREF="007276.html#0019" CLASS="Element59">DaysInYear</A> property.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0028">TIdDateTimeStamp.GetHourOf12Day</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007276.html" CLASS="Element59">TIdDateTimeStamp</A>, <A HREF="010497.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Provides access to the AM/PM hour of <A HREF="007276.html#0014" CLASS="Element59">Day</A> for the Indy timestamp.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>function</STRONG> GetHourOf12Day: Integer;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+GetHourOf12Day is an Integer function that acts as the read access specifier for the <A HREF="007276.html#0036" CLASS="Element59">HourOf12Day</A> property.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0029">TIdDateTimeStamp.GetHourOf24Day</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007276.html" CLASS="Element59">TIdDateTimeStamp</A>, <A HREF="010498.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Provides access to the Military hour of <A HREF="007276.html#0014" CLASS="Element59">Day</A> for the timestamp value.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>function</STRONG> GetHourOf24Day: Integer;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+GetHourOf24Day is an Integer function that acts as the read access specifier for the <A HREF="007276.html#0037" CLASS="Element59">HourOf24Day</A> property.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="002A">TIdDateTimeStamp.GetIsMorning</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007276.html" CLASS="Element59">TIdDateTimeStamp</A>, <A HREF="010499.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Indicates that the timestamp value contains a time before noon.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>function</STRONG> GetIsMorning: Boolean;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+GetIsMorning is a Boolean function that acts as the read access specifier for the <A HREF="007276.html#0039" CLASS="Element59">IsMorning</A> property.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="002B">TIdDateTimeStamp.GetMinuteOfDay</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007276.html" CLASS="Element59">TIdDateTimeStamp</A>, <A HREF="010500.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Provides access to the minute of the <A HREF="007276.html#0014" CLASS="Element59">Day</A> for the timestamp value.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>function</STRONG> GetMinuteOfDay: Integer;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+GetMinuteOfDay is an Integer function that acts as the read access specifier for the <A HREF="007276.html#003B" CLASS="Element59">MinuteOfDay</A> property.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="002C">TIdDateTimeStamp.GetMinuteOfHour</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007276.html" CLASS="Element59">TIdDateTimeStamp</A>, <A HREF="010501.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Provides access to the minute of the hour for the timestamp value.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>function</STRONG> GetMinuteOfHour: Integer;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+GetMinuteOfHour is an Integer function that acts as the read access specifier for the <A HREF="007276.html#003C" CLASS="Element59">MinuteOfHour</A> property.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="002D">TIdDateTimeStamp.GetMonthName</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007276.html" CLASS="Element59">TIdDateTimeStamp</A>, <A HREF="010502.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Provides access to the long month name for the timestamp value.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>function</STRONG> GetMonthName: <STRONG>String</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+GetMonthName is a String function that acts as the read access specifier for the <A HREF="007276.html#003D" CLASS="Element59">MonthName</A> property.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="002E">TIdDateTimeStamp.GetMonthOfYear</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007276.html" CLASS="Element59">TIdDateTimeStamp</A>, <A HREF="010503.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Provides access to the numeric month of year for the Indy timestamp.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>function</STRONG> GetMonthOfYear: Integer;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+GetMonthOfYear is an Integer function that acts as the read access specifier for the <A HREF="007276.html#003E" CLASS="Element59">MonthOfYear</A> property.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="002F">TIdDateTimeStamp.GetMonthShortName</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007276.html" CLASS="Element59">TIdDateTimeStamp</A>, <A HREF="010504.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Provides access to the short month name for the Indy timestamp.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>function</STRONG> GetMonthShortName: <STRONG>String</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+GetMonthShortName is a String function that acts as the read access specifier for the <A HREF="007276.html#003F" CLASS="Element59">MonthShortName</A> property.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0030">TIdDateTimeStamp.GetSecondOfMinute</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007276.html" CLASS="Element59">TIdDateTimeStamp</A>, <A HREF="010505.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Provides access to the seconds of the current minute for the Indy timestamp.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>function</STRONG> GetSecondOfMinute: Integer;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+GetSecondOfMinute is an Integer function that acts as the read access specifier for the <A HREF="007276.html#0041" CLASS="Element59">SecondOfMinute</A> property.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0031">TIdDateTimeStamp.GetSecondsInYear</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007276.html" CLASS="Element59">TIdDateTimeStamp</A>, <A HREF="010506.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Indicates the total number of seconds in the Indy timestamp year.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>function</STRONG> GetSecondsInYear: Integer;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+GetSecondsInYear is an Integer function that acts as the read access specifier for the <A HREF="007276.html#0042" CLASS="Element59">SecondsInYear</A> property.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0032">TIdDateTimeStamp.GetTimeZoneAsString</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007276.html" CLASS="Element59">TIdDateTimeStamp</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Offset of the local timezone from GMT.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>function</STRONG> GetTimeZoneAsString: <STRONG>String</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Return Value</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+String - Offest hours and minutes from GMT.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+GetTimeZoneAsString is a String function that returns a value that indicates the offset of the local time zone from GMT (Greenwich Mean Time). THe value is expressed as a positive or negative number of hours and minutes from UTC. For example:<P CLASS="Element10">
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12">      -0500
+      +0000
+      +0300</PRE></DIV>
+</DIV>
+<P CLASS="Element10">
+GetTimeZoneAsString calls <A HREF="007276.html#0033" CLASS="Element59">GetTimeZoneHour</A> and <A HREF="007276.html#0034" CLASS="Element59">GetTimeZoneMinutes</A> to calculate the offset from UTC. GetTimeZoneAsString is used as the read access specifier for the <A HREF="007276.html#0059" CLASS="Element59">TimeZoneAsString</A> property.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0033">TIdDateTimeStamp.GetTimeZoneHour</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007276.html" CLASS="Element59">TIdDateTimeStamp</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Number of hours between the local timezone and GMT time.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>function</STRONG> GetTimeZoneHour: Integer;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Return Value</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Integer - Number of hours between the local timezone and GMT time.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+GetTimeZoneHour is an Integer function that returns the number of hours between the local timezone and GMT time. GetTimeZoneHour is the read access specifier for the <A HREF="007276.html#005A" CLASS="Element59">TimeZoneHour</A> property, and is calculated using <A HREF="007276.html#0058" CLASS="Element59">TimeZone</A>.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0034">TIdDateTimeStamp.GetTimeZoneMinutes</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007276.html" CLASS="Element59">TIdDateTimeStamp</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Number of minutes between the local timezone and GMT time.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>function</STRONG> GetTimeZoneMinutes: Integer;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Return Value</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Integer - Number of minutes as an offset between the local timezone and GMT time.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+GetTimeZoneMinutes is an Integer function that returns the number of minutes as an offset between the local timezone and GMT time. GetTimeZoneMinutes is the read access specifier for the <A HREF="007276.html#005B" CLASS="Element59">TimeZoneMinutes</A> property, and is calculated using the value in <A HREF="007276.html#0058" CLASS="Element59">TimeZone</A>.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0035">TIdDateTimeStamp.GetWeekOfYear</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007276.html" CLASS="Element59">TIdDateTimeStamp</A>, <A HREF="010507.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Provides access to the week number for the Indy timestamp year.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>function</STRONG> GetWeekOfYear: Integer;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+GetWeekOfYear is an Integer function that acts as the read access specifier for the <A HREF="007276.html#005C" CLASS="Element59">WeekOfYear</A> property.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0043">TIdDateTimeStamp.SetDay</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007276.html" CLASS="Element59">TIdDateTimeStamp</A>, <A HREF="010508.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Updates the <A HREF="007276.html#0014" CLASS="Element59">Day</A> of <A HREF="007276.html#005D" CLASS="Element59">Year</A> for the Indy timestamp.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>procedure</STRONG> SetDay(ANumber: Integer);</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+ANumber: Integer</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+<A HREF="007276.html#0014" CLASS="Element59">Day</A> number to assign to the Indy timestamp.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+SetDay is a procedure used to update the <A HREF="007276.html#0014" CLASS="Element59">Day</A> property for the Indy timestamp. ANumber is the day of year to be assigned to the Indy timestamp. SetDay changes the <A HREF="007276.html#0014" CLASS="Element59">Day</A> property to 0 (zero) and calls <A HREF="007276.html#0000" CLASS="Element59">AddDays</A> using the value in ANumber to adjust the Indy timestamp.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0044">TIdDateTimeStamp.SetFromDOSDateTime</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007276.html" CLASS="Element59">TIdDateTimeStamp</A>, <A HREF="010509.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Calculates the timestamp value from a date and time in DOS format.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>procedure</STRONG> SetFromDOSDateTime(ADate: Word; ATime: Word);</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+ADate: Word</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+DOS date value.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+ATime: Word</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+DOS time value.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+SetFromDOSDateTime is a procedure used to set the timestamp value from Word values expressed in DOS Date and Time format. SetFromDOSDateTime call <A HREF="007276.html#005E" CLASS="Element59">Zero</A> to reset the timestamp to it's default values, and sets the initial year to 1980 prior to applying the ADate and ATime values.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0045">TIdDateTimeStamp.SetFromISO8601</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007276.html" CLASS="Element59">TIdDateTimeStamp</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Sets the date and time from an ISO 8601 time value.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>procedure</STRONG> SetFromISO8601(AString: <STRONG>String</STRONG>);</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+AString: String</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Date and time in ISO 8601 format.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+SetFromISO8601 is a procedure that the date and time components in <A HREF="007276.html" CLASS="Element59">TIdDateTimeStamp</A> using the ISO 8601 date time value in AString. AString may contain an ISO date value that is expressed as a Calendar, Ordinal, or Week date value. The following ISO 8601 date formats are allowed:<P CLASS="Element10">
+<UL>
+<LI>Calendar - YYYY-MM-DD.<P CLASS="Element10">
+<LI>Ordinal - YYYY-NNN; where NNN is the day of the year.<P CLASS="Element10">
+<LI>Week - YYYY-WNN-D where W is a literal character and NN is the week number for the year and D is the day of week.</UL>
+<P CLASS="Element10">
+AString may also contain an ISO time value expressed in HH:MM:SS format. The time format may also contain an optional prefix &quot;T&quot; indicating a time value.<P CLASS="Element10">
+For example, the following values all represent ISO 8601 date time values for July 4, 2001 at 1:00 PM:<P CLASS="Element10">
+<UL>
+<LI>2001-07-04 13:00:00<P CLASS="Element10">
+<LI>2001-07-04T13:00:00<P CLASS="Element10">
+<LI>2001-185 13:00:00<P CLASS="Element10">
+<LI>2001-185T13:00:00<P CLASS="Element10">
+<LI>2001-W24-4T13:00:00<P CLASS="Element10">
+<LI>2001-W24-4 13:00:00</UL>
+</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0046">TIdDateTimeStamp.SetFromRFC822</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007276.html" CLASS="Element59">TIdDateTimeStamp</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Sets the date and time from an RFC date and time value.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>procedure</STRONG> SetFromRFC822(AString: <STRONG>String</STRONG>);</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+AString: String</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+RFC-compliant date time value.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+SetFromRFC822 is a procedure that sets the date and time components of <A HREF="007276.html" CLASS="Element59">TIdDateTimeStamp</A> using the RFC-compliant date and time value in AString. AString may contain values in the format:<P CLASS="Element10">
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12">      Fri, 7 Sep 2001 13:00:00</PRE></DIV>
+</DIV>
+<P CLASS="Element10">
+SetFromRFC822 calls the <A HREF="007117.html" CLASS="Element59">StrInternetToDateTime</A> procedure in <A HREF="002193.html" CLASS="Element59">IdGlobal.pas</A> to convert the RFC date time value.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0047">TIdDateTimeStamp.SetFromTDateTime</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007276.html" CLASS="Element59">TIdDateTimeStamp</A>, <A HREF="010510.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Initializes the Indy timestamp from a TDateTime value.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>procedure</STRONG> SetFromTDateTime(ADateTime: TDateTime);</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+ADateTime: TDateTime</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Native date/time to assign to the Indy timestamp.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+SetFromTDateTime is a procedure that allows assignment of the native date/time in ADateTime to the Indy timestamp. SetFromTDateTime calls <A HREF="007276.html#0048" CLASS="Element59">SetFromTTimeStamp</A> to implement updates to the Indy timestamp.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0048">TIdDateTimeStamp.SetFromTTimeStamp</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007276.html" CLASS="Element59">TIdDateTimeStamp</A>, <A HREF="010511.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Initializes the Indy timestamp from a TTimeStamp value.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>procedure</STRONG> SetFromTTimeStamp(ATimeStamp: TTimeStamp);</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+ATimeStamp: TTimeStamp</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Native timestamp value to assign the Indy timestamp.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+SetFromTTimeStamp is a procedure used to assign the native TTimeStamp value in ATimeStamp to the Indy timestamp. SetFromTTimeStamp calls <A HREF="007276.html#004C" CLASS="Element59">SetYear</A>, <A HREF="007276.html#0043" CLASS="Element59">SetDay</A>, and <A HREF="007276.html#004A" CLASS="Element59">SetSecond</A> to initialize the Indy timestamp to a value that corresponds to the date and time value 1/1/1 00:00:00. SetFromTTimeStamp then calls <A HREF="007276.html#0049" CLASS="Element59">SetMillisecond</A> using the time portion of ATimeStamp, and <A HREF="007276.html#0043" CLASS="Element59">SetDay</A> using the date portion of ATimeStamp.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0049">TIdDateTimeStamp.SetMillisecond</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007276.html" CLASS="Element59">TIdDateTimeStamp</A>, <A HREF="010512.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Initializes an Indy timestamp using milliseconds.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>procedure</STRONG> SetMillisecond(ANumber: Integer);</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+ANumber: Integer</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Number of milliseconds since the base date.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+SetMillisecond is a procedure used to initialize an Indy timestamp using the number of milliseconds in ANumber since the base date. SetMillisecond clears the <A HREF="007276.html#003A" CLASS="Element59">Millisecond</A> property to 0 (zero) and calls <A HREF="007276.html#0002" CLASS="Element59">AddMilliseconds</A> using Anumber to initialize the Indy timestamp.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="004A">TIdDateTimeStamp.SetSecond</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007276.html" CLASS="Element59">TIdDateTimeStamp</A>, <A HREF="010513.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Increments an Indy timestamp using Seconds.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>procedure</STRONG> SetSecond(ANumber: Integer);</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+ANumber: Integer</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Number of seconds to be added to the Indy timestamp.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+SetSecond is a procedure used to increment an Indy timestamp using the number of Seconds in ANumber. SetSecond clears the <A HREF="007276.html#0040" CLASS="Element59">Second</A> property to 0 (zero) and calls <A HREF="007276.html#0005" CLASS="Element59">AddSeconds</A> using the value in ANumber.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="004B">TIdDateTimeStamp.SetTimeZone</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007276.html" CLASS="Element59">TIdDateTimeStamp</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Sets the timezone for the date time value.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>procedure</STRONG> SetTimeZone(<STRONG>const</STRONG> Value: Integer);</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+const Value: Integer</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Timezone for the date time value.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+SetTimeZone is a procedure that sets the timezone used for the TDateTime in <A HREF="007276.html" CLASS="Element59">TIdDateTimeStamp</A> to Value. SetTimeZone is also the write access specifier for the <A HREF="007276.html#0058" CLASS="Element59">TimeZone</A> property.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="004C">TIdDateTimeStamp.SetYear</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007276.html" CLASS="Element59">TIdDateTimeStamp</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Updates an Indy timestamp to reflect the specified year.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>procedure</STRONG> SetYear(ANumber: Integer);</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+ANumber: Integer</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+<A HREF="007276.html#005D" CLASS="Element59">Year</A> number to be assigned to the Indy timestamp.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+SetYear is a procedure used to assign the year number in ANumber to the Indy timestamp. When ANumber is 0 (zero), this is considered to be an invalid year number and no update is performed. SetYear will adjust the Indy timestamp using the CheckLeapYear method for the year specified in ANumber.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="004D">TIdDateTimeStamp.SubtractDays</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007276.html" CLASS="Element59">TIdDateTimeStamp</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Subtracts the specified number of days from the Indy timestamp.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>procedure</STRONG> SubtractDays(ANumber: Cardinal);</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+ANumber: Cardinal</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Number of days to be subtracted from the Indy timestamp.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+SubtractDays is a procedure used to subtract the number of days specified in ANumber from the Indy timestamp. SubtractDays will adjust the Indy timestamp to reflect any change in <A HREF="007276.html#0014" CLASS="Element59">Day</A> or <A HREF="007276.html#005D" CLASS="Element59">Year</A> related to the operation.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="004E">TIdDateTimeStamp.SubtractHours</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007276.html" CLASS="Element59">TIdDateTimeStamp</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Subtracts the specified number of hours from the Indy timestamp.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>procedure</STRONG> SubtractHours(ANumber: Cardinal);</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+ANumber: Cardinal</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Number of hours to be subtracted from the Indy timestamp.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+SubtractHours is a procedure used to subtract the number of hours specified in ANumber from the Indy timestamp. SubtractHours will adjust Seconds, <A HREF="007276.html#0014" CLASS="Element59">Day</A>, and <A HREF="007276.html#005D" CLASS="Element59">Year</A> accordingly.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="004F">TIdDateTimeStamp.SubtractMilliseconds</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007276.html" CLASS="Element59">TIdDateTimeStamp</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Subtracts the specified number of Milliseconds from the Indy timestamp.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>procedure</STRONG> SubtractMilliseconds(ANumber: Cardinal);</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+ANumber: Cardinal</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Number of milliseconds to be subtracted from the Indy timestamp.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+SubtractMilliseconds is a procedure used to subtract the number of milliseconds specified in ANumber from the Indy timestamp. SubtractMilliseconds will adjust Milliseconds, Seconds, <A HREF="007276.html#0014" CLASS="Element59">Day</A>, and <A HREF="007276.html#005D" CLASS="Element59">Year</A> accordingly.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0050">TIdDateTimeStamp.SubtractMinutes</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007276.html" CLASS="Element59">TIdDateTimeStamp</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Subtracts the specified number of minutes from the Indy timestamp.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>procedure</STRONG> SubtractMinutes(ANumber: Cardinal);</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+ANumber: Cardinal</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Number of minutes to subtract from the Indy timestamp.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+SubtractMinutes is a procedure used to subtract the number of minutes specified in ANumber from the Indy timestamp. SubtractMinutes will adjust Seconds, <A HREF="007276.html#0014" CLASS="Element59">Day</A>, and <A HREF="007276.html#005D" CLASS="Element59">Year</A> accordingly.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0051">TIdDateTimeStamp.SubtractMonths</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007276.html" CLASS="Element59">TIdDateTimeStamp</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Subtracts the specified number of months from the Indy timestamp.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>procedure</STRONG> SubtractMonths(ANumber: Cardinal);</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+ANumber: Cardinal</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Number of months to subtract from the Indy timestamp.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+SubtractMonths is a procedure used to subtract the number of months specified in ANumber from the Indy timestamp. SubtractMonths will adjust <A HREF="007276.html#005D" CLASS="Element59">Year</A> accordingly.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0052">TIdDateTimeStamp.SubtractSeconds</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007276.html" CLASS="Element59">TIdDateTimeStamp</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Subtracts the specified number of seconds from the Indy timestamp.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>procedure</STRONG> SubtractSeconds(ANumber: Cardinal);</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+ANumber: Cardinal</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Number of seconds to subtract from the Indy timestamp.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+SubtractSeconds is a procedure used to subtract the number of seconds specified in ANumber from the Indy timestamp. SubtractSeconds will adjust Seconds, <A HREF="007276.html#0014" CLASS="Element59">Day</A>, and <A HREF="007276.html#005D" CLASS="Element59">Year</A> accordingly.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0053">TIdDateTimeStamp.SubtractTDateTime</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007276.html" CLASS="Element59">TIdDateTimeStamp</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Subtracts a TDateTime value from the Indy timestamp.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>procedure</STRONG> SubtractTDateTime(ADateTime: TDateTime);</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+ADateTime: TDateTime</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+The date and time value to be subtracted from the Indy timestamp.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+SubtractTDateTime is a procedure used to subtract the TDateTime value specified in ADateTime from the Indy timestamp. SubtractTDateTime will adjust Milliseconds, Seconds, <A HREF="007276.html#0014" CLASS="Element59">Day</A>, and <A HREF="007276.html#005D" CLASS="Element59">Year</A> accordingly. SubtractTDateTime calls <A HREF="007276.html#0055" CLASS="Element59">SubtractTTimeStamp</A> to implement its operation.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0054">TIdDateTimeStamp.SubtractTIdDateTimeStamp</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007276.html" CLASS="Element59">TIdDateTimeStamp</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Subtracts an Indy timestamp value from the current Indy timestamp.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>procedure</STRONG> SubtractTIdDateTimeStamp(AIdDateTime: <A HREF="007276.html" CLASS="Element59">TIdDateTimeStamp</A>);</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+AIdDateTime: TIdDateTimeStamp</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+The Indy timestamp value to subtract from the current Indy timestamp.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+SubtractTIdDateTimeStamp is a procedure used to subtract the Indy timestamp specified in AIdDateTime from the current Indy timestamp. SubtractTIdDateTimeStamp will adjust Milliseconds, Seconds, <A HREF="007276.html#0014" CLASS="Element59">Day</A>, and <A HREF="007276.html#005D" CLASS="Element59">Year</A> accordingly.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0055">TIdDateTimeStamp.SubtractTTimeStamp</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007276.html" CLASS="Element59">TIdDateTimeStamp</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Subtracts the specified TTimeStamp from the Indy timestamp.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>procedure</STRONG> SubtractTTimeStamp(ATimeStamp: TTimeStamp);</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+ATimeStamp: TTimeStamp</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+The TTimeStamp to be subtracted from the Indy timestamp.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+SubtractTTimeStamp is a procedure used to subtract the TTimeStamp value specified in ATimeStamp from the Indy timestamp. SubtractTTimeStamp will adjust Milliseconds, Seconds, <A HREF="007276.html#0014" CLASS="Element59">Day</A>, and <A HREF="007276.html#005D" CLASS="Element59">Year</A> accordingly.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0056">TIdDateTimeStamp.SubtractWeeks</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007276.html" CLASS="Element59">TIdDateTimeStamp</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Subtracts the specified number of weeks from the Indy timestamp.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>procedure</STRONG> SubtractWeeks(ANumber: Cardinal);</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+ANumber: Cardinal</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Number of weeks to subtract from the Indy timestamp.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+SubtractWeeks is a procedure used to subtract the number of weeks specified in ANumber from the Indy timestamp. SubtractWeeks will adjust <A HREF="007276.html#0014" CLASS="Element59">Day</A> and <A HREF="007276.html#005D" CLASS="Element59">Year</A> accordingly.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0057">TIdDateTimeStamp.SubtractYears</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007276.html" CLASS="Element59">TIdDateTimeStamp</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Subtracts the specified number of years from the Indy timestamp.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>procedure</STRONG> SubtractYears(ANumber: Cardinal);</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+ANumber: Cardinal</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Number of years to subtract from the Indy timestamp.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+SubtractYears is a procedure used to subtract the number of years specified in ANumber from the Indy timestamp. SubtractYears will adjust <A HREF="007276.html#005D" CLASS="Element59">Year</A> accordingly.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="005E">TIdDateTimeStamp.Zero</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007276.html" CLASS="Element59">TIdDateTimeStamp</A>, <A HREF="010514.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Resets the date and time values.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>procedure</STRONG> Zero;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Zero is a procedure that resets the date, time, and timezone values in <A HREF="007276.html" CLASS="Element59">TIdDateTimeStamp</A> to their default values. Zero calls <A HREF="007276.html#005F" CLASS="Element59">ZeroDate</A> to reset the date component of the date time value. Zero calls <A HREF="007276.html#0060" CLASS="Element59">ZeroTime</A> to reset the time component of the date time value. Zero also sets <A HREF="007276.html#0058" CLASS="Element59">TimeZone</A> to 0 prior to exiting from the method.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="005F">TIdDateTimeStamp.ZeroDate</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007276.html" CLASS="Element59">TIdDateTimeStamp</A>, <A HREF="010515.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Resets the date value to its default representation.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>procedure</STRONG> ZeroDate;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+ZeroDate is a procedure that resets the value of the date component in <A HREF="007276.html" CLASS="Element59">TIdDateTimeStamp</A>. ZeroDate calls <A HREF="007276.html#004C" CLASS="Element59">SetYear</A> to set the year to 1, and calls <A HREF="007276.html#0043" CLASS="Element59">SetDay</A> to set the day number to 1.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0060">TIdDateTimeStamp.ZeroTime</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007276.html" CLASS="Element59">TIdDateTimeStamp</A>, <A HREF="010516.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Resets the time value to its default representation.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>procedure</STRONG> ZeroTime;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+ZeroTime is a procedure that resets the value of the time component in <A HREF="007276.html" CLASS="Element59">TIdDateTimeStamp</A>. ZeroTime calls <A HREF="007276.html#004A" CLASS="Element59">SetSecond</A> and <A HREF="007276.html#0049" CLASS="Element59">SetMillisecond</A> to set the time to 00:00:00.000.</DIV>
+</DIV>
+<DIV CLASS="Element62">
+<HR>Created with Doc-O-Matic 2 donated to <STRONG><A HREF="http://www.delphi-jedi.org">Project JEDI</A></STRONG>. Commercial license available from the <STRONG><A HREF="http://www.doc-o-matic.com">Doc-O-Matic site</A></STRONG>.</DIV>
+</DIV></BODY></HTML>

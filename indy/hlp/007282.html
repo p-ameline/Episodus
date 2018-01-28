@@ -1,0 +1,174 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+<TITLE>TIdDecoder4to3</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <META name="GENERATOR" content="Doc-O-Matic">
+    <LINK rel="STYLESHEET" href="default.css" type="text/css">
+
+<SCRIPT LANGUAGE="JavaScript1.2" SRC="scripts.js"></SCRIPT>
+</HEAD>
+<BODY CLASS="Element57">
+<TABLE BORDER="0" BGCOLOR="#AACCFF" WIDTH="100%" CELLSPACING="0" CELLPADDING="0">
+<TR><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element1">
+Indy 9</DIV>
+</TD><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element2">
+<A HREF="content.html" CLASS="Element59">Content</A> | <A HREF="idx.html" CLASS="Element59">Index</A> | <A HREF="symref.html" CLASS="Element59">Reference</A></DIV>
+</TD></TR></TABLE><DIV CLASS="Element58">
+<DIV CLASS="Element5">
+TIdDecoder4to3</DIV>
+<DIV CLASS="Element7">
+<A HREF="010602.html" CLASS="Element59">Hierarchy</A>, <A HREF="010603.html" CLASS="Element59">Properties</A>, <A HREF="010604.html" CLASS="Element59">Methods</A>, <A HREF="010605.html" CLASS="Element59">See Also</A>, <A HREF="002134.html" CLASS="Element59">Unit: IdCoder3To4</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Implements a decoder using a table-driven alphabet to produce output represented in the US-ASCII character set.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12">TIdDecoder4to3 = <STRONG>class</STRONG>(<A HREF="007281.html" CLASS="Element59">TIdDecoder</A>)</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Unit</DIV>
+<DIV CLASS="Element69">
+<A HREF="002134.html" CLASS="Element59">IdCoder3To4</A></DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+TIdDecoder4to3 is a <A HREF="007281.html" CLASS="Element59">TIdDecoder</A> descendant that implements decoding capabilities for data encoded using <A HREF="007310.html" CLASS="Element59">TIdEncoder3to4</A>. TIdDecoder4to3 provides a decoding table to represent the valid characters in the encoder alphabet. <STRONG>Note:</STRONG> TIdDecoder4to3 does not specify the valid characters in the decoding table. Application will generally use a descendant class, like TIdDeCoderMIME or <A HREF="007285.html" CLASS="Element59">TIdDecoderUUE</A>, where the alphabet is specified.<P CLASS="Element10">
+TIdDecoder4to3 provides methods to decode string values to as stream destination, and method to handle the low-level conversion performed when processing string input values.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0003">TIdDecoder4to3.FillChar</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007282.html" CLASS="Element59">TIdDecoder4to3</A>, <A HREF="010606.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Indicates a character value that can be omitted from decoded output.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> FillChar: Char;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+FillChar is a Char property that Indicates a character value that can be omitted from decoded output. FillChar should correspond to the value that may have been added by <A HREF="007310.html" CLASS="Element59">TIdEncoder3to4</A> the encoded output to force to the length required by <A HREF="007310.html#0001" CLASS="Element59">TIdEncoder3to4.Encode</A>.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0000">TIdDecoder4to3.ConstructDecodeTable</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007282.html" CLASS="Element59">TIdDecoder4to3</A>, <A HREF="010607.html" CLASS="Element59">See Also</A>, <A HREF="010608.html" CLASS="Element59">Example</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Initializes the coding table used by the decoder.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>class</STRONG> <STRONG>procedure</STRONG> ConstructDecodeTable(<STRONG>const</STRONG> ACodingTable: <STRONG>string</STRONG>; <STRONG>var</STRONG> ADecodeArray: <A HREF="007288.html" CLASS="Element59">TIdDecodeTable</A>);</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+const ACodingTable: string</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+String containing the initial coder alphabet.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+var ADecodeArray: TIdDecodeTable</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Table used by the decoder to detect valid characters and ordinal position.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+ConstructDecodeTable is a Class procedure that initializes the CodingTable used by <A HREF="007282.html" CLASS="Element59">TIdDecoder4to3</A>. All elements in ADecoderArray are initialize to decimal 255, and the valid characters in ACodingTable are overlaid to indicate their ordinal position in the coder alphabet.<P CLASS="Element10">
+ADecodeArray is used by descendant classes, like <A HREF="007283.html" CLASS="Element59">TIdDecoderMIME</A> and <A HREF="007285.html" CLASS="Element59">TIdDecoderUUE</A>, to initialize their DecodeTable properties based on the alphabet for each specific coder.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0001">TIdDecoder4to3.DecodeToStream</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007282.html" CLASS="Element59">TIdDecoder4to3</A>, <A HREF="010609.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Implements the <A HREF="007282.html" CLASS="Element59">TIdDecoder4to3</A> decoding algorithm for decoding String values to a Stream.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>procedure</STRONG> DecodeToStream(AIn: <STRONG>string</STRONG>; ADest: TStream); <STRONG>override</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+AIn: string</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Value to be decoded.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+ADest: TStream</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Stream that is the destination for the decoded value.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+DecodeToStream is an overridden procedure in <A HREF="007282.html" CLASS="Element59">TIdDecoder4to3</A> that implements decoding the String value in AIn to the TStream destination in ADest. DecodeToStream implements a decoding algorithm that converts the 4-byte representation of encoded data to it's 3-byte un-encoded representation.<P CLASS="Element10">
+DecodeToStream can raise an <A HREF="000375.html" CLASS="Element59">EIdException</A> with the constant message <A HREF="006740.html" CLASS="Element59">RSUnevenSizeInDecodeStream</A> when the length of the encoded data in AIn is not a multiple of 4.<P CLASS="Element10">
+DecodeToStream reads 4 bytes of data from AIn and calls <A HREF="007282.html#0002" CLASS="Element59">DecodeUnit</A> until all contents in the encoded data have been handled. An individual byte in the 3-byte un-encoded value and it's preceding byte will be omitted when the byte value is equal to <A HREF="007282.html#0003" CLASS="Element59">FillChar</A>.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0002">TIdDecoder4to3.DecodeUnit</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007282.html" CLASS="Element59">TIdDecoder4to3</A>, <A HREF="010610.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Performs the specifics of the <A HREF="007282.html" CLASS="Element59">TIdDecoder4to3</A> decoding algorithm.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>procedure</STRONG> DecodeUnit(AIn: Cardinal; <STRONG>var</STRONG> VOut1: Byte; <STRONG>var</STRONG> VOut2: Byte; <STRONG>var</STRONG> VOut3: Byte);</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+AIn: Cardinal</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Cardinal value of the encoded data.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+var VOut1: Byte</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+value of Byte 1 in the un-encoded data.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+var VOut2: Byte</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+value of Byte 2 in the un-encoded data.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+var VOut3: Byte</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+value of Byte 3 in the un-encoded data.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+DecodeUnit is a procedure that implements the specific processing required to perform the <A HREF="007282.html" CLASS="Element59">TIdDecoder4to3</A> decoding algorithm. AIn is the Cardinal value of the encoded data. DecodeUnit create an instance of <A HREF="007226.html" CLASS="Element59">TIdCardinalBytes</A> used to concatenate the first 6-bits of each byte into their un-encoded representation as 3 Bytes values in VOut1, VOut2, and VOut3.</DIV>
+</DIV>
+<DIV CLASS="Element62">
+<HR>Created with Doc-O-Matic 2 donated to <STRONG><A HREF="http://www.delphi-jedi.org">Project JEDI</A></STRONG>. Commercial license available from the <STRONG><A HREF="http://www.doc-o-matic.com">Doc-O-Matic site</A></STRONG>.</DIV>
+</DIV></BODY></HTML>

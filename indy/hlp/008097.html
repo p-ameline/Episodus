@@ -1,0 +1,158 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+<TITLE>TTextRecord</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <META name="GENERATOR" content="Doc-O-Matic">
+    <LINK rel="STYLESHEET" href="default.css" type="text/css">
+
+<SCRIPT LANGUAGE="JavaScript1.2" SRC="scripts.js"></SCRIPT>
+</HEAD>
+<BODY CLASS="Element57">
+<TABLE BORDER="0" BGCOLOR="#AACCFF" WIDTH="100%" CELLSPACING="0" CELLPADDING="0">
+<TR><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element1">
+Indy 9</DIV>
+</TD><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element2">
+<A HREF="content.html" CLASS="Element59">Content</A> | <A HREF="idx.html" CLASS="Element59">Index</A> | <A HREF="symref.html" CLASS="Element59">Reference</A></DIV>
+</TD></TR></TABLE><DIV CLASS="Element58">
+<DIV CLASS="Element5">
+TTextRecord</DIV>
+<DIV CLASS="Element7">
+<A HREF="015257.html" CLASS="Element59">Hierarchy</A>, <A HREF="015258.html" CLASS="Element59">Properties</A>, <A HREF="015259.html" CLASS="Element59">Methods</A>, <A HREF="002173.html" CLASS="Element59">Unit: IdDNSResolver</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Represents resource records in a DNS response that include <A HREF="008097.html#0003" CLASS="Element59">Text</A> String resource record types.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12">TTextRecord = <STRONG>class</STRONG>(<A HREF="008059.html" CLASS="Element59">TResultRecord</A>)</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Unit</DIV>
+<DIV CLASS="Element69">
+<A HREF="002173.html" CLASS="Element59">IdDNSResolver</A></DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+TTextRecord is a <A HREF="008059.html" CLASS="Element59">TResultRecord</A> descendant that represents a resource record returned in the results for a DNS query. TTextRecord is the collection item created to represent a resource resource returned when <A HREF="007302.html#0003" CLASS="Element59">TIdDNSResolver.QueryRecords</A> includes the value qtTXT for <A HREF="008097.html#0003" CLASS="Element59">Text</A> String resource records.<P CLASS="Element10">
+<A HREF="008097.html#0003" CLASS="Element59">Text</A> String resource records are used to provide variable length text string values associated with the Domain owner. <A HREF="008097.html#0003" CLASS="Element59">Text</A> String resource records do not describe the semantics of the test string contents, and is dependent on the domain where it is located.<P CLASS="Element10">
+A <A HREF="008097.html#0003" CLASS="Element59">Text</A> String resource record uses the same DNS packet layout as other <A HREF="008059.html" CLASS="Element59">TResultRecord</A>-based responses, but extends the use of RData to include the following definition and format:<P CLASS="Element10">
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12">  +--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+
+  |                                               |
+  .                                               .
+  .                   TXT-DATA                    .
+  .                                               .
+  |                                               |
+  +--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+</PRE></DIV>
+</DIV>
+<P CLASS="Element10">
+<UL>
+<LI>TXT-DATA - One or more character strings.</UL>
+<P CLASS="Element10">
+TTextRecord extends <A HREF="008059.html" CLASS="Element59">TResultRecord</A> to implement the specifics of accessing RData values as properties, including <A HREF="008097.html#0003" CLASS="Element59">Text</A>. TTextRecord also overrides the <A HREF="008097.html#0002" CLASS="Element59">Parse</A> method to read the values in RData into their property counterparts.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0003">TTextRecord.Text</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="008097.html" CLASS="Element59">TTextRecord</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Represents character strings associated with the owner.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> Text: TStrings;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Text is a read-only TStrings property that represents one or more string values that occur in the RData field of a Text String resource record. Values in Text are associated with the owner in Name, and semantics of its contents are dependent on the domain where it is located.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0000">TTextRecord.Create</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="008097.html" CLASS="Element59">TTextRecord</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Constructor for the object instance.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>constructor</STRONG> Create(Collection: TCollection); <STRONG>override</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+Collection: TCollection</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Owner of the collection item.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Create is the constructor for the object instance. Create calls the inherited Create method using Collection as the owner of the collection item.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0001">TTextRecord.Destroy</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="008097.html" CLASS="Element59">TTextRecord</A>, <A HREF="015260.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Frees the resource record collection item.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>destructor</STRONG> Destroy; <STRONG>override</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Destroy is the destructor for the object instance. Destroy frees resources allocated to the <A HREF="008097.html#0003" CLASS="Element59">Text</A> property in the <A HREF="008097.html#0000" CLASS="Element59">Create</A> method. Destroy calls the inherited Destroy method prior to exit.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0002">TTextRecord.Parse</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="008097.html" CLASS="Element59">TTextRecord</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Parses RData values into properties.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>procedure</STRONG> Parse(CompleteMessage: <STRONG>String</STRONG>; APos: Integer); <STRONG>override</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+CompleteMessage: String</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Contents of the resource record.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+APos: Integer</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Position where RData values begin in the answer.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Parse is an overridden procedure that implements a routine to parse resource record values in the DNS response into their property-based counterparts.<P CLASS="Element10">
+CompleteMessage is the contents of the resource record. Since the DNS message can contain compressed data, the whole message is needed for parsing and pointer location.<P CLASS="Element10">
+APos is the position in the resource record where RData values for this record type are located in the DNS Answer.<P CLASS="Element10">
+Parse calls the inherited Parse method, and retrieves the DNS labels and values for the <A HREF="008097.html#0003" CLASS="Element59">Text</A> property.</DIV>
+</DIV>
+<DIV CLASS="Element62">
+<HR>Created with Doc-O-Matic 2 donated to <STRONG><A HREF="http://www.delphi-jedi.org">Project JEDI</A></STRONG>. Commercial license available from the <STRONG><A HREF="http://www.doc-o-matic.com">Doc-O-Matic site</A></STRONG>.</DIV>
+</DIV></BODY></HTML>

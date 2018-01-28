@@ -1,0 +1,435 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+<TITLE>TIdCommandHandler</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <META name="GENERATOR" content="Doc-O-Matic">
+    <LINK rel="STYLESHEET" href="default.css" type="text/css">
+
+<SCRIPT LANGUAGE="JavaScript1.2" SRC="scripts.js"></SCRIPT>
+</HEAD>
+<BODY CLASS="Element57">
+<TABLE BORDER="0" BGCOLOR="#AACCFF" WIDTH="100%" CELLSPACING="0" CELLPADDING="0">
+<TR><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element1">
+Indy 9</DIV>
+</TD><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element2">
+<A HREF="content.html" CLASS="Element59">Content</A> | <A HREF="idx.html" CLASS="Element59">Index</A> | <A HREF="symref.html" CLASS="Element59">Reference</A></DIV>
+</TD></TR></TABLE><DIV CLASS="Element58">
+<DIV CLASS="Element5">
+TIdCommandHandler</DIV>
+<DIV CLASS="Element7">
+<A HREF="010143.html" CLASS="Element59">Hierarchy</A>, <A HREF="010144.html" CLASS="Element59">Properties</A>, <A HREF="010145.html" CLASS="Element59">Methods</A>, <A HREF="010146.html" CLASS="Element59">Events</A>, <A HREF="010147.html" CLASS="Element59">See Also</A>, <A HREF="002919.html" CLASS="Element59">Unit: IdTCPServer</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Implements a collection item representing command handlers for a server implementation.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12">TIdCommandHandler = <STRONG>class</STRONG>(TCollectionItem)</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Unit</DIV>
+<DIV CLASS="Element69">
+<A HREF="002919.html" CLASS="Element59">IdTCPServer</A></DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+TIdCommandHandler is a TCollectionItem descendant that implements a mechanism for recognizing valid commands for a Server, and provides methods and properties needed handle parameters, perform actions, and formulate error and success responses.<P CLASS="Element10">
+TIdCommandHandler implements an <A HREF="007244.html#000B" CLASS="Element59">OnCommand</A> event handler that receives a <A HREF="007243.html" CLASS="Element59">TIdCommandEvent</A> event type representing the unique command to be executed. TIdCommandHandler implements the virtual <A HREF="007244.html#0000" CLASS="Element59">Check</A> method that handles creation of <A HREF="007242.html" CLASS="Element59">TIdCommand</A> object instances, signalling of event notifications for the associated command object, as well as preparation of reply and response values for the associated threaded peer connection.<P CLASS="Element10">
+TIdCommandHandler is an optional feature for use with <A HREF="007831.html" CLASS="Element59">TIdTCPServer</A> and descendant classes. TIdCommandHandler can be used when <A HREF="007831.html#0003" CLASS="Element59">TIdTCPServer.CommandHandlersEnabled</A> indicates that command handlers are desired, and the server has valid TIdCommandHandler instances assigned in the CommandHandlers collection. Under any other circumstance, <A HREF="007831.html" CLASS="Element59">TIdTCPServer</A> reverts to the default behavior implemented using the <A HREF="007831.html#0015" CLASS="Element59">TIdTCPServer.OnExecute</A> event handler.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0001">TIdCommandHandler.CmdDelimiter</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007244.html" CLASS="Element59">TIdCommandHandler</A>, <A HREF="010148.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Identifies the delimiter character between the <A HREF="007244.html#0002" CLASS="Element59">Command</A> and parameter values.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> CmdDelimiter: Char;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+CmdDelimiter is a Char property that identifies the delimiter character used to separate <A HREF="007244.html#0002" CLASS="Element59">Command</A> from any parameter values in data received from a peer connection. CmdDelimiter is used in <A HREF="007244.html#0000" CLASS="Element59">Check</A> when parameter values are detected in the received data. If CmdDelimiter contains any value other than <A HREF="000285.html" CLASS="Element59">CHAR0</A> (Decimal 0), both <A HREF="007244.html#0002" CLASS="Element59">Command</A> and CmdDelimiter are extracted from the received data. Any remaining data is used as parameter values for the associated <A HREF="007242.html" CLASS="Element59">TIdCommand</A> object instance.<P CLASS="Element10">
+The default value for CmdDelimiter is ' ' (Decimal 32), as assigned in <A HREF="007244.html#0003" CLASS="Element59">Create</A>.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0002">TIdCommandHandler.Command</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007244.html" CLASS="Element59">TIdCommandHandler</A>, <A HREF="010149.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Text that causes the command handler to be invoked.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> Command: <STRONG>string</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Command is a String property that represents the text received from a peer connection that will result in the command handler being performed using optional parameter values. Command is examined in <A HREF="007244.html#0000" CLASS="Element59">Check</A> to determine if the command handler can be used with data received from a peer thread connection. Use <A HREF="007244.html#000B" CLASS="Element59">OnCommand</A> to implement the functionality needed in response to Command.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0004">TIdCommandHandler.Data</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007244.html" CLASS="Element59">TIdCommandHandler</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Storage slot for TObject data used by the command handler.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> Data: TObject;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Data is a TObject property that can be used as a storage slot for data used by the command handler, and can contain a reference to any TObject descendant. Data cn accessed by a command action handler or event handlers triggered through execution of the item in TIdCommandCommandHandlers.<P CLASS="Element10">
+<STRONG>Note</STRONG>: It is the responsibility of the application to cast Data to the class instance required, or an exception will be raised.<P CLASS="Element10">
+Data is not initialized in the <A HREF="007244.html#0003" CLASS="Element59">Create</A> constructor, nor is it released in the <A HREF="007244.html#0005" CLASS="Element59">Destroy</A> destructor. The application must assume all responsibility for maintaining Data when assigned.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0006">TIdCommandHandler.Disconnect</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007244.html" CLASS="Element59">TIdCommandHandler</A>, <A HREF="010150.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Closes the connection to the peer after handling a command.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> Disconnect: boolean;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Disconnect is a Boolean property that indicates if the command handler should close the connection to the peer after the <A HREF="007244.html#0007" CLASS="Element59">Enabled</A> command handler is invoked. Disconnect is used in <A HREF="007244.html#0000" CLASS="Element59">Check</A>, after an associated <A HREF="007242.html" CLASS="Element59">TIdCommand</A> object instance has been created, prepared, and signalled to the <A HREF="007244.html#000B" CLASS="Element59">OnCommand</A> event handler. When Disconnect is True, the peer thread connection is closed prior to exiting from the <A HREF="007244.html#0000" CLASS="Element59">Check</A>.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0007">TIdCommandHandler.Enabled</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007244.html" CLASS="Element59">TIdCommandHandler</A>, <A HREF="010151.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Indicates if the command handler can respond to the associated <A HREF="007244.html#0002" CLASS="Element59">Command</A>.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> Enabled: boolean;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Enabled is a Boolean property that indicates if the command handler instance can be used to execute the associated <A HREF="007244.html#0002" CLASS="Element59">Command</A> received from a peer connection. When Enabled is False, the command handler cannot be invoked by a thread of execution for the peer connection.<P CLASS="Element10">
+The default value for Enabled is <A HREF="002182.html" CLASS="Element59">IdEnabledDefault</A>, as assigned in the <A HREF="007244.html#0003" CLASS="Element59">Create</A> constructor.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0009">TIdCommandHandler.Name</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007244.html" CLASS="Element59">TIdCommandHandler</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Identity for the item in the owner collection.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> Name: <STRONG>string</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Name is a String property that represents the identity for the collection item in a <A HREF="007245.html" CLASS="Element59">TIdCommandHandlers</A> collection, and is also used as the DisplayName when the collection item is viewd in the Object Inspector. The default value for Name is assigned in the <A HREF="007244.html#0003" CLASS="Element59">Create</A> constructor, and contains the concatenated values of ClassName and the string representation of the inherited ID property.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="000C">TIdCommandHandler.ParamDelimiter</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007244.html" CLASS="Element59">TIdCommandHandler</A>, <A HREF="010152.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Identifies the delimiter character between parameters.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> ParamDelimiter: Char;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+ParamDelimiter is a Char property that identifies the delimiter character expected between parameter appearing in <A HREF="007244.html#0002" CLASS="Element59">Command</A>. ParamDelimiter is used in <A HREF="007244.html#0000" CLASS="Element59">Check</A> to separated values in <A HREF="007244.html#0002" CLASS="Element59">Command</A> into individual parameter values for a <A HREF="007242.html" CLASS="Element59">TIdCommand</A> instance representing the command. ParamDelimiter is used when <A HREF="007244.html#000D" CLASS="Element59">ParseParams</A> is True. Otherwise, parameter parsing is not performed.<P CLASS="Element10">
+The default value for ParamDelimiter is the SPACE character (Decimal 32) as assigned in <A HREF="007244.html#0003" CLASS="Element59">Create</A>.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="000D">TIdCommandHandler.ParseParams</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007244.html" CLASS="Element59">TIdCommandHandler</A>, <A HREF="010153.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Indicates if parameter values are separated into individual line in Params.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> ParseParams: Boolean;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+ParseParams is a Boolean property that indicates if the command handler should parse any parameters that occur after the command sent to the <A HREF="007244.html#0000" CLASS="Element59">Check</A> method. When ParseParams is True, values occurring after the command and optional <A HREF="007244.html#0001" CLASS="Element59">CmdDelimiter</A> are added to the Params property in the command object as individual lines when the <A HREF="007244.html#000C" CLASS="Element59">ParamDelimiter</A> character is encountered.<P CLASS="Element10">
+The default value for ParseParams is <A HREF="002308.html" CLASS="Element59">IdParseParamsDefault</A>.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="000E">TIdCommandHandler.ReplyExceptionCode</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007244.html" CLASS="Element59">TIdCommandHandler</A>, <A HREF="010154.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Represents the numeric code returned when an exception occurs in the command handler.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> ReplyExceptionCode: Integer;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+ReplyExceptionCode is an Integer property that represents the Numeric result code used when an exception occurs after signalling the associated command object in <A HREF="007244.html#0000" CLASS="Element59">Check</A>. When an exception is raised, ReplyExceptionCode is used with the message text from the exception as the new value for Reply. The peer thread connection in the associated command object is used to <A HREF="006944.html" CLASS="Element59">send</A> the reply using SendReply when PeformReply indicates that a reply is needed.<P CLASS="Element10">
+<STRONG>Note</STRONG>: An exception that occurs in <A HREF="007244.html#0000" CLASS="Element59">Check</A> can result in the OnException event handler for the server context being executed. <A HREF="007244.html#0000" CLASS="Element59">Check</A> examines the ReplyExceptionCode on the server to insure that either condition is detected.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="000F">TIdCommandHandler.ReplyNormal</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007244.html" CLASS="Element59">TIdCommandHandler</A>, <A HREF="010155.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Represents the reply indicating successful completion of the command handler.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> ReplyNormal: <A HREF="007663.html" CLASS="Element59">TIdRFCReply</A>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+ReplyNormal is a <A HREF="007663.html" CLASS="Element59">TIdRFCReply</A> property that contains the NumericCode and Text for the reply indicating successful completion of the command handler. ReplyNormal is used as the initial value for the reply in an associated <A HREF="007242.html" CLASS="Element59">TIdCommand</A> object instance in the command handler.<P CLASS="Element10">
+ReplyNormal is used in the <A HREF="007244.html#0000" CLASS="Element59">Check</A> method prior to invoking execution of the command object of the command handler.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0010">TIdCommandHandler.Response</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007244.html" CLASS="Element59">TIdCommandHandler</A>, <A HREF="010156.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Contains string values used as the response for the command handler.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> Response: TStrings;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Response is a TStrings property that contains string values to be written in an RFC-complaint format as the response for the command. Response is used in <A HREF="007244.html#0000" CLASS="Element59">Check</A> when the associated <A HREF="007242.html#0007" CLASS="Element59">TIdCommand.Response</A> does not contain any values. <STRONG>Note</STRONG>: <A HREF="007244.html#0000" CLASS="Element59">Check</A> also examines the <A HREF="007242.html#0006" CLASS="Element59">TIdCommand.Reply</A> property to generate any values from the command object.<P CLASS="Element10">
+Response is sent to the peer connection in the current thread of execution using the <A HREF="007828.html#0042" CLASS="Element59">TIdTCPConnection.WriteRFCStrings</A> method.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0011">TIdCommandHandler.Tag</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007244.html" CLASS="Element59">TIdCommandHandler</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Stores an Integer value.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> Tag: integer;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Tag is an Integer property that has no predefined meaning. The Tag property is provided for the convenience of developers. It can be used for storing an additional integer value, or it can be typecast to any value such as a component reference or a pointer.<P CLASS="Element10">
+<A HREF="007598.html" CLASS="Element59">TIdNNTPServer</A> uses the Tag property to identify the index position of the NNTPCommand assigned to the <A HREF="007244.html" CLASS="Element59">TIdCommandHandler</A>.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0000">TIdCommandHandler.Check</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007244.html" CLASS="Element59">TIdCommandHandler</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Handles dispatching and execution of the command for the command handler.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>function</STRONG> Check(<STRONG>const</STRONG> AData: <STRONG>string</STRONG>; AThread: <A HREF="007613.html" CLASS="Element59">TIdPeerThread</A>): boolean; <STRONG>virtual</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+const AData: string</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+<A HREF="007244.html#0004" CLASS="Element59">Data</A> received from the peer connection.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+AThread: TIdPeerThread</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Thread of execution for the peer connection.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Return Value</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Boolean - True</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Check is a Boolean function that is used to create, prepare, and dispatch a <A HREF="007242.html" CLASS="Element59">TIdCommand</A> object instance used in association with the command handler. Check examines AData for optional <A HREF="007244.html#0001" CLASS="Element59">CmdDelimiter</A> and parameter values.<P CLASS="Element10">
+Check creates a <A HREF="007242.html" CLASS="Element59">TIdCommand</A> object instance used to represent the command handled by the command handler, and sets property values including the CommandHandler that created the object and the peer thread used for data and response messages.<P CLASS="Element10">
+Check parses parameter values into the TIdCOmmand object when <A HREF="007244.html#000D" CLASS="Element59">ParseParams</A> is True.<P CLASS="Element10">
+Check assigns the values in <A HREF="007244.html#000F" CLASS="Element59">ReplyNormal</A> as the default reply for the <A HREF="007242.html" CLASS="Element59">TIdCommand</A> associated with the command handler.<P CLASS="Element10">
+Check signals the <A HREF="007244.html#000B" CLASS="Element59">OnCommand</A> event handler to allow execution of actions for the command.<P CLASS="Element10">
+If an exception occurs, Check updates the Reply from the command object to contain the value in <A HREF="007244.html#000E" CLASS="Element59">ReplyExceptionCode</A> and exception message text. Exception messages are then written to the peer thread connection.<P CLASS="Element10">
+When the command object completes execution, values in Reply and <A HREF="007244.html#0010" CLASS="Element59">Response</A> are sent to the peer thread connection. If <A HREF="007244.html#0006" CLASS="Element59">Disconnect</A> is True, the peer thread connection is closed prior to exiting from the method.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0003">TIdCommandHandler.Create</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007244.html" CLASS="Element59">TIdCommandHandler</A>, <A HREF="010157.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Constructor for the object instance.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>constructor</STRONG> Create(ACollection: TCollection); <STRONG>override</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+ACollection: TCollection</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Collection that owns the command handler.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Create is the constructor for the object instance, and calls the inherited Create method to initialize property values. Create initializes the object instances used in the <A HREF="007244.html#000F" CLASS="Element59">ReplyNormal</A> and <A HREF="007244.html#0010" CLASS="Element59">Response</A> properties, and sets the following properties to their default values:<P CLASS="Element10">
+<UL>
+<LI><A HREF="007244.html#0001" CLASS="Element59">CmdDelimiter</A> - ' ' (Decimal 32)<P CLASS="Element10">
+<LI><A HREF="007244.html#0007" CLASS="Element59">Enabled</A> - <A HREF="002182.html" CLASS="Element59">IdEnabledDefault</A><P CLASS="Element10">
+<LI><A HREF="007244.html#0009" CLASS="Element59">Name</A> - Concatenated value of ClassName and ID<P CLASS="Element10">
+<LI><A HREF="007244.html#000C" CLASS="Element59">ParamDelimiter</A> - ' ' (Decimal 32)<P CLASS="Element10">
+<LI><A HREF="007244.html#000D" CLASS="Element59">ParseParams</A> - <A HREF="002308.html" CLASS="Element59">IdParseParamsDefault</A></UL>
+</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0005">TIdCommandHandler.Destroy</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007244.html" CLASS="Element59">TIdCommandHandler</A>, <A HREF="010158.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Frees the object instance.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>destructor</STRONG> Destroy; <STRONG>override</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Destroy is the Destructor for the object instance. Destroy is responsible for free resources allocated in the <A HREF="007244.html#0003" CLASS="Element59">Create</A> constructor prior to calling the inherited Destroy method.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0008">TIdCommandHandler.GetNamePath</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007244.html" CLASS="Element59">TIdCommandHandler</A>, <A HREF="010159.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Determines the text used to represent the collection item in the Object Inspector.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>function</STRONG> GetNamePath: <STRONG>string</STRONG>; <STRONG>override</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+GetNamePath is an overriden String function that determines the text used to represent the collection item in the Object Inspector. <A HREF="007244.html" CLASS="Element59">TIdCommandHandler</A> returns the name of the owner of the collection, acessed using <A HREF="007245.html#0003" CLASS="Element59">TIdCommandHandlers.OwnedBy</A>, followed by a '.' character and the DisplayName for the collection item. When the collection owner is unassigned, GetNamePath calls the inherited method. GetNamePath is intended for internal use only.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="000A">TIdCommandHandler.NameIs</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007244.html" CLASS="Element59">TIdCommandHandler</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Checks that a command handler has the specified name.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>function</STRONG> NameIs(ACommand: <STRONG>string</STRONG>): Boolean;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+ACommand: string</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+<A HREF="007244.html#0009" CLASS="Element59">Name</A> to be compared to the property value.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Return Value</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Boolean - True when the command handler has the specified name.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+NameIs is a Boolean function that allows comparison of the <A HREF="007244.html#0009" CLASS="Element59">Name</A> property to the value specified in ACommand. NameIs can be used to insure that a <A HREF="007244.html" CLASS="Element59">TIdCommandHandler</A> contains the name desired before triggering a procedure used as an action handler.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="000B">TIdCommandHandler.OnCommand</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007244.html" CLASS="Element59">TIdCommandHandler</A>, <A HREF="010160.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Event handler that performs an action associated with a command handler.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> OnCommand: <A HREF="007243.html" CLASS="Element59">TIdCommandEvent</A>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+OnCommand is a <A HREF="007243.html" CLASS="Element59">TIdCommandEvent</A> property that represents the event handler signalled when the associated <A HREF="007242.html" CLASS="Element59">TIdCommand</A> object instance is executed for the <A HREF="007244.html#0002" CLASS="Element59">Command</A> Handler. Applications must a procedure to the event handler that implements the functionality to be performed when the event handler is signalled for execution.</DIV>
+</DIV>
+<DIV CLASS="Element62">
+<HR>Created with Doc-O-Matic 2 donated to <STRONG><A HREF="http://www.delphi-jedi.org">Project JEDI</A></STRONG>. Commercial license available from the <STRONG><A HREF="http://www.doc-o-matic.com">Doc-O-Matic site</A></STRONG>.</DIV>
+</DIV></BODY></HTML>

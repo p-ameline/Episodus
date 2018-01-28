@@ -1,0 +1,65 @@
+#ifndef __NSCHKBOX_H#define __NSCHKBOX_H
+
+class Message ;
+class NSControle ;
+
+// #include <owl\owlpch.h>
+#include <owl\applicat.h>
+#include <owl\checkbox.h>
+
+// #include "nsbb\nsbb_dlg.h"
+#include "nsbb\nsbbtran.h"
+
+#ifdef _ENTERPRISE_DLL
+  #include "enterpriseLus/nsglobalLus.h"
+#else
+  #include "partage/nsglobal.h"
+#endif
+
+#include "nsbb\nsbb_glo.h"
+
+class _NSBBCLASSE NSCheckBox : public TCheckBox, public NSRoot
+{
+  public:
+
+    NSControle* pControle ;
+    bool        ActiveToi ;	//activer physiquement le controle ou juste lui donner le focus
+    bool        bTitre ;    // Le titre dépendant de la langue a-t-il déjà été donné
+
+    // Constructeur et destructeur
+    NSCheckBox(NSContexte *pCtx, TWindow* parent, int resId, TGroupBox* group, bool bStandardStyle = false, string sBackColor = string("")) ;
+    NSCheckBox(NSContexte *pCtx, TWindow* parent, int resId, const char far* title, int x,
+                      int y, int w, int h, TGroupBox *group = 0, bool bStandardStyle = false, string sBackColor = string(""),
+                      TModule* module = 0) ;
+    ~NSCheckBox() ;
+
+    void    SetupWindow() ;
+    bool    canWeClose() ;
+
+    bool    isEmpty() { return _bIsEmpty ; }
+
+    uint    Transferer(TTransferDirection direction, CTRL_ACTIVITY* pActif, Message* pMessage = 0) ;
+    uint    TempTransferer(CTRL_ACTIVITY* pActif, Message* pMessage = 0) ;
+    void    activeControle(int activation, Message* pMessage = 0) ;
+    void    EvKeyUp(uint key, uint repeatcount, uint flags) ;
+    TResult EvSetBackColor(TParam1 param1, TParam2 param2) ;
+
+    char far* GetClassName() ;
+
+    WNDTYPE donneType() { return(isCaseACocher) ; }
+
+    // child id notification handled at the child
+    //
+    void    BNClicked() ;  // BN_CLICKED
+
+  protected:
+
+    bool   _bIsEmpty ; // Never been activated (checked or unchecked) by user
+    bool   _bStandardStyle ;
+    string _sBackColor ;
+
+	DECLARE_RESPONSE_TABLE(NSCheckBox) ;
+} ;
+
+#endif
+

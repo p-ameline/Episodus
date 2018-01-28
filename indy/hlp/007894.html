@@ -1,0 +1,164 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+<TITLE>TIdVCardMailingLabelItem</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <META name="GENERATOR" content="Doc-O-Matic">
+    <LINK rel="STYLESHEET" href="default.css" type="text/css">
+
+<SCRIPT LANGUAGE="JavaScript1.2" SRC="scripts.js"></SCRIPT>
+</HEAD>
+<BODY CLASS="Element57">
+<TABLE BORDER="0" BGCOLOR="#AACCFF" WIDTH="100%" CELLSPACING="0" CELLPADDING="0">
+<TR><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element1">
+Indy 9</DIV>
+</TD><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element2">
+<A HREF="content.html" CLASS="Element59">Content</A> | <A HREF="idx.html" CLASS="Element59">Index</A> | <A HREF="symref.html" CLASS="Element59">Reference</A></DIV>
+</TD></TR></TABLE><DIV CLASS="Element58">
+<DIV CLASS="Element5">
+TIdVCardMailingLabelItem</DIV>
+<DIV CLASS="Element7">
+<A HREF="014862.html" CLASS="Element59">Hierarchy</A>, <A HREF="014863.html" CLASS="Element59">Properties</A>, <A HREF="014864.html" CLASS="Element59">Methods</A>, <A HREF="014865.html" CLASS="Element59">See Also</A>, <A HREF="002949.html" CLASS="Element59">Unit: IdVCard</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Encapsulates a VCard mailing label.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12">TIdVCardMailingLabelItem = <STRONG>class</STRONG>(TCollectionItem)</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Unit</DIV>
+<DIV CLASS="Element69">
+<A HREF="002949.html" CLASS="Element59">IdVCard</A></DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+The TIdVCardMailingLabelItem object encapsulates a mailing label for the VCard owner.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0000">TIdVCardMailingLabelItem.AddressAttributes</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007894.html" CLASS="Element59">TIdVCardMailingLabelItem</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Describes the type of VCard address.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> AddressAttributes: <A HREF="007224.html" CLASS="Element59">TIdCardAddressAttributes</A>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+AddressAttributes is a property used to describe a the type of address, and can include one of the following values:<P CLASS="Element10">
+<UL>
+<LI>tatHome - home delivery address<P CLASS="Element10">
+<LI>tatDomestic - a domestic address<P CLASS="Element10">
+<LI>tatInternational - an international address<P CLASS="Element10">
+<LI>tatPostal - a postal delivery address<P CLASS="Element10">
+<LI>tatParcel - a parcel delivery address<P CLASS="Element10">
+<LI>tatWork - a work delivery address<P CLASS="Element10">
+<LI>tatPreferred - preferred address</UL>
+</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0004">TIdVCardMailingLabelItem.MailingLabel</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007894.html" CLASS="Element59">TIdVCardMailingLabelItem</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Contents of the mailing label.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> MailingLabel: TStrings;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+MailingLabel is the contents of the mailing label.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0001">TIdVCardMailingLabelItem.Assign</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007894.html" CLASS="Element59">TIdVCardMailingLabelItem</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Copy the property values of an object.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>procedure</STRONG> Assign(Source: TPersistent); <STRONG>override</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+Source: TPersistent</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Object containing values to be copied.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Assign is a procedure used to copy the properties of the persistent object in Source to the current object instance. When the current object and the object in Source are the same ClassType, Assign will copy the following property values:<P CLASS="Element10">
+<UL>
+<LI><A HREF="007894.html#0000" CLASS="Element59">AddressAttributes</A><P CLASS="Element10">
+<LI><A HREF="007894.html#0004" CLASS="Element59">MailingLabel</A></UL>
+<P CLASS="Element10">
+When the current object and Source do not sahre the same ClassType, Assign calls the inherited Assign method.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0002">TIdVCardMailingLabelItem.Create</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007894.html" CLASS="Element59">TIdVCardMailingLabelItem</A>, <A HREF="014866.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Constructor for the collection item.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>constructor</STRONG> Create(Collection: TCollection); <STRONG>override</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+Collection: TCollection</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Collection that owns the collection item.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Create is the constructor for the collection item, and relies on the inherited Create method. Create initializes the <A HREF="007894.html#0004" CLASS="Element59">MailingLabel</A> TStringList property.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0003">TIdVCardMailingLabelItem.Destroy</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007894.html" CLASS="Element59">TIdVCardMailingLabelItem</A>, <A HREF="014867.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Frees an object instance.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>destructor</STRONG> Destroy; <STRONG>override</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Destroy is the destructor for the object instance. Destroy clears and releases the <A HREF="007894.html#0004" CLASS="Element59">MailingLabel</A> property prior to calling the inherited Destroy method.</DIV>
+</DIV>
+<DIV CLASS="Element62">
+<HR>Created with Doc-O-Matic 2 donated to <STRONG><A HREF="http://www.delphi-jedi.org">Project JEDI</A></STRONG>. Commercial license available from the <STRONG><A HREF="http://www.doc-o-matic.com">Doc-O-Matic site</A></STRONG>.</DIV>
+</DIV></BODY></HTML>

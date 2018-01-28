@@ -1,0 +1,92 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+<TITLE>IdMessageCoderMIME.pas</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <META name="GENERATOR" content="Doc-O-Matic">
+    <LINK rel="STYLESHEET" href="default.css" type="text/css">
+
+<SCRIPT LANGUAGE="JavaScript1.2" SRC="scripts.js"></SCRIPT>
+</HEAD>
+<BODY CLASS="Element57">
+<TABLE BORDER="0" BGCOLOR="#AACCFF" WIDTH="100%" CELLSPACING="0" CELLPADDING="0">
+<TR><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element1">
+Indy 9</DIV>
+</TD><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element2">
+<A HREF="content.html" CLASS="Element59">Content</A> | <A HREF="idx.html" CLASS="Element59">Index</A> | <A HREF="symref.html" CLASS="Element59">Reference</A></DIV>
+</TD></TR></TABLE><DIV CLASS="Element58">
+<DIV CLASS="Element5">
+IdMessageCoderMIME.pas</DIV>
+<DIV CLASS="Element7">
+<A HREF="015908.html" CLASS="Element59">See Also</A>, <A HREF="015909.html" CLASS="Element59">Classes</A>, <A HREF="015910.html" CLASS="Element59">Constants</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+<DIV CLASS="Element15">
+Unit: IdMessageCoderMIME.pas</DIV>
+<P CLASS="Element10">
+IdMessageCoderMIME.pas contains types, classes, procedures, functions, and constant variables used to implement coders and decoders for RFC-822 compliant MIME message parts. IdMessageCoderMIME.pas extends the coder framework established in <A HREF="002133.html" CLASS="Element59">IdCoder.pas</A>.<P CLASS="Element10">
+MIME encoding allows data to be represented in a 7-bit textual representation, called Base64, as described in the Internet Standards document:<P CLASS="Element10">
+<UL>
+<LI>RFC 2045 - Multipurpose Internet Mail Extensions (MIME), Part One: Format of Internet Message Bodies, Section 6.8 Base64 Content-Transfer-Encoding (http://www.rfc-editor.org/rfc/rfc2045.txt)</UL>
+<P CLASS="Element10">
+The MIME, or Base64, encoding mechanism is designed to represent arbitrary sequences of byte data in a form that need not be humanly readable. Base64 encoding is almost identical to the mechanism used in Privacy Enhanced Mail (PEM) applications, as defined in:<P CLASS="Element10">
+<UL>
+<LI>RFC 1421 - Privacy Enhancement for Internet Electronic Mail, Part I: Message Encryption and Authentication Procedures (http://www.rfc-editor.org/rfc/rfc1421.txt)</UL>
+<P CLASS="Element10">
+Base64 encoding uses a 64-character subset of US-ASCII, enabling 6 bits to be represented per printable character. An extra character (&quot;=&quot;) has special significance in Base64 encoding. Base64 encoding can represent all version of ISO 646, including US-ASCII, and all characters in the subset are also represented identically in EBCDIC.<P CLASS="Element10">
+Base64 encoding represents 24-bit groups of input as output strings of 4 encoded characters. Proceeding from left to right, a 24-bit input group is formed by concatenating 3 8-bit input groups. These 24 bits are then treated as 4 concatenated 6-bit groups, each of which is translated into a single digit in the base64 alphabet.<P CLASS="Element10">
+Each 6-bit group is used as an index into an array of 64 printable characters. The character referenced by the index is placed in the output string. These characters are selected to be universally representable, and the set excludes characters with particular significance to SMTP (&quot;.&quot;, <A HREF="000298.html" CLASS="Element59">CR</A>, <A HREF="003176.html" CLASS="Element59">LF</A>) and to the multipart boundary delimiters (&quot;-&quot;) defined in:<P CLASS="Element10">
+<UL>
+<LI>RFC 2046 - Multipurpose Internet Mail Extensions (MIME), Part Two: Media Types (http://www.rfc-editor.org/rfc/rfc2046.txt)</UL>
+<P CLASS="Element10">
+The following table identifies characters and encodings for the Base64 Alphabet:<P CLASS="Element10">
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12">      Value Encoding  Value Encoding
+      0     A         34    i
+      1     B         35    j
+      2     C         36    k
+      3     D         37    l
+      4     E         38    m
+      5     F         39    n
+      6     G         40    o
+      7     H         41    p
+      8     I         42    q
+      9     J         43    r
+      10    K         44    s
+      11    L         45    t
+      12    M         46    u
+      13    N         47    v
+      14    O         48    w
+      15    P         49    x
+      16    Q         50    y
+      17    R         51    z
+      18    S         52    0
+      19    T         53    1
+      20    U         54    2
+      21    V         55    3
+      22    W         56    4
+      23    X         57    5
+      24    Y         58    6
+      25    Z         59    7
+      26    a         60    8
+      27    b         61    9
+      28    c         62    +
+      29    d         63    /
+      30    e         (pad) =
+      31    f
+      32    g
+      33    h</PRE></DIV>
+</DIV>
+<P CLASS="Element10">
+Base64-encoded output must be represented in lines of no more than 76 characters each. All line breaks or other characters not found in the Base64 alphabet must be ignored by decoding software.<P CLASS="Element10">
+Special processing is performed if fewer than 24 bits are available at the end of the data being encoded. A full encoding quantum is always completed at the end of a body. When fewer than 24 input bits are available in an input group, zero bits are added (on the right) to form an integral number of 6-bit groups. Padding at the end of the data is performed using the &quot;=&quot; character.<P CLASS="Element10">
+Because it is used only for padding at the end of the data, the occurrence of any &quot;=&quot; characters may be taken as evidence that the end of the data has been reached (without truncation in transit). No such assurance is possible, however, when the number of octets transmitted was a multiple of three and no &quot;=&quot; characters are present.<P CLASS="Element10">
+Any characters outside of the Base64 alphabet are to be ignored when present in Base64-encoded data.<P CLASS="Element10">
+Base64 encoding is commonly used in E-Mail and Usenet messages.</DIV>
+</DIV>
+<DIV CLASS="Element62">
+<HR>Created with Doc-O-Matic 2 donated to <STRONG><A HREF="http://www.delphi-jedi.org">Project JEDI</A></STRONG>. Commercial license available from the <STRONG><A HREF="http://www.doc-o-matic.com">Doc-O-Matic site</A></STRONG>.</DIV>
+</DIV></BODY></HTML>

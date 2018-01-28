@@ -1,0 +1,193 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+<TITLE>TIdCompressionIntercept</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <META name="GENERATOR" content="Doc-O-Matic">
+    <LINK rel="STYLESHEET" href="default.css" type="text/css">
+
+<SCRIPT LANGUAGE="JavaScript1.2" SRC="scripts.js"></SCRIPT>
+</HEAD>
+<BODY CLASS="Element57">
+<TABLE BORDER="0" BGCOLOR="#AACCFF" WIDTH="100%" CELLSPACING="0" CELLPADDING="0">
+<TR><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element1">
+Indy 9</DIV>
+</TD><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element2">
+<A HREF="content.html" CLASS="Element59">Content</A> | <A HREF="idx.html" CLASS="Element59">Index</A> | <A HREF="symref.html" CLASS="Element59">Reference</A></DIV>
+</TD></TR></TABLE><DIV CLASS="Element58">
+<DIV CLASS="Element5">
+TIdCompressionIntercept</DIV>
+<DIV CLASS="Element7">
+<A HREF="010199.html" CLASS="Element59">Hierarchy</A>, <A HREF="010200.html" CLASS="Element59">Properties</A>, <A HREF="010201.html" CLASS="Element59">Methods</A>, <A HREF="010202.html" CLASS="Element59">Events</A>, <A HREF="002143.html" CLASS="Element59">Unit: IdCompressionIntercept</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Implements an intercept that compresses a data stream using zlib.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12">TIdCompressionIntercept = <STRONG>class</STRONG>(<A HREF="007248.html" CLASS="Element59">TIdConnectionIntercept</A>)</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Unit</DIV>
+<DIV CLASS="Element69">
+<A HREF="002143.html" CLASS="Element59">IdCompressionIntercept</A></DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+TIdCompressionIntercept is a <A HREF="007248.html" CLASS="Element59">TIdConnectionIntercept</A> descendant that implements an Indy intercept component that compresses a data stream using the open-source zlib compression library. Set the <A HREF="007247.html#0000" CLASS="Element59">CompressionLevel</A> property to a value between 1 and 9 to enable compressing of the data stream. A setting of 0(zero) disables compression and the component is dormant. The sender *and* received must have compression enabled in order to properly decompress the data stream. They do *not* have to use the same <A HREF="007247.html#0000" CLASS="Element59">CompressionLevel</A> as long as they are both set to a value between 1 and 9.<P CLASS="Element10">
+In order for this file to compile on Windows, the follow .obj files *must* be provided as delivered with this file:<P CLASS="Element10">
+<UL>
+<LI>deflate.obj<P CLASS="Element10">
+<LI>inflate.obj<P CLASS="Element10">
+<LI>inftrees.obj<P CLASS="Element10">
+<LI>trees.obj<P CLASS="Element10">
+<LI>adler32.obj<P CLASS="Element10">
+<LI>infblock.obj<P CLASS="Element10">
+<LI>infcodes.obj<P CLASS="Element10">
+<LI>infutil.obj<P CLASS="Element10">
+<LI>inffast.obj</UL>
+<P CLASS="Element10">
+On Linux, the shared-object file libz.so.1 *must* be available on the system. Most modern Linux distributions include this file.<P CLASS="Element10">
+You may sometimes get the following compiler errors with this file:<P CLASS="Element10">
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12">    <A HREF="002143.html" CLASS="Element59">IdCompressionIntercept.pas</A>(331) Error: Incompatible types
+    <A HREF="002143.html" CLASS="Element59">IdCompressionIntercept.pas</A>(152) Error: Unsatisfied forward or external declaration: '_tr_init'
+    <A HREF="002143.html" CLASS="Element59">IdCompressionIntercept.pas</A>(153) Error: Unsatisfied forward or external declaration: '_tr_tally'
+    <A HREF="002143.html" CLASS="Element59">IdCompressionIntercept.pas</A>(154) Error: Unsatisfied forward or external declaration: '_tr_flush_block'
+    <A HREF="002143.html" CLASS="Element59">IdCompressionIntercept.pas</A>(155) Error: Unsatisfied forward or external declaration: '_tr_align'
+    <A HREF="002143.html" CLASS="Element59">IdCompressionIntercept.pas</A>(156) Error: Unsatisfied forward or external declaration: '_tr_stored_block'
+    <A HREF="002143.html" CLASS="Element59">IdCompressionIntercept.pas</A>(157) Error: Unsatisfied forward or external declaration: 'adler32'
+    <A HREF="002143.html" CLASS="Element59">IdCompressionIntercept.pas</A>(158) Error: Unsatisfied forward or external declaration: 'inflate_blocks_new'
+    <A HREF="002143.html" CLASS="Element59">IdCompressionIntercept.pas</A>(159) Error: Unsatisfied forward or external declaration: 'inflate_blocks'
+    <A HREF="002143.html" CLASS="Element59">IdCompressionIntercept.pas</A>(160) Error: Unsatisfied forward or external declaration: 'inflate_blocks_reset'
+    <A HREF="002143.html" CLASS="Element59">IdCompressionIntercept.pas</A>(161) Error: Unsatisfied forward or external declaration: 'inflate_blocks_free'
+    <A HREF="002143.html" CLASS="Element59">IdCompressionIntercept.pas</A>(162) Error: Unsatisfied forward or external declaration: 'inflate_set_dictionary'
+    <A HREF="002143.html" CLASS="Element59">IdCompressionIntercept.pas</A>(163) Error: Unsatisfied forward or external declaration: 'inflate_trees_bits'
+    <A HREF="002143.html" CLASS="Element59">IdCompressionIntercept.pas</A>(164) Error: Unsatisfied forward or external declaration: 'inflate_trees_dynamic'
+    <A HREF="002143.html" CLASS="Element59">IdCompressionIntercept.pas</A>(165) Error: Unsatisfied forward or external declaration: 'inflate_trees_fixed'
+    <A HREF="002143.html" CLASS="Element59">IdCompressionIntercept.pas</A>(166) Error: Unsatisfied forward or external declaration: 'inflate_trees_free'
+    <A HREF="002143.html" CLASS="Element59">IdCompressionIntercept.pas</A>(167) Error: Unsatisfied forward or external declaration: 'inflate_codes_new'
+    <A HREF="002143.html" CLASS="Element59">IdCompressionIntercept.pas</A>(168) Error: Unsatisfied forward or external declaration: 'inflate_codes'
+    <A HREF="002143.html" CLASS="Element59">IdCompressionIntercept.pas</A>(169) Error: Unsatisfied forward or external declaration: 'inflate_codes_free'
+    <A HREF="002143.html" CLASS="Element59">IdCompressionIntercept.pas</A>(170) Error: Unsatisfied forward or external declaration: '_inflate_mask'
+    <A HREF="002143.html" CLASS="Element59">IdCompressionIntercept.pas</A>(171) Error: Unsatisfied forward or external declaration: 'inflate_flush'
+    <A HREF="002143.html" CLASS="Element59">IdCompressionIntercept.pas</A>(172) Error: Unsatisfied forward or external declaration: 'inflate_fast'
+    <A HREF="002143.html" CLASS="Element59">IdCompressionIntercept.pas</A>(189) Error: Unsatisfied forward or external declaration: 'deflateInit_'
+    <A HREF="002143.html" CLASS="Element59">IdCompressionIntercept.pas</A>(196) Error: Unsatisfied forward or external declaration: 'deflate'
+    <A HREF="002143.html" CLASS="Element59">IdCompressionIntercept.pas</A>(203) Error: Unsatisfied forward or external declaration: 'deflateEnd'
+    <A HREF="002143.html" CLASS="Element59">IdCompressionIntercept.pas</A>(213) Error: Unsatisfied forward or external declaration: 'inflateInit_'
+    <A HREF="002143.html" CLASS="Element59">IdCompressionIntercept.pas</A>(220) Error: Unsatisfied forward or external declaration: 'inflate'
+    <A HREF="002143.html" CLASS="Element59">IdCompressionIntercept.pas</A>(227) Error: Unsatisfied forward or external declaration: 'inflateEnd'
+    <A HREF="002143.html" CLASS="Element59">IdCompressionIntercept.pas</A>(234) Error: Unsatisfied forward or external declaration: 'inflateReset'
+    Indy40.dpk(196) Fatal: Could not compile used unit '<A HREF="002143.html" CLASS="Element59">IdCompressionIntercept.pas</A>'</PRE></DIV>
+</DIV>
+<P CLASS="Element10">
+Do not be alarmed. This is due to a bug in DCC32 in Delphi 4, 5, 6, plus C++Builder, 4, 5, and 6.<P CLASS="Element10">
+There is a workaround for this issue. The workaround is to compile this unit separately from the other units and than build Indy with a command such as DCC32 using the /M parameter. DO not use the /B parameter as that does force everything to be recompiled triggering the DCC32 error.<P CLASS="Element10">
+The batch files FULLC4.BAT, FULLC5.BAT, FULLC6.BAT, FULLD4.BAT, FULLD5.BAT and FULLD6.BAT now have the workaround in them so we recommend that you use those to build Indy.<P CLASS="Element10">
+Borland is aware of the issue.<P CLASS="Element10">
+Original Author: Allen Bauer<P CLASS="Element10">
+This source file is submitted to the Indy project on behalf of Borland Sofware Corporation. No warranties, express or implied are given with this source file.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0000">TIdCompressionIntercept.CompressionLevel</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007247.html" CLASS="Element59">TIdCompressionIntercept</A>, <A HREF="010203.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Represents the compression level applied the data stream for the intercept.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> CompressionLevel: <A HREF="007151.html" CLASS="Element59">TCompressionLevel</A>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+CompressionLevel is a <A HREF="007151.html" CLASS="Element59">TCompressionLevel</A> property that represents the compression level to be applied when transforming data using <A HREF="007247.html#0003" CLASS="Element59">Send</A> or <A HREF="007247.html#0002" CLASS="Element59">Receive</A>. Set CompressionLevel to a value between 1 and 9 to enable compressing of the data stream for intercept. When CompressionLevel is 0 (zero), compression is disabled and the intercept is dormant.<P CLASS="Element10">
+Both the sender and receiver must have compression enabled in order to properly decompress the data stream for the intercept. They do not have to use the same CompressionLevel as long as they are both set to a value between 1 and 9.<P CLASS="Element10">
+Changing the value in CompressionLevel insures that the internal compression and decompression records are reset and cleared. The new value for CompressionLevel will also be forced into the range allowed by the <A HREF="007151.html" CLASS="Element59">TCompressionLevel</A> enumeration.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0001">TIdCompressionIntercept.Destroy</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007247.html" CLASS="Element59">TIdCompressionIntercept</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Frees the object instance.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>destructor</STRONG> Destroy; <STRONG>override</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Destroy is the destructor for the object instance. Destroy insures that the internal ZLib compression and decompression records are reset and cleared. Destroy also frees Pointers allocated to the internal <A HREF="007247.html#0003" CLASS="Element59">Send</A> and <A HREF="007247.html#0002" CLASS="Element59">Receive</A> buffers for the compression intercept. Destroy calls the inherited Destroy method prior to exiting.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0002">TIdCompressionIntercept.Receive</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007247.html" CLASS="Element59">TIdCompressionIntercept</A>, <A HREF="010204.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Decompresses stream data for the intercept using ZLib.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>procedure</STRONG> Receive(ABuffer: TStream); <STRONG>override</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+ABuffer: TStream</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Stream to use for input and output values for the operation.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Receive is an overridden procedure in <A HREF="007247.html" CLASS="Element59">TIdCompressionIntercept</A> that implements ZLib decompression of data received in ABuffer. When <A HREF="007247.html#0000" CLASS="Element59">CompressionLevel</A> is 0 (zero), the compression intercept is dormant and no decompression is performed for values in ABuffer.<P CLASS="Element10">
+Receive initializes the internal ZLib compression and decompression records when they have been assigned in the object instance. Receive reads data from the internal receive buffer using a 2,048 byte block that expands by 1024 bytes on successive reads until the end of the ZLib stream is reached. If a stream, data, or memory error occurs while decompressing the contents of the receive buffer, a <A HREF="000370.html" CLASS="Element59">EIdDecompressionError</A> exception will be raised with the message <A HREF="006752.html" CLASS="Element59">RSZLDecompressionError</A>.<P CLASS="Element10">
+On successful completion of receive buffer decompression, ABuffer is resized and the decompressed data is returned to the stream.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0003">TIdCompressionIntercept.Send</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007247.html" CLASS="Element59">TIdCompressionIntercept</A>, <A HREF="010205.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Compresses stream data for the intercept using ZLib.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>procedure</STRONG> Send(ABuffer: TStream); <STRONG>override</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+ABuffer: TStream</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Stream to use for input and output values for the operation.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Send is an overridden procedure in <A HREF="007247.html" CLASS="Element59">TIdCompressionIntercept</A> that implements ZLib compression of stream data received in ABuffer. When <A HREF="007247.html#0000" CLASS="Element59">CompressionLevel</A> is 0 (zero), the compression intercept is dormant and no compression is performed for values in ABuffer.<P CLASS="Element10">
+Send initializes the internal ZLib compression and decompression records when they have been assigned in the object instance. Send insures that the internal Send buffer is large enough to hold the stream data in ABuffer. Send reads data from the internal <A HREF="006944.html" CLASS="Element59">send</A> buffer using a 2,048 byte block that expands by 1024 bytes on successive reads until the end of the ZLib stream is reached.<P CLASS="Element10">
+If a stream, data, or memory error occurs while compressing the contents of the <A HREF="006944.html" CLASS="Element59">send</A> buffer, a <A HREF="000361.html" CLASS="Element59">EIdCompressionError</A> exception will be raised with the message <A HREF="006750.html" CLASS="Element59">RSZLCompressionError</A>.<P CLASS="Element10">
+On successful completion of <A HREF="006944.html" CLASS="Element59">send</A> buffer compression, ABuffer is resized and the compressed data is returned to the stream.</DIV>
+</DIV>
+<DIV CLASS="Element62">
+<HR>Created with Doc-O-Matic 2 donated to <STRONG><A HREF="http://www.delphi-jedi.org">Project JEDI</A></STRONG>. Commercial license available from the <STRONG><A HREF="http://www.doc-o-matic.com">Doc-O-Matic site</A></STRONG>.</DIV>
+</DIV></BODY></HTML>

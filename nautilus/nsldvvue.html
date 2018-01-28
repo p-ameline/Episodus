@@ -1,0 +1,170 @@
+<html>
+ 
+<head>
+</head>
+
+<body>
+
+<center>
+<h1>NSLDVVUE.CPP</h1>
+<br>
+Liste des objets<br>
+<br>
+<font size="4">
+   
+
+</center>
+ Classe des objets : <U>class NSLdvView</U>: <br><br>
+
+ Classe des objets : <U>class NSLdvToon</U>: <br><br>
+<center>
+<table border=1>
+  <tr> 
+	                                                
+        <td> int         toonType; </td> 
+</tr>
+<tr>  
+        <td>string      sLibelle;</td> 
+</tr>
+<tr>  
+        <td>NVLdVRect   Box;</td>
+</tr>
+<tr>   
+        <td>int         iZOrder;</td> 
+
+        // NS_CLASSLIB::TRect rectangle;
+</tr>
+<tr>  
+        <td>NSLdvView*  pView;</td>
+</tr>
+
+</table border=1></center>
+ Classe des objets : <U>class NSLigneView </U>: <br><br>
+
+Classe des objets :<U>class ArrayOfToons </U>: <br><br>
+Classe des objets :<U>class NSPbModifView</U>: <br><br>
+<center>
+<table border=1>
+  <tr> 
+	<td>  NSProblemModifier* pModifier; </td> 
+</tr>
+ </table border=1></center>
+ Classe des objets : <U>class NSLigneView  </U>: <br><br> 
+<center>
+<table border=1>
+  <tr> 
+	// Position en y : juste au dessus de la ligne de base -> iIndex = 0
+        // yOrder : if just above the baseline, then iIndex = 0;
+        <td>int             iIndex; </td>
+</tr>
+<tr>  
+        <td>bool            bClos; </td> 
+ </tr>
+ </table border=1></center>
+ Classe des objets : <U>class NSProblemView   </U>: <br><br> 
+<center>
+<table border=1>
+  <tr>
+ <td> int iLeftMargin, iRigthMargin, iTopMargin, iBottomMargin;</td> 
+</tr>
+<tr>  
+     <td>    NSProblem*      pProblem;  
+  </tr>                                              
+ </table border=1></center>
+ Classe des objets : <U>class NSPreoccupView   </U>: <br><br> 
+<center>
+<table border=1>
+  <tr>
+ <td> int iLeftMargin, iRigthMargin, iTopMargin, iBottomMargin;</td> 
+</tr>
+<tr>  
+     <td>    NSPreoccupation* pPreoccupation; </td>
+ </tr>
+ </table border=1></center>
+ Classe des objets : <U>class NSBaseLineView   </U>: <br><br> 
+Classe des objets : <U>class NSSsObjView  </U>: <br><br> 
+<center>
+<table border=1>
+  <tr>
+ <td>  NSLdvSousObjet  *pSsObjet ;</td>
+</tr>
+<tr> 
+    <td>      NSLdvObjetView  *pObjetView ;</td>
+</tr>
+<tr> 
+     <td>     NSProblemView   *pProblemView ; </td>
+</tr>
+</table border=1></center>
+ Classe des objets : <U>class NSLdvObjetView  </U>: <br><br> 
+<center>
+<table border=1>
+  <tr>
+ <td> NSLdvObjet      *pObjet ;</td>
+</tr>
+<tr> 
+     <td>    NSLigneView     *pLigneView ; </td>
+</tr>
+</table border=1></center>
+ Classe des objets : <U>class   NSLdvView  </U>: <br><br> 
+<center>
+<table border=1>
+  <tr>
+ <td>  int         iXunit;</td>
+</tr>
+<tr> 
+   <td>      int         iZoomFactor;</td>
+</tr>
+<tr> 
+
+      <td>   int         iLargeurLigne, iLargeurBaseline;</td>
+</tr>
+<tr> 
+      <td>   int         iInterligne;</td>
+</tr>
+<tr> 
+
+       <td>  int         iLargeurChronoLine ;</td></tr>
+</tr>
+<tr> 
+
+        // Rectangle contenant toute la ligne de vie (de la naissance
+        //                                      au dernier élément plannifié)
+       <td>  NVLdVRect   GlobalBox;</td>
+</tr>
+<tr> 
+
+        // Position du coin inférieur-droit par rapport au coin inf-dt global
+       <td>  NVLdVTemps  tDateHeureInfDroit;</td>
+</tr>
+<tr> 
+       <td>  long        lPosInfDroit;</td>
+</tr>
+<tr> 
+        <td> bool        bSystemColors;</td>
+</tr>
+<tr> 
+        <td> int         iLeftServiceAreaMargin ;</td>
+</tr>
+<tr> 
+        <td> int         iRightServiceAreaMargin ;</td>
+</tr>
+<tr> 
+        <td> int         iTopServiceAreaMargin ;</td>
+</tr>
+<tr> 
+        <td> int         iBottomServiceAreaMargin ;</td>
+</tr>
+<tr> 
+        NS_CLASSLIB::TRect  rectDateTimeArea ;
+//        <td> NSLdvBasketView     *pBasketView ;</td>
+</tr>
+<tr> 
+       <td>  OWL::TStatusBar* pSB;</td>
+</tr>
+<tr> 
+  <td>ArrayOfToons aToons;</td>
+</tr>
+<tr>
+<td>bool	bSetupToolBar;</td>
+</tr>
+</table border=1></center>

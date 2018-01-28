@@ -1,0 +1,1016 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+<TITLE>TIdSocketHandle</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <META name="GENERATOR" content="Doc-O-Matic">
+    <LINK rel="STYLESHEET" href="default.css" type="text/css">
+
+<SCRIPT LANGUAGE="JavaScript1.2" SRC="scripts.js"></SCRIPT>
+</HEAD>
+<BODY CLASS="Element57">
+<TABLE BORDER="0" BGCOLOR="#AACCFF" WIDTH="100%" CELLSPACING="0" CELLPADDING="0">
+<TR><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element1">
+Indy 9</DIV>
+</TD><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element2">
+<A HREF="content.html" CLASS="Element59">Content</A> | <A HREF="idx.html" CLASS="Element59">Index</A> | <A HREF="symref.html" CLASS="Element59">Reference</A></DIV>
+</TD></TR></TABLE><DIV CLASS="Element58">
+<DIV CLASS="Element5">
+TIdSocketHandle</DIV>
+<DIV CLASS="Element7">
+<A HREF="013731.html" CLASS="Element59">Hierarchy</A>, <A HREF="013732.html" CLASS="Element59">Properties</A>, <A HREF="013733.html" CLASS="Element59">Methods</A>, <A HREF="013734.html" CLASS="Element59">See Also</A>, <A HREF="002823.html" CLASS="Element59">Unit: IdSocketHandle</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Represents a low-level <A HREF="007071.html" CLASS="Element59">socket</A> binding.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12">TIdSocketHandle = <STRONG>class</STRONG>(TCollectionItem)</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Unit</DIV>
+<DIV CLASS="Element69">
+<A HREF="002823.html" CLASS="Element59">IdSocketHandle</A></DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+TIdSocketHandle encapsulates the low-level <A HREF="007071.html" CLASS="Element59">socket</A> binding and its associated functions. A <A HREF="007071.html" CLASS="Element59">socket</A> binding is the handle used for sending and receiving data, making and closing a connection, or waiting for a connection (listening).<P CLASS="Element10">
+TIdSocketHandle is used by <A HREF="007828.html" CLASS="Element59">TIdTCPConnection</A> descendants in Indy to encapsulate the low-level connection and methods used to access the protocol stack in Binding.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0004">TIdSocketHandle.ClientPortMax</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007713.html" CLASS="Element59">TIdSocketHandle</A>, <A HREF="013735.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Indicates the minimum port number allowed for binding a <A HREF="007071.html" CLASS="Element59">socket</A> handle.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> ClientPortMax: Integer;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+ClientPortMax is an Integer property that indicates the maximum port number allowed when <A HREF="007713.html#0003" CLASS="Element59">Bind</A> is called for a <A HREF="007071.html" CLASS="Element59">socket</A> handle with the value 0 (zero) in <A HREF="007713.html#0011" CLASS="Element59">Port</A>. ClientPortMax is used in conjunction with <A HREF="007713.html#0005" CLASS="Element59">ClientPortMin</A> to determine the range of port numbers allowed for the bound <A HREF="007071.html" CLASS="Element59">socket</A> handle. The value of ClientPortMax should be larger than the value of <A HREF="007713.html#0005" CLASS="Element59">ClientPortMin</A>.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0005">TIdSocketHandle.ClientPortMin</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007713.html" CLASS="Element59">TIdSocketHandle</A>, <A HREF="013736.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Indicates the minimum port number allowed for binding a <A HREF="007071.html" CLASS="Element59">socket</A> handle.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> ClientPortMin: Integer;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+ClientPortMin is an Integer property that indicates the minimum port number allowed when <A HREF="007713.html#0003" CLASS="Element59">Bind</A> is called for a <A HREF="007071.html" CLASS="Element59">socket</A> handle with the value 0 (zero) in <A HREF="007713.html#0011" CLASS="Element59">Port</A>. ClientPortMin is used in conjunction with <A HREF="007713.html#0004" CLASS="Element59">ClientPortMax</A> to determine the range of port numbers allowed for the bound <A HREF="007071.html" CLASS="Element59">socket</A> handle. The value of ClientPortMin should not exceed the value of <A HREF="007713.html#0004" CLASS="Element59">ClientPortMax</A>.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="000B">TIdSocketHandle.Handle</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007713.html" CLASS="Element59">TIdSocketHandle</A>, <A HREF="013737.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Specifies the low-level <A HREF="007071.html" CLASS="Element59">socket</A> handle for the binding.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> Handle: <A HREF="007743.html" CLASS="Element59">TIdStackSocketHandle</A>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Handle is a read-only <A HREF="007743.html" CLASS="Element59">TIdStackSocketHandle</A> property that encapsulate the low-level <A HREF="007071.html" CLASS="Element59">socket</A> handle required to perform protocol stack API operations. Handle is also referred to as the <A HREF="007071.html" CLASS="Element59">socket</A> descriptor in UNIX parlance. Socket descriptors are not presumed to correspond to a regular file handle, and native file operations such as read(), write(), and close() cannot be assumed to work correctly when applied to <A HREF="007071.html" CLASS="Element59">socket</A> descriptors.<P CLASS="Element10">
+Handle is assigned a valid value in <A HREF="007713.html#0000" CLASS="Element59">Accept</A>, and <A HREF="007713.html#0001" CLASS="Element59">AllocateSocket</A>. The value in Handle is <A HREF="000936.html" CLASS="Element59">Id_INVALID_SOCKET</A> prior to calling one of these methods. Handle is release in <A HREF="007713.html#0006" CLASS="Element59">CloseSocket</A>.<P CLASS="Element10">
+<A HREF="007713.html#000C" CLASS="Element59">HandleAllocated</A> reflects the current state of Handle.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="000C">TIdSocketHandle.HandleAllocated</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007713.html" CLASS="Element59">TIdSocketHandle</A>, <A HREF="013738.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Specifies the validity of the <A HREF="007071.html" CLASS="Element59">socket</A> handle.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> HandleAllocated: Boolean;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+HandleAllocated is a read-only <STRONG>Boolean</STRONG> property that indicates if <A HREF="007713.html#000B" CLASS="Element59">Handle</A> is a valid <A HREF="007071.html" CLASS="Element59">socket</A> descriptor.<P CLASS="Element10">
+HandleAlocated is <STRONG>True</STRONG> when a valid <A HREF="007071.html" CLASS="Element59">socket</A> descriptor has been created in <A HREF="007713.html#0001" CLASS="Element59">AllocateSocket</A> or <A HREF="007713.html#0000" CLASS="Element59">Accept</A>. HandleAllocated is <STRONG>False</STRONG> when a <A HREF="007071.html" CLASS="Element59">socket</A> descriptor has not been selected, or the value of <A HREF="007713.html#000B" CLASS="Element59">Handle</A> is <A HREF="000936.html" CLASS="Element59">Id_INVALID_SOCKET</A>.<P CLASS="Element10">
+HandleAllocated is used to allow sockets, altered using <A HREF="007713.html#001A" CLASS="Element59">SetSockOpt</A>, to indicate that the <A HREF="007071.html" CLASS="Element59">socket</A> handle is no longer available for <A HREF="006944.html" CLASS="Element59">send</A> and receive operations.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="000D">TIdSocketHandle.IP</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007713.html" CLASS="Element59">TIdSocketHandle</A>, <A HREF="013739.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Specifies the address of the local connection.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> IP: <STRONG>string</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+IP is a <STRONG>String</STRONG> property that identifies the address of the computer on the local connection. IP can be a computer name, such as &quot;<STRONG>wvnvm.wvnet.edu</STRONG>&quot;, or an IP address in dotted-decimal format, such as &quot;<STRONG>129.71.2.4</STRONG>&quot;.<P CLASS="Element10">
+IP is used in <A HREF="007713.html#0003" CLASS="Element59">Bind</A> and <A HREF="007713.html#0007" CLASS="Element59">Connect</A> to initialize or open a <A HREF="007071.html" CLASS="Element59">socket</A> descriptor for the connection. IP is used in conjunction with <A HREF="007713.html#0011" CLASS="Element59">Port</A> to determine the local association used to identify the connection endpoint.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="000F">TIdSocketHandle.PeerIP</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007713.html" CLASS="Element59">TIdSocketHandle</A>, <A HREF="013740.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Specifies the address of the remote connection.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> PeerIP: <STRONG>string</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+PeerIP is a read-only <STRONG>String</STRONG> property that identifies the address of the computer on the remote connection. PeerIP can be a computer name, such as &quot;<STRONG>wvnvm.wvnet.edu</STRONG>&quot;, or an <A HREF="007713.html#000D" CLASS="Element59">IP</A> address in dotted-decimal format, such as &quot;<STRONG>129.71.2.4</STRONG>&quot;.<P CLASS="Element10">
+PeerIP is used in conjunction with <A HREF="007713.html#0010" CLASS="Element59">PeerPort</A> to determine the association used to identify the remote connection endpoint.<P CLASS="Element10">
+PeerIP is updated in <A HREF="007713.html#0019" CLASS="Element59">SetPeer</A>, and as a result of <A HREF="007713.html#0000" CLASS="Element59">Accept</A>, <A HREF="007713.html#0018" CLASS="Element59">SendTo</A>, and <A HREF="007713.html#0014" CLASS="Element59">RecvFrom</A> operations.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0010">TIdSocketHandle.PeerPort</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007713.html" CLASS="Element59">TIdSocketHandle</A>, <A HREF="013741.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Specifies the port number used by a peer connection.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> PeerPort: integer;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+PeerPort is a read-only <STRONG>Integer</STRONG> property that identifies the port number on the remote system where data is sent and received. <A HREF="007713.html#000F" CLASS="Element59">PeerIP</A> identifies the host name or dotted-decimal address of the remote system.<P CLASS="Element10">
+<STRONG>Note</STRONG>: Many port numbers are associated, by convention, with a particular service such as ftp or http as described in <A HREF="002775.html" CLASS="Element59">IdPorts</A>. Some protocols use pre-defined port numbers. <A HREF="007713.html#0011" CLASS="Element59">Port</A> numbers below 1024 are reserved, but using a number above 1024 does not guarantee there will be no conflict.<P CLASS="Element10">
+PeerPort is updated using <A HREF="007713.html#0019" CLASS="Element59">SetPeer</A>, or when <A HREF="007713.html#0000" CLASS="Element59">Accept</A> is used to <A HREF="000175.html" CLASS="Element59">bind</A> a connection to a remote system.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0011">TIdSocketHandle.Port</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007713.html" CLASS="Element59">TIdSocketHandle</A>, <A HREF="013742.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Specifies the port number used by the local connection.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> Port: integer;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Port is an <STRONG>Integer</STRONG> property that identifies the port number on the local system where data is sent and received. <A HREF="007713.html#000D" CLASS="Element59">IP</A> identifies the host name or dotted-decimal address of the local system.<P CLASS="Element10">
+<STRONG>Note</STRONG>: Many port numbers are associated, by convention, with a particular service such as ftp or http as described in <A HREF="002775.html" CLASS="Element59">IdPorts</A>. Some protocols use pre-defined port numbers. Port numbers below 1024 are reserved, but using a number above 1024 does not guarantee there will be no conflict.<P CLASS="Element10">
+Port is used in conjunction with <A HREF="007713.html#000D" CLASS="Element59">IP</A> to determine the local association used to identify the connection endpoint from <A HREF="007713.html#0003" CLASS="Element59">Bind</A> and <A HREF="007713.html#0007" CLASS="Element59">Connect</A>.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0000">TIdSocketHandle.Accept</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007713.html" CLASS="Element59">TIdSocketHandle</A>, <A HREF="013743.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Accepts a connection on a listening <A HREF="007071.html" CLASS="Element59">socket</A>.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>function</STRONG> Accept(ASocket: <A HREF="007743.html" CLASS="Element59">TIdStackSocketHandle</A>): boolean;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+ASocket: TIdStackSocketHandle</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Socket descriptor with the connection request.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Accept is a procedure that extracts a pending connection request for a <A HREF="007071.html" CLASS="Element59">socket</A> descriptor, creates a new <A HREF="007071.html" CLASS="Element59">socket</A> with the properties of the listening <A HREF="007071.html" CLASS="Element59">socket</A>, an returns the <A HREF="007071.html" CLASS="Element59">socket</A> handle of the new <A HREF="007071.html" CLASS="Element59">socket</A> to <A HREF="007713.html#000B" CLASS="Element59">Handle</A>.<P CLASS="Element10">
+Accept is used by the listening thread of server applications that spawn new threads for each connection request, like <A HREF="007507.html" CLASS="Element59">TIdListenerThread</A> and <A HREF="007876.html" CLASS="Element59">TIdUDPListenerThread</A>.<P CLASS="Element10">
+Accept assigns the new <A HREF="007071.html" CLASS="Element59">socket</A> descriptor to <A HREF="007713.html#000B" CLASS="Element59">Handle</A> and sets <A HREF="007713.html#000C" CLASS="Element59">HandleAllocated</A> to <STRONG>True</STRONG>.<P CLASS="Element10">
+Accept calls <A HREF="007713.html#001B" CLASS="Element59">UpdateBindingLocal</A> to insure that the protocol stack handler uses the correct protocol family, <A HREF="007713.html#000D" CLASS="Element59">IP</A>, and <A HREF="007713.html#0011" CLASS="Element59">Port</A> for servers that may <A HREF="003177.html" CLASS="Element59">listen</A> on more than one local <A HREF="007713.html#000D" CLASS="Element59">IP</A> address.<P CLASS="Element10">
+Accept calls <A HREF="007713.html#001C" CLASS="Element59">UpdateBindingPeer</A> to insure that the protocol stack handler uses the correct protocol family, <A HREF="007713.html#000F" CLASS="Element59">PeerIP</A>, and <A HREF="007713.html#0010" CLASS="Element59">PeerPort</A> for the client connection.<P CLASS="Element10">
+If no pending connections are present on the <A HREF="007071.html" CLASS="Element59">socket</A> descriptor, Accept will wait until a connection is present before exiting from the method.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0001">TIdSocketHandle.AllocateSocket</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007713.html" CLASS="Element59">TIdSocketHandle</A>, <A HREF="013744.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Creates a <A HREF="007071.html" CLASS="Element59">socket</A> descriptor.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>procedure</STRONG> AllocateSocket(<STRONG>const</STRONG> ASocketType: Integer = <A HREF="002014.html" CLASS="Element59">Id_SOCK_STREAM</A>; <STRONG>const</STRONG> AProtocol: Integer = <A HREF="001276.html" CLASS="Element59">Id_IPPROTO_IP</A>);</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+const ASocketType: Integer = Id_SOCK_STREAM</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Socket family. Default is <A HREF="002014.html" CLASS="Element59">Id_SOCK_STREAM</A>.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+const AProtocol: Integer = Id_IPPROTO_IP</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Protocol family. Default is <A HREF="001276.html" CLASS="Element59">Id_IPPROTO_IP</A>.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+AllocateSocket is a procedure that allocates a <A HREF="007071.html" CLASS="Element59">socket</A> descriptor of the desired <A HREF="007071.html" CLASS="Element59">socket</A> type and Internet protocol family as specified in the parameters.<P CLASS="Element10">
+ASocketType determines address family used for the connection, and indicates the valid protocol family options for the <A HREF="007071.html" CLASS="Element59">socket</A> type. The following <A HREF="007071.html" CLASS="Element59">socket</A> types are supported:<P CLASS="Element10">
+<UL>
+<LI><A HREF="002014.html" CLASS="Element59">Id_SOCK_STREAM</A> (Default)<P CLASS="Element10">
+<LI><A HREF="002012.html" CLASS="Element59">Id_SOCK_DGRAM</A><P CLASS="Element10">
+<LI><A HREF="002013.html" CLASS="Element59">Id_SOCK_RAW</A></UL>
+<P CLASS="Element10">
+AProtocol identifies the Internet protocol to be used for the given <A HREF="007071.html" CLASS="Element59">socket</A> type. Only a single protocol exists to support a particular <A HREF="007071.html" CLASS="Element59">socket</A> type using a given address format. The following protocol families are supported:<P CLASS="Element10">
+<UL>
+<LI><A HREF="001276.html" CLASS="Element59">Id_IPPROTO_IP</A> (Default)<P CLASS="Element10">
+<LI><A HREF="001274.html" CLASS="Element59">Id_IPPROTO_ICMP</A><P CLASS="Element10">
+<LI><A HREF="001275.html" CLASS="Element59">Id_IPPROTO_IGMP</A><P CLASS="Element10">
+<LI><A HREF="001279.html" CLASS="Element59">Id_IPPROTO_TCP</A><P CLASS="Element10">
+<LI><A HREF="001280.html" CLASS="Element59">Id_IPPROTO_UDP</A><P CLASS="Element10">
+<LI><A HREF="001278.html" CLASS="Element59">Id_IPPROTO_RAW</A></UL>
+<P CLASS="Element10">
+AllocateSocket will call <A HREF="007713.html#0006" CLASS="Element59">CloseSocket</A> if the <A HREF="007071.html" CLASS="Element59">socket</A> handle is already allocated.<P CLASS="Element10">
+AllocateSocket will set <A HREF="007713.html#000C" CLASS="Element59">HandleAllocated</A> to <STRONG>True</STRONG> to reflect the state of the <A HREF="007071.html" CLASS="Element59">socket</A> handle.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0002">TIdSocketHandle.Assign</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007713.html" CLASS="Element59">TIdSocketHandle</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Copies the value of an object instance to the current instance.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>procedure</STRONG> Assign(Source: TPersistent); <STRONG>override</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+Source: TPersistent</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+The object instance containing the values to copy.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Assign is a procedure used to copy the value of properties in the TPersistent descendant Source to the current object instance. Assign updates the following property values:<P CLASS="Element10">
+<UL>
+<LI><A HREF="007713.html#000D" CLASS="Element59">IP</A><P CLASS="Element10">
+<LI><A HREF="007713.html#0011" CLASS="Element59">Port</A><P CLASS="Element10">
+<LI><A HREF="007713.html#000F" CLASS="Element59">PeerIP</A><P CLASS="Element10">
+<LI><A HREF="007713.html#0010" CLASS="Element59">PeerPort</A></UL>
+</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0003">TIdSocketHandle.Bind</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007713.html" CLASS="Element59">TIdSocketHandle</A>, <A HREF="013745.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Associates a local address with a <A HREF="007071.html" CLASS="Element59">socket</A>.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>procedure</STRONG> Bind;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Bind is used on an unconnected <A HREF="007071.html" CLASS="Element59">socket</A> to associate the <A HREF="007713.html#000D" CLASS="Element59">IP</A> and <A HREF="007713.html#0011" CLASS="Element59">Port</A> of the local host with <A HREF="007713.html#000B" CLASS="Element59">Handle</A> prior to <A HREF="007713.html#0007" CLASS="Element59">Connect</A> or <A HREF="007713.html#000E" CLASS="Element59">Listen</A> operations.<P CLASS="Element10">
+If the application does not care what address is assigned to it, it may use a blank <A HREF="007713.html#000D" CLASS="Element59">IP</A> (<STRONG>''</STRONG>). This allows the protocol stack to assign the Internet address <A HREF="000934.html" CLASS="Element59">Id_INADDR_ANY</A>, and an any appropriate network interface will be used.<P CLASS="Element10">
+If the application does not care what port is assigned to it, it may use <A HREF="007713.html#0011" CLASS="Element59">Port</A> 0. This allows the protocol stack to assign a unique port to the application with a value between 1024 and 5000.<P CLASS="Element10">
+Use <A HREF="007713.html#001A" CLASS="Element59">SetSockOpt</A> to alter <A HREF="007071.html" CLASS="Element59">socket</A>-level settings including broadcast, linger, buffering, and Nagle options.<P CLASS="Element10">
+Bind will raise an <A HREF="000375.html" CLASS="Element59">EIdException</A> if the address in <A HREF="007713.html#000D" CLASS="Element59">IP</A> and <A HREF="007713.html#0011" CLASS="Element59">Port</A> is already in use.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0006">TIdSocketHandle.CloseSocket</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007713.html" CLASS="Element59">TIdSocketHandle</A>, <A HREF="013746.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Closes a <A HREF="007071.html" CLASS="Element59">socket</A>.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>procedure</STRONG> CloseSocket(<STRONG>const</STRONG> AResetLocal: boolean = True); <STRONG>virtual</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+const AResetLocal: boolean = True</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Clears the local <A HREF="007713.html#000D" CLASS="Element59">IP</A> address and <A HREF="007713.html#0011" CLASS="Element59">Port</A> number when True.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+CloseSocket is a procedure to close a <A HREF="007071.html" CLASS="Element59">socket</A>. CloseSocket allows the protocol stack to <A HREF="006981.html" CLASS="Element59">shutdown</A> and release the <A HREF="007071.html" CLASS="Element59">socket</A> handle for the descriptor. <A HREF="007713.html#000C" CLASS="Element59">HandleAllocated</A> is set to False to indicate to that the <A HREF="007071.html" CLASS="Element59">socket</A> is no longer available to other threads of execution. CloseSocket has no effect if <A HREF="007713.html#000C" CLASS="Element59">HandleAllocated</A> is False.<P CLASS="Element10">
+AResetLocal indicates that rest should be called for the local connection.<P CLASS="Element10">
+CloseSocket is affected by options used in <A HREF="007713.html#001A" CLASS="Element59">SetSockOpt</A> for <A HREF="002004.html" CLASS="Element59">Id_SO_LINGER</A>.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0007">TIdSocketHandle.Connect</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007713.html" CLASS="Element59">TIdSocketHandle</A>, <A HREF="013747.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Establish a connection to a peer.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>function</STRONG> Connect(<STRONG>const</STRONG> AFamily: Integer = <A HREF="001809.html" CLASS="Element59">Id_PF_INET</A>): Integer; <STRONG>virtual</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+const AFamily: Integer = Id_PF_INET</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Internet protocol family. Default is <A HREF="001809.html" CLASS="Element59">Id_PF_INET</A>.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Return Value</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Integer - 0 on success.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Connect is an Integer function that opens a connection to a remote system using the specified Internet protocol family.<P CLASS="Element10">
+Connect uses <A HREF="007713.html#000D" CLASS="Element59">IP</A> and <A HREF="007713.html#0011" CLASS="Element59">Port</A>, and the parameter AFamily, to call the Connect facilities of the protocol stack. When Connect has successfully completed, the <A HREF="007071.html" CLASS="Element59">socket</A> will be ready to <A HREF="006944.html" CLASS="Element59">send</A> and receive data using <A HREF="007713.html#0017" CLASS="Element59">Send</A>, <A HREF="007713.html#0018" CLASS="Element59">SendTo</A>, <A HREF="007713.html#0013" CLASS="Element59">Recv</A>, and <A HREF="007713.html#0014" CLASS="Element59">RecvFrom</A>.<P CLASS="Element10">
+Use <A HREF="007713.html#0012" CLASS="Element59">Readable</A>, any time following a successful Connect, to determine if the <A HREF="007071.html" CLASS="Element59">socket</A> is in a valid input/output state.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0008">TIdSocketHandle.Create</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007713.html" CLASS="Element59">TIdSocketHandle</A>, <A HREF="013748.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Creates and initializes the binding instance.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>constructor</STRONG> Create(ACollection: TCollection); <STRONG>override</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+ACollection: TCollection</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Owner of the collection item instance.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Create is the constructor for the collection item <A HREF="007713.html" CLASS="Element59">TIdSocketHandle</A>, and relies on the inherited Create constructor to initialize the collection item.<P CLASS="Element10">
+The <I>ACollection</I> parameter is the <A HREF="007714.html" CLASS="Element59">TIdSocketHandles</A> collection that owns the collection item instance. <I>ACollection</I> is used to retrieve the value in DefaultPort, and to assign that value to <A HREF="007713.html#0011" CLASS="Element59">Port</A> in the <A HREF="007713.html" CLASS="Element59">TIdSocketHandle</A> instance.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0009">TIdSocketHandle.Destroy</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007713.html" CLASS="Element59">TIdSocketHandle</A>, <A HREF="013749.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Disposes of the collection item instance.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>destructor</STRONG> Destroy; <STRONG>override</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Destroy is the destructor for the collection item. Destroy will call <A HREF="007713.html#0006" CLASS="Element59">CloseSocket</A> prior to invoking the inherited Destroy destructor.<P CLASS="Element10">
+<STRONG>Note</STRONG>: Do not call Destroy directly. Call Free instead.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="000A">TIdSocketHandle.GetSockOpt</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007713.html" CLASS="Element59">TIdSocketHandle</A>, <A HREF="013750.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Retrieves <A HREF="007071.html" CLASS="Element59">socket</A> options for a <A HREF="007071.html" CLASS="Element59">socket</A> descriptor.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>procedure</STRONG> GetSockOpt(level: Integer; optname: Integer; optval: PChar; optlen: Integer);</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+level: Integer</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Option level <A HREF="002019.html" CLASS="Element59">Id_SOL_SOCKET</A>, <A HREF="001279.html" CLASS="Element59">Id_IPPROTO_TCP</A>, or <A HREF="001276.html" CLASS="Element59">Id_IPPROTO_IP</A>.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+optname: Integer</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Socket option to retrieve.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+optval: PChar</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Value for the requested option.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+optlen: Integer</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Length of the option value buffer.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+GetSockOpt is a procedure used to retrieve <A HREF="007071.html" CLASS="Element59">socket</A> options for the <A HREF="007071.html" CLASS="Element59">socket</A> descriptor represented by <A HREF="007713.html#000B" CLASS="Element59">Handle</A>. Options can control <A HREF="007071.html" CLASS="Element59">socket</A> operations such as receiving Out-Of-Band data, broadcasting datagram packets, and much more.<P CLASS="Element10">
+OptNames is one of the constant values declared in IdStackConts.pas.<P CLASS="Element10">
+OptVal is the resulting <A HREF="007071.html" CLASS="Element59">socket</A> option after a call to WSGetSockOpt using the global stack instance <A HREF="000691.html" CLASS="Element59">GStack</A>.<P CLASS="Element10">
+Use <A HREF="007713.html#001A" CLASS="Element59">SetSockOpt</A> to update the options for a <A HREF="007071.html" CLASS="Element59">socket</A> descriptor.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="000E">TIdSocketHandle.Listen</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007713.html" CLASS="Element59">TIdSocketHandle</A>, <A HREF="013751.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Instructs a <A HREF="007071.html" CLASS="Element59">socket</A> to <A HREF="003177.html" CLASS="Element59">listen</A> for incoming connection.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>procedure</STRONG> Listen(<STRONG>const</STRONG> anQueueCount: integer = 5);</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+const anQueueCount: integer = 5</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Number of pending connection requests to allow. Default is 5.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Listen is a procedure that allows a bound <A HREF="007071.html" CLASS="Element59">socket</A> descriptor to wait for incoming connections. Listen is normally used in server applications that allow multiple simultaneous connections.<P CLASS="Element10">
+anQueueCount identifies the maximum number of pending connection requests to allow for the <A HREF="007071.html" CLASS="Element59">socket</A> descriptor. Use care when specifying a larger value for anQueueCount; most protocol stacks limit the number of pending connections requests allowed per <A HREF="007071.html" CLASS="Element59">socket</A> descriptor to a small value. Use <A HREF="007713.html#0000" CLASS="Element59">Accept</A> to service a pending connection request.<P CLASS="Element10">
+<A HREF="007713.html#000B" CLASS="Element59">Handle</A> identifies the <A HREF="007071.html" CLASS="Element59">socket</A> descriptor used to <A HREF="003177.html" CLASS="Element59">listen</A> for connections, and must not be connected prior to calling Listen.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0012">TIdSocketHandle.Readable</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007713.html" CLASS="Element59">TIdSocketHandle</A>, <A HREF="013752.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Determines the read status of a <A HREF="007071.html" CLASS="Element59">socket</A>.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>function</STRONG> Readable(AMSec: Integer = <A HREF="002932.html" CLASS="Element59">IdTimeoutDefault</A>): boolean;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+AMSec: Integer = IdTimeoutDefault</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Time-out value in milliseconds. Default is <A HREF="002932.html" CLASS="Element59">IdTimeoutDefault</A>.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Return Value</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Boolean - <STRONG>True</STRONG> when the <A HREF="007071.html" CLASS="Element59">socket</A> can be read.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Readable is a <STRONG>Boolean</STRONG> function that is used to determine the status of the <A HREF="007071.html" CLASS="Element59">socket</A> connection for read operations. Readable provides access to the <A HREF="007713.html#0016" CLASS="Element59">Select</A> API of the protocol stack. Readable returns <STRONG>True</STRONG> when the <A HREF="007071.html" CLASS="Element59">socket</A> descriptor is ready for read operations using <A HREF="007713.html#0013" CLASS="Element59">Recv</A>, <A HREF="007713.html#0014" CLASS="Element59">RecvFrom</A>, or <A HREF="007713.html#0000" CLASS="Element59">Accept</A>.<P CLASS="Element10">
+Readable will raise an EIdConnClosedGraceful exception if <A HREF="007713.html#000C" CLASS="Element59">HandleAllocated</A> contains <STRONG>False</STRONG>.<P CLASS="Element10">
+Readable detects the use of a TIdAntifreeze instance in an application. When present, Readable yields processing cycles during the lifetime of the method call to the TIdAntifreeze.DoProcess method.<P CLASS="Element10">
+When AMSec is <A HREF="002933.html" CLASS="Element59">IdTimeoutInfinite</A>, Readable uses the IdleTimeout value in TIdAntifreeze as its time-out value. Readable will continue executing until the <A HREF="007071.html" CLASS="Element59">socket</A> is ready to read.<P CLASS="Element10">
+When AMsec is larger than the IdleTimeout value in TIdAntifreeze, Readable is called using the difference between the two time-out values. If the <A HREF="007071.html" CLASS="Element59">socket</A> is ready to read, no further processing is performed. If the <A HREF="007071.html" CLASS="Element59">socket</A> is not ready to read, the time-out value is set to the IdleTimeout value in TIdAntifreeze and Readable is called again to determine the <A HREF="007071.html" CLASS="Element59">socket</A> status. Readable yields processing cycles to the TIdAntifreeze.DoProcess method if the <A HREF="007071.html" CLASS="Element59">socket</A> is still not ready to read.<P CLASS="Element10">
+Readable does not yield processing cycles when an instance of TIdAntifreeze has not been used in the application.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0013">TIdSocketHandle.Recv</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007713.html" CLASS="Element59">TIdSocketHandle</A>, <A HREF="013753.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Receives data from a <A HREF="007071.html" CLASS="Element59">socket</A>.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>function</STRONG> Recv(<STRONG>var</STRONG> ABuf; ALen: Integer; AFlags: Integer): Integer;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+var ABuf</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Buffer for the read operation.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+ALen: Integer</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Length of the read buffer.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+AFlags: Integer</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Flags to modify <A HREF="007071.html" CLASS="Element59">socket</A> options.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Return Value</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Integer - Number of bytes read.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Recv is an Integer function used to read incoming data from a connected <A HREF="007071.html" CLASS="Element59">socket</A> descriptor. Recv is used on streaming sockets, to read all available data up to the size of the read buffer. Recv can also retrieve Out-of-Band data on sockets configured using <A HREF="002005.html" CLASS="Element59">Id_SO_OOBINLINE</A> in <A HREF="007713.html#001A" CLASS="Element59">SetSockOpt</A>. If no data is available on the <A HREF="007071.html" CLASS="Element59">socket</A>, Recv waits for data to arrive.<P CLASS="Element10">
+AFlags can be used to alter the behavior of the Recv method beyond the options specified in <A HREF="007713.html#001A" CLASS="Element59">SetSockOpt</A>. The supported values of AFlags includes:<P CLASS="Element10">
+<UL>
+<LI>MSG_OOB - Process out-of-band data.<P CLASS="Element10">
+<LI>MSG_PEEK - Peek at the incoming data. The data is copied into the read buffer, but is not removed from the input queue.</UL>
+</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0014">TIdSocketHandle.RecvFrom</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007713.html" CLASS="Element59">TIdSocketHandle</A>, <A HREF="013754.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Receive data from a <A HREF="007071.html" CLASS="Element59">socket</A> and store the remote system address.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>function</STRONG> RecvFrom(<STRONG>var</STRONG> ABuffer; <STRONG>const</STRONG> ALength: Integer; <STRONG>const</STRONG> AFlags: Integer; <STRONG>var</STRONG> VIP: <STRONG>string</STRONG>; <STRONG>var</STRONG> VPort: Integer): Integer; <STRONG>virtual</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+var ABuffer</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Buffer for the read operation.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+const ALength: Integer</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Length of the read buffer.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+const AFlags: Integer</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Flags to modify <A HREF="007071.html" CLASS="Element59">socket</A> options.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+var VIP: string</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+<A HREF="007713.html#000D" CLASS="Element59">IP</A> Address of the remote connection.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+var VPort: Integer</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+<A HREF="007713.html#0011" CLASS="Element59">Port</A> number of the remote connection.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Return Value</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Integer - Number of bytes read.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+RecvFrom is an Integer function used to read incoming data from a <A HREF="007071.html" CLASS="Element59">socket</A> connection, and to store the address of the remote system in the variable parameters VIP and VPort.<P CLASS="Element10">
+RecvFrom is used on streaming sockets, to read all available data up to the size of the read buffer. RecvFrom can also retrieve Out-of-Band data on sockets configured using <A HREF="002005.html" CLASS="Element59">Id_SO_OOBINLINE</A> in <A HREF="007713.html#001A" CLASS="Element59">SetSockOpt</A>. If no data is available on the <A HREF="007071.html" CLASS="Element59">socket</A>, RecvFrom waits for data to arrive.<P CLASS="Element10">
+AFlags can be used to alter the behavior of the RecvFrom method beyond the options specified in <A HREF="007713.html#001A" CLASS="Element59">SetSockOpt</A>. The supported values of AFlags includes:<P CLASS="Element10">
+<UL>
+<LI>MSG_OOB - Process out-of-band data.<P CLASS="Element10">
+<LI>MSG_PEEK - Peek at the incoming data. The data is copied into the read buffer, but is not removed from the input queue.</UL>
+</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0015">TIdSocketHandle.Reset</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007713.html" CLASS="Element59">TIdSocketHandle</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Restores the <A HREF="007071.html" CLASS="Element59">socket</A> handle to an uninitialized state.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>procedure</STRONG> Reset(<STRONG>const</STRONG> AResetLocal: boolean = True);</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+const AResetLocal: boolean = True</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Indicates that <A HREF="007713.html#000D" CLASS="Element59">IP</A> and <A HREF="007713.html#0011" CLASS="Element59">Port</A> are cleared for the connection.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Reset is a procedure used to insure that <A HREF="007713.html" CLASS="Element59">TIdSocketHandle</A> is in an uninitialized state. Reset clears the following properties to their uninitialized values:<P CLASS="Element10">
+<UL>
+<LI><A HREF="007713.html#000C" CLASS="Element59">HandleAllocated</A> - False<P CLASS="Element10">
+<LI><A HREF="007713.html#000B" CLASS="Element59">Handle</A> - <A HREF="000936.html" CLASS="Element59">Id_INVALID_SOCKET</A><P CLASS="Element10">
+<LI><A HREF="007713.html#000F" CLASS="Element59">PeerIP</A> - '' (empty string)<P CLASS="Element10">
+<LI><A HREF="007713.html#0010" CLASS="Element59">PeerPort</A> - 0</UL>
+<P CLASS="Element10">
+When aResetLocal is True, the <A HREF="007713.html#000D" CLASS="Element59">IP</A> and <A HREF="007713.html#0011" CLASS="Element59">Port</A> for the <A HREF="007071.html" CLASS="Element59">socket</A> descriptor are reset to the following values:<P CLASS="Element10">
+<UL>
+<LI><A HREF="007713.html#000D" CLASS="Element59">IP</A> = '' (empty string)<P CLASS="Element10">
+<LI><A HREF="007713.html#0011" CLASS="Element59">Port</A> - 0</UL>
+<P CLASS="Element10">
+Reset is called from <A HREF="007713.html#0008" CLASS="Element59">Create</A> and <A HREF="007713.html#0006" CLASS="Element59">CloseSocket</A>.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0016">TIdSocketHandle.Select</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007713.html" CLASS="Element59">TIdSocketHandle</A>, <A HREF="013755.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Determines if a <A HREF="007071.html" CLASS="Element59">socket</A> handle is available for reading and writing.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>function</STRONG> Select(ASocket: <A HREF="007743.html" CLASS="Element59">TIdStackSocketHandle</A>; ATimeOut: Integer): boolean;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+ASocket: TIdStackSocketHandle</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Protocol stack <A HREF="007071.html" CLASS="Element59">socket</A> handle for the operation.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+ATimeOut: Integer</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Number of milliseconds to wait for completion of the operation.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Select is a Boolean function that determines if the protocol stack <A HREF="007071.html" CLASS="Element59">socket</A> handle in ASocket is available for reading and writing. ATimeOut is the number of milliseconds that the protocol stack should wait for completion of the operation. Select calls the <A HREF="007740.html#0023" CLASS="Element59">TIdStack.WSSelect</A> method to access the protocol stack routines that implements the <A HREF="006943.html" CLASS="Element59">select</A> operation.<P CLASS="Element10">
+On successful compeletion of <A HREF="007740.html#0023" CLASS="Element59">TIdStack.WSSelect</A>, <A HREF="007202.html#0004" CLASS="Element59">TIdAntiFreezeBase.DoProcess</A> is called to force an idle state in the main thread of execution, and to allow message processing for other threads of execution.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0017">TIdSocketHandle.Send</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007713.html" CLASS="Element59">TIdSocketHandle</A>, <A HREF="013756.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Sends data using a connected <A HREF="007071.html" CLASS="Element59">socket</A>.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>function</STRONG> Send(<STRONG>var</STRONG> Buf; len: Integer; flags: Integer): Integer;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+var Buf</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Buffer to write to the <A HREF="007071.html" CLASS="Element59">socket</A>.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+len: Integer</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Length of the write buffer.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+flags: Integer</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Flags to modify <A HREF="007071.html" CLASS="Element59">socket</A> options.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Return Value</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Integer - Number of bytes read.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Send is an Integer function used to write outgoing data to a connected <A HREF="007071.html" CLASS="Element59">socket</A>. Send returns the total number of bytes sent over the <A HREF="007071.html" CLASS="Element59">socket</A> connection.<P CLASS="Element10">
+Datagram sockets cannot write datagrams that are larger than the MAXUDPDG constant declared by the protocol stack. Streaming <A HREF="007071.html" CLASS="Element59">socket</A> connections will attempt to write all data in the buffer up to the size specified.<P CLASS="Element10">
+AFlags can be used to alter the behavior of the Send method beyond the options specified in <A HREF="007713.html#001A" CLASS="Element59">SetSockOpt</A>. The supported values of Flags includes:<P CLASS="Element10">
+<UL>
+<LI>MSG_OOB - Send out-of-band data .<P CLASS="Element10">
+<LI>MSG_DONTROUTE - Do not route the data.</UL>
+</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0018">TIdSocketHandle.SendTo</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007713.html" CLASS="Element59">TIdSocketHandle</A>, <A HREF="013757.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Sends data to a specific address.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>procedure</STRONG> SendTo(<STRONG>const</STRONG> AIP: <STRONG>string</STRONG>; <STRONG>const</STRONG> APort: Integer; <STRONG>var</STRONG> ABuffer; <STRONG>const</STRONG> ABufferSize: Integer);</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+const AIP: string</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+<A HREF="007713.html#000D" CLASS="Element59">IP</A> address of the remote system.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+const APort: Integer</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+<A HREF="007713.html#0011" CLASS="Element59">Port</A> number of the remote system.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+var ABuffer</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Buffer to <A HREF="006944.html" CLASS="Element59">send</A> over the <A HREF="007071.html" CLASS="Element59">socket</A> connection.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+const ABufferSize: Integer</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Size of the <A HREF="006944.html" CLASS="Element59">send</A> buffer.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+SendTo is a procedure used to write outgoing data to a <A HREF="007071.html" CLASS="Element59">socket</A> connected to the remote system specified in <A HREF="007713.html#000D" CLASS="Element59">IP</A> address and <A HREF="007713.html#0011" CLASS="Element59">Port</A> number.<P CLASS="Element10">
+SendTo will raise an <A HREF="000375.html" CLASS="Element59">EIdException</A> exception if the number of bytes sent does not match the value in <I>ABufferSize</I>, or if the number of bytes sent is <A HREF="002015.html" CLASS="Element59">Id_SOCKET_ERROR</A>.<P CLASS="Element10">
+SendTo is used on datagram or stream sockets. For datagram sockets, care must be taken not to exceed the maximum packet size of the protocol stack declared in MAXUDPDG. Streaming sockets will attempt to write all data in the buffer to the <A HREF="007071.html" CLASS="Element59">socket</A> connection.<P CLASS="Element10">
+To <A HREF="006944.html" CLASS="Element59">send</A> a broadcast datagram, the <A HREF="007713.html#000D" CLASS="Element59">IP</A> address parameter must contain <A HREF="000934.html" CLASS="Element59">Id_INADDR_ANY</A>.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0019">TIdSocketHandle.SetPeer</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007713.html" CLASS="Element59">TIdSocketHandle</A>, <A HREF="013758.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Updates the remote address of a <A HREF="007071.html" CLASS="Element59">socket</A> connection.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>procedure</STRONG> SetPeer(<STRONG>const</STRONG> asIP: <STRONG>string</STRONG>; anPort: integer);</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+const asIP: string</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+<A HREF="007713.html#000D" CLASS="Element59">IP</A> address for the remote connection.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+anPort: integer</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+<A HREF="007713.html#0011" CLASS="Element59">Port</A> number for the remote connection.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+SetPeer is a procedure used to update the <A HREF="007713.html#000F" CLASS="Element59">PeerIP</A> and <A HREF="007713.html#0010" CLASS="Element59">PeerPort</A> properties of the <A HREF="007071.html" CLASS="Element59">socket</A> connection. SetPeer is a convenience method provided for <A HREF="007828.html" CLASS="Element59">TIdTCPConnection</A> descendants that may need to update the Binding property, like <A HREF="007827.html" CLASS="Element59">TIdTCPClient</A> and <A HREF="007873.html" CLASS="Element59">TIdUDPBase</A>.<P CLASS="Element10">
+SetPeer is also used by the listening thread of server applications that spawn new threads for each connection request, like <A HREF="007507.html" CLASS="Element59">TIdListenerThread</A> and <A HREF="007876.html" CLASS="Element59">TIdUDPListenerThread</A>.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="001A">TIdSocketHandle.SetSockOpt</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007713.html" CLASS="Element59">TIdSocketHandle</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Sets <A HREF="007071.html" CLASS="Element59">socket</A> options.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>procedure</STRONG> SetSockOpt(level: Integer; optname: Integer; optval: PChar; optlen: Integer);</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+level: Integer</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Option level <A HREF="002019.html" CLASS="Element59">Id_SOL_SOCKET</A>, <A HREF="001279.html" CLASS="Element59">Id_IPPROTO_TCP</A>, or <A HREF="001276.html" CLASS="Element59">Id_IPPROTO_IP</A>.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+optname: Integer</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Socket option to receive the option value.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+optval: PChar</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Value for the requested option.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+optlen: Integer</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Length of the option value buffer.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+SetSockOpt is a procedure used to set the value of <A HREF="007071.html" CLASS="Element59">socket</A>-level options for a <A HREF="007071.html" CLASS="Element59">socket</A> descriptor. Options can control <A HREF="007071.html" CLASS="Element59">socket</A> operations such as receiving Out-Of-Band data, broadcasting datagram packets, and much more.<P CLASS="Element10">
+There are two types of <A HREF="007071.html" CLASS="Element59">socket</A> options: Boolean and Data. Boolean options enable or disable a specific feature. Use a zero value in OptVal to disable a feature, and a non-zero value in OptVal to enable the feature.<P CLASS="Element10">
+Data options require the address used to store the value or structure in OptVal. OptNames use the contant values declared in IdStackConts.pas, including:<P CLASS="Element10">
+<UL>
+<LI><A HREF="001999.html" CLASS="Element59">Id_SO_BROADCAST</A> - Boolean</UL>
+<P CLASS="Element10">
+Allow transmission of broadcast messages on the <A HREF="007071.html" CLASS="Element59">socket</A>.<P CLASS="Element10">
+<UL>
+<LI><A HREF="002000.html" CLASS="Element59">Id_SO_DEBUG</A> - Booean</UL>
+<P CLASS="Element10">
+Record debugging information.<P CLASS="Element10">
+<P CLASS="Element10">
+<UL>
+<LI>Id_SO_DONTLINGER - Boolean</UL>
+<P CLASS="Element10">
+Don't block <A HREF="007713.html#0006" CLASS="Element59">CloseSocket</A> for unsent data.<P CLASS="Element10">
+<P CLASS="Element10">
+<UL>
+<LI><A HREF="002001.html" CLASS="Element59">Id_SO_DONTROUTE</A> - Boolean</UL>
+<P CLASS="Element10">
+Don't route dsata, <A HREF="006944.html" CLASS="Element59">send</A> it directly to the interface.<P CLASS="Element10">
+<P CLASS="Element10">
+<UL>
+<LI><A HREF="002003.html" CLASS="Element59">Id_SO_KEEPALIVE</A> - Boolean</UL>
+<P CLASS="Element10">
+<A HREF="007713.html#0017" CLASS="Element59">Send</A> keepalive packets.<P CLASS="Element10">
+<P CLASS="Element10">
+<UL>
+<LI><A HREF="002004.html" CLASS="Element59">Id_SO_LINGER</A> - Data Linger</UL>
+<P CLASS="Element10">
+Linger on close if unsent data is present.<P CLASS="Element10">
+<P CLASS="Element10">
+<UL>
+<LI><A HREF="002005.html" CLASS="Element59">Id_SO_OOBINLINE</A> - Boolean</UL>
+<P CLASS="Element10">
+Receive out-of-band data in the normal data stream.<P CLASS="Element10">
+<P CLASS="Element10">
+<UL>
+<LI><A HREF="002006.html" CLASS="Element59">Id_SO_RCVBUF</A> - Data Integer</UL>
+<P CLASS="Element10">
+Specify buffer size for receives.<P CLASS="Element10">
+<P CLASS="Element10">
+<UL>
+<LI><A HREF="002008.html" CLASS="Element59">Id_SO_REUSEADDR</A> - Boolean</UL>
+<P CLASS="Element10">
+Allow the <A HREF="007071.html" CLASS="Element59">socket</A> to be bound to an address which is already in use.<P CLASS="Element10">
+<P CLASS="Element10">
+<UL>
+<LI><A HREF="002009.html" CLASS="Element59">Id_SO_SNDBUF</A> - Data Integer</UL>
+<P CLASS="Element10">
+Specify buffer size for sends.<P CLASS="Element10">
+<P CLASS="Element10">
+<UL>
+<LI><A HREF="002007.html" CLASS="Element59">Id_SO_RCVTIMEO</A> - Data Integer</UL>
+<P CLASS="Element10">
+Receive timeout.<P CLASS="Element10">
+<P CLASS="Element10">
+<UL>
+<LI><A HREF="002010.html" CLASS="Element59">Id_SO_SNDTIMEO</A> - Data Integer</UL>
+<P CLASS="Element10">
+<A HREF="007713.html#0017" CLASS="Element59">Send</A> timeout.<P CLASS="Element10">
+<P CLASS="Element10">
+<UL>
+<LI><A HREF="000947.html" CLASS="Element59">Id_IP_TTL</A> - Data Integer</UL>
+<P CLASS="Element10">
+Set Time-To-Live in <A HREF="007713.html#000D" CLASS="Element59">IP</A> header fields.<P CLASS="Element10">
+<P CLASS="Element10">
+<UL>
+<LI><A HREF="002055.html" CLASS="Element59">Id_TCP_NODELAY</A> - Boolean</UL>
+<P CLASS="Element10">
+Disables the Nagle algorithm for <A HREF="006944.html" CLASS="Element59">send</A> coalascing.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="001B">TIdSocketHandle.UpdateBindingLocal</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007713.html" CLASS="Element59">TIdSocketHandle</A>, <A HREF="013759.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Updates the protocol family, and address for a <A HREF="007071.html" CLASS="Element59">socket</A> handle.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>procedure</STRONG> UpdateBindingLocal;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+UpdateBindingLocal is a procedure used to insure that the <A HREF="007071.html" CLASS="Element59">socket</A> handle allocated for a connection uses the proper Protocol family, <A HREF="007713.html#000D" CLASS="Element59">IP</A>, and <A HREF="007713.html#0011" CLASS="Element59">Port</A>. UpdateBindingLocal is generally used for connections that can <A HREF="007713.html#000E" CLASS="Element59">Listen</A> on multiple <A HREF="007713.html#000D" CLASS="Element59">IP</A> addresses.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="001C">TIdSocketHandle.UpdateBindingPeer</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007713.html" CLASS="Element59">TIdSocketHandle</A>, <A HREF="013760.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Updates the protocol family and remote address for a <A HREF="007071.html" CLASS="Element59">socket</A> connection.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>procedure</STRONG> UpdateBindingPeer;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+UpdateBindingPeer is a procedure used to update the Protocol family, <A HREF="007713.html#000F" CLASS="Element59">PeerIP</A>, and <A HREF="007713.html#0010" CLASS="Element59">PeerPort</A> for the peer connection on a <A HREF="007071.html" CLASS="Element59">socket</A> handle. UpdateBindingPeer is generally used for connections that can <A HREF="000027.html" CLASS="Element59">accept</A> client connections using multiple local <A HREF="007713.html#000D" CLASS="Element59">IP</A> addresses.</DIV>
+</DIV>
+<DIV CLASS="Element62">
+<HR>Created with Doc-O-Matic 2 donated to <STRONG><A HREF="http://www.delphi-jedi.org">Project JEDI</A></STRONG>. Commercial license available from the <STRONG><A HREF="http://www.doc-o-matic.com">Doc-O-Matic site</A></STRONG>.</DIV>
+</DIV></BODY></HTML>

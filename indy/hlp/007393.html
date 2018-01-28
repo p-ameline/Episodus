@@ -1,0 +1,247 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+<TITLE>TIdHTTPSession</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <META name="GENERATOR" content="Doc-O-Matic">
+    <LINK rel="STYLESHEET" href="default.css" type="text/css">
+
+<SCRIPT LANGUAGE="JavaScript1.2" SRC="scripts.js"></SCRIPT>
+</HEAD>
+<BODY CLASS="Element57">
+<TABLE BORDER="0" BGCOLOR="#AACCFF" WIDTH="100%" CELLSPACING="0" CELLPADDING="0">
+<TR><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element1">
+Indy 9</DIV>
+</TD><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element2">
+<A HREF="content.html" CLASS="Element59">Content</A> | <A HREF="idx.html" CLASS="Element59">Index</A> | <A HREF="symref.html" CLASS="Element59">Reference</A></DIV>
+</TD></TR></TABLE><DIV CLASS="Element58">
+<DIV CLASS="Element5">
+TIdHTTPSession</DIV>
+<DIV CLASS="Element7">
+<A HREF="011596.html" CLASS="Element59">Hierarchy</A>, <A HREF="011597.html" CLASS="Element59">Properties</A>, <A HREF="011598.html" CLASS="Element59">Methods</A>, <A HREF="011599.html" CLASS="Element59">See Also</A>, <A HREF="002147.html" CLASS="Element59">Unit: IdCustomHTTPServer</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Implements a persistent HTTP Session.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12">TIdHTTPSession = <STRONG>class</STRONG>(TObject)</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Unit</DIV>
+<DIV CLASS="Element69">
+<A HREF="002147.html" CLASS="Element59">IdCustomHTTPServer</A></DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+TIdHTTPSession is a TObject descendant that implements a HTTP Session.<P CLASS="Element10">
+TIdHTTPSession also provides support for maintaining a persistent HTTP session and state for <A HREF="007392.html" CLASS="Element59">TIdHTTPServer</A>. TIdHTTPSession is used with TIdHTTPSessionList to provide persistent HTTP session management using the <A HREF="007393.html#0007" CLASS="Element59">SessionID</A> property and the &quot;IDSESSIONID&quot; Cookie.<P CLASS="Element10">
+<A HREF="007393.html#0007" CLASS="Element59">SessionID</A> is the unique identifier for the HTTP session.<P CLASS="Element10">
+LastTimestamp is the date and time that the HTTP session was last modified.<P CLASS="Element10">
+<A HREF="007393.html#0006" CLASS="Element59">RemoteHost</A> is the address of the remote computer using the HTTP session.<P CLASS="Element10">
+<A HREF="007393.html#0000" CLASS="Element59">Content</A> is a storage area for string values that can be used to form HTTP request and/or response messages.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0000">TIdHTTPSession.Content</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007393.html" CLASS="Element59">TIdHTTPSession</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Provides storage for HTTP message contents.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> Content: TStrings;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Content is a TStrings property that stores string values that can be used to form the content for an HTTP request and/or response. Content can be used as a temporary storage area for values subsequently use in command or event handlers like TIdHTTP.OnCommandGet.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0004">TIdHTTPSession.LastTimeStamp</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007393.html" CLASS="Element59">TIdHTTPSession</A>, <A HREF="011600.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Specifies the date and time a session was last modified.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> LastTimeStamp: TDateTime;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+LastTimeStamp is a read-only TDateTime property that identifies the date and time that a HTTP session was last modified. LastTimeStamp is used with the SessionTimeOut value from <A HREF="007378.html" CLASS="Element59">TIdHTTPDefaultSessionList</A> to determine when a persistent HTTP session has expired.<P CLASS="Element10">
+LastTimeStamp is updated when a HTTP session is created or accessed for use with a HTTP request or response by <A HREF="007392.html" CLASS="Element59">TIdHTTPServer</A>.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0006">TIdHTTPSession.RemoteHost</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007393.html" CLASS="Element59">TIdHTTPSession</A>, <A HREF="011601.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Represents the remote computer address for the session.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> RemoteHost: <STRONG>string</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+RemoteHost is a read-only String property that represents the IP address for the remote computer system which is the endpoint for the HTTP session. RemoteHost is used when <A HREF="007378.html#0006" CLASS="Element59">TIdHTTPDefaultSessionList.GetSession</A> is used to locate a persistent session having the desired <A HREF="007393.html#0007" CLASS="Element59">SessionID</A> and RemoteHost for information provided in an HTTP session.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0007">TIdHTTPSession.SessionID</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007393.html" CLASS="Element59">TIdHTTPSession</A>, <A HREF="011602.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Represents the unique session identifier.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> SessionID: <STRONG>String</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+SessionID is a String property that represents the unique identifier for the HTTP session. SessionID is the &quot;IDSESSIONID&quot; Cookie value used to implement HTTP session persistence. SessionID is used when <A HREF="007378.html#0006" CLASS="Element59">TIdHTTPDefaultSessionList.GetSession</A> is used to locate a persistent session having the desired SessionID and <A HREF="007393.html#0006" CLASS="Element59">RemoteHost</A> for information provided in an HTTP session. SessionID is updated when <A HREF="007271.html#0002" CLASS="Element59">TIdCustomHTTPServer.CreateSession</A> is ised to initalize a new session for requests to the server.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0001">TIdHTTPSession.Create</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007393.html" CLASS="Element59">TIdHTTPSession</A>, <A HREF="011603.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Constructor for the object instance.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>constructor</STRONG> Create(AOwner: <A HREF="007377.html" CLASS="Element59">TIdHTTPCustomSessionList</A>); <STRONG>virtual</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+AOwner: TIdHTTPCustomSessionList</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Owner of the object instance.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Create is the constructor for the object instance, and is responsible for initializing properties specific to the <A HREF="007393.html" CLASS="Element59">TIdHTTPSession</A>. Create does <STRONG>not</STRONG> call the inherited Create constructor.<P CLASS="Element10">
+AOwner is the owner of the object instance, and when assigned, should reflect the <A HREF="007377.html" CLASS="Element59">TIdHTTPCustomSessionList</A> that owns the session object instance. AOwner is used to trigger the OnSessionStart event handler to perform session maintenance specific to the server implementation.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0002">TIdHTTPSession.CreateInitialized</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007393.html" CLASS="Element59">TIdHTTPSession</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Constructor for the object instance.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>constructor</STRONG> CreateInitialized(AOwner: <A HREF="007377.html" CLASS="Element59">TIdHTTPCustomSessionList</A>; <STRONG>const</STRONG> <A HREF="007393.html#0007" CLASS="Element59">SessionID</A>: <STRONG>string</STRONG>; <STRONG>const</STRONG> RemoteIP: <STRONG>string</STRONG>); <STRONG>virtual</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+AOwner: TIdHTTPCustomSessionList</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Session list that owns the object instance.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+const SessionID: string</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Session identifier for the object instance.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+const RemoteIP: string</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+IP address for the remote host for the session.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+CreateInitialized is the constructor for the object instance, and initializes properties for the HTTP session including <A HREF="007393.html#0007" CLASS="Element59">SessionID</A>, <A HREF="007393.html#0006" CLASS="Element59">RemoteHost</A>, <A HREF="007393.html#0000" CLASS="Element59">Content</A>, Owner, OnSessionStart, and LastTimestamp to their default values.<P CLASS="Element10">
+The session identifier is set to the value specified in <A HREF="007393.html#0007" CLASS="Element59">SessionID</A>. <A HREF="007393.html#0006" CLASS="Element59">RemoteHost</A> is set to the value specified in RemoteIP. <A HREF="007393.html#0004" CLASS="Element59">LastTimeStamp</A> is set the current date and time on the HTTP server. Owner is set to the <A HREF="007377.html" CLASS="Element59">TIdHTTPCustomSessionList</A> specified in AOwner that owns the object instance.<P CLASS="Element10">
+The <A HREF="007393.html#0000" CLASS="Element59">Content</A> property is created, and the OnSessionStart event handler is assigned the value from the session list that owns the object instance.<P CLASS="Element10">
+CreateInitialized is called from TIdHTTPFefaultSessionList.CreateSession, where a new session is created and added to the session list for the server.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0003">TIdHTTPSession.Destroy</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007393.html" CLASS="Element59">TIdHTTPSession</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Frees the object instance.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>destructor</STRONG> Destroy; <STRONG>override</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Destroy is a procedure that acts as the destructor for the object instance, and is responsible for handling persistent session clean-up and freeing object properties for the session.<P CLASS="Element10">
+Destroy calls DoSessionEnd to trigger the OnSessionEnd event handler, and signals the Owner session list that the session should be removed.<P CLASS="Element10">
+Destroy clears the <A HREF="007393.html#0000" CLASS="Element59">Content</A> property, and frees the property instance.<P CLASS="Element10">
+Destroy frees the private and protected member variables used by the object instance.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0005">TIdHTTPSession.Lock</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007393.html" CLASS="Element59">TIdHTTPSession</A>, <A HREF="011604.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Provides resource protection for Session properties and methods.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>procedure</STRONG> Lock;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Lock is a TCriticalSection property used to provide resource protection for the properties and methods of the HTTP session in a multi-threaded application. Lock is allocated in the <A HREF="007393.html#0001" CLASS="Element59">Create</A> method, and freed in <A HREF="007393.html#0003" CLASS="Element59">Destroy</A>.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0008">TIdHTTPSession.Unlock</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007393.html" CLASS="Element59">TIdHTTPSession</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Enables access to the session from another thread.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>procedure</STRONG> Unlock;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Unlock is a procedure used to remove repsource protect for session properties and methods after a call to <A HREF="007393.html#0005" CLASS="Element59">Lock</A>. Unlock exits the TCriticalSection used to prevent multi-threaded access to the object instance properties and methods.</DIV>
+</DIV>
+<DIV CLASS="Element62">
+<HR>Created with Doc-O-Matic 2 donated to <STRONG><A HREF="http://www.delphi-jedi.org">Project JEDI</A></STRONG>. Commercial license available from the <STRONG><A HREF="http://www.doc-o-matic.com">Doc-O-Matic site</A></STRONG>.</DIV>
+</DIV></BODY></HTML>

@@ -1,0 +1,132 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+<TITLE>TIdRSHServer</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <META name="GENERATOR" content="Doc-O-Matic">
+    <LINK rel="STYLESHEET" href="default.css" type="text/css">
+
+<SCRIPT LANGUAGE="JavaScript1.2" SRC="scripts.js"></SCRIPT>
+</HEAD>
+<BODY CLASS="Element57">
+<TABLE BORDER="0" BGCOLOR="#AACCFF" WIDTH="100%" CELLSPACING="0" CELLPADDING="0">
+<TR><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element1">
+Indy 9</DIV>
+</TD><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element2">
+<A HREF="content.html" CLASS="Element59">Content</A> | <A HREF="idx.html" CLASS="Element59">Index</A> | <A HREF="symref.html" CLASS="Element59">Reference</A></DIV>
+</TD></TR></TABLE><DIV CLASS="Element58">
+<DIV CLASS="Element5">
+TIdRSHServer</DIV>
+<DIV CLASS="Element7">
+<A HREF="013426.html" CLASS="Element59">Hierarchy</A>, <A HREF="013427.html" CLASS="Element59">Properties</A>, <A HREF="013428.html" CLASS="Element59">Methods</A>, <A HREF="013429.html" CLASS="Element59">Events</A>, <A HREF="013430.html" CLASS="Element59">See Also</A>, <A HREF="002807.html" CLASS="Element59">Unit: IdRSHServer</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Implements a RSH Daemon.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12">TIdRSHServer = <STRONG>class</STRONG>(<A HREF="007650.html" CLASS="Element59">TIdRemoteCMDServer</A>)</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Unit</DIV>
+<DIV CLASS="Element69">
+<A HREF="002807.html" CLASS="Element59">IdRSHServer</A></DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+TIdRSHServer is a <A HREF="007650.html" CLASS="Element59">TIdRemoteCMDServer</A> descendant that implements a Remote Shell Daemon (RSHD), and allows remote client connections to <A HREF="000295.html" CLASS="Element59">connect</A> and execute commands or service requests. TIdRSHServer specifies Properties, Methods, and Events that allow the server to implement and execute command requests using the RSH Protocol.<P CLASS="Element10">
+By convention, TIdRSHServer forces all client connection requests to use port numbers outside the reserved range 0 through 1023. TIdRSHServer allows creation of a secondary client connection to be used for redirecting standard error output to the RSH client. A secondary connection is created when a non-null valid port number is provided in the connection request.<P CLASS="Element10">
+TIdRSHServer uses the source address of the client connection request to determine the name of the client host. If the name cannot be determined, the rshd daemon uses the dotted decimal representation of the client host address.<P CLASS="Element10">
+When a client thread is executed for TIdRSHServer, values are read from the client connection for the user name on the client host, user name on the local server, and the password for use on the local server.<P CLASS="Element10">
+TIdRSHServer provides the <A HREF="007667.html#0003" CLASS="Element59">OnCommand</A> event handler to allow the implementation to control platform-specific authentication and execution of the command for the RSH session.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0001">TIdRSHServer.DefaultPort</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007667.html" CLASS="Element59">TIdRSHServer</A>, <A HREF="013431.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+The port number used when listening for new client connections.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> DefaultPort: integer;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+DefaultPort is an Integer property that represent the default port number used to <A HREF="003177.html" CLASS="Element59">listen</A> for new client connections. The value of DefaultPort is provided for use with <A HREF="007714.html" CLASS="Element59">TIdSocketHandles</A>. <A HREF="007831.html" CLASS="Element59">TIdTCPServer</A> and descendant classes use the DefaultPort number to <A HREF="000175.html" CLASS="Element59">bind</A> allocated sockets handles when the Active property to set to True.<P CLASS="Element10">
+The default value for DefaultPort is Id_PORT_cmd as assigned in the <A HREF="007667.html#0000" CLASS="Element59">Create</A> method.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0002">TIdRSHServer.ForcePortsInRange</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007667.html" CLASS="Element59">TIdRSHServer</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+This property indicates if the server should disconnect clients that do not <A HREF="000295.html" CLASS="Element59">connect</A> from the port range (512 - 1023).</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> ForcePortsInRange: Boolean;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+This property indicates if the server should disconnect clients that do not <A HREF="000295.html" CLASS="Element59">connect</A> from the port range (512 - 1023). If this property is true, the RSH Server component will automatically disconnect clients that do not do <A HREF="000295.html" CLASS="Element59">connect</A> to the server from ports in this range. Setting this to False will permit the client to use the RSH server even if they do not <A HREF="000295.html" CLASS="Element59">connect</A> from this port range.<P CLASS="Element10">
+Usually, this should be set to true to prevent non-administrative users from using the RSH server. Setting this to false should be done with the utmost caution as it will increase the likelihood for abuse. The reason RSH requires clients to <A HREF="000295.html" CLASS="Element59">connect</A> from ports in the 512-1023 range is because on most multi-user operating systems, this ensures some security as only administrators on those systems could use it. However, &quot;security&quot; is somewhat limited because many single user operating systems will not prevent non-administrator users from using those reserved ports and it is possible for hackers to alter port numbers on packets.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0000">TIdRSHServer.Create</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007667.html" CLASS="Element59">TIdRSHServer</A>, <A HREF="013432.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Constructor for the object instance.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>constructor</STRONG> Create(AOwner: TComponent); <STRONG>override</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+AOwner: TComponent</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Owner of the object instance.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Create is the constructor for the object instance. Create calls the inherited Create method. Create sets the value for <A HREF="007667.html#0001" CLASS="Element59">DefaultPort</A> to <A HREF="002381.html" CLASS="Element59">IdPORT_cmd</A>, as used by convention in the RSH protocol. Create sets <A HREF="007667.html#0002" CLASS="Element59">ForcePortsInRange</A> to <A HREF="006379.html" CLASS="Element59">RSH_FORCEPORTSINRANGE</A> propr to exiting from the method.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0003">TIdRSHServer.OnCommand</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007667.html" CLASS="Element59">TIdRSHServer</A>, <A HREF="013433.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Allows authentication and execution of the command for the RSH session.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> OnCommand: <A HREF="007666.html" CLASS="Element59">TIdRSHCommandEvent</A>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+OnCommand is a <A HREF="007666.html" CLASS="Element59">TIdRSHCommandEvent</A> property that represents the event handler signalled when a threaded RSH client connection needs to perform authentication and execution of a service request. OnCommand is triggered during execution of the threaded client connection, and uses arguments to the event handler to identify values needed during authentication and command execution.<P CLASS="Element10">
+OnCommand is signalled after the optional connection for redirected standard error output has been created, bound, and successfully connected. In addition, null terminated values for the client user name, host user name, and the RSH command have been read from the request connection prior to triggering OnCommand.<P CLASS="Element10">
+Applications must assign a procedure to the event handler to allow responding to the event notification. The event handler can be used to authenticate the client and host user name values, to execute the command, and to <A HREF="006944.html" CLASS="Element59">send</A> error or result values using the optional connection for redirected standard error output.</DIV>
+</DIV>
+<DIV CLASS="Element62">
+<HR>Created with Doc-O-Matic 2 donated to <STRONG><A HREF="http://www.delphi-jedi.org">Project JEDI</A></STRONG>. Commercial license available from the <STRONG><A HREF="http://www.doc-o-matic.com">Doc-O-Matic site</A></STRONG>.</DIV>
+</DIV></BODY></HTML>

@@ -1,0 +1,39 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+<TITLE>Remove</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <META name="GENERATOR" content="Doc-O-Matic">
+    <LINK rel="STYLESHEET" href="default.css" type="text/css">
+
+<SCRIPT LANGUAGE="JavaScript1.2" SRC="scripts.js"></SCRIPT>
+</HEAD>
+<BODY CLASS="Element57">
+<TABLE BORDER="0" BGCOLOR="#AACCFF" WIDTH="100%" CELLSPACING="0" CELLPADDING="0">
+<TR><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element1">
+Indy 9</DIV>
+</TD><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element2">
+<A HREF="content.html" CLASS="Element59">Content</A> | <A HREF="idx.html" CLASS="Element59">Index</A> | <A HREF="symref.html" CLASS="Element59">Reference</A></DIV>
+</TD></TR></TABLE><DIV CLASS="Element58">
+<DIV CLASS="Element5">
+Remove</DIV>
+<DIV CLASS="Element7">
+<A HREF="008556.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Removes bytes of data from the memory buffer.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Remove is a procedure used to to remove the number of bytes in AByteCount from the memory buffer. Remove shifts the contents of Memory so that only data bytes AByteCount through the Size of the buffer are available for further processing. When ByteCount and Size are the same, the memory buffer in Memory is reset using Clear.<P CLASS="Element10">
+Remove will raise an <A HREF="000425.html" CLASS="Element59">EIdNotEnoughDataInBuffer</A> exception when AByteCount is larger than the Size of Memory in <A HREF="007219.html" CLASS="Element59">TIdBuffer</A>.<P CLASS="Element10">
+Removes triggers the protected OnBytesRemoved event handler, when assigned, after data has been removed from the Memory in <A HREF="007219.html" CLASS="Element59">TIdBuffer</A>.<P CLASS="Element10">
+<STRONG>Note</STRONG>: Data in Memory should be handled in the manner appropriate to the application prior to calling Remove.</DIV>
+</DIV>
+<DIV CLASS="Element62">
+<HR>Created with Doc-O-Matic 2 donated to <STRONG><A HREF="http://www.delphi-jedi.org">Project JEDI</A></STRONG>. Commercial license available from the <STRONG><A HREF="http://www.doc-o-matic.com">Doc-O-Matic site</A></STRONG>.</DIV>
+</DIV></BODY></HTML>

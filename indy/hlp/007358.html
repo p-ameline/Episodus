@@ -1,0 +1,157 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+<TITLE>TIdHash128</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <META name="GENERATOR" content="Doc-O-Matic">
+    <LINK rel="STYLESHEET" href="default.css" type="text/css">
+
+<SCRIPT LANGUAGE="JavaScript1.2" SRC="scripts.js"></SCRIPT>
+</HEAD>
+<BODY CLASS="Element57">
+<TABLE BORDER="0" BGCOLOR="#AACCFF" WIDTH="100%" CELLSPACING="0" CELLPADDING="0">
+<TR><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element1">
+Indy 9</DIV>
+</TD><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element2">
+<A HREF="content.html" CLASS="Element59">Content</A> | <A HREF="idx.html" CLASS="Element59">Index</A> | <A HREF="symref.html" CLASS="Element59">Reference</A></DIV>
+</TD></TR></TABLE><DIV CLASS="Element58">
+<DIV CLASS="Element5">
+TIdHash128</DIV>
+<DIV CLASS="Element7">
+<A HREF="011256.html" CLASS="Element59">Hierarchy</A>, <A HREF="011257.html" CLASS="Element59">Methods</A>, <A HREF="011258.html" CLASS="Element59">See Also</A>, <A HREF="002240.html" CLASS="Element59">Unit: IdHash</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Implements a class to calculate a 128-bit hash value based on string- or stream-based input values.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12">TIdHash128 = <STRONG>class</STRONG>(<A HREF="007357.html" CLASS="Element59">TIdHash</A>)</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Unit</DIV>
+<DIV CLASS="Element69">
+<A HREF="002240.html" CLASS="Element59">IdHash</A></DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+TIdHash128 is a <A HREF="007357.html" CLASS="Element59">TIdHash</A> descendant that implements calculation of a 128-bit hash value based on string- or stream-based input values. TIdHash128 is a base class that specifies an abstract virtual method for calculating the hash value for the input data from a stream. Applications should create instances of a descendant class that implements the abstract methods.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0000">TIdHash128.AsHex</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007358.html" CLASS="Element59">TIdHash128</A>, <A HREF="011259.html" CLASS="Element59">See Also</A>, <A HREF="011260.html" CLASS="Element59">Example</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Converts the hash value to it's hexadecimal representation.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>class</STRONG> <STRONG>function</STRONG> AsHex(<STRONG>const</STRONG> AValue: <A HREF="007128.html" CLASS="Element59">T4x4LongWordRecord</A>): <STRONG>string</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+const AValue: T4x4LongWordRecord</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+The record containg LongWord values to converted to hex.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Return Value</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+String - Hexadecimal representation of the has value.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+AsHex is String class function that converts the hash value specified in AValue to it's hexadecimal representation. AsHex allocates a string with the length needed to represent the multiple LongWord values in AValue. AsHex allows uses of the method without an existing instance of the <A HREF="007358.html" CLASS="Element59">TIdHash128</A> class.<P CLASS="Element10">
+AsHex is used in <A HREF="007617.html#0002" CLASS="Element59">TIdPOP3.Connect</A> when the MD5 hash value is converted to hex for used in the APOP authentication mechanism.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0001">TIdHash128.HashValue</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007358.html" CLASS="Element59">TIdHash128</A>, <A HREF="011261.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Implements calculation of a hash value for input data.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>function</STRONG> HashValue(<STRONG>const</STRONG> ASrc: <STRONG>string</STRONG>): <A HREF="007128.html" CLASS="Element59">T4x4LongWordRecord</A>; <STRONG>overload</STRONG>;
+<STRONG>function</STRONG> HashValue(AStream: TStream): <A HREF="007128.html" CLASS="Element59">T4x4LongWordRecord</A>; <STRONG>virtual</STRONG>; <STRONG>abstract</STRONG>; <STRONG>overload</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+const ASrc: string</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+String containing data used to calculate the hash value.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+AStream: TStream</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Stream containing data used to calculate the hash value.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Return Value</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+<A HREF="007128.html" CLASS="Element59">T4x4LongWordRecord</A> - 128-bit hash value for the input data.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+<A HREF="007358.html#0001" CLASS="Element59">HashValue</A> is an overloaded T4x4LongWordRecordfunction in <A HREF="007358.html" CLASS="Element59">TIdHash128</A> that specifies the mechanism used to calculate the 128-bit hash value for the input data.<P CLASS="Element10">
+The stream-based variant of <A HREF="007358.html#0001" CLASS="Element59">HashValue</A> is an abstract virtual function that must be reimplemented in a descendant class, like <A HREF="007364.html" CLASS="Element59">TIdHashMessageDigest</A>, to support the specifics of the hashing algorithm. The string-based variant of <A HREF="007358.html#0001" CLASS="Element59">HashValue</A> relies on this implementation to calculate the hash value.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0002">TIdHash128.HashValue</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007358.html" CLASS="Element59">TIdHash128</A>, <A HREF="011262.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Implements calculation of a hash value for input data.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>function</STRONG> <A HREF="007358.html#0001" CLASS="Element59">HashValue</A>(<STRONG>const</STRONG> ASrc: <STRONG>string</STRONG>): <A HREF="007128.html" CLASS="Element59">T4x4LongWordRecord</A>; <STRONG>overload</STRONG>;
+<STRONG>function</STRONG> <A HREF="007358.html#0001" CLASS="Element59">HashValue</A>(AStream: TStream): <A HREF="007128.html" CLASS="Element59">T4x4LongWordRecord</A>; <STRONG>virtual</STRONG>; <STRONG>abstract</STRONG>; <STRONG>overload</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+const ASrc: string</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+String containing data used to calculate the hash value.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+AStream: TStream</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Stream containing data used to calculate the hash value.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Return Value</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+<A HREF="007128.html" CLASS="Element59">T4x4LongWordRecord</A> - 128-bit hash value for the input data.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+<A HREF="007358.html#0001" CLASS="Element59">HashValue</A> is an overloaded T4x4LongWordRecordfunction in <A HREF="007358.html" CLASS="Element59">TIdHash128</A> that specifies the mechanism used to calculate the 128-bit hash value for the input data.<P CLASS="Element10">
+The stream-based variant of <A HREF="007358.html#0001" CLASS="Element59">HashValue</A> is an abstract virtual function that must be reimplemented in a descendant class, like <A HREF="007364.html" CLASS="Element59">TIdHashMessageDigest</A>, to support the specifics of the hashing algorithm. The string-based variant of <A HREF="007358.html#0001" CLASS="Element59">HashValue</A> relies on this implementation to calculate the hash value.</DIV>
+</DIV>
+<DIV CLASS="Element62">
+<HR>Created with Doc-O-Matic 2 donated to <STRONG><A HREF="http://www.delphi-jedi.org">Project JEDI</A></STRONG>. Commercial license available from the <STRONG><A HREF="http://www.doc-o-matic.com">Doc-O-Matic site</A></STRONG>.</DIV>
+</DIV></BODY></HTML>

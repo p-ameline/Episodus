@@ -1,0 +1,279 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+<TITLE>TIdAuthentication</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <META name="GENERATOR" content="Doc-O-Matic">
+    <LINK rel="STYLESHEET" href="default.css" type="text/css">
+
+<SCRIPT LANGUAGE="JavaScript1.2" SRC="scripts.js"></SCRIPT>
+</HEAD>
+<BODY CLASS="Element57">
+<TABLE BORDER="0" BGCOLOR="#AACCFF" WIDTH="100%" CELLSPACING="0" CELLPADDING="0">
+<TR><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element1">
+Indy 9</DIV>
+</TD><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element2">
+<A HREF="content.html" CLASS="Element59">Content</A> | <A HREF="idx.html" CLASS="Element59">Index</A> | <A HREF="symref.html" CLASS="Element59">Reference</A></DIV>
+</TD></TR></TABLE><DIV CLASS="Element58">
+<DIV CLASS="Element5">
+TIdAuthentication</DIV>
+<DIV CLASS="Element7">
+<A HREF="009940.html" CLASS="Element59">Hierarchy</A>, <A HREF="009941.html" CLASS="Element59">Properties</A>, <A HREF="009942.html" CLASS="Element59">Methods</A>, <A HREF="009943.html" CLASS="Element59">See Also</A>, <A HREF="002121.html" CLASS="Element59">Unit: IdAuthentication</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Ancestor for authentication classes in the Indy authentication framework.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12">TIdAuthentication = <STRONG>class</STRONG>(TPersistent)</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Unit</DIV>
+<DIV CLASS="Element69">
+<A HREF="002121.html" CLASS="Element59">IdAuthentication</A></DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+TIdAuthentication is a TPersistent descendant, and an ancestor class that specifies the properties and methods available in the Indy authentication framework. TIdAuthentication represents the common functionality needed to implement the authentication methods described in the Internet Standards documents:<P CLASS="Element10">
+<UL>
+<LI>RFC 2616 - Hypertext Transfer Protocol [HTTP/1.1] (http://www.rfc-editor.org/rfc/rfc2616.txt)<P CLASS="Element10">
+<LI>RFC 2617 - HTTP <A HREF="007205.html#0000" CLASS="Element59">Authentication</A>: Basic and Digest Access <A HREF="007205.html#0000" CLASS="Element59">Authentication</A> (http://www.rfc-editor.org/rfc/rfc2617.txt)</UL>
+<P CLASS="Element10">
+Applications should create instances of descendant classes that implement the specifics described in the preceeding documents, such as <A HREF="007215.html" CLASS="Element59">TIdBasicAuthentication</A> and <A HREF="007296.html" CLASS="Element59">TIdDigestAuthentication</A>.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0001">TIdAuthentication.AuthParams</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007205.html" CLASS="Element59">TIdAuthentication</A>, <A HREF="009944.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Represents authentication parameters to be used for the process.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> AuthParams: <A HREF="007369.html" CLASS="Element59">TIdHeaderList</A>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+AuthParams is a <A HREF="007369.html" CLASS="Element59">TIdHeaderList</A> property that represents authentication parameters to be used for the authentication process. AuthParams normally contains the value of the WWWAuthenticate in the <A HREF="007651.html" CLASS="Element59">TIdRequestHeaderInfo</A> that triggered the authentication process.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0003">TIdAuthentication.CurrentStep</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007205.html" CLASS="Element59">TIdAuthentication</A>, <A HREF="009945.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Identifies the current task number during authentication processing.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> CurrentStep: Integer;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+CurrentStep is a read-only Integer property used to identify the active task during reading of authentication information. CurrentStep contains the value 0 (zero) when <A HREF="007205.html#000B" CLASS="Element59">Username</A> and <A HREF="007205.html#0008" CLASS="Element59">Password</A> values have not been examined for the corresponding <A HREF="007212.html" CLASS="Element59">TIdAuthWhatsNext</A> value. CurrentStep contains the value 1 (one) when the current authentication process has failed.<P CLASS="Element10">
+The default value for CurrentStep is 0 (zero) as assigned in the <A HREF="007205.html#0002" CLASS="Element59">Create</A> constructor. CurrentStep is also set to the default value in the <A HREF="007205.html#0009" CLASS="Element59">Reset</A> method.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0007">TIdAuthentication.Params</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007205.html" CLASS="Element59">TIdAuthentication</A>, <A HREF="009946.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Contains authentication parameters for the mechanism.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> Params: <A HREF="007369.html" CLASS="Element59">TIdHeaderList</A>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Params is a read-only <A HREF="007369.html" CLASS="Element59">TIdHeaderList</A> property used to represent common parameter values for the authentication mechanism. Params is used to store the <A HREF="007205.html#000B" CLASS="Element59">Username</A> and <A HREF="007205.html#0008" CLASS="Element59">Password</A> property values used during execution of the authorization process. Params is also used in descendant classes for values specific to the enhanced authentication functionality.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0008">TIdAuthentication.Password</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007205.html" CLASS="Element59">TIdAuthentication</A>, <A HREF="009947.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Represents the authorization credentials for the authentication process.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> Password: <STRONG>String</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Password is a String property that represents the authorization credentials used in the authentication process. Use <A HREF="007205.html#000B" CLASS="Element59">Username</A> to specify the identity used for the authentication process.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="000A">TIdAuthentication.Steps</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007205.html" CLASS="Element59">TIdAuthentication</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Number of tasks required for the authentication process.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> Steps: Integer;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Steps is a read-only Integer property that represents the number of tasks needed to perform the authentication process. The default value returned for the Steps property is 0.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="000B">TIdAuthentication.Username</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007205.html" CLASS="Element59">TIdAuthentication</A>, <A HREF="009948.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Represents the authorization identity for the authentication process.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> Username: <STRONG>String</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Username is a String property that represents the authorization identity used in the authentication process. Use <A HREF="007205.html#0008" CLASS="Element59">Password</A> to specify the credential used for the authentication process.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0000">TIdAuthentication.Authentication</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007205.html" CLASS="Element59">TIdAuthentication</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Represents the authentication method name to use.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>function</STRONG> Authentication: <STRONG>String</STRONG>; <STRONG>virtual</STRONG>; <STRONG>abstract</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Return Value</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+String - Authentication method Name for the object instance.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Authentication is an abstract virtual String function that represents the authentication method name to use.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0002">TIdAuthentication.Create</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007205.html" CLASS="Element59">TIdAuthentication</A>, <A HREF="009949.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Constructor for the object instance.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>constructor</STRONG> Create; <STRONG>virtual</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Create is the constructor for the object instance. Create relies on the inherited Create method. Create allocates resources required for the <A HREF="007205.html#0007" CLASS="Element59">Params</A> property, and sets the default value for <A HREF="007205.html#0003" CLASS="Element59">CurrentStep</A> to 0.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0004">TIdAuthentication.Destroy</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007205.html" CLASS="Element59">TIdAuthentication</A>, <A HREF="009950.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Frees the object instance.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>destructor</STRONG> Destroy; <STRONG>override</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Destroy is the destructor for the object instance. Destroy clears the <A HREF="007205.html#0001" CLASS="Element59">AuthParams</A>, if values have been assigned to the property, prior to calling the inherited Destroy method.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0005">TIdAuthentication.KeepAlive</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007205.html" CLASS="Element59">TIdAuthentication</A>, <A HREF="009951.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Indicates that Keep-Alive signals are supported for the authentication mechanism.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>function</STRONG> KeepAlive: Boolean; <STRONG>virtual</STRONG>; <STRONG>abstract</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+KeepAlive is an abstract virtual Boolean function that specifies the function used to indicate if the authentication mechanism supports use of the KEEP-ALIVE header. Descendant classes, like <A HREF="007215.html" CLASS="Element59">TIdBasicAuthentication</A>, must implement the KeepAlive function to indicate if the mechanism can be used to prevent loss of a connection during authentication processing.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0006">TIdAuthentication.Next</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007205.html" CLASS="Element59">TIdAuthentication</A>, <A HREF="009952.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Identifies the next action in the authentication process.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>function</STRONG> Next: <A HREF="007212.html" CLASS="Element59">TIdAuthWhatsNext</A>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Return Value</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+<A HREF="007212.html" CLASS="Element59">TIdAuthWhatsNext</A> - Next action in the authentication process.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Next is a <A HREF="007212.html" CLASS="Element59">TIdAuthWhatsNext</A> function that identifies the next action that should be performed in the authentication process. Next will increment the the value of Retries when the return value is wnDoRequest.<P CLASS="Element10">
+Next is used in <A HREF="007375.html#0006" CLASS="Element59">TIdHTTP.OnAuthorization</A> to determine the action to be taken by the user agent.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0009">TIdAuthentication.Reset</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007205.html" CLASS="Element59">TIdAuthentication</A>, <A HREF="009953.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Clears the number of retries for the authentication mechanism.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>procedure</STRONG> Reset; <STRONG>virtual</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Reset is a virtual procedure that clears the number of retry attempts performed using the authentication mechanism. In <A HREF="007205.html" CLASS="Element59">TIdAuthentication</A>, Reset is an empty implementation. Descendant classes, like <A HREF="007215.html" CLASS="Element59">TIdBasicAuthentication</A> will override Reset to perform the functionality specific to the authentication mechanism.</DIV>
+</DIV>
+<DIV CLASS="Element62">
+<HR>Created with Doc-O-Matic 2 donated to <STRONG><A HREF="http://www.delphi-jedi.org">Project JEDI</A></STRONG>. Commercial license available from the <STRONG><A HREF="http://www.doc-o-matic.com">Doc-O-Matic site</A></STRONG>.</DIV>
+</DIV></BODY></HTML>

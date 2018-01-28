@@ -1,0 +1,167 @@
+/*
+** Copyright Nautilus, (10/9/2004)
+** david.giocanti@nautilus-info.com
+
+** Ce logiciel est un programme informatique servant à [rappeler les
+** caractéristiques techniques de votre logiciel].
+
+** Ce logiciel est régi par la licence CeCILL soumise au droit français et
+** respectant les principes de diffusion des logiciels libres. Vous pouvez
+** utiliser, modifier et/ou redistribuer ce programme sous les conditions
+** de la licence CeCILL telle que diffusée par le CEA, le CNRS et l'INRIA
+** sur le site "http://www.cecill.info".
+
+** En contrepartie de l'accessibilité au code source et des droits de copie,
+** de modification et de redistribution accordés par cette licence, il n'est
+** offert aux utilisateurs qu'une garantie limitée.  Pour les mêmes raisons,
+** seule une responsabilité restreinte pèse sur l'auteur du programme,  le
+** titulaire des droits patrimoniaux et les concédants successifs.
+
+** A cet égard  l'attention de l'utilisateur est attirée sur les risques
+** associés au chargement,  à l'utilisation,  à la modification et/ou au
+** développement et à la reproduction du logiciel par l'utilisateur étant
+** donné sa spécificité de logiciel libre, qui peut le rendre complexe à
+** manipuler et qui le réserve donc à des développeurs et des professionnels
+** avertis possédant  des  connaissances  informatiques approfondies.  Les
+** utilisateurs sont donc invités à charger  et  tester  l'adéquation  du
+** logiciel à leurs besoins dans des conditions permettant d'assurer la
+** sécurité de leurs systèmes et ou de leurs données et, plus généralement,
+** à l'utiliser et l'exploiter dans les mêmes conditions de sécurité.
+
+** Le fait que vous puissiez accéder à cet en-tête signifie que vous avez
+** pris connaissance de la licence CeCILL, et que vous en avez accepté les
+** termes.
+*/
+
+#ifndef   BB1CONTROLERTYPES_H_
+# define   BB1CONTROLERTYPES_H_
+
+# define OB1_UNINITIALIZED -42
+
+/**
+* \brief State of computation for the validity context
+*/
+/**
+*  State of computation for the validity context  <BR>
+*  Etat de du calcul de validité pour un KS
+*/
+enum ValidityContextType
+{
+  NO_COMPUTATION = 0,    /**< The validity computation has not been done yet \brief The validity computation has not been done yet */
+  VALID = 1,             /**< The Computation has been done and the validity context is valid \brief The Computation has been done and the validity context is valid */
+  PROPOSABLE = 2,        /**< The Computation has been done and the validity context is proposable (can be forced to valid by user) \brief The Computation has been done and the validity context is proposable (can be forced to valid by user) */
+  INVALID = 3            /**< The Computation has been done and the validity context is invalid \brief The Computation has been done and the validity context is invalid */
+};
+
+/**
+* \brief Strategy type
+*/
+enum TStrategyType
+{
+  DETERMINISTIC = 0,  /**< Deterministic resolution */
+  OPPORTUNIST  = 1    /**< Opportunistic resolution */
+};
+
+/**
+* \brief KS type
+*/
+/**
+* KS type <BR>
+* Type de KS
+*/
+enum KSType
+{
+  KS_SERVICE      = 0,  /**< Service KS : compute in background \brief Service KS  */
+  USER_KS         = 1,  /**< User KS (used to compute a risk for exemple)  \brief USer KS */
+  SVCE_WINDOWS_KS = 2,  /**<  IHM KS used to start other KSs \brief IHM KS */
+  USER_WINDOWS_KS = 3,  /**<  IHM KS = USER_KS attached to an interface \brief IHM KS */
+  USER_PREDI_KS   = 4,  /**<  IHM KS = dedicated to PreDi \brief IHM KS */
+  USER_PROJECT_KS = 5,  /**<  IHM KS = dedicated to Projects \brief IHM KS */
+  USER_PROJ_FU_KS = 6   /**<  IHM KS = dedicated to Projects \brief IHM KS */
+};
+
+/**
+* \brief KS state
+*/
+/**
+* KS state <BR>
+* Etat du KS
+*/
+enum KSState
+{
+  FREE_AND_RUNNING = 0,       /**< Free KS : compute freely in background \brief Free and running KS  */
+  WAITING_FOR_USER_INPUT = 1, /**< Waiting for user to press to OK button \brief KS waiting for user input */
+  WAITING_FOR_USER_START = 2, /**< Waiting for user to start this KS (for proposable) \brief KS waiting to be started */
+  SLEEPING = 3,               /**< Not starter \brief KS  */
+  KILLED = 4                  /**< Killed by user \brief IHM KS */
+};
+
+
+/**
+* \brief Kind of node present in controler graph
+*/
+/**
+* Kind of node present in controler graph <BR>
+* Type de noeud présent dans le graph
+*/
+enum OB1NodeTypes
+{
+  KS_NODE         = 0,   /**< Node representing a KS  \brief Node representing a KS */
+  TRIGGER_NODE    = 1,   /**< Node representing a collections of trigger condition \brief Node representing a collections of trigger condition */
+  LEVEL_NODE      = 2,   /**< Node representing a collections condition for execution \brief ode representing a collections condition for execution */
+  RESULT_NODE     = 3,   /**< Node representing a condition the result of the execution of the KS \brief Node representing a condition the result of the execution of the KS  */
+  OTHER_NODE      = 4,   /**< Node representing a conditions \brief Node representing a conditions */
+  AND_NODE        = 5,   /**< Node representing the logical and \brief Node representing the logical and */
+  VALIDITY_NODE   = 6,   /**< Node representing the validity Node \brief  Node representing the validity Node*/
+  ABSTRACT_NODE   = 7    /**< Unknow node \brief Unknow node */
+};
+
+
+/**
+* \brief Link Type
+*/
+/**
+* Link Type <BR>
+* Type de liens
+*/
+enum OB1EdgeType
+{
+  VOID_EDGE    = -1, /* Not used by a node; for NULL parameter in fct call */
+  CREATES      = 0,  /* The Ouput of the KS */
+  IS_CREATED   = 1,  /* Tells the KS wich have creates this node */
+  IMPLIES      = 2,  /* A var that implies this result */
+  REQUIRES     = 3,  /* Var that a KS requires */
+  IS_NEEDED    = 4,  /* Tell this node is requires by a KS */
+  TRIGERS      = 5,
+  RESULT       = 6, /* Tell this result ndoe is requires by a KS */
+  LEVEL        = 7,
+  UNDEFINED    = 9,
+  IS_VALIDATED = 10,    /* node about the vilidity of the KS in a context */
+  VALIDATED    = 11     /* Node of the validity of a KS */
+};
+
+/**
+* \brief Array indicating the inverse label type
+*/
+/**
+*  Array indicating the inverse label type
+*  Indique le label inverse. utiliser pour parcourir le graph
+*/
+
+/*
+# ifdef _DANSBBKDLL
+
+const OB1EdgeType inverseLabel[9][2]= {{CREATES,IS_CREATED},
+                         {IS_CREATED, CREATES},
+                         {IMPLIES,IS_NEEDED},
+                         {REQUIRES,IS_NEEDED},
+                         {TRIGERS, TRIGERS},
+                         {RESULT, RESULT},
+                         {LEVEL,LEVEL},
+                         {IS_VALIDATED,VALIDATED},
+                         {VALIDATED,IS_VALIDATED}};
+
+# endif
+*/
+
+#endif /* end of BB1ControlerTypes.h   */

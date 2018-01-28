@@ -1,0 +1,421 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+<TITLE>THINFORecord</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <META name="GENERATOR" content="Doc-O-Matic">
+    <LINK rel="STYLESHEET" href="default.css" type="text/css">
+
+<SCRIPT LANGUAGE="JavaScript1.2" SRC="scripts.js"></SCRIPT>
+</HEAD>
+<BODY CLASS="Element57">
+<TABLE BORDER="0" BGCOLOR="#AACCFF" WIDTH="100%" CELLSPACING="0" CELLPADDING="0">
+<TR><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element1">
+Indy 9</DIV>
+</TD><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element2">
+<A HREF="content.html" CLASS="Element59">Content</A> | <A HREF="idx.html" CLASS="Element59">Index</A> | <A HREF="symref.html" CLASS="Element59">Reference</A></DIV>
+</TD></TR></TABLE><DIV CLASS="Element58">
+<DIV CLASS="Element5">
+THINFORecord</DIV>
+<DIV CLASS="Element7">
+<A HREF="009880.html" CLASS="Element59">Hierarchy</A>, <A HREF="009881.html" CLASS="Element59">Properties</A>, <A HREF="009882.html" CLASS="Element59">Methods</A>, <A HREF="002173.html" CLASS="Element59">Unit: IdDNSResolver</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Represents a resource record returned from a DNS query that includes Host Information resource record types.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12">THINFORecord = <STRONG>class</STRONG>(<A HREF="008097.html" CLASS="Element59">TTextRecord</A>)</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Unit</DIV>
+<DIV CLASS="Element69">
+<A HREF="002173.html" CLASS="Element59">IdDNSResolver</A></DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+THINFORecord is a <A HREF="008097.html" CLASS="Element59">TTextRecord</A> descendant that represents a resource record returned in the results for a DNS query. THINFORecord is a collection item created to represent a resource record returned when TIDNSResolver.QueryRecords includes the value qtHINFO for Host Information resource records.<P CLASS="Element10">
+HINFO resource records are used to acquire general information about a host server. The main use is for protocols such as FTP that can use special procedures when talking between machines or operating systems of the same type.<P CLASS="Element10">
+An HINFO resoure record uses the same DNS packet layout as other <A HREF="008059.html" CLASS="Element59">TResultRecord</A>-based responses, but extends the use of RData to include the following definition and format:<P CLASS="Element10">
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12">  +--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+
+  |                                               |
+  .                                               .
+  .                      <A HREF="007192.html#0000" CLASS="Element59">CPU</A>                      .
+  .                                               .
+  |                                               |
+  +--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+
+  |                                               |
+  .                                               .
+  .                      <A HREF="007192.html#0001" CLASS="Element59">OS</A>                       .
+  .                                               .
+  |                                               |
+  +--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+</PRE></DIV>
+</DIV>
+<P CLASS="Element10">
+<UL>
+<LI><A HREF="007192.html#0000" CLASS="Element59">CPU</A> - Variable length character string which specifies the <A HREF="007192.html#0000" CLASS="Element59">CPU</A> type for the host server.<P CLASS="Element10">
+<LI><A HREF="007192.html#0001" CLASS="Element59">OS</A> - Variable length character string which specifies the Operating System for the host server.</UL>
+<P CLASS="Element10">
+Standard values for <A HREF="007192.html#0000" CLASS="Element59">CPU</A> and <A HREF="007192.html#0001" CLASS="Element59">OS</A> can be found in RFC 1010.<P CLASS="Element10">
+THINFORecord extends <A HREF="008097.html" CLASS="Element59">TTextRecord</A> to implement the specifics of accessing RData values as properties, including <A HREF="007192.html#0000" CLASS="Element59">CPU</A> and <A HREF="007192.html#0001" CLASS="Element59">OS</A>. THINFORecord also overrides the <A HREF="007192.html#0002" CLASS="Element59">Parse</A> method to read the values in RData into their property counterparts.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0000">THINFORecord.CPU</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007192.html" CLASS="Element59">THINFORecord</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Represents the CPU type for the host server.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> CPU: <STRONG>String</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+CPU is a read-only String property that represents the CPU type for the host server. CPU will contain one of the standard values defined in RFC 1010, including:<P CLASS="Element10">
+<UL>
+<LI>ALTO<P CLASS="Element10">
+<LI>AMDAHL-V7<P CLASS="Element10">
+<LI>APOLLO<P CLASS="Element10">
+<LI>ATT-3B20<P CLASS="Element10">
+<LI>BBN-C/60<P CLASS="Element10">
+<LI>BURROUGHS-B/29<P CLASS="Element10">
+<LI>BURROUGHS-B/4800<P CLASS="Element10">
+<LI>BUTTERFLY<P CLASS="Element10">
+<LI>C/30<P CLASS="Element10">
+<LI>C/70<P CLASS="Element10">
+<LI>CADLINC<P CLASS="Element10">
+<LI>CADR<P CLASS="Element10">
+<LI>CDC-170<P CLASS="Element10">
+<LI>CDC-170/750<P CLASS="Element10">
+<LI>CDC-173<P CLASS="Element10">
+<LI>CELERITY-1200<P CLASS="Element10">
+<LI>COMTEN-3690<P CLASS="Element10">
+<LI>CP8040<P CLASS="Element10">
+<LI>CRAY-1<P CLASS="Element10">
+<LI>CRAY-X/MP<P CLASS="Element10">
+<LI>CRAY-2<P CLASS="Element10">
+<LI>CTIWS-117<P CLASS="Element10">
+<LI>DANDELION<P CLASS="Element10">
+<LI>DEC-10<P CLASS="Element10">
+<LI>DEC-1050<P CLASS="Element10">
+<LI>DEC-1077<P CLASS="Element10">
+<LI>DEC-1080<P CLASS="Element10">
+<LI>DEC-1090<P CLASS="Element10">
+<LI>DEC-1090B<P CLASS="Element10">
+<LI>DEC-1090T<P CLASS="Element10">
+<LI>DEC-2020T<P CLASS="Element10">
+<LI>DEC-2040<P CLASS="Element10">
+<LI>DEC-2040T<P CLASS="Element10">
+<LI>DEC-2050T<P CLASS="Element10">
+<LI>DEC-2060<P CLASS="Element10">
+<LI>DEC-2060T<P CLASS="Element10">
+<LI>DEC-2065<P CLASS="Element10">
+<LI>DEC-FALCON<P CLASS="Element10">
+<LI>DEC-KS10<P CLASS="Element10">
+<LI>DORADO<P CLASS="Element10">
+<LI>DPS8/70M<P CLASS="Element10">
+<LI>ELXSI-6400<P CLASS="Element10">
+<LI>FOONLY-F2<P CLASS="Element10">
+<LI>FOONLY-F3<P CLASS="Element10">
+<LI>FOONLY-F4<P CLASS="Element10">
+<LI>GOULD<P CLASS="Element10">
+<LI>GOULD-6050<P CLASS="Element10">
+<LI>GOULD-6080<P CLASS="Element10">
+<LI>GOULD-9050<P CLASS="Element10">
+<LI>GOULD-9080<P CLASS="Element10">
+<LI>H-316<P CLASS="Element10">
+<LI>H-60/68<P CLASS="Element10">
+<LI>H-68<P CLASS="Element10">
+<LI>H-68/80<P CLASS="Element10">
+<LI>H-89<P CLASS="Element10">
+<LI>HONEYWELL-DPS-6<P CLASS="Element10">
+<LI>HONEYWELL-DPS-8/70<P CLASS="Element10">
+<LI>HP3000<P CLASS="Element10">
+<LI>HP3000/64<P CLASS="Element10">
+<LI>IBM-158<P CLASS="Element10">
+<LI>IBM-360/67<P CLASS="Element10">
+<LI>IBM-370/3033<P CLASS="Element10">
+<LI>IBM-3081<P CLASS="Element10">
+<LI>IBM-3084QX<P CLASS="Element10">
+<LI>IBM-3101<P CLASS="Element10">
+<LI>IBM-4331<P CLASS="Element10">
+<LI>IBM-4341<P CLASS="Element10">
+<LI>IBM-4361<P CLASS="Element10">
+<LI>IBM-4381<P CLASS="Element10">
+<LI>IBM-4956<P CLASS="Element10">
+<LI>IBM-PC<P CLASS="Element10">
+<LI>IBM-PC/AT<P CLASS="Element10">
+<LI>IBM-PC/XT<P CLASS="Element10">
+<LI>IBM-SERIES/1<P CLASS="Element10">
+<LI>IMAGEN<P CLASS="Element10">
+<LI>IMAGEN-8/300<P CLASS="Element10">
+<LI>IMSAI<P CLASS="Element10">
+<LI>INTEGRATED-SOLUTIONS<P CLASS="Element10">
+<LI>INTEGRATED-SOLUTIONS-68K<P CLASS="Element10">
+<LI>INTEGRATED-SOLUTIONS-CREATOR<P CLASS="Element10">
+<LI>INTEGRATED-SOLUTIONS-CREATOR-8<P CLASS="Element10">
+<LI>INTEL-IPSC<P CLASS="Element10">
+<LI>IS-1<P CLASS="Element10">
+<LI>IS-68010<P CLASS="Element10">
+<LI>LMI<P CLASS="Element10">
+<LI>LSI-11<P CLASS="Element10">
+<LI>LSI-11/2<P CLASS="Element10">
+<LI>LSI-11/23<P CLASS="Element10">
+<LI>LSI-11/73<P CLASS="Element10">
+<LI>M68000<P CLASS="Element10">
+<LI>MASSCOMP<P CLASS="Element10">
+<LI>MC500<P CLASS="Element10">
+<LI>MC68000<P CLASS="Element10">
+<LI>MICROVAX<P CLASS="Element10">
+<LI>MICROVAX-I<P CLASS="Element10">
+<LI>MV/8000<P CLASS="Element10">
+<LI>NAS3-5<P CLASS="Element10">
+<LI>NCR-COMTEN-3690<P CLASS="Element10">
+<LI>NOW<P CLASS="Element10">
+<LI>ONYX-Z8000<P CLASS="Element10">
+<LI>PDP-11<P CLASS="Element10">
+<LI>PDP-11/3<P CLASS="Element10">
+<LI>PDP-11/23<P CLASS="Element10">
+<LI>PDP-11/24<P CLASS="Element10">
+<LI>PDP-11/34<P CLASS="Element10">
+<LI>PDP-11/40<P CLASS="Element10">
+<LI>PDP-11/44<P CLASS="Element10">
+<LI>PDP-11/45<P CLASS="Element10">
+<LI>PDP-11/50<P CLASS="Element10">
+<LI>PDP-11/70<P CLASS="Element10">
+<LI>PDP-11/73<P CLASS="Element10">
+<LI>PE-7/32<P CLASS="Element10">
+<LI>PE-3205<P CLASS="Element10">
+<LI>PERQ<P CLASS="Element10">
+<LI>PLEXUS-P/60<P CLASS="Element10">
+<LI>PLI<P CLASS="Element10">
+<LI>PLURIBUS<P CLASS="Element10">
+<LI>PRIME-2350<P CLASS="Element10">
+<LI>PRIME-2450<P CLASS="Element10">
+<LI>PRIME-2755<P CLASS="Element10">
+<LI>PRIME-9655<P CLASS="Element10">
+<LI>PRIME-9755<P CLASS="Element10">
+<LI>PRIME-9955II<P CLASS="Element10">
+<LI>PRIME-2250<P CLASS="Element10">
+<LI>PRIME-2655<P CLASS="Element10">
+<LI>PRIME-9955<P CLASS="Element10">
+<LI>PRIME-9950<P CLASS="Element10">
+<LI>PRIME-9650<P CLASS="Element10">
+<LI>PRIME-9750<P CLASS="Element10">
+<LI>PRIME-2250<P CLASS="Element10">
+<LI>PRIME-750<P CLASS="Element10">
+<LI>PRIME-850<P CLASS="Element10">
+<LI>PRIME-550II<P CLASS="Element10">
+<LI>PYRAMID-90<P CLASS="Element10">
+<LI>PYRAMID-90MX<P CLASS="Element10">
+<LI>PYRAMID-90X<P CLASS="Element10">
+<LI>RIDGE<P CLASS="Element10">
+<LI>RIDGE-32<P CLASS="Element10">
+<LI>RIDGE-32C<P CLASS="Element10">
+<LI>ROLM-1666<P CLASS="Element10">
+<LI>S1-MKIIA<P CLASS="Element10">
+<LI>SMI<P CLASS="Element10">
+<LI>SEQUENT-BALANCE-8000<P CLASS="Element10">
+<LI>SIEMENS<P CLASS="Element10">
+<LI>SILICON-GRAPHICS<P CLASS="Element10">
+<LI>SILICON-GRAPHICS-IRIS<P CLASS="Element10">
+<LI>SPERRY-DCP/10<P CLASS="Element10">
+<LI>SUN<P CLASS="Element10">
+<LI>SUN-2<P CLASS="Element10">
+<LI>SUN-2/50<P CLASS="Element10">
+<LI>SUN-2/100<P CLASS="Element10">
+<LI>SUN-2/120<P CLASS="Element10">
+<LI>SUN-2/140<P CLASS="Element10">
+<LI>SUN-2/150<P CLASS="Element10">
+<LI>SUN-2/160<P CLASS="Element10">
+<LI>SUN-2/170<P CLASS="Element10">
+<LI>SUN-3/160<P CLASS="Element10">
+<LI>SUN-3/50<P CLASS="Element10">
+<LI>SUN-3/75<P CLASS="Element10">
+<LI>SUN-3/110<P CLASS="Element10">
+<LI>SUN-50<P CLASS="Element10">
+<LI>SUN-100<P CLASS="Element10">
+<LI>SUN-120<P CLASS="Element10">
+<LI>SUN-130<P CLASS="Element10">
+<LI>SUN-150<P CLASS="Element10">
+<LI>SUN-170<P CLASS="Element10">
+<LI>SUN-68000<P CLASS="Element10">
+<LI>SYMBOLICS-3600<P CLASS="Element10">
+<LI>SYMBOLICS-3670<P CLASS="Element10">
+<LI>TANDEM-TXP<P CLASS="Element10">
+<LI>TEK-6130<P CLASS="Element10">
+<LI>TI-EXPLORER<P CLASS="Element10">
+<LI>TP-4000<P CLASS="Element10">
+<LI>TRS-80<P CLASS="Element10">
+<LI>UNIVAC-1100<P CLASS="Element10">
+<LI>UNIVAC-1100/60<P CLASS="Element10">
+<LI>UNIVAC-1100/62<P CLASS="Element10">
+<LI>UNIVAC-1100/63<P CLASS="Element10">
+<LI>UNIVAC-1100/64<P CLASS="Element10">
+<LI>UNIVAC-1100/70<P CLASS="Element10">
+<LI>UNIVAC-1160<P CLASS="Element10">
+<LI>VAX-11/725<P CLASS="Element10">
+<LI>VAX-11/730<P CLASS="Element10">
+<LI>VAX-11/750<P CLASS="Element10">
+<LI>VAX-11/780<P CLASS="Element10">
+<LI>VAX-11/785<P CLASS="Element10">
+<LI>VAX-11/790<P CLASS="Element10">
+<LI>VAX-11/8600<P CLASS="Element10">
+<LI>VAX-8600<P CLASS="Element10">
+<LI>WANG-PC002<P CLASS="Element10">
+<LI>WANG-VS100<P CLASS="Element10">
+<LI>WANG-VS400<P CLASS="Element10">
+<LI>XEROX-1108<P CLASS="Element10">
+<LI>XEROX-8010</UL>
+</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0001">THINFORecord.OS</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007192.html" CLASS="Element59">THINFORecord</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Represents the Operating SYstem name in a Host Information resource record.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> OS: <STRONG>String</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+OS is a read-only String property that represents the Operating System name for the host server as indicated in the resource record. OS will contain one of the standard values described in RFC 1010, including:<P CLASS="Element10">
+<UL>
+<LI>AEGIS<P CLASS="Element10">
+<LI>APOLLO<P CLASS="Element10">
+<LI>BS-2000<P CLASS="Element10">
+<LI>CEDAR<P CLASS="Element10">
+<LI>CGW<P CLASS="Element10">
+<LI>CHRYSALIS<P CLASS="Element10">
+<LI>CMOS<P CLASS="Element10">
+<LI>CMS<P CLASS="Element10">
+<LI>COS<P CLASS="Element10">
+<LI>CPIX<P CLASS="Element10">
+<LI>CTOS<P CLASS="Element10">
+<LI>CTSS<P CLASS="Element10">
+<LI>DCN<P CLASS="Element10">
+<LI>DDNOS<P CLASS="Element10">
+<LI>DOMAIN<P CLASS="Element10">
+<LI>EDX<P CLASS="Element10">
+<LI>ELF<P CLASS="Element10">
+<LI>EMBOS<P CLASS="Element10">
+<LI>EMMOS<P CLASS="Element10">
+<LI>EPOS<P CLASS="Element10">
+<LI>FOONEX<P CLASS="Element10">
+<LI>FUZZ<P CLASS="Element10">
+<LI>GCOS<P CLASS="Element10">
+<LI>GPOS<P CLASS="Element10">
+<LI>HDOS<P CLASS="Element10">
+<LI>IMAGEN<P CLASS="Element10">
+<LI>INTERCOM<P CLASS="Element10">
+<LI>IMPRESS<P CLASS="Element10">
+<LI>INTERLISP<P CLASS="Element10">
+<LI>IOS<P CLASS="Element10">
+<LI>ITS<P CLASS="Element10">
+<LI>LISP<P CLASS="Element10">
+<LI>LISPM<P CLASS="Element10">
+<LI>LOCUS<P CLASS="Element10">
+<LI>MINOS<P CLASS="Element10">
+<LI>MOS<P CLASS="Element10">
+<LI>MPE5<P CLASS="Element10">
+<LI>MSDOS<P CLASS="Element10">
+<LI>MULTICS<P CLASS="Element10">
+<LI>MVS<P CLASS="Element10">
+<LI>MVS/SP<P CLASS="Element10">
+<LI>NEXUS<P CLASS="Element10">
+<LI>NMS<P CLASS="Element10">
+<LI>NONSTOP<P CLASS="Element10">
+<LI>NOS-2<P CLASS="Element10">
+<LI>OS/DDP<P CLASS="Element10">
+<LI>OS4<P CLASS="Element10">
+<LI>OS8d6<P CLASS="Element10">
+<LI>OSX<P CLASS="Element10">
+<LI>PCDOS<P CLASS="Element10">
+<LI>PERQ/OS<P CLASS="Element10">
+<LI>PLI<P CLASS="Element10">
+<LI>PSDOS/MIT<P CLASS="Element10">
+<LI>PRIMOS<P CLASS="Element10">
+<LI>RMX/RDOS<P CLASS="Element10">
+<LI>ROS<P CLASS="Element10">
+<LI>RSX11M<P CLASS="Element10">
+<LI>SATOPS<P CLASS="Element10">
+<LI>SCS<P CLASS="Element10">
+<LI>SIMP<P CLASS="Element10">
+<LI>SWIFT<P CLASS="Element10">
+<LI>TAC<P CLASS="Element10">
+<LI>TANDEM<P CLASS="Element10">
+<LI>TENEX<P CLASS="Element10">
+<LI>TOPS10<P CLASS="Element10">
+<LI>TOPS20<P CLASS="Element10">
+<LI>TP3010<P CLASS="Element10">
+<LI>TRSDOS<P CLASS="Element10">
+<LI>ULTRIX<P CLASS="Element10">
+<LI>UNIX<P CLASS="Element10">
+<LI>UT2D<P CLASS="Element10">
+<LI>V<P CLASS="Element10">
+<LI>VM<P CLASS="Element10">
+<LI>VM/370<P CLASS="Element10">
+<LI>VM/CMS<P CLASS="Element10">
+<LI>VM/SP<P CLASS="Element10">
+<LI>VMS<P CLASS="Element10">
+<LI>VMS/EUNICE<P CLASS="Element10">
+<LI>VRTX<P CLASS="Element10">
+<LI>WAITS<P CLASS="Element10">
+<LI>WANG<P CLASS="Element10">
+<LI>XDE<P CLASS="Element10">
+<LI>XENIX</UL>
+</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0002">THINFORecord.Parse</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007192.html" CLASS="Element59">THINFORecord</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Parsed RData values into properties.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>procedure</STRONG> Parse(CompleteMessage: <STRONG>String</STRONG>; APos: Integer); <STRONG>override</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+CompleteMessage: String</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Contents of the resource record.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+APos: Integer</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Position where RData values begin in the answer.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Parse is an overridden procedure that implements a routine to parse resource record values in the DNS response into their property-based counterparts.<P CLASS="Element10">
+CompleteMessage is the contents of the resource record. Since the DNS message can contain compressed data, the whole message is needed for parsing and pointer location.<P CLASS="Element10">
+APos is the position in the resource record where RData values for this record type are located in the DNS Answer.<P CLASS="Element10">
+Parse calls the inherited Parse method, and retrieve the DNS labels and values for the <A HREF="007192.html#0000" CLASS="Element59">CPU</A> and <A HREF="007192.html#0001" CLASS="Element59">OS</A> properties.</DIV>
+</DIV>
+<DIV CLASS="Element62">
+<HR>Created with Doc-O-Matic 2 donated to <STRONG><A HREF="http://www.delphi-jedi.org">Project JEDI</A></STRONG>. Commercial license available from the <STRONG><A HREF="http://www.doc-o-matic.com">Doc-O-Matic site</A></STRONG>.</DIV>
+</DIV></BODY></HTML>

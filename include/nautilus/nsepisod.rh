@@ -1,0 +1,36 @@
+// Ammorce -> Libellés
+#define IDC_BWCCGROUP1	108
+#define IDC_EDIT1	109
+#define IDC_BWCCTEXT1	110
+#define IDC_BWCCTEXT2	111
+#define IDC_EDIT2	112
+#define IDC_BWCCTEXT3	113
+#define IDC_BWCCTEXT4	114
+#define IDC_BWCCTEXT5	115
+#define IDC_BWCCTEXT6	116
+#define IDC_EDIT3	115
+#define IDC_BWCCTEXT7	117
+#define IDC_EDIT4	118
+#define IDC_BWCCTEXT9	119
+#define IDC_EDIT5	120
+#define IDC_EDIT6	121
+#define IDC_EDIT7	122
+#define IDC_EDIT8	123
+#define IDC_EDIT9	124
+#define IDC_EDIT10	125
+#define IDC_EDIT11	126
+#define IDC_EDIT12	127
+#define IDC_BWCCTEXT10	128
+#define IDC_BWCCTEXT11	129
+#define IDC_BWCCTEXT12	130
+#define IDC_BWCCTEXT13	131
+#define IDC_BWCCTEXT8	118
+#define IDC_NOUVEAU	    101#define IDC_CREER	    102
+#define IDC_LIBELLES    103
+#define IDC_REPLACE	    104
+#define IDC_REMOVE	    105
+#define IDC_SUBLIBELLES 106
+#define IDC_SUBREMOVE	107
+#define IDC_IMPORT	    108
+
+

@@ -1,0 +1,59 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+<TITLE>FindAuthClass</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <META name="GENERATOR" content="Doc-O-Matic">
+    <LINK rel="STYLESHEET" href="default.css" type="text/css">
+
+<SCRIPT LANGUAGE="JavaScript1.2" SRC="scripts.js"></SCRIPT>
+</HEAD>
+<BODY CLASS="Element57">
+<TABLE BORDER="0" BGCOLOR="#AACCFF" WIDTH="100%" CELLSPACING="0" CELLPADDING="0">
+<TR><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element1">
+Indy 9</DIV>
+</TD><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element2">
+<A HREF="content.html" CLASS="Element59">Content</A> | <A HREF="idx.html" CLASS="Element59">Index</A> | <A HREF="symref.html" CLASS="Element59">Reference</A></DIV>
+</TD></TR></TABLE><DIV CLASS="Element58">
+<DIV CLASS="Element5">
+FindAuthClass</DIV>
+<DIV CLASS="Element7">
+<A HREF="015302.html" CLASS="Element59">See Also</A>, <A HREF="002121.html" CLASS="Element59">Unit: IdAuthentication</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Retrieves a class instance to be used for the specified authentication method.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>function</STRONG> FindAuthClass(AuthName: <STRONG>String</STRONG>): <A HREF="007206.html" CLASS="Element59">TIdAuthenticationClass</A>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Unit</DIV>
+<DIV CLASS="Element69">
+<A HREF="002121.html" CLASS="Element59">IdAuthentication</A></DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+AuthName: String</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Authentication method to be used by the framework.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Return Value</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+<A HREF="007206.html" CLASS="Element59">TIdAuthenticationClass</A> - Authentication class instance for the requested method.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+FindAuthClass is a <A HREF="007206.html" CLASS="Element59">TIdAuthenticationClass</A> function that retrieves an authentication class instance that can be used for the authentication scheme identified in AuthName. Authentication classes are retrieved form the list of registered authentication classes created by <A HREF="006191.html" CLASS="Element59">RegisterAuthenticationMethod</A>.<P CLASS="Element10">
+FindAuthClass is used in <A HREF="007375.html" CLASS="Element59">TIdHTTP</A> to locate the authentication class to be used in support of the WWW-Authenticate header in the HTTP Response.</DIV>
+</DIV>
+<DIV CLASS="Element62">
+<HR>Created with Doc-O-Matic 2 donated to <STRONG><A HREF="http://www.delphi-jedi.org">Project JEDI</A></STRONG>. Commercial license available from the <STRONG><A HREF="http://www.doc-o-matic.com">Doc-O-Matic site</A></STRONG>.</DIV>
+</DIV></BODY></HTML>

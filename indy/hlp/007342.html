@@ -1,0 +1,746 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+<TITLE>TIdFTPServer</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <META name="GENERATOR" content="Doc-O-Matic">
+    <LINK rel="STYLESHEET" href="default.css" type="text/css">
+
+<SCRIPT LANGUAGE="JavaScript1.2" SRC="scripts.js"></SCRIPT>
+</HEAD>
+<BODY CLASS="Element57">
+<TABLE BORDER="0" BGCOLOR="#AACCFF" WIDTH="100%" CELLSPACING="0" CELLPADDING="0">
+<TR><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element1">
+Indy 9</DIV>
+</TD><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element2">
+<A HREF="content.html" CLASS="Element59">Content</A> | <A HREF="idx.html" CLASS="Element59">Index</A> | <A HREF="symref.html" CLASS="Element59">Reference</A></DIV>
+</TD></TR></TABLE><DIV CLASS="Element58">
+<DIV CLASS="Element5">
+TIdFTPServer</DIV>
+<DIV CLASS="Element7">
+<A HREF="011146.html" CLASS="Element59">Hierarchy</A>, <A HREF="011147.html" CLASS="Element59">Properties</A>, <A HREF="011148.html" CLASS="Element59">Methods</A>, <A HREF="011149.html" CLASS="Element59">Events</A>, <A HREF="011150.html" CLASS="Element59">See Also</A>, <A HREF="002192.html" CLASS="Element59">Unit: IdFTPServer</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Implements a File Transfer Protocol (FTP) server.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12">TIdFTPServer = <STRONG>class</STRONG>(<A HREF="007831.html" CLASS="Element59">TIdTCPServer</A>)</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Unit</DIV>
+<DIV CLASS="Element69">
+<A HREF="002192.html" CLASS="Element59">IdFTPServer</A></DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+TIdFTPServer is a <A HREF="007831.html" CLASS="Element59">TIdTCPServer</A> descendant that implements a multi-threaded File Transfer Protocol (FTP) server as described in the Internet Standards document:<P CLASS="Element10">
+<UL>
+<LI>RFC 959 - File Transfer Protocol [FTP] (http://www.rfc-editor.org/rfc/rfc959.txt)</UL>
+<P CLASS="Element10">
+FTP is a basic file-sharing system for uploading and downloading files, as well as managing files and directories. The FTP protocol is commonly used for software distribution, uploading files to a web-server, and providing archives for various purposes.<P CLASS="Element10">
+TIdFTPServer implements properties that can be used to configure and control FTP server options, including:<P CLASS="Element10">
+<UL>
+<LI>Permit anonymous login accounts.<P CLASS="Element10">
+<LI>Specify the computer system to emulate in file and directory handling.<P CLASS="Element10">
+<LI>Configure the reply used for the FTP HELP command.<P CLASS="Element10">
+<LI>Specify the Home directory to use for use for client connections.</UL>
+<P CLASS="Element10">
+TIdFTPServer provides a default implementation that uses <A HREF="007244.html" CLASS="Element59">TIdCommandHandler</A> instances and <A HREF="007242.html" CLASS="Element59">TIdCommand</A> reply event handlers to perform file and directory handling functions. The server can also be implemented using the OnExecute event handler to respond to multi-threaded client connections when the CommandHandlersEnabled property is False.<P CLASS="Element10">
+TIdFTPServer provides a collection and event handlers to allow access to <A HREF="007881.html" CLASS="Element59">TIdUserAccount</A> instances for Authentication of client accounts. There are also event handler that allow handling the FTP USER and PASS commands when User Accounts are maintained external to the FTP server implementation.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0000">TIdFTPServer.AllowAnonymousLogin</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007342.html" CLASS="Element59">TIdFTPServer</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Indicates if &quot;Anonymous&quot; accounts are supported in the FTP server.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> AllowAnonymousLogin: Boolean;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+AllowAnonymousLogin is a Boolean property that indicates if the FTP server implementation allows client connections using accounts names found in <A HREF="007342.html#0001" CLASS="Element59">AnonymousAccounts</A>. AllowAnonymousLogin is used in the command reply handler for the FTP USER command, and updates properties in the client connection thread to indicate the UserType for the account.<P CLASS="Element10">
+When AllowAnonymousLogin is False, accounts names and passwords will be authenticated using <A HREF="007342.html#0015" CLASS="Element59">UserAccounts</A>, or the <A HREF="007342.html#0013" CLASS="Element59">OnUserLogin</A> event handler when UsetrAccounts are not assigned.<P CLASS="Element10">
+The default value for AllowAnonymousLogin if False, as assigned in the <A HREF="007342.html#0003" CLASS="Element59">Create</A> constructor.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0001">TIdFTPServer.AnonymousAccounts</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007342.html" CLASS="Element59">TIdFTPServer</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Contains account names considered to be &quot;anonymous&quot; accounts on the FTP server.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> AnonymousAccounts: TStringList;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+AnonymousAccounts is a TStringList property that contains the account names considered to be &quot;anonymous&quot; or &quot;guest&quot; accounts for the FTP server implementation. If <A HREF="007342.html#0000" CLASS="Element59">AllowAnonymousLogin</A> is True, anonymous accounts are permitted in the FTP server implementation.<P CLASS="Element10">
+AnonymousAccounts is initialized in the <A HREF="007342.html#0003" CLASS="Element59">Create</A> constructor, and contains the default values 'anonymous' and 'guest'. <STRONG>Note</STRONG>: By default, <A HREF="007342.html#0000" CLASS="Element59">AllowAnonymousLogin</A> is set to False in <A HREF="007342.html#0003" CLASS="Element59">Create</A>.<P CLASS="Element10">
+AnonymousAccounts is freed and released in the <A HREF="007342.html#0005" CLASS="Element59">Destroy</A> destructor.<P CLASS="Element10">
+AnonymousAccounts is used in the FTP USER command action handler, when the server handles the user name for the account provided in the <A HREF="007242.html" CLASS="Element59">TIdCommand</A> instance triggering the command action handler. The USER command action handler compares the value found in the TIdFTPServerThread.UnparsedParams against AnonymousAccounts, and sets the UserType and Username for the associated Thread in ASender when the user account is found.<P CLASS="Element10">
+<STRONG>Note</STRONG>: AnonymousAccounts is not used to authenicate anonymous logins in the FTP server implementation when <A HREF="007342.html#0015" CLASS="Element59">UserAccounts</A> has not been assigned. In this situation, <A HREF="007342.html#0013" CLASS="Element59">OnUserLogin</A> is signalled to perfrom username and password authentication.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0002">TIdFTPServer.AnonymousPassStrictCheck</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007342.html" CLASS="Element59">TIdFTPServer</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Indicates that passwords for anonymous accounts must contain a valid email address.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> AnonymousPassStrictCheck: Boolean;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+AnonymousPassStrictCheck is a Boolean property that indicates if passwords for anonymous user accounts require validation to insure that the password contains a valid email address. AnonymousPassStrictCheck is used in the FTP PASS command event handler when the client connection thread contains the value utAnonymousUser in <A HREF="007343.html#0001" CLASS="Element59">TIdFTPServerThread.UserType</A>.<P CLASS="Element10">
+When AnonymousPassStrictCheck check is True, and the password for the client connection is not blank, the password is checked to insure that the value contains an RFC-compliant email address. When the password is valid, the authentication status in <A HREF="007343.html#0001" CLASS="Element59">TIdFTPServerThread.Authenticated</A> is set to True.<P CLASS="Element10">
+When the password is blank for the anonymous account, UserType and Authenticated properties in the threaded client connection are reverted to their unauthenticated values.<P CLASS="Element10">
+The default value for AnonymousPassStrictCheck is True, as assigned in the <A HREF="007342.html#0003" CLASS="Element59">Create</A> constructor.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0004">TIdFTPServer.DefaultDataPort</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007342.html" CLASS="Element59">TIdFTPServer</A>, <A HREF="011151.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Represents the data channel port number for threaded client connections.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> DefaultDataPort: Integer;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+DefaultDataPort is an Integer property that represents the port number to use when initializing the data channel for threaded client connections to the FTP server. The default value for DefaultDataPort is <A HREF="002454.html" CLASS="Element59">IdPORT_FTP_DATA</A> as assigned in the constructor for the object instance.<P CLASS="Element10">
+DefaultDataPort is used frequently in <A HREF="007342.html" CLASS="Element59">TIdFTPServer</A>. DefaultDataPort is the value provided as a parameter when creating the <A HREF="007343.html" CLASS="Element59">TIdFTPServerThread</A> instances for threaded client connections to the FTP server. In turn, DefaultDataPort is also used when the <A HREF="007343.html" CLASS="Element59">TIdFTPServerThread</A> needs to create a <A HREF="007275.html" CLASS="Element59">TIdDataChannelThread</A> or intitialize the data channel for the threaded client connection.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0006">TIdFTPServer.EmulateSystem</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007342.html" CLASS="Element59">TIdFTPServer</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Indicates the computer system to emulate in file and directory handling operations.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> EmulateSystem: <A HREF="007348.html" CLASS="Element59">TIdFTPSystems</A>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+EmulateSystem is a <A HREF="007348.html" CLASS="Element59">TIdFTPSystems</A> property that indicates the computer system to emulate in file and directory handling operations for the FTP server implementation. EmulateSystem is also used when the FTP server generates responses for the LIST, SITE, and SYST FTP commands.<P CLASS="Element10">
+The default value for EmulateSystem is ftpsDOS, as assigned in the <A HREF="007342.html#0003" CLASS="Element59">Create</A> constructor.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0007">TIdFTPServer.HelpReply</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007342.html" CLASS="Element59">TIdFTPServer</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Specifies text values sent in a response to the FTP HELP command.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> HelpReply: Tstrings;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+HelpReply is a TStrings property that contains the textual value sent to an FTP client connection in response to the FTP HELP command. HelpReply is used as the values for the normal reply in the <A HREF="007244.html" CLASS="Element59">TIdCommandHandler</A> for the FTP HELP command.<P CLASS="Element10">
+HelpReply contents are sent in responses using the Control channel for the client connection.<P CLASS="Element10">
+Applications should assign lines of text to the property that indicate the FTP commands supported in the server implementation, or to provide site-specific implementation status information.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0014">TIdFTPServer.SystemType</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007342.html" CLASS="Element59">TIdFTPServer</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Indicates the host operating system and platform for the server implementation.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> SystemType: <STRONG>string</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+SystemType is a String property that indicates the host operating system and platform for the FTP server implementation. SystemType is used when the command event handler for the FTP SYST command verb is executed.<P CLASS="Element10">
+SystemType is updated when the value in the <A HREF="007342.html#0006" CLASS="Element59">EmulateSystem</A> property is changed, and SystemType contains a standard value. SystemType will contain one of the following for the associated <A HREF="007342.html#0006" CLASS="Element59">EmulateSystem</A> value:<P CLASS="Element10">
+<UL>
+<LI>ftpsDOS - 'Windows 9x/NT'.<P CLASS="Element10">
+<LI>ftpsUNIX - 'UNIX type: L8'.<P CLASS="Element10">
+<LI>ftpsVAX - 'UNIX type: L8'.</UL>
+<P CLASS="Element10">
+The default value for SystemType is 'Windows 9x/NT', as assigned in the <A HREF="007342.html#0003" CLASS="Element59">Create</A> constructor.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0015">TIdFTPServer.UserAccounts</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007342.html" CLASS="Element59">TIdFTPServer</A>, <A HREF="011152.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Implements a container for user accounts managed by the FTP server.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> UserAccounts: <A HREF="007883.html" CLASS="Element59">TIdUserManager</A>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+UserAccounts is a <A HREF="007882.html" CLASS="Element59">TIdUserAccounts</A> property that represents the container used for managing <A HREF="007881.html" CLASS="Element59">TIdUserAccount</A> instances for valid accounts on the FTP server. By default, UserAccounts are not used in the FTP server implementation. Use <A HREF="007342.html#0013" CLASS="Element59">OnUserLogin</A> to determine when the account has been Authenticated for access to the FTP server.<P CLASS="Element10">
+An application can create a <A HREF="007882.html" CLASS="Element59">TIdUserAccounts</A> class instance for the property to enable use of UserAccounts and its AuthenticateUser, Accounts, and OnAuthentication properties and methods. The application must also free the resources allocated to UserAccount prior to destruction of the object instance.<P CLASS="Element10">
+UserAccounts is used by the command reply handlers for the FTP USER and PASS commands to perform authorization using the user name and password values from the corresponding CommandHandlers. UserAccounts should use its OnAuthenticate event handler to insure that valid accounts are added to the collection maintained by the component. A user account is accessed using the ItemsByUserName property, and provides values that indicate the user name, real name, password, and user-defined attributes associated with the account used by the threaded client connection.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0003">TIdFTPServer.Create</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007342.html" CLASS="Element59">TIdFTPServer</A>, <A HREF="011153.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Constructor for the object instance.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>constructor</STRONG> Create(AOwner: TComponent); <STRONG>override</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+AOwner: TComponent</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Owner of the object instance.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Create is the constructor for the object instance, and calls the inherited Create method using the component specified in AOwner as the owner of the object instance.<P CLASS="Element10">
+Create assigns <A HREF="007343.html" CLASS="Element59">TIdFTPServerThread</A> to the ThreadClass property used for creating new threaded client connections.<P CLASS="Element10">
+Create sets the default values for properties in the FTP server implementation, including:<P CLASS="Element10">
+<UL>
+<LI><A HREF="007342.html#0000" CLASS="Element59">AllowAnonymousLogin</A> - False.<P CLASS="Element10">
+<LI><A HREF="007342.html#0002" CLASS="Element59">AnonymousPassStrictCheck</A> - True.<P CLASS="Element10">
+<LI>DefaultPort - IDPORT_FTP.<P CLASS="Element10">
+<LI><A HREF="007342.html#0006" CLASS="Element59">EmulateSystem</A> - ftpsDOS.<P CLASS="Element10">
+<LI>Greeting - Numeric Code 220 with the text &quot;Indy FTP Server ready&quot;.<P CLASS="Element10">
+<LI>ReplyUnknownCommand - Numeric Code 500 with the constant text <A HREF="006339.html" CLASS="Element59">RSFTPCmdSyntaxError</A>.<P CLASS="Element10">
+<LI><A HREF="007342.html#0014" CLASS="Element59">SystemType</A> - 'Windows 9x/NT.'</UL>
+<P CLASS="Element10">
+Create also allocates resources required for properties in the object instance, including the following:<P CLASS="Element10">
+<UL>
+<LI><A HREF="007342.html#0001" CLASS="Element59">AnonymousAccounts</A> - Anonymous account name; default values include 'anonymous' and 'guest'.<P CLASS="Element10">
+<LI><A HREF="007342.html#0007" CLASS="Element59">HelpReply</A> - Text used in response tot he FTP HELP command verb.<P CLASS="Element10">
+<LI><A HREF="007342.html#0015" CLASS="Element59">UserAccounts</A> - Nil; indicates user accounts are not maintained by the FTP server implementation.</UL>
+<P CLASS="Element10">
+When the FTP Server component is not being used in the IDE, Create will populate CommandHandlers with the <A HREF="007244.html" CLASS="Element59">TIdCommandHandler</A> instances and command reply event handlers used to implement the FTP commands.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0005">TIdFTPServer.Destroy</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007342.html" CLASS="Element59">TIdFTPServer</A>, <A HREF="011154.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Frees the object instance.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>destructor</STRONG> Destroy; <STRONG>override</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Destroy is the destructor for the object instance. Destroy frees and releases resources allocated in the <A HREF="007342.html#0003" CLASS="Element59">Create</A> constructor, like <A HREF="007342.html#0001" CLASS="Element59">AnonymousAccounts</A> and <A HREF="007342.html#0007" CLASS="Element59">HelpReply</A>. Destroy calls the inherited Destroy method prior to exiting.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0008">TIdFTPServer.OnAfterUserLogin</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007342.html" CLASS="Element59">TIdFTPServer</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Event handler signalled after authentication of a user account.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> OnAfterUserLogin: <A HREF="008009.html" CLASS="Element59">TOnAfterUserLoginEvent</A>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+Sender</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Command handler generating the event notification.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+OnAfterUserLogin is a TOnAfterUserLogin property that represents the event handler signalled when a user account has been successfully authenticated using <A HREF="007342.html#0015" CLASS="Element59">UserAccounts</A> in the FTP server implementation. OnAfterUserLogin is signalled from the command replay handler for the FTP PASS command when the user name and password have been read and Authenticated for a threaded client connection using values from <A HREF="007342.html#0015" CLASS="Element59">UserAccounts</A>.<P CLASS="Element10">
+OnAfterUserLogin canbe used to perform server logging, set default values or file system path based on the user account, or to perform additional processing required to maintain state for the client connection. <STRONG>Note</STRONG>: Applications must assign a procedure to the event handler to allow responding to the event notification.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0009">TIdFTPServer.OnChangeDirectory</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007342.html" CLASS="Element59">TIdFTPServer</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Allows the server to <A HREF="006943.html" CLASS="Element59">select</A> a file system path.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> OnChangeDirectory: <A HREF="008014.html" CLASS="Element59">TOnDirectoryEvent</A>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+ADirectory</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+File system path to be used for the directory-related command.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+ASender</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Client connection for the event.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+OnChangeDirectory is a <A HREF="008014.html" CLASS="Element59">TOnDirectoryEvent</A> property that represents the event handler signalled when the FTP server performs the FTP CWD or CDUP command verbs. OnChangeDirectory allows the server to perform platform-specific API calls needed to change the currently selected file system path to the desired location specified in ADirectory.<P CLASS="Element10">
+ASender is the threaded client connection for the event notification. ADirectory is the file system path to be selected after execution of the command event handler. ADirectory will contain the directory path after resolving the directory path using the file handling required for the system in <A HREF="007342.html#0006" CLASS="Element59">EmulateSystem</A>. When triggered for the FTP CDUP command, ADirectory contains the notation required to change to the parent directory in the local file system.<P CLASS="Element10">
+An FTP server implementation must assign a procedure to the event handler to allow responding to the event notifications. The <A HREF="007343.html#0003" CLASS="Element59">TIdFTPServerThread.CurrentDir</A> property will be updated to the value used by the event handler.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="000A">TIdFTPServer.OnDeleteFile</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007342.html" CLASS="Element59">TIdFTPServer</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Allows the server to remove a file from the server file system.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> OnDeleteFile: <A HREF="008015.html" CLASS="Element59">TOnFileEvent</A>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+AFilename</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+File to be removed from the local file system.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+ASender</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Client connection for the event notification.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+OnDeleteFile is a <A HREF="008015.html" CLASS="Element59">TOnFileEvent</A> property that represents the event handler signalled when the FTP server needs to remove a file located on the server file system. OnDeleteFile is used in the FTP DELE command event handler, and allows the server to perform the platform-specific API calls needed to delete the file specified in AFilename.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Notes</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Applications must assign a procedure to the event handler to allow responding to the event notification. When an event handler has not been assigned, the message specified in RSFTPFileActionNotTakenand with a numeric result code of 550 is sent to the client connection.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="000B">TIdFTPServer.OnGetCustomListFormat</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007342.html" CLASS="Element59">TIdFTPServer</A></DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> OnGetCustomListFormat: <A HREF="007608.html" CLASS="Element59">TIdOnGetCustomListFormat</A>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+AItem</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Directory listing item to be examined.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+ASender</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+FTP server generating the event notification.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+VText</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Textual representation for the directory listing item.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+OnGetCustomListFormat is a <A HREF="007608.html" CLASS="Element59">TIdOnGetCustomListFormat</A> property that represents the event handler signalled when an FTP server implementation needs to use a custom directory listing format. OnGetCustomListFormat is used in ListDirectory when event handlers have been assigned for <A HREF="007342.html#000D" CLASS="Element59">OnListDirectory</A> and <A HREF="007342.html#0006" CLASS="Element59">EmulateSystem</A> contains the value ftpsOther.<P CLASS="Element10">
+The event handler for OnGetCustomListFormat is also assigned to the <A HREF="007337.html#0004" CLASS="Element59">TIdFTPListItems.OnGetCustomListFormat</A> event handler and <A HREF="007337.html#0002" CLASS="Element59">TIdFTPListItems.ListFormat</A> is given the value flfCustom.<P CLASS="Element10">
+Applications must assign a procedure to the event handler to allow responding to the event notification. The procedure must examine the properties and/or raw data in AItem to generate the textual representation of the directory listing item in VText.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="000C">TIdFTPServer.OnGetFileSize</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007342.html" CLASS="Element59">TIdFTPServer</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Allows the server to retrieve the size for a file in the server file system.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> OnGetFileSize: <A HREF="008016.html" CLASS="Element59">TOnGetFileSizeEvent</A>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+AFilename</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+File name requested.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+AFileSize</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Size of the requested file.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+ASender</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Client connection for the event notification.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+OnGetFileSize is a <A HREF="008016.html" CLASS="Element59">TOnGetFileSizeEvent</A> property that represents the event handler signalled when the FTP server needs to determine the size of a file on the server file system. OnGetFileSize allows the FTP server implementation to perform the platform-specific API calls needed to retrieve the size of the file specified in AFilename.<P CLASS="Element10">
+OnGetFileSize is used when the command event handler is executed after receiving the FTP SIZE command verb from the client connection in ASender. AFileSize will contain the number of bytes in the file specified by AFilename, or -1 when the file size cannot be determined.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="000D">TIdFTPServer.OnListDirectory</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007342.html" CLASS="Element59">TIdFTPServer</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Allows the server to generate a formatted directory listing.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> OnListDirectory: <A HREF="008018.html" CLASS="Element59">TOnListDirectoryEvent</A>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+ADirectoryListing</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Collection of file items for the listing.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+APath</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+File system directory for the listing.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+ASender</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Client connection for the event notification.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+OnListDirectory is a <A HREF="008018.html" CLASS="Element59">TOnListDirectoryEvent</A> property that represents the event handler signalled when an FTP server implementation needs to prepare and process a directory listing for the client connection. OnListDirectory is triggered when the command event handler for the FTP LIST command verb is executed.<P CLASS="Element10">
+OnListDirectoryEvent allows the server to examine, validate, or maintain items that appear in the directory listing using the <A HREF="007337.html#0002" CLASS="Element59">TIdFTPListItems.ListFormat</A> as indicated by <A HREF="007342.html#0006" CLASS="Element59">EmulateSystem</A>.<P CLASS="Element10">
+OnListDirectoryEvent allows the server to use properties from the connection for the client thread specified in ASender, the current directory in APath, and the collection with file information in ADirectoryListing. The event handler can also add or delete <A HREF="007333.html" CLASS="Element59">TIdFTPListItem</A> entries in ADirectoryListing. Use the platform-specific API calls needed to retrieve the list of files for the specified directory, and populate the contents of ADirectoryListing.<P CLASS="Element10">
+An FTP server implementation must assign a procedure to the event handler for the <A HREF="008018.html" CLASS="Element59">TOnListDirectoryEvent</A> event to allow responding to the event notification. When a procedure has not been assigned to the event handler, an <A HREF="000483.html" CLASS="Element59">EIdTFTPException</A> will be raised.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="000E">TIdFTPServer.OnMakeDirectory</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007342.html" CLASS="Element59">TIdFTPServer</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Allows the server to remove a directory from the server file system.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> OnMakeDirectory: <A HREF="008014.html" CLASS="Element59">TOnDirectoryEvent</A>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+ADirectory</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+File system path to be used for the directory-related command.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+ASender</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Client connection generating the event.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+OnMakeDirectory is a <A HREF="008014.html" CLASS="Element59">TOnDirectoryEvent</A> property that represents the event handler signalled when an FTP server needs to create a new directory in the server file system. OnMakeDirectory is triggered when the command event handler for the FTP MKD command verb is executed.<P CLASS="Element10">
+OnMakeDirectory allows the FTP server to perform the platform-specific API calls needed to create the resolved directory path in ADirectory on the server file system.<P CLASS="Element10">
+An FTP server implementation must assign a procedure to the event handler to allow responding to the event notification.<P CLASS="Element10">
+Use <A HREF="007342.html#000F" CLASS="Element59">OnRemoveDirectory</A> to implement removal of a directory on the server file system.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="000F">TIdFTPServer.OnRemoveDirectory</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007342.html" CLASS="Element59">TIdFTPServer</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Allows the server to remove a directory in the server file system.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> OnRemoveDirectory: <A HREF="008014.html" CLASS="Element59">TOnDirectoryEvent</A>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+ADirectory</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+File system path to be used for the directory-related command.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+ASender</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Client connection generating the event.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+OnRemoveDirectory is a <A HREF="008014.html" CLASS="Element59">TOnDirectoryEvent</A> property that represents the event handler signalled when an FTP server needs to remove a directory from the server file system. OnRemoveDirectory is triggered in the command event handler for the FTP RMD command verb.<P CLASS="Element10">
+OnRemoveDirectory allows the server to perform the platform-specific API calls need to removed the resolved file directory path specified in ADirectory.<P CLASS="Element10">
+An FTP server implementation must assign a procedure to the event handler to allow responding to the event notification.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0010">TIdFTPServer.OnRenameFile</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007342.html" CLASS="Element59">TIdFTPServer</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Allows the server to rename a file in the server file system.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> OnRenameFile: <A HREF="008023.html" CLASS="Element59">TOnRenameFileEvent</A>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+ARenameFromFile</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Orignal filename.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+ARenameToFile</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+New file name.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+ASender</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Threaded client connection for the event notification.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+OnRenameFile is a <A HREF="008023.html" CLASS="Element59">TOnRenameFileEvent</A> property that represents the event handler signalled when the FTP server needs to rename a file on the server file system.<P CLASS="Element10">
+OnRenameFile is examined in the command event handler for the FTP RNFR command verb, and indicates that file renaming can be performed for the FTP server implementation. OnRenameFile is triggered when the command event handler for the FTP RNTO command verb is executed.<P CLASS="Element10">
+OnRenameFile allows the server to peform the platform-specific API calls need to rename the file. ARenameFromFile indicates the orginal file name in the server file system. ARenameToFile indicates the new file name in the server file system.<P CLASS="Element10">
+An FTP server implementation must assign a procedure to the event handler to allow responding to the event notification.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0011">TIdFTPServer.OnRetrieveFile</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007342.html" CLASS="Element59">TIdFTPServer</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Allows the server to retrieve a file from the server file system.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> OnRetrieveFile: <A HREF="008025.html" CLASS="Element59">TOnRetrieveFileEvent</A>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+AFilename</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+File to be retrieved.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+ASender</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Client thread for the event notification.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+AStream</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Destination for the contents of the file.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+OnRetrieveFile is a <A HREF="008025.html" CLASS="Element59">TOnRetrieveFileEvent</A> property that represents the event handler signalled when the FTP server needs to retrieve a file stored on the server file system. OnRetrieveFile is triggered when the command event handler for the FTP RETR command verb is executed.<P CLASS="Element10">
+OnRetrieveFile allows the server to load the contents of the file specified in AFilename into the stream specified by AStream. OnRetrieveFile must create a stream to use for transferring the contents of the file, and assign the reference to AStream. OnRetrieveFile may also use the default value of AStream (Nil) to indicate that the specified file could not be found, or is not available for transfer to the client connection.<P CLASS="Element10">
+When the stream has been assigned in OnRetrieveFile, the restart position indicated in TIdFTPSErverThread.RESTPos is located in AStream prior to transfer of data on the data channel.<P CLASS="Element10">
+An FTP server implementation must assign a procedure to the event handler to allow responding to the event notification.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0012">TIdFTPServer.OnStoreFile</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007342.html" CLASS="Element59">TIdFTPServer</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Allows the server to store a file on the server file system.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> OnStoreFile: <A HREF="008028.html" CLASS="Element59">TOnStoreFileEvent</A>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+AAppend</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Indicates data should be appended to an existing file.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+AFilename</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+File to be loaded onto the local file system.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+ASender</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Client thread for the event notification.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+AStream</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Data read by the event handler.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+OnStoreFile is a <A HREF="008028.html" CLASS="Element59">TOnStoreFileEvent</A> property that represents the event handler signalled when the server needs to store the contents of a file retrieved from the client connection on the server file system. OnStoreFile is triggered when the command event handlers for the FTP STOR, STOU, or APPE command verbs are executed.<P CLASS="Element10">
+OnStoreFile allows the server to perform the platform-specific API calls needed to load the data for the file specified in AFilename using the stream AStream constructed by the event handler. OnStoreFile responsible for determining if the authenticated client can store files on the local file system, and creating the stream used to load the contents of the file. AAppend indicates that data can be appended to the end of an existing file on the server file system.<P CLASS="Element10">
+An FTP server implementation must assign a procedure to the event handler to allow responding to the event notification.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0013">TIdFTPServer.OnUserLogin</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007342.html" CLASS="Element59">TIdFTPServer</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Allows the server to perform user account authentication for a client connection.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> OnUserLogin: <A HREF="008030.html" CLASS="Element59">TOnUserLoginEvent</A>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+AAuthenticated</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Indicates if the client is authorized.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+APassword</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+User credentials from the client.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+ASender</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Client thread for the event notification.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+AUsername</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+User identity from the client.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+OnUserLogin is a <A HREF="008030.html" CLASS="Element59">TOnUserLoginEvent</A> property that represents the event handler signalled when the FTP server needs to perform authentication for a threaded client connection. OnUserLogin is triggered when the command event handlers for the FTP USER and PASS command verbs have been executed.<P CLASS="Element10">
+OnUserLogin allows the server to perform authentication for the user account using the AUsername and APassword values supplied by the threaded client connection. OnUserLogin is used when the value in <A HREF="007343.html#0001" CLASS="Element59">TIdFTPServerThread.UserType</A> is utNormalUser, and <A HREF="007342.html#0015" CLASS="Element59">UserAccounts</A> have not been assigned for authenticating accounts in the server implementation.<P CLASS="Element10">
+OnUserLogin can be used to access resources external to the server to perform account authentication, and must set the value in AAuthenticated to indicate that the client has access to the FTP server.<P CLASS="Element10">
+When the account has been authenticated in the event handler, values in the <A HREF="007343.html" CLASS="Element59">TIdFTPServerThread</A> client connection are updated to indicate the status and password used in the authorization process.<P CLASS="Element10">
+An FTP server implementation must assign a procedure to the event handler to allow responding to the event notification.<P CLASS="Element10">
+Use <A HREF="007342.html#0008" CLASS="Element59">OnAfterUserLogin</A> to perform server maintenance required after a successful authentication attempt for the client connection.</DIV>
+</DIV>
+<DIV CLASS="Element62">
+<HR>Created with Doc-O-Matic 2 donated to <STRONG><A HREF="http://www.delphi-jedi.org">Project JEDI</A></STRONG>. Commercial license available from the <STRONG><A HREF="http://www.doc-o-matic.com">Doc-O-Matic site</A></STRONG>.</DIV>
+</DIV></BODY></HTML>

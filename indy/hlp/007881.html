@@ -1,0 +1,217 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+<TITLE>TIdUserAccount</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <META name="GENERATOR" content="Doc-O-Matic">
+    <LINK rel="STYLESHEET" href="default.css" type="text/css">
+
+<SCRIPT LANGUAGE="JavaScript1.2" SRC="scripts.js"></SCRIPT>
+</HEAD>
+<BODY CLASS="Element57">
+<TABLE BORDER="0" BGCOLOR="#AACCFF" WIDTH="100%" CELLSPACING="0" CELLPADDING="0">
+<TR><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element1">
+Indy 9</DIV>
+</TD><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element2">
+<A HREF="content.html" CLASS="Element59">Content</A> | <A HREF="idx.html" CLASS="Element59">Index</A> | <A HREF="symref.html" CLASS="Element59">Reference</A></DIV>
+</TD></TR></TABLE><DIV CLASS="Element58">
+<DIV CLASS="Element5">
+TIdUserAccount</DIV>
+<DIV CLASS="Element7">
+<A HREF="014726.html" CLASS="Element59">Hierarchy</A>, <A HREF="014727.html" CLASS="Element59">Properties</A>, <A HREF="014728.html" CLASS="Element59">Methods</A>, <A HREF="002948.html" CLASS="Element59">Unit: IdUserAccounts</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Implements a user account for use in Indy server implementations.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12">TIdUserAccount = <STRONG>class</STRONG>(TCollectionItem)</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Unit</DIV>
+<DIV CLASS="Element69">
+<A HREF="002948.html" CLASS="Element59">IdUserAccounts</A></DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+TIdUserAccount is a TCollectionItem descendant that represents information about an account used on an Indy server. TIdUserAccount includes properties that identify the account and authentication password, and describe attributes associated with the user account. TIdUserAccount also includes methods that allow verification of a password against the stored password for the account.<P CLASS="Element10">
+TIdUserAccount is the class type used to represent entries in a <A HREF="007882.html" CLASS="Element59">TIdUserAccounts</A> collection.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0000">TIdUserAccount.Attributes</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007881.html" CLASS="Element59">TIdUserAccount</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Represents additional information for a user account.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> Attributes: Tstrings;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Attributes is a TStrings property that provides storage for additional information associated with a user account. Values are added to Attributes as individual strings in the familiar NAME=VALUE format.<P CLASS="Element10">
+<A HREF="007881.html" CLASS="Element59">TIdUserAccount</A> does not specifiy the content or semantics for data in the Attributes property.<P CLASS="Element10">
+Use <A HREF="007881.html#0003" CLASS="Element59">Data</A> to store a TObject descendant that contains information for the user account.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0003">TIdUserAccount.Data</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007881.html" CLASS="Element59">TIdUserAccount</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Stores an object instance to be used with the user account.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> Data: TObject;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Data is a public TObject property that provides storage for TObject and descendant classes to be used with the user account. Data is not maintained by <A HREF="007881.html" CLASS="Element59">TIdUserAccount</A>, and it is the responsibility of the application to handle creating or freeing object instances stored in Data.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0005">TIdUserAccount.Password</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007881.html" CLASS="Element59">TIdUserAccount</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Account credentials used for authenticating the user account.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> Password: <STRONG>string</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Password is a String property that represents the authentication credentials to use for the use account. Password is used in <A HREF="007881.html#0001" CLASS="Element59">CheckPassword</A> to verify that the supplied credentials match the Password for the user account.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0006">TIdUserAccount.RealName</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007881.html" CLASS="Element59">TIdUserAccount</A>, <A HREF="014729.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Indicates the name of the user account owner.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> RealName: <STRONG>string</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+RealName is a String property that represents the name associated with the owner of a user account.<P CLASS="Element10">
+Use <A HREF="007881.html#0007" CLASS="Element59">UserName</A> to get the value that identifies the account.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0007">TIdUserAccount.UserName</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007881.html" CLASS="Element59">TIdUserAccount</A>, <A HREF="014730.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Represents the access identity for the user account.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> UserName: <STRONG>string</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+UserName is a String property that represent the value to be used when accessing the user account. UserName is used with <A HREF="007881.html#0005" CLASS="Element59">Password</A> when performing account authentication.<P CLASS="Element10">
+Use <A HREF="007881.html#0006" CLASS="Element59">RealName</A> to get the textual name of the person that owns the user account.<P CLASS="Element10">
+Use <A HREF="007881.html#0000" CLASS="Element59">Attributes</A> to access additional information about the user account.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0001">TIdUserAccount.CheckPassword</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007881.html" CLASS="Element59">TIdUserAccount</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Verifies that a value matches the stored password for the user account.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>function</STRONG> CheckPassword(<STRONG>const</STRONG> APassword: <STRONG>String</STRONG>): Boolean;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+const APassword: String</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Authentication credentials to verify for the user account.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Return Value</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Boolean - True when the value matches the stored password for the user account.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+CheckPassword is a Boolean function that verifies authentication credentials specified in APassword. CheckPassword compares the value in APassword to the <A HREF="007881.html#0005" CLASS="Element59">Password</A> property using the CaseSensitivePasswords setting from the <A HREF="007882.html" CLASS="Element59">TIdUserAccounts</A> collection that owns the user account. CheckPassword returns True when the values match.<P CLASS="Element10">
+CheckPassword is used in <A HREF="007883.html#0001" CLASS="Element59">TIdUserManager.AuthenticateUser</A> to locate the user account and perform authentication using the specified identity and credentials.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0002">TIdUserAccount.Create</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007881.html" CLASS="Element59">TIdUserAccount</A>, <A HREF="014731.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Constructor for the object instance.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>constructor</STRONG> Create(ACollection: TCollection); <STRONG>override</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+ACollection: TCollection</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Owner of the object instance.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Create is the constructor for the object instance. Create calls the inherited Create method using ACollection as the owner of the object instance. Create also allocates resources needed for the Attribute property.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0004">TIdUserAccount.Destroy</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007881.html" CLASS="Element59">TIdUserAccount</A>, <A HREF="014732.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Frees an object instance.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>destructor</STRONG> Destroy; <STRONG>override</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Destroy is the destructor for the object instance. Destroy frees and releases resources allocated in the <A HREF="007881.html#0002" CLASS="Element59">Create</A> method, including <A HREF="007881.html#0000" CLASS="Element59">Attributes</A>. Destroy calls the inherited Destroy method prior to exiting.</DIV>
+</DIV>
+<DIV CLASS="Element62">
+<HR>Created with Doc-O-Matic 2 donated to <STRONG><A HREF="http://www.delphi-jedi.org">Project JEDI</A></STRONG>. Commercial license available from the <STRONG><A HREF="http://www.doc-o-matic.com">Doc-O-Matic site</A></STRONG>.</DIV>
+</DIV></BODY></HTML>

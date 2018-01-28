@@ -1,0 +1,77 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+<TITLE>TIdMessageDecoderUUE</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <META name="GENERATOR" content="Doc-O-Matic">
+    <LINK rel="STYLESHEET" href="default.css" type="text/css">
+
+<SCRIPT LANGUAGE="JavaScript1.2" SRC="scripts.js"></SCRIPT>
+</HEAD>
+<BODY CLASS="Element57">
+<TABLE BORDER="0" BGCOLOR="#AACCFF" WIDTH="100%" CELLSPACING="0" CELLPADDING="0">
+<TR><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element1">
+Indy 9</DIV>
+</TD><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element2">
+<A HREF="content.html" CLASS="Element59">Content</A> | <A HREF="idx.html" CLASS="Element59">Index</A> | <A HREF="symref.html" CLASS="Element59">Reference</A></DIV>
+</TD></TR></TABLE><DIV CLASS="Element58">
+<DIV CLASS="Element5">
+TIdMessageDecoderUUE</DIV>
+<DIV CLASS="Element7">
+<A HREF="012581.html" CLASS="Element59">Hierarchy</A>, <A HREF="012582.html" CLASS="Element59">Properties</A>, <A HREF="012583.html" CLASS="Element59">Methods</A>, <A HREF="012584.html" CLASS="Element59">Events</A>, <A HREF="012585.html" CLASS="Element59">See Also</A>, <A HREF="002290.html" CLASS="Element59">Unit: IdMessageCoderUUE</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Implements support for decoding RFC 822 message parts using the UUDecode algorithm.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12">TIdMessageDecoderUUE = <STRONG>class</STRONG>(<A HREF="007549.html" CLASS="Element59">TIdMessageDecoder</A>)</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Unit</DIV>
+<DIV CLASS="Element69">
+<A HREF="002290.html" CLASS="Element59">IdMessageCoderUUE</A></DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+TIdMessageDecoderUUE is a <A HREF="007549.html" CLASS="Element59">TIdMessageDecoder</A> descendant that implements support for decoding RFC 822 message parts using the UUDecode algorithm. TIdMessageDecoderUUE extends the ancestor class to provide support for detecting both UUE- and XXE-encoded body lines, as well as the inconsistent use of FillChar at the end of the encoded data stream.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0000">TIdMessageDecoderUUE.ReadBody</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007555.html" CLASS="Element59">TIdMessageDecoderUUE</A>, <A HREF="012586.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Implements reading and decoding the body of an RFC 822 message part using the UUDecode algorithm.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>function</STRONG> ReadBody(ADestStream: TStream; <STRONG>var</STRONG> AMsgEnd: Boolean): <A HREF="007549.html" CLASS="Element59">TIdMessageDecoder</A>; <STRONG>override</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+ADestStream: TStream</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Stream to receive the decoded contents of the message part.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Return Value</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+<A HREF="007549.html" CLASS="Element59">TIdMessageDecoder</A> - Message decoder class used for the message part.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+ReadBody is an overridden <A HREF="007549.html" CLASS="Element59">TIdMessageDecoder</A> function in <A HREF="007555.html" CLASS="Element59">TIdMessageDecoderUUE</A> that implements reading and decoding of an RFC 822 message part using the UUDecode algorithm. ReadBody constructs an internal decoder class, either <A HREF="007285.html" CLASS="Element59">TIdDecoderUUE</A> or <A HREF="007287.html" CLASS="Element59">TIdDecoderXXE</A>, based on the value of the length byte in the encoded body line. If the body line does not contain a value expected for UUE- or XXE-encoded lines, an <A HREF="000375.html" CLASS="Element59">EIdException</A> will be raised with the constant message <A HREF="006743.html" CLASS="Element59">RSUnrecognizedUUEEncodingScheme</A>.<P CLASS="Element10">
+ReadBody calls ReadLn until the end of the encoded message stream is reached. Each line read from the input stream is processed using the DecodeToStream method for the decoder class instance.</DIV>
+</DIV>
+<DIV CLASS="Element62">
+<HR>Created with Doc-O-Matic 2 donated to <STRONG><A HREF="http://www.delphi-jedi.org">Project JEDI</A></STRONG>. Commercial license available from the <STRONG><A HREF="http://www.doc-o-matic.com">Doc-O-Matic site</A></STRONG>.</DIV>
+</DIV></BODY></HTML>

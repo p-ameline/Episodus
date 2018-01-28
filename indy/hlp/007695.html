@@ -1,0 +1,99 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+<TITLE>TIdServerIOHandlerSocket</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <META name="GENERATOR" content="Doc-O-Matic">
+    <LINK rel="STYLESHEET" href="default.css" type="text/css">
+
+<SCRIPT LANGUAGE="JavaScript1.2" SRC="scripts.js"></SCRIPT>
+</HEAD>
+<BODY CLASS="Element57">
+<TABLE BORDER="0" BGCOLOR="#AACCFF" WIDTH="100%" CELLSPACING="0" CELLPADDING="0">
+<TR><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element1">
+Indy 9</DIV>
+</TD><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element2">
+<A HREF="content.html" CLASS="Element59">Content</A> | <A HREF="idx.html" CLASS="Element59">Index</A> | <A HREF="symref.html" CLASS="Element59">Reference</A></DIV>
+</TD></TR></TABLE><DIV CLASS="Element58">
+<DIV CLASS="Element5">
+TIdServerIOHandlerSocket</DIV>
+<DIV CLASS="Element7">
+<A HREF="013495.html" CLASS="Element59">Hierarchy</A>, <A HREF="013496.html" CLASS="Element59">Properties</A>, <A HREF="013497.html" CLASS="Element59">Methods</A>, <A HREF="013498.html" CLASS="Element59">Events</A>, <A HREF="002816.html" CLASS="Element59">Unit: IdServerIOHandlerSocket</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Implements <A HREF="007071.html" CLASS="Element59">socket</A>-based IOHandler support in a multi-threaded server.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12">TIdServerIOHandlerSocket = <STRONG>class</STRONG>(<A HREF="007685.html" CLASS="Element59">TIdServerIOHandler</A>)</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Unit</DIV>
+<DIV CLASS="Element69">
+<A HREF="002816.html" CLASS="Element59">IdServerIOHandlerSocket</A></DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+TIdServerIOHandlerSocket is a <A HREF="007685.html" CLASS="Element59">TIdServerIOHandler</A> descendant that implements the framework used in a multi-threaded server to support the Indy <A HREF="007071.html" CLASS="Element59">socket</A>-based IOHandler framework.<P CLASS="Element10">
+<A HREF="007685.html" CLASS="Element59">TIdServerIOHandler</A> provides implementations of the <A HREF="007695.html#0001" CLASS="Element59">Init</A> and <A HREF="007695.html#0000" CLASS="Element59">Accept</A> methods that allow initialization and realization of a <A HREF="007071.html" CLASS="Element59">socket</A>-based IOHandler for a multi-threaded server that uses a listening thread to detect client connections.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0000">TIdServerIOHandlerSocket.Accept</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007695.html" CLASS="Element59">TIdServerIOHandlerSocket</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Realizes a <A HREF="007071.html" CLASS="Element59">socket</A>-based IO handler for a threaded client connection.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>function</STRONG> Accept(ASocket: <A HREF="007743.html" CLASS="Element59">TIdStackSocketHandle</A>; AThread: <A HREF="007846.html" CLASS="Element59">TIdThread</A> = <STRONG>nil</STRONG>): <A HREF="007421.html" CLASS="Element59">TIdIOHandler</A>; <STRONG>override</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+ASocket: TIdStackSocketHandle</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Handle for the listener thread detecting the client connection.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Return Value</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+<A HREF="007421.html" CLASS="Element59">TIdIOHandler</A> - IO handler to use for the threaded client connection.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Accept is a <A HREF="007421.html" CLASS="Element59">TIdIOHandler</A> function that allows a multi-thread server to realize a <A HREF="007426.html" CLASS="Element59">TIdIOHandlerSocket</A> instance using sockets as the input/output source for a threaded client connections.<P CLASS="Element10">
+Accept creates and opens a <A HREF="007426.html" CLASS="Element59">TIdIOHandlerSocket</A> instance that is used to <A HREF="000027.html" CLASS="Element59">accept</A> the <A HREF="000175.html" CLASS="Element59">bind</A> the <A HREF="007071.html" CLASS="Element59">socket</A> handle provided in ASocket to a client connection.<P CLASS="Element10">
+Accept is called by the listener thread for the multi-thread server when a new threaded client connection is detected. Accept is used to create the <A HREF="007421.html" CLASS="Element59">TIdIOHandler</A> using the <A HREF="007071.html" CLASS="Element59">socket</A> handler for the listener thead. The return value is assigned to the <A HREF="007828.html#001B" CLASS="Element59">TIdTCPConnection.IOHandler</A> in the threaded client connection for subsequent input/output operations.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0001">TIdServerIOHandlerSocket.Init</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007695.html" CLASS="Element59">TIdServerIOHandlerSocket</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Initializes the server IO handler for a multi-threaded server.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>procedure</STRONG> Init; <STRONG>override</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Init is a virtual procedure that allows initialization required for the server IOHandler. Init is an empty implementation in <A HREF="007695.html" CLASS="Element59">TIdServerIOHandlerSocket</A>, and can be overridden in a descendant class to perform maintenance and housekeeping needed for a specific type of input/output source.<P CLASS="Element10">
+Use <A HREF="007695.html#0000" CLASS="Element59">Accept</A> to realize a <A HREF="007421.html" CLASS="Element59">TIdIOHandler</A> instance for a <A HREF="007071.html" CLASS="Element59">socket</A>-based input/output source used for a threaded client connections.<P CLASS="Element10">
+Init is used when a multi-threaded server becomes Active, but prior to allocating <A HREF="007071.html" CLASS="Element59">socket</A> bindings for any listener threads or client connections.</DIV>
+</DIV>
+<DIV CLASS="Element62">
+<HR>Created with Doc-O-Matic 2 donated to <STRONG><A HREF="http://www.delphi-jedi.org">Project JEDI</A></STRONG>. Commercial license available from the <STRONG><A HREF="http://www.doc-o-matic.com">Doc-O-Matic site</A></STRONG>.</DIV>
+</DIV></BODY></HTML>

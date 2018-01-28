@@ -1,0 +1,37 @@
+// Ammorce -> Libellés
+#define IDC_SOAPEDIT    101
+#define IDC_SOAPEDIT2   102
+#define IDC_SOAPEDIT3	103
+#define IDCONVERT       104
+
+#define IDC_CHGLIBELLE  101
+
+// ListWindow
+
+#define IDC_CODE	    101
+#define IDC_POSITION    102
+#define IDC_DUPLIQU     103
+#define IDC_CLONE       104
+#define IDC_LIBELLE     105
+#define IDC_OCR_LEARN   106
+
+#define IDC_PRINCIPE1	111
+#define IDC_PRINCIPE2   112
+#define IDC_PRINCIPE3   113
+#define IDC_PRINCIPE4   114
+#define IDC_PRINCIPE5	115
+#define IDC_PRINCIPE6   116
+#define IDC_PRINCIPE7   117
+#define IDC_PRINCIPE8   118
+#define IDC_PRINCIPE9   119
+
+#define IDC_DUPLIQUE1	121
+#define IDC_DUPLIQUE2   122
+#define IDC_DUPLIQUE3   123
+#define IDC_DUPLIQUE4   124
+#define IDC_DUPLIQUE5	125
+#define IDC_DUPLIQUE6   126
+#define IDC_DUPLIQUE7   127
+#define IDC_DUPLIQUE8   128
+#define IDC_DUPLIQUE9   129
+

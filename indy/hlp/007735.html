@@ -1,0 +1,266 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+<TITLE>TIdSSLSocket</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <META name="GENERATOR" content="Doc-O-Matic">
+    <LINK rel="STYLESHEET" href="default.css" type="text/css">
+
+<SCRIPT LANGUAGE="JavaScript1.2" SRC="scripts.js"></SCRIPT>
+</HEAD>
+<BODY CLASS="Element57">
+<TABLE BORDER="0" BGCOLOR="#AACCFF" WIDTH="100%" CELLSPACING="0" CELLPADDING="0">
+<TR><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element1">
+Indy 9</DIV>
+</TD><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element2">
+<A HREF="content.html" CLASS="Element59">Content</A> | <A HREF="idx.html" CLASS="Element59">Index</A> | <A HREF="symref.html" CLASS="Element59">Reference</A></DIV>
+</TD></TR></TABLE><DIV CLASS="Element58">
+<DIV CLASS="Element5">
+TIdSSLSocket</DIV>
+<DIV CLASS="Element7">
+<A HREF="013878.html" CLASS="Element59">Hierarchy</A>, <A HREF="013879.html" CLASS="Element59">Properties</A>, <A HREF="013880.html" CLASS="Element59">Methods</A>, <A HREF="013881.html" CLASS="Element59">See Also</A>, <A HREF="002875.html" CLASS="Element59">Unit: IdSSLOpenSSL</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Implements a <A HREF="007071.html" CLASS="Element59">socket</A> connection for the SSL transport protocol.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12">TIdSSLSocket = <STRONG>class</STRONG>(TObject)</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Unit</DIV>
+<DIV CLASS="Element69">
+<A HREF="002875.html" CLASS="Element59">IdSSLOpenSSL</A></DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+TIdSSLSocket is a class that provides a <A HREF="007071.html" CLASS="Element59">socket</A> implementation that supports the Secure Socket Layer transport protocol. TIdSSLSocket allows both client and server SSL connections using an SSL context, as well as support for session identifiers and X.509 certificate files.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0001">TIdSSLSocket.Cipher</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007735.html" CLASS="Element59">TIdSSLSocket</A></DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> Cipher: <A HREF="007724.html" CLASS="Element59">TIdSSLCipher</A>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Cipher</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0007">TIdSSLSocket.PeerCert</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007735.html" CLASS="Element59">TIdSSLSocket</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+X.509 certificate for a peer on the SSL <A HREF="007071.html" CLASS="Element59">socket</A> connection.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> PeerCert: <A HREF="007901.html" CLASS="Element59">TIdX509</A>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+PeerCert is a read-only <A HREF="007901.html" CLASS="Element59">TIdX509</A> property that represents the X.509 certificate for a peer connection on the SSL <A HREF="007071.html" CLASS="Element59">socket</A>.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0000">TIdSSLSocket.Accept</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007735.html" CLASS="Element59">TIdSSLSocket</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Creates and binds a new SSL <A HREF="007071.html" CLASS="Element59">socket</A>.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>procedure</STRONG> Accept(<STRONG>const</STRONG> pHandle: <A HREF="007743.html" CLASS="Element59">TIdStackSocketHandle</A>; fSSLContext: <A HREF="007727.html" CLASS="Element59">TIdSSLContext</A>);</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+const pHandle: TIdStackSocketHandle</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Socket handle binding used for the new SSL <A HREF="007071.html" CLASS="Element59">socket</A>.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+fSSLContext: TIdSSLContext</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+SSL context for the SSL <A HREF="007071.html" CLASS="Element59">socket</A>.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Accept is a procedure that initializes an SSL <A HREF="007071.html" CLASS="Element59">socket</A> for the SSL context specified in fSSLContext, and binds the SSL <A HREF="007071.html" CLASS="Element59">socket</A> using the <A HREF="007071.html" CLASS="Element59">socket</A> handle in pHandle.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0002">TIdSSLSocket.Connect</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007735.html" CLASS="Element59">TIdSSLSocket</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Creates and binds a new client SSL <A HREF="007071.html" CLASS="Element59">socket</A>.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>procedure</STRONG> Connect(<STRONG>const</STRONG> pHandle: <A HREF="007743.html" CLASS="Element59">TIdStackSocketHandle</A>; fSSLContext: <A HREF="007727.html" CLASS="Element59">TIdSSLContext</A>);</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+const pHandle: TIdStackSocketHandle</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Socket handle binding for the SSL <A HREF="007071.html" CLASS="Element59">socket</A>.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+fSSLContext: TIdSSLContext</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+SSL context for the SSL <A HREF="007071.html" CLASS="Element59">socket</A>.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Connect is a procedure that initializes an SSL <A HREF="007071.html" CLASS="Element59">socket</A> for the client SSL context specified in fSSLContext, and binds the SSL <A HREF="007071.html" CLASS="Element59">socket</A> using the <A HREF="007071.html" CLASS="Element59">socket</A> handle in pHandle.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0003">TIdSSLSocket.Create</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007735.html" CLASS="Element59">TIdSSLSocket</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Constructor for the object instance.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>constructor</STRONG> Create(Parent: TObject);</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+Parent: TObject</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Owner of the object instance.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Create is the constructor for the object instance. Create assigns the Parent for the SSL <A HREF="007071.html" CLASS="Element59">socket</A>.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0004">TIdSSLSocket.Destroy</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007735.html" CLASS="Element59">TIdSSLSocket</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Frees an object instance.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>destructor</STRONG> Destroy; <STRONG>override</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Destroy is the destructor for the object instance. Destroy will <A HREF="006981.html" CLASS="Element59">shutdown</A> the SSL <A HREF="007071.html" CLASS="Element59">socket</A> prior to freeing and releasing the object instance. Destroy calls the inherited Destroy method.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0005">TIdSSLSocket.GetSessionID</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007735.html" CLASS="Element59">TIdSSLSocket</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+SSL session identifier for the SSL <A HREF="007071.html" CLASS="Element59">socket</A>.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>function</STRONG> GetSessionID: <A HREF="007142.html" CLASS="Element59">TByteArray</A>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+GetSessionID is a <A HREF="007142.html" CLASS="Element59">TByteArray</A> function that returns SSL session identifier for the SSL <A HREF="007071.html" CLASS="Element59">socket</A>.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0006">TIdSSLSocket.GetSessionIDAsString</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007735.html" CLASS="Element59">TIdSSLSocket</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+SSL session identifier in hexadecimal form.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>function</STRONG> GetSessionIDAsString: <STRONG>String</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+GetSessionIDAsString is a String function that returns a string containing the hexadecimal representation of the SSL session identifier for the SSL <A HREF="007071.html" CLASS="Element59">socket</A>.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0008">TIdSSLSocket.Recv</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007735.html" CLASS="Element59">TIdSSLSocket</A></DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>function</STRONG> Recv(<STRONG>var</STRONG> ABuf; ALen: integer): integer;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Recv</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0009">TIdSSLSocket.Send</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007735.html" CLASS="Element59">TIdSSLSocket</A></DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>function</STRONG> Send(<STRONG>var</STRONG> ABuf; ALen: integer): integer;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Send</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="000A">TIdSSLSocket.SetCipherList</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007735.html" CLASS="Element59">TIdSSLSocket</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+SetCipherList is not currently implemented.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>procedure</STRONG> SetCipherList(CipherList: <STRONG>String</STRONG>);</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+SetCipherList is not currently implemented.</DIV>
+</DIV>
+<DIV CLASS="Element62">
+<HR>Created with Doc-O-Matic 2 donated to <STRONG><A HREF="http://www.delphi-jedi.org">Project JEDI</A></STRONG>. Commercial license available from the <STRONG><A HREF="http://www.doc-o-matic.com">Doc-O-Matic site</A></STRONG>.</DIV>
+</DIV></BODY></HTML>

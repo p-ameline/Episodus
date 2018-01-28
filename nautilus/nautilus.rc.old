@@ -1,0 +1,2227 @@
+// -----------------------------------------------------------------------------// nautilus.rc
+// -----------------------------------------------------------------------------
+// -----------------------------------------------------------------------------
+// $Revision: 1.62 $
+// $Author: remi $
+// $Date: 2005/07/20 08:50:41 $
+// -----------------------------------------------------------------------------
+// -----------------------------------------------------------------------------
+
+// -----------------------------------------------------------------------------
+// Copyright Nautilus, 2004
+// http://www.nautilus-info.com
+// -----------------------------------------------------------------------------
+// Ce logiciel est un programme informatique servant à gérer et traiter les
+// informations de santé d'une personne.
+//
+// Ce logiciel est régi par la licence CeCILL soumise au droit français et
+// respectant les principes de diffusion des logiciels libres. Vous pouvez
+// utiliser, modifier et/ou redistribuer ce programme sous les conditions de la
+// licence CeCILL telle que diffusée par le CEA, le CNRS et l'INRIA sur le site
+// "http://www.cecill.info".
+//
+// En contrepartie de l'accessibilité au code source et des droits de copie, de
+// modification et de redistribution accordés par cette licence, il n'est offert
+// aux utilisateurs qu'une garantie limitée. Pour les mêmes raisons, seule une
+// responsabilité restreinte pèse sur l'auteur du programme, le titulaire des
+// droits patrimoniaux et les concédants successifs.
+//
+// A cet égard  l'attention de l'utilisateur est attirée sur les risques
+// associés au chargement, à l'utilisation, à la modification et/ou au
+// développement et à la reproduction du logiciel par l'utilisateur étant donné
+// sa spécificité de logiciel libre, qui peut le rendre complexe à manipuler et
+// qui le réserve donc à des développeurs et des professionnels avertis
+// possédant des connaissances informatiques approfondies. Les utilisateurs sont
+// donc invités à charger et tester l'adéquation du logiciel à leurs besoins
+// dans des conditions permettant d'assurer la sécurité de leurs systèmes et ou
+// de leurs données et, plus généralement, à l'utiliser et l'exploiter dans les
+// mêmes conditions de sécurité.
+//
+// Le fait que vous puissiez accéder à cet en-tête signifie que vous avez pris
+// connaissance de la licence CeCILL, et que vous en avez accepté les termes.
+// -----------------------------------------------------------------------------
+// This software is a computer program whose purpose is to manage and process
+// a person's health data.
+//
+// This software is governed by the CeCILL  license under French law and abiding
+// by the rules of distribution of free software. You can use, modify and/ or
+// redistribute the software under the terms of the CeCILL license as circulated
+// by CEA, CNRS and INRIA at the following URL "http://www.cecill.info".
+//
+// As a counterpart to the access to the source code and  rights to copy, modify
+// and redistribute granted by the license, users are provided only with a
+// limited warranty and the software's author, the holder of the economic
+// rights, and the successive licensors have only limited liability.
+//
+// In this respect, the user's attention is drawn to the risks associated with
+// loading, using, modifying and/or developing or reproducing the software by
+// the user in light of its specific status of free software, that may mean that
+// it is complicated to manipulate, and that also therefore means that it is
+// reserved for developers and experienced professionals having in-depth
+// computer knowledge. Users are therefore encouraged to load and test the
+// software's suitability as regards their requirements in conditions enabling
+// the security of their systems and/or data to be ensured and, more generally,
+// to use and operate it in the same conditions as regards security.
+//
+// The fact that you are presently reading this means that you have had
+// knowledge of the CeCILL license and that you accept its terms.
+// -----------------------------------------------------------------------------
+// -----------------------------------------------------------------------------// Attention// -----------------------------------------------------------------------------// Les chemins des include doivent être en chemin relatif sur le cvs.// Si vous avez besoin de les modifier en chemin absolu pour pouvoir les// modifier avec Borland 5, vous devez les repasser en chemin relatif avant de// les remettre sur le cvs.// -----------------------------------------------------------------------------// #ifndef WORKSHOP_INVOKED
+// # include <windows.h>
+// #endif
+
+// #include "c:\cvs\nautilus\include\nautilus\nautilus.rh"
+// #include "nautilus\nautilus.rh"
+
+// pour richedit// #include <owl/window.rh>// #include <owl/editsear.rh>
+// #include <owl/editfile.rh>
+
+// #include <owl/inputdia.rc>// #include <owl/editfile.rc>
+// #include <owl/editsear.rc>
+// #include <owl/owlapp.rc>
+// #include <owl/except.rc>
+// #include <owl/printer.rc>
+// #include <owl/prevwin.rc>
+
+// #include <owl/docview.rc>// #include <owl/except.rc>
+// #include <owl/mdi.rh>
+
+//#include "c:\cvs\nautilus\include\nautilus\richedap.h"
+//#include "c:\cvs\nautilus\nautilus\nsldvvue.rh"// #include "nautilus\richedap.h"// #include "nautilus\nsldvvue.rh"#ifdef RC_INVOKED
+
+// #include <owl/statusba.rc>
+//// Menu principal
+//
+IDM_MDICMNDS MENU
+{
+ POPUP "&Fichier"
+ {
+  POPUP "&Nouveau"
+  {
+   MENUITEM "Nouveau compte-&rendu", CM_NEWCR
+   MENUITEM "Nouvelle &consultation", CM_NEWCS
+   MENUITEM "Nouvelle &note", CM_NEWCONSULT
+   MENUITEM "Nouveau fichier &texte", CM_NEWTTXT
+   MENUITEM "Nouveau fichier &word", CM_NEWTMPL
+   MENUITEM "Nouveau &formulaire", CM_QUESTIONNAIRE
+  }
+
+  POPUP "&Ouvrir"
+  {
+   MENUITEM "Ouvrir fichier &texte", CM_OPENTTXT
+   MENUITEM "Ouvrir fichier &word", CM_OPENTMPL
+  }
+
+  MENUITEM "&Importer", CM_IMPORTE
+  MENUITEM "I&mporter Images", CM_IMPORTIMG
+  // MENUITEM "Capt&urer des images", CM_CAPTUREIMG
+  MENUITEM "E&dition d'images", CM_PANNEL
+  MENUITEM "&Fermer", CM_FILECLOSE
+  MENUITEM "&Enregistrer", CM_ENREGISTRE
+  MENUITEM SEPARATOR
+  MENUITEM "&Composer", CM_COMPOSE
+  MENUITEM "&Publier", CM_IMPRIME
+  MENUITEM "&Visualiser", CM_VISUAL
+  MENUITEM SEPARATOR
+  MENUITEM "&Quitter", CM_EXIT
+ }
+
+ MENUITEM Separator
+ MENUITEM Separator
+ MENUITEM Separator
+ POPUP "&Personnes"
+ {
+  MENUITEM "Changer/créer &patient", CM_NEWPAT
+  MENUITEM "&Dossier patient", CM_CHEMISE
+  MENUITEM "F&ermer patient", CM_BUREAU
+  // MENUITEM SEPARATOR
+  // MENUITEM "Carte &Vitale", CM_CVITALE
+  // MENUITEM "&Fiche compta", CM_CREATCOMPTA
+  // MENUITEM "&Situation", CM_MODIFCOMPTA
+  MENUITEM SEPARATOR
+  MENUITEM "Changer &utilisateur", CM_NEWDOC
+  MENUITEM "&Créer utilisateur", CM_CREATDOC
+  MENUITEM "&Modifier utilisateur", CM_MODIFDOC
+  MENUITEM SEPARATOR
+  MENUITEM "Créer co&rrespondant", CM_CREATCOR
+  MENUITEM "Modifier corres&pondant", CM_MODIFCOR
+  MENUITEM SEPARATOR
+  MENUITEM "Gestion de l'équipe de santé", CM_HEALTHTEAM
+  MENUITEM "Importer patient", CM_IMPORT_PATIENT
+  MENUITEM "Importer correspondant", CM_IMPORT_CORRESP
+  MENUITEM "Importer utilisateur", CM_IMPORT_USER
+  MENUITEM SEPARATOR
+  MENUITEM "Mise à &jour patient depuis Ligne de vie", CM_SYNCHRO_IMP_THIS_PAT
+  MENUITEM "S&ynchronisation patient vers Ligne de vie", CM_SYNCHRO_EXP_THIS_PAT
+ }
+
+ POPUP "&Fonctions"
+ {
+  MENUITEM "Lancement", CM_FUNCTION
+ }
+
+ POPUP "&Episodus"
+ {
+  MENUITEM "&Ligne de vie", CM_LDV
+  MENUITEM "&Médicaments", CM_LDV_DRUGS
+  MENUITEM "P&rocédures", CM_PROCESS
+  MENUITEM "&Objectifs de santé", CM_LDV_GOALS
+  MENUITEM SEPARATOR
+  MENUITEM "&Elaboration du message", CM_PROMET_MESSAGE
+  MENUITEM "&Envoi des données au serveur", CM_PROMET_SEND
+  MENUITEM "&Préparation des données diogène", CM_DIOGENE
+  MENUITEM SEPARATOR
+  MENUITEM "&Navigation sur le serveur", CM_PROMET_SURF
+  MENUITEM SEPARATOR
+  MENUITEM "&Zoom sur la Ligne de vie", CM_LDV_ZOOMIN
+  MENUITEM "&Elargir sur la Ligne de vie", CM_LDV_ZOOMOUT
+ }
+
+ POPUP "&Comptabilité"
+ {
+  MENUITEM "Saisie d'une &recette", CM_RECETTE
+  MENUITEM "Saisie d'une &dépense", CM_DEPENSE
+  MENUITEM SEPARATOR
+  MENUITEM "Liste des recettes", CM_LISTRECETTES
+  MENUITEM "Liste des dépenses", CM_LISTDEPENSES
+  MENUITEM "Déclaration 2035", CM_2035
+  MENUITEM "Liste des &AGA", CM_AGA
+  MENUITEM "Liste des &Impayés", CM_IMPAYES
+  MENUITEM "&Liste des Actes", CM_LISTACTES
+  MENUITEM "&Somme des actes", CM_SOMACTES
+  MENUITEM "Somme des &Encaissements", CM_SOMENCAISS
+  MENUITEM SEPARATOR
+  MENUITEM "Saisie des &Tiers-payants", CM_SAISIETP
+  MENUITEM "&Feuille de soins", CM_FEUILLESOINS
+  MENUITEM SEPARATOR
+  MENUITEM "Import fichier &Noemie", CM_IMPORTNOEMIE
+ }
+
+ POPUP "&Outils"
+ {
+  MENUITEM "&Matériels", CM_MATERIELS
+  MENUITEM "&Reconvoquer", CM_RECONVOC
+  POPUP "&Episodus"
+  {
+   MENUITEM "&Paramètres episodus", CM_EPISO_LEARN
+   MENUITEM "Paramètres &mails", CM_EPISO_START
+   MENUITEM SEPARATOR
+   MENUITEM "Paramètres de &capture", CM_EPISO_MODELS
+   MENUITEM "Créer en-tête", CM_NEW_ENTETE
+   MENUITEM "Modifier en-tête", CM_MOD_ENTETE
+   MENUITEM SEPARATOR
+   MENUITEM "&Outils episodus", CM_EPISO_STOP
+  }
+
+
+  MENUITEM "&Blackboard", CM_BBK
+  MENUITEM "Outils &système", CM_OUTILS
+  MENUITEM "&Gestion des fils guides", CM_GROUPGD
+  MENUITEM "&Paramètres d'impression", CM_PARAM_PRINT
+  MENUITEM SEPARATOR
+  MENUITEM "Re&chercher...", CM_REQUETE
+  MENUITEM "Resul&tats...", CM_RESULT
+  MENUITEM SEPARATOR
+  MENUITEM "Referencer Archetype", CM_REFARCH
+  MENUITEM "Edition d'Archétype", CM_ARCHEDIT
+  MENUITEM "Edition Referentiel", CM_REFEDIT
+  MENUITEM "Edition Modèle de publication", CM_TPLEDIT
+  MENUITEM SEPARATOR
+  MENUITEM "Lancer une sauvegarde", CM_SAUVEGARDE
+ }
+ MENUITEM Separator
+ POPUP "F&enêtre"
+ {
+  MENUITEM "&Cascade", CM_CASCADECHILDREN
+  MENUITEM "&Mosaïque", CM_TILECHILDREN
+  MENUITEM "&Réorganiser les icônes", CM_ARRANGEICONS
+//  MENUITEM "&Tout fermer", CM_CLOSECHILDREN
+ }
+
+ MENUITEM Separator
+ POPUP "&Aide"
+ {
+  MENUITEM "&Aide en ligne\tF1", CM_HELP
+  MENUITEM Separator
+  MENUITEM "A &propos de...", CM_ABOUT
+ }
+}
+
+IDM_MDICMND_MODULE MENU
+{
+ POPUP "&Fichier"
+ {
+  MENUITEM "&Fermer", CM_FILECLOSE
+  MENUITEM "&Enregistrer", CM_ENREGISTRE
+  MENUITEM SEPARATOR
+  MENUITEM "&Publier", CM_IMPRIME
+  MENUITEM "&Visualiser", CM_VISUAL
+  MENUITEM SEPARATOR
+  MENUITEM "&Quitter", CM_EXIT
+ }
+
+ MENUITEM Separator
+ MENUITEM Separator
+ MENUITEM Separator
+ POPUP "&Personnes"
+ {
+  MENUITEM "Changer/créer &patient", CM_NEWPAT
+  MENUITEM "&Dossier patient", CM_CHEMISE
+  MENUITEM "F&ermer patient", CM_BUREAU
+  MENUITEM SEPARATOR
+  MENUITEM "Changer &utilisateur", CM_NEWDOC
+  MENUITEM "&Créer utilisateur", CM_CREATDOC
+  MENUITEM "&Modifier utilisateur", CM_MODIFDOC
+ }
+
+ POPUP "&Fonctions"
+ {
+  MENUITEM "Lancement", CM_FUNCTION
+ }
+
+ POPUP "&Episodus"
+ {
+  MENUITEM "&Ouvrir la Ligne de vie", CM_LDV
+  MENUITEM "&Médicaments", CM_LDV_DRUGS
+  MENUITEM "P&rocédures", CM_PROCESS
+  MENUITEM "&Objectifs de santé", CM_LDV_GOALS
+  MENUITEM SEPARATOR
+  MENUITEM "&Elaboration du message", CM_PROMET_MESSAGE
+  MENUITEM "&Envoi des données au serveur", CM_PROMET_SEND
+  MENUITEM "&Préparation des données diogène", CM_DIOGENE
+  MENUITEM SEPARATOR
+  MENUITEM "&Navigation sur le serveur", CM_PROMET_SURF
+  MENUITEM SEPARATOR
+  MENUITEM "&Zoom sur la Ligne de vie", CM_LDV_ZOOMIN
+  MENUITEM "&Elargir sur la Ligne de vie", CM_LDV_ZOOMOUT
+ }
+
+ MENUITEM Separator
+ POPUP "F&enêtre"
+ {
+  MENUITEM "&Cascade", CM_CASCADECHILDREN
+  MENUITEM "&Mosaïque", CM_TILECHILDREN
+  MENUITEM "&Réorganiser les icônes", CM_ARRANGEICONS
+//  MENUITEM "&Tout fermer", CM_CLOSECHILDREN
+ }
+
+ MENUITEM Separator
+ POPUP "&Aide"
+ {
+  MENUITEM "&Aide en ligne\tF1", CM_HELP
+  MENUITEM Separator
+  MENUITEM "A &propos de...", CM_ABOUT
+ }
+}
+
+//
+// Menu de la fiche Admin
+//
+IDM_ADMIN MENU
+{
+ POPUP "&Fichier"
+ {
+  POPUP "&Nouveau"
+  {
+   MENUITEM "Nouveau compte-&rendu", CM_NEWCR
+   MENUITEM "Nouvelle &consultation", CM_NEWCS
+   MENUITEM "Nouvelle &note", CM_NEWCONSULT
+   MENUITEM "Nouveau fichier &texte", CM_NEWTTXT
+   MENUITEM "Nouveau fichier &word", CM_NEWTMPL
+   MENUITEM "Nouveau &formulaire", CM_QUESTIONNAIRE
+  }
+
+  POPUP "&Ouvrir"
+  {
+   MENUITEM "Ouvrir fichier &texte", CM_OPENTTXT
+   MENUITEM "Ouvrir fichier &word", CM_OPENTMPL
+  }
+
+  MENUITEM "&Importer", CM_IMPORTE
+  MENUITEM "I&mporter Images", CM_IMPORTIMG
+  // MENUITEM "Capt&urer des images", CM_CAPTUREIMG
+  MENUITEM "E&dition d'images", CM_PANNEL
+  MENUITEM "&Fermer", CM_FILECLOSE
+  MENUITEM "&Enregistrer", CM_ENREGISTRE
+  MENUITEM SEPARATOR
+  MENUITEM "&Composer", CM_COMPOSE
+  MENUITEM "&Publier", CM_IMPRIME
+  MENUITEM "&Visualiser", CM_VISUAL
+  MENUITEM SEPARATOR
+  MENUITEM "&Quitter", CM_EXIT
+ }
+
+ MENUITEM Separator
+ MENUITEM Separator
+ MENUITEM Separator
+ POPUP "&Personnes"
+ {
+  MENUITEM "Changer/créer &patient", CM_NEWPAT
+  MENUITEM "Modifier p&atient", CM_ADMIN_MODIF
+  MENUITEM "&Reconvoquer patient", CM_ADMIN_MODIFDC
+  MENUITEM "&Dossier patient", CM_CHEMISE
+  MENUITEM "F&ermer patient", CM_BUREAU
+  // MENUITEM SEPARATOR
+  // MENUITEM "Carte &Vitale", CM_CVITALE
+  // MENUITEM "&Fiche compta", CM_CREATCOMPTA
+  // MENUITEM "&Situation", CM_MODIFCOMPTA
+  MENUITEM SEPARATOR
+  MENUITEM "Changer &utilisateur", CM_NEWDOC
+  MENUITEM "&Créer utilisateur", CM_CREATDOC
+  MENUITEM "&Modifier utilisateur", CM_MODIFDOC
+  MENUITEM SEPARATOR
+  MENUITEM "Créer co&rrespondant", CM_CREATCOR
+  MENUITEM "Modifier corres&pondant", CM_MODIFCOR
+  MENUITEM SEPARATOR
+  MENUITEM "Gestion de l'équipe de santé", CM_HEALTHTEAM
+  MENUITEM "Importer patient", CM_IMPORT_PATIENT
+  MENUITEM "Importer correspondant", CM_IMPORT_CORRESP
+  MENUITEM "Importer utilisateur", CM_IMPORT_USER
+  MENUITEM SEPARATOR
+  MENUITEM "Mise à &jour patient depuis Ligne de vie", CM_SYNCHRO_IMP_THIS_PAT
+  MENUITEM "S&ynchronisation patient vers Ligne de vie", CM_SYNCHRO_EXP_THIS_PAT
+ }
+
+ POPUP "&Fonctions"
+ {
+  MENUITEM "Lancement", CM_FUNCTION
+ }
+
+ POPUP "&Episodus"
+ {
+  MENUITEM "&Ouvrir la Ligne de vie", CM_LDV
+  MENUITEM "&Médicaments", CM_LDV_DRUGS
+  MENUITEM "P&rocédures", CM_PROCESS
+  MENUITEM "&Objectifs de santé", CM_LDV_GOALS
+  MENUITEM SEPARATOR
+  MENUITEM "&Elaboration du message", CM_PROMET_MESSAGE
+  MENUITEM "&Envoi des données au serveur", CM_PROMET_SEND
+  MENUITEM "&Préparation des données diogène", CM_DIOGENE
+  MENUITEM SEPARATOR
+  MENUITEM "&Navigation sur le serveur", CM_PROMET_SURF
+  MENUITEM SEPARATOR
+  MENUITEM "&Zoom sur la Ligne de vie", CM_LDV_ZOOMIN
+  MENUITEM "&Elargir sur la Ligne de vie", CM_LDV_ZOOMOUT
+ }
+
+ POPUP "&Comptabilité"
+ {
+  MENUITEM "Saisie d'une &recette", CM_RECETTE
+  MENUITEM "Saisie d'une &dépense", CM_DEPENSE
+  MENUITEM SEPARATOR
+  MENUITEM "Liste des recettes", CM_LISTRECETTES
+  MENUITEM "Liste des dépenses", CM_LISTDEPENSES
+  MENUITEM "Déclaration 2035", CM_2035
+  MENUITEM "Liste des &AGA", CM_AGA
+  MENUITEM "Liste des &Impayés", CM_IMPAYES
+  MENUITEM "&Liste des Actes", CM_LISTACTES
+  MENUITEM "&Somme des actes", CM_SOMACTES
+  MENUITEM "Somme des &Encaissements", CM_SOMENCAISS
+  MENUITEM SEPARATOR
+  MENUITEM "Saisie des &Tiers-payants", CM_SAISIETP
+  MENUITEM "&Feuille de soins", CM_FEUILLESOINS
+  MENUITEM SEPARATOR
+  MENUITEM "Import fichier &Noemie", CM_IMPORTNOEMIE
+ }
+
+#ifndef N_TIERS
+ POPUP "&Outils"
+ {
+  MENUITEM "&Matériels", CM_MATERIELS
+  MENUITEM "&Reconvoquer", CM_RECONVOC
+  POPUP "&Episodus"
+  {
+   MENUITEM "&Paramètres serveur", CM_EPISO_LEARN
+   MENUITEM "&Paramètres mails", CM_EPISO_START
+   MENUITEM SEPARATOR
+   MENUITEM "Paramètres de &capture", CM_EPISO_MODELS
+   MENUITEM SEPARATOR
+   MENUITEM "&Outils episodus", CM_EPISO_STOP
+  }
+
+  MENUITEM "&Blackboard", CM_BBK
+  MENUITEM "Outils &système", CM_OUTILS
+  MENUITEM "&Gestion des fils guides", CM_GROUPGD
+  MENUITEM "&Paramètres d'impression", CM_PARAM_PRINT
+  MENUITEM SEPARATOR
+  MENUITEM "Re&chercher...", CM_REQUETE
+  MENUITEM "Resul&tats...", CM_RESULT
+  MENUITEM SEPARATOR
+  MENUITEM "Referencer Archetype", CM_REFARCH
+  MENUITEM "Edition d'Archétype", CM_ARCHEDIT
+  MENUITEM "Edition Referentiel", CM_REFEDIT
+  MENUITEM "Edition Modèle de publication", CM_TPLEDIT
+  MENUITEM "Créer en-tête", CM_NEW_ENTETE
+  MENUITEM "Modifier en-tête", CM_MOD_ENTETE
+  MENUITEM SEPARATOR
+  MENUITEM "Lancer une sauvegarde", CM_SAUVEGARDE
+ }
+#endif
+
+ MENUITEM Separator
+ POPUP "F&enêtre"
+ {
+  MENUITEM "&Cascade", CM_CASCADECHILDREN
+  MENUITEM "&Mosaïque", CM_TILECHILDREN
+  MENUITEM "&Réorganiser les icônes", CM_ARRANGEICONS
+//  MENUITEM "&Tout fermer", CM_CLOSECHILDREN
+ }
+
+ MENUITEM Separator
+ POPUP "&Aide"
+ {
+  MENUITEM "&Aide en ligne\tF1", CM_HELP
+  MENUITEM Separator
+  MENUITEM "&A propos de...", CM_ABOUT
+ }
+}
+
+IDM_ADMIN_MODULE MENU
+{
+ POPUP "&Fichier"
+ {
+  MENUITEM "&Quitter", CM_EXIT
+ }
+
+ MENUITEM Separator
+ MENUITEM Separator
+ MENUITEM Separator
+ POPUP "&Personnes"
+ {
+  MENUITEM "Changer/créer &patient", CM_NEWPAT
+  MENUITEM "Modifier p&atient", CM_ADMIN_MODIF
+  MENUITEM "&Dossier patient", CM_CHEMISE
+  MENUITEM SEPARATOR
+  MENUITEM "Changer &utilisateur", CM_NEWDOC
+  MENUITEM "&Créer utilisateur", CM_CREATDOC
+  MENUITEM "&Modifier utilisateur", CM_MODIFDOC
+ }
+
+ POPUP "&Fonctions"
+ {
+  MENUITEM "Lancement", CM_FUNCTION
+ }
+
+ POPUP "&Episodus"
+ {
+  MENUITEM "&Ouvrir la Ligne de vie", CM_LDV
+  MENUITEM "&Médicaments", CM_LDV_DRUGS
+  MENUITEM "P&rocédures", CM_PROCESS
+  MENUITEM "&Objectifs de santé", CM_LDV_GOALS
+  MENUITEM SEPARATOR
+  MENUITEM "&Elaboration du message", CM_PROMET_MESSAGE
+  MENUITEM "&Envoi des données au serveur", CM_PROMET_SEND
+  MENUITEM "&Préparation des données diogène", CM_DIOGENE
+  MENUITEM SEPARATOR
+  MENUITEM "&Navigation sur le serveur", CM_PROMET_SURF
+  MENUITEM SEPARATOR
+  MENUITEM "&Zoom sur la Ligne de vie", CM_LDV_ZOOMIN
+  MENUITEM "&Elargir sur la Ligne de vie", CM_LDV_ZOOMOUT
+ }
+
+ POPUP "&Outils"
+ {
+  POPUP "&Episodus"
+  {
+   MENUITEM "&Paramètres serveur", CM_EPISO_LEARN
+   MENUITEM "&Paramètres mails", CM_EPISO_START
+   MENUITEM SEPARATOR
+   MENUITEM "Paramètres de &capture", CM_EPISO_MODELS
+   MENUITEM SEPARATOR
+   MENUITEM "&Outils episodus", CM_EPISO_STOP
+  }
+
+  MENUITEM "Referencer Archetype", CM_REFARCH
+  MENUITEM SEPARATOR
+  MENUITEM "Lancer une sauvegarde", CM_SAUVEGARDE
+ }
+
+ MENUITEM Separator
+ POPUP "F&enêtre"
+ {
+  MENUITEM "&Cascade", CM_CASCADECHILDREN
+  MENUITEM "&Mosaïque", CM_TILECHILDREN
+  MENUITEM "&Réorganiser les icônes", CM_ARRANGEICONS
+//  MENUITEM "&Tout fermer", CM_CLOSECHILDREN
+ }
+
+ MENUITEM Separator
+ POPUP "&Aide"
+ {
+  MENUITEM "&Aide en ligne\tF1", CM_HELP
+  MENUITEM Separator
+  MENUITEM "&A propos de...", CM_ABOUT
+ }
+}
+//
+// Menu de l'historique
+//
+IDM_HISTO MENU
+{
+ MENUITEM Separator
+ MENUITEM Separator
+ MENUITEM Separator
+ POPUP "&Personnes"
+ {
+  MENUITEM "Changer/créer &patient", CM_NEWPAT
+  MENUITEM "&Dossier patient", CM_CHEMISE
+  MENUITEM "F&ermer patient", CM_BUREAU
+  // MENUITEM SEPARATOR
+  // MENUITEM "Carte &Vitale", CM_CVITALE
+  // MENUITEM "&Fiche compta", CM_CREATCOMPTA
+  // MENUITEM "&Situation", CM_MODIFCOMPTA
+  MENUITEM SEPARATOR
+  MENUITEM "Changer &utilisateur", CM_NEWDOC
+  MENUITEM "&Créer utilisateur", CM_CREATDOC
+  MENUITEM "&Modifier utilisateur", CM_MODIFDOC
+  MENUITEM SEPARATOR
+  MENUITEM "Créer co&rrespondant", CM_CREATCOR
+  MENUITEM "Modifier corres&pondant", CM_MODIFCOR
+  MENUITEM SEPARATOR
+  MENUITEM "Gestion de l'équipe de santé", CM_HEALTHTEAM
+  MENUITEM "Importer patient", CM_IMPORT_PATIENT
+	MENUITEM "Importer correspondant", CM_IMPORT_CORRESP
+  MENUITEM "Importer utilisateur", CM_IMPORT_USER
+  MENUITEM SEPARATOR
+  MENUITEM "Mise à &jour patient depuis Ligne de vie", CM_SYNCHRO_IMP_THIS_PAT
+  MENUITEM "S&ynchronisation patient vers Ligne de vie", CM_SYNCHRO_EXP_THIS_PAT
+ }
+
+ POPUP "&Fonctions"
+ {
+  MENUITEM "Lancement", CM_FUNCTION
+ }
+
+ POPUP "&Episodus"
+ {
+  MENUITEM "&Ouvrir la Ligne de vie", CM_LDV
+  MENUITEM "&Médicaments", CM_LDV_DRUGS
+  MENUITEM "P&rocédures", CM_PROCESS
+  MENUITEM "&Objectifs de santé", CM_LDV_GOALS
+  MENUITEM SEPARATOR
+  MENUITEM "&Elaboration du message", CM_PROMET_MESSAGE
+  MENUITEM "&Envoi des données au serveur", CM_PROMET_SEND
+  MENUITEM "&Préparation des données diogène", CM_DIOGENE
+  MENUITEM SEPARATOR
+  MENUITEM "&Navigation sur le serveur", CM_PROMET_SURF
+  MENUITEM SEPARATOR
+  MENUITEM "&Zoom sur la Ligne de vie", CM_LDV_ZOOMIN
+  MENUITEM "&Elargir sur la Ligne de vie", CM_LDV_ZOOMOUT
+ }
+
+ POPUP "&Comptabilité"
+ {
+  MENUITEM "Saisie d'une &recette", CM_RECETTE
+  MENUITEM "Saisie d'une &dépense", CM_DEPENSE
+  MENUITEM SEPARATOR
+  MENUITEM "Liste des recettes", CM_LISTRECETTES
+  MENUITEM "Liste des dépenses", CM_LISTDEPENSES
+  MENUITEM "Déclaration 2035", CM_2035
+  MENUITEM "Liste des &AGA", CM_AGA
+  MENUITEM "Liste des &Impayés", CM_IMPAYES
+  MENUITEM "&Liste des Actes", CM_LISTACTES
+  MENUITEM "&Somme des actes", CM_SOMACTES
+  MENUITEM "Somme des &Encaissements", CM_SOMENCAISS
+  MENUITEM SEPARATOR
+  MENUITEM "Saisie des &Tiers-payants", CM_SAISIETP
+  MENUITEM "&Feuille de soins", CM_FEUILLESOINS
+  MENUITEM SEPARATOR
+  MENUITEM "Import fichier &Noemie", CM_IMPORTNOEMIE
+ }
+
+ POPUP "&Outils"
+ {
+  MENUITEM "&Matériels", CM_MATERIELS
+  MENUITEM "&Reconvoquer", CM_RECONVOC
+  POPUP "&Episodus"
+  {
+   MENUITEM "&Paramètres serveur", CM_EPISO_LEARN
+   MENUITEM "&Paramètres mails", CM_EPISO_START
+   MENUITEM SEPARATOR
+   MENUITEM "Paramètres de &capture", CM_EPISO_MODELS
+   MENUITEM SEPARATOR
+   MENUITEM "&Outils episodus", CM_EPISO_STOP
+  }
+
+  MENUITEM "Outils &système", CM_OUTILS
+  MENUITEM "&Gestion des fils guides", CM_GROUPGD
+  MENUITEM "&Paramètres d'impression", CM_PARAM_PRINT
+  MENUITEM SEPARATOR
+  MENUITEM "Re&chercher...", CM_REQUETE
+  MENUITEM "Resul&tats...", CM_RESULT
+  MENUITEM SEPARATOR
+  MENUITEM "Referencer Archetype", CM_REFARCH
+  MENUITEM "Edition d'Archétype", CM_ARCHEDIT
+  MENUITEM "Edition Referentiel", CM_REFEDIT
+  MENUITEM "Edition Modèle de publication", CM_TPLEDIT
+  MENUITEM SEPARATOR
+  MENUITEM "Lancer une sauvegarde", CM_SAUVEGARDE
+ }
+
+ POPUP "&Historique"
+ {
+  MENUITEM "&Tout", CM_0P
+  MENUITEM "&1+", CM_1P
+  MENUITEM "&2+", CM_2P
+  MENUITEM "&3+", CM_3P
+  MENUITEM "&4+", CM_4P
+ }
+
+ MENUITEM Separator
+ MENUITEM Separator
+ POPUP "&Aide"
+ {
+  MENUITEM "&Aide en ligne\aF1", CM_HELP
+  MENUITEM Separator
+  MENUITEM "&A propos de...", CM_ABOUT
+ }
+}
+
+IDM_HISTO_MODULE MENU
+{
+ MENUITEM Separator
+ MENUITEM Separator
+ MENUITEM Separator
+ POPUP "&Personnes"
+ {
+  MENUITEM "Changer/créer &patient", CM_NEWPAT
+  MENUITEM "&Dossier patient", CM_CHEMISE
+  MENUITEM SEPARATOR
+  MENUITEM "Changer &utilisateur", CM_NEWDOC
+  MENUITEM "&Créer utilisateur", CM_CREATDOC
+  MENUITEM "&Modifier utilisateur", CM_MODIFDOC
+ }
+
+ POPUP "&Fonctions"
+ {
+  MENUITEM "Lancement", CM_FUNCTION
+ }
+
+ POPUP "&Episodus"
+ {
+  MENUITEM "&Ouvrir la Ligne de vie", CM_LDV
+  MENUITEM "&Médicaments", CM_LDV_DRUGS
+  MENUITEM "P&rocédures", CM_PROCESS
+  MENUITEM "&Objectifs de santé", CM_LDV_GOALS
+  MENUITEM SEPARATOR
+  MENUITEM "&Elaboration du message", CM_PROMET_MESSAGE
+  MENUITEM "&Envoi des données au serveur", CM_PROMET_SEND
+  MENUITEM "&Préparation des données diogène", CM_DIOGENE
+  MENUITEM SEPARATOR
+  MENUITEM "&Navigation sur le serveur", CM_PROMET_SURF
+  MENUITEM SEPARATOR
+  MENUITEM "&Zoom sur la Ligne de vie", CM_LDV_ZOOMIN
+  MENUITEM "&Elargir sur la Ligne de vie", CM_LDV_ZOOMOUT
+ }
+
+ POPUP "&Outils"
+ {
+  POPUP "&Episodus"
+  {
+   MENUITEM "&Paramètres serveur", CM_EPISO_LEARN
+   MENUITEM "&Paramètres mails", CM_EPISO_START
+   MENUITEM SEPARATOR
+   MENUITEM "Paramètres de &capture", CM_EPISO_MODELS
+   MENUITEM SEPARATOR
+   MENUITEM "&Outils episodus", CM_EPISO_STOP
+  }
+
+  MENUITEM "Referencer Archetype", CM_REFARCH
+  MENUITEM SEPARATOR
+  MENUITEM "Lancer une sauvegarde", CM_SAUVEGARDE
+ }
+
+ POPUP "&Historique"
+ {
+  MENUITEM "&Tout", CM_0P
+  MENUITEM "&1+", CM_1P
+  MENUITEM "&2+", CM_2P
+  MENUITEM "&3+", CM_3P
+  MENUITEM "&4+", CM_4P
+ }
+
+ MENUITEM Separator
+ MENUITEM Separator
+ POPUP "&Aide"
+ {
+  MENUITEM "&Aide en ligne\aF1", CM_HELP
+  MENUITEM Separator
+  MENUITEM "&A propos de...", CM_ABOUT
+ }
+
+}
+
+//
+// Vue HTML
+//
+IDM_VISUALVIEW MENU 
+{
+ POPUP "&Fichier"
+ {
+  POPUP "&Nouveau"
+  {
+   MENUITEM "Nouveau compte-&rendu", CM_NEWCR
+   MENUITEM "Nouvelle &consultation", CM_NEWCS
+   MENUITEM "Nouvelle &note", CM_NEWCONSULT
+   MENUITEM "Nouveau fichier &texte", CM_NEWTTXT
+   MENUITEM "Nouveau fichier &word", CM_NEWTMPL
+   MENUITEM "Nouveau &formulaire", CM_QUESTIONNAIRE
+  }
+
+  POPUP "&Ouvrir"
+  {
+   MENUITEM "Ouvrir fichier &texte", CM_OPENTTXT
+   MENUITEM "Ouvrir fichier &word", CM_OPENTMPL
+  }
+
+  MENUITEM "&Importer", CM_IMPORTE
+  MENUITEM "I&mporter Images", CM_IMPORTIMG
+  // MENUITEM "Capt&urer des images", CM_CAPTUREIMG
+  MENUITEM "E&dition d'images", CM_PANNEL
+  MENUITEM "&Fermer", CM_FILECLOSE
+  MENUITEM "&Enregistrer", CM_ENREGISTRE
+  MENUITEM SEPARATOR
+  MENUITEM "&Composer", CM_COMPOSE
+  MENUITEM "&Publier", CM_IMPRIME
+  MENUITEM "&Visualiser", CM_VISUAL
+  MENUITEM SEPARATOR
+  MENUITEM "&Quitter", CM_EXIT
+ }
+
+ MENUITEM Separator
+ POPUP "&Document"
+ {
+  MENUITEM "&Editer", IDC_EDITION_HTM
+  MENUITEM "&Rafraîchir", IDC_RAFRAICHIR_HTM
+  MENUITEM SEPARATOR
+  MENUITEM "&Précédent", CM_PRECEDENT
+  MENUITEM "&Suivant", CM_SUIVANT
+ }
+
+ MENUITEM Separator
+ MENUITEM Separator
+ POPUP "&Personnes"
+ {
+  MENUITEM "Changer/créer &patient", CM_NEWPAT
+  MENUITEM "&Dossier patient", CM_CHEMISE
+  MENUITEM "F&ermer patient", CM_BUREAU
+  // MENUITEM SEPARATOR
+  // MENUITEM "Carte &Vitale", CM_CVITALE
+  // MENUITEM "&Fiche compta", CM_CREATCOMPTA
+  // MENUITEM "&Situation", CM_MODIFCOMPTA
+  MENUITEM SEPARATOR
+  MENUITEM "Changer &utilisateur", CM_NEWDOC
+  MENUITEM "&Créer utilisateur", CM_CREATDOC
+  MENUITEM "&Modifier utilisateur", CM_MODIFDOC
+  MENUITEM "Créer en-tête", CM_NEW_ENTETE
+  MENUITEM "Modifier en-tête", CM_MOD_ENTETE
+  MENUITEM SEPARATOR
+  MENUITEM "Créer co&rrespondant", CM_CREATCOR
+  MENUITEM "Modifier corres&pondant", CM_MODIFCOR
+  MENUITEM SEPARATOR
+  MENUITEM "Gestion de l'équipe de santé", CM_HEALTHTEAM
+  MENUITEM "Importer patient", CM_IMPORT_PATIENT
+  MENUITEM "Importer correspondant", CM_IMPORT_CORRESP
+  MENUITEM "Importer utilisateur", CM_IMPORT_USER
+  MENUITEM SEPARATOR
+  MENUITEM "Mise à &jour patient depuis Ligne de vie", CM_SYNCHRO_IMP_THIS_PAT
+  MENUITEM "S&ynchronisation patient vers Ligne de vie", CM_SYNCHRO_EXP_THIS_PAT
+ }
+
+ POPUP "&Fonctions"
+ {
+  MENUITEM "Lancement", CM_FUNCTION
+ }
+
+ POPUP "&Episodus"
+ {
+  MENUITEM "&Ouvrir la Ligne de vie", CM_LDV
+  MENUITEM "&Médicaments", CM_LDV_DRUGS
+  MENUITEM "P&rocédures", CM_PROCESS
+  MENUITEM "&Objectifs de santé", CM_LDV_GOALS
+  MENUITEM SEPARATOR
+  MENUITEM "&Elaboration du message", CM_PROMET_MESSAGE
+  MENUITEM "&Envoi des données au serveur", CM_PROMET_SEND
+  MENUITEM "&Préparation des données diogène", CM_DIOGENE
+  MENUITEM SEPARATOR
+  MENUITEM "&Navigation sur le serveur", CM_PROMET_SURF
+  MENUITEM SEPARATOR
+  MENUITEM "&Zoom sur la Ligne de vie", CM_LDV_ZOOMIN
+  MENUITEM "&Elargir sur la Ligne de vie", CM_LDV_ZOOMOUT
+ }
+
+ POPUP "&Comptabilité"
+ {
+  MENUITEM "Saisie d'une &recette", CM_RECETTE
+  MENUITEM "Saisie d'une &dépense", CM_DEPENSE
+  MENUITEM SEPARATOR
+  MENUITEM "Liste des recettes", CM_LISTRECETTES
+  MENUITEM "Liste des dépenses", CM_LISTDEPENSES
+  MENUITEM "Déclaration 2035", CM_2035
+  MENUITEM "Liste des &AGA", CM_AGA
+  MENUITEM "Liste des &Impayés", CM_IMPAYES
+  MENUITEM "&Liste des Actes", CM_LISTACTES
+  MENUITEM "&Somme des actes", CM_SOMACTES
+  MENUITEM "Somme des &Encaissements", CM_SOMENCAISS
+  MENUITEM SEPARATOR
+  MENUITEM "Saisie des &Tiers-payants", CM_SAISIETP
+  MENUITEM "&Feuille de soins", CM_FEUILLESOINS
+  MENUITEM SEPARATOR
+  MENUITEM "Import fichier &Noemie", CM_IMPORTNOEMIE
+ }
+
+ POPUP "&Outils"
+ {
+  MENUITEM "&Matériels", CM_MATERIELS
+  MENUITEM "&Reconvoquer", CM_RECONVOC
+  POPUP "&Episodus"
+  {
+   MENUITEM "&Paramètres serveur", CM_EPISO_LEARN
+   MENUITEM "&Paramètres mails", CM_EPISO_START
+   MENUITEM SEPARATOR
+   MENUITEM "Paramètres de &capture", CM_EPISO_MODELS
+   MENUITEM SEPARATOR
+   MENUITEM "&Outils episodus", CM_EPISO_STOP
+  }
+
+  MENUITEM "Outils &système", CM_OUTILS
+  MENUITEM "&Gestion des fils guides", CM_GROUPGD
+  MENUITEM "&Paramètres d'impression", CM_PARAM_PRINT
+  MENUITEM SEPARATOR
+  MENUITEM "Re&chercher...", CM_REQUETE
+  MENUITEM "Resul&tats...", CM_RESULT
+  MENUITEM SEPARATOR
+  MENUITEM "Referencer Archetype", CM_REFARCH
+  MENUITEM "Edition d'Archétype", CM_ARCHEDIT
+  MENUITEM "Edition Referentiel", CM_REFEDIT
+  MENUITEM "Edition Modèle de publication", CM_TPLEDIT
+  MENUITEM SEPARATOR
+  MENUITEM "Lancer une sauvegarde", CM_SAUVEGARDE
+ }
+
+ MENUITEM Separator
+ POPUP "F&enêtre"
+ {
+  MENUITEM "&Cascade", CM_CASCADECHILDREN
+  MENUITEM "&Mosaïque", CM_TILECHILDREN
+  MENUITEM "&Réorganiser les icônes", CM_ARRANGEICONS
+//  MENUITEM "&Tout fermer", CM_CLOSECHILDREN
+ }
+
+ MENUITEM Separator
+ POPUP "&Aide"
+ {
+  MENUITEM "&Aide en ligne\tF1", CM_HELP
+  MENUITEM Separator
+  MENUITEM "A &propos de...", CM_ABOUT
+ }
+}
+
+IDM_VISUALVIEW_MODU MENU
+{
+ POPUP "&Fichier"
+ {
+  MENUITEM "&Fermer", CM_FILECLOSE
+  MENUITEM "&Enregistrer", CM_ENREGISTRE
+  MENUITEM SEPARATOR
+  MENUITEM "&Composer", CM_COMPOSE
+  MENUITEM "&Publier", CM_IMPRIME
+  MENUITEM "&Visualiser", CM_VISUAL
+  MENUITEM SEPARATOR
+  MENUITEM "&Quitter", CM_EXIT
+ }
+
+ MENUITEM Separator
+ POPUP "&Document"
+ {
+  MENUITEM "&Editer", IDC_EDITION_HTM
+  MENUITEM "&Rafraîchir", IDC_RAFRAICHIR_HTM
+  MENUITEM SEPARATOR
+  MENUITEM "&Précédent", CM_PRECEDENT
+  MENUITEM "&Suivant", CM_SUIVANT
+ }
+
+ MENUITEM Separator
+ MENUITEM Separator
+ POPUP "&Personnes"
+ {
+  MENUITEM "Changer/créer &patient", CM_NEWPAT
+  MENUITEM "&Dossier patient", CM_CHEMISE
+  MENUITEM SEPARATOR
+  MENUITEM "Changer &utilisateur", CM_NEWDOC
+  MENUITEM "&Créer utilisateur", CM_CREATDOC
+  MENUITEM "&Modifier utilisateur", CM_MODIFDOC
+ }
+
+ POPUP "&Fonctions"
+ {
+  MENUITEM "Lancement", CM_FUNCTION
+ }
+
+ POPUP "&Episodus"
+ {
+  MENUITEM "&Ouvrir la Ligne de vie", CM_LDV
+  MENUITEM "&Médicaments", CM_LDV_DRUGS
+  MENUITEM "P&rocédures", CM_PROCESS
+  MENUITEM "&Objectifs de santé", CM_LDV_GOALS
+  MENUITEM SEPARATOR
+  MENUITEM "&Elaboration du message", CM_PROMET_MESSAGE
+  MENUITEM "&Envoi des données au serveur", CM_PROMET_SEND
+  MENUITEM "&Préparation des données diogène", CM_DIOGENE
+  MENUITEM SEPARATOR
+  MENUITEM "&Navigation sur le serveur", CM_PROMET_SURF
+  MENUITEM SEPARATOR
+  MENUITEM "&Zoom sur la Ligne de vie", CM_LDV_ZOOMIN
+  MENUITEM "&Elargir sur la Ligne de vie", CM_LDV_ZOOMOUT
+ }
+
+ POPUP "&Outils"
+ {
+  POPUP "&Episodus"
+  {
+   MENUITEM "&Paramètres serveur", CM_EPISO_LEARN
+   MENUITEM "&Paramètres mails", CM_EPISO_START
+   MENUITEM SEPARATOR
+   MENUITEM "Paramètres de &capture", CM_EPISO_MODELS
+   MENUITEM SEPARATOR
+   MENUITEM "&Outils episodus", CM_EPISO_STOP
+  }
+
+  MENUITEM "Referencer Archetype", CM_REFARCH
+  MENUITEM SEPARATOR
+  MENUITEM "Lancer une sauvegarde", CM_SAUVEGARDE
+ }
+
+ MENUITEM Separator
+ POPUP "F&enêtre"
+ {
+  MENUITEM "&Cascade", CM_CASCADECHILDREN
+  MENUITEM "&Mosaïque", CM_TILECHILDREN
+  MENUITEM "&Réorganiser les icônes", CM_ARRANGEICONS
+//  MENUITEM "&Tout fermer", CM_CLOSECHILDREN
+ }
+
+ MENUITEM Separator
+ POPUP "&Aide"
+ {
+  MENUITEM "&Aide en ligne\tF1", CM_HELP
+  MENUITEM Separator
+  MENUITEM "A &propos de...", CM_ABOUT
+ }
+}
+IDM_CRVIEW MENU{
+ MENUITEM Separator
+ POPUP "&Edition"
+ {
+  MENUITEM "Ann&uler\aCtrl+Z", CM_EDITUNDO
+  MENUITEM SEPARATOR
+  MENUITEM "&Couper\aCtrl+X", CM_EDITCUT
+  MENUITEM "C&opier\aCtrl+C", CM_EDITCOPY
+  MENUITEM "&Effacer", CM_EDITCLEAR
+ }
+}
+
+IDM_MGVIEW MENU{
+ MENUITEM Separator
+ POPUP "&Edit"
+ {
+  MENUITEM "&Undo\aCtrl+Z", CM_EDITUNDO
+  MENUITEM Separator
+  MENUITEM "&Cut\aCtrl+X", CM_EDITCUT
+  MENUITEM "C&opy\aCtrl+C", CM_EDITCOPY
+  MENUITEM "&Clear", CM_EDITCLEAR
+ }
+
+ POPUP "&Tools"
+ {
+  MENUITEM "Pen Si&ze", CM_PENSIZE
+  MENUITEM "Pen Colo&r", CM_PENCOLOR
+ }
+}
+
+//// Menu de nsttx
+//
+IDM_APPMENU MENU
+{
+ POPUP "&Fichier"
+ {
+  POPUP "&Nouveau"
+  {
+   MENUITEM "Nouveau compte-&rendu", CM_NEWCR
+   MENUITEM "Nouvelle &consultation", CM_NEWCS
+   MENUITEM "Nouvelle &note", CM_NEWCONSULT
+   MENUITEM "Nouveau fichier &texte", CM_NEWTTXT
+   MENUITEM "Nouveau fichier &word", CM_NEWTMPL
+   MENUITEM "Nouveau &formulaire", CM_QUESTIONNAIRE
+  }
+
+  POPUP "&Ouvrir"
+  {
+   MENUITEM "Ouvrir fichier &texte", CM_OPENTTXT
+   MENUITEM "Ouvrir fichier &word", CM_OPENTMPL
+  }
+
+  MENUITEM "&Vierge", CM_FILENEW
+  MENUITEM "&Ouvrir une lettre type", CM_LETTRETYPE
+  MENUITEM "&Importer", CM_IMPORTE
+  MENUITEM "I&mporter Images", CM_IMPORTIMG
+  // MENUITEM "Capt&urer des images", CM_CAPTUREIMG
+  MENUITEM "E&dition d'images", CM_PANNEL
+  MENUITEM "&Fermer", CM_FILECLOSE
+  MENUITEM SEPARATOR
+  MENUITEM "&Enregistrer", CM_ENREGISTRE
+  MENUITEM "Enregistrer &Sous", CM_FILESAVEAS
+  MENUITEM SEPARATOR
+  MENUITEM "&Composer", CM_COMPOSE
+  MENUITEM "&Publier", CM_IMPRIME
+  MENUITEM "&Visualiser", CM_VISUAL
+  MENUITEM SEPARATOR
+  MENUITEM "&Quitter", CM_EXIT
+ }
+
+ MENUITEM Separator
+ POPUP "&Edition"
+ {
+  MENUITEM "Ann&uler\tCtrl+Z", CM_EDITUNDO, GRAYED
+  MENUITEM SEPARATOR
+  MENUITEM "&Couper\tCtrl+X", CM_EDITCUT, GRAYED
+  MENUITEM "Co&pier\tCtrl+C", CM_EDITCOPY, GRAYED
+  MENUITEM "C&oller\tCtrl+V", CM_EDITPASTE, GRAYED
+  MENUITEM SEPARATOR
+  MENUITEM "&Effacer\tCtrl+Del", CM_EDITCLEAR, GRAYED
+  MENUITEM "&Détruire\tDel", CM_EDITDELETE, GRAYED
+ }
+
+ POPUP "&Recherche"
+ {
+  MENUITEM "&Rechercher...", CM_EDITFIND, GRAYED
+  MENUITEM "Rem&placer...", CM_EDITREPLACE, GRAYED
+  MENUITEM "Rechercher &Suivant\aF3", CM_EDITFINDNEXT, GRAYED
+ }
+
+ MENUITEM Separator
+ POPUP "&Afficher"
+ {
+  MENUITEM "Barre d'ou&tils", CM_VIEWTOOLBAR
+  MENUITEM "Barre de f&ormat", CM_VIEWSTATUSBAR
+ }
+
+ MENUITEM Separator
+ POPUP "&Personnes"
+ {
+  MENUITEM "Changer/créer &patient", CM_NEWPAT
+  MENUITEM "&Dossier patient", CM_CHEMISE
+  MENUITEM "F&ermer patient", CM_BUREAU
+  // MENUITEM SEPARATOR
+  // MENUITEM "Carte &Vitale", CM_CVITALE
+  // MENUITEM "&Fiche compta", CM_CREATCOMPTA
+  // MENUITEM "&Situation", CM_MODIFCOMPTA
+  MENUITEM SEPARATOR
+  MENUITEM "Changer &utilisateur", CM_NEWDOC
+  MENUITEM "&Créer utilisateur", CM_CREATDOC
+  MENUITEM "&Modifier utilisateur", CM_MODIFDOC
+  MENUITEM "Créer en-tête", CM_NEW_ENTETE
+  MENUITEM "Modifier en-tête", CM_MOD_ENTETE
+  MENUITEM SEPARATOR
+  MENUITEM "Créer co&rrespondant", CM_CREATCOR
+  MENUITEM "Modifier corres&pondant", CM_MODIFCOR
+  MENUITEM SEPARATOR
+  MENUITEM "Gestion de l'équipe de santé", CM_HEALTHTEAM
+  MENUITEM "Importer patient", CM_IMPORT_PATIENT
+  MENUITEM "Importer correspondant", CM_IMPORT_CORRESP
+  MENUITEM "Importer utilisateur", CM_IMPORT_USER
+  MENUITEM SEPARATOR
+  MENUITEM "Mise à &jour patient depuis Ligne de vie", CM_SYNCHRO_IMP_THIS_PAT
+  MENUITEM "S&ynchronisation patient vers Ligne de vie", CM_SYNCHRO_EXP_THIS_PAT
+ }
+
+ POPUP "&Fonctions"
+ {
+  MENUITEM "Lancement", CM_FUNCTION
+ }
+
+ POPUP "&Episodus"
+ {
+  MENUITEM "&Ouvrir la Ligne de vie", CM_LDV
+  MENUITEM "&Médicaments", CM_LDV_DRUGS
+  MENUITEM "P&rocédures", CM_PROCESS
+  MENUITEM "&Objectifs de santé", CM_LDV_GOALS
+  MENUITEM SEPARATOR
+  MENUITEM "&Elaboration du message", CM_PROMET_MESSAGE
+  MENUITEM "&Envoi des données au serveur", CM_PROMET_SEND
+  MENUITEM "&Préparation des données diogène", CM_DIOGENE
+  MENUITEM SEPARATOR
+  MENUITEM "&Navigation sur le serveur", CM_PROMET_SURF
+  MENUITEM SEPARATOR
+  MENUITEM "&Zoom sur la Ligne de vie", CM_LDV_ZOOMIN
+  MENUITEM "&Elargir sur la Ligne de vie", CM_LDV_ZOOMOUT
+ }
+
+ POPUP "&Comptabilité"
+ {
+  MENUITEM "Saisie d'une &recette", CM_RECETTE
+  MENUITEM "Saisie d'une &dépense", CM_DEPENSE
+  MENUITEM SEPARATOR
+  MENUITEM "Liste des recettes", CM_LISTRECETTES
+  MENUITEM "Liste des dépenses", CM_LISTDEPENSES
+  MENUITEM "Déclaration 2035", CM_2035
+  MENUITEM "Liste des &AGA", CM_AGA
+  MENUITEM "Liste des &Impayés", CM_IMPAYES
+  MENUITEM "&Liste des Actes", CM_LISTACTES
+  MENUITEM "&Somme des actes", CM_SOMACTES
+  MENUITEM "Somme des &Encaissements", CM_SOMENCAISS
+  MENUITEM SEPARATOR
+  MENUITEM "Saisie des &Tiers-payants", CM_SAISIETP
+  MENUITEM "&Feuille de soins", CM_FEUILLESOINS
+  MENUITEM SEPARATOR
+  MENUITEM "Import fichier &Noemie", CM_IMPORTNOEMIE
+ }
+
+ POPUP "&Outils"
+ {
+  MENUITEM "&Matériels", CM_MATERIELS
+  MENUITEM "&Reconvoquer", CM_RECONVOC
+  POPUP "&Episodus"
+  {
+   MENUITEM "&Paramètres serveur", CM_EPISO_LEARN
+   MENUITEM "Paramètres &mails", CM_EPISO_START
+   MENUITEM SEPARATOR
+   MENUITEM "Paramètres de &capture", CM_EPISO_MODELS
+   MENUITEM SEPARATOR
+   MENUITEM "&Outils episodus", CM_EPISO_STOP
+  }
+
+  MENUITEM "Outils &système", CM_OUTILS
+  MENUITEM "&Gestion des fils guides", CM_GROUPGD
+  MENUITEM "&Paramètres d'impression", CM_PARAM_PRINT
+  MENUITEM SEPARATOR
+  MENUITEM "Re&chercher...", CM_REQUETE
+  MENUITEM "Resul&tats...", CM_RESULT
+  MENUITEM SEPARATOR
+  MENUITEM "Referencer Archetype", CM_REFARCH
+  MENUITEM "Edition d'Archétype", CM_ARCHEDIT
+  MENUITEM "Edition Referentiel", CM_REFEDIT
+  MENUITEM "Edition Modèle de publication", CM_TPLEDIT
+  MENUITEM SEPARATOR
+  MENUITEM "&Formules", CM_FORMULE
+  MENUITEM "Lancer une sauvegarde", CM_SAUVEGARDE
+ }
+
+ POPUP "F&ormat"
+ {
+  POPUP "&Caractere"
+  {
+   MENUITEM "&Gras", CM_FORMATBOLD
+   MENUITEM "&Italique", CM_FORMATITALIC
+   MENUITEM "&Souligné", CM_FORMATUNDERLINE
+   MENUITEM "&Barré", CM_FORMATSTRIKEOUT
+  }
+
+  MENUITEM "&Police...", CM_FORMATFONT
+ }
+
+ MENUITEM Separator
+ MENUITEM Separator
+ POPUP "&Aide"
+ {
+  MENUITEM "&Aide en ligne\aF1", CM_HELP
+  MENUITEM Separator
+  MENUITEM "&A propos de...", CM_ABOUT
+ }
+}
+IDM_CORRIGELES MENU
+{
+  MENUITEM "&Corriger", CM_CORRIGE
+  MENUITEM Separator
+  MENUITEM "&Détruire", CM_CORRSUPR
+}
+
+IDM_LDV_VIEW MENU
+{
+ MENUITEM Separator
+ POPUP "&Médicament"
+ {
+  MENUITEM "&Nouveau médicament", CM_DRUG_NEW
+  MENUITEM SEPARATOR
+  MENUITEM "&Arrêter ce médicament", CM_DRUG_STOP
+  MENUITEM "&Supprimer ce médicament", CM_DRUG_DELETE
+  MENUITEM SEPARATOR
+  MENUITEM "&Modifier ce médicament", CM_DRUG_CHANGE
+  MENUITEM "&Renouveler ce médicament", CM_DRUG_RENEW
+  MENUITEM SEPARATOR
+  MENUITEM "&Créer une ordonnance", IDC_ORDONNANCE
+ }
+}
+
+IDM_DRUG_VIEW MENU
+{
+ MENUITEM Separator
+ POPUP "&Médicament"
+ {
+  MENUITEM "&Nouveau médicament", CM_DRUG_NEW
+  MENUITEM SEPARATOR
+  MENUITEM "&Arrêter ce médicament", CM_DRUG_STOP
+  MENUITEM "&Supprimer ce médicament", CM_DRUG_DELETE
+  MENUITEM SEPARATOR
+  MENUITEM "&Modifier ce médicament", CM_DRUG_CHANGE
+  MENUITEM "&Renouveler ce médicament", CM_DRUG_RENEW
+  MENUITEM SEPARATOR
+  MENUITEM "&Créer une ordonnance", IDC_ORDONNANCE
+ }
+}
+
+IDM_PROCESS_VIEW MENU
+{
+ MENUITEM Separator
+ POPUP "&Procédure"
+ {
+  MENUITEM "&Nouvelle procédure", CM_PROCESS_NEW
+  MENUITEM SEPARATOR
+  MENUITEM "&Arrêter cette procédure", CM_PROCESS_STOP
+  MENUITEM SEPARATOR
+  MENUITEM "&Modifier cette procédure", CM_PROCESS_CHANGE
+ }
+}
+
+IDM_GOAL_VIEW MENU
+{
+ MENUITEM Separator
+ POPUP "&Objectifs"
+ {
+  // MENUITEM "&Nouvel objectif", CM_GOAL_NEW
+  // MENUITEM SEPARATOR
+  MENUITEM "&Clore cet objectif", CM_GOAL_STOP
+  // MENUITEM SEPARATOR
+  // MENUITEM "&Modifier cet objectif", CM_GOAL_CHANGE
+ }
+}
+
+IDM_RCEPISOD_VIEW MENU
+{
+ MENUITEM Separator
+ POPUP "&Episodes"
+ {
+  MENUITEM "&Ajouter un épisode", CM_EPISO_NEW
+  MENUITEM SEPARATOR
+  MENUITEM "A&rrêter cet épisode", CM_EPISO_CLOSE
+  MENUITEM SEPARATOR
+  MENUITEM "&Réviser cet objectif", CM_EPISO_EVOLUER
+ }
+}
+
+STRINGTABLE{
+ CM_ABOUT, "Ouvre une boite de dialogue d'information"
+ CM_CHEMISE, "Ouverture du dossier du patient"
+ CM_NEWDOC, "Changement d'utilisateur"
+ CM_NEWPAT, "Changement de patient"
+ CM_BUREAU, "Fermeture du patient"
+ CM_SYNCHRO_IMP_THIS_PAT, "Mise à jour du patient depuis Ligne de vie"
+ CM_SYNCHRO_EXP_THIS_PAT, "Synchronisation du patient vers Ligne de vie"
+ // CM_NEWCR, "Elaboration d'un nouveau compte rendu"
+ CM_NOEDIT, "No document to edit"
+ CM_NEWMAGIC, "Elaboration d'une nouvelle feuille magique"
+ CM_NEWTTXT, "Appel du traitement de texte"
+ CM_NEWTMPL, "Appel du traitement de texte word"
+ CM_IMPRIME, "Impression du document en cours"
+ CM_ENREGISTRE, "Sauvegarde du document en cours"
+ CM_LDV, "Ligne de vie"
+ CM_LDV_DRUGS, "Médicaments"
+ CM_PROCESS, "Procédures"
+ CM_LDV_GOALS, "Objectifs de santé"
+ CM_ADMIN, "Fiche administrative"
+ CM_PROMET_MESSAGE, "Ajout des données au message"
+ CM_PROMET_SEND, "Envoi des données au serveur Prometheus"
+ CM_DIOGENE, "Préparation des données diogène" CM_LDV_ZOOMIN, "Zoom sur la Ligne de vie" CM_LDV_ZOOMOUT, "Elargir sur la Ligne de vie"
+}
+
+IDM_EPISOD MENU{
+    MENUITEM "&Contexte",       IDC_EPISOD_CONTEXT
+    MENUITEM "&Format",         IDC_EPISOD_FORMAT
+    MENUITEM "&Unité",          IDC_EPISOD_UNIT
+    MENUITEM SEPARATOR
+    MENUITEM "C&lassification", IDC_EPISOD_CLASSIF
+    MENUITEM SEPARATOR
+    POPUP "Type d'&analyse"
+    {
+        MENUITEM "&Position",               IDC_EPISOD_AN_P
+        MENUITEM "&Ordre d'énumération",    IDC_EPISOD_AN_O
+        MENUITEM "Position &et ordre",      IDC_EPISOD_AN_PO
+        MENUITEM "&Libellé",                IDC_EPISOD_AN_L
+        MENUITEM SEPARATOR
+        MENUITEM "&Relatif - position",     IDC_EPISOD_AN_RP
+        MENUITEM "&Relatif - ordre",        IDC_EPISOD_AN_RO
+        MENUITEM SEPARATOR
+        MENUITEM "Element &ignoré",         IDC_EPISOD_AN_N
+    }
+    MENUITEM SEPARATOR
+    MENUITEM "Créer un sous-&modèle", IDC_EPISOD_SUB
+}
+//--------------- RICHEDIT
+
+IDA_RICHEDIT ACCELERATORS
+{
+ "^B", CM_FORMATBOLD,      ASCII
+ "^I", CM_FORMATITALIC,    ASCII
+ "^U", CM_FORMATUNDERLINE, ASCII
+ "^S", CM_ENREGISTRE,      ASCII
+ "^P", CM_IMPRIME,         ASCII
+}
+
+IDA_MDICMNDS ACCELERATORS
+{
+ VK_F1, CM_HELP, VIRTKEY
+ VK_F2, CM_LDV, VIRTKEY
+ VK_F3, CM_HEALTHTEAM_LIST, VIRTKEY
+ VK_F4, CM_MAILBOX, VIRTKEY
+ VK_F5, CM_LDV_DRUGS, VIRTKEY
+ VK_F6, CM_LDV_GOALS, VIRTKEY
+ VK_F7, CM_ADMIN, VIRTKEY
+ VK_F8, CM_PREDI, VIRTKEY
+ VK_F9, CM_BBK, VIRTKEY
+ "H", ID_VIEW_HEADINGS, VIRTKEY, CONTROL
+}
+
+IDA_ADMIN ACCELERATORS
+{
+ VK_F1, CM_HELP, VIRTKEY
+ VK_F2, CM_LDV, VIRTKEY
+ VK_F3, CM_HEALTHTEAM_LIST, VIRTKEY
+ VK_F4, CM_MAILBOX, VIRTKEY
+ VK_F5, CM_LDV_DRUGS, VIRTKEY
+ VK_F6, CM_LDV_GOALS, VIRTKEY
+ VK_F7, CM_ADMIN, VIRTKEY
+ VK_F8, CM_PREDI, VIRTKEY
+ VK_F9, CM_BBK, VIRTKEY
+}
+
+LDV_ACCEL ACCELERATORS{
+ "^Z", CM_LDV_ZOOMIN,   ASCII
+ "^E", CM_LDV_ZOOMOUT,  ASCII
+ "^P", IDC_NEWPREOCCUP, ASCII
+ "^T", CM_DRUG_NEW,     ASCII
+ "^R", CM_APPOINTMENT,  ASCII
+}
+
+DRUGS_ACCEL ACCELERATORS
+{
+ "^T", CM_DRUG_NEW,     ASCII
+ "^R", CM_REFERENTIAL,  ASCII
+}
+
+REFVIEW_ACCEL ACCELERATORS
+{
+ "^S", CM_ENREGISTRE,   ASCII
+ "^P", CM_IMPRIME,      ASCII
+}
+
+IDM_MDICMNDS_MUE MENU
+{
+ POPUP "&Fichier"
+ {
+  POPUP "&Nouveau"
+  {
+   MENUITEM "Nouveau compte-&rendu", CM_NEWCR
+   MENUITEM "Nouvelle &consultation", CM_NEWCS
+   MENUITEM "Nouvelle &note", CM_NEWCONSULT
+   MENUITEM "Nouveau fichier &texte", CM_NEWTTXT
+   MENUITEM "Nouveau fichier &word", CM_NEWTMPL
+   MENUITEM "Nouveau &formulaire", CM_QUESTIONNAIRE
+  }
+
+  POPUP "&Ouvrir"
+  {
+   MENUITEM "Ouvrir fichier &texte", CM_OPENTTXT
+   MENUITEM "Ouvrir fichier &word", CM_OPENTMPL
+  }
+
+  MENUITEM "&Importer", CM_IMPORTE
+  MENUITEM "I&mporter Images", CM_IMPORTIMG
+  // MENUITEM "Capt&urer des images", CM_CAPTUREIMG
+  MENUITEM "E&dition d'images", CM_PANNEL
+  MENUITEM "&Fermer", CM_FILECLOSE
+  MENUITEM "&Enregistrer", CM_ENREGISTRE
+  MENUITEM SEPARATOR
+  MENUITEM "&Composer", CM_COMPOSE
+  MENUITEM "&Publier", CM_IMPRIME
+  MENUITEM "&Visualiser", CM_VISUAL
+  MENUITEM SEPARATOR
+  MENUITEM "&Quitter", CM_EXIT
+ }
+
+ MENUITEM Separator
+ MENUITEM Separator
+ MENUITEM Separator
+ POPUP "&Personnes"
+ {
+  MENUITEM "Changer/créer &patient", CM_NEWPAT
+  MENUITEM "&Dossier patient", CM_CHEMISE
+  MENUITEM "F&ermer patient", CM_BUREAU
+  // MENUITEM SEPARATOR
+  // MENUITEM "Carte &Vitale", CM_CVITALE
+  // MENUITEM "&Fiche compta", CM_CREATCOMPTA
+  // MENUITEM "&Situation", CM_MODIFCOMPTA
+  MENUITEM SEPARATOR
+  MENUITEM "Changer &utilisateur", CM_NEWDOC
+  MENUITEM "&Créer utilisateur", CM_CREATDOC
+  MENUITEM "&Modifier utilisateur", CM_MODIFDOC
+  MENUITEM SEPARATOR
+  // MENUITEM "Créer/Modifier co&rrespondant", CM_EDITCOR
+  MENUITEM "Créer co&rrespondant", CM_CREATCOR
+  MENUITEM "Modifier corres&pondant", CM_MODIFCOR
+  MENUITEM SEPARATOR
+  MENUITEM "Gestion de l'équipe de santé", CM_HEALTHTEAM
+  MENUITEM "Importer patient", CM_IMPORT_PATIENT
+ 	MENUITEM "Importer correspondant", CM_IMPORT_CORRESP
+  MENUITEM "Importer utilisateur", CM_IMPORT_USER
+  MENUITEM SEPARATOR
+  MENUITEM "Mise à &jour patient depuis Ligne de vie", CM_SYNCHRO_IMP_THIS_PAT
+  MENUITEM "S&ynchronisation patient vers Ligne de vie", CM_SYNCHRO_EXP_THIS_PAT
+  #endif
+ }
+
+ POPUP "&Fonctions"
+ {
+  MENUITEM "Add/Modifier fonctions", CM_FUNCTION
+ }
+
+ POPUP "&Episodus"
+ {
+  MENUITEM "&Ouvrir la Ligne de vie", CM_LDV
+  MENUITEM "&Médicaments", CM_LDV_DRUGS
+  MENUITEM "P&rocédures", CM_PROCESS
+  MENUITEM "&Objectifs de santé", CM_LDV_GOALS
+  MENUITEM SEPARATOR
+  MENUITEM "&Elaboration du message", CM_PROMET_MESSAGE
+  MENUITEM "&Envoi des données au serveur", CM_PROMET_SEND
+  MENUITEM "&Préparation des données diogène", CM_DIOGENE
+  MENUITEM SEPARATOR
+  MENUITEM "&Navigation sur le serveur", CM_PROMET_SURF
+  MENUITEM SEPARATOR
+  MENUITEM "&Zoom sur la Ligne de vie", CM_LDV_ZOOMIN
+  MENUITEM "&Elargir sur la Ligne de vie", CM_LDV_ZOOMOUT
+ }
+
+ POPUP "&Comptabilité"
+ {
+  MENUITEM "Saisie d'une &recette", CM_RECETTE
+  MENUITEM "Saisie d'une &dépense", CM_DEPENSE
+  MENUITEM SEPARATOR
+  MENUITEM "Liste des recettes", CM_LISTRECETTES
+  MENUITEM "Liste des dépenses", CM_LISTDEPENSES
+  MENUITEM "Déclaration 2035", CM_2035
+  MENUITEM "Liste des &AGA", CM_AGA
+  MENUITEM "Liste des &Impayés", CM_IMPAYES
+  MENUITEM "&Liste des Actes", CM_LISTACTES
+  MENUITEM "&Somme des actes", CM_SOMACTES
+  MENUITEM "Somme des &Encaissements", CM_SOMENCAISS
+  MENUITEM SEPARATOR
+  MENUITEM "Saisie des &Tiers-payants", CM_SAISIETP
+  MENUITEM "&Feuille de soins", CM_FEUILLESOINS
+  MENUITEM SEPARATOR
+  MENUITEM "Import fichier &Noemie", CM_IMPORTNOEMIE
+ }
+
+ POPUP "&Outils"
+ {
+  MENUITEM "Gestion des &matériels", CM_MATERIELS
+  MENUITEM "&Gestion des fils guides", CM_GROUPGD
+  // MENUITEM "&Reconvoquer", CM_RECONVOC
+  POPUP "Recherche multi-&critères"
+  {
+   MENUITEM "Re&chercher...", CM_REQUETE
+   MENUITEM "Resul&tats...", CM_RESULT
+  }
+  // MENUITEM "Outils &système", CM_OUTILS
+  MENUITEM "&Outils episodus", CM_EPISO_STOP
+  MENUITEM "Réferencement d'&Archetype", CM_REFARCH
+  MENUITEM "Edition d'Archétype", CM_ARCHEDIT
+  MENUITEM "Edition Referentiel", CM_REFEDIT
+  MENUITEM "Edition Modèle de publication", CM_TPLEDIT
+  MENUITEM SEPARATOR
+  POPUP "&Vos préférences"
+  {
+   MENUITEM "&Paramètres episodus", CM_EPISO_LEARN
+   MENUITEM "Paramètres &mails", CM_EPISO_START
+   MENUITEM SEPARATOR
+   MENUITEM "Créer en-tête", CM_NEW_ENTETE
+   MENUITEM "Modifier en-tête", CM_MOD_ENTETE
+   MENUITEM SEPARATOR
+   MENUITEM "Paramètres de &capture", CM_EPISO_MODELS
+   MENUITEM SEPARATOR
+   MENUITEM "Enregistrer la position des fenêtres", CM_ENREG_WIN
+  }
+  POPUP "&Paramètres de ce poste"
+  {
+   MENUITEM "&Paramètres d'impression", CM_PARAM_PRINT
+  }
+  MENUITEM SEPARATOR
+  MENUITEM "Gestion du &Pilot", CM_PILOT_AGENTS
+  MENUITEM SEPARATOR
+  MENUITEM "Lancer une &sauvegarde", CM_SAUVEGARDE
+ }
+
+ MENUITEM Separator
+ POPUP "F&enêtre"
+ {
+  MENUITEM "&Cascade", CM_CASCADECHILDREN
+  MENUITEM "&Mosaïque", CM_TILECHILDREN
+  MENUITEM "&Réorganiser les icônes", CM_ARRANGEICONS
+//  MENUITEM "&Tout fermer", CM_CLOSECHILDREN
+ }
+
+ MENUITEM Separator
+ POPUP "&Aide"
+ {
+  MENUITEM "&Aide en ligne\tF1", CM_HELP
+  MENUITEM Separator
+  MENUITEM "A &propos de...", CM_ABOUT
+ }
+
+}
+
+
+IDM_ADMIN_MUE MENU
+{
+ POPUP "&Fichier"
+ {
+  POPUP "&Nouveau"
+  {
+   MENUITEM "Nouveau compte-&rendu", CM_NEWCR
+   MENUITEM "Nouvelle &consultation", CM_NEWCS
+   MENUITEM "Nouvelle &note", CM_NEWCONSULT
+   MENUITEM "Nouveau fichier &texte", CM_NEWTTXT
+   MENUITEM "Nouveau fichier &word", CM_NEWTMPL
+   MENUITEM "Nouveau &formulaire", CM_QUESTIONNAIRE
+  }
+
+  POPUP "&Ouvrir"
+  {
+   MENUITEM "Ouvrir fichier &texte", CM_OPENTTXT
+   MENUITEM "Ouvrir fichier &word", CM_OPENTMPL
+  }
+
+  MENUITEM "&Importer", CM_IMPORTE
+  MENUITEM "I&mporter Images", CM_IMPORTIMG
+  // MENUITEM "Capt&urer des images", CM_CAPTUREIMG
+  MENUITEM "E&dition d'images", CM_PANNEL
+  MENUITEM "&Fermer", CM_FILECLOSE
+  MENUITEM "&Enregistrer", CM_ENREGISTRE
+  MENUITEM SEPARATOR
+  MENUITEM "&Composer", CM_COMPOSE
+  MENUITEM "&Publier", CM_IMPRIME
+  MENUITEM "&Visualiser", CM_VISUAL
+  MENUITEM SEPARATOR
+  MENUITEM "&Quitter", CM_EXIT
+ }
+
+ MENUITEM Separator
+ MENUITEM Separator
+ MENUITEM Separator
+ POPUP "&Personnes"
+ {
+  MENUITEM "Changer/créer &patient", CM_NEWPAT
+  MENUITEM "Modifier p&atient", CM_ADMIN_MODIF
+  MENUITEM "&Reconvoquer patient", CM_ADMIN_MODIFDC
+  MENUITEM "&Dossier patient", CM_CHEMISE
+  MENUITEM "F&ermer patient", CM_BUREAU
+  // MENUITEM SEPARATOR
+  // MENUITEM "Carte &Vitale", CM_CVITALE
+  // MENUITEM "&Fiche compta", CM_CREATCOMPTA
+  // MENUITEM "&Situation", CM_MODIFCOMPTA
+  MENUITEM SEPARATOR
+  MENUITEM "Changer &utilisateur", CM_NEWDOC
+  MENUITEM "&Créer utilisateur", CM_CREATDOC
+  MENUITEM "&Modifier utilisateur", CM_MODIFDOC
+  MENUITEM SEPARATOR
+  // MENUITEM "Créer/Modifier co&rrespondant", CM_EDITCOR
+  MENUITEM "Créer co&rrespondant", CM_CREATCOR
+  MENUITEM "Modifier corres&pondant", CM_MODIFCOR
+  MENUITEM SEPARATOR
+  MENUITEM "Gestion de l'équipe de santé", CM_HEALTHTEAM
+  MENUITEM "Importer patient", CM_IMPORT_PATIENT
+  MENUITEM "Importer correspondant", CM_IMPORT_CORRESP
+  MENUITEM "Importer utilisateur", CM_IMPORT_USER
+  MENUITEM SEPARATOR
+  MENUITEM "Mise à &jour patient depuis Ligne de vie", CM_SYNCHRO_IMP_THIS_PAT
+  MENUITEM "S&ynchronisation patient vers Ligne de vie", CM_SYNCHRO_EXP_THIS_PAT
+  #endif
+ }
+
+ POPUP "&Episodus"
+ {
+  MENUITEM "&Ouvrir la Ligne de vie", CM_LDV
+  MENUITEM "&Médicaments", CM_LDV_DRUGS
+  MENUITEM "P&rocédures", CM_PROCESS
+  MENUITEM "&Objectifs de santé", CM_LDV_GOALS
+  MENUITEM SEPARATOR
+  MENUITEM "&Elaboration du message", CM_PROMET_MESSAGE
+  MENUITEM "&Envoi des données au serveur", CM_PROMET_SEND
+  MENUITEM "&Préparation des données diogène", CM_DIOGENE
+  MENUITEM SEPARATOR
+  MENUITEM "&Navigation sur le serveur", CM_PROMET_SURF
+  MENUITEM SEPARATOR
+  MENUITEM "&Zoom sur la Ligne de vie", CM_LDV_ZOOMIN
+  MENUITEM "&Elargir sur la Ligne de vie", CM_LDV_ZOOMOUT
+ }
+
+ POPUP "&Comptabilité"
+ {
+  MENUITEM "Saisie d'une &recette", CM_RECETTE
+  MENUITEM "Saisie d'une &dépense", CM_DEPENSE
+  MENUITEM SEPARATOR
+  MENUITEM "Liste des recettes", CM_LISTRECETTES
+  MENUITEM "Liste des dépenses", CM_LISTDEPENSES
+  MENUITEM "Déclaration 2035", CM_2035
+  MENUITEM "Liste des &AGA", CM_AGA
+  MENUITEM "Liste des &Impayés", CM_IMPAYES
+  MENUITEM "&Liste des Actes", CM_LISTACTES
+  MENUITEM "&Somme des actes", CM_SOMACTES
+  MENUITEM "Somme des &Encaissements", CM_SOMENCAISS
+  MENUITEM SEPARATOR
+  MENUITEM "Saisie des &Tiers-payants", CM_SAISIETP
+  MENUITEM "&Feuille de soins", CM_FEUILLESOINS
+  MENUITEM SEPARATOR
+  MENUITEM "Import fichier &Noemie", CM_IMPORTNOEMIE
+ }
+
+ POPUP "&Outils"
+ {
+  MENUITEM "Gestion des &matériels", CM_MATERIELS
+  MENUITEM "&Gestion des fils guides", CM_GROUPGD
+  // MENUITEM "&Reconvoquer", CM_RECONVOC
+  POPUP "Recherche multi-&critères"
+  {
+   MENUITEM "Re&chercher...", CM_REQUETE
+   MENUITEM "Resul&tats...", CM_RESULT
+  }
+  MENUITEM "Outils &système", CM_OUTILS
+  MENUITEM "&Outils episodus", CM_EPISO_STOP
+  MENUITEM "Réferencement d'&Archetype", CM_REFARCH
+  MENUITEM SEPARATOR
+  POPUP "&Vos préférences"
+  {
+   MENUITEM "&Paramètres episodus", CM_EPISO_LEARN
+   MENUITEM "Paramètres &mails", CM_EPISO_START
+   MENUITEM SEPARATOR
+   MENUITEM "Créer en-tête", CM_NEW_ENTETE
+  	MENUITEM "Modifier en-tête", CM_MOD_ENTETE
+   MENUITEM SEPARATOR
+   MENUITEM "Paramètres de &capture", CM_EPISO_MODELS
+   MENUITEM SEPARATOR
+   MENUITEM "Enregistrer la position des fenêtres", CM_ENREG_WIN
+  }
+  POPUP "&Paramètres de ce poste"
+  {
+   MENUITEM "&Paramètres d'impression", CM_PARAM_PRINT
+  }
+  MENUITEM SEPARATOR
+  MENUITEM "Gestion du &Pilot", CM_PILOT_AGENTS
+  MENUITEM SEPARATOR
+  MENUITEM "Lancer une &sauvegarde", CM_SAUVEGARDE
+ }
+
+ MENUITEM Separator
+ POPUP "F&enêtre"
+ {
+  MENUITEM "&Cascade", CM_CASCADECHILDREN
+  MENUITEM "&Mosaïque", CM_TILECHILDREN
+  MENUITEM "&Réorganiser les icônes", CM_ARRANGEICONS
+//  MENUITEM "&Tout fermer", CM_CLOSECHILDREN
+ }
+
+ MENUITEM Separator
+ POPUP "&Aide"
+ {
+  MENUITEM "&Aide en ligne\tF1", CM_HELP
+  MENUITEM Separator
+  MENUITEM "&A propos de...", CM_ABOUT
+ }
+
+}
+
+
+IDM_HISTO_MUE MENU
+{
+ MENUITEM Separator
+ MENUITEM Separator
+ MENUITEM Separator
+ POPUP "&Personnes"
+ {
+  MENUITEM "Changer/créer &patient", CM_NEWPAT
+  MENUITEM "&Dossier patient", CM_CHEMISE
+  MENUITEM "F&ermer patient", CM_BUREAU
+  // MENUITEM SEPARATOR
+  // MENUITEM "Carte &Vitale", CM_CVITALE
+  // MENUITEM "&Fiche compta", CM_CREATCOMPTA
+  // MENUITEM "&Situation", CM_MODIFCOMPTA
+  MENUITEM SEPARATOR
+  MENUITEM "Changer &utilisateur", CM_NEWDOC
+  MENUITEM "&Créer utilisateur", CM_CREATDOC
+  MENUITEM "&Modifier utilisateur", CM_MODIFDOC
+  MENUITEM SEPARATOR
+  // MENUITEM "Créer/Modifier co&rrespondant", CM_EDITCOR
+  MENUITEM "Créer co&rrespondant", CM_CREATCOR
+  MENUITEM "Modifier corres&pondant", CM_MODIFCOR
+  MENUITEM SEPARATOR
+  MENUITEM "Gestion de l'équipe de santé", CM_HEALTHTEAM
+  MENUITEM "Importer patient", CM_IMPORT_PATIENT
+  MENUITEM "Importer correspondant", CM_IMPORT_CORRESP
+  MENUITEM "Importer utilisateur", CM_IMPORT_USER
+  MENUITEM SEPARATOR
+  MENUITEM "Mise à &jour patient depuis Ligne de vie", CM_SYNCHRO_IMP_THIS_PAT
+  MENUITEM "S&ynchronisation patient vers Ligne de vie", CM_SYNCHRO_EXP_THIS_PAT
+  #endif
+ }
+
+ POPUP "&Episodus"
+ {
+  MENUITEM "&Ouvrir la Ligne de vie", CM_LDV
+  MENUITEM "&Médicaments", CM_LDV_DRUGS
+  MENUITEM "P&rocédures", CM_PROCESS
+  MENUITEM "&Objectifs de santé", CM_LDV_GOALS
+  MENUITEM SEPARATOR
+  MENUITEM "&Elaboration du message", CM_PROMET_MESSAGE
+  MENUITEM "&Envoi des données au serveur", CM_PROMET_SEND
+  MENUITEM "&Préparation des données diogène", CM_DIOGENE
+  MENUITEM SEPARATOR
+  MENUITEM "&Navigation sur le serveur", CM_PROMET_SURF
+  MENUITEM SEPARATOR
+  MENUITEM "&Zoom sur la Ligne de vie", CM_LDV_ZOOMIN
+  MENUITEM "&Elargir sur la Ligne de vie", CM_LDV_ZOOMOUT
+ }
+
+ POPUP "&Comptabilité"
+ {
+  MENUITEM "Saisie d'une &recette", CM_RECETTE
+  MENUITEM "Saisie d'une &dépense", CM_DEPENSE
+  MENUITEM SEPARATOR
+  MENUITEM "Liste des recettes", CM_LISTRECETTES
+  MENUITEM "Liste des dépenses", CM_LISTDEPENSES
+  MENUITEM "Déclaration 2035", CM_2035
+  MENUITEM "Liste des &AGA", CM_AGA
+  MENUITEM "Liste des &Impayés", CM_IMPAYES
+  MENUITEM "&Liste des Actes", CM_LISTACTES
+  MENUITEM "&Somme des actes", CM_SOMACTES
+  MENUITEM "Somme des &Encaissements", CM_SOMENCAISS
+  MENUITEM SEPARATOR
+  MENUITEM "Saisie des &Tiers-payants", CM_SAISIETP
+  MENUITEM "&Feuille de soins", CM_FEUILLESOINS
+  MENUITEM SEPARATOR
+  MENUITEM "Import fichier &Noemie", CM_IMPORTNOEMIE
+ }
+
+ POPUP "&Historique"
+ {
+  MENUITEM "&Tout", CM_0P
+  MENUITEM "&1+", CM_1P
+  MENUITEM "&2+", CM_2P
+  MENUITEM "&3+", CM_3P
+  MENUITEM "&4+", CM_4P
+ }
+
+ POPUP "&Outils"
+ {
+  MENUITEM "Gestion des &matériels", CM_MATERIELS
+  MENUITEM "&Gestion des fils guides", CM_GROUPGD
+  // MENUITEM "&Reconvoquer", CM_RECONVOC
+  POPUP "Recherche multi-&critères"
+  {
+   MENUITEM "Re&chercher...", CM_REQUETE
+   MENUITEM "Resul&tats...", CM_RESULT
+  }
+  MENUITEM "Outils &système", CM_OUTILS
+  MENUITEM "&Outils episodus", CM_EPISO_STOP
+  MENUITEM "Réferencement d'&Archetype", CM_REFARCH
+  MENUITEM SEPARATOR
+  POPUP "&Vos préférences"
+  {
+   MENUITEM "&Paramètres episodus", CM_EPISO_LEARN
+   MENUITEM "Paramètres &mails", CM_EPISO_START
+   MENUITEM SEPARATOR
+   MENUITEM "Créer en-tête", CM_NEW_ENTETE
+   MENUITEM "Modifier en-tête", CM_MOD_ENTETE
+   MENUITEM SEPARATOR
+   MENUITEM "Paramètres de &capture", CM_EPISO_MODELS
+   MENUITEM SEPARATOR
+   MENUITEM "Enregistrer la position des fenêtres", CM_ENREG_WIN
+  }
+  POPUP "&Paramètres de ce poste"
+  {
+   MENUITEM "&Paramètres d'impression", CM_PARAM_PRINT
+  }
+  MENUITEM SEPARATOR
+  MENUITEM "Gestion du &Pilot", CM_PILOT_AGENTS
+  MENUITEM SEPARATOR
+  MENUITEM "Lancer une &sauvegarde", CM_SAUVEGARDE
+ }
+
+ MENUITEM Separator
+ MENUITEM Separator
+ POPUP "&Aide"
+ {
+  MENUITEM "&Aide en ligne\aF1", CM_HELP
+  MENUITEM Separator
+  MENUITEM "&A propos de...", CM_ABOUT
+ }
+
+}
+
+
+IDM_VISUALVIEW_MUE MENU
+{
+ POPUP "&Fichier"
+ {
+  POPUP "&Nouveau"
+  {
+   MENUITEM "Nouveau compte-&rendu", CM_NEWCR
+   MENUITEM "Nouvelle &consultation", CM_NEWCS
+   MENUITEM "Nouvelle &note", CM_NEWCONSULT
+   MENUITEM "Nouveau fichier &texte", CM_NEWTTXT
+   MENUITEM "Nouveau fichier &word", CM_NEWTMPL
+   MENUITEM "Nouveau &formulaire", CM_QUESTIONNAIRE
+  }
+
+  POPUP "&Ouvrir"
+  {
+   MENUITEM "Ouvrir fichier &texte", CM_OPENTTXT
+   MENUITEM "Ouvrir fichier &word", CM_OPENTMPL
+  }
+
+  MENUITEM "&Importer", CM_IMPORTE
+  MENUITEM "I&mporter Images", CM_IMPORTIMG
+  // MENUITEM "Capt&urer des images", CM_CAPTUREIMG
+  MENUITEM "E&dition d'images", CM_PANNEL
+  MENUITEM "&Fermer", CM_FILECLOSE
+  MENUITEM "&Enregistrer", CM_ENREGISTRE
+  MENUITEM SEPARATOR
+  MENUITEM "&Composer", CM_COMPOSE
+  MENUITEM "&Publier", CM_IMPRIME
+  MENUITEM "&Visualiser", CM_VISUAL
+  MENUITEM SEPARATOR
+  MENUITEM "&Quitter", CM_EXIT
+ }
+
+ MENUITEM Separator
+ POPUP "&Document"
+ {
+  MENUITEM "&Editer", IDC_EDITION_HTM
+  MENUITEM "&Rafraîchir", IDC_RAFRAICHIR_HTM
+  MENUITEM SEPARATOR
+  MENUITEM "&Précédent", CM_PRECEDENT
+  MENUITEM "&Suivant", CM_SUIVANT
+ }
+
+ MENUITEM Separator
+ MENUITEM Separator
+ POPUP "&Personnes"
+ {
+  MENUITEM "Changer/créer &patient", CM_NEWPAT
+  MENUITEM "&Dossier patient", CM_CHEMISE
+  MENUITEM "F&ermer patient", CM_BUREAU
+  // MENUITEM SEPARATOR
+  // MENUITEM "Carte &Vitale", CM_CVITALE
+  // MENUITEM "&Fiche compta", CM_CREATCOMPTA
+  // MENUITEM "&Situation", CM_MODIFCOMPTA
+  MENUITEM SEPARATOR
+  MENUITEM "Changer &utilisateur", CM_NEWDOC
+  MENUITEM "&Créer utilisateur", CM_CREATDOC
+  MENUITEM "&Modifier utilisateur", CM_MODIFDOC
+  MENUITEM SEPARATOR
+  // MENUITEM "Créer/Modifier co&rrespondant", CM_EDITCOR
+  MENUITEM "Créer co&rrespondant", CM_CREATCOR
+  MENUITEM "Modifier corres&pondant", CM_MODIFCOR
+  MENUITEM SEPARATOR
+  MENUITEM "Gestion de l'équipe de santé", CM_HEALTHTEAM
+  MENUITEM "Importer patient", CM_IMPORT_PATIENT
+  MENUITEM "Importer correspondant", CM_IMPORT_CORRESP
+  MENUITEM "Importer utilisateur", CM_IMPORT_USER
+  MENUITEM SEPARATOR
+  MENUITEM "Mise à &jour patient depuis Ligne de vie", CM_SYNCHRO_IMP_THIS_PAT
+  MENUITEM "S&ynchronisation patient vers Ligne de vie", CM_SYNCHRO_EXP_THIS_PAT
+  #endif
+ }
+
+ POPUP "&Episodus"
+ {
+  MENUITEM "&Ouvrir la Ligne de vie", CM_LDV
+  MENUITEM "&Médicaments", CM_LDV_DRUGS
+  MENUITEM "P&rocédures", CM_PROCESS
+  MENUITEM "&Objectifs de santé", CM_LDV_GOALS
+  MENUITEM SEPARATOR
+  MENUITEM "&Elaboration du message", CM_PROMET_MESSAGE
+  MENUITEM "&Envoi des données au serveur", CM_PROMET_SEND
+  MENUITEM "&Préparation des données diogène", CM_DIOGENE
+  MENUITEM SEPARATOR
+  MENUITEM "&Navigation sur le serveur", CM_PROMET_SURF
+  MENUITEM SEPARATOR
+  MENUITEM "&Zoom sur la Ligne de vie", CM_LDV_ZOOMIN
+  MENUITEM "&Elargir sur la Ligne de vie", CM_LDV_ZOOMOUT
+ }
+
+ POPUP "&Comptabilité"
+ {
+  MENUITEM "Saisie d'une &recette", CM_RECETTE
+  MENUITEM "Saisie d'une &dépense", CM_DEPENSE
+  MENUITEM SEPARATOR
+  MENUITEM "Liste des recettes", CM_LISTRECETTES
+  MENUITEM "Liste des dépenses", CM_LISTDEPENSES
+  MENUITEM "Déclaration 2035", CM_2035
+  MENUITEM "Liste des &AGA", CM_AGA
+  MENUITEM "Liste des &Impayés", CM_IMPAYES
+  MENUITEM "&Liste des Actes", CM_LISTACTES
+  MENUITEM "&Somme des actes", CM_SOMACTES
+  MENUITEM "Somme des &Encaissements", CM_SOMENCAISS
+  MENUITEM SEPARATOR
+  MENUITEM "Saisie des &Tiers-payants", CM_SAISIETP
+  MENUITEM "&Feuille de soins", CM_FEUILLESOINS
+  MENUITEM SEPARATOR
+  MENUITEM "Import fichier &Noemie", CM_IMPORTNOEMIE
+ }
+// #endif
+
+ POPUP "&Outils"
+ {
+  MENUITEM "Gestion des &matériels", CM_MATERIELS
+  MENUITEM "&Gestion des fils guides", CM_GROUPGD
+  // MENUITEM "&Reconvoquer", CM_RECONVOC
+  POPUP "Recherche multi-&critères"
+  {
+   MENUITEM "Re&chercher...", CM_REQUETE
+   MENUITEM "Resul&tats...", CM_RESULT
+  }
+  MENUITEM "Outils &système", CM_OUTILS
+  MENUITEM "&Outils episodus", CM_EPISO_STOP
+  MENUITEM "Réferencement d'&Archetype", CM_REFARCH
+  MENUITEM SEPARATOR
+  POPUP "&Vos préférences"
+  {
+   MENUITEM "&Paramètres episodus", CM_EPISO_LEARN
+   MENUITEM "Paramètres &mails", CM_EPISO_START
+   MENUITEM SEPARATOR
+   MENUITEM "Créer en-tête", CM_NEW_ENTETE
+   MENUITEM "Modifier en-tête", CM_MOD_ENTETE
+   MENUITEM SEPARATOR
+   MENUITEM "Paramètres de &capture", CM_EPISO_MODELS
+   MENUITEM SEPARATOR
+   MENUITEM "Enregistrer la position des fenêtres", CM_ENREG_WIN
+  }
+  POPUP "&Paramètres de ce poste"
+  {
+   MENUITEM "&Paramètres d'impression", CM_PARAM_PRINT
+  }
+  MENUITEM SEPARATOR
+  MENUITEM "Gestion du &Pilot", CM_PILOT_AGENTS
+  MENUITEM SEPARATOR
+  MENUITEM "Lancer une &sauvegarde", CM_SAUVEGARDE
+ }
+
+ MENUITEM Separator
+ POPUP "F&enêtre"
+ {
+  MENUITEM "&Cascade", CM_CASCADECHILDREN
+  MENUITEM "&Mosaïque", CM_TILECHILDREN
+  MENUITEM "&Réorganiser les icônes", CM_ARRANGEICONS
+//  MENUITEM "&Tout fermer", CM_CLOSECHILDREN
+ }
+
+ MENUITEM Separator
+ POPUP "&Aide"
+ {
+  MENUITEM "&Aide en ligne\tF1", CM_HELP
+  MENUITEM Separator
+  MENUITEM "A &propos de...", CM_ABOUT
+ }
+}
+
+IDM_APPMENU_MUE MENU
+{
+ POPUP "&Fichier"
+ {
+  POPUP "&Nouveau"
+  {
+   MENUITEM "Nouveau compte-&rendu", CM_NEWCR
+   MENUITEM "Nouvelle &consultation", CM_NEWCS
+   MENUITEM "Nouvelle &note", CM_NEWCONSULT
+   MENUITEM "Nouveau fichier &texte", CM_NEWTTXT
+   MENUITEM "Nouveau fichier &word", CM_NEWTMPL
+   MENUITEM "Nouveau &formulaire", CM_QUESTIONNAIRE
+  }
+
+  POPUP "&Ouvrir"
+  {
+   MENUITEM "Ouvrir fichier &texte", CM_OPENTTXT
+   MENUITEM "Ouvrir fichier &word", CM_OPENTMPL
+  }
+
+  MENUITEM "&Vierge", CM_FILENEW
+  MENUITEM "&Ouvrir une lettre type", CM_LETTRETYPE
+  MENUITEM "&Importer", CM_IMPORTE
+  MENUITEM "I&mporter Images", CM_IMPORTIMG
+  // MENUITEM "Capt&urer des images", CM_CAPTUREIMG
+  MENUITEM "E&dition d'images", CM_PANNEL
+  MENUITEM "&Fermer", CM_FILECLOSE
+  MENUITEM SEPARATOR
+  MENUITEM "&Enregistrer", CM_ENREGISTRE
+  MENUITEM "Enregistrer &Sous", CM_FILESAVEAS
+  MENUITEM SEPARATOR
+  MENUITEM "&Composer", CM_COMPOSE
+  MENUITEM "&Publier", CM_IMPRIME
+  MENUITEM "&Visualiser", CM_VISUAL
+  MENUITEM SEPARATOR
+  MENUITEM "&Quitter", CM_EXIT
+ }
+
+ MENUITEM Separator
+ POPUP "&Edition"
+ {
+  MENUITEM "Ann&uler\tCtrl+Z", CM_EDITUNDO, GRAYED
+  MENUITEM SEPARATOR
+  MENUITEM "&Couper\tCtrl+X", CM_EDITCUT, GRAYED
+  MENUITEM "Co&pier\tCtrl+C", CM_EDITCOPY, GRAYED
+  MENUITEM "C&oller\tCtrl+V", CM_EDITPASTE, GRAYED
+  MENUITEM SEPARATOR
+  MENUITEM "&Effacer\tCtrl+Del", CM_EDITCLEAR, GRAYED
+  MENUITEM "&Détruire\tDel", CM_EDITDELETE, GRAYED
+ }
+
+ POPUP "&Recherche"
+ {
+  MENUITEM "&Rechercher...", CM_EDITFIND, GRAYED
+  MENUITEM "Rem&placer...", CM_EDITREPLACE, GRAYED
+  MENUITEM "Rechercher &Suivant\aF3", CM_EDITFINDNEXT, GRAYED
+ }
+
+ MENUITEM Separator
+ POPUP "&Afficher"
+ {
+  MENUITEM "Barre d'ou&tils", CM_VIEWTOOLBAR
+  MENUITEM "Barre de f&ormat", CM_VIEWSTATUSBAR
+ }
+
+ MENUITEM Separator
+ POPUP "&Personnes"
+ {
+  MENUITEM "Changer/créer &patient", CM_NEWPAT
+  MENUITEM "&Dossier patient", CM_CHEMISE
+  MENUITEM "F&ermer patient", CM_BUREAU
+  // MENUITEM SEPARATOR
+  // MENUITEM "Carte &Vitale", CM_CVITALE
+  // MENUITEM "&Fiche compta", CM_CREATCOMPTA
+  // MENUITEM "&Situation", CM_MODIFCOMPTA
+  MENUITEM SEPARATOR
+  MENUITEM "Changer &utilisateur", CM_NEWDOC
+  MENUITEM "&Créer utilisateur", CM_CREATDOC
+  MENUITEM "&Modifier utilisateur", CM_MODIFDOC
+  MENUITEM SEPARATOR
+  // MENUITEM "Créer/Modifier co&rrespondant", CM_EDITCOR
+  MENUITEM "Créer co&rrespondant", CM_CREATCOR
+  MENUITEM "Modifier corres&pondant", CM_MODIFCOR
+  MENUITEM SEPARATOR
+  MENUITEM "Gestion de l'équipe de santé", CM_HEALTHTEAM
+  MENUITEM "Importer patient", CM_IMPORT_PATIENT
+  MENUITEM "Importer correspondant", CM_IMPORT_CORRESP
+  MENUITEM "Importer utilisateur", CM_IMPORT_USER
+  MENUITEM SEPARATOR
+  MENUITEM "Mise à &jour patient depuis Ligne de vie", CM_SYNCHRO_IMP_THIS_PAT
+  MENUITEM "S&ynchronisation patient vers Ligne de vie", CM_SYNCHRO_EXP_THIS_PAT
+  #endif
+ }
+
+ POPUP "&Episodus"
+ {
+  MENUITEM "&Ouvrir la Ligne de vie", CM_LDV
+  MENUITEM "&Médicaments", CM_LDV_DRUGS
+  MENUITEM "P&rocédures", CM_PROCESS
+  MENUITEM "&Objectifs de santé", CM_LDV_GOALS
+  MENUITEM SEPARATOR
+  MENUITEM "&Elaboration du message", CM_PROMET_MESSAGE
+  MENUITEM "&Envoi des données au serveur", CM_PROMET_SEND
+  MENUITEM "&Préparation des données diogène", CM_DIOGENE
+  MENUITEM SEPARATOR
+  MENUITEM "&Navigation sur le serveur", CM_PROMET_SURF
+  MENUITEM SEPARATOR
+  MENUITEM "&Zoom sur la Ligne de vie", CM_LDV_ZOOMIN
+  MENUITEM "&Elargir sur la Ligne de vie", CM_LDV_ZOOMOUT
+ }
+
+ POPUP "&Comptabilité"
+ {
+  MENUITEM "Saisie d'une &recette", CM_RECETTE
+  MENUITEM "Saisie d'une &dépense", CM_DEPENSE
+  MENUITEM SEPARATOR
+  MENUITEM "Liste des recettes", CM_LISTRECETTES
+  MENUITEM "Liste des dépenses", CM_LISTDEPENSES
+  MENUITEM "Déclaration 2035", CM_2035
+  MENUITEM "Liste des &AGA", CM_AGA
+  MENUITEM "Liste des &Impayés", CM_IMPAYES
+  MENUITEM "&Liste des Actes", CM_LISTACTES
+  MENUITEM "&Somme des actes", CM_SOMACTES
+  MENUITEM "Somme des &Encaissements", CM_SOMENCAISS
+  MENUITEM SEPARATOR
+  MENUITEM "Saisie des &Tiers-payants", CM_SAISIETP
+  MENUITEM "&Feuille de soins", CM_FEUILLESOINS
+  MENUITEM SEPARATOR
+  MENUITEM "Import fichier &Noemie", CM_IMPORTNOEMIE
+ }
+
+ POPUP "&Outils"
+ {
+  MENUITEM "Gestion des &matériels", CM_MATERIELS
+  MENUITEM "&Gestion des fils guides", CM_GROUPGD
+  // MENUITEM "&Reconvoquer", CM_RECONVOC
+  POPUP "Recherche multi-&critères"
+  {
+   MENUITEM "Re&chercher...", CM_REQUETE
+   MENUITEM "Resul&tats...", CM_RESULT
+  }
+  MENUITEM "Outils &système", CM_OUTILS
+  MENUITEM "&Outils episodus", CM_EPISO_STOP
+  MENUITEM "Réferencement d'&Archetype", CM_REFARCH
+  MENUITEM SEPARATOR
+  POPUP "&Vos préférences"
+  {
+   MENUITEM "&Paramètres episodus", CM_EPISO_LEARN
+   MENUITEM "Paramètres &mails", CM_EPISO_START
+   MENUITEM SEPARATOR
+   MENUITEM "Créer en-tête", CM_NEW_ENTETE
+   MENUITEM "Modifier en-tête", CM_MOD_ENTETE
+   MENUITEM SEPARATOR
+   MENUITEM "Paramètres de &capture", CM_EPISO_MODELS
+   MENUITEM SEPARATOR
+   MENUITEM "Enregistrer la position des fenêtres", CM_ENREG_WIN
+  }
+  POPUP "&Paramètres de ce poste"
+  {
+   MENUITEM "&Paramètres d'impression", CM_PARAM_PRINT
+  }
+  MENUITEM SEPARATOR
+  MENUITEM "Gestion du &Pilot", CM_PILOT_AGENTS
+  MENUITEM SEPARATOR
+  MENUITEM "Lancer une &sauvegarde", CM_SAUVEGARDE
+ }
+
+ POPUP "F&ormat"
+ {
+  POPUP "&Caractere"
+  {
+   MENUITEM "&Gras", CM_FORMATBOLD
+   MENUITEM "&Italique", CM_FORMATITALIC
+   MENUITEM "&Souligné", CM_FORMATUNDERLINE
+   MENUITEM "&Barré", CM_FORMATSTRIKEOUT
+  }
+
+  MENUITEM "&Police...", CM_FORMATFONT
+ }
+
+ MENUITEM Separator
+ MENUITEM Separator
+ POPUP "&Aide"
+ {
+  MENUITEM "&Aide en ligne\aF1", CM_HELP
+  MENUITEM Separator
+  MENUITEM "&A propos de...", CM_ABOUT
+ }
+}
+
+#endif  // RC_INVOKED
+

@@ -1,0 +1,366 @@
+# ---------------------------------------------------------------------------
+!if !$d(BCB)
+BCB = $(MAKEDIR)\..
+!endif
+
+# ---------------------------------------------------------------------------
+# SECTION EDI
+# ---------------------------------------------------------------------------
+# La section suivante du Makefile du projet est gérée par l'EDI de BCB.
+# Il est recommandé d'utiliser l'EDI pour modifier les valeurs de cette
+# section.
+# ---------------------------------------------------------------------------
+
+VERSION = BCB.04.04
+# ---------------------------------------------------------------------------
+PROJECT = ..\..\..\..\cvs\episodus\nsm_ob1.dll
+OBJFILES = ..\..\..\..\cvs\episodus\ObjNTIERS\nsm_ob1.obj \
+  ..\..\..\..\cvs\episodus\ObjNTIERS\AttValPair.obj \
+  ..\..\..\..\cvs\episodus\ObjNTIERS\BB1API.obj \
+  ..\..\..\..\cvs\episodus\ObjNTIERS\BB1APIconst.obj \
+  ..\..\..\..\cvs\episodus\ObjNTIERS\BB1APIdef.obj \
+  ..\..\..\..\cvs\episodus\ObjNTIERS\BB1APIfns.obj \
+  ..\..\..\..\cvs\episodus\ObjNTIERS\BB1APIget.obj \
+  ..\..\..\..\cvs\episodus\ObjNTIERS\BB1APIui.obj \
+  ..\..\..\..\cvs\episodus\ObjNTIERS\BB1AppInst.obj \
+  ..\..\..\..\cvs\episodus\ObjNTIERS\BB1BBam.obj \
+  ..\..\..\..\cvs\episodus\ObjNTIERS\BB1BBcreate.obj \
+  ..\..\..\..\cvs\episodus\ObjNTIERS\BB1BBcycle.obj \
+  ..\..\..\..\cvs\episodus\ObjNTIERS\BB1BBeval.obj \
+  ..\..\..\..\cvs\episodus\ObjNTIERS\BB1BBevent.obj \
+  ..\..\..\..\cvs\episodus\ObjNTIERS\BB1BBfns.obj \
+  ..\..\..\..\cvs\episodus\ObjNTIERS\BB1BBmmr.obj \
+  ..\..\..\..\cvs\episodus\ObjNTIERS\BB1BBmsg.obj \
+  ..\..\..\..\cvs\episodus\ObjNTIERS\BB1BBname.obj \
+  ..\..\..\..\cvs\episodus\ObjNTIERS\BB1BBphase.obj \
+  ..\..\..\..\cvs\episodus\ObjNTIERS\BB1Class.obj \
+  ..\..\..\..\cvs\episodus\ObjNTIERS\BB1ClassIndex.obj \
+  ..\..\..\..\cvs\episodus\ObjNTIERS\BB1Error.obj \
+  ..\..\..\..\cvs\episodus\ObjNTIERS\BB1Event.obj \
+  ..\..\..\..\cvs\episodus\ObjNTIERS\BB1Exception.obj \
+  ..\..\..\..\cvs\episodus\ObjNTIERS\BB1Execution.obj \
+  ..\..\..\..\cvs\episodus\ObjNTIERS\BB1KB.obj \
+  ..\..\..\..\cvs\episodus\ObjNTIERS\BB1KS.obj \
+  ..\..\..\..\cvs\episodus\ObjNTIERS\BB1KSKB.obj \
+  ..\..\..\..\cvs\episodus\ObjNTIERS\BB1Link.obj \
+  ..\..\..\..\cvs\episodus\ObjNTIERS\BB1List.obj \
+  ..\..\..\..\cvs\episodus\ObjNTIERS\BB1Message.obj \
+  ..\..\..\..\cvs\episodus\ObjNTIERS\BB1Object.obj \
+  ..\..\..\..\cvs\episodus\ObjNTIERS\BB1Set.obj \
+  ..\..\..\..\cvs\episodus\ObjNTIERS\BB1types.obj \
+  ..\..\..\..\cvs\episodus\ObjNTIERS\ClassKB.obj \
+  ..\..\..\..\cvs\episodus\ObjNTIERS\Controler.obj \
+  ..\..\..\..\cvs\episodus\ObjNTIERS\Interface.obj \
+  ..\..\..\..\cvs\episodus\ObjNTIERS\InterfaceExt.obj \
+  ..\..\..\..\cvs\episodus\ObjNTIERS\Marker.obj \
+  ..\..\..\..\cvs\episodus\ObjNTIERS\MarkSet.obj \
+  ..\..\..\..\cvs\episodus\ObjNTIERS\nautilus-bbk.obj \
+  ..\..\..\..\cvs\episodus\ObjNTIERS\OB1Agenda.obj \
+  ..\..\..\..\cvs\episodus\ObjNTIERS\OB1Edge.obj \
+  ..\..\..\..\cvs\episodus\ObjNTIERS\OB1Heuristix.obj \
+  ..\..\..\..\cvs\episodus\ObjNTIERS\OB1Node.obj \
+  ..\..\..\..\cvs\episodus\ObjNTIERS\OB1Strategy.obj \
+  ..\..\..\..\cvs\episodus\ObjNTIERS\OB1Token.obj \
+  ..\..\..\..\cvs\episodus\ObjNTIERS\Sheduler.obj \
+  ..\..\..\..\cvs\episodus\ObjNTIERS\Tgraph.obj \
+  ..\..\..\..\cvs\episodus\ObjNTIERS\TypedVal.obj \
+  ..\..\..\..\cvs\episodus\ObjNTIERS\NautilusType.obj \
+  ..\..\..\..\cvs\episodus\ObjNTIERS\BB1Task.obj \
+  ..\..\..\..\cvs\episodus\ObjNTIERS\InitStructure.obj \
+  ..\..\..\..\cvs\episodus\ObjNTIERS\Transfer.obj \
+  ..\..\..\..\cvs\episodus\ObjNTIERS\toolbox.obj \
+  ..\..\..\..\cvs\episodus\ObjNTIERS\AgentManager.obj \
+  ..\..\..\..\cvs\episodus\ObjNTIERS\Agent.obj \
+  ..\..\..\..\cvs\episodus\ObjNTIERS\NSKS.obj
+RESFILES = ..\..\..\..\cvs\episodus\ObjNTIERS\OB1.res nsm_ob1.res
+DEFFILE =
+RESDEPEN = $(RESFILES)
+LIBFILES = bidsvi.lib owlwvi.lib nsmutil.lib nsmbb.lib nsmepisod.lib nsmsavoir.lib
+IDLGENFILES =
+IDLFILES =
+LIBRARIES =
+SPARELIBS = vcl40.lib
+PACKAGES = vclx40.bpi vcl40.bpi vcldb40.bpi vcldbx40.bpi bcbsmp40.bpi dclocx40.bpi \
+  qrpt40.bpi teeui40.bpi vclsmp40.bpi teedb40.bpi tee40.bpi ibsmp40.bpi \
+  nmfast40.bpi inetdb40.bpi inet40.bpi
+# ---------------------------------------------------------------------------
+PATHCPP = .;ns_ob1
+PATHASM = .;
+PATHPAS = .;
+PATHRC = .;ns_ob1
+DEBUGLIBPATH = $(BCB)\lib\debug
+RELEASELIBPATH = $(BCB)\lib\release
+SYSDEFINES = NO_STRICT;_RTLDLL;USEPACKAGES
+USERDEFINES = INC_OLE2;STRICT;_OWLDLL;_OWLALLPCH;_USE_OWL_CM_EXIT;NO_SHDOCVW_GUIDS;BI_NAMESPACE;_NSHOOKDLL;_DANSBBKDLL;_MUE;__TCONTROLER__;__TCONTROLER_DEBUG__;__DEBUG__;__OB1__;N_TIERS;FOR_WINDOWS
+# ---------------------------------------------------------------------------
+CFLAG1 = -Ins_ob1;ns_ob1\testcontroler;ns_ob1\nsbbk;ns_ob1\tsp;ns_ob1\gcd;ns_ob1\testBB1;include;$(BCB)\include;$(BCB)\include\owlfiles;$(BCB)\include\vcl;"..\..\..\..\Program Files (x86)\Java\jdk1.6.0_30\include";"..\..\..\..\Program Files (x86)\Java\jdk1.6.0_30\include\win32";nsprpub\include\nspr \
+  -WD -Od -w -Tkh30000 -r- -a8 -5 -k -y -v -vi- -c -tWM \
+  -D$(SYSDEFINES);$(USERDEFINES)
+CFLAG2 =
+CFLAG3 =
+IDLCFLAGS = -Ins_ob1 -Ins_ob1\testcontroler -Ins_ob1\nsbbk -Ins_ob1\tsp -Ins_ob1\gcd \
+  -Ins_ob1\testBB1 -Iinclude -I$(BCB)\include -I$(BCB)\include\owlfiles \
+  -I$(BCB)\include\vcl \
+  -I"..\..\..\..\Program Files (x86)\Java\jdk1.6.0_30\include" \
+  -I"..\..\..\..\Program Files (x86)\Java\jdk1.6.0_30\include\win32" \
+  -Insprpub\include\nspr -src_suffixcpp -DINC_OLE2 -DSTRICT -D_OWLDLL \
+  -D_OWLALLPCH -D_USE_OWL_CM_EXIT -DNO_SHDOCVW_GUIDS -DBI_NAMESPACE -D_NSHOOKDLL \
+  -D_DANSBBKDLL -D_MUE -D__TCONTROLER__ -D__TCONTROLER_DEBUG__ -D__DEBUG__ \
+  -D__OB1__ -DN_TIERS -DFOR_WINDOWS
+PFLAGS = -Uns_ob1;..\..\..\..\cvs\episodus;$(BCB)\lib\obj;$(BCB)\lib;$(RELEASELIBPATH) \
+  -Ins_ob1;ns_ob1\testcontroler;ns_ob1\nsbbk;ns_ob1\tsp;ns_ob1\gcd;ns_ob1\testBB1;include;$(BCB)\include;$(BCB)\include\owlfiles;$(BCB)\include\vcl;"..\..\..\..\Program Files (x86)\Java\jdk1.6.0_30\include";"..\..\..\..\Program Files (x86)\Java\jdk1.6.0_30\include\win32";nsprpub\include\nspr \
+  -N2..\..\..\..\cvs\episodus\ObjNTIERS -N0..\..\..\..\cvs\episodus\ObjNTIERS \
+  -DINC_OLE2;STRICT;_OWLDLL;_OWLALLPCH;_USE_OWL_CM_EXIT;NO_SHDOCVW_GUIDS;BI_NAMESPACE;_NSHOOKDLL;_DANSBBKDLL;_MUE;__TCONTROLER__;__TCONTROLER_DEBUG__;__DEBUG__;__OB1__;N_TIERS;FOR_WINDOWS \
+  -$Y+ -$W -$O- -v -M -JPHNE
+RFLAGS = -ins_ob1;ns_ob1\testcontroler;ns_ob1\nsbbk;ns_ob1\tsp;ns_ob1\gcd;ns_ob1\testBB1;include;$(BCB)\include;$(BCB)\include\owlfiles;$(BCB)\include\vcl;"..\..\..\..\Program Files (x86)\Java\jdk1.6.0_30\include";"..\..\..\..\Program Files (x86)\Java\jdk1.6.0_30\include\win32";nsprpub\include\nspr \
+  -DINC_OLE2;STRICT;_OWLDLL;_OWLALLPCH;_USE_OWL_CM_EXIT;NO_SHDOCVW_GUIDS;BI_NAMESPACE;_NSHOOKDLL;_DANSBBKDLL;_MUE;__TCONTROLER__;__TCONTROLER_DEBUG__;__DEBUG__;__OB1__;N_TIERS;FOR_WINDOWS
+AFLAGS = /ins_ob1 /ins_ob1\testcontroler /ins_ob1\nsbbk /ins_ob1\tsp /ins_ob1\gcd \
+  /ins_ob1\testBB1 /iinclude /i$(BCB)\include /i$(BCB)\include\owlfiles \
+  /i$(BCB)\include\vcl \
+  /i"..\..\..\..\Program Files (x86)\Java\jdk1.6.0_30\include" \
+  /i"..\..\..\..\Program Files (x86)\Java\jdk1.6.0_30\include\win32" \
+  /insprpub\include\nspr /dINC_OLE2 /dSTRICT /d_OWLDLL /d_OWLALLPCH \
+  /d_USE_OWL_CM_EXIT /dNO_SHDOCVW_GUIDS /dBI_NAMESPACE /d_NSHOOKDLL /d_DANSBBKDLL \
+  /d_MUE /d__TCONTROLER__ /d__TCONTROLER_DEBUG__ /d__DEBUG__ /d__OB1__ /dN_TIERS \
+  /dFOR_WINDOWS /mx /w2 /zi
+LFLAGS = -Lns_ob1;..\..\..\..\cvs\episodus;$(BCB)\lib\obj;$(BCB)\lib;$(RELEASELIBPATH) \
+  -l"C:\cvs\episodus\" -aa -Tpd -x -Gn -Gi -v
+IFLAGS =
+# ---------------------------------------------------------------------------
+ALLOBJ = c0d32.obj Memmgr.Lib $(PACKAGES) sysinit.obj $(OBJFILES)
+ALLRES = $(RESFILES)
+ALLLIB = $(LIBFILES) $(LIBRARIES) import32.lib cp32mti.lib
+# ---------------------------------------------------------------------------
+!ifdef IDEOPTIONS
+
+[Version Info]
+IncludeVerInfo=1
+AutoIncBuild=0
+MajorVer=5
+MinorVer=11
+Release=1
+Build=0
+Debug=0
+PreRelease=0
+Special=0
+Private=0
+DLL=1
+Locale=1036
+CodePage=1252
+
+[Version Info Keys]
+CompanyName=
+FileDescription=
+FileVersion=5.11.1.0
+InternalName=
+LegalCopyright=
+LegalTrademarks=
+OriginalFilename=
+ProductName=ePisodus
+ProductVersion=5.11.0001
+Comments=
+
+[HistoryLists\hlIncludePath]
+Count=26
+Item0=ns_ob1;ns_ob1\testcontroler;ns_ob1\nsbbk;ns_ob1\tsp;ns_ob1\gcd;ns_ob1\testBB1;include;$(BCB)\include;$(BCB)\include\owlfiles;$(BCB)\include\vcl;..\..\..\..\Program Files (x86)\Java\jdk1.6.0_30\include;..\..\..\..\Program Files (x86)\Java\jdk1.6.0_30\include\win32;nsprpub\include\nspr
+Item1=ns_ob1;ns_ob1\testcontroler;ns_ob1\nsbbk;ns_ob1\tsp;ns_ob1\gcd;ns_ob1\testBB1;include;$(BCB)\include;$(BCB)\include\owlfiles;$(BCB)\include\vcl;..\..\Program Files (x86)\Java\jdk1.6.0_30\include;..\..\Program Files (x86)\Java\jdk1.6.0_30\include\win32;nsprpub\include\nspr
+Item2=ns_ob1;ns_ob1\testcontroler;ns_ob1\nsbbk;ns_ob1\tsp;ns_ob1\gcd;ns_ob1\testBB1;include;$(BCB)\include;$(BCB)\include\owlfiles;$(BCB)\include\vcl;..\..\Program Files\Java\jdk1.6.0_17\include;..\..\Program Files\Java\jdk1.6.0_17\include\win32;nsprpub\include\nspr
+Item3=ns_ob1;ns_ob1\testcontroler;ns_ob1\nsbbk;ns_ob1\tsp;ns_ob1\gcd;ns_ob1\testBB1;include;$(BCB)\include;$(BCB)\include\owlfiles;$(BCB)\include\vcl;..\..\Program Files\Java\jdk1.6.0_17\include;..\..\Program Files\Java\jdk1.6.0_17\include\win32;nsprpub\pr\include
+Item4=ns_ob1;ns_ob1\testcontroler;ns_ob1\nsbbk;ns_ob1\tsp;ns_ob1\gcd;ns_ob1\testBB1;include;$(BCB)\include;$(BCB)\include\owlfiles;$(BCB)\include\vcl;C:\Program Files\Java\jdk1.6.0_17\include;C:\Program Files\Java\jdk1.6.0_17\include\win32
+Item5=ns_ob1;ns_ob1\testcontroler;ns_ob1\nsbbk;ns_ob1\tsp;ns_ob1\gcd;ns_ob1\testBB1;include;$(BCB)\include;$(BCB)\include\owlfiles;$(BCB)\include\vcl;..\..\j2sdk1.4.2\include;..\..\j2sdk1.4.2\include\win32
+Item6=ns_ob1;ns_ob1\testcontroler;ns_ob1\nsbbk;ns_ob1\tsp;ns_ob1\gcd;ns_ob1\testBB1;include;$(BCB)\include;$(BCB)\include\owlfiles;$(BCB)\include\vcl;..\..\j2sdk1.4.1\include;..\..\j2sdk1.4.1\include\win32
+Item7=ns_ob1;ns_ob1\testcontroler;ns_ob1\nsbbk;ns_ob1\tsp;ns_ob1\gcd;ns_ob1\testBB1;include;$(BCB)\include;$(BCB)\include\owlfiles;$(BCB)\include\vcl;C:\j2sdk1.4.1\include;C:\j2sdk1.4.1\include\win32
+Item8=ns_ob1;ns_ob1\testcontroler;ns_ob1\nsbbk;ns_ob1\tsp;ns_ob1\gcd;ns_ob1\testBB1;include;$(BCB)\include;$(BCB)\include\owlfiles;$(BCB)\include\vcl
+Item9=ns_ob1;ns_ob1\testcontroler;ns_ob1\nsbbk;ns_ob1\tsp;ns_ob1\gcd;ns_ob1\testBB1;ns_ob1;include;$(BCB)\include;$(BCB)\include\owlfiles;$(BCB)\include\vcl
+Item10=include\ns_ob1\TControler;ns_ob1\TControler;ns_ob1\testcontroler;ns_ob1\nsbbk;ns_ob1\tsp;ns_ob1\gcd;ns_ob1\testBB1;ns_ob1;include;$(BCB)\include;$(BCB)\include\owlfiles;$(BCB)\include\vcl
+Item11=ns_ob1\TControler;ns_ob1\testcontroler;ns_ob1\nsbbk;ns_bbk\tsp;ns_ob1\gcd;ns_ob1\testBB1;ns_ob1;include;$(BCB)\include;$(BCB)\include\owlfiles;$(BCB)\include\vcl
+Item12=ns_ob1\testcontroler;ns_ob1\nsbbk;ns_ob1\tsp;ns_ob1\gcd;ns_ob1\testBB1;ns_ob1;include;$(BCB)\include;$(BCB)\include\owlfiles;$(BCB)\include\vcl
+Item13=ns_ob1\nsbbk;ns_ob1\tsp;ns_ob1\gcd;ns_ob1\testBB1;ns_ob1;include;$(BCB)\include;$(BCB)\include\owlfiles;$(BCB)\include\vcl
+Item14=ns_ob1\tsp;ns_ob1\gcd;ns_ob1\testBB1;ns_ob1;include;$(BCB)\include;$(BCB)\include\owlfiles;$(BCB)\include\vcl
+Item15=ns_ob1\testBB1;ns_ob1;include;$(BCB)\include;$(BCB)\include\owlfiles;$(BCB)\include\vcl
+Item16=ns_ob1;include;$(BCB)\include;$(BCB)\include\owlfiles;$(BCB)\include\vcl
+Item17=dicom;include;$(BCB)\include;$(BCB)\include\owlfiles;$(BCB)\include\vcl
+Item18=dicom;include;$(BCB)\include;$(BCB)\include\vcl;$(BCB)\include\owlfiles
+Item19=include;$(BCB)\include;$(BCB)\include\vcl;$(BCB)\include\owlfiles
+Item20=dicom;include;$(BCB)\include;$(BCB)\include\vcl;$(BCB)\include\owlfiles;include\dicom
+Item21=include;$(BCB)\include;$(BCB)\include\vcl;$(BCB)\include\owlfiles;include\dicom
+Item22=partage;nsutil;include;$(BCB)\include;$(BCB)\include\vcl;$(BCB)\include\owlfiles
+Item23=partage;nsutil;c:\nautilus\include;$(BCB)\include;$(BCB)\include\vcl;$(BCB)\include\owlfiles
+Item24=c:\nautilus\include;$(BCB)\include;$(BCB)\include\vcl;$(BCB)\include\owlfiles
+Item25=partage;nsutil;$(BCB)\include;$(BCB)\include\vcl;$(BCB)\include\owlfiles
+
+[HistoryLists\hlLibraryPath]
+Count=21
+Item0=..\..\..\..\cvs\episodus;$(BCB)\lib\obj;$(BCB)\lib
+Item1=..\..\Program Files (x86)\Borland\CBuilder4\Lib;ns_ob1;ns_ob1\testcontroler;ns_ob1\nsbbk;ns_ob1\tsp;ns_ob1\gcd;ns_ob1\testBB1;nautilus;$(BCB)\lib\obj;$(BCB)\lib
+Item2=ns_ob1;ns_ob1\testcontroler;ns_ob1\nsbbk;ns_ob1\tsp;ns_ob1\gcd;ns_ob1\testBB1;nautilus;$(BCB)\lib\obj;$(BCB)\lib
+Item3=ns_ob1;ns_ob1\testcontroler;..\..\borland\cbuilder4\cbuilder4\Lib;ns_ob1\nsbbk;ns_ob1\tsp;ns_ob1\gcd;ns_ob1\testBB1;nautilus;$(BCB)\lib\obj;$(BCB)\lib
+Item4=ns_ob1;ns_ob1\testcontroler;..\..\borland\cbuilder4\cbuilder4\Lib;ns_ob1\nsbbk;ns_ob1\tsp;ns_ob1\gcd;ns_ob1\testBB1;ns_ob1;nautilus;$(BCB)\lib\obj;$(BCB)\lib
+Item5=include\ns_ob1\TControler;ns_ob1\TControler;ns_ob1\testcontroler;..\..\borland\cbuilder4\cbuilder4\Lib;ns_ob1\nsbbk;ns_ob1\tsp;ns_ob1\gcd;ns_ob1\testBB1;ns_ob1;nautilus;$(BCB)\lib\obj;$(BCB)\lib
+Item6=ns_ob1\TControler;ns_ob1\testcontroler;..\..\borland\cbuilder4\cbuilder4\Lib;ns_ob1\nsbbk;ns_ob1\tsp;ns_ob1\gcd;ns_ob1\testBB1;ns_ob1;nautilus;$(BCB)\lib\obj;$(BCB)\lib
+Item7=ns_ob1\testcontroler;..\..\borland\cbuilder4\cbuilder4\Lib;ns_ob1\nsbbk;ns_ob1\tsp;ns_ob1\gcd;ns_ob1\testBB1;ns_ob1;nautilus;$(BCB)\lib\obj;$(BCB)\lib
+Item8=ns_ob1\nsbbk;ns_ob1\tsp;ns_ob1\gcd;ns_ob1\testBB1;ns_ob1;nautilus;$(BCB)\lib\obj;$(BCB)\lib
+Item9=ns_ob1\nsbbk;ns_ob1\tsp;ns_ob1\gcd;ns_ob1\testBB1;ns_ob1;..\Program Files\Borland\CBuilder4\Lib\Release;nautilus;$(BCB)\lib\obj;$(BCB)\lib
+Item10=ns_ob1\tsp;ns_ob1\gcd;ns_ob1\testBB1;ns_ob1;..\Program Files\Borland\CBuilder4\Lib\Release;nautilus;$(BCB)\lib\obj;$(BCB)\lib
+Item11=ns_ob1\testBB1;ns_ob1;..\Program Files\Borland\CBuilder4\Lib\Release;nautilus;$(BCB)\lib\obj;$(BCB)\lib
+Item12=ns_ob1;..\Program Files\Borland\CBuilder4\Lib\Release;nautilus;$(BCB)\lib\obj;$(BCB)\lib
+Item13=..\Program Files\Borland\CBuilder4\Lib\Release;nautilus;$(BCB)\lib\obj;$(BCB)\lib
+Item14=nautilus;$(BCB)\lib\obj;$(BCB)\lib
+Item15=dicom;nautilus;$(BCB)\lib\obj;$(BCB)\lib
+Item16=..\builder3\cbuilder3\lib;partage;nsutil;c:\nautilus;$(BCB)\lib\obj;$(BCB)\lib
+Item17=partage;nsutil;c:\nautilus;$(BCB)\lib\obj;$(BCB)\lib
+Item18=..\program files\borland\cbuilder3\lib;partage;nsutil;c:\nautilus;$(BCB)\lib\obj;$(BCB)\lib
+Item19=c:\nautilus;$(BCB)\lib\obj;$(BCB)\lib
+Item20=partage;nsutil;$(BCB)\lib\obj;$(BCB)\lib
+
+[HistoryLists\hlDebugSourcePath]
+Count=1
+Item0=$(BCB)\source\vcl
+
+[HistoryLists\hlConditionals]
+Count=30
+Item0=INC_OLE2;STRICT;_OWLDLL;_OWLALLPCH;_USE_OWL_CM_EXIT;NO_SHDOCVW_GUIDS;BI_NAMESPACE;_NSHOOKDLL;_DANSBBKDLL;_MUE;__TCONTROLER__;__TCONTROLER_DEBUG__;__DEBUG__;__OB1__;N_TIERS;FOR_WINDOWS
+Item1=INC_OLE2;STRICT;_OWLDLL;_OWLALLPCH;_USE_OWL_CM_EXIT;NO_SHDOCVW_GUIDS;__BI_NAMESPACE;_NSHOOKDLL;_DANSBBKDLL;_MUE;__TCONTROLER__;__TCONTROLER_DEBUG__;__DEBUG__;__OB1__;N_TIERS;FOR_WINDOWS
+Item2=INC_OLE2;STRICT;_OWLDLL;_OWLALLPCH;_USE_OWL_CM_EXIT;NO_SHDOCVW_GUIDS;BI_NAMESPACE;_NSHOOKDLL;_DANSBBKDLL;_MUE;__TCONTROLER__;__TCONTROLER_DEBUG__;__DEBUG__;__OB1__;N_TIERS
+Item3=INC_OLE2;STRICT;_OWLDLL;_OWLALLPCH;_USE_OWL_CM_EXIT;NO_SHDOCVW_GUIDS;BI_NAMESPACE;_NSHOOKDLL;_DANSBBKDLL;_MUE;__TCONTROLER__;__TCONTROLER_DEBUG__;__DEBUG__;__OB1__
+Item4=INC_OLE2;STRICT;_OWLDLL;_OWLALLPCH;_USE_OWL_CM_EXIT;NO_SHDOCVW_GUIDS;BI_NAMESPACE;_NSHOOKDLL;_DANSBBKDLL;_MUE;__TCONTROLER__;__TCONTROLER_DEBUG__;__DEBUG__
+Item5=INC_OLE2;STRICT;_OWLDLL;_OWLALLPCH;_USE_OWL_CM_EXIT;NO_SHDOCVW_GUIDS;BI_NAMESPACE;_NSHOOKDLL;_DANSBBKDLL;_MUE;__TCONTROLER__;__TCONTROLER_DEBUG__
+Item6=INC_OLE2;STRICT;_OWLDLL;_OWLALLPCH;_USE_OWL_CM_EXIT;NO_SHDOCVW_GUIDS;BI_NAMESPACE;_NSHOOKDLL;_DANSBBKDLL;_MUE;__TCONTROLER__
+Item7=INC_OLE2;STRICT;_OWLDLL;_OWLALLPCH;_USE_OWL_CM_EXIT;NO_SHDOCVW_GUIDS;BI_NAMESPACE;_NSHOOKDLL;_DANSBBKDLL;_MUE
+Item8=INC_OLE2;STRICT;_OWLDLL;_OWLALLPCH;_USE_OWL_CM_EXIT;NO_SHDOCVW_GUIDS;BI_NAMESPACE;_NSHOOKDLL;_DANSBBKDLL
+Item9=STRICT;_OWLDLL;_OWLALLPCH;_USE_OWL_CM_EXIT;NO_SHDOCVW_GUIDS;BI_NAMESPACE;_NSHOOKDLL;_DANSBBKDLL
+Item10=STRICT;_OWLDLL;_OWLALLPCH;_USE_OWL_CM_EXIT;NO_SHDOCVW_GUIDS;BI_NAMESPACE;_NSHOOKDLL
+Item11=STRICT;_OWLDLL;_OWLALLPCH;_USE_OWL_CM_EXIT;NO_SHDOCVW_GUIDS;BI_NAMESPACE;_NSHOOKDLL;__GNUC__
+Item12=STRICT;_OWLDLL;_OWLALLPCH;_USE_OWL_CM_EXIT;NO_SHDOCVW_GUIDS;BI_NAMESPACE;INC_OLE2;WINDOWS;_NSHOOKDLL;__USING_CNAME__
+Item13=STRICT;_OWLDLL;_OWLALLPCH;_USE_OWL_CM_EXIT;NO_SHDOCVW_GUIDS;BI_NAMESPACE;INC_OLE2;WINDOWS;_NSHOOKDLL
+Item14=STRICT;_OWLDLL;_OWLALLPCH;_USE_OWL_CM_EXIT;NO_SHDOCVW_GUIDS;BI_NAMESPACE;INC_OLE2;WINDOWS
+Item15=STRICT;_OWLDLL;_OWLALLPCH;_USE_OWL_CM_EXIT;_DANSDLL;_NSDICOMDLL;NO_SHDOCVW_GUIDS;BI_NAMESPACE;INC_OLE2;WINDOWS
+Item16=STRICT;_OWLDLL;_OWLALLPCH;_USE_OWL_CM_EXIT;_DANSDLL;_NSDICOMDLL;NO_SHDOCVW_GUIDS;BI_NAMESPACE;INC_OLE2
+Item17=STRICT;_OWLDLL;_OWLALLPCH;_USE_OWL_CM_EXIT;_DANSDLL;_NSDICOMDLL;NO_SHDOCVW_GUIDS;BI_NAMESPACE
+Item18=STRICT;_OWLDLL;_USE_OWL_CM_EXIT;_NSDICOMDLL;_DANSDLL;BI_NAMESPACE
+Item19=STRICT;_OWLDLL;_OWLALLPCH;_USE_OWL_CM_EXIT;_NSDICOMDLL;_DANSDLL;BI_NAMESPACE
+Item20=STRICT;_OWLDLL;_USE_OWL_CM_EXIT;WINDOWS;_NSDICOMDLL;BI_NAMESPACE
+Item21=STRICT;_OWLDLL;_USE_OWL_CM_EXIT;WINDOWS;_NSDICOMDLL
+Item22=STRICT;_OWLDLL;_USE_OWL_CM_EXIT;_NSUTILDLL
+Item23=_RTLDLL;STRICT;_OWLDLL;_USE_OWL_CM_EXIT;_NSUTILDLL;USEPACKAGES
+Item24=_RTLDLL;STRICT;_OWLDLL;_USE_OWL_CM_EXIT;USEPACKAGES;_NSUTILDLL
+Item25=_RTLDLL;STRICT;_OWLDLL;_USE_OWL_CM_EXIT;USEPACKAGES
+Item26=_RTLDLL;STRICT;_OWLDLL;USEPACKAGES;_USE_OWL_CM_EXIT;
+Item27=_RTLDLL;STRICT;USEPACKAGES;_OWLDLL;
+Item28=_RTLDLL;USEPACKAGES;STRICT;
+Item29=_RTLDLL;USEPACKAGES
+
+[HistoryLists\hlIntOutputDir]
+Count=4
+Item0=..\..\..\..\cvs\episodus\ObjNTIERS
+Item1=ObjNTIERS
+Item2=ObjMUE
+Item3=Obj
+
+[HistoryLists\hlFinalOutputDir]
+Count=1
+Item0=..\..\..\..\cvs\episodus
+
+[HistoryLists\hIBPIOutputDir]
+Count=1
+Item0=..\..\..\..\cvs\episodus
+
+[Debugging]
+DebugSourceDirs=$(BCB)\source\vcl
+
+[Parameters]
+RunParams=
+HostApplication=
+RemoteHost=
+RemotePath=
+RemoteDebug=0
+
+[Compiler]
+InMemoryExe=0
+ShowInfoMsgs=0
+
+[CORBA]
+AddServerUnit=1
+AddClientUnit=1
+PrecompiledHeaders=1
+
+!endif
+
+# ---------------------------------------------------------------------------
+# SECTION MAKE
+# ---------------------------------------------------------------------------
+# Cette section du fichier projet n'est pas utilisée par l'EDI de BCB. Elle est destinée
+# à la construction à partir de la ligne de commande en utilisant l'utilitaire MAKE.
+# ---------------------------------------------------------------------------
+
+.autodepend
+# ---------------------------------------------------------------------------
+!if !$d(BCC32)
+BCC32 = bcc32
+!endif
+
+!if !$d(DCC32)
+DCC32 = dcc32
+!endif
+
+!if !$d(TASM32)
+TASM32 = tasm32
+!endif
+
+!if !$d(LINKER)
+LINKER = ilink32
+!endif
+
+!if !$d(BRCC32)
+BRCC32 = brcc32
+!endif
+
+!if !$d(IDL2CPP)
+IDL2CPP = idl2cpp
+!endif
+# ---------------------------------------------------------------------------
+!if $d(PATHCPP)
+.PATH.CPP = $(PATHCPP)
+.PATH.C   = $(PATHCPP)
+!endif
+
+!if $d(PATHPAS)
+.PATH.PAS = $(PATHPAS)
+!endif
+
+!if $d(PATHASM)
+.PATH.ASM = $(PATHASM)
+!endif
+
+!if $d(PATHRC)
+.PATH.RC  = $(PATHRC)
+!endif
+# ---------------------------------------------------------------------------
+$(PROJECT): $(IDLGENFILES) $(OBJFILES) $(RESDEPEN) $(DEFFILE)
+    $(BCB)\BIN\$(LINKER) @&&!
+    $(LFLAGS) +
+    $(ALLOBJ), +
+    $(PROJECT),, +
+    $(ALLLIB), +
+    $(DEFFILE), +
+    $(ALLRES)
+!
+# ---------------------------------------------------------------------------
+.pas.hpp:
+    $(BCB)\BIN\$(DCC32) $(PFLAGS) {$< }
+
+.pas.obj:
+    $(BCB)\BIN\$(DCC32) $(PFLAGS) {$< }
+
+.cpp.obj:
+    $(BCB)\BIN\$(BCC32) $(CFLAG1) $(CFLAG2) $(CFLAG3) -n$(@D) {$< }
+
+.c.obj:
+    $(BCB)\BIN\$(BCC32) $(CFLAG1) $(CFLAG2) $(CFLAG3) -n$(@D) {$< }
+
+.asm.obj:
+    $(BCB)\BIN\$(TASM32) $(AFLAGS) $<, $@
+
+.rc.res:
+    $(BCB)\BIN\$(BRCC32) $(RFLAGS) -fo$@ $<
+# ---------------------------------------------------------------------------

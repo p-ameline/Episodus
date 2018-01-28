@@ -1,0 +1,335 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+<TITLE>TIdTrivialFTP</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <META name="GENERATOR" content="Doc-O-Matic">
+    <LINK rel="STYLESHEET" href="default.css" type="text/css">
+
+<SCRIPT LANGUAGE="JavaScript1.2" SRC="scripts.js"></SCRIPT>
+</HEAD>
+<BODY CLASS="Element57">
+<TABLE BORDER="0" BGCOLOR="#AACCFF" WIDTH="100%" CELLSPACING="0" CELLPADDING="0">
+<TR><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element1">
+Indy 9</DIV>
+</TD><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element2">
+<A HREF="content.html" CLASS="Element59">Content</A> | <A HREF="idx.html" CLASS="Element59">Index</A> | <A HREF="symref.html" CLASS="Element59">Reference</A></DIV>
+</TD></TR></TABLE><DIV CLASS="Element58">
+<DIV CLASS="Element5">
+TIdTrivialFTP</DIV>
+<DIV CLASS="Element7">
+<A HREF="014568.html" CLASS="Element59">Hierarchy</A>, <A HREF="014569.html" CLASS="Element59">Properties</A>, <A HREF="014570.html" CLASS="Element59">Methods</A>, <A HREF="014571.html" CLASS="Element59">Events</A>, <A HREF="014572.html" CLASS="Element59">See Also</A>, <A HREF="002938.html" CLASS="Element59">Unit: IdTrivialFTP</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Implements a Trivial File Transfer Protocol client.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12">TIdTrivialFTP = <STRONG>class</STRONG>(<A HREF="007874.html" CLASS="Element59">TIdUDPClient</A>)</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Unit</DIV>
+<DIV CLASS="Element69">
+<A HREF="002938.html" CLASS="Element59">IdTrivialFTP</A></DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+TIdTrivialFTP is a <A HREF="007874.html" CLASS="Element59">TIdUDPClient</A> descendant that implements a Trivial File Transfer Protocol (TFTP) client as described in the Internet Standards documents:<P CLASS="Element10">
+<UL>
+<LI>RFC 1350 - Trivial File Transfer Protocol (http://www.rfc-editor.org/rfc/rfc1350.txt)<P CLASS="Element10">
+<LI>RFC 1782 - TFTP Option Extension (http://www.rfc-editor.org/rfc/rfc1782.txt)<P CLASS="Element10">
+<LI>RFC 1783 - TFTP Blocksize Option (http://www.rfc-editor.org/rfc/rfc1783.txt)</UL>
+<P CLASS="Element10">
+Trivial FTP is an extremely lightweight and simple UDP-Based file transfer protocol that is normally used read and write files from/to a remote server. TFTP cannot list directories, and currently has no provisions for user authentication.<P CLASS="Element10">
+TIdTrivialFTP supports the TFP Option Negotiation Protocol where the client appends options at the end of the Read Request or Write request packet. TIdTrivialFTP also supports the TFTP Blocksize Option which allows the client and server to negotiate a blocksize more applicable to the network medium.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0003">TIdTrivialFTP.OnWork</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007868.html" CLASS="Element59">TIdTrivialFTP</A>, <A HREF="014573.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Specifies the event handler when data is sent or received.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> OnWork;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+OnWork is a <A HREF="008112.html" CLASS="Element59">TWorkEvent</A> property that represents the event handler triggered when a <A HREF="007868.html#0001" CLASS="Element59">Get</A> or <A HREF="007868.html#0006" CLASS="Element59">Put</A> request has been made, and the method is started. When AWorkMode is wmRead Mode (<A HREF="007868.html#0001" CLASS="Element59">Get</A> method) or wmWrite Mode (<A HREF="007868.html#0006" CLASS="Element59">Put</A> method), the amount of data transmitted is available in ACount.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0004">TIdTrivialFTP.OnWorkBegin</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007868.html" CLASS="Element59">TIdTrivialFTP</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Specifies an event handler for a data request.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> OnWorkBegin;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+OnWorkBegin is an event handler that allows the TFTP client to respond to a <A HREF="007868.html#0001" CLASS="Element59">Get</A> or <A HREF="007868.html#0006" CLASS="Element59">Put</A> request notification. OnWorkBegin is triggered when has been made, and is about to begin transferring data.<P CLASS="Element10">
+Work mode will contain wmRead for <A HREF="007868.html#0001" CLASS="Element59">Get</A> operations, and wmWrite for <A HREF="007868.html#0006" CLASS="Element59">Put</A> operations.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0005">TIdTrivialFTP.OnWorkEnd</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007868.html" CLASS="Element59">TIdTrivialFTP</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Specifies an event handler for a complete file operation.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> OnWorkEnd;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+OnWorkEnd is an event handler that allows the TFTP client to respond to a complete file operation. OnWorkEnd is triggered when a request has been made and the method completes. Work mode will contain wmRead for <A HREF="007868.html#0001" CLASS="Element59">Get</A> operations or wmWrite for <A HREF="007868.html#0006" CLASS="Element59">Put</A> operations.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0008">TIdTrivialFTP.RequestedBlockSize</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007868.html" CLASS="Element59">TIdTrivialFTP</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Identifies of bytes to transmit before an acknowledgement is required.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> RequestedBlockSize: Integer;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+RequestedBlockSize is an Integer property that identifies the number of bytes to use as Block when reading or writing file data on the TFTP server. Normally a file cannot be transmitted in a single block. RequestedBlockSize specifies the number of bytes that can transmitted before an acknowledgement is required.<P CLASS="Element10">
+The default value for RequestedBlockSize is 1500. Note: Changing the value of RequestedBlockSize can adversely affect the performance of the protocol.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0009">TIdTrivialFTP.TransferMode</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007868.html" CLASS="Element59">TIdTrivialFTP</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Specifies the transfer mode for data on TFTP connection.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> TransferMode: <A HREF="007845.html" CLASS="Element59">TIdTFTPMode</A>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+<A HREF="007845.html" CLASS="Element59">TIdTFTPMode</A> is an enumerated type that specifies the transfer mode for data on TFTP connection, and can contain the values tfNetAscii and tfOctet.<P CLASS="Element10">
+tfNetAscii indicates that the connection will transmit data using the netascii, or &quot;USA Standard Code for Information Interchange&quot;, format defined in the Telnet protocol specification. tfNetAscii will contain 8-bit ASCII data.<P CLASS="Element10">
+tfOctet indicates that the connection will transmit raw 8-bit data, or binary data.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0000">TIdTrivialFTP.Create</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007868.html" CLASS="Element59">TIdTrivialFTP</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Creates a new object instance.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>constructor</STRONG> Create(AnOwner: TComponent); <STRONG>override</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+AnOwner: TComponent</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Owner of the object instance.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Create is the constructor for the object instance, and creates a new <A HREF="007868.html" CLASS="Element59">TIdTrivialFTP</A> component. Create sets the default port to the standard port number used for the TFTP protocol (<A HREF="002724.html" CLASS="Element59">IdPORT_TFTP</A>). The constructor also sets <A HREF="007868.html#0009" CLASS="Element59">TransferMode</A> to tfOctet, <A HREF="007868.html#0008" CLASS="Element59">RequestedBlockSize</A> to 1500, and ReceiveTimeout to 4000.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0002">TIdTrivialFTP.Get</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007868.html" CLASS="Element59">TIdTrivialFTP</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Retrieve a file from a TrivialFTP server.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>procedure</STRONG> <A HREF="007868.html#0001" CLASS="Element59">Get</A>(<STRONG>const</STRONG> ServerFile: <STRONG>String</STRONG>; DestinationStream: TStream); <STRONG>overload</STRONG>;
+<STRONG>procedure</STRONG> <A HREF="007868.html#0001" CLASS="Element59">Get</A>(<STRONG>const</STRONG> ServerFile: <STRONG>String</STRONG>; <STRONG>const</STRONG> LocalFile: <STRONG>String</STRONG>); <STRONG>overload</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+const ServerFile: String</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+File name on the server.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+DestinationStream: TStream</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Destination for retrieved file data.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+const LocalFile: String</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+File name on the local file system.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Get is an overloaded method to retrieve a file from a TrivialFTP server.<P CLASS="Element10">
+The version requiring a local filename creates a TFileStream, then calls the stream version of the Get method (it is freed automatically).<P CLASS="Element10">
+The stream version of the Get method transmits the stream, firing the onWork, onWorkBegin, onWorkEnd during the process.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0001">TIdTrivialFTP.Get</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007868.html" CLASS="Element59">TIdTrivialFTP</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Retrieve a file from a TrivialFTP server.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>procedure</STRONG> Get(<STRONG>const</STRONG> ServerFile: <STRONG>String</STRONG>; DestinationStream: TStream); <STRONG>overload</STRONG>;
+<STRONG>procedure</STRONG> Get(<STRONG>const</STRONG> ServerFile: <STRONG>String</STRONG>; <STRONG>const</STRONG> LocalFile: <STRONG>String</STRONG>); <STRONG>overload</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+const ServerFile: String</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+File name on the server.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+DestinationStream: TStream</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Destination for retrieved file data.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+const LocalFile: String</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+File name on the local file system.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Get is an overloaded method to retrieve a file from a TrivialFTP server.<P CLASS="Element10">
+The version requiring a local filename creates a TFileStream, then calls the stream version of the Get method (it is freed automatically).<P CLASS="Element10">
+The stream version of the Get method transmits the stream, firing the onWork, onWorkBegin, onWorkEnd during the process.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0007">TIdTrivialFTP.Put</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007868.html" CLASS="Element59">TIdTrivialFTP</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Sends a file to a TrivialFTP server.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>procedure</STRONG> <A HREF="007868.html#0006" CLASS="Element59">Put</A>(SourceStream: TStream; <STRONG>const</STRONG> ServerFile: <STRONG>String</STRONG>); <STRONG>overload</STRONG>;
+<STRONG>procedure</STRONG> <A HREF="007868.html#0006" CLASS="Element59">Put</A>(<STRONG>const</STRONG> LocalFile: <STRONG>String</STRONG>; <STRONG>const</STRONG> ServerFile: <STRONG>String</STRONG>); <STRONG>overload</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+SourceStream: TStream</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Contains the data to be sent to the TFTP server.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+const ServerFile: String</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+File name of the TFTP server.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+const LocalFile: String</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+File name on the local file system.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Put is an overloaded method to <A HREF="006944.html" CLASS="Element59">send</A> a file to a TrivialFTP server.<P CLASS="Element10">
+The version requiring a local filename creates a TFileStream, then calls the stream version of the Put method (it is freed automatically).<P CLASS="Element10">
+The stream version of the Put method transmits the stream, firing the onWork, onWorkBegin, onWorkEnd during the process.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0006">TIdTrivialFTP.Put</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007868.html" CLASS="Element59">TIdTrivialFTP</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Sends a file to a TrivialFTP server.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>procedure</STRONG> Put(SourceStream: TStream; <STRONG>const</STRONG> ServerFile: <STRONG>String</STRONG>); <STRONG>overload</STRONG>;
+<STRONG>procedure</STRONG> Put(<STRONG>const</STRONG> LocalFile: <STRONG>String</STRONG>; <STRONG>const</STRONG> ServerFile: <STRONG>String</STRONG>); <STRONG>overload</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+SourceStream: TStream</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Contains the data to be sent to the TFTP server.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+const ServerFile: String</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+File name of the TFTP server.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+const LocalFile: String</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+File name on the local file system.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Put is an overloaded method to <A HREF="006944.html" CLASS="Element59">send</A> a file to a TrivialFTP server.<P CLASS="Element10">
+The version requiring a local filename creates a TFileStream, then calls the stream version of the Put method (it is freed automatically).<P CLASS="Element10">
+The stream version of the Put method transmits the stream, firing the onWork, onWorkBegin, onWorkEnd during the process.</DIV>
+</DIV>
+<DIV CLASS="Element62">
+<HR>Created with Doc-O-Matic 2 donated to <STRONG><A HREF="http://www.delphi-jedi.org">Project JEDI</A></STRONG>. Commercial license available from the <STRONG><A HREF="http://www.doc-o-matic.com">Doc-O-Matic site</A></STRONG>.</DIV>
+</DIV></BODY></HTML>

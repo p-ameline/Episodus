@@ -1,0 +1,356 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+<TITLE>TIdLPRControlFile</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <META name="GENERATOR" content="Doc-O-Matic">
+    <LINK rel="STYLESHEET" href="default.css" type="text/css">
+
+<SCRIPT LANGUAGE="JavaScript1.2" SRC="scripts.js"></SCRIPT>
+</HEAD>
+<BODY CLASS="Element57">
+<TABLE BORDER="0" BGCOLOR="#AACCFF" WIDTH="100%" CELLSPACING="0" CELLPADDING="0">
+<TR><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element1">
+Indy 9</DIV>
+</TD><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element2">
+<A HREF="content.html" CLASS="Element59">Content</A> | <A HREF="idx.html" CLASS="Element59">Index</A> | <A HREF="symref.html" CLASS="Element59">Reference</A></DIV>
+</TD></TR></TABLE><DIV CLASS="Element58">
+<DIV CLASS="Element5">
+TIdLPRControlFile</DIV>
+<DIV CLASS="Element7">
+<A HREF="012199.html" CLASS="Element59">Hierarchy</A>, <A HREF="012200.html" CLASS="Element59">Properties</A>, <A HREF="012201.html" CLASS="Element59">Methods</A>, <A HREF="012202.html" CLASS="Element59">See Also</A>, <A HREF="002280.html" CLASS="Element59">Unit: IdLPR</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Encapsulates an LPR control file.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12">TIdLPRControlFile = <STRONG>class</STRONG>(TPersistent)</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Unit</DIV>
+<DIV CLASS="Element69">
+<A HREF="002280.html" CLASS="Element59">IdLPR</A></DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+TIdLPRControlFile is a TPersistent descendant that encapsulates an LPR control file. An LPR control file specifies printing settings for a particular print job. TIdLPRControlFile is the type used to represent the <A HREF="007516.html#0000" CLASS="Element59">TIdLPR.ControlFile</A> property.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0001">TIdLPRControlFile.BannerClass</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007517.html" CLASS="Element59">TIdLPRControlFile</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+This is the class name to be printed on the banner page.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> BannerClass: <STRONG>String</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+This is the class name to be printed on the banner page. The name must be 31 or fewer characters. The name can be omitted. If it is, the name of the host on which the file is printed will be used. The class is conventionally used to display the host from which the printing job originated.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0002">TIdLPRControlFile.BannerPage</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007517.html" CLASS="Element59">TIdLPRControlFile</A>, <A HREF="012203.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Indicates that the LPR print job control contains a banner page.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> BannerPage: Boolean;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+The BannerPage property indicates that the LPR print job control contains a banner page. Use the <A HREF="007517.html#0001" CLASS="Element59">BannerClass</A> property to identify the type of banner page required.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0004">TIdLPRControlFile.FileFormat</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007517.html" CLASS="Element59">TIdLPRControlFile</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+This property specifies the format of the file you are sending to the daemon.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> FileFormat: <A HREF="007518.html" CLASS="Element59">TIdLPRFileFormat</A>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+This property specifies the format of the file you are sending to the daemon or how the file is to be printed by the daemon. This can be one of the following values:<P CLASS="Element10">
+<UL>
+<LI>ffCIF - CalTech Intermediate Form<P CLASS="Element10">
+<LI>ffDVI - DVI (TeX output)<P CLASS="Element10">
+<LI>ffFormattedText - add formatting as needed to text file<P CLASS="Element10">
+<LI>ffPlot - Berkeley Unix plot library<P CLASS="Element10">
+<LI>ffControlCharText - text file with control characters<P CLASS="Element10">
+<LI>ffDitroff - ditroff output<P CLASS="Element10">
+<LI>ffPostScript - Postscript output file (.PS)<P CLASS="Element10">
+<LI>ffPR - 'pr' format<P CLASS="Element10">
+<LI>ffFORTRAM - FORTRAN carriage control<P CLASS="Element10">
+<LI>ffTroff - Troff output<P CLASS="Element10">
+<LI>ffSunRaster - Sun raster format file (.RAS, .RAST, .SUN, .SR, .SCR)</UL>
+</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0005">TIdLPRControlFile.HostName</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007517.html" CLASS="Element59">TIdLPRControlFile</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+This is the name of the computer that requested the print job.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> HostName: <STRONG>String</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+HostName is a String property that is the name of the computer that requested the print job. By default, this will be the address of the user's computer.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0006">TIdLPRControlFile.IndentCount</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007517.html" CLASS="Element59">TIdLPRControlFile</A>, <A HREF="012204.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Specifies the column indenting count for the print job.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> IndentCount: Integer;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+IndentCount is an Integer property that specifies the Indenting count for the print job. The Indenting count specifies the number of columns to indenting the content of the print job.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0007">TIdLPRControlFile.JobName</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007517.html" CLASS="Element59">TIdLPRControlFile</A>, <A HREF="012205.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Specifies the job name to be printed on the banner page.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> JobName: <STRONG>String</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+JobName is a String property that is the job name to be printed on the banner page for the print job.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0008">TIdLPRControlFile.MailWhenPrinted</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007517.html" CLASS="Element59">TIdLPRControlFile</A>, <A HREF="012206.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Indicates the LPR daemon should mail the user when the print job is finished.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> MailWhenPrinted: Boolean;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+MailWhenPrinted is a Boolean property that indicates if the LPR daemon should <A HREF="006944.html" CLASS="Element59">send</A> mail to the user identified in <A HREF="007517.html#000E" CLASS="Element59">UserName</A> when the LPR print job is finished. The default value for MailWhenPrinted is False, as assigned in <A HREF="007517.html#0003" CLASS="Element59">Create</A>. MailWhenPrinted is used when <A HREF="007516.html" CLASS="Element59">TIdLPR</A> generates a print stream including control data for a job.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0009">TIdLPRControlFile.OutputWidth</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007517.html" CLASS="Element59">TIdLPRControlFile</A>, <A HREF="012207.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Specifies the maximum number of columns for the print job.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> OutputWidth: Integer;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+OutputWidth is an Integer property that specifies the maximum number of columns for the print job.<P CLASS="Element10">
+Use <A HREF="007517.html#0006" CLASS="Element59">IndentCount</A> to specify the number of columns to use for the left margin of the print job.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="000A">TIdLPRControlFile.TroffBoldFont</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007517.html" CLASS="Element59">TIdLPRControlFile</A>, <A HREF="012208.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Indicates the font control settings for a Bold font in a print job.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> TroffBoldFont: <STRONG>String</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+TroffBoldFont is a String property that indicates the control settings to use for a Bold font face when generating formatted text in a <A HREF="007516.html" CLASS="Element59">TIdLPR</A> print job.<P CLASS="Element10">
+Use <A HREF="007517.html#000C" CLASS="Element59">TroffRomanFont</A>, <A HREF="007517.html#000B" CLASS="Element59">TroffItalicFont</A>, and <A HREF="007517.html#000D" CLASS="Element59">TroffSpecialFont</A> to specify other font settings for the print job.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="000B">TIdLPRControlFile.TroffItalicFont</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007517.html" CLASS="Element59">TIdLPRControlFile</A>, <A HREF="012209.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Indicates the font control settings for an Italic font in a print job.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> TroffItalicFont: <STRONG>String</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+TroffItalicFont is a String property that indicates the control settings to use for an Italic font face when generating formatted text in a <A HREF="007516.html" CLASS="Element59">TIdLPR</A> print job.<P CLASS="Element10">
+Use <A HREF="007517.html#000A" CLASS="Element59">TroffBoldFont</A>, <A HREF="007517.html#000C" CLASS="Element59">TroffRomanFont</A>, and <A HREF="007517.html#000D" CLASS="Element59">TroffSpecialFont</A> to specify other font settings for the print job.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="000C">TIdLPRControlFile.TroffRomanFont</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007517.html" CLASS="Element59">TIdLPRControlFile</A>, <A HREF="012210.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Indicates the font control settings for a Roman font in a print job.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> TroffRomanFont: <STRONG>String</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+TroffRomanFont is a String property that indicates the control settings to use for a Roman font face when generating formatted text in a <A HREF="007516.html" CLASS="Element59">TIdLPR</A> print job.<P CLASS="Element10">
+Use <A HREF="007517.html#000A" CLASS="Element59">TroffBoldFont</A>, <A HREF="007517.html#000B" CLASS="Element59">TroffItalicFont</A>, and <A HREF="007517.html#000D" CLASS="Element59">TroffSpecialFont</A> to specify other font settings for the print job.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="000D">TIdLPRControlFile.TroffSpecialFont</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007517.html" CLASS="Element59">TIdLPRControlFile</A>, <A HREF="012211.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Indicates the font control settings for Special fonts in a print job.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> TroffSpecialFont: <STRONG>String</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+TroffSpecialFont is a String property that indicates the control settings to use for special fonts when generating formatted text in a <A HREF="007516.html" CLASS="Element59">TIdLPR</A> print job.<P CLASS="Element10">
+Use <A HREF="007517.html#000A" CLASS="Element59">TroffBoldFont</A>, <A HREF="007517.html#000B" CLASS="Element59">TroffItalicFont</A>, and <A HREF="007517.html#000C" CLASS="Element59">TroffRomanFont</A> to specify other font settings for the print job.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="000E">TIdLPRControlFile.UserName</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007517.html" CLASS="Element59">TIdLPRControlFile</A>, <A HREF="012212.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+This is the User name for the person who submitted the print job.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> UserName: <STRONG>String</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+This is the User name for the person who submitted the print job or the user requesting that some of their jobs be deleted.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0000">TIdLPRControlFile.Assign</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007517.html" CLASS="Element59">TIdLPRControlFile</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Copies values from one object to another object.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>procedure</STRONG> Assign(Source: TPersistent); <STRONG>override</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+Source: TPersistent</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Object containing values to be copied.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Assign is a procedure that copies the contents of a persistent object to the current object instance. Source is the object instance containing values to be copied.<P CLASS="Element10">
+When Source is an instance of <A HREF="007517.html" CLASS="Element59">TIdLPRControlFile</A>, the following property values are copied into the current object:<P CLASS="Element10">
+<UL>
+<LI><A HREF="007517.html#0001" CLASS="Element59">BannerClass</A><P CLASS="Element10">
+<LI><A HREF="007517.html#0006" CLASS="Element59">IndentCount</A><P CLASS="Element10">
+<LI><A HREF="007517.html#0007" CLASS="Element59">JobName</A><P CLASS="Element10">
+<LI><A HREF="007517.html#0002" CLASS="Element59">BannerPage</A><P CLASS="Element10">
+<LI><A HREF="007517.html#000E" CLASS="Element59">UserName</A><P CLASS="Element10">
+<LI><A HREF="007517.html#0009" CLASS="Element59">OutputWidth</A><P CLASS="Element10">
+<LI><A HREF="007517.html#0004" CLASS="Element59">FileFormat</A><P CLASS="Element10">
+<LI><A HREF="007517.html#000C" CLASS="Element59">TroffRomanFont</A><P CLASS="Element10">
+<LI><A HREF="007517.html#000B" CLASS="Element59">TroffItalicFont</A><P CLASS="Element10">
+<LI><A HREF="007517.html#000A" CLASS="Element59">TroffBoldFont</A><P CLASS="Element10">
+<LI><A HREF="007517.html#000D" CLASS="Element59">TroffSpecialFont</A><P CLASS="Element10">
+<LI><A HREF="007517.html#0008" CLASS="Element59">MailWhenPrinted</A></UL>
+<P CLASS="Element10">
+When Source is another TPersistent calss descendant, Assign calls the inherited method using Source as an argument.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0003">TIdLPRControlFile.Create</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007517.html" CLASS="Element59">TIdLPRControlFile</A>, <A HREF="012213.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Constructor for the <A HREF="007517.html" CLASS="Element59">TIdLPRControlFile</A> object instance.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>constructor</STRONG> Create;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Create is the constructor for the <A HREF="007517.html" CLASS="Element59">TIdLPRControlFile</A> object instance. Create callsd the inherited Create method, and initializes values on the <A HREF="007517.html#0005" CLASS="Element59">HostName</A>, <A HREF="007517.html#0004" CLASS="Element59">FileFormat</A>, <A HREF="007517.html#0006" CLASS="Element59">IndentCount</A>, <A HREF="007517.html#0002" CLASS="Element59">BannerPage</A>, and <A HREF="007517.html#0009" CLASS="Element59">OutputWidth</A> properties. <A HREF="007517.html#0005" CLASS="Element59">HostName</A> can contain the value &quot;unknown&quot; if the local IP address or host name cannot be retrieved.</DIV>
+</DIV>
+<DIV CLASS="Element62">
+<HR>Created with Doc-O-Matic 2 donated to <STRONG><A HREF="http://www.delphi-jedi.org">Project JEDI</A></STRONG>. Commercial license available from the <STRONG><A HREF="http://www.doc-o-matic.com">Doc-O-Matic site</A></STRONG>.</DIV>
+</DIV></BODY></HTML>

@@ -1,0 +1,686 @@
+// -----------------------------------------------------------------------------// nscompta.rc
+// -----------------------------------------------------------------------------
+// ressources des dialogues compta
+// -----------------------------------------------------------------------------
+// $Revision: 1.5 $
+// $Author: pameline $
+// $Date: 2017/02/04 18:18:59 $
+// -----------------------------------------------------------------------------
+// -----------------------------------------------------------------------------
+
+// -----------------------------------------------------------------------------
+// Copyright Nautilus, 2004
+// http://www.nautilus-info.com
+// -----------------------------------------------------------------------------
+// Ce logiciel est un programme informatique servant à gérer et traiter les
+// informations de santé d'une personne.
+//
+// Ce logiciel est régi par la licence CeCILL soumise au droit français et
+// respectant les principes de diffusion des logiciels libres. Vous pouvez
+// utiliser, modifier et/ou redistribuer ce programme sous les conditions de la
+// licence CeCILL telle que diffusée par le CEA, le CNRS et l'INRIA sur le site
+// "http://www.cecill.info".
+//
+// En contrepartie de l'accessibilité au code source et des droits de copie, de
+// modification et de redistribution accordés par cette licence, il n'est offert
+// aux utilisateurs qu'une garantie limitée. Pour les mêmes raisons, seule une
+// responsabilité restreinte pèse sur l'auteur du programme, le titulaire des
+// droits patrimoniaux et les concédants successifs.
+//
+// A cet égard  l'attention de l'utilisateur est attirée sur les risques
+// associés au chargement, à l'utilisation, à la modification et/ou au
+// développement et à la reproduction du logiciel par l'utilisateur étant donné
+// sa spécificité de logiciel libre, qui peut le rendre complexe à manipuler et
+// qui le réserve donc à des développeurs et des professionnels avertis
+// possédant des connaissances informatiques approfondies. Les utilisateurs sont
+// donc invités à charger et tester l'adéquation du logiciel à leurs besoins
+// dans des conditions permettant d'assurer la sécurité de leurs systèmes et ou
+// de leurs données et, plus généralement, à l'utiliser et l'exploiter dans les
+// mêmes conditions de sécurité.
+//
+// Le fait que vous puissiez accéder à cet en-tête signifie que vous avez pris
+// connaissance de la licence CeCILL, et que vous en avez accepté les termes.
+// -----------------------------------------------------------------------------
+// This software is a computer program whose purpose is to manage and process
+// a person's health data.
+//
+// This software is governed by the CeCILL  license under French law and abiding
+// by the rules of distribution of free software. You can use, modify and/ or
+// redistribute the software under the terms of the CeCILL license as circulated
+// by CEA, CNRS and INRIA at the following URL "http://www.cecill.info".
+//
+// As a counterpart to the access to the source code and  rights to copy, modify
+// and redistribute granted by the license, users are provided only with a
+// limited warranty and the software's author, the holder of the economic
+// rights, and the successive licensors have only limited liability.
+//
+// In this respect, the user's attention is drawn to the risks associated with
+// loading, using, modifying and/or developing or reproducing the software by
+// the user in light of its specific status of free software, that may mean that
+// it is complicated to manipulate, and that also therefore means that it is
+// reserved for developers and experienced professionals having in-depth
+// computer knowledge. Users are therefore encouraged to load and test the
+// software's suitability as regards their requirements in conditions enabling
+// the security of their systems and/or data to be ensured and, more generally,
+// to use and operate it in the same conditions as regards security.
+//
+// The fact that you are presently reading this means that you have had
+// knowledge of the CeCILL license and that you accept its terms.
+// -----------------------------------------------------------------------------
+// #define IDD_DIALOG1	1
+// -----------------------------------------------------------------------------// Attention// -----------------------------------------------------------------------------// Les chemins des include doivent être en chemin relatif sur le cvs.// Si vous avez besoin de les modifier en chemin absolu pour pouvoir les// modifier avec Borland 5, vous devez les repasser en chemin relatif avant de// les remettre sur le cvs. // -----------------------------------------------------------------------------#include "c:\cvs\episodus\nscompta\nscompta.rh"
+// #include "nscompta\nscompta.rh"#include "c:\cvs\episodus\nscompta\nsCptaRef.rh"#include <owl\window.rh>
+IDD_CVITALE DIALOG 0, 0, 357, 218
+STYLE DS_MODALFRAME | DS_3DLOOK | DS_CONTEXTHELP | WS_POPUP | WS_VISIBLE | WS_CAPTION | WS_SYSMENU
+CAPTION "Carte Vitale"
+FONT 8, "MS Sans Serif"
+{
+ CONTROL "Caisse gestionnaire", -1, "static", SS_LEFT | WS_CHILD | WS_VISIBLE, 4, 8, 104, 8
+ CONTROL "", IDC_CV_CAISSE, "edit", ES_LEFT | WS_CHILD | WS_VISIBLE | WS_BORDER | WS_TABSTOP, 4, 16, 112, 12
+ CONTROL "N° d'immatriculation", -1, "static", SS_LEFT | WS_CHILD | WS_VISIBLE, 124, 8, 72, 8
+ CONTROL "", IDC_CV_NUM, "edit", ES_LEFT | ES_READONLY | WS_CHILD | WS_VISIBLE | WS_BORDER | WS_TABSTOP, 124, 16, 92, 12
+ CONTROL "Centre gestionnaire", -1, "static", SS_LEFT | WS_CHILD | WS_VISIBLE, 224, 8, 104, 8
+ CONTROL "", IDC_CV_CENTRE, "edit", ES_LEFT | WS_CHILD | WS_VISIBLE | WS_BORDER | WS_TABSTOP, 224, 16, 120, 12
+ CONTROL "Bénéficiaires", -1, "static", SS_LEFT | WS_CHILD | WS_VISIBLE, 4, 36, 96, 9
+ CONTROL "ListView1", IDC_CV_LISTBEN, "SysListView32", LVS_REPORT | LVS_SINGLESEL | WS_CHILD | WS_VISIBLE | WS_BORDER, 4, 44, 288, 69, WS_EX_CLIENTEDGE
+ CONTROL "Ajouter", IDC_CV_AJOUTER, "button", BS_PUSHBUTTON | BS_CENTER | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 312, 44, 32, 15
+ CONTROL "Modifier", IDC_CV_MODIFIER, "button", BS_PUSHBUTTON | BS_CENTER | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 312, 69, 32, 15
+ CONTROL "Enlever", IDC_CV_ENLEVER, "button", BS_PUSHBUTTON | BS_CENTER | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 312, 96, 32, 15
+ CONTROL "Code de gestion", -1, "static", SS_LEFT | WS_CHILD | WS_VISIBLE, 24, 128, 60, 9
+ CONTROL "", IDC_CV_CODEGES, "edit", ES_LEFT | WS_CHILD | WS_VISIBLE | WS_BORDER | WS_TABSTOP, 152, 124, 140, 47
+ CONTROL "Code du régime", -1, "static", SS_LEFT | WS_CHILD | WS_VISIBLE, 24, 160, 60, 9
+ CONTROL "", IDC_CV_CODEREG, "edit", ES_LEFT | WS_CHILD | WS_VISIBLE | WS_BORDER | WS_TABSTOP, 88, 124, 24, 12
+ CONTROL "", IDC_CV_ADRCAISSE, "edit", ES_LEFT | WS_CHILD | WS_VISIBLE | WS_BORDER | WS_TABSTOP, 88, 156, 24, 12
+ CONTROL "", IDOK, "BorBtn", BS_DEFPUSHBUTTON | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 88, 184, 43, 25
+ CONTROL "", IDCANCEL, "BorBtn", BS_PUSHBUTTON | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 152, 184, 43, 25
+ CONTROL "", IDHELP, "BorBtn", BS_PUSHBUTTON | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 248, 184, 43, 25
+}
+
+IDD_NUMSS DIALOG 0, 0, 173, 76
+STYLE DS_MODALFRAME | DS_3DLOOK | DS_CONTEXTHELP | WS_POPUP | WS_VISIBLE | WS_CAPTION | WS_SYSMENU
+CAPTION "Numéro d'immatriculation"
+FONT 8, "MS Sans Serif"
+{
+ CONTROL "", IDC_NUMSS_EDIT, "edit", ES_LEFT | WS_CHILD | WS_VISIBLE | WS_BORDER | WS_TABSTOP, 12, 17, 148, 12
+ CONTROL "Entrez le numéro S.S. :", -1, "static", SS_LEFT | WS_CHILD | WS_VISIBLE, 12, 9, 144, 7
+ CONTROL "", IDOK, "BorBtn", BS_DEFPUSHBUTTON | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 39, 40, 43, 25
+ CONTROL "", IDCANCEL, "BorBtn", BS_PUSHBUTTON | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 91, 40, 43, 25
+}
+
+IDD_BENEFICIAIRE DIALOG 0, 0, 375, 227
+STYLE DS_MODALFRAME | DS_3DLOOK | DS_CONTEXTHELP | WS_POPUP | WS_VISIBLE | WS_CAPTION | WS_SYSMENU
+CAPTION "Bénéficiaire"
+FONT 8, "MS Sans Serif"
+{
+ CONTROL "", IDC_BNF_NOMPATRO, "edit", ES_LEFT | ES_AUTOHSCROLL | WS_CHILD | WS_VISIBLE | WS_BORDER | WS_TABSTOP, 16, 12, 104, 13
+ CONTROL "", IDC_BNF_PRENOM, "edit", ES_LEFT | ES_AUTOHSCROLL | WS_CHILD | WS_VISIBLE | WS_BORDER | WS_TABSTOP, 16, 60, 104, 13
+ CONTROL "", IDC_BNF_NOMUSUEL, "edit", ES_LEFT | ES_AUTOHSCROLL | WS_CHILD | WS_VISIBLE | WS_BORDER | WS_TABSTOP, 16, 36, 104, 13
+ CONTROL "Nom patronymique", -1, "static", SS_LEFT | WS_CHILD | WS_VISIBLE, 16, 4, 100, 8
+ CONTROL "Prénom", -1, "static", SS_LEFT | WS_CHILD | WS_VISIBLE, 16, 52, 108, 8
+ CONTROL "Nom usuel", -1, "static", SS_LEFT | WS_CHILD | WS_VISIBLE, 16, 28, 100, 8
+ CONTROL "Rang gémellaire", -1, "static", SS_LEFT | WS_CHILD | WS_VISIBLE, 16, 108, 56, 8
+ CONTROL "", IDC_BNF_RANGGEM, "edit", ES_LEFT | WS_CHILD | WS_VISIBLE | WS_BORDER | WS_TABSTOP, 76, 104, 24, 13
+ CONTROL "", IDC_BNF_ADRESSE, "edit", ES_LEFT | ES_MULTILINE | ES_AUTOHSCROLL | ES_AUTOVSCROLL | WS_CHILD | WS_VISIBLE | WS_BORDER | WS_TABSTOP, 16, 128, 136, 60
+ CONTROL "Adresse", -1, "static", SS_LEFT | WS_CHILD | WS_VISIBLE, 16, 120, 60, 7
+ CONTROL "Qualité", -1, "static", SS_LEFT | WS_CHILD | WS_VISIBLE, 164, 4, 108, 8
+ CONTROL "", IDC_BNF_CBQUALITE, "combobox", CBS_DROPDOWNLIST | CBS_AUTOHSCROLL | WS_CHILD | WS_VISIBLE | WS_VSCROLL | WS_TABSTOP, 164, 12, 112, 79
+ CONTROL "Affection Longue Durée", IDC_BNF_GBALD, "BorShade", BSS_GROUP | BSS_CAPTION | BSS_LEFT | WS_CHILD | WS_VISIBLE | WS_GROUP, 164, 39, 112, 151
+ CONTROL "Pas d'ALD", IDC_BNF_NOALD, "BorRadio", BS_AUTORADIOBUTTON | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 176, 56, 52, 8
+ CONTROL "Dans la liste", IDC_BNF_DLISTE1, "BorRadio", BS_AUTORADIOBUTTON | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 176, 92, 68, 9
+ CONTROL "Hors liste", IDC_BNF_HLISTE1, "BorRadio", BS_AUTORADIOBUTTON | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 176, 104, 68, 9
+ CONTROL "Multiples invalidantes", IDC_BNF_MULT1, "BorRadio", BS_AUTORADIOBUTTON | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 176, 116, 84, 9
+ CONTROL "Dans la liste", IDC_BNF_DLISTE2, "BorRadio", BS_AUTORADIOBUTTON | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 176, 152, 68, 9
+ CONTROL "Hors liste", IDC_BNF_HLISTE2, "BorRadio", BS_AUTORADIOBUTTON | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 176, 164, 68, 8
+ CONTROL "Multiples invalidantes", IDC_BNF_MULT2, "BorRadio", BS_AUTORADIOBUTTON | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 176, 176, 84, 9
+ CONTROL "ALD conditionnant le taux de remboursement :", -1, "static", SS_LEFT | WS_CHILD | WS_VISIBLE, 176, 68, 80, 17
+ CONTROL "ALD ne conditionnant pas le taux de remboursement :", -1, "static", SS_LEFT | WS_CHILD | WS_VISIBLE, 176, 132, 92, 17
+ CONTROL "Droits à l'AMO", IDC_BNF_GBAMO, "BorShade", BSS_GROUP | BSS_CAPTION | BSS_LEFT | WS_CHILD | WS_VISIBLE | WS_GROUP, 300, 4, 56, 44
+ CONTROL "Oui", IDC_BNF_AMOOUI, "BorRadio", BS_AUTORADIOBUTTON | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 308, 20, 40, 9
+ CONTROL "Non", IDC_BNF_AMONON, "BorRadio", BS_AUTORADIOBUTTON | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 308, 32, 44, 9
+ CONTROL "", IDC_BNF_CODESITU, "edit", ES_LEFT | WS_CHILD | WS_VISIBLE | WS_BORDER | WS_TABSTOP, 300, 64, 36, 13
+ CONTROL "", IDC_BNF_MUTUELLE, "edit", ES_LEFT | ES_AUTOHSCROLL | WS_CHILD | WS_VISIBLE | WS_BORDER | WS_TABSTOP, 300, 92, 60, 13
+ CONTROL "Droits mutuelle", IDC_BNF_GBMUTU, "BorShade", BSS_GROUP | BSS_CAPTION | BSS_LEFT | WS_CHILD | WS_VISIBLE | WS_GROUP, 300, 116, 60, 44
+ CONTROL "Oui", IDC_BNF_MUTUOUI, "BorRadio", BS_AUTORADIOBUTTON | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 308, 132, 40, 9
+ CONTROL "Non", IDC_BNF_MUTUNON, "BorRadio", BS_AUTORADIOBUTTON | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 308, 144, 44, 9
+ CONTROL "", IDC_BNF_GARANTIES, "edit", ES_LEFT | WS_CHILD | WS_VISIBLE | WS_BORDER | WS_TABSTOP, 300, 176, 60, 13
+ CONTROL "", IDC_BNF_DATENAISS, "edit", ES_LEFT | WS_CHILD | WS_VISIBLE | WS_BORDER | WS_TABSTOP, 16, 84, 52, 14
+ CONTROL "", IDC_BNF_HEURENAISS, "edit", ES_LEFT | WS_CHILD | WS_VISIBLE | WS_BORDER | WS_TABSTOP, 76, 84, 44, 14
+ CONTROL "Date naissance", -1, "static", SS_LEFT | WS_CHILD | WS_VISIBLE, 16, 76, 52, 8
+ CONTROL "Heure", -1, "static", SS_LEFT | WS_CHILD | WS_VISIBLE, 76, 76, 24, 8
+ CONTROL "Code situation", -1, "static", SS_LEFT | WS_CHILD | WS_VISIBLE, 300, 56, 56, 8
+ CONTROL "Mutuelle", -1, "static", SS_LEFT | WS_CHILD | WS_VISIBLE, 300, 84, 60, 8
+ CONTROL "Garanties effectives", -1, "static", SS_LEFT | WS_CHILD | WS_VISIBLE, 300, 168, 68, 8
+ CONTROL "", IDOK, "BorBtn", BS_DEFPUSHBUTTON | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 16, 196, 43, 25
+ CONTROL "", IDCANCEL, "BorBtn", BS_PUSHBUTTON | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 108, 196, 43, 25
+ CONTROL "Patient en cours", IDC_BNF_PATENCOURS, "button", BS_PUSHBUTTON | BS_CENTER | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 180, 204, 80, 13
+ CONTROL "Autre patient", IDC_BNF_AUTREPAT, "button", BS_PUSHBUTTON | BS_CENTER | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 280, 204, 80, 13
+}
+
+IDD_1610 DIALOG 0, 0, 277, 174
+STYLE DS_MODALFRAME | DS_3DLOOK | DS_CONTEXTHELP | WS_POPUP | WS_VISIBLE | WS_CAPTION | WS_SYSMENU
+CAPTION "Prestation"
+FONT 8, "MS Sans Serif"
+{
+ CONTROL "", IDC_1610_DATE, "edit", ES_LEFT | WS_CHILD | WS_VISIBLE | WS_BORDER | WS_TABSTOP, 8, 12, 68, 13
+ CONTROL "Date", -1, "static", SS_LEFT | WS_CHILD | WS_VISIBLE, 8, 4, 68, 7
+ CONTROL "", IDC_1610_HEURE, "edit", ES_LEFT | WS_CHILD | WS_VISIBLE | WS_BORDER | WS_TABSTOP, 88, 12, 48, 13
+ CONTROL "Heure", -1, "static", SS_LEFT | WS_CHILD | WS_VISIBLE, 88, 4, 60, 7
+ CONTROL "ComboBox1", IDC_1610_LIEU, "combobox", CBS_DROPDOWNLIST | WS_CHILD | WS_VISIBLE | WS_VSCROLL | WS_TABSTOP, 148, 68, 120, 64
+ CONTROL "Lieu d'exécution", -1, "static", SS_LEFT | WS_CHILD | WS_VISIBLE, 148, 60, 64, 8
+ CONTROL "ComboBox2", IDC_1610_CODE, "combobox", CBS_DROPDOWNLIST | WS_CHILD | WS_VISIBLE | WS_VSCROLL | WS_TABSTOP, 8, 40, 112, 68
+ CONTROL "Code prestation", -1, "static", SS_LEFT | WS_CHILD | WS_VISIBLE, 8, 32, 64, 8
+ CONTROL "", IDC_1610_COEFF, "edit", ES_LEFT | WS_CHILD | WS_VISIBLE | WS_BORDER | WS_TABSTOP, 148, 40, 40, 13
+ CONTROL "Coefficient", -1, "static", SS_LEFT | WS_CHILD | WS_VISIBLE, 148, 32, 40, 8
+ CONTROL "", IDC_1610_DIVIS, "edit", ES_LEFT | WS_CHILD | WS_VISIBLE | WS_BORDER | WS_TABSTOP, 200, 40, 24, 13
+ CONTROL "/", -1, "static", SS_LEFT | WS_CHILD | WS_VISIBLE, 192, 44, 8, 9
+ CONTROL "Diviseur", -1, "static", SS_LEFT | WS_CHILD | WS_VISIBLE, 200, 32, 28, 8
+ CONTROL "", IDC_1610_QTE, "edit", ES_LEFT | WS_CHILD | WS_VISIBLE | WS_BORDER | WS_TABSTOP, 244, 40, 24, 13
+ CONTROL "Qté", -1, "static", SS_LEFT | WS_CHILD | WS_VISIBLE, 244, 32, 20, 8
+ CONTROL "ComboBox3", IDC_1610_COMPL, "combobox", CBS_DROPDOWNLIST | WS_CHILD | WS_VISIBLE | WS_VSCROLL | WS_TABSTOP, 8, 68, 120, 68
+ CONTROL "Compl. prestation", -1, "static", SS_LEFT | WS_CHILD | WS_VISIBLE, 8, 60, 64, 8
+ CONTROL "ComboBox4", IDC_1610_QUALIF, "combobox", CBS_DROPDOWNLIST | WS_CHILD | WS_VISIBLE | WS_VSCROLL | WS_TABSTOP, 148, 12, 120, 71
+ CONTROL "Qualificatif", -1, "static", SS_LEFT | WS_CHILD | WS_VISIBLE, 148, 4, 60, 7
+ CONTROL "", IDC_1610_DNBR, "edit", ES_LEFT | WS_CHILD | WS_VISIBLE | WS_BORDER | WS_TABSTOP, 8, 96, 32, 14
+ CONTROL "Dénombr.", -1, "static", SS_LEFT | WS_CHILD | WS_VISIBLE, 8, 88, 40, 8
+ CONTROL "", IDC_1610_MONTANT, "edit", ES_LEFT | ES_READONLY | WS_CHILD | WS_VISIBLE | WS_BORDER | WS_TABSTOP, 148, 96, 80, 14
+ CONTROL "Montant", -1, "static", SS_LEFT | WS_CHILD | WS_VISIBLE, 148, 88, 64, 8
+ CONTROL "Monnaie", IDC_1610_SIGLE, "static", SS_LEFT | WS_CHILD | WS_VISIBLE, 232, 100, 30, 9
+ CONTROL "", IDOK, "BorBtn", BS_DEFPUSHBUTTON | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 88, 132, 43, 25
+ CONTROL "", IDCANCEL, "BorBtn", BS_PUSHBUTTON | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 152, 132, 43, 25
+}
+
+IDD_FACT DIALOG 0, 0, 265, 147
+STYLE DS_MODALFRAME | DS_3DLOOK | DS_CONTEXTHELP | WS_POPUP | WS_VISIBLE | WS_CAPTION | WS_SYSMENU
+CAPTION "Fiche de paiement"
+FONT 8, "MS Sans Serif"
+{
+ CONTROL "", IDC_FACT_DATE, "edit", ES_LEFT | WS_CHILD | WS_VISIBLE | WS_BORDER | WS_TABSTOP, 24, 16, 72, 13
+ CONTROL "Date", -1, "static", SS_LEFT | WS_CHILD | WS_VISIBLE, 24, 8, 64, 8
+ CONTROL "ComboBox1", IDC_FACT_ORGA, "combobox", CBS_DROPDOWNLIST | WS_CHILD | WS_VISIBLE | WS_VSCROLL | WS_TABSTOP, 24, 44, 104, 56
+ CONTROL "Organisme", -1, "static", SS_LEFT | WS_CHILD | WS_VISIBLE, 24, 36, 92, 8
+ CONTROL "", IDC_FACT_MONTANT, "edit", ES_LEFT | WS_CHILD | WS_VISIBLE | WS_BORDER | WS_TABSTOP, 24, 72, 80, 13
+ CONTROL "Montant", -1, "static", SS_LEFT | WS_CHILD | WS_VISIBLE, 24, 64, 76, 8
+ CONTROL "Unité", IDC_FACT_UNITE, "BorShade", BSS_GROUP | BSS_CAPTION | BSS_LEFT | WS_CHILD | WS_VISIBLE | WS_GROUP, 144, 60, 92, 24
+ CONTROL "LOC", IDC_FACT_LOC, "BorRadio", BS_AUTORADIOBUTTON | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 152, 72, 36, 9
+ CONTROL "EURO", IDC_FACT_EURO, "BorRadio", BS_AUTORADIOBUTTON | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 188, 72, 36, 9
+ CONTROL "ComboBox2", IDC_FACT_MODEPAIE, "combobox", CBS_DROPDOWNLIST | WS_CHILD | WS_VISIBLE | WS_VSCROLL | WS_TABSTOP, 144, 44, 92, 56
+ CONTROL "Mode de paiement", -1, "static", SS_LEFT | WS_CHILD | WS_VISIBLE, 144, 36, 80, 8
+ CONTROL "", IDOK, "BorBtn", BS_DEFPUSHBUTTON | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 24, 104, 43, 25
+ CONTROL "", IDCANCEL, "BorBtn", BS_PUSHBUTTON | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 98, 104, 43, 25
+ CONTROL "Imprimer", IDC_PAI_IMPRIMER, "button", BS_PUSHBUTTON | BS_CENTER | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 170, 104, 43, 25
+}
+
+IDD_LISTCOMPT DIALOG 0, 0, 425, 285
+STYLE DS_MODALFRAME | DS_3DLOOK | DS_CONTEXTHELP | WS_POPUP | WS_VISIBLE | WS_CAPTION | WS_SYSMENU
+CAPTION "Fiches de comptabilité"
+FONT 8, "MS Sans Serif"
+{
+ CONTROL "Monnaie", IDC_LC_MONNAIE, "BorShade", BSS_GROUP | BSS_CAPTION | BSS_LEFT | WS_CHILD | WS_VISIBLE | WS_GROUP, 85, 12, 76, 24
+ CONTROL "EURO", IDC_LC_EURO, "BorRadio", BS_AUTORADIOBUTTON | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 89, 24, 36, 9
+ CONTROL "LOC", IDC_LC_LOC, "BorRadio", BS_AUTORADIOBUTTON | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 129, 24, 28, 9
+ CONTROL "Total dû", -1, "static", SS_LEFT | WS_CHILD | WS_VISIBLE, 173, 16, 48, 8
+ CONTROL "", IDC_LC_TOTALDU, "edit", ES_LEFT | ES_READONLY | WS_CHILD | WS_VISIBLE | WS_BORDER | WS_TABSTOP, 173, 24, 80, 13
+ CONTROL "Total payé", -1, "static", SS_LEFT | WS_CHILD | WS_VISIBLE, 261, 16, 48, 8
+ CONTROL "", IDC_LC_TOTALPAYE, "edit", ES_LEFT | ES_READONLY | WS_CHILD | WS_VISIBLE | WS_BORDER | WS_TABSTOP, 261, 24, 80, 13
+ CONTROL "ListView1", IDC_LC_LW, "SysListView32", LVS_REPORT | WS_CHILD | WS_VISIBLE | WS_BORDER, 8, 44, 408, 192
+ CONTROL "", IDOK, "BorBtn", BS_DEFPUSHBUTTON | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 157, 248, 43, 25
+ CONTROL "", IDCANCEL, "BorBtn", BS_PUSHBUTTON | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 225, 248, 43, 25
+}
+
+IDD_COMPT DIALOG 0, 0, 309, 297
+STYLE DS_MODALFRAME | DS_3DLOOK | DS_CONTEXTHELP | WS_POPUP | WS_VISIBLE | WS_CAPTION | WS_SYSMENU
+CAPTION "Feuille de soins"
+FONT 8, "MS Sans Serif"
+{
+ CONTROL "", IDC_CPT_DATE, "edit", ES_LEFT | WS_CHILD | WS_VISIBLE | WS_BORDER | WS_TABSTOP, 8, 13, 68, 12
+ CONTROL "Date", -1, "static", SS_LEFT | WS_CHILD | WS_VISIBLE, 8, 4, 56, 8
+ CONTROL "", IDC_CPT_HEURE, "edit", ES_LEFT | WS_CHILD | WS_VISIBLE | WS_BORDER | WS_TABSTOP, 84, 13, 44, 12
+ CONTROL "Heure", -1, "static", SS_LEFT | WS_CHILD | WS_VISIBLE, 84, 4, 28, 8
+ CONTROL "", IDC_CPT_EXAMEN, "edit", ES_LEFT | ES_AUTOHSCROLL | WS_CHILD | WS_VISIBLE | WS_BORDER | WS_TABSTOP, 136, 12, 166, 12
+ CONTROL "Examen", -1, "static", SS_LEFT | WS_CHILD | WS_VISIBLE, 136, 4, 36, 8
+ CONTROL "Consultation", IDC_CPT_CONSULT, "button", BS_PUSHBUTTON | BS_CENTER | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 244, 2, 56, 9
+ CONTROL "CORRESPONDANT", IDC_CPT_PRENDCOR, "button", BS_PUSHBUTTON | BS_CENTER | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 8, 28, 120, 24
+ CONTROL "Contexte", IDC_CPT_GBCONTEXTE, "BorShade", BSS_GROUP | BSS_CAPTION | BSS_LEFT | WS_CHILD | WS_VISIBLE | WS_GROUP, 136, 28, 166, 24
+ CONTROL "Externe", IDC_CPT_EXTERNE, "BorRadio", BS_AUTORADIOBUTTON | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 140, 40, 40, 9
+ CONTROL "Ambulatoire", IDC_CPT_AMBULATOIRE, "BorRadio", BS_AUTORADIOBUTTON | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 186, 40, 56, 9
+ CONTROL "Hospitalisé", IDC_CPT_HOSPITAL, "BorRadio", BS_AUTORADIOBUTTON | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 248, 40, 48, 9
+ CONTROL "", IDC_CPT_LISTFSE, "SysListView32", LVS_REPORT | LVS_SINGLESEL | WS_CHILD | WS_VISIBLE | WS_BORDER, 8, 55, 196, 87, WS_EX_CLIENTEDGE
+ CONTROL "Ajout acte CCAM", IDC_CPT_CCAM, "button", BS_PUSHBUTTON | BS_CENTER | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 212, 55, 88, 16
+ CONTROL "Ajout prestation (K, C...)", IDC_CPT_PREST, "button", BS_PUSHBUTTON | BS_CENTER | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 212, 71, 88, 16
+ CONTROL "Ajout acte libre", IDC_CPT_CLAM, "button", BS_PUSHBUTTON | BS_CENTER | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 212, 90, 88, 16
+ CONTROL "Ajout produit", IDC_CPT_LOT, "button", BS_PUSHBUTTON | BS_CENTER | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 212, 106, 88, 16
+ CONTROL "Ajout déplacement", IDC_CPT_IDEPL, "button", BS_PUSHBUTTON | BS_CENTER | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 212, 126, 88, 12
+ CONTROL "Ajout indem. kilométrique", IDC_CPT_IKM, "button", BS_PUSHBUTTON | BS_CENTER | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 212, 138, 88, 12
+ CONTROL "Somme due", -1, "static", SS_LEFT | WS_CHILD | WS_VISIBLE, 8, 150, 80, 8
+ CONTROL "", IDC_CPT_SOMDUE, "edit", ES_LEFT | WS_CHILD | WS_VISIBLE | WS_BORDER | WS_TABSTOP, 8, 158, 84, 14
+ CONTROL "Dépassement", -1, "static", SS_LEFT | WS_CHILD | WS_VISIBLE, 108, 150, 76, 8
+ CONTROL "", IDC_CPT_DEPASS, "edit", ES_LEFT | ES_READONLY | WS_CHILD | WS_VISIBLE | WS_BORDER | WS_TABSTOP, 108, 158, 84, 14
+ CONTROL "Monnaie", IDC_CPT_GBMONNAIE, "BorShade", BSS_GROUP | BSS_CAPTION | BSS_LEFT | WS_CHILD | WS_VISIBLE | WS_GROUP, 212, 150, 88, 24
+ CONTROL "EURO", IDC_CPT_EURO, "BorRadio", BS_AUTORADIOBUTTON | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 216, 162, 36, 9
+ CONTROL "local", IDC_CPT_LOC, "BorRadio", BS_AUTORADIOBUTTON | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 256, 162, 40, 9
+ CONTROL "Nouveau paiement", IDC_CPT_PAIEMENT, "button", BS_PUSHBUTTON | BS_CENTER | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 8, 177, 140, 12
+ CONTROL "", IDC_CPT_LISTFACT, "SysListView32", LVS_REPORT | LVS_SINGLESEL | WS_CHILD | WS_VISIBLE | WS_BORDER, 8, 189, 140, 46, WS_EX_CLIENTEDGE
+ CONTROL "Total payé", -1, "static", SS_LEFT | WS_CHILD | WS_VISIBLE, 8, 237, 84, 8
+ CONTROL "", IDC_CPT_PAYE, "edit", ES_LEFT | ES_READONLY | WS_CHILD | WS_VISIBLE | WS_BORDER | WS_TABSTOP, 8, 245, 84, 14
+ CONTROL "Nouveau dû par Tiers-Payant", IDC_CPT_TPAYANT, "button", BS_PUSHBUTTON | BS_CENTER | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 160, 177, 140, 12
+ CONTROL "", IDC_CPT_LISTTPAYANT, "SysListView32", LVS_REPORT | LVS_SINGLESEL | WS_CHILD | WS_VISIBLE | WS_BORDER, 160, 189, 140, 46, WS_EX_CLIENTEDGE
+ CONTROL "Total restant dû", -1, "static", SS_LEFT | WS_CHILD | WS_VISIBLE, 160, 237, 92, 8
+ CONTROL "", IDC_CPT_RESTEDU, "edit", ES_LEFT | ES_READONLY | WS_CHILD | WS_VISIBLE | WS_BORDER | WS_TABSTOP, 160, 245, 92, 14
+ CONTROL "", IDOK, "BorBtn", BS_DEFPUSHBUTTON | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 61, 264, 43, 25
+ CONTROL "", IDCANCEL, "BorBtn", BS_PUSHBUTTON | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 205, 264, 43, 25
+}
+
+IDD_TPAYANT DIALOG 0, 0, 257, 119
+STYLE DS_MODALFRAME | DS_3DLOOK | DS_CONTEXTHELP | WS_POPUP | WS_VISIBLE | WS_CAPTION | WS_SYSMENU
+CAPTION "Détail Tiers-payant"
+FONT 8, "MS Sans Serif"
+{
+ CONTROL "ComboBox1", IDC_TP_ORGA, "combobox", CBS_DROPDOWNLIST | WS_CHILD | WS_VISIBLE | WS_VSCROLL | WS_TABSTOP, 24, 17, 104, 51
+ CONTROL "Organisme", -1, "static", SS_LEFT | WS_CHILD | WS_VISIBLE, 24, 8, 92, 8
+ CONTROL "Paiement", IDC_TP_PAIEMENT, "button", BS_PUSHBUTTON | BS_CENTER | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 144, 17, 92, 13
+ CONTROL "", IDC_TP_RESTEDU, "edit", ES_LEFT | WS_CHILD | WS_VISIBLE | WS_BORDER | WS_TABSTOP, 24, 48, 80, 13
+ CONTROL "Reste dû", -1, "static", SS_LEFT | WS_CHILD | WS_VISIBLE, 24, 40, 76, 8
+ CONTROL "Unité", IDC_TP_UNITE, "BorShade", BSS_GROUP | BSS_CAPTION | BSS_LEFT | WS_CHILD | WS_VISIBLE | WS_GROUP, 144, 36, 92, 24
+ CONTROL "LOC", IDC_TP_LOC, "BorRadio", BS_AUTORADIOBUTTON | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 152, 48, 36, 9
+ CONTROL "EURO", IDC_TP_EURO, "BorRadio", BS_AUTORADIOBUTTON | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 188, 48, 36, 9
+ CONTROL "", IDOK, "BorBtn", BS_DEFPUSHBUTTON | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 75, 84, 43, 25
+ CONTROL "", IDCANCEL, "BorBtn", BS_PUSHBUTTON | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 139, 84, 43, 25
+}
+
+IDD_1620 DIALOG 0, 0, 240, 120
+STYLE DS_MODALFRAME | DS_3DLOOK | DS_CONTEXTHELP | WS_POPUP | WS_VISIBLE | WS_CAPTION | WS_SYSMENU
+CAPTION "Indemnité forfaitaire de déplacement"
+FONT 8, "MS Sans Serif"
+{
+ CONTROL "", IDC_1620_DATE, "edit", ES_LEFT | WS_CHILD | WS_VISIBLE | WS_BORDER | WS_TABSTOP, 12, 12, 64, 13
+ CONTROL "", IDC_1620_HEURE, "edit", ES_LEFT | WS_CHILD | WS_VISIBLE | WS_BORDER | WS_TABSTOP, 88, 12, 40, 13
+ CONTROL "ComboBox1", IDC_1620_CODEIFD, "combobox", CBS_DROPDOWNLIST | WS_CHILD | WS_VISIBLE | WS_VSCROLL | WS_TABSTOP, 148, 13, 76, 56
+ CONTROL "", IDC_1620_QUANTITE, "edit", ES_LEFT | WS_CHILD | WS_VISIBLE | WS_BORDER | WS_TABSTOP, 12, 44, 28, 13
+ CONTROL "", IDC_1620_MONTANT, "edit", ES_LEFT | ES_READONLY | WS_CHILD | WS_VISIBLE | WS_BORDER | WS_TABSTOP, 88, 44, 68, 13
+ CONTROL "Date", -1, "static", SS_LEFT | WS_CHILD | WS_VISIBLE, 12, 4, 32, 8
+ CONTROL "Heure", -1, "static", SS_LEFT | WS_CHILD | WS_VISIBLE, 88, 4, 28, 8
+ CONTROL "Code IFD", -1, "static", SS_LEFT | WS_CHILD | WS_VISIBLE, 148, 4, 40, 8
+ CONTROL "Qté", -1, "static", SS_LEFT | WS_CHILD | WS_VISIBLE, 12, 36, 20, 8
+ CONTROL "Montant", -1, "static", SS_LEFT | WS_CHILD | WS_VISIBLE, 88, 36, 52, 8
+ CONTROL "Monnaie", IDC_1620_SIGLE, "static", SS_LEFT | WS_CHILD | WS_VISIBLE, 160, 48, 36, 8
+ CONTROL "", IDOK, "BorBtn", BS_DEFPUSHBUTTON | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 67, 80, 43, 25
+ CONTROL "", IDCANCEL, "BorBtn", BS_PUSHBUTTON | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 129, 80, 43, 25
+}
+IDD_1630 DIALOG 0, 0, 240, 120STYLE DS_MODALFRAME | DS_3DLOOK | DS_CONTEXTHELP | WS_POPUP | WS_VISIBLE | WS_CAPTION | WS_SYSMENU
+CAPTION "Indemnité kilométrique de déplacement"
+FONT 8, "MS Sans Serif"
+{
+ CONTROL "", IDC_1630_DATE, "edit", ES_LEFT | WS_CHILD | WS_VISIBLE | WS_BORDER | WS_TABSTOP, 12, 12, 64, 13
+ CONTROL "", IDC_1630_HEURE, "edit", ES_LEFT | WS_CHILD | WS_VISIBLE | WS_BORDER | WS_TABSTOP, 88, 12, 40, 13
+ CONTROL "ComboBox1", IDC_1630_CODEIK, "combobox", CBS_DROPDOWNLIST | WS_CHILD | WS_VISIBLE | WS_VSCROLL | WS_TABSTOP, 148, 13, 76, 56
+ CONTROL "", IDC_1630_NBREKM, "edit", ES_LEFT | WS_CHILD | WS_VISIBLE | WS_BORDER | WS_TABSTOP, 12, 44, 44, 13
+ CONTROL "", IDC_1630_MONTANT, "edit", ES_LEFT | ES_READONLY | WS_CHILD | WS_VISIBLE | WS_BORDER | WS_TABSTOP, 88, 44, 68, 13
+ CONTROL "Date", -1, "static", SS_LEFT | WS_CHILD | WS_VISIBLE, 12, 4, 32, 8
+ CONTROL "Heure", -1, "static", SS_LEFT | WS_CHILD | WS_VISIBLE, 88, 4, 28, 8
+ CONTROL "Code IK", -1, "static", SS_LEFT | WS_CHILD | WS_VISIBLE, 148, 4, 40, 8
+ CONTROL "Nombre Km", -1, "static", SS_LEFT | WS_CHILD | WS_VISIBLE, 12, 36, 44, 8
+ CONTROL "Montant", -1, "static", SS_LEFT | WS_CHILD | WS_VISIBLE, 88, 36, 52, 8
+ CONTROL "Monnaie", IDC_1630_SIGLE, "static", SS_LEFT | WS_CHILD | WS_VISIBLE, 160, 48, 36, 8
+ CONTROL "", IDOK, "BorBtn", BS_DEFPUSHBUTTON | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 67, 80, 43, 25
+ CONTROL "", IDCANCEL, "BorBtn", BS_PUSHBUTTON | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 129, 80, 43, 25
+}
+
+IDD_AGA DIALOG 0, 0, 465, 270
+STYLE DS_MODALFRAME | DS_3DLOOK | DS_CONTEXTHELP | WS_POPUP | WS_VISIBLE | WS_CAPTION | WS_SYSMENU
+CAPTION "Liste AGA"
+FONT 8, "MS Sans Serif"
+{
+ CONTROL "ListView1", IDC_AGA_LW, "SysListView32", LVS_REPORT | LVS_SINGLESEL | WS_CHILD | WS_VISIBLE | WS_BORDER, 16, 8, 432, 116
+ CONTROL "Imprimer", IDC_AGA_IMPRIMER, "button", BS_PUSHBUTTON | BS_CENTER | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 180, 236, 128, 13
+ CONTROL "", IDOK, "BorBtn", BS_DEFPUSHBUTTON | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 16, 228, 43, 25
+ CONTROL "", IDCANCEL, "BorBtn", BS_PUSHBUTTON | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 404, 228, 43, 25
+ CONTROL "", IDC_AGA_GLOBAL, "SysListView32", LVS_REPORT | WS_CHILD | WS_VISIBLE | WS_BORDER, 16, 148, 184, 74
+ CONTROL "", IDC_AGA_LOC, "SysListView32", LVS_REPORT | WS_CHILD | WS_VISIBLE | WS_BORDER, 332, 148, 116, 72
+ CONTROL "", IDC_AGA_EURO, "SysListView32", LVS_REPORT | WS_CHILD | WS_VISIBLE | WS_BORDER, 208, 148, 116, 72
+ CONTROL "Sommes globales converties", -1, "static", SS_LEFT | WS_CHILD | WS_VISIBLE, 16, 136, 96, 8
+ CONTROL "Somme des ", -1, "static", SS_LEFT | WS_CHILD | WS_VISIBLE, 332, 136, 40, 8
+ CONTROL "<monnaie>", IDC_AGA_MONNAIE, "static", SS_LEFT | WS_CHILD | WS_VISIBLE, 372, 136, 40, 8
+ CONTROL "Somme des Euros", -1, "static", SS_LEFT | WS_CHILD | WS_VISIBLE, 208, 136, 108, 9
+}
+
+IDD_LISTDEP DIALOG 0, 0, 358, 244
+STYLE DS_MODALFRAME | DS_3DLOOK | DS_CONTEXTHELP | WS_POPUP | WS_VISIBLE | WS_CAPTION | WS_SYSMENU
+CAPTION "Liste des dépenses"
+FONT 8, "MS Sans Serif"
+{
+ CONTROL "ListView1", IDC_LISTDEP_LW, "SysListView32", LVS_REPORT | LVS_SINGLESEL | WS_CHILD | WS_VISIBLE | WS_BORDER, 16, 8, 320, 104
+ CONTROL "Imprimer", IDC_LISTDEP_IMPRIMER, "button", BS_PUSHBUTTON | BS_CENTER | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 112, 224, 128, 13
+ CONTROL "", IDOK, "BorBtn", BS_DEFPUSHBUTTON | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 20, 212, 43, 25
+ CONTROL "", IDCANCEL, "BorBtn", BS_PUSHBUTTON | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 292, 212, 43, 25
+ CONTROL "Détail", -1, "static", SS_LEFT | WS_CHILD | WS_VISIBLE, 124, 116, 96, 8
+ CONTROL "ListBox1", IDC_LISTDEP_LB, "listbox", LBS_STANDARD | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 124, 128, 104, 60
+ CONTROL "Edit1", IDC_LISTDEP_EDIT, "edit", ES_LEFT | WS_CHILD | WS_VISIBLE | WS_BORDER | WS_TABSTOP, 124, 192, 104, 16
+}
+IDD_CRITERES DIALOG 0, 0, 188, 120
+STYLE DS_MODALFRAME | DS_3DLOOK | DS_CONTEXTHELP | WS_POPUP | WS_VISIBLE | WS_CAPTION | WS_SYSMENU
+CAPTION "Critères de recherche"
+FONT 8, "MS Sans Serif"
+{
+ CONTROL "Entre le :", -1, "static", SS_LEFT | WS_CHILD | WS_VISIBLE, 12, 12, 60, 8
+ CONTROL "", IDC_CRIT_DATE1, "edit", ES_LEFT | WS_CHILD | WS_VISIBLE | WS_BORDER | WS_TABSTOP, 12, 22, 76, 13
+ CONTROL "et le :", -1, "static", SS_LEFT | WS_CHILD | WS_VISIBLE, 100, 13, 52, 9
+ CONTROL "", IDC_CRIT_DATE2, "edit", ES_LEFT | WS_CHILD | WS_VISIBLE | WS_BORDER | WS_TABSTOP, 100, 22, 76, 13
+ CONTROL "Sélectionnez :", IDC_CRIT_ACTES, "BorShade", BSS_GROUP | BSS_CAPTION | BSS_LEFT | WS_CHILD | WS_VISIBLE | WS_GROUP, 36, 40, 116, 36
+ CONTROL "Vos actes uniquement", IDC_CRIT_ACTESPERSO, "BorRadio", BS_AUTORADIOBUTTON | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 52, 52, 84, 9
+ CONTROL "Tous les actes", IDC_CRIT_ACTESTOUS, "BorRadio", BS_AUTORADIOBUTTON | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 52, 64, 76, 9
+ CONTROL "", IDOK, "BorBtn", BS_DEFPUSHBUTTON | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 40, 88, 43, 25
+ CONTROL "", IDCANCEL, "BorBtn", BS_PUSHBUTTON | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 104, 88, 43, 25
+}
+
+IDD_MULTICRITERES DIALOG 0, 0, 284, 197
+STYLE DS_MODALFRAME | DS_3DLOOK | DS_CONTEXTHELP | WS_POPUP | WS_VISIBLE | WS_CAPTION | WS_SYSMENU
+CAPTION "Définition des critères de recherche"
+FONT 8, "MS Sans Serif"
+{
+ CONTROL "Examens entre le :", -1, "static", SS_LEFT | WS_CHILD | WS_VISIBLE, 4, 7, 68, 8
+ CONTROL "", IDC_MC_DATE1, "edit", ES_LEFT | WS_CHILD | WS_VISIBLE | WS_BORDER | WS_TABSTOP, 68, 4, 84, 13
+ CONTROL "et le :", -1, "static", SS_LEFT | WS_CHILD | WS_VISIBLE, 160, 6, 20, 10
+ CONTROL "", IDC_MC_DATE2, "edit", ES_LEFT | WS_CHILD | WS_VISIBLE | WS_BORDER | WS_TABSTOP, 184, 4, 84, 13
+ CONTROL "", -1, "BorShade", BSS_HDIP | BSS_LEFT | WS_CHILD | WS_VISIBLE, 6, 26, 272, 1
+ CONTROL "", IDC_MC_EXAMEN, "edit", ES_LEFT | ES_AUTOHSCROLL | WS_CHILD | WS_VISIBLE | WS_BORDER | WS_TABSTOP, 8, 40, 100, 13
+ CONTROL "Type d'examen", -1, "static", SS_LEFT | WS_CHILD | WS_VISIBLE, 8, 32, 96, 8
+ CONTROL "Prescripteur", IDC_MC_PRESCRIPT, "button", BS_PUSHBUTTON | BS_CENTER | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 132, 40, 140, 13
+ CONTROL "Sélectionnez", IDC_MC_ACTES, "BorShade", BSS_GROUP | BSS_CAPTION | BSS_LEFT | WS_CHILD | WS_VISIBLE | WS_GROUP, 8, 60, 100, 39
+ CONTROL "&Tous les actes", IDC_MC_ACTES_TOUS, "BorRadio", BS_AUTORADIOBUTTON | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 16, 72, 84, 9
+ CONTROL "&Vos actes uniquement", IDC_MC_ACTES_PERSO, "BorRadio", BS_AUTORADIOBUTTON | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 16, 84, 84, 9
+ CONTROL "", -1, "BorShade", BSS_HDIP | BSS_LEFT | WS_CHILD | WS_VISIBLE, 134, 90, 52, 1
+ CONTROL "Impayés", IDC_MC_IMP, "BorShade", BSS_GROUP | BSS_CAPTION | BSS_LEFT | WS_CHILD | WS_VISIBLE | WS_GROUP, 132, 60, 56, 64
+ CONTROL "&Tous", IDC_MC_IMP_TOUS, "BorRadio", BS_AUTORADIOBUTTON | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 140, 75, 44, 9
+ CONTROL "&Impayés", IDC_MC_IMP_IMPAYES, "BorRadio", BS_AUTORADIOBUTTON | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 140, 96, 44, 9
+ CONTROL "&Payés", IDC_MC_IMP_PAYES, "BorRadio", BS_AUTORADIOBUTTON | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 140, 109, 40, 9
+ CONTROL "", -1, "BorShade", BSS_HDIP | BSS_LEFT | WS_CHILD | WS_VISIBLE, 210, 90, 60, 1
+ CONTROL "Contexte", IDC_MC_CTXT, "BorShade", BSS_GROUP | BSS_CAPTION | BSS_LEFT | WS_CHILD | WS_VISIBLE | WS_GROUP, 208, 60, 64, 88
+ CONTROL "&Tous", IDC_MC_CTXT_TOUS, "BorRadio", BS_AUTORADIOBUTTON | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 216, 75, 52, 9
+ CONTROL "&Non précisé", IDC_MC_CTXT_NP, "BorRadio", BS_AUTORADIOBUTTON | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 216, 94, 52, 9
+ CONTROL "&Externe", IDC_MC_CTXT_EXT, "BorRadio", BS_AUTORADIOBUTTON | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 216, 107, 52, 9
+ CONTROL "&Ambulatoire", IDC_MC_CTXT_AMBU, "BorRadio", BS_AUTORADIOBUTTON | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 216, 120, 52, 9
+ CONTROL "&Hospitalisé", IDC_MC_CTXT_HOSP, "BorRadio", BS_AUTORADIOBUTTON | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 216, 133, 52, 9
+ CONTROL "", -1, "BorShade", BSS_HDIP | BSS_LEFT | WS_CHILD | WS_VISIBLE, 6, 152, 272, 1
+ CONTROL "", IDOK, "BorBtn", BS_DEFPUSHBUTTON | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 40, 164, 43, 25
+ CONTROL "", IDCANCEL, "BorBtn", BS_PUSHBUTTON | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 120, 164, 43, 25
+ CONTROL "", IDHELP, "BorBtn", BS_PUSHBUTTON | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 200, 164, 43, 25
+}
+
+IDD_MULTICRITIMP DIALOG 0, 0, 284, 176
+STYLE DS_MODALFRAME | DS_3DLOOK | DS_CONTEXTHELP | WS_POPUP | WS_VISIBLE | WS_CAPTION | WS_SYSMENU
+CAPTION "Définition des critères de recherche"
+FONT 8, "MS Sans Serif"
+{
+ CONTROL "Examens entre le :", -1, "static", SS_LEFT | WS_CHILD | WS_VISIBLE, 36, 12, 68, 8
+ CONTROL "", IDC_MCI_DATE1, "edit", ES_LEFT | WS_CHILD | WS_VISIBLE | WS_BORDER | WS_TABSTOP, 96, 10, 60, 13
+ CONTROL "et le :", -1, "static", SS_LEFT | WS_CHILD | WS_VISIBLE, 167, 11, 20, 10
+ CONTROL "", IDC_MCI_DATE2, "edit", ES_LEFT | WS_CHILD | WS_VISIBLE | WS_BORDER | WS_TABSTOP, 188, 10, 60, 13
+ CONTROL "", -1, "BorShade", BSS_HDIP | BSS_LEFT | WS_CHILD | WS_VISIBLE, 8, 30, 264, 4
+ CONTROL "Type d'examen", -1, "static", SS_LEFT | WS_CHILD | WS_VISIBLE, 8, 36, 96, 8
+ CONTROL "", IDC_MCI_EXAMEN, "edit", ES_LEFT | ES_AUTOHSCROLL | WS_CHILD | WS_VISIBLE | WS_BORDER | WS_TABSTOP, 8, 44, 100, 13
+ CONTROL "Organisme :", -1, "static", SS_LEFT | WS_CHILD | WS_VISIBLE, 8, 62, 80, 8
+ CONTROL "", IDC_MCI_ORGA, "combobox", CBS_DROPDOWNLIST | WS_CHILD | WS_VISIBLE | WS_VSCROLL | WS_TABSTOP, 8, 72, 100, 48
+ CONTROL "Prescripteur", IDC_MCI_PRESCRIPT, "button", BS_PUSHBUTTON | BS_CENTER | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 8, 96, 100, 13
+ CONTROL "Sélectionnez", IDC_MCI_ACTES, "BorShade", BSS_GROUP | BSS_CAPTION | BSS_LEFT | WS_CHILD | WS_VISIBLE | WS_GROUP, 120, 36, 76, 39
+ CONTROL "&Tous les actes", IDC_MCI_ACTES_TOUS, "BorRadio", BS_AUTORADIOBUTTON | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 128, 48, 64, 9
+ CONTROL "&Vos actes", IDC_MCI_ACTES_PERSO, "BorRadio", BS_AUTORADIOBUTTON | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 128, 60, 48, 9
+ CONTROL "", -1, "BorShade", BSS_HDIP | BSS_LEFT | WS_CHILD | WS_VISIBLE, 210, 68, 60, 1
+ CONTROL "Contexte", IDC_MCI_CTXT, "BorShade", BSS_GROUP | BSS_CAPTION | BSS_LEFT | WS_CHILD | WS_VISIBLE | WS_GROUP, 208, 36, 64, 92
+ CONTROL "Tous", IDC_MCI_CTXT_TOUS, "BorRadio", BS_AUTORADIOBUTTON | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 212, 52, 40, 9
+ CONTROL "&Non précisé", IDC_MCI_CTXT_NP, "BorRadio", BS_AUTORADIOBUTTON | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 212, 76, 52, 9
+ CONTROL "&Externe", IDC_MCI_CTXT_EXT, "BorRadio", BS_AUTORADIOBUTTON | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 212, 88, 52, 9
+ CONTROL "&Ambulatoire", IDC_MCI_CTXT_AMBU, "BorRadio", BS_AUTORADIOBUTTON | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 212, 100, 52, 9
+ CONTROL "&Hospitalisé", IDC_MCI_CTXT_HOSP, "BorRadio", BS_AUTORADIOBUTTON | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 212, 112, 52, 9
+ CONTROL "", -1, "BorShade", BSS_HDIP | BSS_LEFT | WS_CHILD | WS_VISIBLE, 10, 136, 264, 1
+ CONTROL "", IDOK, "BorBtn", BS_DEFPUSHBUTTON | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 48, 144, 43, 25
+ CONTROL "", IDCANCEL, "BorBtn", BS_PUSHBUTTON | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 120, 144, 43, 25
+ CONTROL "", IDHELP, "BorBtn", BS_PUSHBUTTON | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 192, 144, 43, 25
+}
+
+IDD_LISTIMP DIALOG 0, 0, 426, 218
+STYLE DS_MODALFRAME | DS_3DLOOK | DS_CONTEXTHELP | WS_POPUP | WS_VISIBLE | WS_CAPTION | WS_SYSMENU
+CAPTION "Liste des impayés"
+FONT 8, "MS Sans Serif"
+{
+ CONTROL "", IDC_LI_LIBELLE, "static", SS_LEFT | WS_CHILD | WS_VISIBLE, 4, 4, 356, 40
+ CONTROL "Monnaie", IDC_LI_MONNAIE, "BorShade", BSS_GROUP | BSS_CAPTION | BSS_CENTER | WS_CHILD | WS_VISIBLE | WS_GROUP, 368, 4, 48, 40
+ CONTROL "EURO", IDC_LI_EURO, "BorRadio", BS_AUTORADIOBUTTON | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 372, 16, 40, 9
+ CONTROL "LOC", IDC_LI_LOC, "BorRadio", BS_AUTORADIOBUTTON | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 372, 32, 40, 9
+ CONTROL "ListView1", IDC_LI_LW, "SysListView32", LVS_REPORT | WS_CHILD | WS_VISIBLE | WS_BORDER, 7, 48, 412, 132
+ CONTROL "Imprimer", IDC_LI_IMPRIMER, "button", BS_PUSHBUTTON | BS_CENTER | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 67, 188, 108, 25
+ CONTROL "", IDOK, "BorBtn", BS_DEFPUSHBUTTON | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 315, 188, 43, 25
+}
+
+IDD_LISTACTES DIALOG 0, 0, 406, 218
+STYLE DS_MODALFRAME | DS_3DLOOK | DS_CONTEXTHELP | WS_POPUP | WS_VISIBLE | WS_CAPTION | WS_SYSMENU
+CAPTION "Liste des actes"
+FONT 8, "MS Sans Serif"
+{
+ CONTROL "", IDC_LA_LIBELLE, "static", SS_LEFT | WS_CHILD | WS_VISIBLE, 4, 4, 396, 24
+ CONTROL "ListView1", IDC_LA_LW, "SysListView32", LVS_REPORT | WS_CHILD | WS_VISIBLE | WS_BORDER, 4, 32, 396, 152
+ CONTROL "Imprimer", IDC_LA_IMPRIMER, "button", BS_PUSHBUTTON | BS_CENTER | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 85, 188, 108, 25
+ CONTROL "", IDOK, "BorBtn", BS_DEFPUSHBUTTON | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 277, 188, 43, 25
+}
+
+IDD_SOMACTES DIALOG 0, 0, 402, 253
+STYLE DS_MODALFRAME | DS_3DLOOK | DS_CONTEXTHELP | WS_POPUP | WS_VISIBLE | WS_CAPTION | WS_SYSMENU
+CAPTION "Somme des actes"
+FONT 8, "MS Sans Serif"
+{
+ CONTROL "", IDC_SOMACTES_LIBELLE, "static", SS_LEFT | WS_CHILD | WS_VISIBLE, 4, 4, 392, 36
+ CONTROL "ListView1", IDC_SOMACTES_EXAMENS, "SysListView32", LVS_REPORT | WS_CHILD | WS_VISIBLE | WS_BORDER, 4, 48, 204, 129
+ CONTROL "ListView2", IDC_SOMACTES_TOTAUX, "SysListView32", LVS_REPORT | WS_CHILD | WS_VISIBLE | WS_BORDER, 212, 48, 184, 110
+ CONTROL "ListView3", IDC_SOMACTES_KCODES, "SysListView32", LVS_REPORT | WS_CHILD | WS_VISIBLE | WS_BORDER, 4, 180, 204, 68
+ CONTROL "", IDC_TOTAL_COMPTE, "static", SS_LEFT | WS_CHILD | WS_VISIBLE, 212, 170, 184, 30
+ CONTROL "", IDC_TOTAL_DEPASS, "static", SS_LEFT | WS_CHILD | WS_VISIBLE, 212, 198, 184, 20
+ CONTROL "Imprimer", IDC_SOMACTES_IMPRIMER, "button", BS_PUSHBUTTON | BS_CENTER | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 224, 220, 108, 25
+ CONTROL "", IDOK, "BorBtn", BS_DEFPUSHBUTTON | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 344, 220, 43, 25
+}
+
+IDD_FACTCRITERES DIALOG 0, 0, 284, 127
+STYLE DS_MODALFRAME | DS_3DLOOK | DS_CONTEXTHELP | WS_POPUP | WS_VISIBLE | WS_CAPTION | WS_SYSMENU
+CAPTION "Définition des critères de recherche"
+FONT 8, "MS Sans Serif"
+{
+ CONTROL "Examens entre le :", -1, "static", SS_LEFT | WS_CHILD | WS_VISIBLE, 36, 12, 68, 8
+ CONTROL "", IDC_FC_DATE1, "edit", ES_LEFT | WS_CHILD | WS_VISIBLE | WS_BORDER | WS_TABSTOP, 96, 10, 60, 13
+ CONTROL "et le :", -1, "static", SS_LEFT | WS_CHILD | WS_VISIBLE, 167, 11, 20, 10
+ CONTROL "", IDC_FC_DATE2, "edit", ES_LEFT | WS_CHILD | WS_VISIBLE | WS_BORDER | WS_TABSTOP, 188, 10, 60, 13
+ CONTROL "Line1", -1, "BorShade", BSS_HDIP | BSS_LEFT | WS_CHILD | WS_VISIBLE, 8, 30, 264, 4
+ CONTROL "Sélectionnez", IDC_FC_ACTES, "BorShade", BSS_GROUP | BSS_CAPTION | BSS_LEFT | WS_CHILD | WS_VISIBLE | WS_GROUP, 184, 40, 76, 39
+ CONTROL "Tous les actes", IDC_FC_ACTES_TOUS, "BorRadio", BS_AUTORADIOBUTTON | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 192, 52, 64, 9
+ CONTROL "Vos actes", IDC_FC_ACTES_PERSO, "BorRadio", BS_AUTORADIOBUTTON | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 192, 64, 48, 9
+ CONTROL "", IDC_FC_ORGA, "combobox", CBS_DROPDOWNLIST | WS_CHILD | WS_VISIBLE | WS_VSCROLL | WS_TABSTOP, 12, 52, 100, 48
+ CONTROL "Organisme :", -1, "static", SS_LEFT | WS_CHILD | WS_VISIBLE, 12, 44, 80, 8
+ CONTROL "", IDOK, "BorBtn", BS_DEFPUSHBUTTON | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 88, 92, 43, 25
+ CONTROL "", IDCANCEL, "BorBtn", BS_PUSHBUTTON | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 152, 92, 43, 25
+}
+
+IDD_SOMENCAISS DIALOG 0, 0, 291, 254
+STYLE DS_MODALFRAME | DS_3DLOOK | DS_CONTEXTHELP | WS_POPUP | WS_VISIBLE | WS_CAPTION | WS_SYSMENU
+CAPTION "Somme des encaissements"
+FONT 8, "MS Sans Serif"
+{
+ CONTROL "", IDC_SE_LIBELLE, "static", SS_LEFT | WS_CHILD | WS_VISIBLE, 4, 4, 276, 48
+ CONTROL "ListView1", IDC_SE_LOC, "SysListView32", LVS_REPORT | WS_CHILD | WS_VISIBLE | WS_BORDER, 20, 76, 120, 76
+ CONTROL "ListView2", IDC_SE_EURO, "SysListView32", LVS_REPORT | WS_CHILD | WS_VISIBLE | WS_BORDER, 152, 76, 120, 76
+ CONTROL "ListView3", IDC_SE_GLOBAL, "SysListView32", LVS_REPORT | WS_CHILD | WS_VISIBLE | WS_BORDER, 20, 172, 184, 76
+ CONTROL "Somme des ", -1, "static", SS_LEFT | WS_CHILD | WS_VISIBLE, 20, 65, 40, 9
+ CONTROL "Somme des Euros", -1, "static", SS_LEFT | WS_CHILD | WS_VISIBLE, 152, 65, 88, 9
+ CONTROL "Sommes globales converties", -1, "static", SS_LEFT | WS_CHILD | WS_VISIBLE, 20, 160, 140, 9
+ CONTROL "<monnaie>", IDC_SE_MONNAIE, "static", SS_LEFT | WS_CHILD | WS_VISIBLE, 60, 65, 40, 9
+ CONTROL "Imprimer", IDC_SE_IMPRIMER, "button", BS_PUSHBUTTON | BS_CENTER | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 236, 184, 43, 25
+ CONTROL "", IDOK, "BorBtn", BS_DEFPUSHBUTTON | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 236, 220, 43, 25
+}
+
+IDD_SAISIETP DIALOG 0, 0, 281, 199
+STYLE DS_MODALFRAME | DS_3DLOOK | DS_CONTEXTHELP | WS_POPUP | WS_VISIBLE | WS_CAPTION | WS_SYSMENU
+CAPTION "Saisie d'un Tiers-Payant"
+FONT 8, "MS Sans Serif"
+{
+ CONTROL "", IDC_STP_LIBCOURT, "edit", ES_LEFT | WS_CHILD | WS_VISIBLE | WS_BORDER | WS_TABSTOP, 36, 22, 100, 13
+ CONTROL "", IDC_STP_LIBLONG, "edit", ES_LEFT | ES_AUTOHSCROLL | WS_CHILD | WS_VISIBLE | WS_BORDER | WS_TABSTOP, 36, 56, 216, 13
+ CONTROL "Libellé court", -1, "static", SS_LEFT | WS_CHILD | WS_VISIBLE, 36, 13, 80, 7
+ CONTROL "Libellé long", -1, "static", SS_LEFT | WS_CHILD | WS_VISIBLE, 36, 47, 44, 9
+ CONTROL "Choix d'un tiers-payant", IDC_STP_CHOIXTP, "button", BS_PUSHBUTTON | BS_CENTER | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 88, 148, 104, 14
+ CONTROL "", IDC_STP_ADRESSE, "edit", ES_LEFT | ES_MULTILINE | ES_AUTOVSCROLL | ES_AUTOHSCROLL | ES_WANTRETURN | WS_CHILD | WS_VISIBLE | WS_BORDER | WS_TABSTOP, 36, 92, 184, 47
+ CONTROL "Adresse", -1, "static", SS_LEFT | WS_CHILD | WS_VISIBLE, 36, 82, 32, 9
+ CONTROL "", IDOK, "BorBtn", BS_DEFPUSHBUTTON | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 87, 168, 43, 25
+ CONTROL "", IDCANCEL, "BorBtn", BS_PUSHBUTTON | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 151, 168, 43, 25
+}
+
+IDD_CHOIXTP DIALOG 0, 0, 240, 211
+STYLE DS_MODALFRAME | DS_3DLOOK | DS_CONTEXTHELP | WS_POPUP | WS_VISIBLE | WS_CAPTION | WS_SYSMENU
+CAPTION "Choix d'un Tiers-Payant"
+FONT 8, "MS Sans Serif"
+{
+ CONTROL "ListView1", IDC_CTP_LW, "SysListView32", LVS_REPORT | WS_CHILD | WS_VISIBLE | WS_BORDER, 16, 13, 204, 142
+ CONTROL "", IDOK, "BorBtn", BS_DEFPUSHBUTTON | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 68, 172, 43, 25
+ CONTROL "", IDCANCEL, "BorBtn", BS_PUSHBUTTON | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 128, 172, 43, 25
+}
+
+IDD_1610_INIT DIALOG 0, 0, 277, 129
+STYLE DS_MODALFRAME | DS_3DLOOK | DS_CONTEXTHELP | WS_POPUP | WS_VISIBLE | WS_CAPTION | WS_SYSMENU
+CAPTION "Initialisation d'une prestation"
+FONT 8, "MS Sans Serif"
+{
+ CONTROL "", IDC_1610_INIT_COEFF, "edit", ES_LEFT | WS_CHILD | WS_VISIBLE | WS_BORDER | WS_TABSTOP, 148, 40, 40, 13
+ CONTROL "Coefficient", -1, "static", SS_LEFT | WS_CHILD | WS_VISIBLE, 148, 32, 40, 8
+ CONTROL "", IDC_1610_INIT_DATE, "edit", ES_LEFT | WS_CHILD | WS_VISIBLE | WS_BORDER | WS_TABSTOP, 8, 12, 68, 13
+ CONTROL "Date", -1, "static", SS_LEFT | WS_CHILD | WS_VISIBLE, 8, 4, 68, 7
+ CONTROL "", IDC_1610_INIT_HEURE, "edit", ES_LEFT | WS_CHILD | WS_VISIBLE | WS_BORDER | WS_TABSTOP, 88, 12, 48, 13
+ CONTROL "Heure", -1, "static", SS_LEFT | WS_CHILD | WS_VISIBLE, 88, 4, 60, 7
+ CONTROL "ComboBox2", IDC_1610_INIT_CODE, "combobox", CBS_DROPDOWNLIST | WS_CHILD | WS_VISIBLE | WS_VSCROLL | WS_TABSTOP, 8, 40, 112, 68
+ CONTROL "Code prestation", -1, "static", SS_LEFT | WS_CHILD | WS_VISIBLE, 8, 32, 64, 8
+ CONTROL "", IDC_1610_INIT_DIVIS, "edit", ES_LEFT | WS_CHILD | WS_VISIBLE | WS_BORDER | WS_TABSTOP, 200, 40, 24, 13
+ CONTROL "/", -1, "static", SS_LEFT | WS_CHILD | WS_VISIBLE, 192, 44, 8, 8
+ CONTROL "Diviseur", -1, "static", SS_LEFT | WS_CHILD | WS_VISIBLE, 200, 32, 28, 8
+ CONTROL "", IDC_1610_INIT_MONTANT, "edit", ES_LEFT | ES_READONLY | WS_CHILD | WS_VISIBLE | WS_BORDER | WS_TABSTOP, 148, 68, 77, 14
+ CONTROL "Montant", -1, "static", SS_LEFT | WS_CHILD | WS_VISIBLE, 148, 60, 64, 8
+ CONTROL "Monnaie", IDC_1610_INIT_SIGLE, "static", SS_LEFT | WS_CHILD | WS_VISIBLE, 232, 72, 28, 9
+ CONTROL "", IDC_1610_INIT_EXAMEN, "edit", ES_LEFT | ES_READONLY | WS_CHILD | WS_VISIBLE | WS_BORDER | WS_TABSTOP, 148, 12, 120, 13
+ CONTROL "Examen", -1, "static", SS_LEFT | WS_CHILD | WS_VISIBLE, 148, 4, 88, 7
+ CONTROL "", IDOK, "BorBtn", BS_DEFPUSHBUTTON | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 94, 96, 43, 25
+ CONTROL "", IDCANCEL, "BorBtn", BS_PUSHBUTTON | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 158, 96, 43, 25
+}
+
+IDD_NOEMIE DIALOG 149, 20, 281, 98
+STYLE DS_MODALFRAME | DS_3DLOOK | DS_CONTEXTHELP | WS_POPUP | WS_VISIBLE | WS_CAPTION | WS_SYSMENU
+CAPTION "TRAITEMENT DES FICHIERS NOEMIE"
+FONT 8, "MS Sans Serif"
+{
+ CONTROL "", IDC_FICHIER_RSP, "edit", ES_LEFT | WS_CHILD | WS_VISIBLE | WS_BORDER | WS_TABSTOP, 5, 36, 270, 14
+ CONTROL "OK", IDOK, "BorBtn", BS_PUSHBUTTON | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 61, 64, 43, 25
+ CONTROL "", IDCANCEL, "BorBtn", BS_PUSHBUTTON | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 177, 64, 43, 25
+ CONTROL "LANCER L'IMPORTATION", IDC_LANCER, "button", BS_PUSHBUTTON | BS_CENTER | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 5, 4, 270, 17
+ CONTROL "Fichier en cours", -1, "BorStatic", SS_LEFT | WS_CHILD | WS_VISIBLE | WS_GROUP, 5, 28, 270, 8
+}
+
+IDD_CCAM_INIT DIALOG 0, 0, 263, 174
+STYLE DS_MODALFRAME | DS_3DLOOK | DS_CONTEXTHELP | WS_POPUP | WS_VISIBLE | WS_CAPTION | WS_SYSMENU
+CAPTION "Saisie d'un code CCAM"
+FONT 8, "MS Sans Serif"
+{
+ CONTROL "Code CCAM", IDC_CCAM_CODE, "button", BS_PUSHBUTTON | BS_CENTER | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 8, 12, 248, 32
+ CONTROL "Date", -1, "static", SS_LEFT | WS_CHILD | WS_VISIBLE, 169, 57, 52, 8
+ CONTROL "", IDC_CCAM_DATE, "edit", ES_LEFT | WS_CHILD | WS_VISIBLE | WS_BORDER | WS_TABSTOP, 168, 65, 68, 13
+ CONTROL "Modificateurs", -1, "static", SS_LEFT | WS_CHILD | WS_VISIBLE, 73, 56, 48, 9
+ CONTROL "", IDC_CCAM_MODIFS, "edit", ES_LEFT | WS_CHILD | WS_VISIBLE | WS_BORDER | WS_TABSTOP, 72, 65, 84, 13
+ CONTROL "Pourcentage", -1, "static", SS_LEFT | WS_CHILD | WS_VISIBLE, 20, 56, 48, 8
+ CONTROL "", IDC_CCAM_POURCENT, "edit", ES_LEFT | WS_CHILD | WS_VISIBLE | WS_BORDER | WS_TABSTOP, 20, 65, 24, 13
+ CONTROL "%", -1, "static", SS_LEFT | WS_CHILD | WS_VISIBLE, 48, 68, 8, 8
+ CONTROL "", IDC_CCAM_MONTANT, "edit", ES_LEFT | ES_READONLY | WS_CHILD | WS_VISIBLE | WS_BORDER | WS_TABSTOP, 79, 95, 68, 13
+ CONTROL "Montant", -1, "static", SS_LEFT | WS_CHILD | WS_VISIBLE, 79, 87, 52, 8
+ CONTROL "Monnaie", IDC_CCAM_SIGLE, "static", SS_LEFT | WS_CHILD | WS_VISIBLE, 151, 99, 36, 8
+ CONTROL "", IDOK, "BorBtn", BS_DEFPUSHBUTTON | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 79, 126, 43, 25
+ CONTROL "", IDCANCEL, "BorBtn", BS_PUSHBUTTON | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 141, 126, 43, 25
+}
+
+IDD_CLAM_INIT DIALOG 0, 0, 263, 174
+STYLE DS_MODALFRAME | DS_3DLOOK | DS_CONTEXTHELP | WS_POPUP | WS_VISIBLE | WS_CAPTION | WS_SYSMENU
+CAPTION "Saisie d'un code CLAM"
+FONT 8, "MS Sans Serif"
+{
+ CONTROL "Code acte", IDC_LIBRE_CODE, "button", BS_PUSHBUTTON | BS_CENTER | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 8, 12, 248, 32
+ CONTROL "Pourcentage", -1, "static", SS_LEFT | WS_CHILD | WS_VISIBLE, 20, 56, 48, 8
+ CONTROL "", IDC_LIBRE_POURCENT, "edit", ES_LEFT | WS_CHILD | WS_VISIBLE | WS_BORDER | WS_TABSTOP, 20, 65, 24, 13
+ CONTROL "%", -1, "static", SS_LEFT | WS_CHILD | WS_VISIBLE, 48, 68, 8, 8
+ CONTROL "Date", -1, "static", SS_LEFT | WS_CHILD | WS_VISIBLE, 73, 56, 52, 8
+ CONTROL "", IDC_LIBRE_DATE, "edit", ES_LEFT | WS_CHILD | WS_VISIBLE | WS_BORDER | WS_TABSTOP, 73, 65, 68, 13
+ CONTROL "Montant", -1, "static", SS_LEFT | WS_CHILD | WS_VISIBLE, 169, 56, 52, 8
+ CONTROL "", IDC_LIBRE_MONTANT_E, "edit", ES_LEFT | ES_READONLY | WS_CHILD | WS_VISIBLE | WS_BORDER | WS_TABSTOP, 169, 65, 68, 12
+ CONTROL "Monnaie", IDC_LIBRE_SIGLE_E, "static", SS_LEFT | WS_CHILD | WS_VISIBLE, 239, 67, 36, 8
+ CONTROL "", IDC_LIBRE_MONTANT_F, "edit", ES_LEFT | ES_READONLY | WS_CHILD | WS_VISIBLE | WS_BORDER | WS_TABSTOP, 169, 80, 68, 12
+ CONTROL "Monnaie", IDC_LIBRE_SIGLE_F, "static", SS_LEFT | WS_CHILD | WS_VISIBLE, 239, 82, 36, 8
+ CONTROL "", IDOK, "BorBtn", BS_DEFPUSHBUTTON | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 79, 126, 43, 25
+ CONTROL "", IDCANCEL, "BorBtn", BS_PUSHBUTTON | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 141, 126, 43, 25
+}
+
+IDD_MAT_INIT DIALOG 0, 0, 548, 160
+STYLE DS_MODALFRAME | DS_3DLOOK | DS_CONTEXTHELP | WS_POPUP | WS_VISIBLE | WS_CAPTION | WS_SYSMENU
+CAPTION "Saisie de consommable"
+FONT 8, "MS Sans Serif"
+{
+ CONTROL "", IDC_LOTS_CHOISIS, "SysListView32", LVS_REPORT | LVS_SINGLESEL | WS_CHILD | WS_VISIBLE | WS_BORDER, 8, 8, 250, 100
+ CONTROL "", IDC_LOTS_CHOIX, "SysListView32", LVS_REPORT | LVS_SINGLESEL | WS_CHILD | WS_VISIBLE | WS_BORDER, 290, 8, 250, 100
+ CONTROL "Montant", -1, "static", SS_LEFT | WS_CHILD | WS_VISIBLE, 8, 120, 40, 8
+ CONTROL "", IDC_LOTS_MONTANT_E, "edit", ES_LEFT | ES_READONLY | WS_CHILD | WS_VISIBLE | WS_BORDER | WS_TABSTOP, 50, 120, 68, 12
+ CONTROL "Monnaie", IDC_LOTS_SIGLE_E, "static", SS_LEFT | WS_CHILD | WS_VISIBLE, 120, 122, 36, 8
+ CONTROL "", IDC_LOTS_MONTANT_F, "edit", ES_LEFT | ES_READONLY | WS_CHILD | WS_VISIBLE | WS_BORDER | WS_TABSTOP, 50, 135, 68, 12
+ CONTROL "Monnaie", IDC_LOTS_SIGLE_F, "static", SS_LEFT | WS_CHILD | WS_VISIBLE, 120, 137, 36, 8
+ CONTROL "Elargir le choix", ID_ELARGIR, "button", BS_PUSHBUTTON | BS_CENTER | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 290, 109, 250, 10
+ CONTROL "", IDOK, "BorBtn", BS_DEFPUSHBUTTON | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 250, 125, 43, 25
+ CONTROL "", IDCANCEL, "BorBtn", BS_PUSHBUTTON | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 320, 125, 43, 25
+}
+
+IDD_CPTA_SEARCH_PROCESS DIALOG 0, 0, 165, 144
+STYLE DS_MODALFRAME | DS_3DLOOK | DS_CONTEXTHELP | WS_POPUP | WS_VISIBLE | WS_CAPTION | WS_SYSMENU
+CAPTION "Recherche en comptabilité"
+FONT 8, "MS Sans Serif"
+{
+ CONTROL "Date en cours", -1, "button", BS_GROUPBOX | WS_CHILD | WS_VISIBLE | WS_GROUP, 8, 7, 148, 31
+ CONTROL "", IDC_DISPLAY_DATE, "BorStatic", SS_LEFT | WS_CHILD | WS_VISIBLE | WS_GROUP, 16, 20, 132, 9
+ CONTROL "Numéro de fiche", -1, "button", BS_GROUPBOX | WS_CHILD | WS_VISIBLE | WS_GROUP, 8, 44, 148, 31
+ CONTROL "", IDC_DISPLAY_CODE, "BorStatic", SS_LEFT | WS_CHILD | WS_VISIBLE | WS_GROUP, 16, 58, 132, 9
+ CONTROL "Statut", -1, "button", BS_GROUPBOX | WS_CHILD | WS_VISIBLE | WS_GROUP, 8, 82, 148, 31
+ CONTROL "", IDC_CHECK_ACK, "BorStatic", SS_LEFT | WS_CHILD | WS_VISIBLE | WS_GROUP, 16, 96, 132, 9
+ CONTROL "STOP", IDC_CHECK_STOP, "button", BS_PUSHBUTTON | BS_CENTER | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 57, 128, 52, 13
+}
+
+IDD_NGAP_MGMT DIALOG 11, 27, 650, 340
+// STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION
+STYLE WS_POPUP | WS_VISIBLE | WS_CAPTION | WS_SYSMENU | WS_THICKFRAME | WS_MINIMIZEBOX | WS_MAXIMIZEBOX
+CLASS "bordlg"
+CAPTION "Gestion des lettres-clés"
+FONT 8, "MS Sans Serif"
+{
+ CONTROL "", -1, "BorShade", BSS_RGROUP | BSS_CAPTION | BSS_LEFT | WS_CHILD | WS_VISIBLE, 4, 4, 642, 298
+ CONTROL "", IDC_CLAMS, "SysListView32", LVS_REPORT | LVS_SINGLESEL | WS_CHILD | WS_VISIBLE | WS_BORDER, 8, 8, 634, 290
+ CONTROL "", -1, "BorShade", BSS_HDIP | BSS_LEFT | WS_CHILD | WS_VISIBLE, 1, 305, 648, 1
+ CONTROL "", IDOK, "BorBtn", BS_DEFPUSHBUTTON | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 100, 310, 43, 25
+ CONTROL "Nouveau", ID_NEW, "button", BS_PUSHBUTTON | BS_CENTER | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 300, 310, 43, 25
+}
+
+IDD_NGAP_EDIT DIALOG 0, 0, 292, 103
+STYLE DS_MODALFRAME | DS_3DLOOK | DS_CONTEXTHELP | WS_POPUP | WS_VISIBLE | WS_CAPTION | WS_SYSMENU
+CAPTION "Lettre clé"
+FONT 8, "MS Sans Serif"
+{
+ CONTROL "Libellé", -1, "static", SS_LEFT | WS_CHILD | WS_VISIBLE, 4, 5, 40, 10
+ CONTROL "", IDC_NGAP_LABEL, "edit", ES_LEFT | ES_AUTOHSCROLL | WS_CHILD | WS_VISIBLE | WS_BORDER | WS_TABSTOP, 48, 4, 240, 12
+ CONTROL "Code", -1, "static", SS_LEFT | WS_CHILD | WS_VISIBLE, 4, 21, 40, 10
+ CONTROL "", IDC_NGAP_CODE, "edit", ES_LEFT | ES_AUTOHSCROLL | WS_CHILD | WS_VISIBLE | WS_BORDER | WS_TABSTOP, 48, 20, 98, 12
+ CONTROL "", -1, "BorShade", BSS_RGROUP | BSS_CAPTION | BSS_LEFT | WS_CHILD | WS_VISIBLE, 4, 38, 140, 32
+ CONTROL "Prix d'achat", -1, "BorStatic", SS_LEFT | WS_CHILD | WS_VISIBLE, 8, 44, 60, 10
+ CONTROL "", IDC_NGAP_PRIX_E, "edit", ES_LEFT | WS_CHILD | WS_VISIBLE | WS_BORDER | WS_TABSTOP, 70, 43, 50, 12
+ CONTROL "€", -1, "BorStatic", SS_LEFT | WS_CHILD | WS_VISIBLE, 125, 44, 15, 10
+ CONTROL "", IDC_NGAP_PRIX_F, "edit", ES_LEFT | WS_CHILD | WS_VISIBLE | WS_BORDER | WS_TABSTOP, 70, 55, 50, 12
+ CONTROL "F", IDC_LOT_SIGLE, "BorStatic", SS_LEFT | WS_CHILD | WS_VISIBLE, 125, 56, 15, 10
+ CONTROL "Catégorie", -1, "static", SS_LEFT | WS_CHILD | WS_VISIBLE, 152, 44, 64, 8
+ CONTROL "", IDC_NGAP_CAT, "combobox", CBS_DROPDOWNLIST | WS_CHILD | WS_VISIBLE | WS_VSCROLL | WS_TABSTOP, 214, 43, 50, 80
+ CONTROL "", IDOK, "BorBtn", BS_DEFPUSHBUTTON | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 60, 73, 43, 25
+ CONTROL "", IDCANCEL, "BorBtn", BS_PUSHBUTTON | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 180, 73, 43, 25
+}
+
+// fin de nscompta.rc
+

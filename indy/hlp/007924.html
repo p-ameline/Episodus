@@ -1,0 +1,76 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+<TITLE>TLr</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <META name="GENERATOR" content="Doc-O-Matic">
+    <LINK rel="STYLESHEET" href="default.css" type="text/css">
+
+<SCRIPT LANGUAGE="JavaScript1.2" SRC="scripts.js"></SCRIPT>
+</HEAD>
+<BODY CLASS="Element57">
+<TABLE BORDER="0" BGCOLOR="#AACCFF" WIDTH="100%" CELLSPACING="0" CELLPADDING="0">
+<TR><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element1">
+Indy 9</DIV>
+</TD><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element2">
+<A HREF="content.html" CLASS="Element59">Content</A> | <A HREF="idx.html" CLASS="Element59">Index</A> | <A HREF="symref.html" CLASS="Element59">Reference</A></DIV>
+</TD></TR></TABLE><DIV CLASS="Element58">
+<DIV CLASS="Element5">
+TLr</DIV>
+<DIV CLASS="Element7">
+<A HREF="015399.html" CLASS="Element59">See Also</A>, <A HREF="002822.html" CLASS="Element59">Unit: IdSNTP</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+NTPGram LongInt storage structure.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12">TLr = <STRONG>packed</STRONG> <STRONG>record</STRONG>
+  L1: byte;
+  L2: byte;
+  L3: byte;
+  L4: byte;
+  <STRONG>end</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Unit</DIV>
+<DIV CLASS="Element69">
+<A HREF="002822.html" CLASS="Element59">IdSNTP</A></DIV>
+<DIV CLASS="Element14">
+Members</DIV>
+<DIV CLASS="Element20">
+L1: byte;</DIV>
+<DIV CLASS="Element22">
+<DIV CLASS="Element21">
+L1 is used to store the value of byte 1 of 4 bytes in the <A HREF="007924.html" CLASS="Element59">TLr</A> structure.</DIV>
+</DIV>
+<DIV CLASS="Element20">
+L2: byte;</DIV>
+<DIV CLASS="Element22">
+<DIV CLASS="Element21">
+L2 is used to store the value of byte 2 of 4 bytes in the <A HREF="007924.html" CLASS="Element59">TLr</A> structure.</DIV>
+</DIV>
+<DIV CLASS="Element20">
+L3: byte;</DIV>
+<DIV CLASS="Element22">
+<DIV CLASS="Element21">
+L3 is used to store the value of byte 3 of 4 bytes in the <A HREF="007924.html" CLASS="Element59">TLr</A> structure.</DIV>
+</DIV>
+<DIV CLASS="Element20">
+L4: byte;</DIV>
+<DIV CLASS="Element22">
+<DIV CLASS="Element21">
+L4 is used to store the value of byte 4 of 4 bytes in the <A HREF="007924.html" CLASS="Element59">TLr</A> structure.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+The TLr structure is an internal <STRONG>packed record</STRONG> structure used to handle the byte order of LongInt values received in a <A HREF="008005.html" CLASS="Element59">TNTPGram</A> datagram. TLr is used to flip the order of bytes when TTIdSNTP.DateTime updates the value of Originate, Destination, Transmit, and Receive timestamps.<P CLASS="Element10">
+L1 is used to store the value of byte 1 of 4 bytes in the TLr structure. L2 is used to store the value of byte 2 of 4 bytes in the TLr structure. L3 is used to store the value of byte 3 of 4 bytes in the TLr structure. L4 is used to store the value of byte 4 of 4 bytes in the TLr structure.</DIV>
+</DIV>
+<DIV CLASS="Element62">
+<HR>Created with Doc-O-Matic 2 donated to <STRONG><A HREF="http://www.delphi-jedi.org">Project JEDI</A></STRONG>. Commercial license available from the <STRONG><A HREF="http://www.doc-o-matic.com">Doc-O-Matic site</A></STRONG>.</DIV>
+</DIV></BODY></HTML>

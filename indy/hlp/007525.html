@@ -1,0 +1,234 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+<TITLE>TIdManagedBuffer</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <META name="GENERATOR" content="Doc-O-Matic">
+    <LINK rel="STYLESHEET" href="default.css" type="text/css">
+
+<SCRIPT LANGUAGE="JavaScript1.2" SRC="scripts.js"></SCRIPT>
+</HEAD>
+<BODY CLASS="Element57">
+<TABLE BORDER="0" BGCOLOR="#AACCFF" WIDTH="100%" CELLSPACING="0" CELLPADDING="0">
+<TR><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element1">
+Indy 9</DIV>
+</TD><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element2">
+<A HREF="content.html" CLASS="Element59">Content</A> | <A HREF="idx.html" CLASS="Element59">Index</A> | <A HREF="symref.html" CLASS="Element59">Reference</A></DIV>
+</TD></TR></TABLE><DIV CLASS="Element58">
+<DIV CLASS="Element5">
+TIdManagedBuffer</DIV>
+<DIV CLASS="Element7">
+<A HREF="012248.html" CLASS="Element59">Hierarchy</A>, <A HREF="012249.html" CLASS="Element59">Properties</A>, <A HREF="012250.html" CLASS="Element59">Methods</A>, <A HREF="002918.html" CLASS="Element59">Unit: IdTCPConnection</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Extended buffer class that allows access to the memory allocated to the buffer.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12">TIdManagedBuffer = <STRONG>class</STRONG>(<A HREF="007699.html" CLASS="Element59">TIdSimpleBuffer</A>)</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Unit</DIV>
+<DIV CLASS="Element69">
+<A HREF="002918.html" CLASS="Element59">IdTCPConnection</A></DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+TIdManagedBuffer is a <A HREF="007699.html" CLASS="Element59">TIdSimpleBuffer</A> descendant that extends the ancestor class to include properties and methods used for maintaining and accessing the memory used for the buffer. TIdManagedBuffer is the type used to represent the <A HREF="007828.html#0018" CLASS="Element59">TIdTCPConnection.InputBuffer</A> property.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0005">TIdManagedBuffer.PackReadedSize</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007525.html" CLASS="Element59">TIdManagedBuffer</A>, <A HREF="012251.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Indicates the number of bytes needed for the internal buffer for the managed buffer instance.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> PackReadedSize: Integer;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+PackReadedSize is an Integer property that indicates the number of bytes to use for the internal buffer used to hold values read for the managed buffer. PackReadedSize also determines when <A HREF="007525.html#0004" CLASS="Element59">PackBuffer</A> is called in <A HREF="007525.html#0006" CLASS="Element59">Remove</A>.<P CLASS="Element10">
+Changing the value in PackReadedSize to a non-positive value causes <A HREF="002260.html" CLASS="Element59">IdInBufCacheSizeDefault</A> to be assigned as the property value.<P CLASS="Element10">
+The default value for PackReadedSize is <A HREF="002260.html" CLASS="Element59">IdInBufCacheSizeDefault</A> as assigned in the <A HREF="007525.html#0001" CLASS="Element59">Create</A> constructor.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0000">TIdManagedBuffer.Clear</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007525.html" CLASS="Element59">TIdManagedBuffer</A>, <A HREF="012252.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Clears the memory allocated to the buffer.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>procedure</STRONG> Clear;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Clear is a procedure that allows the buffer class to clear the memory allocated to the buffer. Clear calls the inherited Clear method, and sets the number of bytes read to 0.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0001">TIdManagedBuffer.Create</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007525.html" CLASS="Element59">TIdManagedBuffer</A>, <A HREF="012253.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Constructor for the object instance.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>constructor</STRONG> Create(AOnBytesRemoved: <A HREF="007223.html" CLASS="Element59">TIdBufferBytesRemoved</A> = <STRONG>nil</STRONG>);</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+AOnBytesRemoved: TIdBufferBytesRemoved = nil</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Event handler to call when removing contents from the buffer.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Create is the constructor for the object instance. Create calls the inherited Create method using AOnBytesRemoved as the event handler used when removing bytes from the memory for the buffer. Create sets the default value of <A HREF="007525.html#0005" CLASS="Element59">PackReadedSize</A> to <A HREF="002260.html" CLASS="Element59">IdInBufCacheSizeDefault</A> prior to exiting from the method.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0002">TIdManagedBuffer.Extract</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007525.html" CLASS="Element59">TIdManagedBuffer</A>, <A HREF="012254.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Copies and removes bytes from the memory for the buffer.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>function</STRONG> Extract(<STRONG>const</STRONG> AByteCount: Integer): <STRONG>string</STRONG>; <STRONG>override</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+const AByteCount: Integer</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Number of bytes to be removed from the memory allocated to the buffer.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Extract is a String function used to remove the number of byes indicated in AByteCount from the <A HREF="007525.html#0003" CLASS="Element59">Memory</A> allocated to the buffer. Extract can raise an <A HREF="000425.html" CLASS="Element59">EIdNotEnoughDataInBuffer</A> instance when AByteCount exceeds the size of the allocated buffer. Extract copies the number of bytes specified to the Result value, and calls <A HREF="007525.html#0006" CLASS="Element59">Remove</A> using AByteCount as an argument.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0003">TIdManagedBuffer.Memory</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007525.html" CLASS="Element59">TIdManagedBuffer</A>, <A HREF="012255.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Provides access to the unread storage allocated for the buffer.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>function</STRONG> Memory: Pointer;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Memory is a Pointer function that provides access to the unread storage allocated for the buffer. Memory is normally accessed by a dereferenced pointer to the PChar values for the buffer. Use <A HREF="007525.html#0000" CLASS="Element59">Clear</A>, <A HREF="007525.html#0002" CLASS="Element59">Extract</A>, or <A HREF="007525.html#0006" CLASS="Element59">Remove</A> to read or reset Memory contents.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0004">TIdManagedBuffer.PackBuffer</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007525.html" CLASS="Element59">TIdManagedBuffer</A>, <A HREF="012256.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Removes read values and resizes the allocated memory for the buffer.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>procedure</STRONG> PackBuffer;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+PackBuffer is a procedure used to clear values from <A HREF="007525.html#0003" CLASS="Element59">Memory</A> that had been read. PackBuffer uses ReadedSize to determine the number of bytes already read from the buffer. When ReadedSize is greater than zero (0), PackBuffer calls Move to make unread bytes appear at the beginning of <A HREF="007525.html#0003" CLASS="Element59">Memory</A> allocated for the buffer and resizes the memory stream to Size. PackBuffer sets the number of bytes read to zero (0) prior to exiting from the method.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0006">TIdManagedBuffer.Remove</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007525.html" CLASS="Element59">TIdManagedBuffer</A>, <A HREF="012257.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Removes the spcified number of bytes from the internal cache.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>procedure</STRONG> Remove(<STRONG>const</STRONG> AByteCount: integer); <STRONG>override</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+const AByteCount: integer</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Number of bytes to remove from the managed buffer.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Remove is a procedure used to increment the number of bytes read for the managed buffer by the value specified in AByteCount, and cause the bytes to be removed from the internal cache.<P CLASS="Element10">
+Remove can raise an <A HREF="000425.html" CLASS="Element59">EIdNotEnoughDataInBuffer</A> exception when AByteCount is larger than Size of the internal cache for the managed buffer. When AByteCount is equal to Size, Remove calls the <A HREF="007525.html#0000" CLASS="Element59">Clear</A> method. Otherwise, Remvoe increments the ReadedSize property by the number of bytes specified in AByteCount.<P CLASS="Element10">
+If ReadedSize is larger than the threshold value indicated in <A HREF="007525.html#0005" CLASS="Element59">PackReadedSize</A>, Remove calls <A HREF="007525.html#0004" CLASS="Element59">PackBuffer</A> to adjust the internal cache size to reflect the unhandled contents of the managed buffer.<P CLASS="Element10">
+The OnBytesRemoved event handler is triggered (when assigned) using the specifed number of bytes in AByteCount.<P CLASS="Element10">
+Use <A HREF="007525.html#0002" CLASS="Element59">Extract</A> to retrieve and remove a specified number of bytes from the contents of a managed buffer.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0007">TIdManagedBuffer.Seek</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007525.html" CLASS="Element59">TIdManagedBuffer</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Moves the current location in the managed buffer to the specified position.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>function</STRONG> Seek(Offset: Longint; Origin: Word): Longint; <STRONG>override</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+Offset: Longint</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Number of bytes to move from the specified origin.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+Origin: Word</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Buffer location to use as the intial seek position.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Seek is a LongInt function used to moves the current location in the managed buffer to the position indicated by the Offset and Origin arguments. Seek allows the managed buffer to emulate the positioning used in a TStream object but on the <A HREF="007525.html#0003" CLASS="Element59">Memory</A> position for the managed buffer.<P CLASS="Element10">
+If Offset is from the beginning of the resource, Seek moves to the position Offset in <A HREF="007525.html#0003" CLASS="Element59">Memory</A>. Offset must be greater than 0. When Offset is from the current position in the resource, Seek moves to the current Position + Offset. When Offset is from the end of the resource, Offset must be less than or equal to 0 to indicate a number of bytes before the end of the buffer.<P CLASS="Element10">
+Seek returns the new Position in the <A HREF="007525.html#0003" CLASS="Element59">Memory</A> property, the new current position in the resource.</DIV>
+</DIV>
+<DIV CLASS="Element62">
+<HR>Created with Doc-O-Matic 2 donated to <STRONG><A HREF="http://www.delphi-jedi.org">Project JEDI</A></STRONG>. Commercial license available from the <STRONG><A HREF="http://www.doc-o-matic.com">Doc-O-Matic site</A></STRONG>.</DIV>
+</DIV></BODY></HTML>

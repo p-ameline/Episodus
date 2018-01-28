@@ -1,0 +1,233 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+<TITLE>TQueryResult</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <META name="GENERATOR" content="Doc-O-Matic">
+    <LINK rel="STYLESHEET" href="default.css" type="text/css">
+
+<SCRIPT LANGUAGE="JavaScript1.2" SRC="scripts.js"></SCRIPT>
+</HEAD>
+<BODY CLASS="Element57">
+<TABLE BORDER="0" BGCOLOR="#AACCFF" WIDTH="100%" CELLSPACING="0" CELLPADDING="0">
+<TR><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element1">
+Indy 9</DIV>
+</TD><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element2">
+<A HREF="content.html" CLASS="Element59">Content</A> | <A HREF="idx.html" CLASS="Element59">Index</A> | <A HREF="symref.html" CLASS="Element59">Reference</A></DIV>
+</TD></TR></TABLE><DIV CLASS="Element58">
+<DIV CLASS="Element5">
+TQueryResult</DIV>
+<DIV CLASS="Element7">
+<A HREF="015066.html" CLASS="Element59">Hierarchy</A>, <A HREF="015067.html" CLASS="Element59">Properties</A>, <A HREF="015068.html" CLASS="Element59">Methods</A>, <A HREF="015069.html" CLASS="Element59">See Also</A>, <A HREF="002173.html" CLASS="Element59">Unit: IdDNSResolver</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Implements a container for values returned in a response to a DNS query.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12">TQueryResult = <STRONG>class</STRONG>(TCollection)</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Unit</DIV>
+<DIV CLASS="Element69">
+<A HREF="002173.html" CLASS="Element59">IdDNSResolver</A></DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+TQueryResult is a TCollection descendant that implements a container for values returned in a response to a DNS query. TQueryResult is the type used to represent the <A HREF="007302.html#0004" CLASS="Element59">TIdDNSResolver.QueryResult</A> property.<P CLASS="Element10">
+TQueryResult provides property that identify field values returned in the DNS response message packet, including <A HREF="008046.html#0006" CLASS="Element59">QueryClass</A>, <A HREF="008046.html#0007" CLASS="Element59">QueryType</A>, and <A HREF="008046.html#0004" CLASS="Element59">DomainName</A>. TQueryResult also implements the <A HREF="008046.html#0005" CLASS="Element59">Items</A> property to provide indexed access to resource records returned in the Answer, Authority, or Additional sections of the DNS response.<P CLASS="Element10">
+TQueryResult provides method maintain the <A HREF="008059.html" CLASS="Element59">TResultRecord</A> collection of resource records for the DNS response, including <A HREF="008046.html#0000" CLASS="Element59">Add</A> and <A HREF="008046.html#0001" CLASS="Element59">Clear</A>.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0004">TQueryResult.DomainName</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="008046.html" CLASS="Element59">TQueryResult</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Represents the domain name to which a resource record pertains.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> DomainName: <STRONG>String</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+DomainName is a read-only String property that represents the domain name to which a resource record pertains. DomainName is read when <A HREF="007302.html" CLASS="Element59">TIdDNSResolver</A> parses the results from a DNS query into a <A HREF="008059.html" CLASS="Element59">TResultRecord</A>.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0005">TQueryResult.Items</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="008046.html" CLASS="Element59">TQueryResult</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Provides indexed access to resource records in the DNS query response.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> Items [<STRONG>Index</STRONG>: Integer]: <A HREF="008059.html" CLASS="Element59">TResultRecord</A>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Items is an indexed <A HREF="008059.html" CLASS="Element59">TResultRecord</A> property that provides access to the collection of resource records created when the resolver parses the DNS query response.<P CLASS="Element10">
+Items insures that read access to the collection always returns a <A HREF="008059.html" CLASS="Element59">TResultRecord</A> instance. Applications can examine <A HREF="008059.html#0006" CLASS="Element59">TResultRecord.RecType</A> for the returned item to determine if another <A HREF="008059.html" CLASS="Element59">TResultRecord</A> descendant can be used to access additional properties and methods for the resource record.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0006">TQueryResult.QueryClass</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="008046.html" CLASS="Element59">TQueryResult</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Represents the resource record class used in a DNS query.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> QueryClass: Word;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+QueryClass is a read-only Word property that represents the QClass used for querying resource records for the specified <A HREF="008046.html#0004" CLASS="Element59">DomainName</A>. QueryClass is read from the header for the DNS response packet when <A HREF="007302.html" CLASS="Element59">TIdDNSResolver</A> parses the query results.<P CLASS="Element10">
+<STRONG>Note</STRONG>: Currently, the <A HREF="007302.html" CLASS="Element59">TIdDNSResolver</A> implementation does not support all aspects of the DNS protocol, and includes the following limitations:<P CLASS="Element10">
+<UL>
+<LI>The DNS query class field is limited to examing resource records for the IN (Internet) class only. CS (CSNet), CH (CHAOS), and HS (Hesiod) are not supported at this time.</UL>
+</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0007">TQueryResult.QueryType</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="008046.html" CLASS="Element59">TQueryResult</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Indicates the query OpCode used to perform a DNS query.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> QueryType: Word;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+QueryType is a read-only Word property that represents the query OpCode used for querying resource records for the specified <A HREF="008046.html#0004" CLASS="Element59">DomainName</A>. QueryType is read from the header for the DNS response packet when <A HREF="007302.html" CLASS="Element59">TIdDNSResolver</A> parses the query results.<P CLASS="Element10">
+<STRONG>Note</STRONG>: Currently, the <A HREF="007302.html" CLASS="Element59">TIdDNSResolver</A> implementation does not support all aspects of the DNS protocol, and includes the following limitations:<P CLASS="Element10">
+<UL>
+<LI>The DNS query type is limited to standard queries, where the DNS Header OPCODE is 0. Inverse queries (OPCODE=1) and Status queries (OPCODE=2) are not supported at this time.</UL>
+</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0000">TQueryResult.Add</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="008046.html" CLASS="Element59">TQueryResult</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Creates resource records from raw data found in a DNS response.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>function</STRONG> Add(Answer: <STRONG>string</STRONG>; <STRONG>var</STRONG> APos: Integer): <A HREF="008059.html" CLASS="Element59">TResultRecord</A>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+Answer: string</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Raw data for the values found in the DNS response.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+var APos: Integer</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Offset to data for the resource record</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Return Value</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+<A HREF="008059.html" CLASS="Element59">TResultRecord</A> - Resource record created to represent DNS response data.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Add is a <A HREF="008059.html" CLASS="Element59">TResultRecord</A> function that creates instances of resource records based on raw data found in a DNS response.<P CLASS="Element10">
+Add extracts the values used for Name, TTL, RData, RDataLength, RecType, and RecClass in the <A HREF="008059.html" CLASS="Element59">TResultRecord</A> return value. Add also insures that the proper <A HREF="008059.html" CLASS="Element59">TResultRecord</A> descendant is created to represent the resource record based on the the value in RecType. Add can create instances of <A HREF="008059.html" CLASS="Element59">TResultRecord</A> descendants like <A HREF="007135.html" CLASS="Element59">TARecord</A>, <A HREF="008004.html" CLASS="Element59">TNSRecord</A>, <A HREF="007937.html" CLASS="Element59">TMXRecord</A>, <A HREF="007938.html" CLASS="Element59">TNAMERecord</A>, <A HREF="008074.html" CLASS="Element59">TSOARecord</A>, <A HREF="007192.html" CLASS="Element59">THINFORecord</A>, <A HREF="008097.html" CLASS="Element59">TTextRecord</A>, <A HREF="008109.html" CLASS="Element59">TWKSRecord</A>, <A HREF="008043.html" CLASS="Element59">TPTRRecord</A>, and <A HREF="007932.html" CLASS="Element59">TMINFORecord</A>. When an unsupported resource record type is encountered, Add creates a generic <A HREF="008059.html" CLASS="Element59">TResultRecord</A> instance.<P CLASS="Element10">
+Add also call the <A HREF="008059.html#0002" CLASS="Element59">TResultRecord.Parse</A> method to read RData values in the resource record into their property counterparts.<P CLASS="Element10">
+Add updates the value in APos to indicate when values for the resource record have been read and processed.<P CLASS="Element10">
+Use <A HREF="008046.html#0005" CLASS="Element59">Items</A> to access resource records created for the query result.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0001">TQueryResult.Clear</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="008046.html" CLASS="Element59">TQueryResult</A>, <A HREF="015070.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Resets the container to its default state.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>procedure</STRONG> Clear; <STRONG>reintroduce</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Clear is a procedure that resets the container to the default state. Clear calls the inherited Clear method, and also clears the query internal pointer list used to a handle compressed resource records.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0002">TQueryResult.Create</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="008046.html" CLASS="Element59">TQueryResult</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Constructor for the object instance.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>constructor</STRONG> Create(AResultRecord: <A HREF="008059.html" CLASS="Element59">TResultRecord</A>);</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+AResultRecord: TResultRecord</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Collection that owns resource records for the object instance.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Create is the constructor for the object instance. Create calls the inherited Create method using <A HREF="008059.html" CLASS="Element59">TResultRecord</A> as the owner of the collectionm items created for the query response.<P CLASS="Element10">
+Create assigns the value in AResultRecord to the internal <A HREF="008059.html" CLASS="Element59">TResultRecord</A> maintained by the object instance. Create also allocates resources using for the internal qwuery pointer list used to handle compressed resource records.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0003">TQueryResult.destroy</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="008046.html" CLASS="Element59">TQueryResult</A>, <A HREF="015071.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Frees an object instance.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>destructor</STRONG> destroy; <STRONG>override</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Destroy is the destructor for the object instance. Destroy frees and releases resources allocted in the <A HREF="008046.html#0002" CLASS="Element59">Create</A> method, including the internal query pointer list used for handling compressed resource records.<P CLASS="Element10">
+Destroy calls the inherited Destroy method prior to exiting.</DIV>
+</DIV>
+<DIV CLASS="Element62">
+<HR>Created with Doc-O-Matic 2 donated to <STRONG><A HREF="http://www.delphi-jedi.org">Project JEDI</A></STRONG>. Commercial license available from the <STRONG><A HREF="http://www.doc-o-matic.com">Doc-O-Matic site</A></STRONG>.</DIV>
+</DIV></BODY></HTML>

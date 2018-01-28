@@ -1,0 +1,1746 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+<TITLE>TIdIRCServer</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <META name="GENERATOR" content="Doc-O-Matic">
+    <LINK rel="STYLESHEET" href="default.css" type="text/css">
+
+<SCRIPT LANGUAGE="JavaScript1.2" SRC="scripts.js"></SCRIPT>
+</HEAD>
+<BODY CLASS="Element57">
+<TABLE BORDER="0" BGCOLOR="#AACCFF" WIDTH="100%" CELLSPACING="0" CELLPADDING="0">
+<TR><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element1">
+Indy 9</DIV>
+</TD><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element2">
+<A HREF="content.html" CLASS="Element59">Content</A> | <A HREF="idx.html" CLASS="Element59">Index</A> | <A HREF="symref.html" CLASS="Element59">Reference</A></DIV>
+</TD></TR></TABLE><DIV CLASS="Element58">
+<DIV CLASS="Element5">
+TIdIRCServer</DIV>
+<DIV CLASS="Element7">
+<A HREF="012042.html" CLASS="Element59">Hierarchy</A>, <A HREF="012043.html" CLASS="Element59">Properties</A>, <A HREF="012044.html" CLASS="Element59">Methods</A>, <A HREF="012045.html" CLASS="Element59">Events</A>, <A HREF="012046.html" CLASS="Element59">See Also</A>, <A HREF="002273.html" CLASS="Element59">Unit: IdIrcServer</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Specifies an Internet Relay Chat Protocol server.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12">TIdIRCServer = <STRONG>class</STRONG>(<A HREF="007831.html" CLASS="Element59">TIdTCPServer</A>)</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Unit</DIV>
+<DIV CLASS="Element69">
+<A HREF="002273.html" CLASS="Element59">IdIrcServer</A></DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+TIdIRCServer is a <A HREF="007831.html" CLASS="Element59">TIdTCPServer</A> descendant that provides a server implementation of the Internet Relay Chat (IRC) Protocol as described in the Internet Standards document:<P CLASS="Element10">
+<UL>
+<LI>RFC 1459 - Internet Relay Chat Protocol (IRC) (http://www.rfc-editor.org/rfc/rfc1459.txt)</UL>
+<P CLASS="Element10">
+The IRC protocol provides users with a way to chat among themselves in &quot;chat rooms&quot;. The IRC protocol is a text-based conferencing protocol that uses TCP/IP as the network transport.<P CLASS="Element10">
+A typical IRC environment involves a single process (the server) that forms a central point for client (or other server) connections, performing the required message delivery/multiplexing and other functions. IRC allows various forms of message delivery including user-to-user, user-to-list, user-to-group, user-to-server, and server-to-server communication modes.<P CLASS="Element10">
+The only network configuration allowed for IRC servers is that of a spanning tree where each server acts as a central node for the rest of the network visible to the server.<P CLASS="Element10">
+An IRC client can be any <A HREF="007071.html" CLASS="Element59">socket</A>-enable application capable of connecting to an IRC server that is not already an IRC server.<P CLASS="Element10">
+TIdIRCServer uses the standard port number <A HREF="002494.html" CLASS="Element59">IdPORT_IRC</A> reserved for the IRC protocol to <A HREF="003177.html" CLASS="Element59">listen</A> for client connections. TIdIRCServer, like <A HREF="007831.html" CLASS="Element59">TIdTCPServer</A>, is a multithreaded application where new connections are respresented by a <A HREF="007613.html" CLASS="Element59">TIdPeerThread</A> that is serviced by the TIdIRCServer.<P CLASS="Element10">
+TIdIRCServer recognizes the following IRC commands as defined in the RFC specification:<P CLASS="Element10">
+<UL>
+<LI>ADMIN<P CLASS="Element10">
+<LI>AWAY<P CLASS="Element10">
+<LI>CONNECT<P CLASS="Element10">
+<LI>ERROR<P CLASS="Element10">
+<LI>INFO<P CLASS="Element10">
+<LI>INVITE<P CLASS="Element10">
+<LI>ISON<P CLASS="Element10">
+<LI>JOIN<P CLASS="Element10">
+<LI>KICK<P CLASS="Element10">
+<LI>KILL<P CLASS="Element10">
+<LI>LINKS<P CLASS="Element10">
+<LI>LIST<P CLASS="Element10">
+<LI>MODE<P CLASS="Element10">
+<LI>NAMES<P CLASS="Element10">
+<LI>NICK<P CLASS="Element10">
+<LI>NOTICE<P CLASS="Element10">
+<LI>OPER<P CLASS="Element10">
+<LI>PART<P CLASS="Element10">
+<LI>PASS<P CLASS="Element10">
+<LI>PING<P CLASS="Element10">
+<LI>PONG<P CLASS="Element10">
+<LI>PRIVMSG<P CLASS="Element10">
+<LI>QUIT<P CLASS="Element10">
+<LI>REHASH<P CLASS="Element10">
+<LI>RESTART<P CLASS="Element10">
+<LI>SERVER<P CLASS="Element10">
+<LI>SQUIT<P CLASS="Element10">
+<LI>STATS<P CLASS="Element10">
+<LI>SUMMON<P CLASS="Element10">
+<LI>TIME<P CLASS="Element10">
+<LI>TOPIC<P CLASS="Element10">
+<LI>TRACE<P CLASS="Element10">
+<LI>USER<P CLASS="Element10">
+<LI>USERHOST<P CLASS="Element10">
+<LI>USERS<P CLASS="Element10">
+<LI>VERSION<P CLASS="Element10">
+<LI>WALLOPS<P CLASS="Element10">
+<LI>WHO<P CLASS="Element10">
+<LI>WHOIS<P CLASS="Element10">
+<LI>WHOWAS</UL>
+<P CLASS="Element10">
+TIdIRCServer provides an event handler architecture for all IRC commands that allow the IRC server application to determine the appropriate mechanism used to respond to an IRC command. TIdIRCServer does not provide an implementation for the event handlers.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0000">TIdIRCServer.Create</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007493.html" CLASS="Element59">TIdIRCServer</A>, <A HREF="012047.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Constructor for the object instance.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>constructor</STRONG> Create(AOwner: TComponent); <STRONG>override</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+AOwner: TComponent</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Owner of the object instance.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Create is the constructor for the object instance. Create calls the inherited Create method, and sets the value of the default port property to the standard port number used for Internet Relay Chat (<A HREF="002494.html" CLASS="Element59">IdPORT_IRC</A>).</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0001">TIdIRCServer.OnCommandAdmin</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007493.html" CLASS="Element59">TIdIRCServer</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Event handler for the IRC ADMIN command.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> OnCommandAdmin: <A HREF="007461.html" CLASS="Element59">TIdIrcOneParmEvent</A>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+Parm</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Target server for the command.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+Thread</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Client generating the event.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+OnCommandAdmin is a <A HREF="007461.html" CLASS="Element59">TIdIrcOneParmEvent</A> event handler that allows the server to respond to the IRC ADMIN command. ADMIN is used to retrieve the name of the administrator for the server specified in Parm. An IRC server must be able to forward an ADMIN message to other servers.<P CLASS="Element10">
+Parm can contain wildcard characters to indicate that the first server matching the host name mask. For example:<P CLASS="Element10">
+<UL>
+<LI>irc.wvnet.edu - request a specific server.<P CLASS="Element10">
+<LI>*.edu - request the first server found in the edu domain.</UL>
+</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0002">TIdIRCServer.OnCommandAway</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007493.html" CLASS="Element59">TIdIRCServer</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Event handler for the IRC AWAY command.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> OnCommandAway: <A HREF="007461.html" CLASS="Element59">TIdIrcOneParmEvent</A>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+Parm</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Away message for the client.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+Thread</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Client generating the event.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+OnCommandAway is a <A HREF="007461.html" CLASS="Element59">TIdIrcOneParmEvent</A> event handler that allows the server to respond to the IRC AWAY command. AWAY is used to designate the automatic response message for a PRIVMSG message received for a client that is not connected, and to toggle the user's presence status.<P CLASS="Element10">
+When Parm contains text, the user is not available to receive additional messages and the text in Parm should be sent by the server to any clients sending messages to the user. When Parm is an empty string, the user is on-line and can resume receipt of IRC messages. For example:<P CLASS="Element10">
+<UL>
+<LI>&quot;Gone to Lunch. Back in 30 minutes.&quot; - The Away message is active.<P CLASS="Element10">
+<LI>&quot;&quot; - Away message inactive. User receives messages.</UL>
+</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0003">TIdIRCServer.OnCommandConnect</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007493.html" CLASS="Element59">TIdIRCServer</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Event handler for IRC CONNECT commands.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> OnCommandConnect: <A HREF="007498.html" CLASS="Element59">TIdIrcThreeParmEvent</A>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+Parm1</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Target server for the client connection.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+Parm2</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Target server port number for the connection.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+Parm3</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Remote server for the connection.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+Thread</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Client generating the event.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+OnCommandConnect is a <A HREF="007498.html" CLASS="Element59">TIdIrcThreeParmEvent</A> event handler that allows the server to respond to the IRC CONNECT command. CONNECT is a privileged IRC command available to IRC Operators, and is used to open a connection to another server. CONNECT is used to build the spanning tree that represents the IRC network.<P CLASS="Element10">
+Parm1 is the target server will be the endpoint for the connection.<P CLASS="Element10">
+Parm2 is an optional port number to use for the connection.<P CLASS="Element10">
+Parm3 is an optional server that represents the origin point for the new connection. When Parm3 is an empty string, the origin is the current server.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0004">TIdIRCServer.OnCommandError</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007493.html" CLASS="Element59">TIdIRCServer</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Event handler for the IRC ERROR command.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> OnCommandError: <A HREF="007461.html" CLASS="Element59">TIdIrcOneParmEvent</A>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+Parm</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Error message to <A HREF="006944.html" CLASS="Element59">send</A> to IRC operators.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+Thread</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Client generating the event.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+OnCommandError is a TIdIrcOneParmEventevent handler that allows the server to respond to the IRC ERROR command. ERROR is used to report a serious or fatal server error to IRC Operators. ERROR may also <A HREF="006944.html" CLASS="Element59">send</A> the error message from one server to another server, but must not be accepted from an unknown client.<P CLASS="Element10">
+An ERROR message is used to report errors which occur on the server-to-server link only. An ERROR message is sent to a server at the connection endpoint and all operators currently connected. It is not to be passed onto any other servers by a server if it is received from a server. When a server sends a received ERROR message to operators, the message should be encapsulated in a NOTICE message, indicating that the client was not responsible for the error.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0005">TIdIRCServer.OnCommandInfo</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007493.html" CLASS="Element59">TIdIRCServer</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Event handler for the IRC INFO command.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> OnCommandInfo: <A HREF="007461.html" CLASS="Element59">TIdIrcOneParmEvent</A>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+Parm</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Target server for the request.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+Thread</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Client generating the event.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+OnCommandInfo is a TIdIrcOneParmEventevent handler that allows the server to respond to the IRC INFO command. INFO is used to retrieve information which describes the server in Parm, including the version number, patch level, date started, and miscellaneous data relevant to server identification.<P CLASS="Element10">
+Parm can contain a server name, a host name mask with wildcard characters, or a user nickname that identifies the target of the INFO request. For example:<P CLASS="Element10">
+<UL>
+<LI>csd.bu.edu - request information for a specific server.<P CLASS="Element10">
+<LI>*.edu - request information from the first available server.<P CLASS="Element10">
+<LI>MyNick - request information from the server where MyNick is connected.</UL>
+</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0006">TIdIRCServer.OnCommandInvite</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007493.html" CLASS="Element59">TIdIRCServer</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Event handler for the IRC INVITE command.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> OnCommandInvite: <A HREF="007499.html" CLASS="Element59">TIdIrcTwoParmEvent</A>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+Parm1</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+User Nickname to invite to a channel.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+Parm2</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Channel name for the invitation.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+Thread</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Client generating the event.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+OnCommandInvite is a <A HREF="007499.html" CLASS="Element59">TIdIrcTwoParmEvent</A> event handler that allows the server to respond the IRC INVITE command. INVITE is used to invite the user specified in Parm1 to the channel specified in Parm2.<P CLASS="Element10">
+Parm1 contains the Nickname of the user to be invited to a channel.<P CLASS="Element10">
+Parm2 contains the Channel name where the user is to be invited. There is no requirement that Parm2 identifying an existing or valid channel.<P CLASS="Element10">
+To invite a user to a channel which is by invitation only, the client sending the invite must be recognized as being a channel operator on the given channel.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0007">TIdIRCServer.OnCommandIsOn</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007493.html" CLASS="Element59">TIdIRCServer</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Event handler for the IRC ISON command.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> OnCommandIsOn: <A HREF="007461.html" CLASS="Element59">TIdIrcOneParmEvent</A>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+Parm</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+List of nicknames for the command.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+Thread</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Client generating the event.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+OnCommandIsOn is a <A HREF="007461.html" CLASS="Element59">TIdIrcOneParmEvent</A> event handler that allows the server to respond to the IRC ISON command. ISON is used to determine if a user, or list of users, is/are currently connected to the IRC server.<P CLASS="Element10">
+Parm is a user nickname or space-delimited list of user nicknames. For each nickname in the list, the server adds that to its reply string when the user is connected. The list returned may be empty, the same as the original list, or a subset of the original list in Parm. Parm cannot exceed 512 characters.<P CLASS="Element10">
+ISON may only be processed by the server for the client sending the command, and cannot be passed to other servers for further processing.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0008">TIdIRCServer.OnCommandJoin</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007493.html" CLASS="Element59">TIdIRCServer</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Event handler for the IRC JOIN command.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> OnCommandJoin: <A HREF="007499.html" CLASS="Element59">TIdIrcTwoParmEvent</A>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+Parm1</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+List of channels to join.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+Parm2</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+List of keys for the joined channels.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+Thread</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Client generating the event.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+OnCommandJoin is a <A HREF="007499.html" CLASS="Element59">TIdIrcTwoParmEvent</A> event handler that allows the server to respond to the IRC JOIN command. JOIN is used to signal that a client wishes to <A HREF="003177.html" CLASS="Element59">listen</A> for IRC messages on the channels specified in Parm1.<P CLASS="Element10">
+Permissions to join a channel are determined by the server that hosts the client connection. All other servers should add the user to the channel when it is received from the origin server. The local server can add a user under the following circumstances:<P CLASS="Element10">
+<UL>
+<LI>The user must be invited if the channel is by invitation only.<P CLASS="Element10">
+<LI>The user's nick/username/hostname must not match any active bans.<P CLASS="Element10">
+<LI>The correct key (password) must be given if it is set.</UL>
+<P CLASS="Element10">
+When a user has joined a channel, they will receive notice about all commands for their server that affect the channel.<P CLASS="Element10">
+Parm1 contains a channel name, or a list of comma-delimited channel names, where the client should <A HREF="003177.html" CLASS="Element59">listen</A> for IRC messages.<P CLASS="Element10">
+Parm2 contains a key (password), or a list of comma-delimited keys, for all channels where keys are required.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0009">TIdIRCServer.OnCommandKick</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007493.html" CLASS="Element59">TIdIRCServer</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Event handler for the IRC KICK command.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> OnCommandKick: <A HREF="007498.html" CLASS="Element59">TIdIrcThreeParmEvent</A>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+Parm1</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Channel name(s).</DIV>
+</DIV>
+<DIV CLASS="Element17">
+Parm2</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+User NickName(s).</DIV>
+</DIV>
+<DIV CLASS="Element17">
+Parm3</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Reason for the action.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+Thread</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Client generating the event.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+OnCommandKick is a <A HREF="007498.html" CLASS="Element59">TIdIrcThreeParmEvent</A> event handler that allows the server to respond to the IRC KICK command. KICK is used to forcibly remove the user in Parm2 for the channel in Parm1. Parm3 is the comment or reason message sent to the client. Only a channel operator may use the KICK command.<P CLASS="Element10">
+Each server that receives a KICK message checks that the user is a valid channel operator before removing the victim in Parm2 from the channel.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Notes</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+The IRC protocol allows extension of the KICK command parameters to allow Parm1 to contain a comma-delimited list of channel names, and Parm2 to contain a comma-delimited list of user Nicknames.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="000A">TIdIRCServer.OnCommandKill</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007493.html" CLASS="Element59">TIdIRCServer</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Event handler for the IRC KILL command.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> OnCommandKill: <A HREF="007499.html" CLASS="Element59">TIdIrcTwoParmEvent</A>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+Parm1</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Nickname for the connection to be closed.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+Parm2</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Reason or Comment that explains the action.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+Thread</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Client generating the event.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+OnCommandKill is a <A HREF="007499.html" CLASS="Element59">TIdIrcTwoParmEvent</A> event handler that allows the server to respond to the IRC KILL command. KILL is used to cause the server connection to the client to be closed on the server that hosts the client connection. KILL is generally used by servers to close connection for duplicates entries in the list of valid NickNames. KILL is also available to channel operators.<P CLASS="Element10">
+Parm1 is the user NickName for the connection to be closed.<P CLASS="Element10">
+Parm2 is a comment that reflects the reason that the connection is closed. The name of the user generating the message and all servers in the IRC network path is prepended to Parm2.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Notes</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+It is recommended that only channel operators be allowed to KILL user connections.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="000B">TIdIRCServer.OnCommandLinks</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007493.html" CLASS="Element59">TIdIRCServer</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Event handler for the IRC LINKS command.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> OnCommandLinks: <A HREF="007499.html" CLASS="Element59">TIdIrcTwoParmEvent</A>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+Parm1</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Server mask for the query.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+Parm2</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Optional remote server mask.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+Thread</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Client generating the event.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+OnCommandLinks is a <A HREF="007499.html" CLASS="Element59">TIdIrcTwoParmEvent</A> event handler that allows the server to respond to the IRC LINKS command. LINKS is used to retrieve a list of servers matching the mask in Parm1 known to the server answering the query.<P CLASS="Element10">
+Remote server can be a server name, or a server name mask that identifies the server where the command is forwarded for processing. For example:<P CLASS="Element10">
+<UL>
+<LI>LINKS *.au - lists all servers with a name that matches *.au<P CLASS="Element10">
+<LI>LINKS *.bu.edu *.edu - lists all servers with a name that matches *.bu.edu on the first server matching *.edu</UL>
+</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="000C">TIdIRCServer.OnCommandList</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007493.html" CLASS="Element59">TIdIRCServer</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Event handler for the IRC LIST command.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> OnCommandList: <A HREF="007499.html" CLASS="Element59">TIdIrcTwoParmEvent</A>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+Parm1</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+List of channels.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+Parm2</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Server name.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+Thread</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Client generating the event.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+OnCommandList is a <A HREF="007499.html" CLASS="Element59">TIdIrcTwoParmEvent</A> event handler that allows the server to respond to the IRC LIST command. LIST is used to retrieve a list of channels and topics for the specified server.<P CLASS="Element10">
+Parm1 is an optional parameter that identifies a comma-delimited list of channel names where status and topic information should be retrieved.<P CLASS="Element10">
+Parm2 is the server where the list command should be performed.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="000D">TIdIRCServer.OnCommandMode</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007493.html" CLASS="Element59">TIdIRCServer</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Event handler for the IRC MODE command.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> OnCommandMode: <A HREF="007447.html" CLASS="Element59">TIdIrcFiveParmEvent</A>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+Parm1</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Channel or User Nickname.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+Parm2</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Channel options.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+Parm3</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Limit on options.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+Parm4</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Target User Nickname.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+Parm5</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Ban mask.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+Thread</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Client generating the event.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+OnCommandMode is a <A HREF="007447.html" CLASS="Element59">TIdIrcFiveParmEvent</A> event handler that allows the server to respond to the IRC MODE command. MODE is a dual-purpose command in IRC that is used to change both username and channel mode information.<P CLASS="Element10">
+Channel mode is provided to allow channel operators to change the characteristics of the channel. In channel mode, Parm2 indicates channel options that include a &quot;+&quot; or &quot;-&quot; character, indicating the action, and one or more of the following channel option characters:<P CLASS="Element10">
+<UL>
+<LI>o - Give/take channel operator privileges.<P CLASS="Element10">
+<LI>p - Private channel flag.<P CLASS="Element10">
+<LI>s - Secret channel flag.<P CLASS="Element10">
+<LI>i - Invite-only channel flag.<P CLASS="Element10">
+<LI>t - Topic settable by channel operator only flag.<P CLASS="Element10">
+<LI>n - No messages to channel from clients on the outside.<P CLASS="Element10">
+<LI>m - Moderated channel.<P CLASS="Element10">
+<LI>l - Set the user limit to channel.<P CLASS="Element10">
+<LI>b - Set a ban mask to keep users out.<P CLASS="Element10">
+<LI>v - Give/take the ability to speak on a moderated channel.<P CLASS="Element10">
+<LI>k - Set a channel key (password).</UL>
+<P CLASS="Element10">
+When using the 'o' and 'b' options, a restriction on a total of three per mode command has been imposed.<P CLASS="Element10">
+User mode is provided to allow changes that affect how the user is seen by others, and what extra messages are seen by the client. In User mode, Parm2 indicates user options that include a &quot;+&quot; or &quot;-&quot; character, indicating the action, and one or more of the following user option characters:<P CLASS="Element10">
+<UL>
+<LI>i - Marks a users as invisible.<P CLASS="Element10">
+<LI>s - Marks a user for receipt of server notices.<P CLASS="Element10">
+<LI>w - User receives wallops.<P CLASS="Element10">
+<LI>o - Operator flag.</UL>
+<P CLASS="Element10">
+If a user attempts to make themselves an operator using the &quot;+o&quot; flag, the attempt should be ignored. There is no restriction, however, on a user removing their operator option flag.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="000E">TIdIRCServer.OnCommandNames</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007493.html" CLASS="Element59">TIdIRCServer</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Event handler for the IRC NAMES command.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> OnCommandNames: <A HREF="007461.html" CLASS="Element59">TIdIrcOneParmEvent</A>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+Parm</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+List of channels.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+Thread</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Client generating the event.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+OnCommandNames is a <A HREF="007461.html" CLASS="Element59">TIdIrcOneParmEvent</A> event handler that allows the server to respond to the IRC NAMES command. NAMES is used to retrieve a list of user Nicknames available on the channels in Parm.<P CLASS="Element10">
+Parm should not contain private or secret channels. When Parm is blank, a list of all users on any channel on the server is returned. Users on not on the server, or a visible channel on the server, are placed at the end of the list on channel &quot;*&quot;.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="000F">TIdIRCServer.OnCommandNick</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007493.html" CLASS="Element59">TIdIRCServer</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Event handler for the IRC NICK command.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> OnCommandNick: <A HREF="007499.html" CLASS="Element59">TIdIrcTwoParmEvent</A>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+Parm1</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Nickname for the current user.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+Parm2</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Number of hops to the home server.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+Thread</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Client generating the event.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+OnCommandNick is a <A HREF="007499.html" CLASS="Element59">TIdIrcTwoParmEvent</A> event handler that allows the server to respond to the IRC NICK command. Nick is used to assign the Nickname in Parm1 to the current user. If the user already has a Nickname, the Nickname is changed to Parm1.<P CLASS="Element10">
+Parm2 is an optional parameter that contains the number of hops from the home server for the user. A local connection has a hop count of 0. If Parm2 is supplied by a client, it is ignored.<P CLASS="Element10">
+The server cannot allow two users to have an identical Nickname. If a Nickname collision occurs, both connection with the Nickname are closed and the entries are removed from the server database.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0010">TIdIRCServer.OnCommandNotice</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007493.html" CLASS="Element59">TIdIRCServer</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Event handler for the IRC NOTICE command.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> OnCommandNotice: <A HREF="007499.html" CLASS="Element59">TIdIrcTwoParmEvent</A>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+Parm1</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+NickName to receive the message.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+Parm2</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Content of the message.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+Thread</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Client generating the request.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+OnCommandNotice is a <A HREF="007499.html" CLASS="Element59">TIdIrcTwoParmEvent</A> event handler that allows the server to respond to the IRC NOTICE command. NOTICE is used to <A HREF="006944.html" CLASS="Element59">send</A> the message in Parm2 to the user nickname in Parm1. NOTICE does not generate automatic replies or error messages.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0011">TIdIRCServer.OnCommandOper</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007493.html" CLASS="Element59">TIdIRCServer</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Event handler for the IRC OPER command.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> OnCommandOper: <A HREF="007499.html" CLASS="Element59">TIdIrcTwoParmEvent</A>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+Parm1</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Username requesting operator permission.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+Parm2</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Password for the user requesting operator permission.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+Thread</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Client generating the event.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+OnCommandOper is a <A HREF="007499.html" CLASS="Element59">TIdIrcTwoParmEvent</A> event handler that allows the server to respond to the IRC OPER command. OPER is used to obtain operator privileges.<P CLASS="Element10">
+Param1 contains the user requesting operator privileges.<P CLASS="Element10">
+Param2 contains the password for the user requesting operator privileges.<P CLASS="Element10">
+If the user and password are valid, the server will inform the remainder of the IRC network using the &quot;MODE +o&quot; command for the client nickname.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0012">TIdIRCServer.OnCommandOther</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007493.html" CLASS="Element59">TIdIRCServer</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Event handler for unknown IRC commands.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> OnCommandOther: <A HREF="007490.html" CLASS="Element59">TIdIrcOtherEvent</A>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+Command</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Command from the client.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+Parm</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Command parameters from the client.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+Thread</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Client generating the event.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+OnCommandOther is a <A HREF="007490.html" CLASS="Element59">TIdIrcOtherEvent</A> event handler that allows the server to respond to unknown IRC commands. OnCommandOther is called when the server encounters a command that is not recognized as an IRC protocol command.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0013">TIdIRCServer.OnCommandPart</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007493.html" CLASS="Element59">TIdIRCServer</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Event handler for the IRC PART command.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> OnCommandPart: <A HREF="007461.html" CLASS="Element59">TIdIrcOneParmEvent</A>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+Parm</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+List of channels.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+Thread</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Client generating the event.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+OnCommandPart is a <A HREF="007461.html" CLASS="Element59">TIdIrcOneParmEvent</A> event handler that allows the server to respond to the IRC PART command. PART is used to signal that the client should be removed from the list of active users for all channels in Parm. Parm can contain a comma-delimited list of channel names, or a single channel name.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0014">TIdIRCServer.OnCommandPass</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007493.html" CLASS="Element59">TIdIRCServer</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Event handler for the IRC PASS command.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> OnCommandPass: <A HREF="007461.html" CLASS="Element59">TIdIrcOneParmEvent</A>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+Parm</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Password for the connection.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+Thread</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Client generating the event.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+OnCommandPass is a <A HREF="007461.html" CLASS="Element59">TIdIrcOneParmEvent</A> event handler that allows the server to respond to the IRC PASS command. PASS is used to set the password to be used for a connection.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0015">TIdIRCServer.OnCommandPing</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007493.html" CLASS="Element59">TIdIRCServer</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Event handler for the IRC PING command.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> OnCommandPing: <A HREF="007499.html" CLASS="Element59">TIdIrcTwoParmEvent</A>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+Parm1</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Server issuing the PING request.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+Parm2</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Server where a PONG response shall be forwarded.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+Thread</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Client generating the event.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+OnCommandPing is a <A HREF="007499.html" CLASS="Element59">TIdIrcTwoParmEvent</A> event handler that allows the server to respond to the IRC PING command. PING is used to test for the presence of an active client at the other end of the connection. A PING message is sent at regular intervals if no other activity detected coming from a connection. If a connection fails to respond to a PING command within a set amount of time, that connection is closed.<P CLASS="Element10">
+Parm1 is the name of the server where a client PONG response must be sent, and normally represents the server that issued the PING request.<P CLASS="Element10">
+Parm2 is an optional parameter that contains the name of a server where a client PONG response should be forwarded.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0016">TIdIRCServer.OnCommandPong</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007493.html" CLASS="Element59">TIdIRCServer</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Event handler for the IRC PONG command.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> OnCommandPong: <A HREF="007499.html" CLASS="Element59">TIdIrcTwoParmEvent</A>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+Parm1</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Server responding to the PING message.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+Parm2</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Server where the PONG message shall be forwarded.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+Thread</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Client generating the event.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+OnCommandPong is a <A HREF="007499.html" CLASS="Element59">TIdIrcTwoParmEvent</A> event handler that allows the server to respond to the IRC PONG command. PONG is used to reply to a PING message.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0017">TIdIRCServer.OnCommandPrivMsg</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007493.html" CLASS="Element59">TIdIRCServer</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Event handler for the IRC PRIVMSG command.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> OnCommandPrivMsg: <A HREF="007499.html" CLASS="Element59">TIdIrcTwoParmEvent</A>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+Parm1</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+List of receivers.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+Parm2</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Message to be sent to the receivers.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+Thread</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Client generating the event.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+OnCommandPrivMsg is a <A HREF="007499.html" CLASS="Element59">TIdIrcTwoParmEvent</A> event handler that allows the server to response to the IRC PRIVMSG command. PRIVMSG is used to <A HREF="006944.html" CLASS="Element59">send</A> private messages between users.<P CLASS="Element10">
+Parm1 contains a nickname, a comma-delimited list of nicknames or channels, or a host/server mask that identifies the destination for the message in Parm2.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0018">TIdIRCServer.OnCommandQuit</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007493.html" CLASS="Element59">TIdIRCServer</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Event handler for the IRC QUIT command.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> OnCommandQuit: <A HREF="007461.html" CLASS="Element59">TIdIrcOneParmEvent</A>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+Parm</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Text to <A HREF="006944.html" CLASS="Element59">send</A> in the QUIT message.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+Thread</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Client generating the event.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+OnCommandQuit is a <A HREF="007461.html" CLASS="Element59">TIdIrcOneParmEvent</A> event handler that allows the server to respond to the IRC QUIT command. QUIT is used to end a client session with an optional text message. The server must close the connection to a client which sends a QUIT message.<P CLASS="Element10">
+If Parm is not specified, the NickName is sent as the test for the message. When two server connections are involved, the text for the message is the space-delimited names of the servers.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0019">TIdIRCServer.OnCommandRehash</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007493.html" CLASS="Element59">TIdIRCServer</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Event handler for the IRC REHASH command.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> OnCommandRehash: <A HREF="007448.html" CLASS="Element59">TIdIrcGetEvent</A>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+Thread</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Client generating the event.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+OnCommandRehash is a <A HREF="007448.html" CLASS="Element59">TIdIrcGetEvent</A> event handler that allows the server to respond to the IRC REHASH command. REHASH is used by the operator to force the server to re-read and process its configuration file.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="001A">TIdIRCServer.OnCommandRestart</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007493.html" CLASS="Element59">TIdIRCServer</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Event handler for the IRC RESTART command.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> OnCommandRestart: <A HREF="007448.html" CLASS="Element59">TIdIrcGetEvent</A>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+Thread</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Client generating the event.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+OnCommandRestart is a <A HREF="007448.html" CLASS="Element59">TIdIrcGetEvent</A> event handler that allows the server to respond to the IRC RESTART command. RESTART is used to force a server to restart.<P CLASS="Element10">
+RESTART is optional since it may be viewed as a risk to allow arbitrary people to <A HREF="000295.html" CLASS="Element59">connect</A> to a server as an operator and execute this command, causing (at least) a disruption to service.<P CLASS="Element10">
+The RESTART command must always be fully processed by the server to which the sending client is connected and not be passed onto other connected servers.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="001B">TIdIRCServer.OnCommandServer</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007493.html" CLASS="Element59">TIdIRCServer</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Event handler for the IRC SERVER command.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> OnCommandServer: <A HREF="007494.html" CLASS="Element59">TIdIrcServerEvent</A>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+Hopcount</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Number of hops to the server.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+Info</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Host name for the server connection.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+ServerName</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Name of the new server connection.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+Thread</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Client generating the event.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+OnCommandServer is a <A HREF="007494.html" CLASS="Element59">TIdIrcServerEvent</A> event handler that allows the server to respond to the IRC SERVER command. SERVER is used to tell a server that the other end of a new connection is a server. This message is also used to pass server data over whole net. When a new server is connected to net, information about it be broadcast to the whole network.<P CLASS="Element10">
+HopCount is used to give all servers some internal information on how far away all servers are. With a full server list, it would be possible to construct a map of the entire server tree, but hostmasks prevent this from being done.<P CLASS="Element10">
+If a SERVER message is parsed and attempts to introduce a server which is already known to the receiving server, the connection from which that message must be closed (following the correct procedures), since a duplicate route to a server has formed and the acyclic nature of the IRC tree broken.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="001C">TIdIRCServer.OnCommandSQuit</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007493.html" CLASS="Element59">TIdIRCServer</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Event handler for the IRC SQUIT command.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> OnCommandSQuit: <A HREF="007499.html" CLASS="Element59">TIdIrcTwoParmEvent</A>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+Parm1</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Server name for the message.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+Parm2</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Comment for the message.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+Thread</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Client generating the event.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+OnCommandSQuit is a <A HREF="007499.html" CLASS="Element59">TIdIrcTwoParmEvent</A> event handler that allows the server to respond to the IRC SQUIT command. SQUIT is used to <A HREF="006944.html" CLASS="Element59">send</A> a notification that a server is stopping or has ceased to function. If a server wishes to break the connection to another server it must <A HREF="006944.html" CLASS="Element59">send</A> a SQUIT message to the other server, using the name of the other server as the server parameter, which then closes its connection to the quitting server.<P CLASS="Element10">
+This command is also available operators to help keep a network of IRC servers connected in an orderly fashion. Operators may also issue an SQUIT message for a remote server connection. In this case, the SQUIT must be parsed by each server in between the operator and the remote server, updating the view of the network held by each server as explained below.<P CLASS="Element10">
+Parm2 should be supplied by all operators who execute a SQUIT for a remote server (that is not connected to the server they are currently on) so that other operators are aware for the reason of this action. Parm2 is also filled in by servers which may place an error or similar message here.<P CLASS="Element10">
+Both of the servers which are on either side of the connection being closed are required to <A HREF="006944.html" CLASS="Element59">send</A> out a SQUIT message (to all its other server connections) for all other servers which are considered to be behind that link.<P CLASS="Element10">
+Similarly, a QUIT message must be sent to the other connected servers rest of the network on behalf of all clients behind that link. In addition to this, all channel members of a channel which lost a member due to the split must be sent a QUIT message.<P CLASS="Element10">
+If a server connection is terminated prematurely (e.g. the server on the other end of the link died), the server which detects this disconnection is required to inform the rest of the network that the connection has closed and fill in the comment field with something appropriate.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="001D">TIdIRCServer.OnCommandStats</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007493.html" CLASS="Element59">TIdIRCServer</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Event handler for the IRC STATS command.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> OnCommandStats: <A HREF="007499.html" CLASS="Element59">TIdIrcTwoParmEvent</A>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+Parm1</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Statistics query for the server.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+Parm2</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Server to be queried.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+Thread</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Client generating the event.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+OnCommandStats is a <A HREF="007499.html" CLASS="Element59">TIdIrcTwoParmEvent</A> event handler that allows the server to respond to the IRC STATS command. STATS is used to query statistics for the server specified in Parm1 using the query in Parm1.<P CLASS="Element10">
+If Parm2 is omitted, only the end of stats reply is sent back. The implementation of this command is highly dependent on the server which replies, although the server must be able to supply information as described by the queries below (or similar).<P CLASS="Element10">
+A query may be given by any single letter which is only checked by the destination server (if given as the Parm2 parameter) and is otherwise passed on by intermediate servers, ignored and unaltered.<P CLASS="Element10">
+The following queries are those found in the current IRC implementation and provide a large portion of the setup information for that server. Although these may not be supported in the same way by other versions, all servers should be able to supply a valid reply to a STATS query which is consistent with the reply formats currently used and the purpose of the query.<P CLASS="Element10">
+The currently supported queries are:<P CLASS="Element10">
+<UL>
+<LI>c - returns a list of servers which the server may <A HREF="000295.html" CLASS="Element59">connect</A> to or allow connections from.<P CLASS="Element10">
+<LI>h - returns a list of servers which are either forced to be treated as leaves or allowed to act as hubs.<P CLASS="Element10">
+<LI>i - returns a list of hosts which the server allows a client to <A HREF="000295.html" CLASS="Element59">connect</A> from.<P CLASS="Element10">
+<LI>k - returns a list of banned username/hostname combinations for that server.<P CLASS="Element10">
+<LI>l - returns a list of the server's connections, showing how long each connection has been established and the traffic over that connection in bytes and messages for each direction.<P CLASS="Element10">
+<LI>m - returns a list of commands supported by the server and the usage count for each if the usage count is non zero.<P CLASS="Element10">
+<LI>o - returns a list of hosts from which normal clients may become operators.<P CLASS="Element10">
+<LI>y - show Y (Class) lines from server's configuration file.<P CLASS="Element10">
+<LI>u - returns a string showing how long the server has been up.</UL>
+</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="001E">TIdIRCServer.OnCommandSummon</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007493.html" CLASS="Element59">TIdIRCServer</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Event handler for the IRC SUMMON command.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> OnCommandSummon: <A HREF="007499.html" CLASS="Element59">TIdIrcTwoParmEvent</A>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+Parm1</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+User name to receive the message.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+Parm2</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Server name to receive the message.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+Thread</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Client generating the event.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+OnCommandSummon is a <A HREF="007499.html" CLASS="Element59">TIdIrcTwoParmEvent</A> event handler that allows the server to respond to the IRC SUMMON command. SUMMON is used to ask a user on a host running an IRC server to join an IRC network. The SUMMON message is only sent if the target server has SUMMON enabled, the user is logged in and the server process can write to the user session.<P CLASS="Element10">
+If Parm2 is given, this is the target server for the message. If summon is not enabled in a server, it must return the <A HREF="000573.html" CLASS="Element59">ERR_SUMMONDISABLED</A> numeric and pass the summon message to other IRC servers.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="001F">TIdIRCServer.OnCommandTime</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007493.html" CLASS="Element59">TIdIRCServer</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Event handler for the IRC TIME command.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> OnCommandTime: <A HREF="007461.html" CLASS="Element59">TIdIrcOneParmEvent</A>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+Parm</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Server used to retrieve the time.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+Thread</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Client generating the event.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+OnCommandTime is a <A HREF="007461.html" CLASS="Element59">TIdIrcOneParmEvent</A> event handler that allows the server to respond to the IRC TIME command. TIME is used to query the time for the server specified in Parm. If Parm is not given, the server handling the command must reply to the query.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0020">TIdIRCServer.OnCommandTopic</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007493.html" CLASS="Element59">TIdIRCServer</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Event handler for the IRC TOPIC command.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> OnCommandTopic: <A HREF="007499.html" CLASS="Element59">TIdIrcTwoParmEvent</A>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+Parm1</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Channel name.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+Parm2</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Topic for the Channel.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+Thread</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Client generating the event.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+OnCommandTopic is a <A HREF="007499.html" CLASS="Element59">TIdIrcTwoParmEvent</A> event handler that allows the server to respond to the IRC TOPIC command. TOPIC is used to change or view the topic for a channel.<P CLASS="Element10">
+Parm1 is the channel to be affected by the message.<P CLASS="Element10">
+Parm2 is the topic for the specified channel.<P CLASS="Element10">
+If Parm2 is not specified, the current topic for Parm1 will be retrieved.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0021">TIdIRCServer.OnCommandTrace</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007493.html" CLASS="Element59">TIdIRCServer</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Event handler for the IRC TRACE command.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> OnCommandTrace: <A HREF="007461.html" CLASS="Element59">TIdIrcOneParmEvent</A>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+Parm</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Server name for the trace.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+Thread</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Client generating the event.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+OnCommandTrace is a <A HREF="007461.html" CLASS="Element59">TIdIrcOneParmEvent</A> event handler that allows the server to respond to the IRC TRACE command. TRACE is used to find the route to the server specified in Parm.<P CLASS="Element10">
+Each server that processes this message must tell the sender about it by sending a reply indicating it is a pass-through link, forming a chain of replies similar to that gained from using &quot;traceroute&quot;. After sending this reply back, it must then <A HREF="006944.html" CLASS="Element59">send</A> the TRACE message to the next server until given server is reached. If Parm is omitted, it is recommended that TRACE command <A HREF="006944.html" CLASS="Element59">send</A> a message to the sender telling which servers the current server has direct connection to.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0022">TIdIRCServer.OnCommandUser</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007493.html" CLASS="Element59">TIdIRCServer</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Event handler for the IRC USER command.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> OnCommandUser: <A HREF="007502.html" CLASS="Element59">TIdIrcUserEvent</A>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+HostName</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Host name for the connection.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+RealName</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Real name for the connection.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+ServerName</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Server name for the connection.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+Thread</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Client generating the event.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+UserName</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+User name for the connection.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+OnCommandUser is a <A HREF="007502.html" CLASS="Element59">TIdIrcUserEvent</A> event handler that allows the server to respond to the IRC USER command. USER is used to specify the username, hostname, servername and realname of a new user. It is also used in communication between servers to indicate new user arriving on IRC, since only after both USER and NICK have been received from a client does a user become registered.<P CLASS="Element10">
+USER messages between IRC servers must to be prefixed with client's NICKname. Note that hostname and servername are normally ignored by the IRC server when the USER command comes from a directly connected client (for security reasons), but they are used in server to server communication. This means that a NICK must always be sent to a remote server when a new user is being introduced to the rest of the network before the accompanying USER is sent.<P CLASS="Element10">
+It must be noted that realname parameter must be the last parameter, because it may contain space characters and must be prefixed with a colon (':') to make sure this is recognized as such.<P CLASS="Element10">
+Since it is easy for a client to lie about its username by relying solely on the USER message, the use of an &quot;Identity Server&quot; is recommended. If the host which a user connects from has such a server enabled the username is set to that as in the reply from the &quot;Identity Server&quot;.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0023">TIdIRCServer.OnCommandUserHost</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007493.html" CLASS="Element59">TIdIRCServer</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Event handler for the IRC USERHOST command.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> OnCommandUserHost: <A HREF="007461.html" CLASS="Element59">TIdIrcOneParmEvent</A>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+Parm</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+List of nicknames.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+Thread</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Client generating the event.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+OnCommandUserHost is a <A HREF="007461.html" CLASS="Element59">TIdIrcOneParmEvent</A> event handler that allows the server to respond to the IRC USERHOST command. USERHOST is used to retrieve a list of information about each nickname that it found. The returned list has each reply separated by a space.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0024">TIdIRCServer.OnCommandUsers</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007493.html" CLASS="Element59">TIdIRCServer</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Event handler for the IRC USERS command.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> OnCommandUsers: <A HREF="007461.html" CLASS="Element59">TIdIrcOneParmEvent</A>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+Parm</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Server name.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+Thread</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Client generating the event.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+OnCommandUsers is a <A HREF="007461.html" CLASS="Element59">TIdIrcOneParmEvent</A> event handler that allows the server to respond to the IRC USERS command. USERS is used to return a list of users logged into the server in a similar format to who(1), rusers(1) and finger(1). Some people may disable this command on their server for security related reasons. If disabled, the correct numeric response must be returned to indicate this condition.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0025">TIdIRCServer.OnCommandVersion</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007493.html" CLASS="Element59">TIdIRCServer</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Event handler for the IRC VERSION command.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> OnCommandVersion: <A HREF="007461.html" CLASS="Element59">TIdIrcOneParmEvent</A>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+Parm</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Server name.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+Thread</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Client generating the event.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+OnCommandVersion is a <A HREF="007461.html" CLASS="Element59">TIdIrcOneParmEvent</A> event handler that allows the server to respond to the IRC VERSION command. VERSION is used to query the version of the server program. The optional parameter Parm is used to query the version of the server program which a client is not directly connected to.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0026">TIdIRCServer.OnCommandWallops</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007493.html" CLASS="Element59">TIdIRCServer</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Event handler for the IRC WALLOPS command.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> OnCommandWallops: <A HREF="007461.html" CLASS="Element59">TIdIrcOneParmEvent</A>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+Parm</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Text to <A HREF="006944.html" CLASS="Element59">send</A> to all operators.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+Thread</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Client generating the event.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+OnCommandWallops is a <A HREF="007461.html" CLASS="Element59">TIdIrcOneParmEvent</A> event handler that allows the server to respond to the IRC WALLOPS command. WALLOPS is used to <A HREF="006944.html" CLASS="Element59">send</A> a message to all operators currently online. After implementing WALLOPS as a user command it was found that it was often and commonly abused as a means of sending a message to a lot of people (much similar to WALL). Due to this it is recommended that the current implementation of WALLOPS be used as an example by allowing and recognizing only servers as the senders of WALLOPS.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0027">TIdIRCServer.OnCommandWho</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007493.html" CLASS="Element59">TIdIRCServer</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Event handler for the IRC WHO command.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> OnCommandWho: <A HREF="007499.html" CLASS="Element59">TIdIrcTwoParmEvent</A>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+Parm1</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+User name, or an empty string.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+Parm2</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Constant value for operators.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+Thread</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Client generating the event.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+OnCommandWho is a <A HREF="007499.html" CLASS="Element59">TIdIrcTwoParmEvent</A> event handler that allows the server to respond to the IRC WHO command. WHO is used to return a list of information which 'matches' the Parm1 parameter.<P CLASS="Element10">
+In the absence of the Parm1 parameter, all visible (users who aren't invisible (user mode +i) and who don't have a common channel with the requesting client) are listed. The same result can be achieved by using a Parm1 of &quot;0&quot; or any wildcard which will end up matching every entry possible.<P CLASS="Element10">
+The Parm1 passed to WHO is matched against users' host, server, real name and nickname if the channel Parm1 cannot be found.<P CLASS="Element10">
+If the &quot;o&quot; parameter is passed only operators are returned according to the name mask supplied.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0028">TIdIRCServer.OnCommandWhoIs</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007493.html" CLASS="Element59">TIdIRCServer</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Event handler for the IRC WHOIS command.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> OnCommandWhoIs: <A HREF="007499.html" CLASS="Element59">TIdIrcTwoParmEvent</A>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+Parm1</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Server name.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+Parm2</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Nickname mask list.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+Thread</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Client generating the event.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+OnCommandWhoIs is a <A HREF="007499.html" CLASS="Element59">TIdIrcTwoParmEvent</A> event handler that allows the server to respond to the IRC WHOIS command. WHOIS is used to query information about users. The server will answer this message with several numeric messages indicating different statuses of each user which matches the nickmask (if you are entitled to see them). If no wildcard is present in the Parm2 any information about that nick which you are allowed to see is presented. A comma (',') separated list of nicknames may be given.<P CLASS="Element10">
+The latter version sends the query to a specific server. It is useful if you want to know how long the user in question has been idle as only local server (ie. the server the user is directly connected to) knows that information, while everything else is globally known.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0029">TIdIRCServer.OnCommandWhoWas</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007493.html" CLASS="Element59">TIdIRCServer</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Event handler for the IRC WHOWAS command.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> OnCommandWhoWas: <A HREF="007498.html" CLASS="Element59">TIdIrcThreeParmEvent</A>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+Parm1</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Previous Nickname.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+Parm2</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Maximum number of replies from the server.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+Parm3</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Server to search for the Nickname history.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+Thread</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Client generating the event.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+OnCommandWhoWas is a <A HREF="007498.html" CLASS="Element59">TIdIrcThreeParmEvent</A> event handler that allows the server to respond to the IRC WHOWAS command. WHOWAS is used to retrieve information about a nickname which no longer exists. This may either be due to a nickname change or the user leaving IRC.<P CLASS="Element10">
+In response to this query, the server searches through its nickname history, looking for any nicks which are lexically the same (no wild card matching here). The history is searched backward, returning the most recent entry first. If there are multiple entries, up to Parm2 replies will be returned (or all of them if no Parm2 parameter is given). If a non-positive number is passed as being Parm2, then a full search is done.</DIV>
+</DIV>
+<DIV CLASS="Element62">
+<HR>Created with Doc-O-Matic 2 donated to <STRONG><A HREF="http://www.delphi-jedi.org">Project JEDI</A></STRONG>. Commercial license available from the <STRONG><A HREF="http://www.doc-o-matic.com">Doc-O-Matic site</A></STRONG>.</DIV>
+</DIV></BODY></HTML>

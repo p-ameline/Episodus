@@ -1,0 +1,57 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+<TITLE>TARecord</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <META name="GENERATOR" content="Doc-O-Matic">
+    <LINK rel="STYLESHEET" href="default.css" type="text/css">
+
+<SCRIPT LANGUAGE="JavaScript1.2" SRC="scripts.js"></SCRIPT>
+</HEAD>
+<BODY CLASS="Element57">
+<TABLE BORDER="0" BGCOLOR="#AACCFF" WIDTH="100%" CELLSPACING="0" CELLPADDING="0">
+<TR><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element1">
+Indy 9</DIV>
+</TD><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element2">
+<A HREF="content.html" CLASS="Element59">Content</A> | <A HREF="idx.html" CLASS="Element59">Index</A> | <A HREF="symref.html" CLASS="Element59">Reference</A></DIV>
+</TD></TR></TABLE><DIV CLASS="Element58">
+<DIV CLASS="Element5">
+TARecord</DIV>
+<DIV CLASS="Element7">
+<A HREF="009817.html" CLASS="Element59">Hierarchy</A>, <A HREF="009818.html" CLASS="Element59">Properties</A>, <A HREF="009819.html" CLASS="Element59">Methods</A>, <A HREF="009820.html" CLASS="Element59">See Also</A>, <A HREF="002173.html" CLASS="Element59">Unit: IdDNSResolver</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Represents a resource record returned from a DNS query that includes Host Address record types.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12">TARecord = <STRONG>class</STRONG>(<A HREF="008053.html" CLASS="Element59">TRDATARecord</A>)</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Unit</DIV>
+<DIV CLASS="Element69">
+<A HREF="002173.html" CLASS="Element59">IdDNSResolver</A></DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+TARecord is a <A HREF="008053.html" CLASS="Element59">TRDATARecord</A> descendant that represents a resource record returned in the results for a DNS query. TARecord is the collection item created to represent a resource resource returned when TIDNSResolver.QueryRecords includes the value qtA for Address resource records.<P CLASS="Element10">
+An Address resource record is used to provide the Internet address of a host server in dotted-decimal form. For example: &quot;10.2.0.52&quot; or &quot;192.0.5.6&quot;.<P CLASS="Element10">
+An Address resource record uses the same DNS packet layout as other <A HREF="008059.html" CLASS="Element59">TResultRecord</A>-based responses, but extends the use of RData to include the following definition and format:<P CLASS="Element10">
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12">  +--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+
+  |                    ADDRESS                    |
+  +--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+</PRE></DIV>
+</DIV>
+<P CLASS="Element10">
+<UL>
+<LI>ADDRESS - 32-bit Internet address.</UL>
+<P CLASS="Element10">
+Hosts that have multiple Internet addresses will have multiple Address resource records.</DIV>
+</DIV>
+<DIV CLASS="Element62">
+<HR>Created with Doc-O-Matic 2 donated to <STRONG><A HREF="http://www.delphi-jedi.org">Project JEDI</A></STRONG>. Commercial license available from the <STRONG><A HREF="http://www.doc-o-matic.com">Doc-O-Matic site</A></STRONG>.</DIV>
+</DIV></BODY></HTML>

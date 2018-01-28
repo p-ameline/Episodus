@@ -1,0 +1,384 @@
+#define IDM_CORRIGELES  	   99
+#define IDM_MDICMNDS   		  100#define IDA_MDICMNDS        100#define IDM_MDICMND_MODULE  101#define IDM_MDICMNDS_MUE	  102#define IDM_ADMIN_MUE	      103#define IDM_HISTO_MUE	      104#define IDM_VISUALVIEW_MUE	105#define IDM_APPMENU_MUE	   4097 // cf richedap.h pour IDM_APPMENU
+#define IDM_TODO		  	    151
+#define IDM_BBKTODO         152
+#define IDM_BBK_EVENT      2000
+#define IDM_BBK_UPDATE     2001
+
+#define IDM_ADMIN		  	    170
+#define IDA_ADMIN           170
+#define IDM_ADMIN_MODULE	  171
+#define IDM_HISTO		  	    172
+#define IDM_HISTO_MODULE	  173
+#define IDM_CONSULT	  		  174
+#define IDM_CONSULT_MODULE	175
+#define IDM_VISUALVIEW	    176
+#define IDM_VISUALVIEW_MODU	177
+#define IDM_CRVIEW	  		  178
+#define IDM_CRVIEW_MODULE	  179
+#define IDM_MGVIEW	  		  180
+#define IDM_MGVIEW_MODULE	  181
+#define IDM_CQVIEW	  		  182
+#define IDM_CQVIEW_MODULE	  183
+#define IDM_LDV_VIEW        184
+#define IDM_DRUG_VIEW       186
+#define IDM_PROCESS_VIEW    188
+#define IDM_GOAL_VIEW       190
+
+#define EPI_ICON1      	  	200
+#define ICON_1      	  	  201
+#define TTX_ICON	  	  	  202
+#define TTX_ICON_CS 	  	  203
+
+#define CM_NOEDIT      	    204#define CM_CHEMISE	  	    205
+#define CM_ABOUT       	    206
+#define CM_HELP        	    207
+
+#define CR_ICON	  	  	    221#define CR_ICON_CS 	  	    222
+#define CS_ICON	  	  	    223
+#define CS_ICON_CS 	  	    224
+#define IMG_ICON	  	  	  225
+#define IMG_ICON_CS 	  	  226
+#define HTM_ICON	  	  	  229
+#define HTM_ICON_CS 	  	  230
+#define HIST_ICON	  	  	  231
+#define HIST_ICON_CS   	    232
+#define ADM_ICON	  	  	  233
+#define ADM_ICON_CS 	  	  234
+#define TAB_ICON	  	  	  235
+#define TAB_ICON_CS 	  	  236
+#define WRD_ICON_CS	        237
+#define CQ_ICON_CS	        238
+
+#define CM_QUICKSAVE	  	  301
+#define CM_NEWMAGIC	  	    302
+#define CM_CAPTUREIMG       303
+#define CM_CAPTURETWAIN     304
+#define CM_NEWTMPL	        305#define CM_PENSIZE     	    306
+#define CM_PENCOLOR    	    307
+#define CM_BUREAU	          308
+#define CM_CREATDOC    	    309
+#define CM_MODIFDOC	  	    310
+#define CM_NEWDOC		        311
+#define CM_NEWPAT		        312
+#define CM_NEWTTXT     	    313
+#define CM_NEWTTABL    	    314
+#define CM_NEWCR		        315
+#define CM_NEWCS	  	      316
+#define CM_NEWCONSULT  	    317
+#define CM_IMPORTE	  	    318
+#define CM_COMPOSE	  	    319
+#define CM_IMPRIME     	    320
+#define CM_ENREGISTRE  	    321
+#define CM_CORRIGE	  	    322
+#define CM_CORRSUPR    	    323
+#define CM_CONSULTATION	    324
+#define CM_VISUAL		        325
+
+#define CM_PRECEDENT   	    326#define CM_SUIVANT	  	    327
+#define CM_MAILBOX          328
+#define CM_OUTILS           329
+#define CM_MAILBOX2         330
+#define CM_OUTILS2          331
+#define CM_FORMULE          332
+#define CM_LETTRETYPE       333
+#define CM_MATERIELS        334
+#define CM_CREATCOR         335
+#define CM_MODIFCOR         336
+#define CM_EDITCOR          337
+
+#define CM_IMPORT_HTML      338
+#define CM_IMPORT_PATIENT   339
+#define CM_IMPORT_CORRESP   340
+#define CM_IMPORT_USER      341
+#define CM_RECONVOC         342
+#define CM_IMPORTIMG        343
+#define CM_PANNEL           344
+#define CM_EDITER           345
+#define CM_OPENTTXT         346
+#define CM_OPENTMPL         347
+#define CM_ENREG_WIN        348
+#define CM_IMPORT_PDF       349
+
+#define CM_0P   		        350
+#define CM_1P   		        351
+#define CM_2P   		        352
+#define CM_3P   		        353
+#define CM_4P   		        354
+
+#define IDC_COMPTA_CR		    355
+#define IDC_CONCLUSION_CR 	356
+#define IDC_SELECTALL_CR    357
+#define IDC_COPYTEXT_CR     358
+#define IDC_CODAGE_CR       359
+#define IDC_TXT_MODEL       360
+#define IDC_RAFRAICHIR_HTM	361
+#define IDC_EDITION_HTM	    362
+#define IDC_COOP_CHARTS	    363
+
+#define CM_HEALTHTEAM       364
+#define CM_HEALTHTEAM_ROSE  365
+#define CM_HEALTHTEAM_LIST  366
+
+#define CM_VENUE_LIST       367
+
+#define CM_SET_RECONVOC     368
+
+#define IDM_EPISOD          370
+
+#define IDC_EPISOD_CLASSIF 	371
+#define IDC_EPISOD_CONTEXT 	372
+#define IDC_EPISOD_FORMAT 	373
+#define IDC_EPISOD_UNIT 	  374
+#define IDC_EPISOD_ANALYSE 	375
+#define IDC_EPISOD_AN_P 	  376
+#define IDC_EPISOD_AN_O 	  377
+#define IDC_EPISOD_AN_PO 	  378
+#define IDC_EPISOD_AN_N 	  379
+#define IDC_EPISOD_AN_L 	  380
+#define IDC_EPISOD_AN_RP 	  381
+#define IDC_EPISOD_AN_RO 	  382
+#define IDC_EPISOD_SUB 	    383
+
+#define CM_BBK               384
+
+#define CM_LDV               385
+#define CM_LDV_DRUGS         386
+#define CM_LDV_GOALS         387
+#define CM_PROCESS           388
+#define CM_ADMIN	           389
+#define CM_HISTO	           390
+#define CM_FOLLOW_UP	       391
+
+#define IDC_EPISOD_PHARE_OFF 392
+#define IDC_EPISOD_PHARE_ON  393
+#define CM_PROMET_MESSAGE    396
+#define CM_PROMET_SEND       397
+#define CM_PROMET_SURF       398
+#define CM_PROMET_SURF_PERS  399
+
+#define CM_ADMIN_MODIF 		400
+#define CM_ADMIN_MODIFDC	401
+#define CM_CVITALE	  		402
+#define CM_CREATCOMPTA		403
+#define CM_MODIFCOMPTA    404
+#define CM_AGA				    405
+#define CM_IMPAYES			  406
+#define CM_LISTACTES		  407
+#define CM_SOMACTES			  408
+#define CM_SOMENCAISS		  409
+#define CM_SAISIETP			  410
+#define CM_FEUILLESOINS   411
+#define CM_IMPORTNOEMIE   412
+#define CM_RECETTE        413
+#define CM_DEPENSE        414
+#define CM_LISTRECETTES   415
+#define CM_LISTDEPENSES   416
+#define CM_2035           417
+#define CM_DISPOSABLES    418
+#define CM_LOCAL_ACTS     419
+#define CM_NGAP           420
+
+#define IDC_CLASSIF       421
+#define IDC_ENCYCLOP      422
+#define IDC_CERTIF        423
+
+#define CM_NEW_ENTETE     430
+#define CM_MOD_ENTETE     431
+
+#define CM_GROUPGD          450
+#define CM_REQUETE          451
+#define CM_RESULT           452
+#define CM_REFEDIT          453
+#define CM_ARCHEDIT         454
+#define CM_REFARCH          455
+#define CM_SAUVEGARDE       456
+#define CM_TPLEDIT          457
+
+#define CM_USER_1           460
+#define CM_USER_2           461
+#define CM_USER_3           462
+#define CM_USER_4           463
+#define CM_USER_5           464
+#define CM_USER_6           465
+#define CM_USER_7           466
+#define CM_USER_8           467
+#define CM_USER_9           468
+
+#define CM_PREDI            480
+#define CM_PROJET           481
+#define CM_QUESTIONNAIRE    482
+#define CM_DIOGENE          483
+#define CM_APPOINTMENT      484
+
+#define CM_INTERFACE        485
+
+#define CM_REFERENTIAL      486
+
+#define CM_DRUG_FROM_REF    488
+#define CM_DRUG_NEW         489
+#define CM_DRUG_STOP        490
+#define CM_DRUG_CHANGE      491
+#define CM_DRUG_MODIF_POSO  492
+#define CM_DRUG_RENEW       493
+#define CM_DRUG_DELETE      494
+
+#define CM_EPISO_START      500
+#define CM_EPISO_STOP       501
+#define CM_EPISO_LEARN      502
+#define CM_EPISO_FLOCULE    503
+#define CM_EPISO_TRANSMIT   504
+
+#define CM_PROCESS_NEW          505
+#define CM_PROCESS_STOP         506
+#define CM_PROCESS_CHANGE       507
+#define CM_PROCESS_STEP         508
+
+#define IDB_SOAP_M0             510
+#define IDB_SOAP_S0             511
+#define IDB_SOAP_O0             512
+#define IDB_SOAP_PA0            513
+#define IDB_SOAP_A0             514
+#define IDB_SOAP_P0             515
+#define IDB_SOAP_PR0            516
+#define IDB_SOAP_PP0            517
+
+#define IDB_SOAP_M1             520
+#define IDB_SOAP_S1             521
+#define IDB_SOAP_O1             522
+#define IDB_SOAP_PA1            523
+#define IDB_SOAP_A1             524
+#define IDB_SOAP_P1             525
+#define IDB_SOAP_PR1            526
+#define IDB_SOAP_PP1            527
+
+#define IDB_SOAP_M2             530
+#define IDB_SOAP_S2             531
+#define IDB_SOAP_O2             532
+#define IDB_SOAP_PA2            533
+#define IDB_SOAP_A2             534
+#define IDB_SOAP_P2             535
+#define IDB_SOAP_PR2            536
+#define IDB_SOAP_PP2            537
+
+#define	CM_SHOW_CURVES	        540
+
+#define	CM_LDV_ZOOMIN	          541
+#define	CM_LDV_ZOOMOUT	        542
+
+#define CM_EPISO_MODELS         550
+#define CM_PERSO_PRINCIPES      551
+#define CM_PERSO_WINPOS  	      552
+
+#define	DRUGS_ACCEL		          560
+#define	LDV_ACCEL		            561
+#define	GOALS_ACCEL		          562
+#define	REPORT_ACCEL		        563
+#define	MAILBOX_ACCEL		        564
+#define	REFVIEW_ACCEL		        565
+#define	IDA_RICHEDIT		        566
+
+#define CM_PARAM_PRINT          570
+#define CM_PARAM_SUPPORTS       571
+#define CM_PARAM_CHEMINS        572
+#define CM_PARAM_PILOT        	573
+#define CM_PARAM_COMPTA    	    574
+#define CM_PARAM_CAPTFRMT       575
+#define CM_PARAM_CAPTPATH       576
+#define CM_PARAM_OCRLEARN  	    577
+#define CM_PARAM_OCRSWAP  	    578
+#define CM_PARAM_ICONS  	      579
+#define CM_PARAM_LETTRES  	    580
+#define CM_PARAM_WYSIWYG  	    581
+#define CM_PARAM_UPDATE   	    582
+#define CM_PARAM_BACKUP   	    583
+#define CM_PARAM_KS       	    584
+#define CM_PARAM_MODULES       	585
+#define CM_PARAM_PREDI        	586
+#define CM_PARAM_INIT           587
+
+#define IDM_RCEPISOD_VIEW       600
+#define CM_EPISO_NEW            601
+#define CM_EPISO_CLOSE          602
+#define CM_EPISO_EVOLUER        603
+#define CM_EPISO_VU             604
+#define CM_EPISO_CORRIGER       605
+
+#define CM_GENERAL_ADD          610
+#define CM_GENERAL_CLOSE        611
+#define CM_GENERAL_MODIFY       612
+#define CM_GENERAL_REMOVE       613
+#define CM_GENERAL_CONTINUE     614
+#define CM_GENERAL_FCT1         620
+#define CM_GENERAL_FCT2         621
+#define CM_GENERAL_FCT3         622
+#define CM_GENERAL_FCT4         623
+#define CM_GENERAL_FCT5         624
+#define CM_GENERAL_FCT6         625
+#define CM_GENERAL_FCT7         626
+#define CM_GENERAL_FCT8         627
+#define CM_GENERAL_FCT9         628
+
+#define CM_IDENTIFIER           650
+#define CM_WEB_EXPORT           651
+
+#define CM_GOAL_NEW       	    670
+#define CM_GOAL_STOP            671
+#define CM_GOAL_CHANGE          672
+#define CM_GOAL_TRAIT           673
+#define CM_GOAL_FROM_REF        674
+#define CM_GOAL_VALIDATE        675
+#define CM_GOAL_INVALIDATE      676
+
+#define ID_HELP                 703
+#define ID_OK                   704
+#define ID_CANCEL               705
+
+
+#define IDB_SOAP_0                0
+#define IDB_SOAP_1               10
+#define IDB_SOAP_2               20
+
+//Fonctions
+#define CM_OPENFUNCTION         749
+#define CM_FUNCTION             750
+#define IDD_INTROFUNCT          751
+#define LIST_FUNCT              752
+#define IDC_NEWCOMB             753
+#define IDC_MODCOMB             754
+#define IDC_DELCOMB             755
+#define IDC_FCTPARAMS           756
+
+#define IDD_NEWFUNCT	          760
+#define LIST_NEWFUNCT	          761
+#define IDC_EDITFCT             762
+#define IDC_NEWWIND             763
+#define IDC_MODWIND             764
+#define IDC_DELWIND             765
+
+//saisir les properties de fenetres
+#define IDD_INTROPROP	          770
+#define IDC_MOTHER	            771
+#define IDC_CHILD	              772
+#define IDC_HORIZONTAL	        773
+#define IDC_VERTICAL	          774
+#define IDC_PERCENT	            775
+
+//les buttons de paneSplitter
+#define IDC_OK_PANESPLIT        800
+#define IDC_CANCEL_PANESPLIT    801
+#define IDC_HELP_PANESPLIT      802
+#define IDC_PREVIOUS_PANESPLIT  803
+
+//les buttons de synchro
+#define CM_SYNCHRO_IMP_THIS_PAT 850
+#define CM_SYNCHRO_EXP_THIS_PAT 851
+#define CM_SYNCHRO_ALL_PATS     852
+#define CM_SYNCHRO_SYSTEM       853
+#define CM_SYNCHRO_ALL          854
+
+// Pilot
+#define CM_PILOT_AGENTS         900
+
+// fin de nautilus.rh
+

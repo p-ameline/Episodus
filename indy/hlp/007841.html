@@ -1,0 +1,111 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+<TITLE>TIdTelnetReadThread</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <META name="GENERATOR" content="Doc-O-Matic">
+    <LINK rel="STYLESHEET" href="default.css" type="text/css">
+
+<SCRIPT LANGUAGE="JavaScript1.2" SRC="scripts.js"></SCRIPT>
+</HEAD>
+<BODY CLASS="Element57">
+<TABLE BORDER="0" BGCOLOR="#AACCFF" WIDTH="100%" CELLSPACING="0" CELLPADDING="0">
+<TR><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element1">
+Indy 9</DIV>
+</TD><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element2">
+<A HREF="content.html" CLASS="Element59">Content</A> | <A HREF="idx.html" CLASS="Element59">Index</A> | <A HREF="symref.html" CLASS="Element59">Reference</A></DIV>
+</TD></TR></TABLE><DIV CLASS="Element58">
+<DIV CLASS="Element5">
+TIdTelnetReadThread</DIV>
+<DIV CLASS="Element7">
+<A HREF="014268.html" CLASS="Element59">Hierarchy</A>, <A HREF="014269.html" CLASS="Element59">Properties</A>, <A HREF="014270.html" CLASS="Element59">Methods</A>, <A HREF="014271.html" CLASS="Element59">Events</A>, <A HREF="014272.html" CLASS="Element59">See Also</A>, <A HREF="002921.html" CLASS="Element59">Unit: IdTelnet</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+TELNET client thread that listens for responses to key input and protocol negotiations.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12">TIdTelnetReadThread = <STRONG>class</STRONG>(<A HREF="007846.html" CLASS="Element59">TIdThread</A>)</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Unit</DIV>
+<DIV CLASS="Element69">
+<A HREF="002921.html" CLASS="Element59">IdTelnet</A></DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+TIdTelnetReadThread is a <A HREF="007846.html" CLASS="Element59">TIdThread</A> descendant that represents the thread of execution in the <A HREF="007834.html" CLASS="Element59">TIdTelnet</A> client that listens for responses to key input and protocol option negotiations.<P CLASS="Element10">
+TIdTelnetReadThread implements the thread handling framework inherited from <A HREF="007846.html" CLASS="Element59">TIdThread</A> to control execution of the thread.<P CLASS="Element10">
+TIdTelnetReadThread is used by the OnDataAvailable event handler in <A HREF="007834.html" CLASS="Element59">TIdTelnet</A> to perform read operations for the TELNET client.<P CLASS="Element10">
+Do not create instances of TIdTelnetReadThread. <A HREF="007834.html" CLASS="Element59">TIdTelnet</A> creates an instance of TIdTelnetReadThread when the client is connected to the host.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0000">TIdTelnetReadThread.Client</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007841.html" CLASS="Element59">TIdTelnetReadThread</A>, <A HREF="014273.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Represents the TELNET client for the read thread.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> Client: <A HREF="007834.html" CLASS="Element59">TIdTelnet</A>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Client is a read-only <A HREF="007834.html" CLASS="Element59">TIdTelnet</A> property that represents the TELNET client that is the owner of the thread. Client is assigned in the <A HREF="007841.html#0001" CLASS="Element59">Create</A> consteructor for the read thread, and allows the thread to access properties and methods of the TELNET client during execution. This includes filtering incoming data by triggering the <A HREF="007834.html#0004" CLASS="Element59">TIdTelnet.OnDataAvailable</A> event handler for textual data, and checking for disconnects for the client <A HREF="007071.html" CLASS="Element59">socket</A> connection.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0002">TIdTelnetReadThread.RecvData</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007841.html" CLASS="Element59">TIdTelnetReadThread</A>, <A HREF="014274.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Contains data read bny the read thread for the TELNET client.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> RecvData: <STRONG>String</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+RecvData is a String property that represents the data read by the thread for the TELNET client. RecvData is updated during execution of the read thread, and contains the value returned after filtering the receive buffer for the <A HREF="007834.html" CLASS="Element59">TIdTelnet</A> client. RecvData is provided as a parameter when the <A HREF="007834.html#0004" CLASS="Element59">TIdTelnet.OnDataAvailable</A> event handler is triggered during execution of the client read thread.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0001">TIdTelnetReadThread.Create</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007841.html" CLASS="Element59">TIdTelnetReadThread</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Creates a new <A HREF="007841.html" CLASS="Element59">TIdTelnetReadThread</A> instance.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>constructor</STRONG> Create(AClient: <A HREF="007834.html" CLASS="Element59">TIdTelnet</A>); <STRONG>reintroduce</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+AClient: TIdTelnet</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+TELNET client serviced by this thread.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Create is the constructor for the <A HREF="007841.html" CLASS="Element59">TIdTelnetReadThread</A> instance, and relies on the inherited Create constructor to initialize the thread. <A HREF="007841.html" CLASS="Element59">TIdTelnetReadThread</A> stores a reference to the <A HREF="007834.html" CLASS="Element59">TIdTelnet</A> client that is the recipient of data read by the thread.<P CLASS="Element10">
+<A HREF="007841.html" CLASS="Element59">TIdTelnetReadThread</A> sets the FreeOnTerminate property to True, to indicate that the thread should be freed when execution has been completed.<P CLASS="Element10">
+You should not need to create an instance of this object directly. Instances of this object are created when the <A HREF="007834.html" CLASS="Element59">TIdTelnet</A> client connects to the host.</DIV>
+</DIV>
+<DIV CLASS="Element62">
+<HR>Created with Doc-O-Matic 2 donated to <STRONG><A HREF="http://www.delphi-jedi.org">Project JEDI</A></STRONG>. Commercial license available from the <STRONG><A HREF="http://www.doc-o-matic.com">Doc-O-Matic site</A></STRONG>.</DIV>
+</DIV></BODY></HTML>

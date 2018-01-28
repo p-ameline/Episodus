@@ -1,0 +1,100 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+<TITLE>TIdWhoIsServer</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <META name="GENERATOR" content="Doc-O-Matic">
+    <LINK rel="STYLESHEET" href="default.css" type="text/css">
+
+<SCRIPT LANGUAGE="JavaScript1.2" SRC="scripts.js"></SCRIPT>
+</HEAD>
+<BODY CLASS="Element57">
+<TABLE BORDER="0" BGCOLOR="#AACCFF" WIDTH="100%" CELLSPACING="0" CELLPADDING="0">
+<TR><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element1">
+Indy 9</DIV>
+</TD><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element2">
+<A HREF="content.html" CLASS="Element59">Content</A> | <A HREF="idx.html" CLASS="Element59">Index</A> | <A HREF="symref.html" CLASS="Element59">Reference</A></DIV>
+</TD></TR></TABLE><DIV CLASS="Element58">
+<DIV CLASS="Element5">
+TIdWhoIsServer</DIV>
+<DIV CLASS="Element7">
+<A HREF="014924.html" CLASS="Element59">Hierarchy</A>, <A HREF="014925.html" CLASS="Element59">Properties</A>, <A HREF="014926.html" CLASS="Element59">Methods</A>, <A HREF="014927.html" CLASS="Element59">Events</A>, <A HREF="014928.html" CLASS="Element59">See Also</A>, <A HREF="002952.html" CLASS="Element59">Unit: IdWhoIsServer</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Implements a WhoIs or Nickname server.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12">TIdWhoIsServer = <STRONG>class</STRONG>(TIdTCPserver)</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Unit</DIV>
+<DIV CLASS="Element69">
+<A HREF="002952.html" CLASS="Element59">IdWhoIsServer</A></DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+TIdWhoIsServer helps developers write implementations the Nickname or Whois protocol (RFC 954) as a server. Whois is a simple database query system that is commonly used for consulting domain registration records although it can be used for other simple directory services.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0001">TIdWhoIsServer.DefaultPort</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007899.html" CLASS="Element59">TIdWhoIsServer</A>, <A HREF="014929.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Port number used to <A HREF="003177.html" CLASS="Element59">listen</A> for new connections.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> DefaultPort;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+DefaultPort is an Integer property that identifies the port number used for new <A HREF="007071.html" CLASS="Element59">socket</A> bindings created by the server. The value of DefaultPort is read from and written to Bindings.DefaultPort. The default value for DefaultPort is <A HREF="002760.html" CLASS="Element59">IdPORT_WHOIS</A>, as assigned in the <A HREF="007899.html#0000" CLASS="Element59">Create</A> constructor.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0000">TIdWhoIsServer.Create</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007899.html" CLASS="Element59">TIdWhoIsServer</A>, <A HREF="014930.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Constructor for the object instance.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>constructor</STRONG> Create(AOwner: TComponent); <STRONG>override</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Create is the constructor for the <A HREF="007899.html" CLASS="Element59">TIdWhoIsServer</A> object instance. Create calls the inherited Create method, and sets the value of <A HREF="007899.html#0001" CLASS="Element59">DefaultPort</A> to the standard port number used for the WhoIs protocol (<A HREF="002760.html" CLASS="Element59">IdPORT_WHOIS</A>).</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0002">TIdWhoIsServer.OnCommandLookup</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007899.html" CLASS="Element59">TIdWhoIsServer</A>, <A HREF="014931.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Event handler triggered during execution of a WhoIs query.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> OnCommandLookup: <A HREF="007178.html" CLASS="Element59">TGetEvent</A>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+OnCommandLookup is the <A HREF="007178.html" CLASS="Element59">TGetEvent</A> event handler triggered when a client makes a query to the WhoIs server. OnCommandLookup is used during execution of the threaded client connection, and allows the server to implement the specifics operations needed to resolve the WhoIs query. OnCommandLookup is the event handler used to respond to execution of the TIdWHOIS.WhoIs method on the client.<P CLASS="Element10">
+AThread is the thread for the client connection. ALookup is the domain query to be resolved by the WhoIs server.<P CLASS="Element10">
+<STRONG>Note</STRONG>: A server implementation must assign a procedure to the event handler to allow responding to the event notification. The procedure is responsible for all aspects of resolving the WhoIs query in ALookup, and writing appropriate return values or error messages to the client connection in AThread.</DIV>
+</DIV>
+<DIV CLASS="Element62">
+<HR>Created with Doc-O-Matic 2 donated to <STRONG><A HREF="http://www.delphi-jedi.org">Project JEDI</A></STRONG>. Commercial license available from the <STRONG><A HREF="http://www.doc-o-matic.com">Doc-O-Matic site</A></STRONG>.</DIV>
+</DIV></BODY></HTML>

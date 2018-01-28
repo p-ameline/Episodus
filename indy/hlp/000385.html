@@ -1,0 +1,102 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+<TITLE>EIdHTTPProtocolException</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <META name="GENERATOR" content="Doc-O-Matic">
+    <LINK rel="STYLESHEET" href="default.css" type="text/css">
+
+<SCRIPT LANGUAGE="JavaScript1.2" SRC="scripts.js"></SCRIPT>
+</HEAD>
+<BODY CLASS="Element57">
+<TABLE BORDER="0" BGCOLOR="#AACCFF" WIDTH="100%" CELLSPACING="0" CELLPADDING="0">
+<TR><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element1">
+Indy 9</DIV>
+</TD><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element2">
+<A HREF="content.html" CLASS="Element59">Content</A> | <A HREF="idx.html" CLASS="Element59">Index</A> | <A HREF="symref.html" CLASS="Element59">Reference</A></DIV>
+</TD></TR></TABLE><DIV CLASS="Element58">
+<DIV CLASS="Element5">
+EIdHTTPProtocolException</DIV>
+<DIV CLASS="Element7">
+<A HREF="008832.html" CLASS="Element59">Hierarchy</A>, <A HREF="008833.html" CLASS="Element59">Properties</A>, <A HREF="008834.html" CLASS="Element59">Methods</A>, <A HREF="002251.html" CLASS="Element59">Unit: IdHTTP</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Exception raised during processing of a HTTP response.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12">EIdHTTPProtocolException = <STRONG>class</STRONG>(<A HREF="000441.html" CLASS="Element59">EIdProtocolReplyError</A>)</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Unit</DIV>
+<DIV CLASS="Element69">
+<A HREF="002251.html" CLASS="Element59">IdHTTP</A></DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+EIdHTTPProtocolException is a <A HREF="000441.html" CLASS="Element59">EIdProtocolReplyError</A> descendant that represents an exception type raised by the HTTP protocol handler during processing of an HTTP response. EIdHTTPProtocolException is generally raised when an unexpected numeric HTTP response code is received from the HTTP response.<P CLASS="Element10">
+EIdHTTPProtocolException reimplements the alternate constructor <A HREF="000385.html#0000" CLASS="Element59">CreateError</A> to facilitate creating an exception instance with the values specified in the arguments to the constructor.<P CLASS="Element10">
+EIdHTTPProtocolException also implements <A HREF="000385.html#0001" CLASS="Element59">ErrorMessage</A> to describe the text in the protocol error message.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0001">EIdHTTPProtocolException.ErrorMessage</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="000385.html" CLASS="Element59">EIdHTTPProtocolException</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Text for the HTTP protocol error response.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> ErrorMessage: <STRONG>string</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+ErrorMessage is a read-ony String property that represents the text portion of a protocol error received in a HTTP response. ErrorMessage is initalized using an argument in the <A HREF="000385.html#0000" CLASS="Element59">CreateError</A> constructor.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0000">EIdHTTPProtocolException.CreateError</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="000385.html" CLASS="Element59">EIdHTTPProtocolException</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Constructor for the exception instance.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>constructor</STRONG> CreateError(<STRONG>const</STRONG> anErrCode: Integer; <STRONG>const</STRONG> asReplyMessage: <STRONG>string</STRONG>; <STRONG>const</STRONG> asErrorMessage: <STRONG>string</STRONG>); <STRONG>virtual</STRONG>; <STRONG>reintroduce</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+const anErrCode: Integer</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Numeric error code from the HTTP response.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+const asReplyMessage: string</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+General description of the error.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+const asErrorMessage: string</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Context specific text for the error message.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+CreateError is the constructor for the exception. CreateError calls the inherited CreateError method using the anErrCode and asReplyMessage parameters. CreateError also assigns the value in asErrorMessage to the <A HREF="000385.html#0001" CLASS="Element59">ErrorMessage</A> property prior to raising the exception.</DIV>
+</DIV>
+<DIV CLASS="Element62">
+<HR>Created with Doc-O-Matic 2 donated to <STRONG><A HREF="http://www.delphi-jedi.org">Project JEDI</A></STRONG>. Commercial license available from the <STRONG><A HREF="http://www.doc-o-matic.com">Doc-O-Matic site</A></STRONG>.</DIV>
+</DIV></BODY></HTML>

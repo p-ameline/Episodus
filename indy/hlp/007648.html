@@ -1,0 +1,182 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+<TITLE>TIdRemoteCMDClient</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <META name="GENERATOR" content="Doc-O-Matic">
+    <LINK rel="STYLESHEET" href="default.css" type="text/css">
+
+<SCRIPT LANGUAGE="JavaScript1.2" SRC="scripts.js"></SCRIPT>
+</HEAD>
+<BODY CLASS="Element57">
+<TABLE BORDER="0" BGCOLOR="#AACCFF" WIDTH="100%" CELLSPACING="0" CELLPADDING="0">
+<TR><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element1">
+Indy 9</DIV>
+</TD><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element2">
+<A HREF="content.html" CLASS="Element59">Content</A> | <A HREF="idx.html" CLASS="Element59">Index</A> | <A HREF="symref.html" CLASS="Element59">Reference</A></DIV>
+</TD></TR></TABLE><DIV CLASS="Element58">
+<DIV CLASS="Element5">
+TIdRemoteCMDClient</DIV>
+<DIV CLASS="Element7">
+<A HREF="013255.html" CLASS="Element59">Hierarchy</A>, <A HREF="013256.html" CLASS="Element59">Properties</A>, <A HREF="013257.html" CLASS="Element59">Methods</A>, <A HREF="013258.html" CLASS="Element59">Events</A>, <A HREF="013259.html" CLASS="Element59">See Also</A>, <A HREF="002798.html" CLASS="Element59">Unit: IdRemoteCMDClient</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+TIdRemoteCMDClient is an ancestor to <A HREF="007659.html" CLASS="Element59">TIdRexec</A> and <A HREF="007665.html" CLASS="Element59">TIdRSH</A>.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12">TIdRemoteCMDClient = <STRONG>class</STRONG>(<A HREF="007827.html" CLASS="Element59">TIdTCPClient</A>)</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Unit</DIV>
+<DIV CLASS="Element69">
+<A HREF="002798.html" CLASS="Element59">IdRemoteCMDClient</A></DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+TIdRemoteCMDClient is an ancestor to <A HREF="007659.html" CLASS="Element59">TIdRexec</A> and <A HREF="007665.html" CLASS="Element59">TIdRSH</A> to accommodate some common properties and behaviors shared by those components. The behaviors shared include:<P CLASS="Element10">
+<UL>
+<LI>The usage of a StdError port (<A HREF="007648.html#0000" CLASS="Element59">TIdRemoteCMDClient.UseStdError</A>)<P CLASS="Element10">
+<LI>The server error handling is the same (<A HREF="007648.html#0003" CLASS="Element59">TIdRemoteCMDClient.ErrorReply</A>, <A HREF="007648.html#0002" CLASS="Element59">TIdRemoteCMDClient.ErrorMessage</A>)<P CLASS="Element10">
+<LI>Command requests involve the same code except that the two parameters for authentication are different.<P CLASS="Element10">
+<LI>Both protocols are used for executing commands on a remote server.</UL>
+</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0002">TIdRemoteCMDClient.ErrorMessage</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007648.html" CLASS="Element59">TIdRemoteCMDClient</A>, <A HREF="013260.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+This is the error message that was returned from the Rexec or RSH Deamon.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> ErrorMessage: <STRONG>String</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+This is the error message that was returned from the Rexec or RSH Deamon and this property is only if <A HREF="007659.html#0001" CLASS="Element59">TIdRexec.Execute</A> or TIRSH.<A HREF="007648.html#0004" CLASS="Element59">Execute</A> failed and <A HREF="007648.html#0003" CLASS="Element59">TIdRemoteCMDClient.ErrorReply</A> is True.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0003">TIdRemoteCMDClient.ErrorReply</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007648.html" CLASS="Element59">TIdRemoteCMDClient</A>, <A HREF="013261.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+This indicates if the RSH or Rexec Deamons returned an error.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> ErrorReply: Boolean;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+This indicates if the RSH or Rexec Deamons returned an error. The error can be obtained with the <A HREF="007648.html#0002" CLASS="Element59">TIdRemoteCMDClient.ErrorMessage</A>.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0000">TIdRemoteCMDClient.UseStdError</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007648.html" CLASS="Element59">TIdRemoteCMDClient</A>, <A HREF="013262.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+This property indicates if <A HREF="007659.html" CLASS="Element59">TIdRexec</A> or <A HREF="007665.html" CLASS="Element59">TIdRSH</A> should use a StdError port with the server.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> UseStdError: Boolean;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+This property indicates if <A HREF="007659.html" CLASS="Element59">TIdRexec</A> or <A HREF="007665.html" CLASS="Element59">TIdRSH</A> should use a StdError port with the server. If this is set to True, the client listens on a port for a connection from the daemon and the server connects and uses that port to <A HREF="006944.html" CLASS="Element59">send</A> any error messages. If this is false, the server sends error information through the main connection. The reason that StdError ports are used is that Rexec and RSH are primarily Unix-centered and Unix programs often use a StdError pipe and that data had to be treated separately from non-error related output.<P CLASS="Element10">
+The <A HREF="007648.html#0003" CLASS="Element59">TIdRemoteCMDClient.ErrorReply</A> and <A HREF="007648.html#0002" CLASS="Element59">TIdRemoteCMDClient.ErrorMessage</A> properties are not effected by this property at all.<P CLASS="Element10">
+If the user is behind a firewall, the TIdRemoteCMDClient.UseStdError property should be set to false because a connection to a Rexec or RSH daemon may fail if it can not <A HREF="000295.html" CLASS="Element59">connect</A> to a user's StdError port.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0000">TIdRemoteCMDClient.Create</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007648.html" CLASS="Element59">TIdRemoteCMDClient</A>, <A HREF="013263.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Constructor for the object instance.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>constructor</STRONG> Create(AOwner: TComponent); <STRONG>override</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+AOwner: TComponent</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Owner of the object instance.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Create is the constructor for the object instance. Create calls the inherited Create method and uses AOwner as the owner of the component. Create assigns <A HREF="002800.html" CLASS="Element59">IDRemoteFixPort</A> as the default value for the <A HREF="007649.html" CLASS="Element59">UseReservedPorts</A> property. Create also assigns <A HREF="002801.html" CLASS="Element59">IDRemoteUseStdErr</A> as the default value for the <A HREF="007648.html#0000" CLASS="Element59">UseStdError</A> property.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0001">TIdRemoteCMDClient.Destroy</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007648.html" CLASS="Element59">TIdRemoteCMDClient</A>, <A HREF="013264.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Frees the object instance.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>destructor</STRONG> Destroy; <STRONG>override</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Destroy is the destructor for the object instance. Destroy calls the inherited Destroy method prior to exiting.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0004">TIdRemoteCMDClient.Execute</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007648.html" CLASS="Element59">TIdRemoteCMDClient</A>, <A HREF="013265.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+This is an abstract method that is overridden in descendant classes.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>function</STRONG> Execute(ACommand: <STRONG>String</STRONG>): <STRONG>String</STRONG>; <STRONG>virtual</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+ACommand: String</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+The command to execute on the remote system.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Return Value</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+String - Descendant classes return the results from the command that was executed or no value if an error occurred. In TIdRemoteCMDClient.Execute, this simply returns a blank string.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+This is an abstract method that is overridden in descendant classes. <A HREF="007659.html" CLASS="Element59">TIdRexec</A> and <A HREF="007665.html" CLASS="Element59">TIdRSH</A> override this will a function that calls an internal protected method called InternalExec passing the two authentication parameters required by the respective protocols. We do the coding this way because RSH uses the user's local User ID and the user's User ID on the remote host as part of it's authentication while Rexec requires the user's User ID on the remote machine and the password for authentication.</DIV>
+</DIV>
+<DIV CLASS="Element62">
+<HR>Created with Doc-O-Matic 2 donated to <STRONG><A HREF="http://www.delphi-jedi.org">Project JEDI</A></STRONG>. Commercial license available from the <STRONG><A HREF="http://www.doc-o-matic.com">Doc-O-Matic site</A></STRONG>.</DIV>
+</DIV></BODY></HTML>

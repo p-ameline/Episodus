@@ -1,0 +1,14 @@
+
+//agent list
+
+#define AGENT_LIST	210
+#define IDC_ERROR 250
+#define IDC_SATRT 260
+
+//agent status
+
+#define IDC_START	101
+#define IDC_AGENTNAME	102
+#define IDC_AGENTSTATUS	103
+
+

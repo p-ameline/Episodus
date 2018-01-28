@@ -1,0 +1,177 @@
+// -----------------------------------------------------------------------------
+// header des vues nscqvue.h
+// -----------------------------------------------------------------------------
+#if !defined(__NSCQVUE_H)
+# define __NSCQVUE_H
+
+class NSCQWindowsView ;
+class NSCQDocument ;
+class NSSmallBrother ;
+
+# include <owl\docview.h># include <owl\mdichild.h>//#include <owl\panespli.h>#include <owl\splitter.h>#include <owl\controlb.h>// # include "nautilus\nsdocref.h"
+// # include "nautilus\nautilus.rh"
+// # include "nsbb\nstrewi.h"
+// # include "nautilus\nscqdoc.h"
+# include "nsbb\nsMView.h"
+
+// -----------------------------------------------------------------------------/*** Helper class for MDI windows, with splitting capabilities and toolbar* Classe facilitant l'usage de fenêtres MDI, avec cloisonnement*/class NSMDIChildContent : public TWindow, public NSRoot{	public :		NSMDIChildContent(NSContexte* pCtx, TWindow* parent) ;    void setSplitter(NSPaneSplitter* pSplit) { _pSplitter = pSplit ; }    void setToolBar(NSGadgetWindow* pTool)   { _pToolBar = pTool ; }    NSPaneSplitter* getSplitter() { return _pSplitter ; }    NSGadgetWindow* getToolBar()  { return _pToolBar ; }    void           CmChildOK() ;    void           CmChildHelp() ;
+    void           CmChildCancel() ;	protected :		NSPaneSplitter* _pSplitter ;    NSGadgetWindow* _pToolBar ;    void   EvSize(uint sizeType, ClassLib::TSize &size) ;	DECLARE_RESPONSE_TABLE(NSMDIChildContent) ;} ;/*** Helper class for MDI windows, with splitting capabilities* Classe facilitant l'usage de fenêtres MDI, avec cloisonnement*/class NSMDIChild : public TMDIChild, public NSRoot
+{
+	public:
+
+		bool     bShrinkToClient ;
+		TWindow* client ;
+    HWND     hWndToFocus ;
+
+		NSMDIChild( NSContexte* pCtx,
+    						TMDIClient&     parent,
+								const char far  *title = 0,
+								TWindow         *clientWnd = 0,
+								bool            shrinkToClient = true,
+								TModule         *module = 0) ;
+
+		NSMDIChild(NSContexte* pCtx, HWND hWnd, TModule *module = 0) ;
+		virtual ~NSMDIChild() ;
+
+		void        split(TWindow *pMaster ,TWindow *pSlave,
+                                TSplitDirection splitDir, float percent);
+
+		//Chaque MDIChild a un panel qui a ete cree par une fenetre
+		void     setCreateWindow(TWindow* pWind) ;
+    void     resetCreateWindow()  { _pWndCreatePanel = (TWindow*) 0 ; }
+		TWindow* getCreateWindow()    { return _pWndCreatePanel ; }
+
+		void     RecordChildPos() ;
+		int      GetFrameIndex() ;
+		void     PerformCreate(int menuOrId) ;
+
+		void     initClient(NSDialog *pDlg) ;
+    void     initClientArchetype(NSCQWindowsView *pView) ;
+		void     EvDestroy() ;
+		void     EvSetFocus(THandle hWndLostFocus) ;
+    void 	   EvActivate(uint active, bool minimized, HWND hwnd) ;
+    bool     EvNCActivate(bool active) ;
+    void     EvLButtonDown(uint modKeys, NS_CLASSLIB::TPoint& point) ;
+		void     EvParentNotify(uint event, uint childHandleOrX, uint childIDOrY) ;
+
+		bool     SetDocTitle(const char far* docname, int index) ;
+
+    // Override virtual methods defined by TWindow
+    //
+    bool     PreProcessMsg(MSG& msg);
+    bool     ShowWindow(int cmdShow);
+    bool     EnableWindow(bool enable);
+    void     Destroy(int retVal = 0);
+
+    bool     IsDestroyed() const { return _bDestroyed ; }
+
+    NS_CLASSLIB::TRect GetRectInMdiClient() ;
+
+	protected:
+
+		TWindow* _pWndCreatePanel ;
+
+    bool     _bDestroyed ;
+
+    void     closeChildren() ;
+
+	DECLARE_RESPONSE_TABLE(NSMDIChild) ;
+} ;
+
+/**
+* View (doc/view) for Archetypes
+* Vue (document/vue) pour les Archetypes
+*/
+class NSCQWindowsView : public NSBBMUEView
+{
+	public:
+
+		NSSmallBrother*     _pBigBoss ;
+		NSCQDocument*       _pDoc ;			    // Pointeur sur document formulaire
+		NS_CLASSLIB::TRect  _dlgRect ;
+
+		OWL::TControlBar*   _pToolBar ;		    // Barre d'outils		bool			          _bSetupToolBar ;
+
+		NSCQWindowsView(NSCQDocument& doc, TWindow *parent = 0) ;		~NSCQWindowsView() ;
+
+		void                PerformCreate(int menuOrId) ;
+		void                SetupWindow() ;
+    void                Paint(TDC& dc, bool erase, NS_CLASSLIB::TRect& RectangleAPeindre) ;
+		void 			          lanceArchetype() ;    void                EvKeyDown(uint key, uint repeatCount, uint flags) ;    void                EvSysKeyDown(uint key, uint repeatCount, uint flags) ;    void                EvKeyUp(uint key, uint repeatCount, uint flags) ;    bool                PreProcessMsg(MSG &msg) ;		static LPCSTR       StaticName()    { return "NSCQWindowsView" ; }
+		const char*         GetViewName()   { return StaticName() ; }
+		TWindow*            GetWindow() ;
+		void                setViewName() ;
+
+		// Fonction d'initialisation		void 		            SetupToolBar() ;
+		void		            EvSetFocus(THandle hWndLostFocus) ;
+		void 		            EvClose() ;
+		void                EvDestroy() ;
+
+		// Document notifications		bool 		            CanClose() ;		void 		            CmPublier() ;
+		void 		            CmVisualiser() ;
+		void 		            CmEnregistre() ;
+    void                CmQuickSave() ;
+		void                CmFileClose() ;
+    void                CmHelp() ;
+		void                CmOk() ;
+    void                CmOkFinalStep() ;
+    void                CmCancel() ;
+
+    void                Compta() ;
+
+  protected:
+
+    bool                _bCanClose ;
+    bool                _bOkActivated ;
+    bool                _bWantToSaveAsked ;
+
+    bool                askWantToSave() ;
+
+		// bool                PreProcessMsg(MSG& msg) ;
+
+	DECLARE_RESPONSE_TABLE(NSCQWindowsView) ;
+} ;
+
+/**
+* View (doc/view) for Archetypes
+* Vue (document/vue) pour les Archetypes
+*/
+class NSCQVue : public NSMUEView
+{
+	public:
+
+		NSSmallBrother*     pBigBoss ;
+		NSCQDocument*       pDoc ;			    // Pointeur sur document formulaire
+		NSDialog*           clientWin ;          // Pointeur sur la TWindow du dialogue archetype client
+		NS_CLASSLIB::TRect  dlgRect ;
+
+		OWL::TControlBar*   pToolBar ;		    // Barre d'outils		bool			          bSetupToolBar ;
+
+		NSCQVue(NSCQDocument& doc, TWindow *parent = 0) ;		~NSCQVue() ;
+
+		void                PerformCreate(int menuOrId) ;
+		void                SetupWindow() ;
+		void 			          lanceArchetype() ;		static LPCSTR       StaticName()    { return "NSCQVue" ; }
+		const char*         GetViewName()   { return StaticName() ; }
+		TWindow*            GetWindow() ;
+		void                setViewName() ;
+
+		// Fonction d'initialisation		void 		            SetupToolBar() ;
+		void		            EvSetFocus(THandle hWndLostFocus) ;
+		void 		            EvClose() ;
+		void                EvDestroy() ;
+
+		// Document notifications		bool 		            CanClose() ;
+		void 		            CmPublier() ;
+		void 		            CmVisualiser() ;
+		void 		            CmEnregistre() ;
+		void                CmFileClose() ;
+		void                CmOk() ;
+
+		bool                PreProcessMsg(MSG& msg) ;
+
+	DECLARE_RESPONSE_TABLE(NSCQVue) ;
+} ;
+
+#endif // __NSCQVUE_H
+

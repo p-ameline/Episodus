@@ -1,0 +1,49 @@
+//---------------------------------------------------------------------------
+//     NSIMPMEPERSON.H
+//
+//  Contient les définitions des objets PATIENT et UTILISATEUR
+//---------------------------------------------------------------------------
+#ifndef __NSIMPME_PERSON_H
+#define __NSIMPME_PERSON_H
+
+# include <cstring.h>
+# include <owl\window.h>
+
+//---------------------------------------------------------------------------
+//  Classe NSVersionPatient
+//---------------------------------------------------------------------------
+//
+// Objet contenant les données
+//
+class NSRecupPatientData : public NSRoot
+{
+ public:
+	//
+	// Variables de stockage des valeurs
+	//
+	string sID ;
+  string sGender ;
+  string sNom ;
+  string sPrenom ;
+  string sMaidenName ;
+  string sAdresse ;
+  string sZip ;
+  string sCity ;
+  string sPhone ;
+  string sBirthDate ;
+
+	NSRecupPatientData(NSContexte* pCtx) ;
+	NSRecupPatientData(const NSRecupPatientData& rv) ;
+
+	NSRecupPatientData& operator=(const NSRecupPatientData& src) ;
+	int                 operator==(const NSRecupPatientData& o) ;
+
+	void metAZero();
+	bool estMasculin() { return ('1' == sGender[0]) ; }
+	bool estFeminin()  { return ('2' == sGender[0]) ; }
+	void metMasculin() { sGender = string("1") ; }
+	void metFeminin()  { sGender = string("2") ; }
+} ;
+
+//---------------------------------------------------------------------------
+#endif    // __NSIMPME_PERSON_H

@@ -1,0 +1,267 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+<TITLE>TIdIcmpClient</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <META name="GENERATOR" content="Doc-O-Matic">
+    <LINK rel="STYLESHEET" href="default.css" type="text/css">
+
+<SCRIPT LANGUAGE="JavaScript1.2" SRC="scripts.js"></SCRIPT>
+</HEAD>
+<BODY CLASS="Element57">
+<TABLE BORDER="0" BGCOLOR="#AACCFF" WIDTH="100%" CELLSPACING="0" CELLPADDING="0">
+<TR><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element1">
+Indy 9</DIV>
+</TD><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element2">
+<A HREF="content.html" CLASS="Element59">Content</A> | <A HREF="idx.html" CLASS="Element59">Index</A> | <A HREF="symref.html" CLASS="Element59">Reference</A></DIV>
+</TD></TR></TABLE><DIV CLASS="Element58">
+<DIV CLASS="Element5">
+TIdIcmpClient</DIV>
+<DIV CLASS="Element7">
+<A HREF="011613.html" CLASS="Element59">Hierarchy</A>, <A HREF="011614.html" CLASS="Element59">Properties</A>, <A HREF="011615.html" CLASS="Element59">Methods</A>, <A HREF="011616.html" CLASS="Element59">Events</A>, <A HREF="011617.html" CLASS="Element59">See Also</A>, <A HREF="002254.html" CLASS="Element59">Unit: IdIcmpClient</A></DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12">TIdIcmpClient = <STRONG>class</STRONG>(<A HREF="007635.html" CLASS="Element59">TIdRawClient</A>)</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Unit</DIV>
+<DIV CLASS="Element69">
+<A HREF="002254.html" CLASS="Element59">IdIcmpClient</A></DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+TIdIcmpClient is a Internet <A HREF="007395.html#0005" CLASS="Element59">Protocol</A> client implementation based on the Internet standards document, RFC 792 - Internet Control Message <A HREF="007395.html#0005" CLASS="Element59">Protocol</A> (http://www.rfc-editor.org/rfc/rfc792.txt) , .<P CLASS="Element10">
+TIdIcmpClient is used to <A HREF="006944.html" CLASS="Element59">send</A> an Internet Control Message <A HREF="007395.html#0005" CLASS="Element59">Protocol</A> (ICMP) packet to another computer. ICMP packets are used for ping and TraceRoute capability to help diagnose problems with connectivity.<P CLASS="Element10">
+TIdIcmpClient is a descendant of the abstract class <A HREF="007635.html" CLASS="Element59">TIdRawClient</A>, and uses the <A HREF="007395.html#0005" CLASS="Element59">Protocol</A> value <A HREF="001274.html" CLASS="Element59">Id_IPPROTO_ICMP</A> (Decimal <STRONG>1</STRONG>). TIdIcmpClient uses the message formats and algorithms as defined in RFC 792.<P CLASS="Element10">
+Use TIdIcmpClient to diagnose a communications links by using <A HREF="007395.html#0003" CLASS="Element59">Ping</A>. <A HREF="007395.html#0001" CLASS="Element59">Host</A> identifies the IP address or computer name for the echo request. Use <A HREF="007395.html#0009" CLASS="Element59">ReplyStatus</A> and <A HREF="007395.html#0002" CLASS="Element59">OnReply</A> to access information received as a result of the echo request datagram. Set <A HREF="007395.html#0007" CLASS="Element59">ReceiveTimeout</A> to control the time to wait for a response to the echo request datagram.<P CLASS="Element10">
+Use the TTL property to set the packet's Time To Live value: the maximum number of hops the packet will travel before being bounced.<P CLASS="Element10">
+For Traceroute application, <A HREF="006944.html" CLASS="Element59">send</A> ping echo requests with increased TTL values. Each reply will hold the IP address of the hop where the TTL expired, allowing the program to build the packet's route.<P CLASS="Element10">
+<STRONG>Note</STRONG>: For Windows NT, and Windows 2000, administrator privileges are required to allow TIdICMPClient.<A HREF="007395.html#0003" CLASS="Element59">Ping</A> to work properly. The command line PING application does not exhibit this behavior because Microsoft chose to use undocumented calls in ICMP.DLL and its winsock implementation to get around the issue. In short: they cheated. Indy does not use ICMP.DLL to maintain Linux compatibility, and allow use of both Raw sockets and ICMP sockets.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0001">TIdIcmpClient.Host</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007395.html" CLASS="Element59">TIdIcmpClient</A>, <A HREF="011618.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Specifies the address used to <A HREF="000295.html" CLASS="Element59">connect</A> to a computer.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> Host: <STRONG>string</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Host identifies the address used to <A HREF="000295.html" CLASS="Element59">connect</A> to a computer. The address can be a computer name such as &quot;<STRONG>wvnvm.wvnet.edu</STRONG>&quot; or an IP address such as &quot;<STRONG>129.71.2.4</STRONG>&quot;.<P CLASS="Element10">
+To <A HREF="000295.html" CLASS="Element59">connect</A> to a server on your machine, use IP address &quot;<STRONG>127.0.0.1</STRONG>&quot; aka [<STRONG>localhost</STRONG>].<P CLASS="Element10">
+Use <A HREF="007395.html#0004" CLASS="Element59">Port</A> to specify the port number used for the connection.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0004">TIdIcmpClient.Port</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007395.html" CLASS="Element59">TIdIcmpClient</A>, <A HREF="011619.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Specifies the port number used by the local connection.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> Port: Integer;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Port is an <STRONG>Integer</STRONG> property that identifies the port number on the local system where data is sent and received.<P CLASS="Element10">
+<STRONG>Note</STRONG>: Many port numbers are associated, by convention, with a particular service such as ftp or http as described in <A HREF="002775.html" CLASS="Element59">IdPorts</A>. Some protocols use pre-defined port numbers. Port numbers below 1024 are reserved, but using a number above 1024 does not guarantee there will be no conflict.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0005">TIdIcmpClient.Protocol</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007395.html" CLASS="Element59">TIdIcmpClient</A>, <A HREF="011620.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Specifies the ICMP Internet Protocol for the <A HREF="007071.html" CLASS="Element59">socket</A> connection.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> Protocol: Integer;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Protocol identifies the Internet Protocol used by the <A HREF="007071.html" CLASS="Element59">socket</A> connection. <A HREF="007395.html" CLASS="Element59">TIdIcmpClient</A> uses the value <STRONG><A HREF="001274.html" CLASS="Element59">Id_IPPROTO_ICMP</A></STRONG> as defined in IdStackConst.pas. The default value of Protocol is assigned in the <A HREF="007395.html#0000" CLASS="Element59">Create</A> constructor. Do not change the value of Protocol, or the communications link may not function properly.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0007">TIdIcmpClient.ReceiveTimeout</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007395.html" CLASS="Element59">TIdIcmpClient</A>, <A HREF="011621.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Specifies the time limit to wait for echo responses.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> ReceiveTimeout: integer;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+ReceiveTimeout is an <STRONG>Integer</STRONG> property that identifies the maximum time that a <A HREF="007071.html" CLASS="Element59">socket</A> connection should wait for a response to an echo request. ReceiveTimeout is specified in milliseconds.<P CLASS="Element10">
+ReceiveTimeout is used when capturing an echo request in <A HREF="007395.html#0003" CLASS="Element59">Ping</A>.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0008">TIdIcmpClient.ReplyData</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007395.html" CLASS="Element59">TIdIcmpClient</A>, <A HREF="011622.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Represents the raw data in the ICMP Echo reponse.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> ReplyData: <STRONG>string</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+ReplyData is a read-only String property that represents the values received in an ICMP Echo response. ReplyData is updated when the ICMP response packet contains types <A HREF="000886.html" CLASS="Element59">Id_ICMP_ECHOREPLY</A> or <A HREF="000884.html" CLASS="Element59">Id_ICMP_ECHO</A>, and consists of the raw response packet following the IP and ICMP headers. ReplyData does not have any significance when the ICMP reponse type is any value other than <A HREF="000886.html" CLASS="Element59">Id_ICMP_ECHOREPLY</A> or <A HREF="000884.html" CLASS="Element59">Id_ICMP_ECHO</A>.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0009">TIdIcmpClient.ReplyStatus</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007395.html" CLASS="Element59">TIdIcmpClient</A>, <A HREF="011623.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Specifies the structure used to store a response to an echo request.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> ReplyStatus: <A HREF="008056.html" CLASS="Element59">TReplyStatus</A>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+ReplyStatus is a <A HREF="008056.html" CLASS="Element59">TReplyStatus</A> property used to store a response to an echo request.<P CLASS="Element10">
+ReplyStatus is updated when a receiving a response to an echo request in <A HREF="007395.html#0003" CLASS="Element59">Ping</A>. When the response to an echo request contains a non-zero length, ReplyStatus is updated with the contents of the echo response datagram.<P CLASS="Element10">
+When the response to an echo request contains 0 bytes, ReplyStatus is updated with values to indicate the error condition, including:<P CLASS="Element10">
+<UL>
+<LI>BytesReceived - 0<P CLASS="Element10">
+<LI>FromIpAddress - '0.0.0.0'<P CLASS="Element10">
+<LI>MsgType - 0<P CLASS="Element10">
+<LI>SequenceId - Internal sequence number from <A HREF="007395.html" CLASS="Element59">TIdIcmpClient</A><P CLASS="Element10">
+<LI>TimeToLive - 0<P CLASS="Element10">
+<LI>ReplyStatusType - rsTimeOut</UL>
+</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0000">TIdIcmpClient.Create</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007395.html" CLASS="Element59">TIdIcmpClient</A>, <A HREF="011624.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Constructor for the object instance.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>constructor</STRONG> Create(AOwner: TComponent); <STRONG>override</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Create is the constructor for the object instance. Create relies on the inherited Create constructor to initialize the object instance. In the constructor, <A HREF="007395.html#0005" CLASS="Element59">Protocol</A> is set to the value <A HREF="001274.html" CLASS="Element59">Id_IPPROTO_ICMP</A> defined in IdStackConst.pas, and the internal packet sequence number is set to 0.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0003">TIdIcmpClient.Ping</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007395.html" CLASS="Element59">TIdIcmpClient</A>, <A HREF="011625.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Sends an echo request and receives an echo response.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>procedure</STRONG> Ping(ABuffer: <STRONG>String</STRONG> = ''; SequenceID: word = 0);</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Ping is used to prepare and <A HREF="006944.html" CLASS="Element59">send</A> and echo request, and to receive the echo response. Ping sends the echo request to the computer identified in <A HREF="007395.html#0001" CLASS="Element59">Host</A>, and gets the response to the echo request datagram.<P CLASS="Element10">
+Set <A HREF="007395.html#0007" CLASS="Element59">ReceiveTimeout</A> to indicate the time to wait for a response to the echo request datagram.<P CLASS="Element10">
+Use <A HREF="007395.html#0009" CLASS="Element59">ReplyStatus</A> to access the <A HREF="008056.html" CLASS="Element59">TReplyStatus</A> received as a response to the echo request datagram.<P CLASS="Element10">
+Assign an <A HREF="007395.html#0002" CLASS="Element59">OnReply</A> event handler to perform additional processing when a <A HREF="008024.html" CLASS="Element59">TOnReplyEvent</A> is detected.<P CLASS="Element10">
+<A HREF="007395.html" CLASS="Element59">TIdIcmpClient</A> closes the <A HREF="007071.html" CLASS="Element59">socket</A> handle allocated on completion of the Ping method.<P CLASS="Element10">
+<STRONG>Note</STRONG>: For Windows NT, and Windows 2000, administrator privileges are required to allow TIdICMPClient.Ping to work properly. The command line PING application does not exhibit this behavior because Microsoft chose to use undocumented calls in ICMP.DLL and its winsock implementation to get around the issue. In short: they cheated. Indy does not use ICMP.DLL to maintain Linux compatibility, and allow use of both Raw sockets and ICMP sockets.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0006">TIdIcmpClient.Receive</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007395.html" CLASS="Element59">TIdIcmpClient</A>, <A HREF="011626.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Reads data from the protocol stack.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>function</STRONG> Receive(ATimeOut: Integer): <A HREF="008056.html" CLASS="Element59">TReplyStatus</A>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+ATimeOut: Integer</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Timeout value in milliseconds.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Return Value</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+<A HREF="008056.html" CLASS="Element59">TReplyStatus</A> - Response type for the echo request.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Receive is a <A HREF="008056.html" CLASS="Element59">TReplyStatus</A> function that reads data from the receive buffer for the ICMP broadcast. Receive fills the entire receive buffer with the value <A HREF="000285.html" CLASS="Element59">CHAR0</A> and calls ReceiveBuffer to read the required number of bytes into the allocated buffer. Receive calls CheckForSocketError to insure that a <A HREF="007071.html" CLASS="Element59">socket</A> error did not occur during data receipt. Receive calls DecodeResponse to store received data in the <A HREF="008056.html" CLASS="Element59">TReplyStatus</A> returned from the method.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0002">TIdIcmpClient.OnReply</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007395.html" CLASS="Element59">TIdIcmpClient</A>, <A HREF="011627.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Specifies an event handler for <A HREF="008024.html" CLASS="Element59">TOnReplyEvent</A> events.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> OnReply: <A HREF="008024.html" CLASS="Element59">TOnReplyEvent</A>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+ReplyStatus</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+<STRONG><A HREF="008056.html" CLASS="Element59">TReplyStatus</A></STRONG> Reply from the echo request.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+OnReply is a <A HREF="008024.html" CLASS="Element59">TOnReplyEvent</A> handler triggered when a echo response is received. OnReply is generally used to update progress indicators or other GUI components as a result of receiving the echo response found in <A HREF="007395.html#0009" CLASS="Element59">ReplyStatus</A>. Assign an event handler to perform additional processing when the <A HREF="008024.html" CLASS="Element59">TOnReplyEvent</A> is triggered by <A HREF="007395.html#0003" CLASS="Element59">Ping</A>.</DIV>
+</DIV>
+<DIV CLASS="Element62">
+<HR>Created with Doc-O-Matic 2 donated to <STRONG><A HREF="http://www.delphi-jedi.org">Project JEDI</A></STRONG>. Commercial license available from the <STRONG><A HREF="http://www.doc-o-matic.com">Doc-O-Matic site</A></STRONG>.</DIV>
+</DIV></BODY></HTML>

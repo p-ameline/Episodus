@@ -1,0 +1,10 @@
+//Methode fichier ".XLS" select
+
+
+
+// IDD_Fichier_Xls DIALOG
+#define  IDC_FICHIER_XLS       100
+#define IDC_BWCCTEXT1	101
+
+
+

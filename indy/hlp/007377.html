@@ -1,0 +1,302 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+<TITLE>TIdHTTPCustomSessionList</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <META name="GENERATOR" content="Doc-O-Matic">
+    <LINK rel="STYLESHEET" href="default.css" type="text/css">
+
+<SCRIPT LANGUAGE="JavaScript1.2" SRC="scripts.js"></SCRIPT>
+</HEAD>
+<BODY CLASS="Element57">
+<TABLE BORDER="0" BGCOLOR="#AACCFF" WIDTH="100%" CELLSPACING="0" CELLPADDING="0">
+<TR><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element1">
+Indy 9</DIV>
+</TD><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element2">
+<A HREF="content.html" CLASS="Element59">Content</A> | <A HREF="idx.html" CLASS="Element59">Index</A> | <A HREF="symref.html" CLASS="Element59">Reference</A></DIV>
+</TD></TR></TABLE><DIV CLASS="Element58">
+<DIV CLASS="Element5">
+TIdHTTPCustomSessionList</DIV>
+<DIV CLASS="Element7">
+<A HREF="011459.html" CLASS="Element59">Hierarchy</A>, <A HREF="011460.html" CLASS="Element59">Properties</A>, <A HREF="011461.html" CLASS="Element59">Methods</A>, <A HREF="011462.html" CLASS="Element59">Events</A>, <A HREF="002147.html" CLASS="Element59">Unit: IdCustomHTTPServer</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Specifies an abstract container for persistent HTTP sessions.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12">TIdHTTPCustomSessionList = <STRONG>class</STRONG>(TComponent)</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Unit</DIV>
+<DIV CLASS="Element69">
+<A HREF="002147.html" CLASS="Element59">IdCustomHTTPServer</A></DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+TIdHTTPCustomSessionList is a TComponent descendant that specifies a pure virtual class providing the container framework for HTTP sessions in a <A HREF="007392.html" CLASS="Element59">TIdHTTPServer</A> implementation.<P CLASS="Element10">
+TIdHTTPCustomSessionList declares procedures and methods needed to add an create <A HREF="007393.html" CLASS="Element59">TIdHTTPSession</A> persistent session objects, retrieve session objects by an identifier and remote IP address, and clear sessions form the container.<P CLASS="Element10">
+All methods in TIdHTTPCustomSessionList are declared as virtual abstract procedures and functions, and must be overridden in a descendant class to provide the session management capabilities required.<P CLASS="Element10">
+TIdHTTPCustomSessionList is used as the ancestor for Indy classes, like <A HREF="007378.html" CLASS="Element59">TIdHTTPDefaultSessionList</A>, that manage persistent session information using <A HREF="007393.html" CLASS="Element59">TIdHTTPSession</A> object instances.<P CLASS="Element10">
+TIdHTTPCustomSessionList also implements propeties and event handlers needed to specifiy the default itmeout value for sessions in the container, and to respond top events triggered when a persistent session is started or completed.<P CLASS="Element10">
+TIdHTTPCustomSessionList is the type used to represent the TIdHTTPSession.Owner property established in the contructor for the session object.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0008">TIdHTTPCustomSessionList.SessionTimeout</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007377.html" CLASS="Element59">TIdHTTPCustomSessionList</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Specifies the time-to-live for a HTTP session.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> SessionTimeout: Integer;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+SessionTimeout is a Cardinal property that specifies the time-to-live for a persistent HTTP session expressed in milliseconds. SessionTimeout is used to determine when a <A HREF="007393.html" CLASS="Element59">TIdHTTPSession</A> is stale (the LastTimeStamp indicates that the SessionTimeOut has expired).</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0000">TIdHTTPCustomSessionList.Add</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007377.html" CLASS="Element59">TIdHTTPCustomSessionList</A>, <A HREF="011463.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Specifies the mechanism used to add an HTTP session to the session list.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>procedure</STRONG> Add(ASession: <A HREF="007393.html" CLASS="Element59">TIdHTTPSession</A>); <STRONG>virtual</STRONG>; <STRONG>abstract</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+ASession: TIdHTTPSession</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+HTTP session to add to the session list.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Add specifies the method used to add the HTTP session represented in ASession to the session list. <STRONG>Note</STRONG>: All methods in <A HREF="007377.html" CLASS="Element59">TIdHTTPCustomSessionList</A> are declared as virtual abstract procedures and functions, and must be overridden in a descendant class to provide the session management capabilities required.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0001">TIdHTTPCustomSessionList.Clear</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007377.html" CLASS="Element59">TIdHTTPCustomSessionList</A>, <A HREF="011464.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Specifies the mechanism used to free HTTP sessions in the session list.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>procedure</STRONG> Clear; <STRONG>virtual</STRONG>; <STRONG>abstract</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Clear is an abstract virtual procedure that specifies the mechanism used to remove all <A HREF="007393.html" CLASS="Element59">TIdHTTPSession</A> objects in the session list. <STRONG>Note</STRONG>: All methods in <A HREF="007377.html" CLASS="Element59">TIdHTTPCustomSessionList</A> are declared as virtual abstract procedures and functions, and must be overridden in a descendant class to provide the session management capabilities required.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0002">TIdHTTPCustomSessionList.CreateSession</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007377.html" CLASS="Element59">TIdHTTPCustomSessionList</A>, <A HREF="011465.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Specifies the mechanism to create a new HTTP session.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>function</STRONG> CreateSession(<STRONG>const</STRONG> RemoteIP: <STRONG>String</STRONG>; <STRONG>const</STRONG> SessionID: <STRONG>String</STRONG>): <A HREF="007393.html" CLASS="Element59">TIdHTTPSession</A>; <STRONG>virtual</STRONG>; <STRONG>abstract</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+const RemoteIP: String</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+The peer IP address for the session.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+const SessionID: String</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+The identifier for the session.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Return Value</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+<A HREF="007393.html" CLASS="Element59">TIdHTTPSession</A> - The session object reference.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+CreateSession is an abstract virtual <A HREF="007393.html" CLASS="Element59">TIdHTTPSession</A> function that specifies the mechanism used to create a new HTTP session, and add the new session to the session list.<P CLASS="Element10">
+RemoteIP is the IP address of the remote computer system that is the endpoint for the HTTP session.<P CLASS="Element10">
+SessionID is the identifier for the new HTTP session.<P CLASS="Element10">
+<STRONG>Note</STRONG>: All methods in <A HREF="007377.html" CLASS="Element59">TIdHTTPCustomSessionList</A> are declared as virtual abstract procedures and functions, and must be overridden in a descendant class to provide the session management capabilities required.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0003">TIdHTTPCustomSessionList.CreateUniqueSession</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007377.html" CLASS="Element59">TIdHTTPCustomSessionList</A>, <A HREF="011466.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Specifies the mechanism used to create a new HTTP asession with a unique session ID and remote IP address.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>function</STRONG> CreateUniqueSession(<STRONG>const</STRONG> RemoteIP: <STRONG>String</STRONG>): <A HREF="007393.html" CLASS="Element59">TIdHTTPSession</A>; <STRONG>virtual</STRONG>; <STRONG>abstract</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+const RemoteIP: String</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+IP address or host name for the remote connection.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Return Value</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+<A HREF="007393.html" CLASS="Element59">TIdHTTPSession</A> - new HTTP session created for a client connection.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+CreateUniqueSession is an abstract virtual <A HREF="007393.html" CLASS="Element59">TIdHTTPSession</A> function that specifies the mechanism used to insure a new HTTP session is created for a client connection having the remote IP address specified in RemoteIP.<P CLASS="Element10">
+<STRONG>Note</STRONG>: All methods in <A HREF="007377.html" CLASS="Element59">TIdHTTPCustomSessionList</A> are declared as virtual abstract procedures and functions, and must be overridden in a descendant class to provide the session management capabilities required.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0004">TIdHTTPCustomSessionList.GetSession</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007377.html" CLASS="Element59">TIdHTTPCustomSessionList</A>, <A HREF="011467.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Retrieves a HTTP session from the session list.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>function</STRONG> GetSession(<STRONG>const</STRONG> SessionID: <STRONG>string</STRONG>; <STRONG>const</STRONG> RemoteIP: <STRONG>string</STRONG>): <A HREF="007393.html" CLASS="Element59">TIdHTTPSession</A>; <STRONG>virtual</STRONG>; <STRONG>abstract</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+const SessionID: string</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+The identifier for the session.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+const RemoteIP: string</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+The remote IP address for the session.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Return Value</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+<A HREF="007393.html" CLASS="Element59">TIdHTTPSession</A> - The session object reference, or Nil.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+GetSession is an abstract virtual TIdHTTPSessionList function that specifies the mechanism used to retrieve an existing HTTP session from the session list using values specified in SessionID and RemoteIP.<P CLASS="Element10">
+<STRONG>Note</STRONG>: All methods in <A HREF="007377.html" CLASS="Element59">TIdHTTPCustomSessionList</A> are declared as virtual abstract procedures and functions, and must be overridden in a descendant class to provide the session management capabilities required.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0007">TIdHTTPCustomSessionList.PurgeStaleSessions</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007377.html" CLASS="Element59">TIdHTTPCustomSessionList</A>, <A HREF="011468.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Removes expired sessions from the session list.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>procedure</STRONG> PurgeStaleSessions(PurgeAll: Boolean = false); <STRONG>virtual</STRONG>; <STRONG>abstract</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+PurgeAll: Boolean = false</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Indicates all stale sessions are to be removed.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+PurgeStaleSessions is an abstract virtual procedure that specifies the mechanism used to remove HTTP session where the LastTimestamp and <A HREF="007377.html#0008" CLASS="Element59">SessionTimeout</A> properties indicate that the session has expired. <STRONG>Note</STRONG>: All methods in <A HREF="007377.html" CLASS="Element59">TIdHTTPCustomSessionList</A> are declared as virtual abstract procedures and functions, and must be overridden in a descendant class to provide the session management capabilities required.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0005">TIdHTTPCustomSessionList.OnSessionEnd</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007377.html" CLASS="Element59">TIdHTTPCustomSessionList</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Specifies the event handler for a terminating HTTP session.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> OnSessionEnd: <A HREF="008026.html" CLASS="Element59">TOnSessionEndEvent</A>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+Sender</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+HTTP session for the event notification.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+OnSessionEnd is a <A HREF="008026.html" CLASS="Element59">TOnSessionEndEvent</A> property that represents the event handler signalled when an HTTP session will be terminated. Applications must assign a procedure to the event handler to respond to the event notification.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0006">TIdHTTPCustomSessionList.OnSessionStart</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007377.html" CLASS="Element59">TIdHTTPCustomSessionList</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Specifies the event handler for a terminating HTTP session.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> OnSessionStart: <A HREF="008027.html" CLASS="Element59">TOnSessionStartEvent</A>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+Sender</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+HTTP session for the event notification.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+OnSessionStart is a <A HREF="008027.html" CLASS="Element59">TOnSessionStartEvent</A> property that represents the event handler signalled when an HTTP session will be activated. Applications must assign a procedure to the event handler to respond to the event notification.</DIV>
+</DIV>
+<DIV CLASS="Element62">
+<HR>Created with Doc-O-Matic 2 donated to <STRONG><A HREF="http://www.delphi-jedi.org">Project JEDI</A></STRONG>. Commercial license available from the <STRONG><A HREF="http://www.doc-o-matic.com">Doc-O-Matic site</A></STRONG>.</DIV>
+</DIV></BODY></HTML>

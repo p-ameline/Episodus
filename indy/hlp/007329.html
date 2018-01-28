@@ -1,0 +1,39 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+<TITLE>OnFTPStatus</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <META name="GENERATOR" content="Doc-O-Matic">
+    <LINK rel="STYLESHEET" href="default.css" type="text/css">
+
+<SCRIPT LANGUAGE="JavaScript1.2" SRC="scripts.js"></SCRIPT>
+</HEAD>
+<BODY CLASS="Element57">
+<TABLE BORDER="0" BGCOLOR="#AACCFF" WIDTH="100%" CELLSPACING="0" CELLPADDING="0">
+<TR><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element1">
+Indy 9</DIV>
+</TD><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element2">
+<A HREF="content.html" CLASS="Element59">Content</A> | <A HREF="idx.html" CLASS="Element59">Index</A> | <A HREF="symref.html" CLASS="Element59">Reference</A></DIV>
+</TD></TR></TABLE><DIV CLASS="Element58">
+<DIV CLASS="Element5">
+OnFTPStatus</DIV>
+<DIV CLASS="Element7">
+<A HREF="008562.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Event handler used to signal a change in the FTP connection status.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+OnFTPStatus is a <A HREF="007347.html" CLASS="Element59">TIdFTPStatusEvent</A> property that represents the event handler signalled when the state of the FTP client connection is changed.<P CLASS="Element10">
+OnFTPStatus is signalled in Connect, after successfully opening the client connection, to indicate the value ftpReady.<P CLASS="Element10">
+OnFTPStatus is used in the internal implementation of Get and Put to indicate the status of the connection at various times. OnFTPStatus is signalled using the value ftpTransfer prior to data transmission. OnFTPStatus is signalled using the value ftpReady after successful completion of the command. OnFTPStatus can also signal the value ftpAborted when the command has successfully executed the Abort method, or as a result of an FTP protocol error code.<P CLASS="Element10">
+Applications must assign a procedure to the event handler to allow responding to the <A HREF="007347.html" CLASS="Element59">TIdFTPStatusEvent</A> event notification.</DIV>
+</DIV>
+<DIV CLASS="Element62">
+<HR>Created with Doc-O-Matic 2 donated to <STRONG><A HREF="http://www.delphi-jedi.org">Project JEDI</A></STRONG>. Commercial license available from the <STRONG><A HREF="http://www.doc-o-matic.com">Doc-O-Matic site</A></STRONG>.</DIV>
+</DIV></BODY></HTML>

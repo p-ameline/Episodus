@@ -1,0 +1,45 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+<TITLE>KnownCommands</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <META name="GENERATOR" content="Doc-O-Matic">
+    <LINK rel="STYLESHEET" href="default.css" type="text/css">
+
+<SCRIPT LANGUAGE="JavaScript1.2" SRC="scripts.js"></SCRIPT>
+</HEAD>
+<BODY CLASS="Element57">
+<TABLE BORDER="0" BGCOLOR="#AACCFF" WIDTH="100%" CELLSPACING="0" CELLPADDING="0">
+<TR><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element1">
+Indy 9</DIV>
+</TD><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element2">
+<A HREF="content.html" CLASS="Element59">Content</A> | <A HREF="idx.html" CLASS="Element59">Index</A> | <A HREF="symref.html" CLASS="Element59">Reference</A></DIV>
+</TD></TR></TABLE><DIV CLASS="Element58">
+<DIV CLASS="Element5">
+KnownCommands</DIV>
+<DIV CLASS="Element7">
+<A HREF="015616.html" CLASS="Element59">See Also</A>, <A HREF="002170.html" CLASS="Element59">Unit: IdDICTServer</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Represents the commands recognized by the DICT server.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12">KnownCommands: <STRONG>Array</STRONG> [1..40] <STRONG>of</STRONG> <STRONG>string</STRONG> = ( 'ADMIN', 'AWAY', 'CONNECT', 'ERROR', 'INFO', 'INVITE', 'ISON', 'JOIN', 'KICK', 'KILL', 'LINKS', 'LIST', 'MODE', 'NAMES', 'NICK', 'NOTICE', 'OPER', 'PART', 'PASS', 'PING', 'PONG', 'PRIVMSG', 'QUIT', 'REHASH', 'RESTART', 'SERVER', 'SQUIT', 'STATS', 'SUMMON', 'TIME', 'TOPIC', 'TRACE', 'USER', 'USERHOST', 'USERS', 'VERSION', 'WALLOPS', 'WHO', 'WHOIS', 'WHOWAS' );</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Unit</DIV>
+<DIV CLASS="Element69">
+<A HREF="002170.html" CLASS="Element59">IdDICTServer</A></DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+KnownCommands is a constant array that contains Strings representing the commands recognized by a <A HREF="007294.html" CLASS="Element59">TIdDICTServer</A> implementation. KnownCommands is used when the DICT server use the OnExecute event handler to service threaded client connections.<P CLASS="Element10">
+Known commands has significance when the DoExecute method is called using the <A HREF="007613.html" CLASS="Element59">TIdPeerThread</A>. KnownCommands is used to identify a command and optional parameters read from the client connection, and to dispatch to an event handler used to implement the command functionality.</DIV>
+</DIV>
+<DIV CLASS="Element62">
+<HR>Created with Doc-O-Matic 2 donated to <STRONG><A HREF="http://www.delphi-jedi.org">Project JEDI</A></STRONG>. Commercial license available from the <STRONG><A HREF="http://www.doc-o-matic.com">Doc-O-Matic site</A></STRONG>.</DIV>
+</DIV></BODY></HTML>

@@ -1,0 +1,95 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+<TITLE>TIdServerCookies</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <META name="GENERATOR" content="Doc-O-Matic">
+    <LINK rel="STYLESHEET" href="default.css" type="text/css">
+
+<SCRIPT LANGUAGE="JavaScript1.2" SRC="scripts.js"></SCRIPT>
+</HEAD>
+<BODY CLASS="Element57">
+<TABLE BORDER="0" BGCOLOR="#AACCFF" WIDTH="100%" CELLSPACING="0" CELLPADDING="0">
+<TR><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element1">
+Indy 9</DIV>
+</TD><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element2">
+<A HREF="content.html" CLASS="Element59">Content</A> | <A HREF="idx.html" CLASS="Element59">Index</A> | <A HREF="symref.html" CLASS="Element59">Reference</A></DIV>
+</TD></TR></TABLE><DIV CLASS="Element58">
+<DIV CLASS="Element5">
+TIdServerCookies</DIV>
+<DIV CLASS="Element7">
+<A HREF="013455.html" CLASS="Element59">Hierarchy</A>, <A HREF="013456.html" CLASS="Element59">Properties</A>, <A HREF="013457.html" CLASS="Element59">Methods</A>, <A HREF="013458.html" CLASS="Element59">See Also</A>, <A HREF="002145.html" CLASS="Element59">Unit: IdCookie</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Implements a container for <A HREF="007674.html#0001" CLASS="Element59">Cookie</A> class instances.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12">TIdServerCookies = <STRONG>class</STRONG>(<A HREF="007266.html" CLASS="Element59">TIdCookies</A>)</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Unit</DIV>
+<DIV CLASS="Element69">
+<A HREF="002145.html" CLASS="Element59">IdCookie</A></DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+TIdServerCookies is a <A HREF="007266.html" CLASS="Element59">TIdCookies</A> decendant that implements a container for server <A HREF="007674.html#0001" CLASS="Element59">Cookie</A> class instances. TIdServerCookies provides methods that allow creation of both <A HREF="007264.html" CLASS="Element59">TIdCookieRFC2109</A> <A HREF="007674.html#0001" CLASS="Element59">Cookie</A> class instances. TIdServerCookies also provides methods that provide access to <A HREF="007674.html#0001" CLASS="Element59">Cookie</A> class instances using <A HREF="007674.html#0001" CLASS="Element59">Cookie</A> name, and an integer position in the server <A HREF="007674.html#0001" CLASS="Element59">Cookie</A> collection.<P CLASS="Element10">
+TIdServerCookies is the type used by <A HREF="007389.html" CLASS="Element59">TIdHTTPRequestInfo</A> and <A HREF="007391.html" CLASS="Element59">TIdHTTPResponseInfo</A> to represent the <A HREF="007674.html#0001" CLASS="Element59">Cookie</A> collection maintained by a <A HREF="007375.html" CLASS="Element59">TIdHTTP</A> server.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0001">TIdServerCookies.Cookie</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007674.html" CLASS="Element59">TIdServerCookies</A>, <A HREF="013459.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Provides access to server Cookie collection items by name.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> Cookie [<STRONG>const</STRONG> AName: <STRONG>string</STRONG>]: <A HREF="007264.html" CLASS="Element59">TIdCookieRFC2109</A>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Return Value</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+<A HREF="007264.html" CLASS="Element59">TIdCookieRFC2109</A> - Cookie with the specified name, or Nil.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Cookie is a read-only <A HREF="007264.html" CLASS="Element59">TIdCookieRFC2109</A> property that provides access to server Cookies in the collection using the name specified in AName. <A HREF="007674.html" CLASS="Element59">TIdServerCookies</A> calls GetCookieIndex, when using the read access specifier for Cookie, to determine the position of the Cookie having the specified CookieName. Cookie can return Nil when a Cookie cannot be located in the collection having the specified name value.<P CLASS="Element10">
+Use CookieListByDomain to limit access to Cookie collection items having a specified Domain value. Use Items to access Cookie collection items by their integer position in the container.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0000">TIdServerCookies.Add</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007674.html" CLASS="Element59">TIdServerCookies</A>, <A HREF="013460.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Creates a server <A HREF="007674.html#0001" CLASS="Element59">Cookie</A> class instance to be added to the collection.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>function</STRONG> Add: <A HREF="007673.html" CLASS="Element59">TIdServerCookie</A>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Return Value</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+<A HREF="007673.html" CLASS="Element59">TIdServerCookie</A> - Server <A HREF="007674.html#0001" CLASS="Element59">Cookie</A> class instance added to the collection.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Add is a <A HREF="007673.html" CLASS="Element59">TIdServerCookie</A> function that creates a new instance of <A HREF="007673.html" CLASS="Element59">TIdServerCookie</A> to be added to the <A HREF="007674.html#0001" CLASS="Element59">Cookie</A> collection. Add creates the <A HREF="007674.html#0001" CLASS="Element59">Cookie</A> class instance using the <A HREF="007674.html" CLASS="Element59">TIdServerCookies</A> object instance as the owner of the collection item.<P CLASS="Element10">
+Add is called from <A HREF="007392.html" CLASS="Element59">TIdHTTPServer</A> when cookies are created to represent the Session used for an HTTP client connection, or when Cookies are received in the request for an executing peer thread.</DIV>
+</DIV>
+<DIV CLASS="Element62">
+<HR>Created with Doc-O-Matic 2 donated to <STRONG><A HREF="http://www.delphi-jedi.org">Project JEDI</A></STRONG>. Commercial license available from the <STRONG><A HREF="http://www.doc-o-matic.com">Doc-O-Matic site</A></STRONG>.</DIV>
+</DIV></BODY></HTML>

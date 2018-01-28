@@ -1,0 +1,7 @@
+/****************************************************************************
+nspathor.rh
+produced by Borland Resource Workshop
+*****************************************************************************/
+#define IDC_PATHORLISTBOX	101#define GENERAL				102
+#define MEDICAMENT			103
+

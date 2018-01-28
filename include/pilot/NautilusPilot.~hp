@@ -1,0 +1,554 @@
+#ifndef NAUTILUSPILOT_H
+#define NAUTILUSPILOT_H
+
+/*//////////////////////////////////////////////////////*/
+/*														*/
+/*	Created by:	Dominique Sauquet   					*/
+/*  Created on:	May 2003   								*/
+/*														*/
+/*//////////////////////////////////////////////////////*/
+
+#include "pilot/Pilot.hpp"
+#include "nsbb/nsmanager.h"
+#include "nssavoir/nsvarray.h"
+
+#define MAPPING_RETURN    0
+#define DOMELEMENT_RETURN 1
+#define GRAPH_RETURN      2
+#define EMPTY_RETURN      3
+#define WARNING_RETURN    4
+
+#define PERSON_TYPE       0
+//#define USER_TYPE       1
+//#define CORRESP_TYPE    2
+#define OBJECT_TYPE       1
+
+#define LDV_AGENT_TEXT    	".ior"
+#define LOCAL_AGENT					"local"
+#define DIRECT_GROUP_AGENT	"directGroup"
+#define DIRECT_COLLECTIVE		"directCollective"
+
+unsigned char* ASCIItoUNICODE (unsigned char ch) ;
+unsigned int* ConvertString (unsigned char *string) ;
+
+class _CLASSESGBD NSBasicAttribute
+{
+  private:
+
+    static long lObjectCount ;
+
+  public:
+
+    NSBasicAttribute() ;
+    NSBasicAttribute(string sBalise, string sText) ;
+    NSBasicAttribute(const NSBasicAttribute& rv) ;
+    ~NSBasicAttribute() ;
+
+    static long getNbInstance()											{ return lObjectCount ; }
+    static void initNbInstance() 										{ lObjectCount = 0 ; }
+
+    string  getBalise()                             { return _balise ; }
+    void    setBalise(string sBal)                  { _balise = sBal ; }
+
+    string  getText()                               { return _text ; }
+    void    setText(string sText)                   { _text = sText ; }
+
+    NSBasicAttribute& operator=(const NSBasicAttribute& src) ;
+
+  private:
+
+    string _balise ;
+    string _text ;
+} ;
+
+typedef vector<NSBasicAttribute*>								NSBasicAttributeVector ;
+typedef NSBasicAttributeVector::iterator				NSBasicAttributeIter ;
+typedef NSBasicAttributeVector::const_iterator	NSBasicAttributeCIter ;
+
+class _CLASSESGBD NSBasicAttributeArray : public NSBasicAttributeVector
+{
+  private:
+
+    static long lObjectCount ;
+
+ public:
+
+  NSBasicAttributeArray() : NSBasicAttributeVector() { lObjectCount++ ; }
+  NSBasicAttributeArray(const NSBasicAttributeArray& rv) ;
+  ~NSBasicAttributeArray() ;
+
+  NSBasicAttributeArray& operator=(const NSBasicAttributeArray& src) ;
+
+  static long getNbInstance()											{ return lObjectCount ; }
+  static void initNbInstance() 										{ lObjectCount = 0 ; }
+
+  string getAttributeValue(string sBalise) ;
+  void   setAttributeValue(string sBalise, string sText) ;
+  void   changeAttributeValue(string sBalise, string sText) ;
+  void   eraseAttributeValue(string sBalise) ;
+
+  NSBasicAttribute* getAttribute(string sBalise) ;
+
+  void vider() ;
+} ;
+
+typedef vector<NSBasicAttributeArray*> NSBasicAttributeArrayVector ;
+typedef NSBasicAttributeArrayVector::iterator         NSPersonsAttributeIter ;
+typedef NSBasicAttributeArrayVector::reverse_iterator NSPersonsAttributeReverseIter ;
+typedef NSBasicAttributeArrayVector::const_iterator   NSPersonsAttributeConstIter ;
+
+class _CLASSESGBD NSPersonsAttributesArray : public NSBasicAttributeArrayVector
+{
+  private:
+
+ 	  static long lObjectCount ;
+
+  public:
+
+    NSPersonsAttributesArray() : NSBasicAttributeArrayVector() { lObjectCount++ ; }
+    NSPersonsAttributesArray(const NSPersonsAttributesArray& rv) ;
+    ~NSPersonsAttributesArray() ;
+
+    NSPersonsAttributesArray& operator=(const NSPersonsAttributesArray& src) ;
+
+    static long getNbInstance()		{ return lObjectCount ; }
+    static void initNbInstance() 	{ lObjectCount = 0 ; }
+
+    string  getAttributeValue(string sBalise) ;
+
+    void vider() ;
+} ;
+
+class _CLASSESGBD NSAgentStatus
+{
+  public:
+
+	  enum            AGENTSTATUSTYPE { active = 1, inactive, absent } ;
+    enum						AGENTTYPE {local = 1, LdV, unknown } ;
+
+    NSAgentStatus() ;
+    NSAgentStatus(string sAgentName, string sError ) ;
+    ~NSAgentStatus() ;
+
+    string getAgentName()                     { return sAgent ; }
+    void   setAgentName(string sAg)           { sAgent = sAg ; }
+
+    string getError()                         { return sError ; }
+    void   setError(string sEr)               { sError = sEr ; }
+
+    VecteurString* getServiceList()           { return pServiceList ; }
+    void setServiceList(VecteurString* pVect) ;
+
+    AGENTSTATUSTYPE getAgentStatus()          { return status ; }
+    void   setAgent(AGENTSTATUSTYPE iSt)      { status = iSt ; }
+
+    void   setInactive()                			{ status = inactive ; }
+    bool   isInactive()                				{ return status == inactive ; }
+
+    void   setActive()                				{ status = active ;
+                                                        sError = string("") ; }
+    bool 	 isActive()													{ return active == status ; }
+
+    void   setAbsent()                				{ status = absent ; }
+    bool   isAbsent()                					{ return absent == status ; }
+
+    string getAgentProperties()            		{ return sProperties ; }
+    void   setAgentProperties(string sProp)   { sProperties = sProp ; }
+
+    int  	 getAgentType() ;
+
+    bool	 isLdvTypeAgent() ;
+    bool   isLocalTypeAgent() ;
+    bool   isUnknownTypeAgent() ;
+
+    void addService(string service) ;
+
+    //return if a service is used by this agent
+    bool isServiceInAgentList(string servicename) ;
+
+  private:
+
+    string          sAgent ;
+    string          sProperties ;
+    string          sError ;
+    AGENTSTATUSTYPE status ;
+    //int		 type ;
+    VecteurString*  pServiceList ;
+}  ;
+
+typedef vector<NSAgentStatus*> NSAgentStatusVector ;
+typedef NSAgentStatusVector::iterator       NSAgentStatusIter ;
+typedef NSAgentStatusVector::const_iterator NSAgentStatusConstIter ;
+
+class _CLASSESGBD NSAgentStatusArray : public NSAgentStatusVector
+{
+  public :
+
+    NSAgentStatusArray() : NSAgentStatusVector() {}
+
+    bool    isAvailableService(string sServiceName) ;    //if a services is ok
+
+    string         getAgentError(string sAgentName) ;
+    NSAgentStatus* selectAgent(string sAgentName) ;
+    bool           setAgentError(string sAgentName, string sErr) ;
+    void           addAgent(string sAgentName, string error) ;
+    void           addAgent(string sAgentName, string sErr, VecteurString *pVect) ;
+    bool           addUnavailableServiceForAgent(string sAgent, string sServiceName) ;
+    void           deleteAgent(string sAgentName) ;
+
+    ~NSAgentStatusArray() ;
+    void vider() ;
+};
+
+//=============================================================================
+
+class _CLASSESGBD NSPilotService
+{
+  public:
+
+    NSPilotService()   ;
+    NSPilotService(string sServ) ;
+    ~NSPilotService() ;
+
+    NSPilotService(const NSPilotService& src) ;
+    NSPilotService& operator=(const NSPilotService& src) ;
+
+    string  getServiceName()                 { return _sServiceName ; }
+    void    setServiceName(string sServ)     { _sServiceName = sServ ; }
+
+    VecteurString* getAgentList()                  { return &_aAgentList ; }
+    void setAgentList(const VecteurString& aVect)  { _aAgentList = aVect ; }
+
+    void addAgent(string agent)              { _aAgentList.AddString(agent) ; }
+    //return if a service is used by this agent
+    bool isAgentNeededInService(string agentName) ;
+
+  private:
+
+	  string        _sServiceName ;
+    VecteurString _aAgentList ;
+}  ;
+
+typedef vector<NSPilotService*> NSPilotServiceVector ;
+typedef NSPilotServiceVector::iterator NSPilotServiceStatusIter ;
+
+class _CLASSESGBD NSServiceStatusArray : public NSPilotServiceVector
+{
+  public :
+
+	  NSServiceStatusArray() : NSPilotServiceVector() {}
+
+    bool           isAvailableService(string sServiceName) ; //if a services is ok
+    VecteurString* getAgentListForService(string sService) ;
+
+	  ~NSServiceStatusArray() ;
+	  void vider() ;
+};
+
+class _CLASSESGBD NautilusPilot : public Pilot, public NSSuperRoot
+/***********************************************************/
+{
+  private:
+
+    static jclass    classNautilusPilot ;
+    static jclass    classNautilusGraph ;
+    static jclass    classNode ;
+    static jclass    classMapping ;
+    static jclass    classDOMElement ;
+    static jclass    classStr ;
+
+    static jmethodID midReadGraph ;          //method readGraph of class NautilusPilot
+    static jmethodID midChildrenElements ;
+    static jmethodID midReadGraphService ;   //method readGraph of class NautilusPilot with service name in parameter
+    static jmethodID midWriteGraph ;         //method writeGraph of class NautilusPilot
+    static jmethodID midInvoke ;             //method invokeService of class NautilusPilot
+    static jmethodID midSimpInvoke ;         //method invokeService of class NautilusPilot
+
+    static jmethodID midNewGraph ;           //method constructor of class NautilusGraph
+    static jmethodID midGetGraphId ;         //method getGraphId of class NautilusGraph
+    static jmethodID midGetTreeId ;          //method getTreeId of class NautilusGraph
+    static jmethodID midGetCurrentStep ;    //methode getCurrentStepName of NautilusGraph class
+    static jmethodID midGetCurrentService ;  //methode getCurrentServiceName of NautilusGraph class
+    static jmethodID midModify ;
+
+    static jfieldID jFidMnemo ;
+    static jfieldID jFidWarning ;
+    static jfieldID jFidStack ;
+    static jfieldID jFidStep ;
+
+    jobject jNautilusPilot ;
+
+    JNIEnv*  StartPilotMethod() ;
+    bool     EndPilotMethod(JNIEnv* jenv) ; // True if everything Ok
+
+    JNIEnv*  GetJniEnv() ;
+    void     ReleaseJniEnv() { _bJEnvOnDuty = false ; }
+    bool     ReleaseJniEnv(JNIEnv* jenv) ;         // True if everything Ok
+
+    bool     JniExceptionCheck(JNIEnv* jenv) ;     // True when exception
+
+    jobject  CallObjectMethod(jobject obj, jmethodID methodID, ...) ;
+    jboolean CallBooleanMethod(jobject obj, jmethodID methodID, ...) ;
+    void     CallVoidMethod(jobject obj, jmethodID methodID, ...) ;
+
+    void     buildGraphForC(JNIEnv* jenv, jobject jGraph, NSDataGraph* pGraph) ;
+
+    jobject  buildGraphForJava(JNIEnv* jenv, NSDataGraph* pGraph,
+                                      int& nbTrees, int& nbLinks, int& nbModels, int& nbRights) ;
+
+    jobjectArray createJObjectArray(JNIEnv* jenv, NSBasicAttributeArray *pAttrArray) ;
+
+    void         applyMappings(JNIEnv* jenv, jobjectArray jMappings, NSDataGraph* pGraph,
+                                      int nbTrees, int nbLinks, int nbModels, int nbRights) ;
+    string   getMappedIdForDoc(string sPreviousId, int iNbMaps, char** pTempObjects, char** pStoredObjects) ;
+    string   getMappedIdForNode(string sPreviousId, int iNbMaps, char** pTempNodes, char** pStoredNodes, string sDocId, char** pStoredObjects) ;
+    string   getMappedIdForComposite(string sPreviousId, int iNbMaps, char** pTempNodes, char** pStoredNodes, char** pTempObjects, char** pStoredObjects) ;
+
+    jstring  WindowsTojstring(JNIEnv* jenv, const char * str) ;
+    jstring  WinStringTojstring(JNIEnv* jenv, const string sStr) ;
+
+    /*static*/ string getText(JNIEnv* jenv, jobject jTree) ;
+    /*static*/ string getTagName(JNIEnv* jenv, jobject jTree) ;
+
+    /*static*/ int    jni_getNbTrees(JNIEnv* jenv, jobject jGraph) ;
+    /*static*/ int    jni_getNbLinks(JNIEnv* jenv, jobject jGraph) ;
+    /*static*/ int    jni_getNbModels(JNIEnv* jenv, jobject jGraph) ;
+    /*static*/ int    jni_getNbRights(JNIEnv* jenv, jobject jGraph) ;
+
+    /*static*/ string       jni_getAttribute(JNIEnv* jenv, jobject jGraph, char* method, int i) ;
+    /*static*/ string       jni_getGraphId(JNIEnv* jenv, jobject jGraph) ;
+    /*static*/ string       jni_getTreeId(JNIEnv* jenv, jobject jTree, int i) ;
+    /*static*/ // jobject      jni_getTree(JNIEnv* jenv, jobject jGraph, int i) ;
+    /*static*/ jobjectArray jni_getTreeNodes(JNIEnv* jenv, jobject jGraph, int i) ;
+    /*static*/ string       jni_getNodeField(JNIEnv* jenv, char* fieldName, jobject aNode) ;
+
+    void           transformResultFieldInAttributesArray(JNIEnv* jenv, NSPersonsAttributesArray* pList, string groupeTag = string("list"), string balise = string("person")) ;
+    //convert a java tree to a basicAttributs Array
+    void           DOMTreeToBasicAttribute(JNIEnv* jenv, NSBasicAttributeArray* pAttrElem, jobject jTree, string sNodeName = string("*")) ;
+    /*static*/ int nbOfChildren(JNIEnv* jenv, jobject jTree, string sNodeName = string("*")) ;
+
+    //this method tests all corba agents
+    bool           agentsTest(JNIEnv* jenv, const char* serviceName, NSPersonsAttributesArray *pErrorList) ;
+    bool           resourceList(JNIEnv* jenv, const char* serviceName, NSPersonsAttributesArray *pAgentList, string tag ="agent") ;
+    bool           traitList(JNIEnv* jenv, const char* serviceName, NSPersonsAttributesArray *pAgentList) ;
+    bool           markIncorrectAgents(JNIEnv* jenv) ;
+
+    bool     invokeSimpleService(JNIEnv* jenv, const char* serviceName, NSBasicAttributeArray *pAttrArray) ;
+    bool     invokeAddGraphService(JNIEnv* jenv, const char* serviceName, NSBasicAttributeArray *pAttrArray, NSDataGraph* pGraph) ;
+
+    void     traceAndDisplayError(string sText) ;
+
+    /*static*/ char**   jni_getMappingField(JNIEnv* jenv, char* fieldName,
+                                              jobjectArray jMapping, jint nbMaps) ;
+    const char*         getTextError(JNIEnv* jenv, string sChap = string("NTIERS"), bool bNotFound = false) ;
+    int                 getReturnType(JNIEnv* jenv) ;
+    string              getTextWarning(JNIEnv* jenv, string sChap) ;
+    string              getCurrentStepName() ;
+    string              getCurrentServiceName() ;
+    //recupere le nom du service "traduit" en langage utilisateur
+    string              getCurrentStepUserName(string stepName, string serviceName) ;
+    //recupere  stepName et serviceName du pilot
+    string              getCurrentStepUserName() ;
+
+    static bool         toBeChanged(string id) ;
+    static bool         toBeChangedForComposedId(string id) ;
+
+    string  warningMessage ;
+    string  errorMessage ;
+    string  currentStepName ;
+    string  currentServiceName ;
+
+    JNIEnv* _localJEnv ;
+
+    bool    _bJEnvOnDuty ;      // Is JNI tube occupied?
+    bool    _bServiceOnDuty ;   // Is a Pilot service being invoked?
+    bool    _bPilotOnDuty ;     // Is a function running?
+
+  public:
+
+    static int Init() ;
+
+    NSAgentStatusArray   _AvailableAgentList ;
+
+    //la liste des services avec leurs proprietés
+    //
+    NSServiceStatusArray _PropertiesServicesList ;
+
+    /****************** tools services *******************/
+    static string   SERV_AGENTS_TEST ;
+    static string   SERV_GET_AGENT_LIST ;
+    static string		SERV_GET_NEEDED_AGENT_LIST ;
+
+    static string		SERV_GET_TRAIT_LIST ;
+    static string   SERV_SET_PARAMETERS ;
+
+    /******************* local person services ***********/
+    static string   SERV_USER_LIST ;
+    static string   SERV_USER_LIST_WITH_ROLES ;
+    static string   SERV_LOGIN ;
+    static string   SERV_PATIENT_LIST ;
+    static string   SERV_CREATE_USER ;
+    static string   SERV_MODIFY_USER ;
+
+    static string   SERV_SEARCH_PATIENT ;
+    static string   SERV_SEARCH_PATIENT_FROM_TRAITS ;
+    static string   SERV_CREATE_PATIENT ;
+    static string   SERV_CREATE_CORESPONDENT ;
+
+    //modify person (graph + traits)
+    static string   SERV_MODIFY_PERSON ;
+    static string		SERV_MODIFY_PERSON_TRAITS ;
+    static string		SERV_MODIFY_PERSON_ROLE ;
+    //modify person (graph only)
+    static string   SERV_MODIFY_GRAPH_PERSON ;
+    static string   SERV_SEARCH_PERSON ;
+    static string   SERV_PERSON_LIST_FROM_TRAITS ;
+    static string   SERV_READ_GRAPH_ADMIN ;
+    static string   SERV_READ_ADRESS_GRAPH ;
+    static string   SERV_UNLOCK ;
+    static string   SERV_UNLOCK_ALL_PATIENTS ;
+    static string   SERV_USER_PROPERTIES_LIST ;
+    static string   SERV_PERSON_TRAITS_LIST ;
+
+    /************** local objects services ****************/
+    static string 	SERV_OBJECT_LIST ;
+    static string   SERV_OBJECT_LIST_WITH_TRAITS ;
+    static string   SERV_SEARCH_OBJECT ;
+    static string   SERV_SEARCH_OBJECT_FROM_ID ;
+    static string   SERV_SEARCH_OBJECT_HAVING_TRAITS ;
+    static string   SERV_CREATE_OBJECT ;
+    static string   SERV_MODIFY_OBJECT ;
+
+    /************** synchro collectif *******************/
+
+    static string   SERV_USER_IMPORT ;
+    static string   SERV_CORRESPONDENT_IMPORT ;
+    static string   SERV_CORRESPONDENT_IMPORT_ID ;
+    static string   SERV_PATIENT_IMPORT ;
+    static string   SERV_CREATE_IMPORTED_PATIENT ;
+    static string   SERV_CREATE_IMPORTED_CORRESP ;
+    static string   SERV_CREATE_IMPORTED_USER ;
+    static string   SERV_GET_PERSON_INFORMATION ;
+    static string   SERV_UPDATE_ALL_LDV_OBJECTS ;
+    static string   SERV_EXPORT_DATA ;
+    static string   SERV_IMPORT_DATA ;
+    static string   SERV_ADD_MANDATE ;
+
+    static string   SERV_MERGE_PATIENT ;
+    static string   SERV_OPEN_PATIENT_DATA_FROM_TRAITS ;
+
+    /************* synchro group ***********************/
+
+    //create group patient for epiPump
+    static string   SERV_CREATE_GROUP_PATIENT  ;
+    //open group patient
+    static string   SERV_OPEN_GROUP_PATIENT ;
+    static string   SERV_GROUP_PATIENT_IMPORT ;
+    static string   SERV_CREATE_IMPORTED_GROUP_PATIENT ;
+
+    //modify group patient for epiPump
+    static string   SERV_MODIFY_GROUP_PATIENT ;
+    //group patient list
+    static string   SERV_GROUP_PATIENT_LIST ;
+
+    NautilusPilot(NSSuper* pSuper) ;
+    ~NautilusPilot() ;
+
+    /*****************************tools management*****************************/
+    //this method mark all unavailable agents
+    bool initAgentList() ;
+
+    //return true si tous les agents LdV sont aperationels
+    bool isOperationalLdVAgent() ;
+    bool isOperationalLocalAgent() ;
+
+    bool getServiceForAgent(const char* agentName, VecteurString *pServList ) ;
+    bool testServiceStatus(string sServiceName) ;
+    //for a service
+    bool traitError(string serviceName) ;
+    //for an agent type
+    bool traitError(int agentType) ;
+
+    void addUnavailableAgent(string sAgentName) ;  //add an unavailable agent + all services
+    void addUnavailableAgent(string sAgentName, string sError) ;
+    bool startAgent(string sAgentName) ;
+
+    bool setEpisodusVersion(string version) ;
+    bool runGarbageCollector() ;
+
+    //traitement de list des services utilisé par le pilot
+    bool setServiceList() ;
+    NSServiceStatusArray* getServiceList() { return &_PropertiesServicesList ; }
+
+    /**********************persons and objects management**********************/
+    // bool readGraph(NSDataGraph* pGraph, string sServiceName = "") ;
+    bool writeGraph(NSDataGraph* pGraph) ;
+
+    //generic services
+    bool invokeService(const char* serviceName, NSDataGraph* pGraph, NSBasicAttributeArray *pAttrArray, JNIEnv* jenv = (JNIEnv*) 0) ;
+    bool searchPatient(const char* serviceName, NSDataGraph* pGraph,  NSPersonsAttributesArray *pList, NSBasicAttributeArray *pAttrArray) ;
+    bool invokeService(const char* serviceName, const char* tagName, VecteurString& result) ;
+    bool invokeService(const char* serviceName, const char* tagName, NSPersonsAttributesArray* result) ;
+    bool invokeService(const char* serviceName, NSDataGraph* pGraph, NSPersonsAttributesArray *pList, NSBasicAttributeArray *pAttrArray) ;
+
+    bool invokeService2ReturnElements(const char* serviceName, NSDataGraph* pGraph,
+                      NSPersonsAttributesArray *pList, NSBasicAttributeArray *pAttrArray) ;
+
+
+    //person or object mangement
+    bool personList(const char* serviceName, NSPersonsAttributesArray *pPatList, NSBasicAttributeArray *pAttrArray) ;
+    bool getUserProperties(const char* serviceName, NSPersonsAttributesArray *pPatList,  NSBasicAttributeArray *pAttrArray) ;
+    bool objectList(const char* serviceName, NSPersonsAttributesArray *pObjectList, NSBasicAttributeArray *pAttrArray) ;
+    bool readGraphAdmin(string sServiceName, NSDataGraph* pGraph, NSBasicAttributeArray *pAttrArray) ;
+    bool mergePatient(string sServiceName, NSDataGraph* pGraph, NSBasicAttributeArray *pAttrArray) ;
+    bool readAdressGraph(string sServiceName, NSDataGraph* pGraph, NSBasicAttributeArray *pAttrArray) ;
+    bool createPersonOrObject(const char* serviceName, NSDataGraph* pGraph, NSPersonsAttributesArray *pList, NSBasicAttributeArray *pAttrArrayint, int iType = 0, bool bForced = false) ;
+    bool personsList(const char* serviceName, string resultTagName, NSPersonsAttributesArray *pAttsList, char* first, ...) ;
+
+    bool modifyPersonOrObject(const char* serviceName, NSDataGraph* pGraph,
+                      NSPersonsAttributesArray *pList, NSBasicAttributeArray *pAttrArray) ;
+    bool modifyTraitsForPersonOrObject(const char* serviceName,
+                      NSPersonsAttributesArray *pList, NSBasicAttributeArray *pAttrArray) ;
+
+    bool unlockPatient(const char* serviceName, NSBasicAttributeArray *pAttrArray) ;
+    bool modifyPIDSData(const char* serviceName, NSBasicAttributeArray *pAttrArray) ;
+
+    bool fusionPatient(NSBasicAttributeArray *pAttrArray) ;
+
+    //generic methods
+    string getErrorMessage ()  { return errorMessage ; }
+    string getWarningMessage() { return warningMessage ; }
+
+    //import services
+    bool importNewDataGraphPerson(const char* serviceName, NSBasicAttributeArray *pAttrArray,
+                                           NSDataGraph* pGraph )  ;
+    bool exportNewDataGraphPerson(const char* serviceName, NSBasicAttributeArray *pAttrArray )  ;
+    bool importPerson( const char* serviceName, NSBasicAttributeArray *pAttrArray, NSDataGraph* pGraph ) ;
+    bool getPersonInformation( const char* serviceName, NSBasicAttributeArray *pAttrArray, NSDataGraph* pGraph ) ;
+    bool createImportedPerson(const char* serviceName, NSDataGraph* pGraph, NSPersonsAttributesArray *pList,
+                                  NSBasicAttributeArray *pAttrArray) ;
+    //create or update from collective server
+    bool updateObjectList(const char* serviceName, NSDataGraph* pGraph, NSBasicAttributeArray *pAttrArray) ;
+    bool addHealthTeamMember(const char* serviceName, NSBasicAttributeArray *pAttrArray, NSDataGraph* pGraph) ;
+};
+
+class _CLASSESGBD JniManager : public NSSuperRoot
+/***********************************************************/
+{
+  public:
+
+    JniManager(NSSuper* pSuper) ;
+    ~JniManager() ;
+
+    bool InitialiseJava() ;
+    void DestroyJava() ;
+    bool ResetJava() ;
+
+  protected:
+
+    bool     _bJavaOk ;
+};
+
+
+#endif // NAUTILUSPILOT_H
+

@@ -1,0 +1,68 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+<TITLE>TIdDICTAuthEvent</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <META name="GENERATOR" content="Doc-O-Matic">
+    <LINK rel="STYLESHEET" href="default.css" type="text/css">
+
+<SCRIPT LANGUAGE="JavaScript1.2" SRC="scripts.js"></SCRIPT>
+</HEAD>
+<BODY CLASS="Element57">
+<TABLE BORDER="0" BGCOLOR="#AACCFF" WIDTH="100%" CELLSPACING="0" CELLPADDING="0">
+<TR><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element1">
+Indy 9</DIV>
+</TD><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element2">
+<A HREF="content.html" CLASS="Element59">Content</A> | <A HREF="idx.html" CLASS="Element59">Index</A> | <A HREF="symref.html" CLASS="Element59">Reference</A></DIV>
+</TD></TR></TABLE><DIV CLASS="Element58">
+<DIV CLASS="Element5">
+TIdDICTAuthEvent</DIV>
+<DIV CLASS="Element7">
+<A HREF="002170.html" CLASS="Element59">Unit: IdDICTServer</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Specifies the event type for the DICT AUTH and SASLAUTH commands.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12">TIdDICTAuthEvent = <STRONG>procedure</STRONG> ( Thread: <A HREF="007613.html" CLASS="Element59">TIdPeerThread</A>; Username, authstring : <STRONG>String</STRONG> ) <STRONG>of</STRONG> <STRONG>object</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Unit</DIV>
+<DIV CLASS="Element69">
+<A HREF="002170.html" CLASS="Element59">IdDICTServer</A></DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+AuthString</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+User authentication information.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+Thread</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Execution thread performing the command.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+Username</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+User name to authenticate.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+TIdDICTAuthEvent specifies the event type for the DICT AUTH and SASLAUTH commands, and is used by the <A HREF="007294.html" CLASS="Element59">TIdDICTServer</A> OnCommandAuth and OnCommandSASLAuth event handlers to perform user authentication.<P CLASS="Element10">
+Username contains the user name to be authenticated.<P CLASS="Element10">
+For the DICT AUTH command, AuthString will contain an APOP-style MD5 Checksum as described in RFC 1939.<P CLASS="Element10">
+For the DICT SASLAUTH command, AuthString will contain the BASE64-encoded initial SASL response as described in RFC 2045. All responses to the SASLAUTH server challenge should use the SASLRESP command and a BASE64-encoded parameter.<P CLASS="Element10">
+Authentication is an optional server capability. The AUTH and SASLAUTH commands may be implemented by a DICT server.</DIV>
+</DIV>
+<DIV CLASS="Element62">
+<HR>Created with Doc-O-Matic 2 donated to <STRONG><A HREF="http://www.delphi-jedi.org">Project JEDI</A></STRONG>. Commercial license available from the <STRONG><A HREF="http://www.doc-o-matic.com">Doc-O-Matic site</A></STRONG>.</DIV>
+</DIV></BODY></HTML>

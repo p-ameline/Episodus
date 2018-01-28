@@ -1,0 +1,4 @@
+#!/bin/sh
+
+MALLOC_TRACE=malloc.txt $*
+mtrace $1 malloc.txt

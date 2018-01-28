@@ -1,0 +1,330 @@
+#ifndef __NSADDFUNCTWIND_H
+#define __NSADDFUNCTWIND_H
+
+#include <owl/listwind.h>
+#include <owl/dialog.h>
+#include <owl/edit.h>
+#include <owl/radiobut.h>
+#include <owl/combobox.h>
+#include <owl\groupbox.h>
+
+#ifdef _ENTERPRISE_DLL
+  #include "enterpriseLus/nsglobalLus.h"
+#else
+  #include "partage/nsglobal.h"
+#endif
+
+#include "partage\ns_vector.h"
+#include "nsbb\nsMView.h"
+
+// macro pour appeler LvnGetDispInfo
+#define NS_LV_DISPINFO_NOTIFY(notifyCode, method)\
+  {notifyCode, UINT_MAX, (TAnyDispatcher)::v_LPARAM_Dispatch,\
+  (TMyPMF)v_LV_DISPINFO_NOTIFY_Sig(&TMyClass::method)}
+
+#define NS_LVN_GETDISPINFO(method) NS_LV_DISPINFO_NOTIFY(LVN_GETDISPINFO, method)
+
+// macro pour gérer localement les méthodes qui utilisent un TLwNotify
+#define NS_LISTWIND_NOTIFY(notifyCode, method)\
+  {notifyCode, UINT_MAX, (TAnyDispatcher)::v_LPARAM_Dispatch,\
+  (TMyPMF)v_LISTWIND_NOTIFY_Sig(&TMyClass::method)}
+
+#define NS_LW_COLUMNCLICK(method) NS_LISTWIND_NOTIFY(LVN_COLUMNCLICK, method)
+
+class NSFunctionsListWindow;
+//---------------------------------------------------------------
+//         classe NSAddFunctions
+//---------------------------------------------------------------
+class  NSAddFunctions : public TDialog, public NSRoot
+{
+	public :
+
+		NSFunctionsListWindow* pFctList ;
+
+   	NSAddFunctions(TWindow* pere, NSContexte* pCtx, TModule* module = 0) ;   	~NSAddFunctions();
+    void CmOk() ;
+    void CmCancel() ;    void SetupWindow() ;
+
+	DECLARE_RESPONSE_TABLE(NSAddFunctions) ;};
+//------------------------------------------------------------------------------
+//                classe  NSFunctionsManagement
+//------------------------------------------------------------------------------
+class NSFunctionsManagement
+{
+	public :
+
+		NSFunctionsManagement() ;
+    // NSFunctionsManagement(NSFunctionsManagement& rv);
+    ~NSFunctionsManagement() ;
+
+    string            getFonction()            { return sFonction ; }
+    void              setFonction(string sAct) { sFonction = sAct ; }
+
+    string            getNomFctUtilisateur()            { return sNomFctUtilisateur ; }
+    void              setNomFctUtilisateur(string sStr) { sNomFctUtilisateur = sStr ; }
+
+    string            getComplement()               { return sComplement ; }
+    void              setComplement(string sAct)    { sComplement = sAct ; }
+
+    ArraySplitWindow* getListSplit()                       { return pListSplit ; }
+    void              setListSplit(ArraySplitWindow* pAct) { pListSplit = pAct ; }
+
+    NSWindowProperty::FCTACTIVITY getActivity()         { return _iActivity ; }
+    void              setActivity(NSWindowProperty::FCTACTIVITY iActiv) { _iActivity = iActiv ; }
+
+    char              getHotKey()         { return _cHotKey ; }
+    void              setHotKey(char cHK) { _cHotKey = cHK ; }
+
+    string getModifiers()            { return _sModifiers ; }
+    void   setModifiers(string sMod) { _sModifiers = sMod ; }
+
+	protected :
+
+		string sFonction ;
+    string sNomFctUtilisateur ;
+    string sComplement ;
+    ArraySplitWindow *pListSplit ;
+
+    NSWindowProperty::FCTACTIVITY _iActivity ;
+    char                          _cHotKey ;
+    string                        _sModifiers ;
+};
+
+typedef vector<NSFunctionsManagement*> NSFunctManArray ;
+typedef NSFunctManArray::iterator NSFunctionsManagementIter;
+
+class NSFunctionsManagementArray : public NSFunctManArray
+{
+	public:
+
+		NSFunctionsManagementArray() : NSFunctManArray() {}
+		NSFunctionsManagementArray(NSFunctionsManagementArray& rv) ;
+		~NSFunctionsManagementArray() ;
+
+		void        vider();
+};
+
+class NSCorrespondentsNames
+{
+	public :
+
+		NSCorrespondentsNames() ;
+    ~NSCorrespondentsNames() ;
+
+    string getFonction()            { return sFonction ; }
+    void   setFonction(string sAct) { sFonction = sAct ; }
+
+    string getNomFctUtilisateur()            { return sNomFctUtilisateur ; }
+    void   setNomFctUtilisateur(string sStr) { sNomFctUtilisateur = sStr ; }
+
+	protected :
+
+		string sFonction ;
+    string sNomFctUtilisateur ;
+};
+
+typedef vector<NSCorrespondentsNames*> NSCorArray ;
+typedef NSCorArray::iterator       NSCorrespondentsNamesIter ;
+typedef NSCorArray::const_iterator NSCorrespondentsNamesConstIter ;
+
+class NSCorrespondentsNamesArray : public NSCorArray
+{
+	public:
+
+		NSCorrespondentsNamesArray() : NSCorArray() {}
+		NSCorrespondentsNamesArray(const NSCorrespondentsNamesArray& rv) ;
+    NSCorrespondentsNamesArray& operator=(const NSCorrespondentsNamesArray& src) ;
+		~NSCorrespondentsNamesArray() ;
+
+    void vider() ;
+};
+
+//------------------------------------------------------------------------------// Classe NSFunctionsListWindow
+//------------------------------------------------------------------------------
+class  NSFunctionsListWindow : public TListWindow, public NSRoot
+{
+	public :
+
+		bool                        bNaturallySorted ;
+    int                         iSortedColumn ;
+    /// ArrayWinProp                *pWindsProp ;
+    ArrayWinProp                aWindsPropLoc ;
+    NSFunctionsManagementArray *pFctNameList ;
+
+		//constructeurs  Destructeur
+    NSFunctionsListWindow(TWindow* parent, NSContexte* pCtx, int resourceId,
+                          TModule* module = 0) ;
+    ~NSFunctionsListWindow() ;
+
+    // réponse aux événements
+    void EvSetFocus(HWND hWndLostFocus) ;
+    void EvRButtonDown(uint modkeys, NS_CLASSLIB::TPoint& point) ;
+    void EvLButtonDblClk(uint modKeys, NS_CLASSLIB::TPoint& point) ;
+    void LvnGetDispInfo(TLwDispInfoNotify& dispInfo) ;
+    void LVNColumnclick(TLwNotify& lwn) ;
+    void EvLButtonDown(uint modkeys, NS_CLASSLIB::TPoint& point) ;
+
+    // méthodes
+    void SetupWindow() ;
+    void SetupColumns() ;
+    int  IndexItemSelect() ;
+    void AfficheListe() ;
+    void initFunctionNameListe(string sUserId, string sPersoDirectory) ;
+    void initComponentsListe(string sUserId, string sPersoDirectory,bool bFromFile = true) ;
+    void newWindow(string sWndMother) ;
+    void EnregData(NSFunctionsManagement* pParamsDevelop) ;
+
+    void sortByLibelle() ;
+
+    // entrées de menu
+    // void    CmCreerEnreg() ;
+    void CmModifEnreg() ;
+    void CmSupprEnreg() ;
+    void CmModifParam() ;
+
+    bool canWeClose() ;
+
+	private:
+
+		TWindow *pDialog ;
+
+	DECLARE_RESPONSE_TABLE(NSFunctionsListWindow) ;
+};
+
+
+//------------------------------------------------------------------------------
+// Classe NSSplitListWindow
+//------------------------------------------------------------------------------
+class  NSSplitListWindow : public TListWindow, public NSRoot
+{
+	public :
+
+		int iSortedColumn ;
+
+    //constructeurs  Destructeur
+    NSSplitListWindow(TWindow* parent, NSContexte* pCtx, int resourceId,
+                     NSFunctionsManagement* pParam, NSCorrespondentsNamesArray *pCorrespName,
+                     TModule* module = 0) ;
+    ~NSSplitListWindow() ;
+
+    // réponse aux événements
+    void EvSetFocus(HWND hWndLostFocus);
+    void EvRButtonDown(uint modkeys, NS_CLASSLIB::TPoint& point);
+    void EvLButtonDblClk(uint modKeys, NS_CLASSLIB::TPoint& point);
+    void LvnGetDispInfo(TLwDispInfoNotify& dispInfo);
+
+    // méthodes
+    void SetupWindow() ;
+    void SetupColumns() ;
+    int  IndexItemSelect() ;
+    void AfficheListe() ;
+    void initListe() ;
+    // int     getCombinForModif()         {return  iNoCombinForModif;}
+
+    // entrées de menu
+    void CmCreerEnreg() ;
+    void CmModifEnreg() ;
+    void CmSupprEnreg() ;
+
+	private:
+
+		TWindow                     *pDialog ;
+    NSFunctionsManagement       *pParamInit ;
+    ArraySplitWindow            *pSplitArray ;
+    NSCorrespondentsNamesArray  *pListNames ;
+    // int                             iNoCombinForModif;
+
+	DECLARE_RESPONSE_TABLE(NSSplitListWindow) ;
+};
+
+
+class  NSIntroModifFunctions : public TDialog, public NSRoot
+{
+	public :
+
+		NSSplitListWindow* pPropList ;
+		OWL::TEdit*        pEditFct ;
+
+		NSIntroModifFunctions(TWindow* pere, NSContexte* pCtx, NSFunctionsManagement* pParam = NULL,                                    NSCorrespondentsNamesArray *pCorrespName = NULL,                                    TModule* module = 0) ;    ~NSIntroModifFunctions() ;
+
+    void CmCancel() ;    void CmOk() ;    void SetupWindow() ;
+    // int getIndexModif()                 {return iNoCombinForModif;}
+    // void setIndexModif( int iPar)       {iNoCombinForModif = iPar;}
+
+	private:
+
+  	NSFunctionsManagement*      pParamInt ;
+    NSCorrespondentsNamesArray* pNameList ;
+    //    int                                 iNoCombinForModif ;
+
+	DECLARE_RESPONSE_TABLE(NSIntroModifFunctions) ;};
+class NSComboBoxWindowsName;class  NSMakeFunctions : public TDialog, public NSRoot{
+	public :
+
+		NSComboBoxWindowsName* pEditMother ;
+    NSComboBoxWindowsName* pEditChild ;
+    OWL::TEdit*            pEditPercent ;
+    OWL::TRadioButton*     pVerticalButton ;
+    OWL::TRadioButton*     pHorizontalButton ;
+
+    NSMakeFunctions(TWindow* pere, NSContexte* pCtx, NSSplittingWindowProperty *pPropInt,                         NSCorrespondentsNamesArray *pCorrespName, TModule* module = 0);    ~NSMakeFunctions() ;
+    bool validInput() ;
+    void CmCancel() ;    void CmOk() ;    void SetupWindow() ;
+
+	private:
+
+		NSSplittingWindowProperty*  pPropWind ;
+    NSCorrespondentsNamesArray* pNamesList ;
+
+	DECLARE_RESPONSE_TABLE(NSMakeFunctions) ;};
+class NSComboBoxWindowsName : public OWL::TComboBox{
+	public:
+
+  	// constructors/destructor
+  	NSComboBoxWindowsName(TWindow *parent, int resId, NSCorrespondentsNamesArray *pNames = NULL) ;
+  	~NSComboBoxWindowsName() ;
+
+  	// functions
+  	void   SetupWindow() ;
+		//  int                 GetSelIndex() ;
+  	string getSelCode() ;
+  	void   setCode(string sValue) ;
+
+	protected:
+
+  	NSCorrespondentsNamesArray *pNamesList ;
+  	TWindow                    *pDlgParent ;
+  	string                     sSelectedName ;
+
+	DECLARE_RESPONSE_TABLE(NSComboBoxWindowsName) ;
+} ;
+class NSParamsModifFunctions : public TDialog, public NSRoot{
+	public :
+
+  	OWL::TGroupBox*    pActivite ;
+		OWL::TRadioButton* pInactive ;
+    OWL::TRadioButton* pActive ;
+    OWL::TRadioButton* pAuto ;
+    OWL::TRadioButton* pAutoBBk ;
+
+    OWL::TGroupBox*    pHotKey ;
+		OWL::TEdit*        pEditFct ;
+		OWL::TRadioButton* pModAlt ;
+    OWL::TRadioButton* pModCtrl ;
+    OWL::TRadioButton* pModShift ;
+    OWL::TRadioButton* pModWin ;
+
+		NSParamsModifFunctions(TWindow* pere, NSContexte* pCtx,                           NSWindowProperty::FCTACTIVITY* piActivity,                           char* pcHotKey, string* psMods, TModule* module = 0) ;    ~NSParamsModifFunctions() ;
+
+    void CmCancel() ;    void CmOk() ;    void SetupWindow() ;
+
+	protected :
+
+  	NSWindowProperty::FCTACTIVITY* _piActivity ;
+    char*                          _pcHotKey ;
+    string*                        _psModifiers ;
+    NSWindowProperty               _winProperty ;
+
+	DECLARE_RESPONSE_TABLE(NSParamsModifFunctions) ;
+};
+#endif

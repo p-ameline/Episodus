@@ -1,0 +1,438 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+<TITLE>TIdStream</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <META name="GENERATOR" content="Doc-O-Matic">
+    <LINK rel="STYLESHEET" href="default.css" type="text/css">
+
+<SCRIPT LANGUAGE="JavaScript1.2" SRC="scripts.js"></SCRIPT>
+</HEAD>
+<BODY CLASS="Element57">
+<TABLE BORDER="0" BGCOLOR="#AACCFF" WIDTH="100%" CELLSPACING="0" CELLPADDING="0">
+<TR><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element1">
+Indy 9</DIV>
+</TD><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element2">
+<A HREF="content.html" CLASS="Element59">Content</A> | <A HREF="idx.html" CLASS="Element59">Index</A> | <A HREF="symref.html" CLASS="Element59">Reference</A></DIV>
+</TD></TR></TABLE><DIV CLASS="Element58">
+<DIV CLASS="Element5">
+TIdStream</DIV>
+<DIV CLASS="Element7">
+<A HREF="013944.html" CLASS="Element59">Hierarchy</A>, <A HREF="013945.html" CLASS="Element59">Methods</A>, <A HREF="013946.html" CLASS="Element59">See Also</A>, <A HREF="002911.html" CLASS="Element59">Unit: IdStream</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Implements additional functionality for TStream-based input/output operations.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12">TIdStream = <STRONG>class</STRONG>(TStream)</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Unit</DIV>
+<DIV CLASS="Element69">
+<A HREF="002911.html" CLASS="Element59">IdStream</A></DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+TIdStream is a TStream descendant that implements additional functionality for input/output operations. TIdStream is often used to cast a TStream instance to TIdStream to allow access to the additional methods for stream-based input and output. <STRONG>Note:</STRONG> TIdStream cannot contain new data members; when TStream is cast to a TIdStream instance, the new data members would not contain valid values.<P CLASS="Element10">
+TIdStream implements <A HREF="007748.html#0004" CLASS="Element59">ReadLn</A> and <A HREF="007748.html#000A" CLASS="Element59">WriteLn</A> to provide support for line-oriented input and output. TIdStream also reimplements the <A HREF="007748.html#0008" CLASS="Element59">Write</A> method to support String-based input parameters and additional error checking before writing input values.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0000">TIdStream.BOF</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007748.html" CLASS="Element59">TIdStream</A>, <A HREF="013947.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Indicates the stream is positioned at it's beginning.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>function</STRONG> BOF: Boolean;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Return Value</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Boolean - True when positioned at the beginning of the stream.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+BOF is a Boolean function used to indicate when the <A HREF="007748.html" CLASS="Element59">TIdStream</A> is positioned at the beginning of the stream. BOF contains True when the current stream position is less than or equal to zero (0).<P CLASS="Element10">
+Use <A HREF="007748.html#0001" CLASS="Element59">EOF</A> to determine when the stream is positioned at it's maximum size. Use <A HREF="007748.html#0006" CLASS="Element59">Skip</A> or Seek to change the curent stream position.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0001">TIdStream.EOF</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007748.html" CLASS="Element59">TIdStream</A>, <A HREF="013948.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Indicates the stream is positioned at it's end.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>function</STRONG> EOF: Boolean;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Return Value</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Boolean - True when positioned at the end of the stream.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+EOF is a Boolean function used to indicate when the <A HREF="007748.html" CLASS="Element59">TIdStream</A> is positioned at the end of the stream. EOF contains True when the current stream position is greater than or equal to the current size of the stream.<P CLASS="Element10">
+Use <A HREF="007748.html#0000" CLASS="Element59">BOF</A> to determine when the stream is positioned at it's beginning. Use <A HREF="007748.html#0006" CLASS="Element59">Skip</A> or Seek to change the curent stream position.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0002">TIdStream.FindEOL</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007748.html" CLASS="Element59">TIdStream</A>, <A HREF="013949.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Locates the end of a text line in the stream.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>class</STRONG> <STRONG>function</STRONG> FindEOL(ABuf: PChar; <STRONG>var</STRONG> VLineBufSize: Integer; <STRONG>var</STRONG> VCrEncountered: Boolean): Integer;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+ABuf: PChar</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Buffer to be searched for a line of text.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+var VLineBufSize: Integer</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Size of the buffer or line to be extracted from the buffer.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+var VCrEncountered: Boolean</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+<A HREF="000298.html" CLASS="Element59">CR</A> or <A HREF="003176.html" CLASS="Element59">LF</A> dound in the buffer.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Return Value</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Integer - Number of bytes to the end of the line or the end of the buffer.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+FindEOL is an Integer class function used to locate the end of a text line in the buffer indicated by ABuf. VLineBufSize is a variable parameter that contains the size of ABuf on entry, and will be updated to reflect the character following the <A HREF="000298.html" CLASS="Element59">CR</A> or <A HREF="003176.html" CLASS="Element59">LF</A> characters when they are encounterd in ABuf. VCrEncountered is a variable parameter that indicates if the <A HREF="000298.html" CLASS="Element59">CR</A> of <A HREF="003176.html" CLASS="Element59">LF</A> characters were encountered in ABuf.<P CLASS="Element10">
+FindEOL is used in <A HREF="007748.html#0004" CLASS="Element59">ReadLn</A> to locate the end of a text line in the <A HREF="007748.html" CLASS="Element59">TIdStream</A>.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0003">TIdStream.ReadInteger</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007748.html" CLASS="Element59">TIdStream</A>, <A HREF="013950.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Reads a 16-bit integer value from the current stream position.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>function</STRONG> ReadInteger(<STRONG>const</STRONG> AConvert: Boolean = TRUE): Integer;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+const AConvert: Boolean = TRUE</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Indicates that integer valyues must be converted from it's network byte ordering.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+ReadInteger is an Integer function used to read a 16-bit integer value from the current stream position. ReadInteger calls ReadBuffer to acquire the return value. When AConvert is True, the value is converted from network (or Internet) byte order to it's host-dependent representation using <A HREF="007740.html#001F" CLASS="Element59">TIdStack.WSNToHL</A>.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0004">TIdStream.ReadLn</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007748.html" CLASS="Element59">TIdStream</A>, <A HREF="013951.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Reads a line of text from the current stream position.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>function</STRONG> ReadLn(AMaxLineLength: Integer = -1; AExceptionIfEOF: Boolean = FALSE): <STRONG>String</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+AMaxLineLength: Integer = -1</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Maximum line length to read from the stream. Default value is -1.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+AExceptionIfEOF: Boolean = FALSE</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Raise an exception if <A HREF="007748.html#0001" CLASS="Element59">EOF</A> is reached. Default value is FALSE.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+ReadLn is a String function used to read a single line of text from the current stream position. For <A HREF="007833.html" CLASS="Element59">TIdTCPStream</A> and descendant classes, the Connection is used to perform the ReadLn operation.<P CLASS="Element10">
+ReadLn will acquire a string value from the stream until <A HREF="000534.html" CLASS="Element59">EOL</A> characters are encountered, or until the number of characters in AMaxLineLength is read from the stream. When AMaxLineLength is -1, the value in MaxInt is used as the maximum line length.<P CLASS="Element10">
+ReadLn calls ReadBuffer using a 2,048 byte buffer (or smaller when the stream size permits) to read text values from the stream. ReadLn can raise a <A HREF="000374.html" CLASS="Element59">EIdEndOfStream</A> exception if an unexpected end of stream is encountered while reading values from the stream.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0005">TIdStream.ReadString</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007748.html" CLASS="Element59">TIdStream</A>, <A HREF="013952.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Reads a Pascal-style string from the current stream position.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>function</STRONG> ReadString(<STRONG>const</STRONG> AConvert: Boolean = TRUE): <STRONG>String</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+const AConvert: Boolean = TRUE</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Indicates the string length must be converted from network byte order.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+ReadString is a String function used to read a Pascal-style string from the current stream position. ReadString calls <A HREF="007748.html#0003" CLASS="Element59">ReadInteger</A> to determine the length of string in the stream. When Aconvert is True, the string length will be converted from it's network (or Internet) byte order to a host-dependent representation of the integer value. When the string length is greater than zero (0), ReadString calls ReadBuffer to acquire the return value for the method. Otherwise the return value is an empty string ('').</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0006">TIdStream.Skip</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007748.html" CLASS="Element59">TIdStream</A>, <A HREF="013953.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Moves the current stream position by the specified number of bytes.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>procedure</STRONG> Skip(ASize: Integer);</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+ASize: Integer</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Number of bytes to move the current stream position.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Skip is a convenience procedure used to move the current stream position by the number of bytes specified in ASize. Skip calls the Seek method using ASize to move the stream from the current stream position. ASize can contain a position, negative, or zero (0) value.<P CLASS="Element10">
+Use <A HREF="007748.html#0000" CLASS="Element59">BOF</A> and <A HREF="007748.html#0001" CLASS="Element59">EOF</A> to determine when the beginning or end of the stream has been reached after a call to Skip.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0007">TIdStream.This</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007748.html" CLASS="Element59">TIdStream</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+References the object instance calling the method.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>function</STRONG> This: <A HREF="007748.html" CLASS="Element59">TIdStream</A>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+This is a <A HREF="007748.html" CLASS="Element59">TIdStream</A> function used to gain convenient access to the current object instance. The return value for This is the Self identifier that references the object instance in which the method is called.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0008">TIdStream.Write</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007748.html" CLASS="Element59">TIdStream</A>, <A HREF="013954.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Writes the contents of a string to the stream.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>procedure</STRONG> <STRONG>Write</STRONG>(<STRONG>const</STRONG> AData: <STRONG>string</STRONG>); <STRONG>overload</STRONG>; <STRONG>reintroduce</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+const AData: string</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+String values to be written to the stream.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Write is an overloaded procedure reintroduced in <A HREF="007748.html" CLASS="Element59">TIdStream</A> that allows the string value in AData to be written to the stream. When AData contains a string with a non-zero length, Write calls the WriteBuffer method to transfer a specified number of bytes in AData. When AData contains an emptry string (''), no action is performed.<P CLASS="Element10">
+Use <A HREF="007748.html#000A" CLASS="Element59">WriteLn</A> to write a String value followed by an <A HREF="000534.html" CLASS="Element59">EOL</A> character sequence.<P CLASS="Element10">
+Use <A HREF="007748.html#000C" CLASS="Element59">WriteString</A> to write a Delphi-style String value prepended with the length of the character data.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0009">TIdStream.WriteInteger</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007748.html" CLASS="Element59">TIdStream</A>, <A HREF="013955.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+<A HREF="007748.html#0008" CLASS="Element59">Write</A> a 16-bit Integer value to the stream.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>procedure</STRONG> WriteInteger(AValue: Integer; <STRONG>const</STRONG> AConvert: Boolean = True);</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+AValue: Integer</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+16-bit value to write to the stream.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+const AConvert: Boolean = True</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Indicates bytes are converted to Network byte order.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+WriteInteger is a procedure used to write the 16-bit integer value specified in AValue to the stream. When AConvert is True, the bytes in AVAlue will be converted from their host-dependent byte order to Network (or Internet) byte order using <A HREF="007740.html#001C" CLASS="Element59">TIdStack.WSHToNL</A>.<P CLASS="Element10">
+WriteInteger call WriteBuffer using the content and size of AValue to transfer values to the stream.<P CLASS="Element10">
+Use <A HREF="007748.html#0003" CLASS="Element59">ReadInteger</A> to read a 16-bit value from the stream.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="000A">TIdStream.WriteLn</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007748.html" CLASS="Element59">TIdStream</A>, <A HREF="013956.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Writes a string value and an end-of-line character sequence to the stream.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>procedure</STRONG> WriteLn(<STRONG>const</STRONG> AData: <STRONG>string</STRONG> = ''); <STRONG>overload</STRONG>;
+<STRONG>procedure</STRONG> WriteLn(<STRONG>const</STRONG> AData: <STRONG>string</STRONG>; <STRONG>const</STRONG> AArgs: <STRONG>array</STRONG> <STRONG>of</STRONG> <STRONG>const</STRONG>); <STRONG>overload</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+const AData: string = ''</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+String content or format to be written to the stream.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+const AArgs: array of const</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Array of arguments for the format string.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+<A HREF="007748.html#000A" CLASS="Element59">WriteLn</A> is an overloaded procedure in <A HREF="007748.html" CLASS="Element59">TIdStream</A> that writes string content to the stream followed by an <A HREF="000534.html" CLASS="Element59">EOL</A> character sequence. In the default implementation, <A HREF="007748.html#000A" CLASS="Element59">WriteLn</A> accepts a single string argument in AData that contains the contents to be written to the stream. The default value for AData is an empty string (''), when omitted.<P CLASS="Element10">
+In an overloaded variant of <A HREF="007748.html#000A" CLASS="Element59">WriteLn</A>, AData contains a format string and AArgs contains an open array of arguments to be used in a call to the Format function. The return value from Format is written using the default <A HREF="007748.html#000A" CLASS="Element59">WriteLn</A> implementation.<P CLASS="Element10">
+In both cases, the <A HREF="007018.html" CLASS="Element59">sLineBreak</A> character sequence is written after the string content.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="000B">TIdStream.WriteLn</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007748.html" CLASS="Element59">TIdStream</A>, <A HREF="013957.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Writes a string value and an end-of-line character sequence to the stream.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>procedure</STRONG> <A HREF="007748.html#000A" CLASS="Element59">WriteLn</A>(<STRONG>const</STRONG> AData: <STRONG>string</STRONG> = ''); <STRONG>overload</STRONG>;
+<STRONG>procedure</STRONG> <A HREF="007748.html#000A" CLASS="Element59">WriteLn</A>(<STRONG>const</STRONG> AData: <STRONG>string</STRONG>; <STRONG>const</STRONG> AArgs: <STRONG>array</STRONG> <STRONG>of</STRONG> <STRONG>const</STRONG>); <STRONG>overload</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+const AData: string = ''</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+String content or format to be written to the stream.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+const AArgs: array of const</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Array of arguments for the format string.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+<A HREF="007748.html#000A" CLASS="Element59">WriteLn</A> is an overloaded procedure in <A HREF="007748.html" CLASS="Element59">TIdStream</A> that writes string content to the stream followed by an <A HREF="000534.html" CLASS="Element59">EOL</A> character sequence. In the default implementation, <A HREF="007748.html#000A" CLASS="Element59">WriteLn</A> accepts a single string argument in AData that contains the contents to be written to the stream. The default value for AData is an empty string (''), when omitted.<P CLASS="Element10">
+In an overloaded variant of <A HREF="007748.html#000A" CLASS="Element59">WriteLn</A>, AData contains a format string and AArgs contains an open array of arguments to be used in a call to the Format function. The return value from Format is written using the default <A HREF="007748.html#000A" CLASS="Element59">WriteLn</A> implementation.<P CLASS="Element10">
+In both cases, the <A HREF="007018.html" CLASS="Element59">sLineBreak</A> character sequence is written after the string content.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="000C">TIdStream.WriteString</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007748.html" CLASS="Element59">TIdStream</A>, <A HREF="013958.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Writes a Delphi-style string to the stream.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>procedure</STRONG> WriteString(<STRONG>const</STRONG> AStr: <STRONG>String</STRONG>; <STRONG>const</STRONG> AConvert: Boolean = True);</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+const AStr: String</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+String to be written to the stream.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+const AConvert: Boolean = True</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Converts the length byte order to Network byte order.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+WriteString is a procedure used to write a Delphi-style string containing a binary representation of the string length followed by string content to the stream.<P CLASS="Element10">
+AStr is the string to be written to the stream. AConvert indicates that the string length should be converted from it's host-dependent representation to Network (or Internet) byte order.<P CLASS="Element10">
+WriteString calls <A HREF="007748.html#0009" CLASS="Element59">WriteInteger</A> to output the length of the string content to follow, using AConvert to specifiy the byte ordering required. When the length of AStr is non-zero, WriteString calls WriteBuffer to output the string content of AStr for the specified number of bytes.<P CLASS="Element10">
+Use <A HREF="007748.html#0008" CLASS="Element59">Write</A> to output string content without the binary length to the stream. Use <A HREF="007748.html#000A" CLASS="Element59">WriteLn</A> to output string content and an <A HREF="000534.html" CLASS="Element59">EOL</A> character sequence without the binary length to the stream.</DIV>
+</DIV>
+<DIV CLASS="Element62">
+<HR>Created with Doc-O-Matic 2 donated to <STRONG><A HREF="http://www.delphi-jedi.org">Project JEDI</A></STRONG>. Commercial license available from the <STRONG><A HREF="http://www.doc-o-matic.com">Doc-O-Matic site</A></STRONG>.</DIV>
+</DIV></BODY></HTML>

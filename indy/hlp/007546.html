@@ -1,0 +1,273 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+<TITLE>TIdMessageClient</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <META name="GENERATOR" content="Doc-O-Matic">
+    <LINK rel="STYLESHEET" href="default.css" type="text/css">
+
+<SCRIPT LANGUAGE="JavaScript1.2" SRC="scripts.js"></SCRIPT>
+</HEAD>
+<BODY CLASS="Element57">
+<TABLE BORDER="0" BGCOLOR="#AACCFF" WIDTH="100%" CELLSPACING="0" CELLPADDING="0">
+<TR><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element1">
+Indy 9</DIV>
+</TD><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element2">
+<A HREF="content.html" CLASS="Element59">Content</A> | <A HREF="idx.html" CLASS="Element59">Index</A> | <A HREF="symref.html" CLASS="Element59">Reference</A></DIV>
+</TD></TR></TABLE><DIV CLASS="Element58">
+<DIV CLASS="Element5">
+TIdMessageClient</DIV>
+<DIV CLASS="Element7">
+<A HREF="012459.html" CLASS="Element59">Hierarchy</A>, <A HREF="012460.html" CLASS="Element59">Properties</A>, <A HREF="012461.html" CLASS="Element59">Methods</A>, <A HREF="012462.html" CLASS="Element59">Events</A>, <A HREF="012463.html" CLASS="Element59">See Also</A>, <A HREF="002287.html" CLASS="Element59">Unit: IdMessageClient</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Implements a message client.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12">TIdMessageClient = <STRONG>class</STRONG>(<A HREF="007827.html" CLASS="Element59">TIdTCPClient</A>)</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Unit</DIV>
+<DIV CLASS="Element69">
+<A HREF="002287.html" CLASS="Element59">IdMessageClient</A></DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+TIdMessageClient is a <A HREF="007827.html" CLASS="Element59">TIdTCPClient</A> descendant that implements a generic message client. TIdMessageClient can read and write Internet messages compliant with the RFC 822 message specification.<P CLASS="Element10">
+TIdMessageClient provides methods and properties needed to handle transmission and receipt of both the headers and the body for an Internet message, including line folding.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0001">TIdMessageClient.MsgLineFold</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007546.html" CLASS="Element59">TIdMessageClient</A>, <A HREF="012464.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Identifies the line fold character sequence.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> MsgLineFold: <STRONG>string</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+MsgLineFold is a String property that identifies the line fold character sequence inserted at the beginning of a folded line. The default value for MsgLineFold is <A HREF="007130.html" CLASS="Element59">TAB</A> (Decimal 9), as assigned in the <A HREF="007546.html#0000" CLASS="Element59">Create</A> constructor.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0002">TIdMessageClient.MsgLineLength</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007546.html" CLASS="Element59">TIdMessageClient</A>, <A HREF="012465.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Maximum line length.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> MsgLineLength: integer;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+MsgLineLength is an Integer property that specifies the maximum length of a header line. If the length is exceeded, the header line is folded. The default value for MsgLineLength is 79, as assigned in the <A HREF="007546.html#0000" CLASS="Element59">Create</A> constructor.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0000">TIdMessageClient.Create</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007546.html" CLASS="Element59">TIdMessageClient</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Constructor for the object instance.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>constructor</STRONG> Create(AOwner: TComponent); <STRONG>override</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+AOwner: TComponent</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Owner of the object instance.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Create is the constructor for the object instance. Create relies on the inherited create constructor, and initializes the following property values:<P CLASS="Element10">
+<UL>
+<LI><A HREF="007546.html#0002" CLASS="Element59">MsgLineLength</A> - 79<P CLASS="Element10">
+<LI><A HREF="007546.html#0001" CLASS="Element59">MsgLineFold</A> = <A HREF="007130.html" CLASS="Element59">TAB</A> character (Decimal 9)</UL>
+</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0003">TIdMessageClient.ProcessMessage</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007546.html" CLASS="Element59">TIdMessageClient</A>, <A HREF="012466.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Loads and processes message headers and contents into a <A HREF="007544.html" CLASS="Element59">TIdMessage</A> instance.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>procedure</STRONG> ProcessMessage(AMsg: <A HREF="007544.html" CLASS="Element59">TIdMessage</A>; AHeaderOnly: Boolean = False); <STRONG>overload</STRONG>;
+<STRONG>procedure</STRONG> ProcessMessage(AMsg: <A HREF="007544.html" CLASS="Element59">TIdMessage</A>; <STRONG>const</STRONG> AStream: TStream; AHeaderOnly: Boolean = False); <STRONG>overload</STRONG>;
+<STRONG>procedure</STRONG> ProcessMessage(AMsg: <A HREF="007544.html" CLASS="Element59">TIdMessage</A>; <STRONG>const</STRONG> AFilename: <STRONG>string</STRONG>; AHeaderOnly: Boolean = False); <STRONG>overload</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+AMsg: TIdMessage</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Message to receive header and contents.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+const AStream: TStream</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Stream containing headers and contents to be loaded.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+const AFilename: string</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+File containing headers and contents to be loaded.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+<A HREF="007546.html#0003" CLASS="Element59">ProcessMessage</A> is an overloaded method in <A HREF="007546.html" CLASS="Element59">TIdMessageClient</A> that implements loading and processing of message headers and contents using <A HREF="007071.html" CLASS="Element59">socket</A>-, stream-, or file-based IOHandlers.<P CLASS="Element10">
+The default implementation of <A HREF="007546.html#0003" CLASS="Element59">ProcessMessage</A> uses the IOHandler assigned to the client connection to receive the header and body of the message, and stores data in the message instance specified in AMsg.<P CLASS="Element10">
+The stream-based variant of <A HREF="007546.html#0003" CLASS="Element59">ProcessMessage</A> creates a <A HREF="007427.html" CLASS="Element59">TIdIOHandlerStream</A> instance that can be used to load data from the stream specified in AStream into AMsg. The <A HREF="007427.html" CLASS="Element59">TIdIOHandlerStream</A> instance is freed prior to exiting from the method.<P CLASS="Element10">
+The file-based variant of <A HREF="007546.html#0003" CLASS="Element59">ProcessMessage</A> creates a TFileStream used to access message data in the file specified by AFilename, and calls the stream-based variant of <A HREF="007546.html#0003" CLASS="Element59">ProcessMessage</A> to load message data into AMsg. The TFileStream instance is freed prior to exiting from the method.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0005">TIdMessageClient.ProcessMessage</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007546.html" CLASS="Element59">TIdMessageClient</A>, <A HREF="012467.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Loads and processes message headers and contents into a <A HREF="007544.html" CLASS="Element59">TIdMessage</A> instance.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>procedure</STRONG> <A HREF="007546.html#0003" CLASS="Element59">ProcessMessage</A>(AMsg: <A HREF="007544.html" CLASS="Element59">TIdMessage</A>; AHeaderOnly: Boolean = False); <STRONG>overload</STRONG>;
+<STRONG>procedure</STRONG> <A HREF="007546.html#0003" CLASS="Element59">ProcessMessage</A>(AMsg: <A HREF="007544.html" CLASS="Element59">TIdMessage</A>; <STRONG>const</STRONG> AStream: TStream; AHeaderOnly: Boolean = False); <STRONG>overload</STRONG>;
+<STRONG>procedure</STRONG> <A HREF="007546.html#0003" CLASS="Element59">ProcessMessage</A>(AMsg: <A HREF="007544.html" CLASS="Element59">TIdMessage</A>; <STRONG>const</STRONG> AFilename: <STRONG>string</STRONG>; AHeaderOnly: Boolean = False); <STRONG>overload</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+AMsg: TIdMessage</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Message to receive header and contents.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+const AStream: TStream</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Stream containing headers and contents to be loaded.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+const AFilename: string</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+File containing headers and contents to be loaded.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+<A HREF="007546.html#0003" CLASS="Element59">ProcessMessage</A> is an overloaded method in <A HREF="007546.html" CLASS="Element59">TIdMessageClient</A> that implements loading and processing of message headers and contents using <A HREF="007071.html" CLASS="Element59">socket</A>-, stream-, or file-based IOHandlers.<P CLASS="Element10">
+The default implementation of <A HREF="007546.html#0003" CLASS="Element59">ProcessMessage</A> uses the IOHandler assigned to the client connection to receive the header and body of the message, and stores data in the message instance specified in AMsg.<P CLASS="Element10">
+The stream-based variant of <A HREF="007546.html#0003" CLASS="Element59">ProcessMessage</A> creates a <A HREF="007427.html" CLASS="Element59">TIdIOHandlerStream</A> instance that can be used to load data from the stream specified in AStream into AMsg. The <A HREF="007427.html" CLASS="Element59">TIdIOHandlerStream</A> instance is freed prior to exiting from the method.<P CLASS="Element10">
+The file-based variant of <A HREF="007546.html#0003" CLASS="Element59">ProcessMessage</A> creates a TFileStream used to access message data in the file specified by AFilename, and calls the stream-based variant of <A HREF="007546.html#0003" CLASS="Element59">ProcessMessage</A> to load message data into AMsg. The TFileStream instance is freed prior to exiting from the method.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0004">TIdMessageClient.ProcessMessage</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007546.html" CLASS="Element59">TIdMessageClient</A>, <A HREF="012468.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Loads and processes message headers and contents into a <A HREF="007544.html" CLASS="Element59">TIdMessage</A> instance.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>procedure</STRONG> <A HREF="007546.html#0003" CLASS="Element59">ProcessMessage</A>(AMsg: <A HREF="007544.html" CLASS="Element59">TIdMessage</A>; AHeaderOnly: Boolean = False); <STRONG>overload</STRONG>;
+<STRONG>procedure</STRONG> <A HREF="007546.html#0003" CLASS="Element59">ProcessMessage</A>(AMsg: <A HREF="007544.html" CLASS="Element59">TIdMessage</A>; <STRONG>const</STRONG> AStream: TStream; AHeaderOnly: Boolean = False); <STRONG>overload</STRONG>;
+<STRONG>procedure</STRONG> <A HREF="007546.html#0003" CLASS="Element59">ProcessMessage</A>(AMsg: <A HREF="007544.html" CLASS="Element59">TIdMessage</A>; <STRONG>const</STRONG> AFilename: <STRONG>string</STRONG>; AHeaderOnly: Boolean = False); <STRONG>overload</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+AMsg: TIdMessage</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Message to receive header and contents.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+const AStream: TStream</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Stream containing headers and contents to be loaded.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+const AFilename: string</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+File containing headers and contents to be loaded.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+<A HREF="007546.html#0003" CLASS="Element59">ProcessMessage</A> is an overloaded method in <A HREF="007546.html" CLASS="Element59">TIdMessageClient</A> that implements loading and processing of message headers and contents using <A HREF="007071.html" CLASS="Element59">socket</A>-, stream-, or file-based IOHandlers.<P CLASS="Element10">
+The default implementation of <A HREF="007546.html#0003" CLASS="Element59">ProcessMessage</A> uses the IOHandler assigned to the client connection to receive the header and body of the message, and stores data in the message instance specified in AMsg.<P CLASS="Element10">
+The stream-based variant of <A HREF="007546.html#0003" CLASS="Element59">ProcessMessage</A> creates a <A HREF="007427.html" CLASS="Element59">TIdIOHandlerStream</A> instance that can be used to load data from the stream specified in AStream into AMsg. The <A HREF="007427.html" CLASS="Element59">TIdIOHandlerStream</A> instance is freed prior to exiting from the method.<P CLASS="Element10">
+The file-based variant of <A HREF="007546.html#0003" CLASS="Element59">ProcessMessage</A> creates a TFileStream used to access message data in the file specified by AFilename, and calls the stream-based variant of <A HREF="007546.html#0003" CLASS="Element59">ProcessMessage</A> to load message data into AMsg. The TFileStream instance is freed prior to exiting from the method.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0006">TIdMessageClient.SendMsg</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007546.html" CLASS="Element59">TIdMessageClient</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Sends message headers and body on the client connection.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>procedure</STRONG> SendMsg(AMsg: <A HREF="007544.html" CLASS="Element59">TIdMessage</A>; <STRONG>const</STRONG> AHeadersOnly: Boolean = False); <STRONG>virtual</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+AMsg: TIdMessage</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Message to be sent by the client.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+AHeaderOnly</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Client will write only headers. Default value is False.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+SendMsg is a virtual procedure in <A HREF="007546.html" CLASS="Element59">TIdMessageClient</A> that performs the processing required to <A HREF="006944.html" CLASS="Element59">send</A> the message headers and optional message parts from the message specified in AMsg using the message client. The default implementation of SendMsg calls SendHeader to write the message headers in AMsg. When AHeaderOnly is False, SendMsg also writes a blank separator line signalling the end of message headers, and calls SendBody to <A HREF="006944.html" CLASS="Element59">send</A> the contents of the message body or message parts.<P CLASS="Element10">
+Descendant classes may override the default SendMsg behavior to implement protocol specific message transmission requirements.</DIV>
+</DIV>
+<DIV CLASS="Element62">
+<HR>Created with Doc-O-Matic 2 donated to <STRONG><A HREF="http://www.delphi-jedi.org">Project JEDI</A></STRONG>. Commercial license available from the <STRONG><A HREF="http://www.doc-o-matic.com">Doc-O-Matic site</A></STRONG>.</DIV>
+</DIV></BODY></HTML>

@@ -1,0 +1,55 @@
+// -----------------------------------------------------------------------------
+// nautilus-bbk.h
+// fab - septembre 2002
+// -----------------------------------------------------------------------------
+// Ce fichier définit les prototypes des fonctions d'initialisation du
+// Blackboard. On définit aussi les fonctions permettant la communication entre
+// le Blackboard et Nautilus
+// -----------------------------------------------------------------------------
+
+#ifndef __NAUTILISBBK_H__
+# define __NAUTILUSBBK_H__
+
+#include "ns_ob1\BB1types.h"
+#include "ns_ob1\OB1Functor.h"
+
+# ifdef _DANSBBKDLL
+
+// lance le Blackboard
+
+int       __export CreateInterface(NSContexte *pContexte);
+int				__export runBlackboard(NSContexte *pContexte) ;int				__export closeBlackboard(NSContexte *pContexte) ;int				__export goOneCycleBlackboard(NSContexte *pContexte) ;int				__export goNCyclesBlackboard(NSContexte *pContexte) ;
+// ajoute des données provenant de Nautilus sur le Blackboard
+int				__export addDatasFromNautilusOnBlackboard(NSContexte *pContexte, NSPatPathoArray *pPatPathoArray) ;
+int				__export DPIO(NSContexte *pContexte) ;
+
+bool      __export reinitBlackboard(NSContexte *pContexte) ;
+void      __export addInitEvent(NSContexte *pContexte) ;
+
+
+# else
+
+// lance le Blackboard
+int				runBlackboard(NSContexte *pContexte) ;int				closeBlackboard(NSContexte *pContexte) ;int				goOneCycleBlackboard(NSContexte *pContexte) ;int				goNCyclesBlackboard(NSContexte *pContexte) ;
+// ajoute des données provenant de Nautilus sur le Blackboard
+int				addDatasFromNautilusOnBlackboard(NSContexte *pContexte, NSPatPathoArray *pPatPathoArray) ;
+int				DPIO(NSContexte *pContexte) ;
+
+bool      reinitBlackboard(NSContexte *pContexte) ;
+void      addInitEvent(NSContexte *pContexte) ;
+
+# endif
+
+// fonction d'initialisation du Blackboard
+Errcode 	nautilusBlackboardInit(BB1BB& bb) ;
+
+bool			loadKS(NSContexte *pCtx, BB1BB * bb, string ks, BB1KB *kb, AVPSet *attributes = NULL, bool dpioKS = false) ;
+bool      loadKS(NSContexte *pCtx, BB1BB* bb,string sKS, string sKB, string sLabel = "", string sArc = "", string sArcForce = "", string sArcRefus = "", string sFormulaire = "", bool dpioKS = false) ;
+bool      loadScriptKS(NSContexte *pCtx, BB1BB* bb,string ScriptFile, string sKB, string sLabel = "", string sArc = "", string sArcForce = "", string sArcRefus = "", string sFormulaire = "", bool dpioKS = false) ;
+bool			initKS(NSContexte *pCtx, BB1BB*  bb, string sKS, bool dpioKS) ;
+
+// fonction de terminaison du Blackboard
+bool			nautilusBlackboardTerminateP(const BB1BB &bb) ;
+
+
+#endif // __NAUTILUSBBK_H__

@@ -1,0 +1,235 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+<TITLE>TIdUserManager</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <META name="GENERATOR" content="Doc-O-Matic">
+    <LINK rel="STYLESHEET" href="default.css" type="text/css">
+
+<SCRIPT LANGUAGE="JavaScript1.2" SRC="scripts.js"></SCRIPT>
+</HEAD>
+<BODY CLASS="Element57">
+<TABLE BORDER="0" BGCOLOR="#AACCFF" WIDTH="100%" CELLSPACING="0" CELLPADDING="0">
+<TR><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element1">
+Indy 9</DIV>
+</TD><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element2">
+<A HREF="content.html" CLASS="Element59">Content</A> | <A HREF="idx.html" CLASS="Element59">Index</A> | <A HREF="symref.html" CLASS="Element59">Reference</A></DIV>
+</TD></TR></TABLE><DIV CLASS="Element58">
+<DIV CLASS="Element5">
+TIdUserManager</DIV>
+<DIV CLASS="Element7">
+<A HREF="014753.html" CLASS="Element59">Hierarchy</A>, <A HREF="014754.html" CLASS="Element59">Properties</A>, <A HREF="014755.html" CLASS="Element59">Methods</A>, <A HREF="014756.html" CLASS="Element59">Events</A>, <A HREF="002948.html" CLASS="Element59">Unit: IdUserAccounts</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Implements an account manager for Indy servers.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12">TIdUserManager = <STRONG>class</STRONG>(<A HREF="007213.html" CLASS="Element59">TIdBaseComponent</A>)</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Unit</DIV>
+<DIV CLASS="Element69">
+<A HREF="002948.html" CLASS="Element59">IdUserAccounts</A></DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+TIdUserManager is a <A HREF="007213.html" CLASS="Element59">TIdBaseComponent</A> descendant that implements a mechanism for managing user accounts that can be used by an Indy server. TIdUserManager is the type used to represent the <A HREF="007342.html#0015" CLASS="Element59">TIdFTPServer.UserAccounts</A> property.<P CLASS="Element10">
+TIdUserManager provides properties that indicate characteristics of the user accounts for the server implementation, including:<P CLASS="Element10">
+<UL>
+<LI><A HREF="007883.html#0000" CLASS="Element59">Accounts</A> - Collection of user accounts.<P CLASS="Element10">
+<LI><A HREF="007883.html#0003" CLASS="Element59">CaseSensitiveUsernames</A> - Indicates case is significant when checking an account identity.<P CLASS="Element10">
+<LI><A HREF="007883.html#0002" CLASS="Element59">CaseSensitivePasswords</A> - Indicates case is significant when checking account credentials.</UL>
+<P CLASS="Element10">
+TIdUserManager also provides methods and event handlers that allow authentication of a user account using the identity and credentials provided by a client connection.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0000">TIdUserManager.Accounts</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007883.html" CLASS="Element59">TIdUserManager</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Represents the collection used for user accounts managed by the component.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> Accounts: <A HREF="007882.html" CLASS="Element59">TIdUserAccounts</A>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Accounts is a <A HREF="007882.html" CLASS="Element59">TIdUserAccounts</A> property that represents a collection used for <A HREF="007881.html" CLASS="Element59">TIdUserAccount</A> object instances maintained by the user manager. Accounts is initialized in <A HREF="007883.html#0004" CLASS="Element59">Create</A>, and freed in <A HREF="007883.html#0005" CLASS="Element59">Destroy</A>.<P CLASS="Element10">
+Accounts is used in AuthenicateUser to locate the collection item used for the authorization process. Accounts is also accessed when reading or writing the values in <A HREF="007883.html#0002" CLASS="Element59">CaseSensitivePasswords</A> and GetCaseSensitiveUsernames.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0002">TIdUserManager.CaseSensitivePasswords</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007883.html" CLASS="Element59">TIdUserManager</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Indicates case is significant when verifying passwords for user accounts.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> CaseSensitivePasswords: Boolean;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+CaseSensitivePasswords is a Boolean property that indicates if case is significant when verifying the authentication credentials against the Password stored in a user account. When CaseSensitivePasswords is True, case is significant. When CaseSensitivePasswords is False, case is not significant.<P CLASS="Element10">
+CaseSensitivePasswords uses a read and a write specifier to provide access the <A HREF="007882.html#0001" CLASS="Element59">TIdUserAccounts.CaseSensitivePasswords</A> property.<P CLASS="Element10">
+Use <A HREF="007883.html#0003" CLASS="Element59">CaseSensitiveUsernames</A> to indicate if case is significant when accessing user accounts by the identity for the user account.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0003">TIdUserManager.CaseSensitiveUsernames</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007883.html" CLASS="Element59">TIdUserManager</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Indicates if case is significant when accessing user accounts by user name.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> CaseSensitiveUsernames: Boolean;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+CaseSensitiveUsernames is a Boolean property that indicates if case is significant when accessing user accounts in the collection using UserNames.<P CLASS="Element10">
+When CaseSensitiveUsernames is True, the read access specifier for the UserNames property will consider case to be significant in comparing the user name values. When CaseSensitiveUsernames is False, <A HREF="000074.html" CLASS="Element59">AnsiSameText</A> is used to perform the name comparison.<P CLASS="Element10">
+CaseSensitiveUsernames uses a read and a write specifier to provide access the <A HREF="007882.html#0002" CLASS="Element59">TIdUserAccounts.CaseSensitiveUsernames</A> property.<P CLASS="Element10">
+Use <A HREF="007883.html#0002" CLASS="Element59">CaseSensitivePasswords</A> to indicate if case is significant when verifying user account credentials maintained by the user manager.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0001">TIdUserManager.AuthenticateUser</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007883.html" CLASS="Element59">TIdUserManager</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Authenticates user identity and credentials using user accounts.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>function</STRONG> AuthenticateUser(<STRONG>const</STRONG> AUsername: <STRONG>String</STRONG>; <STRONG>const</STRONG> APassword: <STRONG>String</STRONG>): Boolean;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+const AUsername: String</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+User identity to validate.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+const APassword: String</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+User credentials to validate.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Return Value</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Boolean - True when authentication was successful.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+AuthenticateUser is a Boolean function that authenticates a user account using the values specified in AUsername and APassword. AuthenticateUser retrieves the <A HREF="007881.html" CLASS="Element59">TIdUserAccount</A> identified by AUsername. If a user account having the specified name cannot be located, AuthenticateUser will return False.<P CLASS="Element10">
+AuthenticateUser calls TIdUSerAccount.CheckPassword for the value specified in APassword to complete the authorization process. After aythentication, the <A HREF="007883.html#0006" CLASS="Element59">OnAfterAuthentication</A> event handler is signalled to allow verification against an external source or logging for account access attempts.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0004">TIdUserManager.Create</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007883.html" CLASS="Element59">TIdUserManager</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Constructor for the object instance.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>constructor</STRONG> Create(AOwner: TComponent); <STRONG>override</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+AOwner: TComponent</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Owner of the object instance.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Create is the constructor for the object instance. Create calls the inherited Create method using the value in AOwner. Create also allocates resources required for the <A HREF="007883.html#0000" CLASS="Element59">Accounts</A> property.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0005">TIdUserManager.Destroy</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007883.html" CLASS="Element59">TIdUserManager</A>, <A HREF="014757.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Frees the object instance.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>destructor</STRONG> Destroy; <STRONG>override</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Destroy is the destructor for the object instance. Destroy frees and release resources allocated in the <A HREF="007883.html#0004" CLASS="Element59">Create</A> method, including <A HREF="007883.html#0000" CLASS="Element59">Accounts</A>. Destroy calls the inherited Destroy method prior to exiting.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0006">TIdUserManager.OnAfterAuthentication</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007883.html" CLASS="Element59">TIdUserManager</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Event handler signalled after an attempt to authenticate a user account.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> OnAfterAuthentication: <A HREF="008007.html" CLASS="Element59">TOnAfterAuthentication</A>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+AAuthenticationResult</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Result of the authentication process.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+APassword</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+User credentials for the authentication process.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+AUsername</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+User identity for the authentication process.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+OnAfterAuthentication is a <A HREF="008007.html" CLASS="Element59">TOnAfterAuthentication</A> property that represents the event handler signalled after an attempt to authenticate a user account. Arguments for the event handler include the user identity (AUserName) and credentials (APassword) used for authenticating the client account.<P CLASS="Element10">
+Applications must assign a procedure to the event handler to allow responding to the event notification. The OnAfterAuthentication event handler can be use to perform authentication where the account identity or credentials are stored outside the server implementation, or where additional logging is required after an attempt to access the server.<P CLASS="Element10">
+The OnAfterAuthentication event handler can change the value in AAuthenticationResult to indicate if the authentication attempt was successful.<P CLASS="Element10">
+OnAfterAuthentication is used in the <A HREF="007883.html#0001" CLASS="Element59">AuthenticateUser</A> method after the user account identified in AUsername has verified the password in APassword for the user account. AAuthenticationResult contains the result for the account authorization prior to signalling the <A HREF="008007.html" CLASS="Element59">TOnAfterAuthentication</A> event.</DIV>
+</DIV>
+<DIV CLASS="Element62">
+<HR>Created with Doc-O-Matic 2 donated to <STRONG><A HREF="http://www.delphi-jedi.org">Project JEDI</A></STRONG>. Commercial license available from the <STRONG><A HREF="http://www.doc-o-matic.com">Doc-O-Matic site</A></STRONG>.</DIV>
+</DIV></BODY></HTML>

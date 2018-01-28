@@ -1,0 +1,59 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+<TITLE>TOnCreateSession</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <META name="GENERATOR" content="Doc-O-Matic">
+    <LINK rel="STYLESHEET" href="default.css" type="text/css">
+
+<SCRIPT LANGUAGE="JavaScript1.2" SRC="scripts.js"></SCRIPT>
+</HEAD>
+<BODY CLASS="Element57">
+<TABLE BORDER="0" BGCOLOR="#AACCFF" WIDTH="100%" CELLSPACING="0" CELLPADDING="0">
+<TR><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element1">
+Indy 9</DIV>
+</TD><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element2">
+<A HREF="content.html" CLASS="Element59">Content</A> | <A HREF="idx.html" CLASS="Element59">Index</A> | <A HREF="symref.html" CLASS="Element59">Reference</A></DIV>
+</TD></TR></TABLE><DIV CLASS="Element58">
+<DIV CLASS="Element5">
+TOnCreateSession</DIV>
+<DIV CLASS="Element7">
+<A HREF="002147.html" CLASS="Element59">Unit: IdCustomHTTPServer</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Event type signalled when a HTTP session is needed for a client connection.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12">TOnCreateSession = <STRONG>procedure</STRONG> (ASender: <A HREF="007613.html" CLASS="Element59">TIdPeerThread</A>; <STRONG>var</STRONG> VHTTPSession: <A HREF="007393.html" CLASS="Element59">TIdHTTPSession</A>) <STRONG>of</STRONG> <STRONG>object</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Unit</DIV>
+<DIV CLASS="Element69">
+<A HREF="002147.html" CLASS="Element59">IdCustomHTTPServer</A></DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+ASender</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Client connection for the event notification.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+VHTTPSession</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+HTTP session created for the client connection, or Nil.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+TOnCreateSession is an event type signalled when a HTTP server needs to create a new HTTP session for a threaded client connection. TOnCreateSession is the event type signalled to the TIdHTTPServer.OnCreateSession event handler, and notifies the HTTP server implementation that a new HTTP session is needed to service a threaded client connection.<P CLASS="Element10">
+The HTTP server implementation must assign a procedure to TIdHTTPServer.OnCreateSession to allow responding to the event notification, or TIdHTTPServer.SessionList will be used to retrieve or create the HTTP session for the client thread.</DIV>
+</DIV>
+<DIV CLASS="Element62">
+<HR>Created with Doc-O-Matic 2 donated to <STRONG><A HREF="http://www.delphi-jedi.org">Project JEDI</A></STRONG>. Commercial license available from the <STRONG><A HREF="http://www.doc-o-matic.com">Doc-O-Matic site</A></STRONG>.</DIV>
+</DIV></BODY></HTML>

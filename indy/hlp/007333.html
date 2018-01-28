@@ -1,0 +1,411 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+<TITLE>TIdFTPListItem</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <META name="GENERATOR" content="Doc-O-Matic">
+    <LINK rel="STYLESHEET" href="default.css" type="text/css">
+
+<SCRIPT LANGUAGE="JavaScript1.2" SRC="scripts.js"></SCRIPT>
+</HEAD>
+<BODY CLASS="Element57">
+<TABLE BORDER="0" BGCOLOR="#AACCFF" WIDTH="100%" CELLSPACING="0" CELLPADDING="0">
+<TR><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element1">
+Indy 9</DIV>
+</TD><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element2">
+<A HREF="content.html" CLASS="Element59">Content</A> | <A HREF="idx.html" CLASS="Element59">Index</A> | <A HREF="symref.html" CLASS="Element59">Reference</A></DIV>
+</TD></TR></TABLE><DIV CLASS="Element58">
+<DIV CLASS="Element5">
+TIdFTPListItem</DIV>
+<DIV CLASS="Element7">
+<A HREF="011086.html" CLASS="Element59">Hierarchy</A>, <A HREF="011087.html" CLASS="Element59">Properties</A>, <A HREF="011088.html" CLASS="Element59">Methods</A>, <A HREF="011089.html" CLASS="Element59">See Also</A>, <A HREF="002191.html" CLASS="Element59">Unit: IdFTPList</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Implements a directory entry for the TIdFTPList container.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12">TIdFTPListItem = <STRONG>class</STRONG>(TCollectionItem)</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Unit</DIV>
+<DIV CLASS="Element69">
+<A HREF="002191.html" CLASS="Element59">IdFTPList</A></DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+TIdFTPListItem is a TCollectionItem descendant that implements methods and properties used to represent a directory entry in a <A HREF="007337.html" CLASS="Element59">TIdFTPListItems</A> collection. TIdFTPListItem specifies a common representation for data returned by an FTP server for the LIST, NLST, or STAT commands.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Notes</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+The FTP protocol does not specify a standard representation for this type of data. TIdFTPListItem implements the common attributes found in most FTP server implementations.<P CLASS="Element10">
+TIdFTPListItem also provides the raw textual data used as the basis for the directory entry, and can be used with parsing methods in the <A HREF="007337.html" CLASS="Element59">TIdFTPListItems</A> container to override the default parsing behavior.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0002">TIdFTPListItem.Data</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007333.html" CLASS="Element59">TIdFTPListItem</A>, <A HREF="011090.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Represents the text used for a file or directory entry in the listing.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> Data: <STRONG>string</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Data is a String property that represents the raw textual data received for a file or directory entry from the LIST, NLST, or STAT command. Data is an individual line of text processed when <A HREF="007337.html#0003" CLASS="Element59">TIdFTPListItems.LoadList</A> is used to load directory entries in the container.<P CLASS="Element10">
+Data is used as the ItemName for the collection item when the ListFormat for the container is flfNoDetails. Data can be used in the <A HREF="007337.html#0005" CLASS="Element59">TIdFTPListItems.OnParseCustomListFormat</A> event handler to override the default parsing behavior when the ListFormat is flfCustom.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0003">TIdFTPListItem.FileName</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007333.html" CLASS="Element59">TIdFTPListItem</A>, <A HREF="011091.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Name assigned to the entry in the directory listing.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> FileName: <STRONG>string</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+FileName is a String property that represents the name assigned to the file or directory entry in the directory listing. Use <A HREF="007333.html#0002" CLASS="Element59">LinkedItemName</A> to access the file name for the endpoint of a symbolic link entry.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0004">TIdFTPListItem.GroupName</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007333.html" CLASS="Element59">TIdFTPListItem</A>, <A HREF="011092.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Represents the group name that owns a file or directory entry.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> GroupName: <STRONG>string</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+GroupName is a String property that represents the name of the group that owns the file or directory entry. GroupName has significance when the FTP server is hosted on the UNIX or Linux platforms, and may contain question marks when the attribute does not apply to the ListFormat for the directory listing.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0005">TIdFTPListItem.GroupPermissions</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007333.html" CLASS="Element59">TIdFTPListItem</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Represents group owner permissions for the file or directory entry.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> GroupPermissions: <STRONG>string</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+GroupPermissions is a String property that represents the permissions assigned to the group owner identified in <A HREF="007333.html#0004" CLASS="Element59">GroupName</A>. GroupPermissions has significance when the FTP server is hosted on the UNIX or Linux platforms, and may contain question marks when the attribute does not apply to the ListFormat for the directory listing.<P CLASS="Element10">
+GroupPermissions normally contains values that indicate the attributes or permissions assigned to the file or directory, and can contain the following values and meanings:<P CLASS="Element10">
+<UL>
+<LI>— - Permission omitted.<P CLASS="Element10">
+<LI>L - Symbolic Link.<P CLASS="Element10">
+<LI>D - Directory entry.<P CLASS="Element10">
+<LI>R - Read permission granted.<P CLASS="Element10">
+<LI>W - Write prmission granted<P CLASS="Element10">
+<LI>X - Execute permission granted.</UL>
+</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0000">TIdFTPListItem.ItemCount</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007333.html" CLASS="Element59">TIdFTPListItem</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Number of items located in a directory entry.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> ItemCount: Integer;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+ItemCount is an Integer property that represents the number of items that can be found in an entry that represents a directory on the FTP server. ItemCount will contains zero (0) when the entry is a file. ItemCount us updated when Parse is used to load values for the directory list.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0001">TIdFTPListItem.ItemType</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007333.html" CLASS="Element59">TIdFTPListItem</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Represents a set of file system attributes for the collection item.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> ItemType: <A HREF="007297.html" CLASS="Element59">TIdDirItemType</A>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+ItemType is a <A HREF="007298.html" CLASS="Element59">TIdDirItemTypeSet</A> property that represents a set of attributes for the collection item that describe it usage in the directory listing.<P CLASS="Element10">
+ItemType can include one or more of the following values:<P CLASS="Element10">
+<UL>
+<LI>ditDirectory - Entry is a file.<P CLASS="Element10">
+<LI>ditFile - Entry is a directory.<P CLASS="Element10">
+<LI>ditSymbolicLink - Entry is a symbolic link.</UL>
+<P CLASS="Element10">
+The default value for ItemType is the empty set ([]) as assigned in the <A HREF="007333.html#0001" CLASS="Element59">Create</A> constructor.<P CLASS="Element10">
+ItemType is updated when the Parse method for the collection is used to extract property values from the text for the directory listing.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0002">TIdFTPListItem.LinkedItemName</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007333.html" CLASS="Element59">TIdFTPListItem</A>, <A HREF="011093.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+File name that is the endpoint for a Symbolic Link directory entry.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> LinkedItemName: <STRONG>string</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+LinkedItemName is a String property that represents the file name that is the endpoint for a Symbol Link in a directory listing. LinkedItemName is updated when <A HREF="007337.html" CLASS="Element59">TIdFTPListItems</A> calls Parse, when <A HREF="007335.html" CLASS="Element59">IsSymbolicLink</A> returns True for the directory entry.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0000">TIdFTPListItem.ModifiedDate</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007333.html" CLASS="Element59">TIdFTPListItem</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Represents the creation or modification date for a directory listing item.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> ModifiedDate: TDateTime;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+ModifiedDate is a TDateTime property that represents the date and time that file or directory entry in the directory listing was created or modified.<P CLASS="Element10">
+ModifiedDate is determined when <A HREF="007337.html#0006" CLASS="Element59">TIdFTPListItems.Parse</A> is used to extract property values for the directory listing item. ModifiedDate provides a complete date and time value, and may use defaults values not specified in a partial or incomplete result for a given <A HREF="007332.html" CLASS="Element59">TIdFTPListFormat</A>.<P CLASS="Element10">
+When default values are used in ModifiedDate components, they are generally identified by the following values:<P CLASS="Element10">
+<UL>
+<LI>Year - Year value for the current date.<P CLASS="Element10">
+<LI>Hour - 00<P CLASS="Element10">
+<LI>Minutes - 00<P CLASS="Element10">
+<LI>Seconds - 00<P CLASS="Element10">
+<LI>Milliseconds - .999</UL>
+</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0001">TIdFTPListItem.OwnerName</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007333.html" CLASS="Element59">TIdFTPListItem</A>, <A HREF="011094.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Represents the name of the user that owns a file or directory entry.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> OwnerName: <STRONG>string</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+OwnerName is a String property that represents the name of the user that owns the file or directory entry. OwnerName has significance when the FTP server is hosted on the UNIX or Linux platforms, and may contain question marks when the attribute does not apply to the ListFormat for the directory listing.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0002">TIdFTPListItem.OwnerPermissions</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007333.html" CLASS="Element59">TIdFTPListItem</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Represents permissions for the user that owns the file or directory entry.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> OwnerPermissions: <STRONG>string</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+OwnerPermissions is a String property that represents the permissions assigned to the user owner identified in <A HREF="007333.html#0001" CLASS="Element59">OwnerName</A>. OwnerPermissions has significance when the FTP server is hosted on the UNIX or Linux platforms, and may contain question marks when the attribute does not apply to the ListFormat for the directory listing.<P CLASS="Element10">
+OwnerPermissions normally contains values that indicate the attributes or permissions assigned to the file or directory, and can contain the following values and meanings:<P CLASS="Element10">
+<UL>
+<LI>— - Permission omitted.<P CLASS="Element10">
+<LI>L - Symbolic Link.<P CLASS="Element10">
+<LI>D - Directory entry.<P CLASS="Element10">
+<LI>R - Read permission granted.<P CLASS="Element10">
+<LI>W - Write prmission granted<P CLASS="Element10">
+<LI>X - Execute permission granted.</UL>
+</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0003">TIdFTPListItem.Size</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007333.html" CLASS="Element59">TIdFTPListItem</A>, <A HREF="011095.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Indicates the size of a file on the FTP server.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> Size: Int64;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Size is a Int64 property that represents the size in bytes of the file or directory entry in <A HREF="007333.html#0003" CLASS="Element59">FileName</A> on the FTP server. Size will contain the value zero (0) when the entry is for a directory, and the value in <A HREF="007333.html#0000" CLASS="Element59">ItemCount</A> will indicate the number of files or sub directories in the directory entry.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0005">TIdFTPListItem.UserPermissions</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007333.html" CLASS="Element59">TIdFTPListItem</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Represents effective permissions for the user based on user and group permissions.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> UserPermissions: <STRONG>string</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+UserPermissions is a String property that represents the effective user permissions assigned to the user identified in UserName for the FTP connection. UserPermissions will reflect the permission based on the user account and permissions assigned to the group for the user. UserPermissions has significance when the FTP server is hosted on the UNIX or Linux platforms, and may contain question marks when the attribute does not apply to the ListFormat for the directory listing.<P CLASS="Element10">
+UserPermissions normally contains values that indicate the attributes or permissions assigned to the file or directory, and can contain the following values and meanings:<P CLASS="Element10">
+<UL>
+<LI>— - Permission omitted.<P CLASS="Element10">
+<LI>L - Symbolic Link.<P CLASS="Element10">
+<LI>D - Directory entry.<P CLASS="Element10">
+<LI>R - Read permission granted.<P CLASS="Element10">
+<LI>W - Write prmission granted<P CLASS="Element10">
+<LI>X - Execute permission granted.</UL>
+</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0000">TIdFTPListItem.Assign</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007333.html" CLASS="Element59">TIdFTPListItem</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Copies property values from another persistent object instance.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>procedure</STRONG> Assign(Source: TPersistent); <STRONG>override</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+Source: TPersistent</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Object instance with property values to be copied.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Assign is a procedure that copies property values for another persistent object instance to the current object instance. Assign copies the value of propertied including:<P CLASS="Element10">
+<UL>
+<LI><A HREF="007333.html#0002" CLASS="Element59">Data</A><P CLASS="Element10">
+<LI><A HREF="007333.html#0002" CLASS="Element59">OwnerPermissions</A><P CLASS="Element10">
+<LI><A HREF="007333.html#0005" CLASS="Element59">GroupPermissions</A><P CLASS="Element10">
+<LI><A HREF="007333.html#0005" CLASS="Element59">UserPermissions</A><P CLASS="Element10">
+<LI><A HREF="007333.html#0000" CLASS="Element59">ItemCount</A><P CLASS="Element10">
+<LI><A HREF="007333.html#0001" CLASS="Element59">OwnerName</A><P CLASS="Element10">
+<LI><A HREF="007333.html#0004" CLASS="Element59">GroupName</A><P CLASS="Element10">
+<LI><A HREF="007333.html#0003" CLASS="Element59">Size</A><P CLASS="Element10">
+<LI><A HREF="007336.html" CLASS="Element59">Modified</A><P CLASS="Element10">
+<LI>ItemName<P CLASS="Element10">
+<LI><A HREF="007333.html#0002" CLASS="Element59">LinkedItemName</A><P CLASS="Element10">
+<LI><A HREF="007334.html" CLASS="Element59">IsDirectory</A><P CLASS="Element10">
+<LI><A HREF="007335.html" CLASS="Element59">IsSymbolicLink</A></UL>
+</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0001">TIdFTPListItem.Create</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007333.html" CLASS="Element59">TIdFTPListItem</A>, <A HREF="011096.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Constructor for the collection item.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>constructor</STRONG> Create(AOwner: TCollection); <STRONG>override</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+AOwner: TCollection</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Collection that owns the collection item.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Create is the constructor for the collection item, and calls the inherited Create method using the owner collection specified in AOwner. Create sets the default values for properties in the <A HREF="007333.html" CLASS="Element59">TIdFTPListItem</A> instance. Some properties may not be used for some directory list formats, and will be filled with one or more question marks ('?') when the file or directory attribute is not applicable to the list format.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0004">TIdFTPListItem.Text</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007333.html" CLASS="Element59">TIdFTPListItem</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Determines the textual representation of the directory listing item.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>function</STRONG> Text: <STRONG>string</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Return Value</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+String - Text representation of the directory listing item.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Text is a String function that returns a standardized textual representation of values in a directory listing item. Text uses the value in <A HREF="007337.html#0002" CLASS="Element59">TIdFTPListItems.ListFormat</A> to determine the contents of the return value, and returns the following data items for the given value:<P CLASS="Element10">
+<UL>
+<LI>flfNone - Contents of the <A HREF="007333.html#0002" CLASS="Element59">Data</A> property.<P CLASS="Element10">
+<LI>flfNoDetails - Contents of the <A HREF="007333.html#0003" CLASS="Element59">FileName</A> property.<P CLASS="Element10">
+<LI>flfUnknown - No value is returned.<P CLASS="Element10">
+<LI>flfCustom - Value returned from the <A HREF="007337.html#0004" CLASS="Element59">TIdFTPListItems.OnGetCustomListFormat</A> event handlers.<P CLASS="Element10">
+<LI>flfDos - Contents formatted like and MS DOS Directory listing.<P CLASS="Element10">
+<LI>flfUnix, flfVax - Contents formatted in a UNIX-style directory listing.</UL>
+</DIV>
+</DIV>
+<DIV CLASS="Element62">
+<HR>Created with Doc-O-Matic 2 donated to <STRONG><A HREF="http://www.delphi-jedi.org">Project JEDI</A></STRONG>. Commercial license available from the <STRONG><A HREF="http://www.doc-o-matic.com">Doc-O-Matic site</A></STRONG>.</DIV>
+</DIV></BODY></HTML>

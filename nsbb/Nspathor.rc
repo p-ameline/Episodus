@@ -1,0 +1,23 @@
+/****************************************************************************
+nspathor.rc
+produced by Borland Resource Workshop
+*****************************************************************************/
+#include "nssavoir\nspathor.rh"
+
+//// Attention : Cette boite de dialogue ne possède pas le style WS_VISIBLE
+// 				Penser à exécuter ShowWindow()
+//
+
+LEXIQUE DIALOGEX 24, 9, 230, 124
+EXSTYLE WS_EX_DLGMODALFRAME | WS_EX_TOPMOST | WS_EX_TOOLWINDOW
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CLASS "bordlg"
+CAPTION "LEXIQUE NAUTILUS"
+FONT 8, "MS Sans Serif"
+{
+ CONTROL "", IDC_PATHORLISTBOX, "LISTBOX", LBS_NOTIFY | WS_CHILD | WS_VISIBLE | WS_BORDER | WS_VSCROLL | WS_HSCROLL, 2, 2, 226, 102
+ CONTROL "", -1, "BorShade", BSS_GROUP | BSS_CAPTION | BSS_LEFT | WS_CHILD | WS_VISIBLE | WS_GROUP, 2, 104, 226, 15
+ CONTROL "Lexique général", GENERAL, "BorRadio", BS_RADIOBUTTON | WS_CHILD | WS_VISIBLE, 36, 107, 65, 10
+ CONTROL "Lexique médicament", MEDICAMENT, "BorRadio", BS_RADIOBUTTON | WS_CHILD | WS_VISIBLE, 114, 107, 80, 10
+}
+

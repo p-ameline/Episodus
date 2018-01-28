@@ -1,0 +1,140 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+<TITLE>TIdMappedPortUDP</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <META name="GENERATOR" content="Doc-O-Matic">
+    <LINK rel="STYLESHEET" href="default.css" type="text/css">
+
+<SCRIPT LANGUAGE="JavaScript1.2" SRC="scripts.js"></SCRIPT>
+</HEAD>
+<BODY CLASS="Element57">
+<TABLE BORDER="0" BGCOLOR="#AACCFF" WIDTH="100%" CELLSPACING="0" CELLPADDING="0">
+<TR><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element1">
+Indy 9</DIV>
+</TD><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element2">
+<A HREF="content.html" CLASS="Element59">Content</A> | <A HREF="idx.html" CLASS="Element59">Index</A> | <A HREF="symref.html" CLASS="Element59">Reference</A></DIV>
+</TD></TR></TABLE><DIV CLASS="Element58">
+<DIV CLASS="Element5">
+TIdMappedPortUDP</DIV>
+<DIV CLASS="Element7">
+<A HREF="012363.html" CLASS="Element59">Hierarchy</A>, <A HREF="012364.html" CLASS="Element59">Properties</A>, <A HREF="012365.html" CLASS="Element59">Methods</A>, <A HREF="012366.html" CLASS="Element59">Events</A>, <A HREF="012367.html" CLASS="Element59">See Also</A>, <A HREF="002284.html" CLASS="Element59">Unit: IdMappedPortUDP</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Implements a proxy for UDP connections to a remote computer system.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12">TIdMappedPortUDP = <STRONG>class</STRONG>(<A HREF="007877.html" CLASS="Element59">TIdUDPServer</A>)</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Unit</DIV>
+<DIV CLASS="Element69">
+<A HREF="002284.html" CLASS="Element59">IdMappedPortUDP</A></DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+TIdMappedPortUDP is a <A HREF="007877.html" CLASS="Element59">TIdUDPServer</A> descendant that implements a proxy for connections to a remote computer system using the UDP protocol. TIdMappedPortUDP listens for connections on a designated host address and port number, and makes a surrogate connection to another server using a specified port number. This is useful for certain types of proxy programs. TIdMappedPortUDP also implements an event notification mechanism for new connection requests.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0002">TIdMappedPortUDP.MappedHost</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007537.html" CLASS="Element59">TIdMappedPortUDP</A>, <A HREF="012368.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Identifies the host name or IP address for remote system.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> MappedHost: <STRONG>string</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+MappedHost is a String property that identifies the host name or IP address for the connection to a remote system. MappedHost is used in <A HREF="007537.html#0001" CLASS="Element59">DoUDPRead</A> when the surrogate UDP connection is created for the current connection request.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0003">TIdMappedPortUDP.OnRequest</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007537.html" CLASS="Element59">TIdMappedPortUDP</A>, <A HREF="012369.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Event handler for request to <A HREF="000295.html" CLASS="Element59">connect</A> to a remote system.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> OnRequest: TNotifyEvent;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+OnRequest is a TNotifyEvent event handler used to respond to connection requests using a surrogate UDP client connection to a remote system. Applications must assign a procedure to the event handler to allow response to the event notification.<P CLASS="Element10">
+OnRequest is triggered in <A HREF="007537.html#0001" CLASS="Element59">DoUDPRead</A> prior to establishing the surrogate connection to a remote system for the local UDP client.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0000">TIdMappedPortUDP.Create</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007537.html" CLASS="Element59">TIdMappedPortUDP</A>, <A HREF="012370.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Constructor for the object instance.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>constructor</STRONG> Create(AOwner: TComponent); <STRONG>override</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+AOwner: TComponent</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Owner of the object instance.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Create is the Constructor for the object instance, and relies on the inherited Create method. Create also assigns the constant value <A HREF="002431.html" CLASS="Element59">IdPORT_DOMAIN</A> to the DefaultPort property.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0001">TIdMappedPortUDP.DoUDPRead</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007537.html" CLASS="Element59">TIdMappedPortUDP</A>, <A HREF="012371.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Implements transmission of data from a TStream descendant on a surrogate UDP client connection.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>procedure</STRONG> DoUDPRead(AData: TStream; ABinding: <A HREF="007713.html" CLASS="Element59">TIdSocketHandle</A>); <STRONG>override</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+AData: TStream</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Stream containing data to be sent on the connection.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+ABinding: TIdSocketHandle</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Socket binding generating the request.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+DoUDPRead is an overridden procedure in <A HREF="007537.html" CLASS="Element59">TIdMappedPortUDP</A> that extends the inherited method to allow transmission of data read from a TStream descendant on the surrogate UDP client connection.<P CLASS="Element10">
+DoUDPRead calls the inhertied DoUDPRead method, and generates the <A HREF="007537.html#0003" CLASS="Element59">OnRequest</A> event notification for the connection. DoUDPRead creates a private <A HREF="007874.html" CLASS="Element59">TIdUDPClient</A> instance that acts as a surrogate connection to the remote system identified in <A HREF="007537.html#0002" CLASS="Element59">MappedHost</A> and MappedPort. DoUDPRead attempts to read all of the remaining contents in AData, transmit the data, and read any response from the remote system. If a response is received, the value is <A HREF="006944.html" CLASS="Element59">send</A> to peer connection in ABinding.</DIV>
+</DIV>
+<DIV CLASS="Element62">
+<HR>Created with Doc-O-Matic 2 donated to <STRONG><A HREF="http://www.delphi-jedi.org">Project JEDI</A></STRONG>. Commercial license available from the <STRONG><A HREF="http://www.doc-o-matic.com">Doc-O-Matic site</A></STRONG>.</DIV>
+</DIV></BODY></HTML>

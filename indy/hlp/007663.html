@@ -1,0 +1,359 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+<TITLE>TIdRFCReply</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <META name="GENERATOR" content="Doc-O-Matic">
+    <LINK rel="STYLESHEET" href="default.css" type="text/css">
+
+<SCRIPT LANGUAGE="JavaScript1.2" SRC="scripts.js"></SCRIPT>
+</HEAD>
+<BODY CLASS="Element57">
+<TABLE BORDER="0" BGCOLOR="#AACCFF" WIDTH="100%" CELLSPACING="0" CELLPADDING="0">
+<TR><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element1">
+Indy 9</DIV>
+</TD><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element2">
+<A HREF="content.html" CLASS="Element59">Content</A> | <A HREF="idx.html" CLASS="Element59">Index</A> | <A HREF="symref.html" CLASS="Element59">Reference</A></DIV>
+</TD></TR></TABLE><DIV CLASS="Element58">
+<DIV CLASS="Element5">
+TIdRFCReply</DIV>
+<DIV CLASS="Element7">
+<A HREF="013385.html" CLASS="Element59">Hierarchy</A>, <A HREF="013386.html" CLASS="Element59">Properties</A>, <A HREF="013387.html" CLASS="Element59">Methods</A>, <A HREF="013388.html" CLASS="Element59">See Also</A>, <A HREF="002805.html" CLASS="Element59">Unit: IdRFCReply</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Represents values in an RFC-compliant response.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12">TIdRFCReply = <STRONG>class</STRONG>(TCollectionItem)</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Unit</DIV>
+<DIV CLASS="Element69">
+<A HREF="002805.html" CLASS="Element59">IdRFCReply</A></DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+TIdRFCReply is a TPersistent descendant that implements an RFC-compliant response that consists of a response code (in both numeric and tteual form) and one or more lines of <A HREF="007663.html#000A" CLASS="Element59">Text</A> messages. TIdRFCReply is used by Indy servers and command handlers to represent the responses used for a specific protocol.<P CLASS="Element10">
+<A HREF="007663.html#0004" CLASS="Element59">NumericCode</A> is an optional value representing the numeric response for a protocol message, and can be omitted when only the <A HREF="007663.html#000A" CLASS="Element59">Text</A> portion of a response is significant in the protocol. <A HREF="007663.html#000B" CLASS="Element59">TextCode</A> is the literal extracted from the response message orior to conversion to numeric form.<P CLASS="Element10">
+<A HREF="007663.html#000A" CLASS="Element59">Text</A> can contain multiple lines, and is generated using the continuation response mechanism common to many RFC-compliant protocols. For example, a response with the <A HREF="007663.html#0004" CLASS="Element59">NumericCode</A> of 200 and multiple lines in <A HREF="007663.html#000A" CLASS="Element59">Text</A> might be sent like the following:<P CLASS="Element10">
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12">    200-You were connected
+    200-Your session started
+    200 Ok</PRE></DIV>
+</DIV>
+</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0004">TIdRFCReply.NumericCode</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007663.html" CLASS="Element59">TIdRFCReply</A>, <A HREF="013389.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Represents an optional numeric response code.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> NumericCode: Integer;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+NumericCode is an Integer property that represents an optional numeric response in an RFC-compliant reply. Valid values for NumericCode are dependent on the RFC protocol specification in use. Use <A HREF="007663.html#000B" CLASS="Element59">TextCode</A> to set the numeric response value based on a string. Use <A HREF="007663.html#000A" CLASS="Element59">Text</A> to access one or more lines in the RFC reply.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="000A">TIdRFCReply.Text</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007663.html" CLASS="Element59">TIdRFCReply</A>, <A HREF="013390.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Represents textual contents of the RFC reply.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> Text: TStrings;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Text is a TStrings property that represents one or more lines of text in the textual representaion of the RFC reply. When Text contains multiple lines, the RFC reply is written using the continuation response convention in a format like the following:<P CLASS="Element10">
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12">
+    200-Indy Server ready
+    200-Started Sun, 8 Jul 2001 01:02:03 -0500
+    200 OK
+</PRE></DIV>
+</DIV>
+</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="000B">TIdRFCReply.TextCode</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007663.html" CLASS="Element59">TIdRFCReply</A>, <A HREF="013391.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Represents the protocol response code expressed as a String value.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> TextCode: <STRONG>string</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+TextCode is a String property that represents the numeric protocol response code expressed as a String. Setting the value in TextCode will result in an update to the corresponding value in <A HREF="007663.html#0004" CLASS="Element59">NumericCode</A>. TextCode is used mainly in protocols that do use real numreic response codes, like POP3. TextCode is updated when <A HREF="007663.html#0006" CLASS="Element59">ParseResponse</A> is used to handle a protocol response.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0000">TIdRFCReply.Clear</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007663.html" CLASS="Element59">TIdRFCReply</A>, <A HREF="013392.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Resets properties in the reply to their default values.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>procedure</STRONG> Clear;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Clear is a procedure that is used to reset properties in the reply to their default values. Clear sets <A HREF="007663.html#0004" CLASS="Element59">NumericCode</A> to 0 (zero) and <A HREF="007663.html#000B" CLASS="Element59">TextCode</A> to an empty string (''). Clear also removes all lines in <A HREF="007663.html#000A" CLASS="Element59">Text</A> by calling the Clear method for the TStrings property.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0001">TIdRFCReply.Create</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007663.html" CLASS="Element59">TIdRFCReply</A>, <A HREF="013393.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Constructor for the object instance.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>constructor</STRONG> Create(Collection: TCollection); <STRONG>override</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Create is the Constructor for the object instance, and relies on the inherited Create method to initialize properties in the instance. Create also initializes the TStringList used in the <A HREF="007663.html#000A" CLASS="Element59">Text</A> property, and calls <A HREF="007663.html#0000" CLASS="Element59">Clear</A> to insure that properties contain their default values.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0002">TIdRFCReply.Destroy</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007663.html" CLASS="Element59">TIdRFCReply</A>, <A HREF="013394.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Frees the object instance.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>destructor</STRONG> Destroy; <STRONG>override</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Destroy is the destructor for the object instance, and frees any allocated resources in object properties including <A HREF="007663.html#000A" CLASS="Element59">Text</A>. Destroy calls the inherited Destroy method prior to exiting.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0003">TIdRFCReply.GenerateReply</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007663.html" CLASS="Element59">TIdRFCReply</A>, <A HREF="013395.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Constructs the numeric result and message text for a response.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>function</STRONG> GenerateReply: <STRONG>string</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Return Value</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+String - RFC formatted response.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+GenerateReply is a String function used to construct the response for a prtocol message using the values in <A HREF="007663.html#0004" CLASS="Element59">NumericCode</A> and <A HREF="007663.html#000A" CLASS="Element59">Text</A>. <A HREF="007663.html#0004" CLASS="Element59">NumericCode</A> is an optional value in <A HREF="007663.html" CLASS="Element59">TIdRFCReply</A>, and can be omitted when only the <A HREF="007663.html#000A" CLASS="Element59">Text</A> portion of a response is significant in the protocol.<P CLASS="Element10">
+When <A HREF="007663.html#0004" CLASS="Element59">NumericCode</A> is a non-zero value and <A HREF="007663.html#000A" CLASS="Element59">Text</A> contains multiple lines, the response is generated using the continuation response mechanism common to many RFC-compliant protocols. A single line of in <A HREF="007663.html#000A" CLASS="Element59">Text</A> results in a response without the continuation character. For example, a response with the <A HREF="007663.html#0004" CLASS="Element59">NumericCode</A> of 200 and multiple lines in <A HREF="007663.html#000A" CLASS="Element59">Text</A> might be sent like the following:<P CLASS="Element10">
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12">    200-You were connected
+    200-Your session started
+    200 Ok</PRE></DIV>
+</DIV>
+</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0005">TIdRFCReply.ParseLineResponse</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007663.html" CLASS="Element59">TIdRFCReply</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Parses protocol response lines into the RFC reply.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>procedure</STRONG> ParseLineResponse(<STRONG>const</STRONG> ATag: <STRONG>String</STRONG>; <STRONG>const</STRONG> AStrings: TStrings);</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+const ATag: String</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Command Tag for the response.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+const AStrings: TStrings</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Values to be loaded in the the RFC Reply.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+ParseLineResponse is a procedure used to parse multi-line IMAP4 protocol responses stores in AStrings. ParseLineResponse handles both tagged and untagged response lines in AStrings, and updates the value in <A HREF="007663.html#000B" CLASS="Element59">TextCode</A> to reflect the value from the protocol response. If the final line in the AStrings is an untagged response, the value in <A HREF="007663.html#000B" CLASS="Element59">TextCode</A> is set to &quot;OK&quot;. ParseLineResponse also read multi-line tagged responses until the value in ATag in encountered in AStrings.<P CLASS="Element10">
+ParseLineResponse calls <A HREF="007663.html#0000" CLASS="Element59">Clear</A> reset the RFC reply to its default state prior to parsing response lines from AStrings. ParseLineResponse inmsures that line added to <A HREF="007663.html#000A" CLASS="Element59">Text</A> contain only the text portion of the response and not the tag or numeric response value.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0007">TIdRFCReply.ParseResponse</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007663.html" CLASS="Element59">TIdRFCReply</A>, <A HREF="013396.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Extracts values from the RFC-compliant response.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>procedure</STRONG> <A HREF="007663.html#0006" CLASS="Element59">ParseResponse</A>(<STRONG>const</STRONG> AStrings: TStrings); <STRONG>overload</STRONG>;
+<STRONG>procedure</STRONG> <A HREF="007663.html#0006" CLASS="Element59">ParseResponse</A>(<STRONG>const</STRONG> ATag: <STRONG>String</STRONG>; <STRONG>const</STRONG> AStrings: TStrings); <STRONG>overload</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+const AStrings: TStrings</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Line(s) of text in the protocol response.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+const ATag: String</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Command Tag for the response.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+ParseResponse is an overloaded procedure used to extract values from a multiline protocol response in AStrings, and store the corresponding values for <A HREF="007663.html#000B" CLASS="Element59">TextCode</A>, <A HREF="007663.html#0004" CLASS="Element59">NumericCode</A>, and one or more lines in <A HREF="007663.html#000A" CLASS="Element59">Text</A>. ParseResponse is overloaded to handle protocol responses that expected tagged response messages (like IMAP4) tagged and untagged protocol response messages.<P CLASS="Element10">
+ParseResponse calls <A HREF="007663.html#0000" CLASS="Element59">Clear</A> to reset the contents of the RFC reply prior to parsing data in the protocol response. ParseResponse removes the numeric response code or tag from the text prior to adding the value to AStrings.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0006">TIdRFCReply.ParseResponse</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007663.html" CLASS="Element59">TIdRFCReply</A>, <A HREF="013397.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Extracts values from the RFC-compliant response.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>procedure</STRONG> ParseResponse(<STRONG>const</STRONG> AStrings: TStrings); <STRONG>overload</STRONG>;
+<STRONG>procedure</STRONG> ParseResponse(<STRONG>const</STRONG> ATag: <STRONG>String</STRONG>; <STRONG>const</STRONG> AStrings: TStrings); <STRONG>overload</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+const AStrings: TStrings</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Line(s) of text in the protocol response.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+const ATag: String</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Command Tag for the response.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+ParseResponse is an overloaded procedure used to extract values from a multiline protocol response in AStrings, and store the corresponding values for <A HREF="007663.html#000B" CLASS="Element59">TextCode</A>, <A HREF="007663.html#0004" CLASS="Element59">NumericCode</A>, and one or more lines in <A HREF="007663.html#000A" CLASS="Element59">Text</A>. ParseResponse is overloaded to handle protocol responses that expected tagged response messages (like IMAP4) tagged and untagged protocol response messages.<P CLASS="Element10">
+ParseResponse calls <A HREF="007663.html#0000" CLASS="Element59">Clear</A> to reset the contents of the RFC reply prior to parsing data in the protocol response. ParseResponse removes the numeric response code or tag from the text prior to adding the value to AStrings.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0008">TIdRFCReply.ReplyExists</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007663.html" CLASS="Element59">TIdRFCReply</A>, <A HREF="013398.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Indicates if the RFC reply is not blank.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>function</STRONG> ReplyExists: Boolean;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Return Value</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Boolean - True when the reply is not empty.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+ReplyExists is a Boolean function that indicates if the RFC reply contains values other than the default empty values. ReplyExists returns True when <A HREF="007663.html#0004" CLASS="Element59">NumericCode</A> contains a non-zero value, or when the number of lines in <A HREF="007663.html#000A" CLASS="Element59">Text</A> is non-zero.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0009">TIdRFCReply.SetReply</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007663.html" CLASS="Element59">TIdRFCReply</A>, <A HREF="013399.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Updates the contents of the RFC reply.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>procedure</STRONG> SetReply(<STRONG>const</STRONG> ANumericCode: Integer; <STRONG>const</STRONG> AText: <STRONG>string</STRONG>);</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+const ANumericCode: Integer</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Numeric response value for the reply.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+const AText: string</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Textual content for the reply.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+SetReply is a procedure used to update the contents of the RFC reply using the arguments in ANumericCode and AText. Use <A HREF="007663.html#0000" CLASS="Element59">Clear</A> to reset the RFC reply to its default empty values.</DIV>
+</DIV>
+<DIV CLASS="Element62">
+<HR>Created with Doc-O-Matic 2 donated to <STRONG><A HREF="http://www.delphi-jedi.org">Project JEDI</A></STRONG>. Commercial license available from the <STRONG><A HREF="http://www.doc-o-matic.com">Doc-O-Matic site</A></STRONG>.</DIV>
+</DIV></BODY></HTML>

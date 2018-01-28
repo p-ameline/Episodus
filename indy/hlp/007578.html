@@ -1,0 +1,303 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+<TITLE>TIdMimeTable</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <META name="GENERATOR" content="Doc-O-Matic">
+    <LINK rel="STYLESHEET" href="default.css" type="text/css">
+
+<SCRIPT LANGUAGE="JavaScript1.2" SRC="scripts.js"></SCRIPT>
+</HEAD>
+<BODY CLASS="Element57">
+<TABLE BORDER="0" BGCOLOR="#AACCFF" WIDTH="100%" CELLSPACING="0" CELLPADDING="0">
+<TR><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element1">
+Indy 9</DIV>
+</TD><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element2">
+<A HREF="content.html" CLASS="Element59">Content</A> | <A HREF="idx.html" CLASS="Element59">Index</A> | <A HREF="symref.html" CLASS="Element59">Reference</A></DIV>
+</TD></TR></TABLE><DIV CLASS="Element58">
+<DIV CLASS="Element5">
+TIdMimeTable</DIV>
+<DIV CLASS="Element7">
+<A HREF="012807.html" CLASS="Element59">Hierarchy</A>, <A HREF="012808.html" CLASS="Element59">Properties</A>, <A HREF="012809.html" CLASS="Element59">Methods</A>, <A HREF="012810.html" CLASS="Element59">See Also</A>, <A HREF="002193.html" CLASS="Element59">Unit: IdGlobal</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Provides access to MIME types for the local computer.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12">TIdMimeTable = <STRONG>class</STRONG>(TObject)</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Unit</DIV>
+<DIV CLASS="Element69">
+<A HREF="002193.html" CLASS="Element59">IdGlobal</A></DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+TIdMimeTable is a class used in Indy to provide access to the known MIME types and file name extensions from settings on the local computer system. TIdMimeTable provides a degree of isolation from the issues related to platform-specific MIME type storage.<P CLASS="Element10">
+On the Windows platform, TIdMimeTable relies on an initial set of common MIME types supplemented by values harvested from the Windows HKEY_CLASSES_ROOT Registry key. On the Linux platform, there is no universal counterpart to the Windows Registry for MIME types. A text-based configuration file is normally present in most Linux distributions. But it's name and location in the file system hierarchy is different for each family of distribution. Each Desktop/Window manager, and many applications, maintain their own MIME type configuration files. Their names and locations are almost always radically different, too.<P CLASS="Element10">
+To accommodate developers on both platforms, TIdMimeTable provides methods that can be used to control the location, format, and content of values used for MIME types. The <A HREF="007578.html#0007" CLASS="Element59">OnBuildCache</A> event handler can be used to override loading of the cached MIME types registered on the local computer. In addition, <A HREF="007578.html#0006" CLASS="Element59">LoadFromStrings</A> and <A HREF="007578.html#0008" CLASS="Element59">SaveToStrings</A> can be used to override the values loaded and stored for TIdMimeTable.<P CLASS="Element10">
+<A HREF="007578.html#0005" CLASS="Element59">GetFileMIMEType</A> can be used to retrieve the MIME type for a specified file name based on the file extension. <A HREF="007578.html#0004" CLASS="Element59">GetDefaultFileExt</A> can be used to retrieve the file extension associated with the specified MIME type. Use <A HREF="007578.html#0000" CLASS="Element59">AddMimeType</A> to add a file extension and MIME type to TIdMimeTable.<P CLASS="Element10">
+TIdMimeTable is designed primarily for use by client applications. But, TIdMimeTable is also used in <A HREF="007271.html" CLASS="Element59">TIdCustomHTTPServer</A> to determine the file names and extensions that can be provided for an HTTP request with &quot;Accept&quot; header(s) for specific MIME types.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0007">TIdMimeTable.OnBuildCache</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007578.html" CLASS="Element59">TIdMimeTable</A>, <A HREF="012811.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Event handler used to load MIME type mappings from a non-standard source.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> OnBuildCache: TNotifyEvent;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+OnBuildCache is a TNotifyEvent property that represents the event handler signalled when the MIME type mapping table needs to be loaded from an external or non-standard source.<P CLASS="Element10">
+When a procedure has been assigned to the OnBuildCache event handler, it is entirely responsible for loading the file extensions and MIME type/subtypes used in the class instance. When OnBuildCache is unassigned, the default behavior is to loaded the MIME type and file extension mappings specific to the development platform.<P CLASS="Element10">
+OnBuildCache is triggered in the <A HREF="007578.html#0001" CLASS="Element59">BuildCache</A> method.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0000">TIdMimeTable.AddMimeType</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007578.html" CLASS="Element59">TIdMimeTable</A>, <A HREF="012812.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Adds a file extension to MIME type and subtype mapping.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>procedure</STRONG> AddMimeType(<STRONG>const</STRONG> Ext: <STRONG>string</STRONG>; <STRONG>const</STRONG> MIMEType: <STRONG>string</STRONG>);</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+const Ext: string</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+File extensions for the MIME type and subtype.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+const MIMEType: string</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+IANA MIME type and subtype for the mapping.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+AddMimeType is a procedure that allows adding the new file name extension specified in Ext and the MIME type specified in MIMEType to the mappings in the <A HREF="007578.html" CLASS="Element59">TIdMimeTable</A> instance. AddMimeType will raise an <A HREF="000375.html" CLASS="Element59">EIdException</A> exception if the file extension in Ext already exists in the MIME type mapping.<P CLASS="Element10">
+Ext is the case-insensitive file extension including the '.' character. If the period character is not included in Ext, it will be inserted prior to inclusion in the list of file extensions. If Ext is an empty string (''), an <A HREF="000375.html" CLASS="Element59">EIdException</A> will be raised with the message <A HREF="006554.html" CLASS="Element59">RSMIMEExtensionEmpty</A>.<P CLASS="Element10">
+MIMEType is the case-insensitive IANA registered MIME type and subtype to be associated with the file extension in Ext. If MIMEType contains an empty string (''), and <A HREF="000375.html" CLASS="Element59">EIdException</A> will be raised with the message <A HREF="006556.html" CLASS="Element59">RSMIMEMIMETypeEmpty</A>.<P CLASS="Element10">
+Use <A HREF="007578.html#0005" CLASS="Element59">GetFileMIMEType</A> to get a MIME type for a specified file name and extension. Use <A HREF="007578.html#0004" CLASS="Element59">GetDefaultFileExt</A> to find the initial file extension found for a given MIME type and subtype. The MIME type mapping table can be loaded with custom values using <A HREF="007578.html#0006" CLASS="Element59">LoadFromStrings</A>.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0001">TIdMimeTable.BuildCache</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007578.html" CLASS="Element59">TIdMimeTable</A>, <A HREF="012813.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Populates MIME types and file extensions.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>procedure</STRONG> BuildCache; <STRONG>virtual</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+BuildCache is a procedure used to control populating the MIME type/subtype and file name extension mappings used in the <A HREF="007578.html" CLASS="Element59">TIdMimeTable</A> instance. BuildCache allows the MIME type mapping to be loaded using the default values for the development platform, or populated in the <A HREF="007578.html#0007" CLASS="Element59">OnBuildCache</A> event handler. When a procedure has been assigned to the <A HREF="007578.html#0007" CLASS="Element59">OnBuildCache</A> event handler, it is entirely responsible for loading the file extensions and MIME type/subtypes used in the class instance.<P CLASS="Element10">
+When <A HREF="007578.html#0007" CLASS="Element59">OnBuildCache</A> is unassigned, the default behavior is to loaded the MIME type and file extension mappings specific to the development platform. This includes loading a common set of MIME type mapping values used for both Windows and Linux development platforms.<P CLASS="Element10">
+On the Windows platform, <A HREF="007578.html" CLASS="Element59">TIdMimeTable</A> supplements these values by harvesting content types from the Windows HKEY_CLASSES_ROOT Registry key.<P CLASS="Element10">
+On the Linux platform, there is no universal counterpart to the Windows Registry for MIME types. A text-based configuration file is normally present in most Linux distributions. But it's name and location in the file system hierarchy is different for each family of distributions. Each Desktop/Window manager, and many applications, maintain their own MIME type configuration files. Their names and locations are almost always radically different, too. On the Linux platform, no additional MIME types are loaded other than the known values used for both development platforms.<P CLASS="Element10">
+No action is performed, however, when existing values are found in the MIME type mappings.<P CLASS="Element10">
+Use <A HREF="007578.html#0006" CLASS="Element59">LoadFromStrings</A> to load custom MIME type mappings from a TStringList.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0002">TIdMimeTable.Create</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007578.html" CLASS="Element59">TIdMimeTable</A>, <A HREF="012814.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Constructor for the object instance.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>constructor</STRONG> Create(Autofill: boolean = true); <STRONG>virtual</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+Autofill: boolean = true</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Automatically load MIME types and file extensions.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Create is the constructor for the object instance, and initializes the TStringList objects used to store MIME types and File extensions.<P CLASS="Element10">
+When Autofill is True, Create calls the <A HREF="007578.html#0001" CLASS="Element59">BuildCache</A> method to populate the MIME type entries from system settings on the local computer, or using the <A HREF="007578.html#0007" CLASS="Element59">OnBuildCache</A> event handler. When Autofill is False, use <A HREF="007578.html#0006" CLASS="Element59">LoadFromStrings</A> to populate the MIME type mapping table.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0003">TIdMimeTable.Destroy</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007578.html" CLASS="Element59">TIdMimeTable</A>, <A HREF="012815.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Destructor for the object instance.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>destructor</STRONG> Destroy; <STRONG>override</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Destroy is the destructor for the object instance, and is responsible for freeing and releasing the TStringList instances used to store File Extensions and MIME types used by the class. Destroy calls the inherited Destroy method prior to exiting.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0004">TIdMimeTable.GetDefaultFileExt</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007578.html" CLASS="Element59">TIdMimeTable</A>, <A HREF="012816.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Returns the file extension for the specified MIME type.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>function</STRONG> GetDefaultFileExt(<STRONG>Const</STRONG> MIMEType: <STRONG>string</STRONG>): <STRONG>string</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+Const MIMEType: string</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+The MIME type and subtype to examine.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Return Value</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+String - The file extension for the MIME type, or ''.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+GetDefaultFileExt is a String function used to retrieve the file extension for the case-insensitive registered MIME type specified in MIMEType. GetDefaultFileExt will call <A HREF="007578.html#0001" CLASS="Element59">BuildCache</A> if the value in MIMEType is not already present in the MIME type mapping table.<P CLASS="Element10">
+The return value for GetDefaultFileExt will contain the file extension, including the '.' character, associate dwith the MIME type in MIMEType. The return value for the method can be an empty string ('') when the value in MIMEType cannot be found in the MIME type mapping after checking the cached values.<P CLASS="Element10">
+Use <A HREF="007578.html#0000" CLASS="Element59">AddMimeType</A> to add a new file extension to MIME type mapping to the table.<P CLASS="Element10">
+Use <A HREF="007578.html#0005" CLASS="Element59">GetFileMIMEType</A> to retrieve the MIME type for a specified file name and file extension.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0005">TIdMimeTable.GetFileMIMEType</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007578.html" CLASS="Element59">TIdMimeTable</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Returns the MIME type for a file name.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>function</STRONG> GetFileMIMEType(<STRONG>const</STRONG> AFileName: <STRONG>string</STRONG>): <STRONG>string</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+fileName</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+The file name to be examined.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Return Value</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+String - The registered MIME type for the file name.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+GetFileMIMEType is a String function used to retrieve the registered MIME type for the file name specified in Filename. GetFileMIMEType examines the currently cached MIME types, but calls <A HREF="007578.html#0001" CLASS="Element59">BuildCache</A> is no registered MIME type exists in the cache for the specified file. If no MIME type is found after reloading the cache, the value &quot;application/octet-stream&quot; is used as the MIME type for the file.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0006">TIdMimeTable.LoadFromStrings</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007578.html" CLASS="Element59">TIdMimeTable</A>, <A HREF="012817.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Loads the MIME Type mapping table from the specified TStrings values.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>procedure</STRONG> LoadFromStrings(AStrings: TStrings; <STRONG>const</STRONG> MimeSeparator: Char = '=');</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+AStrings: TStrings</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Values to be loaded into the MIME type mapping table.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+const MimeSeparator: Char = '='</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Character used to delimit file extention and MIME type values in AStrings.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+LoadFromStrings is a procedure used to parse file extension and MIME type and subtype values in AStrings in the MIME mapping table. MimeSeparator is the character used to delimit file extention and MIME type and subtype values in AStrings.<P CLASS="Element10">
+LoadFromStrings clears any existing file extension and MIME type mappings prior to loading each line in AStrings. LoadFromStrings converts file extensions to their lowercase representation prior to addition to the file extenstion list. LoadFromStrings calls <A HREF="007578.html#0000" CLASS="Element59">AddMimeType</A> if the file extension does not already exist in the MIME type mapping table.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0008">TIdMimeTable.SaveToStrings</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007578.html" CLASS="Element59">TIdMimeTable</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Stores MIME Type mapping values to a TStrings variable.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>procedure</STRONG> SaveToStrings(AStrings: TStrings; <STRONG>const</STRONG> MimeSeparator: Char = '=');</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+AStrings: TStrings</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Destination for MIME Type mapping values.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+const MimeSeparator: Char = '='</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Delimiter for extension and MIME type values.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+SaveToStrings is a procedure used to store values in the MIME type mapping to table to the TStrings specified in AStrings. MimeSeparator is the charcter to use as a delimiter between the file extension and the MIME Type and Subtype in lines added to AStrings. SaveToStrings clears any existing values in AStrings prior to storing the MIME Type mappings, with one file extension, delimiter character, and MIME Type value per line.</DIV>
+</DIV>
+<DIV CLASS="Element62">
+<HR>Created with Doc-O-Matic 2 donated to <STRONG><A HREF="http://www.delphi-jedi.org">Project JEDI</A></STRONG>. Commercial license available from the <STRONG><A HREF="http://www.doc-o-matic.com">Doc-O-Matic site</A></STRONG>.</DIV>
+</DIV></BODY></HTML>

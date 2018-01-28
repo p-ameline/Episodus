@@ -1,0 +1,83 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+<TITLE>EncodeAddressItem</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <META name="GENERATOR" content="Doc-O-Matic">
+    <LINK rel="STYLESHEET" href="default.css" type="text/css">
+
+<SCRIPT LANGUAGE="JavaScript1.2" SRC="scripts.js"></SCRIPT>
+</HEAD>
+<BODY CLASS="Element57">
+<TABLE BORDER="0" BGCOLOR="#AACCFF" WIDTH="100%" CELLSPACING="0" CELLPADDING="0">
+<TR><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element1">
+Indy 9</DIV>
+</TD><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element2">
+<A HREF="content.html" CLASS="Element59">Content</A> | <A HREF="idx.html" CLASS="Element59">Index</A> | <A HREF="symref.html" CLASS="Element59">Reference</A></DIV>
+</TD></TR></TABLE><DIV CLASS="Element58">
+<DIV CLASS="Element5">
+EncodeAddressItem</DIV>
+<DIV CLASS="Element7">
+<A HREF="015298.html" CLASS="Element59">See Also</A>, <A HREF="002135.html" CLASS="Element59">Unit: IdCoderHeader</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Converts an email address to a string using contenta and transfer encodings and character set.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>function</STRONG> EncodeAddressItem(EmailAddr: TIdEmailAddressItem; <STRONG>const</STRONG> HeaderEncoding: Char; TransferHeader: <A HREF="008099.html" CLASS="Element59">TTransfer</A>; MimeCharSet: <STRONG>string</STRONG>): <STRONG>string</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Unit</DIV>
+<DIV CLASS="Element69">
+<A HREF="002135.html" CLASS="Element59">IdCoderHeader</A></DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+EmailAddr: TIdEmailAddressItem</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+EMail address to be encoded.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+const HeaderEncoding: Char</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Header encoding for the encoded EMail address.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+TransferHeader: TTransfer</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Transfer encoding for the encoded EMail address.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+MimeCharSet: string</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+MIME character set to use for the encoded EMail address.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Return Value</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+String - The encoded EMail address in Name and Address format.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+EncodeAddressItem is a String function that converts the EMail address in EMailAddr to an encoded string representation using the encodings and character set specified in the parameters to the function. Encoding is performed using the <A HREF="000519.html" CLASS="Element59">EncodeHeader</A> function when the email address contains characters not representable in the US-ASCII character set.<P CLASS="Element10">
+The return value for EncodeAddressItem is a string that represents the EMail address and optional name from EMailAddr. When EmailAddr contains the optional name, the return string contains data in the following format:<P CLASS="Element10">
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12">      John Doe </PRE></DIV>
+</DIV>
+<P CLASS="Element10">
+The special characters '' and '&quot;' in the email address will be quoted using the '' character.</DIV>
+</DIV>
+<DIV CLASS="Element62">
+<HR>Created with Doc-O-Matic 2 donated to <STRONG><A HREF="http://www.delphi-jedi.org">Project JEDI</A></STRONG>. Commercial license available from the <STRONG><A HREF="http://www.doc-o-matic.com">Doc-O-Matic site</A></STRONG>.</DIV>
+</DIV></BODY></HTML>

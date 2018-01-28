@@ -1,0 +1,167 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+<TITLE>TIdUDPListenerThread</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <META name="GENERATOR" content="Doc-O-Matic">
+    <LINK rel="STYLESHEET" href="default.css" type="text/css">
+
+<SCRIPT LANGUAGE="JavaScript1.2" SRC="scripts.js"></SCRIPT>
+</HEAD>
+<BODY CLASS="Element57">
+<TABLE BORDER="0" BGCOLOR="#AACCFF" WIDTH="100%" CELLSPACING="0" CELLPADDING="0">
+<TR><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element1">
+Indy 9</DIV>
+</TD><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element2">
+<A HREF="content.html" CLASS="Element59">Content</A> | <A HREF="idx.html" CLASS="Element59">Index</A> | <A HREF="symref.html" CLASS="Element59">Reference</A></DIV>
+</TD></TR></TABLE><DIV CLASS="Element58">
+<DIV CLASS="Element5">
+TIdUDPListenerThread</DIV>
+<DIV CLASS="Element7">
+<A HREF="014669.html" CLASS="Element59">Hierarchy</A>, <A HREF="014670.html" CLASS="Element59">Properties</A>, <A HREF="014671.html" CLASS="Element59">Methods</A>, <A HREF="014672.html" CLASS="Element59">Events</A>, <A HREF="014673.html" CLASS="Element59">See Also</A>, <A HREF="002946.html" CLASS="Element59">Unit: IdUDPServer</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Specifies the listener thread for <A HREF="007877.html" CLASS="Element59">TIdUDPServer</A>.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12">TIdUDPListenerThread = <STRONG>class</STRONG>(<A HREF="007846.html" CLASS="Element59">TIdThread</A>)</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Unit</DIV>
+<DIV CLASS="Element69">
+<A HREF="002946.html" CLASS="Element59">IdUDPServer</A></DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+TIdUDPListenerThread is a <A HREF="007846.html" CLASS="Element59">TIdThread</A> descendant that is the listening thread for <A HREF="007877.html" CLASS="Element59">TIdUDPServer</A>. TIdUDPListenerThread is used to detect arrival of data on <A HREF="007071.html" CLASS="Element59">socket</A> bindings allocated by <A HREF="007877.html" CLASS="Element59">TIdUDPServer</A>. When data is detected, the server is notified that data is available in Buffer using <A HREF="007876.html#0004" CLASS="Element59">UDPRead</A>.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0000">TIdUDPListenerThread.AcceptWait</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007876.html" CLASS="Element59">TIdUDPListenerThread</A>, <A HREF="014674.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Time-out period for accepting new connections.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> AcceptWait: integer;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+AcceptWait is an <STRONG>Integer</STRONG> property that defines the time-out for accepting a new connection on the <A HREF="007713.html" CLASS="Element59">TIdSocketHandle</A> in Server.Bindings. AcceptWait is expressed in milliseconds. The default value for AcceptWait is <STRONG>1000</STRONG> (1 second).<P CLASS="Element10">
+AcceptWait is used in the <A HREF="007876.html#0003" CLASS="Element59">Run</A> method to determine if the <A HREF="007713.html" CLASS="Element59">TIdSocketHandle</A> in Server.Bindings is readable.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0001">TIdUDPListenerThread.Create</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007876.html" CLASS="Element59">TIdUDPListenerThread</A>, <A HREF="014675.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Create is the constructor for the <A HREF="007876.html" CLASS="Element59">TIdUDPListenerThread</A> object instance.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>constructor</STRONG> Create(<STRONG>const</STRONG> ABufferSize: integer; Owner: <A HREF="007877.html" CLASS="Element59">TIdUDPServer</A>); <STRONG>reintroduce</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+const ABufferSize: integer</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Size of the buffer for the listener thread.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+Owner: TIdUDPServer</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Server that owns the listening thread.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Create uses the inherited Create constructor to instantiate a suspended <A HREF="007876.html" CLASS="Element59">TIdUDPListenerThread</A>. The listener thread Create constructor is called when the <A HREF="007877.html" CLASS="Element59">TIdUDPServer</A> sets Active to <STRONG>True</STRONG>.<P CLASS="Element10">
+<I>ABufferSize</I> is normally set to the value in TIdUDPServer.BufferSize when the listener thread is created.<P CLASS="Element10">
+Create also initializes the following:<P CLASS="Element10">
+<UL>
+<LI>Sets <A HREF="007876.html#0000" CLASS="Element59">AcceptWait</A> to <STRONG>1000</STRONG> (ms) (<STRONG>1</STRONG> second)<P CLASS="Element10">
+<LI>Creates the TMemoryStream Buffer<P CLASS="Element10">
+<LI>Sets Buffer.Size to <I>ABufferSize</I><P CLASS="Element10">
+<LI>Sets Server to the owner of the listening thread.</UL>
+</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0002">TIdUDPListenerThread.Destroy</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007876.html" CLASS="Element59">TIdUDPListenerThread</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Destructor for the object instance.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>destructor</STRONG> Destroy; <STRONG>override</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Destroy is the destructor for <A HREF="007876.html" CLASS="Element59">TIdUDPListenerThread</A>, and is responsible for disposing of the object instance. Destroy performs the following actions:<P CLASS="Element10">
+<UL>
+<LI>Free and release Buffer.<P CLASS="Element10">
+<LI>Calls the inherited Destroy method.</UL>
+<P CLASS="Element10">
+Destroy should not be directly called in an application. Use Free instead. Free checks to ensure that the object reference is not <STRONG>Nil</STRONG> before calling Destroy.<P CLASS="Element10">
+<STRONG>Note</STRONG>: If an exception is emitted from the constructor, the destructor is called to destroy the partially constructed object instance. Destructors should check that allocated resources, such as handles, were actually allocated before trying to release them.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0003">TIdUDPListenerThread.Run</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007876.html" CLASS="Element59">TIdUDPListenerThread</A>, <A HREF="014676.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Performs the main thread of execution for the listener thread.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>procedure</STRONG> Run; <STRONG>override</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+The Run method provides the main thread of execution for the <A HREF="007876.html" CLASS="Element59">TIdUDPListenerThread</A>. Run insures that all <A HREF="007714.html" CLASS="Element59">TIdSocketHandles</A> in Bindings are selected.<P CLASS="Element10">
+While the server is not Stopped, Run will check each <A HREF="007071.html" CLASS="Element59">socket</A> handle for incoming data and receive the new data into Buffer. Buffer is repositioned to the beginning of the buffer after reading incoming data. Run will raise an <A HREF="000505.html" CLASS="Element59">EIdUDPReceiveErrorZeroBytes</A> if there is an error reading from one of the <A HREF="007071.html" CLASS="Element59">socket</A> handles.<P CLASS="Element10">
+Run uses the ThreadedEvent property of the <A HREF="007877.html" CLASS="Element59">TIdUDPServer</A> to determine how read event notifications to the server are performed. When the server is using threaded events, Run calls <A HREF="007876.html#0004" CLASS="Element59">UDPRead</A>. Otherwise the <A HREF="007876.html#0004" CLASS="Element59">UDPRead</A> method is a synchronised method call.<P CLASS="Element10">
+Run is invoked by making the <A HREF="007877.html" CLASS="Element59">TIdUDPServer</A> active when the listener thread is started.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0004">TIdUDPListenerThread.UDPRead</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007876.html" CLASS="Element59">TIdUDPListenerThread</A>, <A HREF="014677.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Receives UDP data packets.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>procedure</STRONG> UDPRead;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+UDPRead is a procedure that detects receipt of a UDP datagram in Buffer, and performs Server.DoUDPRead to make the data available.<P CLASS="Element10">
+UDPRead is a synchronised method in <A HREF="007876.html" CLASS="Element59">TIdUDPListenerThread</A>, and uses the Server context to notify receipt of the data from the peer IP address and port number.</DIV>
+</DIV>
+<DIV CLASS="Element62">
+<HR>Created with Doc-O-Matic 2 donated to <STRONG><A HREF="http://www.delphi-jedi.org">Project JEDI</A></STRONG>. Commercial license available from the <STRONG><A HREF="http://www.doc-o-matic.com">Doc-O-Matic site</A></STRONG>.</DIV>
+</DIV></BODY></HTML>

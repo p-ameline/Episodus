@@ -1,0 +1,494 @@
+// -----------------------------------------------------------------------------
+// Interface.h
+// -----------------------------------------------------------------------------
+// -----------------------------------------------------------------------------
+// $Revision: 1.11 $
+// $Author: pameline $
+// $Date: 2013/07/21 19:56:43 $
+// -----------------------------------------------------------------------------
+// DG  - october 2004
+// -----------------------------------------------------------------------------
+
+// -----------------------------------------------------------------------------
+// Copyright Nautilus, 2004
+// http://www.nautilus-info.com
+// -----------------------------------------------------------------------------
+// Ce logiciel est un programme informatique servant à gérer et traiter les
+// informations de santé d'une personne.
+//
+// Ce logiciel est régi par la licence CeCILL soumise au droit français et
+// respectant les principes de diffusion des logiciels libres. Vous pouvez
+// utiliser, modifier et/ou redistribuer ce programme sous les conditions de la
+// licence CeCILL telle que diffusée par le CEA, le CNRS et l'INRIA sur le site
+// "http://www.cecill.info".
+//
+// En contrepartie de l'accessibilité au code source et des droits de copie, de
+// modification et de redistribution accordés par cette licence, il n'est offert
+// aux utilisateurs qu'une garantie limitée. Pour les mêmes raisons, seule une
+// responsabilité restreinte pèse sur l'auteur du programme, le titulaire des
+// droits patrimoniaux et les concédants successifs.
+//
+// A cet égard  l'attention de l'utilisateur est attirée sur les risques
+// associés au chargement, à l'utilisation, à la modification et/ou au
+// développement et à la reproduction du logiciel par l'utilisateur étant donné
+// sa spécificité de logiciel libre, qui peut le rendre complexe à manipuler et
+// qui le réserve donc à des développeurs et des professionnels avertis
+// possédant des connaissances informatiques approfondies. Les utilisateurs sont
+// donc invités à charger et tester l'adéquation du logiciel à leurs besoins
+// dans des conditions permettant d'assurer la sécurité de leurs systèmes et ou
+// de leurs données et, plus généralement, à l'utiliser et l'exploiter dans les
+// mêmes conditions de sécurité.
+//
+// Le fait que vous puissiez accéder à cet en-tête signifie que vous avez pris
+// connaissance de la licence CeCILL, et que vous en avez accepté les termes.
+// -----------------------------------------------------------------------------
+// This software is a computer program whose purpose is to manage and process
+// a person's health data.
+//
+// This software is governed by the CeCILL  license under French law and abiding
+// by the rules of distribution of free software. You can use, modify and/ or
+// redistribute the software under the terms of the CeCILL license as circulated
+// by CEA, CNRS and INRIA at the following URL "http://www.cecill.info".
+//
+// As a counterpart to the access to the source code and  rights to copy, modify
+// and redistribute granted by the license, users are provided only with a
+// limited warranty and the software's author, the holder of the economic
+// rights, and the successive licensors have only limited liability.
+//
+// In this respect, the user's attention is drawn to the risks associated with
+// loading, using, modifying and/or developing or reproducing the software by
+// the user in light of its specific status of free software, that may mean that
+// it is complicated to manipulate, and that also therefore means that it is
+// reserved for developers and experienced professionals having in-depth
+// computer knowledge. Users are therefore encouraged to load and test the
+// software's suitability as regards their requirements in conditions enabling
+// the security of their systems and/or data to be ensured and, more generally,
+// to use and operate it in the same conditions as regards security.
+//
+// The fact that you are presently reading this means that you have had
+// knowledge of the CeCILL license and that you accept its terms.
+// -----------------------------------------------------------------------------
+
+#ifndef __INTERFACEBB_H__
+# define __INTERFACEBB_H__
+
+class NautilusEvent ;
+class NSSearchStruct ;
+class IsAnswerPresentOnBlackBoard ;
+class AskDeterministicQuestion ;
+class BB1Order ;
+class insertObjectOnBlacBoard ;
+class BB1Object ;
+class BBKEVentView ;
+class TypedVal ;
+class PathsList ;
+class BB1BBInterface ;
+class NSPatPathoArray ;
+class OB1Strategy ;
+class OB1Node ;
+class OB1Token ;
+
+class NSContexte ;
+class BB1BB ;
+
+# ifdef  __OB1__
+#  include "partage\NTArray.h"
+class NSToDoTask ;
+typedef NTArray<NSToDoTask> NSTaskArray ;
+# else
+class NSTaskArray ;
+# endif
+
+# include <owl\mdichild.h>    // Fenetre MDI client
+# include <owl\listwind.h>    // List
+# include <owl\listbox.h>
+# include <owl\dialog.h>
+# include <owl\window.h>
+# include <owl\tabctrl.h>
+# include <owl\commctrl.h>
+# include <owl\listview.h>
+# include <owl\treewind.h>
+
+# ifndef _DANSBBKDLL
+#  define _BBKEXPORT __import
+# else
+#  define _BBKEXPORT __export
+# endif
+
+# include "ns_ob1\NautilusType.h"
+# include "ns_ob1\BB1Task.h"
+
+template <class T>
+inline void _CALLCNVN (T::*v_U_U_POINT_Sig(void _CALLCNVN (T::*pmf)(uint, uint, NS_CLASSLIB::TPoint&)))(uint, uint, NS_CLASSLIB::TPoint&)
+{
+  return pmf;
+}
+
+#define EV_COMMAND_ON_POINT(id, notifyCode, method)\
+  {notifyCode, id, (TAnyDispatcher)::v_U_POINT_Dispatch,\
+   (TMyPMF)v_U_POINT_Sig(&TMyClass::method)}
+
+//! Windows which is an interface beetween the blackboard and Nautilus
+//! Type des objets à traiter
+enum NautilusObjectType
+{
+  Drug = 0,           //!< Prescription médicamenteuse \brief Prescription médicamenteuse
+  Preocupation = 1,   //!< Nouvelle prescription inscrite sur la Ligne de Vie \brief Nouvelle prescription inscrite sur la Ligne de Vie
+  Risk = 2,   //!< Nouvelle prescription inscrite sur la Ligne de Vie \brief Nouvelle prescription inscrite sur la Ligne de Vie
+  Goal = 3,          //!< Nouvel objectif de santé \brief Nouvel objectif de santé
+  Undefined = 4       //!< Information indéfinie : Considérée comme identifiée par son path \brief Information indéfinie : Considérée comme identifiée par son path
+} ;
+
+//! Fonction appelée par default par le controleur quand il ne sait pas répondre à une question
+bool   LeafDefaultComputation(TypedVal& daf, TypedVal* pSearchParams, HWND interfaceHandle, BB1BBInterface * temp) ;
+string ParseNautilusPath(string& naut_path) ;
+
+void   getAlternativePath(string sPath, PathsList* pPathList) ;
+void   checkAlternate(string sPath, PathsList* pPathList, string sModel, string sAlternate) ;
+bool   isInPath(string sPath, PathsList* pPathList) ;
+
+class OB1InterfaceContainer ;
+class NSKSListWindow ;
+class NSQuestionListWindow ;
+class NSAnswerListWindow ;
+class NSEventListWindow ;
+
+//! \brief Interface between Nautilus and OB1-BBK
+
+// -----------------------------------------------------------------------------
+// OB1 Interface <BR>
+// Interface de communication avec OB1
+// Le but étant de gérer le fonctionnement pour le blackboard
+// -----------------------------------------------------------------------------
+class _BBKEXPORT BB1BBInterface : public  TDialog // TMDIChild
+{
+ protected:
+
+  CRITICAL_SECTION       _cs ;
+  BB1BB*                 _bb ;              //!< Pointer to the blackboard \brief Pointer to the blackboard
+  NSContexte*            _pContexte ;       //!< Pointer to the supervisor \brief Pointer to the supervisor
+  NSTaskArray            _aToDoNow ;         //!< Message already taken \brief Message already taken
+  bool                   _isDeterministe ;
+  BB1TaskList            _AnswerList ;     //!< Liste des messages gérés par le système \brief Liste des messages gérés par le système
+  OB1InterfaceContainer* _parent ;         //!< fenetre parent \brief fenetre parent
+
+ public:
+
+	enum BBTRACETYPE { trNone = -1, trError = 0, trWarning, trSteps, trSubSteps, trDetails, trSubDetails } ;
+
+	//! \brief  constructor
+  BB1BBInterface(TWindow * parent, NSContexte * Contexte, OWL::TModule * module = (OWL::TModule *) 0) ;
+
+  //! \brief  Destructor
+  ~BB1BBInterface() ;
+
+  //! \brief  Put the blackboard in interface
+  //!
+  //! Put the blackboard in interface <BR>
+  //! Relie l'interface au Blackboard
+  //! @param temp Blackboard
+  void putBB(BB1BB * temp) ;
+
+  //! \brief Return a BB's pointer
+  BB1BB*                 getBB()        { return _bb ; }
+  OB1InterfaceContainer* getContainer() { return _parent ; }
+
+  //! \brief  callback function for message computation
+  //!
+  //! callback function for message computation <BR>
+  //! Fonction activée lors de l'envoie d'un message à l'interface. Déclenche le traitement des messages.
+  void CmBBKEvent() ;
+
+  //! \brief Init Function
+  void SetupWindow() ;
+
+  //! \brief timer Execution
+  //!
+  //! Timer Execution <BR>
+  //! Exécute un cycle du blackboard à chaque temps ecoulé.
+  //! @param id Timer Id to test
+  void EvTimer(uint id) ;
+
+ protected:
+
+  void computeMessage() ;
+
+  //! \brief Get the file message store for the blackboard in NSSuper
+  //!
+  //! Get the file message store for the blackboard in NSSuper <BR>
+  //! Récupère les messages destinés au Blackboard dans OB1
+  void getMessage() ;
+
+  //! \brief Send asynchrone message to nautilus
+  //!
+  //! Send asynchrone message to nautilus
+  //! \warning Not implemented
+  void postMessage() ;
+
+  //! \brief Link the interface dialog to a mdi child
+  //!
+  //! Link the dialog interface to a mdi child<BR>
+  //! Relie l'interface dialog a un container MDI
+  //! @param parent mdi container
+ public:
+
+  void SetParentContainer(OB1InterfaceContainer * parent) { _parent = parent ; }
+
+ public:
+  //! \brief search information in patient folder
+  //!
+  //! search information in patient folder
+  NSPatPathoArray* SearchInPatientFolder(PathsList* temp, string* pAnswerDate, string start_date = string(""), string end_date = string("")) ;
+  NSPatPathoArray* SearchInPatientFolder(PathsList* temp, string* pAnswerDate, NSSearchStruct *pSearchStruct) ;
+
+  //! \brief add an event on nautilus
+
+  //! add an event on nautilus  <BR>
+  //! Ajoute un evenment dans la KB Nautilus Event
+  bool addNautilusEvent(NautilusEvent * ev) ;
+  bool addNautilusEvent(string sEventPath) ;
+
+  void askForWindowUpdate(HWND hTargetWindow) ;
+
+  //! \brief ask if an answer is already present on blackboard
+  //!
+  //! ask if an answer is already present on blackboard
+  BB1Object * askIsAnswerPresentOnBlackBoard(IsAnswerPresentOnBlackBoard * isp) ;
+
+  //! \brief add a new strategy
+  //!
+  //! add a new strategy
+  OB1Strategy * addAskDeterministicQuestion(AskDeterministicQuestion * aq) ;
+
+  //! \brief add an order
+  //!
+  //! add an order
+  bool addBB1Order(BB1Order* bb1Temp) ;
+
+  //! \brief insert information on blackboard
+  //!
+  //! insert information on blackboard
+  bool addinsertObjectOnBlacBoard(insertObjectOnBlacBoard* temp) ;
+
+  //! \brief Function which answers to a question
+  //!
+  //! Function which answers to a question <BR>
+  //! Fonction qui répond à une question et remplit une réponse qui lui est transmise<BR>
+  //! Cette fonction peut être utilisée directement (sans envoi de message).
+  //! @param sPath
+  //! @param sArchetype
+  //! @param pAnwser
+  //! @param bCompte If the data is in
+  AnswerStatus::ANSWERSTATUS getAnswer2Question(string sPath, string sArchetype, NSPatPathoArray ** pAnswer, string &sAnswerDate, bool bCompute = true, bool bUserIsWaiting = false, HWND interfaceHandle = (HWND) 0, NSSearchStruct *pSearchStruct = (NSSearchStruct *) 0) ;
+
+  //! \brief Full a patPatho used in an archetype
+  //!
+  //! Full a patpatho used in an archetype<BR>
+  //! Cette fonction est synhrone et peut être execute par appel de fonction
+  //! Remplit une patpatho utilisée dans un archetype
+  //! @param  sPath Path of the information
+  //! @param  sArchetype Archetype Name
+  //! @param  pAnswer Patho to fill
+  //! @param  end_data Not used
+  //! @return 1 always
+ 	//! \todo Return a better value
+  AnswerStatus::ANSWERSTATUS precoche(string sPath, NSPatPathoArray** pAnswer, HWND interfaceHandle, string* pAnswerDate, bool bCompute = true, NSSearchStruct *pSearchStruct = (NSSearchStruct *) 0) ;
+
+  bool synchronousCall(string sPath, NSPatPathoArray** pAnswer, HWND interfaceHandle, string* pAnswerDate, NSSearchStruct *pSearchStruct = (NSSearchStruct *) 0) ;
+
+  //! \brief Determines and resolves in a deterministic way a question
+  //!
+  //! Determines and resolves in a deterministic way a question<BR>
+  //! Détermine la strategie et résoud une question en mode deterministe
+  //! @param  question To ask
+  //! @return Result of the execution
+  //! \todo   Renvoyer une valeur
+  enum COMPUTABILITYLEVEL { clNone = -1, clError = 0, clComputable, clNotComputable } ;
+  COMPUTABILITYLEVEL ComputeQuestion(TypedVal* pQuestion, OB1Token* pMasterToken, bool bUserIsWaiting = false, HWND interfaceHandle = (HWND) 0, long int persistenceHandle = -1, NSSearchStruct *pSearchStruct = (NSSearchStruct *) 0) ;
+
+  int  CountActiveTokensForClient(HWND interfaceHandle) ;
+  void DisconnectInterface(HWND interfaceHandle) ;
+
+  bool insertAnswerOnBlackboard(string sPath, NSPatPathoArray *pAnswer, NautilusObjectType type, HWND interfaceHandle, NSSearchStruct *pSearchStruct = (NSSearchStruct *) 0) ;
+  void insertLeavesOnBlackBoard(string sPath, NSPatPathoArray *pAnswer, NautilusObjectType type = Undefined, HWND interfaceHandle = (HWND) 0) ;
+
+  void signalThatPatpathoWasSaved(const NSPatPathoArray* pPPT, bool bNew) ;
+
+  enum KSCONTROL { ksStop = 0, ksHold, ksFree } ;
+  // void driveKSfromDialog(string sKsName, KSCONTROL iControl) ;
+  void driveKSfromDialog(long int iToken, KSCONTROL iControl) ;
+
+  void connectTokenToWindow(long int iToken, HWND hInterfaceWindow) ;
+
+  //! Fonction dédiée à la boite de dialogue
+ public:
+
+  //! \brief Print the list of KS
+  //!
+  //! Print the list of KSs<BR>
+  //! Affiche la liste des KSs (boite de dialogue)
+  void PrintAgentList() ;
+
+  //! Montre un Control  si visible = true
+  //! Si visible = false le cache
+  void EnableControl(int RessourceId, bool visible) ;
+  void ChangeTabbedControl(int i) ;
+  void InitTabbedControl() ; // Initialise le tab control
+  void InitListView() ;
+  void InitListViewForQuestions() ;
+  void InitListViewForAnswers() ;
+  void InitListViewForEvents() ;
+  void DispInfoKs(TLwDispInfoNotify& dispInfo) ;
+  void DispInfoAction(TLwDispInfoNotify& dispInfo) ;
+  void RefreshObjectsList() ;
+  void RefreshQuestionsList() ;
+  void RefreshAnswersList() ;
+  void RefreshEventsList() ;
+  void KsDblClick(uint modKeys, ClassLib::TPoint& point) ;
+
+  void showKsProperty(uint iIndex) ;
+
+  void addActionString(string sActionText, BBTRACETYPE iActionLevel) ;
+
+  //! Planque le blackboard<BR>
+  //! Fenetre permettant de masquer ou de faire apparaitre le blackboard<BR>
+  //! @param hide <ul><li>true : cache l'interface</li><li>false montre l'interface</li></ul>
+  void MaskBB(bool hide) ;
+  void Mask() ;
+
+  void TabChanged(TNotify far& nm) ;
+
+  protected:
+
+  	OWL::TTabControl *    _ActionsPossible ;
+    NSKSListWindow *      _KsList ;				    //!< Control to print KS list to user
+    NSQuestionListWindow* _QuestionsList ;
+    NSAnswerListWindow*   _AnswersList ;
+    NSEventListWindow*    _EventsList ;
+    OWL::TListWindow *    _actionsInOB1 ;     //!< Control to see all actions that rise in the blackboard \warning not used
+    BBTRACETYPE           _actionsLogLevel ;
+
+    int                   _interfaceTimerInterval ;
+
+  DECLARE_RESPONSE_TABLE(BB1BBInterface) ;  // event manager
+} ;
+
+//! \brief Blackboard MDI container
+//!
+//! Blackboard MDI container<BR>
+//! Fenetre MDI contenant la boite de dialogue inerface
+class _BBKEXPORT OB1InterfaceContainer : public TMDIChild
+{
+ public:
+
+  //! \brief constructor
+  //!
+  //! constructor
+  //! @param MDI parent windows
+  //! @param Pointer to context
+  //! @param inter interaface dialog box to set in the client windows
+  OB1InterfaceContainer(TMDIClient& parent, NSContexte * Contexte, BB1BBInterface * inter) ;
+
+  //! \brief destructor
+  //!
+  //! Destructor
+  ~OB1InterfaceContainer() ;
+
+  void EvSize(uint sizeType, ClassLib::TSize& size) ;
+  void SetupWindow() ;
+  void EvDestroy() ;
+	bool CanClose() ;
+
+  BB1BBInterface* getInterface()                   { return _interface ; }
+  void            setInterface(BB1BBInterface* pI) { _interface = pI ; }
+
+ private:
+
+  BB1BBInterface *  _interface ;  //!< Pointer to interface \brief Pointer to interface
+  NSContexte *      _pContexte ;  //!< Context of interface \brief Context of interface
+
+  DECLARE_RESPONSE_TABLE(OB1InterfaceContainer) ;
+} ;
+
+//
+// Objet "ListWindow" avec gestion du double-click
+//
+class NSKSListWindow : public TListWindow
+{
+	public:
+
+		BB1BBInterface* pInterface ;		int             iRes ;
+		NSKSListWindow(BB1BBInterface* pere, int resId, int x, int y, int w,                                                int h, OWL::TModule* module = (OWL::TModule *) 0) ;
+    NSKSListWindow(BB1BBInterface* pere, int resourceId, OWL::TModule* module = (OWL::TModule *) 0) ;
+
+		~NSKSListWindow() {}    void 	SetupWindow() ;
+    void    EvRButtonDown(uint modkeys, NS_CLASSLIB::TPoint& point);
+    void    EvLButtonDblClk(uint modKeys, NS_CLASSLIB::TPoint& point) ;    void    EvKeyDown(uint key, uint repeatCount, uint flags) ;    void    EvLButtonUp(uint modKeys, NS_CLASSLIB::TPoint& pt) ;    int     IndexItemSelect() ;
+
+    void    EvSetFocus(HWND hWndLostFocus) ;
+    void    EvKillFocus(HWND hWndGetFocus) ;
+
+  DECLARE_RESPONSE_TABLE(NSKSListWindow) ;};
+
+//
+// ListWindow object for Questions
+//
+class NSQuestionListWindow : public TListWindow
+{
+	public:
+
+		BB1BBInterface* pInterface ;		int             iRes ;
+		NSQuestionListWindow(BB1BBInterface* pere, int resId, int x, int y, int w,                                                int h, OWL::TModule* module = (OWL::TModule *) 0) ;
+    NSQuestionListWindow(BB1BBInterface* pere, int resourceId, OWL::TModule* module = (OWL::TModule *) 0) ;
+
+		~NSQuestionListWindow() {}    void 	SetupWindow() ;
+    void    EvRButtonDown(uint modkeys, NS_CLASSLIB::TPoint& point);
+    void    EvLButtonDblClk(uint modKeys, NS_CLASSLIB::TPoint& point) ;    void    EvKeyDown(uint key, uint repeatCount, uint flags) ;    void    EvLButtonUp(uint modKeys, NS_CLASSLIB::TPoint& pt) ;    int     IndexItemSelect() ;
+
+    void    EvSetFocus(HWND hWndLostFocus) ;
+    void    EvKillFocus(HWND hWndGetFocus) ;
+
+  DECLARE_RESPONSE_TABLE(NSQuestionListWindow) ;};
+
+//
+// ListWindow object for Answers
+//
+class NSAnswerListWindow : public TListWindow
+{
+	public:
+
+		BB1BBInterface* pInterface ;		int             iRes ;
+		NSAnswerListWindow(BB1BBInterface* pere, int resId, int x, int y, int w,                                                int h, OWL::TModule* module = (OWL::TModule *) 0) ;
+    NSAnswerListWindow(BB1BBInterface* pere, int resourceId, OWL::TModule* module = (OWL::TModule *) 0) ;
+
+		~NSAnswerListWindow() {}    void 	SetupWindow() ;
+    void    EvRButtonDown(uint modkeys, NS_CLASSLIB::TPoint& point);
+    void    EvLButtonDblClk(uint modKeys, NS_CLASSLIB::TPoint& point) ;    void    EvKeyDown(uint key, uint repeatCount, uint flags) ;    void    EvLButtonUp(uint modKeys, NS_CLASSLIB::TPoint& pt) ;    int     IndexItemSelect() ;
+
+    void    EvSetFocus(HWND hWndLostFocus) ;
+    void    EvKillFocus(HWND hWndGetFocus) ;
+
+  DECLARE_RESPONSE_TABLE(NSAnswerListWindow) ;};
+
+//
+// ListWindow object for Events
+//
+class NSEventListWindow : public TListWindow
+{
+	public:
+
+		BB1BBInterface* pInterface ;		int             iRes ;
+		NSEventListWindow(BB1BBInterface* pere, int resId, int x, int y, int w,                                                int h, OWL::TModule* module = (OWL::TModule *) 0) ;
+    NSEventListWindow(BB1BBInterface* pere, int resourceId, OWL::TModule* module = (OWL::TModule *) 0) ;
+
+		~NSEventListWindow() {}    void 	SetupWindow() ;
+    void    EvRButtonDown(uint modkeys, NS_CLASSLIB::TPoint& point);
+    void    EvLButtonDblClk(uint modKeys, NS_CLASSLIB::TPoint& point) ;    void    EvKeyDown(uint key, uint repeatCount, uint flags) ;    void    EvLButtonUp(uint modKeys, NS_CLASSLIB::TPoint& pt) ;    int     IndexItemSelect() ;
+
+    void    EvSetFocus(HWND hWndLostFocus) ;
+    void    EvKillFocus(HWND hWndGetFocus) ;
+
+  DECLARE_RESPONSE_TABLE(NSEventListWindow) ;};
+
+#endif // !__INTERFACEBB_H__
+

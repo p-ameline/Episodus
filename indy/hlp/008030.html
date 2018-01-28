@@ -1,0 +1,69 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+<TITLE>TOnUserLoginEvent</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <META name="GENERATOR" content="Doc-O-Matic">
+    <LINK rel="STYLESHEET" href="default.css" type="text/css">
+
+<SCRIPT LANGUAGE="JavaScript1.2" SRC="scripts.js"></SCRIPT>
+</HEAD>
+<BODY CLASS="Element57">
+<TABLE BORDER="0" BGCOLOR="#AACCFF" WIDTH="100%" CELLSPACING="0" CELLPADDING="0">
+<TR><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element1">
+Indy 9</DIV>
+</TD><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element2">
+<A HREF="content.html" CLASS="Element59">Content</A> | <A HREF="idx.html" CLASS="Element59">Index</A> | <A HREF="symref.html" CLASS="Element59">Reference</A></DIV>
+</TD></TR></TABLE><DIV CLASS="Element58">
+<DIV CLASS="Element5">
+TOnUserLoginEvent</DIV>
+<DIV CLASS="Element7">
+<A HREF="002192.html" CLASS="Element59">Unit: IdFTPServer</A></DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12">TOnUserLoginEvent = <STRONG>procedure</STRONG> (ASender: <A HREF="007343.html" CLASS="Element59">TIdFTPServerThread</A>; <STRONG>const</STRONG> AUsername, APassword: <STRONG>string</STRONG>; <STRONG>var</STRONG> AAuthenticated: Boolean) <STRONG>of</STRONG> <STRONG>object</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Unit</DIV>
+<DIV CLASS="Element69">
+<A HREF="002192.html" CLASS="Element59">IdFTPServer</A></DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+AAuthenticated</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Indicates if the client is authorized.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+APassword</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+User credentials from the client.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+ASender</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Client thread for the event notification.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+AUsername</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+User identity from the client.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+TOnUserLoginEvent is an event type signalled when an FTP server implementation needs to perform authentication for threaded client connection.<P CLASS="Element10">
+TOnUserLoginEvent is the event type signalled to the <A HREF="007342.html#0013" CLASS="Element59">TIdFTPServer.OnUserLogin</A> event handler, and allows the FTP server to perform authetication for a user account after receiving the FTP USER and PASS command verbs.<P CLASS="Element10">
+TOnUserLoginEvent is used in the FTP PASS command event handler when the server implementation does not use <A HREF="007882.html" CLASS="Element59">TIdUserAccounts</A> for account authorization. The event handler can access resources external to the server to perform account authentication, and must set the value in AAuthenticated to indicate that the client has access to the FTP server.<P CLASS="Element10">
+The server implementation must assign a procedure to the event handler to allow responding to the event notification.</DIV>
+</DIV>
+<DIV CLASS="Element62">
+<HR>Created with Doc-O-Matic 2 donated to <STRONG><A HREF="http://www.delphi-jedi.org">Project JEDI</A></STRONG>. Commercial license available from the <STRONG><A HREF="http://www.doc-o-matic.com">Doc-O-Matic site</A></STRONG>.</DIV>
+</DIV></BODY></HTML>

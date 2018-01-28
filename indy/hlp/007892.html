@@ -1,0 +1,152 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+<TITLE>TIdVCardEmbeddedObject</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <META name="GENERATOR" content="Doc-O-Matic">
+    <LINK rel="STYLESHEET" href="default.css" type="text/css">
+
+<SCRIPT LANGUAGE="JavaScript1.2" SRC="scripts.js"></SCRIPT>
+</HEAD>
+<BODY CLASS="Element57">
+<TABLE BORDER="0" BGCOLOR="#AACCFF" WIDTH="100%" CELLSPACING="0" CELLPADDING="0">
+<TR><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element1">
+Indy 9</DIV>
+</TD><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element2">
+<A HREF="content.html" CLASS="Element59">Content</A> | <A HREF="idx.html" CLASS="Element59">Index</A> | <A HREF="symref.html" CLASS="Element59">Reference</A></DIV>
+</TD></TR></TABLE><DIV CLASS="Element58">
+<DIV CLASS="Element5">
+TIdVCardEmbeddedObject</DIV>
+<DIV CLASS="Element7">
+<A HREF="014838.html" CLASS="Element59">Hierarchy</A>, <A HREF="014839.html" CLASS="Element59">Properties</A>, <A HREF="014840.html" CLASS="Element59">Methods</A>, <A HREF="014841.html" CLASS="Element59">See Also</A>, <A HREF="002949.html" CLASS="Element59">Unit: IdVCard</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Encapsulates an embedded object in a VCard.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12">TIdVCardEmbeddedObject = <STRONG>class</STRONG>(TPersistent)</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Unit</DIV>
+<DIV CLASS="Element69">
+<A HREF="002949.html" CLASS="Element59">IdVCard</A></DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+The TIdVCardEmbeddedObject object encapsulates an embedded object in a VCard such as a graphic, sound, or public-key (for encryption).</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0000">TIdVCardEmbeddedObject.Base64Encoded</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007892.html" CLASS="Element59">TIdVCardEmbeddedObject</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Indicates that <A HREF="007892.html#0003" CLASS="Element59">EmbeddedData</A> is represented Base64-encoded.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> Base64Encoded: Boolean;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Base64Encoded is a Boolean indicator is True if <A HREF="007892.html#0003" CLASS="Element59">EmbeddedData</A> is represented as by Base64-encoded values.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0003">TIdVCardEmbeddedObject.EmbeddedData</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007892.html" CLASS="Element59">TIdVCardEmbeddedObject</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+ASCII or Binary data for the VCard.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> EmbeddedData: TStrings;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+EmbeddedData represents a storage slot for ASCII or binary data in the VCard. EmbeddedData is usually stored in an encoded format such as BASE64, although some keys may not require decoding. You can check data encoding by examining the <A HREF="007892.html#0000" CLASS="Element59">Base64Encoded</A> property.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0004">TIdVCardEmbeddedObject.ObjectType</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007892.html" CLASS="Element59">TIdVCardEmbeddedObject</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Indicates the file or key type for the VCard.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> ObjectType: <STRONG>String</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+ObjectType indicates the type of media, such as the file type or key type.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0005">TIdVCardEmbeddedObject.ObjectURL</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007892.html" CLASS="Element59">TIdVCardEmbeddedObject</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+URL for object in a VCard.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> ObjectURL: <STRONG>String</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+ObjectURL is the Universal Resource Locator where the object is located if it is NOT embedded in the VCard.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0001">TIdVCardEmbeddedObject.Create</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007892.html" CLASS="Element59">TIdVCardEmbeddedObject</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Constructor for the object instance.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>constructor</STRONG> Create;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Create is the constructor for the object instance. Create relies on the inherited Create method, and initializes the EmbeddData TStringList property.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0002">TIdVCardEmbeddedObject.Destroy</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007892.html" CLASS="Element59">TIdVCardEmbeddedObject</A>, <A HREF="014842.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Frees an object instance.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>destructor</STRONG> Destroy; <STRONG>override</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Destroy is the destructor for an object instance. Destroy clears and releases the <A HREF="007892.html#0003" CLASS="Element59">EmbeddedData</A> property prior to calling the inherited Destroy method.</DIV>
+</DIV>
+<DIV CLASS="Element62">
+<HR>Created with Doc-O-Matic 2 donated to <STRONG><A HREF="http://www.delphi-jedi.org">Project JEDI</A></STRONG>. Commercial license available from the <STRONG><A HREF="http://www.doc-o-matic.com">Doc-O-Matic site</A></STRONG>.</DIV>
+</DIV></BODY></HTML>

@@ -1,0 +1,158 @@
+/****************************************************************************
+
+
+nsbb.rh
+
+produced by Borland Resource Workshop
+
+
+*****************************************************************************/
+
+#define IDA_BB     100
+
+#define IDC_EDITTEXTLIBRE	103
+
+#define IDB_0PLUS	10
+#define IDB_1PLUS	11
+#define IDB_2PLUS	12
+#define IDB_3PLUS	13
+#define IDB_4PLUS	14
+
+// #define IDB_CR	10
+// #define IDB_CONSULTATION	9
+#define IDB_PROP	7
+
+#define IDB_TEXTELIBRE	6
+
+#define IDB_OK     8
+#define IDB_CANCEL 9
+
+#define CONCLUSION_APRES	105
+#define CONCLUSION_PLACE	104
+#define CONCLUSION_AVANT	102
+#define IDC_AUTREUNITE	107
+#define IDC_UNITE	107
+#define IDC_VALSTOCK	104
+#define IDC_RECADYNAM	108
+#define IDC_LES	103
+#define IDC_DES	102
+#define IDC_SINGULIER	101
+#define IDC_Des	102
+
+#define IDC_MULT_DETRUIT 102
+#define IDC_MULT_AJOUT   101
+#define IDC_EDITION      101
+#define IDC_SUP          102
+#define IDC_INF          103
+#define IDC_DATE         101
+
+#define IDD_4P	111
+#define IDD_3P	117
+#define IDD_2P	116
+#define IDD_1P	113
+#define IDD_0P	118
+#define IDD_PRESENT_VAL	 109
+#define IDD_EVENTUEL_VAL 107
+#define IDD_ABSENT_VAL	 121
+#define IDD_100_VAL      120
+#define IDD_75_VAL       115
+#define IDD_50_VAL       125
+#define IDD_25_VAL       114
+#define IDD_0_VAL        112
+#define IDC_PRESENT_VAL  109
+#define IDC_EVENTUEL_VAL 107
+#define IDC_ABSENT_VAL   121
+#define IDC_100_VAL      120
+#define IDC_75_VAL       115
+#define IDC_50_VAL       125
+#define IDC_25_VAL       114
+#define IDC_0_VAL        112
+#define IDC_OP           112
+#define IDC_INTERET      108
+
+#define IDC_MSCTLS_TRACKBAR1	105
+#define IDC_CERTITUDE	105
+#define IDC_MSCTLS_TRACKBAR2	108
+
+#define SU_ITVP	106
+#define SU_DIAP	105
+#define SU_ITVS	104
+#define SU_DIAS	103
+#define SU_ITVM	102
+#define SU_PRES	101
+
+#define I103	103
+
+//
+// Defines globaux des nsdlg
+//
+
+// pour les boutons spécifiques à un module
+#define ID_RESERVE1		 80
+#define ID_RESERVE2		 81
+#define ID_RESERVE3		 82
+#define ID_RESERVE4		 83
+
+#define IDBBKCALCUL   89
+#define ID_ONGLET     90
+
+#define IDTL          91
+#define IDC_TL1			  92
+#define IDC_TL2			  93
+#define IDC_TL3			  94
+
+#define IDTL_ACTIF    79
+#define IDC_TL1_ACTIF	78
+#define IDC_TL2_ACTIF	77
+#define IDC_TL3_ACTIF	76
+
+#define IDVALVE_NORMALE	95
+#define IDCONCLUSION	  96
+#define IDRETOUR		    97
+#define IDB_F9			    98
+#define IDCALCUL		    99
+#define IDSUITE			   100
+#define IDC_DETRUIRE	 990
+
+#define IDHELPWWW		   991
+#define IDHELPNEW      992
+
+#define IDTREEPASTE    993
+#define IDNOFREETXT    994
+
+//
+//position drag and drop
+//
+#define IDC_AVANT			200
+#define IDC_APRES			201
+#define IDC_FILS			202
+
+// Dialogue IDD_ADMIN_PAT
+#define IDC_ADMINPAT_NOM    101#define IDC_ADMINPAT_PRENOM	102#define IDC_ADMINPAT_SEXE   103
+#define IDC_ADMINPAT_SEXE_M	104
+#define IDC_ADMINPAT_SEXE_F	105
+#define IDC_ADMINPAT_DATEN	106
+#define IDC_ADMINPAT_NSS    107
+#define IDC_ADMINPAT_CODE   108
+
+// Dialogue MEDICDLG
+#define IDC_PERIODECYCLE	            300
+#define IDC_MMS                       301
+#define IDC_HEURES	                  302
+#define IDC_FOISJOUR                  303
+#define IDC_TEXTLIBRE	                304
+#define IDC_MOMENTS                   310
+#define IDC_REGULIER                  305
+#define IDC_JOURS	                    307
+#define IDC_LIBRE                     306
+
+// Dialogue IDD_RENEW_MEDIC
+#define IDC_EDIT_PDT                    101
+#define IDC_UPDOWN_PDT                  102
+#define IDC_COMBOBOX_PDT                103
+#define IDC_EDIT_RNV                    104
+#define IDC_UPDOWN_RNV                  105
+
+//#define IDC_TEXTLIBRERYTHME             309
+//#define IDC_MOMENTS	                    310
+//#define IDC_PERIODERYTHME               308

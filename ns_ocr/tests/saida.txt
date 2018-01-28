@@ -1,0 +1,1964 @@
+gocr_blockTypeRegister: (TEXT): 1
+gocr_blockTypeRegister: (PICTURE): 2
+gocr_blockTypeRegister: (MATH_EXPRESSION): 3
+gocr_charAttributeRegister: (BOLD, 0, "(null)")
+gocr_charAttributeRegister: (ITALIC, 0, "(null)")
+gocr_charAttributeRegister: (SUBSCRIPT, 0, "(null)")
+gocr_charAttributeRegister: (SUPERCRIPT, 0, "(null)")
+gocr_charAttributeRegister: (FONT, 1, "%s %d")
+gocr_setAttribute: (1, 0x3)
+gocr_setAttribute: (3, 0x1)
+gocr_moduleLoad: (/home/gocr/modules/modules/libobscure.la)
+gocr_functionInsertBefore: (3, obscure_charFinder, (nil), -1)
+gocr_functionInsertBefore: lib: /home/gocr/modules/modules/libobscure.la
+gocr_functionInsertBefore: (4, obscure_charRecognizer, (nil), -1)
+gocr_functionInsertBefore: lib: /home/gocr/modules/modules/libobscure.la
+_gocr_imageLoad: (../../examples/text.pbm, 1)
+_gocr_imageLoad: PBM format detected.
+_gocr_thresholdGrayToBW: (0x804b368)
+gocr_runAllModules: ()
+gocr_blockTypeGetByName: (TEXT)
+gocr_blockAdd: (0x40027f00)
+_gocr_imageSharedCopy: (0x804b368, 0, 0, 580, 100, 0x40027f14)
+gocr_runAllModules: module charFinder:obscure_charFinder
+gocr_blockTypeGetByName: (TEXT)
+gocr_charBegin: ()
+gocr_charSetAllNearPixels: (1, 0, 64, 8)
+gocr_charEnd: ()
+_gocr_imageSharedCopy: (0x40027f14, 0, 47, 16, 64, 0x804b4a0)
+gocr_charBegin: ()
+gocr_charSetAllNearPixels: (1, 0, 91, 8)
+gocr_charEnd: ()
+_gocr_imageSharedCopy: (0x40027f14, 0, 84, 10, 95, 0x80852f0)
+gocr_charBegin: ()
+gocr_charSetAllNearPixels: (1, 2, 0, 8)
+gocr_charEnd: ()
+_gocr_imageSharedCopy: (0x40027f14, 2, 0, 39, 34, 0x8085420)
+gocr_charBegin: ()
+gocr_charSetAllNearPixels: (1, 12, 78, 8)
+gocr_charEnd: ()
+_gocr_imageSharedCopy: (0x40027f14, 12, 78, 23, 95, 0x8085658)
+gocr_charBegin: ()
+gocr_charSetAllNearPixels: (1, 18, 48, 8)
+gocr_charEnd: ()
+_gocr_imageSharedCopy: (0x40027f14, 18, 48, 32, 64, 0x80857d0)
+gocr_charBegin: ()
+gocr_charSetAllNearPixels: (1, 26, 86, 8)
+gocr_charEnd: ()
+_gocr_imageSharedCopy: (0x40027f14, 26, 84, 34, 95, 0x8085930)
+gocr_charBegin: ()
+gocr_charSetAllNearPixels: (1, 35, 54, 8)
+gocr_charEnd: ()
+_gocr_imageSharedCopy: (0x40027f14, 35, 47, 49, 65, 0x8085a60)
+gocr_charBegin: ()
+gocr_charSetAllNearPixels: (1, 45, 27, 8)
+gocr_charEnd: ()
+_gocr_imageSharedCopy: (0x40027f14, 45, 12, 66, 35, 0x8085bd8)
+gocr_charBegin: ()
+gocr_charSetAllNearPixels: (1, 45, 86, 8)
+gocr_charEnd: ()
+_gocr_imageSharedCopy: (0x40027f14, 45, 78, 56, 95, 0x8085d98)
+gocr_charBegin: ()
+gocr_charSetAllNearPixels: (1, 59, 86, 8)
+gocr_charEnd: ()
+_gocr_imageSharedCopy: (0x40027f14, 59, 84, 67, 95, 0x8085f10)
+gocr_charBegin: ()
+gocr_charSetAllNearPixels: (1, 61, 48, 8)
+gocr_charEnd: ()
+_gocr_imageSharedCopy: (0x40027f14, 61, 48, 77, 64, 0x8086040)
+gocr_charBegin: ()
+gocr_charSetAllNearPixels: (1, 68, 84, 8)
+gocr_charEnd: ()
+_gocr_imageSharedCopy: (0x40027f14, 68, 77, 76, 94, 0x80861a0)
+gocr_charBegin: ()
+gocr_charSetAllNearPixels: (1, 69, 13, 8)
+gocr_charEnd: ()
+_gocr_imageSharedCopy: (0x40027f14, 69, 12, 77, 34, 0x8086318)
+gocr_charBegin: ()
+gocr_charSetAllNearPixels: (1, 71, 1, 8)
+gocr_charEnd: ()
+_gocr_imageSharedCopy: (0x40027f14, 71, 1, 74, 4, 0x80864c0)
+gocr_charBegin: ()
+gocr_charSetAllNearPixels: (1, 80, 48, 8)
+gocr_charEnd: ()
+_gocr_imageSharedCopy: (0x40027f14, 80, 48, 94, 64, 0x8086590)
+gocr_charBegin: ()
+gocr_charSetAllNearPixels: (1, 85, 86, 8)
+gocr_charEnd: ()
+_gocr_imageSharedCopy: (0x40027f14, 85, 84, 95, 100, 0x80866f0)
+gocr_charBegin: ()
+gocr_charSetAllNearPixels: (1, 96, 48, 8)
+gocr_charEnd: ()
+_gocr_imageSharedCopy: (0x40027f14, 96, 48, 109, 64, 0x8086850)
+gocr_charBegin: ()
+gocr_charSetAllNearPixels: (1, 97, 10, 8)
+gocr_charEnd: ()
+_gocr_imageSharedCopy: (0x40027f14, 97, 10, 123, 34, 0x80869b0)
+gocr_charBegin: ()
+gocr_charSetAllNearPixels: (1, 97, 78, 8)
+gocr_charEnd: ()
+_gocr_imageSharedCopy: (0x40027f14, 97, 78, 108, 94, 0x8086b70)
+gocr_charBegin: ()
+gocr_charSetAllNearPixels: (1, 111, 84, 8)
+gocr_charEnd: ()
+_gocr_imageSharedCopy: (0x40027f14, 111, 84, 115, 94, 0x8086cd0)
+gocr_charBegin: ()
+gocr_charSetAllNearPixels: (1, 112, 78, 8)
+gocr_charEnd: ()
+_gocr_imageSharedCopy: (0x40027f14, 112, 78, 114, 80, 0x8086de8)
+gocr_charBegin: ()
+gocr_charSetAllNearPixels: (1, 120, 54, 8)
+gocr_charEnd: ()
+_gocr_imageSharedCopy: (0x40027f14, 120, 47, 136, 65, 0x8086ea0)
+gocr_charBegin: ()
+gocr_charSetAllNearPixels: (1, 124, 97, 8)
+gocr_charEnd: ()
+_gocr_imageSharedCopy: (0x40027f14, 124, 84, 129, 99, 0x8087018)
+gocr_charBegin: ()
+gocr_charSetAllNearPixels: (1, 126, 30, 8)
+gocr_charEnd: ()
+_gocr_imageSharedCopy: (0x40027f14, 126, 19, 141, 35, 0x8087178)
+gocr_charBegin: ()
+gocr_charSetAllNearPixels: (1, 127, 79, 8)
+gocr_charEnd: ()
+_gocr_imageSharedCopy: (0x40027f14, 127, 78, 129, 80, 0x80872d8)
+gocr_charBegin: ()
+gocr_charSetAllNearPixels: (1, 133, 78, 8)
+gocr_charEnd: ()
+_gocr_imageSharedCopy: (0x40027f14, 133, 78, 143, 94, 0x8087390)
+gocr_charBegin: ()
+gocr_charSetAllNearPixels: (1, 140, 48, 8)
+gocr_charEnd: ()
+_gocr_imageSharedCopy: (0x40027f14, 140, 48, 155, 64, 0x80874f0)
+gocr_charBegin: ()
+gocr_charSetAllNearPixels: (1, 143, 20, 8)
+gocr_charEnd: ()
+_gocr_imageSharedCopy: (0x40027f14, 143, 19, 149, 34, 0x8087650)
+gocr_charBegin: ()
+gocr_charSetAllNearPixels: (1, 144, 12, 8)
+gocr_charEnd: ()
+_gocr_imageSharedCopy: (0x40027f14, 144, 11, 147, 14, 0x80877b0)
+gocr_charBegin: ()
+gocr_charSetAllNearPixels: (1, 146, 78, 8)
+gocr_charEnd: ()
+_gocr_imageSharedCopy: (0x40027f14, 146, 78, 150, 94, 0x8087880)
+gocr_charBegin: ()
+gocr_charSetAllNearPixels: (1, 158, 48, 8)
+gocr_charEnd: ()
+_gocr_imageSharedCopy: (0x40027f14, 158, 48, 164, 64, 0x80879e0)
+gocr_charBegin: ()
+gocr_charSetAllNearPixels: (1, 161, 84, 8)
+gocr_charEnd: ()
+_gocr_imageSharedCopy: (0x40027f14, 161, 84, 179, 94, 0x8087b40)
+gocr_charBegin: ()
+gocr_charSetAllNearPixels: (1, 163, 18, 8)
+gocr_charEnd: ()
+_gocr_imageSharedCopy: (0x40027f14, 163, 18, 182, 34, 0x8087c58)
+gocr_charBegin: ()
+gocr_charSetAllNearPixels: (1, 175, 61, 8)
+gocr_charEnd: ()
+_gocr_imageSharedCopy: (0x40027f14, 175, 48, 184, 65, 0x8087db8)
+gocr_charBegin: ()
+gocr_charSetAllNearPixels: (1, 182, 84, 8)
+gocr_charEnd: ()
+_gocr_imageSharedCopy: (0x40027f14, 182, 84, 193, 94, 0x8087f30)
+gocr_charBegin: ()
+gocr_charSetAllNearPixels: (1, 185, 31, 8)
+gocr_charEnd: ()
+_gocr_imageSharedCopy: (0x40027f14, 185, 24, 195, 35, 0x8088048)
+gocr_charBegin: ()
+gocr_charSetAllNearPixels: (1, 187, 48, 8)
+gocr_charEnd: ()
+_gocr_imageSharedCopy: (0x40027f14, 187, 48, 203, 64, 0x8088178)
+gocr_charBegin: ()
+gocr_charSetAllNearPixels: (1, 195, 86, 8)
+gocr_charEnd: ()
+_gocr_imageSharedCopy: (0x40027f14, 195, 84, 205, 95, 0x80882d8)
+gocr_charBegin: ()
+gocr_charSetAllNearPixels: (1, 197, 24, 8)
+gocr_charEnd: ()
+_gocr_imageSharedCopy: (0x40027f14, 197, 24, 201, 34, 0x8088408)
+gocr_charBegin: ()
+gocr_charSetAllNearPixels: (1, 198, 18, 8)
+gocr_charEnd: ()
+_gocr_imageSharedCopy: (0x40027f14, 198, 18, 200, 20, 0x8088520)
+gocr_charBegin: ()
+gocr_charSetAllNearPixels: (1, 206, 48, 8)
+gocr_charEnd: ()
+_gocr_imageSharedCopy: (0x40027f14, 206, 48, 218, 64, 0x80885d8)
+gocr_charBegin: ()
+gocr_charSetAllNearPixels: (1, 212, 19, 8)
+gocr_charEnd: ()
+_gocr_imageSharedCopy: (0x40027f14, 212, 19, 230, 34, 0x8088738)
+gocr_charBegin: ()
+gocr_charSetAllNearPixels: (1, 215, 84, 8)
+gocr_charEnd: ()
+_gocr_imageSharedCopy: (0x40027f14, 215, 84, 226, 99, 0x8088898)
+gocr_charBegin: ()
+gocr_charSetAllNearPixels: (1, 229, 86, 8)
+gocr_charEnd: ()
+_gocr_imageSharedCopy: (0x40027f14, 229, 84, 240, 99, 0x80889f8)
+gocr_charBegin: ()
+gocr_charSetAllNearPixels: (1, 230, 48, 8)
+gocr_charEnd: ()
+_gocr_imageSharedCopy: (0x40027f14, 230, 48, 249, 64, 0x8088b58)
+gocr_charBegin: ()
+gocr_charSetAllNearPixels: (1, 233, 26, 8)
+gocr_charEnd: ()
+_gocr_imageSharedCopy: (0x40027f14, 233, 25, 242, 35, 0x8088cb8)
+gocr_charBegin: ()
+gocr_charSetAllNearPixels: (1, 242, 84, 8)
+gocr_charEnd: ()
+_gocr_imageSharedCopy: (0x40027f14, 242, 84, 249, 94, 0x8088dd0)
+gocr_charBegin: ()
+gocr_charSetAllNearPixels: (1, 244, 25, 8)
+gocr_charEnd: ()
+_gocr_imageSharedCopy: (0x40027f14, 244, 25, 248, 34, 0x8088ee8)
+gocr_charBegin: ()
+gocr_charSetAllNearPixels: (1, 245, 19, 8)
+gocr_charEnd: ()
+_gocr_imageSharedCopy: (0x40027f14, 245, 19, 247, 21, 0x8089000)
+gocr_charBegin: ()
+gocr_charSetAllNearPixels: (1, 252, 48, 8)
+gocr_charEnd: ()
+_gocr_imageSharedCopy: (0x40027f14, 252, 48, 267, 64, 0x80890b8)
+gocr_charBegin: ()
+gocr_charSetAllNearPixels: (1, 260, 85, 8)
+gocr_charEnd: ()
+_gocr_imageSharedCopy: (0x40027f14, 260, 84, 267, 95, 0x8089218)
+gocr_charBegin: ()
+gocr_charSetAllNearPixels: (1, 268, 84, 8)
+gocr_charEnd: ()
+_gocr_imageSharedCopy: (0x40027f14, 268, 80, 275, 95, 0x8089348)
+gocr_charBegin: ()
+gocr_charSetAllNearPixels: (1, 270, 54, 8)
+gocr_charEnd: ()
+_gocr_imageSharedCopy: (0x40027f14, 270, 47, 286, 65, 0x80894a8)
+gocr_charBegin: ()
+gocr_charSetAllNearPixels: (1, 279, 84, 8)
+gocr_charEnd: ()
+_gocr_imageSharedCopy: (0x40027f14, 279, 84, 290, 95, 0x8089620)
+gocr_charBegin: ()
+gocr_charSetAllNearPixels: (1, 297, 48, 8)
+gocr_charEnd: ()
+_gocr_imageSharedCopy: (0x40027f14, 297, 48, 310, 64, 0x8089750)
+gocr_charBegin: ()
+gocr_charSetAllNearPixels: (1, 300, 84, 8)
+gocr_charEnd: ()
+_gocr_imageSharedCopy: (0x40027f14, 300, 84, 328, 95, 0x80898b0)
+gocr_charBegin: ()
+gocr_charSetAllNearPixels: (1, 314, 54, 8)
+gocr_charEnd: ()
+_gocr_imageSharedCopy: (0x40027f14, 314, 47, 330, 69, 0x80899e0)
+gocr_charBegin: ()
+gocr_charSetAllNearPixels: (1, 333, 48, 8)
+gocr_charEnd: ()
+_gocr_imageSharedCopy: (0x40027f14, 333, 48, 349, 65, 0x8089b88)
+gocr_charBegin: ()
+gocr_charSetAllNearPixels: (1, 338, 84, 8)
+gocr_charEnd: ()
+_gocr_imageSharedCopy: (0x40027f14, 338, 84, 350, 94, 0x8089d00)
+gocr_charBegin: ()
+gocr_charSetAllNearPixels: (1, 351, 84, 8)
+gocr_charEnd: ()
+_gocr_imageSharedCopy: (0x40027f14, 351, 84, 362, 99, 0x8089e18)
+gocr_charBegin: ()
+gocr_charSetAllNearPixels: (1, 359, 50, 8)
+gocr_charEnd: ()
+_gocr_imageSharedCopy: (0x40027f14, 359, 47, 369, 65, 0x8089f78)
+gocr_charBegin: ()
+gocr_charSetAllNearPixels: (1, 365, 84, 8)
+gocr_charEnd: ()
+_gocr_imageSharedCopy: (0x40027f14, 365, 84, 373, 94, 0x808a0f0)
+gocr_charBegin: ()
+gocr_charSetAllNearPixels: (1, 372, 48, 8)
+gocr_charEnd: ()
+_gocr_imageSharedCopy: (0x40027f14, 372, 48, 387, 64, 0x808a208)
+gocr_charBegin: ()
+gocr_charSetAllNearPixels: (1, 384, 91, 8)
+gocr_charEnd: ()
+_gocr_imageSharedCopy: (0x40027f14, 384, 84, 394, 95, 0x808a368)
+gocr_charBegin: ()
+gocr_charSetAllNearPixels: (1, 385, 80, 8)
+gocr_charEnd: ()
+_gocr_imageSharedCopy: (0x40027f14, 385, 79, 387, 81, 0x808a498)
+gocr_charBegin: ()
+gocr_charSetAllNearPixels: (1, 390, 48, 8)
+gocr_charEnd: ()
+_gocr_imageSharedCopy: (0x40027f14, 390, 48, 405, 65, 0x808a550)
+gocr_charBegin: ()
+gocr_charSetAllNearPixels: (1, 390, 79, 8)
+gocr_charEnd: ()
+_gocr_imageSharedCopy: (0x40027f14, 390, 79, 392, 81, 0x808a6c8)
+gocr_charBegin: ()
+gocr_charSetAllNearPixels: (1, 396, 86, 8)
+gocr_charEnd: ()
+_gocr_imageSharedCopy: (0x40027f14, 396, 84, 406, 95, 0x808a780)
+gocr_charBegin: ()
+gocr_charSetAllNearPixels: (1, 397, 80, 8)
+gocr_charEnd: ()
+_gocr_imageSharedCopy: (0x40027f14, 397, 79, 399, 81, 0x808a8b0)
+gocr_charBegin: ()
+gocr_charSetAllNearPixels: (1, 402, 79, 8)
+gocr_charEnd: ()
+_gocr_imageSharedCopy: (0x40027f14, 402, 79, 404, 81, 0x808a968)
+gocr_charBegin: ()
+gocr_charSetAllNearPixels: (1, 409, 84, 8)
+gocr_charEnd: ()
+_gocr_imageSharedCopy: (0x40027f14, 409, 84, 420, 95, 0x808aa20)
+gocr_charBegin: ()
+gocr_charSetAllNearPixels: (1, 410, 80, 8)
+gocr_charEnd: ()
+_gocr_imageSharedCopy: (0x40027f14, 410, 79, 412, 81, 0x808ab50)
+gocr_charBegin: ()
+gocr_charSetAllNearPixels: (1, 415, 79, 8)
+gocr_charEnd: ()
+_gocr_imageSharedCopy: (0x40027f14, 415, 79, 417, 81, 0x808ac08)
+gocr_charBegin: ()
+gocr_charSetAllNearPixels: (1, 416, 48, 8)
+gocr_charEnd: ()
+_gocr_imageSharedCopy: (0x40027f14, 416, 48, 458, 65, 0x808acc0)
+gocr_charBegin: ()
+gocr_charSetAllNearPixels: (1, 467, 64, 8)
+gocr_charEnd: ()
+_gocr_imageSharedCopy: (0x40027f14, 467, 48, 484, 64, 0x808ae38)
+gocr_charBegin: ()
+gocr_charSetAllNearPixels: (1, 485, 48, 8)
+gocr_charEnd: ()
+_gocr_imageSharedCopy: (0x40027f14, 485, 48, 502, 64, 0x808af98)
+gocr_charBegin: ()
+gocr_charSetAllNearPixels: (1, 504, 64, 8)
+gocr_charEnd: ()
+_gocr_imageSharedCopy: (0x40027f14, 504, 48, 516, 64, 0x808b0f8)
+gocr_charBegin: ()
+gocr_charSetAllNearPixels: (1, 528, 64, 8)
+gocr_charEnd: ()
+_gocr_imageSharedCopy: (0x40027f14, 528, 47, 544, 64, 0x808b258)
+gocr_charBegin: ()
+gocr_charSetAllNearPixels: (1, 532, 43, 8)
+gocr_charEnd: ()
+_gocr_imageSharedCopy: (0x40027f14, 532, 42, 534, 44, 0x808b3d0)
+gocr_charBegin: ()
+gocr_charSetAllNearPixels: (1, 537, 42, 8)
+gocr_charEnd: ()
+_gocr_imageSharedCopy: (0x40027f14, 537, 42, 539, 44, 0x808b488)
+gocr_charBegin: ()
+gocr_charSetAllNearPixels: (1, 546, 54, 8)
+gocr_charEnd: ()
+_gocr_imageSharedCopy: (0x40027f14, 546, 47, 562, 65, 0x808b540)
+gocr_charBegin: ()
+gocr_charSetAllNearPixels: (1, 550, 43, 8)
+gocr_charEnd: ()
+_gocr_imageSharedCopy: (0x40027f14, 550, 42, 552, 44, 0x808b6b8)
+gocr_charBegin: ()
+gocr_charSetAllNearPixels: (1, 555, 42, 8)
+gocr_charEnd: ()
+_gocr_imageSharedCopy: (0x40027f14, 555, 42, 557, 44, 0x808b770)
+gocr_charBegin: ()
+gocr_charSetAllNearPixels: (1, 565, 48, 8)
+gocr_charEnd: ()
+_gocr_imageSharedCopy: (0x40027f14, 565, 48, 580, 65, 0x808b828)
+gocr_charBegin: ()
+gocr_charSetAllNearPixels: (1, 569, 43, 8)
+gocr_charEnd: ()
+_gocr_imageSharedCopy: (0x40027f14, 569, 42, 571, 44, 0x808b9a0)
+gocr_charBegin: ()
+gocr_charSetAllNearPixels: (1, 574, 42, 8)
+gocr_charEnd: ()
+_gocr_imageSharedCopy: (0x40027f14, 574, 42, 576, 44, 0x808ba58)
+_gocr_blockInfoFill: (0x40027f00)
+_gocr_blockInfoFill: height: [3 35 13.488372]
+width: [3 43 11.802325]
+gocr_runAllModules: module charRecognizer:obscure_charRecognizer
+gocr_printBox: (0x804b448)
+Box: x0:0, y0:47, x1:16, y1:64; c:0 ac:0 mod:0
+gocr_printArea: (0x40027f14, 0, 47, 16, 64)
+.......**........
+.......**........
+.......**........
+......****.......
+......****.......
+......*.***......
+.....**.***......
+.....*..***......
+.....*...***.....
+....**...***.....
+....*.....**.....
+....*********....
+...**********....
+...*.......**....
+...*.......***...
+..*........***...
+..*.........**...
+*****.....*******
+attributes: 0.944444 0.080911 0.725490
+gocr_runAllModules: module charRecognizer:obscure_charRecognizer
+gocr_printBox: (0x8085298)
+Box: x0:0, y0:84, x1:10, y1:95; c:0 ac:0 mod:0
+gocr_printArea: (0x40027f14, 0, 84, 10, 95)
+.******....
+.**...**...
+.**...***..
+.**....**..
+.....****..
+..****.**..
+.***...**..
+***....**.*
+**....***.*
+***...***.*
+****.******
+...**...**.
+attributes: 0.916667 0.123324 0.492424
+gocr_runAllModules: module charRecognizer:obscure_charRecognizer
+gocr_printBox: (0x80853c8)
+Box: x0:2, y0:0, x1:39, y1:34; c:0 ac:0 mod:0
+gocr_printArea: (0x40027f14, 2, 0, 39, 34)
+********......................********
+*********....................*********
+....*****....................*****....
+....*.****..................******....
+....*.****..................******....
+....*.****..................*.****....
+....*..****................**.****....
+....*..****................**.****....
+....*..****................*..****....
+....*...****..............**..****....
+....*...****..............**..****....
+....*...****..............*...****....
+....*....****............**...****....
+....*....****............**...****....
+....*.....****..........**....****....
+....*.....****..........**....****....
+....*.....****..........*.....****....
+....*......****........**.....****....
+....*......****........**.....****....
+....*......****........*......****....
+....*.......****......**......****....
+....*.......****......**......****....
+....*.......****......*.......****....
+....*........****....**.......****....
+....*........****....**.......****....
+....*.........***....*........****....
+....*.........****..**........****....
+....*.........****..*.........****....
+....*..........******.........****....
+....*..........******.........****....
+....*..........*****..........****....
+....**..........****..........****....
+...***..........****..........****....
+*********.......***.......************
+*********........**.......************
+attributes: 1.085714 0.038844 0.691729
+gocr_runAllModules: module charRecognizer:obscure_charRecognizer
+gocr_printBox: (0x8085600)
+Box: x0:12, y0:78, x1:23, y1:95; c:0 ac:0 mod:0
+gocr_printArea: (0x40027f14, 12, 78, 23, 95)
+****........
+.***........
+.***........
+.***........
+.***........
+.***........
+.********...
+.****...**..
+.***.....**.
+.***.....***
+.***.....***
+.***.....***
+.***.....***
+.***.....***
+.***.....**.
+.***....***.
+.*****.***..
+.....***....
+attributes: 0.666667 0.100154 0.583333
+gocr_runAllModules: module charRecognizer:obscure_charRecognizer
+gocr_printBox: (0x8085778)
+Box: x0:18, y0:48, x1:32, y1:64; c:0 ac:0 mod:0
+gocr_printArea: (0x40027f14, 18, 48, 32, 64)
+************...
+..***.....***..
+..***......***.
+..***.......**.
+..***.......**.
+..***......***.
+..***......***.
+..***....****..
+..***********..
+..***......***.
+..***.......***
+..***.......***
+..***.......***
+..***.......***
+..***.......***
+..***......***.
+*************..
+attributes: 0.882353 0.088908 0.533333
+gocr_runAllModules: module charRecognizer:obscure_charRecognizer
+gocr_printBox: (0x80858d8)
+Box: x0:26, y0:84, x1:34, y1:95; c:0 ac:0 mod:0
+gocr_printArea: (0x40027f14, 26, 84, 34, 95)
+..******.
+.**...***
+***...***
+**....***
+**.......
+**.......
+**.......
+**.......
+***.....*
+.**....**
+..***.**.
+....**...
+attributes: 0.750000 0.138889 0.583333
+gocr_runAllModules: module charRecognizer:obscure_charRecognizer
+gocr_printBox: (0x8085a08)
+Box: x0:35, y0:47, x1:49, y1:65; c:0 ac:0 mod:0
+gocr_printArea: (0x40027f14, 35, 47, 49, 65)
+.......***....*
+.....*******..*
+...***......***
+..***........**
+.***.........**
+.***..........*
+.**...........*
+***...........*
+***............
+***............
+***............
+***............
+***...........*
+.***..........*
+.***..........*
+..***........**
+...***......**.
+....****..***..
+......*****....
+attributes: 0.789474 0.084938 0.701754
+gocr_runAllModules: module charRecognizer:obscure_charRecognizer
+gocr_printBox: (0x8085b80)
+Box: x0:45, y0:12, x1:66, y1:35; c:0 ac:0 mod:0
+gocr_printArea: (0x40027f14, 45, 12, 66, 35)
+.....*******..........
+....***..*****........
+...**......****.......
+..**........****......
+..***........***......
+.*****.......****.....
+.*****........***.....
+..***.........***.....
+..............***.....
+..............***.....
+........*********.....
+.....******...***.....
+...*****......***.....
+..****........***.....
+.****.........***.....
+****..........***...**
+****..........***...**
+****.........****...**
+****.........****...**
+****.........****...**
+****........*****...**
+.****......**.****.**.
+..**********...******.
+....******.......**...
+attributes: 0.916667 0.061662 0.626894
+gocr_runAllModules: module charRecognizer:obscure_charRecognizer
+gocr_printBox: (0x8085d40)
+Box: x0:45, y0:78, x1:56, y1:95; c:0 ac:0 mod:0
+gocr_printArea: (0x40027f14, 45, 78, 56, 95)
+......****..
+........**..
+........**..
+........**..
+........**..
+........**..
+...*******..
+.***...***..
+***.....**..
+**......**..
+**......**..
+**......**..
+**......**..
+**......**..
+***.....**..
+.**....***..
+..***.******
+....**..**..
+attributes: 0.666667 0.100154 0.652778
+gocr_runAllModules: module charRecognizer:obscure_charRecognizer
+gocr_printBox: (0x8085eb8)
+Box: x0:59, y0:84, x1:67, y1:95; c:0 ac:0 mod:0
+gocr_printArea: (0x40027f14, 59, 84, 67, 95)
+..******.
+.**...**.
+***....**
+**.....**
+**.....**
+*********
+**.......
+**.......
+***.....*
+.**....**
+..**..**.
+....**...
+attributes: 0.750000 0.138889 0.537037
+gocr_runAllModules: module charRecognizer:obscure_charRecognizer
+gocr_printBox: (0x8085fe8)
+Box: x0:61, y0:48, x1:77, y1:64; c:0 ac:0 mod:0
+gocr_printArea: (0x40027f14, 61, 48, 77, 64)
+************.....
+..***.....***....
+..***.......**...
+..***........**..
+..***........***.
+..***.........**.
+..***.........**.
+..***.........***
+..***.........***
+..***.........***
+..***.........***
+..***.........**.
+..***........***.
+..***........**..
+..***.......***..
+..***......***...
+************.....
+attributes: 1.000000 0.083189 0.626298
+gocr_runAllModules: module charRecognizer:obscure_charRecognizer
+gocr_printBox: (0x8086148)
+Box: x0:68, y0:77, x1:76, y1:94; c:0 ac:0 mod:0
+gocr_printArea: (0x40027f14, 68, 77, 76, 94)
+.....***.
+...***.**
+...**.***
+..***..**
+..***....
+..***....
+..***....
+*******..
+..***....
+..***....
+..***....
+..***....
+..***....
+..***....
+..***....
+..***....
+..***....
+.******..
+attributes: 0.500000 0.124226 0.586420
+gocr_runAllModules: module charRecognizer:obscure_charRecognizer
+gocr_printBox: (0x80862c0)
+Box: x0:69, y0:12, x1:77, y1:34; c:0 ac:0 mod:0
+gocr_printArea: (0x40027f14, 69, 12, 77, 34)
+.*****...
+******...
+******...
+...***...
+...***...
+...***...
+...***...
+...***...
+...***...
+...***...
+...***...
+...***...
+...***...
+...***...
+...***...
+...***...
+...***...
+...***...
+...***...
+...***...
+...***...
+*********
+*********
+attributes: 0.391304 0.119315 0.570048
+gocr_runAllModules: module charRecognizer:obscure_charRecognizer
+gocr_printBox: (0x8086468)
+Box: x0:71, y0:1, x1:74, y1:4; c:0 ac:0 mod:0
+gocr_printArea: (0x40027f14, 71, 1, 74, 4)
+****
+****
+****
+****
+attributes: 1.000000 0.353553 0.000000
+gocr_runAllModules: module charRecognizer:obscure_charRecognizer
+gocr_printBox: (0x8086538)
+Box: x0:80, y0:48, x1:94, y1:64; c:0 ac:0 mod:0
+gocr_printArea: (0x40027f14, 80, 48, 94, 64)
+**************.
+..***......***.
+..***.......**.
+..***........*.
+..***........*.
+..***....*...*.
+..***....*.....
+..***...**.....
+..********.....
+..***....*.....
+..***....*....*
+..***....*....*
+..***........**
+..***........*.
+..***........*.
+..***.......**.
+**************.
+attributes: 0.882353 0.088908 0.603922
+gocr_runAllModules: module charRecognizer:obscure_charRecognizer
+gocr_printBox: (0x8086698)
+Box: x0:85, y0:84, x1:95, y1:100; c:0 ac:0 mod:0
+gocr_printArea: (0x40027f14, 85, 84, 95, 100)
+..*********
+.**...**.**
+***...***..
+***...***..
+***...***..
+.**...**...
+.***.***...
+.*.***.....
+.*.........
+.*******...
+.*********.
+**......**.
+**.......**
+**.......**
+**......**.
+.***..***..
+...****....
+attributes: 0.647059 0.108281 0.518717
+gocr_runAllModules: module charRecognizer:obscure_charRecognizer
+gocr_printBox: (0x80867f8)
+Box: x0:96, y0:48, x1:109, y1:64; c:0 ac:0 mod:0
+gocr_printArea: (0x40027f14, 96, 48, 109, 64)
+*************.
+..***......***
+..***.......**
+..***........*
+..***........*
+..***....*...*
+..***....*....
+..***...**....
+..********....
+..***...**....
+..***....*....
+..***....*....
+..***.........
+..***.........
+..***.........
+..***.........
+********......
+attributes: 0.823529 0.092532 0.634454
+gocr_runAllModules: module charRecognizer:obscure_charRecognizer
+gocr_printBox: (0x8086958)
+Box: x0:97, y0:10, x1:123, y1:34; c:0 ac:0 mod:0
+gocr_printArea: (0x40027f14, 97, 10, 123, 34)
+******...............******
+******..............*******
+...****.............****...
+...****.............****...
+...****............*****...
+...*.***...........*.***...
+...*.***...........*.***...
+...*.***..........**.***...
+...*..***.........*..***...
+...*..***........**..***...
+...*..***........**..***...
+...*...***.......*...***...
+...*...***......**...***...
+...*....***.....*....***...
+...*....***.....*....***...
+...*....***....**....***...
+...*.....***...*.....***...
+...*.....***...*.....***...
+...*.....***..**.....***...
+...*......***.*......***...
+...*......*****......***...
+...*......*****......***...
+..**.......***.......***...
+..***......***.......***...
+*******.....*.....*********
+attributes: 1.080000 0.054514 0.662222
+gocr_runAllModules: module charRecognizer:obscure_charRecognizer
+gocr_printBox: (0x8086b18)
+Box: x0:97, y0:78, x1:108, y1:94; c:0 ac:0 mod:0
+gocr_printArea: (0x40027f14, 97, 78, 108, 94)
+****........
+.***........
+.***........
+.***........
+.***........
+.***........
+.********...
+.****..***..
+.***....**..
+.***....**..
+.***....**..
+.***....**..
+.***....**..
+.***....**..
+.***....**..
+.***....**..
+*****.******
+attributes: 0.705882 0.102003 0.583333
+gocr_runAllModules: module charRecognizer:obscure_charRecognizer
+gocr_printBox: (0x8086c78)
+Box: x0:111, y0:84, x1:115, y1:94; c:0 ac:0 mod:0
+gocr_printArea: (0x40027f14, 111, 84, 115, 94)
+****.
+.***.
+.***.
+.***.
+.***.
+.***.
+.***.
+.***.
+.***.
+.***.
+*****
+attributes: 0.454545 0.219692 0.345455
+gocr_runAllModules: module charRecognizer:obscure_charRecognizer
+gocr_printBox: (0x8086d90)
+Box: x0:112, y0:78, x1:114, y1:80; c:0 ac:0 mod:0
+gocr_printArea: (0x40027f14, 112, 78, 114, 80)
+**.
+***
+**.
+attributes: 1.000000 0.471405 0.222222
+gocr_runAllModules: module charRecognizer:obscure_charRecognizer
+gocr_printBox: (0x8086e48)
+Box: x0:120, y0:47, x1:136, y1:65; c:0 ac:0 mod:0
+gocr_printArea: (0x40027f14, 120, 47, 136, 65)
+.......***....*..
+.....*******..*..
+...***......***..
+..***........**..
+.***.........**..
+.***..........*..
+.**...........*..
+***...........*..
+***..............
+***..............
+***..............
+***.......*******
+***..........**..
+.***.........**..
+.***.........**..
+..***........**..
+...***......***..
+....****..***.*..
+......*****......
+attributes: 0.894737 0.078932 0.699690
+gocr_runAllModules: module charRecognizer:obscure_charRecognizer
+gocr_printBox: (0x8086fc0)
+Box: x0:124, y0:84, x1:129, y1:99; c:0 ac:0 mod:0
+gocr_printArea: (0x40027f14, 124, 84, 129, 99)
+..****
+....**
+....**
+....**
+....**
+....**
+....**
+....**
+....**
+....**
+....**
+....**
+....**
+**..**
+**..**
+*****.
+attributes: 0.375000 0.178000 0.572917
+gocr_runAllModules: module charRecognizer:obscure_charRecognizer
+gocr_printBox: (0x8087120)
+Box: x0:126, y0:19, x1:141, y1:35; c:0 ac:0 mod:0
+gocr_printArea: (0x40027f14, 126, 19, 141, 35)
+...******.......
+..***...***.....
+.**......**.....
+.***.....***....
+.***......**....
+..**......**....
+..........**....
+.....*******....
+...***....**....
+.****.....**....
+.***......**....
+***.......**..**
+***......***..**
+***......***..**
+.***....****..*.
+..*******.*****.
+....***.....**..
+attributes: 0.941176 0.085828 0.617647
+gocr_runAllModules: module charRecognizer:obscure_charRecognizer
+gocr_printBox: (0x8087280)
+Box: x0:127, y0:78, x1:129, y1:80; c:0 ac:0 mod:0
+gocr_printArea: (0x40027f14, 127, 78, 129, 80)
+.**
+***
+.**
+attributes: 1.000000 0.471405 0.222222
+gocr_runAllModules: module charRecognizer:obscure_charRecognizer
+gocr_printBox: (0x8087338)
+Box: x0:133, y0:78, x1:143, y1:94; c:0 ac:0 mod:0
+gocr_printArea: (0x40027f14, 133, 78, 143, 94)
+****.......
+.***.......
+.***.......
+.***.......
+.***.......
+.***.......
+.***..*****
+.***...***.
+.***..**...
+.***.**....
+.*****.....
+.******....
+.***.***...
+.***..**...
+.***..***..
+.***...***.
+*****.*****
+attributes: 0.647059 0.108281 0.534759
+gocr_runAllModules: module charRecognizer:obscure_charRecognizer
+gocr_printBox: (0x8087498)
+Box: x0:140, y0:48, x1:155, y1:64; c:0 ac:0 mod:0
+gocr_printArea: (0x40027f14, 140, 48, 155, 64)
+*******..*******
+..***.......**..
+..***.......**..
+..***.......**..
+..***.......**..
+..***.......**..
+..***.......**..
+..***.......**..
+..************..
+..***.......**..
+..***.......**..
+..***.......**..
+..***.......**..
+..***.......**..
+..***.......**..
+..***.......**..
+*******..*******
+attributes: 0.941176 0.085828 0.595588
+gocr_runAllModules: module charRecognizer:obscure_charRecognizer
+gocr_printBox: (0x80875f8)
+Box: x0:143, y0:19, x1:149, y1:34; c:0 ac:0 mod:0
+gocr_printArea: (0x40027f14, 143, 19, 149, 34)
+.****..
+*****..
+..***..
+..***..
+..***..
+..***..
+..***..
+..***..
+..***..
+..***..
+..***..
+..***..
+..***..
+..***..
+..***..
+*******
+attributes: 0.437500 0.155931 0.508929
+gocr_runAllModules: module charRecognizer:obscure_charRecognizer
+gocr_printBox: (0x8087758)
+Box: x0:144, y0:11, x1:147, y1:14; c:0 ac:0 mod:0
+gocr_printArea: (0x40027f14, 144, 11, 147, 14)
+.**.
+****
+****
+.**.
+attributes: 1.000000 0.353553 0.250000
+gocr_runAllModules: module charRecognizer:obscure_charRecognizer
+gocr_printBox: (0x8087828)
+Box: x0:146, y0:78, x1:150, y1:94; c:0 ac:0 mod:0
+gocr_printArea: (0x40027f14, 146, 78, 150, 94)
+****.
+.***.
+.***.
+.***.
+.***.
+.***.
+.***.
+.***.
+.***.
+.***.
+.***.
+.***.
+.***.
+.***.
+.***.
+.***.
+*****
+attributes: 0.294118 0.208471 0.364706
+gocr_runAllModules: module charRecognizer:obscure_charRecognizer
+gocr_printBox: (0x8087988)
+Box: x0:158, y0:48, x1:164, y1:64; c:0 ac:0 mod:0
+gocr_printArea: (0x40027f14, 158, 48, 164, 64)
+*******
+..***..
+..***..
+..***..
+..***..
+..***..
+..***..
+..***..
+..***..
+..***..
+..***..
+..***..
+..***..
+..***..
+..***..
+..***..
+*******
+attributes: 0.411765 0.154494 0.504202
+gocr_runAllModules: module charRecognizer:obscure_charRecognizer
+gocr_printBox: (0x8087ae8)
+Box: x0:161, y0:84, x1:179, y1:94; c:0 ac:0 mod:0
+gocr_printArea: (0x40027f14, 161, 84, 179, 94)
+****.****..*****...
+.****...****..***..
+.***....***....**..
+.***....***....**..
+.***....**.....**..
+.***....**.....**..
+.***....**.....**..
+.***....**.....**..
+.***....**.....**..
+.***....**.....**..
+*****.******.******
+attributes: 1.727273 0.105045 0.526316
+gocr_runAllModules: module charRecognizer:obscure_charRecognizer
+gocr_printBox: (0x8087c00)
+Box: x0:163, y0:18, x1:182, y1:34; c:0 ac:0 mod:0
+gocr_printArea: (0x40027f14, 163, 18, 182, 34)
+*****..........*****
+..***..........***..
+..****........****..
+..*.**........*.**..
+..*.***.......*.**..
+..*..**......*..**..
+..*..**......*..**..
+..*..***.....*..**..
+..*...**....*...**..
+..*...**....*...**..
+..*...***..**...**..
+..*....**..*....**..
+..*....***.*....**..
+..*.....***.....**..
+..*.....***.....**..
+..**....***.....**..
+******...*...*******
+attributes: 1.176471 0.077202 0.641176
+gocr_runAllModules: module charRecognizer:obscure_charRecognizer
+gocr_printBox: (0x8087d60)
+Box: x0:175, y0:48, x1:184, y1:65; c:0 ac:0 mod:0
+gocr_printArea: (0x40027f14, 175, 48, 184, 65)
+...*******
+......***.
+......***.
+......***.
+......***.
+......***.
+......***.
+......***.
+......***.
+......***.
+......***.
+......***.
+......***.
+***...***.
+***...***.
+***...**..
+.**..***..
+..****....
+attributes: 0.555556 0.114396 0.616667
+gocr_runAllModules: module charRecognizer:obscure_charRecognizer
+gocr_printBox: (0x8087ed8)
+Box: x0:182, y0:84, x1:193, y1:94; c:0 ac:0 mod:0
+gocr_printArea: (0x40027f14, 182, 84, 193, 94)
+*********...
+.****..***..
+.***....**..
+.***....**..
+.***....**..
+.***....**..
+.***....**..
+.***....**..
+.***....**..
+.***....**..
+*****.******
+attributes: 1.090909 0.123324 0.492424
+gocr_runAllModules: module charRecognizer:obscure_charRecognizer
+gocr_printBox: (0x8087ff0)
+Box: x0:185, y0:24, x1:195, y1:35; c:0 ac:0 mod:0
+gocr_printArea: (0x40027f14, 185, 24, 195, 35)
+.******....
+.**...**...
+.**...***..
+.**....**..
+.....****..
+..****.**..
+.***...**..
+***....**.*
+**....***.*
+***...***.*
+****.******
+...**...**.
+attributes: 0.916667 0.123324 0.492424
+gocr_runAllModules: module charRecognizer:obscure_charRecognizer
+gocr_printBox: (0x8088120)
+Box: x0:187, y0:48, x1:203, y1:64; c:0 ac:0 mod:0
+gocr_printArea: (0x40027f14, 187, 48, 203, 64)
+*******.....*****
+..***.......***..
+..***.......**...
+..***......**....
+..***.....*......
+..***....*.......
+..***...*........
+..***..***.......
+..***.****.......
+..****..***......
+..***....***.....
+..***....***.....
+..***.....***....
+..***......***...
+..***......***...
+..***.......***..
+*******....******
+attributes: 1.000000 0.083189 0.622837
+gocr_runAllModules: module charRecognizer:obscure_charRecognizer
+gocr_printBox: (0x8088280)
+Box: x0:195, y0:84, x1:205, y1:95; c:0 ac:0 mod:0
+gocr_printArea: (0x40027f14, 195, 84, 205, 95)
+..******...
+.**....**..
+***.....**.
+**......**.
+**......***
+**......***
+**......***
+**......**.
+***.....**.
+.**....***.
+..***.***..
+....**.....
+attributes: 0.916667 0.123324 0.575758
+gocr_runAllModules: module charRecognizer:obscure_charRecognizer
+gocr_printBox: (0x80883b0)
+Box: x0:197, y0:24, x1:201, y1:34; c:0 ac:0 mod:0
+gocr_printArea: (0x40027f14, 197, 24, 201, 34)
+****.
+.***.
+.***.
+.***.
+.***.
+.***.
+.***.
+.***.
+.***.
+.***.
+*****
+attributes: 0.454545 0.219692 0.345455
+gocr_runAllModules: module charRecognizer:obscure_charRecognizer
+gocr_printBox: (0x80884c8)
+Box: x0:198, y0:18, x1:200, y1:20; c:0 ac:0 mod:0
+gocr_printArea: (0x40027f14, 198, 18, 200, 20)
+**.
+***
+**.
+attributes: 1.000000 0.471405 0.222222
+gocr_runAllModules: module charRecognizer:obscure_charRecognizer
+gocr_printBox: (0x8088580)
+Box: x0:206, y0:48, x1:218, y1:64; c:0 ac:0 mod:0
+gocr_printArea: (0x40027f14, 206, 48, 218, 64)
+********.....
+..***........
+..***........
+..***........
+..***........
+..***........
+..***........
+..***........
+..***........
+..***........
+..***.......*
+..***.......*
+..***.......*
+..***.......*
+..***......**
+..***.....***
+*************
+attributes: 0.764706 0.096837 0.660633
+gocr_runAllModules: module charRecognizer:obscure_charRecognizer
+gocr_printBox: (0x80886e0)
+Box: x0:212, y0:19, x1:230, y1:34; c:0 ac:0 mod:0
+gocr_printArea: (0x40027f14, 212, 19, 230, 34)
+*****.........*****
+*****.........*****
+..****.......****..
+..****.......****..
+..*.**......*****..
+..*.***.....*****..
+..*..**.....*.***..
+..*..**....**.***..
+..*..***...*..***..
+..*...**...*..***..
+..*...***.**..***..
+..*...***.*...***..
+..*....**.*...***..
+..*....****...***..
+..**....**....***..
+******..**..*******
+attributes: 1.187500 0.081709 0.549342
+gocr_runAllModules: module charRecognizer:obscure_charRecognizer
+gocr_printBox: (0x8088840)
+Box: x0:215, y0:84, x1:226, y1:99; c:0 ac:0 mod:0
+gocr_printArea: (0x40027f14, 215, 84, 226, 99)
+*********...
+.****...**..
+.***....***.
+.***.....***
+.***.....***
+.***.....***
+.***.....***
+.***.....***
+.***.....**.
+.***....***.
+.*****.***..
+.***.***....
+.***........
+.***........
+.***........
+*****.......
+attributes: 0.750000 0.104167 0.531250
+gocr_runAllModules: module charRecognizer:obscure_charRecognizer
+gocr_printBox: (0x80889a0)
+Box: x0:229, y0:84, x1:240, y1:99; c:0 ac:0 mod:0
+gocr_printArea: (0x40027f14, 229, 84, 240, 99)
+...****..*..
+.***...***..
+***....***..
+***.....**..
+**......**..
+**......**..
+**......**..
+**......**..
+***.....**..
+.**....***..
+..***.****..
+....**..**..
+........**..
+........**..
+........**..
+......******
+attributes: 0.750000 0.104167 0.630208
+gocr_runAllModules: module charRecognizer:obscure_charRecognizer
+gocr_printBox: (0x8088b00)
+Box: x0:230, y0:48, x1:249, y1:64; c:0 ac:0 mod:0
+gocr_printArea: (0x40027f14, 230, 48, 249, 64)
+*****..........*****
+..***..........***..
+..****........****..
+..*.**........*.**..
+..*.***.......*.**..
+..*..**......*..**..
+..*..**......*..**..
+..*..***.....*..**..
+..*...**....*...**..
+..*...**....*...**..
+..*...***..**...**..
+..*....**..*....**..
+..*....***.*....**..
+..*.....***.....**..
+..*.....***.....**..
+..**....***.....**..
+******...*...*******
+attributes: 1.176471 0.077202 0.641176
+gocr_runAllModules: module charRecognizer:obscure_charRecognizer
+gocr_printBox: (0x8088c60)
+Box: x0:233, y0:25, x1:242, y1:35; c:0 ac:0 mod:0
+gocr_printArea: (0x40027f14, 233, 25, 242, 35)
+.******...
+***..***..
+***...**..
+......**..
+..******..
+.***..**..
+**....**..
+**....**.*
+**...***.*
+***.******
+..***..**.
+attributes: 0.909091 0.135146 0.463636
+gocr_runAllModules: module charRecognizer:obscure_charRecognizer
+gocr_printBox: (0x8088d78)
+Box: x0:242, y0:84, x1:249, y1:94; c:0 ac:0 mod:0
+gocr_printArea: (0x40027f14, 242, 84, 249, 94)
+***.****
+.****.**
+.***..**
+.***....
+.***....
+.***....
+.***....
+.***....
+.***....
+.***....
+******..
+attributes: 0.727273 0.154562 0.488636
+gocr_runAllModules: module charRecognizer:obscure_charRecognizer
+gocr_printBox: (0x8088e90)
+Box: x0:244, y0:25, x1:248, y1:34; c:0 ac:0 mod:0
+gocr_printArea: (0x40027f14, 244, 25, 248, 34)
+****.
+.***.
+.***.
+.***.
+.***.
+.***.
+.***.
+.***.
+.***.
+*****
+attributes: 0.500000 0.223607 0.340000
+gocr_runAllModules: module charRecognizer:obscure_charRecognizer
+gocr_printBox: (0x8088fa8)
+Box: x0:245, y0:19, x1:247, y1:21; c:0 ac:0 mod:0
+gocr_printArea: (0x40027f14, 245, 19, 247, 21)
+**.
+***
+***
+attributes: 1.000000 0.471405 0.111111
+gocr_runAllModules: module charRecognizer:obscure_charRecognizer
+gocr_printBox: (0x8089060)
+Box: x0:252, y0:48, x1:267, y1:64; c:0 ac:0 mod:0
+gocr_printArea: (0x40027f14, 252, 48, 267, 64)
+*****......*****
+..****.......**.
+..****.......*..
+..*.***......*..
+..*..***.....*..
+..*..***.....*..
+..*...***....*..
+..*....***...*..
+..*....***...*..
+..*.....***..*..
+..*......***.*..
+..*......***.*..
+..*.......****..
+..*........***..
+..*........***..
+..*.........**..
+*****........*..
+attributes: 0.941176 0.085828 0.676471
+gocr_runAllModules: module charRecognizer:obscure_charRecognizer
+gocr_printBox: (0x80891c0)
+Box: x0:260, y0:84, x1:267, y1:95; c:0 ac:0 mod:0
+gocr_printArea: (0x40027f14, 260, 84, 267, 95)
+.******.
+**....*.
+*.....*.
+**....*.
+******..
+.******.
+....****
+*.....**
+*.....**
+**....**
+***..**.
+*..**...
+attributes: 0.666667 0.150231 0.500000
+gocr_runAllModules: module charRecognizer:obscure_charRecognizer
+gocr_printBox: (0x80892f0)
+Box: x0:268, y0:80, x1:275, y1:95; c:0 ac:0 mod:0
+gocr_printArea: (0x40027f14, 268, 80, 275, 95)
+....*...
+...**...
+...**...
+..***...
+********
+..***...
+..***...
+..***...
+..***...
+..***...
+..***..*
+..***..*
+..***..*
+...**..*
+...*****
+.....**.
+attributes: 0.500000 0.139754 0.585938
+gocr_runAllModules: module charRecognizer:obscure_charRecognizer
+gocr_printBox: (0x8089450)
+Box: x0:270, y0:47, x1:286, y1:65; c:0 ac:0 mod:0
+gocr_printArea: (0x40027f14, 270, 47, 286, 65)
+.......***.......
+....****.****....
+...***.....***...
+..***.......***..
+.***.........***.
+.***.........***.
+.**...........**.
+***...........***
+***...........***
+***...........***
+***...........***
+***...........***
+***...........***
+.***.........***.
+.***.........***.
+..***.......***..
+...**.......**...
+....***...***....
+......*****......
+attributes: 0.894737 0.078932 0.665635
+gocr_runAllModules: module charRecognizer:obscure_charRecognizer
+gocr_printBox: (0x80895c8)
+Box: x0:279, y0:84, x1:290, y1:95; c:0 ac:0 mod:0
+gocr_printArea: (0x40027f14, 279, 84, 290, 95)
+****..****..
+.***...***..
+.***....**..
+.***....**..
+.***....**..
+.***....**..
+.***....**..
+.***....**..
+.***....**..
+.***...***..
+..***.******
+....**..**..
+attributes: 1.000000 0.117851 0.527778
+gocr_runAllModules: module charRecognizer:obscure_charRecognizer
+gocr_printBox: (0x80896f8)
+Box: x0:297, y0:48, x1:310, y1:64; c:0 ac:0 mod:0
+gocr_printArea: (0x40027f14, 297, 48, 310, 64)
+************..
+..***.....***.
+..***......***
+..***......***
+..***.......**
+..***.......**
+..***......***
+..***......**.
+..**********..
+..***.........
+..***.........
+..***.........
+..***.........
+..***.........
+..***.........
+..***.........
+*******.......
+attributes: 0.823529 0.092532 0.626050
+gocr_runAllModules: module charRecognizer:obscure_charRecognizer
+gocr_printBox: (0x8089858)
+Box: x0:300, y0:84, x1:328, y1:95; c:0 ac:0 mod:0
+gocr_printArea: (0x40027f14, 300, 84, 328, 95)
+******..****************.****
+..***....***..***..****..***.
+..***....**...***...**....*..
+...**....*....***...***...*..
+...***..**.....**...***..**..
+...***..*......***.*.**..*...
+....**..*.......**.*.***.*...
+....****........****..****...
+.....***........***...***....
+.....***.........**...***....
+.....**..........**....**....
+......*..........*.....*.....
+attributes: 2.416667 0.090186 0.614943
+gocr_runAllModules: module charRecognizer:obscure_charRecognizer
+gocr_printBox: (0x8089988)
+Box: x0:314, y0:47, x1:330, y1:69; c:0 ac:0 mod:0
+gocr_printArea: (0x40027f14, 314, 47, 330, 69)
+.......***.......
+....****.****....
+...***.....***...
+..***.......***..
+.***.........***.
+.***.........***.
+.**...........**.
+***...........***
+***...........***
+***...........***
+***...........***
+***...........***
+***...........***
+.**...........**.
+.***...***...***.
+..***.**.**.***..
+...**.*...*.**...
+....****..***....
+......******....*
+...........**...*
+...........******
+...........******
+............****.
+attributes: 0.739130 0.073148 0.649616
+gocr_runAllModules: module charRecognizer:obscure_charRecognizer
+gocr_printBox: (0x8089b30)
+Box: x0:333, y0:48, x1:349, y1:65; c:0 ac:0 mod:0
+gocr_printArea: (0x40027f14, 333, 48, 349, 65)
+***********......
+..***....****....
+..***......***...
+..***......***...
+..***......***...
+..***......***...
+..***......***...
+..***.....***....
+..*********......
+..***....***.....
+..***.....***....
+..***.....***....
+..***.....***....
+..***.....***....
+..***.....***...*
+..***......**...*
+*******....***.**
+............****.
+attributes: 0.944444 0.080911 0.601307
+gocr_runAllModules: module charRecognizer:obscure_charRecognizer
+gocr_printBox: (0x8089ca8)
+Box: x0:338, y0:84, x1:350, y1:94; c:0 ac:0 mod:0
+gocr_printArea: (0x40027f14, 338, 84, 350, 94)
+******.*****.
+..***...***..
+...**...*....
+...***.**....
+....****.....
+.....***.....
+.....***.....
+....*****....
+...**..***...
+..**....***..
+*****..******
+attributes: 1.181818 0.119087 0.573427
+gocr_runAllModules: module charRecognizer:obscure_charRecognizer
+gocr_printBox: (0x8089dc0)
+Box: x0:351, y0:84, x1:362, y1:99; c:0 ac:0 mod:0
+gocr_printArea: (0x40027f14, 351, 84, 362, 99)
+******..****
+..***....***
+..***....*..
+...**....*..
+...***..**..
+....**..*...
+....**..*...
+....****....
+.....***....
+.....***....
+......*.....
+......*.....
+.....*......
+***..*......
+***.**......
+.****.......
+attributes: 0.750000 0.104167 0.687500
+gocr_runAllModules: module charRecognizer:obscure_charRecognizer
+gocr_printBox: (0x8089f20)
+Box: x0:359, y0:47, x1:369, y1:65; c:0 ac:0 mod:0
+gocr_printArea: (0x40027f14, 359, 47, 369, 65)
+....***...*
+..*********
+.**.....***
+**.......**
+**.......**
+**.......**
+***.......*
+****.......
+.*******...
+..********.
+.....******
+........***
+*........**
+*........**
+*........**
+**.......**
+***.....***
+*****..***.
+*...****...
+attributes: 0.578947 0.105045 0.550239
+gocr_runAllModules: module charRecognizer:obscure_charRecognizer
+gocr_printBox: (0x808a098)
+Box: x0:365, y0:84, x1:373, y1:94; c:0 ac:0 mod:0
+gocr_printArea: (0x40027f14, 365, 84, 373, 94)
+*********
+**....***
+*....***.
+*...***..
+*...***..
+...***...
+..***...*
+..**....*
+.***....*
+***....**
+********.
+attributes: 0.818182 0.143562 0.464646
+gocr_runAllModules: module charRecognizer:obscure_charRecognizer
+gocr_printBox: (0x808a1b0)
+Box: x0:372, y0:48, x1:387, y1:64; c:0 ac:0 mod:0
+gocr_printArea: (0x40027f14, 372, 48, 387, 64)
+***************.
+**.....**....***
+*......**.....**
+*......**......*
+*......**......*
+*......**......*
+.......**.......
+.......**.......
+.......**.......
+.......**.......
+.......**.......
+.......**.......
+.......**.......
+.......**.......
+.......**.......
+.......**.......
+...*********....
+attributes: 0.941176 0.085828 0.750000
+gocr_runAllModules: module charRecognizer:obscure_charRecognizer
+gocr_printBox: (0x808a310)
+Box: x0:384, y0:84, x1:394, y1:95; c:0 ac:0 mod:0
+gocr_printArea: (0x40027f14, 384, 84, 394, 95)
+.******....
+.**...**...
+.**...***..
+.**....**..
+.....****..
+..****.**..
+.***...**..
+***....**.*
+**....***.*
+***...***.*
+****.******
+...**...**.
+attributes: 0.916667 0.123324 0.492424
+gocr_runAllModules: module charRecognizer:obscure_charRecognizer
+gocr_printBox: (0x808a440)
+Box: x0:385, y0:79, x1:387, y1:81; c:0 ac:0 mod:0
+gocr_printArea: (0x40027f14, 385, 79, 387, 81)
+.**
+***
+***
+attributes: 1.000000 0.471405 0.111111
+gocr_runAllModules: module charRecognizer:obscure_charRecognizer
+gocr_printBox: (0x808a4f8)
+Box: x0:390, y0:48, x1:405, y1:65; c:0 ac:0 mod:0
+gocr_printArea: (0x40027f14, 390, 48, 405, 65)
+*******....*****
+..***........**.
+..***........*..
+..***........*..
+..***........*..
+..***........*..
+..***........*..
+..***........*..
+..***........*..
+..***........*..
+..***........*..
+..***........*..
+..***........*..
+..***........*..
+...**.......**..
+...***.....**...
+....****.***....
+......*****.....
+attributes: 0.888889 0.083622 0.701389
+gocr_runAllModules: module charRecognizer:obscure_charRecognizer
+gocr_printBox: (0x808a670)
+Box: x0:390, y0:79, x1:392, y1:81; c:0 ac:0 mod:0
+gocr_printArea: (0x40027f14, 390, 79, 392, 81)
+***
+***
+***
+attributes: 1.000000 0.471405 0.000000
+gocr_runAllModules: module charRecognizer:obscure_charRecognizer
+gocr_printBox: (0x808a728)
+Box: x0:396, y0:84, x1:406, y1:95; c:0 ac:0 mod:0
+gocr_printArea: (0x40027f14, 396, 84, 406, 95)
+..******...
+.**....**..
+***.....**.
+**......**.
+**......***
+**......***
+**......***
+**......**.
+***.....**.
+.**....***.
+..***.***..
+....**.....
+attributes: 0.916667 0.123324 0.575758
+gocr_runAllModules: module charRecognizer:obscure_charRecognizer
+gocr_printBox: (0x808a858)
+Box: x0:397, y0:79, x1:399, y1:81; c:0 ac:0 mod:0
+gocr_printArea: (0x40027f14, 397, 79, 399, 81)
+.**
+***
+***
+attributes: 1.000000 0.471405 0.111111
+gocr_runAllModules: module charRecognizer:obscure_charRecognizer
+gocr_printBox: (0x808a910)
+Box: x0:402, y0:79, x1:404, y1:81; c:0 ac:0 mod:0
+gocr_printArea: (0x40027f14, 402, 79, 404, 81)
+***
+***
+***
+attributes: 1.000000 0.471405 0.000000
+gocr_runAllModules: module charRecognizer:obscure_charRecognizer
+gocr_printBox: (0x808a9c8)
+Box: x0:409, y0:84, x1:420, y1:95; c:0 ac:0 mod:0
+gocr_printArea: (0x40027f14, 409, 84, 420, 95)
+****..****..
+.***...***..
+.***....**..
+.***....**..
+.***....**..
+.***....**..
+.***....**..
+.***....**..
+.***....**..
+.***...***..
+..***.******
+....**..**..
+attributes: 1.000000 0.117851 0.527778
+gocr_runAllModules: module charRecognizer:obscure_charRecognizer
+gocr_printBox: (0x808aaf8)
+Box: x0:410, y0:79, x1:412, y1:81; c:0 ac:0 mod:0
+gocr_printArea: (0x40027f14, 410, 79, 412, 81)
+.**
+***
+***
+attributes: 1.000000 0.471405 0.111111
+gocr_runAllModules: module charRecognizer:obscure_charRecognizer
+gocr_printBox: (0x808abb0)
+Box: x0:415, y0:79, x1:417, y1:81; c:0 ac:0 mod:0
+gocr_printArea: (0x40027f14, 415, 79, 417, 81)
+***
+***
+***
+attributes: 1.000000 0.471405 0.000000
+gocr_runAllModules: module charRecognizer:obscure_charRecognizer
+gocr_printBox: (0x808ac68)
+Box: x0:416, y0:48, x1:458, y1:65; c:0 ac:0 mod:0
+gocr_printArea: (0x40027f14, 416, 48, 458, 65)
+*******......************...******...******
+..***.........**....***......***.......**..
+...***........**.....**.......**.......**..
+...***........*......***......***......*...
+....**.......**......***.....****......*...
+....***......*.......***.....*.**.....**...
+....***......*........**.....*.***....*....
+.....**.....**........***...**.***....*....
+.....***....*.........***...*...**...**....
+.....***....*..........**...*...***..*.....
+......***..*...........***..*...***..*.....
+......***..*...........***.*.....**.**.....
+.......**.**............**.*.....****......
+.......****.............****.....****......
+.......****.............***.......***......
+........***..............**.......**.......
+........**...............**.......**.......
+........**...............**.......**.......
+attributes: 2.388889 0.060227 0.724806
+gocr_runAllModules: module charRecognizer:obscure_charRecognizer
+gocr_printBox: (0x808ade0)
+Box: x0:467, y0:48, x1:484, y1:64; c:0 ac:0 mod:0
+gocr_printArea: (0x40027f14, 467, 48, 484, 64)
+.*******...******.
+...***......***...
+....***.....**....
+....***....**.....
+.....***...*......
+......***.*.......
+......*****.......
+.......***........
+........***.......
+.......****.......
+.......*.***......
+......*...***.....
+.....**...***.....
+.....*.....***....
+....*.......***...
+...**.......***...
+******.....*******
+attributes: 1.058824 0.080911 0.702614
+gocr_runAllModules: module charRecognizer:obscure_charRecognizer
+gocr_printBox: (0x808af40)
+Box: x0:485, y0:48, x1:502, y1:64; c:0 ac:0 mod:0
+gocr_printArea: (0x40027f14, 485, 48, 502, 64)
+*******......*****
+..***.........**..
+...***........*...
+....***......**...
+....***......*....
+.....***....*.....
+.....***...**.....
+......***..*......
+.......*****......
+.......****.......
+........**........
+........**........
+........**........
+........**........
+........**........
+........**........
+......*******.....
+attributes: 1.058824 0.080911 0.767974
+gocr_runAllModules: module charRecognizer:obscure_charRecognizer
+gocr_printBox: (0x808b0a0)
+Box: x0:504, y0:48, x1:516, y1:64; c:0 ac:0 mod:0
+gocr_printArea: (0x40027f14, 504, 48, 516, 64)
+.************
+.***.....****
+.**......***.
+.*......***..
+.*......***..
+.*.....***...
+......***....
+......***....
+.....***.....
+....***......
+....***.....*
+...***......*
+...***......*
+..***......**
+.***.......**
+.***......***
+************.
+attributes: 0.764706 0.096837 0.601810
+gocr_runAllModules: module charRecognizer:obscure_charRecognizer
+gocr_printBox: (0x808b200)
+Box: x0:528, y0:47, x1:544, y1:64; c:0 ac:0 mod:0
+gocr_printArea: (0x40027f14, 528, 47, 544, 64)
+.......**........
+.......**........
+.......**........
+......****.......
+......****.......
+......*.***......
+.....**.***......
+.....*..***......
+.....*...***.....
+....**...***.....
+....*.....**.....
+....*********....
+...**********....
+...*.......**....
+...*.......***...
+..*........***...
+..*.........**...
+*****.....*******
+attributes: 0.944444 0.080911 0.725490
+gocr_runAllModules: module charRecognizer:obscure_charRecognizer
+gocr_printBox: (0x808b378)
+Box: x0:532, y0:42, x1:534, y1:44; c:0 ac:0 mod:0
+gocr_printArea: (0x40027f14, 532, 42, 534, 44)
+.**
+***
+***
+attributes: 1.000000 0.471405 0.111111
+gocr_runAllModules: module charRecognizer:obscure_charRecognizer
+gocr_printBox: (0x808b430)
+Box: x0:537, y0:42, x1:539, y1:44; c:0 ac:0 mod:0
+gocr_printArea: (0x40027f14, 537, 42, 539, 44)
+***
+***
+***
+attributes: 1.000000 0.471405 0.000000
+gocr_runAllModules: module charRecognizer:obscure_charRecognizer
+gocr_printBox: (0x808b4e8)
+Box: x0:546, y0:47, x1:562, y1:65; c:0 ac:0 mod:0
+gocr_printArea: (0x40027f14, 546, 47, 562, 65)
+.......***.......
+....****.****....
+...***.....***...
+..***.......***..
+.***.........***.
+.***.........***.
+.**...........**.
+***...........***
+***...........***
+***...........***
+***...........***
+***...........***
+***...........***
+.***.........***.
+.***.........***.
+..***.......***..
+...**.......**...
+....***...***....
+......*****......
+attributes: 0.894737 0.078932 0.665635
+gocr_runAllModules: module charRecognizer:obscure_charRecognizer
+gocr_printBox: (0x808b660)
+Box: x0:550, y0:42, x1:552, y1:44; c:0 ac:0 mod:0
+gocr_printArea: (0x40027f14, 550, 42, 552, 44)
+.**
+***
+***
+attributes: 1.000000 0.471405 0.111111
+gocr_runAllModules: module charRecognizer:obscure_charRecognizer
+gocr_printBox: (0x808b718)
+Box: x0:555, y0:42, x1:557, y1:44; c:0 ac:0 mod:0
+gocr_printArea: (0x40027f14, 555, 42, 557, 44)
+***
+***
+***
+attributes: 1.000000 0.471405 0.000000
+gocr_runAllModules: module charRecognizer:obscure_charRecognizer
+gocr_printBox: (0x808b7d0)
+Box: x0:565, y0:48, x1:580, y1:65; c:0 ac:0 mod:0
+gocr_printArea: (0x40027f14, 565, 48, 580, 65)
+*******....*****
+..***........**.
+..***........*..
+..***........*..
+..***........*..
+..***........*..
+..***........*..
+..***........*..
+..***........*..
+..***........*..
+..***........*..
+..***........*..
+..***........*..
+..***........*..
+...**.......**..
+...***.....**...
+....****.***....
+......*****.....
+attributes: 0.888889 0.083622 0.701389
+gocr_runAllModules: module charRecognizer:obscure_charRecognizer
+gocr_printBox: (0x808b948)
+Box: x0:569, y0:42, x1:571, y1:44; c:0 ac:0 mod:0
+gocr_printArea: (0x40027f14, 569, 42, 571, 44)
+.**
+***
+***
+attributes: 1.000000 0.471405 0.111111
+gocr_runAllModules: module charRecognizer:obscure_charRecognizer
+gocr_printBox: (0x808ba00)
+Box: x0:574, y0:42, x1:576, y1:44; c:0 ac:0 mod:0
+gocr_printArea: (0x40027f14, 574, 42, 576, 44)
+***
+***
+***
+attributes: 1.000000 0.471405 0.000000
+_gocr_blockTextFill: (0x40027f00)
+_gocr_imageWrite: (0x804b368, test.ppm, 1)
+gocr_finalize: ()

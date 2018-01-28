@@ -1,0 +1,118 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+<TITLE>TIdQOTD</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <META name="GENERATOR" content="Doc-O-Matic">
+    <LINK rel="STYLESHEET" href="default.css" type="text/css">
+
+<SCRIPT LANGUAGE="JavaScript1.2" SRC="scripts.js"></SCRIPT>
+</HEAD>
+<BODY CLASS="Element57">
+<TABLE BORDER="0" BGCOLOR="#AACCFF" WIDTH="100%" CELLSPACING="0" CELLPADDING="0">
+<TR><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element1">
+Indy 9</DIV>
+</TD><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element2">
+<A HREF="content.html" CLASS="Element59">Content</A> | <A HREF="idx.html" CLASS="Element59">Index</A> | <A HREF="symref.html" CLASS="Element59">Reference</A></DIV>
+</TD></TR></TABLE><DIV CLASS="Element58">
+<DIV CLASS="Element5">
+TIdQOTD</DIV>
+<DIV CLASS="Element7">
+<A HREF="013152.html" CLASS="Element59">Hierarchy</A>, <A HREF="013153.html" CLASS="Element59">Properties</A>, <A HREF="013154.html" CLASS="Element59">Methods</A>, <A HREF="013155.html" CLASS="Element59">Events</A>, <A HREF="013156.html" CLASS="Element59">See Also</A>, <A HREF="002776.html" CLASS="Element59">Unit: IdQotd</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Implements a <A HREF="007628.html#0002" CLASS="Element59">Quote</A> of the Day Protocol client.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12">TIdQOTD = <STRONG>class</STRONG>(<A HREF="007827.html" CLASS="Element59">TIdTCPClient</A>)</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Unit</DIV>
+<DIV CLASS="Element69">
+<A HREF="002776.html" CLASS="Element59">IdQotd</A></DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+TIdQOTD implements a <A HREF="007628.html#0002" CLASS="Element59">Quote</A> of the Day Protocol (QUOTD) client as described in the Internet Standards document:<P CLASS="Element10">
+<UL>
+<LI>RFC 865 - <A HREF="007628.html#0002" CLASS="Element59">Quote</A> of the Day Protocol (http://www.rfc-editor.org/rfc/rfc865.txt)</UL>
+<P CLASS="Element10">
+QUOTD is a simple protocol for retrieving a short quote from a server.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0001">TIdQOTD.Port</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007628.html" CLASS="Element59">TIdQOTD</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Port number used for the server connection.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> Port: integer;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Port is an Integer property that identifies the server port number server used for the client connection. By convention, some internet protocols reserve port number including:<P CLASS="Element10">
+<UL>
+<LI>21 - FTP<P CLASS="Element10">
+<LI>25 - SMTP<P CLASS="Element10">
+<LI>80 - HTTP<P CLASS="Element10">
+<LI>119 - NNTP</UL>
+<P CLASS="Element10">
+A client application may define it's own port to connect to a server running the same port.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0002">TIdQOTD.Quote</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007628.html" CLASS="Element59">TIdQOTD</A>, <A HREF="013157.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Connects and retrieves a quote from the QOTD server.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> Quote: <STRONG>String</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Quote is a read-only String property that connects to the Quote of the Day server and retrieves a quote.<P CLASS="Element10">
+Be sure to set the Host property to the Quote of the Day server before calling Quote.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0000">TIdQOTD.Create</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007628.html" CLASS="Element59">TIdQOTD</A>, <A HREF="013158.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Constructor for the object instance.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>constructor</STRONG> Create(AOwner: TComponent); <STRONG>override</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+AOwner: TComponent</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Owner of the object instance.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Create is the constructor for the object instance that instantiates a new <A HREF="007628.html" CLASS="Element59">TIdQOTD</A> component and sets the default port to the standard port number used for the <A HREF="007628.html#0002" CLASS="Element59">Quote</A> of the Day protocol (<A HREF="002634.html" CLASS="Element59">IdPORT_QOTD</A>).</DIV>
+</DIV>
+<DIV CLASS="Element62">
+<HR>Created with Doc-O-Matic 2 donated to <STRONG><A HREF="http://www.delphi-jedi.org">Project JEDI</A></STRONG>. Commercial license available from the <STRONG><A HREF="http://www.doc-o-matic.com">Doc-O-Matic site</A></STRONG>.</DIV>
+</DIV></BODY></HTML>

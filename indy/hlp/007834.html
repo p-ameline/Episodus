@@ -1,0 +1,272 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+<TITLE>TIdTelnet</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <META name="GENERATOR" content="Doc-O-Matic">
+    <LINK rel="STYLESHEET" href="default.css" type="text/css">
+
+<SCRIPT LANGUAGE="JavaScript1.2" SRC="scripts.js"></SCRIPT>
+</HEAD>
+<BODY CLASS="Element57">
+<TABLE BORDER="0" BGCOLOR="#AACCFF" WIDTH="100%" CELLSPACING="0" CELLPADDING="0">
+<TR><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element1">
+Indy 9</DIV>
+</TD><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element2">
+<A HREF="content.html" CLASS="Element59">Content</A> | <A HREF="idx.html" CLASS="Element59">Index</A> | <A HREF="symref.html" CLASS="Element59">Reference</A></DIV>
+</TD></TR></TABLE><DIV CLASS="Element58">
+<DIV CLASS="Element5">
+TIdTelnet</DIV>
+<DIV CLASS="Element7">
+<A HREF="014233.html" CLASS="Element59">Hierarchy</A>, <A HREF="014234.html" CLASS="Element59">Properties</A>, <A HREF="014235.html" CLASS="Element59">Methods</A>, <A HREF="014236.html" CLASS="Element59">Events</A>, <A HREF="014237.html" CLASS="Element59">See Also</A>, <A HREF="002921.html" CLASS="Element59">Unit: IdTelnet</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Implements a TELNET protocol client.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12">TIdTelnet = <STRONG>class</STRONG>(<A HREF="007827.html" CLASS="Element59">TIdTCPClient</A>)</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Unit</DIV>
+<DIV CLASS="Element69">
+<A HREF="002921.html" CLASS="Element59">IdTelnet</A></DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+TIdTelnet is a client implementation of the TELNET Protocol as described in the Internet Standards documents:<P CLASS="Element10">
+<UL>
+<LI>RFC 854 - TELNET Protocol Specification (http://www.rfc-editor.org/rfc/rfc854.txt)<P CLASS="Element10">
+<LI>RFC 855 - TELNET Option Specifications (http://www.rfc-editor.org/rfc/rfc855.txt)<P CLASS="Element10">
+<LI>RFC 856 - TELNET Binary Transmission (http://www.rfc-editor.org/rfc/rfc856.txt)<P CLASS="Element10">
+<LI>RFC 857 - TELNET Echo Option (http://www.rfc-editor.org/rfc/rfc857.txt)<P CLASS="Element10">
+<LI>RFC 858 - TELNET Suppress Go Ahead Option (http://www.rfc-editor.org/rfc/rfc858.txt)<P CLASS="Element10">
+<LI>RFC 859 - TELNET Status Option (http://www.rfc-editor.org/rfc/rfc859.txt)<P CLASS="Element10">
+<LI>RFC 860 - TELNET Timing Mark Option (http://www.rfc-editor.org/rfc/rfc860.txt)<P CLASS="Element10">
+<LI>RFC 861 - TELNET Extended Options: List Option (http://www.rfc-editor.org/rfc/rfc861.txt)<P CLASS="Element10">
+<LI>RFC 1700 - Assigned Numbers (http://www.rfc-editor.org/rfc/rfc1700.txt)</UL>
+<P CLASS="Element10">
+TIdTelnet is a <A HREF="007827.html" CLASS="Element59">TIdTCPClient</A> descendant used to transmit data with interspersed TELNET control information.<P CLASS="Element10">
+TIdTelnet provides a general, eight-bit byte-oriented communications facility designed to interface terminal devices and terminal-oriented processes. The TELNET protocol may also be used for terminal-to-terminal communication (&quot;linking&quot;) and process-to-process communication (distributed computation).<P CLASS="Element10">
+TIdTelnet also provides negotiated options that allows additional services over and above those available within an NVT (Network Virtual <A HREF="007834.html#0001" CLASS="Element59">Terminal</A>).</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0003">TIdTelnet.OnConnect</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007834.html" CLASS="Element59">TIdTelnet</A>, <A HREF="014238.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Specifies the connection event handler.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> OnConnect: TNotifyEvent;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+OnConnect is a TClientEvent event handler that responds to client connection requests. OnConnect is called from the <A HREF="007834.html#0000" CLASS="Element59">Connect</A> method, prior to opening the <A HREF="007071.html" CLASS="Element59">socket</A> connection and assigning the <A HREF="007841.html" CLASS="Element59">TIdTelnetReadThread</A> used to read data for the <A HREF="007834.html" CLASS="Element59">TIdTelnet</A> object.<P CLASS="Element10">
+Applications should assign a procedure to the OnConnect event handler to respond to connection requests or perform special processing prior to opening the <A HREF="007071.html" CLASS="Element59">socket</A> connection.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0005">TIdTelnet.OnDisconnect</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007834.html" CLASS="Element59">TIdTelnet</A>, <A HREF="014239.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Specifies the event handler for disconnection requests.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> OnDisconnect: TNotifyEvent;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+OnDisconnect is a <A HREF="007837.html" CLASS="Element59">TIdTelnetCommandEvent</A> event handler that responds to client disconnection requests. OnDisconnect is triggered from the <A HREF="007834.html#0002" CLASS="Element59">Disconnect</A> method after terminating the <A HREF="007834.html#0000" CLASS="Element59">TelnetThread</A> and closing the <A HREF="007071.html" CLASS="Element59">socket</A> connection.<P CLASS="Element10">
+Applications should assign a procedure to the OnDisconnect event handler to perform processing required after closing the <A HREF="007071.html" CLASS="Element59">socket</A> connection.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0000">TIdTelnet.TelnetThread</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007834.html" CLASS="Element59">TIdTelnet</A>, <A HREF="014240.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Specifies the thread used to read data and commands for the TELNET client.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> TelnetThread: <A HREF="007841.html" CLASS="Element59">TIdTelnetReadThread</A>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+TelnetThread is an instance of <A HREF="007841.html" CLASS="Element59">TIdTelnetReadThread</A> that is used to read data and commands for the <A HREF="007834.html" CLASS="Element59">TIdTelnet</A> object. All data from the host is read using this thread. The <A HREF="007834.html#0004" CLASS="Element59">OnDataAvailable</A> and <A HREF="007834.html#0006" CLASS="Element59">OnTelnetCommand</A> event handlers are called as a result of data being received via this thread.<P CLASS="Element10">
+TelnetThread is created when the client connects to the host, and terminated when the client disconnects from the host.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0001">TIdTelnet.Terminal</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007834.html" CLASS="Element59">TIdTelnet</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Specifies the terminal identification string for the TELNET client.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> Terminal: <STRONG>string</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Terminal is a String property that contains the terminal identification string used to identify the terminal type in suboption negotiations. The terminal type information is an NVT ASCII string with a maximum length of 40 characters, as described in RFC 1700.<P CLASS="Element10">
+<STRONG>Note</STRONG>: Indy does not provide terminal emulation other than a dumb terminal NVT implementation. Any non-null string value can be used in Terminal.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0000">TIdTelnet.Connect</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007834.html" CLASS="Element59">TIdTelnet</A>, <A HREF="014241.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Connects the TELNET client to a host.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>procedure</STRONG> Connect(<STRONG>const</STRONG> ATimeout: Integer = <A HREF="002932.html" CLASS="Element59">IdTimeoutDefault</A>); <STRONG>override</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Connect is an overridden procedure in <A HREF="007834.html" CLASS="Element59">TIdTelnet</A> used to <A HREF="000295.html" CLASS="Element59">connect</A> the TELNET client to a host computer identified by the Host and Port properties.<P CLASS="Element10">
+Connect triggers the <A HREF="007834.html#0003" CLASS="Element59">OnConnect</A> event prior to using the inherited Connect method to open the <A HREF="007071.html" CLASS="Element59">socket</A> connection. If the client is connected, the <A HREF="007834.html#0000" CLASS="Element59">TelnetThread</A> property is initialized.<P CLASS="Element10">
+Connect can raise an <A HREF="000375.html" CLASS="Element59">EIdException</A> exception with the constant message <A HREF="006706.html" CLASS="Element59">RSTELNETCLIConnectError</A> if an <A HREF="000451.html" CLASS="Element59">EIdSocketError</A> occurs.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0001">TIdTelnet.Create</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007834.html" CLASS="Element59">TIdTelnet</A>, <A HREF="014242.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Constructor for the new <A HREF="007834.html" CLASS="Element59">TIdTelnet</A> instance.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>constructor</STRONG> Create(AOwner: TComponent); <STRONG>override</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+AOwner: TComponent</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Owner of the object instance.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Create is the constructor for the new <A HREF="007834.html" CLASS="Element59">TIdTelnet</A> object instance. Create relies on the inherited Create constructor, and initializes the following private and public properties:<P CLASS="Element10">
+<UL>
+<LI>Port - Set to the value <A HREF="002721.html" CLASS="Element59">IdPORT_TELNET</A> (Decimal <STRONG>23</STRONG>).<P CLASS="Element10">
+<LI>State - Set to the value tnsData.<P CLASS="Element10">
+<LI>SentDoDont - Set to the null string value (Decimal <STRONG>0</STRONG>).<P CLASS="Element10">
+<LI>SentWillWont - Set to the null string value (Decimal <STRONG>0</STRONG>).<P CLASS="Element10">
+<LI>ReceivedDoDont - Set to the null string value (Decimal <STRONG>0</STRONG>).<P CLASS="Element10">
+<LI>ReceivedWillWont - Set to the null string value (Decimal <STRONG>0</STRONG> ).<P CLASS="Element10">
+<LI><A HREF="007834.html#0001" CLASS="Element59">Terminal</A> - Set to the string value '<STRONG>dumb</STRONG>'.<P CLASS="Element10">
+<LI>IamTelnet - Set to <STRONG>False</STRONG>.</UL>
+</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0002">TIdTelnet.Disconnect</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007834.html" CLASS="Element59">TIdTelnet</A>, <A HREF="014243.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Disconnects the client from the host.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>procedure</STRONG> Disconnect; <STRONG>override</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Disconnect is an overridden procedure in <A HREF="007834.html" CLASS="Element59">TIdTelnet</A> that instructs the <A HREF="007834.html#0000" CLASS="Element59">TelnetThread</A> to terminate, and calls the inherited Disconnect method. Disconnect also triggers the TClientEvent event used by the <A HREF="007834.html#0005" CLASS="Element59">OnDisconnect</A> event handler.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0007">TIdTelnet.SendCh</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007834.html" CLASS="Element59">TIdTelnet</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Sends a character to the host.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>procedure</STRONG> SendCh(Ch: Char);</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+Ch: Char</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Character to <A HREF="006944.html" CLASS="Element59">send</A> to the host.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+SendCh is a procedure used to <A HREF="006944.html" CLASS="Element59">send</A> a character from the client to the host. SendCh examines the character in Ch to determine if carriage returns are written to the host (when IamTelnet is True) using the inherited WriteLn method, or omitted in favor of the inherited WriteLn method.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0004">TIdTelnet.OnDataAvailable</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007834.html" CLASS="Element59">TIdTelnet</A>, <A HREF="014244.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Specifies the event handler for processing data received from the host.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> OnDataAvailable: <A HREF="007838.html" CLASS="Element59">TIdTelnetDataAvailEvent</A>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+OnDataAvailable is the <A HREF="007838.html" CLASS="Element59">TIdTelnetDataAvailEvent</A> event handler used to handle data received from the host. OnDataAvailable processes and applies the data read with <A HREF="007834.html#0000" CLASS="Element59">TelnetThread</A>.<P CLASS="Element10">
+Applications must assign a procedure to the OnDataAvailable event handler to allow the <A HREF="007834.html" CLASS="Element59">TIdTelnet</A> object to determine how data from the host is applied.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0006">TIdTelnet.OnTelnetCommand</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007834.html" CLASS="Element59">TIdTelnet</A>, <A HREF="014245.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Specifies the TELNET command event handler.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> OnTelnetCommand: <A HREF="007837.html" CLASS="Element59">TIdTelnetCommandEvent</A>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+OnTelnetCommand is the <A HREF="007836.html" CLASS="Element59">TIdTelnetCommand</A> event handler used to respond to TELNET commands and status changes received by the <A HREF="007834.html" CLASS="Element59">TIdTelnet</A> client.<P CLASS="Element10">
+Applications should assign a procedure to the event handler in order to respond to specific TELNET commands, or to perform TELNET options; i.e. tncNoLocalEcho, tncLocalEcho, or tncEcho.</DIV>
+</DIV>
+<DIV CLASS="Element62">
+<HR>Created with Doc-O-Matic 2 donated to <STRONG><A HREF="http://www.delphi-jedi.org">Project JEDI</A></STRONG>. Commercial license available from the <STRONG><A HREF="http://www.doc-o-matic.com">Doc-O-Matic site</A></STRONG>.</DIV>
+</DIV></BODY></HTML>

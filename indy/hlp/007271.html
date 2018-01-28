@@ -1,0 +1,572 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+<TITLE>TIdCustomHTTPServer</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <META name="GENERATOR" content="Doc-O-Matic">
+    <LINK rel="STYLESHEET" href="default.css" type="text/css">
+
+<SCRIPT LANGUAGE="JavaScript1.2" SRC="scripts.js"></SCRIPT>
+</HEAD>
+<BODY CLASS="Element57">
+<TABLE BORDER="0" BGCOLOR="#AACCFF" WIDTH="100%" CELLSPACING="0" CELLPADDING="0">
+<TR><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element1">
+Indy 9</DIV>
+</TD><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element2">
+<A HREF="content.html" CLASS="Element59">Content</A> | <A HREF="idx.html" CLASS="Element59">Index</A> | <A HREF="symref.html" CLASS="Element59">Reference</A></DIV>
+</TD></TR></TABLE><DIV CLASS="Element58">
+<DIV CLASS="Element5">
+TIdCustomHTTPServer</DIV>
+<DIV CLASS="Element7">
+<A HREF="010361.html" CLASS="Element59">Hierarchy</A>, <A HREF="010362.html" CLASS="Element59">Properties</A>, <A HREF="010363.html" CLASS="Element59">Methods</A>, <A HREF="010364.html" CLASS="Element59">Events</A>, <A HREF="010365.html" CLASS="Element59">See Also</A>, <A HREF="002147.html" CLASS="Element59">Unit: IdCustomHTTPServer</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Specifies properties, methods, and events for the Indy HTTP Server implementation.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12">TIdCustomHTTPServer = <STRONG>class</STRONG>(<A HREF="007831.html" CLASS="Element59">TIdTCPServer</A>)</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Unit</DIV>
+<DIV CLASS="Element69">
+<A HREF="002147.html" CLASS="Element59">IdCustomHTTPServer</A></DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+TIdCustomHTTPServer is a <A HREF="007831.html" CLASS="Element59">TIdTCPServer</A> descendant that specifies properties, methods, and events for an implementation of the Hypertext Transfer Protocol (HTTP) as described in the Internet Standards document:<P CLASS="Element10">
+<UL>
+<LI>RFC 1945 - Hypertext Transfer Protocol [HTTP] version 1.0 (http://www.rfc-editor.org/rfc/rfc1945.txt)<P CLASS="Element10">
+<LI>RFC 2616 - Hypertext Transfer Protocol [HTTP] version 1.1 (http://www.rfc-editor.org/rfc/rfc2616.txt)</UL>
+<P CLASS="Element10">
+Application do not normally create instances of TIdCustomHTTPServer. Most properties, methods, and events in TIdCustomHTTPServer are protected to allow descendant classes to override their implementaion. Use <A HREF="007392.html" CLASS="Element59">TIdHTTPServer</A> to access published properties, method, and events.<P CLASS="Element10">
+TIdCustomHTTPServer also supports the Secure Hypertext Transport protocol (HTTPS) as described in the Internet Standards document:<P CLASS="Element10">
+<UL>
+<LI>RFC 2660 - The Secure HyperText Transfer Protocol (http://www.rfc-editor.org/rfc/rfc2660.txt)</UL>
+<P CLASS="Element10">
+Assign an instance of <A HREF="007676.html" CLASS="Element59">TIdServerInterceptOpenSSL</A> to the Intercept property to allow use of the HTTPS protocol. For the Windows platform, you must install the Indy OpenSSL support .DLL's available at http://www.intelicom.si to enable Secure Socket Layer support.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0000">TIdCustomHTTPServer.AutoStartSession</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007271.html" CLASS="Element59">TIdCustomHTTPServer</A>, <A HREF="010366.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Requests a new session when an existing session is not found.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> AutoStartSession: boolean;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+AutoStartSession is a Boolean property that indicates a new HTTP session should be created when a persistent HTTP session does not exist in <A HREF="007271.html#0010" CLASS="Element59">SessionList</A>.<P CLASS="Element10">
+AutoStartSession is used when a threaded HTTP client connection executes, and <A HREF="007271.html#0011" CLASS="Element59">SessionState</A> indicates that persistent sessions are maintained on the HTTP server. AutoStartSession allows <A HREF="007271.html#0002" CLASS="Element59">CreateSession</A> to be called when an HTTP session cannot be found in <A HREF="007271.html#0010" CLASS="Element59">SessionList</A> containing the <A HREF="000687.html" CLASS="Element59">GSessionIDCookie</A> for the client IP address.<P CLASS="Element10">
+<STRONG>Note</STRONG>: Even when AutoStartSession is True, <A HREF="007271.html#0002" CLASS="Element59">CreateSession</A> will not be called when <A HREF="007271.html#000A" CLASS="Element59">OnInvalidSession</A> indicates that the session should not be allowed to continue.<P CLASS="Element10">
+The default value for AutoStartSession is <A HREF="002060.html" CLASS="Element59">Id_TId_HTTPAutoStartSession</A> as assigned in the <A HREF="007271.html#0001" CLASS="Element59">Create</A> constructor.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0003">TIdCustomHTTPServer.DefaultPort</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007271.html" CLASS="Element59">TIdCustomHTTPServer</A>, <A HREF="010367.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Default port number for the server.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> DefaultPort: integer;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+DefaultPort is a published property in <A HREF="007392.html" CLASS="Element59">TIdHTTPServer</A> that identifies the default port number for listener threads in the server, as described in the Hypertext Transfer Protocol specification. The default value for DefaultPort is <A HREF="002476.html" CLASS="Element59">IdPORT_HTTP</A>.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0006">TIdCustomHTTPServer.KeepAlive</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007271.html" CLASS="Element59">TIdCustomHTTPServer</A>, <A HREF="010368.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Indicates if a client connection should remain open for subsequent use in an HTTP session.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> KeepAlive: Boolean;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+KeepAlive is a Boolean property that indicates if the HTTP server should keep the connection open for the session established in an executing client thread. When KeepAlive is True, the connection used for the HTTP response is give a 'keep-alive' header in the response content. When KeepAlive is False, the connection header 'close' is used in the HTTP response. <STRONG> The default value for KeepAlive is <A HREF="002061.html" CLASS="Element59">Id_TId_HTTPServer_KeepAlive</A>, as assigned in the <A HREF="007271.html#0001" CLASS="Element59">Create</A> constructor. </STRONG></DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0007">TIdCustomHTTPServer.MIMETable</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007271.html" CLASS="Element59">TIdCustomHTTPServer</A>, <A HREF="010369.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Represents the MIME type table for the HTTP server implementation.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> MIMETable: <A HREF="007578.html" CLASS="Element59">TIdMimeTable</A>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+MIMETable is a read-only <A HREF="007578.html" CLASS="Element59">TIdMimeTable</A> property that is used to retrieve the registered MIME type for a file requested in the <A HREF="007271.html#000E" CLASS="Element59">ServeFile</A> method. Values in MIMETable may be assigned to the ContentType property in the <A HREF="007391.html" CLASS="Element59">TIdHTTPResponseInfo</A> containing headers written in the HTTP response.<P CLASS="Element10">
+MIMETable is initialized in the <A HREF="007271.html#0001" CLASS="Element59">Create</A> constructor, and loaded with default values using <A HREF="007578.html#0001" CLASS="Element59">TIdMimeTable.BuildCache</A>. MIMETable is freed in the <A HREF="007271.html#0004" CLASS="Element59">Destroy</A> method.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="000D">TIdCustomHTTPServer.ParseParams</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007271.html" CLASS="Element59">TIdCustomHTTPServer</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Requests parsing of query parameters in client requests.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> ParseParams: boolean;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+ParseParams is a Boolean property that indicates the string list should be populated with the query values from the client request query string (GET method) or form values (POST method).<P CLASS="Element10">
+For a client request in the form:<P CLASS="Element10">
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12">    http://www.mydomain.com/test.htm?color=blue&amp;size=10&amp;style=44</PRE></DIV>
+</DIV>
+<P CLASS="Element10">
+The Params property would contain:<P CLASS="Element10">
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12">    color=blue size=10 style=44</PRE></DIV>
+</DIV>
+<P CLASS="Element10">
+The developer has easy access to the value of named parameters using the RequestInfo.Params.Values property:<P CLASS="Element10">
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12">    Color := RequestInfo.Params.Values['Color'];</PRE></DIV>
+</DIV>
+<P CLASS="Element10">
+To parse non-standard request query or form data, the ParseParams property should be set to false, and the developer will need to build a parser to extract the parameters from the UnparsedParams property.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="000F">TIdCustomHTTPServer.ServerSoftware</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007271.html" CLASS="Element59">TIdCustomHTTPServer</A>, <A HREF="010370.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Indicates the server software used to generate the HTTP response.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> ServerSoftware: <STRONG>string</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+ServerSoftware is a String property that contains textual values that identify the server software used to generate the values in the HTTP response.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0010">TIdCustomHTTPServer.SessionList</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007271.html" CLASS="Element59">TIdCustomHTTPServer</A>, <A HREF="010371.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Container for HTTP sessions for the server.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> SessionList: <A HREF="007377.html" CLASS="Element59">TIdHTTPCustomSessionList</A>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+SessionList is a read-only <A HREF="007377.html" CLASS="Element59">TIdHTTPCustomSessionList</A> property used as a container for <A HREF="007393.html" CLASS="Element59">TIdHTTPSession</A> instances created for the HTTP server. SessionList is maintained in <A HREF="007271.html#0002" CLASS="Element59">CreateSession</A> and <A HREF="007271.html#0005" CLASS="Element59">EndSession</A>, as well as by <A HREF="007378.html#0007" CLASS="Element59">TIdHTTPDefaultSessionList.PurgeStaleSessions</A>.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0011">TIdCustomHTTPServer.SessionState</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007271.html" CLASS="Element59">TIdCustomHTTPServer</A>, <A HREF="010372.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Indicates that the server uses persistent HTTP sessions.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> SessionState: Boolean;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+SessionState is a Boolean property that indicates persistent sessions are used by the HTTP server to service requests from peer threads. SessionState is used by <A HREF="007271.html#0002" CLASS="Element59">CreateSession</A> to determine if a new persistent session is created and added to the session list.<P CLASS="Element10">
+SessionState is used to get the cookie value for a session, and to determine if a persistent session matching the 'IDHTTPSESSIONID' cookie and Remote IP address should be retrieved from the session list.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0012">TIdCustomHTTPServer.SessionTimeOut</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007271.html" CLASS="Element59">TIdCustomHTTPServer</A>, <A HREF="010373.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+specifies the default time-to-live for persistent HTTP sessions.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> SessionTimeOut: Integer;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+SessionTimeOut is an Integer property that specifies the default time-to-live for persistent HTTP sessions created by the HTTP server. SessionTimeOut is assigned as the default SessionTimeOut for the server session list when the HTTP server becomes active.<P CLASS="Element10">
+SessionTimeOut is used determine when a persistent HTTP session has expired, or become stale. Stale persistent sessions are removed from the HTTP session list.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0001">TIdCustomHTTPServer.Create</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007271.html" CLASS="Element59">TIdCustomHTTPServer</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Constructor for the object instance.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>constructor</STRONG> Create(AOwner: TComponent); <STRONG>override</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+AOwner: TComponent</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Owner of the object instance.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Create is the constructor for the <A HREF="007392.html" CLASS="Element59">TIdHTTPServer</A> instance. Create calls the inherited Create method using AOwner. Create allocates resources needed for the <A HREF="007271.html#0010" CLASS="Element59">SessionList</A> and <A HREF="007271.html#0007" CLASS="Element59">MIMETable</A> properties, and sets the following properties to their default values:<P CLASS="Element10">
+<UL>
+<LI><A HREF="007271.html#0003" CLASS="Element59">DefaultPort</A> - default port number for the listener thread (<A HREF="002476.html" CLASS="Element59">IdPORT_HTTP</A>).<P CLASS="Element10">
+<LI><A HREF="007271.html#000D" CLASS="Element59">ParseParams</A> - requests parsing of query parameters (<A HREF="002062.html" CLASS="Element59">Id_TId_HTTPServer_ParseParams</A>).<P CLASS="Element10">
+<LI><A HREF="007271.html#0011" CLASS="Element59">SessionState</A> - Persistent sessions are used in the server implementation (<A HREF="002063.html" CLASS="Element59">Id_TId_HTTPServer_SessionState</A>).<P CLASS="Element10">
+<LI><A HREF="007271.html#0012" CLASS="Element59">SessionTimeOut</A> - Default timeout for persistent sessions (<A HREF="002064.html" CLASS="Element59">Id_TId_HTTPSessionTimeOut</A>).<P CLASS="Element10">
+<LI><A HREF="007271.html#0000" CLASS="Element59">AutoStartSession</A> - Session can be automatically created during client execution (<A HREF="002060.html" CLASS="Element59">Id_TId_HTTPAutoStartSession</A>).<P CLASS="Element10">
+<LI><A HREF="007271.html#0006" CLASS="Element59">KeepAlive</A> - HTTP client connections can use the &quot;Keep Alive&quot; option (<A HREF="002061.html" CLASS="Element59">Id_TId_HTTPServer_KeepAlive</A>).</UL>
+<P CLASS="Element10">
+Create also sets an internal flag that indicates if an executing theaded client connection can execute even when OnCOmmandGet is unassigned (False).</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0002">TIdCustomHTTPServer.CreateSession</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007271.html" CLASS="Element59">TIdCustomHTTPServer</A>, <A HREF="010374.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Creates a new HTTP session.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>function</STRONG> CreateSession(AThread: <A HREF="007613.html" CLASS="Element59">TIdPeerThread</A>; HTTPResponse: <A HREF="007391.html" CLASS="Element59">TIdHTTPResponseInfo</A>; HTTPRequest: <A HREF="007389.html" CLASS="Element59">TIdHTTPRequestInfo</A>): <A HREF="007393.html" CLASS="Element59">TIdHTTPSession</A>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+HTTPResponse: TIdHTTPResponseInfo</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+The response to use for the session.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+HTTPRequest: TIdHTTPRequestInfo</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+The request to use for the session.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Return Value</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+<A HREF="007393.html" CLASS="Element59">TIdHTTPSession</A> - The session created for the HTTP request and response.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+CreateSession is a <A HREF="007393.html" CLASS="Element59">TIdHTTPSession</A> function used to get a new persistent HTTP session for the server implementation. CreateSession initializes a new HTTP session with a unique SessionID for the IP address specified in the HTTPRequest parameter. SessionID is added to the HTTPResponse as the <A HREF="000687.html" CLASS="Element59">GSessionIDCookie</A> cookie. The new session is assigned to both the HTTP Request and the HTTP Response for the executing client thread, and added to the <A HREF="007271.html#0010" CLASS="Element59">SessionList</A> for the server.<P CLASS="Element10">
+If <A HREF="007271.html#0011" CLASS="Element59">SessionState</A> is False, CreateSession will perform no action and return the value Nil.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0004">TIdCustomHTTPServer.Destroy</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007271.html" CLASS="Element59">TIdCustomHTTPServer</A>, <A HREF="010375.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Frees the object instance.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>destructor</STRONG> Destroy; <STRONG>override</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Destroy is the destructor for the object instance. Destroy insures that the server is not Active, or listening for new connections. Destroy frees resources allocated to the <A HREF="007271.html#0007" CLASS="Element59">MIMETable</A> and <A HREF="007271.html#0010" CLASS="Element59">SessionList</A> properties. Destroy calls the inherited method to complete destruction of the object instance.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0005">TIdCustomHTTPServer.EndSession</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007271.html" CLASS="Element59">TIdCustomHTTPServer</A>, <A HREF="010376.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Frees the named HTTP session.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>function</STRONG> EndSession(<STRONG>const</STRONG> SessionName: <STRONG>string</STRONG>): boolean;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+const SessionName: string</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Identifier of the session to be freed.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Return Value</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Boolean - True when the named session is found and freed.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+EndSession is a Boolean function that allows the HTTP server to free the <A HREF="007393.html" CLASS="Element59">TIdHTTPSession</A> using the name specified in SessionName. EndSession attempts to locate the <A HREF="007393.html" CLASS="Element59">TIdHTTPSession</A> in <A HREF="007271.html#0010" CLASS="Element59">SessionList</A> that has a SessionID matching SessionName. When a session is found that matches SessionName, it is freed from the <A HREF="007271.html#0010" CLASS="Element59">SessionList</A> and the return value for the method is set to True.<P CLASS="Element10">
+EndSession uses SessionList.GetSession to find the named session. If a valid session reference is retrieved, the session is freed.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="000E">TIdCustomHTTPServer.ServeFile</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007271.html" CLASS="Element59">TIdCustomHTTPServer</A>, <A HREF="010377.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Requests a file transfer to the HTTP client.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>function</STRONG> ServeFile(AThread: <A HREF="007613.html" CLASS="Element59">TIdPeerThread</A>; ResponseInfo: <A HREF="007391.html" CLASS="Element59">TIdHTTPResponseInfo</A>; aFile: TFileName): cardinal; <STRONG>virtual</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+AThread: TIdPeerThread</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+The peer thread requesting the file.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+ResponseInfo: TIdHTTPResponseInfo</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+The response object used to write headers for the HTTP response.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+aFile: TFileName</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+The file name requested.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Return Value</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Cardinal - Number of bytes written to the peer thread connection.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+ServeFile is a Cardinal function used to <A HREF="006944.html" CLASS="Element59">send</A> the contents of a file on the HTTP server to the HTTP client represented by the peer thread connection.<P CLASS="Element10">
+ServeFile uses <A HREF="007271.html#0007" CLASS="Element59">MIMETable</A> to determine the content type for the requested file.<P CLASS="Element10">
+ServeFile uses AResponseInfo to write the HTTP response headers, and writes the content of the file in AFile to the peer thread Connection.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0008">TIdCustomHTTPServer.OnCommandOther</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007271.html" CLASS="Element59">TIdCustomHTTPServer</A>, <A HREF="010378.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Represents the event handler for unknown HTTP commands.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> OnCommandOther: <A HREF="007385.html" CLASS="Element59">TIdHTTPOtherEvent</A>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+asCommand</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+The command from the HTTP request.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+asData</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+The data from the HTTP request.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+asVersion</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+The version number from the HTTP request.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+Thread</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+The peer thread generating the event.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+OnCommandOther is the <A HREF="007385.html" CLASS="Element59">TIdHTTPOtherEvent</A> event handler used to respond to unknown HTTP commands. OnCommandOther is used during execution of the threaded client connection when a command other than GET, POST, or HEAD is received in the HTTP request.<P CLASS="Element10">
+The application must assign a procedure to the OnCommandOther event handler to allow the server to respond to the unknown HTTP command. Use OnCommandOther to generate custom Response or Error messages, handle non-standard HTTP commands, or perform processing specific to the HTTP server implementation when an error occurs.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0009">TIdCustomHTTPServer.OnCreateSession</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007271.html" CLASS="Element59">TIdCustomHTTPServer</A>, <A HREF="010379.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Event signalled when a session is needed a client connection.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> OnCreateSession: <A HREF="008012.html" CLASS="Element59">TOnCreateSession</A>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+ASender</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+THread of execution for the threaded client connection.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+VHTTPSession</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+HTTP session for the event notification.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+OnCreateSession is a <A HREF="008012.html" CLASS="Element59">TOnCreateSession</A> property that represents the event handler signalled when an HTTP session is needed for a threaded client connection. OnCreateSession is signalled when <A HREF="007271.html#0002" CLASS="Element59">TIdCustomHTTPServer.CreateSession</A> is used and <A HREF="007271.html#0011" CLASS="Element59">TIdCustomHTTPServer.SessionState</A> is True, and allows the server implementation to retrieve or create an HTTP session using the requirements or logic desired.<P CLASS="Element10">
+Applications must assign a procedure to the OnCreateSession event handler to allow responsing to the event notification. When OnCreateSession is unassigned, the HTTP server will use the <A HREF="007378.html#0004" CLASS="Element59">TIdHTTPDefaultSessionList.CreateUniqueSession</A> method to initialize an HTTP session.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="000A">TIdCustomHTTPServer.OnInvalidSession</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007271.html" CLASS="Element59">TIdCustomHTTPServer</A>, <A HREF="010380.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Event handler signalled when a session cannot be restored for a specific SessionID.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> OnInvalidSession: <A HREF="007380.html" CLASS="Element59">TIdHTTPInvalidSessionEvent</A>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+ContinueProcessing</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Indicates that a new session can be created. InvalidSessionID - Session ID found in a Request Cookie.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+RequestInfo</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Header sent in the client request.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+ResponseInfo</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Header to include in a response.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+Thread</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Client connection generating the event notification.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+OnInvalidSession is a <A HREF="007380.html" CLASS="Element59">TIdHTTPInvalidSessionEvent</A> property that represents the event handler signalled when a persistent session with the specified SessionID cannot be restored from <A HREF="007271.html#0010" CLASS="Element59">SessionList</A>.<P CLASS="Element10">
+OnInvalidSession is signalled when the threaded client connection in Thread is executed. InvalidSessionID is the <A HREF="000687.html" CLASS="Element59">GSessionIDCookie</A> value that identifies the session to be restored. The event handler can set the value of ContinueProcessing to indicate if the server can create a new session for the threaded client connection.<P CLASS="Element10">
+Applications must assign a procedure to the event handler to allow responding to the event notification.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="000B">TIdCustomHTTPServer.OnSessionEnd</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007271.html" CLASS="Element59">TIdCustomHTTPServer</A>, <A HREF="010381.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Specifies the event handler for terminating HTTP sessions.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> OnSessionEnd: <A HREF="008026.html" CLASS="Element59">TOnSessionEndEvent</A>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+OnSessionEnd is the <A HREF="008026.html" CLASS="Element59">TOnSessionEndEvent</A> event handler used to respond to the event notification for termination of a HTTP session. OnSessionEnd is assigned to the OnSessionEnd event handler for the HTTP session list used by server. The event handler is assigned when the server becomes active.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="000C">TIdCustomHTTPServer.OnSessionStart</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007271.html" CLASS="Element59">TIdCustomHTTPServer</A>, <A HREF="010382.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Specifies the event handler for creating a new HTTP session.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> OnSessionStart: <A HREF="008027.html" CLASS="Element59">TOnSessionStartEvent</A>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+OnSessionStart is the <A HREF="008027.html" CLASS="Element59">TOnSessionStartEvent</A> event handler used to respond to the event notification for creation of a new HTTP session. OnSessionStart is assigned to the OnSessionStart event handler for the HTTP session list used by server. The event handler is assigned when the server becomes active.</DIV>
+</DIV>
+<DIV CLASS="Element62">
+<HR>Created with Doc-O-Matic 2 donated to <STRONG><A HREF="http://www.delphi-jedi.org">Project JEDI</A></STRONG>. Commercial license available from the <STRONG><A HREF="http://www.doc-o-matic.com">Doc-O-Matic site</A></STRONG>.</DIV>
+</DIV></BODY></HTML>

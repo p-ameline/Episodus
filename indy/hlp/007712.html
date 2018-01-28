@@ -1,0 +1,177 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+<TITLE>TIdSNTP</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <META name="GENERATOR" content="Doc-O-Matic">
+    <LINK rel="STYLESHEET" href="default.css" type="text/css">
+
+<SCRIPT LANGUAGE="JavaScript1.2" SRC="scripts.js"></SCRIPT>
+</HEAD>
+<BODY CLASS="Element57">
+<TABLE BORDER="0" BGCOLOR="#AACCFF" WIDTH="100%" CELLSPACING="0" CELLPADDING="0">
+<TR><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element1">
+Indy 9</DIV>
+</TD><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element2">
+<A HREF="content.html" CLASS="Element59">Content</A> | <A HREF="idx.html" CLASS="Element59">Index</A> | <A HREF="symref.html" CLASS="Element59">Reference</A></DIV>
+</TD></TR></TABLE><DIV CLASS="Element58">
+<DIV CLASS="Element5">
+TIdSNTP</DIV>
+<DIV CLASS="Element7">
+<A HREF="013712.html" CLASS="Element59">Hierarchy</A>, <A HREF="013713.html" CLASS="Element59">Properties</A>, <A HREF="013714.html" CLASS="Element59">Methods</A>, <A HREF="013715.html" CLASS="Element59">Events</A>, <A HREF="013716.html" CLASS="Element59">See Also</A>, <A HREF="002822.html" CLASS="Element59">Unit: IdSNTP</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Implements a Simple Network Time Protocol client.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12">TIdSNTP = <STRONG>class</STRONG>(<A HREF="007874.html" CLASS="Element59">TIdUDPClient</A>)</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Unit</DIV>
+<DIV CLASS="Element69">
+<A HREF="002822.html" CLASS="Element59">IdSNTP</A></DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+The TIdSNTP implements a client for the Simple Network Time Protocol (SNTP), as described in the Internet standards document:<P CLASS="Element10">
+<UL>
+<LI>RFC 2030 - Simple Network Time Protocol (SNTP) Version 4 for IPv4, IPv6 and OSI (http://www.rfc-editor.org/rfc/rfc2030.txt)</UL>
+<P CLASS="Element10">
+SNTP is an extremely reliable protocol for time-synchronization on the Internet with accuracy from 1 to 50 milliseconds, even over great distances.<P CLASS="Element10">
+SNTP Version 4 includes certain optional extensions to the basic Version 3 model. TIdSNTP does not implement the optional extensions for either Key Identifier or Message Digest portions of the NTP/SNTP message format.<P CLASS="Element10">
+TIdSNTP, a descendant of <A HREF="007874.html" CLASS="Element59">TIdUDPClient</A>, utilizes SNTP in the unicast client mode.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0000">TIdSNTP.AdjustmentTime</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007712.html" CLASS="Element59">TIdSNTP</A>, <A HREF="013717.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Local clock offset</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> AdjustmentTime: TDateTime;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+AdjustmentTime is a read-only TDateTime property that returns the local clock offset calculated when <A HREF="007712.html#0003" CLASS="Element59">DateTime</A> is retrieved from the SNTP server.<P CLASS="Element10">
+AdjustmentTime is calculated according to the algorithm in RFC 2030.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0001">TIdSNTP.CheckStratum</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007712.html" CLASS="Element59">TIdSNTP</A>, <A HREF="013718.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Indicates the Stratum number is used when validating a server response.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> CheckStratum: Boolean;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+CheckStratum is a Boolean property that indicates if the Stratum value in the <A HREF="008005.html" CLASS="Element59">TNTPGram</A> response should be used when determining the <A HREF="007712.html#0003" CLASS="Element59">DateTime</A> from the SNTP server. When CheckStratum is True, the numeric Stratum number in the response is validated before accepting the date time value from the server. The default value for CheckStratum is True, as assigned in the <A HREF="007712.html#0002" CLASS="Element59">Create</A> constructor.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0003">TIdSNTP.DateTime</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007712.html" CLASS="Element59">TIdSNTP</A>, <A HREF="013719.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Date and time returned for the client</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> DateTime: TDateTime;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+DateTime is a read-only TDateTime property used to store the date and time value retrieved using the SNTP client.<P CLASS="Element10">
+The value in DateTime is read using the protected function GetDateTime. GetDateTime creates an <A HREF="008005.html" CLASS="Element59">TNTPGram</A> datagram , transmits the datagram as a string containing the unicast SNTP request using Send, and retrieves the response using ReceiveString. If the response is not an empty string, <A HREF="007712.html" CLASS="Element59">TIdSNTP</A> properties are updated with values in the response.<P CLASS="Element10">
+The value in DateTime can be <STRONG>0.0</STRONG> when the NTP datagram response is either an empty string or ignored based on values in LeapIndicator, Stratum, or TransmitTimestamp fields of the response <A HREF="008005.html" CLASS="Element59">TNTPGram</A>.<P CLASS="Element10">
+Reading the value of DateTime does not affect the clock on the local computer. Use <A HREF="007712.html#0005" CLASS="Element59">SyncTime</A> to read the value in DateTime prior to updating the clock on the local computer.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0004">TIdSNTP.RoundTripDelay</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007712.html" CLASS="Element59">TIdSNTP</A>, <A HREF="013720.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Elapsed duration required to retrieve the date and time value.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> RoundTripDelay: TDateTime;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+RoundTripDelay is a read-only TDateTime property that returns the round trip delay duration calculated when <A HREF="007712.html#0003" CLASS="Element59">DateTime</A> is retrieved from the SNTP server.<P CLASS="Element10">
+RoundTripDelay is calculated according to the algorithm in RFC 2030.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0002">TIdSNTP.Create</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007712.html" CLASS="Element59">TIdSNTP</A>, <A HREF="013721.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Constructor for the object instance.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>constructor</STRONG> Create(AOwner: TComponent); <STRONG>override</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+AOwner: TComponent</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Owner of the object instance.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Create is the constructor for the object instance. Create calls the inherited Create method using AOwner as the owner of the object instance. Create sets the default value for the Port property to <A HREF="002685.html" CLASS="Element59">IdPORT_SNTP</A>, as required in the SNTP protocol. Create also sets <A HREF="007712.html#0001" CLASS="Element59">CheckStratum</A> to True, indicating Stratum numbers are used in verifying NTPGram results from an SNTP server.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0005">TIdSNTP.SyncTime</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007712.html" CLASS="Element59">TIdSNTP</A>, <A HREF="013722.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Updates the clock on the local computer.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>function</STRONG> SyncTime: Boolean;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Return Value</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Boolean - True on success.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+SyncTime is a Boolean function that updates the clock on the local computer, and returns <STRONG>True</STRONG> if the value of <A HREF="007712.html#0003" CLASS="Element59">DateTime</A> is not an invalid value and the <A HREF="008005.html" CLASS="Element59">TNTPGram</A> response is not ignored.</DIV>
+</DIV>
+<DIV CLASS="Element62">
+<HR>Created with Doc-O-Matic 2 donated to <STRONG><A HREF="http://www.delphi-jedi.org">Project JEDI</A></STRONG>. Commercial license available from the <STRONG><A HREF="http://www.doc-o-matic.com">Doc-O-Matic site</A></STRONG>.</DIV>
+</DIV></BODY></HTML>

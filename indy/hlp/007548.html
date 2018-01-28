@@ -1,0 +1,88 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+<TITLE>TIdMessageCollection</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <META name="GENERATOR" content="Doc-O-Matic">
+    <LINK rel="STYLESHEET" href="default.css" type="text/css">
+
+<SCRIPT LANGUAGE="JavaScript1.2" SRC="scripts.js"></SCRIPT>
+</HEAD>
+<BODY CLASS="Element57">
+<TABLE BORDER="0" BGCOLOR="#AACCFF" WIDTH="100%" CELLSPACING="0" CELLPADDING="0">
+<TR><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element1">
+Indy 9</DIV>
+</TD><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element2">
+<A HREF="content.html" CLASS="Element59">Content</A> | <A HREF="idx.html" CLASS="Element59">Index</A> | <A HREF="symref.html" CLASS="Element59">Reference</A></DIV>
+</TD></TR></TABLE><DIV CLASS="Element58">
+<DIV CLASS="Element5">
+TIdMessageCollection</DIV>
+<DIV CLASS="Element7">
+<A HREF="012477.html" CLASS="Element59">Hierarchy</A>, <A HREF="012478.html" CLASS="Element59">Properties</A>, <A HREF="012479.html" CLASS="Element59">Methods</A>, <A HREF="012480.html" CLASS="Element59">See Also</A>, <A HREF="002292.html" CLASS="Element59">Unit: IdMessageCollection</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Implements a collection for Indy messages.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12">TIdMessageCollection = <STRONG>class</STRONG>(TCollection)</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Unit</DIV>
+<DIV CLASS="Element69">
+<A HREF="002292.html" CLASS="Element59">IdMessageCollection</A></DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+TIdMessageCollection is a TCollection descendant that implements a container for <A HREF="007571.html" CLASS="Element59">TIdMessageItem</A> object instances. TIdMessageCollection is the type used for the TIdMailbox.MessageList property, and when retrieving messages and headers using an IMAP4 client.<P CLASS="Element10">
+TIdMessageCollection enhances the ancestor class by insuring that collection items added to the container are <A HREF="007571.html" CLASS="Element59">TIdMessageItem</A> instances.<P CLASS="Element10">
+TIdMessageCollection extends the ancestor class by providing indexed access to <A HREF="007544.html" CLASS="Element59">TIdMessage</A> instances in the container using the <A HREF="007548.html#0001" CLASS="Element59">Messages</A> property.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0001">TIdMessageCollection.Messages</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007548.html" CLASS="Element59">TIdMessageCollection</A>, <A HREF="012481.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Allows access to the message property in a collection item.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> Messages [<STRONG>index</STRONG>: Integer]: <A HREF="007544.html" CLASS="Element59">TIdMessage</A>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Messages is an Integer indexed <A HREF="007544.html" CLASS="Element59">TIdMessage</A> property that provides access to the <A HREF="007544.html" CLASS="Element59">TIdMessage</A> contained in a collection item. Index values must be in the range 0 .. Count-1.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0000">TIdMessageCollection.Add</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007548.html" CLASS="Element59">TIdMessageCollection</A>, <A HREF="012482.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Adds new message items to the collection.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>function</STRONG> Add: <A HREF="007571.html" CLASS="Element59">TIdMessageItem</A>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Return Value</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+<A HREF="007571.html" CLASS="Element59">TIdMessageItem</A> - new collection item added to the collection.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Add is an overridden <A HREF="007571.html" CLASS="Element59">TIdMessageItem</A> function that creates new items in the collection. Add insures that collection items are cast to a <A HREF="007571.html" CLASS="Element59">TIdMessageItem</A> instance after calling the inherited Add method.</DIV>
+</DIV>
+<DIV CLASS="Element62">
+<HR>Created with Doc-O-Matic 2 donated to <STRONG><A HREF="http://www.delphi-jedi.org">Project JEDI</A></STRONG>. Commercial license available from the <STRONG><A HREF="http://www.doc-o-matic.com">Doc-O-Matic site</A></STRONG>.</DIV>
+</DIV></BODY></HTML>

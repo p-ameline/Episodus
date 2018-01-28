@@ -1,0 +1,134 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+<TITLE>TIdCustomHTTP Methods</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <META name="GENERATOR" content="Doc-O-Matic">
+    <LINK rel="STYLESHEET" href="default.css" type="text/css">
+
+<SCRIPT LANGUAGE="JavaScript1.2" SRC="scripts.js"></SCRIPT>
+</HEAD>
+<BODY CLASS="Element57">
+<TABLE BORDER="0" BGCOLOR="#AACCFF" WIDTH="100%" CELLSPACING="0" CELLPADDING="0">
+<TR><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element1">
+Indy 9</DIV>
+</TD><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element2">
+<A HREF="content.html" CLASS="Element59">Content</A> | <A HREF="idx.html" CLASS="Element59">Index</A> | <A HREF="symref.html" CLASS="Element59">Reference</A></DIV>
+</TD></TR></TABLE><DIV CLASS="Element58">
+<DIV CLASS="Element27">
+TIdCustomHTTP Methods</DIV>
+<DIV CLASS="Element28">
+<A HREF="007270.html" CLASS="Element59">TIdCustomHTTP</A> | <A HREF="010356.html" CLASS="Element59">Legend</A></DIV>
+<P><DIV CLASS="Element29">
+TIdCustomHTTP</DIV>
+<DIV CLASS="Element32">
+<DIV CLASS="Element31">
+<IMG SRC="indempty.png" BORDER="0" HEIGHT="12" WIDTH="7" ALT=""><IMG SRC="virtual.png" BORDER="0" HEIGHT="12" WIDTH="7" ALT="virtual">&nbsp;<A HREF="007270.html#0004" CLASS="Element59">Create</A><P CLASS="Element31">
+<IMG SRC="indempty.png" BORDER="0" HEIGHT="12" WIDTH="7" ALT=""><IMG SRC="virtual.png" BORDER="0" HEIGHT="12" WIDTH="7" ALT="virtual">&nbsp;<A HREF="007270.html#0005" CLASS="Element59">Destroy</A><P CLASS="Element31">
+<IMG SRC="indempty.png" BORDER="0" HEIGHT="12" WIDTH="7" ALT=""><IMG SRC="virtual.png" BORDER="0" HEIGHT="12" WIDTH="7" ALT="virtual">&nbsp;<A HREF="007270.html#0006" CLASS="Element59">DoRequest</A><P CLASS="Element31">
+<IMG SRC="indempty.png" BORDER="0" HEIGHT="12" WIDTH="7" ALT=""><IMG SRC="indempty.png" BORDER="0" HEIGHT="12" WIDTH="7" ALT="">&nbsp;<A HREF="007270.html#0008" CLASS="Element59">procedure&nbsp;Get(AURL:&nbsp;string;&nbsp;const&nbsp;AResponseContent:&nbsp;TStream);&nbsp;overload;</A><P CLASS="Element31">
+<IMG SRC="indempty.png" BORDER="0" HEIGHT="12" WIDTH="7" ALT=""><IMG SRC="indempty.png" BORDER="0" HEIGHT="12" WIDTH="7" ALT="">&nbsp;<A HREF="007270.html#0007" CLASS="Element59">function&nbsp;Get(AURL:&nbsp;string):&nbsp;string;&nbsp;overload;</A><P CLASS="Element31">
+<IMG SRC="indempty.png" BORDER="0" HEIGHT="12" WIDTH="7" ALT=""><IMG SRC="indempty.png" BORDER="0" HEIGHT="12" WIDTH="7" ALT="">&nbsp;<A HREF="007270.html#000A" CLASS="Element59">Head</A><P CLASS="Element31">
+<IMG SRC="indempty.png" BORDER="0" HEIGHT="12" WIDTH="7" ALT=""><IMG SRC="indempty.png" BORDER="0" HEIGHT="12" WIDTH="7" ALT="">&nbsp;<A HREF="007270.html#0011" CLASS="Element59">Options</A><P CLASS="Element31">
+<IMG SRC="indempty.png" BORDER="0" HEIGHT="12" WIDTH="7" ALT=""><IMG SRC="indempty.png" BORDER="0" HEIGHT="12" WIDTH="7" ALT="">&nbsp;<A HREF="007270.html#0016" CLASS="Element59">function&nbsp;Post(AURL:&nbsp;string;&nbsp;const&nbsp;ASource:&nbsp;TStrings):&nbsp;string;&nbsp;overload;</A><P CLASS="Element31">
+<IMG SRC="indempty.png" BORDER="0" HEIGHT="12" WIDTH="7" ALT=""><IMG SRC="indempty.png" BORDER="0" HEIGHT="12" WIDTH="7" ALT="">&nbsp;<A HREF="007270.html#0014" CLASS="Element59">function&nbsp;Post(AURL:&nbsp;string;&nbsp;const&nbsp;ASource:&nbsp;TStream):&nbsp;string;&nbsp;overload;</A><P CLASS="Element31">
+<IMG SRC="indempty.png" BORDER="0" HEIGHT="12" WIDTH="7" ALT=""><IMG SRC="indempty.png" BORDER="0" HEIGHT="12" WIDTH="7" ALT="">&nbsp;<A HREF="007270.html#0012" CLASS="Element59">function&nbsp;Post(AURL:&nbsp;string;&nbsp;const&nbsp;ASource:&nbsp;TIdMultiPartFormDataStream):&nbsp;string;&nbsp;overload;</A><P CLASS="Element31">
+<IMG SRC="indempty.png" BORDER="0" HEIGHT="12" WIDTH="7" ALT=""><IMG SRC="indempty.png" BORDER="0" HEIGHT="12" WIDTH="7" ALT="">&nbsp;<A HREF="007270.html#0017" CLASS="Element59">procedure&nbsp;Post(AURL:&nbsp;string;&nbsp;const&nbsp;ASource:&nbsp;TStrings;&nbsp;const&nbsp;AResponseContent:&nbsp;TStream);&nbsp;overload;</A><P CLASS="Element31">
+<IMG SRC="indempty.png" BORDER="0" HEIGHT="12" WIDTH="7" ALT=""><IMG SRC="indempty.png" BORDER="0" HEIGHT="12" WIDTH="7" ALT="">&nbsp;<A HREF="007270.html#0015" CLASS="Element59">procedure&nbsp;Post(AURL:&nbsp;string;&nbsp;const&nbsp;ASource:&nbsp;TStream;&nbsp;const&nbsp;AResponseContent:&nbsp;TStream);&nbsp;overload;</A><P CLASS="Element31">
+<IMG SRC="indempty.png" BORDER="0" HEIGHT="12" WIDTH="7" ALT=""><IMG SRC="indempty.png" BORDER="0" HEIGHT="12" WIDTH="7" ALT="">&nbsp;<A HREF="007270.html#0013" CLASS="Element59">procedure&nbsp;Post(AURL:&nbsp;string;&nbsp;const&nbsp;ASource:&nbsp;TIdMultiPartFormDataStream;&nbsp;AResponseContent:&nbsp;TStream);&nbsp;overload;</A><P CLASS="Element31">
+<IMG SRC="indempty.png" BORDER="0" HEIGHT="12" WIDTH="7" ALT=""><IMG SRC="indempty.png" BORDER="0" HEIGHT="12" WIDTH="7" ALT="">&nbsp;<A HREF="007270.html#001A" CLASS="Element59">function&nbsp;Put(AURL:&nbsp;string;&nbsp;const&nbsp;ASource:&nbsp;TStream):&nbsp;string;&nbsp;overload;</A><P CLASS="Element31">
+<IMG SRC="indempty.png" BORDER="0" HEIGHT="12" WIDTH="7" ALT=""><IMG SRC="indempty.png" BORDER="0" HEIGHT="12" WIDTH="7" ALT="">&nbsp;<A HREF="007270.html#001B" CLASS="Element59">procedure&nbsp;Put(AURL:&nbsp;string;&nbsp;const&nbsp;ASource:&nbsp;TStream;&nbsp;const&nbsp;AResponseContent:&nbsp;TStream);&nbsp;overload;</A><P CLASS="Element31">
+<IMG SRC="indempty.png" BORDER="0" HEIGHT="12" WIDTH="7" ALT=""><IMG SRC="indempty.png" BORDER="0" HEIGHT="12" WIDTH="7" ALT="">&nbsp;<A HREF="007270.html#0022" CLASS="Element59">procedure&nbsp;Trace(AURL:&nbsp;string;&nbsp;const&nbsp;AResponseContent:&nbsp;TStream);&nbsp;overload;</A><P CLASS="Element31">
+<IMG SRC="indempty.png" BORDER="0" HEIGHT="12" WIDTH="7" ALT=""><IMG SRC="indempty.png" BORDER="0" HEIGHT="12" WIDTH="7" ALT="">&nbsp;<A HREF="007270.html#0021" CLASS="Element59">function&nbsp;Trace(AURL:&nbsp;string):&nbsp;string;&nbsp;overload;</A><P CLASS="Element31">
+</DIV>
+</DIV>
+<DIV CLASS="Element29">
+TIdTCPClient</DIV>
+<DIV CLASS="Element32">
+<DIV CLASS="Element31">
+<IMG SRC="indempty.png" BORDER="0" HEIGHT="12" WIDTH="7" ALT=""><IMG SRC="virtual.png" BORDER="0" HEIGHT="12" WIDTH="7" ALT="virtual">&nbsp;<A HREF="007827.html#0004" CLASS="Element59">Connect</A><P CLASS="Element31">
+<IMG SRC="indempty.png" BORDER="0" HEIGHT="12" WIDTH="7" ALT=""><IMG SRC="virtual.png" BORDER="0" HEIGHT="12" WIDTH="7" ALT="virtual">&nbsp;<A HREF="007827.html#0005" CLASS="Element59">ConnectAndGetAll</A><P CLASS="Element31">
+<IMG SRC="indempty.png" BORDER="0" HEIGHT="12" WIDTH="7" ALT=""><IMG SRC="virtual.png" BORDER="0" HEIGHT="12" WIDTH="7" ALT="virtual">&nbsp;<A HREF="007827.html#0006" CLASS="Element59">Create</A><P CLASS="Element31">
+<IMG SRC="indempty.png" BORDER="0" HEIGHT="12" WIDTH="7" ALT=""><IMG SRC="virtual.png" BORDER="0" HEIGHT="12" WIDTH="7" ALT="virtual">&nbsp;<A HREF="007827.html#0007" CLASS="Element59">Destroy</A><P CLASS="Element31">
+</DIV>
+</DIV>
+<DIV CLASS="Element29">
+TIdTCPConnection</DIV>
+<DIV CLASS="Element32">
+<DIV CLASS="Element31">
+<IMG SRC="indempty.png" BORDER="0" HEIGHT="12" WIDTH="7" ALT=""><IMG SRC="virtual.png" BORDER="0" HEIGHT="12" WIDTH="7" ALT="virtual">&nbsp;<A HREF="007828.html#0000" CLASS="Element59">AllData</A><P CLASS="Element31">
+<IMG SRC="indempty.png" BORDER="0" HEIGHT="12" WIDTH="7" ALT=""><IMG SRC="indempty.png" BORDER="0" HEIGHT="12" WIDTH="7" ALT="">&nbsp;<A HREF="007828.html#0002" CLASS="Element59">CancelWriteBuffer</A><P CLASS="Element31">
+<IMG SRC="indempty.png" BORDER="0" HEIGHT="12" WIDTH="7" ALT=""><IMG SRC="indempty.png" BORDER="0" HEIGHT="12" WIDTH="7" ALT="">&nbsp;<A HREF="007828.html#0004" CLASS="Element59">procedure&nbsp;Capture(ADest:&nbsp;TStream;&nbsp;const&nbsp;ADelim:&nbsp;string&nbsp;=&nbsp;'.';&nbsp;const&nbsp;AIsRFCMessage:&nbsp;Boolean&nbsp;=&nbsp;True);&nbsp;overload;</A><P CLASS="Element31">
+<IMG SRC="indempty.png" BORDER="0" HEIGHT="12" WIDTH="7" ALT=""><IMG SRC="indempty.png" BORDER="0" HEIGHT="12" WIDTH="7" ALT="">&nbsp;<A HREF="007828.html#0003" CLASS="Element59">procedure&nbsp;Capture(ADest:&nbsp;TStream;&nbsp;out&nbsp;VLineCount:&nbsp;Integer;&nbsp;const&nbsp;ADelim:&nbsp;string&nbsp;=&nbsp;'.';&nbsp;const&nbsp;AIsRFCMessage:&nbsp;Boolean&nbsp;=&nbsp;True);&nbsp;overload;</A><P CLASS="Element31">
+<IMG SRC="indempty.png" BORDER="0" HEIGHT="12" WIDTH="7" ALT=""><IMG SRC="indempty.png" BORDER="0" HEIGHT="12" WIDTH="7" ALT="">&nbsp;<A HREF="007828.html#0006" CLASS="Element59">procedure&nbsp;Capture(ADest:&nbsp;TStrings;&nbsp;const&nbsp;ADelim:&nbsp;string&nbsp;=&nbsp;'.';&nbsp;const&nbsp;AIsRFCMessage:&nbsp;Boolean&nbsp;=&nbsp;True);&nbsp;overload;</A><P CLASS="Element31">
+<IMG SRC="indempty.png" BORDER="0" HEIGHT="12" WIDTH="7" ALT=""><IMG SRC="indempty.png" BORDER="0" HEIGHT="12" WIDTH="7" ALT="">&nbsp;<A HREF="007828.html#0005" CLASS="Element59">procedure&nbsp;Capture(ADest:&nbsp;TStrings;&nbsp;out&nbsp;VLineCount:&nbsp;Integer;&nbsp;const&nbsp;ADelim:&nbsp;string&nbsp;=&nbsp;'.';&nbsp;const&nbsp;AIsRFCMessage:&nbsp;Boolean&nbsp;=&nbsp;True);&nbsp;overload;</A><P CLASS="Element31">
+<IMG SRC="indempty.png" BORDER="0" HEIGHT="12" WIDTH="7" ALT=""><IMG SRC="virtual.png" BORDER="0" HEIGHT="12" WIDTH="7" ALT="virtual">&nbsp;<A HREF="007828.html#0007" CLASS="Element59">CheckForDisconnect</A><P CLASS="Element31">
+<IMG SRC="indempty.png" BORDER="0" HEIGHT="12" WIDTH="7" ALT=""><IMG SRC="virtual.png" BORDER="0" HEIGHT="12" WIDTH="7" ALT="virtual">&nbsp;<A HREF="007828.html#0008" CLASS="Element59">CheckForGracefulDisconnect</A><P CLASS="Element31">
+<IMG SRC="indempty.png" BORDER="0" HEIGHT="12" WIDTH="7" ALT=""><IMG SRC="virtual.png" BORDER="0" HEIGHT="12" WIDTH="7" ALT="virtual">&nbsp;<A HREF="007828.html#0009" CLASS="Element59">CheckResponse</A><P CLASS="Element31">
+<IMG SRC="indempty.png" BORDER="0" HEIGHT="12" WIDTH="7" ALT=""><IMG SRC="indempty.png" BORDER="0" HEIGHT="12" WIDTH="7" ALT="">&nbsp;<A HREF="007828.html#000A" CLASS="Element59">ClearWriteBuffer</A><P CLASS="Element31">
+<IMG SRC="indempty.png" BORDER="0" HEIGHT="12" WIDTH="7" ALT=""><IMG SRC="indempty.png" BORDER="0" HEIGHT="12" WIDTH="7" ALT="">&nbsp;<A HREF="007828.html#000C" CLASS="Element59">CloseWriteBuffer</A><P CLASS="Element31">
+<IMG SRC="indempty.png" BORDER="0" HEIGHT="12" WIDTH="7" ALT=""><IMG SRC="virtual.png" BORDER="0" HEIGHT="12" WIDTH="7" ALT="virtual">&nbsp;<A HREF="007828.html#000D" CLASS="Element59">Connected</A><P CLASS="Element31">
+<IMG SRC="indempty.png" BORDER="0" HEIGHT="12" WIDTH="7" ALT=""><IMG SRC="virtual.png" BORDER="0" HEIGHT="12" WIDTH="7" ALT="virtual">&nbsp;<A HREF="007828.html#000E" CLASS="Element59">Create</A><P CLASS="Element31">
+<IMG SRC="indempty.png" BORDER="0" HEIGHT="12" WIDTH="7" ALT=""><IMG SRC="indempty.png" BORDER="0" HEIGHT="12" WIDTH="7" ALT="">&nbsp;<A HREF="007828.html#000F" CLASS="Element59">CurrentReadBuffer</A><P CLASS="Element31">
+<IMG SRC="indempty.png" BORDER="0" HEIGHT="12" WIDTH="7" ALT=""><IMG SRC="virtual.png" BORDER="0" HEIGHT="12" WIDTH="7" ALT="virtual">&nbsp;<A HREF="007828.html#0010" CLASS="Element59">Destroy</A><P CLASS="Element31">
+<IMG SRC="indempty.png" BORDER="0" HEIGHT="12" WIDTH="7" ALT=""><IMG SRC="virtual.png" BORDER="0" HEIGHT="12" WIDTH="7" ALT="virtual">&nbsp;<A HREF="007828.html#0011" CLASS="Element59">Disconnect</A><P CLASS="Element31">
+<IMG SRC="indempty.png" BORDER="0" HEIGHT="12" WIDTH="7" ALT=""><IMG SRC="virtual.png" BORDER="0" HEIGHT="12" WIDTH="7" ALT="virtual">&nbsp;<A HREF="007828.html#0012" CLASS="Element59">DisconnectSocket</A><P CLASS="Element31">
+<IMG SRC="indempty.png" BORDER="0" HEIGHT="12" WIDTH="7" ALT=""><IMG SRC="indempty.png" BORDER="0" HEIGHT="12" WIDTH="7" ALT="">&nbsp;<A HREF="007828.html#0013" CLASS="Element59">FlushWriteBuffer</A><P CLASS="Element31">
+<IMG SRC="indempty.png" BORDER="0" HEIGHT="12" WIDTH="7" ALT=""><IMG SRC="indempty.png" BORDER="0" HEIGHT="12" WIDTH="7" ALT="">&nbsp;<A HREF="007828.html#0014" CLASS="Element59">GetInternalResponse</A><P CLASS="Element31">
+<IMG SRC="indempty.png" BORDER="0" HEIGHT="12" WIDTH="7" ALT=""><IMG SRC="virtual.png" BORDER="0" HEIGHT="12" WIDTH="7" ALT="virtual">&nbsp;<A HREF="007828.html#0015" CLASS="Element59">function&nbsp;GetResponse(const&nbsp;AAllowedResponses:&nbsp;array&nbsp;of&nbsp;SmallInt):&nbsp;SmallInt;&nbsp;virtual;&nbsp;overload;</A><P CLASS="Element31">
+<IMG SRC="indempty.png" BORDER="0" HEIGHT="12" WIDTH="7" ALT=""><IMG SRC="indempty.png" BORDER="0" HEIGHT="12" WIDTH="7" ALT="">&nbsp;<A HREF="007828.html#0016" CLASS="Element59">function&nbsp;GetResponse(const&nbsp;AAllowedResponse:&nbsp;SmallInt):&nbsp;SmallInt;&nbsp;overload;</A><P CLASS="Element31">
+<IMG SRC="indempty.png" BORDER="0" HEIGHT="12" WIDTH="7" ALT=""><IMG SRC="indempty.png" BORDER="0" HEIGHT="12" WIDTH="7" ALT="">&nbsp;<A HREF="007828.html#0019" CLASS="Element59">InputLn</A><P CLASS="Element31">
+<IMG SRC="indempty.png" BORDER="0" HEIGHT="12" WIDTH="7" ALT=""><IMG SRC="indempty.png" BORDER="0" HEIGHT="12" WIDTH="7" ALT="">&nbsp;<A HREF="007828.html#0023" CLASS="Element59">OpenWriteBuffer</A><P CLASS="Element31">
+<IMG SRC="indempty.png" BORDER="0" HEIGHT="12" WIDTH="7" ALT=""><IMG SRC="virtual.png" BORDER="0" HEIGHT="12" WIDTH="7" ALT="virtual">&nbsp;<A HREF="007828.html#0024" CLASS="Element59">procedure&nbsp;RaiseExceptionForLastCmdResult;&nbsp;virtual;&nbsp;overload;</A><P CLASS="Element31">
+<IMG SRC="indempty.png" BORDER="0" HEIGHT="12" WIDTH="7" ALT=""><IMG SRC="virtual.png" BORDER="0" HEIGHT="12" WIDTH="7" ALT="virtual">&nbsp;<A HREF="007828.html#0025" CLASS="Element59">procedure&nbsp;RaiseExceptionForLastCmdResult(AException:&nbsp;TClassIdException);&nbsp;virtual;&nbsp;overload;</A><P CLASS="Element31">
+<IMG SRC="indempty.png" BORDER="0" HEIGHT="12" WIDTH="7" ALT=""><IMG SRC="indempty.png" BORDER="0" HEIGHT="12" WIDTH="7" ALT="">&nbsp;<A HREF="007828.html#0026" CLASS="Element59">ReadBuffer</A><P CLASS="Element31">
+<IMG SRC="indempty.png" BORDER="0" HEIGHT="12" WIDTH="7" ALT=""><IMG SRC="indempty.png" BORDER="0" HEIGHT="12" WIDTH="7" ALT="">&nbsp;<A HREF="007828.html#0027" CLASS="Element59">ReadCardinal</A><P CLASS="Element31">
+<IMG SRC="indempty.png" BORDER="0" HEIGHT="12" WIDTH="7" ALT=""><IMG SRC="indempty.png" BORDER="0" HEIGHT="12" WIDTH="7" ALT="">&nbsp;<A HREF="007828.html#0028" CLASS="Element59">ReadChar</A><P CLASS="Element31">
+<IMG SRC="indempty.png" BORDER="0" HEIGHT="12" WIDTH="7" ALT=""><IMG SRC="virtual.png" BORDER="0" HEIGHT="12" WIDTH="7" ALT="virtual">&nbsp;<A HREF="007828.html#0029" CLASS="Element59">ReadFromStack</A><P CLASS="Element31">
+<IMG SRC="indempty.png" BORDER="0" HEIGHT="12" WIDTH="7" ALT=""><IMG SRC="indempty.png" BORDER="0" HEIGHT="12" WIDTH="7" ALT="">&nbsp;<A HREF="007828.html#002A" CLASS="Element59">ReadInteger</A><P CLASS="Element31">
+<IMG SRC="indempty.png" BORDER="0" HEIGHT="12" WIDTH="7" ALT=""><IMG SRC="virtual.png" BORDER="0" HEIGHT="12" WIDTH="7" ALT="virtual">&nbsp;<A HREF="007828.html#002B" CLASS="Element59">ReadLn</A><P CLASS="Element31">
+<IMG SRC="indempty.png" BORDER="0" HEIGHT="12" WIDTH="7" ALT=""><IMG SRC="indempty.png" BORDER="0" HEIGHT="12" WIDTH="7" ALT="">&nbsp;<A HREF="007828.html#002E" CLASS="Element59">ReadLnWait</A><P CLASS="Element31">
+<IMG SRC="indempty.png" BORDER="0" HEIGHT="12" WIDTH="7" ALT=""><IMG SRC="indempty.png" BORDER="0" HEIGHT="12" WIDTH="7" ALT="">&nbsp;<A HREF="007828.html#002F" CLASS="Element59">ReadSmallInt</A><P CLASS="Element31">
+<IMG SRC="indempty.png" BORDER="0" HEIGHT="12" WIDTH="7" ALT=""><IMG SRC="indempty.png" BORDER="0" HEIGHT="12" WIDTH="7" ALT="">&nbsp;<A HREF="007828.html#0030" CLASS="Element59">ReadStream</A><P CLASS="Element31">
+<IMG SRC="indempty.png" BORDER="0" HEIGHT="12" WIDTH="7" ALT=""><IMG SRC="indempty.png" BORDER="0" HEIGHT="12" WIDTH="7" ALT="">&nbsp;<A HREF="007828.html#0031" CLASS="Element59">ReadString</A><P CLASS="Element31">
+<IMG SRC="indempty.png" BORDER="0" HEIGHT="12" WIDTH="7" ALT=""><IMG SRC="indempty.png" BORDER="0" HEIGHT="12" WIDTH="7" ALT="">&nbsp;<A HREF="007828.html#0032" CLASS="Element59">ReadStrings</A><P CLASS="Element31">
+<IMG SRC="indempty.png" BORDER="0" HEIGHT="12" WIDTH="7" ALT=""><IMG SRC="indempty.png" BORDER="0" HEIGHT="12" WIDTH="7" ALT="">&nbsp;<A HREF="007828.html#0037" CLASS="Element59">function&nbsp;SendCmd(const&nbsp;AOut:&nbsp;string;&nbsp;const&nbsp;AResponse:&nbsp;SmallInt&nbsp;=&nbsp;-1):&nbsp;SmallInt;&nbsp;overload;</A><P CLASS="Element31">
+<IMG SRC="indempty.png" BORDER="0" HEIGHT="12" WIDTH="7" ALT=""><IMG SRC="virtual.png" BORDER="0" HEIGHT="12" WIDTH="7" ALT="virtual">&nbsp;<A HREF="007828.html#0036" CLASS="Element59">function&nbsp;SendCmd(const&nbsp;AOut:&nbsp;string;&nbsp;const&nbsp;AResponse:&nbsp;Array&nbsp;of&nbsp;SmallInt):&nbsp;SmallInt;&nbsp;virtual;&nbsp;overload;</A><P CLASS="Element31">
+<IMG SRC="indempty.png" BORDER="0" HEIGHT="12" WIDTH="7" ALT=""><IMG SRC="indempty.png" BORDER="0" HEIGHT="12" WIDTH="7" ALT="">&nbsp;<A HREF="007828.html#0039" CLASS="Element59">WaitFor</A><P CLASS="Element31">
+<IMG SRC="indempty.png" BORDER="0" HEIGHT="12" WIDTH="7" ALT=""><IMG SRC="virtual.png" BORDER="0" HEIGHT="12" WIDTH="7" ALT="virtual">&nbsp;<A HREF="007828.html#003A" CLASS="Element59">Write</A><P CLASS="Element31">
+<IMG SRC="indempty.png" BORDER="0" HEIGHT="12" WIDTH="7" ALT=""><IMG SRC="indempty.png" BORDER="0" HEIGHT="12" WIDTH="7" ALT="">&nbsp;<A HREF="007828.html#003B" CLASS="Element59">WriteBuffer</A><P CLASS="Element31">
+<IMG SRC="indempty.png" BORDER="0" HEIGHT="12" WIDTH="7" ALT=""><IMG SRC="indempty.png" BORDER="0" HEIGHT="12" WIDTH="7" ALT="">&nbsp;<A HREF="007828.html#003C" CLASS="Element59">WriteCardinal</A><P CLASS="Element31">
+<IMG SRC="indempty.png" BORDER="0" HEIGHT="12" WIDTH="7" ALT=""><IMG SRC="virtual.png" BORDER="0" HEIGHT="12" WIDTH="7" ALT="virtual">&nbsp;<A HREF="007828.html#003D" CLASS="Element59">WriteFile</A><P CLASS="Element31">
+<IMG SRC="indempty.png" BORDER="0" HEIGHT="12" WIDTH="7" ALT=""><IMG SRC="indempty.png" BORDER="0" HEIGHT="12" WIDTH="7" ALT="">&nbsp;<A HREF="007828.html#003E" CLASS="Element59">WriteHeader</A><P CLASS="Element31">
+<IMG SRC="indempty.png" BORDER="0" HEIGHT="12" WIDTH="7" ALT=""><IMG SRC="indempty.png" BORDER="0" HEIGHT="12" WIDTH="7" ALT="">&nbsp;<A HREF="007828.html#003F" CLASS="Element59">WriteInteger</A><P CLASS="Element31">
+<IMG SRC="indempty.png" BORDER="0" HEIGHT="12" WIDTH="7" ALT=""><IMG SRC="virtual.png" BORDER="0" HEIGHT="12" WIDTH="7" ALT="virtual">&nbsp;<A HREF="007828.html#0040" CLASS="Element59">WriteLn</A><P CLASS="Element31">
+<IMG SRC="indempty.png" BORDER="0" HEIGHT="12" WIDTH="7" ALT=""><IMG SRC="indempty.png" BORDER="0" HEIGHT="12" WIDTH="7" ALT="">&nbsp;<A HREF="007828.html#0041" CLASS="Element59">WriteRFCReply</A><P CLASS="Element31">
+<IMG SRC="indempty.png" BORDER="0" HEIGHT="12" WIDTH="7" ALT=""><IMG SRC="indempty.png" BORDER="0" HEIGHT="12" WIDTH="7" ALT="">&nbsp;<A HREF="007828.html#0042" CLASS="Element59">WriteRFCStrings</A><P CLASS="Element31">
+<IMG SRC="indempty.png" BORDER="0" HEIGHT="12" WIDTH="7" ALT=""><IMG SRC="indempty.png" BORDER="0" HEIGHT="12" WIDTH="7" ALT="">&nbsp;<A HREF="007828.html#0043" CLASS="Element59">WriteSmallInt</A><P CLASS="Element31">
+<IMG SRC="indempty.png" BORDER="0" HEIGHT="12" WIDTH="7" ALT=""><IMG SRC="virtual.png" BORDER="0" HEIGHT="12" WIDTH="7" ALT="virtual">&nbsp;<A HREF="007828.html#0044" CLASS="Element59">WriteStream</A><P CLASS="Element31">
+<IMG SRC="indempty.png" BORDER="0" HEIGHT="12" WIDTH="7" ALT=""><IMG SRC="indempty.png" BORDER="0" HEIGHT="12" WIDTH="7" ALT="">&nbsp;<A HREF="007828.html#0045" CLASS="Element59">WriteStrings</A><P CLASS="Element31">
+</DIV>
+</DIV>
+<DIV CLASS="Element29">
+TIdComponent</DIV>
+<DIV CLASS="Element32">
+<DIV CLASS="Element31">
+<IMG SRC="indempty.png" BORDER="0" HEIGHT="12" WIDTH="7" ALT=""><IMG SRC="virtual.png" BORDER="0" HEIGHT="12" WIDTH="7" ALT="virtual">&nbsp;<A HREF="007246.html#0000" CLASS="Element59">BeginWork</A><P CLASS="Element31">
+<IMG SRC="indempty.png" BORDER="0" HEIGHT="12" WIDTH="7" ALT=""><IMG SRC="virtual.png" BORDER="0" HEIGHT="12" WIDTH="7" ALT="virtual">&nbsp;<A HREF="007246.html#0001" CLASS="Element59">Create</A><P CLASS="Element31">
+<IMG SRC="indempty.png" BORDER="0" HEIGHT="12" WIDTH="7" ALT=""><IMG SRC="virtual.png" BORDER="0" HEIGHT="12" WIDTH="7" ALT="virtual">&nbsp;<A HREF="007246.html#0002" CLASS="Element59">Destroy</A><P CLASS="Element31">
+<IMG SRC="indempty.png" BORDER="0" HEIGHT="12" WIDTH="7" ALT=""><IMG SRC="virtual.png" BORDER="0" HEIGHT="12" WIDTH="7" ALT="virtual">&nbsp;<A HREF="007246.html#0003" CLASS="Element59">DoWork</A><P CLASS="Element31">
+<IMG SRC="indempty.png" BORDER="0" HEIGHT="12" WIDTH="7" ALT=""><IMG SRC="virtual.png" BORDER="0" HEIGHT="12" WIDTH="7" ALT="virtual">&nbsp;<A HREF="007246.html#0004" CLASS="Element59">EndWork</A><P CLASS="Element31">
+</DIV>
+</DIV>
+<DIV CLASS="Element29">
+TIdBaseComponent</DIV>
+<DIV CLASS="Element32">
+<DIV CLASS="Element31">
+<IMG SRC="indempty.png" BORDER="0" HEIGHT="12" WIDTH="7" ALT=""><IMG SRC="indempty.png" BORDER="0" HEIGHT="12" WIDTH="7" ALT="">&nbsp;<A HREF="007213.html#0000" CLASS="Element59">GetVersion</A><P CLASS="Element31">
+</DIV>
+</DIV>
+<DIV CLASS="Element62">
+<HR>Created with Doc-O-Matic 2 donated to <STRONG><A HREF="http://www.delphi-jedi.org">Project JEDI</A></STRONG>. Commercial license available from the <STRONG><A HREF="http://www.doc-o-matic.com">Doc-O-Matic site</A></STRONG>.</DIV>
+</DIV></BODY></HTML>

@@ -1,0 +1,65 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+<TITLE>TIdPOP3ServerMessageNumberEvent</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <META name="GENERATOR" content="Doc-O-Matic">
+    <LINK rel="STYLESHEET" href="default.css" type="text/css">
+
+<SCRIPT LANGUAGE="JavaScript1.2" SRC="scripts.js"></SCRIPT>
+</HEAD>
+<BODY CLASS="Element57">
+<TABLE BORDER="0" BGCOLOR="#AACCFF" WIDTH="100%" CELLSPACING="0" CELLPADDING="0">
+<TR><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element1">
+Indy 9</DIV>
+</TD><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element2">
+<A HREF="content.html" CLASS="Element59">Content</A> | <A HREF="idx.html" CLASS="Element59">Index</A> | <A HREF="symref.html" CLASS="Element59">Reference</A></DIV>
+</TD></TR></TABLE><DIV CLASS="Element58">
+<DIV CLASS="Element5">
+TIdPOP3ServerMessageNumberEvent</DIV>
+<DIV CLASS="Element7">
+<A HREF="015490.html" CLASS="Element59">See Also</A>, <A HREF="002310.html" CLASS="Element59">Unit: IdPOP3Server</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Event type triggered from command handlers that use message numbers.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12">TIdPOP3ServerMessageNumberEvent = <STRONG>procedure</STRONG> (ASender: <A HREF="007242.html" CLASS="Element59">TIdCommand</A>; AMessageNum :Integer) <STRONG>of</STRONG> <STRONG>object</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Unit</DIV>
+<DIV CLASS="Element69">
+<A HREF="002310.html" CLASS="Element59">IdPOP3Server</A></DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+AMessageNum</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Message number to be affected in the mailbox.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+ASender</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Command handler procedure generating the event.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+TIdPOP3ServerMessageNumberEvent is an event type triggered when a command handler for the server executes a POP3 command that acts upon the message numbers. TIdPOP3ServerMessageNumberEvent is the type used to represent <A HREF="007618.html" CLASS="Element59">TIdPOP3Server</A> event handlers like:<P CLASS="Element10">
+<UL>
+<LI>OnLIST<P CLASS="Element10">
+<LI>OnRETR<P CLASS="Element10">
+<LI>OnDELE<P CLASS="Element10">
+<LI>OnUIDL</UL>
+<P CLASS="Element10">
+POP3 commands that trigger a TIdPOP3ServerMessageNumberEvent event are only valid when the <A HREF="007623.html" CLASS="Element59">TIdPOP3ServerState</A> is Tran. In some situations, AMessageNum is an optional POP3 command parameter, and can contain -1 when a value isn't specified by the client connection. Some functions require this capability. For example, the LIST command can operate either by a certain message number or a with no arguments. See RFC1939 for details.</DIV>
+</DIV>
+<DIV CLASS="Element62">
+<HR>Created with Doc-O-Matic 2 donated to <STRONG><A HREF="http://www.delphi-jedi.org">Project JEDI</A></STRONG>. Commercial license available from the <STRONG><A HREF="http://www.doc-o-matic.com">Doc-O-Matic site</A></STRONG>.</DIV>
+</DIV></BODY></HTML>

@@ -1,0 +1,288 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+<TITLE>TResultRecord</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <META name="GENERATOR" content="Doc-O-Matic">
+    <LINK rel="STYLESHEET" href="default.css" type="text/css">
+
+<SCRIPT LANGUAGE="JavaScript1.2" SRC="scripts.js"></SCRIPT>
+</HEAD>
+<BODY CLASS="Element57">
+<TABLE BORDER="0" BGCOLOR="#AACCFF" WIDTH="100%" CELLSPACING="0" CELLPADDING="0">
+<TR><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element1">
+Indy 9</DIV>
+</TD><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element2">
+<A HREF="content.html" CLASS="Element59">Content</A> | <A HREF="idx.html" CLASS="Element59">Index</A> | <A HREF="symref.html" CLASS="Element59">Reference</A></DIV>
+</TD></TR></TABLE><DIV CLASS="Element58">
+<DIV CLASS="Element5">
+TResultRecord</DIV>
+<DIV CLASS="Element7">
+<A HREF="015104.html" CLASS="Element59">Hierarchy</A>, <A HREF="015105.html" CLASS="Element59">Properties</A>, <A HREF="015106.html" CLASS="Element59">Methods</A>, <A HREF="015107.html" CLASS="Element59">See Also</A>, <A HREF="002173.html" CLASS="Element59">Unit: IdDNSResolver</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Collection item used to represent resource records returned by a DNS query.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12">TResultRecord = <STRONG>class</STRONG>(TCollectionItem)</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Unit</DIV>
+<DIV CLASS="Element69">
+<A HREF="002173.html" CLASS="Element59">IdDNSResolver</A></DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+TResultRecord is a TCollectionItem descendant that represents resource records returned in the results for a DNS query. TResultRecord contains data associated with names, aliases, and internet addresses in the tree-structured Domain <A HREF="008059.html#0001" CLASS="Element59">Name</A> Space.<P CLASS="Element10">
+Resource records are returned in the Answer, Authority, and Additional sections of a DNS response, and they all share the same format: a variable number of resource records, where the number of records is specified in the corresponding count field in the header.<P CLASS="Element10">
+A resource record has the following format:<P CLASS="Element10">
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12">  +--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+
+  |                                               |
+  .                                               .
+  .                      NAME                     .
+  .                                               .
+  |                                               |
+  +--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+
+  |                      TYPE                     |
+  +--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+
+  |                     CLASS                     |
+  +--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+
+  |                      <A HREF="008059.html#0007" CLASS="Element59">TTL</A>                      |
+  |                                               |
+  +--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+
+  |                    RDLENGTH                   |
+  +--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--|
+  .                                               .
+  .                     RDATA                     .
+  .                                               .
+  +--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+</PRE></DIV>
+</DIV>
+<P CLASS="Element10">
+<UL>
+<LI>NAME - Domain name to which this resource record pertains.<P CLASS="Element10">
+<LI>TYPE - Two octets containing one of the encoded resource record type codes. TYPE specifies the meaning of the data in the RDATA field.<P CLASS="Element10">
+<LI>CLASS - Two octets which specify the class of the data in the RDATA field.<P CLASS="Element10">
+<LI><A HREF="008059.html#0007" CLASS="Element59">TTL</A> - 32-bit unsigned integer that specifies the time interval (in seconds) that the resource record may be cached before it should be discarded. Zero values are interpreted to mean that the resource record can only be used for the transaction in progress, and should not be cached.<P CLASS="Element10">
+<LI>RDLENGTH - 16-bit unsigned integer that specifies the length in octets of the RDATA field.<P CLASS="Element10">
+<LI>RDATA - A variable length string of octets that describes the resource. The format of this information varies according to the TYPE and CLASS of the resource record. For example, the if the TYPE is A and the CLASS is IN, the RDATA field is a 4 octet ARPA Internet address.</UL>
+<P CLASS="Element10">
+TResultRecord provides properties that represent the values found in a resource record, including the resource record type, resource class, Time-To-Live, data for the resource record, and the length of data in the resource record.<P CLASS="Element10">
+TResultRecord also provides methods to handle parsing of raw data from a DNS query response, and storing the resulting values in properties for the object instance.<P CLASS="Element10">
+TResultRecord is also an ancestor class for other resource record types such as <A HREF="007135.html" CLASS="Element59">TARecord</A>, <A HREF="007149.html" CLASS="Element59">TCNRecord</A>, <A HREF="007192.html" CLASS="Element59">THINFORecord</A>, <A HREF="007932.html" CLASS="Element59">TMINFORecord</A>, <A HREF="007937.html" CLASS="Element59">TMXRecord</A>, <A HREF="007938.html" CLASS="Element59">TNAMERecord</A>, <A HREF="008004.html" CLASS="Element59">TNSRecord</A>, <A HREF="008043.html" CLASS="Element59">TPTRRecord</A>, <A HREF="008053.html" CLASS="Element59">TRDATARecord</A>, <A HREF="008074.html" CLASS="Element59">TSOARecord</A>, <A HREF="008097.html" CLASS="Element59">TTextRecord</A>, and <A HREF="008109.html" CLASS="Element59">TWKSRecord</A>. These descendant classes provide additional properties used for labels in the RDATA field that are specific to the resource class and resource record type.<P CLASS="Element10">
+TResultRecord is the type used to represent collection items maintained in the <A HREF="008046.html" CLASS="Element59">TQueryResult</A> collection, and the item class returned when accessing the resource records returned by a DNS query in <A HREF="007302.html#0004" CLASS="Element59">TIdDNSResolver.QueryResult</A>.Items.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0001">TResultRecord.Name</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="008059.html" CLASS="Element59">TResultRecord</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Represents the domain name that is the owner of the resource record.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> Name: <STRONG>string</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Name is a read-only String property that represents the domain name that is the owner of the resource record. Name is often implied, rather than forming an integral part of the resource record.<P CLASS="Element10">
+Many name servers internally form tree or hash structures for the domain name space, and link resource records to these nodes. The remaining resource record values are the fixed header (<A HREF="008059.html#0006" CLASS="Element59">RecType</A>, <A HREF="008059.html#0005" CLASS="Element59">RecClass</A>, and <A HREF="008059.html#0007" CLASS="Element59">TTL</A>) which is consistent for all resource records. Variable data that describes the resource record is attached to the <A HREF="008059.html#0003" CLASS="Element59">RData</A> property.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0003">TResultRecord.RData</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="008059.html" CLASS="Element59">TResultRecord</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Represents class-dependent data which describes the resource record.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> RData: <STRONG>String</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+RData is a read-only String property that represents class-dependent data which describes the resource record. RData can contain differing values based on the resource record type or class.<P CLASS="Element10">
+RData is often used to provide the raw data used for property values in <A HREF="008059.html" CLASS="Element59">TResultRecord</A> decendant classes like <A HREF="008053.html" CLASS="Element59">TRDATARecord</A> and <A HREF="008109.html" CLASS="Element59">TWKSRecord</A>. Values in RData frequently contain &quot;pointers&quot; to other data in the Domain <A HREF="008059.html#0001" CLASS="Element59">Name</A> Space. Other <A HREF="008059.html" CLASS="Element59">TResultRecord</A> descendants will use RData to populate properties, including the following resource record types and usages:<P CLASS="Element10">
+<UL>
+<LI><A HREF="007135.html" CLASS="Element59">TARecord</A> - For the IN class, a 32 bit IP address. For the CH class, a domain name followed by a 16 bit octal Chaos address.<P CLASS="Element10">
+<LI><A HREF="007149.html" CLASS="Element59">TCNRecord</A> - A domain name.<P CLASS="Element10">
+<LI><A HREF="007937.html" CLASS="Element59">TMXRecord</A>- A 16-bit preference value (where a lower number indicates a higher perference) followed by a host name willing to act as a mail exchange for the owner domain.<P CLASS="Element10">
+<LI><A HREF="008004.html" CLASS="Element59">TNSRecord</A> - A host name.<P CLASS="Element10">
+<LI><A HREF="008043.html" CLASS="Element59">TPTRRecord</A> - A domain name.<P CLASS="Element10">
+<LI><A HREF="008074.html" CLASS="Element59">TSOARecord</A> - Multiple field values.</UL>
+</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0004">TResultRecord.RDataLength</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="008059.html" CLASS="Element59">TResultRecord</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Indicates the length of <A HREF="008059.html#0003" CLASS="Element59">RData</A> in the resource record.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> RDataLength: Integer;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+RDataLength is a read-only Integer property that indicates the length of RDATA values for a resource record read in a DNS query response. RDataLength is updated when the resource record is parsed from the DNS response packet, and added to <A HREF="008046.html" CLASS="Element59">TQueryResult</A> in <A HREF="007302.html#0005" CLASS="Element59">TIdDNSResolver.Resolve</A>.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0005">TResultRecord.RecClass</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="008059.html" CLASS="Element59">TResultRecord</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Represents the encoded resource class for the resource record.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> RecClass: word;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+RecClass is a read-only Word property that represents the two byte protocol family or instance of a protocol for the resource record encoded as a 16-bit value. The DNS protocol specifies the following unencoded values for the property:<P CLASS="Element10">
+<UL>
+<LI>IN - The Internet system<P CLASS="Element10">
+<LI>CH - The CHAOS system<P CLASS="Element10">
+<LI>CS - CSNet (Obsolete)<P CLASS="Element10">
+<LI>HS - Hesoid</UL>
+<P CLASS="Element10">
+<STRONG>Note</STRONG>: Currently, the <A HREF="007302.html" CLASS="Element59">TIdDNSResolver</A> implementation does not support all aspects of the DNS protocol, and includes the following limitations:<P CLASS="Element10">
+<UL>
+<LI>The DNS query class field is limited to examining resource records for the IN (Internet) class only. CS (CSNet), CH (CHAOS), and HS (Hesiod) are not supported at this time.</UL>
+<P CLASS="Element10">
+RecClass is updated when resource records are parsed, and added to <A HREF="008046.html" CLASS="Element59">TQueryResult</A> from the <A HREF="007302.html#0005" CLASS="Element59">TIdDNSResolver.Resolve</A> method.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0006">TResultRecord.RecType</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="008059.html" CLASS="Element59">TResultRecord</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Represents the type for a resource record read in a DNS query response.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> RecType: <A HREF="008045.html" CLASS="Element59">TQueryRecordTypes</A>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+RecType is a read-only <A HREF="008045.html" CLASS="Element59">TQueryRecordTypes</A> property that represents the type for a resource record read in a DNS query response. Like <A HREF="008059.html#0005" CLASS="Element59">RecClass</A>, RecType is an encoded 16-bit value that specifies the type of the resource record as defined in <A HREF="006188.html" CLASS="Element59">QueryRecordValues</A>.<P CLASS="Element10">
+RecType will normally contain one of the <A HREF="008045.html" CLASS="Element59">TQueryRecordTypes</A> values specified in <A HREF="007302.html#0003" CLASS="Element59">TIdDNSResolver.QueryRecords</A> prior to calling <A HREF="007302.html#0005" CLASS="Element59">TIdDNSResolver.Resolve</A>.<P CLASS="Element10">
+RecType may contain one of the following values and associated meanings for the resource record type:<P CLASS="Element10">
+<UL>
+<LI>1 - Host address<P CLASS="Element10">
+<LI>2 - Authoritative name server<P CLASS="Element10">
+<LI>3 - Mail destination (Obsolete - use MX)<P CLASS="Element10">
+<LI>4 - Mail forwarder (Obsolete - use MX)<P CLASS="Element10">
+<LI>5 - Canonical name for an alias<P CLASS="Element10">
+<LI>6 - Start of a zone of authority marker<P CLASS="Element10">
+<LI>7 - Mailbox domain name (EXPERIMENTAL)<P CLASS="Element10">
+<LI>8 - Mail group member (EXPERIMENTAL)<P CLASS="Element10">
+<LI>9 - Mail rename domain name (EXPERIMENTAL)<P CLASS="Element10">
+<LI>10 - Null resource record (EXPERIMENTAL)<P CLASS="Element10">
+<LI>11 - Well known service description<P CLASS="Element10">
+<LI>12 - Domain name pointer<P CLASS="Element10">
+<LI>13 - Host information<P CLASS="Element10">
+<LI>14 - Mailbox or mail list information<P CLASS="Element10">
+<LI>15 - Mail exchange<P CLASS="Element10">
+<LI>16 - Text strings<P CLASS="Element10">
+<LI>255 - All resource record types</UL>
+<P CLASS="Element10">
+RecType is updated when <A HREF="008046.html#0000" CLASS="Element59">TQueryResult.Add</A> is used to create a resource record read from a DNS response in <A HREF="007302.html#0005" CLASS="Element59">TIdDNSResolver.Resolve</A>.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0007">TResultRecord.TTL</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="008059.html" CLASS="Element59">TResultRecord</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Indicates the Time-To-Live for the resource record.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> TTL: cardinal;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+TTL is a read-only Cardinal property that indicates the Time-To-Live for the resource record. TTL represents a time limit that is the number of seconds that a resource record is considered valid in the cache for a <A HREF="007302.html" CLASS="Element59">TIdDNSResolver</A> object instance.<P CLASS="Element10">
+TTL does not apply to authoritative data in a DNS zone, but can timeout by use of refreshing policies for the zone. TTL is assigned by the administrator for the zone where the data originates.<P CLASS="Element10">
+While short TTLs can be used to minimize caching, and a zero TTL prohibits caching, the realities of Internet performance suggest that these times should be on the order of days for the typical host. If a change can be anticipated, the TTL can be reduced on the DNS server prior to the change to minimize inconsistency during the change, and then increased back to its former value following the change.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0000">TResultRecord.Destroy</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="008059.html" CLASS="Element59">TResultRecord</A>, <A HREF="015108.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Frees the object instance.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>destructor</STRONG> Destroy; <STRONG>override</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Destroy is the destructor for the object instance. Destroy calls the inherited Destroy method prior to exit.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0002">TResultRecord.Parse</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="008059.html" CLASS="Element59">TResultRecord</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Parses the raw data for a resource record from a DNS response.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>procedure</STRONG> Parse(CompleteMessage: <STRONG>String</STRONG>; APos: Integer); <STRONG>virtual</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+CompleteMessage: String</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Raw data for the resource record from a DNS Answer.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+APos: Integer</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Integer position where data values begin in the DNS response (One-based).</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Parse is a virtual procedure that allows the collection item to perform parsing required to extract property values from the raw data for the resource record, as specified in CompleteMessage.<P CLASS="Element10">
+APos is the one-based integer position where data for the resource record can be located in the values specified in CompleteMessage.<P CLASS="Element10">
+Parse is not implemented in <A HREF="008059.html" CLASS="Element59">TResultRecord</A>, and should be overridden in <A HREF="008059.html" CLASS="Element59">TResultRecord</A> descendant classes to perform parsing specific to the content for the resource record type.<P CLASS="Element10">
+Parse is used by <A HREF="007302.html" CLASS="Element59">TIdDNSResolver</A> when resolving a DNS query, and parsing the answer values returned in the DNS response.</DIV>
+</DIV>
+<DIV CLASS="Element62">
+<HR>Created with Doc-O-Matic 2 donated to <STRONG><A HREF="http://www.delphi-jedi.org">Project JEDI</A></STRONG>. Commercial license available from the <STRONG><A HREF="http://www.doc-o-matic.com">Doc-O-Matic site</A></STRONG>.</DIV>
+</DIV></BODY></HTML>

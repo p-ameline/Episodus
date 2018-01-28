@@ -1,0 +1,293 @@
+/*
+** Copyright Nautilus, (10/9/2004)
+** fabrice.le_perru@nautilus-info.com
+** david.giocanti@nautilus-info.com
+
+** Ce logiciel est un programme informatique servant à [rappeler les
+** caractéristiques techniques de votre logiciel].
+
+** Ce logiciel est régi par la licence CeCILL soumise au droit français et
+** respectant les principes de diffusion des logiciels libres. Vous pouvez
+** utiliser, modifier et/ou redistribuer ce programme sous les conditions
+** de la licence CeCILL telle que diffusée par le CEA, le CNRS et l'INRIA
+** sur le site "http://www.cecill.info".
+
+** En contrepartie de l'accessibilité au code source et des droits de copie,
+** de modification et de redistribution accordés par cette licence, il n'est
+** offert aux utilisateurs qu'une garantie limitée.  Pour les mêmes raisons,
+** seule une responsabilité restreinte pèse sur l'auteur du programme,  le
+** titulaire des droits patrimoniaux et les concédants successifs.
+
+** A cet égard  l'attention de l'utilisateur est attirée sur les risques
+** associés au chargement,  à l'utilisation,  à la modification et/ou au
+** développement et à la reproduction du logiciel par l'utilisateur étant
+** donné sa spécificité de logiciel libre, qui peut le rendre complexe à
+** manipuler et qui le réserve donc à des développeurs et des professionnels
+** avertis possédant  des  connaissances  informatiques approfondies.  Les
+** utilisateurs sont donc invités à charger  et  tester  l'adéquation  du
+** logiciel à leurs besoins dans des conditions permettant d'assurer la
+** sécurité de leurs systèmes et ou de leurs données et, plus généralement,
+** à l'utiliser et l'exploiter dans les mêmes conditions de sécurité.
+
+** Le fait que vous puissiez accéder à cet en-tête signifie que vous avez
+** pris connaissance de la licence CeCILL, et que vous en avez accepté les
+** termes.
+*/
+// All blackboard elements are objects.  Since anything that one can reason
+// about should be on the blackboard, that can be almost anything. In practice,
+// only things expected to be reasoned about should be objects.
+
+#ifndef _BB1Object_h
+  #define _BB1Object_h 1
+
+class BB1BB ;
+class BB1Class ;
+class BB1Decision ;
+class BB1Event ;
+class BB1KB ;     // for friend delclaration
+class BB1Link ;
+class BB1Message ;
+class BB1Object ; // for declaration of ::ModifyObject(...)
+
+#ifdef __GNUC__
+  #pragma interface
+#endif // __GNUC__
+
+#include <fstream.h>         // for Save(...)
+// #include "TypedVal.h"
+#include "AttValPair.h"
+// #include "BB1types.h"
+// #include "BB1KB.h"
+// #include "ns_ob1\toolbox.h"
+#include "ns_ob1\BB1BB.h"
+
+extern const AVPSet			NULLAVPSET ;
+extern const LinkSet		NULLLINKSET ;
+
+Errcode _BBKEXPORT	ModifyObject(	BB1Object&		object,
+																const AVPSet	*attSpec,
+																const LinkSet	*linkSpec,
+																const AVPSet	*delAttSpec,
+																const LinkSet	*delLinkSpec,
+																const int			eventP,
+                                bool  temp) ;
+
+NSPatPathoArray* _BBKEXPORT getPatPatho2(BB1Object* temp, const std::string& pathpathoname);
+
+// bool _BBKEXPORT getBoolAnswer(Transfert& reponse, std::string& sQuestion) ;
+
+class _BBKEXPORT BB1Object
+{
+	friend class NBBKB ;
+	friend class NautilusBB ;
+	
+  // Allowed to call BB1Object()
+	friend class BB1AppInst ;
+	friend class BB1BB ;
+	friend class BB1Class ;
+	friend class BB1Decision ;
+	friend class BB1Event ;
+	friend class BB1KS ;
+	friend class BB1KSAR ;
+	friend class BB1Message ;
+  friend NSPatPathoArray* getPatPatho(BB1Object* temp, std::string& pathpathoname);
+
+	// Allowed to call ~BB1Object() and Attributes()
+	friend class BB1KB ;
+
+  friend class ObjectList ;
+	friend class ObjectSet ;
+
+	// Allowed to access attributes and links
+	friend std::ostream&	operator<<(std::ostream& os, const BB1Object& obj) ;
+
+	// Allowed to call ProcessAttributes(...) and ProcessLinksNN(...)
+	friend Errcode	ModifyObject(	BB1Object&		object,
+																const AVPSet	*attSpec,
+																const LinkSet	*linkSpec,
+																const AVPSet	*delAttSpec,
+																const LinkSet	*delLinkSpec,
+																const int			eventP,
+                                bool  temp) ;
+
+ public: // API
+
+  BB1Object(const string sOname, AttValPair dispatch, BB1KB& kb, BB1Class *Class) ;
+
+	BB1Object(const BB1Object& bbObj) ;
+	~BB1Object() ;
+
+  BB1BB&          BB() ;
+
+	// Return a pointer to the class of this instance
+	const BB1Class *Class() const { return ((BB1Class *) Object("Exemplifies")) ; }
+
+	// Return the cycle upon which the object was created
+	Cycle           CycleCreated() const { return _cycleCreated ; }
+
+	bool						ExemplifiesP(const string sC) const ;
+
+  Errcode				  AddLink(const string sForwardLinkName, const string sInverseLinkName, BB1Object* pToObject) ;
+
+	// If the attribute is bound locally, return TRUE; otherwise, return FALSE.
+	bool						HasAttributeP(const AttValPair& avp) const { return (GetLocalAttribute(avp) ? true : false) ; }
+
+	bool						HasLinkP(const string sLinkName, const BB1Object *pToObject) const
+		      { return (GetLocalLink(sLinkName, pToObject) ? true : false) ; }
+
+	// Return a reference to the object's knowledge base
+  inline BB1KB&   KB() const { return _knowledgeBase ; }
+
+  inline string   LongName() const ;
+
+	Errcode					Modify( const AVPSet*  attSpec		 = (AVPSet*) 0,
+													const LinkSet* linkSpec		 = (LinkSet*) 0,
+													const AVPSet*  delAttSpec	 = (AVPSet*) 0,
+													const LinkSet* delLinkSpec = (LinkSet*) 0,
+													const int			 eventP			 = TRUE,
+                                bool     createToken = true)
+  { return (ModifyObject(*this, attSpec, linkSpec, delAttSpec, delLinkSpec, eventP, createToken)) ; }
+
+	// Return a reference to the object's name
+	const string&		Name() const { return _name ; } ;
+
+	BB1Object				*Object(const string& oname) const ;
+	void			      Objects(const string& oname, ObjectList *retval) const ;
+
+	// Is this BB1Object a strategy control-plan object?
+	bool						  Value(const string& attribute, bool&						 		 b ) const ;
+  NautilusQuestion* Value(const string& attribute, NautilusQuestion*     c ) const ;
+  AnswerStatus*     Value(const string& attribute, AnswerStatus*         c ) const ;
+	double					  Value(const string& attribute, double&					 		 d ) const ;
+	long						  Value(const string& attribute, long&						 		 l ) const ;
+	const string		  Value(const string& attribute, const string&			 	 s ) const ;
+	NSPatPathoArray*  Value(const string& attribute, NSPatPathoArray 	 *patho) const ;
+	BB1Object*        Value(const string& attribute, BB1Object				 *objet) const ;
+  NautilusEvent*    Value(const string& attribute, NautilusEvent		 *event) const ;
+  vector<HANDLE>*   Value(const string& attribute, vector<HANDLE>		 *handl) const ;
+
+  #ifdef __OB1__UNOPTIM__
+  int							Value(const string& attribute, int&							 			i ) const ;
+  float						Value(const string& attribute, float&						 			f ) const ;
+  char						Value(const string& attribute, char&						 			c ) const ;
+  short						Value(const string& attribute, short&						 			s ) const ;
+  unsigned char		Value(const string& attribute, unsigned char&			 		uc) const ;
+	unsigned int		Value(const string& attribute, unsigned int&			 		ui) const ;
+	unsigned long		Value(const string& attribute, unsigned long&			 		ul) const ;
+	unsigned short	Value(const string& attribute, unsigned short&		 		us) const ;
+  PathsList				*Value(const string& attribute, PathsList       	*paths) const ;
+  #endif
+
+  std::string                         getQuestionPath() ;
+
+  AnswerStatus::ANSWERSTATUS          getAnswerStatus() ;
+  AnswerStatus::ANSWERPROCESSINGSTAGE getAnswerProcessStage() ;
+
+  string                              getAnswerStatusAsString() ;
+  string                              getAnswerProcessStageAsString() ;
+
+	void setAnswerStatus(AnswerStatus::ANSWERSTATUS iStatus, HWND interfaceHandle) ;
+	void setAnswerProcessStage(AnswerStatus::ANSWERPROCESSINGSTAGE iStage) ;
+
+  bool updatePatPatho(NSPatPathoArray* patho, string sAnswerDate, bool bExt = false) ;
+
+  inline
+	TypedVal* Attributes(const std::string& attributes) ;  /*renvoie the first type val of a name */
+  //
+  // Helper functions for Attributes
+  //
+  TypedVal* PathAttributes()               { return Attributes("explication") ; }
+  TypedVal* SearchParams()                 { return Attributes("searchParams") ; }
+  TypedVal* InterfacesHandlesAttributes()  { return Attributes("interfaces") ; }
+  TypedVal* TokensHandlesAttributes()      { return Attributes("tokens") ; }
+  TypedVal* PersistenceHandlesAttributes() { return Attributes("persistence") ; }
+
+  static long getNbInstance() { return _lBB1ObjectCount ; }
+
+  bool      isOrphanQuestion() ;
+
+	// For user interfaces
+	const AVPSet		*Attributes() const	{ return &_attributes ; } ;
+	const LinkSet		*Links()      const { return &_links ; } ;
+	const Voidptr		Value(const string& attribute, Voidptr& p) const ;
+	virtual bool		IsAP(const string sC) const ;
+	virtual bool		UpdatePrescriptionTCAux() const ;
+	virtual bool		UpdatePrescriptionOCAux() const ;
+	virtual Errcode	UpdatePrescriptionACAux() ;
+	virtual bool		TerminatePrescriptionTCAux() const ;
+	virtual bool		TerminatePrescriptionPCAux() const ;
+	virtual bool		TerminatePrescriptionOCAux() const ;
+	virtual Errcode	TerminatePrescriptionACAux() ;
+	virtual void		DeleteParentDecision(BB1Decision *decision) ;
+
+	BB1Object&			operator=(BB1Object& src) ;
+
+ protected:
+
+	void CreateToken(const EventType et, const AVPSet *attSpec, const LinkSet *linkSpec,
+                   const AVPSet *delAttSpec, const LinkSet *delLinkSpec, bool createStrat = false);
+
+	Errcode					ProcessAttributes(const AVPSet *attSpec = (AVPSet*) 0, const AVPSet *delAttSpec = (AVPSet*) 0) ;
+	Errcode					ProcessLinksNN(const LinkSet *linkSpec = (LinkSet*) 0, const LinkSet *delLinkSpec = (LinkSet*) 0) ;
+	Errcode					ProcessLinkAdd(const BB1Link* pNewLink) ;
+	Errcode					ProcessLinkDel(BB1Link* pDelLink) ;
+
+	//Errcode					AddLink(const string& forwardLinkName, const string& inverseLinkName, BB1Object& toObject) ;
+	Errcode					DeleteAllAttributes() ;
+	Errcode					DeleteAllLinks() ;
+	void						DeleteBackwardLink(BB1Link *flptr, const BB1Class* pC) ;
+  inline
+	bool						AVPMatch(const AttValPair& avp1, const AttValPair& avp2) const ;
+	AttValPair			*GetInheritedAttribute(const AttValPair& avp) const ;
+	AttValPair			*GetLocalAttribute(const AttValPair& avp) const ;
+	BB1Link					*GetLocalLink(const string sLinkName, const BB1Object* pToObject) const ;
+	bool						ValidLinkP(const string sLinkName, const BB1Object* pToObject) const ;
+	virtual void		Save(ofstream& KBstream) = 0 ;
+	void						SaveClass(ofstream& KBstream) { KBstream << ((BB1Object *) Class())->Name() ; } ;
+	void						SaveName(ofstream& KBstream) 	{ KBstream << Name() << "\n" ; } ;
+	void						SaveAttributes(ofstream& KBstream) ;
+	void						SaveLinks(ofstream& KBstream) ;
+
+ protected:
+
+	Errcode					Instantiate(BB1Class* pC) ;
+
+	// ---------------------------------------------------------------------------
+	// Is the object allowed to have the attribute? Default; BB1Class, BB1KSAR,
+	// and BB1Message override.
+	// ---------------------------------------------------------------------------
+
+	virtual bool		ValidAttributeP(const AttValPair& avp) const ;
+
+ private:
+
+	AVPSet					  _attributes ;			// The object's attribute list
+	int							  _strategyP ;			// TRUE iff instance of BB1Strategy
+	const Cycle			  _cycleCreated ;		// The cycle upon which the object was created
+	BB1KB&					  _knowledgeBase ;  // The object's KB
+	LinkSet					  _links ;					// The object's link list
+	const std::string _name ;						// The object's name
+
+  static long       _lBB1ObjectCount ;
+} ;
+
+inline
+TypedVal*
+BB1Object::Attributes(const std::string& sSearchedAttribut)
+{
+  if (_attributes.empty())
+		return (TypedVal*) 0 ;
+
+	for (AVPCIter a = _attributes.begin() ; _attributes.end() != a ; a++)
+  	if ((*a) && ((*a)->AttributeName() == sSearchedAttribut))
+    	return (*a)->AttributeValuePtr() ;
+
+	return (TypedVal*) 0 ;
+}
+
+typedef BB1Object	*Objptr ;
+
+std::ostream&	operator<<(std::ostream& os, const BB1Object& obj) ;
+
+#endif // _BB1Object_h
+

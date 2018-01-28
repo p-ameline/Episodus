@@ -1,0 +1,102 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+<TITLE>TIdIPMCastBase</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <META name="GENERATOR" content="Doc-O-Matic">
+    <LINK rel="STYLESHEET" href="default.css" type="text/css">
+
+<SCRIPT LANGUAGE="JavaScript1.2" SRC="scripts.js"></SCRIPT>
+</HEAD>
+<BODY CLASS="Element57">
+<TABLE BORDER="0" BGCOLOR="#AACCFF" WIDTH="100%" CELLSPACING="0" CELLPADDING="0">
+<TR><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element1">
+Indy 9</DIV>
+</TD><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element2">
+<A HREF="content.html" CLASS="Element59">Content</A> | <A HREF="idx.html" CLASS="Element59">Index</A> | <A HREF="symref.html" CLASS="Element59">Reference</A></DIV>
+</TD></TR></TABLE><DIV CLASS="Element58">
+<DIV CLASS="Element5">
+TIdIPMCastBase</DIV>
+<DIV CLASS="Element7">
+<A HREF="011878.html" CLASS="Element59">Hierarchy</A>, <A HREF="011879.html" CLASS="Element59">Properties</A>, <A HREF="011880.html" CLASS="Element59">Methods</A>, <A HREF="011881.html" CLASS="Element59">Events</A>, <A HREF="011882.html" CLASS="Element59">See Also</A>, <A HREF="002267.html" CLASS="Element59">Unit: IdIPMCastBase</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Implements the common properties and method for Multicast clients and servers.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12">TIdIPMCastBase = <STRONG>class</STRONG>(<A HREF="007246.html" CLASS="Element59">TIdComponent</A>)</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Unit</DIV>
+<DIV CLASS="Element69">
+<A HREF="002267.html" CLASS="Element59">IdIPMCastBase</A></DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+TIdIPMCastBase is a <A HREF="007246.html" CLASS="Element59">TIdComponent</A> descendant that implements the the common functionality for both client and server components that support IP multicasting, as described in the Internet Standards documents:<P CLASS="Element10">
+<UL>
+<LI>RFC 1112 - Host Extensions for IP Multicasting. (http://www.rfc-editor.org/rfc/rfc1112.txt)<P CLASS="Element10">
+<LI>RFC 1458 - Requirements for Multicast Protocols. (http://www.rfc-editor.org/rfc/rfc1458.txt)</UL>
+<P CLASS="Element10">
+TIdIPMCastBase implements properties and abstract methods that allow access to and control of the MulticastGroup address, Port, Active state, and Binding for the component.<P CLASS="Element10">
+Applications do not create instances of TIdIPMCastBase. Use <A HREF="007433.html" CLASS="Element59">TIdIPMCastClient</A> or <A HREF="007435.html" CLASS="Element59">TIdIPMCastServer</A> to provide Multicast datagram support.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0000">TIdIPMCastBase.Create</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007432.html" CLASS="Element59">TIdIPMCastBase</A>, <A HREF="011883.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Constructor for the object instance.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>constructor</STRONG> Create(AOwner: TComponent); <STRONG>override</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+AOwner: TComponent</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Owner of the object instance.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Create is the constructor for the object instance, and calls the inhertied Create methods using AOwner as the owner of the object instance. Create assigns the default value <A HREF="000958.html" CLASS="Element59">Id_IPMC_All_Systems</A> to the MultiCastGroup property prior to exiting from the method.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0001">TIdIPMCastBase.IsValidMulticastGroup</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007432.html" CLASS="Element59">TIdIPMCastBase</A>, <A HREF="011884.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Indicates that an IP address is a member of a multicast group address.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>function</STRONG> IsValidMulticastGroup(Value: <STRONG>string</STRONG>): Boolean;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+Value: string</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Multicast Group IP address to be verified in the method.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+IsValidMulticastGroup is a Boolean function that indicates if the IP address in Value represents an IP address that is a member of a multicast group address. IsValidMulticastGroup returns True when the first byte of the dotted-decimal IP address is in the range identified by the constants <A HREF="003059.html" CLASS="Element59">IPMCastLo</A> through <A HREF="003058.html" CLASS="Element59">IPMCastHi</A>. IsValidMulticastGroup will return False when the IP address is not in the required range, or Value contains a host name instead of a dotted-decimal IP address.</DIV>
+</DIV>
+<DIV CLASS="Element62">
+<HR>Created with Doc-O-Matic 2 donated to <STRONG><A HREF="http://www.delphi-jedi.org">Project JEDI</A></STRONG>. Commercial license available from the <STRONG><A HREF="http://www.doc-o-matic.com">Doc-O-Matic site</A></STRONG>.</DIV>
+</DIV></BODY></HTML>

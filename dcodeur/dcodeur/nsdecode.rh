@@ -1,0 +1,16 @@
+
+
+//
+// Aide au décodage
+//
+#define IDD_DECODE	1
+#define IDC_TREEV_DECODE 101
+#define IDC_CORRIGER	 102
+#define IDC_ANNUL	     103
+#define IDC_AUTOMATIQUE	 104
+//
+// Images de la treeView
+//
+#define IDB_NORMAL	 1
+#define IDB_ERREUR	 2
+#define IDB_QUESTION 3

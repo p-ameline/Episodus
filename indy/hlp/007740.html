@@ -1,0 +1,844 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+<TITLE>TIdStack</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <META name="GENERATOR" content="Doc-O-Matic">
+    <LINK rel="STYLESHEET" href="default.css" type="text/css">
+
+<SCRIPT LANGUAGE="JavaScript1.2" SRC="scripts.js"></SCRIPT>
+</HEAD>
+<BODY CLASS="Element57">
+<TABLE BORDER="0" BGCOLOR="#AACCFF" WIDTH="100%" CELLSPACING="0" CELLPADDING="0">
+<TR><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element1">
+Indy 9</DIV>
+</TD><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element2">
+<A HREF="content.html" CLASS="Element59">Content</A> | <A HREF="idx.html" CLASS="Element59">Index</A> | <A HREF="symref.html" CLASS="Element59">Reference</A></DIV>
+</TD></TR></TABLE><DIV CLASS="Element58">
+<DIV CLASS="Element5">
+TIdStack</DIV>
+<DIV CLASS="Element7">
+<A HREF="013902.html" CLASS="Element59">Hierarchy</A>, <A HREF="013903.html" CLASS="Element59">Properties</A>, <A HREF="013904.html" CLASS="Element59">Methods</A>, <A HREF="013905.html" CLASS="Element59">See Also</A>, <A HREF="002906.html" CLASS="Element59">Unit: IdStack</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Ancestor for platform-specific protocol stack interfaces.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12">TIdStack = <STRONG>class</STRONG></PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Unit</DIV>
+<DIV CLASS="Element69">
+<A HREF="002906.html" CLASS="Element59">IdStack</A></DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+TIdStack is an ancestor class for platform-specific protocol stack interfaces. This class is created and destroyed as needed. This is mentioned only because there a few useful low-level properties and methods.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0007">TIdStack.LastError</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007740.html" CLASS="Element59">TIdStack</A>, <A HREF="013906.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Indicates the error number encounterd in a protocol stack operation.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> LastError: Integer;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Return Value</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Integer - numeric error number from the protocol stack.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+LastError is a read-only Integer property that indicates a previous return value from a protocol stack operation with the value <A HREF="002015.html" CLASS="Element59">Id_SOCKET_ERROR</A>. LastError is updated in <A HREF="007740.html#0000" CLASS="Element59">CheckForSocketError</A> to contain the numeric result from <A HREF="007740.html#0016" CLASS="Element59">WSGetLastError</A>. LastError is generally used when the stack instance needs to call <A HREF="007740.html#000A" CLASS="Element59">RaiseSocketError</A> after encountering an error that is not handled by the protocol stack.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0008">TIdStack.LocalAddress</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007740.html" CLASS="Element59">TIdStack</A>, <A HREF="013907.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Identifies the Host name or address for the local computer.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> LocalAddress: <STRONG>string</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+LocalAddress is a read-only String property that contains the current host name or address. Use <A HREF="007740.html#0009" CLASS="Element59">LocalAddresses</A> to access all names or addresses assigned to the local computer.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0009">TIdStack.LocalAddresses</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007740.html" CLASS="Element59">TIdStack</A>, <A HREF="013908.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+List of host names for the local computer.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> LocalAddresses: TStrings;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+LocalAddresses is a read-only TStrings property that is a list of all host names or IP addresses assigned for the local computer. Use <A HREF="007740.html#0008" CLASS="Element59">LocalAddress</A> to access the current host name or IP address for the local computer.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0000">TIdStack.CheckForSocketError</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007740.html" CLASS="Element59">TIdStack</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Performs a check for specific <A HREF="007071.html" CLASS="Element59">socket</A> error numbers.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>function</STRONG> CheckForSocketError(<STRONG>const</STRONG> AResult: integer = <A HREF="002015.html" CLASS="Element59">Id_SOCKET_ERROR</A>): boolean; <STRONG>overload</STRONG>;
+<STRONG>function</STRONG> CheckForSocketError(<STRONG>const</STRONG> AResult: integer; <STRONG>const</STRONG> AIgnore: <STRONG>array</STRONG> <STRONG>of</STRONG> integer): boolean; <STRONG>overload</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+const AResult: integer = Id_SOCKET_ERROR</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Error number to ne checked. Default value is <A HREF="002015.html" CLASS="Element59">Id_SOCKET_ERROR</A>.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+const AIgnore: array of integer</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+An array of inter <A HREF="007071.html" CLASS="Element59">socket</A> error numbers to be ignored.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Return Value</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Boolean - True when a the last error is ignored.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+<A HREF="007740.html#0000" CLASS="Element59">CheckForSocketError</A> is a Boolean function used to perform a check for specific <A HREF="007071.html" CLASS="Element59">socket</A> error numbers. When AResult does not contain <A HREF="002015.html" CLASS="Element59">Id_SOCKET_ERROR</A> or AIgnore is an empty array, all <A HREF="007071.html" CLASS="Element59">socket</A> errors are detected.<P CLASS="Element10">
+If the last <A HREF="007071.html" CLASS="Element59">socket</A> error is contained in AIgnore, the return value is True. Under all other conditions the return values is False. If a <A HREF="007071.html" CLASS="Element59">socket</A> error si detected and not ignored, <A HREF="007740.html#000A" CLASS="Element59">RaiseSocketError</A> is called with the <A HREF="007071.html" CLASS="Element59">socket</A> error number detected.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0001">TIdStack.CheckForSocketError</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007740.html" CLASS="Element59">TIdStack</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Performs a check for specific <A HREF="007071.html" CLASS="Element59">socket</A> error numbers.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>function</STRONG> <A HREF="007740.html#0000" CLASS="Element59">CheckForSocketError</A>(<STRONG>const</STRONG> AResult: integer = <A HREF="002015.html" CLASS="Element59">Id_SOCKET_ERROR</A>): boolean; <STRONG>overload</STRONG>;
+<STRONG>function</STRONG> <A HREF="007740.html#0000" CLASS="Element59">CheckForSocketError</A>(<STRONG>const</STRONG> AResult: integer; <STRONG>const</STRONG> AIgnore: <STRONG>array</STRONG> <STRONG>of</STRONG> integer): boolean; <STRONG>overload</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+const AResult: integer = Id_SOCKET_ERROR</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Error number to ne checked. Default value is <A HREF="002015.html" CLASS="Element59">Id_SOCKET_ERROR</A>.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+const AIgnore: array of integer</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+An array of inter <A HREF="007071.html" CLASS="Element59">socket</A> error numbers to be ignored.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Return Value</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Boolean - True when a the last error is ignored.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+<A HREF="007740.html#0000" CLASS="Element59">CheckForSocketError</A> is a Boolean function used to perform a check for specific <A HREF="007071.html" CLASS="Element59">socket</A> error numbers. When AResult does not contain <A HREF="002015.html" CLASS="Element59">Id_SOCKET_ERROR</A> or AIgnore is an empty array, all <A HREF="007071.html" CLASS="Element59">socket</A> errors are detected.<P CLASS="Element10">
+If the last <A HREF="007071.html" CLASS="Element59">socket</A> error is contained in AIgnore, the return value is True. Under all other conditions the return values is False. If a <A HREF="007071.html" CLASS="Element59">socket</A> error si detected and not ignored, <A HREF="007740.html#000A" CLASS="Element59">RaiseSocketError</A> is called with the <A HREF="007071.html" CLASS="Element59">socket</A> error number detected.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0002">TIdStack.Create</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007740.html" CLASS="Element59">TIdStack</A>, <A HREF="013909.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Constructor for the object instance.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>constructor</STRONG> Create; <STRONG>virtual</STRONG>; <STRONG>reintroduce</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Create is the constructor for the object instance. Create is an abstract method that must be overridden in descendant classes to provide any initialization sequences before using stack functions.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0003">TIdStack.CreateSocketHandle</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007740.html" CLASS="Element59">TIdStack</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Creates a new <A HREF="007071.html" CLASS="Element59">socket</A> descriptor.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>function</STRONG> CreateSocketHandle(<STRONG>const</STRONG> ASocketType: Integer; <STRONG>const</STRONG> AProtocol: Integer = <A HREF="001276.html" CLASS="Element59">Id_IPPROTO_IP</A>): <A HREF="007743.html" CLASS="Element59">TIdStackSocketHandle</A>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+const ASocketType: Integer</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Socket type for the descriptor.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+const AProtocol: Integer = Id_IPPROTO_IP</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Protocol family for the descriptor. Default value is <A HREF="001276.html" CLASS="Element59">Id_IPPROTO_IP</A>.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Return Value</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+<A HREF="007743.html" CLASS="Element59">TIdStackSocketHandle</A> - Newly created <A HREF="007071.html" CLASS="Element59">socket</A> descriptor.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+CreateSocketHandle is a <A HREF="007743.html" CLASS="Element59">TIdStackSocketHandle</A> function that create a new <A HREF="007071.html" CLASS="Element59">socket</A> descriptor using the <A HREF="007071.html" CLASS="Element59">socket</A> type specifies in AScoketType and the protocol family specified in AProtocol.<P CLASS="Element10">
+On the Windows platform, CreateSocketHandle calls the <A HREF="007740.html#0028" CLASS="Element59">WSSocket</A> function. If an error occurs while creating the new <A HREF="007071.html" CLASS="Element59">socket</A> descriptor, an <A HREF="000404.html" CLASS="Element59">EIdInvalidSocket</A> exception is raised.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0004">TIdStack.CreateStack</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007740.html" CLASS="Element59">TIdStack</A>, <A HREF="013910.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Get a platform-specific protocol stack instance.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>class</STRONG> <STRONG>function</STRONG> CreateStack: <A HREF="007740.html" CLASS="Element59">TIdStack</A>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+CreateStack is a <A HREF="007740.html" CLASS="Element59">TIdStack</A> class function that returns a <A HREF="007740.html" CLASS="Element59">TIdStack</A> descendant for a specific platform. This is an internal procedure called by Indy and should not be used directly in an application.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0005">TIdStack.Destroy</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007740.html" CLASS="Element59">TIdStack</A>, <A HREF="013911.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Frees the object instance.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>destructor</STRONG> Destroy; <STRONG>override</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Destroy is the destructor for the object instance, and is overridden in descendant classes to provide any needed shut-down required for the protocol stack.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0006">TIdStack.IsIP</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007740.html" CLASS="Element59">TIdStack</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Detects a numeric IP address.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>function</STRONG> IsIP(AIP: <STRONG>string</STRONG>): boolean;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+AIP: string</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Host name or IP address to be checked.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Return Value</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Boolean - True if the parameter is a numeric IP address.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+IsIP is a Boolean function that returns True if the string in AIP is a numeric IP address, or False if AIP contains a host name.<P CLASS="Element10">
+For example, if the value &quot;129.71.2.4&quot; is passed as AIP, this function will return True. If the value &quot;wvnvm.wvnet.edu&quot; is passed in AIP, this function will return False.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="000A">TIdStack.RaiseSocketError</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007740.html" CLASS="Element59">TIdStack</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Creates an exception for a <A HREF="007071.html" CLASS="Element59">socket</A> error number.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>procedure</STRONG> RaiseSocketError(<STRONG>const</STRONG> AErr: integer);</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+const AErr: integer</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Socket error number to be raised.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+RaiseSocketError is a procedure that raises an <A HREF="000451.html" CLASS="Element59">EIdSocketError</A> exception. RaiseSocketError uses the error code specified by the AErr integer parameter as the <A HREF="007740.html#0007" CLASS="Element59">LastError</A> parameter, and the translated <A HREF="007071.html" CLASS="Element59">socket</A> error message for the AErr integer value.<P CLASS="Element10">
+<STRONG>Note</STRONG>: It is normal to receive a 10038 exception (10038, NOT others!) here when *shutting down* (NOT at other times!) servers (NOT clients!). If you receive a 10038 exception here please see the FAQ at http://www.nevrona.com/Indy/FAQ.html<P CLASS="Element10">
+If you DID read the FAQ and have further questions, please feel free to ask using one of the methods (Carefully note that these methods do not include email) listed on the Tech Support link at http://www.nevrona.com/Indy</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="000B">TIdStack.ResolveHost</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007740.html" CLASS="Element59">TIdStack</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Convert a host name into an IP address.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>function</STRONG> ResolveHost(<STRONG>const</STRONG> AHost: <STRONG>string</STRONG>): <STRONG>string</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+const AHost: string</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Host name to convert.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Return Value</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+String - IP address for the host name.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+ResolveHost is a String function that returns the IP address for a given host name specified by the AHost parameter. For example, if AHost is set to &quot;wvnvm.wvnet.edu&quot;, the function will return &quot;129.71.2.4&quot;. If AHost was set to 129.71.2.4&quot;, this function returns &quot;129.71.2.4&quot;.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="000C">TIdStack.StringToTInAddr</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007740.html" CLASS="Element59">TIdStack</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Converts an string into a structured IP address.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>function</STRONG> StringToTInAddr(AIP: <STRONG>string</STRONG>): <A HREF="007417.html" CLASS="Element59">TIdInAddr</A>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+AIP: string</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+IP address string to be converted.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Return Value</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+<A HREF="007417.html" CLASS="Element59">TIdInAddr</A> - IP address structure.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+StringToTInAddr is a <A HREF="007417.html" CLASS="Element59">TIdInAddr</A> function that returns a structure containing the IP Address specified by the AIP parameter. This function is used Internally in Indy.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="000D">TIdStack.TInAddrToString</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007740.html" CLASS="Element59">TIdStack</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Converts an IP structure to a string.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>function</STRONG> TInAddrToString(<STRONG>var</STRONG> AInAddr): <STRONG>string</STRONG>; <STRONG>virtual</STRONG>; <STRONG>abstract</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+var AInAddr</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+IP address structure to convert.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Return Value</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+String - String containing the converted IP address.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+TInAddrToString is a String function that returns an IP address as a string from a <A HREF="007911.html" CLASS="Element59">TInAddr</A> structure. This is used internally in Indy so you do not call this directly.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="000E">TIdStack.TranslateStringToTInAddr</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007740.html" CLASS="Element59">TIdStack</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Translates a string a creates an IP address structure.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>procedure</STRONG> TranslateStringToTInAddr(AIP: <STRONG>string</STRONG>; <STRONG>var</STRONG> AInAddr); <STRONG>virtual</STRONG>; <STRONG>abstract</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+AIP: string</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+String to be translated and converted.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+var AInAddr</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+IP address structure for the converted value.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+TranslateStringToTInAddr that translates an IP address from the string parameter AIP and returns it in the <A HREF="007911.html" CLASS="Element59">TInAddr</A> specified by the AInAddr parameter. This is used internally in Indy so you do not call this directly.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="000F">TIdStack.WSAccept</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007740.html" CLASS="Element59">TIdStack</A></DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>function</STRONG> WSAccept(ASocket: <A HREF="007743.html" CLASS="Element59">TIdStackSocketHandle</A>; <STRONG>var</STRONG> VIP: <STRONG>string</STRONG>; <STRONG>var</STRONG> VPort: Integer): <A HREF="007743.html" CLASS="Element59">TIdStackSocketHandle</A>; <STRONG>virtual</STRONG>; <STRONG>abstract</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+WSAccept</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0010">TIdStack.WSBind</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007740.html" CLASS="Element59">TIdStack</A></DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>function</STRONG> WSBind(ASocket: <A HREF="007743.html" CLASS="Element59">TIdStackSocketHandle</A>; <STRONG>const</STRONG> AFamily: Integer; <STRONG>const</STRONG> AIP: <STRONG>string</STRONG>; <STRONG>const</STRONG> APort: Integer): Integer; <STRONG>virtual</STRONG>; <STRONG>abstract</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+WSBind</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0011">TIdStack.WSCloseSocket</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007740.html" CLASS="Element59">TIdStack</A></DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>function</STRONG> WSCloseSocket(ASocket: <A HREF="007743.html" CLASS="Element59">TIdStackSocketHandle</A>): Integer; <STRONG>virtual</STRONG>; <STRONG>abstract</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+WSCloseSocket</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0012">TIdStack.WSConnect</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007740.html" CLASS="Element59">TIdStack</A></DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>function</STRONG> WSConnect(<STRONG>const</STRONG> ASocket: <A HREF="007743.html" CLASS="Element59">TIdStackSocketHandle</A>; <STRONG>const</STRONG> AFamily: Integer; <STRONG>const</STRONG> AIP: <STRONG>string</STRONG>; <STRONG>const</STRONG> APort: Integer): Integer; <STRONG>virtual</STRONG>; <STRONG>abstract</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+WSConnect</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0013">TIdStack.WSGetHostByAddr</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007740.html" CLASS="Element59">TIdStack</A></DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>function</STRONG> WSGetHostByAddr(<STRONG>const</STRONG> AAddress: <STRONG>string</STRONG>): <STRONG>string</STRONG>; <STRONG>virtual</STRONG>; <STRONG>abstract</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+WSGetHostByAddr</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0014">TIdStack.WSGetHostByName</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007740.html" CLASS="Element59">TIdStack</A></DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>function</STRONG> WSGetHostByName(<STRONG>const</STRONG> AHostName: <STRONG>string</STRONG>): <STRONG>string</STRONG>; <STRONG>virtual</STRONG>; <STRONG>abstract</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+WSGetHostByName</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0015">TIdStack.WSGetHostName</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007740.html" CLASS="Element59">TIdStack</A></DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>function</STRONG> WSGetHostName: <STRONG>string</STRONG>; <STRONG>virtual</STRONG>; <STRONG>abstract</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+WSGetHostName</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0016">TIdStack.WSGetLastError</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007740.html" CLASS="Element59">TIdStack</A></DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>function</STRONG> WSGetLastError: Integer; <STRONG>virtual</STRONG>; <STRONG>abstract</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+WSGetLastError</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0017">TIdStack.WSGetPeerName</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007740.html" CLASS="Element59">TIdStack</A></DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>procedure</STRONG> WSGetPeerName(ASocket: <A HREF="007743.html" CLASS="Element59">TIdStackSocketHandle</A>; <STRONG>var</STRONG> AFamily: Integer; <STRONG>var</STRONG> AIP: <STRONG>string</STRONG>; <STRONG>var</STRONG> APort: Integer); <STRONG>virtual</STRONG>; <STRONG>abstract</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+WSGetPeerName</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0018">TIdStack.WSGetServByName</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007740.html" CLASS="Element59">TIdStack</A></DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>function</STRONG> WSGetServByName(<STRONG>const</STRONG> AServiceName: <STRONG>string</STRONG>): Integer; <STRONG>virtual</STRONG>; <STRONG>abstract</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+WSGetServByName</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0019">TIdStack.WSGetServByPort</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007740.html" CLASS="Element59">TIdStack</A></DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>function</STRONG> WSGetServByPort(<STRONG>const</STRONG> APortNumber: Integer): TStrings; <STRONG>virtual</STRONG>; <STRONG>abstract</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+WSGetServByPort</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="001A">TIdStack.WSGetSockName</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007740.html" CLASS="Element59">TIdStack</A></DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>procedure</STRONG> WSGetSockName(ASocket: <A HREF="007743.html" CLASS="Element59">TIdStackSocketHandle</A>; <STRONG>var</STRONG> AFamily: Integer; <STRONG>var</STRONG> AIP: <STRONG>string</STRONG>; <STRONG>var</STRONG> APort: Integer); <STRONG>virtual</STRONG>; <STRONG>abstract</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+WSGetSockName</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="001B">TIdStack.WSGetSockOpt</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007740.html" CLASS="Element59">TIdStack</A></DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>function</STRONG> WSGetSockOpt(ASocket: <A HREF="007743.html" CLASS="Element59">TIdStackSocketHandle</A>; Alevel: Integer; AOptname: Integer; AOptval: PChar; <STRONG>var</STRONG> AOptlen: Integer): Integer; <STRONG>virtual</STRONG>; <STRONG>abstract</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+WSGetSockOpt</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="001C">TIdStack.WSHToNL</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007740.html" CLASS="Element59">TIdStack</A></DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>function</STRONG> WSHToNL(AHostLong: LongWord): LongWord; <STRONG>virtual</STRONG>; <STRONG>abstract</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+WSHToNL</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="001D">TIdStack.WSHToNs</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007740.html" CLASS="Element59">TIdStack</A></DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>function</STRONG> WSHToNs(AHostShort: Word): Word; <STRONG>virtual</STRONG>; <STRONG>abstract</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+WSHToNs</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="001E">TIdStack.WSListen</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007740.html" CLASS="Element59">TIdStack</A></DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>function</STRONG> WSListen(ASocket: <A HREF="007743.html" CLASS="Element59">TIdStackSocketHandle</A>; ABackLog: Integer): Integer; <STRONG>virtual</STRONG>; <STRONG>abstract</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+WSListen</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="001F">TIdStack.WSNToHL</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007740.html" CLASS="Element59">TIdStack</A></DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>function</STRONG> WSNToHL(ANetLong: LongWord): LongWord; <STRONG>virtual</STRONG>; <STRONG>abstract</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+WSNToHL</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0020">TIdStack.WSNToHs</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007740.html" CLASS="Element59">TIdStack</A></DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>function</STRONG> WSNToHs(ANetShort: Word): Word; <STRONG>virtual</STRONG>; <STRONG>abstract</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+WSNToHs</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0021">TIdStack.WSRecv</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007740.html" CLASS="Element59">TIdStack</A></DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>function</STRONG> WSRecv(ASocket: <A HREF="007743.html" CLASS="Element59">TIdStackSocketHandle</A>; <STRONG>var</STRONG> ABuffer; <STRONG>const</STRONG> ABufferLength: Integer; <STRONG>const</STRONG> AFlags: Integer): Integer; <STRONG>virtual</STRONG>; <STRONG>abstract</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+WSRecv</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0022">TIdStack.WSRecvFrom</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007740.html" CLASS="Element59">TIdStack</A></DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>function</STRONG> WSRecvFrom(<STRONG>const</STRONG> ASocket: <A HREF="007743.html" CLASS="Element59">TIdStackSocketHandle</A>; <STRONG>var</STRONG> ABuffer; <STRONG>const</STRONG> ALength: Integer; <STRONG>const</STRONG> AFlags: Integer; <STRONG>var</STRONG> VIP: <STRONG>string</STRONG>; <STRONG>var</STRONG> VPort: Integer): Integer; <STRONG>virtual</STRONG>; <STRONG>abstract</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+WSRecvFrom</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0023">TIdStack.WSSelect</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007740.html" CLASS="Element59">TIdStack</A></DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>function</STRONG> WSSelect(ARead: TList; AWrite: TList; AErrors: TList; ATimeout: Integer): Integer; <STRONG>virtual</STRONG>; <STRONG>abstract</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+WSSelect</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0024">TIdStack.WSSend</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007740.html" CLASS="Element59">TIdStack</A></DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>function</STRONG> WSSend(ASocket: <A HREF="007743.html" CLASS="Element59">TIdStackSocketHandle</A>; <STRONG>var</STRONG> ABuffer; <STRONG>const</STRONG> ABufferLength: Integer; <STRONG>const</STRONG> AFlags: Integer): Integer; <STRONG>virtual</STRONG>; <STRONG>abstract</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+WSSend</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0025">TIdStack.WSSendTo</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007740.html" CLASS="Element59">TIdStack</A></DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>function</STRONG> WSSendTo(ASocket: <A HREF="007743.html" CLASS="Element59">TIdStackSocketHandle</A>; <STRONG>var</STRONG> ABuffer; <STRONG>const</STRONG> ABufferLength: Integer; <STRONG>const</STRONG> AFlags: Integer; <STRONG>const</STRONG> AIP: <STRONG>string</STRONG>; <STRONG>const</STRONG> APort: integer): Integer; <STRONG>virtual</STRONG>; <STRONG>abstract</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+WSSendTo</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0026">TIdStack.WSSetSockOpt</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007740.html" CLASS="Element59">TIdStack</A></DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>function</STRONG> WSSetSockOpt(ASocket: <A HREF="007743.html" CLASS="Element59">TIdStackSocketHandle</A>; ALevel: Integer; AOptName: Integer; AOptVal: PChar; AOptLen: Integer): Integer; <STRONG>virtual</STRONG>; <STRONG>abstract</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+WSSetSockOpt</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0027">TIdStack.WSShutdown</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007740.html" CLASS="Element59">TIdStack</A></DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>function</STRONG> WSShutdown(ASocket: <A HREF="007743.html" CLASS="Element59">TIdStackSocketHandle</A>; AHow: Integer): Integer; <STRONG>virtual</STRONG>; <STRONG>abstract</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+WSShutdown</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0028">TIdStack.WSSocket</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007740.html" CLASS="Element59">TIdStack</A></DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>function</STRONG> WSSocket(AFamily: Integer; AStruct: Integer; AProtocol: Integer): <A HREF="007743.html" CLASS="Element59">TIdStackSocketHandle</A>; <STRONG>virtual</STRONG>; <STRONG>abstract</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+WSSocket</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0029">TIdStack.WSTranslateSocketErrorMsg</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007740.html" CLASS="Element59">TIdStack</A></DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>function</STRONG> WSTranslateSocketErrorMsg(<STRONG>const</STRONG> AErr: integer): <STRONG>string</STRONG>; <STRONG>virtual</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+WSTranslateSocketErrorMsg</DIV>
+</DIV>
+<DIV CLASS="Element62">
+<HR>Created with Doc-O-Matic 2 donated to <STRONG><A HREF="http://www.delphi-jedi.org">Project JEDI</A></STRONG>. Commercial license available from the <STRONG><A HREF="http://www.doc-o-matic.com">Doc-O-Matic site</A></STRONG>.</DIV>
+</DIV></BODY></HTML>

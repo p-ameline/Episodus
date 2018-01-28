@@ -1,0 +1,4 @@
+
+#define CM_EPISO_OCR_START 800
+#define CM_EPISO_BLOC_DEF  801
+

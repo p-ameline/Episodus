@@ -1,0 +1,380 @@
+//---------------------------------------------------------------------------//     NSMATFIC.H
+//     PA   juillet 95
+//  Contient les définitions des objets Matériel
+//---------------------------------------------------------------------------
+#ifndef __NSMATFIC_H
+#define __NSMATFIC_H
+
+class NSDlgFonction ;
+
+class NSUtilEditDate ;
+class NSUtilLexique ;
+class NSUtilEdit2 ;
+
+class NSProtocoleInfo ;
+
+class NSPatPathoArray ;
+class BBFilsItem ;
+
+class NSSmallBrother ;
+
+class NSPersonsAttributesArray ;
+
+#include <owl\dialog.h>
+#include <owl\listbox.h>
+#include <owl\listwind.h>
+#include <owl\groupbox.h>
+#include <owl\radiobut.h>
+#include <owl\static.h>
+
+// #include <classlib\arrays.h>
+#include "partage\ns_vector.h"
+
+#include "nsoutil\nsexport.h"
+// #include "nssavoir\ns_medic.h"
+#include "nsbb\nsutidlg.h"
+// #include "nsbb\nsednum.h"
+
+#include "pilot\NautilusPilot.hpp"
+
+//
+// Taille des champs du fichier MATERIEL
+//
+#define MAT_TYPE_LEN 		      5
+#define MAT_UTILISATEUR_LEN   3
+#define MAT_CODE_LEN 	  	    3
+#define MAT_LIBELLE_LEN 	   55
+#define MAT_NUM_SERIE_LEN 	 35
+#define MAT_MISE_SVCE_LEN 	  8
+#define MAT_ACTIF_LEN 	  	  1
+
+//
+// Ordre des champs du fichier MATERIEL
+//
+#define MAT_TYPE_FIELD 		     1
+#define MAT_UTILISATEUR_FIELD  2
+#define MAT_CODE_FIELD 	  	   3
+#define MAT_LIBELLE_FIELD 	   4
+#define MAT_NUM_SERIE_FIELD    5
+#define MAT_MISE_SVCE_FIELD    6
+#define MAT_ACTIF_FIELD 	     7
+
+//---------------------------------------------------------------------------
+//  Classe Materiel
+//      ANCETRE : NSFiche
+//---------------------------------------------------------------------------
+//
+// Objet données des Objets Materiel
+//
+class _NSOUTILCLASSE NSMaterielData
+{
+	public :
+
+  	string _sObjectID ;
+    //
+    // Variables de stockage des valeurs
+    //
+/*
+    char type[MAT_TYPE_LEN + 1] ;
+    char utilisateur[MAT_UTILISATEUR_LEN + 1] ;
+    char code[MAT_CODE_LEN + 1] ;
+    char libelle[MAT_LIBELLE_LEN + 1] ;
+    char num_serie[MAT_NUM_SERIE_LEN + 1] ;
+    char mise_svce[MAT_MISE_SVCE_LEN + 1] ;
+    char actif[MAT_ACTIF_LEN + 1] ;
+*/
+    string _sType ;
+    string _sUtilisateur ;
+    string _sCode ;
+    string _sLibelle ;
+    string _sNum_serie ;
+    string _sMise_svce ;
+    string _sActif ;
+
+    string _sLibelle_complet ;
+
+    bool   isActive()            { return string("0") != _sActif ; }
+    void   setActif(bool bActif) { bActif ? _sActif = string("1") : _sActif = string("0") ; }
+
+    void metAZero() ;
+
+    NSMaterielData() { metAZero() ; }
+    NSMaterielData(const NSMaterielData& rv) ;
+
+    NSMaterielData& operator=(const NSMaterielData& src) ;
+    int   		      operator==(const NSMaterielData& o) const ;
+};
+
+//
+// Objet "Info" correspondant à Materiel
+// (destiné à être utilisé dans les containers)
+//
+class _NSOUTILCLASSE NSMaterielInfo
+{
+	public:
+
+		NSMaterielData   _Donnees ;
+    NSPatPathoArray* _pPatPathoArray ;
+
+    bool initialiseDepuisObjet(NSSuper* pSuper, string sObjId, string actif = string("")) ;
+    bool initialiseDepuisSN(NSSuper* pSuper, string sObjSN, string actif = string("")) ;
+
+    void initFromPatpatho(NSSuper* pSuper, string sActif = string("")) ;
+
+		NSMaterielInfo() ;
+    ~NSMaterielInfo() ;
+		NSMaterielInfo(const NSMaterielInfo& rv) ;
+
+    string donneComplement() ;
+    bool initialiseDepuisComplement(string sComplement) ;
+
+		NSMaterielInfo& operator=(const NSMaterielInfo& src) ;
+		int             operator==(const NSMaterielInfo& o) const ;
+
+    void   reset()    { _Donnees.metAZero() ; }
+
+    string getObjectID()           { return _Donnees._sObjectID ; }
+    void   setObjectID(string sID) { _Donnees._sObjectID = sID ; }
+
+    string getType()     { return _Donnees._sType ; }
+    string getUser()     { return _Donnees._sUtilisateur ; }
+    string getCode()     { return _Donnees._sCode ; }
+    string getLabel()    { return _Donnees._sLibelle ; }
+    string getSN()       { return _Donnees._sNum_serie ; }
+    string getDate()     { return _Donnees._sMise_svce ; }
+    string getActif()    { return _Donnees._sActif ; }
+    bool   isActive()    { return _Donnees.isActive() ; }
+
+    string getFullLabel() { return _Donnees._sLibelle_complet ; }
+    string getLabelAndSN() ;
+    void   removeTrailingDotSpace(string &sLabel) ;
+
+    string getLexiqueLabel(NSSuper* pSuper) ;
+};
+
+//
+// Définition de NSMaterielArray (Array de NSMateriel(s))
+//
+typedef vector<NSMaterielInfo*> NSMatInfoArray ;
+typedef NSMatInfoArray::iterator       MatosIter ;
+typedef NSMatInfoArray::const_iterator MatosConstIter ;
+
+class NSMaterielArray : public NSMatInfoArray
+{
+	public :
+
+		// Constructeurs
+		NSMaterielArray() : NSMatInfoArray() {}
+		NSMaterielArray(const NSMaterielArray& rv) ;
+      	//
+		// Destructeur
+		virtual ~NSMaterielArray() ;
+    void vider() ;
+};
+
+//// Objet "Boite de dialogue" utilisé pour la création / modification des matériels
+//
+class CreerMaterielDialog : public NSUtilDialog
+{
+	public:
+
+		NSUtilLexique*     pType ;
+    NSUtilEditDate*    pMiseSvce ;
+    NSUtilEdit2*		   pLibelle ;
+    NSUtilEdit2*		   pNumSerie ;
+
+    OWL::TStatic*      pTypeText ;
+    OWL::TStatic*      pMiseSvceText ;
+    OWL::TStatic*      pLibelleText ;
+    OWL::TStatic*      pNumSerieText ;
+
+    OWL::TGroupBox*		 pActif ;
+    OWL::TRadioButton* pActifOui ;
+    OWL::TRadioButton* pActifNon ;
+
+    NSMaterielData*		 pData ;
+    bool				       bCreation ;
+    NSMaterielArray*	 pMatArray ;
+
+		CreerMaterielDialog(TWindow* pere, NSContexte* pCtx, NSMaterielArray* pMaterielArray, bool bMode, TModule* module = 0) ;
+    ~CreerMaterielDialog() ;
+
+    void SetupWindow() ;
+
+    void CmOk() ;
+    void CmCancel() ;
+
+	DECLARE_RESPONSE_TABLE(CreerMaterielDialog) ;
+};
+//
+// Objet "Boite de dialogue" utilisé pour la liste des matériels
+//
+class NSListeMatWindow ;
+
+class _NSOUTILCLASSE ListeMaterielDialog : public NSUtilDialog
+{
+	public:
+
+		NSListeMatWindow* pListeMat ;
+    NSMaterielArray*  pMatArray ;
+    NSMaterielArray*  pMatAjoutArray ;
+    NSMaterielArray*  pMatModifArray ;
+    NSMaterielInfo*   pMatSelect ;
+
+    int					 	    nbMat ;
+    int						    nbMatAjout ;
+    int					 	    MaterielChoisi ;
+
+    string            sDefaultEchogID ;
+
+    ListeMaterielDialog(TWindow* pere, NSContexte* pCtx, TModule* module = 0) ;
+    ~ListeMaterielDialog() ;
+
+    void SetupWindow() ;
+
+    bool InitMatArray() ;
+    bool InitMatArrayByActivity(string sActivityCode) ;
+
+    bool ExisteDansAjouts(NSMaterielInfo* pMatInfo) ;
+    void InitListe() ;
+    void AfficheListe() ;    void LvnGetDispInfo(TLwDispInfoNotify& dispInfo) ;
+    void EvRButtonDown(uint modkeys, NS_CLASSLIB::TPoint& point) ;
+    void EvRButtonDownOut(uint modkeys, NS_CLASSLIB::TPoint& point) ;
+    bool InitDataMateriel(NSMaterielInfo* pMatInfo, bool bCreer) ;
+
+    bool CreerMateriel(NSMaterielInfo* pMatInfo) ;
+    bool ModifierMateriel(NSMaterielInfo* pMatInfo) ;
+
+    void CmCreer() ;
+    void CmSupprimer() ;
+    void CmModifier() ;
+    void CmSetDefault() ;
+
+    void CmOk() ;
+    void CmCancel() ;
+
+    void readDefaultEchogID() ;
+    void storeDefaultEchogID() ;
+
+	DECLARE_RESPONSE_TABLE(ListeMaterielDialog) ;
+};
+
+//
+// Objet "ListWindow" avec gestion du double-click (pour les matériels)
+//
+class NSListeMatWindow : public TListWindow
+{
+	public:
+
+		ListeMaterielDialog* pDlg ;
+
+		NSListeMatWindow(ListeMaterielDialog* pere, int resId) : TListWindow(pere, resId)
+		{
+    	pDlg = pere ;
+    }
+  	~NSListeMatWindow() {}
+
+		void EvLButtonDblClk(uint modKeys, NS_CLASSLIB::TPoint& point) ;
+    void EvRButtonDown(uint modkeys, NS_CLASSLIB::TPoint& point) ;
+		int  IndexItemSelect() ;
+
+	DECLARE_RESPONSE_TABLE(NSListeMatWindow) ;
+};
+
+//
+// Objet "Boite de dialogue" utilisé pour sélectionner un matériel
+//
+
+class _NSOUTILCLASSE ChoixMaterielDialog : public NSUtilDialog
+{
+	public:
+
+		string          *_pMatType, *_pMatUtilisateur ;
+    string          _sTypeEnCours ;
+
+		NSMaterielInfo* _pMaterielChoisi ;
+
+		OWL::TListBox*  _pMatBox ;
+    OWL::TButton*   _pChoiceButton ;
+
+    NSPersonsAttributesArray _aFoundObj ;
+
+		UINT            _iMaterielChoisi ;
+
+		ChoixMaterielDialog(TWindow*, NSContexte* pCtx, string* pMatType,
+                            string* pMatUti, NSMaterielInfo* pMatChoix) ;
+		~ChoixMaterielDialog() ;
+
+		void SetupWindow() ;
+
+		void CmSelectMateriel(WPARAM Cmd) ;
+		void CmCancel() ;
+		void CmMaterielDblClk(WPARAM Cmd) ;
+    void CmElargir() ;
+
+    void donneGuides(string sGuideElargie) ;
+    void initialiserListe() ;
+
+		void OuvreDocument(int NumDoc) ;
+
+	DECLARE_RESPONSE_TABLE(ChoixMaterielDialog) ;
+};
+
+
+//******************************************************************
+//											PROTOCOLE
+//******************************************************************
+
+//
+// Définition de NSProtocoleArray (Array de NSProtocole(s))
+//
+typedef vector<NSProtocoleInfo*> NSProtInfoArray;
+typedef NSProtInfoArray::iterator IterProto;
+
+class _NSOUTILCLASSE NSProtocoleArray : public NSProtInfoArray
+{
+	public :
+
+		// Constructeurs
+		NSProtocoleArray() : NSProtInfoArray() {}
+		NSProtocoleArray(NSProtocoleArray& rv) ;
+      	//
+		// Destructeur
+		virtual ~NSProtocoleArray() ;
+    void vider() ;};
+
+//// Objet "Boite de dialogue" utilisé pour sélectionner un matériel//
+class _NSOUTILCLASSE ChoixProtocole : public NSUtilDialog // public TDialog, public NSRoot
+{
+	public:
+
+		string					  *pRotocolType, *pProtoUtilisateur ;
+		NSProtocoleInfo*  pProtocoleChoisi ;
+		OWL::TListBox* 		pRotocolBox ;
+		NSProtocoleArray* pProtArray ;
+
+		UINT              ProtocoleChoisi ;
+
+		ChoixProtocole(TWindow*, NSContexte* pCtx, string* pMatType,
+                       string* pMatUti, NSProtocoleInfo* pMatChoix) ;
+		~ChoixProtocole() ;
+
+		void SetupWindow() ;
+
+		void CmSelectProto(WPARAM Cmd) ;
+		void CmCancel() ;
+		void CmProtoDblClk(WPARAM Cmd) ;
+
+		void OuvreDocument(int NumDoc) ;
+
+	DECLARE_RESPONSE_TABLE(ChoixProtocole) ;
+};
+
+void _NSOUTILCLASSE selectMaterial(NSDlgFonction* pNSDlgFct, NSSmallBrother* pBigBoss, string sMaterialType, string sDefaultTitle, string sLang) ;
+int  _NSOUTILCLASSE InitMaterialTitle(NSDlgFonction* pNSDlgFct, NSSmallBrother* pBigBoss, string sDefaultTitle, string sLang) ;
+void _NSOUTILCLASSE chercherProtocole(NSDlgFonction* pNSDlgFct, NSSmallBrother* pBigBoss, BBFilsItem* pBBFilsItem, string sEtiquette, string sLang) ;
+void _NSOUTILCLASSE FormerPatpatho(NSSmallBrother* pBigBoss, BBFilsItem* pBBFilsItem, NSProtocoleInfo* pProtocol, string sLang) ;
+void _NSOUTILCLASSE ErasePatpatho(BBFilsItem* pBBFilsItem) ;
+
+#endif    // __NSMATFIC_H
+

@@ -1,0 +1,17 @@
+////////////////////////////////////////////////////
+// ns_sgbd.rh : identificateurs du fichier de ressources
+
+// dialogue IDD_CVITALE
+#define IDC_STABLE 			101
+#define IDC_SMESSAGE		102
+#define IDC_BVERIFIE		103
+#define IDC_BREPARE			104
+#define IDC_PRGBAR_REPARE	105
+#define IDC_PRGBAR_ENTETE	106
+#define IDC_PRGBAR_INDEX	107
+#define IDC_PRGRBAR_DATA	108
+#define IDC_VERIF_MSG		109
+#define IDC_REPARE_MSG		110
+
+// fin de ns_sgbd.rh
+////////////////////////////////////////////////////

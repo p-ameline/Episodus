@@ -1,0 +1,63 @@
+ 
+// Dialogue IDD_OBJECTIF_VIEW
+
+#define IDC_OBJECTIF_NAME	101
+//combobox
+#define IDC_PERIOD_UNIT	    102
+#define IDC_STATIC_PERIOD   202
+#define IDC_STATIC_VALUE    203
+#define IDC_VALUE_UNIT	    103
+
+#define IDC_CYCLE	        123
+#define IDC_ONE	            124
+#define IDC_GROUP	        125
+#define IDC_PERMANENT	    126
+
+//period
+#define IDC_PERIOD_IDEAL_MIN	    104
+#define IDC_PERIOD_IDEAL_MAX	    204
+#define IDC_PERIOD_RECOMMEND_MIN	105
+#define IDC_PERIOD_RECOMMEND_MAX	106
+#define IDC_PERIOD_AUTHORIZE_MAX	107
+#define IDC_PERIOD_AUTHORIZE_MIN	108
+
+#define IDC_VALUE_AUTHORIZE_MIN	    109
+#define IDC_VALUE_AUTHORIZE_MAX	    110
+#define IDC_VALUE_RECOMMEND_MAX	    111
+#define IDC_VALUE_IDEAL_MAX	        112
+#define IDC_VALUE_IDEAL_MIN	        113
+#define IDC_VALUE_RECOMMEND_MIN	    114
+
+
+#define IDC_STATICRECT3	            122
+#define IDC_STATICRECT4	            132
+
+
+#define IDC_DATE_AUTHORIZE_MAX	    121
+#define IDC_DATE_RECOMMAND_MAX	    116
+#define IDC_DATE_IDEAL_MAX	        117
+#define IDC_DATE_IDEAL_MIN	        118
+#define IDC_DATE_RECOMMAND_MIN	    119
+#define IDC_DATE_AUTHORIZE_MIN	    120
+
+#define IDC_LINE1	                211
+#define IDC_LINE2	                212
+#define IDC_LINE3	                213
+#define IDC_LINE4	                214
+#define IDC_LINE5	                215
+#define IDC_LINE6	                216
+#define IDC_STATICTEXT2	122
+#define IDC_STATIC_MOMMENTS	122
+#define IDC_OBJECTIF_BOX            217
+
+#define IDC_PRESENCE	129
+#define IDC_ABSENT	131
+
+#define IDC_EDIT1	132
+#define IDC_COMPLEMENT	132
+
+#define IDC_EVENIMENT_END	        134
+#define IDC_DATE_END	            130
+
+#define IDC_EVENIMENT_DEBUT	        127
+#define IDC_DATE_DEBUT	            115

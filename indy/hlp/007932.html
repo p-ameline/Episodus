@@ -1,0 +1,140 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+<TITLE>TMINFORecord</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <META name="GENERATOR" content="Doc-O-Matic">
+    <LINK rel="STYLESHEET" href="default.css" type="text/css">
+
+<SCRIPT LANGUAGE="JavaScript1.2" SRC="scripts.js"></SCRIPT>
+</HEAD>
+<BODY CLASS="Element57">
+<TABLE BORDER="0" BGCOLOR="#AACCFF" WIDTH="100%" CELLSPACING="0" CELLPADDING="0">
+<TR><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element1">
+Indy 9</DIV>
+</TD><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element2">
+<A HREF="content.html" CLASS="Element59">Content</A> | <A HREF="idx.html" CLASS="Element59">Index</A> | <A HREF="symref.html" CLASS="Element59">Reference</A></DIV>
+</TD></TR></TABLE><DIV CLASS="Element58">
+<DIV CLASS="Element5">
+TMINFORecord</DIV>
+<DIV CLASS="Element7">
+<A HREF="015013.html" CLASS="Element59">Hierarchy</A>, <A HREF="015014.html" CLASS="Element59">Properties</A>, <A HREF="015015.html" CLASS="Element59">Methods</A>, <A HREF="002173.html" CLASS="Element59">Unit: IdDNSResolver</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Represents a resource record returned from a DNS query that includes mailbox or mailing list resource record types.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12">TMINFORecord = <STRONG>class</STRONG>(<A HREF="008059.html" CLASS="Element59">TResultRecord</A>)</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Unit</DIV>
+<DIV CLASS="Element69">
+<A HREF="002173.html" CLASS="Element59">IdDNSResolver</A></DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+TMINFORecord is a <A HREF="008059.html" CLASS="Element59">TResultRecord</A> descendant that represents a resource record returned in the results for a DNS query. TMINFORecord is a collection item created to represent a resource record returned when TIDNSResolver.QueryRecords includes the value qtMINFO for Mailbox Information resource records.<P CLASS="Element10">
+MINFO resource records are an experimental record type used to represent mailbox addresses for both the maintainer and error logging facilities for a mailing list or email address specified in the owner.<P CLASS="Element10">
+An MINFO resoure record uses the same DNS packet layout as other <A HREF="008059.html" CLASS="Element59">TResultRecord</A>-based responses, but extends the use of RData to include the following definition and format:<P CLASS="Element10">
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12">  +--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+
+  |                                               |
+  .                                               .
+  .                    RMAILBX                    .
+  .                                               .
+  |                                               |
+  +--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+
+  |                                               |
+  .                                               .
+  .                    EMAILBX                    .
+  .                                               .
+  |                                               |
+  +--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+</PRE></DIV>
+</DIV>
+<P CLASS="Element10">
+<UL>
+<LI>RMAILBX - Domain name which specifies a mailbox which is responsible for the mailing list or mailbox. If this domain name names the root, the owner of the MINFO Resource Record is responsible for itself. Many existing mailing lists use a mailbox X-request for the RMAILBX field of mailing list X, e.g., Msgroup-request for Msgroup. This field provides a more general mechanism.<P CLASS="Element10">
+<LI>EMAILBX - Domain name which specifies a mailbox used to receive error messages related to the mailing list or mailbox specified by the owner of the MINFO Resource Record (similar to the ERRORS-TO: field which has been proposed). If this domain name names the root, errors should be returned to the sender of the message.</UL>
+<P CLASS="Element10">
+Although MINFO resource record can be associated with a simple mailbox, they are usually used with a mailing list address.<P CLASS="Element10">
+TMINFORecord extends <A HREF="008097.html" CLASS="Element59">TTextRecord</A> to implement the specifics of accessing RData values as properties, including ResponsiblePersoneMailbox and <A HREF="007932.html#0000" CLASS="Element59">ErrorMailbox</A>. TMINFORecord also overrides the <A HREF="007932.html#0001" CLASS="Element59">Parse</A> method to read the values in RData into their property counterparts.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0000">TMINFORecord.ErrorMailbox</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007932.html" CLASS="Element59">TMINFORecord</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Indicates the email address for reporting error messages for the mailbox or mailing list.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> ErrorMailbox: <STRONG>String</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+ErrorMailbox is a read-only String property that represents the email address used to receive error messages related to the mailing list or mailbox specified by the owner of the Resource Record. If the domain name for the Resouce Record is the root, errors should be returned to the sender of the message. ErrorMailbox is read from RData values in the Resource Record in <A HREF="007932.html#0001" CLASS="Element59">Parse</A>.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0002">TMINFORecord.ResponsiblePersonMailbox</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007932.html" CLASS="Element59">TMINFORecord</A>, <A HREF="015016.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Identifies the email address for the person that maintains a mailbox or mailinglist.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> ResponsiblePersonMailbox: <STRONG>String</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+ResponsiblePersonMailbox is a read-only String property that represents the email address for a person responsible for maintaining another email address or mailing list. ResponsiblePersonMailbox is read from the RData values for the resource record in <A HREF="007932.html#0001" CLASS="Element59">Parse</A>.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0001">TMINFORecord.Parse</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007932.html" CLASS="Element59">TMINFORecord</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Parses RData values into properties.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>procedure</STRONG> Parse(CompleteMessage: <STRONG>String</STRONG>; APos: Integer); <STRONG>override</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+CompleteMessage: String</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Contents of the resource record.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+APos: Integer</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Position where RData values begin in the answer.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Parse is an overridden procedure that implements a routine to parse resource record values in the DNS response into their property-based counterparts.<P CLASS="Element10">
+CompleteMessage is the contents of the resource record. Since the DNS message can contain compressed data, the whole message is needed for parsing and pointer location.<P CLASS="Element10">
+APos is the position in the resource record where RData values for this record type are located in the DNS Answer.<P CLASS="Element10">
+Parse calls the inherited Parse method, and retrieves the DNS labels and values for the ResponsiblePersone and <A HREF="007932.html#0000" CLASS="Element59">ErrorMailbox</A> properties.</DIV>
+</DIV>
+<DIV CLASS="Element62">
+<HR>Created with Doc-O-Matic 2 donated to <STRONG><A HREF="http://www.delphi-jedi.org">Project JEDI</A></STRONG>. Commercial license available from the <STRONG><A HREF="http://www.doc-o-matic.com">Doc-O-Matic site</A></STRONG>.</DIV>
+</DIV></BODY></HTML>

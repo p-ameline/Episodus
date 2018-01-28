@@ -1,0 +1,30 @@
+#define IDC_THINKING_CURSOR	6176
+
+#define IDC_SELECT_TODO	  101
+#define IDC_LIST_ACTION	  102
+#define IDC_LIST_KS			  103
+#define IDC_LIST_QUESTION 104
+#define IDC_LIST_ANSWER   105
+#define IDC_LIST_EVENT    106
+#define IDC_MASK	        107
+
+#define IDB_NO_COMPUTATION  301
+#define IDB_VALID           302
+#define IDB_PRPOSABLE       303
+#define IDB_INVALID         304
+
+#define IDB_CREATES       310
+#define IDB_IS_CREATED    311
+#define IDB_IMPLIES       312
+#define IDB_REQUIRES      313
+#define IDB_IS_NEEDED     314
+#define IDB_TRIGERS       315
+#define IDB_RESULT        316
+#define IDB_LEVEL         317
+#define IDB_UNDEFINED     318
+#define IDB_IS_VALIDATED  319
+#define IDB_VALIDATED     320
+
+#define IDB_REQUIRES_BAD  330
+#define IDB_REQUIRES_OK   331
+#define IDB_REQUIRES_WAIT 332

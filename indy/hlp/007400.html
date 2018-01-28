@@ -1,0 +1,225 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+<TITLE>TIdIdent</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <META name="GENERATOR" content="Doc-O-Matic">
+    <LINK rel="STYLESHEET" href="default.css" type="text/css">
+
+<SCRIPT LANGUAGE="JavaScript1.2" SRC="scripts.js"></SCRIPT>
+</HEAD>
+<BODY CLASS="Element57">
+<TABLE BORDER="0" BGCOLOR="#AACCFF" WIDTH="100%" CELLSPACING="0" CELLPADDING="0">
+<TR><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element1">
+Indy 9</DIV>
+</TD><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element2">
+<A HREF="content.html" CLASS="Element59">Content</A> | <A HREF="idx.html" CLASS="Element59">Index</A> | <A HREF="symref.html" CLASS="Element59">Reference</A></DIV>
+</TD></TR></TABLE><DIV CLASS="Element58">
+<DIV CLASS="Element5">
+TIdIdent</DIV>
+<DIV CLASS="Element7">
+<A HREF="011636.html" CLASS="Element59">Hierarchy</A>, <A HREF="011637.html" CLASS="Element59">Properties</A>, <A HREF="011638.html" CLASS="Element59">Methods</A>, <A HREF="011639.html" CLASS="Element59">Events</A>, <A HREF="011640.html" CLASS="Element59">See Also</A>, <A HREF="002255.html" CLASS="Element59">Unit: IdIdent</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Implements an Ident protocol (RFC 1413) client.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12">TIdIdent = <STRONG>class</STRONG>(<A HREF="007827.html" CLASS="Element59">TIdTCPClient</A>)</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Unit</DIV>
+<DIV CLASS="Element69">
+<A HREF="002255.html" CLASS="Element59">IdIdent</A></DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+TIdIdent is a <A HREF="007827.html" CLASS="Element59">TIdTCPClient</A> descendant that implements an Ident protocol as a client, as described in the Internet Standards document:<P CLASS="Element10">
+<UL>
+<LI><A HREF="http://www.rfc-editor.org/rfc/rfc1413.txt"> RFC 1413 - Identification Protocol </A></UL>
+<P CLASS="Element10">
+TIdIdent is part of an &quot;Internet Caller ID&quot; where a typical Server queries an Ident Server which is running on that client. This component is typically used to query Ident Servers that run on connecting clients.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0001">TIdIdent.Port</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007400.html" CLASS="Element59">TIdIdent</A>, <A HREF="011641.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+POrt number for the connection to an Ident server.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> Port: integer;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Port is a published Integer property in <A HREF="007400.html" CLASS="Element59">TIdIdent</A> that represents the port number used for the connection to an Ident server. The default value for Port, as required by the Ident protocol, is assigned in the <A HREF="007400.html#0000" CLASS="Element59">Create</A> constructor.<P CLASS="Element10">
+Set Host to identify the server IP Address or host name to be used for the connection.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0003">TIdIdent.QueryTimeOut</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007400.html" CLASS="Element59">TIdIdent</A>, <A HREF="011642.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+This property is a time out value for the <A HREF="007400.html#0002" CLASS="Element59">TIdIdent.Query</A> method.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> QueryTimeOut: Integer;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+This property is a time out value for the <A HREF="007400.html#0002" CLASS="Element59">TIdIdent.Query</A> method. If this timeout is exceeded, the query is abandoned and the <A HREF="000393.html" CLASS="Element59">EIdIdentQueryTimeOut</A> exception is raised. By default, this value is <A HREF="002256.html" CLASS="Element59">IdIdentQryTimeout</A>.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0004">TIdIdent.Reply</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007400.html" CLASS="Element59">TIdIdent</A>, <A HREF="011643.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+This property is the reply that was sent by an Ident server from a query.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> Reply: <STRONG>String</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+This is the reply that was sent by an Ident server from a query. This reply is parsed by the <A HREF="007400.html#0005" CLASS="Element59">ReplyCharset</A>, <A HREF="007400.html#0006" CLASS="Element59">TIdIdent.ReplyOS</A>, <A HREF="007400.html#0007" CLASS="Element59">TIdIdent.ReplyOther</A>, and TIdIdent.ReplyUserID properties into more usable forms</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0005">TIdIdent.ReplyCharset</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007400.html" CLASS="Element59">TIdIdent</A>, <A HREF="011644.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+This property returns the charset from the <A HREF="007400.html#0004" CLASS="Element59">TIdIdent.Reply</A> property.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> ReplyCharset: <STRONG>String</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+This property returns the charset from the <A HREF="007400.html#0004" CLASS="Element59">TIdIdent.Reply</A> property or the RFC 1413 default value of US-ASCII. The reply is obtained by usint the <A HREF="007400.html#0002" CLASS="Element59">TIdIdent.Query</A> method.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0006">TIdIdent.ReplyOS</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007400.html" CLASS="Element59">TIdIdent</A>, <A HREF="011645.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+This property returns the client's operating system from the <A HREF="007400.html#0004" CLASS="Element59">TIdIdent.Reply</A> property.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> ReplyOS: <STRONG>String</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+This property returns the client's operating system from the <A HREF="007400.html#0004" CLASS="Element59">TIdIdent.Reply</A> property. The reply is obtained by usint the <A HREF="007400.html#0002" CLASS="Element59">TIdIdent.Query</A> method. This value usually is one Id_OS constants which is defined in the IdAssignedNumbers unit.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0007">TIdIdent.ReplyOther</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007400.html" CLASS="Element59">TIdIdent</A>, <A HREF="011646.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+This property returns other information from the <A HREF="007400.html#0004" CLASS="Element59">TIdIdent.Reply</A> property.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> ReplyOther: <STRONG>String</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+This property returns freeform text in the <A HREF="007400.html#0004" CLASS="Element59">TIdIdent.Reply</A> property. The reply is obtained by using the <A HREF="007400.html#0002" CLASS="Element59">TIdIdent.Query</A> method. Examples of this are an encrypted audit token, or other non-userid information about a user (such as the real name and phone number of a user from a UNIX passwd file)</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0008">TIdIdent.ReplyUserName</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007400.html" CLASS="Element59">TIdIdent</A>, <A HREF="011647.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+This property returns the client's User name from the <A HREF="007400.html#0004" CLASS="Element59">TIdIdent.Reply</A> property.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> ReplyUserName: <STRONG>String</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+This property returns the client's User ID from the <A HREF="007400.html#0004" CLASS="Element59">TIdIdent.Reply</A> property. The reply is obtained by usint the <A HREF="007400.html#0002" CLASS="Element59">TIdIdent.Query</A> method. This value may be different for each connection pair passed to the <A HREF="007400.html#0002" CLASS="Element59">Query</A> method if the computer is a multi-user system.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0000">TIdIdent.Create</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007400.html" CLASS="Element59">TIdIdent</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+This constructor creates a new <A HREF="007400.html" CLASS="Element59">TIdIdent</A> object.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>constructor</STRONG> Create(AOwner: TComponent); <STRONG>override</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+This constructor creates a new <A HREF="007400.html" CLASS="Element59">TIdIdent</A> object. It sets the <A HREF="007400.html#0001" CLASS="Element59">Port</A> property to <A HREF="002356.html" CLASS="Element59">IdPORT_AUTH</A> and sets the <A HREF="007400.html#0003" CLASS="Element59">QueryTimeOut</A> property to the <A HREF="002256.html" CLASS="Element59">IdIdentQryTimeout</A> constant.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0002">TIdIdent.Query</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007400.html" CLASS="Element59">TIdIdent</A>, <A HREF="011648.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+This method performs an Ident Query.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>procedure</STRONG> Query(APortOnServer: Word; APortOnClient: Word);</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+APortOnServer: Word</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+the port that the client computer connected to the server on</DIV>
+</DIV>
+<DIV CLASS="Element17">
+APortOnClient: Word</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+the port that the client is using to make the connection.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+This method performs an Ident Query. When performing the query, the server sends a pair of ports. The first port is the port that the client computer connected to the server on. The second port is the port that the client is using to make the connection. The reply is placed in the <A HREF="007400.html#0004" CLASS="Element59">Reply</A> property and it is also parsed when using the <A HREF="007400.html#0005" CLASS="Element59">ReplyCharset</A>, <A HREF="007400.html#0006" CLASS="Element59">ReplyOS</A>, <A HREF="007400.html#0007" CLASS="Element59">ReplyOther</A>, and ReplyUserID properties. This method will raise an <A HREF="000394.html" CLASS="Element59">EIdIdentReply</A> class if there is an error. These classes are <A HREF="000391.html" CLASS="Element59">EIdIdentInvalidPort</A>, <A HREF="000392.html" CLASS="Element59">EIdIdentNoUser</A>, <A HREF="000390.html" CLASS="Element59">EIdIdentHiddenUser</A>, <A HREF="000395.html" CLASS="Element59">EIdIdentUnknownError</A>, and <A HREF="000393.html" CLASS="Element59">EIdIdentQueryTimeOut</A>.</DIV>
+</DIV>
+<DIV CLASS="Element62">
+<HR>Created with Doc-O-Matic 2 donated to <STRONG><A HREF="http://www.delphi-jedi.org">Project JEDI</A></STRONG>. Commercial license available from the <STRONG><A HREF="http://www.doc-o-matic.com">Doc-O-Matic site</A></STRONG>.</DIV>
+</DIV></BODY></HTML>

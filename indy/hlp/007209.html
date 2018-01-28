@@ -1,0 +1,140 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+<TITLE>TIdAuthenticationManager</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <META name="GENERATOR" content="Doc-O-Matic">
+    <LINK rel="STYLESHEET" href="default.css" type="text/css">
+
+<SCRIPT LANGUAGE="JavaScript1.2" SRC="scripts.js"></SCRIPT>
+</HEAD>
+<BODY CLASS="Element57">
+<TABLE BORDER="0" BGCOLOR="#AACCFF" WIDTH="100%" CELLSPACING="0" CELLPADDING="0">
+<TR><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element1">
+Indy 9</DIV>
+</TD><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element2">
+<A HREF="content.html" CLASS="Element59">Content</A> | <A HREF="idx.html" CLASS="Element59">Index</A> | <A HREF="symref.html" CLASS="Element59">Reference</A></DIV>
+</TD></TR></TABLE><DIV CLASS="Element58">
+<DIV CLASS="Element5">
+TIdAuthenticationManager</DIV>
+<DIV CLASS="Element7">
+<A HREF="009989.html" CLASS="Element59">Hierarchy</A>, <A HREF="009990.html" CLASS="Element59">Properties</A>, <A HREF="009991.html" CLASS="Element59">Methods</A>, <A HREF="009992.html" CLASS="Element59">See Also</A>, <A HREF="002123.html" CLASS="Element59">Unit: IdAuthenticationManager</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Maintains authentication mechanisms used for a HTTP client connection.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12">TIdAuthenticationManager = <STRONG>class</STRONG>(<A HREF="007213.html" CLASS="Element59">TIdBaseComponent</A>)</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Unit</DIV>
+<DIV CLASS="Element69">
+<A HREF="002123.html" CLASS="Element59">IdAuthenticationManager</A></DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+TIdAuthenticationManager is a <A HREF="007213.html" CLASS="Element59">TIdBaseComponent</A> descendant that maintains a collection of authentication mechanisms used by a HTTP client. TIdAuthenticationManager is the types used to represent the <A HREF="007270.html#0001" CLASS="Element59">TIdCustomHTTP.AuthenticationManager</A> property, and is used when a HTTP request requires a specific <A HREF="007205.html" CLASS="Element59">TIdAuthentication</A> mechanism.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0001">TIdAuthenticationManager.Authentications</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007209.html" CLASS="Element59">TIdAuthenticationManager</A>, <A HREF="009993.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Authentication class instances maintained by the manager component.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> Authentications: <A HREF="007207.html" CLASS="Element59">TIdAuthenticationCollection</A>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Authentications is a read-only <A HREF="007207.html" CLASS="Element59">TIdAuthenticationCollection</A> property that represents the <A HREF="007208.html" CLASS="Element59">TIdAuthenticationItem</A> instances maintained by the authentication manager component.<P CLASS="Element10">
+Authentications is initialized in the <A HREF="007209.html#0002" CLASS="Element59">Create</A> constructor, and released in the <A HREF="007209.html#0003" CLASS="Element59">Destroy</A> destructor. Authentications is updated when AddAuthentications is called.<P CLASS="Element10">
+Use methods in the TOwnedCollection ancestor class, like Clear, Delete, Items, to access members of the collection.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0000">TIdAuthenticationManager.AddAuthentication</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007209.html" CLASS="Element59">TIdAuthenticationManager</A>, <A HREF="009994.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Adds a new authentication mechanism to the collection for the component,</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>procedure</STRONG> AddAuthentication(AAuthtetication: <A HREF="007205.html" CLASS="Element59">TIdAuthentication</A>; AURL: <A HREF="007878.html" CLASS="Element59">TIdURI</A>);</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+AAuthtetication: TIdAuthentication</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Authentication mechanism to add.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+AURL: TIdURI</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Resource locator for the authentication.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+AddAuthentication is a convenience procedure that creates a new authentication class instance in the <A HREF="007209.html#0001" CLASS="Element59">Authentications</A> collection maintained by the component. AddAuthentication calls the Add method for the <A HREF="007209.html#0001" CLASS="Element59">Authentications</A> collection, and sets the URL and Params values maintained in the new collection item based on values in the AAuthtetication and AURL parameters.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0002">TIdAuthenticationManager.Create</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007209.html" CLASS="Element59">TIdAuthenticationManager</A>, <A HREF="009995.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Constructor for the object instance.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>constructor</STRONG> Create(AOwner: TComponent); <STRONG>override</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+AOwner: TComponent</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Owner of the object instance.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Create is the constructor for the object instance. Create calls the inherited Create method using AOwner as the owner of the object instance for notification messages. Create allocates resources need for the Authentication property prior to exiting from the method.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0003">TIdAuthenticationManager.Destroy</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007209.html" CLASS="Element59">TIdAuthenticationManager</A>, <A HREF="009996.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Frees the object instance.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>destructor</STRONG> Destroy; <STRONG>override</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Destroy is the destructor for the object instance. Destroy frees resource allocated in the <A HREF="007209.html#0002" CLASS="Element59">Create</A> method for the <A HREF="007209.html#0001" CLASS="Element59">Authentications</A> property. Destroy calls the inherited Destroy method prior to exiting.</DIV>
+</DIV>
+<DIV CLASS="Element62">
+<HR>Created with Doc-O-Matic 2 donated to <STRONG><A HREF="http://www.delphi-jedi.org">Project JEDI</A></STRONG>. Commercial license available from the <STRONG><A HREF="http://www.doc-o-matic.com">Doc-O-Matic site</A></STRONG>.</DIV>
+</DIV></BODY></HTML>

@@ -1,0 +1,184 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+<TITLE>TSlaveThread</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <META name="GENERATOR" content="Doc-O-Matic">
+    <LINK rel="STYLESHEET" href="default.css" type="text/css">
+
+<SCRIPT LANGUAGE="JavaScript1.2" SRC="scripts.js"></SCRIPT>
+</HEAD>
+<BODY CLASS="Element57">
+<TABLE BORDER="0" BGCOLOR="#AACCFF" WIDTH="100%" CELLSPACING="0" CELLPADDING="0">
+<TR><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element1">
+Indy 9</DIV>
+</TD><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element2">
+<A HREF="content.html" CLASS="Element59">Content</A> | <A HREF="idx.html" CLASS="Element59">Index</A> | <A HREF="symref.html" CLASS="Element59">Reference</A></DIV>
+</TD></TR></TABLE><DIV CLASS="Element58">
+<DIV CLASS="Element5">
+TSlaveThread</DIV>
+<DIV CLASS="Element7">
+<A HREF="015136.html" CLASS="Element59">Hierarchy</A>, <A HREF="015137.html" CLASS="Element59">Properties</A>, <A HREF="015138.html" CLASS="Element59">Methods</A>, <A HREF="015139.html" CLASS="Element59">Events</A>, <A HREF="015140.html" CLASS="Element59">See Also</A>, <A HREF="002943.html" CLASS="Element59">Unit: IdTunnelSlave</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Implements a listening thread for communication with the tunnel master server.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12">TSlaveThread = <STRONG>class</STRONG>(<A HREF="007846.html" CLASS="Element59">TIdThread</A>)</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Unit</DIV>
+<DIV CLASS="Element69">
+<A HREF="002943.html" CLASS="Element59">IdTunnelSlave</A></DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+TSlaveThread is a <A HREF="007846.html" CLASS="Element59">TIdThread</A> descendant that implements a listening thread for the <A HREF="007872.html" CLASS="Element59">TIdTunnelSlave</A> server.<P CLASS="Element10">
+TSlaveThread overrides the BeforeRun, AfterRun, <A HREF="008072.html#0005" CLASS="Element59">Run</A>, and <A HREF="008072.html#0003" CLASS="Element59">Execute</A> virtual methods, inherited from <A HREF="007613.html" CLASS="Element59">TIdPeerThread</A>, that provide the Indy thread execution framework.<P CLASS="Element10">
+TSlaveThread keeps a reference, in SlaveParent, to the <A HREF="007872.html" CLASS="Element59">TIdTunnelSlave</A> that owns the listening thread. SlaveParent provides the server context for accessing properties and method of the <A HREF="007872.html" CLASS="Element59">TIdTunnelSlave</A> from the listening thread.<P CLASS="Element10">
+TSlaveThread keeps a reference to the <A HREF="007827.html" CLASS="Element59">TIdTCPClient</A> connection that represents the tunnelled link to the TIdTunnelServer. The tunnel connection is established in the constructor for TSlaveThread, closed in <A HREF="008072.html#0005" CLASS="Element59">Run</A>, and Disconnected in the destructor.<P CLASS="Element10">
+When the TSlaveThread is executed in <A HREF="008072.html#0005" CLASS="Element59">Run</A>, it insures that the tunnel connection to the <A HREF="007871.html" CLASS="Element59">TIdTunnelMaster</A> is active and ready to <A HREF="000027.html" CLASS="Element59">accept</A> read and write operations. If an exception occurs, the connection is closed and the thread will terminate. If the exception is not <A HREF="000451.html" CLASS="Element59">EIdSocketError</A> or EIdSocketClosed, the exception will be raised for the application.<P CLASS="Element10">
+TSlaveThread arbitrates data transformation for messages from the tunnel master server, as well as session connection and disconnection for client messages.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0000">TSlaveThread.Connection</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="008072.html" CLASS="Element59">TSlaveThread</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Represents the client connection to the tunnel master server.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> Connection: <A HREF="007827.html" CLASS="Element59">TIdTCPClient</A>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Connection is a read-only <A HREF="007827.html" CLASS="Element59">TIdTCPClient</A> property that represents the client connection to a tunnel master server for the <A HREF="007872.html" CLASS="Element59">TIdTunnelSlave</A> services by the thread.<P CLASS="Element10">
+Connection is used to gain access to the read buffer for the TCP connection while the slave thread is executing, and passes the read buffer as data for the Receiver.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0004">TSlaveThread.Executed</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="008072.html" CLASS="Element59">TSlaveThread</A>, <A HREF="015141.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Indicates that the thread has been <A HREF="008072.html#0005" CLASS="Element59">Run</A> using the Indy thread framework.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> Executed: Boolean;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Executed is a Boolean property that indicates the thread has been <A HREF="008072.html#0005" CLASS="Element59">Run</A> using the Indy thread framework. Executed is updated from <A HREF="008072.html#0003" CLASS="Element59">Execute</A> at the completion of the <A HREF="008072.html#0005" CLASS="Element59">Run</A> method.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0001">TSlaveThread.Create</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="008072.html" CLASS="Element59">TSlaveThread</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Constructor for the object instance.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>constructor</STRONG> Create(Slave: <A HREF="007872.html" CLASS="Element59">TIdTunnelSlave</A>); <STRONG>reintroduce</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+Slave: TIdTunnelSlave</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+The <A HREF="007872.html" CLASS="Element59">TIdTunnelSlave</A> serviced by the thread.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Create is the reintroduced constructor for the object instance. Create initializes object properties that depend on the Slave parameter, including:<P CLASS="Element10">
+<UL>
+<LI>SlaveParent<P CLASS="Element10">
+<LI><A HREF="008072.html#0000" CLASS="Element59">Connection</A><P CLASS="Element10">
+<LI>OnTerminate</UL>
+<P CLASS="Element10">
+SlaveParent contains a reference to the Slave parameter. <A HREF="008072.html#0000" CLASS="Element59">Connection</A> is the internal <A HREF="007827.html" CLASS="Element59">TIdTCPClient</A> for Slave. OnTerminate is assigned the event handler for the OnTunnelThreadTerminate event of Slave.<P CLASS="Element10">
+In addition, other thread properties are initialized to their default values, including:<P CLASS="Element10">
+<UL>
+<LI>FreeOnTerminate - False<P CLASS="Element10">
+<LI><A HREF="008072.html#0004" CLASS="Element59">Executed</A> - False<P CLASS="Element10">
+<LI>StopMode - smTerminate</UL>
+<P CLASS="Element10">
+Create relies in the inherited Create constructor to initialize the thread in a suspended state.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0002">TSlaveThread.Destroy</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="008072.html" CLASS="Element59">TSlaveThread</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Frees the thread instance.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>destructor</STRONG> Destroy; <STRONG>override</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Destroy is the destructor for the thread instance. Destroy insures that <A HREF="008072.html#0000" CLASS="Element59">Connection</A> is disconnected and Receiver is freed prior to exiting from the method. Destroy also releases the critical section used to protect access to the <A HREF="008072.html#0004" CLASS="Element59">Executed</A> property.<P CLASS="Element10">
+Destroy relies on the inherited Destroy method to complete destruction of the thread instance.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0003">TSlaveThread.Execute</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="008072.html" CLASS="Element59">TSlaveThread</A>, <A HREF="015142.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Starts running the thread.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>procedure</STRONG> Execute; <STRONG>override</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Execute is a procedure used to activate execution of the Indy thread in the thread framework. Execute relies on the inherited Execute method to signal that the thread should <A HREF="008072.html#0005" CLASS="Element59">Run</A>.<P CLASS="Element10">
+Execute updates the <A HREF="008072.html#0004" CLASS="Element59">Executed</A> property prior to completion of the method.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0005">TSlaveThread.Run</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="008072.html" CLASS="Element59">TSlaveThread</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Provides the main thread of execution for the Indy thread framework.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>procedure</STRONG> Run; <STRONG>override</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Run is a procedure that provides the main thread of execution for the Indy thread framework. Run ensures that the client <A HREF="008072.html#0000" CLASS="Element59">Connection</A> is valid and ready to perform read operations.<P CLASS="Element10">
+Run captures incoming messages from the client connection and provide the data to Receiver for interpretation. Run remains active until the thread is terminated. When a new message is detected, Run verifies that the CRC for the message matched the CRC value in the encapsulation header. When the CRC values do not match, Run will raise an <A HREF="000375.html" CLASS="Element59">EIdException</A> exception.<P CLASS="Element10">
+Run also allows the Slaveparent to perform data transformation using Receiver. If an error occurs during data transformation, Run will raise an <A HREF="000375.html" CLASS="Element59">EIdException</A> exception.<P CLASS="Element10">
+Finally, Run performs the action specified in the message type header in Receiver. This action can include closing the client connection due to an error in either the data or the session, or allowing the client to receive the result of the tunnel transformation.</DIV>
+</DIV>
+<DIV CLASS="Element62">
+<HR>Created with Doc-O-Matic 2 donated to <STRONG><A HREF="http://www.delphi-jedi.org">Project JEDI</A></STRONG>. Commercial license available from the <STRONG><A HREF="http://www.doc-o-matic.com">Doc-O-Matic site</A></STRONG>.</DIV>
+</DIV></BODY></HTML>

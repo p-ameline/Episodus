@@ -1,0 +1,101 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+<TITLE>EIdSocketError</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <META name="GENERATOR" content="Doc-O-Matic">
+    <LINK rel="STYLESHEET" href="default.css" type="text/css">
+
+<SCRIPT LANGUAGE="JavaScript1.2" SRC="scripts.js"></SCRIPT>
+</HEAD>
+<BODY CLASS="Element57">
+<TABLE BORDER="0" BGCOLOR="#AACCFF" WIDTH="100%" CELLSPACING="0" CELLPADDING="0">
+<TR><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element1">
+Indy 9</DIV>
+</TD><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element2">
+<A HREF="content.html" CLASS="Element59">Content</A> | <A HREF="idx.html" CLASS="Element59">Index</A> | <A HREF="symref.html" CLASS="Element59">Reference</A></DIV>
+</TD></TR></TABLE><DIV CLASS="Element58">
+<DIV CLASS="Element5">
+EIdSocketError</DIV>
+<DIV CLASS="Element7">
+<A HREF="009323.html" CLASS="Element59">Hierarchy</A>, <A HREF="009324.html" CLASS="Element59">Properties</A>, <A HREF="009325.html" CLASS="Element59">Methods</A>, <A HREF="009326.html" CLASS="Element59">See Also</A>, <A HREF="002183.html" CLASS="Element59">Unit: IdException</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Exception raised for Socket errors.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12">EIdSocketError = <STRONG>class</STRONG>(<A HREF="000375.html" CLASS="Element59">EIdException</A>)</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Unit</DIV>
+<DIV CLASS="Element69">
+<A HREF="002183.html" CLASS="Element59">IdException</A></DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+EIdSocketError is an <A HREF="000375.html" CLASS="Element59">EIdException</A> descendant that represents an exception class raised when a general <A HREF="007071.html" CLASS="Element59">socket</A> error occurs. EIdSocketError is used to represent non-protocol specific <A HREF="007071.html" CLASS="Element59">socket</A> errors that originate from the protocol stack, and provides the <A HREF="000451.html#0001" CLASS="Element59">LastError</A> property to reflect the numeric error number.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0001">EIdSocketError.LastError</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="000451.html" CLASS="Element59">EIdSocketError</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Indicates the last error code.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> LastError: Integer;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+LastError is the last <A HREF="007071.html" CLASS="Element59">socket</A> error code and is used to provide the developer with flexibility when dealing with specific <A HREF="007071.html" CLASS="Element59">socket</A> errors. This is set with the <A HREF="000451.html#0000" CLASS="Element59">CreateError</A> constructor.<P CLASS="Element10">
+The values for this property are usually listed in Winsock references such as:<P CLASS="Element10">
+<UL>
+<LI>http://www.ibiblio.org/winsock/winsock-1.1/winsock.html<P CLASS="Element10">
+<LI>http://www.sockets.com/<P CLASS="Element10">
+<LI>Microsoft Windows Sockets 2 Reference (http://www.msdn.microsoft.com)</UL>
+</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0000">EIdSocketError.CreateError</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="000451.html" CLASS="Element59">EIdSocketError</A>, <A HREF="009327.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Constructor for the exception class.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>constructor</STRONG> CreateError(<STRONG>const</STRONG> AErr: Integer; <STRONG>const</STRONG> AMsg: <STRONG>string</STRONG>); <STRONG>virtual</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+const AErr: Integer</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Error number for the exception.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+const AMsg: string</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Error message for the exception.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+CreateError is the constructor for the exception instance, and allocates an instance of <A HREF="000451.html" CLASS="Element59">EIdSocketError</A> with an error code specified by AErr and the message specified by AMsg.<P CLASS="Element10">
+CreateError calls the inherited Create method using AMsg as the exception message. CreateError also sets the value in <A HREF="000451.html#0001" CLASS="Element59">LastError</A> to the value specified in AErr.</DIV>
+</DIV>
+<DIV CLASS="Element62">
+<HR>Created with Doc-O-Matic 2 donated to <STRONG><A HREF="http://www.delphi-jedi.org">Project JEDI</A></STRONG>. Commercial license available from the <STRONG><A HREF="http://www.doc-o-matic.com">Doc-O-Matic site</A></STRONG>.</DIV>
+</DIV></BODY></HTML>

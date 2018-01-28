@@ -1,0 +1,374 @@
+// -----------------------------------------------------------------------------
+// nsmpids.h// -----------------------------------------------------------------------------
+// Base contenant l'identifiant patient dans le modele MUE
+// -----------------------------------------------------------------------------
+// FLP - octobre 2004
+// -----------------------------------------------------------------------------
+
+// -----------------------------------------------------------------------------
+// Copyright Nautilus, 2004
+// http://www.nautilus-info.com
+// -----------------------------------------------------------------------------
+// Ce logiciel est un programme informatique servant à gérer et traiter les
+// informations de santé d'une personne.
+//
+// Ce logiciel est régi par la licence CeCILL soumise au droit français et
+// respectant les principes de diffusion des logiciels libres. Vous pouvez
+// utiliser, modifier et/ou redistribuer ce programme sous les conditions de la
+// licence CeCILL telle que diffusée par le CEA, le CNRS et l'INRIA sur le site
+// "http://www.cecill.info".
+//
+// En contrepartie de l'accessibilité au code source et des droits de copie, de
+// modification et de redistribution accordés par cette licence, il n'est offert
+// aux utilisateurs qu'une garantie limitée. Pour les mêmes raisons, seule une
+// responsabilité restreinte pèse sur l'auteur du programme, le titulaire des
+// droits patrimoniaux et les concédants successifs.
+//
+// A cet égard  l'attention de l'utilisateur est attirée sur les risques
+// associés au chargement, à l'utilisation, à la modification et/ou au
+// développement et à la reproduction du logiciel par l'utilisateur étant donné
+// sa spécificité de logiciel libre, qui peut le rendre complexe à manipuler et
+// qui le réserve donc à des développeurs et des professionnels avertis
+// possédant des connaissances informatiques approfondies. Les utilisateurs sont
+// donc invités à charger et tester l'adéquation du logiciel à leurs besoins
+// dans des conditions permettant d'assurer la sécurité de leurs systèmes et ou
+// de leurs données et, plus généralement, à l'utiliser et l'exploiter dans les
+// mêmes conditions de sécurité.
+//
+// Le fait que vous puissiez accéder à cet en-tête signifie que vous avez pris
+// connaissance de la licence CeCILL, et que vous en avez accepté les termes.
+// -----------------------------------------------------------------------------
+// This software is a computer program whose purpose is to manage and process
+// a person's health data.
+//
+// This software is governed by the CeCILL  license under French law and abiding
+// by the rules of distribution of free software. You can use, modify and/ or
+// redistribute the software under the terms of the CeCILL license as circulated
+// by CEA, CNRS and INRIA at the following URL "http://www.cecill.info".
+//
+// As a counterpart to the access to the source code and  rights to copy, modify
+// and redistribute granted by the license, users are provided only with a
+// limited warranty and the software's author, the holder of the economic
+// rights, and the successive licensors have only limited liability.
+//
+// In this respect, the user's attention is drawn to the risks associated with
+// loading, using, modifying and/or developing or reproducing the software by
+// the user in light of its specific status of free software, that may mean that
+// it is complicated to manipulate, and that also therefore means that it is
+// reserved for developers and experienced professionals having in-depth
+// computer knowledge. Users are therefore encouraged to load and test the
+// software's suitability as regards their requirements in conditions enabling
+// the security of their systems and/or data to be ensured and, more generally,
+// to use and operate it in the same conditions as regards security.
+//
+// The fact that you are presently reading this means that you have had
+// knowledge of the CeCILL license and that you accept its terms.
+// -----------------------------------------------------------------------------
+
+#ifndef nsmpidsH
+#define nsmpidsH
+
+# include <cstring.h>
+# include <owl\window.h>
+
+# include "ns_sgbd\nsfiche.h"
+# include "nsbb\nsexport.h"
+# include "partage\ns_vector.h"
+# include "nsbb/nspatpat.h"
+
+const char LocalPatient = '-' ;
+const char INMEMORY_CHAR = '#' ;
+
+//
+// Taille des champs du fichier PIDS
+//
+#define PIDS_NSS_LEN        7
+#define PIDS_ROOTDOC_LEN    6
+#define PIDS_NOM_LEN       35
+#define PIDS_PRENOM_LEN    35
+#define PIDS_CODE_LEN      20
+#define PIDS_SEXE_LEN	    1
+#define PIDS_NAISSANCE_LEN  8
+#define PIDS_LOGIN_LEN     35
+#define PIDS_PASSWD_LEN    35
+#define PIDS_NB_EXEMP_LEN   2
+#define PIDS_MESSAGERIE_LEN 50
+
+//
+// Indice des champs du fichier PIDS
+//
+#define PIDS_NSS_FIELD        1
+#define PIDS_ROOTDOC_FIELD    2
+#define PIDS_NOM_FIELD        3
+#define PIDS_PRENOM_FIELD     4
+#define PIDS_CODE_FIELD       5
+#define PIDS_SEXE_FIELD		  6
+#define PIDS_NAISSANCE_FIELD  7
+#define PIDS_LOGIN_FIELD      8
+#define PIDS_PASSWD_FIELD     9
+
+//---------------------------------------------------------------------------
+//  Classe NSPids
+//---------------------------------------------------------------------------
+//
+// Objet contenant les données
+//
+class _NSBBCLASSE NSPidsData
+{
+ public:
+	//
+	// Variables de stockage des valeurs
+	//
+	char nss[PIDS_NSS_LEN + 1];
+ 	char rootdoc[PIDS_ROOTDOC_LEN + 1];
+	char nom[PIDS_NOM_LEN + 1];
+	char prenom[PIDS_PRENOM_LEN + 1];
+	char code[PIDS_CODE_LEN + 1];
+	char sexe[PIDS_SEXE_LEN + 1];
+	char naissance[PIDS_NAISSANCE_LEN + 1];
+ 	char login[PIDS_LOGIN_LEN + 1];
+ 	char passwd[PIDS_PASSWD_LEN + 1];
+
+	char nb_exemp[PIDS_NB_EXEMP_LEN + 1];
+ 	char messagerie[PIDS_MESSAGERIE_LEN + 1];
+
+	NSPidsData() ;
+	NSPidsData(const NSPidsData& rv) ;
+
+	NSPidsData& operator=(const NSPidsData& src) ;
+	int 		   	operator==(const NSPidsData& o) ;
+	void 			metABlanc() ;
+	void 			metAZero() ;
+};
+
+
+// -----------------------------------------------------------------------------
+// Classe NSPidsInfo  (destinée à être stockée dans une Array)
+// -----------------------------------------------------------------------------
+class NSPids ;
+class NSPersonGraphManager ;
+class NSAddressGraphManager ;
+class NSBasicAttributeArray ;
+
+class _NSBBCLASSE NSPidsInfo : public NSRoot
+{
+ public:
+	// Objet qui contient les données
+	NSPidsData* 	        	pDonnees ;
+  NSPersonGraphManager*   pGraphPerson ;
+  NSAddressGraphManager*  pGraphAdr ;
+  string                  sFonction ;
+  string                  sChez ;
+
+	NSPidsInfo(NSContexte* pCtx) ;
+	NSPidsInfo(NSPids*) ;
+	NSPidsInfo(NSBasicAttributeArray* pAttribute, NSContexte* pCtx) ;
+	NSPidsInfo(const NSPidsInfo& rv) ;
+	~NSPidsInfo() ;
+
+	NSPidsInfo&	operator=(const NSPidsInfo& src) ;
+	int					operator==(const NSPidsInfo& o) ;
+} ;
+
+//
+// Objet dérivé de NSFiche servant aux accès de base de données
+//
+class _NSBBCLASSE NSPids : public NSPidsInfo, public NSFiche
+{
+ public :
+
+	PIDSTYPE iTypePids;
+
+	NSPids(NSContexte* pCtx, PIDSTYPE iType = pidsPatient);
+	~NSPids();
+
+	void			metABlanc() { pDonnees->metABlanc(); }
+	void			alimenteFiche();
+	void			videFiche();
+	DBIResult open();
+	DBIResult close();
+};
+
+//
+// Définition de NSDataTreeArray (Array de NSDataTree(s))
+//
+
+typedef vector<NSPidsInfo*> NSPidsVector ;
+typedef NSPidsVector::iterator NSPidsIter ;
+typedef NSPidsVector::reverse_iterator NSPidsReverseIter ;
+typedef NSPidsVector::const_iterator   NSPidsConstIter ;
+
+class _NSBBCLASSE NSPidsArray : public NSPidsVector
+{
+	public :
+
+		// Constructeurs
+		NSPidsArray() : NSPidsVector() {}
+		NSPidsArray(const NSPidsArray& rv) ;
+		// Destructeur
+		virtual ~NSPidsArray() ;
+		void vider() ;
+
+		NSPidsArray& operator=(const NSPidsArray& src) ;
+		int          operator==(const NSPidsArray& o) ;
+};
+
+//=================== Classe NSPersonManager =============================
+//========================================================================
+
+class NSPatPathoArray;
+class NSVectPatPathoArray;
+
+class _NSBBCLASSE NSPersonInfo : public NSSuperRoot
+{
+	protected:
+
+  	string      _sSexe ;
+    NSContexte *_pContexte ;
+
+	public:
+
+		// Donnees administratives
+    string _sPersonID ;
+    string _sNom ;
+    string _sPrenom ;
+    string _sLang ;
+    string _sNaissance ;
+    string _sLogin ;
+    // Données PDS
+    string _sMetier ;
+    string _sSpecialite ;
+    string _sOrientation ;
+		string _sActivite ;
+    string _sAdeli ;
+    string _sRpps ;
+    string _sTitre ;
+    string _sCivilite ;
+    string _sRoles ;
+    string _sVille ;
+    string _sPhone ;
+    string _sMobile ;
+    string _sMail ;
+    string _sReconvocDate ;
+    string _sBlocked ;
+    // Donnees adresse (principale)
+    string _sChez ;
+    string _sObjectAdr ;
+    string _sMainAdr ;
+
+    PIDSTYPE _typePids ;
+
+    NSVectPatPathoArray _VectData ;
+
+    NSPersonInfo(NSSuper* pSuper, NSBasicAttributeArray* pAttribute = 0) ;
+    NSPersonInfo(NSSuper* pSuper, NSContexte* pCtx, string sNss, PIDSTYPE iTypePids = pidsPatient) ;
+    NSPersonInfo(NSContexte* pCtx, NSPatPathoArray* pPatPathoData, PIDSTYPE iTypePids = pidsPatient) ;
+    ~NSPersonInfo() ;
+    NSPersonInfo(const NSPersonInfo& rv) ;
+    NSPersonInfo& operator=(const NSPersonInfo& src) ;
+    int           operator==(const NSPersonInfo& o) ;
+
+    const char*           getszPersonID() { return _sPersonID.c_str() ; }
+    NSPersonGraphManager* getPersonGraph() ;
+    string                getMainAdr(PIDSTYPE iTypePids, string sLanguage) ;
+
+    string getNss()         const  { return _sPersonID ; }
+		string getNom()         const  { return _sNom ; }
+		string getPrenom()      const  { return _sPrenom ; }
+    string getLang()        const  { return _sLang ; }
+		string getNaissance()   const  { return _sNaissance ; }
+    string getLogin()       const  { return _sLogin ; }
+    string getMetier()      const  { return _sMetier ; }
+    string getSpecialite()  const  { return _sSpecialite ; }
+    string getOrientation() const  { return _sOrientation ; }
+		string getActivite()    const  { return _sActivite ; }
+    string getAdeli()       const  { return _sAdeli ; }
+    string getRpps()        const  { return _sRpps ; }
+    string getTitre()       const  { return _sTitre ; }
+    string getCivilite()    const  { return _sCivilite ; }
+    string getRoles()       const  { return _sRoles ; }
+    string getVille()       const  { return _sVille ; }
+    string getPhone()       const  { return _sPhone ; }
+    string getMobile()      const  { return _sMobile ; }
+    string getMail()        const  { return _sMail ; }
+    string getConvoc()      const  { return _sReconvocDate ; }
+    string getBlocked()     const  { return _sBlocked ; }
+    string getChez()        const  { return _sChez ; }
+    string getObjectAdr()   const  { return _sObjectAdr ; }
+    string getMainAdr()     const  { return _sMainAdr ; }
+
+    PIDSTYPE getTypePids()  const  { return  _typePids ; }
+
+    string getNomLong() const ;
+
+  	void setNss(string sVal)       { _sPersonID     = sVal ; }
+		void setNom(string sVal)       { _sNom          = sVal ; }
+		void setPrenom(string sVal)    { _sPrenom       = sVal ; }
+		void setNaissance(string sVal) { _sNaissance    = sVal ; }
+		void setLang(string sVal)      { _sLang         = sVal ; }
+    void setConvoc(string sVal)    { _sReconvocDate = sVal ; }
+    void setPhone(string sVal)     { _sPhone        = sVal ; }
+    void setMobile(string sVal)    { _sMobile       = sVal ; }
+    void setMail(string sVal)      { _sMail         = sVal ; }
+
+    void initValues() ;
+    void updateCalculatedValues(NSPersonGraphManager* pPersonGraphManager, PIDSTYPE iTypePids) ;
+
+    bool estMasculin() { return (string("HMASC") == _sSexe) ; }
+		bool estFeminin()  { return (string("HFEMI") == _sSexe) ; }
+		void metMasculin() { _sSexe = string("HMASC") ; }
+		void metFeminin()  { _sSexe = string("HFEMI") ; }
+
+    // Indique si l'utilisateur est local
+		inline bool IsLocal()    { return (LocalPatient == _sPersonID[0]) ; }
+  	// Indique si l'utilisateur est en mémoire
+  	inline bool IsInMemory() { return (INMEMORY_CHAR == _sPersonID[0]) ; }
+  	// Indique si l'utilisateur est collectif
+  	inline bool IsGlobal()   { return ((false == IsInMemory()) && (false == IsLocal())) ; }
+};
+
+//
+// Définition de NSPersonArray (Array de NSPersonInfo(s))
+//
+
+typedef vector<NSPersonInfo*> NSPersonVector ;
+typedef NSPersonVector::iterator         NSPersonIter ;
+typedef NSPersonVector::reverse_iterator NSPersonReverseIter ;
+typedef NSPersonVector::const_iterator   NSPersonConstIter ;
+
+class _NSBBCLASSE NSPersonArray : public NSPersonVector, public NSSuperRoot
+{
+	public :
+
+    enum GETPERSONMODE { synchronous = 1, asynchronous, justCheck } ;
+
+		// Constructeurs
+		NSPersonArray(NSSuper* pSuper) : NSPersonVector(), NSSuperRoot(pSuper) {}
+		NSPersonArray(const NSPersonArray& rv) ;
+		// Destructeur
+		virtual ~NSPersonArray() ;
+    void vider() ;
+
+    NSPersonArray& operator=(const NSPersonArray& src) ;
+    int            operator==(const NSPersonArray& o) ;
+
+    NSPersonInfo* lookForPersonInArray(string sID) ;
+    NSPersonInfo* lookForRppsInArray(string sID) ;
+    NSPersonInfo* lookForAdeliInArray(string sID) ;
+
+    NSPersonInfo* getPerson(NSContexte *pContexte, string sID, PIDSTYPE iTypePids = pidsPatient, GETPERSONMODE iGetPersonMode = synchronous) ;
+    NSPersonInfo* getPersonFromIndexedProId(NSContexte *pContexte, string sID, string sIdCode) ;
+    NSPersonInfo* getPersonFromProId(NSContexte *pContexte, string sID, string sIdCode, GETPERSONMODE iGetPersonMode = synchronous) ;
+    NSPersonInfo* getPersonFromRpps(NSContexte *pContexte, string sID, GETPERSONMODE iGetPersonMode = synchronous) ;
+    NSPersonInfo* getPersonFromAdeli(NSContexte *pContexte, string sID, GETPERSONMODE iGetPersonMode = synchronous) ;
+    NSPersonInfo* getPersonByPidsFromProId(NSContexte *pContexte, string sID, string sIdCode, string sPids) ;
+
+    NSPersonInfo* createPerson(NSContexte *pContexte, PIDSTYPE iTypePids = pidsPatient) ;
+    bool          modifyPerson(NSContexte *pContexte, string sID, string sRoles, PIDSTYPE iTypePids = pidsPatient) ;
+
+    string        createContribution(NSContexte *pContexte, NSPersonGraphManager* pGraphManager, PIDSTYPE iTypePids) ;
+    bool          closeContribution(NSContexte *pContexte, NSPersonGraphManager* pGraphManager, string sContribution) ;
+};
+
+#endif
+

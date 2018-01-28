@@ -1,0 +1,54 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+<TITLE>TIdIMAP4ConnectionState</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <META name="GENERATOR" content="Doc-O-Matic">
+    <LINK rel="STYLESHEET" href="default.css" type="text/css">
+
+<SCRIPT LANGUAGE="JavaScript1.2" SRC="scripts.js"></SCRIPT>
+</HEAD>
+<BODY CLASS="Element57">
+<TABLE BORDER="0" BGCOLOR="#AACCFF" WIDTH="100%" CELLSPACING="0" CELLPADDING="0">
+<TR><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element1">
+Indy 9</DIV>
+</TD><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element2">
+<A HREF="content.html" CLASS="Element59">Content</A> | <A HREF="idx.html" CLASS="Element59">Index</A> | <A HREF="symref.html" CLASS="Element59">Reference</A></DIV>
+</TD></TR></TABLE><DIV CLASS="Element58">
+<DIV CLASS="Element5">
+TIdIMAP4ConnectionState</DIV>
+<DIV CLASS="Element7">
+<A HREF="015363.html" CLASS="Element59">See Also</A>, <A HREF="002258.html" CLASS="Element59">Unit: IdIMAP4</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Identifies the connection state, and subsequent valid commands, for an IMAP4 client.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12">TIdIMAP4ConnectionState = (csAny, csNonAuthenticated, csAuthenticated, csSelected);</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Unit</DIV>
+<DIV CLASS="Element69">
+<A HREF="002258.html" CLASS="Element59">IdIMAP4</A></DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+TIdIMAP4ConnectionState is an enumerated type that represents the connection state for the IMAP4 client. TIdIMAP4ConnectionState values are used to determine when IMAP4 commands are valid and permitted for the client connection. TIdIMAP4ConnectionState can contain the following values:<P CLASS="Element10">
+<UL>
+<LI>csAny - Commands allowed in any connection state.<P CLASS="Element10">
+<LI>csNonAuthenticated - Commands allowed prior to establishing authentication and entering an authenticated state.<P CLASS="Element10">
+<LI>csAuthenticated - Commands allowed after authentication but prior to mailbox selection.<P CLASS="Element10">
+<LI>csSelected - Commands allowed after selecting a mailbox.</UL>
+<P CLASS="Element10">
+csAny permits the commands cmdCAPABILITY, cmdNOOP, and cmdLOGOUT.<P CLASS="Element10">
+csNonAuthenticated permits commands from the csAny connection state, as well as the commands cmdAUTHENTICATE and cmdLOGOUT.<P CLASS="Element10">
+csAuthenticated permits commands from the csNonAuthenticated connection state, as well as the commands cmdSELECT, cmdEXAMINE, cmdCREATE, cmdDELETE, cmdRENAME, cmdSUBSCRIBE, cmdUNSUBSCRIBE, cmdLIST, cmdLSUB, cmdSTATUS, and cmdAPPEND.<P CLASS="Element10">
+csSelected permits commands from the csAuthenticated connection state, as well as the commands cmdCHECK, cmdCLOSE, cmdEXPUNGE, cmdSEARCH, cmdFETCH, cmdSTORE, cmdCOPY, cmdUID, and the experimental/expansion commmands represented by cmdXCmd.</DIV>
+</DIV>
+<DIV CLASS="Element62">
+<HR>Created with Doc-O-Matic 2 donated to <STRONG><A HREF="http://www.delphi-jedi.org">Project JEDI</A></STRONG>. Commercial license available from the <STRONG><A HREF="http://www.doc-o-matic.com">Doc-O-Matic site</A></STRONG>.</DIV>
+</DIV></BODY></HTML>

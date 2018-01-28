@@ -1,0 +1,132 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+<TITLE>TIdCookieRFC2965</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <META name="GENERATOR" content="Doc-O-Matic">
+    <LINK rel="STYLESHEET" href="default.css" type="text/css">
+
+<SCRIPT LANGUAGE="JavaScript1.2" SRC="scripts.js"></SCRIPT>
+</HEAD>
+<BODY CLASS="Element57">
+<TABLE BORDER="0" BGCOLOR="#AACCFF" WIDTH="100%" CELLSPACING="0" CELLPADDING="0">
+<TR><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element1">
+Indy 9</DIV>
+</TD><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element2">
+<A HREF="content.html" CLASS="Element59">Content</A> | <A HREF="idx.html" CLASS="Element59">Index</A> | <A HREF="symref.html" CLASS="Element59">Reference</A></DIV>
+</TD></TR></TABLE><DIV CLASS="Element58">
+<DIV CLASS="Element5">
+TIdCookieRFC2965</DIV>
+<DIV CLASS="Element7">
+<A HREF="010288.html" CLASS="Element59">Hierarchy</A>, <A HREF="010289.html" CLASS="Element59">Properties</A>, <A HREF="010290.html" CLASS="Element59">Methods</A>, <A HREF="010291.html" CLASS="Element59">See Also</A>, <A HREF="002145.html" CLASS="Element59">Unit: IdCookie</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Implements a persistent session mechanism using Cookies with extend headers.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12">TIdCookieRFC2965 = <STRONG>class</STRONG>(<A HREF="007264.html" CLASS="Element59">TIdCookieRFC2109</A>)</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Unit</DIV>
+<DIV CLASS="Element69">
+<A HREF="002145.html" CLASS="Element59">IdCookie</A></DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+TIdCookieRFC2965 is a <A HREF="007264.html" CLASS="Element59">TIdCookieRFC2109</A> descendant that implements a persistent session mechanism using Cookies in HTTP requests and responses, as described in the Internet Standards document:<P CLASS="Element10">
+<UL>
+<LI>RFC 2965 - HTTP State Management Mechanism (http://www.rfc-editor.org/rfc/rfc2965.txt)</UL>
+<P CLASS="Element10">
+TIdCookieRFC2965 extends <A HREF="007264.html" CLASS="Element59">TIdCookieRFC2109</A> by adding additional extended Cookie headers, and allows additional Cookie attributes to be indicated in the <A HREF="007265.html#0000" CLASS="Element59">CommentURL</A>, <A HREF="007265.html#0002" CLASS="Element59">Discard</A>, and <A HREF="007265.html#0003" CLASS="Element59">PortList</A> properties.<P CLASS="Element10">
+TIdCookieRFC2965 differs from the original Netscape Cookie proposal, but can interoperate with HTTP/1.0 clients that use the Netscape Cookie mechanism. The significant differences in TIdCookieRFC2965 are the ability to formulate extended Cookie headers that contain MaxAge, <A HREF="007265.html#0002" CLASS="Element59">Discard</A>, and <A HREF="007265.html#0003" CLASS="Element59">PortList</A> attribute values.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0000">TIdCookieRFC2965.CommentURL</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007265.html" CLASS="Element59">TIdCookieRFC2965</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Represents a network resource for user data or documentation about the Cookie.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> CommentURL: <STRONG>String</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+CommentURL is a String property that represents the optional Cookie attribute used to derive or store private information about a user, and allows an origin server to document how it intends to use the Cookie. CommentURL refers to a Univesal Resource Locator for the network resource.<P CLASS="Element10">
+An HTTP client can inspect CommentURL to decide whether to initiate or continue a session with this Cookie. If a Cookie includes a CommentURL value, the HTTP client should store that information in a human-readable form with the Cookie, or, preferably, should allow the user to follow the link as part of a Cookie inspection user interface.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0002">TIdCookieRFC2965.Discard</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007265.html" CLASS="Element59">TIdCookieRFC2965</A>, <A HREF="010292.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Indicates that a Cookie should be discarded after use.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> Discard: Boolean;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Discard is a Boolean property that represents an optional Cookie attribute that indicates how the Cookie is handled during Cookie management. When Discard is True, the HTTP client should unconditionally discard the Cookie when the user agent terminates.<P CLASS="Element10">
+Use MaxAge or Expires to control Cookie longevity based on dates or duration.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0003">TIdCookieRFC2965.PortList</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007265.html" CLASS="Element59">TIdCookieRFC2965</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Represents port numbers allowed for HTTP requests.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> PortList [AIndex: Integer]: Integer;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+PortList is an Array property that contains optional Integer values representing port numbers where a Cookie may be returned in an HTTP request. PortList is accessed using the zero-based Integer index value specified in AIndex. A Cookie can be rejected in an HTTP request when the port number for the request does not match a value specified in PortList.<P CLASS="Element10">
+The default HTTP port (80) is added to PortList when no explicit values are specified.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0001">TIdCookieRFC2965.Create</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007265.html" CLASS="Element59">TIdCookieRFC2965</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Constructor for the object instance.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>constructor</STRONG> Create(ACollection: TCollection); <STRONG>override</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+ACollection: TCollection</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Collection that owns the collection item.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Create is the constructor for the object instance, and calls the inherited Create method using the collection that owns the Cookie specified in ACollection.</DIV>
+</DIV>
+<DIV CLASS="Element62">
+<HR>Created with Doc-O-Matic 2 donated to <STRONG><A HREF="http://www.delphi-jedi.org">Project JEDI</A></STRONG>. Commercial license available from the <STRONG><A HREF="http://www.doc-o-matic.com">Doc-O-Matic site</A></STRONG>.</DIV>
+</DIV></BODY></HTML>

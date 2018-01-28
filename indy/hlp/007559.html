@@ -1,0 +1,89 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+<TITLE>TIdMessageEncoderInfoMIME</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <META name="GENERATOR" content="Doc-O-Matic">
+    <LINK rel="STYLESHEET" href="default.css" type="text/css">
+
+<SCRIPT LANGUAGE="JavaScript1.2" SRC="scripts.js"></SCRIPT>
+</HEAD>
+<BODY CLASS="Element57">
+<TABLE BORDER="0" BGCOLOR="#AACCFF" WIDTH="100%" CELLSPACING="0" CELLPADDING="0">
+<TR><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element1">
+Indy 9</DIV>
+</TD><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element2">
+<A HREF="content.html" CLASS="Element59">Content</A> | <A HREF="idx.html" CLASS="Element59">Index</A> | <A HREF="symref.html" CLASS="Element59">Reference</A></DIV>
+</TD></TR></TABLE><DIV CLASS="Element58">
+<DIV CLASS="Element5">
+TIdMessageEncoderInfoMIME</DIV>
+<DIV CLASS="Element7">
+<A HREF="012628.html" CLASS="Element59">Hierarchy</A>, <A HREF="012629.html" CLASS="Element59">Properties</A>, <A HREF="012630.html" CLASS="Element59">Methods</A>, <A HREF="012631.html" CLASS="Element59">See Also</A>, <A HREF="002289.html" CLASS="Element59">Unit: IdMessageCoderMIME</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Represents the registered encoder class and updates properties for an associated message.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12">TIdMessageEncoderInfoMIME = <STRONG>class</STRONG>(<A HREF="007558.html" CLASS="Element59">TIdMessageEncoderInfo</A>)</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Unit</DIV>
+<DIV CLASS="Element69">
+<A HREF="002289.html" CLASS="Element59">IdMessageCoderMIME</A></DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+TIdMessageEncoderInfoMIME is a <A HREF="007558.html" CLASS="Element59">TIdMessageEncoderInfo</A> descendant that implements the extensions necessary to represent the registered encoder classes for MIME-encoded message parts. TIdMessageEncoderInfoMIME also provides a mechanism to update properties in an associated <A HREF="007544.html" CLASS="Element59">TIdMessage</A> instance based on the content and type of the message part.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0000">TIdMessageEncoderInfoMIME.Create</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007559.html" CLASS="Element59">TIdMessageEncoderInfoMIME</A>, <A HREF="012632.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Constructor for the object instance.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>constructor</STRONG> Create; <STRONG>override</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Create is the Constructor for the object instance, and relies on the inherited Create method. Create also sets the MessageEncoderClass to an instance of <A HREF="007563.html" CLASS="Element59">TIdMessageEncoderMIME</A>, to represent the class used to create new instances of the decoder from the <A HREF="007562.html" CLASS="Element59">TIdMessageEncoderList</A> that represents registered encoder classes.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0001">TIdMessageEncoderInfoMIME.InitializeHeaders</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007559.html" CLASS="Element59">TIdMessageEncoderInfoMIME</A>, <A HREF="012633.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Updates message properties from headers in the message part.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>procedure</STRONG> InitializeHeaders(AMsg: <A HREF="007544.html" CLASS="Element59">TIdMessage</A>); <STRONG>override</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+AMsg: TIdMessage</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Message associated with the encoder instance.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+InitializeHeaders is an overridden Procedure in <A HREF="007559.html" CLASS="Element59">TIdMessageEncoderInfoMIME</A> that updates properties in an associated <A HREF="007544.html" CLASS="Element59">TIdMessage</A> instance based on the contents of the message.<P CLASS="Element10">
+InitializeHeaders updates the <A HREF="007544.html#000B" CLASS="Element59">TIdMessage.ContentType</A> property to indicate the RFC message headers needed for the message specified in AMsg.</DIV>
+</DIV>
+<DIV CLASS="Element62">
+<HR>Created with Doc-O-Matic 2 donated to <STRONG><A HREF="http://www.delphi-jedi.org">Project JEDI</A></STRONG>. Commercial license available from the <STRONG><A HREF="http://www.doc-o-matic.com">Doc-O-Matic site</A></STRONG>.</DIV>
+</DIV></BODY></HTML>

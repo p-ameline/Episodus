@@ -1,0 +1,88 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+<TITLE>TIdDiscardUDPServer</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <META name="GENERATOR" content="Doc-O-Matic">
+    <LINK rel="STYLESHEET" href="default.css" type="text/css">
+
+<SCRIPT LANGUAGE="JavaScript1.2" SRC="scripts.js"></SCRIPT>
+</HEAD>
+<BODY CLASS="Element57">
+<TABLE BORDER="0" BGCOLOR="#AACCFF" WIDTH="100%" CELLSPACING="0" CELLPADDING="0">
+<TR><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element1">
+Indy 9</DIV>
+</TD><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element2">
+<A HREF="content.html" CLASS="Element59">Content</A> | <A HREF="idx.html" CLASS="Element59">Index</A> | <A HREF="symref.html" CLASS="Element59">Reference</A></DIV>
+</TD></TR></TABLE><DIV CLASS="Element58">
+<DIV CLASS="Element5">
+TIdDiscardUDPServer</DIV>
+<DIV CLASS="Element7">
+<A HREF="010725.html" CLASS="Element59">Hierarchy</A>, <A HREF="010726.html" CLASS="Element59">Properties</A>, <A HREF="010727.html" CLASS="Element59">Methods</A>, <A HREF="010728.html" CLASS="Element59">Events</A>, <A HREF="010729.html" CLASS="Element59">See Also</A>, <A HREF="002172.html" CLASS="Element59">Unit: IdDiscardUDPServer</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Implements a Discard Protocol server.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12">TIdDiscardUDPServer = <STRONG>class</STRONG>(<A HREF="007877.html" CLASS="Element59">TIdUDPServer</A>)</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Unit</DIV>
+<DIV CLASS="Element69">
+<A HREF="002172.html" CLASS="Element59">IdDiscardUDPServer</A></DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+TIdDiscardUDPServer implements a UDP-based server for the Discard Protocol (RFC 863). <A HREF="007299.html" CLASS="Element59">TIdDISCARDServer</A> is a useful debugging and measurement protocol where the data sent to the server is simply discarded.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0001">TIdDiscardUDPServer.DefaultPort</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007300.html" CLASS="Element59">TIdDiscardUDPServer</A>, <A HREF="010730.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Default port number used for client connections.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> DefaultPort: integer;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+DefaultPort is an Integer property that represents the default port number for listening and accepting client connections to <A HREF="007300.html" CLASS="Element59">TIdDiscardUDPServer</A>. DefaultPort is redefined in <A HREF="007300.html" CLASS="Element59">TIdDiscardUDPServer</A>, and the value <A HREF="002423.html" CLASS="Element59">IdPORT_DISCARD</A> is assigned in the <A HREF="007300.html#0000" CLASS="Element59">Create</A> constructor.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0000">TIdDiscardUDPServer.Create</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007300.html" CLASS="Element59">TIdDiscardUDPServer</A>, <A HREF="010731.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Constructor for the object instance.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>constructor</STRONG> Create(AOwner: TComponent); <STRONG>override</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+AOwner: TComponent</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Owner of the object instance.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Create is the constructor for the object instance, and calls the inherited Create method to instantiate a new <A HREF="007300.html" CLASS="Element59">TIdDiscardUDPServer</A> component. Create sets the value of <A HREF="007300.html#0001" CLASS="Element59">DefaultPort</A> to the standard port number used for thye Discard protocol (<A HREF="002423.html" CLASS="Element59">IdPORT_DISCARD</A>).</DIV>
+</DIV>
+<DIV CLASS="Element62">
+<HR>Created with Doc-O-Matic 2 donated to <STRONG><A HREF="http://www.delphi-jedi.org">Project JEDI</A></STRONG>. Commercial license available from the <STRONG><A HREF="http://www.doc-o-matic.com">Doc-O-Matic site</A></STRONG>.</DIV>
+</DIV></BODY></HTML>

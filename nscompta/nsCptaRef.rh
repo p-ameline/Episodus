@@ -1,0 +1,56 @@
+// nsCptaRef.rh : identificateurs du fichier de ressources
+// dialogue IDD_CLAM
+#define IDC_LIBRE		  101
+#define ID_ELARGIR		201
+
+// dialogue IDD_CLAM_MGMT
+#define IDC_CLAMS		  101
+#define ID_NEW			  102
+
+#define CM_EDIT_ACT     101
+#define CM_NEW_ACT      102
+#define CM_NEW_ACT_FROM 103
+
+// dialogue IDD_CLAM_EDIT
+#define IDC_CLAM_CODE   101
+#define IDC_CLAM_LABEL  102
+#define IDC_CLAM_EXAM   103
+#define IDC_CLAM_PRIX_E 104
+#define IDC_CLAM_PRIX_F 105
+#define IDC_CLAM_FREQ   106
+#define IDC_LOT_SIGLE   107
+
+// dialogue IDD_NGAP_EDIT
+#define IDC_NGAP_CODE   101
+#define IDC_NGAP_LABEL  102
+#define IDC_NGAP_PRIX_E 103
+#define IDC_NGAP_PRIX_F 104
+#define IDC_NGAP_CAT    105
+
+// dialogue IDD_LOT_MGMT#define IDC_LOTS		  101
+#define ID_NEW			  102
+
+#define CM_EDIT_LOT     101
+#define CM_NEW_LOT      102
+#define CM_NEW_LOT_FROM 103
+
+// dialogue IDD_LOT_EDIT
+#define IDC_LOT_LABEL    101
+#define IDC_LOT_LEXIQUE  102
+#define IDC_LOT_EXAM     103
+#define IDC_LOT_DATE     104
+#define IDC_LOT_ACHAT_E  105#define IDC_LOT_ACHAT_F  106
+#define IDC_LOT_VENTE_E  107
+#define IDC_LOT_VENTE_F  108
+#define IDC_LOT_QTE      109#define IDC_LOT_REMAINS  110#define IDC_LOT_ALERT    111
+#define IDC_LOT_STATUS   112
+#define IDC_LOT_NEW      113
+#define IDC_LOT_OPEN     114
+#define IDC_LOT_CLOSE    115
+#define IDC_LOT_SIGLE_A  116
+#define IDC_LOT_SIGLE_V  117
+#define IDC_LOT_BARRE    118
+
+// fin de nsCptaRef.rh
+////////////////////////////////////////////////////
+

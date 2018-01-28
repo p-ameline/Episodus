@@ -1,0 +1,245 @@
+#ifndef __NSBB_DLG_H#define __NSBB_DLG_H
+
+#include <classlib/arrays.h>
+#include <owl/dialog.h>
+#include <owl/tooltip.h>
+
+class NSPatPathoArray ;
+class NSSuper ;
+class Message ;
+
+class BBItem ;
+class BBFilsItem ;
+class NSTransferInfo ;
+class NSControleVector ;
+
+class NSDialog ;
+class NSBBMUEView ;
+class NSToolTip ;
+
+#ifdef _ENTERPRISE_DLL
+  #include "enterpriseLus/nsglobalLus.h"
+#else
+  #include "partage/nsglobal.h"
+#endif
+
+#include "partage\ns_vector.h"
+#include "partage\ns_search.h"
+#include "nsbb\nsExport.h"
+#include "nsbb\nsbb_glo.h"
+
+#ifndef __NSBBSMAL_H
+	class NSSmallBrother;
+#endif
+
+#define BF_DELETE 	BF_CHECKED + 1
+
+struct NSControle ;
+struct NSFonction ;
+struct NSDlgFonction ;
+
+//--------------------------------------------------------------------------
+// Structure qui sert à lier les contrôles à leur homologue BB
+//--------------------------------------------------------------------------
+struct _NSBBCLASSE NSControle : public NSRoot
+{
+	private :
+
+    static long lObjectCount ;
+
+  	string			    _sIdentite ;	        // Code du contrôle
+
+    NSDialog*		    _pNSDialog ;	        // Pointeur sur la boîte de dialogue mère
+    NSBBMUEView*    _pMUEView ;
+
+    NSTransferInfo*	_pTransfert ;	      // Pointeur sur la structure de transfert
+        /*S -filling on setup window; F - filling on focus  */
+    string	        _sFilling ;	        // type du cochage du controle
+    string          _sFillingFilter ;    // element de recherche pour le filling : le filling inclut ce qui est après
+    string          _sFillingStarter ;   // element de départ pour le filling : le filling se fait à partir de cet élément
+    // string          sFillingEndPeriod ; // periode de fin de recherche
+    NSSearchStruct  _searchStruct ;
+    string          _sPathControl ;      // chemin du controle maître associé à une date
+
+    string	        _sHelpText ;	        
+
+    void*			      _pNSCtrl ;	          // Contrôle NSButton, NSCheckBox etc auquel
+                                        // est rattaché le NSControle
+    WNDTYPE				  _iType ;		          // Type du contrôle
+
+    bool            _bGestionMultiple ;
+
+    NSDlgFonction*  _pNSDlgFct ;	        // Fonction de dialogue rattachée
+
+    bool            _bVisible ;
+    bool            _bDisconnected ;
+
+  public :
+
+  	// Constructeurs, Destructeur
+    NSControle(NSContexte* pCtx) ;
+    NSControle(NSContexte* pCtx, BBItem* pBBItem, string sIdentite, string sDlgFct) ;
+    NSControle(const NSControle& src) ;
+    ~NSControle() ;
+
+    bool    canWeClose() ;
+    HWND    getHWND() ;
+
+    // activation du contrôle dans un état donné
+    void    activeControle(int activation, Message* pMessage = 0) ;
+    uint    Transfer(TTransferDirection direction) ;
+    uint    TransferFinal(TTransferDirection direction) ;
+    uint    TempTransfer() ;
+    void    prepareControle() ;
+    void    executeKillFocusBehaviour() ;
+    void    activateParent() ;
+    void    SetFocus() ;
+
+    // Surcharges des opérateurs
+    NSControle&     operator=(const NSControle& src) ;
+    int             operator==(const NSControle& x) ;
+
+    string          getIdentite()                       { return _sIdentite ; }
+    void            setIdentite(string ident)           { _sIdentite = ident ; }
+
+    NSDialog*       getNSDialog()                       { return _pNSDialog ; }
+    void            setNSDialog(NSDialog* pDlg)         { _pNSDialog = pDlg ; }
+
+    NSBBMUEView*    getMUEView()                        { return _pMUEView ; }
+    void            setMUEView(NSBBMUEView* pView)      { _pMUEView = pView ; }
+
+    NSTransferInfo* getTransfert()                      { return _pTransfert ; }
+    void            setTransfert(NSTransferInfo* pTrsf) { _pTransfert = pTrsf ; }
+
+    void*           getControle()                       { return _pNSCtrl ; }
+    void            setControle(void* pCtrl)            { _pNSCtrl = pCtrl ; }
+
+    WNDTYPE         getType()                           { return _iType ; }
+    void            setType(WNDTYPE iTyp)               { _iType = iTyp ; }
+
+    bool            getGestionMultiple()        { return _bGestionMultiple ; }
+    void            setGestionMultiple(bool bg) { _bGestionMultiple = bg ; }
+
+    NSDlgFonction*  getFonction()                       { return _pNSDlgFct ; }
+    void            setFonction(NSDlgFonction* pFct)    { _pNSDlgFct = pFct ; }
+
+    bool            isVisible()                         { return _bVisible ; }
+    void            setVisible(bool bVisib)             { _bVisible = bVisib ; }
+
+    bool            isDisconnected()                    { return _bDisconnected ; }
+    void            setDisconnected(bool bDisc)         { _bDisconnected = bDisc ; }
+
+    string          getHelpText() ;
+    void            setHelpText(string sHT)             { _sHelpText = sHT ; }
+
+    // Fonctions to get objects that are common to NSDialog and NSBBMUEView
+    //
+    BBItem*           getInterfaceElementItem() ;
+    TWindow*          getInterfacePointer() ;
+    NSContexte*       getInterfaceContext() ;
+    NSControleVector* getInterfaceControls() ;
+
+    // Fonction qui permet au NSControle de trouver son NSTransferInfo
+    int         lierTransfert(BBItem* pBBItem) ;
+
+    void        initFromArray(NSPatPathoArray* pPatPathoArray) ;
+
+    string      getFilling()           { return _sFilling ; }
+    string      getFillingFilter()     { return _sFillingFilter ; }
+    // string      getFillingEndPeriod()  { return _sFillingEndPeriod ; }
+    NSSearchStruct* getSearchStruct()  { return &_searchStruct ; }
+    string      getPathControl()       { return _sPathControl ; }
+    void        setFilling(string sFil) ;
+
+    bool        initOnSetupWindow() ;  //filling on setup
+    bool        initOnFocus() ;        //filling on focus
+    bool        initOnTimer() ;        //filling by OB1 over time
+    bool        isToFilling(string str) ;
+
+    string      getPath() ;
+    string      cutPath(string *psPath, string sCutElement = string(""), bool bInclude = true) ;
+    bool        getPathForBlackboard(string* psPathForBB) ;
+    // bool        getEndValidityDate(string* psValidityDate) ;
+
+    bool        isEmpty() ;
+    bool        hasBeenValidated() ;
+
+    static long getNbInstance() { return lObjectCount ; }
+    static void initNbInstance() { lObjectCount = 0 ; }
+};
+
+typedef vector<NSControle*> NSControleVectorCtrl ;
+typedef NSControleVectorCtrl::iterator       iterNSControle ;
+typedef NSControleVectorCtrl::const_iterator iterNSControleConst ;
+
+class _NSBBCLASSE NSControleVector : public NSControleVectorCtrl
+{
+	public :
+
+  	// Constructeurs
+    NSControleVector() : NSControleVectorCtrl() {}
+    NSControleVector(const NSControleVector& rv) ;
+
+    // Destructeur
+    ~NSControleVector() ;
+    NSControleVector& NSControleVector::operator=(const NSControleVector& src) ;
+    void vider() ;
+};
+
+//---------------------------------------------------------------------------
+//  Classe des fonctions d'interface NAUTILUS
+//
+//  Cette classe sert à mettre en place les fonctions qui interviennent au
+//  sein de la boîte de dialogue
+//----------------------------------------------------------------------------
+class _NSBBCLASSE NSDlgFonction : public NSRoot //exportable car utilisée dans KE
+{
+	protected:
+
+		NSSmallBrother* _pBigBoss ;
+
+    NSControle* 	  _pControle ;
+    string			    _sNomFonction ;
+    TModule*		    _pNSResModule ;
+    BBItem* 		    _pBBItem ;
+
+  public:
+
+    BOOL (FAR *_pAdresseFct) (NSDlgFonction far *, NSSmallBrother far*, int) ;
+
+    // Constructeurs
+    NSDlgFonction(NSContexte* pCtx, NSSmallBrother* pBig, BBItem* pBBItem, string sNomFonct = "", NSControle* pCtrl = 0, TModule* pResModule = 0) ;
+    NSDlgFonction(const NSDlgFonction& src) ;
+
+    // Destructeur
+    virtual ~NSDlgFonction() ;
+
+    NSDlgFonction& operator = (const NSDlgFonction& src) ;
+    int            operator == (const NSDlgFonction& x) ;
+
+    int execute(SITUATION_TYPE iParam, HWND hWndFocus = 0, uint key = '\0') ;
+
+    void rafraichitControles() ;
+    bool isFrere(HWND hWndGetFocus) ;
+    bool isFrereAvant(HWND hWndGetFocus) ;
+    bool isFrereApres(HWND hWndGetFocus) ;
+
+    bool containFonction(string sFctName) ;
+
+    NSSmallBrother* getBigBoss()  { return _pBigBoss ; }
+
+    NSControle* 	  getControl()  { return _pControle ; }
+    string			    getFonction() { return _sNomFonction ; }
+    TModule*		    getModule()   { return _pNSResModule ; }
+    BBItem* 		    getItem()     { return _pBBItem ; }
+
+    void 	          setControl(NSControle* pC) { _pControle    = pC ;   }
+    void			      setFonction(string sFct)   { _sNomFonction = sFct ; }
+    void            setModule(TModule* pM)     { _pNSResModule = pM ;   }
+    void            setItem(BBItem* pIt)       { _pBBItem      = pIt ;  }
+};
+
+int NSDlgFct(NSDlgFonction* pNSFct, int iParam) ;
+
+#endif
+

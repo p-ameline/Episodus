@@ -1,0 +1,109 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+<TITLE>EIdProtocolReplyError</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <META name="GENERATOR" content="Doc-O-Matic">
+    <LINK rel="STYLESHEET" href="default.css" type="text/css">
+
+<SCRIPT LANGUAGE="JavaScript1.2" SRC="scripts.js"></SCRIPT>
+</HEAD>
+<BODY CLASS="Element57">
+<TABLE BORDER="0" BGCOLOR="#AACCFF" WIDTH="100%" CELLSPACING="0" CELLPADDING="0">
+<TR><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element1">
+Indy 9</DIV>
+</TD><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element2">
+<A HREF="content.html" CLASS="Element59">Content</A> | <A HREF="idx.html" CLASS="Element59">Index</A> | <A HREF="symref.html" CLASS="Element59">Reference</A></DIV>
+</TD></TR></TABLE><DIV CLASS="Element58">
+<DIV CLASS="Element5">
+EIdProtocolReplyError</DIV>
+<DIV CLASS="Element7">
+<A HREF="009242.html" CLASS="Element59">Hierarchy</A>, <A HREF="009243.html" CLASS="Element59">Properties</A>, <A HREF="009244.html" CLASS="Element59">Methods</A>, <A HREF="009245.html" CLASS="Element59">See Also</A>, <A HREF="002183.html" CLASS="Element59">Unit: IdException</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Exception type for protocol reply errors.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12">EIdProtocolReplyError = <STRONG>class</STRONG>(<A HREF="000375.html" CLASS="Element59">EIdException</A>)</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Unit</DIV>
+<DIV CLASS="Element69">
+<A HREF="002183.html" CLASS="Element59">IdException</A></DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+EIdProtocolReplyError is an <A HREF="000375.html" CLASS="Element59">EIdException</A> descendant tha represents the exception type raised for protocol replies that represent an error condition. EIdProtocolReplyError is also used as the ancestor for more specific protocol reply errors, like <A HREF="000385.html" CLASS="Element59">EIdHTTPProtocolException</A> and <A HREF="000414.html" CLASS="Element59">EIdNNTPConnectionRefused</A>.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0001">EIdProtocolReplyError.ReplyErrorCode</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="000441.html" CLASS="Element59">EIdProtocolReplyError</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Error code for the exception.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> ReplyErrorCode: Integer;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+ReplyErrorCode is the error code for the exception and can be used for testing selectively to certain errors in your program.<P CLASS="Element10">
+Some protocols such as IMAP4 and POP3 do not use numerical error number codes. In such cases, we define constant values in the classes unit, and override the GetResponse method to parse those replies and return the constants. When this is done, you use the constants as if they were numerical values. Examples are the following:<P CLASS="Element10">
+<UL>
+<LI><A HREF="007617.html" CLASS="Element59">TIdPOP3</A> -<P CLASS="Element10">
+<LI><A HREF="008477.html" CLASS="Element59">wsOk</A> - the operation succeeded<P CLASS="Element10">
+<LI><A HREF="008475.html" CLASS="Element59">wsErr</A> - the operation failed</UL>
+ <A HREF="007405.html" CLASS="Element59">TIdIMAP4</A><P CLASS="Element10">
+<UL>
+<LI><A HREF="008477.html" CLASS="Element59">wsOk</A> - the operation succeeded<P CLASS="Element10">
+<LI><A HREF="008476.html" CLASS="Element59">wsNo</A> - the operation failed<P CLASS="Element10">
+<LI><A HREF="008473.html" CLASS="Element59">wsBad</A> - bad command</UL>
+</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0000">EIdProtocolReplyError.CreateError</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="000441.html" CLASS="Element59">EIdProtocolReplyError</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Constructor for the exception.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>constructor</STRONG> CreateError(<STRONG>const</STRONG> AErrCode: Integer; <STRONG>const</STRONG> AReplyMessage: <STRONG>string</STRONG>); <STRONG>virtual</STRONG>; <STRONG>reintroduce</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+anErrCode</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Error number form the peer.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+asReplyMessage</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Error reply from the peer.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+CreateError is the constructor for the exception, and creates a <A HREF="000441.html" CLASS="Element59">EIdProtocolReplyError</A> exception which takes the following parameters:<P CLASS="Element10">
+<UL>
+<LI>asReplyMessage - text reply from a peer.<P CLASS="Element10">
+<LI>anErrCode - error code from the peer.</UL>
+</DIV>
+</DIV>
+<DIV CLASS="Element62">
+<HR>Created with Doc-O-Matic 2 donated to <STRONG><A HREF="http://www.delphi-jedi.org">Project JEDI</A></STRONG>. Commercial license available from the <STRONG><A HREF="http://www.doc-o-matic.com">Doc-O-Matic site</A></STRONG>.</DIV>
+</DIV></BODY></HTML>

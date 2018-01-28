@@ -1,0 +1,71 @@
+//
+// NsEpisod.rh
+//
+
+// Dialogue IDD_CAPTURE
+#define IDC_CAPTCTXBOX	101
+
+// Dialogues CLASSIFY_??
+#define IDC_CODES_LIST	101
+#define IDC_CODES_MORE	102
+#define IDC_CODES_LEVEL	103
+#define IDC_CODES_LESS	104
+#define IDC_BWCCGROUP1	105
+
+// Dialogue CLASSIFY_C2
+#define IDC_CISP_A	    201
+#define IDC_CISP_B	    202
+#define IDC_CISP_D	    203
+#define IDC_CISP_F	    204
+#define IDC_CISP_H	    205
+#define IDC_CISP_K	    206
+#define IDC_CISP_L	    207
+#define IDC_CISP_N	    208
+#define IDC_CISP_P	    209
+#define IDC_CISP_R	    210
+#define IDC_CISP_S	    211
+#define IDC_CISP_T	    212
+#define IDC_CISP_U	    213
+#define IDC_CISP_W	    214
+#define IDC_CISP_X	    215
+#define IDC_CISP_Y	    216
+#define IDC_CISP_Z	    217
+
+#define IDC_CISP_1	    301
+#define IDC_CISP_2	    302
+#define IDC_CISP_3	    303
+
+// Dialogue CLASSIFY_MA
+#define IDC_CIM_I	    201
+#define IDC_CIM_II	    202
+#define IDC_CIM_III     203
+#define IDC_CIM_IV	    204
+#define IDC_CIM_V	    205
+#define IDC_CIM_VI	    206
+#define IDC_CIM_VII	    207
+#define IDC_CIM_VIII	208
+#define IDC_CIM_IX	    209
+#define IDC_CIM_X	    210
+#define IDC_CIM_XI	    211
+#define IDC_CIM_XII	    212
+#define IDC_CIM_XIII	213
+#define IDC_CIM_XIV	    214
+#define IDC_CIM_XV	    215
+#define IDC_CIM_XVI	    216
+#define IDC_CIM_XVII	217
+#define IDC_CIM_XVIII1	218
+#define IDC_CIM_XVIII2	219
+#define IDC_CIM_XVIII3	220
+#define IDC_CIM_XIX	    221
+
+// Dialogue IDD_PROMET_PRESEND
+#define IDC_PROPAT_DATEN    101
+#define IDC_PROPAT_ZIP	    102
+#define IDC_PROPAT_GR1	    201
+#define IDC_PROPAT_C	    202
+#define IDC_PROPAT_V	    203
+#define IDC_PROPAT_GR2	    301
+#define IDC_PROPAT_RV	    302
+#define IDC_PROPAT_NRV	    303
+#define IDC_PROPAT_URG	    304
+

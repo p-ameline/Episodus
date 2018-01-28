@@ -1,0 +1,721 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+<TITLE>TIdTCPServer</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <META name="GENERATOR" content="Doc-O-Matic">
+    <LINK rel="STYLESHEET" href="default.css" type="text/css">
+
+<SCRIPT LANGUAGE="JavaScript1.2" SRC="scripts.js"></SCRIPT>
+</HEAD>
+<BODY CLASS="Element57">
+<TABLE BORDER="0" BGCOLOR="#AACCFF" WIDTH="100%" CELLSPACING="0" CELLPADDING="0">
+<TR><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element1">
+Indy 9</DIV>
+</TD><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element2">
+<A HREF="content.html" CLASS="Element59">Content</A> | <A HREF="idx.html" CLASS="Element59">Index</A> | <A HREF="symref.html" CLASS="Element59">Reference</A></DIV>
+</TD></TR></TABLE><DIV CLASS="Element58">
+<DIV CLASS="Element5">
+TIdTCPServer</DIV>
+<DIV CLASS="Element7">
+<A HREF="014158.html" CLASS="Element59">Hierarchy</A>, <A HREF="014159.html" CLASS="Element59">Properties</A>, <A HREF="014160.html" CLASS="Element59">Methods</A>, <A HREF="014161.html" CLASS="Element59">Events</A>, <A HREF="014162.html" CLASS="Element59">See Also</A>, <A HREF="002919.html" CLASS="Element59">Unit: IdTCPServer</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Implements a multi-threaded TCP Server.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12">TIdTCPServer = <STRONG>class</STRONG>(<A HREF="007246.html" CLASS="Element59">TIdComponent</A>)</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Unit</DIV>
+<DIV CLASS="Element69">
+<A HREF="002919.html" CLASS="Element59">IdTCPServer</A></DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+TIdTCPServer encapsulates a complete, multi-threaded TCP (Transmission Control Protocol) server. TIdTCPServer uses one or more threads to <A HREF="003177.html" CLASS="Element59">listen</A> for client connections, and in conjunction with a <A HREF="007853.html" CLASS="Element59">TIdThreadMgr</A>, allocates a separate thread to handle each client connection to the server. A list of active <A HREF="007831.html#001D" CLASS="Element59">ThreadClass</A> instances are maintained in <A HREF="007831.html#001F" CLASS="Element59">Threads</A>.<P CLASS="Element10">
+TIdTCPServer provides options that allow configuration of the server listener threads, including:<P CLASS="Element10">
+<UL>
+<LI><A HREF="007831.html#0005" CLASS="Element59">DefaultPort</A><P CLASS="Element10">
+<LI><A HREF="007831.html#000C" CLASS="Element59">ListenQueue</A><P CLASS="Element10">
+<LI><A HREF="007831.html#0016" CLASS="Element59">OnListenException</A><P CLASS="Element10">
+<LI><A HREF="007831.html#001B" CLASS="Element59">ReuseSocket</A><P CLASS="Element10">
+<LI><A HREF="007831.html#000F" CLASS="Element59">MaxConnections</A><P CLASS="Element10">
+<LI><A HREF="007831.html#000E" CLASS="Element59">MaxConnectionReply</A></UL>
+<P CLASS="Element10">
+TIdTCPServer also provides properties and methods to control protocol specific options, including:<P CLASS="Element10">
+<UL>
+<LI><A HREF="007831.html#0007" CLASS="Element59">Greeting</A><P CLASS="Element10">
+<LI><A HREF="007831.html#0018" CLASS="Element59">ReplyExceptionCode</A><P CLASS="Element10">
+<LI><A HREF="007831.html#001A" CLASS="Element59">ReplyUnknownCommand</A></UL>
+<P CLASS="Element10">
+The TIdTCPServer architecture also implements two mechanisms for servicing peer connections. The first method uses event handlers that execute in the context of the threaded peer connection. The server implementation can assign procedures to the event handlers to respond to the following events:<P CLASS="Element10">
+<UL>
+<LI><A HREF="007831.html#0012" CLASS="Element59">OnConnect</A><P CLASS="Element10">
+<LI><A HREF="007831.html#0015" CLASS="Element59">OnExecute</A><P CLASS="Element10">
+<LI><A HREF="007831.html#0013" CLASS="Element59">OnDisconnect</A><P CLASS="Element10">
+<LI><A HREF="007831.html#0014" CLASS="Element59">OnException</A></UL>
+<P CLASS="Element10">
+The other method uses a collection of <A HREF="007244.html" CLASS="Element59">TIdCommandHandler</A> objects to recognizing valid server commands, and provides methods and properties needed to handle parameters, perform actions, and formulate error and success responses. The properties and method realted to CommandHandler usgae include the following:<P CLASS="Element10">
+<UL>
+<LI><A HREF="007831.html#0002" CLASS="Element59">CommandHandlers</A><P CLASS="Element10">
+<LI><A HREF="007831.html#0003" CLASS="Element59">CommandHandlersEnabled</A><P CLASS="Element10">
+<LI><A HREF="007831.html#0017" CLASS="Element59">OnNoCommandHandler</A><P CLASS="Element10">
+<LI><A HREF="007831.html#0010" CLASS="Element59">OnAfterCommandHandler</A><P CLASS="Element10">
+<LI><A HREF="007831.html#0011" CLASS="Element59">OnBeforeCommandHandler</A></UL>
+<P CLASS="Element10">
+Server implementors can choose between using server-based event handlers and command handlers to provide finer control over the operation of the server and protocol.<P CLASS="Element10">
+TIdTCPServer can be used as a base class to create custom TCP server descendants that support specific protocols. Many of the Indy server components, such as <A HREF="007228.html" CLASS="Element59">TIdChargenServer</A>, <A HREF="007278.html" CLASS="Element59">TIdDayTimeServer</A>, <A HREF="007294.html" CLASS="Element59">TIdDICTServer</A>, TIdEchoServer, <A HREF="007325.html" CLASS="Element59">TIdFingerServer</A>, <A HREF="007356.html" CLASS="Element59">TIdGopherServer</A>, <A HREF="007374.html" CLASS="Element59">TIdHostNameServer</A>, <A HREF="007392.html" CLASS="Element59">TIdHTTPServer</A>, <A HREF="007493.html" CLASS="Element59">TIdIRCServer</A>, <A HREF="007598.html" CLASS="Element59">TIdNNTPServer</A>, TIdQUOTDServer, <A HREF="007842.html" CLASS="Element59">TIdTelnetServer</A>, and TIdWhoisServer, are descendants of the TIdTCPServer component.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0000">TIdTCPServer.Active</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007831.html" CLASS="Element59">TIdTCPServer</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Specifies that the server is running and listening for connections.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> Active: Boolean;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Active is a <STRONG>Boolean</STRONG> property that indicates the current state of the <A HREF="007831.html" CLASS="Element59">TIdTCPServer</A>.<P CLASS="Element10">
+When Active is <STRONG>True</STRONG>, the server will <A HREF="003177.html" CLASS="Element59">listen</A> for client connections, allocate threads and <A HREF="007071.html" CLASS="Element59">socket</A> handles for connections, and respond to thread execution in the manner prescribed by the <A HREF="007831.html" CLASS="Element59">TIdTCPServer</A> or descendant. When Active is <STRONG>False</STRONG>, connections and <A HREF="007071.html" CLASS="Element59">socket</A> handles will be closed, peer threads will be terminated and freed, the thread manager will be released, and the listener thread will be terminated and freed.<P CLASS="Element10">
+Active uses the protected write procedure SetActive to implement changes in the value of the property.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0001">TIdTCPServer.Bindings</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007831.html" CLASS="Element59">TIdTCPServer</A>, <A HREF="014163.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Container for <A HREF="007071.html" CLASS="Element59">socket</A> handles allocated by the server.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> Bindings: <A HREF="007714.html" CLASS="Element59">TIdSocketHandles</A>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Bindings is a <A HREF="007714.html" CLASS="Element59">TIdSocketHandles</A> property and a collection of <A HREF="007713.html" CLASS="Element59">TIdSocketHandle</A> instances. Bindings provides the <A HREF="007831.html#0005" CLASS="Element59">DefaultPort</A> number for the TCP server and is used by the <A HREF="007507.html" CLASS="Element59">TIdListenerThread</A> to gain access to <A HREF="007071.html" CLASS="Element59">socket</A> handles and low-level access methods provided by the TCP/IP protocol stack.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0002">TIdTCPServer.CommandHandlers</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007831.html" CLASS="Element59">TIdTCPServer</A>, <A HREF="014164.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Container for command handlers used for the server.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> CommandHandlers: <A HREF="007245.html" CLASS="Element59">TIdCommandHandlers</A>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+CommandHandlers is a <A HREF="007245.html" CLASS="Element59">TIdCommandHandlers</A> property that is a container for <A HREF="007244.html" CLASS="Element59">TIdCommandHandler</A> instances that identify commands, replies, and actions for the server. CommandHandlers is used when the thread peer connection is executed to examine and respond to commands from the peer connection. <A HREF="007831.html#0003" CLASS="Element59">CommandHandlersEnabled</A> must be True to allow use of the CommandHandlers for the server.<P CLASS="Element10">
+Use <A HREF="007831.html#0015" CLASS="Element59">OnExecute</A> to provide alternate event handling for the execution of peer threads.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0003">TIdTCPServer.CommandHandlersEnabled</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007831.html" CLASS="Element59">TIdTCPServer</A>, <A HREF="014165.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Indicates if <A HREF="007831.html#0002" CLASS="Element59">CommandHandlers</A> are used during peer thread execution.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> CommandHandlersEnabled: boolean;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+CommandHandlersEnabled is a Boolean property that indicates if <A HREF="007831.html#0002" CLASS="Element59">CommandHandlers</A> are used during execution of peer thread connections. When CommandHandlersEnabled is True, <A HREF="007831.html#0002" CLASS="Element59">CommandHandlers</A> should contain valid <A HREF="007244.html" CLASS="Element59">TIdCommandHandler</A> instances to allow responding to commands received from the peer connection.<P CLASS="Element10">
+Use <A HREF="007831.html#0015" CLASS="Element59">OnExecute</A>, when CommandHandlersEnabled is False, to provide alternate event handling for the execution of peer threads.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0005">TIdTCPServer.DefaultPort</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007831.html" CLASS="Element59">TIdTCPServer</A>, <A HREF="014166.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Identifies the default port number for new connections.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> DefaultPort: integer;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+DefaultPort is an <STRONG>Integer</STRONG> property that identifies the port number used to <A HREF="003177.html" CLASS="Element59">listen</A> for new client connections. The value of DefaultPort is read from and written to Bindings.DefaultPort.<P CLASS="Element10">
+<A HREF="007831.html" CLASS="Element59">TIdTCPServer</A> uses the DefaultPort number to <A HREF="000175.html" CLASS="Element59">bind</A> allocated sockets handles when the <A HREF="007831.html#0000" CLASS="Element59">Active</A> property to set to <STRONG>True</STRONG>.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0007">TIdTCPServer.Greeting</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007831.html" CLASS="Element59">TIdTCPServer</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Banner message sent after accepting threaded client connections.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> Greeting: <A HREF="007663.html" CLASS="Element59">TIdRFCReply</A>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Greeting is a <A HREF="007663.html" CLASS="Element59">TIdRFCReply</A> property that contains the banner message sent to a peer when the threaded client connection has been accepted by the listener thread. Greeting is written to the client just prior to triggering the <A HREF="007831.html#0012" CLASS="Element59">OnConnect</A> event and starting execution of the <A HREF="007613.html" CLASS="Element59">TIdPeerThread</A>.<P CLASS="Element10">
+Greeting is initialized in the <A HREF="007831.html#0004" CLASS="Element59">Create</A> constructor, and freed in <A HREF="007831.html#0006" CLASS="Element59">Destroy</A>.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0008">TIdTCPServer.ImplicitIOHandler</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007831.html" CLASS="Element59">TIdTCPServer</A>, <A HREF="014167.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Indicates if the IO handler was created when the server became active.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> ImplicitIOHandler: Boolean;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Return Value</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Boolean - True when created during activation.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+ImplicitIOHandler is a read-only Boolean property that indicates if the <A HREF="007831.html#000B" CLASS="Element59">IOHandler</A> for the server was created as as result of the server becoming <A HREF="007831.html#0000" CLASS="Element59">Active</A>. ImplicitIOHandler will contain True when an object instance is assigned during activation of the listening thread for the server. ImplicitIOHandler will contain False when the server <A HREF="007831.html#000B" CLASS="Element59">IOHandler</A> has been expressedly assigned by the application.<P CLASS="Element10">
+ImplicitIOHandler is used in the <A HREF="007831.html#0006" CLASS="Element59">Destroy</A> destructor to determine if the object instance must free the resources allocated in server <A HREF="007831.html#000B" CLASS="Element59">IOHandler</A> prior to destruction.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0009">TIdTCPServer.ImplicitThreadMgr</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007831.html" CLASS="Element59">TIdTCPServer</A>, <A HREF="014168.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Indicates if the thread manager was created when the server became active.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> ImplicitThreadMgr: Boolean;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Return Value</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Boolean - True when created during activation.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+ImplicitThreadMgr is a read-only Boolean property that indicates if <A HREF="007831.html#001E" CLASS="Element59">ThreadMgr</A> was created as as result of the server becoming <A HREF="007831.html#0000" CLASS="Element59">Active</A>. ImplicitThreadMgr will contain True when an object instance is assigned during creation and activation of the listening thread for the server. ImplicitThreadMgr will contain False when the <A HREF="007831.html#001E" CLASS="Element59">ThreadMgr</A> has been expressedly assigned by the application.<P CLASS="Element10">
+ImplicitThreadMgr is also used when the serve becomes inactive to determine if the object instance must free the resources allocated in <A HREF="007831.html#001E" CLASS="Element59">ThreadMgr</A> prior to stopping the server.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="000A">TIdTCPServer.Intercept</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007831.html" CLASS="Element59">TIdTCPServer</A>, <A HREF="014169.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Identifies the <A HREF="007071.html" CLASS="Element59">socket</A> data handler.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> Intercept: <A HREF="007675.html" CLASS="Element59">TIdServerIntercept</A>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Intercept is a <A HREF="007675.html" CLASS="Element59">TIdServerIntercept</A> property that implements support for detecting when data is sent or data is received using a <A HREF="007071.html" CLASS="Element59">socket</A> connection. Intercept provides an extensible mechanism to manipulate the <A HREF="007071.html" CLASS="Element59">socket</A> connection or the data sent and received over the connection prior to use by a client.<P CLASS="Element10">
+Intercept allows a developer to create TIdIntercept descendants to encrypt and decrypt data or to compress and decompress messages. One common use of TIdIntercept is to provide support for the Secure Socket Layer (SSL) protocol, using a <A HREF="007676.html" CLASS="Element59">TIdServerInterceptOpenSSL</A> instance, in <A HREF="007831.html" CLASS="Element59">TIdTCPServer</A> and descendants.<P CLASS="Element10">
+Intercept is used by <A HREF="007507.html" CLASS="Element59">TIdListenerThread</A> to insure that the peer <A HREF="007832.html" CLASS="Element59">TIdTCPServerConnection</A> receives an appropriate <A HREF="007071.html" CLASS="Element59">socket</A> handle binding from Intercept.Accept. The peer connection should receive a <A HREF="007248.html" CLASS="Element59">TIdConnectionIntercept</A> descendant appropriate to the <A HREF="007675.html" CLASS="Element59">TIdServerIntercept</A> that accepts the connection, or the <A HREF="007071.html" CLASS="Element59">socket</A> connection will not be able to communicate properly.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="000B">TIdTCPServer.IOHandler</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007831.html" CLASS="Element59">TIdTCPServer</A>, <A HREF="014170.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Represents the IOHandler used by the listener thread for the server.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> IOHandler: <A HREF="007685.html" CLASS="Element59">TIdServerIOHandler</A>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+IOHandler is a <A HREF="007685.html" CLASS="Element59">TIdServerIOHandler</A> property that represents the input / output handler used by listener threads that <A HREF="000027.html" CLASS="Element59">accept</A> client connections for the server. IOHandler will get an instance of <A HREF="007695.html" CLASS="Element59">TIdServerIOHandlerSocket</A> assigned to the property when the server becomes <A HREF="007831.html#0000" CLASS="Element59">Active</A>, if another class instance has not already been assigned. Applications can assign another <A HREF="007685.html" CLASS="Element59">TIdServerIOHandler</A> descendant to the property prior to setting <A HREF="007831.html#0000" CLASS="Element59">Active</A> to True.<P CLASS="Element10">
+<A HREF="007507.html" CLASS="Element59">TIdListenerThread</A> uses the IOHandler for the server when the listener thread is executed.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="000C">TIdTCPServer.ListenQueue</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007831.html" CLASS="Element59">TIdTCPServer</A>, <A HREF="014171.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Inicates the mximum number of unresolved connection attempts allowed.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> ListenQueue: integer;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+ListenQueue is an Integer property that indicates the maximum number of unresolved connection attempts allowed for listener threads before exception is raised. ListenQueue is used as an argument when <A HREF="007071.html" CLASS="Element59">socket</A> descriptors for ListenerThreads are during created during server activation.<P CLASS="Element10">
+Use <A HREF="007831.html#0016" CLASS="Element59">OnListenException</A> to provide an event handler for notifications of exceptions raised when ListenQueue is exceeded.<P CLASS="Element10">
+The default value for ListenQueue is <A HREF="002274.html" CLASS="Element59">IdListenQueueDefault</A> as assigned in the <A HREF="007831.html#0004" CLASS="Element59">Create</A> constructor.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="000E">TIdTCPServer.MaxConnectionReply</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007831.html" CLASS="Element59">TIdTCPServer</A>, <A HREF="014172.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Represents the message used when peer connections exceed their limit.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> MaxConnectionReply: <A HREF="007663.html" CLASS="Element59">TIdRFCReply</A>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+MaxConnectionReply is a <A HREF="007663.html" CLASS="Element59">TIdRFCReply</A> property that represents the RFC message response to use when the number of peer connections to the server exceeds <A HREF="007831.html#000F" CLASS="Element59">MaxConnections</A>. MaxConnectionReply is used when a <A HREF="007507.html" CLASS="Element59">TIdListenerThread</A> cannot <A HREF="000027.html" CLASS="Element59">accept</A> a new connection due to the condition. The generated reply from MaxConnectionReply is written to the peer connection, and the peer is Disconnected.<P CLASS="Element10">
+Use <A HREF="007831.html#000F" CLASS="Element59">MaxConnections</A> to establish the connection limit for the server implementation.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="000F">TIdTCPServer.MaxConnections</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007831.html" CLASS="Element59">TIdTCPServer</A>, <A HREF="014173.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Indicates the maximum numer of peer connections allowed for the server.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> MaxConnections: Integer;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+MaxConnections is an Integer property that indicates the maximum number of simultaneous peer connections allowed for the server implementation. MaxConnections can be used to insure that a pre-determined memory or bandwidth threshold is not exceeded. When MaxConnection is 0 (zero), the server does not impose a limit on the maximum number of client connections.<P CLASS="Element10">
+MaxConnections is used when a <A HREF="007507.html" CLASS="Element59">TIdListenerThread</A> for the server detects a new connection request. If the MaxConnections limit has been exceeed, the <A HREF="007831.html#000E" CLASS="Element59">MaxConnectionReply</A> message is written to the peer connection and the <A HREF="007071.html" CLASS="Element59">socket</A> is Disconnected.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0018">TIdTCPServer.ReplyExceptionCode</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007831.html" CLASS="Element59">TIdTCPServer</A>, <A HREF="014174.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Specifies the numeric result code used after an exception.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> ReplyExceptionCode: Integer;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+ReplyExceptionCode is an Integer property that specifies the numeric result code used when an exception is raised in the server context during dispatch and execution of a command handler in IdCommandHandler.Check. An exception may also use the ReplyExceptionCode in a command handler, if the exception occurs during execution of the associated <A HREF="007242.html" CLASS="Element59">TIdCommand</A>.<P CLASS="Element10">
+ReplyExceptionCode and the text from the exception message are written to the client connection when the exception is trapped.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0019">TIdTCPServer.ReplyTexts</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007831.html" CLASS="Element59">TIdTCPServer</A>, <A HREF="014175.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Represents protocol responses used in the server implementation.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> ReplyTexts: <A HREF="007662.html" CLASS="Element59">TIdRFCReplies</A>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+ReplyTexts is a <A HREF="007662.html" CLASS="Element59">TIdRFCReplies</A> property that represents the RFC-compliant protocol responses used in the implementation of <A HREF="007831.html" CLASS="Element59">TIdTCPServer</A> and descendant proptocol servers. ReplyTexts is used extensively in <A HREF="007598.html" CLASS="Element59">TIdNNTPServer</A>.<P CLASS="Element10">
+ReplyTexts is initializecd in <A HREF="007831.html#0004" CLASS="Element59">Create</A>, and freed in <A HREF="007831.html#0006" CLASS="Element59">Destroy</A>. ReplyTexts is used to generate the <A HREF="007831.html#0007" CLASS="Element59">TIdTCPServer.Greeting</A> message senst when a threaded client is connected to the server. ReplyTexts is also used in <A HREF="007242.html#0008" CLASS="Element59">TIdCommand.SendReply</A> to update the <A HREF="007242.html#0006" CLASS="Element59">TIdCommand.Reply</A> descriptive text written in response to a <A HREF="007244.html" CLASS="Element59">TIdCommandHandler</A> used in the server implementation.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="001A">TIdTCPServer.ReplyUnknownCommand</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007831.html" CLASS="Element59">TIdTCPServer</A>, <A HREF="014176.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Represents an RFC response message used for an unkown command.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> ReplyUnknownCommand: <A HREF="007663.html" CLASS="Element59">TIdRFCReply</A>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+ReplyUnknownCommand is a <A HREF="007663.html" CLASS="Element59">TIdRFCReply</A> property that represents the RFC response to use when an unknown command is received from a client connection. The <A HREF="007831.html#0017" CLASS="Element59">OnNoCommandHandler</A> event handler, when assigned, takes precendence over use of ReplyUnknownCommand.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="001B">TIdTCPServer.ReuseSocket</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007831.html" CLASS="Element59">TIdTCPServer</A>, <A HREF="014177.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Indicates reuse of local addresses for listener threads.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> ReuseSocket: <A HREF="007658.html" CLASS="Element59">TIdReuseSocket</A>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+ReuseSocket is a <A HREF="007658.html" CLASS="Element59">TIdReuseSocket</A> property that indicates if <A HREF="007071.html" CLASS="Element59">socket</A> IP addresses and port numbers can be reused for <A HREF="007507.html" CLASS="Element59">TIdListenerThread</A> instances used by the server. ReuseSocket is used as an option for SetSockOpt when allocating the listener thread(s) after the server becomes <A HREF="007831.html#0000" CLASS="Element59">Active</A>.<P CLASS="Element10">
+The default value for ReuseSocket is rsOSDependent, as assigned in the <A HREF="007831.html#0004" CLASS="Element59">Create</A> constructor.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="001C">TIdTCPServer.TerminateWaitTime</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007831.html" CLASS="Element59">TIdTCPServer</A>, <A HREF="014178.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Specifies the time a server should wait for terminating threads.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> TerminateWaitTime: Integer;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+TerminateWaitTime is an <STRONG>Integer</STRONG> property that identifies the total number of milliseconds that the server should wait, in TerminateAllThreads, for all threads to complete termination. TerminateWaitTime is an aggregate delay time, and allows TerminateAllThreads to monitor the <A HREF="007831.html#001F" CLASS="Element59">Threads</A> list every <STRONG>250ms</STRONG> until TerminateWaitTime has elapsed.<P CLASS="Element10">
+The default value for TerminateWaitTime is <STRONG>5000</STRONG> (<STRONG>5</STRONG> seconds). Use a larger value for TerminateWaitTime when the server handles a large number of peer connection threads, or when OnDisconnected event handling for the peer connection involves time intensive operations.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="001D">TIdTCPServer.ThreadClass</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007831.html" CLASS="Element59">TIdTCPServer</A>, <A HREF="014179.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Specified the thread class type for the thread manager.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> ThreadClass: <A HREF="007850.html" CLASS="Element59">TIdThreadClass</A>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+ThreadClass is a <A HREF="007850.html" CLASS="Element59">TIdThreadClass</A> property used to identify the class type used by <A HREF="007831.html#001E" CLASS="Element59">ThreadMgr</A> when creating new peer threads for the TCP server. The default ThreadClass for <A HREF="007831.html" CLASS="Element59">TIdTCPServer</A> is <A HREF="007613.html" CLASS="Element59">TIdPeerThread</A> as asssigned in the <A HREF="007831.html#0004" CLASS="Element59">Create</A> constructor.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="001E">TIdTCPServer.ThreadMgr</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007831.html" CLASS="Element59">TIdTCPServer</A>, <A HREF="014180.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Identifies the thread manager used by the server.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> ThreadMgr: <A HREF="007853.html" CLASS="Element59">TIdThreadMgr</A>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+ThreadMgr is a <A HREF="007853.html" CLASS="Element59">TIdThreadMgr</A> property that provides an extensible mechanism for thread management.<P CLASS="Element10">
+ThreadMgr can <A HREF="000027.html" CLASS="Element59">accept</A> an explicit reference to one of the <A HREF="007853.html" CLASS="Element59">TIdThreadMgr</A> descendants, such as <A HREF="007854.html" CLASS="Element59">TIdThreadMgrDefault</A> or TIdThreadMgrPooled. ThreadMgr will be implicitly created, using a <A HREF="007854.html" CLASS="Element59">TIdThreadMgrDefault</A> instance, if no other thread manager is assigned when <A HREF="007831.html#0000" CLASS="Element59">Active</A> is set to True.<P CLASS="Element10">
+ThreadMgr is used by TIdListenerThread.Run get the <A HREF="007613.html" CLASS="Element59">TIdPeerThread</A> that will act as the thread of execution for new client connections. ThreadMgr uses <A HREF="007831.html#001D" CLASS="Element59">ThreadClass</A> to determine the class instance returned to the listener thread.<P CLASS="Element10">
+ThreadMgr is used by TIdPeerThread.AfterRun to perform the <A HREF="007853.html#0005" CLASS="Element59">TIdThreadMgr.ReleaseThread</A> method.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="001F">TIdTCPServer.Threads</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007831.html" CLASS="Element59">TIdTCPServer</A>, <A HREF="014181.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Container for peer threads connecting to the server.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> Threads: TThreadList;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Threads is a read-only <STRONG>TThreadList</STRONG> property that acts as a container for <A HREF="007613.html" CLASS="Element59">TIdPeerThread</A> items created in the listener thread.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0004">TIdTCPServer.Create</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007831.html" CLASS="Element59">TIdTCPServer</A>, <A HREF="014182.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Create is the constructor for <A HREF="007831.html" CLASS="Element59">TIdTCPServer</A>.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>constructor</STRONG> Create(AOwner: TComponent); <STRONG>override</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+AOwner: TComponent</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Owner of the instance.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Create relies on the inherited Create method, and allocates object instances used in the folowing properties:<P CLASS="Element10">
+<UL>
+<LI><A HREF="007831.html#0007" CLASS="Element59">Greeting</A><P CLASS="Element10">
+<LI><A HREF="007831.html#000E" CLASS="Element59">MaxConnectionReply</A><P CLASS="Element10">
+<LI><A HREF="007831.html#001F" CLASS="Element59">Threads</A><P CLASS="Element10">
+<LI><A HREF="007831.html#001D" CLASS="Element59">ThreadClass</A> (<A HREF="007613.html" CLASS="Element59">TIdPeerThread</A>)<P CLASS="Element10">
+<LI><A HREF="007831.html#001A" CLASS="Element59">ReplyUnknownCommand</A></UL>
+<P CLASS="Element10">
+Create also sets the default values for the following properties:<P CLASS="Element10">
+<UL>
+<LI><A HREF="007831.html#0003" CLASS="Element59">CommandHandlersEnabled</A> - <A HREF="002140.html" CLASS="Element59">IdCommandHandlersEnabledDefault</A><P CLASS="Element10">
+<LI><A HREF="007831.html#001C" CLASS="Element59">TerminateWaitTime</A> - 5000<P CLASS="Element10">
+<LI><A HREF="007831.html#000C" CLASS="Element59">ListenQueue</A> - <A HREF="002274.html" CLASS="Element59">IdListenQueueDefault</A></UL>
+</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0006">TIdTCPServer.Destroy</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007831.html" CLASS="Element59">TIdTCPServer</A>, <A HREF="014183.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Destructor for the class instance.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>destructor</STRONG> Destroy; <STRONG>override</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Destroy is the destructor for the <A HREF="007831.html" CLASS="Element59">TIdTCPServer</A> instance, and sets <A HREF="007831.html#0000" CLASS="Element59">Active</A> to False. Destroy frees any <A HREF="007831.html#0001" CLASS="Element59">Bindings</A> allocated for listener threads or peer connections. Destroy frees other resources allocated in the <A HREF="007831.html#0004" CLASS="Element59">Create</A> constructor prior to calling the inherited Destroy method.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="000D">TIdTCPServer.Loaded</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007831.html" CLASS="Element59">TIdTCPServer</A>, <A HREF="014184.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Specifies that the component has been completely loaded from the component stream.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>procedure</STRONG> Loaded; <STRONG>override</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Loaded allows the <A HREF="007831.html" CLASS="Element59">TIdTCPServer</A> to initialize itself after all its parts have been loaded using Delphi component streaming conventions, including a call to the inherited Loaded method.<P CLASS="Element10">
+Loaded intercepts any change to the <A HREF="007831.html#0000" CLASS="Element59">Active</A> property until all other properties and sibling components have been read from the component stream.<P CLASS="Element10">
+If the <A HREF="007831.html" CLASS="Element59">TIdTCPServer</A> should be active, Loaded then sets the <A HREF="007831.html#0000" CLASS="Element59">Active</A> property to True to force initialization of Bingings and <A HREF="007831.html#001E" CLASS="Element59">ThreadMgr</A> properties, as well as the TIdTListenerThread used by <A HREF="007831.html" CLASS="Element59">TIdTCPServer</A>.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0010">TIdTCPServer.OnAfterCommandHandler</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007831.html" CLASS="Element59">TIdTCPServer</A>, <A HREF="014185.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Represents the event handler signalled after CommandHandler usgage.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> OnAfterCommandHandler: <A HREF="007199.html" CLASS="Element59">TIdAfterCommandHandlerEvent</A>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+OnAfterCommandHandler is a <A HREF="007199.html" CLASS="Element59">TIdAfterCommandHandlerEvent</A> property that represents the event handler signalled after <A HREF="007831.html#0002" CLASS="Element59">CommandHandlers</A> have been used to service an executing peer thread connection. <STRONG>Note</STRONG>: OnAfterCommandHandler does not indicate that a <A HREF="007244.html" CLASS="Element59">TIdCommandHandler</A> was located for a command from the client.<P CLASS="Element10">
+Use <A HREF="007831.html#0017" CLASS="Element59">OnNoCommandHandler</A> to respond to event notifications when a command handler cannot be located for a client command.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0011">TIdTCPServer.OnBeforeCommandHandler</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007831.html" CLASS="Element59">TIdTCPServer</A>, <A HREF="014186.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Represents the event handler signalled before CommandHandler usgage.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> OnBeforeCommandHandler: <A HREF="007216.html" CLASS="Element59">TIdBeforeCommandHandlerEvent</A>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+OnBeforeCommandHandler is a <A HREF="007216.html" CLASS="Element59">TIdBeforeCommandHandlerEvent</A> property that represents the event handler signalled before <A HREF="007831.html#0002" CLASS="Element59">CommandHandlers</A> is used to service an executing peer thread connection. <STRONG>Note</STRONG>: OnBeforeCommandHandler does not indicate that a <A HREF="007244.html" CLASS="Element59">TIdCommandHandler</A> will located for a command from the client.<P CLASS="Element10">
+Use <A HREF="007831.html#0017" CLASS="Element59">OnNoCommandHandler</A> to respond to event notifications when a command handler cannot be located for a client command. Use <A HREF="007831.html#0010" CLASS="Element59">OnAfterCommandHandler</A> to respond to event notifications after command handler useage has been completed.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0012">TIdTCPServer.OnConnect</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007831.html" CLASS="Element59">TIdTCPServer</A>, <A HREF="014187.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Event handler for peer thread connection attempts.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> OnConnect: <A HREF="007697.html" CLASS="Element59">TIdServerThreadEvent</A>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+OnConnect is an event handler for TIdServerThreadEvents. OnConnect occurs when a <A HREF="007613.html" CLASS="Element59">TIdPeerThread</A> attempts to <A HREF="000295.html" CLASS="Element59">connect</A> to a <A HREF="007831.html" CLASS="Element59">TIdTCPServer</A>.<P CLASS="Element10">
+OnConnect receives AThread as a parameter, representing the <A HREF="007613.html" CLASS="Element59">TIdPeerThread</A> thread that is requesting the connection.<P CLASS="Element10">
+Assign a <A HREF="007697.html" CLASS="Element59">TIdServerThreadEvent</A> event handler procedure to OnConnect.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0013">TIdTCPServer.OnDisconnect</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007831.html" CLASS="Element59">TIdTCPServer</A>, <A HREF="014188.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Event handler for peer thread disconnection.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> OnDisconnect: <A HREF="007697.html" CLASS="Element59">TIdServerThreadEvent</A>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+OnDisconnect is an event handler for a <A HREF="007697.html" CLASS="Element59">TIdServerThreadEvent</A> event, and occurs when the <A HREF="007613.html" CLASS="Element59">TIdPeerThread</A> attempts to disconnect from a TCP server. OnDisconnect receives the parameter AThread, and represents the <A HREF="007613.html" CLASS="Element59">TIdPeerThread</A> thread requesting to be disconnected. OnDisconnect is triggered when Athread has finished execution, and just prior to the <A HREF="007613.html" CLASS="Element59">TIdPeerThread</A> being released by the thread manager specified in <A HREF="007831.html#001E" CLASS="Element59">ThreadMgr</A>.<P CLASS="Element10">
+<STRONG>Note</STRONG>: Do not call Synchronized method in the OnDisconnect event handler. Only inherited Notification calls are safe for use in OnDisconnect. This is important because OnDisconnect is called for active client threads when the server sets <A HREF="007831.html#0000" CLASS="Element59">Active</A> to False. Using synchronized methods in OnDisconnect can result in a deadlock condition, caused when the thread is suspended while the method is executing in the main VCL thread.<P CLASS="Element10">
+<A HREF="007831.html" CLASS="Element59">TIdTCPServer</A> will detect the deadlock condition, but a timeout error will be raised while trying to terminate the active threads. Use Thread.Notification to act on the notification that a component is being inserted or removed. For example, if a component has object fields or properties that contain references to other components, it can check the notifications of component removals and invalidate those references as needed.<P CLASS="Element10">
+Assign a <A HREF="007697.html" CLASS="Element59">TIdServerThreadEvent</A> event handler procedure to OnDisconnect to allow responding to the event notification.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0014">TIdTCPServer.OnException</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007831.html" CLASS="Element59">TIdTCPServer</A>, <A HREF="014189.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Event handler for exceptions raised in a peer thread.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> OnException: <A HREF="007698.html" CLASS="Element59">TIdServerThreadExceptionEvent</A>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+OnException is a <A HREF="007698.html" CLASS="Element59">TIdServerThreadExceptionEvent</A> property that represents the vent handler signalled when an Exception is raised during execition of a peer thread. OnException is called from <A HREF="007613.html" CLASS="Element59">TIdPeerThread</A> using the Server context for the thread.<P CLASS="Element10">
+Applications must assign a procedure to the event handler to allow a response to the event notification.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0015">TIdTCPServer.OnExecute</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007831.html" CLASS="Element59">TIdTCPServer</A>, <A HREF="014190.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Event handler for peer thread execution.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> OnExecute: <A HREF="007697.html" CLASS="Element59">TIdServerThreadEvent</A>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+OnExecute is an event handler for TIdServerThreadEvents. OnExecute occurs when a <A HREF="007613.html" CLASS="Element59">TIdPeerThread</A> attempts to perform the TIdPeerThread.Run method. OnExecute receives AThread as a parameter, representing the <A HREF="007613.html" CLASS="Element59">TIdPeerThread</A> thread that will be started.<P CLASS="Element10">
+Assign a <A HREF="007697.html" CLASS="Element59">TIdServerThreadEvent</A> event handler procedure to OnExecute to respond to the event notification.<P CLASS="Element10">
+Use <A HREF="007831.html#0002" CLASS="Element59">CommandHandlers</A> and <A HREF="007831.html#0003" CLASS="Element59">CommandHandlersEnabled</A> to provide finer control over commands executed for a peer thread connection.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0016">TIdTCPServer.OnListenException</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007831.html" CLASS="Element59">TIdTCPServer</A>, <A HREF="014191.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Event handler for an exception in a listener thread.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> OnListenException: <A HREF="007508.html" CLASS="Element59">TIdListenExceptionEvent</A>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+OnListenException is a <A HREF="007508.html" CLASS="Element59">TIdListenExceptionEvent</A> property that represents the event handler signalled when an exception is raised during execution of a <A HREF="007507.html" CLASS="Element59">TIdListenerThread</A>. OnListenException is accessed using the server context in the listener thread.<P CLASS="Element10">
+Applications must assign a procedure to the event handler to allow a response to the event notification.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0017">TIdTCPServer.OnNoCommandHandler</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007831.html" CLASS="Element59">TIdTCPServer</A>, <A HREF="014192.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Event handler signalled when a command handler cannot be located.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> OnNoCommandHandler: <A HREF="007600.html" CLASS="Element59">TIdNoCommandHandlerEvent</A>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+OnNoCommandHandler is a <A HREF="007600.html" CLASS="Element59">TIdNoCommandHandlerEvent</A> property that represents the event handler signalled when a <A HREF="007244.html" CLASS="Element59">TIdCommandHandler</A> cannot be located for an executing peer thread connection. OnNoCommandHandler will not be triggered when <A HREF="007831.html#0003" CLASS="Element59">CommandHandlersEnabled</A> is False.<P CLASS="Element10">
+Applications must assign a procedure to the event handler to allow a response to the event notification.</DIV>
+</DIV>
+<DIV CLASS="Element62">
+<HR>Created with Doc-O-Matic 2 donated to <STRONG><A HREF="http://www.delphi-jedi.org">Project JEDI</A></STRONG>. Commercial license available from the <STRONG><A HREF="http://www.doc-o-matic.com">Doc-O-Matic site</A></STRONG>.</DIV>
+</DIV></BODY></HTML>

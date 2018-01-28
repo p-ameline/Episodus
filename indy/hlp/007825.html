@@ -1,0 +1,124 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+<TITLE>TIdSyslogServer</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <META name="GENERATOR" content="Doc-O-Matic">
+    <LINK rel="STYLESHEET" href="default.css" type="text/css">
+
+<SCRIPT LANGUAGE="JavaScript1.2" SRC="scripts.js"></SCRIPT>
+</HEAD>
+<BODY CLASS="Element57">
+<TABLE BORDER="0" BGCOLOR="#AACCFF" WIDTH="100%" CELLSPACING="0" CELLPADDING="0">
+<TR><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element1">
+Indy 9</DIV>
+</TD><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element2">
+<A HREF="content.html" CLASS="Element59">Content</A> | <A HREF="idx.html" CLASS="Element59">Index</A> | <A HREF="symref.html" CLASS="Element59">Reference</A></DIV>
+</TD></TR></TABLE><DIV CLASS="Element58">
+<DIV CLASS="Element5">
+TIdSyslogServer</DIV>
+<DIV CLASS="Element7">
+<A HREF="014041.html" CLASS="Element59">Hierarchy</A>, <A HREF="014042.html" CLASS="Element59">Properties</A>, <A HREF="014043.html" CLASS="Element59">Methods</A>, <A HREF="014044.html" CLASS="Element59">Events</A>, <A HREF="014045.html" CLASS="Element59">See Also</A>, <A HREF="002916.html" CLASS="Element59">Unit: IdSyslogServer</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Implements a BSD Syslog protocol as a server.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12">TIdSyslogServer = <STRONG>class</STRONG>(<A HREF="007877.html" CLASS="Element59">TIdUDPServer</A>)</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Unit</DIV>
+<DIV CLASS="Element69">
+<A HREF="002916.html" CLASS="Element59">IdSyslogServer</A></DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+TIdSyslogServer implements a server for the BSD Syslog protocol, as specified in the Internet Standards document:<P CLASS="Element10">
+<UL>
+<LI>RFC 3164 - The BSD syslog Protocol (http://www.rfc-editor.prg/rfc/rfc3164.txt)</UL>
+<P CLASS="Element10">
+TIdSyslogServer is used to gather event notification messages from networked devices. Notification messages are represented by <A HREF="007822.html" CLASS="Element59">TIdSysLogMessage</A> instances, and can contain information that categorize and differentiate diverse messages from processes running on the networked devices.<P CLASS="Element10">
+TIdSyslogServer can used as the termination point for notification messages, or used as a relay agent for another syslog daemon. TIdSyslogServer does not make any assumptions about the format or content of message values, and is used as a transport facility.<P CLASS="Element10">
+Use the OnSysLog event handler to implement data collection for messages in a <A HREF="007822.html" CLASS="Element59">TIdSysLogMessage</A> instance.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0001">TIdSyslogServer.DefaultPort</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007825.html" CLASS="Element59">TIdSyslogServer</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Port number used to <A HREF="003177.html" CLASS="Element59">listen</A> for client transmissions.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> DefaultPort: integer;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+DefaultPort is an Integer property that represents the port number used to <A HREF="003177.html" CLASS="Element59">listen</A> for client data packets using the Syslog protocol. DefaultPort is accessed when a <A HREF="007071.html" CLASS="Element59">socket</A> descriptor is bound for accepting incoming data packets. The value <A HREF="002712.html" CLASS="Element59">IdPORT_syslog</A> is assigned to DefaultPort in the <A HREF="007825.html#0000" CLASS="Element59">Create</A> constructor.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0000">TIdSyslogServer.Create</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007825.html" CLASS="Element59">TIdSyslogServer</A>, <A HREF="014046.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Constructor for the object instance.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>constructor</STRONG> Create(AOwner: TComponent); <STRONG>override</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Create is the constructor for the object instance. Create calls the inherited Create method using AOwner as the owner for the component. Create assigns <A HREF="002712.html" CLASS="Element59">IdPORT_syslog</A> as the value for the <A HREF="007825.html#0001" CLASS="Element59">DefaultPort</A> property.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0002">TIdSyslogServer.OnSyslog</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007825.html" CLASS="Element59">TIdSyslogServer</A>, <A HREF="014047.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+This event is triggered when the TIdSysLogServer receives SysLog data for collection.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> OnSyslog: <A HREF="008029.html" CLASS="Element59">TOnSyslogEvent</A>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+ABinding</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+The binding for the peer connection.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+ASysLogMessage</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+The <A HREF="007822.html" CLASS="Element59">TIdSysLogMessage</A> for the message that was received. This will be destroyed by the server.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+Sender</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+The component that triggered the event.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+This event is triggered when the TIdSysLogServer receives SysLog data for collection.</DIV>
+</DIV>
+<DIV CLASS="Element62">
+<HR>Created with Doc-O-Matic 2 donated to <STRONG><A HREF="http://www.delphi-jedi.org">Project JEDI</A></STRONG>. Commercial license available from the <STRONG><A HREF="http://www.doc-o-matic.com">Doc-O-Matic site</A></STRONG>.</DIV>
+</DIV></BODY></HTML>

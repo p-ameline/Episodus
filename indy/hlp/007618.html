@@ -1,0 +1,335 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+<TITLE>TIdPOP3Server</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <META name="GENERATOR" content="Doc-O-Matic">
+    <LINK rel="STYLESHEET" href="default.css" type="text/css">
+
+<SCRIPT LANGUAGE="JavaScript1.2" SRC="scripts.js"></SCRIPT>
+</HEAD>
+<BODY CLASS="Element57">
+<TABLE BORDER="0" BGCOLOR="#AACCFF" WIDTH="100%" CELLSPACING="0" CELLPADDING="0">
+<TR><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element1">
+Indy 9</DIV>
+</TD><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element2">
+<A HREF="content.html" CLASS="Element59">Content</A> | <A HREF="idx.html" CLASS="Element59">Index</A> | <A HREF="symref.html" CLASS="Element59">Reference</A></DIV>
+</TD></TR></TABLE><DIV CLASS="Element58">
+<DIV CLASS="Element5">
+TIdPOP3Server</DIV>
+<DIV CLASS="Element7">
+<A HREF="013087.html" CLASS="Element59">Hierarchy</A>, <A HREF="013088.html" CLASS="Element59">Properties</A>, <A HREF="013089.html" CLASS="Element59">Methods</A>, <A HREF="013090.html" CLASS="Element59">Events</A>, <A HREF="013091.html" CLASS="Element59">See Also</A>, <A HREF="002310.html" CLASS="Element59">Unit: IdPOP3Server</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Implements a multi-threaded POP3 server.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12">TIdPOP3Server = <STRONG>class</STRONG>(TIdTcpServer)</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Unit</DIV>
+<DIV CLASS="Element69">
+<A HREF="002310.html" CLASS="Element59">IdPOP3Server</A></DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+TIdPOP3Server is a TIdTcpServer descendant that implements a multi-threaded server using the Post Office Protocol version 3 (POP3), as described in the Internet Standards document:<P CLASS="Element10">
+<UL>
+<LI><A HREF="http://www.rfc-editor.org/rfc/rfc1939.txt"> RFC 1939 - Post Office Protocol Version 3 </A></UL>
+<P CLASS="Element10">
+TIdPOP3Server provides the capabilities needed to allow simultaneous client connections to access a POP3 maildrop and retrieve undelivered mail messages on the server.<P CLASS="Element10">
+TIdPOP3Server is not intended to provide extensive manipulation operations of mail on the server; normally, mail is downloaded and then deleted. Use <A HREF="007405.html" CLASS="Element59">TIdIMAP4</A> and <A HREF="007413.html" CLASS="Element59">TIdIMAP4Server</A> when a more advanced (and complex) mail protocol is required.<P CLASS="Element10">
+TIdPOP3Server provides a dual implementation capability, mirroring the options available in <A HREF="007831.html" CLASS="Element59">TIdTCPServer</A>, using the <A HREF="007831.html#0015" CLASS="Element59">TIdTCPServer.OnExecute</A> event handler or through the use of the <A HREF="007245.html" CLASS="Element59">TIdCommandHandlers</A> collection.<P CLASS="Element10">
+<UL>
+<LI>USER<P CLASS="Element10">
+<LI>PASS<P CLASS="Element10">
+<LI>LIST<P CLASS="Element10">
+<LI>RETR<P CLASS="Element10">
+<LI>DELE<P CLASS="Element10">
+<LI>QUIT<P CLASS="Element10">
+<LI>APOP<P CLASS="Element10">
+<LI>STAT<P CLASS="Element10">
+<LI>NOOP<P CLASS="Element10">
+<LI>RSET<P CLASS="Element10">
+<LI>TOP<P CLASS="Element10">
+<LI>UIDL</UL>
+<P CLASS="Element10">
+Use CommandHandlers and CommandHandlerEnabled to provide finer control over the implementation of the commands and event handlers for threaded client connections to the POP3 server.<P CLASS="Element10">
+TIdPOP3Server provides methods that allow a command handler to trigger event handlers that implement the specifics of accessing the mailstore and file system for the server. TIdPOP3Server also utilizes <A HREF="007624.html" CLASS="Element59">TIdPOP3ServerThread</A> to handle threaded client connections to the server, and allow tracking of identity, authentication, and state for the client connections to the server.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0002">TIdPOP3Server.DefaultPort</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007618.html" CLASS="Element59">TIdPOP3Server</A>, <A HREF="013092.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Default port number used to <A HREF="003177.html" CLASS="Element59">listen</A> doer client connections.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> DefaultPort;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+DefaultPort is a publishes integer property in <A HREF="007618.html" CLASS="Element59">TIdPOP3Server</A>, and represents the port used to <A HREF="003177.html" CLASS="Element59">listen</A> for new connections to the POP3 server. DefaultPort is assigned to the Bindings used for the server. The initial value for DefaultPort is <A HREF="002619.html" CLASS="Element59">IdPORT_POP3</A>, as assigned in the <A HREF="007618.html#0001" CLASS="Element59">Create</A> constructor.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0001">TIdPOP3Server.Create</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007618.html" CLASS="Element59">TIdPOP3Server</A>, <A HREF="013093.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Constructor for the object instance.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>constructor</STRONG> Create(AOwner: TComponent); <STRONG>override</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+AOwner: TComponent</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+TComponent - Owner of the object instance.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Create is the constructor for the object instance, and calls the inherited Create method. Create assigns <A HREF="007624.html" CLASS="Element59">TIdPOP3ServerThread</A> as the class type for threaded client connections to the server, and sets the value for <A HREF="007618.html#0002" CLASS="Element59">DefaultPort</A> to <A HREF="002619.html" CLASS="Element59">IdPORT_POP3</A> as required by the POP3 protocol. Create also sets the default values used in Greeting and ReplyUnknownCommand.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0003">TIdPOP3Server.Destroy</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007618.html" CLASS="Element59">TIdPOP3Server</A>, <A HREF="013094.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Frees the object instance.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>destructor</STRONG> Destroy; <STRONG>override</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Destroy is the destructor for the object instance. Destroy calls the inherited method prior to exiting.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0000">TIdPOP3Server.CheckUser</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007618.html" CLASS="Element59">TIdPOP3Server</A>, <A HREF="013095.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Implements identifying and authenticating a client connection.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> CheckUser: <A HREF="007620.html" CLASS="Element59">TIdPOP3ServerLogin</A>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+CheckUser is a <A HREF="007620.html" CLASS="Element59">TIdPOP3ServerLogin</A> property that represents the event handler triggered to implement identifying and authenticating a client connection after the POP2 PASS command. CheckUser is called from the command event handler that implements the <A HREF="007242.html" CLASS="Element59">TIdCommand</A> for PASS for the threaded client.<P CLASS="Element10">
+<STRONG>Note</STRONG>: Assign a procedure to the event handler to allow responding to the <A HREF="007620.html" CLASS="Element59">TIdPOP3ServerLogin</A> event. The procedure is responsible for setting the session state in the <A HREF="007624.html#0003" CLASS="Element59">TIdPOP3ServerThread.State</A> instance depending on success or failure of the process. The procedure <STRONG>does not</STRONG> have to write positive or negative POP3 responses to the client connection.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0004">TIdPOP3Server.OnAPOP</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007618.html" CLASS="Element59">TIdPOP3Server</A>, <A HREF="013096.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Implements alternative authentication for POP3 client connections.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> OnAPOP: <A HREF="007619.html" CLASS="Element59">TIdPOP3ServerAPOPCommandEvent</A>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+OnAPOP is a <A HREF="007619.html" CLASS="Element59">TIdPOP3ServerAPOPCommandEvent</A> property that represents the event handler signalled when a threaded client connection performs the POP3 APOP command verb. OnAPOP allows the server to implement an alternate method of authentication which does not involve sending a password as clear text over the network.<P CLASS="Element10">
+OnAPOP is triggered by the command event handler that implements the <A HREF="007242.html" CLASS="Element59">TIdCommand</A> for APOP for the threaded client connection. OnAPOP must verify that the mailbox identifier and digest from the client connection are valid.<P CLASS="Element10">
+AMailboxID is the POP3 account name (or mailbox) accessed by the client connection.<P CLASS="Element10">
+ADigest is the 16-octet hexadecimal MD5 Message Digest calculated by applying the MD5 algorithm specified in RFC 1321 to a string consisting of the timestamp (including angle-brackets) followed by the shared APOP secret for the client connection.<P CLASS="Element10">
+<STRONG>Note</STRONG>: Assign a procedure to the event handler to allow responding to the event notification. If the digest is correct, the event handler is responsible for write a positive POP3 response to the client connection, and setting the <A HREF="007624.html#0003" CLASS="Element59">TIdPOP3ServerThread.State</A> to the correct value. Negative POP3 responses are written by the command event handler that triggers OnAPOP when <A HREF="007624.html#0003" CLASS="Element59">TIdPOP3ServerThread.State</A> does not contain the value Auth on entry, and the value Trans on exit.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0005">TIdPOP3Server.OnDELE</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007618.html" CLASS="Element59">TIdPOP3Server</A>, <A HREF="013097.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Implements marking a message for deletion in the POP3 mail store.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> OnDELE: <A HREF="007621.html" CLASS="Element59">TIdPOP3ServerMessageNumberEvent</A>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+OnDELE is a <A HREF="007621.html" CLASS="Element59">TIdPOP3ServerMessageNumberEvent</A> property that represents the event handler signalled when a threaded client connection performs the POP3 DELE command verb. OnDELE allows the server to implement marking a specified message for deletion in the mailstore on the server. OnDELE must verify that the specified message number is not already deleted in the mailstore. OnDELE defers physical removal of the message to the <A HREF="007618.html#0007" CLASS="Element59">OnQUIT</A> event handler.<P CLASS="Element10">
+OnDELE is triggered by the command event handler that implements the <A HREF="007242.html" CLASS="Element59">TIdCommand</A> for DELE for the threaded client connection. OnDELE<P CLASS="Element10">
+<STRONG>Note</STRONG>: Assign a procedure to the event handler to allow responding to the event notification. The OnDELE event handler is not triggered if the <A HREF="007624.html#0003" CLASS="Element59">TIdPOP3ServerThread.State</A> property contains a value other than Trans. The event handler is responsible for writing positive POP3 responses; Negative POP3 responses are written by the command event handler that triggers OnDELE when <A HREF="007624.html#0003" CLASS="Element59">TIdPOP3ServerThread.State</A> does not contain the value Trans on entry, or encounters an exception in the event handler.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0006">TIdPOP3Server.OnLIST</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007618.html" CLASS="Element59">TIdPOP3Server</A>, <A HREF="013098.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Implements generating a list of messages in the server mail store.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> OnLIST: <A HREF="007621.html" CLASS="Element59">TIdPOP3ServerMessageNumberEvent</A>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+OnLIST is a <A HREF="007621.html" CLASS="Element59">TIdPOP3ServerMessageNumberEvent</A> property that represents the event handler signalled when a threaded client connection performs the POP3 LIST command verb. OnLIST allows the server to implement generation of a listing containing information about one or more messages in a server mailstore.<P CLASS="Element10">
+In order to simplify parsing POP3 listings, all POP3 servers are required to use a common format for listings. A scan listing consists of the message-number of the message, followed by a single space and the exact size of the message in octets. Additional information may follow the the message size in the scan listing, and is dependent on the server implementation. It is not, however, encouraged. Each line in the listing must end with a CRLF pair.<P CLASS="Element10">
+<STRONG>Note</STRONG>: Messages marked for deleteion are not included in a listing.<P CLASS="Element10">
+OnLIST is triggered by the command event handler that implements the <A HREF="007242.html" CLASS="Element59">TIdCommand</A> for LIST for the threaded client connection.<P CLASS="Element10">
+<STRONG>Note</STRONG>: Assign a procedure to the event handler to allow responding to the event notification. The OnLIST event handler is not triggered if the <A HREF="007624.html#0003" CLASS="Element59">TIdPOP3ServerThread.State</A> property contains a value other than Trans. The event handler is responsible for writing the content for the listing and other positive POP3 responses; Negative POP3 responses are written by the command event handler that triggers OnLIST when <A HREF="007624.html#0003" CLASS="Element59">TIdPOP3ServerThread.State</A> does not contain the value Trans on entry, or the event handler is unassigned.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0007">TIdPOP3Server.OnQUIT</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007618.html" CLASS="Element59">TIdPOP3Server</A>, <A HREF="013099.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Implements closing and housekeeping for a POP3 session.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> OnQUIT: <A HREF="007622.html" CLASS="Element59">TIdPOP3ServerNoParamEvent</A>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+OnQUIT is a <A HREF="007622.html" CLASS="Element59">TIdPOP3ServerNoParamEvent</A> property that represents the event handler signalled when a threaded client connection performs the POP3 QUIT command verb. OnQUIT allows the server to implement processing required to release resources acquired during POP3 session, remove messages marked for deletion, and close the client connection.<P CLASS="Element10">
+OnQUIT is triggered by the command event handler that implements the <A HREF="007242.html" CLASS="Element59">TIdCommand</A> for QUIT for the threaded client connection.<P CLASS="Element10">
+<STRONG>Note</STRONG>: Assign a procedure to the event handler to allow responding to the event notification. The OnQUIT event handler is not triggered if the <A HREF="007624.html#0003" CLASS="Element59">TIdPOP3ServerThread.State</A> property contains a value other than Trans. The event handler is responsible for writing the POP3 goodbye response, and setting the <A HREF="007624.html#0003" CLASS="Element59">TIdPOP3ServerThread.State</A> to Update for the POP3 client session.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0008">TIdPOP3Server.OnRETR</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007618.html" CLASS="Element59">TIdPOP3Server</A>, <A HREF="013100.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Implements retrieval of messages from the server mail store.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> OnRETR: <A HREF="007621.html" CLASS="Element59">TIdPOP3ServerMessageNumberEvent</A>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+OnRETR is a <A HREF="007621.html" CLASS="Element59">TIdPOP3ServerMessageNumberEvent</A> property that represents the event handler signalled when a threaded client connection performs the POP3 RETR command verb.<P CLASS="Element10">
+OnRETR allows the server to retrieve the specified message number from the server mail store. OnRETR must write the RFC-compliant contents of the message to the connection for the POP3 client. OnRETR is responsible for writing the initial +OK response that includes the message size, the contents of the RFC message, and the terminating '.' for the retrieved message.<P CLASS="Element10">
+<STRONG>Note</STRONG>: The message number cannot refer to a message marked for deletion, or a negative POP3 response should be returned from the event handler. OnRETR is not triggered when <A HREF="007624.html#0003" CLASS="Element59">TIdPOP3ServerThread.State</A> contains a value other than Trans. Negative POP3 responses are written by the RETR command handler when <A HREF="007624.html#0003" CLASS="Element59">TIdPOP3ServerThread.State</A> is invalid, or the OnRETR event handler has not been assigned.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0009">TIdPOP3Server.OnRSET</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007618.html" CLASS="Element59">TIdPOP3Server</A>, <A HREF="013101.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Implements resetting a POP3 client session.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> OnRSET: <A HREF="007622.html" CLASS="Element59">TIdPOP3ServerNoParamEvent</A>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+OnRSET is a <A HREF="007622.html" CLASS="Element59">TIdPOP3ServerNoParamEvent</A> property that represents the event handler signalled when a threaded client connection performs the POP3 RSET command verb. OnRSET allows the server to implement processing required to unmark any messages marked for deletion from the server mail store for the client connection.<P CLASS="Element10">
+OnRSET is triggered by the command event handler that implements the <A HREF="007242.html" CLASS="Element59">TIdCommand</A> for RSET for the threaded client connection. <STRONG>Note</STRONG>: OnRSET is not triggered for a client connection where <A HREF="007624.html#0003" CLASS="Element59">TIdPOP3ServerThread.State</A> contains a value other than Trans.<P CLASS="Element10">
+OnRSET is responsible for writing the positive POP3 response to the client connection after restoring messages marked for deletion; Negative POP3 responses are written by the RSET command handler when <A HREF="007624.html#0003" CLASS="Element59">TIdPOP3ServerThread.State</A> contains a value other than Trans or the OnREST event handler has not been assigned.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="000A">TIdPOP3Server.OnSTAT</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007618.html" CLASS="Element59">TIdPOP3Server</A>, <A HREF="013102.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Implements a maildrop status listing for threaded client connections.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> OnSTAT: <A HREF="007622.html" CLASS="Element59">TIdPOP3ServerNoParamEvent</A>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+OnSTAT is a <A HREF="007622.html" CLASS="Element59">TIdPOP3ServerNoParamEvent</A> property that represents the event handler signalled when a threaded client connection performs the POP3 STAT command verb. OnSTAT allows the server to implement processing required to generate a status listing for the maildrop for for the client connection.<P CLASS="Element10">
+To simplify POP3 client parsing, the POP3 server is required to use a common format for drop listings. The positive response consists of &quot;+OK&quot; followed by a single space, the number of messages in the maildrop, a single space, and the size of the maildrop in octets. Additional server-dependent information may be included in the drop listing, but it is not encouraged. The drop listing is terminated by the CRLF pair.<P CLASS="Element10">
+<STRONG>Note</STRONG>: Messages marked for deletion should not be included in the message count or total message size for the maildrop.<P CLASS="Element10">
+OnSTAT is triggered by the command event handler that implements the <A HREF="007242.html" CLASS="Element59">TIdCommand</A> for STAT for the threaded client connection. <STRONG>Note</STRONG>: OnSTAT is not triggered for a client connection where <A HREF="007624.html#0003" CLASS="Element59">TIdPOP3ServerThread.State</A> contains a value other than Trans.<P CLASS="Element10">
+OnSTAT is responsible for writing the positive POP3 response to the client connection; Negative POP3 responses are written by the STAT command handler when <A HREF="007624.html#0003" CLASS="Element59">TIdPOP3ServerThread.State</A> contains a value other than Trans or the OnSTAT event handler has not been assigned.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="000B">TIdPOP3Server.OnTOP</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007618.html" CLASS="Element59">TIdPOP3Server</A>, <A HREF="013103.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Implements a maildrop status listing for threaded client connections.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> OnTOP: <A HREF="007625.html" CLASS="Element59">TIdPOP3ServerTOPCommandEvent</A>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+OnTOP is a <A HREF="007625.html" CLASS="Element59">TIdPOP3ServerTOPCommandEvent</A> property that represents the event handler signalled when a threaded client connection performs the POP3 TOP command verb. OnTOP allows the server to implement the optional POP3 command, and performs processing required to extract message headers and the specified number of body lines for the indicated message number.<P CLASS="Element10">
+OnTOP is responsible for generating the initial Positive POP3 response, followed by message headers, a blank line, the number of body lines requested, and the terminating '.' character. If the number of lines requested by the POP3 client is greater than the number of lines in the body, then the POP3 server sends the entire message.<P CLASS="Element10">
+<STRONG>Note</STRONG>: It is recommended to implement support for the TOP command. Messages marked for deletion should not be included in the TOP listing.<P CLASS="Element10">
+OnTOP is triggered by the command event handler that implements the <A HREF="007242.html" CLASS="Element59">TIdCommand</A> support for TOP for the threaded client connection. <STRONG>Note</STRONG>: OnTOP is not triggered for a client connection where <A HREF="007624.html#0003" CLASS="Element59">TIdPOP3ServerThread.State</A> contains a value other than Trans, or the event handler has not been assigned.<P CLASS="Element10">
+OnTOP is responsible for writing the positive POP3 response to the client connection; Negative POP3 responses are written by the TOP command handler when <A HREF="007624.html#0003" CLASS="Element59">TIdPOP3ServerThread.State</A> contains a value other than Trans or the OnTOP event handler has not been assigned.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="000C">TIdPOP3Server.OnUIDL</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007618.html" CLASS="Element59">TIdPOP3Server</A>, <A HREF="013104.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> OnUIDL: <A HREF="007621.html" CLASS="Element59">TIdPOP3ServerMessageNumberEvent</A>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+OnUIDL is a <A HREF="007621.html" CLASS="Element59">TIdPOP3ServerMessageNumberEvent</A> property that represents the event handler signalled when a threaded client connection performs the POP3 UIDL command verb. OnUIDL allows the server to implement the optional POP3 command, and performs processing required to generate the unique identifier listing for one or more messages in the mail store for the client connection.<P CLASS="Element10">
+OnUIDL is responsible for generating the initial Positive POP3 response, followed by one or more lines containing information for the specified message(s). If no message number is specified, the response will contain multiple unique identifier lines.<P CLASS="Element10">
+To simplify POP3 client parsing, all POP3 servers are required to use a cokmon format for unique-id listings. A unique-id listing consists of the message-number of the message, followed by a single space and the unique-id of the message. No information follows the unique-id in the unique-id listing.<P CLASS="Element10">
+The unique-id of a message is an arbitrary server-determined string, consisting of one to 70 characters in the range 0x21 to 0x7E, which uniquely identifies a message within a maildrop and which persists across sessions. This persistence is required even if a session ends without entering the UPDATE state. The server should never reuse an unique-id in a given maildrop, for as long as the entity using the unique-id exists.<P CLASS="Element10">
+<STRONG>Note</STRONG>: Messages marked for deletion are not included in a UIDL listing. It is recommended to implement support for the UIDL command. It is generally preferable for server implementations to store arbitrarily assigned unique-ids in the maildrop, but it is permitted for unique-ids to be calculated as a hash of the message. Clients should be able to handle a situation where two identical copies of a message in a maildrop have the same unique-id.<P CLASS="Element10">
+OnUIDL is triggered by the command event handler that implements the <A HREF="007242.html" CLASS="Element59">TIdCommand</A> support for UIDL for the threaded client connection. <STRONG>Note</STRONG>: OnUIDL is not triggered for a client connection where <A HREF="007624.html#0003" CLASS="Element59">TIdPOP3ServerThread.State</A> contains a value other than Trans, or the event handler has not been assigned.<P CLASS="Element10">
+OnUIDL is responsible for writing the positive POP3 response to the client connection; Negative POP3 responses are written by the UIDL command handler when <A HREF="007624.html#0003" CLASS="Element59">TIdPOP3ServerThread.State</A> contains a value other than Trans or the <A HREF="007618.html#000B" CLASS="Element59">OnTOP</A> event handler has not been assigned.</DIV>
+</DIV>
+<DIV CLASS="Element62">
+<HR>Created with Doc-O-Matic 2 donated to <STRONG><A HREF="http://www.delphi-jedi.org">Project JEDI</A></STRONG>. Commercial license available from the <STRONG><A HREF="http://www.doc-o-matic.com">Doc-O-Matic site</A></STRONG>.</DIV>
+</DIV></BODY></HTML>

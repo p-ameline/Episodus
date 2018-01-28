@@ -1,0 +1,161 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+<TITLE>TIdEMailAddressItem</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <META name="GENERATOR" content="Doc-O-Matic">
+    <LINK rel="STYLESHEET" href="default.css" type="text/css">
+
+<SCRIPT LANGUAGE="JavaScript1.2" SRC="scripts.js"></SCRIPT>
+</HEAD>
+<BODY CLASS="Element57">
+<TABLE BORDER="0" BGCOLOR="#AACCFF" WIDTH="100%" CELLSPACING="0" CELLPADDING="0">
+<TR><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element1">
+Indy 9</DIV>
+</TD><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element2">
+<A HREF="content.html" CLASS="Element59">Content</A> | <A HREF="idx.html" CLASS="Element59">Index</A> | <A HREF="symref.html" CLASS="Element59">Reference</A></DIV>
+</TD></TR></TABLE><DIV CLASS="Element58">
+<DIV CLASS="Element5">
+TIdEMailAddressItem</DIV>
+<DIV CLASS="Element7">
+<A HREF="010822.html" CLASS="Element59">Hierarchy</A>, <A HREF="010823.html" CLASS="Element59">Properties</A>, <A HREF="010824.html" CLASS="Element59">Methods</A>, <A HREF="010825.html" CLASS="Element59">See Also</A>, <A HREF="002181.html" CLASS="Element59">Unit: IdEMailAddress</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Represents the name an email address in RFC 822 form.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12">TIdEMailAddressItem = <STRONG>class</STRONG>(TCollectionItem)</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Unit</DIV>
+<DIV CLASS="Element69">
+<A HREF="002181.html" CLASS="Element59">IdEMailAddress</A></DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+The TIdEMailAddressItem object structures a person's name and E-Mail address into a RFC 822-compliant form, and can parse a RFC 822-compliant EMail address into the person's name and E-Mail address. TIdEMailAddressItem also provides encoding and decoding of quoted characters as specified in the the lexical requirements for character quoting in RFC 822.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0000">TIdEMailAddressItem.Address</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007307.html" CLASS="Element59">TIdEMailAddressItem</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Represents the person's Email address.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> Address: <STRONG>string</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Address is a String property that represents an Email address in RFC 822-compliant form. Updating the <A HREF="007307.html#0002" CLASS="Element59">Name</A> or Address portions of the email address causes the <A HREF="007307.html#0003" CLASS="Element59">Text</A> property to be updated to reflect the previous changes to the new email address. For example:<P CLASS="Element10">
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12">
+    AEmail.<A HREF="007307.html#0003" CLASS="Element59">Text</A> := '&quot;John Doe&quot; &lt;jdoe@some.net&gt;'; // AEmail.<A HREF="007307.html#0002" CLASS="Element59">Name</A>
+    contains '&quot;John Doe&quot;' // AEmail.Address contains 'jdoe@some.net'
+
+    AEmail.<A HREF="007307.html#0002" CLASS="Element59">Name</A> := 'Jane Doe'; AEmail.Address := 'janed@another.net'; //
+    AEmail.<A HREF="007307.html#0003" CLASS="Element59">Text</A> contains 'Jane Doe &lt;janed@another.net&gt;'
+</PRE></DIV>
+</DIV>
+</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0002">TIdEMailAddressItem.Name</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007307.html" CLASS="Element59">TIdEMailAddressItem</A>, <A HREF="010826.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Represents the person's name in an EMail address.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> Name: <STRONG>string</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Name is a String property that represents the person's name in the Email address. Updating the Name or <A HREF="007307.html#0000" CLASS="Element59">Address</A> portions of the EMail address causes <A HREF="007307.html#0003" CLASS="Element59">Text</A> to be updated to reflect the changes in to the other property values. For example:<P CLASS="Element10">
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12">
+    AEmail.<A HREF="007307.html#0003" CLASS="Element59">Text</A> := '&quot;John Doe&quot; &lt;jdoe@some.net&gt;';
+    // AEmail.Name contains '&quot;John Doe&quot;'
+    // AEmail.<A HREF="007307.html#0000" CLASS="Element59">Address</A> contains 'jdoe@some.net'
+
+    AEmail.Name := 'Jane Doe';
+    AEmail.<A HREF="007307.html#0000" CLASS="Element59">Address</A> := 'janed@another.net';
+    // AEmail.<A HREF="007307.html#0003" CLASS="Element59">Text</A> contains 'Jane Doe &lt;janed@another.net&gt;'
+</PRE></DIV>
+</DIV>
+</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0003">TIdEMailAddressItem.Text</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007307.html" CLASS="Element59">TIdEMailAddressItem</A>, <A HREF="010827.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Represents the the full contents of an email address.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> Text: <STRONG>String</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Text is a String property that represents the person's name and email address in RFC 822-compliant form. Text can be used to set both the <A HREF="007307.html#0002" CLASS="Element59">Name</A> and <A HREF="007307.html#0000" CLASS="Element59">Address</A> for the <A HREF="007307.html" CLASS="Element59">TIdEMailAddressItem</A> by providing an RFC 822-compliant string. For example:<P CLASS="Element10">
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12">    AEmail.Text := '&quot;John Doe&quot; &lt;jdoe@some.net&gt;';
+    // AEmail.<A HREF="007307.html#0002" CLASS="Element59">Name</A> contains '&quot;John Doe&quot;'
+    // AEmail.<A HREF="007307.html#0000" CLASS="Element59">Address</A> contains 'jdoe@some.net'
+
+    AEmail.<A HREF="007307.html#0002" CLASS="Element59">Name</A> := 'Jane Doe';
+    AEmail.<A HREF="007307.html#0000" CLASS="Element59">Address</A> := 'janed@another.net';
+    // AEmail.Text contains 'Jane Doe &lt;janed@another.net&gt;'</PRE></DIV>
+</DIV>
+<P CLASS="Element10">
+When changing the property value, the new valueis examined for use of reserved characters, including '&lt;', '&gt;', '@', '(', ')', '&quot;', SPACE, and <A HREF="007130.html" CLASS="Element59">TAB</A>. When the new value for Text contains one of these reserved characters, it is examined for proper use of the preceeding in the name and address portions of the email address.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0001">TIdEMailAddressItem.Assign</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007307.html" CLASS="Element59">TIdEMailAddressItem</A>, <A HREF="010828.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Copies the properties of an Email <A HREF="007307.html#0000" CLASS="Element59">Address</A> item.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>procedure</STRONG> Assign(Source: TPersistent); <STRONG>override</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+ASource</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Persistent class to be assigned to the current object instance.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Assign is an overloaded procedure that allows the persistent TIdEmailAddressItem to assign the values in another instance to the current instance.<P CLASS="Element10">
+Assign copies the values of the <A HREF="007307.html#0002" CLASS="Element59">Name</A> and <A HREF="007307.html#0000" CLASS="Element59">Address</A> members when ASource is another TIdEMailAddessItem instance. Otherwise, Assign relies on the inherited Assign method.</DIV>
+</DIV>
+<DIV CLASS="Element62">
+<HR>Created with Doc-O-Matic 2 donated to <STRONG><A HREF="http://www.delphi-jedi.org">Project JEDI</A></STRONG>. Commercial license available from the <STRONG><A HREF="http://www.doc-o-matic.com">Doc-O-Matic site</A></STRONG>.</DIV>
+</DIV></BODY></HTML>

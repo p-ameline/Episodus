@@ -1,0 +1,54 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+<TITLE>IdStati</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <META name="GENERATOR" content="Doc-O-Matic">
+    <LINK rel="STYLESHEET" href="default.css" type="text/css">
+
+<SCRIPT LANGUAGE="JavaScript1.2" SRC="scripts.js"></SCRIPT>
+</HEAD>
+<BODY CLASS="Element57">
+<TABLE BORDER="0" BGCOLOR="#AACCFF" WIDTH="100%" CELLSPACING="0" CELLPADDING="0">
+<TR><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element1">
+Indy 9</DIV>
+</TD><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element2">
+<A HREF="content.html" CLASS="Element59">Content</A> | <A HREF="idx.html" CLASS="Element59">Index</A> | <A HREF="symref.html" CLASS="Element59">Reference</A></DIV>
+</TD></TR></TABLE><DIV CLASS="Element58">
+<DIV CLASS="Element5">
+IdStati</DIV>
+<DIV CLASS="Element7">
+<A HREF="015604.html" CLASS="Element59">See Also</A>, <A HREF="002142.html" CLASS="Element59">Unit: IdComponent</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Format strings for constructing connection status text messages.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12">IdStati: <STRONG>array</STRONG>[<A HREF="007746.html" CLASS="Element59">TIdStatus</A>] <STRONG>of</STRONG> <STRONG>string</STRONG>  = ( <A HREF="006704.html" CLASS="Element59">RSStatusResolving</A>, <A HREF="006701.html" CLASS="Element59">RSStatusConnecting</A>, <A HREF="006700.html" CLASS="Element59">RSStatusConnected</A>, <A HREF="006703.html" CLASS="Element59">RSStatusDisconnecting</A>, <A HREF="006702.html" CLASS="Element59">RSStatusDisconnected</A>, <A HREF="006705.html" CLASS="Element59">RSStatusText</A>, <A HREF="006705.html" CLASS="Element59">RSStatusText</A>, <A HREF="006705.html" CLASS="Element59">RSStatusText</A>, <A HREF="006705.html" CLASS="Element59">RSStatusText</A>);</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Unit</DIV>
+<DIV CLASS="Element69">
+<A HREF="002142.html" CLASS="Element59">IdComponent</A></DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+IdStati is an array of strings which are used as the format specifier for constructing the status message of the <A HREF="007747.html" CLASS="Element59">TIdStatusEvent</A> event. There is one array element in IdStati for each of the values in the <A HREF="007746.html" CLASS="Element59">TIdStatus</A> enumerated type.<P CLASS="Element10">
+Each element in the array contains a constant value that represents the format specifier for a specific status message, and can contain one of the following values:<P CLASS="Element10">
+<UL>
+<LI><A HREF="006704.html" CLASS="Element59">RSStatusResolving</A><P CLASS="Element10">
+<LI><A HREF="006701.html" CLASS="Element59">RSStatusConnecting</A><P CLASS="Element10">
+<LI><A HREF="006700.html" CLASS="Element59">RSStatusConnected</A><P CLASS="Element10">
+<LI><A HREF="006703.html" CLASS="Element59">RSStatusDisconnecting</A><P CLASS="Element10">
+<LI><A HREF="006702.html" CLASS="Element59">RSStatusDisconnected</A><P CLASS="Element10">
+<LI><A HREF="006705.html" CLASS="Element59">RSStatusText</A></UL>
+<P CLASS="Element10">
+Do not change the order of the strings in this array or the <A HREF="007246.html#0006" CLASS="Element59">TIdComponent.OnStatus</A> event could return incorrect status strings.</DIV>
+</DIV>
+<DIV CLASS="Element62">
+<HR>Created with Doc-O-Matic 2 donated to <STRONG><A HREF="http://www.delphi-jedi.org">Project JEDI</A></STRONG>. Commercial license available from the <STRONG><A HREF="http://www.doc-o-matic.com">Doc-O-Matic site</A></STRONG>.</DIV>
+</DIV></BODY></HTML>

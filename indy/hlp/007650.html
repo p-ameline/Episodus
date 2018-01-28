@@ -1,0 +1,131 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+<TITLE>TIdRemoteCMDServer</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <META name="GENERATOR" content="Doc-O-Matic">
+    <LINK rel="STYLESHEET" href="default.css" type="text/css">
+
+<SCRIPT LANGUAGE="JavaScript1.2" SRC="scripts.js"></SCRIPT>
+</HEAD>
+<BODY CLASS="Element57">
+<TABLE BORDER="0" BGCOLOR="#AACCFF" WIDTH="100%" CELLSPACING="0" CELLPADDING="0">
+<TR><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element1">
+Indy 9</DIV>
+</TD><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element2">
+<A HREF="content.html" CLASS="Element59">Content</A> | <A HREF="idx.html" CLASS="Element59">Index</A> | <A HREF="symref.html" CLASS="Element59">Reference</A></DIV>
+</TD></TR></TABLE><DIV CLASS="Element58">
+<DIV CLASS="Element5">
+TIdRemoteCMDServer</DIV>
+<DIV CLASS="Element7">
+<A HREF="013274.html" CLASS="Element59">Hierarchy</A>, <A HREF="013275.html" CLASS="Element59">Properties</A>, <A HREF="013276.html" CLASS="Element59">Methods</A>, <A HREF="013277.html" CLASS="Element59">Events</A>, <A HREF="013278.html" CLASS="Element59">See Also</A>, <A HREF="002799.html" CLASS="Element59">Unit: IdRemoteCMDServer</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Implements a common ancestor for a multithreaded server that executes a command for a remote client connection.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12">TIdRemoteCMDServer = <STRONG>class</STRONG>(<A HREF="007831.html" CLASS="Element59">TIdTCPServer</A>)</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Unit</DIV>
+<DIV CLASS="Element69">
+<A HREF="002799.html" CLASS="Element59">IdRemoteCMDServer</A></DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+TIdRemoteCMDServer is a <A HREF="007831.html" CLASS="Element59">TIdTCPServer</A> descendant that implements a multithreaded server that accepts remote client connections in order to execute commands. TIdRemoteCMDServer implements event handlers that allow execution of the threaded client connection, and generation of result or error messages for the remote client.<P CLASS="Element10">
+TIdRemoteCMDServer provides a protected method that implements execution of a threaded client connection to the server. The default implementation handles validation of port numbers for the client connection, command execution and processing, and closing of the client connection. During execution, the client must provide a Null character (decimal 0) delimited list of arguments to the TIdRemoteCMDServer that includes:<P CLASS="Element10">
+<UL>
+<LI>Client port number for standard error output. The default value is 0 when standard error output is not used for the connection.<P CLASS="Element10">
+<LI>User name for use in authenticating the client connection in the Rexec protocol or the User ID on the client machine in the RSH protocol.<P CLASS="Element10">
+<LI>Password for use in authenticating the client connection in the Rexec protocol or the User ID on the host machine in the RSH protocol.<P CLASS="Element10">
+<LI>Command line and optional arguments to be executed by the server.</UL>
+<P CLASS="Element10">
+When a port number for standard error output is provided, the executing client thread will create a TCP connection that will <A HREF="000295.html" CLASS="Element59">connect</A> to the client's remote port number indicated in the initial argument to the remote command server. In RSH, this is done using a local port number in the range 512 through 1023. The standard error connection is closed after execution of the command for the threaded client connection.<P CLASS="Element10">
+<STRONG>Note</STRONG>: TIdRemoteCMDServer is the ancestor for more specialized server implementations like <A HREF="007661.html" CLASS="Element59">TIdRexecServer</A> an TIdRshServer, and contains an protected abstract virtual method that must be overridden in descendant classes to invoke execution of the command for a threaded client connection.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0000">TIdRemoteCMDServer.SendError</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007650.html" CLASS="Element59">TIdRemoteCMDServer</A>, <A HREF="013279.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Sends an error message to either the standard error connection or the client connection.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>procedure</STRONG> SendError(AThread: <A HREF="007613.html" CLASS="Element59">TIdPeerThread</A>; AStdErr: <A HREF="007827.html" CLASS="Element59">TIdTCPClient</A>; AMsg: <STRONG>String</STRONG>);</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+AThread: TIdPeerThread</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Threaded client connection for the error message.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+AStdErr: TIdTCPClient</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Standard error connection to use for the error message.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+AMsg: String</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Error message to <A HREF="006944.html" CLASS="Element59">send</A> to the client connection.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+SendError is a procedure used to <A HREF="006944.html" CLASS="Element59">send</A> the error message in AMsg to the threaded client connection in AThread using the standard error connection in AStdErr. SendError writes the value #1 (Decimal 1) to the connection in AThread to indicate that an error condition has occurred. When AStdErr contains a valid TCP connection for a non-zero client port number, the error message in AMsg is written to the connection in AStdErr. When AStdErr dopes not contain a valid TCP connection, the error message in AMsg is written to the connection in AThread.<P CLASS="Element10">
+Use SendResult to return values that occur during successful execution of the command for the client connection.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0001">TIdRemoteCMDServer.SendResults</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007650.html" CLASS="Element59">TIdRemoteCMDServer</A>, <A HREF="013280.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Sends the results from remote command execution to a client connection.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>procedure</STRONG> SendResults(AThread: <A HREF="007613.html" CLASS="Element59">TIdPeerThread</A>; AStdErr: <A HREF="007827.html" CLASS="Element59">TIdTCPClient</A>; AMsg: <STRONG>String</STRONG>);</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+AThread: TIdPeerThread</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Threaded client connection for the error message.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+AStdErr: TIdTCPClient</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Standard error connection to use for the error message.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+AMsg: String</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Error message to <A HREF="006944.html" CLASS="Element59">send</A> to the client connection.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+SendResults is a procedure used to <A HREF="006944.html" CLASS="Element59">send</A> the results from successful execution of command for a client connection to the <A HREF="007650.html" CLASS="Element59">TIdRemoteCMDServer</A> instance. SendResults write a Null character (Decimal 0) to the client connection in AThread to indicate that the remote command was completed successfully, followed by the value in AMsg.<P CLASS="Element10">
+Use <A HREF="007650.html#0000" CLASS="Element59">SendError</A> to return an error message that occurs during execution of the command for the client connection.</DIV>
+</DIV>
+<DIV CLASS="Element62">
+<HR>Created with Doc-O-Matic 2 donated to <STRONG><A HREF="http://www.delphi-jedi.org">Project JEDI</A></STRONG>. Commercial license available from the <STRONG><A HREF="http://www.doc-o-matic.com">Doc-O-Matic site</A></STRONG>.</DIV>
+</DIV></BODY></HTML>

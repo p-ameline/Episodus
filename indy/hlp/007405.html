@@ -1,0 +1,2202 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+<TITLE>TIdIMAP4</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <META name="GENERATOR" content="Doc-O-Matic">
+    <LINK rel="STYLESHEET" href="default.css" type="text/css">
+
+<SCRIPT LANGUAGE="JavaScript1.2" SRC="scripts.js"></SCRIPT>
+</HEAD>
+<BODY CLASS="Element57">
+<TABLE BORDER="0" BGCOLOR="#AACCFF" WIDTH="100%" CELLSPACING="0" CELLPADDING="0">
+<TR><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element1">
+Indy 9</DIV>
+</TD><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element2">
+<A HREF="content.html" CLASS="Element59">Content</A> | <A HREF="idx.html" CLASS="Element59">Index</A> | <A HREF="symref.html" CLASS="Element59">Reference</A></DIV>
+</TD></TR></TABLE><DIV CLASS="Element58">
+<DIV CLASS="Element5">
+TIdIMAP4</DIV>
+<DIV CLASS="Element7">
+<A HREF="011674.html" CLASS="Element59">Hierarchy</A>, <A HREF="011675.html" CLASS="Element59">Properties</A>, <A HREF="011676.html" CLASS="Element59">Methods</A>, <A HREF="011677.html" CLASS="Element59">Events</A>, <A HREF="011678.html" CLASS="Element59">See Also</A>, <A HREF="002258.html" CLASS="Element59">Unit: IdIMAP4</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Implements an Internet Message Access Protocol version 4.1 client.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12">TIdIMAP4 = <STRONG>class</STRONG>(<A HREF="007546.html" CLASS="Element59">TIdMessageClient</A>)</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Unit</DIV>
+<DIV CLASS="Element69">
+<A HREF="002258.html" CLASS="Element59">IdIMAP4</A></DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+TIdIMAP4 is a <A HREF="007546.html" CLASS="Element59">TIdMessageClient</A> descendant that implements a client for the IMAP4 (Internet Message Access Protocol version 4.1) protocol, as described in the Internet standards document:<P CLASS="Element10">
+<UL>
+<LI>RFC 2060 - Internet Message Access Protocol version 4.1 (http://www.rfc-editor.org/rfc/rfc2060.txt)</UL>
+<P CLASS="Element10">
+The Internet Message Access Protocol, Version 4.1 (IMAP4rev1) allows a client to access and manipulate electronic mail messages on an IMAP4 server. IMAP4 permits manipulation of remote message folders, called &quot;mailboxes&quot;, in a way that is functionally equivalent to local mailboxes.<P CLASS="Element10">
+IMAP4rev1 includes operations for creating, deleting, and renaming mailboxes; checking for new messages; permanently removing messages; setting and clearing flags; RFC 822 and MIME message parsing; searching; and selective fetching of message attributes, texts, and portions thereof. Messages in IMAP4rev1 are accessed by the use of numbers. These numbers are either message sequence numbers or unique identifiers.<P CLASS="Element10">
+IMAP4rev1 does not specify a means of posting mail; message posting is handled by a mail transfer protocol such as <A HREF="007701.html" CLASS="Element59">TIdSMTP</A>.<P CLASS="Element10">
+The IMAP4 protocol allows the client to issue multiple commands before expecting a server response. In addition, server responses may not necessarily be received in the order in which the IMAP commands are issued on the client. Finally, IMAP4 responses differ from TCP-related response codes in both format and content. To accomodate these protocol differences, methods inherited from <A HREF="007828.html" CLASS="Element59">TIdTCPConnection</A> are reimplemented to support the specifics or the IMAP protocol for sending commands and receiving responses.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0006">TIdIMAP4.ConnectionState</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007405.html" CLASS="Element59">TIdIMAP4</A>, <A HREF="011679.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Indicates the IMAP4 connection state.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> ConnectionState: <A HREF="007408.html" CLASS="Element59">TIdIMAP4ConnectionState</A>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+ConnectionState is a read-only <A HREF="007408.html" CLASS="Element59">TIdIMAP4ConnectionState</A> property that indicates the state of the IMAP4 connection. AN IMAP4 connection can exist in one of the following states: Non-Authenticated, Authenticated, Selected, and Logout. ConnectionState is used to determine which IMAP commands are valid for the indicated state.<P CLASS="Element10">
+ConnectionState can contain one the follwing <A HREF="007408.html" CLASS="Element59">TIdIMAP4ConnectionState</A> values:<P CLASS="Element10">
+<UL>
+<LI>csAny - Commands allowed in any connection state.<P CLASS="Element10">
+<LI>csNonAuthenticated - Commands allowed prior to establishing authentication and entering an authenticated state.<P CLASS="Element10">
+<LI>csAuthenticated - Commands allowed after authentication but prior to mailbox selection.<P CLASS="Element10">
+<LI>csSelected - Commands allowed after selecting a mailbox.</UL>
+<P CLASS="Element10">
+csAny permits the commands cmdCAPABILITY, cmdNOOP, and cmdLOGOUT.<P CLASS="Element10">
+csNonAuthenticated permits commands from the csAny connection state, as well as the commands cmdAUTHENTICATE and cmdLOGOUT.<P CLASS="Element10">
+csAuthenticated permits commands from the csNonAuthenticated connection state, as well as the commands cmdSELECT, cmdEXAMINE, cmdCREATE, cmdDELETE, cmdRENAME, cmdSUBSCRIBE, cmdUNSUBSCRIBE, cmdLIST, cmdLSUB, cmdSTATUS, and cmdAPPEND.<P CLASS="Element10">
+csSelected permits commands from the csAuthenticated connection state, as well as the commands cmdCHECK, cmdCLOSE, cmdEXPUNGE, cmdSEARCH, cmdFETCH, cmdSTORE, cmdCOPY, cmdUID, and the experimental/expansion commmands represented by cmdXCmd.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="001B">TIdIMAP4.MailBox</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007405.html" CLASS="Element59">TIdIMAP4</A>, <A HREF="011680.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Represents the IMAP4 mailbox.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> MailBox: <A HREF="007521.html" CLASS="Element59">TIdMailBox</A>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+MailBox is a <A HREF="007521.html" CLASS="Element59">TIdMailBox</A> property that represents the IMAP4 mailbox including Attributes, Flags, and Messages stored on the IMAP4 server. MailBox is assigned in either the <A HREF="007405.html#0001" CLASS="Element59">SelectMailBox</A> or <A HREF="007405.html#000F" CLASS="Element59">ExamineMailBox</A> methods, and can be updated by methods that <A HREF="006943.html" CLASS="Element59">select</A>, retrieve or update messages on the IMAP4 server.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="001C">TIdIMAP4.MailBoxSeparator</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007405.html" CLASS="Element59">TIdIMAP4</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Identifies the character used to separate mailbox in the hierarchical mailbox namespace.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> MailBoxSeparator: Char;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+MailBoxSeparator is a Char property that represents the character used to separate levels of hierarchy in a hierarchical mailbox namespace. In Indy, the default value for MailBoxSeparator is '/'.<P CLASS="Element10">
+The namespace consists of an optional namespace character '#' and namespace identifier that specified the type of mailbox store, followed by one or more mailboxes. The interpretation of mailbox names is implementation-dependent. However, the case-insensitive mailbox name INBOX is a special name reserved to mean &quot;the primary mailbox for this user on this server&quot;.<P CLASS="Element10">
+For instance, the following examples represent the default mailbox for an IMAP4 account for the user 'dsiders', and the shared NNTP mailbox for the borland.public.delphi.internet.winsock newsgroup on the server Forums.Borland.Com:<P CLASS="Element10">
+<UL>
+<LI>dsiders/InBox<P CLASS="Element10">
+<LI>#news/Forums/Borland/Com/Borland/Public/Delphi/Internet/Winsock</UL>
+<P CLASS="Element10">
+By changing the MailboxSeparator character to '.', the previous examples would contain the following:<P CLASS="Element10">
+<UL>
+<LI>dsiders.InBox<P CLASS="Element10">
+<LI>#news.Forums.Borland.Com.Borland.Public.Delphi.Internet.Winsock</UL>
+</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="001E">TIdIMAP4.Password</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007405.html" CLASS="Element59">TIdIMAP4</A>, <A HREF="011681.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Identifies the password for IMAP4 server authentication.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> Password;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Password is a String property that identifies the user (or account) to be used for connection and authentication to the IMAP4 server. <A HREF="007405.html#0014" CLASS="Element59">Username</A> and Password are used in the <A HREF="007405.html#0005" CLASS="Element59">Connect</A> method to perform a clear-text login to the IMAP4 server.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="001F">TIdIMAP4.Port</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007405.html" CLASS="Element59">TIdIMAP4</A>, <A HREF="011682.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Identifies the port number used for IMAP4 server connections.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> Port: integer;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Port is an Integer property that identifies the port number used for IMAP4 server connections. Port is assigned the default value <A HREF="002485.html" CLASS="Element59">IdPORT_IMAP4</A> in the <A HREF="007405.html#0008" CLASS="Element59">Create</A> constructor.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="002A">TIdIMAP4.RetrieveOnSelect</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007405.html" CLASS="Element59">TIdIMAP4</A>, <A HREF="011683.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Indicates data to be automatically retrieved from the mailbox when a mailbox is selected.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> RetrieveOnSelect: <A HREF="007657.html" CLASS="Element59">TIdRetrieveOnSelect</A>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+RetrieveOnSelect is a <A HREF="007657.html" CLASS="Element59">TIdRetrieveOnSelect</A> property that indicates data to be automatically retrieved from the mailbox when an IMAP4 mailbox is selected. The default value for RetrieveOnSelect is rsDisabled as assigned in the <A HREF="007405.html#0008" CLASS="Element59">Create</A> constructor.<P CLASS="Element10">
+RetrieveOnSelect is used in <A HREF="007405.html#0001" CLASS="Element59">SelectMailBox</A> to determine how much data should be loaded in the TIdMailbox that represents the currently selected mailbox.<P CLASS="Element10">
+rsHeaders indicates that only message headers are loaded for messages in the mailbox.<P CLASS="Element10">
+rsMessages indicates that complete messages are loaded from the mailbox.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0014">TIdIMAP4.Username</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007405.html" CLASS="Element59">TIdIMAP4</A>, <A HREF="011684.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Identifies the user name for IMAP4 server authentication.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> Username;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Username is a String property that identifies the user (or account) to be used for connection and authentication to the IMAP4 server. Username and <A HREF="007405.html#001E" CLASS="Element59">Password</A> are used in the <A HREF="007405.html#0005" CLASS="Element59">Connect</A> method to perform a clear-text login to the IMAP4 server.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0000">TIdIMAP4.AppendMsg</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007405.html" CLASS="Element59">TIdIMAP4</A>, <A HREF="011685.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Adds a message to the specified mailbox.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>function</STRONG> AppendMsg(<STRONG>const</STRONG> AMBName: <STRONG>String</STRONG>; AMsg: <A HREF="007544.html" CLASS="Element59">TIdMessage</A>; <STRONG>const</STRONG> AFlags: <A HREF="007570.html" CLASS="Element59">TIdMessageFlagsSet</A> = []): Boolean;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+const AMBName: String</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Mailbox name used to store the new message.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+AMsg: TIdMessage</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Message to be added to the mailbox.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+const AFlags: TIdMessageFlagsSet = []</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Message flags to apply to the message in the mailbox. Default value is [].</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Return Value</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Boolean - True on success.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+AppendMsg is a Boolean function that appends the message in AMsg to the mailbox specified in AMBName. AFlags indicates the set of message flags which should be applied to the message in the mailbox. AppendMsg implements the IMAP4 APPEND command, and requires that the <A HREF="007405.html#0006" CLASS="Element59">ConnectionState</A> for client contain the value csAuthenticated or csSelected. AppendMsg can raise an <A HREF="000366.html" CLASS="Element59">EIdConnectionStateError</A> exception when the <A HREF="007405.html#0006" CLASS="Element59">ConnectionState</A> does not contain one of the expected values. <STRONG>Note</STRONG>: the APPEND command is not used for message delivery, because it does not provide a mechanism to transfer SMTP envelope information.<P CLASS="Element10">
+AppendMsg constructs the flags for the message using MessageFlagSetToStr prior to calling <A HREF="007405.html#0002" CLASS="Element59">SendCmd</A> using the IMAP4 APPEND command. AppendMsg inspects the numeric response code in LastCmdResult, and when the value is <A HREF="008477.html" CLASS="Element59">wsOk</A> sends the message headers and body in AMsg to the IMAP4 server.<P CLASS="Element10">
+AppendMsg returns False if an exception occurs, or the response code from the IMAP4 server is not <A HREF="008477.html" CLASS="Element59">wsOk</A>.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0001">TIdIMAP4.Capability</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007405.html" CLASS="Element59">TIdIMAP4</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Retrieves a list of capabilities supported on the IMAP4 server.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>function</STRONG> Capability(ASlCapability: TStrings): Boolean;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+ASlCapability: TStrings</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+TStrings used to store results for the command.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Return Value</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Boolean - True on success.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Capability is a Boolean function that provides a list of the capabilities supported on the IMAP4 server. Capability implements the IMAP4 CAPABILTIY command, and returns the untagged response from the server as a series of lines in ASlCapability. Capability calls <A HREF="007405.html#0002" CLASS="Element59">SendCmd</A> to perform the IMAP4 CAPBILITY command, and parses values in a successful response into ASlCapability. There will be one capability per line in ASlCapability.<P CLASS="Element10">
+Use of the Capability method is not dependent on a particular value in <A HREF="007405.html#0006" CLASS="Element59">ConnectionState</A>, and can be used at any time during the session. It is not necessary to issue a Capability call more than once for a client connection.<P CLASS="Element10">
+Any line in ASlCapability which begins with &quot;AUTH=&quot; indicates that the server supports that particular authentication mechanism. Other lines in ASlCapability may refer to extensions, revisions, or amendments to the IMAP4 specification, and are not enabled for an IMAP4 session without explicit client action to invoke the capability.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0002">TIdIMAP4.CheckMailBox</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007405.html" CLASS="Element59">TIdIMAP4</A>, <A HREF="011686.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Requests a checkpoint of the currently selected mailbox.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>function</STRONG> CheckMailBox: Boolean;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Return Value</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Boolean - True on success.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+CheckMailBox is a Boolean function that requests a checkpoint of the currently selected mailbox. A checkpoint refers to the IMAP4 server-specific housekeeping associated with a mailbox that is not normally executed as part of each IMAP4 command.<P CLASS="Element10">
+CheckMailBox requires that <A HREF="007405.html#0006" CLASS="Element59">ConnectionState</A> contain the value csSelected or an <A HREF="000366.html" CLASS="Element59">EIdConnectionStateError</A> exception wil be raised.<P CLASS="Element10">
+CheckMailBox executes the IMAP4 CHECK command, and sets the return value to indicate if the server response in ResultNo is <A HREF="008477.html" CLASS="Element59">wsOk</A>.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0003">TIdIMAP4.CheckMsgSeen</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007405.html" CLASS="Element59">TIdIMAP4</A>, <A HREF="011687.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Indicates if the specified message has been read.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>function</STRONG> CheckMsgSeen(<STRONG>const</STRONG> AMsgNum: Integer): Boolean;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+const AMsgNum: Integer</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Message number to be checked.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Return Value</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Boolean - True when the message has been read.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+CheckMsgSeen is a Boolean function that indicates if the message specified by AMsgNum in the current mailbox has been read. CheckMsgSeen requires that the <A HREF="007405.html#0006" CLASS="Element59">ConnectionState</A> contain the value csSelected, or an <A HREF="000366.html" CLASS="Element59">EIdConnectionStateError</A> exception will be raised.<P CLASS="Element10">
+CheckMsgSeen calls <A HREF="007405.html#0002" CLASS="Element59">SendCmd</A>, after incrementing the IMAP command counter, using the IMAP FETCH command with the FLAGS attribute. CheckMsgSeen returns True when the server response indicates that the flags for the message contains the TIdMessageFlag value mfSeen.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0004">TIdIMAP4.CloseMailBox</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007405.html" CLASS="Element59">TIdIMAP4</A>, <A HREF="011688.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Closes the currently selected mailbox.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>function</STRONG> CloseMailBox: Boolean;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Return Value</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Boolean - True on success.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+CloseMailBox is a Boolean function that closes the currently selected mailbox. CloseMailBox requires that <A HREF="007405.html#0006" CLASS="Element59">ConnectionState</A> contain the value csSelected, or an <A HREF="000366.html" CLASS="Element59">EIdConnectionStateError</A> exception will be raised. CloseMailBox calls <A HREF="007405.html#0002" CLASS="Element59">SendCmd</A> using the IMAP CLOSE command, and sets <A HREF="007405.html#0006" CLASS="Element59">ConnectionState</A> to csAuthenticated on successful completion.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0005">TIdIMAP4.Connect</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007405.html" CLASS="Element59">TIdIMAP4</A>, <A HREF="011689.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Opens a connection and attempts to login to the IMAP server.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>procedure</STRONG> Connect(<STRONG>const</STRONG> ATimeout: Integer = <A HREF="002932.html" CLASS="Element59">IdTimeoutDefault</A>); <STRONG>override</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+const ATimeout: Integer = IdTimeoutDefault</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Number of milliseconds before a connection timeout occurs. Default value is <A HREF="002932.html" CLASS="Element59">IdTimeoutDefault</A>.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Connect is an overridden procedure in <A HREF="007405.html" CLASS="Element59">TIdIMAP4</A> that opens a connection to the IMAP server and attempts to login using the <A HREF="007405.html#0014" CLASS="Element59">Username</A> and <A HREF="007405.html#001E" CLASS="Element59">Password</A> for the account.<P CLASS="Element10">
+Connect calls the inherited Connect method, and on successful connection, sets <A HREF="007405.html#0006" CLASS="Element59">ConnectionState</A> to the value csNonAuthenticated. Connect calls <A HREF="007405.html#0002" CLASS="Element59">SendCmd</A> using the IMAP LOGIN command and the <A HREF="007405.html#0014" CLASS="Element59">Username</A> and <A HREF="007405.html#001E" CLASS="Element59">Password</A> values specified for the account. If the login is accepted by the IMAP server, Connect sets <A HREF="007405.html#0006" CLASS="Element59">ConnectionState</A> to the value csAuthenticated.<P CLASS="Element10">
+If an exception occurs in Connect, Connect calls <A HREF="007405.html#000D" CLASS="Element59">Disconnect</A> and re-raises the exception.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0007">TIdIMAP4.CopyMsgs</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007405.html" CLASS="Element59">TIdIMAP4</A>, <A HREF="011690.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Copies messages to the specified mailbox.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>function</STRONG> CopyMsgs(<STRONG>const</STRONG> AMsgNumList: <STRONG>array</STRONG> <STRONG>of</STRONG> Integer; <STRONG>const</STRONG> AMBName: <STRONG>String</STRONG>): Boolean;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+const AMsgNumList: array of Integer</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Message numbers to copy to the destination mailbox.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+const AMBName: String</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Mailbox name to receive a copy of the selected messages.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Return Value</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Boolean - True on success.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+CopyMsgs is an overloaded Boolean function in <A HREF="007405.html" CLASS="Element59">TIdIMAP4</A> that copies messages specified by AMsgNumList from the currently selected mailbox to the mailbox specified in AMBName.<P CLASS="Element10">
+If AMsgNumList is an empty array (length of zero), CopyMsg sets the return value to False and exits the method. CopyMsg requires that <A HREF="007405.html#0006" CLASS="Element59">ConnectionState</A> contain the value csSelected, or an <A HREF="000366.html" CLASS="Element59">EIdConnectionStateError</A> exception will be raised.<P CLASS="Element10">
+CopyMsg calls the <A HREF="007405.html#0002" CLASS="Element59">SendCmd</A> method using the IMAP COPY command, and sets the return value to True when the response in ResultNo contains <A HREF="008477.html" CLASS="Element59">wsOk</A>.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0008">TIdIMAP4.Create</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007405.html" CLASS="Element59">TIdIMAP4</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Constructor for the object instance.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>constructor</STRONG> Create(AOwner: TComponent); <STRONG>override</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+AOwner: TComponent</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Owner of the object instance.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Create is the Constructor for the object instance, and relies on the inhertited Create method. Create also initializes properties to their default values, including:<P CLASS="Element10">
+<UL>
+<LI><A HREF="007405.html#001B" CLASS="Element59">MailBox</A> - TIdMailbox instance for the session.<P CLASS="Element10">
+<LI><A HREF="007405.html#001F" CLASS="Element59">Port</A> - Default value is <A HREF="002485.html" CLASS="Element59">IdPORT_IMAP4</A>.<P CLASS="Element10">
+<LI><A HREF="007405.html#0006" CLASS="Element59">ConnectionState</A> - Default value is csNonAuthenticated.<P CLASS="Element10">
+<LI><A HREF="007405.html#002A" CLASS="Element59">RetrieveOnSelect</A> - Defaule value is rsDisabled.</UL>
+</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0009">TIdIMAP4.CreateMailBox</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007405.html" CLASS="Element59">TIdIMAP4</A>, <A HREF="011691.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Creates a new mailbox on the IMAP4 server.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>function</STRONG> CreateMailBox(<STRONG>const</STRONG> AMBName: <STRONG>String</STRONG>): Boolean;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+const AMBName: String</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Mailbox name to be created on the server.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Return Value</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Boolean - True on success.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+CreateMailBox is a Boolean function that creates the new mailbox specified in AMBName on the IMAP4 server. When AMBName ends with the hierarchy seperator character (returned by <A HREF="007405.html#0019" CLASS="Element59">ListMailBoxes</A>), additional mailboxes may be created under the current mailbox in the hierarchy. When AMBName contains the hierarchy seperator character anywhere else in the mailbox name, additional mailbox folders should be created prior to the final mailbox name in the specification.<P CLASS="Element10">
+CreateMailBox requires that the value of <A HREF="007405.html#0006" CLASS="Element59">ConnectionState</A> contain either csAuthenticated or csSelected, or an <A HREF="000366.html" CLASS="Element59">EIdConnectionStateError</A> exception will be raised.<P CLASS="Element10">
+CreateMailBox calls the <A HREF="007405.html#0002" CLASS="Element59">SendCmd</A> method using the IMAP CREATE command and the attributes specified in AMBName. CreateMsg sets the return value to True when ResultNo contains <A HREF="008477.html" CLASS="Element59">wsOk</A>.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="000A">TIdIMAP4.DeleteMailBox</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007405.html" CLASS="Element59">TIdIMAP4</A>, <A HREF="011692.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Removes the specified mailbox on the IMAP4 server.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>function</STRONG> DeleteMailBox(<STRONG>const</STRONG> AMBName: <STRONG>String</STRONG>): Boolean;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+const AMBName: String</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Mailbox to be removed.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Return Value</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Boolean - True on success.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+DeleteMailBox is a Boolean function that permanently removes the mailbox specified in AMBName from the IMAP4 server. Attempting to remove the &quot;INBOX&quot; mailbox, or a mailbox name that does not exist, will result in an error response from the server.<P CLASS="Element10">
+DeleteMailBox requires that the value of <A HREF="007405.html#0006" CLASS="Element59">ConnectionState</A> contain either csAuthenticated or csSelected, or an <A HREF="000366.html" CLASS="Element59">EIdConnectionStateError</A> exception will be raised.<P CLASS="Element10">
+DeleteMailBox calls <A HREF="007405.html#0002" CLASS="Element59">SendCmd</A> using the IMAP DELETE Command, and sets the return value to True when ResultNo contains <A HREF="008477.html" CLASS="Element59">wsOk</A>.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="000B">TIdIMAP4.DeleteMsgs</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007405.html" CLASS="Element59">TIdIMAP4</A>, <A HREF="011693.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Marks the specified messages for subsequent deletion when a mailbox is purged.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>function</STRONG> DeleteMsgs(<STRONG>const</STRONG> AMsgNumList: <STRONG>array</STRONG> <STRONG>of</STRONG> Integer): Boolean;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+const AMsgNumList: array of Integer</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Array of messge numbers to mark for deletion.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Return Value</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Boolean - True on success.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+DeleteMsgs is a Boolean function that marks the specified messages in AMsgNumList for subsequent deletion when the mailbox is purged. DeleteMsgs calls <A HREF="007405.html#0005" CLASS="Element59">StoreFlags</A> to add the message flag value mfDeleted to the flags stored in the message on the IMAP4 server.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="000C">TIdIMAP4.Destroy</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007405.html" CLASS="Element59">TIdIMAP4</A>, <A HREF="011694.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Frees the object instance.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>destructor</STRONG> Destroy; <STRONG>override</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Destroy is the destructor for the object instance. Destroy frees and releases object properties that were initialized in the <A HREF="007405.html#0008" CLASS="Element59">Create</A> constructor, including <A HREF="007405.html#001B" CLASS="Element59">MailBox</A> and CmdResultDetails, prior to calling the inherited destructor.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="000D">TIdIMAP4.Disconnect</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007405.html" CLASS="Element59">TIdIMAP4</A>, <A HREF="011695.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Closes an IMAP4 session and connection.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>procedure</STRONG> Disconnect; <STRONG>override</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Disconnect is an overriden procedure in <A HREF="007405.html" CLASS="Element59">TIdIMAP4</A> that closes an IMAP4 session and connection. If Connected is False, an <A HREF="000424.html" CLASS="Element59">EIdNotConnected</A> exception will be raised.<P CLASS="Element10">
+Disconnect calls the <A HREF="007405.html#0002" CLASS="Element59">SendCmd</A> method using the IMAP LOGOUT command prior to calling the inherited Disconnect method and setting <A HREF="007405.html#0006" CLASS="Element59">ConnectionState</A> to the value csNonAuthenticated.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="000E">TIdIMAP4.DoAlert</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007405.html" CLASS="Element59">TIdIMAP4</A>, <A HREF="011696.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Implements signalling of an alert message.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>procedure</STRONG> DoAlert(<STRONG>const</STRONG> AMsg: <STRONG>String</STRONG>);</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+const AMsg: String</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Text for the alert message.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+DoAlert is a procedure that implements event notification for alert messages in an IMAP4 response. Alert messages can occur in results from an IMAP4 command that selects the current mailbox, or appends a new message to a mailbox. <A HREF="007200.html" CLASS="Element59">TIdAlertEvent</A> event are generated when the alert is parsed from the results from the command.<P CLASS="Element10">
+DoAlert signals the <A HREF="007405.html#001D" CLASS="Element59">OnAlert</A> event handler for the current IMAP4 client instance using the value in AMsg for the alert message. Applications must assign a procedure to the <A HREF="007405.html#001D" CLASS="Element59">OnAlert</A> event handler to allow responding to the event notification.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="000F">TIdIMAP4.ExamineMailBox</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007405.html" CLASS="Element59">TIdIMAP4</A>, <A HREF="011697.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Select a mailbox for read-only access.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>function</STRONG> ExamineMailBox(<STRONG>const</STRONG> AMBName: <STRONG>String</STRONG>; AMB: <A HREF="007521.html" CLASS="Element59">TIdMailBox</A>): Boolean;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+const AMBName: String</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Mailbox name to use accessed on the IMAP4 server.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+AMB: TIdMailBox</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Mailbox to be filled with the retrieved message values.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Return Value</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Boolean - True on success.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+ExamineMailBox is a Boolean function in <A HREF="007405.html" CLASS="Element59">TIdIMAP4</A> used to <A HREF="006943.html" CLASS="Element59">select</A> the mailbox specified in AMBName for read-only access. Messages and Flags are retrieved from the mailbox and stored in the <A HREF="007521.html" CLASS="Element59">TIdMailBox</A> instance specified in AMB. ExamineMailBox returns the same output as <A HREF="007405.html#0001" CLASS="Element59">SelectMailBox</A>, except for the read-only attribute applied to the mailbox, flags, and messages.<P CLASS="Element10">
+ExamineMailBox requires that the value of <A HREF="007405.html#0006" CLASS="Element59">ConnectionState</A> contain either csAuthenticated or csSelected, or an <A HREF="000366.html" CLASS="Element59">EIdConnectionStateError</A> exception will be raised.<P CLASS="Element10">
+ExamineMailBox calls <A HREF="007405.html#0002" CLASS="Element59">SendCmd</A> using the IMAP EXAMINE command. When the numeric code in LastCmdResult contains <A HREF="008477.html" CLASS="Element59">wsOk</A>, the text values in LastCmdResult are parsed to populate the <A HREF="007521.html" CLASS="Element59">TIdMailBox</A> instance specified AMB.<P CLASS="Element10">
+ExamineMailBox returns True on successful completion of the method, or false when the response code is not <A HREF="008477.html" CLASS="Element59">wsOk</A> or an exception occurs.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0010">TIdIMAP4.ExpungeMailBox</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007405.html" CLASS="Element59">TIdIMAP4</A>, <A HREF="011698.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Removes messages marked for deletion in the currently selected mailbox.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>function</STRONG> ExpungeMailBox: Boolean;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Return Value</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Boolean - True on success.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+ExpungeMailBox is a Boolean function that permanently removes messages marked for deletion in the currently selected mailbox. Messages marked for deletion contain the Deleted flag. ExpungeMailBox requires that <A HREF="007405.html#0006" CLASS="Element59">ConnectionState</A> contain the value csSelected, or an <A HREF="000366.html" CLASS="Element59">EIdConnectionStateError</A> exception will be raised.<P CLASS="Element10">
+ExpungeMailBox calls the <A HREF="007405.html#0002" CLASS="Element59">SendCmd</A> method using the IMAP EXPUNGE command, and on successful completion calls the ParseExpungeResultDetails method for the selected mailbox.<P CLASS="Element10">
+ExpungeMailBox sets the return value to True when protocol response contains the value <A HREF="008477.html" CLASS="Element59">wsOk</A>.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0011">TIdIMAP4.GetInternalLineResponse</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007405.html" CLASS="Element59">TIdIMAP4</A>, <A HREF="011699.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Reads multiple tagged and untagged IMAP4 responses from a server.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>procedure</STRONG> GetInternalLineResponse(<STRONG>const</STRONG> ATag: <STRONG>String</STRONG>);</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+const ATag: String</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Tagged response expected as the terminal response for the message.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+GetInternalLineResponse is a procedure that implements reading of multiple tagged and untagged IMAP4 responses from a server. GetInternalLineResponse is called in the implementation of the <A HREF="007405.html#0014" CLASS="Element59">GetLineResponse</A> method. GetInternalLineResponse creates and populates a TStringList that is used to capture the response lines from the IMAP4 server using ReadLnWait. GetInternalLineResponse will read untagged responses until the tagged response in ATag is encountered.<P CLASS="Element10">
+GetInternalLineResponse calls FLastCmdResult.ParseLineResponse using the values in ATag and the TStringList to prepare the response for use by the IMAP4 client. GetInternalLineResponse frees the TStringList used to capture response lines prior to exiting from the method.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0013">TIdIMAP4.GetInternalResponse</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007405.html" CLASS="Element59">TIdIMAP4</A>, <A HREF="011700.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Reads mutiple untagged response or a single tagged response from the server.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>procedure</STRONG> <A HREF="007405.html#0012" CLASS="Element59">GetInternalResponse</A>(<STRONG>const</STRONG> ATag: <STRONG>String</STRONG>); <STRONG>overload</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+const ATag: String</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Command tag expecetd in the IMAP4 response.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+<A HREF="007405.html#0012" CLASS="Element59">GetInternalResponse</A> is an overloaded procedure that implements reading of tagged and untagged IMAP4 responses from a server. <A HREF="007405.html#0012" CLASS="Element59">GetInternalResponse</A> is called from the implementation of the <A HREF="007405.html#0015" CLASS="Element59">GetResponse</A> method. <A HREF="007405.html#0012" CLASS="Element59">GetInternalResponse</A> creates and populates a TStringList that is used to capture the response line(s) from the IMAP4 server using ReadLnWait. <A HREF="007405.html#0011" CLASS="Element59">GetInternalLineResponse</A> will read multiple untagged responses until the tagged response in ATag is encountered, or a single tagged response line having the value in ATag.<P CLASS="Element10">
+<A HREF="007405.html#0012" CLASS="Element59">GetInternalResponse</A> calls LastCmdResult.ParseResponse using the command tag in ATag and the TStringList containing response lines to prepare the response for use in the IMAP4 client. <A HREF="007405.html#0012" CLASS="Element59">GetInternalResponse</A> free the TStringList prior to exiting from the method.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0012">TIdIMAP4.GetInternalResponse</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007405.html" CLASS="Element59">TIdIMAP4</A>, <A HREF="011701.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Reads mutiple untagged response or a single tagged response from the server.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>procedure</STRONG> GetInternalResponse; <STRONG>overload</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+ATag</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Command tag expecetd in the IMAP4 response.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+GetInternalResponse is an overloaded procedure that implements reading of tagged and untagged IMAP4 responses from a server. GetInternalResponse is called from the implementation of the <A HREF="007405.html#0015" CLASS="Element59">GetResponse</A> method. GetInternalResponse creates and populates a TStringList that is used to capture the response line(s) from the IMAP4 server using ReadLnWait. <A HREF="007405.html#0011" CLASS="Element59">GetInternalLineResponse</A> will read multiple untagged responses until the tagged response in ATag is encountered, or a single tagged response line having the value in ATag.<P CLASS="Element10">
+GetInternalResponse calls LastCmdResult.ParseResponse using the command tag in ATag and the TStringList containing response lines to prepare the response for use in the IMAP4 client. GetInternalResponse free the TStringList prior to exiting from the method.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0014">TIdIMAP4.GetLineResponse</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007405.html" CLASS="Element59">TIdIMAP4</A>, <A HREF="011702.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Retrieves and Checks an IMAP4 server response line.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>function</STRONG> GetLineResponse(<STRONG>const</STRONG> ATag: <STRONG>String</STRONG>; <STRONG>const</STRONG> AAllowedResponses: <STRONG>array</STRONG> <STRONG>of</STRONG> SmallInt): SmallInt;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+const ATag: String</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Command tag name expected in the response.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+const AAllowedResponses: array of SmallInt</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Response codes allowed.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Return Value</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+SmallInt - Response code from the server.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+GetLineResponse is a SmallInt function in <A HREF="007405.html" CLASS="Element59">TIdIMAP4</A> that retrieves an IMAP4 server response line, and determines the response code based on the tagged or untagged response content. Untagged response codes, indicated by &quot;*&quot; in the initial position of the response, always set the return value to True. Otherwise, the command tag name in ATag is expected in the server response, and the return value is based on the presence of &quot;OK&quot;, &quot;NO&quot;, &quot;BAD&quot;, &quot;PREAUTH&quot; or &quot;BYE&quot; in the response line.<P CLASS="Element10">
+GetLineResponse calls <A HREF="007405.html#0011" CLASS="Element59">GetInternalLineResponse</A> using the value specified in ATag, and sets the numeric response code in LastCmdResult to one of the integer constants <A HREF="008477.html" CLASS="Element59">wsOk</A>, <A HREF="008476.html" CLASS="Element59">wsNo</A>, <A HREF="008473.html" CLASS="Element59">wsBad</A>, <A HREF="008478.html" CLASS="Element59">wsPreAuth</A>, or <A HREF="008474.html" CLASS="Element59">wsBye</A>. GetLineResponse can raise an <A HREF="000375.html" CLASS="Element59">EIdException</A> exception using the message specified in <A HREF="006742.html" CLASS="Element59">RSUnrecognizedIMAP4ResponseHeader</A> when the numeric response code is not in one of the integer constants. GetLineResponse calls CheckResponse to insure that the numeric response code is one of the allowable values specified in AAllowedResponses.<P CLASS="Element10">
+GetLineResponse calls the inherited CheckResponse method, and sets the return value to the ResultNo from CheckResponse.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0016">TIdIMAP4.GetResponse</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007405.html" CLASS="Element59">TIdIMAP4</A>, <A HREF="011703.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Retrieves and Checks a multiple line IMAP4 server response.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>function</STRONG> <A HREF="007405.html#0015" CLASS="Element59">GetResponse</A>(<STRONG>const</STRONG> ATag: <STRONG>String</STRONG>; <STRONG>const</STRONG> AAllowedResponses: <STRONG>array</STRONG> <STRONG>of</STRONG> SmallInt): SmallInt; <STRONG>overload</STRONG>; <STRONG>reintroduce</STRONG>;
+<STRONG>function</STRONG> <A HREF="007405.html#0015" CLASS="Element59">GetResponse</A>(<STRONG>const</STRONG> AAllowedResponses: <STRONG>array</STRONG> <STRONG>of</STRONG> SmallInt): SmallInt; <STRONG>overload</STRONG>; <STRONG>reintroduce</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+const ATag: String</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Command tag name expected in the server response.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+const AAllowedResponses: array of SmallInt</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Array of allowed server response codes.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Return Value</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+SmallInt - Response code from the server.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+GetResponse is an overloaded SmallInt function in <A HREF="007405.html" CLASS="Element59">TIdIMAP4</A> that implements retrieval and processing of IMAP4 server responses. GetResponse is overloaded to allow used with commands that expect a tagged response having the value in ATag, or an untagged response. GetResponse calls <A HREF="007405.html#0012" CLASS="Element59">GetInternalResponse</A>, using the optional commag tag in ATag to read one or more response lines from the IMAP4 server.<P CLASS="Element10">
+GetResponse sets the numeric code in LastCmdResult to one of the IMAP4 integer constants weOk, <A HREF="008473.html" CLASS="Element59">wsBad</A>, <A HREF="008474.html" CLASS="Element59">wsBye</A>, <A HREF="008478.html" CLASS="Element59">wsPreAuth</A>, <A HREF="008476.html" CLASS="Element59">wsNo</A>. GetResponse can raise an <A HREF="000375.html" CLASS="Element59">EIdException</A> with the message <A HREF="006742.html" CLASS="Element59">RSUnrecognizedIMAP4ResponseHeader</A> if a response code other than the preceeding is encountered in the IMAP4 response.<P CLASS="Element10">
+GetResponse checks the the numeric response code against the allowable numeric response code(s) specified in AAllowedResponses.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0015">TIdIMAP4.GetResponse</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007405.html" CLASS="Element59">TIdIMAP4</A>, <A HREF="011704.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Retrieves and Checks a multiple line IMAP4 server response.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>function</STRONG> GetResponse(<STRONG>const</STRONG> ATag: <STRONG>String</STRONG>; <STRONG>const</STRONG> AAllowedResponses: <STRONG>array</STRONG> <STRONG>of</STRONG> SmallInt): SmallInt; <STRONG>overload</STRONG>; <STRONG>reintroduce</STRONG>;
+<STRONG>function</STRONG> GetResponse(<STRONG>const</STRONG> AAllowedResponses: <STRONG>array</STRONG> <STRONG>of</STRONG> SmallInt): SmallInt; <STRONG>overload</STRONG>; <STRONG>reintroduce</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+const ATag: String</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Command tag name expected in the server response.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+const AAllowedResponses: array of SmallInt</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Array of allowed server response codes.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Return Value</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+SmallInt - Response code from the server.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+GetResponse is an overloaded SmallInt function in <A HREF="007405.html" CLASS="Element59">TIdIMAP4</A> that implements retrieval and processing of IMAP4 server responses. GetResponse is overloaded to allow used with commands that expect a tagged response having the value in ATag, or an untagged response. GetResponse calls <A HREF="007405.html#0012" CLASS="Element59">GetInternalResponse</A>, using the optional commag tag in ATag to read one or more response lines from the IMAP4 server.<P CLASS="Element10">
+GetResponse sets the numeric code in LastCmdResult to one of the IMAP4 integer constants weOk, <A HREF="008473.html" CLASS="Element59">wsBad</A>, <A HREF="008474.html" CLASS="Element59">wsBye</A>, <A HREF="008478.html" CLASS="Element59">wsPreAuth</A>, <A HREF="008476.html" CLASS="Element59">wsNo</A>. GetResponse can raise an <A HREF="000375.html" CLASS="Element59">EIdException</A> with the message <A HREF="006742.html" CLASS="Element59">RSUnrecognizedIMAP4ResponseHeader</A> if a response code other than the preceeding is encountered in the IMAP4 response.<P CLASS="Element10">
+GetResponse checks the the numeric response code against the allowable numeric response code(s) specified in AAllowedResponses.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0017">TIdIMAP4.KeepAlive</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007405.html" CLASS="Element59">TIdIMAP4</A>, <A HREF="011705.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Prevents loss of a IMAP server connection due to a timeout.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>procedure</STRONG> KeepAlive;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+KeepAlive is a Procedure used to prevents loss of the IMAP server connection due to a timeout condition by sending the IMAP NOOP command.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0018">TIdIMAP4.ListInferiorMailBoxes</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007405.html" CLASS="Element59">TIdIMAP4</A>, <A HREF="011706.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Retrieves a list of mailboxes contained in the specified mailbox folder hierarchy.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>function</STRONG> ListInferiorMailBoxes(AMailBoxList: TStringList; AInferiorMailBoxList: TStringList): Boolean;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+AMailBoxList: TStringList</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Optional mailbox or folder to be searched.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+AInferiorMailBoxList: TStringList</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Receives mailbox names retreived in the search.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Return Value</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Boolean - True on success.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+ListInferiorMailBoxes is a Boolean function that retrieves a list of mailboxes contained in the specified mailbox folder hierarchy.<P CLASS="Element10">
+ListInferiorMailBoxes can be used when the container folder might include many child mailboxes, and the search might be time consuming. ListInferiorMailBoxes requires that the value of <A HREF="007405.html#0006" CLASS="Element59">ConnectionState</A> be csAuthenticated or csSelected, or an <A HREF="000366.html" CLASS="Element59">EIdConnectionStateError</A> exception will be raised.<P CLASS="Element10">
+When AMailBoxList in unassigned (Nil), ListInferiorMailBoxes will search for child mailboxes in the currently selected mailbox using the IMAP LIST command. ListInferiorMailBoxes calls ParseListResultDetails to populate the AInferiorMailBoxList variable with the contents of CmdResultDetails including the default &quot;INBOX&quot;.<P CLASS="Element10">
+When AMailBoxList contains valid TStrings values, ListInferiorMailBoxes retrieves the child mailbox list for each line in AMailBoxList and accumulates the parsed results in AInferiorMailBoxList.<P CLASS="Element10">
+ListInferiorMailBoxes sets the return value to True when the numeric protocol response contains <A HREF="008477.html" CLASS="Element59">wsOk</A>.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0019">TIdIMAP4.ListMailBoxes</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007405.html" CLASS="Element59">TIdIMAP4</A>, <A HREF="011707.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Retrieves a list of mailboxes for the IMAP4 account.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>function</STRONG> ListMailBoxes(AMailBoxList: TStringList): Boolean;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+AMailBoxList: TStringList</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Receives the list of mailboxes for the account.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Return Value</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Boolean - True on success.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+ListMailBoxes is a Boolean function that retrieves a list of mailboxes for the IMAP4 account. ListMailBoxes requires that the value of <A HREF="007405.html#0006" CLASS="Element59">ConnectionState</A> be csAuthenticated or csSelected, or an <A HREF="000366.html" CLASS="Element59">EIdConnectionStateError</A> exception will be raised.<P CLASS="Element10">
+ListMailBoxes calls <A HREF="007405.html#0002" CLASS="Element59">SendCmd</A> using the IMAP LIST command for all mailboxes in the currently selected folder. ListMailBoxes calls parses the results and stores the mailboxes information in CmdResultDetails to the AMailBoxList variable.<P CLASS="Element10">
+ListMailBoxes sets the return value to True when the protocol numeric response code contains the value <A HREF="008477.html" CLASS="Element59">wsOk</A>.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="001A">TIdIMAP4.ListSubscribedMailBoxes</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007405.html" CLASS="Element59">TIdIMAP4</A>, <A HREF="011708.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Retrieves the list of subscribed mailboxes on the IMAP4 server.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>function</STRONG> ListSubscribedMailBoxes(AMailBoxList: TStringList): Boolean;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+AMailBoxList: TStringList</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Destination for the list of subscribed mailboxes.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Return Value</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Boolean - True on success, False on protocol error or exception.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+ListSubscribedMailBoxes is a Boolean function used to retrieve the list of subscribed mailbox from the IMAP4 server, and store the results in AMailBoxList. ListSubscribedMailBoxes implements the IMAP4 LSUB command using arguments required to retrieve all mailboxes having the appropriate IMAP4 flags.<P CLASS="Element10">
+ListSubscribedMailBoxes requires that the <A HREF="007405.html#0006" CLASS="Element59">ConnectionState</A> property for the client contain either the value csAuthenticated or csSelected. When <A HREF="007405.html#0006" CLASS="Element59">ConnectionState</A> is not valid for the operation, an <A HREF="000366.html" CLASS="Element59">EIdConnectionStateError</A> exception wil be raised and the return value for the method will be False. The return value will be True when the LSUB command has compeleted with the <A HREF="008477.html" CLASS="Element59">wsOk</A> protocol response code and the list of mailboxes has been parsed in the AMailBoxList parameter.<P CLASS="Element10">
+Use <A HREF="007405.html#0001" CLASS="Element59">SelectMailBox</A> to activate a particular mailbox in the subscribed mailbox list.<P CLASS="Element10">
+Use <A HREF="007405.html#0013" CLASS="Element59">UnsubscribeMailBox</A> to remove a mailbox from the subscribed list on the IMAP4 server.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0020">TIdIMAP4.RenameMailBox</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007405.html" CLASS="Element59">TIdIMAP4</A>, <A HREF="011709.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Renames a specified mailbox on the IMAP4 server.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>function</STRONG> RenameMailBox(<STRONG>const</STRONG> AOldMBName: <STRONG>String</STRONG>; <STRONG>const</STRONG> ANewMBName: <STRONG>String</STRONG>): Boolean;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+const AOldMBName: String</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Mailbox name to be changed .</DIV>
+</DIV>
+<DIV CLASS="Element17">
+const ANewMBName: String</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+New name for the mailbox.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Return Value</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Boolean - True on success.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+RenameMailBox is a Boolean function that renames the mailbox specified in AOldMBName to the value specified in ANewMBName on the IMAP4 server. RenameMailBox will receive a protocol error if AOldMBName does not exist, of when ANewMBName already exists.<P CLASS="Element10">
+Renaming the &quot;INBOX&quot; mailbox is permitted, and has special behavior. It moves all messages in INBOX to a new mailbox with the given name, leaving INBOX empty. If the server implementation supports inferior hierarchical names of INBOX, these are unaffected by a rename of INBOX.<P CLASS="Element10">
+RenameMailBox requires that the value of <A HREF="007405.html#0006" CLASS="Element59">ConnectionState</A> contain either csAuthenticated or csSelected, or an <A HREF="000366.html" CLASS="Element59">EIdConnectionStateError</A> exception will be raised.<P CLASS="Element10">
+RenameMailBox calls <A HREF="007405.html#0002" CLASS="Element59">SendCmd</A> using the IMAP4 RENAME command to alter the mailbox name. RenameMailBox sets the return value to True when ResultNo contains the value <A HREF="008477.html" CLASS="Element59">wsOk</A>.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0021">TIdIMAP4.Retrieve</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007405.html" CLASS="Element59">TIdIMAP4</A>, <A HREF="011710.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Retrieves a message from a mailbox and marks it as read on the server.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>function</STRONG> Retrieve(<STRONG>const</STRONG> AMsgNum: Integer; AMsg: <A HREF="007544.html" CLASS="Element59">TIdMessage</A>): Boolean;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+const AMsgNum: Integer</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Message number to retreive from the mailbox.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+AMsg: TIdMessage</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Stores the retrieved message headers, body, and attachments.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Return Value</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Boolean - True on success.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Retrieve is a Boolean function that retrieves a message from a mailbox and marks it as read on the server. Retrieve requires that <A HREF="007405.html#0006" CLASS="Element59">ConnectionState</A> contain the value csSelected, or an <A HREF="000366.html" CLASS="Element59">EIdConnectionStateError</A> exception will be raised.<P CLASS="Element10">
+Retrieve <A HREF="006944.html" CLASS="Element59">send</A> the IMAP4 FETCH command for the specified message number. On successful retrieval of the RFC 822 envelope data, Retrieve calls ReceiveHeader and ReceiveBody to load the message contents into the <A HREF="007544.html" CLASS="Element59">TIdMessage</A> instance specified by AMsg.<P CLASS="Element10">
+Retrieve sets the return value to True when ResultNo contains the value <A HREF="008477.html" CLASS="Element59">wsOk</A>.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0022">TIdIMAP4.RetrieveAllEnvelopes</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007405.html" CLASS="Element59">TIdIMAP4</A>, <A HREF="011711.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Retrieves RFC-822 envelope data for messages in a mailbox.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>function</STRONG> RetrieveAllEnvelopes(AMsgList: <A HREF="007548.html" CLASS="Element59">TIdMessageCollection</A>): Boolean;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+AMsgList: TIdMessageCollection</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Collection of message instances created while retrieving message envelope data.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Return Value</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Boolean - True on success, False on exception or protocol error.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+RetrieveAllEnvelopes is a Boolean function used to retrieve IMAP4 envelope data for all messages in the currently selected IMAP4 mailbox by their message number.<P CLASS="Element10">
+IMAP4 envelope information consists of data items that describes the envelope structure of a message and is computed by parsing RFC-822 message headers from individual messages in the IMAP4 mailbox. Fields in the envelope structure are in the following order: date, subject, from, sender, reply-to, to, cc, bcc, in-reply-to, and message-id.<P CLASS="Element10">
+Any member in an envelope structure that is not applicable is presented as an empty value. Note that the IMAP4 server MUST default the reply-to and sender fields from the from field; a client is not expected to know how to do this.<P CLASS="Element10">
+RetrieveAllEnvelopes constructs instances of <A HREF="007544.html" CLASS="Element59">TIdMessage</A> which are assigned to collection items added to the AMsgList message collection. RetrieveAllEnvelopes requires that the <A HREF="007405.html#0006" CLASS="Element59">ConnectionState</A> property for the IMAP4 client contain the value csSelected, or an <A HREF="000366.html" CLASS="Element59">EIdConnectionStateError</A> exception will be raised and the return value will be set to False.<P CLASS="Element10">
+RetrieveAllEnvelopes implements the IMAP4 FETCH command using arguments that will result in all envelope data items for the messages in the selected mailbox. The multi-line response from the IMAP4 server is captured and parsed into newly created TIdMessages instances in AMsgList collections items.<P CLASS="Element10">
+The return value for RetrieveAllEnvelopes will be True when the protocol response code from the IMAP4 server is <A HREF="008477.html" CLASS="Element59">wsOk</A>, and the multi-line response is successfully parsed into the AMsgList collection.<P CLASS="Element10">
+Use UIDLRetrieveAllEnvelopes to retrieve envelope data for messages using their unique Identifier.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0023">TIdIMAP4.RetrieveAllHeaders</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007405.html" CLASS="Element59">TIdIMAP4</A>, <A HREF="011712.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Retrieves headers for all messages in a mailbox and populates the specified message collection.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>function</STRONG> RetrieveAllHeaders(AMsgList: <A HREF="007548.html" CLASS="Element59">TIdMessageCollection</A>): Boolean;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+AMessageList</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Message collection to be populated.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Return Value</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Boolean - True on success.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+RetrieveAllHeaders is a Boolean function that retrieves headers for all messages in the currently selected mailbox, and populates the message collection specified in AMessageList with message instances to store the headers.<P CLASS="Element10">
+RetrieveAllHeaders is used in <A HREF="007405.html#0001" CLASS="Element59">SelectMailBox</A> to automatically retrieve data from the selected mailbox when <A HREF="007405.html#002A" CLASS="Element59">RetrieveOnSelect</A> contains the value rsHeaders.<P CLASS="Element10">
+RetrieveAllHeaders requires that <A HREF="007405.html#0006" CLASS="Element59">ConnectionState</A> contain the value csSelected, or an <A HREF="000366.html" CLASS="Element59">EIdConnectionStateError</A> exception will be raised.<P CLASS="Element10">
+When AMessageList is unassigned (Nil), RetrieveAllHeaders will set the return value to False and exit from the method. Otherwise, RetrieveAllHeaders will create a new message in the collection and call <A HREF="007405.html#0027" CLASS="Element59">RetrieveHeader</A> for each individual message number. If the headers for a given message cannot be loaded from the IMAP mailbox, the return value is set to False and additional messages are ignored.<P CLASS="Element10">
+RetrieveAllHeaders will return True when all message headers have been retrieved from the mailbox.<P CLASS="Element10">
+Use <A HREF="007405.html#0024" CLASS="Element59">RetrieveAllMsgs</A> to fetch both message headers and contents in a message collection.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0024">TIdIMAP4.RetrieveAllMsgs</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007405.html" CLASS="Element59">TIdIMAP4</A>, <A HREF="011713.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Retrieves all messages in a mailbox and populates the specified message collection.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>function</STRONG> RetrieveAllMsgs(AMsgList: <A HREF="007548.html" CLASS="Element59">TIdMessageCollection</A>): Boolean;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+AMessageList</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Message collection to be populated.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Return Value</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Boolean - True on success.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+RetrieveAllMsgs is a Boolean function that retrieves all messages in the currently selected mailbox, and populates the message collection specified in AMessageList with message instances.<P CLASS="Element10">
+RetrieveAllMsgs is used in <A HREF="007405.html#0001" CLASS="Element59">SelectMailBox</A> to automatically retrieve data from the selected mailbox when <A HREF="007405.html#002A" CLASS="Element59">RetrieveOnSelect</A> contains the value rsMessages.<P CLASS="Element10">
+RetrieveAllMsgs requires that <A HREF="007405.html#0006" CLASS="Element59">ConnectionState</A> contain the value csSelected, or an <A HREF="000366.html" CLASS="Element59">EIdConnectionStateError</A> exception will be raised.<P CLASS="Element10">
+When AMessageList is unassigned (Nil), <A HREF="007405.html#0023" CLASS="Element59">RetrieveAllHeaders</A> will set the return value to False and exit from the method. Otherwise, RetrieveAllMsgs will create a new message in the collection and call <A HREF="007405.html#0021" CLASS="Element59">Retrieve</A> for each individual message number. If the headers for given message cannot be loaded from the IMAP mailbox, the return value is set to False and additional messages are ignored.<P CLASS="Element10">
+RetrieveAllMsgs will return True when all messages have been retrieved from the mailbox.<P CLASS="Element10">
+Use <A HREF="007405.html#0023" CLASS="Element59">RetrieveAllHeaders</A> to fetch only message headers for the message collection.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0025">TIdIMAP4.RetrieveEnvelope</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007405.html" CLASS="Element59">TIdIMAP4</A>, <A HREF="011714.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Retrieves SMTP evnvelope information for a message in the mailbox.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>function</STRONG> RetrieveEnvelope(<STRONG>const</STRONG> AMsgNum: Integer; AMsg: <A HREF="007544.html" CLASS="Element59">TIdMessage</A>): Boolean;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+const AMsgNum: Integer</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Message number to retrieve from the mailbox.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+AMsg: TIdMessage</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Message instance to store the return values.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Return Value</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Bolean - True on success.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+RetrieveEnvelope is a Boolean function used to retrieve the SMTP envelope information for the message number specified in AMsgNum, and to store the information in the message identified by AMsg. RetrieveEnvelope requires that <A HREF="007405.html#0006" CLASS="Element59">ConnectionState</A> contain the value csSelected, indicating a mailbox has been successfully selected and authenticated. RetrieveEnvelope can raise an <A HREF="000366.html" CLASS="Element59">EIdConnectionStateError</A> exception if a mailbox has not been selected and/or authenticated for the current user.<P CLASS="Element10">
+RetrieveEnvelope calls <A HREF="007405.html#0002" CLASS="Element59">SendCmd</A> using the IMAP4 FETCH command and arguments constructed from the value in AMsgNum and the IMAP4 fetch data flags required for the operation. RetrieveEnvelope reads the multi-line response form the IMAP4 server, and verifies that the initial response matches the command issued using <A HREF="007405.html#0002" CLASS="Element59">SendCmd</A>. When they are the same, RetrieveEnvelope extracts the SMTP headers from the response and parses the header values in the message specified in AMsg.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0026">TIdIMAP4.RetrieveFlags</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007405.html" CLASS="Element59">TIdIMAP4</A>, <A HREF="011715.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Retrieves message flags stored in a message on the IMAP4 server.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>function</STRONG> RetrieveFlags(<STRONG>const</STRONG> AMsgNum: Integer; AFlags: <A HREF="007570.html" CLASS="Element59">TIdMessageFlagsSet</A>): Boolean;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+const AMsgNum: Integer</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Message number containing flags to be retrieved.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+AFlags: TIdMessageFlagsSet</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Pointer the array where messge flags are stored.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Return Value</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Boolean - True on success.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+RetrieveFlags is a Boolean function that is used to retrieves message flags for a the message number specified in stored in AMsgNum from an IMAP4 server.<P CLASS="Element10">
+RetrieveFlags requires that <A HREF="007405.html#0006" CLASS="Element59">ConnectionState</A> contain the value csSelected, or an <A HREF="000366.html" CLASS="Element59">EIdConnectionStateError</A> exception will be raised.<P CLASS="Element10">
+RetrieveFlags calls the IMAP4 FETCH command to get flags for the specified message number. If a protocol error occurs while retrieving the flag value, RetrieveFlags sets the return value to False and exits from the method. On successful completion, RetrieveFlags processes the untagged responses in CmdResultDetails using ParseFlagString and sets the return value to True.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0027">TIdIMAP4.RetrieveHeader</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007405.html" CLASS="Element59">TIdIMAP4</A>, <A HREF="011716.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Retrieves headers for a specified message number and populates the message instance.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>function</STRONG> RetrieveHeader(<STRONG>const</STRONG> AMsgNum: Integer; AMsg: <A HREF="007544.html" CLASS="Element59">TIdMessage</A>): Boolean;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+const AMsgNum: Integer</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Message number to be retrieved from the mailbox.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+AMsg: TIdMessage</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Message instance used to store retrieved header values.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Return Value</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Boolean - True on success.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+RetrieveHeader is a Boolean function that retrieves headers for the message number specified in AMsgNum, and populates the message instance AMsg with the header values.<P CLASS="Element10">
+RetrieveHeader requires that <A HREF="007405.html#0006" CLASS="Element59">ConnectionState</A> contain the value csSelected, or an <A HREF="000366.html" CLASS="Element59">EIdConnectionStateError</A> exception will be raised.<P CLASS="Element10">
+RetrieveHeader <A HREF="006944.html" CLASS="Element59">send</A> the IMAP4 FETCH command for the specified message number to access the stored header values. RetrieveHeader insures that the untagged server response contains an RFC 822 header before calling ReceiveHeader to populate the header values in the message instance.<P CLASS="Element10">
+RetrieveHeader sets the return value to True when the numeric protocol response in LastCmdResult contains the value <A HREF="008477.html" CLASS="Element59">wsOk</A>.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0028">TIdIMAP4.RetrieveMailBoxSize</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007405.html" CLASS="Element59">TIdIMAP4</A>, <A HREF="011717.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Indicates the size of all messages in the currently selected mailbox.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>function</STRONG> RetrieveMailBoxSize: Integer;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Return Value</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Integer - Bytes required to store all messages in the mailbox or -1 when an error occurs.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+RetrieveMailBoxSize is an Integer function that calculates the size of all messages in the currently selected mailbox.<P CLASS="Element10">
+RetrieveMailBoxSize requires that <A HREF="007405.html#0006" CLASS="Element59">ConnectionState</A> contain the value csSelected, or an <A HREF="000366.html" CLASS="Element59">EIdConnectionStateError</A> exception will be raised. The return value for RetrieveMailBoxSize is -1 if an error occurs in the method. RetrieveMailBoxSize calls SendCMd using the IMAP4 FETCH command to get the message size for each message in the IMAP mailbox, and accumulates the total size as the return value for the method.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0029">TIdIMAP4.RetrieveMsgSize</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007405.html" CLASS="Element59">TIdIMAP4</A>, <A HREF="011718.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Indicates the size of a specified message in the currently selected mailbox.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>function</STRONG> RetrieveMsgSize(<STRONG>const</STRONG> AMsgNum: Integer): Integer;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+const AMsgNum: Integer</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Message number to access in the mailbox.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Return Value</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Integer - Bytes required to store the message in the mailbox or -1 when an error occurs.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+RetrieveMsgSize is an Integer function that calculates the size of the message specified by AMsgNum in the currently selected mailbox.<P CLASS="Element10">
+RetrieveMsgSize requires that <A HREF="007405.html#0006" CLASS="Element59">ConnectionState</A> contain the value csSelected, or an <A HREF="000366.html" CLASS="Element59">EIdConnectionStateError</A> exception will be raised. The return value for RetrieveMsgSize is -1 if an error occurs in the method. RetrieveMsgSize calls SendCMd using the IMAP4 FETCH command to get the message size for the specified message number in the IMAP mailbox, and sets the return value for the method.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="002B">TIdIMAP4.RetrievePeek</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007405.html" CLASS="Element59">TIdIMAP4</A>, <A HREF="011719.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Retrieves a specified message number from a mailbox preserving its Seen flag.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>function</STRONG> RetrievePeek(<STRONG>const</STRONG> AMsgNum: Integer; AMsg: <A HREF="007544.html" CLASS="Element59">TIdMessage</A>): Boolean;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+const AMsgNum: Integer</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Message number to be retrieved from the mailbox.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+AMsg: TIdMessage</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Message instance to store the retrieved message.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Return Value</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Boolean - True on success.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+RetrievePeek is a Boolean function that retrieves the message specified in AMsgNum and stores the result in the mesage instance specified by AMsg. Unlike <A HREF="007405.html#0021" CLASS="Element59">Retrieve</A>, RetrievePeek preserves the state of the Seen flag for the message in the mailbox.<P CLASS="Element10">
+RetrievePeek requires that <A HREF="007405.html#0006" CLASS="Element59">ConnectionState</A> contain the value csSelected, or an <A HREF="000366.html" CLASS="Element59">EIdConnectionStateError</A> exception wil be raised. RetrievePeek sends the IMAP4 FETCH command to retrieve data for the specified message number. RetrievePeek insures that the server response contains untagged resposnes for the desired message prior to calling ReceiveHeader and ReceiveBody to populate the message instance.<P CLASS="Element10">
+RetrievePeek sets the return value to True when the protocol reponse code contains the value <A HREF="008477.html" CLASS="Element59">wsOk</A>.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0000">TIdIMAP4.SearchMailBox</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007405.html" CLASS="Element59">TIdIMAP4</A></DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>function</STRONG> <A HREF="007406.html" CLASS="Element59">SearchMailBox</A>(<STRONG>const</STRONG> ASearchInfo: <STRONG>array</STRONG> <STRONG>of</STRONG> <A HREF="007411.html" CLASS="Element59">TIdIMAP4SearchRec</A>): Boolean;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+const ASearchInfo: array of TIdIMAP4SearchRec</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Array</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0001">TIdIMAP4.SelectMailBox</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007405.html" CLASS="Element59">TIdIMAP4</A>, <A HREF="011720.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Selects a mailbox on the IMAP4 server as the current mailbox for message access.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>function</STRONG> SelectMailBox(<STRONG>const</STRONG> AMBName: <STRONG>String</STRONG>): Boolean;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+const AMBName: String</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Mailbox name to be activated.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Return Value</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Boolean - True on success.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+SelectMailBox is a Boolean function that selects the mailbox specified in AMBName as the current mailbox for message access on the IMAP4 server. Only one mailbox can be selected at a time in a IMAP4 connection. Simultaneous access to multiple mailboxes requires multiple connections. SelectMailBox automatically deselects any currently selected mailbox before attempting the new selection. Consequently, if a mailbox is selected and a SELECT command that fails is attempted, no mailbox is selected.<P CLASS="Element10">
+SelectMailBox requires that the value of <A HREF="007405.html#0006" CLASS="Element59">ConnectionState</A> contain either csAuthenticated or csSelected, or an <A HREF="000366.html" CLASS="Element59">EIdConnectionStateError</A> exception will be raised.<P CLASS="Element10">
+SelectMailBox calls <A HREF="007405.html#0002" CLASS="Element59">SendCmd</A> using the IMAP4 SELECT command for the specified mailbox name. On successful completion of the command, SelectMailBox parses the multi-line response in LastCmdResult and loads the values into the <A HREF="007405.html#001B" CLASS="Element59">MailBox</A> specified in AMBName. SelectMailBox sets <A HREF="007405.html#0006" CLASS="Element59">ConnectionState</A> to the value csSelected. If the response code from <A HREF="007405.html#0002" CLASS="Element59">SendCmd</A> contains a value other than <A HREF="008477.html" CLASS="Element59">wsOk</A>, the value in <A HREF="007405.html#0006" CLASS="Element59">ConnectionState</A> is set csAuthenticated.<P CLASS="Element10">
+SelectMailBox also calls either <A HREF="007405.html#0023" CLASS="Element59">RetrieveAllHeaders</A> or <A HREF="007405.html#0024" CLASS="Element59">RetrieveAllMsgs</A>, based on the value of <A HREF="007405.html#002A" CLASS="Element59">RetrieveOnSelect</A>, to populate the message list in <A HREF="007405.html#001B" CLASS="Element59">MailBox</A>.<P CLASS="Element10">
+SelectMailBox sets the return value for the method to True when bumeric response code in LastCmdResult contains the value <A HREF="008477.html" CLASS="Element59">wsOk</A>.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0003">TIdIMAP4.SendCmd</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007405.html" CLASS="Element59">TIdIMAP4</A>, <A HREF="011721.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Sends a tagged IMAP4 command to the server and checks for valid response codes.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>function</STRONG> <A HREF="007405.html#0002" CLASS="Element59">SendCmd</A>(<STRONG>const</STRONG> ATag: <STRONG>string</STRONG>; <STRONG>const</STRONG> AOut: <STRONG>string</STRONG>; <STRONG>const</STRONG> AResponse: SmallInt = -1): SmallInt; <STRONG>overload</STRONG>;
+<STRONG>function</STRONG> <A HREF="007405.html#0002" CLASS="Element59">SendCmd</A>(<STRONG>const</STRONG> ATag: <STRONG>string</STRONG>; <STRONG>const</STRONG> AOut: <STRONG>string</STRONG>; <STRONG>const</STRONG> AResponse: <STRONG>array</STRONG> <STRONG>of</STRONG> SmallInt): SmallInt; <STRONG>overload</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+const ATag: string</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Tag to identify the server response to this command.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+const AOut: string</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Command to be executed on the IMAP4 server.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+const AResponse: SmallInt = -1</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Anticipated server reponse(s). -1 when omitted.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Return Value</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+SmallInt - Response code received from the IMAP4 server.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+SendCmd is an overloaded SmallInt function in <A HREF="007405.html" CLASS="Element59">TIdIMAP4</A> that allows the client to <A HREF="006944.html" CLASS="Element59">send</A> the tagged command specified in ATag and AOut to the IMAP4 server, and anticipates a response or responses as specified in AResponse.<P CLASS="Element10">
+AResponse can be an array of SmallInt values that indicate the valie responses for the command, or a single SmallInt value.<P CLASS="Element10">
+SendCmd calls WriteLn to <A HREF="006944.html" CLASS="Element59">send</A> the values in Atag and AOut to the IMAOP4 server, and calls <A HREF="007405.html#0015" CLASS="Element59">GetResponse</A> to determine the server response.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0002">TIdIMAP4.SendCmd</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007405.html" CLASS="Element59">TIdIMAP4</A>, <A HREF="011722.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Sends a tagged IMAP4 command to the server and checks for valid response codes.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>function</STRONG> SendCmd(<STRONG>const</STRONG> ATag: <STRONG>string</STRONG>; <STRONG>const</STRONG> AOut: <STRONG>string</STRONG>; <STRONG>const</STRONG> AResponse: SmallInt = -1): SmallInt; <STRONG>overload</STRONG>;
+<STRONG>function</STRONG> SendCmd(<STRONG>const</STRONG> ATag: <STRONG>string</STRONG>; <STRONG>const</STRONG> AOut: <STRONG>string</STRONG>; <STRONG>const</STRONG> AResponse: <STRONG>array</STRONG> <STRONG>of</STRONG> SmallInt): SmallInt; <STRONG>overload</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+const ATag: string</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Tag to identify the server response to this command.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+const AOut: string</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Command to be executed on the IMAP4 server.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+const AResponse: SmallInt = -1</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Anticipated server reponse(s). -1 when omitted.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Return Value</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+SmallInt - Response code received from the IMAP4 server.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+SendCmd is an overloaded SmallInt function in <A HREF="007405.html" CLASS="Element59">TIdIMAP4</A> that allows the client to <A HREF="006944.html" CLASS="Element59">send</A> the tagged command specified in ATag and AOut to the IMAP4 server, and anticipates a response or responses as specified in AResponse.<P CLASS="Element10">
+AResponse can be an array of SmallInt values that indicate the valie responses for the command, or a single SmallInt value.<P CLASS="Element10">
+SendCmd calls WriteLn to <A HREF="006944.html" CLASS="Element59">send</A> the values in Atag and AOut to the IMAOP4 server, and calls <A HREF="007405.html#0015" CLASS="Element59">GetResponse</A> to determine the server response.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0004">TIdIMAP4.StatusMailBox</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007405.html" CLASS="Element59">TIdIMAP4</A>, <A HREF="011723.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Retrieves status data items for the specified mailbox.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>function</STRONG> StatusMailBox(<STRONG>const</STRONG> AMBName: <STRONG>String</STRONG>; AMB: <A HREF="007521.html" CLASS="Element59">TIdMailBox</A>; <STRONG>const</STRONG> AStatusDataItems: <STRONG>array</STRONG> <STRONG>of</STRONG> <A HREF="007415.html" CLASS="Element59">TIdIMAP4StatusDataItem</A>): Boolean;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+const AMBName: String</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Mailbox name tio be accessed and loaded.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+AMB: TIdMailBox</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Represents the contents read from the mailbox.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+const AStatusDataItems: array of TIdIMAP4StatusDataItem</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Status data items to be retrieved.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Return Value</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Boolean - True on success.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+StatusMailBox is a Boolean function that retrieves the status data items specified in AStatusDataItems for the mailbox specified in AMBName.<P CLASS="Element10">
+StatusMailBox requires that the value of <A HREF="007405.html#0006" CLASS="Element59">ConnectionState</A> contain either csAuthenticated or csSelected, or an <A HREF="000366.html" CLASS="Element59">EIdConnectionStateError</A> exception will be raised.<P CLASS="Element10">
+StatusMailBox calls <A HREF="007405.html#0002" CLASS="Element59">SendCmd</A> using the IMAP4 STATUS command for the specified mailbox name and data items. On succesful completion, StatusMailBox calls ParseStatusResultDetails to load the values in CmdResultDetails into the Mailbox sopecified in AMB.<P CLASS="Element10">
+StatusMailBox sets the return value for the method to True when ResultNo contains the value <A HREF="008477.html" CLASS="Element59">wsOk</A>.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0005">TIdIMAP4.StoreFlags</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007405.html" CLASS="Element59">TIdIMAP4</A>, <A HREF="011724.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Updates the specified message flags for a list of message numbers.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>function</STRONG> StoreFlags(<STRONG>const</STRONG> AMsgNumList: <STRONG>array</STRONG> <STRONG>of</STRONG> Integer; <STRONG>const</STRONG> AStoreMethod: <A HREF="007416.html" CLASS="Element59">TIdIMAP4StoreDataItem</A>; <STRONG>const</STRONG> AFlags: <A HREF="007570.html" CLASS="Element59">TIdMessageFlagsSet</A>): Boolean;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+const AMsgNumList: array of Integer</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Message numbers to be updated by the method.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+const AStoreMethod: TIdIMAP4StoreDataItem</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Method to use for storing flag values.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+const AFlags: TIdMessageFlagsSet</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Message flags to be updated for the specified messages.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Return Value</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Boolean - True on success.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+StoreFlags is a Boolean function that Updates the message flags specified in AFlags for the list of message numbers specified in AMsgNumList. AStoreMethod indicates if the message flags are added, replaced or removed.<P CLASS="Element10">
+When AMsgNumList has a length of zero, the return value for the method is set to False and the method is exited. StoreFlags requires that <A HREF="007405.html#0006" CLASS="Element59">ConnectionState</A> contain the value csSelected, or an <A HREF="000366.html" CLASS="Element59">EIdConnectionStateError</A> exception will be raised.<P CLASS="Element10">
+StoreFlags calls <A HREF="007405.html#0002" CLASS="Element59">SendCmd</A> using the IMAP4 STORE command for the specified messages and flags. StoreFlags sets the return value for the method to True when ResultNo contains the value <A HREF="008477.html" CLASS="Element59">wsOk</A>.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0006">TIdIMAP4.SubscribeMailBox</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007405.html" CLASS="Element59">TIdIMAP4</A>, <A HREF="011725.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Adds a mailbox to the list of &quot;active&quot; or &quot;subscribed&quot; mailboxes.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>function</STRONG> SubscribeMailBox(<STRONG>const</STRONG> AMBName: <STRONG>String</STRONG>): Boolean;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+const AMBName: String</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Mailbox name to add to the active mailbox list.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Return Value</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Boolean - True on success.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+SubscribeMailBox is a Boolean function used to add the mailbox name specified in AMBName to the list of &quot;active&quot; or &quot;subscribed&quot; mailboxes on the IMAP4 server. SubscribeMailBox updates the values that are returned by the IMAP4 LSUB command. SubscribeMailBox returns True when the response code from the IMAP4 server is <A HREF="008477.html" CLASS="Element59">wsOk</A>.<P CLASS="Element10">
+SubscribeMailBox requires that the <A HREF="007405.html#0006" CLASS="Element59">ConnectionState</A> for the client contain the value csAuthenticated or csSelected to perform the IMAP4 function. SubscribeMailBox can raise an <A HREF="000366.html" CLASS="Element59">EIdConnectionStateError</A> exception with the message <A HREF="006510.html" CLASS="Element59">RSIMAP4ConnectionStateError</A> if <A HREF="007405.html#0006" CLASS="Element59">ConnectionState</A> contains a value other than csAuthenticated or csSelected.<P CLASS="Element10">
+SubscribeMailBox calls <A HREF="007405.html#0002" CLASS="Element59">SendCmd</A> using the IMAP4 SUBSCRIBE command and the value specified in AMBName as an argument. The IMAP4 server may validate the mailbox argument in AMBName to verify that it exists. The return value for SubscribeMailBox will be True when the numeric response code from <A HREF="007405.html#0002" CLASS="Element59">SendCmd</A> is <A HREF="008477.html" CLASS="Element59">wsOk</A> and an exception does not occur.<P CLASS="Element10">
+Use <A HREF="007405.html#0013" CLASS="Element59">UnsubscribeMailBox</A> to remove a specified mailbox from the &quot;active&quot; or &quot;subscibed&quot; list.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0007">TIdIMAP4.UIDCheckMsgSeen</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007405.html" CLASS="Element59">TIdIMAP4</A>, <A HREF="011726.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Indicates if the mailbox message has been read.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>function</STRONG> UIDCheckMsgSeen(<STRONG>const</STRONG> AMsgUID: <STRONG>String</STRONG>): Boolean;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+const AMsgUID: String</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Unique Identifier for the message to examine.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Return Value</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Boolean - True when read, False when unread or on protocol error.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+UIDCheckMsgSeen is a Boolean function that indicates if the message Unique Identifier specified in AMsgUID references a message that has been read in the IMAP4 mailbox. UIDCheckMsgSeen requires that <A HREF="007405.html#0006" CLASS="Element59">ConnectionState</A> contain the value csSelected, indicating a mailbox has been selected, or an <A HREF="000366.html" CLASS="Element59">EIdConnectionStateError</A> exception will be raised.<P CLASS="Element10">
+When a mailbox has been selected, UIDCheckMsgSeen performs the IMAP4 UID command with arguments needed to retrieve mailbox message flags for the message specified in AMsgUID.<P CLASS="Element10">
+The return value for UIDCheckMsgSeen is True when the IMAP4 Seen flag is present in mailbox message flags for the message, or False when the flag is not present or the protocol request returns a value other than wsOK.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0008">TIdIMAP4.UIDDeleteMsg</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007405.html" CLASS="Element59">TIdIMAP4</A>, <A HREF="011727.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Marks a messasge for deletion in the IMAP4 mailbox.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>function</STRONG> UIDDeleteMsg(<STRONG>const</STRONG> AMsgUID: <STRONG>String</STRONG>): Boolean;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+const AMsgUID: String</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Unique Identifier for the message to delete.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Return Value</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Boolean - True on success.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+UIDDeleteMsg is a Boolean function that allows the IMAP4 client to mark the message specified in AMsgUID for deletion in the IMAP4 mailbox. AMsgUID is the Unique Identifier for the message to mark for deletion. UIDDeleteMsg does not physically remove the message from the mailbox. UIDDeleteMsg calls the <A HREF="007405.html#0012" CLASS="Element59">UIDStoreFlags</A> to add the IMAP4 Deleted flag to the message flags in the IMAP4 mailbox. Use <A HREF="007405.html#0010" CLASS="Element59">ExpungeMailBox</A> to physically remove all messages marked for deletion.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0009">TIdIMAP4.UIDRetrieve</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007405.html" CLASS="Element59">TIdIMAP4</A>, <A HREF="011728.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Retrieves the contents of a message by UID from an IMAP4 server.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>function</STRONG> UIDRetrieve(<STRONG>const</STRONG> AMsgUID: <STRONG>String</STRONG>; AMsg: <A HREF="007544.html" CLASS="Element59">TIdMessage</A>): Boolean;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+const AMsgUID: String</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Unique Identifier for the message to retrieve.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+AMsg: TIdMessage</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Storage for the retrieve message values.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Return Value</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Boolean - True on success.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+UIDRetrieve is a Boolean function used to retrieve the entire contents of a message from an IMAP4 server by Unique Identifier for the message. UIDRetrieve requires that <A HREF="007405.html#0006" CLASS="Element59">ConnectionState</A> contain the value csSelected, indicating a mailbox has been selected, or an <A HREF="000366.html" CLASS="Element59">EIdConnectionStateError</A> exception will be raised. The return value for the method will be True when the protocol response is <A HREF="008477.html" CLASS="Element59">wsOk</A>.<P CLASS="Element10">
+UIDRetrieve executes the IMAP4 UID FETCH command with the arguments needed to retrieve the message identified by the valuein AMsgUID. UIDRetrieve will retrieve the RFC message headers, body, and attachments, and mailbox message flags for storage in the message instance specified by AMsg.<P CLASS="Element10">
+Use <A HREF="007405.html#0011" CLASS="Element59">UIDRetrievePeek</A> to retrieve a mailbox message while avoiding use of the IMAP4 Seen message flag in the iMAP4 mailbox.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="000A">TIdIMAP4.UIDRetrieveAllEnvelopes</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007405.html" CLASS="Element59">TIdIMAP4</A>, <A HREF="011729.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Retrieves RFC-822 envelope data for messages in a mailbox.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>function</STRONG> UIDRetrieveAllEnvelopes(AMsgList: <A HREF="007548.html" CLASS="Element59">TIdMessageCollection</A>): Boolean;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+AMsgList: TIdMessageCollection</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Message collection for envelope data from the mailbox.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Return Value</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Boolean - True on success.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+UIDRetrieveAllEnvelopes is a Boolean function used to retrieve envelope data for all messages in the IMAP4 mailbox, and store the results in the message collection specified by AMsgList.<P CLASS="Element10">
+IMAP4 envelope information consists of data items that describes the envelope structure of a message and is computed by parsing RFC-822 message headers from individual messages in the IMAP4 mailbox. Fields in the envelope structure are in the following order: date, subject, from, sender, reply-to, to, cc, bcc, in-reply-to, and message-id.<P CLASS="Element10">
+Any member in an envelope structure that is not applicable is presented as an empty value. Note that the IMAP4 server MUST default the reply-to and sender fields from the from field; a client is not expected to know how to do this.<P CLASS="Element10">
+UIDRetrieveAllEnvelopes constructs instances of <A HREF="007544.html" CLASS="Element59">TIdMessage</A> which are assigned to collection items added to the AMsgList message collection. <A HREF="007405.html#0022" CLASS="Element59">RetrieveAllEnvelopes</A> requires that the <A HREF="007405.html#0006" CLASS="Element59">ConnectionState</A> property for the IMAP4 client contain the value csSelected, or an <A HREF="000366.html" CLASS="Element59">EIdConnectionStateError</A> exception will be raised and the return value will be set to False.<P CLASS="Element10">
+UIDRetrieveAllEnvelopes requires that <A HREF="007405.html#0006" CLASS="Element59">ConnectionState</A> contain the value csSelected, indicating that a mailbox has been selected, or an <A HREF="000366.html" CLASS="Element59">EIdConnectionStateError</A> exception will be raised.<P CLASS="Element10">
+UIDRetrieveAllEnvelopes executes the IMAP4 UID FETCH command using arguments to <A HREF="006943.html" CLASS="Element59">select</A> all envelope data items from the IMAP4 mailbox by their uniqueness identifier. UIDRetrieveAllEnvelopes will retrieve the protocol results, storing parsed values in message collection items.<P CLASS="Element10">
+The return value for UIDRetrieveAllEnvelopes will be True when the protocol response code from the IMAP4 server is <A HREF="008477.html" CLASS="Element59">wsOk</A>, and the multi-line response is successfully parsed into the AMsgList collection.<P CLASS="Element10">
+Use <A HREF="007405.html#0022" CLASS="Element59">RetrieveAllEnvelopes</A> to retrieve envelope data for messages using their messge number in the IMAP4 mailbox.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="000B">TIdIMAP4.UIDRetrieveAllHeaders</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007405.html" CLASS="Element59">TIdIMAP4</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Retrieves headers for mail messages by their uniqueness identifier.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>function</STRONG> UIDRetrieveAllHeaders(AMsgList: <A HREF="007548.html" CLASS="Element59">TIdMessageCollection</A>): Boolean;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+UIDRetrieveAllHeaders is a Boolean function used to retrieve message headers for all mail messages in the selected IMAP4 mailbox. AMsgList is the <A HREF="007548.html" CLASS="Element59">TIdMessageCollection</A> where retrieved headers are stored using newly created <A HREF="007571.html" CLASS="Element59">TIdMessageItem</A> instances.<P CLASS="Element10">
+<STRONG>Note</STRONG>: UIDRetrieveAllHeaders is not implmented at this time, and always returns the value False.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="000C">TIdIMAP4.UIDRetrieveEnvelope</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007405.html" CLASS="Element59">TIdIMAP4</A>, <A HREF="011730.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Retrieves envelope data for a specific message.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>function</STRONG> UIDRetrieveEnvelope(<STRONG>const</STRONG> AMsgUID: <STRONG>String</STRONG>; AMsg: <A HREF="007544.html" CLASS="Element59">TIdMessage</A>): Boolean;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+const AMsgUID: String</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Uniqueness Identifier for the desired message.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+AMsg: TIdMessage</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Message used to store retrieved envelope data.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Return Value</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Boolean - True on success.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+UIDRetrieveEnvelope is a Boolean function used to retrieve the IMAP envelope headers for the message identified by the uniqueness identifier in AMsgID. Values returned by the IMAP4 server are stored in the AMsg class instance.<P CLASS="Element10">
+UIDRetrieveEnvelope implements the IMAP4 UID FETCH command using AMsgId and other arguments needed to retrieve the envelope headers for the specified message.<P CLASS="Element10">
+IMAP4 envelope information consists of data items that describe the envelope structure of a message and is computed by parsing RFC-822 message headers from individual messages in the IMAP4 mailbox. Fields in the envelope structure are in the following order: date, subject, from, sender, reply-to, to, cc, bcc, in-reply-to, and message-id. Any member in an envelope structure that is not applicable is presented as an empty value.<P CLASS="Element10">
+UIDRetrieveEnvelope requires that the <A HREF="007405.html#0006" CLASS="Element59">ConnectionState</A> property contain the value csSelected, or an <A HREF="000366.html" CLASS="Element59">EIdConnectionStateError</A> exception will be raised and the return value is set to False. The return value will be True when the protocol response code is <A HREF="008477.html" CLASS="Element59">wsOk</A>, and the multi-line response containing the envelope data fields is successfully parsed into the AMsg message instance.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="000D">TIdIMAP4.UIDRetrieveFlags</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007405.html" CLASS="Element59">TIdIMAP4</A>, <A HREF="011731.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Retrieves message flags associated with the specified message.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>function</STRONG> UIDRetrieveFlags(<STRONG>const</STRONG> AMsgUID: <STRONG>String</STRONG>; AFlags: <A HREF="007570.html" CLASS="Element59">TIdMessageFlagsSet</A>): Boolean;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+const AMsgUID: String</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Uniqueness identifier for the desired message.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+AFlags: TIdMessageFlagsSet</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+set of IMAP4 flags for the indicated message.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Return Value</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Boolean - True on success.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+UIDRetrieveFlags is a Boolean function used to retrieve a set of IMAP4 message flags associated with the message identified by the uniqueness identifier specified in AMsgUID. AFlags is used to store the optional <A HREF="007569.html" CLASS="Element59">TIdMessageFlags</A> values for the message.<P CLASS="Element10">
+UIDRetrieveFlags requires that the <A HREF="007405.html#0006" CLASS="Element59">ConnectionState</A> property contain the value csSelected, or an <A HREF="000366.html" CLASS="Element59">EIdConnectionStateError</A> exception will be raised and the return value will be set to False.<P CLASS="Element10">
+UIDRetrieveFlags executes the IMAP4 UID FETCH command using arguments to retrieve the flags for the message specified in AMsgID. When the protocol response code from the IMAP4 server is <A HREF="008477.html" CLASS="Element59">wsOk</A>, the multi-line response is parsed to store flag valuein AFlags. If the server response code is not <A HREF="008477.html" CLASS="Element59">wsOk</A>, the return value for the method is set to False.<P CLASS="Element10">
+Use <A HREF="007405.html#0012" CLASS="Element59">UIDStoreFlags</A> to add or remove flags for a message identified bu it's uniqueness identifier in the IMAP4 mailbox.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="000E">TIdIMAP4.UIDRetrieveHeader</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007405.html" CLASS="Element59">TIdIMAP4</A>, <A HREF="011732.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Retrieves the RFC 822 headers for a specific message.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>function</STRONG> UIDRetrieveHeader(<STRONG>const</STRONG> AMsgUID: <STRONG>String</STRONG>; AMsg: <A HREF="007544.html" CLASS="Element59">TIdMessage</A>): Boolean;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+const AMsgUID: String</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Uniqueness identifier for the desired message.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+AMsg: TIdMessage</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Message instance to store retrieved headers.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Return Value</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Boolean - True on success.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+UIDRetrieveHeader is a Boolean function used to retrieve message headers for the uniqueness identifier specified in AMsgId. UIDRetrieveHeader retrieves all IMAP4 headers associated with the message in the IMAP4 mailbox. UIDRetrieveHeader implements the IMAP4 UID FETCH using AMsgId and other arguments needed to retrieve the RFC 822 Headers for the message.<P CLASS="Element10">
+UIDRetrieveHeader requires that the <A HREF="007405.html#0006" CLASS="Element59">ConnectionState</A> property contain the value csSelected, or an <A HREF="000366.html" CLASS="Element59">EIdConnectionStateError</A> exception will be raised and the return value will be set to False.<P CLASS="Element10">
+UIDRetrieveHeader reads the multi-line IMAP4 protocol response, and calls ReceiveHeader toload the RFC 822 headers into the AMsg message instance. The return value for the method will be True when the protocol response code from the IMAP4 server is <A HREF="008477.html" CLASS="Element59">wsOk</A>.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="000F">TIdIMAP4.UIDRetrieveMailBoxSize</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007405.html" CLASS="Element59">TIdIMAP4</A>, <A HREF="011733.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Calculates the size of all messages in a mailbox.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>function</STRONG> UIDRetrieveMailBoxSize: Integer;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Return Value</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Integer - Size of the mailbox in bytes.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+UIDRetrieveMailBoxSize is an Integer function used to retrieve the size in bytes of the currently selected IMAP4 mailbox. UIDRetrieveMailBoxSize requires the <A HREF="007405.html#0006" CLASS="Element59">ConnectionState</A> property to contain the value csSelected, or an <A HREF="000366.html" CLASS="Element59">EIdConnectionStateError</A> exception will be raised and the return value will be set to -1. The return value will be 0 when the selected <A HREF="007521.html" CLASS="Element59">TIdMailBox</A> does not contain any messages.<P CLASS="Element10">
+UIDRetrieveMailBoxSize implements the IMAP4 UID FETCH command using arguments to <A HREF="006943.html" CLASS="Element59">select</A> the RFC message size for all messages in the mailbox. The multi-line protocol response from the IMAP4 server is parsed to determine the size of each message, and the total is assigned as the return value for the method.<P CLASS="Element10">
+Use <A HREF="007405.html#0028" CLASS="Element59">RetrieveMailBoxSize</A> to calculate the size of all messages in the mailbox regardless of uniqueness identifiers for messages. <A HREF="007405.html#0028" CLASS="Element59">RetrieveMailBoxSize</A> will include messages marked for deletion, and draft messages.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0010">TIdIMAP4.UIDRetrieveMsgSize</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007405.html" CLASS="Element59">TIdIMAP4</A>, <A HREF="011734.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Retrieves the size of a message in the IMAP4 mailbox.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>function</STRONG> UIDRetrieveMsgSize(<STRONG>const</STRONG> AMsgUID: <STRONG>String</STRONG>): Integer;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+const AMsgUID: String</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Uniqueness identifier for the desired message.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Return Value</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Integer - Size of the message in the IMAP4 mailbox.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+UIDRetrieveMsgSize is an Integer function used to retrieve the size of a message in the IMAP4 mailbox by the uniqueness identifier specified in AMsgID. UIDRetrieveMsgSize requires the <A HREF="007405.html#0006" CLASS="Element59">ConnectionState</A> property to contain the value csSelected, or an <A HREF="000366.html" CLASS="Element59">EIdConnectionStateError</A> exception will be raised and the return value is set to -1.<P CLASS="Element10">
+UIDRetrieveMsgSize implements the IMAP4 UID FETCH using AMsgID and flags need to retrieve the RFC 822 message size from the currently selected IMAP4 mailbox. When the protocol response code is <A HREF="008477.html" CLASS="Element59">wsOk</A>, the values are parsed to determine the number of bytes required for the message in the mailbox. The return value for the method is -1 when a response code other than <A HREF="008477.html" CLASS="Element59">wsOk</A> is received from the IMAP4 server.<P CLASS="Element10">
+Use <A HREF="007405.html#0029" CLASS="Element59">RetrieveMsgSize</A> to retrieve the size for a message that can be marked for deletion or saved as a draft.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0011">TIdIMAP4.UIDRetrievePeek</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007405.html" CLASS="Element59">TIdIMAP4</A>, <A HREF="011735.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Retrieves a specified message from a mailbox preserving its Seen flag.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>function</STRONG> UIDRetrievePeek(<STRONG>const</STRONG> AMsgUID: <STRONG>String</STRONG>; AMsg: <A HREF="007544.html" CLASS="Element59">TIdMessage</A>): Boolean;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+const AMsgUID: String</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Uniqueness identifier for the desired message.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+AMsg: TIdMessage</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Stores the message retrieve from mailbox.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Return Value</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Boolean - True on success.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+UIDRetrievePeek is a Boolean function used to retrieve a message identified by the Uniqueness identifier specified in AMsgID, and to store the message contents in AMsg. Unlike <A HREF="007405.html#0009" CLASS="Element59">UIDRetrieve</A>, UIDRetrievePeek preserves the state of the &quot;Seen&quot; flag for the message in the mailbox.<P CLASS="Element10">
+UIDRetrievePeek requires that <A HREF="007405.html#0006" CLASS="Element59">ConnectionState</A> contain the value csSelected, or an <A HREF="000366.html" CLASS="Element59">EIdConnectionStateError</A> exception wil be raised. <A HREF="007405.html#002B" CLASS="Element59">RetrievePeek</A> sends the IMAP4 UID FETCH command to retrieve data for the specified message in AMsgID. UIDRetrievePeek insures that the server response contains untagged responses for the desired message prior to calling ReceiveHeader and receiving the body to populate the message instance.<P CLASS="Element10">
+UIDRetrievePeek sets the return value to True when the protocol response code contains the value <A HREF="008477.html" CLASS="Element59">wsOk</A>.<P CLASS="Element10">
+Use <A HREF="007405.html#002B" CLASS="Element59">RetrievePeek</A> to retrieve a message by it's relative message number in the IMAP4 mailbox.<P CLASS="Element10">
+Use <A HREF="007405.html#0009" CLASS="Element59">UIDRetrieve</A> to retrieve a message by it's uniquesness identifier, and mark the message as read in the IMAP4 mailbox.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0012">TIdIMAP4.UIDStoreFlags</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007405.html" CLASS="Element59">TIdIMAP4</A>, <A HREF="011736.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Applies flag values using the desired storage method for a specified message.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>function</STRONG> UIDStoreFlags(<STRONG>const</STRONG> AMsgUID: <STRONG>String</STRONG>; <STRONG>const</STRONG> AStoreMethod: <A HREF="007416.html" CLASS="Element59">TIdIMAP4StoreDataItem</A>; <STRONG>const</STRONG> AFlags: <A HREF="007570.html" CLASS="Element59">TIdMessageFlagsSet</A>): Boolean;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+const AMsgUID: String</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Uniqueness identifier for the affected message.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+const AStoreMethod: TIdIMAP4StoreDataItem</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Storage method for flag values.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+const AFlags: TIdMessageFlagsSet</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Flag values to apply to the affected message.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Return Value</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Boolean - True on success.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+UIDStoreFlags is a Boolean function used to apply the set of <A HREF="007569.html" CLASS="Element59">TIdMessageFlags</A> values in AFlags to the message specified by the uniqueness identifier specified in AMsgID. AStoreMethod indicates the storage method to be used for the message flag values.<P CLASS="Element10">
+AMsgID is the uniqueness identifier for the affected message. When AMsgID is omitted, the return value for the method is set to False and exits to the calling procedure or function.<P CLASS="Element10">
+UIDStoreFlags requires the <A HREF="007405.html#0006" CLASS="Element59">ConnectionState</A> property to contain the value csSelected, or an <A HREF="000366.html" CLASS="Element59">EIdConnectionStateError</A> exception is raised and the return value for the method is set to False.<P CLASS="Element10">
+UIDStoreFlags implements the IMAP4 UID STORE command using AMsgID and the directives needed to apply the flags storage methods and values specified in AStoreMethod and AFlags. The return value for the method will be True when the IMAP4 protocol reopens code is <A HREF="008477.html" CLASS="Element59">wsOk</A>.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0013">TIdIMAP4.UnsubscribeMailBox</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007405.html" CLASS="Element59">TIdIMAP4</A>, <A HREF="011737.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Removes a mailbox from the list of &quot;active&quot; or &quot;subscribed&quot; mailboxes.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>function</STRONG> UnsubscribeMailBox(<STRONG>const</STRONG> AMBName: <STRONG>String</STRONG>): Boolean;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+const AMBName: String</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Mailbox name to removed from the active or subscribed list.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Return Value</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Boolean - True on success.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+UnsubscribeMailBox is a Boolean function used to remove the mailbox name specified in AMBName to the list of &quot;active&quot; or &quot;subscribed&quot; mailboxes on the IMAP4 server. UnsubscribeMailBox updates the values that are returned by the IMAP4 LSUB command.<P CLASS="Element10">
+UnsubscribeMailBox requires that the <A HREF="007405.html#0006" CLASS="Element59">ConnectionState</A> for the client contain the value csAuthenticated or csSelected to perform the IMAP4 function. <A HREF="007405.html#0006" CLASS="Element59">SubscribeMailBox</A> can raise an <A HREF="000366.html" CLASS="Element59">EIdConnectionStateError</A> exception with the message <A HREF="006510.html" CLASS="Element59">RSIMAP4ConnectionStateError</A> if <A HREF="007405.html#0006" CLASS="Element59">ConnectionState</A> contains a value other than csAuthenticated or csSelected.<P CLASS="Element10">
+UnsubscribeMailBox calls <A HREF="007405.html#0002" CLASS="Element59">SendCmd</A> using the IMAP4 UNSUBSCRIBE command and the value specified in AMBName as an argument. UnsubscribeMailBox returns True when the response code from the IMAP4 server is <A HREF="008477.html" CLASS="Element59">wsOk</A>.<P CLASS="Element10">
+Use <A HREF="007405.html#0006" CLASS="Element59">SubscribeMailBox</A> to add a specified mailbox from the &quot;active&quot; or &quot;subscibed&quot; list.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="001D">TIdIMAP4.OnAlert</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007405.html" CLASS="Element59">TIdIMAP4</A>, <A HREF="011738.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Event handler for alert messages in IMAP4 responses.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> OnAlert: <A HREF="007200.html" CLASS="Element59">TIdAlertEvent</A>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+OnAlert is a <A HREF="007200.html" CLASS="Element59">TIdAlertEvent</A> property that represents the event handler signalled to allow an IMAP4 client to receive alert messages. Alert messages can occur in results from an IMAP4 command that selects the current mailbox, or appends a new message to a mailbox. OnAlert is signalled when the alert message is parsed from the lines in an IMAP4 response.<P CLASS="Element10">
+Applications must assign a procedure to the OnAlert event handler to allow responding to alert messages.</DIV>
+</DIV>
+<DIV CLASS="Element62">
+<HR>Created with Doc-O-Matic 2 donated to <STRONG><A HREF="http://www.delphi-jedi.org">Project JEDI</A></STRONG>. Commercial license available from the <STRONG><A HREF="http://www.doc-o-matic.com">Doc-O-Matic site</A></STRONG>.</DIV>
+</DIV></BODY></HTML>

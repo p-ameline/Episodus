@@ -1,0 +1,277 @@
+// nscompta.rh : identificateurs du fichier de ressources
+// dialogue IDD_CVITALE#define IDC_CV_CAISSE		  101
+#define IDC_CV_NUM			  102
+#define IDC_CV_CENTRE		  103
+#define IDC_CV_LISTBEN		104
+#define IDC_CV_CODEGES		105
+#define IDC_CV_CODEREG		106
+#define IDC_CV_ADRCAISSE 	107
+#define IDC_CV_AJOUTER		108
+#define IDC_CV_MODIFIER		109
+#define IDC_CV_ENLEVER		110
+
+// dialogue IDD_NUMSS
+#define IDC_NUMSS_EDIT		101
+
+// dialogue IDD_BENEFICIAIRE
+#define IDC_BNF_NOMPATRO	 101
+#define IDC_BNF_NOMUSUEL	 102
+#define IDC_BNF_PRENOM		 103
+#define IDC_BNF_DATENAISS	 104
+#define IDC_BNF_HEURENAISS 105
+#define IDC_BNF_RANGGEM		 106
+#define IDC_BNF_ADRESSE		 107
+#define IDC_BNF_GBALD		   108
+#define IDC_BNF_NOALD		   109
+#define IDC_BNF_DLISTE1		 110
+#define IDC_BNF_HLISTE1		 111
+#define IDC_BNF_MULT1		   112
+#define IDC_BNF_DLISTE2		 113
+#define IDC_BNF_HLISTE2		 114
+#define IDC_BNF_MULT2		   115
+#define IDC_BNF_CBQUALITE	 116
+#define IDC_BNF_GBAMO		   117
+#define IDC_BNF_AMOOUI		 118
+#define IDC_BNF_AMONON		 119
+#define IDC_BNF_MUTUELLE	 120
+#define IDC_BNF_GBMUTU		 121
+#define IDC_BNF_MUTUOUI		 122
+#define IDC_BNF_MUTUNON		 123
+#define IDC_BNF_CODESITU	 124
+#define IDC_BNF_GARANTIES	 125
+#define IDC_BNF_PATENCOURS 126
+#define IDC_BNF_AUTREPAT	 127
+
+// dialogue IDD_COMPT
+#define IDC_CPT_EXAMEN      101
+#define IDC_CPT_GBMONNAIE   102
+#define IDC_CPT_LOC         103
+#define IDC_CPT_EURO        104
+#define IDC_CPT_LISTFSE			105
+#define IDC_CPT_PREST       106
+#define IDC_CPT_IDEPL       107
+#define IDC_CPT_IKM         108#define IDC_CPT_SOMDUE			109
+#define IDC_CPT_DEPASS			110
+#define IDC_CPT_PAYE        111
+#define IDC_CPT_RESTEDU			112
+#define IDC_CPT_TPAYANT			113
+#define IDC_CPT_PRENDCOR		114
+#define IDC_CPT_LISTFACT		115
+#define IDC_CPT_LISTTPAYANT 116
+#define IDC_CPT_PAIEMENT		117
+#define IDC_CPT_GBCONTEXTE  118
+#define IDC_CPT_EXTERNE			119
+#define IDC_CPT_AMBULATOIRE	120
+#define IDC_CPT_HOSPITAL		121
+#define IDC_CPT_DATE        122
+#define IDC_CPT_HEURE       123
+#define IDC_CPT_CONSULT			124
+#define IDC_CPT_CCAM        125
+#define IDC_CPT_CLAM        126
+#define IDC_CPT_LOT         127
+// dialogue IDD_FACT
+#define IDC_FACT_ORGA		  101
+#define IDC_FACT_MONTANT	102
+#define IDC_FACT_UNITE		103
+#define IDC_FACT_LOC		  104
+#define IDC_FACT_EURO		  105
+#define IDC_FACT_MODEPAIE	106
+#define IDC_FACT_DATE		  107
+#define IDC_PAI_IMPRIMER	108
+
+// dialogue IDD_TPAYANT
+#define IDC_TP_ORGA			  101
+#define IDC_TP_RESTEDU		102
+#define IDC_TP_UNITE		  103
+#define IDC_TP_LOC			  104
+#define IDC_TP_EURO			  105
+#define IDC_TP_PAIEMENT		106
+
+// dialogue IDD_LISTCOMPT
+#define IDC_LC_LW			    101
+#define IDC_LC_TOTALDU		102
+#define IDC_LC_TOTALPAYE	103
+#define IDC_LC_MONNAIE		104
+#define IDC_LC_LOC			  105
+#define IDC_LC_EURO			  106
+
+// dialogue IDD_LISTIMP
+#define IDC_LI_MONNAIE		101
+#define IDC_LI_LOC			  102
+#define IDC_LI_EURO			  103
+#define IDC_LI_LW			    104
+#define IDC_LI_IMPRIMER		105
+#define IDC_LI_LIBELLE		106
+
+// dialogue IDD_1610
+#define IDC_1610_LIEU		  101
+#define IDC_1610_QUALIF		102
+#define IDC_1610_CODE		  103
+#define IDC_1610_COEFF		104
+#define IDC_1610_QTE		  105
+#define IDC_1610_COMPL		106
+#define IDC_1610_DNBR		  107
+#define IDC_1610_MONTANT	108#define IDC_1610_DATE		  109
+#define IDC_1610_HEURE		110
+#define IDC_1610_SIGLE		111
+#define IDC_1610_DIVIS		112
+
+// dialogue IDD_1610_INIT
+#define IDC_1610_INIT_DATE		101
+#define IDC_1610_INIT_HEURE		102
+#define IDC_1610_INIT_EXAMEN	103
+#define IDC_1610_INIT_CODE		104
+#define IDC_1610_INIT_COEFF		105
+#define IDC_1610_INIT_MONTANT	106
+#define IDC_1610_INIT_SIGLE		107
+#define IDC_1610_INIT_DIVIS		108
+
+// Dialogue IDD_1620
+#define IDC_1620_DATE		  101
+#define IDC_1620_HEURE		102
+#define IDC_1620_CODEIFD	103
+#define IDC_1620_QUANTITE	104
+#define IDC_1620_MONTANT	105
+#define IDC_1620_SIGLE		106
+
+// Dialogue IDD_1630
+#define IDC_1630_DATE		  101
+#define IDC_1630_HEURE		102
+#define IDC_1630_CODEIK		103
+#define IDC_1630_NBREKM		104
+#define IDC_1630_MONTANT	105
+#define IDC_1630_SIGLE		106
+
+// Dialogue IDD_CCAM_INIT
+#define IDC_CCAM_CODE	      101
+#define IDC_CCAM_DATE	      102
+#define IDC_CCAM_POURCENT	  103
+#define IDC_CCAM_MODIFS	    104
+#define IDC_CCAM_MONTANT	  105
+#define IDC_CCAM_SIGLE	    106
+
+// Dialogue IDD_CLAM_INIT
+#define IDC_LIBRE_CODE	      101
+#define IDC_LIBRE_DATE	      102
+#define IDC_LIBRE_POURCENT	  103
+#define IDC_LIBRE_MONTANT_E	  104
+#define IDC_LIBRE_MONTANT_F	  105
+#define IDC_LIBRE_SIGLE_E	    106
+#define IDC_LIBRE_SIGLE_F	    107
+
+// Dialogue IDD_CLAM_INIT
+#define IDC_LOTS_CHOISIS	    101
+#define IDC_LOTS_CHOIX	      102
+#define IDC_LOTS_CHOISIR	    103
+#define IDC_LOTS_ANNULER	    104
+#define IDC_LOTS_MONTANT_E	  105
+#define IDC_LOTS_MONTANT_F	  106
+#define IDC_LOTS_SIGLE_E	    107
+#define IDC_LOTS_SIGLE_F	    108
+
+// Dialogue IDD_AGA
+#define IDC_AGA_LW				  101
+#define IDC_AGA_GLOBAL			102
+#define IDC_AGA_LOC				  103
+#define IDC_AGA_EURO			  104
+#define IDC_AGA_MONNAIE			105
+#define IDC_AGA_IMPRIMER		106
+
+// Dialogue IDD_LISTDEP#define IDC_LISTDEP_LW			  101#define IDC_LISTDEP_LB	      102
+#define IDC_LISTDEP_EDIT	    103
+#define IDC_LISTDEP_IMPRIMER  104
+// Dialogue IDD_CRITERES
+#define IDC_CRIT_DATE1	      101
+#define IDC_CRIT_DATE2	      102
+#define IDC_CRIT_ACTES			  103
+#define IDC_CRIT_ACTESPERSO		104
+#define IDC_CRIT_ACTESTOUS		105
+
+// Dialogue IDD_MULTICRITERES#define IDC_MC_DATE1			  101
+#define IDC_MC_DATE2			  102
+#define IDC_MC_EXAMEN			  103
+#define IDC_MC_PRESCRIPT		104
+#define IDC_MC_ACTES			  105
+#define IDC_MC_ACTES_TOUS		106
+#define IDC_MC_ACTES_PERSO	107
+#define IDC_MC_IMP				  108
+#define IDC_MC_IMP_TOUS			109
+#define IDC_MC_IMP_IMPAYES	110
+#define IDC_MC_IMP_PAYES		111
+#define IDC_MC_CTXT				  112
+#define IDC_MC_CTXT_TOUS		113
+#define IDC_MC_CTXT_NP			114
+#define IDC_MC_CTXT_EXT			115
+#define IDC_MC_CTXT_AMBU		116
+#define IDC_MC_CTXT_HOSP		117
+
+// Dialogue IDD_MULTICRITIMP
+#define IDC_MCI_DATE1			  101
+#define IDC_MCI_DATE2			  102
+#define IDC_MCI_EXAMEN			103
+#define IDC_MCI_PRESCRIPT		104
+#define IDC_MCI_ACTES			  105
+#define IDC_MCI_ACTES_TOUS	106
+#define IDC_MCI_ACTES_PERSO	107
+#define IDC_MCI_CTXT			  108
+#define IDC_MCI_CTXT_TOUS		109
+#define IDC_MCI_CTXT_NP		  110
+#define IDC_MCI_CTXT_EXT		111
+#define IDC_MCI_CTXT_AMBU		112
+#define IDC_MCI_CTXT_HOSP		113
+#define IDC_MCI_ORGA			  114
+
+// Dialogue IDD_FACTCRITERES
+#define IDC_FC_DATE1			  101
+#define IDC_FC_DATE2			  102
+#define IDC_FC_ACTES			  103
+#define IDC_FC_ACTES_TOUS		104
+#define IDC_FC_ACTES_PERSO	105
+#define IDC_FC_ORGA				  106
+
+// Dialogue IDD_LISTACTES
+#define IDC_LA_LW				    101
+#define IDC_LA_IMPRIMER			102
+#define IDC_LA_LIBELLE			103
+
+// Dialogue IDD_SOMACTES
+#define IDC_SOMACTES_EXAMENS  101
+#define IDC_SOMACTES_TOTAUX   102
+#define IDC_SOMACTES_KCODES   103
+#define IDC_SOMACTES_IMPRIMER 104
+#define IDC_SOMACTES_LIBELLE  105
+#define IDC_TOTAL_COMPTE      106
+#define IDC_TOTAL_DEPASS      107
+
+// Dialogue IDD_SOMENCAISS
+#define IDC_SE_LOC		      101
+#define IDC_SE_EURO		      102
+#define IDC_SE_GLOBAL	      103
+#define IDC_SE_MONNAIE	    104
+#define IDC_SE_IMPRIMER	    105
+#define IDC_SE_LIBELLE	    106
+
+// Dialogue IDD_SAISIETP
+#define IDC_STP_LIBCOURT    101
+#define IDC_STP_LIBLONG		  102
+#define IDC_STP_ADRESSE		  103
+#define IDC_STP_CHOIXTP		  104
+
+// Dialogue IDD_CHOIXTP
+#define IDC_CTP_LW	        101
+
+// Dialogue
+#define IDC_LANCER          101
+#define IDC_FICHIER_RSP     102
+
+// Dialogue IDD_CPTA_SEARCH_PROCESS
+#define IDC_DISPLAY_DATE    101
+#define IDC_DISPLAY_CODE    102
+#define IDC_CHECK_ACK       103
+#define IDC_CHECK_STOP      104
+
+#define ID_ELARGIR 201
+
+// fin de nscompta.rh
+////////////////////////////////////////////////////
+

@@ -1,0 +1,267 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+<TITLE>TIdLogBase</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <META name="GENERATOR" content="Doc-O-Matic">
+    <LINK rel="STYLESHEET" href="default.css" type="text/css">
+
+<SCRIPT LANGUAGE="JavaScript1.2" SRC="scripts.js"></SCRIPT>
+</HEAD>
+<BODY CLASS="Element57">
+<TABLE BORDER="0" BGCOLOR="#AACCFF" WIDTH="100%" CELLSPACING="0" CELLPADDING="0">
+<TR><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element1">
+Indy 9</DIV>
+</TD><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element2">
+<A HREF="content.html" CLASS="Element59">Content</A> | <A HREF="idx.html" CLASS="Element59">Index</A> | <A HREF="symref.html" CLASS="Element59">Reference</A></DIV>
+</TD></TR></TABLE><DIV CLASS="Element58">
+<DIV CLASS="Element5">
+TIdLogBase</DIV>
+<DIV CLASS="Element7">
+<A HREF="012100.html" CLASS="Element59">Hierarchy</A>, <A HREF="012101.html" CLASS="Element59">Properties</A>, <A HREF="012102.html" CLASS="Element59">Methods</A>, <A HREF="012103.html" CLASS="Element59">Events</A>, <A HREF="012104.html" CLASS="Element59">See Also</A>, <A HREF="002275.html" CLASS="Element59">Unit: IdLogBase</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Defines a component logging Framework.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12">TIdLogBase = <STRONG>class</STRONG>(<A HREF="007248.html" CLASS="Element59">TIdConnectionIntercept</A>)</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Unit</DIV>
+<DIV CLASS="Element69">
+<A HREF="002275.html" CLASS="Element59">IdLogBase</A></DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+TIdLogBase is an abstract class that defines a framework for logging information about Indy communication components.<P CLASS="Element10">
+TIdLogBase is a descendant of <A HREF="007248.html" CLASS="Element59">TIdConnectionIntercept</A>. TIdLogBase implements inherited virtual methods to write text strings to a log when <A HREF="007713.html" CLASS="Element59">TIdSocketHandle</A> operations are performed. These operations include <A HREF="000295.html" CLASS="Element59">connect</A>, read, write, and disconnect.<P CLASS="Element10">
+Messages written to the log may optionally transform all <STRONG><A HREF="000534.html" CLASS="Element59">EOL</A></STRONG> characters, (<STRONG>Carriage Return</STRONG> + <STRONG>Line Feed</STRONG>) by default, to the token <STRONG>'&lt;<A HREF="000534.html" CLASS="Element59">EOL</A>&gt;'</STRONG>. A log message can optionally generate the date and time it was written to the log.<P CLASS="Element10">
+<STRONG>Note</STRONG>: TIdLogBase does not specify the destination for log messages. TIdLogBase descendants must implement the virtual methods in the class to resolve where log messages are stored, or written.<P CLASS="Element10">
+TIdLogBase is the ancestor class for the <A HREF="007511.html" CLASS="Element59">TIdLogDebug</A> component. <A HREF="007511.html" CLASS="Element59">TIdLogDebug</A> demonstrates an implementation that can store messages in a file stream or write messages to the standard Debugger Output.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0000">TIdLogBase.Active</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007510.html" CLASS="Element59">TIdLogBase</A>, <A HREF="012105.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Start or stop logging of messages.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> Active: Boolean;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Active is used to start or stop logging of messages from <A HREF="007510.html#0008" CLASS="Element59">Send</A> and <A HREF="007510.html#0006" CLASS="Element59">Receive</A> operations performed using the Binding <A HREF="007071.html" CLASS="Element59">socket</A> handle. Set Active to <STRONG>True</STRONG> to begin message logging. The logging destination will be Opened if it is currently Closed. Set Active to <STRONG>False</STRONG> to stop message logging. The logging destination will be Closed if it is currently Open.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0005">TIdLogBase.LogTime</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007510.html" CLASS="Element59">TIdLogBase</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Specifies if log messages are date- and time-stamped.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> LogTime: Boolean;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+LogTime is a <STRONG>Boolean</STRONG> property that indicates if the log message should automatically include the current date and time when the message is created. The default value for LogTime is <STRONG>True</STRONG>, as assigned in the <A HREF="007510.html#0002" CLASS="Element59">Create</A> constructor.<P CLASS="Element10">
+If LogTime is <STRONG>True</STRONG>, a message will have the current date and time prepended to the message contents. Date and time is formatted using the value given in the global ShortDateFormat variable.<P CLASS="Element10">
+LogTime is called from virtual methods in the class as a part of message formatting routines.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0007">TIdLogBase.ReplaceCRLF</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007510.html" CLASS="Element59">TIdLogBase</A>, <A HREF="012106.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Indicates that line-end characters in a message should be replace with tags.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> ReplaceCRLF: Boolean;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+ReplaceCRLF is a Boolean property that indicates if the line-end characters <A HREF="000298.html" CLASS="Element59">CR</A>, <A HREF="003176.html" CLASS="Element59">LF</A>, and <A HREF="000534.html" CLASS="Element59">EOL</A> in a log message should be replace with their tag counterparts &quot;&lt;<A HREF="000298.html" CLASS="Element59">CR</A>&gt;&quot;, &quot;&lt;<A HREF="003176.html" CLASS="Element59">LF</A>&gt;&quot;, and &quot;&lt;<A HREF="000534.html" CLASS="Element59">EOL</A>&gt;&quot;. ReplaceCRLF is usedin the <A HREF="007510.html#0006" CLASS="Element59">Receive</A> and <A HREF="007510.html#0008" CLASS="Element59">Send</A> methods prior to writing of the log message.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0001">TIdLogBase.Connect</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007510.html" CLASS="Element59">TIdLogBase</A>, <A HREF="012107.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Writes a log message when a connection is established.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>procedure</STRONG> Connect(AConnection: TComponent); <STRONG>override</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+AConnection: TComponent</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Component establishing the connection.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Connect is a procedure used to write a log message when a connection is opened for the component in AConnection. The log message will contain an optional date, and the operation name. For example:<P CLASS="Element10">
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12">
+      01/01/20000 13:03:42: Connected.
+</PRE></DIV>
+</DIV>
+<P CLASS="Element10">
+Set <A HREF="007510.html#0005" CLASS="Element59">LogTime</A> to <STRONG>True</STRONG> to include date and time information in the log message.<P CLASS="Element10">
+Connect calls the inherited Connect method prior to generating the status message.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0002">TIdLogBase.Create</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007510.html" CLASS="Element59">TIdLogBase</A>, <A HREF="012108.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Constructor for the object instance.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>constructor</STRONG> Create(AOwner: TComponent); <STRONG>override</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+AOwner: TComponent</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Owner of the object instance.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Create is the overridfen constructor for the object instance. Create relies on the inherited Create constructor, and sets the default values of <A HREF="007510.html#0005" CLASS="Element59">LogTime</A> (<STRONG>True</STRONG>) and <A HREF="007510.html#0007" CLASS="Element59">ReplaceCRLF</A> (<STRONG>True</STRONG>).<P CLASS="Element10">
+<STRONG>Note</STRONG>: Applications should not create instances of <A HREF="007510.html" CLASS="Element59">TIdLogBase</A>. Create a <A HREF="007510.html" CLASS="Element59">TIdLogBase</A> descendant, like <A HREF="007511.html" CLASS="Element59">TIdLogDebug</A>, that implements the abstract methods for writing and storing messages to the desired destination.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0003">TIdLogBase.Destroy</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007510.html" CLASS="Element59">TIdLogBase</A>, <A HREF="012109.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Frees the object instance.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>destructor</STRONG> Destroy; <STRONG>override</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Destroy is the Destructor for the object instance. Destroy insures that the logging component is not <A HREF="007510.html#0000" CLASS="Element59">Active</A> prior to calling the inherited Destructor.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0004">TIdLogBase.Disconnect</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007510.html" CLASS="Element59">TIdLogBase</A>, <A HREF="012110.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Writes a log message and closes a connection.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>procedure</STRONG> Disconnect; <STRONG>override</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Disconnect is a procedure used to write a log message when a connection is closed. The log message will contain an optional date, and the operation name. For example:<P CLASS="Element10">
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12">
+      01/01/20000 13:03:42: Disconnected.
+</PRE></DIV>
+</DIV>
+<P CLASS="Element10">
+Set <A HREF="007510.html#0005" CLASS="Element59">LogTime</A> to <STRONG>True</STRONG> to include date and time information in the log message. <A HREF="007510.html#0001" CLASS="Element59">Connect</A> relies on a virtual ethod to perform formatting and output of messages to the log.<P CLASS="Element10">
+Disconnect calls the inherited Disconnect method to reset the component that owns the connection.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0006">TIdLogBase.Receive</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007510.html" CLASS="Element59">TIdLogBase</A>, <A HREF="012111.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Implements writing of stream-based messages to the logging destination for Receive operations.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>procedure</STRONG> Receive(ABuffer: TStream); <STRONG>override</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+ABuffer: TStream</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Stream containing the message to be logged.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Receive is an overriden procedure in <A HREF="007510.html" CLASS="Element59">TIdLogBase</A> that implements logging of message contents for the stream ABuffer for Receive operations. Receive calls the inherited method prior to constructing the contents of the log message from the input stream. Receive relies on a virutal method in the class to perform output of the log message to the logging destination.<P CLASS="Element10">
+When <A HREF="007510.html#0005" CLASS="Element59">LogTime</A> is True, the current date and time stamp is prepended to the log message.<P CLASS="Element10">
+When <A HREF="007510.html#0007" CLASS="Element59">ReplaceCRLF</A> is True, all instances of <A HREF="000298.html" CLASS="Element59">CR</A>, <A HREF="003176.html" CLASS="Element59">LF</A>, and <A HREF="000534.html" CLASS="Element59">EOL</A> in the message are replaced with their tag counterparts, &quot;&lt;<A HREF="000298.html" CLASS="Element59">CR</A>&gt;&quot;, &quot;&lt;<A HREF="003176.html" CLASS="Element59">LF</A>&gt;&quot;, and &quot;&lt;<A HREF="000534.html" CLASS="Element59">EOL</A>&gt;&quot;.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0008">TIdLogBase.Send</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007510.html" CLASS="Element59">TIdLogBase</A>, <A HREF="012112.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Implements writing of stream-based messages to the logging destination for Send operations.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>procedure</STRONG> Send(ABuffer: TStream); <STRONG>override</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+ABuffer: TStream</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Stream containing the message to be logged.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Send is an overriden procedure in <A HREF="007510.html" CLASS="Element59">TIdLogBase</A> that implements logging of message contents for the stream ABuffer for Send operations. Send calls the inherited method prior to constructing the contents of the log message from the input stream. Send relies on a virutal method in the class to perform output of the log message to the logging destination.<P CLASS="Element10">
+When <A HREF="007510.html#0005" CLASS="Element59">LogTime</A> is True, the current date and time stamp is prepended to the log message.<P CLASS="Element10">
+When <A HREF="007510.html#0007" CLASS="Element59">ReplaceCRLF</A> is True, all instances of <A HREF="000298.html" CLASS="Element59">CR</A>, <A HREF="003176.html" CLASS="Element59">LF</A>, and <A HREF="000534.html" CLASS="Element59">EOL</A> in the message are replaced with their tag counterparts, &quot;&lt;<A HREF="000298.html" CLASS="Element59">CR</A>&gt;&quot;, &quot;&lt;<A HREF="003176.html" CLASS="Element59">LF</A>&gt;&quot;, and &quot;&lt;<A HREF="000534.html" CLASS="Element59">EOL</A>&gt;&quot;.</DIV>
+</DIV>
+<DIV CLASS="Element62">
+<HR>Created with Doc-O-Matic 2 donated to <STRONG><A HREF="http://www.delphi-jedi.org">Project JEDI</A></STRONG>. Commercial license available from the <STRONG><A HREF="http://www.doc-o-matic.com">Doc-O-Matic site</A></STRONG>.</DIV>
+</DIV></BODY></HTML>

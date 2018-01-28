@@ -1,0 +1,82 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+<TITLE>TIdNNTPOnSelectGroup</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <META name="GENERATOR" content="Doc-O-Matic">
+    <LINK rel="STYLESHEET" href="default.css" type="text/css">
+
+<SCRIPT LANGUAGE="JavaScript1.2" SRC="scripts.js"></SCRIPT>
+</HEAD>
+<BODY CLASS="Element57">
+<TABLE BORDER="0" BGCOLOR="#AACCFF" WIDTH="100%" CELLSPACING="0" CELLPADDING="0">
+<TR><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element1">
+Indy 9</DIV>
+</TD><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element2">
+<A HREF="content.html" CLASS="Element59">Content</A> | <A HREF="idx.html" CLASS="Element59">Index</A> | <A HREF="symref.html" CLASS="Element59">Reference</A></DIV>
+</TD></TR></TABLE><DIV CLASS="Element58">
+<DIV CLASS="Element5">
+TIdNNTPOnSelectGroup</DIV>
+<DIV CLASS="Element7">
+<A HREF="002306.html" CLASS="Element59">Unit: IdNNTPServer</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Event type signalled when an NNTP client selects the active newsgroup.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12">TIdNNTPOnSelectGroup = <STRONG>procedure</STRONG> (AThread: <A HREF="007599.html" CLASS="Element59">TIdNNTPThread</A>; <STRONG>const</STRONG> AGroup: <STRONG>string</STRONG>; <STRONG>var</STRONG> VMsgCount: Integer; <STRONG>var</STRONG> VMsgFirst: Integer; <STRONG>var</STRONG> VMsgLast: Integer; <STRONG>var</STRONG> VGroupExists: Boolean) <STRONG>of</STRONG> <STRONG>object</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Unit</DIV>
+<DIV CLASS="Element69">
+<A HREF="002306.html" CLASS="Element59">IdNNTPServer</A></DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+AGroup</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Newsgroup anme requested.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+AThread</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+THreaded client connection for the event.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+VGroupExists</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Group exists on the NNTTP server.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+VMsgCount</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Number of messages in the newsgroup.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+VMsgFirst</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+First message number in the newsgroup.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+VMsgLast</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Last message number in the newsgroup.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+TIdNNTPOnSelectGroup is an event type signalled when an NNTP client connection issues the NNTP command to change the active newsgroup.</DIV>
+</DIV>
+<DIV CLASS="Element62">
+<HR>Created with Doc-O-Matic 2 donated to <STRONG><A HREF="http://www.delphi-jedi.org">Project JEDI</A></STRONG>. Commercial license available from the <STRONG><A HREF="http://www.doc-o-matic.com">Doc-O-Matic site</A></STRONG>.</DIV>
+</DIV></BODY></HTML>

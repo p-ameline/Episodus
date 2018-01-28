@@ -1,0 +1,94 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+<TITLE>TIpStruct</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <META name="GENERATOR" content="Doc-O-Matic">
+    <LINK rel="STYLESHEET" href="default.css" type="text/css">
+
+<SCRIPT LANGUAGE="JavaScript1.2" SRC="scripts.js"></SCRIPT>
+</HEAD>
+<BODY CLASS="Element57">
+<TABLE BORDER="0" BGCOLOR="#AACCFF" WIDTH="100%" CELLSPACING="0" CELLPADDING="0">
+<TR><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element1">
+Indy 9</DIV>
+</TD><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element2">
+<A HREF="content.html" CLASS="Element59">Content</A> | <A HREF="idx.html" CLASS="Element59">Index</A> | <A HREF="symref.html" CLASS="Element59">Reference</A></DIV>
+</TD></TR></TABLE><DIV CLASS="Element58">
+<DIV CLASS="Element5">
+TIpStruct</DIV>
+<DIV CLASS="Element7">
+<A HREF="015397.html" CLASS="Element59">Example</A>, <A HREF="002304.html" CLASS="Element59">Unit: IdNetworkCalculator</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Provides storage for the components of an IP address or network mask.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12">TIpStruct = <STRONG>record</STRONG>
+  <STRONG>case</STRONG> integer <STRONG>of</STRONG>
+    0: (Byte1: byte;
+        Byte2: byte;
+        Byte3: byte;
+        Byte4: byte;);
+    1: (FullAddr: Longword;);
+  <STRONG>end</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Unit</DIV>
+<DIV CLASS="Element69">
+<A HREF="002304.html" CLASS="Element59">IdNetworkCalculator</A></DIV>
+<DIV CLASS="Element14">
+Members</DIV>
+<DIV CLASS="Element20">
+Byte1: byte;</DIV>
+<DIV CLASS="Element22">
+<DIV CLASS="Element21">
+Byte1 represents one <STRONG>Byte</STRONG> of the 4-byte IP address or network mask. Use FullAddr to access the <STRONG>LongWord</STRONG> variant of <A HREF="007918.html" CLASS="Element59">TIpStruct</A>.</DIV>
+</DIV>
+<DIV CLASS="Element20">
+Byte2: byte;</DIV>
+<DIV CLASS="Element22">
+<DIV CLASS="Element21">
+Byte2 represents one <STRONG>Byte</STRONG> of the 4-byte IP address or network mask. Use FullAddr to access the <STRONG>LongWord</STRONG> variant of <A HREF="007918.html" CLASS="Element59">TIpStruct</A>.</DIV>
+</DIV>
+<DIV CLASS="Element20">
+Byte3: byte;</DIV>
+<DIV CLASS="Element22">
+<DIV CLASS="Element21">
+Byte3 represents one <STRONG>Byte</STRONG> of the 4-byte IP address or network mask. Use FullAddr to access the <STRONG>LongWord</STRONG> variant of <A HREF="007918.html" CLASS="Element59">TIpStruct</A>.</DIV>
+</DIV>
+<DIV CLASS="Element20">
+Byte4: byte;</DIV>
+<DIV CLASS="Element22">
+<DIV CLASS="Element21">
+Byte4 represents one <STRONG>Byte</STRONG> of the 4-byte IP address or network mask. Use FullAddr to access the <STRONG>LongWord</STRONG> variant of <A HREF="007918.html" CLASS="Element59">TIpStruct</A>.</DIV>
+</DIV>
+<DIV CLASS="Element20">
+FullAddr: Longword;</DIV>
+<DIV CLASS="Element22">
+<DIV CLASS="Element21">
+FullAddr represents the IP address or network mask as a 32-bit <STRONG>LongWord</STRONG> value. Use Byte1, Byte2, Byte3, or Byte4 to access the <STRONG>Byte</STRONG> variant of <A HREF="007918.html" CLASS="Element59">TIpStruct</A>.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+TIpStruct is a variant <STRONG>record</STRONG> used to store IP address values. TIpStruct has the following format:<P CLASS="Element10">
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12">+-------+-------+-------+-------+
+| Byte4 | Byte3 | Byte2 | Byte1 | (Byte variant)
++-------+-------+-------+-------+
+|           FullAddr            | (LongWord variant)
++-------------------------------+</PRE></DIV>
+</DIV>
+<P CLASS="Element10">
+TIpStruct provides access to the value of the IP address as a sequence of <STRONG>Byte</STRONG> values using Byte1, Byte2, Byte3, and Byte4. TIpStruct also provides access to the value of the IP address as a <STRONG>LongWord</STRONG> value using FullAddr.<P CLASS="Element10">
+TIpStruct is used by <A HREF="007917.html" CLASS="Element59">TIpProperty</A> and the functions IP and StrToIP to store IP addresses.</DIV>
+</DIV>
+<DIV CLASS="Element62">
+<HR>Created with Doc-O-Matic 2 donated to <STRONG><A HREF="http://www.delphi-jedi.org">Project JEDI</A></STRONG>. Commercial license available from the <STRONG><A HREF="http://www.doc-o-matic.com">Doc-O-Matic site</A></STRONG>.</DIV>
+</DIV></BODY></HTML>

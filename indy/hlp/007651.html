@@ -1,0 +1,395 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+<TITLE>TIdRequestHeaderInfo</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <META name="GENERATOR" content="Doc-O-Matic">
+    <LINK rel="STYLESHEET" href="default.css" type="text/css">
+
+<SCRIPT LANGUAGE="JavaScript1.2" SRC="scripts.js"></SCRIPT>
+</HEAD>
+<BODY CLASS="Element57">
+<TABLE BORDER="0" BGCOLOR="#AACCFF" WIDTH="100%" CELLSPACING="0" CELLPADDING="0">
+<TR><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element1">
+Indy 9</DIV>
+</TD><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element2">
+<A HREF="content.html" CLASS="Element59">Content</A> | <A HREF="idx.html" CLASS="Element59">Index</A> | <A HREF="symref.html" CLASS="Element59">Reference</A></DIV>
+</TD></TR></TABLE><DIV CLASS="Element58">
+<DIV CLASS="Element5">
+TIdRequestHeaderInfo</DIV>
+<DIV CLASS="Element7">
+<A HREF="013289.html" CLASS="Element59">Hierarchy</A>, <A HREF="013290.html" CLASS="Element59">Properties</A>, <A HREF="013291.html" CLASS="Element59">Methods</A>, <A HREF="013292.html" CLASS="Element59">See Also</A>, <A HREF="002252.html" CLASS="Element59">Unit: IdHTTPHeaderInfo</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Implements message headers for an HTTP request.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12">TIdRequestHeaderInfo = <STRONG>class</STRONG>(<A HREF="007317.html" CLASS="Element59">TIdEntityHeaderInfo</A>)</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Unit</DIV>
+<DIV CLASS="Element69">
+<A HREF="002252.html" CLASS="Element59">IdHTTPHeaderInfo</A></DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+TIdRequestHeaderInfo is a <A HREF="007317.html" CLASS="Element59">TIdEntityHeaderInfo</A> descendant that implements properties and methods needed to represent message headers for a HTTP request, as described in the Internet Standards document:<P CLASS="Element10">
+<UL>
+<LI>RFC 2616 - Hypertext Transfer Protocol version 1.1 [HTTP/1.1] (http://www.rfc-editor.org/rfc/rfc2616.txt)</UL>
+<P CLASS="Element10">
+The request headers allow the client to pass additional information about the request, or the request client, to the server.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0000">TIdRequestHeaderInfo.Accept</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007651.html" CLASS="Element59">TIdRequestHeaderInfo</A>, <A HREF="013293.html" CLASS="Element59">Example</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Specifies the media types accepted in a HTTP response.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> Accept: <STRONG>string</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Accept is a String property that specifies the media types that are acceptable in a resulting HTTP response, and can be used to limit the request to a small set of desired types. If no Accept header field is present, then it is assumed that the client accepts all media types.<P CLASS="Element10">
+Accept is composed of the media type, subtype, and optional parameters. The asterisk &quot;*&quot; character is used to group media types into ranges, with &quot;*/*&quot; indicating all media types and &quot;type/*&quot; indicating all subtypes of that type.<P CLASS="Element10">
+Each media type and subtype may include one or more parameters, beginning with the &quot;q&quot; parameter that indicates the relative quality factor. Quality factors allow the user agent to determine the relative degree of preference for that media type and subtype, using the qvalue scale from 0 to 1. The default value is q=1.<P CLASS="Element10">
+Accept is updated in the <A HREF="007651.html#0003" CLASS="Element59">ProcessHeaders</A> method. Accept is used in <A HREF="007651.html#0001" CLASS="Element59">SetHeaders</A> to read the header values for the request.<P CLASS="Element10">
+The default value for Accept is set to 'text/html, */*' when the <A HREF="007651.html#0005" CLASS="Element59">Clear</A> method is called.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0001">TIdRequestHeaderInfo.AcceptCharSet</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007651.html" CLASS="Element59">TIdRequestHeaderInfo</A>, <A HREF="013294.html" CLASS="Element59">Example</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Indicates the character sets accepted in a HTTP response.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> AcceptCharSet: <STRONG>string</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+AcceptCharSet is a String property that indicates the character sets accepted in a resulting HTTP response. AcceptCharSet may contain any valid Character set value as described in the Internet Standards document:<P CLASS="Element10">
+<UL>
+<LI>RFC 1700, Assigned Numbers</UL>
+<P CLASS="Element10">
+Each charset value may have an associated quality value which represents the user's preference for that charset. The default value is q=1. For example:<P CLASS="Element10">
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12">  iso-8859-5, unicode-1-1; q=0.8</PRE></DIV>
+</DIV>
+<P CLASS="Element10">
+The special value &quot;*&quot; in <A HREF="007651.html#0000" CLASS="Element59">Accept</A>-CharSet matches every character set including ISO-8859-1. If no &quot;*&quot; is present in AcceptCharSet, then all character sets not explicitly mentioned get a quality value of 0, except for ISO-8859-1, which gets a quality value of 1 if not explicitly mentioned.<P CLASS="Element10">
+If no AcceptCharSet header is present, the default is that any character set is acceptable.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0002">TIdRequestHeaderInfo.AcceptEncoding</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007651.html" CLASS="Element59">TIdRequestHeaderInfo</A>, <A HREF="013295.html" CLASS="Element59">See Also</A>, <A HREF="013296.html" CLASS="Element59">Example</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Indicates the content encodings accepted in a HTTP response.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> AcceptEncoding: <STRONG>string</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+AcceptEncoding is a String property that indicates the content encodings accepted in a resulting HTTP response. An AcceptEncoding value is composed of one or more content encoding scheme and an optional realtive quality factor for the encoding. AcceptEncoding permits the same values as permitted in ContentEncoding. The special &quot;*&quot; symbol in AcceptEncoding matches any available content encoding not explicitly listed in the header field.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0003">TIdRequestHeaderInfo.AcceptLanguage</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007651.html" CLASS="Element59">TIdRequestHeaderInfo</A>, <A HREF="013297.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Indicates languages accepted in a HTTP response.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> AcceptLanguage: <STRONG>string</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+AcceptLanguage is a String property that indicates the languages preferred in a HTTP response. AcceptLanguage can contain the same valid values as the ContentLanguage property.<P CLASS="Element10">
+Each language specified may have an associated quality value which represents an estimate of the user preference for the languages specified by that range. The quality value defaults to &quot;q=1&quot;. For example:<P CLASS="Element10">
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12">  da, en-gb;q=0.8, en;q=0.7</PRE></DIV>
+</DIV>
+<P CLASS="Element10">
+The special character &quot;*&quot; matches every tag not matched by any other language specifier in AcceptLanguage. If no AcceptLanguage header is present in the request, the server assumes that all languages are equally acceptable.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0004">TIdRequestHeaderInfo.BasicAuthentication</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007651.html" CLASS="Element59">TIdRequestHeaderInfo</A>, <A HREF="013298.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Indicates that HTTP Basic Access authentication should be used.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> BasicAuthentication: boolean;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+BasicAuthentication is a Boolean property that indicates if the HTTP Basic Access authentication algorithm should be used to calculate authorization credentials for the HTTP request. Set BasicAuthentication to True to allow <A HREF="007215.html" CLASS="Element59">TIdBasicAuthentication</A> to be assigned to Authentication in <A HREF="007651.html#0001" CLASS="Element59">SetHeaders</A>.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0000">TIdRequestHeaderInfo.From</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007651.html" CLASS="Element59">TIdRequestHeaderInfo</A>, <A HREF="013299.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Indicates the email address for the requesting user.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> From: <STRONG>string</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+From is a String property that contains an optional RFC 1123-complaint Internet email address for the person controlling the requesting user agent. For example:<P CLASS="Element10">
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12">      webmaster@w3.org</PRE></DIV>
+</DIV>
+<P CLASS="Element10">
+From may be used for server logging and as a means for identifying the source of invalid or unwanted requests. From should not be used as an insecure form of access protection.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0001">TIdRequestHeaderInfo.Host</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007651.html" CLASS="Element59">TIdRequestHeaderInfo</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Represents the Internet host name or address for the resource accessed by the HTTP request.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> Host: <STRONG>string</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Host is a string property that represents the Host header, as defined in RFC 2616, and indicates the Internet host and port number of the resource accessed in a HTTP request. Host normally contains a value derived from the URI indicated in TIdHTTP.URL, and allows identification of the server to differentiate requests that might use an ambiguous or relative URI on a HTTP server that provides multiple host names using a single IP address.<P CLASS="Element10">
+When Host does not contain a trailing port number, it is implied that the default <A HREF="007375.html#000B" CLASS="Element59">TIdHTTP.Port</A> number will be used for the service requested. For example, a request to the origin server for http://www.w3.org/pub/WWW/ could include the following value in Host:<P CLASS="Element10">
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12">     Host: www.w3.org:80</PRE></DIV>
+</DIV>
+<P CLASS="Element10">
+A value must be included in Host for all HTTP/1.1 request messages. If the requested URI in TIdHTTP.URL does not include an Internet host name for the service being requested, then the Host property for the request must be given with an empty value.<P CLASS="Element10">
+The most common form of Request-URI is that used to identify a resource on an origin server or gateway using a relative path specifier. In this case the path in TIdHTTP.URL would contain the absolute path, and the Host property for the request must include the network location or server identity. For example, a client wishing to retrieve the resource identitifed using the path 'www.w3.org/pub/WWW/TheProject.html' would result in a request containg the following:<P CLASS="Element10">
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12">    IdHTTP.URL.URI contains '/pub/WWW/TheProject.html';
+    IdHTTP.Request.Host contains 'www.w3.org';</PRE></DIV>
+</DIV>
+<P CLASS="Element10">
+Host is updated when <A HREF="007375.html" CLASS="Element59">TIdHTTP</A> prepares the HTTP request for transmission to the remote server.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0002">TIdRequestHeaderInfo.Password</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007651.html" CLASS="Element59">TIdRequestHeaderInfo</A>, <A HREF="013300.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Represents the password used in construction of authorization credentials.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> Password: <STRONG>String</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Password is a String property used in conjunction with <A HREF="007651.html#0003" CLASS="Element59">Username</A> to construct authorization credentials during Authentiction of HTTP connection. <A HREF="007651.html#0003" CLASS="Element59">Username</A> and Password are suppied to the <A HREF="007205.html" CLASS="Element59">TIdAuthentication</A> class instance in Authentication, when <A HREF="007651.html#0004" CLASS="Element59">BasicAuthentication</A> is True, in the <A HREF="007651.html#0001" CLASS="Element59">SetHeaders</A> method.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0004">TIdRequestHeaderInfo.ProxyConnection</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007651.html" CLASS="Element59">TIdRequestHeaderInfo</A>, <A HREF="013301.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Indicates the action to perform for a proxied connection.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> ProxyConnection: <STRONG>string</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+ProxyConnection is a String property that represents the value to be used in an HTTP request for the 'Proxy-connection' header. ProxyConnection indicates that an HTTP request using a proxied connection should attempt to use the indicated action during connection to the proxy host. ProxyConnection can contain one of the values:<P CLASS="Element10">
+<UL>
+<LI>KEEP—ALIVE - The connection should be maintained for subsequent use.<P CLASS="Element10">
+<LI>CLOSE - The connection should be closed.</UL>
+</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0000">TIdRequestHeaderInfo.Referer</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007651.html" CLASS="Element59">TIdRequestHeaderInfo</A>, <A HREF="013302.html" CLASS="Element59">Example</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Specifies the address where a request URI was obtained.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> Referer: <STRONG>string</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Referer is a String property that allows the client to specify, to the server, the address of the resource from which the Request URI was obtained. The Referer header allows a server to generate lists of links used to access the resource, and may be used for logging or caching purposes.<P CLASS="Element10">
+If the Referer value is a relative URI, it should be interpreted relative to the URI for the RequestI, and may not include a fragment.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0002">TIdRequestHeaderInfo.UserAgent</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007651.html" CLASS="Element59">TIdRequestHeaderInfo</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Identifies the user agent (program) issuing the HTTP request.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> UserAgent: <STRONG>string</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+UserAgent is a String property that contains information about the user agent originating the HTTP request. UserAgent is used for statistical purposes, the tracing of protocol violations, and automated recognition of user agents for the sake of tailoring responses to avoid particular user agent limitations.<P CLASS="Element10">
+UserAgent can contain multiple product identifiers and comments identifying the agent and any subproducts which form a significant part of the user agent.<P CLASS="Element10">
+UserAgent should be provided for all HTTP requests.<P CLASS="Element10">
+UserAgent will be reset to its default value in the <A HREF="007651.html#0005" CLASS="Element59">Clear</A> method.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0003">TIdRequestHeaderInfo.Username</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007651.html" CLASS="Element59">TIdRequestHeaderInfo</A>, <A HREF="013303.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Represents the Username used in construction of authorization credentials.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> Username: <STRONG>String</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Username is a String property used in conjunction with <A HREF="007651.html#0002" CLASS="Element59">Password</A> to construct authorization credentials during Authentiction of HTTP connection. Username and <A HREF="007651.html#0002" CLASS="Element59">Password</A> are suppied to the <A HREF="007205.html" CLASS="Element59">TIdAuthentication</A> class instance in Authentication, when <A HREF="007651.html#0004" CLASS="Element59">BasicAuthentication</A> is True, in the <A HREF="007651.html#0001" CLASS="Element59">SetHeaders</A> method.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0005">TIdRequestHeaderInfo.Clear</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007651.html" CLASS="Element59">TIdRequestHeaderInfo</A>, <A HREF="013304.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Resets request headers to their default values.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>procedure</STRONG> Clear; <STRONG>override</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Clear is an overriden procedure that clears values assigned to object properties. Clear also resets the following object properties to their default values:<P CLASS="Element10">
+<UL>
+<LI><A HREF="007651.html#0000" CLASS="Element59">Accept</A> - 'text/html, */*'<P CLASS="Element10">
+<LI><A HREF="007651.html#0001" CLASS="Element59">AcceptCharSet</A> - '' (Empty string)<P CLASS="Element10">
+<LI><A HREF="007651.html#0002" CLASS="Element59">UserAgent</A> - DefaultUserAgent<P CLASS="Element10">
+<LI><A HREF="007651.html#0004" CLASS="Element59">BasicAuthentication</A> - False</UL>
+<P CLASS="Element10">
+Clear also resets any values in <A HREF="007654.html" CLASS="Element59">ProxyParams</A>, when the object property has been assigned, prior to calling the inherited Clear method.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0003">TIdRequestHeaderInfo.ProcessHeaders</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007651.html" CLASS="Element59">TIdRequestHeaderInfo</A>, <A HREF="013305.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Loads headers values into their object properties.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>procedure</STRONG> ProcessHeaders; <STRONG>override</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+Headers</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Header names and values to be processed.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+ProcessHeaders is an overridden procedure that load the header names and values in Headers into their corresponding object properties. RawHeaders is updated to contain the initial data in Headers. Values in Headers are assigned to the corresponding property, and subsequently removed the <A HREF="007369.html" CLASS="Element59">TIdHeaderList</A>. ProcessHeaders also determines the values for ContentRangeStart and ContentRangeEnd when Headers contains the 'Range' header.<P CLASS="Element10">
+ProcessHeaders callls the inherited ProcessHeaders method to allow handing of Entity headers, and headers that are stored in ExtraHeaders.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0001">TIdRequestHeaderInfo.SetHeaders</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007651.html" CLASS="Element59">TIdRequestHeaderInfo</A>, <A HREF="013306.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Stores header properties in the specified list of header names and values.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>procedure</STRONG> SetHeaders; <STRONG>override</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+Headers</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Destination for the header property values.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+SetHeaders is an overriden procedure that populates the <A HREF="007369.html" CLASS="Element59">TIdHeaderList</A> specified in Headers. SetHeaders calls the inherited method to process Entity headers and ExtraHeaders. SetHeaders then adds non-blank HTTP request property values to the list of header names and values.<P CLASS="Element10">
+SetHeaders also constructs the 'Range' header using the values in ContentRangeStart and ContentRangeEnd. If Authentication has been assigned, or <A HREF="007651.html#0004" CLASS="Element59">BasicAuthentication</A> is True, SetHeaders will construct an 'Authorization' header using the credentials returned by the <A HREF="007205.html" CLASS="Element59">TIdAuthentication</A> object instance.<P CLASS="Element10">
+SetHeaders also calls ProxyParams.SetHeaders to allow construction of Proxy-specific header names and values.</DIV>
+</DIV>
+<DIV CLASS="Element62">
+<HR>Created with Doc-O-Matic 2 donated to <STRONG><A HREF="http://www.delphi-jedi.org">Project JEDI</A></STRONG>. Commercial license available from the <STRONG><A HREF="http://www.doc-o-matic.com">Doc-O-Matic site</A></STRONG>.</DIV>
+</DIV></BODY></HTML>

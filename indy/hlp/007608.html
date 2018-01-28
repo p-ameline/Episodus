@@ -1,0 +1,57 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+<TITLE>TIdOnGetCustomListFormat</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <META name="GENERATOR" content="Doc-O-Matic">
+    <LINK rel="STYLESHEET" href="default.css" type="text/css">
+
+<SCRIPT LANGUAGE="JavaScript1.2" SRC="scripts.js"></SCRIPT>
+</HEAD>
+<BODY CLASS="Element57">
+<TABLE BORDER="0" BGCOLOR="#AACCFF" WIDTH="100%" CELLSPACING="0" CELLPADDING="0">
+<TR><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element1">
+Indy 9</DIV>
+</TD><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element2">
+<A HREF="content.html" CLASS="Element59">Content</A> | <A HREF="idx.html" CLASS="Element59">Index</A> | <A HREF="symref.html" CLASS="Element59">Reference</A></DIV>
+</TD></TR></TABLE><DIV CLASS="Element58">
+<DIV CLASS="Element5">
+TIdOnGetCustomListFormat</DIV>
+<DIV CLASS="Element7">
+<A HREF="002191.html" CLASS="Element59">Unit: IdFTPList</A></DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12">TIdOnGetCustomListFormat = <STRONG>procedure</STRONG> (ASender: <A HREF="007342.html" CLASS="Element59">TIdFTPServer</A>; AItem: <A HREF="007333.html" CLASS="Element59">TIdFTPListItem</A>; <STRONG>var</STRONG> VText: <STRONG>string</STRONG>) <STRONG>of</STRONG> <STRONG>object</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Unit</DIV>
+<DIV CLASS="Element69">
+<A HREF="002191.html" CLASS="Element59">IdFTPList</A></DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+AItem</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Listing item to be parsed.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+VText</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Contains the text representing the results for the custom parsing routine.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+TIdOnGetCustomListFormat is an event type signalled when <A HREF="007337.html" CLASS="Element59">TIdFTPListItems</A> needs to perform custom parsing to prepare a text representation of a directory listing item. TIdOnGetCustomListFormat is the type used to represent the <A HREF="007337.html#0004" CLASS="Element59">TIdFTPListItems.OnGetCustomListFormat</A> property, and allows the directory listing container to implement a routine used in <A HREF="007333.html#0004" CLASS="Element59">TIdFTPListItem.Text</A> when <A HREF="007337.html#0002" CLASS="Element59">TIdFTPListItems.ListFormat</A> contains the <A HREF="007332.html" CLASS="Element59">TIdFTPListFormat</A> value flfCustom.<P CLASS="Element10">
+AItem is a <A HREF="007333.html" CLASS="Element59">TIdFTPListItem</A> that provides a container for the raw data for the directory listing item.<P CLASS="Element10">
+VText is the textual value return as a result of the custom parsin routine.<P CLASS="Element10">
+Applications must assign a procedure to an event handler to allow reposnding to the event notification.</DIV>
+</DIV>
+<DIV CLASS="Element62">
+<HR>Created with Doc-O-Matic 2 donated to <STRONG><A HREF="http://www.delphi-jedi.org">Project JEDI</A></STRONG>. Commercial license available from the <STRONG><A HREF="http://www.doc-o-matic.com">Doc-O-Matic site</A></STRONG>.</DIV>
+</DIV></BODY></HTML>

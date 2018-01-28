@@ -1,0 +1,77 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+<TITLE>EncodeHeader</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <META name="GENERATOR" content="Doc-O-Matic">
+    <LINK rel="STYLESHEET" href="default.css" type="text/css">
+
+<SCRIPT LANGUAGE="JavaScript1.2" SRC="scripts.js"></SCRIPT>
+</HEAD>
+<BODY CLASS="Element57">
+<TABLE BORDER="0" BGCOLOR="#AACCFF" WIDTH="100%" CELLSPACING="0" CELLPADDING="0">
+<TR><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element1">
+Indy 9</DIV>
+</TD><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element2">
+<A HREF="content.html" CLASS="Element59">Content</A> | <A HREF="idx.html" CLASS="Element59">Index</A> | <A HREF="symref.html" CLASS="Element59">Reference</A></DIV>
+</TD></TR></TABLE><DIV CLASS="Element58">
+<DIV CLASS="Element5">
+EncodeHeader</DIV>
+<DIV CLASS="Element7">
+<A HREF="002135.html" CLASS="Element59">Unit: IdCoderHeader</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Encodes a message header that contains non-US-ASCII characters.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>function</STRONG> EncodeHeader(<STRONG>const</STRONG> Header: <STRONG>string</STRONG>; specials: <A HREF="000302.html" CLASS="Element59">CSET</A>; <STRONG>const</STRONG> HeaderEncoding: Char; TransferHeader: <A HREF="008099.html" CLASS="Element59">TTransfer</A>; MimeCharSet: <STRONG>string</STRONG>): <STRONG>string</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Unit</DIV>
+<DIV CLASS="Element69">
+<A HREF="002135.html" CLASS="Element59">IdCoderHeader</A></DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+const Header: string</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Message header to be encoded.<P CLASS="Element19">
+specials = Special charcters that require quoting.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+const HeaderEncoding: Char</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Content encoding for the message header.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+TransferHeader: TTransfer</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Transfer encoding for the message header.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+MimeCharSet: string</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+MIME character set for the message header.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Return Value</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+String - Value of the encoded message header.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+EncodeHeader is a String function that encodes a message header containing non-US-ASCII characters using the content encoding, transfer encoding, and character set specified in the input parameters.</DIV>
+</DIV>
+<DIV CLASS="Element62">
+<HR>Created with Doc-O-Matic 2 donated to <STRONG><A HREF="http://www.delphi-jedi.org">Project JEDI</A></STRONG>. Commercial license available from the <STRONG><A HREF="http://www.doc-o-matic.com">Doc-O-Matic site</A></STRONG>.</DIV>
+</DIV></BODY></HTML>

@@ -1,0 +1,69 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+<TITLE>TIdIMAP4Commands</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <META name="GENERATOR" content="Doc-O-Matic">
+    <LINK rel="STYLESHEET" href="default.css" type="text/css">
+
+<SCRIPT LANGUAGE="JavaScript1.2" SRC="scripts.js"></SCRIPT>
+</HEAD>
+<BODY CLASS="Element57">
+<TABLE BORDER="0" BGCOLOR="#AACCFF" WIDTH="100%" CELLSPACING="0" CELLPADDING="0">
+<TR><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element1">
+Indy 9</DIV>
+</TD><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element2">
+<A HREF="content.html" CLASS="Element59">Content</A> | <A HREF="idx.html" CLASS="Element59">Index</A> | <A HREF="symref.html" CLASS="Element59">Reference</A></DIV>
+</TD></TR></TABLE><DIV CLASS="Element58">
+<DIV CLASS="Element5">
+TIdIMAP4Commands</DIV>
+<DIV CLASS="Element7">
+<A HREF="015362.html" CLASS="Element59">See Also</A>, <A HREF="002258.html" CLASS="Element59">Unit: IdIMAP4</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Represents the enumerated type for IMAP4 commands.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12">TIdIMAP4Commands = (cmdCAPABILITY, cmdNOOP, cmdLOGOUT, cmdAUTHENTICATE, cmdLOGIN, cmdSELECT, cmdEXAMINE, cmdCREATE, cmdDELETE, cmdRENAME, cmdSUBSCRIBE, cmdUNSUBSCRIBE, cmdLIST, cmdLSUB, cmdSTATUS, cmdAPPEND, cmdCHECK, cmdCLOSE, cmdEXPUNGE, cmdSEARCH, cmdFETCH, cmdSTORE, cmdCOPY, cmdUID, cmdXCmd);</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Unit</DIV>
+<DIV CLASS="Element69">
+<A HREF="002258.html" CLASS="Element59">IdIMAP4</A></DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+TIdIMAP4Commands is an enumerated type that represents valid IMAP4 commands. Values in TIdIMAP4Commands are used as an Integer index, and the upper- and lower-bounds, for accessing the textual representation of the IMAP4 commands needed by the protocol.<P CLASS="Element10">
+cmdCAPABILITY represents the IMAP4 CAPABILITY command which requests the version number, optional authentication methods, and a list of capabilities supported by the IMAP4 server.<P CLASS="Element10">
+cmdNOOP represents the IMAP4 NOOP command which performs no specific operation, but allows the client to poll for new messages or message status updates during a period of inactivity, or to reset an inactivity autologout timer on the IMAP4 server. cmdNOOP always succeeds.<P CLASS="Element10">
+cmdLOGOUT represents the IMAP4 LOGOUT command which informs the server that the client is done with the connection. The IMAP4 server will <A HREF="006944.html" CLASS="Element59">send</A> a BYE response before the (tagged) OK response, and then close the network connection.<P CLASS="Element10">
+cmdAUTHENTICATE represents the IMAP4 AUTHENTICATE command which indicates the optional authentication mechanism to use for the connection to the IMAP4 server, and initiates the authentication protocol exchange.<P CLASS="Element10">
+cmdLOGIN represents the IMAP4 LOGIN command which identifies the client to the IMAP4 server using a plaintext user name and password for authentication.<P CLASS="Element10">
+cmdSELECT represents the IMAP4 SELECT command which specifies the singular mailbox to be accessed on the IMAP4 server, and results in receipt of statistics and flags for the selected mailbox. Simultaneous access to multiple mailboxes requires multiple IMAP4 client connections.<P CLASS="Element10">
+cmdEXAMINE represents the IMAP4 EXAMINE command and is identical to cmdSELECT except the mailbox will allow only read-only access.<P CLASS="Element10">
+cmdCREATE represents the IMAP4 CREATE command which is used to initialize a new mailbox and/or hierarchy folder with a given name.<P CLASS="Element10">
+cmdDELETE represents the IMAP4 DELETE command which permanently removes a mailbox with a given name.<P CLASS="Element10">
+cmdRENAME represents the IMAP4 RENAME command which changes the name of a mailbox or hierarchy folder. Renaming the INBOX mailbox is permitted, but moves all messages in INBOX to a new mailbox with the given name and leaves INBOX intact and empty.<P CLASS="Element10">
+cmdSUBSCRIBE represents the IMAP4 SUBSCRIBE command which adds the specified mailbox to the set of &quot;active&quot; or &quot;subscribed&quot; mailboxes on the IMAP4 server.<P CLASS="Element10">
+cmdUNSUBSCRIBE represents the IMAP4 UNSUBSCRIBE command which removes the specified mailbox from set of &quot;active&quot; or &quot;subscribed&quot; mailboxes on the IMAP4 server.<P CLASS="Element10">
+cmdLIST represents the IMAP4 LIST command which returns a subset of mailbox names from the complete set of all mailbox names available to the client using optional reference names and mailbox wildcards.<P CLASS="Element10">
+cmdLSUB represents the IMAP4 LSUB command which returns a list contaiing a subset of mailbox names from the set of mailbox names that the user has declared as being &quot;active&quot; or &quot;subscribed&quot;.<P CLASS="Element10">
+cmdSTATUS represents the IMAP4 STATUS command which requests the status of defined data items for an indicated mailbox.<P CLASS="Element10">
+cmdAPPEND represents the IMAP4 APPEND command which appends literal arguments and optional flags as a new message in the specified mailbox, but is not used for message delivery.<P CLASS="Element10">
+cmdCHECK represents the IMAP4 CHECK command which requests a checkpoint of the currently selected mailbox.<P CLASS="Element10">
+cmdCLOSE represents the IMAP4 CLOSE command which permanently removes messages flagged for deletion from the currently selected mailbox, and returns to an authenticated state.<P CLASS="Element10">
+cmdEXPUNGE represents the IMAP4 EXPUNGE command which permanently removes messages flagged for deletion from the currently selected mailbox after confirmation.<P CLASS="Element10">
+cmdSEARCH represents the IMAP4 SEARCH command which searches a mailbox for messages that match the given search criteria key(s).<P CLASS="Element10">
+cmdFETCH represents the IMAP4 FETCH command which retrieves defined data items associated with a message in a mailbox.<P CLASS="Element10">
+cmdSTORE represents the IMAP4 STORE command which alters defined data items associated with a message in a mailbox.<P CLASS="Element10">
+cmdCOPY represents the IMAP4 COPY command which copies the specified message(s) to the specified destination mailbox preserving the flags and internal date of the message(s).<P CLASS="Element10">
+cmdUID represents the IMAP4 UID command which indicates that messages are accessed by UID instead of message sequence number in IMAP4 commands.<P CLASS="Element10">
+cmdXCmd represents experimental IMAP4 commands.</DIV>
+</DIV>
+<DIV CLASS="Element62">
+<HR>Created with Doc-O-Matic 2 donated to <STRONG><A HREF="http://www.delphi-jedi.org">Project JEDI</A></STRONG>. Commercial license available from the <STRONG><A HREF="http://www.doc-o-matic.com">Doc-O-Matic site</A></STRONG>.</DIV>
+</DIV></BODY></HTML>

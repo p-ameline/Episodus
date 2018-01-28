@@ -1,0 +1,67 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+<TITLE>TIdAntiFreeze</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <META name="GENERATOR" content="Doc-O-Matic">
+    <LINK rel="STYLESHEET" href="default.css" type="text/css">
+
+<SCRIPT LANGUAGE="JavaScript1.2" SRC="scripts.js"></SCRIPT>
+</HEAD>
+<BODY CLASS="Element57">
+<TABLE BORDER="0" BGCOLOR="#AACCFF" WIDTH="100%" CELLSPACING="0" CELLPADDING="0">
+<TR><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element1">
+Indy 9</DIV>
+</TD><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element2">
+<A HREF="content.html" CLASS="Element59">Content</A> | <A HREF="idx.html" CLASS="Element59">Index</A> | <A HREF="symref.html" CLASS="Element59">Reference</A></DIV>
+</TD></TR></TABLE><DIV CLASS="Element58">
+<DIV CLASS="Element5">
+TIdAntiFreeze</DIV>
+<DIV CLASS="Element7">
+<A HREF="009891.html" CLASS="Element59">Hierarchy</A>, <A HREF="009892.html" CLASS="Element59">Properties</A>, <A HREF="009893.html" CLASS="Element59">Methods</A>, <A HREF="009894.html" CLASS="Element59">See Also</A>, <A HREF="002117.html" CLASS="Element59">Unit: IdAntiFreeze</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Prevents an application UI from freezing.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12">TIdAntiFreeze = <STRONG>class</STRONG>(<A HREF="007202.html" CLASS="Element59">TIdAntiFreezeBase</A>)</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Unit</DIV>
+<DIV CLASS="Element69">
+<A HREF="002117.html" CLASS="Element59">IdAntiFreeze</A></DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Indy works on the blocking model. That is when calls are made to Indy the do not return until they are complete. If calls are made in the main thread this will cause the Application User Interface to &quot;freeze&quot; during Indy calls. TIdAntiFreeze counter acts this effect. TIdAntiFreeze allows Indy subsystem to make process Application message calls so that Windows messages continue to be executed while Indy blocking <A HREF="007071.html" CLASS="Element59">socket</A> calls are in effect.<P CLASS="Element10">
+Only one TIdAntiFreeze can be active in an application. If another instance already exists, an exception is raised. <A HREF="007202.html" CLASS="Element59">TIdAntiFreezeBase</A> uses the global variable <A HREF="000648.html" CLASS="Element59">GAntiFreeze</A>, declared in the <A HREF="007202.html" CLASS="Element59">TIdAntiFreezeBase</A> unit, to determine if another instance has already been created.<P CLASS="Element10">
+<STRONG>Note:</STRONG> <A HREF="000648.html" CLASS="Element59">GAntiFreeze</A> is not assigned if an instance is added in the form designer (during design time).<P CLASS="Element10">
+<STRONG>Note:</STRONG> The TIdAntiFreeze.pas unit must <STRONG>NOT</STRONG> appear in the uses clause of any Indy or descendant unit. This unit is linked in an application when the component is placed on a Form. This is done to preserve isolation from the Forms.pas and QForms.pas units.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0000">TIdAntiFreeze.Process</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007201.html" CLASS="Element59">TIdAntiFreeze</A>, <A HREF="009895.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Implements TIdAntifreeze functionality.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>procedure</STRONG> Process; <STRONG>override</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Process is the overridden implementation of the abstract virtual <A HREF="007202.html#0007" CLASS="Element59">TIdAntiFreezeBase.Process</A> method. Process inspects the ApplicationHasPriority property to determine if Application.ProcessMessages is called. If False, the pending Windows message is dispatched to Application.HandleMessage.<P CLASS="Element10">
+<STRONG>Note</STRONG>: Due to the differences in message dispatching, Process does not use or inspect ApplicationHasPriority on the Linux Platform; Process simply calls Application.ProcessMessages.<P CLASS="Element10">
+<STRONG>Note:</STRONG> The TIdAntiFreeze.pas unit must <STRONG>NOT</STRONG> appear in the uses clause of any Indy or descendant unit. This unit is linked in an application when the component is placed on a Form. This is done to preserve isolation from the FORMS.PAS and QForms.pas units.</DIV>
+</DIV>
+<DIV CLASS="Element62">
+<HR>Created with Doc-O-Matic 2 donated to <STRONG><A HREF="http://www.delphi-jedi.org">Project JEDI</A></STRONG>. Commercial license available from the <STRONG><A HREF="http://www.doc-o-matic.com">Doc-O-Matic site</A></STRONG>.</DIV>
+</DIV></BODY></HTML>

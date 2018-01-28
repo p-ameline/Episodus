@@ -1,0 +1,153 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+<TITLE>TIdLogEvent</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <META name="GENERATOR" content="Doc-O-Matic">
+    <LINK rel="STYLESHEET" href="default.css" type="text/css">
+
+<SCRIPT LANGUAGE="JavaScript1.2" SRC="scripts.js"></SCRIPT>
+</HEAD>
+<BODY CLASS="Element57">
+<TABLE BORDER="0" BGCOLOR="#AACCFF" WIDTH="100%" CELLSPACING="0" CELLPADDING="0">
+<TR><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element1">
+Indy 9</DIV>
+</TD><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element2">
+<A HREF="content.html" CLASS="Element59">Content</A> | <A HREF="idx.html" CLASS="Element59">Index</A> | <A HREF="symref.html" CLASS="Element59">Reference</A></DIV>
+</TD></TR></TABLE><DIV CLASS="Element58">
+<DIV CLASS="Element5">
+TIdLogEvent</DIV>
+<DIV CLASS="Element7">
+<A HREF="012132.html" CLASS="Element59">Hierarchy</A>, <A HREF="012133.html" CLASS="Element59">Properties</A>, <A HREF="012134.html" CLASS="Element59">Methods</A>, <A HREF="012135.html" CLASS="Element59">Events</A>, <A HREF="012136.html" CLASS="Element59">See Also</A>, <A HREF="002277.html" CLASS="Element59">Unit: IdLogEvent</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Implements an event-based logging class for data input and output, as well as status messages.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12">TIdLogEvent = <STRONG>class</STRONG>(<A HREF="007510.html" CLASS="Element59">TIdLogBase</A>)</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Unit</DIV>
+<DIV CLASS="Element69">
+<A HREF="002277.html" CLASS="Element59">IdLogEvent</A></DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+TIdLogEvent is a <A HREF="007510.html" CLASS="Element59">TIdLogBase</A> descendant that extends the Indy logging framework to include support for event-based notifications of input/output or status change notifications.<P CLASS="Element10">
+TIdLogEvent publishes event handlers for data receipt and transmission, as well as an event handler for notifications in the <A HREF="007071.html" CLASS="Element59">socket</A> connection state.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0000">TIdLogEvent.OnReceived</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007513.html" CLASS="Element59">TIdLogEvent</A>, <A HREF="012137.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Represents the event handler for data receipt notifications.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> OnReceived: <A HREF="007921.html" CLASS="Element59">TLogItemDataEvent</A>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+AData</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Values affected by the operation.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+ASender</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Component generating the event notification.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+AText</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Indicates the operation performed on the <A HREF="007071.html" CLASS="Element59">socket</A> connection.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+OnReceived is a <A HREF="007921.html" CLASS="Element59">TLogItemDataEvent</A> event handler that represents the event handler for data receipt notifications. Applications must assign a procedure to the event handler in order to respond to the event notification.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0001">TIdLogEvent.OnSent</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007513.html" CLASS="Element59">TIdLogEvent</A>, <A HREF="012138.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Represents the event handler for data transmission notifications.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> OnSent: <A HREF="007921.html" CLASS="Element59">TLogItemDataEvent</A>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+AData</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Values affected by the operation.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+ASender</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Component generating the event notification.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+AText</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Indicates the operation performed on the <A HREF="007071.html" CLASS="Element59">socket</A> connection.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+OnSent is a <A HREF="007921.html" CLASS="Element59">TLogItemDataEvent</A> event handler that represents the event handler for data transmission notifications. Applications must assign a procedure to the event handler in order to respond to the event notification.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0002">TIdLogEvent.OnStatus</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007513.html" CLASS="Element59">TIdLogEvent</A>, <A HREF="012139.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Represents the event handler for <A HREF="007071.html" CLASS="Element59">socket</A> connection status notifications.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> OnStatus: <A HREF="007922.html" CLASS="Element59">TLogItemStatusEvent</A>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+ASender</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Component generating the event notification.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+AText</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Indicates the status message for the <A HREF="007071.html" CLASS="Element59">socket</A> connection.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+OnStatus is a <A HREF="007922.html" CLASS="Element59">TLogItemStatusEvent</A> event handler that represents the event handler for <A HREF="007071.html" CLASS="Element59">socket</A> connection status notifications. Applications must assign a procedure to the event handler in order to respond to the event notification.</DIV>
+</DIV>
+<DIV CLASS="Element62">
+<HR>Created with Doc-O-Matic 2 donated to <STRONG><A HREF="http://www.delphi-jedi.org">Project JEDI</A></STRONG>. Commercial license available from the <STRONG><A HREF="http://www.doc-o-matic.com">Doc-O-Matic site</A></STRONG>.</DIV>
+</DIV></BODY></HTML>

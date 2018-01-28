@@ -1,0 +1,665 @@
+// -----------------------------------------------------------------------------
+// nsoutil.rc
+// -----------------------------------------------------------------------------
+//
+// -----------------------------------------------------------------------------
+// $Revision: 1.6 $
+// $Author: pameline $
+// $Date: 2015/02/07 13:04:15 $
+// -----------------------------------------------------------------------------
+// -----------------------------------------------------------------------------
+
+// -----------------------------------------------------------------------------
+// Copyright Nautilus, 2004
+// http://www.nautilus-info.com
+// -----------------------------------------------------------------------------
+// Ce logiciel est un programme informatique servant à gérer et traiter les
+// informations de santé d'une personne.
+//
+// Ce logiciel est régi par la licence CeCILL soumise au droit français et
+// respectant les principes de diffusion des logiciels libres. Vous pouvez
+// utiliser, modifier et/ou redistribuer ce programme sous les conditions de la
+// licence CeCILL telle que diffusée par le CEA, le CNRS et l'INRIA sur le site
+// "http://www.cecill.info".
+//
+// En contrepartie de l'accessibilité au code source et des droits de copie, de
+// modification et de redistribution accordés par cette licence, il n'est offert
+// aux utilisateurs qu'une garantie limitée. Pour les mêmes raisons, seule une
+// responsabilité restreinte pèse sur l'auteur du programme, le titulaire des
+// droits patrimoniaux et les concédants successifs.
+//
+// A cet égard  l'attention de l'utilisateur est attirée sur les risques
+// associés au chargement, à l'utilisation, à la modification et/ou au
+// développement et à la reproduction du logiciel par l'utilisateur étant donné
+// sa spécificité de logiciel libre, qui peut le rendre complexe à manipuler et
+// qui le réserve donc à des développeurs et des professionnels avertis
+// possédant des connaissances informatiques approfondies. Les utilisateurs sont
+// donc invités à charger et tester l'adéquation du logiciel à leurs besoins
+// dans des conditions permettant d'assurer la sécurité de leurs systèmes et ou
+// de leurs données et, plus généralement, à l'utiliser et l'exploiter dans les
+// mêmes conditions de sécurité.
+//
+// Le fait que vous puissiez accéder à cet en-tête signifie que vous avez pris
+// connaissance de la licence CeCILL, et que vous en avez accepté les termes.
+// -----------------------------------------------------------------------------
+// This software is a computer program whose purpose is to manage and process
+// a person's health data.
+//
+// This software is governed by the CeCILL  license under French law and abiding
+// by the rules of distribution of free software. You can use, modify and/ or
+// redistribute the software under the terms of the CeCILL license as circulated
+// by CEA, CNRS and INRIA at the following URL "http://www.cecill.info".
+//
+// As a counterpart to the access to the source code and  rights to copy, modify
+// and redistribute granted by the license, users are provided only with a
+// limited warranty and the software's author, the holder of the economic
+// rights, and the successive licensors have only limited liability.
+//
+// In this respect, the user's attention is drawn to the risks associated with
+// loading, using, modifying and/or developing or reproducing the software by
+// the user in light of its specific status of free software, that may mean that
+// it is complicated to manipulate, and that also therefore means that it is
+// reserved for developers and experienced professionals having in-depth
+// computer knowledge. Users are therefore encouraged to load and test the
+// software's suitability as regards their requirements in conditions enabling
+// the security of their systems and/or data to be ensured and, more generally,
+// to use and operate it in the same conditions as regards security.
+//
+// The fact that you are presently reading this means that you have had
+// knowledge of the CeCILL license and that you accept its terms.
+// -----------------------------------------------------------------------------
+// -----------------------------------------------------------------------------// Attention// -----------------------------------------------------------------------------// Les chemins des include doivent être en chemin relatif sur le cvs.// Si vous avez besoin de les modifier en chemin absolu pour pouvoir les// modifier avec Borland 5, vous devez les repasser en chemin relatif avant de// les remettre sur le cvs.// -----------------------------------------------------------------------------
+#include "c:\cvs\episodus\nsoutil\nsoutil.rh"
+#include "c:\cvs\episodus\nautilus\nautilus.rh"
+#include "c:\cvs\episodus\nsoutil\nsimport.rh"
+//#include "nsoutil\nsoutil.rh"
+//#include "nautilus\nautilus.rh"
+//#include "nsoutil\nsimport.rh"
+
+#include <owl\window.rh>
+#include <owl\mdi.rh>
+
+PROGRESS_DLG DIALOG 38, 45, 117, 58
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION
+CLASS "BORDLG"
+CAPTION "Merci de patienter"
+{
+ CONTROL "", -1, "BorShade", BSS_GROUP | BSS_LEFT | WS_CHILD | WS_VISIBLE, 5, 4, 108, 32
+ CONTROL "", IDC_PROGRESS_TXT, "STATIC", SS_CENTER | WS_CHILD | WS_VISIBLE | WS_GROUP, 9, 9, 100, 11
+ CONTROL "", IDC_PROGRESS_BAR, "msctls_progress32", WS_CHILD | WS_VISIBLE | WS_BORDER, 9, 24, 100, 8
+ CONTROL "STOP", PROGRESS_STOP_BTN, "button", BS_PUSHBUTTON | BS_CENTER | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 15, 40, 87, 14
+}
+
+OUTILS_NTIERS DIALOG 34, 17, 327, 186
+STYLE DS_MODALFRAME | WS_POPUP | WS_VISIBLE | WS_CAPTION | WS_SYSMENU
+CLASS "bordlg"
+CAPTION "Utilitaires"
+FONT 8, "MS Sans Serif"
+{
+ CONTROL "", IDC_TV, "listbox", LBS_NOTIFY | WS_CHILD | WS_VISIBLE | WS_BORDER | WS_VSCROLL | WS_TABSTOP, 8, 8, 311, 130
+ CONTROL "", -1, "BorShade", BSS_HDIP | BSS_LEFT | WS_CHILD | WS_VISIBLE, 5, 151, 317, 1
+ CONTROL "", IDOK, "BorBtn", BS_DEFPUSHBUTTON | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 18, 156, 43, 25
+ CONTROL "", IDCANCEL, "BorBtn", BS_PUSHBUTTON | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 142, 156, 43, 25
+ CONTROL "", IDHELP, "BorBtn", BS_PUSHBUTTON | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 266, 156, 43, 25
+}
+
+OUTILS_INTERFACES DIALOG 34, 17, 327, 186
+STYLE DS_MODALFRAME | WS_POPUP | WS_VISIBLE | WS_CAPTION | WS_SYSMENU
+CLASS "bordlg"
+CAPTION "Interfaces"
+FONT 8, "MS Sans Serif"
+{
+ CONTROL "", IDC_TV, "listbox", LBS_NOTIFY | WS_CHILD | WS_VISIBLE | WS_BORDER | WS_VSCROLL | WS_TABSTOP, 8, 8, 311, 130
+ CONTROL "", -1, "BorShade", BSS_HDIP | BSS_LEFT | WS_CHILD | WS_VISIBLE, 5, 151, 317, 1
+ CONTROL "", IDOK, "BorBtn", BS_DEFPUSHBUTTON | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 18, 156, 43, 25
+ CONTROL "", IDCANCEL, "BorBtn", BS_PUSHBUTTON | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 142, 156, 43, 25
+ CONTROL "", IDHELP, "BorBtn", BS_PUSHBUTTON | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 266, 156, 43, 25
+}
+
+OUTILS DIALOG 34, 17, 327, 186
+STYLE DS_MODALFRAME | WS_POPUP | WS_VISIBLE | WS_CAPTION | WS_SYSMENU
+CLASS "bordlg"
+CAPTION "Utilitaires"
+FONT 8, "MS Sans Serif"
+{
+ CONTROL "Evolution Nautilus", -1, "BorShade", BSS_GROUP | BSS_CAPTION | BSS_LEFT | WS_CHILD | WS_VISIBLE | WS_GROUP, 4, 4, 320, 38
+ CONTROL "Template.db", IDC_MODIFY_TEMPLATE, "BorCheck", BS_AUTOCHECKBOX | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 8, 16, 52, 9
+ CONTROL "Conversion ppt -> loc + dat", IDC_PPTLOCDAT, "BorCheck", BS_AUTOCHECKBOX | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 8, 28, 104, 12
+ CONTROL "Bibliothèque d'Archétypes", IDC_CREE_ARCHELIB, "BorCheck", BS_AUTOCHECKBOX | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 124, 16, 96, 9
+ CONTROL "Bibliothèque de chemises", IDC_CREE_CHEMLIB, "BorCheck", BS_AUTOCHECKBOX | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 124, 29, 96, 9
+ CONTROL "Créer Graphe", IDC_CREE_GRAPHE, "BorCheck", BS_AUTOCHECKBOX | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 241, 17, 67, 9
+ CONTROL "Importation", -1, "BorShade", BSS_GROUP | BSS_CAPTION | BSS_LEFT | WS_CHILD | WS_VISIBLE | WS_GROUP, 4, 45, 320, 41
+ CONTROL "Conversion Nautilus 2.x vers Nautilus Win32", IDC_CONVERT, "BorCheck", BS_AUTOCHECKBOX | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 8, 56, 156, 12
+ CONTROL "Reprise des données Coccilog", IDC_IMPORT_COCCI, "BorCheck", BS_AUTOCHECKBOX | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 8, 68, 156, 12
+ CONTROL "Utilitaires", -1, "BorShade", BSS_RGROUP | BSS_CAPTION | BSS_LEFT | WS_CHILD | WS_VISIBLE, 4, 88, 319, 58
+ CONTROL "Editeur sémantique", IDC_EDITSEM, "BorCheck", BS_AUTOCHECKBOX | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 8, 104, 88, 12
+ CONTROL "Outils système", IDC_CODE, "BorCheck", BS_AUTOCHECKBOX | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 8, 116, 88, 12
+ // CONTROL "Outils classifications", IDC_TV, "BorCheck", BS_AUTOCHECKBOX | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 8, 128, 88, 12
+ CONTROL "Outils Médicaments", IDC_GUIDE, "BorCheck", BS_AUTOCHECKBOX | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 124, 128, 76, 12
+ CONTROL "Réparation", IDC_REPAIR, "BorCheck", BS_AUTOCHECKBOX | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 124, 104, 80, 9
+ CONTROL "", -1, "BorShade", BSS_HDIP | BSS_LEFT | WS_CHILD | WS_VISIBLE, 5, 151, 317, 1
+ CONTROL "", IDOK, "BorBtn", BS_DEFPUSHBUTTON | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 18, 156, 43, 25
+ CONTROL "", IDCANCEL, "BorBtn", BS_PUSHBUTTON | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 142, 156, 43, 25
+ CONTROL "", IDHELP, "BorBtn", BS_PUSHBUTTON | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 266, 156, 43, 25
+}
+
+IDD_EDITFG DIALOG 0, 0, 329, 250
+STYLE DS_MODALFRAME | DS_3DLOOK | DS_CONTEXTHELP | WS_POPUP | WS_VISIBLE | WS_CAPTION | WS_SYSMENU
+CAPTION "Edition des fils guides"
+FONT 8, "MS Sans Serif"
+{
+ CONTROL "ListView1", IDC_LW_FILS, "SysListView32", LVS_REPORT | WS_CHILD | WS_VISIBLE | WS_BORDER, 168, 56, 152, 129
+ CONTROL "ListView3", IDC_LW_PERE, "SysListView32", LVS_REPORT | WS_CHILD | WS_VISIBLE | WS_BORDER, 8, 56, 152, 129
+ CONTROL "", IDC_EDIT_COMMENT, "edit", ES_LEFT | WS_CHILD | WS_VISIBLE | WS_BORDER | WS_TABSTOP, 8, 16, 152, 13
+ CONTROL "Commentaire", -1, "static", SS_LEFT | WS_CHILD | WS_VISIBLE, 8, 5, 120, 8
+ CONTROL "bas", IDC_BAS_PERE, "button", BS_PUSHBUTTON | BS_CENTER | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 100, 190, 60, 13
+ CONTROL "haut", IDC_HAUT_PERE, "button", BS_PUSHBUTTON | BS_CENTER | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 8, 190, 60, 13
+ CONTROL "Insérer", IDC_INS_PERE, "button", BS_PUSHBUTTON | BS_CENTER | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 8, 40, 46, 13
+ CONTROL "Modifier", IDC_MOD_PERE, "button", BS_PUSHBUTTON | BS_CENTER | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 60, 40, 46, 13
+ CONTROL "Détruire", IDC_DEL_PERE, "button", BS_PUSHBUTTON | BS_CENTER | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 113, 40, 46, 13
+ CONTROL "bas", IDC_BAS_FILS, "button", BS_PUSHBUTTON | BS_CENTER | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 260, 190, 60, 13
+ CONTROL "haut", IDC_HAUT_FILS, "button", BS_PUSHBUTTON | BS_CENTER | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 168, 190, 60, 13
+ CONTROL "Insérer", IDC_INS_FILS, "button", BS_PUSHBUTTON | BS_CENTER | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 168, 40, 46, 13
+ CONTROL "Modifier", IDC_MOD_FILS, "button", BS_PUSHBUTTON | BS_CENTER | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 220, 40, 46, 13
+ CONTROL "Détruire", IDC_DEL_FILS, "button", BS_PUSHBUTTON | BS_CENTER | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 273, 40, 46, 13
+ CONTROL "", IDOK, "BorBtn", BS_DEFPUSHBUTTON | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 88, 216, 43, 25
+ CONTROL "", IDCANCEL, "BorBtn", BS_PUSHBUTTON | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 144, 216, 43, 25
+ CONTROL "", IDHELP, "BorBtn", BS_PUSHBUTTON | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 200, 216, 43, 25
+ CONTROL "Choix d'un groupe", IDC_EDIT_CHOIXGD, "button", BS_PUSHBUTTON | BS_CENTER | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 168, 16, 152, 13
+ CONTROL "Groupe", -1, "static", SS_LEFT | WS_CHILD | WS_VISIBLE, 168, 5, 92, 11
+}
+IDD_GROUPGD DIALOG 32, 17, 158, 122
+EXSTYLE WS_EX_DLGMODALFRAME
+STYLE DS_MODALFRAME | WS_POPUP | WS_VISIBLE | WS_CAPTION | WS_SYSMENU
+CLASS "bordlg"
+CAPTION "Gestion des groupes de fils guides"
+FONT 8, "MS Sans Serif"
+{
+ CONTROL "", -1, "BorShade", BSS_HDIP | BSS_LEFT | WS_CHILD | WS_VISIBLE, 12, 85, 136, 1
+ CONTROL "", IDOK, "BorBtn", BS_DEFPUSHBUTTON | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 11, 91, 43, 25
+ CONTROL "", IDCANCEL, "BorBtn", BS_PUSHBUTTON | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 59, 91, 43, 25
+ CONTROL "", IDHELP, "BorBtn", BS_PUSHBUTTON | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 106, 91, 43, 25
+ CONTROL "Importation d'un groupe", IDC_GROUPGD_IMPORT, "button", BS_PUSHBUTTON | BS_CENTER | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 21, 4, 120, 15
+ CONTROL "Exportation d'un groupe", IDC_GROUPGD_EXPORT, "button", BS_PUSHBUTTON | BS_CENTER | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 21, 23, 120, 15
+ CONTROL "Destruction d'un groupe", IDC_GROUPGD_DESTROY, "button", BS_PUSHBUTTON | BS_CENTER | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 21, 41, 120, 15
+ CONTROL "Gestion des fils guides d'un groupe", IDC_GROUPGD_LISTFG, "button", BS_PUSHBUTTON | BS_CENTER | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 21, 60, 120, 15
+}
+
+IDD_CHOIXGD DIALOG 0, 0, 299, 185
+STYLE DS_MODALFRAME | DS_3DLOOK | DS_CONTEXTHELP | WS_POPUP | WS_VISIBLE | WS_CAPTION | WS_SYSMENU
+CAPTION "Choix d'un groupe de fils guides"
+FONT 8, "MS Sans Serif"
+{
+ CONTROL "Type de fils guides", IDC_CHOIXGD_GB, "button", BS_GROUPBOX | WS_CHILD | WS_VISIBLE | WS_GROUP, 8, 4, 184, 32
+ CONTROL "Fils guides système", IDC_CHOIXGD_FGSYS, "BorRadio", BS_AUTORADIOBUTTON | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 16, 20, 80, 9
+ CONTROL "Fils guides utilisateur", IDC_CHOIXGD_FGUTIL, "BorRadio", BS_AUTORADIOBUTTON | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 96, 20, 92, 9
+ CONTROL "", IDC_CHOIXGD_LIST, "listbox", LBS_NOTIFY | WS_CHILD | WS_VISIBLE | WS_BORDER | WS_VSCROLL | WS_TABSTOP, 8, 40, 280, 103
+ CONTROL "", IDOK, "BorBtn", BS_DEFPUSHBUTTON | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 72, 152, 43, 25
+ CONTROL "", IDCANCEL, "BorBtn", BS_PUSHBUTTON | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 128, 152, 43, 25
+ CONTROL "", IDHELP, "BorBtn", BS_PUSHBUTTON | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 188, 152, 43, 25
+ CONTROL "Créer groupe", IDC_CHOIXGD_NEWGD, "button", BS_PUSHBUTTON | BS_CENTER | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 208, 4, 80, 12
+ CONTROL "Modifier groupe", IDC_CHOIXGD_MODGD, "button", BS_PUSHBUTTON | BS_CENTER | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 208, 24, 80, 12
+}
+
+IDD_NOMGD DIALOG 0, 0, 202, 98
+STYLE DS_MODALFRAME | DS_3DLOOK | DS_CONTEXTHELP | WS_POPUP | WS_VISIBLE | WS_CAPTION | WS_SYSMENU
+CAPTION "Nom du fichier à enregistrer"
+FONT 8, "MS Sans Serif"
+{
+ CONTROL "", IDC_NOMGD_EDIT, "edit", ES_LEFT | WS_CHILD | WS_VISIBLE | WS_BORDER | WS_TABSTOP, 23, 26, 155, 13
+ CONTROL "Entrez un nom de fichier avec extension", IDC_NOMGD_TEXT, "static", SS_LEFT | WS_CHILD | WS_VISIBLE, 24, 17, 160, 8
+ CONTROL "", IDOK, "BorBtn", BS_DEFPUSHBUTTON | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 27, 60, 43, 25
+ CONTROL "", IDCANCEL, "BorBtn", BS_PUSHBUTTON | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 79, 60, 43, 25
+ CONTROL "", IDHELP, "BorBtn", BS_PUSHBUTTON | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 131, 60, 43, 25
+}
+
+IDD_MODFG DIALOG 0, 0, 181, 212
+STYLE DS_MODALFRAME | DS_3DLOOK | DS_CONTEXTHELP | WS_POPUP | WS_VISIBLE | WS_CAPTION | WS_SYSMENU
+CAPTION "Modification d'un noeud"
+FONT 8, "MS Sans Serif"
+{
+ CONTROL "", IDC_MODFG_EDIT, "edit", ES_LEFT | WS_CHILD | WS_VISIBLE | WS_BORDER | WS_TABSTOP, 8, 40, 152, 13
+ CONTROL "Noeud", -1, "static", SS_LEFT | WS_CHILD | WS_VISIBLE, 8, 32, 124, 8
+ CONTROL "Toute séquence (**)", IDC_MODFG_SEQUENCE, "BorRadio", BS_RADIOBUTTON | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 8, 4, 112, 9
+ CONTROL "Tout élément (??)", IDC_MODFG_ELEMENT, "BorRadio", BS_RADIOBUTTON | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 8, 17, 112, 9
+ CONTROL "Certitude", IDC_MODFG_CERTGROUP, "button", BS_GROUPBOX | WS_CHILD | WS_VISIBLE | WS_GROUP, 8, 65, 152, 51
+ CONTROL "Aucune", IDC_MODFG_CERTSANS, "button", BS_AUTORADIOBUTTON | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 16, 80, 44, 9
+ CONTROL "0", IDC_MODFG_CERT00, "button", BS_AUTORADIOBUTTON | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 16, 96, 24, 9
+ CONTROL "25", IDC_MODFG_CERT25, "button", BS_AUTORADIOBUTTON | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 40, 96, 24, 9
+ CONTROL "50", IDC_MODFG_CERT50, "button", BS_AUTORADIOBUTTON | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 68, 96, 24, 9
+ CONTROL "75", IDC_MODFG_CERT75, "button", BS_AUTORADIOBUTTON | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 96, 96, 24, 9
+ CONTROL "100", IDC_MODFG_CERT100, "button", BS_AUTORADIOBUTTON | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 124, 96, 28, 9
+ CONTROL "Pluriel", IDC_MODFG_PLURGROUP, "button", BS_GROUPBOX | WS_CHILD | WS_VISIBLE | WS_GROUP, 8, 125, 152, 47
+ CONTROL "Des", IDC_MODFG_PLUR1, "button", BS_AUTORADIOBUTTON | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 20, 156, 40, 9
+ CONTROL "Tous les", IDC_MODFG_PLUR2, "button", BS_AUTORADIOBUTTON | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 76, 156, 56, 9
+ CONTROL "Singulier", IDC_MODFG_PLURSANS, "button", BS_AUTORADIOBUTTON | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 20, 140, 56, 9
+ CONTROL "", IDOK, "BorBtn", BS_DEFPUSHBUTTON | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 8, 180, 43, 25
+ CONTROL "", IDCANCEL, "BorBtn", BS_PUSHBUTTON | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 64, 180, 43, 25
+ CONTROL "", IDHELP, "BorBtn", BS_PUSHBUTTON | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 120, 180, 43, 25
+}
+
+IDD_LISTFG DIALOG 0, 0, 390, 212
+STYLE DS_MODALFRAME | DS_3DLOOK | DS_CONTEXTHELP | WS_POPUP | WS_VISIBLE | WS_CAPTION | WS_SYSMENU
+CAPTION "Liste des fils guides d'un groupe"
+FONT 8, "MS Sans Serif"
+{
+ CONTROL "ListView1", IDC_LISTFG_LW, "SysListView32", LVS_REPORT | LVS_SINGLESEL | WS_CHILD | WS_VISIBLE | WS_BORDER, 8, 52, 372, 108
+ CONTROL "ComboBox1", IDC_LISTFG_GROUPE, "combobox", CBS_DROPDOWNLIST | WS_CHILD | WS_VISIBLE | WS_VSCROLL | WS_TABSTOP, 8, 4, 176, 80
+ CONTROL "Ajouter", IDC_LISTFG_NEW, "button", BS_PUSHBUTTON | BS_CENTER | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 8, 32, 60, 13
+ CONTROL "Modifier", IDC_LISTFG_MOD, "button", BS_PUSHBUTTON | BS_CENTER | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 88, 32, 60, 13
+ CONTROL "Dupliquer", IDC_LISTFG_DUP, "button", BS_PUSHBUTTON | BS_CENTER | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 168, 32, 60, 13
+ CONTROL "Détruire", IDC_LISTFG_DEL, "button", BS_PUSHBUTTON | BS_CENTER | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 320, 32, 60, 13
+ CONTROL "Créer groupe", IDC_LISTFG_NEWGP, "button", BS_PUSHBUTTON | BS_CENTER | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 200, 4, 80, 13
+ CONTROL "Modifier groupe", IDC_LISTFG_MODGP, "button", BS_PUSHBUTTON | BS_CENTER | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 300, 4, 80, 13
+ CONTROL "Haut", IDC_LISTFG_UP, "button", BS_PUSHBUTTON | BS_CENTER | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 12, 176, 60, 13
+ CONTROL "Bas", IDC_LISTFG_DOWN, "button", BS_PUSHBUTTON | BS_CENTER | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 96, 176, 60, 13
+ CONTROL "", IDOK, "BorBtn", BS_DEFPUSHBUTTON | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 224, 168, 43, 25
+ CONTROL "", IDCANCEL, "BorBtn", BS_PUSHBUTTON | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 280, 168, 43, 25
+ CONTROL "", IDHELP, "BorBtn", BS_PUSHBUTTON | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 336, 168, 43, 25
+}
+IDD_CREATEGD DIALOG 0, 0, 306, 80
+STYLE DS_MODALFRAME | DS_3DLOOK | DS_CONTEXTHELP | WS_POPUP | WS_VISIBLE | WS_CAPTION | WS_SYSMENU
+CAPTION "Création / Modification d'un groupe de fils guides"
+FONT 8, "MS Sans Serif"
+{
+ CONTROL "", IDC_CREATEGD_CODE, "edit", ES_LEFT | ES_READONLY | WS_CHILD | WS_VISIBLE | WS_BORDER | WS_TABSTOP, 12, 17, 36, 13
+ CONTROL "", IDC_CREATEGD_LIBELLE, "edit", ES_LEFT | WS_CHILD | WS_VISIBLE | WS_BORDER | WS_TABSTOP, 60, 17, 232, 13
+ CONTROL "", IDC_CREATEGD_DATE, "edit", ES_LEFT | WS_CHILD | WS_VISIBLE | WS_BORDER | WS_TABSTOP, 12, 52, 60, 13
+ CONTROL "", IDC_CREATEGD_UTIL, "edit", ES_LEFT | WS_CHILD | WS_VISIBLE | WS_BORDER | WS_TABSTOP, 92, 52, 68, 13
+ CONTROL "Code groupe", -1, "static", SS_LEFT | WS_CHILD | WS_VISIBLE, 12, 9, 44, 8
+ CONTROL "Libellé groupe", -1, "static", SS_LEFT | WS_CHILD | WS_VISIBLE, 60, 9, 168, 8
+ CONTROL "Date de création", -1, "static", SS_LEFT | WS_CHILD | WS_VISIBLE, 12, 44, 56, 8
+ CONTROL "Code utilisateur", -1, "static", SS_LEFT | WS_CHILD | WS_VISIBLE, 92, 44, 68, 8
+ CONTROL "", IDOK, "BorBtn", BS_DEFPUSHBUTTON | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 192, 44, 43, 25
+ CONTROL "", IDCANCEL, "BorBtn", BS_PUSHBUTTON | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 248, 44, 43, 25
+}
+
+IDD_REQUETE DIALOG 0, 0, 564, 327
+STYLE DS_MODALFRAME | DS_3DLOOK | DS_CONTEXTHELP | WS_POPUP | WS_VISIBLE | WS_CAPTION | WS_SYSMENU
+CAPTION "Edition d'une recherche"
+FONT 8, "MS Sans Serif"
+{
+ CONTROL "", -1, "static", SS_WHITEFRAME | WS_CHILD | WS_VISIBLE, 396, 16, 164, 104
+ CONTROL "", IDC_REQ_NOM, "edit", ES_LEFT | WS_CHILD | WS_VISIBLE | WS_BORDER | WS_TABSTOP, 404, 28, 140, 13
+ CONTROL "Nom de la recherche", -1, "static", SS_LEFT | WS_CHILD | WS_VISIBLE, 404, 20, 140, 8
+ CONTROL "Créer une nouvelle recherche", IDC_REQ_NEWREQ, "button", BS_PUSHBUTTON | BS_CENTER | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 404, 92, 140, 13
+ CONTROL "Reprendre une recherche enregistrée", IDC_REQ_OPEN, "button", BS_PUSHBUTTON | BS_CENTER | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 404, 48, 140, 13
+ CONTROL "Enregistrer la recherche en cours", IDC_REQ_SAVE, "button", BS_PUSHBUTTON | BS_CENTER | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 404, 68, 140, 13
+ CONTROL "Etape 1 : définir les critères de patients", IDC_REQ_STEP1_TXT, "static", SS_CENTER | WS_CHILD | WS_VISIBLE, 4, 4, 190, 9
+ CONTROL "", -1, "static", SS_BLACKFRAME | WS_CHILD | WS_VISIBLE | WS_GROUP | WS_TABSTOP, 4, 16, 190, 24
+ CONTROL "Critères Patient", IDC_REQ_CRITPAT, "BorCheck", BS_AUTOCHECKBOX | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 56, 22, 64, 13
+ CONTROL "Etape 2 : définir les critères de documents", IDC_REQ_STEP2_TXT, "static", SS_CENTER | WS_CHILD | WS_VISIBLE, 202, 4, 190, 9
+ CONTROL "", -1, "static", SS_BLACKFRAME | WS_CHILD | WS_VISIBLE | WS_GROUP | WS_TABSTOP, 202, 16, 190, 24
+ CONTROL "Critères Document", IDC_REQ_CRITDOC, "BorCheck", BS_AUTOCHECKBOX | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 248, 22, 72, 13
+ CONTROL "Etape 3 : définir les critères cliniques", IDC_REQ_STEP3_TXT, "static", SS_CENTER | WS_CHILD | WS_VISIBLE, 3, 44, 388, 9
+ CONTROL "", -1, "static", SS_BLACKFRAME | WS_CHILD | WS_VISIBLE | WS_GROUP | WS_TABSTOP, 4, 56, 388, 112
+ CONTROL "ListView1", IDC_REQ_LW, "SysListView32", LVS_REPORT | LVS_SINGLESEL | WS_CHILD | WS_VISIBLE | WS_BORDER, 12, 80, 372, 80
+ CONTROL "Ajouter un critère clinique", IDC_REQ_NEW, "button", BS_PUSHBUTTON | BS_CENTER | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 12, 64, 196, 13
+ CONTROL "Modifier", IDC_REQ_MOD, "button", BS_PUSHBUTTON | BS_CENTER | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 212, 64, 52, 13
+ CONTROL "Dupliquer", IDC_REQ_DUP, "button", BS_PUSHBUTTON | BS_CENTER | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 324, 64, 52, 13
+ CONTROL "Détruire", IDC_REQ_DEL, "button", BS_PUSHBUTTON | BS_CENTER | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 268, 64, 52, 13
+ CONTROL "Etape 4 : définir les requêtes cliniques", IDC_REQ_STEP4_TXT, "static", SS_CENTER | WS_CHILD | WS_VISIBLE, 4, 172, 388, 9
+ CONTROL "", -1, "static", SS_BLACKFRAME | WS_CHILD | WS_VISIBLE | WS_GROUP | WS_TABSTOP, 4, 184, 388, 132
+ CONTROL "Nom", IDC_REQ_NAME_TXT, "static", SS_CENTER | WS_CHILD | WS_VISIBLE, 108, 188, 272, 9
+ CONTROL "", IDC_REQ_NAME_EDIT, "edit", ES_LEFT | WS_CHILD | WS_VISIBLE | WS_BORDER | WS_TABSTOP, 108, 200, 272, 14
+ CONTROL "(", IDC_REQ_OUVRANTE, "button", BS_PUSHBUTTON | BS_CENTER | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 12, 224, 20, 13
+ CONTROL "ET", IDC_REQ_ET, "button", BS_PUSHBUTTON | BS_CENTER | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 36, 224, 20, 13
+ CONTROL "OU", IDC_REQ_OU, "button", BS_PUSHBUTTON | BS_CENTER | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 60, 224, 20, 13
+ CONTROL ")", IDC_REQ_FERMANTE, "button", BS_PUSHBUTTON | BS_CENTER | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 84, 224, 20, 13
+ CONTROL "Phrase logique", IDC_REQ_BOOL_TXT, "static", SS_CENTER | WS_CHILD | WS_VISIBLE, 108, 212, 272, 9
+ CONTROL "", IDC_REQ_EDIT, "edit", ES_LEFT | WS_CHILD | WS_VISIBLE | WS_BORDER | WS_TABSTOP, 108, 224, 272, 14
+ CONTROL "Ajouter cette requete", IDC_REQ_REQ_NEW, "button", BS_PUSHBUTTON | BS_CENTER | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 12, 244, 196, 13
+ CONTROL "Modifier", IDC_REQ_REQ_MOD, "button", BS_PUSHBUTTON | BS_CENTER | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 216, 244, 52, 13
+ CONTROL "Dupliquer", IDC_REQ_REQ_DUP, "button", BS_PUSHBUTTON | BS_CENTER | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 328, 244, 52, 13
+ CONTROL "Détruire", IDC_REQ_REQ_DEL, "button", BS_PUSHBUTTON | BS_CENTER | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 272, 244, 52, 13
+ CONTROL "", IDC_REQ_BOOL_LW, "SysListView32", LVS_REPORT | LVS_SINGLESEL | WS_CHILD | WS_VISIBLE | WS_BORDER, 12, 260, 372, 52
+ CONTROL "Etape 5 : définir le mode de validation", IDC_REQ_STEP5_TXT, "static", SS_CENTER | WS_CHILD | WS_VISIBLE, 400, 224, 156, 9
+ CONTROL "", -1, "static", SS_BLACKFRAME | WS_CHILD | WS_VISIBLE | WS_GROUP | WS_TABSTOP, 400, 236, 156, 28
+ CONTROL "Par patient", IDC_REQ_MODPAT, "button", BS_AUTORADIOBUTTON | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 434, 240, 88, 9
+ CONTROL "Par document", IDC_REQ_MODDOC, "button", BS_AUTORADIOBUTTON | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 434, 252, 88, 9
+ CONTROL "Etape 6 : lancer", IDC_REQ_STEP5_TXT, "static", SS_CENTER | WS_CHILD | WS_VISIBLE, 400, 284, 156, 9
+ CONTROL "", -1, "static", SS_BLACKFRAME | WS_CHILD | WS_VISIBLE | WS_GROUP | WS_TABSTOP, 400, 296, 156, 20
+ CONTROL "Lancer la recherche", IDC_REQ_LANCER, "button", BS_PUSHBUTTON | BS_CENTER | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 404, 300, 148, 14
+ CONTROL "Fermer sans lancer la recherche", IDC_REQ_FERMER, "button", BS_PUSHBUTTON | BS_CENTER | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 404, 136, 148, 13
+}
+IDD_EDITREQ DIALOG 0, 0, 329, 195
+STYLE DS_MODALFRAME | DS_3DLOOK | DS_CONTEXTHELP | WS_POPUP | WS_VISIBLE | WS_CAPTION | WS_SYSMENU
+CAPTION "Edition d'un chemin de requête"
+FONT 8, "MS Sans Serif"
+{
+ CONTROL "ListView1", IDC_EDITREQ_LWFILS, "SysListView32", LVS_REPORT | WS_CHILD | WS_VISIBLE | WS_BORDER, 168, 24, 152, 129
+ CONTROL "ListView3", IDC_EDITREQ_LWPERE, "SysListView32", LVS_REPORT | WS_CHILD | WS_VISIBLE | WS_BORDER, 8, 24, 152, 129
+ CONTROL "Insérer", IDC_EDITREQ_INS, "button", BS_PUSHBUTTON | BS_CENTER | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 8, 8, 46, 13
+ CONTROL "Modifier", IDC_EDITREQ_MOD, "button", BS_PUSHBUTTON | BS_CENTER | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 60, 8, 46, 13
+ CONTROL "Détruire", IDC_EDITREQ_DEL, "button", BS_PUSHBUTTON | BS_CENTER | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 113, 8, 46, 13
+ CONTROL "Ajouter élément", IDC_EDITREQ_AJOUTER, "button", BS_PUSHBUTTON | BS_CENTER | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 168, 8, 152, 13
+ CONTROL "", IDOK, "BorBtn", BS_DEFPUSHBUTTON | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 88, 164, 43, 25
+ CONTROL "", IDCANCEL, "BorBtn", BS_PUSHBUTTON | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 144, 164, 43, 25
+ CONTROL "", IDHELP, "BorBtn", BS_PUSHBUTTON | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 200, 164, 43, 25
+}
+
+IDD_CRITREQPAT DIALOG 66, 8, 285, 276
+STYLE DS_MODALFRAME | WS_POPUP | WS_VISIBLE | WS_CAPTION | WS_SYSMENU
+CAPTION "Choix des critères Patient"
+FONT 8, "MS Sans Serif"
+{
+ CONTROL "", -1, "BorShade", BSS_GROUP | BSS_CAPTION | BSS_LEFT | WS_CHILD | WS_VISIBLE | WS_GROUP, 4, 4, 276, 212, 0
+ CONTROL "Date de naissance", -1, "BorShade", BSS_GROUP | BSS_CAPTION | BSS_LEFT | WS_CHILD | WS_VISIBLE | WS_GROUP, 12, 8, 180, 48
+ CONTROL "Date min.", -1, "static", SS_LEFT | WS_CHILD | WS_VISIBLE, 16, 24, 84, 9, 0
+ CONTROL "", IDC_CRITREQPAT_DATEN1, "edit", ES_LEFT | WS_CHILD | WS_VISIBLE | WS_BORDER | WS_TABSTOP, 16, 32, 84, 13, 0
+ CONTROL "Date max.", -1, "static", SS_LEFT | WS_CHILD | WS_VISIBLE, 104, 24, 84, 8, 0
+ CONTROL "", IDC_CRITREQPAT_DATEN2, "edit", ES_LEFT | WS_CHILD | WS_VISIBLE | WS_BORDER | WS_TABSTOP, 104, 32, 84, 13, 0
+ CONTROL "Sexe", IDC_CRITREQPAT_SEXE, "BorShade", BSS_GROUP | BSS_CAPTION | BSS_LEFT | WS_CHILD | WS_VISIBLE | WS_GROUP, 200, 8, 72, 48, 0
+ CONTROL "Masculin", IDC_CRITREQPAT_SEXE1, "BorRadio", BS_AUTORADIOBUTTON | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 208, 25, 60, 9, 0
+ CONTROL "Féminin", IDC_CRITREQPAT_SEXE2, "BorRadio", BS_AUTORADIOBUTTON | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 208, 40, 60, 12, 0
+ CONTROL "Nom", -1, "static", SS_LEFT | WS_CHILD | WS_VISIBLE, 57, 68, 172, 8, 0
+ CONTROL "", IDC_CRITREQPAT_NOM, "edit", ES_LEFT | ES_AUTOHSCROLL | WS_CHILD | WS_VISIBLE | WS_BORDER | WS_TABSTOP, 57, 76, 172, 13, 0
+ CONTROL "Prénom", -1, "static", SS_LEFT | WS_CHILD | WS_VISIBLE, 57, 92, 172, 8, 0
+ CONTROL "", IDC_CRITREQPAT_PRENOM, "edit", ES_LEFT | ES_AUTOHSCROLL | WS_CHILD | WS_VISIBLE | WS_BORDER | WS_TABSTOP, 57, 100, 172, 13, 0
+ CONTROL "Adresse", -1, "BorShade", BSS_GROUP | BSS_CAPTION | BSS_LEFT | WS_CHILD | WS_VISIBLE | WS_GROUP, 12, 116, 260, 40, 0
+ CONTROL "Code Postal", -1, "static", SS_LEFT | WS_CHILD | WS_VISIBLE, 20, 132, 76, 8
+ CONTROL "", IDC_CRITREQPAT_CODEPOST, "edit", ES_LEFT | WS_CHILD | WS_VISIBLE | WS_BORDER | WS_TABSTOP, 20, 140, 76, 13
+ CONTROL "Ville", -1, "static", SS_LEFT | WS_CHILD | WS_VISIBLE, 120, 132, 140, 8
+ CONTROL "", IDC_CRITREQPAT_VILLE, "edit", ES_LEFT | WS_CHILD | WS_VISIBLE | WS_BORDER | WS_TABSTOP, 120, 140, 140, 13
+ CONTROL "Situation familiale", IDC_CRITREQPAT_SITFAM, "BorShade", BSS_GROUP | BSS_CAPTION | BSS_LEFT | WS_CHILD | WS_VISIBLE | WS_GROUP, 12, 160, 260, 48, 0
+ CONTROL "Célibataire", IDC_CRITREQPAT_CEL, "BorRadio", BS_AUTORADIOBUTTON | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 16, 176, 56, 9, 0
+ CONTROL "Veuf (Veuve)", IDC_CRITREQPAT_VEU, "BorRadio", BS_AUTORADIOBUTTON | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 16, 192, 60, 9, 0
+ CONTROL "Marié(e)", IDC_CRITREQPAT_MAR, "BorRadio", BS_AUTORADIOBUTTON | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 104, 176, 48, 9, 0
+ CONTROL "Concubin(e)", IDC_CRITREQPAT_CCB, "BorRadio", BS_AUTORADIOBUTTON | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 104, 192, 56, 9
+ CONTROL "Divorcé(e)", IDC_CRITREQPAT_DIV, "BorRadio", BS_AUTORADIOBUTTON | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 180, 176, 48, 9, 0
+ CONTROL "Nombre d'enfants", -1, "static", SS_LEFT | WS_CHILD | WS_VISIBLE, 180, 192, 60, 9, 0
+ CONTROL "", IDC_CRITREQPAT_NBENF, "edit", ES_LEFT | WS_CHILD | WS_VISIBLE | WS_BORDER | WS_TABSTOP, 244, 188, 20, 12, 0
+ CONTROL "OK", IDOK, "BorBtn", BS_PUSHBUTTON | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 51, 224, 43, 25, 0
+ CONTROL "Cancel", IDCANCEL, "BorBtn", BS_PUSHBUTTON | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 121, 224, 43, 25, 0
+ CONTROL "", IDHELP, "BorBtn", BS_PUSHBUTTON | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 200, 224, 43, 25
+ CONTROL "Effacer tout", IDC_CRITREQPAT_EFFACER, "button", BS_PUSHBUTTON | BS_CENTER | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 92, 256, 104, 12
+}
+IDD_LANCEREQ DIALOG 0, 0, 195, 175
+STYLE DS_MODALFRAME | DS_3DLOOK | DS_CONTEXTHELP | WS_POPUP | WS_VISIBLE | WS_CAPTION | WS_SYSMENU
+CAPTION "Lancement de la requête"
+FONT 8, "MS Sans Serif"
+{
+ CONTROL "", IDC_LR_GROUP, "BorShade", BSS_GROUP | BSS_CAPTION | BSS_LEFT | WS_CHILD | WS_VISIBLE | WS_GROUP, 8, 9, 176, 59
+ CONTROL "Avec Libellé de requête", IDC_LR_AVECLIB, "BorRadio", BS_RADIOBUTTON | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 20, 17, 100, 11
+ CONTROL "Avec Critères Patient", IDC_LR_AVECPAT, "BorRadio", BS_RADIOBUTTON | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 20, 32, 104, 12
+ CONTROL "Avec Critères Document", IDC_LR_AVECDOC, "BorRadio", BS_RADIOBUTTON | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 20, 48, 108, 12
+ CONTROL "", IDC_LR_EDITPAT, "edit", ES_LEFT | WS_CHILD | WS_VISIBLE | WS_BORDER | WS_TABSTOP, 8, 84, 80, 12
+ CONTROL "", IDC_LR_EDITDOC, "edit", ES_LEFT | WS_CHILD | WS_VISIBLE | WS_BORDER | WS_TABSTOP, 8, 112, 80, 12
+ CONTROL "Patient en cours", -1, "static", SS_LEFT | WS_CHILD | WS_VISIBLE, 8, 76, 52, 8
+ CONTROL "Document en cours", -1, "static", SS_LEFT | WS_CHILD | WS_VISIBLE, 8, 104, 72, 8
+ CONTROL "Frame1", -1, "static", SS_ETCHEDFRAME | WS_CHILD | WS_VISIBLE, 8, 134, 176, 38
+ CONTROL "", IDC_LR_STATUS, "static", SS_LEFT | WS_CHILD | WS_VISIBLE, 16, 140, 160, 10
+ CONTROL "", IDC_PROGRESS, "msctls_progress32", WS_CHILD | WS_VISIBLE | WS_BORDER, 12, 156, 168, 12
+ CONTROL "Démarrer", IDC_LR_START, "button", BS_PUSHBUTTON | BS_CENTER | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 108, 84, 76, 14
+ CONTROL "Arrêter", IDC_LR_STOP, "button", BS_PUSHBUTTON | BS_CENTER | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 108, 112, 76, 14
+}
+
+IDD_CRITREQDOC DIALOG 66, 8, 173, 202
+STYLE DS_MODALFRAME | WS_POPUP | WS_VISIBLE | WS_CAPTION | WS_SYSMENU
+CAPTION "Choix des critères Document"
+FONT 8, "MS Sans Serif"
+{
+ CONTROL "AUTEUR", IDC_CRITREQDOC_AUTEUR, "button", BS_PUSHBUTTON | BS_CENTER | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 12, 13, 148, 17
+ CONTROL "Type document", -1, "static", SS_LEFT | WS_CHILD | WS_VISIBLE, 12, 44, 60, 8, 0
+ CONTROL "", IDC_CRITREQDOC_TYPE, "edit", ES_LEFT | ES_AUTOHSCROLL | WS_CHILD | WS_VISIBLE | WS_BORDER | WS_TABSTOP, 12, 52, 148, 13, 0
+ CONTROL "Date document", -1, "BorShade", BSS_GROUP | BSS_CAPTION | BSS_LEFT | WS_CHILD | WS_VISIBLE | WS_GROUP, 12, 76, 148, 72
+ CONTROL "Date min.", -1, "static", SS_LEFT | WS_CHILD | WS_VISIBLE, 45, 92, 84, 9, 0
+ CONTROL "", IDC_CRITREQDOC_DATE1, "edit", ES_LEFT | WS_CHILD | WS_VISIBLE | WS_BORDER | WS_TABSTOP, 45, 100, 84, 13, 0
+ CONTROL "Date max.", -1, "static", SS_LEFT | WS_CHILD | WS_VISIBLE, 45, 120, 84, 8
+ CONTROL "", IDC_CRITREQDOC_DATE2, "edit", ES_LEFT | WS_CHILD | WS_VISIBLE | WS_BORDER | WS_TABSTOP, 45, 128, 84, 13, 0
+ CONTROL "OK", IDOK, "BorBtn", BS_PUSHBUTTON | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 24, 152, 43, 25, 0
+ CONTROL "Cancel", IDCANCEL, "BorBtn", BS_PUSHBUTTON | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 106, 152, 43, 25, 0
+ CONTROL "Effacer tout", IDC_CRITREQDOC_EFFACER, "button", BS_PUSHBUTTON | BS_CENTER | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 35, 184, 104, 12
+}
+
+IDD_LISTUTI DIALOG 0, 0, 217, 208
+STYLE DS_MODALFRAME | DS_3DLOOK | DS_CONTEXTHELP | WS_POPUP | WS_VISIBLE | WS_CAPTION | WS_SYSMENU
+CAPTION "Liste des utilisateurs"
+FONT 8, "MS Sans Serif"
+{
+ CONTROL "ListView1", IDC_LISTUTI_LW, "SysListView32", LVS_REPORT | LVS_SINGLESEL | WS_CHILD | WS_VISIBLE | WS_BORDER, 12, 8, 192, 154
+ CONTROL "", IDOK, "BorBtn", BS_DEFPUSHBUTTON | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 55, 172, 43, 25
+ CONTROL "", IDCANCEL, "BorBtn", BS_PUSHBUTTON | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 119, 172, 43, 25
+}
+
+IDD_VALEUR DIALOG 116, 337, 165, 152
+STYLE DS_MODALFRAME | WS_POPUP | WS_VISIBLE | WS_CAPTION | WS_SYSMENU
+CLASS "bordlg"
+CAPTION "Valeur chiffrée"
+FONT 8, "MS Sans Serif"
+{
+ CONTROL "Valeur exacte :", -1, "BorShade", BSS_GROUP | BSS_CAPTION | BSS_LEFT | WS_CHILD | WS_VISIBLE | WS_GROUP, 12, 12, 72, 32
+ CONTROL "", IDC_VALEUR_EDITION, "edit", ES_LEFT | WS_CHILD | WS_VISIBLE | WS_BORDER | WS_TABSTOP, 16, 28, 61, 12
+ CONTROL "Supérieur à :", -1, "static", SS_LEFT | WS_CHILD | WS_VISIBLE, 16, 58, 40, 8
+ CONTROL "", IDC_VALEUR_INF, "edit", ES_LEFT | WS_CHILD | WS_VISIBLE | WS_BORDER | WS_TABSTOP, 16, 66, 61, 12, 0
+ CONTROL "Inférieur à :", -1, "static", SS_LEFT | WS_CHILD | WS_VISIBLE, 16, 80, 44, 8
+ CONTROL "", IDC_VALEUR_SUP, "edit", ES_LEFT | WS_CHILD | WS_VISIBLE | WS_BORDER | WS_TABSTOP, 16, 88, 61, 12
+ CONTROL "Unité :", -1, "BorStatic", SS_LEFT | WS_CHILD | WS_VISIBLE | WS_GROUP, 96, 20, 30, 8, 0
+ CONTROL "", IDC_VALEUR_UNITE, "edit", ES_LEFT | WS_CHILD | WS_VISIBLE | WS_BORDER | WS_TABSTOP, 96, 28, 44, 12, 0
+ CONTROL "", -1, "BorShade", BSS_GROUP | BSS_CAPTION | BSS_LEFT | WS_CHILD | WS_VISIBLE | WS_GROUP, 4, 4, 156, 112
+ CONTROL "Intervalle :", -1, "BorShade", BSS_GROUP | BSS_CAPTION | BSS_LEFT | WS_CHILD | WS_VISIBLE | WS_GROUP, 12, 48, 72, 56
+ CONTROL "Avec valeur Inf.", IDC_VALEUR_AVECINF, "button", BS_AUTORADIOBUTTON | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 88, 66, 64, 13
+ CONTROL "Avec valeur Sup.", IDC_VALEUR_AVECSUP, "button", BS_AUTORADIOBUTTON | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 88, 88, 68, 13
+ CONTROL "", IDOK, "BorBtn", BS_PUSHBUTTON | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 4, 121, 43, 25, 0
+ CONTROL "", IDCANCEL, "BorBtn", BS_PUSHBUTTON | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 60, 121, 43, 25, 0
+ CONTROL "Effacer", IDC_VALEUR_EFF, "button", BS_PUSHBUTTON | BS_CENTER | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 116, 121, 43, 25
+}
+
+IDD_LEXIMODIF DIALOG 66, 30, 245, 68EXSTYLE WS_EX_DLGMODALFRAME | WS_EX_CONTEXTHELP
+STYLE DS_MODALFRAME | DS_3DLOOK | DS_CONTEXTHELP | WS_POPUP | WS_VISIBLE | WS_CAPTION | WS_SYSMENU
+CAPTION "Premier vrai"
+FONT 8, "MS Sans Serif"
+{
+ CONTROL "Remplacer", 103, "static", SS_LEFT | WS_CHILD | WS_VISIBLE, 16, 12, 32, 8
+ CONTROL "", IDC_REMPL, "edit", ES_LEFT | WS_CHILD | WS_VISIBLE | WS_BORDER | WS_TABSTOP, 64, 9, 96, 12
+ CONTROL "Par", 104, "static", SS_LEFT | WS_CHILD | WS_VISIBLE, 16, 30, 48, 8
+ CONTROL "", IDC_PAR, "edit", ES_LEFT | WS_CHILD | WS_VISIBLE | WS_BORDER | WS_TABSTOP, 64, 30, 96, 12
+ CONTROL "", -1, "BorShade", BSS_VDIP | BSS_LEFT | WS_CHILD | WS_VISIBLE, 172, 9, 4, 52
+ CONTROL "", IDOK, "BorBtn", BS_PUSHBUTTON | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 192, 8, 43, 25
+ CONTROL "", IDCANCEL, "BorBtn", BS_PUSHBUTTON | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 192, 36, 43, 25
+}
+
+IDD_PROPEDIT DIALOG 0, 0, 355, 318
+STYLE DS_MODALFRAME | DS_3DLOOK | DS_CONTEXTHELP | WS_POPUP | WS_VISIBLE | WS_CAPTION | WS_SYSMENU
+CAPTION "Editeur de propositions"
+FONT 8, "MS Sans Serif"
+{
+ CONTROL "Proposition", -1, "static", SS_LEFT | WS_CHILD | WS_VISIBLE, 17, 14, 40, 10
+ CONTROL "", IDC_PE_PROPNAME, "edit", ES_LEFT | WS_CHILD | WS_VISIBLE | WS_BORDER | WS_TABSTOP, 60, 12, 276, 12
+ CONTROL "Groupe", -1, "static", SS_LEFT | WS_CHILD | WS_VISIBLE, 20, 34, 36, 9
+ CONTROL "", IDC_PE_GROUPNAME, "edit", ES_LEFT | WS_CHILD | WS_VISIBLE | WS_BORDER | WS_TABSTOP, 60, 32, 276, 12
+ CONTROL "TreeView1", IDC_PE_TVIEW, "SysTreeView32", TVS_HASBUTTONS | TVS_HASLINES | TVS_LINESATROOT | TVS_EDITLABELS | WS_CHILD | WS_VISIBLE | WS_BORDER, 12, 140, 228, 135, WS_EX_CLIENTEDGE
+ CONTROL "", IDC_PE_NUMTREE, "edit", ES_LEFT | WS_CHILD | WS_VISIBLE | WS_BORDER | WS_TABSTOP, 312, 140, 24, 13
+ CONTROL "Tree numéro :", -1, "static", SS_LEFT | WS_CHILD | WS_VISIBLE, 252, 142, 56, 13
+ CONTROL "Suivant", IDC_PE_NEXTTREE, "button", BS_PUSHBUTTON | BS_CENTER | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 252, 170, 88, 13
+ CONTROL "Précédent", IDC_PE_PREVTREE, "button", BS_PUSHBUTTON | BS_CENTER | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 252, 197, 88, 12
+ CONTROL "Ajouter", IDC_PE_ADDTREE, "button", BS_PUSHBUTTON | BS_CENTER | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 252, 223, 88, 12
+ CONTROL "Supprimer", IDC_PE_DELTREE, "button", BS_PUSHBUTTON | BS_CENTER | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 252, 251, 88, 12
+ CONTROL "", IDOK, "BorBtn", BS_PUSHBUTTON | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 64, 283, 43, 25
+ CONTROL "", IDCANCEL, "BorBtn", BS_PUSHBUTTON | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 160, 283, 43, 25
+ CONTROL "", IDC_PE_VALIDITY, "edit", ES_LEFT | ES_WANTRETURN | ES_MULTILINE | ES_AUTOVSCROLL | WS_CHILD | WS_VISIBLE | WS_BORDER | WS_TABSTOP, 16, 60, 320, 70
+ CONTROL "Validité", -1, "static", SS_LEFT | WS_CHILD | WS_VISIBLE, 20, 50, 52, 8
+}
+
+IDD_REFEDIT DIALOG 0, 0, 355, 247
+STYLE DS_MODALFRAME | DS_3DLOOK | DS_CONTEXTHELP | WS_POPUP | WS_VISIBLE | WS_CAPTION | WS_SYSMENU
+CAPTION "Editeur de référentiels"
+FONT 8, "MS Sans Serif"
+{
+ CONTROL "", IDC_RE_REFNAME, "edit", ES_LEFT | WS_CHILD | WS_VISIBLE | WS_BORDER | WS_TABSTOP, 12, 20, 324, 12
+ CONTROL "Référentiel", IDC_RE_NEWREF, "button", BS_PUSHBUTTON | BS_CENTER | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 12, 4, 120, 12
+ CONTROL "Proposition", -1, "static", SS_LEFT | WS_CHILD | WS_VISIBLE, 17, 41, 40, 13
+ CONTROL "Haut", IDC_RE_PROPHAUT, "button", BS_PUSHBUTTON | BS_CENTER | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 64, 39, 56, 13
+ CONTROL "Bas", IDC_RE_PROPBAS, "button", BS_PUSHBUTTON | BS_CENTER | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 128, 39, 56, 13
+ CONTROL "Ajouter", IDC_RE_ADDPROP, "button", BS_PUSHBUTTON | BS_CENTER | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 212, 39, 56, 14
+ CONTROL "Supprimer", IDC_RE_DELPROP, "button", BS_PUSHBUTTON | BS_CENTER | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 280, 39, 56, 13
+ CONTROL "ListView1", IDC_RE_LVIEW, "SysListView32", LVS_REPORT | WS_CHILD | WS_VISIBLE | WS_BORDER, 12, 68, 328, 136
+ CONTROL "Frame1", -1, "static", SS_ETCHEDFRAME | WS_CHILD | WS_VISIBLE, 12, 60, 328, 1
+ CONTROL "", IDOK, "BorBtn", BS_PUSHBUTTON | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 108, 212, 43, 25
+ CONTROL "", IDCANCEL, "BorBtn", BS_PUSHBUTTON | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 204, 212, 43, 25
+}
+
+IDD_ARCEDIT DIALOG 0, 0, 422, 247
+STYLE DS_MODALFRAME | DS_3DLOOK | DS_CONTEXTHELP | WS_POPUP | WS_VISIBLE | WS_CAPTION | WS_SYSMENU
+CAPTION "Editeur d'Archétypes"
+FONT 8, "MS Sans Serif"
+{
+ CONTROL "", IDC_AE_ARCNAME, "edit", ES_LEFT | WS_CHILD | WS_VISIBLE | WS_BORDER | WS_TABSTOP, 4, 4, 364, 12
+ CONTROL "TreeView1", IDC_AE_TVIEW, "SysTreeView32", TVS_HASBUTTONS | TVS_HASLINES | TVS_LINESATROOT | TVS_EDITLABELS | WS_CHILD | WS_VISIBLE | WS_BORDER, 4, 16, 364, 228, WS_EX_CLIENTEDGE
+ CONTROL "", -1, "static", SS_ETCHEDFRAME | WS_CHILD | WS_VISIBLE, 372, 20, 1, 212
+ CONTROL "Ouvrir", IDC_AE_OPEN, "button", BS_PUSHBUTTON | BS_CENTER | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 376, 18, 43, 25
+ CONTROL "Enregistrer", IDC_AE_SAVE, "button", BS_PUSHBUTTON | BS_CENTER | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 376, 104, 43, 25
+ CONTROL "Nouveau", IDC_AE_NEW, "button", BS_PUSHBUTTON | BS_CENTER | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 376, 60, 43, 25
+ CONTROL "", IDOK, "BorBtn", BS_PUSHBUTTON | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 376, 156, 43, 25
+ CONTROL "", IDCANCEL, "BorBtn", BS_PUSHBUTTON | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 376, 208, 43, 25
+}
+
+IDD_CONTLIST DIALOG 0, 0, 185, 179
+STYLE DS_MODALFRAME | DS_3DLOOK | DS_CONTEXTHELP | WS_POPUP | WS_VISIBLE | WS_CAPTION | WS_SYSMENU
+CAPTION "Edition d'une contrainte"
+FONT 8, "MS Sans Serif"
+{
+ CONTROL "Element", -1, "static", SS_LEFT | WS_CHILD | WS_VISIBLE, 8, 4, 116, 8
+ CONTROL "", IDC_CL_LABEL, "edit", ES_LEFT | WS_CHILD | WS_VISIBLE | WS_BORDER | WS_TABSTOP, 8, 16, 164, 13
+ CONTROL "Critère d'inclusion (obligatoire)", IDC_CL_OBLIG, "button", BS_GROUPBOX | WS_CHILD | WS_VISIBLE | WS_GROUP, 32, 36, 116, 28
+ CONTROL "oui", IDC_CL_OBLIG_OUI, "BorRadio", BS_AUTORADIOBUTTON | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 44, 48, 32, 9
+ CONTROL "non", IDC_CL_OBLIG_NON, "BorRadio", BS_AUTORADIOBUTTON | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 92, 48, 32, 9
+ CONTROL "Fils obligatoires", IDC_CL_FILS, "button", BS_GROUPBOX | WS_CHILD | WS_VISIBLE | WS_GROUP, 12, 78, 160, 38
+ CONTROL "", IDC_CL_FILS_MIN, "edit", ES_LEFT | WS_CHILD | WS_VISIBLE | WS_BORDER | WS_TABSTOP, 40, 96, 24, 13
+ CONTROL "", IDC_CL_FILS_MAX, "edit", ES_LEFT | WS_CHILD | WS_VISIBLE | WS_BORDER | WS_TABSTOP, 120, 96, 24, 13
+ CONTROL "Min", -1, "static", SS_LEFT | WS_CHILD | WS_VISIBLE, 20, 98, 16, 8
+ CONTROL "Max", -1, "static", SS_LEFT | WS_CHILD | WS_VISIBLE, 100, 98, 16, 9
+ CONTROL "", IDOK, "BorBtn", BS_PUSHBUTTON | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 37, 136, 43, 25
+ CONTROL "", IDCANCEL, "BorBtn", BS_PUSHBUTTON | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 105, 136, 43, 25
+}
+
+IDD_CONTROLTEXT DIALOG 0, 0, 302, 118
+STYLE DS_MODALFRAME | DS_3DLOOK | DS_CONTEXTHELP | WS_POPUP | WS_VISIBLE | WS_CAPTION | WS_SYSMENU
+CAPTION "Edition d'un controle"
+FONT 8, "MS Sans Serif"
+{
+ CONTROL "Element", -1, "static", SS_LEFT | WS_CHILD | WS_VISIBLE, 8, 4, 116, 8
+ CONTROL "", IDC_CT_LABEL, "edit", ES_LEFT | WS_CHILD | WS_VISIBLE | WS_BORDER | WS_TABSTOP, 8, 16, 148, 13
+ CONTROL "Controle actif", IDC_CT_ACTIF, "button", BS_GROUPBOX | WS_CHILD | WS_VISIBLE | WS_GROUP, 176, 6, 116, 28
+ CONTROL "oui", IDC_CT_ACTIF_OUI, "BorRadio", BS_AUTORADIOBUTTON | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 188, 18, 32, 9
+ CONTROL "non", IDC_CT_ACTIF_NON, "BorRadio", BS_AUTORADIOBUTTON | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 236, 18, 32, 9
+ CONTROL "Texte", -1, "button", BS_GROUPBOX | WS_CHILD | WS_VISIBLE | WS_GROUP, 8, 40, 284, 38
+ CONTROL "", IDC_CT_TEXTE, "edit", ES_LEFT | WS_CHILD | WS_VISIBLE | WS_BORDER | WS_TABSTOP, 16, 56, 268, 13
+ CONTROL "", IDOK, "BorBtn", BS_PUSHBUTTON | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 84, 84, 43, 25
+ CONTROL "", IDCANCEL, "BorBtn", BS_PUSHBUTTON | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 144, 84, 43, 25
+}
+
+IDD_ENTETE_EDIT DIALOG 0, 0, 441, 196
+STYLE DS_MODALFRAME | DS_3DLOOK | DS_CONTEXTHELP | WS_POPUP | WS_VISIBLE | WS_CAPTION | WS_SYSMENU
+CAPTION "Edition de l'en-tete"
+FONT 8, "MS Sans Serif"
+{
+ CONTROL "Liste des variables de l'en-tete", -1, "static", SS_LEFT | WS_CHILD | WS_VISIBLE, 14, 12, 212, 8
+ CONTROL "", IDC_ENTETE_LW, "SysListView32", LVS_REPORT | WS_CHILD | WS_VISIBLE | WS_BORDER, 12, 24, 416, 129
+ CONTROL "", IDOK, "BorBtn", BS_PUSHBUTTON | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 135, 162, 43, 25
+ CONTROL "", IDCANCEL, "BorBtn", BS_PUSHBUTTON | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 199, 162, 43, 25
+ CONTROL "", IDHELP, "BorBtn", BS_PUSHBUTTON | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 263, 162, 43, 25
+}
+
+IDD_VARTAG_EDIT DIALOG 0, 0, 357, 94
+STYLE DS_MODALFRAME | DS_3DLOOK | DS_CONTEXTHELP | WS_POPUP | WS_VISIBLE | WS_CAPTION | WS_SYSMENU
+CAPTION "Edition d'une variable d'en-tete"
+FONT 8, "MS Sans Serif"
+{
+ CONTROL "Nom de la variable", -1, "static", SS_LEFT | WS_CHILD | WS_VISIBLE, 13, 9, 140, 9
+ CONTROL "", IDC_VARTAG_EDITNAME, "edit", ES_LEFT | ES_READONLY | WS_CHILD | WS_VISIBLE | WS_BORDER | WS_TABSTOP, 12, 22, 180, 13
+ CONTROL "Valeur de la variable", -1, "static", SS_LEFT | WS_CHILD | WS_VISIBLE, 13, 47, 128, 8
+ CONTROL "", IDC_VARTAG_EDITVALUE, "edit", ES_LEFT | WS_CHILD | WS_VISIBLE | WS_BORDER | WS_TABSTOP, 13, 60, 320, 13
+ CONTROL "", IDOK, "BorBtn", BS_PUSHBUTTON | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 240, 10, 43, 25
+ CONTROL "", IDCANCEL, "BorBtn", BS_PUSHBUTTON | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 290, 10, 43, 25
+}
+
+IDD_REPAIR_DOCUM DIALOG 66, 21, 245, 63
+STYLE DS_MODALFRAME | DS_3DLOOK | DS_CONTEXTHELP | WS_POPUP | WS_VISIBLE | WS_CAPTION | WS_SYSMENU
+CAPTION "Reconstruction de la table des documents"
+FONT 8, "MS Sans Serif"
+{
+ CONTROL "Num", -1, "static", SS_LEFT | WS_CHILD | WS_VISIBLE, 16, 14, 20, 8
+ CONTROL "", IDC_CVT_NSS, "edit", ES_LEFT | WS_CHILD | WS_VISIBLE | WS_BORDER | WS_TABSTOP, 36, 10, 40, 12
+ CONTROL "Code", -1, "static", SS_LEFT | WS_CHILD | WS_VISIBLE, 80, 12, 20, 8
+ CONTROL "", IDC_CVT_CODE, "edit", ES_LEFT | WS_CHILD | WS_VISIBLE | WS_BORDER | WS_TABSTOP, 100, 9, 60, 12
+ CONTROL "Nom", 105, "static", SS_LEFT | WS_CHILD | WS_VISIBLE, 16, 30, 20, 8
+ CONTROL "", IDC_CVT_NOM, "edit", ES_LEFT | WS_CHILD | WS_VISIBLE | WS_BORDER | WS_TABSTOP, 36, 26, 124, 12
+ CONTROL "Prénom", 106, "static", SS_LEFT | WS_CHILD | WS_VISIBLE, 4, 41, 28, 8
+ CONTROL "", IDC_CVT_PRENOM, "edit", ES_LEFT | WS_CHILD | WS_VISIBLE | WS_BORDER | WS_TABSTOP, 36, 41, 124, 12
+ CONTROL "", -1, "BorShade", BSS_VDIP | BSS_LEFT | WS_CHILD | WS_VISIBLE, 172, 6, 1, 52
+ CONTROL "Stop", IDC_CVT_STOP, "BorBtn", BS_PUSHBUTTON | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 188, 33, 43, 25
+ CONTROL "Lancer", IDC_CVT_START, "BorBtn", BS_PUSHBUTTON | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 188, 5, 43, 25
+}
+
+/*
+IDD_HEADER_MODEL DIALOG 11, 27, 188, 153
+STYLE DS_MODALFRAME | WS_POPUP | WS_VISIBLE | WS_CAPTION | WS_SYSMENU
+CLASS "bordlg"
+CAPTION "Choix d'un modèle d'en-tete"
+FONT 8, "MS Sans Serif"
+{
+ CONTROL "", -1, "BorShade", BSS_HDIP | BSS_LEFT | WS_CHILD | WS_VISIBLE, 1, 117, 183, 1
+ CONTROL "", IDOK, "BorBtn", BS_DEFPUSHBUTTON | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 16, 124, 43, 25
+ CONTROL "", IDCANCEL, "BorBtn", BS_PUSHBUTTON | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 72, 124, 43, 25
+ CONTROL "", IDHELP, "BorBtn", BS_PUSHBUTTON | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 128, 124, 43, 25
+ CONTROL "", IDC_LISTBOX, "LISTBOX", LBS_NOTIFY | WS_BORDER | WS_VSCROLL | WS_HSCROLL | WS_GROUP, 11, 19, 163, 95
+ CONTROL "", -1, "BorShade", BSS_RGROUP | BSS_CAPTION | BSS_LEFT | WS_CHILD | WS_VISIBLE, 6, 7, 173, 105
+}
+*/
+
+IDD_CREAT_TPL DIALOG 11, 27, 379, 228
+STYLE DS_MODALFRAME | WS_POPUP | WS_VISIBLE | WS_CAPTION | WS_SYSMENU
+CLASS "bordlg"
+CAPTION "Edition des modèles de présentation"
+FONT 8, "MS Sans Serif"
+{
+ CONTROL "", -1, "BorShade", BSS_HDIP | BSS_LEFT | WS_CHILD | WS_VISIBLE, 8, 185, 364, 1
+ CONTROL "", IDOK, "BorBtn", BS_DEFPUSHBUTTON | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 111, 191, 43, 25
+ CONTROL "", IDCANCEL, "BorBtn", BS_PUSHBUTTON | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 167, 191, 43, 25
+ CONTROL "", IDHELP, "BorBtn", BS_PUSHBUTTON | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 223, 191, 43, 25
+ CONTROL "", -1, "BorShade", BSS_RGROUP | BSS_CAPTION | BSS_LEFT | WS_CHILD | WS_VISIBLE, 6, 7, 366, 166
+ CONTROL "ComboBox2", IDC_CREATTPL_COMBO, "combobox", CBS_DROPDOWNLIST | CBS_AUTOHSCROLL | WS_CHILD | WS_VISIBLE | WS_VSCROLL | WS_TABSTOP, 20, 26, 136, 63
+ CONTROL "Type document", -1, "BorStatic", SS_LEFT | WS_CHILD | WS_VISIBLE | WS_GROUP, 24, 16, 104, 9
+ CONTROL "Utilisation", IDC_CREATTPL_UTIL, "BorShade", BSS_GROUP | BSS_CAPTION | BSS_LEFT | WS_CHILD | WS_VISIBLE | WS_GROUP, 21, 52, 103, 100
+ CONTROL "Tout le monde", IDC_CREATTPL_UTIL1, "BorRadio", BS_AUTORADIOBUTTON | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 28, 68, 72, 9
+ CONTROL "Vous-meme", IDC_CREATTPL_UTIL2, "BorRadio", BS_AUTORADIOBUTTON | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 28, 80, 68, 9
+ CONTROL "Type Template", IDC_CREATTPL_TYPE, "BorShade", BSS_GROUP | BSS_CAPTION | BSS_LEFT | WS_CHILD | WS_VISIBLE | WS_GROUP, 167, 111, 88, 40
+ CONTROL "Composition", IDC_CREATTPL_COMPO, "BorRadio", BS_AUTORADIOBUTTON | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 175, 125, 72, 9
+ CONTROL "Par défaut", IDC_CREATTPL_DEFAUT, "BorRadio", BS_AUTORADIOBUTTON | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 175, 138, 76, 9
+ CONTROL "", IDC_CREATTPL_LIBELLE, "edit", ES_LEFT | WS_CHILD | WS_VISIBLE | WS_BORDER | WS_TABSTOP, 166, 26, 196, 13
+ CONTROL "Libellé", -1, "BorStatic", SS_LEFT | WS_CHILD | WS_VISIBLE | WS_GROUP, 168, 16, 140, 7
+ CONTROL "Sélectionner", IDC_CREATTPL_ENTETE, "button", BS_PUSHBUTTON | BS_CENTER | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 166, 59, 196, 13
+ CONTROL "Sélectionner", IDC_CREATTPL_FICHIER, "button", BS_PUSHBUTTON | BS_CENTER | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 167, 89, 196, 13
+ CONTROL "", IDC_CREATTPL_ROOT, "edit", ES_LEFT | WS_CHILD | WS_VISIBLE | WS_BORDER | WS_TABSTOP, 28, 132, 72, 14
+ CONTROL "Pour un document particulier", -1, "BorStatic", SS_LEFT | WS_CHILD | WS_VISIBLE | WS_GROUP, 29, 123, 92, 9
+ CONTROL "Numéro de console", -1, "BorStatic", SS_LEFT | WS_CHILD | WS_VISIBLE | WS_GROUP, 28, 94, 76, 9
+ CONTROL "", IDC_CREATTPL_CONSOLE, "edit", ES_LEFT | WS_CHILD | WS_VISIBLE | WS_BORDER | WS_TABSTOP, 28, 104, 44, 14
+ CONTROL "Fichier template", -1, "BorStatic", SS_LEFT | WS_CHILD | WS_VISIBLE | WS_GROUP, 168, 78, 120, 9
+ CONTROL "Fichier en-tete", -1, "BorStatic", SS_LEFT | WS_CHILD | WS_VISIBLE | WS_GROUP, 168, 48, 84, 8
+}
+
+UPDATE_WARNING DIALOG 38, 45, 300, 130
+STYLE DS_MODALFRAME | WS_POPUP | WS_VISIBLE | WS_CAPTION | WS_SYSMENU
+CAPTION "Gestion des mises à jour"
+FONT 8, "MS Sans Serif"
+{
+ CONTROL "", -1, "BorShade", BSS_GROUP | BSS_LEFT | WS_CHILD | WS_VISIBLE, 4, 4, 292, 120
+ CONTROL "Une version plus récente est disponible, souhaitez-vous l'installer ?", UPDATE_QUESTION, "BorStatic", SS_CENTER | WS_CHILD | WS_VISIBLE | WS_GROUP, 7, 9, 284, 23
+ CONTROL "Oui", UPDATE_YES, "button", BS_PUSHBUTTON | BS_CENTER | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 85, 35, 40, 15
+ CONTROL "Non", UPDATE_NO, "button", BS_PUSHBUTTON | BS_CENTER | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 175, 35, 40, 15
+ CONTROL "", UPDATE_RELEASE, "EDIT", ES_LEFT | ES_MULTILINE | WS_CHILD | WS_VISIBLE | WS_BORDER | WS_TABSTOP, 7, 60, 284, 50
+ CONTROL "Elargir", UPDATE_ENLARGE, "button", BS_PUSHBUTTON | BS_CENTER | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 7, 111, 284, 10
+}
+
+CORTOOLBOX DIALOG 38, 45, 117, 58
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION
+CLASS "BORDLG"
+CAPTION "Outils de gestion des personnes"
+{
+ CONTROL "", -1, "BorShade", BSS_GROUP | BSS_LEFT | WS_CHILD | WS_VISIBLE, 5, 4, 108, 32
+ CONTROL "Exporter les correspondants au format mailing", MAIL_BTN, "button", BS_PUSHBUTTON | BS_CENTER | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 15, 40, 87, 14
+}
+
+// fin de nsoutil.rc
+

@@ -1,0 +1,152 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+<TITLE>TIdSysLogMsgPart</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <META name="GENERATOR" content="Doc-O-Matic">
+    <LINK rel="STYLESHEET" href="default.css" type="text/css">
+
+<SCRIPT LANGUAGE="JavaScript1.2" SRC="scripts.js"></SCRIPT>
+</HEAD>
+<BODY CLASS="Element57">
+<TABLE BORDER="0" BGCOLOR="#AACCFF" WIDTH="100%" CELLSPACING="0" CELLPADDING="0">
+<TR><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element1">
+Indy 9</DIV>
+</TD><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element2">
+<A HREF="content.html" CLASS="Element59">Content</A> | <A HREF="idx.html" CLASS="Element59">Index</A> | <A HREF="symref.html" CLASS="Element59">Reference</A></DIV>
+</TD></TR></TABLE><DIV CLASS="Element58">
+<DIV CLASS="Element5">
+TIdSysLogMsgPart</DIV>
+<DIV CLASS="Element7">
+<A HREF="014024.html" CLASS="Element59">Hierarchy</A>, <A HREF="014025.html" CLASS="Element59">Properties</A>, <A HREF="014026.html" CLASS="Element59">Methods</A>, <A HREF="014027.html" CLASS="Element59">See Also</A>, <A HREF="002915.html" CLASS="Element59">Unit: IdSysLogMessage</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+TIdSysLogMsgPart encapsulates the Msg part of the SysLog message.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12">TIdSysLogMsgPart = <STRONG>class</STRONG>(TPersistent)</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Unit</DIV>
+<DIV CLASS="Element69">
+<A HREF="002915.html" CLASS="Element59">IdSysLogMessage</A></DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+TIdSysLogMsgPart encapsulates the Msg part of the SysLog message such as the original text message, <A HREF="007823.html#0004" CLASS="Element59">Process</A> name, <A HREF="007823.html#0002" CLASS="Element59">PID</A>, and the message content. This class allows you to parse the SysLog Msg part and create a properly formatted Msg part of the SysLog message.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0001">TIdSysLogMsgPart.Content</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007823.html" CLASS="Element59">TIdSysLogMsgPart</A>, <A HREF="014028.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+The content property is the free-form text property for the message sent by a process.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> Content: <STRONG>String</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+The content property is the free-form text property for the message sent by a process. The value is obtained by parsing the <A HREF="007823.html#0005" CLASS="Element59">TIdSysLogMsgPart.Text</A> text property and setting this property will update the <A HREF="007823.html#0005" CLASS="Element59">TIdSysLogMsgPart.Text</A> property.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0002">TIdSysLogMsgPart.PID</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007823.html" CLASS="Element59">TIdSysLogMsgPart</A>, <A HREF="014029.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+This is the <A HREF="007823.html#0004" CLASS="Element59">Process</A> ID (PID) for the process that caused the SysLog message.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> PID: Integer;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+This is the <A HREF="007823.html#0004" CLASS="Element59">Process</A> ID (PID) for the process that caused the SysLog message. This name may not be the name of the program sending the SysLog message to the server. This value is used only if <A HREF="007823.html#0003" CLASS="Element59">TIdSysLogMsgPart.PIDAvailable</A> property is set to true. The value is obtained by parsing the <A HREF="007823.html#0005" CLASS="Element59">TIdSysLogMsgPart.Text</A> text property and setting this property will update the <A HREF="007823.html#0005" CLASS="Element59">TIdSysLogMsgPart.Text</A> property.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0003">TIdSysLogMsgPart.PIDAvailable</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007823.html" CLASS="Element59">TIdSysLogMsgPart</A>, <A HREF="014030.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+This property indicates if a <A HREF="007823.html#0002" CLASS="Element59">PID</A> is available in the <A HREF="007823.html#0005" CLASS="Element59">Text</A> form of the Msg.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> PIDAvailable: Boolean;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+This property indicates if a <A HREF="007823.html#0002" CLASS="Element59">PID</A> is available in the <A HREF="007823.html#0005" CLASS="Element59">Text</A> form of the Msg. Setting this to True will cause the <A HREF="007823.html#0002" CLASS="Element59">PID</A> value to be included in the text form of the Msg or setting this to false will remove the <A HREF="007823.html#0002" CLASS="Element59">PID</A> from the <A HREF="007823.html#0005" CLASS="Element59">Text</A> form of the Msg. A <A HREF="007823.html#0002" CLASS="Element59">PID</A> may not be included if it is not applicable to the computer or if the <A HREF="007823.html#0002" CLASS="Element59">PID</A> would be meaningless (e.g. the process by it's nature runs briefly such as SU). The value is obtained by parsing the <A HREF="007823.html#0005" CLASS="Element59">TIdSysLogMsgPart.Text</A> text property and setting this property will update the <A HREF="007823.html#0005" CLASS="Element59">TIdSysLogMsgPart.Text</A> property.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0004">TIdSysLogMsgPart.Process</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007823.html" CLASS="Element59">TIdSysLogMsgPart</A>, <A HREF="014031.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+This is the name of the process that caused the SysLog message.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> Process: <STRONG>String</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+This is the name of the process that caused the SysLog message. This name may not be the name of the program sending the SysLog message to the server. The value is obtained by parsing the <A HREF="007823.html#0005" CLASS="Element59">TIdSysLogMsgPart.Text</A> text property and setting this property will update the <A HREF="007823.html#0005" CLASS="Element59">TIdSysLogMsgPart.Text</A> property.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0005">TIdSysLogMsgPart.Text</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007823.html" CLASS="Element59">TIdSysLogMsgPart</A>, <A HREF="014032.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+This is the raw text form of the SysLog Msg.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> Text: <STRONG>String</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+This is the raw text form of the SysLog Msg. Setting this property will update the <A HREF="007823.html#0004" CLASS="Element59">TIdSysLogMsgPart.Process</A>, <A HREF="007823.html#0003" CLASS="Element59">TIdSysLogMsgPart.PIDAvailable</A>, <A HREF="007823.html#0002" CLASS="Element59">TIdSysLogMsgPart.PID</A>, and <A HREF="007823.html#0001" CLASS="Element59">TIdSysLogMsgPart.Content</A> properties to reflect the appropriate values and likewise, setting the properties mentioned will update this property.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0000">TIdSysLogMsgPart.Assign</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007823.html" CLASS="Element59">TIdSysLogMsgPart</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Copies property values from a persistent source.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>procedure</STRONG> Assign(Source: Tpersistent); <STRONG>override</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Assign is a procedure that allows property values for the current object instance to be copied from the persistent component specified in Source. When Source is an instance of <A HREF="007823.html" CLASS="Element59">TIdSysLogMsgPart</A>, the value for the <A HREF="007823.html#0005" CLASS="Element59">Text</A> property is updated from the value in Source. Otherwise, the inherited Assign method is called.</DIV>
+</DIV>
+<DIV CLASS="Element62">
+<HR>Created with Doc-O-Matic 2 donated to <STRONG><A HREF="http://www.delphi-jedi.org">Project JEDI</A></STRONG>. Commercial license available from the <STRONG><A HREF="http://www.doc-o-matic.com">Doc-O-Matic site</A></STRONG>.</DIV>
+</DIV></BODY></HTML>

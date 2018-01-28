@@ -1,0 +1,65 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+<TITLE>SplitLines</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <META name="GENERATOR" content="Doc-O-Matic">
+    <LINK rel="STYLESHEET" href="default.css" type="text/css">
+
+<SCRIPT LANGUAGE="JavaScript1.2" SRC="scripts.js"></SCRIPT>
+</HEAD>
+<BODY CLASS="Element57">
+<TABLE BORDER="0" BGCOLOR="#AACCFF" WIDTH="100%" CELLSPACING="0" CELLPADDING="0">
+<TR><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element1">
+Indy 9</DIV>
+</TD><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element2">
+<A HREF="content.html" CLASS="Element59">Content</A> | <A HREF="idx.html" CLASS="Element59">Index</A> | <A HREF="symref.html" CLASS="Element59">Reference</A></DIV>
+</TD></TR></TABLE><DIV CLASS="Element58">
+<DIV CLASS="Element5">
+SplitLines</DIV>
+<DIV CLASS="Element7">
+<A HREF="002912.html" CLASS="Element59">Unit: IdStrings</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Separates character values in into individual lines in a TStrings object instance.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>procedure</STRONG> SplitLines(AData: PChar; ADataSize: Integer; AStrings: TStrings);</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Unit</DIV>
+<DIV CLASS="Element69">
+<A HREF="002912.html" CLASS="Element59">IdStrings</A></DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+AData: PChar</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Buffer to be examine for lines of text.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+ADataSize: Integer</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Number of characters to be examined in the buffer.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+AStrings: TStrings</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+TSrings instance to be loaded with lines from AData.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+SplitLines is a procedure used to separate the character values in AData into individual lines in AStrings. AData is the buffer to be examined for <A HREF="000298.html" CLASS="Element59">CR</A> or <A HREF="003176.html" CLASS="Element59">LF</A> markers that indicate the end of a line. AData will examine up to and including ADataSize characters in the AData buffer. When a <A HREF="000298.html" CLASS="Element59">CR</A>, <A HREF="003176.html" CLASS="Element59">LF</A>, or CRLF sequence is encountered, the string and a Pointer to the beginning of the current line are stored in AStrings using the TStrings.AddObject method.<P CLASS="Element10">
+<STRONG>Note</STRONG>: AStrings calls the TStrings.BeginUpdate and TString.Clear methods propr to locating and adding lines to the TStrings object instance. AStrings calls the TStrings.EndUpdate method when ADataSize characters have been handled in the Data buffer.</DIV>
+</DIV>
+<DIV CLASS="Element62">
+<HR>Created with Doc-O-Matic 2 donated to <STRONG><A HREF="http://www.delphi-jedi.org">Project JEDI</A></STRONG>. Commercial license available from the <STRONG><A HREF="http://www.doc-o-matic.com">Doc-O-Matic site</A></STRONG>.</DIV>
+</DIV></BODY></HTML>

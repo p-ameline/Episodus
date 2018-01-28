@@ -1,0 +1,37 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+<TITLE>NNTPCommands</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <META name="GENERATOR" content="Doc-O-Matic">
+    <LINK rel="STYLESHEET" href="default.css" type="text/css">
+
+<SCRIPT LANGUAGE="JavaScript1.2" SRC="scripts.js"></SCRIPT>
+</HEAD>
+<BODY CLASS="Element57">
+<TABLE BORDER="0" BGCOLOR="#AACCFF" WIDTH="100%" CELLSPACING="0" CELLPADDING="0">
+<TR><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element1">
+Indy 9</DIV>
+</TD><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element2">
+<A HREF="content.html" CLASS="Element59">Content</A> | <A HREF="idx.html" CLASS="Element59">Index</A> | <A HREF="symref.html" CLASS="Element59">Reference</A></DIV>
+</TD></TR></TABLE><DIV CLASS="Element58">
+<DIV CLASS="Element5">
+NNTPCommands</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Specifies the NNTP commands and extensions recognized by the server implementation.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+NNTPCommands is a constant Array containing the String values recognized as valid commands or extensions in the NNTP protocol. NNTPCommands are used in <A HREF="007598.html#0000" CLASS="Element59">TIdNNTPServer.Create</A> to construct <A HREF="007244.html" CLASS="Element59">TIdCommandHandler</A> instances stored in the TIdNNTPServer.CommandHandlers collection.<P CLASS="Element10">
+NNTPCommands are related to their <A HREF="007244.html" CLASS="Element59">TIdCommandHandler</A> counterparts through the ordinal index position, stored in the <A HREF="007244.html#0011" CLASS="Element59">TIdCommandHandler.Tag</A> property, and the value stored in the <A HREF="007244.html#0002" CLASS="Element59">TIdCommandHandler.Command</A> property.<P CLASS="Element10">
+Refer to <A HREF="007831.html#0003" CLASS="Element59">TIdTCPServer.CommandHandlersEnabled</A> and <A HREF="007831.html#0002" CLASS="Element59">TIdTCPServer.CommandHandlers</A> for a more detailed description of the command event handler architecture.<P CLASS="Element10">
+Use the inherited <A HREF="007831.html#0015" CLASS="Element59">TIdTCPServer.OnExecute</A> to implement the NNTP servers capabilities using a single state and dispatching event handler.</DIV>
+</DIV>
+<DIV CLASS="Element62">
+<HR>Created with Doc-O-Matic 2 donated to <STRONG><A HREF="http://www.delphi-jedi.org">Project JEDI</A></STRONG>. Commercial license available from the <STRONG><A HREF="http://www.doc-o-matic.com">Doc-O-Matic site</A></STRONG>.</DIV>
+</DIV></BODY></HTML>

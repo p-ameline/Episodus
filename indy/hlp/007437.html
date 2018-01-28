@@ -1,0 +1,360 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+<TITLE>TIdIPWatch</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <META name="GENERATOR" content="Doc-O-Matic">
+    <LINK rel="STYLESHEET" href="default.css" type="text/css">
+
+<SCRIPT LANGUAGE="JavaScript1.2" SRC="scripts.js"></SCRIPT>
+</HEAD>
+<BODY CLASS="Element57">
+<TABLE BORDER="0" BGCOLOR="#AACCFF" WIDTH="100%" CELLSPACING="0" CELLPADDING="0">
+<TR><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element1">
+Indy 9</DIV>
+</TD><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element2">
+<A HREF="content.html" CLASS="Element59">Content</A> | <A HREF="idx.html" CLASS="Element59">Index</A> | <A HREF="symref.html" CLASS="Element59">Reference</A></DIV>
+</TD></TR></TABLE><DIV CLASS="Element58">
+<DIV CLASS="Element5">
+TIdIPWatch</DIV>
+<DIV CLASS="Element7">
+<A HREF="011954.html" CLASS="Element59">Hierarchy</A>, <A HREF="011955.html" CLASS="Element59">Properties</A>, <A HREF="011956.html" CLASS="Element59">Methods</A>, <A HREF="011957.html" CLASS="Element59">Events</A>, <A HREF="011958.html" CLASS="Element59">See Also</A>, <A HREF="002270.html" CLASS="Element59">Unit: IdIPWatch</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Determines the online status and IP addresses for a computer.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12">TIdIPWatch = <STRONG>class</STRONG>(<A HREF="007246.html" CLASS="Element59">TIdComponent</A>)</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Unit</DIV>
+<DIV CLASS="Element69">
+<A HREF="002270.html" CLASS="Element59">IdIPWatch</A></DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+TIdIPWatch determines Online status, returns current IP address, and (optionally) keeps history of IP addresses issued to the computer using the class instance.<P CLASS="Element10">
+TIdIPWatch uses <A HREF="007437.html#0002" CLASS="Element59">CurrentIP</A> to determine online status, and will not establish a new connection using RAS or DUN.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0000">TIdIPWatch.Active</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007437.html" CLASS="Element59">TIdIPWatch</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Indicates that IP history collection is active.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> Active: Boolean;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Active is a <STRONG>Boolean</STRONG> property used to indicate that the class instance is ready to detect new IP addresses. For <A HREF="007437.html" CLASS="Element59">TIdIPWatch</A>, changing the value of Active also updates the state of the internal <A HREF="007438.html" CLASS="Element59">TIdIPWatchThread</A> used by the object instance. The default value for Active is <A HREF="003053.html" CLASS="Element59">IP_WATCH_ACTIVE</A>.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0002">TIdIPWatch.CurrentIP</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007437.html" CLASS="Element59">TIdIPWatch</A>, <A HREF="011959.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Specifies the most recent IP used by the host.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> CurrentIP: <STRONG>string</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+CurrentIP is a read-only <STRONG>String</STRONG> property used to identify the most recent IP address returned by the <A HREF="007437.html#000A" CLASS="Element59">LocalIP</A> function. CurrentIP is updated as a result of <A HREF="007438.html" CLASS="Element59">TIdIPWatchThread</A> event notifications when <A HREF="007437.html#000F" CLASS="Element59">WatchInterval</A> milliseconds has elapsed, or by a call to <A HREF="007437.html#0004" CLASS="Element59">ForceCheck</A>.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0005">TIdIPWatch.HistoryEnabled</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007437.html" CLASS="Element59">TIdIPWatch</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Indicates that the IP history is stored to the history file.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> HistoryEnabled: Boolean;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+HistoryEnabled is a <STRONG>Boolean</STRONG> property used to indicate if the <A HREF="007437.html#0007" CLASS="Element59">IPHistoryList</A> should be saved in <A HREF="007437.html#000E" CLASS="Element59">SaveHistory</A> or restored in <A HREF="007437.html#0009" CLASS="Element59">LoadHistory</A>. The default value for HistoryEnabled is <A HREF="003054.html" CLASS="Element59">IP_WATCH_HIST_ENABLED</A>, as assigned in the <A HREF="007437.html#0001" CLASS="Element59">Create</A> constructor.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0006">TIdIPWatch.HistoryFilename</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007437.html" CLASS="Element59">TIdIPWatch</A>, <A HREF="011960.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Identifies the IP history storage file.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> HistoryFilename: <STRONG>string</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+HistoryFilename is a <STRONG>String</STRONG> property used to identify the file name for saving and restoring IP addresses in <A HREF="007437.html#0007" CLASS="Element59">IPHistoryList</A>. The default value for HistoryFilename is defined in the constant <A HREF="003055.html" CLASS="Element59">IP_WATCH_HIST_FILENAME</A>.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0007">TIdIPWatch.IPHistoryList</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007437.html" CLASS="Element59">TIdIPWatch</A>, <A HREF="011961.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+IPHistoryList is a list of IP addresses detected on the local computer.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> IPHistoryList: TStringList;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+IPHistoryList is a read-only <STRONG>TStringList</STRONG> property used as a container for IP addresses detected by the <A HREF="007437.html" CLASS="Element59">TIdIPWatch</A> class instance. IPHistoryList does not record an empty IP address (<STRONG>''</STRONG>) or the local IP address <STRONG>127.0.0.1</STRONG>. IPHistoryList does not record an IP address when the most recent IP address in the history list matches the current IP address.<P CLASS="Element10">
+IPHistoryList is updated in the methods CheckStatus and <A HREF="007437.html#0003" CLASS="Element59">Destroy</A>.<P CLASS="Element10">
+The IPHistoryList can contain a maximum number of entries identified in the <A HREF="007437.html#000B" CLASS="Element59">MaxHistoryEntries</A> property. When the the number of entries exceeds <A HREF="007437.html#000B" CLASS="Element59">MaxHistoryEntries</A>, the oldest IP address in the history list will be deleted.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0008">TIdIPWatch.IsOnline</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007437.html" CLASS="Element59">TIdIPWatch</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Identifies if the local host is online.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> IsOnline: Boolean;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+IsOnline is a read-only <STRONG>Boolean</STRONG> property used to identify the current online status. IsOnline is updated in the CheckStatus method, and is set to True when the current IP address is not empty (<STRONG>''</STRONG>) or the default local host value <STRONG>127.0.0.1</STRONG>.<P CLASS="Element10">
+The default value for IsOnline is <STRONG>False</STRONG>.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="000B">TIdIPWatch.MaxHistoryEntries</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007437.html" CLASS="Element59">TIdIPWatch</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+The maximum number of IP addesses allowed in <A HREF="007437.html#0007" CLASS="Element59">IPHistoryList</A>.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> MaxHistoryEntries: Integer;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+MaxHistoryEntries is an <STRONG>Integer</STRONG> property used to determine the maximum number of IP address to be maintain in <A HREF="007437.html#0007" CLASS="Element59">IPHistoryList</A>. When the number of entries in <A HREF="007437.html#0007" CLASS="Element59">IPHistoryList</A> exceeds MaxHistoryEntries, the oldest IP address will be deleted from <A HREF="007437.html#0007" CLASS="Element59">IPHistoryList</A>.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="000C">TIdIPWatch.OnStatusChanged</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007437.html" CLASS="Element59">TIdIPWatch</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+OnStatusChanged event handler.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> OnStatusChanged: TNotifyEvent;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+OnStatusChanged is a TNotifyEvent event handler triggered when the value of <A HREF="007437.html#0008" CLASS="Element59">IsOnline</A> is changed. The OnStatusChanged event handler is not called when the value of ComponentState is <I>csDesigning</I>. The OnStatusChanged event handler is generally used to update progress indicators or GUI components.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="000D">TIdIPWatch.PreviousIP</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007437.html" CLASS="Element59">TIdIPWatch</A>, <A HREF="011962.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Previous IP address detected on the local computer.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> PreviousIP: <STRONG>string</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+PreviousIP is a String property, used internally by <A HREF="007437.html" CLASS="Element59">TIdIPWatch</A>, to track the most recently detected IP address. PreviousIP is used in conjunction with <A HREF="007437.html#0002" CLASS="Element59">CurrentIP</A> to determine when a new IP address needs to be added to the <A HREF="007437.html#0007" CLASS="Element59">IPHistoryList</A>.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="000F">TIdIPWatch.WatchInterval</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007437.html" CLASS="Element59">TIdIPWatch</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Specifies the interval between checks for an IP address change.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> WatchInterval: Cardinal;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+WatchInterval is a <STRONG>Cardinal</STRONG> property used to determine the time, in milliseconds, between firing of the timer used by <A HREF="007437.html" CLASS="Element59">TIdIPWatch</A>. The default value for WatchInterval is <A HREF="003057.html" CLASS="Element59">IP_WATCH_INTERVAL</A>.<P CLASS="Element10">
+When WatchInterval is changed, the Interval property for the internal <A HREF="007438.html" CLASS="Element59">TIdIPWatchThread</A> instance is updated to contain the same value.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0001">TIdIPWatch.Create</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007437.html" CLASS="Element59">TIdIPWatch</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Constructor for the object instance.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>constructor</STRONG> Create(AOwner: TComponent); <STRONG>override</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Create is the constructor for the object instance, and performs the following operations:<P CLASS="Element10">
+<UL>
+<LI>Initializes the <A HREF="007437.html#0007" CLASS="Element59">IPHistoryList</A>.<P CLASS="Element10">
+<LI>Sets the <A HREF="007437.html#0008" CLASS="Element59">IsOnline</A> property to <STRONG>False</STRONG>.<P CLASS="Element10">
+<LI>Sets the Enabled property to <A HREF="003053.html" CLASS="Element59">IP_WATCH_ACTIVE</A>.<P CLASS="Element10">
+<LI>Sets the <A HREF="007437.html#000F" CLASS="Element59">WatchInterval</A> to <A HREF="003057.html" CLASS="Element59">IP_WATCH_INTERVAL</A>.<P CLASS="Element10">
+<LI>Clears the previous IP address.<P CLASS="Element10">
+<LI>Creates the <A HREF="007438.html" CLASS="Element59">TIdIPWatchThread</A> used by the instance.<P CLASS="Element10">
+<LI>Sets the <A HREF="007437.html#0005" CLASS="Element59">HistoryEnabled</A> property to <A HREF="003054.html" CLASS="Element59">IP_WATCH_HIST_ENABLED</A>.<P CLASS="Element10">
+<LI>Sets <A HREF="003055.html" CLASS="Element59">IP_WATCH_HIST_FILENAME</A> as the default value for <A HREF="007437.html#0006" CLASS="Element59">HistoryFilename</A>.<P CLASS="Element10">
+<LI>Sets <A HREF="003056.html" CLASS="Element59">IP_WATCH_HIST_MAX</A> as the default value for <A HREF="007437.html#000B" CLASS="Element59">MaxHistoryEntries</A>.</UL>
+</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0003">TIdIPWatch.Destroy</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007437.html" CLASS="Element59">TIdIPWatch</A>, <A HREF="011963.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Frees the class instance.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>destructor</STRONG> Destroy; <STRONG>override</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Destroy is the destructor for the class instance. Prior to calling the <A HREF="007437.html#000E" CLASS="Element59">SaveHistory</A> inherited Destroy method, <A HREF="007437.html" CLASS="Element59">TIdIPWatch</A> performs the following operations:<P CLASS="Element10">
+<UL>
+<LI>Ensures that <A HREF="007437.html#0002" CLASS="Element59">CurrentIP</A> is in the <A HREF="007437.html#0007" CLASS="Element59">IPHistoryList</A>.<P CLASS="Element10">
+<LI>Disables the <A HREF="007437.html" CLASS="Element59">TIdIPWatch</A> instance.<P CLASS="Element10">
+<LI>Saves the history list in <A HREF="007437.html#0007" CLASS="Element59">IPHistoryList</A> to the file identified by <A HREF="007437.html#0006" CLASS="Element59">HistoryFilename</A>.<P CLASS="Element10">
+<LI>Frees the <A HREF="007437.html#0007" CLASS="Element59">IPHistoryList</A>.</UL>
+</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0004">TIdIPWatch.ForceCheck</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007437.html" CLASS="Element59">TIdIPWatch</A>, <A HREF="011964.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Forces collection of the current IP address.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>function</STRONG> ForceCheck: Boolean;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+ForceCheck is a Boolean function that returns a value indicating if the local system is online. ForceCheck does not wait for the internal <A HREF="007438.html" CLASS="Element59">TIdIPWatchThread</A> to generate an event notification by calling CheckStatus.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0009">TIdIPWatch.LoadHistory</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007437.html" CLASS="Element59">TIdIPWatch</A>, <A HREF="011965.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Loads the history of local IP addresses from a file.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>procedure</STRONG> LoadHistory;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+LoadHistory is a procedure used to restore the <A HREF="007437.html#0007" CLASS="Element59">IPHistoryList</A> from the file identified in <A HREF="007437.html#0006" CLASS="Element59">HistoryFilename</A>. LoadHistory assigns the most recent IP address from <A HREF="007437.html#0007" CLASS="Element59">IPHistoryList</A> to the private variable used to maintain the <A HREF="007437.html#000D" CLASS="Element59">PreviousIP</A> address.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Notes</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+LoadHistory does not restore the history list in the IDE, or any time the component state is <I>csDesigning</I>.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="000A">TIdIPWatch.LocalIP</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007437.html" CLASS="Element59">TIdIPWatch</A>, <A HREF="011966.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Current IP address assigned to the local host.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>function</STRONG> LocalIP: <STRONG>string</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+LocalIP is a String function that returns the currently assigned IP address for the local system from the TCP/IP stack. LocalIP is used to determine the value of <A HREF="007437.html#0002" CLASS="Element59">CurrentIP</A>.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="000E">TIdIPWatch.SaveHistory</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007437.html" CLASS="Element59">TIdIPWatch</A>, <A HREF="011967.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Save IP addresses in <A HREF="007437.html#0007" CLASS="Element59">IPHistoryList</A> to a file.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>procedure</STRONG> SaveHistory;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+SaveHistory is a procedure used to write the contents of the <A HREF="007437.html#0007" CLASS="Element59">IPHistoryList</A> to the file identified by <A HREF="007437.html#0006" CLASS="Element59">HistoryFilename</A> when the <A HREF="007437.html#0005" CLASS="Element59">HistoryEnabled</A> property is True. SaveHistory has no effect when the ComponentState is csDesigning.</DIV>
+</DIV>
+<DIV CLASS="Element62">
+<HR>Created with Doc-O-Matic 2 donated to <STRONG><A HREF="http://www.delphi-jedi.org">Project JEDI</A></STRONG>. Commercial license available from the <STRONG><A HREF="http://www.doc-o-matic.com">Doc-O-Matic site</A></STRONG>.</DIV>
+</DIV></BODY></HTML>

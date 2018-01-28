@@ -1,0 +1,281 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+<TITLE>TIdAntiFreezeBase</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <META name="GENERATOR" content="Doc-O-Matic">
+    <LINK rel="STYLESHEET" href="default.css" type="text/css">
+
+<SCRIPT LANGUAGE="JavaScript1.2" SRC="scripts.js"></SCRIPT>
+</HEAD>
+<BODY CLASS="Element57">
+<TABLE BORDER="0" BGCOLOR="#AACCFF" WIDTH="100%" CELLSPACING="0" CELLPADDING="0">
+<TR><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element1">
+Indy 9</DIV>
+</TD><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element2">
+<A HREF="content.html" CLASS="Element59">Content</A> | <A HREF="idx.html" CLASS="Element59">Index</A> | <A HREF="symref.html" CLASS="Element59">Reference</A></DIV>
+</TD></TR></TABLE><DIV CLASS="Element58">
+<DIV CLASS="Element5">
+TIdAntiFreezeBase</DIV>
+<DIV CLASS="Element7">
+<A HREF="009904.html" CLASS="Element59">Hierarchy</A>, <A HREF="009905.html" CLASS="Element59">Properties</A>, <A HREF="009906.html" CLASS="Element59">Methods</A>, <A HREF="009907.html" CLASS="Element59">See Also</A>, <A HREF="002118.html" CLASS="Element59">Unit: IdAntiFreezeBase</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Ancestor for the Indy GUI-integration class.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12">TIdAntiFreezeBase = <STRONG>class</STRONG>(<A HREF="007213.html" CLASS="Element59">TIdBaseComponent</A>)</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Unit</DIV>
+<DIV CLASS="Element69">
+<A HREF="002118.html" CLASS="Element59">IdAntiFreezeBase</A></DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Do not create instances of TIdAntiFreezeBase. Applications should create and use instances of the <A HREF="007201.html" CLASS="Element59">TIdAntiFreeze</A> component.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0000">TIdAntiFreezeBase.Active</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007202.html" CLASS="Element59">TIdAntiFreezeBase</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Indicates that the component is active.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> Active: boolean;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Active is a Boolean property that can be used to enable or disable a <A HREF="007202.html" CLASS="Element59">TIdAntiFreezeBase</A> component. The default value for Active is <A HREF="000871.html" CLASS="Element59">ID_Default_TIdAntiFreezeBase_Active</A> as assigned in the <A HREF="007202.html#0002" CLASS="Element59">Create</A> constructor.<P CLASS="Element10">
+<STRONG>Note:</STRONG> <A HREF="007202.html" CLASS="Element59">TIdAntiFreezeBase</A> can only perform it's processing when the calling client is the main thread in the application and the component is Active, as indicated in <A HREF="007202.html#0008" CLASS="Element59">ShouldUse</A>.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0001">TIdAntiFreezeBase.ApplicationHasPriority</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007202.html" CLASS="Element59">TIdAntiFreezeBase</A>, <A HREF="009908.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Specifies that messages from the application main thread have priority.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> ApplicationHasPriority: Boolean;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+ApplicationHasPriority is a <STRONG>Boolean</STRONG> property indicating that an Application should process any Application messages prior to messages from other threads of execution in the <A HREF="007201.html#0000" CLASS="Element59">TIdAntiFreeze.Process</A> method.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0005">TIdAntiFreezeBase.IdleTimeOut</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007202.html" CLASS="Element59">TIdAntiFreezeBase</A>, <A HREF="009909.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Identifies the idle timeout value in milliseconds.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> IdleTimeOut: integer;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+IdleTimeOut is an <STRONG>Integer</STRONG> property specifies the number of milliseconds that should elapse in calls to <A HREF="007202.html#0009" CLASS="Element59">Sleep</A>. IdleTimeout is also the timeout value used in <A HREF="007713.html#0012" CLASS="Element59">TIdSocketHandle.Readable</A>. The default value for IdleTimeout is <A HREF="000873.html" CLASS="Element59">ID_Default_TIdAntiFreezeBase_IdleTimeOut</A>, as used by both VCL Component streaming and the <A HREF="007202.html#0002" CLASS="Element59">Create</A> constructor.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0006">TIdAntiFreezeBase.OnlyWhenIdle</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007202.html" CLASS="Element59">TIdAntiFreezeBase</A>, <A HREF="009910.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Specifies the component should yield when the main thread is idle.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> OnlyWhenIdle: Boolean;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+OnlyWhenIdle is a Boolean property that indicates when <A HREF="007202.html" CLASS="Element59">TIdAntiFreezeBase</A> should yield when the Application main thread is idle. Set OnlyWhenIdle to True to prevent the component from yielding when the application main thread is not idle in <A HREF="007202.html#0004" CLASS="Element59">DoProcess</A>. Set OnlyWhenIdle to False to allow the component to yield when <A HREF="007202.html#0008" CLASS="Element59">ShouldUse</A> is True.<P CLASS="Element10">
+The default value for OnlyWhenIdle is <A HREF="000874.html" CLASS="Element59">ID_Default_TIdAntiFreezeBase_OnlyWhenIdle</A> as assigned using VCL Component streaming and the <A HREF="007202.html#0002" CLASS="Element59">Create</A> constructor.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0002">TIdAntiFreezeBase.Create</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007202.html" CLASS="Element59">TIdAntiFreezeBase</A>, <A HREF="009911.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Constructs and initializes an instance of <A HREF="007202.html" CLASS="Element59">TIdAntiFreezeBase</A>.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>constructor</STRONG> Create(AOwner: TComponent); <STRONG>override</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+AOwner: TComponent</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Owner of the object instance.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+It is not necessary to explicitly create an instance of the component added in the form designer. These components are created automatically when the application is run, and they are destroyed when the application is closed.<P CLASS="Element10">
+Only one instance of <A HREF="007202.html" CLASS="Element59">TIdAntiFreezeBase</A> is allowed per application. If another instance already exists, an exception is raised with the <A HREF="006583.html" CLASS="Element59">RSOnlyOneAntiFreeze</A> message. <A HREF="007202.html" CLASS="Element59">TIdAntiFreezeBase</A> uses the global variable <A HREF="000648.html" CLASS="Element59">GAntiFreeze</A> to determine if another instance has already been created.<P CLASS="Element10">
+Create initializes the following properties to their default values:<P CLASS="Element10">
+<UL>
+<LI><A HREF="007202.html#0000" CLASS="Element59">Active</A> - <A HREF="000871.html" CLASS="Element59">ID_Default_TIdAntiFreezeBase_Active</A><P CLASS="Element10">
+<LI><A HREF="007202.html#0001" CLASS="Element59">ApplicationHasPriority</A> - <A HREF="000872.html" CLASS="Element59">ID_Default_TIdAntiFreezeBase_ApplicationHasPriority</A><P CLASS="Element10">
+<LI><A HREF="007202.html#0005" CLASS="Element59">IdleTimeOut</A> - <A HREF="000874.html" CLASS="Element59">ID_Default_TIdAntiFreezeBase_OnlyWhenIdle</A></UL>
+<P CLASS="Element10">
+<STRONG>Note:</STRONG> Do not create instances of <A HREF="007202.html" CLASS="Element59">TIdAntiFreezeBase</A>. Applications should use the <A HREF="007201.html" CLASS="Element59">TIdAntiFreeze</A> component.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0003">TIdAntiFreezeBase.Destroy</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007202.html" CLASS="Element59">TIdAntiFreezeBase</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Disposes of a <A HREF="007202.html" CLASS="Element59">TIdAntiFreezeBase</A> object instance.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>destructor</STRONG> Destroy; <STRONG>override</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Destroy sets the unit global variable <A HREF="000648.html" CLASS="Element59">GAntiFreeze</A> to the value <STRONG>nil</STRONG>, and calls the inherited Destroy method.<P CLASS="Element10">
+It is not recommended to call Destroy directly. Call Free instead. Free checks to ensure that the object reference is not nil before calling Destroy.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0004">TIdAntiFreezeBase.DoProcess</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007202.html" CLASS="Element59">TIdAntiFreezeBase</A>, <A HREF="009912.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Implements basic <A HREF="007202.html#0007" CLASS="Element59">Process</A> functionality for descendant classes.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>class</STRONG> <STRONG>procedure</STRONG> DoProcess(<STRONG>const</STRONG> AIdle: boolean = true; <STRONG>const</STRONG> AOverride: boolean = false);</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+const AIdle: boolean = true</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+True forces an Idle state. Default is <STRONG>True</STRONG>.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+const AOverride: boolean = false</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+True overrides the current <A HREF="007202.html#0006" CLASS="Element59">OnlyWhenIdle</A> property. Default is <STRONG>False</STRONG>.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+DoProcess is a class procedure that implements the default behavior for the abstract <A HREF="007202.html#0007" CLASS="Element59">Process</A> method in <A HREF="007202.html" CLASS="Element59">TIdAntiFreezeBase</A> descendants. DoProcess allows the component to force an idle state in the main thread of execution, and to allow message processing for other threads of execution.<P CLASS="Element10">
+Set AIdle to True to force an idle state in the main thread regardless of the <A HREF="007202.html#0006" CLASS="Element59">OnlyWhenIdle</A> value. Set AIdle to False to use the current <A HREF="007202.html#0006" CLASS="Element59">OnlyWhenIdle</A> value.<P CLASS="Element10">
+Set AOverride to True to force an idle state in the main thread regardless of either AIdle or <A HREF="007202.html#0006" CLASS="Element59">OnlyWhenIdle</A> values. Set AOverride to False to allow use of the current values in AIdle or <A HREF="007202.html#0006" CLASS="Element59">OnlyWhenIdle</A>.<P CLASS="Element10">
+DoProcess calls the <A HREF="007202.html#0007" CLASS="Element59">Process</A> method of the global <A HREF="000648.html" CLASS="Element59">GAntiFreeze</A> application variable. <STRONG>Note:</STRONG> <A HREF="007202.html" CLASS="Element59">TIdAntiFreezeBase</A> can only perform DoProcess when the calling client is the main application thread and the component is <A HREF="007202.html#0000" CLASS="Element59">Active</A>.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0007">TIdAntiFreezeBase.Process</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007202.html" CLASS="Element59">TIdAntiFreezeBase</A>, <A HREF="009913.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Specifies the method that implements the component functionality.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>procedure</STRONG> Process; <STRONG>virtual</STRONG>; <STRONG>abstract</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Process is an abstract virtual procedure in <A HREF="007202.html" CLASS="Element59">TIdAntiFreezeBase</A>. Descendant classes must implement Process to define the specific functionality performed by the component.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0008">TIdAntiFreezeBase.ShouldUse</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007202.html" CLASS="Element59">TIdAntiFreezeBase</A>, <A HREF="009914.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Indicates that a <A HREF="007202.html" CLASS="Element59">TIdAntiFreezeBase</A> descendant is in use, and processor cycles should be yielded to the main thread.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>class</STRONG> <STRONG>function</STRONG> ShouldUse: boolean;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Return Value</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Boolean - True when the calling client is in the main thread and an active <A HREF="007202.html" CLASS="Element59">TIdAntiFreezeBase</A> descendant is in use.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+ShouldUse is a Boolean class function that indicates when a <A HREF="007202.html" CLASS="Element59">TIdAntiFreezeBase</A> descendant is in use in an application, and that the component should yield to the main thread of execution. ShouldUse will return True when all of the following conditions are also True:<P CLASS="Element10">
+<UL>
+<LI><A HREF="000648.html" CLASS="Element59">GAntiFreeze</A> is not nil.<P CLASS="Element10">
+<LI><A HREF="003010.html" CLASS="Element59">InMainThread</A> is True.<P CLASS="Element10">
+<LI><A HREF="000648.html" CLASS="Element59">GAntiFreeze</A> is <A HREF="007202.html#0000" CLASS="Element59">Active</A>.</UL>
+<P CLASS="Element10">
+ShouldUse is called from <A HREF="007202.html#0009" CLASS="Element59">TIdAntiFreezeBase.Sleep</A>, as well as <A HREF="007828.html" CLASS="Element59">TIdTCPConnection</A> descendants that implement connection timeout features like <A HREF="007827.html" CLASS="Element59">TIdTCPClient</A> and <A HREF="007831.html" CLASS="Element59">TIdTCPServer</A>.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0009">TIdAntiFreezeBase.Sleep</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007202.html" CLASS="Element59">TIdAntiFreezeBase</A>, <A HREF="009915.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Yields processor cycles and optionally processes application messages.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>class</STRONG> <STRONG>procedure</STRONG> Sleep(ATimeout: Integer);</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+ATimeout: Integer</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Total milliseconds to yiled to the application.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Sleep is a public class procedure that forces a <A HREF="007202.html" CLASS="Element59">TIdAntiFreezeBase</A> descendant to yield processor cycles for as many as ATimeout milliseconds. Sleep calls <A HREF="007202.html#0008" CLASS="Element59">ShouldUse</A> to determine if a <A HREF="007202.html" CLASS="Element59">TIdAntiFreezeBase</A> descendant is in use in the application. When <A HREF="007202.html#0008" CLASS="Element59">ShouldUse</A> is True, Sleep calls IdGlobal.Sleep and <A HREF="007202.html#0004" CLASS="Element59">DoProcess</A> repeatedly until ATimeout milliseconds has elapsed. Each iteration allows IdGlobal.Sleep to pause the application for TIdAntiFreeze.<A HREF="007202.html#0005" CLASS="Element59">IdleTimeOut</A> milliseconds, and calls <A HREF="007202.html#0004" CLASS="Element59">DoProcess</A> to allow the main thread of excution to handle application messages.<P CLASS="Element10">
+When <A HREF="007202.html#0008" CLASS="Element59">ShouldUse</A> is False, Sleep calls IdGlobal.Sleep for ATimeout milliseconds with no additional processing.</DIV>
+</DIV>
+<DIV CLASS="Element62">
+<HR>Created with Doc-O-Matic 2 donated to <STRONG><A HREF="http://www.delphi-jedi.org">Project JEDI</A></STRONG>. Commercial license available from the <STRONG><A HREF="http://www.doc-o-matic.com">Doc-O-Matic site</A></STRONG>.</DIV>
+</DIV></BODY></HTML>

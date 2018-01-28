@@ -1,0 +1,77 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+<TITLE>TIdPOP3ServerAPOPCommandEvent</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <META name="GENERATOR" content="Doc-O-Matic">
+    <LINK rel="STYLESHEET" href="default.css" type="text/css">
+
+<SCRIPT LANGUAGE="JavaScript1.2" SRC="scripts.js"></SCRIPT>
+</HEAD>
+<BODY CLASS="Element57">
+<TABLE BORDER="0" BGCOLOR="#AACCFF" WIDTH="100%" CELLSPACING="0" CELLPADDING="0">
+<TR><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element1">
+Indy 9</DIV>
+</TD><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element2">
+<A HREF="content.html" CLASS="Element59">Content</A> | <A HREF="idx.html" CLASS="Element59">Index</A> | <A HREF="symref.html" CLASS="Element59">Reference</A></DIV>
+</TD></TR></TABLE><DIV CLASS="Element58">
+<DIV CLASS="Element5">
+TIdPOP3ServerAPOPCommandEvent</DIV>
+<DIV CLASS="Element7">
+<A HREF="015488.html" CLASS="Element59">See Also</A>, <A HREF="002310.html" CLASS="Element59">Unit: IdPOP3Server</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Event type triggered for the POP3 APOP command.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12">TIdPOP3ServerAPOPCommandEvent = <STRONG>procedure</STRONG> (ASender: <A HREF="007242.html" CLASS="Element59">TIdCommand</A>; AMailboxID :<STRONG>String</STRONG>; ADigest :<STRONG>String</STRONG>) <STRONG>of</STRONG> <STRONG>object</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Unit</DIV>
+<DIV CLASS="Element69">
+<A HREF="002310.html" CLASS="Element59">IdPOP3Server</A></DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+ADigest</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+MD5 Message Digest for authentication.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+AMailboxID</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+POP3 account name.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+ASender</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Client connection triggering the event.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+TIdPOP3ServerAPOPCommandEvent is an event type triggered during execution of the command handler for the POP3 APOP command. TIdPOP3ServerAPOPCommandEvent the type used to represent the <A HREF="007618.html#0004" CLASS="Element59">TIdPOP3Server.OnAPOP</A> event handler. TIdPOP3ServerAPOPCommandEvent is used to implement the alternate method of authentication which provides for both origin authentication and replay protection (APOP) for the client connection in ASender. APOP does not involve sending a password in the clear over the network.<P CLASS="Element10">
+<STRONG>Note</STRONG>: The server implementation must assign a procedure to the event handler to allow responding to the POP3 APOP command.<P CLASS="Element10">
+ASender is the <A HREF="007624.html" CLASS="Element59">TIdPOP3ServerThread</A> generating the event notification as a result of the POP3 APOP command.<P CLASS="Element10">
+AMailboxID is the POP3 account name (or mailbox) to be accessed by the client connection.<P CLASS="Element10">
+ADigest is the 16-octet hexadecimal MD5 Message Digest calculated by applying the MD5 algorithm specified in RFC 1321 to a string consisting of the timestamp (including angle-brackets) followed by the shared APOP secret for the client connection.<P CLASS="Element10">
+The procedure assigned to the event handler is responsible for verifying that the account identified by ADigest is allowed access to the mailbox specified in AMailboxID. Use ASender to write the positive POP3 response, and set the <A HREF="007623.html" CLASS="Element59">TIdPOP3ServerState</A> for the <A HREF="007624.html" CLASS="Element59">TIdPOP3ServerThread</A> to Trans.<P CLASS="Element10">
+<STRONG>Note</STRONG>: The event handler will not be triggered from the APOP command handler if the <A HREF="007623.html" CLASS="Element59">TIdPOP3ServerState</A> in ASender does not contain Auth.<P CLASS="Element10">
+A POP3 server which implements the APOP command will include a timestamp in its banner greeting. The syntax of the timestamp corresponds to the `msg-id' in RFC 822, and must be different each POP3 server banner greeting issued. For example, on a UNIX implementation in which a separate UNIX process is used for each instance of a POP3 server, the syntax of the timestamp might be:<P CLASS="Element10">
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12">      &lt;process-ID.clock@hostname&gt;</PRE></DIV>
+</DIV>
+<P CLASS="Element10">
+where `process-ID' is the decimal value of the process's PID, clock is the decimal value of the system clock, and hostname is the fully-qualified domain-name corresponding to the host where the POP3 server is running.</DIV>
+</DIV>
+<DIV CLASS="Element62">
+<HR>Created with Doc-O-Matic 2 donated to <STRONG><A HREF="http://www.delphi-jedi.org">Project JEDI</A></STRONG>. Commercial license available from the <STRONG><A HREF="http://www.doc-o-matic.com">Doc-O-Matic site</A></STRONG>.</DIV>
+</DIV></BODY></HTML>

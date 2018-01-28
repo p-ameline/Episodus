@@ -1,0 +1,331 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+<TITLE>TIpProperty</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <META name="GENERATOR" content="Doc-O-Matic">
+    <LINK rel="STYLESHEET" href="default.css" type="text/css">
+
+<SCRIPT LANGUAGE="JavaScript1.2" SRC="scripts.js"></SCRIPT>
+</HEAD>
+<BODY CLASS="Element57">
+<TABLE BORDER="0" BGCOLOR="#AACCFF" WIDTH="100%" CELLSPACING="0" CELLPADDING="0">
+<TR><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element1">
+Indy 9</DIV>
+</TD><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element2">
+<A HREF="content.html" CLASS="Element59">Content</A> | <A HREF="idx.html" CLASS="Element59">Index</A> | <A HREF="symref.html" CLASS="Element59">Reference</A></DIV>
+</TD></TR></TABLE><DIV CLASS="Element58">
+<DIV CLASS="Element5">
+TIpProperty</DIV>
+<DIV CLASS="Element7">
+<A HREF="014974.html" CLASS="Element59">Hierarchy</A>, <A HREF="014975.html" CLASS="Element59">Properties</A>, <A HREF="014976.html" CLASS="Element59">Methods</A>, <A HREF="014977.html" CLASS="Element59">See Also</A>, <A HREF="002304.html" CLASS="Element59">Unit: IdNetworkCalculator</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Provides persistent storage and manipulation for network address and mask values.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12">TIpProperty = <STRONG>class</STRONG>(TPersistent)</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Unit</DIV>
+<DIV CLASS="Element69">
+<A HREF="002304.html" CLASS="Element59">IdNetworkCalculator</A></DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+TIpProperty is a <STRONG>TPersistent</STRONG> descendant that provides storage variables and manipulation methods for the components of a network address or network mask. TIpProperty is used by <A HREF="007582.html" CLASS="Element59">TIdNetworkCalculator</A> to represent the NetworkAddress and NetworkMask properties.<P CLASS="Element10">
+Use <A HREF="007917.html#0005" CLASS="Element59">Byte1</A>, <A HREF="007917.html#0006" CLASS="Element59">Byte2</A>, <A HREF="007917.html#0007" CLASS="Element59">Byte3</A>, and <A HREF="007917.html#0008" CLASS="Element59">Byte4</A> to access the individual <STRONG>Byte</STRONG> values of the 32-bit IP address.<P CLASS="Element10">
+Use <A HREF="007917.html#0002" CLASS="Element59">AsDoubleWord</A> to access the <STRONG>LongWord</STRONG> value of the IP address.<P CLASS="Element10">
+Use <A HREF="007917.html#0001" CLASS="Element59">AsBinaryString</A> to access the <STRONG>String</STRONG> representation of individual bits of the IP address. For example: &quot;<STRONG>11111111111111111111111100000000</STRONG>&quot; is the binary string representation of the network mask <STRONG>255.255.255.0</STRONG>.<P CLASS="Element10">
+Use <A HREF="007917.html#0004" CLASS="Element59">AsString</A> to access the <STRONG>String</STRONG> representation of the IP address. For example: &quot;<STRONG>255.255.255.0</STRONG>&quot; is the string representation of a network mask with the &quot;dotted-decimal&quot; value <STRONG>255.255.255.0</STRONG>.<P CLASS="Element10">
+Use <A HREF="007917.html#000B" CLASS="Element59">SetAll</A> to simultaneously update the 4 <STRONG>Byte</STRONG> values in the IP address.<P CLASS="Element10">
+Use <A HREF="007917.html#0009" CLASS="Element59">ByteArray</A> to access the <STRONG>Byte</STRONG> values of the IP address and indicate if the byte has a zero or non-zero value.<P CLASS="Element10">
+Use the <A HREF="007917.html#000A" CLASS="Element59">OnChange</A> event handler to perform application-specific processing when the value of the TIpProperty has been modified.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0000">TIpProperty.AddressType</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007917.html" CLASS="Element59">TIpProperty</A>, <A HREF="014978.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Represents the address class type for an IP address.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> AddressType: <A HREF="007430.html" CLASS="Element59">TIdIPAddressType</A>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+AddressType is a read-only <A HREF="007430.html" CLASS="Element59">TIdIPAddressType</A> property that represents the class type for an IP address. AddressType can be used to determine if an IP address is a routable non-private address, or a loopback address.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0001">TIpProperty.AsBinaryString</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007917.html" CLASS="Element59">TIpProperty</A>, <A HREF="014979.html" CLASS="Element59">See Also</A>, <A HREF="014980.html" CLASS="Element59">Example</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Represents a string containing the individual bits in the 32-bit IP address.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> AsBinaryString: <STRONG>String</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+AsBinaryString is a <STRONG>String</STRONG> property that represents the individual bits in the 32-bit IP address or network mask. &quot;<STRONG>1</STRONG>&quot; indicates that the bit set. &quot;<STRONG>0</STRONG>&quot; indicates that the bit is not set. AsBinaryString should always contain a string with a length of <STRONG>32</STRONG> characters. For example, the network mask <STRONG>255.255.255.0</STRONG> would be represent by AsBinaryString in the form &quot;<STRONG>11111111111111111111111100000000</STRONG>&quot;.<P CLASS="Element10">
+AsBinaryString calls <A HREF="007917.html#000B" CLASS="Element59">SetAll</A> to update the value of the individual bytes in the IP address.<P CLASS="Element10">
+Use <A HREF="007917.html#0005" CLASS="Element59">Byte1</A>, <A HREF="007917.html#0006" CLASS="Element59">Byte2</A>, <A HREF="007917.html#0007" CLASS="Element59">Byte3</A>, <A HREF="007917.html#0008" CLASS="Element59">Byte4</A>, <A HREF="007917.html#0002" CLASS="Element59">AsDoubleWord</A>, or <A HREF="007917.html#0004" CLASS="Element59">AsString</A> to access the value of the IP address in other representations.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0002">TIpProperty.AsDoubleWord</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007917.html" CLASS="Element59">TIpProperty</A>, <A HREF="014981.html" CLASS="Element59">See Also</A>, <A HREF="014982.html" CLASS="Element59">Example</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Represents the IP address as a unsigned integer value.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> AsDoubleWord: Longword;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+AsDoubleWord is a <STRONG>LongWord</STRONG> property that represents the IP address or network mask as a unsigned integer value. AsDoubleWord calls <A HREF="007917.html#000B" CLASS="Element59">SetAll</A> to update the value of the individual bytes in the IP address.<P CLASS="Element10">
+Use <A HREF="007917.html#0005" CLASS="Element59">Byte1</A>, <A HREF="007917.html#0006" CLASS="Element59">Byte2</A>, <A HREF="007917.html#0007" CLASS="Element59">Byte3</A>, <A HREF="007917.html#0008" CLASS="Element59">Byte4</A>, <A HREF="007917.html#0001" CLASS="Element59">AsBinaryString</A>, or <A HREF="007917.html#0004" CLASS="Element59">AsString</A> to access the value of the IP address in other representations.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0004">TIpProperty.AsString</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007917.html" CLASS="Element59">TIpProperty</A>, <A HREF="014983.html" CLASS="Element59">See Also</A>, <A HREF="014984.html" CLASS="Element59">Example</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Represents the IP address as a string in dotted-decimal format.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> AsString: <STRONG>String</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+AsString is a <STRONG>String</STRONG> property that represents the value of the IP address or network mask in dotted-decimal format, like &quot;<STRONG>129.71.2.4</STRONG>&quot;.<P CLASS="Element10">
+AsString calls <A HREF="007917.html#000B" CLASS="Element59">SetAll</A> to update the value of the individual bytes in the IP address.<P CLASS="Element10">
+Use <A HREF="007917.html#0005" CLASS="Element59">Byte1</A>, <A HREF="007917.html#0006" CLASS="Element59">Byte2</A>, <A HREF="007917.html#0007" CLASS="Element59">Byte3</A>, <A HREF="007917.html#0008" CLASS="Element59">Byte4</A>, <A HREF="007917.html#0002" CLASS="Element59">AsDoubleWord</A>, or <A HREF="007917.html#0001" CLASS="Element59">AsBinaryString</A> to access the value of the IP address in other representations.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0005">TIpProperty.Byte1</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007917.html" CLASS="Element59">TIpProperty</A>, <A HREF="014985.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Represents one byte of the 4-byte IP address or network mask.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> Byte1: byte;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Byte1 is a <STRONG>Byte</STRONG> property that represents one Byte of the 4-byte IP address or network mask.<P CLASS="Element10">
+Byte1, <A HREF="007917.html#0006" CLASS="Element59">Byte2</A>, <A HREF="007917.html#0007" CLASS="Element59">Byte3</A>, and <A HREF="007917.html#0008" CLASS="Element59">Byte4</A> are used primarily to read the current value of the <A HREF="007917.html" CLASS="Element59">TIpProperty</A>. Byte1 calls <A HREF="007917.html#000B" CLASS="Element59">SetAll</A> to update the value of the byte in the IP address.<P CLASS="Element10">
+Use <A HREF="007917.html#0002" CLASS="Element59">AsDoubleWord</A>, <A HREF="007917.html#0004" CLASS="Element59">AsString</A>, or <A HREF="007917.html#0001" CLASS="Element59">AsBinaryString</A> to access the value of the IP address in other representations.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0006">TIpProperty.Byte2</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007917.html" CLASS="Element59">TIpProperty</A>, <A HREF="014986.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Represents one byte of the 4-byte IP address or network mask.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> Byte2: Byte;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Byte2 is a <STRONG>Byte</STRONG> property that represents one Byte of the 4-byte IP address or network mask.<P CLASS="Element10">
+<A HREF="007917.html#0005" CLASS="Element59">Byte1</A>, Byte2, <A HREF="007917.html#0007" CLASS="Element59">Byte3</A>, and <A HREF="007917.html#0008" CLASS="Element59">Byte4</A> are used primarily to read the current value of the <A HREF="007917.html" CLASS="Element59">TIpProperty</A>. Byte2 calls <A HREF="007917.html#000B" CLASS="Element59">SetAll</A> to update the value of the byte in the IP address.<P CLASS="Element10">
+Use <A HREF="007917.html#0002" CLASS="Element59">AsDoubleWord</A>, <A HREF="007917.html#0004" CLASS="Element59">AsString</A>, or <A HREF="007917.html#0001" CLASS="Element59">AsBinaryString</A> to access the value of the IP address in other representations.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0007">TIpProperty.Byte3</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007917.html" CLASS="Element59">TIpProperty</A>, <A HREF="014987.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Represents one byte of the 4-byte IP address or network mask.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> Byte3: Byte;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Byte3 is a <STRONG>Byte</STRONG> property that represents one Byte of the 4-byte IP address or network mask.<P CLASS="Element10">
+<A HREF="007917.html#0005" CLASS="Element59">Byte1</A>, <A HREF="007917.html#0006" CLASS="Element59">Byte2</A>, Byte3, and <A HREF="007917.html#0008" CLASS="Element59">Byte4</A> are used primarily to read the current value of the <A HREF="007917.html" CLASS="Element59">TIpProperty</A>. Byte3 calls <A HREF="007917.html#000B" CLASS="Element59">SetAll</A> to update the value of the byte in the IP address.<P CLASS="Element10">
+Use <A HREF="007917.html#0002" CLASS="Element59">AsDoubleWord</A>, <A HREF="007917.html#0004" CLASS="Element59">AsString</A>, or <A HREF="007917.html#0001" CLASS="Element59">AsBinaryString</A> to access the value of the IP address in other representations.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0008">TIpProperty.Byte4</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007917.html" CLASS="Element59">TIpProperty</A>, <A HREF="014988.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Represents one byte of the 4-byte IP address or network mask.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> Byte4: Byte;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Byte4 is a <STRONG>Byte</STRONG> property that represents one Byte of the 4-byte IP address or network mask.<P CLASS="Element10">
+<A HREF="007917.html#0005" CLASS="Element59">Byte1</A>, <A HREF="007917.html#0006" CLASS="Element59">Byte2</A>, <A HREF="007917.html#0007" CLASS="Element59">Byte3</A>, and Byte4 are used primarily to read the current value of the <A HREF="007917.html" CLASS="Element59">TIpProperty</A>. Byte4 calls <A HREF="007917.html#000B" CLASS="Element59">SetAll</A> to update the value of the byte in the IP address.<P CLASS="Element10">
+Use <A HREF="007917.html#0002" CLASS="Element59">AsDoubleWord</A>, <A HREF="007917.html#0004" CLASS="Element59">AsString</A>, or <A HREF="007917.html#0001" CLASS="Element59">AsBinaryString</A> to access the value of the IP address in other representations.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0009">TIpProperty.ByteArray</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007917.html" CLASS="Element59">TIpProperty</A>, <A HREF="014989.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Represents the 32-bit IP address as boolean flags.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> ByteArray [<STRONG>Index</STRONG>: cardinal]: boolean;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+Index</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Position in the ByteArray.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Return Value</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+<STRONG>Boolean</STRONG> - <STRONG>True</STRONG> if the bit set.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+ByteArray is an indexed <STRONG>Boolean</STRONG> property that provides access to the individual bits that make up the 32-bit IP address or network mask. Values for Index are in the range <STRONG>0</STRONG>..<STRONG>31</STRONG>. ByteArray is used primary in the construction of the <A HREF="007917.html#0001" CLASS="Element59">AsBinaryString</A> representation of the IP address.<P CLASS="Element10">
+Use <A HREF="007917.html#0005" CLASS="Element59">Byte1</A>, <A HREF="007917.html#0006" CLASS="Element59">Byte2</A>, <A HREF="007917.html#0007" CLASS="Element59">Byte3</A>, <A HREF="007917.html#0008" CLASS="Element59">Byte4</A>, <A HREF="007917.html#0002" CLASS="Element59">AsDoubleWord</A>, <A HREF="007917.html#0004" CLASS="Element59">AsString</A>, or <A HREF="007917.html#0001" CLASS="Element59">AsBinaryString</A> to access the value of the IP address in other representations.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="000A">TIpProperty.OnChange</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007917.html" CLASS="Element59">TIpProperty</A>, <A HREF="014990.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Specifies the event handler for changes to the IP address value.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> OnChange: TNotifyEvent;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+OnChange is a <STRONG>TNotifyEvent</STRONG> property that specifies the event handler for changes to the value of the IP address or network mask. OnChange is triggered from both <A HREF="007917.html#0003" CLASS="Element59">Assign</A> and <A HREF="007917.html#000B" CLASS="Element59">SetAll</A>.<P CLASS="Element10">
+Use OnChange to notify an application of changes in the network address properties. <A HREF="007917.html#0003" CLASS="Element59">Assign</A> an OnChange event handler to respond to the event notification.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0003">TIpProperty.Assign</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007917.html" CLASS="Element59">TIpProperty</A>, <A HREF="014991.html" CLASS="Element59">See Also</A>, <A HREF="014992.html" CLASS="Element59">Example</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Copies the contents of another <A HREF="007917.html" CLASS="Element59">TIpProperty</A> object.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>procedure</STRONG> Assign(Source: Tpersistent); <STRONG>override</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+Source: Tpersistent</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+The persistent object that is the source of the object values.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Assign is an overridden procedure inherited from TPersistent that copies the properties or other attributes of Source to the current instance.<P CLASS="Element10">
+Assign calls <A HREF="007917.html#000B" CLASS="Element59">SetAll</A> to update the Byte values of the IP address or network mask. Assigns triggers the <A HREF="007917.html#000A" CLASS="Element59">OnChange</A> event handler to signify that a change has occurred in <A HREF="007917.html" CLASS="Element59">TIpProperty</A> values. Finally, Assign calls the inherited Assign method to handle assignment of properties from the class of the Source parameter.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="000B">TIpProperty.SetAll</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007917.html" CLASS="Element59">TIpProperty</A>, <A HREF="014993.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Updates the byte values of the 32-bit IP address.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>procedure</STRONG> SetAll(One: Byte; Two: Byte; Three: Byte; Four: Byte); <STRONG>virtual</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+One: Byte</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Value for Byte 1 of 4 in the 32-bit IP address.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+Two: Byte</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Value for Byte 2 of 4 in the 32-bit IP address.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+Three: Byte</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Value for Byte 3 of 4 in the 32-bit IP address.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+Four: Byte</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Value for Byte 4 of 4 in the 32-bit IP address.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+SetAll is a procedure used to update the <STRONG>Byte</STRONG> values of the 32-bit IP address or network mask. SetAll is called when write operations to the IP address are performed from <A HREF="007917.html#0003" CLASS="Element59">Assign</A>, <A HREF="007917.html#0002" CLASS="Element59">AsDoubleWord</A>, <A HREF="007917.html#0004" CLASS="Element59">AsString</A>, <A HREF="007917.html#0001" CLASS="Element59">AsBinaryString</A>, and <A HREF="007917.html#0009" CLASS="Element59">ByteArray</A>.</DIV>
+</DIV>
+<DIV CLASS="Element62">
+<HR>Created with Doc-O-Matic 2 donated to <STRONG><A HREF="http://www.delphi-jedi.org">Project JEDI</A></STRONG>. Commercial license available from the <STRONG><A HREF="http://www.doc-o-matic.com">Doc-O-Matic site</A></STRONG>.</DIV>
+</DIV></BODY></HTML>

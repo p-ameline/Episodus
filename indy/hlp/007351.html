@@ -1,0 +1,50 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+<TITLE>TIdFTPUserType</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <META name="GENERATOR" content="Doc-O-Matic">
+    <LINK rel="STYLESHEET" href="default.css" type="text/css">
+
+<SCRIPT LANGUAGE="JavaScript1.2" SRC="scripts.js"></SCRIPT>
+</HEAD>
+<BODY CLASS="Element57">
+<TABLE BORDER="0" BGCOLOR="#AACCFF" WIDTH="100%" CELLSPACING="0" CELLPADDING="0">
+<TR><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element1">
+Indy 9</DIV>
+</TD><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element2">
+<A HREF="content.html" CLASS="Element59">Content</A> | <A HREF="idx.html" CLASS="Element59">Index</A> | <A HREF="symref.html" CLASS="Element59">Reference</A></DIV>
+</TD></TR></TABLE><DIV CLASS="Element58">
+<DIV CLASS="Element5">
+TIdFTPUserType</DIV>
+<DIV CLASS="Element7">
+<A HREF="002192.html" CLASS="Element59">Unit: IdFTPServer</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Represents the type of user account used for the threaded client connection.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12">TIdFTPUserType = (utNone, utAnonymousUser, utNormalUser);</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Unit</DIV>
+<DIV CLASS="Element69">
+<A HREF="002192.html" CLASS="Element59">IdFTPServer</A></DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+TIdFTPUserType is an enumerated type that represents the type of user account that has connected to the FTP server in a threaded client connection. TIdFTPUserType can contain one of the following values and associated meanings:<P CLASS="Element10">
+<UL>
+<LI>utNone - No user account type has been determined.<P CLASS="Element10">
+<LI>utAnonymousUser - The user account is an Anonymous account.<P CLASS="Element10">
+<LI>utNormalUser - The user account has been authenticated as a normal user account.</UL>
+<P CLASS="Element10">
+TIdFTPUserType is the type used to represent the <A HREF="007343.html#0001" CLASS="Element59">TIdFTPServerThread.UserType</A> property for the client connection thread. A TIdFTPUserType value is assigned to <A HREF="007343.html#0001" CLASS="Element59">TIdFTPServerThread.UserType</A> when the server used Command handlers to respond to the FTP USER command. The same value is used when the FTP USER command is issues and the server must authorize the account using credentials from the client connection.</DIV>
+</DIV>
+<DIV CLASS="Element62">
+<HR>Created with Doc-O-Matic 2 donated to <STRONG><A HREF="http://www.delphi-jedi.org">Project JEDI</A></STRONG>. Commercial license available from the <STRONG><A HREF="http://www.doc-o-matic.com">Doc-O-Matic site</A></STRONG>.</DIV>
+</DIV></BODY></HTML>

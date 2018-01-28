@@ -1,0 +1,286 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+<TITLE>TIdCookieManager</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <META name="GENERATOR" content="Doc-O-Matic">
+    <LINK rel="STYLESHEET" href="default.css" type="text/css">
+
+<SCRIPT LANGUAGE="JavaScript1.2" SRC="scripts.js"></SCRIPT>
+</HEAD>
+<BODY CLASS="Element57">
+<TABLE BORDER="0" BGCOLOR="#AACCFF" WIDTH="100%" CELLSPACING="0" CELLPADDING="0">
+<TR><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element1">
+Indy 9</DIV>
+</TD><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element2">
+<A HREF="content.html" CLASS="Element59">Content</A> | <A HREF="idx.html" CLASS="Element59">Index</A> | <A HREF="symref.html" CLASS="Element59">Reference</A></DIV>
+</TD></TR></TABLE><DIV CLASS="Element58">
+<DIV CLASS="Element5">
+TIdCookieManager</DIV>
+<DIV CLASS="Element7">
+<A HREF="010250.html" CLASS="Element59">Hierarchy</A>, <A HREF="010251.html" CLASS="Element59">Properties</A>, <A HREF="010252.html" CLASS="Element59">Methods</A>, <A HREF="010253.html" CLASS="Element59">Events</A>, <A HREF="010254.html" CLASS="Element59">See Also</A>, <A HREF="002146.html" CLASS="Element59">Unit: IdCookieManager</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Implements a HTTP client Cookie manager.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12">TIdCookieManager = <STRONG>class</STRONG>(<A HREF="007213.html" CLASS="Element59">TIdBaseComponent</A>)</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Unit</DIV>
+<DIV CLASS="Element69">
+<A HREF="002146.html" CLASS="Element59">IdCookieManager</A></DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+TIdCookieManager is a <A HREF="007213.html" CLASS="Element59">TIdBaseComponent</A> descendant that implements a management facility for persistent HTTP state information, as described in the Internet Standards and reference documents:<P CLASS="Element10">
+<UL>
+<LI>RFC 2109 - HTTP State Management Mechanism (http://www.rfc-editor.org/rfc/rfc2109.txt)<P CLASS="Element10">
+<LI>RFC 2965 - HTTP State Management Mechanism (http://www.rfc-editor.org/rfc/rfc2965.txt)<P CLASS="Element10">
+<LI>Netscape Persistent Client State - HTTP Cookies (http://www.netscape.com/newsref/std/cookie_spec.html)</UL>
+<P CLASS="Element10">
+The TIdCookieManager component provides the Add and Add2 methods that enable maintenance of Cookie class instances added to the <A HREF="007263.html#0002" CLASS="Element59">CookieCollection</A> in an HTTP Client connection. The <A HREF="007263.html#0005" CLASS="Element59">GenerateCookieList</A> method is provided to create a textual representation of Cookies maintained for a specific URI.<P CLASS="Element10">
+In addition, TIdCookieManager implements event handlers that allow event notifications during creation or destruction of the TIdCookieManager class instance, and when Cookies are added using the Cookie manager.<P CLASS="Element10">
+TIdCookieManager is used by a <A HREF="007375.html" CLASS="Element59">TIdHTTP</A> client in the CookieMananger property when AllowCookies is True. The HTTP client uses CookieManager to maintain a Cookie collection when 'Set-cookie' or 'Set-cookie2' headers are detected in a response from an HTTP server.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0002">TIdCookieManager.CookieCollection</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007263.html" CLASS="Element59">TIdCookieManager</A>, <A HREF="010255.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Represents a container for Cookies managed by <A HREF="007263.html" CLASS="Element59">TIdCookieManager</A>.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> CookieCollection: <A HREF="007266.html" CLASS="Element59">TIdCookies</A>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+CookieCollection is a read-only <A HREF="007266.html" CLASS="Element59">TIdCookies</A> property that represents the Cookie class instances maintained by <A HREF="007263.html" CLASS="Element59">TIdCookieManager</A> for the HTTP client. CookieCollection is accessed when <A HREF="007263.html" CLASS="Element59">TIdCookieManager</A> creates new Cookie class instances in calls to <A HREF="007263.html#0000" CLASS="Element59">AddCookie</A> or <A HREF="007263.html#0001" CLASS="Element59">AddCookie2</A>, and when the textual Cookie content is prepared using <A HREF="007263.html#0005" CLASS="Element59">GenerateCookieList</A>.<P CLASS="Element10">
+Use the <A HREF="007263.html#0008" CLASS="Element59">OnNewCookie</A> event handler to manage the CookieCollection when new Cookie class instances are created in <A HREF="007263.html#0000" CLASS="Element59">AddCookie</A> or <A HREF="007263.html#0001" CLASS="Element59">AddCookie2</A>.<P CLASS="Element10">
+Use the <A HREF="007263.html#0006" CLASS="Element59">OnCreate</A> and <A HREF="007263.html#0007" CLASS="Element59">OnDestroy</A> event handlers to manage the CookieCollection during creation or destruction of the <A HREF="007263.html" CLASS="Element59">TIdCookieManager</A> class instance.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0006">TIdCookieManager.OnCreate</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007263.html" CLASS="Element59">TIdCookieManager</A>, <A HREF="010256.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Event handler signalled during the <A HREF="007263.html#0003" CLASS="Element59">Create</A> method.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> OnCreate: <A HREF="008010.html" CLASS="Element59">TOnCreateEvent</A>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+OnCreate is a TNotifyEvent property that represents the event handler signalled during creation of the <A HREF="007263.html" CLASS="Element59">TIdCookieManager</A> object instance. OnCreate can be used to handle management of the <A HREF="007263.html#0002" CLASS="Element59">CookieCollection</A> when the <A HREF="007263.html" CLASS="Element59">TIdCookieManager</A> calls the <A HREF="007263.html#0003" CLASS="Element59">Create</A> method.<P CLASS="Element10">
+Applications must assign a procedure to the event handler to allow responding to the event notification.<P CLASS="Element10">
+Use <A HREF="007263.html#0007" CLASS="Element59">OnDestroy</A> to handle management of the <A HREF="007263.html#0002" CLASS="Element59">CookieCollection</A> when the object instance is freed.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0007">TIdCookieManager.OnDestroy</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007263.html" CLASS="Element59">TIdCookieManager</A>, <A HREF="010257.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Event handler signalled during the <A HREF="007263.html#0003" CLASS="Element59">Create</A> method.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> OnDestroy: <A HREF="008013.html" CLASS="Element59">TOnDestroyEvent</A>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+OnDestroy is a TNotifyEvent property that represents the event handler signalled during destruction of the <A HREF="007263.html" CLASS="Element59">TIdCookieManager</A> object instance. OnDestroy can be used to handle management of the <A HREF="007263.html#0002" CLASS="Element59">CookieCollection</A> when the <A HREF="007263.html" CLASS="Element59">TIdCookieManager</A> calls the <A HREF="007263.html#0004" CLASS="Element59">Destroy</A> method.<P CLASS="Element10">
+Applications must assign a procedure to the event handler to allow responding to the event notification.<P CLASS="Element10">
+Use <A HREF="007263.html#0006" CLASS="Element59">OnCreate</A> to handle management of the <A HREF="007263.html#0002" CLASS="Element59">CookieCollection</A> when the object instance is created.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0000">TIdCookieManager.AddCookie</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007263.html" CLASS="Element59">TIdCookieManager</A>, <A HREF="010258.html" CLASS="Element59">See Also</A>, <A HREF="010259.html" CLASS="Element59">Example</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Adds a cookie to the collection managed by IdCookieManager.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>procedure</STRONG> AddCookie(ACookie: <STRONG>String</STRONG>; AHost: <STRONG>String</STRONG>);</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+ACookie: String</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Textual Cookie values as described in RFC 2109.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+AHost: String</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Host name or address from the URI for the HTTP request.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+AddCookie is a procedure that creates a new <A HREF="007264.html" CLASS="Element59">TIdCookieRFC2109</A> Cookie class instance for the Cookie values specified in ACookie and the Domain specified in AHost. The internal implementation of AddCookie insures that the Cookie is updated to reflect the values in ACookie, and sets the Domain attribute of the Cookie to AHost when no specific Domain is found in the Cookie contents.<P CLASS="Element10">
+AddCookie checks that the Cookie is valid for the Domain specified in AHost prior to signalling the <A HREF="007263.html#0008" CLASS="Element59">OnNewCookie</A> event handler. When AHost is not a valid Domain, or the <A HREF="007263.html#0008" CLASS="Element59">OnNewCookie</A> event handler indicates that the Cookie has been rejected, the Cookie class instance is removed from the <A HREF="007263.html#0002" CLASS="Element59">CookieCollection</A> and freed.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0001">TIdCookieManager.AddCookie2</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007263.html" CLASS="Element59">TIdCookieManager</A>, <A HREF="010260.html" CLASS="Element59">See Also</A>, <A HREF="010261.html" CLASS="Element59">Example</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Adds a cookie to the collection managed by IdCookieManager.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>procedure</STRONG> AddCookie2(ACookie: <STRONG>String</STRONG>; AHost: <STRONG>String</STRONG>);</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+ACookie: String</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Textual Cookie values as described in RFC 2965.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+AHost: String</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Host name or address from the URI for the HTTP request.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+AddCookie2 is a procedure that creates a new <A HREF="007265.html" CLASS="Element59">TIdCookieRFC2965</A> Cookie class instance for the Cookie values specified in ACookie and the Domain specified in AHost. The internal implementation of AddCookie2 insures that the Cookie is updated to reflect the values in ACookie, and sets the Domain attribute of the Cookie to AHost when no specific Domain is found in the Cookie contents.<P CLASS="Element10">
+AddCookie2 checks that the Cookie is valid for the Domain specified in AHost prior to signalling the <A HREF="007263.html#0008" CLASS="Element59">OnNewCookie</A> event handler. When AHost is not a valid Domain, or the <A HREF="007263.html#0008" CLASS="Element59">OnNewCookie</A> event handler indicates that the Cookie has been rejected, the Cookie class instance is removed from the <A HREF="007263.html#0002" CLASS="Element59">CookieCollection</A> and freed.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0003">TIdCookieManager.Create</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007263.html" CLASS="Element59">TIdCookieManager</A>, <A HREF="010262.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Constructor for the object instance.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>constructor</STRONG> Create(AOwner: TComponent); <STRONG>override</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+AOwner: TComponent</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Owner of the object instance.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Create is the constructor for the object instance. Create calls the inherited Create method using AOwner as the owner of the object instance. Create initializes the <A HREF="007266.html" CLASS="Element59">TIdCookies</A> instance used in the <A HREF="007263.html#0002" CLASS="Element59">CookieCollection</A> property, and specifies the current object instance as the owner of the Cookie collection.<P CLASS="Element10">
+Calling Create will signal a TNotifyEvent when a procedure has been assigned to the <A HREF="007263.html#0006" CLASS="Element59">OnCreate</A> event handler. Use <A HREF="007263.html#0006" CLASS="Element59">OnCreate</A> to handle management of the <A HREF="007263.html#0002" CLASS="Element59">CookieCollection</A> during creation of the <A HREF="007263.html" CLASS="Element59">TIdCookieManager</A> object instance.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0004">TIdCookieManager.Destroy</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007263.html" CLASS="Element59">TIdCookieManager</A>, <A HREF="010263.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Frees the object instance.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>destructor</STRONG> Destroy; <STRONG>override</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Destroy is the destructor for the object instance. Destroy will signal a TNotifyEvent event type whan a procedure has been assigned to the <A HREF="007263.html#0007" CLASS="Element59">OnDestroy</A> event handler. Use <A HREF="007263.html#0007" CLASS="Element59">OnDestroy</A> to handle management of the <A HREF="007263.html#0002" CLASS="Element59">CookieCollection</A> during destruction of the <A HREF="007263.html" CLASS="Element59">TIdCookieManager</A> object instance.<P CLASS="Element10">
+Destroy frees resources allocated in the <A HREF="007263.html#0003" CLASS="Element59">Create</A> method, including the <A HREF="007263.html#0002" CLASS="Element59">CookieCollection</A> property, prior to calling the inherited Destroy method.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0005">TIdCookieManager.GenerateCookieList</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007263.html" CLASS="Element59">TIdCookieManager</A>, <A HREF="010264.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Generates text containing Cookie values that match the specified values.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>function</STRONG> GenerateCookieList(URL: <A HREF="007878.html" CLASS="Element59">TIdURI</A>; SecureConnection: Boolean = false): <STRONG>String</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+URL: TIdURI</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+URI specifying the Host and Path for valid Cookie content.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+SecureConnection: Boolean = false</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Indicates if a Secure connection is required. Default value is False.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Return Value</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+String - Textual representation of the matching Cookies.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+GenerateCookieList is a String function that generates the textual content for Cookies in the <A HREF="007263.html#0002" CLASS="Element59">CookieCollection</A> that match the Domain and Path for the location specified in URL in the HTTP server request.<P CLASS="Element10">
+SecureConnection indicates whether Cookies must contain a Secure attribute value before they are included in the generated Cookie content for the HTTP client.<P CLASS="Element10">
+Cookies in the <A HREF="007263.html#0002" CLASS="Element59">CookieCollection</A> will not be used in the generated content when Domain, Path, or Secure Cookie attributes do not match the required values. Cookies can also be ignored when they have Expired.<P CLASS="Element10">
+GenerateCookieList creates and populates a <A HREF="007262.html" CLASS="Element59">TIdCookieList</A> with Cookie class instances matching the required values, and fills the return value with the CookieName and Value for corresponding Cookies in the list. GenerateCookieList frees the <A HREF="007262.html" CLASS="Element59">TIdCookieList</A> prior to exiting from the method.<P CLASS="Element10">
+GenerateCookieList is called when an HTTP request is prepared and executed using the Post or Put methods of an HTTP client.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0008">TIdCookieManager.OnNewCookie</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007263.html" CLASS="Element59">TIdCookieManager</A>, <A HREF="010265.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Event handler signalled when Cookies are added to the collection.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> OnNewCookie: <A HREF="008020.html" CLASS="Element59">TOnNewCookieEvent</A>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+OnNewCookie is a <A HREF="008020.html" CLASS="Element59">TOnNewCookieEvent</A> property that represents the event handler signalled when Cookie class instances are added to the <A HREF="007263.html#0002" CLASS="Element59">CookieCollection</A>. OnNewCookie is signalled when <A HREF="007263.html#0000" CLASS="Element59">AddCookie</A> or <A HREF="007263.html#0001" CLASS="Element59">AddCookie2</A> is used to create the corresponding Cookie class instance used to represent the text for the Cookie.<P CLASS="Element10">
+Applications must assign a procedure to the event handler to allow responding to the event notification. OnNewCookie can indicate if the Cookie is accepted or rejected based on values detected in the Cookie content.<P CLASS="Element10">
+Use OnNewCookie to ovreride the default logic used in management of the <A HREF="007263.html#0002" CLASS="Element59">CookieCollection</A> when Cookies are added to the collection.</DIV>
+</DIV>
+<DIV CLASS="Element62">
+<HR>Created with Doc-O-Matic 2 donated to <STRONG><A HREF="http://www.delphi-jedi.org">Project JEDI</A></STRONG>. Commercial license available from the <STRONG><A HREF="http://www.doc-o-matic.com">Doc-O-Matic site</A></STRONG>.</DIV>
+</DIV></BODY></HTML>

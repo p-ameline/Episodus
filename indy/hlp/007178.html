@@ -1,0 +1,60 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+<TITLE>TGetEvent</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <META name="GENERATOR" content="Doc-O-Matic">
+    <LINK rel="STYLESHEET" href="default.css" type="text/css">
+
+<SCRIPT LANGUAGE="JavaScript1.2" SRC="scripts.js"></SCRIPT>
+</HEAD>
+<BODY CLASS="Element57">
+<TABLE BORDER="0" BGCOLOR="#AACCFF" WIDTH="100%" CELLSPACING="0" CELLPADDING="0">
+<TR><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element1">
+Indy 9</DIV>
+</TD><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element2">
+<A HREF="content.html" CLASS="Element59">Content</A> | <A HREF="idx.html" CLASS="Element59">Index</A> | <A HREF="symref.html" CLASS="Element59">Reference</A></DIV>
+</TD></TR></TABLE><DIV CLASS="Element58">
+<DIV CLASS="Element5">
+TGetEvent</DIV>
+<DIV CLASS="Element7">
+<A HREF="015430.html" CLASS="Element59">See Also</A>, <A HREF="002952.html" CLASS="Element59">Unit: IdWhoIsServer</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Event triggered to perform a WhoIs look-up query.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12">TGetEvent = <STRONG>procedure</STRONG> (AThread: <A HREF="007613.html" CLASS="Element59">TIdPeerThread</A>; ALookup: <STRONG>string</STRONG>) <STRONG>of</STRONG> <STRONG>object</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Unit</DIV>
+<DIV CLASS="Element69">
+<A HREF="002952.html" CLASS="Element59">IdWhoIsServer</A></DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+ALookup</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Look-up value for the WhoIs query.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+AThread</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Client connection for the event notification.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+TGetEvent is an event type signalled when <A HREF="007899.html" CLASS="Element59">TIdWhoIsServer</A> performs the look-up of individual names, mailbox names, network organizations, DDN nodes and associated hosts, and TAC telephone numbers for the value specified in ALookup.<P CLASS="Element10">
+TGetEvent is the event type signalled to the <A HREF="007899.html#0002" CLASS="Element59">TIdWhoIsServer.OnCommandLookup</A> event handler, and allows the server to implement the platform-specific mechanisms required to provide the client connection in AThread with data for the network service.<P CLASS="Element10">
+Applications must assign a procedure to the event handler to allow responding to the event notification. The event handler can provide data from local resources, or access data on servers provided by the Network Information Center (NIC) at SRI International at 26.0.0.73 or 10.0.0.51. The event can formulate and write responses using the connection in AThread.</DIV>
+</DIV>
+<DIV CLASS="Element62">
+<HR>Created with Doc-O-Matic 2 donated to <STRONG><A HREF="http://www.delphi-jedi.org">Project JEDI</A></STRONG>. Commercial license available from the <STRONG><A HREF="http://www.doc-o-matic.com">Doc-O-Matic site</A></STRONG>.</DIV>
+</DIV></BODY></HTML>

@@ -1,0 +1,4 @@
+
+
+#define IDC_PROPGROUP 101
+#define IDC_PROPI   	102#define IDC_PROPA     103#define IDC_PROPO     104#define IDC_PROPB	    105#define IDC_ALTGROUP  106#define IDC_ALT	      107#define IDC_MOD_ALT	  108#define IDC_MOD_CTRL	109#define IDC_MOD_SHIFT	110#define IDC_MOD_WIN	  111

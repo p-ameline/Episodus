@@ -1,0 +1,314 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+<TITLE>TIdHostNameServer</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <META name="GENERATOR" content="Doc-O-Matic">
+    <LINK rel="STYLESHEET" href="default.css" type="text/css">
+
+<SCRIPT LANGUAGE="JavaScript1.2" SRC="scripts.js"></SCRIPT>
+</HEAD>
+<BODY CLASS="Element57">
+<TABLE BORDER="0" BGCOLOR="#AACCFF" WIDTH="100%" CELLSPACING="0" CELLPADDING="0">
+<TR><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element1">
+Indy 9</DIV>
+</TD><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element2">
+<A HREF="content.html" CLASS="Element59">Content</A> | <A HREF="idx.html" CLASS="Element59">Index</A> | <A HREF="symref.html" CLASS="Element59">Reference</A></DIV>
+</TD></TR></TABLE><DIV CLASS="Element58">
+<DIV CLASS="Element5">
+TIdHostNameServer</DIV>
+<DIV CLASS="Element7">
+<A HREF="011420.html" CLASS="Element59">Hierarchy</A>, <A HREF="011421.html" CLASS="Element59">Properties</A>, <A HREF="011422.html" CLASS="Element59">Methods</A>, <A HREF="011423.html" CLASS="Element59">Events</A>, <A HREF="011424.html" CLASS="Element59">See Also</A>, <A HREF="002248.html" CLASS="Element59">Unit: IdHostnameServer</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Implements a HostName server.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12">TIdHostNameServer = <STRONG>class</STRONG>(<A HREF="007831.html" CLASS="Element59">TIdTCPServer</A>)</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Unit</DIV>
+<DIV CLASS="Element69">
+<A HREF="002248.html" CLASS="Element59">IdHostnameServer</A></DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+TIdHostNameServer is a <A HREF="007831.html" CLASS="Element59">TIdTCPServer</A> descendant that provides a server implementation of the Hostname Server as described in the Internet Standards document:<P CLASS="Element10">
+<UL>
+<LI>RFC 953 - HOSTNAME Server (http://www.rfc-editor.org/rfc/rfc953.txt)</UL>
+<P CLASS="Element10">
+HostName Server provides machine-readable name and/or address information describing networks, gateways, hosts, and eventually domains, within the internet environment.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0000">TIdHostNameServer.Create</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007374.html" CLASS="Element59">TIdHostNameServer</A>, <A HREF="011425.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Constructor for the object instance.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>constructor</STRONG> Create(AOwner: TComponent); <STRONG>override</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+AOwner: TComponent</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Owner of the object instance.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Create is the constructor for the object instance. Create initializes the <A HREF="007374.html" CLASS="Element59">TIdHostNameServer</A> component and set's it's default port to the standard Host Name protocol port (<A HREF="002471.html" CLASS="Element59">IdPORT_HOSTNAME</A>).</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0001">TIdHostNameServer.OnCommandALL</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007374.html" CLASS="Element59">TIdHostNameServer</A>, <A HREF="011426.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Event handler for the HOSTNAME ALL command.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> OnCommandALL: <A HREF="007196.html" CLASS="Element59">THostNameGetEvent</A>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+Thread</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Client generating the event.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+OnCommandALL is an event handler for the HOSTNAME ALL command. Applications must assign a procedure to the event handler to allow the server to respond to the command.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0002">TIdHostNameServer.OnCommandALLDOM</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007374.html" CLASS="Element59">TIdHostNameServer</A>, <A HREF="011427.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Event handler for the HOSTNAME ALLDOM command.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> OnCommandALLDOM: <A HREF="007196.html" CLASS="Element59">THostNameGetEvent</A>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+Thread</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Client generating the event.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+OnCommandALLDOM is an event handler for the HOSTNAME ALLDOM command. Applications must assign a procedure to the event handler to allow the server to respond to the command.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0003">TIdHostNameServer.OnCommandALLINGWAY</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007374.html" CLASS="Element59">TIdHostNameServer</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Event handler for the HOSTNAME ALLINGWAY command.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> OnCommandALLINGWAY: <A HREF="007196.html" CLASS="Element59">THostNameGetEvent</A>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+Thread</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Client generating the event.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+OnCommandALLINGWAY is an event handler for the HOSTNAME ALLINGWAY command. Applications must assign a procedure to the event handler to allow the server to respond to the command.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0004">TIdHostNameServer.OnCommandALLOLD</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007374.html" CLASS="Element59">TIdHostNameServer</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Event handler for the HOSTNAME ALLOLD command.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> OnCommandALLOLD: <A HREF="007196.html" CLASS="Element59">THostNameGetEvent</A>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+Thread</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Client generating the event.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+OnCommandALLOLD is an event handler for the HOSTNAME ALLOLD command. Applications must assign a procedure to the event handler to allow the server to respond to the command.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0005">TIdHostNameServer.OnCommandDOMAINS</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007374.html" CLASS="Element59">TIdHostNameServer</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Event handler for the HOSTNAME DOMAINS command.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> OnCommandDOMAINS: <A HREF="007196.html" CLASS="Element59">THostNameGetEvent</A>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+Thread</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Client generating the event.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+OnCommandDOMAINS is an event handler for the HOSTNAME DOMAINS command. Applications must assign a procedure to the event handler to allow the server to respond to the command.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0006">TIdHostNameServer.OnCommandHADDR</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007374.html" CLASS="Element59">TIdHostNameServer</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Event handler for the HOSTNAME HADDR command.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> OnCommandHADDR: <A HREF="007197.html" CLASS="Element59">THostNameOneParmEvent</A>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+Parm</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Parameters for the command.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+Thread</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Client generating the event.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+OnCommandHADDR is an event handler for the HOSTNAME HADDR command. Applications must assign a procedure to the event handler to allow the server to respond to the command.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0007">TIdHostNameServer.OnCommandHELP</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007374.html" CLASS="Element59">TIdHostNameServer</A>, <A HREF="011428.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Event handler for the HOSTNAME Help command.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> OnCommandHELP: <A HREF="007196.html" CLASS="Element59">THostNameGetEvent</A>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+Thread</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Client generating the event.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+OnCommandHELP is an event handler for the HOSTNAME Help command. Applications must assign a procedure to the event handler to allow the server to respond to the command.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0008">TIdHostNameServer.OnCommandHNAME</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007374.html" CLASS="Element59">TIdHostNameServer</A>, <A HREF="011429.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Event handler for the HOSTNAME HNAME command.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> OnCommandHNAME: <A HREF="007197.html" CLASS="Element59">THostNameOneParmEvent</A>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+Thread</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Client generating the event.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+OnCommandHNAME ia an event handler for the HOSTNAME HNAME command. Applications must assign a procedure to the event handler to allow the server to respond to the command.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0009">TIdHostNameServer.OnCommandVERSION</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007374.html" CLASS="Element59">TIdHostNameServer</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Event handler for the HOSTNAME VERSION command.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> OnCommandVERSION: <A HREF="007196.html" CLASS="Element59">THostNameGetEvent</A>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+Thread</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Client generating the event.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+OnCommandVERSION is an event handler for the HOSTNAME VERSION command. Applications must assign a procedure to the event handler to allow the server to respond to the command.</DIV>
+</DIV>
+<DIV CLASS="Element62">
+<HR>Created with Doc-O-Matic 2 donated to <STRONG><A HREF="http://www.delphi-jedi.org">Project JEDI</A></STRONG>. Commercial license available from the <STRONG><A HREF="http://www.doc-o-matic.com">Doc-O-Matic site</A></STRONG>.</DIV>
+</DIV></BODY></HTML>

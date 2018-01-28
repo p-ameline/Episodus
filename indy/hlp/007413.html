@@ -1,0 +1,1320 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+<TITLE>TIdIMAP4Server</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <META name="GENERATOR" content="Doc-O-Matic">
+    <LINK rel="STYLESHEET" href="default.css" type="text/css">
+
+<SCRIPT LANGUAGE="JavaScript1.2" SRC="scripts.js"></SCRIPT>
+</HEAD>
+<BODY CLASS="Element57">
+<TABLE BORDER="0" BGCOLOR="#AACCFF" WIDTH="100%" CELLSPACING="0" CELLPADDING="0">
+<TR><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element1">
+Indy 9</DIV>
+</TD><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element2">
+<A HREF="content.html" CLASS="Element59">Content</A> | <A HREF="idx.html" CLASS="Element59">Index</A> | <A HREF="symref.html" CLASS="Element59">Reference</A></DIV>
+</TD></TR></TABLE><DIV CLASS="Element58">
+<DIV CLASS="Element5">
+TIdIMAP4Server</DIV>
+<DIV CLASS="Element7">
+<A HREF="011747.html" CLASS="Element59">Hierarchy</A>, <A HREF="011748.html" CLASS="Element59">Properties</A>, <A HREF="011749.html" CLASS="Element59">Methods</A>, <A HREF="011750.html" CLASS="Element59">Events</A>, <A HREF="011751.html" CLASS="Element59">See Also</A>, <A HREF="002259.html" CLASS="Element59">Unit: IdIMAP4Server</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Implements an IMAP4 server.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12">TIdIMAP4Server = <STRONG>class</STRONG>(<A HREF="007831.html" CLASS="Element59">TIdTCPServer</A>)</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Unit</DIV>
+<DIV CLASS="Element69">
+<A HREF="002259.html" CLASS="Element59">IdIMAP4Server</A></DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+TIdIMAP4Server helps developers implement a Internet Message Access Protocol, Version 4rev1 or IMAP4 server as decribed in the Internet Standards document:<P CLASS="Element10">
+<UL>
+<LI>RFC 2060 - Internet Message Access Protocol - Version 4rev1 (http://www.rfc-editor.org/rfc/rfc2060.txt)</UL>
+<P CLASS="Element10">
+IMAP4 allows a client to access and manipulate electronic mail messages on a server. IMAP4rev1 permits manipulation of mailboxes (remote message folders) in a way that is functionally equivalent to local folders. IMAP4rev1 also provides the capability for an offline client to resynchronize with the server.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0000">TIdIMAP4Server.Create</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007413.html" CLASS="Element59">TIdIMAP4Server</A>, <A HREF="011752.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Constructor for the object instance.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>constructor</STRONG> Create(AOwner: TComponent); <STRONG>override</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Create is the constructor for the object instance. Create calls the inherited Create constructor, and initializes the TIdMAPI4Server object instance by setting <A HREF="007414.html" CLASS="Element59">DefaultPort</A> to the port number used for the IMAP4 protocol (<A HREF="002485.html" CLASS="Element59">IdPORT_IMAP4</A>).</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0000">TIdIMAP4Server.OnCommandAPPEND</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007413.html" CLASS="Element59">TIdIMAP4Server</A>, <A HREF="011753.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Event handler for the IMAP4 APPEND command.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> OnCommandAPPEND: <A HREF="007150.html" CLASS="Element59">TCommandEvent</A>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+CmdStr</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Command parameters for the event.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+Handled</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Indicates the command has been handled in the event handler.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+Tag</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Tag identifier for the command.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+Thread</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Client thread for the event notification.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+OnCommandAPPEND is a <A HREF="007150.html" CLASS="Element59">TCommandEvent</A> property that represents the event handler triggered when a threaded client connection executes the IMAP4 APPEND command. OnCommandAPPEND uses arguments in the CmdStr parameter to create a new message and append it to a specified mailbox.<P CLASS="Element10">
+CmdStr may contain the following values:<P CLASS="Element10">
+<UL>
+<LI>mailbox - mailbox name.<P CLASS="Element10">
+<LI>flags - OPTIONAL list of parenthesized message flags.<P CLASS="Element10">
+<LI>timestamp - OPTIONAL date/time for the new message.<P CLASS="Element10">
+<LI>literal - octet count for the message.</UL>
+<P CLASS="Element10">
+Assign a procedure to the event handler that performs the processing required to create a new, and capture the RFC 822-compliant message headers and content from the client connection in Thread. The new message should include any non-blank values indicated in flags and timestamp.<P CLASS="Element10">
+If the append is unsuccessful for any reason, the mailbox MUST be restored to its state before the APPEND attempt. Set Handled to False to indicate that the APPEND process could not be completed successfully in the event handler.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Notes</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+the APPEND command event handler is not used for message delivery, because it does not provide a mechanism to transfer envelope information.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0001">TIdIMAP4Server.ONCommandAUTHENTICATE</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007413.html" CLASS="Element59">TIdIMAP4Server</A>, <A HREF="011754.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Event handler for the IMAP4 AUTHENTICATE command.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> ONCommandAUTHENTICATE: <A HREF="007150.html" CLASS="Element59">TCommandEvent</A>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+CmdStr</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Command parameters for the event.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+Handled</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Indicates the command has been handled in the event handler.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+Tag</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Tag identifier for the command.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+Thread</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Client thread for the event notification.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+ONCommandAUTHENTICATE is a <A HREF="007150.html" CLASS="Element59">TCommandEvent</A> property that represents the event handler triggered when a threaded client issues the IMAP4 AUTHENTICATE command.<P CLASS="Element10">
+ONCommandAUTHENTICATE uses the argument in CmdStr to determine the authentication mechanism for the client connection. If the server supports the requested authentication mechanism, ONCommandAUTHENTICATE must perform an authentication protocol exchange to identify and authenticate the client.<P CLASS="Element10">
+Authentication mechanisms are optional. The server may also perform client authentication using the <A HREF="007413.html#000D" CLASS="Element59">ONCommandLOGIN</A> event handler.<P CLASS="Element10">
+<STRONG>Note</STRONG>: The server implementation must assign a procedure to the event handler to allow responding to the event notification.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0002">TIdIMAP4Server.ONCommandCAPABILITY</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007413.html" CLASS="Element59">TIdIMAP4Server</A>, <A HREF="011755.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Event type for the IMAP4 CAPABILITY command.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> ONCommandCAPABILITY: <A HREF="007150.html" CLASS="Element59">TCommandEvent</A>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+CmdStr</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Command parameters for the event.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+Handled</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Indicates the command has been handled in the event handler.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+Tag</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Tag identifier for the command.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+Thread</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Client thread for the event notification.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+ONCommandCAPABILITY is a <A HREF="007150.html" CLASS="Element59">TCommandEvent</A> property that represents the event handler triggered when the IMAP4 client issues the CAPABILITY command. ONCommandCAPABILITY allows the server to format and transmit a listing that indicates the IMAP4 capabilities supported in the server implementation.<P CLASS="Element10">
+The capability listing should contain a space-delimited listing of capability names beginning with the atom &quot;IMAP4rev1&quot;. A capability name which begins with &quot;AUTH=&quot; indicates that the server supports that particular authentication mechanism. Other capability names indicate that the server supports an extension, revision, or amendment to the IMAP4rev1 protocol.<P CLASS="Element10">
+Capability names are standard or standards-track IMAP4rev1 extensions, revisions, or amendments registered with IANA. A capability name may begin with &quot;X&quot; to indicate a non-standard or unregistered capability. For example:<P CLASS="Element10">
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12">      S: * CAPABILITY IMAP4rev1 AUTH=KERBEROS_V4 XPIG-LATIN</PRE></DIV>
+</DIV>
+<P CLASS="Element10">
+<STRONG>Note</STRONG>: ONCommandCAPABILITY can be issued regardless of the connection or user state. The server implementation must assign a procedure to the event handler to allow responding to the event notification.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0003">TIdIMAP4Server.ONCommandCHECK</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007413.html" CLASS="Element59">TIdIMAP4Server</A>, <A HREF="011756.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Event handler for the IMAP4 CHECK command.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> ONCommandCHECK: <A HREF="007150.html" CLASS="Element59">TCommandEvent</A>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+CmdStr</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Command parameters for the event.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+Handled</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Indicates the command has been handled in the event handler.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+Tag</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Tag identifier for the command.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+Thread</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Client thread for the event notification.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+ONCommandCHECK is a <A HREF="007150.html" CLASS="Element59">TCommandEvent</A> property that represents the event handler triggered when the IMAP4 client issues the CHECK command. ONCommandCHECK allows the server implementation to perform implementation- dependent housekeeping required to synchronize the state for the currently selected mailbox with it's representation in a mail store.<P CLASS="Element10">
+<STRONG>Note</STRONG>: Implementing ONCommandCHECK is not required, and should function equivalent to the IMAP NOOP command under those circumstances. The server implementation must assign a procedure to the event handler to allow responding to the event notification.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0004">TIdIMAP4Server.OnCommandCLOSE</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007413.html" CLASS="Element59">TIdIMAP4Server</A>, <A HREF="011757.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Event handler for the IMAP4 CLOSE command.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> OnCommandCLOSE: <A HREF="007150.html" CLASS="Element59">TCommandEvent</A>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+CmdStr</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Command parameters for the event.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+Handled</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Indicates the command has been handled in the event handler.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+Tag</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Tag identifier for the command.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+Thread</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Client thread for the event notification.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+OnCommandCLOSE is a <A HREF="007150.html" CLASS="Element59">TCommandEvent</A> property that represents the event handler triggered when the client issues the IMAP4 CLOSE command. OnCommandCLOSE allows the server to remove all messages containing the Deleted flag for the currently selected mailbox, and return the client connection to the authenticated state.<P CLASS="Element10">
+OnCommandCLOSE should not remove deleted messages or raise an error if the mailbox is selected by an IMAP4 EXAMINE command, or is otherwise selected read-only.<P CLASS="Element10">
+OnCommandCLOSE is similar to <A HREF="007413.html#000A" CLASS="Element59">ONCommandEXPUNGE</A>, except it does not <A HREF="006944.html" CLASS="Element59">send</A> untagged responses for each deleted message.<P CLASS="Element10">
+Use <A HREF="007413.html#0013" CLASS="Element59">ONCommandSELECT</A>, ONCommandEXAMINE to open a mailbox in a specific read or write mode. Use <A HREF="007413.html#000E" CLASS="Element59">ONCommandLOGOUT</A> to implicitly close the selected mailbox and ignore deleted messages.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0005">TIdIMAP4Server.OnCommandCOPY</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007413.html" CLASS="Element59">TIdIMAP4Server</A>, <A HREF="011758.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Event handler for the IMAP4 COPY command.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> OnCommandCOPY: <A HREF="007150.html" CLASS="Element59">TCommandEvent</A>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+CmdStr</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Command parameters for the event.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+Handled</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Indicates the command has been handled in the event handler.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+Tag</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Tag identifier for the command.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+Thread</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Client thread for the event notification.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+OnCommandCOPY is a <A HREF="007150.html" CLASS="Element59">TCommandEvent</A> property that represents the event handler triggered when a client issues the IMAP4 COPY command. OnCommandCOPY can be used to implement processing required to copy one or more messages from the current mailbox to an another existing mailbox, as specified by arguments in CmdStr.<P CLASS="Element10">
+CmdStr will contain a message set indicating a message number or range followed by the destination mailbox name.<P CLASS="Element10">
+<STRONG>Note</STRONG>: The server implementation must assign a procedure to the event handler to allow responding to the event notification.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0006">TIdIMAP4Server.ONCommandCREATE</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007413.html" CLASS="Element59">TIdIMAP4Server</A>, <A HREF="011759.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Event type for the IMAP4 CREATE command.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> ONCommandCREATE: <A HREF="007150.html" CLASS="Element59">TCommandEvent</A>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+CmdStr</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Command parameters for the event.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+Handled</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Indicates the command has been handled in the event handler.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+Tag</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Tag identifier for the command.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+Thread</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Client thread for the event notification.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+ONCommandCREATE is a <A HREF="007150.html" CLASS="Element59">TCommandEvent</A> property that represents the event handler triggered when a client issues the IMAP4 CREATE command. ONCommandCREATE allows the server to perform processing required to create a new mailbox having the name specified in CmdStr.<P CLASS="Element10">
+ONCommandCREATE cannot create a new mailbox that has a name matching an existing or deleted mailbox. It is also an error to create a mailbox with the reserved name &quot;INBOX&quot;. The mailbox name can reflect the folder hierarchy if the server implementation chooses to support hierarchical mail folders.<P CLASS="Element10">
+Use <A HREF="007413.html#0007" CLASS="Element59">ONCommandDELETE</A> to remove a mailbox from the server mail store.<P CLASS="Element10">
+<STRONG>Note</STRONG>: The server implementation must assign a procedure to the event handler to allow responding to the event notification.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0007">TIdIMAP4Server.ONCommandDELETE</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007413.html" CLASS="Element59">TIdIMAP4Server</A>, <A HREF="011760.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Event type for the IMAP4 DELETE command.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> ONCommandDELETE: <A HREF="007150.html" CLASS="Element59">TCommandEvent</A>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+CmdStr</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Command parameters for the event.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+Handled</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Indicates the command has been handled in the event handler.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+Tag</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Tag identifier for the command.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+Thread</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Client thread for the event notification.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+ONCommandDELETE is a <A HREF="007150.html" CLASS="Element59">TCommandEvent</A> property that represents the event handler triggered when a client issues the IMAP4 DELETE command. ONCommandDELETE allows the server to perform processing needed to permanently remove the mailbox name specified in CmdStr from the server mail store.<P CLASS="Element10">
+ONCommandDELETE should not attempt to remove inferior mailboxes in the mail folder hierarchy that cannot be selected, and should return an error indicating the condition.<P CLASS="Element10">
+<STRONG>Note</STRONG>: The server implementation must assign a procedure to the event handler to allow responding to the event notification.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0008">TIdIMAP4Server.OnCommandError</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007413.html" CLASS="Element59">TIdIMAP4Server</A>, <A HREF="011761.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Event handler for an unknown IMAP4 command.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> OnCommandError: <A HREF="007150.html" CLASS="Element59">TCommandEvent</A>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+CmdStr</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Command parameters for the event.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+Handled</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Indicates the command has been handled in the event handler.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+Tag</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Tag identifier for the command.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+Thread</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Client thread for the event notification.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+OnCommandError is a <A HREF="007150.html" CLASS="Element59">TCommandEvent</A> property that represents the event handler triggered when a client issues a command which is not recognized by <A HREF="007413.html" CLASS="Element59">TIdIMAP4Server</A>. OnCommandError allows the server to perform logging or other processing required when a command not present in <A HREF="002965.html" CLASS="Element59">IMAPCommands</A> is received.<P CLASS="Element10">
+<STRONG>Note</STRONG>: The server implementation can assign a procedure to the event handler to allow responding to the event notification.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0009">TIdIMAP4Server.OnCommandEXAMINE</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007413.html" CLASS="Element59">TIdIMAP4Server</A>, <A HREF="011762.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Event handler for the IMAP4 EXAMINE command.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> OnCommandEXAMINE: <A HREF="007150.html" CLASS="Element59">TCommandEvent</A>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+CmdStr</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Command parameters for the event.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+Handled</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Indicates the command has been handled in the event handler.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+Tag</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Tag identifier for the command.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+Thread</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Client thread for the event notification.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+OnCommandEXAMINE is a <A HREF="007150.html" CLASS="Element59">TCommandEvent</A> property that represents the event handler triggered when a client issues the IMAP4 EXAMINE command. OnCommandEXAMINE allows the server to perform processing required to open the mailbox specified in CmdStr for read-only access.<P CLASS="Element10">
+OnCommandEXAMINE, like OnCommandSELECT, must <A HREF="006944.html" CLASS="Element59">send</A> untagged responses to the client connection to define the initial state of the mailbox, and includes the following:<P CLASS="Element10">
+<UL>
+<LI>FLAGS - FLags defined for the mailbox.<P CLASS="Element10">
+<LI>EXISTS - Number of nmessages in the mailbox.<P CLASS="Element10">
+<LI>RECENT - Number of messages having the Recent flag.<P CLASS="Element10">
+<LI>UIDVALIDITY - The unique identifier validity value.</UL>
+<P CLASS="Element10">
+OnCommandEXAMINE may <A HREF="006944.html" CLASS="Element59">send</A> an untagged response containing values for UNSEEN indicating the message sequence number for the first unseen message in the mailbox.<P CLASS="Element10">
+OnCommandEXAMINE can be used to <A HREF="006943.html" CLASS="Element59">select</A> one mailbox for the client connection. It cannot access more than one mailbox simultaneously. AN exist mailbox must be closed when a new mailbox is accessed. Selecting or Examining multiple mailboxes will require multiple client connections.<P CLASS="Element10">
+Use <A HREF="007413.html#0013" CLASS="Element59">ONCommandSELECT</A> to access a mailbox with write permissions for the client connection.<P CLASS="Element10">
+<STRONG>Note</STRONG>: The server implementation can assign a procedure to the event handler to allow responding to the event notification.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="000A">TIdIMAP4Server.ONCommandEXPUNGE</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007413.html" CLASS="Element59">TIdIMAP4Server</A>, <A HREF="011763.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Event handler for the IMAP4 EXPUNGE command.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> ONCommandEXPUNGE: <A HREF="007150.html" CLASS="Element59">TCommandEvent</A>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+CmdStr</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Command parameters for the event.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+Handled</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Indicates the command has been handled in the event handler.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+Tag</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Tag identifier for the command.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+Thread</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Client thread for the event notification.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+ONCommandEXPUNGE is a <A HREF="007150.html" CLASS="Element59">TCommandEvent</A> property that represents the event handler triggered when a client issues the IMAP4 EXPUNGE command. ONCommandEXPUNGE allows the server to perform processing required to permanently remove messages containg the Deleted flag in the currently selected mailbox.<P CLASS="Element10">
+ONCommandEXPUNGE returns an untagged response to the client for each message removed from the mailbox.<P CLASS="Element10">
+Use <A HREF="007413.html#0004" CLASS="Element59">OnCommandCLOSE</A> to remove deleted messages without notification when the mailbox is closed.<P CLASS="Element10">
+Use <A HREF="007413.html#0013" CLASS="Element59">ONCommandSELECT</A> or ONCommandEXAMINE to open a mailbox in a specific read or write mode. Use <A HREF="007413.html#000E" CLASS="Element59">ONCommandLOGOUT</A> to implicitly close the selected mailbox and ignore deleted messages.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="000B">TIdIMAP4Server.ONCommandFETCH</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007413.html" CLASS="Element59">TIdIMAP4Server</A>, <A HREF="011764.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Event handler for the IMAP4 FETCH command.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> ONCommandFETCH: <A HREF="007150.html" CLASS="Element59">TCommandEvent</A>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+CmdStr</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Command parameters for the event.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+Handled</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Indicates the command has been handled in the event handler.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+Tag</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Tag identifier for the command.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+Thread</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Client thread for the event notification.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+ONCommandFETCH is a <A HREF="007150.html" CLASS="Element59">TCommandEvent</A> property that represents the event handler triggered when a client issues the IMAP4 FETCH command. ONCommandFETCH allows the server to perform processing required to retrieve data associated with a message set in the currently selected mailbox. CmdStr contains a message number or range, and the message data items to be fetched from the server mail store.<P CLASS="Element10">
+Message data items can contain one or more of the following:<P CLASS="Element10">
+<UL>
+<LI>ALL - Equivalent to (FLAGS INTERNALDATE RFC822.SIZE ENVELOPE).<P CLASS="Element10">
+<LI>BODY - Non-extensible form of BODYSTRUCTURE.<P CLASS="Element10">
+<LI>BODY[&lt;section&gt;]&lt;offset.count&gt; - The text of a particular body section.<P CLASS="Element10">
+<LI>BODY.PEEK[&lt;section&gt;]&lt;offset.count&gt; - An alternate form of BODY that does not set the Seen flag.<P CLASS="Element10">
+<LI>BODYSTRUCTURE - Structure of the message body indicated in the message headers.<P CLASS="Element10">
+<LI>ENVELOPE - Envelope structure of the message indicated in the message headers. (Uses default field values).<P CLASS="Element10">
+<LI>FAST - Equivalent to (FLAGS INTERNALDATE RFC822.SIZE).<P CLASS="Element10">
+<LI>FLAGS - Flags that are set for this message.<P CLASS="Element10">
+<LI>FULL - Equivalent to (FLAGS INTERNALDATE RFC822.SIZE ENVELOPE BODY).<P CLASS="Element10">
+<LI>INTERNALDATE - The internal date of the message.<P CLASS="Element10">
+<LI>RFC822 - Equivalent to BODY[], but differing in the syntax of the untagged responses using RFC822.<P CLASS="Element10">
+<LI>RFC822.HEADER - Equivalent to BODY.PEEK[HEADER], but differing in the syntax of the untagged responses using RFC822.HEADER.<P CLASS="Element10">
+<LI>RFC822.SIZE - The RFC-822 size of the message.<P CLASS="Element10">
+<LI>RFC822.TEXT - Equivalent to BODY[TEXT], but differing in the syntax of the untagged responses using RFC822.TEXT.<P CLASS="Element10">
+<LI>UID - The unique identifier for the message.</UL>
+</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="000C">TIdIMAP4Server.ONCommandLIST</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007413.html" CLASS="Element59">TIdIMAP4Server</A>, <A HREF="011765.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Event handler for the IMAP4 LIST command.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> ONCommandLIST: <A HREF="007150.html" CLASS="Element59">TCommandEvent</A>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+CmdStr</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Command parameters for the event.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+Handled</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Indicates the command has been handled in the event handler.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+Tag</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Tag identifier for the command.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+Thread</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Client thread for the event notification.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+ONCommandLIST is a <A HREF="007150.html" CLASS="Element59">TCommandEvent</A> property that represents the event handler triggered when the client issues an IMAP4 LIST command. ONCommandLIST allows the server to perform processing required to prepare a list of mailbox names available to the client connection.<P CLASS="Element10">
+CmdStr contains an optional reference name and a mailbox specifier that identify the subset of mailbox names to be returned in the listing. CMdStr may contain the wildcard characters &quot;*&quot; and &quot;%&quot;. The Server implementation can hide mailboxes with reserved or special names from wildcard searches.<P CLASS="Element10">
+The special name &quot;INBOX&quot; is included in the output from LIST, if &quot;INBOX&quot; is supported on the server for this user, and can be included based on the reference and mailbox name arguments.<P CLASS="Element10">
+ONCommandLIST must prepare zero or more untagged responses containing the name attributes, hierarchy delimiter, and mailbox name as defined in the IMAP4 LIST Command. Responses should be returned quickly, and with a minimum of processing.<P CLASS="Element10">
+Use <A HREF="007413.html#0013" CLASS="Element59">ONCommandSELECT</A> or ONCommandEXAMINE to open a mailbox using read/write or read-only access permissions.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="000D">TIdIMAP4Server.ONCommandLOGIN</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007413.html" CLASS="Element59">TIdIMAP4Server</A>, <A HREF="011766.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Event handler for the IMAP4 LOGIN command.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> ONCommandLOGIN: <A HREF="007150.html" CLASS="Element59">TCommandEvent</A>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+CmdStr</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Command parameters for the event.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+Handled</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Indicates the command has been handled in the event handler.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+Tag</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Tag identifier for the command.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+Thread</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Client thread for the event notification.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+ONCommandLOGIN is a <A HREF="007150.html" CLASS="Element59">TCommandEvent</A> property that represents the event handler triggered when a client issues the IMAP4 LOGIN command. ONCommandLOGIN allows the server to perform processing required to identify and authenticate the client connection using the user name and password values in CmdStr.<P CLASS="Element10">
+When using ONCommandLOGIN, the passsword for the LOGIN command is sent in the clear. Use <A HREF="007413.html#0001" CLASS="Element59">ONCommandAUTHENTICATE</A> to process cliednt identification and authentication using secure mechanisms.<P CLASS="Element10">
+The Server should <A HREF="006944.html" CLASS="Element59">send</A> an error message for a failed LOGIN attempt where the password is invalid, but should not specifiy that a user name is incorrect.<P CLASS="Element10">
+The Server implementations may allow non-authenticated access to certain mailboxes. The convention is to use a LOGIN command with the userid &quot;anonymous&quot;. A password is required. It is implementation- dependent what requirements, if any, are placed on the password and what access restrictions are placed on anonymous users.<P CLASS="Element10">
+Once authenticated (including as anonymous), it is not possible to re-enter a non-authenticated state.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="000E">TIdIMAP4Server.ONCommandLOGOUT</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007413.html" CLASS="Element59">TIdIMAP4Server</A>, <A HREF="011767.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Event handler for the IMAP4 LOGOUT command.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> ONCommandLOGOUT: <A HREF="007150.html" CLASS="Element59">TCommandEvent</A>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+CmdStr</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Command parameters for the event.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+Handled</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Indicates the command has been handled in the event handler.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+Tag</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Tag identifier for the command.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+Thread</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Client thread for the event notification.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+ONCommandLOGOUT is a <A HREF="007150.html" CLASS="Element59">TCommandEvent</A> property that represents the event handler triggered when a client issues the IMAP4 LOGOUT command. ONCommandLOGOUT allows the server to perform processing required to close the client connection.<P CLASS="Element10">
+The Server must <A HREF="006944.html" CLASS="Element59">send</A> an untagged BYE response before the tagged OK response using the client connection in Thread. The IMAP4 state for the client is set to LOGOUT prior to sending responses and closing the physical connection. <STRONG>Note</STRONG>: The client connection cannot re-enter a non-authenticated state after LOGOUT.<P CLASS="Element10">
+Use <A HREF="007413.html#000D" CLASS="Element59">ONCommandLOGIN</A> or <A HREF="007413.html#0001" CLASS="Element59">ONCommandAUTHENTICATE</A> to identify and authenticate a client connection to the Server.<P CLASS="Element10">
+Use <A HREF="007413.html#0013" CLASS="Element59">ONCommandSELECT</A> or ONCommandEXAMINE to open a mailbox after authentication.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="000F">TIdIMAP4Server.OnCommandLSUB</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007413.html" CLASS="Element59">TIdIMAP4Server</A>, <A HREF="011768.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Event handler for the IMAP4 LSUB command.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> OnCommandLSUB: <A HREF="007150.html" CLASS="Element59">TCommandEvent</A>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+CmdStr</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Command parameters for the event.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+Handled</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Indicates the command has been handled in the event handler.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+Tag</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Tag identifier for the command.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+Thread</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Client thread for the event notification.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+OnCommandLSUB is a <A HREF="007150.html" CLASS="Element59">TCommandEvent</A> property that represents the event handler triggered when a client issues the IMPAP4 LSUB command. OnCommandLSUB allows the server to perform processing required to build a response containing a list of active or subscribed mailboxes for the user account. OnCommandLSUB uses the arguments in CmdStr to identify the reference name and mailbox specifier for the subscribed list.<P CLASS="Element10">
+The server may validate subscribed names to see if the mailbox still exists. When it no longer exists, it should be flagged with the NoSelect attribute in the untagged response. The server should not unilaterally remove a mailbox name from the subscription list even if the mailbox no longer exists.<P CLASS="Element10">
+<STRONG>Note</STRONG>: The server can maintain the subscription list for well-known mailbox names, like &quot;system-alerts&quot;, where the server implementation removes the mailbox when the contents expire.<P CLASS="Element10">
+Responses for the LSUB command are written in the same format as the responses for the LIST command.<P CLASS="Element10">
+Use <A HREF="007413.html#0016" CLASS="Element59">ONCommandSUBSCRIBE</A> to add a mailbox name to the subscribed list. Use <A HREF="007413.html#0018" CLASS="Element59">ONCommandUNSUBSCRIBE</A> to remove a mailbox name from the subscribed list.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0010">TIdIMAP4Server.ONCommandNOOP</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007413.html" CLASS="Element59">TIdIMAP4Server</A>, <A HREF="011769.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Event handler for the IMAP4 NOOP command.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> ONCommandNOOP: <A HREF="007150.html" CLASS="Element59">TCommandEvent</A>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+CmdStr</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Command parameters for the event.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+Handled</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Indicates the command has been handled in the event handler.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+Tag</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Tag identifier for the command.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+Thread</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Client thread for the event notification.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+ONCommandNOOP is a <A HREF="007150.html" CLASS="Element59">TCommandEvent</A> property that represents the event handler triggered when a client issues the IMAP4 NOOP command. ONCommandNOOP allows the server to respond to period polling for new messasges or message status updates during a period of inactivity. ONCommandNOOP can also be used to reset the inactivity logout timer on the server, when it is used in the server implementation.<P CLASS="Element10">
+ONCommandNOOP will always succeed, and should set Handled to True. ONCommandNOOP should generate the untagged responses required to indicate the current mailbox state.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0011">TIdIMAP4Server.OnCommandRENAME</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007413.html" CLASS="Element59">TIdIMAP4Server</A>, <A HREF="011770.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Event handler for the IMAP4 RENAME command.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> OnCommandRENAME: <A HREF="007150.html" CLASS="Element59">TCommandEvent</A>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+CmdStr</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Command parameters for the event.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+Handled</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Indicates the command has been handled in the event handler.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+Tag</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Tag identifier for the command.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+Thread</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Client thread for the event notification.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+OnCommandRENAME is a <A HREF="007150.html" CLASS="Element59">TCommandEvent</A> property that represents the event handler triggered when a client issues the IMAP4 RENAME command. OnCommandRENAME allows the server to perform processing required to change the name of an existing mailbox using the arguments supplied in CmdStr. The first argument is the existing mailbox name. The second argument is the desired name for the mailbox.<P CLASS="Element10">
+The server should generate an error response when trying to rename a mailbox that does not exist, or trying to rename a mailbox to a name that does already exist. If the mailbox name includes inferior hierarchical names, then the inferior hierarchical names must also be renamed.<P CLASS="Element10">
+When removing a mailbox, the server must retain the highest used unique identifier of the old mailbox to avoid errors when recreating a mailbox with the same name.<P CLASS="Element10">
+Renaming the &quot;INBOX&quot; mailbox is permitted, and has special behavior. It moves all messages in &quot;INBOX&quot; to a new mailbox with the specified name, leaving &quot;INBOX&quot; empty. If the server implementation supports inferior hierarchical names on &quot;INBOX&quot;, they are no affected by renaming &quot;INBOX&quot;.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0012">TIdIMAP4Server.OnCommandSEARCH</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007413.html" CLASS="Element59">TIdIMAP4Server</A>, <A HREF="011771.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Event handler for the IMAP4 SEARCH command.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> OnCommandSEARCH: <A HREF="007150.html" CLASS="Element59">TCommandEvent</A>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+CmdStr</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Command parameters for the event.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+Handled</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Indicates the command has been handled in the event handler.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+Tag</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Tag identifier for the command.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+Thread</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Client thread for the event notification.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+OnCommandSEARCH is a <A HREF="007150.html" CLASS="Element59">TCommandEvent</A> property that represents the event handler triggered when a client issues the IMAP4 SEARCH command. OnCommandSEARCH allows the server to perform processing required to search a selected mailbox for messages that match the search criteria specified in CmdStr. CmdStr will contain one or more search keys that identify the search fields or values.<P CLASS="Element10">
+<STRONG>Note</STRONG>: Describing all of the IMAP4 search keys and their usage is beyond the scope of this document. Please refer to RFC 2060 for more detailed information on the SEARCH command.<P CLASS="Element10">
+OnCommandSEARCH will generate an untagged response that contains a list of message numbers that match the search criteria.<P CLASS="Element10">
+The Server implementation may exclude body parts with content media types other than &quot;text&quot; and &quot;message&quot; from the search.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0013">TIdIMAP4Server.ONCommandSELECT</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007413.html" CLASS="Element59">TIdIMAP4Server</A>, <A HREF="011772.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Event handler for the IMAP4 SELECT command.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> ONCommandSELECT: <A HREF="007150.html" CLASS="Element59">TCommandEvent</A>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+CmdStr</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Command parameters for the event.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+Handled</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Indicates the command has been handled in the event handler.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+Tag</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Tag identifier for the command.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+Thread</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Client thread for the event notification.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+ONCommandSELECT is a <A HREF="007150.html" CLASS="Element59">TCommandEvent</A> property that represents the event handler triggered when a client issues the IMAP4 SELECT command. ONCommandSELECT allows the server to perform processing required to open the mailbox name specified in CmdStr to allow access to the messages. ONCommandSELECT must generate the following untagged responses to define the initial state of the mailbox at the client prior to sending the &quot;OK&quot; response:<P CLASS="Element10">
+<UL>
+<LI>FLAGS - Flags defined flags in the mailbox.<P CLASS="Element10">
+<LI>&lt;n&gt; EXISTS - Number of messages in the mailbox.<P CLASS="Element10">
+<LI>&lt;n&gt; RECENT - Number of messages with the Recent flag set.<P CLASS="Element10">
+<LI>OK [UIDVALIDITY &lt;n&gt;] - Unique identifier validity value.<P CLASS="Element10">
+<LI>OK [UNSEEN &lt;n&gt;] - First unread messasge number.<P CLASS="Element10">
+<LI>OK [PERMANENTFLAGS (&lt;flaglist&gt;)] - Flags that cannot be changed for the mailbox.</UL>
+<P CLASS="Element10">
+The server can selected only one mailbox at a time for the client connection. Simultaneous access to multiple mailboxes requires multiple client connections.<P CLASS="Element10">
+ONCommandSELECT should automatically deselect any currently selected mailbox before attempting the new selection. If a SELECT command fails, then no mailbox will be selected.<P CLASS="Element10">
+If the client is permitted to modify the mailbox, the server should prefix the text of the tagged OK response with the &quot;[READ-WRITE]&quot; response code.<P CLASS="Element10">
+If the client is not permitted to modify the mailbox, the mailbox is selected as read-only. The server must prefix the text of the tagged OK response with the &quot;[READ-ONLY]&quot; response code.<P CLASS="Element10">
+Use ONCommandEXAMINE to open a mailbox with read-only access regardless of user permissions.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0014">TIdIMAP4Server.ONCommandSTATUS</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007413.html" CLASS="Element59">TIdIMAP4Server</A>, <A HREF="011773.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Event handler for the IMAP4 STATUS command.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> ONCommandSTATUS: <A HREF="007150.html" CLASS="Element59">TCommandEvent</A>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+CmdStr</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Command parameters for the event.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+Handled</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Indicates the command has been handled in the event handler.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+Tag</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Tag identifier for the command.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+Thread</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Client thread for the event notification.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+ONCommandSTATUS is a <A HREF="007150.html" CLASS="Element59">TCommandEvent</A> property that represents the event handler triggered when a client issues the IMAP4 STATUS command. ONCommandSTATUS allows the server to perform processing needed to indicate the status of the mailbox and data items specified in CmdStr. ONCommandSTATUS should not cause the status or flags for the current mailbox, or any message in the mailbox, to be altered. ONCommandSTATUS is used as an alternative to opening a second connection to a mailbox using ONCommandEXAMINE when checking status information.<P CLASS="Element10">
+Unlike <A HREF="007413.html#000C" CLASS="Element59">ONCommandLIST</A>, ONCommandSTATUS may require more time to open a mail messages and extract flags and field values. ONCommandSTATUS differs from <A HREF="007413.html#000C" CLASS="Element59">ONCommandLIST</A> in that wildcardds are not permitted in the mailbox name in CmdStr.<P CLASS="Element10">
+ONCommandSTATUS must be able to locate and extract the following status data items:<P CLASS="Element10">
+<UL>
+<LI>MESSAGES - Number of messages in the mailbox.<P CLASS="Element10">
+<LI>RECENT - Number of messages with the Recent flag set.<P CLASS="Element10">
+<LI>UIDNEXT - Next UID value for new messages in the mailbox.<P CLASS="Element10">
+<LI>UIDVALIDITY - Unique identifier validity value of the mailbox.<P CLASS="Element10">
+<LI>UNSEEN - Number of messages which do not have the Seen flag set. </I></UL>
+</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0015">TIdIMAP4Server.OnCommandSTORE</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007413.html" CLASS="Element59">TIdIMAP4Server</A>, <A HREF="011774.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Event handler for the IMAP4 STORE command.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> OnCommandSTORE: <A HREF="007150.html" CLASS="Element59">TCommandEvent</A>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+CmdStr</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Command parameters for the event.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+Handled</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Indicates the command has been handled in the event handler.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+Tag</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Tag identifier for the command.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+Thread</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Client thread for the event notification.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+OnCommandSTORE is a <A HREF="007150.html" CLASS="Element59">TCommandEvent</A> property that represents the event handler triggered when a client issues the IMAP4 STORE command. OnCommandSTORE allows the server to perform processing required to store message data for the message set and data items specified in CmdStr in the currently selected mailbox.<P CLASS="Element10">
+OnCommandSTORE can return updated values with an untagged FETCH response unless the data items contain the &quot;.SILENT&quot; suffix. The server should assume that the client is not interested in the updated value. <STRONG>Note</STRONG>: Even when a data item suffix contains &quot;.SILENT&quot;, the server should <A HREF="006944.html" CLASS="Element59">send</A> an untagged FETCH response if a message flag is changed by an external source.<P CLASS="Element10">
+Message data items can contain the following values and associated meanings:<P CLASS="Element10">
+<UL>
+<LI>FLAGS &lt;flag list&gt; - Sets message flags to the indicated values.<P CLASS="Element10">
+<LI>FLAGS.SILENT &lt;flag list&gt; - Sets message flags to the indicated values. No FETCH response.<P CLASS="Element10">
+<LI>+FLAGS &lt;flag list&gt; - Add the specified flags to the message.<P CLASS="Element10">
+<LI>+FLAGS.SILENT &lt;flag list&gt; - Add the specified flags to the message. No FETCH response.<P CLASS="Element10">
+<LI>-FLAGS &lt;flag list&gt; - Remove the specified flags from the message.<P CLASS="Element10">
+<LI>-FLAGS.SILENT &lt;flag list&gt; - Remove the specified flags from the message. No FETCH response.</UL>
+</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0016">TIdIMAP4Server.ONCommandSUBSCRIBE</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007413.html" CLASS="Element59">TIdIMAP4Server</A>, <A HREF="011775.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Event handler for the IMAP4 SUBSCRIBE command.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> ONCommandSUBSCRIBE: <A HREF="007150.html" CLASS="Element59">TCommandEvent</A>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+CmdStr</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Command parameters for the event.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+Handled</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Indicates the command has been handled in the event handler.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+Tag</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Tag identifier for the command.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+Thread</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Client thread for the event notification.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+ONCommandSUBSCRIBE is a <A HREF="007150.html" CLASS="Element59">TCommandEvent</A> property that represents the the event handler triggered when a client issues the IMAP4 SUBSCRIBE command. ONCommandSUBSCRIBE allows the server to perform processing required to add the mailbox name specified in CmdStr to the list of subscribed mailboxes for the client connection.<P CLASS="Element10">
+ONCommandSUBSCRIBE can perform validation to insure that CmdStr contains a valid mailbox name. It cannot, however, remove an exisiting mailbox name from the subscribed list if it no longer exists.<P CLASS="Element10">
+Use ONCommandLSUB to retrieve the current list of subscribed mailboxes for the client. Use ONCOmmandUNSUBSCRIBE to remove a mailbox from the subscribed list.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0017">TIdIMAP4Server.ONCommandUID</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007413.html" CLASS="Element59">TIdIMAP4Server</A>, <A HREF="011776.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Event handler for the IMAP4 UID command.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> ONCommandUID: <A HREF="007150.html" CLASS="Element59">TCommandEvent</A>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+ONCommandUID is a <A HREF="007150.html" CLASS="Element59">TCommandEvent</A> property that represents the event handler triggered when a client issues the IMAP4 UID command. ONCommandUID allows the server to perform processing required to retrieve, store, or locate data for messages using the arguments specified in CmdStr.<P CLASS="Element10">
+ONCommandUID must be able to handle arguments in CmdStr that include a command name, a message set, and a flag list. The commands that appear in CmdStr include:<P CLASS="Element10">
+<UL>
+<LI>COPY - Executes an IMAP4 COPY using uniqueness identifiers instead of message numbers.<P CLASS="Element10">
+<LI>FETCH - Retrieves specified arguments using uniqueness identifiers instead of message numbers.<P CLASS="Element10">
+<LI>STORE - Stores message data using uniqueness identifiers instead of message numbers.<P CLASS="Element10">
+<LI>SEARCH - Performs an IMAP4 search returning uniqueness identifiers instead of message numbers.</UL>
+</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0018">TIdIMAP4Server.ONCommandUNSUBSCRIBE</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007413.html" CLASS="Element59">TIdIMAP4Server</A>, <A HREF="011777.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Event handler for the IMAP4 UNSUBSCRIBE command.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> ONCommandUNSUBSCRIBE: <A HREF="007150.html" CLASS="Element59">TCommandEvent</A>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+CmdStr</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Command parameters for the event.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+Handled</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Indicates the command has been handled in the event handler.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+Tag</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Tag identifier for the command.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+Thread</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Client thread for the event notification.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+ONCommandUNSUBSCRIBE is a <A HREF="007150.html" CLASS="Element59">TCommandEvent</A> property that represents the the event handler triggered when a client issues the IMAP4 UNSUBSCRIBE command. ONCommandUNSUBSCRIBE allows the server to perform processing required to remove the mailbox name specified in CmdStr from the list of subscribed mailboxes for the client connection.<P CLASS="Element10">
+Use ONCommandLSUB to retrieve the current list of subscribed mailboxes for the client. Use ONCOmmandSUBSCRIBE to add a mailbox to the subscribed list.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0019">TIdIMAP4Server.OnCommandX</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007413.html" CLASS="Element59">TIdIMAP4Server</A>, <A HREF="011778.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Event handler for the IMAP4 extended command.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> OnCommandX: <A HREF="007150.html" CLASS="Element59">TCommandEvent</A>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+CmdStr</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Command parameters for the event.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+Handled</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Indicates the command has been handled in the event handler.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+Tag</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Tag identifier for the command.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+Thread</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Client thread for the event notification.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+OnCommandX is a <A HREF="007150.html" CLASS="Element59">TCommandEvent</A> property that represents the event handler triggered when the client issues an IMAP4 extended command where the command verb is prefixed with the letter &quot;X&quot;. OnCommandX allows a server-specific implementation of experimental extensions to the IMAP4 protocol.<P CLASS="Element10">
+CmdStr will contain any parameter values to be used in the implementation.<P CLASS="Element10">
+<STRONG>Note</STRONG>: The server implementation must assign a procedure to the event handler to allow responding to the event notification.</DIV>
+</DIV>
+<DIV CLASS="Element62">
+<HR>Created with Doc-O-Matic 2 donated to <STRONG><A HREF="http://www.delphi-jedi.org">Project JEDI</A></STRONG>. Commercial license available from the <STRONG><A HREF="http://www.doc-o-matic.com">Doc-O-Matic site</A></STRONG>.</DIV>
+</DIV></BODY></HTML>

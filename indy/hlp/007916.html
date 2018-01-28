@@ -1,0 +1,65 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+<TITLE>TIPMCastReadEvent</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <META name="GENERATOR" content="Doc-O-Matic">
+    <LINK rel="STYLESHEET" href="default.css" type="text/css">
+
+<SCRIPT LANGUAGE="JavaScript1.2" SRC="scripts.js"></SCRIPT>
+</HEAD>
+<BODY CLASS="Element57">
+<TABLE BORDER="0" BGCOLOR="#AACCFF" WIDTH="100%" CELLSPACING="0" CELLPADDING="0">
+<TR><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element1">
+Indy 9</DIV>
+</TD><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element2">
+<A HREF="content.html" CLASS="Element59">Content</A> | <A HREF="idx.html" CLASS="Element59">Index</A> | <A HREF="symref.html" CLASS="Element59">Reference</A></DIV>
+</TD></TR></TABLE><DIV CLASS="Element58">
+<DIV CLASS="Element5">
+TIPMCastReadEvent</DIV>
+<DIV CLASS="Element7">
+<A HREF="015507.html" CLASS="Element59">See Also</A>, <A HREF="002268.html" CLASS="Element59">Unit: IdIPMCastClient</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Event type signalled to allow reading an incoming datagram for a multicast client.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12">TIPMCastReadEvent = <STRONG>procedure</STRONG> (Sender: TObject; AData: TStream; ABinding: <A HREF="007713.html" CLASS="Element59">TIdSocketHandle</A>) <STRONG>of</STRONG> <STRONG>object</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Unit</DIV>
+<DIV CLASS="Element69">
+<A HREF="002268.html" CLASS="Element59">IdIPMCastClient</A></DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+ABinding</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Listener thread <A HREF="007071.html" CLASS="Element59">socket</A> handle for the event.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+AData</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Destination stream for the incoming data.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+Sender</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Client for the event notification.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+TIPMCastReadEvent is an event type signalled when an incoming datagram is available on the listener thread <A HREF="007071.html" CLASS="Element59">socket</A> handle for a <A HREF="007433.html" CLASS="Element59">TIdIPMCastClient</A> instance. TIPMCastReadEvent allows the listener thread to notify the <A HREF="007433.html" CLASS="Element59">TIdIPMCastClient</A> instance of the incoming data packet, and allow use of the event handler to read data into a stream.<P CLASS="Element10">
+TIPMCastReadEvent is the type used to represent the <A HREF="007433.html#0007" CLASS="Element59">TIdIPMCastClient.OnIPMCastRead</A> property. Applications should assign a procedure to the event handler to allow responding to the event notifcation.</DIV>
+</DIV>
+<DIV CLASS="Element62">
+<HR>Created with Doc-O-Matic 2 donated to <STRONG><A HREF="http://www.delphi-jedi.org">Project JEDI</A></STRONG>. Commercial license available from the <STRONG><A HREF="http://www.doc-o-matic.com">Doc-O-Matic site</A></STRONG>.</DIV>
+</DIV></BODY></HTML>

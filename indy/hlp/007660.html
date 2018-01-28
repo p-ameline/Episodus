@@ -1,0 +1,77 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+<TITLE>TIdRexecCommandEvent</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <META name="GENERATOR" content="Doc-O-Matic">
+    <LINK rel="STYLESHEET" href="default.css" type="text/css">
+
+<SCRIPT LANGUAGE="JavaScript1.2" SRC="scripts.js"></SCRIPT>
+</HEAD>
+<BODY CLASS="Element57">
+<TABLE BORDER="0" BGCOLOR="#AACCFF" WIDTH="100%" CELLSPACING="0" CELLPADDING="0">
+<TR><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element1">
+Indy 9</DIV>
+</TD><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element2">
+<A HREF="content.html" CLASS="Element59">Content</A> | <A HREF="idx.html" CLASS="Element59">Index</A> | <A HREF="symref.html" CLASS="Element59">Reference</A></DIV>
+</TD></TR></TABLE><DIV CLASS="Element58">
+<DIV CLASS="Element5">
+TIdRexecCommandEvent</DIV>
+<DIV CLASS="Element7">
+<A HREF="015495.html" CLASS="Element59">See Also</A>, <A HREF="002804.html" CLASS="Element59">Unit: IdRexecServer</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Event type signalled to perform authentication and execution of the RExec session.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12">TIdRexecCommandEvent = <STRONG>procedure</STRONG> (AThread: <A HREF="007613.html" CLASS="Element59">TIdPeerThread</A>; AStdError : <A HREF="007827.html" CLASS="Element59">TIdTCPClient</A>; AUserName, APassword, ACommand : <STRONG>String</STRONG>) <STRONG>of</STRONG> <STRONG>object</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Unit</DIV>
+<DIV CLASS="Element69">
+<A HREF="002804.html" CLASS="Element59">IdRexecServer</A></DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+ACommand</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Command to be performed in the RExec session.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+APassword</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Authentication credentials for the client connection.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+AStdError</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Connection used for redirecting output to the client.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+AThread</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Client connection for the event notification.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+AUserName</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Authentication identity for the client connection.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+TIdRexecCommandEvent is an event type signalled when a threaded client connection for <A HREF="007661.html" CLASS="Element59">TIdRexecServer</A> needs to authenticate and execute a command from the client connection.<P CLASS="Element10">
+TIdRexecCommandEvent is the event type signalled to the <A HREF="007661.html#0002" CLASS="Element59">TIdRexecServer.OnCommand</A> event handler during execution of the thread for the client connection. Applications must assign a procedure to the event handler to allow responding to the event notification.</DIV>
+</DIV>
+<DIV CLASS="Element62">
+<HR>Created with Doc-O-Matic 2 donated to <STRONG><A HREF="http://www.delphi-jedi.org">Project JEDI</A></STRONG>. Commercial license available from the <STRONG><A HREF="http://www.doc-o-matic.com">Doc-O-Matic site</A></STRONG>.</DIV>
+</DIV></BODY></HTML>

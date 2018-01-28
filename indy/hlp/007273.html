@@ -1,0 +1,417 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+<TITLE>TIdCustomThreadComponent</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <META name="GENERATOR" content="Doc-O-Matic">
+    <LINK rel="STYLESHEET" href="default.css" type="text/css">
+
+<SCRIPT LANGUAGE="JavaScript1.2" SRC="scripts.js"></SCRIPT>
+</HEAD>
+<BODY CLASS="Element57">
+<TABLE BORDER="0" BGCOLOR="#AACCFF" WIDTH="100%" CELLSPACING="0" CELLPADDING="0">
+<TR><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element1">
+Indy 9</DIV>
+</TD><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element2">
+<A HREF="content.html" CLASS="Element59">Content</A> | <A HREF="idx.html" CLASS="Element59">Index</A> | <A HREF="symref.html" CLASS="Element59">Reference</A></DIV>
+</TD></TR></TABLE><DIV CLASS="Element58">
+<DIV CLASS="Element5">
+TIdCustomThreadComponent</DIV>
+<DIV CLASS="Element7">
+<A HREF="010408.html" CLASS="Element59">Hierarchy</A>, <A HREF="010409.html" CLASS="Element59">Properties</A>, <A HREF="010410.html" CLASS="Element59">Methods</A>, <A HREF="010411.html" CLASS="Element59">See Also</A>, <A HREF="002924.html" CLASS="Element59">Unit: IdThreadComponent</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Ancestor for visual components that implement threaded execution at runtime.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12">TIdCustomThreadComponent = <STRONG>class</STRONG>(<A HREF="007213.html" CLASS="Element59">TIdBaseComponent</A>)</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Unit</DIV>
+<DIV CLASS="Element69">
+<A HREF="002924.html" CLASS="Element59">IdThreadComponent</A></DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+TIdCustomThreadComponent is a <A HREF="007213.html" CLASS="Element59">TIdBaseComponent</A> descendant that is the ancestor class for Indy components that use a <A HREF="007846.html" CLASS="Element59">TIdThread</A> instance internally during execution. TIdCustomThreadComponent exposes properties, methods, and event handlers that are used to access the underlying protected <A HREF="007846.html" CLASS="Element59">TIdThread</A> instance, including:<P CLASS="Element10">
+<UL>
+<LI>Active<P CLASS="Element10">
+<LI>Priority<P CLASS="Element10">
+<LI>StopMode<P CLASS="Element10">
+<LI>OnAfterExecute<P CLASS="Element10">
+<LI>OnAfterRun<P CLASS="Element10">
+<LI>OnBeforeExecute<P CLASS="Element10">
+<LI>OnBeforeRun<P CLASS="Element10">
+<LI>OnCleanup<P CLASS="Element10">
+<LI>OnException<P CLASS="Element10">
+<LI>OnRun<P CLASS="Element10">
+<LI>OnStopped<P CLASS="Element10">
+<LI>OnTerminate<P CLASS="Element10">
+<LI><A HREF="007273.html#0005" CLASS="Element59">Start</A><P CLASS="Element10">
+<LI><A HREF="007273.html#0006" CLASS="Element59">Stop</A><P CLASS="Element10">
+<LI><A HREF="007273.html#0009" CLASS="Element59">Synchronize</A><P CLASS="Element10">
+<LI><A HREF="007274.html" CLASS="Element59">SynchronizeEx</A><P CLASS="Element10">
+<LI><A HREF="007273.html#0000" CLASS="Element59">Terminate</A><P CLASS="Element10">
+<LI><A HREF="007273.html#0001" CLASS="Element59">TerminateAndWaitFor</A><P CLASS="Element10">
+<LI><A HREF="007273.html#0005" CLASS="Element59">WaitFor</A><P CLASS="Element10">
+<LI><A HREF="007273.html#0004" CLASS="Element59">ReturnValue</A><P CLASS="Element10">
+<LI><A HREF="007273.html#0007" CLASS="Element59">Stopped</A><P CLASS="Element10">
+<LI><A HREF="007273.html#0008" CLASS="Element59">Suspended</A><P CLASS="Element10">
+<LI><A HREF="007273.html#0002" CLASS="Element59">Terminated</A></UL>
+<P CLASS="Element10">
+TIdCustomThreadComponent allows creation of visual components that can manipulate properties and events handlers in the object inspector at design-time. When the thread becomes Active at runtime, the event handlers for the thread are synchronized to the VCL thread for the component instance.<P CLASS="Element10">
+<STRONG>Note</STRONG>: Some methods in TIdCustomThreadComponent are declared as virtual. Applications should not create instances of TIdCustomThreadComponent. <A HREF="007273.html#0000" CLASS="Element59">Create</A> instance of a descendant class that implement the virtual methods in the component.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0001">TIdCustomThreadComponent.Data</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007273.html" CLASS="Element59">TIdCustomThreadComponent</A>, <A HREF="010412.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Provides object data for the internal thread of execution.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> Data: TObject;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Data is a TObject property used to provide optional values to the internal thread used in executing the threaded component object. Read and Write access to the Data property is delegated to Data property in the underlying <A HREF="007846.html" CLASS="Element59">TIdThread</A> instance.<P CLASS="Element10">
+<STRONG>Note</STRONG>: Data is not maintained in either <A HREF="007273.html#0000" CLASS="Element59">Create</A> or <A HREF="007273.html#0002" CLASS="Element59">Destroy</A>. Applications must allocate and free the TObject descendant used in the Data property.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0003">TIdCustomThreadComponent.Handle</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007273.html" CLASS="Element59">TIdCustomThreadComponent</A>, <A HREF="010413.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Provides access to the thread handle for the component.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> Handle: <A HREF="007182.html" CLASS="Element59">THandle</A>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Handle is a read-only <A HREF="007182.html" CLASS="Element59">THandle</A> property that provides access to the handle allocated to the internal thread used in the thread component object. Read access to Handle calls the <A HREF="000667.html" CLASS="Element59">GetThreadHandle</A> function for the internal thread instance. Handle can be used when called platform-specific APIs that require a thread handle for thread manipulation.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0004">TIdCustomThreadComponent.ReturnValue</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007273.html" CLASS="Element59">TIdCustomThreadComponent</A>, <A HREF="010414.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Represents the return value for the completed thread of execution.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> ReturnValue: Integer;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+ReturnValue is a public Integer property that represents the value returned when the internal thread of execution is completed or the threaded component object. ReturnValue indicates success, failure, or the simple numeric result for the thread. Read and write access for ReturnValue is delegated to the underlying thread instance.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0007">TIdCustomThreadComponent.Stopped</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007273.html" CLASS="Element59">TIdCustomThreadComponent</A>, <A HREF="010415.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Indicates the thread for the component has been halted.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> Stopped: Boolean;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Stopped is a read-only Boolean property that indicates if the internal thread for the component has been asked to halt execution. Stopped read its value from the underlying thread instance used in the implementation of the thread component object. Stopped is also used in determining the value for the Active property when the IDE is not running. Active will be True when Stopped contains False.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0008">TIdCustomThreadComponent.Suspended</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007273.html" CLASS="Element59">TIdCustomThreadComponent</A>, <A HREF="010416.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Indicates if the thread has been interrupted, but not stopped or terminated.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> Suspended: Boolean;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Suspended is a read-only Boolean property that indicates if the Suspend property for the internal thread has been set to True. The Suspended thread can continue execution when Resume is called.<P CLASS="Element10">
+Check <A HREF="007273.html#0007" CLASS="Element59">Stopped</A> to determine if <A HREF="007273.html#0006" CLASS="Element59">Stop</A> has been called for the internal thread. Check <A HREF="007273.html#0002" CLASS="Element59">Terminated</A> to determine if <A HREF="007273.html#0000" CLASS="Element59">Terminate</A> has been called for the internal thread.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0002">TIdCustomThreadComponent.Terminated</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007273.html" CLASS="Element59">TIdCustomThreadComponent</A>, <A HREF="010417.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Indicates a request to <A HREF="007273.html#0000" CLASS="Element59">Terminate</A> for the internal thread for the component.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> Terminated: Boolean;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Terminated is a read-only Boolean property that indicates when Terminated has been called for the internal thread for the threaded component object. Terminated does not indicate that <A HREF="007273.html#0000" CLASS="Element59">Terminate</A> method has been successfully completed.<P CLASS="Element10">
+Use <A HREF="007273.html#0007" CLASS="Element59">Stopped</A> to determine is the internal thread is still running. Call <A HREF="007273.html#0005" CLASS="Element59">WaitFor</A> to pause until the <A HREF="007273.html#0004" CLASS="Element59">ReturnValue</A> for a terminating thread is set and thread clean up is performed.<P CLASS="Element10">
+Use <A HREF="007273.html#0001" CLASS="Element59">TerminateAndWaitFor</A> to force thread termination and pause until its completion.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0003">TIdCustomThreadComponent.TerminatingException</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007273.html" CLASS="Element59">TIdCustomThreadComponent</A>, <A HREF="010418.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Message from an exception raised during execution of the internal thread.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> TerminatingException: <STRONG>string</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+TerminatingException is a read-only String property that represents the message from an exception raised during execution of the internal thread for the component. Use <A HREF="007273.html#0004" CLASS="Element59">TerminatingExceptionClass</A> to access the class type for the exeception.<P CLASS="Element10">
+Use OnException to perform exception handling for component using a method synchronized to the main application thread.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0004">TIdCustomThreadComponent.TerminatingExceptionClass</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007273.html" CLASS="Element59">TIdCustomThreadComponent</A>, <A HREF="010419.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Class Type for an exception raised during execution of the internal thread.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> TerminatingExceptionClass: TClass;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+TerminatingExceptionClass is a read-only TClass property that represents the class type for an exception raised during execution of the internal thread for the component. Use <A HREF="007273.html#0003" CLASS="Element59">TerminatingException</A> to access the message from the exception.<P CLASS="Element10">
+Use <A HREF="007851.html#0006" CLASS="Element59">TIdThreadComponent.OnException</A> to perform exception handling using a method synchronized to the main application thread of execution.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0000">TIdCustomThreadComponent.Create</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007273.html" CLASS="Element59">TIdCustomThreadComponent</A>, <A HREF="010420.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Constructor for the threaded component object instance.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>constructor</STRONG> Create(AOwner: TComponent); <STRONG>override</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+AOwner: TComponent</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Owner of the object instance.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Create is the constructor for the threaded component object instance. Create calls the inherited Create method using AOwner of the owner of the object instance. Create allocates the internal thread instance used in implementing the threaded component when the ComponentState contains a value other than csDesigning. <STRONG>Note</STRONG>: In other words, the thread instance is not initialized when an instance is created in the IDE.<P CLASS="Element10">
+Create sets the default value for the StopMode property to <A HREF="002926.html" CLASS="Element59">IdThreadComponentDefaultStopMode</A>, and sets Priority to <A HREF="002925.html" CLASS="Element59">IdThreadComponentDefaultPriority</A> prior to exiting from the the method.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0002">TIdCustomThreadComponent.Destroy</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007273.html" CLASS="Element59">TIdCustomThreadComponent</A>, <A HREF="010421.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Frees the object instance.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>destructor</STRONG> Destroy; <STRONG>override</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Destroy is the destructor for the object instance. Destroy frees and release the internal thread instance used in implementing the threaded component. When the thread has been assigned (not in the IDE), Destroy terminates the thread instance and resumes a suspended thread to allow termination to complete. Destroy calls the inherited Destroy method prior to exiting.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0005">TIdCustomThreadComponent.Start</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007273.html" CLASS="Element59">TIdCustomThreadComponent</A>, <A HREF="010422.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Starts or resumes the thread of execution for the component.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>procedure</STRONG> Start; <STRONG>virtual</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Start is a virtual procedure in <A HREF="007273.html" CLASS="Element59">TIdCustomThreadComponent</A> that instructs the internal thread instance for the threaded component object to start or resume execution. Start is called when the value of the Active property is changed from False to True. <STRONG>Note</STRONG>: The internal thread instance is not executed when calling Start and the thread instance is still unassigned (running in the IDE).<P CLASS="Element10">
+Use <A HREF="007273.html#0006" CLASS="Element59">Stop</A> to halt execution of the internal thread for the component.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0006">TIdCustomThreadComponent.Stop</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007273.html" CLASS="Element59">TIdCustomThreadComponent</A>, <A HREF="010423.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Halts execution of the thread for the component.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>procedure</STRONG> Stop; <STRONG>virtual</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Stop is a virtual procedure in <A HREF="007273.html" CLASS="Element59">TIdCustomThreadComponent</A> that halts execution of the internal thread for the threaded component object. Stop is called when the value of the Active property is changed from True to False. <STRONG>Note</STRONG>: The internal thread instance is not halted using Stop when the thread instance is unassigned (in the IDE).</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="000A">TIdCustomThreadComponent.Synchronize</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007273.html" CLASS="Element59">TIdCustomThreadComponent</A>, <A HREF="010424.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Executes a thread or procedural method in the main application thread.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>procedure</STRONG> <A HREF="007273.html#0009" CLASS="Element59">Synchronize</A>(AMethod: TThreadMethod); <STRONG>overload</STRONG>;
+<STRONG>procedure</STRONG> <A HREF="007273.html#0009" CLASS="Element59">Synchronize</A>(AMethod: TMethod); <STRONG>overload</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+AMethod: TThreadMethod</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Thread or procedural method to be executed in the main thread.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Synchronize is an overloaded method in <A HREF="007273.html" CLASS="Element59">TIdCustomThreadComponent</A> that causes the thread or procedural method in AMethod to be executed using the VCL thread for the thread component object. Synchronize is used to avoid conflicts in multi-threaded applications.<P CLASS="Element10">
+Use Synchronize to execute a thread or object method that may not be thread-safe when accessing memory or other resources in the application. Use <A HREF="007274.html" CLASS="Element59">SynchronizeEx</A> to perform thread or procedural methods that required access to the <A HREF="007273.html#0001" CLASS="Element59">Data</A> property or TIdSynchronizeThreadComponentEvent procedures.<P CLASS="Element10">
+<STRONG>Note</STRONG>: The Execution of the thread is suspended while Method is executing in the main VCL thread.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0009">TIdCustomThreadComponent.Synchronize</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007273.html" CLASS="Element59">TIdCustomThreadComponent</A>, <A HREF="010425.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Executes a thread or procedural method in the main application thread.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>procedure</STRONG> Synchronize(AMethod: TThreadMethod); <STRONG>overload</STRONG>;
+<STRONG>procedure</STRONG> Synchronize(AMethod: TMethod); <STRONG>overload</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+AMethod: TThreadMethod</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Thread or procedural method to be executed in the main thread.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Synchronize is an overloaded method in <A HREF="007273.html" CLASS="Element59">TIdCustomThreadComponent</A> that causes the thread or procedural method in AMethod to be executed using the VCL thread for the thread component object. Synchronize is used to avoid conflicts in multi-threaded applications.<P CLASS="Element10">
+Use Synchronize to execute a thread or object method that may not be thread-safe when accessing memory or other resources in the application. Use <A HREF="007274.html" CLASS="Element59">SynchronizeEx</A> to perform thread or procedural methods that required access to the <A HREF="007273.html#0001" CLASS="Element59">Data</A> property or TIdSynchronizeThreadComponentEvent procedures.<P CLASS="Element10">
+<STRONG>Note</STRONG>: The Execution of the thread is suspended while Method is executing in the main VCL thread.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0000">TIdCustomThreadComponent.Terminate</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007273.html" CLASS="Element59">TIdCustomThreadComponent</A>, <A HREF="010426.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Requests that the thread for the component be terminated.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>procedure</STRONG> Terminate; <STRONG>virtual</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Terminate is a virtual procedure in <A HREF="007273.html" CLASS="Element59">TIdCustomThreadComponent</A> that signals the internal thread for the threaded component to halt execution as soon as possible. Terminate results in the <A HREF="007273.html#0002" CLASS="Element59">Terminated</A> property for the internal thread instance being set to True, but allows the thread to continue execution for normal shut down and clean up.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0001">TIdCustomThreadComponent.TerminateAndWaitFor</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007273.html" CLASS="Element59">TIdCustomThreadComponent</A>, <A HREF="010427.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Waits for termination fo the internal thread for the component.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>procedure</STRONG> TerminateAndWaitFor; <STRONG>virtual</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+TerminateAndWaitFor is a virtual procedure in <A HREF="007273.html" CLASS="Element59">TIdCustomThreadComponent</A> that combines the actions of both the <A HREF="007273.html#0000" CLASS="Element59">Terminate</A> and <A HREF="007273.html#0005" CLASS="Element59">WaitFor</A> methods of the internal thread for the threaded component object. TerminateAndWaitFor will wait for the <A HREF="007273.html#0007" CLASS="Element59">Stopped</A> to be set, and then calls <A HREF="007273.html#0005" CLASS="Element59">WaitFor</A> to get the <A HREF="007273.html#0004" CLASS="Element59">ReturnValue</A> after completion of the <A HREF="007273.html#0000" CLASS="Element59">Terminate</A> method call.<P CLASS="Element10">
+<STRONG>Note</STRONG>: Both <A HREF="007273.html#0000" CLASS="Element59">Terminate</A> and TerminateAndWaitFor depend on the Execute method periodically checking the <A HREF="007273.html#0002" CLASS="Element59">Terminated</A> property, and exiting when is has been set to True.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0005">TIdCustomThreadComponent.WaitFor</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007273.html" CLASS="Element59">TIdCustomThreadComponent</A>, <A HREF="010428.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Waits until thread execution has been completed.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>function</STRONG> WaitFor: LongWord;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+WaitFor is LongWord function that delays until the internal thread for the component has completed its Execute method. WaitFor will pause as a result of a call to <A HREF="007273.html#0000" CLASS="Element59">Terminate</A> or when it has been <A HREF="007273.html#0007" CLASS="Element59">Stopped</A> and StopMode is smTerminate. The return value for WaitFor is set to the <A HREF="007273.html#0004" CLASS="Element59">ReturnValue</A> from the internal thread.<P CLASS="Element10">
+Use <A HREF="007273.html#0001" CLASS="Element59">TerminateAndWaitFor</A> to combine the operations of the <A HREF="007273.html#0000" CLASS="Element59">Terminate</A> and the WaitFor methods.</DIV>
+</DIV>
+<DIV CLASS="Element62">
+<HR>Created with Doc-O-Matic 2 donated to <STRONG><A HREF="http://www.delphi-jedi.org">Project JEDI</A></STRONG>. Commercial license available from the <STRONG><A HREF="http://www.doc-o-matic.com">Doc-O-Matic site</A></STRONG>.</DIV>
+</DIV></BODY></HTML>

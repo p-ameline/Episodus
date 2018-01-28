@@ -1,0 +1,321 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+<TITLE>TIdThread</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <META name="GENERATOR" content="Doc-O-Matic">
+    <LINK rel="STYLESHEET" href="default.css" type="text/css">
+
+<SCRIPT LANGUAGE="JavaScript1.2" SRC="scripts.js"></SCRIPT>
+</HEAD>
+<BODY CLASS="Element57">
+<TABLE BORDER="0" BGCOLOR="#AACCFF" WIDTH="100%" CELLSPACING="0" CELLPADDING="0">
+<TR><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element1">
+Indy 9</DIV>
+</TD><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element2">
+<A HREF="content.html" CLASS="Element59">Content</A> | <A HREF="idx.html" CLASS="Element59">Index</A> | <A HREF="symref.html" CLASS="Element59">Reference</A></DIV>
+</TD></TR></TABLE><DIV CLASS="Element58">
+<DIV CLASS="Element5">
+TIdThread</DIV>
+<DIV CLASS="Element7">
+<A HREF="014310.html" CLASS="Element59">Hierarchy</A>, <A HREF="014311.html" CLASS="Element59">Properties</A>, <A HREF="014312.html" CLASS="Element59">Methods</A>, <A HREF="014313.html" CLASS="Element59">Events</A>, <A HREF="014314.html" CLASS="Element59">See Also</A>, <A HREF="002923.html" CLASS="Element59">Unit: IdThread</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Ancestor for all Indy threads.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12">TIdThread = <STRONG>class</STRONG>(<A HREF="007214.html" CLASS="Element59">TIdBaseThread</A>)</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Unit</DIV>
+<DIV CLASS="Element69">
+<A HREF="002923.html" CLASS="Element59">IdThread</A></DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+TIdThread is a descendant of the Delphi <STRONG>TThread</STRONG>, and the ancestor of thread classes used in Indy. <A HREF="007846.html#0000" CLASS="Element59">Create</A> a descendant of TIdThread to represent a thread of execution in a multi-threaded application.<P CLASS="Element10">
+TIdThread extends the functionality of TThread to include flexible methods for control of thread state and notification of changes to thread state.<P CLASS="Element10">
+TIdThread implements the inherited abstract Execute method to provide a known thread execution mechanism. Execute can detect thread termination, suspend and resume threads, and provide exception handling for an exception raised during thread execution. Execute also provides finer control of thread execution by extending TThread to include the equivalent of thread event handlers.<P CLASS="Element10">
+TIdThread and descendants should override the abstract Run method, and implement the virtual methods BeforeRun and AfterRun.<P CLASS="Element10">
+The Execute method iterates through a loop, making calls to BeforeRun, Run, and AfterRun to provide thread functionality. This loop can be stopped by calling the <A HREF="007846.html#0003" CLASS="Element59">Stop</A> method. Use the <A HREF="007846.html#0002" CLASS="Element59">Start</A> method to begin or resume execution of the loop.<P CLASS="Element10">
+TIdThread descendants can be used in conjunction with a <A HREF="007853.html" CLASS="Element59">TIdThreadMgr</A> descendants to address the overhead issues associated with thread creation and resource allocation in a multi-threaded application.<P CLASS="Element10">
+<STRONG>Note</STRONG>: Do not use properties and methods of other objects directly in the Run method of a thread. Use the <A HREF="007848.html" CLASS="Element59">Synchronize</A> method to call a procedure that can access objects and resources which are not thread-safe.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0001">TIdThread.Data</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007846.html" CLASS="Element59">TIdThread</A>, <A HREF="014315.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Storage slot for data used by a thread.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> Data: TObject;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Data is a TObject property, and can contain a reference to any TObject descendant. Data can be used to store an object reference that will be required by the <A HREF="007846.html" CLASS="Element59">TIdThread</A> descendant in either Run, BeforeRun, or AfterRun methods.<P CLASS="Element10">
+<STRONG>Note</STRONG>: It is the responsibility of the <A HREF="007846.html" CLASS="Element59">TIdThread</A> descendant to cast Data to the class instance required by the <A HREF="007846.html" CLASS="Element59">TIdThread</A> descendant, or an exception will be raised.<P CLASS="Element10">
+Data is not initialized in the <A HREF="007846.html#0000" CLASS="Element59">Create</A> constructor, but is released in the <A HREF="007846.html#0002" CLASS="Element59">Destroy</A> destructor.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0004">TIdThread.StopMode</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007846.html" CLASS="Element59">TIdThread</A>, <A HREF="014316.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Determines the action taken when the <A HREF="007846.html#0003" CLASS="Element59">Stop</A> method is called.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> StopMode: <A HREF="007863.html" CLASS="Element59">TIdThreadStopMode</A>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+<A HREF="007863.html" CLASS="Element59">TIdThreadStopMode</A> type defines the possible values for the StopMode property of the <A HREF="007846.html" CLASS="Element59">TIdThread</A> component, as defined below.<P CLASS="Element10">
+<UL>
+<LI>smTerminate - The thread should be terminated.<P CLASS="Element10">
+<LI>smSuspend - The thread should be suspended.</UL>
+</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0005">TIdThread.Stopped</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007846.html" CLASS="Element59">TIdThread</A>, <A HREF="014317.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Indicates whether a thread is stopped.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> Stopped: Boolean;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Stopped is True if the thread has been asked to stop, which means the loop in the Execute method will not iterate until a call to the <A HREF="007846.html#0002" CLASS="Element59">Start</A> method is made.<P CLASS="Element10">
+Note that a thread may still be executing even if its Stopped property is True.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0002">TIdThread.TerminatingException</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007846.html" CLASS="Element59">TIdThread</A>, <A HREF="014318.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Contains the text of an Exception.Message raised within the Execute method.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> TerminatingException: <STRONG>string</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+TerminatingException is updated in the Execute method from a try...except block prior to triggering the <A HREF="007846.html#0000" CLASS="Element59">OnException</A> event for the Exception and terminating the thread.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0003">TIdThread.TerminatingExceptionClass</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007846.html" CLASS="Element59">TIdThread</A>, <A HREF="014319.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Represents the class type for an exception raised during Execute.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> TerminatingExceptionClass: TClass;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+TerminatingExceptionClass is a read-only TClass property that represents the class type for an exception raised during the Execute method for the thread. Use <A HREF="007846.html#0002" CLASS="Element59">TerminatingException</A> to access the message for the exception raised. Use <A HREF="007846.html#0000" CLASS="Element59">OnException</A> to implement immediate exception handling prior to exiting from the Execute method and calling <A HREF="007846.html#0000" CLASS="Element59">Terminate</A> for the thread.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0000">TIdThread.Create</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007846.html" CLASS="Element59">TIdThread</A>, <A HREF="014320.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Create is the constructor for the <A HREF="007846.html" CLASS="Element59">TIdThread</A> instance.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>constructor</STRONG> Create(ACreateSuspended: Boolean = True); <STRONG>virtual</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+ACreateSuspended: Boolean = True</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Create thread in a suspended state.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Create relies on the inherited Create constructor to initialize the object instance. In Create, <A HREF="007846.html#0005" CLASS="Element59">Stopped</A> is set to the value in the ACreateSuspended parameter. If ACreateSuspended is True, you should call the <A HREF="007846.html#0002" CLASS="Element59">Start</A> method in order to start thread execution. If ACreateSuspended is False, the thread automatically starts its execution.<P CLASS="Element10">
+Create insures that GNotifyThread contains a valid TIdNotifyThread instance prior to extiing from the method.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0002">TIdThread.Destroy</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007846.html" CLASS="Element59">TIdThread</A>, <A HREF="014321.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Frees a class instance.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>destructor</STRONG> Destroy; <STRONG>override</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Destroy is the destructor for the object instance, and is responsible for releasing any TObject reference in <A HREF="007846.html#0001" CLASS="Element59">Data</A>. Destroy relies on the inherited Destroy method to free the object instance.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0002">TIdThread.Start</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007846.html" CLASS="Element59">TIdThread</A>, <A HREF="014322.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Starts or resumes iteration of the loop in the Execute method.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>procedure</STRONG> Start; <STRONG>virtual</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Start instructs the thread instance to start or resume iterating through the main thread of execution for the thread.<P CLASS="Element10">
+If <A HREF="007846.html#0005" CLASS="Element59">Stopped</A> is True when Start is called, the values of <A HREF="007846.html#0005" CLASS="Element59">Stopped</A> and the inherited Suspended property are set to <STRONG>False</STRONG>, and the main thread of execution is allowed to continue.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0003">TIdThread.Stop</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007846.html" CLASS="Element59">TIdThread</A>, <A HREF="014323.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Prevents further execution of the thread.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>procedure</STRONG> Stop; <STRONG>virtual</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+When Stop is called, <A HREF="007846.html#0005" CLASS="Element59">Stopped</A> is set to True, meaning the executing thread method will not allow additional iterations. Depending on the value of the <A HREF="007846.html#0004" CLASS="Element59">StopMode</A> property, the thread will be terminated or allow suspension from the thread of execution.<P CLASS="Element10">
+When the Stop method is called, it immediately returns, but the thread may have to wait for completion of thread of execution before it can be suspended or terminated. In contrast, if the <A HREF="007846.html#0001" CLASS="Element59">TerminateAndWaitFor</A> method is called instead, it returns only after the thread has left the main thread of execution.<P CLASS="Element10">
+If you want to immediately suspend the thread, you should set Suspended to true.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0000">TIdThread.Terminate</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007846.html" CLASS="Element59">TIdThread</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Forces the thread of execution to be halted.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>procedure</STRONG> Terminate; <STRONG>virtual</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Terminate is a virtual procedure in <A HREF="007846.html" CLASS="Element59">TIdThread</A> that forces the thread of execution to be halted. Calling Terminate causes the Terminated property to be updated to True.<P CLASS="Element10">
+Terminate will be called in Execute when an exception is raised during execution of the thread. Terminate is also called when <A HREF="007846.html#0003" CLASS="Element59">Stop</A> is executed and <A HREF="007846.html#0004" CLASS="Element59">StopMode</A> contains smTerminate.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0001">TIdThread.TerminateAndWaitFor</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007846.html" CLASS="Element59">TIdThread</A>, <A HREF="014324.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Signals a thread to terminate and waits for it to finish by exiting the Execute method.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>procedure</STRONG> TerminateAndWaitFor; <STRONG>virtual</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+TerminateAndWaitFor calls the inherited <A HREF="007846.html#0000" CLASS="Element59">Terminate</A> method, sets <A HREF="007846.html#0005" CLASS="Element59">Stopped</A> to <STRONG>True</STRONG>, and calls the inherited WaitFor method. Unlike WaitFor in the ancestor TThread class, the value returned from WaitFor is not used.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0000">TIdThread.OnException</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007846.html" CLASS="Element59">TIdThread</A>, <A HREF="014325.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Handles exceptions raised in the thread of execution.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> OnException: <A HREF="007322.html" CLASS="Element59">TIdExceptionThreadEvent</A>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+E</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Exception to be handled.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+Sender</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Object calling the event handler.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+OnException is a <A HREF="007320.html" CLASS="Element59">TIdExceptionEvent</A> event handler that allows the application to specify how execeptions are handled in the multi-threaded program. Write an OnException event handler procedure to provide special processing when the thread encounters an Exception in the Execute method.<P CLASS="Element10">
+<STRONG>Note</STRONG>: Do not free the thread object within this event handler. Allow the OnException event handler to return to the thread context for proper thread termination.<P CLASS="Element10">
+The text portion of the Exception message can also be found in <A HREF="007846.html#0002" CLASS="Element59">TerminatingException</A>.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0001">TIdThread.OnStopped</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007846.html" CLASS="Element59">TIdThread</A>, <A HREF="014326.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Represents an event handler for stopping a thread of execution.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> OnStopped: <A HREF="007604.html" CLASS="Element59">TIdNotifyThreadEvent</A>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+OnStopped is a <A HREF="007604.html" CLASS="Element59">TIdNotifyThreadEvent</A> event handler triggered when an executing thread indicates that it has been stopped. OnStopped can be used to restart or terminate the thread, or to perform processing required when the thread of execution has been completed.<P CLASS="Element10">
+Applications must assign a procedure to the event handler to allow a response to the event notification.</DIV>
+</DIV>
+<DIV CLASS="Element62">
+<HR>Created with Doc-O-Matic 2 donated to <STRONG><A HREF="http://www.delphi-jedi.org">Project JEDI</A></STRONG>. Commercial license available from the <STRONG><A HREF="http://www.doc-o-matic.com">Doc-O-Matic site</A></STRONG>.</DIV>
+</DIV></BODY></HTML>

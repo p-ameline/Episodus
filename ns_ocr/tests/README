@@ -1,0 +1,10 @@
+The files in this directory are used to test and debug libgocr, and the source
+code may be useful to developers. Here's a brief description of what they are
+supposed to do:
+
+charfind.c: locates some characters and outputs another image, to debug. Shows
+	some charFind functions.
+image.c: opens an image and prints it.
+imagewrite.c: opens an image, defines a block that covers it in full and outputs
+	another image. Shows block functions and debugging.
+module.c: opens a module (available at the homepage) and runs it.

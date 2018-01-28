@@ -1,0 +1,153 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+<TITLE>TIdSync</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <META name="GENERATOR" content="Doc-O-Matic">
+    <LINK rel="STYLESHEET" href="default.css" type="text/css">
+
+<SCRIPT LANGUAGE="JavaScript1.2" SRC="scripts.js"></SCRIPT>
+</HEAD>
+<BODY CLASS="Element57">
+<TABLE BORDER="0" BGCOLOR="#AACCFF" WIDTH="100%" CELLSPACING="0" CELLPADDING="0">
+<TR><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element1">
+Indy 9</DIV>
+</TD><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element2">
+<A HREF="content.html" CLASS="Element59">Content</A> | <A HREF="idx.html" CLASS="Element59">Index</A> | <A HREF="symref.html" CLASS="Element59">Reference</A></DIV>
+</TD></TR></TABLE><DIV CLASS="Element58">
+<DIV CLASS="Element5">
+TIdSync</DIV>
+<DIV CLASS="Element7">
+<A HREF="013965.html" CLASS="Element59">Hierarchy</A>, <A HREF="013966.html" CLASS="Element59">Properties</A>, <A HREF="013967.html" CLASS="Element59">Methods</A>, <A HREF="013968.html" CLASS="Element59">See Also</A>, <A HREF="002913.html" CLASS="Element59">Unit: IdSync</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Specifies a mechanism for thread-based notification messages and synchronize method calls.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12">TIdSync = <STRONG>class</STRONG>(TObject)</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Unit</DIV>
+<DIV CLASS="Element69">
+<A HREF="002913.html" CLASS="Element59">IdSync</A></DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+TIdSync is a TObject descendant that implements support for abstract Synchronized methods calls that have parameters and/or return values. TIdSync also provides methods that support thread-based notification messages to reduce overhead in server applications.<P CLASS="Element10">
+TIdSync is used to act in behalf of the Indy thread instance specified in <A HREF="007815.html#0004" CLASS="Element59">Thread</A>, and also insures that at least a single instance of the <A HREF="007815.html#0004" CLASS="Element59">Thread</A> class has been created in the application.<P CLASS="Element10">
+An instance of TIdSync is used when <A HREF="007846.html" CLASS="Element59">TIdThread</A> calls Notify, and is added to the global thread-based notifcation mechanism in GNotifyThread. GNotifyThread is used instead of PostMessage because of changes to the <A HREF="007815.html#0003" CLASS="Element59">Synchronize</A> method calls in Delphi 6 and Kylix, and also provides a low overhead notification mechanism for server applications.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0004">TIdSync.Thread</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007815.html" CLASS="Element59">TIdSync</A>, <A HREF="013969.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Represents the thread of execution to Syncronized or Notified.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> Thread: <A HREF="007214.html" CLASS="Element59">TIdBaseThread</A>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Thread is a read-only <A HREF="007846.html" CLASS="Element59">TIdThread</A> property that represents an Indy thread that can receive the notification and synchronization provided by the <A HREF="007815.html" CLASS="Element59">TIdSync</A> object instance. Thread is the recipient of any redirected Notify or <A HREF="007815.html#0003" CLASS="Element59">Synchronize</A> method calls received by <A HREF="007815.html" CLASS="Element59">TIdSync</A>.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0000">TIdSync.Create</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007815.html" CLASS="Element59">TIdSync</A>, <A HREF="013970.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Constructor for the object instance.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>constructor</STRONG> Create; <STRONG>virtual</STRONG>; <STRONG>overload</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+AThread</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Indy <A HREF="007815.html#0004" CLASS="Element59">Thread</A> to receive the notify or synchronize message.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Create is the constructor for the object instance, and calls the inherited Create method to initiailize properties in the object. Create sets <A HREF="007815.html#0004" CLASS="Element59">Thread</A> to the Indy thread class instance specified in AThread.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0001">TIdSync.Create</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007815.html" CLASS="Element59">TIdSync</A>, <A HREF="013971.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Constructor for the object instance.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>constructor</STRONG> <A HREF="007815.html#0000" CLASS="Element59">Create</A>(AThread: <A HREF="007214.html" CLASS="Element59">TIdBaseThread</A>); <STRONG>virtual</STRONG>; <STRONG>overload</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+AThread: TIdBaseThread</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Indy <A HREF="007815.html#0004" CLASS="Element59">Thread</A> to receive the notify or synchronize message.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+<A HREF="007815.html#0000" CLASS="Element59">Create</A> is the constructor for the object instance, and calls the inherited <A HREF="007815.html#0000" CLASS="Element59">Create</A> method to initiailize properties in the object. <A HREF="007815.html#0000" CLASS="Element59">Create</A> sets <A HREF="007815.html#0004" CLASS="Element59">Thread</A> to the Indy thread class instance specified in AThread.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0002">TIdSync.DoSynchronize</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007815.html" CLASS="Element59">TIdSync</A>, <A HREF="013972.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Specifices the mechanism for implementing a synchronized method.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>procedure</STRONG> DoSynchronize; <STRONG>virtual</STRONG>; <STRONG>abstract</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+DoSynchronize is an abstract virtual procedure in <A HREF="007815.html" CLASS="Element59">TIdSync</A>, and specifies the mechanism to be used for implementing a method call that must be executed using the main VCL thread to avoid multi-threading conflicts. DoSynchronize is the method used when the object instance calls <A HREF="007815.html#0003" CLASS="Element59">Synchronize</A>.<P CLASS="Element10">
+<STRONG>Note</STRONG>: <A HREF="007815.html" CLASS="Element59">TIdSync</A> provides synchronization and notification for threads. Descendant classes should override the DoSynchronize method to implement support for thread methods, or methods with parameters and/or return values.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0003">TIdSync.Synchronize</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007815.html" CLASS="Element59">TIdSync</A>, <A HREF="013973.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Perform Synchronization for a thread instead of a thread method.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>procedure</STRONG> Synchronize;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Synchronize is a procedure used to avoid conflicts in a multi-threaded application. Synchronize allows <A HREF="007815.html#0004" CLASS="Element59">Thread</A> to call its Synchronize with the abstract virtual <A HREF="007815.html#0002" CLASS="Element59">DoSynchronize</A> method. The net result is that the instance in <A HREF="007815.html#0004" CLASS="Element59">Thread</A> receives a Notify message, and subsequently is executed, without a realized call to a ThreadMethod.</DIV>
+</DIV>
+<DIV CLASS="Element62">
+<HR>Created with Doc-O-Matic 2 donated to <STRONG><A HREF="http://www.delphi-jedi.org">Project JEDI</A></STRONG>. Commercial license available from the <STRONG><A HREF="http://www.doc-o-matic.com">Doc-O-Matic site</A></STRONG>.</DIV>
+</DIV></BODY></HTML>

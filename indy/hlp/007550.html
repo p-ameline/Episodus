@@ -1,0 +1,105 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+<TITLE>TIdMessageDecoderInfo</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <META name="GENERATOR" content="Doc-O-Matic">
+    <LINK rel="STYLESHEET" href="default.css" type="text/css">
+
+<SCRIPT LANGUAGE="JavaScript1.2" SRC="scripts.js"></SCRIPT>
+</HEAD>
+<BODY CLASS="Element57">
+<TABLE BORDER="0" BGCOLOR="#AACCFF" WIDTH="100%" CELLSPACING="0" CELLPADDING="0">
+<TR><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element1">
+Indy 9</DIV>
+</TD><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element2">
+<A HREF="content.html" CLASS="Element59">Content</A> | <A HREF="idx.html" CLASS="Element59">Index</A> | <A HREF="symref.html" CLASS="Element59">Reference</A></DIV>
+</TD></TR></TABLE><DIV CLASS="Element58">
+<DIV CLASS="Element5">
+TIdMessageDecoderInfo</DIV>
+<DIV CLASS="Element7">
+<A HREF="012511.html" CLASS="Element59">Hierarchy</A>, <A HREF="012512.html" CLASS="Element59">Methods</A>, <A HREF="012513.html" CLASS="Element59">See Also</A>, <A HREF="002288.html" CLASS="Element59">Unit: IdMessageCoder</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Represents information about registered decoder classes and detects coder usage for message part contents.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12">TIdMessageDecoderInfo = <STRONG>class</STRONG>(TObject)</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Unit</DIV>
+<DIV CLASS="Element69">
+<A HREF="002288.html" CLASS="Element59">IdMessageCoder</A></DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+TIdMessageDecoderInfo is a TObject descendant that specifies the base class for representing information about registered decoder classes. TIdMessageDecoderInfo also provides a mechanism to detect when a decoder is suitable for use in decoding the contents of a message part, and returns a reference to the decoder class.<P CLASS="Element10">
+All methods in TIdMessageDecoderInfo are virtual. Descendant classes, like <A HREF="007551.html" CLASS="Element59">TIdMessageDecoderInfoMIME</A> and <A HREF="007552.html" CLASS="Element59">TIdMessageDecoderInfoUUE</A>, should implement the constructor and pertinent methods to provide support for specific encoding algorithms.<P CLASS="Element10">
+Instances of TIdMessageDecoderInfo and descendant classes are stored in a global <A HREF="007553.html" CLASS="Element59">TIdMessageDecoderList</A> variable to indicate that the decoder class is registered and available for use with message parts.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0000">TIdMessageDecoderInfo.CheckForStart</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007550.html" CLASS="Element59">TIdMessageDecoderInfo</A>, <A HREF="012514.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Specifies a method for retrieving a decoder class instance, and associating the decoder with a given message.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>function</STRONG> CheckForStart(ASender: <A HREF="007544.html" CLASS="Element59">TIdMessage</A>; ALine: <STRONG>string</STRONG>): <A HREF="007549.html" CLASS="Element59">TIdMessageDecoder</A>; <STRONG>virtual</STRONG>; <STRONG>abstract</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+ASender: TIdMessage</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Message associated with the decoder instance.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+ALine: string</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Encoded message part content to be examined to determine the appropriate decoder class.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Return Value</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+<A HREF="007549.html" CLASS="Element59">TIdMessageDecoder</A> - Decoder class instance to use for the message part.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+CheckForStart is an abstract virtual function in <A HREF="007550.html" CLASS="Element59">TIdMessageDecoderInfo</A> that specifies a method for retrieving a decoder class instance, and associating the decoder class instance with a specific message.<P CLASS="Element10">
+ASender is the <A HREF="007544.html" CLASS="Element59">TIdMessage</A> to be associated with the decoder class instance.<P CLASS="Element10">
+ALine is a line from the message part that will be examined to determine if the registered decoder can be used for decoding the message part.<P CLASS="Element10">
+Descendant classes, like <A HREF="007551.html" CLASS="Element59">TIdMessageDecoderInfoMIME</A> and <A HREF="007552.html" CLASS="Element59">TIdMessageDecoderInfoUUE</A>, must implement comparisons to determine if ALine contains a marker signifying the start of a block using the specific encoding algorithm. If ALine contains the appropriate signature, a message decoder instance is created for ASender in the function return value. Otherwise the function return value is Nil.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0001">TIdMessageDecoderInfo.Create</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007550.html" CLASS="Element59">TIdMessageDecoderInfo</A>, <A HREF="012515.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Constructor for the object instance.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>constructor</STRONG> Create; <STRONG>virtual</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Create is the constructor for the object instance. Create is a virtual constructor that can be re-implemented in descendant classes to provide the capability needed for the derived class instance.</DIV>
+</DIV>
+<DIV CLASS="Element62">
+<HR>Created with Doc-O-Matic 2 donated to <STRONG><A HREF="http://www.delphi-jedi.org">Project JEDI</A></STRONG>. Commercial license available from the <STRONG><A HREF="http://www.doc-o-matic.com">Doc-O-Matic site</A></STRONG>.</DIV>
+</DIV></BODY></HTML>

@@ -1,0 +1,339 @@
+//
+// BB1Task.h
+//
+// Made by (Tabun)
+// Login   <giocan_d@epita.fr>
+//
+// Started on  Jan Sep 16 16:16:25 2004 Tabun
+//
+
+#ifndef   BB1TASK_H_
+# define   BB1TASK_H_
+
+#include <string>
+
+#include "ns_ob1\OB1Export.h"
+// #include "nsbb\nspatpat.h"
+#include "ns_ob1\TypedVal.h"
+// #include "ns_ob1\BB1types.h"
+
+/*
+** Classs which describe a Nautilus Event
+** A Nautilus event is a pathpatho as root for
+** the document and an a pathpathoiter for the change
+*/
+
+/**
+* Type that defines all kinds of interaction of the blackboard in asynchornous mode  <BR>
+* Type définissant les différentes interaction avec le blackboard
+*/
+enum BB1TaskType
+{
+  ABSTRACT_TASK 									= 0, /**< Undefinde task */
+  NAUTILUS_EVENT_TASK 						= 1, /**< Add an event in the blackboard */
+  IS_ANSWER_PRESENT_ON_BLACKBOARD = 2, /**< Task wich ask if the blackboard can answer to a question */
+  ORDER 													= 3, /**< Give an order to BB */
+  ASK_DETERMINISTIC_QUESTION 			= 4, /**< Ask a question which must be resolved in deterministic mode */
+  INSERT_OBJECT_ON_BLACKOARD 			= 5  /**< Insert an object on the blackboard */
+};
+
+
+/**
+* \brief  Abstraction of a task that can be done by the blackboard
+*/
+/**
+* Abstraction of a task that can be done by the blackboard in asynchronous mode   <BR>
+* A task is an interaction with BB <BR>
+* Interface déclarant les différentes fonctions a implenté pour que le blackboard puisse
+* éxecuté une tache. Une tache est une interaction avec le BB en mode asynchrone
+*/
+class _BBKEXPORT BB1Task
+{
+  protected:
+
+  	std::string _label ;        /**< Writing information about the label */
+  	bool        _sendResponse ; /**< did we have to send an anwer in asynchrone mode */
+  	TypedVal*   _path ;         /**< the actual type of a question in nautilus : can be change */
+
+  public:
+
+    BB1Task()
+    {
+    	_label        = std::string("") ;
+      _sendResponse = false ;
+    	_path         = (TypedVal*) 0 ;
+    }
+
+    BB1Task(const BB1Task& src)
+    {
+    	_label        = src._label ;
+      _sendResponse = src._sendResponse ;
+      if (src._path)
+      	_path = new TypedVal(*(src._path)) ;
+      else
+    		_path = (TypedVal*) 0 ;
+    }
+
+  	/**
+    * Destructor
+    */
+    ~BB1Task()
+    {
+      if (_path)
+        delete(_path) ;
+    }
+
+    BB1Task&	operator=(const BB1Task& src)
+    {
+    	if (&src == this)
+      	return *this ;
+
+      _sendResponse = src._sendResponse ;
+    	_label        = src._label ;
+
+      if (_path)
+        delete(_path) ;
+
+      if (src._path)
+      	_path = new TypedVal(*(src._path)) ;
+      else
+    		_path = (TypedVal*) 0 ;
+
+      return *this ;
+    }
+
+  /**
+  * return the priority of the question  <BR>
+  * Renvoie la priorité de la tache.
+  * @return priority of the task
+  */
+   virtual int         Priority() = 0 ;
+   virtual BB1TaskType Type()             { return (ABSTRACT_TASK) ; } /* return the type of the class , used for determined hierarchy */
+   void                Response(bool vka) { _sendResponse = vka ; }    /* did we have to send an answer */
+   bool                Reponse()          { return (_sendResponse) ; } /* did we have to send an answer ? */
+   void                Label(std::string temp) ;                       /* put label option */
+   std::string         Label()            { return (_label) ; }        /* get the label's string */
+   TypedVal*           Path()             { return (_path) ; }         /* return the path */
+};
+
+
+/**
+* \brief Ansynchronous way to know if an answer is present int he blackboard
+*/
+/**
+* Ansynchronous way to know if an answer is present in he blackboard <BR>
+* Demande ansychrone pour savoir si une réponse est déja présente sur le blackboard
+*/
+class _BBKEXPORT IsAnswerPresentOnBlackBoard : public BB1Task
+{
+  protected:               /* is this information is present on blackboard */
+
+    bool _deepResearch ;   /**< depth of the search :      <BR>
+                            *  <ul>
+                            *  <li>false : search on the controler only </li>
+                            *  <li>true : search ont the controler and in the al KB after </li>
+                            * </ul>
+                           */
+  public:
+
+  	IsAnswerPresentOnBlackBoard() ;
+    IsAnswerPresentOnBlackBoard(TypedVal* path, bool deepResult) ;
+    IsAnswerPresentOnBlackBoard(std::string labe, std::string _path, bool deepResult) ;
+
+    IsAnswerPresentOnBlackBoard(const IsAnswerPresentOnBlackBoard& src) ;
+    IsAnswerPresentOnBlackBoard& operator=(const IsAnswerPresentOnBlackBoard& src) ;
+
+    ~IsAnswerPresentOnBlackBoard() ;
+
+    int                 Priority() {return (11) ; }
+    virtual BB1TaskType Type() { return (IS_ANSWER_PRESENT_ON_BLACKBOARD) ; }
+    bool                getDepthSearch() { return (_deepResearch) ; }
+    void                putDethSearch(bool search) { _deepResearch = search ; }
+} ;
+
+
+/**
+* \brief   Ansynchronous way to ask deterministic question
+*/
+/**
+*  Ansynchronous way to ask deterministic question  <BR>
+*  Maniere asynchorne de poser une question au blackboard
+*/
+class _BBKEXPORT AskDeterministicQuestion : public BB1Task
+{
+	protected:
+
+  	int _priority ; /**< priority of the question for the sheduling algorithm \brief priority of the question for the sheduling algorithm */
+
+	public:
+
+  	/**
+   	* \brief Constructor
+   	*/
+   	/**
+   	* Constructor
+   	*/
+   	AskDeterministicQuestion() ;
+   	AskDeterministicQuestion(std::string label, TypedVal* path, int priority) ;
+
+    AskDeterministicQuestion(const AskDeterministicQuestion& src) ;
+    AskDeterministicQuestion& operator=(const AskDeterministicQuestion& src) ;
+
+    ~AskDeterministicQuestion() ;
+
+   	virtual BB1TaskType Type()                  { return (ASK_DETERMINISTIC_QUESTION) ; }
+   	int                 Priority()              { return (_priority) ; }
+   	void                Priority(int priority)  { _priority = priority ; }
+   	void                putPath(TypedVal* path) { _path = new TypedVal(*path) ; }
+};
+
+
+/**
+* \brief type of order
+*/
+/**
+*  type of order
+*/
+enum  BB1ORDER
+{
+  BB1CLOSE = 0,
+  BB1CHANGE = 2,
+  NOBEEP = 3
+};
+
+class _BBKEXPORT BB1Order : public BB1Task
+{
+	protected:
+
+  	BB1ORDER _order ;        /**< Order's type */
+    std::string toChange ;   // Chose a modifier ddans le fonctionnement
+    std::string changement ; // chanagement a effectuer
+
+	public:
+
+  	BB1Order() ;
+  	BB1Order(BB1ORDER order, std::string tochange ="", std::string change="") ;
+
+    BB1Order(const BB1Order& src) ;
+    BB1Order& operator=(const BB1Order& src) ;
+
+    ~BB1Order() ;
+
+  	virtual  BB1TaskType Type()          { return (ORDER) ; }
+  	int                  Priority()      { return (42) ; }
+  	BB1ORDER             getOrder()      { return (_order) ; }
+  	std::string          getToChange()   { return (toChange) ; }
+  	std::string          getChangement() { return (changement) ; }
+};
+
+
+/**
+* \brief   Ansynchronous way to ask insert information on Blackboard
+*/
+/**
+*  Ansynchronous way to ask insert information on Blackboard  <BR>
+*  Maniere asynchorne de poser une information sur le blackboard
+*/
+class _BBKEXPORT insertObjectOnBlacBoard : public BB1Task
+{
+	protected:
+
+  	NSPatPathoArray* _doc ;
+
+  public:
+
+		insertObjectOnBlacBoard() ;
+  	insertObjectOnBlacBoard(NSPatPathoArray* doc, TypedVal* path) ;
+
+    insertObjectOnBlacBoard(const insertObjectOnBlacBoard& src) ;
+    insertObjectOnBlacBoard& operator=(const insertObjectOnBlacBoard& src) ;
+
+    ~insertObjectOnBlacBoard() ;
+
+  	virtual BB1TaskType Type()           { return (INSERT_OBJECT_ON_BLACKOARD) ; }
+  	int                 Priority()       { return (42) ; }
+  	NSPatPathoArray*    getInformation() { return (_doc) ; }
+};
+
+
+class  _BBKEXPORT  Precoche : public BB1Task
+{
+};
+
+
+class  _BBKEXPORT BB1Answer
+{
+};
+
+class _BBKEXPORT BB1Alert :  public  BB1Answer
+{
+	protected:
+
+  	int         _priority_alert ;   /* Alert's priority */
+    std::string _path ;             /* PAth of the question */
+    std::string _label ;            /* Explication of the alert */
+
+  public:
+
+    BB1Alert(std::string label, std::string path, int prior = 3) ;
+
+    BB1Alert(const BB1Alert& src) ;
+    BB1Alert& operator=(const BB1Alert& src) ;
+
+    ~BB1Alert() ;
+
+    std::string getLabel() { return (_label) ; }
+    std::string getPath()  { return (_path) ; }
+    int         Priority() { return (_priority_alert) ; }
+};
+
+
+class _BBKEXPORT TaskStructure
+{
+		BB1Task*   _task ;
+  	BB1Answer* _answer ;
+  	bool       _toDelete ; /* used for garbage collecting */
+
+	public:
+
+  	TaskStructure(BB1Task* temp);
+    ~TaskStructure();
+
+    TaskStructure(const TaskStructure& src) ;
+    TaskStructure& operator=(const TaskStructure& src) ;
+
+    inline BB1Task*   Task()                  { return (_task) ; }
+    inline BB1Answer* Answer()                { return (_answer) ;  }
+    inline TypedVal*  Path()                  { return (_task->Path()) ; }
+    inline void       Task(BB1Task* temp)     { _task = temp ; }
+    inline void       Answer(BB1Answer* temp) { _answer = temp ; }
+    inline void       ToDelete()              { _toDelete = true ; }
+    inline bool       Delete()                { return (_toDelete) ; }
+
+	private:
+
+  	void              setTask(BB1Task* pTask) ;
+    void              deleteTask() ;
+};
+
+class _BBKEXPORT BB1TaskList
+{
+		std::vector<TaskStructure* > _TaskStructureList ;
+
+	public:
+
+  	BB1TaskList() ;
+    ~BB1TaskList() ;
+
+    BB1TaskList(const BB1TaskList& src) ;
+    BB1TaskList& operator=(const BB1TaskList& src) ;
+
+    TaskStructure* getTask(TypedVal* val) ;
+    void           AddTask(TaskStructure* temp) ;
+    void           GarbageCollecting() ;
+
+    void           vider() ;
+};
+
+#endif
+

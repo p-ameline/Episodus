@@ -1,0 +1,258 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+<TITLE>TSOARecord</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <META name="GENERATOR" content="Doc-O-Matic">
+    <LINK rel="STYLESHEET" href="default.css" type="text/css">
+
+<SCRIPT LANGUAGE="JavaScript1.2" SRC="scripts.js"></SCRIPT>
+</HEAD>
+<BODY CLASS="Element57">
+<TABLE BORDER="0" BGCOLOR="#AACCFF" WIDTH="100%" CELLSPACING="0" CELLPADDING="0">
+<TR><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element1">
+Indy 9</DIV>
+</TD><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element2">
+<A HREF="content.html" CLASS="Element59">Content</A> | <A HREF="idx.html" CLASS="Element59">Index</A> | <A HREF="symref.html" CLASS="Element59">Reference</A></DIV>
+</TD></TR></TABLE><DIV CLASS="Element58">
+<DIV CLASS="Element5">
+TSOARecord</DIV>
+<DIV CLASS="Element7">
+<A HREF="015161.html" CLASS="Element59">Hierarchy</A>, <A HREF="015162.html" CLASS="Element59">Properties</A>, <A HREF="015163.html" CLASS="Element59">Methods</A>, <A HREF="002173.html" CLASS="Element59">Unit: IdDNSResolver</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Represents resource records in a DNS response that include Start of Authority resource record types.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12">TSOARecord = <STRONG>class</STRONG>(<A HREF="008059.html" CLASS="Element59">TResultRecord</A>)</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Unit</DIV>
+<DIV CLASS="Element69">
+<A HREF="002173.html" CLASS="Element59">IdDNSResolver</A></DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+TSOARecord is a <A HREF="008059.html" CLASS="Element59">TResultRecord</A> descendant that represents a resource record returned in the results for a DNS query. TSOARecord is the collection item created to represent a resource resource returned when <A HREF="007302.html#0003" CLASS="Element59">TIdDNSResolver.QueryRecords</A> includes the value qtSOA for Start of Authority resource records.<P CLASS="Element10">
+A Start of Authority resource record is used to identify the start of a zone of authority for the authoritative data in the Answer section of the DNS response. A Start of Authority resource record is especially for describing name server zone management parameters.<P CLASS="Element10">
+A Start of Authority resource record uses the same DNS packet layout as other <A HREF="008059.html" CLASS="Element59">TResultRecord</A>-based responses, but extends the use of RData to include the following definition and format:<P CLASS="Element10">
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12">  +--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+
+  |                                               |
+  .                                               .
+  .                     MNAME                     .
+  .                                               .
+  +--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+
+  |                                               |
+  .                                               .
+  .                     RNAME                     .
+  .                                               .
+  +--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+
+  |                    SERIAL                     |
+  |                                               |
+  +--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+
+  |                    REFRESH                    |
+  |                                               |
+  +--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+
+  |                     RETRY                     |
+  |                                               |
+  +--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+
+  |                    EXPIRE                     |
+  |                                               |
+  +--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+
+  |                    MINIMUM                    |
+  |                                               |
+  +--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+</PRE></DIV>
+</DIV>
+<P CLASS="Element10">
+<UL>
+<LI>MNAME - Domain name of the name server that was the original or primary source of data for this zone.<P CLASS="Element10">
+<LI>RNAME - Domain name which specifies the mailbox of the person responsible for this zone.<P CLASS="Element10">
+<LI>SERIAL - 32-bit unsigned integer that is the version number of the original copy of the zone. Zone transfers preserve this value. This value wraps and should be compared using sequence space arithmetic.<P CLASS="Element10">
+<LI>REFRESH - 32-bit time interval before the zone should be refreshed.<P CLASS="Element10">
+<LI>RETRY - 32-bit time interval that should elapse before a failed refresh should be retried.<P CLASS="Element10">
+<LI>EXPIRE - 32-bit time value that specifies the upper limit on the time interval that can elapse before the zone is no longer authoritative.<P CLASS="Element10">
+<LI>MINIMUM - 32-bit unsigned integer that is the minimum TTL field that should be exported with any RR from this zone.</UL>
+<P CLASS="Element10">
+All times are expressed in seconds.<P CLASS="Element10">
+Most of these fields are pertinent only for name server maintenance operations. However, MINIMUM is used in all query operations that retrieve Resource Records from a zone.<P CLASS="Element10">
+Whenever a Start of Authority RR is sent in a response to a query, the TTL field is set to the maximum of the TTL field from the Resource Record, and the MINIMUM field in the appropriate SOA. Thus MINIMUM is a lower bound on the TTL field for all RRs in a zone. Note that this use of MINIMUM should occur when the Resource Records are copied into the response and not when the zone is loaded from a master file or via a zone transfer. The reason for this provison is to allow future dynamic update facilities to change the Start of Authority Resource Record with known semantics.<P CLASS="Element10">
+TSOARecord extends <A HREF="008059.html" CLASS="Element59">TResultRecord</A> to implement the specifics of accessing RData values as properties, including <A HREF="008074.html#0003" CLASS="Element59">Primary</A>, <A HREF="008074.html#0005" CLASS="Element59">ResponsiblePerson</A>, <A HREF="008074.html#0007" CLASS="Element59">Serial</A>, <A HREF="008074.html#0004" CLASS="Element59">Refresh</A>, <A HREF="008074.html#0006" CLASS="Element59">Retry</A>, <A HREF="008074.html#0000" CLASS="Element59">Expire</A>, and <A HREF="008074.html#0001" CLASS="Element59">MinimumTTL</A>. TSOARecord also overrides the <A HREF="008074.html#0002" CLASS="Element59">Parse</A> method to read the values in RData into their property counterparts.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0000">TSOARecord.Expire</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="008074.html" CLASS="Element59">TSOARecord</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Authoritative zone timeout value.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> Expire: Cardinal;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Expire is a read-only Cardinal property that represents the 32-bit time value that specifies the upper limit on the time interval that can elapse before the zone is no longer authoritative. Expire is expressed in seconds.<P CLASS="Element10">
+Expire is used to control when a cached response from a DNS name server needs to be Refreshed or polled by a secondary name server or resolver. Other maintenance parameters for the <A HREF="008074.html" CLASS="Element59">TSOARecord</A>, like <A HREF="008074.html#0001" CLASS="Element59">MinimumTTL</A> and <A HREF="008074.html#0004" CLASS="Element59">Refresh</A>, may also force a similar operation.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0001">TSOARecord.MinimumTTL</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="008074.html" CLASS="Element59">TSOARecord</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Minimum Time-To-Live for Resource Records in this Zone.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> MinimumTTL: Cardinal;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+MinimumTTL is a read-only Cardinal property that represents the unsigned 32-bit minimum Time-To-Live field that should be exported with any Resource Record from this zone.<P CLASS="Element10">
+MinimumTTL is the value assigned by the DNS name server as the default value for TTL in all Resource Records for which it is an Authoritative name server. TTL may be given a higher value at some other time.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0003">TSOARecord.Primary</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="008074.html" CLASS="Element59">TSOARecord</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Domain name of the primary name server for this zone.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> Primary: <STRONG>string</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Primary is a read-only String property that represents the domain name of the name server that was the original or primary source of data for this zone. Primary is the host server where any changes to the DNS master file are coordinated for any resources in the zone.<P CLASS="Element10">
+Secondary name servers and resolver will periodically monitor the server identified in Primary for changes to the <A HREF="008074.html" CLASS="Element59">TSOARecord</A> for the name server.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0004">TSOARecord.Refresh</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="008074.html" CLASS="Element59">TSOARecord</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Zone refresh time interval.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> Refresh: Cardinal;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Refresh is a read-only Cardinal property that represents the 32-bit time interval before the zone should be refreshed. Refresh is expressed in seconds.<P CLASS="Element10">
+Refresh is used to force distributed domain name service data to be refreshed at periodic intervals. The host server in <A HREF="008074.html#0003" CLASS="Element59">Primary</A> determines the Refresh interval, and secondary name servers and resolvers are responsible for performing the actions needed to refresh distributed DNS data.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0005">TSOARecord.ResponsiblePerson</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="008074.html" CLASS="Element59">TSOARecord</A>, <A HREF="015164.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Indicates the person responsible for this DNS zone.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> ResponsiblePerson: <STRONG>string</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+ResponsiblePerson is a read-only String property that represents the name of the person responsible for maintaining this zone in the domain name space. ResponsiblePerson is updated when <A HREF="008074.html#0002" CLASS="Element59">Parse</A> is used to examine the response message from the DNS server. ResponsiblePerson is populated using <A HREF="008046.html" CLASS="Element59">TQueryResult</A> values.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0006">TSOARecord.Retry</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="008074.html" CLASS="Element59">TSOARecord</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Time interval before retrying a failed refresh.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> Retry: Cardinal;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Retry is a read-only Cardinal property that represents the 32-bit time interval that should elapse before a failed refresh should be retried. Retry is expressed in seconds.<P CLASS="Element10">
+Retry is a zone maintenance parameter used to control periodic polling of the secondary name servers for the zone. Retry is used when a secondary name server is attempt to check zone data after <A HREF="008074.html#0004" CLASS="Element59">Refresh</A> has expired. If this check cannot be completed, new checks are started every Retry seconds.<P CLASS="Element10">
+The check is a simple query to the primary for the <A HREF="008074.html" CLASS="Element59">TSOARecord</A> Resource Record for the zone. If the value in <A HREF="008074.html#0007" CLASS="Element59">Serial</A> in the secondary zone data is equal to the <A HREF="008074.html#0007" CLASS="Element59">Serial</A> returned by <A HREF="008074.html#0003" CLASS="Element59">Primary</A>, then no changes have occurred, and the <A HREF="008074.html#0004" CLASS="Element59">Refresh</A> interval wait is restarted. If the secondary finds it impossible to perform a serial check for the <A HREF="008074.html#0000" CLASS="Element59">Expire</A> interval, it must assume that its copy of the zone is obsolete an discard it.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0007">TSOARecord.Serial</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="008074.html" CLASS="Element59">TSOARecord</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Serial number of the original Zone transfer.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> Serial: cardinal;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Serial is a read-only Cardinal property that represents the unsigned 32-bit version number of the original copy of the zone data. Zone transfers preserve this value. This value wraps and should be compared using sequence space arithmetic.<P CLASS="Element10">
+Serial is a zone maintenance parameter used to control periodic polling of the secondary name servers for the zone. Serial is used when a secondary name server is attempt to check zone data after <A HREF="008074.html#0004" CLASS="Element59">Refresh</A> has expired. If this check cannot be completed, new checks are started every <A HREF="008074.html#0006" CLASS="Element59">Retry</A> seconds.<P CLASS="Element10">
+The check is a simple query to the primary for the <A HREF="008074.html" CLASS="Element59">TSOARecord</A> Resource Record for the zone. If the value in Serial in the secondary zone data is equal to the Serial returned by <A HREF="008074.html#0003" CLASS="Element59">Primary</A>, then no changes have occurred, and the <A HREF="008074.html#0004" CLASS="Element59">Refresh</A> interval wait is restarted. If the secondary finds it impossible to perform a serial check for the <A HREF="008074.html#0000" CLASS="Element59">Expire</A> interval, it must assume that its copy of the zone is obsolete an discard it.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0002">TSOARecord.Parse</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="008074.html" CLASS="Element59">TSOARecord</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Parses RData values into properties.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>procedure</STRONG> Parse(CompleteMessage: <STRONG>String</STRONG>; APos: Integer); <STRONG>override</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+CompleteMessage: String</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Contents of the resource record.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+APos: Integer</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Position where RData values begin in the answer.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Parse is an overridden procedure that implements a routine to parse resource record values in the DNS response into their property-based counterparts.<P CLASS="Element10">
+CompleteMessage is the contents of the resource record. Since the DNS message can contain compressed data, the whole message is needed for parsing and pointer location.<P CLASS="Element10">
+APos is the position in the resource record where RData values for this record type are located in the DNS Answer.<P CLASS="Element10">
+Parse calls the inherited Parse method, and retrieves the DNS labels and values for the <A HREF="008074.html#0003" CLASS="Element59">Primary</A>, <A HREF="008074.html#0005" CLASS="Element59">ResponsiblePerson</A>, <A HREF="008074.html#0007" CLASS="Element59">Serial</A>, <A HREF="008074.html#0004" CLASS="Element59">Refresh</A>, <A HREF="008074.html#0006" CLASS="Element59">Retry</A>, <A HREF="008074.html#0000" CLASS="Element59">Expire</A>, and <A HREF="008074.html#0001" CLASS="Element59">MinimumTTL</A> properties.</DIV>
+</DIV>
+<DIV CLASS="Element62">
+<HR>Created with Doc-O-Matic 2 donated to <STRONG><A HREF="http://www.delphi-jedi.org">Project JEDI</A></STRONG>. Commercial license available from the <STRONG><A HREF="http://www.doc-o-matic.com">Doc-O-Matic site</A></STRONG>.</DIV>
+</DIV></BODY></HTML>

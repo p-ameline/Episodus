@@ -1,0 +1,642 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+<TITLE>TIdIRCChannel</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <META name="GENERATOR" content="Doc-O-Matic">
+    <LINK rel="STYLESHEET" href="default.css" type="text/css">
+
+<SCRIPT LANGUAGE="JavaScript1.2" SRC="scripts.js"></SCRIPT>
+</HEAD>
+<BODY CLASS="Element57">
+<TABLE BORDER="0" BGCOLOR="#AACCFF" WIDTH="100%" CELLSPACING="0" CELLPADDING="0">
+<TR><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element1">
+Indy 9</DIV>
+</TD><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element2">
+<A HREF="content.html" CLASS="Element59">Content</A> | <A HREF="idx.html" CLASS="Element59">Index</A> | <A HREF="symref.html" CLASS="Element59">Reference</A></DIV>
+</TD></TR></TABLE><DIV CLASS="Element58">
+<DIV CLASS="Element5">
+TIdIRCChannel</DIV>
+<DIV CLASS="Element7">
+<A HREF="011999.html" CLASS="Element59">Hierarchy</A>, <A HREF="012000.html" CLASS="Element59">Properties</A>, <A HREF="012001.html" CLASS="Element59">Methods</A>, <A HREF="012002.html" CLASS="Element59">Events</A>, <A HREF="002271.html" CLASS="Element59">Unit: IdIRC</A></DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12">TIdIRCChannel = <STRONG>class</STRONG>(TCollectionItem)</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Unit</DIV>
+<DIV CLASS="Element69">
+<A HREF="002271.html" CLASS="Element59">IdIRC</A></DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+TIdIRCChannel</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0000">TIdIRCChannel.Active</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007441.html" CLASS="Element59">TIdIRCChannel</A></DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> Active: Boolean;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Active</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0003">TIdIRCChannel.Bans</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007441.html" CLASS="Element59">TIdIRCChannel</A></DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> Bans: TStringList;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Bans</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0006">TIdIRCChannel.CloseType</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007441.html" CLASS="Element59">TIdIRCChannel</A></DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> CloseType: <A HREF="007446.html" CLASS="Element59">TIdIRCCloseType</A>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+CloseType</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0008">TIdIRCChannel.Data</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007441.html" CLASS="Element59">TIdIRCChannel</A></DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> Data: TObject;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Data</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0014">TIdIRCChannel.Key</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007441.html" CLASS="Element59">TIdIRCChannel</A></DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> Key: <STRONG>String</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Key</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0018">TIdIRCChannel.Limit</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007441.html" CLASS="Element59">TIdIRCChannel</A></DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> Limit: Integer;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Limit</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="001A">TIdIRCChannel.Mode</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007441.html" CLASS="Element59">TIdIRCChannel</A></DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> Mode: <A HREF="007443.html" CLASS="Element59">TIdIRCChannelModes</A>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Mode</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="001B">TIdIRCChannel.ModeChange</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007441.html" CLASS="Element59">TIdIRCChannel</A></DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> ModeChange: Boolean;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+ModeChange</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="001D">TIdIRCChannel.ModeString</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007441.html" CLASS="Element59">TIdIRCChannel</A></DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> ModeString: <STRONG>String</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+ModeString</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="001E">TIdIRCChannel.Name</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007441.html" CLASS="Element59">TIdIRCChannel</A></DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> Name: <STRONG>String</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Name</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="001F">TIdIRCChannel.Names</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007441.html" CLASS="Element59">TIdIRCChannel</A></DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> Names: TStringList;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Names</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0027">TIdIRCChannel.Topic</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007441.html" CLASS="Element59">TIdIRCChannel</A></DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> Topic: <STRONG>String</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Topic</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0001">TIdIRCChannel.AddUser</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007441.html" CLASS="Element59">TIdIRCChannel</A></DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>function</STRONG> AddUser(ANick: <STRONG>String</STRONG>; AAddress: <STRONG>String</STRONG>): <A HREF="007501.html" CLASS="Element59">TIdIRCUser</A>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+AddUser</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0002">TIdIRCChannel.Ban</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007441.html" CLASS="Element59">TIdIRCChannel</A></DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>procedure</STRONG> Ban(AHostmask: <STRONG>String</STRONG>);</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Ban</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0004">TIdIRCChannel.BeginMode</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007441.html" CLASS="Element59">TIdIRCChannel</A></DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>procedure</STRONG> BeginMode;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+BeginMode</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0005">TIdIRCChannel.ChangedNick</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007441.html" CLASS="Element59">TIdIRCChannel</A></DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>procedure</STRONG> ChangedNick(AUser: <A HREF="007501.html" CLASS="Element59">TIdIRCUser</A>; ANewNick: <STRONG>String</STRONG>);</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+ChangedNick</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0007">TIdIRCChannel.Create</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007441.html" CLASS="Element59">TIdIRCChannel</A></DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>constructor</STRONG> Create(AClient: <A HREF="007439.html" CLASS="Element59">TIdIRC</A>; AName: <STRONG>String</STRONG>); <STRONG>reintroduce</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Create</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0009">TIdIRCChannel.Deop</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007441.html" CLASS="Element59">TIdIRCChannel</A></DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>procedure</STRONG> Deop(ANick: <STRONG>String</STRONG>);</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Deop</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="000A">TIdIRCChannel.Destroy</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007441.html" CLASS="Element59">TIdIRCChannel</A></DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>destructor</STRONG> Destroy; <STRONG>override</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Destroy</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="000B">TIdIRCChannel.Devoice</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007441.html" CLASS="Element59">TIdIRCChannel</A></DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>procedure</STRONG> Devoice(ANick: <STRONG>String</STRONG>);</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Devoice</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="000C">TIdIRCChannel.EndMode</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007441.html" CLASS="Element59">TIdIRCChannel</A></DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>procedure</STRONG> EndMode;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+EndMode</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="000D">TIdIRCChannel.Find</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007441.html" CLASS="Element59">TIdIRCChannel</A></DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>function</STRONG> Find(ANick: <STRONG>String</STRONG>; <STRONG>var</STRONG> AIndex: Integer): Boolean;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Find</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="000E">TIdIRCChannel.GotDeop</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007441.html" CLASS="Element59">TIdIRCChannel</A></DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>procedure</STRONG> GotDeop(AUser: <A HREF="007501.html" CLASS="Element59">TIdIRCUser</A>);</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+GotDeop</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="000F">TIdIRCChannel.GotDevoice</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007441.html" CLASS="Element59">TIdIRCChannel</A></DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>procedure</STRONG> GotDevoice(AUser: <A HREF="007501.html" CLASS="Element59">TIdIRCUser</A>);</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+GotDevoice</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0010">TIdIRCChannel.GotOp</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007441.html" CLASS="Element59">TIdIRCChannel</A></DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>procedure</STRONG> GotOp(AUser: <A HREF="007501.html" CLASS="Element59">TIdIRCUser</A>);</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+GotOp</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0011">TIdIRCChannel.GotVoice</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007441.html" CLASS="Element59">TIdIRCChannel</A></DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>procedure</STRONG> GotVoice(AUser: <A HREF="007501.html" CLASS="Element59">TIdIRCUser</A>);</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+GotVoice</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0012">TIdIRCChannel.HasUser</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007441.html" CLASS="Element59">TIdIRCChannel</A></DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>function</STRONG> HasUser(ANick: <STRONG>String</STRONG>): Boolean;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+HasUser</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0013">TIdIRCChannel.Joined</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007441.html" CLASS="Element59">TIdIRCChannel</A></DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>procedure</STRONG> Joined(AUser: <A HREF="007501.html" CLASS="Element59">TIdIRCUser</A>);</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Joined</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0015">TIdIRCChannel.KeyChanged</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007441.html" CLASS="Element59">TIdIRCChannel</A></DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>procedure</STRONG> KeyChanged(AKey: <STRONG>String</STRONG>);</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+KeyChanged</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0016">TIdIRCChannel.Kick</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007441.html" CLASS="Element59">TIdIRCChannel</A></DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>procedure</STRONG> Kick(ANick: <STRONG>String</STRONG>; AReason: <STRONG>String</STRONG>);</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Kick</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0017">TIdIRCChannel.Kicked</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007441.html" CLASS="Element59">TIdIRCChannel</A></DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>procedure</STRONG> Kicked(AUser: <A HREF="007501.html" CLASS="Element59">TIdIRCUser</A>);</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Kicked</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0019">TIdIRCChannel.LimitChanged</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007441.html" CLASS="Element59">TIdIRCChannel</A></DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>procedure</STRONG> LimitChanged(ALimit: Integer);</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+LimitChanged</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="001C">TIdIRCChannel.ModeChanged</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007441.html" CLASS="Element59">TIdIRCChannel</A></DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>procedure</STRONG> ModeChanged(AMode: <A HREF="007443.html" CLASS="Element59">TIdIRCChannelModes</A>);</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+ModeChanged</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0021">TIdIRCChannel.Op</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007441.html" CLASS="Element59">TIdIRCChannel</A></DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>procedure</STRONG> Op(ANick: <STRONG>String</STRONG>);</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Op</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0022">TIdIRCChannel.Part</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007441.html" CLASS="Element59">TIdIRCChannel</A></DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>procedure</STRONG> Part(AReason: <STRONG>String</STRONG>);</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Part</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0023">TIdIRCChannel.Parted</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007441.html" CLASS="Element59">TIdIRCChannel</A></DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>procedure</STRONG> Parted(AUser: <A HREF="007501.html" CLASS="Element59">TIdIRCUser</A>);</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Parted</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0024">TIdIRCChannel.Quit</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007441.html" CLASS="Element59">TIdIRCChannel</A></DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>procedure</STRONG> Quit(AUser: <A HREF="007501.html" CLASS="Element59">TIdIRCUser</A>);</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Quit</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0025">TIdIRCChannel.RemoveUser</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007441.html" CLASS="Element59">TIdIRCChannel</A></DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>procedure</STRONG> RemoveUser(AUser: <A HREF="007501.html" CLASS="Element59">TIdIRCUser</A>);</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+RemoveUser</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0026">TIdIRCChannel.Say</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007441.html" CLASS="Element59">TIdIRCChannel</A></DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>procedure</STRONG> Say(AMsg: <STRONG>String</STRONG>);</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Say</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0028">TIdIRCChannel.TopicChanged</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007441.html" CLASS="Element59">TIdIRCChannel</A></DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>procedure</STRONG> TopicChanged(ATopic: <STRONG>String</STRONG>);</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+TopicChanged</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0029">TIdIRCChannel.Unban</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007441.html" CLASS="Element59">TIdIRCChannel</A></DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>procedure</STRONG> Unban(AHostmask: <STRONG>String</STRONG>);</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Unban</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="002A">TIdIRCChannel.Voice</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007441.html" CLASS="Element59">TIdIRCChannel</A></DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>procedure</STRONG> Voice(ANick: <STRONG>String</STRONG>);</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Voice</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0020">TIdIRCChannel.OnChannelUpdate</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007441.html" CLASS="Element59">TIdIRCChannel</A></DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> OnChannelUpdate: <A HREF="007454.html" CLASS="Element59">TIdIRCOnChannelUpdate</A>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+OnChannelUpdate</DIV>
+</DIV>
+<DIV CLASS="Element62">
+<HR>Created with Doc-O-Matic 2 donated to <STRONG><A HREF="http://www.delphi-jedi.org">Project JEDI</A></STRONG>. Commercial license available from the <STRONG><A HREF="http://www.doc-o-matic.com">Doc-O-Matic site</A></STRONG>.</DIV>
+</DIV></BODY></HTML>

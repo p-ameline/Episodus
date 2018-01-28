@@ -1,0 +1,216 @@
+
+// COMPLEXMEDICAMENTDLG
+
+// #define DRUG_EDIT           101
+// #define DRUG_DATE_DEB	      102
+// #define DRUG_DATE_FIN	      103
+// #define IDR_DRG_CHRONIQUE   104
+// #define IDC_DRG_NBJOURS	    105
+// #define IDR_DRG_DANS        106
+// #define IDR_DRG_DUREE       107
+// #define IDR_DRG_LE          108
+// #define IDC_DRG_NBJOURS_TXT 109
+// #define DATE_DEB_DRG_TEXT   110
+// #define DATE_FIN_DRG_GROUP  111
+// #define DATE_DEBPRESC_TEXT  112
+// #define DATE_FINPRESC_TEXT  113
+// #define PRESC_DATE_DEB      114
+// #define PRESC_DATE_FIN      115
+// #define TRT_GROUP           116
+// #define DRG_UNIT            117
+// #define DRG_UNIT_TXT        118
+// #define IDC_REMBURS         119
+// #define IDC_SUBSTIT         120
+// #define IDC_ADVICE_TXT      121
+// #define IDC_ADVICE_COMBO    122
+// #define IDC_EVENT_TXT       123
+// #define IDC_EVENT_EDIT      124
+// #define CPLX_PRESCR_GROUP   125
+
+// MEDICAMENTDLG (obsolete)
+
+#define DRUG_EDIT         101
+// #define DRUG_DATE_DEB	     102 // already in nsldvvue.rh
+// #define DRUG_DATE_FIN	     103 // already in nsldvvue.rh
+// #define IDR_DRG_CHRONIQUE   104 // already in nsldvvue.rh
+// #define IDC_GROUPBOX1	     104 // already in nsldvvue.rh
+// #define IDR_DRG_CHRONIQUE   104 // already in nsldvvue.rh
+// #define IDC_DRG_NBJOURS	   105 // already in nsldvvue.rh
+// #define IDR_DRG_DANS        106 // already in nsldvvue.rh
+// #define IDR_DRG_DUREE       107 // already in nsldvvue.rh
+// #define IDR_DRG_LE          108 // already in nsldvvue.rh
+// #define IDC_DRG_NBJOURS_TXT 109 // already in nsldvvue.rh
+// #define DATE_DEB_DRG_TEXT   110 // already in nsldvvue.rh
+// #define DATE_FIN_DRG_GROUP  111 // already in nsldvvue.rh
+// #define DATE_DEBPRESC_TEXT  112 // already in nsldvvue.rh
+// #define DATE_FINPRESC_TEXT  113 // already in nsldvvue.rh
+
+#define IDC_GROUPMEDOC    255
+#define IDC_MEDOCNAME     256
+#define IDC_GROUPPRISE    257
+#define IDC_UPDOWN1       258
+#define IDC_UPDOWN2       259
+#define IDC_UPDOWN3       260
+#define IDC_MATED         261
+#define IDC_MIDED         262
+#define IDC_SOIRED        263
+#define IDC_GROUPMATIN    264
+#define IDC_GROUPMIDI     119
+#define IDC_GROUPSOIR     120
+#define IDC_TABPSOLO      121
+#define IDC_GROUPBOX8     125
+#define IDC_CHANGECYCLE   126
+#define IDC_COMMODPRISE   127
+#define IDC_GROUPRISEMODE 128
+#define IDC_COMPRIM           129
+#define IDC_EDIT1             130
+#define IDC_GROUPPHASE        132
+#define IDC_GROUPCYCLE        133
+#define IDC_REMBOURS          134
+#define IDC_CHECKSUB          135
+#define IDC_GROUPBOX5         140
+#define IDC_BUTPOSO           141
+#define IDC_TABCONTROL3       281
+#define IDC_GROUPCOUCHER      280
+#define IDC_EDSOIR            144
+#define IDC_UPDOWN4           145
+#define IDC_TABCYCLE          146
+#define IDC_LUNDI             147
+#define IDC_MARDI             148
+#define IDC_MERCREDI          149
+#define IDC_JEUDI             150
+#define IDC_VENDREDI          151
+#define IDC_SAMEDI            152
+#define IDC_DIMANCHE          153
+#define IDC_CUREED            154
+#define IDC_UPDOWN5           155
+#define IDC_COMCURE           156
+#define IDC_EDCURCYC          157
+#define IDC_UPDOWN6           158
+#define IDC_DURCYCBOX         159
+#define IDC_DURCUR            160
+#define IDC_TOUTELES          161
+#define IDC_COMBOBOX2         162
+#define IDC_EXTENDPHASE       164
+#define IDC_PHASE1            165
+#define IDC_UPDOWN7           166
+#define IDC_PHASECOMBO1       167
+#define IDC_STATICTEXT2       168
+#define IDC_EDRENEW           169
+#define IDC_UPDOWN8           170
+#define IDC_STATICTEXT3       171
+#define IDC_EDPHASEPEND       172
+
+#define IDC_NBCURELIBRE       174
+#define IDC_CUREEDLI          175
+#define IDC_UPDOWN9           176
+#define IDC_STATICECLI        177
+#define IDC_EDLIBRE2          178
+#define IDC_UPDOWN10          179
+
+#define IDC_DURCUR2           180
+#define IDC_EDITCUR2          181
+#define IDC_UPDOWN11          182
+#define IDC_COMCUR2           183
+
+#define IDC_CMPSUNREGU        184
+#define IDC_EDREGPOS          185
+#define IDC_UPDOWN12          186
+#define IDC_STATICTEXT4       187
+#define IDC_FREQPOSREG        188
+#define IDC_EDIT9             189
+#define IDC_UPDOWN14          190
+#define IDC_COMBREG2POS       191
+
+#define IDC_GROUPBOX4         192
+#define IDC_GROUPBOX7         193
+#define IDC_GROUPBOX10        194
+#define IDC_GROUPBOX11        195
+#define IDC_GROUPBOX12        196
+#define IDC_EDREVEIL          197
+#define IDC_UPDOWN13          198
+#define IDC_EDMATIN2          199
+#define IDC_UPDOWN15          200
+#define IDC_GROUPBOX13        201
+#define IDC_EDMIDI2           202
+#define IDC_UPDOWN16          204
+#define IDC_EDGOUTER2         205
+#define IDC_UPDOWN17          206
+#define IDC_EDSOIR2           207
+#define IDC_UPDOWN18          208
+#define IDC_EDCOUCHER2        209
+#define IDC_UPDOWN19          210
+#define IDC_GROUPBOX14        211
+#define IDC_EDNUIT            212
+#define IDC_UPDOWN20          213
+
+#define IDC_GROUPBOX15        214
+#define IDC_EDHOURTAKE        215
+#define IDC_UPDOWN21          216
+#define IDC_GROUPBOX16        217
+#define IDC_NUMHOURED         218
+#define IDC_UPDOWN22          219
+#define IDC_BUTTON3           220
+#define IDC_LISTVIEW3         221
+
+
+#define IDC_GROUPBOX17        222
+#define IDC_GROUPBOX18        223
+#define IDC_STATICTEXT5       224
+#define IDC_UNITEDFOIS        225
+#define IDC_PSOEDFOIS         226
+#define IDC_UPDOWN23          227
+#define IDC_UPDOWN24          228
+#define IDC_GROUPBOX19        229
+#define IDC_EDFREQ3           230
+#define IDC_COMBOFREQ3        231
+
+#define IDC_SIMPLECYCLE       232
+#define IDC_UPDOWN25          233
+
+#define IDC_COMIREGCY2        234
+#define IDC_ADDPHASE          235
+#define IDC_ADDRYTHM          236
+
+#define IDC_LISTPHASE	        237
+
+#define IDC_BUTTON1	          238
+#define IDC_COMBOBOX1	        239
+#define IDC_LISTBOX3	        240
+#define IDC_LISTVIEWFORCYCLE	241
+#define IDC_LISTBOX2	        242
+
+#define IDC_MEDOCCHOICE       243
+
+#define IDC_GRUNIQUE          244
+#define IDC_UPUNIQUE          245
+#define IDC_EDUNIQUE          246
+
+#define IDC_J1                247
+#define IDC_J2                248
+#define IDC_J3                249
+#define IDC_J4                250
+#define IDC_J5                251
+
+// #define IDR_DRG_CHRONIQUE   255
+// #define IDC_DRG_NBJOURS	    256
+// #define IDR_DRG_DANS        257
+// #define IDR_DRG_DUREE       258
+// #define IDR_DRG_LE          259
+// #define IDC_DRG_NBJOURS_TXT 260
+// #define DATE_FIN_DRG_GROUP  261
+// #define TRT_GROUP           262
+// #define DRG_UNIT_TXT        263
+// #define DRG_UNIT            264
+// #define DATE_DEBPRESC_TEXT  265
+#define IDC_ADVICE_TXT      266
+#define IDC_EDIT3           267
+#define IDC_EDIT4           268
+// #define DATE_DEB_DRG_TEXT   269
+// #define PRESC_DATE_DEB      270
+// #define PRESC_DATE_FIN      271
+// #define DATE_FINPRESC_TEXT  272
+
+// #define ALD_BUTTON          280
+// #define FREE_TEXT_BUTTON    281
+

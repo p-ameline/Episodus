@@ -1,0 +1,37 @@
+// #define IDC_DETRUIRE				        102  // #define IDC_DETRUIRE	 990 dans nsbb.rh#define IDC_DELETE					        103
+#define	IDC_INSERTFRERE         	  104
+#define	IDC_INSERTELEMENTFICTIF		  105
+#define IDC_MODIFIER				        106
+#define IDC_ABSENT					        107
+#define IDC_PARAMETRES				      108
+#define	IDC_PRESENCE				        109
+#define IDC_CUT						          111
+#define	IDC_COPY					          112
+#define	IDC_PASTE					          113
+#define IDC_FILGUIDE                114
+#define IDC_CONTRAINTE              116
+#define IDC_CONTROLE                117
+#define IDC_TREE_NEWPREOCCUP        118
+#define IDC_CONNECTPREOCCUP         119
+#define IDC_EDITRIGHTS         		  120
+#define IDC_PASTE_TL          		  121
+#define IDC_DICO_LOST_FOCUS         122
+#define IDC_TREE_JOKER1             123
+#define IDC_TREE_JOKER2             124
+#define IDC_TREE_JOKER3             125
+#define IDC_TREE_JOKER4             126
+#define IDC_TREE_JOKER5             127
+
+#define IDC_NEWADR                  101
+#define IDC_CORADR                  102
+#define IDC_CHGADR                  103
+#define IDC_TYPADR                  104
+#define IDC_DELADR                  105
+
+#define IDC_NEWCORR                 101
+#define IDC_MODCORR                 102
+#define IDC_DELCORR                 103
+
+#define IDC_NEWENREG                  200#define IDC_MODENREG                  201
+#define IDC_DELENREG                  202#define IDC_HISTORY                   203
+

@@ -1,0 +1,50 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+<TITLE>TIdFTPTransferMode</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <META name="GENERATOR" content="Doc-O-Matic">
+    <LINK rel="STYLESHEET" href="default.css" type="text/css">
+
+<SCRIPT LANGUAGE="JavaScript1.2" SRC="scripts.js"></SCRIPT>
+</HEAD>
+<BODY CLASS="Element57">
+<TABLE BORDER="0" BGCOLOR="#AACCFF" WIDTH="100%" CELLSPACING="0" CELLPADDING="0">
+<TR><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element1">
+Indy 9</DIV>
+</TD><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element2">
+<A HREF="content.html" CLASS="Element59">Content</A> | <A HREF="idx.html" CLASS="Element59">Index</A> | <A HREF="symref.html" CLASS="Element59">Reference</A></DIV>
+</TD></TR></TABLE><DIV CLASS="Element58">
+<DIV CLASS="Element5">
+TIdFTPTransferMode</DIV>
+<DIV CLASS="Element7">
+<A HREF="015355.html" CLASS="Element59">See Also</A>, <A HREF="002190.html" CLASS="Element59">Unit: IdFTPCommon</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Represents the transmission mode for data transfers.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12">TIdFTPTransferMode = (dmBlock, dmCompressed, dmStream);</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Unit</DIV>
+<DIV CLASS="Element69">
+<A HREF="002190.html" CLASS="Element59">IdFTPCommon</A></DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+TIdFTPTransferMode is an enumerated type that represents the transmission mode for data transfers. TIdFTPTransferMode often reflects a value based on the associated <A HREF="007331.html" CLASS="Element59">TIdFTPDataStructure</A> indicated for an FTP client. TIdFTPTransferMode can be used in the <A HREF="007328.html#0013" CLASS="Element59">TIdFTP.TransferMode</A> method to set the transfer mode prior to FTP GET or PUT operations.<P CLASS="Element10">
+TIdFTPTransferMode can have one of the following values, and associated meanings:<P CLASS="Element10">
+<UL>
+<LI>dmBlock - Data is transmitted as a series of blocks preceded by one or more header bytes. The header bytes contain a descriptor code and a count field that indicates the block type and the total length of data up to the next header.<P CLASS="Element10">
+<LI>dmCompressed - Indicates that data can contain byte strings, compressed data using replications and/or filler, or control bytes. dmCompressed mode is useful for obtaining increased bandwidth on very large network transmissions at a little extra CPU cost.<P CLASS="Element10">
+<LI>dmStream - Data is transmitted as a stream of bytes, and there is no restriction on the data representation for the stream. When dmStream is used for record-structured files, the stream will contain end-of-record and end-of-file control bytes. For a file stream, end-of-file is indicated by the sending host closing the data connection, and all bytes are data bytes.</UL>
+</DIV>
+</DIV>
+<DIV CLASS="Element62">
+<HR>Created with Doc-O-Matic 2 donated to <STRONG><A HREF="http://www.delphi-jedi.org">Project JEDI</A></STRONG>. Commercial license available from the <STRONG><A HREF="http://www.doc-o-matic.com">Doc-O-Matic site</A></STRONG>.</DIV>
+</DIV></BODY></HTML>

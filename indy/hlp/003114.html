@@ -1,0 +1,169 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+<TITLE>IPX_SPXCONNSTATUS_DATA</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <META name="GENERATOR" content="Doc-O-Matic">
+    <LINK rel="STYLESHEET" href="default.css" type="text/css">
+
+<SCRIPT LANGUAGE="JavaScript1.2" SRC="scripts.js"></SCRIPT>
+</HEAD>
+<BODY CLASS="Element57">
+<TABLE BORDER="0" BGCOLOR="#AACCFF" WIDTH="100%" CELLSPACING="0" CELLPADDING="0">
+<TR><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element1">
+Indy 9</DIV>
+</TD><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element2">
+<A HREF="content.html" CLASS="Element59">Content</A> | <A HREF="idx.html" CLASS="Element59">Index</A> | <A HREF="symref.html" CLASS="Element59">Reference</A></DIV>
+</TD></TR></TABLE><DIV CLASS="Element58">
+<DIV CLASS="Element5">
+IPX_SPXCONNSTATUS_DATA</DIV>
+<DIV CLASS="Element7">
+<A HREF="002953.html" CLASS="Element59">Unit: IdWinSock2</A></DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12">IPX_SPXCONNSTATUS_DATA = <STRONG>packed</STRONG> <STRONG>record</STRONG>
+  ConnectionState: Byte;
+  WatchDogActive: Byte;
+  LocalConnectionId: Word;
+  RemoteConnectionId: Word;
+  LocalSequenceNumber: Word;
+  LocalAckNumber: Word;
+  LocalAllocNumber: Word;
+  RemoteAckNumber: Word;
+  RemoteAllocNumber: Word;
+  LocalSocket: Word;
+  ImmediateAddress: <STRONG>Array</STRONG> [0..5] <STRONG>of</STRONG> Byte;
+  RemoteNetwork: <STRONG>Array</STRONG> [0..3] <STRONG>of</STRONG> Byte;
+  RemoteNode: <STRONG>Array</STRONG> [0..5] <STRONG>of</STRONG> Byte;
+  RemoteSocket: Word;
+  RetransmissionCount: Word;
+  EstimatedRoundTripDelay: Word;
+  RetransmittedPackets: Word;
+  SuppressedPacket: Word;
+  <STRONG>end</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Unit</DIV>
+<DIV CLASS="Element69">
+<A HREF="002953.html" CLASS="Element59">IdWinSock2</A></DIV>
+<DIV CLASS="Element14">
+Members</DIV>
+<DIV CLASS="Element20">
+ConnectionState: Byte;</DIV>
+<DIV CLASS="Element22">
+<DIV CLASS="Element21">
+ConnectionState</DIV>
+</DIV>
+<DIV CLASS="Element20">
+WatchDogActive: Byte;</DIV>
+<DIV CLASS="Element22">
+<DIV CLASS="Element21">
+WatchDogActive</DIV>
+</DIV>
+<DIV CLASS="Element20">
+LocalConnectionId: Word;</DIV>
+<DIV CLASS="Element22">
+<DIV CLASS="Element21">
+LocalConnectionId</DIV>
+</DIV>
+<DIV CLASS="Element20">
+RemoteConnectionId: Word;</DIV>
+<DIV CLASS="Element22">
+<DIV CLASS="Element21">
+RemoteConnectionId</DIV>
+</DIV>
+<DIV CLASS="Element20">
+LocalSequenceNumber: Word;</DIV>
+<DIV CLASS="Element22">
+<DIV CLASS="Element21">
+LocalSequenceNumber</DIV>
+</DIV>
+<DIV CLASS="Element20">
+LocalAckNumber: Word;</DIV>
+<DIV CLASS="Element22">
+<DIV CLASS="Element21">
+LocalAckNumber</DIV>
+</DIV>
+<DIV CLASS="Element20">
+LocalAllocNumber: Word;</DIV>
+<DIV CLASS="Element22">
+<DIV CLASS="Element21">
+LocalAllocNumber</DIV>
+</DIV>
+<DIV CLASS="Element20">
+RemoteAckNumber: Word;</DIV>
+<DIV CLASS="Element22">
+<DIV CLASS="Element21">
+RemoteAckNumber</DIV>
+</DIV>
+<DIV CLASS="Element20">
+RemoteAllocNumber: Word;</DIV>
+<DIV CLASS="Element22">
+<DIV CLASS="Element21">
+RemoteAllocNumber</DIV>
+</DIV>
+<DIV CLASS="Element20">
+LocalSocket: Word;</DIV>
+<DIV CLASS="Element22">
+<DIV CLASS="Element21">
+LocalSocket</DIV>
+</DIV>
+<DIV CLASS="Element20">
+ImmediateAddress: Array [0..5] of Byte;</DIV>
+<DIV CLASS="Element22">
+<DIV CLASS="Element21">
+ImmediateAddress</DIV>
+</DIV>
+<DIV CLASS="Element20">
+RemoteNetwork: Array [0..3] of Byte;</DIV>
+<DIV CLASS="Element22">
+<DIV CLASS="Element21">
+RemoteNetwork</DIV>
+</DIV>
+<DIV CLASS="Element20">
+RemoteNode: Array [0..5] of Byte;</DIV>
+<DIV CLASS="Element22">
+<DIV CLASS="Element21">
+RemoteNode</DIV>
+</DIV>
+<DIV CLASS="Element20">
+RemoteSocket: Word;</DIV>
+<DIV CLASS="Element22">
+<DIV CLASS="Element21">
+RemoteSocket</DIV>
+</DIV>
+<DIV CLASS="Element20">
+RetransmissionCount: Word;</DIV>
+<DIV CLASS="Element22">
+<DIV CLASS="Element21">
+RetransmissionCount</DIV>
+</DIV>
+<DIV CLASS="Element20">
+EstimatedRoundTripDelay: Word;</DIV>
+<DIV CLASS="Element22">
+<DIV CLASS="Element21">
+EstimatedRoundTripDelay</DIV>
+</DIV>
+<DIV CLASS="Element20">
+RetransmittedPackets: Word;</DIV>
+<DIV CLASS="Element22">
+<DIV CLASS="Element21">
+RetransmittedPackets</DIV>
+</DIV>
+<DIV CLASS="Element20">
+SuppressedPacket: Word;</DIV>
+<DIV CLASS="Element22">
+<DIV CLASS="Element21">
+SuppressedPacket</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+IPX_SPXCONNSTATUS_DATA</DIV>
+</DIV>
+<DIV CLASS="Element62">
+<HR>Created with Doc-O-Matic 2 donated to <STRONG><A HREF="http://www.delphi-jedi.org">Project JEDI</A></STRONG>. Commercial license available from the <STRONG><A HREF="http://www.doc-o-matic.com">Doc-O-Matic site</A></STRONG>.</DIV>
+</DIV></BODY></HTML>

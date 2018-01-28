@@ -1,0 +1,95 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+<TITLE>TIdServerCookie</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <META name="GENERATOR" content="Doc-O-Matic">
+    <LINK rel="STYLESHEET" href="default.css" type="text/css">
+
+<SCRIPT LANGUAGE="JavaScript1.2" SRC="scripts.js"></SCRIPT>
+</HEAD>
+<BODY CLASS="Element57">
+<TABLE BORDER="0" BGCOLOR="#AACCFF" WIDTH="100%" CELLSPACING="0" CELLPADDING="0">
+<TR><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element1">
+Indy 9</DIV>
+</TD><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element2">
+<A HREF="content.html" CLASS="Element59">Content</A> | <A HREF="idx.html" CLASS="Element59">Index</A> | <A HREF="symref.html" CLASS="Element59">Reference</A></DIV>
+</TD></TR></TABLE><DIV CLASS="Element58">
+<DIV CLASS="Element5">
+TIdServerCookie</DIV>
+<DIV CLASS="Element7">
+<A HREF="013442.html" CLASS="Element59">Hierarchy</A>, <A HREF="013443.html" CLASS="Element59">Properties</A>, <A HREF="013444.html" CLASS="Element59">Methods</A>, <A HREF="013445.html" CLASS="Element59">See Also</A>, <A HREF="002145.html" CLASS="Element59">Unit: IdCookie</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Implements a collection item for HTTP Server Cookies.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12">TIdServerCookie = <STRONG>class</STRONG>(<A HREF="007264.html" CLASS="Element59">TIdCookieRFC2109</A>)</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Unit</DIV>
+<DIV CLASS="Element69">
+<A HREF="002145.html" CLASS="Element59">IdCookie</A></DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+TIdServerCookie is a <A HREF="007264.html" CLASS="Element59">TIdCookieRFC2109</A> descendant that implements a collection item for a <A HREF="007674.html" CLASS="Element59">TIdServerCookies</A> collection. TIdServerCookie is created and used by <A HREF="007392.html" CLASS="Element59">TIdHTTPServer</A> in an HTTP request or response.<P CLASS="Element10">
+TIdServerCookie differs from <A HREF="007264.html" CLASS="Element59">TIdCookieRFC2109</A> by reinstituting use of the Expires property, instead of MaxAge, to indicate when Cookie data is no longer valid. There is many web browsers which does not support <A HREF="003458.html" CLASS="Element59">Max</A>-Age as defined in RFC2109 and simply ignore it.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0000">TIdServerCookie.AddAttribute</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007673.html" CLASS="Element59">TIdServerCookie</A>, <A HREF="013446.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Maintains attribute names and values for the Server Cookie.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>procedure</STRONG> AddAttribute(<STRONG>const</STRONG> Attribute: <STRONG>String</STRONG>; <STRONG>const</STRONG> Value: <STRONG>String</STRONG>);</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+const Attribute: String</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Cookie attribute name to be updated.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+const Value: String</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Cookie attribute value to be updated.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+AddAttribute is a procedure that allows the server Cookie to correctly maintain the Path and Domain properties based on Cookie headers received in an HTTP client request. AddAttribute checks the Cookie attribute named in Value for the presense of the special Value '$PATH' or '$DOMAIN'. When Attribute contains either of these special Cookie headers, the data in Value is assigned to the corresponding Path or Domain property.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0001">TIdServerCookie.Create</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007673.html" CLASS="Element59">TIdServerCookie</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Constructor for the object instance.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>constructor</STRONG> Create(ACollection: TCollection); <STRONG>override</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Create is the constructor for the object instance. Create calls the inherited Create method using the collection that owns the collection item specified in ACollection. Create also set value for the internal version representation to cvNetscape.</DIV>
+</DIV>
+<DIV CLASS="Element62">
+<HR>Created with Doc-O-Matic 2 donated to <STRONG><A HREF="http://www.delphi-jedi.org">Project JEDI</A></STRONG>. Commercial license available from the <STRONG><A HREF="http://www.doc-o-matic.com">Doc-O-Matic site</A></STRONG>.</DIV>
+</DIV></BODY></HTML>

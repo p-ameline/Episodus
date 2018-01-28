@@ -1,0 +1,60 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+<TITLE>TIdMappedPortOutboundConnectEvent</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <META name="GENERATOR" content="Doc-O-Matic">
+    <LINK rel="STYLESHEET" href="default.css" type="text/css">
+
+<SCRIPT LANGUAGE="JavaScript1.2" SRC="scripts.js"></SCRIPT>
+</HEAD>
+<BODY CLASS="Element57">
+<TABLE BORDER="0" BGCOLOR="#AACCFF" WIDTH="100%" CELLSPACING="0" CELLPADDING="0">
+<TR><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element1">
+Indy 9</DIV>
+</TD><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element2">
+<A HREF="content.html" CLASS="Element59">Content</A> | <A HREF="idx.html" CLASS="Element59">Index</A> | <A HREF="symref.html" CLASS="Element59">Reference</A></DIV>
+</TD></TR></TABLE><DIV CLASS="Element58">
+<DIV CLASS="Element5">
+TIdMappedPortOutboundConnectEvent</DIV>
+<DIV CLASS="Element7">
+<A HREF="015471.html" CLASS="Element59">See Also</A>, <A HREF="002283.html" CLASS="Element59">Unit: IdMappedPortTCP</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Event type triggered during outbound connection of the port-based proxy.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12">TIdMappedPortOutboundConnectEvent = <STRONG>procedure</STRONG> (AThread: <A HREF="007535.html" CLASS="Element59">TIdMappedPortThread</A>; AException: Exception) <STRONG>of</STRONG> <STRONG>object</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Unit</DIV>
+<DIV CLASS="Element69">
+<A HREF="002283.html" CLASS="Element59">IdMappedPortTCP</A></DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+AException</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Exception reaised while opening the proxied connection.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+AThread</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Thread for the proxied connection.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+TIdMappedPortOutboundConnectEvent is an event type triggered when a <A HREF="007535.html" CLASS="Element59">TIdMappedPortThread</A> thread instance attempts to create the outbound TIdTcpClient used for a port-based proxy. TIdMappedPortOutboundConnectEvent is the type used to represent the <A HREF="007533.html#0003" CLASS="Element59">TIdMappedPortTCP.OnOutboundConnect</A> event handler.<P CLASS="Element10">
+AThread is the <A HREF="007535.html" CLASS="Element59">TIdMappedPortThread</A> instance for the proxied connection, and provides access to the connections for the server (Proxy) and client (remote).<P CLASS="Element10">
+AException is an optional exception that may have been raised while attempting to open the outbound proxy connection. AException will contain Nil when an exception has not been raised during outbound connection.</DIV>
+</DIV>
+<DIV CLASS="Element62">
+<HR>Created with Doc-O-Matic 2 donated to <STRONG><A HREF="http://www.delphi-jedi.org">Project JEDI</A></STRONG>. Commercial license available from the <STRONG><A HREF="http://www.doc-o-matic.com">Doc-O-Matic site</A></STRONG>.</DIV>
+</DIV></BODY></HTML>

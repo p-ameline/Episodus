@@ -1,0 +1,335 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+<TITLE>TIdNetscapeCookie</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <META name="GENERATOR" content="Doc-O-Matic">
+    <LINK rel="STYLESHEET" href="default.css" type="text/css">
+
+<SCRIPT LANGUAGE="JavaScript1.2" SRC="scripts.js"></SCRIPT>
+</HEAD>
+<BODY CLASS="Element57">
+<TABLE BORDER="0" BGCOLOR="#AACCFF" WIDTH="100%" CELLSPACING="0" CELLPADDING="0">
+<TR><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element1">
+Indy 9</DIV>
+</TD><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element2">
+<A HREF="content.html" CLASS="Element59">Content</A> | <A HREF="idx.html" CLASS="Element59">Index</A> | <A HREF="symref.html" CLASS="Element59">Reference</A></DIV>
+</TD></TR></TABLE><DIV CLASS="Element58">
+<DIV CLASS="Element5">
+TIdNetscapeCookie</DIV>
+<DIV CLASS="Element7">
+<A HREF="012837.html" CLASS="Element59">Hierarchy</A>, <A HREF="012838.html" CLASS="Element59">Properties</A>, <A HREF="012839.html" CLASS="Element59">Methods</A>, <A HREF="012840.html" CLASS="Element59">See Also</A>, <A HREF="002145.html" CLASS="Element59">Unit: IdCookie</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Implements a persistent state mechanism for HTTP connections using Cookies.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12">TIdNetscapeCookie = <STRONG>class</STRONG>(TCollectionItem)</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Unit</DIV>
+<DIV CLASS="Element69">
+<A HREF="002145.html" CLASS="Element59">IdCookie</A></DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+TIdNetscapeCookie is a TCollectionItem descendant that implements a persistent state mechanism used to store and retrieve about HTTP client connections using Cookies, as described in the reference document:<P CLASS="Element10">
+<UL>
+<LI>Netscape Persistent Client State - HTTP Cookies (http://www.netscape.com/newsref/std/cookie_spec.html)</UL>
+<P CLASS="Element10">
+TIdNetscapeCookie provides methods and properties to allow introduction of one or more Cookie values and associated Cookie attributes to the client as part of an HTTP response, including the common Cookie headers Name, <A HREF="007580.html#000C" CLASS="Element59">Value</A>, <A HREF="007580.html#0006" CLASS="Element59">Domain</A>, <A HREF="007580.html#0009" CLASS="Element59">Path</A>, and <A HREF="007580.html#000A" CLASS="Element59">Secure</A>.<P CLASS="Element10">
+TIdNetscapeCookie also implements the <A HREF="007580.html#0007" CLASS="Element59">Expires</A> header to let the client know when it is safe to purge Cookie data.<P CLASS="Element10">
+TIdNetscapeCookie can also be used to represent Cookie values returned from a client to an HTTP Server.<P CLASS="Element10">
+TIdNetscapeCookie is used as the ancestor for descendant classes that implement alternate Cookie representations, including TIdCookie2109 and TIdCookie2965.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0001">TIdNetscapeCookie.ClientCookie</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007580.html" CLASS="Element59">TIdNetscapeCookie</A>, <A HREF="012841.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Represents the Cookie name and value.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> ClientCookie: <STRONG>String</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Return Value</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+String - Name and value for the Cookie.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+ClientCookie is a read-only String property that represents the <A HREF="007580.html#0002" CLASS="Element59">CookieName</A> and <A HREF="007580.html#000C" CLASS="Element59">Value</A> for the Cookie. ClientCookie returns the property values in the form NAME=VALUE. Use <A HREF="007580.html#000B" CLASS="Element59">ServerCookie</A> or <A HREF="007580.html#0003" CLASS="Element59">CookieText</A> to access the Cookie including attributes values like <A HREF="007580.html#0006" CLASS="Element59">Domain</A>, <A HREF="007580.html#0009" CLASS="Element59">Path</A>, <A HREF="007580.html#000A" CLASS="Element59">Secure</A>, and <A HREF="007580.html#0007" CLASS="Element59">Expires</A>.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0002">TIdNetscapeCookie.CookieName</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007580.html" CLASS="Element59">TIdNetscapeCookie</A>, <A HREF="012842.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Represents the identity for a Cookie header.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> CookieName: <STRONG>String</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+CookieName is a String property that contains the identity portion of the name/value attribute pair that represents the Client or Server Cookie. CookieName is used to access the textual content of the Cookie in a <A HREF="007266.html" CLASS="Element59">TIdCookies</A> collection.<P CLASS="Element10">
+CookieNames that begin with $ are reserved for specifiying attributes to associate with an adjacent cookie, and must not be used by applications.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0003">TIdNetscapeCookie.CookieText</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007580.html" CLASS="Element59">TIdNetscapeCookie</A>, <A HREF="012843.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Represents the textual representation for a Cookie including attribute parameters.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> CookieText: <STRONG>String</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+CookieText is a String property that represents the name and value attribute pair, as well as optional parameters that make up the textual representaion of the Cookie. CookieText can contain the in the <A HREF="007580.html#0002" CLASS="Element59">CookieName</A> and <A HREF="007580.html#000C" CLASS="Element59">Value</A> properties, as well as property values from <A HREF="007580.html#0007" CLASS="Element59">Expires</A>, <A HREF="007580.html#0009" CLASS="Element59">Path</A>, <A HREF="007580.html#0006" CLASS="Element59">Domain</A>, and the <A HREF="007580.html#000A" CLASS="Element59">Secure</A> flag.<P CLASS="Element10">
+Use <A HREF="007580.html#000B" CLASS="Element59">ServerCookie</A> to access the Set-Cookie variant of the Cookie for use in an HTTP response. Use <A HREF="007580.html#0001" CLASS="Element59">ClientCookie</A> to access the values as received on an HTTP Client.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0006">TIdNetscapeCookie.Domain</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007580.html" CLASS="Element59">TIdNetscapeCookie</A>, <A HREF="012844.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Indicates the host system where a Cookie is valid.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> Domain: <STRONG>String</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Domain is a String property that represents the optional Cookie attribute that specifies the host system where the Cookie is valid. Domain can contain an explicit value, beginning with a '.', or the value of the host that receives the request.<P CLASS="Element10">
+Domain is used in <A HREF="007580.html#0008" CLASS="Element59">IsValidCookie</A> to determine if a specific Cookie can be used for the server host in an HTTP request.<P CLASS="Element10">
+Use <A HREF="007580.html#0009" CLASS="Element59">Path</A> to determine the subset of URLs where a Cookie is valid.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0007">TIdNetscapeCookie.Expires</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007580.html" CLASS="Element59">TIdNetscapeCookie</A>, <A HREF="012845.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Indicates the life time of the Cookie.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> Expires: <STRONG>String</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Expires is a String property that represents the optional Cookie attribute that defines the valid life time of a Cookie. Once the expiration date has been reached, the cookie will no longer be stored or given out. Expires is expressed in a format based on RFC 822, RFC 850, RFC 1036, and RFC 1123, with the variations that the only legal time zone is GMT and the separators between the elements of the date must be dashes. For example:<P CLASS="Element10">
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12">    Wed, 04-Jul-2001 01:00:01 GMT</PRE></DIV>
+</DIV>
+<P CLASS="Element10">
+When Expires is omitted, the Cookie will expire when the HTTP session ends.<P CLASS="Element10">
+<STRONG>Note</STRONG>: There is a bug in Netscape Navigator version 1.1 and earlier. Only Cookies whose <A HREF="007580.html#0009" CLASS="Element59">Path</A> attribute is set explicitly to &quot;/&quot; will be properly saved between sessions if they have an Expires attribute value.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0009">TIdNetscapeCookie.Path</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007580.html" CLASS="Element59">TIdNetscapeCookie</A>, <A HREF="012846.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Specifies the subset of URLs valid for the Cookie.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> Path: <STRONG>String</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Path is a String property that specifies the subset of URLs in a <A HREF="007580.html#0006" CLASS="Element59">Domain</A> for which the Cookie is valid. If the <A HREF="007580.html#0006" CLASS="Element59">Domain</A> for a Cookie matches the server host, then the request path specified in a URL is compared with the Path attribute, and is considered valid when Path is a subset of the request URL.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="000A">TIdNetscapeCookie.Secure</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007580.html" CLASS="Element59">TIdNetscapeCookie</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Indicates the Cookie requires a secure communications channel.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> Secure: Boolean;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Secure is a Boolean property that indicates the Cookie can be transmitted only on a secure communications channel. Currently this means that secure cookies will only be sent to HTTPS (HTTP over SSL) servers. If secure is not specified, a cookie is considered safe to be sent in the clear over unsecured channels.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="000B">TIdNetscapeCookie.ServerCookie</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007580.html" CLASS="Element59">TIdNetscapeCookie</A>, <A HREF="012847.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Represents the Cookie contents in a Server response.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> ServerCookie: <STRONG>String</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+ServerCookie is a read-only String property that represents the textual representation of the Cookie name value pair and optional attributes, like <A HREF="007580.html#0003" CLASS="Element59">CookieText</A>. ServerCookie is used to provide persistent state information from an HTTP Server to an HTTP client.<P CLASS="Element10">
+Use <A HREF="007580.html#0001" CLASS="Element59">ClientCookie</A> to provide information about a persistent session as part of an HTTP client request.<P CLASS="Element10">
+Use <A HREF="007580.html#0003" CLASS="Element59">CookieText</A> to access Cookie properties when updates can be performed.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="000C">TIdNetscapeCookie.Value</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007580.html" CLASS="Element59">TIdNetscapeCookie</A>, <A HREF="012848.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Represents persistent state data associated with a Cookie name.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> Value: <STRONG>String</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Value is a String property that represents the persistent state data associated with the identity in <A HREF="007580.html#0002" CLASS="Element59">CookieName</A>. Value is used to construct <A HREF="007580.html#0003" CLASS="Element59">CookieText</A>, with optional attribute values, that represents the complete Cookie.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0000">TIdNetscapeCookie.Assign</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007580.html" CLASS="Element59">TIdNetscapeCookie</A>, <A HREF="012849.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Copies property values to the current object instance.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>procedure</STRONG> Assign(Source: TPersistent); <STRONG>override</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+Source: TPersistent</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Persistent class containing values to be copied.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Assign is a procedure used to copy and assign values from a TPersistent descendant in Source to the current object instance. When Source is a <A HREF="007264.html" CLASS="Element59">TIdCookieRFC2109</A> class instance, Assign updates <A HREF="007580.html#0003" CLASS="Element59">CookieText</A> and the internal Cookie version using the property values in Source.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0004">TIdNetscapeCookie.Create</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007580.html" CLASS="Element59">TIdNetscapeCookie</A>, <A HREF="012850.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Constructor for the object instance.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>constructor</STRONG> Create(ACollection: TCollection); <STRONG>override</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+ACollection: TCollection</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Collection that owns the collection item.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Create is the constructor for the object instance, and calls the inherited Create method using the Cookie collection specified in ACollection as the owner of the Cookie. Create sets the internal version for the Cookie to cvNetscape prior to exiting from the method.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0005">TIdNetscapeCookie.Destroy</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007580.html" CLASS="Element59">TIdNetscapeCookie</A>, <A HREF="012851.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Frees the collection item.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>destructor</STRONG> Destroy; <STRONG>override</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Destroy is the destructor for the object instance, and insures that all Cookie values for the curent <A HREF="007580.html#0006" CLASS="Element59">Domain</A> are removed from the in the <A HREF="007266.html" CLASS="Element59">TIdCookies</A> Collection. Destroy calls the inherited Destroy prior to exiting the method.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0008">TIdNetscapeCookie.IsValidCookie</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007580.html" CLASS="Element59">TIdNetscapeCookie</A>, <A HREF="012852.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Indicates if the <A HREF="007580.html#0006" CLASS="Element59">Domain</A> for the Cookie matches the host server for the request.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>function</STRONG> IsValidCookie(AServerHost: <STRONG>String</STRONG>): Boolean; <STRONG>virtual</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+AServerHost: String</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Host server receiving the request.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Return Value</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Boolean - True when the host server matches <A HREF="007580.html#0006" CLASS="Element59">Domain</A>.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+IsValidCookie is a Boolean function that indicates if the <A HREF="007580.html#0006" CLASS="Element59">Domain</A> for the Cookie matches the host server that received the request and state information. AServerHost is the server that received the request containing the persistent state information in the Cookie. IsValidCookie returns True when AServerHost contains an IP address or host name that matches the <A HREF="007580.html#0006" CLASS="Element59">Domain</A> for the Cookie.<P CLASS="Element10">
+Use <A HREF="007580.html#0009" CLASS="Element59">Path</A> to determine the subset of URLs where the Cookie is valid.</DIV>
+</DIV>
+<DIV CLASS="Element62">
+<HR>Created with Doc-O-Matic 2 donated to <STRONG><A HREF="http://www.delphi-jedi.org">Project JEDI</A></STRONG>. Commercial license available from the <STRONG><A HREF="http://www.doc-o-matic.com">Doc-O-Matic site</A></STRONG>.</DIV>
+</DIV></BODY></HTML>

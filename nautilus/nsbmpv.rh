@@ -1,0 +1,26 @@
+#include <owl/editfile.rh>
+
+// Menuitem IDs
+//
+#define BITMAPVIEW			 7100
+
+// #define CM_FILEOPEN			 7100
+#define CM_READ1            7101
+#define CM_READ2            7102
+#define CM_READBAD          7103
+#define CM_MEMHANDLE        7104
+#define CM_MEMHANDLEREFRESH 7105
+// #define CM_FILEPRINT			 7106
+// #define CM_EXIT				 7107
+
+// #define CM_EDITCOPY			 7201
+// #define CM_EDITPASTE			 7202
+
+#define CM_FIT              7301
+#define CM_AUTOCLIPVIEW     7302
+#define CM_PAINTFROMDDB     7303
+#define CM_PAINTICON        7304
+
+// Accelerator ID
+//
+#define IDA_BMPVIEW         7100

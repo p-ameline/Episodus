@@ -1,0 +1,210 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+<TITLE>TIdMappedPortTCP</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <META name="GENERATOR" content="Doc-O-Matic">
+    <LINK rel="STYLESHEET" href="default.css" type="text/css">
+
+<SCRIPT LANGUAGE="JavaScript1.2" SRC="scripts.js"></SCRIPT>
+</HEAD>
+<BODY CLASS="Element57">
+<TABLE BORDER="0" BGCOLOR="#AACCFF" WIDTH="100%" CELLSPACING="0" CELLPADDING="0">
+<TR><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element1">
+Indy 9</DIV>
+</TD><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element2">
+<A HREF="content.html" CLASS="Element59">Content</A> | <A HREF="idx.html" CLASS="Element59">Index</A> | <A HREF="symref.html" CLASS="Element59">Reference</A></DIV>
+</TD></TR></TABLE><DIV CLASS="Element58">
+<DIV CLASS="Element5">
+TIdMappedPortTCP</DIV>
+<DIV CLASS="Element7">
+<A HREF="012330.html" CLASS="Element59">Hierarchy</A>, <A HREF="012331.html" CLASS="Element59">Properties</A>, <A HREF="012332.html" CLASS="Element59">Methods</A>, <A HREF="012333.html" CLASS="Element59">Events</A>, <A HREF="012334.html" CLASS="Element59">See Also</A>, <A HREF="002283.html" CLASS="Element59">Unit: IdMappedPortTCP</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Implements a proxy for TCP connections to a remote computer.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12">TIdMappedPortTCP = <STRONG>class</STRONG>(<A HREF="007831.html" CLASS="Element59">TIdTCPServer</A>)</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Unit</DIV>
+<DIV CLASS="Element69">
+<A HREF="002283.html" CLASS="Element59">IdMappedPortTCP</A></DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+TIdMappedPortTCP is a <A HREF="007831.html" CLASS="Element59">TIdTCPServer</A> descendant that implements a proxy for connections to a remote computer system. TIdMappedPortTCP listens for connections on a designated port number and makes a connection to another server using a specified port number. This is useful for certain types of proxy programs.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0001">TIdMappedPortTCP.MappedHost</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007533.html" CLASS="Element59">TIdMappedPortTCP</A>, <A HREF="012335.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Host address for mapped port connections.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> MappedHost: <STRONG>String</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+MappedHost is a String property that represents the address of the host computer that is the endpoint for <A HREF="007533.html" CLASS="Element59">TIdMappedPortTCP</A> client connections. MappedHost is assigned to the Host property for the TCP client created by <A HREF="007533.html" CLASS="Element59">TIdMappedPortTCP</A>.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0002">TIdMappedPortTCP.MappedPort</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007533.html" CLASS="Element59">TIdMappedPortTCP</A>, <A HREF="012336.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Port number for mapped connections to the host.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> MappedPort: Integer;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+MappedPort is an Integer property that represents the port number used by <A HREF="007533.html" CLASS="Element59">TIdMappedPortTCP</A> to establish a connection with the remote host computer. MappedPort is assigned to the port number for the TCP client created by <A HREF="007533.html" CLASS="Element59">TIdMappedPortTCP</A>.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0000">TIdMappedPortTCP.Create</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007533.html" CLASS="Element59">TIdMappedPortTCP</A>, <A HREF="012337.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Constructor for the object instance.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>constructor</STRONG> Create(AOwner: TComponent); <STRONG>override</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+AOwner: TComponent</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Owner of the object instance.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Create is the constructor for the object instance. Create calls the inherited Create method to initialize the object instance, and sets <A HREF="007533.html#0002" CLASS="Element59">MappedPort</A> to the constant value <A HREF="001290.html" CLASS="Element59">ID_MAPPED_PORT_TCP_PORT</A>.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0000">TIdMappedPortTCP.OnConnect</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007533.html" CLASS="Element59">TIdMappedPortTCP</A>, <A HREF="012338.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Event handler signalled for local client connection to the proxy server.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> OnConnect: <A HREF="007536.html" CLASS="Element59">TIdMappedPortThreadEvent</A>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+OnConnect is a <A HREF="007536.html" CLASS="Element59">TIdMappedPortThreadEvent</A> property signalled when a threaded client connection to the proxy server is establised. OnConnect allows the server to implement processing required to verify or log local client connections prior to establishing the outbound connection to the renmote computer system.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0001">TIdMappedPortTCP.OnDisconnect</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007533.html" CLASS="Element59">TIdMappedPortTCP</A>, <A HREF="012339.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Event handler signalled when the local client connection is closed.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> OnDisconnect: <A HREF="007536.html" CLASS="Element59">TIdMappedPortThreadEvent</A>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+OnDisconnect is a <A HREF="007536.html" CLASS="Element59">TIdMappedPortThreadEvent</A> property that represents the event handler signalled when a threaded client connection is established to the port-based proxy server. OnDisconnect allows the server to implement logging or processing required when the local connection for the peer thread has been closed.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0002">TIdMappedPortTCP.OnExecute</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007533.html" CLASS="Element59">TIdMappedPortTCP</A>, <A HREF="012340.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Event handler for reading data sent to the remote system on the proxied connection.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> OnExecute: <A HREF="007536.html" CLASS="Element59">TIdMappedPortThreadEvent</A>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+OnExecute is a <A HREF="007536.html" CLASS="Element59">TIdMappedPortThreadEvent</A> property that represents the event handler triggered during execution of a threaded client connection to the port-based proxy server. OnExecute allows the access to the threaded client connection for the purposes of reading data from the local connection, and forwarding the data to the outbound client connection to the remote system.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0003">TIdMappedPortTCP.OnOutboundConnect</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007533.html" CLASS="Element59">TIdMappedPortTCP</A>, <A HREF="012341.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Event trigered when an outcbound connection to the remnote system is opened.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> OnOutboundConnect: <A HREF="007532.html" CLASS="Element59">TIdMappedPortOutboundConnectEvent</A>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+OnOutboundConnect is a <A HREF="007532.html" CLASS="Element59">TIdMappedPortOutboundConnectEvent</A> property that represents the event handler triggered when an outbound connection has been opened for the local client connection to the proxy server. OnOutboundConnect can have an optional exception type raised while trying to open the connection to the remote computer system.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0004">TIdMappedPortTCP.OnOutboundData</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007533.html" CLASS="Element59">TIdMappedPortTCP</A>, <A HREF="012342.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Event handler signalled when data is available to <A HREF="006944.html" CLASS="Element59">send</A> to the remote computer system.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> OnOutboundData: <A HREF="007536.html" CLASS="Element59">TIdMappedPortThreadEvent</A>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+OnOutboundData is a <A HREF="007536.html" CLASS="Element59">TIdMappedPortThreadEvent</A> property that represents the event handler signalled when data has been read from the local client connection to the port-based proxy server. OnOutboundData is used during execution of the client thread after the local and remote connections have been established, after data has been read from the local connection, and just prior to sending data to the remote connection.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0005">TIdMappedPortTCP.OnOutboundDisconnect</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007533.html" CLASS="Element59">TIdMappedPortTCP</A></DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> OnOutboundDisconnect: <A HREF="007536.html" CLASS="Element59">TIdMappedPortThreadEvent</A>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+OnOutboundDisconnect</DIV>
+</DIV>
+<DIV CLASS="Element62">
+<HR>Created with Doc-O-Matic 2 donated to <STRONG><A HREF="http://www.delphi-jedi.org">Project JEDI</A></STRONG>. Commercial license available from the <STRONG><A HREF="http://www.doc-o-matic.com">Doc-O-Matic site</A></STRONG>.</DIV>
+</DIV></BODY></HTML>

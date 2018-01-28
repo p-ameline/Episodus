@@ -1,0 +1,1333 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+<TITLE>TIdFTP</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <META name="GENERATOR" content="Doc-O-Matic">
+    <LINK rel="STYLESHEET" href="default.css" type="text/css">
+
+<SCRIPT LANGUAGE="JavaScript1.2" SRC="scripts.js"></SCRIPT>
+</HEAD>
+<BODY CLASS="Element57">
+<TABLE BORDER="0" BGCOLOR="#AACCFF" WIDTH="100%" CELLSPACING="0" CELLPADDING="0">
+<TR><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element1">
+Indy 9</DIV>
+</TD><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element2">
+<A HREF="content.html" CLASS="Element59">Content</A> | <A HREF="idx.html" CLASS="Element59">Index</A> | <A HREF="symref.html" CLASS="Element59">Reference</A></DIV>
+</TD></TR></TABLE><DIV CLASS="Element58">
+<DIV CLASS="Element5">
+TIdFTP</DIV>
+<DIV CLASS="Element7">
+<A HREF="011031.html" CLASS="Element59">Hierarchy</A>, <A HREF="011032.html" CLASS="Element59">Properties</A>, <A HREF="011033.html" CLASS="Element59">Methods</A>, <A HREF="011034.html" CLASS="Element59">Events</A>, <A HREF="011035.html" CLASS="Element59">See Also</A>, <A HREF="002189.html" CLASS="Element59">Unit: IdFTP</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Implements a File Transfer Protocol (FTP) client.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12">TIdFTP = <STRONG>class</STRONG>(<A HREF="007827.html" CLASS="Element59">TIdTCPClient</A>)</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Unit</DIV>
+<DIV CLASS="Element69">
+<A HREF="002189.html" CLASS="Element59">IdFTP</A></DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+TIdFtp implements a File Transfer Protocol (FTP) client as described in the Internet Standards document:<P CLASS="Element10">
+<UL>
+<LI>RFC 959 - File Transfer Protocol [FTP] (http://www.rfc-editor.org/rfc/rfc959.txt)</UL>
+<P CLASS="Element10">
+FTP is a basic file-sharing system for uploading and downloading files, as well as managing files and directories. The FTP protocol is commonly used for software distribution, uploading files to a web-server, and providing archives for various purposes.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0003">TIdFTP.CanResume</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007328.html" CLASS="Element59">TIdFTP</A>, <A HREF="011036.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Indicates the FTP site supports FTP Resume operations.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> CanResume: Boolean;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+CanResume is a read-only Boolean property that indicates the FTP site supports FTP Resume operations. When the FTP server supports resume, you can use the <A HREF="007328.html#000C" CLASS="Element59">Get</A> method to resume a previously aborted download. If the FTP server does not support resume, the file has to be retrieved start at the beginning of the file.<P CLASS="Element10">
+CanResume is implemented using the <A HREF="007328.html#000C" CLASS="Element59">ResumeSupported</A> for read access, and will normally be updated only once per FTP client session by testing the results of the FTP REST command.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="000A">TIdFTP.DirectoryListing</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007328.html" CLASS="Element59">TIdFTP</A>, <A HREF="011037.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Container for a structured file and directory listing.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> DirectoryListing: <A HREF="007337.html" CLASS="Element59">TIdFTPListItems</A>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+DirectoryListing is a read-only TIdFTPList property that represents the container and parser for <A HREF="007333.html" CLASS="Element59">TIdFTPListItem</A> instances created from the result values for the <A HREF="007328.html#0010" CLASS="Element59">List</A> or <A HREF="007328.html#0010" CLASS="Element59">Status</A> methods. DirectoryListing is always cleared prior to adding the values returned by <A HREF="007328.html#0010" CLASS="Element59">List</A> or <A HREF="007328.html#0010" CLASS="Element59">Status</A>.<P CLASS="Element10">
+DirectoryListing provides a structured means of accessing data about files and directories returned from the FTP LIST, NLST, or STAT commands. DirectoryListing can also be used to populate GUI controls that display the results of the FTP operation, like TTreeView.<P CLASS="Element10">
+DirectoryListing can be used with the <A HREF="007328.html#0000" CLASS="Element59">OnParseCustomListFormat</A> event handler to allow parsing of FTP <A HREF="007328.html#0010" CLASS="Element59">List</A> formats not normally supported by TIdFTPList.<P CLASS="Element10">
+DirectoryListing is initialized prior to use in <A HREF="007328.html#0010" CLASS="Element59">List</A>, or using the <A HREF="007328.html#0019" CLASS="Element59">OnCreateFTPList</A> event handler. DirectoryListing is freed in the <A HREF="007328.html#0009" CLASS="Element59">Destroy</A> method.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0011">TIdFTP.ListResult</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007328.html" CLASS="Element59">TIdFTP</A>, <A HREF="011038.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Container for raw text values returned in an FTP directory listing.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> ListResult: TStrings;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+ListResult is a read-only TStrings property used to store the text values returned from an FTP server using the <A HREF="007328.html#0010" CLASS="Element59">List</A> method. ListResult is also used when attempting to determine the listing format for the items to be created in <A HREF="007328.html#000A" CLASS="Element59">DirectoryListing</A>. ListResult is intialized in the <A HREF="007328.html#0007" CLASS="Element59">Create</A> constructor, and freed in the <A HREF="007328.html#0009" CLASS="Element59">Destroy</A> method.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0013">TIdFTP.LoginMsg</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007328.html" CLASS="Element59">TIdFTP</A>, <A HREF="011039.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Message sent by the FTP server after client log in.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> LoginMsg: <A HREF="007663.html" CLASS="Element59">TIdRFCReply</A>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+LoginMsg is a <A HREF="007663.html" CLASS="Element59">TIdRFCReply</A> property that represents the message sent by the FTP server after a successful call to the <A HREF="007328.html#0012" CLASS="Element59">TIdFTP.Login</A> method. The values in LoginMsg are usually displayed to the user and indicate information such as acceptable use and access policies, a message of the day, or anything else the server wishes mention.<P CLASS="Element10">
+The LoginMsg property is cleared by the <A HREF="007328.html#0009" CLASS="Element59">ReInitialize</A> method.<P CLASS="Element10">
+Use Greeting to access the welcome message and instructions received as part of the success response code 220 after a calling <A HREF="007328.html#0006" CLASS="Element59">TIdFTP.Connect</A>.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0016">TIdFTP.OnAfterClientLogin</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007328.html" CLASS="Element59">TIdFTP</A>, <A HREF="011040.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Event handler signalled after a successful <A HREF="007328.html#0012" CLASS="Element59">Login</A> attempt.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> OnAfterClientLogin: <A HREF="008008.html" CLASS="Element59">TOnAfterClientLogin</A>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+OnAfterLogin is a TNotifyEvent property that represents the event handler signalled after a successful call to <A HREF="007328.html#0012" CLASS="Element59">Login</A>, but prior to setting up the connection properties. OnAfterLogin can be used to provide FTP proxy support from the user application.<P CLASS="Element10">
+Applications must assign an procedure to the event handler to allow responding to the event notification.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0001">TIdFTP.Passive</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007328.html" CLASS="Element59">TIdFTP</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Determines the FTP data connection method.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> Passive: boolean;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Passive is a Boolean property that determines how a File Transfer Protocol Data connection is made.<P CLASS="Element10">
+If Passive is set to False, the PORT method is used. In this method, <A HREF="007328.html" CLASS="Element59">TIdFTP</A> uses the <A HREF="007700.html" CLASS="Element59">TIdSimpleServer</A> to <A HREF="003177.html" CLASS="Element59">listen</A> for a data connection which is established by the server and the PORT command tells the server where to <A HREF="000295.html" CLASS="Element59">connect</A> to <A HREF="007328.html" CLASS="Element59">TIdFTP</A>.<P CLASS="Element10">
+If Passive is set to True, the PASV method is used. In this method, <A HREF="007328.html" CLASS="Element59">TIdFTP</A> issues the PASV command and the server tells <A HREF="007328.html" CLASS="Element59">TIdFTP</A> where to establish the data connection. <A HREF="007328.html" CLASS="Element59">TIdFTP</A> than connects to the server where the server indicated using <A HREF="007827.html" CLASS="Element59">TIdTCPClient</A>. This method is sometimes used with some proxy configurations. However, some proxy configurations require PORT transfers and some FTP servers do not support PASV transfers.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0002">TIdFTP.Password</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007328.html" CLASS="Element59">TIdFTP</A>, <A HREF="011041.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Indicates the Password used when logging in to the FTP server.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> Password;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Password is a String property that indicates the credentials used when logging in to the FTP server. <A HREF="007328.html#0015" CLASS="Element59">Username</A> and Password are sent to the FTP server when using the <A HREF="007328.html#0012" CLASS="Element59">TIdFTP.Login</A> method.<P CLASS="Element10">
+For anonymous file transfers, Password should contain the client email address in the property.<P CLASS="Element10">
+For FTP clients that require connection to a proxy server, the <A HREF="007328.html#0015" CLASS="Element59">Username</A> and Password properties found in <A HREF="007328.html#0004" CLASS="Element59">ProxySettings</A> may be used depending on the proxy server type in <A HREF="007328.html#0004" CLASS="Element59">ProxySettings</A>.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0003">TIdFTP.Port</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007328.html" CLASS="Element59">TIdFTP</A>, <A HREF="011042.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Represents the port number used for the FTP Control channel.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> Port: integer;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Port is an Integer property that represents the port number on the FTP server used to establish the client connection for the FTP Control channel. The default value for Port is IDPORT_FTP, as required by the FTP protocol. Client connections may use the values in <A HREF="007328.html#0004" CLASS="Element59">ProxySettings</A> when proxied server connections are required.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0004">TIdFTP.ProxySettings</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007328.html" CLASS="Element59">TIdFTP</A>, <A HREF="011043.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> ProxySettings: <A HREF="007340.html" CLASS="Element59">TIdFtpProxySettings</A>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+ProxySettings is a read-only <A HREF="007340.html" CLASS="Element59">TIdFtpProxySettings</A> property that represents the optional settings to be used for proxied connections to an FTP server. ProxySettings is allocated in <A HREF="007328.html#0007" CLASS="Element59">Create</A>, and freed in <A HREF="007328.html#0009" CLASS="Element59">Destroy</A>.<P CLASS="Element10">
+ProxySettings contains properties that indicate the <A HREF="007341.html" CLASS="Element59">TIdFtpProxyType</A> to use when establishing the proxied connection using the Host, <A HREF="007328.html#0003" CLASS="Element59">Port</A>, <A HREF="007328.html#0015" CLASS="Element59">Username</A>, and <A HREF="007328.html#0002" CLASS="Element59">Password</A> property values.<P CLASS="Element10">
+The Host and <A HREF="007328.html#0003" CLASS="Element59">Port</A> values in ProxySettings are used in <A HREF="007328.html#0006" CLASS="Element59">Connect</A> to establish the control channel connection for the FTP client when ProxySettings.ProxyType contains a value other than fpcmNone.<P CLASS="Element10">
+ProxySettings.ProxyType also indicates both the method and values used for authenticating the proxied connection to the FTP server in <A HREF="007328.html#0012" CLASS="Element59">Login</A>, according to the following proxy type values and methodologies:<P CLASS="Element10">
+<UL>
+<LI>fpcmNone - Sends the FTP client <A HREF="007328.html#0015" CLASS="Element59">Username</A> and optional <A HREF="007328.html#0002" CLASS="Element59">Password</A>.<P CLASS="Element10">
+<LI>fpcmUserSite - Sends the ProxySettings <A HREF="007328.html#0015" CLASS="Element59">Username</A> and optional <A HREF="007328.html#0002" CLASS="Element59">Password</A>, followed immediately by the FTP client <A HREF="007328.html#0015" CLASS="Element59">Username</A> and optional <A HREF="007328.html#0002" CLASS="Element59">Password</A>.<P CLASS="Element10">
+<LI>fpcmSite - Sends the ProxySettings <A HREF="007328.html#0015" CLASS="Element59">Username</A> and optional <A HREF="007328.html#0002" CLASS="Element59">Password</A>, sends the SITE command and the FTP Host property, and the FTP client <A HREF="007328.html#0015" CLASS="Element59">Username</A> and optional <A HREF="007328.html#0002" CLASS="Element59">Password</A>.<P CLASS="Element10">
+<LI>fpcmOpen - Sends the ProxySettings <A HREF="007328.html#0015" CLASS="Element59">Username</A> and optional <A HREF="007328.html#0002" CLASS="Element59">Password</A>, sends the OPEN command with the FTP Host property, and the FTP client <A HREF="007328.html#0015" CLASS="Element59">Username</A> and optional <A HREF="007328.html#0002" CLASS="Element59">Password</A>.<P CLASS="Element10">
+<LI>fpcmUserPass - Calls SendCmd with the command USER user@proxyuser@host, calls SendCmd with the command PASS pwd@proxypwd, or optionally PASS pwd.<P CLASS="Element10">
+<LI>fpcmTransparent - Sends the ProxySettings <A HREF="007328.html#0015" CLASS="Element59">Username</A> and optional <A HREF="007328.html#0002" CLASS="Element59">Password</A>, followed immediately by the FTP client <A HREF="007328.html#0015" CLASS="Element59">Username</A> and optional password.<P CLASS="Element10">
+<LI>fpcmHttpProxyWithFtp - Not implemented at this time.</UL>
+</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0012">TIdFTP.SystemDesc</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007328.html" CLASS="Element59">TIdFTP</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Description of the FTP server.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> SystemDesc: <STRONG>string</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+SystemDesc is a String property that contians a description of the FTP server. SystemDesc normally contains the name of the operating system for the FTP server, but the value of SystemDesc can be server-specififc.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0014">TIdFTP.TransferType</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007328.html" CLASS="Element59">TIdFTP</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Indicates the file transfer type.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> TransferType: <A HREF="007350.html" CLASS="Element59">TIdFTPTransferType</A>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+TransferType is a <A HREF="007350.html" CLASS="Element59">TIdFTPTransferType</A> property that indicates the file transfer type currently in use for the FTP client, and can contain one of the following values:<P CLASS="Element10">
+<UL>
+<LI>ftBinary - Binary (8 bit) file transfers<P CLASS="Element10">
+<LI>ftASCII - ASCII (7 bit) file transfers</UL>
+<P CLASS="Element10">
+An application should use the ftBinary transfer type for transferring executables, compressed files, graphics, and multimedia files. Use the ftASCII transfer type for 7bit ASCII files, such as text or Hyper Text Markup Language.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0015">TIdFTP.Username</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007328.html" CLASS="Element59">TIdFTP</A>, <A HREF="011044.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Indicates the user name used when logging in to the FTP server.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> Username;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Username is a String property that indicates the user name used when logging in to the FTP server. Username and <A HREF="007328.html#0002" CLASS="Element59">Password</A> are sent to the FTP server when using the <A HREF="007328.html#0012" CLASS="Element59">TIdFTP.Login</A> method.<P CLASS="Element10">
+For anonymous file transfers, Username should contain the text <I>anonymous</I>. Use your email address in the <A HREF="007328.html#0002" CLASS="Element59">Password</A> property when connecting for anonymous file transfers.<P CLASS="Element10">
+For FTP clients that require connection to a proxy server, the Username and <A HREF="007328.html#0002" CLASS="Element59">Password</A> properties found in <A HREF="007328.html#0004" CLASS="Element59">ProxySettings</A> may be used depending on the proxy server type in <A HREF="007328.html#0004" CLASS="Element59">ProxySettings</A>.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0000">TIdFTP.Abort</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007328.html" CLASS="Element59">TIdFTP</A>, <A HREF="011045.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Stops an FTP service operation.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>procedure</STRONG> Abort; <STRONG>virtual</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Abort is a procedure that instructs the FTP server to interrupt the current FTP service request, and any associated transfer of data. Abort sends the FTP ABOR command to the server to halt the current operation. Abort forces the <A HREF="007071.html" CLASS="Element59">socket</A> allocated to the data channel for the FTP session to be disconnected by calling <A HREF="007328.html#000F" CLASS="Element59">KillDataChannel</A>. Abort does not change the state in Connected for the control channel used in the FTP client.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0001">TIdFTP.Account</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007328.html" CLASS="Element59">TIdFTP</A>, <A HREF="011046.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+This method sends additional login information to a FTP Server.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>procedure</STRONG> Account(AInfo: <STRONG>String</STRONG>);</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+AInfo: String</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+The additional login information required by a server.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Account is a procedure used to <A HREF="006944.html" CLASS="Element59">send</A> additional login information to a FTP Server, in addition to the login information sent by the <A HREF="007328.html#0012" CLASS="Element59">TIdFTP.Login</A> and <A HREF="007328.html#0006" CLASS="Element59">TIdFTP.Connect</A> methods. Account can be used when you get the FTP response codes 332 or 532 as a reply to a FTP commands.<P CLASS="Element10">
+Historically, Account is a Telnet string identifying the user's account. The command is not necessarily related to the USER command, as some sites may require an account for login and others only for specific access, such as storing files. If account information is not required for <A HREF="007328.html#0012" CLASS="Element59">Login</A>, the response code is 230; and if the account information is needed for a command issued later in the dialogue, the server should return a 332 or 532 reply depending on whether it stores (pending receipt of the AccounT command) or discards the command, respectively.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0002">TIdFTP.Allocate</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007328.html" CLASS="Element59">TIdFTP</A>, <A HREF="011047.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Pre-allocates space on a FTP server before you upload a file.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>procedure</STRONG> Allocate(AAllocateBytes: Integer);</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+AAllocateBytes: Integer</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+The number of bytes that should be allocated</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+This method pre-allocates space on a FTP server before you upload a file using the <A HREF="007328.html#0005" CLASS="Element59">Put</A> method. It is recommend to use this method before attempting to upload a file. Some servers may require this command while others do not. If a server does not require this command, it should treat this command as if it you had called the <A HREF="007328.html#0015" CLASS="Element59">TIdFTP.Noop</A> method.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0004">TIdFTP.ChangeDir</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007328.html" CLASS="Element59">TIdFTP</A>, <A HREF="011048.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Changes the current directory on the FTP server file system.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>procedure</STRONG> ChangeDir(<STRONG>const</STRONG> ADirName: <STRONG>string</STRONG>);</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+const ADirName: string</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+path desired on the srver file system.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+ChangeDir is a procedure that changes the current directory on the FTP server file system to the subdirectory specified in the ADirName parameter. ChangeDir sends the FTP CWD command to set current directory to the specified value.<P CLASS="Element10">
+<STRONG>Note</STRONG>: RFC 959 indicates that reponse code 250 is the proper success response code for the CWD command. Some server implementations (to remain nameless) return the 250 response code to indicate successful completeion of the CWD command. Indy will recognize both response codes 200 and 250 as the success response code for the CDW command.<P CLASS="Element10">
+Use <A HREF="007328.html#0005" CLASS="Element59">ChangeDirUp</A> to set the current directory on the FTP server to the directory on level higher in the file system hierarchy.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0005">TIdFTP.ChangeDirUp</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007328.html" CLASS="Element59">TIdFTP</A>, <A HREF="011049.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Changes to the parent directory on the FTP server.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>procedure</STRONG> ChangeDirUp;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+<A HREF="007328.html#0004" CLASS="Element59">ChangeDir</A> is a procedure that changes the current directory up one level in the local file system for the FTP server. Use the <A HREF="007328.html#0004" CLASS="Element59">ChangeDir</A> method to move to a specified directory on the local file system.<P CLASS="Element10">
+<STRONG>Note</STRONG>: RFC 959 indicates that reponse code 200 is the proper success response code for the CWUP command, but mentions that CDUP may also returns the 250 response code permitted for CWD. Indy will recognize both response codes 200 and 250 as the success response code for the CDUP command.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0006">TIdFTP.Connect</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007328.html" CLASS="Element59">TIdFTP</A>, <A HREF="011050.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Opens a connection to the FTP server.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>procedure</STRONG> Connect(AAutoLogin: boolean = True; <STRONG>const</STRONG> ATimeout: Integer = <A HREF="002932.html" CLASS="Element59">IdTimeoutDefault</A>); <STRONG>reintroduce</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+AAutoLogin: boolean = True</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+<A HREF="007328.html#0012" CLASS="Element59">Login</A> the user when connected. Default value is True.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Connect is a procedure that opens the connection to an FTP server using the Host and <A HREF="007328.html#0003" CLASS="Element59">Port</A> properties. Connect will attempt to use values from the Host and <A HREF="007328.html#0003" CLASS="Element59">Port</A> properties in <A HREF="007328.html#0004" CLASS="Element59">ProxySettings</A> when proxied server connections are required, but will revert to the original Host and <A HREF="007328.html#0003" CLASS="Element59">Port</A> values if an exception occurs. Connect calls the inherited Connect method to open the physical <A HREF="007071.html" CLASS="Element59">socket</A> handle for the connection.<P CLASS="Element10">
+When the protocol response code from the Server is 220, the values in LastCmdResult are assigned to the Greeting property.<P CLASS="Element10">
+When AutoLogin is True, the Connect method will authenticate the connection using the <A HREF="007328.html#0012" CLASS="Element59">Login</A> method and trigger the OnAfterLogin event handler. Connect also sends the <A HREF="007328.html#0014" CLASS="Element59">TransferType</A> for the new connection, and sends the FTP SYST command to get the host FTP server stored in <A HREF="007328.html#0012" CLASS="Element59">SystemDesc</A>.<P CLASS="Element10">
+After successful completion of the preceeding steps, Connect triggers the OnStatus event handler using the ftpReady status value. If an exception is raised in Connect, Connect calls Disconnect and re-raises the exception for the application exception handler.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0007">TIdFTP.Create</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007328.html" CLASS="Element59">TIdFTP</A>, <A HREF="011051.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Constructor for the object instance.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>constructor</STRONG> Create(AOwner: TComponent); <STRONG>override</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+AOwner: TComponent</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Owner of the object instance.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Create is the constructor for the object instance. Create calls the inherited Create method using AOwner as the owner of the object instance.<P CLASS="Element10">
+Create sets the default values used in FTP client properties, including:<P CLASS="Element10">
+<UL>
+<LI><A HREF="007328.html#0003" CLASS="Element59">Port</A> - IDPORT_FTP (as specified in the File Transfer Protocol).<P CLASS="Element10">
+<LI><A HREF="007328.html#0001" CLASS="Element59">Passive</A> - <A HREF="002066.html" CLASS="Element59">Id_TIdFTP_Passive</A><P CLASS="Element10">
+<LI><A HREF="007328.html#0014" CLASS="Element59">TransferType</A> - <A HREF="002067.html" CLASS="Element59">Id_TIdFTP_TransferType</A><P CLASS="Element10">
+<LI><A HREF="007328.html#0003" CLASS="Element59">CanResume</A> - False</UL>
+<P CLASS="Element10">
+Create also sets the value used in the internal flag indicating if support for Resume has been tested to False.<P CLASS="Element10">
+Create also allocates resources required for the <A HREF="007328.html#0013" CLASS="Element59">LoginMsg</A>, <A HREF="007328.html#0011" CLASS="Element59">ListResult</A>, and <A HREF="007328.html#0004" CLASS="Element59">ProxySettings</A> properties.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0008">TIdFTP.Delete</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007328.html" CLASS="Element59">TIdFTP</A>, <A HREF="011052.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Remove a file on the FTP server.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>procedure</STRONG> Delete(<STRONG>const</STRONG> AFilename: <STRONG>string</STRONG>);</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Delete is a procedure that removes the file specified in AFilename from the file system on the FTP server. Some servers may not give the user permission to delete files on the server file system.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0009">TIdFTP.Destroy</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007328.html" CLASS="Element59">TIdFTP</A>, <A HREF="011053.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Frees the object instance.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>destructor</STRONG> Destroy; <STRONG>override</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Destroy is the destructor for the object instance. Destroy frees resources allocated in the <A HREF="007328.html#0007" CLASS="Element59">Create</A> constructor to the <A HREF="007328.html#0013" CLASS="Element59">LoginMsg</A>, <A HREF="007328.html#0011" CLASS="Element59">ListResult</A>, and <A HREF="007328.html#0004" CLASS="Element59">ProxySettings</A> properties. Destroy also clears and frees the collection in <A HREF="007328.html#000A" CLASS="Element59">DirectoryListing</A>. Destroy calls the inherited Destroy method prior to exiting.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="000B">TIdFTP.FileStructure</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007328.html" CLASS="Element59">TIdFTP</A>, <A HREF="011054.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Sends the data storage format required to the FTP server.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>procedure</STRONG> FileStructure(AStructure: <A HREF="007331.html" CLASS="Element59">TIdFTPDataStructure</A>);</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+AStructure: TIdFTPDataStructure</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Data structure for storage of file(s).</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+FileStructure is a procedure that informs the FTP server of the intended storage format for subsequent FTP commands that transfer data. FileStructure <A HREF="006944.html" CLASS="Element59">send</A> the FTP STRU command verb and the character representation of the <A HREF="007331.html" CLASS="Element59">TIdFTPDataStructure</A> value specified in AStructure.<P CLASS="Element10">
+<STRONG>Note</STRONG>: FileStructure has no effect if the FTP client is not Connected.<P CLASS="Element10">
+Use <A HREF="007328.html#0011" CLASS="Element59">StructureMount</A> to mount a different file system data structure without altering login or account information.<P CLASS="Element10">
+Use <A HREF="007328.html#0014" CLASS="Element59">TransferType</A> to indicate if the file transfer requires Binary or ASCII representation of data.<P CLASS="Element10">
+Use <A HREF="007328.html#0013" CLASS="Element59">TransferMode</A> to indicate whether data transfers will use Block, Compressed, or Stream data handling.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="000D">TIdFTP.Get</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007328.html" CLASS="Element59">TIdFTP</A>, <A HREF="011055.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Retrieves a file using the FTP protocol.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>procedure</STRONG> <A HREF="007328.html#000C" CLASS="Element59">Get</A>(<STRONG>const</STRONG> ASourceFile: <STRONG>string</STRONG>; ADest: TStream; AResume: Boolean = false); <STRONG>overload</STRONG>;
+<STRONG>procedure</STRONG> <A HREF="007328.html#000C" CLASS="Element59">Get</A>(<STRONG>const</STRONG> ASourceFile: <STRONG>string</STRONG>; <STRONG>const</STRONG> ADestFile: <STRONG>string</STRONG>; <STRONG>const</STRONG> ACanOverwrite: boolean = false; AResume: Boolean = false); <STRONG>overload</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+const ASourceFile: string</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+File name on the FTP server.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+ADest: TStream</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Stream where file data will be written.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+AResume: Boolean = false</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Partial download can be completed.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+const ADestFile: string</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+File name and optional path on the local machine.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+const ACanOverwrite: boolean = false</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Overwrite an existing file with the same name.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Get is an overloaded procedure that allows the FTP client to retrieve a file with the name specified in ASourceFile from the FTP server using the FTP RETR command verb. The overloaded implementations of Get use either a file- or a stream-based destination for the data from the FTP server, as specified in ADestFile or ADest.<P CLASS="Element10">
+Get allows continuing a previous partial download or appending data to an existing file on the local file system when AResume is True and <A HREF="007328.html#0003" CLASS="Element59">CanResume</A> indicates that the FTP server implementation allows the FTP REST command verb.<P CLASS="Element10">
+In the file-based variant of the method, the destination file will be created before retrieving data when ACanOverwrite is True or the file does not already exist. When ACanOverwite is False and AResume is True, the destination file will be opened and position to the end of the file before retrieving data.<P CLASS="Element10">
+An <A HREF="000379.html" CLASS="Element59">EIdFTPFileAlreadyExists</A> exception will be raised when the destination file in ADestFile already exists, and both ACanOverwrite and AResume contain False.<P CLASS="Element10">
+In the stream-based variant of the Get method, data returned from the FTP server can be accessed in the stream specified in ADest. During data retrieval, Get calls methods that initialize the DataChannel for the FTP client using the connection type specificed in <A HREF="007328.html#0001" CLASS="Element59">Passive</A>. These protected methods also trigger the OnStatus event handler with the ftpTransfer status value, reads stream data from the FTP server, and signals the the OnStatus event handler with the ftpReady status value on completion. OnStatus maty be triggered with the value ftpAborted if the response code from the FTP server is the numeric value 225.<P CLASS="Element10">
+After completion of the retrieval process, Get signals the <A HREF="007328.html#0017" CLASS="Element59">OnAfterGet</A> event handler using the stream specified in ADest as an argument.<P CLASS="Element10">
+Use <A HREF="007328.html#0005" CLASS="Element59">Put</A> to transfer data from the FTP client to the FTP server.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="000C">TIdFTP.Get</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007328.html" CLASS="Element59">TIdFTP</A>, <A HREF="011056.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Retrieves a file using the FTP protocol.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>procedure</STRONG> Get(<STRONG>const</STRONG> ASourceFile: <STRONG>string</STRONG>; ADest: TStream; AResume: Boolean = false); <STRONG>overload</STRONG>;
+<STRONG>procedure</STRONG> Get(<STRONG>const</STRONG> ASourceFile: <STRONG>string</STRONG>; <STRONG>const</STRONG> ADestFile: <STRONG>string</STRONG>; <STRONG>const</STRONG> ACanOverwrite: boolean = false; AResume: Boolean = false); <STRONG>overload</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+const ASourceFile: string</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+File name on the FTP server.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+ADest: TStream</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Stream where file data will be written.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+AResume: Boolean = false</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Partial download can be completed.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+const ADestFile: string</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+File name and optional path on the local machine.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+const ACanOverwrite: boolean = false</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Overwrite an existing file with the same name.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Get is an overloaded procedure that allows the FTP client to retrieve a file with the name specified in ASourceFile from the FTP server using the FTP RETR command verb. The overloaded implementations of Get use either a file- or a stream-based destination for the data from the FTP server, as specified in ADestFile or ADest.<P CLASS="Element10">
+Get allows continuing a previous partial download or appending data to an existing file on the local file system when AResume is True and <A HREF="007328.html#0003" CLASS="Element59">CanResume</A> indicates that the FTP server implementation allows the FTP REST command verb.<P CLASS="Element10">
+In the file-based variant of the method, the destination file will be created before retrieving data when ACanOverwrite is True or the file does not already exist. When ACanOverwite is False and AResume is True, the destination file will be opened and position to the end of the file before retrieving data.<P CLASS="Element10">
+An <A HREF="000379.html" CLASS="Element59">EIdFTPFileAlreadyExists</A> exception will be raised when the destination file in ADestFile already exists, and both ACanOverwrite and AResume contain False.<P CLASS="Element10">
+In the stream-based variant of the Get method, data returned from the FTP server can be accessed in the stream specified in ADest. During data retrieval, Get calls methods that initialize the DataChannel for the FTP client using the connection type specificed in <A HREF="007328.html#0001" CLASS="Element59">Passive</A>. These protected methods also trigger the OnStatus event handler with the ftpTransfer status value, reads stream data from the FTP server, and signals the the OnStatus event handler with the ftpReady status value on completion. OnStatus maty be triggered with the value ftpAborted if the response code from the FTP server is the numeric value 225.<P CLASS="Element10">
+After completion of the retrieval process, Get signals the <A HREF="007328.html#0017" CLASS="Element59">OnAfterGet</A> event handler using the stream specified in ADest as an argument.<P CLASS="Element10">
+Use <A HREF="007328.html#0005" CLASS="Element59">Put</A> to transfer data from the FTP client to the FTP server.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="000E">TIdFTP.Help</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007328.html" CLASS="Element59">TIdFTP</A>, <A HREF="011057.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Requests FTP server capabilities or site-specific implementations.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>procedure</STRONG> Help(<STRONG>var</STRONG> AHelpContents: TStringList; ACommand: <STRONG>String</STRONG> = '');</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+var AHelpContents: TStringList</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Values returned from the HELP command.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+ACommand: String = ''</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Optional argument requesting more specific information.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Help is a procedure that retrieves the FTP server capabilities, and other helpful information, using the FTP HELP command. The return values in AHelpContents will reflect information regarding the server implementation status over the control connection to the user.<P CLASS="Element10">
+Help can <A HREF="006944.html" CLASS="Element59">send</A> the optional argument in ACommand to request more specific information about about value returned in a previous call to Help. The server may use this reply to specify site-dependent parameters, e.g., in response to HELP SITE.<P CLASS="Element10">
+<STRONG>Note</STRONG>: Help has no effect if the FTP client is not Connected. Help can be used prior to <A HREF="007328.html#0012" CLASS="Element59">Login</A> or other forms of user authentication.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="000F">TIdFTP.KillDataChannel</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007328.html" CLASS="Element59">TIdFTP</A>, <A HREF="011058.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Closes the FTP data channel.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>procedure</STRONG> KillDataChannel; <STRONG>virtual</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+KillDataChannel is a procedure used to force the FTP data channel to be closed. File data is sent or received using the data channel in <A HREF="007328.html#0005" CLASS="Element59">Put</A> and <A HREF="007328.html#000C" CLASS="Element59">Get</A>. KillDataChannel closes the <A HREF="007071.html" CLASS="Element59">socket</A> handle used for the connection.<P CLASS="Element10">
+KillDataChannel is used in the <A HREF="007328.html#0000" CLASS="Element59">Abort</A> method.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0010">TIdFTP.List</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007328.html" CLASS="Element59">TIdFTP</A>, <A HREF="011059.html" CLASS="Element59">Example</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Gets a list of files and directories on the FTP server.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>procedure</STRONG> List(ADest: TStrings; <STRONG>const</STRONG> ASpecifier: <STRONG>string</STRONG> = ''; <STRONG>const</STRONG> ADetails: boolean = true);</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+ADest: TStrings</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+List for files and directories in the current directory.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+const ASpecifier: string = ''</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+File mask for the listing. Default value is ''.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+const ADetails: boolean = true</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Include file details. Default value is True.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+List is a procedure used to request a list of files or directories in the current directory on the FTP server.<P CLASS="Element10">
+ADest is a TStringList argument used to store the raw text values returned from the FTP server directory listing.<P CLASS="Element10">
+ASpecifier is a String value that contains a mask indicating the files and/or directories to be included in the listing. ASpecifier can contain common wildcard characters like <STRONG>'*'</STRONG> and <STRONG>'?'</STRONG>. Some useful masks include:<P CLASS="Element10">
+<UL>
+<LI>*.* - All files in the current directory.<P CLASS="Element10">
+<LI>* - All directory entries in the current directory.<P CLASS="Element10">
+<LI>*. - All files regardless of extension in the current directory.<P CLASS="Element10">
+<LI>A??.txt - All text files that have a 3-character name starting with 'A'.</UL>
+<P CLASS="Element10">
+ADetails is a Boolean value that indicates if the list should contain details about the files and directories that match the mask in ASpecifier. When ADetails is False, only the file or directory name is returned in the ADest string list using the FTP NLST command. When ADetails is True, List can return FTP server-dependent details including the file size, date modified, and file permissions for the Owner, Group, and User using the FTP LIST command.<P CLASS="Element10">
+List will initialize and Clear the <A HREF="007328.html#000A" CLASS="Element59">DirectoryListing</A> property, and parse the return values in ADest into collection items in the <A HREF="007328.html#000A" CLASS="Element59">DirectoryListing</A> container. When ADest is empty, parsing of the formatted DirectoyListing is omitted.<P CLASS="Element10">
+List stores the return values form the FTP server in the the <A HREF="007328.html#0011" CLASS="Element59">ListResult</A> property, and allows use for the List command for either stand-alone use or for preparation of the structured <A HREF="007328.html#000A" CLASS="Element59">DirectoryListing</A>.<P CLASS="Element10">
+List calls methods in <A HREF="007328.html#000A" CLASS="Element59">DirectoryListing</A> that detects common data formats returned by FTP servers. Applications can override the default detection and parsing behavior by assigning procedures to the <A HREF="007328.html#0018" CLASS="Element59">OnCheckListFormat</A> and <A HREF="007328.html#0000" CLASS="Element59">OnParseCustomListFormat</A> event handlers.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0012">TIdFTP.Login</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007328.html" CLASS="Element59">TIdFTP</A>, <A HREF="011060.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Authenticates a client connection to the FTP server.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>procedure</STRONG> Login;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Login is a procedure that provides authentication for an FTP client connection to the FTP server using the <A HREF="007328.html#0015" CLASS="Element59">Username</A> and <A HREF="007328.html#0002" CLASS="Element59">Password</A> properties. Login provides support for proxied connections to the FTP server through properties and methods in <A HREF="007328.html#0004" CLASS="Element59">ProxySettings</A>. Set ProxySettings.ProxyType to the <A HREF="007341.html" CLASS="Element59">TIdFtpProxyType</A> value desired for the connection prior to calling <A HREF="007328.html#0006" CLASS="Element59">Connect</A> or Login.<P CLASS="Element10">
+<STRONG>Note</STRONG>: Proxied connections using <A HREF="007341.html" CLASS="Element59">TIdFtpProxyType</A> value fpcmHttpProxyWithFtp are not implemented at this time.<P CLASS="Element10">
+The <A HREF="007328.html#0002" CLASS="Element59">Password</A> property may not be sent during Login if the FTP server indicates that it does not require it.<P CLASS="Element10">
+Login sets <A HREF="007328.html#0013" CLASS="Element59">LoginMsg</A> to the values returned in LastCmdResult on successful completion of the login sequence. Login is called by the <A HREF="007328.html#0006" CLASS="Element59">Connect</A> method, and should be called immediately after using the <A HREF="007328.html#0009" CLASS="Element59">ReInitialize</A> method.<P CLASS="Element10">
+You may also use the <A HREF="007328.html#0001" CLASS="Element59">Account</A> method to provide additional information about a client connection on some FTP server implementations.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0014">TIdFTP.MakeDir</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007328.html" CLASS="Element59">TIdFTP</A>, <A HREF="011061.html" CLASS="Element59">Example</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+<A HREF="007328.html#0007" CLASS="Element59">Create</A> a directory on the FTP server.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>procedure</STRONG> MakeDir(<STRONG>const</STRONG> ADirName: <STRONG>string</STRONG>);</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+const ADirName: string</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Directory to create.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+MakeDir is a procedure that requests creation of a directory on the FTP server. Some FTP servers may not allow the user to create new directories.<P CLASS="Element10">
+ADirName is a String that identifies the directory to be created on the FTP server. ADirName must conform to the file naming conventions for the FTP server, or an FTP error response code and message will be returned.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0015">TIdFTP.Noop</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007328.html" CLASS="Element59">TIdFTP</A>, <A HREF="011062.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Send a Keep-Alive signal to the FTP server.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>procedure</STRONG> Noop;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Noop is a method that sends a keep-alive signal to the FTP server. Noop is sometimes use to prevent the FTP server from closing a connection which is idle for a long period of time.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0006">TIdFTP.Put</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007328.html" CLASS="Element59">TIdFTP</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Uploads a file to an FTP server.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>procedure</STRONG> <A HREF="007328.html#0005" CLASS="Element59">Put</A>(<STRONG>const</STRONG> ASource: TStream; <STRONG>const</STRONG> ADestFile: <STRONG>string</STRONG> = ''; <STRONG>const</STRONG> AAppend: boolean = false); <STRONG>overload</STRONG>;
+<STRONG>procedure</STRONG> <A HREF="007328.html#0005" CLASS="Element59">Put</A>(<STRONG>const</STRONG> ASourceFile: <STRONG>string</STRONG>; <STRONG>const</STRONG> ADestFile: <STRONG>string</STRONG> = ''; <STRONG>const</STRONG> AAppend: boolean = false); <STRONG>overload</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+const ASource: TStream</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Contains data to be uploaded.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+const ADestFile: string = ''</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Destination file name on the remote FTP server.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+const AAppend: boolean = false</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Default value is False.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+const ASourceFile: string</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+File containing data to be uploaded.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Put is an overloaded procedure that uploads data to a file with the name specified in ADestFile on the FTP server. The uploaded data can be either a stream (ASource) or a name of a file which exists on the user's computer (ASourceFile).<P CLASS="Element10">
+Setting AAppend to True causes the server to append the file being uploaded to one which already exists on the FTP server.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0005">TIdFTP.Put</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007328.html" CLASS="Element59">TIdFTP</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Uploads a file to an FTP server.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>procedure</STRONG> Put(<STRONG>const</STRONG> ASource: TStream; <STRONG>const</STRONG> ADestFile: <STRONG>string</STRONG> = ''; <STRONG>const</STRONG> AAppend: boolean = false); <STRONG>overload</STRONG>;
+<STRONG>procedure</STRONG> Put(<STRONG>const</STRONG> ASourceFile: <STRONG>string</STRONG>; <STRONG>const</STRONG> ADestFile: <STRONG>string</STRONG> = ''; <STRONG>const</STRONG> AAppend: boolean = false); <STRONG>overload</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+const ASource: TStream</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Contains data to be uploaded.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+const ADestFile: string = ''</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Destination file name on the remote FTP server.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+const AAppend: boolean = false</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Default value is False.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+const ASourceFile: string</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+File containing data to be uploaded.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Put is an overloaded procedure that uploads data to a file with the name specified in ADestFile on the FTP server. The uploaded data can be either a stream (ASource) or a name of a file which exists on the user's computer (ASourceFile).<P CLASS="Element10">
+Setting AAppend to True causes the server to append the file being uploaded to one which already exists on the FTP server.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0007">TIdFTP.Quit</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007328.html" CLASS="Element59">TIdFTP</A>, <A HREF="011063.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Closes the FTP client connection.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>procedure</STRONG> Quit;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Quit is a procedure used to close a user connection to the FTP server when a file transfer operation is not in progress. Quit closes the control channel for the FTP client. An application should call <A HREF="007328.html#0000" CLASS="Element59">Abort</A>, when a file transfer is in progress, prior to calling the Quit method.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0008">TIdFTP.Quote</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007328.html" CLASS="Element59">TIdFTP</A>, <A HREF="011064.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Implements execution of FTP commands not supported in this component.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>function</STRONG> Quote(<STRONG>const</STRONG> ACommand: <STRONG>String</STRONG>): SmallInt;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+const ACommand: String</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+FTP command to be executed.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Return Value</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+SmallInt - Result code from the FTP operation.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Quote is a SmallInt function that implements execution of the literal FTP command specified in ACommand, and returns the result code from the operation. Quote is used to allow FTP commands that are site-specific or not implemented by the <A HREF="007328.html" CLASS="Element59">TIdFTP</A> component. For example, Quote is used in <A HREF="007328.html" CLASS="Element59">TIdFTP</A> to perform the FTP REST command.<P CLASS="Element10">
+Quote executes the string literal in ACommand using the inherited SendCmd method.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0009">TIdFTP.ReInitialize</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007328.html" CLASS="Element59">TIdFTP</A>, <A HREF="011065.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Clears the account and settings for the FTP client.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>procedure</STRONG> ReInitialize(ADelay: Cardinal = 10);</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+ADelay: Cardinal = 10</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Waiting for Godot.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+ReInitialize is a procedure that performs the FTP REIN command for a Connected FTP client. ReInitialize is used to clear the current <A HREF="007328.html#0001" CLASS="Element59">Account</A> and settings for the FTP client. All <A HREF="007328.html" CLASS="Element59">TIdFTP</A> properties are reset to the default values, and the control channel is left open. This is identical to the client state immediately after the control channel is opened using <A HREF="007328.html#0006" CLASS="Element59">Connect</A>.<P CLASS="Element10">
+An application should normally call the <A HREF="007328.html#0012" CLASS="Element59">Login</A> method after using ReInitialize.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="000A">TIdFTP.RemoveDir</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007328.html" CLASS="Element59">TIdFTP</A>, <A HREF="011066.html" CLASS="Element59">See Also</A>, <A HREF="011067.html" CLASS="Element59">Example</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Remove a directory on the FTP server.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>procedure</STRONG> RemoveDir(<STRONG>const</STRONG> ADirName: <STRONG>string</STRONG>);</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+const ADirName: string</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Directory to be removed.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+RemoveDir is a procedure used to request that the directory in ADirName be removed from the FTP server file hierarchy. Some FTP servers do not allow users to remove directory entries. Use <A HREF="007328.html#0008" CLASS="Element59">Delete</A> to remove files from the FTP server file system.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="000B">TIdFTP.Rename</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007328.html" CLASS="Element59">TIdFTP</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Change the name of a file on the FTP server.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>procedure</STRONG> Rename(<STRONG>const</STRONG> ASourceFile: <STRONG>string</STRONG>; <STRONG>const</STRONG> ADestFile: <STRONG>string</STRONG>);</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+const ASourceFile: string</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Original file name.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+const ADestFile: string</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+New file name.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Rename is a method used to request that the FTP server rename a file from ASourceFile to ADestFile.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="000C">TIdFTP.ResumeSupported</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007328.html" CLASS="Element59">TIdFTP</A>, <A HREF="011068.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Indicates if the server implements the FTP REST command.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>function</STRONG> ResumeSupported: Boolean;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Return Value</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Boolean - True when restart markers are supported.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+ResumeSupported is a Boolean function used as the read access specifier for the <A HREF="007328.html#0003" CLASS="Element59">CanResume</A> property, and indicates if the FTP server implements the FTP REST command. ResumeSupported calls the <A HREF="007328.html#0008" CLASS="Element59">Quote</A> method using the FTP command literal 'REST 1' to determine if the capability is supported in the FTP server implementation, and calls <A HREF="007328.html#0008" CLASS="Element59">Quote</A> using the command 'REST 0' to disable the test. When ResumeSupported returns True, the FTP server allows restart markers for file transfer.<P CLASS="Element10">
+ResumeSupported is examined in <A HREF="007328.html#000C" CLASS="Element59">Get</A> to determine if the FTP REST command is needed to resume file retreival at a specified restart marker.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="000D">TIdFTP.RetrieveCurrentDir</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007328.html" CLASS="Element59">TIdFTP</A>, <A HREF="011069.html" CLASS="Element59">See Also</A>, <A HREF="011070.html" CLASS="Element59">Example</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Gets the current directory name on the FTP server.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>function</STRONG> RetrieveCurrentDir: <STRONG>string</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Return Value</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+String - Current directory name.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+RetrieveCurrentDir is a String function that returns the name of the present working directory, or current directory, on the FTP server. The return value for RetrieveCurrentDir will contain the current directory name with leading and trailing quote (<STRONG>&quot;</STRONG>) characters removed.<P CLASS="Element10">
+Use <A HREF="007328.html#0004" CLASS="Element59">ChangeDir</A> or <A HREF="007328.html#0005" CLASS="Element59">ChangeDirUp</A> to <A HREF="006943.html" CLASS="Element59">select</A> the current directory by path or relative position in the directory hierarchy.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="000E">TIdFTP.Site</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007328.html" CLASS="Element59">TIdFTP</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Sends an FTP server site command.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>procedure</STRONG> Site(<STRONG>const</STRONG> ACommand: <STRONG>string</STRONG>);</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+const ACommand: string</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Server site command to perform.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Site is a procedure used to <A HREF="006944.html" CLASS="Element59">send</A> a site-specific FTP command directly to the FTP server. Site is used by an FTP server to provide services specific to the host system that are essential to file transfer, but not sufficiently universal to be included as commands in the FTP protocol.<P CLASS="Element10">
+Use the FTP HELP SITE command to discover the commands and syntax requirements for the specific FTP server.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="000F">TIdFTP.Size</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007328.html" CLASS="Element59">TIdFTP</A>, <A HREF="011071.html" CLASS="Element59">Example</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Gets file size information from the FTP server.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>function</STRONG> Size(<STRONG>const</STRONG> AFileName: <STRONG>String</STRONG>): Integer;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+const AFileName: String</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+The file name.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Return Value</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Integer - Size of the file or -1 when unknown.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Size is an Integer function used to retrieve file size information for the file specified in AFilename from the FTP server.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0010">TIdFTP.Status</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007328.html" CLASS="Element59">TIdFTP</A>, <A HREF="011072.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Implements the FTP STAT command.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>procedure</STRONG> Status(<STRONG>var</STRONG> AStatusList: TStringList);</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+var AStatusList: TStringList</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Optional Status response lines from the server.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Status is a procedure that implements the FTP STAT command, and returns a listing containing the status of the FTP operation in progress including transfer parameters and connection status. Status peforms similiar to the <A HREF="007328.html#0010" CLASS="Element59">List</A> method, but receives response data using the Control channel instead of the Data channel.<P CLASS="Element10">
+Status will populate the <A HREF="007328.html#000A" CLASS="Element59">DirectoryListing</A> collection after receiving the response stream from the server, or clear <A HREF="007328.html#000A" CLASS="Element59">DirectoryListing</A> when the nmber of response lines is zero (0).<P CLASS="Element10">
+AStatusList will contain the response from the server if an exception is raised during the method.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0011">TIdFTP.StructureMount</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007328.html" CLASS="Element59">TIdFTP</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Mounts a file system data structure for the FTP client.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>procedure</STRONG> StructureMount(APath: <STRONG>String</STRONG>);</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+APath: String</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Directory or file system structure to be loaded.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+StructureMount is a procedure that implement the FTP SMNT command verb, and allows the client to mount a different file system data structure without altering his login or accounting information. APath is the pathname specifying a directory or other system dependent file group designator.<P CLASS="Element10">
+StructureMount calls SendCmd using the SMNT command to perform the requested command.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0013">TIdFTP.TransferMode</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007328.html" CLASS="Element59">TIdFTP</A>, <A HREF="011073.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Implements the FTP MODE command.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>procedure</STRONG> TransferMode(ATransferMode: <A HREF="007349.html" CLASS="Element59">TIdFTPTransferMode</A>);</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+ATransferMode: TIdFTPTransferMode</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Transfer mode for the connection.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+TransferMode is a procedure that implements the FTP MODE command. TransferMode sends the character representation of the <A HREF="007349.html" CLASS="Element59">TIdFTPTransferMode</A> value specified in ATransferMode.<P CLASS="Element10">
+TransferMode has no effecet if the client is not Connected.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0017">TIdFTP.OnAfterGet</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007328.html" CLASS="Element59">TIdFTP</A>, <A HREF="011074.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Event handler signalled on completion of the <A HREF="007328.html#000C" CLASS="Element59">Get</A> method.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> OnAfterGet: <A HREF="007330.html" CLASS="Element59">TIdFtpAfterGet</A>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+ASender</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+FTP client for the event notification.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+VStream</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Stream containing data read from the FTP server.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+OnAfterGet is a <A HREF="007330.html" CLASS="Element59">TIdFtpAfterGet</A> property that represents the event handler signalled when the <A HREF="007328.html#000C" CLASS="Element59">Get</A> method has completed retrieval of file data from the FTP server.<P CLASS="Element10">
+Applications must assign a procedure to the OnAfterGet event handle to allow responding to the event notification. OnAfterGet can be used to perform pre-processing for data found in VStream, or to update progress indicators in the application.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0018">TIdFTP.OnCheckListFormat</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007328.html" CLASS="Element59">TIdFTP</A>, <A HREF="011075.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Event handler signalled when preparing a formatted directory listing.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> OnCheckListFormat: <A HREF="007231.html" CLASS="Element59">TIdCheckListFormat</A>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+OnCheckListFormat is a <A HREF="007231.html" CLASS="Element59">TIdCheckListFormat</A> property that represents the event handler signalled when the FTP client is prearing to parse the values for <A HREF="007328.html#000A" CLASS="Element59">DirectoryListing</A> in the <A HREF="007328.html#0010" CLASS="Element59">List</A> method. OnCheckListFormat can be used to override the default behavior when detecting the format of data returned in the <A HREF="007328.html#0010" CLASS="Element59">List</A> or <A HREF="007328.html#0010" CLASS="Element59">Status</A> methods.<P CLASS="Element10">
+<STRONG>Note</STRONG>: Applications must assign a procedure to the event handler to allow responding to the event notification. In addition, the DirectoryListing.ListFormat property must contain the value flfUnknown for the event handler to be signalled.<P CLASS="Element10">
+The OnCheckListFormat event handler can perform detection of data formats, and assign a new value to the TIdFTPListFormatlist format argument.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0019">TIdFTP.OnCreateFTPList</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007328.html" CLASS="Element59">TIdFTP</A>, <A HREF="011076.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Event handler signalled when a formatted <A HREF="007328.html#000A" CLASS="Element59">DirectoryListing</A> needs to be created.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> OnCreateFTPList: <A HREF="007269.html" CLASS="Element59">TIdCreateFTPList</A>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+OnCreateFTPList is a <A HREF="007269.html" CLASS="Element59">TIdCreateFTPList</A> property that represents the event handler signalled when a formatted <A HREF="007328.html#000A" CLASS="Element59">DirectoryListing</A> needs to be created prior to loading the results from the <A HREF="007328.html#0010" CLASS="Element59">List</A> or <A HREF="007328.html#0010" CLASS="Element59">Status</A> methods. OnCreateFTPList can be used to create and/or populate the TIdFTPList instance used for the <A HREF="007328.html#000A" CLASS="Element59">DirectoryListing</A> property.<P CLASS="Element10">
+Applications must assign a procedure to the event handler to allow responding to the event notification. <A HREF="007328.html" CLASS="Element59">TIdFTP</A> creates a TIdFTPList class instance using the default values when OnCreateFTPList has not been assigned.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0000">TIdFTP.OnParseCustomListFormat</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007328.html" CLASS="Element59">TIdFTP</A>, <A HREF="011077.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Event handler to use for custom parsing of a formatted Directory listing.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> OnParseCustomListFormat: <A HREF="007609.html" CLASS="Element59">TIdOnParseCustomListFormat</A>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+OnParseCustomListFormat is a <A HREF="007609.html" CLASS="Element59">TIdOnParseCustomListFormat</A> property that represents the event handler used to parse data values returned by the <A HREF="007328.html#0010" CLASS="Element59">List</A> or <A HREF="007328.html#0010" CLASS="Element59">Status</A> methods. OnParseCustomListFormat allows customized parsing of values in <A HREF="007333.html#0002" CLASS="Element59">TIdFTPListItem.Data</A>, when the data format is not supported by TIdFTPList.<P CLASS="Element10">
+Applications can assign a procedure to the OnParseCustomListFormat event handler to enable parsing collection items in the <A HREF="007328.html#000A" CLASS="Element59">DirectoryListing</A> property when the FTP list format contains the value flfCustom. The event handler should examine values in <A HREF="007333.html#0002" CLASS="Element59">TIdFTPListItem.Data</A> to parse values for other <A HREF="007333.html" CLASS="Element59">TIdFTPListItem</A> properties.<P CLASS="Element10">
+OnParseCustomListFormat is assigned to the OnParseCustomListFormat event handler for the <A HREF="007328.html#000A" CLASS="Element59">DirectoryListing</A> property prior to loading the content of the formatted directory listing.</DIV>
+</DIV>
+<DIV CLASS="Element62">
+<HR>Created with Doc-O-Matic 2 donated to <STRONG><A HREF="http://www.delphi-jedi.org">Project JEDI</A></STRONG>. Commercial license available from the <STRONG><A HREF="http://www.doc-o-matic.com">Doc-O-Matic site</A></STRONG>.</DIV>
+</DIV></BODY></HTML>

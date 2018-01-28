@@ -1,0 +1,67 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+<TITLE>TIdHashMessageDigest5</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <META name="GENERATOR" content="Doc-O-Matic">
+    <LINK rel="STYLESHEET" href="default.css" type="text/css">
+
+<SCRIPT LANGUAGE="JavaScript1.2" SRC="scripts.js"></SCRIPT>
+</HEAD>
+<BODY CLASS="Element57">
+<TABLE BORDER="0" BGCOLOR="#AACCFF" WIDTH="100%" CELLSPACING="0" CELLPADDING="0">
+<TR><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element1">
+Indy 9</DIV>
+</TD><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element2">
+<A HREF="content.html" CLASS="Element59">Content</A> | <A HREF="idx.html" CLASS="Element59">Index</A> | <A HREF="symref.html" CLASS="Element59">Reference</A></DIV>
+</TD></TR></TABLE><DIV CLASS="Element58">
+<DIV CLASS="Element5">
+TIdHashMessageDigest5</DIV>
+<DIV CLASS="Element7">
+<A HREF="011363.html" CLASS="Element59">Hierarchy</A>, <A HREF="011364.html" CLASS="Element59">Methods</A>, <A HREF="011365.html" CLASS="Element59">See Also</A>, <A HREF="002244.html" CLASS="Element59">Unit: IdHashMessageDigest</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Implements the MD5 message digest encryption algorithm.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12">TIdHashMessageDigest5 = <STRONG>class</STRONG>(<A HREF="007366.html" CLASS="Element59">TIdHashMessageDigest4</A>)</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Unit</DIV>
+<DIV CLASS="Element69">
+<A HREF="002244.html" CLASS="Element59">IdHashMessageDigest</A></DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+TIdHashMessageDigest5 is a <A HREF="007364.html" CLASS="Element59">TIdHashMessageDigest</A> descendant that implements the RSA-MD5 encryption algorithm as described in the Internet Standards document:<P CLASS="Element10">
+<UL>
+<LI>RFC 1321 - The MD5 Message-Digest Algorithm (http://www.rfc-editor.org/rfc/rfc1321.txt)</UL>
+<P CLASS="Element10">
+TIdHashMessageDigest5 implements the MD5 algorithm used for digital signature applications, where a large file must be &quot;compressed&quot; in a secure manner before being encrypted with a private (secret) key under a public-key cryptosystem such as RSA. The RSA-MD5 algorithm takes an input message of an arbitrary length and produces a 128-bit &quot;fingerprint&quot; or &quot;message digest&quot; of the input.<P CLASS="Element10">
+The MD5 algorithm is an extension of the MD4 message-digest algorithm. MD5 is slightly slower than MD4, but is more &quot;conservative&quot; in design. MD5 exists to compensate for potential security holes that exist in MD4. The MD5 algorithm differs from MD4 in the following ways:<P CLASS="Element10">
+<UL>
+<LI>A fourth round operation is added to the algorithm.<P CLASS="Element10">
+<LI>Each step now has a unique additive constant.<P CLASS="Element10">
+<LI>Rounding in second step of the algorithm has been made less symmetrical than it's MD4 predecessor.<P CLASS="Element10">
+<LI>Each step accumulates the result of the previous step promoting an &quot;avalanche effect&quot;.<P CLASS="Element10">
+<LI>The input word order in rounds 2 and 3 is changed to make these patterns less predictable and repetitive.<P CLASS="Element10">
+<LI>The shift amounts in each round have been approximately optimized, to yield a faster &quot;avalanche effect.&quot; The shifts in each of the rounds is distinct.</UL>
+<P CLASS="Element10">
+TIdHashMessageDigest5 can be used in various cryptography implementations that require the RSA-MD5 algorithm. Some MD5 implementations are described in the following documents:<P CLASS="Element10">
+<UL>
+<LI>RFC 1828 - IP Authentication using Keyed MD5 (http://www.rfc-editor.org/rfc/rfc1828.txt)<P CLASS="Element10">
+<LI>RFC 1864 - The Content-MD5 Header Field (http://www.rfc-editor.org/rfc/rfc1864.txt)<P CLASS="Element10">
+<LI>RFC 2082 - RIP-2 MD5 Authentication (http://www.rfc-editor.org/rfc/rfc2082.txt)<P CLASS="Element10">
+<LI>RFC 2085 - HMAC-MD5 IP Authentication with Replay Prevention (http://www.rfc-editor.org/rfc/rfc2085.txt)<P CLASS="Element10">
+<LI>RFC 2385 - Protection of BGP Sessions via the TCP MD5 Signature Option (http://www.rfc-editor.org/rfc/rfc2385.txt)<P CLASS="Element10">
+<LI>RFC 2537 - RSA/MD5 KEYs and SIGs in the Domain Name System (DNS) (http://www.rfc-editor.org/rfc/rfc2537.txt)</UL>
+<P CLASS="Element10">
+The MD5 algorithm has been placed in the public domain.</DIV>
+</DIV>
+<DIV CLASS="Element62">
+<HR>Created with Doc-O-Matic 2 donated to <STRONG><A HREF="http://www.delphi-jedi.org">Project JEDI</A></STRONG>. Commercial license available from the <STRONG><A HREF="http://www.doc-o-matic.com">Doc-O-Matic site</A></STRONG>.</DIV>
+</DIV></BODY></HTML>

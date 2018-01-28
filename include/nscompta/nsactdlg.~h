@@ -1,0 +1,350 @@
+// NSAgaDlg : dialogues des Actes// Rémi SPAAK Octobre 98
+//////////////////////////////////////////////////////
+
+#ifndef __NSACTDLG_H
+#define __NSACTDLG_H
+
+#if defined(_DANSCPTADLL)
+	#define _CLASSECPTA __export
+#else
+	#define _CLASSECPTA __import
+#endif
+
+#include <owl\edit.h>
+#include <owl\checkbox.h>
+#include <owl\groupbox.h>
+#include <owl\listbox.h>
+#include <owl\listwind.h>
+#include <owl\scrollba.h>
+#include <owl\combobox.h>
+
+// #include "nsbb\nsednum.h"// #include "nscompta\nscompta.h"
+// #include "nscompta\nscpta.h"
+// #include "nscompta\nsagavar.h"
+
+#include "nsdn\nsdocnoy.h"
+#include "nsbb\nsutidlg.h"
+
+//
+// Classe document ACT (liste et somme des actes) pour la publication
+//
+class _CLASSECPTA NSActDocument : public NSNoyauDocument
+{
+	public:
+
+  	NSSomActData		 totaux ;
+    NSVarCompta*		 pVar ;
+    NSMultiCriteres* pCriteres ;
+    bool					   bImprimer ;
+
+    NSFse16Array*		 pFseArray ;
+    int						   nbPrest ;
+    NSFactArray*		 pFactArray ;
+    int						   nbFact ;
+    NSTPArray*			 pTPArray ;
+    int						   nbTP ;
+    NSListActArray*	 pActArray ;
+		int	 					   nbAct ;
+    NSExamArray*		 pExamArray ;
+    int						   nbExam ;
+    NSKCodeArray*		 pKCodeArray ;
+    int						   nbKCode ;
+    NSCCAMCodeArray* pCCAMCodeArray ;
+    int						   nbCCAMCode ;
+    NSCCAMCodeArray* pLibreCodeArray ;
+    int						   nbLibreCode ;
+    NSTotauxArray*	 pTotauxArray ;
+    int						   nbTotaux ;
+
+    NSActDocument(TDocument *parent, NSDocumentInfo *pDocumentInfo,
+      					NSDocumentInfo* pDocHtmlInfo = 0, NSContexte *pCtx = 0) ;
+
+    NSActDocument(TDocument *parent = 0, NSContexte *pCtx = 0) ;
+
+    ~NSActDocument() ;
+
+    // Méthodes virtuelles de TDocument
+    bool 		Open(int mode = 0, const char far *path = 0) ;
+    bool 		Close() ;
+
+    bool 		LanceCriteres() ;
+    bool		InitFactArray(string sNumCompt) ;
+    bool		InitTPArray(string sNumCompt) ;
+    //bool 		InitFse1610Array(string sNumCompt) ;
+		//bool 		InitFse1620Array(string sNumCompt) ;
+    //bool 		InitFse1630Array(string sNumCompt) ;
+    //bool 		InitCCAMArray(string sNumCompt) ;
+    bool		ChercheActes(string sNumCompt) ;
+    void		SommeActes(string& sActes) ;
+    int			EstDansKCodeArray(string sKCode, NSKCodeArray* pArray) ;
+    int			EstDansCCAMCodeArray(string sCCAMCode, NSCCAMCodeArray* pArray) ;
+    int			EstDansLibreCodeArray(string sCCAMCode, NSCCAMCodeArray* pArray) ;
+    int			EstDansExamArray(string sCode, NSExamArray* pArray) ;
+    void		InitKCodes(NSComptInfo* pComptInfo) ;
+    void		InitCCAMCodes(NSComptInfo* pComptInfo) ;
+    void		InitLibreCodes(NSComptInfo* pComptInfo) ;
+    bool		CalculeTotaux(NSComptInfo* pComptInfo) ;
+    void		InitTotauxArray() ;
+    bool		CherchePatient(string sNumSS, string& sNomPatient, NSPersonInfo& patInfo) ;
+    bool    SelectionCriteres(NSCompt* pCompt) ;
+    bool 		InitActArray(bool bAvecPatient) ;
+
+    // bool IsOpen();
+};
+
+class _CLASSECPTA NSListActWindow;
+class _CLASSECPTA NSListActDialog : public NSUtilDialog{
+	public:
+
+		NSActDocument*   pDoc ;
+
+    TStatic*         pLibelle ;
+		NSVarCompta*     pVar ;
+		NSListActWindow* pListeAct ;
+
+		NSListActDialog(TWindow* pere, NSContexte* pCtx, NSActDocument* pActDoc) ;
+		~NSListActDialog() ;
+
+		void SetupWindow() ;
+
+		void InitListeAct() ;
+		void AfficheListeAct() ;
+		void DispInfoListeAct(TLwDispInfoNotify& dispInfo) ;
+
+		void CmModifAct() ;
+		void CmImprimer() ;
+		void CmOk() ;
+		void CmCancel() ;
+
+	DECLARE_RESPONSE_TABLE(NSListActDialog) ;
+};
+
+//// Objet "ListWindow" avec gestion du double-click (pour les fiches Act à modifier)
+//
+class _CLASSECPTA NSListActWindow : public TListWindow
+{
+	public:
+
+		NSListActDialog* pDlg ;
+
+		NSListActWindow(NSListActDialog* pere, int resId) : TListWindow(pere, resId)
+		{
+			pDlg = pere ;
+		}
+		~NSListActWindow() {}
+
+    void SetupWindow() ;
+
+		void EvLButtonDblClk(uint modKeys, NS_CLASSLIB::TPoint& point) ;
+		int  IndexItemSelect() ;
+	DECLARE_RESPONSE_TABLE(NSListActWindow) ;
+};
+
+class _CLASSECPTA NSSomActDialog : public NSUtilDialog{
+	public:
+
+		NSActDocument* pDoc ;
+
+    TStatic*       pLibelle ;
+    NSVarCompta* 	 pVar ;
+    TListWindow* 	 pListeExam ;
+    TListWindow*	 pListeTotaux ;
+    TListWindow*	 pListeKCode ;
+    TStatic*       pCounts ;
+    TStatic*       pInfoDepass ;
+
+		NSSomActDialog(TWindow* pere, NSContexte* pCtx, NSActDocument* pActDoc) ;
+    ~NSSomActDialog() ;
+
+    void 		SetupWindow() ;
+
+		void 		InitListeExam() ;
+    void 		AfficheListeExam() ;
+    void 		DispInfoListeExam(TLwDispInfoNotify& dispInfo) ;
+    void 		InitListeTotaux() ;
+    void 		AfficheListeTotaux() ;
+    void 		DispInfoListeTotaux(TLwDispInfoNotify& dispInfo) ;
+    void 		InitListeKCode() ;
+    void 		AfficheListeKCode() ;
+    void 		DispInfoListeKCode(TLwDispInfoNotify& dispInfo) ;
+    void    DisplayCounts() ;
+    void    DisplayDepass() ;
+
+    void		CmImprimer() ;
+    void 		CmOk() ;
+   	void 		CmCancel() ;
+
+	DECLARE_RESPONSE_TABLE(NSSomActDialog) ;
+};
+
+//
+// Classe document Encaissement pour la publication
+//
+class _CLASSECPTA NSEncaissDocument : public NSNoyauDocument
+{
+	public:
+
+  	NSVarCompta*		 pVar ;
+    NSMultiCriteres* pCriteres ;
+    NSEncaissData*	 pTotaux ;
+    NSEncaissData*	 pPartiels ;
+    bool					   bImprimer ;
+
+    NSFactArray*		 pFactArray ;
+		int	 					   nbFact ;
+
+		NSEncaissDocument(TDocument *parent, NSDocumentInfo *pDocumentInfo,
+      					NSDocumentInfo* pDocHtmlInfo = 0, NSContexte *pCtx = 0) ;
+
+		NSEncaissDocument(TDocument *parent = 0, NSContexte *pCtx = 0) ;
+
+		~NSEncaissDocument() ;
+
+    // Méthodes virtuelles de TDocument
+    bool Open(int mode = 0, const char far *path = 0) ;
+    bool Close() ;
+
+    bool LanceCriteres() ;
+    bool SelectionCriteres(NSFact* pFact) ;
+    bool InitFactArray() ;
+    void CalculeTotaux() ;
+
+		// bool IsOpen();
+};
+
+class _CLASSECPTA NSSomEncaissDialog : public NSUtilDialog
+{
+	public:
+
+		NSEncaissDocument* pDoc ;
+    NSTotauxArray*     pTotauxArray ;
+		int					       nbTotaux ;
+    NSTotauxArray*     pPartielsArray ;
+    int					       nbPartiels ;
+
+    TStatic*           pLibelle ;
+    NSVarCompta*       pVar ;
+    TListWindow*       pListeLoc ;
+    TListWindow*       pListeEuro ;
+    TListWindow*       pListeGlobal ;
+    TStatic*		       pMonnaie ;
+
+		NSSomEncaissDialog(TWindow* pere, NSContexte* pCtx, NSEncaissDocument* pActDoc) ;
+    ~NSSomEncaissDialog() ;
+
+    void 		SetupWindow() ;
+
+    void		InitTotauxArrays() ;
+		void 		InitListeLoc() ;
+    void 		AfficheListeLoc() ;
+    void 		DispInfoListeLoc(TLwDispInfoNotify& dispInfo) ;
+    void 		InitListeEuro() ;
+    void 		AfficheListeEuro() ;
+    void 		DispInfoListeEuro(TLwDispInfoNotify& dispInfo) ;
+    void 		InitListeGlobal() ;
+    void 		AfficheListeGlobal() ;
+    void 		DispInfoListeGlobal(TLwDispInfoNotify& dispInfo) ;
+
+    void		CmImprimer() ;
+    void 		CmOk() ;
+    void 		CmCancel() ;
+
+	DECLARE_RESPONSE_TABLE(NSSomEncaissDialog) ;
+};
+
+//
+// Classe NSMultiCriteresDialog
+//
+class _CLASSECPTA NSMultiCriteresDialog : public NSUtilDialog
+{
+	public:
+
+		NSMultiCriteres* 	 pCriteres ;
+
+    NSUtilEditDate*	   pDate1 ;
+    NSUtilEditDate*	   pDate2 ;
+    NSUtilLexique*		 pExamen ;
+    TStatic*           pPrescript ;
+    OWL::TGroupBox*		 pActes ;
+    OWL::TRadioButton* pActesPerso ;
+    OWL::TRadioButton* pActesTous ;
+    OWL::TGroupBox*		 pImp ;
+    OWL::TRadioButton* pImpTous ;
+    OWL::TRadioButton* pImpImpayes ;
+    OWL::TRadioButton* pImpPayes ;
+    OWL::TGroupBox*		 pCtxt ;
+    OWL::TRadioButton* pCtxtTous ;
+    OWL::TRadioButton* pCtxtNP ;
+    OWL::TRadioButton* pCtxtExt ;
+    OWL::TRadioButton* pCtxtAmbu ;
+    OWL::TRadioButton* pCtxtHosp ;
+
+    NSMultiCriteresDialog(TWindow* pere, NSContexte* pCtx) ;
+    ~NSMultiCriteresDialog() ;
+
+    void SetupWindow() ;
+    void CmPrescript() ;
+
+    void CmOk() ;
+    void CmCancel() ;
+
+	DECLARE_RESPONSE_TABLE(NSMultiCriteresDialog) ;
+};
+
+class _CLASSECPTA NSFactCriteresDialog : public NSUtilDialog
+{
+	public:
+
+		NSMultiCriteres* 	 pCriteres ;
+   	NSCodeOrgaArray*	 pCodeOrgaArray ;
+   	int						     nbCodeOrga ;
+
+   	NSUtilEditDate*	   pDate1 ;
+   	NSUtilEditDate*	   pDate2 ;
+   	OWL::TGroupBox*		 pActes ;
+   	OWL::TRadioButton* pActesPerso ;
+   	OWL::TRadioButton* pActesTous ;
+   	OWL::TComboBox*		 pOrga ;
+
+   	NSFactCriteresDialog(TWindow* pere, NSContexte* pCtx) ;
+   	~NSFactCriteresDialog() ;
+
+   	void SetupWindow() ;
+   	bool InitCodeOrgaArray() ;
+
+   	void CmOk() ;
+   	void CmCancel() ;
+
+	DECLARE_RESPONSE_TABLE(NSFactCriteresDialog) ;
+};
+
+class CptaSearchProgressDialog : public NSUtilDialog
+{
+	public :
+
+		OWL::TStatic*	pCurrentDate ;
+		OWL::TStatic*	pCurrentCode ;
+		OWL::TStatic*	pAck ;
+
+		int    count ;
+		int    num ;
+		int    maxNum ;
+    int	   maxGarbage ;
+		bool   bStop ;
+
+		CptaSearchProgressDialog(TWindow* pere, NSContexte* pCtx) ;
+		~CptaSearchProgressDialog() ;
+
+		void SetupWindow() ;
+		void SetNewDate(string sNewDate) ;
+		void SetNewCode(string sNewCode) ;
+		void SetAck(string sAck) ;
+		void ClearText() ;
+		void StopProcess() ;
+		bool isStopped() ;
+
+	DECLARE_RESPONSE_TABLE(CptaSearchProgressDialog) ;
+};
+
+#endif // fin de nsactdlg.h////////////////////////////
+

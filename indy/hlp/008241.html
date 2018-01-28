@@ -1,0 +1,139 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+<TITLE>TZStreamRec</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <META name="GENERATOR" content="Doc-O-Matic">
+    <LINK rel="STYLESHEET" href="default.css" type="text/css">
+
+<SCRIPT LANGUAGE="JavaScript1.2" SRC="scripts.js"></SCRIPT>
+</HEAD>
+<BODY CLASS="Element57">
+<TABLE BORDER="0" BGCOLOR="#AACCFF" WIDTH="100%" CELLSPACING="0" CELLPADDING="0">
+<TR><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element1">
+Indy 9</DIV>
+</TD><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element2">
+<A HREF="content.html" CLASS="Element59">Content</A> | <A HREF="idx.html" CLASS="Element59">Index</A> | <A HREF="symref.html" CLASS="Element59">Reference</A></DIV>
+</TD></TR></TABLE><DIV CLASS="Element58">
+<DIV CLASS="Element5">
+TZStreamRec</DIV>
+<DIV CLASS="Element7">
+<A HREF="015411.html" CLASS="Element59">See Also</A>, <A HREF="002143.html" CLASS="Element59">Unit: IdCompressionIntercept</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Represents state information for a Zlib stream.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12">TZStreamRec = <STRONG>packed</STRONG> <STRONG>record</STRONG>
+  next_in: PChar;
+  avail_in: Integer;
+  total_in: Integer;
+  next_out: PChar;
+  avail_out: Integer;
+  total_out: Integer;
+  msg: PChar;
+  internal: Pointer;
+  zalloc: <A HREF="007134.html" CLASS="Element59">TAlloc</A>;
+  zfree: <A HREF="007170.html" CLASS="Element59">TFree</A>;
+  AppData: Pointer;
+  data_type: Integer;
+  adler: Integer;
+  reserved: Integer;
+  <STRONG>end</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Unit</DIV>
+<DIV CLASS="Element69">
+<A HREF="002143.html" CLASS="Element59">IdCompressionIntercept</A></DIV>
+<DIV CLASS="Element14">
+Members</DIV>
+<DIV CLASS="Element20">
+next_in: PChar;</DIV>
+<DIV CLASS="Element22">
+<DIV CLASS="Element21">
+next_in</DIV>
+</DIV>
+<DIV CLASS="Element20">
+avail_in: Integer;</DIV>
+<DIV CLASS="Element22">
+<DIV CLASS="Element21">
+avail_in</DIV>
+</DIV>
+<DIV CLASS="Element20">
+total_in: Integer;</DIV>
+<DIV CLASS="Element22">
+<DIV CLASS="Element21">
+total_in</DIV>
+</DIV>
+<DIV CLASS="Element20">
+next_out: PChar;</DIV>
+<DIV CLASS="Element22">
+<DIV CLASS="Element21">
+next_out</DIV>
+</DIV>
+<DIV CLASS="Element20">
+avail_out: Integer;</DIV>
+<DIV CLASS="Element22">
+<DIV CLASS="Element21">
+avail_out</DIV>
+</DIV>
+<DIV CLASS="Element20">
+total_out: Integer;</DIV>
+<DIV CLASS="Element22">
+<DIV CLASS="Element21">
+total_out</DIV>
+</DIV>
+<DIV CLASS="Element20">
+msg: PChar;</DIV>
+<DIV CLASS="Element22">
+<DIV CLASS="Element21">
+msg</DIV>
+</DIV>
+<DIV CLASS="Element20">
+zalloc: TAlloc;</DIV>
+<DIV CLASS="Element22">
+<DIV CLASS="Element21">
+zalloc</DIV>
+</DIV>
+<DIV CLASS="Element20">
+zfree: TFree;</DIV>
+<DIV CLASS="Element22">
+<DIV CLASS="Element21">
+zfree</DIV>
+</DIV>
+<DIV CLASS="Element20">
+AppData: Pointer;</DIV>
+<DIV CLASS="Element22">
+<DIV CLASS="Element21">
+AppData</DIV>
+</DIV>
+<DIV CLASS="Element20">
+data_type: Integer;</DIV>
+<DIV CLASS="Element22">
+<DIV CLASS="Element21">
+data_type</DIV>
+</DIV>
+<DIV CLASS="Element20">
+adler: Integer;</DIV>
+<DIV CLASS="Element22">
+<DIV CLASS="Element21">
+adler</DIV>
+</DIV>
+<DIV CLASS="Element20">
+reserved: Integer;</DIV>
+<DIV CLASS="Element22">
+<DIV CLASS="Element21">
+reserved</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+TZStreamRec is a record type that represents state information for a stream used in the Zlib compression / decompression library.</DIV>
+</DIV>
+<DIV CLASS="Element62">
+<HR>Created with Doc-O-Matic 2 donated to <STRONG><A HREF="http://www.delphi-jedi.org">Project JEDI</A></STRONG>. Commercial license available from the <STRONG><A HREF="http://www.doc-o-matic.com">Doc-O-Matic site</A></STRONG>.</DIV>
+</DIV></BODY></HTML>

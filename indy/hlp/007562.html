@@ -1,0 +1,149 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+<TITLE>TIdMessageEncoderList</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <META name="GENERATOR" content="Doc-O-Matic">
+    <LINK rel="STYLESHEET" href="default.css" type="text/css">
+
+<SCRIPT LANGUAGE="JavaScript1.2" SRC="scripts.js"></SCRIPT>
+</HEAD>
+<BODY CLASS="Element57">
+<TABLE BORDER="0" BGCOLOR="#AACCFF" WIDTH="100%" CELLSPACING="0" CELLPADDING="0">
+<TR><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element1">
+Indy 9</DIV>
+</TD><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element2">
+<A HREF="content.html" CLASS="Element59">Content</A> | <A HREF="idx.html" CLASS="Element59">Index</A> | <A HREF="symref.html" CLASS="Element59">Reference</A></DIV>
+</TD></TR></TABLE><DIV CLASS="Element58">
+<DIV CLASS="Element5">
+TIdMessageEncoderList</DIV>
+<DIV CLASS="Element7">
+<A HREF="012668.html" CLASS="Element59">Hierarchy</A>, <A HREF="012669.html" CLASS="Element59">Methods</A>, <A HREF="012670.html" CLASS="Element59">See Also</A>, <A HREF="002288.html" CLASS="Element59">Unit: IdMessageCoder</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Container for registered encoder classes, with methods to create, access, and release registered encoder classes.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12">TIdMessageEncoderList = <STRONG>class</STRONG>(TObject)</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Unit</DIV>
+<DIV CLASS="Element69">
+<A HREF="002288.html" CLASS="Element59">IdMessageCoder</A></DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+TIdMessageEncoderList is a TObject descendant that is a container for registered encoder classes. TIdMessageEncoderList provides methods to create, access, and release registered encoder class instances.<P CLASS="Element10">
+The <A HREF="007562.html#0003" CLASS="Element59">RegisterEncoder</A> class method is used to register new encoder classes. <A HREF="007562.html#0003" CLASS="Element59">RegisterEncoder</A> is called in the initialization section of Units that contain an encoder class, like <A HREF="002288.html" CLASS="Element59">IdMessageCoder.pas</A>, <A HREF="002289.html" CLASS="Element59">IdMessageCoderMIME.pas</A>, <A HREF="002290.html" CLASS="Element59">IdMessageCoderUUE.pas</A>, and <A HREF="002291.html" CLASS="Element59">IdMessageCoderXXE.pas</A>.<P CLASS="Element10">
+The class method <A HREF="007562.html#0000" CLASS="Element59">ByName</A> is used to access an existing class instance in the container.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0000">TIdMessageEncoderList.ByName</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007562.html" CLASS="Element59">TIdMessageEncoderList</A>, <A HREF="012671.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Retrieves information about a registered encoder class using a specified name.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>class</STRONG> <STRONG>function</STRONG> ByName(<STRONG>const</STRONG> AName: <STRONG>string</STRONG>): <A HREF="007558.html" CLASS="Element59">TIdMessageEncoderInfo</A>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+const AName: string</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Name of the registered encoder class to be retrieved.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Return Value</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+<A HREF="007558.html" CLASS="Element59">TIdMessageEncoderInfo</A> - Registerd encoder class that matxh the specified name.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+ByName is a <A HREF="007558.html" CLASS="Element59">TIdMessageEncoderInfo</A> class function in <A HREF="007562.html" CLASS="Element59">TIdMessageEncoderList</A> that retrieves information about a registered encoder class using the name specified in AName. If a registered encoder cannot be located with the specified name, an <A HREF="000375.html" CLASS="Element59">EIdException</A> exception is raised with the constant message <A HREF="006552.html" CLASS="Element59">RSMessageEncoderNotFound</A> the value in AName.<P CLASS="Element10">
+ByName is used by <A HREF="007544.html" CLASS="Element59">TIdMessage</A> and <A HREF="007575.html" CLASS="Element59">TIdMessageParts</A> when updating the value of the AttachmentEncoding property.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0001">TIdMessageEncoderList.Create</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007562.html" CLASS="Element59">TIdMessageEncoderList</A>, <A HREF="012672.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Constructor for the object instance.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>constructor</STRONG> Create;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Create is the Constructor for the object instance, and relies on the inherited Create method. Create also initializes the internal list used to store registered message encoder class instances.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0002">TIdMessageEncoderList.Destroy</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007562.html" CLASS="Element59">TIdMessageEncoderList</A>, <A HREF="012673.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Frees the object instance.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>destructor</STRONG> Destroy; <STRONG>override</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Destroy is the Destructor fo r the object instance. Destroy frees each registerd encoder class instance in the internal list, and list prior to calling the inherited Destroy method.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0003">TIdMessageEncoderList.RegisterEncoder</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007562.html" CLASS="Element59">TIdMessageEncoderList</A>, <A HREF="012674.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Registers and stores information about encoder class types.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>class</STRONG> <STRONG>procedure</STRONG> RegisterEncoder(<STRONG>const</STRONG> AMessageEncoderName: <STRONG>string</STRONG>; AMessageEncoderInfo: <A HREF="007558.html" CLASS="Element59">TIdMessageEncoderInfo</A>);</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+const AMessageEncoderName: string</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Name to be associated with the registered encoder class.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+AMessageEncoderInfo: TIdMessageEncoderInfo</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Information about the registered encoder class.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+RegisterEncoder is a class procedure in <A HREF="007562.html" CLASS="Element59">TIdMessageEncoderList</A> that provides a mechanism for registering and storing information about encoder class types.<P CLASS="Element10">
+RegisterEncoder checks to insure that the list for registered encoder classed has be initialized to a valid <A HREF="007562.html" CLASS="Element59">TIdMessageEncoderList</A> instance. RegisterEncoder adds the class information in AMessageEncoderInfo to the list, and associates the name in AName with the registered class type.<P CLASS="Element10">
+RegisterEncoder is called from the initialization section of the Unit that contains the class type, like <A HREF="002288.html" CLASS="Element59">IdMessageCoder.pas</A>, <A HREF="002289.html" CLASS="Element59">IdMessageCoderMIME.pas</A>, <A HREF="002290.html" CLASS="Element59">IdMessageCoderUUE.pas</A>, and <A HREF="002291.html" CLASS="Element59">IdMessageCoderXXE.pas</A>.</DIV>
+</DIV>
+<DIV CLASS="Element62">
+<HR>Created with Doc-O-Matic 2 donated to <STRONG><A HREF="http://www.delphi-jedi.org">Project JEDI</A></STRONG>. Commercial license available from the <STRONG><A HREF="http://www.doc-o-matic.com">Doc-O-Matic site</A></STRONG>.</DIV>
+</DIV></BODY></HTML>

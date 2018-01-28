@@ -1,0 +1,66 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+<TITLE>CopyFileTo</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <META name="GENERATOR" content="Doc-O-Matic">
+    <LINK rel="STYLESHEET" href="default.css" type="text/css">
+
+<SCRIPT LANGUAGE="JavaScript1.2" SRC="scripts.js"></SCRIPT>
+</HEAD>
+<BODY CLASS="Element57">
+<TABLE BORDER="0" BGCOLOR="#AACCFF" WIDTH="100%" CELLSPACING="0" CELLPADDING="0">
+<TR><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element1">
+Indy 9</DIV>
+</TD><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element2">
+<A HREF="content.html" CLASS="Element59">Content</A> | <A HREF="idx.html" CLASS="Element59">Index</A> | <A HREF="symref.html" CLASS="Element59">Reference</A></DIV>
+</TD></TR></TABLE><DIV CLASS="Element58">
+<DIV CLASS="Element5">
+CopyFileTo</DIV>
+<DIV CLASS="Element7">
+<A HREF="002193.html" CLASS="Element59">Unit: IdGlobal</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Copies the source file to the destination file.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>function</STRONG> CopyFileTo(<STRONG>const</STRONG> Source: <STRONG>string</STRONG>; <STRONG>const</STRONG> Destination: <STRONG>string</STRONG>): Boolean;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Unit</DIV>
+<DIV CLASS="Element69">
+<A HREF="002193.html" CLASS="Element59">IdGlobal</A></DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+const Source: string</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Source file name.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+const Destination: string</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Destination file name.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Return Value</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Boolean - <STRONG>True</STRONG> if the file is copied, <STRONG>False</STRONG> on error.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+CopyFileTo is a function used to copy the file specified in <I>Source</I> to the file specified in <I>Destination</I>.<P CLASS="Element10">
+CopyFileTo will return False if the file in <I>Destination</I> already exists.<P CLASS="Element10">
+CopyFileTo encapsulates the platform-specific calls needed to perform the file copy operation. On the Windows platform, this is the Win32 API function CopyFile. On the Linux platform, CopyFileTo uses a TFileStream instance to create the destination file.</DIV>
+</DIV>
+<DIV CLASS="Element62">
+<HR>Created with Doc-O-Matic 2 donated to <STRONG><A HREF="http://www.delphi-jedi.org">Project JEDI</A></STRONG>. Commercial license available from the <STRONG><A HREF="http://www.doc-o-matic.com">Doc-O-Matic site</A></STRONG>.</DIV>
+</DIV></BODY></HTML>

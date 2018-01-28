@@ -1,0 +1,95 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+<TITLE>TIdHeader</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <META name="GENERATOR" content="Doc-O-Matic">
+    <LINK rel="STYLESHEET" href="default.css" type="text/css">
+
+<SCRIPT LANGUAGE="JavaScript1.2" SRC="scripts.js"></SCRIPT>
+</HEAD>
+<BODY CLASS="Element57">
+<TABLE BORDER="0" BGCOLOR="#AACCFF" WIDTH="100%" CELLSPACING="0" CELLPADDING="0">
+<TR><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element1">
+Indy 9</DIV>
+</TD><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element2">
+<A HREF="content.html" CLASS="Element59">Content</A> | <A HREF="idx.html" CLASS="Element59">Index</A> | <A HREF="symref.html" CLASS="Element59">Reference</A></DIV>
+</TD></TR></TABLE><DIV CLASS="Element58">
+<DIV CLASS="Element5">
+TIdHeader</DIV>
+<DIV CLASS="Element7">
+<A HREF="002941.html" CLASS="Element59">Unit: IdTunnelCommon</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Represents encapsulated tunnel headers and data.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12">TIdHeader = <STRONG>record</STRONG>
+  CRC16: Word;
+  MsgType: Word;
+  MsgLen: Word;
+  UserId: Word;
+  Port: Word;
+  IpAddr: <A HREF="007417.html" CLASS="Element59">TIdInAddr</A>;
+  <STRONG>end</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Unit</DIV>
+<DIV CLASS="Element69">
+<A HREF="002941.html" CLASS="Element59">IdTunnelCommon</A></DIV>
+<DIV CLASS="Element14">
+Members</DIV>
+<DIV CLASS="Element20">
+CRC16: Word;</DIV>
+<DIV CLASS="Element22">
+<DIV CLASS="Element21">
+CRC16 is a member variable.</DIV>
+</DIV>
+<DIV CLASS="Element20">
+MsgType: Word;</DIV>
+<DIV CLASS="Element22">
+<DIV CLASS="Element21">
+MsgType is a member variable.</DIV>
+</DIV>
+<DIV CLASS="Element20">
+MsgLen: Word;</DIV>
+<DIV CLASS="Element22">
+<DIV CLASS="Element21">
+MsgLen is a member variable.</DIV>
+</DIV>
+<DIV CLASS="Element20">
+UserId: Word;</DIV>
+<DIV CLASS="Element22">
+<DIV CLASS="Element21">
+UserId is a member variable.</DIV>
+</DIV>
+<DIV CLASS="Element20">
+Port: Word;</DIV>
+<DIV CLASS="Element22">
+<DIV CLASS="Element21">
+Port is a member variable.</DIV>
+</DIV>
+<DIV CLASS="Element20">
+IpAddr: TIdInAddr;</DIV>
+<DIV CLASS="Element22">
+<DIV CLASS="Element21">
+IpAddr is a member variable.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+TIdHeader is a record type that represents encapsulated tunnel headers and data for Indy Tunnel components.<P CLASS="Element10">
+CRC16 is a Word member that contains the calculated CRC16 checksum value for the contents of the encapsulated tunnel message.<P CLASS="Element10">
+MsgType is a Word member that contains a message type constant value representing a handling instruction to the Tunnel component.<P CLASS="Element10">
+MsgLen is a Word member that contains the length of the encapsulated tunnel message.<P CLASS="Element10">
+UserId is a Word member that represents the user identifier for the client connection to the Tunnel server.<P CLASS="Element10">
+Port is a Word member that presents the for the client connection to the Tunnel component.<P CLASS="Element10">
+IpAddr is a <A HREF="007417.html" CLASS="Element59">TIdInAddr</A> member that represent the structured IP address for the client connection to the Tunnel component.</DIV>
+</DIV>
+<DIV CLASS="Element62">
+<HR>Created with Doc-O-Matic 2 donated to <STRONG><A HREF="http://www.delphi-jedi.org">Project JEDI</A></STRONG>. Commercial license available from the <STRONG><A HREF="http://www.doc-o-matic.com">Doc-O-Matic site</A></STRONG>.</DIV>
+</DIV></BODY></HTML>

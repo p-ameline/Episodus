@@ -1,0 +1,77 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+<TITLE>TIdMappedTelnet</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <META name="GENERATOR" content="Doc-O-Matic">
+    <LINK rel="STYLESHEET" href="default.css" type="text/css">
+
+<SCRIPT LANGUAGE="JavaScript1.2" SRC="scripts.js"></SCRIPT>
+</HEAD>
+<BODY CLASS="Element57">
+<TABLE BORDER="0" BGCOLOR="#AACCFF" WIDTH="100%" CELLSPACING="0" CELLPADDING="0">
+<TR><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element1">
+Indy 9</DIV>
+</TD><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element2">
+<A HREF="content.html" CLASS="Element59">Content</A> | <A HREF="idx.html" CLASS="Element59">Index</A> | <A HREF="symref.html" CLASS="Element59">Reference</A></DIV>
+</TD></TR></TABLE><DIV CLASS="Element58">
+<DIV CLASS="Element5">
+TIdMappedTelnet</DIV>
+<DIV CLASS="Element7">
+<A HREF="012380.html" CLASS="Element59">Hierarchy</A>, <A HREF="012381.html" CLASS="Element59">Properties</A>, <A HREF="012382.html" CLASS="Element59">Methods</A>, <A HREF="012383.html" CLASS="Element59">Events</A>, <A HREF="012384.html" CLASS="Element59">See Also</A>, <A HREF="002283.html" CLASS="Element59">Unit: IdMappedPortTCP</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Implements a port-based proxy server for Telnet client connections.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12">TIdMappedTelnet = <STRONG>class</STRONG>(<A HREF="007272.html" CLASS="Element59">TIdCustomMappedTelnet</A>)</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Unit</DIV>
+<DIV CLASS="Element69">
+<A HREF="002283.html" CLASS="Element59">IdMappedPortTCP</A></DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+TIdMappedTelnet is a <A HREF="007272.html" CLASS="Element59">TIdCustomMappedTelnet</A> descendant that implements a multithreaded port-based proxy server for Telnet client connections. TIdMappedTelnet implements methods and properties that allow the proxy to create <A HREF="007542.html" CLASS="Element59">TIdMappedTelnetThread</A> thread class instances for client connections to the server using the specified <A HREF="007539.html" CLASS="Element59">DefaultPort</A> number and the <A HREF="007540.html" CLASS="Element59">MappedPort</A> for connection to the remote system.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0000">TIdMappedTelnet.AllowedConnectAttempts</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007538.html" CLASS="Element59">TIdMappedTelnet</A>, <A HREF="012385.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Number of connections permitted to the port-based proxy server.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> AllowedConnectAttempts: Integer;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+AllowedConnectAttempts is a read-only Integer property in <A HREF="007538.html" CLASS="Element59">TIdMappedTelnet</A> that indicates the number of connection allowed to the port-based proxy. The default value for AllowedConnectAttempts is -1, and indicates that an unlimited number of connections are permitted for the port proxy. 0 indicates that no connections are allowed.<P CLASS="Element10">
+AllowedConnectAttempts is used when creating outbound connections for the local client to the port-based proxy server.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0000">TIdMappedTelnet.OnCheckHostPort</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007538.html" CLASS="Element59">TIdMappedTelnet</A></DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> OnCheckHostPort: <A HREF="007541.html" CLASS="Element59">TIdMappedTelnetCheckHostPort</A>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+OnCheckHostPort</DIV>
+</DIV>
+<DIV CLASS="Element62">
+<HR>Created with Doc-O-Matic 2 donated to <STRONG><A HREF="http://www.delphi-jedi.org">Project JEDI</A></STRONG>. Commercial license available from the <STRONG><A HREF="http://www.doc-o-matic.com">Doc-O-Matic site</A></STRONG>.</DIV>
+</DIV></BODY></HTML>

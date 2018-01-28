@@ -1,0 +1,196 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+<TITLE>TIdThreadMgrPool</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <META name="GENERATOR" content="Doc-O-Matic">
+    <LINK rel="STYLESHEET" href="default.css" type="text/css">
+
+<SCRIPT LANGUAGE="JavaScript1.2" SRC="scripts.js"></SCRIPT>
+</HEAD>
+<BODY CLASS="Element57">
+<TABLE BORDER="0" BGCOLOR="#AACCFF" WIDTH="100%" CELLSPACING="0" CELLPADDING="0">
+<TR><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element1">
+Indy 9</DIV>
+</TD><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element2">
+<A HREF="content.html" CLASS="Element59">Content</A> | <A HREF="idx.html" CLASS="Element59">Index</A> | <A HREF="symref.html" CLASS="Element59">Reference</A></DIV>
+</TD></TR></TABLE><DIV CLASS="Element58">
+<DIV CLASS="Element5">
+TIdThreadMgrPool</DIV>
+<DIV CLASS="Element7">
+<A HREF="014403.html" CLASS="Element59">Hierarchy</A>, <A HREF="014404.html" CLASS="Element59">Properties</A>, <A HREF="014405.html" CLASS="Element59">Methods</A>, <A HREF="014406.html" CLASS="Element59">See Also</A>, <A HREF="002929.html" CLASS="Element59">Unit: IdThreadMgrPool</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Provides thread management using a pool of <A HREF="007846.html" CLASS="Element59">TIdThread</A> instances.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12">TIdThreadMgrPool = <STRONG>class</STRONG>(<A HREF="007853.html" CLASS="Element59">TIdThreadMgr</A>)</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Unit</DIV>
+<DIV CLASS="Element69">
+<A HREF="002929.html" CLASS="Element59">IdThreadMgrPool</A></DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+TIdThreadMgrPool is a thread manager that utilizes the thread management framework defined in <A HREF="007853.html" CLASS="Element59">TIdThreadMgr</A>. TIdThreadMgrPool provides thread management using a pool of <A HREF="007846.html" CLASS="Element59">TIdThread</A> instances. Threads are created by the thread manager, when necessary, or retrieved from the thread pool. TIdThreadMgrPool also keeps a list of active threads.<P CLASS="Element10">
+The thread pool can have a maximum size to conserve system resources.<P CLASS="Element10">
+TIdThreadMgrPool uses Lock to protect thread manager resources in <A HREF="007855.html#0002" CLASS="Element59">GetThread</A> and <A HREF="007855.html#0004" CLASS="Element59">ReleaseThread</A>.<P CLASS="Element10">
+TIdThreadMgrPool implements the inherited abstract methods <A HREF="007855.html#0002" CLASS="Element59">GetThread</A> and <A HREF="007855.html#0004" CLASS="Element59">ReleaseThread</A>. <A HREF="007855.html#0002" CLASS="Element59">GetThread</A> provides a thread instance for the thread manager. <A HREF="007855.html#0004" CLASS="Element59">ReleaseThread</A> handles freeing and releasing a thread instance, or returning the instance to the thread pool.<P CLASS="Element10">
+Use <A HREF="007855.html#0005" CLASS="Element59">TerminateThreads</A> to notify all <A HREF="007846.html" CLASS="Element59">TIdThread</A> instances to close their <A HREF="007071.html" CLASS="Element59">socket</A> connection, release the thread, and remove the thread from ActiveThreads.<P CLASS="Element10">
+Assign an instance of <A HREF="007850.html" CLASS="Element59">TIdThreadClass</A> to ThreadClass before using the thread manager to allocate new threads.<P CLASS="Element10">
+To use TIdThreadMgrPool with <A HREF="007831.html" CLASS="Element59">TIdTCPServer</A>, create an instance of TIdThreadMgrPool, and assign the object reference to <A HREF="007831.html#001E" CLASS="Element59">TIdTCPServer.ThreadMgr</A>. If you are using protocols which do not close the <A HREF="007071.html" CLASS="Element59">socket</A> connection after each request, you may wish to consider using the <A HREF="007854.html" CLASS="Element59">TIdThreadMgrDefault</A> thread manager. After closing a connection with <A HREF="007854.html" CLASS="Element59">TIdThreadMgrDefault</A>, the thread and all associated data is freed. When you are using TIdThreadMgrPool, the threads is stored in the Pool and when the server needs new thread it is not created but is taken from the Pool.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0003">TIdThreadMgrPool.PoolSize</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007855.html" CLASS="Element59">TIdThreadMgrPool</A>, <A HREF="014407.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Indicates the maximum size of the thread pool.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> PoolSize: Integer;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+PoolSize is an <STRONG>Integer</STRONG> property used to indicate the maximum number of thread instances that can be stored in ThreadPool.<P CLASS="Element10">
+PoolSize is used by <A HREF="007855.html#0004" CLASS="Element59">ReleaseThread</A> to determine if a thread should be returned to ThreadPool, or if the thread should Terminate and Free. PoolSize is updated in <A HREF="007855.html#0004" CLASS="Element59">ReleaseThread</A> when a thread finishes executing, and it is returned to ThreadPool.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0000">TIdThreadMgrPool.Create</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007855.html" CLASS="Element59">TIdThreadMgrPool</A>, <A HREF="014408.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Create is the constructor for the object instance.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>constructor</STRONG> Create(AOwner: TComponent); <STRONG>override</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+AOwner: TComponent</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Owner of the object instance.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Create is the constructor for the object instance. Create relies on the inherited Create constructor to initialize the object instance, but also creates the thread list used in the thread pool.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0001">TIdThreadMgrPool.Destroy</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007855.html" CLASS="Element59">TIdThreadMgrPool</A>, <A HREF="014409.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Destroy is the destructor for the object instance.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>destructor</STRONG> Destroy; <STRONG>override</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Destroy is the destructor for the object instance. Destroy will free all threads in thread pool, locking the thread list to protect resources, and free the thread pool prior to calling the inherited Destroy destructor.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0002">TIdThreadMgrPool.GetThread</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007855.html" CLASS="Element59">TIdThreadMgrPool</A>, <A HREF="014410.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Requests a new thread for the thread manager.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>function</STRONG> GetThread: <A HREF="007846.html" CLASS="Element59">TIdThread</A>; <STRONG>override</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Return Value</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+<A HREF="007846.html" CLASS="Element59">TIdThread</A> - The new thread instance.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+GetThread is an implementation of the inherited abstract <A HREF="007846.html" CLASS="Element59">TIdThread</A> function that requests a new thread for the thread manager. GetThread tries to satisfy new thread requests by retrieving an existing thread instance from ThreadPool. &lt;-- While GetThread searches for a pooled thread, it also frees and deletes any Terminated threads. The pooled thread instance is removed from ThreadPool. --&gt;<P CLASS="Element10">
+If there are no existing threads in ThreadPool, GetThread can create a new thread instance using CreateNewThread. The new thread instance will have the StopMode value smSuspend. The thread instance will be added to ActiveThreads and returned as the result of GetThread.<P CLASS="Element10">
+GetThread locks the ThreadPool while extracting a thread for reuse.<P CLASS="Element10">
+A thread instance can be freed using <A HREF="007855.html#0004" CLASS="Element59">ReleaseThread</A>. A list of threads can be terminated and freed using <A HREF="007855.html#0005" CLASS="Element59">TerminateThreads</A>.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0004">TIdThreadMgrPool.ReleaseThread</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007855.html" CLASS="Element59">TIdThreadMgrPool</A>, <A HREF="014411.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Remove a thread from the active thread list.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>procedure</STRONG> ReleaseThread(AThread: <A HREF="007846.html" CLASS="Element59">TIdThread</A>); <STRONG>override</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+AThread: TIdThread</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Thread to be released.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+ReleaseThread implements the inherited abstract procedure that instructs the thread manager to remove AThread from the list of active threads in ActiveThreads.<P CLASS="Element10">
+If the thread has not Terminated, and ThreadPool does not exceed <A HREF="007855.html#0003" CLASS="Element59">PoolSize</A>, the thread instance will be Stopped and returned to ThreadPool.<P CLASS="Element10">
+If AThread is the current Terminated thread of execution, it is allowed to complete with Terminate. If AThread is not the current thread of execution, AThread.TerminateAndWaitFor is called and the thread is Freed.<P CLASS="Element10">
+ReleaseThread locks and unlocks the ThreadPool list to protect resources while handling the thread instance.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0005">TIdThreadMgrPool.TerminateThreads</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007855.html" CLASS="Element59">TIdThreadMgrPool</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Terminates all running threads and returns them to the thread pool.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>procedure</STRONG> TerminateThreads; <STRONG>override</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+TerminateWaitTime</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Milliseconds before a timeout occurs during thread termination.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+TerminateThreads is an overridden procedure in <A HREF="007855.html" CLASS="Element59">TIdThreadMgrPool</A> that allows the pooled thread manager to terminate all running threads, and return them to the pool for the thread manager. TerminateThreads calles the inherited method to halt execution of all threads using the timeout value specified in TerminateWaitTime.<P CLASS="Element10">
+TerminateThreads extends the ancestor class by locking the internal TThreadList for the TIdThreads in the pool to Start the thread and remove it from the locked thread list. THe locked TTHreadList is unlocked prioer to exiting from the method.</DIV>
+</DIV>
+<DIV CLASS="Element62">
+<HR>Created with Doc-O-Matic 2 donated to <STRONG><A HREF="http://www.delphi-jedi.org">Project JEDI</A></STRONG>. Commercial license available from the <STRONG><A HREF="http://www.doc-o-matic.com">Doc-O-Matic site</A></STRONG>.</DIV>
+</DIV></BODY></HTML>

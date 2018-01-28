@@ -1,0 +1,507 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+<TITLE>TIdTunnelMaster</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <META name="GENERATOR" content="Doc-O-Matic">
+    <LINK rel="STYLESHEET" href="default.css" type="text/css">
+
+<SCRIPT LANGUAGE="JavaScript1.2" SRC="scripts.js"></SCRIPT>
+</HEAD>
+<BODY CLASS="Element57">
+<TABLE BORDER="0" BGCOLOR="#AACCFF" WIDTH="100%" CELLSPACING="0" CELLPADDING="0">
+<TR><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element1">
+Indy 9</DIV>
+</TD><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element2">
+<A HREF="content.html" CLASS="Element59">Content</A> | <A HREF="idx.html" CLASS="Element59">Index</A> | <A HREF="symref.html" CLASS="Element59">Reference</A></DIV>
+</TD></TR></TABLE><DIV CLASS="Element58">
+<DIV CLASS="Element5">
+TIdTunnelMaster</DIV>
+<DIV CLASS="Element7">
+<A HREF="014598.html" CLASS="Element59">Hierarchy</A>, <A HREF="014599.html" CLASS="Element59">Properties</A>, <A HREF="014600.html" CLASS="Element59">Methods</A>, <A HREF="014601.html" CLASS="Element59">Events</A>, <A HREF="002942.html" CLASS="Element59">Unit: IdTunnelMaster</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Implements a TCP Server for IP encapsulation tunnels.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12">TIdTunnelMaster = <STRONG>class</STRONG>(<A HREF="007831.html" CLASS="Element59">TIdTCPServer</A>)</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Unit</DIV>
+<DIV CLASS="Element69">
+<A HREF="002942.html" CLASS="Element59">IdTunnelMaster</A></DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+TIdTunnelMaster is a <A HREF="007831.html" CLASS="Element59">TIdTCPServer</A> descendant that specifies a multithreaded server that acts as a controller for IP encapsulation &quot;tunnels&quot;.<P CLASS="Element10">
+TIdTunnelMaster acts a Proxy for user connections. The IP encapsulation tunnels represent a User connection and the Server advocate used to process IP datagrams for the tunnel.<P CLASS="Element10">
+TIdTunnelMaster also allows construction of Virtual Private Networks through the IP encapsulation tunnel facilities for SOCKS authentication, tunnel management, data transformation, statistical logging, and IP header CRC calculation with optional IP header message types.<P CLASS="Element10">
+TIdTunnelMaster works in conjunction with an instance of <A HREF="007872.html" CLASS="Element59">TIdTunnelSlave</A> that acts as the multithreaded server for managing the endpoint for the IP tunnel.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0000">TIdTunnelMaster.Active</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007871.html" CLASS="Element59">TIdTunnelMaster</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Indicates the active state of the server.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> Active: Boolean;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Active is a Boolean property that indicates when the server is listening for new connections, and processing IP tunnel requests.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0004">TIdTunnelMaster.LockDestinationHost</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007871.html" CLASS="Element59">TIdTunnelMaster</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Indicates if the tunnel client host name must reflect the mapped host.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> LockDestinationHost: Boolean;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+LockDestinationHost is a Boolean property that indicates if the tunnel client host name must reflect the mapped host. When a TCP client for the tunnel connection, LockDestinationHost is used to determine if the host name of the client is the <A HREF="007871.html#0007" CLASS="Element59">MappedHost</A> from the tunnel server or the local IP address for the client using the tunnel.<P CLASS="Element10">
+When LockDestinationHost is True, the tunnel server <A HREF="007871.html#0007" CLASS="Element59">MappedHost</A> property is used as the Host for TCP client connection. When LockDestinationHost is False, the local IP address for the tunnel client is used as the Host for TCP client connection.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0005">TIdTunnelMaster.LockDestinationPort</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007871.html" CLASS="Element59">TIdTunnelMaster</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Indicates if the tunnel client port number must reflect the mapped port.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> LockDestinationPort: Boolean;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+LockDestinationPort<P CLASS="Element10">
+LockDestinationPort is a Boolean property that indicates if the tunnel client port number must reflect the mapped port number. When a TCP client for the tunnel connection, LockDestinationPort is used to determine if the port number of the client is the <A HREF="007871.html#0008" CLASS="Element59">MappedPort</A> from the tunnel server or the local port number for the client using the tunnel.<P CLASS="Element10">
+When LockDestinationPort is True, the tunnel server <A HREF="007871.html#0008" CLASS="Element59">MappedPort</A> property is used as the Port for TCP client connection. When LockDestinationPort is False, the local port number for the tunnel client is used as the Port for TCP client connection.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0006">TIdTunnelMaster.Logger</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007871.html" CLASS="Element59">TIdTunnelMaster</A>, <A HREF="014602.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Represents the activity logging component for the server.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> Logger: <A HREF="007920.html" CLASS="Element59">TLogger</A>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Logger is a <A HREF="007920.html" CLASS="Element59">TLogger</A> property that represents the activity logging component for the server. Logger provides the capability to write log messages to a text files, and uses the exposed LogEvent event handler to customize the information logging action.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0007">TIdTunnelMaster.MappedHost</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007871.html" CLASS="Element59">TIdTunnelMaster</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Specifies the host name used for connections from the server.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> MappedHost: <STRONG>string</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+MappedHost is a String property that represents the default host name used for TCP client connections from the server.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0008">TIdTunnelMaster.MappedPort</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007871.html" CLASS="Element59">TIdTunnelMaster</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Identifies the port number for new client connections.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> MappedPort: Integer;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+MappedPort is an Integer property that identifies the port number used for new client connections. MappedPort is used when a new TCP Client thread that represents the endpoint for the IP tunnel is created in Connect.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0009">TIdTunnelMaster.NumServices</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007871.html" CLASS="Element59">TIdTunnelMaster</A>, <A HREF="014603.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Number of service threads for the tunnel.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> NumServices: Integer;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+NumServices is a read-only Integer property that identifies the number of <A HREF="003469.html" CLASS="Element59">MClientThread</A> service threads currently running for the <A HREF="007871.html" CLASS="Element59">TIdTunnelMaster</A>.<P CLASS="Element10">
+NumServices is maintained by <A HREF="003469.html" CLASS="Element59">MClientThread</A> when a new service thread is created or destroyed for the tunnel master. <A HREF="003469.html" CLASS="Element59">MClientThread</A> service threads are used to associate a thread connection for the tunnel master with a TCP client connection that will service requests.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="000A">TIdTunnelMaster.NumSlaves</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007871.html" CLASS="Element59">TIdTunnelMaster</A>, <A HREF="014604.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Number of slave connections for the tunnel.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> NumSlaves: Integer;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+NumSlaves is a read-only Integer property that identifies the current number of <A HREF="007872.html" CLASS="Element59">TIdTunnelSlave</A> connections for the <A HREF="007871.html" CLASS="Element59">TIdTunnelMaster</A> instance.<P CLASS="Element10">
+NumSlaves is maintained in DoConnect and DoDisconnect, when the <A HREF="008071.html" CLASS="Element59">TSlaveData</A> container for the connection thread is created or destroyed.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0001">TIdTunnelMaster.Create</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007871.html" CLASS="Element59">TIdTunnelMaster</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Constructor for the object instance.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>constructor</STRONG> Create(AOwner: TComponent); <STRONG>override</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+AOwner: TComponent</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Owner of the object instance.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Create is the constructor for the object instance. Create relies on the inherited Create method, and also initializes properties for the object instance. The following properties are initialized to their default value:<P CLASS="Element10">
+<UL>
+<LI><A HREF="007871.html#0000" CLASS="Element59">Active</A> - False<P CLASS="Element10">
+<LI>ConnectedSlaves - 0<P CLASS="Element10">
+<LI>ConnectedServices - 0<P CLASS="Element10">
+<LI>NumberOfConnectionsValue - 0;<P CLASS="Element10">
+<LI>NumberOfPacketsValue - 0;<P CLASS="Element10">
+<LI>CompressionRatioValue - 0<P CLASS="Element10">
+<LI>CompressedBytes - 0<P CLASS="Element10">
+<LI>BytesRead - 0<P CLASS="Element10">
+<LI>BytesWrite - 0<P CLASS="Element10">
+<LI><A HREF="007871.html#0004" CLASS="Element59">LockDestinationHost</A> - False;<P CLASS="Element10">
+<LI><A HREF="007871.html#0005" CLASS="Element59">LockDestinationPort</A> - False;<P CLASS="Element10">
+<LI>OnlyOneThread - Critical Section<P CLASS="Element10">
+<LI>LockSlavesNumber - Critical Section<P CLASS="Element10">
+<LI>LockServicesNumber - Critical Section<P CLASS="Element10">
+<LI>StatisticsLocker - Critical Section</UL>
+</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0002">TIdTunnelMaster.Destroy</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007871.html" CLASS="Element59">TIdTunnelMaster</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Frees the object instance.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>destructor</STRONG> Destroy; <STRONG>override</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Destroy is the destructor for the object instance, and is responsible for disconnecting all users, as well as freeing and releasing object properties including:<P CLASS="Element10">
+<UL>
+<LI><A HREF="007871.html#0006" CLASS="Element59">Logger</A><P CLASS="Element10">
+<LI><A HREF="007871.html#0000" CLASS="Element59">Active</A><P CLASS="Element10">
+<LI>Clients<P CLASS="Element10">
+<LI>OnlyOneThread<P CLASS="Element10">
+<LI>LockSlavesNumber<P CLASS="Element10">
+<LI>LockServicesNumber<P CLASS="Element10">
+<LI>StatisticsLocker</UL>
+<P CLASS="Element10">
+Destroy calls the inherited Destroy method prior to exiting from the destructor.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0003">TIdTunnelMaster.GetStatistics</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007871.html" CLASS="Element59">TIdTunnelMaster</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Gets statistical measurements for the server.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>procedure</STRONG> GetStatistics(Module: Integer; <STRONG>var</STRONG> Value: Integer);</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+Module: Integer</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Statistic type requested.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+var Value: Integer</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Value for the requested statistic type.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+GetStatistics is a procedure used to retrieve statistical information for the <A HREF="007871.html" CLASS="Element59">TIdTunnelMaster</A> instance.<P CLASS="Element10">
+Module is an Integer that represents one of the statistic type constant values from <A HREF="002941.html" CLASS="Element59">IdTunnelCommon.pas</A>, and normally contains on of the following values:<P CLASS="Element10">
+<UL>
+<LI><A HREF="003547.html" CLASS="Element59">NumberOfConnectionsType</A> - 1<P CLASS="Element10">
+<LI><A HREF="003548.html" CLASS="Element59">NumberOfPacketsType</A> - 2<P CLASS="Element10">
+<LI><A HREF="000294.html" CLASS="Element59">CompressionRatioType</A> - 3<P CLASS="Element10">
+<LI><A HREF="000293.html" CLASS="Element59">CompressedBytesType</A> - 4<P CLASS="Element10">
+<LI><A HREF="000220.html" CLASS="Element59">BytesReadType</A> - 5<P CLASS="Element10">
+<LI><A HREF="000221.html" CLASS="Element59">BytesWriteType</A> - 6</UL>
+<P CLASS="Element10">
+<A HREF="000294.html" CLASS="Element59">CompressionRatioType</A> returns a calculated value that represents the ratio of total number of bytes read to compressed bytes read.<P CLASS="Element10">
+Value is an Integer variable used to return the value for the selected statistic type.<P CLASS="Element10">
+GetStatistics uses the StatisticsLocker critical section to protect access to the server resources from multiple threads.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0010">TIdTunnelMaster.SetStatistics</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007871.html" CLASS="Element59">TIdTunnelMaster</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Updates statistics for connections to the server.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>procedure</STRONG> SetStatistics(Module: Integer; Value: Integer);</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+Module: Integer</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Statistical category to update.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+Value: Integer</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Delta value for the statistical category.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+SetStatistics is a procedure that allows the tunnel master to update variables that track active connections, packets transmitted, compression ratio, total number of compressed bytes, total bytes read, and total bytes written for the connection.<P CLASS="Element10">
+SetStatistics is called when the number of service connections is updated, or during client thread execution.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="000B">TIdTunnelMaster.OnConnect</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007871.html" CLASS="Element59">TIdTunnelMaster</A>, <A HREF="014605.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Specifies the event handler for new client connections.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> OnConnect: <A HREF="007697.html" CLASS="Element59">TIdServerThreadEvent</A>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+Thread</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Client connecting to the tunnel server.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+OnConnect is a <A HREF="007697.html" CLASS="Element59">TIdServerThreadEvent</A> event handler that allows the tunnel master server to respond to connection requests from the listening thread.<P CLASS="Element10">
+OnConnect is called from the DoConnect method after a <A HREF="008071.html" CLASS="Element59">TSlaveData</A> container has been initialized for the client connection in Thread.<P CLASS="Element10">
+Applications must assign a procedure to the event handler to allow a response to the event notification.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="000C">TIdTunnelMaster.OnDisconnect</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007871.html" CLASS="Element59">TIdTunnelMaster</A>, <A HREF="014606.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Specifies the event handler for terminated client connections.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> OnDisconnect: <A HREF="007697.html" CLASS="Element59">TIdServerThreadEvent</A>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+Thread</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Client closing a connection to the tunnel server.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+OnDisconnect is a <A HREF="007697.html" CLASS="Element59">TIdServerThreadEvent</A> event handler that allows the tunnel master server to respond to a request to close a connection for the client thread.<P CLASS="Element10">
+OnDisconnect is called from the DoDisconnect method after all service threads and the client connection in Thread have been closed.<P CLASS="Element10">
+Applications must assign a procedure to the OnDisconnect event handler to allow a response to the event notification.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="000D">TIdTunnelMaster.OnInterpretMsg</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007871.html" CLASS="Element59">TIdTunnelMaster</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Specifies message processing for tunnel connection sessions.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> OnInterpretMsg: <A HREF="008064.html" CLASS="Element59">TSendMsgEvent</A>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+CustomMsg</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Data to be interpreted.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+Thread</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Client connection for the message.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+OnInterpretMsg is a <A HREF="008064.html" CLASS="Element59">TSendMsgEvent</A> event handler that allows the tunnel master server to respond to a notification that a message has been received that requires special processing.<P CLASS="Element10">
+OnInterpretMsg is provided to allow <A HREF="008072.html" CLASS="Element59">TSlaveThread</A> instances to access data interpretation routines specific to the tunnel master server.<P CLASS="Element10">
+Use OnInterpretMsg to perform interpretation of message data for the client connection.<P CLASS="Element10">
+Thread is the client connection that is the recipient of the message.<P CLASS="Element10">
+CustomMsg is the data that needs to be interpreted before allowing transmission to the client connection.<P CLASS="Element10">
+Applications must assign a procedure to the event handler to allow a response to the event notification.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="000E">TIdTunnelMaster.OnTransformRead</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007871.html" CLASS="Element59">TIdTunnelMaster</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Specifies data transformation for a message from a tunnel slave.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> OnTransformRead: <A HREF="007697.html" CLASS="Element59">TIdServerThreadEvent</A>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+Thread</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+The tunnel slave receiver generated the event.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+OnTransformRead is a <A HREF="007697.html" CLASS="Element59">TIdServerThreadEvent</A> event handler that allows the tunnel master server to respond to a message from the tunnel slave that data has been received that requires transformation.<P CLASS="Element10">
+OnTransformRead is used by <A HREF="007872.html" CLASS="Element59">TIdTunnelSlave</A> to access data transformation routines specific to the tunnel master server.<P CLASS="Element10">
+Thread represents the <A HREF="008055.html" CLASS="Element59">TReceiver</A> for the message.<P CLASS="Element10">
+Applications must assign a procedure to the event handler to allow a response to the event notification.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="000F">TIdTunnelMaster.OnTransformSend</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007871.html" CLASS="Element59">TIdTunnelMaster</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Performs data transformation prior to transmission.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> OnTransformSend: <A HREF="008067.html" CLASS="Element59">TSendTrnEvent</A>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+CustomMsg</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+The message data to be transformed.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+Header</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Header structure for the custom message.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+Thread</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Client connection generating the event.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+OnTransformSend is a <A HREF="008067.html" CLASS="Element59">TSendTrnEvent</A> that allows the tunnel master server to perform data transformation before transmission to a tunnel slave. OnTransformSend is called in SendMsg to transform the message content into an acceptable format for transmission over the network connection.<P CLASS="Element10">
+OnTransformSend is responsible for updating the <A HREF="007368.html" CLASS="Element59">TIdHeader</A> in Header to reflect the current values for CRC16, MsgType, and MsgLen.<P CLASS="Element10">
+CustomMsg will contain the modified contents of the message after transformation.<P CLASS="Element10">
+Applications must assign a procedure to the event handler to allow a response to the event notification.</DIV>
+</DIV>
+<DIV CLASS="Element62">
+<HR>Created with Doc-O-Matic 2 donated to <STRONG><A HREF="http://www.delphi-jedi.org">Project JEDI</A></STRONG>. Commercial license available from the <STRONG><A HREF="http://www.doc-o-matic.com">Doc-O-Matic site</A></STRONG>.</DIV>
+</DIV></BODY></HTML>

@@ -1,0 +1,170 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+<TITLE>TIdVCardEMailItem</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <META name="GENERATOR" content="Doc-O-Matic">
+    <LINK rel="STYLESHEET" href="default.css" type="text/css">
+
+<SCRIPT LANGUAGE="JavaScript1.2" SRC="scripts.js"></SCRIPT>
+</HEAD>
+<BODY CLASS="Element57">
+<TABLE BORDER="0" BGCOLOR="#AACCFF" WIDTH="100%" CELLSPACING="0" CELLPADDING="0">
+<TR><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element1">
+Indy 9</DIV>
+</TD><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element2">
+<A HREF="content.html" CLASS="Element59">Content</A> | <A HREF="idx.html" CLASS="Element59">Index</A> | <A HREF="symref.html" CLASS="Element59">Reference</A></DIV>
+</TD></TR></TABLE><DIV CLASS="Element58">
+<DIV CLASS="Element5">
+TIdVCardEMailItem</DIV>
+<DIV CLASS="Element7">
+<A HREF="014826.html" CLASS="Element59">Hierarchy</A>, <A HREF="014827.html" CLASS="Element59">Properties</A>, <A HREF="014828.html" CLASS="Element59">Methods</A>, <A HREF="014829.html" CLASS="Element59">See Also</A>, <A HREF="002949.html" CLASS="Element59">Unit: IdVCard</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+encapsulates a VCard E-Mail address.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12">TIdVCardEMailItem = <STRONG>class</STRONG>(TCollectionItem)</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Unit</DIV>
+<DIV CLASS="Element69">
+<A HREF="002949.html" CLASS="Element59">IdVCard</A></DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+The TIdVCardEMailItem object encapsulates a VCard owner's E-Mail address in the <A HREF="007886.html" CLASS="Element59">TIdVCard</A> component.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0000">TIdVCardEMailItem.Address</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007890.html" CLASS="Element59">TIdVCardEMailItem</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Contents of the E-Mail address.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> Address: <STRONG>String</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Address is the contents of the E-Mail address.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0003">TIdVCardEMailItem.EMailType</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007890.html" CLASS="Element59">TIdVCardEMailItem</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Identifies the type of E-Mail address.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> EMailType: <A HREF="007891.html" CLASS="Element59">TIdVCardEMailType</A>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+EMailType identifies the type of E-Mail address, and can contain one of the following values:<P CLASS="Element10">
+<UL>
+<LI>ematAOL - America On-Line<P CLASS="Element10">
+<LI>ematAppleLink - AppleLink<P CLASS="Element10">
+<LI>ematATT - AT&amp;T Mail<P CLASS="Element10">
+<LI>ematCIS - CompuServe Information Service<P CLASS="Element10">
+<LI>emateWorld - eWorld<P CLASS="Element10">
+<LI>ematInternet -Internet SMTP<P CLASS="Element10">
+<LI>ematIBMMail - IBM Mail<P CLASS="Element10">
+<LI>ematMCIMail - MCI Mail<P CLASS="Element10">
+<LI>ematPowerShare - PowerShare<P CLASS="Element10">
+<LI>ematProdigy - Prodigy Information Service<P CLASS="Element10">
+<LI>ematTelex - Telex number<P CLASS="Element10">
+<LI>ematX400 - X.400 service</UL>
+</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0004">TIdVCardEMailItem.Preferred</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007890.html" CLASS="Element59">TIdVCardEMailItem</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Indicates the person's preferred E-Mail address.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> Preferred: Boolean;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Preferred is an indicator that is True if this is the person's preferred E-Mail address.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0001">TIdVCardEMailItem.Assign</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007890.html" CLASS="Element59">TIdVCardEMailItem</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Copy the property values of an object.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>procedure</STRONG> Assign(Source: TPersistent); <STRONG>override</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+Source: TPersistent</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Object containing values to be copied.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Assign is a procedure used to copy the properties of the persistent object in Source to the current object instance. When the current object and the object in Source are the same ClassType, Assign will copy the following property values:<P CLASS="Element10">
+<UL>
+<LI><A HREF="007890.html#0003" CLASS="Element59">EMailType</A><P CLASS="Element10">
+<LI><A HREF="007890.html#0004" CLASS="Element59">Preferred</A><P CLASS="Element10">
+<LI><A HREF="007890.html#0000" CLASS="Element59">Address</A></UL>
+<P CLASS="Element10">
+When the current object and Source do not sahre the same ClassType, Assign calls the inherited Assign method.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0002">TIdVCardEMailItem.Create</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007890.html" CLASS="Element59">TIdVCardEMailItem</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Constructor for the collection item.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>constructor</STRONG> Create(Collection: TCollection); <STRONG>override</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+Collection: TCollection</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Collection that owns the collection item.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Create is the constructor for the collection item. Create relies on the inherited Create method, and initializes the EmailType property to the value ematInternet.</DIV>
+</DIV>
+<DIV CLASS="Element62">
+<HR>Created with Doc-O-Matic 2 donated to <STRONG><A HREF="http://www.delphi-jedi.org">Project JEDI</A></STRONG>. Commercial license available from the <STRONG><A HREF="http://www.doc-o-matic.com">Doc-O-Matic site</A></STRONG>.</DIV>
+</DIV></BODY></HTML>

@@ -1,0 +1,277 @@
+# ---------------------------------------------------------------------------
+!if !$d(BCB)
+BCB = $(MAKEDIR)\..
+!endif
+
+# ---------------------------------------------------------------------------
+# SECTION EDI
+# ---------------------------------------------------------------------------
+# La section suivante du Makefile du projet est gérée par l'EDI de BCB.
+# Il est recommandé d'utiliser l'EDI pour modifier les valeurs de cette
+# section.
+# ---------------------------------------------------------------------------
+
+VERSION = BCB.04.04
+# ---------------------------------------------------------------------------
+PROJECT = ..\..\..\..\cvs\episodus\nsmutil.dll
+OBJFILES = ..\..\..\..\cvs\episodus\ObjNTIERS\nsmutil.obj \
+  ..\..\..\..\cvs\episodus\ObjNTIERS\nscache.obj \
+  ..\..\..\..\cvs\episodus\ObjNTIERS\nsdivers.obj \
+  ..\..\..\..\cvs\episodus\ObjNTIERS\Nsutifct.obj \
+  ..\..\..\..\cvs\episodus\ObjNTIERS\nsdivfct.obj \
+  ..\..\..\..\cvs\episodus\ObjNTIERS\cryptinterface.obj \
+  ..\..\..\..\cvs\episodus\ObjNTIERS\crypto.obj \
+  ..\..\..\..\cvs\episodus\ObjNTIERS\cryptounix.obj \
+  ..\..\..\..\cvs\episodus\ObjNTIERS\md5c.obj \
+  ..\..\..\..\cvs\episodus\ObjNTIERS\tinyxmlparser.obj \
+  ..\..\..\..\cvs\episodus\ObjNTIERS\tinyxml.obj \
+  ..\..\..\..\cvs\episodus\ObjNTIERS\tinyxmlerror.obj \
+  ..\..\..\..\cvs\episodus\ObjNTIERS\tinystr.obj \
+  ..\..\..\..\cvs\episodus\ObjNTIERS\csvparser.obj \
+  ..\..\..\..\cvs\episodus\ObjNTIERS\attvalelem.obj \
+  ..\..\..\..\cvs\episodus\ObjNTIERS\nsstructure.obj \
+  ..\..\..\..\cvs\episodus\ObjNTIERS\nsdivfile.obj
+RESFILES = nsmutil.res
+DEFFILE =
+RESDEPEN = $(RESFILES)
+LIBFILES = memmgr.lib cp32mti.lib bidsvi.lib owlwvi.lib nsmbb.lib nsm_sgbd.lib nsmsavoir.lib
+IDLGENFILES =
+IDLFILES =
+LIBRARIES =
+SPARELIBS = vcl40.lib
+PACKAGES = vclx40.bpi vcl40.bpi vcldb40.bpi vcldbx40.bpi bcbsmp40.bpi dclocx40.bpi \
+  qrpt40.bpi teeui40.bpi vclsmp40.bpi teedb40.bpi tee40.bpi ibsmp40.bpi \
+  nmfast40.bpi inetdb40.bpi inet40.bpi
+# ---------------------------------------------------------------------------
+PATHCPP = .;nsutil;partage
+PATHASM = .;
+PATHPAS = .;
+PATHRC = .;
+DEBUGLIBPATH = $(BCB)\lib\debug
+RELEASELIBPATH = $(BCB)\lib\release
+SYSDEFINES = NO_STRICT;_RTLDLL;USEPACKAGES
+USERDEFINES = STRICT;_OWLDLL;_USE_OWL_CM_EXIT;_NSUTILDLL;_MUE;N_TIERS;__OB1__
+# ---------------------------------------------------------------------------
+CFLAG1 = -Iapicrypt;partage;nsutil;include;$(BCB)\include;$(BCB)\include\vcl;$(BCB)\include\owlfiles;"..\..\..\..\Program Files (x86)\Java\jdk1.6.0_30\include";"..\..\..\..\Program Files (x86)\Java\jdk1.6.0_30\include\win32" \
+  -WD -Od -w- -Tkh30000 -r- -a8 -k -y -v -vi- -c -tWM \
+  -D$(SYSDEFINES);$(USERDEFINES)
+CFLAG2 =
+CFLAG3 =
+IDLCFLAGS = -Iapicrypt -Ipartage -Insutil -Iinclude -I$(BCB)\include -I$(BCB)\include\vcl \
+  -I$(BCB)\include\owlfiles \
+  -I"..\..\..\..\Program Files (x86)\Java\jdk1.6.0_30\include" \
+  -I"..\..\..\..\Program Files (x86)\Java\jdk1.6.0_30\include\win32" \
+  -src_suffixcpp -DSTRICT -D_OWLDLL -D_USE_OWL_CM_EXIT -D_NSUTILDLL -D_MUE \
+  -DN_TIERS -D__OB1__
+PFLAGS = -Upartage;nsutil;"..\..\..\..\Program Files (x86)\Borland\CBuilder4\Lib";..\..\..\..\cvs\episodus;apicrypt;$(BCB)\lib\obj;$(BCB)\lib;$(RELEASELIBPATH) \
+  -Iapicrypt;partage;nsutil;include;$(BCB)\include;$(BCB)\include\vcl;$(BCB)\include\owlfiles;"..\..\..\..\Program Files (x86)\Java\jdk1.6.0_30\include";"..\..\..\..\Program Files (x86)\Java\jdk1.6.0_30\include\win32" \
+  -N2..\..\..\..\cvs\episodus\ObjNTIERS -N0..\..\..\..\cvs\episodus\ObjNTIERS \
+  -DSTRICT;_OWLDLL;_USE_OWL_CM_EXIT;_NSUTILDLL;_MUE;N_TIERS;__OB1__ -$YD -$W -$O- \
+  -v -M -JPHNE
+RFLAGS = -iapicrypt;partage;nsutil;include;$(BCB)\include;$(BCB)\include\vcl;$(BCB)\include\owlfiles;"..\..\..\..\Program Files (x86)\Java\jdk1.6.0_30\include";"..\..\..\..\Program Files (x86)\Java\jdk1.6.0_30\include\win32" \
+  -DSTRICT;_OWLDLL;_USE_OWL_CM_EXIT;_NSUTILDLL;_MUE;N_TIERS;__OB1__
+AFLAGS = /iapicrypt /ipartage /insutil /iinclude /i$(BCB)\include /i$(BCB)\include\vcl \
+  /i$(BCB)\include\owlfiles \
+  /i"..\..\..\..\Program Files (x86)\Java\jdk1.6.0_30\include" \
+  /i"..\..\..\..\Program Files (x86)\Java\jdk1.6.0_30\include\win32" /dSTRICT \
+  /d_OWLDLL /d_USE_OWL_CM_EXIT /d_NSUTILDLL /d_MUE /dN_TIERS /d__OB1__ /mx /w2 /zi
+LFLAGS = -Lpartage;nsutil;"..\..\..\..\Program Files (x86)\Borland\CBuilder4\Lib";..\..\..\..\cvs\episodus;apicrypt;$(BCB)\lib\obj;$(BCB)\lib;$(RELEASELIBPATH) \
+  -l"C:\cvs\episodus\" -aa -Tpd -x -Gn -Gi -v
+IFLAGS =
+# ---------------------------------------------------------------------------
+ALLOBJ = c0d32.obj Memmgr.Lib $(PACKAGES) sysinit.obj $(OBJFILES)
+ALLRES = $(RESFILES)
+ALLLIB = $(LIBFILES) $(LIBRARIES) import32.lib cp32mti.lib
+# ---------------------------------------------------------------------------
+!ifdef IDEOPTIONS
+
+[Version Info]
+IncludeVerInfo=1
+AutoIncBuild=0
+MajorVer=5
+MinorVer=11
+Release=1
+Build=0
+Debug=0
+PreRelease=0
+Special=0
+Private=0
+DLL=1
+Locale=1036
+CodePage=1252
+
+[Version Info Keys]
+CompanyName=Odyssee
+FileDescription=
+FileVersion=5.11.1.0
+InternalName=
+LegalCopyright=
+LegalTrademarks=
+OriginalFilename=
+ProductName=
+ProductVersion=5.11.0001
+Comments=
+
+[HistoryLists\hlIncludePath]
+Count=14
+Item0=apicrypt;partage;nsutil;include;$(BCB)\include;$(BCB)\include\vcl;$(BCB)\include\owlfiles;..\..\..\..\Program Files (x86)\Java\jdk1.6.0_30\include;..\..\..\..\Program Files (x86)\Java\jdk1.6.0_30\include\win32
+Item1=apicrypt;partage;nsutil;include;$(BCB)\include;$(BCB)\include\vcl;$(BCB)\include\owlfiles;..\..\Program Files (x86)\Java\jdk1.6.0_30\include;..\..\Program Files (x86)\Java\jdk1.6.0_30\include\win32
+Item2=apicrypt;partage;nsutil;include;$(BCB)\include;$(BCB)\include\vcl;$(BCB)\include\owlfiles;..\..\Program Files\Java\jdk1.6.0_30\include;..\..\Program Files\Java\jdk1.6.0_30\include\win32
+Item3=apicrypt;partage;nsutil;include;$(BCB)\include;$(BCB)\include\vcl;$(BCB)\include\owlfiles;C:\Program Files\Java\jdk1.6.0_17\include;C:\Program Files\Java\jdk1.6.0_17\include\win32
+Item4=apicrypt;partage;nsutil;include;$(BCB)\include;$(BCB)\include\vcl;$(BCB)\include\owlfiles;..\..\j2sdk1.4.2\include;..\..\j2sdk1.4.2\include\win32
+Item5=apicrypt;partage;nsutil;include;$(BCB)\include;$(BCB)\include\vcl;$(BCB)\include\owlfiles;..\..\j2sdk1.4.1\include;..\..\j2sdk1.4.1\include\win32
+Item6=apicrypt;partage;nsutil;include;$(BCB)\include;$(BCB)\include\vcl;$(BCB)\include\owlfiles;C:\j2sdk1.4.1\include;C:\j2sdk1.4.1\include\win32
+Item7=apicrypt;partage;nsutil;include;$(BCB)\include;$(BCB)\include\vcl;$(BCB)\include\owlfiles;..\..\Program Files\Java\j2sdk1.4.2_04\include;..\..\Program Files\Java\j2sdk1.4.2_04\include\win32
+Item8=apicrypt;partage;nsutil;include;$(BCB)\include;$(BCB)\include\vcl;$(BCB)\include\owlfiles;C:\Program Files\Java\j2sdk1.4.2_04\include;C:\Program Files\Java\j2sdk1.4.2_04\include\win32
+Item9=apicrypt;partage;nsutil;include;$(BCB)\include;$(BCB)\include\vcl;$(BCB)\include\owlfiles
+Item10=apicrypt;partage;nsutil;c:\nautilus\include;$(BCB)\include;$(BCB)\include\vcl;$(BCB)\include\owlfiles
+Item11=partage;nsutil;c:\nautilus\include;$(BCB)\include;$(BCB)\include\vcl;$(BCB)\include\owlfiles
+Item12=c:\nautilus\include;$(BCB)\include;$(BCB)\include\vcl;$(BCB)\include\owlfiles
+Item13=partage;nsutil;$(BCB)\include;$(BCB)\include\vcl;$(BCB)\include\owlfiles
+
+[HistoryLists\hlLibraryPath]
+Count=11
+Item0=partage;nsutil;..\..\..\..\Program Files (x86)\Borland\CBuilder4\Lib;..\..\..\..\cvs\episodus;apicrypt;$(BCB)\lib\obj;$(BCB)\lib
+Item1=..\..\..\..\Program Files (x86)\Borland\CBuilder4\Lib;..\..\..\..\cvs\episodus;apicrypt;$(BCB)\lib\obj;$(BCB)\lib
+Item2=..\..\Program Files (x86)\Borland\CBuilder4\Lib;apicrypt;partage;nsutil;$(BCB)\lib\obj;$(BCB)\lib
+Item3=apicrypt;partage;nsutil;$(BCB)\lib\obj;$(BCB)\lib
+Item4=apicrypt;..\builder4\cbuilder4\Lib;..\buider3\cbuilder3\lib;partage;nsutil;$(BCB)\lib\obj;$(BCB)\lib
+Item5=apicrypt;..\builder4\cbuilder4\Lib;..\buider3\cbuilder3\lib;partage;nsutil;c:\nautilus;$(BCB)\lib\obj;$(BCB)\lib
+Item6=..\buider3\cbuilder3\lib;partage;nsutil;c:\nautilus;$(BCB)\lib\obj;$(BCB)\lib
+Item7=partage;nsutil;c:\nautilus;$(BCB)\lib\obj;$(BCB)\lib
+Item8=..\program files\borland\cbuilder3\lib;partage;nsutil;c:\nautilus;$(BCB)\lib\obj;$(BCB)\lib
+Item9=c:\nautilus;$(BCB)\lib\obj;$(BCB)\lib
+Item10=partage;nsutil;$(BCB)\lib\obj;$(BCB)\lib
+
+[HistoryLists\hlDebugSourcePath]
+Count=1
+Item0=$(BCB)\source\vcl
+
+[HistoryLists\hlConditionals]
+Count=11
+Item0=STRICT;_OWLDLL;_USE_OWL_CM_EXIT;_NSUTILDLL;_MUE;N_TIERS;__OB1__
+Item1=STRICT;_OWLDLL;_USE_OWL_CM_EXIT;_NSUTILDLL;_MUE;N_TIERS
+Item2=STRICT;_OWLDLL;_USE_OWL_CM_EXIT;_NSUTILDLL;_MUE
+Item3=STRICT;_OWLDLL;_USE_OWL_CM_EXIT;_NSUTILDLL
+Item4=_RTLDLL;STRICT;_OWLDLL;_USE_OWL_CM_EXIT;_NSUTILDLL;USEPACKAGES
+Item5=_RTLDLL;STRICT;_OWLDLL;_USE_OWL_CM_EXIT;USEPACKAGES;_NSUTILDLL
+Item6=_RTLDLL;STRICT;_OWLDLL;_USE_OWL_CM_EXIT;USEPACKAGES
+Item7=_RTLDLL;STRICT;_OWLDLL;USEPACKAGES;_USE_OWL_CM_EXIT;
+Item8=_RTLDLL;STRICT;USEPACKAGES;_OWLDLL;
+Item9=_RTLDLL;USEPACKAGES;STRICT;
+Item10=_RTLDLL;USEPACKAGES
+
+[HistoryLists\hlIntOutputDir]
+Count=4
+Item0=..\..\..\..\cvs\episodus\ObjNTIERS
+Item1=ObjNTIERS
+Item2=ObjMUE
+Item3=Obj
+
+[HistoryLists\hlFinalOutputDir]
+Count=1
+Item0=..\..\..\..\cvs\episodus
+
+[HistoryLists\hIBPIOutputDir]
+Count=1
+Item0=..\..\..\..\cvs\episodus
+
+[Debugging]
+DebugSourceDirs=$(BCB)\source\vcl
+
+[Parameters]
+RunParams=
+HostApplication=
+RemoteHost=
+RemotePath=
+RemoteDebug=0
+
+[Compiler]
+InMemoryExe=0
+ShowInfoMsgs=0
+
+[CORBA]
+AddServerUnit=1
+AddClientUnit=1
+PrecompiledHeaders=1
+
+!endif
+
+# ---------------------------------------------------------------------------
+# SECTION MAKE
+# ---------------------------------------------------------------------------
+# Cette section du fichier projet n'est pas utilisée par l'EDI de BCB. Elle est destinée
+# à la construction à partir de la ligne de commande en utilisant l'utilitaire MAKE.
+# ---------------------------------------------------------------------------
+
+.autodepend
+# ---------------------------------------------------------------------------
+!if !$d(BCC32)
+BCC32 = bcc32
+!endif
+
+!if !$d(DCC32)
+DCC32 = dcc32
+!endif
+
+!if !$d(TASM32)
+TASM32 = tasm32
+!endif
+
+!if !$d(LINKER)
+LINKER = ilink32
+!endif
+
+!if !$d(BRCC32)
+BRCC32 = brcc32
+!endif
+
+!if !$d(IDL2CPP)
+IDL2CPP = idl2cpp
+!endif
+# ---------------------------------------------------------------------------
+!if $d(PATHCPP)
+.PATH.CPP = $(PATHCPP)
+.PATH.C   = $(PATHCPP)
+!endif
+
+!if $d(PATHPAS)
+.PATH.PAS = $(PATHPAS)
+!endif
+
+!if $d(PATHASM)
+.PATH.ASM = $(PATHASM)
+!endif
+
+!if $d(PATHRC)
+.PATH.RC  = $(PATHRC)
+!endif
+# ---------------------------------------------------------------------------
+$(PROJECT): $(IDLGENFILES) $(OBJFILES) $(RESDEPEN) $(DEFFILE)
+    $(BCB)\BIN\$(LINKER) @&&!
+    $(LFLAGS) +
+    $(ALLOBJ), +
+    $(PROJECT),, +
+    $(ALLLIB), +
+    $(DEFFILE), +
+    $(ALLRES)
+!
+# ---------------------------------------------------------------------------
+.pas.hpp:
+    $(BCB)\BIN\$(DCC32) $(PFLAGS) {$< }
+
+.pas.obj:
+    $(BCB)\BIN\$(DCC32) $(PFLAGS) {$< }
+
+.cpp.obj:
+    $(BCB)\BIN\$(BCC32) $(CFLAG1) $(CFLAG2) $(CFLAG3) -n$(@D) {$< }
+
+.c.obj:
+    $(BCB)\BIN\$(BCC32) $(CFLAG1) $(CFLAG2) $(CFLAG3) -n$(@D) {$< }
+
+.asm.obj:
+    $(BCB)\BIN\$(TASM32) $(AFLAGS) $<, $@
+
+.rc.res:
+    $(BCB)\BIN\$(BRCC32) $(RFLAGS) -fo$@ $<
+# ---------------------------------------------------------------------------

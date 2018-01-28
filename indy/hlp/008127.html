@@ -1,0 +1,183 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+<TITLE>TWSAProtocol_InfoA</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <META name="GENERATOR" content="Doc-O-Matic">
+    <LINK rel="STYLESHEET" href="default.css" type="text/css">
+
+<SCRIPT LANGUAGE="JavaScript1.2" SRC="scripts.js"></SCRIPT>
+</HEAD>
+<BODY CLASS="Element57">
+<TABLE BORDER="0" BGCOLOR="#AACCFF" WIDTH="100%" CELLSPACING="0" CELLPADDING="0">
+<TR><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element1">
+Indy 9</DIV>
+</TD><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element2">
+<A HREF="content.html" CLASS="Element59">Content</A> | <A HREF="idx.html" CLASS="Element59">Index</A> | <A HREF="symref.html" CLASS="Element59">Reference</A></DIV>
+</TD></TR></TABLE><DIV CLASS="Element58">
+<DIV CLASS="Element5">
+TWSAProtocol_InfoA</DIV>
+<DIV CLASS="Element7">
+<A HREF="002953.html" CLASS="Element59">Unit: IdWinSock2</A></DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12">TWSAProtocol_InfoA = <STRONG>record</STRONG>
+  dwServiceFlags1: LongInt;
+  dwServiceFlags2: LongInt;
+  dwServiceFlags3: LongInt;
+  dwServiceFlags4: LongInt;
+  dwProviderFlags: LongInt;
+  ProviderId: <A HREF="007179.html" CLASS="Element59">TGUID</A>;
+  dwCatalogEntryId: LongInt;
+  ProtocolChain: <A HREF="008129.html" CLASS="Element59">TWSAProtocolChain</A>;
+  iVersion: Integer;
+  iAddressFamily: Integer;
+  iMaxSockAddr: Integer;
+  iMinSockAddr: Integer;
+  iSocketType: Integer;
+  iProtocol: Integer;
+  iProtocolMaxOffset: Integer;
+  iNetworkByteOrder: Integer;
+  iSecurityScheme: Integer;
+  dwMessageSize: LongInt;
+  dwProviderReserved: LongInt;
+  szProtocol: <STRONG>Array</STRONG>[0..WSAPROTOCOL_LEN+1-1] <STRONG>of</STRONG> Char;
+  <STRONG>end</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Unit</DIV>
+<DIV CLASS="Element69">
+<A HREF="002953.html" CLASS="Element59">IdWinSock2</A></DIV>
+<DIV CLASS="Element14">
+Members</DIV>
+<DIV CLASS="Element20">
+dwServiceFlags1: LongInt;</DIV>
+<DIV CLASS="Element22">
+<DIV CLASS="Element21">
+dwServiceFlags1</DIV>
+</DIV>
+<DIV CLASS="Element20">
+dwServiceFlags2: LongInt;</DIV>
+<DIV CLASS="Element22">
+<DIV CLASS="Element21">
+dwServiceFlags2</DIV>
+</DIV>
+<DIV CLASS="Element20">
+dwServiceFlags3: LongInt;</DIV>
+<DIV CLASS="Element22">
+<DIV CLASS="Element21">
+dwServiceFlags3</DIV>
+</DIV>
+<DIV CLASS="Element20">
+dwServiceFlags4: LongInt;</DIV>
+<DIV CLASS="Element22">
+<DIV CLASS="Element21">
+dwServiceFlags4</DIV>
+</DIV>
+<DIV CLASS="Element20">
+dwProviderFlags: LongInt;</DIV>
+<DIV CLASS="Element22">
+<DIV CLASS="Element21">
+dwProviderFlags</DIV>
+</DIV>
+<DIV CLASS="Element20">
+ProviderId: TGUID;</DIV>
+<DIV CLASS="Element22">
+<DIV CLASS="Element21">
+ProviderId</DIV>
+</DIV>
+<DIV CLASS="Element20">
+dwCatalogEntryId: LongInt;</DIV>
+<DIV CLASS="Element22">
+<DIV CLASS="Element21">
+dwCatalogEntryId</DIV>
+</DIV>
+<DIV CLASS="Element20">
+ProtocolChain: TWSAProtocolChain;</DIV>
+<DIV CLASS="Element22">
+<DIV CLASS="Element21">
+ProtocolChain</DIV>
+</DIV>
+<DIV CLASS="Element20">
+iVersion: Integer;</DIV>
+<DIV CLASS="Element22">
+<DIV CLASS="Element21">
+iVersion</DIV>
+</DIV>
+<DIV CLASS="Element20">
+iAddressFamily: Integer;</DIV>
+<DIV CLASS="Element22">
+<DIV CLASS="Element21">
+iAddressFamily</DIV>
+</DIV>
+<DIV CLASS="Element20">
+iMaxSockAddr: Integer;</DIV>
+<DIV CLASS="Element22">
+<DIV CLASS="Element21">
+iMaxSockAddr</DIV>
+</DIV>
+<DIV CLASS="Element20">
+iMinSockAddr: Integer;</DIV>
+<DIV CLASS="Element22">
+<DIV CLASS="Element21">
+iMinSockAddr</DIV>
+</DIV>
+<DIV CLASS="Element20">
+iSocketType: Integer;</DIV>
+<DIV CLASS="Element22">
+<DIV CLASS="Element21">
+iSocketType</DIV>
+</DIV>
+<DIV CLASS="Element20">
+iProtocol: Integer;</DIV>
+<DIV CLASS="Element22">
+<DIV CLASS="Element21">
+iProtocol</DIV>
+</DIV>
+<DIV CLASS="Element20">
+iProtocolMaxOffset: Integer;</DIV>
+<DIV CLASS="Element22">
+<DIV CLASS="Element21">
+iProtocolMaxOffset</DIV>
+</DIV>
+<DIV CLASS="Element20">
+iNetworkByteOrder: Integer;</DIV>
+<DIV CLASS="Element22">
+<DIV CLASS="Element21">
+iNetworkByteOrder</DIV>
+</DIV>
+<DIV CLASS="Element20">
+iSecurityScheme: Integer;</DIV>
+<DIV CLASS="Element22">
+<DIV CLASS="Element21">
+iSecurityScheme</DIV>
+</DIV>
+<DIV CLASS="Element20">
+dwMessageSize: LongInt;</DIV>
+<DIV CLASS="Element22">
+<DIV CLASS="Element21">
+dwMessageSize</DIV>
+</DIV>
+<DIV CLASS="Element20">
+dwProviderReserved: LongInt;</DIV>
+<DIV CLASS="Element22">
+<DIV CLASS="Element21">
+dwProviderReserved</DIV>
+</DIV>
+<DIV CLASS="Element20">
+szProtocol: Array[0..WSAPROTOCOL_LEN+1-1] of Char;</DIV>
+<DIV CLASS="Element22">
+<DIV CLASS="Element21">
+szProtocol</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+TWSAProtocol_InfoA</DIV>
+</DIV>
+<DIV CLASS="Element62">
+<HR>Created with Doc-O-Matic 2 donated to <STRONG><A HREF="http://www.delphi-jedi.org">Project JEDI</A></STRONG>. Commercial license available from the <STRONG><A HREF="http://www.doc-o-matic.com">Doc-O-Matic site</A></STRONG>.</DIV>
+</DIV></BODY></HTML>

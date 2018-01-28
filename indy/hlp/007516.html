@@ -1,0 +1,347 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+<TITLE>TIdLPR</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <META name="GENERATOR" content="Doc-O-Matic">
+    <LINK rel="STYLESHEET" href="default.css" type="text/css">
+
+<SCRIPT LANGUAGE="JavaScript1.2" SRC="scripts.js"></SCRIPT>
+</HEAD>
+<BODY CLASS="Element57">
+<TABLE BORDER="0" BGCOLOR="#AACCFF" WIDTH="100%" CELLSPACING="0" CELLPADDING="0">
+<TR><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element1">
+Indy 9</DIV>
+</TD><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element2">
+<A HREF="content.html" CLASS="Element59">Content</A> | <A HREF="idx.html" CLASS="Element59">Index</A> | <A HREF="symref.html" CLASS="Element59">Reference</A></DIV>
+</TD></TR></TABLE><DIV CLASS="Element58">
+<DIV CLASS="Element5">
+TIdLPR</DIV>
+<DIV CLASS="Element7">
+<A HREF="012176.html" CLASS="Element59">Hierarchy</A>, <A HREF="012177.html" CLASS="Element59">Properties</A>, <A HREF="012178.html" CLASS="Element59">Methods</A>, <A HREF="012179.html" CLASS="Element59">Events</A>, <A HREF="002280.html" CLASS="Element59">Unit: IdLPR</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+This class implements the Line Printer Daemon Protocol (LPR) as a client.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12">TIdLPR = <STRONG>class</STRONG>(<A HREF="007827.html" CLASS="Element59">TIdTCPClient</A>)</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Unit</DIV>
+<DIV CLASS="Element69">
+<A HREF="002280.html" CLASS="Element59">IdLPR</A></DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+This class implements the Line Printer Daemon Protocol (LPR) as a client. The protocol is used to add, remove, and get the status of print jobs from a spool on a remote computer. This protocol was developed around the Berkeley version of Unix and later formalized in RFC 1179.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0000">TIdLPR.ControlFile</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007516.html" CLASS="Element59">TIdLPR</A>, <A HREF="012180.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+This is the control file for the current print job.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> ControlFile: <A HREF="007517.html" CLASS="Element59">TIdLPRControlFile</A>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+This is the control file for the current print job. The control file specifies the parameters for the print job and is sent when a request is sent to the LPR daemon.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0004">TIdLPR.JobId</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007516.html" CLASS="Element59">TIdLPR</A>, <A HREF="012181.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Identifies the current print Job ID number.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> JobId: <STRONG>String</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+JobId is a String property that identifies the print Job Identification number for LPR print job. Changing the value in JobID insures that JobID is less than 999. Values greater than or equal to 999 are ignored, and reset to 1 when the print job is generated. JobID is sent as a parameter to the <A HREF="007516.html#0005" CLASS="Element59">OnLPRStatus</A> event handler.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="000A">TIdLPR.Queue</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007516.html" CLASS="Element59">TIdLPR</A>, <A HREF="012182.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+This is the name of the print queue (spool) that is used with the <A HREF="007516.html#0003" CLASS="Element59">GetQueueState</A>, <A HREF="007516.html#0006" CLASS="Element59">Print</A>, and <A HREF="007516.html#0008" CLASS="Element59">PrintFile</A>.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> Queue: <STRONG>String</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+This is the name of the print queue (spool) that is used with the <A HREF="007516.html#0003" CLASS="Element59">GetQueueState</A>, <A HREF="007516.html#0006" CLASS="Element59">Print</A>, and <A HREF="007516.html#0008" CLASS="Element59">PrintFile</A>.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0001">TIdLPR.Create</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007516.html" CLASS="Element59">TIdLPR</A>, <A HREF="012183.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+This constructor creates the <A HREF="007516.html" CLASS="Element59">TIdLPR</A> object.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>constructor</STRONG> Create(AOwner: TComponent); <STRONG>override</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Create<P CLASS="Element10">
+This constructor creates the <A HREF="007516.html" CLASS="Element59">TIdLPR</A> object, sets the port to <A HREF="002521.html" CLASS="Element59">IdPORT_LPD</A>, sets the BoundPortMin to 721, and sets BoundPortMax to 731. Create also sets the default value for <A HREF="007516.html#000A" CLASS="Element59">Queue</A> and <A HREF="007516.html#0004" CLASS="Element59">JobId</A>.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0002">TIdLPR.Destroy</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007516.html" CLASS="Element59">TIdLPR</A>, <A HREF="012184.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Frees the object instance.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>destructor</STRONG> Destroy; <STRONG>override</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Destroy is the destructor for the <A HREF="007516.html" CLASS="Element59">TIdLPR</A> object instance. Destroy frees resources allocated in the <A HREF="007516.html#0000" CLASS="Element59">ControlFile</A> property prior to calling the inherited Destroy method.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0003">TIdLPR.GetQueueState</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007516.html" CLASS="Element59">TIdLPR</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+This method requests that the server <A HREF="006944.html" CLASS="Element59">send</A> the status of print jobs in a spool.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>function</STRONG> GetQueueState(<STRONG>const</STRONG> AShortFormat: Boolean = false; <STRONG>const</STRONG> AList: <STRONG>String</STRONG> = ''): <STRONG>String</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+const AShortFormat: Boolean = false</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+This parameter indicates if the daemon should <A HREF="006944.html" CLASS="Element59">send</A> an abbreviated listing.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Return Value</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+String - the status of the print jobs from the server.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+This method requests that the server <A HREF="006944.html" CLASS="Element59">send</A> the status of print jobs in a spool.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0007">TIdLPR.Print</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007516.html" CLASS="Element59">TIdLPR</A>, <A HREF="012185.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+This method sends text to the daemon for printing.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>procedure</STRONG> <A HREF="007516.html#0006" CLASS="Element59">Print</A>(AText: <STRONG>String</STRONG>); <STRONG>overload</STRONG>;
+<STRONG>procedure</STRONG> <A HREF="007516.html#0006" CLASS="Element59">Print</A>(ABuffer: <STRONG>array</STRONG> <STRONG>of</STRONG> Byte); <STRONG>overload</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+AText: String</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+a string to be printed</DIV>
+</DIV>
+<DIV CLASS="Element17">
+ABuffer: array of Byte</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+An array of characters to print</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Print is a method used to <A HREF="006944.html" CLASS="Element59">send</A> output text to the LPR daemon for printing.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0006">TIdLPR.Print</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007516.html" CLASS="Element59">TIdLPR</A>, <A HREF="012186.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+This method sends text to the daemon for printing.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>procedure</STRONG> Print(AText: <STRONG>String</STRONG>); <STRONG>overload</STRONG>;
+<STRONG>procedure</STRONG> Print(ABuffer: <STRONG>array</STRONG> <STRONG>of</STRONG> Byte); <STRONG>overload</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+AText: String</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+a string to be printed</DIV>
+</DIV>
+<DIV CLASS="Element17">
+ABuffer: array of Byte</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+An array of characters to print</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Print is a method used to <A HREF="006944.html" CLASS="Element59">send</A> output text to the LPR daemon for printing.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0008">TIdLPR.PrintFile</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007516.html" CLASS="Element59">TIdLPR</A>, <A HREF="012187.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+This sends a file to the daemon for printing.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>procedure</STRONG> PrintFile(AFileName: <STRONG>String</STRONG>);</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+AFileName: String</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+The file to be printed.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+PrintFile is a method used to <A HREF="006944.html" CLASS="Element59">send</A> the contents of a file to the LPR daemon for printing.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0009">TIdLPR.PrintWaitingJobs</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007516.html" CLASS="Element59">TIdLPR</A>, <A HREF="012188.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+This method requests that the server print all of the print jobs that are waiting in the queue.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>procedure</STRONG> PrintWaitingJobs;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+This method requests that the server print all of the print jobs that are waiting in the queue specified by the <A HREF="007516.html#000A" CLASS="Element59">TIdLPR.Queue</A> property.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="000B">TIdLPR.RemoveJobList</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007516.html" CLASS="Element59">TIdLPR</A>, <A HREF="012189.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+This requests that the daemon remove a list of jobs from its queue.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>procedure</STRONG> RemoveJobList(AList: <STRONG>String</STRONG>; <STRONG>const</STRONG> AAsRoot: Boolean = False);</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+AList: String</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+a list of print job numbers from the person specified in the ControlFile.UserName property or if the AsRoot parameter is true, this can be the UserNames whose jobs are to be deleted</DIV>
+</DIV>
+<DIV CLASS="Element17">
+AsRoot</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+If this parameter is true, the AList parameter can be this can be the UserNames whose jobs are to be deleted. If false, the only jobs that can be deleted are for the user specified in the ControlFile.UserName property. The root account is the system administrator or Unix Super User.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+This requests that the daemon remove a list of jobs from its queue (specified in the <A HREF="007516.html#000A" CLASS="Element59">Queue</A> property).</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0005">TIdLPR.OnLPRStatus</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007516.html" CLASS="Element59">TIdLPR</A>, <A HREF="012190.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+This event is triggered to indicate the status of the <A HREF="007516.html" CLASS="Element59">TIdLPR</A> object.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> OnLPRStatus: <A HREF="007520.html" CLASS="Element59">TIdLPRStatusEvent</A>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+ASender</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+the object that triggered this event</DIV>
+</DIV>
+<DIV CLASS="Element17">
+AStatus</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+The state of the <A HREF="007516.html" CLASS="Element59">TIdLPR</A> queue</DIV>
+</DIV>
+<DIV CLASS="Element17">
+AStatusText</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+The JobID, an error message if AStatus equals psError, or the queue results if AStatus equals psQueueState.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+This event is triggered to indicate the status of the <A HREF="007516.html" CLASS="Element59">TIdLPR</A> object.</DIV>
+</DIV>
+<DIV CLASS="Element62">
+<HR>Created with Doc-O-Matic 2 donated to <STRONG><A HREF="http://www.delphi-jedi.org">Project JEDI</A></STRONG>. Commercial license available from the <STRONG><A HREF="http://www.doc-o-matic.com">Doc-O-Matic site</A></STRONG>.</DIV>
+</DIV></BODY></HTML>

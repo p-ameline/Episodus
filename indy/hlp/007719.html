@@ -1,0 +1,354 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+<TITLE>TIdSocksInfo</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <META name="GENERATOR" content="Doc-O-Matic">
+    <LINK rel="STYLESHEET" href="default.css" type="text/css">
+
+<SCRIPT LANGUAGE="JavaScript1.2" SRC="scripts.js"></SCRIPT>
+</HEAD>
+<BODY CLASS="Element57">
+<TABLE BORDER="0" BGCOLOR="#AACCFF" WIDTH="100%" CELLSPACING="0" CELLPADDING="0">
+<TR><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element1">
+Indy 9</DIV>
+</TD><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element2">
+<A HREF="content.html" CLASS="Element59">Content</A> | <A HREF="idx.html" CLASS="Element59">Index</A> | <A HREF="symref.html" CLASS="Element59">Reference</A></DIV>
+</TD></TR></TABLE><DIV CLASS="Element58">
+<DIV CLASS="Element5">
+TIdSocksInfo</DIV>
+<DIV CLASS="Element7">
+<A HREF="013815.html" CLASS="Element59">Hierarchy</A>, <A HREF="013816.html" CLASS="Element59">Properties</A>, <A HREF="013817.html" CLASS="Element59">Methods</A>, <A HREF="013818.html" CLASS="Element59">Events</A>, <A HREF="013819.html" CLASS="Element59">See Also</A>, <A HREF="002824.html" CLASS="Element59">Unit: IdSocks</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Implements SOCKS protocol support for Indy clients.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12">TIdSocksInfo = <STRONG>class</STRONG>(<A HREF="007246.html" CLASS="Element59">TIdComponent</A>)</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Unit</DIV>
+<DIV CLASS="Element69">
+<A HREF="002824.html" CLASS="Element59">IdSocks</A></DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+TIdSocksInfo is a <A HREF="007246.html" CLASS="Element59">TIdComponent</A> descendant that implements support for the SOCKS protocol, as described in the Internet Standards document:<P CLASS="Element10">
+<UL>
+<LI>RFC 1928 - SOCKS Protocol <A HREF="007719.html#0009" CLASS="Element59">Version</A> 5 (http://www.rfc-editor.org/rfc/rfc1928.txt)</UL>
+<P CLASS="Element10">
+The SOCKS protocol is used to isolate the internal network structure of an organization from from an exterior network, such as the Internet, through the use of network firewalls. These firewalls typically act as an application-layer gateway between networks, and usually offer controlled access using common Internet protocol clients such as TELNET, FTP, HTTP, and SMTP.<P CLASS="Element10">
+The SOCKS protocol is designed as a framework for transparent and secure traversal of firewall implementations using both the TCP and UDP domains. SOCKS <A HREF="007719.html#0009" CLASS="Element59">Version</A> 4 is supported, and provides unsecured firewall traversal for TCP-based clients and servers. SOCKS <A HREF="007719.html#0009" CLASS="Element59">Version</A> 5 is also supported, and provides strong authentication for the SOCKS protocol.<P CLASS="Element10">
+TIdSocksInfo implements properties required for the SOCKS protocol, including:<P CLASS="Element10">
+<UL>
+<LI><A HREF="007720.html" CLASS="Element59">Connection</A><P CLASS="Element10">
+<LI><A HREF="007719.html#0009" CLASS="Element59">Version</A><P CLASS="Element10">
+<LI><A HREF="007719.html#0000" CLASS="Element59">Authentication</A><P CLASS="Element10">
+<LI><A HREF="007719.html#0001" CLASS="Element59">Host</A><P CLASS="Element10">
+<LI><A HREF="007719.html#0007" CLASS="Element59">Port</A><P CLASS="Element10">
+<LI><A HREF="007719.html#0008" CLASS="Element59">Username</A><P CLASS="Element10">
+<LI><A HREF="007719.html#0006" CLASS="Element59">Password</A></UL>
+<P CLASS="Element10">
+TIdSocksInfo implements methods required for the SOCKS protocol, including:<P CLASS="Element10">
+<UL>
+<LI><A HREF="007719.html#0005" CLASS="Element59">MakeSocksConnection</A><P CLASS="Element10">
+<LI><A HREF="007719.html#0003" CLASS="Element59">MakeSocks4Connection</A><P CLASS="Element10">
+<LI><A HREF="007719.html#0004" CLASS="Element59">MakeSocks5Connection</A></UL>
+</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0000">TIdSocksInfo.Authentication</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007719.html" CLASS="Element59">TIdSocksInfo</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Indicates the authentication type required for SOCKS client connection.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> Authentication: <A HREF="008082.html" CLASS="Element59">TSocksAuthentication</A>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Authentication is a <A HREF="008082.html" CLASS="Element59">TSocksAuthentication</A> property that represents the authentication mechanism required for the client <A HREF="007720.html" CLASS="Element59">Connection</A>, and can include one of the following values or meanings:<P CLASS="Element10">
+<UL>
+<LI>saNoAuthentication - No authentication required.<P CLASS="Element10">
+<LI>saUsernamePassword - <A HREF="007719.html#0008" CLASS="Element59">Username</A> and <A HREF="007719.html#0006" CLASS="Element59">Password</A> authentication required.</UL>
+<P CLASS="Element10">
+The default value for Authentication is <A HREF="002016.html" CLASS="Element59">ID_SOCKS_AUTH</A>, as assigned in the <A HREF="007719.html#0000" CLASS="Element59">Create</A> constructor.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0001">TIdSocksInfo.Host</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007719.html" CLASS="Element59">TIdSocksInfo</A>, <A HREF="013820.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Represents the host name or numeric IP address for a SOCKS proxy connection.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> Host: <STRONG>string</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Host is a String property that represents the host name or numeric IP address for a SOCKS proxy server. Use <A HREF="007719.html#0007" CLASS="Element59">Port</A> for the numeric port number for the connection.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0002">TIdSocksInfo.IOHandler</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007719.html" CLASS="Element59">TIdSocksInfo</A>, <A HREF="013821.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Input/output mechanism used for the proxied connection.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> IOHandler: <A HREF="007421.html" CLASS="Element59">TIdIOHandler</A>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+IOHandler is a <A HREF="007421.html" CLASS="Element59">TIdIOHandler</A> property that represents the input/output mechanism used for reading and writing value to or from the connection that is the endpoint for the Socks proxy. IOHandler is used when <A HREF="007719.html#0003" CLASS="Element59">MakeSocks4Connection</A> and <A HREF="007719.html#0004" CLASS="Element59">MakeSocks5Connection</A> are called to establish the proxy connection to <A HREF="007719.html#0001" CLASS="Element59">Host</A> and <A HREF="007719.html#0007" CLASS="Element59">Port</A> using the <A HREF="007719.html#0000" CLASS="Element59">Authentication</A> for the <A HREF="007719.html#0008" CLASS="Element59">Username</A> and <A HREF="007719.html#0006" CLASS="Element59">Password</A> values.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0006">TIdSocksInfo.Password</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007719.html" CLASS="Element59">TIdSocksInfo</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Represents the authentication credentials used for the SOCKS proxy connection.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> Password: <STRONG>string</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Password is a String property that represents the authentication credentials used for a SOCKS <A HREF="007719.html#0009" CLASS="Element59">Version</A> 5 proxy connection. <A HREF="007719.html#0008" CLASS="Element59">Username</A> and Password are used in the <A HREF="007719.html#0004" CLASS="Element59">MakeSocks5Connection</A> method when <A HREF="007719.html#0000" CLASS="Element59">Authentication</A> contains the value saUsernamePassword and <A HREF="007719.html#0005" CLASS="Element59">MakeSocksConnection</A> is called.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0007">TIdSocksInfo.Port</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007719.html" CLASS="Element59">TIdSocksInfo</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Represents the port number used for a SOCKS proxy connection.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> Port: Integer;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Port is an Integer property that represents the port number used for the connection to a SOCKS proxy server. The default value for Port is <A HREF="002017.html" CLASS="Element59">ID_SOCKS_PORT</A>, as assigned in the <A HREF="007719.html#0000" CLASS="Element59">Create</A> constructor.<P CLASS="Element10">
+Use <A HREF="007719.html#0001" CLASS="Element59">Host</A> to specify the server name or IP address for the connection.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0008">TIdSocksInfo.Username</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007719.html" CLASS="Element59">TIdSocksInfo</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Represents the authentication identity used for the SOCKS proxy connection.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> Username: <STRONG>string</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Username is a String property that represents the authentication identity used for a SOCKS proxy connection. Username and <A HREF="007719.html#0006" CLASS="Element59">Password</A> are used in the <A HREF="007719.html#0003" CLASS="Element59">MakeSocks4Connection</A> and <A HREF="007719.html#0004" CLASS="Element59">MakeSocks5Connection</A> methods when <A HREF="007719.html#0005" CLASS="Element59">MakeSocksConnection</A> is called.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0009">TIdSocksInfo.Version</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007719.html" CLASS="Element59">TIdSocksInfo</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Specifies the SOCKS version required for the proxied client connection.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> Version: <A HREF="008083.html" CLASS="Element59">TSocksVersion</A>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Version is a <A HREF="008083.html" CLASS="Element59">TSocksVersion</A> property that indicates the version of the SOCKS protocol to be used for the client connection to a proxy server. There are currently two versions of the SOCKS protocol: SOCKS Version 4 and SOCKS Version 5.<P CLASS="Element10">
+SOCKS Version 4 provides for unsecured firewall traversal for TCP-based client-server applications.<P CLASS="Element10">
+SOCKS Version 5 provides additional support for UDP-based clients and servers, and a generalized strong authentication scheme.<P CLASS="Element10">
+Version allows the SOCKS client to perform the specifics for establishing a client connection that are required for the differing versions in <A HREF="007719.html#0005" CLASS="Element59">MakeSocksConnection</A>.<P CLASS="Element10">
+The default value for Version is <A HREF="002018.html" CLASS="Element59">ID_SOCKS_VER</A> as assigned in the <A HREF="007719.html#0000" CLASS="Element59">Create</A> constructor.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0000">TIdSocksInfo.Create</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007719.html" CLASS="Element59">TIdSocksInfo</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Constructor for the object instance.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>constructor</STRONG> Create(AOwner: TComponent); <STRONG>override</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+AOwner: TComponent</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Owner of the object instance.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Create is the constructor for the object instance. Create calls the inherited Create method using the value specified in AOwner. Create also assigns the default values for properties, including:<P CLASS="Element10">
+<UL>
+<LI><A HREF="007719.html#0000" CLASS="Element59">Authentication</A> - <A HREF="002016.html" CLASS="Element59">ID_SOCKS_AUTH</A><P CLASS="Element10">
+<LI><A HREF="007719.html#0009" CLASS="Element59">Version</A> - <A HREF="002018.html" CLASS="Element59">ID_SOCKS_VER</A><P CLASS="Element10">
+<LI><A HREF="007719.html#0007" CLASS="Element59">Port</A> - <A HREF="002017.html" CLASS="Element59">ID_SOCKS_PORT</A></UL>
+</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0003">TIdSocksInfo.MakeSocks4Connection</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007719.html" CLASS="Element59">TIdSocksInfo</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Establishes the <A HREF="007071.html" CLASS="Element59">socket</A> connection used for a SOCKS proxy connection.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>procedure</STRONG> MakeSocks4Connection(<STRONG>const</STRONG> AHost: <STRONG>string</STRONG>; <STRONG>const</STRONG> APort: Integer);</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+const AHost: string</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+<A HREF="007719.html#0001" CLASS="Element59">Host</A> name or IP address for a socks connection request.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+const APort: Integer</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+<A HREF="007719.html#0007" CLASS="Element59">Port</A> number for a socks connection request.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+MakeSocks4Connection is a procedure that establishes the <A HREF="007828.html" CLASS="Element59">TIdTCPConnection</A> used for a SOCKS proxy connection. MakeSocks4Connection is called from <A HREF="007719.html#0005" CLASS="Element59">MakeSocksConnection</A> when the value in <A HREF="007719.html#0009" CLASS="Element59">Version</A> is svSocks4 or svSocks4A.<P CLASS="Element10">
+MakeSocks4Connection sets the OpCode and <A HREF="007719.html#0009" CLASS="Element59">Version</A> number for the <A HREF="007721.html" CLASS="Element59">TIdSocksRequest</A> sent to the proxy server at the location specified in AHost and APort. MakeSocks4Connection will use the host address '0.0.0.1' when <A HREF="007719.html#0009" CLASS="Element59">Version</A> contains the value svSocks4A.<P CLASS="Element10">
+MakeSocks4Connection also sets the identity for the SOCKS request to the value specified in <A HREF="007719.html#0008" CLASS="Element59">Username</A>.<P CLASS="Element10">
+MakeSocks4Connection writes the SOCKS request to the <A HREF="007720.html" CLASS="Element59">Connection</A> for the proxy, and reads the SOCKS response packet. MakeSocks4Connection can raise an exception when the TIdSocksResponse.OpCode contains one of the following values:<P CLASS="Element10">
+<UL>
+<LI>90 - <A HREF="007720.html" CLASS="Element59">Connection</A> successful<P CLASS="Element10">
+<LI>91 - <A HREF="000456.html" CLASS="Element59">EIdSocksRequestFailed</A><P CLASS="Element10">
+<LI>92 - <A HREF="000458.html" CLASS="Element59">EIdSocksRequestServerFailed</A><P CLASS="Element10">
+<LI>93 - <A HREF="000457.html" CLASS="Element59">EIdSocksRequestIdentFailed</A><P CLASS="Element10">
+<LI>Other - <A HREF="000468.html" CLASS="Element59">EIdSocksUnknownError</A></UL>
+</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0004">TIdSocksInfo.MakeSocks5Connection</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007719.html" CLASS="Element59">TIdSocksInfo</A>, <A HREF="013822.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Establishes the <A HREF="007071.html" CLASS="Element59">socket</A> connection used for a SOCKS proxy connection.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>procedure</STRONG> MakeSocks5Connection(<STRONG>const</STRONG> AHost: <STRONG>string</STRONG>; <STRONG>const</STRONG> APort: Integer);</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+const AHost: string</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+<A HREF="007719.html#0001" CLASS="Element59">Host</A> name or IP address for a socks connection request.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+const APort: Integer</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+<A HREF="007719.html#0007" CLASS="Element59">Port</A> number for a socks connection request.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+MakeSocks5Connection is a procedure that establishes the <A HREF="007828.html" CLASS="Element59">TIdTCPConnection</A> used for a SOCKS proxy connection. MakeSocks5Connection is called from <A HREF="007719.html#0005" CLASS="Element59">MakeSocksConnection</A> when the value in <A HREF="007719.html#0009" CLASS="Element59">Version</A> is svSocks5.<P CLASS="Element10">
+MakeSocks5Connection establishes the <A HREF="007071.html" CLASS="Element59">socket</A> connection for the client, and performs authentication method negotiation as required by the SOCKS version 5 protocol. An <A HREF="000454.html" CLASS="Element59">EIdSocksAuthMethodError</A> exception will be raised if an unsupported authentication method is returned on the <A HREF="007720.html" CLASS="Element59">Connection</A> to the proxy server.<P CLASS="Element10">
+MakeSocks5Connection performs client <A HREF="007719.html#0000" CLASS="Element59">Authentication</A> using the values in <A HREF="007719.html#0008" CLASS="Element59">Username</A> and <A HREF="007719.html#0006" CLASS="Element59">Password</A> when authentication method is saUsernamePassword. An <A HREF="000466.html" CLASS="Element59">EIdSocksServerRespondError</A> exception will be raised when the client is unable to read the authentication status results from the <A HREF="007720.html" CLASS="Element59">Connection</A> to the proxy server. An <A HREF="000453.html" CLASS="Element59">EIdSocksAuthError</A> will be raised when an invalid authentication status value is returned on the <A HREF="007720.html" CLASS="Element59">Connection</A> to the proxy server.<P CLASS="Element10">
+If authentication is required, and successful, MakeSocks5Connection will <A HREF="006944.html" CLASS="Element59">send</A> the SOCKS connection request packet that specifies the details for the proxied connection. The request packet includes the SOCKS version number, command opcode, address type, destination host name or IP address, and destination port number for the proxied <A HREF="007720.html" CLASS="Element59">Connection</A>. The destination address and port contain the values specified in AHost and APort.<P CLASS="Element10">
+MakeSocks5Connection will raise an <A HREF="000466.html" CLASS="Element59">EIdSocksServerRespondError</A> exception when a response cannot be read from the <A HREF="007720.html" CLASS="Element59">Connection</A> to the proxy server. Other exceptions can be raised when specific values are returned in the result code for the SOCKS reply, and include the following:<P CLASS="Element10">
+<UL>
+<LI>1 - <A HREF="000462.html" CLASS="Element59">EIdSocksServerGeneralError</A><P CLASS="Element10">
+<LI>2 - <A HREF="000465.html" CLASS="Element59">EIdSocksServerPermissionError</A><P CLASS="Element10">
+<LI>3 - <A HREF="000464.html" CLASS="Element59">EIdSocksServerNetUnreachableError</A><P CLASS="Element10">
+<LI>4 - <A HREF="000463.html" CLASS="Element59">EIdSocksServerHostUnreachableError</A><P CLASS="Element10">
+<LI>5 - <A HREF="000461.html" CLASS="Element59">EIdSocksServerConnectionRefusedError</A><P CLASS="Element10">
+<LI>6 - <A HREF="000467.html" CLASS="Element59">EIdSocksServerTTLExpiredError</A><P CLASS="Element10">
+<LI>7 - <A HREF="000460.html" CLASS="Element59">EIdSocksServerCommandError</A><P CLASS="Element10">
+<LI>8 - <A HREF="000459.html" CLASS="Element59">EIdSocksServerAddressError</A></UL>
+<P CLASS="Element10">
+An <A HREF="000468.html" CLASS="Element59">EIdSocksUnknownError</A> exception will be raised if the result code in the SOCKS reply contains an unknown value.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0005">TIdSocksInfo.MakeSocksConnection</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007719.html" CLASS="Element59">TIdSocksInfo</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Opens a SOCKS connection using version-specific connection handling.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>procedure</STRONG> MakeSocksConnection(<STRONG>const</STRONG> AHost: <STRONG>string</STRONG>; <STRONG>const</STRONG> APort: Integer);</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+const AHost: string</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+<A HREF="007719.html#0001" CLASS="Element59">Host</A> name or IP address for a socks connection request.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+const APort: Integer</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+<A HREF="007719.html#0007" CLASS="Element59">Port</A> number for a socks connection request.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+MakeSocksConnection is a procedure that allows the client to establish a <A HREF="007071.html" CLASS="Element59">socket</A> connection to the proxy server for the destination address identified in AHost and APort. MakeSocksConnection insures that the correct connection processing is performed for the SOCKS <A HREF="007719.html#0009" CLASS="Element59">Version</A> required for the client connection.<P CLASS="Element10">
+MakeSocksConnection calls <A HREF="007719.html#0003" CLASS="Element59">MakeSocks4Connection</A> when <A HREF="007719.html#0009" CLASS="Element59">Version</A> contains the value svSocks4 or svSocks4A. MakeSocksConnection calls <A HREF="007719.html#0004" CLASS="Element59">MakeSocks5Connection</A> when <A HREF="007719.html#0009" CLASS="Element59">Version</A> contains the value svSocks5.</DIV>
+</DIV>
+<DIV CLASS="Element62">
+<HR>Created with Doc-O-Matic 2 donated to <STRONG><A HREF="http://www.delphi-jedi.org">Project JEDI</A></STRONG>. Commercial license available from the <STRONG><A HREF="http://www.doc-o-matic.com">Doc-O-Matic site</A></STRONG>.</DIV>
+</DIV></BODY></HTML>

@@ -1,0 +1,66 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+<TITLE>TOnNewCookieEvent</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <META name="GENERATOR" content="Doc-O-Matic">
+    <LINK rel="STYLESHEET" href="default.css" type="text/css">
+
+<SCRIPT LANGUAGE="JavaScript1.2" SRC="scripts.js"></SCRIPT>
+</HEAD>
+<BODY CLASS="Element57">
+<TABLE BORDER="0" BGCOLOR="#AACCFF" WIDTH="100%" CELLSPACING="0" CELLPADDING="0">
+<TR><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element1">
+Indy 9</DIV>
+</TD><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element2">
+<A HREF="content.html" CLASS="Element59">Content</A> | <A HREF="idx.html" CLASS="Element59">Index</A> | <A HREF="symref.html" CLASS="Element59">Reference</A></DIV>
+</TD></TR></TABLE><DIV CLASS="Element58">
+<DIV CLASS="Element5">
+TOnNewCookieEvent</DIV>
+<DIV CLASS="Element7">
+<A HREF="015517.html" CLASS="Element59">See Also</A>, <A HREF="002146.html" CLASS="Element59">Unit: IdCookieManager</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Event type signalled when a new Cookie is added to the HTTP client Cookie collection.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12">TOnNewCookieEvent = <STRONG>procedure</STRONG> (ASender: TObject; ACookie: <A HREF="007264.html" CLASS="Element59">TIdCookieRFC2109</A>; <STRONG>Var</STRONG> VAccept: Boolean) <STRONG>of</STRONG> <STRONG>object</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Unit</DIV>
+<DIV CLASS="Element69">
+<A HREF="002146.html" CLASS="Element59">IdCookieManager</A></DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+ACookie</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Cookie class instance to be added to the collection.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+ASender</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Cookie Manager generatinmg the event notification.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+VAccept</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Indicates if the Cookie was accepted and added.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+TOnNewCookieEvent is an event type signalled when <A HREF="007263.html" CLASS="Element59">TIdCookieManager</A> adds a new Cookie class instance to the CookieCollection maintained for and by the <A HREF="007375.html" CLASS="Element59">TIdHTTP</A> client. Applications must assign a procedure to the OnNewCookie event handler to allow a response to the event notification.<P CLASS="Element10">
+ACookie is the <A HREF="007264.html" CLASS="Element59">TIdCookieRFC2109</A> Cookie class instance, or descendant, to be added to the collection. ACookie is created as a result of <A HREF="007263.html" CLASS="Element59">TIdCookieManager</A> calls to either AddCookie or AddCookie2 during processing of Cookie headers detected in a response from an HTTP server.<P CLASS="Element10">
+VAccept is a Boolean variable parameter that indicates if the Cookie was accepted and added to the collection maintained by the Cookie manager. The OnNewCookie event handler can set the value of VAccept to False to indicate that a Cookie was not added due to Cookie expiration, invalid Domain or Path attributes, incorrect Secure connection settings, or other invalid Cookie attributes.</DIV>
+</DIV>
+<DIV CLASS="Element62">
+<HR>Created with Doc-O-Matic 2 donated to <STRONG><A HREF="http://www.delphi-jedi.org">Project JEDI</A></STRONG>. Commercial license available from the <STRONG><A HREF="http://www.doc-o-matic.com">Doc-O-Matic site</A></STRONG>.</DIV>
+</DIV></BODY></HTML>

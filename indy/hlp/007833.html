@@ -1,0 +1,204 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+<TITLE>TIdTCPStream</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <META name="GENERATOR" content="Doc-O-Matic">
+    <LINK rel="STYLESHEET" href="default.css" type="text/css">
+
+<SCRIPT LANGUAGE="JavaScript1.2" SRC="scripts.js"></SCRIPT>
+</HEAD>
+<BODY CLASS="Element57">
+<TABLE BORDER="0" BGCOLOR="#AACCFF" WIDTH="100%" CELLSPACING="0" CELLPADDING="0">
+<TR><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element1">
+Indy 9</DIV>
+</TD><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element2">
+<A HREF="content.html" CLASS="Element59">Content</A> | <A HREF="idx.html" CLASS="Element59">Index</A> | <A HREF="symref.html" CLASS="Element59">Reference</A></DIV>
+</TD></TR></TABLE><DIV CLASS="Element58">
+<DIV CLASS="Element5">
+TIdTCPStream</DIV>
+<DIV CLASS="Element7">
+<A HREF="014216.html" CLASS="Element59">Hierarchy</A>, <A HREF="014217.html" CLASS="Element59">Properties</A>, <A HREF="014218.html" CLASS="Element59">Methods</A>, <A HREF="014219.html" CLASS="Element59">See Also</A>, <A HREF="002920.html" CLASS="Element59">Unit: IdTCPStream</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Implements support for redirecting stream input and output to a <A HREF="007071.html" CLASS="Element59">socket</A> connection.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12">TIdTCPStream = <STRONG>class</STRONG>(TStream)</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Unit</DIV>
+<DIV CLASS="Element69">
+<A HREF="002920.html" CLASS="Element59">IdTCPStream</A></DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+TIdTCPStream is a TStream descendant that implements support for redirecting input and output on a TStream descendant to a <A HREF="007828.html" CLASS="Element59">TIdTCPConnection</A> <A HREF="007071.html" CLASS="Element59">socket</A> handle. TIdTCPStream reimplements the common TStream methods, <A HREF="007833.html#0002" CLASS="Element59">Read</A>, <A HREF="007833.html#0004" CLASS="Element59">Write</A>, and <A HREF="007833.html#0003" CLASS="Element59">Seek</A>, to provide the functionality needed for redirecting input and output.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0000">TIdTCPStream.Connection</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007833.html" CLASS="Element59">TIdTCPStream</A>, <A HREF="014220.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Represents the connection used for performing input and output for the stream descendant.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> Connection: <A HREF="007828.html" CLASS="Element59">TIdTCPConnection</A>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Connection is a read-only <A HREF="007828.html" CLASS="Element59">TIdTCPConnection</A> property that represents the <A HREF="007071.html" CLASS="Element59">socket</A> connection used for performing input and output for the stream descendant.<P CLASS="Element10">
+Connection is assigned in the <A HREF="007833.html#0001" CLASS="Element59">Create</A> constructor, and is used to perform the actual input or output operation requested by method in the TStream descendant, like <A HREF="007833.html#0002" CLASS="Element59">Read</A>, <A HREF="007833.html#0004" CLASS="Element59">Write</A>, and <A HREF="007833.html#0003" CLASS="Element59">Seek</A>.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0001">TIdTCPStream.Create</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007833.html" CLASS="Element59">TIdTCPStream</A>, <A HREF="014221.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Constructor for the object instance.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>constructor</STRONG> Create(AConnection: <A HREF="007828.html" CLASS="Element59">TIdTCPConnection</A>); <STRONG>reintroduce</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+AConnection: TIdTCPConnection</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+<A HREF="007833.html#0000" CLASS="Element59">Connection</A> used for stream input and output operations.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Create is the Constructor for the object instance that is reintroduced in <A HREF="007833.html" CLASS="Element59">TIdTCPStream</A>, and relies the inherited Create method. Create also assigns the <A HREF="007828.html" CLASS="Element59">TIdTCPConnection</A> instance in the AConnection parameter to the <A HREF="007833.html#0000" CLASS="Element59">Connection</A> property.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0002">TIdTCPStream.Read</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007833.html" CLASS="Element59">TIdTCPStream</A>, <A HREF="014222.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Implements stream input from a <A HREF="007071.html" CLASS="Element59">socket</A> connection.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>function</STRONG> <STRONG>Read</STRONG>(<STRONG>var</STRONG> ABuffer; ACount: Longint): Longint; <STRONG>override</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+var ABuffer</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Buffer to receive values read from the <A HREF="007071.html" CLASS="Element59">socket</A> connection.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+ACount: Longint</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Number of Bytes read from the <A HREF="007071.html" CLASS="Element59">socket</A> connection.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Return Value</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+LongInt - Number of bytes read from the <A HREF="007071.html" CLASS="Element59">socket</A> connection.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Read is an overriden LongInt function that implements stream input from the associated <A HREF="007071.html" CLASS="Element59">socket</A> handle in <A HREF="007833.html#0000" CLASS="Element59">Connection</A>. Read calls <A HREF="007828.html#0026" CLASS="Element59">TIdTCPConnection.ReadBuffer</A> using the input parameters ABuffer and ACount to perform input of values from the <A HREF="007833.html#0000" CLASS="Element59">Connection</A>. Values read from the <A HREF="007071.html" CLASS="Element59">socket</A> <A HREF="007833.html#0000" CLASS="Element59">Connection</A> are stored in the ABuffer input parameter. The return value for Read is the actual number of bytes read from the <A HREF="007833.html#0000" CLASS="Element59">Connection</A> and stored in the input variable ACount.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0003">TIdTCPStream.Seek</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007833.html" CLASS="Element59">TIdTCPStream</A>, <A HREF="014223.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Reimplements locating a position in a stream.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>function</STRONG> Seek(AOffset: Longint; AOrigin: Word): Longint; <STRONG>override</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+AOffset: Longint</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Number of bytes to move in the stream from the specified position.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+AOrigin: Word</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Identifies the origin for the AOffset parameter.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Return Value</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Longint - New Position in the stream.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Seek is an overridden LongInt function that reimplements locating a position in the TStream descendant.<P CLASS="Element10">
+<STRONG>Note</STRONG>: Because input and output operations are redirected to a <A HREF="007071.html" CLASS="Element59">socket</A> <A HREF="000295.html" CLASS="Element59">connect</A>, and values are not written to the stream, <A HREF="007833.html" CLASS="Element59">TIdTCPStream</A> does not support seeking a location in the TStream descendant. The return value for Seek, the new Position in the stream, is always -1.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0004">TIdTCPStream.Write</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007833.html" CLASS="Element59">TIdTCPStream</A>, <A HREF="014224.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Reimplements support for writing stream contents to a <A HREF="007071.html" CLASS="Element59">socket</A> connection.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>function</STRONG> <STRONG>Write</STRONG>(<STRONG>const</STRONG> ABuffer; ACount: Longint): Longint; <STRONG>override</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+const ABuffer</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Values to be written to the <A HREF="007071.html" CLASS="Element59">socket</A> connection.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+ACount: Longint</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Number of bytes written to the <A HREF="007071.html" CLASS="Element59">socket</A> connection.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Return Value</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+LongInt - Number of bytes written to the <A HREF="007071.html" CLASS="Element59">socket</A> connection.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Write is an overridden LongInt function that reimplements support for writing TStream contents to the <A HREF="007071.html" CLASS="Element59">socket</A> handle specified in <A HREF="007833.html#0000" CLASS="Element59">Connection</A>. Write calls the <A HREF="007828.html#003B" CLASS="Element59">TIdTCPConnection.WriteBuffer</A> method, using the input parameters ABuffer and ACount, to perform the physical output of values to the <A HREF="007071.html" CLASS="Element59">socket</A> connection. The return value for Write is the updated value of the ACount input parameter after the call to <A HREF="007828.html#003B" CLASS="Element59">TIdTCPConnection.WriteBuffer</A>.</DIV>
+</DIV>
+<DIV CLASS="Element62">
+<HR>Created with Doc-O-Matic 2 donated to <STRONG><A HREF="http://www.delphi-jedi.org">Project JEDI</A></STRONG>. Commercial license available from the <STRONG><A HREF="http://www.doc-o-matic.com">Doc-O-Matic site</A></STRONG>.</DIV>
+</DIV></BODY></HTML>

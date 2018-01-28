@@ -1,0 +1,118 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+<TITLE>TIdReadMemoryStream</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <META name="GENERATOR" content="Doc-O-Matic">
+    <LINK rel="STYLESHEET" href="default.css" type="text/css">
+
+<SCRIPT LANGUAGE="JavaScript1.2" SRC="scripts.js"></SCRIPT>
+</HEAD>
+<BODY CLASS="Element57">
+<TABLE BORDER="0" BGCOLOR="#AACCFF" WIDTH="100%" CELLSPACING="0" CELLPADDING="0">
+<TR><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element1">
+Indy 9</DIV>
+</TD><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element2">
+<A HREF="content.html" CLASS="Element59">Content</A> | <A HREF="idx.html" CLASS="Element59">Index</A> | <A HREF="symref.html" CLASS="Element59">Reference</A></DIV>
+</TD></TR></TABLE><DIV CLASS="Element58">
+<DIV CLASS="Element5">
+TIdReadMemoryStream</DIV>
+<DIV CLASS="Element7">
+<A HREF="013244.html" CLASS="Element59">Hierarchy</A>, <A HREF="013245.html" CLASS="Element59">Methods</A>, <A HREF="013246.html" CLASS="Element59">See Also</A>, <A HREF="002193.html" CLASS="Element59">Unit: IdGlobal</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Implements read-only stream access to memory.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12">TIdReadMemoryStream = <STRONG>class</STRONG>(TCustomMemoryStream)</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Unit</DIV>
+<DIV CLASS="Element69">
+<A HREF="002193.html" CLASS="Element59">IdGlobal</A></DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+TIdReadMemoryStream is a TCustomMemoryStream descendant, and is used to provide fast, read-only, stream-based access to values in memory. TIdReadMemoryStream implements the <A HREF="007647.html#0000" CLASS="Element59">SetPointer</A> and <A HREF="007647.html#0001" CLASS="Element59">Write</A> methods from the abstract ancestor class.<P CLASS="Element10">
+TIdReadMemoryStream is used internally in the implementation of some Indy methods like <A HREF="007309.html#0000" CLASS="Element59">TIdEncoder.Encode</A>, <A HREF="007360.html#0000" CLASS="Element59">TIdHash32.HashValue</A>, <A HREF="007359.html#0000" CLASS="Element59">TIdHash16.HashValue</A>, and <A HREF="007358.html#0001" CLASS="Element59">TIdHash128.HashValue</A>.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0000">TIdReadMemoryStream.SetPointer</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007647.html" CLASS="Element59">TIdReadMemoryStream</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Assigns the memory buffer associated with the memory stream.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>procedure</STRONG> SetPointer(Ptr: Pointer; Size: Longint);</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+Ptr: Pointer</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Pointer to the memory buffer for the stream.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+Size: Longint</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Size of the buffer for the stream.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+SetPointer is a procedure that assigns the internal memory buffer associated with the memory stream. SetPointer is a public method in <A HREF="007647.html" CLASS="Element59">TIdReadMemoryStream</A>, and calls the inherited method using Ptr and Size as arguments.<P CLASS="Element10">
+Ptr is as pointer to the internal buffer to be assigned to Memory. Size is the number of bytes allocated to the buffer in Ptr.<P CLASS="Element10">
+SetPointer sets the Position of the memory stream to byte 0 (zero) using Seek prior to exiting the method.<P CLASS="Element10">
+<STRONG>Note</STRONG>: SetPointer does not free the existing value of Memory, if any, when it replaces the memory buffer. Descendant classes that use SetPointer to replace an existing stream memory pool should free the memory pointed to by the Memory property before calling SetPointer to replace the memory buffer.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0001">TIdReadMemoryStream.Write</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007647.html" CLASS="Element59">TIdReadMemoryStream</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Overrides the default write behavior for the read-only memory stream.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>function</STRONG> <STRONG>Write</STRONG>(<STRONG>const</STRONG> Buffer; Count: Longint): Longint; <STRONG>override</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+const Buffer</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Values to be written. Ignored.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+Count: Longint</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Number of bytes to be written. Ignored.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Return Value</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+LongInt - Numer of bytes written. Always returns 0 (zero).</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Write is a LongInt function that is reimplemented in <A HREF="007647.html" CLASS="Element59">TIdReadMemoryStream</A> to override the default behavior for the custom memory stream. <A HREF="007647.html" CLASS="Element59">TIdReadMemoryStream</A> is a read-only stream, and the return value for the Write method will always be 0 (zero).</DIV>
+</DIV>
+<DIV CLASS="Element62">
+<HR>Created with Doc-O-Matic 2 donated to <STRONG><A HREF="http://www.delphi-jedi.org">Project JEDI</A></STRONG>. Commercial license available from the <STRONG><A HREF="http://www.doc-o-matic.com">Doc-O-Matic site</A></STRONG>.</DIV>
+</DIV></BODY></HTML>

@@ -1,0 +1,102 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+<TITLE>TIdThreadMgrDefault</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <META name="GENERATOR" content="Doc-O-Matic">
+    <LINK rel="STYLESHEET" href="default.css" type="text/css">
+
+<SCRIPT LANGUAGE="JavaScript1.2" SRC="scripts.js"></SCRIPT>
+</HEAD>
+<BODY CLASS="Element57">
+<TABLE BORDER="0" BGCOLOR="#AACCFF" WIDTH="100%" CELLSPACING="0" CELLPADDING="0">
+<TR><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element1">
+Indy 9</DIV>
+</TD><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element2">
+<A HREF="content.html" CLASS="Element59">Content</A> | <A HREF="idx.html" CLASS="Element59">Index</A> | <A HREF="symref.html" CLASS="Element59">Reference</A></DIV>
+</TD></TR></TABLE><DIV CLASS="Element58">
+<DIV CLASS="Element5">
+TIdThreadMgrDefault</DIV>
+<DIV CLASS="Element7">
+<A HREF="014389.html" CLASS="Element59">Hierarchy</A>, <A HREF="014390.html" CLASS="Element59">Properties</A>, <A HREF="014391.html" CLASS="Element59">Methods</A>, <A HREF="014392.html" CLASS="Element59">See Also</A>, <A HREF="002928.html" CLASS="Element59">Unit: IdThreadMgrDefault</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Default thread manager for Indy servers.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12">TIdThreadMgrDefault = <STRONG>class</STRONG>(<A HREF="007853.html" CLASS="Element59">TIdThreadMgr</A>)</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Unit</DIV>
+<DIV CLASS="Element69">
+<A HREF="002928.html" CLASS="Element59">IdThreadMgrDefault</A></DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+TIdThreadMgrDefault is a descendant of TIDThreadMgr that acts as the default thread manager in Indy for <A HREF="007831.html" CLASS="Element59">TIdTCPServer</A> and descendants. TIdThreadMgrDefault utilizes the thread management framework defined in <A HREF="007853.html" CLASS="Element59">TIdThreadMgr</A>. TIdThreadMgrDefault creates and destroys threads for every connection, and stores active thread instances in the ActiveThreads list.<P CLASS="Element10">
+TIdThreadMgrDefault implements the inherited abstract methods <A HREF="007854.html#0000" CLASS="Element59">GetThread</A> and <A HREF="007854.html#0001" CLASS="Element59">ReleaseThread</A>. <A HREF="007854.html#0000" CLASS="Element59">GetThread</A> creates a new thread instance for the thread manager. <A HREF="007854.html#0001" CLASS="Element59">ReleaseThread</A> handles freeing and releasing a thread instance.<P CLASS="Element10">
+Use TerminateThreads to notify all <A HREF="007846.html" CLASS="Element59">TIdThread</A> instances to close their <A HREF="007071.html" CLASS="Element59">socket</A> connection, release the thread, and remove the thread from ActiveThreads.<P CLASS="Element10">
+Assign an instance of <A HREF="007850.html" CLASS="Element59">TIdThreadClass</A> to ThreadClass before using the thread manager to allocate new threads.<P CLASS="Element10">
+TIdThreadMgrDefault is the default thread manager created for instances of <A HREF="007831.html" CLASS="Element59">TIdTCPServer</A> and descendants. To use another thread manager, create an instance of a <A HREF="007853.html" CLASS="Element59">TIdThreadMgr</A> descendant, and assign the object reference to <A HREF="007831.html#001E" CLASS="Element59">TIdTCPServer.ThreadMgr</A>. If you are using protocols such as HTTP, Time, or Gopher, where the connection is closed after the request is fulfilled, you may wish to consider using the <A HREF="007855.html" CLASS="Element59">TIdThreadMgrPool</A> thread manager. After closing a connection with TIdThreadMgrDefault, the thread and all associated data is freed. When you are using <A HREF="007855.html" CLASS="Element59">TIdThreadMgrPool</A>, the threads is stored in the Pool and when the server needs new thread it is not created but is taken from the Pool.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0000">TIdThreadMgrDefault.GetThread</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007854.html" CLASS="Element59">TIdThreadMgrDefault</A>, <A HREF="014393.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Requests a new thread for the thread manager.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>function</STRONG> GetThread: <A HREF="007846.html" CLASS="Element59">TIdThread</A>; <STRONG>override</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Return Value</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+<A HREF="007846.html" CLASS="Element59">TIdThread</A> - The new thread instance.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+<A HREF="007854.html" CLASS="Element59">TIdThreadMgrDefault</A> implements GetThread to provide new thread instances for the thread manager. GetThread uses CreateNewThread to obtain the new thread instance. GetThread also adds the new thread instance to ActiveThreads.<P CLASS="Element10">
+A thread instance can be freed using <A HREF="007854.html#0001" CLASS="Element59">ReleaseThread</A>.<P CLASS="Element10">
+A list of threads can be terminated and freed using TerminateThreads.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0001">TIdThreadMgrDefault.ReleaseThread</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007854.html" CLASS="Element59">TIdThreadMgrDefault</A>, <A HREF="014394.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Frees a thread instance.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>procedure</STRONG> ReleaseThread(AThread: <A HREF="007846.html" CLASS="Element59">TIdThread</A>); <STRONG>override</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+AThread: TIdThread</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Thread to be released.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+ReleaseThread is an implementation of the inherited abstract method that instructs the thread manager to terminate and free a thread instance.<P CLASS="Element10">
+If AThread is the current thread of execution, and has not been Suspended, the thread calls TerminateAndWaitFor to force termination of the active thread. TIdThread.Free is called to release the thread. If AThread is not the current thread, FreeOnTerminate is set to <STRONG>True</STRONG>.<P CLASS="Element10">
+ReleaseThread removes the thread from ActiveThreads prior to exiting from the method.</DIV>
+</DIV>
+<DIV CLASS="Element62">
+<HR>Created with Doc-O-Matic 2 donated to <STRONG><A HREF="http://www.delphi-jedi.org">Project JEDI</A></STRONG>. Commercial license available from the <STRONG><A HREF="http://www.doc-o-matic.com">Doc-O-Matic site</A></STRONG>.</DIV>
+</DIV></BODY></HTML>

@@ -1,0 +1,123 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+<TITLE>TIdGopherMenu</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <META name="GENERATOR" content="Doc-O-Matic">
+    <LINK rel="STYLESHEET" href="default.css" type="text/css">
+
+<SCRIPT LANGUAGE="JavaScript1.2" SRC="scripts.js"></SCRIPT>
+</HEAD>
+<BODY CLASS="Element57">
+<TABLE BORDER="0" BGCOLOR="#AACCFF" WIDTH="100%" CELLSPACING="0" CELLPADDING="0">
+<TR><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element1">
+Indy 9</DIV>
+</TD><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element2">
+<A HREF="content.html" CLASS="Element59">Content</A> | <A HREF="idx.html" CLASS="Element59">Index</A> | <A HREF="symref.html" CLASS="Element59">Reference</A></DIV>
+</TD></TR></TABLE><DIV CLASS="Element58">
+<DIV CLASS="Element5">
+TIdGopherMenu</DIV>
+<DIV CLASS="Element7">
+<A HREF="011198.html" CLASS="Element59">Hierarchy</A>, <A HREF="011199.html" CLASS="Element59">Properties</A>, <A HREF="011200.html" CLASS="Element59">Methods</A>, <A HREF="011201.html" CLASS="Element59">See Also</A>, <A HREF="002194.html" CLASS="Element59">Unit: IdGopher</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Collection of Gopher menu items.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12">TIdGopherMenu = <STRONG>class</STRONG>(TCollection)</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Unit</DIV>
+<DIV CLASS="Element69">
+<A HREF="002194.html" CLASS="Element59">IdGopher</A></DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+TIdGopherMenu is a collection of <A HREF="007355.html" CLASS="Element59">TIdGopherMenuItem</A> instances, and encapsulates a Gopher menu or a Gopher + Extended Menu. TIdGopherMenu is returned by the following:<P CLASS="Element10">
+<UL>
+<LI><A HREF="007352.html#0001" CLASS="Element59">TIdGopher.GetExtendedMenu</A><P CLASS="Element10">
+<LI><A HREF="007352.html#0003" CLASS="Element59">TIdGopher.GetMenu</A><P CLASS="Element10">
+<LI><A HREF="007352.html#0007" CLASS="Element59">TIdGopher.Search</A></UL>
+</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0002">TIdGopherMenu.Items</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007353.html" CLASS="Element59">TIdGopherMenu</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Gopher menu items in the collection.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> Items [ <STRONG>Index</STRONG>: Integer ]: <A HREF="007355.html" CLASS="Element59">TIdGopherMenuItem</A>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+Index</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Position in the collection.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Return Value</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+<A HREF="007355.html" CLASS="Element59">TIdGopherMenuItem</A> - Gopher menu item in the collection.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Items is an indexed <A HREF="007355.html" CLASS="Element59">TIdGopherMenuItem</A> property that provides access to the individual Gopher menu items in the collection. Index values can range from 0 to Count-1. Items is the default property for <A HREF="007353.html" CLASS="Element59">TIdGopherMenu</A>.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0000">TIdGopherMenu.Add</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007353.html" CLASS="Element59">TIdGopherMenu</A>, <A HREF="011202.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Add a new Gopher menu item.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>function</STRONG> Add: <A HREF="007355.html" CLASS="Element59">TIdGopherMenuItem</A>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Return Value</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+<A HREF="007355.html" CLASS="Element59">TIdGopherMenuItem</A> - Gopher menu item added to the collection.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Add is a <A HREF="007355.html" CLASS="Element59">TIdGopherMenuItem</A> function that returns a new <A HREF="007355.html" CLASS="Element59">TIdGopherMenuItem</A>, and adds it to the <A HREF="007353.html" CLASS="Element59">TIdGopherMenu</A> collection. Add is primarily for internal use in the <A HREF="007352.html" CLASS="Element59">TIdGopher</A> component.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0001">TIdGopherMenu.Create</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007353.html" CLASS="Element59">TIdGopherMenu</A>, <A HREF="011203.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Constructor for the object instance.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>constructor</STRONG> Create; <STRONG>reintroduce</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Create is the constructor for the object instance, and is used by <A HREF="007352.html#0003" CLASS="Element59">TIdGopher.GetMenu</A> and <A HREF="007352.html#0001" CLASS="Element59">TIdGopher.GetExtendedMenu</A> to create the menu for the Gopher selector.</DIV>
+</DIV>
+<DIV CLASS="Element62">
+<HR>Created with Doc-O-Matic 2 donated to <STRONG><A HREF="http://www.delphi-jedi.org">Project JEDI</A></STRONG>. Commercial license available from the <STRONG><A HREF="http://www.doc-o-matic.com">Doc-O-Matic site</A></STRONG>.</DIV>
+</DIV></BODY></HTML>

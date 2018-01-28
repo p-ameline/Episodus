@@ -1,0 +1,437 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+<TITLE>TIdCookies</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <META name="GENERATOR" content="Doc-O-Matic">
+    <LINK rel="STYLESHEET" href="default.css" type="text/css">
+
+<SCRIPT LANGUAGE="JavaScript1.2" SRC="scripts.js"></SCRIPT>
+</HEAD>
+<BODY CLASS="Element57">
+<TABLE BORDER="0" BGCOLOR="#AACCFF" WIDTH="100%" CELLSPACING="0" CELLPADDING="0">
+<TR><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element1">
+Indy 9</DIV>
+</TD><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element2">
+<A HREF="content.html" CLASS="Element59">Content</A> | <A HREF="idx.html" CLASS="Element59">Index</A> | <A HREF="symref.html" CLASS="Element59">Reference</A></DIV>
+</TD></TR></TABLE><DIV CLASS="Element58">
+<DIV CLASS="Element5">
+TIdCookies</DIV>
+<DIV CLASS="Element7">
+<A HREF="010301.html" CLASS="Element59">Hierarchy</A>, <A HREF="010302.html" CLASS="Element59">Properties</A>, <A HREF="010303.html" CLASS="Element59">Methods</A>, <A HREF="010304.html" CLASS="Element59">See Also</A>, <A HREF="002145.html" CLASS="Element59">Unit: IdCookie</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Implements a container for <A HREF="007266.html#0004" CLASS="Element59">Cookie</A> class instances.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12">TIdCookies = <STRONG>class</STRONG>(TOwnedCollection)</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Unit</DIV>
+<DIV CLASS="Element69">
+<A HREF="002145.html" CLASS="Element59">IdCookie</A></DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+TIdCookies is a TOwnedCollection descendant that implements a container for <A HREF="007266.html#0004" CLASS="Element59">Cookie</A> class instances. TIdCookies provides methods that allow creation of both <A HREF="007264.html" CLASS="Element59">TIdCookieRFC2109</A> and <A HREF="007265.html" CLASS="Element59">TIdCookieRFC2965</A> <A HREF="007266.html#0004" CLASS="Element59">Cookie</A> class instances. TIdCookies also provides methods that provide access to <A HREF="007266.html#0004" CLASS="Element59">Cookie</A> class instances using <A HREF="007266.html#0004" CLASS="Element59">Cookie</A> name, <A HREF="007266.html#0004" CLASS="Element59">Cookie</A> name and Domain, and an integer position in the <A HREF="007266.html#0004" CLASS="Element59">Cookie</A> collection.<P CLASS="Element10">
+TIdCookies is the type used by <A HREF="007263.html" CLASS="Element59">TIdCookieManager</A> to represent the <A HREF="007266.html#0004" CLASS="Element59">Cookie</A> collection maintained by a <A HREF="007375.html" CLASS="Element59">TIdHTTP</A> client.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0004">TIdCookies.Cookie</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007266.html" CLASS="Element59">TIdCookies</A>, <A HREF="010305.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Provides access to Cookie collection items using name and domain values.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> Cookie [<STRONG>const</STRONG> AName, ADomain: <STRONG>string</STRONG>]: <A HREF="007264.html" CLASS="Element59">TIdCookieRFC2109</A>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Return Value</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+<A HREF="007264.html" CLASS="Element59">TIdCookieRFC2109</A> - Cookie with the specified name and domain, or Nil.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Cookie is a read-only <A HREF="007264.html" CLASS="Element59">TIdCookieRFC2109</A> property that provides access to Cookies in the collection using the name and domain specified in AName and ADomain. <A HREF="007266.html" CLASS="Element59">TIdCookies</A> calls <A HREF="007266.html#0003" CLASS="Element59">GetCookieIndex</A>, when using the read access specifier for Cookie, to determine the position of the Cookie having the specified CookieName and Domain. Cookie can return Nil when a Cookie cannot be located in the collection having the specified name and domain values.<P CLASS="Element10">
+Use <A HREF="007267.html" CLASS="Element59">CookieListByDomain</A> to limit access to Cookie collection items having a specified Domain value. Use <A HREF="007266.html#0005" CLASS="Element59">Items</A> to access Cookie collection items by their integer position in the container.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0005">TIdCookies.Items</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007266.html" CLASS="Element59">TIdCookies</A>, <A HREF="010306.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Provides access to <A HREF="007266.html#0004" CLASS="Element59">Cookie</A> collection items by position in the container.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> Items [<STRONG>Index</STRONG>: Integer]: <A HREF="007264.html" CLASS="Element59">TIdCookieRFC2109</A>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+Index</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Position in the container to be accessed.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Return Value</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+<A HREF="007264.html" CLASS="Element59">TIdCookieRFC2109</A> - <A HREF="007266.html#0004" CLASS="Element59">Cookie</A> at the specified position in the collection.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Items is a <A HREF="007264.html" CLASS="Element59">TIdCookieRFC2109</A> property that provides access to <A HREF="007266.html#0004" CLASS="Element59">Cookie</A> class instances in the collection using the Integer position specified in Index. Items is the default property used when accessing the collection.<P CLASS="Element10">
+Items is used when accessing or updating <A HREF="007266.html#0004" CLASS="Element59">Cookie</A> collection items in the GetCookie, <A HREF="007266.html#0003" CLASS="Element59">GetCookieIndex</A>, and <A HREF="007266.html#0001" CLASS="Element59">Delete</A> methods.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0000">TIdCookies.Add</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007266.html" CLASS="Element59">TIdCookies</A>, <A HREF="010307.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Creates a <A HREF="007266.html#0004" CLASS="Element59">Cookie</A> class instance to be added to the <A HREF="007266.html#0004" CLASS="Element59">Cookie</A> collection.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>function</STRONG> Add: <A HREF="007264.html" CLASS="Element59">TIdCookieRFC2109</A>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Return Value</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+<A HREF="007264.html" CLASS="Element59">TIdCookieRFC2109</A> - <A HREF="007266.html#0004" CLASS="Element59">Cookie</A> class instance added to the collection.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Add is a <A HREF="007264.html" CLASS="Element59">TIdCookieRFC2109</A> function that creates a new instance of <A HREF="007264.html" CLASS="Element59">TIdCookieRFC2109</A> to be added to the <A HREF="007266.html#0004" CLASS="Element59">Cookie</A> collection. Add creates the <A HREF="007266.html#0004" CLASS="Element59">Cookie</A> class instance using the <A HREF="007266.html" CLASS="Element59">TIdCookies</A> object instance as the owner of the collection item.<P CLASS="Element10">
+Add is called from the <A HREF="007263.html#0000" CLASS="Element59">TIdCookieManager.AddCookie</A> method when a CookieName and Domain are added to an HTTP client as an <A HREF="007264.html" CLASS="Element59">TIdCookieRFC2109</A> class instance.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0001">TIdCookies.Add2</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007266.html" CLASS="Element59">TIdCookies</A>, <A HREF="010308.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Creates a <A HREF="007266.html#0004" CLASS="Element59">Cookie</A> class instance to be added to the <A HREF="007266.html#0004" CLASS="Element59">Cookie</A> collection.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>function</STRONG> Add2: <A HREF="007265.html" CLASS="Element59">TIdCookieRFC2965</A>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Return Value</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+<A HREF="007265.html" CLASS="Element59">TIdCookieRFC2965</A> - <A HREF="007266.html#0004" CLASS="Element59">Cookie</A> class instance added to the collection.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Add2 is a <A HREF="007265.html" CLASS="Element59">TIdCookieRFC2965</A> function that creates a new instance of <A HREF="007265.html" CLASS="Element59">TIdCookieRFC2965</A> to be added to the <A HREF="007266.html#0004" CLASS="Element59">Cookie</A> collection. <A HREF="007266.html#0000" CLASS="Element59">Add</A> creates the <A HREF="007266.html#0004" CLASS="Element59">Cookie</A> class instance using the <A HREF="007266.html" CLASS="Element59">TIdCookies</A> object instance as the owner of the collection item.<P CLASS="Element10">
+Add2 is called from the <A HREF="007263.html#0001" CLASS="Element59">TIdCookieManager.AddCookie2</A> method when a CookieName and Domain are added to an HTTP client as an <A HREF="007265.html" CLASS="Element59">TIdCookieRFC2965</A> class instance.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0002">TIdCookies.AddCookie</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007266.html" CLASS="Element59">TIdCookies</A>, <A HREF="010309.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Adds or updates a <A HREF="007266.html#0004" CLASS="Element59">Cookie</A> instance in the collection.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>procedure</STRONG> AddCookie(ACookie: <A HREF="007264.html" CLASS="Element59">TIdCookieRFC2109</A>);</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+ACookie: TIdCookieRFC2109</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+<A HREF="007266.html#0004" CLASS="Element59">Cookie</A> class instance to be added or updated in the collection.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+AddCookie is a procedure that adds a <A HREF="007264.html" CLASS="Element59">TIdCookieRFC2109</A> class instance specified in ACookie to the <A HREF="007266.html#0004" CLASS="Element59">Cookie</A> collection. AddCookie uses an instance of <A HREF="007262.html" CLASS="Element59">TIdCookieList</A> to maintain a list of Cookies for the Domain specified in ACookie. AddCookie also uses <A HREF="007267.html" CLASS="Element59">CookieListByDomain</A> to create or maintain <A HREF="007266.html#0004" CLASS="Element59">Cookie</A> class instances using the value of CookieName specified in ACookie.<P CLASS="Element10">
+If a <A HREF="007266.html#0004" CLASS="Element59">Cookie</A> having the Domain and CookieName specified in ACookie already exists in the collection, the <A HREF="007266.html#0004" CLASS="Element59">Cookie</A> value is assigned to the existing <A HREF="007264.html" CLASS="Element59">TIdCookieRFC2109</A> object instance and ACookie is freed. Otherwise, ACookie is added to the <A HREF="007266.html#0004" CLASS="Element59">Cookie</A> list for the specified Domain and CookieName.<P CLASS="Element10">
+AddCookie is called by <A HREF="007263.html" CLASS="Element59">TIdCookieManager</A> when a <A HREF="007266.html#0004" CLASS="Element59">Cookie</A> is added to the collection maintained by an HTTP client.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0003">TIdCookies.AddSrcCookie</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007266.html" CLASS="Element59">TIdCookies</A>, <A HREF="010310.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Creates a new <A HREF="007266.html#0004" CLASS="Element59">Cookie</A> collection item using the textual <A HREF="007266.html#0004" CLASS="Element59">Cookie</A> data.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>procedure</STRONG> AddSrcCookie(<STRONG>const</STRONG> sCookie: <STRONG>string</STRONG>);</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+const sCookie: string</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Textual representation of the <A HREF="007266.html#0004" CLASS="Element59">Cookie</A>.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+AddSrcCookie is a procedure used to create a new <A HREF="007266.html#0004" CLASS="Element59">Cookie</A> class instance in the collection using the textual representation of <A HREF="007266.html#0004" CLASS="Element59">Cookie</A> specified in sCookie. AddSrcCookie calls <A HREF="007266.html#0000" CLASS="Element59">Add</A> to create the <A HREF="007266.html#0004" CLASS="Element59">Cookie</A> class instance added to the collection. AddSrcCookie sets the name, value, and attributes for the <A HREF="007266.html#0004" CLASS="Element59">Cookie</A> by updating CookieText to reflect the data specified in sCookie.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0000">TIdCookies.Create</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007266.html" CLASS="Element59">TIdCookies</A>, <A HREF="010311.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Constructor for the object instance.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>constructor</STRONG> Create(AOwner: TPersistent);</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+AOwner: TPersistent</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Owner of the collection.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Create is the constructor for the object instance. Create calls the inherited Create method using AOwner as the owner of the collection, and <A HREF="007264.html" CLASS="Element59">TIdCookieRFC2109</A> as the ItemClass maintained in the collection.<P CLASS="Element10">
+Create initializes the <A HREF="007262.html" CLASS="Element59">TIdCookieList</A> used by the <A HREF="007267.html" CLASS="Element59">CookieListByDomain</A> property, and sets Sorted to False in the object property. Create also allocates an internal TMultiReadExclusiveWriteSynchronizer instance that is used to protect access to the collection in a multi-threaded application.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0001">TIdCookies.Delete</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007266.html" CLASS="Element59">TIdCookies</A>, <A HREF="010312.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Removes a <A HREF="007266.html#0004" CLASS="Element59">Cookie</A> from the collection.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>procedure</STRONG> Delete(<STRONG>Index</STRONG>: Integer);</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+Index: Integer</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Position of the <A HREF="007266.html#0004" CLASS="Element59">Cookie</A> in the container.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Delete is a procedure that allows freeing of a <A HREF="007266.html#0004" CLASS="Element59">Cookie</A> class instance in the collection by the Integer position in the container specified in Index. Delete accesses the collection using the <A HREF="007266.html#0005" CLASS="Element59">Items</A> property and the specified Index position to call the Free method for the collection item.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0002">TIdCookies.Destroy</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007266.html" CLASS="Element59">TIdCookies</A>, <A HREF="010313.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Frees the object instance.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>destructor</STRONG> Destroy; <STRONG>override</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Destroy is the destructor for the object instance. Destroy calls Clear to insure that Cookies are removed from the collection. Destroy frees resources allocated in the <A HREF="007266.html#0000" CLASS="Element59">Create</A> constructor, including the <A HREF="007267.html" CLASS="Element59">CookieListByDomain</A> property and the internal protection mechanism used to access the collection. Destroy calls the inherited Destroy method prior to exiting.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0003">TIdCookies.GetCookieIndex</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007266.html" CLASS="Element59">TIdCookies</A>, <A HREF="010314.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Indicates the index position of a <A HREF="007266.html#0004" CLASS="Element59">Cookie</A> containing specified values.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>function</STRONG> GetCookieIndex(FirstIndex: integer; <STRONG>const</STRONG> AName: <STRONG>string</STRONG>): Integer; <STRONG>overload</STRONG>;
+<STRONG>function</STRONG> GetCookieIndex(FirstIndex: integer; <STRONG>const</STRONG> AName: <STRONG>string</STRONG>; <STRONG>const</STRONG> ADomain: <STRONG>string</STRONG>): Integer; <STRONG>overload</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+FirstIndex: integer</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Initial position to be examined in the collection.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+const AName: string</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+<A HREF="007266.html#0004" CLASS="Element59">Cookie</A> name to be matched.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+const ADomain: string</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Domain attribute to be matched.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Return Value</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Integer - Position of the matched <A HREF="007266.html#0004" CLASS="Element59">Cookie</A> in the collection, or -1 when not found.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+<A HREF="007266.html#0003" CLASS="Element59">GetCookieIndex</A> is an overloaded Integer function that accesses <A HREF="007266.html#0004" CLASS="Element59">Cookie</A> class instances in the collection to determine the position of the collection item matching the specified search criteria. <A HREF="007266.html#0003" CLASS="Element59">GetCookieIndex</A> will return the value -1 when a <A HREF="007266.html#0004" CLASS="Element59">Cookie</A> cannot be located in the collection that matches the specified search criteria.<P CLASS="Element10">
+FirstIndex specifies the initial position in the container to be used when comparing values in the AName and/or ADomain parameters.<P CLASS="Element10">
+AName is the CookieName value desired in a <A HREF="007266.html#0004" CLASS="Element59">Cookie</A> collection item.<P CLASS="Element10">
+ADomain is the Domain value desired in a <A HREF="007266.html#0004" CLASS="Element59">Cookie</A> collection item.<P CLASS="Element10">
+<A HREF="007266.html#0003" CLASS="Element59">GetCookieIndex</A> is called from the GetCookie method to locate one of the <A HREF="007266.html#0005" CLASS="Element59">Items</A> in the collection that match a specified Name and Domain.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0004">TIdCookies.GetCookieIndex</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007266.html" CLASS="Element59">TIdCookies</A>, <A HREF="010315.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Indicates the index position of a <A HREF="007266.html#0004" CLASS="Element59">Cookie</A> containing specified values.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>function</STRONG> <A HREF="007266.html#0003" CLASS="Element59">GetCookieIndex</A>(FirstIndex: integer; <STRONG>const</STRONG> AName: <STRONG>string</STRONG>): Integer; <STRONG>overload</STRONG>;
+<STRONG>function</STRONG> <A HREF="007266.html#0003" CLASS="Element59">GetCookieIndex</A>(FirstIndex: integer; <STRONG>const</STRONG> AName: <STRONG>string</STRONG>; <STRONG>const</STRONG> ADomain: <STRONG>string</STRONG>): Integer; <STRONG>overload</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+FirstIndex: integer</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Initial position to be examined in the collection.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+const AName: string</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+<A HREF="007266.html#0004" CLASS="Element59">Cookie</A> name to be matched.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+const ADomain: string</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Domain attribute to be matched.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Return Value</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Integer - Position of the matched <A HREF="007266.html#0004" CLASS="Element59">Cookie</A> in the collection, or -1 when not found.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+<A HREF="007266.html#0003" CLASS="Element59">GetCookieIndex</A> is an overloaded Integer function that accesses <A HREF="007266.html#0004" CLASS="Element59">Cookie</A> class instances in the collection to determine the position of the collection item matching the specified search criteria. <A HREF="007266.html#0003" CLASS="Element59">GetCookieIndex</A> will return the value -1 when a <A HREF="007266.html#0004" CLASS="Element59">Cookie</A> cannot be located in the collection that matches the specified search criteria.<P CLASS="Element10">
+FirstIndex specifies the initial position in the container to be used when comparing values in the AName and/or ADomain parameters.<P CLASS="Element10">
+AName is the CookieName value desired in a <A HREF="007266.html#0004" CLASS="Element59">Cookie</A> collection item.<P CLASS="Element10">
+ADomain is the Domain value desired in a <A HREF="007266.html#0004" CLASS="Element59">Cookie</A> collection item.<P CLASS="Element10">
+<A HREF="007266.html#0003" CLASS="Element59">GetCookieIndex</A> is called from the GetCookie method to locate one of the <A HREF="007266.html#0005" CLASS="Element59">Items</A> in the collection that match a specified Name and Domain.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0006">TIdCookies.LockCookieListByDomain</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007266.html" CLASS="Element59">TIdCookies</A>, <A HREF="010316.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Provides resource protection for write access to Cookies in the <A HREF="007266.html#0004" CLASS="Element59">Cookie</A> collection.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>function</STRONG> LockCookieListByDomain(AAccessType: <A HREF="007261.html" CLASS="Element59">TIdCookieAccess</A>): <A HREF="007262.html" CLASS="Element59">TIdCookieList</A>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+AAccessType: TIdCookieAccess</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Access requested for the resource protection block.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Return Value</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+<A HREF="007262.html" CLASS="Element59">TIdCookieList</A> - List of Cookies for the specified Domain.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+LockCookieListByDomain is a <A HREF="007262.html" CLASS="Element59">TIdCookieList</A> function that protects write access to resources in the <A HREF="007266.html#0004" CLASS="Element59">Cookie</A> collection for the using a TMultiReadExclusiveWriteSynchronizer. AAccessType is a <A HREF="007261.html" CLASS="Element59">TIdCookieAccess</A> value that indicates the access type that should be recorded using the resource protection lock.<P CLASS="Element10">
+The return value for LockCookieListByDomain is the values returned by the <A HREF="007267.html" CLASS="Element59">CookieListByDomain</A> method call.<P CLASS="Element10">
+LockCookieListByDomain is used by method that create or free items in the <A HREF="007266.html#0004" CLASS="Element59">Cookie</A> collection, like <A HREF="007266.html#0000" CLASS="Element59">Add</A> and <A HREF="007266.html#0001" CLASS="Element59">Delete</A>.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0007">TIdCookies.UnlockCookieListByDomain</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007266.html" CLASS="Element59">TIdCookies</A>, <A HREF="010317.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Releases resource protection for accessing Cookies in the <A HREF="007266.html#0004" CLASS="Element59">Cookie</A> collection.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>procedure</STRONG> UnlockCookieListByDomain(AAccessType: <A HREF="007261.html" CLASS="Element59">TIdCookieAccess</A>);</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+AAccessType: TIdCookieAccess</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Access requested for the resource protection block.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+UnlockCookieListByDomain is a procedure that releases the resource protection block for the <A HREF="007266.html#0004" CLASS="Element59">Cookie</A> collection created using <A HREF="007266.html#0006" CLASS="Element59">LockCookieListByDomain</A>. AAccessType is a <A HREF="007261.html" CLASS="Element59">TIdCookieAccess</A> value that indicates the access type that should be released for the resource protection block.<P CLASS="Element10">
+UnlockCookieListByDomain is used by methods that create or free items in the <A HREF="007266.html#0004" CLASS="Element59">Cookie</A> collection, like <A HREF="007266.html#0000" CLASS="Element59">Add</A> and <A HREF="007266.html#0001" CLASS="Element59">Delete</A>.</DIV>
+</DIV>
+<DIV CLASS="Element62">
+<HR>Created with Doc-O-Matic 2 donated to <STRONG><A HREF="http://www.delphi-jedi.org">Project JEDI</A></STRONG>. Commercial license available from the <STRONG><A HREF="http://www.doc-o-matic.com">Doc-O-Matic site</A></STRONG>.</DIV>
+</DIV></BODY></HTML>

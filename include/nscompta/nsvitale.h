@@ -1,0 +1,265 @@
+//---------------------------------------------------------------------------
+//     NSCPS.H
+//
+//  Contient les définitions des objets de gestion de la carte CPS
+//
+//  1ere version : PA juin 98   Dernière modif : 17/06/98
+//---------------------------------------------------------------------------
+#ifndef __NSVITALE_H
+#define __NSVITALE_H
+
+#include <cstring.h>
+#include "ns_sgbd\nsfiche.h"
+
+#if defined(_DANSCPTADLL)
+	#define _CLASSELEXI __export
+#else
+	#define _CLASSELEXI __import
+#endif
+
+//
+// Taille des champs du fichier Carte_SV1
+//
+#define CSV1_IMMATRICUL_LEN  13
+#define CSV1_TYPE_IMMA_LEN 	1
+#define CSV1_CLE_IMMA_LEN 		2
+#define CSV1_REGIME_LEN  	   2
+#define CSV1_CAISSE_LEN  		3
+#define CSV1_CENTRE_LEN  		4
+#define CSV1_CODE_GEST_LEN  	2
+
+//
+// Indice des champs du fichier Carte_SV1
+//
+#define CSV1_IMMATRICUL_FIELD 1
+#define CSV1_TYPE_IMMA_FIELD 	2
+#define CSV1_CLE_IMMA_FIELD 	3
+#define CSV1_REGIME_FIELD  	4
+#define CSV1_CAISSE_FIELD  	5
+#define CSV1_CENTRE_FIELD  	6
+#define CSV1_CODE_GEST_FIELD  7
+
+//
+// Taille des champs du fichier Carte_SV2
+//
+#define CSV2_IMMATRICUL_LEN  13
+#define CSV2_NUMERO_LEN   		2
+#define CSV2_PATIENT_LEN		6
+#define CSV2_NOM_PATRO_LEN   27
+#define CSV2_NOM_USUEL_LEN   27
+#define CSV2_PRENOM_LEN   	  27
+#define CSV2_ADRESSE_LEN    160
+#define CSV2_DATE_NAIS_LEN   12
+#define CSV2_RANG_GEM_LEN		1
+#define CSV2_QUALITE_LEN   	2
+#define CSV2_DROITS_LEN  		1
+#define CSV2_ALD_LEN   			1
+#define CSV2_SITUATION_LEN   	4
+#define CSV2_MUTUELLE_LEN   	8
+#define CSV2_DROITS_MUT_LEN   1
+#define CSV2_GARANTIES_LEN   	8
+
+//
+// Indice des champs du fichier Carte_SV2
+//
+#define CSV2_IMMATRICUL_FIELD  1
+#define CSV2_NUMERO_FIELD  	 2
+#define CSV2_PATIENT_FIELD     3
+#define CSV2_NOM_PATRO_FIELD   4
+#define CSV2_NOM_USUEL_FIELD   5
+#define CSV2_PRENOM_FIELD   	 6
+#define CSV2_ADRESSE_FIELD     7
+#define CSV2_DATE_NAIS_FIELD   8
+#define CSV2_RANG_GEM_FIELD	 9
+#define CSV2_QUALITE_FIELD   	10
+#define CSV2_DROITS_FIELD  	11
+#define CSV2_ALD_FIELD   		12
+#define CSV2_SITUATION_FIELD  13
+#define CSV2_MUTUELLE_FIELD   14
+#define CSV2_DROITS_MUT_FIELD 15
+#define CSV2_GARANTIES_FIELD  16
+
+//---------------------------------------------------------------------------
+//  Classe NSVitale1
+//---------------------------------------------------------------------------
+//
+// Objet contenant les données
+//
+class _CLASSELEXI NSVitale1Data
+{
+	public :
+   	//
+	  	// Variables de stockage des valeurs
+	  	//
+     	char immatricul[CSV1_IMMATRICUL_LEN + 1];
+     	char typeImma[CSV1_TYPE_IMMA_LEN + 1];
+     	char cleImma[CSV1_CLE_IMMA_LEN + 1];
+     	char regime[CSV1_REGIME_LEN + 1];
+     	char caisse[CSV1_CAISSE_LEN + 1];
+     	char centre[CSV1_CENTRE_LEN + 1];
+     	char codeGest[CSV1_CODE_GEST_LEN + 1];
+
+	  	NSVitale1Data();
+	  	NSVitale1Data(NSVitale1Data& rv);
+     	~NSVitale1Data();
+
+	  	NSVitale1Data& operator=(NSVitale1Data src);
+	  	int 			operator==(const NSVitale1Data& o);
+
+	  	void metABlanc();
+     	void metAZero();
+};
+
+//
+// Objet dérivé de NSFiche servant aux accès de base de données
+//
+class _CLASSELEXI NSVitale1 : public NSFiche
+{
+  public :
+	  //
+	  // Objet qui contient les données
+	  //
+	  NSVitale1Data* pDonnees;
+
+	  NSVitale1(NSSuper* pSuper) ;
+     NSVitale1(const NSVitale1& rv);
+	  ~NSVitale1();
+
+	  void metABlanc() { pDonnees->metABlanc(); }
+
+	  void alimenteFiche();
+	  void videFiche();
+	  DBIResult open();
+     DBIResult getPatRecord();
+
+	  virtual bool Create();
+	  virtual bool Modify();
+
+     NSVitale1& operator=(const NSVitale1& src);
+     int 	 	 operator==(const NSVitale1& o);
+};
+
+//---------------------------------------------------------------------------
+//  Classe NSVitale1Info  (destinée à être stockée dans une Array)
+//---------------------------------------------------------------------------
+class _CLASSELEXI NSVitale1Info
+{
+	public :
+		//
+		// Objet qui contient les données
+		//
+		NSVitale1Data* pDonnees;
+
+		NSVitale1Info();
+		NSVitale1Info(NSVitale1*);
+		NSVitale1Info(const NSVitale1Info& rv);
+      ~NSVitale1Info();
+
+		NSVitale1Info& operator=(const NSVitale1Info& src);
+		int 				operator==(const NSVitale1Info& o);
+};
+
+//---------------------------------------------------------------------------
+//  Classe NSVitale2
+//---------------------------------------------------------------------------
+//
+// Objet contenant les données
+//
+class _CLASSELEXI NSVitale2Data
+{
+	public :
+   	//
+	  	// Variables de stockage des valeurs
+	  	//
+     	char immatricul[CSV2_IMMATRICUL_LEN + 1];
+     	char numero[CSV2_NUMERO_LEN + 1];
+      char patient[CSV2_PATIENT_LEN + 1];
+     	char nomPatro[CSV2_NOM_PATRO_LEN + 1];
+     	char nomUsuel[CSV2_NOM_USUEL_LEN + 1];
+     	char prenom[CSV2_PRENOM_LEN + 1];
+     	char adresse[CSV2_ADRESSE_LEN + 1];
+     	char dateNais[CSV2_DATE_NAIS_LEN + 1];
+     	char rangGem[CSV2_RANG_GEM_LEN + 1];
+     	char qualite[CSV2_QUALITE_LEN + 1];
+     	char droits[CSV2_DROITS_LEN + 1];
+     	char ald[CSV2_ALD_LEN + 1];
+     	char situation[CSV2_SITUATION_LEN + 1];
+     	char mutuelle[CSV2_MUTUELLE_LEN + 1];
+     	char droitsMut[CSV2_DROITS_MUT_LEN + 1];
+     	char garanties[CSV2_GARANTIES_LEN + 1];
+
+	  	NSVitale2Data();
+	  	NSVitale2Data(const NSVitale2Data& rv);
+     	~NSVitale2Data();
+
+	  	NSVitale2Data& operator=(const NSVitale2Data& src);
+	  	int 		  		operator==(const NSVitale2Data& o);
+
+	  	void metABlanc();
+     	void metAZero();
+};
+
+//// Objet dérivé de NSFiche servant aux accès de base de données
+//
+class _CLASSELEXI NSVitale2 : public NSFiche
+{
+  public :
+
+    //	  // Objet qui contient les données
+	  //
+	  NSVitale2Data* pDonnees;
+
+	  NSVitale2(NSSuper* pSuper) ;
+    NSVitale2(const NSVitale2& rv);
+	  ~NSVitale2();
+
+	  void alimenteFiche();
+	  void videFiche();
+	  DBIResult open();
+    DBIResult getPatRecord();
+
+	  virtual bool Create();
+	  virtual bool Modify();
+
+    NSVitale2& operator=(const NSVitale2& src);
+    int 	 operator==(const NSVitale2& o);
+};
+
+//---------------------------------------------------------------------------//  Classe NSVitale2Info  (destinée à être stockée dans une Array)
+//---------------------------------------------------------------------------
+class _CLASSELEXI NSVitale2Info
+{
+	public :
+		//
+		// Objet qui contient les données
+		//
+		NSVitale2Data* pDonnees;
+
+		NSVitale2Info();
+		NSVitale2Info(NSVitale2*);
+		NSVitale2Info(const NSVitale2Info& rv);
+    ~NSVitale2Info();
+
+		NSVitale2Info& operator=(const NSVitale2Info& src);
+		int 				operator==(const NSVitale2Info& o);
+};
+
+//// Définition de NSVitale2Array (Array de NSVitale2Info(s))
+//
+typedef vector<NSVitale2Info*> NSCV2Array;
+typedef NSCV2Array::iterator NSCV2Iter;
+
+class NSVitale2Array : public NSCV2Array
+{
+  public :
+
+	  // Constructeurs
+	  NSVitale2Array() : NSCV2Array() {}
+	  NSVitale2Array(NSVitale2Array& rv);
+	  // Destructeur
+	  virtual ~NSVitale2Array();
+    void vider();
+};
+
+//---------------------------------------------------------------------------#endif    // __NSVITALE_H
+

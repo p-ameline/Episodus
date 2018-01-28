@@ -1,0 +1,145 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+<TITLE>TIdIPMCastListenerThread</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <META name="GENERATOR" content="Doc-O-Matic">
+    <LINK rel="STYLESHEET" href="default.css" type="text/css">
+
+<SCRIPT LANGUAGE="JavaScript1.2" SRC="scripts.js"></SCRIPT>
+</HEAD>
+<BODY CLASS="Element57">
+<TABLE BORDER="0" BGCOLOR="#AACCFF" WIDTH="100%" CELLSPACING="0" CELLPADDING="0">
+<TR><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element1">
+Indy 9</DIV>
+</TD><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element2">
+<A HREF="content.html" CLASS="Element59">Content</A> | <A HREF="idx.html" CLASS="Element59">Index</A> | <A HREF="symref.html" CLASS="Element59">Reference</A></DIV>
+</TD></TR></TABLE><DIV CLASS="Element58">
+<DIV CLASS="Element5">
+TIdIPMCastListenerThread</DIV>
+<DIV CLASS="Element7">
+<A HREF="011915.html" CLASS="Element59">Hierarchy</A>, <A HREF="011916.html" CLASS="Element59">Properties</A>, <A HREF="011917.html" CLASS="Element59">Methods</A>, <A HREF="011918.html" CLASS="Element59">Events</A>, <A HREF="002268.html" CLASS="Element59">Unit: IdIPMCastClient</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Implements a listener thread for incoming multicast client connections.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12">TIdIPMCastListenerThread = <STRONG>class</STRONG>(<A HREF="007846.html" CLASS="Element59">TIdThread</A>)</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Unit</DIV>
+<DIV CLASS="Element69">
+<A HREF="002268.html" CLASS="Element59">IdIPMCastClient</A></DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+TIdIPMCastListenerThread is a <A HREF="007846.html" CLASS="Element59">TIdThread</A> descendant that implements the mechanism used to <A HREF="003177.html" CLASS="Element59">listen</A> for incoming datagram packets for an active TIdTIdIPMCastClient instance. TIdIPMCastListenerThread provides properties and methods that allow the listener thread to be executed in order to <A HREF="000027.html" CLASS="Element59">accept</A> incoming connections, read and buffer the incoming datagram packets, and optionally signal the associated multicast client of the operation.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0000">TIdIPMCastListenerThread.AcceptWait</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007434.html" CLASS="Element59">TIdIPMCastListenerThread</A>, <A HREF="011919.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Indicates the number of milliseconds to wait for selection of <A HREF="007071.html" CLASS="Element59">socket</A> descriptors.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> AcceptWait: integer;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+AcceptWait is an Integer property that indicates the number of milliseconds that the executing listener thread should wait for selection of <A HREF="007071.html" CLASS="Element59">socket</A> descriptors used to read incoming datagrams for the multicast client. The default value for AcceptWait is 1000, as assigned in the <A HREF="007434.html#0001" CLASS="Element59">Create</A> constructor.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0001">TIdIPMCastListenerThread.Create</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007434.html" CLASS="Element59">TIdIPMCastListenerThread</A>, <A HREF="011920.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Constructor for the object instance.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>constructor</STRONG> Create(Owner: <A HREF="007433.html" CLASS="Element59">TIdIPMCastClient</A>); <STRONG>reintroduce</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+Owner: TIdIPMCastClient</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Multicast client that owns the listening thread.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Create is the constructor for the object instance. Create calls the inherited Create method to instantiate a suspended thread. The value in Owner is assigned to the public member that represents the server for the listener thread, and BufferSize is set to the corresponding property value in Owner. Create sets the default value for <A HREF="007434.html#0000" CLASS="Element59">AcceptWait</A> to 1000. Create also allocates resources used for the Buffer property.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0002">TIdIPMCastListenerThread.Destroy</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007434.html" CLASS="Element59">TIdIPMCastListenerThread</A>, <A HREF="011921.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Frees the object instance.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>destructor</STRONG> Destroy; <STRONG>override</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Destroy is the destructor for the object instance. Destroy frees resource allocated to the Buffer property in the <A HREF="007434.html#0001" CLASS="Element59">Create</A> method prior to calling the inherited Destroy method.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0003">TIdIPMCastListenerThread.IPMCastRead</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007434.html" CLASS="Element59">TIdIPMCastListenerThread</A>, <A HREF="011922.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Signals receipt of a datagram packet to the multicast client.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>procedure</STRONG> IPMCastRead;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+IPMCastRead is a procedure that allows the listener thread to signal receipt of a datagram packet to the multicast client. IPMCastRead uses the public member representing the client context to perform the protected method that signals the <A HREF="007433.html#0007" CLASS="Element59">TIdIPMCastClient.OnIPMCastRead</A> event handler.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0004">TIdIPMCastListenerThread.Run</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007434.html" CLASS="Element59">TIdIPMCastListenerThread</A>, <A HREF="011923.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Starts execution of the listener thread for a multicast client.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>procedure</STRONG> Run; <STRONG>override</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Run is an overridden procedure in <A HREF="007434.html" CLASS="Element59">TIdIPMCastListenerThread</A> that starts execution of the listener thread for the associated multicast client. Run performs several significnt actions that affect operation of the multicast client.<P CLASS="Element10">
+Run creates a TList that is used to store references to the <A HREF="007071.html" CLASS="Element59">socket</A> handles in <A HREF="007433.html#0001" CLASS="Element59">TIdIPMCastClient.Bindings</A> that are used to <A HREF="000027.html" CLASS="Element59">accept</A> incoming datagrams for the multicast client. Run iterates over <A HREF="007071.html" CLASS="Element59">socket</A> handles in the list to retrieve the <A HREF="007071.html" CLASS="Element59">socket</A> descriptor and initalize the Buffer used for reading incoming datagram packets. Run can raise an <A HREF="000505.html" CLASS="Element59">EIdUDPReceiveErrorZeroBytes</A> exception zero (0) bytes are read from a connection accepted by the listening thread.<P CLASS="Element10">
+Run also examines the <A HREF="007433.html#0008" CLASS="Element59">TIdIPMCastClient.ThreadedEvent</A> for the associated multicast client to determine if the <A HREF="007434.html#0003" CLASS="Element59">IPMCastRead</A> method can be triggered in the content of the multicast client, or if it must be synchronized to the main VCL thread.<P CLASS="Element10">
+Run clears and frees the TList used for <A HREF="007071.html" CLASS="Element59">socket</A> handles prior to exiting from the method.</DIV>
+</DIV>
+<DIV CLASS="Element62">
+<HR>Created with Doc-O-Matic 2 donated to <STRONG><A HREF="http://www.delphi-jedi.org">Project JEDI</A></STRONG>. Commercial license available from the <STRONG><A HREF="http://www.doc-o-matic.com">Doc-O-Matic site</A></STRONG>.</DIV>
+</DIV></BODY></HTML>

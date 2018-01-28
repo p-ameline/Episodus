@@ -1,0 +1,5 @@
+#!/bin/sh
+
+MALLOC_TRACE=malloc.txt libtool --mode=execute $*
+libtool --mode=execute mtrace $1 malloc.txt 2>&1 | less
+

@@ -1,0 +1,23 @@
+#include "export\imp_dcm.rh"
+
+IDD_Fichier_DCM DIALOG 116, 354, 260, 164
+STYLE DS_MODALFRAME | WS_POPUP | WS_VISIBLE | WS_CAPTION | WS_SYSMENU
+CLASS "bordlg"
+CAPTION "Importation d'un fichier XLS"
+FONT 8, "MS Sans Serif"
+{
+ CONTROL "Sélectionnez le fichier dont vous souhaitez importer les données", -1, "BorStatic", SS_LEFT | WS_CHILD | WS_VISIBLE | WS_GROUP, 28, 4, 204, 8
+ CONTROL "", IDC_FICHIER_XLS, "listbox", LBS_STANDARD | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 20, 12, 220, 111
+ CONTROL "", -1, "BorShade", BSS_HDIP | BSS_LEFT | WS_CHILD | WS_VISIBLE, 22, 128, 216, 1, 0
+ CONTROL "", IDOK, "BorBtn", BS_PUSHBUTTON | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 60, 136, 43, 25, 0
+ CONTROL "", IDCANCEL, "BorBtn", BS_PUSHBUTTON | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 156, 136, 43, 25, 0
+}
+
+
+
+
+
+
+
+
+

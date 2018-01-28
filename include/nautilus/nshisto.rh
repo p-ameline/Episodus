@@ -1,0 +1,86 @@
+#define IDC_TITRE		    101
+#define IDC_OUVRIR      110
+#define IDC_OTER        111
+#define IDC_AJOUTER		  112
+#define IDC_PROPRIETE   113
+// #define IDC_DETRUIRE    114 // #define IDC_DETRUIRE	 990 dans nsbb.rh
+#define IDC_PARAMETRES  115
+#define IDC_TOUTOUVRIR  116
+#define IDC_ORIGINAL    117
+#define IDC_XML_EXPORT  118
+#define IDC_TRANSFERT   119
+#define IDC_FORCESIGN   120
+#define IDC_SHOW_MANAG  121
+#define IDC_OPEN_EXT    122
+#define IDC_NEW_FROM    123
+
+#define IDB_CR				      1#define IDB_CR_OUVERT		    2
+#define IDB_CONSULTATION	  3
+#define IDB_CS_OUVERT		    4
+#define IDB_VIDE			      5
+#define IDB_CR_HD			      6
+#define IDB_CS_HD			      7
+#define IDB_IMAGE			      8
+#define IDB_IMAGE_FERME		  9
+// #define IDB_0PLUS		       10
+// #define IDB_1PLUS		       11
+// #define IDB_2PLUS		       12
+// #define IDB_3PLUS		       13
+// #define IDB_4PLUS		       14
+#define IDB_TLIB		       15
+#define IDB_INCLUS		     16
+#define IDB_SUITE		       17
+#define IDB_CQ	           18
+#define IDB_CQ_OUVERT	     19#define IDB_CQ_1	         20#define IDB_CR_1			     21#define IDB_CR_OUVERT_1	   22
+#define IDB_CONSULTATION_1 23
+#define IDB_CS_OUVERT_1	   24
+#define IDB_VIDE_1			   25
+#define IDB_CR_HD_1			   26
+#define IDB_CS_HD_1			   27
+#define IDB_IMAGE_1			   28
+#define IDB_IMAGE_FERME_1	 29#define IDB_CQ_2	         30#define IDB_CQ_3	         31#define IDB_CQ_4	         32
+#define IDB_CQ_OUVERT_1	   33#define IDB_CQ_OUVERT_2	   34#define IDB_TLIB_1		     35#define IDB_CQ_OUVERT_3	   36#define IDB_CQ_OUVERT_4	   37
+#define IDB_AR	           38
+#define IDB_AR_OUVERT	     39
+
+#define IDB_CR_2			     41
+#define IDB_CR_OUVERT_2		 42
+#define IDB_CONSULTATION_2 43
+#define IDB_CS_OUVERT_2		 44
+#define IDB_VIDE_2			   45
+#define IDB_CR_HD_2			   46
+#define IDB_CS_HD_2			   47
+#define IDB_IMAGE_2			   48
+#define IDB_IMAGE_FERME_2	 49
+#define IDB_AR_1	         50
+#define IDB_AR_OUVERT_1	   51
+#define IDB_AR_2	         52
+#define IDB_AR_OUVERT_2	   53
+#define IDB_TLIB_2		     55
+
+#define IDB_CR_3			     61
+#define IDB_CR_OUVERT_3		 62
+#define IDB_CONSULTATION_3 63
+#define IDB_CS_OUVERT_3		 64
+#define IDB_VIDE_3			   65
+#define IDB_CR_HD_3			   66
+#define IDB_CS_HD_3			   67
+#define IDB_IMAGE_3			   68
+#define IDB_IMAGE_FERME_3	 69
+#define IDB_AR_3	         70
+#define IDB_AR_OUVERT_3	   71
+#define IDB_TLIB_3		     75
+
+#define IDB_CR_4			     81
+#define IDB_CR_OUVERT_4		 82
+#define IDB_CONSULTATION_4 83
+#define IDB_CS_OUVERT_4		 84
+#define IDB_VIDE_4			   85
+#define IDB_CR_HD_4			   86
+#define IDB_CS_HD_4			   87
+#define IDB_IMAGE_4			   88
+#define IDB_IMAGE_FERME_4	 89
+#define IDB_AR_4	         90
+#define IDB_AR_OUVERT_4	   91
+#define IDB_TLIB_4		     95
+

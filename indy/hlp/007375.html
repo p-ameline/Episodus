@@ -1,0 +1,518 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+<TITLE>TIdHTTP</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <META name="GENERATOR" content="Doc-O-Matic">
+    <LINK rel="STYLESHEET" href="default.css" type="text/css">
+
+<SCRIPT LANGUAGE="JavaScript1.2" SRC="scripts.js"></SCRIPT>
+</HEAD>
+<BODY CLASS="Element57">
+<TABLE BORDER="0" BGCOLOR="#AACCFF" WIDTH="100%" CELLSPACING="0" CELLPADDING="0">
+<TR><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element1">
+Indy 9</DIV>
+</TD><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element2">
+<A HREF="content.html" CLASS="Element59">Content</A> | <A HREF="idx.html" CLASS="Element59">Index</A> | <A HREF="symref.html" CLASS="Element59">Reference</A></DIV>
+</TD></TR></TABLE><DIV CLASS="Element58">
+<DIV CLASS="Element5">
+TIdHTTP</DIV>
+<DIV CLASS="Element7">
+<A HREF="011438.html" CLASS="Element59">Hierarchy</A>, <A HREF="011439.html" CLASS="Element59">Properties</A>, <A HREF="011440.html" CLASS="Element59">Methods</A>, <A HREF="011441.html" CLASS="Element59">Events</A>, <A HREF="011442.html" CLASS="Element59">See Also</A>, <A HREF="002251.html" CLASS="Element59">Unit: IdHTTP</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Implements an HTTP client.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12">TIdHTTP = <STRONG>class</STRONG>(<A HREF="007270.html" CLASS="Element59">TIdCustomHTTP</A>)</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Unit</DIV>
+<DIV CLASS="Element69">
+<A HREF="002251.html" CLASS="Element59">IdHTTP</A></DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+TIdHTTP is a <A HREF="007270.html" CLASS="Element59">TIdCustomHTTP</A> descendant that is a client implementation of the Hypertext Transfer Protocol (HTTP) as described in the Internet Standards documents:<P CLASS="Element10">
+<UL>
+<LI>RFC 1945 - Hypertext Transfer Protocol version 1.0 [HTTP/1.0] (http://www.rfc-editor.org/rfc/rfc1945.txt)<P CLASS="Element10">
+<LI>RFC 2616 - Hypertext Transfer Protocol version 1.1 [HTTP/1.1] (http://www.rfc-editor.org/rfc/rfc2616.txt)</UL>
+</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Notes</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+TIdHTTP publishes properties and event handlers on the ancestor classes to allow access from the client application, and the VCL streaming mechanism.<P CLASS="Element10">
+TIdHTTP provides support for both HTTP 1.0 and HTTP 1.1 protocols. NOte: Post is restricted to support for the HTTP 1.0 protocol due to limited HTTP server support for the HTTP 1.1 specification.<P CLASS="Element10">
+TIdHTTP also provides a <A HREF="007375.html#0002" CLASS="Element59">CookieManager</A> that implements an HTTP State Management mechanism as specified in the Internet Standards documents, and reference materials:<P CLASS="Element10">
+<UL>
+<LI>RFC 2109 - HTTP State Management Mechanism (http://www.rfc-editor.org/rfc/rfc2109.txt)<P CLASS="Element10">
+<LI>RFC 2965 - HTTP State Management Mechanism (http://www.rfc-editor.org/rfc/rfc2965.txt)<P CLASS="Element10">
+<LI>Netscape Persistent Client State - HTTP Cookies (http://www.netscape.com/newsref/std/cookie_spec.html)</UL>
+<P CLASS="Element10">
+TIdHTTP also supports the Secure Hypertext Transport protocol (HTTPS) as described in the Internet Standards document:<P CLASS="Element10">
+<UL>
+<LI>RFC 2660 - The Secure HyperText Transfer Protocol (http://www.rfc-editor.org/rfc/rfc2660.txt)</UL>
+<P CLASS="Element10">
+Assign an instance of <A HREF="007249.html" CLASS="Element59">TIdConnectionInterceptOpenSSL</A> to the Intercept property to allow use of the HTTPS protocol. For the Windows platform, you must install the Indy OpenSSL support .DLL's available at http://www.intelicom.si to enable Secure Socket Layer support.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0000">TIdHTTP.AllowCookies</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007375.html" CLASS="Element59">TIdHTTP</A>, <A HREF="011443.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Indicates if the HTTP client accepts Cookies in response headers.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> AllowCookies: Boolean;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+AllowCookies is a published Boolean property in <A HREF="007375.html" CLASS="Element59">TIdHTTP</A>, and indicates if the HTTP client allows use of persistent state information using TIdCookie instances handled by <A HREF="007375.html#0002" CLASS="Element59">CookieManager</A>. AllowCookies is used when an HTTP client retrieves headers for an HTTP Response, and processes Response headers and cookie values.<P CLASS="Element10">
+When AllowCookies is True, the HTTP client will insure that <A HREF="007375.html#0002" CLASS="Element59">CookieManager</A> is instantiated prior to adding any <A HREF="007264.html" CLASS="Element59">TIdCookieRFC2109</A> or <A HREF="007265.html" CLASS="Element59">TIdCookieRFC2965</A> cookie instances detected in Response headers.<P CLASS="Element10">
+The default value for AllowCookies is True, as assigned in the Create constructor.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0001">TIdHTTP.AuthRetries</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007375.html" CLASS="Element59">TIdHTTP</A>, <A HREF="011444.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Maximum number of authentication requests allowed for the client connection.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> AuthRetries: Integer;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+AuthRetries is a published Integer property in <A HREF="007375.html" CLASS="Element59">TIdHTTP</A>, and represents the maximum number of retries permitted when performing authentication for the <A HREF="007375.html" CLASS="Element59">TIdHTTP</A> client connection. AuthRetries is used when an HTTP protocol handler for the client connection attempts to process a protocol response code that indicates authentication or proxy authentication is required (401 or 407).<P CLASS="Element10">
+AuthRetries is compared to the current number of authentication requests issued to determine if additional authentication requests are allowed. When permitted, the request is performed using the <A HREF="007375.html#0006" CLASS="Element59">OnAuthorization</A> event handler.<P CLASS="Element10">
+The default value for AuthRetries is 3, as assigned in the Create constructor.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0002">TIdHTTP.CookieManager</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007375.html" CLASS="Element59">TIdHTTP</A>, <A HREF="011445.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Maintains client persistent state information using Cookies.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> CookieManager: <A HREF="007263.html" CLASS="Element59">TIdCookieManager</A>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+CookieManager is a published <A HREF="007263.html" CLASS="Element59">TIdCookieManager</A> property in <A HREF="007375.html" CLASS="Element59">TIdHTTP</A>, and enables maintenance of persistent state information using Cookies for the HTTP Client connection. CookieManager is accessed when Cookies are detected during processing of headers in an HTTP response, or when preparing headers for an HTTP request.<P CLASS="Element10">
+CookieManager is used by the HTTP client when <A HREF="007375.html#0000" CLASS="Element59">AllowCookies</A> is True.<P CLASS="Element10">
+The client will insure that CookieManager is instantiated prior to adding <A HREF="007264.html" CLASS="Element59">TIdCookieRFC2109</A> or <A HREF="007265.html" CLASS="Element59">TIdCookieRFC2965</A> class instances to the collection maintained in CookieManager. CookieManager is freed in the Destroy method.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0003">TIdHTTP.HandleRedirects</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007375.html" CLASS="Element59">TIdHTTP</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Indicates if the HTTP client can handle redirections to an alternate resource location.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> HandleRedirects: Boolean;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+HandleRedirects is a published Boolean property in <A HREF="007375.html" CLASS="Element59">TIdHTTP</A>, and indicates if the HTTP client should handle redirects in a response from the HTTP server. Redirects are indicated by the HTTP Response having a ResponseCode in the range 300 to 307, and requires further action needs by the HTTP Client to fulfill the request.<P CLASS="Element10">
+Redirection ResponseCodes include the following:<P CLASS="Element10">
+<UL>
+<LI>300 - Multiple Choices. The request can be fulfilled with one of a set of resources, each with its own specific location. The HTTP client can <A HREF="006943.html" CLASS="Element59">select</A> a preferred representation and redirect its request to that location.<P CLASS="Element10">
+<LI>301 - Moved Permanently. The requested resource has been assigned a new permanent URI and any future references to this resource should use the new location specified in the Response.<P CLASS="Element10">
+<LI>302 - Found. The requested resource resides temporarily under a different URI. Since the redirection might be altered on occasion, the client should continue to use the URI in the <A HREF="007375.html#000F" CLASS="Element59">Request</A> for future requests.<P CLASS="Element10">
+<LI>304 - Not Modified. If the client has performed a conditional GET request and access is allowed, but the document has not been modified, the server should respond with this status code. The 304 response should not contain a message body, and is always terminated by the first empty line after the header fields, and must include a Date header.<P CLASS="Element10">
+<LI>305 - Use Proxy. The requested resource must be accessed through the proxy given by the Location header in the HTTP Response containing the URI of the Proxy.<P CLASS="Element10">
+<LI>307 - Temporary Redirect. The requested resource resides temporarily under a different URI. Since the redirection may be altered on occasion, the HTTP client should continue to use the URI in the RequestI for future requests.</UL>
+<P CLASS="Element10">
+HandleRedirects is used with <A HREF="007375.html#000E" CLASS="Element59">RedirectMaximum</A> in DoRequest to detect and prevent <A HREF="002998.html" CLASS="Element59">infinite</A> redirection loops, by limiting the number of active redirections for the client to the value specified in <A HREF="007375.html#000E" CLASS="Element59">RedirectMaximum</A>.<P CLASS="Element10">
+When HandleRedirects is True, the HTTP Client will trigger the <A HREF="007375.html#0008" CLASS="Element59">OnRedirect</A> event handler to determine if the client can <A HREF="000027.html" CLASS="Element59">accept</A> the redirection location found in an HTTP response. When accepted, the redirect causes a new HTTP request with the new location to be issued to fulfill the original request.<P CLASS="Element10">
+When HandleRedirects is False, the <A HREF="007375.html#0008" CLASS="Element59">OnRedirect</A> event handler will be triggered, and an <A HREF="000441.html" CLASS="Element59">EIdProtocolReplyError</A> exception will be raised when the redirect cannot be handled by the HTTP client.<P CLASS="Element10">
+The default value for HandleRedirects is <A HREF="002070.html" CLASS="Element59">Id_TIdHTTP_HandleRedirects</A>, as assigned in the Create constuctor.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0004">TIdHTTP.Host</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007375.html" CLASS="Element59">TIdHTTP</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Specifies the name or address of the server accessed by an HTTP request.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> Host: <STRONG>string</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Host is a String property that specifies the Internet address or host name of the server accessed by an HTTP <A HREF="007375.html#000F" CLASS="Element59">Request</A> for a specified URL. Host is included in the HTTP <A HREF="007375.html#000F" CLASS="Element59">Request</A> as a header field for HTTP 1.1 Requests. Host may also refer to the name or address of a Proxy server when Proxy Connections are used to access the resource identified in URL. The exact resource identified by an HTTP request is determined by examining both the URL and the Host properties.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0005">TIdHTTP.HTTPOptions</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007375.html" CLASS="Element59">TIdHTTP</A>, <A HREF="011446.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Indicates the HTTP protocol options applied to the client connection.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> HTTPOptions: <A HREF="007384.html" CLASS="Element59">TIdHTTPOptions</A>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+HTTPOptions is a published <A HREF="007384.html" CLASS="Element59">TIdHTTPOptions</A> property in <A HREF="007375.html" CLASS="Element59">TIdHTTP</A>, and represents the <A HREF="007383.html" CLASS="Element59">TIdHTTPOption</A> protocol options in use for an HTTP client.<P CLASS="Element10">
+HTTPOptions is used at various times when the client or the HTTP protocol handler needs to perform some action, including processing HTTP responses, preparing request parameters, and authentication of the client connection to a server or proxy.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="000B">TIdHTTP.Port</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007375.html" CLASS="Element59">TIdHTTP</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Identifies the port number used for the connection to an HTTP server.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> Port: integer;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Port is an Integer property that contains the port number used for establishing a connection to the HTTP server. The default value for Port is <A HREF="002476.html" CLASS="Element59">IdPORT_HTTP</A>, as assigned by the Create constructor.<P CLASS="Element10">
+Port is used with <A HREF="007375.html#0004" CLASS="Element59">Host</A> to establish an endpoint for the client connection, and may refer to a Proxy server when the <A HREF="007375.html#000F" CLASS="Element59">Request</A> contains headers that require use of a proxied connection.<P CLASS="Element10">
+Port is used in DoRequest to perform the HTTP transfer method, and receive a Response from the HTTP server.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="000C">TIdHTTP.ProtocolVersion</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007375.html" CLASS="Element59">TIdHTTP</A>, <A HREF="011447.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Specifies the HTTP version.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> ProtocolVersion: <A HREF="007387.html" CLASS="Element59">TIdHTTPProtocolVersion</A>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+ProtocolVersion is a published <A HREF="007387.html" CLASS="Element59">TIdHTTPProtocolVersion</A> property in <A HREF="007375.html" CLASS="Element59">TIdHTTP</A>, and specifies the HTTP version used for Get, Head, and Post methods for the HTTP client. ProtocolVersion allows the following values:<P CLASS="Element10">
+<UL>
+<LI>pv1_0 - HTTP 1.0<P CLASS="Element10">
+<LI>pv1_1 - HTTP 1.1</UL>
+<P CLASS="Element10">
+The default value for ProtocolVersion is pv1_1.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="000D">TIdHTTP.ProxyParams</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007375.html" CLASS="Element59">TIdHTTP</A>, <A HREF="011448.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Represents connection and user authorization values used for a Proxied client connection.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> ProxyParams: <A HREF="007626.html" CLASS="Element59">TIdProxyConnectionInfo</A>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+ProxyParams is a published <A HREF="007626.html" CLASS="Element59">TIdProxyConnectionInfo</A> property in <A HREF="007375.html" CLASS="Element59">TIdHTTP</A>, and represents values used in an HTTP request that requires a Proxy connection.<P CLASS="Element10">
+ProxyParams contains properties that relect the Server, <A HREF="007375.html#000B" CLASS="Element59">Port</A>, Username, and Password used to open and authorize a connection to a Proxy server. ProxyParams also indicates if authentication uses the Basic Authentication algorithm.<P CLASS="Element10">
+ProxyParams is used when <A HREF="007375.html" CLASS="Element59">TIdHTTP</A> attempts to set the <A HREF="007375.html#0004" CLASS="Element59">Host</A> and <A HREF="007375.html#000B" CLASS="Element59">Port</A> number for the client connection, and when <A HREF="007375.html#0007" CLASS="Element59">OnProxyAuthorization</A> is triggered for the client connection. The Header representation for ProxyParams is used when the HTTP Protocol handler builds the HTTP request packet and tranmits its content to the host server.<P CLASS="Element10">
+The Authetication mechanism in ProxyParams is reset when the OnDisconnected event handler is triggered for the HTTP client connection.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="000E">TIdHTTP.RedirectMaximum</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007375.html" CLASS="Element59">TIdHTTP</A>, <A HREF="011449.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Specifies the maximum number of redirects for the HTTP client.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> RedirectMaximum: Integer;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+RedirectMaximum is a published Integer property in <A HREF="007375.html" CLASS="Element59">TIdHTTP</A>, and specifies the maximum number of redirects that should be handled by the HTTP client. The default value for RedirectMaximum is <STRONG>15</STRONG>.<P CLASS="Element10">
+RedirectMaximum is provided to limit the effect of web-sites that perform numerous redirects, and to prevent stack overflow due to recursion. RedirectMaximum is used when <A HREF="007375.html#0003" CLASS="Element59">HandleRedirects</A> is True, otherwise it has no effect.<P CLASS="Element10">
+RedirectMaximum is used with the internally maintained redirect count to determine when redirect handling is deferred to the application. When the redirect count exceeds the value of RedirectMaximum, DoRequest will signal the <A HREF="007375.html#0008" CLASS="Element59">OnRedirect</A> event handler to allow the application to respond to the redirect request. If the redirect is not handled by the application, an <A HREF="000441.html" CLASS="Element59">EIdProtocolReplyError</A> exception will be raised.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="000F">TIdHTTP.Request</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007375.html" CLASS="Element59">TIdHTTP</A>, <A HREF="011450.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Specifies the header values to <A HREF="006944.html" CLASS="Element59">send</A> to the HTTP server.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> Request: <A HREF="007388.html" CLASS="Element59">TIdHTTPRequest</A>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Request is a published <A HREF="007388.html" CLASS="Element59">TIdHTTPRequest</A> property in <A HREF="007375.html" CLASS="Element59">TIdHTTP</A>, and is used to specify the header values to <A HREF="006944.html" CLASS="Element59">send</A> to the HTTP server. Request headers allow the HTTP client to pass additional information about the request, or the request client, to the HTTP server.<P CLASS="Element10">
+Request may contain the textual representation of Cookie values from the HTTP client, <A HREF="007375.html#0004" CLASS="Element59">Host</A> and <A HREF="007375.html#000B" CLASS="Element59">Port</A> information for a proxied connection, as well as values from <A HREF="007375.html" CLASS="Element59">TIdHTTP</A> properties transmitted as message headers.<P CLASS="Element10">
+Request is used in DoRequest to perform the HTTP transfer.<P CLASS="Element10">
+Use Response to examine header values received in an HTTP protocol response from the server.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0006">TIdHTTP.OnAuthorization</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007375.html" CLASS="Element59">TIdHTTP</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Event handler for authentication of an HTTP connection.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> OnAuthorization: <A HREF="007607.html" CLASS="Element59">TIdOnAuthorization</A>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+Handled</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Indicatesd if the authentication was successful.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+Sender</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+HTTP Client generating the event notification.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+VPassword</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+User authorization for the HTTP request.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+VUserName</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+User identity for the HTTP request.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+OnAuthorization is a published <A HREF="007607.html" CLASS="Element59">TIdOnAuthorization</A> property in <A HREF="007375.html" CLASS="Element59">TIdHTTP</A>, and represents the event handler signalled when an HTTP client connection needs to provide authentication data as part of an HTTP request.<P CLASS="Element10">
+VUserName and VPassword are the authentication credentials found in the HTTP <A HREF="007375.html#000F" CLASS="Element59">Request</A>, and can be updated in the event handler. Handled indicates if the event handler has successfully authenticated using the client account credentials and method.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0007">TIdHTTP.OnProxyAuthorization</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007375.html" CLASS="Element59">TIdHTTP</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Event handler for selecting the HTTP client authentication mechanism for a proxy connection.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> OnProxyAuthorization: <A HREF="007607.html" CLASS="Element59">TIdOnAuthorization</A>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+AuthenticationClass</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Authentication class to use for the connection.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+AuthInfo</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Header values to use in authectication.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+Sender</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+HTTP client generating the event notification.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+OnProxyAuthorization is a published <A HREF="007627.html" CLASS="Element59">TIdProxyOnAuthorization</A> property in <A HREF="007375.html" CLASS="Element59">TIdHTTP</A>, and represents the event handler signalled when an HTTP client selects an authentication class to be used when session or proxy authentication is required for a connection. OnProxyAuthorization is signalled prior to triggering the <A HREF="007375.html#0006" CLASS="Element59">OnAuthorization</A> event handler.<P CLASS="Element10">
+AuthenticationClass is the class instance to be used to perform authentication for the mechanisms required in an HTTP request.<P CLASS="Element10">
+AuthInfo is the header values to be be used in the HTTP response that includes the authentication results.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0008">TIdHTTP.OnRedirect</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007375.html" CLASS="Element59">TIdHTTP</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Event handler triggered for redirect requests.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> OnRedirect: <A HREF="007382.html" CLASS="Element59">TIdHTTPOnRedirectEvent</A>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+dest</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+URL for the new resource location.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+Handled</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Indicated that redirects should be handled.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+NumRedirect</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+An accumulator for the number of redirection requests.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+Sender</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Client triggering the event.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+VMethod</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+HTTP method to be used to fulfill the redirect.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+OnRedirect is a published <A HREF="007382.html" CLASS="Element59">TIdHTTPOnRedirectEvent</A> property in <A HREF="007375.html" CLASS="Element59">TIdHTTP</A>, and represents the event handler signalled when the HTTP client receives a redirection ResponseCode in the Response for an HTTP <A HREF="007375.html#000F" CLASS="Element59">Request</A>.<P CLASS="Element10">
+OnRedirect is signalled during handling of an HTTP Response in the DoRequest method when the ResponseCode contains a value in the range 300-307, and the Response contains a Location header.<P CLASS="Element10">
+When <A HREF="007375.html#0003" CLASS="Element59">HandleRedirects</A> is True, and the number of active redirects does not exceed <A HREF="007375.html#000E" CLASS="Element59">RedirectMaximum</A>, the event handler is signalled to allow the HTTP client to handle any processing required for the Location, Method, or current number of redirection requests. If the client is not Disconnected, the pending redirection request is automatically executed using a nested call to DoRequest.<P CLASS="Element10">
+When <A HREF="007375.html#0003" CLASS="Element59">HandleRedirects</A> is False, the event handler is signalled to allow the HTTP client to handle all aspects of the redirection request. If the redirection request is not handled, an <A HREF="000441.html" CLASS="Element59">EIdProtocolReplyError</A> exception will be raised.<P CLASS="Element10">
+An Application must assign a procedure to the event handler in order to respond to the event notification. The event handler procedure can used to alter the redirection location specified in Dest, or to change the HTTP method for a pending redirection request. The event handler procedure should also set Handled to True to indicate that the redirection request can/should be allowed for the client.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0009">TIdHTTP.OnSelectAuthorization</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007375.html" CLASS="Element59">TIdHTTP</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Event handler triggered when the client selects an authentication mechanism for the connection.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> OnSelectAuthorization: <A HREF="007610.html" CLASS="Element59">TIdOnSelectAuthorization</A>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+AuthenticationClass</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Authentication class to use for the connection.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+AuthInfo</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Header values to use in authectication.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+Sender</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+HTTP client generating the event notification.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+OnSelectAuthorization is a published <A HREF="007610.html" CLASS="Element59">TIdOnSelectAuthorization</A> property in <A HREF="007375.html" CLASS="Element59">TIdHTTP</A>, and represents the event handler triggered when the HTTP client chooses an Authentication method and class for authorizing a connection.<P CLASS="Element10">
+OnSelectAuthorization is triggered when a <A HREF="007375.html#000F" CLASS="Element59">Request</A> needs Authentication using a supported Authentication method for the WWWAuthenticate headers found in Response. OnSelectAuthorization can be used to set the class instance in Auth used for authenticating the client <A HREF="007375.html#000F" CLASS="Element59">Request</A> based on header values found in AuthInfo.<P CLASS="Element10">
+OnSelectAuthorization is used prior to triggering the <A HREF="007375.html#0006" CLASS="Element59">OnAuthorization</A> event handler for the client connection.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="000A">TIdHTTP.OnSelectProxyAuthorization</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007375.html" CLASS="Element59">TIdHTTP</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Event handler triggered when the client selects an authentication mechanism for the Proxied connection.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> OnSelectProxyAuthorization: <A HREF="007610.html" CLASS="Element59">TIdOnSelectAuthorization</A>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+AuthenticationClass</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Authentication class to use for the connection.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+AuthInfo</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Header values to use in authectication.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+Sender</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+HTTP client generating the event notification.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+OnSelectProxyAuthorization is a published <A HREF="007610.html" CLASS="Element59">TIdOnSelectAuthorization</A> property in <A HREF="007375.html" CLASS="Element59">TIdHTTP</A>, and represents the event handler triggered when the HTTP client chooses an Authentication method and class for authorizing a Proxied connection.<P CLASS="Element10">
+OnSelectProxyAuthorization is triggered when a <A HREF="007375.html#000F" CLASS="Element59">Request</A> needs Authentication using a supported Authentication method for the Proxy headers found in Response. OnSelectProxyAuthorization can be used to set the class instance in Auth used for authenticating the client <A HREF="007375.html#000F" CLASS="Element59">Request</A> based on header values found in AuthInfo.<P CLASS="Element10">
+OnSelectProxyAuthorization is used prior to triggering the <A HREF="007375.html#0007" CLASS="Element59">OnProxyAuthorization</A> event handler for the client connection.</DIV>
+</DIV>
+<DIV CLASS="Element62">
+<HR>Created with Doc-O-Matic 2 donated to <STRONG><A HREF="http://www.delphi-jedi.org">Project JEDI</A></STRONG>. Commercial license available from the <STRONG><A HREF="http://www.doc-o-matic.com">Doc-O-Matic site</A></STRONG>.</DIV>
+</DIV></BODY></HTML>

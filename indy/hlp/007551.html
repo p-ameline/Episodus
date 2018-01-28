@@ -1,0 +1,82 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+<TITLE>TIdMessageDecoderInfoMIME</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <META name="GENERATOR" content="Doc-O-Matic">
+    <LINK rel="STYLESHEET" href="default.css" type="text/css">
+
+<SCRIPT LANGUAGE="JavaScript1.2" SRC="scripts.js"></SCRIPT>
+</HEAD>
+<BODY CLASS="Element57">
+<TABLE BORDER="0" BGCOLOR="#AACCFF" WIDTH="100%" CELLSPACING="0" CELLPADDING="0">
+<TR><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element1">
+Indy 9</DIV>
+</TD><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element2">
+<A HREF="content.html" CLASS="Element59">Content</A> | <A HREF="idx.html" CLASS="Element59">Index</A> | <A HREF="symref.html" CLASS="Element59">Reference</A></DIV>
+</TD></TR></TABLE><DIV CLASS="Element58">
+<DIV CLASS="Element5">
+TIdMessageDecoderInfoMIME</DIV>
+<DIV CLASS="Element7">
+<A HREF="012524.html" CLASS="Element59">Hierarchy</A>, <A HREF="012525.html" CLASS="Element59">Methods</A>, <A HREF="012526.html" CLASS="Element59">See Also</A>, <A HREF="002289.html" CLASS="Element59">Unit: IdMessageCoderMIME</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Represents a registered decoder class and detects the decoder boundary marker in a message part.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12">TIdMessageDecoderInfoMIME = <STRONG>class</STRONG>(<A HREF="007550.html" CLASS="Element59">TIdMessageDecoderInfo</A>)</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Unit</DIV>
+<DIV CLASS="Element69">
+<A HREF="002289.html" CLASS="Element59">IdMessageCoderMIME</A></DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+TIdMessageDecoderInfoMIME is a <A HREF="007550.html" CLASS="Element59">TIdMessageDecoderInfo</A> descendant that implements the specifics of a registered decoder class for MIME-encoded RFC message parts. TIdMessageDecoderInfoMIME reimplements methods of the ancestor class to detect the presence of a MIMEBoundary in the associated message, and create a new MIME decoder instance for the message.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0000">TIdMessageDecoderInfoMIME.CheckForStart</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007551.html" CLASS="Element59">TIdMessageDecoderInfoMIME</A>, <A HREF="012527.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Detects a MIME boundary and creates a decoder class for the associated document.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>function</STRONG> CheckForStart(ASender: <A HREF="007544.html" CLASS="Element59">TIdMessage</A>; ALine: <STRONG>string</STRONG>): <A HREF="007549.html" CLASS="Element59">TIdMessageDecoder</A>; <STRONG>override</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+ASender: TIdMessage</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Message to associate with a decoder class.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+ALine: string</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Line from a message header to check for a MIME boundary.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Return Value</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+<A HREF="007549.html" CLASS="Element59">TIdMessageDecoder</A> - Decoder class instance for the message.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+CheckForStart is an overridden <A HREF="007549.html" CLASS="Element59">TIdMessageDecoder</A> function in <A HREF="007551.html" CLASS="Element59">TIdMessageDecoderInfoMIME</A> that is used to examine a line from an RFC message header for a MIME boundary marker. When the MIMEBoundary in ASender is detected in ALine, a new instance of the decoder class is created and associated with the messge ASender.</DIV>
+</DIV>
+<DIV CLASS="Element62">
+<HR>Created with Doc-O-Matic 2 donated to <STRONG><A HREF="http://www.delphi-jedi.org">Project JEDI</A></STRONG>. Commercial license available from the <STRONG><A HREF="http://www.doc-o-matic.com">Doc-O-Matic site</A></STRONG>.</DIV>
+</DIV></BODY></HTML>

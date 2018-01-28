@@ -1,0 +1,104 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+<TITLE>TIdAuthenticationCollection</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <META name="GENERATOR" content="Doc-O-Matic">
+    <LINK rel="STYLESHEET" href="default.css" type="text/css">
+
+<SCRIPT LANGUAGE="JavaScript1.2" SRC="scripts.js"></SCRIPT>
+</HEAD>
+<BODY CLASS="Element57">
+<TABLE BORDER="0" BGCOLOR="#AACCFF" WIDTH="100%" CELLSPACING="0" CELLPADDING="0">
+<TR><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element1">
+Indy 9</DIV>
+</TD><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element2">
+<A HREF="content.html" CLASS="Element59">Content</A> | <A HREF="idx.html" CLASS="Element59">Index</A> | <A HREF="symref.html" CLASS="Element59">Reference</A></DIV>
+</TD></TR></TABLE><DIV CLASS="Element58">
+<DIV CLASS="Element5">
+TIdAuthenticationCollection</DIV>
+<DIV CLASS="Element7">
+<A HREF="009962.html" CLASS="Element59">Hierarchy</A>, <A HREF="009963.html" CLASS="Element59">Properties</A>, <A HREF="009964.html" CLASS="Element59">Methods</A>, <A HREF="009965.html" CLASS="Element59">See Also</A>, <A HREF="002123.html" CLASS="Element59">Unit: IdAuthenticationManager</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Implements a container for authentication mechanisms used by a HTTP client.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12">TIdAuthenticationCollection = <STRONG>class</STRONG>(TOwnedCollection)</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Unit</DIV>
+<DIV CLASS="Element69">
+<A HREF="002123.html" CLASS="Element59">IdAuthenticationManager</A></DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+TIdAuthenticationCollection is a TOwnedCollection descendant that implements a container for authentication mechanisms used by a HTTP client. <A HREF="007207.html#0002" CLASS="Element59">Items</A> contains the <A HREF="007208.html" CLASS="Element59">TIdAuthenticationItem</A> authentication mechanism used for a given URL accessed by a <A HREF="007270.html" CLASS="Element59">TIdCustomHTTP</A> or <A HREF="007375.html" CLASS="Element59">TIdHTTP</A> client.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0002">TIdAuthenticationCollection.Items</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007207.html" CLASS="Element59">TIdAuthenticationCollection</A>, <A HREF="009966.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Provides indexes access to authentication class instances in the collection.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> Items [AIndex: Integer]: <A HREF="007208.html" CLASS="Element59">TIdAuthenticationItem</A>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Items is an indexed <A HREF="007208.html" CLASS="Element59">TIdAuthenticationItem</A> property that provides access to the items in the collection by the integer value in Index. Reading a collection item in a specified position returns the item as a <A HREF="007208.html" CLASS="Element59">TIdAuthenticationItem</A> object instance. Writing a <A HREF="007208.html" CLASS="Element59">TIdAuthenticationItem</A> to specified position calls the Assign method for the collection item to store the new value(s).<P CLASS="Element10">
+Use <A HREF="007207.html#0000" CLASS="Element59">Add</A> to create a new <A HREF="007208.html" CLASS="Element59">TIdAuthenticationItem</A> collection item.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0000">TIdAuthenticationCollection.Add</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007207.html" CLASS="Element59">TIdAuthenticationCollection</A>, <A HREF="009967.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>function</STRONG> Add: <A HREF="007208.html" CLASS="Element59">TIdAuthenticationItem</A>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Add is a <A HREF="007208.html" CLASS="Element59">TIdAuthenticationItem</A> function used to create new object instances in the <A HREF="007207.html#0002" CLASS="Element59">Items</A> property for the collection. Add creates a new instance of the ItemCLass for the collection, <A HREF="007208.html" CLASS="Element59">TIdAuthenticationItem</A>, with the collection as the owner of the item.<P CLASS="Element10">
+Use <A HREF="007207.html#0002" CLASS="Element59">Items</A> for read and write access to exisiting object instances in the collection.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0001">TIdAuthenticationCollection.Create</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007207.html" CLASS="Element59">TIdAuthenticationCollection</A>, <A HREF="009968.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Constructor for the collection.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>constructor</STRONG> Create(AOwner: Tpersistent);</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+AOwner: Tpersistent</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Owner of the collection.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Create is the constructor for the collection. Create calls the inherited Create method using AOwner as the owner of the collection, and <A HREF="007208.html" CLASS="Element59">TIdAuthenticationItem</A> as the ItemClass for objects added to the collection using <A HREF="007207.html#0000" CLASS="Element59">Add</A>.</DIV>
+</DIV>
+<DIV CLASS="Element62">
+<HR>Created with Doc-O-Matic 2 donated to <STRONG><A HREF="http://www.delphi-jedi.org">Project JEDI</A></STRONG>. Commercial license available from the <STRONG><A HREF="http://www.doc-o-matic.com">Doc-O-Matic site</A></STRONG>.</DIV>
+</DIV></BODY></HTML>

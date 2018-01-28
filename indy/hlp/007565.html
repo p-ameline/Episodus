@@ -1,0 +1,78 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+<TITLE>TIdMessageEncoderUUEBase</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <META name="GENERATOR" content="Doc-O-Matic">
+    <LINK rel="STYLESHEET" href="default.css" type="text/css">
+
+<SCRIPT LANGUAGE="JavaScript1.2" SRC="scripts.js"></SCRIPT>
+</HEAD>
+<BODY CLASS="Element57">
+<TABLE BORDER="0" BGCOLOR="#AACCFF" WIDTH="100%" CELLSPACING="0" CELLPADDING="0">
+<TR><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element1">
+Indy 9</DIV>
+</TD><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element2">
+<A HREF="content.html" CLASS="Element59">Content</A> | <A HREF="idx.html" CLASS="Element59">Index</A> | <A HREF="symref.html" CLASS="Element59">Reference</A></DIV>
+</TD></TR></TABLE><DIV CLASS="Element58">
+<DIV CLASS="Element5">
+TIdMessageEncoderUUEBase</DIV>
+<DIV CLASS="Element7">
+<A HREF="012711.html" CLASS="Element59">Hierarchy</A>, <A HREF="012712.html" CLASS="Element59">Properties</A>, <A HREF="012713.html" CLASS="Element59">Methods</A>, <A HREF="012714.html" CLASS="Element59">Events</A>, <A HREF="012715.html" CLASS="Element59">See Also</A>, <A HREF="002290.html" CLASS="Element59">Unit: IdMessageCoderUUE</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Implements the UUEncode algorithm for an RFC 822 message part.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12">TIdMessageEncoderUUEBase = <STRONG>class</STRONG>(<A HREF="007556.html" CLASS="Element59">TIdMessageEncoder</A>)</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Unit</DIV>
+<DIV CLASS="Element69">
+<A HREF="002290.html" CLASS="Element59">IdMessageCoderUUE</A></DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+TIdMessageEncoderUUEBase is a <A HREF="007556.html" CLASS="Element59">TIdMessageEncoder</A> descendant that is a base class implementing support for encoding an RFC 822 message part using the UUEncode algorithm. TIdMessageEncoderUUEBase extends the ancestor class by overriding the <A HREF="007565.html#0000" CLASS="Element59">Encode</A> method to allow creation of the entire encoded packet using a <A HREF="007310.html" CLASS="Element59">TIdEncoder3to4</A> object instance.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0000">TIdMessageEncoderUUEBase.Encode</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007565.html" CLASS="Element59">TIdMessageEncoderUUEBase</A>, <A HREF="012716.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Implement encoding of a message part using a 3-byte to 4-byte encoding algorithm.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>procedure</STRONG> Encode(ASrc: TStream; ADest: TStream); <STRONG>override</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+ASrc: TStream</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Stream containing the message part to be encoded.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+ADest: TStream</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Stream to receive the encoded message part.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Encode is an overridden procedure in <A HREF="007565.html" CLASS="Element59">TIdMessageEncoderUUEBase</A> that extends the ancestor class by implementing encoding of an RFC 822 message part using a 3-byte to 4-byte encoding algorithm.<P CLASS="Element10">
+Encode uses an instance of the <A HREF="007310.html" CLASS="Element59">TIdEncoder3to4</A> object to perform encoding of the values in the ASrc input stream, and writes the encoded message part to the ADest output stream.<P CLASS="Element10">
+Encode constructs the entire UUEncode packet including the header, body, and trailer sections. The header section includes the keyword &quot;begin&quot; followed by the space-delimited values for PermissionCode, Filename, and the <A HREF="000534.html" CLASS="Element59">EOL</A> character sequence. The body section consists of one or more lines containing the encoded output form the <A HREF="007310.html" CLASS="Element59">TIdEncoder3to4</A> object. Each line will contain not more than 45 bytes and the <A HREF="000534.html" CLASS="Element59">EOL</A> character sequence. The trailer section contains the FillChar value followed by <A HREF="000534.html" CLASS="Element59">EOL</A>, the keyword &quot;end&quot;, and an additional <A HREF="000534.html" CLASS="Element59">EOL</A> character sequence.</DIV>
+</DIV>
+<DIV CLASS="Element62">
+<HR>Created with Doc-O-Matic 2 donated to <STRONG><A HREF="http://www.delphi-jedi.org">Project JEDI</A></STRONG>. Commercial license available from the <STRONG><A HREF="http://www.doc-o-matic.com">Doc-O-Matic site</A></STRONG>.</DIV>
+</DIV></BODY></HTML>

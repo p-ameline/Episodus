@@ -1,0 +1,475 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+<TITLE>TIdVCard</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <META name="GENERATOR" content="Doc-O-Matic">
+    <LINK rel="STYLESHEET" href="default.css" type="text/css">
+
+<SCRIPT LANGUAGE="JavaScript1.2" SRC="scripts.js"></SCRIPT>
+</HEAD>
+<BODY CLASS="Element57">
+<TABLE BORDER="0" BGCOLOR="#AACCFF" WIDTH="100%" CELLSPACING="0" CELLPADDING="0">
+<TR><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element1">
+Indy 9</DIV>
+</TD><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element2">
+<A HREF="content.html" CLASS="Element59">Content</A> | <A HREF="idx.html" CLASS="Element59">Index</A> | <A HREF="symref.html" CLASS="Element59">Reference</A></DIV>
+</TD></TR></TABLE><DIV CLASS="Element58">
+<DIV CLASS="Element5">
+TIdVCard</DIV>
+<DIV CLASS="Element7">
+<A HREF="014766.html" CLASS="Element59">Hierarchy</A>, <A HREF="014767.html" CLASS="Element59">Properties</A>, <A HREF="014768.html" CLASS="Element59">Methods</A>, <A HREF="014769.html" CLASS="Element59">See Also</A>, <A HREF="002949.html" CLASS="Element59">Unit: IdVCard</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Implements an electronic business card.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12">TIdVCard = <STRONG>class</STRONG>(<A HREF="007213.html" CLASS="Element59">TIdBaseComponent</A>)</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Unit</DIV>
+<DIV CLASS="Element69">
+<A HREF="002949.html" CLASS="Element59">IdVCard</A></DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+The TIdVCard component processes Virtual Cards which are electronic business cards through the <A HREF="007886.html#0011" CLASS="Element59">ReadFromTStrings</A> method. This component is compliant with the VCard specification:<P CLASS="Element10">
+<UL>
+<LI>vCard version 2.1 Specification (http://www.imc.org/pdi/vcard-21.txt)</UL>
+<P CLASS="Element10">
+and the VCard specification version 3.0:<P CLASS="Element10">
+<UL>
+<LI>RFC 2425 - A MIME Content-Type for Directory Information (http://www.rfc-editor.org/rfc/rfc2425.txt)<P CLASS="Element10">
+<LI>RFC 2426 - vCard MIME Directory Profile (http://www.rfc-editor.org/rfc/rfc2426.txt)</UL>
+<P CLASS="Element10">
+Creating VCards will be added at a later time.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0000">TIdVCard.Addresses</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007886.html" CLASS="Element59">TIdVCard</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Represents a list of VCard addresses.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> Addresses: <A HREF="007887.html" CLASS="Element59">TIdVCardAddresses</A>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Addresses represents the list of addresses for the VCard.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0001">TIdVCard.BirthDay</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007886.html" CLASS="Element59">TIdVCard</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Represents the birthday the VCard owner.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> BirthDay: TDateTime;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+BirthDay represents the birthday, and optional time of birth, for the VCard owner.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0002">TIdVCard.BusinessInfo</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007886.html" CLASS="Element59">TIdVCard</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Represents business information about the VCard owner.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> BusinessInfo: <A HREF="007888.html" CLASS="Element59">TIdVCardBusinessInfo</A>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+BusinessInfo represents business information about the VCard owner.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0003">TIdVCard.Categories</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007886.html" CLASS="Element59">TIdVCard</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Represents a list of categories for the VCard.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> Categories: TStrings;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Categories represents a list of categories for the VCard used for classification purposes.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0004">TIdVCard.Classification</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007886.html" CLASS="Element59">TIdVCard</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Represents the general intent or keyword access for the VCard.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> Classification: <STRONG>String</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Classification represents the general intent or keyword access for information in the VCard.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0005">TIdVCard.Comments</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007886.html" CLASS="Element59">TIdVCard</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Textual comments for the VCard.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> Comments: TStrings;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Comments is miscellaneous textual comments, or additional information, the owner wishes to attach to the VCard.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0008">TIdVCard.EMailAddresses</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007886.html" CLASS="Element59">TIdVCard</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+List of the VCard owner's E-Mail address.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> EMailAddresses: <A HREF="007889.html" CLASS="Element59">TIdVCardEMailAddresses</A>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+EMailAddresses is a list of the VCard owner's E-Mail address.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0009">TIdVCard.EMailProgram</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007886.html" CLASS="Element59">TIdVCard</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+E-Mail program used by the card's owner.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> EMailProgram: <STRONG>String</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+EMailProgram is the E-Mail program used by the card's owner.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="000A">TIdVCard.FullName</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007886.html" CLASS="Element59">TIdVCard</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+VCard owner's name.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> FullName: <A HREF="007896.html" CLASS="Element59">TIdVCardName</A>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+FullName is the VCard owner's name.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="000B">TIdVCard.Key</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007886.html" CLASS="Element59">TIdVCard</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+VCard owner's encryption key.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> Key: <A HREF="007892.html" CLASS="Element59">TIdVCardEmbeddedObject</A>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Key is the VCard owner's encryption key used for encryption methods such as S/MIME or PGP.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="000C">TIdVCard.Logo</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007886.html" CLASS="Element59">TIdVCard</A>, <A HREF="014770.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Organization's logo.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> Logo: <A HREF="007892.html" CLASS="Element59">TIdVCardEmbeddedObject</A>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Logo is a read-only <A HREF="007892.html" CLASS="Element59">TIdVCardEmbeddedObject</A> that contains information aboput the image used as a logo for the Organization for the VCard owner.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="000D">TIdVCard.MailingLabels</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007886.html" CLASS="Element59">TIdVCard</A>, <A HREF="014771.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+List of mailing labels for the VCard owner.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> MailingLabels: <A HREF="007895.html" CLASS="Element59">TIdVCardMailingLabels</A>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+MailingLabels is a read-only <A HREF="007895.html" CLASS="Element59">TIdVCardMailingLabels</A> property that contains one or more mailing labels for the owner of the VCard.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="000E">TIdVCard.Photo</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007886.html" CLASS="Element59">TIdVCard</A>, <A HREF="014772.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+VCard owner's photograph.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> Photo: <A HREF="007892.html" CLASS="Element59">TIdVCardEmbeddedObject</A>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Photo is a read-only <A HREF="007892.html" CLASS="Element59">TIdVCardEmbeddedObject</A> property that contains a photographic image of owner of the VCard.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="000F">TIdVCard.ProductID</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007886.html" CLASS="Element59">TIdVCard</A>, <A HREF="014773.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Program which created this VCard.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> ProductID: <STRONG>String</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+ProductID is a String property that represents the identifer for the product that creates the VCard instance.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0010">TIdVCard.RawForm</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007886.html" CLASS="Element59">TIdVCard</A>, <A HREF="014774.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Raw data for the VCard.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> RawForm: TStrings;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+RawForm is a read-only TStrings property tha is the container used to store the raw data for the VCard object intance.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0012">TIdVCard.Sound</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007886.html" CLASS="Element59">TIdVCard</A>, <A HREF="014775.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Sound file for the VCard.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> Sound: <A HREF="007892.html" CLASS="Element59">TIdVCardEmbeddedObject</A>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Sound is a read-only <A HREF="007892.html" CLASS="Element59">TIdVCardEmbeddedObject</A> property that indicates an audio file associated with the VCard, such as how to pronounce a VCard owner's name.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0013">TIdVCard.Telephones</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007886.html" CLASS="Element59">TIdVCard</A>, <A HREF="014776.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+List of the VCard owner's telephone numbers.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> Telephones: <A HREF="007897.html" CLASS="Element59">TIdVCardTelephones</A>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Telephones is a read-only <A HREF="007897.html" CLASS="Element59">TIdVCardTelephones</A> property that represents one or more telephone numbers for the owner of the VCard.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0014">TIdVCard.UniqueID</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007886.html" CLASS="Element59">TIdVCard</A>, <A HREF="014777.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Unique identifier for the VCard.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> UniqueID: <STRONG>String</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+UniqueID is a String property that represents the uniqueness identifier, or UID, for the VCard object instance. UniqueID is updated when variables are updated from raw VCard data.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0015">TIdVCard.URLs</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007886.html" CLASS="Element59">TIdVCard</A>, <A HREF="014778.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+URLs for the VCard owner or organization.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> URLs: TStrings;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+URLs is a TStrings property that represents the Universal Resource Locators associated with the VCard. URLs are used to represent a URI with additional information for the the person or the organization web page.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0016">TIdVCard.VCardVersion</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007886.html" CLASS="Element59">TIdVCard</A>, <A HREF="014779.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Version number of the VCard specification.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> VCardVersion: Real;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+VCardVersion is the version number of the VCard specification used in creating and storing the data for the VCard instance.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0006">TIdVCard.Create</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007886.html" CLASS="Element59">TIdVCard</A>, <A HREF="014780.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Creates a new VCard instance.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>constructor</STRONG> Create(AOwner: TComponent); <STRONG>override</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Create is the constructor for <A HREF="007886.html" CLASS="Element59">TIdVCard</A> object instance. Create initializes the object properties for the new VCard instance.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0007">TIdVCard.Destroy</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007886.html" CLASS="Element59">TIdVCard</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Frees a VCard instance.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>destructor</STRONG> Destroy; <STRONG>override</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Destroy is the destructor for <A HREF="007886.html" CLASS="Element59">TIdVCard</A>, and clears a fress object properties for the VCard instance.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0011">TIdVCard.ReadFromTStrings</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007886.html" CLASS="Element59">TIdVCard</A>, <A HREF="014781.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Reads a VCard from a TStrings object.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>procedure</STRONG> ReadFromTStrings(s: TStrings);</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+s: TStrings</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+TStrings used as a source for VCard data.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+ReadFromTStrings is a procedure used to read the contents for a VCard from a TStrings object instance. ReadFromTStrings clears the raw values stored for the VCard instance, and reads all values between the BEGIN:VCARD and END:VCARD in the string list in s. ReadFromTStrings sets the properyty values for the VCard instance after loading the raw data for the VCard.</DIV>
+</DIV>
+<DIV CLASS="Element62">
+<HR>Created with Doc-O-Matic 2 donated to <STRONG><A HREF="http://www.delphi-jedi.org">Project JEDI</A></STRONG>. Commercial license available from the <STRONG><A HREF="http://www.doc-o-matic.com">Doc-O-Matic site</A></STRONG>.</DIV>
+</DIV></BODY></HTML>

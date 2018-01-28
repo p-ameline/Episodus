@@ -1,0 +1,111 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+<TITLE>TIdLocalEvent</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <META name="GENERATOR" content="Doc-O-Matic">
+    <LINK rel="STYLESHEET" href="default.css" type="text/css">
+
+<SCRIPT LANGUAGE="JavaScript1.2" SRC="scripts.js"></SCRIPT>
+</HEAD>
+<BODY CLASS="Element57">
+<TABLE BORDER="0" BGCOLOR="#AACCFF" WIDTH="100%" CELLSPACING="0" CELLPADDING="0">
+<TR><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element1">
+Indy 9</DIV>
+</TD><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element2">
+<A HREF="content.html" CLASS="Element59">Content</A> | <A HREF="idx.html" CLASS="Element59">Index</A> | <A HREF="symref.html" CLASS="Element59">Reference</A></DIV>
+</TD></TR></TABLE><DIV CLASS="Element58">
+<DIV CLASS="Element5">
+TIdLocalEvent</DIV>
+<DIV CLASS="Element7">
+<A HREF="012091.html" CLASS="Element59">Hierarchy</A>, <A HREF="012092.html" CLASS="Element59">Methods</A>, <A HREF="012093.html" CLASS="Element59">See Also</A>, <A HREF="002193.html" CLASS="Element59">Unit: IdGlobal</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Event type signalled for thread-based notification messages.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12">TIdLocalEvent = <STRONG>class</STRONG>(TEvent)</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Unit</DIV>
+<DIV CLASS="Element69">
+<A HREF="002193.html" CLASS="Element59">IdGlobal</A></DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+TIdLocalEvent is a TEvent descendant that specifies the event type, signalled to the global thread-based notication list when there are pending synchronization requests for an Indy thread instance.<P CLASS="Element10">
+TIdLocalEvent is created using the default Event attributes to allow inheritance of the security attributes of the process that creates the event. TIdLocalEvent can be automatically reset when the single thread that waits on the signal is released. TIdLocalEvent is not created to access an existing named TEvent object instance. TIdLocalEvent is also created with the initial event signal state cleared.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0000">TIdLocalEvent.Create</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007509.html" CLASS="Element59">TIdLocalEvent</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Constructor for the object instance.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>constructor</STRONG> Create(<STRONG>const</STRONG> AInitialState: Boolean = False; <STRONG>const</STRONG> AManualReset: Boolean = False); <STRONG>reintroduce</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+const AInitialState: Boolean = False</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Default value is False.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+const AManualReset: Boolean = False</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Default value is False.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Create is the constructor for the object instance. Create calls the inherited Create method using the input parameters to initialize the object instance.<P CLASS="Element10">
+<A HREF="007509.html" CLASS="Element59">TIdLocalEvent</A> is created using the default Event attributes to allow inheritance of the security attributes of the process that creates the event.<P CLASS="Element10">
+When AInitialState is False, the <A HREF="007509.html" CLASS="Element59">TIdLocalEvent</A> is created with the initial event signal state cleared (not set).<P CLASS="Element10">
+When AManualReset is False, the <A HREF="007509.html" CLASS="Element59">TIdLocalEvent</A> can be automatically reset when the single thread that waits on the signal is released. It does not require a call to ResetEvent.<P CLASS="Element10">
+<A HREF="007509.html" CLASS="Element59">TIdLocalEvent</A> is not created to access an existing named TEvent object instance.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0001">TIdLocalEvent.WaitFor</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007509.html" CLASS="Element59">TIdLocalEvent</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Waits until another thread turns on the signal of the event object.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>function</STRONG> WaitFor: TWaitResult; <STRONG>overload</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Return Value</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+TWaitResult - The resulting signal state.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+WaitFor is a TWaitResult function that waits until the signal of the event object is turned on. WaitFor will indefinitely until the event is signalled. WaitFor returns one of the following TWaitResult values:<P CLASS="Element10">
+<UL>
+<LI>wrSignaled - The signal of the event object was set.<P CLASS="Element10">
+<LI>wrAbandoned - The event object was destroyed before the event was signalled.<P CLASS="Element10">
+<LI>wrError - An error occurred while waiting.</UL>
+<P CLASS="Element10">
+Check the LastError property for an error code giving more information.</DIV>
+</DIV>
+<DIV CLASS="Element62">
+<HR>Created with Doc-O-Matic 2 donated to <STRONG><A HREF="http://www.delphi-jedi.org">Project JEDI</A></STRONG>. Commercial license available from the <STRONG><A HREF="http://www.doc-o-matic.com">Doc-O-Matic site</A></STRONG>.</DIV>
+</DIV></BODY></HTML>

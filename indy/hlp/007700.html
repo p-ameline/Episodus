@@ -1,0 +1,299 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+<TITLE>TIdSimpleServer</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <META name="GENERATOR" content="Doc-O-Matic">
+    <LINK rel="STYLESHEET" href="default.css" type="text/css">
+
+<SCRIPT LANGUAGE="JavaScript1.2" SRC="scripts.js"></SCRIPT>
+</HEAD>
+<BODY CLASS="Element57">
+<TABLE BORDER="0" BGCOLOR="#AACCFF" WIDTH="100%" CELLSPACING="0" CELLPADDING="0">
+<TR><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element1">
+Indy 9</DIV>
+</TD><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element2">
+<A HREF="content.html" CLASS="Element59">Content</A> | <A HREF="idx.html" CLASS="Element59">Index</A> | <A HREF="symref.html" CLASS="Element59">Reference</A></DIV>
+</TD></TR></TABLE><DIV CLASS="Element58">
+<DIV CLASS="Element5">
+TIdSimpleServer</DIV>
+<DIV CLASS="Element7">
+<A HREF="013535.html" CLASS="Element59">Hierarchy</A>, <A HREF="013536.html" CLASS="Element59">Properties</A>, <A HREF="013537.html" CLASS="Element59">Methods</A>, <A HREF="013538.html" CLASS="Element59">Events</A>, <A HREF="013539.html" CLASS="Element59">See Also</A>, <A HREF="002817.html" CLASS="Element59">Unit: IdSimpleServer</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Implements a single-threaded TCP Server.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12">TIdSimpleServer = <STRONG>class</STRONG>(<A HREF="007828.html" CLASS="Element59">TIdTCPConnection</A>)</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Unit</DIV>
+<DIV CLASS="Element69">
+<A HREF="002817.html" CLASS="Element59">IdSimpleServer</A></DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+TIdSimpleServer is a <A HREF="007828.html" CLASS="Element59">TIdTCPConnection</A> descendant that implements a single-threaded TCP (Transmission Control Protocol) server. TIdSimpleServer is essentially a TCP connection that gains the ability to <A HREF="003177.html" CLASS="Element59">listen</A> for serial connection requests.<P CLASS="Element10">
+TIdSimpleServer can be used as a base class to create custom single-threaded TCP server descendants.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0001">TIdSimpleServer.AcceptWait</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007700.html" CLASS="Element59">TIdSimpleServer</A>, <A HREF="013540.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Timeout for accepting a new connection.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> AcceptWait: integer;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+AcceptWait is an <STRONG>Integer</STRONG> property that defines the timeout for accepting a new connection on the <A HREF="007713.html" CLASS="Element59">TIdSocketHandle</A> in <A HREF="007700.html#0004" CLASS="Element59">Binding</A>. AcceptWait is expressed in milliseconds.<P CLASS="Element10">
+AcceptWait is used in <A HREF="007700.html#000A" CLASS="Element59">Listen</A> to determine if the <A HREF="007713.html" CLASS="Element59">TIdSocketHandle</A> allocated to <A HREF="007700.html#0004" CLASS="Element59">Binding</A> is readable.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0004">TIdSimpleServer.Binding</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007700.html" CLASS="Element59">TIdSimpleServer</A>, <A HREF="013541.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Socket descriptor used to <A HREF="003177.html" CLASS="Element59">listen</A> for connection requests.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> Binding: <A HREF="007713.html" CLASS="Element59">TIdSocketHandle</A>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Binding is a <A HREF="007713.html" CLASS="Element59">TIdSocketHandle</A> property that represents the <A HREF="007071.html" CLASS="Element59">socket</A> descriptor used by <A HREF="007700.html" CLASS="Element59">TIdSimpleServer</A> to <A HREF="007700.html#000A" CLASS="Element59">Listen</A> for serial connection requests.<P CLASS="Element10">
+Binding is allocated in the <A HREF="007700.html#0008" CLASS="Element59">CreateBinding</A> method.<P CLASS="Element10">
+Binding is used when <A HREF="007700.html" CLASS="Element59">TIdSimpleServer</A> begins to <A HREF="003177.html" CLASS="Element59">listen</A> for connection requests. If Binding is not assigned, <A HREF="007700.html#000C" CLASS="Element59">ResetConnection</A> is called and the Binding is initialized using <A HREF="007700.html#0008" CLASS="Element59">CreateBinding</A>.<P CLASS="Element10">
+Binding is also used when the <A HREF="007071.html" CLASS="Element59">socket</A> handle for the specified <A HREF="007700.html#0005" CLASS="Element59">BoundIP</A> and <A HREF="007700.html#0006" CLASS="Element59">BoundPort</A> is bound in the <A HREF="007700.html#0003" CLASS="Element59">Bind</A> method.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0005">TIdSimpleServer.BoundIP</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007700.html" CLASS="Element59">TIdSimpleServer</A>, <A HREF="013542.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+IP address used by the server.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> BoundIP: <STRONG>string</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+BoundIP is a <STRONG>String</STRONG> property used to identify the IP address of the server. BoundIP and <A HREF="007700.html#0006" CLASS="Element59">BoundPort</A> are used when the <A HREF="007071.html" CLASS="Element59">socket</A> handle for the server is allocated and bound in <A HREF="007700.html#000A" CLASS="Element59">Listen</A>.<P CLASS="Element10">
+BoundIP exists because <A HREF="007700.html#0004" CLASS="Element59">Binding</A> is not a published property (it is public) and cannot be streamed without the <A HREF="007714.html" CLASS="Element59">TIdSocketHandles</A> collection that owns the <A HREF="007700.html#0004" CLASS="Element59">Binding</A>.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0006">TIdSimpleServer.BoundPort</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007700.html" CLASS="Element59">TIdSimpleServer</A>, <A HREF="013543.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Port number used by the server.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> BoundPort: Integer;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+BoundPort is an <STRONG>Integer</STRONG> property used to identify the port number for the server. <A HREF="007700.html#0005" CLASS="Element59">BoundIP</A> and BoundPort are used when the <A HREF="007071.html" CLASS="Element59">socket</A> handle for the server is allocated and bound in <A HREF="007700.html#000A" CLASS="Element59">Listen</A>.<P CLASS="Element10">
+BoundPort exists because <A HREF="007700.html#0004" CLASS="Element59">Binding</A> is not a published property, it is public, and cannot be streamed without the <A HREF="007714.html" CLASS="Element59">TIdSocketHandles</A> collection that owns the <A HREF="007700.html#0004" CLASS="Element59">Binding</A>.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="000B">TIdSimpleServer.ListenHandle</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007700.html" CLASS="Element59">TIdSimpleServer</A>, <A HREF="013544.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Represents the <A HREF="007071.html" CLASS="Element59">socket</A> handle for the listener thread.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> ListenHandle: <A HREF="007743.html" CLASS="Element59">TIdStackSocketHandle</A>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+ListenHandle is a read-only <A HREF="007743.html" CLASS="Element59">TIdStackSocketHandle</A> property that represents the <A HREF="007071.html" CLASS="Element59">socket</A> handle allocated for the server lister thread. ListenHandle contains <A HREF="000936.html" CLASS="Element59">Id_INVALID_SOCKET</A> when no <A HREF="007071.html" CLASS="Element59">socket</A> handle has been allocated for the listener thread.<P CLASS="Element10">
+ListenHandle is updated in <A HREF="007700.html#0007" CLASS="Element59">Create</A>, <A HREF="007700.html#0003" CLASS="Element59">Bind</A>, and <A HREF="007700.html#000A" CLASS="Element59">Listen</A>.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0000">TIdSimpleServer.Abort</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007700.html" CLASS="Element59">TIdSimpleServer</A>, <A HREF="013545.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Instructs a server to stop listening.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>procedure</STRONG> Abort; <STRONG>virtual</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Abort is a procedure that instructs <A HREF="007700.html" CLASS="Element59">TIdSimpleServer</A> to stop listening for connection requests. After calling Abort, the server will close the listening <A HREF="007071.html" CLASS="Element59">socket</A> handle and force an exit from the <A HREF="007700.html#000A" CLASS="Element59">Listen</A> method.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0002">TIdSimpleServer.BeginListen</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007700.html" CLASS="Element59">TIdSimpleServer</A>, <A HREF="013546.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Initializes the listener thread for the server.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>procedure</STRONG> BeginListen; <STRONG>virtual</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+BeginListen is a procedure used initialize the connection state and insure that the <A HREF="007700.html#000B" CLASS="Element59">ListenHandle</A> has called <A HREF="007700.html#0003" CLASS="Element59">Bind</A>.<P CLASS="Element10">
+BeginListen calls <A HREF="007700.html#000C" CLASS="Element59">ResetConnection</A> to clear the internal flags used by the server. BeginListen calls the <A HREF="007700.html#000A" CLASS="Element59">Listen</A> method for <A HREF="007700.html#0004" CLASS="Element59">Binding</A> and sets the internal flag that indicates that the server is listening for client connections.<P CLASS="Element10">
+BeginListen is called from <A HREF="007700.html#000A" CLASS="Element59">Listen</A> prior to entering the control loop for the listener.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0003">TIdSimpleServer.Bind</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007700.html" CLASS="Element59">TIdSimpleServer</A>, <A HREF="013547.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Allocates and binds the <A HREF="007071.html" CLASS="Element59">socket</A> handle for the listener thread.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>procedure</STRONG> Bind; <STRONG>virtual</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Bind is a procedure used to allocate the <A HREF="007071.html" CLASS="Element59">socket</A> handle for the listener thread, and <A HREF="000175.html" CLASS="Element59">bind</A> the address specified in <A HREF="007700.html#0005" CLASS="Element59">BoundIP</A> and <A HREF="007700.html#0006" CLASS="Element59">BoundPort</A>.<P CLASS="Element10">
+<A HREF="007700.html#000B" CLASS="Element59">ListenHandle</A> will contain the handle for the <A HREF="007700.html#0004" CLASS="Element59">Binding</A>. If an exception occurs, <A HREF="007700.html#000B" CLASS="Element59">ListenHandle</A> is assigned the value <A HREF="000936.html" CLASS="Element59">Id_INVALID_SOCKET</A> and the exception is raised.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0007">TIdSimpleServer.Create</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007700.html" CLASS="Element59">TIdSimpleServer</A>, <A HREF="013548.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Constructor for the object instance.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>constructor</STRONG> Create(AOwner: TComponent); <STRONG>override</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Create is the constructor for the object instance, and relies on the inherited Create method. Create sets the value of <A HREF="007700.html#000B" CLASS="Element59">ListenHandle</A> to <A HREF="000936.html" CLASS="Element59">Id_INVALID_SOCKET</A> prior to exiting from the method.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0008">TIdSimpleServer.CreateBinding</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007700.html" CLASS="Element59">TIdSimpleServer</A>, <A HREF="013549.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Sets the <A HREF="007071.html" CLASS="Element59">socket</A> descriptor used in the IO Handler.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>procedure</STRONG> CreateBinding;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+CreateBinding is a procedure used to initialize the IOHandler for the server to a <A HREF="007426.html" CLASS="Element59">TIdIOHandlerSocket</A> instance, and assigns the binding in the IOHandler to the <A HREF="007700.html#0004" CLASS="Element59">Binding</A> property. CreateBinding also Opens the IOHandler.<P CLASS="Element10">
+CreateBinding is called from the <A HREF="007700.html#0002" CLASS="Element59">BeginListen</A> method, to prepare the server to <A HREF="000027.html" CLASS="Element59">accept</A> connection requests.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0009">TIdSimpleServer.EndListen</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007700.html" CLASS="Element59">TIdSimpleServer</A>, <A HREF="013550.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Stops the servers from accepting connection requests.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>procedure</STRONG> EndListen; <STRONG>virtual</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+EndListen is a procedure used to inform the server that it can no longer <A HREF="000027.html" CLASS="Element59">accept</A> connection requests. EndListen calls <A HREF="007700.html#000C" CLASS="Element59">ResetConnection</A> to clear the Indy buffer and internal state flags.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="000A">TIdSimpleServer.Listen</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007700.html" CLASS="Element59">TIdSimpleServer</A>, <A HREF="013551.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Allows a server to <A HREF="003177.html" CLASS="Element59">listen</A> for a client connection.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>function</STRONG> Listen: Boolean; <STRONG>virtual</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Return Value</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Boolean - <STRONG>True</STRONG> on success, <STRONG>False</STRONG> on error.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Listen is a Boolean function that allows <A HREF="007700.html" CLASS="Element59">TIdSimpleServer</A> to <A HREF="003177.html" CLASS="Element59">listen</A> for serial connection requests. Listen returns True when a connection request is detected, accepted, and is readable. Listen returns False if the <A HREF="007700.html#0001" CLASS="Element59">AcceptWait</A> timeout period elapses while trying to <A HREF="006943.html" CLASS="Element59">select</A> the <A HREF="007071.html" CLASS="Element59">socket</A> handle, or the <A HREF="007700.html#0000" CLASS="Element59">Abort</A> procedure is called.<P CLASS="Element10">
+Listen call <A HREF="007700.html#0002" CLASS="Element59">BeginListen</A> to initialize the server <A HREF="007071.html" CLASS="Element59">socket</A> handle and state prior to entering the listener thread of execution. Listen provides a control loop that uses both AbortRequested and the <A HREF="007071.html" CLASS="Element59">socket</A> handle <A HREF="007700.html#0004" CLASS="Element59">Binding</A> to determine when the server should stop listening for a client connection.<P CLASS="Element10">
+While AbortRequested is False, Listen will insure that the <A HREF="007700.html#0004" CLASS="Element59">Binding</A> is readable using the <A HREF="007700.html#0001" CLASS="Element59">AcceptWait</A> timeout value. When a connection request is detected, Listen calls Accept using the Handle for <A HREF="007700.html#0004" CLASS="Element59">Binding</A>.<P CLASS="Element10">
+When AbortRequested is True or a new connection has handled with Accept, Listen will close and invalidate the <A HREF="007071.html" CLASS="Element59">socket</A> handle in <A HREF="007700.html#000B" CLASS="Element59">ListenHandle</A>.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="000C">TIdSimpleServer.ResetConnection</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007700.html" CLASS="Element59">TIdSimpleServer</A>, <A HREF="013552.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Clears connection and state indicators for the server.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>procedure</STRONG> ResetConnection; <STRONG>override</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+ResetConnection is a procedure used to clear the values in AbortedRequested and Listening prior to entering the control loop for the listener thread. ResetConnection calls the inherited ResetConnection method.</DIV>
+</DIV>
+<DIV CLASS="Element62">
+<HR>Created with Doc-O-Matic 2 donated to <STRONG><A HREF="http://www.delphi-jedi.org">Project JEDI</A></STRONG>. Commercial license available from the <STRONG><A HREF="http://www.doc-o-matic.com">Doc-O-Matic site</A></STRONG>.</DIV>
+</DIV></BODY></HTML>

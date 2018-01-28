@@ -1,0 +1,66 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+<TITLE>TIdPeerThread</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <META name="GENERATOR" content="Doc-O-Matic">
+    <LINK rel="STYLESHEET" href="default.css" type="text/css">
+
+<SCRIPT LANGUAGE="JavaScript1.2" SRC="scripts.js"></SCRIPT>
+</HEAD>
+<BODY CLASS="Element57">
+<TABLE BORDER="0" BGCOLOR="#AACCFF" WIDTH="100%" CELLSPACING="0" CELLPADDING="0">
+<TR><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element1">
+Indy 9</DIV>
+</TD><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element2">
+<A HREF="content.html" CLASS="Element59">Content</A> | <A HREF="idx.html" CLASS="Element59">Index</A> | <A HREF="symref.html" CLASS="Element59">Reference</A></DIV>
+</TD></TR></TABLE><DIV CLASS="Element58">
+<DIV CLASS="Element5">
+TIdPeerThread</DIV>
+<DIV CLASS="Element7">
+<A HREF="013049.html" CLASS="Element59">Hierarchy</A>, <A HREF="013050.html" CLASS="Element59">Properties</A>, <A HREF="013051.html" CLASS="Element59">Methods</A>, <A HREF="013052.html" CLASS="Element59">Events</A>, <A HREF="013053.html" CLASS="Element59">See Also</A>, <A HREF="002919.html" CLASS="Element59">Unit: IdTCPServer</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Thread used for client connections.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12">TIdPeerThread = <STRONG>class</STRONG>(<A HREF="007846.html" CLASS="Element59">TIdThread</A>)</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Unit</DIV>
+<DIV CLASS="Element69">
+<A HREF="002919.html" CLASS="Element59">IdTCPServer</A></DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+TIdPeerThread is a thread that is created for every connection made to the <A HREF="007831.html" CLASS="Element59">TIdTCPServer</A>. Every client connection runs in it's own thread on the <A HREF="007831.html" CLASS="Element59">TIdTCPServer</A>.<P CLASS="Element10">
+Requests for TIdPeerThreads are created by a <A HREF="007507.html" CLASS="Element59">TIdListenerThread</A>, and are delegated to the <A HREF="007853.html" CLASS="Element59">TIdThreadMgr</A> for the TCP server.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0000">TIdPeerThread.Connection</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007613.html" CLASS="Element59">TIdPeerThread</A>, <A HREF="013054.html" CLASS="Element59">See Also</A>, <A HREF="013055.html" CLASS="Element59">Example</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Encapsulates server access within a thread.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> Connection: <A HREF="007832.html" CLASS="Element59">TIdTCPServerConnection</A>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Connection is a read-only <A HREF="007832.html" CLASS="Element59">TIdTCPServerConnection</A> property used to encapsulate access to the TCP server from within a thread. When the thread is executed, Connection provides the server context for the thread.<P CLASS="Element10">
+Requests for TIdPeerThreads are created by a <A HREF="007507.html" CLASS="Element59">TIdListenerThread</A>, and are delegated to the <A HREF="007853.html" CLASS="Element59">TIdThreadMgr</A> for the TCP server.<P CLASS="Element10">
+In <A HREF="007613.html" CLASS="Element59">TIdPeerThread</A>, Connection is owned by the Connection.Server that is the end-point of the connection.<P CLASS="Element10">
+Connection can be used to access properties, methods, and events of the server, and to allow data transmission in a manner similar to a client connection. For example:</DIV>
+</DIV>
+<DIV CLASS="Element62">
+<HR>Created with Doc-O-Matic 2 donated to <STRONG><A HREF="http://www.delphi-jedi.org">Project JEDI</A></STRONG>. Commercial license available from the <STRONG><A HREF="http://www.doc-o-matic.com">Doc-O-Matic site</A></STRONG>.</DIV>
+</DIV></BODY></HTML>

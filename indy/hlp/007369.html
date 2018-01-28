@@ -1,0 +1,352 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+<TITLE>TIdHeaderList</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <META name="GENERATOR" content="Doc-O-Matic">
+    <LINK rel="STYLESHEET" href="default.css" type="text/css">
+
+<SCRIPT LANGUAGE="JavaScript1.2" SRC="scripts.js"></SCRIPT>
+</HEAD>
+<BODY CLASS="Element57">
+<TABLE BORDER="0" BGCOLOR="#AACCFF" WIDTH="100%" CELLSPACING="0" CELLPADDING="0">
+<TR><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element1">
+Indy 9</DIV>
+</TD><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element2">
+<A HREF="content.html" CLASS="Element59">Content</A> | <A HREF="idx.html" CLASS="Element59">Index</A> | <A HREF="symref.html" CLASS="Element59">Reference</A></DIV>
+</TD></TR></TABLE><DIV CLASS="Element58">
+<DIV CLASS="Element5">
+TIdHeaderList</DIV>
+<DIV CLASS="Element7">
+<A HREF="011372.html" CLASS="Element59">Hierarchy</A>, <A HREF="011373.html" CLASS="Element59">Properties</A>, <A HREF="011374.html" CLASS="Element59">Methods</A>, <A HREF="011375.html" CLASS="Element59">See Also</A>, <A HREF="002245.html" CLASS="Element59">Unit: IdHeaderList</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Implements a collection of header names and values.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12">TIdHeaderList = <STRONG>class</STRONG>(TStringList)</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Unit</DIV>
+<DIV CLASS="Element69">
+<A HREF="002245.html" CLASS="Element59">IdHeaderList</A></DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+TIdHeaderList is a TStringList descendant that implements a collection of header names and values, and facilitates the processing of headers used in many protocols such as Gopher+, HTTP, NNTP, POP3, and SMTP.<P CLASS="Element10">
+Features include the use of a &quot;:&quot; instead of a comma for separating field names from values (this can be changed with the <A HREF="007369.html#0009" CLASS="Element59">NameValueSeparator</A> property), and optional header folding and unfolding.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0001">TIdHeaderList.CaseSensitive</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007369.html" CLASS="Element59">TIdHeaderList</A>, <A HREF="011376.html" CLASS="Element59">Example</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Indicates if header name comparisons are case sensitive.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> CaseSensitive: Boolean;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+CaseSensitive is a Boolean property that indicates if header name comparisons are case sensitive. Name, <A HREF="007369.html#000B" CLASS="Element59">Values</A>, and IndexOf will consider case to be significant when CaseSensitive is True.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0005">TIdHeaderList.FoldLength</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007369.html" CLASS="Element59">TIdHeaderList</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Indicates the Maximum length of a header line before folding occurs.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> FoldLength: Integer;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+FoldLength is an Integer property used to indicate the maximum length of a header line where folding occurs. When <A HREF="007369.html#0006" CLASS="Element59">FoldLines</A> is True, FoldLength is used to perform wrapping of text in the header line.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0006">TIdHeaderList.FoldLines</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007369.html" CLASS="Element59">TIdHeaderList</A>, <A HREF="011377.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Indicates that header lines can be folded when the maximum length is exceeded.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> FoldLines: Boolean;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+FoldLines is a Boolean property that indicates the string contents of header line <A HREF="007369.html#000B" CLASS="Element59">Values</A> can be wrapped when the length exceeds <A HREF="007369.html#0005" CLASS="Element59">FoldLength</A>. Set FoldLines to True to allow line wrapping.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0008">TIdHeaderList.Names</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007369.html" CLASS="Element59">TIdHeaderList</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Access header names by position.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> Names [<STRONG>Index</STRONG>: Integer]: <STRONG>string</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+Index</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Header position to access.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Return Value</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+String - header name at the given position.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Names is a read-only String property that provides indexed access to header names for the header list. Names works like Borland's TStrings.Names except that it uses the delimiter in <A HREF="007369.html#0009" CLASS="Element59">NameValueSeparator</A> and respects the case sensitivity flag in <A HREF="007369.html#0001" CLASS="Element59">CaseSensitive</A>.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0009">TIdHeaderList.NameValueSeparator</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007369.html" CLASS="Element59">TIdHeaderList</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Delimiter(s) used to separate header names and header values.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> NameValueSeparator: <STRONG>String</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+NameValueSeparator is a String property that represents the characters used as a delimiter between the header name and the header value in the textual representation of headers.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="000A">TIdHeaderList.UnfoldLines</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007369.html" CLASS="Element59">TIdHeaderList</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Indicates that header lines should be unfolded.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> UnfoldLines: Boolean;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+UnfoldLines is a Boolean property that indicates if <A HREF="007369.html#000B" CLASS="Element59">Values</A> should be interpreted with line unfolding. Setting UnfoldLines to False will cause <A HREF="007369.html#000B" CLASS="Element59">Values</A> to not unfold lines. Setting UnfoldLines to True causes header lines with continuation characters to be returned with the preceding header line.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="000B">TIdHeaderList.Values</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007369.html" CLASS="Element59">TIdHeaderList</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Allows access to header values by name.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> Values [<STRONG>const</STRONG> Name: <STRONG>string</STRONG>]: <STRONG>string</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+Name</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Header name to be retrieved.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Return Value</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+String - Header value for the header name.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Values is an Indexed String property that works like Borland's TStrings.Values except it uses the delimiter defined in <A HREF="007369.html#0009" CLASS="Element59">NameValueSeparator</A> as the seperator between header name and value.<P CLASS="Element10">
+Case sensitivity is set with the <A HREF="007369.html#0001" CLASS="Element59">CaseSensitive</A> property, and if <A HREF="007369.html#000A" CLASS="Element59">UnfoldLines</A> is True, lines will be unfolded.<P CLASS="Element10">
+Thus if <A HREF="007369.html#000A" CLASS="Element59">UnfoldLines</A> is set to true, the value in following Example for Values['Subject'] would be &quot;This is a line which is folded. This is on another line.&quot; If <A HREF="007369.html#000A" CLASS="Element59">UnfoldLines</A> is set to False, the Value['Subject'] would equal = &quot;This is a line which is folded.&quot;<P CLASS="Element10">
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12">Subject:  This is a line which is folded.
+ This is on another line.</PRE></DIV>
+</DIV>
+</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0000">TIdHeaderList.AddStdValues</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007369.html" CLASS="Element59">TIdHeaderList</A>, <A HREF="011378.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Converts text line in NAME=VALUE form to their TIdHeaderLIst representation.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>procedure</STRONG> AddStdValues(ASrc: TStrings);</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+ASrc: TStrings</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Storage contains values in NAME=VALUE form.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+AddStdValues is a procedure used to convert text values in the TStrings container ASrc to their <A HREF="007369.html" CLASS="Element59">TIdHeaderList</A> representation using <A HREF="007369.html#0009" CLASS="Element59">NameValueSeparator</A>. ASrc contains text representing header names and values in NAME=VALUE form. AddStdValues replaces the '=' character in each text line with the <A HREF="007369.html#0009" CLASS="Element59">NameValueSeparator</A> character(s) for their header representation.<P CLASS="Element10">
+Use <A HREF="007369.html#0002" CLASS="Element59">ConvertToStdValues</A> to convert header name and values to their NAME=VALUE form.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0002">TIdHeaderList.ConvertToStdValues</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007369.html" CLASS="Element59">TIdHeaderList</A>, <A HREF="011379.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Converts headers using a specific separator to NAME=VALUE form.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>procedure</STRONG> ConvertToStdValues(ADest: TStrings);</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+ADest: TStrings</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Storage for header values in NAME=VALUE form.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+ConvertToStdValues is a procedure used to convert text values in <A HREF="007369.html" CLASS="Element59">TIdHeaderList</A> to a NAME=VALUE representation in the TStrings instance in ADest. ConvertToStdValues replaces the <A HREF="007369.html#0009" CLASS="Element59">NameValueSeparator</A> character(s) in each line in <A HREF="007369.html" CLASS="Element59">TIdHeaderList</A> with the '=' character used by TStrings descendants.<P CLASS="Element10">
+Use <A HREF="007369.html#0000" CLASS="Element59">AddStdValues</A> to add text lines in NAME=VALUE form to a <A HREF="007369.html" CLASS="Element59">TIdHeaderList</A>.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0003">TIdHeaderList.Create</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007369.html" CLASS="Element59">TIdHeaderList</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Constructor for the object instance.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>constructor</STRONG> Create;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Create is the constructor for the object instance, and relies on the inherited Create method to initialize the object. Create also sets the default values for properties including:<P CLASS="Element10">
+<UL>
+<LI><A HREF="007369.html#0009" CLASS="Element59">NameValueSeparator</A> - ': '<P CLASS="Element10">
+<LI><A HREF="007369.html#0001" CLASS="Element59">CaseSensitive</A> - False<P CLASS="Element10">
+<LI><A HREF="007369.html#000A" CLASS="Element59">UnfoldLines</A> - True<P CLASS="Element10">
+<LI><A HREF="007369.html#0006" CLASS="Element59">FoldLines</A> - True<P CLASS="Element10">
+<LI><A HREF="007369.html#0005" CLASS="Element59">FoldLength</A> - 78</UL>
+</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0004">TIdHeaderList.Extract</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007369.html" CLASS="Element59">TIdHeaderList</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Finds and stores all values for the given header name.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>procedure</STRONG> Extract(<STRONG>const</STRONG> AName: <STRONG>string</STRONG>; ADest: TStrings);</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+const AName: string</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Header name to be located and stored.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+ADest: TStrings</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+TStrings to store all located header values.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Extract is a procedure that is used to search the header list for all occurrences of the header in <I>AName</I>. When the header in <I>AName</I> is located, the value of the header is added to <I>ADest</I>. <I>ADest</I> can, as a result, contain multiple values for the named header, with one value per line.<P CLASS="Element10">
+<STRONG>Note</STRONG>: <I>ADest</I> is not cleared prior to use in Extract. Any existing values in <I>ADest</I> are unaffected.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0007">TIdHeaderList.IndexOfName</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007369.html" CLASS="Element59">TIdHeaderList</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Returns the index position of the header with the given name.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>function</STRONG> IndexOfName(<STRONG>const</STRONG> Name: <STRONG>string</STRONG>): Integer; <STRONG>reintroduce</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+const Name: string</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Header name to locate.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Return Value</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Integer - Index position, or -1 when not found.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+IndexOfName is an Integer function that returns the index position of the header with the given name. IndexOfName work like Borland's TStrings.IndexOfName except it uses the delimiters defined in <A HREF="007369.html#0009" CLASS="Element59">NameValueSeparator</A>, and respects the case sensitivity flag in the <A HREF="007369.html#0001" CLASS="Element59">CaseSensitive</A> property.<P CLASS="Element10">
+IndexOfName can return -1 when the header in Name does not exist in the header list.</DIV>
+</DIV>
+<DIV CLASS="Element62">
+<HR>Created with Doc-O-Matic 2 donated to <STRONG><A HREF="http://www.delphi-jedi.org">Project JEDI</A></STRONG>. Commercial license available from the <STRONG><A HREF="http://www.doc-o-matic.com">Doc-O-Matic site</A></STRONG>.</DIV>
+</DIV></BODY></HTML>

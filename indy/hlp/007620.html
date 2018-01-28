@@ -1,0 +1,61 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+<TITLE>TIdPOP3ServerLogin</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <META name="GENERATOR" content="Doc-O-Matic">
+    <LINK rel="STYLESHEET" href="default.css" type="text/css">
+
+<SCRIPT LANGUAGE="JavaScript1.2" SRC="scripts.js"></SCRIPT>
+</HEAD>
+<BODY CLASS="Element57">
+<TABLE BORDER="0" BGCOLOR="#AACCFF" WIDTH="100%" CELLSPACING="0" CELLPADDING="0">
+<TR><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element1">
+Indy 9</DIV>
+</TD><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element2">
+<A HREF="content.html" CLASS="Element59">Content</A> | <A HREF="idx.html" CLASS="Element59">Index</A> | <A HREF="symref.html" CLASS="Element59">Reference</A></DIV>
+</TD></TR></TABLE><DIV CLASS="Element58">
+<DIV CLASS="Element5">
+TIdPOP3ServerLogin</DIV>
+<DIV CLASS="Element7">
+<A HREF="015489.html" CLASS="Element59">See Also</A>, <A HREF="002310.html" CLASS="Element59">Unit: IdPOP3Server</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Represents the event type triggered for authenticating a POP3 client connection.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12">TIdPOP3ServerLogin = <STRONG>procedure</STRONG> (AThread :<A HREF="007613.html" CLASS="Element59">TIdPeerThread</A>; LThread : <A HREF="007624.html" CLASS="Element59">TIdPOP3ServerThread</A>) <STRONG>of</STRONG> <STRONG>object</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Unit</DIV>
+<DIV CLASS="Element69">
+<A HREF="002310.html" CLASS="Element59">IdPOP3Server</A></DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+AThread</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Client connection for the command handler event.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+LThread</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+POP3 server thread for the client connection.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+TIdPOP3ServerLogin is an event type triggered to allow authentication of a client connection to the POP3 server from the command handler for the POP3 PASS command.<P CLASS="Element10">
+AThread is the thread for the client connection provided by the command handler. LThread is AThread cast to a <A HREF="007624.html" CLASS="Element59">TIdPOP3ServerThread</A> to allow acces to the Username, Password, and State for the POP3 client connection.<P CLASS="Element10">
+TIdPOP3ServerLogin allows the server to perform identification and authentication using properties in LThread. TIdPOP3ServerLogin is the type signalled to the CheckUser event handler in the server implementation.<P CLASS="Element10">
+<STRONG>Note</STRONG>: The event handler is responsible for setting the value for the <A HREF="007624.html#0003" CLASS="Element59">TIdPOP3ServerThread.State</A> property.</DIV>
+</DIV>
+<DIV CLASS="Element62">
+<HR>Created with Doc-O-Matic 2 donated to <STRONG><A HREF="http://www.delphi-jedi.org">Project JEDI</A></STRONG>. Commercial license available from the <STRONG><A HREF="http://www.doc-o-matic.com">Doc-O-Matic site</A></STRONG>.</DIV>
+</DIV></BODY></HTML>

@@ -1,0 +1,71 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+<TITLE>GetTickDiff</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <META name="GENERATOR" content="Doc-O-Matic">
+    <LINK rel="STYLESHEET" href="default.css" type="text/css">
+
+<SCRIPT LANGUAGE="JavaScript1.2" SRC="scripts.js"></SCRIPT>
+</HEAD>
+<BODY CLASS="Element57">
+<TABLE BORDER="0" BGCOLOR="#AACCFF" WIDTH="100%" CELLSPACING="0" CELLPADDING="0">
+<TR><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element1">
+Indy 9</DIV>
+</TD><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element2">
+<A HREF="content.html" CLASS="Element59">Content</A> | <A HREF="idx.html" CLASS="Element59">Index</A> | <A HREF="symref.html" CLASS="Element59">Reference</A></DIV>
+</TD></TR></TABLE><DIV CLASS="Element58">
+<DIV CLASS="Element5">
+GetTickDiff</DIV>
+<DIV CLASS="Element7">
+<A HREF="015310.html" CLASS="Element59">See Also</A>, <A HREF="002193.html" CLASS="Element59">Unit: IdGlobal</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Calculates the elapsed tick count from two tick count values.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>function</STRONG> GetTickDiff(<STRONG>const</STRONG> AOldTickCount: Cardinal; <STRONG>const</STRONG> ANewTickCount: Cardinal): Cardinal;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Unit</DIV>
+<DIV CLASS="Element69">
+<A HREF="002193.html" CLASS="Element59">IdGlobal</A></DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+const AOldTickCount: Cardinal</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Starting tick count</DIV>
+</DIV>
+<DIV CLASS="Element17">
+const ANewTickCount: Cardinal</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Ending tick count</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+GetTickDiff is a Cardinal function that calculates the elapsed tick count using the values in AOldTickCount and ANewTickCount. AOldTickCount and ANewTickCount are the starting and ending tick counts as returned by the <A HREF="000668.html" CLASS="Element59">GetTickCount</A> function. GetTickDiff exists because a <A HREF="000668.html" CLASS="Element59">GetTickCount</A> value can rollover to zero (0) when it exceeds the maximum value represented in the Cardinal data type.<P CLASS="Element10">
+GetTickDiff handles this situation in calculating the elapsed tick count. When ANewTickCount is greater than (or equal to) AOldTickCount, the return value is calculated using:<P CLASS="Element10">
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12">    ANewTickCount - AOldTickCount;</PRE></DIV>
+</DIV>
+<P CLASS="Element10">
+When ANewTickCount is less than AOldTickCount, the return value is adjusted and calculated using:<P CLASS="Element10">
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12">    High(Cardinal) - AOldTickCount + ANewTickCount;</PRE></DIV>
+</DIV>
+<P CLASS="Element10">
+GetTickDiff is used when calculating the values returned in <A HREF="007303.html#0002" CLASS="Element59">TIdEcho.EchoTime</A> and <A HREF="007305.html#0002" CLASS="Element59">TIdEchoUDP.EchoTime</A>, as well as the values returned in <A HREF="007864.html#0005" CLASS="Element59">TIdTime.RoundTripDelay</A> and <A HREF="007866.html#0005" CLASS="Element59">TIdTimeUDP.RoundTripDelay</A>.</DIV>
+</DIV>
+<DIV CLASS="Element62">
+<HR>Created with Doc-O-Matic 2 donated to <STRONG><A HREF="http://www.delphi-jedi.org">Project JEDI</A></STRONG>. Commercial license available from the <STRONG><A HREF="http://www.doc-o-matic.com">Doc-O-Matic site</A></STRONG>.</DIV>
+</DIV></BODY></HTML>

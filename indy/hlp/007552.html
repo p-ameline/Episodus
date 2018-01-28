@@ -1,0 +1,83 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+<TITLE>TIdMessageDecoderInfoUUE</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <META name="GENERATOR" content="Doc-O-Matic">
+    <LINK rel="STYLESHEET" href="default.css" type="text/css">
+
+<SCRIPT LANGUAGE="JavaScript1.2" SRC="scripts.js"></SCRIPT>
+</HEAD>
+<BODY CLASS="Element57">
+<TABLE BORDER="0" BGCOLOR="#AACCFF" WIDTH="100%" CELLSPACING="0" CELLPADDING="0">
+<TR><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element1">
+Indy 9</DIV>
+</TD><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element2">
+<A HREF="content.html" CLASS="Element59">Content</A> | <A HREF="idx.html" CLASS="Element59">Index</A> | <A HREF="symref.html" CLASS="Element59">Reference</A></DIV>
+</TD></TR></TABLE><DIV CLASS="Element58">
+<DIV CLASS="Element5">
+TIdMessageDecoderInfoUUE</DIV>
+<DIV CLASS="Element7">
+<A HREF="012536.html" CLASS="Element59">Hierarchy</A>, <A HREF="012537.html" CLASS="Element59">Methods</A>, <A HREF="012538.html" CLASS="Element59">See Also</A>, <A HREF="002290.html" CLASS="Element59">Unit: IdMessageCoderUUE</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Represents information about the registered decoder class used for decoding UUEncoded message parts.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12">TIdMessageDecoderInfoUUE = <STRONG>class</STRONG>(<A HREF="007550.html" CLASS="Element59">TIdMessageDecoderInfo</A>)</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Unit</DIV>
+<DIV CLASS="Element69">
+<A HREF="002290.html" CLASS="Element59">IdMessageCoderUUE</A></DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+TIdMessageDecoderInfoUUE is a <A HREF="007550.html" CLASS="Element59">TIdMessageDecoderInfo</A> descendant that represents information about the registered decoder class used for decoding UUEncoded message parts. TIdMessageDecoderInfoUUE extends the ancestor class to provide support for detecting the specifics of a UUEncoded packet, as well as representing information about the RFC message part in message headers.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0000">TIdMessageDecoderInfoUUE.CheckForStart</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007552.html" CLASS="Element59">TIdMessageDecoderInfoUUE</A>, <A HREF="012539.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Implements detection of a UUEncoded packet, and creates the message coder for the message part.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>function</STRONG> CheckForStart(ASender: <A HREF="007544.html" CLASS="Element59">TIdMessage</A>; ALine: <STRONG>string</STRONG>): <A HREF="007549.html" CLASS="Element59">TIdMessageDecoder</A>; <STRONG>override</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+ASender: TIdMessage</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Message containing the message part.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+ALine: string</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Line from the message part to be examined for UUEncode formatting.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Return Value</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+<A HREF="007549.html" CLASS="Element59">TIdMessageDecoder</A> - Message Decoder class to use for the message part.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+CheckForStart is an overridden <A HREF="007549.html" CLASS="Element59">TIdMessageDecoder</A> function in <A HREF="007552.html" CLASS="Element59">TIdMessageDecoderInfoUUE</A> that implements recognizing information in UUEncoded message packet, like the header section and PermissionCode, as well as constructing a <A HREF="007555.html" CLASS="Element59">TIdMessageDecoderUUE</A> for the associated message.<P CLASS="Element10">
+CheckForStart exame ALine to see if it contains a UUencode header section, which consists of the keyword &quot;begin&quot; and the space-delimited values for PermissionCode and Filename. If the header section is detected, CheckForStart also sets PartType to ptAttachment.</DIV>
+</DIV>
+<DIV CLASS="Element62">
+<HR>Created with Doc-O-Matic 2 donated to <STRONG><A HREF="http://www.delphi-jedi.org">Project JEDI</A></STRONG>. Commercial license available from the <STRONG><A HREF="http://www.doc-o-matic.com">Doc-O-Matic site</A></STRONG>.</DIV>
+</DIV></BODY></HTML>

@@ -1,0 +1,26 @@
+#ifndef __NSTIP_H#define __NSTIP_H
+#include <owl\applicat.h>
+#include <owl\window.h>#ifdef _ENTERPRISE_DLL  #include "enterpriseLus/nsglobalLus.h"
+#else
+  #include "partage/nsglobal.h"
+#endif#include "nsbb\nsexport.h"#include "nsbb\ns_skins.h"
+#define CM_TIPTIMER_ON  201#define CM_TIPTIMER_OFF 202# define ID_HT_TIMER 25# define TIMER_VALUE	 200
+//// Bulles d'aides Nautilus
+//
+class _NSBBCLASSE NSTitleTip : public TWindow, public NSRoot{	// Construction	public:		NSTitleTip(TWindow* pParent, NSContexte* pCtx) ;		~NSTitleTip() ;
+    void SetupWindow() ;    // Création de la fenêtre    bool Create() ;
+    // Affichage de la fenetre windows
+    void Show(NS_CLASSLIB::TRect rectTitle, string* psText,                    int xoffset = 0, int nMaxChars = -1,
+                    NS_CLASSLIB::TRect* pHoverRect = NULL, LPLOGFONT lpLogFont = NULL, int time = -1) ;
+
+    // Cache la fenêtre
+    void Hide() ;
+    void EvMouseMove(uint modKeys, NS_CLASSLIB::TPoint& point);    void Paint(TDC& dc, bool erase, NS_CLASSLIB::TRect& RectAPeindre);    void EvLButtonDown(uint modKeys, NS_CLASSLIB::TPoint& point);    void EvRButtonDown(uint modKeys, NS_CLASSLIB::TPoint& point);    void EvMButtonDown(uint modKeys, NS_CLASSLIB::TPoint& point);    void EvLButtonDblClk(uint modKeys, NS_CLASSLIB::TPoint& point);    void EvLButtonUp(uint modKeys, NS_CLASSLIB::TPoint& point);    void EvRButtonDblClk(uint modKeys, NS_CLASSLIB::TPoint& point);    void EvTimer(uint timerId);    void setTipsTimer()  { SetTimer(ID_HT_TIMER, TIMER_VALUE); }    void killTipsTimer() { KillTimer(ID_HT_TIMER); }    void EvPaint();
+    void disableTipTimer();    void enableTipTimer();
+	protected:
+		TWindow             *pParentWnd;  // Fenetre parent    std::string         strTitle;	    // Label ç afficher    nsSkin*             pSkin;        // Skin de l'affichage    NS_CLASSLIB::TRect  rectTitle;    NS_CLASSLIB::TRect  rectHover;    NS_CLASSLIB::TRect  rectDisplay;    NS_CLASSLIB::TPoint MouseLoc;     // Last recorded mouse loc    unsigned int				timercount;
+    unsigned int 				time_to;
+
+	DECLARE_RESPONSE_TABLE(NSTitleTip);};
+
+#endif // __NSTIP_H

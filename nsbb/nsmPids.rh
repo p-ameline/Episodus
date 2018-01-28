@@ -1,0 +1,3 @@
+#include <owl/editfile.rh>
+#define PERSO_BUTTON 101#define PRO_BUTTON   102#define USER_BUTTON  103
+

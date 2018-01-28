@@ -1,0 +1,150 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+<TITLE>TIdSMTPRcpReplies</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <META name="GENERATOR" content="Doc-O-Matic">
+    <LINK rel="STYLESHEET" href="default.css" type="text/css">
+
+<SCRIPT LANGUAGE="JavaScript1.2" SRC="scripts.js"></SCRIPT>
+</HEAD>
+<BODY CLASS="Element57">
+<TABLE BORDER="0" BGCOLOR="#AACCFF" WIDTH="100%" CELLSPACING="0" CELLPADDING="0">
+<TR><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element1">
+Indy 9</DIV>
+</TD><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element2">
+<A HREF="content.html" CLASS="Element59">Content</A> | <A HREF="idx.html" CLASS="Element59">Index</A> | <A HREF="symref.html" CLASS="Element59">Reference</A></DIV>
+</TD></TR></TABLE><DIV CLASS="Element58">
+<DIV CLASS="Element5">
+TIdSMTPRcpReplies</DIV>
+<DIV CLASS="Element7">
+<A HREF="013634.html" CLASS="Element59">Hierarchy</A>, <A HREF="013635.html" CLASS="Element59">Properties</A>, <A HREF="013636.html" CLASS="Element59">Methods</A>, <A HREF="013637.html" CLASS="Element59">See Also</A>, <A HREF="002819.html" CLASS="Element59">Unit: IdSMTPServer</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Repesents messages used in SMTP commands using recipient mail addresses.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12">TIdSMTPRcpReplies = <STRONG>class</STRONG>(TPersistent)</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Unit</DIV>
+<DIV CLASS="Element69">
+<A HREF="002819.html" CLASS="Element59">IdSMTPServer</A></DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+TIdSMTPRcpReplies is a TPersistent descendant that specifies properties and method need to implement a container for messages used in response to SMTP command verbs that involve recipient mail addresses. TIdSMTPRcpReplies publishes the <A HREF="007705.html#0001" CLASS="Element59">AddressOkReply</A>, <A HREF="007705.html#0000" CLASS="Element59">AddressErrorReply</A>, and <A HREF="007705.html#0002" CLASS="Element59">AddressWillForwardReply</A> properties that contain these messages values.<P CLASS="Element10">
+TIdSMTPRcpReplies is the type used to represent the <A HREF="007704.html#0009" CLASS="Element59">TIdSMTPMessages.RcpReplies</A>, and is used in the command event handlers for the SMTP MAIL and RCPT commands.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0000">TIdSMTPRcpReplies.AddressErrorReply</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007705.html" CLASS="Element59">TIdSMTPRcpReplies</A>, <A HREF="013638.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Specifies the response message used when SMTP RCPT cannot <A HREF="000027.html" CLASS="Element59">accept</A> or forward incoming mail.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> AddressErrorReply: <STRONG>string</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+AddressErrorReply is a String property that specifies the message used as a response to the SMTP RCPT command verb. AddressErrorReply is used in TIdSMTPServer.CommandRcpt to indicate to the client connection that the incoming mail cannot be selected for delivery to the local destination address, or cannot be forwarded to a remote address.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0001">TIdSMTPRcpReplies.AddressOkReply</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007705.html" CLASS="Element59">TIdSMTPRcpReplies</A>, <A HREF="013639.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Specifies the response message used when SMTP RCPT accepts mail for local delivery.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> AddressOkReply: <STRONG>string</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+AddressOkReply is a String property that specifies the message used as a response to the SMTP RCPT command verb. AddressOkReply is used in TIdSMTPServer.CommandRcpt to indicate to the client connection that the incoming mail has been accepted for delivery to the local destination address.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0002">TIdSMTPRcpReplies.AddressWillForwardReply</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007705.html" CLASS="Element59">TIdSMTPRcpReplies</A>, <A HREF="013640.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Specifies the response message used when SMTP RCPT will forward mail.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> AddressWillForwardReply: <STRONG>string</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+AddressWillForwardReply is a String property that specifies the message used as a response to the SMTP RCPT command verb. AddressWillForwardReply is used in TIdSMTPServer.CommandRcpt to indicate to the client connection that the incoming mail will be forwarded to the destination address.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0003">TIdSMTPRcpReplies.Assign</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007705.html" CLASS="Element59">TIdSMTPRcpReplies</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Copies the properties of one Object instance to another.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>procedure</STRONG> Assign(Source: TPersistent); <STRONG>override</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+Source: TPersistent</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Object instance containing values to be copied.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Assign is an overridden procedure that copies the property values in Source to the current object instance. Assign calls the inherited Assign method.<P CLASS="Element10">
+Assign checks whether the Source parameter specifies another <A HREF="007705.html" CLASS="Element59">TIdSMTPRcpReplies</A> instance, and if so, copies the values of the <A HREF="007705.html#0001" CLASS="Element59">AddressOkReply</A>, <A HREF="007705.html#0000" CLASS="Element59">AddressErrorReply</A>, and <A HREF="007705.html#0002" CLASS="Element59">AddressWillForwardReply</A> properties.<P CLASS="Element10">
+If Source is not a <A HREF="007705.html" CLASS="Element59">TIdSMTPRcpReplies</A> instance, Assign calls the inherited method, which assigns properties from any object that specifies how to copy using the AssignTo method.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0004">TIdSMTPRcpReplies.Create</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007705.html" CLASS="Element59">TIdSMTPRcpReplies</A>, <A HREF="013641.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Constructor for the object instance.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>constructor</STRONG> Create;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Create is the constructor for the object instance. Create calls the inherited Create method, and assigns the default constant values for the following properties:<P CLASS="Element10">
+<UL>
+<LI><A HREF="007705.html#0001" CLASS="Element59">AddressOkReply</A> - <A HREF="006611.html" CLASS="Element59">RSSMTPSvrAddressOk</A><P CLASS="Element10">
+<LI><A HREF="007705.html#0000" CLASS="Element59">AddressErrorReply</A> - <A HREF="006610.html" CLASS="Element59">RSSMTPSvrAddressError</A><P CLASS="Element10">
+<LI><A HREF="007705.html#0002" CLASS="Element59">AddressWillForwardReply</A> - <A HREF="006612.html" CLASS="Element59">RSSMTPSvrAddressWillForward</A></UL>
+</DIV>
+</DIV>
+<DIV CLASS="Element62">
+<HR>Created with Doc-O-Matic 2 donated to <STRONG><A HREF="http://www.delphi-jedi.org">Project JEDI</A></STRONG>. Commercial license available from the <STRONG><A HREF="http://www.doc-o-matic.com">Doc-O-Matic site</A></STRONG>.</DIV>
+</DIV></BODY></HTML>

@@ -1,0 +1,333 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+<TITLE>TIdSysLogMessage</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <META name="GENERATOR" content="Doc-O-Matic">
+    <LINK rel="STYLESHEET" href="default.css" type="text/css">
+
+<SCRIPT LANGUAGE="JavaScript1.2" SRC="scripts.js"></SCRIPT>
+</HEAD>
+<BODY CLASS="Element57">
+<TABLE BORDER="0" BGCOLOR="#AACCFF" WIDTH="100%" CELLSPACING="0" CELLPADDING="0">
+<TR><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element1">
+Indy 9</DIV>
+</TD><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element2">
+<A HREF="content.html" CLASS="Element59">Content</A> | <A HREF="idx.html" CLASS="Element59">Index</A> | <A HREF="symref.html" CLASS="Element59">Reference</A></DIV>
+</TD></TR></TABLE><DIV CLASS="Element58">
+<DIV CLASS="Element5">
+TIdSysLogMessage</DIV>
+<DIV CLASS="Element7">
+<A HREF="013999.html" CLASS="Element59">Hierarchy</A>, <A HREF="014000.html" CLASS="Element59">Properties</A>, <A HREF="014001.html" CLASS="Element59">Methods</A>, <A HREF="014002.html" CLASS="Element59">See Also</A>, <A HREF="002915.html" CLASS="Element59">Unit: IdSysLogMessage</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+TIdSysLogMessage encapsulates a Syslog (RFC 3164) message.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12">TIdSysLogMessage = <STRONG>class</STRONG>(<A HREF="007213.html" CLASS="Element59">TIdBaseComponent</A>)</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Unit</DIV>
+<DIV CLASS="Element69">
+<A HREF="002915.html" CLASS="Element59">IdSysLogMessage</A></DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+TIdSysLogMessage encapsulates a Syslog (RFC 3164) message for the <A HREF="007820.html" CLASS="Element59">TIdSysLog</A> and TIdSysLogServer components including the ability to encode and decode the SysLog message.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0004">TIdSysLogMessage.Facility</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007822.html" CLASS="Element59">TIdSysLogMessage</A>, <A HREF="014003.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+This property indicates the general area where the SysLog message was generated from.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> Facility: TidSyslogFacility;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+This property indicates the general area where the SysLog message was generated from. Setting this property will update the <A HREF="007822.html#0008" CLASS="Element59">TIdSysLogMessage.Pri</A> property as appropriate.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0005">TIdSysLogMessage.Hostname</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007822.html" CLASS="Element59">TIdSysLogMessage</A>, <A HREF="014004.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+IP address or host name for the computer sending the message.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> Hostname: <STRONG>string</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Hostname is a string property that represents the IP address or host name for the computer sending the message. By default, this is set the IP address of the user's computer and is obtained by using GStack.LocalAddress.<P CLASS="Element10">
+<STRONG>Note:</STRONG> This property is not stored in the DFM because the HostName property is specific to a user's computers and storing it in the form files could create a wrong value in the System log.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0006">TIdSysLogMessage.Msg</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007822.html" CLASS="Element59">TIdSysLogMessage</A>, <A HREF="014005.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+This property contains the text and process information of the <A HREF="007822.html" CLASS="Element59">TIdSysLogMessage</A>.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> Msg: <A HREF="007823.html" CLASS="Element59">TIdSysLogMsgPart</A>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+This property contains the text and process information of the <A HREF="007822.html" CLASS="Element59">TIdSysLogMessage</A> which can be set or processed as desired. The following values are often used in the <A HREF="007823.html" CLASS="Element59">TIdSysLogMsgPart</A> object; <A HREF="007823.html#0002" CLASS="Element59">TIdSysLogMsgPart.PID</A>, <A HREF="007823.html#0001" CLASS="Element59">TIdSysLogMsgPart.Content</A>, <A HREF="007823.html#0004" CLASS="Element59">TIdSysLogMsgPart.Process</A>, <A HREF="007823.html#0003" CLASS="Element59">TIdSysLogMsgPart.PIDAvailable</A> , <A HREF="007823.html#0005" CLASS="Element59">TIdSysLogMsgPart.Text</A>.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0007">TIdSysLogMessage.Peer</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007822.html" CLASS="Element59">TIdSysLogMessage</A>, <A HREF="014006.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+This is the peer that sent the <A HREF="007822.html" CLASS="Element59">TIdSysLogMessage</A>.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> Peer: <STRONG>String</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Peer is a String property that represents the IP address or hostname for the peer that sent the <A HREF="007822.html" CLASS="Element59">TIdSysLogMessage</A> to the TIdSysLogServer.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0008">TIdSysLogMessage.Pri</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007822.html" CLASS="Element59">TIdSysLogMessage</A>, <A HREF="014007.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Pri is a calculation of the <A HREF="007822.html#000C" CLASS="Element59">TIdSysLogMessage.Severity</A> and <A HREF="007822.html#0004" CLASS="Element59">TIdSysLogMessage.Facility</A> properties and is used in transmitting the <A HREF="007822.html" CLASS="Element59">TIdSysLogMessage</A>.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> Pri: <A HREF="007824.html" CLASS="Element59">TIdSyslogPRI</A>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Pri is a calculation of the <A HREF="007822.html#000C" CLASS="Element59">TIdSysLogMessage.Severity</A> and <A HREF="007822.html#0004" CLASS="Element59">TIdSysLogMessage.Facility</A> properties and is used in transmitting the <A HREF="007822.html" CLASS="Element59">TIdSysLogMessage</A>. Setting this value to a value from 0 to 191 will update the <A HREF="007822.html#000C" CLASS="Element59">TIdSysLogMessage.Severity</A> and <A HREF="007822.html#0004" CLASS="Element59">TIdSysLogMessage.Facility</A> properties.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0009">TIdSysLogMessage.RawMessage</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007822.html" CLASS="Element59">TIdSysLogMessage</A>, <A HREF="014008.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Raw contents of the message as read from the <A HREF="007071.html" CLASS="Element59">socket</A> connection.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> RawMessage: <STRONG>string</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+RawMessage is a String property that represents the raw contents of the Syslog message as read from the <A HREF="007071.html" CLASS="Element59">socket</A> connection. RawMessage contains the values parsed to determine the contents of the <A HREF="007822.html#0005" CLASS="Element59">Hostname</A>, <A HREF="007822.html#000D" CLASS="Element59">TimeStamp</A>, <A HREF="007822.html#0004" CLASS="Element59">Facility</A>, <A HREF="007822.html#000C" CLASS="Element59">Severity</A>, <A HREF="007822.html#0008" CLASS="Element59">Pri</A>, and <A HREF="007822.html#0006" CLASS="Element59">Msg</A> properties.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="000C">TIdSysLogMessage.Severity</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007822.html" CLASS="Element59">TIdSysLogMessage</A>, <A HREF="014009.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+This property indicates the severity of the SysLog message.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> Severity: <A HREF="007826.html" CLASS="Element59">TIdSyslogSeverity</A>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+This property indicates the severity of the SysLog message. Setting this property will update the <A HREF="007822.html#0008" CLASS="Element59">TIdSysLogMessage.Pri</A> property as appropriate.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="000D">TIdSysLogMessage.TimeStamp</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007822.html" CLASS="Element59">TIdSysLogMessage</A>, <A HREF="014010.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Date and time that the message was sent.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> TimeStamp: TDateTime;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+TimeStamp is a TDateTime property that represents the date and time that a Syslog message was sent. TimeStamp is the value read from the header portion of the Syslog message. If an exception occurs while parsing the message header, TimeStamp will contain the current date and time.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0000">TIdSysLogMessage.assign</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007822.html" CLASS="Element59">TIdSysLogMessage</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Copies property values from a persistent source.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>procedure</STRONG> assign(Source: TPersistent); <STRONG>override</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Assign is a procedure that allows property values for the current object instance to be copied from the persistent component specified in Source. When Source is an instance of <A HREF="007822.html" CLASS="Element59">TIdSysLogMessage</A>, the values for the <A HREF="007822.html#0008" CLASS="Element59">Pri</A>, <A HREF="007822.html#0006" CLASS="Element59">Msg</A>, HostName and Timestamp properties are updated from the values in Source. Otherwise, the inherited Assign method is called.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0001">TIdSysLogMessage.Create</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007822.html" CLASS="Element59">TIdSysLogMessage</A>, <A HREF="014011.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Constructor for the object instance.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>constructor</STRONG> Create(AOwner: TComponent); <STRONG>override</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+AOwner: TComponent</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Owner of the object instance.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Create is the constructor for the object instance. Create calls the inherited Create method using AOwner as the owner of the component instance. Create sets the default value for the PRI property to 13, and uses the global <A HREF="007740.html" CLASS="Element59">TIdStack</A> instance in <A HREF="000691.html" CLASS="Element59">GStack</A> to retrieve the value for the HostName property. Create also allocates the <A HREF="007823.html" CLASS="Element59">TIdSysLogMsgPart</A> used to represent the <A HREF="007822.html#0006" CLASS="Element59">Msg</A> property.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0002">TIdSysLogMessage.Destroy</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007822.html" CLASS="Element59">TIdSysLogMessage</A>, <A HREF="014012.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Frees the object instance.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>destructor</STRONG> Destroy; <STRONG>override</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Destroy is the destructor for the object instance. Destroy frees resources allocated in <A HREF="007822.html#0001" CLASS="Element59">Create</A> for the <A HREF="007822.html#0006" CLASS="Element59">Msg</A> property prior to calling the inherited Destroy method.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0003">TIdSysLogMessage.EncodeMessage</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007822.html" CLASS="Element59">TIdSysLogMessage</A>, <A HREF="014013.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+EncodeMessage encodes the SysLog message into a form for sending with a <A HREF="007820.html" CLASS="Element59">TIdSysLog</A> component.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>function</STRONG> EncodeMessage: <STRONG>String</STRONG>; <STRONG>virtual</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+EncodeMessage encodes the SysLog message into a form for sending with a <A HREF="007820.html" CLASS="Element59">TIdSysLog</A> component.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="000A">TIdSysLogMessage.ReadFromStream</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007822.html" CLASS="Element59">TIdSysLogMessage</A>, <A HREF="014014.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+This message reads a SysLog message from stream.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>procedure</STRONG> ReadFromStream(Src: TStream; Size: integer; APeer: <STRONG>String</STRONG>); <STRONG>virtual</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+Src: TStream</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+The stream to read the SysLog message from</DIV>
+</DIV>
+<DIV CLASS="Element17">
+Size: integer</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+The size of the data to read</DIV>
+</DIV>
+<DIV CLASS="Element17">
+APeer: String</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+The sender's address</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+This message reads a SysLog message from stream and sets the <A HREF="007822.html" CLASS="Element59">TIdSysLogMessage</A> as required. This method is usually called by the TIdSysLogServer before calling the TIdSysLogServer.OnSyslog event handler.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="000B">TIdSysLogMessage.SendToHost</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007822.html" CLASS="Element59">TIdSysLogMessage</A>, <A HREF="014015.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Sends the Syslog message to the host specified host.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>procedure</STRONG> SendToHost(<STRONG>const</STRONG> Dest: <STRONG>String</STRONG>);</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+const Dest: String</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Host name or IP address to receive the syslog message.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+SendToHost is public procedure used to <A HREF="006944.html" CLASS="Element59">send</A> the Syslog message to the host name or IP address indicated in Dest. SendToHost will create a temporary <A HREF="007874.html" CLASS="Element59">TIdUDPClient</A> instance, when one has nopt already been assigned, to be used to for the transmission to the Syslog daemon in Dest. SendtoHost call <A HREF="007874.html#0003" CLASS="Element59">TIdUDPClient.Send</A> using Dest and <A HREF="002712.html" CLASS="Element59">IdPORT_syslog</A> as the destintination for the contents of the message created using <A HREF="007822.html#0003" CLASS="Element59">EncodeMessage</A>.</DIV>
+</DIV>
+<DIV CLASS="Element62">
+<HR>Created with Doc-O-Matic 2 donated to <STRONG><A HREF="http://www.delphi-jedi.org">Project JEDI</A></STRONG>. Commercial license available from the <STRONG><A HREF="http://www.doc-o-matic.com">Doc-O-Matic site</A></STRONG>.</DIV>
+</DIV></BODY></HTML>

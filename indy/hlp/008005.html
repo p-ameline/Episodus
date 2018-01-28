@@ -1,0 +1,844 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+<TITLE>TNTPGram</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <META name="GENERATOR" content="Doc-O-Matic">
+    <LINK rel="STYLESHEET" href="default.css" type="text/css">
+
+<SCRIPT LANGUAGE="JavaScript1.2" SRC="scripts.js"></SCRIPT>
+</HEAD>
+<BODY CLASS="Element57">
+<TABLE BORDER="0" BGCOLOR="#AACCFF" WIDTH="100%" CELLSPACING="0" CELLPADDING="0">
+<TR><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element1">
+Indy 9</DIV>
+</TD><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element2">
+<A HREF="content.html" CLASS="Element59">Content</A> | <A HREF="idx.html" CLASS="Element59">Index</A> | <A HREF="symref.html" CLASS="Element59">Reference</A></DIV>
+</TD></TR></TABLE><DIV CLASS="Element58">
+<DIV CLASS="Element5">
+TNTPGram</DIV>
+<DIV CLASS="Element7">
+<A HREF="015404.html" CLASS="Element59">See Also</A>, <A HREF="002822.html" CLASS="Element59">Unit: IdSNTP</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+NTP/SNTP Datagram message structure.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12">TNTPGram = <STRONG>packed</STRONG> <STRONG>record</STRONG>
+  Head1: byte;
+  Head2: byte;
+  Head3: byte;
+  Head4: byte;
+  RootDelay: longint;
+  RootDispersion: longint;
+  RefID: longint;
+  Ref1: longint;
+  Ref2: longint;
+  Org1: longint;
+  Org2: longint;
+  Rcv1: longint;
+  Rcv2: longint;
+  Xmit1: longint;
+  Xmit2: longint;
+  <STRONG>end</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Unit</DIV>
+<DIV CLASS="Element69">
+<A HREF="002822.html" CLASS="Element59">IdSNTP</A></DIV>
+<DIV CLASS="Element14">
+Members</DIV>
+<DIV CLASS="Element20">
+Head1: byte;</DIV>
+<DIV CLASS="Element22">
+<DIV CLASS="Element21">
+Head1 represents byte 1 of 4 bytes in the <A HREF="008005.html" CLASS="Element59">TNTPGram</A> header. Head1 is utilized to store the values of Leap Indicator, Version Number, and Mode fields according to the following diagram:<P CLASS="Element21">
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12">+---------------+---------------+---------------+---------------+
+|    Head1      |     Head2     |     Head3     |     Head4     |
++---------------+---------------+---------------+---------------+
+ 0 1 2 3 4 5 6 7
++-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+|LI | VN  |Mode |    Stratum    |     Poll      |   Precision   |
++-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+
+Bits  Field
+====  ==============
+0-1   Leap Indicator
+2-4   Version Number
+5-7   Mode
+</PRE></DIV>
+</DIV>
+<P CLASS="Element21">
+<STRONG>Leap Indicator</STRONG> (<STRONG>LI</STRONG>) - Two-bit code warning of an impending leap second to be inserted/deleted in the last minute of the current day, with bit 0 and bit 1, respectively, coded as follows:<P CLASS="Element21">
+<UL>
+<LI>0 - no warning<P CLASS="Element21">
+<LI>1 - last minute has 61 seconds<P CLASS="Element21">
+<LI>2 - last minute has 59 seconds)<P CLASS="Element21">
+<LI>3 - alarm condition (clock not synchronized)</UL>
+<P CLASS="Element21">
+<STRONG>Version Number</STRONG> (<STRONG>VN</STRONG>) - Three-bit integer indicating the NTP/SNTP version number. The version number is 3 for Version 3 (IPv4 only) and 4 for Version 4 (IPv4, IPv6 and OSI). If necessary to distinguish between IPv4, IPv6 and OSI, the encapsulating context must be inspected.<P CLASS="Element21">
+<STRONG>Mode</STRONG> - Three-bit integer indicating the mode, with values defined as follows:<P CLASS="Element21">
+<UL>
+<LI>0 - reserved<P CLASS="Element21">
+<LI>1 - symmetric active<P CLASS="Element21">
+<LI>2 - symmetric passive<P CLASS="Element21">
+<LI>3 - client<P CLASS="Element21">
+<LI>4 - server<P CLASS="Element21">
+<LI>5 - broadcast<P CLASS="Element21">
+<LI>6 - reserved for NTP control message<P CLASS="Element21">
+<LI>7 - reserved for private use</UL>
+<P CLASS="Element21">
+<STRONG>Note</STRONG>: In unicast and anycast modes, the client sets this field to 3 (client) in the request and the server sets it to 4 (server) in the reply. In multicast mode, the server sets this field to 5 (broadcast).</DIV>
+</DIV>
+<DIV CLASS="Element20">
+Head2: byte;</DIV>
+<DIV CLASS="Element22">
+<DIV CLASS="Element21">
+Head2 represents byte 2 of 4 bytes in the <A HREF="008005.html" CLASS="Element59">TNTPGram</A> header. Head2 is utilized to store the values of Stratum, as indicated in the following diagram:<P CLASS="Element21">
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12">+---------------+---------------+---------------+---------------+
+|    Head1      |     Head2     |     Head3     |     Head4     |
++---------------+---------------+---------------+---------------+
+                 0 1 2 3 4 5 6 7
++-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+|LI | VN  |Mode |    Stratum    |     Poll      |   Precision   |
++-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+
+Bits  Field
+====  ==============
+0-7   Stratum
+</PRE></DIV>
+</DIV>
+<P CLASS="Element21">
+<STRONG>Stratum</STRONG> - Eight-bit unsigned integer indicating the stratum level of the local clock, with values defined as follows:<P CLASS="Element21">
+<UL>
+<LI>0 unspecified or unavailable<P CLASS="Element21">
+<LI>1 primary reference (e.g., radio clock)<P CLASS="Element21">
+<LI>2-15 secondary reference (via NTP or SNTP)<P CLASS="Element21">
+<LI>16-255 reserved</UL>
+</DIV>
+</DIV>
+<DIV CLASS="Element20">
+Head3: byte;</DIV>
+<DIV CLASS="Element22">
+<DIV CLASS="Element21">
+Head3 represents byte 3 of 4 bytes in the <A HREF="008005.html" CLASS="Element59">TNTPGram</A> header. Head3 is utilized to store the values of Poll, as indicated in the following diagram:<P CLASS="Element21">
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12">+---------------+---------------+---------------+---------------+
+|    Head1      |     Head2     |     Head3     |     Head4     |
++---------------+---------------+---------------+---------------+
+                                 0 1 2 3 4 5 6 7
++-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+|LI | VN  |Mode |    Stratum    |     Poll      |   Precision   |
++-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+
+Bits  Field
+====  =====
+0-7   Poll
+</PRE></DIV>
+</DIV>
+<P CLASS="Element21">
+<STRONG>Poll Interval</STRONG> - Eight-bit signed integer indicating the maximum interval between successive messages, in seconds to the nearest power of two. The values that can appear in this field presently range from 4 (16 s) to 14 (16284 s); however, most applications use only the sub-range 6 (64 s) to 10 (1024 s).</DIV>
+</DIV>
+<DIV CLASS="Element20">
+Head4: byte;</DIV>
+<DIV CLASS="Element22">
+<DIV CLASS="Element21">
+Head4 represents byte 4 of 4 bytes in the <A HREF="008005.html" CLASS="Element59">TNTPGram</A> header. Head4 is utilized to store the values of Precision, as indicated in the following diagram:<P CLASS="Element21">
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12">+---------------+---------------+---------------+---------------+
+|    Head1      |     Head2     |     Head3     |     Head4     |
++---------------+---------------+---------------+---------------+
+                                                 0 1 2 3 4 5 6 7
++-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+|LI | VN  |Mode |    Stratum    |     Poll      |   Precision   |
++-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+
+Bits  Field
+====  =========
+0-7   Precision
+</PRE></DIV>
+</DIV>
+<P CLASS="Element21">
+<STRONG>Precision</STRONG> - Eight-bit signed integer indicating the precision of the local clock, in seconds to the nearest power of two. The values that normally appear in this field range from -6 for mains-frequency clocks to -20 for microsecond clocks found in some workstations.</DIV>
+</DIV>
+<DIV CLASS="Element20">
+RootDelay: longint;</DIV>
+<DIV CLASS="Element22">
+<DIV CLASS="Element21">
+RootDelay is the <STRONG>LongInt</STRONG> value in <A HREF="008005.html" CLASS="Element59">TNTPGram</A> indicating the total roundtrip delay to the primary reference source, in seconds. RootDelay stores fractional seconds after bit 15, as seen in the following diagram:<P CLASS="Element21">
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12">+---------------------------------------------------------------+
+|                          Root Delay                           |
++---------------------------------------------------------------+
+|                    1                   2                   3  |
+|0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1|
++-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+|          Seconds              |       Fractional Seconds      |
++-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+</PRE></DIV>
+</DIV>
+<P CLASS="Element21">
+<STRONG>Note</STRONG>: RootDelay can have both positive and negative values, depending on the relative time and frequency offsets. The values that normally appear in this field range from negative values of a few milliseconds to positive values of several hundred milliseconds.</DIV>
+</DIV>
+<DIV CLASS="Element20">
+RootDispersion: longint;</DIV>
+<DIV CLASS="Element22">
+<DIV CLASS="Element21">
+RootDispersion is the <STRONG>LongInt</STRONG> value in <A HREF="008005.html" CLASS="Element59">TNTPGram</A> that indicates the nominal error relative to the primary reference source. RootDispersion stores fractional seconds after bit 15, as seen in the following diagram:<P CLASS="Element21">
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12">+---------------------------------------------------------------+
+|                       Root Dispersion                         |
++---------------------------------------------------------------+
+|                    1                   2                   3  |
+|0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1|
++-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+|          Seconds              |       Fractional Seconds      |
++-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+</PRE></DIV>
+</DIV>
+<P CLASS="Element21">
+RootDispersion is measured in seconds, and values normally range from 0 to several hundred milliseconds.</DIV>
+</DIV>
+<DIV CLASS="Element20">
+RefID: longint;</DIV>
+<DIV CLASS="Element22">
+<DIV CLASS="Element21">
+RefID is the <STRONG>LongInt</STRONG> value in <A HREF="008005.html" CLASS="Element59">TNTPGram</A> used to identify the particular reference source, as indicated in the following diagram:<P CLASS="Element21">
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12">+---------------------------------------------------------------+
+|                     Reference Identifier                      |
++---------------------------------------------------------------+
+|                    1                   2                   3  |
+|0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1|
++-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+|                     Reference Identifier                      |
++-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+</PRE></DIV>
+</DIV>
+<P CLASS="Element21">
+In the case of NTP Version 3 or Version 4 stratum-0 (unspecified) or stratum-1 (primary) servers, this is a four-character ASCII string, left justified and zero padded to 32 bits.<P CLASS="Element21">
+In NTP Version 3 secondary servers, this is the 32-bit IPv4 address of the reference source. In NTP Version 4 secondary servers, this is the low order 32 bits of the latest transmit timestamp of the reference source.<P CLASS="Element21">
+In the case of NTP primary (stratum 1) servers, this field is a code identifying the external reference source according to the following list:<P CLASS="Element21">
+<UL>
+<LI>LOCL - uncalibrated local clock used as a primary reference for a subnet without external means of synchronization<P CLASS="Element21">
+<LI>PPS - atomic clock or other pulse-per-second source individually calibrated to national standards<P CLASS="Element21">
+<LI>ACTS - NIST dialup modem service<P CLASS="Element21">
+<LI>USNO - USNO modem service<P CLASS="Element21">
+<LI>PTB - PTB (Germany) modem service<P CLASS="Element21">
+<LI>TDF - Allouis (France) Radio 164 kHz<P CLASS="Element21">
+<LI>DCF - Mainflingen (Germany) Radio 77.5 kHz<P CLASS="Element21">
+<LI>MSF - Rugby (UK) Radio 60 kHz<P CLASS="Element21">
+<LI>WWV - Ft. Collins (US) Radio 2.5, 5, 10, 15, 20 MHz<P CLASS="Element21">
+<LI>WWVB - Boulder (US) Radio 60 kHz<P CLASS="Element21">
+<LI>WWVH - Kaui Hawaii (US) Radio 2.5, 5, 10, 15 MHz<P CLASS="Element21">
+<LI>CHU - Ottawa (Canada) Radio 3330, 7335, 14670 kHz<P CLASS="Element21">
+<LI>LORC - LORAN-C radionavigation system<P CLASS="Element21">
+<LI>OMEG - OMEGA radionavigation system<P CLASS="Element21">
+<LI>GPS - Global Positioning Service<P CLASS="Element21">
+<LI>GOES - Geostationary Orbit Environment Satellite</UL>
+<P CLASS="Element21">
+If the external reference is one of those listed, the associated code should be used. Codes for sources not listed can be contrived as appropriate.</DIV>
+</DIV>
+<DIV CLASS="Element20">
+Ref1: longint;</DIV>
+<DIV CLASS="Element22">
+<DIV CLASS="Element21">
+Ref1 is used to store the <STRONG>LongInt</STRONG> value representing the date portion of the Reference Timestamp, as indicated in the following diagram:<P CLASS="Element21">
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12">+---------------+---------------+---------------+---------------+
+|            Ref1               |              Ref2             |
++-------------------------------+-------------------------------+
+|                    1                   2                   3  |
+|0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1|
++-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+|                   Reference Timestamp (64)                    |
++-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+
+Bits  Field
+====  ==============
+0-15  Ref1
+16-31 Ref2
+</PRE></DIV>
+</DIV>
+<P CLASS="Element21">
+If the server is unsynchronized, all timestamp fields are set to zero. If synchronized, the Reference Timestamp is set to the time the last update was received from the radio clock or modem.<P CLASS="Element21">
+There is some latitude on the part of most clients to forgive invalid timestamps, such as might occur when first coming up or during periods when the primary reference source is inoperative. The most important indicator of an unhealthy server is the LI field in Head1, in which a value of 3 indicates an unsynchronized condition. When this value is displayed, clients should discard the server message, regardless of the contents of other fields.</DIV>
+</DIV>
+<DIV CLASS="Element20">
+Ref2: longint;</DIV>
+<DIV CLASS="Element22">
+<DIV CLASS="Element21">
+Ref2 is used to store the <STRONG>LongInt</STRONG> value representing the time portion of the Reference Timestamp, as indicated in the following diagram:<P CLASS="Element21">
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12">+---------------+---------------+---------------+---------------+
+|            Ref1               |              Ref2             |
++-------------------------------+-------------------------------+
+|                    1                   2                   3  |
+|0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1|
++-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+|                   Reference Timestamp (64)                    |
++-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+
+Bits  Field
+====  ==============
+0-15  Ref1
+16-31 Ref2
+</PRE></DIV>
+</DIV>
+<P CLASS="Element21">
+If the server is unsynchronized, all timestamp fields are set to zero. If synchronized, the Reference Timestamp is set to the time the last update was received from the radio clock or modem.<P CLASS="Element21">
+There is some latitude on the part of most clients to forgive invalid timestamps, such as might occur when first coming up or during periods when the primary reference source is inoperative. The most important indicator of an unhealthy server is the LI field in Head1, in which a value of 3 indicates an unsynchronized condition. When this value is displayed, clients should discard the server message, regardless of the contents of other fields.</DIV>
+</DIV>
+<DIV CLASS="Element20">
+Org1: longint;</DIV>
+<DIV CLASS="Element22">
+<DIV CLASS="Element21">
+Org1 is used to store the <STRONG>LongInt</STRONG> value representing the date portion of the Originate Timestamp, as indicated in the following diagram:<P CLASS="Element21">
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12">+---------------+---------------+---------------+---------------+
+|            Org1               |              Org2             |
++-------------------------------+-------------------------------+
+|                    1                   2                   3  |
+|0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1|
++-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+|                   Originate Timestamp (64)                    |
++-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+
+Bits  Field
+====  ==============
+0-15  Org1
+16-31 Org2
+</PRE></DIV>
+</DIV>
+<P CLASS="Element21">
+If the server is unsynchronized, all timestamp fields are set to zero.<P CLASS="Element21">
+There is some latitude on the part of most clients to forgive invalid timestamps, such as might occur when first coming up or during periods when the primary reference source is inoperative. The most important indicator of an unhealthy server is the LI field in Head1, in which a value of 3 indicates an unsynchronized condition. When this value is displayed, clients should discard the server message, regardless of the contents of other fields.</DIV>
+</DIV>
+<DIV CLASS="Element20">
+Org2: longint;</DIV>
+<DIV CLASS="Element22">
+<DIV CLASS="Element21">
+Org2 is used to store the <STRONG>LongInt</STRONG> value representing the time portion of the Originate Timestamp, as indicated in the following diagram:<P CLASS="Element21">
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12">+---------------+---------------+---------------+---------------+
+|            Org1               |              Org2             |
++-------------------------------+-------------------------------+
+|                    1                   2                   3  |
+|0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1|
++-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+|                   Originate Timestamp (64)                    |
++-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+
+Bits  Field
+====  ==============
+0-15  Org1
+16-31 Org2
+</PRE></DIV>
+</DIV>
+<P CLASS="Element21">
+If the server is unsynchronized, all timestamp fields are set to zero.<P CLASS="Element21">
+There is some latitude on the part of most clients to forgive invalid timestamps, such as might occur when first coming up or during periods when the primary reference source is inoperative. The most important indicator of an unhealthy server is the LI field in Head1, in which a value of 3 indicates an unsynchronized condition. When this value is displayed, clients should discard the server message, regardless of the contents of other fields.</DIV>
+</DIV>
+<DIV CLASS="Element20">
+Rcv1: longint;</DIV>
+<DIV CLASS="Element22">
+<DIV CLASS="Element21">
+Rcv1 is used to store the <STRONG>LongInt</STRONG> value representing the date portion of the Receive Timestamp, as indicated in the following diagram:<P CLASS="Element21">
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12">+---------------+---------------+---------------+---------------+
+|            Rcv1               |              Rcv2             |
++-------------------------------+-------------------------------+
+|                    1                   2                   3  |
+|0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1|
++-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+|                    Receive Timestamp (64)                     |
++-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+
+Bits  Field
+====  ==============
+0-15  Rcv1
+16-31 Rcv2
+</PRE></DIV>
+</DIV>
+<P CLASS="Element21">
+If the server is unsynchronized, all timestamp fields are set to zero. If synchronized, the Reference Timestamp is set to the time the last update was received from the radio clock or modem.<P CLASS="Element21">
+In unicast and anycast modes, the Receive Timestamp and Transmit Timestamp fields are set to the time of day when the message is sent and the Originate Timestamp field is copied unchanged from the Transmit Timestamp field of the request. It is important that this field be copied intact, as a NTP client uses it to avoid replays. In multicast mode, the Originate Timestamp and Receive Timestamp fields are set to 0 and the Transmit Timestamp field is set to the time of day when the message is sent.<P CLASS="Element21">
+There is some latitude on the part of most clients to forgive invalid timestamps, such as might occur when first coming up or during periods when the primary reference source is inoperative. The most important indicator of an unhealthy server is the LI field in Head1, in which a value of 3 indicates an unsynchronized condition. When this value is displayed, clients should discard the server message, regardless of the contents of other fields.</DIV>
+</DIV>
+<DIV CLASS="Element20">
+Rcv2: longint;</DIV>
+<DIV CLASS="Element22">
+<DIV CLASS="Element21">
+Rcv2 is used to store the <STRONG>LongInt</STRONG> value representing the time portion of the Receive Timestamp, as indicated in the following diagram:<P CLASS="Element21">
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12">+---------------+---------------+---------------+---------------+
+|            Rcv1               |              Rcv2             |
++-------------------------------+-------------------------------+
+|                    1                   2                   3  |
+|0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1|
++-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+|                    Receive Timestamp (64)                     |
++-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+
+Bits  Field
+====  ==============
+0-15  Rcv1
+16-31 Rcv2
+</PRE></DIV>
+</DIV>
+<P CLASS="Element21">
+If the server is unsynchronized, all timestamp fields are set to zero. If synchronized, the Reference Timestamp is set to the time the last update was received from the radio clock or modem.<P CLASS="Element21">
+In unicast and anycast modes, the Receive Timestamp and Transmit Timestamp fields are set to the time of day when the message is sent and the Originate Timestamp field is copied unchanged from the Transmit Timestamp field of the request. It is important that this field be copied intact, as a NTP client uses it to avoid replays. In multicast mode, the Originate Timestamp and Receive Timestamp fields are set to 0 and the Transmit Timestamp field is set to the time of day when the message is sent.<P CLASS="Element21">
+There is some latitude on the part of most clients to forgive invalid timestamps, such as might occur when first coming up or during periods when the primary reference source is inoperative. The most important indicator of an unhealthy server is the LI field in Head1, in which a value of 3 indicates an unsynchronized condition. When this value is displayed, clients should discard the server message, regardless of the contents of other fields.</DIV>
+</DIV>
+<DIV CLASS="Element20">
+Xmit1: longint;</DIV>
+<DIV CLASS="Element22">
+<DIV CLASS="Element21">
+Xmit1 is used to store the <STRONG>LongInt</STRONG> value representing the date portion of the Transmit Timestamp, as indicated in the following diagram:<P CLASS="Element21">
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12">+---------------+---------------+---------------+---------------+
+|            Xmit1              |              Xmit2            |
++-------------------------------+-------------------------------+
+|                    1                   2                   3  |
+|0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1|
++-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+|                    Transmit Timestamp (64)                    |
++-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+
+Bits  Field
+====  ==============
+0-15  Xmit1
+16-31 Xmit2
+</PRE></DIV>
+</DIV>
+<P CLASS="Element21">
+If the server is unsynchronized, all timestamp fields are set to zero. If synchronized, the Reference Timestamp is set to the time the last update was received from the radio clock or modem.<P CLASS="Element21">
+In unicast and anycast modes, the Receive Timestamp and Transmit Timestamp fields are set to the time of day when the message is sent and the Originate Timestamp field is copied unchanged from the Transmit Timestamp field of the request. It is important that this field be copied intact, as a NTP client uses it to avoid replays. In multicast mode, the Originate Timestamp and Receive Timestamp fields are set to 0 and the Transmit Timestamp field is set to the time of day when the message is sent.<P CLASS="Element21">
+There is some latitude on the part of most clients to forgive invalid timestamps, such as might occur when first coming up or during periods when the primary reference source is inoperative. The most important indicator of an unhealthy server is the LI field in Head1, in which a value of 3 indicates an unsynchronized condition. When this value is displayed, clients should discard the server message, regardless of the contents of other fields.</DIV>
+</DIV>
+<DIV CLASS="Element20">
+Xmit2: longint;</DIV>
+<DIV CLASS="Element22">
+<DIV CLASS="Element21">
+Xmit2 is used to store the <STRONG>LongInt</STRONG> value representing the time portion of the Transmit Timestamp, as indicated in the following diagram:<P CLASS="Element21">
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12">+---------------+---------------+---------------+---------------+
+|            Xmit1              |              Xmit2            |
++-------------------------------+-------------------------------+
+|                    1                   2                   3  |
+|0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1|
++-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+|                    Transmit Timestamp (64)                    |
++-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+
+Bits  Field
+====  ==============
+0-15  Xmit1
+16-31 Xmit2
+</PRE></DIV>
+</DIV>
+<P CLASS="Element21">
+If the server is unsynchronized, all timestamp fields are set to zero. If synchronized, the Reference Timestamp is set to the time the last update was received from the radio clock or modem.<P CLASS="Element21">
+In unicast and anycast modes, the Receive Timestamp and Transmit Timestamp fields are set to the time of day when the message is sent and the Originate Timestamp field is copied unchanged from the Transmit Timestamp field of the request. It is important that this field be copied intact, as a NTP client uses it to avoid replays. In multicast mode, the Originate Timestamp and Receive Timestamp fields are set to 0 and the Transmit Timestamp field is set to the time of day when the message is sent.<P CLASS="Element21">
+There is some latitude on the part of most clients to forgive invalid timestamps, such as might occur when first coming up or during periods when the primary reference source is inoperative. The most important indicator of an unhealthy server is the LI field in Head1, in which a value of 3 indicates an unsynchronized condition. When this value is displayed, clients should discard the server message, regardless of the contents of other fields.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+TNTPGram is the packed record structure used by <A HREF="007712.html" CLASS="Element59">TIdSNTP</A> for processing SNTP requests and responses. TNTPGram is the data transmitted in UDP packets, and represents the NTP/SNTP Datagram message format as described in the Internet standards document:<P CLASS="Element10">
+<UL>
+<LI>RFC 2030 - Simple Network Time Protocol (SNTP) Version 4 for IPv4, IPv6 and OSI (http://www.rfc-editor.org/rfc/rfc2030.txt)</UL>
+<P CLASS="Element10">
+SNTP Version 4 includes certain optional extensions to the basic Version 3 model. TNTPGram does not implement the optional extensions for either Key Identifier or Message Digest portions of the NTP/SNTP message format.<DIV CLASS="Element15">
+Head1 - Leap Indicator, Version Number, and Mode</DIV>
+<P CLASS="Element10">
+Head1 represents byte 1 of 4 bytes in the TNTPGram header. Head1 is utilized to store the values of Leap Indicator, Version Number, and Mode fields according to the following diagram:<P CLASS="Element10">
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12">    +---------------+---------------+---------------+---------------+
+    |    Head1      |     Head2     |     Head3     |     Head4     |
+    +---------------+---------------+---------------+---------------+
+    0 1 2 3 4 5 6 7
+    +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+    |LI | VN  |Mode |    Stratum    |     Poll      |   Precision   |
+    +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+
+    Bits  Field
+    ====  ==============
+    0-1   Leap Indicator
+    2-4   Version Number
+    5-7   Mode
+</PRE></DIV>
+</DIV>
+ <STRONG>Leap Indicator (LI)</STRONG> - Two-bit code warning of an impending leap second to be inserted/deleted in the last minute of the current day, with bit 0 and bit 1, respectively, coded as follows:<P CLASS="Element10">
+<UL>
+<LI>0 - no warning<P CLASS="Element10">
+<LI>1 - last minute has 61 seconds<P CLASS="Element10">
+<LI>2 - last minute has 59 seconds)<P CLASS="Element10">
+<LI>3 - alarm condition (clock not synchronized)</UL>
+<P CLASS="Element10">
+<STRONG>Version Number (VN)</STRONG> - Three-bit integer indicating the NTP/SNTP version number. The version number is 3 for Version 3 (IPv4 only) and 4 for Version 4 (IPv4, IPv6 and OSI). If necessary to distinguish between IPv4, IPv6 and OSI, the encapsulating context must be inspected.<P CLASS="Element10">
+<STRONG>Mode</STRONG> - Three-bit integer indicating the mode, with values defined as follows:<P CLASS="Element10">
+<UL>
+<LI>0 - reserved<P CLASS="Element10">
+<LI>1 - symmetric active<P CLASS="Element10">
+<LI>2 - symmetric passive<P CLASS="Element10">
+<LI>3 - client<P CLASS="Element10">
+<LI>4 - server<P CLASS="Element10">
+<LI>5 - broadcast<P CLASS="Element10">
+<LI>6 - reserved for NTP control message<P CLASS="Element10">
+<LI>7 - reserved for private use</UL>
+<P CLASS="Element10">
+<STRONG>Note</STRONG>: In unicast and anycast modes, the client sets this field to 3 (client) in the request and the server sets it to 4 (server) in the reply. In multicast mode, the server sets this field to 5 (broadcast).<DIV CLASS="Element15">
+Head2 - Statum level of the local clock</DIV>
+<P CLASS="Element10">
+Head2 represents byte 2 of 4 bytes in the TNTPGram header. Head2 is utilized to store the values of Stratum, as indicated in the following diagram:<P CLASS="Element10">
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12">    +---------------+---------------+---------------+---------------+
+    |    Head1      |     Head2     |     Head3     |     Head4     |
+    +---------------+---------------+---------------+---------------+
+    0 1 2 3 4 5 6 7
+    +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+    |LI | VN  |Mode |    Stratum    |     Poll      |   Precision   |
+    +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+
+    Bits  Field
+    ====  ==============
+    0-7   Stratum
+</PRE></DIV>
+</DIV>
+<P CLASS="Element10">
+<STRONG>Stratum</STRONG> - Eight-bit unsigned integer indicating the stratum level of the local clock, with values defined as follows:<P CLASS="Element10">
+<UL>
+<LI>0 unspecified or unavailable<P CLASS="Element10">
+<LI>1 primary reference (e.g., radio clock)<P CLASS="Element10">
+<LI>2-15 secondary reference (via NTP or SNTP)<P CLASS="Element10">
+<LI>16-255 reserved</UL>
+<DIV CLASS="Element15">
+Head3 - Polling Interval</DIV>
+<P CLASS="Element10">
+Head3 represents byte 3 of 4 bytes in the TNTPGram header. Head3 is utilized to store the values of Poll, as indicated in the following diagram:<P CLASS="Element10">
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12">    +---------------+---------------+---------------+---------------+
+    |    Head1      |     Head2     |     Head3     |     Head4     |
+    +---------------+---------------+---------------+---------------+
+    0 1 2 3 4 5 6 7
+    +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+    |LI | VN  |Mode |    Stratum    |     Poll      |   Precision   |
+    +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+
+    Bits  Field
+    ====  =====
+    0-7   Poll
+</PRE></DIV>
+</DIV>
+<P CLASS="Element10">
+<STRONG>Poll Interval</STRONG> - Eight-bit signed integer indicating the maximum interval between successive messages, in seconds to the nearest power of two. The values that can appear in this field presently range from 4 (16 s) to 14 (16284 s); however, most applications use only the sub-range 6 (64 s) to 10 (1024 s).<DIV CLASS="Element15">
+Head4 - Precision of the local clock</DIV>
+<P CLASS="Element10">
+Head4 represents byte 4 of 4 bytes in the TNTPGram header. Head4 is utilized to store the values of Precision, as indicated in the following diagram:<P CLASS="Element10">
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12">    +---------------+---------------+---------------+---------------+
+    |    Head1      |     Head2     |     Head3     |     Head4     |
+    +---------------+---------------+---------------+---------------+
+    0 1 2 3 4 5 6 7
+    +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+    |LI | VN  |Mode |    Stratum    |     Poll      |   Precision   |
+    +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+
+    Bits  Field
+    ====  =========
+    0-7   Precision
+</PRE></DIV>
+</DIV>
+<P CLASS="Element10">
+<STRONG>Precision</STRONG> - Eight-bit signed integer indicating the precision of the local clock, in seconds to the nearest power of two. The values that normally appear in this field range from -6 for mains-frequency clocks to -20 for microsecond clocks found in some workstations.<DIV CLASS="Element15">
+Org1 - Date portion of the Originate Timestamp.</DIV>
+<P CLASS="Element10">
+Org1 is used to store the <STRONG>LongInt</STRONG> value representing the date portion of the Originate Timestamp, as indicated in the following diagram:<P CLASS="Element10">
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12">    +---------------+---------------+---------------+---------------+
+    |            Org1               |              Org2             |
+    +-------------------------------+-------------------------------+
+    |                    1                   2                   3  |
+    |0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1|
+    +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+    |                   Originate Timestamp (64)                    |
+    +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+
+    Bits  Field
+    ====  ==============
+    0-15  Org1
+    16-31 Org2
+</PRE></DIV>
+</DIV>
+<P CLASS="Element10">
+If the server is unsynchronized, all timestamp fields are set to zero.<P CLASS="Element10">
+There is some latitude on the part of most clients to forgive invalid timestamps, such as might occur when first coming up or during periods when the primary reference source is inoperative. The most important indicator of an unhealthy server is the LI field in Head1, in which a value of 3 indicates an unsynchronized condition. When this value is displayed, clients should discard the server message, regardless of the contents of other fields.<DIV CLASS="Element15">
+Org2 - Time portion of the Originate Timestamp</DIV>
+<P CLASS="Element10">
+Org2 is used to store the <STRONG>LongInt</STRONG> value representing the time portion of the Originate Timestamp, as indicated in the following diagram:<P CLASS="Element10">
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12">    +---------------+---------------+---------------+---------------+
+    |            Org1               |              Org2             |
+    +-------------------------------+-------------------------------+
+    |                    1                   2                   3  |
+    |0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1|
+    +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+    |                   Originate Timestamp (64)                    |
+    +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+
+    Bits  Field
+    ====  ==============
+    0-15  Org1
+    16-31 Org2
+</PRE></DIV>
+</DIV>
+<P CLASS="Element10">
+If the server is unsynchronized, all timestamp fields are set to zero.<P CLASS="Element10">
+There is some latitude on the part of most clients to forgive invalid timestamps, such as might occur when first coming up or during periods when the primary reference source is inoperative. The most important indicator of an unhealthy server is the LI field in Head1, in which a value of 3 indicates an unsynchronized condition. When this value is displayed, clients should discard the server message, regardless of the contents of other fields.<DIV CLASS="Element15">
+Rcv1 - Date portion of the Receive Timestamp</DIV>
+<P CLASS="Element10">
+Rcv1 is used to store the <STRONG>LongInt</STRONG> value representing the date portion of the Receive Timestamp, as indicated in the following diagram:<P CLASS="Element10">
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12">    +---------------+---------------+---------------+---------------+
+    |            Rcv1               |              Rcv2             |
+    +-------------------------------+-------------------------------+
+    |                    1                   2                   3  |
+    |0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1|
+    +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+    |                    Receive Timestamp (64)                     |
+    +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+
+    Bits  Field
+    ====  ==============
+    0-15  Rcv1
+    16-31 Rcv2
+</PRE></DIV>
+</DIV>
+<P CLASS="Element10">
+If the server is unsynchronized, all timestamp fields are set to zero. If synchronized, the Reference Timestamp is set to the time the last update was received from the radio clock or modem.<P CLASS="Element10">
+In unicast and anycast modes, the Receive Timestamp and Transmit Timestamp fields are set to the time of day when the message is sent and the Originate Timestamp field is copied unchanged from the Transmit Timestamp field of the request. It is important that this field be copied intact, as a NTP client uses it to avoid replays. In multicast mode, the Originate Timestamp and Receive Timestamp fields are set to 0 and the Transmit Timestamp field is set to the time of day when the message is sent.<P CLASS="Element10">
+There is some latitude on the part of most clients to forgive invalid timestamps, such as might occur when first coming up or during periods when the primary reference source is inoperative. The most important indicator of an unhealthy server is the LI field in Head1, in which a value of 3 indicates an unsynchronized condition. When this value is displayed, clients should discard the server message, regardless of the contents of other fields.<DIV CLASS="Element15">
+Rcv2 - Time portion of the Receive Timestamp</DIV>
+<P CLASS="Element10">
+Rcv2 is used to store the <STRONG>LongInt</STRONG> value representing the time portion of the Receive Timestamp, as indicated in the following diagram:<P CLASS="Element10">
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12">    +---------------+---------------+---------------+---------------+
+    |            Rcv1               |              Rcv2             |
+    +-------------------------------+-------------------------------+
+    |                    1                   2                   3  |
+    |0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1|
+    +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+    |                    Receive Timestamp (64)                     |
+    +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+
+    Bits  Field
+    ====  ==============
+    0-15  Rcv1
+    16-31 Rcv2
+</PRE></DIV>
+</DIV>
+<P CLASS="Element10">
+If the server is unsynchronized, all timestamp fields are set to zero. If synchronized, the Reference Timestamp is set to the time the last update was received from the radio clock or modem.<P CLASS="Element10">
+In unicast and anycast modes, the Receive Timestamp and Transmit Timestamp fields are set to the time of day when the message is sent and the Originate Timestamp field is copied unchanged from the Transmit Timestamp field of the request. It is important that this field be copied intact, as a NTP client uses it to avoid replays. In multicast mode, the Originate Timestamp and Receive Timestamp fields are set to 0 and the Transmit Timestamp field is set to the time of day when the message is sent.<P CLASS="Element10">
+There is some latitude on the part of most clients to forgive invalid timestamps, such as might occur when first coming up or during periods when the primary reference source is inoperative. The most important indicator of an unhealthy server is the LI field in Head1, in which a value of 3 indicates an unsynchronized condition. When this value is displayed, clients should discard the server message, regardless of the contents of other fields.<DIV CLASS="Element15">
+Ref1 - Date portion of the Reference Timestamp</DIV>
+<P CLASS="Element10">
+Ref1 is used to store the <STRONG>LongInt</STRONG> value representing the date portion of the Reference Timestamp, as indicated in the following diagram:<P CLASS="Element10">
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12">    +---------------+---------------+---------------+---------------+
+    |            Ref1               |              Ref2             |
+    +-------------------------------+-------------------------------+
+    |                    1                   2                   3  |
+    |0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1|
+    +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+    |                   Reference Timestamp (64)                    |
+    +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+
+    Bits  Field
+    ====  ==============
+    0-15  Ref1
+    16-31 Ref2
+</PRE></DIV>
+</DIV>
+<P CLASS="Element10">
+If the server is unsynchronized, all timestamp fields are set to zero. If synchronized, the Reference Timestamp is set to the time the last update was received from the radio clock or modem.<P CLASS="Element10">
+There is some latitude on the part of most clients to forgive invalid timestamps, such as might occur when first coming up or during periods when the primary reference source is inoperative. The most important indicator of an unhealthy server is the LI field in Head1, in which a value of 3 indicates an unsynchronized condition. When this value is displayed, clients should discard the server message, regardless of the contents of other fields.<DIV CLASS="Element15">
+Ref2 - Time portion of the Reference Timestamp</DIV>
+<P CLASS="Element10">
+Ref2 is used to store the <STRONG>LongInt</STRONG> value representing the time portion of the Reference Timestamp, as indicated in the following diagram:<P CLASS="Element10">
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12">    +---------------+---------------+---------------+---------------+
+    |            Ref1               |              Ref2             |
+    +-------------------------------+-------------------------------+
+    |                    1                   2                   3  |
+    |0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1|
+    +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+    |                   Reference Timestamp (64)                    |
+    +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+
+    Bits  Field
+    ====  ==============
+    0-15  Ref1
+    16-31 Ref2
+</PRE></DIV>
+</DIV>
+<P CLASS="Element10">
+If the server is unsynchronized, all timestamp fields are set to zero. If synchronized, the Reference Timestamp is set to the time the last update was received from the radio clock or modem.<P CLASS="Element10">
+There is some latitude on the part of most clients to forgive invalid timestamps, such as might occur when first coming up or during periods when the primary reference source is inoperative. The most important indicator of an unhealthy server is the LI field in Head1, in which a value of 3 indicates an unsynchronized condition. When this value is displayed, clients should discard the server message, regardless of the contents of other fields.<DIV CLASS="Element15">
+RefID - Reference Identifier</DIV>
+<P CLASS="Element10">
+RefID is the <STRONG>LongInt</STRONG> value in TNTPGram used to identify the particular reference source, as indicated in the following diagram:<P CLASS="Element10">
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12">    +---------------------------------------------------------------+
+    |                     Reference Identifier                      |
+    +---------------------------------------------------------------+
+    |                    1                   2                   3  |
+    |0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1|
+    +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+    |                     Reference Identifier                      |
+    +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+</PRE></DIV>
+</DIV>
+<P CLASS="Element10">
+In the case of NTP Version 3 or Version 4 stratum-0 (unspecified) or stratum-1 (primary) servers, this is a four-character ASCII string, left justified and zero padded to 32 bits.<P CLASS="Element10">
+In NTP Version 3 secondary servers, this is the 32-bit IPv4 address of the reference source. In NTP Version 4 secondary servers, this is the low order 32 bits of the latest transmit timestamp of the reference source.<P CLASS="Element10">
+In the case of NTP primary (stratum 1) servers, this field is a code identifying the external reference source according to the following list:<P CLASS="Element10">
+<UL>
+<LI>LOCL - uncalibrated local clock used as a primary reference for a subnet without external means of synchronization<P CLASS="Element10">
+<LI>PPS - atomic clock or other pulse-per-second source individually calibrated to national standards<P CLASS="Element10">
+<LI>ACTS - NIST dialup modem service<P CLASS="Element10">
+<LI>USNO - USNO modem service<P CLASS="Element10">
+<LI>PTB - PTB (Germany) modem service<P CLASS="Element10">
+<LI>TDF - Allouis (France) Radio 164 kHz<P CLASS="Element10">
+<LI>DCF - Mainflingen (Germany) Radio 77.5 kHz<P CLASS="Element10">
+<LI>MSF - Rugby (UK) Radio 60 kHz<P CLASS="Element10">
+<LI>WWV - Ft. Collins (US) Radio 2.5, 5, 10, 15, 20 MHz<P CLASS="Element10">
+<LI>WWVB - Boulder (US) Radio 60 kHz<P CLASS="Element10">
+<LI>WWVH - Kaui Hawaii (US) Radio 2.5, 5, 10, 15 MHz<P CLASS="Element10">
+<LI>CHU - Ottawa (Canada) Radio 3330, 7335, 14670 kHz<P CLASS="Element10">
+<LI>LORC - LORAN-C radionavigation system<P CLASS="Element10">
+<LI>OMEG - OMEGA radionavigation system<P CLASS="Element10">
+<LI>GPS - Global Positioning Service<P CLASS="Element10">
+<LI>GOES - Geostationary Orbit Environment Satellite</UL>
+<P CLASS="Element10">
+If the external reference is one of those listed, the associated code should be used. Codes for sources not listed can be contrived as appropriate.<DIV CLASS="Element15">
+RootDelay - Total roundtrip delay to the time server.</DIV>
+<P CLASS="Element10">
+RootDelay is the <STRONG>LongInt</STRONG> value in TNTPGram indicating the total roundtrip delay to the primary reference source, in seconds. RootDelay stores fractional seconds after bit 15, as seen in the following diagram:<P CLASS="Element10">
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12">    +---------------------------------------------------------------+
+    |                          Root Delay                           |
+    +---------------------------------------------------------------+
+    |                    1                   2                   3  |
+    |0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1|
+    +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+    |          Seconds              |       Fractional Seconds      |
+    +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+</PRE></DIV>
+</DIV>
+<P CLASS="Element10">
+<STRONG>Note</STRONG>: RootDelay can have both positive and negative values, depending on the relative time and frequency offsets. The values that normally appear in this field range from negative values of a few milliseconds to positive values of several hundred milliseconds.<DIV CLASS="Element15">
+RootDispersion - Nominal error for the time server</DIV>
+<P CLASS="Element10">
+RootDispersion is the <STRONG>LongInt</STRONG> value in TNTPGram that indicates the nominal error relative to the primary reference source. RootDispersion stores fractional seconds after bit 15, as seen in the following diagram:<P CLASS="Element10">
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12">    +---------------------------------------------------------------+
+    |                       Root Dispersion                         |
+    +---------------------------------------------------------------+
+    |                    1                   2                   3  |
+    |0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1|
+    +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+    |          Seconds              |       Fractional Seconds      |
+    +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+</PRE></DIV>
+</DIV>
+<P CLASS="Element10">
+RootDispersion is measured in seconds, and values normally range from 0 to several hundred milliseconds.<DIV CLASS="Element15">
+Xmit1 - Date portion of the Transmit Timestamp</DIV>
+<P CLASS="Element10">
+Xmit1 is used to store the <STRONG>LongInt</STRONG> value representing the date portion of the Transmit Timestamp, as indicated in the following diagram:<P CLASS="Element10">
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12">    +---------------+---------------+---------------+---------------+
+    |            Xmit1              |              Xmit2            |
+    +-------------------------------+-------------------------------+
+    |                    1                   2                   3  |
+    |0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1|
+    +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+    |                    Transmit Timestamp (64)                    |
+    +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+
+    Bits  Field
+    ====  ==============
+    0-15  Xmit1
+    16-31 Xmit2
+</PRE></DIV>
+</DIV>
+<P CLASS="Element10">
+If the server is unsynchronized, all timestamp fields are set to zero. If synchronized, the Reference Timestamp is set to the time the last update was received from the radio clock or modem.<P CLASS="Element10">
+In unicast and anycast modes, the Receive Timestamp and Transmit Timestamp fields are set to the time of day when the message is sent and the Originate Timestamp field is copied unchanged from the Transmit Timestamp field of the request. It is important that this field be copied intact, as a NTP client uses it to avoid replays. In multicast mode, the Originate Timestamp and Receive Timestamp fields are set to 0 and the Transmit Timestamp field is set to the time of day when the message is sent.<P CLASS="Element10">
+There is some latitude on the part of most clients to forgive invalid timestamps, such as might occur when first coming up or during periods when the primary reference source is inoperative. The most important indicator of an unhealthy server is the LI field in Head1, in which a value of 3 indicates an unsynchronized condition. When this value is displayed, clients should discard the server message, regardless of the contents of other fields.<DIV CLASS="Element15">
+Xmit2- Time portion of the Transmit Timestamp.</DIV>
+<P CLASS="Element10">
+Xmit2 is used to store the <STRONG>LongInt</STRONG> value representing the time portion of the Transmit Timestamp, as indicated in the following diagram:<P CLASS="Element10">
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12">    +---------------+---------------+---------------+---------------+
+    |            Xmit1              |              Xmit2            |
+    +-------------------------------+-------------------------------+
+    |                    1                   2                   3  |
+    |0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1|
+    +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+    |                    Transmit Timestamp (64)                    |
+    +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+
+    Bits  Field
+    ====  ==============
+    0-15  Xmit1
+    16-31 Xmit2
+</PRE></DIV>
+</DIV>
+<P CLASS="Element10">
+If the server is unsynchronized, all timestamp fields are set to zero. If synchronized, the Reference Timestamp is set to the time the last update was received from the radio clock or modem.<P CLASS="Element10">
+In unicast and anycast modes, the Receive Timestamp and Transmit Timestamp fields are set to the time of day when the message is sent and the Originate Timestamp field is copied unchanged from the Transmit Timestamp field of the request. It is important that this field be copied intact, as a NTP client uses it to avoid replays. In multicast mode, the Originate Timestamp and Receive Timestamp fields are set to 0 and the Transmit Timestamp field is set to the time of day when the message is sent.<P CLASS="Element10">
+There is some latitude on the part of most clients to forgive invalid timestamps, such as might occur when first coming up or during periods when the primary reference source is inoperative. The most important indicator of an unhealthy server is the LI field in Head1, in which a value of 3 indicates an unsynchronized condition. When this value is displayed, clients should discard the server message, regardless of the contents of other fields.</DIV>
+</DIV>
+<DIV CLASS="Element62">
+<HR>Created with Doc-O-Matic 2 donated to <STRONG><A HREF="http://www.delphi-jedi.org">Project JEDI</A></STRONG>. Commercial license available from the <STRONG><A HREF="http://www.doc-o-matic.com">Doc-O-Matic site</A></STRONG>.</DIV>
+</DIV></BODY></HTML>

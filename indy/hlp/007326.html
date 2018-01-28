@@ -1,0 +1,170 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+<TITLE>TIdFormDataField</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <META name="GENERATOR" content="Doc-O-Matic">
+    <LINK rel="STYLESHEET" href="default.css" type="text/css">
+
+<SCRIPT LANGUAGE="JavaScript1.2" SRC="scripts.js"></SCRIPT>
+</HEAD>
+<BODY CLASS="Element57">
+<TABLE BORDER="0" BGCOLOR="#AACCFF" WIDTH="100%" CELLSPACING="0" CELLPADDING="0">
+<TR><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element1">
+Indy 9</DIV>
+</TD><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element2">
+<A HREF="content.html" CLASS="Element59">Content</A> | <A HREF="idx.html" CLASS="Element59">Index</A> | <A HREF="symref.html" CLASS="Element59">Reference</A></DIV>
+</TD></TR></TABLE><DIV CLASS="Element58">
+<DIV CLASS="Element5">
+TIdFormDataField</DIV>
+<DIV CLASS="Element7">
+<A HREF="011010.html" CLASS="Element59">Hierarchy</A>, <A HREF="011011.html" CLASS="Element59">Properties</A>, <A HREF="011012.html" CLASS="Element59">Methods</A>, <A HREF="002303.html" CLASS="Element59">Unit: IdMultipartFormData</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Represents form data fields in a multipart form data stream.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12">TIdFormDataField = <STRONG>class</STRONG>(TCollectionItem)</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Unit</DIV>
+<DIV CLASS="Element69">
+<A HREF="002303.html" CLASS="Element59">IdMultipartFormData</A></DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+TIdFormDataField is a TCollectionItem descendant that represents a form data field added to a <A HREF="007327.html" CLASS="Element59">TIdFormDataFields</A> collection. TIdFormDataField provides access to data fields defined on a multipart form and read from a <A HREF="007579.html" CLASS="Element59">TIdMultiPartFormDataStream</A> object instance. TIdFormDataField implements properties that allow access to the data field name and value, the file name and TStream for inputs that represent file types, and the size of the data field.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0000">TIdFormDataField.ContentType</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007326.html" CLASS="Element59">TIdFormDataField</A></DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> ContentType: <STRONG>string</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+ContentType</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0003">TIdFormDataField.FieldName</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007326.html" CLASS="Element59">TIdFormDataField</A></DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> FieldName: <STRONG>string</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+FieldName</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0004">TIdFormDataField.FieldObject</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007326.html" CLASS="Element59">TIdFormDataField</A></DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> FieldObject: TObject;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+FieldObject</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0005">TIdFormDataField.FieldSize</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007326.html" CLASS="Element59">TIdFormDataField</A></DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> FieldSize: LongInt;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+FieldSize</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0006">TIdFormDataField.FieldStream</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007326.html" CLASS="Element59">TIdFormDataField</A></DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> FieldStream: TStream;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+FieldStream</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0007">TIdFormDataField.FieldValue</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007326.html" CLASS="Element59">TIdFormDataField</A></DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> FieldValue: <STRONG>string</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+FieldValue</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0008">TIdFormDataField.FileName</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007326.html" CLASS="Element59">TIdFormDataField</A></DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> FileName: <STRONG>string</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+FileName</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0001">TIdFormDataField.Create</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007326.html" CLASS="Element59">TIdFormDataField</A></DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>constructor</STRONG> Create(Collection: TCollection); <STRONG>override</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Create</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0002">TIdFormDataField.Destroy</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007326.html" CLASS="Element59">TIdFormDataField</A></DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>destructor</STRONG> Destroy; <STRONG>override</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Destroy</DIV>
+</DIV>
+<DIV CLASS="Element62">
+<HR>Created with Doc-O-Matic 2 donated to <STRONG><A HREF="http://www.delphi-jedi.org">Project JEDI</A></STRONG>. Commercial license available from the <STRONG><A HREF="http://www.doc-o-matic.com">Doc-O-Matic site</A></STRONG>.</DIV>
+</DIV></BODY></HTML>

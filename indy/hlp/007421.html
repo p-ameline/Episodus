@@ -1,0 +1,316 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+<TITLE>TIdIOHandler</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <META name="GENERATOR" content="Doc-O-Matic">
+    <LINK rel="STYLESHEET" href="default.css" type="text/css">
+
+<SCRIPT LANGUAGE="JavaScript1.2" SRC="scripts.js"></SCRIPT>
+</HEAD>
+<BODY CLASS="Element57">
+<TABLE BORDER="0" BGCOLOR="#AACCFF" WIDTH="100%" CELLSPACING="0" CELLPADDING="0">
+<TR><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element1">
+Indy 9</DIV>
+</TD><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element2">
+<A HREF="content.html" CLASS="Element59">Content</A> | <A HREF="idx.html" CLASS="Element59">Index</A> | <A HREF="symref.html" CLASS="Element59">Reference</A></DIV>
+</TD></TR></TABLE><DIV CLASS="Element58">
+<DIV CLASS="Element5">
+TIdIOHandler</DIV>
+<DIV CLASS="Element7">
+<A HREF="011787.html" CLASS="Element59">Hierarchy</A>, <A HREF="011788.html" CLASS="Element59">Properties</A>, <A HREF="011789.html" CLASS="Element59">Methods</A>, <A HREF="011790.html" CLASS="Element59">Events</A>, <A HREF="011791.html" CLASS="Element59">See Also</A>, <A HREF="002262.html" CLASS="Element59">Unit: IdIOHandler</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Defines the framework for input and output using Indy components.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12">TIdIOHandler = <STRONG>class</STRONG>(<A HREF="007246.html" CLASS="Element59">TIdComponent</A>)</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Unit</DIV>
+<DIV CLASS="Element69">
+<A HREF="002262.html" CLASS="Element59">IdIOHandler</A></DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+TIdIOHandler is a <A HREF="007246.html" CLASS="Element59">TIdComponent</A> descendant that defines the framework used to perform input and output operations for Indy components. TIdIOHandler is an abstract ancestor classes. Applications should create an instance of a descendant class, like <A HREF="007426.html" CLASS="Element59">TIdIOHandlerSocket</A> or <A HREF="007427.html" CLASS="Element59">TIdIOHandlerStream</A>, that implement the abstract virtual methods of this ancestor class.<P CLASS="Element10">
+TIdIOHandler specifies the methods normally used create and <A HREF="000175.html" CLASS="Element59">bind</A> a client connection, determine when an IOHandler is ready to perform an IO operation, and perform the data transmission or receipt required for the component.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0000">TIdIOHandler.AfterAccept</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007421.html" CLASS="Element59">TIdIOHandler</A>, <A HREF="011792.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Specifies the method used to initialize an IOHandler after a new connection request.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>procedure</STRONG> AfterAccept; <STRONG>virtual</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+AfterAccept is a virtual procedure in <A HREF="007421.html" CLASS="Element59">TIdIOHandler</A> that specifies the mechanism used to initialize an IOHandler after a listener thread for has detected a client connection request. AfterAccept must be implemented in a descendant class, like <A HREF="007730.html" CLASS="Element59">TIdSSLIOHandlerSocket</A>, to allow any operation needed prior to calling Accept for the <A HREF="007071.html" CLASS="Element59">socket</A> binding in the newly detected client connection.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0001">TIdIOHandler.Close</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007421.html" CLASS="Element59">TIdIOHandler</A>, <A HREF="011793.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Closes the input/output source for the handler.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>procedure</STRONG> Close; <STRONG>virtual</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Close is a virtual procedure that performs the processing necessary to close an input/output source. Descendant classes must override this method to provide the specific functionality needed for the IOHandler, such as closing a <A HREF="007071.html" CLASS="Element59">socket</A> handle or stream.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0002">TIdIOHandler.ConnectClient</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007421.html" CLASS="Element59">TIdIOHandler</A>, <A HREF="011794.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Establisheds a remote connection for the input/output handler.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>procedure</STRONG> ConnectClient(<STRONG>const</STRONG> AHost: <STRONG>string</STRONG>; <STRONG>const</STRONG> APort: Integer; <STRONG>const</STRONG> ABoundIP: <STRONG>string</STRONG>; <STRONG>const</STRONG> ABoundPort: Integer; <STRONG>const</STRONG> ABoundPortMin: Integer; <STRONG>const</STRONG> ABoundPortMax: Integer; <STRONG>const</STRONG> ATimeout: Integer = <A HREF="002932.html" CLASS="Element59">IdTimeoutDefault</A>); <STRONG>virtual</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+const AHost: string</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Address of the remote system for the client connection.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+const APort: Integer</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Port number for the remote connection.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+const ABoundIP: string</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+IP Address bound to the local system.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+const ABoundPort: Integer</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Port number bound to the local computer.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+const ABoundPortMin: Integer</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Minimum bound port number for the local system.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+const ABoundPortMax: Integer</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Maximum bound port number for the local system.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+const ATimeout: Integer = IdTimeoutDefault</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Number of milliseconds to wait before a connection attempt fails. Default value is <A HREF="002932.html" CLASS="Element59">IdTimeoutDefault</A>.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+ConnectClient is a virtual procedure in <A HREF="007421.html" CLASS="Element59">TIdIOHandler</A> that specifies the mechanism that allows an input/output handler to prepare and establish a client connection to a remote computer system using the input parameters. ConnectClient must be implemented in a <A HREF="007421.html" CLASS="Element59">TIdIOHandler</A> decendant, like <A HREF="007426.html" CLASS="Element59">TIdIOHandlerSocket</A> or <A HREF="007730.html" CLASS="Element59">TIdSSLIOHandlerSocket</A>, that uses a physical connection to a remote system.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0003">TIdIOHandler.Connected</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007421.html" CLASS="Element59">TIdIOHandler</A>, <A HREF="011795.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Indicates if the IOHandler connection is prepared and opened.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>function</STRONG> Connected: Boolean; <STRONG>virtual</STRONG>; <STRONG>abstract</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Return Value</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Boolean - True when the IOHandler connection is prepared and opened.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Connected is an abstract virtual Boolean function in <A HREF="007421.html" CLASS="Element59">TIdIOHandler</A> that specifies the method to be used to determine when the physical connection for the IOHandler has been established. <A HREF="007421.html" CLASS="Element59">TIdIOHandler</A> descendant classes must implement Connected to indicate when the connection is available for input/output operations.<P CLASS="Element10">
+For Socket-based IOHandlers, like <A HREF="007426.html" CLASS="Element59">TIdIOHandlerSocket</A> and <A HREF="007730.html" CLASS="Element59">TIdSSLIOHandlerSocket</A>, Connected will indicate when the <A HREF="007071.html" CLASS="Element59">socket</A> handle in Binding has been allocated.<P CLASS="Element10">
+For Stream-based IOHandlers, like <A HREF="007427.html" CLASS="Element59">TIdIOHandlerStream</A>, Connected will indicate when the read and/or write stream has been assigned for the corresponding stream type.<P CLASS="Element10">
+Use <A HREF="007421.html#0005" CLASS="Element59">Open</A> to prepare the physical connection for the IOHandler, and ConnectCLient to establish the connection used by the IOHandler.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0004">TIdIOHandler.Destroy</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007421.html" CLASS="Element59">TIdIOHandler</A>, <A HREF="011796.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Destructor for the object instance.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>destructor</STRONG> Destroy; <STRONG>override</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Destroy is the Destructor for the object instance. Destroy calls the <A HREF="007421.html#0001" CLASS="Element59">Close</A> method prior to calling the inherited Destructor.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0005">TIdIOHandler.Open</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007421.html" CLASS="Element59">TIdIOHandler</A>, <A HREF="011797.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Prepares an input/output source for the handler.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>procedure</STRONG> Open; <STRONG>virtual</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Open is a virtual procedure that prepares an input/output source for the IOHandler. Open is used in descendant classes to prepare the <A HREF="007071.html" CLASS="Element59">socket</A> handle used for a connection to a remote computer system.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0006">TIdIOHandler.Readable</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007421.html" CLASS="Element59">TIdIOHandler</A>, <A HREF="011798.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Indicates when the input/output source is ready.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>function</STRONG> Readable(AMSec: Integer = <A HREF="002932.html" CLASS="Element59">IdTimeoutDefault</A>): Boolean; <STRONG>virtual</STRONG>; <STRONG>abstract</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+AMSec: Integer = IdTimeoutDefault</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Milliseconds to wait for an the input/output source to become available. Default value is <A HREF="002932.html" CLASS="Element59">IdTimeoutDefault</A>.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Return Value</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Boolean - True when the input/output source is ready.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Readable is an abstract virtual Boolean function that indicates when the input/output source for the IO handler is ready to perform the desired operation. Descendant classes must override this method to indicate when the underlying <A HREF="007071.html" CLASS="Element59">socket</A> handle or stream is available.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0007">TIdIOHandler.Recv</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007421.html" CLASS="Element59">TIdIOHandler</A>, <A HREF="011799.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Reads data from an input source.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>function</STRONG> Recv(<STRONG>var</STRONG> ABuf; ALen: Integer): Integer; <STRONG>virtual</STRONG>; <STRONG>abstract</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+var ABuf</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Destination buffer for values read from the input source.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+ALen: Integer</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Number of bytes to read from the input source.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Return Value</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Integer - Number of bytes read.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Recv is an abstract virtual Integer function that performs a read operation on an input source. Values read by the handler are stored in ABuf. ALen indicates the numbers of bytes expected in the read operation. The return value for the method is the actual number of bytes read from the input source.<P CLASS="Element10">
+Descendant classes must override this method to implement the specific functionality required to read data from the underlying <A HREF="007071.html" CLASS="Element59">socket</A> handle or stream.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0008">TIdIOHandler.Send</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007421.html" CLASS="Element59">TIdIOHandler</A>, <A HREF="011800.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Sends data to an output source.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>function</STRONG> Send(<STRONG>var</STRONG> ABuf; ALen: Integer): Integer; <STRONG>virtual</STRONG>; <STRONG>abstract</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+var ABuf</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Buffer containing values to be written.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+ALen: Integer</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Number of bytes to b written.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Return Value</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Integer - Number of bytes written.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Send is an abstract virtual Integer function that performs a write operation on an output destination. Values written by the handler are stored in ABuf. ALen indicates the numbers of bytes expected in the write operation. The return value for the method is the actual number of bytes written to the output destination.<P CLASS="Element10">
+Descendant classes must override this method to implement the specific functionality required to write data to the underlying <A HREF="007071.html" CLASS="Element59">socket</A> handle or stream.</DIV>
+</DIV>
+<DIV CLASS="Element62">
+<HR>Created with Doc-O-Matic 2 donated to <STRONG><A HREF="http://www.delphi-jedi.org">Project JEDI</A></STRONG>. Commercial license available from the <STRONG><A HREF="http://www.doc-o-matic.com">Doc-O-Matic site</A></STRONG>.</DIV>
+</DIV></BODY></HTML>

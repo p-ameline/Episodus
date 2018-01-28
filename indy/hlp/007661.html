@@ -1,0 +1,112 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+<TITLE>TIdRexecServer</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <META name="GENERATOR" content="Doc-O-Matic">
+    <LINK rel="STYLESHEET" href="default.css" type="text/css">
+
+<SCRIPT LANGUAGE="JavaScript1.2" SRC="scripts.js"></SCRIPT>
+</HEAD>
+<BODY CLASS="Element57">
+<TABLE BORDER="0" BGCOLOR="#AACCFF" WIDTH="100%" CELLSPACING="0" CELLPADDING="0">
+<TR><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element1">
+Indy 9</DIV>
+</TD><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element2">
+<A HREF="content.html" CLASS="Element59">Content</A> | <A HREF="idx.html" CLASS="Element59">Index</A> | <A HREF="symref.html" CLASS="Element59">Reference</A></DIV>
+</TD></TR></TABLE><DIV CLASS="Element58">
+<DIV CLASS="Element5">
+TIdRexecServer</DIV>
+<DIV CLASS="Element7">
+<A HREF="013351.html" CLASS="Element59">Hierarchy</A>, <A HREF="013352.html" CLASS="Element59">Properties</A>, <A HREF="013353.html" CLASS="Element59">Methods</A>, <A HREF="013354.html" CLASS="Element59">Events</A>, <A HREF="013355.html" CLASS="Element59">See Also</A>, <A HREF="002804.html" CLASS="Element59">Unit: IdRexecServer</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Implements a Remote Execution (REXEC) daemon.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12">TIdRexecServer = <STRONG>class</STRONG>(<A HREF="007650.html" CLASS="Element59">TIdRemoteCMDServer</A>)</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Unit</DIV>
+<DIV CLASS="Element69">
+<A HREF="002804.html" CLASS="Element59">IdRexecServer</A></DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+TIdRexecServer is a <A HREF="007650.html" CLASS="Element59">TIdRemoteCMDServer</A> decendant that implements a multi-threaded REXEC Daemon (Server) based on the Remote Execution (REXEC) defacto standard.<P CLASS="Element10">
+The REXEC protocol provides remote execution facilities for a command, using authentication based on username and password values. execution. The REXEC daemon performs automatic login, and user authentication when user name and password are provided.<P CLASS="Element10">
+TIdRexecServer implements event handlers that allow notification and execution of a command from a remote client. Client connections to TIdRexecServer may provide a port number to be used for redirect output from the standard error handler, or NULL to indicate that standard error redirection is not required.<P CLASS="Element10">
+A TIdRexecServer implementation may assign a procedure to the <A HREF="007661.html#0002" CLASS="Element59">OnCommand</A> event handler to <A HREF="007661.html#0002" CLASS="Element59">OnCommand</A> to control execution of the client thread.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0001">TIdRexecServer.DefaultPort</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007661.html" CLASS="Element59">TIdRexecServer</A>, <A HREF="013356.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+The port number used when listening for new client connections.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> DefaultPort: integer;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+DefaultPort is an Integer property that represent the default port number used to <A HREF="003177.html" CLASS="Element59">listen</A> for new client connections. The value of DefaultPort is provided for use with <A HREF="007714.html" CLASS="Element59">TIdSocketHandles</A>. <A HREF="007831.html" CLASS="Element59">TIdTCPServer</A> and descendant classes use the DefaultPort number to <A HREF="000175.html" CLASS="Element59">bind</A> allocated sockets handles when the Active property to set to True.<P CLASS="Element10">
+The default value for DefaultPort is <A HREF="001863.html" CLASS="Element59">Id_PORT_exec</A> as assigned in the <A HREF="007661.html#0000" CLASS="Element59">Create</A> method.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0000">TIdRexecServer.Create</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007661.html" CLASS="Element59">TIdRexecServer</A>, <A HREF="013357.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Constructor for the object instance.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>constructor</STRONG> Create(AOwner: TComponent); <STRONG>override</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+AOwner: TComponent</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Owner of the object instance.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Create is the constructor for the object instance, and relies on the inherited Create method to initialize the object instance. Create assigns the value <A HREF="001863.html" CLASS="Element59">Id_PORT_exec</A> to the <A HREF="007661.html#0001" CLASS="Element59">DefaultPort</A>, as is the accepted practice for the RExec protocol.<P CLASS="Element10">
+Create sets the value in ForcePortsInRange to False, since the RExec protocol does not require that port numbers for client connections reside in a specific range.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0002">TIdRexecServer.OnCommand</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007661.html" CLASS="Element59">TIdRexecServer</A>, <A HREF="013358.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Event handler for executing a command from a remote client connection.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> OnCommand: <A HREF="007660.html" CLASS="Element59">TIdRexecCommandEvent</A>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+OnCommand is a <A HREF="007660.html" CLASS="Element59">TIdRexecCommandEvent</A> property that represents the event handler signalled during execution of a threaqded client connetion to the RExec protocol server. OnCommand allows the server to perform authentication and execution of a command request from the remote client using arguments provide in the <A HREF="007660.html" CLASS="Element59">TIdRexecCommandEvent</A> event notification.<P CLASS="Element10">
+The <A HREF="007661.html" CLASS="Element59">TIdRexecServer</A> implementation must assign a procedure to the event handler to allow responding to the event notification.</DIV>
+</DIV>
+<DIV CLASS="Element62">
+<HR>Created with Doc-O-Matic 2 donated to <STRONG><A HREF="http://www.delphi-jedi.org">Project JEDI</A></STRONG>. Commercial license available from the <STRONG><A HREF="http://www.doc-o-matic.com">Doc-O-Matic site</A></STRONG>.</DIV>
+</DIV></BODY></HTML>

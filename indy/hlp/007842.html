@@ -1,0 +1,320 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+<TITLE>TIdTelnetServer</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <META name="GENERATOR" content="Doc-O-Matic">
+    <LINK rel="STYLESHEET" href="default.css" type="text/css">
+
+<SCRIPT LANGUAGE="JavaScript1.2" SRC="scripts.js"></SCRIPT>
+</HEAD>
+<BODY CLASS="Element57">
+<TABLE BORDER="0" BGCOLOR="#AACCFF" WIDTH="100%" CELLSPACING="0" CELLPADDING="0">
+<TR><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element1">
+Indy 9</DIV>
+</TD><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element2">
+<A HREF="content.html" CLASS="Element59">Content</A> | <A HREF="idx.html" CLASS="Element59">Index</A> | <A HREF="symref.html" CLASS="Element59">Reference</A></DIV>
+</TD></TR></TABLE><DIV CLASS="Element58">
+<DIV CLASS="Element5">
+TIdTelnetServer</DIV>
+<DIV CLASS="Element7">
+<A HREF="014282.html" CLASS="Element59">Hierarchy</A>, <A HREF="014283.html" CLASS="Element59">Properties</A>, <A HREF="014284.html" CLASS="Element59">Methods</A>, <A HREF="014285.html" CLASS="Element59">Events</A>, <A HREF="014286.html" CLASS="Element59">See Also</A>, <A HREF="002922.html" CLASS="Element59">Unit: IdTelnetServer</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Specifies a Telnet Protocol server architecture.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12">TIdTelnetServer = <STRONG>class</STRONG>(<A HREF="007831.html" CLASS="Element59">TIdTCPServer</A>)</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Unit</DIV>
+<DIV CLASS="Element69">
+<A HREF="002922.html" CLASS="Element59">IdTelnetServer</A></DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+TIdTelnetServer is sever implementation of the Telnet Protocol as described in the Internet Standards documents:<P CLASS="Element10">
+<UL>
+<LI>RFC 854 - TELNET Protocol Specification (http://www.rfc-editor.org/rfc/rfc854.txt)<P CLASS="Element10">
+<LI>RFC 855 - TELNET Option Specifications (http://www.rfc-editor.org/rfc/rfc855)<P CLASS="Element10">
+<LI>RFC 857 - TELNET Echo Option (http://www.rfc-editor.org/rfc/rfc857.txt)<P CLASS="Element10">
+<LI>RFC 858 - TELNET Suppress Go Ahead Option (http://www.rfc-editor.org/rfc/rfc858.txt)<P CLASS="Element10">
+<LI>RFC 859 - TELNET Status Option (http://www.rfc-editor.org/rfc/rfc859.txt)<P CLASS="Element10">
+<LI>RFC 860 - TELNET Timing Mark Option (http://www.rfc-editor.org/rfc/rfc860.txt)<P CLASS="Element10">
+<LI>RFC 861 - TELNET Extended Options: List Option (http://www.rfc-editor.org/rfc/rfc861.txt)<P CLASS="Element10">
+<LI>RFC 1700 - Assigned Numbers (http://www.rfc-editor.org/rfc/rfc1700.txt)</UL>
+<P CLASS="Element10">
+The TELNET Protocol provides a general communications facility to allow a standard method of interfacing terminal devices and terminal-oriented processes.<P CLASS="Element10">
+Telnet is used to <A HREF="000295.html" CLASS="Element59">connect</A> to a remote computer system and allow the client to act as a dumb terminal on that system.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0001">TIdTelnetServer.DefaultPort</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007842.html" CLASS="Element59">TIdTelnetServer</A>, <A HREF="014287.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Default port number for the server.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> DefaultPort: integer;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+DefaultPort is a published property in <A HREF="007842.html" CLASS="Element59">TIdTelnetServer</A> that identifies the default port number for the server, as described in the Telnet Protocol specification. DefaultPort is the value used in the Port number for listener threads created on the server.<P CLASS="Element10">
+The default value for DefaultPort is <A HREF="002721.html" CLASS="Element59">IdPORT_TELNET</A>, as assigned in the <A HREF="007842.html#0000" CLASS="Element59">Create</A> constructor.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0005">TIdTelnetServer.LoginAttempts</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007842.html" CLASS="Element59">TIdTelnetServer</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Number of failed logins permitted.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> LoginAttempts: Integer;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+LoginAttempts is an Integer property used to indicate the number of unsuccessful login attempts permitted for a connection before the connection is terminated.<P CLASS="Element10">
+LoginAttempts is used in <A HREF="007842.html#0003" CLASS="Element59">DoConnect</A> to determine the number maximum number of login attempts allowed in the method.<P CLASS="Element10">
+By default, a new connection is allowed 3 unsuccessful connection attempts before termination.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0006">TIdTelnetServer.LoginMessage</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007842.html" CLASS="Element59">TIdTelnetServer</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Represents the login message for a new connection.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> LoginMessage: <STRONG>String</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+LoginMessage is a String property used to inform the TELNET connection that the server is ready to <A HREF="000027.html" CLASS="Element59">accept</A> parameter values for Username and Password.<P CLASS="Element10">
+LoginMessage is written to the peer connection after option negotiation has been completed.<P CLASS="Element10">
+The default value for LoginMessage is the constant value <A HREF="006714.html" CLASS="Element59">RSTELNETSRVWelcomeString</A>, or &quot;Indy Telnet Server&quot;.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0000">TIdTelnetServer.Create</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007842.html" CLASS="Element59">TIdTelnetServer</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Constructor for the object instance.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>constructor</STRONG> Create(AOwner: TComponent); <STRONG>override</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+AOwner: TComponent</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Owner of the object instance.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Create is the constructor for the object instance, and relies on the inherited Create method to initialize the TELNET server.<P CLASS="Element10">
+Create also initializes properties for the server to their default values including:<P CLASS="Element10">
+<UL>
+<LI><A HREF="007842.html#0005" CLASS="Element59">LoginAttempts</A> - 3<P CLASS="Element10">
+<LI><A HREF="007842.html#0006" CLASS="Element59">LoginMessage</A> - Constant value <A HREF="006714.html" CLASS="Element59">RSTELNETSRVWelcomeString</A><P CLASS="Element10">
+<LI><A HREF="007842.html#0001" CLASS="Element59">DefaultPort</A> - 23 (Standard TELNET port number)</UL>
+</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0002">TIdTelnetServer.DoAuthenticate</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007842.html" CLASS="Element59">TIdTelnetServer</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Implements user authentication for a connection.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>function</STRONG> DoAuthenticate(AThread: <A HREF="007613.html" CLASS="Element59">TIdPeerThread</A>; <STRONG>const</STRONG> AUsername: <STRONG>string</STRONG>; <STRONG>const</STRONG> APassword: <STRONG>string</STRONG>): boolean; <STRONG>virtual</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+AThread: TIdPeerThread</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+The connection to authenticate.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+const AUsername: string</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+The authentication user name.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+const APassword: string</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+THe authentication password.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+DoAuthenticate is a Boolean function used to implement authentication for a TELNET connection.<P CLASS="Element10">
+DoAuthenticate requires a procedure assigned to the <A HREF="007842.html#0007" CLASS="Element59">OnAuthentication</A> event handler, or an exception will be raised.<P CLASS="Element10">
+DoAuthenticate triggers the <A HREF="007842.html#0007" CLASS="Element59">OnAuthentication</A> event using the specified parameters to perform authentication processing.<P CLASS="Element10">
+DoAuthenticate returns True when authentication is successful, or False when authentication has failed.<P CLASS="Element10">
+DoAuthenticate is called from <A HREF="007842.html#0003" CLASS="Element59">DoConnect</A> to perform authentication for a new TELNET connection.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0003">TIdTelnetServer.DoConnect</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007842.html" CLASS="Element59">TIdTelnetServer</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Opens a connection on the server for the peer.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>procedure</STRONG> DoConnect(AThread: <A HREF="007613.html" CLASS="Element59">TIdPeerThread</A>); <STRONG>override</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+AThread: TIdPeerThread</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+The peer thread with the connection to be opened.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+DoConnect is a procedure used to open a TELNET connection from a peer thread. DoConnect relies on the inherited DoConnect method to handle the basic TCP connection capabilities supported by the server.<P CLASS="Element10">
+DoConnect initializes the Data property to contain an instance of <A HREF="008096.html" CLASS="Element59">TTelnetData</A> for the connection.<P CLASS="Element10">
+DoConnect calls <A HREF="007842.html#0004" CLASS="Element59">DoNegotiate</A> to perform TELNET option negotiation for the connection.<P CLASS="Element10">
+DoConnect sends the <A HREF="007842.html#0006" CLASS="Element59">LoginMessage</A>, when present, to identify the server that is the endpoint for the connection.<P CLASS="Element10">
+When an <A HREF="007842.html#0007" CLASS="Element59">OnAuthentication</A> event handler has been assigned to the server property, DoConnect will read username and password from the peer connection and store the values in Data. DoAuthentication is called using the user name and password values. DoConnect will attempt to authenticate the connection until <A HREF="007842.html#0005" CLASS="Element59">LoginAttempts</A> is exceeded.<P CLASS="Element10">
+If an exception occurs in DoConnect, the exception message is written to the peer connection and the exception is discarded.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0004">TIdTelnetServer.DoNegotiate</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007842.html" CLASS="Element59">TIdTelnetServer</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Implements TELNET option negotiation.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>procedure</STRONG> DoNegotiate(AThread: <A HREF="007613.html" CLASS="Element59">TIdPeerThread</A>); <STRONG>virtual</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+AThread: TIdPeerThread</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+The peer thread to perform option negotiation.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+DoNegotiate is a procedure used to implement the <A HREF="007842.html#0008" CLASS="Element59">OnNegotiate</A> event handler for a peer connection.<P CLASS="Element10">
+DoNegotiate requires a procedure assigned to the <A HREF="007842.html#0008" CLASS="Element59">OnNegotiate</A> event handler to allow option negotiate to be performed for the connection.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0007">TIdTelnetServer.OnAuthentication</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007842.html" CLASS="Element59">TIdTelnetServer</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Specifies the event handler for connection authentication.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> OnAuthentication: <A HREF="007136.html" CLASS="Element59">TAuthenticationEvent</A>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+AAuthenticated</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Indicates authentication success.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+APassword</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+The authentication password.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+AThread</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+The connection to authenticate.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+AUsername</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+The authentication user name.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+OnAuthentication is a <A HREF="007136.html" CLASS="Element59">TAuthenticationEvent</A> event handler used to respond to authentication event notifications when AUsername and APassword have been submitted by the client connection.<P CLASS="Element10">
+When AAuthenticated is True, authentication for the client connection was successful. When AAuthenticated is False, authentication has failed, <A HREF="007842.html#0005" CLASS="Element59">LoginAttempts</A> has been exceeded, or an exception has occurred.<P CLASS="Element10">
+OnAuthentication is triggered from <A HREF="007842.html#0003" CLASS="Element59">DoConnect</A> and <A HREF="007842.html#0002" CLASS="Element59">DoAuthenticate</A>.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0008">TIdTelnetServer.OnNegotiate</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007842.html" CLASS="Element59">TIdTelnetServer</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Specifies the event handler for TELNET option negotiation.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> OnNegotiate: <A HREF="007839.html" CLASS="Element59">TIdTelnetNegotiateEvent</A>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+AThread</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+The peer thread triggering the event.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+OnNegotiate is a <A HREF="007839.html" CLASS="Element59">TIdTelnetNegotiateEvent</A> event handler used to respond to event notifications for the connection in the peer thread.<P CLASS="Element10">
+OnNegotiate is called from <A HREF="007842.html#0003" CLASS="Element59">DoConnect</A> to initialize the TELNET protocol options for the connection.</DIV>
+</DIV>
+<DIV CLASS="Element62">
+<HR>Created with Doc-O-Matic 2 donated to <STRONG><A HREF="http://www.delphi-jedi.org">Project JEDI</A></STRONG>. Commercial license available from the <STRONG><A HREF="http://www.doc-o-matic.com">Doc-O-Matic site</A></STRONG>.</DIV>
+</DIV></BODY></HTML>

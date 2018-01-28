@@ -1,0 +1,258 @@
+#ifndef __NSGEN_H
+#define __NSGEN_H
+
+class NSGenereCompArray ;
+class NSPathologData ;
+
+class gereNum ;
+
+#include "dcodeur/nsphrase.h"
+#include "nssavoir/nspatho.h"
+
+#define STR_SUJET     "Sujt"
+#define STR_COD       "CCOD"
+#define STR_COI       "CCOI"
+#define STR_COS       "CCOS"
+#define STR_CCLIEU    "CCLi"
+#define STR_CCTEMPS   "CCTp"
+#define STR_CCMANIERE "CCMa"
+#define STR_CCMOYEN   "CCMo"
+#define STR_CCCAUSE   "CCCa"
+#define STR_CCBUT     "CCBu"
+#define STR_CCTYPE    "CCTy"
+#define STR_CCCHIFFRE "CCCh"
+#define STR_CCHYPOTH  "CCHy"
+
+#ifndef __linux__
+#if defined(_DKD_DLL)
+	#define _NSDKDCLASSE __export
+#else
+	#define _NSDKDCLASSE __import
+#endif
+#endif
+
+#ifndef __linux__
+class _NSDKDCLASSE NSGenerateur : public NSRoot
+#else
+class NSGenerateur : public NSRoot
+#endif
+{
+	public :
+
+    enum GERECERTITUDE  { sansCertitude = 0, avecCertitude } ;
+    enum WORDTYPE       { isAny = 1, isNoun, isAdjective, isAdverb, isVerb, isInvar } ;
+    enum GENERATEDLEVEL { levelUnknown = 0, levelMain, levelProposition, levelSubject, levelCOD } ;
+
+    NSGenerateur(NSContexte* pCtx, NsProposition* pPropos, string sLangue) ;
+    NSGenerateur(const NSGenerateur& rv) ;
+    virtual ~NSGenerateur() ;
+
+    void initialise() ;
+    void reinitialise() ;
+    void copieTout(const NSGenerateur* rv) ;
+
+    bool ajouteMot(NSPhraseMotArray** ppMotArray, NSPhraseMot* pMot) ;
+    bool ajouteCopieMot(NSPhraseMotArray** ppMotArray, const NSPhraseMot* pMot) ;
+
+    bool CommenceParVoyelle(const string& sLib) ;
+    bool terminePhrase() ;
+    bool termineProposition(NsProposition* pPropos = (NsProposition*) 0) ;
+    void etDuMilieu(string *type, string *type1, string *type2, const string sSepar = string(", ")) ;
+
+    // Pour la gestion de la certitude (ou d'autres modes de groupement)
+    //
+    NSPhraseMotArray*  _pAdjEpitheteAvPos ;
+    NSPhraseMotArray*  _pAdjEpitheteAvNeg ;
+
+    NSPhraseMotArray*  _pAdjEpitheteApPos ;
+    NSPhraseMotArray*  _pAdjEpitheteApNeg ;
+
+    NSPhraseMotArray*  _pCompNomPos ;
+    NSPhraseMotArray*  _pCompNomNeg ;
+
+    NSPhraseMotArray*  _pAdverbePos ;
+    NSPhraseMotArray*  _pAdverbeNeg ;
+
+    NSPhraseMotArray*  _pCODPos ;
+    NSPhraseMotArray*  _pCODNeg ;
+
+    NSPhraseMotArray*  _pAttSujetPos ;
+    NSPhraseMotArray*  _pAttSujetNeg ;
+
+    NSPhraseMotArray*  _pAttCODPos ;
+    NSPhraseMotArray*  _pAttCODNeg ;
+
+    NSGenereCompArray* _pCCArray ;
+
+    //
+    // Generateur de phrase principale
+    //
+    bool           genereProposition(DCODETYPE iStyle, NsProposition* pPropos = (NsProposition*) 0) ;
+		virtual bool   assembleProposition(DCODETYPE iStyle, NsProposition* pPropos) = 0 ;
+    //
+    // Generateur de relative
+    //
+    virtual void   donneLibelleAffiche(string* pLibelle, NSPathologData* pData, GENRE iGenre = genreNull) = 0 ;
+
+    virtual string donnePhraseComplement(NSPhraseMot* pLiaison,
+                                         NSPhraseMot* pPreposition,
+                                         NSPhraseMotArray* pCC,
+                                         bool* bSucces,
+                                         DCODETYPE iStyle) = 0 ;
+    virtual string donnePhraseChiffree(NSPhraseMot* pLiaison,
+                                       NSPhraseMot* pPreposition,
+                                       NSPhraseMotArray* pCC,
+                                       bool* bSucces) = 0 ;
+
+    virtual bool   donnePremierAdj(NSPhraseur* pCompAdj, NSPhraseMot* pMotAdj = 0) = 0 ;
+
+    virtual string donneArticleIndefini(NSPhraseMot* pMot, bool bPluriel, GERECERTITUDE iGereCertitude = avecCertitude) = 0 ;
+    virtual string donneArticleDefini(NSPhraseMot* pMot, bool bPluriel, GERECERTITUDE iGereCertitude = avecCertitude) = 0 ;
+    virtual string donneArticlePartitif(NSPhraseMot* pMot, bool bPluriel, GERECERTITUDE iGereCertitude = avecCertitude) = 0 ;
+    virtual string donnePronomPersonnel(const GENRE iGenre, const NSPhraseur::VBPERSO iVbPersonne, const string sFonction) = 0 ;
+
+    virtual void   etFinal(string *type, string *type1, const string sSeparator = string("")) = 0 ;
+
+    virtual string donneParticipePresent(NSPathologData* pPathoData) = 0 ;
+    virtual string donneParticipePasse(NSPhraseMot* pPhraseMot, GENRE iGenre) = 0 ;
+    virtual void   donneVerbe(string* principal, string* auxilliaire) = 0 ;
+
+    virtual string decodeNum(gereNum* pNum, bool* bSucces) = 0 ;
+
+    virtual string postTraitement(string *sEntree) = 0 ;
+
+    void           contracting(string *pSentence, string sFrom, string sTo) ;
+    void           dispatchArray(const NSPhraseMotArray* pMots, NSPhraseMotArray** ppYesArray, NSPhraseMotArray** ppNoArray, WORDTYPE iWordType = isAny) ;
+    void           dispatchArrayYesNo(const NSPhraseMotArray* pMots, NSPhraseMotArray** ppYesArray, NSPhraseMotArray** ppNoArray, WORDTYPE iWordType = isAny) ;
+    void           dispatchYesNo(const NSPhraseMot* pMot, NSPhraseMotArray** ppYesArray, NSPhraseMotArray** ppNoArray, NSPhraseMotArray::TYPEGRPENUM iGroupingMode) ;
+    bool           isProperType(const NSPhraseMot* pMot, WORDTYPE iWordType) const ;
+
+    // void            setPhrase(string sPhra) { sPhrase = sPhra ; }
+    string         getTempoPhrase()        { return _sPhrase ; }
+    string         getPropositionPhrase()  { return _pProposition->getPhrase() ; }
+
+    void           setCurrentPhraseur(NSPhraseur* pPhr) { _pPh = pPhr ; }
+    NSPhraseur*    getCurrentPhraseur()                 { return _pPh ; }
+
+    void           setProposition(NsProposition* pPhr) { _pProposition = pPhr ; }
+    NsProposition* getProposition()                    { return _pProposition ; }
+
+    void           setLang(string sLng)  { sLang = sLng ; }
+    string         getLang()             { return sLang ; }
+
+    void           setGeneratdLevel(GENERATEDLEVEL iLevel) { _iGeneratedLevel = iLevel ; }
+    GENERATEDLEVEL getGeneratdLevel()                      { return _iGeneratedLevel ; }
+
+    static bool isPlural(const GENRE iGenre)   { return (genreFP == iGenre) || (genreMP == iGenre) || (genreNP == iGenre) ; }
+    static bool isFeminin(const GENRE iGenre)  { return (genreFP == iGenre) || (genreFS == iGenre) ; }
+    static bool isMasculin(const GENRE iGenre) { return (genreMP == iGenre) || (genreMS == iGenre) ; }
+    static bool isNeutral(const GENRE iGenre)  { return (genreNP == iGenre) || (genreNS == iGenre) ; }
+
+    virtual bool traitePostposition(NSPhraseMot* pMot, NSPhraseMotArray* pSpecifique = (NSPhraseMotArray*) 0) ;
+    virtual bool traitePostpositionGeneric(NSPhraseMot* pMot, NSPhraseMotArray* pSpecifique = (NSPhraseMotArray*) 0) ;
+    virtual bool traitePostpositionLocation(NSPhraseMot* pMot) ;
+    string       getPostposition(NSPhraseMot* pMot, const string sPostPosType, bool* pbSuccess) const ;
+
+    static long getNbInstance()  { return lObjectCount ; }
+    static void initNbInstance() { lObjectCount = 0 ; }
+
+	protected:
+
+    string         _sPhrase, sLang ;
+    NSPhraseur*    _pPh ;
+    NsProposition* _pProposition ;
+
+    GENERATEDLEVEL _iGeneratedLevel ;
+
+    static long    lObjectCount ;
+
+    virtual bool   generePhrase(DCODETYPE iStyle) = 0 ;
+
+    bool           getPathologData(const string &sLexique, NSPathologData &Data) ;
+    bool           agglutinate(NSPhraseMot* pMot, string& sLabel) ;
+};
+
+#ifndef __linux__
+class _NSDKDCLASSE NSGenComplement : public NSRoot
+#else
+class NSGenComplement : public NSRoot
+#endif
+{
+  private:
+
+    static long lObjectCount ;
+
+	public:
+
+    // Type de complement
+    //
+    string            _sType ;
+
+    // Arrays de decomposition en positif et negatif
+    //
+    NSPhraseMotArray* _pMotsPos ;
+    NSPhraseMotArray* _pMotsNeg ;
+
+    // Phrases issues du decodage
+    //
+    string            _sPositif ;
+    string            _sNegatif ;
+
+    // Priorite de ce complement dans la phrase
+    //
+    int               _iPriorite ;
+
+    NSGenerateur*     _pGenerateur ;
+
+    NSGenComplement(NSContexte* pCtx, NSGenerateur* pGener) ;
+    NSGenComplement(const NSGenComplement& rv) ;
+    ~NSGenComplement() ;
+
+    void donnePhrElements(NSPhraseMot** ppLiaison, NSPhraseMot** ppPreposition, NSPhraseMotArray** ppMots) ;
+    bool donnePhrase(DCODETYPE iStyle) ;
+    void initialise() ;
+    void classe() ;
+
+    NSGenComplement& operator =(const NSGenComplement& src) ;
+
+    string getType()             { return _sType ; }
+    void   setType(string sType) { _sType = sType ; }
+
+    int    getPriority()         { return _iPriorite ; }
+    void   setPriority(int iP)   { _iPriorite = iP ; }
+
+    string getPositif()          { return _sPositif ; }
+    string getNegatif()          { return _sNegatif ; }
+
+    static long getNbInstance()  { return lObjectCount ; }
+    static void initNbInstance() { lObjectCount = 0 ; }
+};
+
+typedef vector<NSGenComplement*> NSGenCompArray ;
+typedef NSGenCompArray::iterator       GenCompIter ;
+typedef NSGenCompArray::const_iterator GenCompConstIter ;
+
+class NSGenereCompArray : public NSGenCompArray
+{
+	public :
+
+		NSContexte*   pContexte ;
+		NSGenerateur* pGenerateur ;
+
+    // Constructeurs
+    NSGenereCompArray(NSContexte* pCtx, NSGenerateur* pGenerateur) ;
+    NSGenereCompArray(const NSGenereCompArray& rv) ;
+    // Destructeur
+    ~NSGenereCompArray() ;
+
+    bool donnePhrase(DCODETYPE iStyle) ;
+    void initialise() ;
+    void classeTout() ;
+
+    NSGenComplement* donneComplement(string sType) ;
+
+    void vider() ;
+    NSGenereCompArray& operator=(const NSGenereCompArray& src) ;
+};
+
+#endif  // __NSGEN_H

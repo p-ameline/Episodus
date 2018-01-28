@@ -1,0 +1,235 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+<TITLE>TIdCardAddressItem</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <META name="GENERATOR" content="Doc-O-Matic">
+    <LINK rel="STYLESHEET" href="default.css" type="text/css">
+
+<SCRIPT LANGUAGE="JavaScript1.2" SRC="scripts.js"></SCRIPT>
+</HEAD>
+<BODY CLASS="Element57">
+<TABLE BORDER="0" BGCOLOR="#AACCFF" WIDTH="100%" CELLSPACING="0" CELLPADDING="0">
+<TR><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element1">
+Indy 9</DIV>
+</TD><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element2">
+<A HREF="content.html" CLASS="Element59">Content</A> | <A HREF="idx.html" CLASS="Element59">Index</A> | <A HREF="symref.html" CLASS="Element59">Reference</A></DIV>
+</TD></TR></TABLE><DIV CLASS="Element58">
+<DIV CLASS="Element5">
+TIdCardAddressItem</DIV>
+<DIV CLASS="Element7">
+<A HREF="010063.html" CLASS="Element59">Hierarchy</A>, <A HREF="010064.html" CLASS="Element59">Properties</A>, <A HREF="010065.html" CLASS="Element59">Methods</A>, <A HREF="010066.html" CLASS="Element59">See Also</A>, <A HREF="002949.html" CLASS="Element59">Unit: IdVCard</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Encapsulates a complete VCard address.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12">TIdCardAddressItem = <STRONG>class</STRONG>(TCollectionItem)</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Unit</DIV>
+<DIV CLASS="Element69">
+<A HREF="002949.html" CLASS="Element59">IdVCard</A></DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+The TIdCardAddressItem object encapsulates a VCard address in the <A HREF="007886.html" CLASS="Element59">TIdVCard</A> component.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0000">TIdCardAddressItem.AddressAttributes</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007225.html" CLASS="Element59">TIdCardAddressItem</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Represents type information for a VCard address item.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> AddressAttributes: <A HREF="007224.html" CLASS="Element59">TIdCardAddressAttributes</A>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+AddressAttributes represents type information for a VCard address item. AddressAttributes can include the following:<P CLASS="Element10">
+<UL>
+<LI>tatHome - home delivery address<P CLASS="Element10">
+<LI>tatDomestic - a domestic address<P CLASS="Element10">
+<LI>tatInternational - an international address<P CLASS="Element10">
+<LI>tatPostal - a postal delivery address<P CLASS="Element10">
+<LI>tatParcel - a parcel delivery address<P CLASS="Element10">
+<LI>tatWork - a work delivery address<P CLASS="Element10">
+<LI>tatPreferred - preferred address</UL>
+</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0002">TIdCardAddressItem.ExtendedAddress</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007225.html" CLASS="Element59">TIdCardAddressItem</A>, <A HREF="010067.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Represents additional VCard address information.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> ExtendedAddress: <STRONG>String</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+ExtendedAddress represents additional VCard address information. ExtendedAddress can contain information such as an Office identifier for a building or an apartment number.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0003">TIdCardAddressItem.Locality</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007225.html" CLASS="Element59">TIdCardAddressItem</A>, <A HREF="010068.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Represents a VCard locality.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> Locality: <STRONG>String</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Locality represents a VCard a city or town (e.g. Chicago, New York City, Montreal) in a VCard address.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0004">TIdCardAddressItem.Nation</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007225.html" CLASS="Element59">TIdCardAddressItem</A>, <A HREF="010069.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Represents the country or nation for a VCard adress item.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> Nation: <STRONG>String</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Nation represents the country or nation for a VCard adress item, and can contain data such as Canada, U.S.A., Mexico, Russia, etc.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0005">TIdCardAddressItem.POBox</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007225.html" CLASS="Element59">TIdCardAddressItem</A>, <A HREF="010070.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Represents a Post Office Box for a VCard address.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> POBox: <STRONG>String</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+POBox represents a Post Office Box for a VCard address.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0006">TIdCardAddressItem.PostalCode</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007225.html" CLASS="Element59">TIdCardAddressItem</A>, <A HREF="010071.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Represents a VCard postal code for the locality.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> PostalCode: <STRONG>String</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+PostalCode represents the postal code for the locality such as a ZIP Code in the US.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0007">TIdCardAddressItem.Region</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007225.html" CLASS="Element59">TIdCardAddressItem</A>, <A HREF="010072.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Represents a VCard state, province, or county.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> Region: <STRONG>String</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Region represents a VCard political subdivision of a nation such as a Providence in Canada such as &quot;Quebec&quot;, a State in US such as &quot;West Virginia&quot;, or a county in England such as &quot;Kent&quot;.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0008">TIdCardAddressItem.StreetAddress</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007225.html" CLASS="Element59">TIdCardAddressItem</A>, <A HREF="010073.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Represents a VCard street address.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> StreetAddress: <STRONG>String</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+StreetAddress represents a VCard street address such as &quot;101 Sample Avenue&quot;.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0001">TIdCardAddressItem.Assign</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007225.html" CLASS="Element59">TIdCardAddressItem</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Copy the property values of an object.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>procedure</STRONG> Assign(Source: TPersistent); <STRONG>override</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+Source: TPersistent</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Object containing values to be copied.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Assign is a procedure used to copy the properties of the persistent object in Source to the current object instance. When the current object and the object in Source are the same ClassType, Assign will copy the following property values:<P CLASS="Element10">
+<UL>
+<LI>Addr<P CLASS="Element10">
+<LI><A HREF="007225.html#0000" CLASS="Element59">AddressAttributes</A><P CLASS="Element10">
+<LI><A HREF="007225.html#0005" CLASS="Element59">POBox</A><P CLASS="Element10">
+<LI><A HREF="007225.html#0002" CLASS="Element59">ExtendedAddress</A><P CLASS="Element10">
+<LI><A HREF="007225.html#0008" CLASS="Element59">StreetAddress</A><P CLASS="Element10">
+<LI><A HREF="007225.html#0003" CLASS="Element59">Locality</A><P CLASS="Element10">
+<LI><A HREF="007225.html#0007" CLASS="Element59">Region</A><P CLASS="Element10">
+<LI><A HREF="007225.html#0006" CLASS="Element59">PostalCode</A><P CLASS="Element10">
+<LI><A HREF="007225.html#0004" CLASS="Element59">Nation</A></UL>
+<P CLASS="Element10">
+When the current object and Source do not sahre the same ClassType, Assign calls the inherited Assign method.</DIV>
+</DIV>
+<DIV CLASS="Element62">
+<HR>Created with Doc-O-Matic 2 donated to <STRONG><A HREF="http://www.delphi-jedi.org">Project JEDI</A></STRONG>. Commercial license available from the <STRONG><A HREF="http://www.doc-o-matic.com">Doc-O-Matic site</A></STRONG>.</DIV>
+</DIV></BODY></HTML>

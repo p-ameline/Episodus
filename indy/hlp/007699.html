@@ -1,0 +1,134 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+<TITLE>TIdSimpleBuffer</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <META name="GENERATOR" content="Doc-O-Matic">
+    <LINK rel="STYLESHEET" href="default.css" type="text/css">
+
+<SCRIPT LANGUAGE="JavaScript1.2" SRC="scripts.js"></SCRIPT>
+</HEAD>
+<BODY CLASS="Element57">
+<TABLE BORDER="0" BGCOLOR="#AACCFF" WIDTH="100%" CELLSPACING="0" CELLPADDING="0">
+<TR><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element1">
+Indy 9</DIV>
+</TD><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element2">
+<A HREF="content.html" CLASS="Element59">Content</A> | <A HREF="idx.html" CLASS="Element59">Index</A> | <A HREF="symref.html" CLASS="Element59">Reference</A></DIV>
+</TD></TR></TABLE><DIV CLASS="Element58">
+<DIV CLASS="Element5">
+TIdSimpleBuffer</DIV>
+<DIV CLASS="Element7">
+<A HREF="013519.html" CLASS="Element59">Hierarchy</A>, <A HREF="013520.html" CLASS="Element59">Methods</A>, <A HREF="013521.html" CLASS="Element59">See Also</A>, <A HREF="002918.html" CLASS="Element59">Unit: IdTCPConnection</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Buffer used in Indy read and write operations.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12">TIdSimpleBuffer = <STRONG>class</STRONG>(TMemoryStream)</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Unit</DIV>
+<DIV CLASS="Element69">
+<A HREF="002918.html" CLASS="Element59">IdTCPConnection</A></DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+TIdSimpleBuffer is a TMemoryStream descendant used in buffered read and write operations for Indy components. TIdSimpleBuffer includes all the inherited stream functionality of TMemoryStream, and extends the class with the <A HREF="007699.html#0001" CLASS="Element59">Extract</A> and <A HREF="007699.html#0002" CLASS="Element59">Remove</A> methods to manage buffer usage in Indy.<P CLASS="Element10">
+TIdSimpleBuffer also provides a protected <A HREF="007223.html" CLASS="Element59">TIdBufferBytesRemoved</A> event handler that allows notification of data removal from the buffer.<P CLASS="Element10">
+TIdSimpleBuffer is used as a generic buffer in operations that read data from the TCP/IP protocol stack, and in classes that perform read or write buffering like <A HREF="007828.html" CLASS="Element59">TIdTCPConnection</A>.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0000">TIdSimpleBuffer.Create</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007699.html" CLASS="Element59">TIdSimpleBuffer</A>, <A HREF="013522.html" CLASS="Element59">See Also</A>, <A HREF="013523.html" CLASS="Element59">Example 1</A>, <A HREF="013524.html" CLASS="Element59">Example 2</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Constructor for the object instance.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>constructor</STRONG> Create(AOnBytesRemoved: <A HREF="007223.html" CLASS="Element59">TIdBufferBytesRemoved</A> = <STRONG>nil</STRONG>); <STRONG>reintroduce</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+AOnBytesRemoved: TIdBufferBytesRemoved = nil</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Procedure to assign to the protected event handler. Default is nil.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Create is the constructor for the object instance, reintroduced in <A HREF="007699.html" CLASS="Element59">TIdSimpleBuffer</A> to provide the event handler used for removal of data from the buffer. Create calls the inherited Create method, and assigns the <A HREF="007223.html" CLASS="Element59">TIdBufferBytesRemoved</A> event handler in AOnBytesRemoved to the protected OnBytesRemoved event handler.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0001">TIdSimpleBuffer.Extract</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007699.html" CLASS="Element59">TIdSimpleBuffer</A>, <A HREF="013525.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Reads and removes the specified number of bytes from the buffer.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>function</STRONG> Extract(<STRONG>const</STRONG> AByteCount: Integer): <STRONG>string</STRONG>; <STRONG>virtual</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+const AByteCount: Integer</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Number of bytes to read and remove from the buffer.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Return Value</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+String - Values removed from Memory allocated to the buffer.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Extract is a String function used to Read and remove the number of bytes specified in AByteCount from the buffer. Extract will raise an <A HREF="000425.html" CLASS="Element59">EIdNotEnoughDataInBuffer</A> exception if the buffer Size is smaller than the number of bytes indicated in AByteCount.<P CLASS="Element10">
+Extract sets the return value for the method to the contents indicated in Memory starting at the current Position, and including up to AByteCount chatacters. Extract calls <A HREF="007699.html#0002" CLASS="Element59">Remove</A> to delete AByteCount characters from the buffer on successful completion of the method.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0002">TIdSimpleBuffer.Remove</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007699.html" CLASS="Element59">TIdSimpleBuffer</A>, <A HREF="013526.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Removes bytes of data from the memory buffer.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>procedure</STRONG> Remove(<STRONG>const</STRONG> AByteCount: integer); <STRONG>virtual</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+const AByteCount: integer</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Number of bytes to be removed.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Remove is a procedure used to to remove the number of bytes in AByteCount from the memory buffer. Remove shifts the contents of Memory so that only data bytes AByteCount through the Size of the buffer are available for further processing. When ByteCount and Size are the same, the memory buffer in Memory is reset using Clear.<P CLASS="Element10">
+Remove will raise an <A HREF="000425.html" CLASS="Element59">EIdNotEnoughDataInBuffer</A> exception when AByteCount is larger than the Size of Memory in <A HREF="007219.html" CLASS="Element59">TIdBuffer</A>.<P CLASS="Element10">
+Removes triggers the protected OnBytesRemoved event handler, when assigned, after data has been removed from the Memory in <A HREF="007699.html" CLASS="Element59">TIdSimpleBuffer</A>.<P CLASS="Element10">
+<STRONG>Note</STRONG>: Data in Memory should be handled in the manner appropriate to the application prior to calling Remove.</DIV>
+</DIV>
+<DIV CLASS="Element62">
+<HR>Created with Doc-O-Matic 2 donated to <STRONG><A HREF="http://www.delphi-jedi.org">Project JEDI</A></STRONG>. Commercial license available from the <STRONG><A HREF="http://www.doc-o-matic.com">Doc-O-Matic site</A></STRONG>.</DIV>
+</DIV></BODY></HTML>

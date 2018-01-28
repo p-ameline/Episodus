@@ -1,0 +1,12 @@
+//
+// Ns_ocr.rh
+//
+
+// Dialogue IDD_OCR_LEARN
+
+#define IDC_GROUP       101
+#define IDC_CHARS       102
+#define IDC_OCRHSCROLL  103
+#define IDC_OCRVSCROLL  104
+#define IDC_RECONNU	    105
+

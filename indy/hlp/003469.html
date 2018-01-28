@@ -1,0 +1,123 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+<TITLE>MClientThread</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <META name="GENERATOR" content="Doc-O-Matic">
+    <LINK rel="STYLESHEET" href="default.css" type="text/css">
+
+<SCRIPT LANGUAGE="JavaScript1.2" SRC="scripts.js"></SCRIPT>
+</HEAD>
+<BODY CLASS="Element57">
+<TABLE BORDER="0" BGCOLOR="#AACCFF" WIDTH="100%" CELLSPACING="0" CELLPADDING="0">
+<TR><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element1">
+Indy 9</DIV>
+</TD><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element2">
+<A HREF="content.html" CLASS="Element59">Content</A> | <A HREF="idx.html" CLASS="Element59">Index</A> | <A HREF="symref.html" CLASS="Element59">Reference</A></DIV>
+</TD></TR></TABLE><DIV CLASS="Element58">
+<DIV CLASS="Element5">
+MClientThread</DIV>
+<DIV CLASS="Element7">
+<A HREF="009807.html" CLASS="Element59">Hierarchy</A>, <A HREF="009808.html" CLASS="Element59">Methods</A>, <A HREF="002942.html" CLASS="Element59">Unit: IdTunnelMaster</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Performs communication with service threads.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12">MClientThread = <STRONG>class</STRONG>(TThread)</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Unit</DIV>
+<DIV CLASS="Element69">
+<A HREF="002942.html" CLASS="Element59">IdTunnelMaster</A></DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+MClientThread is a TThread descendant that encapsulates the <A HREF="007871.html" CLASS="Element59">TIdTunnelMaster</A> connection from the client to the service threads for the tunnel master.<P CLASS="Element10">
+MClientThread is used to store references to the TCP client connection to the tunnel server, and the master thread used by the tunnel server to handle client requests.<P CLASS="Element10">
+MClientThread communicates with the tunnel server by reading messages from the outbound TCP client, and constructs headers that encapsulate the message for the tunnel server. When the TCP client is no longer readable, the MClientThread will terminate.<P CLASS="Element10">
+MClientThread notifies the tunnel server when a service thread is disconnected, and allows the tunnel server to maintain the number of connected services.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0000">MClientThread.Create</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="003469.html" CLASS="Element59">MClientThread</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Constructor for the thread instance.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>constructor</STRONG> Create(AMaster: <A HREF="007871.html" CLASS="Element59">TIdTunnelMaster</A>);</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+Master</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Tunnel server context for the instance.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Create is the constructor for the thread instance. Create initializes thread properties tot heir default values, including:<P CLASS="Element10">
+<UL>
+<LI>MasterParent - Server context in the Master parameter<P CLASS="Element10">
+<LI>FreeOnTerminate - True<P CLASS="Element10">
+<LI>DisconnectedOnRequest - False<P CLASS="Element10">
+<LI>SelfDisconnected - False<P CLASS="Element10">
+<LI>Locker - Constructed</UL>
+<P CLASS="Element10">
+Create adds the thread instance to MasterParent.Clients, and increments the <A HREF="007871.html" CLASS="Element59">TIdTunnelMaster</A> number of services.<P CLASS="Element10">
+Create calls the inherited Create method to finalize construction of the thread instance.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0001">MClientThread.Destroy</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="003469.html" CLASS="Element59">MClientThread</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Frees the object instance.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>destructor</STRONG> Destroy; <STRONG>override</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Destroy is the destructor for the object instance, and is responsible for notifications to the MasterParent tunnel server that the thread will be freed. Destroy instructs the MasterParent to decrease the number of service threads for the tunnel server, and removes the connection from the client list.<P CLASS="Element10">
+When DisconnectedOnRequest is False, <A HREF="003469.html" CLASS="Element59">MClientThread</A> will also generate and <A HREF="006944.html" CLASS="Element59">send</A> a Tunnel Disconnect message to the tunnel server.<P CLASS="Element10">
+If the TCP client is still connected, the OutboundClient is disconnected and freed.<P CLASS="Element10">
+Destroy also calls the inherited Destroy method to finalize destruction of the object instance.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0002">MClientThread.Execute</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="003469.html" CLASS="Element59">MClientThread</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Implements the processing loop for the thread.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>procedure</STRONG> Execute; <STRONG>override</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Execute is a procedure used by <A HREF="003469.html" CLASS="Element59">MClientThread</A> to implement the processing logic that allows the thread to communicate with service threads for the tunnel connection. Execute will <A HREF="003177.html" CLASS="Element59">listen</A> for OutboundClient messages until the client requests disconnect, or until the thread is Terminated by either the server or the service thread.<P CLASS="Element10">
+Execute constructs the IdHeader.MsgType and the IdHeader.UserID for the OutboundClient message, and calls MasterParent.SendMsg to write the message to the tunnel connection.<P CLASS="Element10">
+When the thread is Terminated, Execute will set SelfDisconnected to True prior to exiting the method.</DIV>
+</DIV>
+<DIV CLASS="Element62">
+<HR>Created with Doc-O-Matic 2 donated to <STRONG><A HREF="http://www.delphi-jedi.org">Project JEDI</A></STRONG>. Commercial license available from the <STRONG><A HREF="http://www.doc-o-matic.com">Doc-O-Matic site</A></STRONG>.</DIV>
+</DIV></BODY></HTML>

@@ -1,0 +1,322 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+<TITLE>TIdMessagePart</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <META name="GENERATOR" content="Doc-O-Matic">
+    <LINK rel="STYLESHEET" href="default.css" type="text/css">
+
+<SCRIPT LANGUAGE="JavaScript1.2" SRC="scripts.js"></SCRIPT>
+</HEAD>
+<BODY CLASS="Element57">
+<TABLE BORDER="0" BGCOLOR="#AACCFF" WIDTH="100%" CELLSPACING="0" CELLPADDING="0">
+<TR><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element1">
+Indy 9</DIV>
+</TD><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element2">
+<A HREF="content.html" CLASS="Element59">Content</A> | <A HREF="idx.html" CLASS="Element59">Index</A> | <A HREF="symref.html" CLASS="Element59">Reference</A></DIV>
+</TD></TR></TABLE><DIV CLASS="Element58">
+<DIV CLASS="Element5">
+TIdMessagePart</DIV>
+<DIV CLASS="Element7">
+<A HREF="012754.html" CLASS="Element59">Hierarchy</A>, <A HREF="012755.html" CLASS="Element59">Properties</A>, <A HREF="012756.html" CLASS="Element59">Methods</A>, <A HREF="012757.html" CLASS="Element59">Events</A>, <A HREF="012758.html" CLASS="Element59">See Also</A>, <A HREF="002286.html" CLASS="Element59">Unit: IdMessage</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Implements the base class for MIME message parts.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12">TIdMessagePart = <STRONG>class</STRONG>(TCollectionItem)</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Unit</DIV>
+<DIV CLASS="Element69">
+<A HREF="002286.html" CLASS="Element59">IdMessage</A></DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+TIdMessagePart is a TCollectionItem descendant that encapsulates a MIME message part. TIdMessagePart is the ancestor class for common MIME message parts like <A HREF="007844.html" CLASS="Element59">TIdText</A> and <A HREF="007204.html" CLASS="Element59">TIdAttachment</A>. TIdMessagePart is also the collection item added to the <A HREF="007575.html" CLASS="Element59">TIdMessageParts</A> collection.<P CLASS="Element10">
+TIdMessagePart provides methods and properties common to all MIME message parts, including properties that represent values from Internet Message headers.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0001">TIdMessagePart.Boundary</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007573.html" CLASS="Element59">TIdMessagePart</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Character sequence that delimits the message part.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> Boundary: <STRONG>String</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Boundary is a String property that contains the character sequence that delimits the message part in an Internet Message. Boundary applies to message parts where the <A HREF="007573.html#0005" CLASS="Element59">ContentType</A> is &quot;multipart&quot;.<P CLASS="Element10">
+Boundary marks the beginning of each message part in the file, and also follows the final message part in the message. Boundary contains the character sequence that follows the mandatory boundary marker prefix &quot;--&quot;.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0002">TIdMessagePart.BoundaryBegin</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007573.html" CLASS="Element59">TIdMessagePart</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Indicates that a boundary marker appears at the beginning of the message part.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> BoundaryBegin: Boolean;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+BoundaryBegin is a Boolean property that indicates that a boundary marker appears at the beginning of the message part. BoundaryBegin is used and updated when the message part is received by a message client.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0003">TIdMessagePart.BoundaryEnd</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007573.html" CLASS="Element59">TIdMessagePart</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Indicates that a boundary marker appears at the end of the message part.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> BoundaryEnd: Boolean;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+BoundaryEnd is a Boolean property that indicates that a boundary marker appears at the end of the message part. BoundaryEnd is used and updated when the message part is received by a message client.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0004">TIdMessagePart.ContentTransfer</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007573.html" CLASS="Element59">TIdMessagePart</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Identifies the encoding scheme for the message part.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> ContentTransfer: <STRONG>string</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+ContentTransfer is a String property that identifies the encoding scheme for the message part. ContentTransfer contains the value from the Internet Message header &quot;Content-Transfer-Encoding:&quot;.<P CLASS="Element10">
+ContentTransfer contains a token that identifies the encoding transformations performed for the message part or the domain for the result. ContentTransfer normally contains one of the following values:<P CLASS="Element10">
+<UL>
+<LI>&quot;7bit&quot;<P CLASS="Element10">
+<LI>&quot;8bit&quot;<P CLASS="Element10">
+<LI>&quot;binary&quot;<P CLASS="Element10">
+<LI>&quot;quoted-printable&quot;<P CLASS="Element10">
+<LI>&quot;base64&quot;</UL>
+<P CLASS="Element10">
+The Content-Transfer-Encoding values &quot;7bit&quot;, &quot;8bit&quot;, and &quot;binary&quot; all indicate that NO encoding transformation has been performed. The quoted-printable and base64 encodings transform their input into values using &quot;7bit&quot; representation.<P CLASS="Element10">
+<STRONG>Note</STRONG>: The five values defined for the ContentTransfer imply nothing about the <A HREF="007573.html#0005" CLASS="Element59">ContentType</A> other than the algorithm by which it was encoded or the transport system requirements when UU-encoded.<P CLASS="Element10">
+<STRONG>Note</STRONG>: ContentTransfer is not case sensitive -- &quot;Base64&quot;, &quot;BASE64&quot; and &quot;bAsE64&quot; are all equivalent.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0005">TIdMessagePart.ContentType</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007573.html" CLASS="Element59">TIdMessagePart</A>, <A HREF="012759.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Identifies the MIME media type for the message.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> ContentType: <STRONG>string</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+ContentType is a String property that specifies the MIME media type for the message. Use <A HREF="007573.html#0004" CLASS="Element59">ContentTransfer</A> to identify the encoding scheme for the message.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0008">TIdMessagePart.ExtraHeaders</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007573.html" CLASS="Element59">TIdMessagePart</A>, <A HREF="012760.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Represents message header without property storage.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> ExtraHeaders: <A HREF="007369.html" CLASS="Element59">TIdHeaderList</A>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+ExtraHeaders is a <A HREF="007369.html" CLASS="Element59">TIdHeaderList</A> property that represents headers from the Internet Message that do not have corresponding properties to represent their values in the object instance.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0009">TIdMessagePart.Headers</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007573.html" CLASS="Element59">TIdMessagePart</A>, <A HREF="012761.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Represents message headers in native form.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> Headers: <A HREF="007369.html" CLASS="Element59">TIdHeaderList</A>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Headers is a read-only <A HREF="007369.html" CLASS="Element59">TIdHeaderList</A> property used to represent the headers for the Internet Message in NAME=VALUE form.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="000A">TIdMessagePart.IsEncoded</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007573.html" CLASS="Element59">TIdMessagePart</A>, <A HREF="012762.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Indicates that the body for the message part is MIME-encoded.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> IsEncoded: Boolean;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+IsEncoded is a read-only Boolean property that indicates the body of the message part is stored in MIME-encoded form. IsEncoded normally reflects that the body contains a graphic image, or BASE64- or QUOTED-PRINTABLE-encoded value.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="000C">TIdMessagePart.StoredPathName</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007573.html" CLASS="Element59">TIdMessagePart</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Identifies the temporary storage file for the message part.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> StoredPathName: TFileName;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+StoredPathName is a TFilename property that represents the file used to store the message part. StoredPathName can contain a temporary path and file name if the message part represents an attachment without a ContentDisposition header specifying a suggested file name.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0000">TIdMessagePart.Assign</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007573.html" CLASS="Element59">TIdMessagePart</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Copy the property values from another object.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>procedure</STRONG> Assign(Source: TPersistent); <STRONG>override</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+Source: TPersistent</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Object instance containing values to be copied.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Assign is a procedure used to copy the property values from the object specified in Source to the current collection item instance. When the ClassType for Source is the same as the current object, Assign will copy the following property values:<P CLASS="Element10">
+<UL>
+<LI><A HREF="007573.html#0004" CLASS="Element59">ContentTransfer</A><P CLASS="Element10">
+<LI><A HREF="007573.html#0005" CLASS="Element59">ContentType</A><P CLASS="Element10">
+<LI><A HREF="007573.html#0008" CLASS="Element59">ExtraHeaders</A></UL>
+<P CLASS="Element10">
+When the ClassType for Source is not the same as the current object, Assign calls the inherited Assign method.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0006">TIdMessagePart.Create</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007573.html" CLASS="Element59">TIdMessagePart</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Constructor for the collection item.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>constructor</STRONG> Create(Collection: TCollection); <STRONG>override</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+Collection: TCollection</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Owner of the collection item.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Create is the constructor for the collection item, and simply raises an exception saying that a <A HREF="007573.html" CLASS="Element59">TIdMessagePart</A> instance cannot be created and added to the collection. Use a <A HREF="007573.html" CLASS="Element59">TIdMessagePart</A> descendant to override this constructor with parameters to add items to a <A HREF="007575.html" CLASS="Element59">TIdMessageParts</A> collection.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0007">TIdMessagePart.Destroy</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007573.html" CLASS="Element59">TIdMessagePart</A>, <A HREF="012763.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Frees the object instance.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>destructor</STRONG> Destroy; <STRONG>override</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Destroy is the destructor for the object instance. Destroy is responsible for freeing and releasing resources allocated to the <A HREF="007573.html#0009" CLASS="Element59">Headers</A> and <A HREF="007573.html#0008" CLASS="Element59">ExtraHeaders</A> properties. Destroy calls the inherited destructor prior to exiting from the method.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="000B">TIdMessagePart.OnGetMessagePartStream</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007573.html" CLASS="Element59">TIdMessagePart</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Event handler for retrieving a message part from a stream.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> OnGetMessagePartStream: <A HREF="008017.html" CLASS="Element59">TOnGetMessagePartStream</A>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+AStream</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Stream containing the content for the message part.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+OnGetMessagePartStream is a <A HREF="008017.html" CLASS="Element59">TOnGetMessagePartStream</A> event handler used to respond to the notification that a message part is available to be read from AStream.<P CLASS="Element10">
+An application must assign a procedure to OnGetMessagePartStream to allow a response to the event notification.</DIV>
+</DIV>
+<DIV CLASS="Element62">
+<HR>Created with Doc-O-Matic 2 donated to <STRONG><A HREF="http://www.delphi-jedi.org">Project JEDI</A></STRONG>. Commercial license available from the <STRONG><A HREF="http://www.doc-o-matic.com">Doc-O-Matic site</A></STRONG>.</DIV>
+</DIV></BODY></HTML>

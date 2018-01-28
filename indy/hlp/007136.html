@@ -1,0 +1,75 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+<TITLE>TAuthenticationEvent</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <META name="GENERATOR" content="Doc-O-Matic">
+    <LINK rel="STYLESHEET" href="default.css" type="text/css">
+
+<SCRIPT LANGUAGE="JavaScript1.2" SRC="scripts.js"></SCRIPT>
+</HEAD>
+<BODY CLASS="Element57">
+<TABLE BORDER="0" BGCOLOR="#AACCFF" WIDTH="100%" CELLSPACING="0" CELLPADDING="0">
+<TR><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element1">
+Indy 9</DIV>
+</TD><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element2">
+<A HREF="content.html" CLASS="Element59">Content</A> | <A HREF="idx.html" CLASS="Element59">Index</A> | <A HREF="symref.html" CLASS="Element59">Reference</A></DIV>
+</TD></TR></TABLE><DIV CLASS="Element58">
+<DIV CLASS="Element5">
+TAuthenticationEvent</DIV>
+<DIV CLASS="Element7">
+<A HREF="002922.html" CLASS="Element59">Unit: IdTelnetServer</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Specifies the event type for user authentication in a TELNET connection.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12">TAuthenticationEvent = <STRONG>procedure</STRONG> (AThread: <A HREF="007613.html" CLASS="Element59">TIdPeerThread</A>; <STRONG>const</STRONG> AUsername, APassword: <STRONG>string</STRONG>; <STRONG>var</STRONG> AAuthenticated: Boolean) <STRONG>of</STRONG> <STRONG>object</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Unit</DIV>
+<DIV CLASS="Element69">
+<A HREF="002922.html" CLASS="Element59">IdTelnetServer</A></DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+AAuthenticated</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Indicates authentication success.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+APassword</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Password for the connection.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+AThread</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Connection generating the event.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+AUsername</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+User name for the connection.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+TAuthenticationEvent is an event type used to perform authentication of username and password information provided by a TELNET connection.<P CLASS="Element10">
+AThread is the peer thread representing the TELNET connection generating the authentication event.<P CLASS="Element10">
+AUsername is the User name supplied for the connection.<P CLASS="Element10">
+APassword is the password supplied for the connection.<P CLASS="Element10">
+AAuthenticated is a variable parameter use to indicate whether the authentication request is successful.<P CLASS="Element10">
+TAuthenticationEvent is used by <A HREF="007842.html" CLASS="Element59">TIdTelnetServer</A> in the OnAuthentication event handler to allow the server implementation to perform user authentication processing.</DIV>
+</DIV>
+<DIV CLASS="Element62">
+<HR>Created with Doc-O-Matic 2 donated to <STRONG><A HREF="http://www.delphi-jedi.org">Project JEDI</A></STRONG>. Commercial license available from the <STRONG><A HREF="http://www.doc-o-matic.com">Doc-O-Matic site</A></STRONG>.</DIV>
+</DIV></BODY></HTML>

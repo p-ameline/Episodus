@@ -1,0 +1,295 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+<TITLE>TIdIdentServer</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <META name="GENERATOR" content="Doc-O-Matic">
+    <LINK rel="STYLESHEET" href="default.css" type="text/css">
+
+<SCRIPT LANGUAGE="JavaScript1.2" SRC="scripts.js"></SCRIPT>
+</HEAD>
+<BODY CLASS="Element57">
+<TABLE BORDER="0" BGCOLOR="#AACCFF" WIDTH="100%" CELLSPACING="0" CELLPADDING="0">
+<TR><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element1">
+Indy 9</DIV>
+</TD><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element2">
+<A HREF="content.html" CLASS="Element59">Content</A> | <A HREF="idx.html" CLASS="Element59">Index</A> | <A HREF="symref.html" CLASS="Element59">Reference</A></DIV>
+</TD></TR></TABLE><DIV CLASS="Element58">
+<DIV CLASS="Element5">
+TIdIdentServer</DIV>
+<DIV CLASS="Element7">
+<A HREF="011657.html" CLASS="Element59">Hierarchy</A>, <A HREF="011658.html" CLASS="Element59">Properties</A>, <A HREF="011659.html" CLASS="Element59">Methods</A>, <A HREF="011660.html" CLASS="Element59">Events</A>, <A HREF="011661.html" CLASS="Element59">See Also</A>, <A HREF="002257.html" CLASS="Element59">Unit: IdIdentServer</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Implements a multi-threaded Identifcation Protocol server.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12">TIdIdentServer = <STRONG>class</STRONG>(<A HREF="007831.html" CLASS="Element59">TIdTCPServer</A>)</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Unit</DIV>
+<DIV CLASS="Element69">
+<A HREF="002257.html" CLASS="Element59">IdIdentServer</A></DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+TIdIdentServer is a <A HREF="007831.html" CLASS="Element59">TIdTCPServer</A> descendant that implements a multi-threaded server for the Identifcation Protocol, as described in the Internet Standards document:<P CLASS="Element10">
+<UL>
+<LI>RFC 1413 - Identification Protocol (http://www.rfc-editor.org/rfc/rfc1413.txt)</UL>
+<P CLASS="Element10">
+TIdIdentServer provides properties, methods, and events that can used, in conjunction with OnExecute, to implement the Identification Protocol which provides a means to determine the identity of a user of a particular TCP connection.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0001">TIdIdentServer.DefaultPort</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007403.html" CLASS="Element59">TIdIdentServer</A>, <A HREF="011662.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Port number used to <A HREF="003177.html" CLASS="Element59">listen</A> for client connections.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> DefaultPort: integer;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+DefaultPort is an Integer property redefined in <A HREF="007403.html" CLASS="Element59">TIdIdentServer</A> to reflect the port number used to <A HREF="003177.html" CLASS="Element59">listen</A> for client connections in the Ident server, as required by the Ident protocol. DefaultPort is given the value <A HREF="002356.html" CLASS="Element59">IdPORT_AUTH</A> in the <A HREF="007403.html#0000" CLASS="Element59">Create</A> constructor. DefaultPort is uised when constructing and binding the listener thread for the multi-threaded server implementation.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0003">TIdIdentServer.QueryTimeOut</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007403.html" CLASS="Element59">TIdIdentServer</A>, <A HREF="011663.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Timeout value for connections to the Ident Server.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> QueryTimeOut: Integer;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+QueryTimeOut is an Integer property that represents the time out value used for connections to the the Ident Server. If this value exceeded, the server will close the connection to the client. The default value is <A HREF="002166.html" CLASS="Element59">IdDefIdentQueryTimeOut</A>, as assigned in the <A HREF="007403.html#0000" CLASS="Element59">Create</A> constructor.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0000">TIdIdentServer.Create</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007403.html" CLASS="Element59">TIdIdentServer</A>, <A HREF="011664.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Constructor for the object instance.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>constructor</STRONG> Create(AOwner: TComponent); <STRONG>override</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+AOwner: TComponent</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Owner of the object instance.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Create is the constructor for the object instance. Create calls the inherited Create method using AOwner as the owner of the object instance. Create also assigns <A HREF="002356.html" CLASS="Element59">IdPORT_AUTH</A> as the value for the <A HREF="007403.html#0001" CLASS="Element59">DefaultPort</A> property, as required by the Ident protocol. Create also sets <A HREF="007403.html#0003" CLASS="Element59">QueryTimeOut</A> to the default value <A HREF="002166.html" CLASS="Element59">IdDefIdentQueryTimeOut</A> prior to exiting from the method.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0004">TIdIdentServer.ReplyError</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007403.html" CLASS="Element59">TIdIdentServer</A>, <A HREF="011665.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+This method sends an error reply to the client requesting a query.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>procedure</STRONG> ReplyError(AThread: <A HREF="007613.html" CLASS="Element59">TIdPeerThread</A>; AServerPort: Integer; AClientPort: Integer; AErr: <A HREF="007401.html" CLASS="Element59">TIdIdentErrorType</A>);</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+AThread: TIdPeerThread</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+The connection thread for the query</DIV>
+</DIV>
+<DIV CLASS="Element17">
+AServerPort: Integer</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+The port that the connection on the server (the computer making the query)</DIV>
+</DIV>
+<DIV CLASS="Element17">
+AClientPort: Integer</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+The port that the client is connecting from (the port the daemon is using to <A HREF="000295.html" CLASS="Element59">connect</A> to the server making the query)</DIV>
+</DIV>
+<DIV CLASS="Element17">
+AErr: TIdIdentErrorType</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+The error reply to <A HREF="006944.html" CLASS="Element59">send</A> and it is one of the values in the <A HREF="007401.html" CLASS="Element59">TIdIdentErrorType</A> topic</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+This method sends an error reply to the client requesting a query.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0005">TIdIdentServer.ReplyIdent</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007403.html" CLASS="Element59">TIdIdentServer</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+This method sends the specified user name for a query.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>procedure</STRONG> ReplyIdent(AThread: <A HREF="007613.html" CLASS="Element59">TIdPeerThread</A>; AServerPort: Integer; AClientPort: Integer; AOS: <STRONG>String</STRONG>; AUserName: <STRONG>String</STRONG>; <STRONG>const</STRONG> ACharset: <STRONG>String</STRONG> = '');</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+AThread: TIdPeerThread</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+The connection thread for the query</DIV>
+</DIV>
+<DIV CLASS="Element17">
+AServerPort: Integer</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+The port that the connection on the server (the computer making the query)</DIV>
+</DIV>
+<DIV CLASS="Element17">
+AClientPort: Integer</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+The port that the client is connecting from (the port the daemon is using to <A HREF="000295.html" CLASS="Element59">connect</A> to the server making the query)</DIV>
+</DIV>
+<DIV CLASS="Element17">
+AOS: String</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+This is the operating system that this computer is running. This value should be one of the Id_OS_ constants that is defined in the IdAssignedNumbers unit</DIV>
+</DIV>
+<DIV CLASS="Element17">
+AUserName: String</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+This is the user name to be sent to the client.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+const ACharset: String = ''</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+This is the character set that the User name is in. This value should be one of the Id_CS constants that is defined in the IdAssignedNumber unit.<P CLASS="Element19">
+</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+This method sends the specified user name for a query.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0006">TIdIdentServer.ReplyOther</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007403.html" CLASS="Element59">TIdIdentServer</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+This method returns unformatted text to the client making a query.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>procedure</STRONG> ReplyOther(AThread: <A HREF="007613.html" CLASS="Element59">TIdPeerThread</A>; AServerPort: Integer; AClientPort: Integer; AOther: <STRONG>String</STRONG>);</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+AThread: TIdPeerThread</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+The connection thread for the query</DIV>
+</DIV>
+<DIV CLASS="Element17">
+AServerPort: Integer</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+The port that the connection on the server (the computer making the query)</DIV>
+</DIV>
+<DIV CLASS="Element17">
+AClientPort: Integer</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+The port that the client is connecting from (the port the daemon is using to <A HREF="000295.html" CLASS="Element59">connect</A> to the server making the query)</DIV>
+</DIV>
+<DIV CLASS="Element17">
+AOther: String</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+This is the text that is sent to the client making the query.<P CLASS="Element19">
+</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+This method returns unformatted text to the client making a query. Examples include an encrypted audit token or other information about a user (such as the real name and phone number of a user from a UNIX passwd file)</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0002">TIdIdentServer.OnIdentQuery</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007403.html" CLASS="Element59">TIdIdentServer</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+This event is triggered when a client queries this daemon.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> OnIdentQuery: <A HREF="007402.html" CLASS="Element59">TIdIdentQueryEvent</A>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+AClientPort</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+The port that the client is connecting from (the port the daemon is using to <A HREF="000295.html" CLASS="Element59">connect</A> to the server making the query)<P CLASS="Element19">
+</DIV>
+</DIV>
+<DIV CLASS="Element17">
+AServerPort</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+The port that the connection on the server (the computer making the query)</DIV>
+</DIV>
+<DIV CLASS="Element17">
+AThread</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+The connection thread for the query. The event is triggered within the context of this thread</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+This event is triggered when a client queries this daemon.</DIV>
+</DIV>
+<DIV CLASS="Element62">
+<HR>Created with Doc-O-Matic 2 donated to <STRONG><A HREF="http://www.delphi-jedi.org">Project JEDI</A></STRONG>. Commercial license available from the <STRONG><A HREF="http://www.doc-o-matic.com">Doc-O-Matic site</A></STRONG>.</DIV>
+</DIV></BODY></HTML>

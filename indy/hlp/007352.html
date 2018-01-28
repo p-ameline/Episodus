@@ -1,0 +1,325 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+<TITLE>TIdGopher</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <META name="GENERATOR" content="Doc-O-Matic">
+    <LINK rel="STYLESHEET" href="default.css" type="text/css">
+
+<SCRIPT LANGUAGE="JavaScript1.2" SRC="scripts.js"></SCRIPT>
+</HEAD>
+<BODY CLASS="Element57">
+<TABLE BORDER="0" BGCOLOR="#AACCFF" WIDTH="100%" CELLSPACING="0" CELLPADDING="0">
+<TR><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element1">
+Indy 9</DIV>
+</TD><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element2">
+<A HREF="content.html" CLASS="Element59">Content</A> | <A HREF="idx.html" CLASS="Element59">Index</A> | <A HREF="symref.html" CLASS="Element59">Reference</A></DIV>
+</TD></TR></TABLE><DIV CLASS="Element58">
+<DIV CLASS="Element5">
+TIdGopher</DIV>
+<DIV CLASS="Element7">
+<A HREF="011181.html" CLASS="Element59">Hierarchy</A>, <A HREF="011182.html" CLASS="Element59">Properties</A>, <A HREF="011183.html" CLASS="Element59">Methods</A>, <A HREF="011184.html" CLASS="Element59">Events</A>, <A HREF="011185.html" CLASS="Element59">See Also</A>, <A HREF="002194.html" CLASS="Element59">Unit: IdGopher</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Implements a Gopher client.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12">TIdGopher = <STRONG>class</STRONG>(<A HREF="007827.html" CLASS="Element59">TIdTCPClient</A>)</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Unit</DIV>
+<DIV CLASS="Element69">
+<A HREF="002194.html" CLASS="Element59">IdGopher</A></DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+The TIdGopher is a client implementation of the Internet Gopher protocol (RFC 1436) as described in the Internet Standards document:<P CLASS="Element10">
+<UL>
+<LI>RFC 1436- The Internet Gopher Protocol (http://www.rfc-editor.org/rfc/rfc1436.txt)</UL>
+<P CLASS="Element10">
+TIdGopher also implements partial support for the Gopher+ protocol as described in the document:<P CLASS="Element10">
+<UL>
+<LI>Gopher+, Upward-Compatible Enhancements to the Internet Gopher protocol (http://boombox.micro.umn.edu/pub/gopher/gopher_protocol/Gopher+/Gopher+.txt)</UL>
+<P CLASS="Element10">
+Gopher is a distributed document system developed at the University of Minnesota as an attempt to make locating information resources intuitive for users through a series of structured menus leading to documents or pointers to other protocols such as Telnet and TN3270. While this has been succeeded by the World Wide Web, this is still useful for accessing legacy systems and has a low overhead due to its simplicity and structure.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0006">TIdGopher.Port</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007352.html" CLASS="Element59">TIdGopher</A>, <A HREF="011186.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Port number for the connection to the Gopher server.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> Port: integer;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Port is an Integer property that identifies the port number used for connecting to a Gopher server. <A HREF="007352.html" CLASS="Element59">TIdGopher</A> overrides the definition of the Port property to assign the default value to <A HREF="002464.html" CLASS="Element59">IdPORT_GOPHER</A>, as required in the Gopher protocol specification.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0000">TIdGopher.Create</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007352.html" CLASS="Element59">TIdGopher</A>, <A HREF="011187.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Instantiates a <A HREF="007352.html" CLASS="Element59">TIdGopher</A> instance.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>constructor</STRONG> Create(AOwner: TComponent); <STRONG>override</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+AOwner: TComponent</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Owner of the object instance.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Create constructs a properly initialized instance of <A HREF="007352.html" CLASS="Element59">TIdGopher</A> using the inherited Create constructor, and initializes <A HREF="007352.html#0006" CLASS="Element59">Port</A> to the constant value <A HREF="002464.html" CLASS="Element59">IdPORT_GOPHER</A> (Decimal <STRONG>70</STRONG>) as required by the Gopher Protocol.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0001">TIdGopher.GetExtendedMenu</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007352.html" CLASS="Element59">TIdGopher</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Gets the Gopher+ extended menu.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>function</STRONG> GetExtendedMenu(ASelector: <STRONG>String</STRONG>; AView: <STRONG>String</STRONG> = ''): <A HREF="007353.html" CLASS="Element59">TIdGopherMenu</A>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+ASelector: String</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+the selector used to retrieve the gopher menu AView - alternative views listed for the item you are retrieving for a Gopher + server.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Return Value</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+<A HREF="007353.html" CLASS="Element59">TIdGopherMenu</A> - Gopher+ extended menu or standard menu.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+GetExtendedMenu is a <A HREF="007353.html" CLASS="Element59">TIdGopherMenu</A> function that gets an extended Gopher+ menu including additional Gopher+ information. GetExtendedMenu will also retrieve the standard Gopher menu if the server does not support Gopher+.<P CLASS="Element10">
+We do not recommend that you use this procedure unless you are sure the server supports Gopher+ because a constant used in the Gopher+ Protocol greeting will conflict with the menu item type constant <A HREF="002210.html" CLASS="Element59">IdGopherItem_Redundant</A> which could appear in the menu as a first item. To determine if a Gopher Server supports Gopher+, use the <A HREF="007355.html#0008" CLASS="Element59">TIdGopherMenuItem.GopherPlusItem</A> property from the gopher menu which is referring to the item you want.<P CLASS="Element10">
+The application is responsible for freeing the <A HREF="007353.html" CLASS="Element59">TIdGopherMenu</A> returned by this function.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0002">TIdGopher.GetFile</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007352.html" CLASS="Element59">TIdGopher</A>, <A HREF="011188.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Retrieve a Gopher Binary File.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>procedure</STRONG> GetFile(ASelector: <STRONG>String</STRONG>; ADestStream: TStream; IsGopherPlus: Boolean = False; AView: <STRONG>String</STRONG> = '');</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+ASelector: String</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+the selector used to retrieve the file.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+ADestStream: TStream</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+DEstination for the retrieved file.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+IsGopherPlus: Boolean = False</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Server supports Gopher+. Default value is False.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+AView: String = ''</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Alternate view listed. Default value is ''.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+GetFile is a procedure used to retrieve a binary Gopher File and store its content in ADestStream. ISGopherPlus should be set to True for Gopher+ servers, or False for non-Gopher+ servers where a file name can start with &quot;+&quot;. AView is an alternative view listed for the file you are retrieving with Gopher+.<P CLASS="Element10">
+If you are retrieving a text file, use the <A HREF="007352.html#0004" CLASS="Element59">GetTextFile</A> method because GetFile will include the &quot;.&quot; end of text file marker.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0003">TIdGopher.GetMenu</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007352.html" CLASS="Element59">TIdGopher</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Retrieves the Gopher menu.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>function</STRONG> GetMenu(ASelector: <STRONG>String</STRONG>; IsGopherPlus: Boolean = False; AView: <STRONG>String</STRONG> = ''): <A HREF="007353.html" CLASS="Element59">TIdGopherMenu</A>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+ASelector: String</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+the selector for the Gopher item or an empty string to get the root item. IsGopherPlus - Server supports Gopher+. Default value is False.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+AView: String = ''</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Alternative view listed. Default value is ''.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Return Value</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+<A HREF="007353.html" CLASS="Element59">TIdGopherMenu</A> - The standard Gopher menu.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+GetMenu is a <A HREF="007353.html" CLASS="Element59">TIdGopherMenu</A> function used to retrieve a Gopher Menu. ISGopherPlus should be set to true for Gopher+ servers or false for non-gopher plus servers in case a menu starts with a &quot;+&quot;. AView is an alternative view listed for the menu you are retrieving with Gopher+.<P CLASS="Element10">
+The application is responsible for freeing the <A HREF="007353.html" CLASS="Element59">TIdGopherMenu</A> returned by this function.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0004">TIdGopher.GetTextFile</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007352.html" CLASS="Element59">TIdGopher</A>, <A HREF="011189.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Retrieve a Gopher text File.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>procedure</STRONG> GetTextFile(ASelector: <STRONG>String</STRONG>; ADestStream: TStream; IsGopherPlus: Boolean = False; AView: <STRONG>String</STRONG> = '');</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+ASelector: String</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+the selector used to retrieve the file.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+ADestStream: TStream</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+DEstination for the retrieved file.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+IsGopherPlus: Boolean = False</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Server supports Gopher+. Default value is False.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+AView: String = ''</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Alternate view listed. Default value is ''.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+GetTextFile is a procedure used to retrieve a Gopher Text File and store its content in ADestStream. ISGopherPlus should be set to True for Gopher+ servers, or False for non-Gopher+ servers where a file name can start with &quot;+&quot;. AView is an alternative view listed for the file you are retrieving with Gopher+.<P CLASS="Element10">
+If you are retrieving a text file, use the <A HREF="007352.html#0002" CLASS="Element59">GetFile</A> method because GetTextFile will stop reading if it encounters the &quot;.&quot; end of text file marker.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0007">TIdGopher.Search</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007352.html" CLASS="Element59">TIdGopher</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Perform a Gopher search using a query.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>function</STRONG> Search(ASelector: <STRONG>String</STRONG>; AQuery: <STRONG>String</STRONG>): <A HREF="007353.html" CLASS="Element59">TIdGopherMenu</A>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+ASelector: String</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+the selector for the gopher item AQuery - the Gopher query string.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Return Value</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+<A HREF="007353.html" CLASS="Element59">TIdGopherMenu</A> - The Gopher menu returned for the query.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Search is a <A HREF="007353.html" CLASS="Element59">TIdGopherMenu</A> function used to perform a Gopher search with the query specified by AQuery, and returns a Gopher Menu resulting from the search. Gopher+ syntax is not supported in AQuery.<P CLASS="Element10">
+The application is responsible for freeing the <A HREF="007353.html" CLASS="Element59">TIdGopherMenu</A> returned by this function.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0005">TIdGopher.OnMenuItem</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007352.html" CLASS="Element59">TIdGopher</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Event handler for retrieved Gopher menu items.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> OnMenuItem: <A HREF="007354.html" CLASS="Element59">TIdGopherMenuEvent</A>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+MenuItem</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+The menu item retrieved from the server.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+Sender</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Gopher menu that own the menu item.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+OnMenuItem is a <A HREF="007354.html" CLASS="Element59">TIdGopherMenuEvent</A> event handler that is triggered for each menu item retrieved with the <A HREF="007352.html#0003" CLASS="Element59">GetMenu</A>, <A HREF="007352.html#0007" CLASS="Element59">Search</A>, and <A HREF="007352.html#0001" CLASS="Element59">GetExtendedMenu</A> methods. OnMenuItem is used to display gopher menu items while the complete menu is downloaded.<P CLASS="Element10">
+An application must assign a procedure to the event handler in order to respond to the event notification.</DIV>
+</DIV>
+<DIV CLASS="Element62">
+<HR>Created with Doc-O-Matic 2 donated to <STRONG><A HREF="http://www.delphi-jedi.org">Project JEDI</A></STRONG>. Commercial license available from the <STRONG><A HREF="http://www.doc-o-matic.com">Doc-O-Matic site</A></STRONG>.</DIV>
+</DIV></BODY></HTML>

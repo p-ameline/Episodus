@@ -1,0 +1,59 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+<TITLE>SetThreadPriority</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <META name="GENERATOR" content="Doc-O-Matic">
+    <LINK rel="STYLESHEET" href="default.css" type="text/css">
+
+<SCRIPT LANGUAGE="JavaScript1.2" SRC="scripts.js"></SCRIPT>
+</HEAD>
+<BODY CLASS="Element57">
+<TABLE BORDER="0" BGCOLOR="#AACCFF" WIDTH="100%" CELLSPACING="0" CELLPADDING="0">
+<TR><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element1">
+Indy 9</DIV>
+</TD><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element2">
+<A HREF="content.html" CLASS="Element59">Content</A> | <A HREF="idx.html" CLASS="Element59">Index</A> | <A HREF="symref.html" CLASS="Element59">Reference</A></DIV>
+</TD></TR></TABLE><DIV CLASS="Element58">
+<DIV CLASS="Element5">
+SetThreadPriority</DIV>
+<DIV CLASS="Element7">
+<A HREF="002193.html" CLASS="Element59">Unit: IdGlobal</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Updates the priority of a thread.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>procedure</STRONG> SetThreadPriority(AThread: TThread; <STRONG>const</STRONG> APriority: <A HREF="007856.html" CLASS="Element59">TIdThreadPriority</A>; <STRONG>const</STRONG> APolicy: Integer = -MaxInt);</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Unit</DIV>
+<DIV CLASS="Element69">
+<A HREF="002193.html" CLASS="Element59">IdGlobal</A></DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+AThread: TThread</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+The thread to be updated.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+const APriority: TIdThreadPriority</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+The thread priority value to be used for the thread.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+SetThreadPriority is a procedure used to update the priority of the thread in AThread to the value specified in APriority. SetThreadPriority encapsulates the platform-specific procedures and functions used to update the priority of a thread. For the Windows platform, Priority is a published property of TThread.<P CLASS="Element10">
+On the Linux platform, thread priority can only be increased for threads running with &quot;root&quot; login permissions. In this situation, SetThreadPriority will only allow non-root threads to lower their thread priority using the libc setpriority function. An attempt to increase thread priority for a non-root thread is ignored.</DIV>
+</DIV>
+<DIV CLASS="Element62">
+<HR>Created with Doc-O-Matic 2 donated to <STRONG><A HREF="http://www.delphi-jedi.org">Project JEDI</A></STRONG>. Commercial license available from the <STRONG><A HREF="http://www.doc-o-matic.com">Doc-O-Matic site</A></STRONG>.</DIV>
+</DIV></BODY></HTML>

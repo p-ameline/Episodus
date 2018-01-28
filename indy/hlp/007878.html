@@ -1,0 +1,496 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+<TITLE>TIdURI</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <META name="GENERATOR" content="Doc-O-Matic">
+    <LINK rel="STYLESHEET" href="default.css" type="text/css">
+
+<SCRIPT LANGUAGE="JavaScript1.2" SRC="scripts.js"></SCRIPT>
+</HEAD>
+<BODY CLASS="Element57">
+<TABLE BORDER="0" BGCOLOR="#AACCFF" WIDTH="100%" CELLSPACING="0" CELLPADDING="0">
+<TR><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element1">
+Indy 9</DIV>
+</TD><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element2">
+<A HREF="content.html" CLASS="Element59">Content</A> | <A HREF="idx.html" CLASS="Element59">Index</A> | <A HREF="symref.html" CLASS="Element59">Reference</A></DIV>
+</TD></TR></TABLE><DIV CLASS="Element58">
+<DIV CLASS="Element5">
+TIdURI</DIV>
+<DIV CLASS="Element7">
+<A HREF="014702.html" CLASS="Element59">Hierarchy</A>, <A HREF="014703.html" CLASS="Element59">Properties</A>, <A HREF="014704.html" CLASS="Element59">Methods</A>, <A HREF="014705.html" CLASS="Element59">See Also</A>, <A HREF="002947.html" CLASS="Element59">Unit: IdURI</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Represents a Universal Resource Identifier.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12">TIdURI = <STRONG>class</STRONG></PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Unit</DIV>
+<DIV CLASS="Element69">
+<A HREF="002947.html" CLASS="Element59">IdURI</A></DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+The TIdURI object parses a <A HREF="007878.html#000D" CLASS="Element59">URI</A> specified in the <A HREF="007878.html#0001" CLASS="Element59">Create</A> constructor into its components: <A HREF="007878.html#000C" CLASS="Element59">Protocol</A>, <A HREF="007878.html#0004" CLASS="Element59">Host</A>, <A HREF="007878.html#000B" CLASS="Element59">Port</A>, <A HREF="007878.html#0009" CLASS="Element59">Path</A>, <A HREF="007878.html#0002" CLASS="Element59">Document</A>, and <A HREF="007878.html#0000" CLASS="Element59">Bookmark</A>. You may also modify the <A HREF="007878.html#000D" CLASS="Element59">URI</A> using object properties.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0000">TIdURI.Bookmark</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007878.html" CLASS="Element59">TIdURI</A>, <A HREF="014706.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Represents an Anchor specified in a <A HREF="007878.html#000D" CLASS="Element59">URI</A>.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> Bookmark: <STRONG>string</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+This is an anchor into a document which was specified by the <A HREF="007878.html#000D" CLASS="Element59">URI</A>. Most web-browsers will simply load the document and scroll down to were the anchor is located in the document. The anchor is used internally by web-browsers and is never sent to the server. <A HREF="007375.html" CLASS="Element59">TIdHTTP</A> and <A HREF="007392.html" CLASS="Element59">TIdHTTPServer</A> will ignore the anchor if it is provided.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0002">TIdURI.Document</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007878.html" CLASS="Element59">TIdURI</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Represents the document name in a <A HREF="007878.html#000D" CLASS="Element59">URI</A>.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> Document: <STRONG>string</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Document is a String property that represents the document portion of a <A HREF="007878.html#000D" CLASS="Element59">URI</A>. For example, the <A HREF="007878.html#000D" CLASS="Element59">URI</A> &quot;http://www.nevrona.com:80/indy/index.html&quot; would result in Document containing the value &quot;index.html&quot;.<P CLASS="Element10">
+Document may be blank if a user is requesting a default page or URL such as &quot;http://www.nevrona.com/indy/&quot;, a directory, or when documents are not applicable to the protocol.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0004">TIdURI.Host</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007878.html" CLASS="Element59">TIdURI</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Represents the host name portion of a <A HREF="007878.html#000D" CLASS="Element59">URI</A>.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> Host: <STRONG>string</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Host is a String property that represents the host name portion of a <A HREF="007878.html#000D" CLASS="Element59">URI</A>. For example, a <A HREF="007878.html#000D" CLASS="Element59">URI</A> with the value &quot;http://www.nevrona.com:80/indy/index.html&quot; would result in the Host property having the value &quot;www.nevrona.com&quot;.<P CLASS="Element10">
+Host can contain either a computer name such as &quot;www.nevrona.com&quot; or an IP address such as &quot;208.225.207.130&quot;.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0006">TIdURI.Params</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007878.html" CLASS="Element59">TIdURI</A>, <A HREF="014707.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Represents optional arguments in the <A HREF="007878.html#000D" CLASS="Element59">URI</A>.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> Params: <STRONG>string</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Params is a String property that represents optional arguments used in the <A HREF="007878.html#000D" CLASS="Element59">URI</A>. Params will normally contain values that do not represent one of the other <A HREF="007878.html#000D" CLASS="Element59">URI</A> component values like <A HREF="007878.html#0002" CLASS="Element59">Document</A> or <A HREF="007878.html#0000" CLASS="Element59">Bookmark</A> as extracted in <A HREF="005923.html" CLASS="Element59">ParseURI</A>. Params values are normally expressed in the URN notation and can be encoded from their raw form using ParansEncode.<P CLASS="Element10">
+Params is updated in <A HREF="005923.html" CLASS="Element59">ParseURI</A>, and is used when <A HREF="007878.html#0003" CLASS="Element59">GetFullURI</A> is called to rebuild the <A HREF="007878.html#000D" CLASS="Element59">URI</A> value from its components.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0008">TIdURI.Password</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007878.html" CLASS="Element59">TIdURI</A>, <A HREF="014708.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Represents a password in a <A HREF="007878.html#000D" CLASS="Element59">URI</A>.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> Password: <STRONG>string</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Password is a String property that represents a password that occurs in the <A HREF="007878.html#000D" CLASS="Element59">URI</A> expressed in the form:<P CLASS="Element10">
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12">      http://username:password@hostname:port/path/document#bookmark</PRE></DIV>
+</DIV>
+</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0009">TIdURI.Path</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007878.html" CLASS="Element59">TIdURI</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Represents the path for a <A HREF="007878.html#000D" CLASS="Element59">URI</A>.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> Path: <STRONG>string</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Path is a String property that represents the path portion of a <A HREF="007878.html#000D" CLASS="Element59">URI</A>. For example, the <A HREF="007878.html#000D" CLASS="Element59">URI</A> with the value &quot;http://www.nevrona.com:80/indy/index.html&quot; would result in the Path property containing the value &quot;/indy/&quot;.<P CLASS="Element10">
+Path can contain &quot;/&quot; if the root directory is specified, or when a path is not applicable with the protocol.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="000B">TIdURI.Port</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007878.html" CLASS="Element59">TIdURI</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Represents the port portion of a <A HREF="007878.html#000D" CLASS="Element59">URI</A>.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> Port: <STRONG>string</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Port is a String property that represents the port specified in a <A HREF="007878.html#000D" CLASS="Element59">URI</A>. For example, a <A HREF="007878.html#000D" CLASS="Element59">URI</A> with the value &quot;http://www.nevrona.com:80/indy/index.html&quot; would result in Port property containing the value &quot;80&quot;.<P CLASS="Element10">
+Often the Port property is not used because most <A HREF="007878.html#000D" CLASS="Element59">URI</A>'s use a default port which is indicated by the protocol, as in &quot;http://www.nevrona.com/indy/index.html&quot;. The HTTP protocol uses port 80 by default.<P CLASS="Element10">
+However, this value should be checked since port can be overridden by a port specified in the <A HREF="007878.html#000D" CLASS="Element59">URI</A>.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="000C">TIdURI.Protocol</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007878.html" CLASS="Element59">TIdURI</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Represents the protocol requested in a <A HREF="007878.html#000D" CLASS="Element59">URI</A>.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> Protocol: <STRONG>string</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Protocol is a String property that represents the protocol requested in a <A HREF="007878.html#000D" CLASS="Element59">URI</A>. For example, a <A HREF="007878.html#000D" CLASS="Element59">URI</A> with the value &quot;http://www.nevrona.com:80/indy/index.html&quot; would result in the Protocol property containg the value &quot;http&quot;.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="000D">TIdURI.URI</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007878.html" CLASS="Element59">TIdURI</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Represents a complete Universal Resource Identifier.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> URI: <STRONG>string</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+URI is a String property that represents the complete <A HREF="007878.html#000C" CLASS="Element59">Protocol</A>, <A HREF="007878.html#0004" CLASS="Element59">Host</A>, <A HREF="007878.html#000B" CLASS="Element59">Port</A>, <A HREF="007878.html#0009" CLASS="Element59">Path</A>, <A HREF="007878.html#0002" CLASS="Element59">Document</A>, and <A HREF="007878.html#0000" CLASS="Element59">Bookmark</A> for a resource. Changing the value of URI will cause <A HREF="007878.html#000C" CLASS="Element59">Protocol</A>, <A HREF="007878.html#0004" CLASS="Element59">Host</A>, <A HREF="007878.html#000B" CLASS="Element59">Port</A>, <A HREF="007878.html#0009" CLASS="Element59">Path</A>, <A HREF="007878.html#0002" CLASS="Element59">Document</A>, and <A HREF="007878.html#0000" CLASS="Element59">Bookmark</A> to be parsed from the URI into the corresponding property values.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0010">TIdURI.Username</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007878.html" CLASS="Element59">TIdURI</A>, <A HREF="014709.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Represents a user name in a <A HREF="007878.html#000D" CLASS="Element59">URI</A>.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> Username: <STRONG>string</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Username is a String property that represents the user name contained in a <A HREF="007878.html#000D" CLASS="Element59">URI</A> expressed in the form:<P CLASS="Element10">
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12">      http://username:password@hostname:port/path/document#bookmark</PRE></DIV>
+</DIV>
+</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0001">TIdURI.Create</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007878.html" CLASS="Element59">TIdURI</A>, <A HREF="014710.html" CLASS="Element59">See Also</A>, <A HREF="014711.html" CLASS="Element59">Example</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Constructor for the object instance.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>constructor</STRONG> Create(<STRONG>const</STRONG> AURI: <STRONG>string</STRONG> = ''); <STRONG>virtual</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+const AURI: string = ''</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Universal Resource Identifier represented by the object instance. Default value is ''.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Create is the constructor for the object instance. Create calls the inherited Create method. AURI is an optional String that specifies the <A HREF="007878.html#000C" CLASS="Element59">Protocol</A>, <A HREF="007878.html#0004" CLASS="Element59">Host</A>, <A HREF="007878.html#000B" CLASS="Element59">Port</A>, <A HREF="007878.html#0009" CLASS="Element59">Path</A>, <A HREF="007878.html#0002" CLASS="Element59">Document</A>, and <A HREF="007878.html#0000" CLASS="Element59">Bookmark</A> for the resource. When AURI contains a non-blank value, the value is asdsigned to the <A HREF="007878.html#000D" CLASS="Element59">URI</A> property, and causes the component portions of the <A HREF="007878.html#000D" CLASS="Element59">URI</A> to be parsed into their corresponding object properties.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0003">TIdURI.GetFullURI</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007878.html" CLASS="Element59">TIdURI</A>, <A HREF="014712.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Retrieves a <A HREF="007878.html#000D" CLASS="Element59">URI</A> value including optional fields.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>function</STRONG> GetFullURI(<STRONG>const</STRONG> AOptionalFileds: <A HREF="007880.html" CLASS="Element59">TIdURIOptionalFieldsSet</A> = [ofAuthInfo, ofBookmark]): <STRONG>String</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+const AOptionalFileds: TIdURIOptionalFieldsSet = [ofAuthInfo, ofBookmark]</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Optional <A HREF="007878.html#000D" CLASS="Element59">URI</A> fields to include in the return value.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Return Value</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+String - <A HREF="007878.html#000D" CLASS="Element59">URI</A> constructed from property values.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+GetFullURI is a String function that constructs a <A HREF="007878.html#000D" CLASS="Element59">URI</A> from property values, and may include optional field values as indicated in AOptionalFileds. The return value for GetFullURI contains a string in the format:<P CLASS="Element10">
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12">    protocol://username:password@host:port/document#bookmark</PRE></DIV>
+</DIV>
+<P CLASS="Element10">
+<A HREF="007878.html#0010" CLASS="Element59">Username</A> and <A HREF="007878.html#0008" CLASS="Element59">Password</A> property values are included in the <A HREF="007878.html#000D" CLASS="Element59">URI</A> when <A HREF="007878.html#0010" CLASS="Element59">Username</A> is not blank and AOptionalFields includes the value ofAuthInfo.<P CLASS="Element10">
+<A HREF="007878.html#000B" CLASS="Element59">Port</A> number is included in the <A HREF="007878.html#000D" CLASS="Element59">URI</A> when the property contains a non-zero value.<P CLASS="Element10">
+The value for <A HREF="007878.html#0000" CLASS="Element59">Bookmark</A> is included in the <A HREF="007878.html#000D" CLASS="Element59">URI</A> when the property is not blank and AOptionalFields includes the value ofBookmark.<P CLASS="Element10">
+Use the <A HREF="007878.html#000D" CLASS="Element59">URI</A> property to get the <A HREF="007878.html#000D" CLASS="Element59">URI</A> value without optional <A HREF="007878.html#000D" CLASS="Element59">URI</A> fields.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0005">TIdURI.NormalizePath</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007878.html" CLASS="Element59">TIdURI</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Converts a directory specifier to the UNIX format.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>class</STRONG> <STRONG>procedure</STRONG> NormalizePath(<STRONG>var</STRONG> APath: <STRONG>string</STRONG>);</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+var APath: string</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Directory to be normalized.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+NormalizePath is a class procedure that converts the directory specified in APath to the UNIX directory syntax. NormalizePath will convert all &quot;&quot; characters to the UNIX path seperator &quot;/&quot;. NormalizePath does NOT convert device names.<P CLASS="Element10">
+NormalizePath returns the converted path specifier in the APath parameter.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0007">TIdURI.ParamsEncode</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007878.html" CLASS="Element59">TIdURI</A>, <A HREF="014713.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Converts <A HREF="007878.html#000D" CLASS="Element59">URI</A> parameter values to their encoded form.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>class</STRONG> <STRONG>function</STRONG> ParamsEncode(<STRONG>const</STRONG> ASrc: <STRONG>string</STRONG>): <STRONG>string</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+const ASrc: string</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Unencoded parameter values for the method.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Return Value</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+String - Parameter values with unsafe characters translated to their encoded values.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+ParamsEncode is a String function used to convert unsafe characters in the <A HREF="007878.html#000D" CLASS="Element59">URI</A> parameter values specified in ASrc to their encoded form. ParamsEncode will convert unsafe characters to their representation in the form %nn, when nn is a the ordinal value of the unsafe character expressed in hexadecimal form. Unsafe characters include any ordinal value greater than $79 (127 Decimal), and the following reserved characters:<P CLASS="Element10">
+<UL>
+<LI>*<P CLASS="Element10">
+<LI>#<P CLASS="Element10">
+<LI>%<P CLASS="Element10">
+<LI>&lt;<P CLASS="Element10">
+<LI>&gt;<P CLASS="Element10">
+<LI>+</UL>
+<P CLASS="Element10">
+ParamsEncode will also convert the space character (<A HREF="000286.html" CLASS="Element59">CHAR32</A>) to it's encoded representation as the character '+' (43 Decimal) (2B Hex).<P CLASS="Element10">
+ParamEncode is a class method, and may be used with a class instance instead of an object instance. For example:<P CLASS="Element10">
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12">      sEncVal := TIdURI.ParamsEncode('gn=local group+uid=12');</PRE></DIV>
+</DIV>
+</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="000A">TIdURI.PathEncode</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007878.html" CLASS="Element59">TIdURI</A>, <A HREF="014714.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Converts <A HREF="007878.html#000D" CLASS="Element59">URI</A> path values to their encoded form.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>class</STRONG> <STRONG>function</STRONG> PathEncode(<STRONG>const</STRONG> ASrc: <STRONG>string</STRONG>): <STRONG>string</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+const ASrc: string</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Unencoded parameter values for the method.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Return Value</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+String - <A HREF="007878.html#0009" CLASS="Element59">Path</A> value with unsafe characters translated to their encoded form.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+PathEncode is a String function used to convert unsafe characters in the <A HREF="007878.html#000D" CLASS="Element59">URI</A> path specified in ASrc to their encoded form. PathEncode will convert unsafe characters to their representation in the form %nn, when nn is a the ordinal value of the unsafe character expressed in hexadecimal form. Unsafe characters include any ordinal value greater than $79 (127 Decimal), and the following reserved characters:<P CLASS="Element10">
+<UL>
+<LI>*<P CLASS="Element10">
+<LI>#<P CLASS="Element10">
+<LI>%<P CLASS="Element10">
+<LI>&lt;<P CLASS="Element10">
+<LI>&gt;<P CLASS="Element10">
+<LI>+<P CLASS="Element10">
+<LI>(Space)</UL>
+<P CLASS="Element10">
+PathEncode is a class method, and may be used with a class instance instead of an object instance. For example:<P CLASS="Element10">
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12">      sEncVal := TIdURI.PathEncode('program filesborlanddelphi6');</PRE></DIV>
+</DIV>
+</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="000E">TIdURI.URLDecode</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007878.html" CLASS="Element59">TIdURI</A>, <A HREF="014715.html" CLASS="Element59">See Also</A>, <A HREF="014716.html" CLASS="Element59">Example</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Converts a URL-Encoded string to a US-ASCII string.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>class</STRONG> <STRONG>function</STRONG> URLDecode(ASrc: <STRONG>string</STRONG>): <STRONG>string</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+ASrc: string</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+URL-encoded string to be decoded.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Return Value</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+String - The un-encoded ASCII representation of the URL.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+URLDecode is a String class function that converts the URL-encoded string in ASrc to its representation in the US-ASCII character set. URLDecode is based on the URL character encoding rules as described in the Internet Standards document RFC 1738 - Uniform Resource Locators (URL) (http://www.rfc-editor.org/rfc/rfc1738.txt) .<P CLASS="Element10">
+URLDecode can used to reverse any string encoding performed using <A HREF="007878.html#000F" CLASS="Element59">URLEncode</A>.<P CLASS="Element10">
+URLDecode converts all occurrances of the '+' character to ' ' (Space) (Decimal 32). URLDecode reads any values represented as a hexadecimal character triplet consisting of the &quot;%&quot; character followed by the two-digit hexadecimal value for the octet, and returns the value to its US-ASCII representation.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="000F">TIdURI.URLEncode</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007878.html" CLASS="Element59">TIdURI</A>, <A HREF="014717.html" CLASS="Element59">See Also</A>, <A HREF="014718.html" CLASS="Element59">Example</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Converts a US-ASCII string to a URL-Encoded string.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>class</STRONG> <STRONG>function</STRONG> URLEncode(<STRONG>const</STRONG> ASrc: <STRONG>string</STRONG>): <STRONG>string</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+const ASrc: string</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+US-ASCII string to be encoded.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Return Value</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+String - URL-encoded representation of the string.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+URLEncode is a String class function that converts a US-ASCII string to its representation in the URL Encoding scheme. URLEncode is based on the URL character encoding rules as described in the Internet Standards document RFC 1738 - Uniform Resource Locators (URL) (http://www.rfc-editor.org/rfc/rfc1738.txt)<P CLASS="Element10">
+URLEncode performs special handling for characters deemed unsafe in the URL encoding scheme, and any graphical US-ASCII characters in the range 80-FF hexadecimal. The characters are converted to the character triplet consisting of the &quot;%&quot; character followed by the two-digit hexadecimal value for the octet.<P CLASS="Element10">
+Use <A HREF="007878.html#000E" CLASS="Element59">URLDecode</A> to return a URL-encoded string to its US-ASCII representation.</DIV>
+</DIV>
+<DIV CLASS="Element62">
+<HR>Created with Doc-O-Matic 2 donated to <STRONG><A HREF="http://www.delphi-jedi.org">Project JEDI</A></STRONG>. Commercial license available from the <STRONG><A HREF="http://www.doc-o-matic.com">Doc-O-Matic site</A></STRONG>.</DIV>
+</DIV></BODY></HTML>

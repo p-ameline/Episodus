@@ -1,0 +1,661 @@
+// -----------------------------------------------------------------------------
+// nsdrugdlg.rc
+// -----------------------------------------------------------------------------
+// -----------------------------------------------------------------------------
+// $Revision: 1.3 $
+// $Author: pameline $
+// $Date: 2009/07/23 08:17:33 $
+// -----------------------------------------------------------------------------
+// -----------------------------------------------------------------------------
+
+// -----------------------------------------------------------------------------
+// Copyright Nautilus, 2004
+// http://www.nautilus-info.com
+// -----------------------------------------------------------------------------
+// Ce logiciel est un programme informatique servant à gérer et traiter les
+// informations de santé d'une personne.
+//
+// Ce logiciel est régi par la licence CeCILL soumise au droit français et
+// respectant les principes de diffusion des logiciels libres. Vous pouvez
+// utiliser, modifier et/ou redistribuer ce programme sous les conditions de la
+// licence CeCILL telle que diffusée par le CEA, le CNRS et l'INRIA sur le site
+// "http://www.cecill.info".
+//
+// En contrepartie de l'accessibilité au code source et des droits de copie, de
+// modification et de redistribution accordés par cette licence, il n'est offert
+// aux utilisateurs qu'une garantie limitée. Pour les mêmes raisons, seule une
+// responsabilité restreinte pèse sur l'auteur du programme, le titulaire des
+// droits patrimoniaux et les concédants successifs.
+//
+// A cet égard  l'attention de l'utilisateur est attirée sur les risques
+// associés au chargement, à l'utilisation, à la modification et/ou au
+// développement et à la reproduction du logiciel par l'utilisateur étant donné
+// sa spécificité de logiciel libre, qui peut le rendre complexe à manipuler et
+// qui le réserve donc à des développeurs et des professionnels avertis
+// possédant des connaissances informatiques approfondies. Les utilisateurs sont
+// donc invités à charger et tester l'adéquation du logiciel à leurs besoins
+// dans des conditions permettant d'assurer la sécurité de leurs systèmes et ou
+// de leurs données et, plus généralement, à l'utiliser et l'exploiter dans les
+// mêmes conditions de sécurité.
+//
+// Le fait que vous puissiez accéder à cet en-tête signifie que vous avez pris
+// connaissance de la licence CeCILL, et que vous en avez accepté les termes.
+// -----------------------------------------------------------------------------
+// This software is a computer program whose purpose is to manage and process
+// a person's health data.
+//
+// This software is governed by the CeCILL  license under French law and abiding
+// by the rules of distribution of free software. You can use, modify and/ or
+// redistribute the software under the terms of the CeCILL license as circulated
+// by CEA, CNRS and INRIA at the following URL "http://www.cecill.info".
+//
+// As a counterpart to the access to the source code and  rights to copy, modify
+// and redistribute granted by the license, users are provided only with a
+// limited warranty and the software's author, the holder of the economic
+// rights, and the successive licensors have only limited liability.
+//
+// In this respect, the user's attention is drawn to the risks associated with
+// loading, using, modifying and/or developing or reproducing the software by
+// the user in light of its specific status of free software, that may mean that
+// it is complicated to manipulate, and that also therefore means that it is
+// reserved for developers and experienced professionals having in-depth
+// computer knowledge. Users are therefore encouraged to load and test the
+// software's suitability as regards their requirements in conditions enabling
+// the security of their systems and/or data to be ensured and, more generally,
+// to use and operate it in the same conditions as regards security.
+//
+// The fact that you are presently reading this means that you have had
+// knowledge of the CeCILL license and that you accept its terms.
+// -----------------------------------------------------------------------------
+// -----------------------------------------------------------------------------// Attention// -----------------------------------------------------------------------------// Les chemins des include doivent être en chemin relatif sur le cvs.// Si vous avez besoin de les modifier en chemin absolu pour pouvoir les// modifier avec Borland 5, vous devez les repasser en chemin relatif avant de// les remettre sur le cvs. // -----------------------------------------------------------------------------
+// #include "gg\gg.rh"
+#include "nsbb\nsbb.rh"
+
+NEW_MEDIC DIALOG 124, 121, 422, 233
+STYLE DS_MODALFRAME | WS_POPUP | WS_VISIBLE | WS_CAPTION | WS_SYSMENU
+CLASS "bordlg"
+CAPTION "Prescription d'un médicament"
+FONT 8, "MS Sans Serif"
+{
+ CONTROL "", -1, "BorShade", BSS_GROUP | BSS_CAPTION | BSS_LEFT | WS_CHILD | WS_VISIBLE | WS_GROUP, 5, 4, 199, 52
+ CONTROL "", -1, "BorShade", BSS_GROUP | BSS_CAPTION | BSS_LEFT | WS_CHILD | WS_VISIBLE | WS_GROUP, 12, 8, 184, 43
+ CONTROL "", -1, "BorShade", BSS_RGROUP | BSS_CAPTION | BSS_LEFT | WS_CHILD | WS_VISIBLE | WS_GROUP, 16, 10, 112, 38
+ CONTROL "Date de début", -1, "BorStatic", SS_LEFT | WS_CHILD | WS_VISIBLE | WS_GROUP, 21, 18, 52, 8
+ CONTROL "", 101, "edit", ES_LEFT | WS_CHILD | WS_VISIBLE | WS_BORDER | WS_TABSTOP, 76, 16, 48, 12
+ CONTROL "Date de fin", -1, "BorStatic", SS_LEFT | WS_CHILD | WS_VISIBLE | WS_GROUP, 21, 30, 52, 8
+ CONTROL "", 103, "edit", ES_LEFT | WS_CHILD | WS_VISIBLE | WS_BORDER | WS_TABSTOP, 76, 28, 48, 12
+ CONTROL "", 105, "edit", ES_LEFT | WS_CHILD | WS_VISIBLE | WS_BORDER | WS_TABSTOP, 135, 18, 33, 12
+ CONTROL "jours", -1, "BorStatic", SS_LEFT | WS_CHILD | WS_VISIBLE | WS_GROUP, 172, 20, 20, 8
+ CONTROL "indéterminée", 106, "BorRadio", BS_RADIOBUTTON | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 136, 32, 56, 12
+ CONTROL "", -1, "BorShade", BSS_GROUP | BSS_CAPTION | BSS_LEFT | WS_CHILD | WS_VISIBLE | WS_GROUP, 208, 4, 140, 52
+ CONTROL "Unite de prise", -1, "BorStatic", SS_LEFT | WS_CHILD | WS_VISIBLE | WS_GROUP, 254, 12, 48, 9
+ CONTROL "", 107, "edit", ES_LEFT | WS_CHILD | WS_VISIBLE | WS_BORDER | WS_TABSTOP, 214, 24, 128, 12
+ CONTROL "", -1, "BorShade", BSS_HDIP | BSS_LEFT | WS_CHILD | WS_VISIBLE, 4, 61, 344, 1
+ CONTROL "Rythme circadien", -1, "BorShade", BSS_RGROUP | BSS_CAPTION | BSS_CENTER | WS_CHILD | WS_VISIBLE | WS_GROUP, 32, 64, 288, 38
+ CONTROL "Réveil", -1, "BorShade", BSS_GROUP | BSS_CAPTION | BSS_CENTER | WS_CHILD | WS_VISIBLE | WS_GROUP, 36, 75, 40, 23
+ CONTROL "", 201, "edit", ES_CENTER | WS_CHILD | WS_VISIBLE | WS_BORDER | WS_TABSTOP, 44, 85, 20, 12
+ CONTROL "Matin", -1, "BorShade", BSS_GROUP | BSS_CAPTION | BSS_CENTER | WS_CHILD | WS_VISIBLE | WS_GROUP, 76, 75, 40, 23
+ CONTROL "", 202, "edit", ES_CENTER | WS_CHILD | WS_VISIBLE | WS_BORDER | WS_TABSTOP, 86, 85, 20, 12
+ CONTROL "Midi", -1, "BorShade", BSS_GROUP | BSS_CAPTION | BSS_CENTER | WS_CHILD | WS_VISIBLE | WS_GROUP, 116, 75, 40, 23
+ CONTROL "", 203, "edit", ES_CENTER | WS_CHILD | WS_VISIBLE | WS_BORDER | WS_TABSTOP, 126, 85, 20, 12
+ CONTROL "Après-midi", -1, "BorShade", BSS_GROUP | BSS_CAPTION | BSS_CENTER | WS_CHILD | WS_VISIBLE | WS_GROUP, 156, 75, 40, 23
+ CONTROL "", 204, "edit", ES_CENTER | WS_CHILD | WS_VISIBLE | WS_BORDER | WS_TABSTOP, 166, 85, 20, 12
+ CONTROL "Soir", -1, "BorShade", BSS_GROUP | BSS_CAPTION | BSS_CENTER | WS_CHILD | WS_VISIBLE | WS_GROUP, 196, 75, 40, 23
+ CONTROL "", 205, "edit", ES_CENTER | WS_CHILD | WS_VISIBLE | WS_BORDER | WS_TABSTOP, 206, 85, 20, 12
+ CONTROL "Coucher", -1, "BorShade", BSS_GROUP | BSS_CAPTION | BSS_CENTER | WS_CHILD | WS_VISIBLE | WS_GROUP, 236, 75, 40, 23
+ CONTROL "", 206, "edit", ES_CENTER | WS_CHILD | WS_VISIBLE | WS_BORDER | WS_TABSTOP, 246, 85, 20, 12
+ CONTROL "Nuit", -1, "BorShade", BSS_GROUP | BSS_CAPTION | BSS_CENTER | WS_CHILD | WS_VISIBLE | WS_GROUP, 276, 75, 40, 23
+ CONTROL "", 207, "edit", ES_CENTER | WS_CHILD | WS_VISIBLE | WS_BORDER | WS_TABSTOP, 286, 85, 20, 12
+ CONTROL "", -1, "BorShade", BSS_HDIP | BSS_LEFT | WS_CHILD | WS_VISIBLE, 4, 108, 344, 1
+ CONTROL "", 301, "SysTreeView32", WS_TABSTOP | TVS_HASBUTTONS | TVS_HASLINES | TVS_LINESATROOT | TVS_EDITLABELS | TVS_SHOWSELALWAYS | WS_CHILD | WS_VISIBLE | WS_BORDER, 4, 116, 344, 108
+ CONTROL "", -1, "BorShade", BSS_VDIP | BSS_LEFT | WS_CHILD | WS_VISIBLE, 356, 9, 1, 211
+ CONTROL "", IDOK, "BorBtn", BS_PUSHBUTTON | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 372, 12, 43, 25
+ CONTROL "", IDCANCEL, "BorBtn", BS_PUSHBUTTON | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 372, 56, 43, 25
+}
+NEW_MEDIC_INIT RCDATA
+{
+"NSTITRE"
+"0PROB1"
+"NSCONTRO"
+" | | |"
+"KOUVR1|KOUVR1/2DA011/£D0;10:BEGINNOW|"
+"KFERM1|KFERM1/2DA011/£D0;10:ENDING|"
+" :LASTING_TIME| | :NOENDING|"
+" |"
+"0MEDF1|0MEDF1/£C;020:CAPTION|"
+" |"
+"KRYTH1|"
+"KREVE1|KRYTH1/KMOME1/KREVE1/VNBDO1/200001/£N0;03|"
+"KMATI1|KRYTH1/KMOME1/KMATI1/VNBDO1/200001/£N0;03|"
+"KMIDI1|KRYTH1/KMOME1/KMIDI1/VNBDO1/200001/£N0;03|"
+"KAPMI1|KRYTH1/KMOME1/KAPMI1/VNBDO1/200001/£N0;03|"
+"KSOIR1|KRYTH1/KMOME1/KSOIR1/VNBDO1/200001/£N0;03|"
+"KCOUC1|KRYTH1/KMOME1/KCOUC1/VNBDO1/200001/£N0;03|"
+"KNOCT3|KRYTH1/KMOME1/KNOCT3/VNBDO1/200001/£N0;03|"
+" |#####1/0DETA1| |"
+" | |"
+"FINRCDAT"
+}
+
+NEW_MEDIC_COMPLEX DIALOG 124, 121, 561, 236
+STYLE DS_MODALFRAME | WS_POPUP | WS_VISIBLE | WS_CAPTION | WS_SYSMENU
+CLASS "bordlg"
+CAPTION "Prescription d'un médicament"
+FONT 8, "MS Sans Serif"
+{
+ CONTROL "", -1, "BorShade", BSS_GROUP | BSS_CAPTION | BSS_LEFT | WS_CHILD | WS_VISIBLE | WS_GROUP, 5, 4, 360, 92
+ CONTROL "", -1, "BorShade", BSS_GROUP | BSS_CAPTION | BSS_LEFT | WS_CHILD | WS_VISIBLE | WS_GROUP, 12, 26, 348, 43
+ CONTROL "Date de début", -1, "BorStatic", SS_LEFT | WS_CHILD | WS_VISIBLE | WS_GROUP, 17, 30, 52, 8
+ CONTROL "", 101, "edit", ES_LEFT | WS_CHILD | WS_VISIBLE | WS_BORDER | WS_TABSTOP, 72, 28, 48, 12
+ CONTROL "Date de fin", -1, "BorShade", BSS_RGROUP | BSS_CAPTION | BSS_LEFT | WS_CHILD | WS_VISIBLE | WS_GROUP, 16, 40, 332, 26
+ CONTROL "le", 102, "BorRadio", BS_AUTORADIOBUTTON | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 48, 52, 20, 12
+ CONTROL "", 103, "edit", ES_LEFT | WS_CHILD | WS_VISIBLE | WS_BORDER | WS_TABSTOP, 72, 52, 48, 12
+ CONTROL "durée totale", 104, "BorRadio", BS_AUTORADIOBUTTON | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 148, 52, 52, 12
+ CONTROL "", 105, "edit", ES_LEFT | ES_WANTRETURN | WS_CHILD | WS_VISIBLE | WS_BORDER | WS_TABSTOP, 199, 52, 33, 12
+ CONTROL "jours", -1, "BorStatic", SS_LEFT | WS_CHILD | WS_VISIBLE | WS_GROUP, 236, 54, 20, 8
+ CONTROL "indéterminée", 106, "BorRadio", BS_AUTORADIOBUTTON | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 276, 52, 56, 12
+ CONTROL "Unite de prise", -1, "BorStatic", SS_LEFT | WS_CHILD | WS_VISIBLE | WS_GROUP, 12, 76, 100, 9
+ CONTROL "", 107, "edit", ES_LEFT | WS_CHILD | WS_VISIBLE | WS_BORDER | WS_TABSTOP, 60, 76, 128, 12
+ CONTROL "", -1, "BorShade", BSS_GROUP | BSS_CAPTION | BSS_LEFT | WS_CHILD | WS_VISIBLE | WS_GROUP, 4, 100, 552, 100
+ CONTROL "", -1, "BorShade", BSS_GROUP | BSS_CAPTION | BSS_LEFT | WS_CHILD | WS_VISIBLE | WS_GROUP, 140, 108, 100, 16
+ CONTROL "Matin", -1, "BorStatic", SS_LEFT | WS_CHILD | WS_VISIBLE | WS_GROUP, 172, 112, 20, 8
+ CONTROL "", 201, "edit", ES_LEFT | WS_CHILD | WS_VISIBLE | WS_BORDER | WS_TABSTOP, 192, 110, 20, 12
+ CONTROL "", -1, "BorShade", BSS_GROUP | BSS_CAPTION | BSS_LEFT | WS_CHILD | WS_VISIBLE | WS_GROUP, 242, 108, 45, 16
+ CONTROL "Midi", -1, "BorStatic", SS_LEFT | WS_CHILD | WS_VISIBLE | WS_GROUP, 244, 114, 16, 8
+ CONTROL "", 202, "edit", ES_LEFT | WS_CHILD | WS_VISIBLE | WS_BORDER | WS_TABSTOP, 264, 110, 20, 12
+ CONTROL "", -1, "BorShade", BSS_GROUP | BSS_CAPTION | BSS_CENTER | WS_CHILD | WS_VISIBLE | WS_GROUP, 288, 108, 88, 16
+ CONTROL "Après-midi", -1, "BorStatic", SS_LEFT | WS_CHILD | WS_VISIBLE | WS_GROUP, 304, 112, 36, 8
+ CONTROL "", 203, "edit", ES_CENTER | WS_CHILD | WS_VISIBLE | WS_BORDER | WS_TABSTOP, 348, 110, 20, 12
+ CONTROL "", -1, "BorShade", BSS_GROUP | BSS_CAPTION | BSS_LEFT | WS_CHILD | WS_VISIBLE | WS_GROUP, 380, 108, 80, 16
+ CONTROL "Soir", -1, "BorStatic", SS_LEFT | WS_CHILD | WS_VISIBLE | WS_GROUP, 404, 114, 16, 8
+ CONTROL "", 204, "edit", ES_LEFT | WS_CHILD | WS_VISIBLE | WS_BORDER | WS_TABSTOP, 424, 110, 20, 12
+ CONTROL "", -1, "BorShade", BSS_GROUP | BSS_CAPTION | BSS_LEFT | WS_CHILD | WS_VISIBLE | WS_GROUP, 464, 108, 68, 16
+ CONTROL "Nuit", -1, "BorStatic", SS_LEFT | WS_CHILD | WS_VISIBLE | WS_GROUP, 480, 112, 20, 9
+ CONTROL "", 205, "edit", ES_LEFT | WS_CHILD | WS_VISIBLE | WS_BORDER | WS_TABSTOP, 504, 110, 20, 12
+ CONTROL "", -1, "BorShade", BSS_RGROUP | BSS_CAPTION | BSS_LEFT | WS_CHILD | WS_VISIBLE | WS_GROUP, 16, 128, 488, 26
+ CONTROL "1", -1, "BorStatic", SS_CENTER | WS_CHILD | WS_VISIBLE | WS_GROUP, 26, 132, 8, 8
+ CONTROL "", 402, "edit", ES_LEFT | WS_CHILD | WS_VISIBLE | WS_BORDER | WS_TABSTOP, 20, 140, 20, 12
+ CONTROL "2", -1, "BorStatic", SS_CENTER | WS_CHILD | WS_VISIBLE | WS_GROUP, 46, 132, 8, 8
+ CONTROL "", 403, "edit", ES_LEFT | WS_CHILD | WS_VISIBLE | WS_BORDER | WS_TABSTOP, 40, 140, 20, 12
+ CONTROL "3", -1, "BorStatic", SS_CENTER | WS_CHILD | WS_VISIBLE | WS_GROUP, 66, 132, 8, 8
+ CONTROL "", 404, "edit", ES_LEFT | WS_CHILD | WS_VISIBLE | WS_BORDER | WS_TABSTOP, 60, 140, 20, 12
+ CONTROL "4", -1, "BorStatic", SS_CENTER | WS_CHILD | WS_VISIBLE | WS_GROUP, 86, 132, 8, 8
+ CONTROL "", 405, "edit", ES_LEFT | WS_CHILD | WS_VISIBLE | WS_BORDER | WS_TABSTOP, 80, 140, 20, 12
+ CONTROL "5", -1, "BorStatic", SS_CENTER | WS_CHILD | WS_VISIBLE | WS_GROUP, 106, 132, 8, 8
+ CONTROL "", 406, "edit", ES_LEFT | WS_CHILD | WS_VISIBLE | WS_BORDER | WS_TABSTOP, 100, 140, 20, 12
+ CONTROL "6", -1, "BorStatic", SS_CENTER | WS_CHILD | WS_VISIBLE | WS_GROUP, 126, 132, 8, 8
+ CONTROL "", 407, "edit", ES_LEFT | WS_CHILD | WS_VISIBLE | WS_BORDER | WS_TABSTOP, 120, 140, 20, 12
+ CONTROL "7", -1, "BorStatic", SS_CENTER | WS_CHILD | WS_VISIBLE | WS_GROUP, 146, 132, 8, 8
+ CONTROL "", 408, "edit", ES_LEFT | WS_CHILD | WS_VISIBLE | WS_BORDER | WS_TABSTOP, 140, 140, 20, 12
+ CONTROL "8", -1, "BorStatic", SS_CENTER | WS_CHILD | WS_VISIBLE | WS_GROUP, 166, 132, 8, 8
+ CONTROL "", 409, "edit", ES_LEFT | WS_CHILD | WS_VISIBLE | WS_BORDER | WS_TABSTOP, 160, 140, 20, 12
+ CONTROL "9", -1, "BorStatic", SS_CENTER | WS_CHILD | WS_VISIBLE | WS_GROUP, 186, 132, 8, 8
+ CONTROL "", 410, "edit", ES_LEFT | WS_CHILD | WS_VISIBLE | WS_BORDER | WS_TABSTOP, 180, 140, 20, 12
+ CONTROL "10", -1, "BorStatic", SS_CENTER | WS_CHILD | WS_VISIBLE | WS_GROUP, 206, 132, 8, 8
+ CONTROL "", 411, "edit", ES_LEFT | WS_CHILD | WS_VISIBLE | WS_BORDER | WS_TABSTOP, 200, 140, 20, 12
+ CONTROL "11", -1, "BorStatic", SS_CENTER | WS_CHILD | WS_VISIBLE | WS_GROUP, 226, 132, 8, 8
+// CONTROL "", 412, "edit", ES_LEFT | WS_CHILD | WS_VISIBLE | WS_BORDER | WS_TABSTOP, 220, 140, 20, 12
+ CONTROL "12", -1, "BorStatic", SS_CENTER | WS_CHILD | WS_VISIBLE | WS_GROUP, 246, 132, 8, 8
+ CONTROL "", 413, "edit", ES_LEFT | WS_CHILD | WS_VISIBLE | WS_BORDER | WS_TABSTOP, 240, 140, 20, 12
+ CONTROL "13", -1, "BorStatic", SS_CENTER | WS_CHILD | WS_VISIBLE | WS_GROUP, 266, 132, 8, 8
+ CONTROL "", 414, "edit", ES_LEFT | WS_CHILD | WS_VISIBLE | WS_BORDER | WS_TABSTOP, 260, 140, 20, 12
+ CONTROL "14", -1, "BorStatic", SS_CENTER | WS_CHILD | WS_VISIBLE | WS_GROUP, 286, 132, 8, 8
+ CONTROL "", 415, "edit", ES_LEFT | WS_CHILD | WS_VISIBLE | WS_BORDER | WS_TABSTOP, 280, 140, 20, 12
+ CONTROL "15", -1, "BorStatic", SS_CENTER | WS_CHILD | WS_VISIBLE | WS_GROUP, 306, 132, 8, 8
+ CONTROL "", 416, "edit", ES_LEFT | WS_CHILD | WS_VISIBLE | WS_BORDER | WS_TABSTOP, 300, 140, 20, 12
+ CONTROL "16", -1, "BorStatic", SS_CENTER | WS_CHILD | WS_VISIBLE | WS_GROUP, 326, 132, 8, 8
+ CONTROL "", 417, "edit", ES_LEFT | WS_CHILD | WS_VISIBLE | WS_BORDER | WS_TABSTOP, 320, 140, 20, 12
+ CONTROL "17", -1, "BorStatic", SS_CENTER | WS_CHILD | WS_VISIBLE | WS_GROUP, 346, 132, 8, 8
+ CONTROL "", 418, "edit", ES_LEFT | WS_CHILD | WS_VISIBLE | WS_BORDER | WS_TABSTOP, 340, 140, 20, 12
+ CONTROL "18", -1, "BorStatic", SS_CENTER | WS_CHILD | WS_VISIBLE | WS_GROUP, 366, 132, 8, 8
+ CONTROL "", 419, "edit", ES_LEFT | WS_CHILD | WS_VISIBLE | WS_BORDER | WS_TABSTOP, 360, 140, 20, 12
+ CONTROL "19", -1, "BorStatic", SS_CENTER | WS_CHILD | WS_VISIBLE | WS_GROUP, 386, 132, 8, 8
+ CONTROL "", 420, "edit", ES_LEFT | WS_CHILD | WS_VISIBLE | WS_BORDER | WS_TABSTOP, 380, 140, 20, 12
+ CONTROL "20", -1, "BorStatic", SS_CENTER | WS_CHILD | WS_VISIBLE | WS_GROUP, 406, 132, 8, 8
+ CONTROL "", 421, "edit", ES_LEFT | WS_CHILD | WS_VISIBLE | WS_BORDER | WS_TABSTOP, 400, 140, 20, 12
+ CONTROL "21", -1, "BorStatic", SS_CENTER | WS_CHILD | WS_VISIBLE | WS_GROUP, 426, 132, 8, 8
+ CONTROL "", 422, "edit", ES_LEFT | WS_CHILD | WS_VISIBLE | WS_BORDER | WS_TABSTOP, 420, 140, 20, 12
+ CONTROL "22", -1, "BorStatic", SS_CENTER | WS_CHILD | WS_VISIBLE | WS_GROUP, 446, 132, 8, 8
+ CONTROL "", 423, "edit", ES_LEFT | WS_CHILD | WS_VISIBLE | WS_BORDER | WS_TABSTOP, 440, 140, 20, 12
+ CONTROL "23", -1, "BorStatic", SS_CENTER | WS_CHILD | WS_VISIBLE | WS_GROUP, 466, 132, 8, 8
+ CONTROL "", 424, "edit", ES_LEFT | WS_CHILD | WS_VISIBLE | WS_BORDER | WS_TABSTOP, 460, 140, 20, 12
+ CONTROL "24", -1, "BorStatic", SS_CENTER | WS_CHILD | WS_VISIBLE | WS_GROUP, 486, 132, 8, 8
+ CONTROL "", 401, "edit", ES_LEFT | WS_CHILD | WS_VISIBLE | WS_BORDER | WS_TABSTOP, 480, 140, 20, 12
+ CONTROL "Réveil", -1, "BorShade", BSS_GROUP | BSS_CAPTION | BSS_CENTER | WS_CHILD | WS_VISIBLE | WS_GROUP, 40, 156, 36, 36
+ CONTROL "", 301, "edit", ES_LEFT | WS_CHILD | WS_VISIBLE | WS_BORDER | WS_TABSTOP, 48, 168, 20, 12
+ CONTROL "Petit-déjeuner", -1, "BorShade", BSS_GROUP | BSS_CAPTION | BSS_CENTER | WS_CHILD | WS_VISIBLE | WS_GROUP, 106, 156, 84, 36
+ CONTROL "", 302, "edit", ES_LEFT | WS_CHILD | WS_VISIBLE | WS_BORDER | WS_TABSTOP, 110, 168, 20, 12
+ CONTROL "Avant", -1, "BorStatic", SS_LEFT | WS_CHILD | WS_VISIBLE | WS_GROUP, 110, 180, 20, 8
+ CONTROL "", 303, "edit", ES_LEFT | WS_CHILD | WS_VISIBLE | WS_BORDER | WS_TABSTOP, 136, 168, 20, 12
+ CONTROL "Pendant", -1, "BorStatic", SS_LEFT | WS_CHILD | WS_VISIBLE | WS_GROUP, 132, 180, 28, 8
+ CONTROL "", 304, "edit", ES_LEFT | WS_CHILD | WS_VISIBLE | WS_BORDER | WS_TABSTOP, 162, 168, 20, 12
+ CONTROL "Après", -1, "BorStatic", SS_LEFT | WS_CHILD | WS_VISIBLE | WS_GROUP, 162, 180, 20, 8
+ CONTROL "Déjeuner", -1, "BorShade", BSS_GROUP | BSS_CAPTION | BSS_CENTER | WS_CHILD | WS_VISIBLE | WS_GROUP, 194, 156, 84, 36
+ CONTROL "", 305, "edit", ES_LEFT | WS_CHILD | WS_VISIBLE | WS_BORDER | WS_TABSTOP, 198, 168, 20, 12
+ CONTROL "Avant", -1, "BorStatic", SS_LEFT | WS_CHILD | WS_VISIBLE | WS_GROUP, 198, 180, 20, 8
+ CONTROL "", 306, "edit", ES_LEFT | WS_CHILD | WS_VISIBLE | WS_BORDER | WS_TABSTOP, 224, 168, 20, 12
+ CONTROL "Pendant", -1, "BorStatic", SS_LEFT | WS_CHILD | WS_VISIBLE | WS_GROUP, 220, 180, 28, 8
+ CONTROL "", 307, "edit", ES_LEFT | WS_CHILD | WS_VISIBLE | WS_BORDER | WS_TABSTOP, 250, 168, 20, 12
+ CONTROL "Après", -1, "BorStatic", SS_LEFT | WS_CHILD | WS_VISIBLE | WS_GROUP, 250, 180, 20, 8
+ CONTROL "Gouter", -1, "BorShade", BSS_GROUP | BSS_CAPTION | BSS_CENTER | WS_CHILD | WS_VISIBLE | WS_GROUP, 282, 156, 84, 36
+ CONTROL "", 308, "edit", ES_LEFT | WS_CHILD | WS_VISIBLE | WS_BORDER | WS_TABSTOP, 286, 168, 20, 12
+ CONTROL "Avant", -1, "BorStatic", SS_LEFT | WS_CHILD | WS_VISIBLE | WS_GROUP, 286, 180, 20, 8
+ CONTROL "", 309, "edit", ES_LEFT | WS_CHILD | WS_VISIBLE | WS_BORDER | WS_TABSTOP, 312, 168, 20, 12
+ CONTROL "Pendant", -1, "BorStatic", SS_LEFT | WS_CHILD | WS_VISIBLE | WS_GROUP, 308, 180, 28, 8
+ CONTROL "", 310, "edit", ES_LEFT | WS_CHILD | WS_VISIBLE | WS_BORDER | WS_TABSTOP, 338, 168, 20, 12
+ CONTROL "Après", -1, "BorStatic", SS_LEFT | WS_CHILD | WS_VISIBLE | WS_GROUP, 338, 180, 20, 8
+ CONTROL "Dîner", -1, "BorShade", BSS_GROUP | BSS_CAPTION | BSS_CENTER | WS_CHILD | WS_VISIBLE | WS_GROUP, 372, 156, 80, 36
+ CONTROL "", 312, "edit", ES_LEFT | WS_CHILD | WS_VISIBLE | WS_BORDER | WS_TABSTOP, 376, 168, 20, 12
+ CONTROL "Avant", -1, "BorStatic", SS_LEFT | WS_CHILD | WS_VISIBLE | WS_GROUP, 376, 180, 20, 8
+ CONTROL "", 313, "edit", ES_LEFT | WS_CHILD | WS_VISIBLE | WS_BORDER | WS_TABSTOP, 402, 168, 20, 12
+ CONTROL "Pendant", -1, "BorStatic", SS_LEFT | WS_CHILD | WS_VISIBLE | WS_GROUP, 398, 180, 28, 8
+ CONTROL "", 314, "edit", ES_LEFT | WS_CHILD | WS_VISIBLE | WS_BORDER | WS_TABSTOP, 428, 168, 20, 12
+ CONTROL "Après", -1, "BorStatic", SS_LEFT | WS_CHILD | WS_VISIBLE | WS_GROUP, 428, 180, 20, 8
+ CONTROL "Coucher", -1, "BorShade", BSS_GROUP | BSS_CAPTION | BSS_CENTER | WS_CHILD | WS_VISIBLE | WS_GROUP, 464, 156, 36, 36
+ CONTROL "", 315, "edit", ES_CENTER | WS_CHILD | WS_VISIBLE | WS_BORDER | WS_TABSTOP, 472, 168, 20, 12
+ CONTROL "", IDOK, "BorBtn", BS_PUSHBUTTON | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 68, 208, 43, 25
+ CONTROL "", IDCANCEL, "BorBtn", BS_PUSHBUTTON | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 172, 208, 43, 25
+}
+NEW_MEDIC_COMPLEX_INIT RCDATA
+{
+"NSTITRE"
+"0PROB1"
+"NSCONTRO"
+" | |"
+"KOUVR1|KOUVR1/2DA011/£D0;10|"
+"KFERM1|KFERM1|KFERM1/2DA011/£D0;10| | | | |"
+"VDOSM1|VDOSM1/200001/£N0;03|"
+"KRYTH1|"
+" |KMATI1|KRYTH1/KMOME1/KMATI1/VNBDO1/200001/£N0;03|"
+" |KMIDI1|KRYTH1/KMOME1/KMIDI1/VNBDO1/200001/£N0;03|"
+" |KAPMI1|KRYTH1/KMOME1/KAPMI1/VNBDO1/200001/£N0;03|"
+" |KSOIR1|KRYTH1/KMOME1/KSOIR1/VNBDO1/200001/£N0;03|"
+" |KNOCT3|KRYTH1/KMOME1/KNOCT3/VNBDO1/200001/£N0;03|"
+" |"
+" | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | |"
+"KREVE1|KRYTH1/KEVEQ1/KREVE1/VNBDO1/200001/£N0;03|"
+"KPDEJ1|"
+"KRYTH1/KEVEQ1/KPDEJ1/KAVAN1/VNBDO1/200001/£N0;03|KAVAN1|"
+"KRYTH1/KEVEQ1/KPDEJ1/KPEND1/VNBDO1/200001/£N0;03|KPEND1|"
+"KRYTH1/KEVEQ1/KPDEJ1/KAPRE1/VNBDO1/200001/£N0;03|KAPRE1|"
+"KDEJE1|"
+"KRYTH1/KEVEQ1/KDEJE1/KAVAN1/VNBDO1/200001/£N0;03|KAVAN1|"
+"KRYTH1/KEVEQ1/KDEJE1/KPEND1/VNBDO1/200001/£N0;03|KPEND1|"
+"KRYTH1/KEVEQ1/KDEJE1/KAPRE1/VNBDO1/200001/£N0;03|KAPRE1|"
+"KGOUT1|"
+"KRYTH1/KEVEQ1/KGOUT1/KAVAN1/VNBDO1/200001/£N0;03|KAVAN1|"
+"KRYTH1/KEVEQ1/KGOUT1/KPEND1/VNBDO1/200001/£N0;03|KPEND1|"
+"KRYTH1/KEVEQ1/KGOUT1/KAPRE1/VNBDO1/200001/£N0;03|KAPRE1|"
+"KDINE1|"
+"KRYTH1/KEVEQ1/KDINE1/KAVAN1/VNBDO1/200001/£N0;03|KAVAN1|"
+"KRYTH1/KEVEQ1/KDINE1/KPEND1/VNBDO1/200001/£N0;03|KPEND1|"
+"KRYTH1/KEVEQ1/KDINE1/KAPRE1/VNBDO1/200001/£N0;03|KAPRE1|"
+"KCOUC1|KRYTH1/KEVEQ1/KCOUC1/VNBDO1/200001/£N0;03|"
+" | |"
+"FINRCDAT"
+}
+
+ZO_ORDONNANCE DIALOG 6, 15, 386, 196
+STYLE DS_MODALFRAME | WS_POPUP | WS_VISIBLE | WS_CAPTION
+CLASS "bordlg"
+CAPTION "Ordonnance"
+FONT 8, "MS Sans Serif"
+{
+ CONTROL "ALD", -1, "BorShade", BSS_RGROUP | BSS_CAPTION | BSS_LEFT | WS_CHILD | WS_VISIBLE, 2, 3, 185, 154
+ CONTROL "ALD", 101, "SysTreeView32", TVS_HASBUTTONS | TVS_HASLINES | TVS_LINESATROOT | TVS_EDITLABELS | TVS_SHOWSELALWAYS | WS_CHILD | WS_VISIBLE | WS_BORDER, 4, 14, 180, 140, 0
+ CONTROL "Non ALD", -1, "BorShade", BSS_RGROUP | BSS_CAPTION | BSS_LEFT | WS_CHILD | WS_VISIBLE, 195, 3, 185, 154
+ CONTROL "Non ALD", 102, "SysTreeView32", TVS_HASBUTTONS | TVS_HASLINES | TVS_LINESATROOT | TVS_EDITLABELS | TVS_SHOWSELALWAYS | WS_CHILD | WS_VISIBLE | WS_BORDER, 197, 14, 180, 140, 0
+ CONTROL "", -1, "BorShade", BSS_HDIP | BSS_LEFT | WS_CHILD | WS_VISIBLE, 0, 159, 388, 3
+ CONTROL "", IDOK, "BorBtn", BS_DEFPUSHBUTTON | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 3, 165, 44, 25
+ CONTROL "", IDCANCEL, "BorBtn", BS_PUSHBUTTON | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 114, 165, 43, 25
+ CONTROL "", IDTL, "BorBtn", BS_PUSHBUTTON | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 225, 165, 43, 25
+ CONTROL "", IDHELP, "BorBtn", BS_PUSHBUTTON | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 336, 165, 43, 25
+}
+ZO_ORDONNANCE_INIT RCDATA
+{
+"NSCONTRO"
+" |GPALD1| |GPCOD1|"
+" | | | | |"
+"FINRCDAT"
+}
+
+ZO_MED DIALOG 6, 15, 189, 86
+STYLE DS_MODALFRAME | WS_POPUP | WS_VISIBLE | WS_CAPTION
+CLASS "bordlg"
+CAPTION "Prescription"
+FONT 8, "MS Sans Serif"
+{
+ CONTROL "", -1, "BorShade", BSS_RGROUP | BSS_CAPTION | BSS_LEFT | WS_CHILD | WS_VISIBLE, 2, 3, 185, 37
+ CONTROL "", 101, "edit", ES_LEFT | WS_CHILD | WS_VISIBLE | WS_BORDER | WS_TABSTOP, 12, 16, 168, 12
+ CONTROL "", -1, "BorShade", BSS_HDIP | BSS_LEFT | WS_CHILD | WS_VISIBLE, 0, 47, 189, 3
+ CONTROL "", IDOK, "BorBtn", BS_DEFPUSHBUTTON | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 3, 55, 44, 25
+ CONTROL "", IDCANCEL, "BorBtn", BS_PUSHBUTTON | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 49, 55, 44, 25
+ CONTROL "", IDTL, "BorBtn", BS_PUSHBUTTON | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 95, 55, 44, 25
+ CONTROL "", IDHELP, "BorBtn", BS_PUSHBUTTON | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 142, 55, 43, 25
+}
+ZO_MED_INIT RCDATA
+{
+"NSCONTRO"
+" |"
+"GPALD1|GPCOD1|"
+" | | | | |"
+"FINRCDAT"
+}
+
+ZO_SIMPLE DIALOG 6, 16, 288, 229
+STYLE DS_MODALFRAME | WS_POPUP | WS_VISIBLE | WS_CAPTION
+CLASS "bordlg"
+CAPTION "Nautilus : Prescription"
+FONT 8, "MS Sans Serif"
+{
+ CONTROL "Type d'administration", -1, "BorShade", BSS_RGROUP | BSS_CAPTION | BSS_CENTER | WS_CHILD | WS_VISIBLE, 4, 2, 228, 48
+ CONTROL "&Injection", 201, "BorRadio", BS_RADIOBUTTON | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 8, 12, 88, 10
+ CONTROL "&Perfusion", 202, "BorRadio", BS_RADIOBUTTON | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 8, 24, 88, 10
+ CONTROL "&Application locale", 203, "BorRadio", BS_RADIOBUTTON | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 104, 12, 88, 10
+ CONTROL "In&halation", 204, "BorRadio", BS_RADIOBUTTON | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 104, 24, 88, 10
+ CONTROL "", 210, "edit", ES_LEFT | WS_CHILD | WS_VISIBLE | WS_BORDER | WS_TABSTOP, 8, 35, 220, 12
+ CONTROL "Voie d'administration", -1, "BorShade", BSS_RGROUP | BSS_CAPTION | BSS_CENTER | WS_CHILD | WS_VISIBLE, 4, 51, 228, 122
+ CONTROL "Voie &entérale", 101, "BorRadio", BS_RADIOBUTTON | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 88, 64, 88, 10
+ CONTROL "Voie &parentérale", 102, "BorRadio", BS_RADIOBUTTON | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 8, 64, 72, 10
+ CONTROL "sous-&cutanée", 103, "BorRadio", BS_RADIOBUTTON | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 16, 76, 68, 10
+ CONTROL "intra&dermique", 104, "BorRadio", BS_RADIOBUTTON | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 16, 88, 68, 10
+ CONTROL "intra&musculaire", 105, "BorRadio", BS_RADIOBUTTON | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 16, 100, 68, 10
+ CONTROL "intra&veineux", 106, "BorRadio", BS_RADIOBUTTON | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 16, 112, 68, 10
+ CONTROL "intra-&artérielle", 107, "BorRadio", BS_RADIOBUTTON | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 16, 124, 68, 10
+ CONTROL "intracar&diaque", 108, "BorRadio", BS_RADIOBUTTON | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 16, 136, 68, 10
+ CONTROL "intra&rachidienne", 109, "BorRadio", BS_RADIOBUTTON | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 16, 148, 68, 10
+ CONTROL "", -1, "BorShade", BSS_VDIP | BSS_LEFT | WS_CHILD | WS_VISIBLE, 84, 68, 1, 92
+ CONTROL "Voie &transmuqueuse", 110, "BorRadio", BS_RADIOBUTTON | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 88, 76, 88, 10
+ CONTROL "&rectale", 111, "BorRadio", BS_RADIOBUTTON | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 100, 88, 68, 10
+ CONTROL "&bucco-linguale", 112, "BorRadio", BS_RADIOBUTTON | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 160, 88, 68, 10
+ CONTROL "&trachéobronchique", 113, "BorRadio", BS_RADIOBUTTON | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 100, 100, 76, 10
+ CONTROL "Voie &locale", 114, "BorRadio", BS_RADIOBUTTON | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 88, 112, 88, 10
+ CONTROL "sur la &peau", 115, "BorRadio", BS_RADIOBUTTON | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 100, 124, 68, 10
+ CONTROL "sur &muqueuse", 116, "BorRadio", BS_RADIOBUTTON | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 100, 136, 68, 10
+ CONTROL "intrapleurale", 117, "BorRadio", BS_RADIOBUTTON | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 168, 124, 56, 10
+ CONTROL "intra-articulaire", 118, "BorRadio", BS_RADIOBUTTON | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 168, 136, 60, 10
+ CONTROL "", 120, "EDIT", ES_LEFT | WS_CHILD | WS_VISIBLE | WS_BORDER | WS_TABSTOP, 8, 160, 220, 12
+ CONTROL "Lieu d'administration", -1, "BorShade", BSS_RGROUP | BSS_CAPTION | BSS_CENTER | WS_CHILD | WS_VISIBLE, 4, 175, 228, 28
+ CONTROL "", 301, "EDIT", ES_LEFT | WS_CHILD | WS_VISIBLE | WS_BORDER | WS_TABSTOP, 8, 188, 220, 12
+ CONTROL "Dose et durée", -1, "BorShade", BSS_RGROUP | BSS_CAPTION | BSS_CENTER | WS_CHILD | WS_VISIBLE, 4, 204, 228, 24
+ CONTROL "&Episodes", 401, "BorRadio", BS_RADIOBUTTON | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 100, 216, 48, 10
+ CONTROL "", -1, "BorShade", BSS_VDIP | BSS_LEFT | WS_CHILD | WS_VISIBLE, 236, 12, 1, 204
+ CONTROL "", IDOK, "BorBtn", BS_DEFPUSHBUTTON | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 240, 24, 43, 25
+ CONTROL "", IDCANCEL, "BorBtn", BS_PUSHBUTTON | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 240, 74, 43, 25
+ CONTROL "", IDTL, "BorBtn", BS_PUSHBUTTON | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 240, 127, 43, 25
+ CONTROL "", IDHELP, "BorBtn", BS_PUSHBUTTON | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 240, 180, 43, 25
+}
+ZO_SIMPLE_INIT RCDATA
+{
+"NSTITRE"
+"0PREA1"
+"NSCONTRO"
+"0ADMI1|"
+"0ADMI1/GINJE1|0ADMI1/GINFR1|0ADMI1/GAPPL1|0ADMI1/NINHA1|0ADMI1/£C;020|"
+"0VADM1|"
+"0VADM1/0VA011|"
+"0VADM1/0VA031|"
+"0VADM1/0VA031/0VA041|0VADM1/0VA031/0VA0J1|0VADM1/0VA031/0VA051|"
+"0VADM1/0VA031/0VA061|0VADM1/0VA031/0VA071|0VADM1/0VA031/0VA081|"
+"0VADM1/0VA031/0VA091|"
+" |"
+"0VADM1/0VA0A1|"
+"0VADM1/0VA0A1/0VA0B1|0VADM1/0VA0A1/0VA0C1|0VADM1/0VA0A1/0VA0D1|"
+"0VADM1/0VA0E1|"
+"0VADM1/0VA0E1/0VA0F1|0VADM1/0VA0E1/0VA0G1|0VADM1/0VA0E1/0VA0H1|"
+"0VADM1/0VA0E1/0VA0I1|"
+"0VADM1/£C;020|"
+"OADML1|"
+"OADML1/£C;020|"
+" |"
+" |"
+" | | |#####1| |"
+"FINRCDAT"
+}
+
+ZO_EPISODE DIALOG 6, 16, 288, 229
+EXSTYLE WS_EX_DLGMODALFRAME
+STYLE DS_MODALFRAME | WS_POPUP | WS_VISIBLE | WS_CAPTION
+CLASS "bordlg"
+CAPTION "Nautilus : Prescription"
+FONT 8, "MS Sans Serif"
+{
+ CONTROL "Durée globale", -1, "BorShade", BSS_RGROUP | BSS_CAPTION | BSS_CENTER | WS_CHILD | WS_VISIBLE, 4, 2, 228, 30
+ CONTROL "", 210, "edit", ES_LEFT | WS_CHILD | WS_VISIBLE | WS_BORDER | WS_TABSTOP, 60, 14, 48, 12
+ CONTROL "Voie d'administration", -1, "BorShade", BSS_RGROUP | BSS_CAPTION | BSS_CENTER | WS_CHILD | WS_VISIBLE, 4, 51, 228, 122
+ CONTROL "Voie &entérale", 101, "BorRadio", BS_RADIOBUTTON | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 88, 64, 88, 10
+ CONTROL "Voie &parentérale", 102, "BorRadio", BS_RADIOBUTTON | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 8, 64, 72, 10
+ CONTROL "sous-&cutanée", 103, "BorRadio", BS_RADIOBUTTON | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 16, 76, 68, 10
+ CONTROL "intra&dermique", 104, "BorRadio", BS_RADIOBUTTON | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 16, 88, 68, 10
+ CONTROL "intra&musculaire", 105, "BorRadio", BS_RADIOBUTTON | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 16, 100, 68, 10
+ CONTROL "intra&veineux", 106, "BorRadio", BS_RADIOBUTTON | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 16, 112, 68, 10
+ CONTROL "intra-&artérielle", 107, "BorRadio", BS_RADIOBUTTON | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 16, 124, 68, 10
+ CONTROL "intracar&diaque", 108, "BorRadio", BS_RADIOBUTTON | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 16, 136, 68, 10
+ CONTROL "intra&rachidienne", 109, "BorRadio", BS_RADIOBUTTON | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 16, 148, 68, 10
+ CONTROL "", -1, "BorShade", BSS_VDIP | BSS_LEFT | WS_CHILD | WS_VISIBLE, 84, 68, 1, 92
+ CONTROL "Voie &transmuqueuse", 110, "BorRadio", BS_RADIOBUTTON | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 88, 76, 88, 10
+ CONTROL "&rectale", 111, "BorRadio", BS_RADIOBUTTON | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 100, 88, 68, 10
+ CONTROL "&bucco-linguale", 112, "BorRadio", BS_RADIOBUTTON | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 160, 88, 68, 10
+ CONTROL "&trachéobronchique", 113, "BorRadio", BS_RADIOBUTTON | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 100, 100, 76, 10
+ CONTROL "Voie &locale", 114, "BorRadio", BS_RADIOBUTTON | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 88, 112, 88, 10
+ CONTROL "sur la &peau", 115, "BorRadio", BS_RADIOBUTTON | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 100, 124, 68, 10
+ CONTROL "sur &muqueuse", 116, "BorRadio", BS_RADIOBUTTON | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 100, 136, 68, 10
+ CONTROL "intrapleurale", 117, "BorRadio", BS_RADIOBUTTON | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 168, 124, 56, 10
+ CONTROL "intra-articulaire", 118, "BorRadio", BS_RADIOBUTTON | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 168, 136, 60, 10
+ CONTROL "", 120, "EDIT", ES_LEFT | WS_CHILD | WS_VISIBLE | WS_BORDER | WS_TABSTOP, 8, 160, 220, 12
+ CONTROL "Lieu d'administration", -1, "BorShade", BSS_RGROUP | BSS_CAPTION | BSS_CENTER | WS_CHILD | WS_VISIBLE, 4, 175, 228, 28
+ CONTROL "", 301, "EDIT", ES_LEFT | WS_CHILD | WS_VISIBLE | WS_BORDER | WS_TABSTOP, 8, 188, 220, 12
+ CONTROL "Dose et durée", -1, "BorShade", BSS_RGROUP | BSS_CAPTION | BSS_CENTER | WS_CHILD | WS_VISIBLE, 4, 204, 228, 24
+ CONTROL "&Episodes", 401, "BorRadio", BS_RADIOBUTTON | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 100, 216, 48, 10
+ CONTROL "", -1, "BorShade", BSS_VDIP | BSS_LEFT | WS_CHILD | WS_VISIBLE, 236, 12, 1, 204
+ CONTROL "", IDOK, "BorBtn", BS_DEFPUSHBUTTON | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 240, 40, 43, 25
+ CONTROL "", IDCANCEL, "BorBtn", BS_PUSHBUTTON | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 240, 84, 43, 25
+ CONTROL "", IDTL, "BorBtn", BS_PUSHBUTTON | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 240, 144, 43, 25
+ CONTROL "", IDHELP, "BorBtn", BS_PUSHBUTTON | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 240, 192, 43, 25
+ CONTROL "Du", -1, "BorStatic", SS_LEFT | WS_CHILD | WS_VISIBLE | WS_GROUP, 44, 16, 12, 8
+ CONTROL "Au", -1, "BorStatic", SS_LEFT | WS_CHILD | WS_VISIBLE | WS_GROUP, 116, 16, 12, 8
+ CONTROL "", 501, "edit", ES_LEFT | WS_CHILD | WS_VISIBLE | WS_BORDER | WS_TABSTOP, 132, 14, 48, 12
+}
+ZO_EPISODE_INIT RCDATA
+{
+"NSTITRE"
+"0PREA1"
+"NSCONTRO"
+" |"
+"VPOID1|VPOID1/2KG001/£N0;03:CORPO|2KG001|"
+"VTAIL1|VTAIL1/2CM001/£N0;03:CORPO|2CM001|"
+"VSUCO1|VSUCO1/2MCAR1/£N0;03|2MCAR1|"
+" |"
+"ACOE12|G0PLA1|GANNE1|GPATC1|ATUBF1|"
+" |"
+"0QUAL1/0QUAB1|0QUAL1/1MOYE1|0QUAL1/0QUAD1|"
+" |"
+"OECHO1/£SGMA1:ECHOG|"
+" |"
+"OSOND1/OSONP1|OSOND1/OSONB1|OSOND1/OSONM1|"
+" | |"
+" | | |#####1| :EXNOR| |"
+"FINRCDAT"
+}
+
+MEDICDLG DIALOG 0, 0, 599, 310
+STYLE DS_MODALFRAME | DS_3DLOOK | DS_CONTEXTHELP | WS_POPUP | WS_VISIBLE | WS_CAPTION | WS_SYSMENU
+CLASS "bordlg"
+CAPTION "Médicament"
+FONT 8, "MS Sans Serif"
+{
+ CONTROL "", 504, "edit", ES_LEFT | ES_MULTILINE | WS_CHILD | WS_VISIBLE | WS_BORDER | WS_TABSTOP, 24, 108, 356, 47
+ CONTROL "0", 131, "edit", ES_RIGHT | WS_CHILD | WS_VISIBLE | WS_BORDER | WS_TABSTOP, 183, 117, 36, 14
+ CONTROL "", 152, "msctls_updown32", WS_CHILD | WS_VISIBLE, 321, 117, 11, 14
+ CONTROL "", -1, "BorShade", BSS_GROUP | BSS_CAPTION | BSS_LEFT | WS_CHILD | WS_VISIBLE | WS_GROUP, 6, 4, 496, 52
+ CONTROL "Médicament", 230, "BorStatic", SS_LEFT | WS_CHILD | WS_VISIBLE | WS_GROUP, 12, 8, 360, 8
+ CONTROL "&Unité de prise", -1, "BorStatic", SS_LEFT | WS_CHILD | WS_VISIBLE | WS_GROUP, 12, 23, 52, 8
+ CONTROL "", 232, "edit", ES_RIGHT | WS_CHILD | WS_VISIBLE | WS_BORDER | WS_TABSTOP, 64, 20, 100, 14
+ CONTROL "&Date d'ouverture", -1, "BorStatic", SS_LEFT | WS_CHILD | WS_VISIBLE | WS_GROUP, 248, 27, 60, 8
+ CONTROL "", 231, "edit", ES_RIGHT | WS_CHILD | WS_VISIBLE | WS_BORDER | WS_TABSTOP, 312, 24, 52, 14
+ CONTROL "&Date de fermeture", -1, "BorStatic", SS_LEFT | WS_CHILD | WS_VISIBLE | WS_GROUP, 248, 43, 60, 8
+ CONTROL "", 233, "edit", ES_RIGHT | WS_CHILD | WS_VISIBLE | WS_BORDER | WS_TABSTOP, 312, 40, 52, 14
+ CONTROL "&Prendre en cas de :", -1, "BorStatic", SS_LEFT | WS_CHILD | WS_VISIBLE | WS_GROUP, 402, 28, 64, 8
+ CONTROL "", 234, "edit", ES_RIGHT | WS_CHILD | WS_VISIBLE | WS_BORDER | WS_TABSTOP, 376, 40, 116, 14
+ CONTROL "PHASE", -1, "BorShade", BSS_RGROUP | BSS_CAPTION | BSS_LEFT | WS_CHILD | WS_VISIBLE | WS_GROUP, 4, 64, 496, 240
+ CONTROL "cycle de la phase", -1, "BorShade", BSS_RGROUP | BSS_CAPTION | BSS_LEFT | WS_CHILD | WS_VISIBLE | WS_GROUP, 12, 80, 480, 140
+ CONTROL "CYCLE CIRCADIEN", -1, "BorShade", BSS_GROUP | BSS_CAPTION | BSS_LEFT | WS_CHILD | WS_VISIBLE | WS_GROUP, 21, 94, 367, 68
+ CONTROL "révei&l", 400, "BorStatic", SS_LEFT | WS_CHILD | WS_VISIBLE | WS_GROUP, 41, 106, 24, 8
+ CONTROL "0", 101, "edit", ES_RIGHT | WS_CHILD | WS_VISIBLE | WS_BORDER | WS_TABSTOP, 29, 116, 36, 14
+ CONTROL "", 102, "msctls_updown32", WS_CHILD | WS_VISIBLE, 64, 117, 11, 14
+ CONTROL "&matin", 401, "BorStatic", SS_LEFT | WS_CHILD | WS_VISIBLE | WS_GROUP, 90, 106, 36, 8
+ CONTROL "0", 111, "edit", ES_RIGHT | WS_CHILD | WS_VISIBLE | WS_BORDER | WS_TABSTOP, 81, 117, 36, 14
+ CONTROL "", 112, "msctls_updown32", WS_CHILD | WS_VISIBLE, 116, 117, 11, 14
+ CONTROL "m&idi", 402, "BorStatic", SS_LEFT | WS_CHILD | WS_VISIBLE | WS_GROUP, 146, 106, 20, 8
+ CONTROL "0", 121, "edit", ES_RIGHT | WS_CHILD | WS_VISIBLE | WS_BORDER | WS_TABSTOP, 132, 117, 36, 14
+ CONTROL "", 122, "msctls_updown32", WS_CHILD | WS_VISIBLE, 167, 117, 11, 14
+ CONTROL "&gouter", 403, "BorStatic", SS_LEFT | WS_CHILD | WS_VISIBLE | WS_GROUP, 194, 106, 24, 8
+ CONTROL "", 132, "msctls_updown32", WS_CHILD | WS_VISIBLE, 216, 117, 13, 14
+ CONTROL "s&oir", 404, "BorStatic", SS_LEFT | WS_CHILD | WS_VISIBLE | WS_GROUP, 250, 106, 16, 8
+ CONTROL "0", 141, "edit", ES_RIGHT | WS_CHILD | WS_VISIBLE | WS_BORDER | WS_TABSTOP, 235, 117, 36, 14
+ CONTROL "", 142, "msctls_updown32", WS_CHILD | WS_VISIBLE, 270, 117, 11, 14
+ CONTROL "&coucher", 405, "BorStatic", SS_LEFT | WS_CHILD | WS_VISIBLE | WS_GROUP, 294, 106, 32, 8
+ CONTROL "0", 151, "edit", ES_RIGHT | WS_CHILD | WS_VISIBLE | WS_BORDER | WS_TABSTOP, 286, 117, 36, 14
+ CONTROL "&nuit", 406, "BorStatic", SS_LEFT | WS_CHILD | WS_VISIBLE | WS_GROUP, 350, 105, 16, 8
+ CONTROL "0", 161, "edit", ES_RIGHT | WS_CHILD | WS_VISIBLE | WS_BORDER | WS_TABSTOP, 337, 117, 36, 14
+ CONTROL "", 162, "msctls_updown32", WS_CHILD | WS_VISIBLE, 372, 117, 11, 14
+ CONTROL "00:00", 420, "edit", ES_LEFT | WS_CHILD | WS_VISIBLE | WS_BORDER | WS_TABSTOP, 30, 110, 36, 14
+ CONTROL "", 423, "msctls_updown32", WS_CHILD | WS_VISIBLE, 64, 110, 11, 14
+ CONTROL "0", 421, "edit", ES_RIGHT | WS_CHILD | WS_VISIBLE | WS_BORDER | WS_TABSTOP, 30, 125, 36, 14
+ CONTROL "", 422, "msctls_updown32", WS_CHILD | WS_VISIBLE, 64, 125, 11, 14
+ CONTROL "00:00", 424, "edit", ES_LEFT | WS_CHILD | WS_VISIBLE | WS_BORDER | WS_TABSTOP, 80, 110, 36, 14
+ CONTROL "", 425, "msctls_updown32", WS_CHILD | WS_VISIBLE, 114, 110, 11, 14
+ CONTROL "0", 426, "edit", ES_RIGHT | WS_CHILD | WS_VISIBLE | WS_BORDER | WS_TABSTOP, 80, 125, 36, 14
+ CONTROL "", 427, "msctls_updown32", WS_CHILD | WS_VISIBLE, 114, 125, 11, 14
+ CONTROL "00:00", 428, "edit", ES_LEFT | WS_CHILD | WS_VISIBLE | WS_BORDER | WS_TABSTOP, 130, 110, 36, 14
+ CONTROL "", 429, "msctls_updown32", WS_CHILD | WS_VISIBLE, 164, 110, 11, 14
+ CONTROL "0", 430, "edit", ES_RIGHT | WS_CHILD | WS_VISIBLE | WS_BORDER | WS_TABSTOP, 130, 125, 36, 14
+ CONTROL "", 431, "msctls_updown32", WS_CHILD | WS_VISIBLE, 164, 125, 11, 14
+ CONTROL "00:00", 432, "edit", ES_LEFT | WS_CHILD | WS_VISIBLE | WS_BORDER | WS_TABSTOP, 180, 110, 36, 14
+ CONTROL "", 433, "msctls_updown32", WS_CHILD | WS_VISIBLE, 214, 110, 11, 14
+ CONTROL "0", 434, "edit", ES_RIGHT | WS_CHILD | WS_VISIBLE | WS_BORDER | WS_TABSTOP, 180, 125, 36, 14
+ CONTROL "", 435, "msctls_updown32", WS_CHILD | WS_VISIBLE, 214, 125, 11, 14
+ CONTROL "00:00", 436, "edit", ES_LEFT | WS_CHILD | WS_VISIBLE | WS_BORDER | WS_TABSTOP, 230, 110, 36, 14
+ CONTROL "", 437, "msctls_updown32", WS_CHILD | WS_VISIBLE, 264, 110, 11, 14
+ CONTROL "0", 438, "edit", ES_RIGHT | WS_CHILD | WS_VISIBLE | WS_BORDER | WS_TABSTOP, 230, 125, 36, 14
+ CONTROL "", 439, "msctls_updown32", WS_CHILD | WS_VISIBLE, 264, 125, 11, 14
+ CONTROL "00:00", 440, "edit", ES_LEFT | WS_CHILD | WS_VISIBLE | WS_BORDER | WS_TABSTOP, 280, 110, 36, 14
+ CONTROL "", 441, "msctls_updown32", WS_CHILD | WS_VISIBLE, 314, 110, 11, 14
+ CONTROL "0", 442, "edit", ES_RIGHT | WS_CHILD | WS_VISIBLE | WS_BORDER | WS_TABSTOP, 280, 125, 36, 14
+ CONTROL "", 443, "msctls_updown32", WS_CHILD | WS_VISIBLE, 314, 125, 11, 14
+ CONTROL "00:00", 444, "edit", ES_LEFT | WS_CHILD | WS_VISIBLE | WS_BORDER | WS_TABSTOP, 330, 110, 36, 14
+ CONTROL "", 445, "msctls_updown32", WS_CHILD | WS_VISIBLE, 364, 110, 11, 14
+ CONTROL "0", 446, "edit", ES_RIGHT | WS_CHILD | WS_VISIBLE | WS_BORDER | WS_TABSTOP, 330, 125, 36, 14
+ CONTROL "", 447, "msctls_updown32", WS_CHILD | WS_VISIBLE, 364, 125, 11, 14
+ CONTROL "Nombre d'unités :", 613, "BorStatic", SS_LEFT | WS_CHILD | WS_VISIBLE | WS_GROUP, 25, 122, 83, 14
+ CONTROL "0", 611, "edit", ES_RIGHT | WS_CHILD | WS_VISIBLE | WS_BORDER | WS_TABSTOP, 85, 120 , 36, 14
+ CONTROL "", 612, "msctls_updown32", WS_CHILD | WS_VISIBLE, 120, 120, 11, 14
+ CONTROL "0", 604, "edit", ES_RIGHT | WS_CHILD | WS_VISIBLE | WS_BORDER | WS_TABSTOP, 135, 120, 36, 14
+ CONTROL "", 605, "msctls_updown32", WS_CHILD | WS_VISIBLE, 170, 120, 11, 14
+ CONTROL "Fois   toutes les :", 606, "BorStatic", SS_LEFT | WS_CHILD | WS_VISIBLE | WS_GROUP, 190, 122, 80, 11
+ CONTROL "0", 607, "edit", ES_RIGHT | WS_CHILD | WS_VISIBLE | WS_BORDER | WS_TABSTOP, 260, 120, 36, 14
+ CONTROL "", 608, "msctls_updown32", WS_CHILD | WS_VISIBLE, 295, 120, 11, 14
+ CONTROL "", 610, "combobox", CBS_DROPDOWNLIST | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 309, 120, 47, 58
+ CONTROL "Fréquence ", 609, "BorStatic", SS_LEFT | WS_CHILD | WS_VISIBLE | WS_GROUP, 265, 105, 80, 14
+ CONTROL "Durée des prises :", 602, "BorStatic", SS_LEFT | WS_CHILD | WS_VISIBLE | WS_GROUP, 25, 140, 83, 10
+ CONTROL "0", 600, "edit", ES_RIGHT | WS_CHILD | WS_VISIBLE | WS_BORDER, 85, 140, 36, 14
+ CONTROL "", 601, "msctls_updown32", WS_CHILD | WS_VISIBLE, 120, 140, 11, 14
+ CONTROL "", 603, "combobox", CBS_DROPDOWNLIST | WS_CHILD | WS_VISIBLE | WS_VSCROLL, 135, 140, 47, 58
+ CONTROL "Nombre d'unités :", 800, "BorStatic", SS_LEFT | WS_CHILD | WS_VISIBLE | WS_GROUP, 30, 122, 83, 14
+ CONTROL "0", 801, "edit", ES_RIGHT | WS_CHILD | WS_VISIBLE | WS_BORDER | WS_TABSTOP, 95, 120 , 36, 14
+ CONTROL "", 802, "msctls_updown32", WS_CHILD | WS_VISIBLE, 130, 120, 11, 14
+ CONTROL "0", 624, "edit", ES_RIGHT | WS_CHILD | WS_VISIBLE | WS_BORDER | WS_TABSTOP, 240, 120, 36, 14
+ CONTROL "", 625, "msctls_updown32", WS_CHILD | WS_VISIBLE, 275, 120, 11, 14
+ CONTROL "toutes les :", 626, "BorStatic", SS_LEFT | WS_CHILD | WS_VISIBLE | WS_GROUP, 195, 122, 38, 11
+ CONTROL "Fréquence - ", 628, "BorStatic", SS_LEFT | WS_CHILD | WS_VISIBLE | WS_GROUP, 151, 122, 40, 14
+ CONTROL "", 627, "combobox", CBS_DROPDOWNLIST | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 289, 120, 47, 57
+ CONTROL "Durée des prises :", 622, "BorStatic", SS_LEFT | WS_CHILD | WS_VISIBLE | WS_GROUP, 30, 140, 83, 10
+ CONTROL "0", 620, "edit", ES_RIGHT | WS_CHILD | WS_VISIBLE | WS_BORDER, 95, 140, 36, 14
+ CONTROL "", 621, "msctls_updown32", WS_CHILD | WS_VISIBLE, 130, 140, 11, 14
+ CONTROL "", 623, "combobox", CBS_DROPDOWNLIST | WS_CHILD | WS_VISIBLE | WS_VSCROLL, 145, 140, 47, 57
+ CONTROL "R&YTHME ", -1, "BorShade", BSS_GROUP | BSS_CAPTION | BSS_LEFT | WS_CHILD | WS_VISIBLE | WS_GROUP, 24, 168, 367, 44
+ CONTROL "D&urée de la cure :", 185, "BorStatic", SS_LEFT | WS_CHILD | WS_VISIBLE | WS_GROUP, 30, 180, 100, 8
+ CONTROL "1", 181, "edit", ES_RIGHT | WS_CHILD | WS_VISIBLE | WS_BORDER | WS_TABSTOP, 30, 192, 36, 14
+ CONTROL "", 182, "msctls_updown32", WS_CHILD | WS_VISIBLE, 65, 192, 11, 14
+ CONTROL "", 183, "combobox", CBS_DROPDOWNLIST | WS_CHILD | WS_VISIBLE | WS_VSCROLL | WS_TABSTOP, 80, 192, 50, 57
+ CONTROL "0", 191, "edit", ES_RIGHT | WS_CHILD | WS_VISIBLE | WS_BORDER | WS_TABSTOP, 150, 192, 36, 14
+ CONTROL "", 192, "msctls_updown32", WS_CHILD | WS_VISIBLE, 185, 192, 11, 14
+ CONTROL "Nombre des cures ", 223, "BorStatic", SS_LEFT | WS_CHILD | WS_VISIBLE | WS_GROUP, 150, 180, 80, 11
+ CONTROL "Fois - toutes les :", 224, "BorStatic", SS_LEFT | WS_CHILD | WS_VISIBLE | WS_GROUP, 205, 194, 60, 11
+ CONTROL "&Fréquence :", 195, "BorStatic", SS_LEFT | WS_CHILD | WS_VISIBLE | WS_GROUP, 270, 180, 70, 8
+ CONTROL "1", 221, "edit", ES_RIGHT | WS_CHILD | WS_VISIBLE | WS_BORDER | WS_TABSTOP, 270, 192, 36, 14
+ CONTROL "", 222, "msctls_updown32", WS_CHILD | WS_VISIBLE, 305, 192, 11, 14
+ CONTROL "", 193, "combobox", CBS_DROPDOWNLIST | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 320, 192, 50, 57
+ CONTROL "&Lundi", 510, "BorCheck", BS_AUTOCHECKBOX | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 40, 180, 56, 13
+ CONTROL "&Mardi", 511, "BorCheck", BS_AUTOCHECKBOX | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 39, 195, 56, 13
+ CONTROL "Mercredi", 512, "BorCheck", BS_AUTOCHECKBOX | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 115, 180, 56, 13
+ CONTROL "&Jeudi", 513, "BorCheck", BS_AUTOCHECKBOX | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 115, 195, 56, 13
+ CONTROL "&Vendredi", 514, "BorCheck", BS_AUTOCHECKBOX | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 205, 180, 56, 13
+ CONTROL "&Samedi", 515, "BorCheck", BS_AUTOCHECKBOX | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 205, 195, 56, 13
+ CONTROL "&Dimanche", 516, "BorCheck", BS_AUTOCHECKBOX | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 283, 180, 56, 13
+ CONTROL "D&urée de la cure :", 658, "BorStatic", SS_LEFT | WS_CHILD | WS_VISIBLE | WS_GROUP, 30, 180, 100, 8
+ CONTROL "Du&rée du cycle :", 659, "BorStatic", SS_LEFT | WS_CHILD | WS_VISIBLE | WS_GROUP, 300, 180, 100, 8
+ CONTROL "1", 651, "edit", ES_RIGHT | WS_CHILD | WS_VISIBLE | WS_BORDER | WS_TABSTOP, 80, 192, 36, 14
+ CONTROL "", 652, "msctls_updown32", WS_CHILD | WS_VISIBLE, 116, 192, 11, 14
+ CONTROL "", 653, "combobox", CBS_DROPDOWNLIST | WS_CHILD | WS_VISIBLE | WS_VSCROLL | WS_TABSTOP, 132, 192, 76, 56
+ CONTROL "1", 655, "edit", ES_RIGHT | WS_CHILD | WS_VISIBLE | WS_BORDER | WS_TABSTOP, 256, 192, 36, 14
+ CONTROL "", 656, "msctls_updown32", WS_CHILD | WS_VISIBLE, 291, 192, 11, 14
+ CONTROL "", 657, "combobox", CBS_DROPDOWNLIST | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 305, 192, 76, 56
+ CONTROL "Toutes les :", 654, "BorStatic", SS_LEFT | WS_CHILD | WS_VISIBLE | WS_GROUP, 211, 194, 38, 11
+ CONTROL "&Précédent", 264, "button", BS_PUSHBUTTON | BS_CENTER | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 402, 99, 38, 17
+ CONTROL "&Suivant", 265, "button", BS_PUSHBUTTON | BS_CENTER | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 402, 122, 38, 17
+ CONTROL "&Ajouter", 261, "button", BS_PUSHBUTTON | BS_CENTER | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 447, 99, 38, 17
+ CONTROL "&Réinitialiser", 262, "button", BS_PUSHBUTTON | BS_CENTER | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 448, 122, 38, 17
+ CONTROL "S&upprimer", 263, "button", BS_PUSHBUTTON | BS_CENTER | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 448, 144, 38, 17
+ CONTROL "P&endant", -1, "BorStatic", SS_LEFT | WS_CHILD | WS_VISIBLE | WS_GROUP, 47, 249, 32, 8
+ CONTROL "1", 201, "edit", ES_RIGHT | WS_CHILD | WS_VISIBLE | WS_BORDER | WS_TABSTOP, 87, 245, 36, 14
+ CONTROL "", 202, "msctls_updown32", WS_CHILD | WS_VISIBLE, 123, 245, 11, 14
+ CONTROL "", 203, "combobox", CBS_DROPDOWNLIST | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 139, 245, 76, 50
+ CONTROL "à renou&veler", -1, "BorStatic", SS_LEFT | WS_CHILD | WS_VISIBLE | WS_GROUP, 229, 248, 44, 8
+ CONTROL "0", 211, "edit", ES_RIGHT | WS_CHILD | WS_VISIBLE | WS_BORDER | WS_TABSTOP, 279, 246, 36, 14
+ CONTROL "", 212, "msctls_updown32", WS_CHILD | WS_VISIBLE, 314, 247, 11, 14
+ CONTROL "fois", -1, "BorStatic", SS_LEFT | WS_CHILD | WS_VISIBLE | WS_GROUP, 351, 248, 24, 8
+ CONTROL "&Précédent", 254, "button", BS_PUSHBUTTON | BS_CENTER | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 402, 237, 38, 17
+ CONTROL "&Suivant", 255, "button", BS_PUSHBUTTON | BS_CENTER | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 402, 259, 38, 17
+ CONTROL "&Ajouter", 251, "button", BS_PUSHBUTTON | BS_CENTER | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 447, 236, 38, 17
+ CONTROL "&Réinitialiser", 252, "button", BS_PUSHBUTTON | BS_CENTER | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 447, 257, 38, 17
+ CONTROL "S&upprimer", 253, "button", BS_PUSHBUTTON | BS_CENTER | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 448, 279, 38, 17
+ CONTROL "", -1, "static", SS_ETCHEDFRAME | WS_CHILD | WS_VISIBLE, 509, 9, 1, 287
+ CONTROL "OK", IDOK, "button", BS_PUSHBUTTON | BS_CENTER | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 517, 8, 50, 14
+ CONTROL "Cancel", IDCANCEL, "BUTTON", BS_PUSHBUTTON | BS_CENTER | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 517, 29, 50, 14
+ CONTROL "Help", IDHELP, "BUTTON", BS_PUSHBUTTON | BS_CENTER | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 517, 50, 50, 14
+ CONTROL "Durée de la phase", -1, "BorShade", BSS_RGROUP | BSS_CAPTION | BSS_LEFT | WS_CHILD | WS_VISIBLE | WS_GROUP, 12, 224, 379, 48
+ CONTROL "Cycle circadien", -1, "BorShade", BSS_GROUP | BSS_CAPTION | BSS_LEFT | WS_CHILD | WS_VISIBLE | WS_GROUP, 512, 73, 72, 83
+ CONTROL "Periode", 300, "BorRadio", BS_AUTORADIOBUTTON | WS_CHILD | WS_VISIBLE, 515, 83, 69, 13
+ CONTROL "&MMS", 301, "BorRadio", BS_AUTORADIOBUTTON | WS_CHILD | WS_VISIBLE, 515, 95, 69, 13
+ CONTROL "&Heures", 302, "BorRadio", BS_AUTORADIOBUTTON | WS_CHILD | WS_VISIBLE, 516, 107, 68, 13
+ CONTROL "&Cycle regulier", 308, "BorRadio", BS_AUTORADIOBUTTON | WS_CHILD | WS_VISIBLE, 516, 119, 68, 13
+ CONTROL "&Cycle libre", 303, "BorRadio", BS_AUTORADIOBUTTON | WS_CHILD | WS_VISIBLE, 516, 131, 68, 13
+ CONTROL "Texte Libre", 304, "BorRadio", BS_AUTORADIOBUTTON | WS_CHILD | WS_VISIBLE, 516, 143, 68, 13
+ CONTROL "", -1, "BorShade", BSS_HDIP | BSS_LEFT | WS_CHILD | WS_VISIBLE, 512, 159, 75, 1
+ CONTROL "Rythme", -1, "BorShade", BSS_GROUP | BSS_CAPTION | BSS_LEFT | WS_CHILD | WS_VISIBLE | WS_GROUP, 512, 163, 72, 57
+ CONTROL "Rythme regulier ", 305, "BorRadio", BS_AUTORADIOBUTTON | WS_CHILD | WS_VISIBLE, 516, 175, 67, 13
+ CONTROL "Jours", 307, "BorRadio", BS_AUTORADIOBUTTON | WS_CHILD | WS_VISIBLE, 516, 204, 67, 13
+ CONTROL "Rythme libre", 306, "BorRadio", BS_AUTORADIOBUTTON | WS_CHILD | WS_VISIBLE, 516, 190, 67, 13
+ CONTROL "", -1, "BorShade", BSS_HDIP | BSS_LEFT | WS_CHILD | WS_VISIBLE, 511, 67, 75, 1
+}
+
+IDD_RENEW_MEDIC DIALOG 0, 0, 471, 70
+STYLE DS_MODALFRAME | DS_3DLOOK | DS_CONTEXTHELP | WS_POPUP | WS_VISIBLE | WS_CAPTION | WS_SYSMENU
+CAPTION "Médicament à renouveler"
+FONT 8, "MS Sans Serif"
+{
+ CONTROL "Durée de la phase", -1, "BorShade", BSS_RGROUP | BSS_CAPTION | BSS_LEFT | WS_CHILD | WS_VISIBLE | WS_GROUP, 13, 10, 379, 48
+ CONTROL "P&endant", -1, "BorStatic", SS_LEFT | WS_CHILD | WS_VISIBLE | WS_GROUP, 48, 35, 32, 8
+ CONTROL "1", IDC_EDIT_PDT, "edit", ES_RIGHT | WS_CHILD | WS_VISIBLE | WS_BORDER | WS_TABSTOP, 88, 31, 36, 14
+ CONTROL "", IDC_UPDOWN_PDT, "msctls_updown32", WS_CHILD | WS_VISIBLE, 124, 31, 11, 14
+ CONTROL "", IDC_COMBOBOX_PDT, "combobox", CBS_DROPDOWNLIST | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 140, 31, 76, 50
+ CONTROL "à renou&veler", -1, "BorStatic", SS_LEFT | WS_CHILD | WS_VISIBLE | WS_GROUP, 230, 34, 44, 8
+ CONTROL "0", IDC_EDIT_RNV, "edit", ES_RIGHT | WS_CHILD | WS_VISIBLE | WS_BORDER | WS_TABSTOP, 280, 32, 36, 14
+ CONTROL "", IDC_UPDOWN_RNV, "msctls_updown32", WS_CHILD | WS_VISIBLE, 315, 33, 11, 14
+ CONTROL "fois", -1, "BorStatic", SS_LEFT | WS_CHILD | WS_VISIBLE | WS_GROUP, 352, 34, 24, 8
+ CONTROL "OK", IDOK, "BUTTON", BS_PUSHBUTTON | BS_CENTER | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 406, 6, 50, 14
+ CONTROL "Cancel", IDCANCEL, "BUTTON", BS_PUSHBUTTON | BS_CENTER | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 406, 26, 50, 14
+ CONTROL "Help", IDHELP, "BUTTON", BS_PUSHBUTTON | BS_CENTER | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 406, 46, 50, 14
+}
+

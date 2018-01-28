@@ -1,0 +1,24 @@
+#ifndef __NSBB_GLO_H#define __NSBB_GLO_H
+
+#define NSDLGFCT_CREATION 	0
+#define NSDLGFCT_REINIT   	1
+#define NSDLGFCT_EXECUTE  	2
+#define NSDLGFCT_POSTEXEC 	3
+#define NSDLGFCT_PREFERME   4
+#define NSDLGFCT_FERMETURE  5
+#define NSDLGFCT_CTRL_KEY   6
+
+//
+// Enumération des types de fenêtres
+//
+enum WNDTYPE { isUndefined, isDlg, isGroup, isEdit, isBtn, isRadioBtn, isCaseACocher,
+               isFunct, isOnglet, isTreeNode, isTreeWindow, isEditLexique,
+               isEditLexiqueDerive, isEditNoLexique, isNSCSVue, isStatic,
+               isEditDate, isEditDateHeure, isAdrListWindow,
+               isHistoryListWindow, isComboClassif, isComboSemantique,
+               isComboList, isCorListWindow, isHistoryValListWindow } ;
+
+enum NODELINKDIRECTION { dirFleche = 1, dirEnvers } ;
+
+#endif
+

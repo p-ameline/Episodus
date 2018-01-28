@@ -1,0 +1,88 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+<TITLE>TIdTCPServerConnection</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <META name="GENERATOR" content="Doc-O-Matic">
+    <LINK rel="STYLESHEET" href="default.css" type="text/css">
+
+<SCRIPT LANGUAGE="JavaScript1.2" SRC="scripts.js"></SCRIPT>
+</HEAD>
+<BODY CLASS="Element57">
+<TABLE BORDER="0" BGCOLOR="#AACCFF" WIDTH="100%" CELLSPACING="0" CELLPADDING="0">
+<TR><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element1">
+Indy 9</DIV>
+</TD><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element2">
+<A HREF="content.html" CLASS="Element59">Content</A> | <A HREF="idx.html" CLASS="Element59">Index</A> | <A HREF="symref.html" CLASS="Element59">Reference</A></DIV>
+</TD></TR></TABLE><DIV CLASS="Element58">
+<DIV CLASS="Element5">
+TIdTCPServerConnection</DIV>
+<DIV CLASS="Element7">
+<A HREF="014201.html" CLASS="Element59">Hierarchy</A>, <A HREF="014202.html" CLASS="Element59">Properties</A>, <A HREF="014203.html" CLASS="Element59">Methods</A>, <A HREF="014204.html" CLASS="Element59">Events</A>, <A HREF="014205.html" CLASS="Element59">See Also</A>, <A HREF="002919.html" CLASS="Element59">Unit: IdTCPServer</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Encapsulates a server connection to a client.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12">TIdTCPServerConnection = <STRONG>class</STRONG>(<A HREF="007828.html" CLASS="Element59">TIdTCPConnection</A>)</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Unit</DIV>
+<DIV CLASS="Element69">
+<A HREF="002919.html" CLASS="Element59">IdTCPServer</A></DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+TIdTCPServerConnection encapsulates a server connection to a client on a <A HREF="007831.html" CLASS="Element59">TIdTCPServer</A>. TIdTCPServerConnection is used by <A HREF="007613.html" CLASS="Element59">TIdPeerThread</A> to provide the server context for accessing any properties, methods, or events of the TCP server.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0001">TIdTCPServerConnection.Server</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007832.html" CLASS="Element59">TIdTCPServerConnection</A>, <A HREF="014206.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Provides the server context for a client connection.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> Server: <A HREF="007831.html" CLASS="Element59">TIdTCPServer</A>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Server is a read-only <A HREF="007831.html" CLASS="Element59">TIdTCPServer</A> property used to store the server context for the class. In <A HREF="007832.html" CLASS="Element59">TIdTCPServerConnection</A>, the <A HREF="007831.html" CLASS="Element59">TIdTCPServer</A> is also the Owner of the <A HREF="007832.html" CLASS="Element59">TIdTCPServerConnection</A> class instance.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0000">TIdTCPServerConnection.Create</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007832.html" CLASS="Element59">TIdTCPServerConnection</A>, <A HREF="014207.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Constructor for the object instance.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>constructor</STRONG> Create(AServer: <A HREF="007831.html" CLASS="Element59">TIdTCPServer</A>); <STRONG>reintroduce</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+AServer: TIdTCPServer</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+<A HREF="007832.html#0001" CLASS="Element59">Server</A> used as the end-point for the connection.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Create is the constructor for the object instance, and calls the inherited Create method. Create sets the <A HREF="007832.html#0001" CLASS="Element59">Server</A> property to the value in AServer to indicate the <A HREF="007831.html" CLASS="Element59">TIdTCPServer</A> context used when a peer thread is executed.</DIV>
+</DIV>
+<DIV CLASS="Element62">
+<HR>Created with Doc-O-Matic 2 donated to <STRONG><A HREF="http://www.delphi-jedi.org">Project JEDI</A></STRONG>. Commercial license available from the <STRONG><A HREF="http://www.doc-o-matic.com">Doc-O-Matic site</A></STRONG>.</DIV>
+</DIV></BODY></HTML>

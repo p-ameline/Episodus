@@ -1,0 +1,127 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+<TITLE>TIdNTLMAuthentication</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <META name="GENERATOR" content="Doc-O-Matic">
+    <LINK rel="STYLESHEET" href="default.css" type="text/css">
+
+<SCRIPT LANGUAGE="JavaScript1.2" SRC="scripts.js"></SCRIPT>
+</HEAD>
+<BODY CLASS="Element57">
+<TABLE BORDER="0" BGCOLOR="#AACCFF" WIDTH="100%" CELLSPACING="0" CELLPADDING="0">
+<TR><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element1">
+Indy 9</DIV>
+</TD><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element2">
+<A HREF="content.html" CLASS="Element59">Content</A> | <A HREF="idx.html" CLASS="Element59">Index</A> | <A HREF="symref.html" CLASS="Element59">Reference</A></DIV>
+</TD></TR></TABLE><DIV CLASS="Element58">
+<DIV CLASS="Element5">
+TIdNTLMAuthentication</DIV>
+<DIV CLASS="Element7">
+<A HREF="013028.html" CLASS="Element59">Hierarchy</A>, <A HREF="013029.html" CLASS="Element59">Properties</A>, <A HREF="013030.html" CLASS="Element59">Methods</A>, <A HREF="013031.html" CLASS="Element59">See Also</A>, <A HREF="002124.html" CLASS="Element59">Unit: IdAuthenticationNTLM</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Implements the NTLM <A HREF="007605.html#0000" CLASS="Element59">Authentication</A> Scheme for HTTP.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12">TIdNTLMAuthentication = <STRONG>class</STRONG>(<A HREF="007205.html" CLASS="Element59">TIdAuthentication</A>)</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Unit</DIV>
+<DIV CLASS="Element69">
+<A HREF="002124.html" CLASS="Element59">IdAuthenticationNTLM</A></DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+TIdNTLMAuthentication is a <A HREF="007205.html" CLASS="Element59">TIdAuthentication</A> that implements the NTLM <A HREF="007605.html#0000" CLASS="Element59">Authentication</A> Scheme for HTTP. The NTLM <A HREF="007605.html#0000" CLASS="Element59">Authentication</A> Scheme is not as secure as Digest and some other schemes, but it is slightly better than the Basic authentication scheme. The NTLM Challenge/Response scheme is described at:<P CLASS="Element10">
+<UL>
+<LI>Microsoft NTLM, MSDN Platform SDK (http://msdn.microsoft.com/library/default.asp?url=/library/en-us/security/hh/secpack/ntlmssp_0k19.asp)</UL>
+<P CLASS="Element10">
+<STRONG>Note</STRONG>: NTLM <A HREF="007605.html#0000" CLASS="Element59">Authentication</A> is not an http authentication scheme; it is a connection authentication scheme which happens to (mis-)use http status codes and headers (and even those incorrectly).</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0000">TIdNTLMAuthentication.Authentication</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007605.html" CLASS="Element59">TIdNTLMAuthentication</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Constructs the authorization credentials for the authentication scheme.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>function</STRONG> Authentication: <STRONG>String</STRONG>; <STRONG>override</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Return Value</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+String - Contents of the binary authentication message.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Authentication is an overridden String function that constructs the authorization credentials using the binary message types required by the authentication scheme.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0001">TIdNTLMAuthentication.Create</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007605.html" CLASS="Element59">TIdNTLMAuthentication</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Constructor for the object instance.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>constructor</STRONG> Create; <STRONG>override</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Create is the constructor for the object instance, and calls the inherited Create method.<P CLASS="Element10">
+Create also initializes the OpenSSL library used for constructing binary message packets used by the protocol by calling IdSSLOpenSSLHeaders.<A HREF="003179.html" CLASS="Element59">Load</A>. If the OpenSSL library cannot be loaded, the constructor aborts creation of the object instance.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0002">TIdNTLMAuthentication.KeepAlive</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007605.html" CLASS="Element59">TIdNTLMAuthentication</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Indicates if the connection should open for Challenge/Response negotiations.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>function</STRONG> KeepAlive: Boolean; <STRONG>override</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+KeepAlive is an overridden Boolean function that indicates if the connection used for Challenge/Response negotiation should remain open during the steps for the process. NTLM is a mutli-step connection-based authentication method, so the connection cannot close during usage.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0003">TIdNTLMAuthentication.Reset</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007605.html" CLASS="Element59">TIdNTLMAuthentication</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Indicates the authentication process should revert to the initial step in the process.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>procedure</STRONG> Reset; <STRONG>override</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Reset is an overridden procedure in <A HREF="007605.html" CLASS="Element59">TIdNTLMAuthentication</A> that calls the inherited method prior to setting the value in Status to 1. Reset inicates the authentication process should revert to the initial step in the Challenge/Response ptotocol.</DIV>
+</DIV>
+<DIV CLASS="Element62">
+<HR>Created with Doc-O-Matic 2 donated to <STRONG><A HREF="http://www.delphi-jedi.org">Project JEDI</A></STRONG>. Commercial license available from the <STRONG><A HREF="http://www.doc-o-matic.com">Doc-O-Matic site</A></STRONG>.</DIV>
+</DIV></BODY></HTML>

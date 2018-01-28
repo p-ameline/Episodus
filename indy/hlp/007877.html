@@ -1,0 +1,183 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+<TITLE>TIdUDPServer</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <META name="GENERATOR" content="Doc-O-Matic">
+    <LINK rel="STYLESHEET" href="default.css" type="text/css">
+
+<SCRIPT LANGUAGE="JavaScript1.2" SRC="scripts.js"></SCRIPT>
+</HEAD>
+<BODY CLASS="Element57">
+<TABLE BORDER="0" BGCOLOR="#AACCFF" WIDTH="100%" CELLSPACING="0" CELLPADDING="0">
+<TR><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element1">
+Indy 9</DIV>
+</TD><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element2">
+<A HREF="content.html" CLASS="Element59">Content</A> | <A HREF="idx.html" CLASS="Element59">Index</A> | <A HREF="symref.html" CLASS="Element59">Reference</A></DIV>
+</TD></TR></TABLE><DIV CLASS="Element58">
+<DIV CLASS="Element5">
+TIdUDPServer</DIV>
+<DIV CLASS="Element7">
+<A HREF="014685.html" CLASS="Element59">Hierarchy</A>, <A HREF="014686.html" CLASS="Element59">Properties</A>, <A HREF="014687.html" CLASS="Element59">Methods</A>, <A HREF="014688.html" CLASS="Element59">Events</A>, <A HREF="014689.html" CLASS="Element59">See Also</A>, <A HREF="002946.html" CLASS="Element59">Unit: IdUDPServer</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Implements a UDP server.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12">TIdUDPServer = <STRONG>class</STRONG>(<A HREF="007873.html" CLASS="Element59">TIdUDPBase</A>)</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Unit</DIV>
+<DIV CLASS="Element69">
+<A HREF="002946.html" CLASS="Element59">IdUDPServer</A></DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+TIdUDPServer is a <A HREF="007873.html" CLASS="Element59">TIdUDPBase</A> descendant that is a server implementation of the User Datagram Protocol(UDP) as described in the Internet standards document:<P CLASS="Element10">
+<UL>
+<LI>RFC 768 - User Datagram Protocol (http://www.rfc-editor.org/rfc/rfc768.txt)</UL>
+<P CLASS="Element10">
+TIdUDPServer uses an instance of TIdUDPListener to perform read operations for multiple <A HREF="007071.html" CLASS="Element59">socket</A> bindings created by the server.<P CLASS="Element10">
+TIdUDPServer can be used as an ancestor class for other server components based on the User Datagram Protocol. <A HREF="007869.html" CLASS="Element59">TIdTrivialFTPServer</A> is a descendant of the TIdUDPServer component.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0000">TIdUDPServer.Bindings</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007877.html" CLASS="Element59">TIdUDPServer</A>, <A HREF="014690.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Socket handles allocated by the server.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> Bindings: <A HREF="007714.html" CLASS="Element59">TIdSocketHandles</A>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Bindings is a <A HREF="007714.html" CLASS="Element59">TIdSocketHandles</A> property and a collection of <A HREF="007713.html" CLASS="Element59">TIdSocketHandle</A> instances. For <A HREF="007877.html" CLASS="Element59">TIdUDPServer</A>, Bindings will contain <A HREF="007714.html" CLASS="Element59">TIdSocketHandles</A> instances with an allocated <A HREF="007071.html" CLASS="Element59">socket</A> of type ID_SOCK_DGRAM.<P CLASS="Element10">
+Bindings provides the <A HREF="007877.html#0002" CLASS="Element59">DefaultPort</A> number for the <A HREF="007877.html" CLASS="Element59">TIdUDPServer</A> and is used by the <A HREF="007876.html" CLASS="Element59">TIdUDPListenerThread</A> to gain access to the <A HREF="007071.html" CLASS="Element59">socket</A> handle and low-level access methods provided by the protocol stack.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0002">TIdUDPServer.DefaultPort</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007877.html" CLASS="Element59">TIdUDPServer</A>, <A HREF="014691.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Port number used to <A HREF="003177.html" CLASS="Element59">listen</A> for new connections.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> DefaultPort: integer;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+DefaultPort is an <STRONG>Integer</STRONG> property that identifies the port number used for new <A HREF="007071.html" CLASS="Element59">socket</A> bindings created by the server. The value of DefaultPort is read from and written to Bindings.DefaultPort.<P CLASS="Element10">
+<A HREF="007877.html" CLASS="Element59">TIdUDPServer</A> uses the DefaultPort number to <A HREF="000175.html" CLASS="Element59">bind</A> the allocated datagram <A HREF="007071.html" CLASS="Element59">socket</A> handle when the Active property to set to <STRONG>True</STRONG>.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0005">TIdUDPServer.ThreadedEvent</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007877.html" CLASS="Element59">TIdUDPServer</A>, <A HREF="014692.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Indicates the method used for UDP read events.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> ThreadedEvent: boolean;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+ThreadedEvent is a Boolean property that indicates if the UDP server is using a seperate thread to perform reads for the UDP connection, or if reads must be synchronised using a UDP method.<P CLASS="Element10">
+When ThreadedEvent is True, the <A HREF="007876.html#0004" CLASS="Element59">TIdUDPListenerThread.UDPRead</A> method is used to handle read operations. The default value for ThreadedEvent is False.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0001">TIdUDPServer.Create</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007877.html" CLASS="Element59">TIdUDPServer</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Constructor for the object instance.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>constructor</STRONG> Create(axOwner: TComponent); <STRONG>override</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Create is the constructor for the <A HREF="007877.html" CLASS="Element59">TIdUDPServer</A> object instance. Create uses the inherited Create method to initialize the object instance, and creates the default <A HREF="007713.html" CLASS="Element59">TIdSocketHandle</A> instance in <A HREF="007877.html#0000" CLASS="Element59">Bindings</A> for the server.<P CLASS="Element10">
+<STRONG>Note</STRONG>: The Host and <A HREF="007877.html#0002" CLASS="Element59">DefaultPort</A> properties must set to the desired values before the UDP server can be activated.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0003">TIdUDPServer.Destroy</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007877.html" CLASS="Element59">TIdUDPServer</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Destructor for the object instance.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>destructor</STRONG> Destroy; <STRONG>override</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Destroy is the destructor for <A HREF="007877.html" CLASS="Element59">TIdUDPServer</A>, and is responsible for disposing of the <A HREF="007877.html" CLASS="Element59">TIdUDPServer</A> object instance. Destroy performs the following actions:<P CLASS="Element10">
+<UL>
+<LI>Set Active to <STRONG>False</STRONG>.<P CLASS="Element10">
+<LI>Frees the <A HREF="007714.html" CLASS="Element59">TIdSocketHandles</A> in <A HREF="007877.html#0000" CLASS="Element59">Bindings</A>.<P CLASS="Element10">
+<LI>Calls the inherited Destroy method.</UL>
+<P CLASS="Element10">
+Destroy should not be directly called in an application. Use Free instead. Free checks to ensure that the object reference is not <STRONG>Nil</STRONG> before calling Destroy.<P CLASS="Element10">
+<STRONG>Note</STRONG>: If an exception is emitted from the constructor, the destructor is called to destroy the partially constructed object instance. Destructors should check that allocated resources, such as handles, were actually allocated before trying to release them.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0004">TIdUDPServer.OnUDPRead</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007877.html" CLASS="Element59">TIdUDPServer</A>, <A HREF="014693.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Event handler for UDP read events.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> OnUDPRead: <A HREF="008105.html" CLASS="Element59">TUDPReadEvent</A>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+ABinding</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Socket binding receiving the UDP datagram.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+AData</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Stream containing data in the UDP datagram.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+OnUDPRead is an event handler for <A HREF="008105.html" CLASS="Element59">TUDPReadEvent</A> events. OnUDPRead is triggered by the DoUDPRead method when data has been read from the <A HREF="007071.html" CLASS="Element59">socket</A> binding and is available for use by the server.<P CLASS="Element10">
+Assign a <A HREF="008105.html" CLASS="Element59">TUDPReadEvent</A> handler procedure to OnUDPRead to respond to the event.</DIV>
+</DIV>
+<DIV CLASS="Element62">
+<HR>Created with Doc-O-Matic 2 donated to <STRONG><A HREF="http://www.delphi-jedi.org">Project JEDI</A></STRONG>. Commercial license available from the <STRONG><A HREF="http://www.doc-o-matic.com">Doc-O-Matic site</A></STRONG>.</DIV>
+</DIV></BODY></HTML>

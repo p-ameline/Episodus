@@ -1,0 +1,145 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+<TITLE>TIdText</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <META name="GENERATOR" content="Doc-O-Matic">
+    <LINK rel="STYLESHEET" href="default.css" type="text/css">
+
+<SCRIPT LANGUAGE="JavaScript1.2" SRC="scripts.js"></SCRIPT>
+</HEAD>
+<BODY CLASS="Element57">
+<TABLE BORDER="0" BGCOLOR="#AACCFF" WIDTH="100%" CELLSPACING="0" CELLPADDING="0">
+<TR><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element1">
+Indy 9</DIV>
+</TD><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element2">
+<A HREF="content.html" CLASS="Element59">Content</A> | <A HREF="idx.html" CLASS="Element59">Index</A> | <A HREF="symref.html" CLASS="Element59">Reference</A></DIV>
+</TD></TR></TABLE><DIV CLASS="Element58">
+<DIV CLASS="Element5">
+TIdText</DIV>
+<DIV CLASS="Element7">
+<A HREF="014296.html" CLASS="Element59">Hierarchy</A>, <A HREF="014297.html" CLASS="Element59">Properties</A>, <A HREF="014298.html" CLASS="Element59">Methods</A>, <A HREF="014299.html" CLASS="Element59">Events</A>, <A HREF="014300.html" CLASS="Element59">See Also</A>, <A HREF="002286.html" CLASS="Element59">Unit: IdMessage</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Encapsulates a MIME-encoded text message part.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12">TIdText = <STRONG>class</STRONG>(<A HREF="007573.html" CLASS="Element59">TIdMessagePart</A>)</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Unit</DIV>
+<DIV CLASS="Element69">
+<A HREF="002286.html" CLASS="Element59">IdMessage</A></DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+TIdText is a <A HREF="007573.html" CLASS="Element59">TIdMessagePart</A> descendant that encapsulates a MIME textual message part. <A HREF="007204.html" CLASS="Element59">TIdAttachment</A> and TIdText are used as collection items in a <A HREF="007575.html" CLASS="Element59">TIdMessageParts</A> collection.<P CLASS="Element10">
+TIdText provides the <A HREF="007844.html#0001" CLASS="Element59">Body</A> property to represent the textual content of the message part.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0001">TIdText.Body</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007844.html" CLASS="Element59">TIdText</A>, <A HREF="014301.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Textual content of the message part.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> Body: TStrings;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Body is a TStrings property that represents the textual content of the MIME message part. Body will be populated with the values from a valid TStrings instance supplied in the <A HREF="007844.html#0002" CLASS="Element59">Create</A> constructor. Body may also be updated using inherited properties and methods from TStrings, like Text and Add.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0000">TIdText.Assign</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007844.html" CLASS="Element59">TIdText</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Copy the property values of an object instance.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>procedure</STRONG> Assign(Source: TPersistent); <STRONG>override</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+Source: TPersistent</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Persistent object containing values to be copied.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Assign is a procedure used to copy the property values from the persistent object specified in Source to the current object instance. When Source has the same ClassType as the current object, Assign will copy the following property values:<P CLASS="Element10">
+<UL>
+<LI>ContentTransfer<P CLASS="Element10">
+<LI>ContentType<P CLASS="Element10">
+<LI>ExtraHeaders<P CLASS="Element10">
+<LI><A HREF="007844.html#0001" CLASS="Element59">Body</A></UL>
+</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0002">TIdText.Create</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007844.html" CLASS="Element59">TIdText</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Constructor for the collection item.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>constructor</STRONG> Create(Collection: <A HREF="007575.html" CLASS="Element59">TIdMessageParts</A>; ABody: TStrings = <STRONG>nil</STRONG>); <STRONG>reintroduce</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+Collection: TIdMessageParts</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Owner of the collection item.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+ABody: TStrings = nil</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Content of the message part.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Create is the constructor for the collection item, and adds the new collection item to the collection specified in Collection. Create calls the inherited Create method to identify the collection that own the collection item. Create also initializes the <A HREF="007844.html#0001" CLASS="Element59">Body</A> property from the value specified in ABody.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0003">TIdText.Destroy</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007844.html" CLASS="Element59">TIdText</A>, <A HREF="014302.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Frees the object instance.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>destructor</STRONG> Destroy; <STRONG>override</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Destroy is the destructor for the object instance. Destroy is responsible for freeing and releasing the <A HREF="007844.html#0001" CLASS="Element59">Body</A> property prior to calling the inherited Destroy method.</DIV>
+</DIV>
+<DIV CLASS="Element62">
+<HR>Created with Doc-O-Matic 2 donated to <STRONG><A HREF="http://www.delphi-jedi.org">Project JEDI</A></STRONG>. Commercial license available from the <STRONG><A HREF="http://www.doc-o-matic.com">Doc-O-Matic site</A></STRONG>.</DIV>
+</DIV></BODY></HTML>

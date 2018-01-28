@@ -1,0 +1,122 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+<TITLE>TIdAuthenticationItem</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <META name="GENERATOR" content="Doc-O-Matic">
+    <LINK rel="STYLESHEET" href="default.css" type="text/css">
+
+<SCRIPT LANGUAGE="JavaScript1.2" SRC="scripts.js"></SCRIPT>
+</HEAD>
+<BODY CLASS="Element57">
+<TABLE BORDER="0" BGCOLOR="#AACCFF" WIDTH="100%" CELLSPACING="0" CELLPADDING="0">
+<TR><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element1">
+Indy 9</DIV>
+</TD><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element2">
+<A HREF="content.html" CLASS="Element59">Content</A> | <A HREF="idx.html" CLASS="Element59">Index</A> | <A HREF="symref.html" CLASS="Element59">Reference</A></DIV>
+</TD></TR></TABLE><DIV CLASS="Element58">
+<DIV CLASS="Element5">
+TIdAuthenticationItem</DIV>
+<DIV CLASS="Element7">
+<A HREF="009974.html" CLASS="Element59">Hierarchy</A>, <A HREF="009975.html" CLASS="Element59">Properties</A>, <A HREF="009976.html" CLASS="Element59">Methods</A>, <A HREF="009977.html" CLASS="Element59">See Also</A>, <A HREF="002123.html" CLASS="Element59">Unit: IdAuthenticationManager</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Represents an authentication mechanism used in a <A HREF="007207.html" CLASS="Element59">TIdAuthenticationCollection</A> collection.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12">TIdAuthenticationItem = <STRONG>class</STRONG>(TCollectionItem)</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Unit</DIV>
+<DIV CLASS="Element69">
+<A HREF="002123.html" CLASS="Element59">IdAuthenticationManager</A></DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+TIdAuthenticationItem is a TCollectionItem descendant that implements items maintained in a <A HREF="007207.html" CLASS="Element59">TIdAuthenticationCollection</A> collection. TIdAuthenticationItem represents the individual authentication mechanisms used for HTTP client requests, including the <A HREF="007208.html#0003" CLASS="Element59">URL</A> and identity and authorization values provoded as parameters in a client request.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0002">TIdAuthenticationItem.Params</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007208.html" CLASS="Element59">TIdAuthenticationItem</A>, <A HREF="009978.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Represent arguments used with an authentication mechanism.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> Params: TStringList;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Params is a TStringList property that represents the arguments provided for an authentication mechanism added to the collection maintained by <A HREF="007209.html" CLASS="Element59">TIdAuthenticationManager</A>. Params is used with <A HREF="007208.html#0003" CLASS="Element59">URL</A> to store the information required to use the authentication mechanism.<P CLASS="Element10">
+Params is initialized in the <A HREF="007208.html#0000" CLASS="Element59">Create</A> constructor, and released in the <A HREF="007208.html#0001" CLASS="Element59">Destroy</A> destructor. Write access to the Params property calls Assign to transfer the values from a TStringList to the property.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0003">TIdAuthenticationItem.URL</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007208.html" CLASS="Element59">TIdAuthenticationItem</A>, <A HREF="009979.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> URL: <A HREF="007878.html" CLASS="Element59">TIdURI</A>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+URL is a <A HREF="007878.html" CLASS="Element59">TIdURI</A> property that represents the resource location for the authetication added to the colletion maintained by <A HREF="007209.html" CLASS="Element59">TIdAuthenticationManager</A>. URL is use with <A HREF="007208.html#0002" CLASS="Element59">Params</A> to store the information required to use the authentication mechanism.<P CLASS="Element10">
+URL is initialized in the <A HREF="007208.html#0000" CLASS="Element59">Create</A> constructor, and released in the <A HREF="007208.html#0001" CLASS="Element59">Destroy</A> destructor. Write access to the URL property copies the URI for the new value to the URI for the property.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0000">TIdAuthenticationItem.Create</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007208.html" CLASS="Element59">TIdAuthenticationItem</A>, <A HREF="009980.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Constructor for the authentication object instance.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>constructor</STRONG> Create(ACollection: TCOllection); <STRONG>override</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+ACollection: TCOllection</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Collection that owns the object instance.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Create is the constructor for the authentication object instance. Create calls the inherited Create method using ACollection as the owner of the object instance. Create also allocates resources required for the <A HREF="007208.html#0003" CLASS="Element59">URL</A> and <A HREF="007208.html#0002" CLASS="Element59">Params</A> properties for the authentication mechanism.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0001">TIdAuthenticationItem.Destroy</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007208.html" CLASS="Element59">TIdAuthenticationItem</A>, <A HREF="009981.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Destructor for the object instance.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>destructor</STRONG> Destroy; <STRONG>override</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Destroy is the destructor for the object instance. Destroy frees resources allocated in <A HREF="007208.html#0000" CLASS="Element59">Create</A> for the <A HREF="007208.html#0003" CLASS="Element59">URL</A> and <A HREF="007208.html#0002" CLASS="Element59">Params</A> properties. Destroy calls the inherited Destroy method prior to exiting.</DIV>
+</DIV>
+<DIV CLASS="Element62">
+<HR>Created with Doc-O-Matic 2 donated to <STRONG><A HREF="http://www.delphi-jedi.org">Project JEDI</A></STRONG>. Commercial license available from the <STRONG><A HREF="http://www.doc-o-matic.com">Doc-O-Matic site</A></STRONG>.</DIV>
+</DIV></BODY></HTML>

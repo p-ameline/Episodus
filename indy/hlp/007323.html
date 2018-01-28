@@ -1,0 +1,155 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+<TITLE>TIdFinger</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <META name="GENERATOR" content="Doc-O-Matic">
+    <LINK rel="STYLESHEET" href="default.css" type="text/css">
+
+<SCRIPT LANGUAGE="JavaScript1.2" SRC="scripts.js"></SCRIPT>
+</HEAD>
+<BODY CLASS="Element57">
+<TABLE BORDER="0" BGCOLOR="#AACCFF" WIDTH="100%" CELLSPACING="0" CELLPADDING="0">
+<TR><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element1">
+Indy 9</DIV>
+</TD><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element2">
+<A HREF="content.html" CLASS="Element59">Content</A> | <A HREF="idx.html" CLASS="Element59">Index</A> | <A HREF="symref.html" CLASS="Element59">Reference</A></DIV>
+</TD></TR></TABLE><DIV CLASS="Element58">
+<DIV CLASS="Element5">
+TIdFinger</DIV>
+<DIV CLASS="Element7">
+<A HREF="010975.html" CLASS="Element59">Hierarchy</A>, <A HREF="010976.html" CLASS="Element59">Properties</A>, <A HREF="010977.html" CLASS="Element59">Methods</A>, <A HREF="010978.html" CLASS="Element59">Events</A>, <A HREF="010979.html" CLASS="Element59">See Also</A>, <A HREF="002187.html" CLASS="Element59">Unit: IdFinger</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Implements a <A HREF="007323.html#0002" CLASS="Element59">Finger</A> protocol client.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12">TIdFinger = <STRONG>class</STRONG>(<A HREF="007827.html" CLASS="Element59">TIdTCPClient</A>)</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Unit</DIV>
+<DIV CLASS="Element69">
+<A HREF="002187.html" CLASS="Element59">IdFinger</A></DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+The TIdFinger implements the <A HREF="007323.html#0002" CLASS="Element59">Finger</A> User Information Protocol or <A HREF="007323.html#0002" CLASS="Element59">Finger</A> (RFC 1288) as a client. The finger protocol is an interface for a database of information about users on a remote system and could include information such as if they were logged in to the system, when they last read their E-Mail or sometimes information the user wishes to make available publicly (.plan file).</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0000">TIdFinger.CompleteQuery</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007323.html" CLASS="Element59">TIdFinger</A>, <A HREF="010980.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Identifies a complete query for the protocol.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> CompleteQuery: <STRONG>String</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+CompleteQuery is the complete <A HREF="007323.html#0002" CLASS="Element59">Finger</A> query such as &quot;user@host&quot;. The CompleteQuery property is provided as a convenience for programs which prompt for a query in this form. CompleteQuery may contain values that permit recursive finger queries on servers that permit this capability, such as:<P CLASS="Element10">
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12">      test@test.com@example.com</PRE></DIV>
+</DIV>
+<P CLASS="Element10">
+CompleteQuery consists of the values in the <A HREF="007323.html#0003" CLASS="Element59">Query</A> and Host properties.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0003">TIdFinger.Query</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007323.html" CLASS="Element59">TIdFinger</A>, <A HREF="010981.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Specifies the query for the <A HREF="007323.html#0002" CLASS="Element59">Finger</A> method.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> Query: <STRONG>String</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Query is a String property that represents the text for the query sent to the server when using the <A HREF="007323.html#0002" CLASS="Element59">Finger</A> method. Values in Query consist of components in one of the following forms:<P CLASS="Element10">
+<UL>
+<LI>username@host<P CLASS="Element10">
+<LI>username@host1@host2</UL>
+<P CLASS="Element10">
+For the second form of Query, there is no arbitrary limit to the number of @host tokens in the query.<P CLASS="Element10">
+Use <A HREF="007323.html#0000" CLASS="Element59">CompleteQuery</A> to get the query string that includes the value in Host.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0004">TIdFinger.VerboseOutput</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007323.html" CLASS="Element59">TIdFinger</A>, <A HREF="010982.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Instructs the server to provide detailed output.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> VerboseOutput: Boolean;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+VerboseOutput indicates to the server that it should give more detailed information than with a regular finger query. However, this will probably not work on many systems so it is set to False by default.<P CLASS="Element10">
+VerboseOutput is used in the <A HREF="007323.html#0002" CLASS="Element59">Finger</A> method, and indicates that additional arguments should be appended to the <A HREF="007323.html#0003" CLASS="Element59">Query</A> property prior to connection and transmission to the server.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0001">TIdFinger.Create</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007323.html" CLASS="Element59">TIdFinger</A>, <A HREF="010983.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Instantiates a <A HREF="007323.html" CLASS="Element59">TIdFinger</A> instance.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>constructor</STRONG> Create(AOwner: TComponent); <STRONG>override</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+AOwner: TComponent</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Owner of the object instance.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Create constructs a properly initialized instance of <A HREF="007323.html" CLASS="Element59">TIdFinger</A> using the inherited Create constructor, and initializes Port to the constant value <A HREF="002449.html" CLASS="Element59">IdPORT_FINGER</A> (Decimal <STRONG>79</STRONG>) as required by the <A HREF="007323.html#0002" CLASS="Element59">Finger</A> Protocol.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0002">TIdFinger.Finger</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007323.html" CLASS="Element59">TIdFinger</A>, <A HREF="010984.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Perfoms a Finger query and retrieves the results.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>function</STRONG> Finger: <STRONG>String</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Finger connects to a finger server, does the finger query specified in the <A HREF="007323.html#0003" CLASS="Element59">Query</A> property, and returns the results of the query. Be sure that the Host property is set appropriately before using this method.</DIV>
+</DIV>
+<DIV CLASS="Element62">
+<HR>Created with Doc-O-Matic 2 donated to <STRONG><A HREF="http://www.delphi-jedi.org">Project JEDI</A></STRONG>. Commercial license available from the <STRONG><A HREF="http://www.doc-o-matic.com">Doc-O-Matic site</A></STRONG>.</DIV>
+</DIV></BODY></HTML>

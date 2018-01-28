@@ -1,0 +1,76 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+<TITLE>TIdHashCRC16</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <META name="GENERATOR" content="Doc-O-Matic">
+    <LINK rel="STYLESHEET" href="default.css" type="text/css">
+
+<SCRIPT LANGUAGE="JavaScript1.2" SRC="scripts.js"></SCRIPT>
+</HEAD>
+<BODY CLASS="Element57">
+<TABLE BORDER="0" BGCOLOR="#AACCFF" WIDTH="100%" CELLSPACING="0" CELLPADDING="0">
+<TR><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element1">
+Indy 9</DIV>
+</TD><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element2">
+<A HREF="content.html" CLASS="Element59">Content</A> | <A HREF="idx.html" CLASS="Element59">Index</A> | <A HREF="symref.html" CLASS="Element59">Reference</A></DIV>
+</TD></TR></TABLE><DIV CLASS="Element58">
+<DIV CLASS="Element5">
+TIdHashCRC16</DIV>
+<DIV CLASS="Element7">
+<A HREF="011297.html" CLASS="Element59">Hierarchy</A>, <A HREF="011298.html" CLASS="Element59">Methods</A>, <A HREF="011299.html" CLASS="Element59">See Also</A>, <A HREF="002242.html" CLASS="Element59">Unit: IdHashCRC</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Implements methods used to calculate a 16-bit CRC value for data in an input stream.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12">TIdHashCRC16 = <STRONG>class</STRONG>(<A HREF="007359.html" CLASS="Element59">TIdHash16</A>)</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Unit</DIV>
+<DIV CLASS="Element69">
+<A HREF="002242.html" CLASS="Element59">IdHashCRC</A></DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+TIdHashCRC16 is a <A HREF="007359.html" CLASS="Element59">TIdHash16</A> descendant that implements methods used to calculate a 16-bit Cyclic Redundnacy Check (CRC) value for data in an input stream. TIdHashCRC16 uses a pre-computed 512-byte lookup table for faster calculation of CRC values.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0000">TIdHashCRC16.HashValue</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007361.html" CLASS="Element59">TIdHashCRC16</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Implements calculation of the 16-bit CRC value for a block of data.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>function</STRONG> HashValue(AStream: TStream): Word; <STRONG>override</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+AStream: TStream</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Stream containing the data to be used for the CRC calculation.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Return Value</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Word - 16-bit CRC value calculated from the input data.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+HashValue is an overridden Word function in <A HREF="007361.html" CLASS="Element59">TIdHashCRC16</A> that implements calculation of the 16-bit CRC value for a block of data. HashValue reimplements the inherited method to use the pre-computed table of 16-bit CRC values for all 256 possible character combinations that can be represented in a byte from the input data. HashValue calculates the CRC result by performing an exclusive OR for the current CRC value and the precomputed CRC value in the table for low nibble of the current input data.</DIV>
+</DIV>
+<DIV CLASS="Element62">
+<HR>Created with Doc-O-Matic 2 donated to <STRONG><A HREF="http://www.delphi-jedi.org">Project JEDI</A></STRONG>. Commercial license available from the <STRONG><A HREF="http://www.doc-o-matic.com">Doc-O-Matic site</A></STRONG>.</DIV>
+</DIV></BODY></HTML>

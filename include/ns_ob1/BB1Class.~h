@@ -1,0 +1,153 @@
+/*
+** Copyright Nautilus, (10/9/2004)
+** david.giocanti@nautilus-info.com
+
+** Ce logiciel est un programme informatique servant à [rappeler les
+** caractéristiques techniques de votre logiciel].
+
+** Ce logiciel est régi par la licence CeCILL soumise au droit français et
+** respectant les principes de diffusion des logiciels libres. Vous pouvez
+** utiliser, modifier et/ou redistribuer ce programme sous les conditions
+** de la licence CeCILL telle que diffusée par le CEA, le CNRS et l'INRIA
+** sur le site "http://www.cecill.info".
+
+** En contrepartie de l'accessibilité au code source et des droits de copie,
+** de modification et de redistribution accordés par cette licence, il n'est
+** offert aux utilisateurs qu'une garantie limitée.  Pour les mêmes raisons,
+** seule une responsabilité restreinte pèse sur l'auteur du programme,  le
+** titulaire des droits patrimoniaux et les concédants successifs.
+
+** A cet égard  l'attention de l'utilisateur est attirée sur les risques
+** associés au chargement,  à l'utilisation,  à la modification et/ou au
+** développement et à la reproduction du logiciel par l'utilisateur étant
+** donné sa spécificité de logiciel libre, qui peut le rendre complexe à
+** manipuler et qui le réserve donc à des développeurs et des professionnels
+** avertis possédant  des  connaissances  informatiques approfondies.  Les
+** utilisateurs sont donc invités à charger  et  tester  l'adéquation  du
+** logiciel à leurs besoins dans des conditions permettant d'assurer la
+** sécurité de leurs systèmes et ou de leurs données et, plus généralement,
+** à l'utiliser et l'exploiter dans les mêmes conditions de sécurité.
+
+** Le fait que vous puissiez accéder à cet en-tête signifie que vous avez
+** pris connaissance de la licence CeCILL, et que vous en avez accepté les
+** termes.
+*/
+
+#ifndef _BB1Class_h
+#define _BB1Class_h 1
+
+#ifdef __GNUC__
+# pragma interface
+#endif // __GNUC__
+
+#include "BB1AppInst.h"
+
+class BB1Class ;		// for declaration of ::MakeAppInst(...)
+class BB1KB ;		// for friend declaration
+
+BB1AppInst *MakeAppInst(BB1Class&		      c,
+                        const string 	    sInstanceName,
+                        AttValPair&       dispatch,
+                        BB1KB&            kb,
+                        /*const*/ AVPSet* pAttSpec,
+                        const LinkSet*    pLinkSpec,
+                        bool              bCreatToken = true,
+                        bool              bCreateStrat = false) ;
+
+/**
+* \brief Class of the object to put in the blackboard
+*/
+/**
+* Class of the object to put in the blackboard <BR>
+* Format imposé sur les objet posé dans le blackboard
+* (Dans nautilus : Question, reponse, evenement)
+*/
+class _BBKEXPORT BB1Class : public BB1Object
+{
+	friend class		NautilusBB ;
+  friend class		BB1BB ;
+  friend class		BB1Object ;
+  friend class		BB1KB ;
+  friend class		ObjectList ;
+  friend class		ObjectSet ;
+
+  public:
+
+    /*
+    ** Does this class allow its instances to have the named attribute?
+    ** This version is being kept for compatibility.
+    */
+
+    /*
+    ** Does this class allow its instances to have the named attribute
+    ** of the given type?
+    */
+
+    bool AllowsAttributeP(const AttValPair& avp) const
+                      { return (GetClassAttribute(avp) ? true : false) ; } ;
+
+    bool AllowsLinkP(const string sLinkName, const BB1Class* pToClass) const ;
+
+    /* Return the set of all direct subclasses */
+    void DirectSubclasses(ObjectList *retval) const { Objects("CanBeA", retval) ; } ;
+
+	  /* Return the set of all direct superclasses */
+	  void DirectSuperclasses(ObjectList *retval) const { Objects("IsA", retval) ; } ;
+
+	  /* Return the set of all instances */
+    void Instances(ObjectList *retval) const { Objects("ExemplifiedBy", retval) ; } ;
+
+    BB1AppInst *MakeInstance(const string	  sName,
+                             AttValPair&    dispatch,
+                             BB1KB&         k,
+                             AVPSet*        pAttSpec  = (AVPSet*) 0,
+                             const LinkSet* pLinkSpec = (LinkSet*) 0,
+                             bool           bCreatToken = true,
+                             bool           bCreateStrat = false) ;
+
+    /* Is this a subclass of the named class? Overrides BB1Object::IsAP(...) */
+    bool IsAP(const string sC) const ;
+
+    /*
+    ** Is the object allowed to have the link?  A class object can take any link.
+    ** Overrides BB1Object.
+    */
+    bool ValidLinkP(const string sLinkName, const BB1Object* pToObject) const { return true ; }
+
+    static long getNbInstance() { return _lBB1ClassCount ; }
+
+  // -------------------------------------------------------------------------
+  //
+  // protected functions
+  //
+  // -------------------------------------------------------------------------
+
+  protected:
+
+    BB1Class(const string&	   oname,
+             AttValPair&       dispatch,
+             BB1KB&		         kb,
+             BB1Class		       *c,
+             /* const*/ AVPSet *AllowedAttributes = NULL) ;
+
+    BB1Class(const BB1Class& bbClass) ;
+
+    /*
+    ** Is the object allowed to have the attribute? A Class object an take any attribute.
+    ** Overrides BB1Object.
+    */
+    bool ValidAttributeP(const AttValPair& avp) const { return true ; } ;
+
+  // private:
+    ~BB1Class() ;
+
+    AttValPair*	GetClassAttribute(const AttValPair& avp) const ;
+    void			  Save(ofstream& KBstream) ;
+
+    static long _lBB1ClassCount ;
+} ;
+
+typedef BB1Class *Classptr ;
+
+#endif // _BB1Class_h
+

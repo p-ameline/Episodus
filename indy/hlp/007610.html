@@ -1,0 +1,66 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+<TITLE>TIdOnSelectAuthorization</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <META name="GENERATOR" content="Doc-O-Matic">
+    <LINK rel="STYLESHEET" href="default.css" type="text/css">
+
+<SCRIPT LANGUAGE="JavaScript1.2" SRC="scripts.js"></SCRIPT>
+</HEAD>
+<BODY CLASS="Element57">
+<TABLE BORDER="0" BGCOLOR="#AACCFF" WIDTH="100%" CELLSPACING="0" CELLPADDING="0">
+<TR><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element1">
+Indy 9</DIV>
+</TD><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element2">
+<A HREF="content.html" CLASS="Element59">Content</A> | <A HREF="idx.html" CLASS="Element59">Index</A> | <A HREF="symref.html" CLASS="Element59">Reference</A></DIV>
+</TD></TR></TABLE><DIV CLASS="Element58">
+<DIV CLASS="Element5">
+TIdOnSelectAuthorization</DIV>
+<DIV CLASS="Element7">
+<A HREF="002251.html" CLASS="Element59">Unit: IdHTTP</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Event type signalled when an HTTP client selects an authentication mechanism.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12">TIdOnSelectAuthorization = <STRONG>procedure</STRONG> (Sender: TObject; <STRONG>var</STRONG> AuthenticationClass: <A HREF="007206.html" CLASS="Element59">TIdAuthenticationClass</A>; AuthInfo: <A HREF="007369.html" CLASS="Element59">TIdHeaderList</A>) <STRONG>of</STRONG> <STRONG>object</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Unit</DIV>
+<DIV CLASS="Element69">
+<A HREF="002251.html" CLASS="Element59">IdHTTP</A></DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+AuthenticationClass</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Authentication class to use for the connection.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+AuthInfo</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Header values to use in authectication.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+Sender</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+HTTP client generating the event notification.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+TIdOnSelectAuthorization is an event type signalled when an HTTP client has selected an authentication class to be used when session or proxy authentication is required for a connection. TIdOnSelectAuthorization is th event type signalled to the <A HREF="007375.html#0009" CLASS="Element59">TIdHTTP.OnSelectAuthorization</A> and <A HREF="007375.html#000A" CLASS="Element59">TIdHTTP.OnSelectProxyAuthorization</A> event handlers prior to triggering the <A HREF="007375.html#0006" CLASS="Element59">TIdHTTP.OnAuthorization</A> event.<P CLASS="Element10">
+AuthenticationClass is the class instance to be used to perform authentication for the mechanisms required in an HTTP request.<P CLASS="Element10">
+AuthInfo is the header values to be be used in the HTTP response that includes the authentication results.</DIV>
+</DIV>
+<DIV CLASS="Element62">
+<HR>Created with Doc-O-Matic 2 donated to <STRONG><A HREF="http://www.delphi-jedi.org">Project JEDI</A></STRONG>. Commercial license available from the <STRONG><A HREF="http://www.doc-o-matic.com">Doc-O-Matic site</A></STRONG>.</DIV>
+</DIV></BODY></HTML>

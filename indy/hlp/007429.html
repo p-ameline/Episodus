@@ -1,0 +1,397 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+<TITLE>TIdIOHandlerThrottle</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <META name="GENERATOR" content="Doc-O-Matic">
+    <LINK rel="STYLESHEET" href="default.css" type="text/css">
+
+<SCRIPT LANGUAGE="JavaScript1.2" SRC="scripts.js"></SCRIPT>
+</HEAD>
+<BODY CLASS="Element57">
+<TABLE BORDER="0" BGCOLOR="#AACCFF" WIDTH="100%" CELLSPACING="0" CELLPADDING="0">
+<TR><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element1">
+Indy 9</DIV>
+</TD><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element2">
+<A HREF="content.html" CLASS="Element59">Content</A> | <A HREF="idx.html" CLASS="Element59">Index</A> | <A HREF="symref.html" CLASS="Element59">Reference</A></DIV>
+</TD></TR></TABLE><DIV CLASS="Element58">
+<DIV CLASS="Element5">
+TIdIOHandlerThrottle</DIV>
+<DIV CLASS="Element7">
+<A HREF="011853.html" CLASS="Element59">Hierarchy</A>, <A HREF="011854.html" CLASS="Element59">Properties</A>, <A HREF="011855.html" CLASS="Element59">Methods</A>, <A HREF="011856.html" CLASS="Element59">Events</A>, <A HREF="011857.html" CLASS="Element59">See Also</A>, <A HREF="002266.html" CLASS="Element59">Unit: IdIOHandlerThrottle</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Implements an IOHandler used to restrict throughput to a targeted number of bytes per second.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12">TIdIOHandlerThrottle = <STRONG>class</STRONG>(<A HREF="007421.html" CLASS="Element59">TIdIOHandler</A>)</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Unit</DIV>
+<DIV CLASS="Element69">
+<A HREF="002266.html" CLASS="Element59">IdIOHandlerThrottle</A></DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+TIdIOHandlerThrottle is a <A HREF="007421.html" CLASS="Element59">TIdIOHandler</A> descendant used to restrict the throughput for an associated IOHandler to a targeted number of bytes per second for <A HREF="007429.html#000B" CLASS="Element59">Send</A> and Receive operations. TIdIOHandlerThrottle attaches to an existing IOHandler to perform its specific function.<P CLASS="Element10">
+TIdIOHandlerThrottle overrides methods in the ancestor class, like :<P CLASS="Element10">
+<UL>
+<LI><A HREF="007429.html#0003" CLASS="Element59">Close</A><P CLASS="Element10">
+<LI><A HREF="007429.html#0004" CLASS="Element59">ConnectClient</A><P CLASS="Element10">
+<LI><A HREF="007429.html#0005" CLASS="Element59">Connected</A><P CLASS="Element10">
+<LI><A HREF="007429.html#0008" CLASS="Element59">Open</A><P CLASS="Element10">
+<LI><A HREF="007429.html#0009" CLASS="Element59">Readable</A><P CLASS="Element10">
+<LI><A HREF="007429.html#000A" CLASS="Element59">Recv</A><P CLASS="Element10">
+<LI><A HREF="007429.html#000B" CLASS="Element59">Send</A></UL>
+<P CLASS="Element10">
+TIdIOHandlerThrottle also publishes properties like:<P CLASS="Element10">
+<UL>
+<LI><A HREF="007429.html#0001" CLASS="Element59">BytesPerSec</A><P CLASS="Element10">
+<LI><A HREF="007429.html#0000" CLASS="Element59">BitsPerSec</A><P CLASS="Element10">
+<LI><A HREF="007429.html#0002" CLASS="Element59">ChainedHandler</A></UL>
+</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0000">TIdIOHandlerThrottle.BitsPerSec</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007429.html" CLASS="Element59">TIdIOHandlerThrottle</A>, <A HREF="011858.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Get or Set the throughput of the IOHandler using a targeted number of Bits per Second.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> BitsPerSec: Cardinal;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+BitsPerSec is a Cardinal property that indicates the throughtput for the <A HREF="007429.html#000B" CLASS="Element59">Send</A> and <A HREF="007429.html#000A" CLASS="Element59">Recv</A> for the associated IOHandler in <A HREF="007429.html#0002" CLASS="Element59">ChainedHandler</A> expressed in Bits per Second (as opposed to Bytes per Second). BitsPerSec is a calculated product using the formula <A HREF="007429.html#0001" CLASS="Element59">BytesPerSec</A> multiplied by 8. Changing the value in BitsPerSec will result in <A HREF="007429.html#0001" CLASS="Element59">BytesPerSec</A> being updated to contain the integer result of the new value divided by 8.<P CLASS="Element10">
+Use <A HREF="007429.html#0001" CLASS="Element59">BytesPerSec</A> to examine or change the target throughput of the IOHandler using an 8-bit Bytes per Second value.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0001">TIdIOHandlerThrottle.BytesPerSec</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007429.html" CLASS="Element59">TIdIOHandlerThrottle</A>, <A HREF="011859.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Indicates the targeted throughput for <A HREF="007429.html#000B" CLASS="Element59">Send</A> and <A HREF="007429.html#000A" CLASS="Element59">Recv</A> operations for the IOHandler.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> BytesPerSec: Cardinal;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+BytesPerSec is a Cardinal property that represents the targeted throughput for <A HREF="007429.html#000B" CLASS="Element59">Send</A> and <A HREF="007429.html#000A" CLASS="Element59">Recv</A> using the associated IOHandler in <A HREF="007429.html#0002" CLASS="Element59">ChainedHandler</A>. BytesPerSec is used in <A HREF="007429.html#000A" CLASS="Element59">Recv</A> and <A HREF="007429.html#000B" CLASS="Element59">Send</A> to determine when the throughput for the associated IOHandler in <A HREF="007429.html#0002" CLASS="Element59">ChainedHandler</A> needs to be restricted in order to meet the target value in the property.<P CLASS="Element10">
+When BytesPerSec contains the value 0 (zero), no bandwidth restriction is performed for the associated IOHandler in <A HREF="007429.html#0002" CLASS="Element59">ChainedHandler</A>. In this situation, <A HREF="007429.html#0002" CLASS="Element59">ChainedHandler</A> calls its <A HREF="007429.html#000A" CLASS="Element59">Recv</A> or <A HREF="007429.html#000B" CLASS="Element59">Send</A> method immediately.<P CLASS="Element10">
+Use <A HREF="007429.html#0000" CLASS="Element59">BitsPerSec</A> to get or set the targeted throughput using bits per second instead of bytes per second.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0002">TIdIOHandlerThrottle.ChainedHandler</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007429.html" CLASS="Element59">TIdIOHandlerThrottle</A>, <A HREF="011860.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Represents the actual IOHandler used for <A HREF="006944.html" CLASS="Element59">send</A> and receive operations for a <A HREF="007071.html" CLASS="Element59">socket</A> connection.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> ChainedHandler: <A HREF="007421.html" CLASS="Element59">TIdIOHandler</A>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+ChainedHandler is a <A HREF="007421.html" CLASS="Element59">TIdIOHandler</A> property that represents the actual IOHandler performing <A HREF="007429.html#000A" CLASS="Element59">Recv</A> and <A HREF="007429.html#000B" CLASS="Element59">Send</A> operations. ChainedHandler is used in <A HREF="007429.html#0004" CLASS="Element59">ConnectClient</A> to establish the connection using the desired Host, Port, and BoundPort number for the client. ChainedHandler is used in methods like <A HREF="007429.html#0008" CLASS="Element59">Open</A>, <A HREF="007429.html#0003" CLASS="Element59">Close</A>, <A HREF="007429.html#0005" CLASS="Element59">Connected</A>, and <A HREF="007429.html#0009" CLASS="Element59">Readable</A>.<P CLASS="Element10">
+ChainedHandler must be assigned a valid <A HREF="007421.html" CLASS="Element59">TIdIOHandler</A> instance, or an EIdThrottleNoChainedIOHandler exception wil be raised during execution in <A HREF="007429.html#0004" CLASS="Element59">ConnectClient</A> and <A HREF="007429.html#0008" CLASS="Element59">Open</A>.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0003">TIdIOHandlerThrottle.Close</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007429.html" CLASS="Element59">TIdIOHandlerThrottle</A>, <A HREF="011861.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Closes the chained IOHandler.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>procedure</STRONG> Close; <STRONG>override</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Close is an overridden procedure in <A HREF="007429.html" CLASS="Element59">TIdIOHandlerThrottle</A>, and allows the associated IOHandler descendant in <A HREF="007429.html#0002" CLASS="Element59">ChainedHandler</A> to be closed. When a valid IOHandler instance has been assigned to <A HREF="007429.html#0002" CLASS="Element59">ChainedHandler</A>, its Close method is called prior to exiting from the method.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0004">TIdIOHandlerThrottle.ConnectClient</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007429.html" CLASS="Element59">TIdIOHandlerThrottle</A>, <A HREF="011862.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Prepares and opens the client connection for a chained IOHandler.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>procedure</STRONG> ConnectClient(<STRONG>const</STRONG> AHost: <STRONG>string</STRONG>; <STRONG>const</STRONG> APort: Integer; <STRONG>const</STRONG> ABoundIP: <STRONG>string</STRONG>; <STRONG>const</STRONG> ABoundPort: Integer; <STRONG>const</STRONG> ABoundPortMin: Integer; <STRONG>const</STRONG> ABoundPortMax: Integer; <STRONG>const</STRONG> ATimeout: Integer = <A HREF="002932.html" CLASS="Element59">IdTimeoutDefault</A>); <STRONG>override</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+const AHost: string</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Address of the remote system for the client connection.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+const APort: Integer</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Port number for the remote connection.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+const ABoundIP: string</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+IP Address bound to the local system.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+const ABoundPort: Integer</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Integer - Port number bound to the local computer.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+const ABoundPortMin: Integer</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Minimum bound port number for the local system.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+const ABoundPortMax: Integer</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Maximum bound port number for the local system.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+const ATimeout: Integer = IdTimeoutDefault</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Number of milliseconds to wait before a connection attempt fails. Default value is <A HREF="002932.html" CLASS="Element59">IdTimeoutDefault</A>.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+ConnectClient is an overriden procedure in <A HREF="007429.html" CLASS="Element59">TIdIOHandlerThrottle</A> that prepares and established the client connection for the associated IOHandler in <A HREF="007429.html#0002" CLASS="Element59">ChainedHandler</A>. ConnectClient calls the inherited ConnectClient method.<P CLASS="Element10">
+When a valid instance of an IOHandler descendant has been assigned to <A HREF="007429.html#0002" CLASS="Element59">ChainedHandler</A>, its ConnectClient mehod is called using the parameters for the method. <STRONG>Note</STRONG>: ConnectClient will raised an EIdThrottleNoChainedIOHandler exception with the message <A HREF="006507.html" CLASS="Element59">RSIHTChainedNotAssigned</A> if a valid IOHandler instance is not assigned to <A HREF="007429.html#0002" CLASS="Element59">ChainedHandler</A>.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0005">TIdIOHandlerThrottle.Connected</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007429.html" CLASS="Element59">TIdIOHandlerThrottle</A>, <A HREF="011863.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Indicates if physical connection for the chained IOHandler is prepared and opened.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>function</STRONG> Connected: Boolean; <STRONG>override</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Connected is an overridden Boolean function in <A HREF="007429.html" CLASS="Element59">TIdIOHandlerThrottle</A>, and determines when the physical connection for the associated IOHandler in <A HREF="007429.html#0002" CLASS="Element59">ChainedHandler</A> has been established. When a valid instance of a <A HREF="007421.html" CLASS="Element59">TIdIOHandler</A> descendant has been assigned to <A HREF="007429.html#0002" CLASS="Element59">ChainedHandler</A>, its Connected method is called. When <A HREF="007429.html#0002" CLASS="Element59">ChainedHandler</A> is unassigned, Connected returns the value False.<P CLASS="Element10">
+Use <A HREF="007429.html#0008" CLASS="Element59">Open</A> to prepare the physical connection for the chained IOHandler, and <A HREF="007429.html#0004" CLASS="Element59">ConnectClient</A> to establish the connection used by the chained IOHandler.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0006">TIdIOHandlerThrottle.Create</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007429.html" CLASS="Element59">TIdIOHandlerThrottle</A>, <A HREF="011864.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Constructor for the object instance.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>constructor</STRONG> Create(AOwner: TComponent); <STRONG>override</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+AOwner: TComponent</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Owner of the object instance.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Create is the constructor for the object instance. Create calls the inherited Create method using AOwner as the owner of the object instance.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0007">TIdIOHandlerThrottle.Destroy</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007429.html" CLASS="Element59">TIdIOHandlerThrottle</A>, <A HREF="011865.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Frees an object instance.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>destructor</STRONG> Destroy; <STRONG>override</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Destroy is the destructor for the object instance. Destroy calls the inherited Destroy method prior to exiting from the method.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0008">TIdIOHandlerThrottle.Open</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007429.html" CLASS="Element59">TIdIOHandlerThrottle</A>, <A HREF="011866.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Prepares and binds the connection for a chained IOHandler.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>procedure</STRONG> Open; <STRONG>override</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Open is an overriden method in <A HREF="007429.html" CLASS="Element59">TIdIOHandlerThrottle</A> that prepares and binds the connection for the chained IOHandler. Open calls the inherited Open method.<P CLASS="Element10">
+When a valid instance of a <A HREF="007421.html" CLASS="Element59">TIdIOHandler</A> descendant has been assigned to <A HREF="007429.html#0002" CLASS="Element59">ChainedHandler</A>, its Open method is called. <STRONG>Note</STRONG>: When <A HREF="007429.html#0002" CLASS="Element59">ChainedHandler</A> is unassigned, Open will raised an EIdThrottleNoChainedIOHandler exception with the message <A HREF="006507.html" CLASS="Element59">RSIHTChainedNotAssigned</A>.<P CLASS="Element10">
+Use <A HREF="007429.html#0004" CLASS="Element59">ConnectClient</A> to establish the connection on the <A HREF="007071.html" CLASS="Element59">socket</A> handle used by the handler. Use <A HREF="007429.html#0003" CLASS="Element59">Close</A> to disconnect the client connection in the chained IOHandler.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0009">TIdIOHandlerThrottle.Readable</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007429.html" CLASS="Element59">TIdIOHandlerThrottle</A>, <A HREF="011867.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Indicates that the chained IOHandler is ready to <A HREF="006944.html" CLASS="Element59">send</A> or receive data.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>function</STRONG> Readable(AMSec: integer = <A HREF="002932.html" CLASS="Element59">IdTimeoutDefault</A>): boolean; <STRONG>override</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+AMSec: integer = IdTimeoutDefault</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Milliseconds to wait for the IOHandler to become ready. Default value is <A HREF="002932.html" CLASS="Element59">IdTimeoutDefault</A>.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Return Value</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Boolean - True when ready.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Readable is an overidden Boolean function in <A HREF="007429.html" CLASS="Element59">TIdIOHandlerThrottle</A> that indicates if associated IOHandler in <A HREF="007429.html#0002" CLASS="Element59">ChainedHandler</A> is ready for input/output operations.<P CLASS="Element10">
+When <A HREF="007429.html#0002" CLASS="Element59">ChainedHandler</A> contains a valid instance of a <A HREF="007421.html" CLASS="Element59">TIdIOHandler</A> descendant, its Readable method is called using the value in AMSec as a parameter. The return value for the method is set to the result of the operation. When <A HREF="007429.html#0002" CLASS="Element59">ChainedHandler</A> is unassigned, the return value for the method is set to False.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="000A">TIdIOHandlerThrottle.Recv</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007429.html" CLASS="Element59">TIdIOHandlerThrottle</A>, <A HREF="011868.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Reads data from a chained IOHandler.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>function</STRONG> Recv(<STRONG>var</STRONG> ABuf; ALen: integer): integer; <STRONG>override</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+var ABuf</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Destination buffer for values read from the chained IOHandler.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+ALen: integer</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Number of bytes to read from the connection.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Return Value</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Integer - Acutal number of bytes read from the chained IOHandler.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Recv is an overridden Integer function that read data using the IOHandler in <A HREF="007429.html#0002" CLASS="Element59">ChainedHandler</A>. When a valid instance of a <A HREF="007421.html" CLASS="Element59">TIdIOHandler</A> descendant is assigned to <A HREF="007429.html#0002" CLASS="Element59">ChainedHandler</A>, Recv will attempt to limit the throughtput for the chained IOHandler when <A HREF="007429.html#0001" CLASS="Element59">BytesPerSec</A> contains a value greater than 0 (zero).<P CLASS="Element10">
+When <A HREF="007429.html#0001" CLASS="Element59">BytesPerSec</A> is 0 (or less), no throughput leveling is performed, and the Recv method for the <A HREF="007429.html#0002" CLASS="Element59">ChainedHandler</A> is called using ABuf and ALen as parameters.<P CLASS="Element10">
+Recv limits throughput by forcing the IOHandler to delay when the elapsed time for a read operation is smaller than the estimated time required to read ALen bytes at the desired <A HREF="007429.html#0001" CLASS="Element59">BytesPerSec</A> rate. The delay will level the throughput rate, on average, to the desired target.<P CLASS="Element10">
+Use <A HREF="007429.html#000B" CLASS="Element59">Send</A> to write data using the chained IOHandler.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="000B">TIdIOHandlerThrottle.Send</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007429.html" CLASS="Element59">TIdIOHandlerThrottle</A>, <A HREF="011869.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Writes data using a chained IOHandler.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>function</STRONG> Send(<STRONG>var</STRONG> ABuf; ALen: integer): integer; <STRONG>override</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+var ABuf</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Buffer for values written using the chained IOHandler.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+ALen: integer</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Number of bytes to write using the chained IOHandler.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Return Value</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Integer - Acutal number of bytes written using the chained IOHandler.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Send is an overridden Integer function that writes data using the IOHandler in <A HREF="007429.html#0002" CLASS="Element59">ChainedHandler</A>. When a valid instance of a <A HREF="007421.html" CLASS="Element59">TIdIOHandler</A> descendant is assigned to <A HREF="007429.html#0002" CLASS="Element59">ChainedHandler</A>, Send will attempt to limit the throughtput for the chained IOHandler when <A HREF="007429.html#0001" CLASS="Element59">BytesPerSec</A> contains a value greater than 0 (zero).<P CLASS="Element10">
+When <A HREF="007429.html#0001" CLASS="Element59">BytesPerSec</A> is 0 (or less), no throughput leveling is performed, and the Send method for the <A HREF="007429.html#0002" CLASS="Element59">ChainedHandler</A> is called using ABuf and ALen as parameters.<P CLASS="Element10">
+Send limits throughput by forcing the IOHandler to delay when the elapsed time for a write operation is smaller than the estimated time required to write ALen bytes at the desired <A HREF="007429.html#0001" CLASS="Element59">BytesPerSec</A> rate. The delay will level the throughput rate, on average, to the desired target.<P CLASS="Element10">
+Use <A HREF="007429.html#000A" CLASS="Element59">Recv</A> to read data using the chained IOHandler.</DIV>
+</DIV>
+<DIV CLASS="Element62">
+<HR>Created with Doc-O-Matic 2 donated to <STRONG><A HREF="http://www.delphi-jedi.org">Project JEDI</A></STRONG>. Commercial license available from the <STRONG><A HREF="http://www.doc-o-matic.com">Doc-O-Matic site</A></STRONG>.</DIV>
+</DIV></BODY></HTML>

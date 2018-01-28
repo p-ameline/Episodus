@@ -1,0 +1,205 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+<TITLE>TIdTrivialFTPServer</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <META name="GENERATOR" content="Doc-O-Matic">
+    <LINK rel="STYLESHEET" href="default.css" type="text/css">
+
+<SCRIPT LANGUAGE="JavaScript1.2" SRC="scripts.js"></SCRIPT>
+</HEAD>
+<BODY CLASS="Element57">
+<TABLE BORDER="0" BGCOLOR="#AACCFF" WIDTH="100%" CELLSPACING="0" CELLPADDING="0">
+<TR><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element1">
+Indy 9</DIV>
+</TD><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element2">
+<A HREF="content.html" CLASS="Element59">Content</A> | <A HREF="idx.html" CLASS="Element59">Index</A> | <A HREF="symref.html" CLASS="Element59">Reference</A></DIV>
+</TD></TR></TABLE><DIV CLASS="Element58">
+<DIV CLASS="Element5">
+TIdTrivialFTPServer</DIV>
+<DIV CLASS="Element7">
+<A HREF="014582.html" CLASS="Element59">Hierarchy</A>, <A HREF="014583.html" CLASS="Element59">Properties</A>, <A HREF="014584.html" CLASS="Element59">Methods</A>, <A HREF="014585.html" CLASS="Element59">Events</A>, <A HREF="014586.html" CLASS="Element59">See Also</A>, <A HREF="002940.html" CLASS="Element59">Unit: IdTrivialFTPServer</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Implements a Trivial File Transfer Protocol server.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12">TIdTrivialFTPServer = <STRONG>class</STRONG>(<A HREF="007877.html" CLASS="Element59">TIdUDPServer</A>)</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Unit</DIV>
+<DIV CLASS="Element69">
+<A HREF="002940.html" CLASS="Element59">IdTrivialFTPServer</A></DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+TIdTrivialFTPServer is a <A HREF="007877.html" CLASS="Element59">TIdUDPServer</A> descendant that implements a Trivial File Transfer Protocol (TFTP) server as described in the Internet Standards documents:<P CLASS="Element10">
+<UL>
+<LI>RFC 1350 - Trivial File Transfer Protocol (http://www.rfc-editor.org/rfc/rfc1350.txt)<P CLASS="Element10">
+<LI>RFC 1782 - TFTP Option Extension (http://www.rfc-editor.org/rfc/rfc1782.txt)<P CLASS="Element10">
+<LI>RFC 1783 - TFTP Blocksize Option (http://www.rfc-editor.org/rfc/rfc1783.txt)</UL>
+<P CLASS="Element10">
+Trivial FTP is an extremely lightweight and simple UDP-Based file transfer protocol that is normally used read and write files from/to a remote server. TFTP cannot list directories, and currently has no provisions for user authentication.<P CLASS="Element10">
+TIdTrivialFTPServer supports the TFP Option Negotiation Protocol where the client appends options at the end of the Read Request or Write request packet. TIdTrivialFTPServer also supports the TFTP Blocksize Option which allows the client and server to negotiate a blocksize more applicable to the network medium.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0000">TIdTrivialFTPServer.Create</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007869.html" CLASS="Element59">TIdTrivialFTPServer</A>, <A HREF="014587.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Creates a new object instance.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>constructor</STRONG> Create(axOwner: TComponent); <STRONG>override</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+axOwner: TComponent</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Owner of the object instance.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Create is the constructor for the object instance. Creates initializes the new <A HREF="007869.html" CLASS="Element59">TIdTrivialFTPServer</A> component, and sets the value in DefaultPort to the standard port number used for the TFTP protocol (<A HREF="002724.html" CLASS="Element59">IdPORT_TFTP</A>).</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0001">TIdTrivialFTPServer.OnReadFile</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007869.html" CLASS="Element59">TIdTrivialFTPServer</A>, <A HREF="014588.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Event handler signalled to read a file on the local file system.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> OnReadFile: <A HREF="007132.html" CLASS="Element59">TAccessFileEvent</A>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+OnReadFile is a <A HREF="007132.html" CLASS="Element59">TAccessFileEvent</A> property that represents the event handler allowing the <A HREF="007869.html" CLASS="Element59">TIdTrivialFTPServer</A> instance to service a Trivial FTP Client request to read a file on the local file system.<P CLASS="Element10">
+Applications must assign a procedure to the OnReadFile event handler to allow responding to the event notification. OnReadFile is used to implement the platform-specific API calls needed to determine access permissions for the client request, and to initialize the stream used for returning the requested file data.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0002">TIdTrivialFTPServer.OnTransferComplete</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007869.html" CLASS="Element59">TIdTrivialFTPServer</A>, <A HREF="014589.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Specifies an event handler for completed TFTP transfers.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> OnTransferComplete: <A HREF="008100.html" CLASS="Element59">TTransferCompleteEvent</A>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+PeerInfo</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Information about the peer connection.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+Sender</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Trivial FTP server generating the event.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+SourceStream</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Contains data for the peer connection.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+Success</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Indicates that the transfer was successful.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+WriteOperation</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Indicates that the transfer was a write operation.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+OnTransferComplete is a <A HREF="008100.html" CLASS="Element59">TTransferCompleteEvent</A> event handler that allows a TrivialFTP server to respond to notifications that a file transfer method has been completed. OnTransferComplete allows the TFTP server to perform operations that may be required for the peer connection or data received on the connection.<P CLASS="Element10">
+An application must assign a procedure to the event handler to allow a response to the event notification. <STRONG>Note:</STRONG> If no user event handler exists, SourceStream is automatically freed.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0003">TIdTrivialFTPServer.OnWriteFile</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007869.html" CLASS="Element59">TIdTrivialFTPServer</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Specifies the event handler for client Put operations.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> OnWriteFile: <A HREF="007132.html" CLASS="Element59">TAccessFileEvent</A>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+AStream</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Contains data to be written to the local file system.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+FileName</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+File name on the server file system.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+FreeStreamOnComplete</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Indicates that the Stream should be freed.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+GrantAccess</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Indicates that the file operation is permitted.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+PeerInfo</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Information about the client connection.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+Sender</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Trivial FTP server generating the event.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+OnWriteFile is a TAccessFileEventevent handler that allows the TrivialFTP server to respond to client PUT requests.<P CLASS="Element10">
+GrantAccess should be updated in the event handler to indicate if the write operation should be allowed by the server. When GrantAccess is True and AStream is not Nil, the event handler should update the local file system to reflect the contents of AStream for the file specified in FileName.<P CLASS="Element10">
+FreeStreamOnComplete indicates that the <A HREF="007869.html#0002" CLASS="Element59">OnTransferComplete</A> event handler should free the stream specified in AStream.</DIV>
+</DIV>
+<DIV CLASS="Element62">
+<HR>Created with Doc-O-Matic 2 donated to <STRONG><A HREF="http://www.delphi-jedi.org">Project JEDI</A></STRONG>. Commercial license available from the <STRONG><A HREF="http://www.doc-o-matic.com">Doc-O-Matic site</A></STRONG>.</DIV>
+</DIV></BODY></HTML>

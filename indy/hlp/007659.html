@@ -1,0 +1,166 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+<TITLE>TIdRexec</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <META name="GENERATOR" content="Doc-O-Matic">
+    <LINK rel="STYLESHEET" href="default.css" type="text/css">
+
+<SCRIPT LANGUAGE="JavaScript1.2" SRC="scripts.js"></SCRIPT>
+</HEAD>
+<BODY CLASS="Element57">
+<TABLE BORDER="0" BGCOLOR="#AACCFF" WIDTH="100%" CELLSPACING="0" CELLPADDING="0">
+<TR><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element1">
+Indy 9</DIV>
+</TD><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element2">
+<A HREF="content.html" CLASS="Element59">Content</A> | <A HREF="idx.html" CLASS="Element59">Index</A> | <A HREF="symref.html" CLASS="Element59">Reference</A></DIV>
+</TD></TR></TABLE><DIV CLASS="Element58">
+<DIV CLASS="Element5">
+TIdRexec</DIV>
+<DIV CLASS="Element7">
+<A HREF="013333.html" CLASS="Element59">Hierarchy</A>, <A HREF="013334.html" CLASS="Element59">Properties</A>, <A HREF="013335.html" CLASS="Element59">Methods</A>, <A HREF="013336.html" CLASS="Element59">Events</A>, <A HREF="013337.html" CLASS="Element59">See Also</A>, <A HREF="002803.html" CLASS="Element59">Unit: IdRexec</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+This class implements Remote Execution (Rexec) as a client.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12">TIdRexec = <STRONG>class</STRONG>(<A HREF="007648.html" CLASS="Element59">TIdRemoteCMDClient</A>)</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Unit</DIV>
+<DIV CLASS="Element69">
+<A HREF="002803.html" CLASS="Element59">IdRexec</A></DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+This class implements Unix Remote Execution (Rexec) as a client. The Rexec protocol is sometimes used to run tasks from remote locations while requiring password authentication. This protocol was originally intended as a temporary &quot;hack&quot; in some older Berkeley Unix Distributions that came into wide usage.<P CLASS="Element10">
+Note that while this protocol is a little more secure than RSH, it still can pose a security hazard on the Internet because the User ID and password are sent in plain-text and that can easily be intercepted by someone wanting to run destructive program.<P CLASS="Element10">
+To use this component:<P CLASS="Element10">
+<UL>
+<LI>Set the TIdRexec.Host to the I.P. Address or name of the remote machine.<P CLASS="Element10">
+<LI>Set the TIdRexec.UserName to the user's remote User ID<P CLASS="Element10">
+<LI>Set the <A HREF="007659.html#0002" CLASS="Element59">TIdRexec.Password</A> to the user's password<P CLASS="Element10">
+<LI>Use the <A HREF="007659.html#0001" CLASS="Element59">TIdRexec.Execute</A> method with the command to run on the remote machine</UL>
+</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0002">TIdRexec.Password</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007659.html" CLASS="Element59">TIdRexec</A>, <A HREF="013338.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Account authorization used for the connectiong to the remote host.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> Password;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Password is a String property that represents the account authorization used for the connectiong to the remote host. <A HREF="007659.html#0004" CLASS="Element59">Username</A> and Password are used for authentication of the connection when the <A HREF="007659.html#0001" CLASS="Element59">Execute</A> method is called.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0003">TIdRexec.Port</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007659.html" CLASS="Element59">TIdRexec</A>, <A HREF="013339.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Port number for the connection to the Rexec server.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> Port: integer;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Port is an Integer property that identifies the port number for connecting to an Rexec server. The default value for Port is <A HREF="001863.html" CLASS="Element59">Id_PORT_exec</A> which is commonly used for the Rexec protocol. Port is updated in the <A HREF="007659.html#0000" CLASS="Element59">Create</A> method.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0004">TIdRexec.Username</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007659.html" CLASS="Element59">TIdRexec</A>, <A HREF="013340.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Account identification used for connecting to the remote host.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> Username;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Username is a String property that represents the account identification used for connecting to the remote host. Username and <A HREF="007659.html#0002" CLASS="Element59">Password</A> are used for authenticating the client connection when the <A HREF="007659.html#0001" CLASS="Element59">Execute</A> method is called.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0000">TIdRexec.Create</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007659.html" CLASS="Element59">TIdRexec</A>, <A HREF="013341.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Instantiates a <A HREF="007659.html" CLASS="Element59">TIdRexec</A> instance.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>constructor</STRONG> Create(AOwner: TComponent); <STRONG>override</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+AOwner: TComponent</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Owner of the object instance.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Create<P CLASS="Element10">
+Create constructs a properly initialized instance of <A HREF="007659.html" CLASS="Element59">TIdRexec</A> using the inherited Create constructor, and initializes <A HREF="007659.html#0003" CLASS="Element59">Port</A> to the constant value <A HREF="001863.html" CLASS="Element59">Id_PORT_exec</A> (Decimal <STRONG>512</STRONG>) as required by the Rexec Protocol.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0001">TIdRexec.Execute</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007659.html" CLASS="Element59">TIdRexec</A>, <A HREF="013342.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+This method executes a command (ACommand) on the RSH Deamon.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>function</STRONG> Execute(ACommand: <STRONG>String</STRONG>): <STRONG>String</STRONG>; <STRONG>override</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+ACommand: String</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+The command to execute on the remote system.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Return Value</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+String - The results from the command that was executed or no value if an error occurred.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+This method authenticates to the Rexec Deamon with the TIdExec.UserName and the <A HREF="007659.html#0002" CLASS="Element59">TIdRexec.Password</A> and than executes a command (ACommand) on the Rexec Deamon. This is only intended for non-interactive processes where the no input is expected from the user.<P CLASS="Element10">
+If an error occurred, TIdRemoteCMD.ErrorReply is set to true and the TIdRemoteCMD.ErrorMessage contains the message returned from the Rexec Deamon. The inherited <A HREF="007648.html#0000" CLASS="Element59">TIdRemoteCMDClient.UseStdError</A> property effects how error messages are sent from the Rexec Deamon.</DIV>
+</DIV>
+<DIV CLASS="Element62">
+<HR>Created with Doc-O-Matic 2 donated to <STRONG><A HREF="http://www.delphi-jedi.org">Project JEDI</A></STRONG>. Commercial license available from the <STRONG><A HREF="http://www.doc-o-matic.com">Doc-O-Matic site</A></STRONG>.</DIV>
+</DIV></BODY></HTML>

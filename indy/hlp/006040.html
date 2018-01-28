@@ -1,0 +1,74 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+<TITLE>ProcessPath</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <META name="GENERATOR" content="Doc-O-Matic">
+    <LINK rel="STYLESHEET" href="default.css" type="text/css">
+
+<SCRIPT LANGUAGE="JavaScript1.2" SRC="scripts.js"></SCRIPT>
+</HEAD>
+<BODY CLASS="Element57">
+<TABLE BORDER="0" BGCOLOR="#AACCFF" WIDTH="100%" CELLSPACING="0" CELLPADDING="0">
+<TR><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element1">
+Indy 9</DIV>
+</TD><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element2">
+<A HREF="content.html" CLASS="Element59">Content</A> | <A HREF="idx.html" CLASS="Element59">Index</A> | <A HREF="symref.html" CLASS="Element59">Reference</A></DIV>
+</TD></TR></TABLE><DIV CLASS="Element58">
+<DIV CLASS="Element5">
+ProcessPath</DIV>
+<DIV CLASS="Element7">
+<A HREF="002193.html" CLASS="Element59">Unit: IdGlobal</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Resolves a directory path containing relative path information.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>function</STRONG> ProcessPath(<STRONG>const</STRONG> ABasePath: <STRONG>String</STRONG>; <STRONG>const</STRONG> APath: <STRONG>String</STRONG>; <STRONG>const</STRONG> APathDelim: <STRONG>string</STRONG> = '/'): <STRONG>string</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Unit</DIV>
+<DIV CLASS="Element69">
+<A HREF="002193.html" CLASS="Element59">IdGlobal</A></DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+const ABasePath: String</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+The path to use for the current directory in relative path information.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+const APath: String</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+The path including relative directoryinformation to be resolved.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+const APathDelim: string = '/'</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Path delimiter. Default value is '/'.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Return Value</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+String - File system directory path after resolution.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+ProcessPath is a String function that performs directory path resolution for the values specified in ABasePath and APath. ABasePath is the absolute directory in the local file system to be used as the current directory when resolving path information in APath. APath can contain a relative file path, or a fully-qualified path name to be resolved by the function.<P CLASS="Element10">
+ProcessPath is used when TIdFTPServer.CurrentDir and TIdFTPServer.List are used with path specifiers. ProcessPath is also used when <A HREF="007375.html" CLASS="Element59">TIdHTTP</A> is used with a URL that contains relative path information.<P CLASS="Element10">
+When APath is an empty string (''), the value in ABasePath is assigned as the return value for ProcessPath. When APath does not begin with the symbol for the root directory ('/'), the value in ABasePath is prepended to the value in APath for resolution.<P CLASS="Element10">
+When APath indicates a path relative to the current directory ('./'), additional directory path resolution is performed. Otherwise, the value in APath is used as the return value for ProcessPath.<P CLASS="Element10">
+The process of directory path resolution involves tracking directory information for any directory path prior to the reference to a relative directory using './' or '../'.</DIV>
+</DIV>
+<DIV CLASS="Element62">
+<HR>Created with Doc-O-Matic 2 donated to <STRONG><A HREF="http://www.delphi-jedi.org">Project JEDI</A></STRONG>. Commercial license available from the <STRONG><A HREF="http://www.doc-o-matic.com">Doc-O-Matic site</A></STRONG>.</DIV>
+</DIV></BODY></HTML>

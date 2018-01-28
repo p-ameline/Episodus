@@ -1,0 +1,108 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+<TITLE>TIdMessageEncoderInfo</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <META name="GENERATOR" content="Doc-O-Matic">
+    <LINK rel="STYLESHEET" href="default.css" type="text/css">
+
+<SCRIPT LANGUAGE="JavaScript1.2" SRC="scripts.js"></SCRIPT>
+</HEAD>
+<BODY CLASS="Element57">
+<TABLE BORDER="0" BGCOLOR="#AACCFF" WIDTH="100%" CELLSPACING="0" CELLPADDING="0">
+<TR><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element1">
+Indy 9</DIV>
+</TD><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element2">
+<A HREF="content.html" CLASS="Element59">Content</A> | <A HREF="idx.html" CLASS="Element59">Index</A> | <A HREF="symref.html" CLASS="Element59">Reference</A></DIV>
+</TD></TR></TABLE><DIV CLASS="Element58">
+<DIV CLASS="Element5">
+TIdMessageEncoderInfo</DIV>
+<DIV CLASS="Element7">
+<A HREF="012613.html" CLASS="Element59">Hierarchy</A>, <A HREF="012614.html" CLASS="Element59">Properties</A>, <A HREF="012615.html" CLASS="Element59">Methods</A>, <A HREF="012616.html" CLASS="Element59">See Also</A>, <A HREF="002288.html" CLASS="Element59">Unit: IdMessageCoder</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Represents information about registered encoder classes and generates RFC message headers for the encoder class.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12">TIdMessageEncoderInfo = <STRONG>class</STRONG>(TObject)</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Unit</DIV>
+<DIV CLASS="Element69">
+<A HREF="002288.html" CLASS="Element59">IdMessageCoder</A></DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+TIdMessageEncoderInfo is a TObject descendant that specifies the base class for representing information about a registered encoder classes. TIdMessageEncoderInfo also provides a mechanism to create RFC 822 headers for the encoder class in an associated <A HREF="007544.html" CLASS="Element59">TIdMessage</A> instance.<P CLASS="Element10">
+Descendant classes, like <A HREF="007559.html" CLASS="Element59">TIdMessageEncoderInfoMIME</A>, <A HREF="007560.html" CLASS="Element59">TIdMessageEncoderInfoUUE</A>, and <A HREF="007561.html" CLASS="Element59">TIdMessageEncoderInfoXXE</A>, should reimplement the virtual methods in TIdMessageEncoderInfo to provide support for assigning the correct <A HREF="007558.html#0002" CLASS="Element59">MessageEncoderClass</A> class type and <A HREF="007558.html#0001" CLASS="Element59">InitializeHeaders</A> values for the specific encoder.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0002">TIdMessageEncoderInfo.MessageEncoderClass</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007558.html" CLASS="Element59">TIdMessageEncoderInfo</A>, <A HREF="012617.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Represents the class type used to create new instances for the registered encoder class.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> MessageEncoderClass: <A HREF="007557.html" CLASS="Element59">TIdMessageEncoderClass</A>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+MessageEncoderClass is a <A HREF="007557.html" CLASS="Element59">TIdMessageEncoderClass</A> property that represents the class type used to create new instances for the registered encoder class.<P CLASS="Element10">
+MessageEncoderClass is assigned a class type instance in the <A HREF="007558.html#0000" CLASS="Element59">Create</A> Constructor for a specific encoder class. MessageCoderClass is used accesed when <A HREF="007573.html" CLASS="Element59">TIdMessagePart</A> descendants call their Encode method. A new instance of the registerd encoder class is created, and used to perform the encoding operation.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0000">TIdMessageEncoderInfo.Create</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007558.html" CLASS="Element59">TIdMessageEncoderInfo</A>, <A HREF="012618.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Constructor for the object instance.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>constructor</STRONG> Create; <STRONG>virtual</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Create is the Constructor for the object instance. Descendant classes, like <A HREF="007559.html" CLASS="Element59">TIdMessageEncoderInfoMIME</A>, <A HREF="007560.html" CLASS="Element59">TIdMessageEncoderInfoUUE</A>, and <A HREF="007561.html" CLASS="Element59">TIdMessageEncoderInfoXXE</A> must assign the correct class type value for <A HREF="007558.html#0002" CLASS="Element59">MessageEncoderClass</A> in their overridden Constructors.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0001">TIdMessageEncoderInfo.InitializeHeaders</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007558.html" CLASS="Element59">TIdMessageEncoderInfo</A>, <A HREF="012619.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Specifies a method for generating RFC 822 headers for a message.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>procedure</STRONG> InitializeHeaders(AMsg: <A HREF="007544.html" CLASS="Element59">TIdMessage</A>); <STRONG>virtual</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+AMsg: TIdMessage</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Message instance to be updated with RFC message headers.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+InitializeHeaders is a virtual procedure in <A HREF="007558.html" CLASS="Element59">TIdMessageEncoderInfo</A> that Specifies a method for generating RFC 822 message headers for an instance of <A HREF="007544.html" CLASS="Element59">TIdMessage</A>. Descendant classes, like <A HREF="007559.html" CLASS="Element59">TIdMessageEncoderInfoMIME</A>, <A HREF="007560.html" CLASS="Element59">TIdMessageEncoderInfoUUE</A>, and <A HREF="007561.html" CLASS="Element59">TIdMessageEncoderInfoXXE</A> should override the method to provide support for generating message headers specific to the giver encoder type.</DIV>
+</DIV>
+<DIV CLASS="Element62">
+<HR>Created with Doc-O-Matic 2 donated to <STRONG><A HREF="http://www.delphi-jedi.org">Project JEDI</A></STRONG>. Commercial license available from the <STRONG><A HREF="http://www.doc-o-matic.com">Doc-O-Matic site</A></STRONG>.</DIV>
+</DIV></BODY></HTML>

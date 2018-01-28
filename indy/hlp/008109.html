@@ -1,0 +1,330 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+<TITLE>TWKSRecord</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <META name="GENERATOR" content="Doc-O-Matic">
+    <LINK rel="STYLESHEET" href="default.css" type="text/css">
+
+<SCRIPT LANGUAGE="JavaScript1.2" SRC="scripts.js"></SCRIPT>
+</HEAD>
+<BODY CLASS="Element57">
+<TABLE BORDER="0" BGCOLOR="#AACCFF" WIDTH="100%" CELLSPACING="0" CELLPADDING="0">
+<TR><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element1">
+Indy 9</DIV>
+</TD><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element2">
+<A HREF="content.html" CLASS="Element59">Content</A> | <A HREF="idx.html" CLASS="Element59">Index</A> | <A HREF="symref.html" CLASS="Element59">Reference</A></DIV>
+</TD></TR></TABLE><DIV CLASS="Element58">
+<DIV CLASS="Element5">
+TWKSRecord</DIV>
+<DIV CLASS="Element7">
+<A HREF="015269.html" CLASS="Element59">Hierarchy</A>, <A HREF="015270.html" CLASS="Element59">Properties</A>, <A HREF="015271.html" CLASS="Element59">Methods</A>, <A HREF="002173.html" CLASS="Element59">Unit: IdDNSResolver</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Represents a Well Known Service Resource Record from a DNS Response packet.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12">TWKSRecord = <STRONG>class</STRONG>(<A HREF="008059.html" CLASS="Element59">TResultRecord</A>)</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Unit</DIV>
+<DIV CLASS="Element69">
+<A HREF="002173.html" CLASS="Element59">IdDNSResolver</A></DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+TWKSRecord is a <A HREF="008059.html" CLASS="Element59">TResultRecord</A> descendant that represents a resource record returned in the results for a DNS query. TWKSRecord is the collection item created to represent a resource resource returned when <A HREF="007302.html#0003" CLASS="Element59">TIdDNSResolver.QueryRecords</A> includes the value qtWKS for Well Known Service resource records.<P CLASS="Element10">
+Well Known Service resoure records are used to describe the well known services supported by a particular protocol on a particular internet address. If a server supports both TCP and UDP variants of a service, multiple WKS resource records are returned in a DNS response.<P CLASS="Element10">
+A Well Known Service resoure record uses the same DNS packet layout as other <A HREF="008059.html" CLASS="Element59">TResultRecord</A>-based responses, but extends the use of RData to include the following definition and format:<P CLASS="Element10">
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12">  +--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+
+  |                    ADDRESS                    |
+  +--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+
+  |       PROTOCOL        |                       |
+  +--+--+--+--+--+--+--+--+                       |
+  |                                               |
+  .                                               .
+  .                    BIT MAP                    .
+  .                                               .
+  +--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+</PRE></DIV>
+</DIV>
+<P CLASS="Element10">
+<UL>
+<LI>ADDRESS - 32-bit Internet address.<P CLASS="Element10">
+<LI>PROTOCOL - 8-bit IP protocol number. Uses BITMAP to indicate one bit per port of the specified protocol.<P CLASS="Element10">
+<LI>BITMAP - Variable length bit map with a length that is a multiple of 8- bits long. The first bit corresponds to port 0, the second to port 1, etc. If the bit map does not include a bit for a protocol of interest, that bit is assumed zero.</UL>
+<P CLASS="Element10">
+TWKSRecord extends <A HREF="008059.html" CLASS="Element59">TResultRecord</A> to implement the specifics of accessing RData values as properties, including <A HREF="008109.html#0000" CLASS="Element59">Address</A>, <A HREF="008109.html#0006" CLASS="Element59">Protocol</A>, <A HREF="008109.html#0002" CLASS="Element59">ByteCount</A>, and <A HREF="008109.html#0001" CLASS="Element59">BitMap</A>. TWKSRecord also overrides the <A HREF="008109.html#0005" CLASS="Element59">Parse</A> method to read the values in RData into their property counterparts.<P CLASS="Element10">
+The appropriate values and mnemonics for ports and protocols are specified in RFC 1010. For example, if PROTOCOL=TCP, the 26th bit corresponds to TCP port 25 (SMTP). If this bit is set, a SMTP server should be listening on TCP port 25; if zero, SMTP service is not supported on the specified address.<P CLASS="Element10">
+<A HREF="008109.html#0006" CLASS="Element59">Protocol</A> specifies the IP protocol the host supports, as described in RFC 1010, and may contain one of the following values:<P CLASS="Element10">
+<UL>
+<LI>0 - Reserved<P CLASS="Element10">
+<LI>1 - ICMP Internet Control Message<P CLASS="Element10">
+<LI>2 - IGMP Internet Group Management<P CLASS="Element10">
+<LI>3 - GGP Gateway-to-Gateway<P CLASS="Element10">
+<LI>4 - Unassigned<P CLASS="Element10">
+<LI>5 - ST Stream<P CLASS="Element10">
+<LI>6 - TCP Transmission Control<P CLASS="Element10">
+<LI>7 - UCL<P CLASS="Element10">
+<LI>8 - EGP Exterior Gateway <A HREF="008109.html#0006" CLASS="Element59">Protocol</A><P CLASS="Element10">
+<LI>9 - IGP any private interior gateway<P CLASS="Element10">
+<LI>10 - BBN-RCC-MON BBN RCC Monitoring<P CLASS="Element10">
+<LI>11 - NVP-II Network Voice <A HREF="008109.html#0006" CLASS="Element59">Protocol</A><P CLASS="Element10">
+<LI>12 - PUP<P CLASS="Element10">
+<LI>13 - ARGUS<P CLASS="Element10">
+<LI>14 - EMCON<P CLASS="Element10">
+<LI>15 - XNET Cross Net Debugger<P CLASS="Element10">
+<LI>16 - CHAOS<P CLASS="Element10">
+<LI>17 - UDP User Datagram<P CLASS="Element10">
+<LI>18 - MUX Multiplexing<P CLASS="Element10">
+<LI>19 - DCN-MEAS DCN Measurement Subsystems<P CLASS="Element10">
+<LI>20 - HMP Host Monitoring<P CLASS="Element10">
+<LI>21 - PRM Packet Radio Measurement<P CLASS="Element10">
+<LI>22 - XNS-IDP XEROX NS IDP<P CLASS="Element10">
+<LI>23 - TRUNK-1 Trunk-1<P CLASS="Element10">
+<LI>24 - TRUNK-2 Trunk-2<P CLASS="Element10">
+<LI>25 - LEAF-1 Leaf-1<P CLASS="Element10">
+<LI>26 - LEAF-2 Leaf-2<P CLASS="Element10">
+<LI>27 - RDP Reliable Data <A HREF="008109.html#0006" CLASS="Element59">Protocol</A><P CLASS="Element10">
+<LI>28 - IRTP Internet Reliable Transaction<P CLASS="Element10">
+<LI>29 - ISO-TP4 ISO Transport <A HREF="008109.html#0006" CLASS="Element59">Protocol</A> Class 4<P CLASS="Element10">
+<LI>30 - NETBLT Bulk Data Transfer <A HREF="008109.html#0006" CLASS="Element59">Protocol</A><P CLASS="Element10">
+<LI>31 - MFE-NSP MFE Network Services <A HREF="008109.html#0006" CLASS="Element59">Protocol</A><P CLASS="Element10">
+<LI>32 - MERIT-INP MERIT Internodal <A HREF="008109.html#0006" CLASS="Element59">Protocol</A><P CLASS="Element10">
+<LI>33 - SEP Sequential Exchange <A HREF="008109.html#0006" CLASS="Element59">Protocol</A><P CLASS="Element10">
+<LI>34 though 60 - Unassigned<P CLASS="Element10">
+<LI>61 - any host internal protocol<P CLASS="Element10">
+<LI>62 - CFTP<P CLASS="Element10">
+<LI>63 - any local network<P CLASS="Element10">
+<LI>64 - SAT-EXPAK SATNET and Backroom EXPAK<P CLASS="Element10">
+<LI>65 - MIT-SUBNET MIT Subnet Support<P CLASS="Element10">
+<LI>66 - RVD MIT Remote Virtual Disk <A HREF="008109.html#0006" CLASS="Element59">Protocol</A><P CLASS="Element10">
+<LI>67 - IPPC Internet Pluribus Packet Core<P CLASS="Element10">
+<LI>68 - any distributed file system<P CLASS="Element10">
+<LI>69 - SAT-MON SATNET Monitoring<P CLASS="Element10">
+<LI>70 - Unassigned<P CLASS="Element10">
+<LI>71 - IPCV Internet Packet Core Utility<P CLASS="Element10">
+<LI>72 through 75 - Unassigned<P CLASS="Element10">
+<LI>76 - BR-SAT-MON Backroom SATNET Monitoring<P CLASS="Element10">
+<LI>77 - Unassigned<P CLASS="Element10">
+<LI>78 - WB-MON WIDEBAND Monitoring<P CLASS="Element10">
+<LI>79 - WB-EXPAK WIDEBAND EXPAK<P CLASS="Element10">
+<LI>80 through 254 - Unassigned<P CLASS="Element10">
+<LI>255 - Reserved</UL>
+</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0000">TWKSRecord.Address</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="008109.html" CLASS="Element59">TWKSRecord</A>, <A HREF="015272.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+IP Address for the Well Known Service Host.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> Address: <STRONG>String</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Address is a Cardinal property that represents the 32-bit IP address for the host implementing the <A HREF="008109.html#0006" CLASS="Element59">Protocol</A> for the Well Known Service. Use <A HREF="008109.html#0006" CLASS="Element59">Protocol</A> and Bitmap to access the protocol or implemented features for the Well Known Service.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0001">TWKSRecord.BitMap</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="008109.html" CLASS="Element59">TWKSRecord</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Represents bits that indicate port usage for the Well Known Service.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> BitMap [<STRONG>index</STRONG>: integer]: Byte;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+BitMap is a read-only Byte property that provides indexed access to the port numbers used on the Host at the specified <A HREF="008109.html#0000" CLASS="Element59">Address</A>. BitMap is a variable length storage area that can be accessed using a zero-based index into the individual bits used to signify the port numbers allowed for the <A HREF="008109.html#0006" CLASS="Element59">Protocol</A> of the Well Known Service.<P CLASS="Element10">
+The appropriate values and mnemonics for ports numbers are specified in RFC 1010. For example, if <A HREF="008109.html#0006" CLASS="Element59">Protocol</A> is the value for TCP, the 26th bit corresponds to TCP port 25 (SMTP). If this bit is set, a SMTP server should be listening on TCP port 25; if zero, SMTP service is not supported on the specified address.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0002">TWKSRecord.ByteCount</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="008109.html" CLASS="Element59">TWKSRecord</A>, <A HREF="015273.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+ByteCount is not currently used in <A HREF="008109.html" CLASS="Element59">TWKSRecord</A>.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> ByteCount: integer;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+ByteCount is not currently used in <A HREF="008109.html" CLASS="Element59">TWKSRecord</A>. ByteCount is not currently used in <A HREF="008109.html" CLASS="Element59">TWKSRecord</A>. ByteCount is not currently used in <A HREF="008109.html" CLASS="Element59">TWKSRecord</A>. ByteCount is not currently used in <A HREF="008109.html" CLASS="Element59">TWKSRecord</A>.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0006">TWKSRecord.Protocol</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="008109.html" CLASS="Element59">TWKSRecord</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Protocol for the Well Known Service host.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> Protocol: Word;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Protocol is a read-only Byte property that specifies the IP protocol supported for the Well Know Service host. Protocol can be one of the following values:<P CLASS="Element10">
+<UL>
+<LI>0 Reserved<P CLASS="Element10">
+<LI>1 ICMP Internet Control Message<P CLASS="Element10">
+<LI>2 IGMP Internet Group Management<P CLASS="Element10">
+<LI>3 GGP Gateway-to-Gateway<P CLASS="Element10">
+<LI>4 Unassigned<P CLASS="Element10">
+<LI>5 ST Stream<P CLASS="Element10">
+<LI>6 TCP Transmission Control<P CLASS="Element10">
+<LI>7 UCL UCL<P CLASS="Element10">
+<LI>8 EGP Exterior Gateway Protocol<P CLASS="Element10">
+<LI>9 IGP any private interior gateway<P CLASS="Element10">
+<LI>10 BBN-RCC-MON BBN RCC Monitoring<P CLASS="Element10">
+<LI>11 NVP-II Network Voice Protocol<P CLASS="Element10">
+<LI>12 PUP PUP<P CLASS="Element10">
+<LI>13 ARGUS ARGUS<P CLASS="Element10">
+<LI>14 EMCON EMCON<P CLASS="Element10">
+<LI>15 XNET Cross Net Debugger<P CLASS="Element10">
+<LI>16 CHAOS Chaos<P CLASS="Element10">
+<LI>17 UDP User Datagram<P CLASS="Element10">
+<LI>18 MUX Multiplexing<P CLASS="Element10">
+<LI>19 DCN-MEAS DCN Measurement Subsystems<P CLASS="Element10">
+<LI>20 HMP Host Monitoring<P CLASS="Element10">
+<LI>21 PRM Packet Radio Measurement<P CLASS="Element10">
+<LI>22 XNS-IDP XEROX NS IDP<P CLASS="Element10">
+<LI>23 TRUNK-1 Trunk-1<P CLASS="Element10">
+<LI>24 TRUNK-2 Trunk-2<P CLASS="Element10">
+<LI>25 LEAF-1 Leaf-1<P CLASS="Element10">
+<LI>26 LEAF-2 Leaf-2<P CLASS="Element10">
+<LI>27 RDP Reliable Data Protocol<P CLASS="Element10">
+<LI>28 IRTP Internet Reliable Transaction<P CLASS="Element10">
+<LI>29 ISO-TP4 ISO Transport Protocol Class 4<P CLASS="Element10">
+<LI>30 NETBLT Bulk Data Transfer Protocol<P CLASS="Element10">
+<LI>31 MFE-NSP MFE Network Services Protocol<P CLASS="Element10">
+<LI>32 MERIT-INP MERIT Internodal Protocol<P CLASS="Element10">
+<LI>33 SEP Sequential Exchange Protocol<P CLASS="Element10">
+<LI>34-60 Unassigned<P CLASS="Element10">
+<LI>61 any host internal protocol<P CLASS="Element10">
+<LI>62 CFTP CFTP<P CLASS="Element10">
+<LI>63 any local network<P CLASS="Element10">
+<LI>64 SAT-EXPAK SATNET and Backroom EXPAK<P CLASS="Element10">
+<LI>65 MIT-SUBNET MIT Subnet Support<P CLASS="Element10">
+<LI>66 RVD MIT Remote Virtual Disk Protocol<P CLASS="Element10">
+<LI>67 IPPC Internet Pluribus Packet Core<P CLASS="Element10">
+<LI>68 any distributed file system<P CLASS="Element10">
+<LI>69 SAT-MON SATNET Monitoring<P CLASS="Element10">
+<LI>70 Unassigned<P CLASS="Element10">
+<LI>71 IPCV Internet Packet Core Utility<P CLASS="Element10">
+<LI>72-75 Unassigned<P CLASS="Element10">
+<LI>76 BR-SAT-MON Backroom SATNET Monitoring<P CLASS="Element10">
+<LI>77 Unassigned<P CLASS="Element10">
+<LI>78 WB-MON WIDEBAND Monitoring<P CLASS="Element10">
+<LI>79 WB-EXPAK WIDEBAND EXPAK<P CLASS="Element10">
+<LI>80-254 Unassigned<P CLASS="Element10">
+<LI>255 Reserved</UL>
+</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0003">TWKSRecord.Create</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="008109.html" CLASS="Element59">TWKSRecord</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Constructor for the object instance.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>constructor</STRONG> Create(Collection: TCollection); <STRONG>override</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+Collection: TCollection</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Owner of the collection item.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Create is the constructor for the object instance. Create calls the inherited Create method using Collection as the owner of the collection item.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0004">TWKSRecord.Destroy</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="008109.html" CLASS="Element59">TWKSRecord</A>, <A HREF="015274.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Frees the resource record collection item.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>destructor</STRONG> Destroy; <STRONG>override</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Destroy is the destructor for the object instance. Destroy calls the inherited Destroy method prior to exiting.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0005">TWKSRecord.Parse</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="008109.html" CLASS="Element59">TWKSRecord</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Parses RData values into properties.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>procedure</STRONG> Parse(CompleteMessage: <STRONG>String</STRONG>; APos: Integer); <STRONG>override</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+CompleteMessage: String</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Contents of the resource record.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+APos: Integer</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Position where RData values begin in the answer.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Parse is an overridden procedure that implements a routine to parse resource record values in the DNS response into their property-based counterparts.<P CLASS="Element10">
+CompleteMessage is the contents of the resource record. Since the DNS message can contain compressed data, the whole message is needed for parsing and pointer location.<P CLASS="Element10">
+APos is the position in the resource record where RData values for this record type are located in the DNS Answer.<P CLASS="Element10">
+Parse calls the inherited Parse method, and retrieves the DNS labels and values for the <A HREF="008109.html#0000" CLASS="Element59">Address</A>, <A HREF="008109.html#0006" CLASS="Element59">Protocol</A>, <A HREF="008109.html#0002" CLASS="Element59">ByteCount</A>, and <A HREF="008109.html#0001" CLASS="Element59">BitMap</A> properties.</DIV>
+</DIV>
+<DIV CLASS="Element62">
+<HR>Created with Doc-O-Matic 2 donated to <STRONG><A HREF="http://www.delphi-jedi.org">Project JEDI</A></STRONG>. Commercial license available from the <STRONG><A HREF="http://www.doc-o-matic.com">Doc-O-Matic site</A></STRONG>.</DIV>
+</DIV></BODY></HTML>

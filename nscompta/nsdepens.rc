@@ -1,0 +1,223 @@
+// -----------------------------------------------------------------------------// nsdepens.rc
+// -----------------------------------------------------------------------------
+// ressources des dialogues compta
+// -----------------------------------------------------------------------------
+// $Revision: 1.1 $
+// $Author: pameline $
+// $Date: 2009/07/23 15:14:45 $
+// -----------------------------------------------------------------------------
+// -----------------------------------------------------------------------------
+
+// -----------------------------------------------------------------------------
+// Copyright Nautilus, 2004
+// http://www.nautilus-info.com
+// -----------------------------------------------------------------------------
+// Ce logiciel est un programme informatique servant à gérer et traiter les
+// informations de santé d'une personne.
+//
+// Ce logiciel est régi par la licence CeCILL soumise au droit français et
+// respectant les principes de diffusion des logiciels libres. Vous pouvez
+// utiliser, modifier et/ou redistribuer ce programme sous les conditions de la
+// licence CeCILL telle que diffusée par le CEA, le CNRS et l'INRIA sur le site
+// "http://www.cecill.info".
+//
+// En contrepartie de l'accessibilité au code source et des droits de copie, de
+// modification et de redistribution accordés par cette licence, il n'est offert
+// aux utilisateurs qu'une garantie limitée. Pour les mêmes raisons, seule une
+// responsabilité restreinte pèse sur l'auteur du programme, le titulaire des
+// droits patrimoniaux et les concédants successifs.
+//
+// A cet égard  l'attention de l'utilisateur est attirée sur les risques
+// associés au chargement, à l'utilisation, à la modification et/ou au
+// développement et à la reproduction du logiciel par l'utilisateur étant donné
+// sa spécificité de logiciel libre, qui peut le rendre complexe à manipuler et
+// qui le réserve donc à des développeurs et des professionnels avertis
+// possédant des connaissances informatiques approfondies. Les utilisateurs sont
+// donc invités à charger et tester l'adéquation du logiciel à leurs besoins
+// dans des conditions permettant d'assurer la sécurité de leurs systèmes et ou
+// de leurs données et, plus généralement, à l'utiliser et l'exploiter dans les
+// mêmes conditions de sécurité.
+//
+// Le fait que vous puissiez accéder à cet en-tête signifie que vous avez pris
+// connaissance de la licence CeCILL, et que vous en avez accepté les termes.
+// -----------------------------------------------------------------------------
+// This software is a computer program whose purpose is to manage and process
+// a person's health data.
+//
+// This software is governed by the CeCILL  license under French law and abiding
+// by the rules of distribution of free software. You can use, modify and/ or
+// redistribute the software under the terms of the CeCILL license as circulated
+// by CEA, CNRS and INRIA at the following URL "http://www.cecill.info".
+//
+// As a counterpart to the access to the source code and  rights to copy, modify
+// and redistribute granted by the license, users are provided only with a
+// limited warranty and the software's author, the holder of the economic
+// rights, and the successive licensors have only limited liability.
+//
+// In this respect, the user's attention is drawn to the risks associated with
+// loading, using, modifying and/or developing or reproducing the software by
+// the user in light of its specific status of free software, that may mean that
+// it is complicated to manipulate, and that also therefore means that it is
+// reserved for developers and experienced professionals having in-depth
+// computer knowledge. Users are therefore encouraged to load and test the
+// software's suitability as regards their requirements in conditions enabling
+// the security of their systems and/or data to be ensured and, more generally,
+// to use and operate it in the same conditions as regards security.
+//
+// The fact that you are presently reading this means that you have had
+// knowledge of the CeCILL license and that you accept its terms.
+// -----------------------------------------------------------------------------
+// -----------------------------------------------------------------------------// Attention// -----------------------------------------------------------------------------// Les chemins des include doivent être en chemin relatif sur le cvs.// Si vous avez besoin de les modifier en chemin absolu pour pouvoir les// modifier avec Borland 5, vous devez les repasser en chemin relatif avant de// les remettre sur le cvs. // -----------------------------------------------------------------------------
+//#include "c:\cvs\nautilus\nscompta\NsDepens.rh"
+#include "nscompta\NsDepens.rh"
+
+IDD_DEPENSES DIALOG 0, 0, 343, 220
+STYLE DS_MODALFRAME | DS_3DLOOK | DS_CONTEXTHELP | WS_POPUP | WS_VISIBLE | WS_CAPTION | WS_SYSMENU
+CLASS "BORDLG"
+CAPTION "Saisie d'une dépense"
+FONT 8, "MS Sans Serif"
+{
+ CONTROL "Date :", -1, "static", SS_LEFT | WS_CHILD | WS_VISIBLE, 4, 7, 20, 8
+ CONTROL "", IDC_DEPS_DATE, "edit", ES_LEFT | WS_CHILD | WS_VISIBLE | WS_BORDER | WS_TABSTOP, 28, 4, 48, 12
+ CONTROL "Libellé :", -1, "static", SS_LEFT | WS_CHILD | WS_VISIBLE, 80, 6, 28, 8
+ CONTROL "", IDC_DEPS_LIBELLE, "edit", ES_LEFT | WS_CHILD | WS_VISIBLE | WS_BORDER | WS_TABSTOP, 108, 4, 232, 12
+ CONTROL "Ecritures", -1, "BorShade", BSS_GROUP | BSS_CAPTION | BSS_LEFT | WS_CHILD | WS_VISIBLE | WS_GROUP, 4, 20, 336, 156
+ CONTROL "Somme (Euros) :", -1, "BorStatic", SS_LEFT | WS_CHILD | WS_VISIBLE | WS_GROUP, 40, 32, 56, 8
+ CONTROL "+", IDC_DEPS_PLUS, "BorRadio", BS_RADIOBUTTON | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 8, 42, 20, 9
+ CONTROL "-", IDC_DEPS_MOINS, "BorRadio", BS_RADIOBUTTON | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 8, 51, 20, 9
+ CONTROL "", IDC_DEPS_SOMME, "edit", ES_LEFT | WS_CHILD | WS_VISIBLE | WS_BORDER | WS_TABSTOP, 28, 44, 108, 12
+ CONTROL "Banque :", -1, "BorStatic", SS_LEFT | WS_CHILD | WS_VISIBLE | WS_GROUP, 56, 64, 32, 8
+ CONTROL "", IDC_DEPS_BANQUE, "combobox", CBS_DROPDOWNLIST | CBS_SORT | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 8, 74, 128, 52
+ CONTROL "", IDC_DEPS_LIGNE, "listbox", LBS_STANDARD | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 140, 36, 192, 136
+ CONTROL "Mode de Paiement", IDC_DEPS_MODE, "BorShade", BSS_GROUP | BSS_CAPTION | BSS_LEFT | WS_CHILD | WS_VISIBLE | WS_GROUP, 8, 100, 128, 64
+ CONTROL "Espèces", IDC_DEPS_ESPECES, "BorRadio", BS_AUTORADIOBUTTON | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 12, 112, 60, 12
+ CONTROL "Chèque", IDC_DEPS_CHEQUE, "BorRadio", BS_AUTORADIOBUTTON | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 12, 124, 56, 12
+ CONTROL "Virement", IDC_DEPS_VIREMENT, "BorRadio", BS_AUTORADIOBUTTON | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 12, 136, 64, 13
+ CONTROL "Carte Bancaire", IDC_DEPS_CB, "BorRadio", BS_AUTORADIOBUTTON | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 12, 148, 64, 13
+ CONTROL "", -1, "BorShade", BSS_HDIP | BSS_LEFT | WS_CHILD | WS_VISIBLE, 7, 181, 328, 1
+ CONTROL "", IDOK, "BorBtn", BS_DEFPUSHBUTTON | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 100, 188, 43, 25
+ CONTROL "", IDCANCEL, "BorBtn", BS_PUSHBUTTON | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 200, 188, 43, 25
+}
+IDD_RECETTES DIALOG 0, 0, 343, 220
+STYLE DS_MODALFRAME | DS_3DLOOK | DS_CONTEXTHELP | WS_POPUP | WS_VISIBLE | WS_CAPTION | WS_SYSMENU
+CLASS "BORDLG"
+CAPTION "Saisie d'une recette"
+FONT 8, "MS Sans Serif"
+{
+ CONTROL "Date :", -1, "static", SS_LEFT | WS_CHILD | WS_VISIBLE, 4, 7, 20, 8
+ CONTROL "", IDC_REC_DATE, "edit", ES_LEFT | WS_CHILD | WS_VISIBLE | WS_BORDER | WS_TABSTOP, 28, 4, 48, 12
+ CONTROL "Libellé :", -1, "static", SS_LEFT | WS_CHILD | WS_VISIBLE, 80, 6, 27, 8
+ CONTROL "", IDC_REC_LIBELLE, "edit", ES_LEFT | WS_CHILD | WS_VISIBLE | WS_BORDER | WS_TABSTOP, 108, 4, 232, 12
+ CONTROL "Ecritures", -1, "BorShade", BSS_GROUP | BSS_CAPTION | BSS_LEFT | WS_CHILD | WS_VISIBLE | WS_GROUP, 4, 20, 336, 156
+ CONTROL "Somme (Euros) :", -1, "BorStatic", SS_LEFT | WS_CHILD | WS_VISIBLE | WS_GROUP, 44, 34, 56, 8
+ CONTROL "", IDC_REC_SOMME, "edit", ES_LEFT | WS_CHILD | WS_VISIBLE | WS_BORDER | WS_TABSTOP, 8, 62, 128, 12
+ CONTROL "Banque :", -1, "BorStatic", SS_LEFT | WS_CHILD | WS_VISIBLE | WS_GROUP, 56, 78, 32, 8
+ CONTROL "", IDC_REC_BANQUE, "combobox", CBS_DROPDOWNLIST | CBS_SORT | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 8, 88, 128, 52
+ CONTROL "", IDC_REC_LIGNE, "listbox", LBS_STANDARD | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 140, 32, 192, 140
+ CONTROL "Mode de Paiement", IDC_MODE, "BorShade", BSS_GROUP | BSS_CAPTION | BSS_LEFT | WS_CHILD | WS_VISIBLE | WS_GROUP, 8, 104, 128, 60
+ CONTROL "Espèces", IDC_REC_ESPECES, "BorRadio", BS_AUTORADIOBUTTON | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 12, 112, 60, 12
+ CONTROL "Chèque", IDC_REC_CHEQUE, "BorRadio", BS_AUTORADIOBUTTON | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 12, 124, 56, 12
+ CONTROL "Virement", IDC_REC_VIREMENT, "BorRadio", BS_AUTORADIOBUTTON | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 12, 136, 64, 13
+ CONTROL "Carte Bancaire", IDC_REC_CB, "BorRadio", BS_AUTORADIOBUTTON | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 12, 148, 64, 13
+ CONTROL "Analyser le libellé", IDC_ANALYSER, "button", BS_PUSHBUTTON | BS_CENTER | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 8, 46, 128, 12
+ CONTROL "", -1, "BorShade", BSS_HDIP | BSS_LEFT | WS_CHILD | WS_VISIBLE, 7, 181, 328, 1
+ CONTROL "", IDOK, "BorBtn", BS_DEFPUSHBUTTON | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 100, 188, 43, 25
+ CONTROL "", IDCANCEL, "BorBtn", BS_PUSHBUTTON | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 200, 188, 43, 25
+}
+
+IDD_ANNEE2035 DIALOG 0, 0, 158, 76
+STYLE DS_MODALFRAME | DS_3DLOOK | DS_CONTEXTHELP | WS_POPUP | WS_VISIBLE | WS_CAPTION | WS_SYSMENU
+CAPTION "Déclaration 2035"
+FONT 8, "MS Sans Serif"
+{
+ CONTROL "Pour l'année :", -1, "static", SS_LEFT | WS_CHILD | WS_VISIBLE, 12, 13, 48, 7
+ CONTROL "", IDC_A2035_ANNEE, "edit", ES_LEFT | WS_CHILD | WS_VISIBLE | WS_BORDER | WS_TABSTOP, 68, 11, 60, 13
+ CONTROL "", IDOK, "BorBtn", BS_DEFPUSHBUTTON | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 27, 42, 43, 25
+ CONTROL "", IDCANCEL, "BorBtn", BS_PUSHBUTTON | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 87, 42, 43, 25
+}
+
+IDD_2035 DIALOG 0, 0, 503, 351
+STYLE DS_MODALFRAME | DS_3DLOOK | DS_CONTEXTHELP | WS_POPUP | WS_VISIBLE | WS_CAPTION | WS_SYSMENU
+CAPTION "Déclaration 2035"
+FONT 8, "MS Sans Serif"
+{
+ CONTROL "Recettes", -1, "BorShade", BSS_GROUP | BSS_CAPTION | BSS_LEFT | WS_CHILD | WS_VISIBLE | WS_GROUP, 20, 13, 460, 83
+ CONTROL "Recettes encaissées", -1, "BorStatic", SS_LEFT | WS_CHILD | WS_VISIBLE | WS_GROUP, 36, 30, 92, 9
+ CONTROL "", IDC_2035_1, "edit", ES_LEFT | WS_CHILD | WS_VISIBLE | WS_BORDER | WS_TABSTOP, 36, 40, 88, 13
+ CONTROL "A déduire : débours payés clients", -1, "BorStatic", SS_LEFT | WS_CHILD | WS_VISIBLE | WS_GROUP, 36, 59, 108, 9
+ CONTROL "", IDC_2035_2, "edit", ES_LEFT | WS_CHILD | WS_VISIBLE | WS_BORDER | WS_TABSTOP, 36, 69, 88, 13
+ CONTROL "A déduire : honoraires rétrocédés", -1, "BorStatic", SS_LEFT | WS_CHILD | WS_VISIBLE | WS_GROUP, 148, 30, 108, 9
+ CONTROL "", IDC_2035_3, "edit", ES_LEFT | WS_CHILD | WS_VISIBLE | WS_BORDER | WS_TABSTOP, 148, 40, 88, 13
+ CONTROL "Montant net des recettes", -1, "BorStatic", SS_LEFT | WS_CHILD | WS_VISIBLE | WS_GROUP, 148, 58, 92, 9
+ CONTROL "", IDC_2035_4, "edit", ES_LEFT | WS_CHILD | WS_VISIBLE | WS_BORDER | WS_TABSTOP, 148, 68, 88, 13
+ CONTROL "Produits financiers", -1, "BorStatic", SS_LEFT | WS_CHILD | WS_VISIBLE | WS_GROUP, 260, 30, 96, 9
+ CONTROL "", IDC_2035_5, "edit", ES_LEFT | WS_CHILD | WS_VISIBLE | WS_BORDER | WS_TABSTOP, 260, 40, 88, 13
+ CONTROL "Gains divers", IDC_2035_6, "BorStatic", SS_LEFT | WS_CHILD | WS_VISIBLE | WS_GROUP, 260, 58, 100, 9
+ CONTROL "", IDC_2035_6, "edit", ES_LEFT | WS_CHILD | WS_VISIBLE | WS_BORDER | WS_TABSTOP, 260, 68, 88, 14
+ CONTROL "Total des recettes", -1, "BorStatic", SS_LEFT | WS_CHILD | WS_VISIBLE | WS_GROUP, 376, 59, 76, 9
+ CONTROL "", IDC_2035_7, "edit", ES_LEFT | WS_CHILD | WS_VISIBLE | WS_BORDER | WS_TABSTOP, 376, 68, 88, 14
+ CONTROL "Dépenses", -1, "BorShade", BSS_GROUP | BSS_CAPTION | BSS_LEFT | WS_CHILD | WS_VISIBLE | WS_GROUP, 20, 100, 460, 240
+ CONTROL "Achats", -1, "BorStatic", SS_LEFT | WS_CHILD | WS_VISIBLE | WS_GROUP, 36, 115, 116, 8
+ CONTROL "", IDC_2035_8, "edit", ES_LEFT | WS_CHILD | WS_VISIBLE | WS_BORDER | WS_TABSTOP, 36, 124, 88, 14
+ CONTROL "Frais de personnel : Salaires nets", -1, "BorStatic", SS_LEFT | WS_CHILD | WS_VISIBLE | WS_GROUP, 36, 145, 108, 8
+ CONTROL "", IDC_2035_9, "edit", ES_LEFT | WS_CHILD | WS_VISIBLE | WS_BORDER | WS_TABSTOP, 36, 156, 88, 14
+ CONTROL "Charges sociales sur salaires", -1, "BorStatic", SS_LEFT | WS_CHILD | WS_VISIBLE | WS_GROUP, 148, 113, 96, 8
+ CONTROL "", IDC_2035_10, "edit", ES_LEFT | WS_CHILD | WS_VISIBLE | WS_BORDER | WS_TABSTOP, 148, 124, 88, 14
+ CONTROL "Impots et taxes : TVA", -1, "BorStatic", SS_LEFT | WS_CHILD | WS_VISIBLE | WS_GROUP, 148, 146, 80, 8
+ CONTROL "", IDC_2035_11, "edit", ES_LEFT | WS_CHILD | WS_VISIBLE | WS_BORDER | WS_TABSTOP, 148, 156, 88, 14
+ CONTROL "Taxe professionnelle", -1, "BorStatic", SS_LEFT | WS_CHILD | WS_VISIBLE | WS_GROUP, 260, 113, 124, 8
+ CONTROL "", IDC_2035_12, "edit", ES_LEFT | WS_CHILD | WS_VISIBLE | WS_BORDER | WS_TABSTOP, 260, 124, 88, 14
+ CONTROL "Impots et taxes : Autres", -1, "BorStatic", SS_LEFT | WS_CHILD | WS_VISIBLE | WS_GROUP, 260, 145, 80, 8
+ CONTROL "", IDC_2035_13, "edit", ES_LEFT | WS_CHILD | WS_VISIBLE | WS_BORDER | WS_TABSTOP, 260, 156, 88, 14
+ CONTROL "Loyer et charges locatives", -1, "BorStatic", SS_LEFT | WS_CHILD | WS_VISIBLE | WS_GROUP, 376, 113, 96, 8
+ CONTROL "", IDC_2035_14, "edit", ES_LEFT | WS_CHILD | WS_VISIBLE | WS_BORDER | WS_TABSTOP, 376, 124, 88, 14
+ CONTROL "Location matériel et mobilier", -1, "BorStatic", SS_LEFT | WS_CHILD | WS_VISIBLE | WS_GROUP, 376, 146, 92, 8
+ CONTROL "", IDC_2035_15, "edit", ES_LEFT | WS_CHILD | WS_VISIBLE | WS_BORDER | WS_TABSTOP, 376, 156, 88, 14
+ CONTROL "Entretien et réparations", -1, "BorStatic", SS_LEFT | WS_CHILD | WS_VISIBLE | WS_GROUP, 36, 177, 96, 8
+ CONTROL "", IDC_2035_16, "edit", ES_LEFT | WS_CHILD | WS_VISIBLE | WS_BORDER | WS_TABSTOP, 36, 188, 88, 14
+ CONTROL "Personnel intérimaire", -1, "BorStatic", SS_LEFT | WS_CHILD | WS_VISIBLE | WS_GROUP, 36, 207, 104, 8
+ CONTROL "", IDC_2035_17, "edit", ES_LEFT | WS_CHILD | WS_VISIBLE | WS_BORDER | WS_TABSTOP, 36, 216, 88, 14
+ CONTROL "Petit outillage", -1, "BorStatic", SS_LEFT | WS_CHILD | WS_VISIBLE | WS_GROUP, 148, 178, 92, 8
+ CONTROL "", IDC_2035_18, "edit", ES_LEFT | WS_CHILD | WS_VISIBLE | WS_BORDER | WS_TABSTOP, 148, 188, 88, 14
+ CONTROL "Chauffage, eau, gaz, électricité", -1, "BorStatic", SS_LEFT | WS_CHILD | WS_VISIBLE | WS_GROUP, 148, 207, 104, 8
+ CONTROL "", IDC_2035_19, "edit", ES_LEFT | WS_CHILD | WS_VISIBLE | WS_BORDER | WS_TABSTOP, 148, 216, 88, 14
+ CONTROL "Honoraires", -1, "BorStatic", SS_LEFT | WS_CHILD | WS_VISIBLE | WS_GROUP, 260, 179, 104, 8
+ CONTROL "", IDC_2035_20, "edit", ES_LEFT | WS_CHILD | WS_VISIBLE | WS_BORDER | WS_TABSTOP, 260, 188, 88, 14
+ CONTROL "Primes d'assurances", -1, "BorStatic", SS_LEFT | WS_CHILD | WS_VISIBLE | WS_GROUP, 260, 207, 108, 8
+ CONTROL "", IDC_2035_21, "edit", ES_LEFT | WS_CHILD | WS_VISIBLE | WS_BORDER | WS_TABSTOP, 260, 216, 88, 14
+ CONTROL "Frais de véhicules", -1, "BorStatic", SS_LEFT | WS_CHILD | WS_VISIBLE | WS_GROUP, 376, 179, 92, 8
+ CONTROL "", IDC_2035_22, "edit", ES_LEFT | WS_CHILD | WS_VISIBLE | WS_BORDER | WS_TABSTOP, 376, 188, 88, 14
+ CONTROL "Autres frais de déplacements", -1, "BorStatic", SS_LEFT | WS_CHILD | WS_VISIBLE | WS_GROUP, 376, 207, 96, 8
+ CONTROL "", IDC_2035_23, "edit", ES_LEFT | WS_CHILD | WS_VISIBLE | WS_BORDER | WS_TABSTOP, 376, 216, 88, 14
+ CONTROL "Total travaux, fournitures, services", -1, "BorStatic", SS_LEFT | WS_CHILD | WS_VISIBLE | WS_GROUP, 260, 268, 112, 8
+ CONTROL "", IDC_2035_BH, "edit", ES_LEFT | WS_CHILD | WS_VISIBLE | WS_BORDER | WS_TABSTOP, 260, 279, 88, 14
+ CONTROL "Total transports, déplacements", -1, "BorStatic", SS_LEFT | WS_CHILD | WS_VISIBLE | WS_GROUP, 376, 269, 100, 8
+ CONTROL "", IDC_2035_BJ, "edit", ES_LEFT | WS_CHILD | WS_VISIBLE | WS_BORDER | WS_TABSTOP, 376, 278, 88, 14
+ CONTROL "Charges sociales personnelles", -1, "BorStatic", SS_LEFT | WS_CHILD | WS_VISIBLE | WS_GROUP, 36, 237, 100, 8
+ CONTROL "", IDC_2035_24, "edit", ES_LEFT | WS_CHILD | WS_VISIBLE | WS_BORDER | WS_TABSTOP, 36, 246, 88, 14
+ CONTROL "Frais de réception", -1, "BorStatic", SS_LEFT | WS_CHILD | WS_VISIBLE | WS_GROUP, 37, 271, 104, 8
+ CONTROL "", IDC_2035_25, "edit", ES_LEFT | WS_CHILD | WS_VISIBLE | WS_BORDER | WS_TABSTOP, 37, 280, 88, 14
+ CONTROL "Fournitures de bureau", -1, "BorStatic", SS_LEFT | WS_CHILD | WS_VISIBLE | WS_GROUP, 36, 302, 100, 8
+ CONTROL "", IDC_2035_26, "edit", ES_LEFT | WS_CHILD | WS_VISIBLE | WS_BORDER | WS_TABSTOP, 36, 312, 88, 14
+ CONTROL "Frais d'actes et de contentieux", -1, "BorStatic", SS_LEFT | WS_CHILD | WS_VISIBLE | WS_GROUP, 148, 236, 104, 8
+ CONTROL "", IDC_2035_27, "edit", ES_LEFT | WS_CHILD | WS_VISIBLE | WS_BORDER | WS_TABSTOP, 148, 246, 88, 14
+ CONTROL "Cotisations syndicales", -1, "BorStatic", SS_LEFT | WS_CHILD | WS_VISIBLE | WS_GROUP, 148, 271, 104, 8
+ CONTROL "", IDC_2035_28, "edit", ES_LEFT | WS_CHILD | WS_VISIBLE | WS_BORDER | WS_TABSTOP, 148, 280, 88, 14
+ CONTROL "Frais divers de gestion", -1, "BorStatic", SS_LEFT | WS_CHILD | WS_VISIBLE | WS_GROUP, 148, 302, 100, 8
+ CONTROL "", IDC_2035_29, "edit", ES_LEFT | WS_CHILD | WS_VISIBLE | WS_BORDER | WS_TABSTOP, 148, 312, 88, 14
+ CONTROL "Line1", -1, "BorShade", BSS_VDIP | BSS_LEFT | WS_CHILD | WS_VISIBLE, 249, 272, 1, 56
+ CONTROL "Frais financiers", -1, "BorStatic", SS_LEFT | WS_CHILD | WS_VISIBLE | WS_GROUP, 260, 237, 96, 8
+ CONTROL "", IDC_2035_30, "edit", ES_LEFT | WS_CHILD | WS_VISIBLE | WS_BORDER | WS_TABSTOP, 260, 246, 88, 14
+ CONTROL "Pertes diverses", -1, "BorStatic", SS_LEFT | WS_CHILD | WS_VISIBLE | WS_GROUP, 376, 237, 96, 8
+ CONTROL "", IDC_2035_31, "edit", ES_LEFT | WS_CHILD | WS_VISIBLE | WS_BORDER | WS_TABSTOP, 376, 246, 88, 14
+ CONTROL "Total des dépenses", -1, "BorStatic", SS_LEFT | WS_CHILD | WS_VISIBLE | WS_GROUP, 376, 302, 92, 8
+ CONTROL "", IDC_2035_32, "edit", ES_LEFT | WS_CHILD | WS_VISIBLE | WS_BORDER | WS_TABSTOP, 376, 312, 88, 14
+ CONTROL "Fermer", IDC_2035_FERMER, "button", BS_PUSHBUTTON | BS_CENTER | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 380, 25, 84, 14
+ CONTROL "Imprimer", IDC_2035_IMPRIMER, "button", BS_PUSHBUTTON | BS_CENTER | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 380, 41, 84, 14
+ CONTROL "", -1, "static", SS_ETCHEDFRAME | WS_CHILD | WS_VISIBLE, 364, 39, 1, 43
+ CONTROL "Total frais divers de gestion", -1, "BorStatic", SS_LEFT | WS_CHILD | WS_VISIBLE | WS_GROUP, 260, 302, 100, 8
+ CONTROL "", IDC_2035_BM, "edit", ES_LEFT | WS_CHILD | WS_VISIBLE | WS_BORDER | WS_TABSTOP, 260, 312, 88, 14
+}
+
+// fin de NsDepens.rc
+

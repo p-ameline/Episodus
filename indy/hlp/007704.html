@@ -1,0 +1,357 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+<TITLE>TIdSMTPMessages</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <META name="GENERATOR" content="Doc-O-Matic">
+    <LINK rel="STYLESHEET" href="default.css" type="text/css">
+
+<SCRIPT LANGUAGE="JavaScript1.2" SRC="scripts.js"></SCRIPT>
+</HEAD>
+<BODY CLASS="Element57">
+<TABLE BORDER="0" BGCOLOR="#AACCFF" WIDTH="100%" CELLSPACING="0" CELLPADDING="0">
+<TR><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element1">
+Indy 9</DIV>
+</TD><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element2">
+<A HREF="content.html" CLASS="Element59">Content</A> | <A HREF="idx.html" CLASS="Element59">Index</A> | <A HREF="symref.html" CLASS="Element59">Reference</A></DIV>
+</TD></TR></TABLE><DIV CLASS="Element58">
+<DIV CLASS="Element5">
+TIdSMTPMessages</DIV>
+<DIV CLASS="Element7">
+<A HREF="013612.html" CLASS="Element59">Hierarchy</A>, <A HREF="013613.html" CLASS="Element59">Properties</A>, <A HREF="013614.html" CLASS="Element59">Methods</A>, <A HREF="013615.html" CLASS="Element59">See Also</A>, <A HREF="002819.html" CLASS="Element59">Unit: IdSMTPServer</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Implements a container for replies to SMTP command verbs.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12">TIdSMTPMessages = <STRONG>class</STRONG>(TPersistent)</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Unit</DIV>
+<DIV CLASS="Element69">
+<A HREF="002819.html" CLASS="Element59">IdSMTPServer</A></DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+TIdSMTPMessages is TPersistent descendant that specifies propetiesd and methods needed to implement a container for SMTP messages used as replies to SMTP Command verbs.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0002">TIdSMTPMessages.DataReplies</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007704.html" CLASS="Element59">TIdSMTPMessages</A>, <A HREF="013616.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Represents messages used when a SMTP server performs the SMTP DATA command.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> DataReplies: <A HREF="007702.html" CLASS="Element59">TIdSMTPDataReplies</A>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+DataReplies is a <A HREF="007702.html" CLASS="Element59">TIdSMTPDataReplies</A> property that represents messages sent when the SMTP server performs the DATA command verb. DataReplies is used in the TIdSMTPServer.CommandData action handler to access the StartDataReply and EndDataReply propeties.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0004">TIdSMTPMessages.ErrorReply</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007704.html" CLASS="Element59">TIdSMTPMessages</A>, <A HREF="013617.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Represents the error message used when a command action does not have a corresponding event handler.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> ErrorReply: <STRONG>string</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+ErrorReply is a String property that represents the SMTP Server response written to the client connection when a TIdCommand.OnCommand event handler does not have a corresponding TIdBasicHandler event handler in the <A HREF="007707.html" CLASS="Element59">TIdSMTPServer</A> implementation for the .<P CLASS="Element10">
+The default behavior in <A HREF="007707.html" CLASS="Element59">TIdSMTPServer</A> is to <A HREF="006944.html" CLASS="Element59">send</A> an RFC response with the numeric error code 500 concatenated with the value in ErrorReply. The command action handler and server event handler combinations used in <A HREF="007707.html" CLASS="Element59">TIdSMTPServer</A> include the following:<P CLASS="Element10">
+<UL>
+<LI>CommandHELP - OnCommandHELP<P CLASS="Element10">
+<LI>CommandSOML - OnCommandSOML<P CLASS="Element10">
+<LI>CommandSEND - OnCommandSEND<P CLASS="Element10">
+<LI>CommandSAML - OnCommandSAML<P CLASS="Element10">
+<LI>CommandVRFY - OnCommandVRFY<P CLASS="Element10">
+<LI>CommandEXPN - OnCommandEXPN<P CLASS="Element10">
+<LI>CommandTURN - OnCommandTURN</UL>
+<P CLASS="Element10">
+The default value for ErrorReply is <A HREF="006614.html" CLASS="Element59">RSSMTPSvrCmdGeneralError</A>, as assigned in the <A HREF="007704.html#0001" CLASS="Element59">Create</A> constructor.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0005">TIdSMTPMessages.Greeting</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007704.html" CLASS="Element59">TIdSMTPMessages</A>, <A HREF="013618.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Indicates greeting messages used in the Server implementation.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> Greeting: <A HREF="007703.html" CLASS="Element59">TIdSMTPGreeting</A>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Greeting is a <A HREF="007703.html" CLASS="Element59">TIdSMTPGreeting</A> property that indicates the greeting messages used by a SMTP server implementation, and their content. Greeting contains String properties like EHLONotSupported, HelloReply, NoHello, and AuthFailed. Greeting also contains a multi-line response EHLOReply.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0006">TIdSMTPMessages.NoopReply</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007704.html" CLASS="Element59">TIdSMTPMessages</A>, <A HREF="013619.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Represents the message used in response to SMTP NOOP and RSET commands.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> NoopReply: <STRONG>string</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+NoopReply is a String property that represents the message used in response to command actions performed for the SMTP NOOP command verb or the SMTP RSET command verb when used prior to starting a mail transaction. The default value for NoopReply is the constant value <A HREF="006618.html" CLASS="Element59">RSSMTPSvrOk</A> as assigned in the <A HREF="007704.html#0001" CLASS="Element59">Create</A> constructor.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0007">TIdSMTPMessages.NotLoggedIn</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007704.html" CLASS="Element59">TIdSMTPMessages</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+SMTP Protocol reply sent when a client is not authorized to perform the request command.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> NotLoggedIn: <STRONG>String</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+NotLoggedIn is a String property that represents the SMTP protocol reply sent to a client connection when authorization is required top perform the SMTP command requested. NotLoggedIn is used in the command handler for the SMTP MAIL command when AuthMode is True. NotLoggedIn is given the value from the resource string RSSMTPNotLoggedIn in the constructor for the class instance.<P CLASS="Element10">
+Seelso: <A HREF="007704.html#0001" CLASS="Element59">Create</A>, AuthMode, RSSMTPNotLoggedIn</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0008">TIdSMTPMessages.QuitReply</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007704.html" CLASS="Element59">TIdSMTPMessages</A>, <A HREF="013620.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Indicates the message used for the SMTP QUIT command.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> QuitReply: <STRONG>string</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+QuitReply is a String property that indicates the message used in response to a <A HREF="007242.html" CLASS="Element59">TIdCommand</A> action handler for the SMTP QUIT command verb. The default value for QuitReply is the constant value <A HREF="006619.html" CLASS="Element59">RSSMTPSvrQuit</A> as assigned in the <A HREF="007704.html#0001" CLASS="Element59">Create</A> constructor.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0009">TIdSMTPMessages.RcpReplies</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007704.html" CLASS="Element59">TIdSMTPMessages</A>, <A HREF="013621.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Represents messages used for SMTP MAIL and RCPT commands.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> RcpReplies: <A HREF="007705.html" CLASS="Element59">TIdSMTPRcpReplies</A>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+RcpReplies is a <A HREF="007705.html" CLASS="Element59">TIdSMTPRcpReplies</A> property that contains message that may be used in conjunction with SMTP commands verbs that involve recipient addresses. RcpReplies represents the AddressOkReply, AddressErrorReply, and AddressWillForwardReply responses used in command handlers and event handlers for the SMTP MAIL and RCPT commands.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="000A">TIdSMTPMessages.ReceivedHeader</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007704.html" CLASS="Element59">TIdSMTPMessages</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Represents the value for the &quot;Received:&quot; header added to forwarded mail.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> ReceivedHeader: <STRONG>string</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+ReceivedHeader is a String property that contains a value to prepended mail messages received on the SMTP server that require forwarding to address outside the domain for the server.<P CLASS="Element10">
+ReceivedHeader is generated im mail messages as a &quot;Received:&quot; RFC message header. ReceivedHeader is significant in Relay and Gateway applications, and must never alter an existing header value in a mail message. The gateway SHOULD indicate the environment and protocol in the &quot;via&quot; clauses of Received field(s) that it supplies.<P CLASS="Element10">
+&quot;Received:&quot; headers in messages originating from other environments may not conform exactly to this specification.<P CLASS="Element10">
+The default value for ReceivedHeader is the constant value <A HREF="006620.html" CLASS="Element59">RSSMTPSvrReceivedHeader</A>, as assigned in the <A HREF="007704.html#0001" CLASS="Element59">Create</A> constructor.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="000B">TIdSMTPMessages.RSetReply</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007704.html" CLASS="Element59">TIdSMTPMessages</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Identifies the response used for the SMTP RSET command.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> RSetReply: <STRONG>string</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+RSetReply is a String property that represents the message used in response to the SMTP RSET command verb after mail transaction has been initiated.<P CLASS="Element10">
+The default value for RSetReply is the constant value <A HREF="006618.html" CLASS="Element59">RSSMTPSvrOk</A>, as assigned in the <A HREF="007704.html#0001" CLASS="Element59">Create</A> constructor.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="000C">TIdSMTPMessages.SequenceError</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007704.html" CLASS="Element59">TIdSMTPMessages</A>, <A HREF="013622.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+SMTP protocol reply used for an invalid SMTP state for the requested command.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> SequenceError: <STRONG>string</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+SequenceError is a String property that represents the SMTP protocol reply sent when an operation has been requested that is out of sequence. SequenceError indicates that another required SMTP command is required prior to the execution of the current SMTP command. SequenceError is normally sent to the client connection when a command handler checks the TIdSMTPServerThread.SMTPState for a required value for the operation.<P CLASS="Element10">
+The default value for SequenceError is the resource string RSSMTPSvrBadSequence as assigned in the <A HREF="007704.html#0001" CLASS="Element59">Create</A> constructor.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="000D">TIdSMTPMessages.SyntaxErrorReply</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007704.html" CLASS="Element59">TIdSMTPMessages</A>, <A HREF="013623.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Represents the message used in response to a syntax error in an SMTP command.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> SyntaxErrorReply: <STRONG>string</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+SyntaxErrorReply is a String property that identifies the message used in response to a syntax error in a SMTP command, an the command or parameter values not be parsed or recognized by <A HREF="007244.html" CLASS="Element59">TIdCommandHandler</A> instances for the Server implementation. The default value for SyntaxErrorReply is the constant value <A HREF="006614.html" CLASS="Element59">RSSMTPSvrCmdGeneralError</A>, as assigned in the <A HREF="007704.html#0001" CLASS="Element59">Create</A> constructor.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="000E">TIdSMTPMessages.XServer</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007704.html" CLASS="Element59">TIdSMTPMessages</A>, <A HREF="013624.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Identifies the SMTP Server acting as the mail transfer agent.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> XServer: <STRONG>string</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+XServer is a String property that represents an experimental RFC message header added to mail received using the SMTP DATA command verb. XServer indicates the Server acting as the mail transfer agent, and provides additional information that can be used in debugging the operations of an SMTP server.<P CLASS="Element10">
+XServer is used in the <A HREF="007707.html#0012" CLASS="Element59">TIdSMTPServer.OnReceiveMessage</A> action handler, and added to mail received using a <A HREF="007707.html#0016" CLASS="Element59">TIdSMTPServer.ReceiveMode</A> of rmMessage or rmMessageParsed.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0000">TIdSMTPMessages.Assign</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007704.html" CLASS="Element59">TIdSMTPMessages</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Copies the properties of one Object instance to another.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>procedure</STRONG> Assign(Source: TPersistent); <STRONG>override</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+Source: TPersistent</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Object instance containing values to be copied.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Assign is an overridden procedure in <A HREF="007704.html" CLASS="Element59">TIdSMTPMessages</A> that copies the property values in Source to the current object instance. Assign calls the inherited Assign method.<P CLASS="Element10">
+Assign checks whether the Source parameter specifies another <A HREF="007704.html" CLASS="Element59">TIdSMTPMessages</A> instance, and if so, copies the values of the <A HREF="007704.html#0006" CLASS="Element59">NoopReply</A>, <A HREF="007704.html#000B" CLASS="Element59">RSetReply</A>, <A HREF="007704.html#0008" CLASS="Element59">QuitReply</A>, <A HREF="007704.html#0004" CLASS="Element59">ErrorReply</A>, <A HREF="007704.html#000A" CLASS="Element59">ReceivedHeader</A>, <A HREF="007704.html#000E" CLASS="Element59">XServer</A>, and <A HREF="007704.html#000D" CLASS="Element59">SyntaxErrorReply</A> properties. Assign also calls the Assign method for object instances in the <A HREF="007704.html#0005" CLASS="Element59">Greeting</A>, <A HREF="007704.html#0009" CLASS="Element59">RcpReplies</A>, and <A HREF="007704.html#0002" CLASS="Element59">DataReplies</A> properties.<P CLASS="Element10">
+If Source is not a <A HREF="007704.html" CLASS="Element59">TIdSMTPMessages</A> instance, Assign calls the inherited method, which assigns properties from any object that specifies how to copy using the AssignTo method.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0001">TIdSMTPMessages.Create</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007704.html" CLASS="Element59">TIdSMTPMessages</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Constructor for the object instance.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>constructor</STRONG> Create;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Create is the constructor for the object instance, and calls the inherited Create method. Create assigns the default constant values used in the following properties:<P CLASS="Element10">
+<UL>
+<LI><A HREF="007704.html#0006" CLASS="Element59">NoopReply</A> - <A HREF="006618.html" CLASS="Element59">RSSMTPSvrOk</A><P CLASS="Element10">
+<LI><A HREF="007704.html#000B" CLASS="Element59">RSetReply</A> - <A HREF="006618.html" CLASS="Element59">RSSMTPSvrOk</A><P CLASS="Element10">
+<LI><A HREF="007704.html#0008" CLASS="Element59">QuitReply</A> - <A HREF="006619.html" CLASS="Element59">RSSMTPSvrQuit</A><P CLASS="Element10">
+<LI><A HREF="007704.html#0004" CLASS="Element59">ErrorReply</A> - <A HREF="006614.html" CLASS="Element59">RSSMTPSvrCmdGeneralError</A><P CLASS="Element10">
+<LI><A HREF="007704.html#000D" CLASS="Element59">SyntaxErrorReply</A> - <A HREF="006614.html" CLASS="Element59">RSSMTPSvrCmdGeneralError</A><P CLASS="Element10">
+<LI><A HREF="007704.html#000A" CLASS="Element59">ReceivedHeader</A> - <A HREF="006620.html" CLASS="Element59">RSSMTPSvrReceivedHeader</A><P CLASS="Element10">
+<LI><A HREF="007704.html#000E" CLASS="Element59">XServer</A> - <A HREF="006623.html" CLASS="Element59">RSSMTPSvrXServer</A></UL>
+<P CLASS="Element10">
+Create also allocates resources used in the following properties:<P CLASS="Element10">
+<UL>
+<LI><A HREF="007704.html#0005" CLASS="Element59">Greeting</A><P CLASS="Element10">
+<LI><A HREF="007704.html#0009" CLASS="Element59">RcpReplies</A><P CLASS="Element10">
+<LI><A HREF="007704.html#0002" CLASS="Element59">DataReplies</A></UL>
+</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0003">TIdSMTPMessages.Destroy</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007704.html" CLASS="Element59">TIdSMTPMessages</A>, <A HREF="013625.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Frees the object instance.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>destructor</STRONG> Destroy; <STRONG>override</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Destroy is the destructor for the object instance. Destroy frees resources allocted in the <A HREF="007704.html#0001" CLASS="Element59">Create</A> constructor for the <A HREF="007704.html#0005" CLASS="Element59">Greeting</A>, <A HREF="007704.html#0009" CLASS="Element59">RcpReplies</A>, and <A HREF="007704.html#0002" CLASS="Element59">DataReplies</A> properties. Destroy calls the inherited Destroy method prior to exiting from the method.</DIV>
+</DIV>
+<DIV CLASS="Element62">
+<HR>Created with Doc-O-Matic 2 donated to <STRONG><A HREF="http://www.delphi-jedi.org">Project JEDI</A></STRONG>. Commercial license available from the <STRONG><A HREF="http://www.doc-o-matic.com">Doc-O-Matic site</A></STRONG>.</DIV>
+</DIV></BODY></HTML>

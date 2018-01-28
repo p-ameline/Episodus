@@ -1,0 +1,79 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+<TITLE>TIdMessageEncoderMIME</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <META name="GENERATOR" content="Doc-O-Matic">
+    <LINK rel="STYLESHEET" href="default.css" type="text/css">
+
+<SCRIPT LANGUAGE="JavaScript1.2" SRC="scripts.js"></SCRIPT>
+</HEAD>
+<BODY CLASS="Element57">
+<TABLE BORDER="0" BGCOLOR="#AACCFF" WIDTH="100%" CELLSPACING="0" CELLPADDING="0">
+<TR><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element1">
+Indy 9</DIV>
+</TD><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element2">
+<A HREF="content.html" CLASS="Element59">Content</A> | <A HREF="idx.html" CLASS="Element59">Index</A> | <A HREF="symref.html" CLASS="Element59">Reference</A></DIV>
+</TD></TR></TABLE><DIV CLASS="Element58">
+<DIV CLASS="Element5">
+TIdMessageEncoderMIME</DIV>
+<DIV CLASS="Element7">
+<A HREF="012683.html" CLASS="Element59">Hierarchy</A>, <A HREF="012684.html" CLASS="Element59">Properties</A>, <A HREF="012685.html" CLASS="Element59">Methods</A>, <A HREF="012686.html" CLASS="Element59">Events</A>, <A HREF="012687.html" CLASS="Element59">See Also</A>, <A HREF="002289.html" CLASS="Element59">Unit: IdMessageCoderMIME</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Implements an encoder for RFC-822 compliant MIME message parts.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12">TIdMessageEncoderMIME = <STRONG>class</STRONG>(<A HREF="007556.html" CLASS="Element59">TIdMessageEncoder</A>)</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Unit</DIV>
+<DIV CLASS="Element69">
+<A HREF="002289.html" CLASS="Element59">IdMessageCoderMIME</A></DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+TIdMessageEncoderMIME is a <A HREF="007556.html" CLASS="Element59">TIdMessageEncoder</A> descendant that implements an encoder for RFC-822 compliant MIME message parts that can be represented using MIME-encoded data. TIdMessageEncoderMIME reimplements the <A HREF="007563.html#0000" CLASS="Element59">Encode</A> method to provide support for the Base64 encoding agorithm using <A HREF="007312.html" CLASS="Element59">TIdEncoderMIME</A>.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0000">TIdMessageEncoderMIME.Encode</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007563.html" CLASS="Element59">TIdMessageEncoderMIME</A>, <A HREF="012688.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Implements the Base64 encoding algorithm for the message part encoder.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>procedure</STRONG> Encode(ASrc: TStream; ADest: TStream); <STRONG>override</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+ASrc: TStream</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Stream containing the message part to be encoded.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+ADest: TStream</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Stream to receive the encoded data.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Encode is an overridden procedure in <A HREF="007563.html" CLASS="Element59">TIdMessageEncoderMIME</A> that implements the Base64 encoding algorithm for the RFC message part encoder.<P CLASS="Element10">
+ASrc is a TStream descendant that contains the un-encoded data for the message part. Encode positions the stream to its origin before the encoding algorithm is used to convert the data in ASrc.<P CLASS="Element10">
+ADest is a TStream descendant that will be used to receive the encoded data for the message part.<P CLASS="Element10">
+Encode uses an instance of <A HREF="007312.html" CLASS="Element59">TIdEncoderMIME</A> to perform the physical encoding of data using the Base64 algorithm. Encode calls TIdEncoderMIME.Encode using 57 characters from ASrc per call. 57 characters is the maximum number of un-encoded data bytes that can be represented in the 72 character Base64-encoded line after applying the 3-byte to 4-byte encoding algorithm. All encoded data is written to the TStream descendant ADest.</DIV>
+</DIV>
+<DIV CLASS="Element62">
+<HR>Created with Doc-O-Matic 2 donated to <STRONG><A HREF="http://www.delphi-jedi.org">Project JEDI</A></STRONG>. Commercial license available from the <STRONG><A HREF="http://www.doc-o-matic.com">Doc-O-Matic site</A></STRONG>.</DIV>
+</DIV></BODY></HTML>

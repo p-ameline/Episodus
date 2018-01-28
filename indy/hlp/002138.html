@@ -1,0 +1,75 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+<TITLE>IdCoderUUE.pas</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <META name="GENERATOR" content="Doc-O-Matic">
+    <LINK rel="STYLESHEET" href="default.css" type="text/css">
+
+<SCRIPT LANGUAGE="JavaScript1.2" SRC="scripts.js"></SCRIPT>
+</HEAD>
+<BODY CLASS="Element57">
+<TABLE BORDER="0" BGCOLOR="#AACCFF" WIDTH="100%" CELLSPACING="0" CELLPADDING="0">
+<TR><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element1">
+Indy 9</DIV>
+</TD><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element2">
+<A HREF="content.html" CLASS="Element59">Content</A> | <A HREF="idx.html" CLASS="Element59">Index</A> | <A HREF="symref.html" CLASS="Element59">Reference</A></DIV>
+</TD></TR></TABLE><DIV CLASS="Element58">
+<DIV CLASS="Element5">
+IdCoderUUE.pas</DIV>
+<DIV CLASS="Element7">
+<A HREF="015705.html" CLASS="Element59">See Also</A>, <A HREF="015706.html" CLASS="Element59">Classes</A>, <A HREF="015707.html" CLASS="Element59">Variables</A>, <A HREF="015708.html" CLASS="Element59">Constants</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+<DIV CLASS="Element15">
+Unit: IdCoderUUE.pas</DIV>
+<P CLASS="Element10">
+IdCoderUUE.pas contains classes, types, constants, and variables needed to implement coders that use the UUEncode and UUDecode algorithms.<P CLASS="Element10">
+The UUEncode algorithm is designed to encode binary data into a 7-bit textual representation, called UUEncode, as established by UUCP (Unix-to-Unix Copy Program).<P CLASS="Element10">
+UUEncode, like Base64, is an encoding mechanism designed to represent arbitrary sequences of byte data in a form that need not be humanly readable. UUEncode is often used to <A HREF="006944.html" CLASS="Element59">send</A> EMail attachments in an environment that is not MIME-compliant, and also allows larger files to be divided into multi-part transmissions.<P CLASS="Element10">
+The UUEncode algorithm represents 24-bit groups of input as output strings of 4 encoded characters. Proceeding from left to right, a 24-bit input group is formed by concatenating 3 8-bit input groups. These 24 bits are then treated as 4 concatenated 6-bit groups, each of which is translated into a single digit in the UUEncode alphabet.<P CLASS="Element10">
+UUEncode differs from Base64 encoding by utilizing a different coding table, or alphabet, to represent the encoded output values. The UUEncode Alphabet can represented by the following encodings and values:<P CLASS="Element10">
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12">    Value Encoding  Value Encoding
+    0     `         33    @
+    1     !         34    A
+    2     &quot;         35    B
+    3     #         36    C
+    4     $         37    D
+    5     %         38    E
+    6     &amp;         39    f
+    7     '         40    g
+    8     '         41    h
+    9     (         42    i
+    10    )         43    j
+    11    *         44    k
+    12    +         45    l
+    13    ,         46    m
+    14    -         47    n
+    15    .         48    o
+    16    /         49    p
+    17    0         50    q
+    18    1         51    r
+    19    2         52    s
+    20    3         53    t
+    21    4         54    u
+    22    5         55    v
+    23    6         56    w
+    24    7         57    x
+    25    8         58    y
+    26    9         59    z
+    27    :         60    [
+    28    ;         61    
+    29    &lt;         62    ]
+    30    =         63    ^
+    31    &gt;         64    _
+    32    ?</PRE></DIV>
+</DIV>
+</DIV>
+</DIV>
+<DIV CLASS="Element62">
+<HR>Created with Doc-O-Matic 2 donated to <STRONG><A HREF="http://www.delphi-jedi.org">Project JEDI</A></STRONG>. Commercial license available from the <STRONG><A HREF="http://www.doc-o-matic.com">Doc-O-Matic site</A></STRONG>.</DIV>
+</DIV></BODY></HTML>

@@ -1,0 +1,543 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+<TITLE>TIdPOP3</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <META name="GENERATOR" content="Doc-O-Matic">
+    <LINK rel="STYLESHEET" href="default.css" type="text/css">
+
+<SCRIPT LANGUAGE="JavaScript1.2" SRC="scripts.js"></SCRIPT>
+</HEAD>
+<BODY CLASS="Element57">
+<TABLE BORDER="0" BGCOLOR="#AACCFF" WIDTH="100%" CELLSPACING="0" CELLPADDING="0">
+<TR><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element1">
+Indy 9</DIV>
+</TD><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element2">
+<A HREF="content.html" CLASS="Element59">Content</A> | <A HREF="idx.html" CLASS="Element59">Index</A> | <A HREF="symref.html" CLASS="Element59">Reference</A></DIV>
+</TD></TR></TABLE><DIV CLASS="Element58">
+<DIV CLASS="Element5">
+TIdPOP3</DIV>
+<DIV CLASS="Element7">
+<A HREF="013063.html" CLASS="Element59">Hierarchy</A>, <A HREF="013064.html" CLASS="Element59">Properties</A>, <A HREF="013065.html" CLASS="Element59">Methods</A>, <A HREF="013066.html" CLASS="Element59">Events</A>, <A HREF="013067.html" CLASS="Element59">See Also</A>, <A HREF="002309.html" CLASS="Element59">Unit: IdPOP3</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Implements a POP3 client.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12">TIdPOP3 = <STRONG>class</STRONG>(<A HREF="007546.html" CLASS="Element59">TIdMessageClient</A>)</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Unit</DIV>
+<DIV CLASS="Element69">
+<A HREF="002309.html" CLASS="Element59">IdPOP3</A></DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+TIdPOP3 is a <A HREF="007546.html" CLASS="Element59">TIdMessageClient</A> descendant that provides a client implementation of the Post Office Protocol version 3 (POP3) as described in the Internet Standards document:<P CLASS="Element10">
+<UL>
+<LI><A HREF="http://www.rfc-editor.org/rfc/rfc1939.txt"> RFC 1939 - Post Office Protocol Version 3 </A></UL>
+<P CLASS="Element10">
+TIdPOP3 is used to retrieve E-Mail messages on a mail server and return the messages to the user's computer. TIdPOP3 provides methods and properties that allow a client account to <A HREF="000295.html" CLASS="Element59">connect</A> to a POP3 server, and to retreive various information about the size and contents of a mail box or email message.<P CLASS="Element10">
+TIdPOP3 is not intended to provide extensive manipulation operations of mail on the server; normally, mail is downloaded and then deleted. Use <A HREF="007405.html" CLASS="Element59">TIdIMAP4</A> and <A HREF="007413.html" CLASS="Element59">TIdIMAP4Server</A> when a more advanced (and complex) mail protocol is required.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0000">TIdPOP3.APOP</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007617.html" CLASS="Element59">TIdPOP3</A>, <A HREF="013068.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Indicates that alternate authentication using a 128-bit MD5 hash value is desired.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> APOP: Boolean;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+APOP is a Boolean property and indicates if the <A HREF="007617.html" CLASS="Element59">TIdPOP3</A> client wants to use the alternate authentication method providing secure password exchange over the network. APOP authentication involves the use of a 128-bit <A HREF="007367.html" CLASS="Element59">TIdHashMessageDigest5</A> value calculated from the message-id timestamp and the shared secret that is the password for the client session. APOP authentication can be used when the APOP property contains True and the server implementation supports the capability.<P CLASS="Element10">
+The value in APOP is used in the <A HREF="007617.html#0002" CLASS="Element59">Connect</A> method, and requires that the server include the APOP message-id timestamp required for the APOP authentication exchange. When APOP is True and the server does not support APOP authentication, an <A HREF="000375.html" CLASS="Element59">EIdException</A> will be raised with the <A HREF="006592.html" CLASS="Element59">RSPOP3ServerDoNotSupportAPOP</A> message. When APOP is False, normal <A HREF="007617.html#0011" CLASS="Element59">Username</A> and <A HREF="007617.html#0008" CLASS="Element59">Password</A> authentication is used.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0008">TIdPOP3.Password</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007617.html" CLASS="Element59">TIdPOP3</A>, <A HREF="013069.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Password for the POP3 account.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> Password;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Password is a String property that represents the password used for the POP3 account. <A HREF="007617.html#0011" CLASS="Element59">Username</A> and Password are used in <A HREF="007617.html#0002" CLASS="Element59">Connect</A> to provide account authentication on the POP3 server connection.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0009">TIdPOP3.Port</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007617.html" CLASS="Element59">TIdPOP3</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Port number for the client connection to the POP3 server.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> Port: integer;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Port is an Integer property that represents the port number used for connecting to a POP3 server. Port is published in <A HREF="007617.html" CLASS="Element59">TIdPOP3</A> to allow streaming of the default value used by the POP3 protocol (<A HREF="002619.html" CLASS="Element59">IdPORT_POP3</A>).<P CLASS="Element10">
+Use Host to specifiy the IP address or host name of the POP3 server used in the client connection.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0011">TIdPOP3.Username</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007617.html" CLASS="Element59">TIdPOP3</A>, <A HREF="013070.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+User identitity for the POP3 account.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> Username;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Username is a String property that represents the account identity used for the POP3 account. Username and <A HREF="007617.html#0008" CLASS="Element59">Password</A> are used in <A HREF="007617.html#0002" CLASS="Element59">Connect</A> to provide account authentication on the POP3 server connection.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0001">TIdPOP3.CheckMessages</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007617.html" CLASS="Element59">TIdPOP3</A>, <A HREF="013071.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Gets the number of messages in a mailbox on the POP3 server.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>function</STRONG> CheckMessages: longint;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Return Value</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+LongInt - Number of messages in a mailbox on the POP3 server.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+CheckMessages is a LongInt function that returns the total number of messages currently in a mailbox on the POP3 server. CheckMessages performs the POP3 STAT command to retrieve the current message count from the POP3 server.<P CLASS="Element10">
+CheckMessages will return 0 (zero) if an exception is raised during execution of the method. Otherwise, the return vaslue for the method is set to numeric value reurned in the text portion of LastCmdResult.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0002">TIdPOP3.Connect</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007617.html" CLASS="Element59">TIdPOP3</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Opens a POP3 client connection.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>procedure</STRONG> Connect(<STRONG>const</STRONG> ATimeout: Integer = <A HREF="002932.html" CLASS="Element59">IdTimeoutDefault</A>); <STRONG>override</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+const ATimeout: Integer = IdTimeoutDefault</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Number of milliseconds to wait for a valid connection. Default value is <A HREF="002932.html" CLASS="Element59">IdTimeoutDefault</A>.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Connect is a procedure used to establish a connection to the POP3 server with the address and port number specified in Host and <A HREF="007617.html#0009" CLASS="Element59">Port</A>. Connect calls the inherited Connect method and waits for a valid connection for ATimeout milliseconds prior to sending account information for the connection. <A HREF="007617.html#0011" CLASS="Element59">Username</A> and <A HREF="007617.html#0008" CLASS="Element59">Password</A> must be assigned prior to calling the Connect method.<P CLASS="Element10">
+If an exception occurs during connection or authentication, the <A HREF="007071.html" CLASS="Element59">socket</A> will <A HREF="007617.html#0005" CLASS="Element59">Disconnect</A> and the exception will be re-raised.<P CLASS="Element10">
+Use <A HREF="007617.html#0005" CLASS="Element59">Disconnect</A> to close the POP3 client connection.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0003">TIdPOP3.Create</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007617.html" CLASS="Element59">TIdPOP3</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Constructor for the object instance.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>constructor</STRONG> Create(AOwner: TComponent); <STRONG>override</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+AOwner: TComponent</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Owner of the object instance.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Create is the constructor for the object instance, and relies on the inherited Create method. Create sets the <A HREF="007617.html#0009" CLASS="Element59">Port</A> property to the default value used for the POP3 protocol (<A HREF="002619.html" CLASS="Element59">IdPORT_POP3</A>).</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0004">TIdPOP3.Delete</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007617.html" CLASS="Element59">TIdPOP3</A>, <A HREF="013072.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Marks a message for deletion on the POP3 server.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>function</STRONG> Delete(<STRONG>const</STRONG> MsgNum: Integer): Boolean;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+const MsgNum: Integer</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Message number to be removed.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Return Value</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Boolean - True when the result is wsOK.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Delete is a Boolean function that marks a message on the POP3 server for deletion using the message number specified in MsgNum. If a non-existent message number is used, an exception is raised. Delete uses the POP DELE command to mark the indicated message number for deletion. Messages marked for deletion on the POP3 server will be physically removed when <A HREF="007617.html#0005" CLASS="Element59">Disconnect</A> is called.<P CLASS="Element10">
+Delete returns True when the numeric result for the operation , as indicated by LastCmdResult, contains the value <A HREF="008477.html" CLASS="Element59">wsOk</A>.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0005">TIdPOP3.Disconnect</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007617.html" CLASS="Element59">TIdPOP3</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Closes the <A HREF="007071.html" CLASS="Element59">socket</A> connection to the POP3 server.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>procedure</STRONG> Disconnect; <STRONG>override</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Disconnect is a procedure that closes the client <A HREF="007071.html" CLASS="Element59">socket</A> connection to the POP3 server. All messages marked for deletion on the POP3 server will be physically removed from the server mailbox. Disconnect performs the POP3 QUIT command to close the POP3 protocol session prior to calling the inherited Disconnect method.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0006">TIdPOP3.GetResponse</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007617.html" CLASS="Element59">TIdPOP3</A>, <A HREF="013073.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Provides numeric response codes for POP3 protocol requests.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>function</STRONG> GetResponse(<STRONG>const</STRONG> AAllowedResponses: <STRONG>array</STRONG> <STRONG>of</STRONG> SmallInt): SmallInt; <STRONG>override</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+const AAllowedResponses: array of SmallInt</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Response code or codes expected or allowed in the protocol response.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Return Value</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+SmallInt - Numeric response code for the response.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+GetResponse is an overridden SmallInt function in <A HREF="007617.html" CLASS="Element59">TIdPOP3</A>, and allows the POP3 client implementation to provide numeric response codes in a fashion consistent with other RFC-based protocols.<P CLASS="Element10">
+<STRONG>Note</STRONG>: The POP3 protocol does not provide numeric response codes, but instead uses '+OK' and '-ERR' in protocol response messages. GetResponse is overridden to capture these alphabetic responses, and convert them into the values <A HREF="008477.html" CLASS="Element59">wsOk</A> and <A HREF="008475.html" CLASS="Element59">wsErr</A> which are stored in the numeric portion of the LastCmdResult property.<P CLASS="Element10">
+AAllowedResponses is an Array of SmallInt values that represents response codes expected and/or allowed in the protocol request. GetResponse will raise an <A HREF="000375.html" CLASS="Element59">EIdException</A> with the constant value RSUnrecognizedPOP3ResponseHeader if a response code other than <A HREF="008477.html" CLASS="Element59">wsOk</A> or <A HREF="008475.html" CLASS="Element59">wsErr</A> is received for the request.<P CLASS="Element10">
+GetResponse calls the inherited method CheckResponse using the numeric value in LastCmdResult.NumericCode and AAllowedResponses prior to exiting from the method.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0007">TIdPOP3.KeepAlive</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007617.html" CLASS="Element59">TIdPOP3</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Prevents a connection timeout.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>procedure</STRONG> KeepAlive;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+KeepAlive is a procedure used to insure that the POP3 protocol session remains open and valid. KeepAlive sends the POP3 NOOP command to avoid a session timeout for the POP3 client. <A HREF="007617.html" CLASS="Element59">TIdPOP3</A> can use KeepAlive when performing time consuming operations, such as maintaining mail folders and messages on local file system, after the POP3 session has be started in <A HREF="007617.html#0002" CLASS="Element59">Connect</A>.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="000A">TIdPOP3.Reset</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007617.html" CLASS="Element59">TIdPOP3</A>, <A HREF="013074.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Reset messages marked for deletion.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>function</STRONG> Reset: Boolean;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Return Value</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Boolean - True on success, False on error.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Reset is a Boolean function that clears the deletion flag for any messages that have been marked for deletion. Reset performs the POP3 RSET command to remove the deletion flag for messages on the POP3 server. <STRONG>Note</STRONG>: Some POP3 servers do not support the POP3 RSET command.<P CLASS="Element10">
+The return value for Reset will be True when the numeric result in LastCmdResult contains <A HREF="008477.html" CLASS="Element59">wsOk</A>. If an error occurs, the return value will be False.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="000B">TIdPOP3.Retrieve</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007617.html" CLASS="Element59">TIdPOP3</A>, <A HREF="013075.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Retrieves a message by number.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>function</STRONG> Retrieve(<STRONG>const</STRONG> MsgNum: Integer; AMsg: <A HREF="007544.html" CLASS="Element59">TIdMessage</A>): Boolean;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+const MsgNum: Integer</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Message number to retrieve from the server.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+AMsg: TIdMessage</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Message instance where the values will be stored.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Return Value</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Boolean - True on success.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Retrieve is a Boolean function that retrieves the message with the message number idemtified in MsgNo, and stores the result in a <A HREF="007544.html" CLASS="Element59">TIdMessage</A> component. Retrieve executes the POP3 RETR command, and checks for the wsOK response from the server prior to processing the contents of the message. Retrieve calls ReceiveHeader to load RFC message headers into AMsg, and on success, calls ReceiveBody to load the message body parts into AMsg.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="000C">TIdPOP3.RetrieveHeader</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007617.html" CLASS="Element59">TIdPOP3</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Retrieves headers for a message.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>function</STRONG> RetrieveHeader(<STRONG>const</STRONG> MsgNum: Integer; AMsg: <A HREF="007544.html" CLASS="Element59">TIdMessage</A>): Boolean;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+const MsgNum: Integer</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Message number to be retrieved.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+AMsg: TIdMessage</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Message instance where headers will be stored.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Return Value</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+<STRONG>Boolean</STRONG> - True on success.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+RetrieveHeader is a Boolean function that retrieves the headers of the message number specified in MsgNum and stores the values in the AMsg instance.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="000D">TIdPOP3.RetrieveMailBoxSize</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007617.html" CLASS="Element59">TIdPOP3</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Gets the mailbox size on the POP3 server.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>function</STRONG> RetrieveMailBoxSize: integer;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Return Value</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+<STRONG>Integer</STRONG> - Mailbox size in bytes, or -1 on error.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+RetrieveMailBoxSize is an Integer function that retrieves the total size of the mailbox on the POP server. The value is returned in bytes. RetrieveMailBoxSize will return 0 when the mailbox is empty, or -1 when an exception is raised.<P CLASS="Element10">
+RetrieveMailBoxSize uses the POP3 LIST command to accumulate the total mailbox size from the values returned for individual messages.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="000E">TIdPOP3.RetrieveMsgSize</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007617.html" CLASS="Element59">TIdPOP3</A>, <A HREF="013076.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Gets the size of a message.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>function</STRONG> RetrieveMsgSize(<STRONG>const</STRONG> MsgNum: Integer): Integer;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+const MsgNum: Integer</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Message number to examine.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Return Value</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Integer - Number of bytes in the message.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+RetrieveMsgSize is an Integer function that retrieves the size of the message specified in MsgNum in the POP3 mailbox. The return value for RetrieveMsgSize is expressed in bytes, and may contain -1 if an error occurs wile trying to access the mailbox or the specified message number on the POP3 server.<P CLASS="Element10">
+RetrieveMsgSize executes the POP3 LIST command with the message number identified in MsgNum. RetrieveMsgSize will extract the numeric message size from the text returned in the LastCmdResult property, or -1 when a server or a protocol error is encountered.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="000F">TIdPOP3.RetrieveRaw</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007617.html" CLASS="Element59">TIdPOP3</A>, <A HREF="013077.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Retrieves message headers and body without performing MIME decoding.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>function</STRONG> RetrieveRaw(<STRONG>const</STRONG> MsgNum: Integer; <STRONG>const</STRONG> Dest: TStrings): boolean;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+const MsgNum: Integer</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Message number to be retrieved.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+const Dest: TStrings</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Destination used to store the message in raw format.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Return Value</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+<STRONG>Boolean</STRONG> - True when message retrieval is successful.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+RetrieveRaw is a <STRONG>Boolean</STRONG> function that retrieves POP3 message headers without performing MIME decoding for the header values. RetrieveRaw uses the POP3 RETR command to intitiate message retrieval. Header values are obtained using Capture.<P CLASS="Element10">
+Use <A HREF="007617.html#000C" CLASS="Element59">RetrieveHeader</A> to get the parsed message headers and store the result in a <A HREF="007544.html" CLASS="Element59">TIdMessage</A> instance. Use <A HREF="007617.html#000B" CLASS="Element59">Retrieve</A> to get an entire message and store the result in a <A HREF="007544.html" CLASS="Element59">TIdMessage</A> instance.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0010">TIdPOP3.UIDL</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007617.html" CLASS="Element59">TIdPOP3</A>, <A HREF="013078.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Retieves the unique-id listing for one or all messages in the mailbox.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>function</STRONG> UIDL(<STRONG>const</STRONG> ADest: TStrings; <STRONG>const</STRONG> AMsgNum: Integer = -1): Boolean;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+const ADest: TStrings</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Container for UID values in the listing.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+const AMsgNum: Integer = -1</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+The message number desired, or all messages when the value is -1. Default value is -1.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Return Value</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Boolean - True on success.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+UIDL is a Boolean function used to retrieve the unique-id listing for one or all messages in the POP3 mailbox. When AMsgNum is specified, UIDL will request the UIDL for the specified message number. Otherwise, all message numbers in the mailbox are requested from the POP3 server.<P CLASS="Element10">
+UIDL calls SendCmd with the POP3 UIDL command and the optional message number. When the response code from SendCmd is <A HREF="008477.html" CLASS="Element59">wsOk</A>, the response values are stored in Dest. Value from the POP3 UIDL command consist of the message number folowed by a space character and the unique-id for the message. The unique-id of a message is an arbitrary server-determined string, consisting of one to 70 characters in the range 0x21 to 0x7E, and uniquely identifies a message within a POP3 mailbox. Messages marked as deleted are not included in a UIDL listing.</DIV>
+</DIV>
+<DIV CLASS="Element62">
+<HR>Created with Doc-O-Matic 2 donated to <STRONG><A HREF="http://www.delphi-jedi.org">Project JEDI</A></STRONG>. Commercial license available from the <STRONG><A HREF="http://www.doc-o-matic.com">Doc-O-Matic site</A></STRONG>.</DIV>
+</DIV></BODY></HTML>

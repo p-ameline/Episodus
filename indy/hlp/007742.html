@@ -1,0 +1,450 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+<TITLE>TIdStackLinux</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <META name="GENERATOR" content="Doc-O-Matic">
+    <LINK rel="STYLESHEET" href="default.css" type="text/css">
+
+<SCRIPT LANGUAGE="JavaScript1.2" SRC="scripts.js"></SCRIPT>
+</HEAD>
+<BODY CLASS="Element57">
+<TABLE BORDER="0" BGCOLOR="#AACCFF" WIDTH="100%" CELLSPACING="0" CELLPADDING="0">
+<TR><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element1">
+Indy 9</DIV>
+</TD><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element2">
+<A HREF="content.html" CLASS="Element59">Content</A> | <A HREF="idx.html" CLASS="Element59">Index</A> | <A HREF="symref.html" CLASS="Element59">Reference</A></DIV>
+</TD></TR></TABLE><DIV CLASS="Element58">
+<DIV CLASS="Element5">
+TIdStackLinux</DIV>
+<DIV CLASS="Element7">
+<A HREF="013920.html" CLASS="Element59">Hierarchy</A>, <A HREF="013921.html" CLASS="Element59">Properties</A>, <A HREF="013922.html" CLASS="Element59">Methods</A>, <A HREF="013923.html" CLASS="Element59">See Also</A>, <A HREF="002908.html" CLASS="Element59">Unit: IdStackLinux</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Implements a protocol stack class on the Linux platform.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12">TIdStackLinux = <STRONG>class</STRONG>(<A HREF="007740.html" CLASS="Element59">TIdStack</A>)</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Unit</DIV>
+<DIV CLASS="Element69">
+<A HREF="002908.html" CLASS="Element59">IdStackLinux</A></DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+TIdStackLinux implements the common architecture that encapsulates the platform-specific API calls needed for a protocol stack class on the Linux platform.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0000">TIdStackLinux.TInAddrToString</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007742.html" CLASS="Element59">TIdStackLinux</A></DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>function</STRONG> TInAddrToString(<STRONG>var</STRONG> AInAddr): <STRONG>string</STRONG>; <STRONG>override</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+TInAddrToString</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0001">TIdStackLinux.TranslateStringToTInAddr</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007742.html" CLASS="Element59">TIdStackLinux</A></DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>procedure</STRONG> TranslateStringToTInAddr(AIP: <STRONG>string</STRONG>; <STRONG>var</STRONG> AInAddr); <STRONG>override</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+TranslateStringToTInAddr</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0002">TIdStackLinux.WSAccept</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007742.html" CLASS="Element59">TIdStackLinux</A></DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>function</STRONG> WSAccept(ASocket: <A HREF="007743.html" CLASS="Element59">TIdStackSocketHandle</A>; <STRONG>var</STRONG> VIP: <STRONG>string</STRONG>; <STRONG>var</STRONG> VPort: Integer): <A HREF="007743.html" CLASS="Element59">TIdStackSocketHandle</A>; <STRONG>override</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+WSAccept</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0003">TIdStackLinux.WSBind</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007742.html" CLASS="Element59">TIdStackLinux</A></DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>function</STRONG> WSBind(ASocket: <A HREF="007743.html" CLASS="Element59">TIdStackSocketHandle</A>; <STRONG>const</STRONG> AFamily: Integer; <STRONG>const</STRONG> AIP: <STRONG>string</STRONG>; <STRONG>const</STRONG> APort: Integer): Integer; <STRONG>override</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+WSBind</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0004">TIdStackLinux.WSCloseSocket</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007742.html" CLASS="Element59">TIdStackLinux</A></DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>function</STRONG> WSCloseSocket(ASocket: <A HREF="007743.html" CLASS="Element59">TIdStackSocketHandle</A>): Integer; <STRONG>override</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+WSCloseSocket</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0005">TIdStackLinux.WSConnect</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007742.html" CLASS="Element59">TIdStackLinux</A></DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>function</STRONG> WSConnect(<STRONG>const</STRONG> ASocket: <A HREF="007743.html" CLASS="Element59">TIdStackSocketHandle</A>; <STRONG>const</STRONG> AFamily: Integer; <STRONG>const</STRONG> AIP: <STRONG>string</STRONG>; <STRONG>const</STRONG> APort: Integer): Integer; <STRONG>override</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+WSConnect</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0006">TIdStackLinux.WSGetHostByAddr</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007742.html" CLASS="Element59">TIdStackLinux</A></DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>function</STRONG> WSGetHostByAddr(<STRONG>const</STRONG> AAddress: <STRONG>string</STRONG>): <STRONG>string</STRONG>; <STRONG>override</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+WSGetHostByAddr</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0007">TIdStackLinux.WSGetHostByName</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007742.html" CLASS="Element59">TIdStackLinux</A></DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>function</STRONG> WSGetHostByName(<STRONG>const</STRONG> AHostName: <STRONG>string</STRONG>): <STRONG>string</STRONG>; <STRONG>override</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+WSGetHostByName</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0008">TIdStackLinux.WSGetHostName</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007742.html" CLASS="Element59">TIdStackLinux</A></DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>function</STRONG> WSGetHostName: <STRONG>string</STRONG>; <STRONG>override</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+WSGetHostName</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0009">TIdStackLinux.WSGetLastError</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007742.html" CLASS="Element59">TIdStackLinux</A></DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>function</STRONG> WSGetLastError: Integer; <STRONG>override</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+WSGetLastError</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="000A">TIdStackLinux.WSGetPeerName</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007742.html" CLASS="Element59">TIdStackLinux</A></DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>procedure</STRONG> WSGetPeerName(ASocket: <A HREF="007743.html" CLASS="Element59">TIdStackSocketHandle</A>; <STRONG>var</STRONG> VFamily: Integer; <STRONG>var</STRONG> VIP: <STRONG>string</STRONG>; <STRONG>var</STRONG> VPort: Integer); <STRONG>override</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+WSGetPeerName</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="000B">TIdStackLinux.WSGetServByName</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007742.html" CLASS="Element59">TIdStackLinux</A></DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>function</STRONG> WSGetServByName(<STRONG>const</STRONG> AServiceName: <STRONG>string</STRONG>): Integer; <STRONG>override</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+WSGetServByName</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="000C">TIdStackLinux.WSGetServByPort</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007742.html" CLASS="Element59">TIdStackLinux</A></DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>function</STRONG> WSGetServByPort(<STRONG>const</STRONG> APortNumber: Integer): TStrings; <STRONG>override</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+WSGetServByPort</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="000D">TIdStackLinux.WSGetSockName</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007742.html" CLASS="Element59">TIdStackLinux</A></DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>procedure</STRONG> WSGetSockName(ASocket: <A HREF="007743.html" CLASS="Element59">TIdStackSocketHandle</A>; <STRONG>var</STRONG> VFamily: Integer; <STRONG>var</STRONG> VIP: <STRONG>string</STRONG>; <STRONG>var</STRONG> VPort: Integer); <STRONG>override</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+WSGetSockName</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="000E">TIdStackLinux.WSGetSockOpt</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007742.html" CLASS="Element59">TIdStackLinux</A></DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>function</STRONG> WSGetSockOpt(ASocket: <A HREF="007743.html" CLASS="Element59">TIdStackSocketHandle</A>; Alevel: Integer; AOptname: Integer; AOptval: PChar; <STRONG>var</STRONG> AOptlen: Integer): Integer; <STRONG>override</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+WSGetSockOpt</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="000F">TIdStackLinux.WSHToNL</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007742.html" CLASS="Element59">TIdStackLinux</A></DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>function</STRONG> WSHToNL(AHostLong: LongWord): LongWord; <STRONG>override</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+WSHToNL</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0010">TIdStackLinux.WSHToNs</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007742.html" CLASS="Element59">TIdStackLinux</A></DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>function</STRONG> WSHToNs(AHostShort: Word): Word; <STRONG>override</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+WSHToNs</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0011">TIdStackLinux.WSListen</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007742.html" CLASS="Element59">TIdStackLinux</A></DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>function</STRONG> WSListen(ASocket: <A HREF="007743.html" CLASS="Element59">TIdStackSocketHandle</A>; ABackLog: Integer): Integer; <STRONG>override</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+WSListen</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0012">TIdStackLinux.WSNToHL</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007742.html" CLASS="Element59">TIdStackLinux</A></DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>function</STRONG> WSNToHL(ANetLong: LongWord): LongWord; <STRONG>override</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+WSNToHL</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0013">TIdStackLinux.WSNToHs</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007742.html" CLASS="Element59">TIdStackLinux</A></DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>function</STRONG> WSNToHs(ANetShort: Word): Word; <STRONG>override</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+WSNToHs</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0014">TIdStackLinux.WSRecv</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007742.html" CLASS="Element59">TIdStackLinux</A></DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>function</STRONG> WSRecv(ASocket: <A HREF="007743.html" CLASS="Element59">TIdStackSocketHandle</A>; <STRONG>var</STRONG> ABuffer; <STRONG>const</STRONG> ABufferLength: Integer; <STRONG>const</STRONG> AFlags: Integer): integer; <STRONG>override</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+WSRecv</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0015">TIdStackLinux.WSRecvFrom</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007742.html" CLASS="Element59">TIdStackLinux</A></DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>function</STRONG> WSRecvFrom(<STRONG>const</STRONG> ASocket: <A HREF="007743.html" CLASS="Element59">TIdStackSocketHandle</A>; <STRONG>var</STRONG> ABuffer; <STRONG>const</STRONG> ALength: Integer; <STRONG>const</STRONG> AFlags: Integer; <STRONG>var</STRONG> VIP: <STRONG>string</STRONG>; <STRONG>var</STRONG> VPort: Integer): Integer; <STRONG>override</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+WSRecvFrom</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0016">TIdStackLinux.WSSelect</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007742.html" CLASS="Element59">TIdStackLinux</A></DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>function</STRONG> WSSelect(ARead: TList; AWrite: TList; AErrors: TList; ATimeout: Integer): Integer; <STRONG>override</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+WSSelect</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0017">TIdStackLinux.WSSend</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007742.html" CLASS="Element59">TIdStackLinux</A></DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>function</STRONG> WSSend(ASocket: <A HREF="007743.html" CLASS="Element59">TIdStackSocketHandle</A>; <STRONG>var</STRONG> ABuffer; <STRONG>const</STRONG> ABufferLength: Integer; <STRONG>const</STRONG> AFlags: Integer): Integer; <STRONG>override</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+WSSend</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0018">TIdStackLinux.WSSendTo</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007742.html" CLASS="Element59">TIdStackLinux</A></DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>function</STRONG> WSSendTo(ASocket: <A HREF="007743.html" CLASS="Element59">TIdStackSocketHandle</A>; <STRONG>var</STRONG> ABuffer; <STRONG>const</STRONG> ABufferLength: Integer; <STRONG>const</STRONG> AFlags: Integer; <STRONG>const</STRONG> AIP: <STRONG>string</STRONG>; <STRONG>const</STRONG> APort: integer): Integer; <STRONG>override</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+WSSendTo</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0019">TIdStackLinux.WSSetSockOpt</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007742.html" CLASS="Element59">TIdStackLinux</A></DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>function</STRONG> WSSetSockOpt(ASocket: <A HREF="007743.html" CLASS="Element59">TIdStackSocketHandle</A>; ALevel: Integer; AOptName: Integer; AOptVal: PChar; AOptLen: Integer): Integer; <STRONG>override</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+WSSetSockOpt</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="001A">TIdStackLinux.WSShutdown</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007742.html" CLASS="Element59">TIdStackLinux</A></DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>function</STRONG> WSShutdown(ASocket: <A HREF="007743.html" CLASS="Element59">TIdStackSocketHandle</A>; AHow: Integer): Integer; <STRONG>override</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+WSShutdown</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="001B">TIdStackLinux.WSSocket</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007742.html" CLASS="Element59">TIdStackLinux</A></DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>function</STRONG> WSSocket(AFamily: Integer; AStruct: Integer; AProtocol: Integer): <A HREF="007743.html" CLASS="Element59">TIdStackSocketHandle</A>; <STRONG>override</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+WSSocket</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="001C">TIdStackLinux.WSTranslateSocketErrorMsg</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007742.html" CLASS="Element59">TIdStackLinux</A></DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>function</STRONG> WSTranslateSocketErrorMsg(<STRONG>const</STRONG> AErr: integer): <STRONG>string</STRONG>; <STRONG>override</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+WSTranslateSocketErrorMsg</DIV>
+</DIV>
+<DIV CLASS="Element62">
+<HR>Created with Doc-O-Matic 2 donated to <STRONG><A HREF="http://www.delphi-jedi.org">Project JEDI</A></STRONG>. Commercial license available from the <STRONG><A HREF="http://www.doc-o-matic.com">Doc-O-Matic site</A></STRONG>.</DIV>
+</DIV></BODY></HTML>

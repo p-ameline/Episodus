@@ -1,0 +1,128 @@
+//----------------------------------------------------------------------------// ObjectWindows
+// Copyright (c) 1992, 1998 by Borland International, All Rights Reserved
+//
+//$Revision: 1.2 $
+//$Author: pameline $
+//$Date: 2009/07/04 08:45:42 $
+//
+// Resources for class TInputDialog.
+//----------------------------------------------------------------------------
+
+#include "nautilus\nautilus.rh"
+#include <owl/window.rh>
+
+#if defined(RC_INVOKED)
+
+STRINGTABLE
+{
+ CM_ABOUT, "Ouvre une boite de dialogue d'information"
+ CM_CHEMISE, "Ouverture du dossier du patient"
+ CM_NEWDOC, "Changement d'utilisateur"
+ CM_NEWPAT, "Changement de patient"
+ CM_BUREAU, "Fermeture du patient"
+ CM_SYNCHRO_IMP_THIS_PAT, "Mise à jour du patient depuis Ligne de vie"
+ CM_SYNCHRO_EXP_THIS_PAT, "Synchronisation du patient vers Ligne de vie"
+ // CM_NEWCR, "Elaboration d'un nouveau compte rendu"
+ CM_NOEDIT, "No document to edit"
+ CM_NEWMAGIC, "Elaboration d'une nouvelle feuille magique"
+ CM_NEWTTXT, "Appel du traitement de texte"
+ CM_NEWTMPL, "Appel du traitement de texte word"
+ CM_IMPRIME, "Impression du document en cours"
+ CM_ENREGISTRE, "Sauvegarde du document en cours"
+ CM_LDV, "Ligne de vie"
+ CM_LDV_DRUGS, "Médicaments"
+ CM_PROCESS, "Procédures"
+ CM_LDV_GOALS, "Objectifs de santé"
+ CM_ADMIN, "Fiche administrative"
+ CM_PROMET_MESSAGE, "Ajout des données au message"
+ CM_PROMET_SEND, "Envoi des données au serveur Prometheus"
+ CM_DIOGENE, "Préparation des données diogène"
+ CM_LDV_ZOOMIN, "Zoom sur la Ligne de vie"
+ CM_LDV_ZOOMOUT, "Elargir sur la Ligne de vie"
+}
+
+IDM_EPISOD MENU
+{
+  MENUITEM "&Contexte",       IDC_EPISOD_CONTEXT
+  MENUITEM "&Format",         IDC_EPISOD_FORMAT
+  MENUITEM "&Unité",          IDC_EPISOD_UNIT
+  MENUITEM SEPARATOR
+  MENUITEM "C&lassification", IDC_EPISOD_CLASSIF
+  MENUITEM SEPARATOR
+  POPUP "Type d'&analyse"
+  {
+    MENUITEM "&Position",               IDC_EPISOD_AN_P
+    MENUITEM "&Ordre d'énumération",    IDC_EPISOD_AN_O
+    MENUITEM "Position &et ordre",      IDC_EPISOD_AN_PO
+    MENUITEM "&Libellé",                IDC_EPISOD_AN_L
+    MENUITEM SEPARATOR
+    MENUITEM "&Relatif - position",     IDC_EPISOD_AN_RP
+    MENUITEM "&Relatif - ordre",        IDC_EPISOD_AN_RO
+    MENUITEM SEPARATOR
+    MENUITEM "Element &ignoré",         IDC_EPISOD_AN_N
+  }
+  MENUITEM SEPARATOR
+  MENUITEM "Créer un sous-&modèle", IDC_EPISOD_SUB
+}
+
+/*
+IDA_RICHEDIT ACCELERATORS
+{
+ "^B", CM_FORMATBOLD,      ASCII
+ "^I", CM_FORMATITALIC,    ASCII
+ "^U", CM_FORMATUNDERLINE, ASCII
+ "^S", CM_ENREGISTRE,      ASCII
+ "^P", CM_IMPRIME,         ASCII
+}
+*/
+
+IDA_MDICMNDS ACCELERATORS
+{
+ VK_F1, CM_HELP, VIRTKEY
+ VK_F2, CM_LDV, VIRTKEY
+ VK_F3, CM_HEALTHTEAM_LIST, VIRTKEY
+ VK_F4, CM_MAILBOX, VIRTKEY
+ VK_F5, CM_LDV_DRUGS, VIRTKEY
+ VK_F6, CM_LDV_GOALS, VIRTKEY
+ VK_F7, CM_ADMIN, VIRTKEY
+ VK_F8, CM_PREDI, VIRTKEY
+ VK_F9, CM_BBK, VIRTKEY
+ // "H", ID_VIEW_HEADINGS, VIRTKEY, CONTROL
+}
+
+/*
+LDV_ACCEL ACCELERATORS
+{ "^Z", CM_LDV_ZOOMIN "^E", CM_LDV_ZOOMOUT
+ "^P", IDC_NEWPREOCCUP
+ "^T", CM_DRUG_NEW
+ "^R", CM_APPOINTMENT
+}
+*/
+
+IDA_ADMIN ACCELERATORS
+{
+ VK_F1, CM_HELP, VIRTKEY
+ VK_F2, CM_LDV, VIRTKEY
+ VK_F3, CM_HEALTHTEAM_LIST, VIRTKEY
+ VK_F4, CM_MAILBOX, VIRTKEY
+ VK_F5, CM_LDV_DRUGS, VIRTKEY
+ VK_F6, CM_LDV_GOALS, VIRTKEY
+ VK_F7, CM_ADMIN, VIRTKEY
+ VK_F8, CM_PREDI, VIRTKEY
+ VK_F9, CM_BBK, VIRTKEY
+}
+
+DRUGS_ACCEL ACCELERATORS
+{
+ "^T", CM_DRUG_NEW,
+ "^R", CM_REFERENTIAL,
+}
+
+REFVIEW_ACCEL ACCELERATORS
+{
+ "^S", CM_ENREGISTRE
+ "^P", CM_IMPRIME
+}
+
+#endif  // defined(RC_INVOKED)
+

@@ -1,0 +1,73 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+<TITLE>TIdInAddr</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <META name="GENERATOR" content="Doc-O-Matic">
+    <LINK rel="STYLESHEET" href="default.css" type="text/css">
+
+<SCRIPT LANGUAGE="JavaScript1.2" SRC="scripts.js"></SCRIPT>
+</HEAD>
+<BODY CLASS="Element57">
+<TABLE BORDER="0" BGCOLOR="#AACCFF" WIDTH="100%" CELLSPACING="0" CELLPADDING="0">
+<TR><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element1">
+Indy 9</DIV>
+</TD><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element2">
+<A HREF="content.html" CLASS="Element59">Content</A> | <A HREF="idx.html" CLASS="Element59">Index</A> | <A HREF="symref.html" CLASS="Element59">Reference</A></DIV>
+</TD></TR></TABLE><DIV CLASS="Element58">
+<DIV CLASS="Element5">
+TIdInAddr</DIV>
+<DIV CLASS="Element7">
+<A HREF="002906.html" CLASS="Element59">Unit: IdStack</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Represents an IP address for protocol stack functions.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12">TIdInAddr = <STRONG>record</STRONG>
+  <STRONG>case</STRONG> integer <STRONG>of</STRONG>
+    0: (S_un_b: <A HREF="007813.html" CLASS="Element59">TIdSunB</A>;);
+    1: (S_un_w: <A HREF="007814.html" CLASS="Element59">TIdSunW</A>;);
+    2: (S_addr: longword;);
+  <STRONG>end</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Unit</DIV>
+<DIV CLASS="Element69">
+<A HREF="002906.html" CLASS="Element59">IdStack</A></DIV>
+<DIV CLASS="Element14">
+Members</DIV>
+<DIV CLASS="Element20">
+S_un_b: TIdSunB;</DIV>
+<DIV CLASS="Element22">
+<DIV CLASS="Element21">
+Member variable.</DIV>
+</DIV>
+<DIV CLASS="Element20">
+S_un_w: TIdSunW;</DIV>
+<DIV CLASS="Element22">
+<DIV CLASS="Element21">
+Member variable.</DIV>
+</DIV>
+<DIV CLASS="Element20">
+S_addr: longword;</DIV>
+<DIV CLASS="Element22">
+<DIV CLASS="Element21">
+Member variable.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+TIdInAddr is a variant record type used to represent an IP address in a form required by low-level <A HREF="007071.html" CLASS="Element59">socket</A> functions. TIdInAddr provides a flexible method for accessing the differing representations of the 32-bit IP address.<P CLASS="Element10">
+S_un_b is a <A HREF="007813.html" CLASS="Element59">TIdSunB</A> member that represents the IP address as 4 Byte values.<P CLASS="Element10">
+S_un_w is a <A HREF="007814.html" CLASS="Element59">TIdSunW</A> member that represents the IP address as 2 Word values.<P CLASS="Element10">
+S_addr is a LongWord member that represents the 32-bit IP address.<P CLASS="Element10">
+TIdInAddr is used internally in Indy.</DIV>
+</DIV>
+<DIV CLASS="Element62">
+<HR>Created with Doc-O-Matic 2 donated to <STRONG><A HREF="http://www.delphi-jedi.org">Project JEDI</A></STRONG>. Commercial license available from the <STRONG><A HREF="http://www.doc-o-matic.com">Doc-O-Matic site</A></STRONG>.</DIV>
+</DIV></BODY></HTML>

@@ -1,0 +1,434 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+<TITLE>TIdNetworkCalculator</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <META name="GENERATOR" content="Doc-O-Matic">
+    <LINK rel="STYLESHEET" href="default.css" type="text/css">
+
+<SCRIPT LANGUAGE="JavaScript1.2" SRC="scripts.js"></SCRIPT>
+</HEAD>
+<BODY CLASS="Element57">
+<TABLE BORDER="0" BGCOLOR="#AACCFF" WIDTH="100%" CELLSPACING="0" CELLPADDING="0">
+<TR><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element1">
+Indy 9</DIV>
+</TD><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element2">
+<A HREF="content.html" CLASS="Element59">Content</A> | <A HREF="idx.html" CLASS="Element59">Index</A> | <A HREF="symref.html" CLASS="Element59">Reference</A></DIV>
+</TD></TR></TABLE><DIV CLASS="Element58">
+<DIV CLASS="Element5">
+TIdNetworkCalculator</DIV>
+<DIV CLASS="Element7">
+<A HREF="012861.html" CLASS="Element59">Hierarchy</A>, <A HREF="012862.html" CLASS="Element59">Properties</A>, <A HREF="012863.html" CLASS="Element59">Methods</A>, <A HREF="012864.html" CLASS="Element59">See Also</A>, <A HREF="002304.html" CLASS="Element59">Unit: IdNetworkCalculator</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Implements an IP address calculator.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12">TIdNetworkCalculator = <STRONG>class</STRONG>(<A HREF="007213.html" CLASS="Element59">TIdBaseComponent</A>)</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Unit</DIV>
+<DIV CLASS="Element69">
+<A HREF="002304.html" CLASS="Element59">IdNetworkCalculator</A></DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+TIdNetworkCalculator is a component that can be used to calculate the validity of a network address, or calculate a list of valid network addresses.<P CLASS="Element10">
+The 32-bit IP address used by TIdNetworkCalculator is based on the network address scheme described in the Internet Standards document RFC 1365 - An IP Address Extension Proposal (http://www.rfc-editor.org/rfc/rfc1365.txt)<P CLASS="Element10">
+Assign values to the properties <A HREF="007582.html#0008" CLASS="Element59">NetworkClass</A>, <A HREF="007582.html#0007" CLASS="Element59">NetworkAddress</A>, and <A HREF="007582.html#000A" CLASS="Element59">NetworkMask</A> to allow the component to validate the IP address desired. You can also use <A HREF="007582.html#0004" CLASS="Element59">IsAddressInNetwork</A> to determine if a specific network address is valid based on the <A HREF="007582.html#000A" CLASS="Element59">NetworkMask</A> settings. Use <A HREF="007582.html#0006" CLASS="Element59">ListIP</A> to view a list of IP addresses accessible over a network having the given network address and network mask.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0005">TIdNetworkCalculator.IsAddressRoutable</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007582.html" CLASS="Element59">TIdNetworkCalculator</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Indicates if the network address is a routable public IP address.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> IsAddressRoutable: Boolean;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Return Value</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Boolean - True when the network address is a public IP address.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+IsAddressRoutable is a read-only Boolean property that indicates if the value in <A HREF="007582.html#0007" CLASS="Element59">NetworkAddress</A> represents an internet address that can be passed to the public internet. IsAddressRoutable compares the Byte values in <A HREF="007582.html#0007" CLASS="Element59">NetworkAddress</A> to insure that the address does <STRONG>not</STRONG> reside in the IANA-assigned Private Address Space, including the following IP Address blocks:<P CLASS="Element10">
+<UL>
+<LI>10.0.0.0 - 10.255.255.255<P CLASS="Element10">
+<LI>172.16.0.0 - 172.31.255.255<P CLASS="Element10">
+<LI>192.168.0.0 - 192.168.255.255</UL>
+<P CLASS="Element10">
+The Private Address Space allows an organization to decide the use of IP addresses without any coordination with IANA or an Internet registry. Addresses within the Private Address Space will only be unique within the enterprise, or the set of enterprises which choose to cooperate over this space so they may communicate with each other in their own private internet. As a result, these network address cannot be routed to the public internet.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0006">TIdNetworkCalculator.ListIP</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007582.html" CLASS="Element59">TIdNetworkCalculator</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Represents the list of valid IP addresses for the network.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> ListIP: TStrings;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+ListIP is a read-only <STRONG>TStrings</STRONG> property that represents the list of valid IP addresses for the current network settings. IP addresses in the list are in &quot;dotted-decimal&quot; form, like <STRONG>129.71.2.4</STRONG>.<P CLASS="Element10">
+ListIP is automatically populated when values are read from the property and the list does not contain any entries, or by the OnNetAddressChange and OnNetMaskChange event handlers. FillIPLIst is used to populate the strings in ListIP.<P CLASS="Element10">
+<STRONG>Note</STRONG>: ListIP will <STRONG>not</STRONG> contain IP addresses in the IDE, or when the component state is <STRONG>csDesigning</STRONG>, if the length of the list from <A HREF="007582.html#000C" CLASS="Element59">NumIP</A> will exceed 1024 entries. This is done to prevent a long loop where the IDE would appear to be locked.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0007">TIdNetworkCalculator.NetworkAddress</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007582.html" CLASS="Element59">TIdNetworkCalculator</A>, <A HREF="012865.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Specifies a local address on a network.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> NetworkAddress: <A HREF="007917.html" CLASS="Element59">TIpProperty</A>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+NetworkAddress is a TIPProperty property that identifies the local address for a computer on the network. NetworkAddress allows the local address to be retrieved and assigned using a variety of representations of the 32-bit IP address, as permitted by TIPProperty.<P CLASS="Element10">
+NetworkAddress is used in conjunction with <A HREF="007582.html#000A" CLASS="Element59">NetworkMask</A> to determine the <A HREF="007582.html#0008" CLASS="Element59">NetworkClass</A> for the complete network address. The OnNetAddressChange event handler is triggered when the value in NetworkAddress is modified.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0008">TIdNetworkCalculator.NetworkClass</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007582.html" CLASS="Element59">TIdNetworkCalculator</A>, <A HREF="012866.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Specifies the network class for the current network address.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> NetworkClass: <A HREF="007957.html" CLASS="Element59">TNetworkClass</A>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+NetworkClass is a read-only <A HREF="007957.html" CLASS="Element59">TNetworkClass</A> property that identifies the network class for the settings in <A HREF="007582.html#0007" CLASS="Element59">NetworkAddress</A> and <A HREF="007582.html#000A" CLASS="Element59">NetworkMask</A>. NetworkClass is automatically updated in the OnNetAddressChange event handler when the value of <A HREF="007582.html#0007" CLASS="Element59">NetworkAddress</A> is updated.<P CLASS="Element10">
+Values for NetworkClass correspond to the enumerated values in <A HREF="007957.html" CLASS="Element59">TNetworkClass</A>, and include the following:<P CLASS="Element10">
+<UL>
+<LI>ID_NET_CLASS_A - Class A<P CLASS="Element10">
+<LI>ID_NET_CLASS_B - Class B<P CLASS="Element10">
+<LI>ID_NET_CLASS_C - Class C<P CLASS="Element10">
+<LI>ID_NET_CLASS_D - Class D<P CLASS="Element10">
+<LI>ID_NET_CLASS_E - Class E</UL>
+</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0009">TIdNetworkCalculator.NetworkClassAsString</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007582.html" CLASS="Element59">TIdNetworkCalculator</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Returns the text representation of the network class.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> NetworkClassAsString: <STRONG>String</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Return Value</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+String - Text representation of the network class.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+NetworkClassAsString is a read-only String property that returns the character representation for the value in <A HREF="007582.html#0008" CLASS="Element59">NetworkClass</A>. Values in <A HREF="007582.html#0008" CLASS="Element59">NetworkClass</A> correspond to the enumerated values in <A HREF="007957.html" CLASS="Element59">TNetworkClass</A>, and include the following:<P CLASS="Element10">
+<UL>
+<LI>ID_NET_CLASS_A - Class 'A'<P CLASS="Element10">
+<LI>ID_NET_CLASS_B - Class 'B'<P CLASS="Element10">
+<LI>ID_NET_CLASS_C - Class 'C'<P CLASS="Element10">
+<LI>ID_NET_CLASS_D - Class 'D'<P CLASS="Element10">
+<LI>ID_NET_CLASS_E - Class 'E'</UL>
+</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="000A">TIdNetworkCalculator.NetworkMask</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007582.html" CLASS="Element59">TIdNetworkCalculator</A>, <A HREF="012867.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Specifies the network address mask for the current network settings.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> NetworkMask: <A HREF="007917.html" CLASS="Element59">TIpProperty</A>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+NetworkMask is a <A HREF="007917.html" CLASS="Element59">TIpProperty</A> that identifies the network address mask for computers on the network. NetworkMask is used in determining valid IP address for local computers on the network and the network number used for routing and gateway applications.<P CLASS="Element10">
+NetworkMask is used in conjunction with <A HREF="007582.html#0007" CLASS="Element59">NetworkAddress</A> to determine the <A HREF="007582.html#0008" CLASS="Element59">NetworkClass</A> for the complete network address. <A HREF="007582.html#000B" CLASS="Element59">NetworkMaskLength</A> identifies the number of available network address based on NetworkMask.<P CLASS="Element10">
+The OnNetMaskChange event handler is triggered when the value in NetworkMask is modified.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="000B">TIdNetworkCalculator.NetworkMaskLength</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007582.html" CLASS="Element59">TIdNetworkCalculator</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Specifies the number of available network addresses for the current network.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> NetworkMaskLength: cardinal;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+NetworkMaskLength is a <STRONG>Cardinal</STRONG> property that identifies the number of available network addresses for the network based on the value of <A HREF="007582.html#000A" CLASS="Element59">NetworkMask</A>. The default value for NetworkMaskLength is <A HREF="001632.html" CLASS="Element59">ID_NC_MASK_LENGTH</A>, as assigned in <A HREF="007582.html#0000" CLASS="Element59">Create</A>.<P CLASS="Element10">
+NetworkMaskLength is automatically recalculated in the OnNetMaskChange event handler following a change in the value of <A HREF="007582.html#000A" CLASS="Element59">NetworkMask</A>.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="000D">TIdNetworkCalculator.OnChange</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007582.html" CLASS="Element59">TIdNetworkCalculator</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Specifies the event handler for changes to network address properties.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> OnChange: TNotifyEvent;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+OnChange is a <STRONG>TNotifyEvent</STRONG> property that specifies the event handler for changes to network address properties. OnChange is triggered from both the OnNetAddressChange and OnNetMaskChange event handlers following a change to the values of either property.<P CLASS="Element10">
+Use OnChange to notify the application of changes in the <A HREF="007582.html" CLASS="Element59">TIdNetworkCalculator</A> network address properties. Assign an OnChange event handler to respond to the event notification.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="000E">TIdNetworkCalculator.OnGenIPList</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007582.html" CLASS="Element59">TIdNetworkCalculator</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Specifies the event handler for updates to <A HREF="007582.html#0006" CLASS="Element59">ListIP</A>.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> OnGenIPList: TNotifyEvent;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+OnGenIPList is a <STRONG>TNotifyEvent</STRONG> property that specifies the event handler for changes to IP address in <A HREF="007582.html#0006" CLASS="Element59">ListIP</A>.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Todo</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+OnGenIPList is triggered when...<P CLASS="Element10">
+Use OnGenIPList to notify the application that IP addresses in <A HREF="007582.html#0006" CLASS="Element59">ListIP</A> have been regenerated after a change to network address settings. Assign an OnGenIPList event handler to respond to the event notification.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0000">TIdNetworkCalculator.Create</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007582.html" CLASS="Element59">TIdNetworkCalculator</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Creates and initializes the class instance.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>constructor</STRONG> Create(AOwner: TComponent); <STRONG>override</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+AOwner: TComponent</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Owner of the object instance.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Create is the constructor for the class instance, and is responsible for properly initializing properties and private variables.<P CLASS="Element10">
+Create relies on the inherited Create constructor, and also performs the following:<P CLASS="Element10">
+<UL>
+<LI>Creates the <A HREF="007582.html#0007" CLASS="Element59">NetworkAddress</A> instance.<P CLASS="Element10">
+<LI>Creates the <A HREF="007582.html#000A" CLASS="Element59">NetworkMask</A> instance.<P CLASS="Element10">
+<LI>Assigns the OnNetAddressChange event handler to the <A HREF="007582.html#000D" CLASS="Element59">OnChange</A> event of <A HREF="007582.html#0007" CLASS="Element59">NetworkAddress</A>.<P CLASS="Element10">
+<LI>Assigns the OnNetMaskChange event handler to the <A HREF="007582.html#000D" CLASS="Element59">OnChange</A> event of <A HREF="007582.html#000A" CLASS="Element59">NetworkMask</A>.<P CLASS="Element10">
+<LI>Creates the <A HREF="007582.html#0006" CLASS="Element59">ListIP</A> instance.<P CLASS="Element10">
+<LI>Assigns the default value of <A HREF="007582.html#000B" CLASS="Element59">NetworkMaskLength</A> (<A HREF="001632.html" CLASS="Element59">ID_NC_MASK_LENGTH</A>).</UL>
+</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0001">TIdNetworkCalculator.Destroy</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007582.html" CLASS="Element59">TIdNetworkCalculator</A>, <A HREF="012868.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Frees the class instance.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>destructor</STRONG> Destroy; <STRONG>override</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Destroy is the destructor for the class instance. Destroy will clear items stored in the <A HREF="007582.html#0006" CLASS="Element59">ListIP</A> property. Destroy will release resources allocated to the <A HREF="007582.html#0007" CLASS="Element59">NetworkAddress</A>, <A HREF="007582.html#000A" CLASS="Element59">NetworkMask</A>, and <A HREF="007582.html#0006" CLASS="Element59">ListIP</A> properties. Destroy calls the inherited Destroy method prior to exiting.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0002">TIdNetworkCalculator.EndIP</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007582.html" CLASS="Element59">TIdNetworkCalculator</A>, <A HREF="012869.html" CLASS="Element59">Example</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Determines the last available IP address for the network.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>function</STRONG> EndIP: <STRONG>String</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Return Value</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+<STRONG>String</STRONG> - IP address in &quot;dotted-decimal&quot; format, like <STRONG>129.71.2.4</STRONG>.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+EndIP is a <STRONG>String</STRONG> function used to determine the last available IP address for the network. EndIP uses the values in <A HREF="007582.html#0007" CLASS="Element59">NetworkAddress</A> and <A HREF="007582.html#000A" CLASS="Element59">NetworkMask</A> to perform calculations for available network addresses. The binary length of <A HREF="007582.html#000A" CLASS="Element59">NetworkMask</A> is used to determine the maximum number of IP addresses on the network in <A HREF="007582.html#000C" CLASS="Element59">NumIP</A>.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0003">TIdNetworkCalculator.FillIPList</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007582.html" CLASS="Element59">TIdNetworkCalculator</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Generates a list of valid IP address for the network.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>procedure</STRONG> FillIPList;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+FillIPList is a procedure used to generate a list of valid IP addresses for the network. The list of valid addresses is stored in <A HREF="007582.html#0006" CLASS="Element59">ListIP</A>. IP addresses are create in &quot;dotted-decimal&quot; form, like <STRONG>129.71.2.4</STRONG>.<P CLASS="Element10">
+FillIPList is used when reading values from the <A HREF="007582.html#0006" CLASS="Element59">ListIP</A> property. FillIPList populates the address list when it does not contain any entries, or in the OnNetAddressChange and OnNetMaskChange event handlers.<P CLASS="Element10">
+FillIPList uses the values in <A HREF="007582.html#0007" CLASS="Element59">NetworkAddress</A> and <A HREF="007582.html#000A" CLASS="Element59">NetworkMask</A> to perform calculations for available network addresses. The binary length of <A HREF="007582.html#000A" CLASS="Element59">NetworkMask</A> is used to determine the maximum number of IP addresses on the network in <A HREF="007582.html#000C" CLASS="Element59">NumIP</A>.<P CLASS="Element10">
+<STRONG>Note</STRONG>: FillIPList will <STRONG>not</STRONG> create a list of IP addresses in the IDE, or when the component state is <STRONG>csDesigning</STRONG>, if the length of the list from <A HREF="007582.html#000C" CLASS="Element59">NumIP</A> will exceed 1024 entries. This is done to prevent a long loop where the IDE would appear to be locked.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0004">TIdNetworkCalculator.IsAddressInNetwork</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007582.html" CLASS="Element59">TIdNetworkCalculator</A>, <A HREF="012870.html" CLASS="Element59">Example</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Indicates if an IP address is valid for the network settings.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>function</STRONG> IsAddressInNetwork(Address: <STRONG>String</STRONG>): Boolean;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+Address: String</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+IP address to be checked in &quot;dotted-decimal&quot; form, like <STRONG>129.71.2.4</STRONG>.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Return Value</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Boolean - <STRONG>True</STRONG> when valid.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+IsAddressInNetwork is a Boolean function used to determine if a specific IP address is valid, based on the current network settings. <A HREF="007582.html#0007" CLASS="Element59">NetworkAddress</A> and <A HREF="007582.html#000A" CLASS="Element59">NetworkMask</A> are used to determine the current network visibility.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="000C">TIdNetworkCalculator.NumIP</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007582.html" CLASS="Element59">TIdNetworkCalculator</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Identifies the number of IP addresses available on the network.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>function</STRONG> NumIP: integer;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Return Value</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+<STRONG>Integer</STRONG> - Number of IP addresses available.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+NumIP is an <STRONG>Integer</STRONG> function that identifies the number of IP addresses available on the network, based on the current <A HREF="007582.html#000A" CLASS="Element59">NetworkMask</A>. NumIP uses <A HREF="007582.html#000B" CLASS="Element59">NetworkMaskLength</A> to calculate the number of IP addresses available.<P CLASS="Element10">
+NumIP is used by <A HREF="007582.html#0003" CLASS="Element59">FillIPList</A> to determine the number of list entries, and by <A HREF="007582.html#0002" CLASS="Element59">EndIP</A> to determine the last available IP address on the network.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="000F">TIdNetworkCalculator.StartIP</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007582.html" CLASS="Element59">TIdNetworkCalculator</A>, <A HREF="012871.html" CLASS="Element59">Example</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Determines the first available IP address for the network.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>function</STRONG> StartIP: <STRONG>String</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Return Value</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+<STRONG>String</STRONG> - IP address in &quot;dotted-decimal&quot; format, like <STRONG>129.71.2.4</STRONG>.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+StartIP is a String function used to determine the first available IP address for the network. StartIP uses the values in <A HREF="007582.html#0007" CLASS="Element59">NetworkAddress</A> and <A HREF="007582.html#000A" CLASS="Element59">NetworkMask</A> to perform calculations for available network addresses.</DIV>
+</DIV>
+<DIV CLASS="Element62">
+<HR>Created with Doc-O-Matic 2 donated to <STRONG><A HREF="http://www.delphi-jedi.org">Project JEDI</A></STRONG>. Commercial license available from the <STRONG><A HREF="http://www.doc-o-matic.com">Doc-O-Matic site</A></STRONG>.</DIV>
+</DIV></BODY></HTML>

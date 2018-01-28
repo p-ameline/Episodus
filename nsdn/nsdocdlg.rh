@@ -1,0 +1,27 @@
+//// Dialogue IDD_NWDOC
+//
+#define IDC_NWDOC_NOM      160
+#define IDC_NWDOC_CHEM     161
+#define IDC_NWDOC_CHGCHEM  162
+#define IDC_NWDOC_TYPE     163
+#define IDC_NWDOC_INTGRP   164
+#define IDC_NWDOC_CREATION 165
+#define IDC_NWDOC_HISTOR   166
+#define IDC_DOCIMPORTANCE  171
+#define IDC_DOC0P          172
+#define IDC_DOC1P          173
+#define IDC_DOC2P          174
+#define IDC_DOC3P          175
+#define IDC_DOC4P          176
+#define IDC_ROSACE         180
+#define IDC_SYNCHRO        181
+#define IDC_NOTE           182
+
+//
+// Dialogue IDD_NWCHEM
+//
+#define IDC_NWCHEM_ARMOI    190
+#define IDC_NWCHEM_COMMENT  191
+#define IDC_NWCHEM_CHGARMOI 192
+#define IDC_NWCHEM_NOM      193
+

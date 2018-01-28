@@ -1,0 +1,327 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+<TITLE>TIdObjectList</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <META name="GENERATOR" content="Doc-O-Matic">
+    <LINK rel="STYLESHEET" href="default.css" type="text/css">
+
+<SCRIPT LANGUAGE="JavaScript1.2" SRC="scripts.js"></SCRIPT>
+</HEAD>
+<BODY CLASS="Element57">
+<TABLE BORDER="0" BGCOLOR="#AACCFF" WIDTH="100%" CELLSPACING="0" CELLPADDING="0">
+<TR><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element1">
+Indy 9</DIV>
+</TD><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element2">
+<A HREF="content.html" CLASS="Element59">Content</A> | <A HREF="idx.html" CLASS="Element59">Index</A> | <A HREF="symref.html" CLASS="Element59">Reference</A></DIV>
+</TD></TR></TABLE><DIV CLASS="Element58">
+<DIV CLASS="Element5">
+TIdObjectList</DIV>
+<DIV CLASS="Element7">
+<A HREF="013040.html" CLASS="Element59">Hierarchy</A>, <A HREF="013041.html" CLASS="Element59">Properties</A>, <A HREF="013042.html" CLASS="Element59">Methods</A>, <A HREF="013043.html" CLASS="Element59">See Also</A>, <A HREF="002144.html" CLASS="Element59">Unit: IdContainers</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Implements a list of object instances.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12">TIdObjectList = <STRONG>class</STRONG>(TList)</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Unit</DIV>
+<DIV CLASS="Element69">
+<A HREF="002144.html" CLASS="Element59">IdContainers</A></DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+TIdObjectList is a TList descendant that implements a list of object instances. TObjectList provides properties and methods to add, delete, rearrange, locate, access, and sort objects. If the <A HREF="007606.html#0007" CLASS="Element59">OwnsObjects</A> property is set to True (the default), TObjectList controls the memory of its objects, freeing an object when its index is reassigned; when it is removed from the list with the Delete, <A HREF="007606.html#0008" CLASS="Element59">Remove</A>, or Clear method; or when the TObjectList instance is itself destroyed.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0006">TIdObjectList.Items</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007606.html" CLASS="Element59">TIdObjectList</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Provides indexed access to the contents of the object list.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> Items [AIndex: Integer]: TObject;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+AIndex</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Position in the list to be accessed.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Return Value</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+TObject - Object at the position on the list.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Items is an indexed TObject property that provides access to the contents of the object list using the Integer position specified in AIndex. The index positions in Items are zero-based.<P CLASS="Element10">
+If <A HREF="007606.html#0007" CLASS="Element59">OwnsObjects</A> is True, reassigning an Items index frees the object that previously occupied that position in the list.<P CLASS="Element10">
+Items can contain nil references. To remove nil references and reduce the size of the array, call the Pack method.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0007">TIdObjectList.OwnsObjects</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007606.html" CLASS="Element59">TIdObjectList</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Indicates if objects are freed when deleted from the list.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> OwnsObjects: Boolean;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+OwnsObjects is a Boolean property that indicates if objects are freed when deleted from the list, or the list or destroyed. OwnsObjects allows TObjectList to control the memory of its objects. If OwnsObjects is True (the default), calling Delete or <A HREF="007606.html#0008" CLASS="Element59">Remove</A> frees the deleted object in addition to removing it from the list. calling Clear frees all the objects in the list in addition to emptying the list. calling the destructor frees all the objects in the list in addition to destroying the TObjectList itself. assigning a new value to an index in <A HREF="007606.html#0006" CLASS="Element59">Items</A> frees the object that previously occupied that position in the list.<P CLASS="Element10">
+Even if OwnsObjects is True, the Extract method can be used to remove objects from the list without freeing them.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0000">TIdObjectList.Add</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007606.html" CLASS="Element59">TIdObjectList</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Inserts an object at the end of the list.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>function</STRONG> Add(AObject: TObject): Integer;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+AObject: TObject</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Object to add to the object list.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Return Value</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Integer - Index position of the inserted object.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Add is an Integer function used to insert an object at the end of the list. Add places the object after the last item, even if the array contains nil references, and returns the index of the inserted object. (The first object in the list has an index of 0.)<P CLASS="Element10">
+Add increments Count and, if necessary, allocates memory by increasing the value of Capacity.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0001">TIdObjectList.Create</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007606.html" CLASS="Element59">TIdObjectList</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Creates and initializes the Object list.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>constructor</STRONG> Create; <STRONG>overload</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+AOwnsObjects</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Indicates if the list owns it's object instances.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Create is an overoaded Constructior in <A HREF="007606.html" CLASS="Element59">TIdObjectList</A> that creates and initializes the Object list. If no parameter is specified, or if the constructor is called with the True parameter, the new TObjectList is initialized with <A HREF="007606.html#0007" CLASS="Element59">OwnsObjects</A> set to True.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0002">TIdObjectList.Create</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007606.html" CLASS="Element59">TIdObjectList</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Creates and initializes the Object list.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>constructor</STRONG> <A HREF="007606.html#0001" CLASS="Element59">Create</A>(AOwnsObjects: Boolean); <STRONG>overload</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+AOwnsObjects: Boolean</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Indicates if the list owns it's object instances.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+<A HREF="007606.html#0001" CLASS="Element59">Create</A> is an overoaded Constructior in <A HREF="007606.html" CLASS="Element59">TIdObjectList</A> that creates and initializes the Object list. If no parameter is specified, or if the constructor is called with the True parameter, the new TObjectList is initialized with <A HREF="007606.html#0007" CLASS="Element59">OwnsObjects</A> set to True.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0003">TIdObjectList.FindInstanceOf</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007606.html" CLASS="Element59">TIdObjectList</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Finds the first instance of a specified class in the list.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>function</STRONG> FindInstanceOf(AClassRef: TClass; AMatchExact: Boolean = True; AStartPos: Integer = 0): Integer;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+AClass</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+CLass instance to be located in the list.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+AExact</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Indicates if descendants classes are a match. Default value is True.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+AStartAt</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Initial position to start the search. Default value is 0.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Return Value</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Integer - Index position of the class instance.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+FindInstanceOf is an Integer function that returns the index of the first instance of AClass appearing after the AStartAt index position in the <A HREF="007606.html#0006" CLASS="Element59">Items</A> array. If AExact is True, FindInstanceOf returns instances only of AClass itself, ignoring instances descendant classes. If no instance of the specified class is found, FindInstanceOf returns –1.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0004">TIdObjectList.IndexOf</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007606.html" CLASS="Element59">TIdObjectList</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Returns the index of the first object in the list with a specified value.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>function</STRONG> IndexOf(AObject: TObject): Integer;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+AObject: TObject</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Object instance to be located.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Return Value</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Integer - Index position of the located object instance.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Call IndexOf to get the index for a specified object in the list, where the first object has index 0, the second object has index 1, and so on. If an object is not in the list, IndexOf returns -1. If an object appears more than once, IndexOf returns the index of the first appearance.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0005">TIdObjectList.Insert</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007606.html" CLASS="Element59">TIdObjectList</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Adds an object to the list at a specified position.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>procedure</STRONG> Insert(AIndex: Integer; AObject: TObject);</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+AObject: TObject</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Object instance to be stored in the list.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+Index</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+- Position in the list for the new object instance.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Insert is a procedure used to add an object at a specified position in the list, shifting the item that previously occupied that position (and all subsequent items) up. Insert increments Count and, if necessary, allocates memory by increasing the value of Capacity.<P CLASS="Element10">
+The Index parameter is zero-based, so the first position in the list has an index of 0.<P CLASS="Element10">
+To replace a nil reference with a new object without growing the array, set the <A HREF="007606.html#0006" CLASS="Element59">Items</A> property directly.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0008">TIdObjectList.Remove</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007606.html" CLASS="Element59">TIdObjectList</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Removes (and optionally frees) an object from the list.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>function</STRONG> Remove(AObject: TObject): Integer;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+AObject: TObject</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Onject instance to be removed.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Return Value</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Integer - Index position of the object removed from the list.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Remove is an Integer function that can be used to delete a specific object from the list when its index is unknown. The value returned is the index of the object in the <A HREF="007606.html#0006" CLASS="Element59">Items</A> array before it was removed. If the specified object is not found on the list, Remove returns –1. If <A HREF="007606.html#0007" CLASS="Element59">OwnsObjects</A> is True, Remove frees the object in addition to removing it from the list.<P CLASS="Element10">
+After an object is deleted, all the objects that follow it are moved up in index position and Count is decremented. If an object appears more than once on the list, Remove deletes only the first appearance. Hence, if <A HREF="007606.html#0007" CLASS="Element59">OwnsObjects</A> is True, removing an object that appears more than once results in empty object references later in the list.<P CLASS="Element10">
+To use an index position (rather than an object reference) to specify the object to be removed, call Delete.<P CLASS="Element10">
+To remove an object from the list without freeing it, call Extract.</DIV>
+</DIV>
+<DIV CLASS="Element62">
+<HR>Created with Doc-O-Matic 2 donated to <STRONG><A HREF="http://www.delphi-jedi.org">Project JEDI</A></STRONG>. Commercial license available from the <STRONG><A HREF="http://www.doc-o-matic.com">Doc-O-Matic site</A></STRONG>.</DIV>
+</DIV></BODY></HTML>

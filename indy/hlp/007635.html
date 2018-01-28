@@ -1,0 +1,121 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+<TITLE>TIdRawClient</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <META name="GENERATOR" content="Doc-O-Matic">
+    <LINK rel="STYLESHEET" href="default.css" type="text/css">
+
+<SCRIPT LANGUAGE="JavaScript1.2" SRC="scripts.js"></SCRIPT>
+</HEAD>
+<BODY CLASS="Element57">
+<TABLE BORDER="0" BGCOLOR="#AACCFF" WIDTH="100%" CELLSPACING="0" CELLPADDING="0">
+<TR><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element1">
+Indy 9</DIV>
+</TD><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element2">
+<A HREF="content.html" CLASS="Element59">Content</A> | <A HREF="idx.html" CLASS="Element59">Index</A> | <A HREF="symref.html" CLASS="Element59">Reference</A></DIV>
+</TD></TR></TABLE><DIV CLASS="Element58">
+<DIV CLASS="Element5">
+TIdRawClient</DIV>
+<DIV CLASS="Element7">
+<A HREF="013227.html" CLASS="Element59">Hierarchy</A>, <A HREF="013228.html" CLASS="Element59">Properties</A>, <A HREF="013229.html" CLASS="Element59">Methods</A>, <A HREF="013230.html" CLASS="Element59">Events</A>, <A HREF="013231.html" CLASS="Element59">See Also</A>, <A HREF="002795.html" CLASS="Element59">Unit: IdRawClient</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Specifies a client that uses Raw sockets.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12">TIdRawClient = <STRONG>class</STRONG>(<A HREF="007634.html" CLASS="Element59">TIdRawBase</A>)</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Unit</DIV>
+<DIV CLASS="Element69">
+<A HREF="002795.html" CLASS="Element59">IdRawClient</A></DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+TIdRawClient is a <A HREF="007634.html" CLASS="Element59">TIdRawBase</A> descendant that specifies a client capable of using Raw <A HREF="007071.html" CLASS="Element59">socket</A> connections. This allows the programmer to code for protocols that are not supported by the standard stack (ICMP, IGMP or any custom protocol).<P CLASS="Element10">
+TIdRawClient does not provide an implementation; implementation will be provided in descendant classes tailored to a specific protocol, like <A HREF="007395.html" CLASS="Element59">TIdIcmpClient</A>.<P CLASS="Element10">
+Depending on the underlying operating system and on the security privilege of the user, it might also allow the programmer to build the IP header (currently, this is only supported by Windows 2000).</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0000">TIdRawClient.Host</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007635.html" CLASS="Element59">TIdRawClient</A>, <A HREF="013232.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Specifies the endpoint for the <A HREF="007071.html" CLASS="Element59">socket</A> connection.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> Host: <STRONG>string</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Host is a String property that specifies the IP address or host name that is the endpoint for the <A HREF="007071.html" CLASS="Element59">socket</A> connection.<P CLASS="Element10">
+Use <A HREF="007635.html#0001" CLASS="Element59">Port</A> to indicate the port number used for the <A HREF="007071.html" CLASS="Element59">socket</A> connection.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0001">TIdRawClient.Port</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007635.html" CLASS="Element59">TIdRawClient</A>, <A HREF="013233.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Identifies the port number for the <A HREF="007071.html" CLASS="Element59">socket</A> connection.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> Port: Integer;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Port is an Integer property that identifies the port number for the <A HREF="007071.html" CLASS="Element59">socket</A> connection.<P CLASS="Element10">
+Use <A HREF="007635.html#0000" CLASS="Element59">Host</A> to specify the IP adress or host name for the <A HREF="007071.html" CLASS="Element59">socket</A> connection.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0002">TIdRawClient.Protocol</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007635.html" CLASS="Element59">TIdRawClient</A>, <A HREF="013234.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Identifies the protocol option for the <A HREF="007071.html" CLASS="Element59">socket</A> connection.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> Protocol: Integer;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Protocol is an Integer property that identifies the protocol used for the <A HREF="007071.html" CLASS="Element59">socket</A> connection.<P CLASS="Element10">
+Use <A HREF="007635.html#0000" CLASS="Element59">Host</A> and <A HREF="007635.html#0001" CLASS="Element59">Port</A> to specify the host name and port number used for the <A HREF="007071.html" CLASS="Element59">socket</A> connection.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0003">TIdRawClient.ReceiveTimeout</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007635.html" CLASS="Element59">TIdRawClient</A>, <A HREF="013235.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Identifies the timeout for receive operations.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> ReceiveTimeout: integer;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+ReceiveTimeout is an Integer property that indicate the number of milliseconds that receive operations must wait for the <A HREF="007071.html" CLASS="Element59">socket</A> to become readable.</DIV>
+</DIV>
+<DIV CLASS="Element62">
+<HR>Created with Doc-O-Matic 2 donated to <STRONG><A HREF="http://www.delphi-jedi.org">Project JEDI</A></STRONG>. Commercial license available from the <STRONG><A HREF="http://www.doc-o-matic.com">Doc-O-Matic site</A></STRONG>.</DIV>
+</DIV></BODY></HTML>

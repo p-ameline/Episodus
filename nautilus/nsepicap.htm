@@ -1,0 +1,176 @@
+<html>
+ 
+<head>
+</head>
+
+<body>
+
+<center>
+<h1>NSEPICAP.CPP</h1>
+<br>
+Liste des objets<br>
+<br>
+<font size="4">
+   
+
+</center>
+ Classe des objets : <U>class  EpisodusElemData </U>: <br><br>
+<center>
+<table border=1>
+  <tr> 
+	<td>unsigned long   AppWindow; </td>
+</tr> 
+<tr> 
+        <td>unsigned long   AppWndChild; </td>
+</tr>
+<tr>  
+        <td>string          sClassChild; </td>
+</tr> 
+<tr> 
+        <td>string          sTextChild; </td>
+</tr>
+<tr>  
+        <td>string          sCorrespondence; </td>
+</tr> 
+<tr> 
+        <td>string          sClassifier; </td>
+</tr>
+</table>
+</center>
+Classe des objets : <U>class EpisodusData </U>: <br><br>
+Classe des objets : <U>class EpisodusModel </U>: <br><br>
+<center>
+<table border=1>
+  <tr> 
+	<td>string      sNom; </td>
+</tr> 
+<tr> 
+        <td>bool        bModified; </td>
+</tr> 
+</table>
+</center>
+Classe des objets : <U>class ArrayEpisodusModelData  </U>: <br><br>
+Classe des objets : <U>class EpisodusModelXML </U>: <br><br>
+<center>
+<table border=1>
+  <tr> 
+	<td>vector<string>  sArrayBalise; </td>
+</tr>
+<tr>  
+        <td>vector<string>  sArrayBaliseVariables; </td>
+</tr> 
+<tr> 
+        <td>vector<string>  sArrayBaliseContenu; </td>
+</tr>
+</table > 
+</center>
+Classe des objets : <U>class MylParam </U>: <br><br> 
+<center>
+<table border=1>
+  <tr> 
+	
+	<td>THandle     AppWindow; </td>
+</tr>
+<tr>  
+        <td>THandle     theMainWindow; </td>
+</tr> 
+<tr> 
+        <td>NSContexte  *pContexte; </td>
+</tr>
+</table> 
+</center>
+Classe des objets : <U>class NSEpisodView </U>: <br><br>
+Classe des objets : <U>class NSSOAPView </U>: <br><br>
+Classe des objets : <U>class NSSOAPTankView </U>: <br><br>
+Classe des objets : <U>class classifExpert </U>: <br><br>
+Classe des objets : <U>class NSEpisodus </U>: <br><br>
+<center>
+<table border=1>
+  <tr> 
+	
+        <td>EpisodusData*           pEpisodusData;</td>
+         <td>// tableau correspondant à la capture</td>
+  </tr>
+<tr>
+        
+        <td>NSEpisodView*           pViewData; </td>
+	<td>// pointeur sur la vue</td>
+   </tr>      
+<tr>
+        
+        <td>NSSOAPView*             pSOAPView; </td>
+       	<td>// pointeur sur la vue SOAP</td>
+  </tr>
+<tr>
+        <td>NSSOAPTankView*         pSOAPTank; </td>
+  </tr>       
+<tr>
+        <td>SOAPBasketArray*        pBasketList; </td>
+  </tr>       
+<tr>
+        // tableau de modèles
+       <td> ArrayEpisodusModelData* pModels; </td>       <td> // pointeur sur la liste de modèles </td>
+</tr>
+<tr>
+        <td>EpisodusModel*          pCurrentModel;</td>  <td>// pointeur sur le modèle courant </td>
+</tr>
+<tr>
+        <td>NSCaptureArray          CaptureArray; </td>
+</tr>
+<tr>
+        <td>classifExpert*          pClassifExpert; </td>
+</tr>
+        // Paramètres spécifiques de l'utilisateur<br>
+        // User parameters<br>
+<tr>
+        <td>bool                    bAutoFlocule; </td>
+</tr>
+<tr>
+        <td>bool                    bSendNow; </td>
+</tr>
+<tr>
+        <td>string                  sAsymetricHash; </td>
+</tr>
+<tr>
+        <td>string                  sPromethePrincipe; </td>
+</tr>
+<tr>
+        <td>string                  sPrometheMail; </td>
+</tr>
+<tr>
+        <td>string                  sPrometheUserId; </td>
+</tr>
+<tr>
+        <td>string                  sPrometheUserLogin;</td>
+</tr>
+<tr>
+        <td>string                  sPrometheUserPaswd;</td>
+</tr>
+</table>
+</center><br>
+Classe des objets : <U>class NSModelDlg </U>: <br><br>
+<center> 
+<table border=1>
+  <tr>
+ 	<td>OWL::TEdit*     pNewLib;</td>
+  </tr>
+<tr>
+        <td>OWL::TButton*   pCreer;</td>
+</tr>
+<tr>
+        <td>OWL::TListBox*  pLibelles;</td>
+</tr>
+<tr>
+   	<td>OWL::TButton*   pModifier;</td>
+</tr>
+<tr>
+   	<td>OWL::TButton*   pSupprimer;</td>
+</tr>
+<tr>
+        <td>EpisodusModel*  pModel;</td> 
+</tr>
+</table>
+</center><br>
+</body>
+
+</html>

@@ -1,0 +1,5 @@
+#define IDC_IDENTIFIANT			107
+#define IDC_PASSWORD    		108
+#define IDC_GROUP_PASSWORD  109
+#define IDC_GROUP_LOGIN     110
+#define IDC_SESSION					111

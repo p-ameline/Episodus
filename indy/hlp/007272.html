@@ -1,0 +1,147 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+<TITLE>TIdCustomMappedTelnet</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <META name="GENERATOR" content="Doc-O-Matic">
+    <LINK rel="STYLESHEET" href="default.css" type="text/css">
+
+<SCRIPT LANGUAGE="JavaScript1.2" SRC="scripts.js"></SCRIPT>
+</HEAD>
+<BODY CLASS="Element57">
+<TABLE BORDER="0" BGCOLOR="#AACCFF" WIDTH="100%" CELLSPACING="0" CELLPADDING="0">
+<TR><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element1">
+Indy 9</DIV>
+</TD><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element2">
+<A HREF="content.html" CLASS="Element59">Content</A> | <A HREF="idx.html" CLASS="Element59">Index</A> | <A HREF="symref.html" CLASS="Element59">Reference</A></DIV>
+</TD></TR></TABLE><DIV CLASS="Element58">
+<DIV CLASS="Element5">
+TIdCustomMappedTelnet</DIV>
+<DIV CLASS="Element7">
+<A HREF="010391.html" CLASS="Element59">Hierarchy</A>, <A HREF="010392.html" CLASS="Element59">Properties</A>, <A HREF="010393.html" CLASS="Element59">Methods</A>, <A HREF="010394.html" CLASS="Element59">Events</A>, <A HREF="010395.html" CLASS="Element59">See Also</A>, <A HREF="002283.html" CLASS="Element59">Unit: IdMappedPortTCP</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Implements an ancestor class for a multi-threaded port-based proxy server.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12">TIdCustomMappedTelnet = <STRONG>class</STRONG>(<A HREF="007533.html" CLASS="Element59">TIdMappedPortTCP</A>)</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Unit</DIV>
+<DIV CLASS="Element69">
+<A HREF="002283.html" CLASS="Element59">IdMappedPortTCP</A></DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+TIdCustomMappedTelnet is a <A HREF="007533.html" CLASS="Element59">TIdMappedPortTCP</A> descendant that implements the ancestor class for a multi-threaded port-based proxy server. TIdCustomMappedTelnet exposes properties used during execution of proxied connections to a remote host, like <A HREF="007272.html#0002" CLASS="Element59">DefaultPort</A>, <A HREF="007272.html#0003" CLASS="Element59">MappedPort</A>, and <A HREF="007272.html#0000" CLASS="Element59">AllowedConnectAttempts</A>.<P CLASS="Element10">
+Applications should create instances of <A HREF="007538.html" CLASS="Element59">TIdMappedTelnet</A>, which publishes properties for access in the object inspector.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0000">TIdCustomMappedTelnet.AllowedConnectAttempts</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007272.html" CLASS="Element59">TIdCustomMappedTelnet</A>, <A HREF="010396.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Number of connections permitted to the port-based proxy server.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> AllowedConnectAttempts: Integer;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+AllowedConnectAttempts is a public Integer property that indicates the number of connection allowed to the port-based proxy. The default value for AllowedConnectAttempts is -1 as assigned in the <A HREF="007272.html#0001" CLASS="Element59">Create</A> constructor. Changing the value in AllowedConnectAttempts insures that the new property value is no less than -1. -1 indicates that an unlimited number of connections are permitted for the port proxy. 0 indicates that no connections are allowed.<P CLASS="Element10">
+AllowedConnectAttempts is used when creating outbound connections for the local client to the port-based proxy server.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0002">TIdCustomMappedTelnet.DefaultPort</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007272.html" CLASS="Element59">TIdCustomMappedTelnet</A>, <A HREF="010397.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Port number for listener threads created for the port-based proxy server.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> DefaultPort: integer;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+DefaultPort is a read-ony Integer property in <A HREF="007272.html" CLASS="Element59">TIdCustomMappedTelnet</A> that indicates the port number assigned to listener threads for the port-based proxy server. The default value for DefaultPort is <A HREF="002721.html" CLASS="Element59">IdPORT_TELNET</A>, as assigned in the <A HREF="007272.html#0001" CLASS="Element59">Create</A> constructor.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0003">TIdCustomMappedTelnet.MappedPort</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007272.html" CLASS="Element59">TIdCustomMappedTelnet</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Port number for proxied connections to a remote host.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> MappedPort: Integer;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+MappedPort is an Integer property that indicates the port number to use for threaded proxy connections to a remote host. MappedPort is used when establishing the outbound connection to a remote host for the port-based proxy server.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0001">TIdCustomMappedTelnet.Create</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007272.html" CLASS="Element59">TIdCustomMappedTelnet</A>, <A HREF="010398.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Constructor for the object instance.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>constructor</STRONG> Create(AOwner: TComponent); <STRONG>override</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+AOwner: TComponent</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Owner of the object instance.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Create is the constructor for the object instance. Create calls the inherited Create method using AOwner as the owner of the object instance.<P CLASS="Element10">
+Create sets the default value for the <A HREF="007272.html#0000" CLASS="Element59">AllowedConnectAttempts</A> property to -1, indicating that unlimited connections are allowed. Create sets the value in <A HREF="007272.html#0002" CLASS="Element59">DefaultPort</A> and MapperPort to <A HREF="002721.html" CLASS="Element59">IdPORT_TELNET</A>.<P CLASS="Element10">
+Create also assigns <A HREF="007542.html" CLASS="Element59">TIdMappedTelnetThread</A> as the ThreadClass for threaded client connections to the proxy.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0004">TIdCustomMappedTelnet.OnCheckHostPort</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007272.html" CLASS="Element59">TIdCustomMappedTelnet</A>, <A HREF="010399.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Event handler signalled to verify the host and port for the proxied connection.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> OnCheckHostPort: <A HREF="007541.html" CLASS="Element59">TIdMappedTelnetCheckHostPort</A>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+OnCheckHostPort is a <A HREF="007541.html" CLASS="Element59">TIdMappedTelnetCheckHostPort</A> property that represents the event handler signalled when during execution of a threaded connection to a port-based TELNET proxy connection. OnCheckHostPort is used to verify the Host Address and Port number extracted from a TELNET connection line, and to <A HREF="000295.html" CLASS="Element59">connect</A> the local client to a remote host.<P CLASS="Element10">
+OnCheckHostPort is called when extracting the host and port number form the TELNET connection string for the executing thread.</DIV>
+</DIV>
+<DIV CLASS="Element62">
+<HR>Created with Doc-O-Matic 2 donated to <STRONG><A HREF="http://www.delphi-jedi.org">Project JEDI</A></STRONG>. Commercial license available from the <STRONG><A HREF="http://www.doc-o-matic.com">Doc-O-Matic site</A></STRONG>.</DIV>
+</DIV></BODY></HTML>

@@ -1,0 +1,483 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+<TITLE>TIdNNTPServer</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <META name="GENERATOR" content="Doc-O-Matic">
+    <LINK rel="STYLESHEET" href="default.css" type="text/css">
+
+<SCRIPT LANGUAGE="JavaScript1.2" SRC="scripts.js"></SCRIPT>
+</HEAD>
+<BODY CLASS="Element57">
+<TABLE BORDER="0" BGCOLOR="#AACCFF" WIDTH="100%" CELLSPACING="0" CELLPADDING="0">
+<TR><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element1">
+Indy 9</DIV>
+</TD><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element2">
+<A HREF="content.html" CLASS="Element59">Content</A> | <A HREF="idx.html" CLASS="Element59">Index</A> | <A HREF="symref.html" CLASS="Element59">Reference</A></DIV>
+</TD></TR></TABLE><DIV CLASS="Element58">
+<DIV CLASS="Element5">
+TIdNNTPServer</DIV>
+<DIV CLASS="Element7">
+<A HREF="012959.html" CLASS="Element59">Hierarchy</A>, <A HREF="012960.html" CLASS="Element59">Properties</A>, <A HREF="012961.html" CLASS="Element59">Methods</A>, <A HREF="012962.html" CLASS="Element59">Events</A>, <A HREF="012963.html" CLASS="Element59">See Also</A>, <A HREF="002306.html" CLASS="Element59">Unit: IdNNTPServer</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Implements an NNTP server framework.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12">TIdNNTPServer = <STRONG>class</STRONG>(<A HREF="007831.html" CLASS="Element59">TIdTCPServer</A>)</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Unit</DIV>
+<DIV CLASS="Element69">
+<A HREF="002306.html" CLASS="Element59">IdNNTPServer</A></DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+TIdNNTPServer is a <A HREF="007831.html" CLASS="Element59">TIdTCPServer</A> descendant that provides a framework for implementing a server based on the Network News Transfer Protocol (NNTP) as described in the Internet Standards documents:<P CLASS="Element10">
+<UL>
+<LI>RFC 977 - Network News Transfer Protocol (http://www.rfc-editor.org/rfc/rfc977.txt)<P CLASS="Element10">
+<LI>RFC 2980 - Common NNTP Extensions (http://www.rfc-editor.org/rfc/rfc2980.txt)</UL>
+<P CLASS="Element10">
+TIdNNTPServer is used for distributing messages publicly to central locations on a network. TIdNNTPServer is based on the formats, control messages, transmission methods, and propagtion algorithms defined in the Internet Standards document:<P CLASS="Element10">
+<UL>
+<LI>RFC 1036 - Standard for Interchange of USENET Messages (http://www.rfc-editor.org/rfc/rfc1036.txt)</UL>
+<P CLASS="Element10">
+TIdNNTPServer also incorporates the syntax for text-based messages as defined in the Internet Standards document:<P CLASS="Element10">
+<UL>
+<LI>RFC 2822 - Internet Message Format (http://www.rfc-editor.org/rfc/rfc2822.txt)</UL>
+<P CLASS="Element10">
+TIdNNTPServer provides a dual implementation capability, mirroring the options available in <A HREF="007831.html" CLASS="Element59">TIdTCPServer</A>, using the <A HREF="007831.html#0015" CLASS="Element59">TIdTCPServer.OnExecute</A> event handler or through the use of the <A HREF="007245.html" CLASS="Element59">TIdCommandHandlers</A> collection.<P CLASS="Element10">
+When using <A HREF="007245.html" CLASS="Element59">TIdCommandHandlers</A>, TIdNNTPServer provides command event handlers to respond to the following NNTP commands and extensions:<P CLASS="Element10">
+<UL>
+<LI>ARTICLE<P CLASS="Element10">
+<LI>BODY<P CLASS="Element10">
+<LI>HEAD<P CLASS="Element10">
+<LI>STAT<P CLASS="Element10">
+<LI><A HREF="000683.html" CLASS="Element59">GROUP</A><P CLASS="Element10">
+<LI>LIST<P CLASS="Element10">
+<LI>HELP<P CLASS="Element10">
+<LI>IHAVE<P CLASS="Element10">
+<LI>LAST<P CLASS="Element10">
+<LI>NEWGROUPS<P CLASS="Element10">
+<LI>NEWNEWS<P CLASS="Element10">
+<LI>NEXT<P CLASS="Element10">
+<LI>POST<P CLASS="Element10">
+<LI>QUIT<P CLASS="Element10">
+<LI>SLAVE<P CLASS="Element10">
+<LI>AUTHINFO<P CLASS="Element10">
+<LI>XOVER<P CLASS="Element10">
+<LI>XHDR<P CLASS="Element10">
+<LI>DATE<P CLASS="Element10">
+<LI>LISTGROUP<P CLASS="Element10">
+<LI>MODE<P CLASS="Element10">
+<LI>TAKETHIS<P CLASS="Element10">
+<LI>CHECK<P CLASS="Element10">
+<LI>XTHREAD<P CLASS="Element10">
+<LI>XGTITLE<P CLASS="Element10">
+<LI>XPAT</UL>
+<P CLASS="Element10">
+TIdNNTPServer also provides event handlers that allow implementation- dependent access to NNTP GRoups, Articles, and Overview database storage.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0001">TIdNNTPServer.DefaultPort</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007598.html" CLASS="Element59">TIdNNTPServer</A>, <A HREF="012964.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Default port number for the server.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> DefaultPort: integer;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+DefaultPort is a published property in <A HREF="007598.html" CLASS="Element59">TIdNNTPServer</A> that identifies the default port number for the server, as described in the Network News Transfer Protocol specification. The default value for DefaultPort is <A HREF="002587.html" CLASS="Element59">IdPORT_NNTP</A>, as assigned in the <A HREF="007598.html#0000" CLASS="Element59">TIdNNTPServer.Create</A> constructor.<P CLASS="Element10">
+DefaultPort is the value used when the server creates a new listener thread for accepting client connections.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0003">TIdNNTPServer.Help</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007598.html" CLASS="Element59">TIdNNTPServer</A>, <A HREF="012965.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Indicates NNTP commands supported in the server implementation.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> Help: TStrings;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Help is TStrings property that contains the string values representing a short summary of commands that are understood by the NNTP server implementation. Help is presented as a textual response to the NNTP HELP command when CommandHandlers are used in the server implementation.<P CLASS="Element10">
+The Help property is allocated the <A HREF="007598.html#0000" CLASS="Element59">Create</A> constructor, and freed in the <A HREF="007598.html#0002" CLASS="Element59">Destroy</A> method. The NNTP server implementation must assign the string contents representing the supported NNTP commands prior to becoming Active.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0016">TIdNNTPServer.OverviewFormat</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007598.html" CLASS="Element59">TIdNNTPServer</A>, <A HREF="012966.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Represents the message headers used in the NNTP overview database.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> OverviewFormat: TStrings;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+OverviewFormat is a TStrings property that represents the message headers to be used in responses to the NNTP XOVER command. OverviewFormat is initialized in the <A HREF="007598.html#0000" CLASS="Element59">Create</A> constructor, and contains the values as required by the NNTP RFCs:<P CLASS="Element10">
+<UL>
+<LI>Subject:<P CLASS="Element10">
+<LI>From:<P CLASS="Element10">
+<LI>Date:<P CLASS="Element10">
+<LI>Message-ID:<P CLASS="Element10">
+<LI>References:<P CLASS="Element10">
+<LI>Bytes:<P CLASS="Element10">
+<LI>Lines:</UL>
+<P CLASS="Element10">
+OverviewFormat is used during execution of the procedure assigned to CommandHandlers for the NNTP LIST OVERVIEW.FMT.<P CLASS="Element10">
+OverviewFormat is freed in the <A HREF="007598.html#0002" CLASS="Element59">Destroy</A> method.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0000">TIdNNTPServer.Create</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007598.html" CLASS="Element59">TIdNNTPServer</A>, <A HREF="012967.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Creates a new <A HREF="007598.html" CLASS="Element59">TIdNNTPServer</A> instance.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>constructor</STRONG> Create(AOwner: TComponent); <STRONG>override</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+AOwner: TComponent</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Owner of the instance.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Create is the constructor for the <A HREF="007598.html" CLASS="Element59">TIdNNTPServer</A> instance. Create relies on the inherited constructor to initialize the object instance, and sets the value of <A HREF="007598.html#0001" CLASS="Element59">DefaultPort</A> to IdPORT_NTTP (Decimal <STRONG>119</STRONG>).</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0002">TIdNNTPServer.Destroy</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007598.html" CLASS="Element59">TIdNNTPServer</A>, <A HREF="012968.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Frees the object instance.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>destructor</STRONG> Destroy; <STRONG>override</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Destroy is the destructor for the object instance. Destroy frees and releases resources allocated in the <A HREF="007598.html#0000" CLASS="Element59">Create</A> constructor, including <A HREF="007598.html#0016" CLASS="Element59">OverviewFormat</A> and <A HREF="007598.html#0003" CLASS="Element59">Help</A>. Destroy calls the inherited Destroy method to finalize destruction of the object instance.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0004">TIdNNTPServer.OnArticleByNo</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007598.html" CLASS="Element59">TIdNNTPServer</A>, <A HREF="012969.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Event handler signalled for the NNTP article retrieveal by message number.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> OnArticleByNo: <A HREF="007585.html" CLASS="Element59">TIdNNTPOnArticleByNo</A>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+OnArticleByNo is a <A HREF="007585.html" CLASS="Element59">TIdNNTPOnArticleByNo</A> property that represents the event handler signalled when a threaded NNTP client connection requests an NNTP article. OnArticleByNo is used in conjunction with the <A HREF="007598.html#0008" CLASS="Element59">OnCheckMsgNo</A> event handler to locate, retrieve, and transmit the the contents of the requested NNTP article.<P CLASS="Element10">
+OnArticleByNo is signalled when the server implementation executes the command process for the CommandHandler assigned to the NNTP ARTICLE command. The server implementation must assign a procedure to the event handler to implement the platform and server specific algorithms required to respond to the NNTP command. The procedure for the event handler must <A HREF="006944.html" CLASS="Element59">send</A> both the headers and the body for the NNTP article.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0005">TIdNNTPServer.OnAuth</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007598.html" CLASS="Element59">TIdNNTPServer</A></DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> OnAuth: <A HREF="007586.html" CLASS="Element59">TIdNNTPOnAuth</A>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+OnAuth</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0006">TIdNNTPServer.OnBodyByNo</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007598.html" CLASS="Element59">TIdNNTPServer</A></DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> OnBodyByNo: <A HREF="007585.html" CLASS="Element59">TIdNNTPOnArticleByNo</A>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+OnBodyByNo</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0007">TIdNNTPServer.OnCheckListGroup</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007598.html" CLASS="Element59">TIdNNTPServer</A></DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> OnCheckListGroup: <A HREF="007587.html" CLASS="Element59">TIdNNTPOnCheckListGroup</A>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+OnCheckListGroup</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0008">TIdNNTPServer.OnCheckMsgNo</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007598.html" CLASS="Element59">TIdNNTPServer</A>, <A HREF="012970.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Verifies message numbers and messgae identifers for articles on the NNTP server.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> OnCheckMsgNo: <A HREF="007588.html" CLASS="Element59">TIdNNTPOnCheckMsgNo</A>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+OnCheckMsgNo is a <A HREF="007588.html" CLASS="Element59">TIdNNTPOnCheckMsgNo</A> property that represents the event handler signalled when a threaded NNTP client connection requests an NNTP article. OnCheckMsgNo is used in conjunction with the <A HREF="007598.html#0004" CLASS="Element59">OnArticleByNo</A> event handler to locate, retrieve, and transmit the the contents of the requested NNTP article.<P CLASS="Element10">
+OnCheckMsgNo is signalled when the server implementation executes the command process for CommandHandlers assigned to the NNTP ARTICLE command. The server implementation must assign a procedure to the event handler to implement the platform and server specific algorithms required to respond to the NNTP command. The procedure for the event handler must insure that an NNTP article exists having the requested message number or unique message identifier.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0009">TIdNNTPServer.OnHeadByNo</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007598.html" CLASS="Element59">TIdNNTPServer</A></DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> OnHeadByNo: <A HREF="007585.html" CLASS="Element59">TIdNNTPOnArticleByNo</A>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+OnHeadByNo</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="000A">TIdNNTPServer.OnIHaveCheck</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007598.html" CLASS="Element59">TIdNNTPServer</A></DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> OnIHaveCheck: <A HREF="007589.html" CLASS="Element59">TIdNNTPOnIHaveCheck</A>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+OnIHaveCheck</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="000B">TIdNNTPServer.OnIHavePost</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007598.html" CLASS="Element59">TIdNNTPServer</A></DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> OnIHavePost: <A HREF="007593.html" CLASS="Element59">TIdNNTPOnPost</A>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+OnIHavePost</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="000C">TIdNNTPServer.OnListGroups</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007598.html" CLASS="Element59">TIdNNTPServer</A>, <A HREF="012971.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Generates a list of newsgroups with message and posting status information.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> OnListGroups: <A HREF="007697.html" CLASS="Element59">TIdServerThreadEvent</A>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+OnListGroups is a <A HREF="007697.html" CLASS="Element59">TIdServerThreadEvent</A> property that represents the event handler signalled when a threaded NNTP client connection requests a listing of newsgroups a relevant group information on the NNTP server. OnListGroups is signalled when the server implementation executes the command procedure for CommandHandlers assigned to the NNTP LIST command.<P CLASS="Element10">
+The server implementation must assign a procedure to the event handler to implement the platform and server specific algorithms required to generate the listing of newsgroups with first, and last message numbers, as well as newsgroup posting status. The procedure for the event handler must write the response to the threaded client connection.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="000D">TIdNNTPServer.OnListNewGroups</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007598.html" CLASS="Element59">TIdNNTPServer</A></DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> OnListNewGroups: <A HREF="007591.html" CLASS="Element59">TIdNNTPOnNewGroupsList</A>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+OnListNewGroups</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="000E">TIdNNTPServer.OnNewNews</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007598.html" CLASS="Element59">TIdNNTPServer</A></DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> OnNewNews: <A HREF="007592.html" CLASS="Element59">TIdNNTPOnNewNews</A>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+OnNewNews</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="000F">TIdNNTPServer.OnNextArticle</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007598.html" CLASS="Element59">TIdNNTPServer</A></DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> OnNextArticle: <A HREF="007590.html" CLASS="Element59">TIdNNTPOnMovePointer</A>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+OnNextArticle</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0010">TIdNNTPServer.OnPost</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007598.html" CLASS="Element59">TIdNNTPServer</A>, <A HREF="012972.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Implements receipt and storage of articles posted to the NNTP server.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> OnPost: <A HREF="007593.html" CLASS="Element59">TIdNNTPOnPost</A>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+OnPost is a <A HREF="007593.html" CLASS="Element59">TIdNNTPOnPost</A> property that represents the event handl;er signalled when a threaded NNTP client connection attempts to post an article to the NNTP server. OnPost is signalled when executing the Command procedure assigned to the CommandHandlers for the NNTP POST command.<P CLASS="Element10">
+OnPost allows the server to implement the platform and server specific procedure and functions needed to receive and store an NNTP article. OnPost may also be used to set a status flag indicating posting is disallowed or failed for the article, as well as an error message associated with the abandoned post. OnPost must also perform receipt of the headers and body for the NNTP article using the threaded client connection, and storage in the format required for the server implementation.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0011">TIdNNTPServer.OnPrevArticle</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007598.html" CLASS="Element59">TIdNNTPServer</A></DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> OnPrevArticle: <A HREF="007590.html" CLASS="Element59">TIdNNTPOnMovePointer</A>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+OnPrevArticle</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0012">TIdNNTPServer.OnSelectGroup</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007598.html" CLASS="Element59">TIdNNTPServer</A>, <A HREF="012973.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Implements retrieval of newsgroup details for the specified newsgroup.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> OnSelectGroup: <A HREF="007594.html" CLASS="Element59">TIdNNTPOnSelectGroup</A>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+OnSelectGroup is a <A HREF="007594.html" CLASS="Element59">TIdNNTPOnSelectGroup</A> property that represents the event handler used to perform the server- and platform-specific methods needed to get detailed newsgroup information. OnSelectGroup is signalled when a threaded NNTP client requests a list of articles for a specific newsgroup, and occurs during execution of the procedure assigned to CommandHandlers for the NNTP <A HREF="000683.html" CLASS="Element59">GROUP</A> command.<P CLASS="Element10">
+OnSelectGroup accepts arguments that identify the newsgroup to be detailed, and returns values in the arguments that indicate the estimated total, first and last message numbers for the specified newsgroup. OnSelectGroup must also set the value for the argument indicating that the requested newsgroup exists on the server.<P CLASS="Element10">
+The server implementation must assign a procedure to the event handler to allow responding to the event notification. <STRONG>NOTE</STRONG>: OnSelectGroup does not need to format and write the NNTP <A HREF="000683.html" CLASS="Element59">GROUP</A> response message; it is written in the CommandGroup procedure.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0013">TIdNNTPServer.OnStatMsgNo</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007598.html" CLASS="Element59">TIdNNTPServer</A></DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> OnStatMsgNo: <A HREF="007590.html" CLASS="Element59">TIdNNTPOnMovePointer</A>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+OnStatMsgNo</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0014">TIdNNTPServer.OnXHdr</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007598.html" CLASS="Element59">TIdNNTPServer</A></DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> OnXHdr: <A HREF="007595.html" CLASS="Element59">TIdNNTPOnXHdr</A>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+OnXHdr</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0015">TIdNNTPServer.OnXOver</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007598.html" CLASS="Element59">TIdNNTPServer</A>, <A HREF="012974.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Implements listing article overview information in the NNTP server.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> OnXOver: <A HREF="007596.html" CLASS="Element59">TIdNNTPOnXOver</A>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+OnXOver is a <A HREF="007596.html" CLASS="Element59">TIdNNTPOnXOver</A> property that represents the event handler used to implement retrieval of information from the overview database for specified or implied articles. OnXOver is signalled during execution of the procedure assigned to CommandHandlers for the NNTP XOVER command. The server implementation must assign a procedure to the event handler to allow responding the event notification.<P CLASS="Element10">
+OnXOver uses values from <A HREF="007599.html" CLASS="Element59">TIdNNTPThread</A> to determine the current newsgroup, and current article pointer for the threaded client connection. A newsgroup must be selected before OnXOver can be used to retrieve overview information. If no NNTP article number is specified in the NNTP XOVER commmand, OnXOver is signalled with the current article pointer as the requested message number. OnXOver should updated the last message number argument to indicate the most recently posted article in the newsgroup.<P CLASS="Element10">
+OnXOver must generate a listing that consists of overview information for each message in the range requested. OnXOver must not contain overview information for deleted or removed articles. Each line in the listing must contain tab delimited values including the article number followed by message headers as indicated in the <A HREF="007598.html#0016" CLASS="Element59">OverviewFormat</A> property. <STRONG>Note</STRONG>: <A HREF="007130.html" CLASS="Element59">TAB</A> and <A HREF="000534.html" CLASS="Element59">EOL</A> characters in header data must be converted to a <A HREF="000286.html" CLASS="Element59">CHAR32</A> (Space) character.<P CLASS="Element10">
+OnXOver must write the contents of the listing to the threaded client connection. The NNTP response code and the trailing '.' character are handled by the protected CommandXOver procedure.</DIV>
+</DIV>
+<DIV CLASS="Element62">
+<HR>Created with Doc-O-Matic 2 donated to <STRONG><A HREF="http://www.delphi-jedi.org">Project JEDI</A></STRONG>. Commercial license available from the <STRONG><A HREF="http://www.doc-o-matic.com">Doc-O-Matic site</A></STRONG>.</DIV>
+</DIV></BODY></HTML>

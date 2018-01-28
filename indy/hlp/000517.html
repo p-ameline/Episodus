@@ -1,0 +1,77 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+<TITLE>EncodeAddress</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <META name="GENERATOR" content="Doc-O-Matic">
+    <LINK rel="STYLESHEET" href="default.css" type="text/css">
+
+<SCRIPT LANGUAGE="JavaScript1.2" SRC="scripts.js"></SCRIPT>
+</HEAD>
+<BODY CLASS="Element57">
+<TABLE BORDER="0" BGCOLOR="#AACCFF" WIDTH="100%" CELLSPACING="0" CELLPADDING="0">
+<TR><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element1">
+Indy 9</DIV>
+</TD><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element2">
+<A HREF="content.html" CLASS="Element59">Content</A> | <A HREF="idx.html" CLASS="Element59">Index</A> | <A HREF="symref.html" CLASS="Element59">Reference</A></DIV>
+</TD></TR></TABLE><DIV CLASS="Element58">
+<DIV CLASS="Element5">
+EncodeAddress</DIV>
+<DIV CLASS="Element7">
+<A HREF="015297.html" CLASS="Element59">See Also</A>, <A HREF="002135.html" CLASS="Element59">Unit: IdCoderHeader</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Encodes RFC 822 EMail Addresses that contains special characters.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>function</STRONG> EncodeAddress(EmailAddr: <A HREF="007308.html" CLASS="Element59">TIdEMailAddressList</A>; <STRONG>const</STRONG> HeaderEncoding: Char; TransferHeader: <A HREF="008099.html" CLASS="Element59">TTransfer</A>; MimeCharSet: <STRONG>string</STRONG>): <STRONG>string</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Unit</DIV>
+<DIV CLASS="Element69">
+<A HREF="002135.html" CLASS="Element59">IdCoderHeader</A></DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+EmailAddr: TIdEMailAddressList</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+List containingt Email addresses to be encoded.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+const HeaderEncoding: Char</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Encoding to use for the EMail addresses.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+TransferHeader: TTransfer</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Transfer encoding to use for the EMail addresses.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+MimeCharSet: string</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+MIME character set to use for the EMail addresses.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Return Value</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+String - comma-delimited representation of the encoded Email addresses.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+EncodeAddress is a String function that encodes RFC 822-compliant EMail Addresses that contains special characters. EncodeAddress calls <A HREF="000518.html" CLASS="Element59">EncodeAddressItem</A> for each EMail address in the list EMailAddr.<P CLASS="Element10">
+The return value for EncodeAddress is a String containing the comma-delimited representation of the encoded Email addresses.</DIV>
+</DIV>
+<DIV CLASS="Element62">
+<HR>Created with Doc-O-Matic 2 donated to <STRONG><A HREF="http://www.delphi-jedi.org">Project JEDI</A></STRONG>. Commercial license available from the <STRONG><A HREF="http://www.doc-o-matic.com">Doc-O-Matic site</A></STRONG>.</DIV>
+</DIV></BODY></HTML>

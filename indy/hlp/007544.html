@@ -1,0 +1,1232 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+<TITLE>TIdMessage</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <META name="GENERATOR" content="Doc-O-Matic">
+    <LINK rel="STYLESHEET" href="default.css" type="text/css">
+
+<SCRIPT LANGUAGE="JavaScript1.2" SRC="scripts.js"></SCRIPT>
+</HEAD>
+<BODY CLASS="Element57">
+<TABLE BORDER="0" BGCOLOR="#AACCFF" WIDTH="100%" CELLSPACING="0" CELLPADDING="0">
+<TR><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element1">
+Indy 9</DIV>
+</TD><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element2">
+<A HREF="content.html" CLASS="Element59">Content</A> | <A HREF="idx.html" CLASS="Element59">Index</A> | <A HREF="symref.html" CLASS="Element59">Reference</A></DIV>
+</TD></TR></TABLE><DIV CLASS="Element58">
+<DIV CLASS="Element5">
+TIdMessage</DIV>
+<DIV CLASS="Element7">
+<A HREF="012407.html" CLASS="Element59">Hierarchy</A>, <A HREF="012408.html" CLASS="Element59">Properties</A>, <A HREF="012409.html" CLASS="Element59">Methods</A>, <A HREF="012410.html" CLASS="Element59">Events</A>, <A HREF="012411.html" CLASS="Element59">See Also</A>, <A HREF="002286.html" CLASS="Element59">Unit: IdMessage</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Encapsulates an Internet Message.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12">TIdMessage = <STRONG>class</STRONG>(<A HREF="007213.html" CLASS="Element59">TIdBaseComponent</A>)</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Unit</DIV>
+<DIV CLASS="Element69">
+<A HREF="002286.html" CLASS="Element59">IdMessage</A></DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+TIdMessage encapsulates a complete Internet Message as described in the Internet Standards documents:<P CLASS="Element10">
+<UL>
+<LI>RFC 822 - Standard for the Format of ARPA Internet Text Messages (http://www.rfc-editor.org/rfc/rfc822.txt)<P CLASS="Element10">
+<LI>RFC 1036 - Standard for Interchange of USENET Messages (http://www.rfc-editor.org/rfc/rfc1036.txt)</UL>
+<P CLASS="Element10">
+TIdMessage is used with message-based protocols, such as POP3, SMTP, and NNTP. TIdMessage supports Multipurpose Internet Mail Extensions (MIME) as described in the Internet Standards documents:<P CLASS="Element10">
+<UL>
+<LI>RFC 2045 - Multipurpose Internet Mail Extensions (MIME), Part One: Format of Internet Message Bodies (http://www.rfc-editor.org/rfc/rfc2045.txt)<P CLASS="Element10">
+<LI>RFC 2046 - Multipurpose Internet Mail Extensions (MIME), Part Two: Media Types (http://www.rfc-editor.org/rfc/rfc2046.txt)<P CLASS="Element10">
+<LI>RFC 2047 - Multipurpose Internet Mail Extensions (MIME), Part Three: Message Header Extensions for Non-ASCII Text (http://www.rfc-editor.org/rfc/rfc2047.txt)<P CLASS="Element10">
+<LI>RFC 2048 - Multipurpose Internet Mail Extensions (MIME), Part Four: Registration Procedures (http://www.rfc-editor.org/rfc/rfc2048.txt)<P CLASS="Element10">
+<LI>RFC 2049 - Multipurpose Internet Mail Extensions (MIME), Part Five: Conformance Criteria and Examples (http://www.rfc-editor.org/rfc/rfc2049.txt)</UL>
+</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0001">TIdMessage.AttachmentEncoding</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007544.html" CLASS="Element59">TIdMessage</A>, <A HREF="012412.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Identifies the default encoding mechanism used for message parts.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> AttachmentEncoding: <STRONG>string</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+AttachmentEncoding is a String property that identifies the encoding mechanism used for attachment message parts in the message. Changing the value of AttachmentEncoding for the message also updates the default encoding used for all message parts in the message.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0002">TIdMessage.BccList</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007544.html" CLASS="Element59">TIdMessage</A>, <A HREF="012413.html" CLASS="Element59">See Also</A>, <A HREF="012414.html" CLASS="Element59">Example</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Indicates blind carbon copy recipients for the message.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> BccList: TIdEmailAddressList;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+BccList is a <A HREF="007308.html" CLASS="Element59">TIdEMailAddressList</A> property used to store email address of recipients that will receive a carbon copy of the message, but do not appear in the &quot;To:&quot; headers for the message. BccList is often used for mailing list applications, where members of the mailing list should receive a copy of a message addressed to the list.<P CLASS="Element10">
+Use <A HREF="007544.html#0004" CLASS="Element59">CCList</A> to indicate message recipients that may appear in the &quot;To:&quot; headers for the message.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0003">TIdMessage.Body</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007544.html" CLASS="Element59">TIdMessage</A>, <A HREF="012415.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Represents the body of the message.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> Body: TStrings;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Body is a TStrings property that contains the textual values that make up the body of the message. Body normally contains values when the <A HREF="007544.html#000B" CLASS="Element59">ContentType</A> for the message is a member of the &quot;text/*&quot; MIME family.<P CLASS="Element10">
+When <A HREF="007544.html#0002" CLASS="Element59">IsEncoded</A> is True, Body contains values that are encoded using the encoding scheme identified in <A HREF="007544.html#000A" CLASS="Element59">ContentTransferEncoding</A>. When <A HREF="007544.html#0002" CLASS="Element59">IsEncoded</A> is False, Body contains ASCII text that represents the contents of the message.<P CLASS="Element10">
+When <A HREF="007544.html#000B" CLASS="Element59">ContentType</A> contains a value in the &quot;multipart/*&quot; MIME family, use <A HREF="007544.html#0005" CLASS="Element59">MessageParts</A> to access the <A HREF="007844.html" CLASS="Element59">TIdText</A> or <A HREF="007204.html" CLASS="Element59">TIdAttachment</A> instances that make up the message.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0004">TIdMessage.CCList</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007544.html" CLASS="Element59">TIdMessage</A>, <A HREF="012416.html" CLASS="Element59">See Also</A>, <A HREF="012417.html" CLASS="Element59">Example</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Indicates carbon copy recipients for the message.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> CCList: TIdEmailAddressList;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+CCList is a <A HREF="007308.html" CLASS="Element59">TIdEMailAddressList</A> property used to store the email address of recipients that will receive a carbon copy of the message. Use <A HREF="007544.html#0002" CLASS="Element59">BccList</A> to indicate recipients that will receive a carbon copy of the message, but do not appear in the &quot;To:&quot; headers for the original message.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0005">TIdMessage.CharSet</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007544.html" CLASS="Element59">TIdMessage</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Indicates the character set used for the message.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> CharSet: <STRONG>string</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+CharSet is a String property that indicates the character set used for the message. Some common CharSet values include:<P CLASS="Element10">
+<UL>
+<LI>US-ASCII<P CLASS="Element10">
+<LI>ISO-8859-1<P CLASS="Element10">
+<LI>ISO-8859-2<P CLASS="Element10">
+<LI>ISO-8859-3<P CLASS="Element10">
+<LI>ISO-8859-4<P CLASS="Element10">
+<LI>ISO-8859-5<P CLASS="Element10">
+<LI>ISO-8859-6<P CLASS="Element10">
+<LI>ISO-8859-7<P CLASS="Element10">
+<LI>ISO-8859-8<P CLASS="Element10">
+<LI>ISO-8859-9<P CLASS="Element10">
+<LI>ISO-8859-10</UL>
+<P CLASS="Element10">
+All of these character sets are used as pure 7bit or 8bit sets without any shift or escape functions. The meaning of shift and escape sequences in these character sets is not defined. The &quot;charset&quot; parameter has been defined primarily for the purpose of textual data, and is described in this section for that reason. However, it is possible that non-textual data might also specify a charset value for some purpose.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0009">TIdMessage.ContentDisposition</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007544.html" CLASS="Element59">TIdMessage</A>, <A HREF="012418.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Indicates presentation and storage parameters for the message.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> ContentDisposition: <STRONG>string</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+ContentDisposition is a String property that represents the value for the Internet Message header &quot;Content-Disposition&quot; as described in RFC 2183. ContentDisposition indicates presentation information for the message and can contain values and optional parameters.<P CLASS="Element10">
+ContentDisposition can contain the value &quot;inline&quot; for an Internet Message where the body part should be display immediately, and in the order in which it occurs.<P CLASS="Element10">
+ContentDisposition can contain the value &quot;attachment&quot; followed by additional parameters to indicate that the message part is separate from the main body of the message. The parameter &quot;filename&quot; can be used to suggest a filename where the message part is detached and stored in a separate file. Other parameters can include &quot;creation-date&quot;, &quot;modification-date&quot;, &quot;read-date&quot;, and &quot;size&quot;.<P CLASS="Element10">
+ContentDisposition refers to the presentation and storage parameters for the entire message. Use <A HREF="007204.html#0001" CLASS="Element59">TIdAttachment.ContentDisposition</A> to access values for a given attachment in <A HREF="007544.html#0005" CLASS="Element59">MessageParts</A>.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="000A">TIdMessage.ContentTransferEncoding</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007544.html" CLASS="Element59">TIdMessage</A>, <A HREF="012419.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Specifies the MIME encoding for the message.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> ContentTransferEncoding: <STRONG>string</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+ContentTransferEncoding is a String property that specifies the MIME encoding used to represent data in a message for transfer using a mail transport protocol. Common values for ContentTransferEncoding include the following:<P CLASS="Element10">
+<UL>
+<LI>7bit - Message contains 7-bit un-encoded US-ASCII data (Default).<P CLASS="Element10">
+<LI>8bit - Message contains 8-bit un-encoded data.<P CLASS="Element10">
+<LI>binary - Message contains an un-encoded octet stream.<P CLASS="Element10">
+<LI>quoted-printable - Message contents transformed to 7-bit US-ASCII using quoted-printable encoding algorithm.<P CLASS="Element10">
+<LI>base64 - Message contents transformed to 7-bit US-ASCII using Base64 encoding algorithm.</UL>
+<P CLASS="Element10">
+Use <A HREF="007544.html#000B" CLASS="Element59">ContentType</A> to determine the original media family and type for a message.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="000B">TIdMessage.ContentType</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007544.html" CLASS="Element59">TIdMessage</A>, <A HREF="012420.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Identifies the MIME media type for the message.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> ContentType: <STRONG>string</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+ContentType is a String property that specifies the MIME media type for the message. The purpose of ContentType is to describe the data contained in the body to allow a user agent to determine how to present the data. ContentType contains information about the media type. subtype, and auxillary information in attribute=value notation. Some common values for the media type and subtype include:<P CLASS="Element10">
+<UL>
+<LI>text/plain<P CLASS="Element10">
+<LI>text/html<P CLASS="Element10">
+<LI>text/xml<P CLASS="Element10">
+<LI>text/enhanced<P CLASS="Element10">
+<LI>image/jpeg<P CLASS="Element10">
+<LI>image/gif<P CLASS="Element10">
+<LI>audio/basic<P CLASS="Element10">
+<LI>audio/au<P CLASS="Element10">
+<LI>video/mpeg<P CLASS="Element10">
+<LI>application/octet-stream<P CLASS="Element10">
+<LI>application/postscript<P CLASS="Element10">
+<LI>application/ms-word<P CLASS="Element10">
+<LI>application/ms-excel<P CLASS="Element10">
+<LI>application/rtf<P CLASS="Element10">
+<LI>multipart/mixed<P CLASS="Element10">
+<LI>multipart/alternative<P CLASS="Element10">
+<LI>multipart/parallel<P CLASS="Element10">
+<LI>multipart/related<P CLASS="Element10">
+<LI>message/rfc822<P CLASS="Element10">
+<LI>message/external-body</UL>
+<P CLASS="Element10">
+Use <A HREF="007544.html#000A" CLASS="Element59">ContentTransferEncoding</A> to identify the encoding scheme for the message.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="000D">TIdMessage.Date</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007544.html" CLASS="Element59">TIdMessage</A>, <A HREF="012421.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+The date a message was sent.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> Date: TDateTime;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Date is a TDateTime property that represents the TDateTime, expressed in the local timezone, when the message was sent. For an incoming message, Date contains the value read from the message header &quot;Date:&quot;. For an outgoing messsage, Date contains the value written to the message header &quot;Date:&quot;, or the current timestamp when <A HREF="007544.html#001C" CLASS="Element59">UseNowForDate</A> is True.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="000F">TIdMessage.Encoding</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007544.html" CLASS="Element59">TIdMessage</A>, <A HREF="012422.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Identifies the encoding algorithm for message attachments.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> Encoding: <A HREF="007567.html" CLASS="Element59">TIdMessageEncoding</A>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Encoding is a <A HREF="007567.html" CLASS="Element59">TIdMessageEncoding</A> property that represents the value to use for identifying the encoding algorithm for <A HREF="007544.html#0005" CLASS="Element59">MessageParts</A> in the message. Encoding may contain one of the following values and meanings:<P CLASS="Element10">
+<UL>
+<LI>meMIME - Uses a MIME encoding algorithm.<P CLASS="Element10">
+<LI>meUU - Uses the UUEncode encoding algorithm.</UL>
+<P CLASS="Element10">
+When the value in Encoding is changed, the corresponding textual representation for the algortihm is stored in <A HREF="007544.html#0001" CLASS="Element59">AttachmentEncoding</A>; for example: &quot;MIME&quot; or &quot;UUE&quot;.<P CLASS="Element10">
+Encoding is used in <A HREF="007544.html#0013" CLASS="Element59">GenerateHeader</A> to insure that <A HREF="007544.html#000B" CLASS="Element59">ContentType</A> and Charset reflect the values found in attachments stored in <A HREF="007544.html#0005" CLASS="Element59">MessageParts</A>.<P CLASS="Element10">
+The default value for Encoding is meMIME as assigned in the <A HREF="007544.html#000C" CLASS="Element59">Create</A> constructor.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0010">TIdMessage.ExtraHeaders</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007544.html" CLASS="Element59">TIdMessage</A>, <A HREF="012423.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Additional headers from the message.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> ExtraHeaders: <A HREF="007369.html" CLASS="Element59">TIdHeaderList</A>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+ExtraHeaders is a <A HREF="007369.html" CLASS="Element59">TIdHeaderList</A> property that contains additional headers for the message. ExtraHeaders is used to store header values from the message that are not represented as properties of <A HREF="007544.html" CLASS="Element59">TIdMessage</A>. ExtraHeaders is generally used to store values that might be added by a Mail User Agent, or for custom extension tokens beginning with &quot;x-&quot;.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0011">TIdMessage.Flags</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007544.html" CLASS="Element59">TIdMessage</A>, <A HREF="012424.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Represents mailbox message flags for the message.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> Flags: <A HREF="007570.html" CLASS="Element59">TIdMessageFlagsSet</A>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Flags is a <A HREF="007570.html" CLASS="Element59">TIdMessageFlagsSet</A> property that represents state, visibility, and persistence information about a message. Flags can used with components and protocols which provide access to and manuipulation of a mailbox address like <A HREF="007617.html" CLASS="Element59">TIdPOP3</A>, TTIdIMAP4, <A HREF="007618.html" CLASS="Element59">TIdPOP3Server</A>, and TIdIMP4Server, or TIdMailbox.<P CLASS="Element10">
+Flags may contain one or more of the enumerated values in <A HREF="007569.html" CLASS="Element59">TIdMessageFlags</A>.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0012">TIdMessage.From</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007544.html" CLASS="Element59">TIdMessage</A>, <A HREF="012425.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Identifies the original author of the message.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> From: TIdEmailAddressItem;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+From is a <A HREF="007307.html" CLASS="Element59">TIdEMailAddressItem</A> property that identifies the original author of the message. From may not contain the same value as <A HREF="007544.html#0015" CLASS="Element59">Sender</A>, when a message is forwarded.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0001">TIdMessage.Headers</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007544.html" CLASS="Element59">TIdMessage</A>, <A HREF="012426.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Header values for the message.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> Headers: <A HREF="007369.html" CLASS="Element59">TIdHeaderList</A>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Headers is a read-only <A HREF="007369.html" CLASS="Element59">TIdHeaderList</A> property used to store the header values for the message in raw form. Headers is updated in <A HREF="007544.html#0000" CLASS="Element59">AddHeader</A> and <A HREF="007544.html#0008" CLASS="Element59">ClearHeader</A>, when message properties represented as header values are updated, or when a message is received by a message client. Headers is used during processing in ProcessHeader and <A HREF="007544.html#0013" CLASS="Element59">GenerateHeader</A>.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0002">TIdMessage.IsEncoded</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007544.html" CLASS="Element59">TIdMessage</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Indicates when the message body is MIME-encoded.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> IsEncoded: Boolean;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+IsEncoded is a Boolean property used to indicate that the message body is encoded with the scheme specified in <A HREF="007544.html#000A" CLASS="Element59">ContentTransferEncoding</A>.<P CLASS="Element10">
+When IsEncoded is True, use <A HREF="007544.html#0005" CLASS="Element59">MessageParts</A> to access the text of the message body. When IsEncoded is False, the message body contains ASCII text and can be updated using <A HREF="007544.html#0003" CLASS="Element59">Body</A>.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0005">TIdMessage.MessageParts</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007544.html" CLASS="Element59">TIdMessage</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+List of message parts for the message.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> MessageParts: <A HREF="007575.html" CLASS="Element59">TIdMessageParts</A>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+MessageParts is a TIdMessagePartsList used to store the <A HREF="007573.html" CLASS="Element59">TIdMessagePart</A> components that make up the message. MessageParts can contain two <A HREF="007573.html" CLASS="Element59">TIdMessagePart</A> descendants: <A HREF="007844.html" CLASS="Element59">TIdText</A> and <A HREF="007204.html" CLASS="Element59">TIdAttachment</A>.<P CLASS="Element10">
+MessageParts is used when <A HREF="007544.html#0002" CLASS="Element59">IsEncoded</A> is set to True (on sending), or <A HREF="007544.html#0009" CLASS="Element59">NoDecode</A> is set to false for receiving.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0006">TIdMessage.MIMEBoundary</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007544.html" CLASS="Element59">TIdMessage</A>, <A HREF="012427.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Represents MIME boundary markers for the message.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> MIMEBoundary: <A HREF="007577.html" CLASS="Element59">TIdMIMEBoundary</A>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+MIMEBoundary is a <A HREF="007577.html" CLASS="Element59">TIdMIMEBoundary</A> property that represents the container for boundary marker strings used in the message. MIMEBoundary contents are in reverse order of their usage in the message. MIMEBoundary is updated when headers are processed from an incoming message, or when message parts are written to the output stream by a message client.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0007">TIdMessage.MsgId</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007544.html" CLASS="Element59">TIdMessage</A>, <A HREF="012428.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Message identifier assigned to the message.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> MsgId: <STRONG>string</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+MsgID is a String property that represents the unique message identifier for the message. MsgID contains the value from the RFC message header 'Message-Id:'. MsgID is normally assigned by the server that receives the message.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0008">TIdMessage.NewsGroups</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007544.html" CLASS="Element59">TIdMessage</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Identifies newsgroup to receive the message.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> NewsGroups: TStrings;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+NewsGroups is a TStrings property that is used to store the Newsgroup names where the message should be posted. Newsgroups is used to construct the value for the RFC message header 'Newsgroups:'. Newsgroups is significant when the message is retrieved or posted using a NNTP client.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0009">TIdMessage.NoDecode</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007544.html" CLASS="Element59">TIdMessage</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Requests a message in raw form.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> NoDecode: Boolean;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+NoDecode is a Boolean property used to indicate that the message should be retrieved without decoding the contents of the message. The default value of NoDecode is False.<P CLASS="Element10">
+When NoDecode is True, the message will be retrieved and added to <A HREF="007544.html#0005" CLASS="Element59">MessageParts</A> as MIME-encoded attachments. There will be one MessagePart (<A HREF="007844.html" CLASS="Element59">TIdText</A> type) added for the message <A HREF="007544.html#0003" CLASS="Element59">Body</A>, and additional MessagePart items (<A HREF="007204.html" CLASS="Element59">TIdAttachment</A> type) for each message attachment. <A HREF="007544.html#0003" CLASS="Element59">Body</A> will be empty.<P CLASS="Element10">
+To read a message for a POP3 client, you can use the following code:<P CLASS="Element10">
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12">    Msg.NoDecode := false;
+    APOP.Retrieve(1, Msg);
+
+    for i := 0 to Pred(Msg.MessageParts.Count) do
+    begin
+      //general attachments
+      if (Msg.MessageParts.Items[i] is <A HREF="007204.html" CLASS="Element59">TIdAttachment</A>) then
+      begin
+        lstAttachments.Add(<A HREF="007204.html" CLASS="Element59">TIdAttachment</A>(Msg.MessageParts.Items[i]).Filename);
+      end
+
+      //body text
+      else
+      begin
+        if Msg.MessageParts.Items[intIndex] is <A HREF="007844.html" CLASS="Element59">TIdText</A> then
+        begin
+          Memo1.Lines.AddStrings(<A HREF="007844.html" CLASS="Element59">TIdText</A>(Msg.MessageParts.Items[i]).<A HREF="007544.html#0003" CLASS="Element59">Body</A>);
+        end
+      end;
+    end;</PRE></DIV>
+</DIV>
+<P CLASS="Element10">
+When NoDecode is False, the message will be retreived and the message body is stored in <A HREF="007544.html#0003" CLASS="Element59">Body</A> in its MIME-encoded form.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="000A">TIdMessage.NoEncode</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007544.html" CLASS="Element59">TIdMessage</A>, <A HREF="012429.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Indicates if encoding can be omitted for <A HREF="007544.html#0001" CLASS="Element59">Headers</A> and <A HREF="007544.html#0003" CLASS="Element59">Body</A> prior to message transmission.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> NoEncode: Boolean;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+NoEncode is a Boolean property that indicates if encoding should be performed when sending message headers and other content. NoEncode can be used when the <A HREF="007544.html" CLASS="Element59">TIdMessage</A> instance has been loaded using values that have already been encoded, or require no encoding prior to transmission.<P CLASS="Element10">
+The default value for NoEncode is <A HREF="001629.html" CLASS="Element59">ID_MSG_NODECODE</A> as assigned in the <A HREF="007544.html#000C" CLASS="Element59">Create</A> constructor. NoEncode is used in <A HREF="007546.html#0006" CLASS="Element59">TIdMessageClient.SendMsg</A>. When NoEncode is True, <A HREF="007544.html#0001" CLASS="Element59">Headers</A> and the optional <A HREF="007544.html#0003" CLASS="Element59">Body</A> for the message will be written by the message client using WriteStrings. <STRONG>Note</STRONG>: When NoEncode is True, other message parts for the message are not sent by the message client.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="000C">TIdMessage.Organization</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007544.html" CLASS="Element59">TIdMessage</A>, <A HREF="012430.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Identifies the organizational affiliation for the message author.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> Organization: <STRONG>string</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Organization is a String property that identifies the organizational affiliation for the message author. Organization is the value from the RFC message header 'Organization:'.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="000D">TIdMessage.Priority</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007544.html" CLASS="Element59">TIdMessage</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Identifies the message priority.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> Priority: <A HREF="007576.html" CLASS="Element59">TIdMessagePriority</A>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Priority is a <A HREF="007576.html" CLASS="Element59">TIdMessagePriority</A> property that describes the message priority. Priority can contain one of the following values:<P CLASS="Element10">
+<UL>
+<LI>mpHighest - The message should be given the highest priority<P CLASS="Element10">
+<LI>mpHigh - This message should be given a high priority<P CLASS="Element10">
+<LI>mpNormal - This message should be given the normal priority. This is the default value.<P CLASS="Element10">
+<LI>mpLow - This message should be given a low priority<P CLASS="Element10">
+<LI>mpLowest - This message should be given the lowest priority</UL>
+</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="000F">TIdMessage.ReceiptRecipient</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007544.html" CLASS="Element59">TIdMessage</A>, <A HREF="012431.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Return receipt email address.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> ReceiptRecipient: TIdEmailAddressItem;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+ReceiptRecipient is a <A HREF="007307.html" CLASS="Element59">TIdEMailAddressItem</A> property used to identify the address where a return receipt for the message should be delivered. Assign a blank value to ReceiptRecipient when a return receipt is not desired.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0010">TIdMessage.Recipients</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007544.html" CLASS="Element59">TIdMessage</A>, <A HREF="012432.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Identifies the recipients of a message.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> Recipients: TIdEmailAddressList;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Recipients is a <A HREF="007308.html" CLASS="Element59">TIdEMailAddressList</A> property used to store TIdEmailAddressItem values that identify the recipients of the message. Use <A HREF="007544.html#0004" CLASS="Element59">CCList</A> for recipients to receive a Carbon Copy of the message. Use BCCList for recipients to receive a Blind Carbo Copy of the message.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0011">TIdMessage.References</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007544.html" CLASS="Element59">TIdMessage</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Identifies the reply-to messages.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> References: <STRONG>string</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+References is a String property that contains a list of message identifiers for which the message is a reply. References contains the value for the RFC message header 'References:'.<P CLASS="Element10">
+References is used by NNTP newsreader applications to create a threaded article display.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0012">TIdMessage.ReplyTo</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007544.html" CLASS="Element59">TIdMessage</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Identifies the delivery address for message replies.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> ReplyTo: TIdEmailAddressList;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+ReplyTo is a TIdEmailAddressItem property that specifies the email address where replies to this message should be delivered. ReplyTo is used when the delivery address is different that <A HREF="007544.html#0012" CLASS="Element59">From</A>. ReplyTo contains the value from the RFC message header 'Reply-To'.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0015">TIdMessage.Sender</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007544.html" CLASS="Element59">TIdMessage</A>, <A HREF="012433.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Identifies the sender of the message.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> Sender: TIdEmailAddressItem;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Sender is a <A HREF="007307.html" CLASS="Element59">TIdEMailAddressItem</A> property used to indicate the person sending the message, if the person is not the message author. Sender contains the value from the RFC message header 'Sender:'. Use <A HREF="007544.html#0012" CLASS="Element59">From</A> to access the original author of the message.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="001A">TIdMessage.Subject</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007544.html" CLASS="Element59">TIdMessage</A>, <A HREF="012434.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Identifies the subject for the message.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> Subject: <STRONG>string</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Subject is a String property that identifies the subject for the message. Subject contains the value from the RFC message header 'Subject:'.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="001B">TIdMessage.UID</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007544.html" CLASS="Element59">TIdMessage</A>, <A HREF="012435.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Unique Identifier for a message.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> UID: <STRONG>String</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+UID is a String property that represents the Unique Identifier message attribute assigned to a message in mail-related protocols like IMAP4 and POP3. The content and format of UID is based on requirements in the mail protocol.<P CLASS="Element10">
+For messages retrieved using <A HREF="007405.html" CLASS="Element59">TIdIMAP4</A>, UID will contain the string representation of the persistent 32-bit integer value stored in mailbox data associted with the message envelope. The value in UID is assigned when a message instance is created and updated in the message collection used in <A HREF="007405.html#000A" CLASS="Element59">TIdIMAP4.UIDRetrieveAllEnvelopes</A>.<P CLASS="Element10">
+For messages retrieved using <A HREF="007617.html" CLASS="Element59">TIdPOP3</A>, UID may contain the arbitrary 70-byte value (maximum) which identifies a message in the POP3 maildrop. In POP3, individual byte values in UID must be in the range 0x21 to 0x7E. <STRONG>Note</STRONG>: Messages marked as deleted in the POP3 maildrop are not returned with a UID value.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="001C">TIdMessage.UseNowForDate</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007544.html" CLASS="Element59">TIdMessage</A>, <A HREF="012436.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Indicates that the message uses the current date and time when sent.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> UseNowForDate: Boolean;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+UseNowForDate is a Boolean property that indicates the message should use the current date and time in the <A HREF="007544.html#000D" CLASS="Element59">Date</A> property when the message is sent to the server.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0000">TIdMessage.AddHeader</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007544.html" CLASS="Element59">TIdMessage</A>, <A HREF="012437.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Adds a header and value to the message.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>procedure</STRONG> AddHeader(<STRONG>const</STRONG> Value: <STRONG>string</STRONG>);</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+const Value: string</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+header name and value in NAME=VALUE form.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+AddHeader is a procedure used to add a header name and value to the Header for the message. Value is the RFC 822 message header to be added in NAME=VALUE form.<P CLASS="Element10">
+AddHeader can be used to add an experimental header after the message has loaded the header values in <A HREF="007546.html" CLASS="Element59">TIdMessageClient</A> and set property values using <A HREF="007544.html#000E" CLASS="Element59">ProcessHeaders</A>.<P CLASS="Element10">
+<STRONG>Note:</STRONG> AddHeader does not perform line folding for header values.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0006">TIdMessage.Clear</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007544.html" CLASS="Element59">TIdMessage</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Clears the header and body for the message.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>procedure</STRONG> Clear; <STRONG>virtual</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Clear is a procedure used to clear the values stored in the Header and <A HREF="007544.html#0003" CLASS="Element59">Body</A> of the message.<P CLASS="Element10">
+Clear calls <A HREF="007544.html#0008" CLASS="Element59">ClearHeader</A> to remove the contents of the message header. Clear calls <A HREF="007544.html#0007" CLASS="Element59">ClearBody</A> to remove the contents of the message body.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0007">TIdMessage.ClearBody</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007544.html" CLASS="Element59">TIdMessage</A>, <A HREF="012438.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+<A HREF="007544.html#0006" CLASS="Element59">Clear</A> the contents of the message body.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>procedure</STRONG> ClearBody;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+ClearBody is a procedure used to clear the contents of the message. ClearBody will insure that text lines in <A HREF="007544.html#0003" CLASS="Element59">Body</A> are remove by calling Body.<A HREF="007544.html#0006" CLASS="Element59">Clear</A>. ClearBody also removes any items in the <A HREF="007544.html#0005" CLASS="Element59">MessageParts</A> collection by calling MessageParts.<A HREF="007544.html#0006" CLASS="Element59">Clear</A>.<P CLASS="Element10">
+Use <A HREF="007544.html#0008" CLASS="Element59">ClearHeader</A> to remove the contents the message Header, or <A HREF="007544.html#0006" CLASS="Element59">Clear</A> to remove both the Header and the <A HREF="007544.html#0003" CLASS="Element59">Body</A> of the message.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0008">TIdMessage.ClearHeader</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007544.html" CLASS="Element59">TIdMessage</A>, <A HREF="012439.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+<A HREF="007544.html#0006" CLASS="Element59">Clear</A> the contents of the message header.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>procedure</STRONG> ClearHeader;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+ClearHeader is a procedure used to clear the contents of the message Header. ClearHeader will reset properties to their default values, including:<P CLASS="Element10">
+<UL>
+<LI>CcList<P CLASS="Element10">
+<LI><A HREF="007544.html#0002" CLASS="Element59">BccList</A><P CLASS="Element10">
+<LI><A HREF="007544.html#000D" CLASS="Element59">Date</A><P CLASS="Element10">
+<LI><A HREF="007544.html#0012" CLASS="Element59">From</A><P CLASS="Element10">
+<LI><A HREF="007544.html#0008" CLASS="Element59">NewsGroups</A><P CLASS="Element10">
+<LI><A HREF="007544.html#000C" CLASS="Element59">Organization</A><P CLASS="Element10">
+<LI><A HREF="007544.html#0011" CLASS="Element59">References</A><P CLASS="Element10">
+<LI><A HREF="007544.html#0012" CLASS="Element59">ReplyTo</A><P CLASS="Element10">
+<LI><A HREF="007544.html#001A" CLASS="Element59">Subject</A><P CLASS="Element10">
+<LI><A HREF="007544.html#0010" CLASS="Element59">Recipients</A><P CLASS="Element10">
+<LI><A HREF="007544.html#000D" CLASS="Element59">Priority</A><P CLASS="Element10">
+<LI><A HREF="007544.html#000F" CLASS="Element59">ReceiptRecipient</A><P CLASS="Element10">
+<LI><A HREF="007544.html#000B" CLASS="Element59">ContentType</A><P CLASS="Element10">
+<LI><A HREF="007544.html#0005" CLASS="Element59">CharSet</A><P CLASS="Element10">
+<LI><A HREF="007544.html#000A" CLASS="Element59">ContentTransferEncoding</A><P CLASS="Element10">
+<LI><A HREF="007544.html#0009" CLASS="Element59">ContentDisposition</A><P CLASS="Element10">
+<LI><A HREF="007544.html#0015" CLASS="Element59">Sender</A><P CLASS="Element10">
+<LI><A HREF="007544.html#0001" CLASS="Element59">Headers</A><P CLASS="Element10">
+<LI><A HREF="007544.html#0010" CLASS="Element59">ExtraHeaders</A><P CLASS="Element10">
+<LI><A HREF="007544.html#0006" CLASS="Element59">MIMEBoundary</A><P CLASS="Element10">
+<LI><A HREF="007544.html#001C" CLASS="Element59">UseNowForDate</A><P CLASS="Element10">
+<LI><A HREF="007544.html#0011" CLASS="Element59">Flags</A></UL>
+<P CLASS="Element10">
+Use <A HREF="007544.html#0007" CLASS="Element59">ClearBody</A> to remove the contents the message <A HREF="007544.html#0003" CLASS="Element59">Body</A>, or <A HREF="007544.html#0006" CLASS="Element59">Clear</A> to remove both the Header and the <A HREF="007544.html#0003" CLASS="Element59">Body</A> of the message.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="000C">TIdMessage.Create</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007544.html" CLASS="Element59">TIdMessage</A>, <A HREF="012440.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Constructor for the object instance.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>constructor</STRONG> Create(AOwner: TComponent); <STRONG>override</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+AOwner: TComponent</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Owner of the object instance.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Create is the constructor for the object instance. Create calls the inherited Create method to initialize the object instance. Create also initializes object properties for the instance, including:<P CLASS="Element10">
+<UL>
+<LI><A HREF="007544.html#0003" CLASS="Element59">Body</A><P CLASS="Element10">
+<LI><A HREF="007544.html#0010" CLASS="Element59">Recipients</A><P CLASS="Element10">
+<LI><A HREF="007544.html#0002" CLASS="Element59">BccList</A><P CLASS="Element10">
+<LI>CcList<P CLASS="Element10">
+<LI><A HREF="007544.html#0005" CLASS="Element59">MessageParts</A><P CLASS="Element10">
+<LI><A HREF="007544.html#0008" CLASS="Element59">NewsGroups</A><P CLASS="Element10">
+<LI><A HREF="007544.html#0001" CLASS="Element59">Headers</A><P CLASS="Element10">
+<LI><A HREF="007544.html#0012" CLASS="Element59">From</A><P CLASS="Element10">
+<LI><A HREF="007544.html#0012" CLASS="Element59">ReplyTo</A><P CLASS="Element10">
+<LI><A HREF="007544.html#0015" CLASS="Element59">Sender</A><P CLASS="Element10">
+<LI><A HREF="007544.html#0010" CLASS="Element59">ExtraHeaders</A><P CLASS="Element10">
+<LI><A HREF="007544.html#000F" CLASS="Element59">ReceiptRecipient</A><P CLASS="Element10">
+<LI><A HREF="007544.html#0006" CLASS="Element59">MIMEBoundary</A><P CLASS="Element10">
+<LI><A HREF="007544.html#0009" CLASS="Element59">NoDecode</A></UL>
+<P CLASS="Element10">
+Create also calls <A HREF="007544.html#0006" CLASS="Element59">Clear</A> to insure that <A HREF="007544.html#0001" CLASS="Element59">Headers</A> and <A HREF="007544.html#0003" CLASS="Element59">Body</A> are reset to their empty state.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="000E">TIdMessage.Destroy</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007544.html" CLASS="Element59">TIdMessage</A>, <A HREF="012441.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Frees the object instance.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>destructor</STRONG> Destroy; <STRONG>override</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Destroy is the destructor for the object instance. Destroy is responsible for freeing the object references used in internal properties, as initiated in the <A HREF="007544.html#000C" CLASS="Element59">Create</A> constructor.<P CLASS="Element10">
+Destroy calls the inherited Destroy method to complete destruction of the object instance.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0013">TIdMessage.GenerateHeader</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007544.html" CLASS="Element59">TIdMessage</A>, <A HREF="012442.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+<A HREF="007544.html#000C" CLASS="Element59">Create</A> a list of headers for the message.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>function</STRONG> GenerateHeader: <A HREF="007369.html" CLASS="Element59">TIdHeaderList</A>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Return Value</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+<A HREF="007369.html" CLASS="Element59">TIdHeaderList</A> - <A HREF="007544.html#0001" CLASS="Element59">Headers</A> generated for the message.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+GenerateHeader is a <A HREF="007369.html" CLASS="Element59">TIdHeaderList</A> function used to create and populate a MIME-encoded list of message headers. The message headers returned by GenerateHeader includes:<P CLASS="Element10">
+<UL>
+<LI><A HREF="007544.html#0012" CLASS="Element59">From</A><P CLASS="Element10">
+<LI><A HREF="007544.html#001A" CLASS="Element59">Subject</A><P CLASS="Element10">
+<LI>To<P CLASS="Element10">
+<LI>Cc<P CLASS="Element10">
+<LI>Newsgroups<P CLASS="Element10">
+<LI>Content-Type<P CLASS="Element10">
+<LI>MIME-Version<P CLASS="Element10">
+<LI>Content-Transfer-<A HREF="007544.html#000F" CLASS="Element59">Encoding</A><P CLASS="Element10">
+<LI><A HREF="007544.html#0015" CLASS="Element59">Sender</A><P CLASS="Element10">
+<LI>Reply-To<P CLASS="Element10">
+<LI><A HREF="007544.html#000C" CLASS="Element59">Organization</A><P CLASS="Element10">
+<LI>Disposition-Notification-To<P CLASS="Element10">
+<LI><A HREF="007544.html#0011" CLASS="Element59">References</A><P CLASS="Element10">
+<LI><A HREF="007544.html#000D" CLASS="Element59">Date</A><P CLASS="Element10">
+<LI>X-<A HREF="007544.html#000D" CLASS="Element59">Priority</A><P CLASS="Element10">
+<LI>X-Library</UL>
+<P CLASS="Element10">
+For the Content-Type header, GenerateHeader compares the MIME <A HREF="007544.html#000F" CLASS="Element59">Encoding</A> for the message to the message encoders used for any <A HREF="007544.html#0005" CLASS="Element59">MessageParts</A>. If a message encoder contains a Charset value, it is appended to <A HREF="007544.html#000B" CLASS="Element59">ContentType</A>. If Ecoding contains a value other than meMIME, and the message has multipart/related or multipart/alternative message parts, an <A HREF="000413.html" CLASS="Element59">EIdMessageException</A> will be raised.<P CLASS="Element10">
+GenerateHeader appends all values in <A HREF="007544.html#0010" CLASS="Element59">ExtraHeaders</A> to the <A HREF="007369.html" CLASS="Element59">TIdHeaderList</A> return value. The application must free the <A HREF="007369.html" CLASS="Element59">TIdHeaderList</A> returned by GenerateHeader.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0000">TIdMessage.GetUseNowForDate</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007544.html" CLASS="Element59">TIdMessage</A>, <A HREF="012443.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Reads the Boolean value for UseDateForNow.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>function</STRONG> GetUseNowForDate: Boolean;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+GetUseNowForDate is the Read access specifier for the Boolean UseDateForNow property.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0003">TIdMessage.LoadFromFile</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007544.html" CLASS="Element59">TIdMessage</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Loads message headers and message parts from a file.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>procedure</STRONG> LoadFromFile(<STRONG>const</STRONG> AFileName: <STRONG>string</STRONG>; <STRONG>const</STRONG> AHeadersOnly: Boolean = False);</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+const AFileName: string</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+File containing values to load into the message.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+const AHeadersOnly: Boolean = False</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Message should load only headers from the file.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+LoadFromFile is a procedure that loads the headers and optional contents for a message from the file name specified in AFilename. If AFilename is not a valid file name on the the local file system, an <A HREF="000412.html" CLASS="Element59">EIdMessageCannotLoad</A> exception will be raised and the method will be aborted.<P CLASS="Element10">
+LoadFromFile creates an instance of TFileStream to be used to reading the values for the message instance. The file stream is created using the file mode constants fmOpenRead and fmShareDenyWrite. LoadFromFile calls <A HREF="007544.html#0004" CLASS="Element59">LoadFromStream</A> using the stream to perform the physical input operation. The TFileStream instance is freed prior to exiting from the method.<P CLASS="Element10">
+When AHeadersOnly is False, only header values up to and including the blank line delimiter in RFC message headers will be read from the input file. When AHeadersOnly is True, both message <A HREF="007544.html#0001" CLASS="Element59">Headers</A> and <A HREF="007544.html#0005" CLASS="Element59">MessageParts</A> will be read into the message instance.<P CLASS="Element10">
+Use <A HREF="007544.html#0013" CLASS="Element59">SaveToFile</A> to create a file suitable for use with LoadFromFile. Use LoadFromSteam to read message contents from a TStream descendant. Use <A HREF="007544.html#0014" CLASS="Element59">SaveToStream</A> to create a stream containing values suitable for use with LoadFromSteam.<P CLASS="Element10">
+<STRONG>Note</STRONG>: Both LoadFromFile and <A HREF="007544.html#0004" CLASS="Element59">LoadFromStream</A> are designed to handle messages written using the <A HREF="007544.html#0014" CLASS="Element59">SaveToStream</A> or SavedToFile methods in the Indy <A HREF="007544.html" CLASS="Element59">TIdMessage</A> component. These methods create an encoded version of the message contents that matches the protocol tranmissions used when the message is transmitted using <A HREF="007701.html" CLASS="Element59">TIdSMTP</A> including the message terminator characters (CRLF.CRLF). If you are trying to import .EML message files from MS Outlook Express, or another email client, make sure that the text file contains the message terminator sequence. An exception will be raised if LoadFromFile or <A HREF="007544.html#0004" CLASS="Element59">LoadFromStream</A> are used to load files that do not include the message terminator sequence.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0004">TIdMessage.LoadFromStream</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007544.html" CLASS="Element59">TIdMessage</A>, <A HREF="012444.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Loads message headers and message parts from an input stream.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>procedure</STRONG> LoadFromStream(AStream: TStream; <STRONG>const</STRONG> AHeadersOnly: Boolean = False);</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+AStream: TStream</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Source used to read headers and message parts.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+const AHeadersOnly: Boolean = False</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Indicates if only headers should be loaded. Default value is False.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+LoadFromStream is a procedure that allows loading of headers and optional message parts for the <A HREF="007544.html" CLASS="Element59">TIdMessage</A> instance from the stream identified in AStream.<P CLASS="Element10">
+AStream is a TStream descendant and represents the data source that will be used read values to be stored in the message instance. AStream can be any TStream descendant suitable for use in the as the input stream in a <A HREF="007427.html" CLASS="Element59">TIdIOHandlerStream</A> instance. <STRONG>Note</STRONG>: The current position in AStream is not changed at any time during the LoadFromStream method. LoadFromStream uses the current stream position to perform the physical input operation, and leaves the stream at the position following the read operation.<P CLASS="Element10">
+AHeadersOnly indicates if only message headers should be loaded for the message instance. When AHeadersOnly is False, the entire message including all <A HREF="007544.html#0001" CLASS="Element59">Headers</A> and <A HREF="007544.html#0005" CLASS="Element59">MessageParts</A> will be loaded from AStream.<P CLASS="Element10">
+LoadFromStream creates an instance of <A HREF="007546.html" CLASS="Element59">TIdMessageClient</A>, and calls <A HREF="007546.html#0003" CLASS="Element59">TIdMessageClient.ProcessMessage</A> to perform the physical input required to load values into the message instance. The <A HREF="007546.html" CLASS="Element59">TIdMessageClient</A> instance is freed prior to exiting from the method.<P CLASS="Element10">
+<STRONG>Note</STRONG>: Both <A HREF="007544.html#0003" CLASS="Element59">LoadFromFile</A> and LoadFromStream are designed to handle messages written using the <A HREF="007544.html#0014" CLASS="Element59">SaveToStream</A> or SavedToFile methods in the Indy <A HREF="007544.html" CLASS="Element59">TIdMessage</A> component. These methods create an encoded version of the message contents that matches the protocol tranmissions used when the message is transmitted using <A HREF="007701.html" CLASS="Element59">TIdSMTP</A> including the message terminator characters (CRLF.CRLF). If you are trying to import .EML message files from MS Outlook Express, or another email client, make sure that the text file contains the message terminator sequence. An exception will be raised if <A HREF="007544.html#0003" CLASS="Element59">LoadFromFile</A> or LoadFromStream are used to load files that do not include the message terminator sequence.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="000E">TIdMessage.ProcessHeaders</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007544.html" CLASS="Element59">TIdMessage</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Updates message properties based on header values in the message.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>procedure</STRONG> ProcessHeaders;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+ProcessHeaders is a procedure that updates message properties based on header values in the message. ProcessHeaders examine the <A HREF="007369.html" CLASS="Element59">TIdHeaderList</A> property <A HREF="007544.html#0001" CLASS="Element59">Headers</A> to retrieve values that can be expressed as <A HREF="007544.html" CLASS="Element59">TIdMessage</A> properties, including the following:<P CLASS="Element10">
+<UL>
+<LI><A HREF="007544.html#0004" CLASS="Element59">CCList</A><P CLASS="Element10">
+<LI><A HREF="007544.html#0009" CLASS="Element59">ContentDisposition</A><P CLASS="Element10">
+<LI><A HREF="007544.html#000A" CLASS="Element59">ContentTransferEncoding</A><P CLASS="Element10">
+<LI><A HREF="007544.html#000B" CLASS="Element59">ContentType</A><P CLASS="Element10">
+<LI><A HREF="007544.html#000D" CLASS="Element59">Date</A><P CLASS="Element10">
+<LI><A HREF="007544.html#0012" CLASS="Element59">From</A><P CLASS="Element10">
+<LI><A HREF="007544.html#0006" CLASS="Element59">MIMEBoundary</A><P CLASS="Element10">
+<LI><A HREF="007544.html#0007" CLASS="Element59">MsgId</A><P CLASS="Element10">
+<LI>Newsgroups<P CLASS="Element10">
+<LI><A HREF="007544.html#000C" CLASS="Element59">Organization</A><P CLASS="Element10">
+<LI><A HREF="007544.html#000D" CLASS="Element59">Priority</A><P CLASS="Element10">
+<LI><A HREF="007544.html#000F" CLASS="Element59">ReceiptRecipient</A><P CLASS="Element10">
+<LI><A HREF="007544.html#0010" CLASS="Element59">Recipients</A><P CLASS="Element10">
+<LI><A HREF="007544.html#0011" CLASS="Element59">References</A><P CLASS="Element10">
+<LI><A HREF="007544.html#0012" CLASS="Element59">ReplyTo</A><P CLASS="Element10">
+<LI><A HREF="007544.html#0015" CLASS="Element59">Sender</A><P CLASS="Element10">
+<LI><A HREF="007544.html#001A" CLASS="Element59">Subject</A></UL>
+</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0013">TIdMessage.SaveToFile</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007544.html" CLASS="Element59">TIdMessage</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Stores message headers and contents in a file.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>procedure</STRONG> SaveToFile(<STRONG>const</STRONG> AFileName: <STRONG>string</STRONG>; <STRONG>const</STRONG> AHeadersOnly: Boolean = False);</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+const AFileName: string</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+File to use for storing the message.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+const AHeadersOnly: Boolean = False</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Message should store only headers to the file.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+SaveToFile is a procedure used to store the headers and optional message parts for the message in the file specified in AFilename. If the file specified in AFileName already exists, the file is deleted prior to performing any output operation. SaveToFile calls <A HREF="007544.html#0014" CLASS="Element59">SaveToStream</A> using the file stream to perform the physical output operation. The file stream instance is freed prior to exiting from the method.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0014">TIdMessage.SaveToStream</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007544.html" CLASS="Element59">TIdMessage</A>, <A HREF="012445.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Stores message headers and message parts to an output stream.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>procedure</STRONG> SaveToStream(AStream: TStream; <STRONG>const</STRONG> AHeadersOnly: Boolean = False);</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+AStream: TStream</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Destination used to write headers and message parts.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+const AHeadersOnly: Boolean = False</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Indicates if only headers should be stored. Default value is False.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+SaveToStream is a procedure that allows storage of headers and optional message parts for the <A HREF="007544.html" CLASS="Element59">TIdMessage</A> instance to the stream identified in AStream.<P CLASS="Element10">
+AStream is a TStream descendant and represents the destination that will be used to write values in the message instance. AStream can be any TStream descendant suitable for use as the output stream in a <A HREF="007427.html" CLASS="Element59">TIdIOHandlerStream</A> instance. <STRONG>Note</STRONG>: The current position in AStream is not changed at any time during the SaveToStream method. SaveToStream uses the current stream position to perform the physical output operation, and leaves the stream at the position following the write operation.<P CLASS="Element10">
+AHeadersOnly indicates if only message headers should be written for the message instance. When AHeadersOnly is False, the entire message including all <A HREF="007544.html#0001" CLASS="Element59">Headers</A> and <A HREF="007544.html#0005" CLASS="Element59">MessageParts</A> will be stored in AStream.<P CLASS="Element10">
+SaveToStream creates an instance of <A HREF="007546.html" CLASS="Element59">TIdMessageClient</A>, and calls TIdMessageClient.SaveMsg to perform the physical output required to store values from the message instance. The <A HREF="007546.html" CLASS="Element59">TIdMessageClient</A> instance is freed prior to exiting from the method.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0016">TIdMessage.SetBody</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007544.html" CLASS="Element59">TIdMessage</A>, <A HREF="012446.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Updates the message body to the specified contents.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>procedure</STRONG> SetBody(<STRONG>const</STRONG> Value: TStrings);</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+const Value: TStrings</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Data to be assigned to the message body.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+SetBody is a procedure that updates the message body to the specified contents. SetBody is the write specifier for the <A HREF="007544.html#0003" CLASS="Element59">Body</A> property.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0017">TIdMessage.SetExtraHeaders</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007544.html" CLASS="Element59">TIdMessage</A>, <A HREF="012447.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Updates the contents of the <A HREF="007544.html#0010" CLASS="Element59">ExtraHeaders</A> property to the specified values.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>procedure</STRONG> SetExtraHeaders(<STRONG>const</STRONG> Value: <A HREF="007369.html" CLASS="Element59">TIdHeaderList</A>);</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+AValue</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Contents to assign to the extra headers list.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+SetExtraHeaders is a procedure that updates the contents of the <A HREF="007544.html#0010" CLASS="Element59">ExtraHeaders</A> property to the specified values.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0018">TIdMessage.SetNewsGroups</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007544.html" CLASS="Element59">TIdMessage</A>, <A HREF="012448.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Updates the contents of the Newsgroup property to the specified values.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>procedure</STRONG> SetNewsGroups(<STRONG>const</STRONG> Value: TStrings);</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+const Value: TStrings</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Contents to be assigned to the newsgroup property.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+SetNewsGroups is a procedure that updates the contents of the NewsGroup property to the specified values.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0019">TIdMessage.SetUseNowForDate</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007544.html" CLASS="Element59">TIdMessage</A>, <A HREF="012449.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Updates the Boolean value for UseDateForNow.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>procedure</STRONG> SetUseNowForDate(<STRONG>const</STRONG> Value: Boolean);</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+SetUseNowForDate is the write access specifier for the Boolean <A HREF="007544.html#001C" CLASS="Element59">UseNowForDate</A> property.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="000B">TIdMessage.OnInitializeISO</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007544.html" CLASS="Element59">TIdMessage</A>, <A HREF="012450.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> OnInitializeISO: <A HREF="007418.html" CLASS="Element59">TIdInitializeIsoEvent</A>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+OnInitializeISO is a <A HREF="007418.html" CLASS="Element59">TIdInitializeIsoEvent</A> property that represents the event handler signalled when ... ???? OnInitializeISO is signalled during excecution of <A HREF="007544.html#0013" CLASS="Element59">GenerateHeader</A>.</DIV>
+</DIV>
+<DIV CLASS="Element62">
+<HR>Created with Doc-O-Matic 2 donated to <STRONG><A HREF="http://www.delphi-jedi.org">Project JEDI</A></STRONG>. Commercial license available from the <STRONG><A HREF="http://www.doc-o-matic.com">Doc-O-Matic site</A></STRONG>.</DIV>
+</DIV></BODY></HTML>

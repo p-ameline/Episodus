@@ -1,0 +1,1370 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+<TITLE>TIdCustomHTTP</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <META name="GENERATOR" content="Doc-O-Matic">
+    <LINK rel="STYLESHEET" href="default.css" type="text/css">
+
+<SCRIPT LANGUAGE="JavaScript1.2" SRC="scripts.js"></SCRIPT>
+</HEAD>
+<BODY CLASS="Element57">
+<TABLE BORDER="0" BGCOLOR="#AACCFF" WIDTH="100%" CELLSPACING="0" CELLPADDING="0">
+<TR><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element1">
+Indy 9</DIV>
+</TD><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element2">
+<A HREF="content.html" CLASS="Element59">Content</A> | <A HREF="idx.html" CLASS="Element59">Index</A> | <A HREF="symref.html" CLASS="Element59">Reference</A></DIV>
+</TD></TR></TABLE><DIV CLASS="Element58">
+<DIV CLASS="Element5">
+TIdCustomHTTP</DIV>
+<DIV CLASS="Element7">
+<A HREF="010326.html" CLASS="Element59">Hierarchy</A>, <A HREF="010327.html" CLASS="Element59">Properties</A>, <A HREF="010328.html" CLASS="Element59">Methods</A>, <A HREF="010329.html" CLASS="Element59">Events</A>, <A HREF="010330.html" CLASS="Element59">See Also</A>, <A HREF="002251.html" CLASS="Element59">Unit: IdHTTP</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Specifies an HTTP client implementation.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12">TIdCustomHTTP = <STRONG>class</STRONG>(<A HREF="007827.html" CLASS="Element59">TIdTCPClient</A>)</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Unit</DIV>
+<DIV CLASS="Element69">
+<A HREF="002251.html" CLASS="Element59">IdHTTP</A></DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+TIdCustomHTTP is a <A HREF="007827.html" CLASS="Element59">TIdTCPClient</A> descendant that specifies a client implementation of the Hypertext Transfer Protocol (HTTP) as described in the Internet Standards documents:<P CLASS="Element10">
+<UL>
+<LI>RFC 1945 - Hypertext Transfer Protocol version 1.0 [HTTP/1.0] (http://www.rfc-editor.org/rfc/rfc1945.txt)<P CLASS="Element10">
+<LI>RFC 2616 - Hypertext Transfer Protocol version 1.1 [HTTP/1.1] (http://www.rfc-editor.org/rfc/rfc2616.txt)</UL>
+<P CLASS="Element10">
+<STRONG>Note</STRONG>: Application do not normally create instances of TIdCustomHTTP. Use <A HREF="007375.html" CLASS="Element59">TIdHTTP</A> which publishes propeties and event handlers used in client applications.<P CLASS="Element10">
+TIdCustomHTTP provides support for both HTTP 1.0 and HTTP 1.1 protocols. Note: <A HREF="007270.html#0012" CLASS="Element59">Post</A> is restricted to support for the HTTP 1.0 protocol due to limited and/or improper HTTP server support for the HTTP 1.1 specification.<P CLASS="Element10">
+TIdCustomHTTP provides a <A HREF="007270.html#0003" CLASS="Element59">CookieManager</A> that implements an HTTP State Management mechanism as specified in the Internet Standards documents, and reference materials:<P CLASS="Element10">
+<UL>
+<LI>RFC 2109 - HTTP State Management Mechanism (http://www.rfc-editor.org/rfc/rfc2109.txt)<P CLASS="Element10">
+<LI>RFC 2965 - HTTP State Management Mechanism (http://www.rfc-editor.org/rfc/rfc2965.txt)<P CLASS="Element10">
+<LI>Netscape Persistent Client State - HTTP Cookies (http://www.netscape.com/newsref/std/cookie_spec.html)</UL>
+<P CLASS="Element10">
+TIdCustomHTTP also supports the Secure Hypertext Transport protocol (HTTPS) as described in the Internet Standards document:<P CLASS="Element10">
+<UL>
+<LI>RFC 2660 - The Secure HyperText Transfer Protocol (http://www.rfc-editor.org/rfc/rfc2660.txt)</UL>
+<P CLASS="Element10">
+Assign an instance of <A HREF="007249.html" CLASS="Element59">TIdConnectionInterceptOpenSSL</A> to the Intercept property to allow use of the HTTPS protocol. For the Windows platform, you must install the Indy OpenSSL support .DLL's available at http://www.intelicom.si to enable Secure Socket Layer support.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0000">TIdCustomHTTP.AllowCookies</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007270.html" CLASS="Element59">TIdCustomHTTP</A>, <A HREF="010331.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Indicates if the HTTP client accepts Cookies in response headers.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> AllowCookies: Boolean;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+AllowCookies is a Boolean property that indicates if the HTTP client allows use of persistent state information using TIdCookie instances handled by <A HREF="007270.html#0003" CLASS="Element59">CookieManager</A>. AllowCookies is used when an HTTP client retrieves headers for an HTTP <A HREF="007270.html#001E" CLASS="Element59">Response</A>, and processes <A HREF="007270.html#001E" CLASS="Element59">Response</A> headers and cookie values.<P CLASS="Element10">
+When AllowCookies is True, the HTTP client will insure that <A HREF="007270.html#0003" CLASS="Element59">CookieManager</A> is instantiated prior to adding any <A HREF="007264.html" CLASS="Element59">TIdCookieRFC2109</A> or <A HREF="007265.html" CLASS="Element59">TIdCookieRFC2965</A> cookie instances detected in <A HREF="007270.html#001E" CLASS="Element59">Response</A> headers.<P CLASS="Element10">
+The default value for AllowCookies is True, as assigned in the <A HREF="007270.html#0004" CLASS="Element59">Create</A> constructor.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0001">TIdCustomHTTP.AuthenticationManager</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007270.html" CLASS="Element59">TIdCustomHTTP</A>, <A HREF="010332.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+AuthenticationManager is not currently used in <A HREF="007270.html" CLASS="Element59">TIdCustomHTTP</A>.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> AuthenticationManager: <A HREF="007209.html" CLASS="Element59">TIdAuthenticationManager</A>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+AuthenticationManager is not currently used in <A HREF="007270.html" CLASS="Element59">TIdCustomHTTP</A>. AuthenticationManager is not currently used in <A HREF="007270.html" CLASS="Element59">TIdCustomHTTP</A>. AuthenticationManager is not currently used in <A HREF="007270.html" CLASS="Element59">TIdCustomHTTP</A>. AuthenticationManager is not currently used in <A HREF="007270.html" CLASS="Element59">TIdCustomHTTP</A>.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0002">TIdCustomHTTP.AuthRetries</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007270.html" CLASS="Element59">TIdCustomHTTP</A>, <A HREF="010333.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Maximum number of authentication requests allowed for the client connection.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> AuthRetries: Integer;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+AuthRetries is an Integer property that represents the maximum number of retries permitted when performing authentication for the <A HREF="007375.html" CLASS="Element59">TIdHTTP</A> client connection. AuthRetries is used when an HTTP protocol handler for the client connection attempts to process a protocol response code that indicates authentication or proxy authentication is required (401 or 407).<P CLASS="Element10">
+AuthRetries is compared to the current number of authentication requests issued to determine if additional authentication requests are allowed. When permitted, the request is performed using the <A HREF="007270.html#000C" CLASS="Element59">OnAuthorization</A> event handler.<P CLASS="Element10">
+The default value for AuthRetries is 3, as assigned in the <A HREF="007270.html#0004" CLASS="Element59">Create</A> constructor.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0003">TIdCustomHTTP.CookieManager</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007270.html" CLASS="Element59">TIdCustomHTTP</A>, <A HREF="010334.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Maintains client persistent state information using Cookies.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> CookieManager: <A HREF="007263.html" CLASS="Element59">TIdCookieManager</A>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+CookieManager is a <A HREF="007263.html" CLASS="Element59">TIdCookieManager</A> property that enables maintenance of persistent state information using Cookies for the HTTP Client connection. CookieManager is accessed when Cookies are detected during processing of headers in an HTTP response, or when preparing headers for an HTTP request.<P CLASS="Element10">
+CookieManager is used by the HTTP client when <A HREF="007270.html#0000" CLASS="Element59">AllowCookies</A> is True.<P CLASS="Element10">
+The client will insure that CookieManager is instantiated prior to adding <A HREF="007264.html" CLASS="Element59">TIdCookieRFC2109</A> or <A HREF="007265.html" CLASS="Element59">TIdCookieRFC2965</A> class instances to the collection maintained in CookieManager. CookieManager is freed in the <A HREF="007270.html#0005" CLASS="Element59">Destroy</A> method.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0009">TIdCustomHTTP.HandleRedirects</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007270.html" CLASS="Element59">TIdCustomHTTP</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Indicates if the HTTP client can handle redirections to an alternate resource location.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> HandleRedirects: Boolean;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+HandleRedirects is a Boolean property that indicates if the HTTP client should handle redirects in a response from the HTTP server. Redirects are indicated by the HTTP <A HREF="007270.html#001E" CLASS="Element59">Response</A> having a <A HREF="007270.html#001F" CLASS="Element59">ResponseCode</A> in the range 300 to 307, and requires further action needs by the HTTP Client to fulfill the request.<P CLASS="Element10">
+Redirection ResponseCodes include the following:<P CLASS="Element10">
+<UL>
+<LI>300 - Multiple Choices. The request can be fulfilled with one of a set of resources, each with its own specific location. The HTTP client can <A HREF="006943.html" CLASS="Element59">select</A> a preferred representation and redirect its request to that location.<P CLASS="Element10">
+<LI>301 - Moved Permanently. The requested resource has been assigned a new permanent URI and any future references to this resource should use the new location specified in the <A HREF="007270.html#001E" CLASS="Element59">Response</A>.<P CLASS="Element10">
+<LI>302 - Found. The requested resource resides temporarily under a different URI. Since the redirection might be altered on occasion, the client should continue to use the URI in the <A HREF="007270.html#001D" CLASS="Element59">Request</A> for future requests.<P CLASS="Element10">
+<LI>304 - Not Modified. If the client has performed a conditional GET request and access is allowed, but the document has not been modified, the server should respond with this status code. The 304 response should not contain a message body, and is always terminated by the first empty line after the header fields, and must include a Date header.<P CLASS="Element10">
+<LI>305 - Use Proxy. The requested resource must be accessed through the proxy given by the Location header in the HTTP <A HREF="007270.html#001E" CLASS="Element59">Response</A> containing the URI of the Proxy.<P CLASS="Element10">
+<LI>307 - Temporary Redirect. The requested resource resides temporarily under a different URI. Since the redirection may be altered on occasion, the HTTP client should continue to use the URI in the RequestI for future requests.</UL>
+<P CLASS="Element10">
+HandleRedirects is used with <A HREF="007270.html#001C" CLASS="Element59">RedirectMaximum</A> in <A HREF="007270.html#0006" CLASS="Element59">DoRequest</A> to detect and prevent <A HREF="002998.html" CLASS="Element59">infinite</A> redirection loops, by limiting the number of active redirections for the client to the value specified in <A HREF="007270.html#001C" CLASS="Element59">RedirectMaximum</A>.<P CLASS="Element10">
+When HandleRedirects is True, the HTTP Client will trigger the <A HREF="007270.html#000E" CLASS="Element59">OnRedirect</A> event handler to determine if the client can <A HREF="000027.html" CLASS="Element59">accept</A> the redirection location found in an HTTP response. When accepted, the redirect causes a new HTTP request with the new location to be issued to fulfill the original request.<P CLASS="Element10">
+When HandleRedirects is False, the <A HREF="007270.html#000E" CLASS="Element59">OnRedirect</A> event handler will be triggered, and an <A HREF="000441.html" CLASS="Element59">EIdProtocolReplyError</A> exception will be raised when the redirect cannot be handled by the HTTP client.<P CLASS="Element10">
+The default value for HandleRedirects is <A HREF="002070.html" CLASS="Element59">Id_TIdHTTP_HandleRedirects</A>, as assigned in the <A HREF="007270.html#0004" CLASS="Element59">Create</A> constuctor.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="000B">TIdCustomHTTP.HTTPOptions</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007270.html" CLASS="Element59">TIdCustomHTTP</A>, <A HREF="010335.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Indicates the HTTP protocol options applied to the client connection.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> HTTPOptions: <A HREF="007384.html" CLASS="Element59">TIdHTTPOptions</A>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+HTTPOptions is a <A HREF="007384.html" CLASS="Element59">TIdHTTPOptions</A> property that represents the <A HREF="007383.html" CLASS="Element59">TIdHTTPOption</A> protocol options in use for an HTTP client.<P CLASS="Element10">
+HTTPOptions is used at various times when the client or the HTTP protocol handler needs to perform some action, including processing HTTP responses, preparing request parameters, and authentication of the client connection to a server or proxy.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0018">TIdCustomHTTP.ProtocolVersion</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007270.html" CLASS="Element59">TIdCustomHTTP</A>, <A HREF="010336.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Specifies the HTTP version.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> ProtocolVersion: <A HREF="007387.html" CLASS="Element59">TIdHTTPProtocolVersion</A>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+ProtocolVersion is a <A HREF="007387.html" CLASS="Element59">TIdHTTPProtocolVersion</A> property that specifies the HTTP version used for <A HREF="007270.html#0007" CLASS="Element59">Get</A>, <A HREF="007270.html#000A" CLASS="Element59">Head</A>, and <A HREF="007270.html#0012" CLASS="Element59">Post</A> methods for the HTTP client. ProtocolVersion allows the following values:<P CLASS="Element10">
+<UL>
+<LI>pv1_0 - HTTP 1.0<P CLASS="Element10">
+<LI>pv1_1 - HTTP 1.1</UL>
+<P CLASS="Element10">
+The default value for ProtocolVersion is pv1_1.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0019">TIdCustomHTTP.ProxyParams</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007270.html" CLASS="Element59">TIdCustomHTTP</A>, <A HREF="010337.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Represents connection and user authorization values used for a Proxied client connection.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> ProxyParams: <A HREF="007626.html" CLASS="Element59">TIdProxyConnectionInfo</A>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+ProxyParams is a read-only <A HREF="007626.html" CLASS="Element59">TIdProxyConnectionInfo</A> property that represents vaslues used in a HTTP request that requires a Proxy connection.<P CLASS="Element10">
+ProxyParams contains properties that relect the Server, Port, Username, and Password used to open and authorize a connection to a Proxy server. ProxyParams also indicates if authentication uses the Basic Authentication algorithm.<P CLASS="Element10">
+ProxyParams is used when <A HREF="007375.html" CLASS="Element59">TIdHTTP</A> attempts to set the Host and Port number for the client connection, and when <A HREF="007270.html#000D" CLASS="Element59">OnProxyAuthorization</A> is triggered for the client connection. The Header representation for ProxyParams is used when the HTTP Protocol handler builds the HTTP request packet and tranmits its content to the host server.<P CLASS="Element10">
+The Authetication mechanism in ProxyParams is reset when the OnDisconnected event handler is triggered for the HTTP client connection.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="001C">TIdCustomHTTP.RedirectMaximum</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007270.html" CLASS="Element59">TIdCustomHTTP</A>, <A HREF="010338.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Specifies the maximum number of redirects for the HTTP client.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> RedirectMaximum: Integer;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+RedirectMaximum is an Integer property that specifies the maximum number of redirects that should be handled by the HTTP client. The default value for RedirectMaximum is <STRONG>15</STRONG>.<P CLASS="Element10">
+RedirectMaximum is provided to limit the effect of web-sites that perform numerous redirects, and to prevent stack overflow due to recursion. RedirectMaximum is used when <A HREF="007270.html#0009" CLASS="Element59">HandleRedirects</A> is True, otherwise it has no effect.<P CLASS="Element10">
+RedirectMaximum is used with the internally maintained redirect count to determine when redirect handling is deferred to the application. When the redirect count exceeds the value of RedirectMaximum, <A HREF="007270.html#0006" CLASS="Element59">DoRequest</A> will signal the <A HREF="007270.html#000E" CLASS="Element59">OnRedirect</A> event handler to allow the application to respond to the redirect request. If the redirect is not handled by the application, an <A HREF="000441.html" CLASS="Element59">EIdProtocolReplyError</A> exception will be raised.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="001D">TIdCustomHTTP.Request</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007270.html" CLASS="Element59">TIdCustomHTTP</A>, <A HREF="010339.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Specifies the header values to <A HREF="006944.html" CLASS="Element59">send</A> to the HTTP server.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> Request: <A HREF="007388.html" CLASS="Element59">TIdHTTPRequest</A>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Request is a <A HREF="007388.html" CLASS="Element59">TIdHTTPRequest</A> property used to specify the header values to <A HREF="006944.html" CLASS="Element59">send</A> to the HTTP server. Request headers allow the HTTP client to pass additional information about the request, or the request client, to the HTTP server.<P CLASS="Element10">
+Request may contain the textual representation of Cookie values from the HTTP client, Host and Port information for a proxied connection, as well as values from <A HREF="007375.html" CLASS="Element59">TIdHTTP</A> properties transmitted as message headers.<P CLASS="Element10">
+Request is used in <A HREF="007270.html#0006" CLASS="Element59">DoRequest</A> to perform the HTTP transfer.<P CLASS="Element10">
+Use <A HREF="007270.html#001E" CLASS="Element59">Response</A> to examine header values received in an HTTP protocol response from the server.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="001E">TIdCustomHTTP.Response</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007270.html" CLASS="Element59">TIdCustomHTTP</A>, <A HREF="010340.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Specifies the header values received from the HTTP server.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> Response: <A HREF="007390.html" CLASS="Element59">TIdHTTPResponse</A>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Response is a <A HREF="007390.html" CLASS="Element59">TIdHTTPResponse</A> property used to specify the header values received in amessage from the HTTP server. Respose headers allow the server to pass additional information about the values returned for an HTTP <A HREF="007270.html#001D" CLASS="Element59">Request</A>.<P CLASS="Element10">
+Response is used in <A HREF="007270.html#0006" CLASS="Element59">DoRequest</A> to perform the HTTP transfer, or in <A HREF="007270.html#000A" CLASS="Element59">Head</A> when retrieving only the header values for the resource identified in <A HREF="007270.html#0023" CLASS="Element59">URL</A>. Response contains the raw data for headers received in the HTTP reponse, and also copies header values into propeties for the object instance. Response may also contain the raw data for Cookies maintained by <A HREF="007270.html#0003" CLASS="Element59">CookieManager</A> in the HTTP client.<P CLASS="Element10">
+Response is used in <A HREF="007270.html#0006" CLASS="Element59">DoRequest</A> when capturing the headers, cookies, and contents for an HTTP response after a <A HREF="007270.html#001D" CLASS="Element59">Request</A>.<P CLASS="Element10">
+Use <A HREF="007270.html#001D" CLASS="Element59">Request</A> to examine header values to be sent in a request to the HTTP server.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="001F">TIdCustomHTTP.ResponseCode</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007270.html" CLASS="Element59">TIdCustomHTTP</A>, <A HREF="010341.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Specifies the response code received from a HTTP server.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> ResponseCode: Integer;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+ResponseCode is a read-only Integer property that specifies the numeric response code received from a HTTP server. ResponseCode normally contains one of the following values:<P CLASS="Element10">
+<UL>
+<LI>200 - OK<P CLASS="Element10">
+<LI>201 - Created<P CLASS="Element10">
+<LI>202 - Accepted<P CLASS="Element10">
+<LI>203 - Non-authoritative Information<P CLASS="Element10">
+<LI>204 - No Content<P CLASS="Element10">
+<LI>205 - Reset Content<P CLASS="Element10">
+<LI>206 - Partial Content<P CLASS="Element10">
+<LI>301 - Moved Permanently<P CLASS="Element10">
+<LI>302 - Moved Temporarily<P CLASS="Element10">
+<LI>303 - See Other<P CLASS="Element10">
+<LI>304 - Not Modified<P CLASS="Element10">
+<LI>305 - Use Proxy<P CLASS="Element10">
+<LI>400 - Bad <A HREF="007270.html#001D" CLASS="Element59">Request</A><P CLASS="Element10">
+<LI>401 - Unauthorized<P CLASS="Element10">
+<LI>403 - Forbidden<P CLASS="Element10">
+<LI>404 - Not Found<P CLASS="Element10">
+<LI>405 - Method not allowed<P CLASS="Element10">
+<LI>406 - Not Acceptable<P CLASS="Element10">
+<LI>407 - Proxy Authentication Required<P CLASS="Element10">
+<LI>408 - <A HREF="007270.html#001D" CLASS="Element59">Request</A> Timeout<P CLASS="Element10">
+<LI>409 - Conflict<P CLASS="Element10">
+<LI>410 - Gone<P CLASS="Element10">
+<LI>411 - Length Required<P CLASS="Element10">
+<LI>412 - Precondition Failed<P CLASS="Element10">
+<LI>413 - <A HREF="007270.html#001D" CLASS="Element59">Request</A> Entity To Long<P CLASS="Element10">
+<LI>414 - <A HREF="007270.html#001D" CLASS="Element59">Request</A>-URI Too Long. 256 Chars max<P CLASS="Element10">
+<LI>415 - Unsupported Media Type<P CLASS="Element10">
+<LI>500 - Internal Server Error<P CLASS="Element10">
+<LI>501 - Not Implemented<P CLASS="Element10">
+<LI>502 - Bad Gateway<P CLASS="Element10">
+<LI>503 - Service Unavailable<P CLASS="Element10">
+<LI>504 - Gateway timeout<P CLASS="Element10">
+<LI>505 - HTTP version not supported</UL>
+<P CLASS="Element10">
+ResponseCode is updated in the <A HREF="007270.html#0006" CLASS="Element59">DoRequest</A> method when a HTTP server response is retrieved. Use <A HREF="007270.html#0020" CLASS="Element59">ResponseText</A> to access the textual description of the numeric response code.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0020">TIdCustomHTTP.ResponseText</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007270.html" CLASS="Element59">TIdCustomHTTP</A>, <A HREF="010342.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Specifies the text for a response received from a HTTP server.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> ResponseText: <STRONG>string</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+ResponseText is a read-only String property that specifies the textual message for a response received from a HTTP server. ResponseText normally contains one of the following values messages for the associated <A HREF="007270.html#001F" CLASS="Element59">ResponseCode</A>:<P CLASS="Element10">
+<UL>
+<LI>200 - OK<P CLASS="Element10">
+<LI>201 - Created<P CLASS="Element10">
+<LI>202 - Accepted<P CLASS="Element10">
+<LI>203 - Non-authoritative Information<P CLASS="Element10">
+<LI>204 - No Content<P CLASS="Element10">
+<LI>205 - Reset Content<P CLASS="Element10">
+<LI>206 - Partial Content<P CLASS="Element10">
+<LI>301 - Moved Permanently<P CLASS="Element10">
+<LI>302 - Moved Temporarily<P CLASS="Element10">
+<LI>303 - See Other<P CLASS="Element10">
+<LI>304 - Not Modified<P CLASS="Element10">
+<LI>305 - Use Proxy<P CLASS="Element10">
+<LI>400 - Bad <A HREF="007270.html#001D" CLASS="Element59">Request</A><P CLASS="Element10">
+<LI>401 - Unauthorized<P CLASS="Element10">
+<LI>403 - Forbidden<P CLASS="Element10">
+<LI>404 - Not Found<P CLASS="Element10">
+<LI>405 - Method not allowed<P CLASS="Element10">
+<LI>406 - Not Acceptable<P CLASS="Element10">
+<LI>407 - Proxy Authentication Required<P CLASS="Element10">
+<LI>408 - <A HREF="007270.html#001D" CLASS="Element59">Request</A> Timeout<P CLASS="Element10">
+<LI>409 - Conflict<P CLASS="Element10">
+<LI>410 - Gone<P CLASS="Element10">
+<LI>411 - Length Required<P CLASS="Element10">
+<LI>412 - Precondition Failed<P CLASS="Element10">
+<LI>413 - <A HREF="007270.html#001D" CLASS="Element59">Request</A> Entity To Long<P CLASS="Element10">
+<LI>414 - <A HREF="007270.html#001D" CLASS="Element59">Request</A>-URI Too Long. 256 Chars max<P CLASS="Element10">
+<LI>415 - Unsupported Media Type<P CLASS="Element10">
+<LI>500 - Internal Server Error<P CLASS="Element10">
+<LI>501 - Not Implemented<P CLASS="Element10">
+<LI>502 - Bad Gateway<P CLASS="Element10">
+<LI>503 - Service Unavailable<P CLASS="Element10">
+<LI>504 - Gateway timeout<P CLASS="Element10">
+<LI>505 - HTTP version not supported</UL>
+<P CLASS="Element10">
+ResponseText is updated in the <A HREF="007270.html#0006" CLASS="Element59">DoRequest</A> method when a HTTP server response is retrieved. Use <A HREF="007270.html#001F" CLASS="Element59">ResponseCode</A> to access the numeric value for the HTTP server response.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0023">TIdCustomHTTP.URL</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007270.html" CLASS="Element59">TIdCustomHTTP</A>, <A HREF="010343.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Represents the attributes of a resource accessed by an HTTP request.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> URL: <A HREF="007878.html" CLASS="Element59">TIdURI</A>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+URL is a read-only <A HREF="007878.html" CLASS="Element59">TIdURI</A> property that represents the attributes of a server resource in an HTTP <A HREF="007270.html#001D" CLASS="Element59">Request</A>, including the Protocol, Host, Port, Path, Document, and Bookmark for a resource.<P CLASS="Element10">
+URL is used in <A HREF="007270.html#0006" CLASS="Element59">DoRequest</A> when provided by the implementation for the HTTP command verb.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0004">TIdCustomHTTP.Create</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007270.html" CLASS="Element59">TIdCustomHTTP</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Constructor for the object instance.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>constructor</STRONG> Create(AOwner: TComponent); <STRONG>override</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+AOwner: TComponent</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Owner of the object instance.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Create is the constructor for the object instance, and relies on the inherited Create method to initialize properties of the object. Create sets the default value for properties, including:<P CLASS="Element10">
+<UL>
+<LI>Port - <A HREF="002476.html" CLASS="Element59">IdPORT_HTTP</A><P CLASS="Element10">
+<LI><A HREF="007270.html#0000" CLASS="Element59">AllowCookies</A> - True<P CLASS="Element10">
+<LI><A HREF="007270.html#001C" CLASS="Element59">RedirectMaximum</A> - <A HREF="002073.html" CLASS="Element59">Id_TIdHTTP_RedirectMax</A><P CLASS="Element10">
+<LI><A HREF="007270.html#0009" CLASS="Element59">HandleRedirects</A> - <A HREF="002070.html" CLASS="Element59">Id_TIdHTTP_HandleRedirects</A><P CLASS="Element10">
+<LI><A HREF="007270.html#0002" CLASS="Element59">AuthRetries</A> - <A HREF="002071.html" CLASS="Element59">Id_TIdHTTP_MaxAuthRetries</A><P CLASS="Element10">
+<LI>ProxyAuthRetriesMax - <A HREF="002071.html" CLASS="Element59">Id_TIdHTTP_MaxAuthRetries</A><P CLASS="Element10">
+<LI><A HREF="007270.html#0018" CLASS="Element59">ProtocolVersion</A> - <A HREF="002072.html" CLASS="Element59">Id_TIdHTTP_ProtocolVersion</A></UL>
+<P CLASS="Element10">
+Create also allocates resources required for the <A HREF="007270.html#001D" CLASS="Element59">Request</A>, <A HREF="007270.html#001E" CLASS="Element59">Response</A>, and URI properties.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0005">TIdCustomHTTP.Destroy</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007270.html" CLASS="Element59">TIdCustomHTTP</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Frees the object instance.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>destructor</STRONG> Destroy; <STRONG>override</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Destroy is the Destructor for the object instance. Destroy is responsible for freeing resources allocated in the <A HREF="007270.html#0004" CLASS="Element59">Create</A> constructor, and includes the <A HREF="007270.html#0003" CLASS="Element59">CookieManager</A> created during header processing. Destroy calls the inherited Destroy method prior to exiting.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0006">TIdCustomHTTP.DoRequest</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007270.html" CLASS="Element59">TIdCustomHTTP</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Performs a HTTP request and retrieves the HTTP response.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>procedure</STRONG> DoRequest(<STRONG>const</STRONG> AMethod: <A HREF="007381.html" CLASS="Element59">TIdHTTPMethod</A>; AURL: <STRONG>string</STRONG>; <STRONG>const</STRONG> ASource: TStream; <STRONG>const</STRONG> AResponseContent: TStream); <STRONG>virtual</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+const AMethod: TIdHTTPMethod</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+The HTTP method to perform.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+AURL: string</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+The location of the resource.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+const ASource: TStream</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Source of the <A HREF="007270.html#001D" CLASS="Element59">Request</A> data.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+const AResponseContent: TStream</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Destination for the <A HREF="007270.html#001E" CLASS="Element59">Response</A> content.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+DoRequest is a procedure used to implement and execute a HTTP request and retrieve the HTTP response. DoRequest is used in the <A HREF="007270.html#0007" CLASS="Element59">Get</A>, <A HREF="007270.html#000A" CLASS="Element59">Head</A>, <A HREF="007270.html#0012" CLASS="Element59">Post</A>, <A HREF="007270.html#001A" CLASS="Element59">Put</A>, and <A HREF="007270.html#0021" CLASS="Element59">Trace</A> methods to perform HTTP transfers. DoRequest recognizes the HTTP methods represented in <A HREF="007381.html" CLASS="Element59">TIdHTTPMethod</A>, but checks to insure that <A HREF="007270.html#0018" CLASS="Element59">ProtocolVersion</A> indicates HTTP 1.1 for the hmTrace, hmPut, hmOptions, and hmDelete methods. An exception will be raised if HTTP 1.1 methods are used when the Proctocol version indicates HTTP 1.0.<P CLASS="Element10">
+AMethod is the <A HREF="007381.html" CLASS="Element59">TIdHTTPMethod</A> value that identifies the request to be performed. AURL is the <A HREF="007270.html#0023" CLASS="Element59">URL</A>-encode location of the resource to be affected by the HTTP request. ASource is a TObject descendant containing the data for the HTTP request. ASource must be either a TStrings or a TStream descendant or an <A HREF="000426.html" CLASS="Element59">EIdObjectTypeNotSupported</A> exception will be raised. AResponseContent is a TStream where the content for the HTTP response will be stored.<P CLASS="Element10">
+DoRequest will parse AURL into components to determine if the <A HREF="007270.html#0023" CLASS="Element59">URL</A> contains a user name and password that should be used for authenticating the <A HREF="007270.html#001D" CLASS="Element59">Request</A>. DoRequest also normalizes the value in AURL to conform to URI notation.<P CLASS="Element10">
+DoRequest will call Connect when the client is not already Connected, and can raise a <A HREF="000469.html" CLASS="Element59">EIdSSLProtocolReplyError</A> when using HTTPS and the connection fails or a timeout occurs.<P CLASS="Element10">
+DoRequest sets the content length of the <A HREF="007270.html#001D" CLASS="Element59">Request</A> to the size of the stream specified in ASource for HTTP PUT or POST methods, or zero (0) when using other HTTP methods. DoRequest also updates headers and optional cookies for the <A HREF="007270.html#001D" CLASS="Element59">Request</A>. DoRequest calls OpenWriteBuffer prior to construct and sending the HTTP <A HREF="007270.html#001D" CLASS="Element59">Request</A> to accomodate HTTP servers which do not fully implement the HTTP Protocol, and calls CloseWriteBuffer to complete the write transaction.<P CLASS="Element10">
+DoRequest reads the HTTP Server <A HREF="007270.html#001E" CLASS="Element59">Response</A> for the HTTP Client <A HREF="007270.html#001D" CLASS="Element59">Request</A>. DoRequest repeatedly calls ReadLn to retrieve headers and <A HREF="007270.html#0020" CLASS="Element59">ResponseText</A> from the server, until the server returns a <A HREF="007270.html#001F" CLASS="Element59">ResponseCode</A> other 100 Continue. This allows the HTTP client to accomodate servers which do not fully implement HTTP 1.1, and respond with 100 Continue for HTTP GET and HEAD methods.<P CLASS="Element10">
+DoRequest detects an HTTP <A HREF="007270.html#001E" CLASS="Element59">Response</A> with Redirection that requires further action to fulfill the <A HREF="007270.html#001D" CLASS="Element59">Request</A>. When <A HREF="007270.html#0009" CLASS="Element59">HandleRedirects</A> is True, and the current number of Redirects is less than the value specified in <A HREF="007270.html#001C" CLASS="Element59">RedirectMaximum</A>, AResponseContent is cleared and the <A HREF="007270.html#000E" CLASS="Element59">OnRedirect</A> event handler is triggered. Use <A HREF="007270.html#000E" CLASS="Element59">OnRedirect</A> to close the connection if no further processing is desired for the HTTP <A HREF="007270.html#001E" CLASS="Element59">Response</A>. When <A HREF="007270.html#0009" CLASS="Element59">HandleRedirects</A> is False, or <A HREF="007270.html#001C" CLASS="Element59">RedirectMaximum</A> is exceeded, the <A HREF="007270.html#000E" CLASS="Element59">OnRedirect</A> event handler is still triggered. An <A HREF="000441.html" CLASS="Element59">EIdProtocolReplyError</A> can be raised when the redirect action is not handled in the <A HREF="007270.html#000E" CLASS="Element59">OnRedirect</A> event handler.<P CLASS="Element10">
+DoRequest also triggers event handlers when the HTTP <A HREF="007270.html#001F" CLASS="Element59">ResponseCode</A> indicates that HTTP Server or Proxy Server authentication is required for the HTTP <A HREF="007270.html#001E" CLASS="Element59">Response</A>. If the authentication is handled by the <A HREF="007270.html#000C" CLASS="Element59">OnAuthorization</A> or <A HREF="007270.html#000D" CLASS="Element59">OnProxyAuthorization</A> event handlers, DoRequest is called to perform the authentication request.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0008">TIdCustomHTTP.Get</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007270.html" CLASS="Element59">TIdCustomHTTP</A>, <A HREF="010344.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Retrieves an HTTP resource.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>procedure</STRONG> <A HREF="007270.html#0007" CLASS="Element59">Get</A>(AURL: <STRONG>string</STRONG>; <STRONG>const</STRONG> AResponseContent: TStream); <STRONG>overload</STRONG>;
+<STRONG>function</STRONG> <A HREF="007270.html#0007" CLASS="Element59">Get</A>(AURL: <STRONG>string</STRONG>): <STRONG>string</STRONG>; <STRONG>overload</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+AURL: string</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+The resource to be retrieved.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+const AResponseContent: TStream</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Destination for the data retrieved.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Return Value</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+String - Contents of the retrieve resource. (Optional)</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Get is an overloaded method used to retrieve the file or data for the resource specified in AURL.<P CLASS="Element10">
+AURL is the complete, fully-qualified location of the resource.<P CLASS="Element10">
+AResponseContent is the TStream or descendant that is the destination for data retrieved using the specified <A HREF="007270.html#0023" CLASS="Element59">URL</A> .<P CLASS="Element10">
+Use Get(AUrl) to retrieve the data from AURL and return the contents as the String result of the function.<P CLASS="Element10">
+Use Get(AUrl, AResponseContent) to retrieve data from the <A HREF="007270.html#0023" CLASS="Element59">URL</A> and write the return values to the TStream descendant specified by AResponseContent.<P CLASS="Element10">
+Get relies on the <A HREF="007270.html#0006" CLASS="Element59">DoRequest</A> method to perform the HTTP transfer.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0007">TIdCustomHTTP.Get</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007270.html" CLASS="Element59">TIdCustomHTTP</A>, <A HREF="010345.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Retrieves an HTTP resource.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>procedure</STRONG> Get(AURL: <STRONG>string</STRONG>; <STRONG>const</STRONG> AResponseContent: TStream); <STRONG>overload</STRONG>;
+<STRONG>function</STRONG> Get(AURL: <STRONG>string</STRONG>): <STRONG>string</STRONG>; <STRONG>overload</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+AURL: string</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+The resource to be retrieved.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+const AResponseContent: TStream</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Destination for the data retrieved.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Return Value</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+String - Contents of the retrieve resource. (Optional)</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Get is an overloaded method used to retrieve the file or data for the resource specified in AURL.<P CLASS="Element10">
+AURL is the complete, fully-qualified location of the resource.<P CLASS="Element10">
+AResponseContent is the TStream or descendant that is the destination for data retrieved using the specified <A HREF="007270.html#0023" CLASS="Element59">URL</A> .<P CLASS="Element10">
+Use Get(AUrl) to retrieve the data from AURL and return the contents as the String result of the function.<P CLASS="Element10">
+Use Get(AUrl, AResponseContent) to retrieve data from the <A HREF="007270.html#0023" CLASS="Element59">URL</A> and write the return values to the TStream descendant specified by AResponseContent.<P CLASS="Element10">
+Get relies on the <A HREF="007270.html#0006" CLASS="Element59">DoRequest</A> method to perform the HTTP transfer.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="000A">TIdCustomHTTP.Head</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007270.html" CLASS="Element59">TIdCustomHTTP</A>, <A HREF="010346.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Requests header values for a resource.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>procedure</STRONG> Head(AURL: <STRONG>string</STRONG>);</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+URL</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Location of the resource.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Head is a procedure used to request the header values for the resource specified in <A HREF="007270.html#0023" CLASS="Element59">URL</A>. Head is identical to <A HREF="007270.html#0007" CLASS="Element59">Get</A>, except that the server does not return a message body in the <A HREF="007270.html#001E" CLASS="Element59">Response</A>. Head can be used to obtain metainformation about the entity implied by the request without transferring the full content of the resource. Head is often used for testing the valuein <A HREF="007270.html#0023" CLASS="Element59">URL</A> for validity, accessibility, and recent modification.<P CLASS="Element10">
+Head calls the <A HREF="007270.html#0006" CLASS="Element59">DoRequest</A> method to perform the HTTP transfer. The returned header values can be found in <A HREF="007270.html#001E" CLASS="Element59">Response</A>.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0011">TIdCustomHTTP.Options</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007270.html" CLASS="Element59">TIdCustomHTTP</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Retrieves options and capabilities for a server resource.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>procedure</STRONG> Options(AURL: <STRONG>string</STRONG>); <STRONG>overload</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+AURL: string</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Identifies the resource location for options and capabilities.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Options is a procedure that implements the HTTP 1.1 command verb used to retrieve information about the communication options available for <A HREF="007270.html#001D" CLASS="Element59">Request</A> and <A HREF="007270.html#001E" CLASS="Element59">Response</A> resulting from the URI specified in AURL. Options allows the HTTP client to determine the options and/or requirements associated with a resource, or the capabilities of a server, without implying a resource action or initiating a resource retrieval.<P CLASS="Element10">
+When AURL contains the value '*' (Asterisk), the Options <A HREF="007270.html#001D" CLASS="Element59">Request</A> applies to all resources on the HTTP server. Since server communication options typically depend on the resource, the &quot;*&quot; request is only useful as a &quot;ping&quot; or &quot;no-op&quot; type of <A HREF="007270.html#001D" CLASS="Element59">Request</A>. For example, this can be used to test a proxy for HTTP/1.1 compliance. When AURL contains a valid server resource, the <A HREF="007270.html#001D" CLASS="Element59">Request</A> applies only to that target.<P CLASS="Element10">
+<A HREF="007270.html#001E" CLASS="Element59">Response</A> will contain the <A HREF="007270.html#001F" CLASS="Element59">ResponseCode</A> 200, and header information that indicates optional features implemented by the server and applicable to the resource.<P CLASS="Element10">
+Options calls the <A HREF="007270.html#0006" CLASS="Element59">DoRequest</A> method to perform the HTTP transfer for the <A HREF="007270.html#001D" CLASS="Element59">Request</A>.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0016">TIdCustomHTTP.Post</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007270.html" CLASS="Element59">TIdCustomHTTP</A>, <A HREF="010347.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Send HTTP data to a web server or CGI program.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>function</STRONG> <A HREF="007270.html#0012" CLASS="Element59">Post</A>(AURL: <STRONG>string</STRONG>; <STRONG>const</STRONG> ASource: TStrings): <STRONG>string</STRONG>; <STRONG>overload</STRONG>;
+<STRONG>function</STRONG> <A HREF="007270.html#0012" CLASS="Element59">Post</A>(AURL: <STRONG>string</STRONG>; <STRONG>const</STRONG> ASource: TStream): <STRONG>string</STRONG>; <STRONG>overload</STRONG>;
+<STRONG>function</STRONG> <A HREF="007270.html#0012" CLASS="Element59">Post</A>(AURL: <STRONG>string</STRONG>; <STRONG>const</STRONG> ASource: <A HREF="007579.html" CLASS="Element59">TIdMultiPartFormDataStream</A>): <STRONG>string</STRONG>; <STRONG>overload</STRONG>;
+<STRONG>procedure</STRONG> <A HREF="007270.html#0012" CLASS="Element59">Post</A>(AURL: <STRONG>string</STRONG>; <STRONG>const</STRONG> ASource: TStrings; <STRONG>const</STRONG> AResponseContent: TStream); <STRONG>overload</STRONG>;
+<STRONG>procedure</STRONG> <A HREF="007270.html#0012" CLASS="Element59">Post</A>(AURL: <STRONG>string</STRONG>; <STRONG>const</STRONG> ASource: TStream; <STRONG>const</STRONG> AResponseContent: TStream); <STRONG>overload</STRONG>;
+<STRONG>procedure</STRONG> <A HREF="007270.html#0012" CLASS="Element59">Post</A>(AURL: <STRONG>string</STRONG>; <STRONG>const</STRONG> ASource: <A HREF="007579.html" CLASS="Element59">TIdMultiPartFormDataStream</A>; AResponseContent: TStream); <STRONG>overload</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+const ASource: TStrings</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+TStrings or stream containing the request data.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+const AResponseContent: TStream</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Destination for response data.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+URL</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Location of the host or CGI application.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Return Value</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+String - Values received in a <A HREF="007270.html#001E" CLASS="Element59">Response</A> for the HTTP POST method.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+<A HREF="007270.html#0012" CLASS="Element59">Post</A> is an overloaded method in <A HREF="007375.html" CLASS="Element59">TIdHTTP</A> that is used to <A HREF="006944.html" CLASS="Element59">send</A> data specified in ASource to the resource location in AURL. <A HREF="007270.html#0012" CLASS="Element59">Post</A> is overloaded to allow use of either TStrings or TStream object instances in ASource, and also provides procedure- and function-based variants of the method to allow String return values or storage of return values in AResponseContent.<P CLASS="Element10">
+Indy currently reverts the HTTP version to 1.0 in a call to the <A HREF="007270.html#0012" CLASS="Element59">Post</A> method. This occurs because some HTTP servers do not respect the RFC for HTTP 1.1 to the full extent of the specification. In particular, most servers do not <A HREF="006944.html" CLASS="Element59">send</A> or expect to receive the 100-Continue HTTP header. Until an optimum solution that does NOT break the RFC is discovered, Indy will restrict all POST requests to version HTTP 1.0 compliance.<P CLASS="Element10">
+When ASource is a TStrings instance, <A HREF="007270.html#0012" CLASS="Element59">Post</A> will replace all occurrences of the End-Of-Line (<A HREF="000534.html" CLASS="Element59">EOL</A>) character in ASource with the value '&amp;' prior to transfer to the HTTP server. When ASource is a TStream instance, no preprocessing of the stream content is performed.<P CLASS="Element10">
+<A HREF="007270.html#0012" CLASS="Element59">Post</A> calls the <A HREF="007270.html#0006" CLASS="Element59">DoRequest</A> method to perform the HTTP transfer.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0014">TIdCustomHTTP.Post</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007270.html" CLASS="Element59">TIdCustomHTTP</A>, <A HREF="010348.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Send HTTP data to a web server or CGI program.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>function</STRONG> <A HREF="007270.html#0012" CLASS="Element59">Post</A>(AURL: <STRONG>string</STRONG>; <STRONG>const</STRONG> ASource: TStrings): <STRONG>string</STRONG>; <STRONG>overload</STRONG>;
+<STRONG>function</STRONG> <A HREF="007270.html#0012" CLASS="Element59">Post</A>(AURL: <STRONG>string</STRONG>; <STRONG>const</STRONG> ASource: TStream): <STRONG>string</STRONG>; <STRONG>overload</STRONG>;
+<STRONG>function</STRONG> <A HREF="007270.html#0012" CLASS="Element59">Post</A>(AURL: <STRONG>string</STRONG>; <STRONG>const</STRONG> ASource: <A HREF="007579.html" CLASS="Element59">TIdMultiPartFormDataStream</A>): <STRONG>string</STRONG>; <STRONG>overload</STRONG>;
+<STRONG>procedure</STRONG> <A HREF="007270.html#0012" CLASS="Element59">Post</A>(AURL: <STRONG>string</STRONG>; <STRONG>const</STRONG> ASource: TStrings; <STRONG>const</STRONG> AResponseContent: TStream); <STRONG>overload</STRONG>;
+<STRONG>procedure</STRONG> <A HREF="007270.html#0012" CLASS="Element59">Post</A>(AURL: <STRONG>string</STRONG>; <STRONG>const</STRONG> ASource: TStream; <STRONG>const</STRONG> AResponseContent: TStream); <STRONG>overload</STRONG>;
+<STRONG>procedure</STRONG> <A HREF="007270.html#0012" CLASS="Element59">Post</A>(AURL: <STRONG>string</STRONG>; <STRONG>const</STRONG> ASource: <A HREF="007579.html" CLASS="Element59">TIdMultiPartFormDataStream</A>; AResponseContent: TStream); <STRONG>overload</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+const ASource: TStrings</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+TStrings or stream containing the request data.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+const AResponseContent: TStream</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Destination for response data.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+URL</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Location of the host or CGI application.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Return Value</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+String - Values received in a <A HREF="007270.html#001E" CLASS="Element59">Response</A> for the HTTP POST method.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+<A HREF="007270.html#0012" CLASS="Element59">Post</A> is an overloaded method in <A HREF="007375.html" CLASS="Element59">TIdHTTP</A> that is used to <A HREF="006944.html" CLASS="Element59">send</A> data specified in ASource to the resource location in AURL. <A HREF="007270.html#0012" CLASS="Element59">Post</A> is overloaded to allow use of either TStrings or TStream object instances in ASource, and also provides procedure- and function-based variants of the method to allow String return values or storage of return values in AResponseContent.<P CLASS="Element10">
+Indy currently reverts the HTTP version to 1.0 in a call to the <A HREF="007270.html#0012" CLASS="Element59">Post</A> method. This occurs because some HTTP servers do not respect the RFC for HTTP 1.1 to the full extent of the specification. In particular, most servers do not <A HREF="006944.html" CLASS="Element59">send</A> or expect to receive the 100-Continue HTTP header. Until an optimum solution that does NOT break the RFC is discovered, Indy will restrict all POST requests to version HTTP 1.0 compliance.<P CLASS="Element10">
+When ASource is a TStrings instance, <A HREF="007270.html#0012" CLASS="Element59">Post</A> will replace all occurrences of the End-Of-Line (<A HREF="000534.html" CLASS="Element59">EOL</A>) character in ASource with the value '&amp;' prior to transfer to the HTTP server. When ASource is a TStream instance, no preprocessing of the stream content is performed.<P CLASS="Element10">
+<A HREF="007270.html#0012" CLASS="Element59">Post</A> calls the <A HREF="007270.html#0006" CLASS="Element59">DoRequest</A> method to perform the HTTP transfer.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0012">TIdCustomHTTP.Post</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007270.html" CLASS="Element59">TIdCustomHTTP</A>, <A HREF="010349.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Send HTTP data to a web server or CGI program.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>function</STRONG> Post(AURL: <STRONG>string</STRONG>; <STRONG>const</STRONG> ASource: TStrings): <STRONG>string</STRONG>; <STRONG>overload</STRONG>;
+<STRONG>function</STRONG> Post(AURL: <STRONG>string</STRONG>; <STRONG>const</STRONG> ASource: TStream): <STRONG>string</STRONG>; <STRONG>overload</STRONG>;
+<STRONG>function</STRONG> Post(AURL: <STRONG>string</STRONG>; <STRONG>const</STRONG> ASource: <A HREF="007579.html" CLASS="Element59">TIdMultiPartFormDataStream</A>): <STRONG>string</STRONG>; <STRONG>overload</STRONG>;
+<STRONG>procedure</STRONG> Post(AURL: <STRONG>string</STRONG>; <STRONG>const</STRONG> ASource: TStrings; <STRONG>const</STRONG> AResponseContent: TStream); <STRONG>overload</STRONG>;
+<STRONG>procedure</STRONG> Post(AURL: <STRONG>string</STRONG>; <STRONG>const</STRONG> ASource: TStream; <STRONG>const</STRONG> AResponseContent: TStream); <STRONG>overload</STRONG>;
+<STRONG>procedure</STRONG> Post(AURL: <STRONG>string</STRONG>; <STRONG>const</STRONG> ASource: <A HREF="007579.html" CLASS="Element59">TIdMultiPartFormDataStream</A>; AResponseContent: TStream); <STRONG>overload</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+const ASource: TStrings</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+TStrings or stream containing the request data.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+const AResponseContent: TStream</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Destination for response data.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+URL</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Location of the host or CGI application.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Return Value</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+String - Values received in a <A HREF="007270.html#001E" CLASS="Element59">Response</A> for the HTTP POST method.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+<A HREF="007270.html#0012" CLASS="Element59">Post</A> is an overloaded method in <A HREF="007375.html" CLASS="Element59">TIdHTTP</A> that is used to <A HREF="006944.html" CLASS="Element59">send</A> data specified in ASource to the resource location in AURL. <A HREF="007270.html#0012" CLASS="Element59">Post</A> is overloaded to allow use of either TStrings or TStream object instances in ASource, and also provides procedure- and function-based variants of the method to allow String return values or storage of return values in AResponseContent.<P CLASS="Element10">
+Indy currently reverts the HTTP version to 1.0 in a call to the <A HREF="007270.html#0012" CLASS="Element59">Post</A> method. This occurs because some HTTP servers do not respect the RFC for HTTP 1.1 to the full extent of the specification. In particular, most servers do not <A HREF="006944.html" CLASS="Element59">send</A> or expect to receive the 100-Continue HTTP header. Until an optimum solution that does NOT break the RFC is discovered, Indy will restrict all POST requests to version HTTP 1.0 compliance.<P CLASS="Element10">
+When ASource is a TStrings instance, <A HREF="007270.html#0012" CLASS="Element59">Post</A> will replace all occurrences of the End-Of-Line (<A HREF="000534.html" CLASS="Element59">EOL</A>) character in ASource with the value '&amp;' prior to transfer to the HTTP server. When ASource is a TStream instance, no preprocessing of the stream content is performed.<P CLASS="Element10">
+<A HREF="007270.html#0012" CLASS="Element59">Post</A> calls the <A HREF="007270.html#0006" CLASS="Element59">DoRequest</A> method to perform the HTTP transfer.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0017">TIdCustomHTTP.Post</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007270.html" CLASS="Element59">TIdCustomHTTP</A>, <A HREF="010350.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Send HTTP data to a web server or CGI program.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>function</STRONG> <A HREF="007270.html#0012" CLASS="Element59">Post</A>(AURL: <STRONG>string</STRONG>; <STRONG>const</STRONG> ASource: TStrings): <STRONG>string</STRONG>; <STRONG>overload</STRONG>;
+<STRONG>function</STRONG> <A HREF="007270.html#0012" CLASS="Element59">Post</A>(AURL: <STRONG>string</STRONG>; <STRONG>const</STRONG> ASource: TStream): <STRONG>string</STRONG>; <STRONG>overload</STRONG>;
+<STRONG>function</STRONG> <A HREF="007270.html#0012" CLASS="Element59">Post</A>(AURL: <STRONG>string</STRONG>; <STRONG>const</STRONG> ASource: <A HREF="007579.html" CLASS="Element59">TIdMultiPartFormDataStream</A>): <STRONG>string</STRONG>; <STRONG>overload</STRONG>;
+<STRONG>procedure</STRONG> <A HREF="007270.html#0012" CLASS="Element59">Post</A>(AURL: <STRONG>string</STRONG>; <STRONG>const</STRONG> ASource: TStrings; <STRONG>const</STRONG> AResponseContent: TStream); <STRONG>overload</STRONG>;
+<STRONG>procedure</STRONG> <A HREF="007270.html#0012" CLASS="Element59">Post</A>(AURL: <STRONG>string</STRONG>; <STRONG>const</STRONG> ASource: TStream; <STRONG>const</STRONG> AResponseContent: TStream); <STRONG>overload</STRONG>;
+<STRONG>procedure</STRONG> <A HREF="007270.html#0012" CLASS="Element59">Post</A>(AURL: <STRONG>string</STRONG>; <STRONG>const</STRONG> ASource: <A HREF="007579.html" CLASS="Element59">TIdMultiPartFormDataStream</A>; AResponseContent: TStream); <STRONG>overload</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+const ASource: TStrings</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+TStrings or stream containing the request data.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+const AResponseContent: TStream</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Destination for response data.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+URL</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Location of the host or CGI application.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Return Value</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+String - Values received in a <A HREF="007270.html#001E" CLASS="Element59">Response</A> for the HTTP POST method.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+<A HREF="007270.html#0012" CLASS="Element59">Post</A> is an overloaded method in <A HREF="007375.html" CLASS="Element59">TIdHTTP</A> that is used to <A HREF="006944.html" CLASS="Element59">send</A> data specified in ASource to the resource location in AURL. <A HREF="007270.html#0012" CLASS="Element59">Post</A> is overloaded to allow use of either TStrings or TStream object instances in ASource, and also provides procedure- and function-based variants of the method to allow String return values or storage of return values in AResponseContent.<P CLASS="Element10">
+Indy currently reverts the HTTP version to 1.0 in a call to the <A HREF="007270.html#0012" CLASS="Element59">Post</A> method. This occurs because some HTTP servers do not respect the RFC for HTTP 1.1 to the full extent of the specification. In particular, most servers do not <A HREF="006944.html" CLASS="Element59">send</A> or expect to receive the 100-Continue HTTP header. Until an optimum solution that does NOT break the RFC is discovered, Indy will restrict all POST requests to version HTTP 1.0 compliance.<P CLASS="Element10">
+When ASource is a TStrings instance, <A HREF="007270.html#0012" CLASS="Element59">Post</A> will replace all occurrences of the End-Of-Line (<A HREF="000534.html" CLASS="Element59">EOL</A>) character in ASource with the value '&amp;' prior to transfer to the HTTP server. When ASource is a TStream instance, no preprocessing of the stream content is performed.<P CLASS="Element10">
+<A HREF="007270.html#0012" CLASS="Element59">Post</A> calls the <A HREF="007270.html#0006" CLASS="Element59">DoRequest</A> method to perform the HTTP transfer.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0015">TIdCustomHTTP.Post</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007270.html" CLASS="Element59">TIdCustomHTTP</A>, <A HREF="010351.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Send HTTP data to a web server or CGI program.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>function</STRONG> <A HREF="007270.html#0012" CLASS="Element59">Post</A>(AURL: <STRONG>string</STRONG>; <STRONG>const</STRONG> ASource: TStrings): <STRONG>string</STRONG>; <STRONG>overload</STRONG>;
+<STRONG>function</STRONG> <A HREF="007270.html#0012" CLASS="Element59">Post</A>(AURL: <STRONG>string</STRONG>; <STRONG>const</STRONG> ASource: TStream): <STRONG>string</STRONG>; <STRONG>overload</STRONG>;
+<STRONG>function</STRONG> <A HREF="007270.html#0012" CLASS="Element59">Post</A>(AURL: <STRONG>string</STRONG>; <STRONG>const</STRONG> ASource: <A HREF="007579.html" CLASS="Element59">TIdMultiPartFormDataStream</A>): <STRONG>string</STRONG>; <STRONG>overload</STRONG>;
+<STRONG>procedure</STRONG> <A HREF="007270.html#0012" CLASS="Element59">Post</A>(AURL: <STRONG>string</STRONG>; <STRONG>const</STRONG> ASource: TStrings; <STRONG>const</STRONG> AResponseContent: TStream); <STRONG>overload</STRONG>;
+<STRONG>procedure</STRONG> <A HREF="007270.html#0012" CLASS="Element59">Post</A>(AURL: <STRONG>string</STRONG>; <STRONG>const</STRONG> ASource: TStream; <STRONG>const</STRONG> AResponseContent: TStream); <STRONG>overload</STRONG>;
+<STRONG>procedure</STRONG> <A HREF="007270.html#0012" CLASS="Element59">Post</A>(AURL: <STRONG>string</STRONG>; <STRONG>const</STRONG> ASource: <A HREF="007579.html" CLASS="Element59">TIdMultiPartFormDataStream</A>; AResponseContent: TStream); <STRONG>overload</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+const ASource: TStrings</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+TStrings or stream containing the request data.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+const AResponseContent: TStream</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Destination for response data.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+URL</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Location of the host or CGI application.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Return Value</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+String - Values received in a <A HREF="007270.html#001E" CLASS="Element59">Response</A> for the HTTP POST method.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+<A HREF="007270.html#0012" CLASS="Element59">Post</A> is an overloaded method in <A HREF="007375.html" CLASS="Element59">TIdHTTP</A> that is used to <A HREF="006944.html" CLASS="Element59">send</A> data specified in ASource to the resource location in AURL. <A HREF="007270.html#0012" CLASS="Element59">Post</A> is overloaded to allow use of either TStrings or TStream object instances in ASource, and also provides procedure- and function-based variants of the method to allow String return values or storage of return values in AResponseContent.<P CLASS="Element10">
+Indy currently reverts the HTTP version to 1.0 in a call to the <A HREF="007270.html#0012" CLASS="Element59">Post</A> method. This occurs because some HTTP servers do not respect the RFC for HTTP 1.1 to the full extent of the specification. In particular, most servers do not <A HREF="006944.html" CLASS="Element59">send</A> or expect to receive the 100-Continue HTTP header. Until an optimum solution that does NOT break the RFC is discovered, Indy will restrict all POST requests to version HTTP 1.0 compliance.<P CLASS="Element10">
+When ASource is a TStrings instance, <A HREF="007270.html#0012" CLASS="Element59">Post</A> will replace all occurrences of the End-Of-Line (<A HREF="000534.html" CLASS="Element59">EOL</A>) character in ASource with the value '&amp;' prior to transfer to the HTTP server. When ASource is a TStream instance, no preprocessing of the stream content is performed.<P CLASS="Element10">
+<A HREF="007270.html#0012" CLASS="Element59">Post</A> calls the <A HREF="007270.html#0006" CLASS="Element59">DoRequest</A> method to perform the HTTP transfer.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0013">TIdCustomHTTP.Post</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007270.html" CLASS="Element59">TIdCustomHTTP</A>, <A HREF="010352.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Send HTTP data to a web server or CGI program.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>function</STRONG> <A HREF="007270.html#0012" CLASS="Element59">Post</A>(AURL: <STRONG>string</STRONG>; <STRONG>const</STRONG> ASource: TStrings): <STRONG>string</STRONG>; <STRONG>overload</STRONG>;
+<STRONG>function</STRONG> <A HREF="007270.html#0012" CLASS="Element59">Post</A>(AURL: <STRONG>string</STRONG>; <STRONG>const</STRONG> ASource: TStream): <STRONG>string</STRONG>; <STRONG>overload</STRONG>;
+<STRONG>function</STRONG> <A HREF="007270.html#0012" CLASS="Element59">Post</A>(AURL: <STRONG>string</STRONG>; <STRONG>const</STRONG> ASource: <A HREF="007579.html" CLASS="Element59">TIdMultiPartFormDataStream</A>): <STRONG>string</STRONG>; <STRONG>overload</STRONG>;
+<STRONG>procedure</STRONG> <A HREF="007270.html#0012" CLASS="Element59">Post</A>(AURL: <STRONG>string</STRONG>; <STRONG>const</STRONG> ASource: TStrings; <STRONG>const</STRONG> AResponseContent: TStream); <STRONG>overload</STRONG>;
+<STRONG>procedure</STRONG> <A HREF="007270.html#0012" CLASS="Element59">Post</A>(AURL: <STRONG>string</STRONG>; <STRONG>const</STRONG> ASource: TStream; <STRONG>const</STRONG> AResponseContent: TStream); <STRONG>overload</STRONG>;
+<STRONG>procedure</STRONG> <A HREF="007270.html#0012" CLASS="Element59">Post</A>(AURL: <STRONG>string</STRONG>; <STRONG>const</STRONG> ASource: <A HREF="007579.html" CLASS="Element59">TIdMultiPartFormDataStream</A>; AResponseContent: TStream); <STRONG>overload</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+const ASource: TStrings</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+TStrings or stream containing the request data.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+const AResponseContent: TStream</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Destination for response data.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+URL</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Location of the host or CGI application.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Return Value</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+String - Values received in a <A HREF="007270.html#001E" CLASS="Element59">Response</A> for the HTTP POST method.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+<A HREF="007270.html#0012" CLASS="Element59">Post</A> is an overloaded method in <A HREF="007375.html" CLASS="Element59">TIdHTTP</A> that is used to <A HREF="006944.html" CLASS="Element59">send</A> data specified in ASource to the resource location in AURL. <A HREF="007270.html#0012" CLASS="Element59">Post</A> is overloaded to allow use of either TStrings or TStream object instances in ASource, and also provides procedure- and function-based variants of the method to allow String return values or storage of return values in AResponseContent.<P CLASS="Element10">
+Indy currently reverts the HTTP version to 1.0 in a call to the <A HREF="007270.html#0012" CLASS="Element59">Post</A> method. This occurs because some HTTP servers do not respect the RFC for HTTP 1.1 to the full extent of the specification. In particular, most servers do not <A HREF="006944.html" CLASS="Element59">send</A> or expect to receive the 100-Continue HTTP header. Until an optimum solution that does NOT break the RFC is discovered, Indy will restrict all POST requests to version HTTP 1.0 compliance.<P CLASS="Element10">
+When ASource is a TStrings instance, <A HREF="007270.html#0012" CLASS="Element59">Post</A> will replace all occurrences of the End-Of-Line (<A HREF="000534.html" CLASS="Element59">EOL</A>) character in ASource with the value '&amp;' prior to transfer to the HTTP server. When ASource is a TStream instance, no preprocessing of the stream content is performed.<P CLASS="Element10">
+<A HREF="007270.html#0012" CLASS="Element59">Post</A> calls the <A HREF="007270.html#0006" CLASS="Element59">DoRequest</A> method to perform the HTTP transfer.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="001A">TIdCustomHTTP.Put</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007270.html" CLASS="Element59">TIdCustomHTTP</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Implements the HTTP PUT command verb.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>function</STRONG> Put(AURL: <STRONG>string</STRONG>; <STRONG>const</STRONG> ASource: TStream): <STRONG>string</STRONG>; <STRONG>overload</STRONG>;
+<STRONG>procedure</STRONG> Put(AURL: <STRONG>string</STRONG>; <STRONG>const</STRONG> ASource: TStream; <STRONG>const</STRONG> AResponseContent: TStream); <STRONG>overload</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+AURL: string</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Location to store the resource on the server.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+const ASource: TStream</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Values tyo be stored at the specified location.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+const AResponseContent: TStream</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Destination for response values from the operation.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+<A HREF="007270.html#001A" CLASS="Element59">Put</A> is an overloaded method in <A HREF="007375.html" CLASS="Element59">TIdHTTP</A>, that implements the HTTP PUT command verb used to store the entity contained in ASource at the URI specified in AURL.<P CLASS="Element10">
+If AURL refers to an existing server resource, the values in ASource are considered to be a modified version of the server resource. When AURL does not exist on the server, a new server resource is created for the values in ASource.<P CLASS="Element10">
+<A HREF="007270.html#001A" CLASS="Element59">Put</A> is overloaded to provide a String function that returns the <A HREF="007270.html#001E" CLASS="Element59">Response</A> from the HTTP <A HREF="007270.html#001D" CLASS="Element59">Request</A>, or a procedure that stores <A HREF="007270.html#001E" CLASS="Element59">Response</A> values in the stream specified by AResponseContent.<P CLASS="Element10">
+<A HREF="007270.html#001A" CLASS="Element59">Put</A> differs from <A HREF="007270.html#0012" CLASS="Element59">Post</A> through its use of the values in AURL. For a <A HREF="007270.html#001A" CLASS="Element59">Put</A> operation, the valuein AURL always refers to the values included in the <A HREF="007270.html#001E" CLASS="Element59">Response</A> content.<P CLASS="Element10">
+<A HREF="007270.html#001A" CLASS="Element59">Put</A> calls <A HREF="007270.html#0006" CLASS="Element59">DoRequest</A> to perform the HTTP transfer.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="001B">TIdCustomHTTP.Put</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007270.html" CLASS="Element59">TIdCustomHTTP</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Implements the HTTP PUT command verb.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>function</STRONG> <A HREF="007270.html#001A" CLASS="Element59">Put</A>(AURL: <STRONG>string</STRONG>; <STRONG>const</STRONG> ASource: TStream): <STRONG>string</STRONG>; <STRONG>overload</STRONG>;
+<STRONG>procedure</STRONG> <A HREF="007270.html#001A" CLASS="Element59">Put</A>(AURL: <STRONG>string</STRONG>; <STRONG>const</STRONG> ASource: TStream; <STRONG>const</STRONG> AResponseContent: TStream); <STRONG>overload</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+AURL: string</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Location to store the resource on the server.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+const ASource: TStream</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Values tyo be stored at the specified location.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+const AResponseContent: TStream</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Destination for response values from the operation.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+<A HREF="007270.html#001A" CLASS="Element59">Put</A> is an overloaded method in <A HREF="007375.html" CLASS="Element59">TIdHTTP</A>, that implements the HTTP PUT command verb used to store the entity contained in ASource at the URI specified in AURL.<P CLASS="Element10">
+If AURL refers to an existing server resource, the values in ASource are considered to be a modified version of the server resource. When AURL does not exist on the server, a new server resource is created for the values in ASource.<P CLASS="Element10">
+<A HREF="007270.html#001A" CLASS="Element59">Put</A> is overloaded to provide a String function that returns the <A HREF="007270.html#001E" CLASS="Element59">Response</A> from the HTTP <A HREF="007270.html#001D" CLASS="Element59">Request</A>, or a procedure that stores <A HREF="007270.html#001E" CLASS="Element59">Response</A> values in the stream specified by AResponseContent.<P CLASS="Element10">
+<A HREF="007270.html#001A" CLASS="Element59">Put</A> differs from <A HREF="007270.html#0012" CLASS="Element59">Post</A> through its use of the values in AURL. For a <A HREF="007270.html#001A" CLASS="Element59">Put</A> operation, the valuein AURL always refers to the values included in the <A HREF="007270.html#001E" CLASS="Element59">Response</A> content.<P CLASS="Element10">
+<A HREF="007270.html#001A" CLASS="Element59">Put</A> calls <A HREF="007270.html#0006" CLASS="Element59">DoRequest</A> to perform the HTTP transfer.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0022">TIdCustomHTTP.Trace</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007270.html" CLASS="Element59">TIdCustomHTTP</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Implements the HTTP TRACE command verb for diagnostics.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>procedure</STRONG> <A HREF="007270.html#0021" CLASS="Element59">Trace</A>(AURL: <STRONG>string</STRONG>; <STRONG>const</STRONG> AResponseContent: TStream); <STRONG>overload</STRONG>;
+<STRONG>function</STRONG> <A HREF="007270.html#0021" CLASS="Element59">Trace</A>(AURL: <STRONG>string</STRONG>): <STRONG>string</STRONG>; <STRONG>overload</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+AURL: string</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Resource to be examined in <A HREF="007270.html#0021" CLASS="Element59">Trace</A>.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+const AResponseContent: TStream</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Destination for the test or diagnostic messages.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Return Value</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+String - Test or diagnostic messages for the resource.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Trace is an overloaded method in <A HREF="007375.html" CLASS="Element59">TIdHTTP</A> that implements the HTTP TRACE command verb. Trace is used to a remote application-layer loop- back for the <A HREF="007270.html#001D" CLASS="Element59">Request</A> message, and allows the HTTP client to see the data received at the host or proxy server that is the target for the <A HREF="007270.html#001D" CLASS="Element59">Request</A>. Trace will return information that can be used for testing and diagnostic purposes.<P CLASS="Element10">
+If the <A HREF="007270.html#001D" CLASS="Element59">Request</A> is valid, the <A HREF="007270.html#001E" CLASS="Element59">Response</A> to a Trace <A HREF="007270.html#001D" CLASS="Element59">Request</A> will contain the entire <A HREF="007270.html#001D" CLASS="Element59">Request</A> message with a Content-Type of &quot;message/http&quot;.<P CLASS="Element10">
+Trace is overloade to allow the response content to be returned a String, using the function-based variant of the method, or in the stream specified in AResponseContent.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0021">TIdCustomHTTP.Trace</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007270.html" CLASS="Element59">TIdCustomHTTP</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Implements the HTTP TRACE command verb for diagnostics.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>procedure</STRONG> Trace(AURL: <STRONG>string</STRONG>; <STRONG>const</STRONG> AResponseContent: TStream); <STRONG>overload</STRONG>;
+<STRONG>function</STRONG> Trace(AURL: <STRONG>string</STRONG>): <STRONG>string</STRONG>; <STRONG>overload</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+AURL: string</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Resource to be examined in <A HREF="007270.html#0021" CLASS="Element59">Trace</A>.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+const AResponseContent: TStream</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Destination for the test or diagnostic messages.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Return Value</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+String - Test or diagnostic messages for the resource.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Trace is an overloaded method in <A HREF="007375.html" CLASS="Element59">TIdHTTP</A> that implements the HTTP TRACE command verb. Trace is used to a remote application-layer loop- back for the <A HREF="007270.html#001D" CLASS="Element59">Request</A> message, and allows the HTTP client to see the data received at the host or proxy server that is the target for the <A HREF="007270.html#001D" CLASS="Element59">Request</A>. Trace will return information that can be used for testing and diagnostic purposes.<P CLASS="Element10">
+If the <A HREF="007270.html#001D" CLASS="Element59">Request</A> is valid, the <A HREF="007270.html#001E" CLASS="Element59">Response</A> to a Trace <A HREF="007270.html#001D" CLASS="Element59">Request</A> will contain the entire <A HREF="007270.html#001D" CLASS="Element59">Request</A> message with a Content-Type of &quot;message/http&quot;.<P CLASS="Element10">
+Trace is overloade to allow the response content to be returned a String, using the function-based variant of the method, or in the stream specified in AResponseContent.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="000C">TIdCustomHTTP.OnAuthorization</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007270.html" CLASS="Element59">TIdCustomHTTP</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Event handler for authentication of an HTTP connection.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> OnAuthorization: <A HREF="007607.html" CLASS="Element59">TIdOnAuthorization</A>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+Handled</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Indicatesd if the authentication was successful.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+Sender</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+HTTP Client generating the event notification.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+VPassword</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+User authorization for the HTTP request.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+VUserName</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+User identity for the HTTP request.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+OnAuthorization is a <A HREF="007607.html" CLASS="Element59">TIdOnAuthorization</A> property that represents the event handler signalled when an HTTP client connection needs to provide authentication data as part of an HTTP request.<P CLASS="Element10">
+VUserName and VPassword are the authentication credentials found in the HTTP <A HREF="007270.html#001D" CLASS="Element59">Request</A>, and can be updated in the event handler. Handled indicates if the event handler has successfully authenticated using the client account credentials and method.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="000D">TIdCustomHTTP.OnProxyAuthorization</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007270.html" CLASS="Element59">TIdCustomHTTP</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Event handler for selecting the HTTP client authentication mechanism for a proxy connection.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> OnProxyAuthorization: <A HREF="007607.html" CLASS="Element59">TIdOnAuthorization</A>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+AuthenticationClass</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Authentication class to use for the connection.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+AuthInfo</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Header values to use in authectication.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+Sender</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+HTTP client generating the event notification.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+OnProxyAuthorization is a <A HREF="007627.html" CLASS="Element59">TIdProxyOnAuthorization</A> property that represents the event handler signalled when an HTTP client selects an authentication class to be used when session or proxy authentication is required for a connection. OnProxyAuthorization is signalled prior to triggering the <A HREF="007270.html#000C" CLASS="Element59">OnAuthorization</A> event handler.<P CLASS="Element10">
+AuthenticationClass is the class instance to be used to perform authentication for the mechanisms required in an HTTP request.<P CLASS="Element10">
+AuthInfo is the header values to be be used in the HTTP response that includes the authentication results.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="000E">TIdCustomHTTP.OnRedirect</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007270.html" CLASS="Element59">TIdCustomHTTP</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Event handler triggered for redirect requests.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> OnRedirect: <A HREF="007382.html" CLASS="Element59">TIdHTTPOnRedirectEvent</A>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+dest</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+<A HREF="007270.html#0023" CLASS="Element59">URL</A> for the new resource location.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+Handled</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Indicated that redirects should be handled.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+NumRedirect</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+An accumulator for the number of redirection requests.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+Sender</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Client triggering the event.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+VMethod</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+HTTP method to be used to fulfill the redirect.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+OnRedirect is a <A HREF="007382.html" CLASS="Element59">TIdHTTPOnRedirectEvent</A> property that represents the event handler used when the HTTP client receives a redirection <A HREF="007270.html#001F" CLASS="Element59">ResponseCode</A> in the <A HREF="007270.html#001E" CLASS="Element59">Response</A> for an HTTP <A HREF="007270.html#001D" CLASS="Element59">Request</A>.<P CLASS="Element10">
+OnRedirect is signalled during handling of an HTTP <A HREF="007270.html#001E" CLASS="Element59">Response</A> in the <A HREF="007270.html#0006" CLASS="Element59">DoRequest</A> method when the <A HREF="007270.html#001F" CLASS="Element59">ResponseCode</A> contains a value in the range 300-307, and the <A HREF="007270.html#001E" CLASS="Element59">Response</A> contains a Location header.<P CLASS="Element10">
+When <A HREF="007270.html#0009" CLASS="Element59">HandleRedirects</A> is True, and the number of active redirects does not exceed <A HREF="007270.html#001C" CLASS="Element59">RedirectMaximum</A>, the event handler is signalled to allow the HTTP client to handle any processing required for the Location, Method, or current number of redirection requests. If the client is not Disconnected, the pending redirection request is automatically executed using a nested call to <A HREF="007270.html#0006" CLASS="Element59">DoRequest</A>.<P CLASS="Element10">
+When <A HREF="007270.html#0009" CLASS="Element59">HandleRedirects</A> is False, the event handler is signalled to allow the HTTP client to handle all aspects of the redirection request. If the redirection request is not handled, an <A HREF="000441.html" CLASS="Element59">EIdProtocolReplyError</A> exception will be raised.<P CLASS="Element10">
+An Application must assign a procedure to the event handler in order to respond to the event notification. The event handler procedure can used to alter the redirection location specified in Dest, or to change the HTTP method for a pending redirection request. The event handler procedure should also set Handled to True to indicate that the redirection request can/should be allowed for the client.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="000F">TIdCustomHTTP.OnSelectAuthorization</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007270.html" CLASS="Element59">TIdCustomHTTP</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Event handler triggered when the client selects an authentication mechanism for the connection.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> OnSelectAuthorization: <A HREF="007610.html" CLASS="Element59">TIdOnSelectAuthorization</A>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+AuthenticationClass</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Authentication class to use for the connection.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+AuthInfo</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Header values to use in authectication.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+Sender</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+HTTP client generating the event notification.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+OnSelectAuthorization is a <A HREF="007610.html" CLASS="Element59">TIdOnSelectAuthorization</A> property that represents the event handler triggered when the HTTP client chooses an Authentication method and class for authorizing a connection.<P CLASS="Element10">
+OnSelectAuthorization is triggered when a <A HREF="007270.html#001D" CLASS="Element59">Request</A> needs Authentication using a supported Authentication method for the WWWAuthenticate headers found in <A HREF="007270.html#001E" CLASS="Element59">Response</A>. OnSelectAuthorization can be used to set the class instance in Auth used for authenticating the client <A HREF="007270.html#001D" CLASS="Element59">Request</A> based on header values found in AuthInfo.<P CLASS="Element10">
+OnSelectAuthorization is used prior to triggering the <A HREF="007270.html#000C" CLASS="Element59">OnAuthorization</A> event handler for the client connection.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0010">TIdCustomHTTP.OnSelectProxyAuthorization</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007270.html" CLASS="Element59">TIdCustomHTTP</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Event handler triggered when the client selects an authentication mechanism for the Proxied connection.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> OnSelectProxyAuthorization: <A HREF="007610.html" CLASS="Element59">TIdOnSelectAuthorization</A>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+AuthenticationClass</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Authentication class to use for the connection.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+AuthInfo</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Header values to use in authectication.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+Sender</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+HTTP client generating the event notification.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+OnSelectProxyAuthorization is a <A HREF="007610.html" CLASS="Element59">TIdOnSelectAuthorization</A> property that represents the event handler triggered when the HTTP client chooses an Authentication method and class for authorizing a Proxied connection.<P CLASS="Element10">
+OnSelectProxyAuthorization is triggered when a <A HREF="007270.html#001D" CLASS="Element59">Request</A> needs Authentication using a supported Authentication method for the Proxy headers found in <A HREF="007270.html#001E" CLASS="Element59">Response</A>. OnSelectProxyAuthorization can be used to set the class instance in Auth used for authenticating the client <A HREF="007270.html#001D" CLASS="Element59">Request</A> based on header values found in AuthInfo.<P CLASS="Element10">
+OnSelectProxyAuthorization is used prior to triggering the <A HREF="007270.html#000D" CLASS="Element59">OnProxyAuthorization</A> event handler for the client connection.</DIV>
+</DIV>
+<DIV CLASS="Element62">
+<HR>Created with Doc-O-Matic 2 donated to <STRONG><A HREF="http://www.delphi-jedi.org">Project JEDI</A></STRONG>. Commercial license available from the <STRONG><A HREF="http://www.doc-o-matic.com">Doc-O-Matic site</A></STRONG>.</DIV>
+</DIV></BODY></HTML>

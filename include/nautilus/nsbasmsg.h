@@ -1,0 +1,226 @@
+//
+#ifndef _NsbasmsgH
+#define _NsbasmsgH
+
+#include <classlib\arrays.h>#include "partage\NTArray.h"
+
+//
+// Taille des champs du fichier MESSAGES
+//
+
+#define MSG_CODE_LEN			4
+#define MSG_MSG_ID_LEN			80
+#define MSG_CONTENT_TYPE_LEN    80
+#define MSG_FROM_LEN			80
+#define MSG_SUBJECT_LEN			80
+#define MSG_DATE_LEN			8
+#define MSG_HEURE_LEN			6
+#define MSG_PRIORITY_LEN		2
+#define MSG_DELMSG_LEN			1
+
+//
+// Indice des champs du fichier MESSAGES
+//
+
+#define MSG_CODE_FIELD			1
+#define MSG_MSG_ID_FIELD		2
+#define MSG_CONTENT_TYPE_FIELD  3
+#define MSG_FROM_FIELD			4
+#define MSG_SUBJECT_FIELD		5
+#define MSG_DATE_FIELD			6
+#define MSG_HEURE_FIELD			7
+#define MSG_PRIORITY_FIELD		8
+#define MSG_DELMSG_FIELD		9
+
+//
+// Taille des champs du fichier MSGPARTS
+//
+
+#define PART_MESSAGE_LEN	4
+#define PART_CODE_LEN		3
+#define PART_STYPE_LEN		10
+#define PART_ITYPE_LEN		1
+#define PART_ENCODING_LEN	1
+#define PART_FICHIER_LEN	100
+
+//
+// Indice des champs du fichier MSGPARTS
+//
+
+#define PART_MESSAGE_FIELD	1
+#define PART_CODE_FIELD		2
+#define PART_STYPE_FIELD	3
+#define PART_ITYPE_FIELD	4
+#define PART_ENCODING_FIELD	5
+#define PART_FICHIER_FIELD	6
+
+//////////////////////////////////////////////////////////////////////////////
+// Base MESSAGES.DB
+//////////////////////////////////////////////////////////////////////////////
+
+class NSMessageData
+{
+  	public :
+	  	//
+	  	// Variables de stockage des valeurs
+	  	//
+  		char code[MSG_CODE_LEN + 1];
+  	 	char msg_id[MSG_MSG_ID_LEN + 1];
+     	char content_type[MSG_CONTENT_TYPE_LEN + 1];
+        char from[MSG_FROM_LEN + 1];
+        char subject[MSG_SUBJECT_LEN + 1];
+        char date[MSG_DATE_LEN + 1];
+        char heure[MSG_HEURE_LEN + 1];
+        char priority[MSG_PRIORITY_LEN + 1];
+        char delmsg[MSG_DELMSG_LEN + 1];
+
+	  	NSMessageData();
+     	NSMessageData(const NSMessageData& rv);
+
+	  	NSMessageData& operator=(const NSMessageData& src);
+	  	int 			  operator==(const NSMessageData& o);
+};
+
+//
+// Objet dérivé de NSFiche utilisé pour les opérations de base de données
+//
+class NSMessage : public NSFiche
+{
+  	public :
+
+	  	//
+	  	// Variables de stockage des valeurs
+	  	//
+	  	NSMessageData* pDonnees;
+
+	  	NSMessage(NSContexte* pCtx);
+	  	~NSMessage();
+
+	  	DBIResult open();
+	  	void alimenteFiche();
+	  	void videFiche();
+};
+
+//
+// Objet contenant uniquement un pointeur sur les donnees
+//
+class NSMessageInfo
+{
+	public :
+	  	//
+	  	// Objet qui contient les données
+	  	//
+	  	NSMessageData* pDonnees;
+
+     	NSMessageInfo();
+		NSMessageInfo(NSMessage*);
+		NSMessageInfo(const NSMessageInfo& rv);
+      	~NSMessageInfo();
+
+      	NSMessageInfo& operator=(const NSMessageInfo& src);
+		int operator == ( const NSMessageInfo& o );
+};
+
+//
+// Définition de NSMessageArray (Array de NSMessage)
+//
+typedef vector<NSMessageInfo*> NSMessageVector;
+typedef NSMessageVector::iterator NSMessageIter;typedef NTArray<NSMessageInfo>   NSMessageArray;
+/*
+class NSMessageArray : public NSMessageVector
+{
+	public :
+		// Constructeurs
+		NSMessageArray() : NSMessageVector() {}
+		NSMessageArray(NSMessageArray& rv);
+		// Destructeur
+		virtual ~NSMessageArray();
+
+   		NSMessageArray& operator=(NSMessageArray src);
+   		void vider();
+};*/
+
+//////////////////////////////////////////////////////////////////////////////
+// Base MSGPARTS.DB
+//////////////////////////////////////////////////////////////////////////////
+
+class NSMsgPartData
+{
+  public :
+	  //
+	  // Variables de stockage des valeurs
+	  //
+     char message[PART_MESSAGE_LEN + 1];
+  	 char code[PART_CODE_LEN + 1];
+     char stype[PART_STYPE_LEN + 1];
+     char itype[PART_ITYPE_LEN + 1];
+     char encoding[PART_ENCODING_LEN + 1];
+     char fichier[PART_FICHIER_LEN + 1];
+
+	  NSMsgPartData();
+     NSMsgPartData(const NSMsgPartData& rv);
+
+	  NSMsgPartData& operator=(const NSMsgPartData& src);
+	  int 			  operator==(const NSMsgPartData& o);
+};
+
+//
+// Objet dérivé de NSFiche utilisé pour les opérations de base de données
+//
+class NSMsgPart : public NSFiche
+{
+    public :
+
+        //
+	    // Variables de stockage des valeurs
+	    //
+	    NSMsgPartData* pDonnees;
+
+	    NSMsgPart(NSContexte* pCtx);
+	    ~NSMsgPart();
+
+	    DBIResult open();
+	    void alimenteFiche();
+	    void videFiche();
+};
+
+//
+// Objet contenant uniquement un pointeur sur les donnees
+//
+class NSMsgPartInfo
+{
+	public :
+	  	//
+	  	// Objet qui contient les données
+	  	//
+	  	NSMsgPartData* pDonnees;
+
+     	NSMsgPartInfo();
+		NSMsgPartInfo(NSMsgPart*);
+		NSMsgPartInfo(const NSMsgPartInfo& rv);
+      ~NSMsgPartInfo();
+
+      NSMsgPartInfo& operator=(const NSMsgPartInfo& src);
+		int operator == ( const NSMsgPartInfo& o );
+};
+
+//
+// Définition de NSMsgPartArray (Array de NSMsgPart)
+//
+typedef vector<NSMsgPartInfo*> NSMsgPartVector;
+typedef NSMsgPartVector::iterator NSMsgPartIter;
+/*
+class NSMsgPartArray : public NSMsgPartVector
+{
+public :
+	// Constructeurs
+	NSMsgPartArray() : NSMsgPartVector() {}
+	NSMsgPartArray(NSMsgPartArray& rv);
+	// Destructeur
+	virtual ~NSMsgPartArray();
+
+   NSMsgPartArray& operator=(NSMsgPartArray src);
+   void vider();
+};       */
+
+#endif

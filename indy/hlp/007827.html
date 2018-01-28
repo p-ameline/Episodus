@@ -1,0 +1,267 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+<TITLE>TIdTCPClient</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <META name="GENERATOR" content="Doc-O-Matic">
+    <LINK rel="STYLESHEET" href="default.css" type="text/css">
+
+<SCRIPT LANGUAGE="JavaScript1.2" SRC="scripts.js"></SCRIPT>
+</HEAD>
+<BODY CLASS="Element57">
+<TABLE BORDER="0" BGCOLOR="#AACCFF" WIDTH="100%" CELLSPACING="0" CELLPADDING="0">
+<TR><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element1">
+Indy 9</DIV>
+</TD><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element2">
+<A HREF="content.html" CLASS="Element59">Content</A> | <A HREF="idx.html" CLASS="Element59">Index</A> | <A HREF="symref.html" CLASS="Element59">Reference</A></DIV>
+</TD></TR></TABLE><DIV CLASS="Element58">
+<DIV CLASS="Element5">
+TIdTCPClient</DIV>
+<DIV CLASS="Element7">
+<A HREF="014056.html" CLASS="Element59">Hierarchy</A>, <A HREF="014057.html" CLASS="Element59">Properties</A>, <A HREF="014058.html" CLASS="Element59">Methods</A>, <A HREF="014059.html" CLASS="Element59">Events</A>, <A HREF="014060.html" CLASS="Element59">See Also</A>, <A HREF="002917.html" CLASS="Element59">Unit: IdTCPClient</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Implement a TCP Client.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12">TIdTCPClient = <STRONG>class</STRONG>(<A HREF="007828.html" CLASS="Element59">TIdTCPConnection</A>)</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Unit</DIV>
+<DIV CLASS="Element69">
+<A HREF="002917.html" CLASS="Element59">IdTCPClient</A></DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+TIdTCPClient encapsulates a complete TCP (Transmission Control Protocol) client including socks support. TIdTCPClient can be used for as an ancestor class for specific protocol implementations. Many Indy client components, such as <A HREF="007277.html" CLASS="Element59">TIdDayTime</A>, <A HREF="007303.html" CLASS="Element59">TIdEcho</A>, <A HREF="007323.html" CLASS="Element59">TIdFinger</A>, <A HREF="007328.html" CLASS="Element59">TIdFTP</A>, <A HREF="007352.html" CLASS="Element59">TIdGopher</A>, <A HREF="007375.html" CLASS="Element59">TIdHTTP</A>, <A HREF="007583.html" CLASS="Element59">TIdNNTP</A>, <A HREF="007617.html" CLASS="Element59">TIdPOP3</A>, TIdQUOTD, <A HREF="007701.html" CLASS="Element59">TIdSMTP</A>, <A HREF="007834.html" CLASS="Element59">TIdTelnet</A>, and <A HREF="007898.html" CLASS="Element59">TIdWhois</A> are TIdTCPClient descendants.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0000">TIdTCPClient.BoundIP</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007827.html" CLASS="Element59">TIdTCPClient</A>, <A HREF="014061.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Specifies the IP address to use for the client.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> BoundIP: <STRONG>string</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+BoundIP is a String property that specifies the local IP address to be used for the client connection. BoundIP is used in <A HREF="007827.html#0004" CLASS="Element59">Connect</A> to indicate the bound IP address for the IOHandlerSocket.ConnectClient method.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0001">TIdTCPClient.BoundPort</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007827.html" CLASS="Element59">TIdTCPClient</A>, <A HREF="014062.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Indicates the preferred port number for the local connection.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> BoundPort: Integer;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+BoundPort is an Integer property that specifies the local port number to be used for the client connection. BoundPort is used in <A HREF="007827.html#0004" CLASS="Element59">Connect</A> to indicate the preferred port number for the IOHandlerSocket.ConnectClient method. <A HREF="007827.html#0003" CLASS="Element59">BoundPortMin</A> and <A HREF="007827.html#0002" CLASS="Element59">BoundPortMax</A> indicate the range of port numbers available for selection when BoundPort contains the default value <A HREF="000213.html" CLASS="Element59">BoundPortDefault</A>.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0002">TIdTCPClient.BoundPortMax</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007827.html" CLASS="Element59">TIdTCPClient</A>, <A HREF="014063.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Indicates the highest port number for the local connection when using default port assignment.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> BoundPortMax: Integer;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+BoundPortMax is an Integer property that specifies the highest local port number to be used for the client connection when using default port assignment. BoundPortMax is used in <A HREF="007827.html#0004" CLASS="Element59">Connect</A> to indicate the upper range for <A HREF="007827.html#0001" CLASS="Element59">BoundPort</A> in the IOHandlerSocket.ConnectClient method. Use <A HREF="007827.html#0003" CLASS="Element59">BoundPortMin</A> to indicate the lower range of port numbers available for selection when <A HREF="007827.html#0001" CLASS="Element59">BoundPort</A> contains the default value <A HREF="000213.html" CLASS="Element59">BoundPortDefault</A>.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0003">TIdTCPClient.BoundPortMin</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007827.html" CLASS="Element59">TIdTCPClient</A>, <A HREF="014064.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Indicates the lowest port number for the local connection when using default port assignment.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> BoundPortMin: Integer;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+BoundPortMin is an Integer property that specifies the lowest local port number to be used for the client connection when using default port assignment. BoundPortMin is used in <A HREF="007827.html#0004" CLASS="Element59">Connect</A> to indicate the lower range for <A HREF="007827.html#0001" CLASS="Element59">BoundPort</A> in the IOHandlerSocket.ConnectClient method. Use <A HREF="007827.html#0002" CLASS="Element59">BoundPortMax</A> to indicate the upper range of port numbers available for selection when <A HREF="007827.html#0001" CLASS="Element59">BoundPort</A> contains the default value <A HREF="000213.html" CLASS="Element59">BoundPortDefault</A>.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0008">TIdTCPClient.Host</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007827.html" CLASS="Element59">TIdTCPClient</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Address of the remote computer system.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> Host: <STRONG>string</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Host is a String property that identifies the address of the remote computer system that will act as the endpoint for the client connection. The address can be a computer name such as &quot;<STRONG>wvnvm.wvnet.edu</STRONG>&quot; or an IP Address such as &quot;<STRONG>129.71.2.4</STRONG>&quot;. To <A HREF="007827.html#0004" CLASS="Element59">Connect</A> to a server on your machine, use an IP address like &quot;<STRONG>127.0.0.1</STRONG>&quot; aka &quot;<STRONG>localhost</STRONG>&quot;.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0009">TIdTCPClient.OnConnected</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007827.html" CLASS="Element59">TIdTCPClient</A>, <A HREF="014065.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Event handler signalled on a successful connection request.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> OnConnected: TNotifyEvent;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+OnConnected is a TNotifyEvent event handler used to triggerd an event notification that the client connection has been established opened in <A HREF="007827.html#0004" CLASS="Element59">Connect</A>. OnConnected is signalled after the IOHandler has been assigned and/or opened using the values indicated in the <A HREF="007827.html#0008" CLASS="Element59">Host</A>, <A HREF="007827.html#000A" CLASS="Element59">Port</A>, <A HREF="007827.html#0000" CLASS="Element59">BoundIP</A>, <A HREF="007827.html#0001" CLASS="Element59">BoundPort</A>, <A HREF="007827.html#0003" CLASS="Element59">BoundPortMin</A>, and <A HREF="007827.html#0002" CLASS="Element59">BoundPortMax</A> properties. OnConnected also occurs after the optional handler in Intercept has been activated for the connection.<P CLASS="Element10">
+Applications must assign a procedure to the event handler to allow responding to the event notification.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="000A">TIdTCPClient.Port</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007827.html" CLASS="Element59">TIdTCPClient</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Port number used for the server connection.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> Port: integer;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Port is an Integer property that identifies the server port number server used for the client connection. By convention, some internet protocols reserve port number including:<P CLASS="Element10">
+<UL>
+<LI>21 - FTP<P CLASS="Element10">
+<LI>25 - SMTP<P CLASS="Element10">
+<LI>80 - HTTP<P CLASS="Element10">
+<LI>119 - NNTP</UL>
+<P CLASS="Element10">
+A client application may define it's own port to <A HREF="000295.html" CLASS="Element59">connect</A> to a server running the same port.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0004">TIdTCPClient.Connect</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007827.html" CLASS="Element59">TIdTCPClient</A>, <A HREF="014066.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Opens the connection for the client.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>procedure</STRONG> Connect(<STRONG>const</STRONG> ATimeout: Integer = <A HREF="002932.html" CLASS="Element59">IdTimeoutDefault</A>); <STRONG>virtual</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Connect is a procedure that attempts to open the client connection to a server. Connect requires a host name (address) in <A HREF="007827.html#0008" CLASS="Element59">Host</A> and the port number in <A HREF="007827.html#000A" CLASS="Element59">Port</A> to establish a connection. Many protocol implementations override this method to provide special initialization sequences required by the protocol.<P CLASS="Element10">
+A client connection will be established using the IOHandler for the connection with <A HREF="007827.html#0000" CLASS="Element59">BoundIP</A> and <A HREF="007827.html#0001" CLASS="Element59">BoundPort</A> as the local IP address and port number for the client. An <A HREF="000354.html" CLASS="Element59">EIdAlreadyConnected</A> exception will be raised if the IOHandler has already established a connection for the client. The IOHandler is used to default local port number assignment when <A HREF="007827.html#0001" CLASS="Element59">BoundPort</A> contains the value <A HREF="000213.html" CLASS="Element59">BoundPortDefault</A>. The IOHandler also uses SocksInfo and the timeout value in ATimeout when opening the connection.<P CLASS="Element10">
+If an exception is raised in the method, Connect calls DisconnectSocket prior to re-raising the exception.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0005">TIdTCPClient.ConnectAndGetAll</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007827.html" CLASS="Element59">TIdTCPClient</A>, <A HREF="014067.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Opens a connection and reads all data.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>function</STRONG> ConnectAndGetAll: <STRONG>string</STRONG>; <STRONG>virtual</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Return Value</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+String - Values read from the connection.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+ConnectAndGetAll is a String function that opens a connection to the server specified by <A HREF="007827.html#0008" CLASS="Element59">Host</A> using the port number specified by <A HREF="007827.html#000A" CLASS="Element59">Port</A>. ConnectAndGetAll reads data from the connection until disconnected by the server.<P CLASS="Element10">
+Make sure that the protocol you are using behaves in this manner before using ConnectAndGetAll. Quote of the Day and DayTime are examples of protocols where ConnectAndGetAll is supported.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0006">TIdTCPClient.Create</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007827.html" CLASS="Element59">TIdTCPClient</A>, <A HREF="014068.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Constructor for the object instance.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>constructor</STRONG> Create(AOwner: TComponent); <STRONG>override</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+AOwner: TComponent</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Owner of the object instance.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Create is the constructor for <A HREF="007827.html" CLASS="Element59">TIdTCPClient</A>, and relies on the inherited Create method in <A HREF="007828.html" CLASS="Element59">TIdTCPConnection</A>. Create allocates the <A HREF="007719.html" CLASS="Element59">TIdSocksInfo</A> instance used in the SocksInfo property, and sets <A HREF="007827.html#0001" CLASS="Element59">BoundPort</A> to the default value <A HREF="000213.html" CLASS="Element59">BoundPortDefault</A>.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0007">TIdTCPClient.Destroy</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007827.html" CLASS="Element59">TIdTCPClient</A>, <A HREF="014069.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Frees the object instance.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>destructor</STRONG> Destroy; <STRONG>override</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Destroy is the destructor for object instance. Destroy is responsible for freeing resources allocates in the <A HREF="007827.html#0006" CLASS="Element59">Create</A> constructor prior to calling the inherited Destroy method.</DIV>
+</DIV>
+<DIV CLASS="Element62">
+<HR>Created with Doc-O-Matic 2 donated to <STRONG><A HREF="http://www.delphi-jedi.org">Project JEDI</A></STRONG>. Commercial license available from the <STRONG><A HREF="http://www.doc-o-matic.com">Doc-O-Matic site</A></STRONG>.</DIV>
+</DIV></BODY></HTML>

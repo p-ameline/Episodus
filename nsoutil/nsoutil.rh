@@ -1,0 +1,283 @@
+//// NsOutils.rh
+//
+
+// Dialogue PROGRESS_DLG
+#define IDC_PROGRESS_TXT  101
+#define IDC_PROGRESS_BAR  102
+#define PROGRESS_STOP_BTN 103
+
+// Dialogue OUTILS
+#define IDC_EDITSEM 	    101
+#define IDC_CONVERT 	    102
+#define IDC_PPTLOCDAT       103
+#define IDC_GUIDE 	        104
+#define IDC_CODE		    105
+#define IDC_EPISODUS	    106
+#define IDC_TV			    107
+#define IDC_PV			    108
+#define IDC_MODIFY_TEMPLATE	111
+#define IDC_IMPORT_COCCI	112
+#define IDC_CREE_ARCHELIB	113
+#define IDC_REPAIR	        114
+#define IDC_CREE_CHEMLIB	115
+#define IDC_CREE_GRAPHE	    116
+
+// Dialogue IDD_PROPEDIT
+#define IDC_PE_PROPNAME	    101
+#define IDC_PE_GROUPNAME	102
+#define IDC_PE_TVIEW	    103
+#define IDC_PE_NUMTREE	    104
+#define IDC_PE_NEXTTREE	    105
+#define IDC_PE_PREVTREE	    106
+#define IDC_PE_ADDTREE	    107
+#define IDC_PE_DELTREE	    108
+#define IDC_PE_VALIDITY		109
+
+// Dialogue IDD_VARTAG_EDIT
+#define IDC_VARTAG_EDITNAME	    101
+#define IDC_VARTAG_EDITVALUE	102
+
+// Dialogue IDD_CONTROLTEXT
+#define IDC_CT_LABEL        101
+#define IDC_CT_ACTIF        102
+#define IDC_CT_ACTIF_OUI    103
+#define IDC_CT_ACTIF_NON    104
+#define IDC_CT_TEXTE        105
+
+// Dialogue IDD_CONTLIST
+#define IDC_CL_LABEL	    101
+#define IDC_CL_OBLIG	    102
+#define IDC_CL_OBLIG_OUI	103
+#define IDC_CL_OBLIG_NON	104
+#define IDC_CL_FILS	        105
+#define IDC_CL_FILS_MIN	    106
+#define IDC_CL_FILS_MAX	    107
+
+// Dialogue IDD_ARCEDIT
+#define IDC_AE_ARCNAME      101
+#define IDC_AE_OPEN         102
+#define IDC_AE_SAVE         103
+#define IDC_AE_TVIEW        104
+#define IDC_AE_NEW	        105
+
+// Dialogue IDD_NOMGD
+#define IDC_NOMGD_EDIT	101
+#define IDC_NOMGD_TEXT	102
+
+// Dialogue IDD_CREATEGD
+#define IDC_CREATEGD_CODE	    101
+#define IDC_CREATEGD_LIBELLE	102
+#define IDC_CREATEGD_DATE	    103
+#define IDC_CREATEGD_UTIL	    104
+
+// Dialogue TYPE_LEXI
+#define DOCUMENT_EDIT   101
+
+// Dialogue IDD_GROUPGD (Gestion des groupes de fils guides)#define IDC_GROUPGD_IMPORT	101
+#define IDC_GROUPGD_EXPORT	102
+#define IDC_GROUPGD_DESTROY	103
+#define IDC_GROUPGD_LISTFG	104
+#define IDC_BUTTON1	105
+#define IDC_BUTTON2	106
+#define IDC_BUTTON3	107
+#define IDC_CHECKBOX1	105
+
+// Dialogue IDD_CHOIXGD#define IDC_CHOIXGD_LIST	101
+#define IDC_CHOIXGD_GB	    102
+#define IDC_CHOIXGD_FGSYS	103
+#define IDC_CHOIXGD_FGUTIL	104
+#define IDC_CHOIXGD_NEWGD	105
+#define IDC_CHOIXGD_MODGD	106
+
+// Dialogue IDD_LISTFG#define IDC_LISTFG_LW	    101
+#define IDC_LISTFG_GROUPE	102
+#define IDC_LISTFG_NEW	    103
+#define IDC_LISTFG_MOD	    104
+#define IDC_LISTFG_DEL	    105
+#define IDC_LISTFG_NEWGP	106
+#define IDC_LISTFG_MODGP	107
+#define IDC_LISTFG_UP	    108
+#define IDC_LISTFG_DOWN	    109
+#define IDC_LISTFG_DUP	    110
+
+// Conversion patients
+#define IC_CVT_NSS	    101
+#define IDC_CVT_CODE	102
+#define IDC_CVT_NOM	    103
+#define IDC_CVT_PRENOM	104
+#define IDC_CVT_START	105
+#define IDC_CVT_STOP	106
+
+
+// Edition des fils guides IDD_EDITFG
+#define IDC_LW_PERE	        101
+#define IDC_LW_FILS	        102
+#define IDC_EDIT_COMMENT	103
+#define IDC_EDIT_CHOIXGD	104
+
+#define IDC_HAUT_PERE	110
+#define IDC_BAS_PERE	111
+#define IDC_INS_PERE	112
+#define IDC_MOD_PERE	113
+#define IDC_DEL_PERE	114
+
+#define IDC_HAUT_FILS	120
+#define IDC_BAS_FILS	121
+#define IDC_INS_FILS	122
+#define IDC_MOD_FILS	123
+#define IDC_DEL_FILS	124
+
+// Modification d'un fil guide IDD_MODFG
+#define IDC_MODFG_SEQUENCE	101
+#define IDC_MODFG_ELEMENT	102
+#define IDC_MODFG_EDIT	    103
+#define IDC_MODFG_CERTGROUP	104
+#define IDC_MODFG_CERTSANS	105
+#define IDC_MODFG_CERT00	106
+#define IDC_MODFG_CERT25	107
+#define IDC_MODFG_CERT50	108
+#define IDC_MODFG_CERT75	109
+#define IDC_MODFG_CERT100	110
+#define IDC_MODFG_PLURGROUP	111
+#define IDC_MODFG_PLUR1	    112
+#define IDC_MODFG_PLUR2	    113
+#define IDC_MODFG_PLURSANS	114
+
+// Edition d'une requête : IDD_REQUETE
+#define IDC_REQ_LW	        101
+#define IDC_REQ_NEW	        102
+#define IDC_REQ_MOD	        103
+#define IDC_REQ_DEL	        104
+#define IDC_REQ_CRITDOC	    105
+#define IDC_REQ_CRITPAT	    106
+#define IDC_REQ_EDIT	      107
+#define IDC_REQ_OUVRANTE	  108
+#define IDC_REQ_ET	        109
+#define IDC_REQ_OU	        110
+#define IDC_REQ_FERMANTE	  111
+#define IDC_REQ_MODPAT	    113
+#define IDC_REQ_MODDOC	    114
+#define IDC_REQ_LANCER	    115
+#define IDC_REQ_FERMER	    116
+#define IDC_REQ_NOM	        117
+#define IDC_REQ_NEWREQ	    118
+#define IDC_REQ_OPEN	      119
+#define IDC_REQ_SAVE	      120
+#define IDC_REQ_DUP	        121
+#define IDC_REQ_BOOL_LW	    122
+#define IDC_REQ_STEP1_TXT   123
+#define IDC_REQ_STEP2_TXT   124
+#define IDC_REQ_STEP3_TXT   125
+#define IDC_REQ_STEP4_TXT   126
+#define IDC_REQ_STEP5_TXT   127
+#define IDC_REQ_STEP6_TXT   128
+#define IDC_REQ_REQ_NEW	    129
+#define IDC_REQ_REQ_MOD	    130
+#define IDC_REQ_REQ_DEL	    131
+#define IDC_REQ_REQ_DUP	    132
+#define IDC_REQ_MANGT_TXT   133
+#define IDC_REQ_NAME_EDIT   134
+#define IDC_REQ_BOOL_TXT    135
+#define IDC_REQ_NAME_TXT    136
+
+// Edition d'un chemin de requête : IDD_EDITREQ
+#define IDC_EDITREQ_LWPERE	101
+#define IDC_EDITREQ_LWFILS	102
+#define IDC_EDITREQ_INS	    103
+#define IDC_EDITREQ_MOD	    104
+#define IDC_EDITREQ_DEL	    105
+#define IDC_EDITREQ_AJOUTER	106
+
+// Critères Patient : IDD_CRITREQPAT
+#define IDC_CRITREQPAT_NOM	    101
+#define IDC_CRITREQPAT_PRENOM	102
+#define IDC_CRITREQPAT_SEXE	    103
+#define IDC_CRITREQPAT_SEXE1	104
+#define IDC_CRITREQPAT_SEXE2	105
+#define IDC_CRITREQPAT_DATEN1	106
+#define IDC_CRITREQPAT_DATEN2	107
+#define IDC_CRITREQPAT_CODEPOST	108
+#define IDC_CRITREQPAT_VILLE	109
+#define IDC_CRITREQPAT_SITFAM	110
+#define IDC_CRITREQPAT_CEL	    111
+#define IDC_CRITREQPAT_MAR	    112
+#define IDC_CRITREQPAT_CCB	    113
+#define IDC_CRITREQPAT_VEU	    114
+#define IDC_CRITREQPAT_DIV	    115
+#define IDC_CRITREQPAT_NBENF	116
+#define IDC_CRITREQPAT_EFFACER	117
+
+// Critères Document : IDD_CRITREQDOC
+#define IDC_CRITREQDOC_TYPE	    101
+#define IDC_CRITREQDOC_DATE1	102
+#define IDC_CRITREQDOC_DATE2	103
+#define IDC_CRITREQDOC_EFFACER	104
+#define IDC_CRITREQDOC_AUTEUR	105
+
+// Lancement de la requête : IDD_LANCEREQ
+#define IDC_LR_GROUP	  101
+#define IDC_LR_AVECLIB	102
+#define IDC_LR_AVECPAT	103
+#define IDC_LR_AVECDOC	104
+#define IDC_LR_EDITPAT	105
+#define IDC_LR_EDITDOC	106
+#define IDC_LR_START	  107
+#define IDC_LR_STOP	    108
+#define IDC_LR_STATUS	  109
+#define IDC_PROGRESS	  110
+
+// Liste utilisateurs IDD_LISTUTI
+#define IDC_LISTUTI_LW	101
+
+// Saisie des valeurs chiffrées : IDD_VALEUR
+#define IDC_VALEUR_EDITION	101
+#define IDC_VALEUR_INF	    102
+#define IDC_VALEUR_SUP	    103
+#define IDC_VALEUR_UNITE	104
+#define IDC_VALEUR_AVECINF	105
+#define IDC_VALEUR_AVECSUP	106
+#define IDC_VALEUR_EFF	    107
+
+// Modification lexique IDD_LEXIMODIF
+#define IDC_REMPL           101
+#define IDC_PAR	            102
+
+// Dialogue IDD_ENTETE_EDIT
+#define IDC_ENTETE_LW	    101
+#define IDC_STATICTEXT1	    102
+
+// Dialogue IDD_REFEDIT
+#define IDC_RE_REFNAME	        101
+#define IDC_RE_NEWREF	        102
+#define IDC_RE_PROPHAUT	        103
+#define IDC_RE_PROPBAS	        104
+#define IDC_RE_ADDPROP	        105
+#define IDC_RE_DELPROP	        106
+#define IDC_RE_LVIEW	        107
+
+// Edition des templates : IDD_CREAT_TPL
+#define IDC_CREATTPL_COMBO	    101
+#define IDC_CREATTPL_UTIL	    102
+#define IDC_CREATTPL_UTIL1	    103
+#define IDC_CREATTPL_UTIL2	    104
+#define IDC_CREATTPL_TYPE	    105
+#define IDC_CREATTPL_COMPO	    106
+#define IDC_CREATTPL_DEFAUT	    107
+#define IDC_CREATTPL_LIBELLE    108
+#define IDC_CREATTPL_ENTETE	    109
+#define IDC_CREATTPL_FICHIER	110
+#define IDC_CREATTPL_ROOT	    111
+#define IDC_CREATTPL_CONSOLE	112
+
+// Dialogue IDD_HEADER_MODEL
+#define IDC_LISTBOX             101
+
+// Dialogue d'update
+#define UPDATE_YES       101
+#define UPDATE_NO        102
+#define UPDATE_QUESTION  103
+#define UPDATE_ENLARGE   104
+#define UPDATE_RELEASE   105
+
+// Dialogue toolbox
+#define MAIL_BTN         101

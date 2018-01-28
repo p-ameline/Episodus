@@ -1,0 +1,52 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+<TITLE>TIdReuseSocket</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <META name="GENERATOR" content="Doc-O-Matic">
+    <LINK rel="STYLESHEET" href="default.css" type="text/css">
+
+<SCRIPT LANGUAGE="JavaScript1.2" SRC="scripts.js"></SCRIPT>
+</HEAD>
+<BODY CLASS="Element57">
+<TABLE BORDER="0" BGCOLOR="#AACCFF" WIDTH="100%" CELLSPACING="0" CELLPADDING="0">
+<TR><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element1">
+Indy 9</DIV>
+</TD><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element2">
+<A HREF="content.html" CLASS="Element59">Content</A> | <A HREF="idx.html" CLASS="Element59">Index</A> | <A HREF="symref.html" CLASS="Element59">Reference</A></DIV>
+</TD></TR></TABLE><DIV CLASS="Element58">
+<DIV CLASS="Element5">
+TIdReuseSocket</DIV>
+<DIV CLASS="Element7">
+<A HREF="015382.html" CLASS="Element59">See Also</A>, <A HREF="002193.html" CLASS="Element59">Unit: IdGlobal</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Indicates how IP addresses and port numbers are reused for listener threads in TCP servers.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12">TIdReuseSocket = (rsOSDependent, rsTrue, rsFalse);</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Unit</DIV>
+<DIV CLASS="Element69">
+<A HREF="002193.html" CLASS="Element59">IdGlobal</A></DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+TIdReuseSocket is an enumerated type that represents the manner in which <A HREF="007071.html" CLASS="Element59">socket</A> reuse is supported in Indy TCP servers. TIdReuseSocket can contain one of the following values and associated meanings:<P CLASS="Element10">
+<UL>
+<LI>rsOSDependent - Reuse IP addersses and port numbers when the OS platform is Linux.<P CLASS="Element10">
+<LI>rsTrue - Always resuse IP addersses and port numbers.<P CLASS="Element10">
+<LI>rsFalse - Never resuse IP addersses and port numbers.</UL>
+<P CLASS="Element10">
+TIdReuseSocket is the type used to represent the <A HREF="007831.html#001B" CLASS="Element59">TIdTCPServer.ReuseSocket</A> property, and indicates if IP addresses and port numbers can be reused for <A HREF="007507.html" CLASS="Element59">TIdListenerThread</A> instances used by the server.<P CLASS="Element10">
+A TIdReuseSocket value is used as an option for SetSockOpt when allocating the listener thread(s) after a server becomes Active.<P CLASS="Element10">
+The default behavior in Indy is rsOSDependent.</DIV>
+</DIV>
+<DIV CLASS="Element62">
+<HR>Created with Doc-O-Matic 2 donated to <STRONG><A HREF="http://www.delphi-jedi.org">Project JEDI</A></STRONG>. Commercial license available from the <STRONG><A HREF="http://www.doc-o-matic.com">Doc-O-Matic site</A></STRONG>.</DIV>
+</DIV></BODY></HTML>

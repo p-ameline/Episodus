@@ -1,0 +1,20 @@
+// Dialogue IDD_CREAT_MAT
+// #define IDC_CM_LIBELLE		101// #define IDC_CM_TYPE			  102
+// #define IDC_CM_NUM_SERIE	103
+// #define IDC_CM_MISE_SVCE	104
+// #define IDC_CM_ACTIF		  105
+// #define IDC_CM_ACTIF_OUI	106
+// #define IDC_CM_ACTIF_NON	107
+
+// Dialogue IDD_LISTMAT
+// #define IDC_LM_LW		  101// #define IDC_LM_CREER	102
+// #define IDC_LM_SUPPR	103
+// #define IDC_LM_MODIF	104
+// #define IDC_LM_SETDEF	105
+// #define IDC_LM_LW_T		106
+
+// Autres dialogues
+// #define IDC_MATERIELBOX	101// #define IDC_PROTOCOLBOX	101
+
+// #define ID_ELARGIR 105
+

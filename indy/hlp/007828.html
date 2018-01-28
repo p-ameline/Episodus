@@ -1,0 +1,2116 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+<TITLE>TIdTCPConnection</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <META name="GENERATOR" content="Doc-O-Matic">
+    <LINK rel="STYLESHEET" href="default.css" type="text/css">
+
+<SCRIPT LANGUAGE="JavaScript1.2" SRC="scripts.js"></SCRIPT>
+</HEAD>
+<BODY CLASS="Element57">
+<TABLE BORDER="0" BGCOLOR="#AACCFF" WIDTH="100%" CELLSPACING="0" CELLPADDING="0">
+<TR><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element1">
+Indy 9</DIV>
+</TD><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element2">
+<A HREF="content.html" CLASS="Element59">Content</A> | <A HREF="idx.html" CLASS="Element59">Index</A> | <A HREF="symref.html" CLASS="Element59">Reference</A></DIV>
+</TD></TR></TABLE><DIV CLASS="Element58">
+<DIV CLASS="Element5">
+TIdTCPConnection</DIV>
+<DIV CLASS="Element7">
+<A HREF="014078.html" CLASS="Element59">Hierarchy</A>, <A HREF="014079.html" CLASS="Element59">Properties</A>, <A HREF="014080.html" CLASS="Element59">Methods</A>, <A HREF="014081.html" CLASS="Element59">Events</A>, <A HREF="014082.html" CLASS="Element59">See Also</A>, <A HREF="002918.html" CLASS="Element59">Unit: IdTCPConnection</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Implements a TCP Connection component.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12">TIdTCPConnection = <STRONG>class</STRONG>(<A HREF="007246.html" CLASS="Element59">TIdComponent</A>)</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Unit</DIV>
+<DIV CLASS="Element69">
+<A HREF="002918.html" CLASS="Element59">IdTCPConnection</A></DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+TIdTCPConnection encapsulates a complete Transmission Control Protocol (TCP) connection. TIdTCPConnection provides methods common to most client and/or server connections that do not require support a specific communications protocol or data representation. These method include buffered reading and writing using the TCP/IP protocol stack, and access to buffered values using ordinal data type and streams.<P CLASS="Element10">
+TIdTCPConnection publishes properties that allow configuration of the transport mechanism for the connection including <A HREF="007828.html#0033" CLASS="Element59">ReadTimeout</A>, <A HREF="007828.html#0034" CLASS="Element59">RecvBufferSize</A>, and <A HREF="007828.html#0035" CLASS="Element59">SendBufferSize</A>, <A HREF="007828.html#0001" CLASS="Element59">ASCIIFilter</A>, <A HREF="007828.html#001A" CLASS="Element59">Intercept</A>, <A HREF="007828.html#001B" CLASS="Element59">IOHandler</A>, and <A HREF="007828.html#0001" CLASS="Element59">ASCIIFilter</A>.<P CLASS="Element10">
+TIdTCPConnection also exposes event handlers that provide notifications of actions performed on the connection including <A HREF="007828.html#001F" CLASS="Element59">OnDisconnected</A>, <A HREF="007828.html#0021" CLASS="Element59">OnWorkBegin</A>, <A HREF="007828.html#0020" CLASS="Element59">OnWork</A>, and <A HREF="007828.html#0022" CLASS="Element59">OnWorkEnd</A>.<P CLASS="Element10">
+TIdTCPConnection is the ancestor class for <A HREF="007827.html" CLASS="Element59">TIdTCPClient</A> and <A HREF="007831.html" CLASS="Element59">TIdTCPServer</A>.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0001">TIdTCPConnection.ASCIIFilter</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007828.html" CLASS="Element59">TIdTCPConnection</A>, <A HREF="014083.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Converts incoming characters to the US-ASCII character set.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> ASCIIFilter: boolean;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+ASCIIFilter is a Boolean property that indicates all data read from the protocol stack should have the high bit reset before storing the values in the Indy read buffer.<P CLASS="Element10">
+ASCIIFilter is used to insure that character data in the Indy buffer will contain values that can be represented using the US-ASCII character set (Decimal 0 through Decimal 127).<P CLASS="Element10">
+ASCIIFilter is used in <A HREF="007828.html#0029" CLASS="Element59">ReadFromStack</A>.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="000B">TIdTCPConnection.ClosedGracefully</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007828.html" CLASS="Element59">TIdTCPConnection</A>, <A HREF="014084.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Indicates that the connection has closed without data in the read buffer.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> ClosedGracefully: Boolean;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+ClosedGracefully is a read-only Boolean property that indicates if a connection has closed without data in the Indy read buffer, or if it was abruptly lost. ClosedGracefully is True when the connection calls <A HREF="007828.html#0011" CLASS="Element59">Disconnect</A>, and has meaning only when <A HREF="007828.html#000D" CLASS="Element59">Connected</A> is False.<P CLASS="Element10">
+CloseGracefully is updated in <A HREF="007828.html#0029" CLASS="Element59">ReadFromStack</A> when a the <A HREF="007071.html" CLASS="Element59">socket</A> handle for the connection is ready for read operations.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0017">TIdTCPConnection.Greeting</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007828.html" CLASS="Element59">TIdTCPConnection</A>, <A HREF="014085.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Represents a banner message received from connection to a protocol server.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> Greeting: <A HREF="007663.html" CLASS="Element59">TIdRFCReply</A>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Greeting is a <A HREF="007663.html" CLASS="Element59">TIdRFCReply</A> property that contains the banner message received during connection to a protocol server. Greeting contains one or more values indicating the initial response from the connection to the server.<P CLASS="Element10">
+Greeting is initialized in the <A HREF="007828.html#000E" CLASS="Element59">Create</A> constructor, and freed in <A HREF="007828.html#0010" CLASS="Element59">Destroy</A>. Greeting is normally updated by descendant classes, like <A HREF="007583.html" CLASS="Element59">TIdNNTP</A>, <A HREF="007328.html" CLASS="Element59">TIdFTP</A>, etc., that provide a welcome message during their overridden <A HREF="000295.html" CLASS="Element59">connect</A> method.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0018">TIdTCPConnection.InputBuffer</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007828.html" CLASS="Element59">TIdTCPConnection</A>, <A HREF="014086.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Represents the internal buffer for unhandled data read from the connection.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> InputBuffer: <A HREF="007525.html" CLASS="Element59">TIdManagedBuffer</A>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+InputBuffer is a read-only <A HREF="007219.html" CLASS="Element59">TIdBuffer</A> property that represents the internal buffer used by Indy for unhandled data read for the connection. InputBuffer contains values read from the TCP/IP protocol stack using <A HREF="007828.html#0029" CLASS="Element59">ReadFromStack</A>.<P CLASS="Element10">
+Values in InputBuffer are affected by methods that extract data in various formats like <A HREF="007828.html#000F" CLASS="Element59">CurrentReadBuffer</A>, <A HREF="007828.html#0030" CLASS="Element59">ReadStream</A>, <A HREF="007828.html#002B" CLASS="Element59">ReadLn</A>, and <A HREF="007828.html#0032" CLASS="Element59">ReadStrings</A>. Most applications will use the methods that extract ordinal data types like <A HREF="007828.html#0027" CLASS="Element59">ReadCardinal</A>, <A HREF="007828.html#0028" CLASS="Element59">ReadChar</A>, <A HREF="007828.html#002A" CLASS="Element59">ReadInteger</A>, <A HREF="007828.html#002F" CLASS="Element59">ReadSmallInt</A>, and <A HREF="007828.html#0031" CLASS="Element59">ReadString</A>.<P CLASS="Element10">
+<STRONG>Note</STRONG>: InputBuffer is not the same as the internal buffer used for receive operations from the TCP/IP protocol stack, as indicated in <A HREF="007828.html#0034" CLASS="Element59">RecvBufferSize</A>.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="001A">TIdTCPConnection.Intercept</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007828.html" CLASS="Element59">TIdTCPConnection</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Allows intercept of read and write operations for the connection.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> Intercept: <A HREF="007248.html" CLASS="Element59">TIdConnectionIntercept</A>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Intercept is a <A HREF="007248.html" CLASS="Element59">TIdConnectionIntercept</A> property used to act as an intermediary between the protocol stack and a <A HREF="007828.html" CLASS="Element59">TIdTCPConnection</A>. Intercept is used to perform operations that can include logging <A HREF="006944.html" CLASS="Element59">send</A> and receive operations, or provide Secure <A HREF="007828.html#0038" CLASS="Element59">Socket</A> Layer (SSL) support for the connection.<P CLASS="Element10">
+The Intercept must be Enabled to allow Intercept actions to be performed.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="001B">TIdTCPConnection.IOHandler</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007828.html" CLASS="Element59">TIdTCPConnection</A>, <A HREF="014087.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Provides an abstract input/output source for <A HREF="006944.html" CLASS="Element59">send</A> and receive operations.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> IOHandler: <A HREF="007421.html" CLASS="Element59">TIdIOHandler</A>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+IOHandler is a <A HREF="007421.html" CLASS="Element59">TIdIOHandler</A> property that indicates the class to be used to provide input and output sources for the connection. IOHandler, and descendant classes, allow abstraction of <A HREF="006944.html" CLASS="Element59">send</A> and receive operations using <A HREF="007828.html#0038" CLASS="Element59">Socket</A> connections, streams, or any input/output source where an IOHandler has been written. The default IOHandler in Indy is the <A HREF="007071.html" CLASS="Element59">socket</A>-based <A HREF="007426.html" CLASS="Element59">TIdIOHandlerSocket</A>.<P CLASS="Element10">
+IOHandler is used in methods that perform low-level read or write operations like <A HREF="007828.html#0029" CLASS="Element59">ReadFromStack</A> and <A HREF="007828.html#003B" CLASS="Element59">WriteBuffer</A>. IOHandler is also used in methods that access the connection status like <A HREF="007828.html#0007" CLASS="Element59">CheckForDisconnect</A>, <A HREF="007828.html#000D" CLASS="Element59">Connected</A>, <A HREF="007828.html#0012" CLASS="Element59">DisconnectSocket</A>, and <A HREF="007828.html#0011" CLASS="Element59">Disconnect</A>.<P CLASS="Element10">
+When accessing IOHandler in application code, always cast the IOHandler to the correct descendant class. This is needed to access any methods or properties in the descendant that cannot be represented in the ancestor class at runtime.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="001C">TIdTCPConnection.LastCmdResult</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007828.html" CLASS="Element59">TIdTCPConnection</A>, <A HREF="014088.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Represents response code and text values for the last command requested.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> LastCmdResult: <A HREF="007663.html" CLASS="Element59">TIdRFCReply</A>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+LastCmdResult is a read-only <A HREF="007663.html" CLASS="Element59">TIdRFCReply</A> property that represents the complete response message received during execution of a command request on the client connection. LastCmdResult contains the response code, in numeric and text form, and one or more lines of text from the response message. LastCmdResult is updated when <A HREF="007828.html#0036" CLASS="Element59">SendCmd</A> sends the client request on the connection, and <A HREF="007828.html#0015" CLASS="Element59">GetResponse</A> is called to parse the numeric and text portions of the response message. LastCmdResult is cleared prior to parsing of the response values.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="001D">TIdTCPConnection.MaxLineAction</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007828.html" CLASS="Element59">TIdTCPConnection</A>, <A HREF="014089.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Indicates the action to be taken when the maximum line length is exceeded when reading data.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> MaxLineAction: <A HREF="007543.html" CLASS="Element59">TIdMaxLineAction</A>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+MaxLineAction is a <A HREF="007543.html" CLASS="Element59">TIdMaxLineAction</A> property that indicates the action to be performed when the <A HREF="007828.html#0018" CLASS="Element59">InputBuffer</A> contains a line that exceeds the value assigned to <A HREF="007828.html#001E" CLASS="Element59">MaxLineLength</A>. MaxLineAction is used with <A HREF="007828.html#001E" CLASS="Element59">MaxLineLength</A> in <A HREF="007828.html#002B" CLASS="Element59">ReadLn</A> to determine if an <A HREF="000442.html" CLASS="Element59">EIdReadLnMaxLineLengthExceeded</A> exception should be raised, or if the data is split into one or more lines when the conditions occurs. <STRONG>Note</STRONG>: MaxLineAction has significance only when <A HREF="007828.html#001E" CLASS="Element59">MaxLineLength</A> contains a non-zero value.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="001E">TIdTCPConnection.MaxLineLength</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007828.html" CLASS="Element59">TIdTCPConnection</A>, <A HREF="014090.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Maximum number of characters for line-oriented input methods.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> MaxLineLength: Integer;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+MaxLineLength is an Integer property that represents the maximum number of characters that can be read using a single call to <A HREF="007828.html#002B" CLASS="Element59">ReadLn</A> or <A HREF="007828.html#0019" CLASS="Element59">InputLn</A> method call. MaxLineLength is intended to protect <A HREF="007828.html" CLASS="Element59">TIdTCPConnection</A> and descendants from Denial of Service attacks that might result from unchecked memory usage. The default value for MaxLineLength is <A HREF="002285.html" CLASS="Element59">IdMaxLineLengthDefault</A>, as assigned in the <A HREF="007828.html#000E" CLASS="Element59">Create</A> constructor.<P CLASS="Element10">
+MaxLineLength is used in <A HREF="007828.html#002B" CLASS="Element59">ReadLn</A> and <A HREF="007828.html#0019" CLASS="Element59">InputLn</A> when the maximum line length argument to the method is -1 indicating that the property value should be used.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="001F">TIdTCPConnection.OnDisconnected</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007828.html" CLASS="Element59">TIdTCPConnection</A>, <A HREF="014091.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Represents the event handler for peer disconnect events.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> OnDisconnected: TNotifyEvent;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+Sender</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Connection triggering the event.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+OnDisconnected is the TNotifyEvent event handler used to respond to event notifications when the peer is disconnected. OnDisconnected is triggered when the <A HREF="007828.html#0011" CLASS="Element59">Disconnect</A> method is used to close the <A HREF="007071.html" CLASS="Element59">socket</A> connection.<P CLASS="Element10">
+An application must assign a procedure to OnDisconnected to allow a response to the event notification.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0020">TIdTCPConnection.OnWork</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007828.html" CLASS="Element59">TIdTCPConnection</A>, <A HREF="014092.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Work event handler for buffered read and write operations.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> OnWork;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+AWorkCount</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Bytes affected by this operation.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+AWorkMode</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Operation being performed.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+Sender</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Owner of this instance.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+OnWork is the event handler for the event <A HREF="008112.html" CLASS="Element59">TWorkEvent</A>. OnWork is used in conjunction with DoWork to notify Indy components and classes when buffered read or write operations are invoked. OnWork is generally used to control the update of progress indicators or GUI components.<P CLASS="Element10">
+AWorkMode indicates the operation performed and the notification sent to OnWork. AWorkMode can be contain one of the following values:<P CLASS="Element10">
+<UL>
+<LI>wmRead - The component is reading data from the peer.<P CLASS="Element10">
+<LI>wmWrite - The component is sending data to the peer.</UL>
+<P CLASS="Element10">
+AWorkCount indicates the number of bytes affected by the operation sent to OnWork.<P CLASS="Element10">
+The event <A HREF="008112.html" CLASS="Element59">TWorkEvent</A> is implemented in <A HREF="002142.html" CLASS="Element59">IdComponent.pas</A>.<P CLASS="Element10">
+<A HREF="007828.html" CLASS="Element59">TIdTCPConnection</A> publishes the OnWork event. OnWork is not published in the ancestor class <A HREF="007246.html" CLASS="Element59">TIdComponent</A>.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0021">TIdTCPConnection.OnWorkBegin</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007828.html" CLASS="Element59">TIdTCPConnection</A>, <A HREF="014093.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+WorkBegin event handler for starting read or write buffering.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> OnWorkBegin;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+AWorkCountMax</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Maximum number of bytes expected.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+AWorkMode</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Operation being performed.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+Sender</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Owner of this instance.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+OnWorkBegin is an event of type <A HREF="008110.html" CLASS="Element59">TWorkBeginEvent</A> as implemented in <A HREF="007246.html" CLASS="Element59">TIdComponent</A>. OnWorkBegin is used in conjunction with BeginWork to notify Indy components and classes when buffered read or write operations are initiated. OnWorkBegin is generally used to control the update of progress indicators or GUI components.<P CLASS="Element10">
+AWorkMode indicates the operation performed and the notification sent to OnWorkBegin. AWorkMode can contain one of the following values:<P CLASS="Element10">
+<UL>
+<LI>wmRead - The component is reading data from the peer.<P CLASS="Element10">
+<LI>wmWrite - The component is sending data to the peer.</UL>
+<P CLASS="Element10">
+AWorkCountMax indicates the maximum number of bytes expected for the operation sent to OnWorkBegin, or 0 when the number of bytes not known.<P CLASS="Element10">
+The event <A HREF="008112.html" CLASS="Element59">TWorkEvent</A> is implemented in <A HREF="002142.html" CLASS="Element59">IdComponent.pas</A>.<P CLASS="Element10">
+<A HREF="007828.html" CLASS="Element59">TIdTCPConnection</A> publishes the OnWorkBegin event. <A HREF="007828.html#0020" CLASS="Element59">OnWork</A> is not published in the ancestor class <A HREF="007246.html" CLASS="Element59">TIdComponent</A>.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0022">TIdTCPConnection.OnWorkEnd</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007828.html" CLASS="Element59">TIdTCPConnection</A>, <A HREF="014094.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+WorkEnd event handler triggered when stopping read and write buffering operations.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> OnWorkEnd;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+AWorkCount</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Bytes affected by this operation.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+AWorkMode</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Operation being performed.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+Sender</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Owner of this instance.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+OnWorkEnd is an event of type <A HREF="008111.html" CLASS="Element59">TWorkEndEvent</A> as implemented in <A HREF="007246.html" CLASS="Element59">TIdComponent</A>. OnWorkEnd is used in conjunction with EndWork to notify Indy components and classes when buffered read or write operations are concluded.<P CLASS="Element10">
+AWorkMode indicates the operation performed and the notification sent to <A HREF="007828.html#0020" CLASS="Element59">OnWork</A>. AWorkMode can contain one of the following values:<P CLASS="Element10">
+<UL>
+<LI>wmRead - The component is reading data from the peer.<P CLASS="Element10">
+<LI>wmWrite - The component is sending data to the peer.</UL>
+<P CLASS="Element10">
+AWorkCount contains the number of bytes affected by the operation.<P CLASS="Element10">
+<A HREF="007828.html" CLASS="Element59">TIdTCPConnection</A> publishes the OnWorkEnd event. OnWorkEnd is not published in the ancestor class <A HREF="007246.html" CLASS="Element59">TIdComponent</A>.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="002C">TIdTCPConnection.ReadLnSplit</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007828.html" CLASS="Element59">TIdTCPConnection</A>, <A HREF="014095.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Indicates that a read from the Input buffer has been split at the maximum line length.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> ReadLnSplit: Boolean;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+ReadLnSplit is a read-only Boolean property that indicates if data read from <A HREF="007828.html#0018" CLASS="Element59">InputBuffer</A> has been split into additional lines due to the line length limitations. ReadLnSplit will contain True when <A HREF="007828.html#002B" CLASS="Element59">ReadLn</A> encounters a line in <A HREF="007828.html#0018" CLASS="Element59">InputBuffer</A> having a length that exceeds the value in <A HREF="007828.html#001E" CLASS="Element59">MaxLineLength</A>, and <A HREF="007828.html#001D" CLASS="Element59">MaxLineAction</A> contains maSplit. <A HREF="007828.html#002B" CLASS="Element59">ReadLn</A> will extract the number of characters indicated in <A HREF="007828.html#001E" CLASS="Element59">MaxLineLength</A>, and allow subsequent operations to handle the remaining data in <A HREF="007828.html#0018" CLASS="Element59">InputBuffer</A>.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="002D">TIdTCPConnection.ReadLnTimedOut</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007828.html" CLASS="Element59">TIdTCPConnection</A>, <A HREF="014096.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Indicates that a timeout occurred in <A HREF="007828.html#002B" CLASS="Element59">ReadLn</A>.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> ReadLnTimedOut: Boolean;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+ReadLnTimedOut is a read-only Boolean property that indicates when a timeout has occurred in the <A HREF="007828.html#002B" CLASS="Element59">ReadLn</A> method.<P CLASS="Element10">
+ReadLnTimedOut is updated in the <A HREF="007828.html#002B" CLASS="Element59">ReadLn</A> method, and is set to True when the return value for <A HREF="007828.html#0029" CLASS="Element59">ReadFromStack</A> is 0.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0033">TIdTCPConnection.ReadTimeout</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007828.html" CLASS="Element59">TIdTCPConnection</A>, <A HREF="014097.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Indicates the milliseconds to wait for a readable connection.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> ReadTimeout: Integer;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+ReadTimeout is an Integer property that indicates the number of milliseconds that the connection should wait for the peer connection to become readable using the protocol stack.<P CLASS="Element10">
+ReadTimeout is used in <A HREF="007828.html#0029" CLASS="Element59">ReadFromStack</A>.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0034">TIdTCPConnection.RecvBufferSize</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007828.html" CLASS="Element59">TIdTCPConnection</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Indicates the current size of the default receive buffer for the connection.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> RecvBufferSize: Integer;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+RecvBufferSize is an Integer property that represents the number of bytes currently allocated to the default receive buffer used for the connection.<P CLASS="Element10">
+The default value for RecvBufferSize is 8192 bytes, and is asssigned in <A HREF="007828.html#000E" CLASS="Element59">Create</A>.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0035">TIdTCPConnection.SendBufferSize</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007828.html" CLASS="Element59">TIdTCPConnection</A>, <A HREF="014098.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Indicates the maximum buffer size to use for writing to the connection.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> SendBufferSize: Integer;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+SendBufferSize is an Integer property that indicates the maximum number of bytes that can be allocated when writing data to the connection. The default value for SendBufferSize is <STRONG>32768</STRONG>.<P CLASS="Element10">
+SendBufferSize is used in <A HREF="007828.html#0044" CLASS="Element59">WriteStream</A> to determine if the number of &quot;chunks&quot; needed to <A HREF="007828.html#003A" CLASS="Element59">Write</A> the TStream contents. When the stream is larger that SendBufferSize, multiple &quot;chunks&quot; will be used.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0038">TIdTCPConnection.Socket</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007828.html" CLASS="Element59">TIdTCPConnection</A>, <A HREF="014099.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Provides access to the <A HREF="007426.html" CLASS="Element59">TIdIOHandlerSocket</A> <A HREF="007828.html#001B" CLASS="Element59">IOHandler</A> for the connection.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> Socket: <A HREF="007426.html" CLASS="Element59">TIdIOHandlerSocket</A>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Socket is a read-only <A HREF="007426.html" CLASS="Element59">TIdIOHandlerSocket</A> property. Socket is a convenience property that provides access to the propeties and methods of the <A HREF="007426.html" CLASS="Element59">TIdIOHandlerSocket</A> handler assigned for the <A HREF="007071.html" CLASS="Element59">socket</A> connection. For example, the following statement groups are equivalent:<P CLASS="Element10">
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12">      AConnection.Socket.Binding.IP := sIPAddress;
+      AConnection.Socket.Binding.Port := iPort;
+      sPeer := AConnection.Socket.Binding.PeerIP;
+      iPeer := AConnection.Socket.Binding.PeerPort;
+      
+
+      <A HREF="007426.html" CLASS="Element59">TIdIOHandlerSocket</A>(AConnection.<A HREF="007828.html#001B" CLASS="Element59">IOHandler</A>).Binding.IP := sIPAddress;
+      <A HREF="007426.html" CLASS="Element59">TIdIOHandlerSocket</A>(AConnection.<A HREF="007828.html#001B" CLASS="Element59">IOHandler</A>).Binding.Port := iPort;
+      sPeer := <A HREF="007426.html" CLASS="Element59">TIdIOHandlerSocket</A>(AConnection.<A HREF="007828.html#001B" CLASS="Element59">IOHandler</A>).Binding.PeerIP;
+      iPeer := <A HREF="007426.html" CLASS="Element59">TIdIOHandlerSocket</A>(AConnection.<A HREF="007828.html#001B" CLASS="Element59">IOHandler</A>).Binding.PeerPort;</PRE></DIV>
+</DIV>
+<P CLASS="Element10">
+Socket will contain the value Nil when the assigned <A HREF="007828.html#001B" CLASS="Element59">IOHandler</A> is not a <A HREF="007426.html" CLASS="Element59">TIdIOHandlerSocket</A> class instance.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0000">TIdTCPConnection.AllData</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007828.html" CLASS="Element59">TIdTCPConnection</A>, <A HREF="014100.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Retrieves all data from a connection.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>function</STRONG> AllData: <STRONG>string</STRONG>; <STRONG>virtual</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+AllData is a String function that retrieves all data from a peer connection until the connection is closed. AllData triggers <A HREF="007828.html#0021" CLASS="Element59">OnWorkBegin</A> event handler, reads values from <A HREF="007828.html#000F" CLASS="Element59">CurrentReadBuffer</A>, and triggers the <A HREF="007828.html#0022" CLASS="Element59">OnWorkEnd</A> event handler as a single operation.<P CLASS="Element10">
+<STRONG>Note:</STRONG> Do not use AllData unless the protocol you are using works in this manner. Protocols which support AllData include Finger, Quote of the Day, and WhoIs.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0002">TIdTCPConnection.CancelWriteBuffer</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007828.html" CLASS="Element59">TIdTCPConnection</A>, <A HREF="014101.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Stops write buffering in Indy.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>procedure</STRONG> CancelWriteBuffer;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+CancelWriteBuffer ends use of the internal write buffering mechanism in Indy without transmitting the data in the write buffer. CancelWriteBuffer calls <A HREF="007828.html#000A" CLASS="Element59">ClearWriteBuffer</A> to remove the contents of the write buffer, and calls <A HREF="007828.html#000C" CLASS="Element59">CloseWriteBuffer</A> to disable continued use of the write buffer during output operations.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0004">TIdTCPConnection.Capture</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007828.html" CLASS="Element59">TIdTCPConnection</A>, <A HREF="014102.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Reads data from the connection into the specified object.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>procedure</STRONG> <A HREF="007828.html#0003" CLASS="Element59">Capture</A>(ADest: TStream; <STRONG>const</STRONG> ADelim: <STRONG>string</STRONG> = '.'; <STRONG>const</STRONG> AIsRFCMessage: Boolean = True); <STRONG>overload</STRONG>;
+<STRONG>procedure</STRONG> <A HREF="007828.html#0003" CLASS="Element59">Capture</A>(ADest: TStream; <STRONG>out</STRONG> VLineCount: Integer; <STRONG>const</STRONG> ADelim: <STRONG>string</STRONG> = '.'; <STRONG>const</STRONG> AIsRFCMessage: Boolean = True); <STRONG>overload</STRONG>;
+<STRONG>procedure</STRONG> <A HREF="007828.html#0003" CLASS="Element59">Capture</A>(ADest: TStrings; <STRONG>const</STRONG> ADelim: <STRONG>string</STRONG> = '.'; <STRONG>const</STRONG> AIsRFCMessage: Boolean = True); <STRONG>overload</STRONG>;
+<STRONG>procedure</STRONG> <A HREF="007828.html#0003" CLASS="Element59">Capture</A>(ADest: TStrings; <STRONG>out</STRONG> VLineCount: Integer; <STRONG>const</STRONG> ADelim: <STRONG>string</STRONG> = '.'; <STRONG>const</STRONG> AIsRFCMessage: Boolean = True); <STRONG>overload</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+ADest: TStream</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Storage for the captured data values.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+const ADelim: string = '.'</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Delimiter for captured data values. Default value is '.'.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+const AIsRFCMessage: Boolean = True</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Captured data is an RFC 822 message. Default value is True.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+<A HREF="007828.html#0003" CLASS="Element59">Capture</A> is a procedure used to read data from the connection into the destination specified by ADest. ADest must be an instance of either a TStrings descendant or a TStream descendant, or an <A HREF="000426.html" CLASS="Element59">EIdObjectTypeNotSupported</A> exception with the constant message <A HREF="006581.html" CLASS="Element59">RSObjectTypeNotSupported</A> will be raised when data is written to ADest.<P CLASS="Element10">
+ADelim is the delimiter used to determine if all data has been read from the connection. ADelim will appear in a line with no other data when all data has been captured. The default delimiter is '.', as used in most RFC-compliant protocols.<P CLASS="Element10">
+AIsRFCMessage indicates that <A HREF="007828.html#0003" CLASS="Element59">Capture</A> is reading an RFC 822 message where a line may start with the characters '..'. <A HREF="007828.html#0003" CLASS="Element59">Capture</A> will convert this character sequence to a single '.' character. A single '.' character in a line indicates the end of the RFC 822 message.<P CLASS="Element10">
+<A HREF="007828.html#0003" CLASS="Element59">Capture</A> triggers the <A HREF="007828.html#0021" CLASS="Element59">OnWorkBegin</A> event handler with wmRead mode before reading data from the connection. <A HREF="007828.html#0003" CLASS="Element59">Capture</A> calls <A HREF="007828.html#002B" CLASS="Element59">ReadLn</A> to retrieve data from the connection until the delimiter specified in ADelim is received. Each line is written to the ADest object reference upon receipt. <A HREF="007828.html#0003" CLASS="Element59">Capture</A> triggers the <A HREF="007828.html#0022" CLASS="Element59">OnWorkEnd</A> event handler with wmRead mode when all data has been captured from the connection.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0003">TIdTCPConnection.Capture</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007828.html" CLASS="Element59">TIdTCPConnection</A>, <A HREF="014103.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Reads data from the connection into the specified object.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>procedure</STRONG> Capture(ADest: TStream; <STRONG>const</STRONG> ADelim: <STRONG>string</STRONG> = '.'; <STRONG>const</STRONG> AIsRFCMessage: Boolean = True); <STRONG>overload</STRONG>;
+<STRONG>procedure</STRONG> Capture(ADest: TStream; <STRONG>out</STRONG> VLineCount: Integer; <STRONG>const</STRONG> ADelim: <STRONG>string</STRONG> = '.'; <STRONG>const</STRONG> AIsRFCMessage: Boolean = True); <STRONG>overload</STRONG>;
+<STRONG>procedure</STRONG> Capture(ADest: TStrings; <STRONG>const</STRONG> ADelim: <STRONG>string</STRONG> = '.'; <STRONG>const</STRONG> AIsRFCMessage: Boolean = True); <STRONG>overload</STRONG>;
+<STRONG>procedure</STRONG> Capture(ADest: TStrings; <STRONG>out</STRONG> VLineCount: Integer; <STRONG>const</STRONG> ADelim: <STRONG>string</STRONG> = '.'; <STRONG>const</STRONG> AIsRFCMessage: Boolean = True); <STRONG>overload</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+ADest: TStream</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Storage for the captured data values.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+const ADelim: string = '.'</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Delimiter for captured data values. Default value is '.'.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+const AIsRFCMessage: Boolean = True</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Captured data is an RFC 822 message. Default value is True.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+<A HREF="007828.html#0003" CLASS="Element59">Capture</A> is a procedure used to read data from the connection into the destination specified by ADest. ADest must be an instance of either a TStrings descendant or a TStream descendant, or an <A HREF="000426.html" CLASS="Element59">EIdObjectTypeNotSupported</A> exception with the constant message <A HREF="006581.html" CLASS="Element59">RSObjectTypeNotSupported</A> will be raised when data is written to ADest.<P CLASS="Element10">
+ADelim is the delimiter used to determine if all data has been read from the connection. ADelim will appear in a line with no other data when all data has been captured. The default delimiter is '.', as used in most RFC-compliant protocols.<P CLASS="Element10">
+AIsRFCMessage indicates that <A HREF="007828.html#0003" CLASS="Element59">Capture</A> is reading an RFC 822 message where a line may start with the characters '..'. <A HREF="007828.html#0003" CLASS="Element59">Capture</A> will convert this character sequence to a single '.' character. A single '.' character in a line indicates the end of the RFC 822 message.<P CLASS="Element10">
+<A HREF="007828.html#0003" CLASS="Element59">Capture</A> triggers the <A HREF="007828.html#0021" CLASS="Element59">OnWorkBegin</A> event handler with wmRead mode before reading data from the connection. <A HREF="007828.html#0003" CLASS="Element59">Capture</A> calls <A HREF="007828.html#002B" CLASS="Element59">ReadLn</A> to retrieve data from the connection until the delimiter specified in ADelim is received. Each line is written to the ADest object reference upon receipt. <A HREF="007828.html#0003" CLASS="Element59">Capture</A> triggers the <A HREF="007828.html#0022" CLASS="Element59">OnWorkEnd</A> event handler with wmRead mode when all data has been captured from the connection.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0006">TIdTCPConnection.Capture</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007828.html" CLASS="Element59">TIdTCPConnection</A>, <A HREF="014104.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Reads data from the connection into the specified object.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>procedure</STRONG> <A HREF="007828.html#0003" CLASS="Element59">Capture</A>(ADest: TStream; <STRONG>const</STRONG> ADelim: <STRONG>string</STRONG> = '.'; <STRONG>const</STRONG> AIsRFCMessage: Boolean = True); <STRONG>overload</STRONG>;
+<STRONG>procedure</STRONG> <A HREF="007828.html#0003" CLASS="Element59">Capture</A>(ADest: TStream; <STRONG>out</STRONG> VLineCount: Integer; <STRONG>const</STRONG> ADelim: <STRONG>string</STRONG> = '.'; <STRONG>const</STRONG> AIsRFCMessage: Boolean = True); <STRONG>overload</STRONG>;
+<STRONG>procedure</STRONG> <A HREF="007828.html#0003" CLASS="Element59">Capture</A>(ADest: TStrings; <STRONG>const</STRONG> ADelim: <STRONG>string</STRONG> = '.'; <STRONG>const</STRONG> AIsRFCMessage: Boolean = True); <STRONG>overload</STRONG>;
+<STRONG>procedure</STRONG> <A HREF="007828.html#0003" CLASS="Element59">Capture</A>(ADest: TStrings; <STRONG>out</STRONG> VLineCount: Integer; <STRONG>const</STRONG> ADelim: <STRONG>string</STRONG> = '.'; <STRONG>const</STRONG> AIsRFCMessage: Boolean = True); <STRONG>overload</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+ADest: TStream</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Storage for the captured data values.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+const ADelim: string = '.'</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Delimiter for captured data values. Default value is '.'.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+const AIsRFCMessage: Boolean = True</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Captured data is an RFC 822 message. Default value is True.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+<A HREF="007828.html#0003" CLASS="Element59">Capture</A> is a procedure used to read data from the connection into the destination specified by ADest. ADest must be an instance of either a TStrings descendant or a TStream descendant, or an <A HREF="000426.html" CLASS="Element59">EIdObjectTypeNotSupported</A> exception with the constant message <A HREF="006581.html" CLASS="Element59">RSObjectTypeNotSupported</A> will be raised when data is written to ADest.<P CLASS="Element10">
+ADelim is the delimiter used to determine if all data has been read from the connection. ADelim will appear in a line with no other data when all data has been captured. The default delimiter is '.', as used in most RFC-compliant protocols.<P CLASS="Element10">
+AIsRFCMessage indicates that <A HREF="007828.html#0003" CLASS="Element59">Capture</A> is reading an RFC 822 message where a line may start with the characters '..'. <A HREF="007828.html#0003" CLASS="Element59">Capture</A> will convert this character sequence to a single '.' character. A single '.' character in a line indicates the end of the RFC 822 message.<P CLASS="Element10">
+<A HREF="007828.html#0003" CLASS="Element59">Capture</A> triggers the <A HREF="007828.html#0021" CLASS="Element59">OnWorkBegin</A> event handler with wmRead mode before reading data from the connection. <A HREF="007828.html#0003" CLASS="Element59">Capture</A> calls <A HREF="007828.html#002B" CLASS="Element59">ReadLn</A> to retrieve data from the connection until the delimiter specified in ADelim is received. Each line is written to the ADest object reference upon receipt. <A HREF="007828.html#0003" CLASS="Element59">Capture</A> triggers the <A HREF="007828.html#0022" CLASS="Element59">OnWorkEnd</A> event handler with wmRead mode when all data has been captured from the connection.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0005">TIdTCPConnection.Capture</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007828.html" CLASS="Element59">TIdTCPConnection</A>, <A HREF="014105.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Reads data from the connection into the specified object.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>procedure</STRONG> <A HREF="007828.html#0003" CLASS="Element59">Capture</A>(ADest: TStream; <STRONG>const</STRONG> ADelim: <STRONG>string</STRONG> = '.'; <STRONG>const</STRONG> AIsRFCMessage: Boolean = True); <STRONG>overload</STRONG>;
+<STRONG>procedure</STRONG> <A HREF="007828.html#0003" CLASS="Element59">Capture</A>(ADest: TStream; <STRONG>out</STRONG> VLineCount: Integer; <STRONG>const</STRONG> ADelim: <STRONG>string</STRONG> = '.'; <STRONG>const</STRONG> AIsRFCMessage: Boolean = True); <STRONG>overload</STRONG>;
+<STRONG>procedure</STRONG> <A HREF="007828.html#0003" CLASS="Element59">Capture</A>(ADest: TStrings; <STRONG>const</STRONG> ADelim: <STRONG>string</STRONG> = '.'; <STRONG>const</STRONG> AIsRFCMessage: Boolean = True); <STRONG>overload</STRONG>;
+<STRONG>procedure</STRONG> <A HREF="007828.html#0003" CLASS="Element59">Capture</A>(ADest: TStrings; <STRONG>out</STRONG> VLineCount: Integer; <STRONG>const</STRONG> ADelim: <STRONG>string</STRONG> = '.'; <STRONG>const</STRONG> AIsRFCMessage: Boolean = True); <STRONG>overload</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+ADest: TStream</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Storage for the captured data values.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+const ADelim: string = '.'</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Delimiter for captured data values. Default value is '.'.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+const AIsRFCMessage: Boolean = True</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Captured data is an RFC 822 message. Default value is True.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+<A HREF="007828.html#0003" CLASS="Element59">Capture</A> is a procedure used to read data from the connection into the destination specified by ADest. ADest must be an instance of either a TStrings descendant or a TStream descendant, or an <A HREF="000426.html" CLASS="Element59">EIdObjectTypeNotSupported</A> exception with the constant message <A HREF="006581.html" CLASS="Element59">RSObjectTypeNotSupported</A> will be raised when data is written to ADest.<P CLASS="Element10">
+ADelim is the delimiter used to determine if all data has been read from the connection. ADelim will appear in a line with no other data when all data has been captured. The default delimiter is '.', as used in most RFC-compliant protocols.<P CLASS="Element10">
+AIsRFCMessage indicates that <A HREF="007828.html#0003" CLASS="Element59">Capture</A> is reading an RFC 822 message where a line may start with the characters '..'. <A HREF="007828.html#0003" CLASS="Element59">Capture</A> will convert this character sequence to a single '.' character. A single '.' character in a line indicates the end of the RFC 822 message.<P CLASS="Element10">
+<A HREF="007828.html#0003" CLASS="Element59">Capture</A> triggers the <A HREF="007828.html#0021" CLASS="Element59">OnWorkBegin</A> event handler with wmRead mode before reading data from the connection. <A HREF="007828.html#0003" CLASS="Element59">Capture</A> calls <A HREF="007828.html#002B" CLASS="Element59">ReadLn</A> to retrieve data from the connection until the delimiter specified in ADelim is received. Each line is written to the ADest object reference upon receipt. <A HREF="007828.html#0003" CLASS="Element59">Capture</A> triggers the <A HREF="007828.html#0022" CLASS="Element59">OnWorkEnd</A> event handler with wmRead mode when all data has been captured from the connection.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0007">TIdTCPConnection.CheckForDisconnect</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007828.html" CLASS="Element59">TIdTCPConnection</A>, <A HREF="014106.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Determines if the peer has been disconnected.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>procedure</STRONG> CheckForDisconnect(<STRONG>const</STRONG> ARaiseExceptionIfDisconnected: boolean = true; <STRONG>const</STRONG> AIgnoreBuffer: boolean = false); <STRONG>virtual</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+const ARaiseExceptionIfDisconnected: boolean = true</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Raise an exception when the connection is closed. Default value is True.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+const AIgnoreBuffer: boolean = false</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Disregards the read buffer size. Default value is False.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+CheckForDisconnect is a procedure used to determine if a connection has been closed by either the server or the client. <A HREF="007828.html#000B" CLASS="Element59">ClosedGracefully</A> is used to determine if a connection has <A HREF="007828.html#000B" CLASS="Element59">ClosedGracefully</A>, or if the <A HREF="007828.html#001B" CLASS="Element59">IOHandler</A> no longer contains an allocated <A HREF="007071.html" CLASS="Element59">socket</A> handle for the connection. If neither condition exists for the connection, no additional processing is performed and the method returns.<P CLASS="Element10">
+When the connection has been <A HREF="007828.html#000B" CLASS="Element59">ClosedGracefully</A>, and the IOHandlerSocket.Binding has an allocated <A HREF="007071.html" CLASS="Element59">socket</A> handle, then <A HREF="007828.html#0012" CLASS="Element59">DisconnectSocket</A> is called to force the <A HREF="007071.html" CLASS="Element59">socket</A> handle to be deallocated.<P CLASS="Element10">
+Under some conditions, CheckForDisconnect can raise an <A HREF="000364.html" CLASS="Element59">EIdConnClosedGracefully</A> exception. The exception can occur when the Indy Read buffer is empty or should be ignored (as indicated in AIgnoreBuffer), and ARaiseExceptionIfDisconnected indicates that the exception is desired.<P CLASS="Element10">
+For a Server connection, this indicates that the client has disconnected the <A HREF="007071.html" CLASS="Element59">socket</A> connection normally. The Exception is used to notify Server handling code. The exception is normal and will only happen from within the IDE, not while your program is running as an EXE. If you do not want to see this, add the <A HREF="000364.html" CLASS="Element59">EIdConnClosedGracefully</A> exception or <A HREF="000446.html" CLASS="Element59">EIdSilentException</A> to the IDE options as exceptions not to break on. From the IDE, press F9 and Indy will catch and handle the exception.<P CLASS="Element10">
+For a Client connection, this indicates that the server has disconnected the <A HREF="007071.html" CLASS="Element59">socket</A> connection normally, but the client has attempted to read or write using the closed connection. You should trap this error using a try..except block.<P CLASS="Element10">
+Please see the FAQ at <A HREF="http://www.nevrona.com/Indy/FAQ.html"> http://www.nevrona.com/Indy/FAQ.html </A> for additional information.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0008">TIdTCPConnection.CheckForGracefulDisconnect</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007828.html" CLASS="Element59">TIdTCPConnection</A>, <A HREF="014107.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Determines if the peer has been gracefully disconnected.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>procedure</STRONG> CheckForGracefulDisconnect(<STRONG>const</STRONG> ARaiseExceptionIfDisconnected: Boolean = True); <STRONG>virtual</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+const ARaiseExceptionIfDisconnected: Boolean = True</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Raise an exception when the connection is closed. Default value is True.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+CheckForGracefulDisconnect is a procedure used to determine if the connection has been closed gracefully. CheckForGracefulDisconnect calls <A HREF="007828.html#0029" CLASS="Element59">ReadFromStack</A> using the value in ARaiseExceptionIfDisconnected and a 1 millisecond timeout to verify that the <A HREF="007071.html" CLASS="Element59">socket</A> handle is ready to perform a read operation.<P CLASS="Element10">
+<A HREF="007828.html#0029" CLASS="Element59">ReadFromStack</A> updates the <A HREF="007828.html#000B" CLASS="Element59">ClosedGracefully</A> property and performs exception handling as specified in ARaiseExceptionIfDisconnected.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0009">TIdTCPConnection.CheckResponse</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007828.html" CLASS="Element59">TIdTCPConnection</A>, <A HREF="014108.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Checks for a valid response in an array of allowable responses.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>function</STRONG> CheckResponse(<STRONG>const</STRONG> AResponse: SmallInt; <STRONG>const</STRONG> AAllowedResponses: <STRONG>array</STRONG> <STRONG>of</STRONG> SmallInt): SmallInt; <STRONG>virtual</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+const AResponse: SmallInt</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Response number to examine.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+const AAllowedResponses: array of SmallInt</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Array of response numbers allowed.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Return Value</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+SmallInt - Response number encountered, or zero on error.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+CheckResponse is a SmallInt function used to check for the existence of the response number in AResponse in the array of allowable responses AAllowedResponses. If CheckResponse examines all allowable response and does not find AResponse, <A HREF="007828.html#0024" CLASS="Element59">RaiseExceptionForLastCmdResult</A> is called.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="000A">TIdTCPConnection.ClearWriteBuffer</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007828.html" CLASS="Element59">TIdTCPConnection</A>, <A HREF="014109.html" CLASS="Element59">See Also</A>, <A HREF="014110.html" CLASS="Element59">Example</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Clears the Indy write buffer.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>procedure</STRONG> ClearWriteBuffer;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+The ClearWriteBuffer method clears the data which has accumulated since the <A HREF="007828.html#0023" CLASS="Element59">OpenWriteBuffer</A> without sending it. This does not stop write buffering. Only <A HREF="007828.html#000C" CLASS="Element59">CloseWriteBuffer</A> and <A HREF="007828.html#0002" CLASS="Element59">CancelWriteBuffer</A> stop write buffering.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="000C">TIdTCPConnection.CloseWriteBuffer</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007828.html" CLASS="Element59">TIdTCPConnection</A>, <A HREF="014111.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Stops write buffering.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>procedure</STRONG> CloseWriteBuffer;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+CloseWriteBuffer is a procedure that forces all data written to the Indy write buffer since a call to <A HREF="007828.html#0023" CLASS="Element59">OpenWriteBuffer</A> to be sent to the peer connection. CloseWriteBuffer disables further writes to the Indy write buffer.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="000D">TIdTCPConnection.Connected</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007828.html" CLASS="Element59">TIdTCPConnection</A>, <A HREF="014112.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Indicates if the peer connection is open and active.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>function</STRONG> Connected: Boolean; <STRONG>virtual</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Connected is a Boolean function used to indicate when the connection to the peer is open and active. Connected calls <A HREF="007828.html#0007" CLASS="Element59">CheckForDisconnect</A> to to determine if the connection was closed normally or abruptly terminated, and returns true when the <A HREF="007828.html#001B" CLASS="Element59">IOHandler</A> indicates that it is Connected.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="000E">TIdTCPConnection.Create</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007828.html" CLASS="Element59">TIdTCPConnection</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Constructor for the object instance.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>constructor</STRONG> Create(AOwner: TComponent); <STRONG>override</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+AOwner: TComponent</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Owner of the object instance.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Create is the constructor for a new <A HREF="007828.html" CLASS="Element59">TIdTCPConnection</A> object instance. Create initializes the following to their default values:<P CLASS="Element10">
+<UL>
+<LI>CmdResultDetails - TStringList Holds command responses.<P CLASS="Element10">
+<LI>RecvBuffer - protected <A HREF="007219.html" CLASS="Element59">TIdBuffer</A> Used to receive data from the TCP stack.<P CLASS="Element10">
+<LI><A HREF="007828.html#0034" CLASS="Element59">RecvBufferSize</A> - Integer Size of RecvBuffer (default value is 8192).<P CLASS="Element10">
+<LI><A HREF="007828.html#0035" CLASS="Element59">SendBufferSize</A> - Integer Size of SendBuffer (default value is 8192).<P CLASS="Element10">
+<LI>Buffer - protected <A HREF="007219.html" CLASS="Element59">TIdBuffer</A> Used to internally buffer Indy reads and writes.</UL>
+<P CLASS="Element10">
+Descendant classes should override this constructor to set default values such as Port, and other protocol specific options.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="000F">TIdTCPConnection.CurrentReadBuffer</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007828.html" CLASS="Element59">TIdTCPConnection</A>, <A HREF="014113.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Updates the Indy buffer with data from the protocol stack.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>function</STRONG> CurrentReadBuffer: <STRONG>string</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Return Value</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+String - Contents of the Indy buffer.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+CurrentReadBuffer is a String function that reads any pending data from the protocol stack for a <A HREF="007828.html#000D" CLASS="Element59">Connected</A> session, and adds the data to the Indy read buffer.<P CLASS="Element10">
+The return value includes all data in the Indy buffer up to size of the internal buffer. Result may also be '' (empty string) if no data is present in the internal Indy buffer.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0010">TIdTCPConnection.Destroy</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007828.html" CLASS="Element59">TIdTCPConnection</A>, <A HREF="014114.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Frees the object instance.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>destructor</STRONG> Destroy; <STRONG>override</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Destroy is the destructor for the object instance. Destroy is responsible for freeing and releasing the resources allocated to properties in the <A HREF="007828.html#000E" CLASS="Element59">Create</A> constructor. Destroy calls <A HREF="007828.html#0012" CLASS="Element59">DisconnectSocket</A> insure that the physical connection to the peer is closed. Destroy relies on the inherited Destroy method to complete destruction of the object instance.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0011">TIdTCPConnection.Disconnect</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007828.html" CLASS="Element59">TIdTCPConnection</A>, <A HREF="014115.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Disconnects the peer connection.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>procedure</STRONG> Disconnect; <STRONG>virtual</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Disconnect is used to disconnect from the current peer connection. Many descendant components override this method to provide termination commands required by various protocols. If you simply need to close a connection, you probably should call the <A HREF="007828.html#0012" CLASS="Element59">DisconnectSocket</A> method.<P CLASS="Element10">
+Disconnect triggers a hsDisconnecting status notification message prior to calling <A HREF="007828.html#0012" CLASS="Element59">DisconnectSocket</A>. When needed, Disconnect also frees the <A HREF="007828.html#001B" CLASS="Element59">IOHandler</A>. Finally, Disconnect triggers the <A HREF="007828.html#001F" CLASS="Element59">OnDisconnected</A> event handler and a hsDisconnected status notification message.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0012">TIdTCPConnection.DisconnectSocket</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007828.html" CLASS="Element59">TIdTCPConnection</A>, <A HREF="014116.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Closes the <A HREF="007071.html" CLASS="Element59">socket</A> binding for the connection.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>procedure</STRONG> DisconnectSocket; <STRONG>virtual</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+DisconnectSocket is a procedure used to close the <A HREF="007071.html" CLASS="Element59">socket</A> binding for the connection. Unlike the <A HREF="007828.html#0011" CLASS="Element59">Disconnect</A> method, DisconnectSocket is not overridden by descendant classes to provide termination sequences required for a particular protocol.<P CLASS="Element10">
+DisconnectSocket is used when an error has occurred in a protocol handler and a guaranteed disconnect is needed.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0013">TIdTCPConnection.FlushWriteBuffer</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007828.html" CLASS="Element59">TIdTCPConnection</A>, <A HREF="014117.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Writes buffered data, and clears the write buffer in Indy.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>procedure</STRONG> FlushWriteBuffer(<STRONG>const</STRONG> AByteCount: Integer = -1);</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+ABytes</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Threshold value for number of bytes to flush. Default value is -1.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+FlushWriteBuffer transmits all data which has been buffered since the call to the <A HREF="007828.html#0023" CLASS="Element59">OpenWriteBuffer</A> method to be sent to the peer. Buffered data is cleared after being sent to the peer connection. <A HREF="007828.html#003A" CLASS="Element59">Write</A> buffering remains active after the FlushWriteBuffer method is completed. Only <A HREF="007828.html#000C" CLASS="Element59">CloseWriteBuffer</A> and <A HREF="007828.html#0002" CLASS="Element59">CancelWriteBuffer</A> can be used to stop write buffering after a call to <A HREF="007828.html#0023" CLASS="Element59">OpenWriteBuffer</A>.<P CLASS="Element10">
+ABytes indicates the threshold value for the number of bytes that should be removed from the Indy buffer and sent to the peer <A HREF="007071.html" CLASS="Element59">socket</A> connection. The default value (<STRONG>-1</STRONG>) forces all data in the Indy buffer to be written to the peer, and the write buffer is cleared using <A HREF="007828.html#000A" CLASS="Element59">ClearWriteBuffer</A>. This is also the case when the buffer is smaller than the threshold value in ABytes. Otherwise, the number of bytes in ABytes is removed from the Indy buffer and sent to the peer.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0014">TIdTCPConnection.GetInternalResponse</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007828.html" CLASS="Element59">TIdTCPConnection</A>, <A HREF="014118.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Impelements reading of response detail lines from a peer connection.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>procedure</STRONG> GetInternalResponse;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+GetInternalResponse is a public procedure used to implement the processing required for the <A HREF="007828.html#0015" CLASS="Element59">GetResponse</A> method. GetInternalResponse clears the values in CmdResultDetails, and reads one or more reponse lines from a peer connection using <A HREF="007828.html#002E" CLASS="Element59">ReadLnWait</A>.<P CLASS="Element10">
+The initial response line is expected to contain the 3-digit response code and text. Additional response lines are read when the initial response is a continuation response line, and continues until the terminal response or a blank line is received. All response lines are added to <A HREF="007828.html#001C" CLASS="Element59">LastCmdResult</A>.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0015">TIdTCPConnection.GetResponse</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007828.html" CLASS="Element59">TIdTCPConnection</A>, <A HREF="014119.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Retrieves one or more response messages from the connection.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>function</STRONG> GetResponse(<STRONG>const</STRONG> AAllowedResponses: <STRONG>array</STRONG> <STRONG>of</STRONG> SmallInt): SmallInt; <STRONG>virtual</STRONG>; <STRONG>overload</STRONG>;
+<STRONG>function</STRONG> GetResponse(<STRONG>const</STRONG> AAllowedResponse: SmallInt): SmallInt; <STRONG>overload</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+const AAllowedResponses: array of SmallInt</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Array of Integer response number permitted.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+const AAllowedResponse: SmallInt</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+An Integer response number expected.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Return Value</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+SmallInt - The numeric response number.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+<A HREF="007828.html#0015" CLASS="Element59">GetResponse</A> is a overloaded SmallInt function that waits for a response message from the peer (such as greetings from a computer or command replies) and returns the numerical response number for the reply. <A HREF="007828.html#0015" CLASS="Element59">GetResponse</A> reads response lines from the connection, including continuation response messages until the terminal response message is received. All response messages are added to to the <A HREF="007828.html#001C" CLASS="Element59">LastCmdResult</A> property.<P CLASS="Element10">
+Use <A HREF="007828.html#001C" CLASS="Element59">LastCmdResult</A> to access the full text or numeric response number for the most recent response message, or multiple response messages.<P CLASS="Element10">
+<A HREF="007828.html#0015" CLASS="Element59">GetResponse</A> sets ResultNo to the three-digit numeric value from the most recent response message in <A HREF="007828.html#001C" CLASS="Element59">LastCmdResult</A>.<P CLASS="Element10">
+Finally, <A HREF="007828.html#0015" CLASS="Element59">GetResponse</A> calls <A HREF="007828.html#0009" CLASS="Element59">CheckResponse</A> using the values in ResultNo and AAllowedResponses to determine if the numeric response code is one of the numeric values allowed for the protocol action.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0016">TIdTCPConnection.GetResponse</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007828.html" CLASS="Element59">TIdTCPConnection</A>, <A HREF="014120.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Retrieves one or more response messages from the connection.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>function</STRONG> <A HREF="007828.html#0015" CLASS="Element59">GetResponse</A>(<STRONG>const</STRONG> AAllowedResponses: <STRONG>array</STRONG> <STRONG>of</STRONG> SmallInt): SmallInt; <STRONG>virtual</STRONG>; <STRONG>overload</STRONG>;
+<STRONG>function</STRONG> <A HREF="007828.html#0015" CLASS="Element59">GetResponse</A>(<STRONG>const</STRONG> AAllowedResponse: SmallInt): SmallInt; <STRONG>overload</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+const AAllowedResponses: array of SmallInt</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Array of Integer response number permitted.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+const AAllowedResponse: SmallInt</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+An Integer response number expected.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Return Value</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+SmallInt - The numeric response number.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+<A HREF="007828.html#0015" CLASS="Element59">GetResponse</A> is a overloaded SmallInt function that waits for a response message from the peer (such as greetings from a computer or command replies) and returns the numerical response number for the reply. <A HREF="007828.html#0015" CLASS="Element59">GetResponse</A> reads response lines from the connection, including continuation response messages until the terminal response message is received. All response messages are added to to the <A HREF="007828.html#001C" CLASS="Element59">LastCmdResult</A> property.<P CLASS="Element10">
+Use <A HREF="007828.html#001C" CLASS="Element59">LastCmdResult</A> to access the full text or numeric response number for the most recent response message, or multiple response messages.<P CLASS="Element10">
+<A HREF="007828.html#0015" CLASS="Element59">GetResponse</A> sets ResultNo to the three-digit numeric value from the most recent response message in <A HREF="007828.html#001C" CLASS="Element59">LastCmdResult</A>.<P CLASS="Element10">
+Finally, <A HREF="007828.html#0015" CLASS="Element59">GetResponse</A> calls <A HREF="007828.html#0009" CLASS="Element59">CheckResponse</A> using the values in ResultNo and AAllowedResponses to determine if the numeric response code is one of the numeric values allowed for the protocol action.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0019">TIdTCPConnection.InputLn</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007828.html" CLASS="Element59">TIdTCPConnection</A>, <A HREF="014121.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Reads a line from the server connection, and echoes the data.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>function</STRONG> InputLn(<STRONG>const</STRONG> AMask: <STRONG>String</STRONG> = ''; AEcho: Boolean = True; ATabWidth: Integer = 8; AMaxLineLength: Integer = -1): <STRONG>String</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+InputLn reads a line from the server and echoes it back honoring the backspace character. If AMask is specified, the AMask string is sent to the peer for each character received, instead of the actual characters which are read.<P CLASS="Element10">
+InputLn is useful when obtaining data from a user such as username, passwords, and commands.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0023">TIdTCPConnection.OpenWriteBuffer</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007828.html" CLASS="Element59">TIdTCPConnection</A>, <A HREF="014122.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Indicates that the peer connection should use Indy internal buffering.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>procedure</STRONG> OpenWriteBuffer(<STRONG>const</STRONG> AThreshhold: Integer = -1);</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+const AThreshhold: Integer = -1</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Number of bytes to buffer before flushing data in the write buffer to the peer. Default value is -1.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+OpenWriteBuffer is a procedure that is normally used to capture <STRONG>all</STRONG> data being sent to a peer, and to store the data in the Indy internal buffer until a call to <A HREF="007828.html#000C" CLASS="Element59">CloseWriteBuffer</A> or <A HREF="007828.html#0013" CLASS="Element59">FlushWriteBuffer</A>. Use OpenWriteBuffer when all data should be sent to the peer at one time.<P CLASS="Element10">
+AThreshold indicates the number of bytes that can accumulate in the Indy write buffer prior to using <A HREF="007828.html#0013" CLASS="Element59">FlushWriteBuffer</A>. The write buffer threshold is used to provide optimium data transfer without creating massive in memory buffers, or requiring the caller to periodically flush the buffer. When the write buffer size exceeds the threshold value, the connection will <A HREF="006944.html" CLASS="Element59">send</A> a packet containing buffered data. The default value of AThreshold (<STRONG>-1</STRONG>) indicates that write buffering should be used for the entire write buffer. <A HREF="007828.html#0013" CLASS="Element59">FlushWriteBuffer</A> may also use a threshold value to determine the data packet size commited to the peer <A HREF="007071.html" CLASS="Element59">socket</A> connection from the Indy internal buffer.<P CLASS="Element10">
+Use OpenWriteBuffer in a <STRONG>try...except</STRONG> block, like the following:<P CLASS="Element10">
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12">    OpenWriteBuffer;
+    try;
+    <A HREF="007828.html#0044" CLASS="Element59">WriteStream</A>(AStream);
+    // Close the write buffer and have Indy now transmit it
+    <A HREF="007828.html#000C" CLASS="Element59">CloseWriteBuffer</A>;
+    except
+    // Clear what we had buffered, and disable write buffering
+    <A HREF="007828.html#0002" CLASS="Element59">CancelWriteBuffer</A>;
+    // Re-raise the exception so it is not masked
+    raise;
+    end;</PRE></DIV>
+</DIV>
+</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0024">TIdTCPConnection.RaiseExceptionForLastCmdResult</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007828.html" CLASS="Element59">TIdTCPConnection</A>, <A HREF="014123.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Handles creating an exception when an error occurs during response processing.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>procedure</STRONG> RaiseExceptionForLastCmdResult; <STRONG>virtual</STRONG>; <STRONG>overload</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+AException</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Exception class tyope to use for creating this exception.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+RaiseExceptionForLastCmdResult is an overloaded procedure in <A HREF="007828.html" CLASS="Element59">TIdTCPConnection</A> that allows the client or descendant classes to create an exception using another Indy exception class type and/or the values in <A HREF="007828.html#001C" CLASS="Element59">LastCmdResult</A>.<P CLASS="Element10">
+When the <A HREF="007147.html" CLASS="Element59">TClassIdException</A> variant is used, an instance of the exception class is raised using the text specified in <A HREF="007828.html#001C" CLASS="Element59">LastCmdResult</A>. The default implementation raises an <A HREF="000441.html" CLASS="Element59">EIdProtocolReplyError</A> exception using the numeric and text values in <A HREF="007828.html#001C" CLASS="Element59">LastCmdResult</A>.<P CLASS="Element10">
+RaiseExceptionForLastCmdResult is used when <A HREF="007828.html#0015" CLASS="Element59">GetResponse</A> validates the numeric codes and messages permitted in the protocol response message.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0025">TIdTCPConnection.RaiseExceptionForLastCmdResult</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007828.html" CLASS="Element59">TIdTCPConnection</A>, <A HREF="014124.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Handles creating an exception when an error occurs during response processing.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>procedure</STRONG> <A HREF="007828.html#0024" CLASS="Element59">RaiseExceptionForLastCmdResult</A>(AException: <A HREF="007147.html" CLASS="Element59">TClassIdException</A>); <STRONG>virtual</STRONG>; <STRONG>overload</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+AException: TClassIdException</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Exception class tyope to use for creating this exception.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+<A HREF="007828.html#0024" CLASS="Element59">RaiseExceptionForLastCmdResult</A> is an overloaded procedure in <A HREF="007828.html" CLASS="Element59">TIdTCPConnection</A> that allows the client or descendant classes to create an exception using another Indy exception class type and/or the values in <A HREF="007828.html#001C" CLASS="Element59">LastCmdResult</A>.<P CLASS="Element10">
+When the <A HREF="007147.html" CLASS="Element59">TClassIdException</A> variant is used, an instance of the exception class is raised using the text specified in <A HREF="007828.html#001C" CLASS="Element59">LastCmdResult</A>. The default implementation raises an <A HREF="000441.html" CLASS="Element59">EIdProtocolReplyError</A> exception using the numeric and text values in <A HREF="007828.html#001C" CLASS="Element59">LastCmdResult</A>.<P CLASS="Element10">
+<A HREF="007828.html#0024" CLASS="Element59">RaiseExceptionForLastCmdResult</A> is used when <A HREF="007828.html#0015" CLASS="Element59">GetResponse</A> validates the numeric codes and messages permitted in the protocol response message.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0026">TIdTCPConnection.ReadBuffer</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007828.html" CLASS="Element59">TIdTCPConnection</A>, <A HREF="014125.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Moves data from the Indy read buffer to a variable.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>procedure</STRONG> ReadBuffer(<STRONG>var</STRONG> ABuffer; <STRONG>const</STRONG> AByteCount: Longint);</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+var ABuffer</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Destination for data from the Indy read buffer.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+const AByteCount: Longint</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Number of bytes to move to the ABuffer.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+ReadBuffer is a procedure used to get data from the internal Indy read buffer and store the result in the variable specified by ABuffer. AByteCount must be larger than 0, and ABuffer must contain a variable parameter, or ReadBuffer will not have any effect.<P CLASS="Element10">
+ReadBuffer calls <A HREF="007828.html#0029" CLASS="Element59">ReadFromStack</A> to insure that the Indy read buffer contains at least the number of bytes specified in AByteCount. ReadBuffer calls <A HREF="007828.html#0007" CLASS="Element59">CheckForDisconnect</A> to insure that the <A HREF="007071.html" CLASS="Element59">socket</A> connection has not been closed. ReadBuffer removes the number of bytes specified from the internal <A HREF="007525.html" CLASS="Element59">TIdManagedBuffer</A>.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0027">TIdTCPConnection.ReadCardinal</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007828.html" CLASS="Element59">TIdTCPConnection</A>, <A HREF="014126.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Returns a cardinal read from the peer.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>function</STRONG> ReadCardinal(<STRONG>const</STRONG> AConvert: boolean = true): Cardinal;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+const AConvert: boolean = true</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Default is True. When true, the value is converted from Internet Byte order to the Native Intel Byte order. If false, no byte-order conversion is done.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Return Value</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Cardinal - the 32 bit value which was received from the peer.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+This function reads a 32 bit unsigned (cardinal) value from the peer and returns it.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0028">TIdTCPConnection.ReadChar</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007828.html" CLASS="Element59">TIdTCPConnection</A>, <A HREF="014127.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Returns a single character from the Indy read buffer.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>function</STRONG> ReadChar: Char;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+ReadChar is a Char function that returns a single character value from the <A HREF="007828.html#0018" CLASS="Element59">InputBuffer</A> for the connection. ReadChar calls <A HREF="007828.html#0026" CLASS="Element59">ReadBuffer</A> to extract the ordinal value from <A HREF="007828.html#0018" CLASS="Element59">InputBuffer</A>.<P CLASS="Element10">
+ReadChar is used in <A HREF="007828.html#0019" CLASS="Element59">InputLn</A> to allow handling of values read from the connection on a character-by-character basis.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0029">TIdTCPConnection.ReadFromStack</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007828.html" CLASS="Element59">TIdTCPConnection</A>, <A HREF="014128.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Reads data from the protocol stack using the <A HREF="007071.html" CLASS="Element59">socket</A> binding.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>function</STRONG> ReadFromStack(<STRONG>const</STRONG> ARaiseExceptionIfDisconnected: Boolean = True; ATimeout: Integer = <A HREF="002932.html" CLASS="Element59">IdTimeoutDefault</A>; <STRONG>const</STRONG> ARaiseExceptionOnTimeout: Boolean = True): Integer; <STRONG>virtual</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+const ARaiseExceptionIfDisconnected: Boolean = True</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Raise an Exception when disconnected. Default value is True.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+ATimeout: Integer = IdTimeoutDefault</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Timeout value to wait for a readble <A HREF="007071.html" CLASS="Element59">socket</A> handle. Default value is <A HREF="002932.html" CLASS="Element59">IdTimeoutDefault</A>.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+const ARaiseExceptionOnTimeout: Boolean = True</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Raise an exception when a timeout occurs. Default value is True.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Return Value</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Integer - Number of bytes read from the protocol stack.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+ReadFromStack is an Integer function used to read data from the IP protocol stack for the peer connection into the Indy buffer maintained for the connection.<P CLASS="Element10">
+ATimeout indicates the number of milliseconds to wait for the <A HREF="007828.html#001B" CLASS="Element59">IOHandler</A> to become readable prior to reading data. When ATimeout contains the value <A HREF="002932.html" CLASS="Element59">IdTimeoutDefault</A>, <A HREF="007828.html#0033" CLASS="Element59">ReadTimeout</A> will be used as the timeout value when it is non-zero. Otherwise, <A HREF="002933.html" CLASS="Element59">IdTimeoutInfinite</A> is used as the timeout value. If a timeout occurs, an <A HREF="000443.html" CLASS="Element59">EIdReadTimeout</A> exception will be raised when ARaiseExceptionOnTimeout is True. Otherwise ReadFromStack performs no additional processing, and uses -1 as the return value for the method.<P CLASS="Element10">
+ReadFromStack calls <A HREF="007828.html#0007" CLASS="Element59">CheckForDisconnect</A> using the value specifed in ARaiseExceptionIfDisconnected to determine if an exception is raised when the connection is closed. If the <A HREF="007071.html" CLASS="Element59">socket</A> is not <A HREF="007828.html#000D" CLASS="Element59">Connected</A>, ReadFromStack will exit from the method.<P CLASS="Element10">
+ReadFromStack uses <A HREF="007828.html#001B" CLASS="Element59">IOHandler</A> to determine when the connection is readable, and to receive data from the input source. ReadFromStack updates <A HREF="007828.html#000B" CLASS="Element59">ClosedGracefully</A> indicating when all data has been read from the stack prior to closing the connection, and calls <A HREF="007740.html#0000" CLASS="Element59">TIdStack.CheckForSocketError</A> to determine if the connection closed abnormally.<P CLASS="Element10">
+When <A HREF="007828.html#000B" CLASS="Element59">ClosedGracefully</A> is False, the protocol stack is used to check for an <A HREF="002112.html" CLASS="Element59">Id_WSAESHUTDOWN</A> error and allows the <A HREF="007071.html" CLASS="Element59">socket</A> to disconnect when the error is detected. If the Indy read buffer contains no unread data, the <A HREF="002112.html" CLASS="Element59">Id_WSAESHUTDOWN</A> exception is re-raised using the protocol stack handler.<P CLASS="Element10">
+ReadFromStack provides support for <A HREF="007248.html" CLASS="Element59">TIdConnectionIntercept</A> by calling the Receive handler for the <A HREF="007828.html#001A" CLASS="Element59">Intercept</A> when Enabled. ReadFromStack also performs 8-bit to 7-bit character translations when <A HREF="007828.html#0001" CLASS="Element59">ASCIIFilter</A> is True.<P CLASS="Element10">
+Finally, ReadFromStack moves data read from the input source to the internal Indy buffer, and sets the return value to the number of bytes handled by the operation.<P CLASS="Element10">
+ReadFromStack can be a time intensive operation due to network contention and the nature of blocking sockets. ReadFromStack should be the only location where data is read from the protocol stack.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="002A">TIdTCPConnection.ReadInteger</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007828.html" CLASS="Element59">TIdTCPConnection</A>, <A HREF="014129.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Reads an integer value in the Indy buffer.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>function</STRONG> ReadInteger(<STRONG>const</STRONG> AConvert: boolean = true): Integer;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+const AConvert: boolean = true</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Indicates that the result should be converted from Internet to Intel byte-order. Default value is <STRONG>True</STRONG>.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Return Value</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Integer - Value read from the Indy buffer.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+ReadInteger is an Integer function that reads a 4-byte binary integer value from the Indy buffer. By default, the resulting Integer value is converted from Internet byte-order to Intel byte-order. This can be overridden by setting AConvert to False.<P CLASS="Element10">
+ReadInteger uses <A HREF="007828.html#0026" CLASS="Element59">ReadBuffer</A> to read and extract the integer value from the Indy buffer. ReadInteger uses the WSNToHL method from TIdStackWinsock to convert the integer value from Internet byte-order to Intel byte-order.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="002B">TIdTCPConnection.ReadLn</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007828.html" CLASS="Element59">TIdTCPConnection</A>, <A HREF="014130.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Reads a line from the Indy buffer.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>function</STRONG> ReadLn(ATerminator: <STRONG>string</STRONG> = <A HREF="003176.html" CLASS="Element59">LF</A>; <STRONG>const</STRONG> ATimeout: Integer = <A HREF="002932.html" CLASS="Element59">IdTimeoutDefault</A>; AMaxLineLength: Integer = -1): <STRONG>string</STRONG>; <STRONG>virtual</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+ATerminator: string = LF</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+End-of-line termination character or characters.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+const ATimeout: Integer = IdTimeoutDefault</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Time-out in milliseconds. Default value <A HREF="002933.html" CLASS="Element59">IdTimeoutInfinite</A>.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Return Value</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+String - Line read from the buffer.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+ReadLn is a function that returns a string containing a single line from the buffer maintained by <A HREF="007828.html" CLASS="Element59">TIdTCPConnection</A>.<P CLASS="Element10">
+The optional ATerminator parameter indicates the end-of-line symbol for the particular protocol. If data is expected, and you do not need a custom end-of-line symbol, you can use the default ATerminator value (#0). ATerminator values include:<P CLASS="Element10">
+<UL>
+<LI>#0 - Default Line Feed (#10)<P CLASS="Element10">
+<LI><A HREF="003176.html" CLASS="Element59">LF</A> - Line Feed (#10)<P CLASS="Element10">
+<LI><A HREF="000298.html" CLASS="Element59">CR</A> - Carriage Return (#13)<P CLASS="Element10">
+<LI><A HREF="000534.html" CLASS="Element59">EOL</A> - End-of-line (Carriage Return + Line Feed)</UL>
+<P CLASS="Element10">
+If there is no terminator (ATerminator) in the buffer, ReadLn will read more bytes from the TCP stack through the <A HREF="007828.html#0029" CLASS="Element59">ReadFromStack</A> method.<P CLASS="Element10">
+Use a custom time-out (ATimeout) value to change the number of milliseconds to wait for a response from the peer connection before a time-out occurs. The default value for ATimeout is <A HREF="002933.html" CLASS="Element59">IdTimeoutInfinite</A>. See <A HREF="002193.html" CLASS="Element59">IdGlobal.pas</A> for more information on constant timeout values.<P CLASS="Element10">
+ReadLn will return an empty string ('') if the peer connection is prematurely closed or a time-out occurs. When a timeout condition occurs in ReadLn, the <A HREF="007828.html#002D" CLASS="Element59">ReadLnTimedOut</A> property is set to True.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="002E">TIdTCPConnection.ReadLnWait</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007828.html" CLASS="Element59">TIdTCPConnection</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Returns a line of text from the connection.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>function</STRONG> ReadLnWait(AFailCount: Integer = MaxInt): <STRONG>string</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Return Value</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+String - Data read from the connection.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+ReadLnWait is a procedure that returns a single line ot text from the connection. ReadLnWait will continue to read from the connection until a non-blank line is received.<P CLASS="Element10">
+If there is no guarantee that data will be available, or a specific line delimiter is required, use <A HREF="007828.html#002B" CLASS="Element59">ReadLn</A> to retrieve data from the connection.<P CLASS="Element10">
+ReadLnWait calls <A HREF="007828.html#002B" CLASS="Element59">ReadLn</A> with the default delimiter and timeout values.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="002F">TIdTCPConnection.ReadSmallInt</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007828.html" CLASS="Element59">TIdTCPConnection</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Reads an small integer value from the connection.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>function</STRONG> ReadSmallInt(<STRONG>const</STRONG> AConvert: boolean = true): SmallInt;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+const AConvert: boolean = true</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Convert the numeric from Network to Host representation. Default value is True.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Return Value</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+SmallInt - Value read from the Indy buffer.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+ReadSmallInt is a SmallInt function used to read an integer value, in the range 0 to 255, from the connection. ReadSmallInt uses <A HREF="007828.html#0026" CLASS="Element59">ReadBuffer</A> to get the SmallInt value from the Indy read buffer.<P CLASS="Element10">
+AConvert indicates that the protocol stack WSNToHs method should be used to convert the numeric value from Network byte-order to Host-specific byte-order.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0030">TIdTCPConnection.ReadStream</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007828.html" CLASS="Element59">TIdTCPConnection</A>, <A HREF="014131.html" CLASS="Element59">See Also</A>, <A HREF="014132.html" CLASS="Element59">Example</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Reads data from the Indy buffer and stores the values in a stream.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>procedure</STRONG> ReadStream(AStream: TStream; AByteCount: LongInt = -1; <STRONG>const</STRONG> AReadUntilDisconnect: boolean = false);</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+AStream: TStream</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Stream where data will be stored.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+AByteCount: LongInt = -1</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Number of bytes to be read. Default value is <STRONG>-1</STRONG>.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+const AReadUntilDisconnect: boolean = false</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Indicates that data should be read from the protocol stack until disconnected. Default value is <STRONG>False</STRONG>.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+ReadStream is a procedure used to read and extract data from the Indy buffer, and to place the resulting values in the stream specified in AStream.<P CLASS="Element10">
+AByteCount indicates the number of bytes to be read from the Indy buffer, or <STRONG>-1</STRONG> if all bytes in the Indy buffer should be included. When AByteCount contains the number of bytes to be read, it is used to increase the size of AStream by the given number of bytes. This reduces memory or disk allocations to a single operation.<P CLASS="Element10">
+AReadUntilDisconnected indicates that data should be read from the protocol stack until the component is disconnected. When AReadUntilDisconnected is <STRONG>True</STRONG>, bytes are read from the protocol stack and written to AStream until <A HREF="007828.html#000D" CLASS="Element59">Connected</A> is <STRONG>False</STRONG>.<P CLASS="Element10">
+<STRONG>Note</STRONG>: When AByteCount is <STRONG>-1</STRONG>, and AReadUntilDisconnected is <STRONG>False</STRONG>, it is assumed that the first 4-bytes in the Indy buffer contains the length of buffered data in Internet format. ReadStream uses <A HREF="007828.html#002A" CLASS="Element59">ReadInteger</A> to convert the value to Intel byte-order prior to reading the remaining data from the Indy buffer.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0031">TIdTCPConnection.ReadString</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007828.html" CLASS="Element59">TIdTCPConnection</A>, <A HREF="014133.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Reads a string value from the connection.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>function</STRONG> ReadString(<STRONG>const</STRONG> ABytes: Integer): <STRONG>string</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+const ABytes: Integer</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Number of bytes to be read from the connection.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Return Value</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+String - Data read from the Indy read buffer.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+ReadString is a String function used to read the number of bytes specified in ABytes from the connection. ReadString uses <A HREF="007828.html#0026" CLASS="Element59">ReadBuffer</A> to get the string from the Indy read buffer.<P CLASS="Element10">
+ReadString delays until the number of bytes in ABytes is available in the Indy read buffer. If the number of bytes is not known, use <A HREF="007828.html#002B" CLASS="Element59">ReadLn</A> or <A HREF="007828.html#002E" CLASS="Element59">ReadLnWait</A>.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0032">TIdTCPConnection.ReadStrings</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007828.html" CLASS="Element59">TIdTCPConnection</A>, <A HREF="014134.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Reads a variable number of text lines from a connection.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>procedure</STRONG> ReadStrings(<STRONG>var</STRONG> AValue: TStrings; AReadLinesCount: Integer = -1);</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+var AValue: TStrings</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Container for values read from the connection.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+AReadLinesCount: Integer = -1</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Number of lines to read from the connection.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+ReadStrings is a procedure that allows the TCP connection to read a variable number of text lines, and store the values in the variable parameter AValue.<P CLASS="Element10">
+AReadLinesCount is the number of lines expected from the TCP connection, or -1 when the connection will contain an Integer that indicates the number of lines to be read. ReadStrings calls <A HREF="007828.html#002A" CLASS="Element59">ReadInteger</A> to get the line count when AReadLinesCount contains -1.<P CLASS="Element10">
+ReadStrings repetitively calls <A HREF="007828.html#002B" CLASS="Element59">ReadLn</A> until the number of expected lines has been read from the TCP connection.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0037">TIdTCPConnection.SendCmd</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007828.html" CLASS="Element59">TIdTCPConnection</A>, <A HREF="014135.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Sends a command to the peer.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>function</STRONG> <A HREF="007828.html#0036" CLASS="Element59">SendCmd</A>(<STRONG>const</STRONG> AOut: <STRONG>string</STRONG>; <STRONG>const</STRONG> AResponse: SmallInt = -1): SmallInt; <STRONG>overload</STRONG>;
+<STRONG>function</STRONG> <A HREF="007828.html#0036" CLASS="Element59">SendCmd</A>(<STRONG>const</STRONG> AOut: <STRONG>string</STRONG>; <STRONG>const</STRONG> AResponse: <STRONG>Array</STRONG> <STRONG>of</STRONG> SmallInt): SmallInt; <STRONG>virtual</STRONG>; <STRONG>overload</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+const AOut: string</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Command to be sent to the server.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+const AResponse: SmallInt = -1</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Numeric response expected. Default is <STRONG>-1</STRONG>. (Array of SmallInt for multiple responses allowed).</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+SendCmd sends the command specified in AOut to the peer. If the numeric response code is not AResponse, an exception is raised. If you have to check for more than one numeric response number code, pass an array of numbers in AResponse. If you do not want an exception raised, omit AResponse.<P CLASS="Element10">
+Use <A HREF="007828.html#001C" CLASS="Element59">LastCmdResult</A> to access the numeric and text portions of the response for the command.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0036">TIdTCPConnection.SendCmd</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007828.html" CLASS="Element59">TIdTCPConnection</A>, <A HREF="014136.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Sends a command to the peer.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>function</STRONG> SendCmd(<STRONG>const</STRONG> AOut: <STRONG>string</STRONG>; <STRONG>const</STRONG> AResponse: SmallInt = -1): SmallInt; <STRONG>overload</STRONG>;
+<STRONG>function</STRONG> SendCmd(<STRONG>const</STRONG> AOut: <STRONG>string</STRONG>; <STRONG>const</STRONG> AResponse: <STRONG>Array</STRONG> <STRONG>of</STRONG> SmallInt): SmallInt; <STRONG>virtual</STRONG>; <STRONG>overload</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+const AOut: string</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Command to be sent to the server.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+const AResponse: SmallInt = -1</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Numeric response expected. Default is <STRONG>-1</STRONG>. (Array of SmallInt for multiple responses allowed).</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+SendCmd sends the command specified in AOut to the peer. If the numeric response code is not AResponse, an exception is raised. If you have to check for more than one numeric response number code, pass an array of numbers in AResponse. If you do not want an exception raised, omit AResponse.<P CLASS="Element10">
+Use <A HREF="007828.html#001C" CLASS="Element59">LastCmdResult</A> to access the numeric and text portions of the response for the command.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0039">TIdTCPConnection.WaitFor</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007828.html" CLASS="Element59">TIdTCPConnection</A>, <A HREF="014137.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Reads data from the peer connection until a string is found.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>function</STRONG> WaitFor(<STRONG>const</STRONG> AString: <STRONG>string</STRONG>): <STRONG>string</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+const AString: string</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+The value to be located.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Return Value</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+String - Value read from the connection.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+WaitFor is a String function used to read from the connection until the value in AString is encountered. The return value for WaitFor will include the value in AString.<P CLASS="Element10">
+WaitFor calls <A HREF="007828.html#0007" CLASS="Element59">CheckForDisconnect</A> to detect when the connection is closed.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="003A">TIdTCPConnection.Write</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007828.html" CLASS="Element59">TIdTCPConnection</A>, <A HREF="014138.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Send a string using the connection.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>procedure</STRONG> <STRONG>Write</STRONG>(<STRONG>const</STRONG> AOut: <STRONG>string</STRONG>); <STRONG>virtual</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+const AOut: string</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Buffer to <A HREF="006944.html" CLASS="Element59">send</A> over the connection.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Write is a procedure used to <A HREF="006944.html" CLASS="Element59">send</A> the string specified in AOut over the connection. When AOut is an empty string, no action is performed.<P CLASS="Element10">
+Write calls <A HREF="007828.html#003B" CLASS="Element59">WriteBuffer</A> to perform output from the buffer.<P CLASS="Element10">
+Write does not add an End-Of-Line sequence to the output buffer.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="003B">TIdTCPConnection.WriteBuffer</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007828.html" CLASS="Element59">TIdTCPConnection</A>, <A HREF="014139.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Sends the data in a buffer to a peer connection.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>procedure</STRONG> WriteBuffer(<STRONG>const</STRONG> ABuffer; AByteCount: Longint; <STRONG>const</STRONG> AWriteNow: Boolean = False);</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+const ABuffer</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Buffer with data to be written.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+AByteCount: Longint</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Number of bytes of data to be written.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+const AWriteNow: Boolean = False</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Ignore write buffering and <A HREF="006944.html" CLASS="Element59">send</A> data immediately. Default value is <STRONG>False</STRONG>.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+WriteBuffer is a procedure that places data in the Indy buffer for the peer connection, or optionally sends the data to the peer connection. <STRONG>Note</STRONG>: This is the only place where data is sent to a peer through the <A HREF="007071.html" CLASS="Element59">socket</A> binding allocated for a connection. All other write procedures call this method.<P CLASS="Element10">
+ABuffer is the <A HREF="007219.html" CLASS="Element59">TIdBuffer</A> that contains data to be affected by WriteBuffer.<P CLASS="Element10">
+AByteCount is the number of bytes in the buffer to be affected by WriteBuffer.<P CLASS="Element10">
+When AWriteNow is <STRONG>True</STRONG>, write buffering will be ignored and ABuffer will be transmitted to the peer without updating the internal Indy write buffer. <STRONG>Note</STRONG>: If this is done after a call to <A HREF="007828.html#0023" CLASS="Element59">OpenWriteBuffer</A>, ABuffer will be transmitted before/in the middle of any data in the Indy internal write buffer.<P CLASS="Element10">
+Call <A HREF="007828.html#0023" CLASS="Element59">OpenWriteBuffer</A> to initiate use of Indy internal write buffering operations.<P CLASS="Element10">
+Call <A HREF="007828.html#0002" CLASS="Element59">CancelWriteBuffer</A> or <A HREF="007828.html#000C" CLASS="Element59">CloseWriteBuffer</A> to interrupt use of the internal Indy write buffer.<P CLASS="Element10">
+Call <A HREF="007828.html#0013" CLASS="Element59">FlushWriteBuffer</A> to force unsent data in the Indy internal write buffer to be sent to the peer connection.<P CLASS="Element10">
+Call <A HREF="007828.html#000A" CLASS="Element59">ClearWriteBuffer</A> to remove any unsent data in the Indy internal write buffer.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="003C">TIdTCPConnection.WriteCardinal</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007828.html" CLASS="Element59">TIdTCPConnection</A>, <A HREF="014140.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Sends a cardinal to the peer.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>procedure</STRONG> WriteCardinal(AValue: Cardinal; <STRONG>const</STRONG> AConvert: Boolean = True);</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+AValue: Cardinal</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+The 32bit value to <A HREF="006944.html" CLASS="Element59">send</A> to the peer.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+const AConvert: Boolean = True</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Default is True. When true, the value is converted to Internet Byte order from the Native Intel Byte order. If false, no byte-order conversion is done.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+This procedure sends a 32-bit unsigned value (cardinal) to the peer. The <A HREF="007865.html" CLASS="Element59">TIdTimeServer</A> component uses WriteCardinal to <A HREF="006944.html" CLASS="Element59">send</A> a time value to the peer connection.<P CLASS="Element10">
+Use <A HREF="007828.html#0027" CLASS="Element59">ReadCardinal</A> to read a 32-bit unsigned value from the peer connection.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="003D">TIdTCPConnection.WriteFile</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007828.html" CLASS="Element59">TIdTCPConnection</A>, <A HREF="014141.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Sends an operating system file to the peer on the connection.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>function</STRONG> WriteFile(<STRONG>const</STRONG> AFile: <STRONG>String</STRONG>; <STRONG>const</STRONG> AEnableTransferFile: Boolean = False): Cardinal; <STRONG>virtual</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+const AFile: String</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+File to <A HREF="006944.html" CLASS="Element59">send</A>.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+const AEnableTransferFile: Boolean = False</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Use OS-specific extenstions to <A HREF="006944.html" CLASS="Element59">send</A> the file. Default value is False.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Return Value</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Cardinal - Number of bytes written to the peer.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+WriteFile is a Cardinal function used to <A HREF="006944.html" CLASS="Element59">send</A> the operating system file specified in AFile to the peer on the connection. WriteFile is used to transfer files in server implementations like HTTP and FTP.<P CLASS="Element10">
+When AEnableTransferFile is True, Windows NT and Windows 2000 server can increase the efficiency of tile transfer operations, but cannot support TIdIntercept or progress indicators. AEnableTransferFile has no effect on Windows 95 and Windows 98.<P CLASS="Element10">
+Otherwise, WriteFile calls <A HREF="007828.html#0044" CLASS="Element59">WriteStream</A> using a TFileStream for the file specified in AFile to perform write operations over the connection.<P CLASS="Element10">
+WriteFile can raise a <A HREF="000378.html" CLASS="Element59">EIdFileNotFound</A> exception when AFile does not exist on the local file system.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="003E">TIdTCPConnection.WriteHeader</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007828.html" CLASS="Element59">TIdTCPConnection</A>, <A HREF="014142.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Sends a protocol header from values in a list.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>procedure</STRONG> WriteHeader(AHeader: TStrings);</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+axHeader</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+List of headers to write to the connection.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+WriteHeader is a procedure used to write the header items in axHeader to the connection. axHeader contains header items in NAME=VALUE form. WriteHeader will translate each line in axHeader to the HTTP header form NAME: VALUE.<P CLASS="Element10">
+WriteHeader calls <A HREF="007828.html#0040" CLASS="Element59">WriteLn</A> for each header item in axHeader. An additional blank line is written to the connection at the end of the header list.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="003F">TIdTCPConnection.WriteInteger</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007828.html" CLASS="Element59">TIdTCPConnection</A>, <A HREF="014143.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Writes a binary integer value to the peer connection.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>procedure</STRONG> WriteInteger(AValue: Integer; <STRONG>const</STRONG> AConvert: Boolean = True);</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+AValue: Integer</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+The integer value to <A HREF="006944.html" CLASS="Element59">send</A> to the peer.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+const AConvert: Boolean = True</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Convert the Host byte-order to Network byte-order. Default value is True.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+WriteInteger is a procedure used to <A HREF="006944.html" CLASS="Element59">send</A> an Integer value to the peer connection.<P CLASS="Element10">
+AValue is the integer value to <A HREF="006944.html" CLASS="Element59">send</A> to the peer connection.<P CLASS="Element10">
+AConvert indicates that the integer in AValue should be converted from local host byte-order to Internet byte-order. When AConvertis True, the protcol stack method WSHToNl is called to convert the binary integer value.<P CLASS="Element10">
+WriteInteger calls <A HREF="007828.html#003B" CLASS="Element59">WriteBuffer</A> to <A HREF="006944.html" CLASS="Element59">send</A> AValue to the peer connection.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0040">TIdTCPConnection.WriteLn</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007828.html" CLASS="Element59">TIdTCPConnection</A>, <A HREF="014144.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Writes string value to the peer connection.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>procedure</STRONG> WriteLn(<STRONG>const</STRONG> AOut: <STRONG>string</STRONG> = ''); <STRONG>virtual</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+const AOut: string = ''</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Value to <A HREF="006944.html" CLASS="Element59">send</A> to the peer connection. Default value is ''.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+WriteLn is a procedure used to <A HREF="006944.html" CLASS="Element59">send</A> the string value specified in AOut to the peer connection. WriteLn appends the <A HREF="000534.html" CLASS="Element59">EOL</A> character sequence to the value in AOut when it is sent to the peer connection.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0041">TIdTCPConnection.WriteRFCReply</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007828.html" CLASS="Element59">TIdTCPConnection</A>, <A HREF="014145.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Sends an RFC response message on the connection.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>procedure</STRONG> WriteRFCReply(AReply: <A HREF="007663.html" CLASS="Element59">TIdRFCReply</A>);</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+AReply: TIdRFCReply</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+RFC response message to be sent on the connection.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+WriteRFCReply is a procedure used to <A HREF="006944.html" CLASS="Element59">send</A> the value of the <A HREF="007663.html" CLASS="Element59">TIdRFCReply</A> specified in AReply on the current connection. WriteRFCReply calls the <A HREF="007828.html#003A" CLASS="Element59">Write</A> method using the value supplied by <A HREF="007663.html#0003" CLASS="Element59">TIdRFCReply.GenerateReply</A> when the RFC response message contains non-blank values.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0042">TIdTCPConnection.WriteRFCStrings</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007828.html" CLASS="Element59">TIdTCPConnection</A>, <A HREF="014146.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+<A HREF="007828.html#003A" CLASS="Element59">Write</A> RFC-compliant response messages on the connection.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>procedure</STRONG> WriteRFCStrings(AStrings: TStrings);</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+AStrings: TStrings</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+TStringLIst to be written on the connection.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+WriteRFCStrings is a procedure used to write the TStrings values in AStrings on the connection in a format consistent with RFC message responses. WriteRFCStrings insures that individual lines in AStrings beginning with the response termination character '.' are converted to '..', and call <A HREF="007828.html#0040" CLASS="Element59">WriteLn</A> using the updated values. When all lines have been written, WriteRFCStrings calls <A HREF="007828.html#0040" CLASS="Element59">WriteLn</A> to <A HREF="006944.html" CLASS="Element59">send</A> the '.' termination character to indicate the end of RFC response messages.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0043">TIdTCPConnection.WriteSmallInt</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007828.html" CLASS="Element59">TIdTCPConnection</A>, <A HREF="014147.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Sends a small integer value to the peer connection.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>procedure</STRONG> WriteSmallInt(AValue: SmallInt; <STRONG>const</STRONG> AConvert: Boolean = True);</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+AValue: SmallInt</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Value to be sent to the peer.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+const AConvert: Boolean = True</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Convert the value from local host byte-order to Internet byte-order. Default value is True.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+WriteSmallInt is a procedure used to <A HREF="006944.html" CLASS="Element59">send</A> the SmallInt specified in AValue to the peer connection.<P CLASS="Element10">
+When AConvert is True, the value specified in AValue is converted to Internet byte-order using the prtocol stack method WSHToNs.<P CLASS="Element10">
+WriteSmallInt calls <A HREF="007828.html#003B" CLASS="Element59">WriteBuffer</A> to <A HREF="006944.html" CLASS="Element59">send</A> the SmallInt value to the peer connection.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0044">TIdTCPConnection.WriteStream</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007828.html" CLASS="Element59">TIdTCPConnection</A>, <A HREF="014148.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Sends a stream of data to the peer connection.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>procedure</STRONG> WriteStream(AStream: TStream; <STRONG>const</STRONG> AAll: Boolean = True; <STRONG>const</STRONG> AWriteByteCount: Boolean = False; <STRONG>const</STRONG> ASize: Integer = 0); <STRONG>virtual</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+AStream: TStream</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+The stream to <A HREF="006944.html" CLASS="Element59">send</A> to the peer connection.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+const AAll: Boolean = True</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+<A HREF="007828.html#003A" CLASS="Element59">Write</A> from the start of the stream. Default value is True.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+const AWriteByteCount: Boolean = False</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+<A HREF="007828.html#003A" CLASS="Element59">Write</A> the stream sizew to the peer connection. Default value is False.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+WriteStream is a procedure used to <A HREF="006944.html" CLASS="Element59">send</A> the contents of the TStream descendant specified in AStream to the peer connection.<P CLASS="Element10">
+AAll indicates that the stream should be positioned to the stream origin prior to sending stream data.<P CLASS="Element10">
+AWriteByteCount indicates that the Integer value containing the size of the stream should be written to the peer connection prior to the stream data. When AAll is true, this value reflects the size of the entire stream. When AAll is False, this value indicates the stream sixe from the current stream position to the end of the stream. When AWriteByteCount is True, <A HREF="007828.html#003F" CLASS="Element59">WriteInteger</A> is called to <A HREF="006944.html" CLASS="Element59">send</A> the stream size to the peer connection.<P CLASS="Element10">
+WriteStream calls BeginWork with the work mode wmWrite and the size of the stream prior to sending stream data to the peer connection. The stream size is the value in AStream.Size, and is stored in a variable for subsequent use in the method. This reduces the overhead for TStream descendants where TStream.Seek is not efficient or practical.<P CLASS="Element10">
+AStream data is sent to the peer in blocks, where each block is read into a buffer that can contain up to <A HREF="007828.html#0035" CLASS="Element59">SendBufferSize</A> bytes. If a read from AStream results in a buffer with a length of 0, when the stream size and position indicate a non-zero value, an <A HREF="000420.html" CLASS="Element59">EIdNoDataToRead</A> exception will be raised. Data read from AStream is sent on the connection using <A HREF="007828.html#003B" CLASS="Element59">WriteBuffer</A> with the current buffer contents and size.<P CLASS="Element10">
+WriteStream calls EndWork with the work mode wmWrite prior to exiting from the method.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0045">TIdTCPConnection.WriteStrings</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007828.html" CLASS="Element59">TIdTCPConnection</A>, <A HREF="014149.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+<A HREF="007828.html#003A" CLASS="Element59">Write</A> multiple text strings to a peer connection.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>procedure</STRONG> WriteStrings(AValue: TStrings; <STRONG>const</STRONG> AWriteLinesCount: Boolean = False);</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+AValue: TStrings</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Values to be sent as output to the peer.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+WriteStrings is a procedure used to <A HREF="006944.html" CLASS="Element59">send</A> the multiple lines of text in AValue to the <A HREF="007071.html" CLASS="Element59">socket</A> peer connection. WriteStrings uses the <A HREF="007828.html#0040" CLASS="Element59">WriteLn</A> method to <A HREF="006944.html" CLASS="Element59">send</A> individual lines in AValue.</DIV>
+</DIV>
+<DIV CLASS="Element62">
+<HR>Created with Doc-O-Matic 2 donated to <STRONG><A HREF="http://www.delphi-jedi.org">Project JEDI</A></STRONG>. Commercial license available from the <STRONG><A HREF="http://www.doc-o-matic.com">Doc-O-Matic site</A></STRONG>.</DIV>
+</DIV></BODY></HTML>

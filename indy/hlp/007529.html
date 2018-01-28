@@ -1,0 +1,170 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+<TITLE>TIdMappedFtpThread</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <META name="GENERATOR" content="Doc-O-Matic">
+    <LINK rel="STYLESHEET" href="default.css" type="text/css">
+
+<SCRIPT LANGUAGE="JavaScript1.2" SRC="scripts.js"></SCRIPT>
+</HEAD>
+<BODY CLASS="Element57">
+<TABLE BORDER="0" BGCOLOR="#AACCFF" WIDTH="100%" CELLSPACING="0" CELLPADDING="0">
+<TR><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element1">
+Indy 9</DIV>
+</TD><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element2">
+<A HREF="content.html" CLASS="Element59">Content</A> | <A HREF="idx.html" CLASS="Element59">Index</A> | <A HREF="symref.html" CLASS="Element59">Reference</A></DIV>
+</TD></TR></TABLE><DIV CLASS="Element58">
+<DIV CLASS="Element5">
+TIdMappedFtpThread</DIV>
+<DIV CLASS="Element7">
+<A HREF="012291.html" CLASS="Element59">Hierarchy</A>, <A HREF="012292.html" CLASS="Element59">Properties</A>, <A HREF="012293.html" CLASS="Element59">Methods</A>, <A HREF="012294.html" CLASS="Element59">Events</A>, <A HREF="012295.html" CLASS="Element59">See Also</A>, <A HREF="002282.html" CLASS="Element59">Unit: IdMappedFTP</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Thread created for port-based proxy connections to an FTP server.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12">TIdMappedFtpThread = <STRONG>class</STRONG>(<A HREF="007535.html" CLASS="Element59">TIdMappedPortThread</A>)</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Unit</DIV>
+<DIV CLASS="Element69">
+<A HREF="002282.html" CLASS="Element59">IdMappedFTP</A></DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+TIdMappedFtpThread is a <A HREF="007535.html" CLASS="Element59">TIdMappedPortThread</A> descendant that represents the thread created for port-based proxy connections to an FTP server. TIdMappedFtpThread implements properties and methods that allow the FTP session to set the <A HREF="007529.html#0005" CLASS="Element59">Host</A> and <A HREF="007529.html#0008" CLASS="Element59">Port</A> used for the local connection to the FTP proxy, and the <A HREF="007529.html#0006" CLASS="Element59">OutboundHost</A> and <A HREF="007529.html#0007" CLASS="Element59">OutboundPort</A> for the proxied connection. TIdMappedFtpThread also provides properties and methods to capture ands resolve the FTP command and parameters, as well as the thread DataChannel used for the proxy connection.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0001">TIdMappedFtpThread.DataChannelThread</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007529.html" CLASS="Element59">TIdMappedFtpThread</A></DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> DataChannelThread: <A HREF="007527.html" CLASS="Element59">TIdMappedFtpDataThread</A>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+DataChannelThread</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0002">TIdMappedFtpThread.FtpCmdLine</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007529.html" CLASS="Element59">TIdMappedFtpThread</A></DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> FtpCmdLine: <STRONG>string</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+FtpCmdLine</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0003">TIdMappedFtpThread.FtpCommand</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007529.html" CLASS="Element59">TIdMappedFtpThread</A></DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> FtpCommand: <STRONG>string</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+FtpCommand</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0004">TIdMappedFtpThread.FtpParams</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007529.html" CLASS="Element59">TIdMappedFtpThread</A></DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> FtpParams: <STRONG>string</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+FtpParams</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0005">TIdMappedFtpThread.Host</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007529.html" CLASS="Element59">TIdMappedFtpThread</A></DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> Host: <STRONG>string</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Host</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0006">TIdMappedFtpThread.OutboundHost</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007529.html" CLASS="Element59">TIdMappedFtpThread</A></DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> OutboundHost: <STRONG>string</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+OutboundHost</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0007">TIdMappedFtpThread.OutboundPort</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007529.html" CLASS="Element59">TIdMappedFtpThread</A></DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> OutboundPort: Integer;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+OutboundPort</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0008">TIdMappedFtpThread.Port</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007529.html" CLASS="Element59">TIdMappedFtpThread</A></DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> Port: Integer;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Port</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0000">TIdMappedFtpThread.Create</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007529.html" CLASS="Element59">TIdMappedFtpThread</A></DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>constructor</STRONG> Create(ACreateSuspended: Boolean = True); <STRONG>override</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Create</DIV>
+</DIV>
+<DIV CLASS="Element62">
+<HR>Created with Doc-O-Matic 2 donated to <STRONG><A HREF="http://www.delphi-jedi.org">Project JEDI</A></STRONG>. Commercial license available from the <STRONG><A HREF="http://www.doc-o-matic.com">Doc-O-Matic site</A></STRONG>.</DIV>
+</DIV></BODY></HTML>

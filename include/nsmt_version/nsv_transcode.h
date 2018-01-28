@@ -1,0 +1,498 @@
+//---------------------------------------------------------------------------
+#ifndef __NSV_TRANSCODE_H
+#define __NSV_TRANSCODE_H
+
+#include "nsmt_version\nsv_person.h"
+#include "nsmt_version\nsv_docum.h"
+#include "nssavoir\nspatbas.h"
+#include "nssavoir\nstransa.h"
+#include "nssavoir\nsgraphe.h"
+#include "nsbb\nspatpat.h"
+#include "ns_sgbd\nschemin.h"
+
+//
+// Taille des champs du fichier TRANSCODE
+//
+#define TRA_TYPE_LEN  		   3
+#define TRA_OLDCODE_LEN     11#define TRA_NEWCODE_LEN	    13
+#define TRA_FLAG_LEN		     1
+
+//
+// Ordre des champs du fichier TRANSCODE
+//
+#define TRA_TYPE_FIELD       1
+#define TRA_OLDCODE_FIELD    2
+#define TRA_NEWCODE_FIELD    3
+#define TRA_FLAG_FIELD       4
+
+//---------------------------------------------------------------------------
+//  Classe NSVTranscode
+//---------------------------------------------------------------------------
+
+//
+// Objet données
+//
+class NSVTranscodeData
+{
+	public :
+
+		//
+    // Variables de stockage des valeurs
+    //
+    char type[TRA_TYPE_LEN + 1] ;
+    char old_code[TRA_OLDCODE_LEN + 1] ;
+    char new_code[TRA_NEWCODE_LEN + 1] ;
+    char flag[TRA_FLAG_LEN + 1] ;
+
+		NSVTranscodeData() { metAZero() ; }
+		NSVTranscodeData(NSVTranscodeData& rv) ;
+
+		NSVTranscodeData& operator=(NSVTranscodeData src) ;
+		int 		   operator==(const NSVTranscodeData& o) ;
+
+		void metAZero() ;
+};
+
+//
+// Objet dérivé de NSFiche utilisé pour les opérations de base de données
+//
+class NSVTranscode : public NSFiche
+{
+	public :
+
+		//
+    // Variables de stockage des valeurs
+    //
+    NSVTranscodeData* pDonnees ;
+
+    NSVTranscode(NSSuper* pSuper) ;
+    NSVTranscode(NSSuper* pSuper, hDBICur hCurSrc) ; // Constructeur curseur cloné
+    ~NSVTranscode() ;
+
+    string getType()    { return string(pDonnees->type) ; }
+    string getOldCode() { return string(pDonnees->old_code) ; }
+    string getNewCode() { return string(pDonnees->new_code) ; }
+    string getFlag()    { return string(pDonnees->flag) ; }
+
+    void  alimenteFiche() ;
+    void  videFiche() ;
+    DBIResult open() ;
+} ;
+
+//
+// Fichier des chemins
+//
+class NSVChemins : public NSFiche
+{
+	public :
+
+		//
+		// Variables de stockage des valeurs
+		//		NSCheminsData* pDonnees ;
+
+		NSVChemins(NSSuper* pSuper) ;
+		~NSVChemins() ;
+
+		DBIResult open(string pathbase) ;
+		void metAZero() { pDonnees->metAZero() ; }
+		void alimenteFiche() ;
+		void videFiche() ;
+};
+
+//
+// Fichier des supports
+//
+class NSVSupports : public NSFiche
+{
+	public :
+
+		//
+    // Variables de stockage des valeurs
+    //
+    NSSupportsData* pDonnees ;
+
+    NSVSupports(NSSuper* pSuper) ;
+    ~NSVSupports() ;
+
+    DBIResult open(string pathbase);
+
+		void metAZero() { pDonnees->metAZero() ; }
+    void alimenteFiche() ;
+    void videFiche() ;
+};
+
+// Définition des fichiers de données
+////////////////////////////////////////////////////
+
+//
+// Indice des champs du fichier PATPADAT
+//
+#define PPD_PAT_FIELD  		    1
+#define PPD_DOCU_FIELD  	    2
+#define PPD_NOEUD_FIELD       3
+#define PPD_TYPE_FIELD   	    4
+#define PPD_LEXIQUE_FIELD     5
+#define PPD_COMPLEMENT_FIELD  6
+#define PPD_CERTITUDE_FIELD   7
+#define PPD_PLURIEL_FIELD     8
+#define PPD_TRAN_NEW_FIELD    9
+#define PPD_TRAN_DEL_FIELD   10
+#define PPD_UNIT_FIELD       11
+
+//
+// Taille des champs du fichier PATPALOC
+//
+#define PPL_VISIBLE_LEN      1
+#define NSV_PPD_NOEUD_LEN    4
+//
+// Indice des champs du fichier PATPALOC
+//
+#define PPL_PAT_FIELD  	  1
+#define PPL_DOCU_FIELD    2
+#define PPL_TRAN_FIELD    3
+#define PPL_NOEUD_FIELD   4
+#define PPL_LOC_FIELD     5
+#define PPL_VISIBLE_FIELD 6
+#define PPL_INTERET_FIELD 7
+
+//---------------------------------------------------------------------------
+//  Classe NSVPatPaDat
+//
+//  La classe NSVPatPaDat permet de stocker un noeud de patpatho sur disque
+//
+//  Pour une transaction donnée, ce noeud peut avoir une localisation
+//  (-> il existe dans la patpatho) ou non (-> il n'existe pas).
+//
+//  Un même noeud peut avoir plusieurs localisations.
+//
+//  Le champ type permet de savoir si ce noeud existe dans la plus récente
+//	 transaction (valeur 'A' pour Actif) ou non (valeur 'H' pour Historique)
+//
+//---------------------------------------------------------------------------
+class _NSBBCLASSE NSVPatPaDatData
+{
+	public :
+
+		char codePatient[NSV_PAT_NSS_LEN + 1] ;
+    char codeDocument[NSV_DOC_CODE_DOCUM_LEN + 1] ;
+    char noeud[NSV_PPD_NOEUD_LEN + 1] ;
+    char type[BASE_TYPE_LEN + 1] ;
+    char lexique[BASE_LEXIQUE_LEN + 1] ;
+    char complement[BASE_COMPLEMENT_LEN + 1] ;
+    char certitude[BASE_CERTITUDE_LEN + 1] ;
+    char pluriel[BASE_PLURIEL_LEN + 1] ;
+    char tran_new[TRAN_CODE_LEN + 1] ;
+    char tran_del[TRAN_CODE_LEN + 1] ;
+    char unit[BASE_UNIT_LEN + 1] ;
+
+		NSVPatPaDatData() { metAZero() ; }
+		NSVPatPaDatData(NSVPatPaDatData& rv) ;
+
+		NSVPatPaDatData& operator=(NSVPatPaDatData src) ;
+		int 			operator==(const NSVPatPaDatData& o) ;
+
+		void metAZero() ;
+
+		int  getType() ;
+		void setType(int newType) ;
+
+		string getID()   { return string(codePatient) + string(codeDocument) ; }
+		string getNode() { return string(codePatient) + string(codeDocument) + string(noeud) ; }
+};
+
+class _NSBBCLASSE NSVPatPaDat : public NSFiche
+{
+    public :
+
+        NSVPatPaDatData* pDonnees;   // Objet qui contient les données
+
+	    NSVPatPaDat(NSSuper* pSuper);
+	    ~NSVPatPaDat();
+
+	    DBIResult open(string pathbase);
+	    void alimenteFiche();
+	    void videFiche();
+
+	    short prendStatut() { return statut; }
+	    void  metStatut(short nouvStatut) { statut = nouvStatut; }
+
+	    virtual bool Create();
+	    virtual bool Modify();
+};
+
+class _NSBBCLASSE NSVPatPaDatInfo
+{
+    public :
+        //
+		// Objet qui contient les données
+		//
+		NSVPatPaDatData* pDonnees;
+
+		NSVPatPaDatInfo();
+		NSVPatPaDatInfo(NSVPatPaDat* pPatPaDat);
+		NSVPatPaDatInfo(NSVPatPaDatInfo& rv);
+
+        string getID()   { return pDonnees->getID(); }
+        string getNode() { return pDonnees->getNode(); }
+
+		NSVPatPaDatInfo& operator=(NSVPatPaDatInfo src);
+		int operator == (const NSVPatPaDatInfo& o);
+        int operator == (const NSPatPathoInfo& o);
+        ~NSVPatPaDatInfo();
+};
+
+typedef vector<NSVPatPaDatInfo*> NSVPatPaDatInfoArray;
+typedef NSVPatPaDatInfoArray::iterator NSVPatPaDatIter;
+
+class _NSBBCLASSE NSVPatPaDatArray : public NSVPatPaDatInfoArray, public NSRoot
+{
+    public :
+
+        //
+	    // Constructeurs
+        //
+	    NSVPatPaDatArray(NSContexte* pCtx = 0);
+	    NSVPatPaDatArray(NSVPatPaDatArray& rv);
+        //
+	    // Destructeur
+        //
+	    ~NSVPatPaDatArray();
+        void vider();
+        //
+        // Opérateurs
+        //
+        NSVPatPaDatArray& operator=(NSVPatPaDatArray src);
+        //
+        // Fonctions de gestion du vecteur
+        //
+        bool ajouteElement(NSVPatPaDatInfo* pPatPaDat);
+};
+
+//---------------------------------------------------------------------------
+//  Classe NSVPatPaLoc
+//
+//  La classe NSVPatPaLoc permet de connaitre la localisation
+//  d'un noeud de NSVPatPaDat pour une transaction donnée
+//
+//  Le champ visible permet de savoir comment présenter la patpatho
+//
+//---------------------------------------------------------------------------
+class _NSBBCLASSE NSVPatPaLocData
+{
+	public :
+
+		char codePatient[NSV_PAT_NSS_LEN + 1] ;
+    char codeDocument[NSV_DOC_CODE_DOCUM_LEN + 1] ;
+    char transaction[TRAN_CODE_LEN + 1] ;
+    char noeud[NSV_PPD_NOEUD_LEN + 1] ;
+    char codeLocalisation[BASE_LOCALISATION_LEN + 1] ;
+    char visible[BASE_VISIBLE_LEN + 1] ;
+    char interet[BASE_INTERET_LEN + 1] ;
+
+		NSVPatPaLocData() { metAZero() ; }
+		NSVPatPaLocData(NSVPatPaLocData& rv) ;
+
+		NSVPatPaLocData& operator=(NSVPatPaLocData src) ;
+		int 			operator==(const NSVPatPaLocData& o) ;
+
+		void metAZero() ;
+
+		string getID()   { return string(codePatient) + string(codeDocument) ; }
+};
+
+class _NSBBCLASSE NSVPatPaLoc : public NSFiche
+{
+	public :
+
+		NSVPatPaLocData* pDonnees ;   // Objet qui contient les données
+
+		NSVPatPaLoc(NSSuper* pSuper) ;
+    ~NSVPatPaLoc() ;
+
+    DBIResult open(string pathbase) ;
+    void alimenteFiche() ;
+    void videFiche() ;
+
+    short prendStatut() { return statut ; }
+    void  metStatut(short nouvStatut) { statut = nouvStatut ; }
+
+    virtual bool Create() ;
+    virtual bool Modify() ;
+};
+
+class _NSBBCLASSE NSVPatPaLocInfo
+{
+	public :
+
+		//
+		// Objet qui contient les données
+		//
+		NSVPatPaLocData* pDonnees ;
+
+		NSVPatPaLocInfo() ;
+		NSVPatPaLocInfo(NSVPatPaLoc* pPatPaLoc) ;
+		NSVPatPaLocInfo(NSVPatPaLocInfo& rv) ;
+
+		NSVPatPaLocInfo& operator=(NSVPatPaLocInfo src) ;
+		int operator == ( const NSVPatPaLocInfo& o ) ;
+    ~NSVPatPaLocInfo() ;
+
+    string getID()   { return pDonnees->getID() ; }
+};
+
+typedef vector<NSVPatPaLocInfo*> NSVPatPaLocInfoArray ;
+typedef NSVPatPaLocInfoArray::iterator NSVPatPaLocIter ;
+
+class _NSBBCLASSE NSVPatPaLocArray : public NSVPatPaLocInfoArray, public NSRoot
+{
+	public :
+
+		//
+    // Constructeurs
+    //
+    NSVPatPaLocArray(NSContexte* pCtx = 0) ;
+    NSVPatPaLocArray(NSVPatPaLocArray& rv) ;
+    //
+    // Destructeur
+    //
+    ~NSVPatPaLocArray() ;
+    void vider() ;
+    //
+    // Opérateurs
+    //
+    NSVPatPaLocArray& operator=(NSVPatPaLocArray src) ;
+    //
+    // Fonctions de gestion du vecteur
+    //
+    bool ajouteElement(NSVPatPaLocInfo* pPatPaLoc) ;
+};
+
+class _NSBBCLASSE NSOldRootLink : public NSRootLink
+{
+ public:
+
+  //! constructor
+  NSOldRootLink() ;
+
+  //! destructor
+  ~NSOldRootLink() ;
+
+  //! Transformation d'une relation en code
+	string          donneOldString(NODELINKTYPES iRelation) ;
+
+  //! Transformation d'un code en relation
+	NODELINKTYPES   donneOldRelation(string sRelation) ;
+} ;
+
+//---------------------------------------------------------------
+//fixer le type de document
+//---------------------------------------------------------------
+class NSTransTermeLexique : public TDialog, public NSRoot
+{
+	public :
+
+		NSUtilLexique* pNewDrug ;
+		string* 		   pTypeDocum ;
+    OWL::TStatic*  pOldDrug ;
+    string         sOldDrugCode ;
+    string         sPathName ;
+
+		NSTransTermeLexique(TWindow* pere, NSContexte* pCtx, string* pTypeDocument,                     string sOldCode, string sPath, TModule* module = 0) ;
+		~NSTransTermeLexique() ;
+
+		void CmOk() ;		void CmCancel() ;
+		void SetupWindow() ;
+
+	DECLARE_RESPONSE_TABLE(NSTransTermeLexique) ;};
+
+// Taille des champs du fichier LEXIMED
+
+# define OLDRUG_LIBELLE_LEN       65
+# define OLDRUG_CODE_LEN          BASE_LEXI_LEN
+# define OLDRUG_GRAMMAIRE_LEN      3
+# define OLDRUG_FREQ_LEN           1
+
+// Indice des champs du fichier LEXIMED
+
+# define OLDRUG_LIBELLE_FIELD			 1
+# define OLDRUG_CODE_FIELD         2
+# define OLDRUG_GRAMMAIRE_FIELD    3
+# define OLDRUG_FREQ_FIELD         4
+
+class _NSBBCLASSE NSOldDrugData
+{
+ public:
+
+	// Variables de stockage des valeurs
+	char libelle[OLDRUG_LIBELLE_LEN + 1] ;
+	char code[OLDRUG_CODE_LEN + 1] ;
+	char grammaire[OLDRUG_GRAMMAIRE_LEN + 1] ;
+	char freq[OLDRUG_FREQ_LEN + 1] ;
+
+	string libelleLong ;
+
+	NSOldDrugData() ;
+	NSOldDrugData(NSOldDrugData& rv) ;
+	~NSOldDrugData() ;
+
+	NSOldDrugData& operator=(NSOldDrugData src) ;
+	int 					 operator==(const NSOldDrugData& o) ;
+} ;
+
+// Objet dérivé de NSFiche servant aux accès de base de données
+//
+class _NSBBCLASSE NSOldDrug : public NSFiche
+{
+	public:
+
+		// Objet qui contient les données
+		NSOldDrugData	*pDonnees ;
+
+		NSOldDrug(NSSuper *pSuper) ;
+		NSOldDrug(NSOldDrug& rv) ;
+		~NSOldDrug() ;
+
+		void					alimenteFiche() ;
+		void					videFiche() ;
+		DBIResult			open(string pathbase) ;
+		DBIResult			getPatRecord() ;
+
+		bool					trouvePathologData(string *pCode, NSOldDrugData *pData, bool afficheErreur = true) ;
+		DBIResult			trouveCode(string *pCode, DBISearchCond searchMode = keySEARCHEQ, DBILockType Blocage = dbiWRITELOCK, bool bErrMessage = true) ;
+		DBIResult			trouveLibelle(string *pLibelle, DBISearchCond searchMode = keySEARCHEQ, DBILockType Blocage = dbiWRITELOCK) ;
+
+		string				*donneLibelle()				{ return &(pDonnees->libelleLong) ; }
+		string  			donneLibelleLexique() { return string(pDonnees->libelle) ; }
+		char					*donneCode() 	 				{ return pDonnees->code ; }
+
+		virtual bool	Create() ;
+		virtual bool	Modify() ;
+
+		NSOldDrug& 	  operator=(NSOldDrug src) ;
+		int						operator==( const NSOldDrug& o ) ;
+} ;
+
+//---------------------------------------------------------------------------
+//  Classe NSOldDrugInfo  (destinée à être stockée dans une Array)
+//---------------------------------------------------------------------------
+class _NSBBCLASSE NSOldDrugInfo
+{
+	public:
+
+		// Objet qui contient les données
+		NSOldDrugData	*pDonnees ;
+
+		NSOldDrugInfo() ;
+		NSOldDrugInfo(NSOldDrug *) ;
+		NSOldDrugInfo(NSOldDrugInfo& rv) ;
+		~NSOldDrugInfo() ;
+
+		string					*donneLibelle() { return &(pDonnees->libelleLong) ; }
+		char						*donneCode() 	  { return pDonnees->code ; }
+
+		NSOldDrugInfo&	operator=(NSOldDrugInfo src) ;
+		int							operator==( const NSOldDrugInfo& o) ;
+} ;
+
+#endif
+

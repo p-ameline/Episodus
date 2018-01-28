@@ -1,0 +1,65 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+<TITLE>SplitColumnsNoTrim</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <META name="GENERATOR" content="Doc-O-Matic">
+    <LINK rel="STYLESHEET" href="default.css" type="text/css">
+
+<SCRIPT LANGUAGE="JavaScript1.2" SRC="scripts.js"></SCRIPT>
+</HEAD>
+<BODY CLASS="Element57">
+<TABLE BORDER="0" BGCOLOR="#AACCFF" WIDTH="100%" CELLSPACING="0" CELLPADDING="0">
+<TR><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element1">
+Indy 9</DIV>
+</TD><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element2">
+<A HREF="content.html" CLASS="Element59">Content</A> | <A HREF="idx.html" CLASS="Element59">Index</A> | <A HREF="symref.html" CLASS="Element59">Reference</A></DIV>
+</TD></TR></TABLE><DIV CLASS="Element58">
+<DIV CLASS="Element5">
+SplitColumnsNoTrim</DIV>
+<DIV CLASS="Element7">
+<A HREF="015334.html" CLASS="Element59">See Also</A>, <A HREF="002912.html" CLASS="Element59">Unit: IdStrings</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Loads delimited strings into a TStrings instance.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>procedure</STRONG> SplitColumnsNoTrim(<STRONG>const</STRONG> AData: <STRONG>String</STRONG>; AStrings: TStrings; <STRONG>const</STRONG> ADelim: <STRONG>String</STRONG> = ' ');</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Unit</DIV>
+<DIV CLASS="Element69">
+<A HREF="002912.html" CLASS="Element59">IdStrings</A></DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+const AData: String</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Values to bhe parsed into lines in the TStrings instance.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+AStrings: TStrings</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+TStrings to contains the separated tokens from AData.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+const ADelim: String = ' '</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Delimiter character for separating lines in AData. Default value is <A HREF="000286.html" CLASS="Element59">CHAR32</A>.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+SplitColumnsNoTrim is a utility procedure that loads values from AData into the string instance AStrings. Values in AData are separated at the delimiter character ADelim, and stored as individual lines in the TStrings instance.<P CLASS="Element10">
+SplitColumnsNoTrim will clear the contents of AStrings prior to separating AData into lines. As lines are are located in AData, the TStrings.AddObject method is called to add the string value and a pointer to the integer position for the string value to the AStrings instance. SplitColumnsNoTrim is like <A HREF="007077.html" CLASS="Element59">SplitColumns</A> except that whitespace characters are <STRONG>NOT</STRONG> removed from the parsed values prior to being added to the TStrings instance in AStrings.</DIV>
+</DIV>
+<DIV CLASS="Element62">
+<HR>Created with Doc-O-Matic 2 donated to <STRONG><A HREF="http://www.delphi-jedi.org">Project JEDI</A></STRONG>. Commercial license available from the <STRONG><A HREF="http://www.doc-o-matic.com">Doc-O-Matic site</A></STRONG>.</DIV>
+</DIV></BODY></HTML>

@@ -1,0 +1,85 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+<TITLE>DateTimeToGmtOffSetStr</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <META name="GENERATOR" content="Doc-O-Matic">
+    <LINK rel="STYLESHEET" href="default.css" type="text/css">
+
+<SCRIPT LANGUAGE="JavaScript1.2" SRC="scripts.js"></SCRIPT>
+</HEAD>
+<BODY CLASS="Element57">
+<TABLE BORDER="0" BGCOLOR="#AACCFF" WIDTH="100%" CELLSPACING="0" CELLPADDING="0">
+<TR><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element1">
+Indy 9</DIV>
+</TD><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element2">
+<A HREF="content.html" CLASS="Element59">Content</A> | <A HREF="idx.html" CLASS="Element59">Index</A> | <A HREF="symref.html" CLASS="Element59">Reference</A></DIV>
+</TD></TR></TABLE><DIV CLASS="Element58">
+<DIV CLASS="Element5">
+DateTimeToGmtOffSetStr</DIV>
+<DIV CLASS="Element7">
+<A HREF="015288.html" CLASS="Element59">See Also</A>, <A HREF="002193.html" CLASS="Element59">Unit: IdGlobal</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Retrieves the GMT time offset for a date/time value.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>function</STRONG> DateTimeToGmtOffSetStr(ADateTime: TDateTime; SubGMT: Boolean): <STRONG>string</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Unit</DIV>
+<DIV CLASS="Element69">
+<A HREF="002193.html" CLASS="Element59">IdGlobal</A></DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+ADateTime: TDateTime</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Value to be converted to a GMT offset string.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+SubGMT: Boolean</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Add the prefix &quot;GMT&quot; to the return value.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Return Value</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+String - The offset from GMT time as a string.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+DateTimeToGmtOffSetStr is a String function used to return the time difference for the ADateTime parameter as an Internet Time difference string. The time difference contains the number of hours and minutes needed to adjust a time value the local timezone to GMT (Greenwich Mean Time). The return value for DateTimeToGmtOffSetStr is expressed in one of the following forms:<P CLASS="Element10">
+<UL>
+<LI>GMT - Same as GMT, offset is 0 hours and 0 minutes.<P CLASS="Element10">
+<LI>-0500 - Local time is 5 hours and 0 minutes earlier than GMT.<P CLASS="Element10">
+<LI>+0130 - Local time is 1 hour and 20 minutes later than GMT.</UL>
+<P CLASS="Element10">
+ADateTime is the native Date/Time value containing the number of hours and minutes to use for the local timezone. ADateTime is not a complete Date/Time value.<P CLASS="Element10">
+SubGMT indicates that the return value should substitute the prefix &quot;<STRONG>GMT</STRONG>&quot; for a time difference string where the offet is 0 hours and 0 minutes. When SubGMT is True, the prefix is used as the time difference string, otherwise the prefix is omitted.<P CLASS="Element10">
+DateTimeToGmtOffSetStr calls DecodeTime to extract the hour and minute components of ADateTime. When ADateTime contains a negative offset, the return value is formatted using the convention:<P CLASS="Element10">
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12">    -HHMM</PRE></DIV>
+</DIV>
+<P CLASS="Element10">
+When ADateTime contains a positive offset, the return value is formatted using the convention:<P CLASS="Element10">
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12">    +HHMM</PRE></DIV>
+</DIV>
+<P CLASS="Element10">
+Where HH represents the 2-digit number of hours in the offset, and MM represents the 2-digit number of minutes in the offset.<P CLASS="Element10">
+To convert an Internet GMT difference string to a TDateTime value that can be used in Date arithmetic operations, use the <A HREF="000675.html" CLASS="Element59">GmtOffsetStrToDateTime</A> function.</DIV>
+</DIV>
+<DIV CLASS="Element62">
+<HR>Created with Doc-O-Matic 2 donated to <STRONG><A HREF="http://www.delphi-jedi.org">Project JEDI</A></STRONG>. Commercial license available from the <STRONG><A HREF="http://www.doc-o-matic.com">Doc-O-Matic site</A></STRONG>.</DIV>
+</DIV></BODY></HTML>

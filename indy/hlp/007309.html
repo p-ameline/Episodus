@@ -1,0 +1,174 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+<TITLE>TIdEncoder</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <META name="GENERATOR" content="Doc-O-Matic">
+    <LINK rel="STYLESHEET" href="default.css" type="text/css">
+
+<SCRIPT LANGUAGE="JavaScript1.2" SRC="scripts.js"></SCRIPT>
+</HEAD>
+<BODY CLASS="Element57">
+<TABLE BORDER="0" BGCOLOR="#AACCFF" WIDTH="100%" CELLSPACING="0" CELLPADDING="0">
+<TR><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element1">
+Indy 9</DIV>
+</TD><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element2">
+<A HREF="content.html" CLASS="Element59">Content</A> | <A HREF="idx.html" CLASS="Element59">Index</A> | <A HREF="symref.html" CLASS="Element59">Reference</A></DIV>
+</TD></TR></TABLE><DIV CLASS="Element58">
+<DIV CLASS="Element5">
+TIdEncoder</DIV>
+<DIV CLASS="Element7">
+<A HREF="010851.html" CLASS="Element59">Hierarchy</A>, <A HREF="010852.html" CLASS="Element59">Properties</A>, <A HREF="010853.html" CLASS="Element59">Methods</A>, <A HREF="010854.html" CLASS="Element59">See Also</A>, <A HREF="002133.html" CLASS="Element59">Unit: IdCoder</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Abstract ancestor for Indy encoder classes.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12">TIdEncoder = <STRONG>class</STRONG>(<A HREF="007213.html" CLASS="Element59">TIdBaseComponent</A>)</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Unit</DIV>
+<DIV CLASS="Element69">
+<A HREF="002133.html" CLASS="Element59">IdCoder</A></DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+TIdEncoder is a <A HREF="007213.html" CLASS="Element59">TIdBaseComponent</A> descendant that is the abstract ancestor for all Indy classes that perform encoding operations on String- or Stream-based origins and return the encoded value as a String value. Descendants of TIdEncoder include <A HREF="007310.html" CLASS="Element59">TIdEncoder3to4</A> and <A HREF="007313.html" CLASS="Element59">TIdEncoderQuotedPrintable</A>.<P CLASS="Element10">
+Applications do not normally create instances of TIdEncoder, and instead use one of the descendant classes that implements a specific encoding algorithm. TIdEncoder can be used an as ancestor for classes that utilize a unique encoding algorithm and also adhere to the Indy coder framework.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0000">TIdEncoder.Encode</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007309.html" CLASS="Element59">TIdEncoder</A>, <A HREF="010855.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Provides encoding for String- or Stream-based input values.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>function</STRONG> Encode(<STRONG>const</STRONG> ASrc: <STRONG>string</STRONG>): <STRONG>string</STRONG>; <STRONG>overload</STRONG>;
+<STRONG>function</STRONG> Encode(ASrcStream: TStream; <STRONG>const</STRONG> ABytes: integer = MaxInt): <STRONG>string</STRONG>; <STRONG>virtual</STRONG>; <STRONG>abstract</STRONG>; <STRONG>overload</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+const ASrc: string</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+String value to be encoded.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+ASrcStream: TStream</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Stream-based values to be encoded.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+const ABytes: integer = MaxInt</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Number of bytes in the input stream to be encoded. Default value is MaxInt.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Return Value</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+String - Encoded value for the input parameter(s).</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+<A HREF="007309.html#0000" CLASS="Element59">Encode</A> is an overloaded String function in <A HREF="007309.html" CLASS="Element59">TIdEncoder</A> that allows String- or Stream-based input values to be encoded. The encoded value of the input parameter is the return value for the function.<P CLASS="Element10">
+ASrc contains the un-encoded valued to be used by the function. In the Stream-based variant, ASrcStream contains the un-encoded input values. ABytes represents the number of bytes in ASrcStream to be affected by the encoding operation. When ommitted, ABytes defaults to the constant value MaxInt, and allows the function to read up to MaxInt byte values or until the end of the Stream is reached.<P CLASS="Element10">
+The Stream-based variant of <A HREF="007309.html#0000" CLASS="Element59">Encode</A> is a virtual function in <A HREF="007309.html" CLASS="Element59">TIdEncoder</A>, and allows descendant classes to reimplement the function using specific encoding algorithms.<P CLASS="Element10">
+<A HREF="007309.html#0000" CLASS="Element59">Encode</A> is called by the class function <A HREF="007309.html#0002" CLASS="Element59">EncodeString</A>, when no application instance of <A HREF="007309.html" CLASS="Element59">TIdEncoder</A> is required or available.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0001">TIdEncoder.Encode</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007309.html" CLASS="Element59">TIdEncoder</A>, <A HREF="010856.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Provides encoding for String- or Stream-based input values.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>function</STRONG> <A HREF="007309.html#0000" CLASS="Element59">Encode</A>(<STRONG>const</STRONG> ASrc: <STRONG>string</STRONG>): <STRONG>string</STRONG>; <STRONG>overload</STRONG>;
+<STRONG>function</STRONG> <A HREF="007309.html#0000" CLASS="Element59">Encode</A>(ASrcStream: TStream; <STRONG>const</STRONG> ABytes: integer = MaxInt): <STRONG>string</STRONG>; <STRONG>virtual</STRONG>; <STRONG>abstract</STRONG>; <STRONG>overload</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+const ASrc: string</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+String value to be encoded.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+ASrcStream: TStream</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Stream-based values to be encoded.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+const ABytes: integer = MaxInt</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Number of bytes in the input stream to be encoded. Default value is MaxInt.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Return Value</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+String - Encoded value for the input parameter(s).</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+<A HREF="007309.html#0000" CLASS="Element59">Encode</A> is an overloaded String function in <A HREF="007309.html" CLASS="Element59">TIdEncoder</A> that allows String- or Stream-based input values to be encoded. The encoded value of the input parameter is the return value for the function.<P CLASS="Element10">
+ASrc contains the un-encoded valued to be used by the function. In the Stream-based variant, ASrcStream contains the un-encoded input values. ABytes represents the number of bytes in ASrcStream to be affected by the encoding operation. When ommitted, ABytes defaults to the constant value MaxInt, and allows the function to read up to MaxInt byte values or until the end of the Stream is reached.<P CLASS="Element10">
+The Stream-based variant of <A HREF="007309.html#0000" CLASS="Element59">Encode</A> is a virtual function in <A HREF="007309.html" CLASS="Element59">TIdEncoder</A>, and allows descendant classes to reimplement the function using specific encoding algorithms.<P CLASS="Element10">
+<A HREF="007309.html#0000" CLASS="Element59">Encode</A> is called by the class function <A HREF="007309.html#0002" CLASS="Element59">EncodeString</A>, when no application instance of <A HREF="007309.html" CLASS="Element59">TIdEncoder</A> is required or available.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0002">TIdEncoder.EncodeString</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007309.html" CLASS="Element59">TIdEncoder</A>, <A HREF="010857.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Class function for encoding a String value.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>class</STRONG> <STRONG>function</STRONG> EncodeString(<STRONG>const</STRONG> AIn: <STRONG>string</STRONG>): <STRONG>string</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+const AIn: string</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Input value to be encoded.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Return Value</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+String - Encoded value of the input parameter.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+EncodeString is a Class function in <A HREF="007309.html" CLASS="Element59">TIdEncoder</A> that provides encoding of the value in AIn using a temporary instance of <A HREF="007309.html" CLASS="Element59">TIdEncoder</A>. EncodeString calls <A HREF="007309.html#0000" CLASS="Element59">Encode</A> using the transient instance to get the return value. The temporary <A HREF="007309.html" CLASS="Element59">TIdEncoder</A> instance is freed before exiting from the EncodeString method.<P CLASS="Element10">
+Applications can use EncodeString when an instance of <A HREF="007309.html" CLASS="Element59">TIdEncoder</A> is neither needed nor available in the application.</DIV>
+</DIV>
+<DIV CLASS="Element62">
+<HR>Created with Doc-O-Matic 2 donated to <STRONG><A HREF="http://www.delphi-jedi.org">Project JEDI</A></STRONG>. Commercial license available from the <STRONG><A HREF="http://www.doc-o-matic.com">Doc-O-Matic site</A></STRONG>.</DIV>
+</DIV></BODY></HTML>

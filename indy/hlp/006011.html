@@ -1,0 +1,73 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+<TITLE>PosInStrArray</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <META name="GENERATOR" content="Doc-O-Matic">
+    <LINK rel="STYLESHEET" href="default.css" type="text/css">
+
+<SCRIPT LANGUAGE="JavaScript1.2" SRC="scripts.js"></SCRIPT>
+</HEAD>
+<BODY CLASS="Element57">
+<TABLE BORDER="0" BGCOLOR="#AACCFF" WIDTH="100%" CELLSPACING="0" CELLPADDING="0">
+<TR><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element1">
+Indy 9</DIV>
+</TD><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element2">
+<A HREF="content.html" CLASS="Element59">Content</A> | <A HREF="idx.html" CLASS="Element59">Index</A> | <A HREF="symref.html" CLASS="Element59">Reference</A></DIV>
+</TD></TR></TABLE><DIV CLASS="Element58">
+<DIV CLASS="Element5">
+PosInStrArray</DIV>
+<DIV CLASS="Element7">
+<A HREF="002193.html" CLASS="Element59">Unit: IdGlobal</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Searches an array of strings for an occurrence of the search string.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>function</STRONG> PosInStrArray(<STRONG>const</STRONG> SearchStr: <STRONG>string</STRONG>; Contents: <STRONG>array</STRONG> <STRONG>of</STRONG> <STRONG>string</STRONG>; <STRONG>const</STRONG> CaseSensitive: Boolean = True): Integer;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Unit</DIV>
+<DIV CLASS="Element69">
+<A HREF="002193.html" CLASS="Element59">IdGlobal</A></DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+const SearchStr: string</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+The value to find in the array of strings.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+Contents: array of string</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+- The array of strings to be searched.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+const CaseSensitive: Boolean = True</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Use case sensitivity, Default value is True.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Return Value</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Integer - Position of the search string in the array, or -1 when not found.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+PosInStrArray is an Integer function used find the first occurrence of the search string specified in SearchStr in the array Contents.<P CLASS="Element10">
+The lower and upper limits of the array Contents is determined using the Low and High functions.<P CLASS="Element10">
+When CaseSensitive is True, the values in SearchStr and the current array element must be an exact match. When CaseSensitive is False, the function <A HREF="000074.html" CLASS="Element59">AnsiSameText</A> is used to compare SearchStr to the string in the current array position.<P CLASS="Element10">
+The return value for the PosInStrArray function will be -1 if the search string does not exist in Contents.</DIV>
+</DIV>
+<DIV CLASS="Element62">
+<HR>Created with Doc-O-Matic 2 donated to <STRONG><A HREF="http://www.delphi-jedi.org">Project JEDI</A></STRONG>. Commercial license available from the <STRONG><A HREF="http://www.doc-o-matic.com">Doc-O-Matic site</A></STRONG>.</DIV>
+</DIV></BODY></HTML>

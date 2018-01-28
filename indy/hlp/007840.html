@@ -1,0 +1,109 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+<TITLE>TIdTelnetPeerThread</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <META name="GENERATOR" content="Doc-O-Matic">
+    <LINK rel="STYLESHEET" href="default.css" type="text/css">
+
+<SCRIPT LANGUAGE="JavaScript1.2" SRC="scripts.js"></SCRIPT>
+</HEAD>
+<BODY CLASS="Element57">
+<TABLE BORDER="0" BGCOLOR="#AACCFF" WIDTH="100%" CELLSPACING="0" CELLPADDING="0">
+<TR><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element1">
+Indy 9</DIV>
+</TD><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element2">
+<A HREF="content.html" CLASS="Element59">Content</A> | <A HREF="idx.html" CLASS="Element59">Index</A> | <A HREF="symref.html" CLASS="Element59">Reference</A></DIV>
+</TD></TR></TABLE><DIV CLASS="Element58">
+<DIV CLASS="Element5">
+TIdTelnetPeerThread</DIV>
+<DIV CLASS="Element7">
+<A HREF="014254.html" CLASS="Element59">Hierarchy</A>, <A HREF="014255.html" CLASS="Element59">Properties</A>, <A HREF="014256.html" CLASS="Element59">Methods</A>, <A HREF="014257.html" CLASS="Element59">Events</A>, <A HREF="014258.html" CLASS="Element59">See Also</A>, <A HREF="002922.html" CLASS="Element59">Unit: IdTelnetServer</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Implements a thread client for TELNET server connections.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12">TIdTelnetPeerThread = <STRONG>class</STRONG>(<A HREF="007613.html" CLASS="Element59">TIdPeerThread</A>)</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Unit</DIV>
+<DIV CLASS="Element69">
+<A HREF="002922.html" CLASS="Element59">IdTelnetServer</A></DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+TIdTelnetPeerThread is a <A HREF="007613.html" CLASS="Element59">TIdPeerThread</A> descendant that implements a threaded client used for connection to to a TELNET server. TIdTelnetPeerThread is the class type assigned to the TIdTelnetServer.ThreadClass property, and used when creating new client connections to the server.<P CLASS="Element10">
+TIdTelnetPeerThread provides properties and methods that allow the multi-threaded <A HREF="007842.html" CLASS="Element59">TIdTelnetServer</A> to perform connection, option negotiation, and authentication for client connections using the TELNET protocol.<P CLASS="Element10">
+TIdTelnetPeerThread also implements the Indy framework for thread execution and management, as defined in the <A HREF="007613.html" CLASS="Element59">TIdPeerThread</A> ancestor class.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0002">TIdTelnetPeerThread.TelnetData</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007840.html" CLASS="Element59">TIdTelnetPeerThread</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Represents account information for the Telnet client connection.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> TelnetData: <A HREF="008096.html" CLASS="Element59">TTelnetData</A>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+TelnetData is a read-only <A HREF="008096.html" CLASS="Element59">TTelnetData</A> property that represents information about the identity and credentials for the threaded client connection. TelnetData is used when the client thread connects to the Telnet server and the <A HREF="007842.html#0007" CLASS="Element59">TIdTelnetServer.OnAuthentication</A> event handler is used to verifiy the captured user name and password.<P CLASS="Element10">
+TelnetData is created in the <A HREF="007840.html#0000" CLASS="Element59">Create</A> constructor, and freed in the <A HREF="007840.html#0001" CLASS="Element59">Destroy</A> method.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0000">TIdTelnetPeerThread.Create</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007840.html" CLASS="Element59">TIdTelnetPeerThread</A>, <A HREF="014259.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Constructor for the object instance.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>constructor</STRONG> Create(ACreateSuspended: Boolean = True); <STRONG>override</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+ACreateSuspended: Boolean = True</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Indicates the TELNET client thread is created in suspended mode.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Create is the constructor for the object instance. Create calls the inherited Create method using the thread creation mode specified in ACreateSuspended. Create also allocates resources required for the <A HREF="007840.html#0002" CLASS="Element59">TelnetData</A> property prior to exiting from the method.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0001">TIdTelnetPeerThread.Destroy</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007840.html" CLASS="Element59">TIdTelnetPeerThread</A>, <A HREF="014260.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Frees the object instance.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>destructor</STRONG> Destroy; <STRONG>override</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Destroy is the destructor for the object instance. Destroy frees and release resources allocated in the <A HREF="007840.html#0000" CLASS="Element59">Create</A> constructor orior to calling the inherited Destroy method.</DIV>
+</DIV>
+<DIV CLASS="Element62">
+<HR>Created with Doc-O-Matic 2 donated to <STRONG><A HREF="http://www.delphi-jedi.org">Project JEDI</A></STRONG>. Commercial license available from the <STRONG><A HREF="http://www.doc-o-matic.com">Doc-O-Matic site</A></STRONG>.</DIV>
+</DIV></BODY></HTML>

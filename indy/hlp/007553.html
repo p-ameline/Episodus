@@ -1,0 +1,187 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+<TITLE>TIdMessageDecoderList</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <META name="GENERATOR" content="Doc-O-Matic">
+    <LINK rel="STYLESHEET" href="default.css" type="text/css">
+
+<SCRIPT LANGUAGE="JavaScript1.2" SRC="scripts.js"></SCRIPT>
+</HEAD>
+<BODY CLASS="Element57">
+<TABLE BORDER="0" BGCOLOR="#AACCFF" WIDTH="100%" CELLSPACING="0" CELLPADDING="0">
+<TR><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element1">
+Indy 9</DIV>
+</TD><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element2">
+<A HREF="content.html" CLASS="Element59">Content</A> | <A HREF="idx.html" CLASS="Element59">Index</A> | <A HREF="symref.html" CLASS="Element59">Reference</A></DIV>
+</TD></TR></TABLE><DIV CLASS="Element58">
+<DIV CLASS="Element5">
+TIdMessageDecoderList</DIV>
+<DIV CLASS="Element7">
+<A HREF="012548.html" CLASS="Element59">Hierarchy</A>, <A HREF="012549.html" CLASS="Element59">Methods</A>, <A HREF="012550.html" CLASS="Element59">See Also</A>, <A HREF="002288.html" CLASS="Element59">Unit: IdMessageCoder</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Provides a framework for registering and retrieving decoder classes for RFC 822 message parts.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12">TIdMessageDecoderList = <STRONG>class</STRONG>(TObject)</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Unit</DIV>
+<DIV CLASS="Element69">
+<A HREF="002288.html" CLASS="Element59">IdMessageCoder</A></DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+TIdMessageDecoderList is a TObject descendant that provides a framework for registering and retrieving decoder classes for RFC 822-compliant message parts.<P CLASS="Element10">
+All methods in TIdMessageDecoderList, except the Constructor and Destructor, are class methods that provide for registering a new decoder class, accessing a decoder by name, and determining when a decoder is appropriate for use on a given message part.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0000">TIdMessageDecoderList.ByName</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007553.html" CLASS="Element59">TIdMessageDecoderList</A>, <A HREF="012551.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Locates an instance of a registered decoder class by name.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>class</STRONG> <STRONG>function</STRONG> ByName(<STRONG>const</STRONG> AName: <STRONG>string</STRONG>): <A HREF="007550.html" CLASS="Element59">TIdMessageDecoderInfo</A>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+const AName: string</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Decoder class name to be located.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Return Value</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+<A HREF="007550.html" CLASS="Element59">TIdMessageDecoderInfo</A> - Container that holds information and class type for the registered decoder class.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+ByName is a <A HREF="007550.html" CLASS="Element59">TIdMessageDecoderInfo</A> class function used to locate an instance of a registered decoder class by the name specified in AName. ByName searches the global list of registerd decoder classes to locate an instance with a name matching AName.<P CLASS="Element10">
+If there is no registered decoder class with a name matching AName, an <A HREF="000375.html" CLASS="Element59">EIdException</A> is raised with the constant message <A HREF="006551.html" CLASS="Element59">RSMessageDecoderNotFound</A> and the value in AName.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0001">TIdMessageDecoderList.CheckForStart</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007553.html" CLASS="Element59">TIdMessageDecoderList</A>, <A HREF="012552.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Determines the registered decoder class instance to be used for an RFC 822 message part.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>class</STRONG> <STRONG>function</STRONG> CheckForStart(ASender: <A HREF="007544.html" CLASS="Element59">TIdMessage</A>; <STRONG>const</STRONG> ALine: <STRONG>string</STRONG>): <A HREF="007549.html" CLASS="Element59">TIdMessageDecoder</A>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+ASender: TIdMessage</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Message to be associated with the decoder class instance.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+const ALine: string</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Text to be examined to determine the decoder needed for the message part.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Return Value</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+<A HREF="007549.html" CLASS="Element59">TIdMessageDecoder</A> - Decoder class instance for the message part.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+CheckForStart is a <A HREF="007549.html" CLASS="Element59">TIdMessageDecoder</A> class function in <A HREF="007553.html" CLASS="Element59">TIdMessageDecoderList</A> that determines the registered decoder class instance to be used for an RFC 822 message part.<P CLASS="Element10">
+CheckForStart examines the list of registered decoder classes, and calls the <A HREF="007550.html#0000" CLASS="Element59">TIdMessageDecoderInfo.CheckForStart</A> method for each instance. When a decoder class is found for the message part, the method exits and returns the <A HREF="007550.html" CLASS="Element59">TIdMessageDecoderInfo</A> instance for the message part. If no decoder class is located for the message part, the return value for CheckForStart is Nil.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0002">TIdMessageDecoderList.Create</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007553.html" CLASS="Element59">TIdMessageDecoderList</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Constructor for the object instance.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>constructor</STRONG> Create;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Create is the Constructor for the object instance, and relies on the inherited Create method. Create also initializes an internal list used to identify and retrieve registered message decoder class instances.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0003">TIdMessageDecoderList.Destroy</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007553.html" CLASS="Element59">TIdMessageDecoderList</A>, <A HREF="012553.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Destructor for the object instance.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>destructor</STRONG> Destroy; <STRONG>override</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Destroy is the Destructor for the object instance. Destroy iterates over a list of the registered decoder class instances, and frees each <A HREF="007550.html" CLASS="Element59">TIdMessageDecoderInfo</A> instance. When all registered decoder class instances have been freed, Destroy also frees the list. Finally, Destroy calls the inherited Destroy method.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0004">TIdMessageDecoderList.RegisterDecoder</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007553.html" CLASS="Element59">TIdMessageDecoderList</A>, <A HREF="012554.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Adds a decoder class to the list of registered decoder classes.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>class</STRONG> <STRONG>procedure</STRONG> RegisterDecoder(<STRONG>const</STRONG> AMessageCoderName: <STRONG>string</STRONG>; AMessageCoderInfo: <A HREF="007550.html" CLASS="Element59">TIdMessageDecoderInfo</A>);</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+const AMessageCoderName: string</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Name to used for identification of the registered decoder class.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+AMessageCoderInfo: TIdMessageDecoderInfo</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Decoder class information to be registered.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+RegisterDecoder is a class procedure in <A HREF="007553.html" CLASS="Element59">TIdMessageDecoderList</A> that adds information about decoder classes for RFC message parts to the list of registered decoder classes.<P CLASS="Element10">
+RegisterDecoder checks to make sure that the list for registered decoder classes has been initalized to an instance of <A HREF="007553.html" CLASS="Element59">TIdMessageDecoderList</A>. RegisterDecoder then adds the decoder information in AMessageCoderInfo to the list with the name specified in AMessageCoderName.<P CLASS="Element10">
+RegisterDecoder is called in the initialization section of the unit that contains the decoder class, like <A HREF="002289.html" CLASS="Element59">IdMessageCoderMIME.pas</A>, <A HREF="002290.html" CLASS="Element59">IdMessageCoderUUE.pas</A>, and <A HREF="002291.html" CLASS="Element59">IdMessageCoderXXE.pas</A>.</DIV>
+</DIV>
+<DIV CLASS="Element62">
+<HR>Created with Doc-O-Matic 2 donated to <STRONG><A HREF="http://www.delphi-jedi.org">Project JEDI</A></STRONG>. Commercial license available from the <STRONG><A HREF="http://www.doc-o-matic.com">Doc-O-Matic site</A></STRONG>.</DIV>
+</DIV></BODY></HTML>

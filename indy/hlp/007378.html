@@ -1,0 +1,286 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+<TITLE>TIdHTTPDefaultSessionList</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <META name="GENERATOR" content="Doc-O-Matic">
+    <LINK rel="STYLESHEET" href="default.css" type="text/css">
+
+<SCRIPT LANGUAGE="JavaScript1.2" SRC="scripts.js"></SCRIPT>
+</HEAD>
+<BODY CLASS="Element57">
+<TABLE BORDER="0" BGCOLOR="#AACCFF" WIDTH="100%" CELLSPACING="0" CELLPADDING="0">
+<TR><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element1">
+Indy 9</DIV>
+</TD><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element2">
+<A HREF="content.html" CLASS="Element59">Content</A> | <A HREF="idx.html" CLASS="Element59">Index</A> | <A HREF="symref.html" CLASS="Element59">Reference</A></DIV>
+</TD></TR></TABLE><DIV CLASS="Element58">
+<DIV CLASS="Element5">
+TIdHTTPDefaultSessionList</DIV>
+<DIV CLASS="Element7">
+<A HREF="011477.html" CLASS="Element59">Hierarchy</A>, <A HREF="011478.html" CLASS="Element59">Properties</A>, <A HREF="011479.html" CLASS="Element59">Methods</A>, <A HREF="011480.html" CLASS="Element59">Events</A>, <A HREF="002147.html" CLASS="Element59">Unit: IdCustomHTTPServer</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Implements a thread-safe container for persistent HTTP sessions.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12">TIdHTTPDefaultSessionList = <STRONG>class</STRONG>(<A HREF="007377.html" CLASS="Element59">TIdHTTPCustomSessionList</A>)</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Unit</DIV>
+<DIV CLASS="Element69">
+<A HREF="002147.html" CLASS="Element59">IdCustomHTTPServer</A></DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+TIdHTTPDefaultSessionList is a <A HREF="007377.html" CLASS="Element59">TIdHTTPCustomSessionList</A> descendant that implements the container framework declared in the ancestor class. TIdHTTPDefaultSessionList provides an implementation that uses a TThreadList to store and manage TIdHTPSession object instances.<P CLASS="Element10">
+TIdHTTPDefaultSessionList overrides abstract virtual methods from the ancestor class to implement the operations needed to maintain the session list, including:<P CLASS="Element10">
+<UL>
+<LI><A HREF="007378.html#0000" CLASS="Element59">Add</A><P CLASS="Element10">
+<LI><A HREF="007378.html#0001" CLASS="Element59">Clear</A><P CLASS="Element10">
+<LI><A HREF="007378.html#0003" CLASS="Element59">CreateSession</A><P CLASS="Element10">
+<LI><A HREF="007378.html#0004" CLASS="Element59">CreateUniqueSession</A><P CLASS="Element10">
+<LI><A HREF="007378.html#0006" CLASS="Element59">GetSession</A><P CLASS="Element10">
+<LI><A HREF="007378.html#0007" CLASS="Element59">PurgeStaleSessions</A><P CLASS="Element10">
+<LI>RemoveSession</UL>
+<P CLASS="Element10">
+TIdHTTPDefaultSessionList extends the ancestor by including the RemoveSessionFromLockedList method to provide thread-safe removal of a persistent session object from the internal TThreadList.<P CLASS="Element10">
+TIdHTTPDefaultSessionList is type used to represent the TIdHTTPServer.SessionList property in an HTTP server implementation.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0000">TIdHTTPDefaultSessionList.Add</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007378.html" CLASS="Element59">TIdHTTPDefaultSessionList</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Adds a persistent HTTP session to the thread-safe container.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>procedure</STRONG> Add(ASession: <A HREF="007393.html" CLASS="Element59">TIdHTTPSession</A>); <STRONG>override</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+ASession: TIdHTTPSession</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+HTTP session to be added to the container.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Add is an overridden procedure in <A HREF="007378.html" CLASS="Element59">TIdHTTPDefaultSessionList</A>, and adds the persistent HTTP session specified in ASession to the thread-safe container. Add calls the TThreadList.Add method to store ASession in the thread list.<P CLASS="Element10">
+Use <A HREF="007378.html#0006" CLASS="Element59">GetSession</A> to retrieve a session added to the container using Add.<P CLASS="Element10">
+Use RemoveSession to delete a session from the container.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0001">TIdHTTPDefaultSessionList.Clear</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007378.html" CLASS="Element59">TIdHTTPDefaultSessionList</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Removes HTTP sessions from the thread-safe session list.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>procedure</STRONG> Clear; <STRONG>override</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Clear is a procedure used to remove all <A HREF="007393.html" CLASS="Element59">TIdHTTPSession</A> objects in the thread-safe session list. Clear will insure that the thread list is locked prior to triggering the OnSessionEnd event handler, clearing the session owner, and freeing all <A HREF="007393.html" CLASS="Element59">TIdHTTPSession</A> instances in the list. Clear unlocks the thread list prior to exiting the method.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0002">TIdHTTPDefaultSessionList.Create</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007378.html" CLASS="Element59">TIdHTTPDefaultSessionList</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Constructor for the object instance.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>constructor</STRONG> Create(AOwner: TComponent); <STRONG>override</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+AOwner: TComponent</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Component that owns the container.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Create is the constructor for the object instance, and calls the inherited Create method using AOwner as the owner of the container. Create allocates resources required for the internal thread list used to store HTTP session instances, and sets the thread list capacity to the value specified in SessionCapacity.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0003">TIdHTTPDefaultSessionList.CreateSession</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007378.html" CLASS="Element59">TIdHTTPDefaultSessionList</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Adds a new HTTP session to the thread-safe container.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>function</STRONG> CreateSession(<STRONG>const</STRONG> RemoteIP: <STRONG>String</STRONG>; <STRONG>const</STRONG> SessionID: <STRONG>String</STRONG>): <A HREF="007393.html" CLASS="Element59">TIdHTTPSession</A>; <STRONG>override</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+const RemoteIP: String</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+The peer IP address for the session.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+const SessionID: String</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+The identifier for the session.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Return Value</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+<A HREF="007393.html" CLASS="Element59">TIdHTTPSession</A> - The session object reference.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+CreateSession is a <A HREF="007393.html" CLASS="Element59">TIdHTTPSession</A> function used to create a new persistent HTTP session, and add the new session to the container. CreateSession constructs a new <A HREF="007393.html" CLASS="Element59">TIdHTTPSession</A> using the values specified in RemoteIP and SessionID. RemoteIP is the IP address of the remote computer system that is the endpoint for the HTTP session. SessionID is the identifier for the new HTTP session.<P CLASS="Element10">
+CreateSession is used by <A HREF="007392.html" CLASS="Element59">TIdHTTPServer</A> to retrieve a new HTTP session when a new client connection is established.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0004">TIdHTTPDefaultSessionList.CreateUniqueSession</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007378.html" CLASS="Element59">TIdHTTPDefaultSessionList</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Creates a new HTTP asession with a unique session ID and remote IP address.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>function</STRONG> CreateUniqueSession(<STRONG>const</STRONG> RemoteIP: <STRONG>String</STRONG>): <A HREF="007393.html" CLASS="Element59">TIdHTTPSession</A>; <STRONG>override</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+const RemoteIP: String</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+IP address or host name for the remote connection.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Return Value</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+<A HREF="007393.html" CLASS="Element59">TIdHTTPSession</A> - new HTTP session created for a client connection.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+CreateUniqueSession is a <A HREF="007393.html" CLASS="Element59">TIdHTTPSession</A> function that is ued to insure a new HTTP session is created for a client connection having the remote IP address specified in RemoteIP. CreateUniqueSession generates a random value for the session identifer used in the HTTP session, and calls to <A HREF="007378.html#0002" CLASS="Element59">Create</A> session when the RemoteIP and SessionID combination is guaranteed to be unique.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0005">TIdHTTPDefaultSessionList.Destroy</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007378.html" CLASS="Element59">TIdHTTPDefaultSessionList</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Destructor for the object instance.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>destructor</STRONG> Destroy; <STRONG>override</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Destroy is the destructor for the object instance. Destroy is responsible for clearing and freeing resource allocated to the internal thread-safe session list for the container. Destroy calls the inherited Destroy method prior to exiting.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0006">TIdHTTPDefaultSessionList.GetSession</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007378.html" CLASS="Element59">TIdHTTPDefaultSessionList</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Retrieves a persistent HTTP session having the specified ID and remote IP address.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>function</STRONG> GetSession(<STRONG>const</STRONG> SessionID: <STRONG>string</STRONG>; <STRONG>const</STRONG> RemoteIP: <STRONG>string</STRONG>): <A HREF="007393.html" CLASS="Element59">TIdHTTPSession</A>; <STRONG>override</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+const SessionID: string</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Session identifier to be located.</DIV>
+</DIV>
+<DIV CLASS="Element17">
+const RemoteIP: string</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Optional remote IP address for the session.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Return Value</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+<A HREF="007393.html" CLASS="Element59">TIdHTTPSession</A> - Persisten session retrieved from the container.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+GetSession is a <A HREF="007393.html" CLASS="Element59">TIdHTTPSession</A> function used to retrive a persistent HTTP session having the remote IP address and session identifier specified in SessionID and RemoteIP. GetSession insures that the internal thread list is locked prior to accessing sessions in the container.<P CLASS="Element10">
+GetSession will iteratively search through all sessions in the container until a session is located with the specified SessionID and RemoteIP. If RemoteIP contains an empty string, the first session with the same session identifier is used.<P CLASS="Element10">
+When a session is located for the session identifer and remote IP address, the session is timestamped for last access to prevent purging as a stale session.<P CLASS="Element10">
+The return value for GetSession can contain Nil when a session cannot be located with the specified values.<P CLASS="Element10">
+GetSession will unlock the internal thread list prior to exiting from the method.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0007">TIdHTTPDefaultSessionList.PurgeStaleSessions</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007378.html" CLASS="Element59">TIdHTTPDefaultSessionList</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Removes one or more expired sessions from the session list.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>procedure</STRONG> PurgeStaleSessions(PurgeAll: Boolean = false); <STRONG>override</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+PurgeAll: Boolean = false</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+<A HREF="007378.html#0001" CLASS="Element59">Clear</A> one or all stale sessions. Default value is False.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+PurgeStaleSessions is a procedure used to remove persistent HTTP sessions where the last access timestamp and session timeout properties indicate that the session has expired. PurgeStaleSessions can be used to remove one or more session that have expired, as indicated in the PurgeAll argument.<P CLASS="Element10">
+PurgeStaleSessions will iteratively call RemoveSessionFromLockedList to remove the expired session(s). PurgeStaleSessions insures that the internal thread list is locked prior to removing stale sessions, and is unlocked prior to exiting from the method.</DIV>
+</DIV>
+<DIV CLASS="Element62">
+<HR>Created with Doc-O-Matic 2 donated to <STRONG><A HREF="http://www.delphi-jedi.org">Project JEDI</A></STRONG>. Commercial license available from the <STRONG><A HREF="http://www.doc-o-matic.com">Doc-O-Matic site</A></STRONG>.</DIV>
+</DIV></BODY></HTML>

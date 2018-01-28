@@ -1,0 +1,79 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+<TITLE>TIdIMAP4SearchRec</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <META name="GENERATOR" content="Doc-O-Matic">
+    <LINK rel="STYLESHEET" href="default.css" type="text/css">
+
+<SCRIPT LANGUAGE="JavaScript1.2" SRC="scripts.js"></SCRIPT>
+</HEAD>
+<BODY CLASS="Element57">
+<TABLE BORDER="0" BGCOLOR="#AACCFF" WIDTH="100%" CELLSPACING="0" CELLPADDING="0">
+<TR><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element1">
+Indy 9</DIV>
+</TD><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element2">
+<A HREF="content.html" CLASS="Element59">Content</A> | <A HREF="idx.html" CLASS="Element59">Index</A> | <A HREF="symref.html" CLASS="Element59">Reference</A></DIV>
+</TD></TR></TABLE><DIV CLASS="Element58">
+<DIV CLASS="Element5">
+TIdIMAP4SearchRec</DIV>
+<DIV CLASS="Element7">
+<A HREF="015365.html" CLASS="Element59">See Also</A>, <A HREF="002258.html" CLASS="Element59">Unit: IdIMAP4</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Represents search criteria for the IMAP4 SEARCH command.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12">TIdIMAP4SearchRec = <STRONG>record</STRONG>
+  Date: TDateTime;
+  Size: Integer;
+  Text: <STRONG>String</STRONG>;
+  SearchKey: <A HREF="007409.html" CLASS="Element59">TIdIMAP4SearchKey</A>;
+  <STRONG>end</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Unit</DIV>
+<DIV CLASS="Element69">
+<A HREF="002258.html" CLASS="Element59">IdIMAP4</A></DIV>
+<DIV CLASS="Element14">
+Members</DIV>
+<DIV CLASS="Element20">
+Date: TDateTime;</DIV>
+<DIV CLASS="Element22">
+<DIV CLASS="Element21">
+Date is a TDateTime member that represents a date value to be used in the search criteria. Date and other search keys are used in <A HREF="007406.html" CLASS="Element59">TIdIMAP4.SearchMailBox</A>.</DIV>
+</DIV>
+<DIV CLASS="Element20">
+Size: Integer;</DIV>
+<DIV CLASS="Element22">
+<DIV CLASS="Element21">
+Size is an Integer member that represents a size value to be used in the search criteria. Size and other search keys are used in <A HREF="007406.html" CLASS="Element59">TIdIMAP4.SearchMailBox</A>.</DIV>
+</DIV>
+<DIV CLASS="Element20">
+Text: String;</DIV>
+<DIV CLASS="Element22">
+<DIV CLASS="Element21">
+Text is a String member that represents a text value to be used in the search criteria. Text and other search keys are used in <A HREF="007406.html" CLASS="Element59">TIdIMAP4.SearchMailBox</A>.</DIV>
+</DIV>
+<DIV CLASS="Element20">
+SearchKey: TIdIMAP4SearchKey;</DIV>
+<DIV CLASS="Element22">
+<DIV CLASS="Element21">
+SearchKey is a <A HREF="007409.html" CLASS="Element59">TIdIMAP4SearchKey</A> member that indicates the defined search attribute to be used in the search criteria.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+TIdIMAP4SearchRec is a record type that contains the IMAP4 search key and associated search values to be used as part of the IMAP4 SEARCH command. An array of TIdIMAP4SearchRec instances, or <A HREF="007412.html" CLASS="Element59">TIdIMAP4SearchRecArray</A>, is used in <A HREF="007406.html" CLASS="Element59">TIdIMAP4.SearchMailBox</A> to perform a search in the currently selected mailbox.<P CLASS="Element10">
+Date is a TDateTime member that represents a date value to be used in the search criteria.<P CLASS="Element10">
+Size is an Integer member that represents a size value to be used in the search criteria.<P CLASS="Element10">
+Text is a String member that represents a text value to be used in the search criteria.<P CLASS="Element10">
+SearchKey is a <A HREF="007409.html" CLASS="Element59">TIdIMAP4SearchKey</A> member that indicates the defined search attribute to be used in the search criteria.</DIV>
+</DIV>
+<DIV CLASS="Element62">
+<HR>Created with Doc-O-Matic 2 donated to <STRONG><A HREF="http://www.delphi-jedi.org">Project JEDI</A></STRONG>. Commercial license available from the <STRONG><A HREF="http://www.doc-o-matic.com">Doc-O-Matic site</A></STRONG>.</DIV>
+</DIV></BODY></HTML>

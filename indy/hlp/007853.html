@@ -1,0 +1,259 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+<TITLE>TIdThreadMgr</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <META name="GENERATOR" content="Doc-O-Matic">
+    <LINK rel="STYLESHEET" href="default.css" type="text/css">
+
+<SCRIPT LANGUAGE="JavaScript1.2" SRC="scripts.js"></SCRIPT>
+</HEAD>
+<BODY CLASS="Element57">
+<TABLE BORDER="0" BGCOLOR="#AACCFF" WIDTH="100%" CELLSPACING="0" CELLPADDING="0">
+<TR><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element1">
+Indy 9</DIV>
+</TD><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element2">
+<A HREF="content.html" CLASS="Element59">Content</A> | <A HREF="idx.html" CLASS="Element59">Index</A> | <A HREF="symref.html" CLASS="Element59">Reference</A></DIV>
+</TD></TR></TABLE><DIV CLASS="Element58">
+<DIV CLASS="Element5">
+TIdThreadMgr</DIV>
+<DIV CLASS="Element7">
+<A HREF="014368.html" CLASS="Element59">Hierarchy</A>, <A HREF="014369.html" CLASS="Element59">Properties</A>, <A HREF="014370.html" CLASS="Element59">Methods</A>, <A HREF="014371.html" CLASS="Element59">See Also</A>, <A HREF="002927.html" CLASS="Element59">Unit: IdThreadMgr</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Specifies the base class for the Indy thread management framework.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12">TIdThreadMgr = <STRONG>class</STRONG>(<A HREF="007213.html" CLASS="Element59">TIdBaseComponent</A>)</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Unit</DIV>
+<DIV CLASS="Element69">
+<A HREF="002927.html" CLASS="Element59">IdThreadMgr</A></DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+TIdThreadMgr is the ancestor class for the thread manager classes in Indy, such as <A HREF="007854.html" CLASS="Element59">TIdThreadMgrDefault</A> and <A HREF="007855.html" CLASS="Element59">TIdThreadMgrPool</A>, and provides a thread management framework.<P CLASS="Element10">
+TIdThreadMgr defines properties and methods needed to allocate and release threads, monitor active threads, terminate a list of running threads, safeguard thread operations, and determine the thread class used by the thread manager to create new thread instances.<P CLASS="Element10">
+Instances of a TIdThreadMgr descendant can be assigned to the <A HREF="007831.html#001E" CLASS="Element59">TIdTCPServer.ThreadMgr</A> property to provide the functionality specific to the thread manager.<P CLASS="Element10">
+Descendants of TIdThreadMgr must implement the virtual abstract methods <A HREF="007853.html#0004" CLASS="Element59">GetThread</A> and <A HREF="007853.html#0005" CLASS="Element59">ReleaseThread</A>, and use some mechanism to protect resources while maintaining the list of active threads during these operations.<P CLASS="Element10">
+Use <A HREF="007853.html#0006" CLASS="Element59">TerminateThreads</A> to notify the <A HREF="007853.html#0000" CLASS="Element59">ActiveThreads</A> list that all <A HREF="007846.html" CLASS="Element59">TIdThread</A> instances should close their <A HREF="007071.html" CLASS="Element59">socket</A> connections, release the thread with RelaseThread, and remove the thread from <A HREF="007853.html#0000" CLASS="Element59">ActiveThreads</A>.<P CLASS="Element10">
+Assign an instance of <A HREF="007850.html" CLASS="Element59">TIdThreadClass</A> to <A HREF="007853.html#0007" CLASS="Element59">ThreadClass</A> before using the thread manager to allocate new threads.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0000">TIdThreadMgr.ActiveThreads</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007853.html" CLASS="Element59">TIdThreadMgr</A>, <A HREF="014372.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Active threads for the thread manager.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> ActiveThreads: TThreadList;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+ActiveThreads is a read-only <STRONG>TList</STRONG> property that contains active threads instances. ActiveThreads is initialized in the <A HREF="007853.html#0001" CLASS="Element59">Create</A> constructor, and freed in the <A HREF="007853.html#0003" CLASS="Element59">Destroy</A> destructor.<P CLASS="Element10">
+<A HREF="007853.html" CLASS="Element59">TIdThreadMgr</A> does maintain the list of active threads. Descendants of <A HREF="007853.html" CLASS="Element59">TIdThreadMgr</A> must implement the virtual abstract methods <A HREF="007853.html#0004" CLASS="Element59">GetThread</A> and <A HREF="007853.html#0005" CLASS="Element59">ReleaseThread</A>, and maintain ActiveThreads during these operations. The thread manager should use <A HREF="007853.html#0005" CLASS="Element59">ReleaseThread</A> to protect resources while maintaining the list of active threads.<P CLASS="Element10">
+Use <A HREF="007853.html#0006" CLASS="Element59">TerminateThreads</A> to notify the ActiveThreads list that all thread instances should close their <A HREF="007071.html" CLASS="Element59">socket</A> connections, release the thread with <A HREF="007853.html#0005" CLASS="Element59">ReleaseThread</A>, and remove the thread from ActiveThreads.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0007">TIdThreadMgr.ThreadClass</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007853.html" CLASS="Element59">TIdThreadMgr</A>, <A HREF="014373.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Class type for new threads.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> ThreadClass: <A HREF="007850.html" CLASS="Element59">TIdThreadClass</A>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+ThreadClass is a <A HREF="007850.html" CLASS="Element59">TIdThreadClass</A> property used to determine the type of thread instances created by the <A HREF="007853.html" CLASS="Element59">TIdThreadMgr</A>. Assign an instance of <A HREF="007850.html" CLASS="Element59">TIdThreadClass</A> to ThreadClass before using the thread manager to allocate new threads using <A HREF="007853.html#0002" CLASS="Element59">CreateNewThread</A>.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0008">TIdThreadMgr.ThreadPriority</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007853.html" CLASS="Element59">TIdThreadMgr</A>, <A HREF="014374.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Indicates the thread priority to use for new threads created by the thread manager.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> ThreadPriority: <A HREF="007856.html" CLASS="Element59">TIdThreadPriority</A>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+ThreadPriority is a <A HREF="007856.html" CLASS="Element59">TIdThreadPriority</A> property that indicates the thread priority to be assigned to new thread instances created in <A HREF="007853.html#0002" CLASS="Element59">CreateNewThread</A>. The default value for ThreadPriority is <A HREF="008039.html" CLASS="Element59">tpNormal</A>.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0001">TIdThreadMgr.Create</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007853.html" CLASS="Element59">TIdThreadMgr</A>, <A HREF="014375.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Create is the constructor for the object instance.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>constructor</STRONG> Create(AOwner: TComponent); <STRONG>override</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+AOwner: TComponent</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Component that owns the object instance.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Create relies on the inherited Create constructor to initialize the object instance. Create also initializes the read-only property <A HREF="007853.html#0000" CLASS="Element59">ActiveThreads</A>. <A HREF="007853.html#0003" CLASS="Element59">Destroy</A> is responsible for freeing <A HREF="007853.html#0000" CLASS="Element59">ActiveThreads</A>.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0002">TIdThreadMgr.CreateNewThread</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007853.html" CLASS="Element59">TIdThreadMgr</A>, <A HREF="014376.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Handles creation of new thread instances.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>function</STRONG> CreateNewThread: <A HREF="007846.html" CLASS="Element59">TIdThread</A>; <STRONG>virtual</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Return Value</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+<A HREF="007846.html" CLASS="Element59">TIdThread</A> - The new thread instance.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+CreateNewThread is a virtual <A HREF="007846.html" CLASS="Element59">TIdThread</A> function in <A HREF="007853.html" CLASS="Element59">TIdThreadMgr</A> that handles creation of new thread instances.<P CLASS="Element10">
+CreateNewThread uses <A HREF="007853.html#0007" CLASS="Element59">ThreadClass</A> to create a new thread instance for the thread manager. If <A HREF="007853.html#0007" CLASS="Element59">ThreadClass</A> is not assigned, an <A HREF="000490.html" CLASS="Element59">EIdThreadClassNotSpecified</A> exception is raised, and the return value of CreateNewThread will be <STRONG>Nil</STRONG>.<P CLASS="Element10">
+CreateNewThread is used by <A HREF="007853.html" CLASS="Element59">TIdThreadMgr</A> descendants to provide the new thread instance needed in <A HREF="007853.html#0004" CLASS="Element59">GetThread</A>.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0003">TIdThreadMgr.Destroy</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007853.html" CLASS="Element59">TIdThreadMgr</A>, <A HREF="014377.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Destructor for the object instance.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>destructor</STRONG> Destroy; <STRONG>override</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Destroy is the destructor for the object instance. Destroy will free the property <A HREF="007853.html#0000" CLASS="Element59">ActiveThreads</A>, and set the value to Nil prior to calling the inherited Destroy destructor.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0004">TIdThreadMgr.GetThread</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007853.html" CLASS="Element59">TIdThreadMgr</A>, <A HREF="014378.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Requests a new thread for the thread manager.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>function</STRONG> GetThread: <A HREF="007846.html" CLASS="Element59">TIdThread</A>; <STRONG>virtual</STRONG>; <STRONG>abstract</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Return Value</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+<A HREF="007846.html" CLASS="Element59">TIdThread</A> - The new thread instance.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+GetThread is a virtual abstract <A HREF="007846.html" CLASS="Element59">TIdThread</A> function that requests a new thread for the thread manager. GetThread is not implemented in <A HREF="007853.html" CLASS="Element59">TIdThreadMgr</A>. Descendants of <A HREF="007853.html" CLASS="Element59">TIdThreadMgr</A> must implement GetThread to satisfy the requirements for the specific thread manager. GetThread can get a thread instance using <A HREF="007853.html#0002" CLASS="Element59">CreateNewThread</A>, re-use a thread from a thread pool, or use another thread creation scheme provided in the <A HREF="007853.html" CLASS="Element59">TIdThreadMgr</A> descendant.<P CLASS="Element10">
+GetThread should use the critical section Lock, or other mechanism, to protect the <A HREF="007853.html#0000" CLASS="Element59">ActiveThreads</A> list while adding the new thread instance.<P CLASS="Element10">
+A thread instance can be freed using <A HREF="007853.html#0005" CLASS="Element59">ReleaseThread</A>. <A HREF="007853.html#0005" CLASS="Element59">ReleaseThread</A> is used in <A HREF="007853.html#0006" CLASS="Element59">TerminateThreads</A>.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0005">TIdThreadMgr.ReleaseThread</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007853.html" CLASS="Element59">TIdThreadMgr</A>, <A HREF="014379.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Terminate and free a thread instance.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>procedure</STRONG> ReleaseThread(AThread: <A HREF="007846.html" CLASS="Element59">TIdThread</A>); <STRONG>virtual</STRONG>; <STRONG>abstract</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+AThread: TIdThread</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+Thread to be released.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+ReleaseThread is a virtual abstract procedure that instructs the <A HREF="007853.html" CLASS="Element59">TIdThreadMgr</A> to terminate and free a thread instance.<P CLASS="Element10">
+ReleaseThread is not implemented in <A HREF="007853.html" CLASS="Element59">TIdThreadMgr</A>. Descendants of <A HREF="007853.html" CLASS="Element59">TIdThreadMgr</A> must implement ReleaseThread to satisfy the requirements for the specific thread manager. ReleaseThread can force the thread to Terminate, WaitFor the thread to complete execution, and Free the thread instance. ReleaseThread may also implement other functionality as required in the <A HREF="007853.html" CLASS="Element59">TIdThreadMgr</A> descendant.<P CLASS="Element10">
+ReleaseThread should use the critical section Lock, or other mechanism, to protect the <A HREF="007853.html#0000" CLASS="Element59">ActiveThreads</A> list while removing the thread instance.<P CLASS="Element10">
+ReleaseThread is used in <A HREF="007853.html#0006" CLASS="Element59">TerminateThreads</A>.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0006">TIdThreadMgr.TerminateThreads</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007853.html" CLASS="Element59">TIdThreadMgr</A>, <A HREF="014380.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Closes, releases, and frees threads in a list.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>procedure</STRONG> TerminateThreads; <STRONG>virtual</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Parameters</DIV>
+<DIV CLASS="Element17">
+Threads</DIV>
+<DIV CLASS="Element18">
+<DIV CLASS="Element19">
+List of threads to terminate.</DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+TerminateThreads is a procedure that forces a list of <A HREF="007846.html" CLASS="Element59">TIdThread</A> instances to close their <A HREF="007071.html" CLASS="Element59">socket</A> connections, releases the threads, and remove the threads from the active thread list.<P CLASS="Element10">
+If the thread list contains <A HREF="007613.html" CLASS="Element59">TIdPeerThread</A> instances, TerminateThreads will call <A HREF="007613.html#0000" CLASS="Element59">TIdPeerThread.Connection</A>.Disconnect to close the <A HREF="007071.html" CLASS="Element59">socket</A> connection.<P CLASS="Element10">
+For each <A HREF="007846.html" CLASS="Element59">TIdThread</A> instance in the thread list, TerminateThreads will call <A HREF="007853.html#0005" CLASS="Element59">ReleaseThread</A>.<P CLASS="Element10">
+The terminated thread instance will be removed from the <I>Thread</I> list.</DIV>
+</DIV>
+<DIV CLASS="Element62">
+<HR>Created with Doc-O-Matic 2 donated to <STRONG><A HREF="http://www.delphi-jedi.org">Project JEDI</A></STRONG>. Commercial license available from the <STRONG><A HREF="http://www.doc-o-matic.com">Doc-O-Matic site</A></STRONG>.</DIV>
+</DIV></BODY></HTML>

@@ -1,0 +1,32 @@
+// ListWindow
+
+#define HPRIM1	1020
+#define HPRIM2	1021
+#define UNKNOWN	1022
+
+#define MAILNEW  1030
+#define MAILOLD  1031
+#define MAILREAD 1032
+
+#define ALERTL1  1040
+#define ALERTL2  1041
+#define ALERTHI  1042
+
+#define PARSE_ERROR  1043
+
+// LOAD_MAILS
+//
+#define IDC_TXT_NEW 101
+#define IDC_BAR_NEW 102
+#define IDC_TXT_OLD 103
+#define IDC_BAR_OLD 104
+#define STOP_BTN    105
+
+//
+//
+#define IDC_CHGCHEM  101
+#define IDC_HISTOR   102
+#define IDC_NOM      103
+#define IDC_TYPE     104
+#define IDC_CREATION 105
+

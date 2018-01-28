@@ -1,0 +1,363 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+<TITLE>TIdHTTPRequestInfo</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <META name="GENERATOR" content="Doc-O-Matic">
+    <LINK rel="STYLESHEET" href="default.css" type="text/css">
+
+<SCRIPT LANGUAGE="JavaScript1.2" SRC="scripts.js"></SCRIPT>
+</HEAD>
+<BODY CLASS="Element57">
+<TABLE BORDER="0" BGCOLOR="#AACCFF" WIDTH="100%" CELLSPACING="0" CELLPADDING="0">
+<TR><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element1">
+Indy 9</DIV>
+</TD><TD VALIGN="MIDDLE" ALIGN="LEFT">
+<DIV CLASS="Element2">
+<A HREF="content.html" CLASS="Element59">Content</A> | <A HREF="idx.html" CLASS="Element59">Index</A> | <A HREF="symref.html" CLASS="Element59">Reference</A></DIV>
+</TD></TR></TABLE><DIV CLASS="Element58">
+<DIV CLASS="Element5">
+TIdHTTPRequestInfo</DIV>
+<DIV CLASS="Element7">
+<A HREF="011521.html" CLASS="Element59">Hierarchy</A>, <A HREF="011522.html" CLASS="Element59">Properties</A>, <A HREF="011523.html" CLASS="Element59">Methods</A>, <A HREF="011524.html" CLASS="Element59">See Also</A>, <A HREF="002147.html" CLASS="Element59">Unit: IdCustomHTTPServer</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Implements a HTTP Request object.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12">TIdHTTPRequestInfo = <STRONG>class</STRONG>(<A HREF="007651.html" CLASS="Element59">TIdRequestHeaderInfo</A>)</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Unit</DIV>
+<DIV CLASS="Element69">
+<A HREF="002147.html" CLASS="Element59">IdCustomHTTPServer</A></DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+TIdHTTPRequestInfo is a TObject descendant that encapsulates access to information for a HTTP request. TIdHTTPRequestInfo publishes properties that provide access to various information for a HTTP request. The properties include the HTTP session, authentication parameters, the remote computer addresses, HTTP headers, cookies, the HTTP command and version, and the document URL for the request.<P CLASS="Element10">
+TIdHTTPRequestInfo is used by <A HREF="007392.html" CLASS="Element59">TIdHTTPServer</A> to capture HTTP headers, and to store a reference to the persistent HTTP session in the session list.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0000">TIdHTTPRequestInfo.AuthExists</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007389.html" CLASS="Element59">TIdHTTPRequestInfo</A>, <A HREF="011525.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Indicates that an authorization header is used in the HTTP request.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> AuthExists: Boolean;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+AuthExists is a read-only Boolean property that indicates an authorization header is used in the HTTP request. AuthExists is set to True when the <A HREF="007389.html#0002" CLASS="Element59">AuthUsername</A> and <A HREF="007389.html#0001" CLASS="Element59">AuthPassword</A> properties have non-blank values during execution of the threaded HTTP client.<P CLASS="Element10">
+AuthExists is updated when <A HREF="007271.html" CLASS="Element59">TIdCustomHTTPServer</A> executes an HTTP client thread, and is used to determine when a <A HREF="007283.html" CLASS="Element59">TIdDecoderMIME</A> needs to be constructed for decoding <A HREF="007389.html#0002" CLASS="Element59">AuthUsername</A> and <A HREF="007389.html#0001" CLASS="Element59">AuthPassword</A> values from the request header.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0001">TIdHTTPRequestInfo.AuthPassword</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007389.html" CLASS="Element59">TIdHTTPRequestInfo</A>, <A HREF="011526.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Specifies the authorization password for a HTTP request.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> AuthPassword: <STRONG>string</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+AuthPassword is a String property that specifies the authorization password from the HTTP header &quot;Authorization:&quot; in the HTTP request. AuthPassword is used with <A HREF="007389.html#0002" CLASS="Element59">AuthUsername</A> to determine the full content of the basic authorization header value.<P CLASS="Element10">
+<A HREF="007389.html#0000" CLASS="Element59">AuthExists</A> indicates that the <A HREF="007389.html#0002" CLASS="Element59">AuthUsername</A> and AuthPassword properties are used in the HTTP request.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0002">TIdHTTPRequestInfo.AuthUsername</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007389.html" CLASS="Element59">TIdHTTPRequestInfo</A>, <A HREF="011527.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Specifies the authorization user name for the HTTP request.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> AuthUsername: <STRONG>string</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+AuthUsername is a String property that specifies the authorization user name from the HTTP header &quot;Authorization:&quot; in the HTTP request. AuthUsername is used with <A HREF="007389.html#0001" CLASS="Element59">AuthPassword</A> to determine the full content of the basic authorization header value. <A HREF="007389.html#0000" CLASS="Element59">AuthExists</A> indicates that the AuthUsername and <A HREF="007389.html#0001" CLASS="Element59">AuthPassword</A> properties are used in the HTTP request.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0003">TIdHTTPRequestInfo.Command</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007389.html" CLASS="Element59">TIdHTTPRequestInfo</A>, <A HREF="011528.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Represents the HTTP command in the request.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> Command: <STRONG>string</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Command is a read-only String property that represents the HTTP command received in the HTTP request, like &quot;GET&quot;, &quot;POST&quot;, or &quot;HEAD&quot;. Use RawHHTTPCommand to access the entire HHTP command in it's original form.<P CLASS="Element10">
+Command is updated when <A HREF="007271.html" CLASS="Element59">TIdCustomHTTPServer</A> reads the HTTP request from an executing threaded HTTP client. Command can be used in <A HREF="007271.html" CLASS="Element59">TIdCustomHTTPServer</A> event handlers, like OnCommandGet and OnCommandOther, to determine the HTTP command that originated the request.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0004">TIdHTTPRequestInfo.Cookies</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007389.html" CLASS="Element59">TIdHTTPRequestInfo</A>, <A HREF="011529.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Represents cookies for the request.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> Cookies: <A HREF="007674.html" CLASS="Element59">TIdServerCookies</A>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Cookies is a TIdCookieColloection property use to store cookie names and values used in the HTTP request. Cookies is updated by <A HREF="007392.html" CLASS="Element59">TIdHTTPServer</A> when a peer thread receives a HTTP request containing header values with the HTTP header &quot;Cookie:&quot;.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0007">TIdHTTPRequestInfo.Document</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007389.html" CLASS="Element59">TIdHTTPRequestInfo</A>, <A HREF="011530.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Specifies the path and document name for a HTTP request.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> Document: <STRONG>string</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Document is a String property that specifies the Uniform Resource Identifier (URI) for the HTTP request. Document normally contains the path, document name, and optional parameters the URL requested.<P CLASS="Element10">
+Document is updated when <A HREF="007392.html" CLASS="Element59">TIdHTTPServer</A> reads the HTTP request during execution of a threaded HTTP client.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0008">TIdHTTPRequestInfo.FormParams</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007389.html" CLASS="Element59">TIdHTTPRequestInfo</A>, <A HREF="011531.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+COntains a string representing values from the request post stream.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> FormParams: <STRONG>string</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+FormParams is a String property that contains the values originating in <A HREF="007389.html#000A" CLASS="Element59">PostStream</A> in their string representation.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0009">TIdHTTPRequestInfo.Params</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007389.html" CLASS="Element59">TIdHTTPRequestInfo</A>, <A HREF="011532.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Represents the HTTP header values as ASCII characters.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> Params: TStrings;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Params is a TString property used to store the parsed values for HTTP headers in the HTTP request. Params contains the header values after URLDecode has been used to convert the headers to their ASCII representation.<P CLASS="Element10">
+Use <A HREF="007389.html#000F" CLASS="Element59">UnparsedParams</A> to view the HTTP headers in their raw form.<P CLASS="Element10">
+Params is updated by <A HREF="007392.html" CLASS="Element59">TIdHTTPServer</A> when a peer thread generates a new HTTP request.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="000A">TIdHTTPRequestInfo.PostStream</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007389.html" CLASS="Element59">TIdHTTPRequestInfo</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Stream used to pass data from a client POST request.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> PostStream: TStream;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+PostStream is a TStream property that represents the stream containing the data to be sent in the <A HREF="007389.html" CLASS="Element59">TIdHTTPRequestInfo</A> used in the request for a threaded client connection. PostStream is used in <A HREF="007392.html" CLASS="Element59">TIdHTTPServer</A> when the client thread is executed. PostStream may contain a reference to an exising stream, or may be implicitly created for the executing client thread.<P CLASS="Element10">
+When the request from the client connection has a non-zero ContentLength, PostStream is used to read the indicated number of bytes. Otherwise, all data is read into PostStream until the client connection is closed.<P CLASS="Element10">
+If the stream is created during execution of the client thread, the contents of PostStream are added to the <A HREF="007389.html#000F" CLASS="Element59">TIdHTTPRequestInfo.UnparsedParams</A> property for the client request.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="000B">TIdHTTPRequestInfo.QueryParams</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007389.html" CLASS="Element59">TIdHTTPRequestInfo</A>, <A HREF="011533.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Represents the query and optional parameters in an HTTP request.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> QueryParams: <STRONG>string</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+QueryParams is a String property that represents the query and optional parameters received in an HTTP request.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="000C">TIdHTTPRequestInfo.RawHTTPCommand</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007389.html" CLASS="Element59">TIdHTTPRequestInfo</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Text data containing the HTTP <A HREF="007389.html#0003" CLASS="Element59">Command</A> received in an HTTP request.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> RawHTTPCommand: <STRONG>string</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+RawHTTPCommand is a read-only String property that represents the raw textual data for a command read from the HTTP client connection. RawHTTPCommand is updated when the threaded client connection is executed, and contains values that are examined to set properties for the <A HREF="007389.html" CLASS="Element59">TIdHTTPRequestInfo</A> instance like <A HREF="007389.html#0003" CLASS="Element59">Command</A>, <A HREF="007389.html#0009" CLASS="Element59">Params</A>, and <A HREF="007389.html#0007" CLASS="Element59">Document</A>.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="000D">TIdHTTPRequestInfo.RemoteIP</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007389.html" CLASS="Element59">TIdHTTPRequestInfo</A>, <A HREF="011534.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Identifies the remote computer for the HTTP request.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> RemoteIP: <STRONG>String</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+RemoteIP is a read-only String property used to identify the remote computer system that is the endpoint for the session used by the HTTP request.<P CLASS="Element10">
+RemoteIP is updated by <A HREF="007392.html" CLASS="Element59">TIdHTTPServer</A> when a peer thread generates a new HTTP request.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="000E">TIdHTTPRequestInfo.Session</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007389.html" CLASS="Element59">TIdHTTPRequestInfo</A>, <A HREF="011535.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Represents the HTTP session for the request.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> Session: <A HREF="007393.html" CLASS="Element59">TIdHTTPSession</A>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Session is a read-only <A HREF="007393.html" CLASS="Element59">TIdHTTPSession</A> property used to represent the HTTP session that acts as the transport for the HTTP request.<P CLASS="Element10">
+Session is updated by <A HREF="007392.html" CLASS="Element59">TIdHTTPServer</A> when a peer thread generates a HTTP request.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="000F">TIdHTTPRequestInfo.UnparsedParams</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007389.html" CLASS="Element59">TIdHTTPRequestInfo</A>, <A HREF="011536.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Represents the HTTP header as URL-encoded values.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> UnparsedParams: <STRONG>string</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+UnparsedParams is a TStrings property used to store the values for HTTP headers in their URL-encoded form. UnparsedParams contains the header values in the form they were received in the HTTP request.<P CLASS="Element10">
+Use <A HREF="007389.html#0009" CLASS="Element59">Params</A> to view the HTTP headers in their ASCII form.<P CLASS="Element10">
+UnparsedParams is updated by <A HREF="007392.html" CLASS="Element59">TIdHTTPServer</A> when a peer thread generates a new HTTP request.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0010">TIdHTTPRequestInfo.Version</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007389.html" CLASS="Element59">TIdHTTPRequestInfo</A>, <A HREF="011537.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Specifies the HTTP version for the request.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>property</STRONG> Version: <STRONG>string</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Version is a read-only String property that represents the HTTP version retrieved as part of the HTTP request. Version is updated when <A HREF="007271.html" CLASS="Element59">TIdCustomHTTPServer</A> reads the HTTP request during execution of a threaded HTTP client. THe value in Version is provided as an argunment to <A HREF="007271.html" CLASS="Element59">TIdCustomHTTPServer</A> event handlers, like OnCommandGet and OnCommandOther.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0005">TIdHTTPRequestInfo.Create</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007389.html" CLASS="Element59">TIdHTTPRequestInfo</A>, <A HREF="011538.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Constructor for the object instance.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>constructor</STRONG> Create; <STRONG>override</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Create is the constructor for the object instance. Create calls the inherited Create constructor. Create also allocates resources required for the <A HREF="007389.html#0009" CLASS="Element59">Params</A> and <A HREF="007389.html#0004" CLASS="Element59">Cookies</A> properties.</DIV>
+</DIV>
+<HR><DIV CLASS="Element6">
+<A NAME="0006">TIdHTTPRequestInfo.Destroy</A></DIV>
+<DIV CLASS="Element7">
+<A HREF="007389.html" CLASS="Element59">TIdHTTPRequestInfo</A>, <A HREF="011539.html" CLASS="Element59">See Also</A></DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Frees the object instance.</DIV>
+</DIV>
+<DIV CLASS="Element13">
+<DIV CLASS="Element12">
+<PRE CLASS="Element12"><STRONG>destructor</STRONG> Destroy; <STRONG>override</STRONG>;</PRE></DIV>
+</DIV>
+<DIV CLASS="Element14">
+Description</DIV>
+<DIV CLASS="Element11">
+<DIV CLASS="Element10">
+Destroy is the destructor for the object instance. Destroy is responsible for freeing the object instances use in the Headers, <A HREF="007389.html#0009" CLASS="Element59">Params</A>, and <A HREF="007389.html#0004" CLASS="Element59">Cookies</A> properties. Destroy calls the inherited Destroy method to complete destruction of the object instance.</DIV>
+</DIV>
+<DIV CLASS="Element62">
+<HR>Created with Doc-O-Matic 2 donated to <STRONG><A HREF="http://www.delphi-jedi.org">Project JEDI</A></STRONG>. Commercial license available from the <STRONG><A HREF="http://www.doc-o-matic.com">Doc-O-Matic site</A></STRONG>.</DIV>
+</DIV></BODY></HTML>
