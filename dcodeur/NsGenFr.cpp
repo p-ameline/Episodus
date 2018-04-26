@@ -4824,13 +4824,21 @@ NSGenerateurFr::donnePronomPersonnel(const GENRE iGenre, const NSPhraseur::VBPER
 }
 
 void
-NSGenerateurFr::etFinal(string *type, string *type1, const string sSeparator)
+NSGenerateurFr::etFinal(string *type, const string *type1, const string sSeparator, bool bUseDefaultIfEmpty)
 {
+  if (((string*) NULL == type) || ((string*) NULL == type1))
+    return ;
+
 	if (string("") == *type1)
 		return ;
 
 	if (string("") != *type)
-    *type += sSeparator ;
+  {
+    if ((string("") == sSeparator) && bUseDefaultIfEmpty)
+      *type += string(" et ") ;
+    else
+      *type += sSeparator ;
+  }
 
 	*type += *type1 ;
 }
@@ -5737,6 +5745,7 @@ NSGenerateurFr::postTraitement(string *psEntree)
   string sSortie = *psEntree ;
 
   // Contraction de la forme "de le " en "du "
+  // Attention, "de le" est valide devant un verbe à l'infinitif, ex : "il est incapable de le contrôler"  
   //
   contracting(&sSortie, string("de le "), string("du ")) ;
 
@@ -5745,11 +5754,13 @@ NSGenerateurFr::postTraitement(string *psEntree)
   contracting(&sSortie, string("de l' "), string("de l'")) ;
 
   // Contraction des formes "de les " ou "de des " en "des "
+  // Attention, "de les" est valide devant un verbe à l'infinitif, ex : "il est incapable de les contrôler"
   //
   contracting(&sSortie, string("de les "), string("des ")) ;
   contracting(&sSortie, string("de des "), string("des ")) ;
 
   // Contraction de la forme "à les " en "aux " et "à le " en "au "
+  // Attention, "à le" ou "à les" est valide devant un verbe à l'infinitif, ex : "il est enclin à les négliger"
   //
   contracting(&sSortie, string("à le "), string("au ")) ;
   contracting(&sSortie, string("à les "), string("aux ")) ;
@@ -5767,6 +5778,10 @@ NSGenerateurFr::postTraitement(string *psEntree)
   //
   contracting(&sSortie, string("avec pas de"), string("sans")) ;
   contracting(&sSortie, string("pas avec de"), string("sans")) ;
+
+  // Gestion des doubles espaces
+  //
+  contracting(&sSortie, string("  "), string(" ")) ;
 
   return sSortie ;
 }

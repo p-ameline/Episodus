@@ -7510,6 +7510,8 @@ NSPatientChoisi::remplaceStandardLabel(string& sHtml, string sTypeTag, string sM
   //
   if      (string("nomPatient") == sChemin)
     sLabel = getNomLong() ;
+  else if (string("signature") == sChemin)
+    sLabel = pContexte->getUtilisateur()->getCivilProf() ;
   else if (string("dateJour") == sChemin)
   {
     string sLang = pContexte->getUserLanguage() ;
@@ -12561,7 +12563,7 @@ NSUtilisateurChoisi::setupToolbar()
 
   ifstream inFile ;
 
-  bool bFileOpened = pContexte->getUtilisateur()->OpenUserFile(&inFile, string("icons.dat"), pContexte->PathName("FGLO")) ;
+  bool bFileOpened = pContexte->getUtilisateur()->OpenUserFile(&inFile, string("icons.dat"), string("icons[user].dat"), pContexte->PathName("FGLO")) ;
 
   if (false == bFileOpened || !inFile)
   {

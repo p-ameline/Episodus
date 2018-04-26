@@ -137,14 +137,14 @@ PACKAGES = vclx40.bpi vcl40.bpi vcldb40.bpi vcldbx40.bpi bcbsmp40.bpi dclocx40.b
   qrpt40.bpi teeui40.bpi vclsmp40.bpi teedb40.bpi tee40.bpi ibsmp40.bpi \
   nmfast40.bpi inetdb40.bpi inet40.bpi
 # ---------------------------------------------------------------------------
-PATHCPP = .;docking;nautilus;nscompta;nsutil;partage;include\nautilus
+PATHCPP = .;docking;nautilus;nscompta;nsutil;curl;partage;export;include\nautilus
 PATHASM = .;
 PATHPAS = .;
 PATHRC = .;nautilus;docking
 DEBUGLIBPATH = $(BCB)\lib\debug
 RELEASELIBPATH = $(BCB)\lib\release
 SYSDEFINES = NO_STRICT;_RTLDLL;USEPACKAGES
-USERDEFINES = STRICT;_OWLDLL;_USE_OWL_CM_EXIT;_BIDSDLL;_OWLALLPCH;BI_NAMESPACE;INC_OLE2;NO_SHDOCVW_GUIDS;_OCFDLL;_OCFPCH;BI_NO_OBJ_STREAMING;_MUE;N_TIERS;__OB1__;NO_EXT_CAPTURE;_IN_EXE;FOR_WINDOWS;BI_PLAT_WIN32
+USERDEFINES = STRICT;_OWLDLL;_USE_OWL_CM_EXIT;_BIDSDLL;_OWLALLPCH;BI_NAMESPACE;INC_OLE2;NO_SHDOCVW_GUIDS;_OCFDLL;_OCFPCH;BI_NO_OBJ_STREAMING;_MUE;N_TIERS;__OB1__;NO_EXT_CAPTURE;_IN_EXE;FOR_WINDOWS;BI_PLAT_WIN32;TIXML_USE_STL
 # ---------------------------------------------------------------------------
 CFLAG1 = -Iindy\c4;include\nautilus;curl;export;pilot;nsutil;nsbb;nscompta;partage;nautilus;nsdn;docking;include;parseur;$(BCB)\include;$(BCB)\include\owlfiles;$(BCB)\include\vcl;$(BCB)\lib;$(BCB)\imports;$(BCB)\include\Mfc;"..\..\..\..\Program Files (x86)\Java\jdk1.6.0_30\include";"..\..\..\..\Program Files (x86)\Java\jdk1.6.0_30\include\win32";libwkhtmltox\include \
   -Od -w -Tkh30000 -r- -a8 -k -y -v -vi- -wuse -wucp -wstv -wstu -wsig -wpin \
@@ -161,14 +161,14 @@ IDLCFLAGS = -Iindy\c4 -Iinclude\nautilus -Icurl -Iexport -Ipilot -Insutil -Insbb
   -Ilibwkhtmltox\include -src_suffixcpp -DSTRICT -D_OWLDLL -D_USE_OWL_CM_EXIT \
   -D_BIDSDLL -D_OWLALLPCH -DBI_NAMESPACE -DINC_OLE2 -DNO_SHDOCVW_GUIDS -D_OCFDLL \
   -D_OCFPCH -DBI_NO_OBJ_STREAMING -D_MUE -DN_TIERS -D__OB1__ -DNO_EXT_CAPTURE \
-  -D_IN_EXE -DFOR_WINDOWS -DBI_PLAT_WIN32
-PFLAGS = -Uinclude\nautilus;export;partage;curl;nsutil;nscompta;nautilus;docking;..\..\..\..\cvs\episodus;indy\c4;$(BCB)\lib;$(BCB)\lib\obj;$(BCB)\Projects\Lib;$(BCB)\imports;"..\..\..\..\Program Files (x86)\Java\jdk1.6.0_30\lib";"..\..\..\..\Program Files (x86)\Java\jdk1.6.0_30\jre\bin\server";$(RELEASELIBPATH) \
+  -D_IN_EXE -DFOR_WINDOWS -DBI_PLAT_WIN32 -DTIXML_USE_STL
+PFLAGS = -U"..\..\..\..\Program Files (x86)\Borland\CBuilder4\Lib";include\nautilus;export;partage;curl;nsutil;nscompta;nautilus;docking;..\..\..\..\cvs\episodus;indy\c4;$(BCB)\lib;$(BCB)\lib\obj;$(BCB)\Projects\Lib;$(BCB)\imports;"..\..\..\..\Program Files (x86)\Java\jdk1.6.0_30\lib";"..\..\..\..\Program Files (x86)\Java\jdk1.6.0_30\jre\bin\server";$(RELEASELIBPATH) \
   -Iindy\c4;include\nautilus;curl;export;pilot;nsutil;nsbb;nscompta;partage;nautilus;nsdn;docking;include;parseur;$(BCB)\include;$(BCB)\include\owlfiles;$(BCB)\include\vcl;$(BCB)\lib;$(BCB)\imports;$(BCB)\include\Mfc;"..\..\..\..\Program Files (x86)\Java\jdk1.6.0_30\include";"..\..\..\..\Program Files (x86)\Java\jdk1.6.0_30\include\win32";libwkhtmltox\include \
   -N2..\..\..\..\cvs\episodus\ObjNTIERS -N0..\..\..\..\cvs\episodus\ObjNTIERS \
-  -DSTRICT;_OWLDLL;_USE_OWL_CM_EXIT;_BIDSDLL;_OWLALLPCH;BI_NAMESPACE;INC_OLE2;NO_SHDOCVW_GUIDS;_OCFDLL;_OCFPCH;BI_NO_OBJ_STREAMING;_MUE;N_TIERS;__OB1__;NO_EXT_CAPTURE;_IN_EXE;FOR_WINDOWS;BI_PLAT_WIN32 \
+  -DSTRICT;_OWLDLL;_USE_OWL_CM_EXIT;_BIDSDLL;_OWLALLPCH;BI_NAMESPACE;INC_OLE2;NO_SHDOCVW_GUIDS;_OCFDLL;_OCFPCH;BI_NO_OBJ_STREAMING;_MUE;N_TIERS;__OB1__;NO_EXT_CAPTURE;_IN_EXE;FOR_WINDOWS;BI_PLAT_WIN32;TIXML_USE_STL \
   -$Y+ -$W -$O- -v -M -JPHNE
 RFLAGS = -iindy\c4;include\nautilus;curl;export;pilot;nsutil;nsbb;nscompta;partage;nautilus;nsdn;docking;include;parseur;$(BCB)\include;$(BCB)\include\owlfiles;$(BCB)\include\vcl;$(BCB)\lib;$(BCB)\imports;$(BCB)\include\Mfc;"..\..\..\..\Program Files (x86)\Java\jdk1.6.0_30\include";"..\..\..\..\Program Files (x86)\Java\jdk1.6.0_30\include\win32";libwkhtmltox\include \
-  -DSTRICT;_OWLDLL;_USE_OWL_CM_EXIT;_BIDSDLL;_OWLALLPCH;BI_NAMESPACE;INC_OLE2;NO_SHDOCVW_GUIDS;_OCFDLL;_OCFPCH;BI_NO_OBJ_STREAMING;_MUE;N_TIERS;__OB1__;NO_EXT_CAPTURE;_IN_EXE;FOR_WINDOWS;BI_PLAT_WIN32
+  -DSTRICT;_OWLDLL;_USE_OWL_CM_EXIT;_BIDSDLL;_OWLALLPCH;BI_NAMESPACE;INC_OLE2;NO_SHDOCVW_GUIDS;_OCFDLL;_OCFPCH;BI_NO_OBJ_STREAMING;_MUE;N_TIERS;__OB1__;NO_EXT_CAPTURE;_IN_EXE;FOR_WINDOWS;BI_PLAT_WIN32;TIXML_USE_STL
 AFLAGS = /iindy\c4 /iinclude\nautilus /icurl /iexport /ipilot /insutil /insbb /inscompta \
   /ipartage /inautilus /insdn /idocking /iinclude /iparseur /i$(BCB)\include \
   /i$(BCB)\include\owlfiles /i$(BCB)\include\vcl /i$(BCB)\lib /i$(BCB)\imports \
@@ -178,8 +178,8 @@ AFLAGS = /iindy\c4 /iinclude\nautilus /icurl /iexport /ipilot /insutil /insbb /i
   /ilibwkhtmltox\include /dSTRICT /d_OWLDLL /d_USE_OWL_CM_EXIT /d_BIDSDLL \
   /d_OWLALLPCH /dBI_NAMESPACE /dINC_OLE2 /dNO_SHDOCVW_GUIDS /d_OCFDLL /d_OCFPCH \
   /dBI_NO_OBJ_STREAMING /d_MUE /dN_TIERS /d__OB1__ /dNO_EXT_CAPTURE /d_IN_EXE \
-  /dFOR_WINDOWS /dBI_PLAT_WIN32 /mx /w2 /zi
-LFLAGS = -Linclude\nautilus;export;partage;curl;nsutil;nscompta;nautilus;docking;..\..\..\..\cvs\episodus;indy\c4;$(BCB)\lib;$(BCB)\lib\obj;$(BCB)\Projects\Lib;$(BCB)\imports;"..\..\..\..\Program Files (x86)\Java\jdk1.6.0_30\lib";"..\..\..\..\Program Files (x86)\Java\jdk1.6.0_30\jre\bin\server";$(RELEASELIBPATH) \
+  /dFOR_WINDOWS /dBI_PLAT_WIN32 /dTIXML_USE_STL /mx /w2 /zi
+LFLAGS = -L"..\..\..\..\Program Files (x86)\Borland\CBuilder4\Lib";include\nautilus;export;partage;curl;nsutil;nscompta;nautilus;docking;..\..\..\..\cvs\episodus;indy\c4;$(BCB)\lib;$(BCB)\lib\obj;$(BCB)\Projects\Lib;$(BCB)\imports;"..\..\..\..\Program Files (x86)\Java\jdk1.6.0_30\lib";"..\..\..\..\Program Files (x86)\Java\jdk1.6.0_30\jre\bin\server";$(RELEASELIBPATH) \
   -l"C:\cvs\episodus\" -aa -Tpe -x -Gn -v
 IFLAGS =
 # ---------------------------------------------------------------------------
@@ -193,8 +193,8 @@ ALLLIB = $(LIBFILES) $(LIBRARIES) import32.lib cp32mti.lib
 IncludeVerInfo=1
 AutoIncBuild=0
 MajorVer=5
-MinorVer=11
-Release=1
+MinorVer=14
+Release=2
 Build=0
 Debug=0
 PreRelease=0
@@ -207,7 +207,7 @@ CodePage=1252
 [Version Info Keys]
 CompanyName=Odyssee
 FileDescription=
-FileVersion=5.11.1.0
+FileVersion=5.14.2.0
 InternalName=
 LegalCopyright=
 LegalTrademarks=
@@ -287,20 +287,21 @@ Count=1
 Item0=$(BCB)\source\vcl
 
 [HistoryLists\hlConditionals]
-Count=13
-Item0=STRICT;_OWLDLL;_USE_OWL_CM_EXIT;_BIDSDLL;_OWLALLPCH;BI_NAMESPACE;INC_OLE2;NO_SHDOCVW_GUIDS;_OCFDLL;_OCFPCH;BI_NO_OBJ_STREAMING;_MUE;N_TIERS;__OB1__;NO_EXT_CAPTURE;_IN_EXE;FOR_WINDOWS;BI_PLAT_WIN32
-Item1=STRICT;_OWLDLL;_USE_OWL_CM_EXIT;_BIDSDLL;_OWLALLPCH;BI_NAMESPACE;INC_OLE2;NO_SHDOCVW_GUIDS;_OCFDLL;_OCFPCH;BI_NO_OBJ_STREAMING;_MUE;N_TIERS;__OB1__;NO_EXT_CAPTURE;_IN_EXE;FOR_WINDOWS
-Item2=STRICT;_OWLDLL;_USE_OWL_CM_EXIT;_BIDSDLL;_OWLALLPCH;BI_NAMESPACE;INC_OLE2;NO_SHDOCVW_GUIDS;_OCFDLL;_OCFPCH;BI_NO_OBJ_STREAMING;_MUE;N_TIERS;__OB1__;NO_EXT_CAPTURE;_IN_EXE
-Item3=STRICT;_OWLDLL;_USE_OWL_CM_EXIT;_BIDSDLL;_OWLALLPCH;BI_NAMESPACE;INC_OLE2;NO_SHDOCVW_GUIDS;_OCFDLL;_OCFPCH;BI_NO_OBJ_STREAMING;_MUE;N_TIERS;__OB1__;NO_EXT_CAPTURE;_IN_EXE;__TRACE
-Item4=STRICT;_OWLDLL;_USE_OWL_CM_EXIT;_BIDSDLL;_OWLALLPCH;BI_NAMESPACE;INC_OLE2;NO_SHDOCVW_GUIDS;_OCFDLL;_OCFPCH;BI_NO_OBJ_STREAMING;_MUE;N_TIERS;__OB1__;NO_EXT_CAPTURE;_IN_EXE;__TRACE;__WARN
-Item5=STRICT;_OWLDLL;_USE_OWL_CM_EXIT;_BIDSDLL;_OWLALLPCH;BI_NAMESPACE;INC_OLE2;NO_SHDOCVW_GUIDS;_OCFDLL;_OCFPCH;BI_NO_OBJ_STREAMING;_MUE;N_TIERS;__OB1__;_EXT_CAPTURE
-Item6=STRICT;_OWLDLL;_USE_OWL_CM_EXIT;_BIDSDLL;_OWLALLPCH;BI_NAMESPACE;INC_OLE2;NO_SHDOCVW_GUIDS;_OCFDLL;_OCFPCH;BI_NO_OBJ_STREAMING;_MUE;N_TIERS;__OB1__
-Item7=STRICT;_OWLDLL;_USE_OWL_CM_EXIT;_BIDSDLL;_OWLALLPCH;BI_NAMESPACE;INC_OLE2;NO_SHDOCVW_GUIDS;_OCFDLL;_OCFPCH;BI_NO_OBJ_STREAMING;_MUE;N_TIERS;__OB1__;EPISODUS
-Item8=STRICT;_OWLDLL;_USE_OWL_CM_EXIT;_BIDSDLL;_OWLALLPCH;BI_NAMESPACE;INC_OLE2;NO_SHDOCVW_GUIDS;_OCFDLL;_OCFPCH;BI_NO_OBJ_STREAMING;_MUE;N_TIERS
-Item9=STRICT;_OWLDLL;_USE_OWL_CM_EXIT;_BIDSDLL;_OWLALLPCH;BI_NAMESPACE;INC_OLE2;NO_SHDOCVW_GUIDS;_OCFDLL;_OCFPCH;BI_NO_OBJ_STREAMING;_MUE
-Item10=STRICT;_OWLDLL;_USE_OWL_CM_EXIT;_BIDSDLL;_OWLALLPCH;BI_NAMESPACE;INC_OLE2;NO_SHDOCVW_GUIDS;_OCFDLL;_OCFPCH;BI_NO_OBJ_STREAMING
-Item11=_RTLDLL;STRICT;_OWLDLL;_USE_OWL_CM_EXIT;_BIDSDLL;_OWLALLPCH;BI_NAMESPACE;INC_OLE2;NO_SHDOCVW_GUIDS;_OCFDLL;_OCFPCH;USEPACKAGES
-Item12=_RTLDLL;USEPACKAGES;STRICT;_OWLDLL;_USE_OWL_CM_EXIT;_BIDSDLL;_OWLALLPCH;BI_NAMESPACE;INC_OLE2;NO_SHDOCVW_GUIDS;_OCFDLL;_OCFPCH
+Count=14
+Item0=STRICT;_OWLDLL;_USE_OWL_CM_EXIT;_BIDSDLL;_OWLALLPCH;BI_NAMESPACE;INC_OLE2;NO_SHDOCVW_GUIDS;_OCFDLL;_OCFPCH;BI_NO_OBJ_STREAMING;_MUE;N_TIERS;__OB1__;NO_EXT_CAPTURE;_IN_EXE;FOR_WINDOWS;BI_PLAT_WIN32;TIXML_USE_STL
+Item1=STRICT;_OWLDLL;_USE_OWL_CM_EXIT;_BIDSDLL;_OWLALLPCH;BI_NAMESPACE;INC_OLE2;NO_SHDOCVW_GUIDS;_OCFDLL;_OCFPCH;BI_NO_OBJ_STREAMING;_MUE;N_TIERS;__OB1__;NO_EXT_CAPTURE;_IN_EXE;FOR_WINDOWS;BI_PLAT_WIN32
+Item2=STRICT;_OWLDLL;_USE_OWL_CM_EXIT;_BIDSDLL;_OWLALLPCH;BI_NAMESPACE;INC_OLE2;NO_SHDOCVW_GUIDS;_OCFDLL;_OCFPCH;BI_NO_OBJ_STREAMING;_MUE;N_TIERS;__OB1__;NO_EXT_CAPTURE;_IN_EXE;FOR_WINDOWS
+Item3=STRICT;_OWLDLL;_USE_OWL_CM_EXIT;_BIDSDLL;_OWLALLPCH;BI_NAMESPACE;INC_OLE2;NO_SHDOCVW_GUIDS;_OCFDLL;_OCFPCH;BI_NO_OBJ_STREAMING;_MUE;N_TIERS;__OB1__;NO_EXT_CAPTURE;_IN_EXE
+Item4=STRICT;_OWLDLL;_USE_OWL_CM_EXIT;_BIDSDLL;_OWLALLPCH;BI_NAMESPACE;INC_OLE2;NO_SHDOCVW_GUIDS;_OCFDLL;_OCFPCH;BI_NO_OBJ_STREAMING;_MUE;N_TIERS;__OB1__;NO_EXT_CAPTURE;_IN_EXE;__TRACE
+Item5=STRICT;_OWLDLL;_USE_OWL_CM_EXIT;_BIDSDLL;_OWLALLPCH;BI_NAMESPACE;INC_OLE2;NO_SHDOCVW_GUIDS;_OCFDLL;_OCFPCH;BI_NO_OBJ_STREAMING;_MUE;N_TIERS;__OB1__;NO_EXT_CAPTURE;_IN_EXE;__TRACE;__WARN
+Item6=STRICT;_OWLDLL;_USE_OWL_CM_EXIT;_BIDSDLL;_OWLALLPCH;BI_NAMESPACE;INC_OLE2;NO_SHDOCVW_GUIDS;_OCFDLL;_OCFPCH;BI_NO_OBJ_STREAMING;_MUE;N_TIERS;__OB1__;_EXT_CAPTURE
+Item7=STRICT;_OWLDLL;_USE_OWL_CM_EXIT;_BIDSDLL;_OWLALLPCH;BI_NAMESPACE;INC_OLE2;NO_SHDOCVW_GUIDS;_OCFDLL;_OCFPCH;BI_NO_OBJ_STREAMING;_MUE;N_TIERS;__OB1__
+Item8=STRICT;_OWLDLL;_USE_OWL_CM_EXIT;_BIDSDLL;_OWLALLPCH;BI_NAMESPACE;INC_OLE2;NO_SHDOCVW_GUIDS;_OCFDLL;_OCFPCH;BI_NO_OBJ_STREAMING;_MUE;N_TIERS;__OB1__;EPISODUS
+Item9=STRICT;_OWLDLL;_USE_OWL_CM_EXIT;_BIDSDLL;_OWLALLPCH;BI_NAMESPACE;INC_OLE2;NO_SHDOCVW_GUIDS;_OCFDLL;_OCFPCH;BI_NO_OBJ_STREAMING;_MUE;N_TIERS
+Item10=STRICT;_OWLDLL;_USE_OWL_CM_EXIT;_BIDSDLL;_OWLALLPCH;BI_NAMESPACE;INC_OLE2;NO_SHDOCVW_GUIDS;_OCFDLL;_OCFPCH;BI_NO_OBJ_STREAMING;_MUE
+Item11=STRICT;_OWLDLL;_USE_OWL_CM_EXIT;_BIDSDLL;_OWLALLPCH;BI_NAMESPACE;INC_OLE2;NO_SHDOCVW_GUIDS;_OCFDLL;_OCFPCH;BI_NO_OBJ_STREAMING
+Item12=_RTLDLL;STRICT;_OWLDLL;_USE_OWL_CM_EXIT;_BIDSDLL;_OWLALLPCH;BI_NAMESPACE;INC_OLE2;NO_SHDOCVW_GUIDS;_OCFDLL;_OCFPCH;USEPACKAGES
+Item13=_RTLDLL;USEPACKAGES;STRICT;_OWLDLL;_USE_OWL_CM_EXIT;_BIDSDLL;_OWLALLPCH;BI_NAMESPACE;INC_OLE2;NO_SHDOCVW_GUIDS;_OCFDLL;_OCFPCH
 
 [HistoryLists\hlIntOutputDir]
 Count=4
@@ -316,18 +317,26 @@ Item1=user=coucou
 Item2=test=coucou
 
 [HistoryLists\hlFinalOutputDir]
-Count=4
+Count=8
 Item0=..\..\..\..\cvs\episodus\
-Item1=..\..\..\..\cvs\episodusItem1=..\..\..\..\cvs\episodusItem1=..\..\..\..\cvs\episodus
+Item1=C:\cvs\episodusItem1=..\..\..\..\cvs\episodusItem1=..\..\..\..\cvs\episodusItem1=..\..\..\..\cvs\episodusItem1=..\..\..\..\cvs\episodusItem1=..\..\..\..\cvs\episodusItem1=..\..\..\..\cvs\episodus
 Item2=
 Item3=
+Item4=
+Item5=
+Item6=
+Item7=
 
 [HistoryLists\hIBPIOutputDir]
-Count=4
+Count=8
 Item0=C:\cvs\episodus\
-Item1=C:\cvs\episodusItem1=C:\cvs\episodusItem1=..\..\..\..\cvs\episodus
+Item1=C:\cvs\episodusItem1=C:\cvs\episodusItem1=C:\cvs\episodusItem1=C:\cvs\episodusItem1=C:\cvs\episodusItem1=C:\cvs\episodusItem1=..\..\..\..\cvs\episodus
 Item2=
 Item3=
+Item4=
+Item5=
+Item6=
+Item7=
 
 [Debugging]
 DebugSourceDirs=$(BCB)\source\vcl

@@ -154,7 +154,7 @@ NSSuper::NSSuper()
 {
 try
 {
-	sNumVersion         = string("5.14.0001") ;
+	sNumVersion         = string("5.14.0006") ;
   _numInstance        = 0 ;
 	_pSuperContext      = (NSContexte*) 0 ;
   _bJavaOk            = false ;
@@ -1365,7 +1365,7 @@ NSSuper::InitParite()
     string line = string("") ;
   	getline(inFile, line) ;
     if (string("") != line)
-    	sData += line + "\n" ;
+    	sData += line + string("\n") ;
 	}
 
 	inFile.close() ;
@@ -1391,7 +1391,7 @@ NSSuper::InitParite()
 
     i++ ;
 
-    if 		((sNomAttrib == string("PARITE")) && (sValAttrib != string("")))
+    if 		((string("PARITE") == sNomAttrib) && (string("") != sValAttrib))
     {
     	// Parité monnaie locale / euros
       _parite = atof(sValAttrib.c_str()) ;
@@ -1402,19 +1402,19 @@ NSSuper::InitParite()
         _parite = 6.5596 ;
       }
     }
-    else if ((sNomAttrib == "MONNAIE") && (sValAttrib != ""))
+    else if ((string("MONNAIE") == sNomAttrib) && (string("") != sValAttrib))
     {
     	if (sValAttrib == "EURO")
       	_monnaieRef = MONNAIE_EURO ;
       else
       	_monnaieRef = MONNAIE_LOCALE ;
     }
-    else if ((sNomAttrib == "SIGLE") && (string("") != sValAttrib))
+    else if ((string("SIGLE") == sNomAttrib) && (string("") != sValAttrib))
     {
     	// sigle de la monnaie locale
       _sigle = sValAttrib ;
     }
-    else if ((sNomAttrib == "AUTO") && (string("") != sValAttrib))
+    else if ((string("AUTO") == sNomAttrib) && (string("") != sValAttrib))
     {
     	// compta automatique
       if (IsYes(sValAttrib))
@@ -1422,7 +1422,7 @@ NSSuper::InitParite()
       else
       	_bComptaAuto = false ;
     }
-    else if ((sNomAttrib == "NOCCAMCR") && (string("") != sValAttrib))
+    else if ((string("NOCCAMCR") == sNomAttrib) && (string("") != sValAttrib))
     {
     	// pas de CCAM pour les comptes rendus
       if (IsYes(sValAttrib))
@@ -1430,7 +1430,7 @@ NSSuper::InitParite()
       else
       	_bNoCCAMforReport = false ;
     }
-    else if ((sNomAttrib == "NOCCAMCS") && (string("") != sValAttrib))
+    else if ((string("NOCCAMCS") == sNomAttrib) && (string("") != sValAttrib))
     {
     	// pas de CCAM pour les consultations
       if (IsYes(sValAttrib))
@@ -1438,12 +1438,12 @@ NSSuper::InitParite()
       else
       	_bNoCCAMforExam = false ;
     }
-    else if ((sNomAttrib == "INDICE") && (string("") != sValAttrib))
+    else if ((string("INDICE") == sNomAttrib) && (string("") != sValAttrib))
     {
     	// indice de consultation
       _indiceConsult = sValAttrib ;
     }
-    else if ((sNomAttrib == "EXPORT") && (string("") != sValAttrib))
+    else if ((string("EXPORT") == sNomAttrib) && (string("") != sValAttrib))
     {
     	// dll d'exportation automatique à la sauvegarde
       _sExport_dll = sValAttrib ;
@@ -1451,7 +1451,7 @@ NSSuper::InitParite()
       sMsg = string("Export dll: ") + _sExport_dll ;
       trace(&sMsg, 1, NSSuper::trSubSteps) ;
     }
-    else if ((sNomAttrib == "EXPORT_CPTA") && (string("") != sValAttrib))
+    else if ((string("EXPORT_CPTA") == sNomAttrib) && (string("") != sValAttrib))
     {
     	// dll d'exportation automatique à la sauvegarde
       _sAccountingExport_dll = sValAttrib ;
@@ -1459,11 +1459,11 @@ NSSuper::InitParite()
       sMsg = string("Export dll for accounting: ") + _sAccountingExport_dll ;
       trace(&sMsg, 1, NSSuper::trSubSteps) ;
     }
-    else if ((sNomAttrib == "STAYS_SYNCHRO") && (string("") != sValAttrib))
+    else if ((string("STAYS_SYNCHRO") == sNomAttrib) && (string("") != sValAttrib))
     {
       _sStaysSynchro_dll = sValAttrib ;
     }
-    else if ((sNomAttrib == "CODEAUTO") && (string("") != sValAttrib))
+    else if ((string("CODEAUTO") == sNomAttrib) && (string("") != sValAttrib))
     {
     	// compta automatique
       if (IsYes(sValAttrib))
@@ -1471,36 +1471,36 @@ NSSuper::InitParite()
       else
       	_bCodageAuto = false ;
     }
-    else if ((sNomAttrib == "USEIEFORPDF") && (string("") != sValAttrib))
+    else if ((string("USEIEFORPDF") == sNomAttrib) && (string("") != sValAttrib))
     {
       if (IsNo(sValAttrib))
       	_bUseIeForPdf = false ;
       else
       	_bUseIeForPdf = true ;
     }
-    else if ((sNomAttrib == "MUSTKILLPDF") && (string("") != sValAttrib))
+    else if ((string("MUSTKILLPDF") == sNomAttrib) && (string("") != sValAttrib))
     {
       if (IsNo(sValAttrib))
         _bMustKillPdfProcess = false ;
       else
         _bMustKillPdfProcess = true ;
     }
-    else if ((sNomAttrib == "NOM_MODULE") && (string("") != sValAttrib))
+    else if ((string("NOM_MODULE") == sNomAttrib) && (string("") != sValAttrib))
     {
     	// nom officiel du module
       _sNomModule = sValAttrib ;
     }
-    else if ((sNomAttrib == "DIFFUSEUR") && (string("") != sValAttrib))
+    else if ((string("DIFFUSEUR") == sNomAttrib) && (string("") != sValAttrib))
     {
     	// nom officiel du module
       _sDiffuseur = sValAttrib ;
     }
-    else if ((sNomAttrib == "URL_DIFFUSEUR") && (string("") != sValAttrib))
+    else if ((string("URL_DIFFUSEUR") == sNomAttrib) && (string("") != sValAttrib))
     {
     	// nom officiel du module
       _sURLDiffuseur = sValAttrib ;
     }
-    else if ((sNomAttrib == "IPP_SITE") && (string("") != sValAttrib))
+    else if ((string("IPP_SITE") == sNomAttrib) && (string("") != sValAttrib))
     {
     	// reference site for Patient's permanent identifier
       _sIppSite = sValAttrib ;
@@ -1508,7 +1508,7 @@ NSSuper::InitParite()
       sMsg = string("Refered site for IPP: ") + _sIppSite ;
       trace(&sMsg, 1, NSSuper::trSubSteps) ;
     }
-    else if ((sNomAttrib == "OPERATION_SITE") && (string("") != sValAttrib))
+    else if ((string("OPERATION_SITE") == sNomAttrib) && (string("") != sValAttrib))
     {
     	// operational site code
       _sOperationalSite = sValAttrib ;
@@ -1516,7 +1516,7 @@ NSSuper::InitParite()
       sMsg = string("Operational site code: ") + _sOperationalSite ;
       trace(&sMsg, 1, NSSuper::trSubSteps) ;
     }
-    else if ((sNomAttrib == "DEMOGRAPHIC") && (string("") != sValAttrib))
+    else if ((string("DEMOGRAPHIC") == sNomAttrib) && (string("") != sValAttrib))
     {
     	// demographic archetype
       _sDemographicArchetypeId = sValAttrib ;
@@ -1524,7 +1524,7 @@ NSSuper::InitParite()
       sMsg = string("Demographic archetype: ") + _sDemographicArchetypeId ;
       trace(&sMsg, 1, NSSuper::trSubSteps) ;
     }
-    else if ((sNomAttrib == "FCT_UNIT") && (string("") != sValAttrib))
+    else if ((string("FCT_UNIT") == sNomAttrib) && (string("") != sValAttrib))
     {
     	// Fonctionnal unit
       _sDefaultFctUnitId = sValAttrib ;
@@ -1532,7 +1532,7 @@ NSSuper::InitParite()
       sMsg = string("Functional unit for this unit: ") + _sDefaultFctUnitId ;
       trace(&sMsg, 1, NSSuper::trSubSteps) ;
     }
-    else if ((sNomAttrib == "CAREPLACE_ID") && (string("") != sValAttrib))
+    else if ((string("CAREPLACE_ID") == sNomAttrib) && (string("") != sValAttrib))
     {
     	// reference site for Patien's permanent identifier
       _sCarePlaceId = sValAttrib ;
@@ -1540,7 +1540,7 @@ NSSuper::InitParite()
       sMsg = string("Care place ID: ") + _sCarePlaceId ;
       trace(&sMsg, 1, NSSuper::trSubSteps) ;
     }
-    else if ((sNomAttrib == "INDEX_MGMT") && (string("") != sValAttrib))
+    else if ((string("INDEX_MGMT") == sNomAttrib) && (string("") != sValAttrib))
     {
       sValAttrib = pseumaj(sValAttrib) ;
     	if      (string("SINGLETREE") == sValAttrib)
@@ -1550,7 +1550,7 @@ NSSuper::InitParite()
       else if (string("MULTITREES") == sValAttrib)
       	_iIndexManagementRule = umMultiTrees ;
     }
-    else if ((sNomAttrib == "IN_PATIENTS") && (string("") != sValAttrib))
+    else if ((string("IN_PATIENTS") == sNomAttrib) && (string("") != sValAttrib))
     {
     	// complete file name for In Patien's file description
       _sInPatientsFileDesc = sValAttrib ;
@@ -1561,23 +1561,23 @@ NSSuper::InitParite()
     //
     // User functions modules
     //
-    else if ((sNomAttrib == "USER_MODULE_1") && (string("") != sValAttrib))
+    else if ((string("USER_MODULE_1") == sNomAttrib) && (string("") != sValAttrib))
       _sUserFctDll[0] = sValAttrib ;
-    else if ((sNomAttrib == "USER_MODULE_2") && (string("") != sValAttrib))
+    else if ((string("USER_MODULE_2") == sNomAttrib) && (string("") != sValAttrib))
       _sUserFctDll[1] = sValAttrib ;
-    else if ((sNomAttrib == "USER_MODULE_3") && (string("") != sValAttrib))
+    else if ((string("USER_MODULE_3") == sNomAttrib) && (string("") != sValAttrib))
       _sUserFctDll[2] = sValAttrib ;
-    else if ((sNomAttrib == "USER_MODULE_4") && (string("") != sValAttrib))
+    else if ((string("USER_MODULE_4") == sNomAttrib) && (string("") != sValAttrib))
       _sUserFctDll[3] = sValAttrib ;
-    else if ((sNomAttrib == "USER_MODULE_5") && (string("") != sValAttrib))
+    else if ((string("USER_MODULE_5") == sNomAttrib) && (string("") != sValAttrib))
       _sUserFctDll[4] = sValAttrib ;
-    else if ((sNomAttrib == "USER_MODULE_6") && (string("") != sValAttrib))
+    else if ((string("USER_MODULE_6") == sNomAttrib) && (string("") != sValAttrib))
       _sUserFctDll[5] = sValAttrib ;
-    else if ((sNomAttrib == "USER_MODULE_7") && (string("") != sValAttrib))
+    else if ((string("USER_MODULE_7") == sNomAttrib) && (string("") != sValAttrib))
       _sUserFctDll[6] = sValAttrib ;
-    else if ((sNomAttrib == "USER_MODULE_8") && (string("") != sValAttrib))
+    else if ((string("USER_MODULE_8") == sNomAttrib) && (string("") != sValAttrib))
       _sUserFctDll[7] = sValAttrib ;
-    else if ((sNomAttrib == "USER_MODULE_9") && (string("") != sValAttrib))
+    else if ((string("USER_MODULE_9") == sNomAttrib) && (string("") != sValAttrib))
       _sUserFctDll[8] = sValAttrib ;
 	}
 	return true ;
@@ -2830,7 +2830,7 @@ NSSuper::GetDocAsHtmlForCR(NSDocumentInfo* pDocument, NSContexte* pCtx, bool bIn
 string
 NSSuper::GetDocAsHtmlForCS(NSDocumentInfo* pDocument, NSContexte* pCtx, bool bInsertMeta, bool bInsertTree)
 {
-  if (NULL == pDocument)
+  if ((NSDocumentInfo*) NULL == pDocument)
     return string("") ;
 
   NSDocumentInfo *pDocHtml = (NSDocumentInfo *) 0 ;
@@ -2857,7 +2857,7 @@ NSSuper::GetDocAsHtmlForCS(NSDocumentInfo* pDocument, NSContexte* pCtx, bool bIn
 string
 NSSuper::GetDocAsHtmlForCQ(NSDocumentInfo* pDocument, NSContexte* pCtx, bool bInsertMeta, bool bInsertTree)
 {
-  if (NULL == pDocument)
+  if ((NSDocumentInfo*) NULL == pDocument)
 		return string("") ;
 
   NSDocumentInfo *pDocHtml = (NSDocumentInfo *) 0 ;
@@ -3103,7 +3103,7 @@ NSSuper::ExportDocAsHtmlForRTF(NSDocumentInfo* pDocument, NSContexte* pCtx, stri
 bool
 NSSuper::ExportDocAsHtmlForTXT(NSDocumentInfo* pDocument, NSContexte* pCtx, string sDocName)
 {
-  if (NULL == pDocument)
+  if ((NSDocumentInfo*) NULL == pDocument)
 		return false ;
 
   NSDocumentInfo *pDocHtml = (NSDocumentInfo *) 0 ;
@@ -3522,6 +3522,7 @@ NSContexte::NSContexte(NSSuper* pSuper)
   _blackboardInterface = (BB1BBInterface*) 0 ;
   _bb                  = (BB1BB*) 0 ;
   _pDico               = new NSDico(this) ;
+  _pBdmDriver          = (NSBdmDriver*) 0 ;
 
   _pEpisodus           = (NSEpisodus*) 0 ;
   _pPredi              = (NSPredi*) 0 ;
@@ -3530,6 +3531,10 @@ NSContexte::NSContexte(NSSuper* pSuper)
   _pEpisodus           = new NSEpisodus(this) ;
 # ifndef __EPIBRAIN__
   _pPredi              = new NSPredi(this) ;
+
+  _iBamType            = btNone ;
+  _sBamApplicationID   = string("") ;
+  _sBamApplicationKey  = string("") ;
 
 /*
   _sAppName = string("Episodus") ;
@@ -3566,8 +3571,14 @@ NSContexte::NSContexte(NSContexte& rv)
   _bb                  = rv._bb ;
   _pDico               = new NSDico(*(rv._pDico)) ;
 
+  _pBdmDriver          = (NSBdmDriver*) 0 ;
   _pEpisodus           = (NSEpisodus*) 0 ;
   _pPredi              = (NSPredi*) 0 ;
+
+  _iBamType            = rv._iBamType ;
+  _sBamApplicationID   = rv._sBamApplicationID ;
+  _sBamApplicationKey  = rv._sBamApplicationKey ;
+
 #ifndef __EPIPUMP__
   _pEpisodus           = rv._pEpisodus ;
 # ifndef __EPIBRAIN__
@@ -3580,6 +3591,8 @@ NSContexte::~NSContexte()
 {
   if (_pDico)
     delete _pDico ;
+  if (_pBdmDriver)
+    delete _pBdmDriver ;
 
 #ifndef __EPIPUMP__
   if (_pEpisodus)
@@ -3633,6 +3646,15 @@ NSContexte::setMainCaption()
 	}
 
 	pMainWindow->SetCaption(sCaption.c_str()) ;
+}
+
+void
+NSContexte::resetBdmDriver()
+{
+  if (_pBdmDriver)
+    delete _pBdmDriver ;
+
+  _pBdmDriver = new NSBdmDriver(this) ;
 }
 
 boolNSContexte::captureData(NSCaptureArray *pCapture)

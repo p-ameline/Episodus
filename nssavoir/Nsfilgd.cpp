@@ -204,7 +204,7 @@ NSDico::UserChanged()
     _pLexiMed = (NSLexiMed*) 0 ;
   }
   //
-  // Fermeture du générateur - Langage generator is deleted
+  // Fermeture du générateur - Language generator is deleted
   //
   if (_pGenerateur)
   {
@@ -2339,16 +2339,16 @@ try
       //
 			sLimiteMonter = sFutureLimiteMonter ;
       string sNouvelleCible = NouvelleCible(&VectItemPere,
-                                                  // bLimitSemanticSearch ? NombreElementEnCommun : 0,
-                                                  NombreElementEnCommun,
-                                                  pVecteurSelonCritere) ;
+                                            // bLimitSemanticSearch ? NombreElementEnCommun : 0,
+                                            NombreElementEnCommun,
+                                            pVecteurSelonCritere) ;
 
       _pBBFiche->lastError = _pBBFiche->chercheClef(&sNouvelleCible,
-                                                        "CHEMIN",
-                                                        NODEFAULTINDEX,
-                                                        keySEARCHGEQ,
-                                                        dbiWRITELOCK) ;
-			if (_pBBFiche->lastError == DBIERR_NONE)
+                                                    "CHEMIN",
+                                                    NODEFAULTINDEX,
+                                                    keySEARCHGEQ,
+                                                    dbiWRITELOCK) ;
+			if (DBIERR_NONE == _pBBFiche->lastError)
       {
       	_pBBFiche->lastError = _pBBFiche->getRecord() ;
         if (_pBBFiche->lastError != DBIERR_NONE)
@@ -2404,7 +2404,7 @@ try
     if (descendre)
     {
     	_pBBFiche->lastError = _pBBFiche->retrouveBookMark(1) ;
-      if ((_pBBFiche->lastError == DBIERR_NONE))
+      if (DBIERR_NONE == _pBBFiche->lastError)
       {
       	_pBBFiche->lastError = _pBBFiche->getRecord() ;
         sCible = _pBBFiche->getSemanticPath() ;
@@ -2438,10 +2438,10 @@ try
           nbElement = VectItemPere.NbElementCommun(&VectItemCible) ;
         }
       }
-      if (_pBBFiche->lastError == DBIERR_NONE)
+      if (DBIERR_NONE == _pBBFiche->lastError)
       	_pBBFiche->lastError = _pBBFiche->placeBookMark(1) ;
 
-      if (_pBBFiche->lastError != DBIERR_NONE)
+      if (DBIERR_NONE != _pBBFiche->lastError)
       	descendre = false ;
     }
     ChoisirMeilleureProposition(pVecteurSelonCritere) ;

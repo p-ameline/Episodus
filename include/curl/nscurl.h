@@ -24,8 +24,12 @@
 #define CURL_EASY_CLEANUP    1
 #define CURL_EASY_GETINFO    4
 #define CURL_EASY_STRERROR   9
+#define CURL_FORMADD        12
+#define CURL_FORMFREE       13
 #define CURL_GLOBAL_INIT    19
 #define CURL_GLOBAL_CLEANUP 18
+#define CURL_SLIST_APPEND   49
+#define CURL_SLIST_FREE_ALL 50
 
 class NSLibCurl
 {
@@ -46,15 +50,19 @@ class NSLibCurl
 
     // Pointers to Easy funstions set
     //
-    static CURL*       (FAR* pCurlEasyInit)( void ) ;
-    static CURLcode    (FAR* pCurlEasySetopt)( CURL *curl, CURLoption option, ... ) ;
-    static CURLcode    (FAR* pCurlEasyPerform)( CURL *curl ) ;
-    static void        (FAR* pCurlEasyReset)( CURL *curl ) ;
-    static void        (FAR* pCurlEasyCleanup)( CURL *curl ) ;
-    static CURLcode    (FAR* pCurlEasyGetInfo)( CURL *curl, CURLINFO info, ... ) ;
-    static const char* (FAR* pCurlEasyStrerror)( CURLcode ) ;
-    static CURLcode    (FAR* pCurlGlobalInit)( long flags ) ;
-    static void        (FAR* pCurlGlobalCleanup)( void ) ;
+    static CURL*        (FAR* pCurlEasyInit)( void ) ;
+    static CURLcode     (FAR* pCurlEasySetopt)( CURL *curl, CURLoption option, ... ) ;
+    static CURLcode     (FAR* pCurlEasyPerform)( CURL *curl ) ;
+    static void         (FAR* pCurlEasyReset)( CURL *curl ) ;
+    static void         (FAR* pCurlEasyCleanup)( CURL *curl ) ;
+    static CURLcode     (FAR* pCurlEasyGetInfo)( CURL *curl, CURLINFO info, ... ) ;
+    static const char*  (FAR* pCurlEasyStrerror)( CURLcode ) ;
+    static CURLcode     (FAR* pCurlGlobalInit)( long flags ) ;
+    static void         (FAR* pCurlGlobalCleanup)( void ) ;
+    static CURLFORMcode (FAR* pCurlFormAdd)(struct curl_httppost **httppost, struct curl_httppost **last_post, ...) ;
+    static void         (FAR* pCurlFormFree)(struct curl_httppost *form) ;
+    static curl_slist*  (FAR* pCurlSlistAppend)(struct curl_slist *, const char *) ;
+    static void         (FAR* pCurlSlistFreeAll)(struct curl_slist *) ;
 
 		NSLibCurl() ;
 		~NSLibCurl() ;

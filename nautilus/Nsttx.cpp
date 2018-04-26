@@ -2087,6 +2087,15 @@ void NSTtxView::CmFileOpen(){
       }
       else if (string("nomPatient") == sTag)
       	sValeur = pDocTtx->pContexte->getPatient()->getNomLong() ;
+      else if (string("signature") == sTag)
+      {
+        sValeur = pDocTtx->pContexte->getUtilisateur()->getCivilProf() ;
+        if (string("") == sValeur)
+        {
+          sValeur = pDocTtx->pContexte->getUtilisateur()->donneSignature(pDocTtx->pContexte, pDocTtx->pContexte->getUtilisateur()->donneLang()) ;
+          pDocTtx->pContexte->getUtilisateur()->setCivilProf(sValeur) ;
+        }
+      }
       else if (string("dateJour") == sTag)
       {
       	string sLang = pDocTtx->pContexte->getUserLanguage() ;

@@ -4048,6 +4048,9 @@ NSMDIFrame::openWhoIsThereWindow(string sInPatientsFileDesc)
   NSSuper* pSuper = pContexte->getSuperviseur() ;
   NSMDIClient* pClient = pSuper->getApplication()->prendClient() ;
 
+  string ps = string("Opening the in-patient window.") ;
+  pSuper->trace(&ps, 1, NSSuper::trDetails) ;
+
   NSMDIChildContent*       pChildContent    = new NSMDIChildContent(pContexte, pClient) ;
 
   NSInPersonsWindow*       pInPersonsWindow = new NSInPersonsWindow(pContexte, pChildContent, sInPatientsFileDesc) ;

@@ -115,9 +115,9 @@ drugSortByPrescrEndInf(NSLdvDrug *pDrug1, NSLdvDrug *pDrug2)
   NSLdvDrugPhase* pPhase1 = pDrug1->getCurrentActivePhase() ;
   NSLdvDrugPhase* pPhase2 = pDrug2->getCurrentActivePhase() ;
 
-  if (NULL == pPhase1)
+  if ((NSLdvDrugPhase*) NULL == pPhase1)
     return true ;
-  if (NULL == pPhase2)
+  if ((NSLdvDrugPhase*) NULL == pPhase2)
     return false ;
 
 	return (pPhase1->tDateFermeture < pPhase2->tDateFermeture) ;
@@ -129,9 +129,9 @@ drugSortByPrescrEndSup(NSLdvDrug *pDrug1, NSLdvDrug *pDrug2)
   NSLdvDrugPhase* pPhase1 = pDrug1->getCurrentActivePhase() ;
   NSLdvDrugPhase* pPhase2 = pDrug2->getCurrentActivePhase() ;
 
-  if (NULL == pPhase2)
+  if ((NSLdvDrugPhase*) NULL == pPhase2)
     return true ;
-  if (NULL == pPhase1)
+  if ((NSLdvDrugPhase*) NULL == pPhase1)
     return false ;
 
 	return (pPhase1->tDateFermeture > pPhase2->tDateFermeture) ;

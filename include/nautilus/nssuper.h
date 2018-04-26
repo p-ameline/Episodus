@@ -33,6 +33,7 @@ class TMyApp ;
 class	BB1BBInterface ;
 class BB1BBInterfaceForKs ;
 class NSDico ;
+class NSBdmDriver ;
 class NSPersonArray ;
 class NSCutPaste ;
 class NSPatPathoData ;
@@ -255,7 +256,7 @@ class NSSuper
 
   NSPersonArray*        getPersonArray() { return _pPersonArray ; }
 
-  skinArray*            getSkins() { return _paSkins ; }
+  skinArray*            getSkins()      { return _paSkins ; }
   OWL::TFont*           getDialogFont() { return _pDialogFont ; }
 
   NSSupportsArray*      getSupports() { return &_aSupportsArray ; }
@@ -551,6 +552,10 @@ class NSUserPatRelation
 
 class NSContexte : public NSSuperRoot
 {
+ public:
+
+  enum BAMTYPE { btNone = 0, btVidal } ;
+
  protected:
 
   NSPatientChoisi*       _pPatient ;
@@ -582,6 +587,11 @@ class NSContexte : public NSSuperRoot
   bool                   _bBBKToDoLocked ;
 
   NSDico*                _pDico ;                       //!< Pointeur sur le dictionnaire en cours
+  NSBdmDriver*           _pBdmDriver ;                  //!< Pointeur sur la bdm
+
+  BAMTYPE                _iBamType ;
+  string                 _sBamApplicationID ;
+  string                 _sBamApplicationKey ;
 
  public:
 
@@ -665,12 +675,15 @@ class NSContexte : public NSSuperRoot
   }
 
   NSDico*         getDico()           { return _pDico ; }
+  NSBdmDriver*    getBdmDriver()      { return _pBdmDriver ; }
   NSFilGuide*     getFilGuide()       { return _pSuper->getFilGuide() ; }
   NSFilGuide*     getFilDecode()      { return _pSuper->getFilDecode() ; }
   NSArcManager*   getArcManager()     { return _pSuper->getArcManager() ; }
   NSPersonArray*  getPersonArray()    { return _pSuper->getPersonArray() ; }
   skinArray*      getSkins()          { return _pSuper->getSkins() ; }
   // note : la fonction getGraphe() est désactivée
+
+  void            resetBdmDriver() ;
 
   string          getBaseDirectory()           { return _sBaseDirectory ; }
   void            setBaseDirectory(string bd)  { _sBaseDirectory = bd ; }
@@ -685,6 +698,14 @@ class NSContexte : public NSSuperRoot
 
   NSWebTipWindow* getHelpTipPP()                        { return _pSuper->_pHelpTip ; }
   void            setHelpTipPP(NSWebTipWindow* pWebTip) { _pSuper->_pHelpTip = pWebTip ; }
+
+  BAMTYPE         getBamType()            { return _iBamType ; }
+  void            setBamType(BAMTYPE iBT) { _iBamType = iBT ; }
+
+  string          getBamApplicationID()   { return _sBamApplicationID ; }
+  void            setBamApplicationID(string sID) { _sBamApplicationID = sID ; }
+  string          getBamApplicationKey()  { return _sBamApplicationKey ; }
+  void            setBamApplicationKey(string sK) { _sBamApplicationKey = sK ; }
 
   void addToDoBbk(NSToDoTask* pTask, bool bSend = true) ;
   // Fonctions du Blackboard

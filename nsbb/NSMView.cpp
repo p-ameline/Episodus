@@ -3771,15 +3771,15 @@ ArrayWinProp::initWindsChild(string sUserId, string sPersoDirectory)
 bool
 ArrayWinProp::initFromFile(string sFileName)
 {
-	if (sFileName == string(""))
+	if (string("") == sFileName)
 		return false ;
 
 	string sData = string("") ;
 
-  if (!getStringFromFile(sFileName, &sData))
+  if (false == getStringFromFile(sFileName, &sData))
 		return false ;
 
-  if (sData == string(""))
+  if (string("") == sData)
 		return false ;
 
 	return initFromString(sFileName, &sData) ;
@@ -3788,7 +3788,7 @@ ArrayWinProp::initFromFile(string sFileName)
 bool
 ArrayWinProp::getStringFromFile(string sFileName, string* pData)
 {
-	if (!pData || (sFileName == string("")))
+	if (((string*) NULL == pData) || (string("") == sFileName))
 		return false ;
 
 	*pData = string("") ;
@@ -3800,10 +3800,9 @@ try
   if (!inFile)
   	return false ;
 
-  string sLine ;
-
   while (!inFile.eof())
   {
+    string sLine("") ;
   	getline(inFile, sLine) ;
     if (string("") != sLine)
     	*pData += sLine + string("\n") ;
@@ -3829,23 +3828,20 @@ ArrayWinProp::initFromString(string sFileName, string* pData)
 
 	string sErrorText = pContexte->getSuperviseur()->getText("fileErrors", "corruptedFile") + string(" ") + sFileName ;
 
-	string sNomAttrib ;
-	string sValAttrib ;
-  string sValSplit ;
-  string sValDetails ;
-	string sFichier ;
+	string sFichier ;
+
 	// boucle de chargement des attributs
 	size_t i = 0 ;
   size_t iStrLen = strlen(pData->c_str()) ;
 	while (i < iStrLen)
 	{
-		sNomAttrib  = "" ;
-		sValAttrib  = "" ;
-    sValSplit   = "" ;
-    sValDetails = "" ;
+		string sNomAttrib  = string("") ;
+		string sValAttrib  = string("") ;
+    string sValSplit   = string("") ;
+    string sValDetails = string("") ;
 
-    string sBloc1 = "" ;
-    string sBloc2 = "" ;
+    string sBloc1 = string("") ;
+    string sBloc2 = string("") ;
 
     bool bContinue = gotoNextBlock(pData, &i) ;
     if (bContinue)
@@ -3856,7 +3852,7 @@ ArrayWinProp::initFromString(string sFileName, string* pData)
     if (bContinue)
     	bContinue = readBlockInString(pData, &i, &sValAttrib) ;
 
-    if ((sNomAttrib == "") || (sValAttrib == ""))
+    if ((string("") == sNomAttrib) || (string("") == sValAttrib))
     {
     	erreur(sErrorText.c_str(), standardError, 0) ;
   		return false ;
@@ -3872,23 +3868,23 @@ ArrayWinProp::initFromString(string sFileName, string* pData)
     if (bContinue)
     	bContinue = readBlockInString(pData, &i, &sBloc2) ;
 
-    if (sBloc1 != string(""))
+    if (string("") != sBloc1)
     {
-    	if      (sBloc1[0] == '[')
+    	if      ('[' == sBloc1[0])
     		sValSplit = sBloc1 ;
-      else if (sBloc1[0] == '(')
+      else if ('(' == sBloc1[0])
     		sValDetails = sBloc1 ;
     }
 
-    if (sBloc2 != string(""))
+    if (string("") != sBloc2)
     {
-    	if      (sBloc2[0] == '[')
+    	if      ('[' == sBloc2[0])
     		sValSplit = sBloc2 ;
-      else if (sBloc2[0] == '(')
+      else if ('(' == sBloc2[0])
     		sValDetails = sBloc2 ;
     }
 
-		if ((i < iStrLen) && ((*pData)[i] == '\n'))
+		if ((i < iStrLen) && ('\n' == (*pData)[i]))
 			i++ ;
     NSWindowProperty* pWinProp = new NSWindowProperty() ;
     pWinProp->setFunction(sNomAttrib) ;
@@ -3897,12 +3893,12 @@ ArrayWinProp::initFromString(string sFileName, string* pData)
     	delete pWinProp ;
       return false ;
     }
-    if ((sValSplit != "") && (!initSplitFromString(&sValSplit, pWinProp)))
+    if ((string("") != sValSplit) && (!initSplitFromString(&sValSplit, pWinProp)))
     {
     	erreur(sErrorText.c_str(), standardError, 0) ;
       return false ;
     }
-    if ((sValDetails != "") && (!initDetailsFromString(&sValDetails, pWinProp)))
+    if ((string("") != sValDetails) && (!initDetailsFromString(&sValDetails, pWinProp)))
     {
     	erreur(sErrorText.c_str(), standardError, 0) ;
       return false ;
@@ -3919,11 +3915,11 @@ ArrayWinProp::initFromString(string sFileName, string* pData)
 bool
 ArrayWinProp::readBlockInString(string* psSource, size_t* piCursor, string* psResult)
 {
-	if (NULL == psResult)
+	if ((string*) NULL == psResult)
 		return false ;
 	*psResult = string("") ;
 
-  if ((NULL == psSource) || (NULL == piCursor))
+  if (((string*) NULL == psSource) || ((size_t*) NULL == piCursor))
 		return false ;
 
   size_t iSourceLen = strlen(psSource->c_str()) ;
@@ -3946,7 +3942,7 @@ ArrayWinProp::readBlockInString(string* psSource, size_t* piCursor, string* psRe
 bool
 ArrayWinProp::gotoNextBlock(string* psSource, size_t* piCursor)
 {
-	if ((NULL == psSource) || (NULL == piCursor))
+	if (((string*) NULL == psSource) || ((size_t*) NULL == piCursor))
 		return false ;
 
   size_t iSourceLen = strlen(psSource->c_str()) ;

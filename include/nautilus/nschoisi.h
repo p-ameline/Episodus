@@ -508,8 +508,8 @@ class NSUtilisateurChoisi : public NSUtiliInfo
 		void SetUtilisateurChoisi(NSBasicAttributeArray *pAttrArray) ;
     bool ModifierAutreUtilisateur(TWindow* parent = (TWindow*) 0) ;
 
-    bool OpenUserFile(ifstream* pInFile, string sFileName, string sPersoDir) ;
-    bool OpenUserFile(ofstream* pInFile, string sFileName, string sPersoDir) ;
+    bool OpenUserFile(ifstream* pInFile, string sFileName, string sShortFileName, string sPersoDir) ;
+    bool OpenUserFile(ofstream* pInFile, string sFileName, string sShortFileName, string sPersoDir) ;
 
     void CreateUserFiles(string sUserID = string("")) ;
     void RenameUserFilesDirectory(string sPreviousID, string sNewID = string("")) ;
@@ -598,7 +598,7 @@ NSPatientChoisi::DonneArray(string sNoeud, NSPatPathoArray *pPPT)
 {  if (!pPPT)    return false ;	if ((!pDocHis) || (pDocHis->VectDocument.empty()))		return false ;  if (strlen(sNoeud.c_str()) != PAT_NSS_LEN + DOC_CODE_DOCUM_LEN + PPD_NOEUD_LEN)    return false ;	string sDocument = string(sNoeud, 0, PAT_NSS_LEN + DOC_CODE_DOCUM_LEN) ;	DocumentIter DocIt = pDocHis->VectDocument.begin() ;	for ( ; DocIt != pDocHis->VectDocument.end() ; DocIt++)	{		if (((*DocIt)->pPatPathoArray) && (!((*DocIt)->pPatPathoArray->empty())))		{			PatPathoIter pptIt = (*DocIt)->pPatPathoArray->begin() ;      if ((*pptIt)->getDoc() == sDocument)      {        for ( ; (pptIt != (*DocIt)->pPatPathoArray->end()) && (sNoeud != (*pptIt)->getNode()) ; pptIt++)          ;        if (pptIt != (*DocIt)->pPatPathoArray->end())        {          (*DocIt)->pPatPathoArray->ExtrairePatPathoFreres(pptIt, pPPT) ;          return true ;        }      }      else      {        if (((*DocIt)->pMeta != NULL) && (!(*DocIt)->pMeta->empty()))        {          PatPathoIter pptMetaIter = (*DocIt)->pMeta->begin() ;          if ((*pptMetaIter)->getDoc() == sDocument)          {            for ( ; (pptMetaIter != (*DocIt)->pMeta->end()) && (sNoeud != (*pptMetaIter)->getNode()) ; pptMetaIter++)              ;            if (pptMetaIter != (*DocIt)->pMeta->end())            {              (*DocIt)->pMeta->ExtrairePatPathoFreres(pptMetaIter, pPPT) ;              return true ;            }          }        }      }		}	}	return false ;}*/
 
 bool
-NSUtilisateurChoisi::OpenUserFile(ifstream* pInFile, string sFileName, string sPersoDir)
+NSUtilisateurChoisi::OpenUserFile(ifstream* pInFile, string sFileName, string sShortFileName, string sPersoDir)
 {
 	if ((NULL == pInFile) || (sFileName == string("")) || (sPersoDir == string("")))
 		return false ;
@@ -613,6 +613,25 @@ NSUtilisateurChoisi::OpenUserFile(ifstream* pInFile, string sFileName, string sP
   if (*pInFile)
 		return true ;
 
+  // Try to open user specific file in model directory
+  //
+  if (string("") != sShortFileName)
+  {
+    sFile = sShortFileName ;
+    size_t pos = sFile.find("[user]") ;
+	  while (NPOS != pos)
+	  {
+      sFile.replace(pos, strlen("[user]"), getID()) ;
+		  pos = sFile.find("[user]", pos + 1) ;
+    }
+
+    sFile = sPersoDir + sFile ;
+    pInFile->open(sFile.c_str()) ;
+
+    if (*pInFile)
+		  return true ;
+  }
+
 	// Try to open file in model directory
 	//
   sFile = sPersoDir + sFileName ;
@@ -625,7 +644,7 @@ NSUtilisateurChoisi::OpenUserFile(ifstream* pInFile, string sFileName, string sP
 }
 
 bool
-NSUtilisateurChoisi::OpenUserFile(ofstream* pOutFile, string sFileName, string sPersoDir)
+NSUtilisateurChoisi::OpenUserFile(ofstream* pOutFile, string sFileName, string sShortFileName, string sPersoDir)
 {
 	if ((NULL == pOutFile) || (sFileName == string("")) || (sPersoDir == string("")))
 		return false ;
@@ -639,6 +658,25 @@ NSUtilisateurChoisi::OpenUserFile(ofstream* pOutFile, string sFileName, string s
 
   if (*pOutFile)
 		return true ;
+
+  // Try to open user specific file in model directory
+  //
+  if (string("") != sShortFileName)
+  {
+    sFile = sShortFileName ;
+    size_t pos = sFile.find("[user]") ;
+	  while (NPOS != pos)
+	  {
+      sFile.replace(pos, strlen("[user]"), getID()) ;
+		  pos = sFile.find("[user]", pos + 1) ;
+    }
+
+    sFile = sPersoDir + sFile ;
+    pOutFile->open(sFile.c_str()) ;
+
+    if (*pOutFile)
+		  return true ;
+  }
 
 	// Try to open file in model directory
 	//

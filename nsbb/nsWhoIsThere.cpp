@@ -771,6 +771,26 @@ try
   _bCloseAfterAdding  = pDescriptor->isYes(string("global"), string("closeAfterAdding")) ;
   _sIcons             = pDescriptor->getLocalText(string("global"), string("icons")) ;
 
+  if (string("") != _sUserFilter)
+  {
+    sTrace = string("User filter: ") + _sUserFilter ;
+    pContexte->getSuperviseur()->trace(&sTrace, 1, NSSuper::trSubDetails) ;
+  }
+  sTrace = string("Parameters: ") ;
+  if (_bRemoveWhenOpening)
+    sTrace += string("remove when opening") ;
+  else
+    sTrace += string("don't remove when opening") ;
+  if (_bCanAddToList)
+    sTrace += string(", can add to list") ;
+  else
+    sTrace += string(", cannot add to list") ;
+  if (_bCloseAfterAdding)
+    sTrace += string(", close after adding") ;
+  else
+    sTrace += string(", don't close after adding") ;
+  pContexte->getSuperviseur()->trace(&sTrace, 1, NSSuper::trSubDetails) ;
+
   refreshFromCsv() ;
 
   sTrace = string("NSInPersonsListWindow::initPersonsListFromCsv leaving") ;
@@ -2301,7 +2321,11 @@ void
 NSInPersonsListWindow::removeFromList(NSInsidePerson* pPersonToRemove)
 {
   if ((NSInsidePerson*) NULL == pPersonToRemove)
+  {
+    string sTrace = string("Asked to remove a \"null preson\" from In Persons list") ;
+    pContexte->getSuperviseur()->trace(&sTrace, 1, NSSuper::trDetails) ;
     return ;
+  }
 
   string sLabelPids = pPersonToRemove->getInformationData("£SPID1") ;
   string sLabelName = pPersonToRemove->getInformationData("ZADMI1/LIDET1/LNOM01") + string(" ") + pPersonToRemove->getInformationData("ZADMI1/LIDET1/LNOM21") ;

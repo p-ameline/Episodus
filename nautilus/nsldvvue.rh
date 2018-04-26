@@ -105,6 +105,10 @@
 #define ALD_BUTTON          143
 #define NS_BUTTON           144
 #define NR_BUTTON           145
+#define DRUG_INFORMATION    146
+#define BDM_SEARCH_INDIC    147
+#define BDM_SEARCH_SUBST    148
+#define BDM_SEARCH_ATC      149
 
 // Dialogue PROP_PREO
 #define IDC_LISTVIEW_ACTUEL	101

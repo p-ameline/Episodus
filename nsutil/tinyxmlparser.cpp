@@ -22,7 +22,7 @@ must not be misrepresented as being the original software.
 distribution.
 */
 
-#include "nsutil\tinyxml.h"
+#include "nsutil/tinyxml.h"
 #include <ctype.h>
 
 //#define DEBUG_PARSER

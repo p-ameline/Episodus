@@ -3341,16 +3341,21 @@ NSGenerateurEn::donnePronomPersonnel(GENRE iGenre, NSPhraseur::VBPERSO /* iVbPer
 }
 
 void
-NSGenerateurEn::etFinal(string *type, string *type1, const string sSeparator)
+NSGenerateurEn::etFinal(string *type, const string *type1, const string sSeparator, bool bUseDefaultIfEmpty)
 {
-  if ((NULL == type) || (NULL == type1))
+  if (((string*) NULL == type) || ((string*) NULL == type1))
     return ;
 
 	if (string("") == *type1)
 		return ;
 
 	if (string("") != *type)
-    *type += sSeparator ;
+  {
+    if ((string("") == sSeparator) && bUseDefaultIfEmpty)
+      *type += string(" and ") ;
+    else
+      *type += sSeparator ;
+  }
 
 	*type += *type1 ;
 

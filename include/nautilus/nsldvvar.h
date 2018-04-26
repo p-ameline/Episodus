@@ -33,6 +33,7 @@
 #include "partage\NTArray.h"
 #include "nsbb\nsmediccontrols.h"
 #include "nsbb\nsmedicphase.h"
+#include "nsoutil\nsBdmDlg.h"
 
 //#include "nautilus\nsldvvue.h"
 
@@ -411,6 +412,10 @@ class NSSimpleNewDrugDlg : public NSUtilDialog
     OWL::TButton        *pComplexModeButton ;
     OWL::TCheckBox      *_pNonSubstituable ;
     OWL::TButton        *_pFreeTextButton ;
+    OWL::TButton        *_pDrugInfoButton ;
+    OWL::TButton        *_pBdmSearchIndicationButton ;
+    OWL::TButton        *_pBdmSearchSubstanceButton ;
+    OWL::TButton        *_pBdmSearchAtcButton ;
 
     NSPatPathoArray     *pPPT ;
 
@@ -447,6 +452,12 @@ class NSSimpleNewDrugDlg : public NSUtilDialog
     void switchToComplexMode() ;
     void editFreeText() ;
     void nonRenouvelable() ;
+    void drugInformation() ;
+
+    void searchInBdmByIndication() ;
+    void searchInBdmBySubstance() ;
+    void searchInBdmByATC() ;
+    void searchInBdm(NSBdmDriver::BAMTABLETYPE iSearchBy) ;
 
   DECLARE_RESPONSE_TABLE(NSSimpleNewDrugDlg) ;
 } ;

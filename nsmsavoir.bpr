@@ -43,13 +43,14 @@ OBJFILES = ..\..\..\..\cvs\episodus\ObjNTIERS\nsmsavoir.obj \
   ..\..\..\..\cvs\episodus\ObjNTIERS\NSHealthTeamMandate.obj \
   ..\..\..\..\cvs\episodus\ObjNTIERS\NsFileCaptur.obj \
   ..\..\..\..\cvs\episodus\ObjNTIERS\ns_search.obj \
-  ..\..\..\..\cvs\episodus\ObjNTIERS\nsHtmBase.obj
+  ..\..\..\..\cvs\episodus\ObjNTIERS\nsHtmBase.obj \
+  ..\..\..\..\cvs\episodus\ObjNTIERS\NsBdmDriver.obj
 RESFILES = ..\..\..\..\cvs\episodus\ObjNTIERS\nssavoir.res \
   ..\..\..\..\cvs\episodus\ObjNTIERS\healthteam.res nsmsavoir.res
 DEFFILE =
 RESDEPEN = $(RESFILES)
 LIBFILES = nsmutil.lib nsm_sgbd.lib nsmbb.lib nsmdn.lib nsmdecode.lib nsmepisod.lib \
-  memmgr.lib cp32mti.lib bidsvi.lib owlwvi.lib ns_capture.lib
+  nsmoutil.lib memmgr.lib cp32mti.lib bidsvi.lib owlwvi.lib ns_capture.lib
 IDLGENFILES =
 IDLFILES =
 LIBRARIES =
@@ -65,7 +66,7 @@ PATHRC = .;nssavoir
 DEBUGLIBPATH = $(BCB)\lib\debug
 RELEASELIBPATH = $(BCB)\lib\release
 SYSDEFINES = NO_STRICT;_RTLDLL;USEPACKAGES
-USERDEFINES = _DANSLEXIDLL;STRICT;_OWLDLL;_USE_OWL_CM_EXIT;_BIDSDLL;_OWLALLPCH;BI_NAMESPACE;INC_OLE2;NO_SHDOCVW_GUIDS;_MUE;N_TIERS;__OB1__;NO_EXT_CAPTURE
+USERDEFINES = _DANSLEXIDLL;STRICT;_OWLDLL;_USE_OWL_CM_EXIT;_BIDSDLL;_OWLALLPCH;BI_NAMESPACE;INC_OLE2;NO_SHDOCVW_GUIDS;_MUE;N_TIERS;__OB1__;NO_EXT_CAPTURE;TIXML_USE_STL
 # ---------------------------------------------------------------------------
 CFLAG1 = -Ipartage;nautilus;include;nsbb;nssavoir;$(BCB)\include;$(BCB)\include\vcl;$(BCB)\include\owlfiles;parseur;"..\..\..\..\Program Files (x86)\Java\jdk1.6.0_30\include";"..\..\..\..\Program Files (x86)\Java\jdk1.6.0_30\include\win32" \
   -WD -Od -w -Tkh30000 -r- -a8 -k -y -v -vi- -c -tWM -D$(SYSDEFINES);$(USERDEFINES)
@@ -77,21 +78,21 @@ IDLCFLAGS = -Ipartage -Inautilus -Iinclude -Insbb -Inssavoir -I$(BCB)\include \
   -I"..\..\..\..\Program Files (x86)\Java\jdk1.6.0_30\include\win32" \
   -src_suffixcpp -D_DANSLEXIDLL -DSTRICT -D_OWLDLL -D_USE_OWL_CM_EXIT -D_BIDSDLL \
   -D_OWLALLPCH -DBI_NAMESPACE -DINC_OLE2 -DNO_SHDOCVW_GUIDS -D_MUE -DN_TIERS \
-  -D__OB1__ -DNO_EXT_CAPTURE
+  -D__OB1__ -DNO_EXT_CAPTURE -DTIXML_USE_STL
 PFLAGS = -U"..\..\..\..\Program Files (x86)\Borland\CBuilder4\Lib";..\..\..\..\cvs\episodus;partage;nautilus;nsbb;nssavoir;$(BCB)\lib\obj;$(BCB)\lib;"..\..\..\..\Program Files (x86)\Java\jdk1.6.0_30\lib";$(RELEASELIBPATH) \
   -Ipartage;nautilus;include;nsbb;nssavoir;$(BCB)\include;$(BCB)\include\vcl;$(BCB)\include\owlfiles;parseur;"..\..\..\..\Program Files (x86)\Java\jdk1.6.0_30\include";"..\..\..\..\Program Files (x86)\Java\jdk1.6.0_30\include\win32" \
   -N2..\..\..\..\cvs\episodus\ObjNTIERS -N0..\..\..\..\cvs\episodus\ObjNTIERS \
-  -D_DANSLEXIDLL;STRICT;_OWLDLL;_USE_OWL_CM_EXIT;_BIDSDLL;_OWLALLPCH;BI_NAMESPACE;INC_OLE2;NO_SHDOCVW_GUIDS;_MUE;N_TIERS;__OB1__;NO_EXT_CAPTURE \
+  -D_DANSLEXIDLL;STRICT;_OWLDLL;_USE_OWL_CM_EXIT;_BIDSDLL;_OWLALLPCH;BI_NAMESPACE;INC_OLE2;NO_SHDOCVW_GUIDS;_MUE;N_TIERS;__OB1__;NO_EXT_CAPTURE;TIXML_USE_STL \
   -$YD -$W -$O- -v -M -JPHNE
 RFLAGS = -ipartage;nautilus;include;nsbb;nssavoir;$(BCB)\include;$(BCB)\include\vcl;$(BCB)\include\owlfiles;parseur;"..\..\..\..\Program Files (x86)\Java\jdk1.6.0_30\include";"..\..\..\..\Program Files (x86)\Java\jdk1.6.0_30\include\win32" \
-  -D_DANSLEXIDLL;STRICT;_OWLDLL;_USE_OWL_CM_EXIT;_BIDSDLL;_OWLALLPCH;BI_NAMESPACE;INC_OLE2;NO_SHDOCVW_GUIDS;_MUE;N_TIERS;__OB1__;NO_EXT_CAPTURE
+  -D_DANSLEXIDLL;STRICT;_OWLDLL;_USE_OWL_CM_EXIT;_BIDSDLL;_OWLALLPCH;BI_NAMESPACE;INC_OLE2;NO_SHDOCVW_GUIDS;_MUE;N_TIERS;__OB1__;NO_EXT_CAPTURE;TIXML_USE_STL
 AFLAGS = /ipartage /inautilus /iinclude /insbb /inssavoir /i$(BCB)\include \
   /i$(BCB)\include\vcl /i$(BCB)\include\owlfiles /iparseur \
   /i"..\..\..\..\Program Files (x86)\Java\jdk1.6.0_30\include" \
   /i"..\..\..\..\Program Files (x86)\Java\jdk1.6.0_30\include\win32" \
   /d_DANSLEXIDLL /dSTRICT /d_OWLDLL /d_USE_OWL_CM_EXIT /d_BIDSDLL /d_OWLALLPCH \
   /dBI_NAMESPACE /dINC_OLE2 /dNO_SHDOCVW_GUIDS /d_MUE /dN_TIERS /d__OB1__ \
-  /dNO_EXT_CAPTURE /mx /w2 /zi
+  /dNO_EXT_CAPTURE /dTIXML_USE_STL /mx /w2 /zi
 LFLAGS = -L"..\..\..\..\Program Files (x86)\Borland\CBuilder4\Lib";..\..\..\..\cvs\episodus;partage;nautilus;nsbb;nssavoir;$(BCB)\lib\obj;$(BCB)\lib;"..\..\..\..\Program Files (x86)\Java\jdk1.6.0_30\lib";$(RELEASELIBPATH) \
   -l"C:\cvs\episodus\" -aa -Tpd -x -Gn -Gi -v
 IFLAGS =
@@ -168,17 +169,18 @@ Count=1
 Item0=$(BCB)\source\vcl
 
 [HistoryLists\hlConditionals]
-Count=10
-Item0=_DANSLEXIDLL;STRICT;_OWLDLL;_USE_OWL_CM_EXIT;_BIDSDLL;_OWLALLPCH;BI_NAMESPACE;INC_OLE2;NO_SHDOCVW_GUIDS;_MUE;N_TIERS;__OB1__;NO_EXT_CAPTURE
-Item1=_DANSLEXIDLL;STRICT;_OWLDLL;_USE_OWL_CM_EXIT;_BIDSDLL;_OWLALLPCH;BI_NAMESPACE;INC_OLE2;NO_SHDOCVW_GUIDS;_MUE;N_TIERS;__OB1__;_EXT_CAPTURE
-Item2=_DANSLEXIDLL;STRICT;_OWLDLL;_USE_OWL_CM_EXIT;_BIDSDLL;_OWLALLPCH;BI_NAMESPACE;INC_OLE2;NO_SHDOCVW_GUIDS;_MUE;N_TIERS;__OB1__
-Item3=_DANSLEXIDLL;STRICT;_OWLDLL;_USE_OWL_CM_EXIT;_BIDSDLL;_OWLALLPCH;BI_NAMESPACE;INC_OLE2;NO_SHDOCVW_GUIDS;_MUE;N_TIERS
-Item4=_DANSLEXIDLL;STRICT;_OWLDLL;_USE_OWL_CM_EXIT;_BIDSDLL;_OWLALLPCH;BI_NAMESPACE;INC_OLE2;NO_SHDOCVW_GUIDS;_MUE
-Item5=_DANSLEXIDLL;STRICT;_OWLDLL;_USE_OWL_CM_EXIT;_BIDSDLL;_OWLALLPCH;BI_NAMESPACE;INC_OLE2;NO_SHDOCVW_GUIDS
-Item6=_RTLDLL;_DANSLEXIDLL;STRICT;_OWLDLL;_USE_OWL_CM_EXIT;_BIDSDLL;_OWLALLPCH;BI_NAMESPACE;INC_OLE2;NO_SHDOCVW_GUIDS;USEPACKAGES
-Item7=_RTLDLL;_DANSLEXIDLL;STRICT;_OWLDLL;_USE_OWL_CM_EXIT;_BIDSDLL;_OWLALLPCH;BI_NAMESPACE;INC_OLE2;USEPACKAGES;NO_SHDOCVW_GUIDS
-Item8=_RTLDLL;_DANSLEXIDLL;STRICT;_OWLDLL;_USE_OWL_CM_EXIT;_BIDSDLL;_OWLALLPCH;BI_NAMESPACE;USEPACKAGES;INC_OLE2
-Item9=_RTLDLL;USEPACKAGES;_DANSLEXIDLL;STRICT;_OWLDLL;_USE_OWL_CM_EXIT;_BIDSDLL;_OWLALLPCH;BI_NAMESPACE
+Count=11
+Item0=_DANSLEXIDLL;STRICT;_OWLDLL;_USE_OWL_CM_EXIT;_BIDSDLL;_OWLALLPCH;BI_NAMESPACE;INC_OLE2;NO_SHDOCVW_GUIDS;_MUE;N_TIERS;__OB1__;NO_EXT_CAPTURE;TIXML_USE_STL
+Item1=_DANSLEXIDLL;STRICT;_OWLDLL;_USE_OWL_CM_EXIT;_BIDSDLL;_OWLALLPCH;BI_NAMESPACE;INC_OLE2;NO_SHDOCVW_GUIDS;_MUE;N_TIERS;__OB1__;NO_EXT_CAPTURE
+Item2=_DANSLEXIDLL;STRICT;_OWLDLL;_USE_OWL_CM_EXIT;_BIDSDLL;_OWLALLPCH;BI_NAMESPACE;INC_OLE2;NO_SHDOCVW_GUIDS;_MUE;N_TIERS;__OB1__;_EXT_CAPTURE
+Item3=_DANSLEXIDLL;STRICT;_OWLDLL;_USE_OWL_CM_EXIT;_BIDSDLL;_OWLALLPCH;BI_NAMESPACE;INC_OLE2;NO_SHDOCVW_GUIDS;_MUE;N_TIERS;__OB1__
+Item4=_DANSLEXIDLL;STRICT;_OWLDLL;_USE_OWL_CM_EXIT;_BIDSDLL;_OWLALLPCH;BI_NAMESPACE;INC_OLE2;NO_SHDOCVW_GUIDS;_MUE;N_TIERS
+Item5=_DANSLEXIDLL;STRICT;_OWLDLL;_USE_OWL_CM_EXIT;_BIDSDLL;_OWLALLPCH;BI_NAMESPACE;INC_OLE2;NO_SHDOCVW_GUIDS;_MUE
+Item6=_DANSLEXIDLL;STRICT;_OWLDLL;_USE_OWL_CM_EXIT;_BIDSDLL;_OWLALLPCH;BI_NAMESPACE;INC_OLE2;NO_SHDOCVW_GUIDS
+Item7=_RTLDLL;_DANSLEXIDLL;STRICT;_OWLDLL;_USE_OWL_CM_EXIT;_BIDSDLL;_OWLALLPCH;BI_NAMESPACE;INC_OLE2;NO_SHDOCVW_GUIDS;USEPACKAGES
+Item8=_RTLDLL;_DANSLEXIDLL;STRICT;_OWLDLL;_USE_OWL_CM_EXIT;_BIDSDLL;_OWLALLPCH;BI_NAMESPACE;INC_OLE2;USEPACKAGES;NO_SHDOCVW_GUIDS
+Item9=_RTLDLL;_DANSLEXIDLL;STRICT;_OWLDLL;_USE_OWL_CM_EXIT;_BIDSDLL;_OWLALLPCH;BI_NAMESPACE;USEPACKAGES;INC_OLE2
+Item10=_RTLDLL;USEPACKAGES;_DANSLEXIDLL;STRICT;_OWLDLL;_USE_OWL_CM_EXIT;_BIDSDLL;_OWLALLPCH;BI_NAMESPACE
 
 [HistoryLists\hlIntOutputDir]
 Count=4
@@ -188,12 +190,14 @@ Item2=ObjMUE
 Item3=Obj
 
 [HistoryLists\hlFinalOutputDir]
-Count=1
-Item0=..\..\..\..\cvs\episodus
+Count=2
+Item0=..\..\..\..\cvs\episodus\
+Item1=..\..\..\..\cvs\episodus
 
 [HistoryLists\hIBPIOutputDir]
-Count=1
-Item0=..\..\..\..\cvs\episodus
+Count=2
+Item0=C:\cvs\episodus\
+Item1=..\..\..\..\cvs\episodus
 
 [Debugging]
 DebugSourceDirs=$(BCB)\source\vcl

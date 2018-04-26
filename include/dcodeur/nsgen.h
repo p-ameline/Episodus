@@ -111,7 +111,7 @@ class NSGenerateur : public NSRoot
     virtual string donneArticlePartitif(NSPhraseMot* pMot, bool bPluriel, GERECERTITUDE iGereCertitude = avecCertitude) = 0 ;
     virtual string donnePronomPersonnel(const GENRE iGenre, const NSPhraseur::VBPERSO iVbPersonne, const string sFonction) = 0 ;
 
-    virtual void   etFinal(string *type, string *type1, const string sSeparator = string("")) = 0 ;
+    virtual void   etFinal(string *type, const string *type1, const string sSeparator = string(""), bool bUseDefaultIfEmpty = true) = 0 ;
 
     virtual string donneParticipePresent(NSPathologData* pPathoData) = 0 ;
     virtual string donneParticipePasse(NSPhraseMot* pPhraseMot, GENRE iGenre) = 0 ;

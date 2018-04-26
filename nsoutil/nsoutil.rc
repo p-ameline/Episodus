@@ -69,12 +69,10 @@
 // knowledge of the CeCILL license and that you accept its terms.
 // -----------------------------------------------------------------------------
 // -----------------------------------------------------------------------------// Attention// -----------------------------------------------------------------------------// Les chemins des include doivent être en chemin relatif sur le cvs.// Si vous avez besoin de les modifier en chemin absolu pour pouvoir les// modifier avec Borland 5, vous devez les repasser en chemin relatif avant de// les remettre sur le cvs.// -----------------------------------------------------------------------------
-#include "c:\cvs\episodus\nsoutil\nsoutil.rh"
-#include "c:\cvs\episodus\nautilus\nautilus.rh"
-#include "c:\cvs\episodus\nsoutil\nsimport.rh"
-//#include "nsoutil\nsoutil.rh"
-//#include "nautilus\nautilus.rh"
-//#include "nsoutil\nsimport.rh"
+#include "nsoutil\nsoutil.rh"
+#include "nautilus\nautilus.rh"
+#include "nsoutil\nsimport.rh"
+#include "nssavoir\nspathor.rh"
 
 #include <owl\window.rh>
 #include <owl\mdi.rh>
@@ -659,6 +657,21 @@ CAPTION "Outils de gestion des personnes"
 {
  CONTROL "", -1, "BorShade", BSS_GROUP | BSS_LEFT | WS_CHILD | WS_VISIBLE, 5, 4, 108, 32
  CONTROL "Exporter les correspondants au format mailing", MAIL_BTN, "button", BS_PUSHBUTTON | BS_CENTER | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 15, 40, 87, 14
+}
+
+//
+// Attention : Cette boite de dialogue ne possède pas le style WS_VISIBLE
+// 				Penser à exécuter ShowWindow()
+//
+
+BDM_DLG DIALOGEX 24, 9, 230, 124
+EXSTYLE WS_EX_DLGMODALFRAME | WS_EX_TOPMOST | WS_EX_TOOLWINDOW
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CLASS "bordlg"
+CAPTION "LEXIQUE NAUTILUS"
+FONT 8, "MS Sans Serif"
+{
+ CONTROL "", IDC_PATHORLISTBOX, "LISTBOX", LBS_NOTIFY | WS_CHILD | WS_VISIBLE | WS_BORDER | WS_VSCROLL | WS_HSCROLL, 2, 2, 226, 115
 }
 
 // fin de nsoutil.rc

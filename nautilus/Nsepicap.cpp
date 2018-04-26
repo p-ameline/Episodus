@@ -1821,7 +1821,7 @@ NSEpisodus::ExportModels()
 #else
 
   ofstream outFile ;
-  bool bFileOpened = pContexte->getUtilisateur()->OpenUserFile(&outFile, sFichier, pContexte->PathName("FGLO")) ;
+  bool bFileOpened = pContexte->getUtilisateur()->OpenUserFile(&outFile, sFichier, string("model[user].xml"), pContexte->PathName("FGLO")) ;
 
   // outFile.open(sFichier.c_str(), ios::out) ;
   if (!bFileOpened || !outFile)
@@ -1890,6 +1890,8 @@ NSEpisodus::UserChanged()
   // chargement des paramètres personnels de l'utilisateur
   loadParams() ;
   loadEpiParams() ;
+
+  pContexte->resetBdmDriver() ;
 
   // register hotkey shortcut - add by fab  if ((sCaptureKey != "") || (sBabylonKey != ""))
   {
@@ -1988,7 +1990,7 @@ try
 		return false ;
 
 	ifstream inFile ;
-  bool bFileOpened = pContexte->getUtilisateur()->OpenUserFile(&inFile, sFichier, pContexte->PathName("FGLO")) ;
+  bool bFileOpened = pContexte->getUtilisateur()->OpenUserFile(&inFile, sFichier, string("model[user].xml"), pContexte->PathName("FGLO")) ;
   if (!bFileOpened || !inFile)
   {
     if (verbose)
@@ -2104,50 +2106,47 @@ NSEpisodus::SetPhareOff()
 bool
 NSEpisodus::loadParams()
 {
-	sCaptureKey = " " ;
-	sBabylonKey = " " ;
+	sCaptureKey = string(" ") ;
+	sBabylonKey = string(" ") ;
 
 	NSUtilisateurChoisi* pUtilisat = pContexte->getUtilisateur() ;
-	if (NULL == pUtilisat)
+	if ((NSUtilisateurChoisi*) NULL == pUtilisat)
 		return false ;
 
 	string sFichier = string("episodus.dat") ;
 
 	ifstream inFile ;
-	bool bFileOpened = pUtilisat->OpenUserFile(&inFile, sFichier, pContexte->PathName("FGLO")) ;
-	if (!bFileOpened || !inFile)
+	bool bFileOpened = pUtilisat->OpenUserFile(&inFile, sFichier, string("episo[user].dat"), pContexte->PathName("FGLO")) ;
+	if ((false == bFileOpened) || !inFile)
 	{
   	string sErrMess = pContexte->getSuperviseur()->getText("fileErrors", "errorOpeningInputFile") + string(" ") + sFichier ;
 		erreur(sErrMess.c_str(), standardError, 0, pContexte->GetMainWindow()->GetHandle()) ;
     return false ;
 	}
 
-	string  line ;
-	string  sData = "" ;
+	string sData = string("") ;
 	while (!inFile.eof())
 	{
-		getline(inFile,line) ;
-		if (line != "")
-			sData += line + "\n" ;
+    string sLine = string("") ;
+		getline(inFile, sLine) ;
+		if (string("") != sLine)
+			sData += sLine + string("\n") ;
 	}
 	inFile.close() ;
-
-  string  sNomAttrib ;
-	string  sValAttrib ;
 
 	// boucle de chargement des attributs
 	size_t i = 0 ;
 	while (i < strlen(sData.c_str()))
 	{
-		sNomAttrib = string("") ;
-		sValAttrib = string("") ;
+		string sNomAttrib = string("") ;
+		string sValAttrib = string("") ;
 
-		while ((i < strlen(sData.c_str())) && (sData[i] != ' ') && (sData[i] != '\t'))
+		while ((i < strlen(sData.c_str())) && (' ' != sData[i]) && ('\t' != sData[i]))
 			sNomAttrib += pseumaj(sData[i++]) ;
-		while ((strlen(sData.c_str())) && ((sData[i] == ' ') || (sData[i] == '\t')))
+		while ((strlen(sData.c_str())) && ((' ' == sData[i]) || ('\t' == sData[i])))
 			i++ ;
 
-		while ((strlen(sData.c_str())) && (sData[i] != '\n'))
+		while ((strlen(sData.c_str())) && ('\n' != sData[i]))
 			sValAttrib += sData[i++] ;
 
 		i++ ;
@@ -2285,6 +2284,16 @@ NSEpisodus::loadParams()
       else
         _bDrugAddVirtualDrug = false ;
     }
+    else if ((sNomAttrib == "VIDAL_APP_ID") && (string("") != sValAttrib))
+		{
+      pContexte->setBamType(NSContexte::btVidal) ;
+      pContexte->setBamApplicationID(sValAttrib) ;
+    }
+    else if ((sNomAttrib == "VIDAL_APP_KEY") && (string("") != sValAttrib))
+		{
+      pContexte->setBamType(NSContexte::btVidal) ;
+      pContexte->setBamApplicationKey(sValAttrib) ;
+    }
   }
   return true ;
 }
@@ -2299,7 +2308,7 @@ NSEpisodus::loadEpiParams()
   string sFichier = string("epiParams.dat") ;
 
 	ifstream inFile ;
-	bool bFileOpened = pUtilisat->OpenUserFile(&inFile, sFichier, pContexte->PathName("FGLO")) ;
+	bool bFileOpened = pUtilisat->OpenUserFile(&inFile, sFichier, string("epiParams[user].dat"), pContexte->PathName("FGLO")) ;
 	if ((false == bFileOpened) || !inFile)
 	{
   	string sErrMess = pContexte->getSuperviseur()->getText("fileErrors", "errorOpeningInputFile") + string(" ") + sFichier ;
@@ -2425,8 +2434,8 @@ NSEpisodus::chargerPrincipes()
 bool
 NSEpisodus::saveParams()
 {
-  NSUtilisateurChoisi * pUtilisat = pContexte->getUtilisateur() ;
-  if ((NULL == pUtilisat) || (NULL == pUtilisat->getGraph()))
+  NSUtilisateurChoisi* pUtilisat = pContexte->getUtilisateur() ;
+  if (((NSUtilisateurChoisi*) NULL == pUtilisat) || (NULL == pUtilisat->getGraph()))
     return false ;
 
   return saveParams(pUtilisat->getGraph()->getAttributeValue(PIDS)) ;
@@ -2437,7 +2446,7 @@ NSEpisodus::saveParams(string sUserId)
 {
 try
 {
-  string sFileName = "episo" + sUserId + ".dat" ;
+  string sFileName = string("episo") + sUserId + string(".dat") ;
   string sFichier  = pContexte->PathName("FGLO") + sFileName ;
 
   ofstream outFile ;
@@ -2526,6 +2535,14 @@ try
 
 	outFile << (string("SERVICE_URL        ") + sServiceUrl + string("\n")) ;
   outFile << (string("SERVICE_TITLE      ") + sServiceTitle + string("\n")) ;
+
+  // BAM parameters
+  //
+  if (pContexte->getBamType() == NSContexte::btVidal)
+  {
+    outFile << (string("VIDAL_APP_ID       ") + pContexte->getBamApplicationID() + string("\n")) ;
+    outFile << (string("VIDAL_APP_KEY      ") + pContexte->getBamApplicationKey() + string("\n")) ;
+  }
 
   outFile.close() ;
 
@@ -4112,7 +4129,7 @@ NSPredi::loadParams()
 	{
     string sFichier = string("dpio.dat") ;
 
-  	bool bFileOpened = pUtilisat->OpenUserFile(&inFile, sFichier, pContexte->PathName("FGLO")) ;
+  	bool bFileOpened = pUtilisat->OpenUserFile(&inFile, sFichier, string("dpio[user].dat"), pContexte->PathName("FGLO")) ;
 		if ((false == bFileOpened) || !inFile)
 		{
   		string sErrMess = pContexte->getSuperviseur()->getText("fileErrors", "errorOpeningInputFile") + string(" ") + sFichier ;

@@ -43,14 +43,14 @@ PACKAGES = vclx40.bpi vcl40.bpi vcldb40.bpi vcldbx40.bpi bcbsmp40.bpi dclocx40.b
   qrpt40.bpi teeui40.bpi vclsmp40.bpi teedb40.bpi tee40.bpi ibsmp40.bpi \
   nmfast40.bpi inetdb40.bpi inet40.bpi
 # ---------------------------------------------------------------------------
-PATHCPP = .;nsutil;partage
+PATHCPP = .;nsutil;partage;apicrypt
 PATHASM = .;
 PATHPAS = .;
 PATHRC = .;
 DEBUGLIBPATH = $(BCB)\lib\debug
 RELEASELIBPATH = $(BCB)\lib\release
 SYSDEFINES = NO_STRICT;_RTLDLL;USEPACKAGES
-USERDEFINES = STRICT;_OWLDLL;_USE_OWL_CM_EXIT;_NSUTILDLL;_MUE;N_TIERS;__OB1__
+USERDEFINES = STRICT;_OWLDLL;_USE_OWL_CM_EXIT;_NSUTILDLL;_MUE;N_TIERS;__OB1__;TIXML_USE_STL
 # ---------------------------------------------------------------------------
 CFLAG1 = -Iapicrypt;partage;nsutil;include;$(BCB)\include;$(BCB)\include\vcl;$(BCB)\include\owlfiles;"..\..\..\..\Program Files (x86)\Java\jdk1.6.0_30\include";"..\..\..\..\Program Files (x86)\Java\jdk1.6.0_30\include\win32" \
   -WD -Od -w- -Tkh30000 -r- -a8 -k -y -v -vi- -c -tWM \
@@ -62,19 +62,20 @@ IDLCFLAGS = -Iapicrypt -Ipartage -Insutil -Iinclude -I$(BCB)\include -I$(BCB)\in
   -I"..\..\..\..\Program Files (x86)\Java\jdk1.6.0_30\include" \
   -I"..\..\..\..\Program Files (x86)\Java\jdk1.6.0_30\include\win32" \
   -src_suffixcpp -DSTRICT -D_OWLDLL -D_USE_OWL_CM_EXIT -D_NSUTILDLL -D_MUE \
-  -DN_TIERS -D__OB1__
+  -DN_TIERS -D__OB1__ -DTIXML_USE_STL
 PFLAGS = -Upartage;nsutil;"..\..\..\..\Program Files (x86)\Borland\CBuilder4\Lib";..\..\..\..\cvs\episodus;apicrypt;$(BCB)\lib\obj;$(BCB)\lib;$(RELEASELIBPATH) \
   -Iapicrypt;partage;nsutil;include;$(BCB)\include;$(BCB)\include\vcl;$(BCB)\include\owlfiles;"..\..\..\..\Program Files (x86)\Java\jdk1.6.0_30\include";"..\..\..\..\Program Files (x86)\Java\jdk1.6.0_30\include\win32" \
   -N2..\..\..\..\cvs\episodus\ObjNTIERS -N0..\..\..\..\cvs\episodus\ObjNTIERS \
-  -DSTRICT;_OWLDLL;_USE_OWL_CM_EXIT;_NSUTILDLL;_MUE;N_TIERS;__OB1__ -$YD -$W -$O- \
-  -v -M -JPHNE
+  -DSTRICT;_OWLDLL;_USE_OWL_CM_EXIT;_NSUTILDLL;_MUE;N_TIERS;__OB1__;TIXML_USE_STL \
+  -$YD -$W -$O- -v -M -JPHNE
 RFLAGS = -iapicrypt;partage;nsutil;include;$(BCB)\include;$(BCB)\include\vcl;$(BCB)\include\owlfiles;"..\..\..\..\Program Files (x86)\Java\jdk1.6.0_30\include";"..\..\..\..\Program Files (x86)\Java\jdk1.6.0_30\include\win32" \
-  -DSTRICT;_OWLDLL;_USE_OWL_CM_EXIT;_NSUTILDLL;_MUE;N_TIERS;__OB1__
+  -DSTRICT;_OWLDLL;_USE_OWL_CM_EXIT;_NSUTILDLL;_MUE;N_TIERS;__OB1__;TIXML_USE_STL
 AFLAGS = /iapicrypt /ipartage /insutil /iinclude /i$(BCB)\include /i$(BCB)\include\vcl \
   /i$(BCB)\include\owlfiles \
   /i"..\..\..\..\Program Files (x86)\Java\jdk1.6.0_30\include" \
   /i"..\..\..\..\Program Files (x86)\Java\jdk1.6.0_30\include\win32" /dSTRICT \
-  /d_OWLDLL /d_USE_OWL_CM_EXIT /d_NSUTILDLL /d_MUE /dN_TIERS /d__OB1__ /mx /w2 /zi
+  /d_OWLDLL /d_USE_OWL_CM_EXIT /d_NSUTILDLL /d_MUE /dN_TIERS /d__OB1__ \
+  /dTIXML_USE_STL /mx /w2 /zi
 LFLAGS = -Lpartage;nsutil;"..\..\..\..\Program Files (x86)\Borland\CBuilder4\Lib";..\..\..\..\cvs\episodus;apicrypt;$(BCB)\lib\obj;$(BCB)\lib;$(RELEASELIBPATH) \
   -l"C:\cvs\episodus\" -aa -Tpd -x -Gn -Gi -v
 IFLAGS =
@@ -148,18 +149,19 @@ Count=1
 Item0=$(BCB)\source\vcl
 
 [HistoryLists\hlConditionals]
-Count=11
-Item0=STRICT;_OWLDLL;_USE_OWL_CM_EXIT;_NSUTILDLL;_MUE;N_TIERS;__OB1__
-Item1=STRICT;_OWLDLL;_USE_OWL_CM_EXIT;_NSUTILDLL;_MUE;N_TIERS
-Item2=STRICT;_OWLDLL;_USE_OWL_CM_EXIT;_NSUTILDLL;_MUE
-Item3=STRICT;_OWLDLL;_USE_OWL_CM_EXIT;_NSUTILDLL
-Item4=_RTLDLL;STRICT;_OWLDLL;_USE_OWL_CM_EXIT;_NSUTILDLL;USEPACKAGES
-Item5=_RTLDLL;STRICT;_OWLDLL;_USE_OWL_CM_EXIT;USEPACKAGES;_NSUTILDLL
-Item6=_RTLDLL;STRICT;_OWLDLL;_USE_OWL_CM_EXIT;USEPACKAGES
-Item7=_RTLDLL;STRICT;_OWLDLL;USEPACKAGES;_USE_OWL_CM_EXIT;
-Item8=_RTLDLL;STRICT;USEPACKAGES;_OWLDLL;
-Item9=_RTLDLL;USEPACKAGES;STRICT;
-Item10=_RTLDLL;USEPACKAGES
+Count=12
+Item0=STRICT;_OWLDLL;_USE_OWL_CM_EXIT;_NSUTILDLL;_MUE;N_TIERS;__OB1__;TIXML_USE_STL
+Item1=STRICT;_OWLDLL;_USE_OWL_CM_EXIT;_NSUTILDLL;_MUE;N_TIERS;__OB1__
+Item2=STRICT;_OWLDLL;_USE_OWL_CM_EXIT;_NSUTILDLL;_MUE;N_TIERS
+Item3=STRICT;_OWLDLL;_USE_OWL_CM_EXIT;_NSUTILDLL;_MUE
+Item4=STRICT;_OWLDLL;_USE_OWL_CM_EXIT;_NSUTILDLL
+Item5=_RTLDLL;STRICT;_OWLDLL;_USE_OWL_CM_EXIT;_NSUTILDLL;USEPACKAGES
+Item6=_RTLDLL;STRICT;_OWLDLL;_USE_OWL_CM_EXIT;USEPACKAGES;_NSUTILDLL
+Item7=_RTLDLL;STRICT;_OWLDLL;_USE_OWL_CM_EXIT;USEPACKAGES
+Item8=_RTLDLL;STRICT;_OWLDLL;USEPACKAGES;_USE_OWL_CM_EXIT;
+Item9=_RTLDLL;STRICT;USEPACKAGES;_OWLDLL;
+Item10=_RTLDLL;USEPACKAGES;STRICT;
+Item11=_RTLDLL;USEPACKAGES
 
 [HistoryLists\hlIntOutputDir]
 Count=4
@@ -169,12 +171,14 @@ Item2=ObjMUE
 Item3=Obj
 
 [HistoryLists\hlFinalOutputDir]
-Count=1
-Item0=..\..\..\..\cvs\episodus
+Count=2
+Item0=..\..\..\..\cvs\episodus\
+Item1=..\..\..\..\cvs\episodus
 
 [HistoryLists\hIBPIOutputDir]
-Count=1
-Item0=..\..\..\..\cvs\episodus
+Count=2
+Item0=C:\cvs\episodus\
+Item1=..\..\..\..\cvs\episodus
 
 [Debugging]
 DebugSourceDirs=$(BCB)\source\vcl

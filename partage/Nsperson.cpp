@@ -2334,6 +2334,19 @@ NSUtiliInfo::changePassword()
 	return true ;
 }
 
+string
+NSUtiliInfo::donneSignature(NSContexte* pContexte, string sLang)
+{
+  string sTitre = StringTitre(pContexte, _sTitre, sLang) ;
+
+	if (string("") != getPrenom())
+  	sTitre += getPrenom() + string(" ") ;
+
+	sTitre += getNom() ;
+
+  return sTitre ;
+}
+
 //***************************************************************************
 //
 // Implémentation des méthodes NSCorrespondantData

@@ -22,7 +22,6 @@ must not be misrepresented as being the original software.
 distribution.
 */
 
-
 #ifndef TINYXML_INCLUDED
 #define TINYXML_INCLUDED
 
@@ -80,7 +79,7 @@ const int TIXML_MAJOR_VERSION = 2;
 const int TIXML_MINOR_VERSION = 3;
 const int TIXML_PATCH_VERSION = 2;
 
-/*	Internal structure for tracking location of items 
+/*	Internal structure for tracking location of items
 	in the XML file.
 */
 struct TiXmlCursor
@@ -92,15 +91,13 @@ struct TiXmlCursor
 	int col;	// 0 based.
 };
 
-
 // Only used by Attribute::Query functions
-enum 
-{ 
+enum
+{
 	TIXML_SUCCESS,
 	TIXML_NO_ATTRIBUTE,
 	TIXML_WRONG_TYPE
 };
-
 
 // Used by the parsing routines.
 enum TiXmlEncoding
@@ -667,6 +664,8 @@ public:
 		document = 0;
 		prev = next = 0;
 	}
+
+  ~TiXmlAttribute() {}
 
 	const char*		Name()  const		{ return name.c_str (); }		///< Return the name of this attribute.
 	const char*		Value() const		{ return value.c_str (); }		///< Return the value of this attribute.

@@ -41,6 +41,7 @@ USELIB("nsmbb.lib");
 USELIB("nsmdn.lib");
 USELIB("nsmdecode.lib");
 USELIB("nsmepisod.lib");
+USELIB("nsmoutil.lib");
 USELIB("memmgr.lib");
 USELIB("cp32mti.lib");
 USELIB("bidsvi.lib");
@@ -60,6 +61,7 @@ USEUNIT("nssavoir\NsFileCaptur.cpp");
 USERES("nsmsavoir.res");
 USEUNIT("partage\ns_search.cpp");
 USEUNIT("nssavoir\nsHtmBase.cpp");
+USEUNIT("nssavoir\NsBdmDriver.cpp");
 //---------------------------------------------------------------------------
 int WINAPI DllEntryPoint(HINSTANCE hinstDll, unsigned long fdwReason, void*)
 {

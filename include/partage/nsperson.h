@@ -685,6 +685,8 @@ class _CLASSELEXI NSUtiliInfo : public NSCorrespondantInfo
     void setPassDate(string sVal)  { _sDatePasswordCreation = sVal ; }
     void setValidity(string sVal)  { _sValidityDuration = sVal ; }
 
+    string donneSignature(NSContexte* pContexte, string sLang = "fr") ;
+
     void	 metAZero()    { _Donnees.metAZero() ; }
 } ;
 

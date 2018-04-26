@@ -39,6 +39,12 @@
 #include "nsepisod\nsepidiv.h"
 #include "nsepisod\nsldvstructs.h"
 
+#include "curl\nsRest.h"
+#include "nsoutil\ibdm.h"
+#include "nsoutil\nsBdmDlg.h"
+#include "nsoutil\nsBdmDrugInfoDlg.h"
+#include "nsutil\tinyxml.h"
+
 // --------------------------------------------------------------------------
 // --------------------- METHODES DE ArrayPreoccupView ----------------------
 // --------------------------------------------------------------------------
@@ -2465,10 +2471,15 @@ DEFINE_RESPONSE_TABLE1(NSSimpleNewDrugDlg, NSUtilDialog)
   // EV_COMMAND(DRUG_COMPLEX_MODE,        switchToComplexMode),
   EV_COMMAND(FREE_TEXT_BUTTON,         editFreeText),
   EV_COMMAND(NR_BUTTON,                nonRenouvelable),
+  // BDM specific functions
+  EV_COMMAND(DRUG_INFORMATION,         drugInformation),
+  EV_COMMAND(BDM_SEARCH_INDIC,         searchInBdmByIndication),
+  EV_COMMAND(BDM_SEARCH_SUBST,         searchInBdmBySubstance),
+  EV_COMMAND(BDM_SEARCH_ATC,           searchInBdmByATC),
 END_RESPONSE_TABLE;
 
 NSSimpleNewDrugDlg::NSSimpleNewDrugDlg(TWindow* pView, NSContexte *pCtx, NSPatPathoArray *pPPTinit)
-                   :NSUtilDialog(pView, pCtx, "NEW_DRUG")
+                   :NSUtilDialog(pView, pCtx, (pCtx->getBamType() == NSContexte::btNone) ? "NEW_DRUG" : "NEW_DRUG_BAM")
 {
 try
 {
@@ -2513,6 +2524,21 @@ NSSimpleNewDrugDlg::createInterfaceElements()
   _pALD             = new OWL::TCheckBox(this, ALD_BUTTON) ;
   _pNonSubstituable = new OWL::TCheckBox(this, NS_BUTTON) ;
   _pFreeTextButton  = new OWL::TButton(this, FREE_TEXT_BUTTON) ;
+
+  if (pContexte->getBamType() != NSContexte::btNone)
+  {
+    _pDrugInfoButton            = new OWL::TButton(this, DRUG_INFORMATION) ;
+    _pBdmSearchIndicationButton = new OWL::TButton(this, BDM_SEARCH_INDIC) ;
+    _pBdmSearchSubstanceButton  = new OWL::TButton(this, BDM_SEARCH_SUBST) ;
+    _pBdmSearchAtcButton        = new OWL::TButton(this, BDM_SEARCH_ATC) ;
+  }
+  else
+  {
+    _pDrugInfoButton            = (OWL::TButton*) 0 ;
+    _pBdmSearchIndicationButton = (OWL::TButton*) 0 ;
+    _pBdmSearchSubstanceButton  = (OWL::TButton*) 0 ;
+    _pBdmSearchAtcButton        = (OWL::TButton*) 0 ;
+  }
 
 	pDateDebTxt    = new OWL::TStatic(this, DATE_DEBPRESC_TEXT) ;
 	pDateDeb       = new NSUtilEditDateHeure(pContexte, this, DRUG_DATE_DEB) ;
@@ -2617,6 +2643,15 @@ NSSimpleNewDrugDlg::~NSSimpleNewDrugDlg()
   delete pPriseMidiTxt ;
   delete pPriseSoirTxt ;
   delete pPriseCoucherTxt ;
+
+  if (_pDrugInfoButton)
+    delete _pDrugInfoButton ;
+  if (_pBdmSearchIndicationButton)
+    delete _pBdmSearchIndicationButton ;
+  if (_pBdmSearchSubstanceButton)
+    delete _pBdmSearchSubstanceButton ;
+  if (_pBdmSearchAtcButton)
+    delete _pBdmSearchAtcButton ;
 
   // delete pComplexModeButton ;
 }
@@ -3380,6 +3415,75 @@ NSSimpleNewDrugDlg::editFreeText()
 void
 NSSimpleNewDrugDlg::nonRenouvelable()
 {
+}
+
+void
+NSSimpleNewDrugDlg::drugInformation()
+{
+  string sSelectedDrug = pType->getCode() ;
+  if (string("") == sSelectedDrug)
+    return ;
+
+  NSBdmDriver* pDriver = pContexte->getBdmDriver() ;
+  if ((NSBdmDriver*) NULL == pDriver)
+    return ;
+
+  // Is this drug referenced as having a CIS code?
+  //
+  string sSelectedDrugSens ;
+  pContexte->getDico()->donneCodeSens(&sSelectedDrug, &sSelectedDrugSens) ;
+
+  InterfaceBdm IBdm(pContexte) ;
+  if (false == IBdm.isCodeLexiMedInDB(sSelectedDrugSens))
+    return ;
+
+  string sCisCode = IBdm.pBdm->getCodeCIP() ;
+
+  NsSelectableDrug drugInformation ;
+
+  if (false == pDriver->getDrugInformation(&drugInformation, &sCisCode))
+    return ;
+
+  NSBdmDrugInfoDlg drugInfoDlg(this, pContexte, &drugInformation) ;
+  drugInfoDlg.Execute() ;
+}
+
+void
+NSSimpleNewDrugDlg::searchInBdmBySubstance()
+{
+  searchInBdm(NSBdmDriver::bamTableSubstance) ;
+}
+
+void
+NSSimpleNewDrugDlg::searchInBdmByIndication()
+{
+  searchInBdm(NSBdmDriver::bamTableIndication) ;
+}
+
+void
+NSSimpleNewDrugDlg::searchInBdmByATC()
+{
+  searchInBdm(NSBdmDriver::bamTableATC) ;
+}
+
+void
+NSSimpleNewDrugDlg::searchInBdm(NSBdmDriver::BAMTABLETYPE iSearchBy)
+{
+  if (pContexte->getBamType() == NSContexte::btNone)
+    return ;
+
+  string sLexicode("") ;
+
+  NSDrugResearchDlg* pSearchDlg = new NSDrugResearchDlg((TWindow*) this, pContexte, &sLexicode, iSearchBy) ;
+  int iExecReturn = pSearchDlg->Execute() ;
+  delete pSearchDlg ;
+
+  if ((IDOK != iExecReturn) || (string("") == sLexicode))
+    return ;
+
+  pType->setLabel(sLexicode) ;
+
+  ExecutedAfterDrugSelection() ;
 }
 
 // -----------------------------------------------------------------------------

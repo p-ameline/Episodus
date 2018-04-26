@@ -251,7 +251,7 @@ NSCsVue::CmPublier()
 try
 {
 	NSCSDocument *pCSDoc = dynamic_cast<NSCSDocument *>(_pDoc) ;
-  if (NULL == pCSDoc)
+  if ((NSCSDocument*) NULL == pCSDoc)
     return ;
 
 	if (pCSDoc->_pHtmlCS)
@@ -278,7 +278,7 @@ NSCsVue::CmVisualiser()
 try
 {
 	NSCSDocument *pCSDoc = dynamic_cast<NSCSDocument *>(_pDoc) ;
-  if (NULL == pCSDoc)
+  if ((NSCSDocument*) NULL == pCSDoc)
     return ;
 
 	if (pCSDoc->_pHtmlCS)
@@ -291,7 +291,7 @@ try
 	if (false == _bConsultVide)
 		pCSDoc->Visualiser() ;
 	else
-		NSTreeWindow::MessageBox("Le document de synthese est vide.") ;
+		NSTreeWindow::MessageBox("Le document de synthèse est vide.") ;
 }
 catch (...)
 {

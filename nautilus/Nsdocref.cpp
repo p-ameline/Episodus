@@ -431,6 +431,9 @@ catch (...)
 }
 }
 
+/**
+ Function called in order to open a WYSIWYG visualization of a document
+ */
 void
 NSRefDocument::Visualiser()
 {
@@ -442,6 +445,7 @@ try
 
 	if ((NSDocumentInfo*) NULL == _pDocInfo)	{
   	string sErrorText = pContexte->getSuperviseur()->getText("documentManagement", "youMustSaveBeforeVisualization") ;
+    pContexte->getSuperviseur()->trace(&sErrorText, 1, NSSuper::trError) ;
     erreur(sErrorText.c_str(), warningError, 0, 0) ;
 		return ;
 	}
@@ -478,7 +482,9 @@ try
 	setNbImpress(0) ;  NSDocViewManager dvManager(pContexte) ;	dvManager.createView(this, "Visual Format") ;}
 catch (...)
 {
-	erreur("Exception Visualiser.", standardError, 0) ;
+  string sErrorText = string("Exception Visualiser.") ;
+  pContexte->getSuperviseur()->trace(&sErrorText, 1, NSSuper::trError) ;
+	erreur(sErrorText.c_str(), standardError, 0) ;
 }
 }
 

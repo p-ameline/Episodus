@@ -498,7 +498,7 @@ NSGenerateur::contracting(string *pSentence, string sFrom, string sTo)
   {
     if (0 == posit1)
       pSentence->replace(0, iFromSize, sTo) ;
-    else if (' ' == (*pSentence)[posit1-1])
+    else if ((' ' == (*pSentence)[posit1-1]) || (' ' == sFrom[0]))
       pSentence->replace(posit1, iFromSize, sTo) ;
 
     posit1 = pSentence->find(sFrom, posit1 + 1) ;
