@@ -1,0 +1,12 @@
+//// NsBdmDlg.rh
+//
+
+// Dialog DRUGS_SEARCH_DLG
+//
+#define IDC_DRGSRCH_EDIT       101
+#define IDC_DRGSRCH_LIST       102
+#define IDC_DRGSRCH_SEARCH_BTN 103
+
+#define IDC_DRGINFO_LIST       101
+#define IDC_DRGINFO_TITLE_LIST 102
+
