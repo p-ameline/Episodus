@@ -83,24 +83,21 @@ ChampEdition::CmOk()
   sValeurInf = string(edition3);
   delete[] edition3;
 
-  if((sValeurExacte != "") && ((sValeurSup != "") || (sValeurInf != "")))
+  if ((sValeurExacte != "") && ((sValeurSup != "") || (sValeurInf != "")))
   {
   	erreur("Il faut choisir la valeur exacte ou l'intervalle", warningError, 0) ;
     pValeurExacte->SetFocus() ;
     return ;
   }
 
-  if (pUnite->sCode == "£?????")
-  {
-  	pUnite->sCode = "" ;
-    pUnite->sContenuTransfert = "" ;
-  }
-  sUnite = pUnite->sContenuTransfert ;
+  if (pUnite->getCode() == string("£?????"))
+    pUnite->setLabel(string("")) ;
+  sUnite = pUnite->getLabel() ;
 
 	if (pStock->GetCheck() == BF_CHECKED)
-  	sTypeCalcul = "STOCK" ;
+  	sTypeCalcul = string("STOCK") ;
   else if (pDynamique->GetCheck() == BF_CHECKED)
-  	sTypeCalcul = "DYNAMIQUE" ;
+  	sTypeCalcul = string("DYNAMIQUE") ;
 
 	CloseWindow(IDOK) ;
 }
@@ -108,10 +105,10 @@ ChampEdition::CmOk()
 string
 ChampEdition::getUnit()
 {
-	if (pUnite->sCode == "£?????")
+	if (pUnite->getCode() == string("£?????"))
 		return string("") ;
 
-	return pUnite->sCode ;
+	return pUnite->getCode() ;
 }
 
 //-------------------------------------------------------------------------
@@ -152,9 +149,9 @@ ChampEdition::SetupWindow()
 
   pValeurSup->SetText(sValeurSup.c_str()) ;
   pValeurInf->SetText(sValeurInf.c_str()) ;
-  pUnite->sContenuTransfert = sUnite ;
+  pUnite->setContenuTransfert(sUnite) ;
 
-  if(bCalcul)
+  if (bCalcul)
   {
   	if (sTypeCalcul == "DYNAMIQUE") //dynamique
     	pDynamique->SetCheck(BF_CHECKED);
@@ -210,7 +207,7 @@ ChampEdition::setUnit(string sNewUnit)
     
   string sLabelUnite ;
 	pContexte->getDico()->donneLibelle(sLang, &sNewUnit, &sLabelUnite) ;
-  pUnite->sCode = sNewUnit ;
+  pUnite->setLabel(sNewUnit) ;
   sUnite = sLabelUnite ;
 
   pValeurExacte->sUnit = sNewUnit ;

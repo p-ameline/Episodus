@@ -33,6 +33,7 @@ class _EPISODUS NewConcernInfo : public NSSuperRoot
     string   getEndDate()   { return _sDateFin ; }
     int      getSeverity()  { return _iSeverity ; }
     string   getCocCode()   { return _sCocCode ; }
+    string   getCimCode()   { return _sCimCode ; }
 
     NSPatPathoArray* getDetails() { return &_pptDetails ; }
 
@@ -43,6 +44,7 @@ class _EPISODUS NewConcernInfo : public NSSuperRoot
     void setEndDate(const string sED)    { _sDateFin = sED ; }
     void setSeverity(const int iS)       { _iSeverity = iS ; }
     void setCocCode(const string sCC)    { _sCocCode = sCC ; }
+    void setCimCode(const string sCC)    { _sCimCode = sCC ; }
 
     void setDetails(const NSPatPathoArray& ppt) { _pptDetails = ppt ; }
 
@@ -55,6 +57,7 @@ class _EPISODUS NewConcernInfo : public NSSuperRoot
     string   _sDateFin ;
     int      _iSeverity ;
     string   _sCocCode ;
+    string   _sCimCode ;
 
     NSPatPathoArray _pptDetails ;
 };

@@ -510,7 +510,7 @@ NSHtmlDrugs::ajouteLignes()
 	{
     ligneBlocHtml.vider() ;
 
-    string sData = texteHtml((*itDrug)->sTitre) ;
+    string sData = texteHtml((*itDrug)->_sTitre) ;
 
     ajouteBloc(new NSHtml("TBLTraitName", sData)) ;
 
@@ -527,15 +527,15 @@ NSHtmlDrugs::ajouteLignes()
 
     if (pPhase)
     {
-      sData    = texteHtml(pPhase->sTitreCourt) ;
-      tpsStart = pPhase->tDateOuverture ;
-      tpsEnd   = pPhase->tDateFermeture ;
+      sData    = texteHtml(pPhase->_sTitreCourt) ;
+      tpsStart = pPhase->_tDateOuverture ;
+      tpsEnd   = pPhase->_tDateFermeture ;
     }
     else if (pLastPhase)
     {
-      sData    = texteHtml(string("(") + pLastPhase->sTitreCourt + string(")")) ;
-      tpsStart = pLastPhase->tDateOuverture ;
-      tpsEnd   = pLastPhase->tDateFermeture ;
+      sData    = texteHtml(string("(") + pLastPhase->_sTitreCourt + string(")")) ;
+      tpsStart = pLastPhase->_tDateOuverture ;
+      tpsEnd   = pLastPhase->_tDateFermeture ;
     }
 
     ajouteBloc(new NSHtml("TBLTraitDose", sData)) ;
@@ -571,20 +571,20 @@ NSHtmlDrugs::ajouteLignes()
 
     string sFormDate = string("") ;
 
-    sFormDate = donne_date((*itDrug)->tDateOuverture.donneDate(), sLang) ;
+    sFormDate = donne_date((*itDrug)->_tDateOuverture.donneDate(), sLang) ;
     ajouteBloc(new NSHtml("TBLTraitStartDate", texteHtml(sFormDate))) ;
 
-    if ((*itDrug)->tDateFermeture.estNoLimit())
+    if ((*itDrug)->_tDateFermeture.estNoLimit())
       sFormDate = texteHtml(string("...")) ;
     else
-      sFormDate = donne_date((*itDrug)->tDateFermeture.donneDate(), sLang) ;
+      sFormDate = donne_date((*itDrug)->_tDateFermeture.donneDate(), sLang) ;
     ajouteBloc(new NSHtml("TBLTraitCloseDate", texteHtml(sFormDate))) ;
 
     if (pPhase)
     {
       sFormDate = string("") ;
 
-      if (false == pPhase->tDateFermeture.estVide())
+      if (false == pPhase->_tDateFermeture.estVide())
       {
         NVLdVTemps tpsNow ;
         tpsNow.takeTime() ;
@@ -592,10 +592,10 @@ NSHtmlDrugs::ajouteLignes()
         GlobalDkd Dcode(pContexte, sLang) ;
 
         string sNumberOf = string("") ;
-        unsigned long ulDeltaDays = pPhase->tDateFermeture.daysBetween(tpsNow) ;
+        unsigned long ulDeltaDays = pPhase->_tDateFermeture.daysBetween(tpsNow) ;
         if (ulDeltaDays > 90)
         {
-          unsigned long ulDeltaMonths = pPhase->tDateFermeture.monthsBetween(tpsNow) ;
+          unsigned long ulDeltaMonths = pPhase->_tDateFermeture.monthsBetween(tpsNow) ;
           string sDeltaMonths = IntToString((int)ulDeltaMonths) ;
           string sUnitCode = string("2DAT21") ;
           if (ulDeltaMonths > 1)
@@ -617,7 +617,7 @@ NSHtmlDrugs::ajouteLignes()
           sNumberOf = sDeltaDays + string(" ") + sUnitLib ;
         }
 
-        sFormDate = donne_date(pPhase->tDateFermeture.donneDate(), sLang) ;
+        sFormDate = donne_date(pPhase->_tDateFermeture.donneDate(), sLang) ;
 
         if (string("") != sNumberOf)
           sFormDate = sNumberOf + string(" (") + sFormDate + string(")") ;

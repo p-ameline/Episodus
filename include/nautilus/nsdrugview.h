@@ -54,8 +54,10 @@ class NSDrugView : public NSLDVView{ public:
 	void CmFct4() ; // ordo sur sélection
   void CmFct5() ; // new guideline file from selection
   void CmFct6() ; // add selection to extisting guideline file
+  void CmFct7() ; // drugs history
   void CmRights() ;
   void CmPublish() ;
+  void CmHistory() ;
 
   void CmOk() {}
   void CmCancel() {}
@@ -105,26 +107,28 @@ class NSDrugView : public NSLDVView{ public:
  protected:
 
 	// Remplissage de la vue
-  void SetupWindow() ;
-  void SetupTxtBar() ;
-  void InitFormatFont() ;
-  void SetupToolBar() ;
+  void   SetupWindow() ;
+  void   SetupTxtBar() ;
+  void   InitFormatFont() ;
+  void   SetupToolBar() ;
 
-  void DispInfoListe(TLwDispInfoNotify& dispInfo) ;
-  void LVNColumnclick(TLwNotify& lwn) ;
+  void   DispInfoListe(TLwDispInfoNotify& dispInfo) ;
+  void   LVNColumnclick(TLwNotify& lwn) ;
 
-  void sortByName() ;
-  void sortByAdmin() ;
-  void sortByDuration() ;
-  void sortByEnding() ;
-  void sortByBegining() ;
-  void sortByPrescrEnd() ;
-  void sortByPrescrDate() ;
+  void   sortByName() ;
+  void   sortByAdmin() ;
+  void   sortByDuration() ;
+  void   sortByEnding() ;
+  void   sortByBegining() ;
+  void   sortByPrescrEnd() ;
+  void   sortByPrescrDate() ;
 
   string getDrugRefToModify(string sWarningMsg = string("")) ;
 
   void   initCurrentList() ;
   void   markAddedDrugs() ;
+
+  void   checkByBdm() ;
 
   // Variables
   NSLdvDocument*         _pLdVDoc ;	// Pointeur sur document EPISOD  NSDrugsPropertyWindow* _pListeWindow ;  OWL::TControlBar*      _pToolBar ;	        // Barre d'outils

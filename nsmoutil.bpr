@@ -28,13 +28,14 @@ OBJFILES = ..\..\..\..\cvs\episodus\ObjNTIERS\nsmoutil.obj \
   ..\..\..\..\cvs\episodus\ObjNTIERS\nsHtmlToPdf.obj \
   ..\..\..\..\cvs\episodus\ObjNTIERS\nsCurl.obj \
   ..\..\..\..\cvs\episodus\ObjNTIERS\nsRest.obj \
-  ..\..\..\..\cvs\episodus\ObjNTIERS\bdm_bases.obj \
-  ..\..\..\..\cvs\episodus\ObjNTIERS\interfaceBdm.obj \
-  ..\..\..\..\cvs\episodus\ObjNTIERS\nsBdmDlg.obj \
   ..\..\..\..\cvs\episodus\ObjNTIERS\nsdicobdm.obj \
   ..\..\..\..\cvs\episodus\ObjNTIERS\NspathorBdm.obj \
   ..\..\..\..\cvs\episodus\ObjNTIERS\nsBdmDrugInfoDlg.obj \
-  ..\..\..\..\cvs\episodus\ObjNTIERS\nsBdmInfoDlg.obj
+  ..\..\..\..\cvs\episodus\ObjNTIERS\nsBdmInfoDlg.obj \
+  ..\..\..\..\cvs\episodus\ObjNTIERS\NsBdmListsDlg.obj \
+  ..\..\..\..\cvs\episodus\ObjNTIERS\bdm_bases.obj \
+  ..\..\..\..\cvs\episodus\ObjNTIERS\interfaceBdm.obj \
+  ..\..\..\..\cvs\episodus\ObjNTIERS\nsBdmDlg.obj
 RESFILES = ..\..\..\..\cvs\episodus\ObjNTIERS\nsoutil.res \
   ..\..\..\..\cvs\episodus\ObjNTIERS\nsEpiOut.res \
   ..\..\..\..\cvs\episodus\ObjNTIERS\nsimport.res \
@@ -184,26 +185,28 @@ Item2=ObjMUE
 Item3=Obj
 
 [HistoryLists\hlFinalOutputDir]
-Count=8
+Count=9
 Item0=..\..\..\..\cvs\episodus\
-Item1=..\..\..\..\cvs\episodusItem1=..\..\..\..\cvs\episodusItem1=..\..\..\..\cvs\episodusItem1=..\..\..\..\cvs\episodusItem1=..\..\..\..\cvs\episodusItem1=..\..\..\..\cvs\episodusItem1=..\..\..\..\cvs\episodus
+Item1=..\..\..\..\cvs\episodusItem1=..\..\..\..\cvs\episodusItem1=..\..\..\..\cvs\episodusItem1=..\..\..\..\cvs\episodusItem1=..\..\..\..\cvs\episodusItem1=..\..\..\..\cvs\episodusItem1=..\..\..\..\cvs\episodusItem1=..\..\..\..\cvs\episodus
 Item2=
 Item3=
 Item4=
 Item5=
 Item6=
 Item7=
+Item8=
 
 [HistoryLists\hIBPIOutputDir]
-Count=8
+Count=9
 Item0=C:\cvs\episodus\
-Item1=C:\cvs\episodusItem1=C:\cvs\episodusItem1=C:\cvs\episodusItem1=C:\cvs\episodusItem1=C:\cvs\episodusItem1=C:\cvs\episodusItem1=..\..\..\..\cvs\episodus
+Item1=C:\cvs\episodusItem1=C:\cvs\episodusItem1=C:\cvs\episodusItem1=C:\cvs\episodusItem1=C:\cvs\episodusItem1=C:\cvs\episodusItem1=C:\cvs\episodusItem1=..\..\..\..\cvs\episodus
 Item2=
 Item3=
 Item4=
 Item5=
 Item6=
 Item7=
+Item8=
 
 [Debugging]
 DebugSourceDirs=$(BCB)\source\vcl

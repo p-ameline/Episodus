@@ -3157,6 +3157,11 @@ bool TestIfPathoOkForDialog(std::string& temp)
         || (std::string("LSUBS") == temp )    // Non substituable
         || (std::string("LREMB") == temp )    // Nom remboursable
         || (std::string("LADMI") == temp )
+        || (std::string("6ATC0") == temp )
+        || (std::string("6CIS0") == temp )
+        || (std::string("6CIP0") == temp )
+        || (std::string("6CIP7") == temp )
+        || (std::string("6CIPT") == temp )
         || (std::string("£RE")   == temp )
         || (std::string("£C;")   == temp )
         || (std::string("£CX")   == temp )) ;
@@ -5487,7 +5492,7 @@ void
 NSMedicamentDlg::ExecutedAfterTrtEndDate()
 {
 	pNbJours->donneValeur() ;
-	int iTrtDurationValue = (int) pNbJours->dValeur ;
+	int iTrtDurationValue = (int) pNbJours->_dValeur ;
 	if (iTrtDurationValue <= 0)
 		return ;
 

@@ -170,13 +170,30 @@ NSGenericBdmInfoDlg::relocateOkButton(int iCurrentBtnTopPos)
   _pOkBtn->MoveWindow(btnRect.left, btnRect.top, btnRect.Width(), btnRect.Height()) ;
 }
 
+bool
+NSGenericBdmInfoDlg::isValidUrl(string sUrl)
+{
+  if (string("") == sUrl)
+    return false ;
+
+  size_t iUrlSize = strlen(sUrl.c_str()) ;
+
+  if (iUrlSize <= 8)
+    return false ;
+
+  if ((string("http://") != string(sUrl, 0, 7)) && (string("https://") != string(sUrl, 0, 8)))
+    return false ;
+
+  return true ;
+}
+
 void
 NSGenericBdmInfoDlg::openUrl(const string sUrl, const string sTitle)
 {
   if (string("") == sUrl)
     return ;
 
-  if ((strlen(sUrl.c_str()) > 7) && (string("http://") == string(sUrl, 0, 7)))
+  if (isValidUrl(sUrl))
   {
     ::ShellExecute(pContexte->GetMainWindow()->HWindow,
                  "open",
@@ -257,6 +274,30 @@ NSBdmInfoDlg::fillList()
   _pInfoList->fillList(_pBlock->getEntries()) ;
 }
 
+void
+NSBdmInfoDlg::activatedInformation(int iIndex)
+{
+  if (iIndex < 0)
+    return ;
+
+  // Get the activated value
+  //
+  NsXmlEntriesArray* pEntries = _pBlock->getEntries() ;
+  if (pEntries->empty() || ((size_t) iIndex >= pEntries->size()))
+    return ;
+
+  NsXmlEntry* pEntry = (*pEntries)[iIndex] ;
+  if ((NsXmlEntry*) NULL == pEntry)
+    return ;
+
+  string sValue = pEntry->getValue() ;
+
+  // If it is a valid URL, open the page
+  //
+  if (isValidUrl(sValue))
+    NSGenericBdmInfoDlg::openUrl(sValue, pEntry->getField()) ;
+}
+
 // -----------------------------------------------------------------
 //
 //  Méthodes de NSBdmMultiInfoDlg
@@ -308,8 +349,38 @@ void
 NSBdmMultiInfoDlg::fillList()
 {
   NsXmlBlock* pBlock = getSelectedBlock() ;
+  if ((NsXmlBlock*) NULL == pBlock)
+    return ;
 
   _pInfoList->fillList(pBlock->getEntries()) ;
+}
+
+void
+NSBdmMultiInfoDlg::activatedInformation(int iIndex)
+{
+  if (iIndex < 0)
+    return ;
+
+  NsXmlBlock* pBlock = getSelectedBlock() ;
+  if ((NsXmlBlock*) NULL == pBlock)
+    return ;
+
+  // Get the activated value
+  //
+  NsXmlEntriesArray* pEntries = pBlock->getEntries() ;
+  if (pEntries->empty() || ((size_t) iIndex >= pEntries->size()))
+    return ;
+
+  NsXmlEntry* pEntry = (*pEntries)[iIndex] ;
+  if ((NsXmlEntry*) NULL == pEntry)
+    return ;
+
+  string sValue = pEntry->getValue() ;
+
+  // If it is a valid URL, open the page
+  //
+  if (isValidUrl(sValue))
+    NSGenericBdmInfoDlg::openUrl(sValue, pEntry->getField()) ;
 }
 
 void
@@ -415,6 +486,7 @@ NSBdmMultiInfoDlg::getSelectedBlock()
  */
 
 DEFINE_RESPONSE_TABLE1(NSBdmInfoListWindow, TListWindow)
+  EV_WM_LBUTTONDBLCLK,
 END_RESPONSE_TABLE ;
 
 NSBdmInfoListWindow::NSBdmInfoListWindow(NSContexte* pCtx, NSGenericBdmInfoDlg *parent, int id, int x, int y, int w, int h, TModule *module)
@@ -448,6 +520,16 @@ NSBdmInfoListWindow::SetupWindow()
   skinSwitchOn("InPatientsListOn") ;
 
   SetupColumns() ;
+}
+
+void
+NSBdmInfoListWindow::EvLButtonDblClk(uint /* modKeys */, NS_CLASSLIB::TPoint& point)
+{
+  TLwHitTestInfo info(point) ;
+
+  int indexItem = HitTest(info) ;
+  if (_pParentDlg)
+    _pParentDlg->activatedInformation(indexItem) ;
 }
 
 void

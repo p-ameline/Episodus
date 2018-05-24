@@ -460,7 +460,7 @@ DocumentIter
 NSDocHistoArray::TrouveDocHisto(const string codeDocBrut)
 {
 	if (true == empty())
-		return NULL ;
+		return (DocumentIter) 0 ;
 
 	DocumentIter iterNode = begin() ;
 	for ( ; end() != iterNode ; iterNode++)
@@ -471,7 +471,7 @@ NSDocHistoArray::TrouveDocHisto(const string codeDocBrut)
 			return iterNode ;
 	}
 
-	return NULL ;
+	return (DocumentIter) 0 ;
 }
 
 //***************************************************************************

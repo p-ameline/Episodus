@@ -21,7 +21,7 @@ class decSpecialite : public decLesion
 
   protected:
 
-    NSPhrasePrescript DkdPrescript ;
+    NSPhrasePrescript _DkdPrescript ;
 
     string getVirtualDrug(const string sSpeciality) ;
 };

@@ -26,6 +26,7 @@
 #include "nautilus\nsepicap.h"
 #include "nautilus\nscaptview.h"
 #include "nautilus\nsdrugview.h"
+#include "nautilus\nsdrughistoview.h"
 #include "nautilus\nsepisodview.h"
 #include "nautilus\nsgoalview.h"
 #include "nautilus\nsFollowUpView.h"
@@ -159,6 +160,16 @@ BEGIN_REGISTRATION(drugLDVtplreg)
  REGDATA(description,"Drug Management")
  REGDATA(filter,     "")
  REGDATA(defaultext, "Drug")
+ REGDATA(directory,  0)
+ REGDOCFLAGS(dtAutoDelete)
+END_REGISTRATION
+
+typedef TDocTemplateT<NSLdvDocument, NSDrugHistoView> DrugHistoViewTmpl ;
+
+BEGIN_REGISTRATION(drugHistoLDVtplreg)
+ REGDATA(description,"Drug History")
+ REGDATA(filter,     "")
+ REGDATA(defaultext, "Drug history")
  REGDATA(directory,  0)
  REGDOCFLAGS(dtAutoDelete)
 END_REGISTRATION
@@ -512,6 +523,28 @@ try
 			{
     		TDocTemplate* tpl1 = getFirstTemplate() ;
     		pTemplate = new DrugViewTmpl(drugLDVtplreg, pContexte->getSuperviseur()->pExeModule, tpl1) ;
+				pDocLdv->SetTemplate(pTemplate) ;
+				attachTemplate(*pTemplate) ;
+			}
+      else
+      	pDocLdv->SetTemplate(pTemplate) ;
+      if (!pView)
+				return pDocManager->CreateView(*pDocLdv, pTemplate) ;
+    	else
+    		return pDocLdv->InitView(pView) ;
+    }
+    else if (sDescription == "Drug History")
+    {
+			DrugHistoViewTmpl* pTemplate = (DrugHistoViewTmpl*) 0 ;
+
+			TDocTemplate* tpl = findTemplateByDesc("Drug History") ;
+    	if (tpl)
+				pTemplate = TYPESAFE_DOWNCAST(tpl, DrugHistoViewTmpl) ;
+
+			if (!pTemplate)
+			{
+    		TDocTemplate* tpl1 = getFirstTemplate() ;
+    		pTemplate = new DrugHistoViewTmpl(drugHistoLDVtplreg, pContexte->getSuperviseur()->pExeModule, tpl1) ;
 				pDocLdv->SetTemplate(pTemplate) ;
 				attachTemplate(*pTemplate) ;
 			}

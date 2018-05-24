@@ -554,7 +554,8 @@ class NSContexte : public NSSuperRoot
 {
  public:
 
-  enum BAMTYPE { btNone = 0, btVidal } ;
+  enum BAMTYPE  { btNone = 0, btVidal } ;
+  enum DRUGSORT { dsName = 0, dsPrice } ;
 
  protected:
 
@@ -592,6 +593,9 @@ class NSContexte : public NSSuperRoot
   BAMTYPE                _iBamType ;
   string                 _sBamApplicationID ;
   string                 _sBamApplicationKey ;
+  DRUGSORT               _iDrugSort ;
+
+  bool                   _bDisplayEaccess ;
 
  public:
 
@@ -668,7 +672,7 @@ class NSContexte : public NSSuperRoot
   NSPersonGraphManager* getGraphPerson() { return _pGraphPerson ; }
   void resetGraphPerson()
   {
-  	if (NULL == _pGraphPerson)
+  	if ((NSPersonGraphManager*) NULL == _pGraphPerson)
     	_pGraphPerson = new NSPersonGraphManager(this->getSuperviseur()) ;
     else
     	_pGraphPerson->graphReset() ;
@@ -701,6 +705,12 @@ class NSContexte : public NSSuperRoot
 
   BAMTYPE         getBamType()            { return _iBamType ; }
   void            setBamType(BAMTYPE iBT) { _iBamType = iBT ; }
+
+  DRUGSORT        getDrugSort()             { return _iDrugSort ; }
+  void            setDrugSort(DRUGSORT iDS) { _iDrugSort = iDS ; }
+
+  bool            mustDisplayEA()         { return _bDisplayEaccess ; }
+  void            setDisplayEA(bool bDEA) { _bDisplayEaccess = bDEA ; }
 
   string          getBamApplicationID()   { return _sBamApplicationID ; }
   void            setBamApplicationID(string sID) { _sBamApplicationID = sID ; }

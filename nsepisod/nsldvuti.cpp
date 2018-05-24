@@ -604,6 +604,20 @@ NVLdVTemps::donneFormattedHeure(NSContexte* pContexte, string sLang) const
 	return formatHeure ;
 }
 
+/**
+ *  Get ISO 8601 format, à la 1980-10-26T01:01:01
+ */
+string
+NVLdVTemps::getIso8601()
+{
+  return string(_sTemps,  0, 4) + string("-") +
+         string(_sTemps,  4, 2) + string("-") +
+         string(_sTemps,  6, 2) + string("T") +
+         string(_sTemps,  8, 2) + string(":") +
+         string(_sTemps, 10, 2) + string(":") +
+         string(_sTemps, 12, 2) ;
+}
+
 void
 NVLdVTemps::takeTime()
 {

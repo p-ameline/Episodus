@@ -153,7 +153,7 @@ class NSGenerateurFr : public NSGenerateur
     string  getAdjectifDemonstratif(GENRE iGenreNom) ;
     string  donnePronomPersonnel(GENRE iGenre, NSPhraseur::VBPERSO iVbPersonne, string sFonction) ;
 
-    void    etFinal(string *type, string *type1, const string sSeparator = string(" et ")) ;
+    void    etFinal(string *type, const string *type1, const string sSeparator = string(""), bool bUseDefaultIfEmpty = true) ;
 
     string  donneParticipePresent(NSPathologData* pPathoData) ;
     string  donneParticipePasse(NSPhraseMot* pPhraseMot, const GENRE iGenre) ;
@@ -299,7 +299,7 @@ class NSGenerateurEn : public NSGenerateur
     string  donneArticlePartitif(NSPhraseMot* pMot, bool bPluriel, GERECERTITUDE iGereCertitude = avecCertitude) ;
     string  donnePronomPersonnel(GENRE iGenre, NSPhraseur::VBPERSO iVbPersonne, string sFonction) ;
 
-    void    etFinal(string *type, string *type1, const string sSeparator = string(" and ")) ;
+    void    etFinal(string *type, const string *type1, const string sSeparator = string(""), bool bUseDefaultIfEmpty = true) ;
 
     string  donneParticipePresent(NSPathologData* pPathoData) ;
     string  donneParticipePasse(NSPhraseMot* pPhraseMot, GENRE iGenre = genreNull) ;

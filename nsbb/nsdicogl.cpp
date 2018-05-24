@@ -229,5 +229,23 @@ NSEditDicoGlobal::isEmpty()
   return (GetTextLen() == 0) ;
 }
 
+/**
+ * Get the text as currently entered in the edit field
+ */
+string
+NSEditDicoGlobal::getRawText()
+{
+  int iBuffLen = GetTextLen() ;
+  if (0 == iBuffLen)
+    return string("") ;
+
+  char far* szBuff = new char[iBuffLen+1] ;
+  GetText(szBuff, iBuffLen+1) ;
+  string sReturn = string(szBuff) ;
+  delete[] szBuff ;
+
+  return sReturn ;
+}
+
 //-------------------------------------------------------------------------
 

@@ -3533,6 +3533,8 @@ NSContexte::NSContexte(NSSuper* pSuper)
   _pPredi              = new NSPredi(this) ;
 
   _iBamType            = btNone ;
+  _iDrugSort           = dsName ;
+  _bDisplayEaccess     = true ;
   _sBamApplicationID   = string("") ;
   _sBamApplicationKey  = string("") ;
 
@@ -3576,6 +3578,8 @@ NSContexte::NSContexte(NSContexte& rv)
   _pPredi              = (NSPredi*) 0 ;
 
   _iBamType            = rv._iBamType ;
+  _iDrugSort           = rv._iDrugSort ;
+  _bDisplayEaccess     = rv._bDisplayEaccess ;
   _sBamApplicationID   = rv._sBamApplicationID ;
   _sBamApplicationKey  = rv._sBamApplicationKey ;
 

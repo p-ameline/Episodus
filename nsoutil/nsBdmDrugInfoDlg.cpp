@@ -77,12 +77,17 @@ NSBdmDrugInfoDlg::fillList()
 }
 
 void
+NSBdmDrugInfoDlg::activatedInformation(int /* iIndex */)
+{
+}
+
+void
 NSBdmDrugInfoDlg::openUrl(const string sUrl)
 {
   if (string("") == sUrl)
     return ;
 
-  if ((strlen(sUrl.c_str()) > 7) && (string("http://") == string(sUrl, 0, 7)))
+  if (isValidUrl(sUrl))
   {
     ::ShellExecute(pContexte->GetMainWindow()->HWindow,
                  "open",

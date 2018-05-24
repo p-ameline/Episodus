@@ -29,6 +29,11 @@ USEUNIT("nsoutil\nsrefedit.cpp");
 USEUNIT("nsoutil\nsHtmlToPdf.cpp");
 USEUNIT("curl\nsCurl.cpp");
 USEUNIT("curl\nsRest.cpp");
+USEUNIT("nsoutil\nsdicobdm.cpp");
+USEUNIT("nsoutil\NspathorBdm.cpp");
+USEUNIT("nsoutil\nsBdmDrugInfoDlg.cpp");
+USEUNIT("nsoutil\nsBdmInfoDlg.cpp");
+USEUNIT("nsoutil\NsBdmListsDlg.cpp");
 USERC("Nsoutil\nsoutil.rc");
 USERC("Nsoutil\nsEpiOut.rc");
 USERC("Nsoutil\nsimport.rc");
@@ -52,10 +57,7 @@ USEUNIT("nsoutil\bdm_bases.cpp");
 USEUNIT("nsoutil\interfaceBdm.cpp");
 USEUNIT("nsoutil\nsBdmDlg.cpp");
 USERC("nsoutil\nsBdmDlg.rc");
-USEUNIT("nsoutil\nsdicobdm.cpp");
-USEUNIT("nsoutil\NspathorBdm.cpp");
-USEUNIT("nsoutil\nsBdmDrugInfoDlg.cpp");
-USEUNIT("nsoutil\nsBdmInfoDlg.cpp");
+
 //---------------------------------------------------------------------------
 int WINAPI DllEntryPoint(HINSTANCE hinstDll, unsigned long fdwReason, void*)
 {

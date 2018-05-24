@@ -154,7 +154,6 @@ USELIB("ocfwvi.lib");
 USELIB("jvm.lib");
 USELIB("psapi.lib");
 USELIB("kernel32.lib");
-USELIB("libcurl-4.lib");
 USEUNIT("adopt.cpp");
 USEUNIT("nautilus\wordbasic.cpp");
 USEFORM("nautilus\AutoWord.cpp", AutoWordForm);
@@ -200,6 +199,7 @@ USEUNIT("nautilus\wordObjects.cpp");
 USEUNIT("nautilus\nsPilotProxy.cpp");
 USEFORM("include\nautilus\ExamHisto.cpp", ExamHistoForm);
 USEFORM("nautilus\NsIndySmtp.cpp", IndySMTP);
+USEUNIT("nautilus\nsdrughistoview.cpp");
 //---------------------------------------------------------------------------
 #include "nautilus\nssuper.h"
 #include "ns_ob1\nautilus-bbk.h"

@@ -546,6 +546,9 @@ NSLdvDocument::getFrameTypeFromRoot(string sRootCode)
 // ----------------------- Drug oriented services -----------------------
 //
 
+/**
+ *  Add a new drug
+ */
 NSLdvDocument::LDVSERVICESERROR
 NSLdvDocument::DrugNewService(TWindow* pCallingView, string sDrugLexiCode, VecteurString* pRelatedConcerns)
 {
@@ -562,16 +565,18 @@ try
   if (string("") != sDrugLexiCode)
   	PPT.ajoutePatho(sDrugLexiCode, 0) ;
 
-  NSSimpleNewDrugDlg *pMedicDlg = new NSSimpleNewDrugDlg(pCallingView, pContexte, &PPT) ;
-  int iResult = pMedicDlg->Execute() ;
-  bool bComplexMode = pMedicDlg->mustSwitchToComplexMode() ;
-  delete (pMedicDlg) ;
+  NSSimpleNewDrugDlg MedicDlg(pCallingView, pContexte, &PPT) ;
+
+  if (pRelatedConcerns && (false == pRelatedConcerns->empty()))
+    MedicDlg.initConnectedIssues(pRelatedConcerns) ;
+
+  int iResult = MedicDlg.Execute() ;
+  bool bComplexMode = MedicDlg.mustSwitchToComplexMode() ;
 
   if (bComplexMode)
 	{
-  	NSMedicamentDlg *pComplexMedicDlg = new NSMedicamentDlg(pCallingView, pContexte, &PPT) ;
-    iResult = pComplexMedicDlg->Execute() ;
-		delete (pComplexMedicDlg) ;
+  	NSMedicamentDlg ComplexMedicDlg(pCallingView, pContexte, &PPT) ;
+    iResult = ComplexMedicDlg.Execute() ;
 
     // NSComplexMedicamentDlg *pComplexMedicDlg = new NSComplexMedicamentDlg(pCallingView, pContexte, &PPT) ;
     // iResult = pComplexMedicDlg->Execute() ;
@@ -586,6 +591,8 @@ try
 
 	// on enregistre ici dans l'index de santé
   //
+  *pRelatedConcerns = *(MedicDlg.getUpdatedLinkedConcern()) ;
+
 	pContexte->getPatient()->CreeTraitement(&PPT, pRelatedConcerns) ;
 
   // invalidateViews("DRUG_NEW") ; // Already done by CreeTraitement
@@ -706,7 +713,7 @@ NSLdvDocument::DrugModifyService(TWindow* pCallingView, string sDrugNode)
 {
 try
 {
-	if (sDrugNode == string(""))
+	if (string("") == sDrugNode)
 		return ldvseNothingToDo ;
 
 	if (!(pContexte->userHasPrivilege(NSContexte::modifyDrug, -1, -1, string(""), string(""), NULL, NULL)))
@@ -719,7 +726,7 @@ try
   LDVFRAME iFrame = ldvframeNotSpecified ;
 
   NSLdvDrug* pDrug = getTreatment(sDrugNode, iFrame) ;
-  if (pDrug == NULL)
+  if ((NSLdvDrug*) NULL == pDrug)
   	return ldvseInvalidData ;
 
   NSPatPathoArray PPT(pContexte->getSuperviseur()) ;
@@ -750,12 +757,12 @@ try
       {
         pptIt++ ;
         int iLigneBase = (*pptIt)->getLigne() ;
-        string sUnite  = "" ;
-        string sFormat = "" ;
-        string sValeur = "" ;
-        string sTemp   = "" ;
+        string sUnite  = string("") ;
+        string sFormat = string("") ;
+        string sValeur = string("") ;
+        string sTemp   = string("") ;
 
-        while ( (pptIt != PPT.end()) &&
+        while ((PPT.end() != pptIt) &&
                 ((*pptIt)->getLigne() == iLigneBase))
         {
           if (pContexte->getDico()->CodeCategorie((*pptIt)->getLexique()) == string("£"))
@@ -766,13 +773,13 @@ try
             pptItValeur = pptIt ;
             break ;
           }
-          pptIt++;
+          pptIt++ ;
         }
 
         // sFormat est du type £D0;03
-        if ((sFormat != "") && ((sFormat[1] == 'D') || (sFormat[1] == 'T')) && (sValeur != ""))
+        if ((string("") != sFormat) && (('D' == sFormat[1]) || ('T' == sFormat[1])) && (string("") != sValeur))
         {
-          if ((sUnite == "2DA01") || (sUnite == "2DA02"))
+          if ((string("2DA01") == sUnite) || (string("2DA02") == sUnite))
           {
             // on remplace la date d'ouverture par la date du jour
             (*pptItValeur)->setComplement(tpsNow.donneDateHeure()) ;
@@ -788,7 +795,7 @@ try
       pptIt++ ;
   }
 
-  if (!bDateTrouvee)
+  if (false == bDateTrouvee)
   {
     string sErrorText = pContexte->getSuperviseur()->getText("drugManagementErrors", "drugToEditHasNoStartingDate") ;
     pContexte->getSuperviseur()->trace(&sErrorText, 1, NSSuper::trError) ;
@@ -806,6 +813,8 @@ try
   bool bEnableToParse = pSimpleMedicDialog->ParseMedicament() ;
   if (true == bEnableToParse)
   {
+    pSimpleMedicDialog->initializeConnectedIssues(sDrugNode) ;
+
   	iResult = pSimpleMedicDialog->Execute() ;
   	bComplexMode = pSimpleMedicDialog->mustSwitchToComplexMode() ;
   }
@@ -817,9 +826,9 @@ try
 	if (true == bComplexMode)
   {
   	/*NSMedicDlg */NSMedicamentDlg *pMedicDialog = new NSMedicamentDlg(pContexte->GetMainWindow(), pContexte, &PPT) ;
-  	iResult = pMedicDialog->Execute() ;  	delete pMedicDialog ;  }  if (iResult != IDOK)    return ldvseCanceledByUser ;  // Si aucune modif : on sort...  if (PPT.estEgal(&PPTCopy))    return ldvseNothingToDo ;  VecteurString NodeArret ;
+  	iResult = pMedicDialog->Execute() ;  	delete pMedicDialog ;  }  if (IDOK != iResult)    return ldvseCanceledByUser ;  // Si aucune modif : on sort...  if (PPT.estEgal(&PPTCopy))    return ldvseNothingToDo ;  VecteurString NodeArret ;
   NodeArret.AddString(sDrugNode) ;  // on cloture la précédente prescription  pContexte->getPatient()->ArreterElement(&NodeArret, tpsNow.donneDateHeure()) ;  // on enregistre la nouvelle prescription dans l'index de santé  if (false == PPT.empty())
-    pContexte->getPatient()->CreeTraitement(&PPT, &(pDrug->aConcerns)) ;
+    pContexte->getPatient()->CreeTraitement(&PPT, &(pDrug->_aConcerns)) ;
 
   // invalidateViews("DRUG_CHANGED") ;
 
@@ -893,7 +902,7 @@ NSLdvDocument::DrugChangePosoService(TWindow* pCallingView, NSLdvDrug* pLdvDrug)
   // on crée une copie - creating a copy
   NSPatPathoArray PPTCopy(phasePPT) ;
 
-	NSMedicModifPosoDlg *pModifPosoDialog = new NSMedicModifPosoDlg(pContexte->GetMainWindow(), pContexte, &phasePPT, &drugPPT) ;  int iResult = pModifPosoDialog->Execute() ;  delete pModifPosoDialog ;  if (iResult != IDOK)    return ldvseCanceledByUser ;	if (true == phasePPT.empty())		return ldvseNothingToDo ;	NVLdVTemps tStart = pActivePhase->tDateOuverture ;	NVLdVTemps tEnd   = pActivePhase->tDateFermeture ;
+	NSMedicModifPosoDlg *pModifPosoDialog = new NSMedicModifPosoDlg(pContexte->GetMainWindow(), pContexte, &phasePPT, &drugPPT) ;  int iResult = pModifPosoDialog->Execute() ;  delete pModifPosoDialog ;  if (iResult != IDOK)    return ldvseCanceledByUser ;	if (true == phasePPT.empty())		return ldvseNothingToDo ;	NVLdVTemps tStart = pActivePhase->_tDateOuverture ;	NVLdVTemps tEnd   = pActivePhase->_tDateFermeture ;
 	// removing all that is not KCYTR in PPTCopy  if (false == PPTCopy.empty())	{		PatPathoIter copyIter = PPTCopy.begin() ;
     int iCol = (*copyIter)->getColonne() ;
     copyIter++ ;
@@ -1068,13 +1077,13 @@ try
 
     if (pDrug)
     {
-    	string sPropTitle    = pDrug->sTitreCourt ;
+    	string sPropTitle    = pDrug->_sTitreCourt ;
 			string sPropGroup    = string("") ;
     	string sPropHelp     = string("") ;
       string sPropCheck    = string("") ;
       string sPropEvidence = string("") ;
       string sUncheckArche = string("") ;
-			ReferentialPropParamsDialog *pParamsDlg = new ReferentialPropParamsDialog(pCallingView, pContexte, &sPropTitle, &sPropGroup, &sPropHelp, &(pDrug->sTitreCourt), &(pDrug->sTitre), &sPropCheck, &sPropEvidence, &sUncheckArche, &groupsLabelsArray) ;
+			ReferentialPropParamsDialog *pParamsDlg = new ReferentialPropParamsDialog(pCallingView, pContexte, &sPropTitle, &sPropGroup, &sPropHelp, &(pDrug->_sTitreCourt), &(pDrug->_sTitre), &sPropCheck, &sPropEvidence, &sUncheckArche, &groupsLabelsArray) ;
 			int iParamsResult = pParamsDlg->Execute() ;
 			delete pParamsDlg ;
 
@@ -1264,13 +1273,13 @@ try
 
     if (pDrug)
     {
-    	string sPropTitle    = pDrug->sTitreCourt ;
+    	string sPropTitle    = pDrug->_sTitreCourt ;
 			string sPropGroup    = string("") ;
     	string sPropHelp     = string("") ;
       string sPropCheck    = string("") ;
       string sPropEvidence = string("") ;
       string sUncheckArche = string("") ;
-			ReferentialPropParamsDialog *pParamsDlg = new ReferentialPropParamsDialog(pCallingView, pContexte, &sPropTitle, &sPropGroup, &sPropHelp, &(pDrug->sTitreCourt), &(pDrug->sTitre), &sPropCheck, &sPropEvidence, &sUncheckArche, &groupsLabelsArray) ;
+			ReferentialPropParamsDialog *pParamsDlg = new ReferentialPropParamsDialog(pCallingView, pContexte, &sPropTitle, &sPropGroup, &sPropHelp, &(pDrug->_sTitreCourt), &(pDrug->_sTitre), &sPropCheck, &sPropEvidence, &sUncheckArche, &groupsLabelsArray) ;
 			int iParamsResult = pParamsDlg->Execute() ;
 			delete pParamsDlg ;
 
@@ -2079,11 +2088,11 @@ NSLdvDocument::Publish(NSLdvPubli *pPubliDriver, bool bCorrespPatient)
 {
 try
 {
-  if (NULL == pPubliDriver)
+  if ((NSLdvPubli*) NULL == pPubliDriver)
     return ;
 
-	if ((NULL == pContexte->getUtilisateur()) ||
-   	 	(bCorrespPatient && (NULL == pContexte->getPatient())))
+	if (((NSUtilisateurChoisi*) NULL == pContexte->getUtilisateur()) ||
+   	 	(bCorrespPatient && ((NSPatientChoisi*) NULL == pContexte->getPatient())))
 		return ;
 
   if (_pPubli)
@@ -3070,22 +3079,22 @@ catch (...)
 bool
 NSLdvDocument::openLdVObject(NSLdvObjet *pObj)
 {
-	if (NULL == pObj)
+	if ((NSLdvObjet*) NULL == pObj)
 		return false ;
 
 	string sObjRef = pObj->getReference() ;
 
 	NSPatientChoisi* pPat = pContexte->getPatient() ;
-	if (NULL == pPat)
+	if ((NSPatientChoisi*) NULL == pPat)
 		return false ;
 
 	// Document his
 	NSHISTODocument* pHistory = pPat->getDocHis() ;
-	if (NULL == pHistory)
+	if ((NSHISTODocument*) NULL == pHistory)
   	return false ;
 
   NSDocHistoArray* pVectDocument = pHistory->getVectDocument() ;
-	if ((NULL == pVectDocument) || pVectDocument->empty())
+	if (((NSDocHistoArray*) NULL == pVectDocument) || pVectDocument->empty())
   	return false ;
 
 	DocumentIter iterDoc = pVectDocument->begin() ;
@@ -3103,7 +3112,7 @@ NSLdvDocument::openLdVObjectsInArray(ArrayObjets* pObjects, NSLdvView* pView)
 {
 try
 {
-	if ((NULL == pObjects) || (pObjects->empty()))
+	if (((ArrayObjets*) NULL == pObjects) || pObjects->empty())
 		return false ;
 
 	// S'il n'y en a qu'un, on l'ouvre directement
@@ -3463,6 +3472,15 @@ try
     Message Msg ;
 		Msg.SetComplement(sCocCode) ;
 		PatPatho.ajoutePatho("6CISP1", &Msg, 1) ;
+  }
+
+  string sCimCode = pConcernInfo->getCimCode() ;
+
+  if (string("") != sCimCode)
+  {
+    Message Msg ;
+		Msg.SetComplement(sCimCode) ;
+		PatPatho.ajoutePatho("6CIMA1", &Msg, 1) ;
   }
 
   string sDateDeb = pConcernInfo->getStartDate() ;
@@ -4907,7 +4925,7 @@ NSLdvDocument::getSocialElement(string sNodeId, NSPatPathoArray **ppPatho)
 PatPathoIter
 NSLdvDocument::donnePreoccup(NSConcern* pConcern, NSPatPathoArray** pPatho)
 {
-  if (NULL == pConcern)
+  if ((NSConcern*) NULL == pConcern)
     return NULL ;
 
   string sNodeId = pConcern->getNoeud() ;
@@ -4918,7 +4936,7 @@ NSLdvDocument::donnePreoccup(NSConcern* pConcern, NSPatPathoArray** pPatho)
 PatPathoIter
 NSLdvDocument::donneGoal(NSLdvGoal* pGoal, NSPatPathoArray** pPatho)
 {
-  if (NULL == pGoal)
+  if ((NSLdvGoal*) NULL == pGoal)
     return NULL ;
 
   string sNodeId = pGoal->getNode() ;
@@ -4929,7 +4947,7 @@ NSLdvDocument::donneGoal(NSLdvGoal* pGoal, NSPatPathoArray** pPatho)
 PatPathoIter
 NSLdvDocument::donneDrug(NSLdvDrug *pDrug, NSPatPathoArray **pPatho)
 {
-  if (NULL == pDrug)
+  if ((NSLdvDrug*) NULL == pDrug)
     return NULL ;
 
   string sNodeId = pDrug->getNoeud() ;
@@ -4941,11 +4959,11 @@ NSConcern*
 NSLdvDocument::donneOpenConcern(LDVFRAME iFrame, string sCodeSens)
 {
   NSFrameInformation* pFrameInfo = aFrameIndexes.getFrameInformation(iFrame) ;
-  if (NULL == pFrameInfo)
+  if ((NSFrameInformation*) NULL == pFrameInfo)
 		return (NSConcern*) 0 ;
 
   ArrayConcern* pConcerns = pFrameInfo->getConcernsArray() ;
-	if ((NULL == pConcerns) || (pConcerns->empty()))
+	if (((ArrayConcern*) NULL == pConcerns) || (pConcerns->empty()))
 		return (NSConcern*) 0 ;
 
 	NVLdVTemps tToday ;
@@ -4991,11 +5009,11 @@ NSLdvDrug*
 NSLdvDocument::donneNextRecentOpenDrug(LDVFRAME iFrame, string sCodeSens, NSLdvDrug* pPreviousDrug)
 {
   NSFrameInformation* pFrameInfo = aFrameIndexes.getFrameInformation(iFrame) ;
-  if (NULL == pFrameInfo)
+  if ((NSFrameInformation*) NULL == pFrameInfo)
 		return (NSLdvDrug*) 0 ;
 
   ArrayLdvDrugs* pDrugs = pFrameInfo->getTreatmentsArray() ;
-	if ((NULL == pDrugs) || (pDrugs->empty()))
+	if (((ArrayLdvDrugs*) NULL == pDrugs) || (pDrugs->empty()))
 		return (NSLdvDrug*) 0 ;
 
 	drugsIter iStartIter = pDrugs->begin() ;
@@ -5018,8 +5036,8 @@ NSLdvDocument::donneNextRecentOpenDrug(LDVFRAME iFrame, string sCodeSens, NSLdvD
 	for (drugsIter j = iStartIter ; pDrugs->end() != j ; j++)
 	{
 		// Préoccupation ouverte
-		if (((*j)->tDateOuverture <= tToday) &&
-				(((*j)->tDateFermeture.estNoLimit()) || ((*j)->tDateFermeture >= tToday)))
+		if (((*j)->_tDateOuverture <= tToday) &&
+				(((*j)->_tDateFermeture.estNoLimit()) || ((*j)->_tDateFermeture >= tToday)))
 		{
     	string sConcern = (*j)->getLexique() ;
       string sConcernCodeSens ;
@@ -5041,8 +5059,8 @@ NSLdvDocument::donneNextRecentOpenDrug(LDVFRAME iFrame, string sCodeSens, NSLdvD
   for (drugsIter j = iStartIter ; pDrugs->end() != j ; j++)
 	{
 		// Préoccupation ouverte
-		if (((*j)->tDateOuverture <= tToday) &&
-				(((*j)->tDateFermeture.estNoLimit()) || ((*j)->tDateFermeture >= tToday)))
+		if (((*j)->_tDateOuverture <= tToday) &&
+				(((*j)->_tDateFermeture.estNoLimit()) || ((*j)->_tDateFermeture >= tToday)))
 		{
       string sConcern = (*j)->getLexique() ;
       string sConcernCodeSens ;
@@ -5062,7 +5080,7 @@ NSLdvDocument::donneNextRecentOpenDrug(LDVFRAME iFrame, string sCodeSens, NSLdvD
 bool
 NSLdvDocument::updateIndexDocument(NSDocumentHisto* pDocument, bool bUpdateDisplay)
 {
-  if (NULL == pDocument)
+  if ((NSDocumentHisto*) NULL == pDocument)
     return false ;
 
   // Can we work ?
@@ -5073,7 +5091,7 @@ NSLdvDocument::updateIndexDocument(NSDocumentHisto* pDocument, bool bUpdateDispl
 	}
 
 	NSHISTODocument* pHistory = pContexte->getPatient()->getDocHis() ;
-  if (NULL == pHistory)
+  if ((NSHISTODocument*) NULL == pHistory)
 	{
     pContexte->getSuperviseur()->traceAndDisplay("documentManagementErrors", "cannotFindHistoryManager") ;
 		return false ;
@@ -6036,12 +6054,12 @@ NSLdvDocument::closeGoal(NSLdvGoal* pGoal, NVLdVTemps* pDateFin, NSPatPathoArray
 {
 try
 {
-	if (NULL == pGoal)
+	if ((NSLdvGoal*) NULL == pGoal)
 		return ;
 
   LDVFRAME iFrame = pGoal->getIFrame() ;
   NSFrameInformation* pFrameInfo = aFrameIndexes.getFrameInformation(iFrame) ;
-  if (NULL == pFrameInfo)
+  if ((NSFrameInformation*) NULL == pFrameInfo)
     return ;
 
 	// Recherche de cette préoccupation dans l'index de santé
@@ -6126,14 +6144,12 @@ try
 	pGoal->_tDateFermeture = *pDateFin ;
 
   NSDocumentHisto* pDocument = pFrameInfo->findNode(pGoal->getNode()) ;
-  if (NULL == pDocument)
+  if ((NSDocumentHisto*) NULL == pDocument)
     return ;
 
 	updateIndexDocument(pDocument, false) ;
 
 	reinitAllGoals() ;
-
-	return ;
 }
 catch (...)
 {
@@ -6147,12 +6163,12 @@ NSLdvDocument::goalAdded(NSLdvGoal* pGoal, GoalInfoArray *pWorstJalons)
 {
 try
 {
-	if ((NULL == pGoal) || (NULL == pWorstJalons))
+	if (((NSLdvGoal*) NULL == pGoal) || ((GoalInfoArray*) NULL == pWorstJalons))
 		return ;
 
 	GoalInfoArray* pJalons = pGoal->getMetaJalons() ;
 
-	if ((NULL == pJalons) || (pJalons->empty()))
+	if (((GoalInfoArray*) NULL == pJalons) || (pJalons->empty()))
 		return ;
 
 	if (pWorstJalons->empty())
@@ -6470,14 +6486,14 @@ catch (...)
 void
 NSLdvDocument::goalModifiedForDrug(NSLdvGoal* pGoal, NSLdvDrug *pDrug)
 {
-	if ((NULL == pGoal) || (NULL == pDrug) || (NULL == pDrug->pWorstJalons))
+	if (((NSLdvGoal*) NULL == pGoal) || ((NSLdvDrug*) NULL == pDrug) || (NULL == pDrug->_pWorstJalons))
 		return ;
 
 	//
 	// On reconstruit entièrement worstJalons
 	// worstJalons is completely rebuilt
 	//
-	pDrug->pWorstJalons->vider() ;
+	pDrug->_pWorstJalons->vider() ;
 
   for (int i = 0 ; i < FRAMECOUNT ; i++)
   {
@@ -6502,7 +6518,7 @@ NSLdvDocument::goalModifiedForDrug(NSLdvGoal* pGoal, NSLdvDrug *pDrug)
 void
 NSLdvDocument::goalModifiedForConcern(NSLdvGoal* pGoal, NSConcern *pConcern)
 {
-	if ((NULL == pGoal) || (NULL == pConcern))
+	if (((NSLdvGoal*) NULL == pGoal) || ((NSConcern*) NULL == pConcern))
 		return ;
 
 	//
@@ -7751,6 +7767,7 @@ try
 	_sHealthIssue   = string("") ;
 	_sPrimoPb       = string("") ;
   _sCocCode       = string("") ;
+  _sCimCode       = string("") ;
 
 	_pPptDetails    = (NSPatPathoArray*) 0 ;
 
@@ -7775,6 +7792,7 @@ try
 	_sHealthIssue    = rv._sHealthIssue ;
 	_sPrimoPb        = rv._sPrimoPb ;
   _sCocCode        = rv._sCocCode ;
+  _sCimCode        = rv._sCimCode ;
 
 	_sTitre          = rv._sTitre ;
 	_sSignificatif   = rv._sSignificatif ;
@@ -8345,6 +8363,7 @@ try
 	_sHealthIssue    = src._sHealthIssue ;
 	_sPrimoPb        = src._sPrimoPb ;
   _sCocCode        = src._sCocCode ;
+  _sCimCode        = src._sCimCode ;
 
 	_aModificateurs  = src._aModificateurs ;
 
@@ -8691,6 +8710,14 @@ try
             else if (sSens == "6CISP")
             {
               pConcern->_sCocCode = (*iter)->getComplement() ;
+              iter++ ;
+            }
+            //
+            // ICD Code
+            //
+            else if (sSens == "6CIMA")
+            {
+              pConcern->_sCimCode = (*iter)->getComplement() ;
               iter++ ;
             }
             //
@@ -9740,9 +9767,9 @@ ArrayObjets::removeObjet(string sRef)
 NSLdvDrugTake::NSLdvDrugTake(NSContexte *pCtx)
               :NSRoot(pCtx)
 {
-	sNbDoses       = string("") ;
-	sAdminType     = string("") ;
-	sAdminLocation = string("") ;
+	_sNbDoses       = string("") ;
+	_sAdminType     = string("") ;
+	_sAdminLocation = string("") ;
 
   lObjectCount++ ;
 }
@@ -9750,11 +9777,11 @@ NSLdvDrugTake::NSLdvDrugTake(NSContexte *pCtx)
 NSLdvDrugTake::NSLdvDrugTake(const NSLdvDrugTake& rv)
               :NSRoot(rv.pContexte)
 {
-	sNbDoses       = rv.sNbDoses ;
-  tpsClose       = rv.tpsClose ;
-  sAdminType     = rv.sAdminType ;
-  sAdminLocation = rv.sAdminLocation ;
-  tpsAdminHour   = rv.tpsAdminHour ;
+	_sNbDoses       = rv._sNbDoses ;
+  _tpsClose       = rv._tpsClose ;
+  _sAdminType     = rv._sAdminType ;
+  _sAdminLocation = rv._sAdminLocation ;
+  _tpsAdminHour   = rv._tpsAdminHour ;
 
   lObjectCount++ ;
 }
@@ -9767,7 +9794,7 @@ NSLdvDrugTake::~NSLdvDrugTake()
 void
 NSLdvDrugTake::initFromTree(NSPatPathoArray* pTree, PatPathoIter iterSource)
 {
-	if (NULL == pTree)
+	if ((NSPatPathoArray*) NULL == pTree)
 		return ;
 
 	PatPathoIter iter = iterSource ;
@@ -9800,7 +9827,7 @@ NSLdvDrugTake::initFromTree(NSPatPathoArray* pTree, PatPathoIter iterSource)
 
             size_t i = sValeur.find(".") ;
   					if (i == NPOS)
-  						sNbDoses = sValeur ;
+  						_sNbDoses = sValeur ;
   					else
   					{
             	string sEntier = string("") ;
@@ -9812,7 +9839,7 @@ NSLdvDrugTake::initFromTree(NSPatPathoArray* pTree, PatPathoIter iterSource)
               	sEntier = string("0") ;
     					sDecima = string(sValeur, i+1, strlen(sValeur.c_str())-i-1) ;
 
-    					sNbDoses = sEntier + sNumSeparator + sDecima ;
+    					_sNbDoses = sEntier + sNumSeparator + sDecima ;
   					}
           }
           iter++ ;
@@ -9824,7 +9851,7 @@ NSLdvDrugTake::initFromTree(NSPatPathoArray* pTree, PatPathoIter iterSource)
         if (pTree->end() != iter)
         {
         	string sDate = (*iter)->getComplement() ;
-          tpsClose.initFromDateHeure(sDate) ;
+          _tpsClose.initFromDateHeure(sDate) ;
           iter++ ;
         }
       }
@@ -9833,7 +9860,7 @@ NSLdvDrugTake::initFromTree(NSPatPathoArray* pTree, PatPathoIter iterSource)
       	iter++ ;
         if (pTree->end() != iter)
         {
-        	sAdminType = (*iter)->getLexique() ;
+        	_sAdminType = (*iter)->getLexique() ;
           iter++ ;
         }
       }
@@ -9842,7 +9869,7 @@ NSLdvDrugTake::initFromTree(NSPatPathoArray* pTree, PatPathoIter iterSource)
       	iter++ ;
         if (pTree->end() != iter)
         {
-        	sAdminLocation = (*iter)->getLexique() ;
+        	_sAdminLocation = (*iter)->getLexique() ;
           iter++ ;
         }
       }
@@ -9853,7 +9880,7 @@ NSLdvDrugTake::initFromTree(NSPatPathoArray* pTree, PatPathoIter iterSource)
         {
         	string sHour = (*iter)->getComplement() ;
           string sDH   = string("00000000") + sHour ;
-          tpsAdminHour.initFromDateHeure(sDH) ;
+          _tpsAdminHour.initFromDateHeure(sDH) ;
       		iter++ ;
         }
         else
@@ -9871,11 +9898,11 @@ NSLdvDrugTake::operator=(const NSLdvDrugTake& src)
   if (this == &src)
 		return *this ;
 
-	sNbDoses       = src.sNbDoses ;
-  tpsClose       = src.tpsClose ;
-  sAdminType     = src.sAdminType ;
-  sAdminLocation = src.sAdminLocation ;
-  tpsAdminHour   = src.tpsAdminHour ;
+	_sNbDoses       = src._sNbDoses ;
+  _tpsClose       = src._tpsClose ;
+  _sAdminType     = src._sAdminType ;
+  _sAdminLocation = src._sAdminLocation ;
+  _tpsAdminHour   = src._tpsAdminHour ;
 
 	return *this ;
 }
@@ -9887,10 +9914,12 @@ NSLdvDrugTake::operator=(const NSLdvDrugTake& src)
 NSLdvDrugCycle::NSLdvDrugCycle(NSContexte *pCtx, NSLdvDrugPhase* pParent)
                :NSRoot(pCtx)
 {
-	sTitre      = string("") ;
-	sTitreCourt = string("") ;
+	_sTitre      = string("") ;
+	_sTitreCourt = string("") ;
 
-  pParentPhase = pParent ;
+  _dDailyDose  = 0 ;
+
+  _pParentPhase = pParent ;
 
   lObjectCount++ ;
 }
@@ -9898,10 +9927,12 @@ NSLdvDrugCycle::NSLdvDrugCycle(NSContexte *pCtx, NSLdvDrugPhase* pParent)
 NSLdvDrugCycle::NSLdvDrugCycle(const NSLdvDrugCycle& rv)
                :NSRoot(rv.pContexte)
 {
-	sTitre      = rv.sTitre ;
-	sTitreCourt = rv.sTitreCourt ;
+	_sTitre       = rv._sTitre ;
+	_sTitreCourt  = rv._sTitreCourt ;
 
-  pParentPhase = rv.pParentPhase ;
+  _dDailyDose   = rv._dDailyDose ;
+
+  _pParentPhase = rv._pParentPhase ;
 
   lObjectCount++ ;
 }
@@ -9914,11 +9945,11 @@ NSLdvDrugCycle::~NSLdvDrugCycle()
 void
 NSLdvDrugCycle::setTitleFromTree(NSPatPathoArray* pTree, PatPathoIter iterSource, bool bLong, bool bShort)
 {
-	if (NULL == pTree)
+	if ((NSPatPathoArray*) NULL == pTree)
 		return ;
 
 	string sSens = (*iterSource)->getLexiqueSens() ;
-  if (sSens != "KCYTR")
+  if (string("KCYTR") != sSens)
   	return ;
 
 	PatPathoIter iter = iterSource ;
@@ -9932,12 +9963,12 @@ NSLdvDrugCycle::setTitleFromTree(NSPatPathoArray* pTree, PatPathoIter iterSource
     {
     	sSens = (*iter)->getLexiqueSens() ;
 
-    	if (sSens == "KRYTH")
+    	if (string("KRYTH") == sSens)
       {
       	setTitleForCircadian(pTree, iter, bLong, bShort) ;
         return ;
       }
-    	else if (sSens == "KRYTP")
+    	else if (string("KRYTP") == sSens)
     	{
       	setTitleForNonCircadian(pTree, iter, bLong, bShort) ;
         return ;
@@ -9988,11 +10019,11 @@ NSLdvDrugCycle::setTitleForCircadian(NSPatPathoArray* pTree, PatPathoIter iterSo
 void
 NSLdvDrugCycle::setTitleForCircadian(NSPatPathoArray* pTree, PatPathoIter iterSource, bool bLong, bool bShort)
 {
-	if ((NULL == pTree) || (NULL == iterSource) || (NULL == *iterSource) || (pTree->end() == iterSource))
+	if (((NSPatPathoArray*) NULL == pTree) || (NULL == iterSource) || (NULL == *iterSource) || (pTree->end() == iterSource))
 		return ;
 
 	string sSens = (*iterSource)->getLexiqueSens() ;
-  if (sSens != "KRYTH")
+  if (string("KRYTH") != sSens)
   	return ;
 
 	PatPathoIter iter = iterSource ;
@@ -10005,6 +10036,8 @@ NSLdvDrugCycle::setTitleForCircadian(NSPatPathoArray* pTree, PatPathoIter iterSo
   	sCircadian[i] = string("0") ;
 
   string sLang = pContexte->getUserLanguage() ;
+
+  _dDailyDose = 0 ;
 
 	while ((pTree->end() != iter) && ((*iter)->getColonne() > iColBase))
 	{
@@ -10038,14 +10071,14 @@ NSLdvDrugCycle::setTitleForCircadian(NSPatPathoArray* pTree, PatPathoIter iterSo
         	string sShortCircadianCode = string("KRYTH3") ;
         	string sShortCircadianLib ;
   				pContexte->getDico()->donneLibelle(sLang, &sShortCircadianCode, &sShortCircadianLib) ;
-          sTitreCourt += string(" ") + sCompl + sShortCircadianLib ;
+          _sTitreCourt += string(" ") + sCompl + sShortCircadianLib ;
         }
 				if (bLong)
         {
         	string sLongCircadianCode = string("KRYTH2") ;
         	string sLongCircadianLib ;
   				pContexte->getDico()->donneLibelle(sLang, &sLongCircadianCode, &sLongCircadianLib) ;
-          sTitre += string(" : ") + sCompl + string(" ") + sLongCircadianLib ;
+          _sTitre += string(" : ") + sCompl + string(" ") + sLongCircadianLib ;
         }
         return ;
       }
@@ -10057,9 +10090,9 @@ NSLdvDrugCycle::setTitleForCircadian(NSPatPathoArray* pTree, PatPathoIter iterSo
         	NSLdvDrugTake drugTake(pContexte) ;
           drugTake.initFromTree(pTree, iter) ;
 
-        	if (drugTake.sNbDoses != string(""))
-          	sTitreCourt += string(" ") + drugTake.sNbDoses +
-                     string("-") + drugTake.tpsAdminHour.donneFormattedHeure(pContexte, sLang) ;
+        	if (drugTake._sNbDoses != string(""))
+          	_sTitreCourt += string(" ") + drugTake._sNbDoses +
+                     string("-") + drugTake._tpsAdminHour.donneFormattedHeure(pContexte, sLang) ;
         }
       }
 
@@ -10068,8 +10101,11 @@ NSLdvDrugCycle::setTitleForCircadian(NSPatPathoArray* pTree, PatPathoIter iterSo
       	iter++ ;
         NSLdvDrugTake drugTake(pContexte) ;
         drugTake.initFromTree(pTree, iter) ;
-        if (drugTake.sNbDoses != string(""))
-        	sCircadian[iPosDose] = drugTake.sNbDoses ;
+        if (drugTake._sNbDoses != string(""))
+        {
+        	sCircadian[iPosDose] = drugTake._sNbDoses ;
+          _dDailyDose += StringToDouble(drugTake._sNbDoses) ;
+        }
     	}
       else
       	iter++ ;
@@ -10098,18 +10134,18 @@ NSLdvDrugCycle::setTitleForCircadian(NSPatPathoArray* pTree, PatPathoIter iterSo
         string sDrugMMSANoonSepar = string(1, drugMMSANoonSepar) ;
         string sDrugMMSDownSepar  = string(1, drugMMSDownSepar) ;
 
-    		sTitreCourt += sDrugMMSUpSepar    + sCircadian[0] + sDrugMMSSepar      + sCircadian[1] +
-      	               sDrugMMSBNoonSepar + sCircadian[2] + sDrugMMSANoonSepar + sCircadian[3] +
-                       sDrugMMSSepar      + sCircadian[4] + sDrugMMSSepar      + sCircadian[5] +
-                       sDrugMMSDownSepar  + sCircadian[6] ;
+    		_sTitreCourt += sDrugMMSUpSepar    + sCircadian[0] + sDrugMMSSepar      + sCircadian[1] +
+      	                sDrugMMSBNoonSepar + sCircadian[2] + sDrugMMSANoonSepar + sCircadian[3] +
+                        sDrugMMSSepar      + sCircadian[4] + sDrugMMSSepar      + sCircadian[5] +
+                        sDrugMMSDownSepar  + sCircadian[6] ;
       }
       // MMSC
       else if (sCircadian[5] != string("0"))
-      	sTitreCourt += sCircadian[1] + sDrugMMSSepar + sCircadian[2] +
-                       sDrugMMSSepar + sCircadian[4] + sDrugMMSSepar + sCircadian[5] ;
+      	_sTitreCourt += sCircadian[1] + sDrugMMSSepar + sCircadian[2] +
+                        sDrugMMSSepar + sCircadian[4] + sDrugMMSSepar + sCircadian[5] ;
       else
-      	sTitreCourt += sCircadian[1] + sDrugMMSSepar + sCircadian[2] +
-                       sDrugMMSSepar + sCircadian[4] ;
+      	_sTitreCourt += sCircadian[1] + sDrugMMSSepar + sCircadian[2] +
+                        sDrugMMSSepar + sCircadian[4] ;
     }
   }
 }
@@ -10125,10 +10161,12 @@ NSLdvDrugCycle::operator=(const NSLdvDrugCycle& src)
 	if (this == &src)
 		return *this ;
 
-	sTitre      = src.sTitre ;
-	sTitreCourt = src.sTitreCourt ;
+	_sTitre       = src._sTitre ;
+	_sTitreCourt  = src._sTitreCourt ;
 
-  pParentPhase = src.pParentPhase ;
+  _dDailyDose   = src._dDailyDose ;
+
+  _pParentPhase = src._pParentPhase ;
 
   return *this ;
 }
@@ -10140,15 +10178,15 @@ NSLdvDrugCycle::operator=(const NSLdvDrugCycle& src)
 NSLdvDrugPhase::NSLdvDrugPhase(NSContexte *pCtx, NSLdvDrug* pParent)
                :NSRoot(pCtx)
 {
-	sReference  = string("") ;
+	_sReference  = string("") ;
 
-	sTitre      = string("") ;
-  sTitreCourt = string("") ;
+	_sTitre      = string("") ;
+  _sTitreCourt = string("") ;
 
-  sIntakeUnitLib      = string("") ;
-	sIntakeUnitShortLib = string("") ;
+  _sIntakeUnitLib      = string("") ;
+	_sIntakeUnitShortLib = string("") ;
 
-  pParentDrug = pParent ;
+  _pParentDrug = pParent ;
 
 	initIntakeUnits() ;
 
@@ -10158,21 +10196,21 @@ NSLdvDrugPhase::NSLdvDrugPhase(NSContexte *pCtx, NSLdvDrug* pParent)
 NSLdvDrugPhase::NSLdvDrugPhase(const NSLdvDrugPhase& rv)
                :NSRoot(rv.pContexte)
 {
-	sReference          = rv.sReference ;
+	_sReference          = rv._sReference ;
 
-	sTitre              = rv.sTitre ;
-  sTitreCourt         = rv.sTitreCourt ;
+	_sTitre              = rv._sTitre ;
+  _sTitreCourt         = rv._sTitreCourt ;
 
-  sIntakeUnitLib      = rv.sIntakeUnitLib ;
-  sIntakeUnitShortLib = rv.sIntakeUnitShortLib ;
+  _sIntakeUnitLib      = rv._sIntakeUnitLib ;
+  _sIntakeUnitShortLib = rv._sIntakeUnitShortLib ;
 
-  tDateOuverture      = rv.tDateOuverture ;
-	tDateFermeture      = rv.tDateFermeture ;
+  _tDateOuverture      = rv._tDateOuverture ;
+	_tDateFermeture      = rv._tDateFermeture ;
 
-  aCycles             = rv.aCycles ;
-  aPrescriptionRects  = rv.aPrescriptionRects ;
+  _aCycles             = rv._aCycles ;
+  _aPrescriptionRects  = rv._aPrescriptionRects ;
 
-  pParentDrug         = rv.pParentDrug ;
+  _pParentDrug         = rv._pParentDrug ;
 
   lObjectCount++ ;
 }
@@ -10185,22 +10223,22 @@ NSLdvDrugPhase::~NSLdvDrugPhase()
 void
 NSLdvDrugPhase::setTitlesFromCycles(bool bLong, bool bShort)
 {
-	sTitre      = string("") ;
-	sTitreCourt = string("") ;
+	_sTitre      = string("") ;
+	_sTitreCourt = string("") ;
 
-  if (aCycles.empty())
+  if (_aCycles.empty())
 		return ;
 
-	NSLdvDrugCycleIter itCycle = aCycles.begin() ;
-  for ( ; aCycles.end() != itCycle ; itCycle++)
+	NSLdvDrugCycleIter itCycle = _aCycles.begin() ;
+  for ( ; _aCycles.end() != itCycle ; itCycle++)
   {
-  	if (aCycles.begin() != itCycle)
+  	if (_aCycles.begin() != itCycle)
     {
-    	sTitre      += string(" - ") ;
-			sTitreCourt += drugPhaseSepar ;
+    	_sTitre      += string(" - ") ;
+			_sTitreCourt += drugPhaseSepar ;
     }
-    sTitre      += (*itCycle)->sTitre ;
-  	sTitreCourt += (*itCycle)->sTitreCourt ;
+    _sTitre      += (*itCycle)->_sTitre ;
+  	_sTitreCourt += (*itCycle)->_sTitreCourt ;
   }
 
   compressShortTitle() ;
@@ -10288,11 +10326,11 @@ NSLdvDrugPhase::compressShortTitle()
 string
 NSLdvDrugPhase::getShortestLibForIntakeUnit()
 {
-	if (!pParentDrug)
+	if ((NSLdvDrug*) NULL == _pParentDrug)
 		return string("") ;
 
-	string sLexiCode = pParentDrug->sIntakeUnit ;
-  string sLangue   = pParentDrug->pDoc->_sLangue ;
+	string sLexiCode = _pParentDrug->_sIntakeUnit ;
+  string sLangue   = _pParentDrug->_pDoc->_sLangue ;
   string sReturn   = string("") ;
 
   pContexte->getDico()->donneShortLibelle(sLangue, &sLexiCode, &sReturn) ;
@@ -10303,11 +10341,11 @@ NSLdvDrugPhase::getShortestLibForIntakeUnit()
 void
 NSLdvDrugPhase::initIntakeUnits()
 {
-	if (!pParentDrug || (pParentDrug->sIntakeUnit == string("")))
+	if (((NSLdvDrug*) NULL == _pParentDrug) || (string("") == _pParentDrug->_sIntakeUnit))
 		return ;
 
-	sIntakeUnitShortLib = getShortestLibForIntakeUnit() ;
-	pContexte->getDico()->donneLibelle(pParentDrug->pDoc->_sLangue, &(pParentDrug->sIntakeUnit), &sIntakeUnitLib) ;
+	_sIntakeUnitShortLib = getShortestLibForIntakeUnit() ;
+	pContexte->getDico()->donneLibelle(_pParentDrug->_pDoc->_sLangue, &(_pParentDrug->_sIntakeUnit), &_sIntakeUnitLib) ;
 }
 
 NSLdvDrugPhase&
@@ -10316,21 +10354,21 @@ NSLdvDrugPhase::operator=(const NSLdvDrugPhase& src)
 	if (&src == this)
 		return *this ;
 
-	sReference          = src.sReference ;
+	_sReference          = src._sReference ;
 
-	sTitre              = src.sTitre ;
-  sTitreCourt         = src.sTitreCourt ;
+	_sTitre              = src._sTitre ;
+  _sTitreCourt         = src._sTitreCourt ;
 
-  sIntakeUnitLib      = src.sIntakeUnitLib ;
-  sIntakeUnitShortLib = src.sIntakeUnitShortLib ;
+  _sIntakeUnitLib      = src._sIntakeUnitLib ;
+  _sIntakeUnitShortLib = src._sIntakeUnitShortLib ;
 
-  tDateOuverture      = src.tDateOuverture ;
-	tDateFermeture      = src.tDateFermeture ;
+  _tDateOuverture      = src._tDateOuverture ;
+	_tDateFermeture      = src._tDateFermeture ;
 
-  aCycles             = src.aCycles ;
-  aPrescriptionRects  = src.aPrescriptionRects ;
+  _aCycles             = src._aCycles ;
+  _aPrescriptionRects  = src._aPrescriptionRects ;
 
-  pParentDrug         = src.pParentDrug ;
+  _pParentDrug         = src._pParentDrug ;
 
 	return *this ;
 }
@@ -10344,25 +10382,26 @@ NSLdvDrug::NSLdvDrug(NSContexte* pCtx, NSLdvDocument* pDocum, LDVFRAME iFrame)
 {
   _iFrame = iFrame ;
 
-	pDoc    = pDocum ;
+	_pDoc    = pDocum ;
 
-	tDateOuverture.init() ;
-	tDateFermeture.init() ;
+	_tDateOuverture.init() ;
+	_tDateFermeture.init() ;
 
-  sTitre      = string("") ;
-  sTitreCourt = string("") ;
-	_sReference = string("") ;
-	_sLexique   = string("") ;
-  sIntakeUnit = string("") ;
-  _sFreeText  = string("") ;
-  _bALD       = false ;
+  _sTitre      = string("") ;
+  _sTitreCourt = string("") ;
+	_sReference  = string("") ;
+	_sLexique    = string("") ;
+  _sAtcCode    = string("") ;
+  _sIntakeUnit = string("") ;
+  _sFreeText   = string("") ;
+  _bALD        = false ;
 
   _sLatestPrescriptionDoc  = string("") ;
   _sLatestPrescriptionDate = string("") ;
 
   _bToBePrescribed = false ;
 
-  pWorstJalons = new GoalInfoArray() ;
+  _pWorstJalons = new GoalInfoArray() ;
 
   lObjectCount++ ;
 }
@@ -10370,38 +10409,39 @@ NSLdvDrug::NSLdvDrug(NSContexte* pCtx, NSLdvDocument* pDocum, LDVFRAME iFrame)
 NSLdvDrug::NSLdvDrug(const NSLdvDrug& rv)
           :NSRoot(rv.pContexte)
 {
-  _iFrame        = rv._iFrame ;
-	pDoc           = rv.pDoc ;
+  _iFrame         = rv._iFrame ;
+	_pDoc           = rv._pDoc ;
 
-	_sReference    = rv._sReference ;
-	_sLexique      = rv._sLexique ;
+	_sReference     = rv._sReference ;
+	_sLexique       = rv._sLexique ;
+  _sAtcCode       = rv._sAtcCode ;
 
-	sTitre         = rv.sTitre ;
-  sTitreCourt    = rv.sTitreCourt ;
-	tDateOuverture = rv.tDateOuverture ;
-	tDateFermeture = rv.tDateFermeture ;
+	_sTitre         = rv._sTitre ;
+  _sTitreCourt    = rv._sTitreCourt ;
+	_tDateOuverture = rv._tDateOuverture ;
+	_tDateFermeture = rv._tDateFermeture ;
 
-  sIntakeUnit    = rv.sIntakeUnit ;
-  aPhases        = rv.aPhases ;
+  _sIntakeUnit    = rv._sIntakeUnit ;
+  _aPhases        = rv._aPhases ;
 
-  _sFreeText     = rv._sFreeText ;
-  _bALD          = rv._bALD ;
+  _sFreeText      = rv._sFreeText ;
+  _bALD           = rv._bALD ;
 
-	aConcerns      = rv.aConcerns ;
+	_aConcerns      = rv._aConcerns ;
 
   _sLatestPrescriptionDoc  = rv._sLatestPrescriptionDoc ;
   _sLatestPrescriptionDate = rv._sLatestPrescriptionDate ;
 
   _bToBePrescribed = rv._bToBePrescribed ;
 
-  pWorstJalons   = new GoalInfoArray(*(rv.pWorstJalons)) ;
+  _pWorstJalons   = new GoalInfoArray(*(rv._pWorstJalons)) ;
 
   lObjectCount++ ;
 }
 
 NSLdvDrug::~NSLdvDrug()
 {
-	delete pWorstJalons ;
+	delete _pWorstJalons ;
 
   lObjectCount-- ;
 }
@@ -10409,10 +10449,10 @@ NSLdvDrug::~NSLdvDrug()
 void
 NSLdvDrug::goalAdded(NSLdvGoal *pGoal)
 {
-	if (NULL == pGoal)
+	if ((NSLdvGoal*) NULL == pGoal)
 		return ;
 
-	pDoc->goalAdded(pGoal, pWorstJalons) ;
+	_pDoc->goalAdded(pGoal, _pWorstJalons) ;
 }
 
 void
@@ -10422,10 +10462,10 @@ NSLdvDrug::goalModified(NSLdvGoal *pGoal)
 	// On reconstruit entièrement worstJalons
 	// worstJalons is completely rebuilt
 	//
-	pWorstJalons->vider() ;
+	_pWorstJalons->vider() ;
 
-  NSFrameInformationArray *pFrames = pDoc->getFrames() ;
-  if (NULL == pFrames)
+  NSFrameInformationArray *pFrames = _pDoc->getFrames() ;
+  if ((NSFrameInformationArray*) NULL == pFrames)
     return ;
 
   for (int i = 0 ; i < FRAMECOUNT ; i++)
@@ -10453,33 +10493,34 @@ NSLdvDrug::operator=(const NSLdvDrug& src)
 	if (this == &src)
 		return *this ;
 
-  _iFrame         = src._iFrame ;
-	pDoc            = src.pDoc ;
+  _iFrame          = src._iFrame ;
+	_pDoc            = src._pDoc ;
 
-	sTitre          = src.sTitre ;
-  sTitreCourt     = src.sTitreCourt ;
-	tDateOuverture  = src.tDateOuverture ;
-	tDateFermeture  = src.tDateFermeture ;
+	_sTitre          = src._sTitre ;
+  _sTitreCourt     = src._sTitreCourt ;
+	_tDateOuverture  = src._tDateOuverture ;
+	_tDateFermeture  = src._tDateFermeture ;
 
-	_sReference     = src._sReference ;
-	_sLexique       = src._sLexique ;
+	_sReference      = src._sReference ;
+	_sLexique        = src._sLexique ;
+  _sAtcCode        = src._sAtcCode ;
 
   _sLatestPrescriptionDoc  = src._sLatestPrescriptionDoc ;
   _sLatestPrescriptionDate = src._sLatestPrescriptionDate ;
 
   _bToBePrescribed = src._bToBePrescribed ;
 
-  sIntakeUnit     = src.sIntakeUnit ;
-  aPhases         = src.aPhases ;
+  _sIntakeUnit     = src._sIntakeUnit ;
+  _aPhases         = src._aPhases ;
 
-  _sFreeText      = src._sFreeText ;
-  _bALD           = src._bALD ;
+  _sFreeText       = src._sFreeText ;
+  _bALD            = src._bALD ;
 
-	aConcerns       = src.aConcerns ;
+	_aConcerns       = src._aConcerns ;
 
-  pWorstJalons->vider() ;
-  if (src.pWorstJalons && (false == src.pWorstJalons->empty()))
-  	*pWorstJalons = *(src.pWorstJalons) ;
+  _pWorstJalons->vider() ;
+  if (src._pWorstJalons && (false == src._pWorstJalons->empty()))
+  	*_pWorstJalons = *(src._pWorstJalons) ;
 
 	return *this ;
 }
@@ -10487,10 +10528,10 @@ NSLdvDrug::operator=(const NSLdvDrug& src)
 bool
 NSLdvDrug::bIsLinkedConcern(string sConcern)
 {
-	if (aConcerns.empty())
+	if (_aConcerns.empty())
 		return false ;
 
-	for (EquiItemIter i = aConcerns.begin() ; aConcerns.end() != i ; i++)
+	for (EquiItemIter i = _aConcerns.begin() ; _aConcerns.end() != i ; i++)
 		if (*(*i) == sConcern)
 			return true ;
 
@@ -10512,11 +10553,11 @@ NSLdvDrug::sendActivationEvent()
 void
 NSLdvDrug::sendEvent(EventType iEvent)
 {
-  if (NULL == pDoc)
+  if ((NSLdvDocument*) NULL == _pDoc)
     return ;
 
-  NSFrameInformationArray *pFrames = pDoc->getFrames() ;
-  if (NULL == pFrames)
+  NSFrameInformationArray *pFrames = _pDoc->getFrames() ;
+  if ((NSFrameInformationArray*) NULL == pFrames)
     return ;
 
   NSPatPathoArray EventPatho(pContexte->getSuperviseur()) ;
@@ -10573,10 +10614,10 @@ NSLdvDrug::initPhases(NSPatPathoArray* pTree, PatPathoIter iterSource)
   //                            this phase ending date elsewhere
 	//
 	NVLdVTemps tPeriodOpen ;
-  if (aPhases.empty())
-  	tPeriodOpen = tDateOuverture ;
+  if (_aPhases.empty())
+  	tPeriodOpen = _tDateOuverture ;
   else
-  	tPeriodOpen = aPhases.back()->tDateFermeture ;
+  	tPeriodOpen = _aPhases.back()->_tDateFermeture ;
 
   NVLdVTemps tPeriodStart = tPeriodOpen ;
   NVLdVTemps tPeriodClose ;
@@ -10660,7 +10701,7 @@ NSLdvDrug::initPhases(NSPatPathoArray* pTree, PatPathoIter iterSource)
         	NVLdVRect* pPhaseRect = new NVLdVRect(NULL) ;
         	pPhaseRect->setLeft(tPeriodStart) ;
         	pPhaseRect->setRight(tPeriodEnd) ;
-        	pPhase->aPrescriptionRects.push_back(pPhaseRect) ;
+        	pPhase->_aPrescriptionRects.push_back(pPhaseRect) ;
         }
 
         tPeriodStart = tPeriodEnd ;
@@ -10669,7 +10710,7 @@ NSLdvDrug::initPhases(NSPatPathoArray* pTree, PatPathoIter iterSource)
     	{
       	NSLdvDrugCycle* pCycle = new NSLdvDrugCycle(pContexte, pPhase) ;
       	pCycle->setTitleFromTree(pTree, iter, true, true) ;
-        pPhase->aCycles.push_back(pCycle) ;
+        pPhase->_aCycles.push_back(pCycle) ;
       	iter++ ;
     	}
       else
@@ -10679,37 +10720,37 @@ NSLdvDrug::initPhases(NSPatPathoArray* pTree, PatPathoIter iterSource)
     	iter++ ;
   }
 
-	pPhase->tDateOuverture = tPeriodOpen ;
-	pPhase->tDateFermeture = tPeriodStart ;
+	pPhase->_tDateOuverture = tPeriodOpen ;
+	pPhase->_tDateFermeture = tPeriodStart ;
 
   if (true == bClosingDateIsSpecified)
   {
-  	pPhase->tDateFermeture = tPeriodClose ;
+  	pPhase->_tDateFermeture = tPeriodClose ;
 
     NVLdVRect* pPhaseRect = new NVLdVRect(NULL) ;
-    pPhaseRect->setLeft(pPhase->tDateOuverture) ;
-		pPhaseRect->setRight(pPhase->tDateFermeture) ;
-    pPhase->aPrescriptionRects.push_back(pPhaseRect) ;
+    pPhaseRect->setLeft(pPhase->_tDateOuverture) ;
+		pPhaseRect->setRight(pPhase->_tDateFermeture) ;
+    pPhase->_aPrescriptionRects.push_back(pPhaseRect) ;
   }
 
   pPhase->setTitlesFromCycles(true, true) ;
 
-  aPhases.push_back(pPhase) ;
+  _aPhases.push_back(pPhase) ;
 }
 
 NSLdvDrugPhase*
 NSLdvDrug::getCurrentActivePhase()
 {
-	if (aPhases.empty())
+	if (_aPhases.empty())
 		return (NSLdvDrugPhase*) 0 ;
 
 	// récupération de la date du jour
   NVLdVTemps tpsNow ;
   tpsNow.takeTime() ;
 
-	NSLdvDrugPhaseIter itPhase = aPhases.begin() ;
-  for ( ; aPhases.end() != itPhase ; itPhase++)
-		if ((tpsNow > (*itPhase)->tDateOuverture) && (tpsNow < (*itPhase)->tDateFermeture))
+	NSLdvDrugPhaseIter itPhase = _aPhases.begin() ;
+  for ( ; _aPhases.end() != itPhase ; itPhase++)
+		if ((tpsNow > (*itPhase)->_tDateOuverture) && (tpsNow < (*itPhase)->_tDateFermeture))
     	return *itPhase ;
 
 	return (NSLdvDrugPhase*) 0 ;
@@ -10718,7 +10759,7 @@ NSLdvDrug::getCurrentActivePhase()
 NSLdvDrugPhase*
 NSLdvDrug::getLastActivePhase()
 {
-	if (aPhases.empty())
+	if (_aPhases.empty())
 		return (NSLdvDrugPhase*) 0 ;
 
   // If there is a current phase, then take it
@@ -10733,14 +10774,14 @@ NSLdvDrug::getLastActivePhase()
   NVLdVTemps tpsNow ;
   tpsNow.takeTime() ;
 
-	NSLdvDrugPhaseIter itPhase = aPhases.begin() ;
-  for ( ; aPhases.end() != itPhase ; itPhase++)
+	NSLdvDrugPhaseIter itPhase = _aPhases.begin() ;
+  for ( ; _aPhases.end() != itPhase ; itPhase++)
   {
-		if (tpsNow > (*itPhase)->tDateOuverture)
+		if (tpsNow > (*itPhase)->_tDateOuverture)
     {
       if ((NSLdvDrugPhase*) NULL == pLastActivePhase)
         pLastActivePhase = *itPhase ;
-      else if (pLastActivePhase->tDateFermeture < (*itPhase)->tDateFermeture)
+      else if (pLastActivePhase->_tDateFermeture < (*itPhase)->_tDateFermeture)
         pLastActivePhase = *itPhase ;
     }
   }
@@ -10751,11 +10792,11 @@ NSLdvDrug::getLastActivePhase()
 NSLdvDrugPhase*
 NSLdvDrug::getPhaseFromNode(string sNode)
 {
-	if (aPhases.empty())
+	if (_aPhases.empty())
 		return (NSLdvDrugPhase*) 0 ;
 
-	NSLdvDrugPhaseIter itPhase = aPhases.begin() ;
-  for ( ; aPhases.end() != itPhase ; itPhase++)
+	NSLdvDrugPhaseIter itPhase = _aPhases.begin() ;
+  for ( ; _aPhases.end() != itPhase ; itPhase++)
 		if ((*itPhase)->getNoeud() == sNode)
     	return *itPhase ;
 
@@ -10769,7 +10810,7 @@ NSLdvDrug::getPrescriptionDate()
 
   string sNodeMedic = getNoeud() ;
 
-  NSFrameInformation* pFrame = pDoc->getFrameForNode(sNodeMedic) ;
+  NSFrameInformation* pFrame = _pDoc->getFrameForNode(sNodeMedic) ;
   if ((NSFrameInformation*) NULL == pFrame)
     return string("") ;
 
@@ -10810,38 +10851,38 @@ NSLdvDrug::getPrescriptionDate()
 void
 NSLdvDrug::setTitlesFromLexique()
 {
-	pDoc->pContexte->getDico()->donneLibelle(pDoc->_sLangue, &_sLexique, &sTitre) ;
+	_pDoc->pContexte->getDico()->donneLibelle(_pDoc->_sLangue, &_sLexique, &_sTitre) ;
 
   // Cut to the first unit
   //
   NSEpiFlechiesDB flechiesDB(pContexte) ;
 
   bool bKeepSearching = true ;
-  size_t iBlankPos = sTitre.find(" ") ;
+  size_t iBlankPos = _sTitre.find(" ") ;
   size_t iPrevPos  = 0 ;
   while (bKeepSearching && (NPOS != iBlankPos))
   {
-  	string sWord = string(sTitre, iPrevPos, iBlankPos - iPrevPos) ;
+  	string sWord = string(_sTitre, iPrevPos, iBlankPos - iPrevPos) ;
   	string sUnitCode = flechiesDB.getCodeLexiq(sWord, '2') ;
     if (string("") != sUnitCode)
     	bKeepSearching = false ;
-    else if (iBlankPos < strlen(sTitre.c_str()) - 1)
+    else if (iBlankPos < strlen(_sTitre.c_str()) - 1)
     {
     	iBlankPos++ ;
-      while ((' ' == sTitre[iBlankPos]) && (iBlankPos < strlen(sTitre.c_str()) - 1))
+      while ((' ' == _sTitre[iBlankPos]) && (iBlankPos < strlen(_sTitre.c_str()) - 1))
       	iBlankPos++ ;
 
       iPrevPos = iBlankPos ;
-      iBlankPos = sTitre.find(" ", iPrevPos) ;
+      iBlankPos = _sTitre.find(" ", iPrevPos) ;
     }
   }
 
   if (NPOS == iBlankPos)
-  	sTitreCourt = sTitre ;
+  	_sTitreCourt = _sTitre ;
   else
-		sTitreCourt = string(sTitre, 0, iBlankPos) ;
+		_sTitreCourt = string(_sTitre, 0, iBlankPos) ;
 
-  string(sTitreCourt, stripBoth) ;
+  string(_sTitreCourt, stripBoth) ;
 }
 
 bool
@@ -10891,9 +10932,9 @@ NSLdvDrug::getPhaseDate(NSLdvDrugPhase* pPhase, string sDateType)
 	pContexte->getDico()->donneCodeSens(&sDateType, &sSens) ;
 
   if      (string("KOUVR") == sSens)
-		return pPhase->tDateOuverture ;
+		return pPhase->_tDateOuverture ;
 	else if (string("KFERM") == sSens)
-		return pPhase->tDateFermeture ;
+		return pPhase->_tDateFermeture ;
 
 	NVLdVTemps tUndefined ;
   tUndefined.init() ;
@@ -10939,7 +10980,7 @@ NSLdvDrug::createXmlTree(Ctree* pTreeObject, string sTargetLocalisation)
 	// Looking for this drug in the health index document
   //
 	NSPatPathoArray* pPatho ;
-	PatPathoIter iter = pDoc->donneDrug(this, &pPatho) ;
+	PatPathoIter iter = _pDoc->donneDrug(this, &pPatho) ;
   // not found !
 	if ((NULL == iter) || (pPatho->end() == iter))
   	return false ;
@@ -11231,7 +11272,7 @@ ArrayLdvDrugs::reloadDrugs(NSPatPathoArray* pPtIndex, PatPathoIter iter, int iCo
 {
 try
 {
-	if ((NULL == pPtIndex) || (pPtIndex->empty()))
+	if (((NSPatPathoArray*) NULL == pPtIndex) || (pPtIndex->empty()))
   	return ;
 
 	// NSPatPathoArray* pPtIndex = pDoc->pPathoPOMRIndex;
@@ -11243,9 +11284,12 @@ try
 	while ((bTourner) && (pPtIndex->end() != iter) &&
          ((*iter)->getColonne() > iColBase))
 	{
-		// Problème
+		// Drug
+    //
 		if ((*iter)->getColonne() == iColBase + 1)
 		{
+      // If a drug was already being processed, then add it to the array
+      //
 			if (pDrug)
 			{
 				bool    b2Add = true ;
@@ -11291,6 +11335,8 @@ try
 				pDrug = (NSLdvDrug*) 0 ;
 			}
 
+      // Processing the new drug
+      //
       string sCodeLex = (*iter)->getLexique() ;
       string sCodeSensDrug ;
     	_pFrame->pContexte->getDico()->donneCodeSens(&sCodeLex, &sCodeSensDrug) ;
@@ -11321,14 +11367,16 @@ try
           pDrug->setTitlesFromLexique() ;
         // Texte libre - Free text
         else
-        	pDrug->sTitre = (*iter)->getTexteLibre() ;
+        	pDrug->_sTitre = (*iter)->getTexteLibre() ;
 
         // Noeud
         pDrug->setNoeud((*iter)->getNode()) ;
 
         iter++ ;
 
-        // Paramètres du problème
+        // Drug's parameters
+        // Paramètres du médicament
+        //
         while ((pPtIndex->end() != iter) &&
                 ((*iter)->getColonne() > iColBase + 1))
         {
@@ -11366,9 +11414,9 @@ try
                 if ((string("2DA01") == sUnite) || (string("2DA02") == sUnite))
                 {
                 	if      (string("KOUVR") == sSens)
-                    pDrug->tDateOuverture.initFromDate(sValeur) ;
+                    pDrug->_tDateOuverture.initFromDate(sValeur) ;
                   else if (string("KFERM") == sSens)
-                  	pDrug->tDateFermeture.initFromDate(sValeur) ;
+                  	pDrug->_tDateFermeture.initFromDate(sValeur) ;
                 }
               }
             }
@@ -11378,7 +11426,7 @@ try
             {
             	iter++ ;
               if ((iter != pPtIndex->end()) && ((*iter)->getColonne() > iColBase + 2))
-              	pDrug->sIntakeUnit = (*iter)->getLexique() ;
+              	pDrug->_sIntakeUnit = (*iter)->getLexique() ;
             }
             // Phases
             //
@@ -11407,14 +11455,27 @@ try
                 iter++ ;
               }
             }
+            else if (string("6ATC0") == sSens)
+            {
+              pDrug->setAtcCode((*iter)->getComplement()) ;
+              iter++ ;
+            }
+            else if ((string("6CIS0") == sSens) ||
+                     (string("6CIP0") == sSens) ||
+                     (string("6CIP7") == sSens) ||
+                     (string("6CIPT") == sSens))
+            {
+              pDrug->setCiCode((*iter)->getComplement()) ;
+              iter++ ;
+            }
             else
               iter++ ;
           }
           else
             iter++ ;
         }
-        if (pDrug->tDateFermeture.estVide())
-        	pDrug->tDateFermeture.setNoLimit() ;
+        if (pDrug->_tDateFermeture.estVide())
+        	pDrug->_tDateFermeture.setNoLimit() ;
   		}
 		}
 		else
@@ -11773,7 +11834,7 @@ try
 
         // Texte libre - Free text
         else
-        	pDrug->sTitre = (*iter)->getTexteLibre() ;
+        	pDrug->_sTitre = (*iter)->getTexteLibre() ;
 
         // Noeud
         string sNoeud = (*iter)->getNode() ;
@@ -11818,10 +11879,10 @@ try
                 if (("2DA01" == sUnite) || ("2DA02" == sUnite))
                 {
                   if ("KOUVR" == sSens)
-                    pDrug->tDateOuverture.initFromDate(sValeur);
+                    pDrug->_tDateOuverture.initFromDate(sValeur);
                   else
                     if ("KFERM" == sSens)
-                      pDrug->tDateFermeture.initFromDate(sValeur);
+                      pDrug->_tDateFermeture.initFromDate(sValeur);
                 }
               }
             }
@@ -11831,7 +11892,7 @@ try
             {
             	iter++ ;
               if ((pPtIndex->end() != iter) && ((*iter)->getColonne() > iColBase + 2))
-              	pDrug->sIntakeUnit = (*iter)->getLexique() ;
+              	pDrug->_sIntakeUnit = (*iter)->getLexique() ;
             }
             // Phases
             //
@@ -11860,19 +11921,32 @@ try
                 iter++ ;
               }
             }
+            else if (string("6ATC0") == sSens)
+            {
+              pDrug->setAtcCode((*iter)->getComplement()) ;
+              iter++ ;
+            }
+            else if ((string("6CIS0") == sSens) ||
+                     (string("6CIP0") == sSens) ||
+                     (string("6CIP7") == sSens) ||
+                     (string("6CIPT") == sSens))
+            {
+              pDrug->setCiCode((*iter)->getComplement()) ;
+              iter++ ;
+            }
             else
               iter++ ;
           }
           else
             iter++ ;
         }
-        if (pDrug->tDateFermeture.estVide())
-        	pDrug->tDateFermeture.setNoLimit() ;
+        if (pDrug->_tDateFermeture.estVide())
+        	pDrug->_tDateFermeture.setNoLimit() ;
 
         // Ce médicament est-il lié à des problèmes de santé ?
         // Is this drug linked to a health problem ?
         pGraphe->TousLesVrais(pDrug->getNoeud(), NSRootLink::drugOf,
-                                                   &(pDrug->aConcerns)) ;
+                                                   &(pDrug->_aConcerns)) ;
 			}
 		}
 		else

@@ -2294,6 +2294,22 @@ NSEpisodus::loadParams()
       pContexte->setBamType(NSContexte::btVidal) ;
       pContexte->setBamApplicationKey(sValAttrib) ;
     }
+    else if ((sNomAttrib == "SORT_DRUGS") && (string("") != sValAttrib))
+		{
+      sValAttrib = pseumaj(sValAttrib) ;
+
+			if      (sValAttrib == string("NAME"))
+				pContexte->setDrugSort(NSContexte::dsName) ;
+			else if (sValAttrib == string("PRICE"))
+				pContexte->setDrugSort(NSContexte::dsPrice) ;
+    }
+    else if ((sNomAttrib == "DISPLAY_EACCESS") && (string("") != sValAttrib))
+		{
+      if (IsYes(sValAttrib))
+        pContexte->setDisplayEA(true) ;
+      else
+        pContexte->setDisplayEA(false) ;
+    }
   }
   return true ;
 }
@@ -2536,6 +2552,11 @@ try
 	outFile << (string("SERVICE_URL        ") + sServiceUrl + string("\n")) ;
   outFile << (string("SERVICE_TITLE      ") + sServiceTitle + string("\n")) ;
 
+  if (pContexte->mustDisplayEA())
+    outFile << (string("DISPLAY_EACCESS    ") + string("Oui") + string("\n")) ;
+  else
+    outFile << (string("DISPLAY_EACCESS    ") + string("Non") + string("\n")) ;
+
   // BAM parameters
   //
   if (pContexte->getBamType() == NSContexte::btVidal)
@@ -2543,6 +2564,11 @@ try
     outFile << (string("VIDAL_APP_ID       ") + pContexte->getBamApplicationID() + string("\n")) ;
     outFile << (string("VIDAL_APP_KEY      ") + pContexte->getBamApplicationKey() + string("\n")) ;
   }
+
+  if      (pContexte->getDrugSort() == NSContexte::dsName)
+    outFile << (string("SORT_DRUGS         ") + string("name") + string("\n")) ;
+  else if (pContexte->getDrugSort() == NSContexte::dsPrice)
+    outFile << (string("SORT_DRUGS         ") + string("price") + string("\n")) ;
 
   outFile.close() ;
 

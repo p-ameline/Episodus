@@ -30,6 +30,7 @@ NewConcernInfo::NewConcernInfo(NSSuper* pSuper)
   _sDateFin  = string("") ;
   _iSeverity = 0 ;
   _sCocCode  = string("") ;
+  _sCimCode  = string("") ;
 }
 
 NewConcernInfo::NewConcernInfo(const NewConcernInfo& rv)
@@ -42,6 +43,7 @@ NewConcernInfo::NewConcernInfo(const NewConcernInfo& rv)
   _sDateFin   = rv._sDateFin ;
   _iSeverity  = rv._iSeverity ;
   _sCocCode   = rv._sCocCode ;
+  _sCimCode   = rv._sCimCode ;
 }
 
 NewConcernInfo::~NewConcernInfo()
@@ -61,6 +63,7 @@ NewConcernInfo::operator=(const NewConcernInfo& src)
   _sDateFin   = src._sDateFin ;
   _iSeverity  = src._iSeverity ;
   _sCocCode   = src._sCocCode ;
+  _sCimCode   = src._sCimCode ;
   _pptDetails = src._pptDetails ;
 
   return *this ;

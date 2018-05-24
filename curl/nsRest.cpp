@@ -47,6 +47,7 @@
 #include <sys/stat.h>
 // #include <unistd.h>
 
+#include "partage\nsdivfct.h"
 #include <curl/nscurl.h>
 // #if LIBCURL_VERSION_NUM < 0x071507
 // #include <curl/types.h>
@@ -153,27 +154,36 @@ string Rest::get(const string& url, const vector<Var>& vars)
       (NULL == libCurl.pCurlEasyCleanup))
 		return string("") ;
 
-  string u = add_vars_to_uri(url, vars) ;
-
   _sBuffer = string("HTTP get error") ;
 
   CURL *curl = (*libCurl.pCurlEasyInit)() ;
+
+  string u = add_escaped_vars_to_uri(&libCurl, curl, url, vars) ;
+
   if(curl)
   {
-    //url = curl_easy_escape(curl, url.c_str(), url.length());
+    // Passing URL
+    (*libCurl.pCurlEasySetopt)(curl, CURLOPT_URL, u.c_str()) ;
+
+    // Login + password (if any)
+    //
     string sAuth = string("") ;
     // if ((string("") != tid) || (string("") != ttoken))
     //  sAuth = tid + string(":") + ttoken ;
 
-    (*libCurl.pCurlEasySetopt)(curl, CURLOPT_URL, u.c_str()) ;
     (*libCurl.pCurlEasySetopt)(curl, CURLOPT_HTTPAUTH, CURLAUTH_BASIC) ;
     if (string("") != sAuth)
       (*libCurl.pCurlEasySetopt)(curl, CURLOPT_USERPWD, sAuth.c_str()) ;
+
+    // Callback function and target string
+    //
     (*libCurl.pCurlEasySetopt)(curl, CURLOPT_WRITEFUNCTION, writer) ;
 
     _sBuffer = string("") ;
     (*libCurl.pCurlEasySetopt)(curl, CURLOPT_WRITEDATA, &_sBuffer) ;
 
+    // Execution
+    //
     CURLcode res = (*libCurl.pCurlEasyPerform)(curl) ;
 
     (*libCurl.pCurlEasyCleanup)(curl) ;
@@ -187,7 +197,7 @@ string Rest::get(const string& url, const vector<Var>& vars)
 /**
  * HTTP POST request
  * @param url HTTP request URL
- * @param vars POST attributes
+ * @param vars POST attributes with
  * @return HTTP response
 */
 string Rest::post(const string& url, const vector<Var>& vars)
@@ -202,28 +212,85 @@ string Rest::post(const string& url, const vector<Var>& vars)
 
   struct curl_httppost *formpost = NULL ;
   struct curl_httppost *lastptr = NULL ;
-  static const char buf[] = "Expect:" ;
 
   (*libCurl.pCurlGlobalInit)(CURL_GLOBAL_ALL) ;
+
+  CURL *curl = (*libCurl.pCurlEasyInit)() ;
+
+  vector<Var> paramsVars ;
+
+  string sPostFields = string("") ;
 
   // Post data
   for (unsigned int i = 0 ; i < vars.size() ; i++)
   {
-    (*libCurl.pCurlFormAdd)(&formpost,
-                            &lastptr,
-                            CURLFORM_COPYNAME, vars[i].getKey().c_str(),
-                            CURLFORM_COPYCONTENTS, vars[i].getValue().c_str(),
-                            CURLFORM_END) ;
+    // CURLFORM_COPYNAME followed by a string which provides the name of this
+    //                   part. libcurl copies the string so your application
+    //                   doesn't need to keep it around after this function call.
+    //                   If the name isn't NUL-terminated, you must set its
+    //                   length with CURLFORM_NAMELENGTH. The name is not
+    //                   allowed to contain zero-valued bytes. The copied data
+    //                   will be freed by curl_formfree.
+    //
+    // CURLFORM_COPYCONTENTS followed by a pointer to the contents of this part,
+    //                   the actual data to send away. libcurl copies the
+    //                   provided data, so your application doesn't need to keep
+    //                   it around after this function call. If the data isn't
+    //                   null terminated, or if you'd like it to contain zero
+    //                   bytes, you must set the length of the name with
+    //                   CURLFORM_CONTENTSLENGTH. The copied data will be freed
+    //                   by curl_formfree.
+    //
+/*
+    if (string("body") == vars[i].getKey())
+    {
+      string sValue = vars[i].getValue() ;
+
+      char *szUrl = (*libCurl.pCurlEasyEscape)(curl, sValue.c_str(), strlen(sValue.c_str())) ;
+      if (szUrl)
+      {
+        sValue = string(szUrl) ;
+        (*libCurl.pCurlFree)(szUrl) ;
+      }
+
+      (*libCurl.pCurlFormAdd)(&formpost,
+                              &lastptr,
+                              CURLFORM_COPYNAME, vars[i].getKey().c_str(),
+                              CURLFORM_COPYCONTENTS, sValue.c_str(),
+                              CURLFORM_END) ;
+    }
+    else
+      paramsVars.push_back(Var(vars[i])) ;
+*/
+
+    string sValue = vars[i].getValue() ;
+
+    char *szUrl = (*libCurl.pCurlEasyEscape)(curl, sValue.c_str(), strlen(sValue.c_str())) ;
+    if (szUrl)
+    {
+      sValue = string(szUrl) ;
+      (*libCurl.pCurlFree)(szUrl) ;
+    }
+
+    if (string("") != sPostFields)
+      sPostFields += string("&") ;
+
+    sPostFields += vars[i].getKey() + string("=") + sValue ;
   }
 
   _sBuffer = string("HTTP post error") ;
 
-  CURL *curl = (*libCurl.pCurlEasyInit)() ;
+  // string u = add_escaped_vars_to_uri(&libCurl, curl, url, paramsVars) ;
+  string u = url ;
+
+/*
+  static const char buf[] = "Expect:" ;
   struct curl_slist *headerlist = (*libCurl.pCurlSlistAppend)(headerlist, buf) ;
+*/
 
   if (curl)
   {
-    (*libCurl.pCurlEasySetopt)(curl, CURLOPT_URL, url.c_str()) ;
+    (*libCurl.pCurlEasySetopt)(curl, CURLOPT_URL, u.c_str()) ;
 
     // string sAuth = tid + string(":") + ttoken ;
     string sAuth = string("") ;
@@ -231,17 +298,24 @@ string Rest::post(const string& url, const vector<Var>& vars)
     if (string("") != sAuth)
       (*libCurl.pCurlEasySetopt)(curl, CURLOPT_USERPWD, sAuth.c_str()) ;
 
-    (*libCurl.pCurlEasySetopt)(curl, CURLOPT_HTTPHEADER, headerlist) ;
-    (*libCurl.pCurlEasySetopt)(curl, CURLOPT_HTTPPOST, formpost) ;
+    if (string("") != sPostFields)
+      (*libCurl.pCurlEasySetopt)(curl, CURLOPT_POSTFIELDS, sPostFields.c_str()) ;
+
+    // (*libCurl.pCurlEasySetopt)(curl, CURLOPT_HTTPHEADER,    headerlist) ;
+    (*libCurl.pCurlEasySetopt)(curl, CURLOPT_HTTPPOST,      formpost) ;
     (*libCurl.pCurlEasySetopt)(curl, CURLOPT_WRITEFUNCTION, writer) ;
     _sBuffer = string("") ;
     (*libCurl.pCurlEasySetopt)(curl, CURLOPT_WRITEDATA, &_sBuffer) ;
+
+    struct curl_slist *headers = NULL ;
+    headers = (*libCurl.pCurlSlistAppend)(headers, "Accept: text/plain") ;
+    (*libCurl.pCurlEasySetopt)(curl, CURLOPT_HTTPHEADER, headers) ;
 
     CURLcode res = (*libCurl.pCurlEasyPerform)(curl) ;
 
     (*libCurl.pCurlEasyCleanup)(curl) ;
     (*libCurl.pCurlFormFree)(formpost) ;
-    (*libCurl.pCurlSlistFreeAll)(headerlist) ;
+    // (*libCurl.pCurlSlistFreeAll)(headerlist) ;
     (*libCurl.pCurlGlobalCleanup)() ;
 
     if (CURLE_OK == res)
@@ -393,6 +467,50 @@ string Rest::build_uri(const string& sPath) const
  * @param path URL path
  * @return full URL
  */
+string Rest::add_escaped_vars_to_uri(NSLibCurl* pLibCurl, CURL *curl, const string& url, const vector<Var>& vars) const
+{
+  string sQuery = string("") ;
+  for (unsigned int i = 0 ; i < vars.size() ; i++)
+  {
+    if (string("") != sQuery)
+      sQuery += string("&") ;
+
+    // Prépare the value (no trailing blanks, blancks replaced by '+')
+    //
+    string sValue = vars[i].getValue() ;
+    strip(sValue) ;
+    sValue = replaceAll(sValue, string(" "), string("+")) ;
+
+    // Converts the given input string to a URL encoded string
+    //
+    char *szUrl = (*pLibCurl->pCurlEasyEscape)(curl, sValue.c_str(), strlen(sValue.c_str())) ;
+    if (szUrl)
+    {
+      sValue = string(szUrl) ;
+      (*pLibCurl->pCurlFree)(szUrl) ;
+    }
+
+    sQuery += vars[i].getKey() + string("=") + sValue ;
+  }
+
+  string u = url ;
+  if (string("") != sQuery)
+  {
+    if (u.find("?") == string::npos)
+      u += string("?") ;
+    else
+      u += string("&") ;
+    u += sQuery ;
+  }
+
+  return u ;
+}
+
+/**
+ * Build a full Bam URL by addition of vars
+ * @param path URL path
+ * @return full URL
+ */
 string Rest::add_vars_to_uri(const string& url, const vector<Var>& vars) const
 {
   string sQuery = string("") ;
@@ -400,7 +518,14 @@ string Rest::add_vars_to_uri(const string& url, const vector<Var>& vars) const
   {
     if (string("") != sQuery)
       sQuery += string("&") ;
-    sQuery += vars[i].getKey() + string("=") + vars[i].getValue() ;
+
+    // Prépare the value (no trailing blanks, blancks replaced by '+')
+    //
+    string sValue = vars[i].getValue() ;
+    strip(sValue) ;
+    sValue = replaceAll(sValue, string(" "), string("+")) ;
+
+    sQuery += vars[i].getKey() + string("=") + sValue ;
   }
 
   string u = url ;

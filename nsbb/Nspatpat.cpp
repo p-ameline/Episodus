@@ -4742,7 +4742,7 @@ NSPatPathoArray::getNodeSpecificDate(PatPathoConstIter iNode, string sDateTypeSe
 
   int iCol = (*iNode)->getColonne() ;
 
-  PatPathoConstIter iNodeNext = iNode++ ;
+  PatPathoConstIter iNodeNext = iNode + 1 ;
   while ((end() != iNodeNext) && ((*iNodeNext)->getColonne() == iCol + 1))
   {
     string sLexNext = (*iNodeNext)->getLexiqueSens() ;
@@ -4752,7 +4752,10 @@ NSPatPathoArray::getNodeSpecificDate(PatPathoConstIter iNode, string sDateTypeSe
       if ((end() != iNodeNext) && ((*iNodeNext)->getColonne() == iCol + 2))
         return ((*iNodeNext)->getComplement()) ;
     }
+
     iNodeNext++ ;
+    while ((end() != iNodeNext) && ((*iNodeNext)->getColonne() > iCol + 1))
+      iNodeNext++ ;
   }
 
   return string("") ;

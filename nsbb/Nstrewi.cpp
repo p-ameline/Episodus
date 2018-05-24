@@ -6458,8 +6458,8 @@ try
   // Unité ?
   if (pNSTreeNode->getUnit() == "200001")
   {
-    sQualifiant = "" ;
-    pChampEdition->pUnite->sCode = "200001" ;
+    sQualifiant = string("") ;
+    pChampEdition->pUnite->setCode(string("200001")) ;
   }
   else if (pNSTreeNode->getUnit() != "")
     sQualifiant = pNSTreeNode->getUnit() ;
@@ -6537,11 +6537,11 @@ try
       	pNSTreeNode->sLabel = "entre " + pChampEdition->sValeurInf + (" et ") +
  				                       pChampEdition->sValeurSup + sUnit;*/
 
-    if (string("") == pChampEdition->pUnite->sCode)
-      pChampEdition->pUnite->sCode = "200001" ;
+    if (string("") == pChampEdition->pUnite->getCode())
+      pChampEdition->pUnite->setCode(string("200001")) ;
 
     pNSTreeNode->SetLexique(sLivre) ;
-    pNSTreeNode->SetUnit(pChampEdition->pUnite->sCode) ;
+    pNSTreeNode->SetUnit(pChampEdition->pUnite->getCode()) ;
 
     string sComplement = string("") ;
 
@@ -6599,7 +6599,7 @@ try
   pChampEdition->sValeurInf    	= string("") ;
   pChampEdition->sUnite        	= string("") ;
   pChampEdition->sTypeCalcul		= string("") ;
-  pChampEdition->pUnite->sCode	= string("") ;
+  pChampEdition->pUnite->setCode(string("")) ;
 }
 catch(TWindow::TXWindow& e)
 {

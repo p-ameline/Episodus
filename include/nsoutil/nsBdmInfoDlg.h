@@ -47,6 +47,7 @@ class NSBdmInfoListWindow : public NSSkinableListWindow
     void    SetupToolBar() ;
     void    SetupWindow() ;
     void    SetupColumns() ;
+    void    EvLButtonDblClk(uint modKeys, NS_CLASSLIB::TPoint& point) ;
 
     void    fillList(NsXmlEntriesArray* paXmlEntriesArray) ;
 
@@ -142,6 +143,9 @@ class _NSOUTILCLASSE NSGenericBdmInfoDlg : public NSUtilDialog
     virtual ~NSGenericBdmInfoDlg() ;
 
     virtual void fillList() = 0 ;
+    virtual void activatedInformation(int iIndex) = 0 ;
+
+    bool isValidUrl(string sUrl) ;
     void openUrl(const string sUrl, const string sTitle) ;
 
   protected:
@@ -189,6 +193,8 @@ class _NSOUTILCLASSE NSBdmInfoDlg : public NSGenericBdmInfoDlg
     void fillList() ;
     void openUrl(const string sUrl) ;
 
+    void activatedInformation(int iIndex) ;
+
     NsXmlBlock* getInformationBlock() { return _pBlock ; }
 
   protected:
@@ -218,6 +224,8 @@ class _NSOUTILCLASSE NSBdmMultiInfoDlg : public NSGenericBdmInfoDlg
     void fillTitles() ;
     void fillList() ;
     void openUrl(const string sUrl) ;
+
+    void activatedInformation(int iIndex) ;
 
     void   selectBlock(string sBlockId) ;
     string getSelectedBlockId() { return _sSelectedBlockId ; }

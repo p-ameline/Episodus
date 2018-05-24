@@ -310,11 +310,11 @@ void
 NSSOAPDocument::creerChroniques()
 {
   NSPatientChoisi* pPat = pContexte->getPatient() ;
-  if ((NULL == pPat) || (NULL == pPat->getLdvDocument()))
+  if (((NSPatientChoisi*) NULL == pPat) || (NULL == pPat->getLdvDocument()))
 		return ;
 
   ArrayConcern* pConcerns = pPat->getLdvDocument()->getConcerns(ldvframeHealth) ;
-  if ((NULL == pConcerns) || pConcerns->empty())
+  if (((ArrayConcern*) NULL == pConcerns) || pConcerns->empty())
   	return ;
 
   // Classification utilisée pour coder l'Assesment ?
@@ -347,9 +347,9 @@ NSSOAPDocument::creerChroniques()
 
       if (false == vResult.empty())
       {
-      	sDate  = "" ;
-        sCode  = "" ;
-        sTexte = "" ;
+      	sDate  = string("") ;
+        sCode  = string("") ;
+        sTexte = string("") ;
 
         EquiItemIter iterLiens = vResult.begin() ;
         for ( ; vResult.end() != iterLiens ; iterLiens++)
@@ -369,7 +369,7 @@ NSSOAPDocument::creerChroniques()
 
               PatPathoIter pptIt = PPt.ChercherNoeud(**iterLiens) ;
 
-              if ((pptIt != NULL) && (PPt.end() != pptIt))
+              if ((NULL != pptIt) && (PPt.end() != pptIt))
               {
                 string sLexSens ;
                 string sLexique = (*pptIt)->getLexique() ;
@@ -385,7 +385,7 @@ NSSOAPDocument::creerChroniques()
                   if ((NULL != pptItPere) && (PPt.end() != pptItPere))
                   {
                     string sLexiPere = (*pptItPere)->getLexique() ;
-                    if (sLexiPere == "£?????")
+                    if (string("£?????") == sLexiPere)
                       sTexte = (*pptItPere)->getTexteLibre() ;
                     else
                       pContexte->getDico()->donneLibelle(sLang, &sLexiPere, &sTexte) ;
@@ -397,7 +397,7 @@ NSSOAPDocument::creerChroniques()
                 else
                 {
                   // Si le noeud ne contient pas le codage, il contient le texte
-                  if (sLexique == "£?????")
+                  if (string("£?????") == sLexique)
                     sTexte = (*pptIt)->getTexteLibre() ;
                   else
                     pContexte->getDico()->donneLibelle(sLang, &sLexique, &sTexte) ;
@@ -417,7 +417,7 @@ NSSOAPDocument::creerChroniques()
 
                   PatPathoIter pptItFils = PPt.ChercherPremierFils(pptIt) ;
 
-                  while ((sCode == "") && (NULL != pptItFils) && (PPt.end() != pptItFils))
+                  while ((string("") == sCode) && (NULL != pptItFils) && (PPt.end() != pptItFils))
                   {
                     sLexique = (*pptItFils)->getLexique() ;
                     pContexte->getDico()->donneCodeSens(&sLexique, &sLexSens) ;
@@ -425,7 +425,7 @@ NSSOAPDocument::creerChroniques()
                     if (sLexSens == sClassifSens)
                       sCode = (*pptItFils)->getComplement() ;
 
-                    pptItFils = PPt.ChercherFrereSuivant(pptItFils);
+                    pptItFils = PPt.ChercherFrereSuivant(pptItFils) ;
                   }
                 }
               }

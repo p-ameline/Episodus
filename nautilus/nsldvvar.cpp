@@ -43,7 +43,10 @@
 #include "nsoutil\ibdm.h"
 #include "nsoutil\nsBdmDlg.h"
 #include "nsoutil\nsBdmDrugInfoDlg.h"
+#include "nsoutil\nsBdmListsDlg.h"
+#include "nsoutil\nsdicobdm.h"
 #include "nsutil\tinyxml.h"
+#include "dcodeur/nsdkd.h"
 
 // --------------------------------------------------------------------------
 // --------------------- METHODES DE ArrayPreoccupView ----------------------
@@ -229,10 +232,11 @@ DEFINE_RESPONSE_TABLE1(NSNewConcernDlg, NSUtilDialog)
   EV_CHILD_NOTIFY_ALL_CODES(IDC_GRAVITE,  UpdateSeverity),
   EV_COMMAND(DUSOI_BTN,                   EvaluateDusoi),
   EV_COMMAND(IDC_COC,                     SetCocCodeVerbose),
+  EV_COMMAND(IDC_CIM,                     SetCimCodeVerbose),
 END_RESPONSE_TABLE;
 
 NSNewConcernDlg::NSNewConcernDlg(NSLdvView* pView, NSContexte* pCtx, NewConcernInfo *pNewConcernInfo)
-                :NSUtilDialog((TWindow*) pView, pCtx, "NEW_PROBLEM", pCtx->GetMainWindow()->GetModule()),
+                :NSUtilDialog((TWindow*) pView, pCtx, (pCtx->getBamType() == NSContexte::btNone) ? "NEW_PROBLEM" : "NEW_PROBLEM_BAM", pCtx->GetMainWindow()->GetModule()),
                  _PptDetails(pCtx->getSuperviseur())
 {
 try
@@ -241,6 +245,7 @@ try
   _pLdvDoc  = (NSLdvDocument*) 0 ;
 
   _sCocCode = string("") ;
+  _sCimCode = string("") ;
 
   _pNewConcernInfo = pNewConcernInfo ;
   InitFromInfo() ;
@@ -264,7 +269,7 @@ catch (...)
 }
 
 NSNewConcernDlg::NSNewConcernDlg(TWindow* pPere, NSLdvDocument* pDoc, NSContexte* pCtx, NewConcernInfo *pNewConcernInfo)
-                :NSUtilDialog(pPere, pCtx, "NEW_PROBLEM", pCtx->GetMainWindow()->GetModule()),
+                :NSUtilDialog(pPere, pCtx, (pCtx->getBamType() == NSContexte::btNone) ? "NEW_PROBLEM" : "NEW_PROBLEM_BAM", pCtx->GetMainWindow()->GetModule()),
                  _PptDetails(pCtx->getSuperviseur())
 {
 try
@@ -273,6 +278,7 @@ try
   _pLdvDoc  = pDoc ;
 
   _sCocCode = string("") ;
+  _sCimCode = string("") ;
 
   _pNewConcernInfo = pNewConcernInfo ;
   InitFromInfo() ;
@@ -294,6 +300,7 @@ NSNewConcernDlg::InitFromInfo()
     return ;
 
   _sCocCode = _pNewConcernInfo->getCocCode() ;
+  _sCimCode = _pNewConcernInfo->getCimCode() ;
 
   NSPatPathoArray* pNCIPatho = _pNewConcernInfo->getDetails() ;
   if (pNCIPatho)
@@ -336,6 +343,11 @@ try
   _pCocButton = new OWL::TButton(this, IDC_COC) ;
   _sClassif  = string("6CISP") ;
   _sPostCase = string("0SOA41") ;
+
+  if (pContexte->getBamType() != NSContexte::btNone)
+    _pCimButton = new OWL::TButton(this, IDC_CIM) ;
+  else
+    _pCimButton = (OWL::TButton*) 0 ;
 }
 catch (...)
 {
@@ -361,6 +373,9 @@ NSNewConcernDlg::~NSNewConcernDlg()
   delete _pGravGauge ;
   delete _pDusoiButton ;
   delete _pCocButton ;
+
+  if (_pCimButton)
+    delete _pCimButton ;
 }
 
 void
@@ -402,6 +417,12 @@ NSNewConcernDlg::SetupWindow()
   string sText = pSuper->getText("healthConcernDialog", "continuityOfCareCode") ;
   _pCocButton->SetCaption(sText.c_str()) ;
 
+  if (_pCimButton)
+  {
+    sText = pSuper->getText("healthConcernDialog", "cimCode") ;
+    _pCimButton->SetCaption(sText.c_str()) ;
+  }
+
   // Initialize concern's concept
   //
 
@@ -432,7 +453,7 @@ NSNewConcernDlg::SetupWindow()
   // If FindDuration() let the duration empty, then check as chronic
   //
   _pNbJours->donneValeur() ;
-  if (0 == _pNbJours->dValeur)
+  if (0 == _pNbJours->_dValeur)
   {
 	  _pNbJours->SetText("") ;
 
@@ -620,7 +641,10 @@ try
   // Coc code
   //
   if (_pNewConcernInfo)
+  {
     _pNewConcernInfo->setCocCode(_sCocCode) ;
+    _pNewConcernInfo->setCimCode(_sCimCode) ;
+  }
 
   // Concern code
   //
@@ -805,6 +829,7 @@ void
 NSNewConcernDlg::SetCocCodeNoVerbose()
 {
   FindCocCode(false) ;
+  FindCimCode(false) ;
   FindDuration() ;
 }
 
@@ -1018,6 +1043,119 @@ catch(TWindow::TXWindow& e)
 catch (...)
 {
 	erreur("Exception NSNewConcernDlg::FindCocCode.",  standardError, 0) ;
+}
+}
+
+void
+NSNewConcernDlg::SetCimCodeVerbose()
+{
+  if ((OWL::TButton*) NULL == _pCimButton)
+    return ;
+
+  if (string("") == _sCimCode)
+  {
+    FindCimCode(true) ;
+    return ;
+  }
+
+  FindCimCode(true) ;
+}
+
+void
+NSNewConcernDlg::DisplayCimCode()
+{
+  if ((OWL::TButton*) NULL == _pCimButton)
+    return ;
+
+  if (string("") == _sCimCode)
+  {
+    string sText = pContexte->getSuperviseur()->getText("healthConcernDialog", "cimCode") ;
+    _pCimButton->SetCaption(sText.c_str()) ;
+    return ;
+  }
+
+  NSEpiClassifDB   dbClassif(pContexte) ;
+  NSEpiClassifInfo classifInfo ;
+  bool bFoundCode = dbClassif.searchCode(string("6CIMA"), _sCimCode, &classifInfo) ;
+
+  string sCaption = _sCimCode ;
+  if (bFoundCode)
+    sCaption += string(" - ") + classifInfo.getLabel() ;
+
+  _pCimButton->SetCaption(sCaption.c_str()) ;
+}
+
+void
+NSNewConcernDlg::FindCimCode(bool bVerbose)
+{
+  if ((OWL::TButton*) NULL == _pCimButton)
+    return ;
+
+try
+{
+  string sSeed = pseumaj(_pType->getLabel()) ;
+  if (string("") == sSeed)
+  {
+    string sText = pContexte->getSuperviseur()->getText("healthConcernDialog", "cimCode") ;
+    _pCimButton->SetCaption(sText.c_str()) ;
+    _sCimCode = string("") ;
+    return ;
+  }
+
+  // Get BDM driver
+  //
+  NSBdmDriver* pDriver = pContexte->getBdmDriver() ;
+  if ((NSBdmDriver*) NULL == pDriver)
+    return ;
+
+  if (false == bVerbose)
+  {
+    NSBdmEntryArray aListeArray ;
+    pDriver->getListForSeed(&aListeArray, &sSeed, NSBdmDriver::bamTableCim10) ;
+
+    if (aListeArray.empty())
+    {
+      string sText = pContexte->getSuperviseur()->getText("healthConcernDialog", "cimCode") ;
+      _pCimButton->SetCaption(sText.c_str()) ;
+      _sCimCode = string("") ;
+      return ;
+    }
+
+    sort(aListeArray.begin(), aListeArray.end(), BdmEntrySortByIdInf) ;
+
+    NSBdmEntry* pFirst = *(aListeArray.begin()) ;
+
+    _sCimCode = pFirst->getID() ;
+
+    string sCaption = _sCimCode + string(" - ") + pFirst->getLabel() ;
+    _pCimButton->SetCaption(sCaption.c_str()) ;
+
+    return ;
+  }
+
+  NSBdmEntry result ;
+  ChoixBdmListDialog bdmList(this, pDriver, NSBdmDriver::bamTableCim10, &result, sSeed) ;
+  int iExecReturn = bdmList.Execute() ;
+
+  if (IDOK != iExecReturn)
+    return ;
+
+  _sCimCode = result.getID() ;
+
+  // DisplayCimCode() ;
+
+  string sCaption = _sCimCode + string(" - ") + result.getLabel() ;
+
+  _pCimButton->SetCaption(sCaption.c_str()) ;
+}
+catch(TWindow::TXWindow& e)
+{
+	string sErr = string("Exception NSNewConcernDlg::FindCimCode : ") + e.why() ;
+	erreur(sErr.c_str(), standardError, 0) ;
+}
+catch (...)
+{
+	erreur("Exception NSNewConcernDlg::FindCimCode.",  standardError, 0) ;
 }
 }
 
@@ -1435,7 +1573,7 @@ try
   // si on dans le cas où "dans" est cochée
   if (pRDans->GetCheck() == BF_CHECKED)
   {
-    if (pNbJours->dValeur < 1)
+    if (pNbJours->_dValeur < 1)
     {
       erreur("La préoccupation doit durer au moins 1 jour.", standardError, 0, GetHandle()) ;
       return ;
@@ -1443,14 +1581,14 @@ try
 
     NVLdVTemps  tDateFin ;
     tDateFin.takeTime() ;
-    tDateFin.ajouteJours(pNbJours->dValeur) ;
+    tDateFin.ajouteJours(pNbJours->_dValeur) ;
     sDateFin = tDateFin.donneDateHeure() ;
   }
 
   // si on est dans le cas où "durée" est cochée
   if (pRDuree->GetCheck() == BF_CHECKED)
   {
-    if (pNbJours->dValeur < 1)
+    if (pNbJours->_dValeur < 1)
     {
       erreur("La préoccupation doit durer au moins 1 jour.", standardError, 0, GetHandle()) ;
       return ;
@@ -1458,7 +1596,7 @@ try
 
     NVLdVTemps  tDateFin ;
     tDateFin.initFromDate(sDateDeb) ;
-    tDateFin.ajouteJours(pNbJours->dValeur) ;
+    tDateFin.ajouteJours(pNbJours->_dValeur) ;
     sDateFin = tDateFin.donneDateHeure() ;
   }
 
@@ -2091,7 +2229,7 @@ try
   // si on dans le cas où "dans" est cochée
   if (pRDans->GetCheck() == BF_CHECKED)
   {
-    if (pNbJours->dValeur < 1)
+    if (pNbJours->_dValeur < 1)
     {
       erreur("La préoccupation doit durer au moins 1 jour.", standardError, 0, GetHandle()) ;
       return ;
@@ -2099,14 +2237,14 @@ try
 
     NVLdVTemps  tDateFin ;
     tDateFin.takeTime() ;
-    tDateFin.ajouteJours(pNbJours->dValeur) ;
+    tDateFin.ajouteJours(pNbJours->_dValeur) ;
     sDateFin = tDateFin.donneDateHeure() ;
   }
 
   // si on est dans le cas où "durée" est cochée
   if (pRDuree->GetCheck() == BF_CHECKED)
   {
-    if (pNbJours->dValeur < 1)
+    if (pNbJours->_dValeur < 1)
     {
       erreur("La préoccupation doit durer au moins 1 jour.", standardError, 0, GetHandle()) ;
       return ;
@@ -2114,7 +2252,7 @@ try
 
     NVLdVTemps  tDateFin ;
     tDateFin.initFromDate(sDateDeb) ;
-    tDateFin.ajouteJours(pNbJours->dValeur) ;
+    tDateFin.ajouteJours(pNbJours->_dValeur) ;
     sDateFin = tDateFin.donneDateHeure() ;
   }
 
@@ -2473,6 +2611,7 @@ DEFINE_RESPONSE_TABLE1(NSSimpleNewDrugDlg, NSUtilDialog)
   EV_COMMAND(NR_BUTTON,                nonRenouvelable),
   // BDM specific functions
   EV_COMMAND(DRUG_INFORMATION,         drugInformation),
+  EV_COMMAND(IDC_ISSUE_BTN,            selectIndication),
   EV_COMMAND(BDM_SEARCH_INDIC,         searchInBdmByIndication),
   EV_COMMAND(BDM_SEARCH_SUBST,         searchInBdmBySubstance),
   EV_COMMAND(BDM_SEARCH_ATC,           searchInBdmByATC),
@@ -2491,6 +2630,8 @@ try
   _sALD           = string("") ;
   _sFreeText      = string("") ;
   _sPositionRepas = string("") ;
+  _sLexiqEvent    = string("") ;
+  _sFreeTextEvent = string("") ;
 
   _bNonSubstituable = false ;
 
@@ -2500,9 +2641,9 @@ try
   //
   createInterfaceElements() ;
 
-  pPPT = pPPTinit ;
+  _pPPT = pPPTinit ;
 
-  bMustSwitchToComplexMode = false ;
+  _bMustSwitchToComplexMode = false ;
 }
 catch (...)
 {
@@ -2513,17 +2654,22 @@ catch (...)
 void
 NSSimpleNewDrugDlg::createInterfaceElements()
 {
-	pTrtGroup      = new OWL::TGroupBox(this, TRT_GROUP) ;
+	_pTrtGroup      = new OWL::TGroupBox(this, TRT_GROUP) ;
 
-	pType          = new NSUtilLexique(pContexte, this, DRUG_EDIT, pContexte->getDico()) ;
-  pType->setLostFocusFunctor(new MemFunctor<NSSimpleNewDrugDlg>( (NSSimpleNewDrugDlg*)this, &NSSimpleNewDrugDlg::ExecutedAfterDrugSelection )) ;
+	_pType          = new NSUtilLexique(pContexte, this, DRUG_EDIT, pContexte->getDico()) ;
+  _pType->setLostFocusFunctor(new MemFunctor<NSSimpleNewDrugDlg>((NSSimpleNewDrugDlg*) this, &NSSimpleNewDrugDlg::ExecutedAfterDrugSelection)) ;
 
-	pUnitePriseTxt = new OWL::TStatic(this, DRG_UNIT_TXT) ;
-	pUnitePrise    = new NSUtilLexique(pContexte, this, DRG_UNIT, pContexte->getDico()) ;
+	_pUnitePriseTxt = new OWL::TStatic(this, DRG_UNIT_TXT) ;
+	_pUnitePrise    = new NSUtilLexique(pContexte, this, DRG_UNIT, pContexte->getDico()) ;
 
   _pALD             = new OWL::TCheckBox(this, ALD_BUTTON) ;
   _pNonSubstituable = new OWL::TCheckBox(this, NS_BUTTON) ;
   _pFreeTextButton  = new OWL::TButton(this, FREE_TEXT_BUTTON) ;
+  _pIssues          = new OWL::TCheckBox(this, IDC_ISSUE_BTN) ;
+
+  _pEventTxt         = new OWL::TStatic(this, IDC_EVENT_TXT) ;
+  _pEvent            = new NSUtilLexique(pContexte, this, IDC_EVENT_EDIT, pContexte->getDico()) ;
+  _pEvent->setLostFocusFunctor(new MemFunctor<NSSimpleNewDrugDlg>((NSSimpleNewDrugDlg*) this, &NSSimpleNewDrugDlg::ExecutedAfterEventSelection)) ;
 
   if (pContexte->getBamType() != NSContexte::btNone)
   {
@@ -2539,54 +2685,55 @@ NSSimpleNewDrugDlg::createInterfaceElements()
     _pBdmSearchSubstanceButton  = (OWL::TButton*) 0 ;
     _pBdmSearchAtcButton        = (OWL::TButton*) 0 ;
   }
+  _pBdmDrugInformation = (NsSelectableDrug*) 0 ;
 
-	pDateDebTxt    = new OWL::TStatic(this, DATE_DEBPRESC_TEXT) ;
-	pDateDeb       = new NSUtilEditDateHeure(pContexte, this, DRUG_DATE_DEB) ;
-  pDateDeb->setLostFocusFunctor(new MemFunctor<NSSimpleNewDrugDlg>( (NSSimpleNewDrugDlg*)this, &NSSimpleNewDrugDlg::ExecutedAfterTrtBeginDate )) ;
-  pDateFinGroup  = new OWL::TGroupBox(this, DATE_FIN_DRG_GROUP) ;
-	pRChronique    = new OWL::TRadioButton(this, IDR_DRG_CHRONIQUE) ;
-	pRDans         = new OWL::TRadioButton(this, IDR_DRG_DANS) ;
-	pRDuree        = new OWL::TRadioButton(this, IDR_DRG_DUREE) ;
-	pRLe           = new OWL::TRadioButton(this, IDR_DRG_LE) ;
-	pNbJours       = new NSEditNum(pContexte, this, IDC_DRG_NBJOURS, 10) ;
-  pNbJours->setLostFocusFunctor(new MemFunctor<NSSimpleNewDrugDlg>( (NSSimpleNewDrugDlg*)this, &NSSimpleNewDrugDlg::ExecutedAfterTrtEndDate ));
+	_pDateDebTxt    = new OWL::TStatic(this, DATE_DEBPRESC_TEXT) ;
+	_pDateDeb       = new NSUtilEditDateHeure(pContexte, this, DRUG_DATE_DEB) ;
+  _pDateDeb->setLostFocusFunctor(new MemFunctor<NSSimpleNewDrugDlg>( (NSSimpleNewDrugDlg*)this, &NSSimpleNewDrugDlg::ExecutedAfterTrtBeginDate )) ;
+  _pDateFinGroup  = new OWL::TGroupBox(this, DATE_FIN_DRG_GROUP) ;
+	_pRChronique    = new OWL::TRadioButton(this, IDR_DRG_CHRONIQUE) ;
+	_pRDans         = new OWL::TRadioButton(this, IDR_DRG_DANS) ;
+	_pRDuree        = new OWL::TRadioButton(this, IDR_DRG_DUREE) ;
+	_pRLe           = new OWL::TRadioButton(this, IDR_DRG_LE) ;
+	_pNbJours       = new NSEditNum(pContexte, this, IDC_DRG_NBJOURS, 10) ;
+  _pNbJours->setLostFocusFunctor(new MemFunctor<NSSimpleNewDrugDlg>( (NSSimpleNewDrugDlg*)this, &NSSimpleNewDrugDlg::ExecutedAfterTrtEndDate ));
   char *temp1[] = {"2HEUR1", "2DAT01", "2DAT11", "2DAT21"} ;
-  pCBDureeTtt    = new NSComboBox(this, IDC_DRG_NBJOURS_TXT, pContexte, temp1, 4) ;
-  pCBDureeTtt->SetLostFocusResponse(new MemFunctor<NSSimpleNewDrugDlg>( (NSSimpleNewDrugDlg*)this, &NSSimpleNewDrugDlg::ExecutedAfterTrtEndDate ));
-	pDateFin       = new NSUtilEditDateHeure(pContexte, this, DRUG_DATE_FIN) ;
+  _pCBDureeTtt    = new NSComboBox(this, IDC_DRG_NBJOURS_TXT, pContexte, temp1, 4) ;
+  _pCBDureeTtt->SetLostFocusResponse(new MemFunctor<NSSimpleNewDrugDlg>( (NSSimpleNewDrugDlg*)this, &NSSimpleNewDrugDlg::ExecutedAfterTrtEndDate ));
+	_pDateFin       = new NSUtilEditDateHeure(pContexte, this, DRUG_DATE_FIN) ;
 
-	pPrescriptionGroup = new OWL::TGroupBox(this, PRESCR_GROUP) ;
+	_pPrescriptionGroup = new OWL::TGroupBox(this, PRESCR_GROUP) ;
 
-	pDureePhaseTxt         = new OWL::TStatic(this, PRESCR_DURA_TXT) ;
-	pDureePhase            = new NSUpDownEdit(this, pContexte, "", PRESCR_DURA, PRESCR_DURA_UPDN) ;
-  pDureePhase->getEditNum()->SetLostFocusResponse(new MemFunctor<NSSimpleNewDrugDlg>( (NSSimpleNewDrugDlg*)this, &NSSimpleNewDrugDlg::ActualisePhase )) ;
-  pDureePhase->getUpDown()->SetLostFocusResponse(new MemFunctor<NSSimpleNewDrugDlg>( (NSSimpleNewDrugDlg*)this, &NSSimpleNewDrugDlg::ActualisePhase )) ;
+	_pDureePhaseTxt         = new OWL::TStatic(this, PRESCR_DURA_TXT) ;
+	_pDureePhase            = new NSUpDownEdit(this, pContexte, "", PRESCR_DURA, PRESCR_DURA_UPDN) ;
+  _pDureePhase->getEditNum()->SetLostFocusResponse(new MemFunctor<NSSimpleNewDrugDlg>( (NSSimpleNewDrugDlg*)this, &NSSimpleNewDrugDlg::ActualisePhase )) ;
+  _pDureePhase->getUpDown()->SetLostFocusResponse(new MemFunctor<NSSimpleNewDrugDlg>( (NSSimpleNewDrugDlg*)this, &NSSimpleNewDrugDlg::ActualisePhase )) ;
 
   char *temp[] = {"2HEUR1", "2DAT01", "2DAT11", "2DAT21"} ;
-  pCBDureePhase          = new NSComboBox(this, PRESCR_DURA_UNIT, pContexte, temp, 4) ;
-  pCBDureePhase->SetLostFocusResponse(new MemFunctor<NSSimpleNewDrugDlg>( (NSSimpleNewDrugDlg*)this, &NSSimpleNewDrugDlg::ActualisePhase ));
-	pRenouvellementTxt     = new OWL::TStatic(this, PRESCR_RENEW_TXT) ;
-	pRenouvellement        = new NSUpDownEdit(this, pContexte, "", PRESCR_RENEW, PRESCR_RENEW_UPDN) ;
+  _pCBDureePhase          = new NSComboBox(this, PRESCR_DURA_UNIT, pContexte, temp, 4) ;
+  _pCBDureePhase->SetLostFocusResponse(new MemFunctor<NSSimpleNewDrugDlg>( (NSSimpleNewDrugDlg*)this, &NSSimpleNewDrugDlg::ActualisePhase ));
+	_pRenouvellementTxt     = new OWL::TStatic(this, PRESCR_RENEW_TXT) ;
+	_pRenouvellement        = new NSUpDownEdit(this, pContexte, "", PRESCR_RENEW, PRESCR_RENEW_UPDN) ;
   _pNonRenouvelable      = new OWL::TCheckBox(this, NR_BUTTON) ;
 
-	pRenouvellementTimeTxt = new OWL::TStatic(this, PRESCR_RENEW_NBTXT) ;
+	_pRenouvellementTimeTxt = new OWL::TStatic(this, PRESCR_RENEW_NBTXT) ;
 
-	pDateDebPrescrTxt      = new OWL::TStatic(this, DATE_DEB_DRG_TEXT) ;
-	pDateDebPrescr         = new NSUtilEditDateHeure(pContexte, this, PRESC_DATE_DEB) ;
-	pDateFinPrescrTxt      = new OWL::TStatic(this, DATE_FINPRESC_TEXT) ;
-	pDateFinPrescr         = new NSUtilEditDateHeure(pContexte, this, PRESC_DATE_FIN) ;
+	_pDateDebPrescrTxt      = new OWL::TStatic(this, DATE_DEB_DRG_TEXT) ;
+	_pDateDebPrescr         = new NSUtilEditDateHeure(pContexte, this, PRESC_DATE_DEB) ;
+	_pDateFinPrescrTxt      = new OWL::TStatic(this, DATE_FINPRESC_TEXT) ;
+	_pDateFinPrescr         = new NSUtilEditDateHeure(pContexte, this, PRESC_DATE_FIN) ;
 
-  pPosologieGroup        = new OWL::TGroupBox(this, POSO_GROUP) ;
+  _pPosologieGroup        = new OWL::TGroupBox(this, POSO_GROUP) ;
 
-	pPriseMatin            = new NSUpDownEdit(this, pContexte, "", POSO_MORNING, POSO_MORNING_UPDN) ;
-  pPriseMidi             = new NSUpDownEdit(this, pContexte, "", POSO_NOON,    POSO_NOON_UPDN) ;
-  pPriseSoir             = new NSUpDownEdit(this, pContexte, "", POSO_NIGHT,   POSO_NIGHT_UPDN) ;
-  pPriseCoucher          = new NSUpDownEdit(this, pContexte, "", POSO_BED,     POSO_BED_UPDN) ;
+	_pPriseMatin            = new NSUpDownEdit(this, pContexte, "", POSO_MORNING, POSO_MORNING_UPDN) ;
+  _pPriseMidi             = new NSUpDownEdit(this, pContexte, "", POSO_NOON,    POSO_NOON_UPDN) ;
+  _pPriseSoir             = new NSUpDownEdit(this, pContexte, "", POSO_NIGHT,   POSO_NIGHT_UPDN) ;
+  _pPriseCoucher          = new NSUpDownEdit(this, pContexte, "", POSO_BED,     POSO_BED_UPDN) ;
 
-	pPriseMatinTxt         = new OWL::TStatic(this, POSO_MORNING_TXT) ;
-  pPriseMidiTxt          = new OWL::TStatic(this, POSO_NOON_TXT) ;
-  pPriseSoirTxt          = new OWL::TStatic(this, POSO_NIGHT_TXT) ;
-  pPriseCoucherTxt       = new OWL::TStatic(this, POSO_BED_TXT) ;
+	_pPriseMatinTxt         = new OWL::TStatic(this, POSO_MORNING_TXT) ;
+  _pPriseMidiTxt          = new OWL::TStatic(this, POSO_NOON_TXT) ;
+  _pPriseSoirTxt          = new OWL::TStatic(this, POSO_NIGHT_TXT) ;
+  _pPriseCoucherTxt       = new OWL::TStatic(this, POSO_BED_TXT) ;
 
 	// pComplexModeButton     = new OWL::TButton(this, DRUG_COMPLEX_MODE) ;
 }
@@ -2596,53 +2743,56 @@ NSSimpleNewDrugDlg::~NSSimpleNewDrugDlg()
   if (_pPhase)
     delete _pPhase ;
 
-  delete pTrtGroup ;
+  delete _pTrtGroup ;
 
-	delete pType ;
-	delete pUnitePriseTxt ;
-	delete pUnitePrise ;
+	delete _pType ;
+	delete _pUnitePriseTxt ;
+	delete _pUnitePrise ;
+  delete _pEventTxt ;
+  delete _pEvent ;
 
   delete _pALD ;
+  delete _pIssues ;
   delete _pNonSubstituable ;
   delete _pFreeTextButton ;
 
-	delete pDateDebTxt ;
-	delete pDateDeb ;
-  delete pDateFinGroup ;
-	delete pRChronique ;
-	delete pRDans ;
-	delete pRDuree ;
-	delete pRLe ;
-	delete pNbJours ;
-	delete pCBDureeTtt ;
-	delete pDateFin ;
+	delete _pDateDebTxt ;
+	delete _pDateDeb ;
+  delete _pDateFinGroup ;
+	delete _pRChronique ;
+	delete _pRDans ;
+	delete _pRDuree ;
+	delete _pRLe ;
+	delete _pNbJours ;
+	delete _pCBDureeTtt ;
+	delete _pDateFin ;
 
-	delete pPrescriptionGroup ;
+	delete _pPrescriptionGroup ;
 
-	delete pDureePhaseTxt ;
-	delete pDureePhase ;
-  delete pCBDureePhase ;
-	delete pRenouvellementTxt ;
-	delete pRenouvellement ;
-	delete pRenouvellementTimeTxt ;
+	delete _pDureePhaseTxt ;
+	delete _pDureePhase ;
+  delete _pCBDureePhase ;
+	delete _pRenouvellementTxt ;
+	delete _pRenouvellement ;
+	delete _pRenouvellementTimeTxt ;
   delete _pNonRenouvelable ;
 
-	delete pDateDebPrescrTxt ;
-	delete pDateDebPrescr ;
-	delete pDateFinPrescrTxt ;
-	delete pDateFinPrescr ;
+	delete _pDateDebPrescrTxt ;
+	delete _pDateDebPrescr ;
+	delete _pDateFinPrescrTxt ;
+	delete _pDateFinPrescr ;
 
-  delete pPosologieGroup ;
+  delete _pPosologieGroup ;
 
-	delete pPriseMatin ;
-  delete pPriseMidi ;
-  delete pPriseSoir ;
-  delete pPriseCoucher ;
+	delete _pPriseMatin ;
+  delete _pPriseMidi ;
+  delete _pPriseSoir ;
+  delete _pPriseCoucher ;
 
-	delete pPriseMatinTxt ;
-  delete pPriseMidiTxt ;
-  delete pPriseSoirTxt ;
-  delete pPriseCoucherTxt ;
+	delete _pPriseMatinTxt ;
+  delete _pPriseMidiTxt ;
+  delete _pPriseSoirTxt ;
+  delete _pPriseCoucherTxt ;
 
   if (_pDrugInfoButton)
     delete _pDrugInfoButton ;
@@ -2652,6 +2802,8 @@ NSSimpleNewDrugDlg::~NSSimpleNewDrugDlg()
     delete _pBdmSearchSubstanceButton ;
   if (_pBdmSearchAtcButton)
     delete _pBdmSearchAtcButton ;
+  if (_pBdmDrugInformation)
+    delete _pBdmDrugInformation ;
 
   // delete pComplexModeButton ;
 }
@@ -2662,17 +2814,6 @@ NSSimpleNewDrugDlg::SetupWindow()
 	TDialog::SetupWindow() ;
 
   initInterfaceElements() ;
-
-	// NVLdVTemps tpsNow ;
-	// tpsNow.takeTime() ;
-
-	// pDateDeb->setDate(tpsNow.donneDateHeure()) ;
-	// pDateDebPrescr->setDate(tpsNow.donneDateHeure()) ;
-
-	// pRChronique->SetCheck(BF_CHECKED) ;
-	// pDateFin->SetReadOnly(true) ;
-	// pNbJours->SetReadOnly(true) ;
-  //pCBDureeTtt->SetReadOnly(true) ;
 }
 
 void
@@ -2684,78 +2825,89 @@ NSSimpleNewDrugDlg::initInterfaceElements()
   SetCaption(sTxt.c_str()) ;
 
   sTxt = pContexte->getSuperviseur()->getText("drugDialog", "treatment") ;
-	pTrtGroup->SetCaption(sTxt.c_str()) ;
+	_pTrtGroup->SetCaption(sTxt.c_str()) ;
 
 	sTxt = pContexte->getSuperviseur()->getText("drugDialog", "takeUnit") ;
-	pUnitePriseTxt->SetText(sTxt.c_str()) ;
+	_pUnitePriseTxt->SetText(sTxt.c_str()) ;
+  sTxt = pContexte->getSuperviseur()->getText("drugDialog", "ALD") ;
+	_pALD->SetCaption(sTxt.c_str()) ;
+  sTxt = pContexte->getSuperviseur()->getText("drugDialog", "inCaseOf") ;
+	_pEventTxt->SetText(sTxt.c_str()) ;
+  sTxt = pContexte->getSuperviseur()->getText("drugDialog", "indications") ;
+	_pIssues->SetCaption(sTxt.c_str()) ;
 
   sTxt = pContexte->getSuperviseur()->getText("drugDialog", "startingDate") ;
-	pDateDebTxt->SetText(sTxt.c_str()) ;
+	_pDateDebTxt->SetText(sTxt.c_str()) ;
   sTxt = pContexte->getSuperviseur()->getText("drugDialog", "endingDate") ;
-  pDateFinGroup->SetCaption(sTxt.c_str()) ;
+  _pDateFinGroup->SetCaption(sTxt.c_str()) ;
   sTxt = pContexte->getSuperviseur()->getText("drugDialog", "undetermined") ;
-	pRChronique->SetCaption(sTxt.c_str()) ;
+	_pRChronique->SetCaption(sTxt.c_str()) ;
   sTxt = pContexte->getSuperviseur()->getText("drugDialog", "fromNow") ;
-	pRDans->SetCaption(sTxt.c_str()) ;
+	_pRDans->SetCaption(sTxt.c_str()) ;
   sTxt = pContexte->getSuperviseur()->getText("drugDialog", "totalDuration") ;
-	pRDuree->SetCaption(sTxt.c_str()) ;
+	_pRDuree->SetCaption(sTxt.c_str()) ;
   sTxt = pContexte->getSuperviseur()->getText("drugDialog", "onThe") ;
-	pRLe->SetCaption(sTxt.c_str()) ;
+	_pRLe->SetCaption(sTxt.c_str()) ;
 
 	sTxt = pContexte->getSuperviseur()->getText("drugDialog", "prescription") ;
-	pPrescriptionGroup->SetCaption(sTxt.c_str()) ;
+	_pPrescriptionGroup->SetCaption(sTxt.c_str()) ;
 
 	sTxt = pContexte->getSuperviseur()->getText("drugDialog", "during") ;
-	pDureePhaseTxt->SetText(sTxt.c_str()) ;
+	_pDureePhaseTxt->SetText(sTxt.c_str()) ;
   sTxt = pContexte->getSuperviseur()->getText("drugDialog", "mayBeRenewed") ;
-	pRenouvellementTxt->SetText(sTxt.c_str()) ;
+	_pRenouvellementTxt->SetText(sTxt.c_str()) ;
   sTxt = pContexte->getSuperviseur()->getText("drugDialog", "time") ;
-	pRenouvellementTimeTxt->SetText(sTxt.c_str()) ;
+	_pRenouvellementTimeTxt->SetText(sTxt.c_str()) ;
 
 	sTxt = pContexte->getSuperviseur()->getText("drugDialog", "from") ;
-	pDateDebPrescrTxt->SetText(sTxt.c_str()) ;
+	_pDateDebPrescrTxt->SetText(sTxt.c_str()) ;
 	sTxt = pContexte->getSuperviseur()->getText("drugDialog", "to") ;
-	pDateFinPrescrTxt->SetText(sTxt.c_str()) ;
+	_pDateFinPrescrTxt->SetText(sTxt.c_str()) ;
 
 	sTxt = pContexte->getSuperviseur()->getText("drugDialog", "posology") ;
-  pPosologieGroup->SetCaption(sTxt.c_str()) ;
+  _pPosologieGroup->SetCaption(sTxt.c_str()) ;
 
   sTxt = pContexte->getSuperviseur()->getText("drugDialog", "morning") ;
-	pPriseMatinTxt->SetText(sTxt.c_str()) ;
+	_pPriseMatinTxt->SetText(sTxt.c_str()) ;
   sTxt = pContexte->getSuperviseur()->getText("drugDialog", "noon") ;
-  pPriseMidiTxt->SetText(sTxt.c_str()) ;
+  _pPriseMidiTxt->SetText(sTxt.c_str()) ;
   sTxt = pContexte->getSuperviseur()->getText("drugDialog", "evening") ;
-  pPriseSoirTxt->SetText(sTxt.c_str()) ;
+  _pPriseSoirTxt->SetText(sTxt.c_str()) ;
   sTxt = pContexte->getSuperviseur()->getText("drugDialog", "bedtime") ;
-  pPriseCoucherTxt->SetText(sTxt.c_str()) ;
+  _pPriseCoucherTxt->SetText(sTxt.c_str()) ;
 
   string sLang = pContexte->getUserLanguage() ;
 
   // Init contents
   //
-  std::string sForme = "" ;
-  std::string sLabel = "" ;
+  string sForme = string("") ;
+  string sLabel = string("") ;
 
   if (string("") != _sLexiqCode)
   {
 		pContexte->getDico()->donneLibelle(sLang, &_sLexiqCode, &sLabel) ;
-    pType->setLabel(_sLexiqCode.c_str(), sLabel.c_str()) ;
+    _pType->setLabel(_sLexiqCode.c_str(), sLabel.c_str()) ;
     sForme = initDispUnit(sLang, _sLexiqCode, sLabel, pContexte) ;
   }
   else
-    pType->SetText("") ;
+    _pType->SetText("") ;
 
   if (string("") != _sPriseUnit)
-    pUnitePrise->setLabel(_sPriseUnit) ;
+    _pUnitePrise->setLabel(_sPriseUnit) ;
   else
   {
   	string sMsgTxt = pContexte->getSuperviseur()->getText("drugDialog", "missingInformation") ;
-    pUnitePrise->SetText(sMsgTxt.c_str()) ;
+    _pUnitePrise->SetText(sMsgTxt.c_str()) ;
     if ((string("") != sForme) && (sForme != sMsgTxt))
-			pUnitePrise->setLabel(sForme) ;
+			_pUnitePrise->setLabel(sForme) ;
 		else
-			pUnitePrise->SetText(sMsgTxt.c_str()) ;
+			_pUnitePrise->SetText(sMsgTxt.c_str()) ;
   }
+
+  if      (string("") != _sLexiqEvent)
+    _pEvent->setLabel(_sLexiqEvent) ;
+  else if (string("") != _sFreeTextEvent)
+    _pEvent->setLabel(string("£?????"), _sFreeTextEvent) ;
 
   if (_bNonSubstituable)
   	_pNonSubstituable->SetCheck(BF_CHECKED) ;
@@ -2767,79 +2919,90 @@ NSSimpleNewDrugDlg::initInterfaceElements()
   else
     _pALD->SetCheck(BF_UNCHECKED) ;
 
+  setSelectedIssuesBtnState() ;
+
   NVLdVTemps tpNow ;
 	tpNow.takeTime() ;
 
   if (string("") != _sDateOuverture)
-		pDateDeb->setDate(_sDateOuverture) ;
+		_pDateDeb->setDate(_sDateOuverture) ;
   else
-		pDateDeb->setDate(tpNow.donneDateHeure()) ;
+		_pDateDeb->setDate(tpNow.donneDateHeure()) ;
 
   if (string("") != _sDateFermeture)
   {
-  	pRLe->SetCheck(BF_CHECKED) ;
-  	pDateFin->setDate(_sDateFermeture) ;
+  	_pRLe->SetCheck(BF_CHECKED) ;
+  	_pDateFin->setDate(_sDateFermeture) ;
   }
   else
   {
-  	pRChronique->SetCheck(BF_CHECKED) ;
-    pDateFin->SetReadOnly(true) ;
+  	_pRChronique->SetCheck(BF_CHECKED) ;
+    _pDateFin->SetReadOnly(true) ;
   }
-  pNbJours->SetReadOnly(true) ;
+  _pNbJours->SetReadOnly(true) ;
 
-  if (NULL == _pPhase)
+  if ((NSphaseMedic*) NULL == _pPhase)
   {
-  	pDateDebPrescr->setDate(tpNow.donneDateHeure()) ;
+  	_pDateDebPrescr->setDate(tpNow.donneDateHeure()) ;
 		return ;
 	}
 
-	pDureePhase->initControle(_pPhase->GetDureePhase()) ;
-	pCBDureePhase->setCode(_pPhase->GetSymBolOfPhase()) ;
-  pDateDebPrescr->setDate(_pPhase->GetStartingDate().donneDateHeure()) ;
-  pDateFinPrescr->setDate(_pPhase->GetClosingDate().donneDateHeure()) ;
+	_pDureePhase->initControle(_pPhase->GetDureePhase()) ;
+	_pCBDureePhase->setCode(_pPhase->GetSymBolOfPhase()) ;
+  _pDateDebPrescr->setDate(_pPhase->GetStartingDate().donneDateHeure()) ;
+  _pDateFinPrescr->setDate(_pPhase->GetClosingDate().donneDateHeure()) ;
 
-  pRenouvellement->initControle(_pPhase->GetNumberOfRenouvellement()) ;
+  _pRenouvellement->initControle(_pPhase->GetNumberOfRenouvellement()) ;
 
   std::vector<NSMedicCycleGlobal*>* pCycles = _pPhase->getCycles() ;
 
-  if ((NULL == pCycles) || pCycles->empty())
+  if (((std::vector<NSMedicCycleGlobal*>*) NULL == pCycles) || pCycles->empty())
 		return ;
 
 	NSMedicCycleGlobal* pCurrentCycle = *(pCycles->begin()) ;
   NSCircadien* pCirc = pCurrentCycle->GetCycleCircadien() ;
-  if ((NULL == pCirc) || (pCirc->getType() != MMS))
+  if (((NSCircadien*) NULL == pCirc) || (pCirc->getType() != MMS))
 		return ;
 
 	// unfortunately not possible : pCirc->Load() ;
 
   BaseCirc* pCircData = pCirc->getData() ;
-  if (NULL == pCircData)
+  if ((BaseCirc*) NULL == pCircData)
 		return ;
 
 	CircBaseMMS* pMMSData = dynamic_cast<CircBaseMMS*>(pCircData) ;
-  if (NULL == pMMSData)
+  if ((CircBaseMMS*) NULL == pMMSData)
 		return ;
 
-  pPriseMatin->getEditNum()->setText(pMMSData->getMatin()) ;
-	pPriseMidi->getEditNum()->setText(pMMSData->getMidi()) ;
-	pPriseSoir->getEditNum()->setText(pMMSData->getSoir()) ;
-	pPriseCoucher->getEditNum()->setText(pMMSData->getCoucher()) ;
+  _pPriseMatin->getEditNum()->setText(pMMSData->getMatin()) ;
+	_pPriseMidi->getEditNum()->setText(pMMSData->getMidi()) ;
+	_pPriseSoir->getEditNum()->setText(pMMSData->getSoir()) ;
+	_pPriseCoucher->getEditNum()->setText(pMMSData->getCoucher()) ;
+}
+
+void
+NSSimpleNewDrugDlg::setSelectedIssuesBtnState()
+{
+  if (_aLinkedIssues.empty())
+  	_pIssues->SetCheck(BF_UNCHECKED) ;
+  else
+    _pIssues->SetCheck(BF_CHECKED) ;
 }
 
 void
 NSSimpleNewDrugDlg::BuildPatpatho()
 {
-	pPPT->vider() ;
+	_pPPT->vider() ;
 
 	// Insert root (drug name)
 	//
 	int iColonne = 0 ;
-  std::string sMEdicName = pType->getCode() ;
+  std::string sMEdicName = _pType->getCode() ;
 
   if (string("") == sMEdicName)
 		return ;
 
-  pPPT->ajoutePatho(sMEdicName, iColonne++) ;
+  _pPPT->ajoutePatho(sMEdicName, iColonne++) ;
 
   int iMedicRoot  = iColonne ;
 
@@ -2847,46 +3010,84 @@ NSSimpleNewDrugDlg::BuildPatpatho()
   //
   string sDate ;
 
-  pDateDeb->getDate(&sDate) ;
-  if ((sDate != "") && (sDate != string("19000000000000")) &&	(sDate != string("00000000000000")))
+  _pDateDeb->getDate(&sDate) ;
+  if ((string("") != sDate) && (sDate != string("19000000000000")) &&	(sDate != string("00000000000000")))
 	{
-  	pPPT->ajoutePatho("KOUVR1", iColonne++) ;
+  	_pPPT->ajoutePatho("KOUVR1", iColonne++) ;
   	Message CodeMsg ;
 		CodeMsg.SetUnit("2DA021") ;
 		CodeMsg.SetComplement(sDate) ;
-		pPPT->ajoutePatho("£D0;19", &CodeMsg, iColonne++) ;
+		_pPPT->ajoutePatho("£D0;19", &CodeMsg, iColonne++) ;
 	}
 	iColonne = iMedicRoot ;
 
-	pDateFin->getDate(&sDate) ;
-  if ((sDate != "") && (sDate != string("19000000000000")) &&	(sDate != string("00000000000000")))
+	_pDateFin->getDate(&sDate) ;
+  if ((string("") != sDate) && (sDate != string("19000000000000")) &&	(sDate != string("00000000000000")))
 	{
-    pPPT->ajoutePatho("KFERM1", iColonne++) ;
+    _pPPT->ajoutePatho("KFERM1", iColonne++) ;
     Message CodeMsg ;
 		CodeMsg.SetUnit("2DA021") ;
 		CodeMsg.SetComplement(sDate) ;
-		pPPT->ajoutePatho("£D0;19", &CodeMsg, iColonne++) ;
+		_pPPT->ajoutePatho("£D0;19", &CodeMsg, iColonne++) ;
 	}
 	iColonne = iMedicRoot ;
 
-  std::string sTakeUnitCode = pUnitePrise->getCode() ;
+  std::string sTakeUnitCode = _pUnitePrise->getCode() ;
 	if (string("") != sTakeUnitCode)
   {
-  	pPPT->ajoutePatho("0MEDF1", iColonne++) ;
-    pPPT->ajoutePatho(sTakeUnitCode, iColonne++) ;
+  	_pPPT->ajoutePatho("0MEDF1", iColonne++) ;
+    _pPPT->ajoutePatho(sTakeUnitCode, iColonne++) ;
+  }
+  iColonne = iMedicRoot ;
+
+  std::string sEventCode = _pEvent->getCode() ;
+  if (string("") != sEventCode)
+  {
+    _pPPT->ajoutePatho("KEVEI2", iColonne++) ;
+    if (string("£?????") != sEventCode)
+      _pPPT->ajoutePatho(sEventCode, iColonne++) ;
+    else
+    {
+      Message CodeMsg ;
+		  CodeMsg.SetTexteLibre(_pEvent->getRawText()) ;
+		  _pPPT->ajoutePatho(sEventCode, &CodeMsg, iColonne++) ;
+    }
+  }
+  iColonne = iMedicRoot ;
+
+  if (string("") != _sATCCode)
+  {
+    Message CodeMsg ;
+		CodeMsg.SetComplement(_sATCCode) ;
+		_pPPT->ajoutePatho("6ATC01", &CodeMsg, iColonne++) ;
+  }
+  iColonne = iMedicRoot ;
+
+  if (string("") != _sCICode)
+  {
+    string sLexique = string("6CIS01") ;
+    size_t iLen = strlen(_sCICode.c_str()) ;
+    if      (7 == iLen)
+      sLexique = string("6CIP71") ;
+    else if (13 == iLen)
+      sLexique = string("6CIPT1") ;
+
+    Message CodeMsg ;
+		CodeMsg.SetComplement(_sATCCode) ;
+		_pPPT->ajoutePatho(sLexique, &CodeMsg, iColonne++) ;
   }
   iColonne = iMedicRoot ;
 
   if ((string("") != _sALD) || _bNonSubstituable)
   {
-    pPPT->ajoutePatho("LADMI1", iColonne++) ;
+    _pPPT->ajoutePatho("LADMI1", iColonne++) ;
     if (string("") != _sALD)
-      pPPT->ajoutePatho("LBARZ1", iColonne) ;
+      _pPPT->ajoutePatho("LBARZ1", iColonne) ;
     if (_bNonSubstituable)
     {
       Message Msg ;
       Msg.SetCertitude("WCE001") ;
-      pPPT->ajoutePatho("LSUBS1", &Msg, iColonne) ;
+      _pPPT->ajoutePatho("LSUBS1", &Msg, iColonne) ;
     }
   }
   iColonne = iMedicRoot ;
@@ -2895,20 +3096,20 @@ NSSimpleNewDrugDlg::BuildPatpatho()
   BuildPhaseTree(&phaseTree) ;
 
   if (false == phaseTree.empty())
-		pPPT->InserePatPatho(pPPT->end(), &phaseTree, iColonne) ;
+		_pPPT->InserePatPatho(_pPPT->end(), &phaseTree, iColonne) ;
 
   if (string("") != _sFreeText)
 	{
     Message CodeMsg ;
 		CodeMsg.SetTexteLibre(_sFreeText) ;
-		pPPT->ajoutePatho("£C;020", &CodeMsg, iColonne) ;
+		_pPPT->ajoutePatho("£C;020", &CodeMsg, iColonne) ;
 	}
 }
 
 void
 NSSimpleNewDrugDlg::BuildPhaseTree(NSPatPathoArray *pPptPhase)
 {
-	if (NULL == pPptPhase)
+	if ((NSPatPathoArray*) NULL == pPptPhase)
 		return ;
 
 	pPptPhase->vider() ;
@@ -2925,8 +3126,8 @@ NSSimpleNewDrugDlg::BuildPhaseTree(NSPatPathoArray *pPptPhase)
   string sDate ;
   iColonne = iColBasePhase + 1 ;
 
-  pDateDebPrescr->getDate(&sDate) ;
-  if ((sDate != "") && (sDate != string("19000000000000")) &&	(sDate != string("00000000000000")))
+  _pDateDebPrescr->getDate(&sDate) ;
+  if ((string("") != sDate) && (sDate != string("19000000000000")) &&	(sDate != string("00000000000000")))
 	{
   	pPptPhase->ajoutePatho("KOUVR1", iColonne++) ;
   	Message CodeMsg ;
@@ -2936,8 +3137,8 @@ NSSimpleNewDrugDlg::BuildPhaseTree(NSPatPathoArray *pPptPhase)
 	}
 	iColonne = iColBasePhase + 1 ;
 
-	pDateFinPrescr->getDate(&sDate) ;
-  if ((sDate != "") && (sDate != string("19000000000000")) &&	(sDate != string("00000000000000")))
+	_pDateFinPrescr->getDate(&sDate) ;
+  if ((string("") != sDate) && (sDate != string("19000000000000")) &&	(sDate != string("00000000000000")))
 	{
     pPptPhase->ajoutePatho("KFERM1", iColonne++) ;
     Message CodeMsg ;
@@ -2949,8 +3150,8 @@ NSSimpleNewDrugDlg::BuildPhaseTree(NSPatPathoArray *pPptPhase)
 
   // traitement des paramètres de la phase
   // pendant
-  int iPhaseDurationValue = pDureePhase->getValue() ;
-	string sPhaseDurationUnit = pCBDureePhase->getSelCode() ;
+  int iPhaseDurationValue = _pDureePhase->getValue() ;
+	string sPhaseDurationUnit = _pCBDureePhase->getSelCode() ;
 
   if ((iPhaseDurationValue > 0) && (string("") != sPhaseDurationUnit))
   {
@@ -2959,7 +3160,7 @@ NSSimpleNewDrugDlg::BuildPhaseTree(NSPatPathoArray *pPptPhase)
 	}
   iColonne = iColBasePhase + 1 ;
 
-  int iRenewValue = pRenouvellement->getValue() ;
+  int iRenewValue = _pRenouvellement->getValue() ;
 
   if (iRenewValue > 0)
   {
@@ -2973,7 +3174,7 @@ NSSimpleNewDrugDlg::BuildPhaseTree(NSPatPathoArray *pPptPhase)
   NSPatPathoArray cycleTree(pContexte->getSuperviseur()) ;
   BuildCycleTree(&cycleTree) ;
 
-  if (!(cycleTree.empty()))
+  if (false == cycleTree.empty())
   {
   	pPptPhase->ajoutePatho("KCYTR1", iColonne++) ;
 		pPptPhase->InserePatPatho(pPptPhase->end(), &cycleTree, iColonne) ;
@@ -2983,7 +3184,7 @@ NSSimpleNewDrugDlg::BuildPhaseTree(NSPatPathoArray *pPptPhase)
 void
 NSSimpleNewDrugDlg::BuildCycleTree(NSPatPathoArray *pPptCycle)
 {
-	if (NULL == pPptCycle)
+	if ((NSPatPathoArray*) NULL == pPptCycle)
 		return ;
 
 	pPptCycle->vider() ;
@@ -2994,19 +3195,19 @@ NSSimpleNewDrugDlg::BuildCycleTree(NSPatPathoArray *pPptCycle)
 
 	std::string temp ;
 
-  temp = pPriseMatin->getText() ;
+  temp = _pPriseMatin->getText() ;
   if (isValidValue(&temp))
 		func_create_patho_quant("KMATI1", temp, pPptCycle, 1) ;
 
-	temp = pPriseMidi->getText() ;
+	temp = _pPriseMidi->getText() ;
 	if (isValidValue(&temp))
 		func_create_patho_quant("KMIDI1", temp, pPptCycle, 1) ;
 
-	temp = pPriseSoir->getText() ;
+	temp = _pPriseSoir->getText() ;
 	if (isValidValue(&temp))
 		func_create_patho_quant("KSOIR1", temp, pPptCycle, 1) ;
 
-	temp = pPriseCoucher->getText() ;
+	temp = _pPriseCoucher->getText() ;
 	if (isValidValue(&temp))
 		func_create_patho_quant("KCOUC1", temp, pPptCycle, 1) ;
 }
@@ -3014,17 +3215,17 @@ NSSimpleNewDrugDlg::BuildCycleTree(NSPatPathoArray *pPptCycle)
 bool
 NSSimpleNewDrugDlg::ParseMedicament()
 {
-	if ((NULL == pPPT) || (true == pPPT->empty()))
+	if (((NSPatPathoArray*) NULL == _pPPT) || (true == _pPPT->empty()))
 		return true ;
 
 	int phasesCount = 0 ;
 
-  PatPathoIter pptIter = pPPT->begin() ;
+  PatPathoIter pptIter = _pPPT->begin() ;
 	_sLexiqCode = (*pptIter)->getLexique() ; // Recuperation du nom  du medicament
 
   pptIter++ ;
 
-  while (pPPT->end() != pptIter)
+  while (_pPPT->end() != pptIter)
   {
     std::string temp = (*pptIter)->getLexiqueSens() ;
 
@@ -3033,7 +3234,7 @@ NSSimpleNewDrugDlg::ParseMedicament()
     	int iColBase = (*pptIter)->getColonne() ;
 
 			pptIter++ ;
-      if (pPPT->end() == pptIter)
+      if (_pPPT->end() == pptIter)
       	return false ;
 
 			if (((*pptIter)->getColonne() > iColBase)  &&
@@ -3051,7 +3252,7 @@ NSSimpleNewDrugDlg::ParseMedicament()
     	int iColBase = (*pptIter)->getColonne() ;
 
 			pptIter++ ;
-      if (pPPT->end() == pptIter)
+      if (_pPPT->end() == pptIter)
       	return false ;
 
 			if (((*pptIter)->getColonne() > iColBase)  &&
@@ -3069,11 +3270,27 @@ NSSimpleNewDrugDlg::ParseMedicament()
 			int iColBase = (*pptIter)->getColonne() ;
 
 			pptIter++ ;
-      if (pPPT->end() == pptIter)
+      if (_pPPT->end() == pptIter)
       	return false ;
 
       if ((*pptIter)->getColonne() > iColBase)
 				_sPriseUnit = (*pptIter)->getLexique() ;
+
+			pptIter++ ;
+    }
+    else if (string("KEVEI") == temp)
+		{
+			int iColBase = (*pptIter)->getColonne() ;
+
+			pptIter++ ;
+      if (_pPPT->end() == pptIter)
+      	return false ;
+
+      string sElemLex = (*pptIter)->getLexique() ;
+      if (string("£?????") == sElemLex)
+        _sFreeTextEvent = (*pptIter)->getTexteLibre() ;
+      else
+        _sLexiqEvent = sElemLex ;
 
 			pptIter++ ;
     }
@@ -3103,7 +3320,7 @@ NSSimpleNewDrugDlg::ParseMedicament()
     {
       int iColBaseAdmin = (*pptIter)->getColonne() ;
       pptIter++ ;
-      while ((pPPT->end() != pptIter) && ((*pptIter)->getColonne() > iColBaseAdmin))
+      while ((_pPPT->end() != pptIter) && ((*pptIter)->getColonne() > iColBaseAdmin))
       {
         std::string tempAdm = (*pptIter)->getLexiqueSens() ;
         if ("LBARZ" == tempAdm)
@@ -3120,6 +3337,19 @@ NSSimpleNewDrugDlg::ParseMedicament()
           return false ;
       }
     }
+    else if (string("6ATC0") == temp)
+    {
+      _sATCCode = (*pptIter)->getComplement() ;
+      pptIter++ ;
+    }
+    else if ((string("6CIS0") == temp) ||
+             (string("6CIP0") == temp) ||
+             (string("6CIP7") == temp) ||
+             (string("6CIPT") == temp))
+    {
+      _sCICode = (*pptIter)->getComplement() ;
+      pptIter++ ;
+    }
     else
     	return false ;
   }
@@ -3129,21 +3359,21 @@ NSSimpleNewDrugDlg::ParseMedicament()
 bool
 NSSimpleNewDrugDlg::ParsePhase(PatPathoIter &pptIter)
 {
-	if (NULL == _pPhase)
+	if ((NSphaseMedic*) NULL == _pPhase)
 		return false ;
 
-	if (pPPT->end() == pptIter)
+	if (_pPPT->end() == pptIter)
 		return true ;
 
 	int iColBase = (*pptIter)->getColonne() ;
 
   pptIter++ ;
-	if (pPPT->end() == pptIter)
+	if (_pPPT->end() == pptIter)
 		return false ;
 
 	int cyclesCount = 0 ;
 
-	while ((pPPT->end() != pptIter) && ((*pptIter)->getColonne() > iColBase))
+	while ((_pPPT->end() != pptIter) && ((*pptIter)->getColonne() > iColBase))
   {
   	string temp = (*pptIter)->getLexiqueSens() ;
 
@@ -3152,7 +3382,7 @@ NSSimpleNewDrugDlg::ParsePhase(PatPathoIter &pptIter)
     	int iColLevel = (*pptIter)->getColonne() ;
 
 			pptIter++ ;
-      if (pPPT->end() == pptIter)
+      if (_pPPT->end() == pptIter)
       	return false ;
 
 			if (((*pptIter)->getColonne() > iColLevel)  &&
@@ -3170,7 +3400,7 @@ NSSimpleNewDrugDlg::ParsePhase(PatPathoIter &pptIter)
     	int iColLevel = (*pptIter)->getColonne() ;
 
 			pptIter++ ;
-      if (pPPT->end() == pptIter)
+      if (_pPPT->end() == pptIter)
       	return false ;
 
 			if (((*pptIter)->getColonne() > iColLevel)  &&
@@ -3188,7 +3418,7 @@ NSSimpleNewDrugDlg::ParsePhase(PatPathoIter &pptIter)
     	int iColLevel = (*pptIter)->getColonne() ;
 
 			pptIter++ ;
-      if (pPPT->end() == pptIter)
+      if (_pPPT->end() == pptIter)
       	return false ;
 
 			if ((*pptIter)->getColonne() > iColLevel)
@@ -3206,7 +3436,7 @@ NSSimpleNewDrugDlg::ParsePhase(PatPathoIter &pptIter)
     	int iColLevel = (*pptIter)->getColonne() ;
 
 			pptIter++ ;
-      if (pPPT->end() == pptIter)
+      if (_pPPT->end() == pptIter)
       	return false ;
 
 			if ((*pptIter)->getColonne() > iColLevel)
@@ -3223,7 +3453,7 @@ NSSimpleNewDrugDlg::ParsePhase(PatPathoIter &pptIter)
     		return false ;
 
       NSMedicCycleGlobal* cycle = new NSMedicCycleGlobal(pContexte, _pPhase) ;
-      PatPathoIter pptEnd = pPPT->end() ;
+      PatPathoIter pptEnd = _pPPT->end() ;
       cycle->Load(pptIter, pptEnd) ;
 
       // Check that there is only circadian information
@@ -3245,25 +3475,40 @@ NSSimpleNewDrugDlg::ParsePhase(PatPathoIter &pptIter)
   return true ;
 }
 
+/**
+ * Set of operation to be executed after a drug has been selected
+ */
 void
 NSSimpleNewDrugDlg::ExecutedAfterDrugSelection()
 {
-	string sLexiqCode = pType->getCode() ;
+	string sLexiqCode = _pType->getCode() ;
 
   if (string("") == sLexiqCode)
 		return ;
 
+  // Display drug's name
+  //
 	string sLabel ;
 	string sLang = pContexte->getUserLanguage() ;
 	pContexte->getDico()->donneLibelle(sLang, &sLexiqCode, &sLabel) ;
 
-	string sMITxt = pContexte->getSuperviseur()->getText("drugDialog", "missingInformation") ;
+  if (pContexte->getBamType() != NSContexte::btNone)
+  {
+    getDrugInformation() ;
+
+    if (_pBdmDrugInformation)
+      checkSecurityCheckInformation() ;
+  }
+
+  // Find and display dispensation unit
+  //
+  string sMITxt = pContexte->getSuperviseur()->getText("drugDialog", "missingInformation") ;
 
 	string sCodeDisp = initDispUnit(sLang, sLexiqCode, sLabel, pContexte) ;
 	if (sCodeDisp != sMITxt) // Verifie que le code exite
-		pUnitePrise->setLabel(sCodeDisp) ;
+		_pUnitePrise->setLabel(sCodeDisp) ;
 	else
-		pUnitePrise->SetText(sCodeDisp.c_str()) ;
+		_pUnitePrise->SetText(sCodeDisp.c_str()) ;
 
 	// initPosoAndCycleForDrug() ;
 }
@@ -3272,12 +3517,12 @@ void
 NSSimpleNewDrugDlg::ExecutedAfterTrtBeginDate()
 {
 	std::string dateDeb ;
-  pDateDeb->getDate(&dateDeb) ;
+  _pDateDeb->getDate(&dateDeb) ;
   NVLdVTemps data ;
   data.initFromDate(dateDeb) ;
 
   std::string date ;
-  pDateDebPrescr->getDate(&date) ;
+  _pDateDebPrescr->getDate(&date) ;
   NVLdVTemps dataPrescr ;
   dataPrescr.initFromDate(date) ;
 
@@ -3286,7 +3531,7 @@ NSSimpleNewDrugDlg::ExecutedAfterTrtBeginDate()
 
   if (data >= tpsNow)
 	{
-		pDateDebPrescr->setDate(data.donneDateHeure()) ;
+		_pDateDebPrescr->setDate(data.donneDateHeure()) ;
     ActualiseEndOfPrescription() ;
 	}
 }
@@ -3294,26 +3539,26 @@ NSSimpleNewDrugDlg::ExecutedAfterTrtBeginDate()
 void
 NSSimpleNewDrugDlg::ExecutedAfterTrtEndDate()
 {
-	pNbJours->donneValeur() ;
-	int iTrtDurationValue = (int) pNbJours->dValeur ;
+	_pNbJours->donneValeur() ;
+	int iTrtDurationValue = (int) _pNbJours->_dValeur ;
 	if (iTrtDurationValue <= 0)
 		return ;
 
-	string sTrtDurationUnit = pCBDureeTtt->getSelCode() ;
+	string sTrtDurationUnit = _pCBDureeTtt->getSelCode() ;
 	if (string("") == sTrtDurationUnit)
 		return ;
 
 	NVLdVTemps tDateFin ;
 
   std::string sDateDeb ;
-	pDateDeb->getDate(&sDateDeb) ;
+	_pDateDeb->getDate(&sDateDeb) ;
 
 	// si on dans le cas où "dans" est cochée
-  if (pRDans->GetCheck() == BF_CHECKED)
+  if (_pRDans->GetCheck() == BF_CHECKED)
     tDateFin.takeTime() ;
 
   // si on est dans le cas où "durée" est cochée
-  else if (pRDuree->GetCheck() == BF_CHECKED)
+  else if (_pRDuree->GetCheck() == BF_CHECKED)
     tDateFin.initFromDate(sDateDeb) ;
 
   else
@@ -3322,20 +3567,28 @@ NSSimpleNewDrugDlg::ExecutedAfterTrtEndDate()
 	tDateFin.ajouteTemps(iTrtDurationValue, sTrtDurationUnit, pContexte) ;
 	string sDateFin = tDateFin.donneDateHeure() ;
 
-  pDateFin->setDate(sDateFin) ;
-  pDateFinPrescr->setDate(sDateFin) ;
+  _pDateFin->setDate(sDateFin) ;
+  _pDateFinPrescr->setDate(sDateFin) ;
 
   std::string dateDebPresc ;
-  pDateDebPrescr->getDate(&dateDebPresc) ;
+  _pDateDebPrescr->getDate(&dateDebPresc) ;
 
   // si on dans le cas où "dans" est cochée, on remplit la durée de prescription
-  if ((pRDans->GetCheck() == BF_CHECKED) ||
-      ((pRDuree->GetCheck() == BF_CHECKED) && (dateDebPresc == sDateDeb)))
+  if ((_pRDans->GetCheck() == BF_CHECKED) ||
+      ((_pRDuree->GetCheck() == BF_CHECKED) && (dateDebPresc == sDateDeb)))
 	{
-		pDureePhase->setValue(iTrtDurationValue) ;
-    pCBDureePhase->setCode(sTrtDurationUnit) ;
+		_pDureePhase->setValue(iTrtDurationValue) ;
+    _pCBDureePhase->setCode(sTrtDurationUnit) ;
     ActualiseEndOfPrescription() ;
   }
+}
+
+/**
+ * Set of operation to be executed after an event has been selected
+ */
+void
+NSSimpleNewDrugDlg::ExecutedAfterEventSelection()
+{
 }
 
 void
@@ -3347,23 +3600,23 @@ NSSimpleNewDrugDlg::ActualisePhase()
 void
 NSSimpleNewDrugDlg::ActualiseEndOfPrescription()
 {
-	int iPhaseDurationValue = pDureePhase->getValue() ;
+	int iPhaseDurationValue = _pDureePhase->getValue() ;
 	if (iPhaseDurationValue <= 0)
 		return ;
 
-	string sPhaseDurationUnit = pCBDureePhase->getSelCode() ;
+	string sPhaseDurationUnit = _pCBDureePhase->getSelCode() ;
 	if (string("") == sPhaseDurationUnit)
 		return ;
 
 	std::string date ;
-  pDateDebPrescr->getDate(&date) ;
+  _pDateDebPrescr->getDate(&date) ;
   NVLdVTemps data ;
   data.initFromDate(date) ;
 
   data.ajouteTemps(iPhaseDurationValue, sPhaseDurationUnit, pContexte) ;
 
   date = data.donneDateHeure() ;
-  pDateFinPrescr->setDate(date) ;
+  _pDateFinPrescr->setDate(date) ;
 }
 
 void
@@ -3372,27 +3625,27 @@ NSSimpleNewDrugDlg::UserName(WPARAM wParam)
   switch (wParam)
   {
     case (IDR_DRG_CHRONIQUE) :
-    	pDateFin->SetReadOnly(true) ;
-      pNbJours->SetReadOnly(true) ;
+    	_pDateFin->SetReadOnly(true) ;
+      _pNbJours->SetReadOnly(true) ;
       //pCBDureeTtt->SetReadOnly(true) ;
       break ;
     case (IDR_DRG_DANS) :
-    	pDateFin->SetReadOnly(true) ;
-      pNbJours->SetReadOnly(false) ;
+    	_pDateFin->SetReadOnly(true) ;
+      _pNbJours->SetReadOnly(false) ;
       //pCBDureeTtt->SetReadOnly(false) ;
-      pNbJours->SetFocus() ;
+      _pNbJours->SetFocus() ;
       break ;
     case (IDR_DRG_DUREE) :
-    	pDateFin->SetReadOnly(true) ;
-      pNbJours->SetReadOnly(false) ;
+    	_pDateFin->SetReadOnly(true) ;
+      _pNbJours->SetReadOnly(false) ;
       //pCBDureeTtt->SetReadOnly(false) ;
-      pNbJours->SetFocus() ;
+      _pNbJours->SetFocus() ;
       break ;
     case (IDR_DRG_LE) :
-    	pNbJours->SetReadOnly(true) ;
+    	_pNbJours->SetReadOnly(true) ;
       //pCBDureeTtt->SetReadOnly(true) ;
-      pDateFin->SetReadOnly(false) ;
-      pDateFin->SetFocus() ;
+      _pDateFin->SetReadOnly(false) ;
+      _pDateFin->SetFocus() ;
       break ;
   }
 }
@@ -3417,13 +3670,29 @@ NSSimpleNewDrugDlg::nonRenouvelable()
 {
 }
 
+/**
+ * Get drug information from BDM
+ */
 void
-NSSimpleNewDrugDlg::drugInformation()
+NSSimpleNewDrugDlg::getDrugInformation()
 {
-  string sSelectedDrug = pType->getCode() ;
+  // Delete existing drug information
+  //
+  if (_pBdmDrugInformation)
+  {
+    delete _pBdmDrugInformation ;
+    _pBdmDrugInformation = (NsSelectableDrug*) 0 ;
+  }
+
+  _sATCCode = string("") ;
+  _sCICode  = string("") ;
+
+  string sSelectedDrug = _pType->getCode() ;
   if (string("") == sSelectedDrug)
     return ;
 
+  // Get BDM driver
+  //
   NSBdmDriver* pDriver = pContexte->getBdmDriver() ;
   if ((NSBdmDriver*) NULL == pDriver)
     return ;
@@ -3438,14 +3707,330 @@ NSSimpleNewDrugDlg::drugInformation()
     return ;
 
   string sCisCode = IBdm.pBdm->getCodeCIP() ;
-
-  NsSelectableDrug drugInformation ;
-
-  if (false == pDriver->getDrugInformation(&drugInformation, &sCisCode))
+  if (string("") == sCisCode)
     return ;
 
-  NSBdmDrugInfoDlg drugInfoDlg(this, pContexte, &drugInformation) ;
+  _sCICode = sCisCode ;
+
+  // Get drug information and instanciate
+  //
+  _pBdmDrugInformation = new NsSelectableDrug() ;
+
+  if (pDriver->getDrugInformation(_pBdmDrugInformation, &sCisCode))
+  {
+    _sATCCode = pDriver->getAtcCodeFromBamId(_pBdmDrugInformation->getBdmID()) ;
+    return ;
+  }
+
+  // If BDM access failed, delete the drug information vector
+  //
+  if (_pBdmDrugInformation)
+  {
+    delete _pBdmDrugInformation ;
+    _pBdmDrugInformation = (NsSelectableDrug*) 0 ;
+  }
+}
+
+void
+NSSimpleNewDrugDlg::checkSecurityCheckInformation()
+{
+  if ((NsSelectableDrug*) NULL == _pBdmDrugInformation)
+    return ;
+
+  NSPatientChoisi* pPatEnCours = pContexte->getPatient() ;
+  if ((NSPatientChoisi*) NULL == pPatEnCours)
+    return ;
+
+  string sMissing  = string("") ;
+  string sMissing1 = string("") ;
+  string sMissing2 = string("") ;
+
+  decodageBase dcode(pContexte, pContexte->getUserLanguage()) ;
+
+  int iMissingInformation = 0 ;
+
+  if (_pBdmDrugInformation->isWeightNeededForSecurityControl())
+  {
+    string sAnswerDate = string("") ;
+    NSPatPathoArray* pAnswer = (NSPatPathoArray*) 0 ;
+
+    bool bSuccess = pContexte->getBBinterface()->synchronousCall(string("VPOID1"), &pAnswer, (HWND) 0, &sAnswerDate) ;
+    if ((false == bSuccess) || ((NSPatPathoArray*) NULL == pAnswer) || pAnswer->empty())
+    {
+      sMissing2 = pContexte->getSuperviseur()->getText("drugInformationAlerts", "theHeight") ;
+      dcode.etDuMilieu(&sMissing, &sMissing1, &sMissing2, string(", ")) ;
+      iMissingInformation++ ;
+    }
+  }
+
+  if (_pBdmDrugInformation->isHeightNeededForSecurityControl())
+  {
+    string sAnswerDate = string("") ;
+    NSPatPathoArray* pAnswer = (NSPatPathoArray*) 0 ;
+
+    bool bSuccess = pContexte->getBBinterface()->synchronousCall(string("VTAIL1"), &pAnswer, (HWND) 0, &sAnswerDate) ;
+    if ((false == bSuccess) || ((NSPatPathoArray*) NULL == pAnswer) || pAnswer->empty())
+    {
+      sMissing2 = pContexte->getSuperviseur()->getText("drugInformationAlerts", "theWeight") ;
+      dcode.etDuMilieu(&sMissing, &sMissing1, &sMissing2, string(", ")) ;
+      iMissingInformation++ ;
+    }
+  }
+
+  if (_pBdmDrugInformation->isClearanceNeededForSecurityControl())
+  {
+    string sAnswerDate = string("") ;
+    NSPatPathoArray* pAnswer = (NSPatPathoArray*) 0 ;
+
+    bool bSuccess = pContexte->getBBinterface()->synchronousCall(string("VCREA1"), &pAnswer, (HWND) 0, &sAnswerDate) ;
+    if ((false == bSuccess) || ((NSPatPathoArray*) NULL == pAnswer) || pAnswer->empty())
+    {
+      sMissing2 = pContexte->getSuperviseur()->getText("drugInformationAlerts", "theCreatininemia") ;
+      dcode.etDuMilieu(&sMissing, &sMissing1, &sMissing2, string(", ")) ;
+      iMissingInformation++ ;
+    }
+  }
+
+  // At leat one information missing
+  //
+  if (0 == iMissingInformation)
+    return ;
+
+  string sEt = string(" ") + pContexte->getSuperviseur()->getText("drugInformationAlerts", "and") + string(" ") ;
+  dcode.etFinal(&sMissing, &sMissing1, sEt) ;
+
+  string sFollow = string("") ;
+  if (1 == iMissingInformation)
+    sFollow = pContexte->getSuperviseur()->getText("drugInformationAlerts", "isMissingForSecurityControl") ;
+  else
+    sFollow = pContexte->getSuperviseur()->getText("drugInformationAlerts", "areMissingForSecurityControl") ;
+  sMissing += string(" ") + sFollow ;
+
+  sMissing[0] = pseumaj(sMissing[0]) ;
+
+  erreur(sMissing.c_str(), warningError, 0, GetHandle()) ;
+}
+
+/**
+ * Display the drug information dialog
+ */
+void
+NSSimpleNewDrugDlg::drugInformation()
+{
+  if ((NsSelectableDrug*) NULL == _pBdmDrugInformation)
+    return ;
+
+  NSBdmDrugInfoDlg drugInfoDlg(this, pContexte, _pBdmDrugInformation) ;
   drugInfoDlg.Execute() ;
+}
+
+void
+NSSimpleNewDrugDlg::initConnectedIssues(VecteurString* pLinkArray)
+{
+  if ((VecteurString*) NULL == pLinkArray)
+    return ;
+
+  _aLinkedIssues        = *pLinkArray ;
+  _aUpdatedLinkedIssues = *pLinkArray ;
+
+  setSelectedIssuesBtnState() ;
+}
+
+/**
+ * Display the health issues dialog
+ */
+void
+NSSimpleNewDrugDlg::selectIndication()
+{
+  // Get current concerns
+  //
+  ArrayConcern aCurrentConcerns((NSFrameInformation*) 0) ;
+  getCurrentConcerns(&aCurrentConcerns) ;
+  if (aCurrentConcerns.empty())
+  {
+    _pIssues->SetCheck(BF_UNCHECKED) ;
+    return ;
+  }
+
+  // Initialize the array of selected elements
+  //
+  int* pSelectedIssues = new int[aCurrentConcerns.size()] ;
+
+  for (int i = 0 ; i < aCurrentConcerns.size() ; i++)
+    pSelectedIssues[i] = 0 ;
+
+  int iSelectedCount = 0 ;
+
+  if (false == _aUpdatedLinkedIssues.empty())
+  {
+    ArrayConcernIter it = aCurrentConcerns.begin() ;
+    for (int iIndex = 0 ; aCurrentConcerns.end() != it ; it++, iIndex++)
+      if (_aUpdatedLinkedIssues.ItemDansUnVecteur((*it)->getNoeud()))
+        pSelectedIssues[iSelectedCount++] = iIndex ;
+  }
+
+  NSSelectIssuesDlg selectIssues(this, pContexte, &aCurrentConcerns, pSelectedIssues, iSelectedCount) ;
+  int iExecReturn = selectIssues.Execute() ;
+
+  if (IDOK != iExecReturn)
+  {
+    delete[] pSelectedIssues ;
+
+    setSelectedIssuesBtnState() ;
+
+    return ;
+  }
+
+  _aUpdatedLinkedIssues.vider() ;
+
+  // The vector of selected arrayx contains _iSelectedCount elements.
+  // Each element is the index of a selected element
+  //
+  if (selectIssues._iSelectedCount > 0)
+  {
+    int iArraySize = aCurrentConcerns.size() ;
+
+	  for (int i = 0 ; i < selectIssues._iSelectedCount ; i++)
+    {
+      NSConcern *pConcern = (*selectIssues._pIssuesArray)[pSelectedIssues[i]] ;
+      if (pConcern)
+        addConnectedIssue(pConcern->getNoeud()) ;
+    }
+  }
+
+  setSelectedIssuesBtnState() ;
+}
+
+void
+NSSimpleNewDrugDlg::initializeConnectedIssues(string sDrugNode)
+{
+  if (string("") == sDrugNode)
+    return ;
+
+  NSLinkManager* pGraphe = pContexte->getPatient()->getGraphPerson()->getLinkManager() ;
+  if ((NSLinkManager*) NULL == pGraphe)
+    return ;
+
+  pGraphe->TousLesVrais(sDrugNode, NSRootLink::drugOf, &_aLinkedIssues) ;
+
+  _aUpdatedLinkedIssues = _aLinkedIssues ;
+
+  setSelectedIssuesBtnState() ;
+}
+
+void
+NSSimpleNewDrugDlg::getCurrentConcerns(ArrayConcern *pCurrentConcerns)
+{
+  if ((ArrayConcern*) NULL == pCurrentConcerns)
+    return ;
+
+  NSPatientChoisi* pPatEnCours = pContexte->getPatient() ;
+  if ((NSPatientChoisi*) NULL == pPatEnCours)
+    return ;
+
+  ArrayConcern* pConcerns = pPatEnCours->getLdvDocument()->getConcerns(ldvframeHealth) ;
+  if (((ArrayConcern*) NULL == pConcerns) || pConcerns->empty())
+    return ;
+
+  NVLdVTemps tNow ;
+  tNow.takeTime() ;
+
+  for (ArrayConcernIter it = pConcerns->begin() ; pConcerns->end() != it ; it++)
+    // If open now
+    //
+    if (((*it)->_tDateOuverture <= tNow) &&
+        ((*it)->_tDateFermeture.estNoLimit() || ((*it)->_tDateFermeture > tNow)))
+      pCurrentConcerns->push_back(new NSConcern(**it)) ;
+}
+
+bool
+NSSimpleNewDrugDlg::isAConnectedIssue(string sConcernNode)
+{
+  return isAConnected(sConcernNode, &_aUpdatedLinkedIssues) ;
+}
+
+bool
+NSSimpleNewDrugDlg::wasAConnectedIssue(string sConcernNode)
+{
+  return isAConnected(sConcernNode, &_aLinkedIssues) ;
+}
+
+bool
+NSSimpleNewDrugDlg::isAConnected(string sConcernNode, VecteurString* pLinkArray)
+{
+  if (((VecteurString*) NULL == pLinkArray) || pLinkArray->empty())
+    return false ;
+
+  return pLinkArray->ItemDansUnVecteur(sConcernNode) ;
+}
+
+void
+NSSimpleNewDrugDlg::addConnectedIssue(string sConcernNode)
+{
+  if (string("") == sConcernNode)
+    return ;
+
+  if (isAConnectedIssue(sConcernNode))
+    return ;
+
+  _aUpdatedLinkedIssues.AddString(sConcernNode) ;
+}
+
+void
+NSSimpleNewDrugDlg::updateConnectedIssues(string sDrugNode)
+{
+  if (string("") == sDrugNode)
+    return ;
+
+  // The new list of connected issues is empty
+  //
+  if (_aUpdatedLinkedIssues.empty())
+  {
+    // If it was already the case, just leave
+    //
+    if (_aLinkedIssues.empty())
+      return ;
+
+    // if some concerns were already connected, we have to unconnect them
+    //
+    EquiItemIter it = _aLinkedIssues.begin() ;
+    for ( ; _aLinkedIssues.end() != it ; it++)
+      UnconnectIssue(sDrugNode, **it) ;
+  }
+
+  // Connect new linked concerns and unconnect no longer linked ones
+  //
+  EquiItemIter itNew = _aUpdatedLinkedIssues.begin() ;
+  for ( ; _aUpdatedLinkedIssues.end() != itNew ; itNew++)
+    if (false == wasAConnectedIssue(**itNew))
+      ConnectIssue(sDrugNode, **itNew) ;
+
+  EquiItemIter itOld = _aLinkedIssues.begin() ;
+  for ( ; _aLinkedIssues.end() != itOld ; itOld++)
+    if (false == isAConnectedIssue(**itOld))
+      UnconnectIssue(sDrugNode, **itOld) ;
+}
+
+void
+NSSimpleNewDrugDlg::ConnectIssue(string sDrugNode, string sConcernNode)
+{
+  if (string("") == sConcernNode)
+    return ;
+
+  NSLinkManager* pGraphe = pContexte->getPatient()->getGraphPerson()->getLinkManager() ;
+
+	pGraphe->etablirLien(sDrugNode, NSRootLink::drugOf, sConcernNode) ;
+}
+
+void
+NSSimpleNewDrugDlg::UnconnectIssue(string sDrugNode, string sConcernNode)
+{
+  if (string("") == sConcernNode)
+    return ;
+
+  NSLinkManager* pGraphe = pContexte->getPatient()->getGraphPerson()->getLinkManager() ;
+
+	pGraphe->detruireLien(sDrugNode, NSRootLink::drugOf, sConcernNode) ;
 }
 
 void
@@ -3481,7 +4066,7 @@ NSSimpleNewDrugDlg::searchInBdm(NSBdmDriver::BAMTABLETYPE iSearchBy)
   if ((IDOK != iExecReturn) || (string("") == sLexicode))
     return ;
 
-  pType->setLabel(sLexicode) ;
+  _pType->setLabel(sLexicode) ;
 
   ExecutedAfterDrugSelection() ;
 }
@@ -3495,36 +4080,36 @@ try
 {
   // on récupère d'abord un éventuel élément lexique sélectionné par les flêches
   // Le Return n'envoie pas d'EvKeyDown et appelle directement CmOk
-  if (pType->getDico()->getDicoDialog()->EstOuvert())
-    pType->getDico()->getDicoDialog()->InsererElementLexique() ;
+  if (_pType->getDico()->getDicoDialog()->EstOuvert())
+    _pType->getDico()->getDicoDialog()->InsererElementLexique() ;
 
-	if (pUnitePrise->getDico()->getDicoDialog()->EstOuvert())
-    pUnitePrise->getDico()->getDicoDialog()->InsererElementLexique() ;
+	if (_pUnitePrise->getDico()->getDicoDialog()->EstOuvert())
+    _pUnitePrise->getDico()->getDicoDialog()->InsererElementLexique() ;
 
   string sTL = string("") ;
 
   // Ne pas accepter les textes libres
-  if (string("£?????") == pType->sCode)
+  if (string("£?????") == _pType->getCode())
   {
     if (false == pContexte->getEpisodus()->bAllowFreeTextLdV)
     {
     	string sErrorTxt = pContexte->getSuperviseur()->getText("drugDialogErrors", "freeTextNotAllowedForTreatment") ;
       erreur(sErrorTxt.c_str(), standardError, 0, GetHandle()) ;
-      pType->SetFocus() ;
+      _pType->SetFocus() ;
       return ;
     }
   }
 
-	if (string("£?????") == pUnitePrise->sCode)
+	if (string("£?????") == _pUnitePrise->getCode())
   {
-    string sLabel = pUnitePrise->getLabel() ;
+    string sLabel = _pUnitePrise->getLabel() ;
     NSPatPathoArray pptTest(pContexte->getSuperviseur()) ;
     BuildCycleTree(&pptTest) ;
     if ((string("") != sLabel) || (false == pptTest.empty()))
     {
   	  string sErrorTxt = pContexte->getSuperviseur()->getText("drugDialogErrors", "freeTextNotAllowedForPrescriptionUnit") ;
       erreur(sErrorTxt.c_str(), standardError, 0, GetHandle()) ;
-      pUnitePrise->SetFocus() ;
+      _pUnitePrise->SetFocus() ;
     }
     return ;
   }
@@ -3565,7 +4150,7 @@ NSSimpleNewDrugDlg::CmCancel()
 void
 NSSimpleNewDrugDlg::switchToComplexMode()
 {
-	bMustSwitchToComplexMode = true ;
+	_bMustSwitchToComplexMode = true ;
 
   BuildPatpatho() ;
 
@@ -3643,7 +4228,7 @@ try
   //
   // Ne pas accepter les textes libres
   //
-  if (pType->sCode == string("£?????"))
+  if (pType->getCode() == string("£?????"))
   {
     if (false == pContexte->getEpisodus()->bAllowFreeTextLdV)
     {
@@ -3651,17 +4236,12 @@ try
       pType->SetFocus() ;
       return ;
     }
-
-    int iBuffLen = pType->GetTextLen() ;
-    char far* szBuff = new char[iBuffLen+1] ;
-    pType->GetText(szBuff, iBuffLen+1) ;
-    pNoeud->setTexteLibre(string(szBuff)) ;
-    delete[] szBuff ;
+    pNoeud->setTexteLibre(pType->getRawText()) ;
   }
   else
     pNoeud->setTexteLibre("") ;
 
-  pNoeud->setLexique(pType->sCode) ;
+  pNoeud->setLexique(pType->getCode()) ;
   pNoeud->setComplement(string("")) ;
 
 	CloseWindow(IDOK) ;
@@ -3813,25 +4393,25 @@ try
   // si on dans le cas où "dans" est cochée
   else if (pRDans->GetCheck() == BF_CHECKED)
   {
-    if (pNbJours->dValeur < 1)
+    if (pNbJours->_dValeur < 1)
     {
       erreur("La préoccupation doit durer au moins 1 jour.", standardError, 0, GetHandle());
       return;
     }
     ptpsFin->takeTime() ;
-    ptpsFin->ajouteJours(pNbJours->dValeur) ;
+    ptpsFin->ajouteJours(pNbJours->_dValeur) ;
   }
 
   // si on est dans le cas où "durée" est cochée
   else if (pRDuree->GetCheck() == BF_CHECKED)
   {
-    if (pNbJours->dValeur < 1)
+    if (pNbJours->_dValeur < 1)
     {
       erreur("La préoccupation doit durer au moins 1 jour.", standardError, 0, GetHandle());
       return;
     }
     ptpsFin->initFromDateHeure(sDDeb) ;
-    ptpsFin->ajouteJours(pNbJours->dValeur) ;
+    ptpsFin->ajouteJours(pNbJours->_dValeur) ;
   }
 
   // si on est dans le cas où "le" est cochée
@@ -4270,7 +4850,7 @@ try
 	//
 	// Ne pas accepter les textes libres
 	//
-	if (pType->sCode == string("£?????"))
+	if (pType->getCode() == string("£?????"))
 	{
 		erreur("Il faut choisir un code lexique et non pas du texte libre ", standardError, 0, GetHandle()) ;
 		pType->SetFocus() ;
@@ -4299,7 +4879,7 @@ try
 	{
   	NVLdVTemps  tDateFin ;
     tDateFin.takeTime() ;
-    tDateFin.ajouteJours(pNbJours->dValeur) ;
+    tDateFin.ajouteJours(pNbJours->_dValeur) ;
     sDFin = tDateFin.donneDateHeure() ;
 	}
 
@@ -4308,7 +4888,7 @@ try
 	{
   	NVLdVTemps  tDateFin ;
     tDateFin.initFromDate(sDDeb) ;
-    tDateFin.ajouteJours(pNbJours->dValeur) ;
+    tDateFin.ajouteJours(pNbJours->_dValeur) ;
     sDFin = tDateFin.donneDateHeure() ;
 	}
 
@@ -4320,7 +4900,7 @@ try
 	// Le titre de la préoccupation a changé
 	// Health concern's title changed
 	//
-	if (pType->sCode != sLexique)
+	if (pType->getCode() != sLexique)
 
 
 	// !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
@@ -4378,13 +4958,13 @@ try
               	pRepere = *iter ;
 
               Message CodeMsg("") ;
-              CodeMsg.SetLexique(pType->sCode) ;
+              CodeMsg.SetLexique(pType->getCode()) ;
               int iDecalLigne ;
               if (PptNoyau.end() != iter)
               	iDecalLigne = 0 ;
               else
               	iDecalLigne = 1 ;
-              PptNoyau.ajoutePatho(iter, pType->sCode, &CodeMsg, colonneMere+1,
+              PptNoyau.ajoutePatho(iter, pType->getCode(), &CodeMsg, colonneMere+1,
                                                    iDecalLigne, true) ;
               //
               // Date de début
@@ -5495,14 +6075,14 @@ try
     return ;
   }
 
-  // Ne pas accepter les textes libres  if (pType->sCode == string("£?????"))
+  // Ne pas accepter les textes libres  if (pType->getCode() == string("£?????"))
   {
     erreur("Il faut choisir un code lexique et non pas du texte libre ", standardError, 0, GetHandle()) ;
     pType->SetFocus() ;
     return ;
   }
 
-  *pTypeDocum = pType->sCode ;
+  *pTypeDocum = pType->getCode() ;
 
 /*
   NSPatPathoArray *pPPT     = new NSPatPathoArray(pContexte) ;
@@ -5544,7 +6124,6 @@ NSNewTrt::CmCancel()
     *pTypeDocum = "";
     Destroy(IDCANCEL);
 }
-
 
 // -----------------------------------------------------------------
 //
@@ -6056,14 +6635,14 @@ try
   	}
 
   	// Ne pas accepter les textes libres
-  	if (pType->sCode == string("£?????"))
+  	if (pType->getCode() == string("£?????"))
   	{
   		erreur("Il faut choisir un code lexique et non pas du texte libre ", standardError, 0, GetHandle()) ;
     	pType->SetFocus() ;
     	return ;
   	}
 
-  	pCurve->setItemValue(pType->sCode) ;
+  	pCurve->setItemValue(pType->getCode()) ;
   }
 
   // idem for Unit
@@ -6075,7 +6654,7 @@ try
   }
 
   // Ne pas accepter les textes libres
-  if (pUnit->sCode == string("£?????"))
+  if (pUnit->getCode() == string("£?????"))
   {
   	erreur("Il faut choisir un code lexique et non pas du texte libre ", standardError, 0, GetHandle()) ;
     pUnit->SetFocus() ;
@@ -6087,7 +6666,7 @@ try
   //
   killControlFocusOnReturnClose() ;
 
-  pCurve->setUnit(pUnit->sCode) ;
+  pCurve->setUnit(pUnit->getCode()) ;
 
   // ------- Axis group
   //
@@ -6477,7 +7056,7 @@ void
 NSConvocDlg::ExecutedAfterDelayChoiceDate()
 {
 	pNbJours->donneValeur() ;
-	int iTrtDurationValue = (int) pNbJours->dValeur ;
+	int iTrtDurationValue = (int) pNbJours->_dValeur ;
 	if (iTrtDurationValue <= 0)
 		return ;
 
@@ -6579,6 +7158,302 @@ void
 NSValueInfoDlg::CmCancel()
 {
 	Destroy(IDCANCEL) ;
+}
+
+//
+// ------------ NSDrugHistoryDlg ------------
+//
+
+DEFINE_RESPONSE_TABLE1(NSDrugHistoryDlg, NSUtilDialog)
+  EV_COMMAND(IDOK,     CmOk),
+  EV_COMMAND(IDCANCEL, CmCancel),
+END_RESPONSE_TABLE ;
+
+NSDrugHistoryDlg::NSDrugHistoryDlg(TWindow* pView, NSContexte *pCtx)
+                 :NSUtilDialog((TWindow*) pView, pCtx, (pCtx->getBamType() == NSContexte::btNone) ? "DRUG_HISTORY_CTRL" : "DRUG_HISTORY_BAM", pCtx->GetMainWindow()->GetModule())
+{
+  _pDrugText = new OWL::TStatic(this, CONCEPT_TEXT) ;
+  _pDrugEdit = new NSUtilLexique(pContexte, this, CONCEPT_EDIT, pContexte->getDico()) ;
+
+  if (pContexte->getBamType() != NSContexte::btNone)
+  {
+    _pAtcText = new OWL::TStatic(this, ATC_TEXT) ;
+    _pAtcCode = new NSEditBdm(pCtx, this, ATC_EDIT, NSBdmDriver::bamTableATC) ;
+  }
+
+  _sLexiqCode  = string("") ;
+  _sLexiqLabel = string("") ;
+  _sAtcCode    = string("") ;
+  _sAtcLabel   = string("") ;
+}
+
+NSDrugHistoryDlg::~NSDrugHistoryDlg()
+{
+  delete _pDrugText ;
+  delete _pDrugEdit ;
+
+  if (_pAtcText)
+    delete _pAtcText ;
+  if (_pAtcCode)
+    delete _pAtcCode ;
+}
+
+void
+NSDrugHistoryDlg::SetupWindow()
+{
+  NSUtilDialog::SetupWindow() ;
+
+  NSSuper* pSuper = pContexte->getSuperviseur() ;
+
+  string sText = pSuper->getText("drugHistory", "concept") ;
+  _pDrugText->SetCaption(sText.c_str()) ;
+  sText = pSuper->getText("drugHistory", "AtcCode") ;
+  _pAtcText->SetCaption(sText.c_str()) ;
+}
+
+string
+NSDrugHistoryDlg::getDrugCode()
+{
+  if ((NSUtilLexique*) NULL == _pDrugEdit)
+    return string("") ;
+
+  return _pDrugEdit->getCode() ;
+}
+
+string
+NSDrugHistoryDlg::getDrugLabel()
+{
+  if ((NSUtilLexique*) NULL == _pDrugEdit)
+    return string("") ;
+
+  return _pDrugEdit->getLabel() ;
+}
+
+string
+NSDrugHistoryDlg::getAtcCode()
+{
+  if ((NSEditBdm*) NULL == _pAtcCode)
+    return string("") ;
+
+  return _pAtcCode->getCode() ;
+}
+
+string
+NSDrugHistoryDlg::getAtcLabel()
+{
+  if ((NSEditBdm*) NULL == _pAtcCode)
+    return string("") ;
+
+  return _pAtcCode->getLabel() ;
+}
+
+void
+NSDrugHistoryDlg::CmOk()
+{
+  NSUtilDialog::CmOk() ;
+}
+
+void
+NSDrugHistoryDlg::CmCancel()
+{
+  NSUtilDialog::CmCancel() ;
+}
+
+// -----------------------------------------------------------------
+//
+//  Méthodes de NSOpenMultiDocsDlg
+//
+// -----------------------------------------------------------------
+// -----------------------------------------------------------------
+DEFINE_RESPONSE_TABLE1(NSSelectIssuesDlg, NSUtilDialog)
+    EV_LV_DISPINFO_NOTIFY(IDC_LISTVIEW_ISSUES, LVN_GETDISPINFO, DispInfoIssuesList),
+    EV_COMMAND(IDOK,            CmOk),
+    EV_COMMAND(IDCANCEL,        CmCancel),
+END_RESPONSE_TABLE;
+
+NSSelectIssuesDlg::NSSelectIssuesDlg(TWindow* pPere, NSContexte* pCtx, ArrayConcern* pIssues, int* pSelectedIssues, int iSelectedCount)
+                  :NSUtilDialog(pPere, pCtx, "SELECT_ISSUES")
+{
+try
+{
+  _pIssuesArray    = pIssues ;
+  _pSelectedIssues = pSelectedIssues ;
+  _iSelectedCount  = iSelectedCount ;
+  _pIssuesList     = new NSIssuesListWindow(this, IDC_LISTVIEW_ISSUES) ;
+}
+catch (...)
+{
+  erreur("Exception NSSelectIssuesDlg ctor.",  standardError, 0) ;
+}
+}
+
+NSSelectIssuesDlg::~NSSelectIssuesDlg()
+{
+  delete _pIssuesList ;
+}
+
+void
+NSSelectIssuesDlg::SetupWindow()
+{
+  // ListView_SetExtendedListViewStyle(pObjectsList->HWindow, LVS_EX_FULLROWSELECT) ;
+
+  NSUtilDialog::SetupWindow() ;
+
+  InitIssuesList() ;
+  DisplayIssuesList() ;
+
+  if (false == _pIssuesArray->empty())
+    _pIssuesList->SetSelIndexes(_pSelectedIssues, _iSelectedCount, true /* bool select */) ;
+}
+
+void
+NSSelectIssuesDlg::dblClickOnIssue()
+{
+  CmOk() ;
+}
+
+void
+NSSelectIssuesDlg::CmOk()
+{
+	if (_pIssuesArray->empty())
+		return ;
+
+	_iSelectedCount = _pIssuesList->GetSelIndexes(_pSelectedIssues, _pIssuesArray->size()) ;
+
+	TDialog::CmOk() ;
+}
+
+void
+NSSelectIssuesDlg::CmCancel()
+{
+  TDialog::CmCancel() ;
+}
+
+void
+NSSelectIssuesDlg::InitIssuesList()
+{
+  TListWindColumn colExam("Examen", 300, TListWindColumn::Left, 0) ;
+  _pIssuesList->InsertColumn(0, colExam) ;
+	TListWindColumn colNombre("Date", 100, TListWindColumn::Left, 1) ;
+  _pIssuesList->InsertColumn(1, colNombre) ;
+}
+
+void
+NSSelectIssuesDlg::DisplayIssuesList()
+{
+	_pIssuesList->DeleteAllItems() ;
+  if (_pIssuesArray->empty())
+    return ;
+
+  char cLibExam[255] = "" ;
+  string sCodeExam, sLibExam ;
+
+  ArrayConcernIter concernIt = _pIssuesArray->end() ;
+  do
+  {
+    concernIt-- ;
+
+    strcpy(cLibExam, (*concernIt)->getTitle().c_str()) ;
+    TListWindItem Item(cLibExam, 0) ;
+    _pIssuesList->InsertItem(Item) ;
+  }
+  while (_pIssuesArray->begin() != concernIt) ;
+}
+
+void
+NSSelectIssuesDlg::DispInfoIssuesList(TLwDispInfoNotify& dispInfo)
+{
+	if (_pIssuesArray->empty())
+  	return ;
+
+  TListWindItem& dispInfoItem = *(TListWindItem*)&dispInfo.item ;
+  int index = dispInfoItem.GetIndex() ;
+
+	// const int 	    BufLen = 255;
+	// static char     buffer[BufLen];
+	// char			cCodeExam[80];
+	// int			    occur;
+
+	ArrayConcernIter concernIt = _pIssuesArray->begin() ;
+	for (int i = 0 ; (i < index) && (_pIssuesArray->end() != concernIt) ; i++, concernIt++) ;
+    if (concernIt == _pIssuesArray->end())
+        return ;
+
+	string sLang = string("") ;
+	if (pContexte)
+		sLang = pContexte->getUserLanguage() ;
+
+	// Affiche les informations en fonction de la colonne
+
+	switch (dispInfoItem.GetSubItem())
+	{
+  	case 1: // nombre d'examens
+
+    	string sDate = (*concernIt)->_tDateOuverture.donneDate() ;
+      sDate = donne_date(sDate, sLang) ;
+      dispInfoItem.SetText(sDate.c_str()) ;
+      break ;
+	}
+
+	return ;
+}
+
+//***************************************************************************
+//
+//  					Méthodes de NSIssuesListWindow//
+//***************************************************************************
+DEFINE_RESPONSE_TABLE1(NSIssuesListWindow, TListWindow)   EV_WM_LBUTTONDBLCLK,
+   // EV_WM_SETFOCUS,
+END_RESPONSE_TABLE;
+
+NSIssuesListWindow::NSIssuesListWindow(NSSelectIssuesDlg* parent, int id, TModule* module)
+                   :TListWindow((TWindow *) parent, id, module)
+{
+  _pView = parent ;
+  _iRes  = id ;
+  Attr.Style |= LVS_REPORT | LVS_SHOWSELALWAYS ;
+  // Attr.ExStyle |= WS_EX_NOPARENTNOTIFY;
+}
+void
+NSIssuesListWindow::SetupWindow()
+{
+  ListView_SetExtendedListViewStyle(this->HWindow, LVS_EX_FULLROWSELECT) ;
+
+  TListWindow::SetupWindow() ;
+}
+
+//---------------------------------------------------------------------------
+//  Fonction de réponse au double-click
+//---------------------------------------------------------------------------
+void
+NSIssuesListWindow::EvLButtonDblClk(uint modKeys, NS_CLASSLIB::TPoint& point)
+{
+  TLwHitTestInfo info(point) ;
+
+  HitTest(info) ;
+  if (info.GetFlags() & LVHT_ONITEM)    _pView->CmOk() ;
+}
+
+//---------------------------------------------------------------------------//  Retourne l'index du premier item sélectionné
+//---------------------------------------------------------------------------
+int
+NSIssuesListWindow::IndexItemSelect()
+{
+	int count = GetItemCount() ;
+  int index = -1 ;
+
+	for (int i = 0 ; i < count ; i++)  	if (GetItemState(i, LVIS_SELECTED))
+    {
+    	index = i ;
+      break ;
+    }
+
+	return index ;}
+
+void
+NSIssuesListWindow::EvSetFocus(HWND hWndLostFocus)
+{
+  _pView->EvSetFocus(hWndLostFocus) ;
 }
 
 // fin de nsldvvar.cpp

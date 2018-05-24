@@ -33,13 +33,45 @@ DrugSortByPriceInf(const NsSelectableDrug *pObj1, const NsSelectableDrug *pObj2)
   if (((NsSelectableDrug*) NULL == pObj1) || ((NsSelectableDrug*) NULL == pObj2))
     return false ;
 
-	return (pObj1->getPrice() < pObj2->getPrice()) ;
+  double dMinFor1 = StringToDouble(pObj1->getMinUcdRangePrice()) ;
+  double dMaxFor1 = StringToDouble(pObj1->getMaxUcdRangePrice()) ;
+
+  double dMinFor2 = StringToDouble(pObj2->getMinUcdRangePrice()) ;
+  double dMaxFor2 = StringToDouble(pObj2->getMaxUcdRangePrice()) ;
+
+  if (dMaxFor1 < dMinFor2)
+    return true ;
+
+  if (dMinFor1 > dMaxFor2)
+    return false ;
+
+  if (dMinFor1 < dMinFor2)
+    return true ;
+
+	return false ;
 }boolDrugSortByPriceSup(const NsSelectableDrug *pObj1, const NsSelectableDrug *pObj2)
 {
   if (((NsSelectableDrug*) NULL == pObj1) || ((NsSelectableDrug*) NULL == pObj2))
     return false ;
 
 	return (pObj1->getPrice() > pObj2->getPrice()) ;
+
+  double dMinFor1 = StringToDouble(pObj1->getMinUcdRangePrice()) ;
+  double dMaxFor1 = StringToDouble(pObj1->getMaxUcdRangePrice()) ;
+
+  double dMinFor2 = StringToDouble(pObj2->getMinUcdRangePrice()) ;
+  double dMaxFor2 = StringToDouble(pObj2->getMaxUcdRangePrice()) ;
+
+  if (dMaxFor2 < dMinFor1)
+    return true ;
+
+  if (dMinFor2 > dMaxFor1)
+    return false ;
+
+  if (dMinFor2 < dMinFor1)
+    return true ;
+
+	return false ;
 }
 
 // -----------------------------------------------------------------
@@ -250,14 +282,12 @@ NSDrugResearchListWindow::DispInfoListe(TLwDispInfoNotify& dispInfo)
   int index = dispInfoItem.GetIndex() ;
   int iCol  = dispInfoItem.GetSubItem() ;
 
-  if (index >= _aDrugs.size())
+  if (index >= (int) _aDrugs.size())
     return ;
 
   NsSelectableDrug* pDrug = _aDrugs[index] ;
   if ((NsSelectableDrug*) NULL == pDrug)
     return ;
-
-  static char szBuffer[1024] ;
 
   string sText = string("") ;
 
@@ -458,4 +488,5 @@ NSDrugsRechEdit::EvKeyUp(uint key, uint repeatCount, uint flags)
 }
 
 */
+
 

@@ -1,5 +1,5 @@
-#ifndef __NSPATHOR_H
-#define __NSPATHOR_H
+#ifndef __NSPATHORBDM_H
+#define __NSPATHORBDM_H
 
 class NSEditBdm ;
 
@@ -116,5 +116,5 @@ class _NSOUTILCLASSE ChoixBdmDialog : public TDialog
 	DECLARE_RESPONSE_TABLE(ChoixBdmDialog) ;
 };
 
-#endif
+#endif // __NSPATHORBDM_H
 

@@ -55,6 +55,8 @@ class _NSBBCLASSE NSEditDicoGlobal : public OWL::TEdit, public NSRoot
     void    EndortToi() ;
     bool    canWeClose() ;
 
+    string  getRawText() ;
+
     bool    isEmpty() ;
 
     void    AcceptToLooseFocus() { _bYouMustAcceptToLooseFocus = true ; }

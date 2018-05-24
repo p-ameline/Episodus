@@ -1033,7 +1033,7 @@ NSPubliEdit::EvChar(uint key, uint repeatCount, uint flags)
 {
 	UINT 		correspSelect ;
 
-	PubliCorrespDialog* pPCDialog = dynamic_cast<PubliCorrespDialog*>(pNSUtilDialog) ;	NSPersonInfo* pCorrespSelect = pPCDialog->getSelectedPerson() ;
+	PubliCorrespDialog* pPCDialog = dynamic_cast<PubliCorrespDialog*>(_pNSUtilDialog) ;	NSPersonInfo* pCorrespSelect = pPCDialog->getSelectedPerson() ;
 	NSUtilEdit::EvChar(key,repeatCount,flags) ;
 	if (IDC_PUBLIER_NBEXPL == iResId)	{
   	// GetText(sNbExpl, WF_NB_PUBLI_LEN + 1) ;

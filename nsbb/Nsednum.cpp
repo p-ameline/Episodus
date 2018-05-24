@@ -30,8 +30,8 @@ END_RESPONSE_TABLE;
 NSUtilEdit::NSUtilEdit(NSContexte* pCtx, NSUtilDialog* pUtilDialog, int resId, int iTextLen, bool bReturn, TModule* module)
            :TEdit((TWindow*)pUtilDialog, resId, iTextLen+1, module), NSRoot(pCtx)
 {
-	pNSUtilDialog = pUtilDialog ;
-  bIntercepte   = bReturn ;        // permet de shunter le 1er Return ou Tab
+	_pNSUtilDialog = pUtilDialog ;
+  _bIntercepte   = bReturn ;        // permet de shunter le 1er Return ou Tab
 
   initCommonData() ;
 }
@@ -39,8 +39,8 @@ NSUtilEdit::NSUtilEdit(NSContexte* pCtx, NSUtilDialog* pUtilDialog, int resId, i
 NSUtilEdit::NSUtilEdit(NSContexte* pCtx, NSUtilDialog* pUtilDialog, int Id, const char far* text, int x, int y, int w, int h, int iTextLen, bool multiline, bool bReturn, TModule* module)
            :TEdit((TWindow*)pUtilDialog, Id, text, x, y, w, h, iTextLen+1, multiline, module), NSRoot(pCtx)
 {
-	pNSUtilDialog = pUtilDialog ;
-  bIntercepte   = bReturn ;        // permet de shunter le 1er Return ou Tab
+	_pNSUtilDialog = pUtilDialog ;
+  _bIntercepte   = bReturn ;        // permet de shunter le 1er Return ou Tab
 
   initCommonData() ;
 }
@@ -48,17 +48,17 @@ NSUtilEdit::NSUtilEdit(NSContexte* pCtx, NSUtilDialog* pUtilDialog, int Id, cons
 void
 NSUtilEdit::initCommonData()
 {
-	if (pNSUtilDialog)
-		pNSUtilDialog->ReferenceControl(this) ;
+	if (_pNSUtilDialog)
+		_pNSUtilDialog->ReferenceControl(this) ;
 
 	_LostFocusFunctor = NULL ;
 
-	bWinStd = false ;
-	if (pNSUtilDialog && pNSUtilDialog->pContexte)
+	_bWinStd = false ;
+	if (_pNSUtilDialog && _pNSUtilDialog->pContexte)
 	{
-  	NSContexte* pContexte = pNSUtilDialog->pContexte ;
+  	NSContexte* pContexte = _pNSUtilDialog->pContexte ;
     if (pContexte && pContexte->getPredi() && pContexte->getPredi()->_bReturnCloses)
-    	bWinStd = true ;
+    	_bWinStd = true ;
 	}
 }
 
@@ -103,7 +103,7 @@ NSUtilEdit::EvKeyUp(uint key, uint repeatcount, uint flags)
 {
   // Gestion windows standard
   // Windows standard behaviour
-  if (bWinStd)
+  if (_bWinStd)
   {
     // return TEdit::EvKeyUp(key, repeatcount, flags) ;
     TEdit::EvKeyUp(key, repeatcount, flags) ;
@@ -119,10 +119,10 @@ NSUtilEdit::EvKeyUp(uint key, uint repeatcount, uint flags)
       //demander à la boîte de dialogue mère d'activer le controle
       //suivant pControle sinon le premier
       //
-      if (bIntercepte)
-        pNSUtilDialog->ActiveControlSuivant(this) ;
+      if (_bIntercepte)
+        _pNSUtilDialog->ActiveControlSuivant(this) ;
       else
-        bIntercepte = true ;
+        _bIntercepte = true ;
       break ;
 
     //?????????????? PENSER A LE FAIRE    /*
@@ -142,16 +142,16 @@ NSUtilEdit::EvKeyUp(uint key, uint repeatcount, uint flags)
       //demander à la boîte de dialogue mère d'activer le controle
       //suivant pControle sinon le premier
       //
-      if (false == bIntercepte)
-        bIntercepte = true ;
-      pNSUtilDialog->ActiveControlSuivant(this) ;
+      if (false == _bIntercepte)
+        _bIntercepte = true ;
+      _pNSUtilDialog->ActiveControlSuivant(this) ;
       break ;
 
     default       :
       if (VK_F1 == key)
-        pNSUtilDialog->CmHelp() ;
-      if (false == bIntercepte)
-        bIntercepte = true ;
+        _pNSUtilDialog->CmHelp() ;
+      if (false == _bIntercepte)
+        _bIntercepte = true ;
       TEdit::EvKeyUp(key, repeatcount, flags) ;
   }
 }
@@ -162,7 +162,7 @@ NSUtilEdit::EvKeyUp(uint key, uint repeatcount, uint flags)
 void
 NSUtilEdit::EvChar(uint key, uint repeatCount, uint flags)
 {
-	if ((false == bWinStd) && ((VK_RETURN == key) || (VK_TAB == key)))
+	if ((false == _bWinStd) && ((VK_RETURN == key) || (VK_TAB == key)))
 		//Process this message to avoid message beeps.
 		return ;
 	else
@@ -174,7 +174,7 @@ uint
 NSUtilEdit::EvGetDlgCode(MSG far* /* msg */)
 {
 	uint retVal = (uint)DefaultProcessing() ;
-	if (false == bWinStd)
+	if (false == _bWinStd)
 		retVal |= DLGC_WANTALLKEYS ;
 	return retVal ;
 }
@@ -209,7 +209,7 @@ END_RESPONSE_TABLE;
 NSUtilEdit2::NSUtilEdit2(NSContexte* pCtx, NSUtilDialog* pUtilDialog, int resId, int iTextLen)
             :NSUtilEdit(pCtx, pUtilDialog, resId, iTextLen)
 {
-	ciTexteLen = iTextLen + 1 ;
+	_ciTexteLen = iTextLen + 1 ;
 }
 
 //
@@ -231,18 +231,18 @@ NSUtilEdit2::SetupWindow()
 void
 NSUtilEdit2::GetText(string& sResultText)
 {
-  int iTextLen = ciTexteLen ;
+  int iTextLen = _ciTexteLen ;
   if (iTextLen <= 1)
     iTextLen = GetTextLen() + 1 ;
 
   char far *texte = new char[iTextLen] ;
 
   TEdit::GetText(texte, iTextLen) ;
-  sTexte = string(texte) ;
+  _sTexte = string(texte) ;
 
   delete[] texte ;
 
-  sResultText = sTexte ;
+  sResultText = _sTexte ;
 }
 
 // ----------------------------------------------------------------------
@@ -298,7 +298,7 @@ voidNSMultiEdit::EvChar(uint key, uint repeatCount, uint flags)
 // ----------------------------------------------------------------------
 NSFilterValidator::NSFilterValidator(NSContexte* pCtx, string sCharSet)                  :TFilterValidator(sCharSet.c_str()), NSRoot(pCtx)
 {
-	sValidator = sCharSet ;
+	_sValidator = sCharSet ;
 }
 
 NSFilterValidator::~NSFilterValidator()
@@ -312,7 +312,7 @@ NSFilterValidator::Error(TWindow* /* owner */)
 	char far msg[255] ;
 
 	// PRECONDITION(owner) ;
-	sprintf(msg, "Caractère non valide : CharSet = [%s].", sValidator.c_str()) ;
+	sprintf(msg, "Caractère non valide : CharSet = [%s].", _sValidator.c_str()) ;
 	string sCaption = string("Message ") + pContexte->getSuperviseur()->getAppName().c_str() ;
 	pContexte->GetMainWindow()->MessageBox(msg, sCaption.c_str(), MB_OK) ;
 }
@@ -331,22 +331,22 @@ NSEditNum::NSEditNum(NSContexte* pCtx, NSUtilDialog* pUtilDialog, int resId, int
 						string sValidator)
           :NSUtilEdit(pCtx, pUtilDialog, resId, iTextLen + 1)
 {
-	sContenuBrut      = string("") ;
-	sContenuTransfert = string("") ;
+	_sContenuBrut      = string("") ;
+	_sContenuTransfert = string("") ;
 
   //ParentNSEditNum  = (TWindow*)pNSUtilDialog;
-  dValeur = 0 ;
+  _dValeur = 0 ;
 
 	DisableTransfer() ;
   //
-  iDecimale = iDecimales ;
-	iMaxInput = iTextLen ;
+  _iDecimale = iDecimales ;
+	_iMaxInput = iTextLen ;
 
 	//
 	// Mise en place du validateur
 	//
-  pFilterValidator = new NSFilterValidator(pCtx, sValidator) ;
-  SetValidator(pFilterValidator) ;
+  _pFilterValidator = new NSFilterValidator(pCtx, sValidator) ;
+  SetValidator(_pFilterValidator) ;
 
   	/* if (iDecimale == 0)
    			SetValidator(new TFilterValidator("0-9"));*/
@@ -371,9 +371,9 @@ NSEditNum::~NSEditNum()
 void
 NSEditNum::setNum(string sNum)
 {
-	sContenuTransfert = sNum ;
+	_sContenuTransfert = sNum ;
   donneBrut() ;
-  SetText(sContenuBrut.c_str()) ;
+  SetText(_sContenuBrut.c_str()) ;
 }
 
 void
@@ -389,7 +389,7 @@ NSEditNum::MettreAJourValeur(string sContenu)
 	//
 	// Elaboration de sContenuTransfert
 	//
-  sContenuBrut = sContenu ;
+  _sContenuBrut = sContenu ;
   donneTransfert() ;
   donneValeur() ;
 }
@@ -426,28 +426,28 @@ NSEditNum::EvKillFocus(HWND hWndGetFocus)
 void
 NSEditNum::donneBrut()
 {
-  if (string("") == sContenuTransfert)
+  if (string("") == _sContenuTransfert)
   {
     //sContenuBrut = "0" + "," + string(iDecimale, '0');
-    sContenuBrut = string("") ;
+    _sContenuBrut = string("") ;
     return ;
   }
 
-	size_t iDecimalCharPos = sContenuTransfert.find('.') ;
+	size_t iDecimalCharPos = _sContenuTransfert.find('.') ;
 	//
 	// Pour les entiers, on supprime les '0' initiaux
 	//
 	if (NPOS == iDecimalCharPos)
 	{
-  	if (string("") == sContenuTransfert)
-    	sContenuBrut = string("") ;
+  	if (string("") == _sContenuTransfert)
+    	_sContenuBrut = string("") ;
     else
     {
-    	size_t i = sContenuTransfert.find_first_not_of('0') ;
+    	size_t i = _sContenuTransfert.find_first_not_of('0') ;
       if (NPOS == i)
-      	sContenuBrut = string("0") ;
+      	_sContenuBrut = string("0") ;
       else
-      	sContenuBrut = string(sContenuTransfert, i, strlen(sContenuTransfert.c_str())-i) ;
+      	_sContenuBrut = string(_sContenuTransfert, i, strlen(_sContenuTransfert.c_str())-i) ;
     }
     return ;
   }
@@ -455,13 +455,13 @@ NSEditNum::donneBrut()
 	// Pour les décimaux, on positionne d'abord la virgule
 	//
   string sDecimalSeparator = string(1, decimSepar) ;
-  if (pNSUtilDialog && pNSUtilDialog->pContexte)
-    sDecimalSeparator = pNSUtilDialog->pContexte->getSuperviseur()->getText("0localInformation", "decimalSeparator") ;
+  if (_pNSUtilDialog && _pNSUtilDialog->pContexte)
+    sDecimalSeparator = _pNSUtilDialog->pContexte->getSuperviseur()->getText("0localInformation", "decimalSeparator") ;
 
-  size_t iTransfertSize = strlen(sContenuTransfert.c_str()) ;
+  size_t iTransfertSize = strlen(_sContenuTransfert.c_str()) ;
 
-  string sIntValue = string(sContenuTransfert, 0, iDecimalCharPos) ;
-  string sDecValue = string(sContenuTransfert, iDecimalCharPos + 1, iTransfertSize - iDecimalCharPos - 1) ;
+  string sIntValue = string(_sContenuTransfert, 0, iDecimalCharPos) ;
+  string sDecValue = string(_sContenuTransfert, iDecimalCharPos + 1, iTransfertSize - iDecimalCharPos - 1) ;
 
   size_t i = sIntValue.find_first_not_of('0') ;
   if (NPOS == i)
@@ -469,7 +469,7 @@ NSEditNum::donneBrut()
   else
     sIntValue = string(sIntValue, i, strlen(sIntValue.c_str())-i) ;
 
-  sContenuBrut = sIntValue + sDecimalSeparator + sDecValue ;
+  _sContenuBrut = sIntValue + sDecimalSeparator + sDecValue ;
 
 /*
   size_t i = sContenuBrut.find_first_not_of('0') ;
@@ -491,55 +491,55 @@ NSEditNum::donneBrut()
 void
 NSEditNum::donneTransfert()
 {
-	strip(sContenuBrut) ;
+	strip(_sContenuBrut) ;
 
-	if ((string("") == sContenuBrut) || (!sContenuBrut.find_first_of("0123456789") == 0))
+	if ((string("") == _sContenuBrut) || (!_sContenuBrut.find_first_of("0123456789") == 0))
 	{
-  	sContenuTransfert = string("") ;
+  	_sContenuTransfert = string("") ;
     return ;
   }
 
   // Recherche du premier caract différent de '0'
   //
-  size_t k = sContenuBrut.find_first_not_of('0') ;
+  size_t k = _sContenuBrut.find_first_not_of('0') ;
   //
   // ATTENTION : on suppose que 0 = rien
   //
   if (NPOS == k)
   {
-  	sContenuTransfert = string("") ;
+  	_sContenuTransfert = string("") ;
     return ;
   }
 
   string sDecimalSeparator = string(1, decimSepar) ;
-	if (pNSUtilDialog && pNSUtilDialog->pContexte)
-		sDecimalSeparator = pNSUtilDialog->pContexte->getSuperviseur()->getText("0localInformation", "decimalSeparator") ;
-  size_t i = sContenuTransfert.find(sDecimalSeparator) ;
+	if (_pNSUtilDialog && _pNSUtilDialog->pContexte)
+		sDecimalSeparator = _pNSUtilDialog->pContexte->getSuperviseur()->getText("0localInformation", "decimalSeparator") ;
+  size_t i = _sContenuTransfert.find(sDecimalSeparator) ;
 
   // on teste si on a 0,XX (il ne faut pas ôter le 0)
   // ou 00035,XX (il faut ôter les 0 initiaux)
   if (i == k)
   {
   	if (0 == k)
-    	sContenuTransfert = string("0") + sContenuBrut ;
+    	_sContenuTransfert = string("0") + _sContenuBrut ;
     else
-    	sContenuTransfert = string(sContenuBrut, k-1, strlen(sContenuBrut.c_str())-k+1) ;
+    	_sContenuTransfert = string(_sContenuBrut, k-1, strlen(_sContenuBrut.c_str())-k+1) ;
   }
 	else
-		sContenuTransfert = string(sContenuBrut, k, strlen(sContenuBrut.c_str())-k) ;
+		_sContenuTransfert = string(_sContenuBrut, k, strlen(_sContenuBrut.c_str())-k) ;
 
 	// Replace local decimal separator by '.'
 	if (NPOS != i)
 	{
 		size_t iSeparLen = strlen(sDecimalSeparator.c_str()) ;
-    size_t iTextLen  = strlen(sContenuTransfert.c_str()) ;
+    size_t iTextLen  = strlen(_sContenuTransfert.c_str()) ;
 
 		if (0 == i)
-    	sContenuTransfert = string("0") + string(".") + string(sContenuTransfert, iSeparLen, iTextLen - iSeparLen) ;
+    	_sContenuTransfert = string("0") + string(".") + string(_sContenuTransfert, iSeparLen, iTextLen - iSeparLen) ;
     else if (i + iSeparLen >= iTextLen)
-			sContenuTransfert = string(sContenuTransfert, 0, i) ;
+			_sContenuTransfert = string(_sContenuTransfert, 0, i) ;
     else
-    	sContenuTransfert = string(sContenuTransfert, 0, i) + string(".") + string(sContenuTransfert, i + iSeparLen, iTextLen - i - iSeparLen) ;
+    	_sContenuTransfert = string(_sContenuTransfert, 0, i) + string(".") + string(_sContenuTransfert, i + iSeparLen, iTextLen - i - iSeparLen) ;
   }
 }
 
@@ -554,11 +554,11 @@ NSEditNum::donneTransfert()
 void
 NSEditNum::donneValeur()
 {
-	dValeur = 0 ;
-	if (string("") == sContenuTransfert)
+	_dValeur = 0 ;
+	if (string("") == _sContenuTransfert)
 		return ;
 
-	dValeur = StringToDouble(sContenuBrut) ;
+	_dValeur = StringToDouble(_sContenuBrut) ;
 }
 
 // ----------------------------------------------------------------------
@@ -613,24 +613,24 @@ NSUtilEditDate::SetupWindow()
   NSUtilEdit::SetupWindow() ;
 
   donneBrut() ;
-  SetText(sContenuBrut.c_str()) ;
+  SetText(_sContenuBrut.c_str()) ;
 }
 
 voidNSUtilEditDate::setDate(string sAAAAMMJJ)
 {
-  sContenuTransfert = sAAAAMMJJ ;
+  _sContenuTransfert = sAAAAMMJJ ;
   donneBrut() ;
-  SetText(sContenuBrut.c_str()) ;
+  SetText(_sContenuBrut.c_str()) ;
 }
 
 void
 NSUtilEditDate::getDate(string* pAAAAMMJJ)
 {
-	sContenuBrut = GetText() ;
+	_sContenuBrut = GetText() ;
 
 	donneTransfert() ;
 
-	*pAAAAMMJJ = sContenuTransfert ;
+	*pAAAAMMJJ = _sContenuTransfert ;
 }
 
 //---------------------------------------------------------------------------
@@ -642,31 +642,29 @@ NSUtilEditDate::getDate(string* pAAAAMMJJ)
 void
 NSUtilEditDate::donneBrut()
 {
-	int i;
-
   string sDateFormat = string("") ;
-  if (pNSUtilDialog && pNSUtilDialog->pContexte)
-    sDateFormat = pNSUtilDialog->pContexte->getSuperviseur()->getText("0localInformation", "dateFormat") ;
+  if (_pNSUtilDialog && _pNSUtilDialog->pContexte)
+    sDateFormat = _pNSUtilDialog->pContexte->getSuperviseur()->getText("0localInformation", "dateFormat") ;
 
-	sContenuBrut = sMask ;
-	sContenuBrut[2] = dateSeparationMARK ;
-	sContenuBrut[5] = dateSeparationMARK ;
+	_sContenuBrut = _sMask ;
+	_sContenuBrut[2] = dateSeparationMARK ;
+	_sContenuBrut[5] = dateSeparationMARK ;
 	//
 	// On passe de AAAAMMJJ à JJ/MM/AAAA
 	//
-  size_t iTransfertSize = strlen(sContenuTransfert.c_str()) ;
+  size_t iTransfertSize = strlen(_sContenuTransfert.c_str()) ;
 
-	if (string("") != sContenuTransfert)
+	if (string("") != _sContenuTransfert)
 	{
   	if (iTransfertSize >= 4)
-    	for (i = 0 ; i < 4 ; i++)
-      	sContenuBrut[i+6] = sContenuTransfert[i] ;
+    	for (int i = 0 ; i < 4 ; i++)
+      	_sContenuBrut[i+6] = _sContenuTransfert[i] ;
     if (iTransfertSize >= 6)
-    	for (i = 0 ; i < 2 ; i++)
-      	sContenuBrut[i+3] = sContenuTransfert[i+4] ;
+    	for (int i = 0 ; i < 2 ; i++)
+      	_sContenuBrut[i+3] = _sContenuTransfert[i+4] ;
     if (iTransfertSize >= 8)
-    	for (i = 0 ; i < 2 ; i++)
-      	sContenuBrut[i] = sContenuTransfert[i+6] ;
+    	for (int i = 0 ; i < 2 ; i++)
+      	_sContenuBrut[i] = _sContenuTransfert[i+6] ;
 	}
 }
 
@@ -678,20 +676,20 @@ NSUtilEditDate::donneBrut()
 void
 NSUtilEditDate::donneTransfert()
 {
-	sContenuTransfert = string("") ;
+	_sContenuTransfert = string("") ;
 	//
   // On passe de JJ/MM/AAAA à AAAAMMJJ
   //
 	char cValidateur[11] = "" ;
 
-	strcpy(cValidateur, sMask.c_str()) ;
+	strcpy(cValidateur, _sMask.c_str()) ;
 	cValidateur[2] = dateSeparationMARK ;
 	cValidateur[5] = dateSeparationMARK ;
-	if (sContenuBrut != cValidateur)
+	if (_sContenuBrut != cValidateur)
 	{
-  	sContenuTransfert  = string(sContenuBrut, 6, 4) ;
-    sContenuTransfert += string(sContenuBrut, 3, 2) ;
-    sContenuTransfert += string(sContenuBrut, 0, 2) ;
+  	_sContenuTransfert  = string(_sContenuBrut, 6, 4) ;
+    _sContenuTransfert += string(_sContenuBrut, 3, 2) ;
+    _sContenuTransfert += string(_sContenuBrut, 0, 2) ;
 	}
 }
 
@@ -828,7 +826,7 @@ NSUtilEditDate::EvKeyDown(uint key, uint repeatCount, uint flags)
     char far* oldBuff = new char[oldBuffLen+1] ;
     TEdit::GetText(oldBuff, oldBuffLen+1) ;
 
-    string dateVide = sMask ;
+    string dateVide = _sMask ;
     string dateEdit = string(oldBuff) ;
 
     if (startSel == endSel)
@@ -859,17 +857,17 @@ NSUtilEditDate::initialise(bool b2000)
 {
   // Date pattern
   //
-  sFormat = pContexte->getSuperviseur()->getText("0localInformation", "dateFormat") ;
-  if (string("") == sFormat)
+  _sFormat = pContexte->getSuperviseur()->getText("0localInformation", "dateFormat") ;
+  if (string("") == _sFormat)
   {
-    sFormat = string("DD/MM/AAAA") ;
-    sFormat[2] = dateSeparationMARK ;
-    sFormat[5] = dateSeparationMARK ;
+    _sFormat = string("DD/MM/AAAA") ;
+    _sFormat[2] = dateSeparationMARK ;
+    _sFormat[5] = dateSeparationMARK ;
   }
 
 	// Validator setting
 	//
-  string sValidator = sFormat ;
+  string sValidator = _sFormat ;
   for (size_t i = 0 ; i < strlen(sValidator.c_str()) ; i++)
     if (('A' == sValidator[i]) || ('D' == sValidator[i]) || ('M' == sValidator[i]))
       sValidator[i] = '#' ;
@@ -878,21 +876,21 @@ NSUtilEditDate::initialise(bool b2000)
 
   // Mask setting
   //
-  sMask = sFormat ;
-  for (size_t i = 0 ; i < strlen(sMask.c_str()) ; i++)
-    if (('A' == sMask[i]) || ('D' == sMask[i]) || ('M' == sMask[i]))
-      sMask[i] = '0' ;
+  _sMask = _sFormat ;
+  for (size_t i = 0 ; i < strlen(_sMask.c_str()) ; i++)
+    if (('A' == _sMask[i]) || ('D' == _sMask[i]) || ('M' == _sMask[i]))
+      _sMask[i] = '0' ;
 
-  size_t iPos = sFormat.find("AAAA") ;
+  size_t iPos = _sFormat.find("AAAA") ;
   if (NPOS != iPos)
   {
     if (b2000)
-      sMask.replace(iPos, 4, "2000") ;
+      _sMask.replace(iPos, 4, "2000") ;
     else
-      sMask.replace(iPos, 4, "1900") ;
+      _sMask.replace(iPos, 4, "1900") ;
   }
 
-  sContenuTransfert = string("") ;
+  _sContenuTransfert = string("") ;
 }
 
 // ----------------------------------------------------------------------
@@ -932,15 +930,15 @@ NSUtilEditHeure::SetupWindow()
 {
   NSUtilEdit::SetupWindow() ;
 	donneBrut() ;
-  SetText(sContenuBrut.c_str()) ;
+  SetText(_sContenuBrut.c_str()) ;
 }
 
 void
 NSUtilEditHeure::setHeure(string sHHMM)
 {
-  sContenuTransfert = sHHMM ;
+  _sContenuTransfert = sHHMM ;
   donneBrut() ;
-  SetText(sContenuBrut.c_str()) ;
+  SetText(_sContenuBrut.c_str()) ;
 }
 
 void
@@ -949,11 +947,11 @@ NSUtilEditHeure::getHeure(string* pHHMM)
   if ((string*) NULL == pHHMM)
     return ;
 
-  sContenuBrut = GetText() ;
+  _sContenuBrut = GetText() ;
 
 	donneTransfert() ;
 
-  *pHHMM = sContenuTransfert ;
+  *pHHMM = _sContenuTransfert ;
 }
 
 //---------------------------------------------------------------------------
@@ -965,15 +963,15 @@ NSUtilEditHeure::getHeure(string* pHHMM)
 void
 NSUtilEditHeure::donneBrut()
 {
-  sContenuBrut = string("00:00") ;
-  sContenuBrut[2] = heureSeparationMARK ;
+  _sContenuBrut = string("00:00") ;
+  _sContenuBrut[2] = heureSeparationMARK ;
 
   //
   // On passe de HHmm à HH:mm
   //
-  if (string("") != sContenuTransfert)
-    sContenuBrut = string(sContenuTransfert, 0, 2) + string(1,heureSeparationMARK) +
-      					string(sContenuTransfert, 2, 2);
+  if (string("") != _sContenuTransfert)
+    _sContenuBrut = string(_sContenuTransfert, 0, 2) + string(1,heureSeparationMARK) +
+      					string(_sContenuTransfert, 2, 2) ;
 }
 
 //---------------------------------------------------------------------------//  Function: 		NSEditDate::donneTransfert()
@@ -984,15 +982,15 @@ NSUtilEditHeure::donneBrut()
 void
 NSUtilEditHeure::donneTransfert()
 {
-	sContenuTransfert = string("") ;
+	_sContenuTransfert = string("") ;
   //
   // On passe de HH:mm à HHmm
   //
   string sValidateur = string("00:00") ;
   sValidateur[2] = heureSeparationMARK ;
 
-  if (sContenuBrut != sValidateur)
-    sContenuTransfert = string(sContenuBrut, 0, 2) + string(sContenuBrut, 3, 2) ;
+  if (_sContenuBrut != sValidateur)
+    _sContenuTransfert = string(_sContenuBrut, 0, 2) + string(_sContenuBrut, 3, 2) ;
 }
 
 ////  TStatic
@@ -1161,7 +1159,7 @@ NSUtilEditHeure::initialise()
   cValidateur[2] = heureSeparationMARK ;
   SetValidator(new TPXPictureValidator(cValidateur)) ;
 
-  sContenuTransfert = string("") ;
+  _sContenuTransfert = string("") ;
 }
 
 // ----------------------------------------------------------------------
@@ -1572,9 +1570,9 @@ NSUtilEditSomme::NSUtilEditSomme(NSContexte* pCtx, NSUtilDialog* parent, int res
 {
   _sLang = sLang ;
 
-	textLen = iTextLen ;
+	_textLen = iTextLen ;
 
-	if (textLen < 4)
+	if (_textLen < 4)
 		erreur("La longueur du champ EditSomme est trop courte.", standardError, 0) ;
 
     /*********************************************
@@ -1592,17 +1590,17 @@ NSUtilEditSomme::NSUtilEditSomme(NSContexte* pCtx, NSUtilDialog* parent, int res
 	delete[] cValidateur;
     ***************************************************/
 
-    sZero = "";
+  _sZero = string("") ;
 
-    for (int i = 0; i < 4; i++)
-   	    sZero += ' ';
+  for (int i = 0; i < 4; i++)
+    _sZero += ' ';
 
-    sZero[0] = '0' ;
-    sZero[1] = sommeSeparationMARK ;
-    sZero[2] = '0' ;
-    sZero[3] = '0' ;
+  _sZero[0] = '0' ;
+  _sZero[1] = sommeSeparationMARK ;
+  _sZero[2] = '0' ;
+  _sZero[3] = '0' ;
 
-    sContenuTransfert = "" ;
+  _sContenuTransfert = string("") ;
 }
 
 //// Destructeur
@@ -1616,14 +1614,14 @@ NSUtilEditSomme::SetupWindow()
 {
   NSUtilEdit::SetupWindow() ;
   donneBrut() ;
-  SetText(sContenuBrut.c_str()) ;
+  SetText(_sContenuBrut.c_str()) ;
 }
 
 voidNSUtilEditSomme::setSomme(string sSomme)
 {
-  sContenuTransfert = sSomme ;
+  _sContenuTransfert = sSomme ;
   donneBrut() ;
-  SetText(sContenuBrut.c_str()) ;
+  SetText(_sContenuBrut.c_str()) ;
 }
 
 void
@@ -1632,10 +1630,10 @@ NSUtilEditSomme::getSomme(string* pSomme)
   if ((string*) NULL == pSomme)
     return ;
 
-  sContenuBrut = GetText() ;
+  _sContenuBrut = GetText() ;
 	donneTransfert() ;
 
-  *pSomme = sContenuTransfert ;
+  *pSomme = _sContenuTransfert ;
 }
 
 //---------------------------------------------------------------------------
@@ -1649,20 +1647,20 @@ NSUtilEditSomme::donneBrut()
 {
   int   transfert ;
   char  nbDec[3] ;
-  char* nbEnt = new char[textLen - 2] ;
+  char* nbEnt = new char[_textLen - 2] ;
 
-  sContenuBrut = sZero ;
+  _sContenuBrut = _sZero ;
 
   //
   // On passe d'un montant en centimes à un montant en francs
   //
-  if (string("") != sContenuTransfert)
+  if (string("") != _sContenuTransfert)
   {
-    transfert = atoi(sContenuTransfert.c_str()) ;
+    transfert = atoi(_sContenuTransfert.c_str()) ;
     sprintf(nbEnt, "%d", transfert/100) ;
     sprintf(nbDec, "%02d", transfert%100) ;
 
-    sContenuBrut = string(nbEnt) + string(1,sommeSeparationMARK) + string(nbDec) ;
+    _sContenuBrut = string(nbEnt) + string(1, sommeSeparationMARK) + string(nbDec) ;
   }
 
   delete[] nbEnt ;
@@ -1678,24 +1676,24 @@ NSUtilEditSomme::donneTransfert()
 {
 	size_t i ;
 
-	sContenuTransfert = "" ;
+	_sContenuTransfert = string("") ;
 
 	//
 	// On passe d'un montant en franc à un montant en centimes
 	//
-	if (!(sContenuBrut == sZero))
+	if (_sContenuBrut != _sZero)
 	{
-  	for (i = 0; (i < strlen(sContenuBrut.c_str())) && (sContenuBrut[i] != ','); i++)
-    	sContenuTransfert += sContenuBrut[i] ;
+  	for (i = 0; (i < strlen(_sContenuBrut.c_str())) && (',' != _sContenuBrut[i]); i++)
+    	_sContenuTransfert += _sContenuBrut[i] ;
 
-		if ((i < strlen(sContenuBrut.c_str())) && (sContenuBrut[i] == ','))
+		if ((i < strlen(_sContenuBrut.c_str())) && (',' == _sContenuBrut[i]))
     	i++ ;
 
-    int j = 0;
-    for (; i < strlen(sContenuBrut.c_str()); i++, j++)
-    	sContenuTransfert += sContenuBrut[i] ;
-    for (; j < 2; j++)
-    	sContenuTransfert += "0" ;
+    int j = 0 ;
+    for ( ; i < strlen(_sContenuBrut.c_str()) ; i++, j++)
+    	_sContenuTransfert += _sContenuBrut[i] ;
+    for ( ; j < 2 ; j++)
+    	_sContenuTransfert += string("0") ;
 	}
 }
 
@@ -1705,16 +1703,16 @@ NSUtilEditSomme::donneTransfert()
 void
 NSUtilEditSomme::EvChar(uint key, uint repeatCount, uint flags)
 {
-    int 	  oldBuffLen = GetTextLen();
-    char far* oldBuff = new char[textLen + 1];
-    uint   	  startSel, endSel;
-    int		  posvir;
-    int		  nbMaxEntier = textLen - 3;
+  int 	  oldBuffLen = GetTextLen();
+  char far* oldBuff = new char[_textLen + 1];
+  uint   	  startSel, endSel;
+  int		  posvir;
+  int		  nbMaxEntier = _textLen - 3;
 
-    TEdit::GetText(oldBuff, oldBuffLen + 1);
-    GetSelection(startSel, endSel);
+  TEdit::GetText(oldBuff, oldBuffLen + 1);
+  GetSelection(startSel, endSel);
 
-    string sEntree = oldBuff;
+  string sEntree = oldBuff;
 
     // Si la sélection est multi-caractères, on la ramène à 1 car.
     //endSel = startSel;
@@ -1894,13 +1892,13 @@ NSUtilEditSomme::EvChar(uint key, uint repeatCount, uint flags)
 voidNSUtilEditSomme::EvKeyDown(uint key, uint repeatCount, uint flags)
 {
 	int 	  oldBuffLen = GetTextLen();
-    char far* oldBuff = new char[textLen + 1];
-    uint   	  startSel, endSel;
-    int		  posvir;
-    int		  nbMaxEntier = textLen - 3;
+  char far* oldBuff = new char[_textLen + 1];
+  uint   	  startSel, endSel;
+  int		  posvir;
+  int		  nbMaxEntier = _textLen - 3;
 
-    TEdit::GetText(oldBuff, oldBuffLen + 1);
-    GetSelection(startSel, endSel);
+  TEdit::GetText(oldBuff, oldBuffLen + 1);
+  GetSelection(startSel, endSel);
 
     //Si la sélection est multi-caractères, on la ramène à 1 car.
     //endSel = startSel;
@@ -1983,21 +1981,22 @@ NSUtilLexique::NSUtilLexique(NSContexte* pCtx, TWindow* parent, int resId, NSDic
                      uint textLen, TModule* module)
               :NSEditDicoGlobal(pCtx, parent, resId, pDictio, "", textLen, module)
 {
-  sContenuTransfert = string("") ;
-  sCode             = string("") ;
-  _LostFocusFunctor = (Functor*) 0 ;
+  _pNSUtilDialog     = (NSUtilDialog*) 0 ;
+  _sContenuTransfert = string("") ;
+  _sCode             = string("") ;
+  _LostFocusFunctor  = (Functor*) 0 ;
 }
 
 NSUtilLexique::NSUtilLexique(NSContexte* pCtx, NSUtilDialog* pUtilDialog, int resId, NSDico* pDictio,
                      uint textLen, TModule* module)
               :NSEditDicoGlobal(pCtx, pUtilDialog, resId, pDictio, "", textLen, module)
 {
-  pNSUtilDialog = pUtilDialog ;
-  pNSUtilDialog->ReferenceControl(this) ;
+  _pNSUtilDialog = pUtilDialog ;
+  _pNSUtilDialog->ReferenceControl(this) ;
 
-  sContenuTransfert = string("") ;
-  sCode             = string("") ;
-  _LostFocusFunctor = (Functor*) 0 ;
+  _sContenuTransfert = string("") ;
+  _sCode             = string("") ;
+  _LostFocusFunctor  = (Functor*) 0 ;
 }
 
 NSUtilLexique::NSUtilLexique(NSContexte* pCtx, TWindow* parent, int resourceId, NSDico* pDictio,
@@ -2007,9 +2006,10 @@ NSUtilLexique::NSUtilLexique(NSContexte* pCtx, TWindow* parent, int resourceId, 
               :NSEditDicoGlobal(pCtx, parent, resourceId, pDictio, text, x, y, w, h,
                        textLimit, multiline, "", module)
 {
-  sContenuTransfert = string("") ;
-  sCode             = string("") ;
-  _LostFocusFunctor = (Functor*) 0 ;
+  _pNSUtilDialog     = (NSUtilDialog*) 0 ;
+  _sContenuTransfert = string("") ;
+  _sCode             = string("") ;
+  _LostFocusFunctor  = (Functor*) 0 ;
 }
 
 NSUtilLexique::NSUtilLexique(NSContexte* pCtx, NSUtilDialog* pUtilDialog, int resourceId, NSDico* pDictio,
@@ -2019,12 +2019,12 @@ NSUtilLexique::NSUtilLexique(NSContexte* pCtx, NSUtilDialog* pUtilDialog, int re
               :NSEditDicoGlobal(pCtx, pUtilDialog,resourceId, pDictio, text, x, y, w, h,
                        textLimit, multiline, "", module)
 {
-  pNSUtilDialog = pUtilDialog ;
-  pNSUtilDialog->ReferenceControl(this) ;
+  _pNSUtilDialog = pUtilDialog ;
+  _pNSUtilDialog->ReferenceControl(this) ;
 
-  sContenuTransfert = string("") ;
-  sCode             = string("") ;
-  _LostFocusFunctor = (Functor*) 0 ;
+  _sContenuTransfert = string("") ;
+  _sCode             = string("") ;
+  _LostFocusFunctor  = (Functor*) 0 ;
 }
 
 NSUtilLexique::~NSUtilLexique()
@@ -2046,7 +2046,7 @@ NSUtilLexique::getCodeSens()
     return string("") ;
 
   string sCodeSens = string("") ;
-  _pDico->donneCodeSens(&sCode, &sCodeSens) ;
+  _pDico->donneCodeSens(&_sCode, &sCodeSens) ;
 
   return sCodeSens ;
 }
@@ -2145,7 +2145,7 @@ NSUtilLexique::EvKeyDown(uint key, uint repeatCount, uint flags)
   Parent->SendNotification(Attr.Id, 200, HWindow) ;
 
   ChoixPathoDialog* pDicoDialog = _pDico->getDicoDialog() ;
-  if (NULL == pDicoDialog)
+  if ((ChoixPathoDialog*) NULL == pDicoDialog)
     return ;
 
   //
@@ -2235,9 +2235,9 @@ NSUtilLexique::ElementSelectionne()
 {
 	char code[BASE_LEXI_LEN+1] ;
 	GetCodeLexiqueChoisi(code) ;
-	GetLabelChoisi(&sContenuTransfert) ;
-	SetText(sContenuTransfert.c_str()) ;
-	sCode = string(code) ;
+	GetLabelChoisi(&_sContenuTransfert) ;
+	SetText(_sContenuTransfert.c_str()) ;
+	_sCode = string(code) ;
   ChoixPathoDialog* pDicoDialog = _pDico->getDicoDialog() ;
   if (pDicoDialog)
 	  pDicoDialog->cacherDialogue() ;
@@ -2246,25 +2246,24 @@ NSUtilLexique::ElementSelectionne()
 void
 NSUtilLexique::setLabel(string code, string texteFictif)
 {
-  sCode = code ;
+  _sCode = code ;
 
-  if (string("") != sCode)
+  if ((string("") != _sCode) && (string("£?????") != _sCode))
   {
     string sLang = _pDico->pContexte->getUserLanguage() ;
-
-    _pDico->donneLibelle(sLang, &sCode, &sContenuTransfert) ;
+    _pDico->donneLibelle(sLang, &_sCode, &_sContenuTransfert) ;
   }
   else
-    sContenuTransfert = string("") ;
+    _sContenuTransfert = string("") ;
 
   // texteFictif est utilisé pour résoudre le problème des jokers
   // Dans ce cas sContenuTransfert est vide et on peut alors
   // forcer sa valeur avec texteFictif != "" pour que l'on ne
   // change pas la valeur de sCode sur le KillFocus.
   if (string("") != texteFictif)
-    sContenuTransfert = texteFictif ;
+    _sContenuTransfert = texteFictif ;
 
-  SetText(sContenuTransfert.c_str()) ;
+  SetText(_sContenuTransfert.c_str()) ;
 }
 
 //------------------------------------------------------------------------
@@ -2286,19 +2285,34 @@ NSUtilLexique::EvKillFocus(HWND hWndGetFocus)
 	// si le texte recupéré est != de sContenuTransfert c'est qu'il s'agit d'un texte libre
 	// mettre dans sCode string("£?????")
 	//
-	if (!(sContenu == sContenuTransfert))
-		sCode = string("£?????") ;
+	if (sContenu != _sContenuTransfert)
+		_sCode = string("£?????") ;
 
 	if (hWndGetFocus != HWindow)
 	{
     ChoixPathoDialog* pDicoDialog = _pDico->getDicoDialog() ;
-		if (pDicoDialog && (hWndGetFocus != pDicoDialog->HWindow) &&
-			  (!(pDicoDialog->IsChild(hWndGetFocus))))
+		if (pDicoDialog)
 		{
-    	pDicoDialog->cacherDialogue() ;
-			NSEditDicoGlobal::EvKillFocus(hWndGetFocus) ;
-			if (NULL != _LostFocusFunctor)
-				(*_LostFocusFunctor)() ;
+      bool bMustHideDialog = true ;
+
+      if ((hWndGetFocus == pDicoDialog->HWindow) || (NULL == hWndGetFocus))
+        bMustHideDialog = false ;
+      else if (pDicoDialog->IsChild(hWndGetFocus))
+        bMustHideDialog = false ;
+      else if (_LostFocusFunctor)
+      {
+        TMyApp* pApp = _pDico->pContexte->getSuperviseur()->getApplication() ;
+        if (hWndGetFocus == pApp->prendClient()->HWindow)
+          bMustHideDialog = false ;
+      }
+
+      if (bMustHideDialog)
+      {
+    	  pDicoDialog->cacherDialogue() ;
+			  NSEditDicoGlobal::EvKillFocus(hWndGetFocus) ;
+			  if (_LostFocusFunctor)
+				  (*_LostFocusFunctor)() ;
+      }
 		}
 		else
 			TEdit::EvKillFocus(hWndGetFocus) ;
@@ -2325,8 +2339,8 @@ END_RESPONSE_TABLE;
 NSUtilEditNumSimpl::NSUtilEditNumSimpl(NSContexte* pCtx, TWindow *windowParent, int resId, NSUtilUpDownEdit *NSparent)
                    :TEdit(windowParent, resId), NSRoot(pCtx)
 {
-  pFather    = NSparent ;
-  pDlgParent = windowParent ;
+  _pFather    = NSparent ;
+  _pDlgParent = windowParent ;
 }
 
 NSUtilEditNumSimpl::~NSUtilEditNumSimpl()
@@ -2413,8 +2427,8 @@ NSUtilEditNumSimpl::getVal()
 void
 NSUtilEditNumSimpl::EvKeyDown(uint key, uint repeatCount, uint flags)
 {
-  NSUtilDialog* pNSUtilDialog = TYPESAFE_DOWNCAST(pDlgParent, NSUtilDialog) ;
-  if (NULL == pNSUtilDialog)
+  NSUtilDialog* pNSUtilDialog = TYPESAFE_DOWNCAST(_pDlgParent, NSUtilDialog) ;
+  if ((NSUtilDialog*) NULL == pNSUtilDialog)
     return ;
 
   switch(key)
@@ -2435,8 +2449,8 @@ NSUtilEditNumSimpl::EvKeyDown(uint key, uint repeatCount, uint flags)
 void
 NSUtilEditNumSimpl::EvKeyUp(uint key, uint repeatcount, uint flags)
 {
-  NSUtilDialog* pNSUtilDialog = TYPESAFE_DOWNCAST(pDlgParent, NSUtilDialog);
-  if (NULL == pNSUtilDialog)
+  NSUtilDialog* pNSUtilDialog = TYPESAFE_DOWNCAST(_pDlgParent, NSUtilDialog);
+  if ((NSUtilDialog*) NULL == pNSUtilDialog)
     return ;
 
   switch(key)
@@ -2488,7 +2502,7 @@ END_RESPONSE_TABLE ;
 NSUtilUpDown::NSUtilUpDown(NSContexte* pCtx, TWindow *windowParent, int resId, NSUtilUpDownEdit *parent)
              :TUpDown(windowParent, resId), NSRoot(pCtx)
 {
-  pFather = parent ;
+  _pFather = parent ;
 }
 
 
@@ -2502,9 +2516,9 @@ NSUtilUpDown::EvLButtonDown(uint /* modKeys */, ClassLib::TPoint& point)
 	ClassLib::TRect rect ;
 	uint            state = GetSpinRectFromPoint(rect, point) ;
 	if      (state == csIncrement)
-		pFather->getEditNum()->incremente() ;
+		_pFather->getEditNum()->incremente() ;
 	else if (state == csDecrement)
-		pFather->getEditNum()->decremente() ;
+		_pFather->getEditNum()->decremente() ;
 }
 
 void
@@ -2520,15 +2534,15 @@ NSUtilUpDown::SetupWindow()
 NSUtilUpDownEdit::NSUtilUpDownEdit(TWindow *windowParent, NSContexte* pCtx, int resEditId, int resUpDownId)
                  :NSRoot(pCtx)
 {
-	pEditNumControl = new NSUtilEditNumSimpl(pContexte, windowParent, resEditId, this) ;
-	pUpDownControl  = new NSUtilUpDown(pContexte, windowParent, resUpDownId, this) ;
+	_pEditNumControl = new NSUtilEditNumSimpl(pContexte, windowParent, resEditId, this) ;
+	_pUpDownControl  = new NSUtilUpDown(pContexte, windowParent, resUpDownId, this) ;
 }
 
 
 NSUtilUpDownEdit::~NSUtilUpDownEdit()
 {
-  delete pEditNumControl ;
-  delete pUpDownControl ;
+  delete _pEditNumControl ;
+  delete _pUpDownControl ;
 }
 
 //-------------------------------------------------------------------------

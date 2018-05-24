@@ -77,19 +77,19 @@ decPrescription::decode(int colonne)
 //  Créé le 07/11/1990 Dernière mise à jour 22/07/1992
 
 decSpecialite::decSpecialite(NSContexte* pCtx, int iDecodeType)
-              :decLesion(pCtx, iDecodeType), DkdPrescript(pCtx, dcTiret)
+              :decLesion(pCtx, iDecodeType), _DkdPrescript(pCtx, dcTiret)
 {
 }
 
 decSpecialite::decSpecialite(decodageBase* pBase, int iDecodeType)
-              :decLesion(pBase, iDecodeType), DkdPrescript(pBase, dcTiret)
+              :decLesion(pBase, iDecodeType), _DkdPrescript(pBase, dcTiret)
 {
 }
 
 void
 decSpecialite::decode(int /* colonne */)
 {
-	DkdPrescript.ammorce() ;
+	_DkdPrescript.ammorce() ;
 
 	// Affichage du nom de la spécialité
 	//
@@ -128,7 +128,7 @@ decSpecialite::decode(int /* colonne */)
 	int refCol = getCol() ;
 	Avance() ;
 
-	DkdPrescript.decode(refCol) ;
+	_DkdPrescript.decode(refCol) ;
 
 	return ;
 }
@@ -139,7 +139,7 @@ decSpecialite::donnePhrase()
   if (false == iBon())
     return ;
 
-	DkdPrescript.metPhrase("4", "4") ;
+	_DkdPrescript.metPhrase("4", "4") ;
 }
 
 string

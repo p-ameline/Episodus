@@ -35,7 +35,11 @@ NSUpdate::NSUpdate(NSContexte * pCtx)
 
   pProgressFunctor = 0 ;
 
+  char* szCurlVersion = (curl.pCurlVersion)() ;
+
   string ps = string("Init of update params") ;
+  if (szCurlVersion)
+    ps += string(" using Curl ") + string(szCurlVersion) ;
 	pContexte->getSuperviseur()->trace(&ps, 1, NSSuper::trSubDetails) ;
 
   curl.init() ;

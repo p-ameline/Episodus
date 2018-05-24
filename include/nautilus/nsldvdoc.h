@@ -121,6 +121,7 @@ class NSConcern : public NSRoot
     string              _sHealthIssue ;   // Health issue
     string              _sPrimoPb ;       // Problème père - Originating problem
     string              _sCocCode ;
+    string              _sCimCode ;
 
     ArrayPbModifier     _aModificateurs ;
 
@@ -135,6 +136,7 @@ class NSConcern : public NSRoot
     LDVFRAME            getIFrame()           { return _iFrame ; }
     string              getLexique()          { return _sLexique ; }
     void                setLexique(string sL) { _sLexique = sL ; }
+    string              getTitle()            { return _sTitre ; }
 
     // int                 getLineNumber()                                           { return iLineNumber ; }
     // void                setLineNumber(int i)                                      { iLineNumber = i ; }
@@ -358,11 +360,11 @@ class NSLdvDrugTake : public NSRoot
 
   public:
 
-    string     sNbDoses ;
-    NVLdVTemps tpsClose ;
-    string     sAdminType ;
-    string     sAdminLocation ;
-    NVLdVTemps tpsAdminHour ;
+    string     _sNbDoses ;
+    NVLdVTemps _tpsClose ;
+    string     _sAdminType ;
+    string     _sAdminLocation ;
+    NVLdVTemps _tpsAdminHour ;
 
     NSLdvDrugTake(NSContexte *pCtx) ;
     NSLdvDrugTake(const NSLdvDrugTake& rv) ;
@@ -384,10 +386,12 @@ class NSLdvDrugCycle : public NSRoot
 
   public:
 
-    string sTitre ;
-    string sTitreCourt ;
+    string          _sTitre ;
+    string          _sTitreCourt ;
 
-    NSLdvDrugPhase* pParentPhase ;
+    double          _dDailyDose ;
+
+    NSLdvDrugPhase* _pParentPhase ;
 
     NSLdvDrugCycle(NSContexte *pCtx, NSLdvDrugPhase* pParent) ;
     NSLdvDrugCycle(const NSLdvDrugCycle& rv) ;
@@ -410,15 +414,15 @@ class NSLdvDrugCycle : public NSRoot
     static void initNbInstance() { lObjectCount = 0 ; }
 } ;
 
-typedef vector<NVLdVRect*> NVLdVRectVector ;
+typedef vector<NVLdVRect*>              NVLdVRectVector ;
 typedef NVLdVRectVector::iterator       NVLdVRectIter ;
 typedef NVLdVRectVector::const_iterator NVLdVRectConstIter ;
-typedef NTArray<NVLdVRect> NVLdVRectArray ;
+typedef NTArray<NVLdVRect>              NVLdVRectArray ;
 
-typedef vector<NSLdvDrugCycle*> NSLdvDrugCycleVector ;
+typedef vector<NSLdvDrugCycle*>              NSLdvDrugCycleVector ;
 typedef NSLdvDrugCycleVector::iterator       NSLdvDrugCycleIter ;
 typedef NSLdvDrugCycleVector::const_iterator NSLdvDrugCycleConstIter ;
-typedef NTArray<NSLdvDrugCycle> NSLdvDrugCycleArray ;
+typedef NTArray<NSLdvDrugCycle>              NSLdvDrugCycleArray ;
 
 class NSLdvDrug ;
 
@@ -430,21 +434,21 @@ class NSLdvDrugPhase : public NSRoot
 
   public:
 
-    string              sReference ;
+    string              _sReference ;
 
-    string              sTitre ;
-    string              sTitreCourt ;
+    string              _sTitre ;
+    string              _sTitreCourt ;
 
-    string              sIntakeUnitLib ;
-    string              sIntakeUnitShortLib ;
+    string              _sIntakeUnitLib ;
+    string              _sIntakeUnitShortLib ;
 
-    NVLdVTemps          tDateOuverture ;
-    NVLdVTemps          tDateFermeture ;
+    NVLdVTemps          _tDateOuverture ;
+    NVLdVTemps          _tDateFermeture ;
 
-    NVLdVRectArray      aPrescriptionRects ;
-    NSLdvDrugCycleArray aCycles ;
+    NVLdVRectArray      _aPrescriptionRects ;
+    NSLdvDrugCycleArray _aCycles ;
 
-    NSLdvDrug*          pParentDrug ;
+    NSLdvDrug*          _pParentDrug ;
 
     NSLdvDrugPhase(NSContexte *pCtx, NSLdvDrug* pParent) ;
     NSLdvDrugPhase(const NSLdvDrugPhase& rv) ;
@@ -455,8 +459,8 @@ class NSLdvDrugPhase : public NSRoot
     string          getShortestLibForIntakeUnit() ;
     void            initIntakeUnits() ;
 
-    string          getNoeud()             { return sReference ; }
-    void            setNoeud(string sNd)   { sReference = sNd ; }
+    string          getNoeud()             { return _sReference ; }
+    void            setNoeud(string sNd)   { _sReference = sNd ; }
 
     bool            modifyDate(string sDateType, NVLdVTemps tNewDate) ;
 
@@ -466,35 +470,35 @@ class NSLdvDrugPhase : public NSRoot
     static void initNbInstance() { lObjectCount = 0 ; }
 } ;
 
-typedef vector<NSLdvDrugPhase*> NSLdvDrugPhaseVector ;
+typedef vector<NSLdvDrugPhase*>              NSLdvDrugPhaseVector ;
 typedef NSLdvDrugPhaseVector::iterator       NSLdvDrugPhaseIter ;
 typedef NSLdvDrugPhaseVector::const_iterator NSLdvDrugPhaseConstIter ;
-typedef NTArray<NSLdvDrugPhase> NSLdvDrugPhaseArray ;
+typedef NTArray<NSLdvDrugPhase>              NSLdvDrugPhaseArray ;
 
 // Médicaments
 class NSLdvDrug : public NSRoot
 {
   public:
 
-    NSLdvDocument* pDoc ;
+    NSLdvDocument*      _pDoc ;
 
-    string     sTitre ;
-    string     sTitreCourt ;
+    string              _sTitre ;
+    string              _sTitreCourt ;
 
-    NVLdVTemps tDateOuverture ;
-    NVLdVTemps tDateFermeture ;
+    NVLdVTemps          _tDateOuverture ;
+    NVLdVTemps          _tDateFermeture ;
 
-    string     sIntakeUnit ;
+    string              _sIntakeUnit ;
 
-    NSLdvDrugPhaseArray aPhases ;
+    NSLdvDrugPhaseArray _aPhases ;
 
-    string     _sFreeText ;
-    bool       _bALD ;
+    string              _sFreeText ;
+    bool                _bALD ;
 
     //vecteur des ids noeud preocupation
-    VecteurString aConcerns ;
+    VecteurString       _aConcerns ;
 
-    GoalInfoArray *pWorstJalons ;  // Worst goals
+    GoalInfoArray*      _pWorstJalons ;  // Worst goals
 
     NSLdvDrug(NSContexte *pCtx, NSLdvDocument* pDocum, LDVFRAME iFrame) ;
     NSLdvDrug(const NSLdvDrug& rv) ;
@@ -504,6 +508,10 @@ class NSLdvDrug : public NSRoot
     void            setNoeud(string sNd)   { _sReference = sNd ; }
     string          getLexique()           { return _sLexique ; }
     void            setLexique(string sLx) { _sLexique = sLx ; }
+    string          getAtcCode()           { return _sAtcCode ; }
+    void            setAtcCode(string sAC) { _sAtcCode = sAC ; }
+    string          getCiCode()            { return _sCiCode ; }
+    void            setCiCode(string sCC)  { _sCiCode = sCC ; }
     LDVFRAME        getIFrame()            { return _iFrame ; }
 
     string          getLatestPrescriptionDoc()           { return _sLatestPrescriptionDoc ; }
@@ -554,6 +562,8 @@ class NSLdvDrug : public NSRoot
 
     string      _sReference ;
     string      _sLexique ;
+    string      _sAtcCode ;
+    string      _sCiCode ;
 
     string      _sLatestPrescriptionDoc ;
     string      _sLatestPrescriptionDate ;
@@ -563,7 +573,7 @@ class NSLdvDrug : public NSRoot
     static long lObjectCount ;
 } ;
 
-typedef vector<NSLdvDrug *>  ArrayDrugs ;
+typedef vector<NSLdvDrug *>        ArrayDrugs ;
 typedef ArrayDrugs::iterator       drugsIter ;
 typedef ArrayDrugs::const_iterator drugsConstIter ;
 

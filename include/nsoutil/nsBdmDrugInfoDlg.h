@@ -48,6 +48,8 @@ class _NSOUTILCLASSE NSBdmDrugInfoDlg : public NSGenericBdmInfoDlg
     void fillList() ;
     void openUrl(const string sUrl) ;
 
+    void activatedInformation(int iIndex) ;
+
     NsSelectableDrug* getDrugInfo() { return _pDrugInfo ; }
 
   protected:

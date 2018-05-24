@@ -46,26 +46,26 @@ NSTypeDocument::~NSTypeDocument(){
 void
 NSTypeDocument::CmOk()
 {
-    // on récupère d'abord un éventuel élément lexique sélectionné par les flèches
-    // Le Return n'envoie pas d'EvKeyDown et appelle directement CmOk
-    if (pType->getDico()->getDicoDialog()->EstOuvert())
-    {
-        pType->getDico()->getDicoDialog()->InsererElementLexique();
-        return;
-    }
-    //
-    // Ne pas accepter les textes libres
-    //
-    if (pType->sCode == string("£?????"))
-    {
-        erreur("Il faut choisir un code lexique et non pas du texte libre ", standardError, 0, GetHandle());
-        pType->SetFocus();
-        return;
-    }
-    *pTypeDocum = pType->sCode;
+  // on récupère d'abord un éventuel élément lexique sélectionné par les flèches
+  // Le Return n'envoie pas d'EvKeyDown et appelle directement CmOk
+  if (pType->getDico()->getDicoDialog()->EstOuvert())
+  {
+      pType->getDico()->getDicoDialog()->InsererElementLexique();
+      return;
+  }
+  //
+  // Ne pas accepter les textes libres
+  //
+  if (pType->getCode() == string("£?????"))
+  {
+    erreur("Il faut choisir un code lexique et non pas du texte libre ", standardError, 0, GetHandle()) ;
+    pType->SetFocus() ;
+    return ;
+  }
+  *pTypeDocum = pType->getCode() ;
 
-    if (*pTypeDocum == "")
-        *pTypeDocum = "GCONS1";
+  if (string("") == *pTypeDocum)
+    *pTypeDocum = string("GCONS1") ;
 
 	CloseWindow(IDOK);
 }

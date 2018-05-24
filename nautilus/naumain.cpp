@@ -5590,7 +5590,7 @@ catch (...)
   string sDate    = pToDo->getParam2() ;
 
   NSLdvDocument *pLdvDoc = pContexte->getPatient()->getLdvDocument() ;
-  if (NULL == pLdvDoc)
+  if ((NSLdvDocument*) NULL == pLdvDoc)
     return ;
 
   // On vérifie que la préoccupation n'existe pas déjà
@@ -5620,6 +5620,8 @@ catch (...)
 
   if (IDOK == iExecReturn)
     pLdvDoc->newLine(ldvframeHealth, sNewNode, &concernInfo) ;
+
+  delete pNPDialog ;
 }voidNSMDIFrame::ToDo_NewPreoccupFromNode(NSToDoTask* pToDo){try{  if ((NSToDoTask*) NULL == pToDo)    return ;	NSTreeWindow *pView = (static_cast<NSTreeWindow *>(pToDo->getPointer1())) ;  NSTreeNode   *pNode = (static_cast<NSTreeNode *>(pToDo->getPointer2())) ;
   if (((NSTreeWindow*) NULL == pView) || ((NSTreeNode*) NULL == pNode))
   	return ;
@@ -5672,11 +5674,11 @@ catch (...)
 {
   erreur("Exception ToDo_NewPreoccupFromNode.", standardError, 0) ;
 }
-}// Creation of a proposal stripe//voidNSMDIFrame::ToDo_NewPreoccupProposal(NSToDoTask* pToDo){  if ((NSToDoTask*) NULL == pToDo)    return ;  NSConcernToDoInformation *pConcernToDo = (static_cast<NSConcernToDoInformation *>(pToDo->getPointer1())) ;  if (NULL == pConcernToDo)    return ;	// TWndow *pView  = (static_cast<TWindow *>(pToDo->pPointer1)) ;  string sLexique = pConcernToDo->getLexique() ;
+}// Creation of a proposal stripe//voidNSMDIFrame::ToDo_NewPreoccupProposal(NSToDoTask* pToDo){  if ((NSToDoTask*) NULL == pToDo)    return ;  NSConcernToDoInformation *pConcernToDo = (static_cast<NSConcernToDoInformation *>(pToDo->getPointer1())) ;  if ((NSConcernToDoInformation*) NULL == pConcernToDo)    return ;	// TWndow *pView  = (static_cast<TWindow *>(pToDo->pPointer1)) ;  string sLexique = pConcernToDo->getLexique() ;
   string sDate    = pConcernToDo->getStartingDate() ;
 
   NSLdvDocument *pLdvDoc = pContexte->getPatient()->getLdvDocument() ;
-  if (NULL == pLdvDoc)
+  if ((NSLdvDocument*) NULL == pLdvDoc)
     return ;
 
   // On vérifie que la préoccupation n'existe pas déjà
@@ -5706,14 +5708,14 @@ NSMDIFrame::ToDo_Message(NSToDoTask* pToDo, NsStripe::STRIPETYPE iStripeType)
   stripe->LayoutSession() ;
 }
 voidNSMDIFrame::ToDo_NewDrugFromNode(NSToDoTask* pToDo){  if ((NSToDoTask*) NULL == pToDo)    return ;	NSTreeWindow *pView = (static_cast<NSTreeWindow *>(pToDo->getPointer1())) ;  NSTreeNode   *pNode = (static_cast<NSTreeNode *>(pToDo->getPointer2())) ;
-  if ((!pView) || (!pNode))
+  if (((NSTreeWindow*) NULL == pView) || ((NSTreeNode*) NULL == pNode))
   	return ;
 
   string sLexique = pNode->getEtiquette() ;
 
   NSLdvDocument   *pLdvDoc = pContexte->getPatient()->getLdvDocument() ;
   NSDrugView      *pDrugView = pLdvDoc->getDrugView("") ;
-  if (!pDrugView)
+  if ((NSDrugView*) NULL == pDrugView)
   {
     pContexte->getPatient()->drugs_show() ;
     for (int i = 0 ; (i < 50) && !pDrugView ; i++)

@@ -21,7 +21,7 @@ long NSPhraseObjet::lBaseObjectCount = 0 ;
 NSPhraseObjet::NSPhraseObjet(NSContexte* pCtx, int iDecoType, string sLangue)
               :decodageBase(pCtx, sLangue)
 {
-  iDcType = iDecoType ;
+  _iDcType = iDecoType ;
 
   lBaseObjectCount++ ;
 }
@@ -29,7 +29,7 @@ NSPhraseObjet::NSPhraseObjet(NSContexte* pCtx, int iDecoType, string sLangue)
 NSPhraseObjet::NSPhraseObjet(decodageBase* pBase, int iDecoType, string sLang)
               :decodageBase(pBase)
 {
-  iDcType  = iDecoType ;
+  _iDcType = iDecoType ;
   _sLangue = sLang ;
 
   lBaseObjectCount++ ;
@@ -38,8 +38,8 @@ NSPhraseObjet::NSPhraseObjet(decodageBase* pBase, int iDecoType, string sLang)
 NSPhraseObjet::NSPhraseObjet(const NSPhraseObjet& rv)
               :decodageBase(rv.pContexte, rv._sLangue)
 {
-  Objet 	= rv.Objet ;
-  iDcType = rv.iDcType ;
+  _Objet 	 = rv._Objet ;
+  _iDcType = rv._iDcType ;
 
   lBaseObjectCount++ ;
 }
@@ -52,7 +52,7 @@ NSPhraseObjet::~NSPhraseObjet()
 void
 NSPhraseObjet::ammorce()
 {
-  Objet = *(*(getitDcode())) ;
+  _Objet = *(*(getitDcode())) ;
 }
 
 void
@@ -67,8 +67,8 @@ NSPhraseObjet::operator=(const NSPhraseObjet& src)
   if (&src == this)
     return *this ;
 
-	Objet 	= src.Objet ;
-  iDcType = src.iDcType ;
+	_Objet 	 = src._Objet ;
+  _iDcType = src._iDcType ;
 
   return *this ;
 }
@@ -222,7 +222,7 @@ NSPhraseLesion::metPhrase()
   // La première phase consiste à annoncer l'existence de la lésion,
   // sous forme d'un COD (ex, "Il existe un polype")
   //
-  NSPhraseMot Lesion(Objet.getDataTank(), pContexte) ;
+  NSPhraseMot Lesion(_Objet.getDataTank(), pContexte) ;
   Lesion.setArticle(NSPhraseMot::articleIndefini) ;
   //
   // Dans l'ordre, on décrit l'aspect, la dimension puis la localisation
@@ -242,12 +242,12 @@ NSPhraseLesion::metPhrase()
     iterPhraseObj i = Aspect.begin() ;
     for ( ; Aspect.end() != i ; i++)
     {
-      string sLexique = (*i)->Objet.getLexique() ;
+      string sLexique = (*i)->_Objet.getLexique() ;
       trouve = pContexte->getDico()->trouvePathologData(_sLangue, &sLexique, &Data) ;
       if (trouve)
       {
         if (Data.estAdjectif())
-          Lesion.getOrCreateFirstComplementPhr()->adjEpithete.push_back(new NSPhraseMot((*i)->Objet.getDataTank(), pContexte)) ;
+          Lesion.getOrCreateFirstComplementPhr()->adjEpithete.push_back(new NSPhraseMot((*i)->_Objet.getDataTank(), pContexte)) ;
       }
     }
   }
@@ -264,7 +264,7 @@ NSPhraseLesion::metPhrase()
     iterPhraseObj i = Localisations.begin() ;
     for ( ; Localisations.end() != i ; i++)
     {
-      string sLexique = (*i)->Objet.getLexique() ;
+      string sLexique = (*i)->_Objet.getLexique() ;
       trouve = pContexte->getDico()->trouvePathologData(_sLangue, &sLexique, &Data) ;
       if (trouve)
       {
@@ -275,10 +275,10 @@ NSPhraseLesion::metPhrase()
             Lesion.initComplement() ;
             bLesionComplement = true ;
           }
-          Lesion.getOrCreateFirstComplementPhr()->adjEpithete.push_back(new NSPhraseMot((*i)->Objet.getDataTank(), pContexte)) ;
+          Lesion.getOrCreateFirstComplementPhr()->adjEpithete.push_back(new NSPhraseMot((*i)->_Objet.getDataTank(), pContexte)) ;
         }
         else if (Data.estNom())
-          _pPhraseur->CCLieu.push_back(new NSPhraseMot((*i)->Objet.getDataTank(), pContexte)) ;
+          _pPhraseur->CCLieu.push_back(new NSPhraseMot((*i)->_Objet.getDataTank(), pContexte)) ;
       }
     }
   }
@@ -335,8 +335,8 @@ NSPhraseLesion::metPhrase()
 NSPhraseLesion::NSPhraseLesion(const NSPhraseLesion& rv)
                :NSPhraseObjet(rv.pContexte)
 {
-  Objet 			    = rv.Objet ;
-  iDcType 		    = rv.iDcType ;
+  _Objet 			    = rv._Objet ;
+  _iDcType 		    = rv._iDcType ;
 
   Aspect          = rv.Aspect ;
   Dimensions      = rv.Dimensions ;
@@ -360,8 +360,8 @@ NSPhraseLesion::operator=(const NSPhraseLesion& src)
   if (&src == this)
     return *this ;
 
-	Objet 			    = src.Objet ;
-  iDcType 		    = src.iDcType ;
+	_Objet 			    = src._Objet ;
+  _iDcType 		    = src._iDcType ;
 
   Aspect          = src.Aspect ;
   Dimensions      = src.Dimensions ;
@@ -439,7 +439,7 @@ NSPhraseGeste::metPhrase()
   // La première phase consiste à annoncer l'existence du geste,
   // sous forme d'un COD
   //
-  NSPhraseMot Geste(Objet.getDataTank(), pContexte) ;
+  NSPhraseMot Geste(_Objet.getDataTank(), pContexte) ;
   Geste.setArticle(NSPhraseMot::articleIndefini) ;
   //
   //
@@ -462,7 +462,7 @@ NSPhraseGeste::metPhrase()
       NSPhraseTemporel* pTp = (NSPhraseTemporel*)(*i) ;
 
       donnee.metAZero() ;
-      donnee.setLexique(pTp->Objet.getLexique()) ;
+      donnee.setLexique(pTp->_Objet.getLexique()) ;
 
       donnee.setComplement(pTp->ValeurMin.getComplement()) ;
       donnee.setUnite(pTp->ValeurMin.getUnit()) ;
@@ -479,8 +479,8 @@ NSPhraseGeste::metPhrase()
 NSPhraseGeste::NSPhraseGeste(const NSPhraseGeste& rv)
               :NSPhraseObjet(rv.pContexte)
 {
-	Objet       = rv.Objet ;
-  iDcType     = rv.iDcType ;
+	_Objet      = rv._Objet ;
+  _iDcType    = rv._iDcType ;
 
   Temporalite = rv.Temporalite ;
   Garbage     = rv.Garbage ;
@@ -492,8 +492,8 @@ NSPhraseGeste::operator=(const NSPhraseGeste& src)
   if (&src == this)
     return *this ;
 
-	Objet       = src.Objet ;
-  iDcType     = src.iDcType ;
+	_Objet      = src._Objet ;
+  _iDcType    = src._iDcType ;
 
   Temporalite = src.Temporalite ;
   Garbage     = src.Garbage ;
@@ -505,17 +505,17 @@ NSPhraseGeste::operator=(const NSPhraseGeste& src)
 // ------------------ METHODES DE NSPhrasePrescript ------------------------
 // -------------------------------------------------------------------------
 NSPhrasePrescript::NSPhrasePrescript(NSContexte* pCtx, int iDecoType, string sLangue)
-              	  :NSPhraseObjet(pCtx, iDecoType, sLangue), Forme((decodageBase*)this), Event((decodageBase*)this), Dates(pCtx)
+              	  :NSPhraseObjet(pCtx, iDecoType, sLangue), _Forme((decodageBase*)this), _Event((decodageBase*)this), _Dates(pCtx)
 {
-  iQuantitePhases  = 0 ;
-  sNonSubstituable = string("") ;
+  _iQuantitePhases  = 0 ;
+  _sNonSubstituable = string("") ;
 }
 
 NSPhrasePrescript::NSPhrasePrescript(decodageBase* pBase, int iDecoType, string sLangue)
-				          :NSPhraseObjet(pBase, iDecoType, sLangue), Forme((decodageBase*)this), Event((decodageBase*)this), Dates(pBase->pContexte)
+				          :NSPhraseObjet(pBase, iDecoType, sLangue), _Forme((decodageBase*)this), _Event((decodageBase*)this), _Dates(pBase->pContexte)
 {
-  iQuantitePhases  = 0 ;
-  sNonSubstituable = string("") ;
+  _iQuantitePhases  = 0 ;
+  _sNonSubstituable = string("") ;
 }
 
 NSPhrasePrescript::~NSPhrasePrescript()
@@ -537,15 +537,15 @@ try
     {
       Avance() ;
 
-      Dates.initMin(*(getitDcode())) ;
+      _Dates.initMin(*(getitDcode())) ;
 
       //
       // On ne sait pas s'il y aura un max, donc on paramètre
       // pour une phrase du type "à partir du"
       //
-      Dates.setTypeTps(TpsDate) ;
-      Dates.setFormeTps(TpsInterval) ;
-      Dates.setRepererTps(TpsFutur) ;
+      _Dates.setTypeTps(TpsDate) ;
+      _Dates.setFormeTps(TpsInterval) ;
+      _Dates.setRepererTps(TpsFutur) ;
 
       Avance() ;
     }
@@ -556,26 +556,26 @@ try
       //
       // Date passée d'un évènement ponctuel
       //
-      Dates.initMax(*(getitDcode())) ;
+      _Dates.initMax(*(getitDcode())) ;
 
-      Dates.setTypeTps(TpsDate) ;
-      Dates.setRepererTps(TpsFutur) ;
+      _Dates.setTypeTps(TpsDate) ;
+      _Dates.setRepererTps(TpsFutur) ;
 
-      if (string("") != Dates.getValeurMin())
+      if (string("") != _Dates.getValeurMin())
       {
         // Date de début == Date de fin / Starting date == Ending date
-        if ((Dates.getValeurMin() == Dates.getValeurMax()) &&
-                    (Dates.getUniteMin() == Dates.getUniteMax()))
-          Dates.setFormeTps(TpsInstant) ;
+        if ((_Dates.getValeurMin() == _Dates.getValeurMax()) &&
+                    (_Dates.getUniteMin() == _Dates.getUniteMax()))
+          _Dates.setFormeTps(TpsInstant) ;
         else
-          Dates.setFormeTps(TpsInterval) ;
+          _Dates.setFormeTps(TpsInterval) ;
 
-        Dates.setMinNow(false) ;
+        _Dates.setMinNow(false) ;
       }
       else
       {
-        Dates.setFormeTps(TpsInterval) ;
-        Dates.setMaxNow(true) ;
+        _Dates.setFormeTps(TpsInterval) ;
+        _Dates.setMaxNow(true) ;
       }
 
       Avance() ;
@@ -586,7 +586,7 @@ try
 
       while ((getCol() > refCol) && iBon())
       {
-        Event.ammorce() ;
+        _Event.ammorce() ;
         Avance() ;
       }
     }
@@ -596,7 +596,7 @@ try
       Avance() ;
       while ((getCol() > refCol) && iBon())
       {
-        Forme.ammorce() ;
+        _Forme.ammorce() ;
         Avance() ;
       }
     }
@@ -608,7 +608,7 @@ try
       {
         NSPhraseObjet Type(this) ;
         Type.ammorce() ;
-        Administration.push_back(new NSPhraseObjet(Type)) ;
+        _Administration.push_back(new NSPhraseObjet(Type)) ;
         Avance() ;
       }
     }
@@ -636,8 +636,8 @@ try
 
         if (iBon())
         {
-          iQuantitePhases++ ;
-          Phases.push_back(pPhase) ;
+          _iQuantitePhases++ ;
+          _Phases.push_back(pPhase) ;
         }
         else
           delete pPhase ;
@@ -653,7 +653,7 @@ try
         {
           NSPhraseMot* pTL = new NSPhraseMot((*(getitDcode()))->getDataTank(), pContexte) ;
           Avance() ;
-          Details.push_back(pTL) ;
+          _Details.push_back(pTL) ;
         }
         else
           Recupere() ;
@@ -667,7 +667,7 @@ try
       {
         NSPhraseObjet* pTL = new NSPhraseObjet(this) ;
         pTL->ammorce() ;
-        FreeText.push_back(pTL) ;
+        _FreeText.push_back(pTL) ;
         Avance() ;
       }
     }
@@ -675,7 +675,7 @@ try
     {
       NSPhraseObjet* pTL = new NSPhraseObjet(this) ;
       pTL->ammorce() ;
-      FreeText.push_back(pTL) ;
+      _FreeText.push_back(pTL) ;
       Avance() ;
     }
     // Admin informations: skipped so far
@@ -688,7 +688,7 @@ try
         if (string("LSUBS/WCE00") == getSt())
         {
           Avance() ;
-          sNonSubstituable = string("Ne pas substituer.") ;
+          _sNonSubstituable = string("Ne pas substituer.") ;
         }
         else
           Avance() ;
@@ -717,14 +717,14 @@ NSPhrasePrescript::metPhrase(string decDeb, string decFin, int sautLigne)
   _pPhraseur->initialise() ;
   setDcodeur(string("")) ;
 
-  if (string("") != Event.Objet.getLexique())
+  if (string("") != _Event._Objet.getLexique())
   {
     NSPhraseur* pPhraEvent = new NSPhraseur(pContexte) ;
     pPhraEvent->iPhraseType = phraseComplement ;
 
     NsProposition PropEvent(pContexte, &pPhraEvent, NsProposition::principale, NsProposition::notSetConjonct) ;
 
-    pPhraEvent->CCHypoth.push_back(new NSPhraseMot(Event.Objet.getDataTank(), pContexte)) ;
+    pPhraEvent->CCHypoth.push_back(new NSPhraseMot(_Event._Objet.getDataTank(), pContexte)) ;
     if (_pGenerateur->genereProposition(dcTiret, &PropEvent))
     {
       setDcodeur(PropEvent.getPhrase()) ;
@@ -737,14 +737,14 @@ NSPhrasePrescript::metPhrase(string decDeb, string decFin, int sautLigne)
     }
   }
 
-  if (Phases.empty())
+  if (_Phases.empty())
   {
     metPhraseFreeText(decDeb, decFin, sautLigne) ;
     return ;
   }
 
-  iterPhraseObj iterPhrase = Phases.begin() ;
-  for ( ; Phases.end() != iterPhrase ; iterPhrase++)
+  iterPhraseObj iterPhrase = _Phases.begin() ;
+  for ( ; _Phases.end() != iterPhrase ; iterPhrase++)
   {
     NSPhrasePhase* pPhase = dynamic_cast<NSPhrasePhase*>(*iterPhrase) ;
     if (pPhase)
@@ -757,9 +757,9 @@ NSPhrasePrescript::metPhrase(string decDeb, string decFin, int sautLigne)
 
   metPhraseFreeText(decDeb, decFin, sautLigne) ;
 
-  if (string("") != sNonSubstituable)
+  if (string("") != _sNonSubstituable)
   {
-    setDcodeur(sNonSubstituable) ;
+    setDcodeur(_sNonSubstituable) ;
     decodageBase::metPhrase(decDeb, decFin, sautLigne) ;
   }
 
@@ -827,19 +827,19 @@ NSPhrasePrescript::metPhrase(string decDeb, string decFin, int sautLigne)
 void
 NSPhrasePrescript::metPhraseFreeText(string decDeb, string decFin, int sautLigne)
 {
-  if (FreeText.empty())
+  if (_FreeText.empty())
     return ;
 
-  iterPhraseObj iterPhrase = FreeText.begin() ;
-  for ( ; FreeText.end() != iterPhrase ; iterPhrase++)
+  iterPhraseObj iterPhrase = _FreeText.begin() ;
+  for ( ; _FreeText.end() != iterPhrase ; iterPhrase++)
   {
-    string sCodeLexique = (*iterPhrase)->Objet.getLexique() ;
+    string sCodeLexique = (*iterPhrase)->_Objet.getLexique() ;
     string sSens ;
     pContexte->getDico()->donneCodeSens(&sCodeLexique, &sSens) ;
 
     if ((sSens == "£??") || (sSens == "£C;"))
     {
-      setDcodeur((*iterPhrase)->Objet.getTexteLibre()) ;
+      setDcodeur((*iterPhrase)->_Objet.getTexteLibre()) ;
       decodageBase::metPhrase(decDeb, decFin, sautLigne) ;
     }
     else
@@ -856,25 +856,25 @@ NSPhrasePrescript::metPhraseFreeText(string decDeb, string decFin, int sautLigne
 }
 
 NSPhrasePrescript::NSPhrasePrescript(const NSPhrasePrescript& rv)
-              	  :NSPhraseObjet(rv.pContexte), Forme(rv.Forme), Event(rv.Event), Dates(rv.Dates)
+              	  :NSPhraseObjet(rv.pContexte), _Forme(rv._Forme), _Event(rv._Event), _Dates(rv._Dates)
 {
-  Objet 			    = rv.Objet ;
-  iDcType 		    = rv.iDcType ;
+  _Objet 			      = rv._Objet ;
+  _iDcType 		      = rv._iDcType ;
 
-  Forme           = rv.Forme ;
-  Dates           = rv.Dates ;
+  _Forme            = rv._Forme ;
+  _Dates            = rv._Dates ;
 
-  Administration  = rv.Administration ;
-  Event           = rv.Event ;
+  _Administration   = rv._Administration ;
+  _Event            = rv._Event ;
 
-  iQuantitePhases = rv.iQuantitePhases ;
-  Phases          = rv.Phases ;
+  _iQuantitePhases  = rv._iQuantitePhases ;
+  _Phases           = rv._Phases ;
 
-  Garbage         = rv.Garbage ;
-  Details         = rv.Details ;
-  FreeText        = rv.FreeText ;
+  _Garbage          = rv._Garbage ;
+  _Details          = rv._Details ;
+  _FreeText         = rv._FreeText ;
 
-  sNonSubstituable = rv.sNonSubstituable ;
+  _sNonSubstituable = rv._sNonSubstituable ;
 }
 
 NSPhrasePrescript&
@@ -883,23 +883,23 @@ NSPhrasePrescript::operator=(const NSPhrasePrescript& src)
   if (this == &src)
   	return *this ;
 
-  Objet 			    = src.Objet ;
-  iDcType 		    = src.iDcType ;
+  _Objet 			      = src._Objet ;
+  _iDcType 		      = src._iDcType ;
 
-	Forme           = src.Forme ;
-  Dates           = src.Dates ;
+	_Forme            = src._Forme ;
+  _Dates            = src._Dates ;
 
-  Administration  = src.Administration ;
-  Event           = src.Event ;
+  _Administration   = src._Administration ;
+  _Event            = src._Event ;
 
-  iQuantitePhases = src.iQuantitePhases ;
-  Phases          = src.Phases ;
+  _iQuantitePhases  = src._iQuantitePhases ;
+  _Phases           = src._Phases ;
 
-  Garbage         = src.Garbage ;
-  Details         = src.Details ;
-  FreeText        = src.FreeText ;
+  _Garbage          = src._Garbage ;
+  _Details          = src._Details ;
+  _FreeText         = src._FreeText ;
 
-  sNonSubstituable = src.sNonSubstituable ;
+  _sNonSubstituable = src._sNonSubstituable ;
 
   return *this ;
 }
@@ -1150,7 +1150,7 @@ try
             if (pPrise)
             {
               NSPhraseur* pPhraCycle = new NSPhraseur(pContexte) ;
-              NSPhraseMot* pMot = new NSPhraseMot(pPrescript->Forme.Objet.getDataTank(), pContexte) ;
+              NSPhraseMot* pMot = new NSPhraseMot(pPrescript->_Forme._Objet.getDataTank(), pContexte) ;
               pMot->initComplement() ;
               pMot->getOrCreateFirstComplementPhr()->adjNumeralCardinal = NSPhraseMot(pPrise->nbDose.getDataTank(), pContexte) ;
               // NSPhraseMot* pMot = new NSPhraseMot(pPrise->nbDose.pDonnees, pContexte) ;
@@ -1208,7 +1208,7 @@ try
               pPhraRythme->iPhraseType = phraseComplement ;
               NsProposition* pProposRythme = new NsProposition(pContexte, &pPhraRythme, NsProposition::notSetType, NsProposition::notSetConjonct) ;
 
-              pPhraRythme->CCTemps.push_back(new NSPhraseMot((*iterRythme)->Objet.getDataTank(), pContexte)) ;
+              pPhraRythme->CCTemps.push_back(new NSPhraseMot((*iterRythme)->_Objet.getDataTank(), pContexte)) ;
 
               pPropRythmArray->push_back(pProposRythme) ;
             }
@@ -1279,8 +1279,8 @@ catch (...)
 NSPhrasePhase::NSPhrasePhase(const NSPhrasePhase& rv)
               :NSPhraseObjet(rv.pContexte), phrDuree(rv.pContexte), DatePhase(rv.pContexte), DateRenouv(rv.pContexte)
 {
-  Objet 			    = rv.Objet ;
-  iDcType 		    = rv.iDcType ;
+  _Objet 			    = rv._Objet ;
+  _iDcType 		    = rv._iDcType ;
 
   phrDuree        = rv.phrDuree ;
   DatePhase       = rv.DatePhase ;
@@ -1297,8 +1297,8 @@ NSPhrasePhase::operator=(const NSPhrasePhase& src)
 	if (this == &src)
 		return *this ;
 
-	Objet 			    = src.Objet ;
-	iDcType 		    = src.iDcType ;
+	_Objet 			    = src._Objet ;
+	_iDcType 		    = src._iDcType ;
 
 	phrDuree        = src.phrDuree ;
 	DatePhase       = src.DatePhase ;
@@ -1627,7 +1627,7 @@ NSPhraseCycle::metPhrase()
         pPhraRythme->iPhraseType = phrasePrincipale ;
         NsProposition* pProposRythme = new NsProposition(pContexte, &pPhraRythme, NsProposition::notSetType, NsProposition::notSetConjonct) ;
 
-        pPhraRythme->COD.push_back(new NSPhraseMot((*iterRythme)->Objet.getDataTank(), pContexte)) ;
+        pPhraRythme->COD.push_back(new NSPhraseMot((*iterRythme)->_Objet.getDataTank(), pContexte)) ;
 
         pPropRythmArray->push_back(pProposRythme) ;
       }
@@ -1649,11 +1649,11 @@ NSPhraseCycle::metPhrase()
 NSPhraseCycle::NSPhraseCycle(const NSPhraseCycle& rv)
               :NSPhraseObjet(rv.pContexte)
 {
-    Objet 			= rv.Objet;
-    iDcType 		= rv.iDcType;
+  _Objet          = rv._Objet;
+  _iDcType        = rv._iDcType;
 
-    Cycle_circadien = rv.Cycle_circadien ;
-    Rythme          = rv.Rythme ;
+  Cycle_circadien = rv.Cycle_circadien ;
+  Rythme          = rv.Rythme ;
 }
 
 NSPhraseCycle&
@@ -1662,8 +1662,8 @@ NSPhraseCycle::operator=(const NSPhraseCycle& src)
   if (this == &src)
   	return *this ;
 
-  Objet 			    = src.Objet ;
-  iDcType 		    = src.iDcType ;
+  _Objet 			    = src._Objet ;
+  _iDcType 		    = src._iDcType ;
 
   Cycle_circadien = src.Cycle_circadien ;
   Rythme          = src.Rythme ;
@@ -1818,8 +1818,8 @@ NSPhrasePrise::metPhrase()
 NSPhrasePrise::NSPhrasePrise(const NSPhrasePrise& rv)
               :NSPhraseObjet(rv.pContexte), Temporalite(rv.pContexte), TempoCycle(rv.pContexte)
 {
-  Objet       = rv.Objet ;
-  iDcType     = rv.iDcType ;
+  _Objet      = rv._Objet ;
+  _iDcType    = rv._iDcType ;
 
   nbDose	   	= rv.nbDose ;
   ValeurDose  = rv.ValeurDose ;
@@ -1836,8 +1836,8 @@ NSPhrasePrise::operator=(const NSPhrasePrise& src)
   if (this == &src)
   	return *this ;
 
-	Objet       = src.Objet ;
-  iDcType     = src.iDcType ;
+	_Objet      = src._Objet ;
+  _iDcType    = src._iDcType ;
 
   nbDose	   	= src.nbDose ;
   ValeurDose  = src.ValeurDose ;
@@ -2056,7 +2056,7 @@ NSPhraseOrgane::metPhrase()
   // La première phase consiste à annoncer l'existence de la lésion,
   // sous forme d'un COD (ex, "Il existe un polype")
   //
-  NSPhraseMot Lesion(Objet.getDataTank(), pContexte) ;
+  NSPhraseMot Lesion(_Objet.getDataTank(), pContexte) ;
   Lesion.setArticle(NSPhraseMot::articleIndefini) ;
   //
   // Dans l'ordre, on décrit l'aspect, la dimension puis la localisation
@@ -2098,15 +2098,15 @@ NSPhraseOrgane::metPhrase()
 NSPhraseOrgane::NSPhraseOrgane(const NSPhraseOrgane& rv)
                :NSPhraseObjet(rv.pContexte)
 {
-  Objet 			= rv.Objet;
-  iDcType 		= rv.iDcType;
+  _Objet 			= rv._Objet;
+  _iDcType 		= rv._iDcType;
 
-  Dimensions		= rv.Dimensions;
+  Dimensions	= rv.Dimensions;
   Lesions			= rv.Lesions;
   Aspect			= rv.Aspect;
 
-  Temporalite     = rv.Temporalite;
-  Garbage         = rv.Garbage;
+  Temporalite = rv.Temporalite;
+  Garbage     = rv.Garbage;
 }
 
 // -------------------------------------------------------------------------
@@ -2168,7 +2168,7 @@ NSPhraseTemporel::metPhrase()
 
   _pPhraseur->initialise() ;
 
-  NSPhraseMot* pMot = new NSPhraseMot(Objet.getDataTank(), pContexte) ;
+  NSPhraseMot* pMot = new NSPhraseMot(_Objet.getDataTank(), pContexte) ;
 
   _pPhraseur->COD.push_back(pMot) ;
 
@@ -2222,8 +2222,8 @@ NSPhraseTemporel::initPhraseMotTime(NSPhraseMotTime* pPMT)
 NSPhraseTemporel::NSPhraseTemporel(const NSPhraseTemporel& rv)
                  :NSPhraseObjet(rv.pContexte)
 {
-	Objet 		  = rv.Objet ;
-  iDcType 	  = rv.iDcType ;
+	_Objet 		  = rv._Objet ;
+  _iDcType 	  = rv._iDcType ;
 
   iTypeTps    = rv.iTypeTps ;
   iFormeTps   = rv.iFormeTps ;
@@ -2242,8 +2242,8 @@ NSPhraseTemporel::operator=(const NSPhraseTemporel& src)
   if (&src == this)
     return *this ;
 
-	Objet 		  = src.Objet ;
-	iDcType 	  = src.iDcType ;
+	_Objet 		  = src._Objet ;
+	_iDcType 	  = src._iDcType ;
 
 	iTypeTps    = src.iTypeTps ;
 	iFormeTps   = src.iFormeTps ;
@@ -2405,8 +2405,8 @@ NSPhraseTempoCycle::estVide()
 NSPhraseTempoCycle::NSPhraseTempoCycle(const NSPhraseTempoCycle& rv)
                    :NSPhraseObjet(rv.pContexte)
 {
-	Objet         = rv.Objet ;
-  iDcType       = rv.iDcType ;
+	_Objet        = rv._Objet ;
+  _iDcType      = rv._iDcType ;
 
   iTypeCycle    = rv.iTypeCycle ;
 
@@ -2421,8 +2421,8 @@ NSPhraseTempoCycle::operator=(const NSPhraseTempoCycle& src)
   if (this == &src)
   	return *this ;
 
-  Objet 		    = src.Objet ;
-  iDcType 	    = src.iDcType ;
+  _Objet 		    = src._Objet ;
+  _iDcType 	    = src._iDcType ;
 
   iTypeCycle    = src.iTypeCycle ;
 
@@ -2477,7 +2477,7 @@ NSPhraseBiometrie::metPhrase()
 
   _pPhraseur->initialise() ;
 
-  NSPhraseMot* pMot = new NSPhraseMot(Objet.getDataTank(), pContexte) ;
+  NSPhraseMot* pMot = new NSPhraseMot(_Objet.getDataTank(), pContexte) ;
   pMot->setComplement(Valeur.getComplement()) ;
   pMot->setFormat(Valeur.getLexique()) ;
   pMot->setUnite(Valeur.getUnit()) ;
@@ -2492,8 +2492,8 @@ NSPhraseBiometrie::metPhrase()
 NSPhraseBiometrie::NSPhraseBiometrie(const NSPhraseBiometrie& rv)
                   :NSPhraseObjet(rv.pContexte)
 {
-	Objet 		   = rv.Objet ;
-  iDcType 	   = rv.iDcType ;
+	_Objet 		   = rv._Objet ;
+  _iDcType 	   = rv._iDcType ;
 
   Valeur       = rv.Valeur ;
   Normales     = rv.Normales ;
@@ -2511,8 +2511,8 @@ NSPhraseBiometrie::operator=(const NSPhraseBiometrie& src)
   if (this == &src)
   	return *this ;
 
-  Objet 		   = src.Objet ;
-  iDcType 	   = src.iDcType ;
+  _Objet 		   = src._Objet ;
+  _iDcType 	   = src._iDcType ;
 
   Valeur       = src.Valeur ;
   Normales     = src.Normales ;
@@ -2538,9 +2538,11 @@ NSPhraseObjArray::NSPhraseObjArray(const NSPhraseObjArray& rv)
 {
 try
 {
-	if (false == empty())
-		for (iterConstPhraseObj i = rv.begin() ; rv.end() != i ; i++)
-			push_back(new NSPhraseObjet(*(*i))) ;
+	if (rv.empty())
+    return ;
+
+  for (iterConstPhraseObj i = rv.begin() ; rv.end() != i ; i++)
+    push_back(new NSPhraseObjet(*(*i))) ;
 }
 catch (...)
 {
@@ -2584,10 +2586,11 @@ try
   // Effacement des éléments déjà contenus dans le vecteur destination
   //
   vider() ;
+
 	//
   // Copie et insertion des éléments de la source
   //
-	if (false == empty())
+	if (false == src.empty())
   	for (iterConstPhraseObj i = src.begin() ; src.end() != i ; i++)
     	push_back(new NSPhraseObjet(*(*i))) ;
 

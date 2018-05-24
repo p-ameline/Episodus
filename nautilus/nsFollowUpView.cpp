@@ -473,19 +473,19 @@ NSFollowUpView::processGoal(NSLdvGoal* pGoal)
 
               // Fill the Follow Up element with treatment's phases
               //
-              if (false == (*itDrugs)->aPhases.empty())
+              if (false == (*itDrugs)->_aPhases.empty())
               {
                 ps2 = "NSFollowUpView::processGoal: filling follow up element with treatment's phases." ;
                 pContexte->getSuperviseur()->trace(&ps2, 1, NSSuper::trSubDetails) ;
 
-                NSLdvDrugPhaseIter phaseIter = (*itDrugs)->aPhases.begin() ;
-                for ( ; (*itDrugs)->aPhases.end() != phaseIter ; phaseIter++)
+                NSLdvDrugPhaseIter phaseIter = (*itDrugs)->_aPhases.begin() ;
+                for ( ; (*itDrugs)->_aPhases.end() != phaseIter ; phaseIter++)
                 {
                   NSHistoryValueManagement *pHistoryValue = new NSHistoryValueManagement() ;
                   pHistoryValue->setLabel(sDrugLexique) ;
-                  pHistoryValue->setDate((*phaseIter)->tDateOuverture.donneDateHeure()) ;
-                  pHistoryValue->setDateFin((*phaseIter)->tDateFermeture.donneDateHeure()) ;
-                  pHistoryValue->setValue((*phaseIter)->sTitreCourt) ;
+                  pHistoryValue->setDate((*phaseIter)->_tDateOuverture.donneDateHeure()) ;
+                  pHistoryValue->setDateFin((*phaseIter)->_tDateFermeture.donneDateHeure()) ;
+                  pHistoryValue->setValue((*phaseIter)->_sTitreCourt) ;
 
                   pFUelt->ElementsArray.push_back(pHistoryValue) ;
                 }

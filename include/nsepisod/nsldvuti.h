@@ -81,6 +81,8 @@ class NVLdVTemps
     string  donneFormattedDate(NSContexte* pContexte, string sLang) const ;
     string  donneFormattedHeure(NSContexte* pContexte, string sLang) const ;
 
+    string  getIso8601() ;
+
     void    placeAns(int iA) ;
     void    placeMois(int iM) ;
     void    placeJours(int iJ) ;

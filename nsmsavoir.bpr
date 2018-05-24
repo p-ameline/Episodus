@@ -79,7 +79,7 @@ IDLCFLAGS = -Ipartage -Inautilus -Iinclude -Insbb -Inssavoir -I$(BCB)\include \
   -src_suffixcpp -D_DANSLEXIDLL -DSTRICT -D_OWLDLL -D_USE_OWL_CM_EXIT -D_BIDSDLL \
   -D_OWLALLPCH -DBI_NAMESPACE -DINC_OLE2 -DNO_SHDOCVW_GUIDS -D_MUE -DN_TIERS \
   -D__OB1__ -DNO_EXT_CAPTURE -DTIXML_USE_STL
-PFLAGS = -U"..\..\..\..\Program Files (x86)\Borland\CBuilder4\Lib";..\..\..\..\cvs\episodus;partage;nautilus;nsbb;nssavoir;$(BCB)\lib\obj;$(BCB)\lib;"..\..\..\..\Program Files (x86)\Java\jdk1.6.0_30\lib";$(RELEASELIBPATH) \
+PFLAGS = -U..\..\..\..\cvs\episodus;partage;nautilus;nsbb;nssavoir;$(BCB)\lib\obj;$(BCB)\lib;"..\..\..\..\Program Files (x86)\Java\jdk1.6.0_30\lib";$(RELEASELIBPATH) \
   -Ipartage;nautilus;include;nsbb;nssavoir;$(BCB)\include;$(BCB)\include\vcl;$(BCB)\include\owlfiles;parseur;"..\..\..\..\Program Files (x86)\Java\jdk1.6.0_30\include";"..\..\..\..\Program Files (x86)\Java\jdk1.6.0_30\include\win32" \
   -N2..\..\..\..\cvs\episodus\ObjNTIERS -N0..\..\..\..\cvs\episodus\ObjNTIERS \
   -D_DANSLEXIDLL;STRICT;_OWLDLL;_USE_OWL_CM_EXIT;_BIDSDLL;_OWLALLPCH;BI_NAMESPACE;INC_OLE2;NO_SHDOCVW_GUIDS;_MUE;N_TIERS;__OB1__;NO_EXT_CAPTURE;TIXML_USE_STL \
@@ -93,7 +93,7 @@ AFLAGS = /ipartage /inautilus /iinclude /insbb /inssavoir /i$(BCB)\include \
   /d_DANSLEXIDLL /dSTRICT /d_OWLDLL /d_USE_OWL_CM_EXIT /d_BIDSDLL /d_OWLALLPCH \
   /dBI_NAMESPACE /dINC_OLE2 /dNO_SHDOCVW_GUIDS /d_MUE /dN_TIERS /d__OB1__ \
   /dNO_EXT_CAPTURE /dTIXML_USE_STL /mx /w2 /zi
-LFLAGS = -L"..\..\..\..\Program Files (x86)\Borland\CBuilder4\Lib";..\..\..\..\cvs\episodus;partage;nautilus;nsbb;nssavoir;$(BCB)\lib\obj;$(BCB)\lib;"..\..\..\..\Program Files (x86)\Java\jdk1.6.0_30\lib";$(RELEASELIBPATH) \
+LFLAGS = -L..\..\..\..\cvs\episodus;partage;nautilus;nsbb;nssavoir;$(BCB)\lib\obj;$(BCB)\lib;"..\..\..\..\Program Files (x86)\Java\jdk1.6.0_30\lib";$(RELEASELIBPATH) \
   -l"C:\cvs\episodus\" -aa -Tpd -x -Gn -Gi -v
 IFLAGS =
 # ---------------------------------------------------------------------------
@@ -147,22 +147,24 @@ Item11=nautilus;include;nsbb;nssavoir;$(BCB)\include;$(BCB)\include\vcl;$(BCB)\i
 Item12=include;nsbb;nssavoir;$(BCB)\include;$(BCB)\include\vcl;$(BCB)\include\owlfiles
 
 [HistoryLists\hlLibraryPath]
-Count=15
-Item0=..\..\..\..\Program Files (x86)\Borland\CBuilder4\Lib;..\..\..\..\cvs\episodus;partage;nautilus;nsbb;nssavoir;$(BCB)\lib\obj;$(BCB)\lib;..\..\..\..\Program Files (x86)\Java\jdk1.6.0_30\lib
-Item1=..\..\Program Files (x86)\Borland\CBuilder4\Lib;partage;nautilus;nsbb;nssavoir;$(BCB)\lib\obj;$(BCB)\lib;..\..\Program Files (x86)\Java\jdk1.6.0_30\lib
-Item2=partage;nautilus;nsbb;nssavoir;$(BCB)\lib\obj;$(BCB)\lib;..\..\Program Files (x86)\Java\jdk1.6.0_30\lib
-Item3=partage;nautilus;nsbb;nssavoir;$(BCB)\lib\obj;$(BCB)\lib;C:\Program Files\Java\jdk1.6.0_17\include\lib
-Item4=partage;nautilus;nsbb;nssavoir;$(BCB)\lib\obj;$(BCB)\lib;..\..\j2sdk1.4.2\lib
-Item5=nautilus;nsbb;nssavoir;$(BCB)\lib\obj;$(BCB)\lib;..\..\j2sdk1.4.2\lib
-Item6=nautilus;nsbb;nssavoir;$(BCB)\lib\obj;$(BCB)\lib;..\..\j2sdk1.4.1\lib
-Item7=nautilus;nsbb;nssavoir;$(BCB)\lib\obj;$(BCB)\lib;C:\j2sdk1.4.1\lib
-Item8=nautilus;nsbb;nssavoir;$(BCB)\lib\obj;$(BCB)\lib;..\..\Program Files\Java\j2sdk1.4.2_04\lib
-Item9=nautilus;nsbb;nssavoir;$(BCB)\lib\obj;$(BCB)\lib;C:\Program Files\Java\j2sdk1.4.2_04\lib
-Item10=nautilus;nsbb;nssavoir;$(BCB)\lib\obj;$(BCB)\lib
-Item11=nautilus;..\builder4\cbuilder4\Lib;..\buider3\cbuilder3\lib;nsbb;nssavoir;$(BCB)\lib\obj;$(BCB)\lib
-Item12=..\buider3\cbuilder3\lib;nsbb;nssavoir;$(BCB)\lib\obj;$(BCB)\lib
-Item13=..\program files\borland\cbuilder3\lib;nsbb;nssavoir;$(BCB)\lib\obj;$(BCB)\lib
-Item14=nsbb;nssavoir;$(BCB)\lib\obj;$(BCB)\lib
+Count=17
+Item0=..\..\..\..\cvs\episodus;partage;nautilus;nsbb;nssavoir;$(BCB)\lib\obj;$(BCB)\lib;..\..\..\..\Program Files (x86)\Java\jdk1.6.0_30\lib
+Item1=partage;nautilus;nsbb;nssavoir;$(BCB)\lib\obj;$(BCB)\lib;..\..\..\..\Program Files (x86)\Java\jdk1.6.0_30\lib
+Item2=..\..\..\..\Program Files (x86)\Borland\CBuilder4\Lib;..\..\..\..\cvs\episodus;partage;nautilus;nsbb;nssavoir;$(BCB)\lib\obj;$(BCB)\lib;..\..\..\..\Program Files (x86)\Java\jdk1.6.0_30\lib
+Item3=..\..\Program Files (x86)\Borland\CBuilder4\Lib;partage;nautilus;nsbb;nssavoir;$(BCB)\lib\obj;$(BCB)\lib;..\..\Program Files (x86)\Java\jdk1.6.0_30\lib
+Item4=partage;nautilus;nsbb;nssavoir;$(BCB)\lib\obj;$(BCB)\lib;..\..\Program Files (x86)\Java\jdk1.6.0_30\lib
+Item5=partage;nautilus;nsbb;nssavoir;$(BCB)\lib\obj;$(BCB)\lib;C:\Program Files\Java\jdk1.6.0_17\include\lib
+Item6=partage;nautilus;nsbb;nssavoir;$(BCB)\lib\obj;$(BCB)\lib;..\..\j2sdk1.4.2\lib
+Item7=nautilus;nsbb;nssavoir;$(BCB)\lib\obj;$(BCB)\lib;..\..\j2sdk1.4.2\lib
+Item8=nautilus;nsbb;nssavoir;$(BCB)\lib\obj;$(BCB)\lib;..\..\j2sdk1.4.1\lib
+Item9=nautilus;nsbb;nssavoir;$(BCB)\lib\obj;$(BCB)\lib;C:\j2sdk1.4.1\lib
+Item10=nautilus;nsbb;nssavoir;$(BCB)\lib\obj;$(BCB)\lib;..\..\Program Files\Java\j2sdk1.4.2_04\lib
+Item11=nautilus;nsbb;nssavoir;$(BCB)\lib\obj;$(BCB)\lib;C:\Program Files\Java\j2sdk1.4.2_04\lib
+Item12=nautilus;nsbb;nssavoir;$(BCB)\lib\obj;$(BCB)\lib
+Item13=nautilus;..\builder4\cbuilder4\Lib;..\buider3\cbuilder3\lib;nsbb;nssavoir;$(BCB)\lib\obj;$(BCB)\lib
+Item14=..\buider3\cbuilder3\lib;nsbb;nssavoir;$(BCB)\lib\obj;$(BCB)\lib
+Item15=..\program files\borland\cbuilder3\lib;nsbb;nssavoir;$(BCB)\lib\obj;$(BCB)\lib
+Item16=nsbb;nssavoir;$(BCB)\lib\obj;$(BCB)\lib
 
 [HistoryLists\hlDebugSourcePath]
 Count=1
@@ -190,14 +192,22 @@ Item2=ObjMUE
 Item3=Obj
 
 [HistoryLists\hlFinalOutputDir]
-Count=2
+Count=6
 Item0=..\..\..\..\cvs\episodus\
-Item1=..\..\..\..\cvs\episodus
+Item1=..\..\..\..\cvs\episodusItem1=..\..\..\..\cvs\episodusItem1=..\..\..\..\cvs\episodusItem1=..\..\..\..\cvs\episodusItem1=..\..\..\..\cvs\episodus
+Item2=
+Item3=
+Item4=
+Item5=
 
 [HistoryLists\hIBPIOutputDir]
-Count=2
+Count=6
 Item0=C:\cvs\episodus\
-Item1=..\..\..\..\cvs\episodus
+Item1=C:\cvs\episodusItem1=C:\cvs\episodusItem1=C:\cvs\episodusItem1=C:\cvs\episodusItem1=..\..\..\..\cvs\episodus
+Item2=
+Item3=
+Item4=
+Item5=
 
 [Debugging]
 DebugSourceDirs=$(BCB)\source\vcl

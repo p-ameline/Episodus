@@ -16,13 +16,13 @@ class _NSDKDCLASSE NSPhraseObjet : public decodageBase
 {
 	public :
 
-  	NSPatPathoInfo Objet ;
+  	NSPatPathoInfo _Objet ;
 
 virtual void decode(int colonne) ;
         void ammorce() ;
 
-		NSPhraseObjet(NSContexte* pCtx, int iDecoType = dcPhrase, string sLangue = "fr") ;
-		NSPhraseObjet(decodageBase* pBase, int iDecoType = dcPhrase, string sLangue = "fr") ;		NSPhraseObjet(const NSPhraseObjet& rv) ;
+		NSPhraseObjet(NSContexte* pCtx, int iDecoType = dcPhrase, string sLangue = string("fr")) ;
+		NSPhraseObjet(decodageBase* pBase, int iDecoType = dcPhrase, string sLangue = string("fr")) ;		NSPhraseObjet(const NSPhraseObjet& rv) ;
     virtual ~NSPhraseObjet() ;
 
 		NSPhraseObjet& operator=(const NSPhraseObjet& src) ;
@@ -33,7 +33,7 @@ virtual void decode(int colonne) ;
 
 	protected:
 
-		int iDcType ;
+		int _iDcType ;
 
     static long lBaseObjectCount ;
 };
@@ -140,27 +140,27 @@ class _NSDKDCLASSE NSPhrasePrescript : public NSPhraseObjet
 {
 	public :
 
-    NSPhraseObjet       Forme ;
-    NSPhraseMotTime     Dates ;
+    NSPhraseObjet    _Forme ;
+    NSPhraseMotTime  _Dates ;
 
-    NSPhraseObjArray    Administration ;    // Mode d'administration
-    NSPhraseObjet       Event ;             // en cas de douleur
+    NSPhraseObjArray _Administration ;    // Mode d'administration
+    NSPhraseObjet    _Event ;             // en cas de douleur
 
-    int                 iQuantitePhases ;
-    NSPhraseObjArray    Phases ;            // Horaire et quantité d'une prise
+    int              _iQuantitePhases ;
+    NSPhraseObjArray _Phases ;            // Horaire et quantité d'une prise
 
-    NSPhraseObjArray    Garbage ;           // Objets inclassables
-    NSPhraseMotArray    Details ;
-    NSPhraseObjArray    FreeText ;
+    NSPhraseObjArray _Garbage ;           // Objets inclassables
+    NSPhraseMotArray _Details ;
+    NSPhraseObjArray _FreeText ;
 
-    string              sNonSubstituable ;  // French only
+    string           _sNonSubstituable ;  // French only
 
     void decode(int colonne) ;
-    void metPhrase(string decDeb = "", string decFin = "", int sautLigne = 0) ;
-    void metPhraseFreeText(string decDeb = "", string decFin = "", int sautLigne = 0) ;
+    void metPhrase(string decDeb = string(""), string decFin = string(""), int sautLigne = 0) ;
+    void metPhraseFreeText(string decDeb = string(""), string decFin = string(""), int sautLigne = 0) ;
 
-    NSPhrasePrescript(NSContexte* pCtx, int iDecoType = dcPhrase, string sLangue = "fr") ;
-    NSPhrasePrescript(decodageBase* pBase, int iDecoType = dcPhrase, string sLangue = "fr") ;
+    NSPhrasePrescript(NSContexte* pCtx, int iDecoType = dcPhrase, string sLangue = string("fr")) ;
+    NSPhrasePrescript(decodageBase* pBase, int iDecoType = dcPhrase, string sLangue = string("fr")) ;
     ~NSPhrasePrescript() ;
 
     NSPhrasePrescript(const NSPhrasePrescript& rv) ;

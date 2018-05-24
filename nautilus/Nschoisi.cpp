@@ -1954,7 +1954,7 @@ NSPatientChoisi::drugs_show(string sConcern)
 try
 {
 #ifndef __EPIPUMP__
-	if (NULL == _pDocLdv)
+	if ((NSLdvDocument*) NULL == _pDocLdv)
 		return ;
 
 	TView* pView = _pDocLdv->GetViewList() ;
@@ -1983,7 +1983,7 @@ try
 	}
 
 	NSDocViewManager dvManager(pContexte) ;
-	if (sConcern == "")
+	if (string("") == sConcern)
 		dvManager.createView(_pDocLdv, "Drug Management") ;
 	else
 	{
@@ -4285,7 +4285,7 @@ NSPatientChoisi::CreeElementFromRef(string sDestinationPath, NSPatPathoArray *pP
 try
 {
 #ifndef __EPIPUMP__
-	if ((NULL == pPatPatho) || (pPatPatho->empty()))
+	if (((NSPatPathoArray*) NULL == pPatPatho) || (pPatPatho->empty()))
 		return true ;
 
 	if (string("") == sDestinationPath)
@@ -4294,7 +4294,7 @@ try
   // Parsing the destination path string
   //
   ClasseStringVector Vect ;
-	DecomposeChaine(&sDestinationPath, &Vect, "/") ;
+	DecomposeChaine(&sDestinationPath, &Vect, string("/")) ;
   if (Vect.empty())
   	return false ;
 
@@ -5663,13 +5663,17 @@ catch (...)
 }
 
 
+/**
+ *  Add a new drug to the list
+ */
 bool
 NSPatientChoisi::CreeTraitement(NSPatPathoArray *pPatPatho, VecteurString* pRelatedConcerns)
 {
 try
 {
 #ifndef __EPIPUMP__
-	if ((NULL == pPatPatho) || (pPatPatho->empty()))
+
+	if (((NSPatPathoArray*) NULL == pPatPatho) || (pPatPatho->empty()))
   	return true ;
 
 	// Recherche du document "Index de santé"

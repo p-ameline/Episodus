@@ -182,6 +182,8 @@ class NSNewConcernDlg : public NSUtilDialog
     string              _sClassif ;
     string              _sPostCase ;
 
+    OWL::TButton        *_pCimButton ;
+
     // string              *psNewNode ;
 
     // NSNewConcernDlg(NSLdvView* pView, string* psNode, NSContexte* pCtx, NSPatPathoArray* pDetails, string *pCocCode, string *sLabel = new string(""), string *pLibelle = 0, int iSever = 10) ;
@@ -206,6 +208,11 @@ class NSNewConcernDlg : public NSUtilDialog
     void DisplayCocCode() ;
     void FindCocCode(bool bVerbose) ;
 
+    void SetCimCodeVerbose() ;
+    void SetCimCodeNoVerbose() ;
+    void DisplayCimCode() ;
+    void FindCimCode(bool bVerbose) ;
+
     void FindDuration() ;
 
     // void    UpdateRisk(uint) ;
@@ -218,6 +225,7 @@ class NSNewConcernDlg : public NSUtilDialog
 
     NewConcernInfo *_pNewConcernInfo ;
     string          _sCocCode ;
+    string          _sCimCode ;
 
     NSPatPathoArray _PptDetails ;
 
@@ -359,11 +367,19 @@ class NSSimpleNewDrugDlg : public NSUtilDialog
 
     std::string         _sLexiqCode ;     // code lexique du médicament
     std::string         _sPriseUnit ;
+    std::string         _sATCCode ;       // Code ATC
+    std::string         _sCICode ;        // Code CIS ou CIP
     std::string         _sDateOuverture ; // date d'ouverture
     std::string         _sDateFermeture ; // date de fermeture
     std::string         _sFreeText ;      // texte libre
     std::string         _sALD ;           // ALD ou non
     std::string         _sPositionRepas ; // Position par rapport aux repas
+
+    std::string         _sLexiqEvent ;    // code lexique "en cas de"
+    std::string         _sFreeTextEvent ; // texte libre "en cas de"
+
+    VecteurString       _aLinkedIssues ;
+    VecteurString       _aUpdatedLinkedIssues ;
 
     NSphaseMedic*       _pPhase ;
 
@@ -371,64 +387,80 @@ class NSSimpleNewDrugDlg : public NSUtilDialog
 
     std::string         _sReferential ;
 
-    OWL::TGroupBox      *pTrtGroup ;
+    OWL::TGroupBox      *_pTrtGroup ;
 
-    NSUtilLexique       *pType ;
-    OWL::TStatic        *pUnitePriseTxt ;
-    NSUtilLexique       *pUnitePrise ;
+    NSUtilLexique       *_pType ;
+    OWL::TStatic        *_pUnitePriseTxt ;
+    NSUtilLexique       *_pUnitePrise ;
+    OWL::TStatic        *_pEventTxt ;
+    NSUtilLexique       *_pEvent ;
 
-    OWL::TStatic        *pDateDebTxt ;
-    NSUtilEditDateHeure *pDateDeb ;
-    OWL::TGroupBox      *pDateFinGroup ;
-    OWL::TRadioButton   *pRChronique ;
-    OWL::TRadioButton   *pRDans ;
-    OWL::TRadioButton   *pRDuree ;
-    OWL::TRadioButton   *pRLe ;
-    NSEditNum           *pNbJours ;
-    NSComboBox          *pCBDureeTtt ;
-    NSUtilEditDateHeure *pDateFin ;
+    OWL::TStatic        *_pDateDebTxt ;
+    NSUtilEditDateHeure *_pDateDeb ;
+    OWL::TGroupBox      *_pDateFinGroup ;
+    OWL::TRadioButton   *_pRChronique ;
+    OWL::TRadioButton   *_pRDans ;
+    OWL::TRadioButton   *_pRDuree ;
+    OWL::TRadioButton   *_pRLe ;
+    NSEditNum           *_pNbJours ;
+    NSComboBox          *_pCBDureeTtt ;
+    NSUtilEditDateHeure *_pDateFin ;
 
-    OWL::TGroupBox      *pPrescriptionGroup ;
+    OWL::TGroupBox      *_pPrescriptionGroup ;
 
-    OWL::TStatic        *pDureePhaseTxt ;
-    NSUpDownEdit        *pDureePhase ;
-    NSComboBox          *pCBDureePhase ;
-    OWL::TStatic        *pRenouvellementTxt ;
-    NSUpDownEdit        *pRenouvellement ;
-    OWL::TStatic        *pRenouvellementTimeTxt ;
+    OWL::TStatic        *_pDureePhaseTxt ;
+    NSUpDownEdit        *_pDureePhase ;
+    NSComboBox          *_pCBDureePhase ;
+    OWL::TStatic        *_pRenouvellementTxt ;
+    NSUpDownEdit        *_pRenouvellement ;
+    OWL::TStatic        *_pRenouvellementTimeTxt ;
     OWL::TCheckBox      *_pNonRenouvelable ;
 
-    OWL::TStatic        *pDateDebPrescrTxt ;
-    NSUtilEditDateHeure *pDateDebPrescr ;
-    OWL::TStatic        *pDateFinPrescrTxt ;
-    NSUtilEditDateHeure *pDateFinPrescr ;
+    OWL::TStatic        *_pDateDebPrescrTxt ;
+    NSUtilEditDateHeure *_pDateDebPrescr ;
+    OWL::TStatic        *_pDateFinPrescrTxt ;
+    NSUtilEditDateHeure *_pDateFinPrescr ;
 
-    OWL::TGroupBox      *pPosologieGroup ;
+    OWL::TGroupBox      *_pPosologieGroup ;
 
-    NSUpDownEdit        *pPriseMatin, *pPriseMidi, *pPriseSoir, *pPriseCoucher ;
-    OWL::TStatic        *pPriseMatinTxt, *pPriseMidiTxt, *pPriseSoirTxt, *pPriseCoucherTxt ;
+    NSUpDownEdit        *_pPriseMatin, *_pPriseMidi, *_pPriseSoir, *_pPriseCoucher ;
+    OWL::TStatic        *_pPriseMatinTxt, *_pPriseMidiTxt, *_pPriseSoirTxt, *_pPriseCoucherTxt ;
 
     OWL::TCheckBox      *_pALD ;
-    OWL::TButton        *pComplexModeButton ;
+    OWL::TCheckBox      *_pIssues ;
+    OWL::TButton        *_pComplexModeButton ;
     OWL::TCheckBox      *_pNonSubstituable ;
     OWL::TButton        *_pFreeTextButton ;
+
+    NSPatPathoArray     *_pPPT ;
+
+    bool                _bMustSwitchToComplexMode ;
+
+    // BDM related information
+    //
     OWL::TButton        *_pDrugInfoButton ;
     OWL::TButton        *_pBdmSearchIndicationButton ;
     OWL::TButton        *_pBdmSearchSubstanceButton ;
     OWL::TButton        *_pBdmSearchAtcButton ;
 
-    NSPatPathoArray     *pPPT ;
+    NsSelectableDrug    *_pBdmDrugInformation ;
 
-    bool                bMustSwitchToComplexMode ;
+    void getDrugInformation() ;
+    void checkSecurityCheckInformation() ;
 
   public:
 
     NSSimpleNewDrugDlg(TWindow* pView, NSContexte *pCtx, NSPatPathoArray *pPPTinit) ;
     ~NSSimpleNewDrugDlg() ;
 
-    bool mustSwitchToComplexMode() { return bMustSwitchToComplexMode ; }
+    bool mustSwitchToComplexMode() { return _bMustSwitchToComplexMode ; }
     bool ParseMedicament() ;    // Function qui charge un medicament
     bool ParsePhase(PatPathoIter &pptIter) ;
+
+    void initializeConnectedIssues(string sDrugNode) ;
+    void initConnectedIssues(VecteurString* pLinkArray) ;
+
+    VecteurString* getUpdatedLinkedConcern() { return &_aUpdatedLinkedIssues ; }
 
   protected:
 
@@ -446,6 +478,7 @@ class NSSimpleNewDrugDlg : public NSUtilDialog
     void ExecutedAfterDrugSelection() ;
     void ExecutedAfterTrtBeginDate() ;
     void ExecutedAfterTrtEndDate() ;
+    void ExecutedAfterEventSelection() ;
     void ActualisePhase() ;
     void ActualiseEndOfPrescription() ;
 
@@ -453,11 +486,25 @@ class NSSimpleNewDrugDlg : public NSUtilDialog
     void editFreeText() ;
     void nonRenouvelable() ;
     void drugInformation() ;
+    void selectIndication() ;
 
     void searchInBdmByIndication() ;
     void searchInBdmBySubstance() ;
     void searchInBdmByATC() ;
     void searchInBdm(NSBdmDriver::BAMTABLETYPE iSearchBy) ;
+
+    void getCurrentConcerns(ArrayConcern *pCurrentConcerns) ;
+
+    bool isAConnectedIssue(string sConcernNode) ;
+    bool wasAConnectedIssue(string sConcernNode) ;
+    bool isAConnected(string sConcernNode, VecteurString* pLinkArray) ;
+    void setSelectedIssuesBtnState() ;
+
+    void addConnectedIssue(string sConcernNode) ;
+
+    void updateConnectedIssues(string sDrugNode) ;
+    void UnconnectIssue(string sDrugNode, string sConcernNode) ;
+    void ConnectIssue(string sDrugNode, string sConcernNode) ;
 
   DECLARE_RESPONSE_TABLE(NSSimpleNewDrugDlg) ;
 } ;
@@ -717,6 +764,40 @@ class NSCurveSampleGroupBox : public OWL::TGroupBox
 
   DECLARE_RESPONSE_TABLE(NSCurveSampleGroupBox) ;
 };
+
+//
+// Création d'un nouveau problème de santé
+//
+class NSDrugHistoryDlg : public NSUtilDialog
+{
+  public:
+
+    NSDrugHistoryDlg(TWindow* pView, NSContexte *pCtx) ;
+    ~NSDrugHistoryDlg() ;
+
+    string getDrugCode() ;
+    string getDrugLabel() ;
+    string getAtcCode() ;
+    string getAtcLabel() ;
+
+  protected:
+
+    std::string    _sLexiqCode ;  // code lexique du médicament
+    std::string    _sLexiqLabel ;
+    std::string    _sAtcCode ;    // code ATC
+    std::string    _sAtcLabel ;
+
+    OWL::TStatic*  _pDrugText ;
+    NSUtilLexique* _pDrugEdit ;
+    OWL::TStatic*  _pAtcText ;
+    NSEditBdm*     _pAtcCode ;
+
+    void CmOk() ;
+    void CmCancel() ;
+    void SetupWindow() ;
+
+  DECLARE_RESPONSE_TABLE(NSDrugHistoryDlg) ;
+} ;
 
 class NSMedic
 {
@@ -990,6 +1071,48 @@ class NSValueInfoDlg : public NSUtilDialog
 
   DECLARE_RESPONSE_TABLE(NSValueInfoDlg) ;
 };
+
+class NSIssuesListWindow ;
+
+class NSSelectIssuesDlg : public NSUtilDialog
+{
+  public:
+
+    int*                _pSelectedIssues ;
+    size_t              _iSelectedCount ;
+    ArrayConcern*       _pIssuesArray ;
+    NSIssuesListWindow* _pIssuesList ;
+
+    NSSelectIssuesDlg(TWindow* pPere, NSContexte* pCtx, ArrayConcern* pIssues, int* pSelectedIssues, int iSelectedCount) ;
+    ~NSSelectIssuesDlg() ;
+
+    void CmOk() ;
+    void CmCancel() ;
+    void SetupWindow() ;
+    void dblClickOnIssue() ;
+
+    void InitIssuesList() ;
+    void DisplayIssuesList() ;
+    void DispInfoIssuesList(TLwDispInfoNotify& dispInfo) ;
+
+  DECLARE_RESPONSE_TABLE(NSSelectIssuesDlg) ;
+};
+
+//
+// "ListWindow" objet with double-click management (to select an issue)
+//
+class NSIssuesListWindow : public TListWindow
+{
+  public:
+
+    NSSelectIssuesDlg* _pView ;    int                _iRes ;
+    NSIssuesListWindow(NSSelectIssuesDlg* pere, int resId, TModule* module = 0) ;    ~NSIssuesListWindow() {}
+    void 	SetupWindow() ;
+    void  EvLButtonDblClk(uint modKeys, NS_CLASSLIB::TPoint& point) ;    int   IndexItemSelect() ;
+
+    void  EvSetFocus(HWND hWndLostFocus) ;
+
+  DECLARE_RESPONSE_TABLE(NSIssuesListWindow) ;};
 
 #endif // __NSLDVVAR_H
 

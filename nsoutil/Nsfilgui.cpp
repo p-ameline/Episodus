@@ -2234,22 +2234,12 @@ NSGroupGdDialog::CodeDispo(string& sCode)
 }
 voidNSGroupGdDialog::CmImport()
 {
-  char 	path[256];
-  string  sGroupe;
-  string  sLibelle;
-  string  sDateGroupe, sDateBase;
-  string  sUtil;
-  ifstream inFile;
-  string   header, line;
-  string   sParam[6] = {"","","","","",""};
-  bool     bInterne;
-
   // on choisi d'abord le répertoire par défaut d'importation (IHTM)
-  strcpy(path,(pContexte->PathName("IHTM")).c_str());
+  string sPath = pContexte->PathName("IHTM") ;
 
   TFileOpenDialog::TData initData(OFN_FILEMUSTEXIST | OFN_PATHMUSTEXIST,
                       "Tous fichiers (*.NSG)|*.nsg|",
-                                          0,path,"NSG");
+                                          0, (char*) sPath.c_str(), "NSG") ;
 
 	int iUserChoice = TFileOpenDialog(pContexte->GetMainWindow(), initData).Execute() ;
 
@@ -2260,6 +2250,7 @@ voidNSGroupGdDialog::CmImport()
 
   string sFileName = string(initData.FileName);
 
+  ifstream inFile ;
   inFile.open(sFileName.c_str());
 	if (!inFile)
   {
@@ -2268,6 +2259,9 @@ voidNSGroupGdDialog::CmImport()
   }
 
   // on récupère le header du fichier groupe
+  //
+  string header = string("") ;
+
   if (!inFile.eof())
   	getline(inFile, header) ;
   else
@@ -2276,6 +2270,8 @@ voidNSGroupGdDialog::CmImport()
     inFile.close() ;
     return ;
   }
+
+  string sParam[6] = {"", "", "", "", "", ""} ;
 
 	if (header != "")
   {
@@ -2305,11 +2301,17 @@ voidNSGroupGdDialog::CmImport()
     return ;
   }
 
-  sGroupe = sParam[2] ;
-  sLibelle = sParam[3] ;
-  sDateGroupe = sParam[4] ;
-  sUtil = sParam[5] ;
+  string sGroupe     = sParam[2] ;
+  string sLibelle    = sParam[3] ;
+  string sDateGroupe = sParam[4] ;
+  string sUtil       = sParam[5] ;
 
+  string sDateBase   = string("") ;
+
+  bool bInterne      = false ;
+
+  // Not a "system group" (means a group shared by a user)
+  //
   if ('$' != sGroupe[0])  {
     int retVal ;
     bool bExiste = false ;
@@ -2332,7 +2334,7 @@ voidNSGroupGdDialog::CmImport()
 
     string sCaption = string("Message ") + pContexte->getSuperviseur()->getAppName().c_str() ;
     retVal = ::MessageBox(pContexte->GetMainWindow()->GetHandle(), "Ce groupe de fils guides a-t-il été créé sur votre site ?", sCaption.c_str(), MB_YESNO) ;
-    if (retVal == IDYES)
+    if (IDYES == retVal)
       bInterne = true ;
     else
       bInterne = false ;
@@ -2344,6 +2346,8 @@ voidNSGroupGdDialog::CmImport()
       return ;
     }
   }
+  // This is a "system group" (means a group created by PA)
+  //
   else
   {
     bool bExiste = false ;
@@ -2397,6 +2401,7 @@ voidNSGroupGdDialog::CmImport()
 
     while (!inFile.eof())
     {
+      string line = string("") ;
       getline(inFile, line) ;
       if (string("") != line)
       {

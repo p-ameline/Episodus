@@ -58,6 +58,7 @@
 #define SEVER_TEXT          118
 #define DUSOI_BTN           119
 #define IDC_COC             120
+#define IDC_CIM             121
 
 // Dialogue NEW_DRUG
 #define DRUG_EDIT           101
@@ -109,6 +110,9 @@
 #define BDM_SEARCH_INDIC    147
 #define BDM_SEARCH_SUBST    148
 #define BDM_SEARCH_ATC      149
+#define IDC_EVENT_EDIT      150
+#define IDC_EVENT_TXT       151
+#define IDC_ISSUE_BTN       152
 
 // Dialogue PROP_PREO
 #define IDC_LISTVIEW_ACTUEL	101
@@ -182,6 +186,15 @@
 #define POINT_RADIUS_EDIT	  146
 #define POINT_RADIUS_TEXT	  147
 #define POINT_RADIUS_UPDN	  148
+
+// Dialogue DRUG_HISTORY_CTRL
+#define CONCEPT_TEXT        101
+#define CONCEPT_EDIT        102
+#define ATC_TEXT            103
+#define ATC_EDIT            104
+
+// Dialogue SELECT_ISSUES
+#define IDC_LISTVIEW_ISSUES	101
 
 // Ammorce -> Libellés
 #define IDI_LDVOBJET16	    6171

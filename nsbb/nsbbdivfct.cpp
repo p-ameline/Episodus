@@ -4097,11 +4097,11 @@ void SetGestationDates(NSDlgFonction *pNSFct)
   string sTraceText = string("Entering SetAgeGestSA") ;
   pSuper->trace(&sTraceText, 1, NSSuper::trDetails) ;
 
-  if ((NULL == pNSFct) || (NULL == pNSFct->getControl()))
+  if (((NSDlgFonction*) NULL == pNSFct) || (NULL == pNSFct->getControl()))
 		return ;
 
   BBItem* pItem = pNSFct->getControl()->getInterfaceElementItem() ;
-  if (NULL == pItem)
+  if ((BBItem*) NULL == pItem)
 		return ;
 
   NVLdVTemps tConception ;
@@ -4110,14 +4110,14 @@ void SetGestationDates(NSDlgFonction *pNSFct)
   string sDateConception ;
 	BBFilsItem* filsConception = RetournerValeurEdit(pItem, string("0CAGE1/KDATC1/2DA011/£D0;10"), &sDateConception, true) ;
 
-  if ((NULL != filsConception) && (string("") != sDateConception))
+  if (((BBFilsItem*) NULL != filsConception) && (string("") != sDateConception))
     tConception.initFromDate(sDateConception) ;
   else
   {
 	  string sDDR ;
 	  BBFilsItem* filsDDR = RetournerValeurEdit(pItem, string("0CAGE1/KDERE1/2DA011/£D0;10"), &sDDR, true) ;
 
-    if ((NULL == filsDDR) || (string("") == sDDR))
+    if (((BBFilsItem*) NULL == filsDDR) || (string("") == sDDR))
 		  return ;
 
     NVLdVTemps tDDR ;
@@ -4159,7 +4159,7 @@ void SetGestationDates(NSDlgFonction *pNSFct)
 
   string sAgeInDay ;
 	BBFilsItem* filsAgeDays = RetournerValeurEdit(pItem, string("0CAGE1/KAGFO3/2DAA01/£N0;03"), &sAgeInDay, true) ;
-	if (NULL != filsAgeDays)
+	if ((BBFilsItem*) NULL != filsAgeDays)
     ActiveChampEdit(filsAgeDays, string(szAgeInDays)) ;
 
   char szAgeInSA[33] ;

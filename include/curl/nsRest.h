@@ -8,6 +8,14 @@
 #ifndef __NSREST_H
 #define __NSREST_H
 
+#ifndef __NSCURL_H
+  class NSLibCurl ;
+#endif
+
+#ifndef CURL_EXTERN
+  class CURL ;
+#endif
+
 #include "nsoutil\nsexport.h"
 
 /** struct to contain the key and value for URL attributes or Body data */
@@ -76,6 +84,7 @@ class _NSOUTILCLASSE Rest
      * @return full URL
      */
     string add_vars_to_uri(const string& url, const vector<Var>& vars) const ;
+    string add_escaped_vars_to_uri(NSLibCurl* pLibCurl, CURL *curl, const string& url, const vector<Var>& vars) const ;
 
   private:
 

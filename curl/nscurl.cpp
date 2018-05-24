@@ -52,49 +52,63 @@ int progress_func(UnaFunctor<int>* pProgressBarSetter,
 /****************************************************************************//***                           CLASSE NSLibCurl                           ***/
 /****************************************************************************/
 
-CURL*        (FAR* NSLibCurl::pCurlEasyInit)( void ) = NULL ;
-CURLcode     (FAR* NSLibCurl::pCurlEasySetopt)( CURL *curl, CURLoption option, ... ) = NULL ;
-CURLcode     (FAR* NSLibCurl::pCurlEasyPerform)( CURL *curl ) = NULL ;
-void         (FAR* NSLibCurl::pCurlEasyReset)( CURL *curl ) = NULL ;
-void         (FAR* NSLibCurl::pCurlEasyCleanup)( CURL *curl ) = NULL ;
-CURLcode     (FAR* NSLibCurl::pCurlEasyGetInfo)( CURL *curl, CURLINFO info, ... ) = NULL ;
-const char*  (FAR* NSLibCurl::pCurlEasyStrerror)( CURLcode ) = NULL ;
-CURLcode     (FAR* NSLibCurl::pCurlGlobalInit)( long flags ) = NULL ;
-void         (FAR* NSLibCurl::pCurlGlobalCleanup)( void ) = NULL ;
+void         (FAR* NSLibCurl::pCurlEasyCleanup)(CURL *curl) = NULL ;
+char*        (FAR* NSLibCurl::pCurlEasyEscape)(CURL *curl, const char *string, int length) = NULL ;
+CURLcode     (FAR* NSLibCurl::pCurlEasyGetInfo)(CURL *curl, CURLINFO info, ...) = NULL ;
+CURL*        (FAR* NSLibCurl::pCurlEasyInit)(void) = NULL ;
+CURLcode     (FAR* NSLibCurl::pCurlEasyPerform)(CURL *curl) = NULL ;
+void         (FAR* NSLibCurl::pCurlEasyReset)(CURL *curl) = NULL ;
+CURLcode     (FAR* NSLibCurl::pCurlEasySetopt)(CURL *curl, CURLoption option, ...) = NULL ;
+const char*  (FAR* NSLibCurl::pCurlEasyStrerror)(CURLcode) = NULL ;
+char*        (FAR* NSLibCurl::pCurlEasyUnescape)(CURL *curl, const char *string, int length, int *outlength) = NULL ;
+
 CURLFORMcode (FAR* NSLibCurl::pCurlFormAdd)(struct curl_httppost **httppost, struct curl_httppost **last_post, ...) = NULL ;
 void         (FAR* NSLibCurl::pCurlFormFree)(struct curl_httppost *form) = NULL ;
+void         (FAR* NSLibCurl::pCurlFree)(void *p) = NULL ;
+
+CURLcode     (FAR* NSLibCurl::pCurlGlobalInit)(long flags) = NULL ;
+void         (FAR* NSLibCurl::pCurlGlobalCleanup)(void) = NULL ;
 curl_slist*  (FAR* NSLibCurl::pCurlSlistAppend)(struct curl_slist *, const char *) = NULL ;
 void         (FAR* NSLibCurl::pCurlSlistFreeAll)(struct curl_slist *) = NULL ;
+
+char*        (FAR* NSLibCurl::pCurlVersion)(void) = NULL ;
 // Constructeur
 NSLibCurl::NSLibCurl()
 {
 try
 {
-	pCurlEasyHandle = 0 ;
+	pCurlEasyHandle = (CURL*) 0 ;
 
   szUrl[0]        = '\0' ;
 	szLogin[0]      = '\0' ;
 	szPassword[0]   = '\0' ;
   szLogAndPass[0] = '\0' ;
 
-	pLibcurlModule = new TModule("libcurl-4.dll", TRUE) ;
-	if ((TModule*) NULL == pLibcurlModule)
+	_pLibcurlModule = new TModule("libcurl-4.dll", TRUE) ;
+	if ((TModule*) NULL == _pLibcurlModule)
 		erreur("can't load libcurl-4.dll", standardError, 0) ;
   else
 	{
-  	(FARPROC) pCurlEasyInit      = pLibcurlModule->GetProcAddress(MAKEINTRESOURCE(CURL_EASY_INIT)) ;
-    (FARPROC) pCurlEasySetopt    = pLibcurlModule->GetProcAddress(MAKEINTRESOURCE(CURL_EASY_SETOPT)) ;
-    (FARPROC) pCurlEasyPerform   = pLibcurlModule->GetProcAddress(MAKEINTRESOURCE(CURL_EASY_PERFORM)) ;
-    (FARPROC) pCurlEasyReset     = pLibcurlModule->GetProcAddress(MAKEINTRESOURCE(CURL_EASY_RESET)) ;
-    (FARPROC) pCurlEasyCleanup   = pLibcurlModule->GetProcAddress(MAKEINTRESOURCE(CURL_EASY_CLEANUP)) ;
-    (FARPROC) pCurlEasyGetInfo   = pLibcurlModule->GetProcAddress(MAKEINTRESOURCE(CURL_EASY_GETINFO)) ;
-    (FARPROC) pCurlEasyStrerror  = pLibcurlModule->GetProcAddress(MAKEINTRESOURCE(CURL_EASY_STRERROR)) ;
-    (FARPROC) pCurlGlobalInit    = pLibcurlModule->GetProcAddress(MAKEINTRESOURCE(CURL_GLOBAL_INIT)) ;
-    (FARPROC) pCurlGlobalCleanup = pLibcurlModule->GetProcAddress(MAKEINTRESOURCE(CURL_GLOBAL_CLEANUP)) ;
-    (FARPROC) pCurlFormAdd       = pLibcurlModule->GetProcAddress(MAKEINTRESOURCE(CURL_FORMADD)) ;
-    (FARPROC) pCurlFormFree      = pLibcurlModule->GetProcAddress(MAKEINTRESOURCE(CURL_FORMFREE)) ;
-    (FARPROC) pCurlSlistAppend   = pLibcurlModule->GetProcAddress(MAKEINTRESOURCE(CURL_SLIST_APPEND)) ;
-    (FARPROC) pCurlSlistFreeAll  = pLibcurlModule->GetProcAddress(MAKEINTRESOURCE(CURL_SLIST_FREE_ALL)) ;
+    (FARPROC) pCurlEasyCleanup   = _pLibcurlModule->GetProcAddress(MAKEINTRESOURCE(CURL_EASY_CLEANUP)) ;
+    (FARPROC) pCurlEasyEscape    = _pLibcurlModule->GetProcAddress(MAKEINTRESOURCE(CURL_EASY_ESCAPE)) ;
+    (FARPROC) pCurlEasyGetInfo   = _pLibcurlModule->GetProcAddress(MAKEINTRESOURCE(CURL_EASY_GETINFO)) ;
+  	(FARPROC) pCurlEasyInit      = _pLibcurlModule->GetProcAddress(MAKEINTRESOURCE(CURL_EASY_INIT)) ;
+    (FARPROC) pCurlEasyPerform   = _pLibcurlModule->GetProcAddress(MAKEINTRESOURCE(CURL_EASY_PERFORM)) ;
+    (FARPROC) pCurlEasyReset     = _pLibcurlModule->GetProcAddress(MAKEINTRESOURCE(CURL_EASY_RESET)) ;
+    (FARPROC) pCurlEasySetopt    = _pLibcurlModule->GetProcAddress(MAKEINTRESOURCE(CURL_EASY_SETOPT)) ;
+    (FARPROC) pCurlEasyStrerror  = _pLibcurlModule->GetProcAddress(MAKEINTRESOURCE(CURL_EASY_STRERROR)) ;
+    (FARPROC) pCurlEasyUnescape  = _pLibcurlModule->GetProcAddress(MAKEINTRESOURCE(CURL_EASY_UNESCAPE)) ;
+
+    (FARPROC) pCurlFormAdd       = _pLibcurlModule->GetProcAddress(MAKEINTRESOURCE(CURL_FORMADD)) ;
+    (FARPROC) pCurlFormFree      = _pLibcurlModule->GetProcAddress(MAKEINTRESOURCE(CURL_FORMFREE)) ;
+    (FARPROC) pCurlFree          = _pLibcurlModule->GetProcAddress(MAKEINTRESOURCE(CURL_FREE)) ;
+
+    (FARPROC) pCurlGlobalInit    = _pLibcurlModule->GetProcAddress(MAKEINTRESOURCE(CURL_GLOBAL_INIT)) ;
+    (FARPROC) pCurlGlobalCleanup = _pLibcurlModule->GetProcAddress(MAKEINTRESOURCE(CURL_GLOBAL_CLEANUP)) ;
+    (FARPROC) pCurlSlistAppend   = _pLibcurlModule->GetProcAddress(MAKEINTRESOURCE(CURL_SLIST_APPEND)) ;
+    (FARPROC) pCurlSlistFreeAll  = _pLibcurlModule->GetProcAddress(MAKEINTRESOURCE(CURL_SLIST_FREE_ALL)) ;
+
+    (FARPROC) pCurlVersion       = _pLibcurlModule->GetProcAddress(MAKEINTRESOURCE(CURL_VERSION)) ;
 	}
 
 /*
@@ -122,7 +136,7 @@ catch (TXInvalidModule e)
 {
 	string sErreur = string("Exception NSLibCurl ctor : ") + e.why() ;
 	erreur(sErreur.c_str(), standardError, 0) ;
-  pLibcurlModule = 0 ;
+  _pLibcurlModule = (TModule*) 0 ;
 }
 catch (...)
 {
@@ -132,8 +146,8 @@ catch (...)
 
 // destructeurNSLibCurl::~NSLibCurl()
 {
-	if (pLibcurlModule)
-		delete pLibcurlModule ;
+	if (_pLibcurlModule)
+		delete _pLibcurlModule ;
 }
 
 bool

@@ -32,10 +32,10 @@ class _NSBBCLASSE NSUtilEdit : public OWL::TEdit, public NSRoot
 
 	public:
 
-		NSUtilDialog* pNSUtilDialog ;
-		bool          bIntercepte ;
+		NSUtilDialog* _pNSUtilDialog ;
+		bool          _bIntercepte ;
 
-		bool          bWinStd ;       // Gestion standard windows
+		bool          _bWinStd ;       // Gestion standard windows
 		// Constructeur et destructeur		NSUtilEdit(NSContexte* pCtx, NSUtilDialog* pNSUtilDialog, int resId, int iTextLen = -1, bool bReturn = true, OWL::TModule* module = 0) ;
     NSUtilEdit(NSContexte* pCtx, NSUtilDialog* pNSUtilDialog, int Id, const char far* text, int x, int y, int w, int h, int iTextLen = -1, bool multiline = false, bool bReturn = true, OWL::TModule* module = 0) ;
 		~NSUtilEdit() ;
@@ -67,8 +67,8 @@ class _NSBBCLASSE NSUtilEdit2 : public NSUtilEdit
 {
   public:
 
-    string sTexte ;
-    int    ciTexteLen ;
+    string _sTexte ;
+    int    _ciTexteLen ;
 
     // Constructeur et destructeur
     NSUtilEdit2(NSContexte* pCtx, NSUtilDialog* pNSUtilDialog, int resId, int iTextLen = -1) ;
@@ -103,7 +103,7 @@ class _NSBBCLASSE NSFilterValidator : public TFilterValidator, public NSRoot
 {
   public:
 
-    string sValidator ;
+    string _sValidator ;
 
     NSFilterValidator(NSContexte* pCtx, string sCharSet) ;
     ~NSFilterValidator() ;
@@ -115,10 +115,10 @@ class _NSBBCLASSE NSEditNum : public NSUtilEdit
 {
 	public:
 
-		UINT   iMaxInput, iDecimale ;
-		string sContenuBrut, sContenuTransfert ;
-		double dValeur ;
-		NSFilterValidator* pFilterValidator ;
+		UINT   _iMaxInput, _iDecimale ;
+		string _sContenuBrut, _sContenuTransfert ;
+		double _dValeur ;
+		NSFilterValidator* _pFilterValidator ;
 
 		// Constructeur et destructeur
 		NSEditNum(NSContexte* pCtx, NSUtilDialog* pNSUtilDialog, int resId,
@@ -134,7 +134,7 @@ class _NSBBCLASSE NSEditNum : public NSUtilEdit
     void setNum(string sNum) ;
     void setNum(double dNum) ;
 
-    double getValue() { return dValeur ; }
+    double getValue() { return _dValeur ; }
 
 		// child id notification handled at the child
 		//
@@ -161,9 +161,9 @@ class _NSBBCLASSE NSUtilEditDate : public NSUtilEdit
 {
 	public:
 
-		string sContenuBrut, sContenuTransfert ;
-		string sMask ;
-    string sFormat ;
+		string _sContenuBrut, _sContenuTransfert ;
+		string _sMask ;
+    string _sFormat ;
     string _sLang ;
 
 		// Constructeur et destructeur
@@ -196,8 +196,8 @@ class _NSBBCLASSE NSUtilEditHeure : public NSUtilEdit
 {
 	public:
 
-		string sContenuBrut, sContenuTransfert ;
-    string sFormat ;
+		string _sContenuBrut, _sContenuTransfert ;
+    string _sFormat ;
     string _sLang ;
 
 		// Constructeur et destructeur
@@ -261,9 +261,9 @@ class _NSBBCLASSE NSUtilEditSomme : public NSUtilEdit
 {
 	public:
 
-		string sContenuBrut, sContenuTransfert ;
-		string sZero ;
-		int    textLen ;
+		string _sContenuBrut, _sContenuTransfert ;
+		string _sZero ;
+		int    _textLen ;
     string _sLang ;
 
 		// Constructeur et destructeur
@@ -297,31 +297,31 @@ class _NSBBCLASSE NSUtilLexique : public NSEditDicoGlobal
 
 	public:
 
-		string sContenuTransfert ; //label dans le champ edit
-    string sCode ;             //code lexique
-    NSUtilDialog* pNSUtilDialog ;
+		string        _sContenuTransfert ; //label dans le champ edit
+    string        _sCode ;             //code lexique
+    NSUtilDialog* _pNSUtilDialog ;
 		//
     // Constructeur et destructeur
     //
     NSUtilLexique(NSContexte* pCtx, TWindow* parent, int resourceId, NSDico* pDictio,
-                      uint textLimit = 0, OWL::TModule* module = 0) ;
+                      uint textLimit = 0, OWL::TModule* module = (OWL::TModule*) 0) ;
 
     NSUtilLexique(NSContexte* pCtx, NSUtilDialog* pUtilDialog, int resourceId, NSDico* pDictio,
-                      uint textLimit = 0, OWL::TModule* module = 0) ;
+                      uint textLimit = 0, OWL::TModule* module = (OWL::TModule*) 0) ;
 
     NSUtilLexique(NSContexte* pCtx, TWindow* parent, int resourceId, NSDico* pDictio,
                       const char far* text,
                       int x, int y, int w, int h,
                       uint     textLimit = 0,
                       bool     multiline = false,
-                      OWL::TModule* module = 0) ;
+                      OWL::TModule* module = (OWL::TModule*) 0) ;
 
 		NSUtilLexique(NSContexte* pCtx, NSUtilDialog* pUtilDialog, int resourceId, NSDico* pDictio,
                       const char far* text,
                       int x, int y, int w, int h,
                       uint     textLimit = 0,
                       bool     multiline = false,
-                      OWL::TModule* module = 0) ;
+                      OWL::TModule* module = (OWL::TModule*) 0) ;
 
 		~NSUtilLexique() ;
 
@@ -330,10 +330,13 @@ class _NSBBCLASSE NSUtilLexique : public NSEditDicoGlobal
 		//
 		// méthodes
 		//
-    string getCode()  { return sCode ; }
+    string getCode()          { return _sCode ; }
+    void   setCode(string sC) { _sCode = sC ; }
     string getCodeSens() ;
-    string getLabel() { return sContenuTransfert ; }
-    void setLabel(string code, string texteFictif = "") ;
+
+    string getLabel()                     { return _sContenuTransfert ; }
+    void   setContenuTransfert(string sC) { _sContenuTransfert = sC ; }
+    void setLabel(string code, string texteFictif = string("")) ;
 
     void SetupWindow() ;
     void UpdateDico() ;
@@ -364,7 +367,7 @@ class _NSBBCLASSE NSUtilUpDown : public OWL::TUpDown, public NSRoot
 	protected:
 
   	// variables
-		NSUtilUpDownEdit *pFather ;
+		NSUtilUpDownEdit *_pFather ;
 
 	// table de réponses
   DECLARE_RESPONSE_TABLE(NSUtilUpDown) ;
@@ -392,8 +395,8 @@ class _NSBBCLASSE NSUtilEditNumSimpl : public OWL::TEdit, public NSRoot
 	protected:
 
 		// variables
-    NSUtilUpDownEdit*   pFather ;
-    TWindow*            pDlgParent ;
+    NSUtilUpDownEdit* _pFather ;
+    TWindow*          _pDlgParent ;
 
 	DECLARE_RESPONSE_TABLE(NSUtilEditNumSimpl) ;
 } ;
@@ -407,20 +410,20 @@ class _NSBBCLASSE NSUtilUpDownEdit : public NSRoot
   	~NSUtilUpDownEdit() ;
 
 		// functions
-  	void               setEditNum(NSUtilEditNumSimpl *pEditNum)    { pEditNumControl = pEditNum ; }
-  	void               setUpDown(NSUtilUpDown *pUpDown)            { pUpDownControl = pUpDown ; }
+  	void               setEditNum(NSUtilEditNumSimpl *pEditNum)    { _pEditNumControl = pEditNum ; }
+  	void               setUpDown(NSUtilUpDown *pUpDown)            { _pUpDownControl = pUpDown ; }
 
-  	NSUtilEditNumSimpl *getEditNum()        { return pEditNumControl ; }
-  	NSUtilUpDown       *getUpDown()         { return pUpDownControl ; }
+  	NSUtilEditNumSimpl *getEditNum()        { return _pEditNumControl ; }
+  	NSUtilUpDown       *getUpDown()         { return _pUpDownControl ; }
 
-  	int                getValue()           { return pEditNumControl->getVal() ; }
-  	void               setValue(int iValue) { pEditNumControl->setVal(iValue) ; }
+  	int                getValue()           { return _pEditNumControl->getVal() ; }
+  	void               setValue(int iValue) { _pEditNumControl->setVal(iValue) ; }
 
   	// variables
 	protected:
 
-		NSUtilUpDown       *pUpDownControl ;
-  	NSUtilEditNumSimpl *pEditNumControl ;
+		NSUtilUpDown       *_pUpDownControl ;
+  	NSUtilEditNumSimpl *_pEditNumControl ;
 } ;
 
 #endif

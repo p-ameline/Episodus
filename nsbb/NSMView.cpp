@@ -296,7 +296,7 @@ NSMUEView::addConcernTitle()
     NSConcern* pConcern = pConcerns->getConcern(sPreoccup) ;
     if (pConcern)
     {
-      sViewName += string(" - ") + pConcern->_sTitre ;
+      sViewName += string(" - ") + pConcern->getTitle() ;
       return ;
     }
   }

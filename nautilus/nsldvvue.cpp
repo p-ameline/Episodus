@@ -1169,15 +1169,14 @@ NSLdvView::SetWindowPosit()
 {
 try
 {
-	string sPosition = pContexte->getEpisodus()->sPosLdV;
-	if (sPosition == "")
-		return;
+	string sPosition = pContexte->getEpisodus()->sPosLdV ;
+	if (string("") == sPosition)
+		return ;
 
-	int     X,Y,W,H;
-	string  sTaille;
-	size_t  debut = 0;
-	size_t  positVide = sPosition.find("|");  //chaîne vide
-	int     nbCoords = 0;
+	string  sTaille ;
+	size_t  debut = 0 ;
+	size_t  positVide = sPosition.find("|") ;  //chaîne vide
+	int     nbCoords = 0 ;
 
 	vector<string> Coordonnees;  //contient les coordonnées sous forme de string
 
@@ -1192,34 +1191,34 @@ try
 	nbCoords++;
 
 	// récupérer les coordonnées
-	vector<string> :: iterator i;
-	i = Coordonnees.begin();
-	X = StringToDouble(*i);
-	i++;
-	Y = StringToDouble(*i);
-	i++;
-	W  = StringToDouble(*i);
-	i++;
-	H = StringToDouble(*i);
+	vector<string>::iterator i ;
+	i = Coordonnees.begin() ;
+	int X = StringToDouble(*i) ;
+	i++ ;
+	int Y = StringToDouble(*i) ;
+	i++ ;
+	int W  = StringToDouble(*i) ;
+	i++ ;
+	int H = StringToDouble(*i) ;
 
 	// cas en icone ou plein ecran
 	if (nbCoords > 4)
 	{
-		i++;
-		sTaille = *i;
+		i++ ;
+		sTaille = *i ;
 	}
 	else
-		sTaille = "N";
+		sTaille = string("N") ;
 
-	Parent->SetWindowPos(0, X, Y, W, H, SWP_NOZORDER);
+	Parent->SetWindowPos(0, X, Y, W, H, SWP_NOZORDER) ;
 
-	if (sTaille == "I")
-		Parent->Show(SW_SHOWMINIMIZED);
+	if (string("I") == sTaille)
+		Parent->Show(SW_SHOWMINIMIZED) ;
 	else
-		if (sTaille == "Z")
-    	Parent->Show(SW_SHOWMAXIMIZED);
+		if (string("Z") == sTaille)
+    	Parent->Show(SW_SHOWMAXIMIZED) ;
     else
-        Parent->Show(SW_SHOWNORMAL);
+        Parent->Show(SW_SHOWNORMAL) ;
 }
 catch (...)
 {
@@ -1781,7 +1780,7 @@ NSLdvView::CmAddObjectifs(NSConcern* pConcern, LDVFRAME iFrame)
 {
 try
 {
-  if (NULL == pConcern)
+  if ((NSConcern*) NULL == pConcern)
 		return ;
 
 	if (false == pConcern->isActiveConcern())
@@ -1814,7 +1813,7 @@ NSLdvView::CmProject(NSConcern* pConcern, LDVFRAME iFrame, string sKsName, strin
 {
 try
 {
-  if ((NULL == pConcern) || (string("") == sKsName))
+  if (((NSConcern*) NULL == pConcern) || (string("") == sKsName))
 		return ;
 
 	if (false == pConcern->isActiveConcern())
@@ -1855,7 +1854,7 @@ NSLdvView::CmEvolPreoIndx(NSConcern* pConcern, NVLdVTemps tpsTarget, LDVFRAME iF
 {
 try
 {
-  if (NULL == pConcern)
+  if ((NSConcern*) NULL == pConcern)
 		return ;
 
 	int iS = 10 ;
@@ -1900,7 +1899,7 @@ NSLdvView::CmSuppressPreo(NSConcern* pConcern)
 {
 try
 {
-  if (NULL == pConcern)
+  if ((NSConcern*) NULL == pConcern)
 		return ;
 
   NSFrameInformation* pFrameInfo = _pLdVDoc->getFrameForNode(pConcern->getNoeud()) ;
@@ -1951,7 +1950,7 @@ NSLdvView::CmDrugNewForConcern(NSConcern* pRelatedConcern)
 void
 NSLdvView::CmDrugRenew(NSLdvDrug* pDrug)
 {
-	if (NULL == pDrug)
+	if ((NSLdvDrug*) NULL == pDrug)
 		return ;
 
 	string sNodeToAlter = pDrug->getNoeud() ;
@@ -1962,7 +1961,7 @@ NSLdvView::CmDrugRenew(NSLdvDrug* pDrug)
 void
 NSLdvView::CmDrugModify(NSLdvDrug* pDrug)
 {
-  if (NULL == pDrug)
+  if ((NSLdvDrug*) NULL == pDrug)
 		return ;
 
 	string sNodeToAlter = pDrug->getNoeud() ;
@@ -1973,7 +1972,7 @@ NSLdvView::CmDrugModify(NSLdvDrug* pDrug)
 void
 NSLdvView::CmDrugChangePoso(NSLdvDrug* pDrug)
 {
-	if (NULL == pDrug)
+	if ((NSLdvDrug*) NULL == pDrug)
 		return ;
 
 	_pLdVDoc->DrugChangePosoService(this, pDrug) ;
@@ -1982,7 +1981,7 @@ NSLdvView::CmDrugChangePoso(NSLdvDrug* pDrug)
 void
 NSLdvView::CmDrugStop(NSLdvDrug* pDrug)
 {
-  if (NULL == pDrug)
+  if ((NSLdvDrug*) NULL == pDrug)
 		return ;
 
 	// string sWarningMsg = pContexte->getSuperviseur()->getText("drugManagementWarnings", "doYouReallyWantToStopThisPrescription") ;
@@ -1995,7 +1994,7 @@ NSLdvView::CmDrugStop(NSLdvDrug* pDrug)
 void
 NSLdvView::CmDrugDelete(NSLdvDrug* pDrug)
 {
-  if (NULL == pDrug)
+  if ((NSLdvDrug*) NULL == pDrug)
 		return ;
 
 	// string sWarningMsg = pContexte->getSuperviseur()->getText("drugManagementWarnings", "doYouReallyWantToDeleteThisPrescription") ;
@@ -2014,7 +2013,7 @@ NSLdvView::CmDrugPrescription()
 void
 NSLdvView::CmManageRights(NSConcern* pConcern)
 {
-  if (NULL == pConcern)
+  if ((NSConcern*) NULL == pConcern)
 		return ;
 
   NSFrameInformation* pFrameInfo = _pLdVDoc->getFrameForNode(pConcern->getNoeud()) ;
@@ -2025,7 +2024,7 @@ NSLdvView::CmManageRights(NSConcern* pConcern)
 void
 NSLdvView::CmManageRights(NSLdvDrug* pDrug)
 {
-  if (NULL == pDrug)
+  if ((NSLdvDrug*) NULL == pDrug)
 		return ;
 
   NSFrameInformation* pFrameInfo = _pLdVDoc->getFrameForNode(pDrug->getNoeud()) ;
@@ -2038,7 +2037,7 @@ NSLdvView::CmNewDrugsFromRefForConcern(NSConcern* pConcern)
 {
 try
 {
-  if (NULL == pConcern)
+  if ((NSConcern*) NULL == pConcern)
 		return ;
 
   _pLdVDoc->DrugSelectProtocolForConcern(this, pConcern->_sReference) ;
@@ -2054,7 +2053,7 @@ NSLdvView::CmNewGoalsFromRefForConcern(NSConcern* pConcern)
 {
 try
 {
-  if (NULL == pConcern)
+  if ((NSConcern*) NULL == pConcern)
 		return ;
 
   _pLdVDoc->GoalSelectProtocolForConcern(this, pConcern->_sReference) ;
@@ -2093,7 +2092,7 @@ NSLdvView::CmChgPreoType(NSConcern* pConcern, LDVFRAME iFrame)
 {
 try
 {
-  if (NULL == pConcern)
+  if ((NSConcern*) NULL == pConcern)
 		return ;
 
 	// Recherche de cette préoccupation dans l'Array
@@ -3571,7 +3570,7 @@ NSLdvView::getScrollablePhysicalRect(NVLdVRect ldvRect)
 bool
 NSLdvView::convertUnit(double* pdValue, string sResultUnit, string sInitialUnit, string sRelatedTo, bool bVerbose)
 {
-	if (NULL == pdValue)
+	if ((double*) NULL == pdValue)
 		return false ;
 
 	if (sResultUnit == sInitialUnit)
@@ -3864,6 +3863,9 @@ NSLdvView::reorganizeLines()
 {
 }
 
+/**
+ *  Called when the drugs list has changed
+ */
 void
 NSLdvView::reinitDrugs()
 {
@@ -9118,10 +9120,10 @@ NSDrugLineView::NSDrugLineView(NSContexte* pCtx, NSLdvViewArea *pWorkArea, NSLdv
 
 	_pDrug = pLdvDrug ;
 
-	_Box.setLeft(_pDrug->tDateOuverture) ;
+	_Box.setLeft(_pDrug->_tDateOuverture) ;
 
-	if (false == _pDrug->tDateFermeture.estVide())
-		_Box.setRight(_pDrug->tDateFermeture) ;
+	if (false == _pDrug->_tDateFermeture.estVide())
+		_Box.setRight(_pDrug->_tDateFermeture) ;
 	else
 	{
 		NVLdVTemps tNoLimit ;
@@ -9196,8 +9198,8 @@ try
 	NVLdVPoint ldvTopLeft(_pView) ;
 	// Left time
 	NVLdVTemps tLeftTime = pRectARepeindre->getLeft() ;
-	if (_pDrug->tDateOuverture > tLeftTime)
-		tLeftTime = _pDrug->tDateOuverture ;
+	if (_pDrug->_tDateOuverture > tLeftTime)
+		tLeftTime = _pDrug->_tDateOuverture ;
 
 	ldvTopLeft.setX(tLeftTime);
 	ldvTopLeft.setY(_pWorkingArea->drugDonneTopLine(_iIndex)) ;
@@ -9205,8 +9207,8 @@ try
 	NVLdVPoint ldvBottomRight(_pView) ;
 	// Right time
 	NVLdVTemps tRightTime = pRectARepeindre->getRight() ;
-	if (_pDrug->tDateFermeture < tRightTime)
-  	tRightTime = _pDrug->tDateFermeture ;
+	if (_pDrug->_tDateFermeture < tRightTime)
+  	tRightTime = _pDrug->_tDateFermeture ;
 	ldvBottomRight.setX(tRightTime) ;	ldvBottomRight.setY(_pWorkingArea->drugDonneBottomLine(_iIndex)) ;
 	NS_CLASSLIB::TPoint ptTopLeft = _pWorkingArea->getScrollablePhysicalPoint(ldvTopLeft) ;
 	NS_CLASSLIB::TPoint ptBotRigh = _pWorkingArea->getScrollablePhysicalPoint(ldvBottomRight) ;
@@ -9228,13 +9230,13 @@ try
 	// 3D decorating
 
 	bool bLeftHedgeDraw ;
-	if (_pDrug->tDateOuverture > pRectARepeindre->getLeft())
+	if (_pDrug->_tDateOuverture > pRectARepeindre->getLeft())
 		bLeftHedgeDraw = true ;
 	else
 		bLeftHedgeDraw = false ;
 
 	bool bRightHedgeDraw ;
-	if (_pDrug->tDateFermeture < pRectARepeindre->getRight())
+	if (_pDrug->_tDateFermeture < pRectARepeindre->getRight())
 		bRightHedgeDraw = true ;
 	else
 		bRightHedgeDraw = false ;
@@ -9315,11 +9317,11 @@ try
 	NVLdVTemps tNoLimit ;
 	tNoLimit.setNoLimit();
 
-	if ((ldvRight.getX() > _pDrug->tDateFermeture) && (false == _pDrug->tDateFermeture.estNoLimit()))
-		ldvRight.setX(_pDrug->tDateFermeture) ;
+	if ((ldvRight.getX() > _pDrug->_tDateFermeture) && (false == _pDrug->_tDateFermeture.estNoLimit()))
+		ldvRight.setX(_pDrug->_tDateFermeture) ;
 
-	if (ldvLeft.getX() < _pDrug->tDateOuverture)
-		ldvLeft.setX(_pDrug->tDateOuverture) ;
+	if (ldvLeft.getX() < _pDrug->_tDateOuverture)
+		ldvLeft.setX(_pDrug->_tDateOuverture) ;
 
 	tptBotLeft  = _pWorkingArea->getScrollablePhysicalPoint(ldvLeft) ;
 	tptBotRight = _pWorkingArea->getScrollablePhysicalPoint(ldvRight) ;
@@ -9329,9 +9331,9 @@ try
 
   // Affichage des doses
   //
-  if ((_pView->getXunit() > pixSemaine) && (false == _pDrug->aPhases.empty()))
+  if ((_pView->getXunit() > pixSemaine) && (false == _pDrug->_aPhases.empty()))
   {
-  	NSLdvDrugPhaseIter itPhase = _pDrug->aPhases.begin() ;
+  	NSLdvDrugPhaseIter itPhase = _pDrug->_aPhases.begin() ;
 
     HFONT hOldFont = (HFONT) pDc->GetCurrentObject(OBJ_FONT) ;
 
@@ -9341,12 +9343,12 @@ try
     bool bDoseDisplayed = false ;
     int  iDoseTextHeight = 0 ;
 
-  	for (; itPhase != _pDrug->aPhases.end() ; itPhase++)
+  	for (; itPhase != _pDrug->_aPhases.end() ; itPhase++)
     {
     	// Phase indicator
 
 			// Left time
-			NVLdVTemps tpsPhaseStart = (*itPhase)->tDateOuverture ;
+			NVLdVTemps tpsPhaseStart = (*itPhase)->_tDateOuverture ;
       // If start is visible, draw it
       if ((tpsPhaseStart > ldvBotLeft.getX()) && (tpsPhaseStart < ldvBotRight.getX()))
       {
@@ -9365,7 +9367,7 @@ try
       }
 
       // Right time
-      NVLdVTemps tpsPhaseEnd = (*itPhase)->tDateFermeture ;
+      NVLdVTemps tpsPhaseEnd = (*itPhase)->_tDateFermeture ;
       if ((tpsPhaseEnd < ldvBotRight.getX()) && (tpsPhaseEnd > ldvBotLeft.getX()))
       {
       	NVLdVPoint ldvPhaseTopRight(_pView) ;
@@ -9384,22 +9386,22 @@ try
 
       if ((tpsPhaseStart < ldvRight.getX()) && (tpsPhaseEnd > ldvLeft.getX()))
       {
-      	string sShortTitle = (*itPhase)->sTitreCourt ;
+      	string sShortTitle = (*itPhase)->_sTitreCourt ;
       	if (sShortTitle != string(""))
       	{
         	NVLdVPoint ldvPhaseTLeft(_pView) ;
       		NVLdVPoint ldvPhaseBRight(_pView) ;
 
-          if (ldvRight.getX() < (*itPhase)->tDateFermeture)
+          if (ldvRight.getX() < (*itPhase)->_tDateFermeture)
           	ldvPhaseBRight.setX(ldvRight.getX()) ;
           else
-          	ldvPhaseBRight.setX((*itPhase)->tDateFermeture) ;
+          	ldvPhaseBRight.setX((*itPhase)->_tDateFermeture) ;
           ldvPhaseBRight.setY(_pWorkingArea->drugDonneTopLine(_iIndex)) ;
 
-          if (ldvLeft.getX() > (*itPhase)->tDateOuverture)
+          if (ldvLeft.getX() > (*itPhase)->_tDateOuverture)
           	ldvPhaseTLeft.setX(ldvLeft.getX()) ;
           else
-          	ldvPhaseTLeft.setX((*itPhase)->tDateOuverture) ;
+          	ldvPhaseTLeft.setX((*itPhase)->_tDateOuverture) ;
           ldvPhaseTLeft.setY(_pWorkingArea->drugDonneTopLine(_iIndex) + _pWorkingArea->getInterligne() / 2) ;
 
         	NS_CLASSLIB::TPoint tptPhaseTLeft  = _pWorkingArea->getScrollablePhysicalPoint(ldvPhaseTLeft) ;
@@ -9430,7 +9432,7 @@ try
     ::SelectObject(pDc->GetHDC(), hOldFont) ;
   }
 
-	pDc->DrawText(_pDrug->sTitreCourt.c_str(), -1, rect2Compare, DT_CALCRECT) ;
+	pDc->DrawText(_pDrug->_sTitreCourt.c_str(), -1, rect2Compare, DT_CALCRECT) ;
 	if (rectDisplay.Width() < rect2Compare.Width())
 	{
 		int decal = rect2Compare.Width() - rectDisplay.Width() ;
@@ -9438,16 +9440,16 @@ try
 		rectDisplay.right += decal ;
 	}
 
-	pDc->DrawText(_pDrug->sTitreCourt.c_str(), -1, rectDisplay, DT_CENTER) ;
+	pDc->DrawText(_pDrug->_sTitreCourt.c_str(), -1, rectDisplay, DT_CENTER) ;
 
   // -----------------------------------------------------------------------
 	// Affichage des objectifs
 	// -----------------------------------------------------------------------
 
-	if ((_pDrug->pWorstJalons) && (false == _pDrug->pWorstJalons->empty()))
+	if ((_pDrug->_pWorstJalons) && (false == _pDrug->_pWorstJalons->empty()))
 	{
-  	GoalInfoIter jalonIt = _pDrug->pWorstJalons->begin() ;
-    for ( ; jalonIt != _pDrug->pWorstJalons->end(); jalonIt++)
+  	GoalInfoIter jalonIt = _pDrug->_pWorstJalons->begin() ;
+    for ( ; jalonIt != _pDrug->_pWorstJalons->end(); jalonIt++)
     {
     	if (((*jalonIt)->tpsInfo < tRightTime) &&
                                         ((*jalonIt)->tpsClosed > tLeftTime))
@@ -11014,7 +11016,7 @@ ArrayOfToons::initTreatments(NSFrameInformationArray *pFrames, NSContexte* pCtx,
 {
 try
 {
-  if (NULL == pFrames)
+  if ((NSFrameInformationArray*) NULL == pFrames)
     return ;
 
   for (int i = 0 ; i < FRAMECOUNT ; i++)
@@ -11060,8 +11062,8 @@ try
           //
           if (pDrugLine && pDrugLine->getDrug() &&
               (pDrugLine->getDrug()->getLexique() == (*i)->getLexique()) &&
-               ((pDrugLine->_Box.getLeft() > (*i)->tDateOuverture) ||
-                (pDrugLine->_Box.getRight() < (*i)->tDateFermeture))
+               ((pDrugLine->_Box.getLeft() > (*i)->_tDateOuverture) ||
+                (pDrugLine->_Box.getRight() < (*i)->_tDateFermeture))
                )
           	iRefIndex = pDrugLine->getIndex() ;
         }
@@ -11083,6 +11085,9 @@ catch (...)
 }
 }
 
+/**
+ *  The list of drugs must be reloaded
+ */
 void
 ArrayOfToons::reinitDrugs(NSFrameInformationArray *pFrames, NSContexte* pCtx, NSLdvViewArea* pWrk)
 {

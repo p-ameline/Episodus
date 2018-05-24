@@ -1729,7 +1729,7 @@ ChoixCaptureUnit::ChoixCaptureUnit(TWindow* parent, NSContexte* pCtx, string* pT
 
 ChoixCaptureUnit::~ChoixCaptureUnit()
 {
-  // delete pType ;
+  delete pType ;
 }
 
 void
@@ -1742,22 +1742,21 @@ void
 ChoixCaptureUnit::CmOk()
 {
 	//ne pas accepter les textes libres
-	if (pType->sCode == string("£?????"))
+	if (pType->getCode() == string("£?????"))
 	{
 		erreur("Il faut choisir un code lexique et non pas du texte libre ", warningError, 0) ;
 		pType->SetFocus() ;
 		return ;
 	}
-	*pTypeUnit = pType->sCode ;
-	delete pType ;
+
+	*pTypeUnit = pType->getCode() ;
 	CloseWindow(IDOK) ;
 }
 
 void
 ChoixCaptureUnit::CmCancel()
 {
-	delete pType ;
-	*pTypeUnit = "" ;
+	*pTypeUnit = string("") ;
 	Destroy(IDCANCEL) ;
 }
 

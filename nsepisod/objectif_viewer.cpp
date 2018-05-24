@@ -545,10 +545,10 @@ ObjectifViewerDlg::hasControlValue(NSUtilEditDateHeure* pControl)
 bool
 ObjectifViewerDlg::hasControlValue(NSUtilLexique* pControl)
 {
-	if (!pControl || !(pControl->HWindow))
+	if (((NSUtilLexique*) NULL == pControl) || !(pControl->HWindow))
 		return false ;
 
-	if (pControl->sContenuTransfert != "")
+	if (pControl->getLabel() != string(""))
 		return true ;
 	return false ;
 }
@@ -654,73 +654,73 @@ ObjectifViewerDlg::getPeriodData()
   if (hasControlValue(pPeriodIdealMin))
   {
     pPeriodIdealMin->donneValeur() ;
-    pObjectif->_dDelaiDebutIdeal = pPeriodIdealMin->dValeur ;
+    pObjectif->_dDelaiDebutIdeal = pPeriodIdealMin->_dValeur ;
     pObjectif->_sUniteDebutIdeal = sPeriodUnitCode ;
   }
   else if ((pObjectif->_dDelaiDebutIdeal > 0) || (pObjectif->_sUniteDebutIdeal != ""))
   {
     pObjectif->_dDelaiDebutIdeal = 0 ;
-    pObjectif->_sUniteDebutIdeal = "" ;
+    pObjectif->_sUniteDebutIdeal = string("") ;
   }
 
   if (hasControlValue(pPeriodIdealMax))
   {
     pPeriodIdealMax->donneValeur() ;
-    pObjectif->_dDelaiDebutIdealMax = pPeriodIdealMax->dValeur ;
+    pObjectif->_dDelaiDebutIdealMax = pPeriodIdealMax->_dValeur ;
     pObjectif->_sUniteDebutIdealMax = sPeriodUnitCode ;
   }
   else if ((pObjectif->_dDelaiDebutIdealMax > 0) || (pObjectif->_sUniteDebutIdealMax != ""))
   {
     pObjectif->_dDelaiDebutIdealMax = 0 ;
-    pObjectif->_sUniteDebutIdealMax = "" ;
+    pObjectif->_sUniteDebutIdealMax = string("") ;
   }
 
   if (hasControlValue(pPeriodRecommendMin))
   {
     pPeriodRecommendMin->donneValeur() ;
-    pObjectif->_dDelaiDebutConseille = pPeriodRecommendMin->dValeur ;
+    pObjectif->_dDelaiDebutConseille = pPeriodRecommendMin->_dValeur ;
     pObjectif->_sUniteDebutConseille = sPeriodUnitCode ;
   }
   else if ((pObjectif->_dDelaiDebutConseille > 0) || (pObjectif->_sUniteDebutConseille != ""))
   {
     pObjectif->_dDelaiDebutConseille = 0 ;
-    pObjectif->_sUniteDebutConseille = "" ;
+    pObjectif->_sUniteDebutConseille = string("") ;
   }
 
   if (hasControlValue(pPeriodRecommendMax))
   {
     pPeriodRecommendMax->donneValeur() ;
-    pObjectif->_dDelaiDebutConseilMax = pPeriodRecommendMax->dValeur ;
+    pObjectif->_dDelaiDebutConseilMax = pPeriodRecommendMax->_dValeur ;
     pObjectif->_sUniteDebutConseilMax = sPeriodUnitCode ;
   }
   else if ((pObjectif->_dDelaiDebutConseilMax > 0) || (pObjectif->_sUniteDebutConseilMax != ""))
   {
     pObjectif->_dDelaiDebutConseilMax = 0 ;
-    pObjectif->_sUniteDebutConseilMax = "" ;
+    pObjectif->_sUniteDebutConseilMax = string("") ;
   }
 
   if (hasControlValue(pPeriodAuthorizeMin))
   {
     pPeriodAuthorizeMin->donneValeur() ;
-    pObjectif->_dDelaiDebutAutorise = pPeriodAuthorizeMin->dValeur ;
+    pObjectif->_dDelaiDebutAutorise = pPeriodAuthorizeMin->_dValeur ;
     pObjectif->_sUniteDebutAutorise = sPeriodUnitCode ;
   }
   else if((pObjectif->_dDelaiDebutAutorise > 0) || (pObjectif->_sUniteDebutAutorise != ""))
   {
     pObjectif->_dDelaiDebutAutorise = 0 ;
-    pObjectif->_sUniteDebutAutorise = "" ;
+    pObjectif->_sUniteDebutAutorise = string("") ;
   }
 
   if (hasControlValue(pPeriodAuthorizeMax))
   {
     pPeriodAuthorizeMax->donneValeur() ;
-    pObjectif->_dDelaiDebutCritique = pPeriodAuthorizeMax->dValeur ;
+    pObjectif->_dDelaiDebutCritique = pPeriodAuthorizeMax->_dValeur ;
     pObjectif->_sUniteDebutCritique = sPeriodUnitCode ;
   }
   else if((pObjectif->_dDelaiDebutCritique > 0) || (pObjectif->_sUniteDebutCritique != ""))
   {
     pObjectif->_dDelaiDebutCritique = 0 ;
-    pObjectif->_sUniteDebutCritique = "" ;
+    pObjectif->_sUniteDebutCritique = string("") ;
   }
 
   return true ;
@@ -744,84 +744,84 @@ ObjectifViewerDlg::getValueData()
   if (hasControlValue(pValueIdealMin))
   {
     pValueIdealMin->donneValeur() ;
-    pObjectif->_dValMinIdeal      = pValueIdealMin->dValeur ;
+    pObjectif->_dValMinIdeal      = pValueIdealMin->_dValeur ;
     pObjectif->_sUniteValMinIdeal = sValueUnitCode ;
     pObjectif->_bValMinIdeal      = true ;
   }
   else if (pObjectif->_bValMinIdeal)
   {
     pObjectif->_dValMinIdeal      = 0 ;
-    pObjectif->_sUniteValMinIdeal = "" ;
+    pObjectif->_sUniteValMinIdeal = string("") ;
     pObjectif->_bValMinIdeal      = false ;
   }
 
   if (hasControlValue(pValueIdealMax))
   {
     pValueIdealMax->donneValeur();
-    pObjectif->_dValMaxIdeal      = pValueIdealMax->dValeur ;
+    pObjectif->_dValMaxIdeal      = pValueIdealMax->_dValeur ;
     pObjectif->_sUniteValMaxIdeal = sValueUnitCode ;
     pObjectif->_bValMaxIdeal      = true ;
   }
   else if (pObjectif->_bValMaxIdeal)
   {
     pObjectif->_dValMaxIdeal      = 0 ;
-    pObjectif->_sUniteValMaxIdeal = "" ;
+    pObjectif->_sUniteValMaxIdeal = string("") ;
     pObjectif->_bValMaxIdeal      = false ;
   }
 
   if (hasControlValue(pValueRecommendMin))
   {
     pValueRecommendMin->donneValeur();
-    pObjectif->_dValMinConseille      = pValueRecommendMin->dValeur ;
+    pObjectif->_dValMinConseille      = pValueRecommendMin->_dValeur ;
     pObjectif->_sUniteValMinConseille = sValueUnitCode ;
     pObjectif->_bValMinConseille      = true ;
   }
   else if (pObjectif->_bValMinConseille)
   {
     pObjectif->_dValMinConseille      = 0 ;
-    pObjectif->_sUniteValMinConseille = "" ;
+    pObjectif->_sUniteValMinConseille = string("") ;
     pObjectif->_bValMinConseille      = false ;
   }
 
   if (hasControlValue(pValueRecommendMax))
   {
     pValueRecommendMin->donneValeur();
-    pObjectif->_dValMaxConseille      = pValueRecommendMax->dValeur ;
+    pObjectif->_dValMaxConseille      = pValueRecommendMax->_dValeur ;
     pObjectif->_sUniteValMaxConseille = sValueUnitCode ;
     pObjectif->_bValMaxConseille      = true ;
   }
   else if (pObjectif->_bValMaxConseille)
   {
     pObjectif->_dValMaxConseille      = 0 ;
-    pObjectif->_sUniteValMaxConseille = "" ;
+    pObjectif->_sUniteValMaxConseille = string("") ;
     pObjectif->_bValMaxConseille      = false ;
   }
 
   if (hasControlValue(pValueAuthorizeMin))
   {
     pValueAuthorizeMin->donneValeur() ;
-    pObjectif->_dValMinAutorise      = pValueAuthorizeMin->dValeur ;
+    pObjectif->_dValMinAutorise      = pValueAuthorizeMin->_dValeur ;
     pObjectif->_sUniteValMinAutorise = sValueUnitCode ;
     pObjectif->_bValMinAutorise      = true ;
   }
   else if (pObjectif->_bValMinAutorise)
   {
     pObjectif->_dValMinAutorise      = 0 ;
-    pObjectif->_sUniteValMinAutorise = "" ;
+    pObjectif->_sUniteValMinAutorise = string("") ;
     pObjectif->_bValMinAutorise      = false ;
   }
 
   if (hasControlValue(pValueAuthorizeMax))
   {
     pValueAuthorizeMax->donneValeur() ;
-    pObjectif->_dValMaxAutorise      = pValueAuthorizeMax->dValeur ;
+    pObjectif->_dValMaxAutorise      = pValueAuthorizeMax->_dValeur ;
     pObjectif->_sUniteValMaxAutorise = sValueUnitCode ;
     pObjectif->_bValMaxAutorise      = true ;
   }
   else if (pObjectif->_bValMaxAutorise)
   {
     pObjectif->_dValMaxAutorise      = 0 ;
-    pObjectif->_sUniteValMaxAutorise = "" ;
+    pObjectif->_sUniteValMaxAutorise = string("") ;
     pObjectif->_bValMaxAutorise      = false ;
   }
 
@@ -1490,17 +1490,17 @@ NSObjectifEditNum::SetIntIntoEditNum(int iVal)
 {
 	char sVal[10] ;
 	itoa(iVal, sVal, 10) ;
-	sContenuTransfert = string (sVal) ;
+	_sContenuTransfert = string (sVal) ;
 	donneBrut() ;
-	SetText(sContenuBrut.c_str()) ;
+	SetText(_sContenuBrut.c_str()) ;
 }
 
 void
 NSObjectifEditNum::SetDoubleIntoEditNum(double dVal)
 {
-	sContenuTransfert = DoubleToString(&dVal, -1, -1) ;
+	_sContenuTransfert = DoubleToString(&dVal, -1, -1) ;
 	donneBrut() ;
-	SetText(sContenuBrut.c_str()) ;
+	SetText(_sContenuBrut.c_str()) ;
 }
 
 //------------------------------------------------------------------------------
