@@ -23,7 +23,7 @@ class NSSuper ;
 class BB1BBInterfaceForKs ;
 
 # include "partage\NTArray.h"
-# include "nautilus\nsLdv_Vars.h"
+# include "nsldv\nsLdv_Vars.h"
 
 class _EPISODUS NSInstanceCounter
 {

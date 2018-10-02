@@ -10,12 +10,13 @@
 // FLP - aout 2003
 // -----------------------------------------------------------------------------
 
-#include "nautilus\nsanxary.h"
+#include "nssavoir\nsBdmDriver.h"
+// #include "nautilus\nsanxary.h"
 #include "nsdn\nsdochis.h"
 #include "nautilus\nsprocessview.h"
-#include "nautilus\nsldvvar.h"
+#include "nsldv\nsldvvar.h"
+#include "nsldv\nsldvgoal.h"
 #include "nsbb\nspanesplitter.h"
-#include "nautilus\nsldvgoal.h"
 #include "nautilus\nshistdo.h"
 #include "nssavoir\nsgraphe.h"
 #include "nsbb\nsattvaltools.h"
@@ -645,7 +646,7 @@ NSProcessView::EvSetFocus(HWND hWndLostFocus)
     pMyApp->SetToolBarWindow(GetWindow()) ;
   }
 
-  pPaneSplitter->SetFrameTitle(getFunction(), sViewName) ;
+  _pPaneSplitter->SetFrameTitle(getFunction(), sViewName) ;
   pContexte->setAideIndex("") ;
   pContexte->setAideCorps("process.htm") ;
 }

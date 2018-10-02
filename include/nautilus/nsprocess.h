@@ -14,7 +14,7 @@
 # define __NSPROCESS_H__
 
 # include "nautilus\nssuper.h"
-# include "nsepisod\nsldvuti.h"
+# include "nsldv\nsldvuti.h"
 
 class NSProcess : public NSRoot
 {

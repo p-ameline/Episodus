@@ -16,13 +16,13 @@
 #include <owl\printer.h>
 #include <classlib\arrays.h>
 
-#include "nautilus\nsannexe.h"
-#include "nautilus\nstxstyl.h"
-#include "nautilus\nstxstar.h"
+#include "ns_sgbd\nsannexe.h"
+#include "dcodeur\nstxstyl.h"
+#include "dcodeur\nstxstar.h"
 #include "nsbb\nsbbsmal.h"
 #include "nautilus\nsdocref.h"
 
-#include "nautilus\nscr_ana.h"#include "nautilus\nautilus.rh"
+#include "dcodeur\nscr_ana.h"#include "nautilus\nautilus.rh"
 
 class  NSRefVue : public TWindowView, public NSRoot
 {

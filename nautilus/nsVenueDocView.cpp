@@ -798,7 +798,7 @@ NSVenuesView::focusFct()
     pMyApp->SetToolBarWindow(GetWindow()) ;
   }
 
-  pPaneSplitter->SetFrameTitle(getFunction(), sViewName) ;
+  _pPaneSplitter->SetFrameTitle(getFunction(), sViewName) ;
   pContexte->setAideIndex("") ;
   pContexte->setAideCorps("medicaments.htm") ;
 }
@@ -816,7 +816,7 @@ NSVenuesView::SetupToolBar()
   pMyApp->cb2->LayoutSession() ;
 */
 
-	pPaneSplitter->FlushControlBar() ;
+	_pPaneSplitter->FlushControlBar() ;
 
 	// FlushControlBar destroys the buttons... we need to create them after
 	//
@@ -825,11 +825,11 @@ NSVenuesView::SetupToolBar()
   sText = pContexte->getSuperviseur()->getText("venuesWindows", "removeVenue") ;
 	_pBtClose = new NSGadgetButton(this, CM_GENERAL_CLOSE, sText.c_str(), 0, 0, 300, 20) ;
 
-  pPaneSplitter->Insert(*new TControlGadget(*_pBtNew)) ;
-	pPaneSplitter->Insert(*new TSeparatorGadget) ;
-  pPaneSplitter->Insert(*new TControlGadget(*_pBtClose)) ;
+  _pPaneSplitter->Insert(*new TControlGadget(*_pBtNew)) ;
+	_pPaneSplitter->Insert(*new TSeparatorGadget) ;
+  _pPaneSplitter->Insert(*new TControlGadget(*_pBtClose)) ;
 
-  pPaneSplitter->LayoutSession() ;
+  _pPaneSplitter->LayoutSession() ;
 }
 
 // -----------------------------------------------------------------------------

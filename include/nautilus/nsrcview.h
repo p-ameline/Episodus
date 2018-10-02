@@ -22,9 +22,9 @@
 #include "nautilus\nautilus.rh"
 #include "nsbb\nsmview.h"
 #include "nautilus\nsldvdoc.h"
-#include "nautilus\nsldvvar.h"
-#include "nautilus\nscr_anx.h"
-#include "nautilus\nstxstar.h"
+#include "nsldv\nsldvvar.h"
+#include "dcodeur\nscr_anx.h"
+#include "dcodeur\nstxstar.h"
 #include "nsbb\nsarc.h"
 
 #define MAXCARS 100000      // Limite du texte pour RichEdit

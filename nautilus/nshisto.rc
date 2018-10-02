@@ -2,7 +2,7 @@
 nshisto.rc
 produced by Borland Resource Workshop
 *****************************************************************************/
-// #include "nautilus\nshisto.rh"#include "c:\cvs\episodus\nsbb\nsbb.rh"#include "c:\cvs\episodus\include\nautilus\nshisto.rh"
+// #include "nautilus\nshisto.rh"#include "nsbb\nsbb.rh"#include "nautilus\nshisto.rh"
 IDB_CR BITMAP
 {
  '42 4D F6 00 00 00 00 00 00 00 76 00 00 00 28 00'

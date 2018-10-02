@@ -10,7 +10,7 @@ DCC = $(ROOT)\bin\dcc32.exe $**
 BRCC = $(ROOT)\bin\brcc32.exe $**
 #------------------------------------------------------------------------------
 PROJECTS = nsmutil nsm_sgbd nsmsavoir nsmbb nsmdecode nsmdn nsmepisod nsmoutil \
-  nsmcompta nsmdzz nsmclient dclusr40.bpl nsm_ocr.dll nsm_grab.dll nsm_ob1.dll \
+  nsmcompta nsmdzz nsmldv nsmclient dclusr40.bpl nsm_ocr.dll nsm_grab.dll nsm_ob1.dll \
   nsm_apicr.dll
 #------------------------------------------------------------------------------
 default: $(PROJECTS)
@@ -46,6 +46,9 @@ nsmcompta: nsmcompta.bpr
 nsmdzz: nsmdzz.bpr
   $(MAKE)
 
+nsmldv: nsmldv.bpr
+  $(MAKE)
+
 nsmclient: nsmclient.bpr
   $(MAKE)
 
@@ -63,4 +66,5 @@ nsm_ob1.dll: nsm_ob1.bpr
 
 nsm_apicr.dll: nsm_apicr.bpr
   $(MAKE)
+
 

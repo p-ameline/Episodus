@@ -17,7 +17,7 @@
 #include "partage\ns_vector.h"
 #include "nautilus\nssuper.h"
 #include "nssavoir\nscaptur.h"
-#include "nsepisod\nsldvuti.h"
+#include "nsldv\nsldvuti.h"
 
 #if defined(_OCRDLL)
 	#define _OCROBJ __export

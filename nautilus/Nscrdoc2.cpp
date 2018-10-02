@@ -517,7 +517,15 @@ try
       return iErreur ;
     }
   }
-  else if (sCodeUtile == "ZORDO")
+  //
+  // Ordonnance / Prescription
+  //         ZORDO = standard
+  //         ZORDB = bizone
+  //         ZORDS = secured (stupéfiants / narcotics)
+  //         ZORDX = d'exception
+  //
+  else if ((string("ZORDO") == sCodeUtile) || (string("ZORDB") == sCodeUtile) ||
+           (string("ZORDS") == sCodeUtile) || (string("ZORDX") == sCodeUtile))
   {
   	pDCModule = new TModule("NSMDZZ.DLL", TRUE) ;
     if ((TModule*) NULL == pDCModule)

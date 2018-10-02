@@ -77,6 +77,8 @@
 #include <bde.hpp>
 #include <sysutils.hpp>
 
+#include "nssavoir\nsBdmDriver.h"
+#include "nssavoir\nspathor.h"
 #include "nautilus\nsrechdl.h"    // Pour ouvrir un nouveau patient
 #include "nautilus\nscrvue.h"     // Document / Vues CN (Compte-Rendu Nautilus)
 #include "nautilus\nsttx.h" 	    // Document / Vues TTX
@@ -110,8 +112,10 @@
 #include "nautilus\nscaptview.h"
 #include "nautilus\nscqdoc.h"
 #include "nautilus\nsldvdoc.h"
+#include "nautilus\nsmdiframe.h"
+#include "nsldv\nsldvdrug.h"
 #include "nautilus\nsldvvue.h"
-#include "nautilus\nsldvgoal.h"
+#include "nsldv\nsldvgoal.h"
 #include "nautilus\ns_html.h"
 #include "dcodeur\nsdkd.h"
 #include "dcodeur\nsphrobj.h"
@@ -154,7 +158,7 @@ NSSuper::NSSuper()
 {
 try
 {
-	sNumVersion         = string("5.14.0006") ;
+	sNumVersion         = string("5.14.0013") ;
   _numInstance        = 0 ;
 	_pSuperContext      = (NSContexte*) 0 ;
   _bJavaOk            = false ;
@@ -3518,6 +3522,8 @@ NSContexte::NSContexte(NSSuper* pSuper)
   _pWebServiceChild    = (NSWebServiceChild*) 0 ;
   _pMailBoxWindow      = (NSMailServiceWindow*) 0 ;
   _pMailBoxChild       = (NSMailServiceChild*) 0 ;
+  _pAlertBoxWindow     = (NSAlertServiceWindow*) 0 ;
+  _pAlertBoxChild      = (NSAlertServiceChild*) 0 ;
   _bBBKToDoLocked      = false ;
   _blackboardInterface = (BB1BBInterface*) 0 ;
   _bb                  = (BB1BB*) 0 ;
@@ -3568,6 +3574,8 @@ NSContexte::NSContexte(NSContexte& rv)
   _pWebServiceChild    = rv._pWebServiceChild ;
   _pMailBoxWindow      = rv._pMailBoxWindow ;
   _pMailBoxChild       = rv._pMailBoxChild ;
+  _pAlertBoxWindow     = rv._pAlertBoxWindow ;
+  _pAlertBoxChild      = rv._pAlertBoxChild ;
   _bBBKToDoLocked      = false ;
   _blackboardInterface = rv._blackboardInterface ;
   _bb                  = rv._bb ;
@@ -3658,7 +3666,55 @@ NSContexte::resetBdmDriver()
   if (_pBdmDriver)
     delete _pBdmDriver ;
 
+  if (NSContexte::btNone == _iBamType)
+  {
+    _pBdmDriver = (NSBdmDriver*) 0 ;
+    return ;
+  }
+
   _pBdmDriver = new NSBdmDriver(this) ;
+
+  // Test the connexion by asking its version number
+  //
+  string sBamVersionId = _pBdmDriver->getBamVersionId() ;
+
+  CURLcode lastRestError = _pBdmDriver->getLastRestError() ;
+
+  if ((string("") != sBamVersionId) && (CURLE_OK == lastRestError))
+  {
+    string sMsg = string("Connected to drug database ") + sBamVersionId ;
+    _pSuper->trace(&sMsg, 1, NSSuper::trSteps) ;
+    return ;
+  }
+
+  // Error message
+  //
+  string sMsg = string("Failed to connect to drug database") ;
+  string sErr = _pSuper->getText("drugEngineManagement", "FailedToConnect") ;
+
+  switch(lastRestError)
+  {
+    case  2 : sMsg += string(" (the communication engine could not initialize).") ;
+              sErr += string(" (the communication engine could not initialize).") ;
+              break ;
+    case  3 : sMsg += string(" (URL d'appel malformée).") ;
+              sErr += string(" (URL d'appel malformée).") ;
+              break ;
+    case  5 : sMsg += string(" (could not resolve proxy).") ;
+              sErr += string(" (") + _pSuper->getText("drugEngineManagement", "ErrorCouldNotResolveProxy") + string(").") ;
+              break ;
+    case  6 : sMsg += string(" (could not resolve host - check web connection).") ;
+              sErr += string(" (") + _pSuper->getText("drugEngineManagement", "ErrorCouldNotResolveHost") + string(").") ;
+              break ;
+    case  7 : sMsg += string(" (could not connect - is the service down?).") ;
+              sErr += string(" (") + _pSuper->getText("drugEngineManagement", "ErrorCouldNotConnect") + string(").") ;
+              break ;
+    default : sMsg += string(" (error ") + IntToString(lastRestError) + string(").") ;
+              sErr += string(".") ;
+  }
+
+  _pSuper->trace(&sMsg, 1, NSSuper::trError) ;
+  erreur(sErr.c_str(), standardError, 0) ;
 }
 
 boolNSContexte::captureData(NSCaptureArray *pCapture)

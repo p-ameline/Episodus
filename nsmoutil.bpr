@@ -35,22 +35,26 @@ OBJFILES = ..\..\..\..\cvs\episodus\ObjNTIERS\nsmoutil.obj \
   ..\..\..\..\cvs\episodus\ObjNTIERS\NsBdmListsDlg.obj \
   ..\..\..\..\cvs\episodus\ObjNTIERS\bdm_bases.obj \
   ..\..\..\..\cvs\episodus\ObjNTIERS\interfaceBdm.obj \
-  ..\..\..\..\cvs\episodus\ObjNTIERS\nsBdmDlg.obj
+  ..\..\..\..\cvs\episodus\ObjNTIERS\nsBdmDlg.obj \
+  ..\..\..\..\cvs\episodus\ObjNTIERS\nsAlertSvceTools.obj \
+  ..\..\..\..\cvs\episodus\ObjNTIERS\nsvisualView.obj \
+  ..\..\..\..\cvs\episodus\ObjNTIERS\nssavary.obj
 RESFILES = ..\..\..\..\cvs\episodus\ObjNTIERS\nsoutil.res \
   ..\..\..\..\cvs\episodus\ObjNTIERS\nsEpiOut.res \
   ..\..\..\..\cvs\episodus\ObjNTIERS\nsimport.res \
   ..\..\..\..\cvs\episodus\ObjNTIERS\nsmatfic.res \
-  ..\..\..\..\cvs\episodus\ObjNTIERS\ns_arche.res nsmoutil.res \
-  ..\..\..\..\cvs\episodus\ObjNTIERS\nsBdmDlg.res
+  ..\..\..\..\cvs\episodus\ObjNTIERS\ns_arche.res \
+  ..\..\..\..\cvs\episodus\ObjNTIERS\nsBdmDlg.res \
+  ..\..\..\..\cvs\episodus\ObjNTIERS\NsAlertBox.res nsmoutil.res
 DEFFILE =
 RESDEPEN = $(RESFILES)
 LIBFILES = nsmutil.lib nsm_sgbd.lib nsmsavoir.lib nsmbb.lib nsmdecode.lib nsmepisod.lib \
-  nsmdn.lib wkhtmltox.lib libcurl-4.lib memmgr.lib cp32mti.lib bidsvi.lib \
-  owlwvi.lib
+  nsmdn.lib nsmldv.lib nsm_ob1.lib wkhtmltox.lib libcurl-4.lib memmgr.lib \
+  cp32mti.lib bidsvi.lib owlwvi.lib
 IDLGENFILES =
 IDLFILES =
-LIBRARIES =
-SPARELIBS = vcl40.lib
+LIBRARIES = dclusr40.lib
+SPARELIBS = vcl40.lib dclusr40.lib
 PACKAGES = vclx40.bpi vcl40.bpi vcldb40.bpi vcldbx40.bpi bcbsmp40.bpi dclocx40.bpi \
   qrpt40.bpi teeui40.bpi vclsmp40.bpi teedb40.bpi tee40.bpi ibsmp40.bpi \
   nmfast40.bpi inetdb40.bpi inet40.bpi
@@ -64,32 +68,34 @@ RELEASELIBPATH = $(BCB)\lib\release
 SYSDEFINES = NO_STRICT;_RTLDLL;USEPACKAGES
 USERDEFINES = STRICT;_OWLDLL;_USE_OWL_CM_EXIT;_OWLALLPCH;_BIDSDLL;BI_NAMESPACE;INC_OLE2;NO_SHDOCVW_GUIDS;_EXPORTDLL;_MUE;N_TIERS;__OB1__;NO_EXT_CAPTURE;FOR_WINDOWS
 # ---------------------------------------------------------------------------
-CFLAG1 = -Icurl;nsdn;ns_vidalRS;nautilus;partage;nsbb;Nsoutil;parseur;include;$(BCB)\include;$(BCB)\include\vcl;$(BCB)\include\owlfiles;"..\..\..\..\Program Files (x86)\Java\jdk1.6.0_30\include";"..\..\..\..\Program Files (x86)\Java\jdk1.6.0_30\include\win32";libwkhtmltox\include \
+CFLAG1 = -Icurl;nsdn;ns_vidalRS;nautilus;partage;nsbb;Nsoutil;parseur;include;$(BCB)\include;$(BCB)\include\vcl;$(BCB)\include\owlfiles;$(BCB)\include\mfc;$(BCB)\imports;"..\..\..\..\Program Files (x86)\Java\jdk1.6.0_30\include";"..\..\..\..\Program Files (x86)\Java\jdk1.6.0_30\include\win32";libwkhtmltox\include \
   -WD -Od -w -Tkh30000 -r- -a8 -k -y -v -vi- -c -tWM -D$(SYSDEFINES);$(USERDEFINES)
 CFLAG2 =
 CFLAG3 =
 IDLCFLAGS = -Icurl -Insdn -Ins_vidalRS -Inautilus -Ipartage -Insbb -INsoutil -Iparseur \
   -Iinclude -I$(BCB)\include -I$(BCB)\include\vcl -I$(BCB)\include\owlfiles \
+  -I$(BCB)\include\mfc -I$(BCB)\imports \
   -I"..\..\..\..\Program Files (x86)\Java\jdk1.6.0_30\include" \
   -I"..\..\..\..\Program Files (x86)\Java\jdk1.6.0_30\include\win32" \
   -Ilibwkhtmltox\include -src_suffixcpp -DSTRICT -D_OWLDLL -D_USE_OWL_CM_EXIT \
   -D_OWLALLPCH -D_BIDSDLL -DBI_NAMESPACE -DINC_OLE2 -DNO_SHDOCVW_GUIDS \
   -D_EXPORTDLL -D_MUE -DN_TIERS -D__OB1__ -DNO_EXT_CAPTURE -DFOR_WINDOWS
-PFLAGS = -Ucurl;partage;Nsoutil;..\..\..\..\cvs\episodus;$(BCB)\lib\obj;$(BCB)\lib;$(RELEASELIBPATH) \
-  -Icurl;nsdn;ns_vidalRS;nautilus;partage;nsbb;Nsoutil;parseur;include;$(BCB)\include;$(BCB)\include\vcl;$(BCB)\include\owlfiles;"..\..\..\..\Program Files (x86)\Java\jdk1.6.0_30\include";"..\..\..\..\Program Files (x86)\Java\jdk1.6.0_30\include\win32";libwkhtmltox\include \
+PFLAGS = -U$(BCB)\Projects\Lib;nautilus;curl;partage;Nsoutil;..\..\..\..\cvs\episodus;$(BCB)\lib\obj;$(BCB)\lib;$(RELEASELIBPATH) \
+  -Icurl;nsdn;ns_vidalRS;nautilus;partage;nsbb;Nsoutil;parseur;include;$(BCB)\include;$(BCB)\include\vcl;$(BCB)\include\owlfiles;$(BCB)\include\mfc;$(BCB)\imports;"..\..\..\..\Program Files (x86)\Java\jdk1.6.0_30\include";"..\..\..\..\Program Files (x86)\Java\jdk1.6.0_30\include\win32";libwkhtmltox\include \
   -N2..\..\..\..\cvs\episodus\ObjNTIERS -N0..\..\..\..\cvs\episodus\ObjNTIERS \
   -DSTRICT;_OWLDLL;_USE_OWL_CM_EXIT;_OWLALLPCH;_BIDSDLL;BI_NAMESPACE;INC_OLE2;NO_SHDOCVW_GUIDS;_EXPORTDLL;_MUE;N_TIERS;__OB1__;NO_EXT_CAPTURE;FOR_WINDOWS \
   -$YD -$W -$O- -v -M -JPHNE
-RFLAGS = -icurl;nsdn;ns_vidalRS;nautilus;partage;nsbb;Nsoutil;parseur;include;$(BCB)\include;$(BCB)\include\vcl;$(BCB)\include\owlfiles;"..\..\..\..\Program Files (x86)\Java\jdk1.6.0_30\include";"..\..\..\..\Program Files (x86)\Java\jdk1.6.0_30\include\win32";libwkhtmltox\include \
+RFLAGS = -icurl;nsdn;ns_vidalRS;nautilus;partage;nsbb;Nsoutil;parseur;include;$(BCB)\include;$(BCB)\include\vcl;$(BCB)\include\owlfiles;$(BCB)\include\mfc;$(BCB)\imports;"..\..\..\..\Program Files (x86)\Java\jdk1.6.0_30\include";"..\..\..\..\Program Files (x86)\Java\jdk1.6.0_30\include\win32";libwkhtmltox\include \
   -DSTRICT;_OWLDLL;_USE_OWL_CM_EXIT;_OWLALLPCH;_BIDSDLL;BI_NAMESPACE;INC_OLE2;NO_SHDOCVW_GUIDS;_EXPORTDLL;_MUE;N_TIERS;__OB1__;NO_EXT_CAPTURE;FOR_WINDOWS
 AFLAGS = /icurl /insdn /ins_vidalRS /inautilus /ipartage /insbb /iNsoutil /iparseur \
   /iinclude /i$(BCB)\include /i$(BCB)\include\vcl /i$(BCB)\include\owlfiles \
+  /i$(BCB)\include\mfc /i$(BCB)\imports \
   /i"..\..\..\..\Program Files (x86)\Java\jdk1.6.0_30\include" \
   /i"..\..\..\..\Program Files (x86)\Java\jdk1.6.0_30\include\win32" \
   /ilibwkhtmltox\include /dSTRICT /d_OWLDLL /d_USE_OWL_CM_EXIT /d_OWLALLPCH \
   /d_BIDSDLL /dBI_NAMESPACE /dINC_OLE2 /dNO_SHDOCVW_GUIDS /d_EXPORTDLL /d_MUE \
   /dN_TIERS /d__OB1__ /dNO_EXT_CAPTURE /dFOR_WINDOWS /mx /w2 /zi
-LFLAGS = -Lcurl;partage;Nsoutil;..\..\..\..\cvs\episodus;$(BCB)\lib\obj;$(BCB)\lib;$(RELEASELIBPATH) \
+LFLAGS = -L$(BCB)\Projects\Lib;nautilus;curl;partage;Nsoutil;..\..\..\..\cvs\episodus;$(BCB)\lib\obj;$(BCB)\lib;$(RELEASELIBPATH) \
   -l"C:\cvs\episodus\" -aa -Tpd -x -Gn -Gi -v
 IFLAGS =
 # ---------------------------------------------------------------------------
@@ -127,37 +133,41 @@ ProductVersion=5.11.0001
 Comments=
 
 [HistoryLists\hlIncludePath]
-Count=17
-Item0=curl;nsdn;ns_vidalRS;nautilus;partage;nsbb;Nsoutil;parseur;include;$(BCB)\include;$(BCB)\include\vcl;$(BCB)\include\owlfiles;..\..\..\..\Program Files (x86)\Java\jdk1.6.0_30\include;..\..\..\..\Program Files (x86)\Java\jdk1.6.0_30\include\win32;libwkhtmltox\include
-Item1=nsdn;ns_vidalRS;nautilus;partage;nsbb;Nsoutil;parseur;include;$(BCB)\include;$(BCB)\include\vcl;$(BCB)\include\owlfiles;..\..\..\..\Program Files (x86)\Java\jdk1.6.0_30\include;..\..\..\..\Program Files (x86)\Java\jdk1.6.0_30\include\win32;libwkhtmltox\include
-Item2=nsdn;ns_vidalRS;nautilus;partage;nsbb;Nsoutil;parseur;include;$(BCB)\include;$(BCB)\include\vcl;$(BCB)\include\owlfiles;..\..\Program Files (x86)\Java\jdk1.6.0_30\include;..\..\Program Files (x86)\Java\jdk1.6.0_30\include\win32;libwkhtmltox\include
-Item3=nsdn;ns_vidalRS;nautilus;partage;nsbb;Nsoutil;parseur;include;$(BCB)\include;$(BCB)\include\vcl;$(BCB)\include\owlfiles;..\..\Program Files (x86)\Java\jdk1.6.0_30\include;..\..\Program Files (x86)\Java\jdk1.6.0_30\include\win32;libwkhtmltox\include\wkhtmltox
-Item4=nsdn;nsd;ns;ns_vidalRS;nautilus;partage;nsbb;Nsoutil;parseur;include;$(BCB)\include;$(BCB)\include\vcl;$(BCB)\include\owlfiles;..\..\Program Files (x86)\Java\jdk1.6.0_30\include;..\..\Program Files (x86)\Java\jdk1.6.0_30\include\win32
-Item5=nsdn;nsd;ns\;ns_vidalRS;nautilus;partage;nsbb;Nsoutil;parseur;include;$(BCB)\include;$(BCB)\include\vcl;$(BCB)\include\owlfiles;C:\Program Files\Java\jdk1.6.0_17\include;C:\Program Files\Java\jdk1.6.0_17\include\win32
-Item6=ns_vidalRS;nautilus;partage;nsbb;Nsoutil;parseur;include;$(BCB)\include;$(BCB)\include\vcl;$(BCB)\include\owlfiles;..\..\j2sdk1.4.2\include;..\..\j2sdk1.4.2\include\win32
-Item7=ns_vidalRS;nautilus;partage;nsbb;Nsoutil;parseur;include;$(BCB)\include;$(BCB)\include\vcl;$(BCB)\include\owlfiles;..\..\j2sdk1.4.1\include;..\..\j2sdk1.4.1\include\win32
-Item8=ns_vidalRS;nautilus;partage;nsbb;Nsoutil;parseur;include;$(BCB)\include;$(BCB)\include\vcl;$(BCB)\include\owlfiles;C:\j2sdk1.4.1\include;C:\j2sdk1.4.1\include\win32
-Item9=ns_vidalRS;nautilus;partage;nsbb;Nsoutil;parseur;include;..\..\Program Files\Java\j2sdk1.4.2_04\include;..\..\Program Files\Java\j2sdk1.4.2_04\include\win32;$(BCB)\include;$(BCB)\include\vcl;$(BCB)\include\owlfiles
-Item10=ns_vidalRS;nautilus;partage;nsbb;Nsoutil;parseur;include;C:\Program Files\Java\j2sdk1.4.2_04\include;C:\Program Files\Java\j2sdk1.4.2_04\include\win32;$(BCB)\include;$(BCB)\include\vcl;$(BCB)\include\owlfiles
-Item11=ns_vidalRS;nautilus;partage;nsbb;Nsoutil;parseur;include;$(BCB)\include;$(BCB)\include\vcl;$(BCB)\include\owlfiles
-Item12=nautilus;partage;nsbb;Nsoutil;parseur;include;$(BCB)\include;$(BCB)\include\vcl;$(BCB)\include\owlfiles
-Item13=..\..\Program Files\Borland\CBuilder4\Bin;nautilus;partage;nsbb;Nsoutil;parseur;include;$(BCB)\include;$(BCB)\include\vcl;$(BCB)\include\owlfiles
-Item14=nautilus;partage;nsbb;Nsoutil;include;$(BCB)\include;$(BCB)\include\vcl;$(BCB)\include\owlfiles
-Item15=include;$(BCB)\include;$(BCB)\include\vcl;$(BCB)\include\owlfiles
-Item16=include;nautilus;partage;nsbb;nsoutil;$(BCB)\include;$(BCB)\include\vcl;$(BCB)\include\owlfiles
+Count=19
+Item0=curl;nsdn;ns_vidalRS;nautilus;partage;nsbb;Nsoutil;parseur;include;$(BCB)\include;$(BCB)\include\vcl;$(BCB)\include\owlfiles;$(BCB)\include\mfc;$(BCB)\imports;..\..\..\..\Program Files (x86)\Java\jdk1.6.0_30\include;..\..\..\..\Program Files (x86)\Java\jdk1.6.0_30\include\win32;libwkhtmltox\include
+Item1=curl;nsdn;ns_vidalRS;nautilus;partage;nsbb;Nsoutil;parseur;include;$(BCB)\include;$(BCB)\include\vcl;$(BCB)\include\owlfiles;$(BCB)\imports;..\..\..\..\Program Files (x86)\Java\jdk1.6.0_30\include;..\..\..\..\Program Files (x86)\Java\jdk1.6.0_30\include\win32;libwkhtmltox\include
+Item2=curl;nsdn;ns_vidalRS;nautilus;partage;nsbb;Nsoutil;parseur;include;$(BCB)\include;$(BCB)\include\vcl;$(BCB)\include\owlfiles;..\..\..\..\Program Files (x86)\Java\jdk1.6.0_30\include;..\..\..\..\Program Files (x86)\Java\jdk1.6.0_30\include\win32;libwkhtmltox\include
+Item3=nsdn;ns_vidalRS;nautilus;partage;nsbb;Nsoutil;parseur;include;$(BCB)\include;$(BCB)\include\vcl;$(BCB)\include\owlfiles;..\..\..\..\Program Files (x86)\Java\jdk1.6.0_30\include;..\..\..\..\Program Files (x86)\Java\jdk1.6.0_30\include\win32;libwkhtmltox\include
+Item4=nsdn;ns_vidalRS;nautilus;partage;nsbb;Nsoutil;parseur;include;$(BCB)\include;$(BCB)\include\vcl;$(BCB)\include\owlfiles;..\..\Program Files (x86)\Java\jdk1.6.0_30\include;..\..\Program Files (x86)\Java\jdk1.6.0_30\include\win32;libwkhtmltox\include
+Item5=nsdn;ns_vidalRS;nautilus;partage;nsbb;Nsoutil;parseur;include;$(BCB)\include;$(BCB)\include\vcl;$(BCB)\include\owlfiles;..\..\Program Files (x86)\Java\jdk1.6.0_30\include;..\..\Program Files (x86)\Java\jdk1.6.0_30\include\win32;libwkhtmltox\include\wkhtmltox
+Item6=nsdn;nsd;ns;ns_vidalRS;nautilus;partage;nsbb;Nsoutil;parseur;include;$(BCB)\include;$(BCB)\include\vcl;$(BCB)\include\owlfiles;..\..\Program Files (x86)\Java\jdk1.6.0_30\include;..\..\Program Files (x86)\Java\jdk1.6.0_30\include\win32
+Item7=nsdn;nsd;ns\;ns_vidalRS;nautilus;partage;nsbb;Nsoutil;parseur;include;$(BCB)\include;$(BCB)\include\vcl;$(BCB)\include\owlfiles;C:\Program Files\Java\jdk1.6.0_17\include;C:\Program Files\Java\jdk1.6.0_17\include\win32
+Item8=ns_vidalRS;nautilus;partage;nsbb;Nsoutil;parseur;include;$(BCB)\include;$(BCB)\include\vcl;$(BCB)\include\owlfiles;..\..\j2sdk1.4.2\include;..\..\j2sdk1.4.2\include\win32
+Item9=ns_vidalRS;nautilus;partage;nsbb;Nsoutil;parseur;include;$(BCB)\include;$(BCB)\include\vcl;$(BCB)\include\owlfiles;..\..\j2sdk1.4.1\include;..\..\j2sdk1.4.1\include\win32
+Item10=ns_vidalRS;nautilus;partage;nsbb;Nsoutil;parseur;include;$(BCB)\include;$(BCB)\include\vcl;$(BCB)\include\owlfiles;C:\j2sdk1.4.1\include;C:\j2sdk1.4.1\include\win32
+Item11=ns_vidalRS;nautilus;partage;nsbb;Nsoutil;parseur;include;..\..\Program Files\Java\j2sdk1.4.2_04\include;..\..\Program Files\Java\j2sdk1.4.2_04\include\win32;$(BCB)\include;$(BCB)\include\vcl;$(BCB)\include\owlfiles
+Item12=ns_vidalRS;nautilus;partage;nsbb;Nsoutil;parseur;include;C:\Program Files\Java\j2sdk1.4.2_04\include;C:\Program Files\Java\j2sdk1.4.2_04\include\win32;$(BCB)\include;$(BCB)\include\vcl;$(BCB)\include\owlfiles
+Item13=ns_vidalRS;nautilus;partage;nsbb;Nsoutil;parseur;include;$(BCB)\include;$(BCB)\include\vcl;$(BCB)\include\owlfiles
+Item14=nautilus;partage;nsbb;Nsoutil;parseur;include;$(BCB)\include;$(BCB)\include\vcl;$(BCB)\include\owlfiles
+Item15=..\..\Program Files\Borland\CBuilder4\Bin;nautilus;partage;nsbb;Nsoutil;parseur;include;$(BCB)\include;$(BCB)\include\vcl;$(BCB)\include\owlfiles
+Item16=nautilus;partage;nsbb;Nsoutil;include;$(BCB)\include;$(BCB)\include\vcl;$(BCB)\include\owlfiles
+Item17=include;$(BCB)\include;$(BCB)\include\vcl;$(BCB)\include\owlfiles
+Item18=include;nautilus;partage;nsbb;nsoutil;$(BCB)\include;$(BCB)\include\vcl;$(BCB)\include\owlfiles
 
 [HistoryLists\hlLibraryPath]
-Count=10
-Item0=curl;partage;Nsoutil;..\..\..\..\cvs\episodus;$(BCB)\lib\obj;$(BCB)\lib
-Item1=..\..\..\..\cvs\episodus;$(BCB)\lib\obj;$(BCB)\lib
-Item2=..\..\Program Files (x86)\Borland\CBuilder4\Lib;nsdn;parseur;nautilus;partage;nsbb;nsoutil;$(BCB)\lib\obj;$(BCB)\lib
-Item3=nsdn;parseur;nautilus;partage;nsbb;nsoutil;$(BCB)\lib\obj;$(BCB)\lib
-Item4=ns_vidalRS;parseur;nautilus;partage;nsbb;nsoutil;$(BCB)\lib\obj;$(BCB)\lib
-Item5=ns_vidalRS;parseur;..\..\Program Files\Borland\CBuilder4\Bin;nautilus;partage;nsbb;nsoutil;$(BCB)\lib\obj;$(BCB)\lib
-Item6=parseur;..\..\Program Files\Borland\CBuilder4\Bin;nautilus;partage;nsbb;nsoutil;$(BCB)\lib\obj;$(BCB)\lib
-Item7=nautilus;partage;nsbb;nsoutil;$(BCB)\lib\obj;$(BCB)\lib
-Item8=..\buider3\cbuilder3\lib;nautilus;partage;nsbb;nsoutil;$(BCB)\lib\obj;$(BCB)\lib
-Item9=..\program files\borland\cbuilder3\lib;nautilus;partage;nsbb;nsoutil;$(BCB)\lib\obj;$(BCB)\lib
+Count=12
+Item0=$(BCB)\Projects\Lib;nautilus;curl;partage;Nsoutil;..\..\..\..\cvs\episodus;$(BCB)\lib\obj;$(BCB)\lib
+Item1=nautilus;curl;partage;Nsoutil;..\..\..\..\cvs\episodus;$(BCB)\lib\obj;$(BCB)\lib
+Item2=curl;partage;Nsoutil;..\..\..\..\cvs\episodus;$(BCB)\lib\obj;$(BCB)\lib
+Item3=..\..\..\..\cvs\episodus;$(BCB)\lib\obj;$(BCB)\lib
+Item4=..\..\Program Files (x86)\Borland\CBuilder4\Lib;nsdn;parseur;nautilus;partage;nsbb;nsoutil;$(BCB)\lib\obj;$(BCB)\lib
+Item5=nsdn;parseur;nautilus;partage;nsbb;nsoutil;$(BCB)\lib\obj;$(BCB)\lib
+Item6=ns_vidalRS;parseur;nautilus;partage;nsbb;nsoutil;$(BCB)\lib\obj;$(BCB)\lib
+Item7=ns_vidalRS;parseur;..\..\Program Files\Borland\CBuilder4\Bin;nautilus;partage;nsbb;nsoutil;$(BCB)\lib\obj;$(BCB)\lib
+Item8=parseur;..\..\Program Files\Borland\CBuilder4\Bin;nautilus;partage;nsbb;nsoutil;$(BCB)\lib\obj;$(BCB)\lib
+Item9=nautilus;partage;nsbb;nsoutil;$(BCB)\lib\obj;$(BCB)\lib
+Item10=..\buider3\cbuilder3\lib;nautilus;partage;nsbb;nsoutil;$(BCB)\lib\obj;$(BCB)\lib
+Item11=..\program files\borland\cbuilder3\lib;nautilus;partage;nsbb;nsoutil;$(BCB)\lib\obj;$(BCB)\lib
 
 [HistoryLists\hlDebugSourcePath]
 Count=1
@@ -185,9 +195,9 @@ Item2=ObjMUE
 Item3=Obj
 
 [HistoryLists\hlFinalOutputDir]
-Count=9
+Count=14
 Item0=..\..\..\..\cvs\episodus\
-Item1=..\..\..\..\cvs\episodusItem1=..\..\..\..\cvs\episodusItem1=..\..\..\..\cvs\episodusItem1=..\..\..\..\cvs\episodusItem1=..\..\..\..\cvs\episodusItem1=..\..\..\..\cvs\episodusItem1=..\..\..\..\cvs\episodusItem1=..\..\..\..\cvs\episodus
+Item1=..\..\..\..\cvs\episodusItem1=..\..\..\..\cvs\episodusItem1=..\..\..\..\cvs\episodusItem1=..\..\..\..\cvs\episodusItem1=..\..\..\..\cvs\episodusItem1=..\..\..\..\cvs\episodusItem1=..\..\..\..\cvs\episodusItem1=..\..\..\..\cvs\episodusItem1=..\..\..\..\cvs\episodusItem1=..\..\..\..\cvs\episodusItem1=..\..\..\..\cvs\episodusItem1=..\..\..\..\cvs\episodusItem1=..\..\..\..\cvs\episodus
 Item2=
 Item3=
 Item4=
@@ -195,11 +205,16 @@ Item5=
 Item6=
 Item7=
 Item8=
+Item9=
+Item10=
+Item11=
+Item12=
+Item13=
 
 [HistoryLists\hIBPIOutputDir]
-Count=9
+Count=14
 Item0=C:\cvs\episodus\
-Item1=C:\cvs\episodusItem1=C:\cvs\episodusItem1=C:\cvs\episodusItem1=C:\cvs\episodusItem1=C:\cvs\episodusItem1=C:\cvs\episodusItem1=C:\cvs\episodusItem1=..\..\..\..\cvs\episodus
+Item1=C:\cvs\episodusItem1=C:\cvs\episodusItem1=C:\cvs\episodusItem1=C:\cvs\episodusItem1=C:\cvs\episodusItem1=C:\cvs\episodusItem1=C:\cvs\episodusItem1=C:\cvs\episodusItem1=C:\cvs\episodusItem1=C:\cvs\episodusItem1=C:\cvs\episodusItem1=C:\cvs\episodusItem1=..\..\..\..\cvs\episodus
 Item2=
 Item3=
 Item4=
@@ -207,6 +222,11 @@ Item5=
 Item6=
 Item7=
 Item8=
+Item9=
+Item10=
+Item11=
+Item12=
+Item13=
 
 [Debugging]
 DebugSourceDirs=$(BCB)\source\vcl

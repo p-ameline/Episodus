@@ -99,6 +99,7 @@ enum CTRL_ACTIVITY { disabledCtrl = -1, inactiveCtrl = 0, activeCtrl = 1 } ;
 	void 	 _export donne_date_claire(const string, string*, string sLang) ;
 
   bool   _export IsValidDatePattern(const string &sName, const string sLocalDatePattern) ;
+  bool   _export IsValidAtcCode(const string sCode) ;
 
   void	 _export donne_date_breve(string sDate, string* pMessage, string* pIntro, string sLang) ;
   void   _export donne_date_claire(string sDate, string* pMessage, string* pIntro, string sLang) ;
@@ -115,6 +116,9 @@ enum CTRL_ACTIVITY { disabledCtrl = -1, inactiveCtrl = 0, activeCtrl = 1 } ;
 	void 	 _export hex_to_long(char*, unsigned long*) ;
   void 	 _export char_to_hex(unsigned char, char*) ;
 	void 	 _export hex_to_char(char*, unsigned char*) ;
+
+  string _export FromUTF8ToISO(const string sUTF8) ;
+  string _export FromISOToUTF8(const string sISO) ;
 
 	void 	 _export format_date(char*) ;
 	void   _export carcat(char*, char) ;
@@ -310,6 +314,13 @@ enum CTRL_ACTIVITY { disabledCtrl = -1, inactiveCtrl = 0, activeCtrl = 1 } ;
   bool _export IsYes(string sText) ;
   bool _export IsNotYes(string sText) ;
 
+  string _export getAllCharsText(const string sTextWithNum, const char cDecimalSeparator, const char cDigitGroupSeparator, size_t iStartFrom) ;
+  string _export getOneDigitCharText(const string sNum) ;
+  string _export getTwoDigitCharText(const string sNum) ;
+  string _export getThreeDigitCharText(const string sNum) ;
+  string _export getNDigitsCharText(const string sNum) ;
+  string _export getCharText(const string sNum, const char cDecimalSeparator, const char cDigitGroupSeparator) ;
+
 #else
 
 	unsigned int  DonneNomFichier(const char *ammorce, const char* suffixe,
@@ -378,6 +389,7 @@ enum CTRL_ACTIVITY { disabledCtrl = -1, inactiveCtrl = 0, activeCtrl = 1 } ;
 	void 	 donne_date_claire(const string, string*, string sLang) ;
 
   bool   IsValidDatePattern(const string &sName, const string sLocalDatePattern) ;
+  bool   IsValidAtcCode(const string sCode) ;
 
   void	 donne_date_breve(string sDate, string* pMessage, string* pIntro, string sLang) ;
   void   donne_date_claire(string sDate, string* pMessage, string* pIntro, string sLang) ;
@@ -394,6 +406,9 @@ enum CTRL_ACTIVITY { disabledCtrl = -1, inactiveCtrl = 0, activeCtrl = 1 } ;
 	void 	 hex_to_long(char*, unsigned long*) ;
   void 	 char_to_hex(unsigned char, char*) ;
 	void 	 hex_to_char(char*, unsigned char*) ;
+
+  string FromUTF8ToISO(const string sUTF8) ;
+  string FromISOToUTF8(const string sISO) ;
 
 	void 	 format_date(char*) ;
 	void 	 carcat(char*, char) ;
@@ -587,6 +602,13 @@ enum CTRL_ACTIVITY { disabledCtrl = -1, inactiveCtrl = 0, activeCtrl = 1 } ;
   bool IsNotNo(string sText)  { return (false == IsNo(sText)) ; }
   bool IsYes(string sText) ;
   bool IsNotYes(string sText) { return (false == IsYes(sText)) ; }
+
+  string getAllCharsText(const string sTextWithNum, const char cDecimalSeparator, const char cDigitGroupSeparator, size_t iStartFrom) ;
+  string getOneDigitCharText(const string sNum) ;
+  string getTwoDigitCharText(const string sNum) ;
+  string getThreeDigitCharText(const string sNum) ;
+  string getNDigitsCharText(const string sNum) ;
+  string getCharText(const string sNum, const char cDecimalSeparator, const char cDigitGroupSeparator) ;
 
 #endif
 

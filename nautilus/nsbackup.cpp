@@ -14,7 +14,7 @@
 
 #include "nautilus\nsbackup.h"
 #include "partage\nsdivfct.h"    // fonction erreur
-#include "nsepisod\nsldvuti.h"
+#include "nsldv\nsldvuti.h"
 
 bool nsbackup(NSSuper *pSuper)
 {

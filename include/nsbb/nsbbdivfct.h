@@ -13,7 +13,7 @@ class NSTreeWindow ;
 // #include "nsbb\nsbbitem.h"
 // #include "nsbb\nsbouton.h"
 
-#include "nautilus\nsLdv_Vars.h"
+#include "nsldv\nsLdv_Vars.h"
 #include "nsbb\nsbb_dlg.h"
 
 class _NSBBCLASSE HistoryConnector

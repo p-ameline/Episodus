@@ -20,8 +20,9 @@
 
 #include <owl/button.h>
 
-#include "nautilus\nssuper.h"
 #include "partage\nsdivfct.h"
+#include "nssavoir\nspathor.h"
+#include "nautilus\nssuper.h"
 #include "partage\ns_timer.h"
 #include "nautilus\ns_html.h"
 #include "nautilus\nscompub.h"		// pour les formules
@@ -37,6 +38,7 @@
 #include "nssavoir\nspathor.h"
 #include "nssavoir\nsgraphe.h"
 #include "nautilus\nsldvdoc.h"
+#include "nautilus\nsmdiframe.h"
 #include "nsbb\nsbbtran.h"
 #include "nsbb\nspanesplitter.h"
 #include "nsbb\nsfltbtnga.h"
@@ -46,8 +48,6 @@
 #include "nautilus\nautilus.rh"
 
 #include "nsepisod\eptables.h"
-
-
 
 // --------------------------------------------------------------------------
 //
@@ -1843,7 +1843,7 @@ NSSOAPView::EvSetFocus(HWND hWndLostFocus)
 		pMyApp->SetToolBarWindow(GetWindow());
 	}
 
-	pPaneSplitter->SetFrameTitle(getFunction(), sViewName) ;	pContexte->setAideIndex("");	pContexte->setAideCorps("epi_soaping.htm");
+	_pPaneSplitter->SetFrameTitle(getFunction(), sViewName) ;	pContexte->setAideIndex("");	pContexte->setAideCorps("epi_soaping.htm");
 }
 
 voidNSSOAPView::SetupToolBar()
@@ -2227,7 +2227,7 @@ NSSOAPTankView::EvSetFocus(HWND hWndLostFocus)
 		pMyApp->SetToolBarWindow(GetWindow());
 	}
 
-  pPaneSplitter->SetFrameTitle(getFunction(), sViewName);
+  _pPaneSplitter->SetFrameTitle(getFunction(), sViewName);
 	pContexte->setAideIndex("");
 	pContexte->setAideCorps("epi_soaping.htm");
 }

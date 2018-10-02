@@ -8,6 +8,7 @@
 #include <owl/docview.h>
 #include <winsys/color.h>
 
+#include "nssavoir\nsBdmDriver.h"
 #include "nautilus\nssuper.h"
 #include "dcodeur\nsdkd.h"
 #include "dcodeur\nsgen.h"
@@ -34,6 +35,7 @@
 #include "nsbb\nsbb.rh"
 #include "nautilus\nsldvvue.h"
 #include "nautilus\nsldvvuetech.h"
+#include "nsldv\nsmdiframe_base.h"
 
 #include "nautilus\nsldvgoal.h"
 
@@ -6243,9 +6245,9 @@ NSLdvViewIconsShowWindow::isPointInPopup(NS_CLASSLIB::TPoint curLoc)
   if (NULL == _pPopupMenu)
     return false ;
 
-  NSMDIFrame* pFrame = pContexte->getSuperviseur()->getApplication()->getFrame() ;
+  NSMDIFrameBase* pFrame = pContexte->getSuperviseur()->getApplication()->getFrame() ;
   HWND hPopup = pFrame->GetPopupMenuWindowHandle() ;
-  if (NULL == hPopup)
+  if ((HWND) NULL == hPopup)
     return false ;
 
   TWindow popuMenuWnd(hPopup) ;

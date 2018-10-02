@@ -11,7 +11,7 @@
   #include "partage/nsglobal.h"
 #endif
 
-#include "nautilus\nsannexe.h"
+#include "ns_sgbd\nsannexe.h"
 #include "nsbb\nsExport.h"
 
 typedef vector<OWL::TControl*>           NSVecteurControl ;typedef NSVecteurControl::iterator       NSControlIter ;

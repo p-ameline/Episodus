@@ -20,7 +20,7 @@
 #include "nsbb\nstrnode.h"
 #include "nsbb\nslistwind.h"
 #include "nssavoir\nsguide.h"
-#include "nsepisod\nsldvuti.h"
+#include "nsldv\nsldvuti.h"
 //#include "nautilus\nscsvue.h"
 
 long NSControle::lObjectCount = 0 ;

@@ -3,6 +3,8 @@
 #include <owl\treewind.h>
 #include <owl\gdiobjec.h>
 
+#include "nssavoir\nspathor.h"
+
 #include "nsbb\nsdico.h"
 #include "nsbb\nstrewi.h"
 #include "nsbb\nstrnode.h"

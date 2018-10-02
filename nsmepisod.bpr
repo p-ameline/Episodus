@@ -16,13 +16,11 @@ VERSION = BCB.04.04
 PROJECT = ..\..\..\..\cvs\episodus\nsmepisod.dll
 OBJFILES = ..\..\..\..\cvs\episodus\ObjNTIERS\nsmepisod.obj \
   ..\..\..\..\cvs\episodus\ObjNTIERS\eptables.obj \
-  ..\..\..\..\cvs\episodus\ObjNTIERS\nsldvuti.obj \
   ..\..\..\..\cvs\episodus\ObjNTIERS\nsepidiv.obj \
   ..\..\..\..\cvs\episodus\ObjNTIERS\nssoapdiv.obj \
   ..\..\..\..\cvs\episodus\ObjNTIERS\nsclasser.obj \
   ..\..\..\..\cvs\episodus\ObjNTIERS\nsCoopChart.obj \
   ..\..\..\..\cvs\episodus\ObjNTIERS\nsPrediDlg.obj \
-  ..\..\..\..\cvs\episodus\ObjNTIERS\nsannexe.obj \
   ..\..\..\..\cvs\episodus\ObjNTIERS\flechiesDB.obj \
   ..\..\..\..\cvs\episodus\ObjNTIERS\objectif_viewer.obj \
   ..\..\..\..\cvs\episodus\ObjNTIERS\nspatdlgknl.obj \
@@ -30,14 +28,14 @@ OBJFILES = ..\..\..\..\cvs\episodus\ObjNTIERS\nsmepisod.obj \
   ..\..\..\..\cvs\episodus\ObjNTIERS\NsPapyrus.obj \
   ..\..\..\..\cvs\episodus\ObjNTIERS\NsMailManager.obj \
   ..\..\..\..\cvs\episodus\ObjNTIERS\NsCsvParser.obj \
-  ..\..\..\..\cvs\episodus\ObjNTIERS\nsldvstructs.obj
+  ..\..\..\..\cvs\episodus\ObjNTIERS\nsPilotProxy.obj
 RESFILES = ..\..\..\..\cvs\episodus\ObjNTIERS\nspredi.res \
   ..\..\..\..\cvs\episodus\ObjNTIERS\nsepidiv.res \
   ..\..\..\..\cvs\episodus\ObjNTIERS\objectif_viewer.res nsmepisod.res
 DEFFILE =
 RESDEPEN = $(RESFILES)
-LIBFILES = nsmutil.lib nsm_sgbd.lib nsmsavoir.lib nsmbb.lib nsmdn.lib memmgr.lib \
-  cp32mti.lib bidsvi.lib owlwvi.lib nspr4.lib nsmdecode.lib
+LIBFILES = nsmutil.lib nsm_sgbd.lib nsmsavoir.lib nsmbb.lib nsmdn.lib nsmldv.lib \
+  memmgr.lib cp32mti.lib bidsvi.lib owlwvi.lib nspr4.lib nsmdecode.lib
 IDLGENFILES =
 IDLFILES =
 LIBRARIES =
@@ -46,7 +44,7 @@ PACKAGES = vclx40.bpi vcl40.bpi vcldb40.bpi vcldbx40.bpi bcbsmp40.bpi dclocx40.b
   qrpt40.bpi teeui40.bpi vclsmp40.bpi teedb40.bpi tee40.bpi ibsmp40.bpi \
   nmfast40.bpi inetdb40.bpi inet40.bpi
 # ---------------------------------------------------------------------------
-PATHCPP = .;nsepisod;nautilus
+PATHCPP = .;nsepisod
 PATHASM = .;
 PATHPAS = .;
 PATHRC = .;nsepisod
@@ -55,32 +53,32 @@ RELEASELIBPATH = $(BCB)\lib\release
 SYSDEFINES = NO_STRICT;_RTLDLL;USEPACKAGES
 USERDEFINES = STRICT;_OWLDLL;_OWLALLPCH;_USE_OWL_CM_EXIT;NO_SHDOCVW_GUIDS;BI_NAMESPACE;INC_OLE2;WINDOWS;_EPISODUSDLL;_MUE;N_TIERS;__OB1__;NO_EXT_CAPTURE;FOR_WINDOWS
 # ---------------------------------------------------------------------------
-CFLAG1 = -Insbb;nautilus;nsepisod;include;$(BCB)\include;$(BCB)\include\owlfiles;$(BCB)\include\vcl;parseur;"..\..\..\..\Program Files (x86)\Java\jdk1.6.0_30\include";"..\..\..\..\Program Files (x86)\Java\jdk1.6.0_30\include\win32";nsprpub\include\nspr \
+CFLAG1 = -Insldv;nsbb;nautilus;nsepisod;include;$(BCB)\include;$(BCB)\include\owlfiles;$(BCB)\include\vcl;parseur;"..\..\..\..\Program Files (x86)\Java\jdk1.6.0_30\include";"..\..\..\..\Program Files (x86)\Java\jdk1.6.0_30\include\win32";nsprpub\include\nspr \
   -WD -Od -w -Tkh30000 -r- -a8 -k -y -v -vi- -c -tWM -D$(SYSDEFINES);$(USERDEFINES)
 CFLAG2 =
 CFLAG3 =
-IDLCFLAGS = -Insbb -Inautilus -Insepisod -Iinclude -I$(BCB)\include \
+IDLCFLAGS = -Insldv -Insbb -Inautilus -Insepisod -Iinclude -I$(BCB)\include \
   -I$(BCB)\include\owlfiles -I$(BCB)\include\vcl -Iparseur \
   -I"..\..\..\..\Program Files (x86)\Java\jdk1.6.0_30\include" \
   -I"..\..\..\..\Program Files (x86)\Java\jdk1.6.0_30\include\win32" \
   -Insprpub\include\nspr -src_suffixcpp -DSTRICT -D_OWLDLL -D_OWLALLPCH \
   -D_USE_OWL_CM_EXIT -DNO_SHDOCVW_GUIDS -DBI_NAMESPACE -DINC_OLE2 -DWINDOWS \
   -D_EPISODUSDLL -D_MUE -DN_TIERS -D__OB1__ -DNO_EXT_CAPTURE -DFOR_WINDOWS
-PFLAGS = -Unautilus;nsepisod;..\..\..\..\cvs\episodus;$(BCB)\lib\obj;$(BCB)\lib;$(RELEASELIBPATH) \
-  -Insbb;nautilus;nsepisod;include;$(BCB)\include;$(BCB)\include\owlfiles;$(BCB)\include\vcl;parseur;"..\..\..\..\Program Files (x86)\Java\jdk1.6.0_30\include";"..\..\..\..\Program Files (x86)\Java\jdk1.6.0_30\include\win32";nsprpub\include\nspr \
+PFLAGS = -Unsldv;nautilus;nsepisod;..\..\..\..\cvs\episodus;$(BCB)\lib\obj;$(BCB)\lib;$(RELEASELIBPATH) \
+  -Insldv;nsbb;nautilus;nsepisod;include;$(BCB)\include;$(BCB)\include\owlfiles;$(BCB)\include\vcl;parseur;"..\..\..\..\Program Files (x86)\Java\jdk1.6.0_30\include";"..\..\..\..\Program Files (x86)\Java\jdk1.6.0_30\include\win32";nsprpub\include\nspr \
   -N2..\..\..\..\cvs\episodus\ObjNTIERS -N0..\..\..\..\cvs\episodus\ObjNTIERS \
   -DSTRICT;_OWLDLL;_OWLALLPCH;_USE_OWL_CM_EXIT;NO_SHDOCVW_GUIDS;BI_NAMESPACE;INC_OLE2;WINDOWS;_EPISODUSDLL;_MUE;N_TIERS;__OB1__;NO_EXT_CAPTURE;FOR_WINDOWS \
   -$Y+ -$W -$O- -v -M -JPHNE
-RFLAGS = -insbb;nautilus;nsepisod;include;$(BCB)\include;$(BCB)\include\owlfiles;$(BCB)\include\vcl;parseur;"..\..\..\..\Program Files (x86)\Java\jdk1.6.0_30\include";"..\..\..\..\Program Files (x86)\Java\jdk1.6.0_30\include\win32";nsprpub\include\nspr \
+RFLAGS = -insldv;nsbb;nautilus;nsepisod;include;$(BCB)\include;$(BCB)\include\owlfiles;$(BCB)\include\vcl;parseur;"..\..\..\..\Program Files (x86)\Java\jdk1.6.0_30\include";"..\..\..\..\Program Files (x86)\Java\jdk1.6.0_30\include\win32";nsprpub\include\nspr \
   -DSTRICT;_OWLDLL;_OWLALLPCH;_USE_OWL_CM_EXIT;NO_SHDOCVW_GUIDS;BI_NAMESPACE;INC_OLE2;WINDOWS;_EPISODUSDLL;_MUE;N_TIERS;__OB1__;NO_EXT_CAPTURE;FOR_WINDOWS
-AFLAGS = /insbb /inautilus /insepisod /iinclude /i$(BCB)\include \
+AFLAGS = /insldv /insbb /inautilus /insepisod /iinclude /i$(BCB)\include \
   /i$(BCB)\include\owlfiles /i$(BCB)\include\vcl /iparseur \
   /i"..\..\..\..\Program Files (x86)\Java\jdk1.6.0_30\include" \
   /i"..\..\..\..\Program Files (x86)\Java\jdk1.6.0_30\include\win32" \
   /insprpub\include\nspr /dSTRICT /d_OWLDLL /d_OWLALLPCH /d_USE_OWL_CM_EXIT \
   /dNO_SHDOCVW_GUIDS /dBI_NAMESPACE /dINC_OLE2 /dWINDOWS /d_EPISODUSDLL /d_MUE \
   /dN_TIERS /d__OB1__ /dNO_EXT_CAPTURE /dFOR_WINDOWS /mx /w2 /zi
-LFLAGS = -Lnautilus;nsepisod;..\..\..\..\cvs\episodus;$(BCB)\lib\obj;$(BCB)\lib;$(RELEASELIBPATH) \
+LFLAGS = -Lnsldv;nautilus;nsepisod;..\..\..\..\cvs\episodus;$(BCB)\lib\obj;$(BCB)\lib;$(RELEASELIBPATH) \
   -l"C:\cvs\episodus\" -aa -Tpd -x -Gn -Gi -v
 IFLAGS =
 # ---------------------------------------------------------------------------
@@ -118,42 +116,44 @@ ProductVersion=5.11.0001
 Comments=
 
 [HistoryLists\hlIncludePath]
-Count=20
-Item0=nsbb;nautilus;nsepisod;include;$(BCB)\include;$(BCB)\include\owlfiles;$(BCB)\include\vcl;parseur;..\..\..\..\Program Files (x86)\Java\jdk1.6.0_30\include;..\..\..\..\Program Files (x86)\Java\jdk1.6.0_30\include\win32;nsprpub\include\nspr
-Item1=nsbb;nautilus;nsepisod;include;$(BCB)\include;$(BCB)\include\owlfiles;$(BCB)\include\vcl;parseur;..\..\Program Files (x86)\Java\jdk1.6.0_30\include;..\..\Program Files (x86)\Java\jdk1.6.0_30\include\win32;nsprpub\include\nspr
-Item2=nsbb;nautilus;nsepisod;include;$(BCB)\include;$(BCB)\include\owlfiles;$(BCB)\include\vcl;parseur;..\..\Program Files\Java\jdk1.6.0_17\include;..\..\Program Files\Java\jdk1.6.0_17\include\win32;C:\cvs\episodus\nsprpub\include\nspr
-Item3=nsbb;nautilus;nsepisod;include;$(BCB)\include;$(BCB)\include\owlfiles;$(BCB)\include\vcl;parseur;C:\Program Files\Java\jdk1.6.0_17\include;C:\Program Files\Java\jdk1.6.0_17\include\win32
-Item4=nsbb;nautilus;nsepisod;include;$(BCB)\include;$(BCB)\include\owlfiles;$(BCB)\include\vcl;parseur;..\..\j2sdk1.4.2\include;..\..\j2sdk1.4.2\include\win32
-Item5=nsbb;nautilus;nsepisod;include;$(BCB)\include;$(BCB)\include\owlfiles;$(BCB)\include\vcl;parseur;..\..\j2sdk1.4.1\include;..\..\j2sdk1.4.1\include\win32
-Item6=nsbb;nautilus;nsepisod;include;$(BCB)\include;$(BCB)\include\owlfiles;$(BCB)\include\vcl;..\..\j2sdk1.4.1\include;..\..\j2sdk1.4.1\include\win32
-Item7=nsbb;nautilus;nsepisod;include;$(BCB)\include;$(BCB)\include\owlfiles;$(BCB)\include\vcl;C:\j2sdk1.4.1\include;C:\j2sdk1.4.1\include\win32
-Item8=nsbb;nautilus;nsepisod;include;$(BCB)\include;$(BCB)\include\owlfiles;$(BCB)\include\vcl
-Item9=nsepisod;include;$(BCB)\include;$(BCB)\include\owlfiles;$(BCB)\include\vcl
-Item10=include;$(BCB)\include;$(BCB)\include\owlfiles;$(BCB)\include\vcl
-Item11=dicom;include;$(BCB)\include;$(BCB)\include\owlfiles;$(BCB)\include\vcl
-Item12=dicom;include;$(BCB)\include;$(BCB)\include\vcl;$(BCB)\include\owlfiles
-Item13=include;$(BCB)\include;$(BCB)\include\vcl;$(BCB)\include\owlfiles
-Item14=dicom;include;$(BCB)\include;$(BCB)\include\vcl;$(BCB)\include\owlfiles;include\dicom
-Item15=include;$(BCB)\include;$(BCB)\include\vcl;$(BCB)\include\owlfiles;include\dicom
-Item16=partage;nsutil;include;$(BCB)\include;$(BCB)\include\vcl;$(BCB)\include\owlfiles
-Item17=partage;nsutil;c:\nautilus\include;$(BCB)\include;$(BCB)\include\vcl;$(BCB)\include\owlfiles
-Item18=c:\nautilus\include;$(BCB)\include;$(BCB)\include\vcl;$(BCB)\include\owlfiles
-Item19=partage;nsutil;$(BCB)\include;$(BCB)\include\vcl;$(BCB)\include\owlfiles
+Count=21
+Item0=nsldv;nsbb;nautilus;nsepisod;include;$(BCB)\include;$(BCB)\include\owlfiles;$(BCB)\include\vcl;parseur;..\..\..\..\Program Files (x86)\Java\jdk1.6.0_30\include;..\..\..\..\Program Files (x86)\Java\jdk1.6.0_30\include\win32;nsprpub\include\nspr
+Item1=nsbb;nautilus;nsepisod;include;$(BCB)\include;$(BCB)\include\owlfiles;$(BCB)\include\vcl;parseur;..\..\..\..\Program Files (x86)\Java\jdk1.6.0_30\include;..\..\..\..\Program Files (x86)\Java\jdk1.6.0_30\include\win32;nsprpub\include\nspr
+Item2=nsbb;nautilus;nsepisod;include;$(BCB)\include;$(BCB)\include\owlfiles;$(BCB)\include\vcl;parseur;..\..\Program Files (x86)\Java\jdk1.6.0_30\include;..\..\Program Files (x86)\Java\jdk1.6.0_30\include\win32;nsprpub\include\nspr
+Item3=nsbb;nautilus;nsepisod;include;$(BCB)\include;$(BCB)\include\owlfiles;$(BCB)\include\vcl;parseur;..\..\Program Files\Java\jdk1.6.0_17\include;..\..\Program Files\Java\jdk1.6.0_17\include\win32;C:\cvs\episodus\nsprpub\include\nspr
+Item4=nsbb;nautilus;nsepisod;include;$(BCB)\include;$(BCB)\include\owlfiles;$(BCB)\include\vcl;parseur;C:\Program Files\Java\jdk1.6.0_17\include;C:\Program Files\Java\jdk1.6.0_17\include\win32
+Item5=nsbb;nautilus;nsepisod;include;$(BCB)\include;$(BCB)\include\owlfiles;$(BCB)\include\vcl;parseur;..\..\j2sdk1.4.2\include;..\..\j2sdk1.4.2\include\win32
+Item6=nsbb;nautilus;nsepisod;include;$(BCB)\include;$(BCB)\include\owlfiles;$(BCB)\include\vcl;parseur;..\..\j2sdk1.4.1\include;..\..\j2sdk1.4.1\include\win32
+Item7=nsbb;nautilus;nsepisod;include;$(BCB)\include;$(BCB)\include\owlfiles;$(BCB)\include\vcl;..\..\j2sdk1.4.1\include;..\..\j2sdk1.4.1\include\win32
+Item8=nsbb;nautilus;nsepisod;include;$(BCB)\include;$(BCB)\include\owlfiles;$(BCB)\include\vcl;C:\j2sdk1.4.1\include;C:\j2sdk1.4.1\include\win32
+Item9=nsbb;nautilus;nsepisod;include;$(BCB)\include;$(BCB)\include\owlfiles;$(BCB)\include\vcl
+Item10=nsepisod;include;$(BCB)\include;$(BCB)\include\owlfiles;$(BCB)\include\vcl
+Item11=include;$(BCB)\include;$(BCB)\include\owlfiles;$(BCB)\include\vcl
+Item12=dicom;include;$(BCB)\include;$(BCB)\include\owlfiles;$(BCB)\include\vcl
+Item13=dicom;include;$(BCB)\include;$(BCB)\include\vcl;$(BCB)\include\owlfiles
+Item14=include;$(BCB)\include;$(BCB)\include\vcl;$(BCB)\include\owlfiles
+Item15=dicom;include;$(BCB)\include;$(BCB)\include\vcl;$(BCB)\include\owlfiles;include\dicom
+Item16=include;$(BCB)\include;$(BCB)\include\vcl;$(BCB)\include\owlfiles;include\dicom
+Item17=partage;nsutil;include;$(BCB)\include;$(BCB)\include\vcl;$(BCB)\include\owlfiles
+Item18=partage;nsutil;c:\nautilus\include;$(BCB)\include;$(BCB)\include\vcl;$(BCB)\include\owlfiles
+Item19=c:\nautilus\include;$(BCB)\include;$(BCB)\include\vcl;$(BCB)\include\owlfiles
+Item20=partage;nsutil;$(BCB)\include;$(BCB)\include\vcl;$(BCB)\include\owlfiles
 
 [HistoryLists\hlLibraryPath]
-Count=12
-Item0=nautilus;nsepisod;..\..\..\..\cvs\episodus;$(BCB)\lib\obj;$(BCB)\lib
-Item1=..\..\..\..\cvs\episodus;$(BCB)\lib\obj;$(BCB)\lib
-Item2=..\..\Program Files (x86)\Borland\CBuilder4\Lib;nsbb;nsepisod;nautilus;$(BCB)\lib\obj;$(BCB)\lib
-Item3=nsbb;nsepisod;nautilus;$(BCB)\lib\obj;$(BCB)\lib
-Item4=nsepisod;nautilus;$(BCB)\lib\obj;$(BCB)\lib
-Item5=nautilus;$(BCB)\lib\obj;$(BCB)\lib
-Item6=dicom;nautilus;$(BCB)\lib\obj;$(BCB)\lib
-Item7=..\builder3\cbuilder3\lib;partage;nsutil;c:\nautilus;$(BCB)\lib\obj;$(BCB)\lib
-Item8=partage;nsutil;c:\nautilus;$(BCB)\lib\obj;$(BCB)\lib
-Item9=..\program files\borland\cbuilder3\lib;partage;nsutil;c:\nautilus;$(BCB)\lib\obj;$(BCB)\lib
-Item10=c:\nautilus;$(BCB)\lib\obj;$(BCB)\lib
-Item11=partage;nsutil;$(BCB)\lib\obj;$(BCB)\lib
+Count=13
+Item0=nsldv;nautilus;nsepisod;..\..\..\..\cvs\episodus;$(BCB)\lib\obj;$(BCB)\lib
+Item1=nautilus;nsepisod;..\..\..\..\cvs\episodus;$(BCB)\lib\obj;$(BCB)\lib
+Item2=..\..\..\..\cvs\episodus;$(BCB)\lib\obj;$(BCB)\lib
+Item3=..\..\Program Files (x86)\Borland\CBuilder4\Lib;nsbb;nsepisod;nautilus;$(BCB)\lib\obj;$(BCB)\lib
+Item4=nsbb;nsepisod;nautilus;$(BCB)\lib\obj;$(BCB)\lib
+Item5=nsepisod;nautilus;$(BCB)\lib\obj;$(BCB)\lib
+Item6=nautilus;$(BCB)\lib\obj;$(BCB)\lib
+Item7=dicom;nautilus;$(BCB)\lib\obj;$(BCB)\lib
+Item8=..\builder3\cbuilder3\lib;partage;nsutil;c:\nautilus;$(BCB)\lib\obj;$(BCB)\lib
+Item9=partage;nsutil;c:\nautilus;$(BCB)\lib\obj;$(BCB)\lib
+Item10=..\program files\borland\cbuilder3\lib;partage;nsutil;c:\nautilus;$(BCB)\lib\obj;$(BCB)\lib
+Item11=c:\nautilus;$(BCB)\lib\obj;$(BCB)\lib
+Item12=partage;nsutil;$(BCB)\lib\obj;$(BCB)\lib
 
 [HistoryLists\hlDebugSourcePath]
 Count=1
@@ -193,14 +193,16 @@ Item2=ObjMUE
 Item3=Obj
 
 [HistoryLists\hlFinalOutputDir]
-Count=2
-Item0=..\..\..\..\cvs\episodus\
-Item1=..\..\..\..\cvs\episodus
+Count=3
+Item0=C:\cvs\episodus\
+Item1=..\..\..\..\cvs\episodusItem1=..\..\..\..\cvs\episodus
+Item2=
 
 [HistoryLists\hIBPIOutputDir]
-Count=2
+Count=3
 Item0=C:\cvs\episodus\
-Item1=..\..\..\..\cvs\episodus
+Item1=C:\cvs\episodusItem1=..\..\..\..\cvs\episodus
+Item2=
 
 [Debugging]
 DebugSourceDirs=$(BCB)\source\vcl

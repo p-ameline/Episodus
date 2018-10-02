@@ -221,8 +221,8 @@ class _CLASSELEXI NSComptData
 		string getCode()        const { return string(code) ;        }
 		string getOperator()    const { return string(operateur) ;   }
 
-    bool   isPayed()  { return ('1' == okPaye[0]) ; }
-    bool   isDepass() { return (('\0' != depassFranc[0]) || ('\0' != depassEuro[0])) ; }
+    bool   isPayed()  const { return ('1' == okPaye[0]) ; }
+    bool   isDepass() const { return (('\0' != depassFranc[0]) || ('\0' != depassEuro[0])) ; }
 };
 
 //// Objet dérivé de NSFiche servant aux accès de base de données

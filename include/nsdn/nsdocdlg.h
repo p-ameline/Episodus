@@ -14,8 +14,8 @@
 class NSDocumentData ;
 class NSChemiseData ;
 
-# include "nautilus\nsannexe.h"
-# include "nautilus\nsanxary.h"
+# include "ns_sgbd\nsannexe.h"
+# include "nsdn\nsanxary.h"
 # include "nsbb\nsednum.h"
 # include "nsbb\nsutidlg.h"
 

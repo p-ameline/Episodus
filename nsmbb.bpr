@@ -42,7 +42,7 @@ OBJFILES = ..\..\..\..\cvs\episodus\ObjNTIERS\nsmbb.obj \
   ..\..\..\..\cvs\episodus\ObjNTIERS\Ns_skins.obj \
   ..\..\..\..\cvs\episodus\ObjNTIERS\NSTip.obj \
   ..\..\..\..\cvs\episodus\ObjNTIERS\ns_cisp.obj \
-  ..\..\..\..\cvs\episodus\ObjNTIERS\webTips.obj \
+  ..\..\..\..\cvs\episodus\ObjNTIERS\stripeDock.obj \
   ..\..\..\..\cvs\episodus\ObjNTIERS\nsarc.obj \
   ..\..\..\..\cvs\episodus\ObjNTIERS\nsattval.obj \
   ..\..\..\..\cvs\episodus\ObjNTIERS\nsarcParseError.obj \
@@ -58,12 +58,13 @@ OBJFILES = ..\..\..\..\cvs\episodus\ObjNTIERS\nsmbb.obj \
   ..\..\..\..\cvs\episodus\ObjNTIERS\nsmanager.obj \
   ..\..\..\..\cvs\episodus\ObjNTIERS\NsRcDlg.obj \
   ..\..\..\..\cvs\episodus\ObjNTIERS\nsmpidsobj.obj \
-  ..\..\..\..\cvs\episodus\ObjNTIERS\nsmedicdlg.obj \
   ..\..\..\..\cvs\episodus\ObjNTIERS\nscombo.obj \
   ..\..\..\..\cvs\episodus\ObjNTIERS\NslistWind.obj \
   ..\..\..\..\cvs\episodus\ObjNTIERS\nsPaneSplitter.obj \
-  ..\..\..\..\cvs\episodus\ObjNTIERS\nsmediccycle.obj \
   ..\..\..\..\cvs\episodus\ObjNTIERS\nsmpids.obj \
+  ..\..\..\..\cvs\episodus\ObjNTIERS\nsmedicdlgbase.obj \
+  ..\..\..\..\cvs\episodus\ObjNTIERS\nsmedicdlg.obj \
+  ..\..\..\..\cvs\episodus\ObjNTIERS\nsmediccycle.obj \
   ..\..\..\..\cvs\episodus\ObjNTIERS\nsmedicphase.obj \
   ..\..\..\..\cvs\episodus\ObjNTIERS\nsmediccontrols.obj \
   ..\..\..\..\cvs\episodus\ObjNTIERS\NSLabel.obj \
@@ -81,23 +82,25 @@ OBJFILES = ..\..\..\..\cvs\episodus\ObjNTIERS\nsmbb.obj \
   ..\..\..\..\cvs\episodus\ObjNTIERS\NsTooltip.obj \
   ..\..\..\..\cvs\episodus\ObjNTIERS\nsMdiChild.obj \
   ..\..\..\..\cvs\episodus\ObjNTIERS\nsWhoIsThere.obj \
-  ..\..\..\..\cvs\episodus\ObjNTIERS\NsRichEdit.obj
-RESFILES = ..\..\..\..\cvs\episodus\ObjNTIERS\nsbb.res \
+  ..\..\..\..\cvs\episodus\ObjNTIERS\NsRichEdit.obj \
+  ..\..\..\..\cvs\episodus\ObjNTIERS\Dockinge.obj \
+  ..\..\..\..\cvs\episodus\ObjNTIERS\webTips.obj
+RESFILES = ..\..\..\..\cvs\episodus\ObjNTIERS\nsbb_admin.res \
+  ..\..\..\..\cvs\episodus\ObjNTIERS\NSHealthTeam.res \
+  ..\..\..\..\cvs\episodus\ObjNTIERS\ns_cisp.res \
+  ..\..\..\..\cvs\episodus\ObjNTIERS\logpass.res \
+  ..\..\..\..\cvs\episodus\ObjNTIERS\medicament.res \
+  ..\..\..\..\cvs\episodus\ObjNTIERS\nsbb.res \
   ..\..\..\..\cvs\episodus\ObjNTIERS\Nspathor.res \
   ..\..\..\..\cvs\episodus\ObjNTIERS\nsdivdlg.res \
   ..\..\..\..\cvs\episodus\ObjNTIERS\nsdrugdlg.res \
   ..\..\..\..\cvs\episodus\ObjNTIERS\nsmPids.res \
-  ..\..\..\..\cvs\episodus\ObjNTIERS\cod_bmp.res \
-  ..\..\..\..\cvs\episodus\ObjNTIERS\nsbb_admin.res \
-  ..\..\..\..\cvs\episodus\ObjNTIERS\medicament.res \
-  ..\..\..\..\cvs\episodus\ObjNTIERS\NSHealthTeam.res \
-  ..\..\..\..\cvs\episodus\ObjNTIERS\ns_cisp.res \
-  ..\..\..\..\cvs\episodus\ObjNTIERS\logpass.res nsmbb.res
+  ..\..\..\..\cvs\episodus\ObjNTIERS\cod_bmp.res nsmbb.res
 DEFFILE =
 RESDEPEN = $(RESFILES) nsbb\webTips.dfm
-LIBFILES = nsmutil.lib nsm_sgbd.lib nsmsavoir.lib nsmdn.lib nsmdecode.lib nsmepisod.lib \
-  nsmoutil.lib memmgr.lib cp32mti.lib bidsvi.lib owlwvi.lib nsm_ob1.lib \
-  ns_capture.lib
+LIBFILES = nsmutil.lib nsm_sgbd.lib nsmsavoir.lib nsmdn.lib nsmldv.lib nsmdecode.lib \
+  nsmepisod.lib nsmoutil.lib memmgr.lib nsm_ob1.lib ns_capture.lib cp32mti.lib \
+  bidsvi.lib owlwvi.lib
 IDLGENFILES =
 IDLFILES =
 LIBRARIES = dclusr40.lib
@@ -106,7 +109,7 @@ PACKAGES = vclx40.bpi vcl40.bpi vcldb40.bpi vcldbx40.bpi bcbsmp40.bpi dclocx40.b
   qrpt40.bpi teeui40.bpi vclsmp40.bpi teedb40.bpi tee40.bpi ibsmp40.bpi \
   nmfast40.bpi inetdb40.bpi inet40.bpi
 # ---------------------------------------------------------------------------
-PATHCPP = .;nsbb;parseur
+PATHCPP = .;nsbb;docking;parseur
 PATHASM = .;
 PATHPAS = .;
 PATHRC = .;nsbb
@@ -115,34 +118,34 @@ RELEASELIBPATH = $(BCB)\lib\release
 SYSDEFINES = NO_STRICT;_RTLDLL;USEPACKAGES
 USERDEFINES = STRICT;_OWLDLL;_OWLALLPCH;_USE_OWL_CM_EXIT;_DANSDLL;_DANSNSBBDLL;_BIDSDLL;NO_SHDOCVW_GUIDS;BI_NAMESPACE;_MUE;N_TIERS;__OB1__;NO_EXT_CAPTURE;FOR_WINDOWS
 # ---------------------------------------------------------------------------
-CFLAG1 = -I$(BCB)\Imports;parseur;codeur;dcodeur;include;nsbb;$(BCB)\include;$(BCB)\include\vcl;$(BCB)\include\owlfiles;$(BCB)\include\owlfiles\services;"..\..\..\..\Program Files (x86)\Java\jdk1.6.0_30\include";"..\..\..\..\Program Files (x86)\Java\jdk1.6.0_30\include\win32" \
+CFLAG1 = -Idocking;$(BCB)\Imports;parseur;codeur;dcodeur;include;nsbb;$(BCB)\include;$(BCB)\include\vcl;$(BCB)\include\owlfiles;$(BCB)\include\owlfiles\services;"..\..\..\..\Program Files (x86)\Java\jdk1.6.0_30\include";"..\..\..\..\Program Files (x86)\Java\jdk1.6.0_30\include\win32" \
   -WD -Od -w -Tkh30000 -r- -a8 -k -y -v -vi- -c -tWM -D$(SYSDEFINES);$(USERDEFINES)
 CFLAG2 =
 CFLAG3 =
-IDLCFLAGS = -I$(BCB)\Imports -Iparseur -Icodeur -Idcodeur -Iinclude -Insbb -I$(BCB)\include \
-  -I$(BCB)\include\vcl -I$(BCB)\include\owlfiles \
+IDLCFLAGS = -Idocking -I$(BCB)\Imports -Iparseur -Icodeur -Idcodeur -Iinclude -Insbb \
+  -I$(BCB)\include -I$(BCB)\include\vcl -I$(BCB)\include\owlfiles \
   -I$(BCB)\include\owlfiles\services \
   -I"..\..\..\..\Program Files (x86)\Java\jdk1.6.0_30\include" \
   -I"..\..\..\..\Program Files (x86)\Java\jdk1.6.0_30\include\win32" \
   -src_suffixcpp -DSTRICT -D_OWLDLL -D_OWLALLPCH -D_USE_OWL_CM_EXIT -D_DANSDLL \
   -D_DANSNSBBDLL -D_BIDSDLL -DNO_SHDOCVW_GUIDS -DBI_NAMESPACE -D_MUE -DN_TIERS \
   -D__OB1__ -DNO_EXT_CAPTURE -DFOR_WINDOWS
-PFLAGS = -U"..\..\..\..\Program Files (x86)\Borland\CBuilder4\Lib";..\..\..\..\cvs\episodus;$(BCB)\Imports;$(BCB)\Projects\Lib;parseur;codeur;dcodeur;nsbb;$(BCB)\lib\obj;$(BCB)\lib;$(RELEASELIBPATH) \
-  -I$(BCB)\Imports;parseur;codeur;dcodeur;include;nsbb;$(BCB)\include;$(BCB)\include\vcl;$(BCB)\include\owlfiles;$(BCB)\include\owlfiles\services;"..\..\..\..\Program Files (x86)\Java\jdk1.6.0_30\include";"..\..\..\..\Program Files (x86)\Java\jdk1.6.0_30\include\win32" \
+PFLAGS = -Udocking;..\..\..\..\cvs\episodus;$(BCB)\Imports;$(BCB)\Projects\Lib;parseur;codeur;dcodeur;nsbb;$(BCB)\lib\obj;$(BCB)\lib;$(RELEASELIBPATH) \
+  -Idocking;$(BCB)\Imports;parseur;codeur;dcodeur;include;nsbb;$(BCB)\include;$(BCB)\include\vcl;$(BCB)\include\owlfiles;$(BCB)\include\owlfiles\services;"..\..\..\..\Program Files (x86)\Java\jdk1.6.0_30\include";"..\..\..\..\Program Files (x86)\Java\jdk1.6.0_30\include\win32" \
   -N2..\..\..\..\cvs\episodus\ObjNTIERS -N0..\..\..\..\cvs\episodus\ObjNTIERS \
   -DSTRICT;_OWLDLL;_OWLALLPCH;_USE_OWL_CM_EXIT;_DANSDLL;_DANSNSBBDLL;_BIDSDLL;NO_SHDOCVW_GUIDS;BI_NAMESPACE;_MUE;N_TIERS;__OB1__;NO_EXT_CAPTURE;FOR_WINDOWS \
   -$YD -$W -$O- -v -M -JPHNE
-RFLAGS = -i$(BCB)\Imports;parseur;codeur;dcodeur;include;nsbb;$(BCB)\include;$(BCB)\include\vcl;$(BCB)\include\owlfiles;$(BCB)\include\owlfiles\services;"..\..\..\..\Program Files (x86)\Java\jdk1.6.0_30\include";"..\..\..\..\Program Files (x86)\Java\jdk1.6.0_30\include\win32" \
+RFLAGS = -idocking;$(BCB)\Imports;parseur;codeur;dcodeur;include;nsbb;$(BCB)\include;$(BCB)\include\vcl;$(BCB)\include\owlfiles;$(BCB)\include\owlfiles\services;"..\..\..\..\Program Files (x86)\Java\jdk1.6.0_30\include";"..\..\..\..\Program Files (x86)\Java\jdk1.6.0_30\include\win32" \
   -DSTRICT;_OWLDLL;_OWLALLPCH;_USE_OWL_CM_EXIT;_DANSDLL;_DANSNSBBDLL;_BIDSDLL;NO_SHDOCVW_GUIDS;BI_NAMESPACE;_MUE;N_TIERS;__OB1__;NO_EXT_CAPTURE;FOR_WINDOWS
-AFLAGS = /i$(BCB)\Imports /iparseur /icodeur /idcodeur /iinclude /insbb /i$(BCB)\include \
-  /i$(BCB)\include\vcl /i$(BCB)\include\owlfiles \
+AFLAGS = /idocking /i$(BCB)\Imports /iparseur /icodeur /idcodeur /iinclude /insbb \
+  /i$(BCB)\include /i$(BCB)\include\vcl /i$(BCB)\include\owlfiles \
   /i$(BCB)\include\owlfiles\services \
   /i"..\..\..\..\Program Files (x86)\Java\jdk1.6.0_30\include" \
   /i"..\..\..\..\Program Files (x86)\Java\jdk1.6.0_30\include\win32" /dSTRICT \
   /d_OWLDLL /d_OWLALLPCH /d_USE_OWL_CM_EXIT /d_DANSDLL /d_DANSNSBBDLL /d_BIDSDLL \
   /dNO_SHDOCVW_GUIDS /dBI_NAMESPACE /d_MUE /dN_TIERS /d__OB1__ /dNO_EXT_CAPTURE \
   /dFOR_WINDOWS /mx /w2 /zi
-LFLAGS = -L"..\..\..\..\Program Files (x86)\Borland\CBuilder4\Lib";..\..\..\..\cvs\episodus;$(BCB)\Imports;$(BCB)\Projects\Lib;parseur;codeur;dcodeur;nsbb;$(BCB)\lib\obj;$(BCB)\lib;$(RELEASELIBPATH) \
+LFLAGS = -Ldocking;..\..\..\..\cvs\episodus;$(BCB)\Imports;$(BCB)\Projects\Lib;parseur;codeur;dcodeur;nsbb;$(BCB)\lib\obj;$(BCB)\lib;$(RELEASELIBPATH) \
   -l"C:\cvs\episodus\" -aa -Tpd -x -Gn -Gi -v
 IFLAGS =
 # ---------------------------------------------------------------------------
@@ -180,33 +183,35 @@ ProductVersion=5.11.0001
 Comments=
 
 [HistoryLists\hlIncludePath]
-Count=14
-Item0=$(BCB)\Imports;parseur;codeur;dcodeur;include;nsbb;$(BCB)\include;$(BCB)\include\vcl;$(BCB)\include\owlfiles;$(BCB)\include\owlfiles\services;..\..\..\..\Program Files (x86)\Java\jdk1.6.0_30\include;..\..\..\..\Program Files (x86)\Java\jdk1.6.0_30\include\win32
-Item1=$(BCB)\Imports;parseur;codeur;dcodeur;include;nsbb;$(BCB)\include;$(BCB)\include\vcl;$(BCB)\include\owlfiles;$(BCB)\include\owlfiles\services;..\..\Program Files (x86)\Java\jdk1.6.0_30\include;..\..\Program Files (x86)\Java\jdk1.6.0_30\include\win32
-Item2=$(BCB)\Imports;parseur;codeur;dcodeur;include;nsbb;$(BCB)\include;$(BCB)\include\vcl;$(BCB)\include\owlfiles;$(BCB)\include\owlfiles\services;C:\Program Files\Java\jdk1.6.0_17\include;C:\Program Files\Java\jdk1.6.0_17\include\win32
-Item3=$(BCB)\Imports;parseur;codeur;dcodeur;include;nsbb;$(BCB)\include;$(BCB)\include\vcl;$(BCB)\include\owlfiles;$(BCB)\include\owlfiles\services;..\..\j2sdk1.4.2\include;..\..\j2sdk1.4.2\include\win32
-Item4=$(BCB)\Imports;parseur;codeur;dcodeur;include;nsbb;$(BCB)\include;$(BCB)\include\vcl;$(BCB)\include\owlfiles;$(BCB)\include\owlfiles\services;..\..\j2sdk1.4.1\include;..\..\j2sdk1.4.1\include\win32
-Item5=parseur;codeur;dcodeur;include;nsbb;$(BCB)\include;$(BCB)\include\vcl;$(BCB)\include\owlfiles;$(BCB)\include\owlfiles\services;..\..\j2sdk1.4.1\include;..\..\j2sdk1.4.1\include\win32
-Item6=parseur;codeur;dcodeur;include;nsbb;$(BCB)\include;$(BCB)\include\vcl;$(BCB)\include\owlfiles;$(BCB)\include\owlfiles\services;C:\j2sdk1.4.1\include;C:\j2sdk1.4.1\include\win32
-Item7=parseur;codeur;dcodeur;include;nsbb;$(BCB)\include;$(BCB)\include\vcl;$(BCB)\include\owlfiles;$(BCB)\include\owlfiles\services;..\..\Program Files\Java\j2sdk1.4.2_04\include;..\..\Program Files\Java\j2sdk1.4.2_04\include\win32
-Item8=parseur;codeur;dcodeur;include;nsbb;$(BCB)\include;$(BCB)\include\vcl;$(BCB)\include\owlfiles;$(BCB)\include\owlfiles\services;C:\Program Files\Java\j2sdk1.4.2_04\include;C:\Program Files\Java\j2sdk1.4.2_04\include\win32
-Item9=parseur;codeur;dcodeur;include;nsbb;$(BCB)\include;$(BCB)\include\vcl;$(BCB)\include\owlfiles;$(BCB)\include\owlfiles\services
-Item10=codeur;dcodeur;include;nsbb;$(BCB)\include;$(BCB)\include\vcl;$(BCB)\include\owlfiles;$(BCB)\include\owlfiles\services
-Item11=dcodeur;include;nsbb;$(BCB)\include;$(BCB)\include\vcl;$(BCB)\include\owlfiles;$(BCB)\include\owlfiles\services
-Item12=include;nsbb;$(BCB)\include;$(BCB)\include\vcl;$(BCB)\include\owlfiles;$(BCB)\include\owlfiles\services
-Item13=include;nsbb;$(BCB)\include;$(BCB)\include\vcl;$(BCB)\include\owlfiles
+Count=15
+Item0=docking;$(BCB)\Imports;parseur;codeur;dcodeur;include;nsbb;$(BCB)\include;$(BCB)\include\vcl;$(BCB)\include\owlfiles;$(BCB)\include\owlfiles\services;..\..\..\..\Program Files (x86)\Java\jdk1.6.0_30\include;..\..\..\..\Program Files (x86)\Java\jdk1.6.0_30\include\win32
+Item1=$(BCB)\Imports;parseur;codeur;dcodeur;include;nsbb;$(BCB)\include;$(BCB)\include\vcl;$(BCB)\include\owlfiles;$(BCB)\include\owlfiles\services;..\..\..\..\Program Files (x86)\Java\jdk1.6.0_30\include;..\..\..\..\Program Files (x86)\Java\jdk1.6.0_30\include\win32
+Item2=$(BCB)\Imports;parseur;codeur;dcodeur;include;nsbb;$(BCB)\include;$(BCB)\include\vcl;$(BCB)\include\owlfiles;$(BCB)\include\owlfiles\services;..\..\Program Files (x86)\Java\jdk1.6.0_30\include;..\..\Program Files (x86)\Java\jdk1.6.0_30\include\win32
+Item3=$(BCB)\Imports;parseur;codeur;dcodeur;include;nsbb;$(BCB)\include;$(BCB)\include\vcl;$(BCB)\include\owlfiles;$(BCB)\include\owlfiles\services;C:\Program Files\Java\jdk1.6.0_17\include;C:\Program Files\Java\jdk1.6.0_17\include\win32
+Item4=$(BCB)\Imports;parseur;codeur;dcodeur;include;nsbb;$(BCB)\include;$(BCB)\include\vcl;$(BCB)\include\owlfiles;$(BCB)\include\owlfiles\services;..\..\j2sdk1.4.2\include;..\..\j2sdk1.4.2\include\win32
+Item5=$(BCB)\Imports;parseur;codeur;dcodeur;include;nsbb;$(BCB)\include;$(BCB)\include\vcl;$(BCB)\include\owlfiles;$(BCB)\include\owlfiles\services;..\..\j2sdk1.4.1\include;..\..\j2sdk1.4.1\include\win32
+Item6=parseur;codeur;dcodeur;include;nsbb;$(BCB)\include;$(BCB)\include\vcl;$(BCB)\include\owlfiles;$(BCB)\include\owlfiles\services;..\..\j2sdk1.4.1\include;..\..\j2sdk1.4.1\include\win32
+Item7=parseur;codeur;dcodeur;include;nsbb;$(BCB)\include;$(BCB)\include\vcl;$(BCB)\include\owlfiles;$(BCB)\include\owlfiles\services;C:\j2sdk1.4.1\include;C:\j2sdk1.4.1\include\win32
+Item8=parseur;codeur;dcodeur;include;nsbb;$(BCB)\include;$(BCB)\include\vcl;$(BCB)\include\owlfiles;$(BCB)\include\owlfiles\services;..\..\Program Files\Java\j2sdk1.4.2_04\include;..\..\Program Files\Java\j2sdk1.4.2_04\include\win32
+Item9=parseur;codeur;dcodeur;include;nsbb;$(BCB)\include;$(BCB)\include\vcl;$(BCB)\include\owlfiles;$(BCB)\include\owlfiles\services;C:\Program Files\Java\j2sdk1.4.2_04\include;C:\Program Files\Java\j2sdk1.4.2_04\include\win32
+Item10=parseur;codeur;dcodeur;include;nsbb;$(BCB)\include;$(BCB)\include\vcl;$(BCB)\include\owlfiles;$(BCB)\include\owlfiles\services
+Item11=codeur;dcodeur;include;nsbb;$(BCB)\include;$(BCB)\include\vcl;$(BCB)\include\owlfiles;$(BCB)\include\owlfiles\services
+Item12=dcodeur;include;nsbb;$(BCB)\include;$(BCB)\include\vcl;$(BCB)\include\owlfiles;$(BCB)\include\owlfiles\services
+Item13=include;nsbb;$(BCB)\include;$(BCB)\include\vcl;$(BCB)\include\owlfiles;$(BCB)\include\owlfiles\services
+Item14=include;nsbb;$(BCB)\include;$(BCB)\include\vcl;$(BCB)\include\owlfiles
 
 [HistoryLists\hlLibraryPath]
-Count=9
-Item0=..\..\..\..\Program Files (x86)\Borland\CBuilder4\Lib;..\..\..\..\cvs\episodus;$(BCB)\Imports;$(BCB)\Projects\Lib;parseur;codeur;dcodeur;nsbb;$(BCB)\lib\obj;$(BCB)\lib
-Item1=$(BCB)\Imports;$(BCB)\Projects\Lib;parseur;codeur;dcodeur;nsbb;$(BCB)\lib\obj;$(BCB)\lib
-Item2=..\..\Program Files (x86)\Borland\CBuilder4\Lib;$(BCB)\Imports;$(BCB)\Projects\Lib;parseur;codeur;dcodeur;nsbb;$(BCB)\lib\obj;$(BCB)\lib
-Item3=parseur;codeur;dcodeur;nsbb;$(BCB)\lib\obj;$(BCB)\lib
-Item4=parseur;codeur;..\builder4\cbuilder4\Lib;..\buider3\cbuilder3\lib;dcodeur;nsbb;$(BCB)\lib\obj;$(BCB)\lib
-Item5=codeur;..\builder4\cbuilder4\Lib;..\buider3\cbuilder3\lib;dcodeur;nsbb;$(BCB)\lib\obj;$(BCB)\lib
-Item6=..\buider3\cbuilder3\lib;dcodeur;nsbb;$(BCB)\lib\obj;$(BCB)\lib
-Item7=dcodeur;..\program files\borland\cbuilder3\lib;nsbb;$(BCB)\lib\obj;$(BCB)\lib
-Item8=..\program files\borland\cbuilder3\lib;nsbb;$(BCB)\lib\obj;$(BCB)\lib
+Count=10
+Item0=docking;..\..\..\..\cvs\episodus;$(BCB)\Imports;$(BCB)\Projects\Lib;parseur;codeur;dcodeur;nsbb;$(BCB)\lib\obj;$(BCB)\lib
+Item1=..\..\..\..\Program Files (x86)\Borland\CBuilder4\Lib;..\..\..\..\cvs\episodus;$(BCB)\Imports;$(BCB)\Projects\Lib;parseur;codeur;dcodeur;nsbb;$(BCB)\lib\obj;$(BCB)\lib
+Item2=$(BCB)\Imports;$(BCB)\Projects\Lib;parseur;codeur;dcodeur;nsbb;$(BCB)\lib\obj;$(BCB)\lib
+Item3=..\..\Program Files (x86)\Borland\CBuilder4\Lib;$(BCB)\Imports;$(BCB)\Projects\Lib;parseur;codeur;dcodeur;nsbb;$(BCB)\lib\obj;$(BCB)\lib
+Item4=parseur;codeur;dcodeur;nsbb;$(BCB)\lib\obj;$(BCB)\lib
+Item5=parseur;codeur;..\builder4\cbuilder4\Lib;..\buider3\cbuilder3\lib;dcodeur;nsbb;$(BCB)\lib\obj;$(BCB)\lib
+Item6=codeur;..\builder4\cbuilder4\Lib;..\buider3\cbuilder3\lib;dcodeur;nsbb;$(BCB)\lib\obj;$(BCB)\lib
+Item7=..\buider3\cbuilder3\lib;dcodeur;nsbb;$(BCB)\lib\obj;$(BCB)\lib
+Item8=dcodeur;..\program files\borland\cbuilder3\lib;nsbb;$(BCB)\lib\obj;$(BCB)\lib
+Item9=..\program files\borland\cbuilder3\lib;nsbb;$(BCB)\lib\obj;$(BCB)\lib
 
 [HistoryLists\hlDebugSourcePath]
 Count=1
@@ -235,12 +240,14 @@ Item2=ObjMUE
 Item3=Obj
 
 [HistoryLists\hlFinalOutputDir]
-Count=1
-Item0=..\..\..\..\cvs\episodus
+Count=2
+Item0=..\..\..\..\cvs\episodus\
+Item1=..\..\..\..\cvs\episodus
 
 [HistoryLists\hIBPIOutputDir]
-Count=1
-Item0=..\..\..\..\cvs\episodus
+Count=2
+Item0=C:\cvs\episodus\
+Item1=..\..\..\..\cvs\episodus
 
 [Debugging]
 DebugSourceDirs=$(BCB)\source\vcl

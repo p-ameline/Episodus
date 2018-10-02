@@ -11,7 +11,7 @@ class NSCompt ;
 #include "nsmt_version\nsv_medic.h"
 #include "nsbb\nsmanager.h"
 #include "nssavoir\nsgraphe.h"
-#include "nautilus\nsanxary.h"
+// #include "nautilus\nsanxary.h"
 
 class NSCvtVarTag
 {

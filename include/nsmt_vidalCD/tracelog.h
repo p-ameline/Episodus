@@ -18,7 +18,7 @@
 # include <bde.hpp>
 
 void
-tracelog(string sTrace, string sLogFile)
+tracelog(const string sTrace, const string sLogFile)
 {
 	if (string("") == sTrace)
 		return ;

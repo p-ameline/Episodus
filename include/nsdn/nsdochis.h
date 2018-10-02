@@ -11,7 +11,7 @@ class NSSearchStruct ;
 
 #include "partage\ns_vector.h"
 #include "nsdn\nsdocum.h"
-#include "nautilus\nsanxary.h"
+#include "nsdn\nsanxary.h"
 
 // #include "nsdn\nsdocnoy.h"
 // #include "nsbb\nspatpat.h"

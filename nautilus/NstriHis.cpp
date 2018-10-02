@@ -1,6 +1,5 @@
 //**************************************************************************//  Traitement de la fiche historique
 //**************************************************************************
-
 #include <owl\listwind.h>
 #include <owl\treewind.h>
 #include <owl\window.h>
@@ -122,7 +121,7 @@ try
 
   skinSwitchOn(skinName) ;
 
-  _ImagesHisto = new TImageList(NS_CLASSLIB::TSize(16, 16), ILC_COLOR4, 15, 5) ;
+  _ImagesHisto = new OWL::TImageList(NS_CLASSLIB::TSize(16, 16), ILC_COLOR4, 15, 5) ;
 
   HINSTANCE hInstModule = *GetApplication() ;
 
@@ -578,7 +577,7 @@ try
     }
   }
 
-  TTreeNode root = GetRoot() ;
+  OWL::TTreeNode root = GetRoot() ;
   NSTreeNode* pNewNSTreeNode = (NSTreeNode*) 0 ;
   //
   // Il existe un document plus récent, c'est lui qui crée le nouveau
@@ -597,7 +596,7 @@ try
 
     // pNewNSTreeNode = new NSTreeNode((*iterGrandFrere)->InsertItem(TTreeNode(*this, "")), pContexte) ;
 
-    TTreeNode treeNode = (*iterGrandFrere)->InsertItem(TTreeNode(*this, "")) ;
+    OWL::TTreeNode treeNode = (*iterGrandFrere)->InsertItem(OWL::TTreeNode(*this, "")) ;
     if (NULL != treeNode.GetHTreeItem())
       pNewNSTreeNode = new NSTreeNode(treeNode, pContexte) ;
 
@@ -617,8 +616,8 @@ try
     }
 
     ligne = 1 ;
-    TTreeNode* pAmorce = new TTreeNode(*this, TVI_FIRST) ;
-    *pAmorce = root.InsertChild(*pAmorce, TTreeNode::First) ;
+    OWL::TTreeNode* pAmorce = new OWL::TTreeNode(*this, TVI_FIRST) ;
+    *pAmorce = root.InsertChild(*pAmorce, OWL::TTreeNode::First) ;
     pNewNSTreeNode = new NSTreeNode(*pAmorce, pContexte) ;
     delete pAmorce ;
   }
@@ -1147,7 +1146,7 @@ NSTreeHistorique::getNodeForPoint(NS_CLASSLIB::TPoint point)
 NSTreeNode*
 NSTreeHistorique::getSelectedNode()
 {
-	TTreeNode node = GetSelection() ;
+	OWL::TTreeNode node = GetSelection() ;
   return GetNSTreeNode(&node) ;
 }
 
@@ -2095,7 +2094,7 @@ NSTreeHistorique::EvRButtonDown(uint , NS_CLASSLIB::TPoint& point)
 	if ((NSDocumentInfo*) NULL == pDocument)
 		return ;
 
-	TPopupMenu *menu = new TPopupMenu() ;
+	OWL::TPopupMenu *menu = new OWL::TPopupMenu() ;
 
 	pNSTreeNodeSelection->SelectItem(TVGN_CARET) ;
 
@@ -2458,9 +2457,11 @@ NSTreeHistorique::Proprietes()
 
 	NSDocumentInfo Docum(pContexte) ;
 
-  NSDocumentData InfoData ;
-  pDocument->initFromData(&InfoData) ;
-	Docum.setData(&InfoData) ;
+  pDocument->initDocumentInfo(&Docum) ;
+
+  // NSDocumentData InfoData ;
+  // pDocument->initFromData(&InfoData) ;
+	// Docum.setData(&InfoData) ;
 
 	NSPropDocDialog* pPropDlg = new NSPropDocDialog(pContexte->GetMainWindow(),
                                                     sTitre, &Docum, pContexte) ;
@@ -2999,7 +3000,7 @@ NSTitre::NSTitre(TWindow* parent, TResId ressource, NSContexte* pCtx, string Tit
 	//
 	// Création de tous les "objets de contrôle"
 	//
-	pTitre = new TEdit(this, IDC_TITRE) ;
+	pTitre = new OWL::TEdit(this, IDC_TITRE) ;
 }
 
 NSTitre::~NSTitre()

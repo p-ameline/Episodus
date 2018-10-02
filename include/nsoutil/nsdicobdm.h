@@ -73,6 +73,10 @@ class _NSOUTILCLASSE NSEditBdm : public OWL::TEdit, public NSRoot
     string getLabel() { return _sSelectedLabel ; }
     string getCode()  { return _sSelectedCode ;  }
 
+    void   injectCode(string sCode) { _sSelectedCode = sCode ;  }
+
+    string getTextAsString() ;
+
     void   setLostFocusFunctor(Functor* func) { _pLostFocusFunctor = func ; }
     void   setGetCodeFunctor(Functor* func)   { _pGotCodeFunctor = func ; }
 
@@ -92,7 +96,6 @@ class _NSOUTILCLASSE NSEditBdm : public OWL::TEdit, public NSRoot
     void    goToPreviousNode() ;
 
     ChoixBdmDialog* getBdmDialog() ;
-    string          getTextAsString() ;
     void            SetPositionLexique() ;
 
   DECLARE_RESPONSE_TABLE(NSEditBdm) ;

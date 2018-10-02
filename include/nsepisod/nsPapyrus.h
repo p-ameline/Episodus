@@ -72,12 +72,6 @@
 #ifndef __NSPAPYRUS_H__
 # define __NSPAPYRUS_H__
 
-#if defined(_EPISODUSDLL)
-	#define _EPISODUS __export
-#else
-	#define _EPISODUS __import
-#endif
-
 #ifdef _ENTERPRISE_DLL
   #include "enterpriseLus/nsglobalLus.h"
 #else
@@ -85,6 +79,8 @@
 #endif
 
 # include "nautilus\nssuper.h"
+
+# include "nsepisod\episod_export.h"
 
 // -----------------------------------------------------------------------------
 //

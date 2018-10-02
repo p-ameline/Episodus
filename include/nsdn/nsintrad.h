@@ -20,7 +20,7 @@
 #include <owl\filedoc.h>
 #include <owl\listbox.h>
 #include "partage\nsperson.h"   // pour le code patient
-#include "nssavoir\nspatbas.h"  // pour BASE_LEXI_LEN#include "nautilus\nsannexe.h"#include "nautilus\nstxstyl.h"#include "nsbb\ns_objs.h"	// pour OBJECT_ID_LEN
+#include "nssavoir\nspatbas.h"  // pour BASE_LEXI_LEN// #include "nautilus\nsannexe.h"// #include "nautilus\nstxstyl.h"#include "nsbb\ns_objs.h"	// pour OBJECT_ID_LEN
 // tailles et indices des champs de FORMULE.DB///////////////////////////////////////////////
 
 #define FORM_CODE_LEN       3

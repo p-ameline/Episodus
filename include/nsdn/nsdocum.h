@@ -22,6 +22,7 @@ class NSCaptureArray ;
 #endif
 
 #include "partage/ns_vector.h"
+#include "partage/nsdivfct.h"
 #include "nsbb/nspatpat.h"
 
 #ifndef __linux__
@@ -304,12 +305,14 @@ class NSDocumentInfo : public NSRoot
 
 	protected:
 
-		NSDocumentData  _Donnees ;
+		NSDocumentData     _Donnees ;
 
-    NSPatPathoArray _Meta ;
-    NSPatPathoArray _Pres ;
-    string 				  _sCodeDocMeta ;
-    string          _sCodeDocPres ;
+    NSPatPathoArray    _Meta ;
+    NSPatPathoArray    _Pres ;
+    string 				     _sCodeDocMeta ;
+    string             _sCodeDocPres ;
+
+    ClasseStringVector _aAdditionalInformation ;
 
 	public:
 
@@ -372,6 +375,8 @@ class NSDocumentInfo : public NSRoot
     string 				   getCodeDocMeta() { return _sCodeDocMeta ; }
     string           getCodeDocPres() { return _sCodeDocPres ; }
 
+    ClasseStringVector* getAdditionalInformation() { return &_aAdditionalInformation ; }
+
     string getDocTitleWithDate() ;
 
     void   setID(string sId)       { _Donnees.setID(sId) ; }
@@ -406,6 +411,8 @@ class NSDocumentInfo : public NSRoot
 
     void 	 setCodeDocMeta(string sCode) { _sCodeDocMeta = sCode ; }
     void   setCodeDocPres(string sCode) { _sCodeDocPres = sCode ; }
+
+    void   setAdditionalInformation(const ClasseStringVector& aAI) { _aAdditionalInformation = aAI ; }
 
 		NSDocumentInfo& operator=(const NSDocumentInfo& src) ;
 		int             operator==(const NSDocumentInfo& o) ;

@@ -23,14 +23,14 @@ OBJFILES = ..\..\..\..\cvs\episodus\ObjNTIERS\nsmdn.obj \
   ..\..\..\..\cvs\episodus\ObjNTIERS\Nsdocdlg.obj \
   ..\..\..\..\cvs\episodus\ObjNTIERS\NsDocHis.obj \
   ..\..\..\..\cvs\episodus\ObjNTIERS\nsperary.obj \
-  ..\..\..\..\cvs\episodus\ObjNTIERS\Nsannexe.obj \
   ..\..\..\..\cvs\episodus\ObjNTIERS\nsframedocs.obj
 RESFILES = ..\..\..\..\cvs\episodus\ObjNTIERS\nsdnres.res \
   ..\..\..\..\cvs\episodus\ObjNTIERS\Nsdocdlg.res nsmdn.res
 DEFFILE =
 RESDEPEN = $(RESFILES)
-LIBFILES = nsmutil.lib nsm_sgbd.lib nsmsavoir.lib nsmbb.lib nsmepisod.lib nsm_ob1.lib \
-  memmgr.lib cp32mti.lib bidsvi.lib owlwvi.lib ns_capture.lib nsmoutil.lib
+LIBFILES = nsmutil.lib nsm_sgbd.lib nsmsavoir.lib nsmbb.lib nsmldv.lib nsmepisod.lib \
+  nsmdecode.lib nsm_ob1.lib memmgr.lib cp32mti.lib bidsvi.lib owlwvi.lib \
+  ns_capture.lib nsmoutil.lib
 IDLGENFILES =
 IDLFILES =
 LIBRARIES =

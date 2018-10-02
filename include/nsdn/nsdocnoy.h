@@ -14,7 +14,7 @@ class NSLinkManager ;
 	#define _CLASSENSDN __import
 #endif
 
-#include "nsdn\nsdocum.h"#include "nssavoir\nsRootLink.h"#include "nssavoir\nsgraphe.h"#include "nautilus\nsLdv_Vars.h"// #include "nsbb\nspatpat.h"
+#include "nsdn\nsdocum.h"#include "nssavoir\nsRootLink.h"#include "nssavoir\nsgraphe.h"#include "nsldv\nsLdv_Vars.h"// #include "nsbb\nspatpat.h"
 // #include "nsbb\nspatbd.h"
 
 #ifndef _ENTERPRISE_DLL
@@ -123,7 +123,8 @@ class _CLASSENSDN NSNoyauDocument : public NSRoot
                     string tmplDoc = string(""), string enteteDoc = string(""),
                     string sDestinataire = string(""), string sCreationDate = string(""),
                     string sMasterDoc = string(""), NSRootLink::NODELINKTYPES masterLink = NSRootLink::viewOfDocument,
-                    bool bMustConnectToFolder = true) ;
+                    bool bMustConnectToFolder = true,
+                    NSPatPathoArray* pSpecificInfoPatPatho = (NSPatPathoArray*) 0) ;
 
 		// Referencement des fichiers Html dynamiques		bool 		ReferencerHtml(string typeDoc, string nomDoc, string tempDoc, string enteteDoc, bool bIsVisible = true) ;
 

@@ -154,6 +154,8 @@ class _NSOUTILCLASSE NSDrugResearchDlg : public NSUtilDialog
     void CmSearch() ;
     void SetupWindow() ;
 
+    void CmDrugDblClk(WPARAM Cmd) ;
+
     void NewCodeSelected() ;
 
     int  IndexItemSelect() ;

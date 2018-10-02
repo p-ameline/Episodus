@@ -248,7 +248,7 @@ class _CLASSECPTA NSImpArray : public NSFicheImpArray
     void initAllPatientInfo() ;
 };
 
-class NSSomActData{
+class _CLASSECPTA NSSomActData{
   public :
 
     int _iTotalLoc ;

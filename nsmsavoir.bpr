@@ -45,12 +45,13 @@ OBJFILES = ..\..\..\..\cvs\episodus\ObjNTIERS\nsmsavoir.obj \
   ..\..\..\..\cvs\episodus\ObjNTIERS\ns_search.obj \
   ..\..\..\..\cvs\episodus\ObjNTIERS\nsHtmBase.obj \
   ..\..\..\..\cvs\episodus\ObjNTIERS\NsBdmDriver.obj
-RESFILES = ..\..\..\..\cvs\episodus\ObjNTIERS\nssavoir.res \
-  ..\..\..\..\cvs\episodus\ObjNTIERS\healthteam.res nsmsavoir.res
+RESFILES = ..\..\..\..\cvs\episodus\ObjNTIERS\healthteam.res \
+  ..\..\..\..\cvs\episodus\ObjNTIERS\nssavoir.res nsmsavoir.res
 DEFFILE =
 RESDEPEN = $(RESFILES)
-LIBFILES = nsmutil.lib nsm_sgbd.lib nsmbb.lib nsmdn.lib nsmdecode.lib nsmepisod.lib \
-  nsmoutil.lib memmgr.lib cp32mti.lib bidsvi.lib owlwvi.lib ns_capture.lib
+LIBFILES = nsmutil.lib nsm_sgbd.lib nsmbb.lib nsmdn.lib nsmldv.lib nsmdecode.lib \
+  nsmepisod.lib nsmoutil.lib memmgr.lib cp32mti.lib bidsvi.lib owlwvi.lib \
+  ns_capture.lib
 IDLGENFILES =
 IDLFILES =
 LIBRARIES =

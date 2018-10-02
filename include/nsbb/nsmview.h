@@ -33,7 +33,7 @@ class NSMDIChild ;
 #else
   #include "partage/nsglobal.h"
 #endif
-#include "nsepisod\nsldvuti.h"
+#include "nsldv\nsldvuti.h"
 // #include "nsTPaneSplitter.h"
 
 // #include "nsbb\nsbb_dlg.h"
@@ -124,8 +124,8 @@ class _NSBBCLASSE NSMUEView : public OWL::TWindowView, public NSRoot// class _N
     void            setGadgetPanelWindow(NSGadgetWindow *pWindow) { pGadgetPanelWindow = pWindow ; }
     NSGadgetWindow* getGadgetPanelWindow()  { return pGadgetPanelWindow ; }
 
-    void            setPaneSplitter (NSPaneSplitter* pPane) { pPaneSplitter = pPane ; }
-    NSPaneSplitter* getPaneSplitter() { return pPaneSplitter ; }
+    void            setPaneSplitter (NSPaneSplitter* pPane) { _pPaneSplitter = pPane ; }
+    NSPaneSplitter* getPaneSplitter() { return _pPaneSplitter ; }
 
     HACCEL          getAccelerator() { return hAccelerator ; }
 
@@ -168,7 +168,7 @@ class _NSBBCLASSE NSMUEView : public OWL::TWindowView, public NSRoot// class _N
     TWindow*        pSplittedWindow ;
     TSplitDirection splitDir ;
     float           percent ;
-    NSPaneSplitter* pPaneSplitter ;
+    NSPaneSplitter* _pPaneSplitter ;
     NSGadgetWindow* pGadgetPanelWindow ;
 
     TMenuDescr*     pMUEViewMenu ;

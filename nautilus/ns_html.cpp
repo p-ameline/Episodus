@@ -7,6 +7,7 @@
 #include <stdio.h>
 #include <classlib\filename.h>
 
+#include "nssavoir\nsBdmDriver.h"
 #include "nautilus\ns_html.h"
 #include "nautilus\nssuper.h"
 #include "partage\nsdivfct.h"
@@ -21,9 +22,11 @@
 #include "nautilus\nsrechdl.h"
 #include "nautilus\nscqdoc.h"
 #include "nautilus\nscompub.h"
+#include "nautilus\nsldvdoc.h"
 #include "nautilus\nsCoopChartDV.h"
-#include "nautilus\nsldvvar.h"
-#include "nautilus\nsldvgoal.h"
+#include "nsldv\nsldvvar.h"
+#include "nsldv\nsldvgoal.h"
+#include "nsldv\nsldvdrug.h"
 #include "dcodeur\nsdkd.h"
 #include "dcodeur\decoder.h"
 #include "nsbb\nsmanager.h"
@@ -497,7 +500,10 @@ NSHtmlDrugs::ajouteBloc(NSHtml *ph)
 void
 NSHtmlDrugs::ajouteLignes()
 {
-  if ((NULL == _pPubliDriver) || (NULL == _pPubliDriver->_pPrintArray))
+  if (((NSLdvPubli*) NULL == _pPubliDriver) || (NULL == _pPubliDriver->_pPrintArray))
+    return ;
+
+  if ((NSLdvDocument*) NULL == _pLdvDoc)
     return ;
 
   ArrayCopyDrugs *pDrugsArray = static_cast<ArrayCopyDrugs*>(_pPubliDriver->_pPrintArray) ;
@@ -627,7 +633,7 @@ NSHtmlDrugs::ajouteLignes()
     else
       ajouteBloc(new NSHtml("TBLTraitRemains", string("&nbsp;"))) ;
 
-    string sPrescriptionDate = (*itDrug)->getPrescriptionDate() ;
+    string sPrescriptionDate = _pLdvDoc->getPrescriptionDate(*itDrug) ;
     if (string("") != sPrescriptionDate)
     {
       sFormDate = donne_date(sPrescriptionDate, sLang) ;
@@ -799,7 +805,7 @@ NSHtmlAga::initTotaux()
   char 		cData[100] ;
   string 	sData ;
 
-  NSAgaRefDocument *pAgaDoc = dynamic_cast<NSAgaRefDocument *>(pDocBrut) ;
+  NSAgaRefDocument *pAgaDoc = dynamic_cast<NSAgaRefDocument *>(_pDocBrut) ;
 
   montant = pAgaDoc->pTotaux->paieLoc ;
   sprintf(cData, "%d,%02d ", montant / 100, montant % 100) ;
@@ -914,7 +920,7 @@ NSHtmlAga::ajouteLignes(){
 	char    cMontant[10]  = "" ;
 	string  sData ;
 
-	NSAgaRefDocument *pAgaDoc = dynamic_cast<NSAgaRefDocument *>(pDocBrut) ;
+	NSAgaRefDocument *pAgaDoc = dynamic_cast<NSAgaRefDocument *>(_pDocBrut) ;
 	string sLang    = pContexte->getUserLanguage() ;
 	string sDateAga = donne_date(pAgaDoc->pCriteres->getDateAga1(), sLang) ;  if (false == pAgaDoc->pAgaArray->empty())  {	  for (NSAgaIter i = pAgaDoc->pAgaArray->begin() ; pAgaDoc->pAgaArray->end() != i ; i++)	  {
   	  ligneBlocHtml.vider() ;
@@ -988,7 +994,7 @@ NSHtmlReq::~NSHtmlReq()
 void
 NSHtmlReq::initTotaux()
 {
-  NSReqRefDocument *pReqDoc = dynamic_cast<NSReqRefDocument *>(pDocBrut) ;
+  NSReqRefDocument *pReqDoc = dynamic_cast<NSReqRefDocument *>(_pDocBrut) ;
   if (NULL == pReqDoc)
     return ;
 
@@ -1040,7 +1046,7 @@ NSHtmlReq::ajouteBloc(NSHtml *ph)
 
 void
 NSHtmlReq::ajouteLignes(){
-	NSReqRefDocument *pReqDoc = dynamic_cast<NSReqRefDocument *>(pDocBrut) ;
+	NSReqRefDocument *pReqDoc = dynamic_cast<NSReqRefDocument *>(_pDocBrut) ;
   if (NULL == pReqDoc)    return ;
   int nbTrouves ;
 	if (pReqDoc->bReqModeDoc)  	nbTrouves = pReqDoc->nbDocResult ;
@@ -1173,7 +1179,7 @@ NSHtmlDep::~NSHtmlDep(){
 
 voidNSHtmlDep::initTotaux()
 {
-  NSDepRefDocument *pDepDoc = dynamic_cast<NSDepRefDocument *>(pDocBrut) ;
+  NSDepRefDocument *pDepDoc = dynamic_cast<NSDepRefDocument *>(_pDocBrut) ;
   if (NULL == pDepDoc)
     return ;
 
@@ -1231,7 +1237,7 @@ NSHtmlDep::ajouteBloc(NSHtml *ph)
 voidNSHtmlDep::ajouteLignes(){
 try
 {
-	NSDepRefDocument *pDepDoc = dynamic_cast<NSDepRefDocument *>(pDocBrut) ;
+	NSDepRefDocument *pDepDoc = dynamic_cast<NSDepRefDocument *>(_pDocBrut) ;
 	if (!pDepDoc || !(pDepDoc->pDepensArray) || pDepDoc->pDepensArray->empty())  	return ;
 	bExisteTable = true ;
 }catch (...)
@@ -1332,7 +1338,7 @@ NSHtmlImp::ajouteBloc(NSHtml *ph)
 void
 NSHtmlImp::ajouteLignes()
 {
-  NSImpRefDocument *pImpDoc = dynamic_cast<NSImpRefDocument *>(pDocBrut) ;
+  NSImpRefDocument *pImpDoc = dynamic_cast<NSImpRefDocument *>(_pDocBrut) ;
   if (NULL == pImpDoc)
     return ;
 
@@ -1508,7 +1514,7 @@ NSHtmlLac::ajouteLignes()
 {
 	string sLang = pContexte->getUserLanguage() ;
 
-  NSListActRefDocument *pActDoc = dynamic_cast<NSListActRefDocument *>(pDocBrut) ;
+  NSListActRefDocument *pActDoc = dynamic_cast<NSListActRefDocument *>(_pDocBrut) ;
   if (NULL == pActDoc)
     return ;
 
@@ -1647,7 +1653,7 @@ NSHtmlSac::initTotaux()
   char 		cData[100] ;
   string 	sData ;
 
-  NSSomActRefDocument *pActDoc = dynamic_cast<NSSomActRefDocument *>(pDocBrut) ;
+  NSSomActRefDocument *pActDoc = dynamic_cast<NSSomActRefDocument *>(_pDocBrut) ;
 
   montant = pActDoc->totaux._iTotalLoc ;
   sprintf(cData, "%d,%02d ", montant / 100, montant % 100) ;
@@ -1771,7 +1777,7 @@ NSHtmlSac::ajouteLignes()
   char   cCodeExam[80] ;
   int    occur ;
 
-  NSSomActRefDocument *pActDoc = dynamic_cast<NSSomActRefDocument *>(pDocBrut) ;
+  NSSomActRefDocument *pActDoc = dynamic_cast<NSSomActRefDocument *>(_pDocBrut) ;
 
   string sLang = string("") ;
   if (pContexte)
@@ -1865,7 +1871,7 @@ NSHtmlSen::~NSHtmlSen()
 void
 NSHtmlSen::initTotaux()
 {
-  NSSomEncaissRefDocument *pEncaissDoc = dynamic_cast<NSSomEncaissRefDocument *>(pDocBrut) ;
+  NSSomEncaissRefDocument *pEncaissDoc = dynamic_cast<NSSomEncaissRefDocument *>(_pDocBrut) ;
 
   if ((NSSomEncaissRefDocument*) NULL == pEncaissDoc)
     return ;
@@ -1921,7 +1927,7 @@ NSHtmlSen::addElement(string sLabel, int iAmount, string sCurrency)
 {
 	string sLang = pContexte->getUserLanguage() ;
 
-  NSPubliRefDocument *pPBDoc = dynamic_cast<NSPubliRefDocument *>(pDocBrut) ;
+  NSPubliRefDocument *pPBDoc = dynamic_cast<NSPubliRefDocument *>(_pDocBrut) ;
   if (NULL == pPBDoc)
     return ;
 
@@ -1957,7 +1963,7 @@ NSHtmlPubli::ajouteLignes()
 {
 	string sLang = pContexte->getUserLanguage() ;
 
-  NSPubliRefDocument *pPBDoc = dynamic_cast<NSPubliRefDocument *>(pDocBrut) ;
+  NSPubliRefDocument *pPBDoc = dynamic_cast<NSPubliRefDocument *>(_pDocBrut) ;
   if ((NULL == pPBDoc) || (NULL == pPBDoc->_pDocInfo))
     return ;
 

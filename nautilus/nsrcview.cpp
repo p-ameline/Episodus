@@ -18,6 +18,7 @@
 #include <owl\validate.h>
 #include <owl\inputdia.h>
 
+#include "nssavoir\nsBdmDriver.h"
 #include "nautilus\nssuper.h"#include "partage\nsdivfct.h"
 #include "nsdn\nsdochis.h"
 #include "nsbb\nsbbitem.h"
@@ -841,7 +842,7 @@ NSEpisodRCView::focusFct()
 		pMyApp->SetToolBarWindow(GetWindow()) ;
 	}
 
-	pPaneSplitter->SetFrameTitle(getFunction(), sViewName) ;
+	_pPaneSplitter->SetFrameTitle(getFunction(), sViewName) ;
 	pContexte->setAideIndex("") ;
 	pContexte->setAideCorps("rc_episode.htm") ;
 }
@@ -1013,16 +1014,16 @@ NSRCHistoryView::concernChanged(string sConcern)
 void
 NSRCHistoryView::initParams()
 {
-    sArchetype      = "" ;
-    pParseur        = 0 ;
+  sArchetype      = "" ;
+  pParseur        = (nsarcParseur*) 0 ;
 
-    sConcernText    = "" ;
+  sConcernText    = "" ;
 
-    PremLigne       = 1 ;
-    HautGcheFenetre.x = HautGcheFenetre.y = 0 ;
-    LargeurPolice   = 0 ;
+  PremLigne       = 1 ;
+  HautGcheFenetre.x = HautGcheFenetre.y = 0 ;
+  LargeurPolice   = 0 ;
 
-    initArchetype() ;
+  initArchetype() ;
 }
 
 void
@@ -1045,7 +1046,7 @@ NSRCHistoryView::reInitParams()
     if (pParseur)
     {
         delete pParseur ;
-        pParseur = 0 ;
+        pParseur = (nsarcParseur*) 0 ;
     }
 
     initArchetype() ;
@@ -1122,7 +1123,7 @@ try
     if (!(pParseur->open(sArchetypeFile)))
     {
         delete pParseur ;
-        pParseur = 0 ;
+        pParseur = (nsarcParseur*) 0 ;
         return ;
     }
 }
@@ -1153,7 +1154,7 @@ NSRCHistoryView::SetupWindow()
 
 	Parent->SetCaption(sViewName.c_str()) ;
 
-	if (!pParseur)
+	if ((nsarcParseur*) NULL == pParseur)
 		return ;
 
 	initLines() ;
@@ -1170,7 +1171,7 @@ NSRCHistoryView::EvSetFocus(HWND hWndLostFocus)
 {
   NSMUEView::EvSetFocus(hWndLostFocus) ;
 
-  pPaneSplitter->SetFrameTitle(getFunction(), sViewName) ;
+  _pPaneSplitter->SetFrameTitle(getFunction(), sViewName) ;
   // pContexte->setAideIndex("") ;
   // pContexte->setAideCorps("objectifs.htm") ;
 }
@@ -1180,10 +1181,11 @@ NSRCHistoryView::initLines()
 {
 try
 {
-  if ((NULL == pParseur) || (NULL == pParseur->getArchetype()))
+  if (((nsarcParseur*) NULL == pParseur) || (NULL == pParseur->getArchetype()))
     return ;
+
   Citem* pItems = pParseur->getArchetype()->getRootItem() ;
-  if (NULL == pItems)
+  if ((Citem*) NULL == pItems)
     return ;
 
   if (pItems->vect_val.empty())

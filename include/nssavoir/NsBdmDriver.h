@@ -15,6 +15,7 @@ class ChoixBdmDialog ;
 class TiXmlElement ;
 class TiXmlNode ;
 class NSPatPathoArray ;
+class ArrayCopyDrugs ;
 
 using namespace std ;
 
@@ -193,6 +194,8 @@ class _CLASSELEXI NsDrugComponent
 {
   public:
 
+    enum ITEMTYPE { itemUndefined = 0, itemActivePrinciple, itemActiveExcipient, itemExcipient } ;
+
     NsDrugComponent() ;
     NsDrugComponent(string sBdmID, string sLabel) ;
 
@@ -201,10 +204,24 @@ class _CLASSELEXI NsDrugComponent
     NsDrugComponent& operator=(const NsDrugComponent& src) ;
     int              operator==(const NsDrugComponent& o) ;
 
+    string   getBdmID()    { return _sBdmID ; }
+    string   getLabel()    { return _sLabel ; }
+    ITEMTYPE getItemType() { return _iItemType ; }
+    int      getRanking()  { return _iRanking ; }
+
+    void     setBdmID(string sBI)     { _sBdmID    = sBI ; }
+    void     setLabel(string sL)      { _sLabel    = sL ; }
+    void     setItemType(ITEMTYPE iT) { _iItemType = iT ; }
+    void     setItemType(string sT) ;
+    void     setRanking(int iR)       { _iRanking  = iR ; }
+    void     setRanking(string sR) ;
+
   protected:
 
-    string  _sBdmID ;
-    string  _sLabel ;
+    string   _sBdmID ;
+    string   _sLabel ;
+    ITEMTYPE _iItemType ;
+    int      _iRanking ;
 } ;
 
 typedef vector<NsDrugComponent*>                 NsDrugComponentsVector ;
@@ -212,6 +229,71 @@ typedef NsDrugComponentsVector::iterator         NsDrugComponentIter ;
 typedef NsDrugComponentsVector::const_iterator   NsDrugComponentConstIter ;
 typedef NsDrugComponentsVector::reverse_iterator NsDrugComponentReverseIter ;
 typedef NTArray<NsDrugComponent>                 NsDrugComponentsArray ;
+
+class _CLASSELEXI NsDrugAlert
+{
+  public:
+
+    enum ALERTSEVERITY { severityUndefined = -1, severityInfo = 0, severityLevel1, severityLevel2, severityLevel3, severityLevel4 } ;
+    enum ALERTTYPE     { typeUndefined = -1, typeWarning = 0, typePrecaution, typeIndicator, typeSideEffect, typePosology, typeActiveIngredientRedundancy, typePhysicoChemicalInteraction} ;
+
+    NsDrugAlert() ;
+
+    NsDrugAlert(const NsDrugAlert& rv) ;
+
+    NsDrugAlert& operator=(const NsDrugAlert& src) ;
+    int          operator==(const NsDrugAlert& o) ;
+
+    ALERTTYPE     getType()         const { return _iType ; }
+    string        getTypeAsString() const { return _sType ; }
+    string        getTitle()        const { return _sTitle ; }
+    string        getID()           const { return _sID ; }
+    string        getContent()      const { return _sContent ; }
+    string        getContentType()  const { return _sContentType ; }
+    ALERTSEVERITY getSeverity()     const { return _iSeverity ; }
+    string        getDetail()       const { return _sDetail ; }
+    string        getDetailType()   const { return _sDetailType ; }
+    string        getProductLabel() const { return _sProductLabel ; }
+
+    NsHtmlLinksArray* getLinks() { return &_aLinks ; }
+
+    void          initializeType(const string sType) ;
+    void          setTitle(const string sTitle)    { _sTitle        = sTitle ; }
+    void          setID(const string sID)          { _sID           = sID ; }
+    void          setContent(const string sC)      { _sContent      = sC ;  }
+    void          setContentType(const string sCT) { _sContentType  = sCT ; }
+    void          initializeSeverity(const string sS)  ;
+    void          setDetail(const string sD)       { _sDetail       = sD ;  }
+    void          setDetailType(const string sDT)  { _sDetailType   = sDT ; }
+    void          setProductLabel(const string sL) { _sProductLabel = sL ;  }
+
+    void   addLink(string sTitle, string sURL, string sType, string sRelType) ;
+
+  protected:
+
+    string        _sProductLabel ;
+
+    ALERTTYPE     _iType ;
+    string        _sType ;
+
+    string        _sTitle ;
+    string        _sID ;
+    string        _sContent ;
+    string        _sContentType ;
+    ALERTSEVERITY _iSeverity ;
+    string        _sDetail ;
+    string        _sDetailType ;
+
+    NsHtmlLinksArray _aLinks ;
+
+    void        reset() ;
+} ;
+
+typedef vector<NsDrugAlert*>                 NsDrugAlertsVector ;
+typedef NsDrugAlertsVector::iterator         NsDrugAlertIter ;
+typedef NsDrugAlertsVector::const_iterator   NsDrugAlertConstIter ;
+typedef NsDrugAlertsVector::reverse_iterator NsDrugAlertReverseIter ;
+typedef NTArray<NsDrugAlert>                 NsDrugAlertArray ;
 
 // A drug as to be selected in a list
 //
@@ -225,6 +307,7 @@ class _CLASSELEXI NsSelectableDrug
     enum MARKETSTATUSTYPE { marketStatusUndefined = 0, marketStatusAvailable, marketStatusDeleted, marketStatusDeletedOneYear, marketStatusPharmaco, marketStatusPharmacoOneYear } ;
     enum COMPANYROLETYPE  { companyRoleUndefined = 0, companyRoleOwner } ;
     enum BOOLEANTYPE      { boolUndefined = -1, boolFalse = 0, boolTrue = 1  } ;
+    enum ALERTLEVEL       { alertUndefined = -1, alertNone = 0, alertLevel1, alertLevel2, alertLevel3, alertLevel4 } ;
 
     NsSelectableDrug() ;
     NsSelectableDrug(string sID, string sCIS, string sLabel, string sPrice) ;
@@ -234,22 +317,29 @@ class _CLASSELEXI NsSelectableDrug
     NsSelectableDrug& operator=(const NsSelectableDrug& src) ;
     int               operator==(const NsSelectableDrug& o) ;
 
+    string getPrescribedNodeId()      const { return _sPrescribedNodeId ; }
     string getBdmID()                 const { return _sBdmID ; }
+    string getBdmVmID()               const { return _sBdmVmID ; }
     string getLabel()                 const { return _sLabel ; }
     string getCIS()                   const { return _sCIS ; }
     string getATC()                   const { return _sATC ; }
+    string getMedicaBase()            const { return _sMedicaBase ; }
     string getOnMarketDate() ;
     string getAmmLabel()              const { return _sAmmLabel ; }
     string getMarketStatusLabel()     const { return _iMarketStatusLabel ; }
     string getWithoutPrescription()   const { return getBoolLabel(_bWithoutPrescription) ; }
     string getCompanyLabel()          const { return _sCompanyLabel ; }
     string getListLabel()             const { return _sListLabel ; }
+    string getVirtualDrugBdmId()      const { return _sVirtualDrugBdmId ; }
     string getVirtualDrugLabel()      const { return _sVirtualDrugLabel ; }
     string getGalenicFormLabel()      const { return _sGalenicFormLabel ; }
     string getHorsGHS()               const { return getBoolLabel(_bHorsGHS) ; }
+    bool   mustBeCareful()            const { return _bBeCareful ; }
     string getBeCareful()             const { return getBoolLabel(_bBeCareful) ; }
     string getVigilanceWarning()      const { return _sVigilanceWarning ; }
+    bool   isDrugInSport()            const { return _bDrugInSport ; }
     string getDrugInSport()           const { return getBoolLabel(_bDrugInSport) ; }
+    bool   isPrescribableByMidwife()  const { return _bPrescribableByMidwife ; }
     string getPrescribableByMidwife() const { return getBoolLabel(_bPrescribableByMidwife) ; }
     string getMinUcdRangePrice()      const { return _sMinUcdRangePrice ; }
     string getMaxUcdRangePrice()      const { return _sMaxUcdRangePrice ; }
@@ -261,18 +351,48 @@ class _CLASSELEXI NsSelectableDrug
 
     string getPrice() const { return _sPrice ; }
 
-    NsHtmlLinksArray*  getLinks()      { return &_aLinks ; }
-    NsXmlEntriesArray* getIndicators() { return &_aIndicators ; }
+    NsHtmlLinksArray*      getLinks()      { return &_aLinks ; }
+    NsXmlEntriesArray*     getIndicators() { return &_aIndicators ; }
+    NsDrugComponentsArray* getComponents() { return &_aComponents ; }
+
+    NsHtmlLinksArray*      getAlertLinks() { return &_aAlertLinks ; }
+    NsDrugAlertArray*      getAlerts()     { return &_aAlerts ;  }
+
+    void                   getActiveComponents(NsDrugComponentsArray* paComponents) const ;
 
     bool   isSexNeededForSecurityControl()       { return isConceptNeededForSecurityControl(string("Sexe")) ; }
     bool   isHeightNeededForSecurityControl()    { return isConceptNeededForSecurityControl(string("Taille")) ; }
     bool   isWeightNeededForSecurityControl()    { return isConceptNeededForSecurityControl(string("Poids")) ; }
     bool   isClearanceNeededForSecurityControl() { return isConceptNeededForSecurityControl(string("Renal")) ; }
 
-    void   setBdmID(string sI)            { _sBdmID = sI ; }
-    void   setCIS(string sC)              { _sCIS   = sC ; }
-    void   setATC(string sA)              { _sATC   = sA ; }
-    void   setLabel(string sL)            { _sLabel = sL ; }
+    string      getContraIndicationSeverity()           { return _sMaxContraIndicationSeverity ; }
+    ALERTLEVEL  getContraIndicationSeverityLevel()      { return _iMaxContraIndicationSeverityLevel ; }
+    string      getAllergySeverity()                    { return _sMaxAllergySeverity ; }
+    ALERTLEVEL  getAllergySeverityLevel()               { return _iMaxAllergySeverityLevel ; }
+    string      getDrugDrugInteractionsSeverity()       { return _sMaxDrugDrugInteractionsSeverity ; }
+    ALERTLEVEL  getDrugDrugInteractionsSeverityLevel()  { return _iMaxDrugDrugInteractionsSeverityLevel ; }
+    string      getPhysicoChemicalSeverity()            { return _sMaxPhysicoChemicalSeverity ; }
+    ALERTLEVEL  getPhysicoChemicalSeverityLevel()       { return _iMaxPhysicoChemicalSeverityLevel ; }
+    string      getPrecautionSeverity()                 { return _sMaxPrecautionSeverity ; }
+    ALERTLEVEL  getPrecautionSeverityLevel()            { return _iMaxPrecautionSeverityLevel ; }
+    string      getRedundantInteractionsSeverity()      { return _sMaxRedundantInteractionsSeverity ; }
+    ALERTLEVEL  getRedundantInteractionsSeverityLevel() { return _iMaxRedundantInteractionsSeverityLevel ; }
+    string      getPosologySeverity()                   { return _sMaxPosologySeverity ; }
+    ALERTLEVEL  getPosologySeverityLevel()              { return _iMaxPosologySeverityLevel ; }
+    string      getProcreationSeverity()                { return _sMaxProcreationSeverity ; }
+    ALERTLEVEL  getProcreationSeverityLevel()           { return _iMaxProcreationSeverityLevel ; }
+
+    string      getCheckPrescriptionIndex()             { return _sCheckPrescriptionIndex ; }
+
+    bool        isNarcotic() ;
+
+    void   setPrescribedNodeId(string sI) { _sPrescribedNodeId = sI ; }
+    void   setBdmID(string sI)            { _sBdmID      = sI ; }
+    void   setBdmVmID(string sI)          { _sBdmVmID    = sI ; }
+    void   setCIS(string sC)              { _sCIS        = sC ; }
+    void   setATC(string sA)              { _sATC        = sA ; }
+    void   setMedicaBase(string sM)       { _sMedicaBase = sM ; }
+    void   setLabel(string sL)            { _sLabel      = sL ; }
     void   setOnMarketDate(string sd) ;
     void   setAmmType(string sd) ;
     void   setAmmLabel(string sL)         { _sAmmLabel = sL ; }
@@ -301,15 +421,45 @@ class _CLASSELEXI NsSelectableDrug
     void   setRetrocession(string sB)          { _bRetrocession = getBool(sB) ; }
     void   setSafetyAlert(string sB)           { _bSafetyAlert  = getBool(sB) ; }
 
+    void   setContraIndicationSeverity(string sL)                { _sMaxContraIndicationSeverity = sL ; }
+    void   setContraIndicationSeverityLevel(ALERTLEVEL iAL)      { _iMaxContraIndicationSeverityLevel = iAL ; }
+    void   setAllergySeverity(string sL)                         { _sMaxAllergySeverity = sL ; }
+    void   setAllergySeverityLevel(ALERTLEVEL iAL)               { _iMaxAllergySeverityLevel = iAL ; }
+    void   setDrugDrugInteractionsSeverity(string sL)            { _sMaxDrugDrugInteractionsSeverity = sL ; }
+    void   setDrugDrugInteractionsSeverityLevel(ALERTLEVEL iAL)  { _iMaxDrugDrugInteractionsSeverityLevel = iAL ; }
+    void   setPhysicoChemicalSeverity(string sL)                 { _sMaxPhysicoChemicalSeverity = sL ; }
+    void   setPhysicoChemicalSeverityLevel(ALERTLEVEL iAL)       { _iMaxPhysicoChemicalSeverityLevel = iAL ; }
+    void   setPrecautionSeverity(string sL)                      { _sMaxPrecautionSeverity = sL ; }
+    void   setPrecautionSeverityLevel(ALERTLEVEL iAL)            { _iMaxPrecautionSeverityLevel = iAL ; }
+    void   setRedundantInteractionsSeverity(string sL)           { _sMaxRedundantInteractionsSeverity = sL ; }
+    void   setRedundantInteractionsSeverityLevel(ALERTLEVEL iAL) { _iMaxRedundantInteractionsSeverityLevel = iAL ; }
+    void   setPosologySeverity(string sL)                        { _sMaxPosologySeverity = sL ; }
+    void   setPosologySeverityLevel(ALERTLEVEL iAL)              { _iMaxPosologySeverityLevel = iAL ; }
+    void   setProcreationSeverity(string sL)                     { _sMaxProcreationSeverity = sL ; }
+    void   setProcreationSeverityLevel(ALERTLEVEL iAL)           { _iMaxProcreationSeverityLevel = iAL ; }
+
+    void   setCheckPrescriptionIndex(string sDPI)                { _sCheckPrescriptionIndex = sDPI ; }
+
+    void       resetCheckResult() ;
+    void       resetCheckAlerts() ;
+    ALERTLEVEL getMaxAlertLevel() ;
+
     void   addLink(string sTitle, string sURL, string sType, string sRelType) ;
+    void   addAlertLink(string sTitle, string sURL, string sType, string sRelType) ;
+    void   addAlert(NsDrugAlert* pAlert) ;
+    string getLinkFromTitle(const string sTitle) const ;
 
   protected:
 
-    string           _sBdmID ;
+    string           _sPrescribedNodeId ;  // When prescribed, drug's node
+
+    string           _sBdmID ;     // for Product
+    string           _sBdmVmID ;   // for virtual drug
     string           _sLabel ;
 
     string           _sCIS ;
     string           _sATC ;
+    string           _sMedicaBase ;
     string           _sOnMarketDate ;
     AMMTYPE          _iAmmType ;
     string           _sAmmLabel ;
@@ -323,10 +473,10 @@ class _CLASSELEXI NsSelectableDrug
     string           _sListId ;
     string           _sListLabel ;               // Type "Liste 1"
 
-    NsDrugComponentsArray _aActivePrinciples ;
+    NsDrugComponentsArray _aComponents ;
     NsXmlEntriesArray     _aIndicators ;
 
-    string           _sVirtualDrugBdmId ;
+    string           _sVirtualDrugBdmId ;  // virtual drug of a product
     string           _sVirtualDrugLabel ;
 
     string           _sGalenicFormBdmId ;
@@ -351,6 +501,28 @@ class _CLASSELEXI NsSelectableDrug
 
     NsHtmlLinksArray _aLinks ;
 
+    string           _sMaxContraIndicationSeverity ;
+    ALERTLEVEL       _iMaxContraIndicationSeverityLevel ;
+    string           _sMaxAllergySeverity ;
+    ALERTLEVEL       _iMaxAllergySeverityLevel ;
+    string           _sMaxDrugDrugInteractionsSeverity ;
+    ALERTLEVEL       _iMaxDrugDrugInteractionsSeverityLevel ;
+    string           _sMaxPhysicoChemicalSeverity ;
+    ALERTLEVEL       _iMaxPhysicoChemicalSeverityLevel ;
+    string           _sMaxPrecautionSeverity ;
+    ALERTLEVEL       _iMaxPrecautionSeverityLevel ;
+    string           _sMaxRedundantInteractionsSeverity ;
+    ALERTLEVEL       _iMaxRedundantInteractionsSeverityLevel ;
+    string           _sMaxPosologySeverity ;
+    ALERTLEVEL       _iMaxPosologySeverityLevel ;
+    string           _sMaxProcreationSeverity ;
+    ALERTLEVEL       _iMaxProcreationSeverityLevel ;
+
+    NsHtmlLinksArray _aAlertLinks ;
+    NsDrugAlertArray _aAlerts ;
+
+    string           _sCheckPrescriptionIndex ;
+
     void        reset() ;
     void        initFrom(const NsSelectableDrug& src) ;
     BOOLEANTYPE getBool(string sB) ;
@@ -373,7 +545,7 @@ class _CLASSELEXI NSBdmEntry
 
     // Constructors
     NSBdmEntry() ;
-    NSBdmEntry(const string sI, const string sL) ;
+    NSBdmEntry(const string sI, const string sC, const string sL) ;
     NSBdmEntry(const NSBdmEntry& rv) ;
     // Destructor
     ~NSBdmEntry() ;
@@ -382,14 +554,17 @@ class _CLASSELEXI NSBdmEntry
     int 			  operator==(const NSBdmEntry& o) ;
 
     string getID()    const { return _sID ;    }
+    string getCode()  const { return _sCode ;  }
     string getLabel() const { return _sLabel ; }
 
-    void   setID(const string sI)    { _sID = sI ;    }
+    void   setID(const string sI)    { _sID    = sI ; }
+    void   setCode(const string sC)  { _sCode  = sC ; }
     void   setLabel(const string sL) { _sLabel = sL ; }
 
   protected:
 
     string _sID ;
+    string _sCode ;
     string _sLabel ;
 };
 
@@ -444,25 +619,32 @@ class _CLASSELEXI NSPresCheckPrescriptionLine
     NSPresCheckPrescriptionLine& operator=(const NSPresCheckPrescriptionLine& src) ;
     int 			                   operator==(const NSPresCheckPrescriptionLine& o) ;
 
+    string getDrugLabel()     { return _sDrugLabel ;     }
     string getDrug()          { return _sDrug ;          }
     string getDrugId()        { return _sDrugId ;        }
     string getDrugType()      { return _sDrugType ;      }
     string getDose()          { return _sDose ;          }
     string getDoseUnit()      { return _sDoseUnit ;      }
+    string getDoseUnitAsText(NSContexte* pContexte) ;
     string getDuration()      { return _sDuration ;      }
     string getDurationType()  { return _sDurationType ;  }
+    string getDurationTypeAsText(NSContexte* pContexte) ;
     string getFrequencyType() { return _sFrequencyType ; }
+    string getFrequencyTypeAsText(NSContexte* pContexte) ;
 
-    void   setDrug(string sD)          { _sDrug = sD ;          }
-    void   setDrugId(string sD)        { _sDrugId = sD ;        }
-    void   setDrugType(string sD)      { _sDrugType = sD ;      }
-    void   setDose(string sD)          { _sDose = sD ;          }
-    void   setDoseUnit(string sD)      { _sDoseUnit = sD ;      }
-    void   setDuration(string sD)      { _sDuration = sD ;      }
-    void   setDurationType(string sD)  { _sDurationType = sD ;  }
+    void   setDrugLabel(string sD)     { _sDrugLabel     = sD ; }
+    void   setDrug(string sD)          { _sDrug          = sD ; }
+    void   setDrugId(string sD)        { _sDrugId        = sD ; }
+    void   setDrugType(string sD)      { _sDrugType      = sD ; }
+    void   setDose(string sD)          { _sDose          = sD ; }
+    void   setDoseUnit(string sD)      { _sDoseUnit      = sD ; }
+    void   setDuration(string sD)      { _sDuration      = sD ; }
+    void   setDurationType(string sD)  { _sDurationType  = sD ; }
     void   setFrequencyType(string sD) { _sFrequencyType = sD ; }
 
   protected:
+
+    string _sDrugLabel ;
 
     string _sDrug ;          // vidal://package/idXXXX vidal://product/idXXX vidal://vmp/idXXX vidal://ucd/idXXX
                              // vidal://cip7/XXXX vidal://cip13/XXX vidal://ucd13/XXX vidal://cis/XXX
@@ -527,6 +709,15 @@ BdmEntrySortByLabelInf(const NSBdmEntry *pObj1, const NSBdmEntry *pObj2)
 }
 
 bool
+BdmEntrySortByCodeInf(const NSBdmEntry *pObj1, const NSBdmEntry *pObj2)
+{
+  if (((NSBdmEntry*) NULL == pObj1) || ((NSBdmEntry*) NULL == pObj2))
+    return false ;
+
+	return (pObj1->getCode() < pObj2->getCode()) ;
+}
+
+bool
 BdmEntrySortByIdInf(const NSBdmEntry *pObj1, const NSBdmEntry *pObj2)
 {
   if (((NSBdmEntry*) NULL == pObj1) || ((NSBdmEntry*) NULL == pObj2))
@@ -542,7 +733,7 @@ class _CLASSELEXI NSBdmDriver : public NSRoot
 {
 	public:
 
-    enum BAMTABLETYPE { bamTableUndefined = 0, bamTableIndication, bamTableSubstance, bamTableATC, bamTableCim10 } ;
+    enum BAMTABLETYPE { bamTableUndefined = 0, bamTableIndication, bamTableSubstance, bamTableATC, bamTableCim10, bamTableAllergies, bamTableMolecules } ;
 
     // Constructor and destructor
     NSBdmDriver(NSContexte* pCtx) ;
@@ -558,6 +749,11 @@ class _CLASSELEXI NSBdmDriver : public NSRoot
     // Get standard code from Bam ID
     //
     string getAtcCodeFromBamId(const string sBamId) ;
+    string getBamIdForAtcCode(const string sCode) ;
+
+    // Get MedicaBase code from Bam virtual drug ID
+    //
+    string getMedicaBaseCodeFromBamVmpId(const string sBamVmpId) ;
 
     // Function that get an html document that displays documents for a product
     //
@@ -575,25 +771,51 @@ class _CLASSELEXI NSBdmDriver : public NSRoot
     //
     void initializeChecker(NSPrescriptionCheckingMessage *pMsg) ;
     void addPatientInfoToChecker(NSPrescriptionCheckingMessage *pMsg, const NSPatPathoArray* pInformation) ;
-    void addPatientInfoToChecker(NSPrescriptionCheckingMessage *pMsg, const string sInformation, const string sValue) ;
+    void addPatientInfoToChecker(NSPrescriptionCheckingMessage *pMsg, const string sInformation, const string sValue, const string sLabel) ;
+    void addMoleculeToChecker(NSPrescriptionCheckingMessage *pMsg, const string sBamID, const string sLabel) ;
+    void addAllergyToChecker(NSPrescriptionCheckingMessage *pMsg, const string sBamID, const string sLabel) ;
     void addPathologyToChecker(NSPrescriptionCheckingMessage *pMsg, const string sIcdCode) ;
-    void addPrecriptionLineToChecker(NSPrescriptionCheckingMessage *pMsg, const NSPresCheckPrescriptionLine* pLine) ;
+    void addPrescriptionLineToChecker(NSPrescriptionCheckingMessage *pMsg, const NSPresCheckPrescriptionLine* pLine) ;
 
-    void checkPrescription(NSPrescriptionCheckingMessage *pMsg) ;
+    void checkPrescription(NSPrescriptionCheckingMessage *pMsg, ArrayCopyDrugs *pDrugs) ;
 
     // Function that get a list of drugs from a criteria (substance, ATC code...)
     //
     void getDrugsForCriteria(NsSelectableDrugArray* paDrugsList, string* pCode, BAMTABLETYPE iTableType) ;
     bool getDrugInformation(NsSelectableDrug* pDrugInformation, string* pCisCode) ;
 
+    // Get the MedicaBase full content
+    //
+    bool   getMedicabaseContent(NSBdmEntryArray* paListeArray) ;
+
+    // Virtual drugs related functions
+    //
+    string getVirtualDrug(const string sSpecialityCode) ;
+
+    // Units based functions
+    //
+    NSBdmEntry*      getUnitForId(string &sUnitBamId) ;
+    NSBdmEntryArray* getUnitsArray() { return &_aUnitsArray ; }
+
     // Function that get a full html document from a partial url
     //
     string getFullUrl(const string sPartialUrl) ;
+
+    // Technical information
+    //
+    string   getBamVersionId() ;
+    CURLcode getLastRestError() { return _pRest->getLastError() ; }
+
+    // Get information from an ICD10 code
+    //
+    bool getIcd10Entry(NSBdmEntry* pResult, const string sIcdCode) ;
 
     ChoixBdmDialog* getBdmDialog()                     { return _pBdmDialog ; }
     void            setBdmDialog(ChoixBdmDialog* pDlg) { _pBdmDialog = pDlg ; }
 
     bool            isBusy() const { return _isBusy ; }
+
+    string          getBasicPathForDocs() { return _sBasicPathForDocs ; }
 
   protected :
 
@@ -604,16 +826,22 @@ class _CLASSELEXI NSBdmDriver : public NSRoot
     Rest*           _pRest ;
 
     bool            _isBusy ;
+    string          _sBasicPathForDocs ;
+
+    NSBdmEntryArray _aUnitsArray ;
 
     // Functions that get a list of elements from their first characters
-    void getElementsForSeed(NSBdmEntryArray* paListeArray, string* pSeed, const string sQuery, const string sIdTag, const string sLabelTag, const vector<Var>* paSpecificVars) ;
+    void getElementsForSeed(NSBdmEntryArray* paListeArray, string* pSeed, const string sQuery, const string sIdTag, const string sCodeTag, const string sLabelTag, const vector<Var>* paSpecificVars) ;
     void getIndicationsForSeed(NSBdmEntryArray* paListeArray, string* pSeed) ;
     void getSubstancesForSeed(NSBdmEntryArray* paListeArray, string* pSeed) ;
     void getAtcCodesForSeed(NSBdmEntryArray* paListeArray, string* pSeed) ;
     void getCim10CodesForSeed(NSBdmEntryArray* paListeArray, string* pSeed) ;
-    void getUnitCodesForSeed(NSBdmEntryArray* paListeArray, string* pSeed) ;
+    void getAllergiesForSeed(NSBdmEntryArray* paListeArray, string* pSeed) ;
+    void getMoleculesForSeed(NSBdmEntryArray* paListeArray, string* pSeed) ;
+    // void getUnitCodesForSeed(NSBdmEntryArray* paListeArray, string* pSeed) ;
+    void getUnitCodesForSeed(string* pSeed) ;
 
-    string fillArrayOfBdmEntriesFromResults(NSBdmEntryArray* paListeArray, const string* psResult, const string sIdTag, const string sLabelTag) ;
+    string fillArrayOfBdmEntriesFromResults(NSBdmEntryArray* paListeArray, const string* psResult, const string sIdTag, const string sCodeTag, const string sLabelTag, const string sIdAttribute = string(""), const string sCodeAttribute = string(""), const string sLabelAttribute = string("")) ;
 
     // Functions that get a list of drugs from a criteria (substance, ATC code...)
     void getDrugsForSeed(NsSelectableDrugArray* paDrugsList, string* pSeed, const string sQuery, const vector<Var>* paSpecificVars) ;
@@ -622,19 +850,34 @@ class _CLASSELEXI NSBdmDriver : public NSRoot
     void getDrugsForAtcCode(NsSelectableDrugArray* paDrugsList, string* pCode) ;
 
     string fillArrayOfDrugsFromResults(NsSelectableDrugArray* paDrugsList, const string* psResult) ;
+    void   fillDrugComponents(NsSelectableDrug* pDrug) ;
+    string fillArrayOfDrugComponents(NsDrugComponentsArray* paDrugComponentsList, const string* psResult) ;
 
     void   getSecurityIndicators(NsSelectableDrug* pDrugInformation) ;
+
+    void   processCheckPrescriptionResult(const string* psResult, ArrayCopyDrugs *pDrugs) ;
+    void   processCheckPrescriptionLineResult(TiXmlElement* pEntryElement, ArrayCopyDrugs *pDrugs) ;
+    void   processCheckPrescriptionAlertResult(TiXmlElement* pEntryElement, ArrayCopyDrugs *pDrugs) ;
+    NsSelectableDrug* getPrescriptionLine(const string sInlineRef, ArrayCopyDrugs *pDrugs) ;
+
+    // MedicaBase related functions
+    //
+    string getMedicabaseFromCis(const string sCisCode) ;
+
+    // Get a drug from a CIS code
+    //
+    bool getDrugInfoFromCisCode(const string sCisCode, NsSelectableDrug* pFoundDrug) ;
 
     // Generic functions
     string getTextForTag(TiXmlElement* pEntryElement, const string sTag) ;
     string getTextForNode(TiXmlNode* pIdNode) ;
     string getAttributeForTag(TiXmlElement* pEntryElement, const string sTag, const string sAttributeName) ;
 
-    string FromUTF8ToISO(const string sUTF8) ;
-    string FromISOToUTF8(const string sISO) ;
+    NsSelectableDrug::ALERTLEVEL getAlertLevel(TiXmlElement* pEntryElement, const string sTag) ;
+
     string GetCleanTag(const string sTag) ;
 
-    bool   isEntryInArray(const NSBdmEntryArray* paListeArray, const string sID, const string sLabel) const ;
+    bool   isEntryInArray(const NSBdmEntryArray* paListeArray, const string sID, const string sCode, const string sLabel) const ;
 } ;
 
 #endif

@@ -223,6 +223,7 @@
 #define CM_DRUG_RENEW       493
 #define CM_DRUG_DELETE      494
 #define CM_DRUG_HISTORY     495
+#define CM_DRUG_ALERTS      496
 
 #define CM_EPISO_START      500
 #define CM_EPISO_STOP       501

@@ -194,10 +194,10 @@ NSCQWindowsView::SetupToolBar()
 	// TMyApp* pMyApp = pContexte->getSuperviseur()->getApplication() ;
 	// pMyApp->FlushControlBar() ;
 
-  pPaneSplitter->FlushControlBar() ;
+  _pPaneSplitter->FlushControlBar() ;
 
-  pPaneSplitter->_pGadgetPanelWindow->setButtonsStyle(uButtonsStyle) ;
-  pPaneSplitter->_pGadgetPanelWindow->insertMainGadgets() ;
+  _pPaneSplitter->_pGadgetPanelWindow->setButtonsStyle(uButtonsStyle) ;
+  _pPaneSplitter->_pGadgetPanelWindow->insertMainGadgets() ;
 
 /*
   if ((uButtonsStyle & MYWS_OK) == MYWS_OK)
@@ -208,7 +208,7 @@ NSCQWindowsView::SetupToolBar()
   	pPaneSplitter->Insert(*new TButtonGadget(IDC_HELP_PANESPLIT,   IDC_HELP_PANESPLIT,   TButtonGadget::Command)) ;
 */
 
-  pPaneSplitter->LayoutSession() ;
+  _pPaneSplitter->LayoutSession() ;
 }
 
 void
@@ -225,7 +225,7 @@ NSCQWindowsView::PerformCreate(int menuOrId)
     // car l'affichage du titre dans la vue est fait par la TMDIChild
     char far szTitle[256] ;
     strcpy(szTitle, "Archetype") ;
-    pPaneSplitter->SetFrameTitle(getFunction(), szTitle) ;
+    _pPaneSplitter->SetFrameTitle(getFunction(), szTitle) ;
     // pDoc->SetTitle(szTitle) ;
   }
 
@@ -262,17 +262,17 @@ NSCQWindowsView::SetupWindow()
     ps = psHeader + string("Splitted Window ") + string(szSplitted) ;
     pContexte->getSuperviseur()->trace(&ps, 1, NSSuper::trSubDetails) ;
   }
-  if (pPaneSplitter)
+  if (_pPaneSplitter)
   {
     char szPane[20] ;
-    sprintf(szPane, "%p", pPaneSplitter->HWindow) ;
+    sprintf(szPane, "%p", _pPaneSplitter->HWindow) ;
     ps = psHeader + string("PaneSplitter ") + string(szPane) ;
     pContexte->getSuperviseur()->trace(&ps, 1, NSSuper::trSubDetails) ;
 
-    if (pPaneSplitter->_pMDIChild)
+    if (_pPaneSplitter->_pMDIChild)
     {
       char szMdiChild[20] ;
-      sprintf(szMdiChild, "%p", pPaneSplitter->_pMDIChild->HWindow) ;
+      sprintf(szMdiChild, "%p", _pPaneSplitter->_pMDIChild->HWindow) ;
       ps = psHeader + string("PaneSplitter's Child ") + string(szMdiChild) ;
       pContexte->getSuperviseur()->trace(&ps, 1, NSSuper::trSubDetails) ;
     }
@@ -339,7 +339,7 @@ NSCQWindowsView::EvSetFocus(THandle hWndLostFocus)
     pContexte->setAideCorps(sHelpUrl) ;
 
 	NSMUEView::EvSetFocus(hWndLostFocus) ;
-  pPaneSplitter->SetFrameTitle(getFunction(), sViewName) ;
+  _pPaneSplitter->SetFrameTitle(getFunction(), sViewName) ;
 
   pMyApp->setMenu(string("menubar"), &hAccelerator) ;
 }
@@ -467,7 +467,7 @@ NSCQWindowsView::CmOkFinalStep()
   executeClosingFunctions() ;
 
   if (_pDoc->enregistre(false, false))
-    pPaneSplitter->youCanCloseNow() ;
+    _pPaneSplitter->youCanCloseNow() ;
   else
     _bOkActivated = false ;
 }
@@ -485,10 +485,10 @@ NSCQWindowsView::EvDestroy()
 
   if (NSCQDocument::dpio == _pDoc->getDocType())
 	{
-    if ((pPaneSplitter) && (pPaneSplitter->_pMDIChild))
+    if ((_pPaneSplitter) && (_pPaneSplitter->_pMDIChild))
     {
       NSSuper *pSuper = pContexte->getSuperviseur() ;
-      TWindow *pWinPtr = (TWindow *) pPaneSplitter->_pMDIChild ;
+      TWindow *pWinPtr = (TWindow*) _pPaneSplitter->_pMDIChild ;
       NSToDoTask* pTask = new NSToDoTask ;
       pTask->setWhatToDo(string("FermeDPIO")) ;
       pTask->setPointer1((void*) pWinPtr, false) ;
@@ -975,16 +975,16 @@ NSCQVue::SetupToolBar()
 	// TMyApp* pMyApp = pContexte->getSuperviseur()->getApplication() ;
 	// pMyApp->FlushControlBar() ;
 
-  pPaneSplitter->FlushControlBar() ;
+  _pPaneSplitter->FlushControlBar() ;
 
   if ((uButtonsStyle & MYWS_OK) == MYWS_OK)
-		pPaneSplitter->Insert(*new TButtonGadget(IDC_OK_PANESPLIT,     IDC_OK_PANESPLIT,     TButtonGadget::Command)) ;
+		_pPaneSplitter->Insert(*new TButtonGadget(IDC_OK_PANESPLIT,     IDC_OK_PANESPLIT,     TButtonGadget::Command)) ;
 	if ((uButtonsStyle & MYWS_CANCEL) == MYWS_CANCEL)
-  	pPaneSplitter->Insert(*new TButtonGadget(IDC_CANCEL_PANESPLIT, IDC_CANCEL_PANESPLIT, TButtonGadget::Command)) ;
+  	_pPaneSplitter->Insert(*new TButtonGadget(IDC_CANCEL_PANESPLIT, IDC_CANCEL_PANESPLIT, TButtonGadget::Command)) ;
 	if ((uButtonsStyle & MYWS_HELP) == MYWS_HELP)
-  	pPaneSplitter->Insert(*new TButtonGadget(IDC_HELP_PANESPLIT,   IDC_HELP_PANESPLIT,   TButtonGadget::Command)) ;
+  	_pPaneSplitter->Insert(*new TButtonGadget(IDC_HELP_PANESPLIT,   IDC_HELP_PANESPLIT,   TButtonGadget::Command)) ;
   if ((uButtonsStyle & MYWS_PREVIOUS) == MYWS_PREVIOUS)
-  	pPaneSplitter->Insert(*new TButtonGadget(IDC_PREVIOUS_PANESPLIT, IDC_PREVIOUS_PANESPLIT, TButtonGadget::Command)) ;
+  	_pPaneSplitter->Insert(*new TButtonGadget(IDC_PREVIOUS_PANESPLIT, IDC_PREVIOUS_PANESPLIT, TButtonGadget::Command)) ;
 }
 
 void
@@ -1010,7 +1010,7 @@ NSCQVue::PerformCreate(int menuOrId)
     if (!res)
       strcpy(szTitle, "Archetype") ;
     else
-    	pPaneSplitter->SetFrameTitle(getFunction(), szTitle) ;
+    	_pPaneSplitter->SetFrameTitle(getFunction(), szTitle) ;
     // pDoc->SetTitle(szTitle) ;
   }
 
@@ -1046,7 +1046,7 @@ NSCQVue::EvSetFocus(THandle hWndLostFocus)
 	}
 
 	NSMUEView::EvSetFocus(hWndLostFocus) ;
-  pPaneSplitter->SetFrameTitle(getFunction(), sViewName) ;
+  _pPaneSplitter->SetFrameTitle(getFunction(), sViewName) ;
 
   if (clientWin)
 		clientWin->EvSetFocus(hWndLostFocus) ;

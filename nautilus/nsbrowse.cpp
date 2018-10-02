@@ -3,7 +3,7 @@
 #include <cstring.h>#include <stdio.h>#include <assert.h>/** Includes spécifiques capture **/#include <string.h>#include <malloc.h>#include <windows.h>#include <wingdi.h>#include <mshtml.h>///////////////////////////////////
 #include <owl\clipboar.h>
 
-#include "Compos.h"#include "Import.h"#include "ImpImg.h"#include "Lettre.h"#include "log_form.h"#include "WebService.h"#include "nautilus\nsbrowse.h"#include "nautilus\nsbasimg.h"#include "nautilus\nsdocref.h"#include "nautilus\nautilus.rh"#include "nautilus\nssuper.h"#include "nautilus\nshistdo.h"#include "nautilus\nsmodhtm.h"#include "nautilus\ns_html.h"#include "nautilus\nsvisual.h"#include "nautilus\nsresour.h"#include "nautilus\nsdocview.h"#include "nautilus\nscsdoc.h"#include "nautilus\nsannexe.h"#include "ns_grab\nsgrabfc.h"
+#include "Compos.h"#include "Import.h"#include "ImpImg.h"#include "Lettre.h"#include "log_form.h"#include "WebService.h"#include "nautilus\nsbrowse.h"#include "nautilus\nsbasimg.h"#include "nautilus\nsdocref.h"#include "nautilus\nautilus.rh"#include "nautilus\nssuper.h"#include "nautilus\nshistdo.h"#include "nautilus\nsmodhtm.h"#include "nautilus\ns_html.h"#include "nautilus\nsvisual.h"#include "nautilus\nsresour.h"#include "nautilus\nsdocview.h"#include "nautilus\nscsdoc.h"// #include "nautilus\nsannexe.h"#include "ns_grab\nsgrabfc.h"
 #include "nsbb\nsbbtran.h"
 #include "nsbb\nsattvaltools.h"
 #include "nssavoir\nsfilecaptur.h"
@@ -2170,6 +2170,7 @@ void
 NSLogWindow::CmImprimer()
 {
   IDispatch* pdisp = Form->Control->Document ;
+
   IOleCommandTarget* command ;
   pdisp->QueryInterface(IID_IOleCommandTarget, (void**)&command) ;
   if (command)
@@ -2177,6 +2178,7 @@ NSLogWindow::CmImprimer()
     command->Exec(NULL, Shdocvw_tlb::OLECMDID_PRINT, Shdocvw_tlb::OLECMDEXECOPT_DONTPROMPTUSER, NULL, NULL) ;
     command->Release() ;
   }
+
   pdisp->Release() ;
 }
 

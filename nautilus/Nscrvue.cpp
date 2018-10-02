@@ -14,7 +14,7 @@
 #include "nautilus\nscrvue.h"
 #include "nautilus\nshistdo.h"
 #include "nautilus\nsadmiwd.h"
-#include "nsepisod\nsldvuti.h"
+#include "nsldv\nsldvuti.h"
 #include "nsbb\nstlibre.h"
 #include "nsbb\nsfltbtnga.h"
 
@@ -1260,7 +1260,8 @@ try
     	string sElemLex = pRootPathoInfo->getLexique() ;
       string sSens ;
       pContexte->getDico()->donneCodeSens(&sElemLex, &sSens) ;
-      if (string("ZORDO") == sSens)
+      if ((string("ZORDO") == sSens) || (string("ZORDB") == sSens) ||
+          (string("ZORDS") == sSens) || (string("ZORDX") == sSens))
       	bOrdo = true ;
     }
 

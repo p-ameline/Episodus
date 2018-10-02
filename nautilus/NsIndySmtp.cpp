@@ -109,15 +109,18 @@ try
   char cPort[80] ;
   itoa(pMail->getPortSmtp(), cPort, 10) ;
 
-  HostName->Caption = (pMail->getUrlSmtp()).c_str() ;
-  UserText->Caption = (pMail->getUserSmtp()).c_str() ;
+  string sUrlSmtp  = pMail->getUrlSmtp() ;
+  string sUserSmtp = pMail->getUserSmtp() ;
+
+  HostName->Caption = sUrlSmtp.c_str() ;
+  UserText->Caption = sUserSmtp.c_str() ;
   FromText->Caption = (pMail->getFrom()).c_str() ;
 
   MessageText->Caption = "Connexion..." ;
 
-  SMTP->Host        = AnsiString((pMail->getUrlSmtp()).c_str()) ;
+  SMTP->Host        = AnsiString(sUrlSmtp.c_str()) ;
   SMTP->Port        = pMail->getPortSmtp() ;
-  SMTP->Username    = AnsiString((pMail->getUserSmtp()).c_str()) ;
+  SMTP->Username    = AnsiString(sUserSmtp.c_str()) ;
 
   SMTP->AuthenticationType = atNone ;
   if (pMail->isPassNeeded())
@@ -295,6 +298,7 @@ bool TIndySMTP::Continuer(){
 }
 
 bool TIndySMTP::Attendre(){
+  pContexte->getSuperviseur()->getApplication()->PumpWaitingMessages() ;
   return (_bAttendre) ;
 }
 

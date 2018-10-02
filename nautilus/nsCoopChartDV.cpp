@@ -770,7 +770,7 @@ NSCoopChartView::focusFct()
     pMyApp->SetToolBarWindow(GetWindow()) ;
   }
 
-  pPaneSplitter->SetFrameTitle(getFunction(), sViewName) ;
+  _pPaneSplitter->SetFrameTitle(getFunction(), sViewName) ;
   pContexte->setAideIndex("") ;
   pContexte->setAideCorps("coopChart.htm") ;
 }
@@ -800,13 +800,13 @@ NSCoopChartView::focusFct()
   }
 }voidNSCoopChartView::cardJustValidated(){  // Redraw, so that the validated status becomes visible to the user  //  _pCurrentWindow->Invalidate() ;  // Starts timer before switching to next card - (visible feedback)  //  SetTimer(ID_COOPTIMER, 1000) ;}voidNSCoopChartView::switchToNextWindow(){  if (_pCardWindowsArray->empty())    return ;  CoopCardWindowIter cardsIt = _pCardWindowsArray->begin() ;  for ( ; _pCardWindowsArray->end() != cardsIt ; cardsIt++)    if (*cardsIt == _pCurrentWindow)      break ;  if (_pCardWindowsArray->end() == cardsIt)    return ;  cardsIt++ ;  if (_pCardWindowsArray->end() == cardsIt)    return ;  _pCurrentWindow = *cardsIt ;  cardChanged() ;}voidNSCoopChartView::switchToPreviousWindow(){  if (_pCardWindowsArray->empty())    return ;  CoopCardWindowIter cardsIt = _pCardWindowsArray->begin() ;  if (*cardsIt == _pCurrentWindow)    return ;  CoopCardWindowIter previousIt = cardsIt ;  cardsIt++ ;  for ( ; _pCardWindowsArray->end() != cardsIt ; cardsIt++)    if (*cardsIt == _pCurrentWindow)      break ;    else      previousIt = cardsIt ;  _pCurrentWindow = *previousIt ;  cardChanged() ;}voidNSCoopChartView::setCardsScores(){  if (_pCardWindowsArray->empty())    return ;  for (CoopCardWindowIter cardsIt = _pCardWindowsArray->begin() ; _pCardWindowsArray->end() != cardsIt ; cardsIt++)    (*cardsIt)->setCardScore() ;}voidNSCoopChartView::EvPaint(){  NSMUEView::EvPaint() ;  _pCurrentWindow->BringWindowToTop() ;  _pCurrentWindow->Invalidate() ;}voidNSCoopChartView::SetupToolBar()
 {
-  pPaneSplitter->FlushControlBar() ;
+  _pPaneSplitter->FlushControlBar() ;
 
-  pPaneSplitter->Insert(*new TButtonGadget(IDC_OK_PANESPLIT,     IDC_OK_PANESPLIT,     TButtonGadget::Command)) ;
-  pPaneSplitter->Insert(*new TButtonGadget(IDC_CANCEL_PANESPLIT, IDC_CANCEL_PANESPLIT, TButtonGadget::Command)) ;
-  pPaneSplitter->Insert(*new TButtonGadget(IDC_HELP_PANESPLIT,   IDC_HELP_PANESPLIT,   TButtonGadget::Command)) ;
+  _pPaneSplitter->Insert(*new TButtonGadget(IDC_OK_PANESPLIT,     IDC_OK_PANESPLIT,     TButtonGadget::Command)) ;
+  _pPaneSplitter->Insert(*new TButtonGadget(IDC_CANCEL_PANESPLIT, IDC_CANCEL_PANESPLIT, TButtonGadget::Command)) ;
+  _pPaneSplitter->Insert(*new TButtonGadget(IDC_HELP_PANESPLIT,   IDC_HELP_PANESPLIT,   TButtonGadget::Command)) ;
 
-  pPaneSplitter->LayoutSession() ;
+  _pPaneSplitter->LayoutSession() ;
 }
 
 void
@@ -828,7 +828,7 @@ NSCoopChartView::SetWindowPosit()
   W = rectDlg.Width()  + _iMaxCardWidth  + _iLeftMargin /* + _iLeftDelta * iNbDelta */ ;
   H = rectDlg.Height() + _iMaxCardHeight + _iTopMargin  /* + _iTopDelta * iNbDelta  */ ;
 
-  NS_CLASSLIB::TRect rectGadget = pPaneSplitter->getGadgetWindow()->GetWindowRect() ;
+  NS_CLASSLIB::TRect rectGadget = _pPaneSplitter->getGadgetWindow()->GetWindowRect() ;
   H += rectGadget.Height() ;
 
   // set new location

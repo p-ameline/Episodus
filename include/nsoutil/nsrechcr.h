@@ -232,6 +232,8 @@ class _NSOUTILCLASSE NSRequestResult
     void   reinitForNewSearch() ;
     void   copyValues(const NSRequestResult* pSrc) ;
 
+    NSPatInfo* getPatientFromId(const string sPatId) ;
+
     NSRequestResult& operator=(const NSRequestResult& src) ;
 
     static long getNbInstance()	 { return lObjectCount ; }
@@ -407,7 +409,7 @@ class _NSOUTILCLASSE NSRequeteWindow : public TListWindow
 
 		NSRequeteDialog* pDlg ;
 
-    NSRequeteWindow(NSRequeteDialog* pere, int resId) ;
+    NSRequeteWindow(NSRequeteDialog* pere, int resId, TModule* module) ;
     ~NSRequeteWindow() ;
 
 		void SetupWindow() ;    void EvLButtonDblClk(uint modKeys, NS_CLASSLIB::TPoint& point) ;
@@ -424,7 +426,7 @@ class _NSOUTILCLASSE NSBooleanRequestsWindow : public TListWindow
 
 		NSRequeteDialog* pDlg ;
 
-    NSBooleanRequestsWindow(NSRequeteDialog* pere, int resId) ;
+    NSBooleanRequestsWindow(NSRequeteDialog* pere, int resId, TModule* module) ;
     ~NSBooleanRequestsWindow() ;
 
 		void SetupWindow() ;    void EvLButtonDblClk(uint modKeys, NS_CLASSLIB::TPoint& point) ;
@@ -452,7 +454,7 @@ class _NSOUTILCLASSE NSLanceReqDialog : public NSUtilDialog
     bool               bAvecPat ;
     bool               bAvecDoc ;
 
-		NSLanceReqDialog(NSRequeteDialog* pere, NSContexte* pCtx, TModule* mod = 0) ;
+		NSLanceReqDialog(NSRequeteDialog* pere, NSContexte* pCtx, TModule* mod = (TModule*) 0) ;
 		~NSLanceReqDialog() ;
 
     void SetupWindow() ;
@@ -486,7 +488,7 @@ class NSEditReqDialog : public NSUtilDialog
     string           sCheminPere ;        // pour pouvoir récupérer le nouveau chemin
     string           sCheminRechPere ;    // le chemin est ici un chemin de recherche
 
-    NSEditReqDialog(TWindow* pere, NSContexte* pCtx, TModule* module = 0) ;
+    NSEditReqDialog(TWindow* pere, NSContexte* pCtx, TModule* module = (TModule*) 0) ;
     ~NSEditReqDialog() ;
 
     void SetupWindow() ;
@@ -498,11 +500,13 @@ class NSEditReqDialog : public NSUtilDialog
     // void LvnGetDispInfo(TLwDispInfoNotify& dispInfo);
     void TrouveLibelle(string sCode, string& sLibelle, bool bPere) ;
     void TrouveLibelleValeur(const string sCode, string& sLibelle, bool bPere) ;
+    void findClassificationLabel(const string sCode, string& sLabel, bool bPere) ;
     void ParsingChemin(string sChem, bool bPere, string sDecal = "+01+01") ;
     void ComposeChemin(string& sChemin, NSEltArray* pArray, bool bRequete = false) ;
     void ComposeCheminBrut(string& sChemin, NSEltArray* pArray) ;
     void RechercheFilsAmmorce(string sAmmorce, string& sFils, string& sDecal) ;
     bool CalculeValeur(string& sCode) ;
+    bool processClassificationCode(string& sCode) ;
 
     // Controles
     void CmInserer() ;
@@ -526,7 +530,8 @@ class NSEditReqWindow : public TListWindow
 		NSEditReqDialog* pDlg ;
 		int              iRes ;
 
-    NSEditReqWindow(NSEditReqDialog* pere, int resId) : TListWindow(pere, resId)
+    NSEditReqWindow(NSEditReqDialog* pere, int resId, TModule* module)
+                   :TListWindow(pere, resId, module)
     {
     	pDlg = pere ;
       iRes = resId ;
@@ -555,7 +560,7 @@ class NSReqListUtilDialog : public NSUtilDialog
     int					         nbUtil ;
     int					         UtilChoisi ;
 
-    NSReqListUtilDialog(TWindow* pere, NSContexte* pCtx, TModule* module = 0) ;
+    NSReqListUtilDialog(TWindow* pere, NSContexte* pCtx, TModule* module = (TModule*) 0) ;
     ~NSReqListUtilDialog() ;
 
     void SetupWindow() ;
@@ -579,7 +584,8 @@ class NSReqListUtilWindow : public TListWindow
 
 		NSReqListUtilDialog* pDlg ;
 
-    NSReqListUtilWindow(NSReqListUtilDialog* pere, int resId) : TListWindow(pere, resId)
+    NSReqListUtilWindow(NSReqListUtilDialog* pere, int resId, TModule* module)
+                       :TListWindow(pere, resId, module)
     {
     	pDlg = pere ;
     }
@@ -613,7 +619,7 @@ class NSValeurChiffreeDialog : public NSUtilDialog
     int 			         MaxInPut ;
 
 		NSValeurChiffreeDialog(TWindow* pere, int MaxEntree, NSContexte* pCtx,
-                                TModule* module = 0) ;
+                                TModule* module = (TModule*) 0) ;
 		~NSValeurChiffreeDialog() ;
 
     void SetupWindow() ;
@@ -624,4 +630,32 @@ class NSValeurChiffreeDialog : public NSUtilDialog
 		void CmCancel() ;
 
 	DECLARE_RESPONSE_TABLE(NSValeurChiffreeDialog) ;};
+//
+// Création d'un nouveau problème de santé
+//
+class NSClassificationCodeDlg : public NSUtilDialog
+{
+  public:
+
+    NSClassificationCodeDlg(TWindow* pView, NSContexte *pCtx, string sCode, TModule* module = (TModule*) 0) ;
+    ~NSClassificationCodeDlg() ;
+
+    string getCode() const { return _sCode ; }
+
+  protected:
+
+    std::string _sCode ;  // code lexique du médicament
+
+    OWL::TStatic* _pCodeText ;
+    OWL::TEdit*   _pCodeEdit ;
+
+    void fillCode() ;
+
+    void CmOk() ;
+    void CmCancel() ;
+    void SetupWindow() ;
+
+  DECLARE_RESPONSE_TABLE(NSClassificationCodeDlg) ;
+} ;
+
 #endif

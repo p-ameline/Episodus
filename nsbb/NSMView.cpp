@@ -17,6 +17,7 @@
 #include <bwcc.h>
 #include <owl/button.h>
 
+#include "nssavoir\nspathor.h"
 #include "nautilus\nssuper.h"
 #include "nsdn\nsdochis.h"
 #include "nsbb\nsmview.h"
@@ -47,7 +48,8 @@
 #include "nssavoir\nsconver.h"
 
 #include "nautilus\nsepicap.h"
-#include "nautilus\nsldvdoc.h"
+#include "nautilus\nsmdiframe.h"
+#include "nsldv\nsldvdoc_base.h"
 #include "nautilus\nshistdo.h"
 
 #include "ns_ob1\BB1BB.h"
@@ -282,12 +284,12 @@ NSMUEView::addConcernTitle()
 	if (string("") == sPreoccup)
 		return ;
 
-	NSLdvDocument *pLdvDoc = pContexte->getPatient()->getLdvDocument() ;
-  if (NULL == pLdvDoc)
+	NSLdvDocumentBase *pLdvDoc = (NSLdvDocumentBase*) pContexte->getPatient()->getLdvDocument() ;
+  if ((NSLdvDocumentBase*) NULL == pLdvDoc)
     return ;
 
   NSFrameInformationArray *pFrames = pLdvDoc->getFrames() ;
-  if ((NULL == pFrames) || pFrames->empty())
+  if (((NSFrameInformationArray*) NULL == pFrames) || pFrames->empty())
     return ;
 
   for (FrameInfoIter i = pFrames->begin() ; pFrames->end() != i ; i++)
@@ -313,9 +315,9 @@ NSMUEView::EvKeyDown(uint key, uint repeatCount, uint flags)
 	if      (VK_TAB == key)
   {
   	if (GetKeyState(VK_SHIFT) < 0)
-    	pPaneSplitter->setFocusToPrevView(this, HWindow) ;
+    	_pPaneSplitter->setFocusToPrevView(this, HWindow) ;
     else
-    	pPaneSplitter->setFocusToNextView(this, HWindow) ;
+    	_pPaneSplitter->setFocusToNextView(this, HWindow) ;
   }
   else
   	TWindowView::EvKeyDown(key, repeatCount, flags) ;
@@ -324,7 +326,7 @@ NSMUEView::EvKeyDown(uint key, uint repeatCount, uint flags)
 void
 NSMUEView::EvSetFocus(HWND hWndLostFocus)
 {
-	pPaneSplitter->_pCurrentFocusedView = this ;
+	_pPaneSplitter->_pCurrentFocusedView = this ;
 
 	TWindowView::EvSetFocus(hWndLostFocus) ;
 
@@ -334,13 +336,13 @@ NSMUEView::EvSetFocus(HWND hWndLostFocus)
 void
 NSMUEView::setFocusToNextSplitterView()
 {
-	pPaneSplitter->setFocusToNextView(this, HWindow) ;
+	_pPaneSplitter->setFocusToNextView(this, HWindow) ;
 }
 
 void
 NSMUEView::setFocusToPrevSplitterView()
 {
-	pPaneSplitter->setFocusToPrevView(this, HWindow) ;
+	_pPaneSplitter->setFocusToPrevView(this, HWindow) ;
 }
 
 void
@@ -481,13 +483,13 @@ NSMUEView::focusView()
 void
 NSMUEView::activate()
 {
-	if ((NULL == pPaneSplitter) || (NULL == pPaneSplitter->_pMDIChild))
+	if (((NSPaneSplitter*) NULL == _pPaneSplitter) || (NULL == _pPaneSplitter->_pMDIChild))
 		return ;
 
-	if (false == pPaneSplitter->_pMDIChild->IsWindow())
+	if (false == _pPaneSplitter->_pMDIChild->IsWindow())
   	return ;
 
-	::SetFocus(pPaneSplitter->_pMDIChild->GetHandle()) ;
+	::SetFocus(_pPaneSplitter->_pMDIChild->GetHandle()) ;
 }
 
 bool
@@ -503,9 +505,9 @@ void
 NSMUEView::activateParent()
 {
 	activateMUEViewMenu() ;
-	//pPaneSplitter->pMDIChild->GetHandle()) ;
-	pPaneSplitter->activateParent() ;
-  pPaneSplitter->SetFrameTitle(getFunction(), sViewName) ;
+	//_pPaneSplitter->pMDIChild->GetHandle()) ;
+	_pPaneSplitter->activateParent() ;
+  _pPaneSplitter->SetFrameTitle(getFunction(), sViewName) ;
 }
 
 void
@@ -2963,20 +2965,20 @@ NSBBMUEView::CmPrevious()
     return ;
 
   NSHISTODocument* pDocManager = pContexte->getPatient()->getDocHis() ;
-  if (NULL == pDocManager)
+  if ((NSHISTODocument*) NULL == pDocManager)
     return ;
 
   Citem* pRootItem = _pBBItem->getArchetypeRootItem() ;
-  if (NULL == pRootItem)
+  if ((Citem*) NULL == pRootItem)
     return ;
 
   Citem* pFirstItem = pRootItem->getFirstSon() ;
-  if (NULL == pFirstItem)
+  if ((Citem*) NULL == pFirstItem)
     return ;
 
   string sLexique = pFirstItem->getCode() ;
   DocumentIter iterPrevDoc = pDocManager->DonnePrevPatPathoDocument(sLexique, (NSPatPathoArray*) 0, 0) ;
-  if (NULL == iterPrevDoc)
+  if ((DocumentIter) NULL == iterPrevDoc)
     return ;
 
   // pDocManager->AutoriserOuverture((NSDocumentInfo*) *iterPrevDoc) ;

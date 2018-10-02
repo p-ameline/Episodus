@@ -7,6 +7,7 @@
 #include <stdio.h>
 #include <classlib\filename.h>
 
+#include "nssavoir\nspathor.h"
 #include "nautilus\nssuper.h"
 #include "partage\nsdivfct.h"
 #include "partage\nsdivfile.h"
@@ -989,7 +990,8 @@ NSRefDocument::Referencer(string typeDoc, string nomDoc, string nomFichier,
                           NSPersonGraphManager* pGraphManager,
                           string sAuthorId, string tmplDoc, string enteteDoc,
                           string sDestinataire, string sCreationDate,
-                          string sMasterDoc, NSRootLink::NODELINKTYPES masterLink)
+                          string sMasterDoc, NSRootLink::NODELINKTYPES masterLink,
+                          NSPatPathoArray* pSpecificInfoPatPatho)
 {
 try
 {
@@ -998,7 +1000,8 @@ try
                                            sCodeDoc, typeLink, pGraphManager,
                                            sAuthorId, tmplDoc, enteteDoc,
                                            sDestinataire, sCreationDate,
-                                           sMasterDoc, masterLink))
+                                           sMasterDoc, masterLink, true,
+                                           pSpecificInfoPatPatho))
     return false ;
 
 	// ajout d'un nouveau document type fichier :  // remise à jour de l'historique ...

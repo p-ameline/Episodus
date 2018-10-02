@@ -34,7 +34,7 @@
 # include "partage\nsglobal.h"
 
 // DB Interfaces
-# include "nsmt_vidalCD\ibdm.h"
+# include "nsoutil\ibdm.h"
 # include "nsmt_vidalCD\ibdmactif.h"
 # include "nsmt_vidalCD\iflechies.h"
 # include "nsmt_vidalCD\ilexique.h"
@@ -45,41 +45,42 @@
 
 class __AFSSAPSEXPORT__	AfssapsMaster : public NSRoot
 {
- public:
-	AfssapsMaster(NSContexte *pCtx) ;
-	AfssapsMaster(const AfssapsMaster& src) ;
-	~AfssapsMaster() ;
+  public:
 
-	AfssapsMaster& operator=(const AfssapsMaster& src) ;
+	  AfssapsMaster(NSContexte *pCtx) ;
+	  AfssapsMaster(const AfssapsMaster& src) ;
+	  ~AfssapsMaster() ;
 
-  bool             doCIS() ;
-	void						 processLine(string* psLine) ;
-  void             processDrug(string sCisCode, string sDenomination,
-                               string sForme, string sVoies, string sStatutAmm,
-                               string sTypeAmm, string sEtatCommerc,
-                               string sDateAMM, string sStatutBdm,
-                               string sNumEurope, string sTitulaire,
-                               string sSurveilRenfo) ;
+	  AfssapsMaster& operator=(const AfssapsMaster& src) ;
 
-  bool             doCISGener() ;
-  void						 processGenerLine(string* psLine) ;
-  void             processGener(string sGroupId, string sDenomination,
+    bool             doCIS() ;
+	  bool						 processLine(string* psLine) ;
+    bool             processDrug(string sCisCode, string sDenomination,
+                                 string sForme, string sVoies, string sStatutAmm,
+                                 string sTypeAmm, string sEtatCommerc,
+                                 string sDateAMM, string sStatutBdm,
+                                 string sNumEurope, string sTitulaire,
+                                 string sSurveilRenfo) ;
+
+    bool             doCISGener() ;
+    void						 processGenerLine(string* psLine) ;
+    void             processGener(string sGroupId, string sDenomination,
                                 string sRefCisCode, string sType,
                                 string sIdInGroup) ;
-  void             updateGenerSemantic(string sCode,
+    void             updateGenerSemantic(string sCode,
                                 string sRefCisCode, string sType,
                                 string sIdInGroup) ;
 
-  bool             doDci() ;
-  void						 processDciLine(string* psLine) ;
-  void             processDci(string sDciId, string sDenomination) ;
+    bool             doDci() ;
+    void						 processDciLine(string* psLine) ;
+    void             processDci(string sDciId, string sDenomination) ;
 
-	bool						 rebuildBdm() ;
+	  bool						 rebuildBdm() ;
 
-	void						 verifCodeLexiq() ;
+	  void						 verifCodeLexiq() ;
 
-	InterfaceBdm		 *pIBdm ;
-	InterfaceLexiMed *pILexiMed ;
+	  InterfaceBdm		 *pIBdm ;
+	  InterfaceLexiMed *pILexiMed ;
 } ;
 
 #endif // __AFSSAPSMASTER_H__

@@ -3,8 +3,7 @@
 #include <vcl.h>
 #pragma hdrstop
 
-#include <dstring.h>#include "WebBrowserPrint.h"#include "ActiveX.h"
-#include "ExamHisto.h"
+#include <dstring.h>#include "WebBrowserPrint.h"#include "ExamHisto.h"
 
 #include "nautilus\nssuper.h"
 #include "partage\nsdivfct.h"
@@ -28,79 +27,6 @@ typedef enum BrowserNavConstants {    navOpenInNewWindow = 1,
 } BrowserNavConstants;
 **********************************/
 
-//---------------------------------------------------------------------------//
-//Helper classes for toolbar edit box:
-//
-//---------------------------------------------------------------------------
-
-void  TEditGadgetEnabler::SetText(const char far* txt)
-{
-	char oldtxt[256] ;
-  OWL::TEdit* edit = dynamic_cast<OWL::TEdit*>(Gadget->GetControl()) ;
-  edit->GetText(oldtxt, 255) ;
-  if (strcmp(txt, oldtxt) != 0)
-  	edit->SetText(txt) ;
-}
-
-void TEditGadget::CommandEnable(){
-	if (Window->GetHandle() && (GetFocus() != GetControl()->HWindow))
-		Window->HandleMessage(WM_COMMAND_ENABLE, 0, TParam2(&TEditGadgetEnabler(*Window, this)));
-}
-
-DEFINE_RESPONSE_TABLE1(TNotifyEdit, OWL::TEdit)	EV_WM_KEYDOWN,
-END_RESPONSE_TABLE;
-
-void TNotifyEdit::EvKeyDown(uint key, uint repeatCount, uint flags){
-	if (key == VK_RETURN)
-  {
-  	if (text)
-    	delete[] text ;
-
-  	text = new char[GetTextLen() + 1] ;
-    GetText(text, GetTextLen() + 1) ;
-    Parent->HandleMessage(WM_COMMAND, GetId(), 0) ;
-  }
-  else
-  	OWL::TEdit::EvKeyDown(key, repeatCount, flags) ;
-}
-
-TAPointer<char> TNotifyEdit::text = 0;
-
-const char* TNotifyEdit::Text()
-{
-	return (const char*)text ;
-}
-
-// Classe NSEditUrl pour la barre d'edition des url
-////////////////////////////////////////////////////////////////
-
-DEFINE_RESPONSE_TABLE1(NSEditUrl, OWL::TEdit)
-	EV_WM_CHAR,
-END_RESPONSE_TABLE;
-
-NSEditUrl::NSEditUrl(NSVisualView* pView) : OWL::TEdit(0, 751, "", 0, 0, 200, 24, 0)
-{
-	pVue = pView;
-}
-
-NSEditUrl::~NSEditUrl()
-{
-}
-
-void
-NSEditUrl::EvChar(uint key, uint repeatCount, uint flags)
-{
-	if (VK_RETURN == key)
-  {
-  	char* url = new char[GetTextLen() + 2] ;
-  	GetText(url, GetTextLen() + 1) ;
-    pVue->Navigate(string(url)) ;
-    delete[] url ;
-  }
-  else
-  	OWL::TEdit::EvChar(key, repeatCount, flags) ;
-}
-
 // Table de réponses de la classe NSVisualView
 ////////////////////////////////////////////////////////////////
 DEFINE_RESPONSE_TABLE1(NSVisualView, TWindowView)
@@ -121,23 +47,23 @@ END_RESPONSE_TABLE;
 // Constructeur NSVisualView
 ////////////////////////////////////////////////////////////////
 
-NSVisualView::NSVisualView(NSRefDocument& doc, TWindow *parent)             :TWindowView(doc,parent), pDocRef(&doc), Form(0){
+NSVisualView::NSVisualView(NSRefDocument& doc, TWindow *parent)             :NSVisualViewBase(doc.pContexte->getSuperviseur(), doc, parent),              _pDocRef(&doc), Form((TExamHistoForm*) 0){
 	pMUEViewMenu = new OWL::TMenuDescr ;
 
-	nsMenuIniter menuIter(pDocRef->pContexte) ;
+	nsMenuIniter menuIter(_pDocRef->pContexte) ;
   menuIter.initMenuDescr(pMUEViewMenu, "menubar_visual") ;
 
-  TMyApp* pMyApp = pDocRef->pContexte->getSuperviseur()->getApplication() ;
+  TMyApp* pMyApp = _pDocRef->pContexte->getSuperviseur()->getApplication() ;
   pMyApp->GetMainWindow()->SetMenuDescr(*pMUEViewMenu) ;
 
 	initValues() ;
   initParams() ;
-  if (0 == pDocRef->getNbImpress())  {
+  if (0 == _pDocRef->getNbImpress())  {
   	// cas utilisé pour la visualisation
-		if (string("") != pDocRef->_sTemplate) // le document a une template associée
+		if (string("") != _pDocRef->_sTemplate) // le document a une template associée
     {
     	// on récupère l'url du serveur nautilus
-      sUrl = pDocRef->pContexte->PathName("UHTM") ;
+      _sUrl = _pDocRef->pContexte->PathName("UHTM") ;
 
       // on génère le fichier à visualiser      GenereHtml() ;
     }
@@ -145,48 +71,44 @@ NSVisualView::NSVisualView(NSRefDocument& doc, TWindow *parent)             :TW
     {
     	// l'url est contenue dans le champ fichier du document
       // on passera par ftp ou http selon le champ fichier
-      if (pDocRef->_pDocInfo)
-				sUrl = pDocRef->_pDocInfo->getFichier() ;
-			sHtml = string("") ;		}
+      if (_pDocRef->_pDocInfo)
+				_sUrl = _pDocRef->_pDocInfo->getFichier() ;
+			_sHtml = string("") ;		}
 	}
   else // cas utilisé dans la publication
   {
   	// Dans ce cas, on a déjà généré le fichier html final (sNomDocHtml)
 
-		sUrl = pDocRef->pContexte->PathName("UHTM") ;    sHtml = pDocRef->getNomDocHtml() ;
+		_sUrl  = _pDocRef->pContexte->PathName("UHTM") ;    _sHtml = _pDocRef->getNomDocHtml() ;
   }
 }
 
 NSVisualView::NSVisualView(NSHtmlModelDocument* pDoc, TWindow *parent)
-             :TWindowView(*pDoc, parent), Form(0){
+             :NSVisualViewBase(pDoc->pContexte->getSuperviseur(), *pDoc, parent), Form((TExamHistoForm*) 0){
   initValues() ;
 
-	pDocRef      = (NSRefDocument*) pDoc ;
+	_pDocRef     = (NSRefDocument*) pDoc ;
 	pMUEViewMenu = (TMenuDescr*) 0 ;
 }
 
 void
 NSVisualView::initValues()
 {
-	delai      	  = 0 ;
-  bUseHook      = false ;
-  bVerbose      = false ;
-  bSimpleCtrl   = false ;
-  bKillTmp      = true ;
-  bWaitImp      = false ;
-  iTempPostNav  = 0 ;
-  iTempImp      = 0 ;
-  sUrl          = string("") ;
-  sHtml         = string("") ;
+  initBaseValues() ;
 
-	bSetupToolBar = true ;
-  bNewNav       = true ;
-  nbNav         = 0 ;
-  sLettreHtml   = string("") ;
-  page          = 0 ;
-  lastUrl       = AnsiString("") ;
-  pEditUrl      = (NSEditUrl*) 0 ; // ne pas oublier
-  pBrowserPrint = (CWebBrowserPrint*) 0 ;
+	delai      	   = 0 ;
+  bUseHook       = false ;
+  bVerbose       = false ;
+  bSimpleCtrl    = false ;
+  bKillTmp       = true ;
+  bWaitImp       = false ;
+  iTempPostNav   = 0 ;
+  iTempImp       = 0 ;
+
+	_bSetupToolBar = true ;
+  _sLettreHtml   = string("") ;
+  _pEditUrl      = (NSEditUrl*) 0 ; // ne pas oublier
+  pBrowserPrint  = (CWebBrowserPrint*) 0 ;
 }
 
 // Destructeur NSVisualView////////////////////////////////////////////////////////////////
@@ -214,7 +136,7 @@ NSVisualView::~NSVisualView(){
 
 TWindow*NSVisualView::GetWindow()
 {
-	return (TWindow*) this ;
+	return (TWindowView*) this ;
 }
 
 // Fonction CanClose pour détruire la barre d'outils
@@ -222,12 +144,13 @@ TWindow*NSVisualView::GetWindow()
 
 boolNSVisualView::CanClose()
 {
-	TMyApp* pMyApp = pDocRef->pContexte->getSuperviseur()->getApplication() ;
+	TMyApp* pMyApp = _pDocRef->pContexte->getSuperviseur()->getApplication() ;
 	pMyApp->FlushControlBar() ;
-	pEditUrl = 0 ;
-	bSetupToolBar = false ;
 
-	return TWindow::CanClose() ;}
+	_pEditUrl = (NSEditUrl*) 0 ;
+	_bSetupToolBar = false ;
+
+	return TWindowView::CanClose() ;}
 
 // Fonction SetupWindow////////////////////////////////////////////////////////////////
 
@@ -243,12 +166,12 @@ voidNSVisualView::SetupWindow()
 	// ::SetWindowPos(Parent->HWindow, NULL, 0, 0, Form->Width, Form->Height, SWP_DRAWFRAME | SWP_NOMOVE | SWP_NOZORDER);
 	// }
 
-	ModifyStyle(WS_BORDER, WS_CHILD) ;	Form->Show() ;
+	TWindowView::ModifyStyle(WS_BORDER, WS_CHILD) ;	Form->Show() ;
 	MakeVisible() ;
 
   // Print mode: hide command pannel
   //
-  if (pDocRef->getNbImpress() > 0)
+  if (_pDocRef->getNbImpress() > 0)
     Form->Pannel->Hide() ;
   else
   {
@@ -256,11 +179,11 @@ voidNSVisualView::SetupWindow()
     // invalidate corresponding buttons
     //
     NSDocumentInfo* pPrevDocInfo = getPrevSameKindDocument() ;
-    if (NULL == pPrevDocInfo)
+    if ((NSDocumentInfo*) NULL == pPrevDocInfo)
       Form->Previous->Enabled = false ;
 
     NSDocumentInfo* pNextDocInfo = getNextSameKindDocument() ;
-    if (NULL == pNextDocInfo)
+    if ((NSDocumentInfo*) NULL == pNextDocInfo)
       Form->Next->Enabled = false ;
   }
 }
@@ -306,55 +229,55 @@ try
 catch (...)
 {
   string ps = string("Exception NSVisualView::PerformCreate Form creation") ;
-  pDocRef->pContexte->getSuperviseur()->trace(&ps, 1, NSSuper::trError) ;
+  _pDocRef->pContexte->getSuperviseur()->trace(&ps, 1, NSSuper::trError) ;
 	erreur(ps.c_str(), standardError, 0) ;
 }
 
 try
 {
 	SetHandle(Form->Handle) ;
-	::SetParent(Forms::Application->Handle, pDocRef->pContexte->GetMainWindow()->HWindow) ;
+	::SetParent(Forms::Application->Handle, _pDocRef->pContexte->GetMainWindow()->HWindow) ;
 }
 catch (...)
 {
   string ps = string("Exception NSVisualView::PerformCreate SetHandle") ;
-  pDocRef->pContexte->getSuperviseur()->trace(&ps, 1, NSSuper::trError) ;
+  _pDocRef->pContexte->getSuperviseur()->trace(&ps, 1, NSSuper::trError) ;
 	erreur(ps.c_str(), standardError, 0) ;
 }
 
-	if (sHtml != "")		SetDocTitle(pDocRef->GetTitle(), 0) ;
+	if (string("") != _sHtml)		SetDocTitle(_pDocRef->GetTitle(), 0) ;
 
-	// on navigue vers le fichier html à visualiser	string ps = string("Navigate to url: ") + sUrl + sHtml ;
-	pDocRef->pContexte->getSuperviseur()->trace(&ps, 1, NSSuper::trError) ;
+	// on navigue vers le fichier html à visualiser	string ps = string("Navigate to url: ") + _sUrl + _sHtml ;
+	_pDocRef->pContexte->getSuperviseur()->trace(&ps, 1, NSSuper::trError) ;
 
 try
 {
-	Navigate(sUrl + sHtml) ;}catch (Exception &ex){
-  string ps = string("Exception NSVisualView::PerformCreate Navigate when navigating to ") + sUrl + sHtml + string(" (") + string(ex.Message.c_str()) + string(")") ;
-  pDocRef->pContexte->getSuperviseur()->trace(&ps, 1, NSSuper::trError) ;
+	Navigate(_sUrl + _sHtml) ;}catch (Exception &ex){
+  string ps = string("Exception NSVisualView::PerformCreate Navigate when navigating to ") + _sUrl + _sHtml + string(" (") + string(ex.Message.c_str()) + string(")") ;
+  _pDocRef->pContexte->getSuperviseur()->trace(&ps, 1, NSSuper::trError) ;
 }
 catch (...)
 {
-  string ps = string("Exception NSVisualView::PerformCreate Navigate when navigating to ") + sUrl + sHtml ;
-  pDocRef->pContexte->getSuperviseur()->trace(&ps, 1, NSSuper::trError) ;
+  string ps = string("Exception NSVisualView::PerformCreate Navigate when navigating to ") + _sUrl + _sHtml ;
+  _pDocRef->pContexte->getSuperviseur()->trace(&ps, 1, NSSuper::trError) ;
 
   // ----- Switched off because it can get thrown "at random" and block printing
   // erreur("Exception NSVisualView::PerformCreate Navigate.", standardError, 0) ;
 }}
 voidNSVisualView::SetupNavBar()
 {
-	TMyApp* pMyApp = pDocRef->pContexte->getSuperviseur()->getApplication() ;
+	TMyApp* pMyApp = _pDocRef->pContexte->getSuperviseur()->getApplication() ;
 
 	if (pMUEViewMenu)
   	pMyApp->GetMainWindow()->SetMenuDescr(*pMUEViewMenu) ;
 
   pMyApp->FlushControlBar() ;
 
-  pEditUrl = new NSEditUrl(this) ;
+  _pEditUrl = new NSEditUrl(this) ;
   pMyApp->getSecondaryControlBar()->Insert(*new TButtonGadget(IDC_EDITION_HTM, IDC_EDITION_HTM, TButtonGadget::Command)) ;  pMyApp->getSecondaryControlBar()->Insert(*new TButtonGadget(IDC_RAFRAICHIR_HTM, IDC_RAFRAICHIR_HTM, TButtonGadget::Command)) ;
   pMyApp->getSecondaryControlBar()->Insert(*new TButtonGadget(CM_PRECEDENT, CM_PRECEDENT, TButtonGadget::Command)) ;
   pMyApp->getSecondaryControlBar()->Insert(*new TSeparatorGadget) ;
-  pMyApp->getSecondaryControlBar()->Insert(*new TEditGadget(*pEditUrl)) ;
+  pMyApp->getSecondaryControlBar()->Insert(*new TEditGadget(*_pEditUrl)) ;
   pMyApp->getSecondaryControlBar()->Insert(*new TSeparatorGadget) ;
   pMyApp->getSecondaryControlBar()->Insert(*new TButtonGadget(CM_SUIVANT, CM_SUIVANT, TButtonGadget::Command)) ;
 
@@ -370,24 +293,24 @@ voidNSVisualView::EvClose()
 void
 NSVisualView::EvSetFocus(THandle hWndLostFocus /* may be 0 */)
 {
-	TMyApp* 	pMyApp = pDocRef->pContexte->getSuperviseur()->getApplication() ;
+	TMyApp* 	pMyApp = _pDocRef->pContexte->getSuperviseur()->getApplication() ;
   WideString  autoUrl ;
 	AnsiString 	url ;
 
   TWindow::EvSetFocus(hWndLostFocus);
 
-  if (bSetupToolBar && (GetWindow() != pMyApp->GetToolBarWindow()))
+  if (_bSetupToolBar && (GetWindow() != pMyApp->GetToolBarWindow()))
   {
   	SetupNavBar() ;
     pMyApp->SetToolBarWindow(GetWindow()) ;
 
     // pour le cas où on change de focus entre plusieurs NSVisualView
-    if (nbNav)
+    if (_nbNav)
     {
     	autoUrl = Form->Control->LocationURL ;
       url = AnsiString(autoUrl) ;
       // ici à priori pEditUrl est valide car on fait le new dans SetupNavBar
-      pEditUrl->SetText(url.c_str()) ;
+      _pEditUrl->SetText(url.c_str()) ;
     }
   }
 }
@@ -396,10 +319,10 @@ voidNSVisualView::EvKillFocus(THandle hWndGetFocus /* may be 0 */)
 {
 	TWindow::EvKillFocus(hWndGetFocus) ;
 
-  if (pEditUrl)
+  if (_pEditUrl)
   {
     // delete pEditUrl ;
-    pEditUrl = (NSEditUrl*) 0 ;
+    _pEditUrl = (NSEditUrl*) 0 ;
   }
 }
 
@@ -424,7 +347,7 @@ voidNSVisualView::EvKeyDown(uint key, uint repeatCount, uint flags)
           IDispatch* pdisp = Form->Control->Document;
           IOleCommandTarget* command;
           pdisp->QueryInterface(IID_IOleCommandTarget, (void**)&command);
-          if(command)
+          if (command)
           {
           	command->Exec(NULL, Shdocvw_tlb::OLECMDID_COPY, Shdocvw_tlb::OLECMDEXECOPT_DODEFAULT, NULL, NULL);
             command->Release();
@@ -516,7 +439,7 @@ voidNSVisualView::EvRButtonDown(uint modKeys, NS_CLASSLIB::TPoint& point)
 {
 	OWL::TPopupMenu *menu = new OWL::TPopupMenu();
 
-	if (string("ZTHTM") == pDocRef->_pDocInfo->getTypeSem())
+	if (string("ZTHTM") == _pDocRef->_pDocInfo->getTypeSem())
 	{
 		menu->AppendMenu(MF_STRING, CM_EDITER, "Editer");
     menu->AppendMenu(MF_SEPARATOR, 0, 0);
@@ -552,7 +475,7 @@ NSVisualView::Navigate(string sUrlTarget)
   else
   {
   	string ps = string("Form not ready when navigating to ") + sUrlTarget ;
-    pDocRef->pContexte->getSuperviseur()->trace(&ps, 1, NSSuper::trError) ;
+    _pDocRef->pContexte->getSuperviseur()->trace(&ps, 1, NSSuper::trError) ;
   }
 // }
 // catch (...)
@@ -641,10 +564,10 @@ NSVisualView::SetPrintParams(NSPrintParams& nspp)
 
 void//NSVisualView::ExecWB(Shdocvw_tlb::OLECMDID iCommand, Shdocvw_tlb::OLECMDEXECOPT iOption)NSVisualView::ExecWB(int iCommand, int iNbExpl, bool bVerbose){try{  // on remplace ici l'ancienne commande d'impression par un controle MFC	// Form->Control->ExecWB(iCommand, iOption) ;	if (NULL == pBrowserPrint)		pBrowserPrint = new CWebBrowserPrint() ;  // Vieux	// IWebBrowser2Disp controlInterface = Form->Control->ControlInterface;  // Moins vieux  // Shdocvw_tlb::IWebBrowser2* pWebBrowser = (Shdocvw_tlb::IWebBrowser2*) Form->Control->ControlInterface ;  if ((NULL == Form) || (NULL == Form->Control))    return ;  IDispatch* pdisp = Form->Control->Application_ ;  if (NULL == pdisp)
 		return ;	GUID DEF_CTL_INTF = {0xD30C1661, 0xCDAF, 0x11D0,{ 0x8A, 0x3E, 0x00, 0xC0, 0x4F, 0xC9, 0xE2, 0x6E} };	Shdocvw_tlb::IWebBrowser2* pWebBrowser = 0 ;	HRESULT hr = pdisp->QueryInterface(DEF_CTL_INTF, (void**)&pWebBrowser) ;  if ((FAILED(hr)) || (NULL == pWebBrowser))
-    return ;	pBrowserPrint->SetWebBrowser(pWebBrowser) ;	// pBrowserPrint->m_Orientation = CWebBrowserPrint::OrientationLandscape;	SetPrintParams(pDocRef->_nspp) ;	pBrowserPrint->Print(iNbExpl, bVerbose) ;}catch (...)
+    return ;	pBrowserPrint->SetWebBrowser(pWebBrowser) ;	// pBrowserPrint->m_Orientation = CWebBrowserPrint::OrientationLandscape;	SetPrintParams(_pDocRef->_nspp) ;	pBrowserPrint->Print(iNbExpl, bVerbose) ;}catch (...)
 {
   string ps = string("Exception NSVisualView::ExecWB") ;
-  pDocRef->pContexte->getSuperviseur()->trace(&ps, 1, NSSuper::trError) ;
+  _pDocRef->pContexte->getSuperviseur()->trace(&ps, 1, NSSuper::trError) ;
 	erreur(ps.c_str(), standardError, 0) ;
 }}voidNSVisualView::ExecWB_old(int iCommand, int iOption){	Form->Control->ExecWB(iCommand, iOption) ;}
 voidNSVisualView::NavigateComplete()
@@ -652,23 +575,23 @@ voidNSVisualView::NavigateComplete()
 	WideString  autoUrl, autoTitle ;
 	AnsiString 	url, title ;
 	string ps = "Ev : NavigateComplete..." ;
-	pDocRef->pContexte->getSuperviseur()->trace(&ps,1) ;
+	_pDocRef->pContexte->getSuperviseur()->trace(&ps,1) ;
 
 	autoUrl = Form->Control->LocationURL ;	url = AnsiString(autoUrl) ;
 
-	if (!(url == lastUrl))	{
+	if (!(url == _lastUrl))	{
   	// ici on vérifie que pEditUrl est valide car dans certains cas bizarres
     // la vue reçoit NavigateComplete avant EvSetFocus (qui fait le new sur pEditUrl)
     // si pEditUrl est invalide, on n'affiche rien.
 
-    if ((pEditUrl) && (pEditUrl->GetHandle() != NULL))    	pEditUrl->SetText(url.c_str()) ;
+    if ((_pEditUrl) && (_pEditUrl->GetHandle() != NULL))    	_pEditUrl->SetText(url.c_str()) ;
 
-    lastUrl = url ;
+    _lastUrl = url ;
     // on incrémente ici nbNav et non dans Navigate    // pour tenir compte des navigations par liens
 
-    if (bNewNav)    	nbNav = ++page ;
+    if (_bNewNav)    	_nbNav = ++_page ;
 
-    bNewNav = true ;
+    _bNewNav = true ;
     // si le titre est vide, on récupère LocationName    // if (!strcmp(pDocRef->GetTitle(), ""))
     // {
     //     autoTitle = Form->Control->Name;
@@ -676,14 +599,14 @@ voidNSVisualView::NavigateComplete()
     //     SetDocTitle(title.c_str(),0);
     // }
 
-    if (pDocRef->getNbImpress())    {    	// if (iTempPostNav > 0)      // pDocRef->pContexte->getSuperviseur()->Delay(iTempPostNav) ;      // CmPublier() ;      postNavigateComplete() ;    }
+    if (_pDocRef->getNbImpress())    {    	// if (iTempPostNav > 0)      // pDocRef->pContexte->getSuperviseur()->Delay(iTempPostNav) ;      // CmPublier() ;      postNavigateComplete() ;    }
   }
 }
 
 void
 NSVisualView::postNavigateComplete()
 {
-	NSSuper* pSuper = pDocRef->pContexte->getSuperviseur() ;
+	NSSuper* pSuper = _pDocRef->pContexte->getSuperviseur() ;
 	NSToDoTask* pTask = new NSToDoTask ;
 	pTask->setWhatToDo(string("NavigateComplete")) ;
 	pTask->setPointer1((void*) this, false) ;
@@ -696,7 +619,7 @@ NSVisualView::NavigateErrorEvent(int iStatusCode, string sURL)
 {
 	string ps = string("Ev : NavigateError for URL \"") + sURL + string("\"") ;
   ps += string(" (") + getNavigateErrorShortMsg(iStatusCode) + string(")") ;
-	pDocRef->pContexte->getSuperviseur()->trace(&ps, 1, NSSuper::trError) ;
+	_pDocRef->pContexte->getSuperviseur()->trace(&ps, 1, NSSuper::trError) ;
 
   ps = string("Ev : NavigateError for URL \"") + sURL + string("\"") ;
   ps += string(" (") + getNavigateErrorDetailedMsg(iStatusCode) + string(")") ;
@@ -870,36 +793,31 @@ NSVisualView::SetURL(const char* _URL)
 {
 	if (_URL)
 	{
-  	strcpy(URL, _URL) ;
+  	_sUrl = string(_URL) ;
     if (Form)
-    	Form->RetrieveURL(URL) ;
+    	Form->RetrieveURL(_URL) ;
 	}
-}
-
-const char*NSVisualView::GetURL()
-{
-	return URL ;
 }
 
 // Fonction GenereHtml////////////////////////////////////////////////////////////////
 
 boolNSVisualView::GenereHtml()
 {
-  string sPathHtml = pDocRef->pContexte->PathName("SHTM") ;
+  string sPathHtml = _pDocRef->pContexte->PathName("SHTM") ;
 
   // on récupère le code du document à visualiser
-  string codeDoc = pDocRef->getDocId() ;
+  string codeDoc = _pDocRef->getDocId() ;
 
-  sHtml = codeDoc ;
+  _sHtml = codeDoc ;
 
   // generation du fichier html (dans le repertoire du serveur)
-  if (false == pDocRef->GenereHtml(sPathHtml, sHtml, toVisualiser))
+  if (false == _pDocRef->GenereHtml(sPathHtml, _sHtml, toVisualiser))
   {
   	erreur("Impossible de générer le fichier html à visualiser", standardError, 0, GetHandle()) ;
-    sHtml = string("") ;
+    _sHtml = string("") ;
     return false ;
   }
-  
+
   return true ;}
 
 // Fonction initParams()//////////////////////////////////////////////////////////////////////
@@ -910,12 +828,14 @@ voidNSVisualView::initParams()
 
   //int     delai;
 
-  string sFichierTempo = pDocRef->pContexte->PathName("FPER") + string("tempo.dat") ;
+  string sFichierTempo = _pDocRef->pContexte->PathName("FPER") + string("tempo.dat") ;
   inFile.open(sFichierTempo.c_str()) ;  if (!inFile)
   {
-    string sErrorText = pDocRef->pContexte->getSuperviseur()->getText("fileErrors", "errorOpeningInputFile") ;
+    NSSuper* pSuper = _pDocRef->pContexte->getSuperviseur() ;
+
+    string sErrorText = pSuper->getText("fileErrors", "errorOpeningInputFile") ;
     sErrorText += string(" ") + sFichierTempo ;
-    pDocRef->pContexte->getSuperviseur()->trace(&sErrorText, 1, NSSuper::trError) ;
+    pSuper->trace(&sErrorText, 1, NSSuper::trError) ;
     erreur(sErrorText.c_str(), standardError, 0) ;
     return ;
   }
@@ -964,11 +884,13 @@ voidNSVisualView::initParams()
 
 voidNSVisualView::Tempo()
 {
-	if ((NULL == pDocRef->pContexte->getSuperviseur()) || (0 == delai))
+  NSSuper* pSuper = _pDocRef->pContexte->getSuperviseur() ;
+
+	if (((NSSuper*) NULL == pSuper) || (0 == delai))
   	return ;
 
 	// application du délai (unité : centième de seconde)
-  pDocRef->pContexte->getSuperviseur()->Delay(delai) ;
+  pSuper->Delay(delai) ;
 }
 
 // Fonction ImprimerLettre////////////////////////////////////////////////////////////////
@@ -980,34 +902,34 @@ try
 	NSDocumentInfo* pDocTtxInfo = 0 ;
 	// NSTtxDocument*  pDocTtx ;
 	// string			sFichHtml;
-	string sPathHtml = pDocRef->pContexte->PathName("SHTM") ;
+	string sPathHtml = _pDocRef->pContexte->PathName("SHTM") ;
 
-	if (string("") == pDocRef->getCodeLettre())
+	if (string("") == _pDocRef->getCodeLettre())
 		return false ;
 
-  NSPersonGraphManager* pGraphManager = pDocRef->pContexte->getPatient()->getGraphPerson() ;
-  if (NULL == pGraphManager)
+  NSPersonGraphManager* pGraphManager = _pDocRef->pContexte->getPatient()->getGraphPerson() ;
+  if ((NSPersonGraphManager*) NULL == pGraphManager)
   	return false ;
 
-  NSDocumentInfo docInfo(pDocRef->getCodeLettre(), pDocRef->pContexte, pGraphManager) ;
+  NSDocumentInfo docInfo(_pDocRef->getCodeLettre(), _pDocRef->pContexte, pGraphManager) ;
 	bool bGetRawDoc = docInfo.InitDocumentBrut(&pDocTtxInfo) ;
   if (false == bGetRawDoc)
     return false ;
 
-	NSTtxDocument DocTtx(0, true, pDocTtxInfo, 0, pDocRef->pContexte) ;	if (DocTtx.IsOpen())
+	NSTtxDocument DocTtx(0, true, pDocTtxInfo, 0, _pDocRef->pContexte) ;	if (DocTtx.IsOpen())
 	{
-		if (!pDocRef->TemplateCompo(pDocTtxInfo->getTypeSem(), DocTtx._sTemplate, DocTtx._sEnTete))
+		if (!_pDocRef->TemplateCompo(pDocTtxInfo->getTypeSem(), DocTtx._sTemplate, DocTtx._sEnTete))
     	return false ;
   }
-  DocTtx._sTemplate = pDocRef->pContexte->PathName("NTPL") + DocTtx._sTemplate ;  DocTtx._sEnTete   = pDocRef->pContexte->PathName("NTPL") + DocTtx._sEnTete ;
-  sLettreHtml       = pDocRef->getCodeLettre() ;
+  DocTtx._sTemplate = _pDocRef->pContexte->PathName("NTPL") + DocTtx._sTemplate ;  DocTtx._sEnTete   = _pDocRef->pContexte->PathName("NTPL") + DocTtx._sEnTete ;
+  _sLettreHtml      = _pDocRef->getCodeLettre() ;
 
-	if (false == DocTtx.GenereHtml(sPathHtml, sLettreHtml, toImprimer, pDocRef->getPubli()->_sAdresseCorresp))	{
+	if (false == DocTtx.GenereHtml(sPathHtml, _sLettreHtml, toImprimer, _pDocRef->getPubli()->_sAdresseCorresp))	{
   	erreur("Impossible de créer le fichier html à imprimer pour la lettre", standardError, 0, GetHandle()) ;
     return false ;
 	}
 
-	pDocRef->getPubli()->_sLettreHtml[pDocRef->getPubli()->_indexLettre] = sLettreHtml ;
+	_pDocRef->getPubli()->_sLettreHtml[_pDocRef->getPubli()->_indexLettre] = _sLettreHtml ;
 }
 catch (...)
 {
@@ -1016,23 +938,23 @@ catch (...)
 }
 
   // on navigue vers le fichier html à visualiser
-	string ps = string("Navigate to letter url: ") + sUrl + sLettreHtml ;
-	pDocRef->pContexte->getSuperviseur()->trace(&ps, 1, NSSuper::trError) ;
+	string ps = string("Navigate to letter url: ") + _sUrl + _sLettreHtml ;
+	_pDocRef->pContexte->getSuperviseur()->trace(&ps, 1, NSSuper::trError) ;
 
 try
 {
-  Navigate(sUrl + sLettreHtml) ;
+  Navigate(_sUrl + _sLettreHtml) ;
 }
 catch (Exception &ex)
 {
-  string ps = string("Exception NSVisualView::ImprimerLettre Navigate when navigating to ") + sUrl + sHtml + string(" (") + string(ex.Message.c_str()) + string(")") ;
-  pDocRef->pContexte->getSuperviseur()->trace(&ps, 1, NSSuper::trError) ;
+  string ps = string("Exception NSVisualView::ImprimerLettre Navigate when navigating to ") + _sUrl + _sLettreHtml + string(" (") + string(ex.Message.c_str()) + string(")") ;
+  _pDocRef->pContexte->getSuperviseur()->trace(&ps, 1, NSSuper::trError) ;
   return true ;
 }
 catch (...)
 {
-  string ps = string("Exception NSVisualView::ImprimerLettre Navigate when navigating to ") + sUrl + sHtml ;
-  pDocRef->pContexte->getSuperviseur()->trace(&ps, 1, NSSuper::trError) ;
+  string ps = string("Exception NSVisualView::ImprimerLettre Navigate when navigating to ") + _sUrl + _sLettreHtml ;
+  _pDocRef->pContexte->getSuperviseur()->trace(&ps, 1, NSSuper::trError) ;
 
   // ----- Switched off because it can get thrown "at random" and block printing
 	// erreur("Exception NSVisualView::ImprimerLettre, Navigate.", standardError, 0) ;
@@ -1048,31 +970,33 @@ catch (...)
 void
 NSVisualView::DetruireTemp()
 {
+  NSSuper* pSuper = _pDocRef->pContexte->getSuperviseur() ;
+
 	// destruction des fichiers temporaires de visualisation
-	if (string("") != sHtml) // si un fichier a été généré
+	if (string("") != _sHtml) // si un fichier a été généré
 	{
 		// destruction du fichier de visualisation
-    string sFichVisual = pDocRef->pContexte->PathName("SHTM") + sHtml ;
+    string sFichVisual = _pDocRef->pContexte->PathName("SHTM") + _sHtml ;
 
     string sTrace = string("Deleting temporary file ") + sFichVisual ;
-    pDocRef->pContexte->getSuperviseur()->trace(&sTrace, 1, NSSuper::trDetails) ;
+    pSuper->trace(&sTrace, 1, NSSuper::trDetails) ;
 
-    NsDeleteTemporaryFile(pDocRef->pContexte->getSuperviseur(), sFichVisual) ;
+    NsDeleteTemporaryFile(pSuper, sFichVisual) ;
 	}
 
-	if (string("") != sLettreHtml) // si un fichier a été généré
+	if (string("") != _sLettreHtml) // si un fichier a été généré
 	{
 		// destruction du fichier de visualisation
-    string sFichVisual = pDocRef->pContexte->PathName("SHTM") + sLettreHtml ;
+    string sFichVisual = _pDocRef->pContexte->PathName("SHTM") + _sLettreHtml ;
 
     string sTrace = string("Deleting temporary file ") + sFichVisual ;
-    pDocRef->pContexte->getSuperviseur()->trace(&sTrace, 1, NSSuper::trDetails) ;
+    pSuper->trace(&sTrace, 1, NSSuper::trDetails) ;
 
-    NsDeleteTemporaryFile(pDocRef->pContexte->getSuperviseur(), sFichVisual) ;
+    NsDeleteTemporaryFile(pSuper, sFichVisual) ;
 	}
 
 	// ne pas oublier, sinon bug du destructeur
-	pDocRef = 0 ;
+	_pDocRef = 0 ;
 }
 
 // Fonction de rafraichissement de la vue////////////////////////////////////////////////////////////////
@@ -1082,27 +1006,27 @@ NSVisualView::Rafraichir()
 try
 {
   // destruction du fichier temporaire de visualisation
-  if (string("") != sHtml) // si un fichier a été généré
+  if (string("") != _sHtml) // si un fichier a été généré
   {
     // destruction du fichier de visualisation
-    string sFichVisual = pDocRef->pContexte->PathName("SHTM") + sHtml ;
+    string sFichVisual = _pDocRef->pContexte->PathName("SHTM") + _sHtml ;
 
     string sTrace = string("Deleting temporary file ") + sFichVisual ;
-    pDocRef->pContexte->getSuperviseur()->trace(&sTrace, 1, NSSuper::trDetails) ;
+    _pDocRef->pContexte->getSuperviseur()->trace(&sTrace, 1, NSSuper::trDetails) ;
 
-    NsDeleteTemporaryFile(pDocRef->pContexte->getSuperviseur(), sFichVisual) ;
+    NsDeleteTemporaryFile(_pDocRef->pContexte->getSuperviseur(), sFichVisual) ;
   }
   else
     return ;     // cas d'un fichier externe
 
   // Destruction de la base d'images du document
   // (pour pouvoir recharger la nouvelle)
-  if (string("") != pDocRef->_sBaseImages)  // si la base a été initialisée
+  if (string("") != _pDocRef->_sBaseImages)  // si la base a été initialisée
   {
-    NSBaseImages BaseImg(pDocRef->_sBaseImages) ;
+    NSBaseImages BaseImg(_pDocRef->_sBaseImages) ;
     BaseImg.lire() ;
     BaseImg.detruire() ;
-    pDocRef->_sBaseImages = string("") ;
+    _pDocRef->_sBaseImages = string("") ;
   }
 
   // on regénère le fichier
@@ -1113,12 +1037,12 @@ try
   }
 
   // on navigue vers le fichier html à visualiser
-  Navigate(sUrl + sHtml) ;
+  Navigate(_sUrl + _sHtml) ;
 }
 catch (Exception &ex)
 {
   string ps = string("Exception NSVisualView::Rafraichir (") + string(ex.Message.c_str()) + string(")") ;
-  pDocRef->pContexte->getSuperviseur()->trace(&ps, 1, NSSuper::trError) ;
+  _pDocRef->pContexte->getSuperviseur()->trace(&ps, 1, NSSuper::trError) ;
 }
 catch (...)
 {
@@ -1132,8 +1056,10 @@ voidNSVisualView::CmPublier()
 {
 try
 {
-  if (NULL == pDocRef->_pDocInfo)	{
-  	string sWarningText = pDocRef->pContexte->getSuperviseur()->getText("documentManagement", "youMustSaveBeforePublishing") ;
+  NSSuper* pSuper = _pDocRef->pContexte->getSuperviseur() ;
+
+  if (NULL == _pDocRef->_pDocInfo)	{
+  	string sWarningText = pSuper->getText("documentManagement", "youMustSaveBeforePublishing") ;
 		MessageBox(sWarningText.c_str(), 0, MB_OK) ;
 		return ;
 	}
@@ -1143,22 +1069,22 @@ try
 	// Pour ce type de documents, on lance ici le processus de publication
 	// qui rappelera la VisualView avec nbImpress > 0, ce qui permettra d'imprimer
 
-	if ((0 == pDocRef->getNbImpress()) && // (NULL != pDocRef->pDocInfo) &&
-    	((pDocRef->pContexte->typeDocument(pDocRef->_pDocInfo->getTypeSem(), NSSuper::isTree)) ||
-			 (pDocRef->pContexte->typeDocument(pDocRef->_pDocInfo->getTypeSem(), NSSuper::isText))))
+	if ((0 == _pDocRef->getNbImpress()) && // (NULL != pDocRef->pDocInfo) &&
+    	((_pDocRef->pContexte->typeDocument(_pDocRef->_pDocInfo->getTypeSem(), NSSuper::isTree)) ||
+			 (_pDocRef->pContexte->typeDocument(_pDocRef->_pDocInfo->getTypeSem(), NSSuper::isText))))
 	{
 		// on vérifie d'abord si le document n'est pas en cours d'impression
 
-		if ((pDocRef->getPubli()) && (pDocRef->getPubli()->ImpressionEnCours()))			return ;
+		if ((_pDocRef->getPubli()) && (_pDocRef->getPubli()->ImpressionEnCours()))			return ;
 
-		pDocRef->Publier() ; // publication avec correspondants		return ;
+		_pDocRef->Publier() ; // publication avec correspondants		return ;
 	}
 
 	// Ici commence le processus d'impression de la page. Pour les documents	// issus de la publication (nbImpress != 0), CmPublier est appelé par
 	// NavigateComplete. Les autres documents s'impriment en un exemplaire
 	// Ajout RS du 09/04/04 : adaptation avec WebBrowserPrint de ExecWb
 
-	if (0 == pDocRef->getNbImpress())
+	if (0 == _pDocRef->getNbImpress())
 	{
 		if (bSimpleCtrl)
     {
@@ -1170,11 +1096,11 @@ try
     else
     	ExecWB(Shdocvw_tlb::OLECMDID_PRINT, 1, bVerbose) ;
 	}
-	else if (pDocRef->getNbImpress() > 0)
+	else if (_pDocRef->getNbImpress() > 0)
 	{
 		if (bSimpleCtrl)
     {
-    	for (int i = 0; i < pDocRef->getNbImpress(); i++)
+    	for (int i = 0; i < _pDocRef->getNbImpress(); i++)
       {
       	if (bVerbose)
         	ExecWB_old(Shdocvw_tlb::OLECMDID_PRINT, Shdocvw_tlb::OLECMDEXECOPT_DODEFAULT) ;
@@ -1183,7 +1109,7 @@ try
       }
     }
     else
-    	ExecWB(Shdocvw_tlb::OLECMDID_PRINT, pDocRef->getNbImpress(), bVerbose) ;
+    	ExecWB(Shdocvw_tlb::OLECMDID_PRINT, _pDocRef->getNbImpress(), bVerbose) ;
 	}
 	else
 	{
@@ -1221,41 +1147,41 @@ try
     pdisp->Release();*/
   string ps ;
 
-	if (pDocRef->getNbImpress())	{
+	if (_pDocRef->getNbImpress())	{
     bool bCallNextPrint = true ;
 
-  	if (pDocRef->getImprimerLettre())
+  	if (_pDocRef->getImprimerLettre())
     {
       bCallNextPrint = false ;
 
     	ps = "Appel de ImprimerLettre..." ;
-      pDocRef->pContexte->getSuperviseur()->trace(&ps,1) ;
+      pSuper->trace(&ps,1) ;
 
-      pDocRef->setImprimerLettre(false) ;      if (false == ImprimerLettre())
+      _pDocRef->setImprimerLettre(false) ;      if (false == ImprimerLettre())
         bCallNextPrint = true ;
     }
     if (bCallNextPrint)
     {
     	// On envoie le Navigate du corresp suivant ou fin (bFinish == true)
 
-      ps = "Appel de ImprimerSuivant..." ;      pDocRef->pContexte->getSuperviseur()->trace(&ps,1) ;
+      ps = "Appel de ImprimerSuivant..." ;      pSuper->trace(&ps,1) ;
 
-      bool bFinish = pDocRef->getPubli()->ImprimerSuivant() ;
+      bool bFinish = _pDocRef->getPubli()->ImprimerSuivant() ;
       // ici on fait appel à une fonction de synchronisation      if (bFinish)
       {
-      	pDocRef->getPubli()->FinImpression() ;
+      	_pDocRef->getPubli()->FinImpression() ;
 
         // on n'affiche pas la MessageBox de fin d'impression        // pour certains documents (tous les documents de compta pour l'instant)
         // (résoud bug dans l'impression des AGA en série)
 
-        if (string("CP") != string(pDocRef->_pDocInfo->getTypeSem(), 0, 2))        {
+        if (string("CP") != string(_pDocRef->_pDocInfo->getTypeSem(), 0, 2))        {
         	ps = "Impression terminée." ;
-          pDocRef->pContexte->getSuperviseur()->trace(&ps,1) ;
+          pSuper->trace(&ps,1) ;
 
-          string sMsgText = pDocRef->pContexte->getSuperviseur()->getText("printing", "printingDone") ;
-          MessageBox(sMsgText.c_str(), 0, MB_OK) ;          pDocRef->setNbImpress(0) ;
-          pDocRef->setNomDocHtml(string("")) ;   // variable de nsdocnoy
-          pDocRef->getPubli()->DeleteVisualViews() ;
+          string sMsgText = pSuper->getText("printing", "printingDone") ;
+          MessageBox(sMsgText.c_str(), 0, MB_OK) ;          _pDocRef->setNbImpress(0) ;
+          _pDocRef->setNomDocHtml(string("")) ;   // variable de nsdocnoy
+          _pDocRef->getPubli()->DeleteVisualViews() ;
         }
       }
     }
@@ -1270,10 +1196,10 @@ catch (...)
 void
 NSVisualView::CmComposer()
 {
-  if (pDocRef->_pDocInfo)
+  if (_pDocRef->_pDocInfo)
   {
     // if (!strcmp(pDocRef->pDocInfo->pDonnees->type, "HIHTM"))
-      pDocRef->Composer() ;
+      _pDocRef->Composer() ;
     // else
       // erreur("Ce type de document ne peut etre composé en visualisation.", standardError, 0, GetHandle());
   }
@@ -1287,11 +1213,11 @@ void
 NSVisualView::CmEditer()
 {
   NSHISTODocument* pDocManager = getDocManager() ;
-  if (NULL == pDocManager)
+  if ((NSHISTODocument*) NULL == pDocManager)
     return ;
 
 	::SetCursor(::LoadCursor(NULL, IDC_WAIT)) ;
-	pDocManager->AutoriserEdition(pDocRef->_pDocInfo) ;
+	pDocManager->AutoriserEdition(_pDocRef->_pDocInfo) ;
 	::SetCursor(::LoadCursor(NULL, IDC_ARROW)) ;
 }
 
@@ -1309,21 +1235,21 @@ NSVisualView::CmFileClose()
 void
 NSVisualView::CmPrecedent()
 {
-	if (page > 1)
+	if (_page > 1)
   {
-    bNewNav = false ;
+    _bNewNav = false ;
 		Form->Control->GoBack() ;
-    page-- ;
+    _page-- ;
   }
 }
 
 voidNSVisualView::CmSuivant()
 {
-  if (page < nbNav)
+  if (_page < _nbNav)
   {
-    bNewNav = false ;
+    _bNewNav = false ;
 		Form->Control->GoForward() ;
-    page++ ;
+    _page++ ;
   }
 }
 
@@ -1331,11 +1257,11 @@ void
 NSVisualView::openPrevSameKindDocument()
 {
   NSDocumentInfo* pDocInfo = getPrevSameKindDocument() ;
-  if (NULL == pDocInfo)
+  if ((NSDocumentInfo*) NULL == pDocInfo)
     return ;
 
   NSHISTODocument* pDocManager = getDocManager() ;
-  if (NULL == pDocManager)
+  if ((NSHISTODocument*) NULL == pDocManager)
     return ;
 
   pDocManager->AutoriserOuverture(pDocInfo) ;
@@ -1345,11 +1271,11 @@ void
 NSVisualView::openNextSameKindDocument()
 {
   NSDocumentInfo* pDocInfo = getNextSameKindDocument() ;
-  if (NULL == pDocInfo)
+  if ((NSDocumentInfo*) NULL == pDocInfo)
     return ;
 
   NSHISTODocument* pDocManager = getDocManager() ;
-  if (NULL == pDocManager)
+  if ((NSHISTODocument*) NULL == pDocManager)
     return ;
 
   pDocManager->AutoriserOuverture(pDocInfo) ;
@@ -1358,11 +1284,11 @@ NSVisualView::openNextSameKindDocument()
 NSHISTODocument*
 NSVisualView::getDocManager()
 {
-  if ((NULL == pDocRef) || (NULL == pDocRef->pContexte))
+  if ((NULL == _pDocRef) || (NULL == _pDocRef->pContexte))
     return (NSHISTODocument*) 0 ;
 
-  NSPatientChoisi* pPatient = pDocRef->pContexte->getPatient() ;
-  if (NULL == pPatient)
+  NSPatientChoisi* pPatient = _pDocRef->pContexte->getPatient() ;
+  if ((NSPatientChoisi*) NULL == pPatient)
     return (NSHISTODocument*) 0 ;
 
   return pPatient->getDocHis() ;
@@ -1372,21 +1298,21 @@ NSDocumentInfo*
 NSVisualView::getPrevSameKindDocument()
 {
   NSHISTODocument* pDocManager = getDocManager() ;
-  if (NULL == pDocManager)
+  if ((NSHISTODocument*) NULL == pDocManager)
     return (NSDocumentInfo*) 0 ;
 
-  NSPatPathoArray PptDocRef(pDocRef->pContexte->getSuperviseur()) ;
-  pDocRef->initFromPatPatho(&PptDocRef) ;
+  NSPatPathoArray PptDocRef(_pDocRef->pContexte->getSuperviseur()) ;
+  _pDocRef->initFromPatPatho(&PptDocRef) ;
   if (PptDocRef.empty())
     return (NSDocumentInfo*) 0 ;
 
-  DocumentIter iterDoc = pDocManager->TrouveDocHisto(pDocRef->getDocId()) ;
-  if (NULL == iterDoc)
+  DocumentIter iterDoc = pDocManager->TrouveDocHisto(_pDocRef->getDocId()) ;
+  if ((DocumentIter) NULL == iterDoc)
     return (NSDocumentInfo*) 0 ;
 
   string sLexique = (*(PptDocRef.begin()))->getLexique() ;
   DocumentIter iterPrevDoc = pDocManager->DonnePrevPatPathoDocument(sLexique, (NSPatPathoArray*) 0, iterDoc) ;
-  if (NULL == iterPrevDoc)
+  if ((DocumentIter) NULL == iterPrevDoc)
     return (NSDocumentInfo*) 0 ;
 
   return (NSDocumentInfo*) *iterPrevDoc ;
@@ -1396,21 +1322,21 @@ NSDocumentInfo*
 NSVisualView::getNextSameKindDocument()
 {
   NSHISTODocument* pDocManager = getDocManager() ;
-  if (NULL == pDocManager)
+  if ((NSHISTODocument*) NULL == pDocManager)
     return (NSDocumentInfo*) 0 ;
 
-  NSPatPathoArray PptDocRef(pDocRef->pContexte->getSuperviseur()) ;
-  pDocRef->initFromPatPatho(&PptDocRef) ;
+  NSPatPathoArray PptDocRef(_pDocRef->pContexte->getSuperviseur()) ;
+  _pDocRef->initFromPatPatho(&PptDocRef) ;
   if (PptDocRef.empty())
     return (NSDocumentInfo*) 0 ;
 
-  DocumentIter iterDoc = pDocManager->TrouveDocHisto(pDocRef->getDocId()) ;
-  if (NULL == iterDoc)
+  DocumentIter iterDoc = pDocManager->TrouveDocHisto(_pDocRef->getDocId()) ;
+  if ((DocumentIter) NULL == iterDoc)
     return (NSDocumentInfo*) 0 ;
 
   string sLexique = (*(PptDocRef.begin()))->getLexique() ;
   DocumentIter iterNextDoc = pDocManager->DonneNextPatPathoDocument(sLexique, (NSPatPathoArray*) 0, iterDoc) ;
-  if (NULL == iterNextDoc)
+  if ((DocumentIter) NULL == iterNextDoc)
     return (NSDocumentInfo*) 0 ;
 
   return (NSDocumentInfo*) *iterNextDoc ;
@@ -1727,10 +1653,10 @@ NSHtmlModelView::NSHtmlModelView(NSHtmlModelDocument& doc, TWindow *parent)
 {
 	pMUEViewMenu = 0 ;
 
-	nsMenuIniter menuIter(pDocRef->pContexte) ;
+	nsMenuIniter menuIter(_pDocRef->pContexte) ;
   pMUEViewMenu = new OWL::TMenuDescr ;
   menuIter.initMenuDescr(pMUEViewMenu, "menubar_visual") ;
-  TMyApp* pMyApp = pDocRef->pContexte->getSuperviseur()->getApplication() ;
+  TMyApp* pMyApp = _pDocRef->pContexte->getSuperviseur()->getApplication() ;
   pMyApp->GetMainWindow()->SetMenuDescr(*pMUEViewMenu) ;
 
 	initValues() ;
@@ -1739,7 +1665,7 @@ NSHtmlModelView::NSHtmlModelView(NSHtmlModelDocument& doc, TWindow *parent)
   bKillTmp = false ;
 
   if (string("") == pDoc->_sActiveFileName)
-  	sHtml = pDoc->_sModelFileName ;  else  	sHtml = pDoc->_sActiveFileName ;
+  	_sHtml = pDoc->_sModelFileName ;  else  	_sHtml = pDoc->_sActiveFileName ;
 }
 
 NSHtmlModelView::~NSHtmlModelView()
@@ -1808,9 +1734,9 @@ NSHtmlModelView::CanClose()
 	}
 	pDoc->SetDirty(false);
 
-	TMyApp* pMyApp = pDocRef->pContexte->getSuperviseur()->getApplication() ;
+	TMyApp* pMyApp = _pDocRef->pContexte->getSuperviseur()->getApplication() ;
 	pMyApp->FlushControlBar() ;
-	pEditUrl = 0 ;
+	_pEditUrl = (NSEditUrl*) 0 ;
 	bSetupToolBar = false ;
 
 	return true ;}
@@ -1821,5 +1747,37 @@ NSHtmlModelView::GetWindow()
 	return (TWindow*) this ;
 }
 
+// Classe NSEditUrl pour la barre d'edition des url
+////////////////////////////////////////////////////////////////
+
+DEFINE_RESPONSE_TABLE1(NSEditUrl, NSEditUrlBase)
+	EV_WM_CHAR,
+END_RESPONSE_TABLE;
+
+NSEditUrl::NSEditUrl(NSVisualView* pView)
+          :NSEditUrlBase((NSVisualViewBase*) pView)
+{
+	_pVue = pView ;
+}
+
+NSEditUrl::~NSEditUrl()
+{
+}
+
+void
+NSEditUrl::EvChar(uint key, uint repeatCount, uint flags)
+{
+	if (VK_RETURN == key)
+  {
+  	char* url = new char[GetTextLen() + 2] ;
+  	GetText(url, GetTextLen() + 1) ;
+    _pVue->Navigate(string(url)) ;
+    delete[] url ;
+  }
+  else
+  	OWL::TEdit::EvChar(key, repeatCount, flags) ;
+}
+
 // fin de nsvisual.cpp/////////////////////////////////////////////////////////////////
+
 

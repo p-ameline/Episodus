@@ -12,16 +12,16 @@ TWebProxy *WebProxy ;
 //---------------------------------------------------------------------------__fastcall TWebProxy::TWebProxy(TComponent* Owner)
                      :TForm(Owner)
 {
-  pView = 0 ;
+  _pView = (NSVisualView*) 0 ;
 }
 
-// Constructeur NautilusTWebProxy::TWebProxy(HWND Parent, NSVisualView* View): TForm(Parent)
+// Nautilus constructor (calls the genrated constructor)//TWebProxy::TWebProxy(HWND Parent, NSVisualView* View): TForm(Parent)
 {
-	pView = View ;
+	_pView = View ;
 
 	// CoInitialize(NULL);
 	// Control = new TWebBrowser(Parent);
-	// Control->Align = alClient;
+	Control->Align = alClient;
 }
 
 //---------------------------------------------------------------------------void __fastcall TWebProxy::RetrieveURL(AnsiString URL)
@@ -48,10 +48,10 @@ void __fastcall TWebProxy::FormMouseDown(TObject *Sender,                      
 }
 //---------------------------------------------------------------------------
 
-void __fastcall TWebProxy::ControlNavigateComplete2(TObject* Sender,                                            LPDISPATCH pDisp, void* /* TVariant* */ URL)
+void __fastcall TWebProxy::ControlNavigateComplete2New(TObject* Sender,                                            LPDISPATCH pDisp, void* /* TVariant* */ URL)
 {
-  if (pView)
-    pView->NavigateComplete() ;
+  if (_pView)
+    _pView->NavigateComplete() ;
 }
 //---------------------------------------------------------------------------
 
@@ -63,8 +63,16 @@ void __fastcall TWebProxy::NavigateError(TObject *Sender, LPDISPATCH pDisp,
   int iStatusCode = int(*StatusCode) ;
   AnsiString sUrl = AnsiString(*URL) ;
 
-  if (pView)
-    pView->NavigateErrorEvent(iStatusCode, string(sUrl.c_str())) ;
+  if (_pView)
+    _pView->NavigateErrorEvent(iStatusCode, string(sUrl.c_str())) ;
+}
+//---------------------------------------------------------------------------
+
+void __fastcall TWebProxy::ControlNavigateComplete2(TObject *Sender,
+      LPDISPATCH pDisp, TVariant *URL)
+{
+  if (_pView)
+    _pView->NavigateComplete() ;
 }
 //---------------------------------------------------------------------------
 

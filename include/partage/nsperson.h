@@ -106,7 +106,7 @@ class NSFrameDocumentsArray ;
 # include "nsbb\nsmpids.h"
 # include "nsbb\nsmanager.h"
 # include "nsbb\nspatpat.h"
-# include "nautilus\nsanxary.h"
+# include "nsdn\nsanxary.h"
 
 //
 // Taille des champs du fichier PATIENT

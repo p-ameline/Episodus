@@ -81,6 +81,7 @@
 
 #include <owl/button.h>
 
+#include "nssavoir\nspathor.h"
 #include "nautilus\nssuper.h"
 #include "partage\nsdivfct.h"
 #include "nautilus\ns_html.h"
@@ -93,8 +94,8 @@
 #include "nautilus\nsepicap.h"
 #include "nautilus\nssoapview.h"
 #include "nautilus\nscaptview.h"
-#include "nautilus\nscr_ana.h"
-#include "nsepisod\nsldvuti.h"
+// #include "nautilus\nscr_ana.h"
+#include "nsldv\nsldvuti.h"
 #include "nsbb\nspanesplitter.h"
 #include "nautilus\nsdocview.h"
 
@@ -1193,7 +1194,7 @@ void
 NSMultiCaptView::EvSetFocus(HWND hWndLostFocus)
 {
   NSMUEView::EvSetFocus(hWndLostFocus) ;
-  pPaneSplitter->SetFrameTitle(getFunction(), sViewName) ;
+  _pPaneSplitter->SetFrameTitle(getFunction(), sViewName) ;
   CreateCaret(false /* isGray */, 2 /* width */, 10 /* height */) ;
   setCaretPosition() ;
   ShowCaret() ;

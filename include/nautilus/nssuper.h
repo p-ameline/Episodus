@@ -27,6 +27,8 @@ class NSWebServiceWindow ;
 class NSWebServiceChild ;
 class NSMailServiceWindow ;
 class NSMailServiceChild ;
+class NSAlertServiceWindow ;
+class NSAlertServiceChild ;
 class NSWebTipWindow ;
 class NSLocalChapterArray ;
 class TMyApp ;
@@ -69,7 +71,7 @@ class NSToDoTask ;
 # include "nautilus\nautilus.rh"
 # include "nautilus\nsldvvue.rh"
 # include "nautilus\richedap.h"
-# include "nautilus\nsLdv_Vars.h"
+# include "nsldv\nsLdv_Vars.h"
 # include "nautilus\psapi.h"
 
 // # include "nsdn\nsdocum.h"
@@ -613,6 +615,9 @@ class NSContexte : public NSSuperRoot
 
   NSMailServiceWindow*   _pMailBoxWindow ;
   NSMailServiceChild*    _pMailBoxChild ;
+
+  NSAlertServiceWindow*  _pAlertBoxWindow ;
+  NSAlertServiceChild*   _pAlertBoxChild ;
 
 	TWindow* GetMainWindow() { return _pSuper->donneMainWindow() ; }
 
@@ -1948,7 +1953,7 @@ NSSuper::afficheStatusMessage(const string sMessage)
 {
 try
 {
-	if (NULL == _pNSApplication)
+	if ((TMyApp*) NULL == _pNSApplication)
 		return ;
 
 	OWL::TStatusBar* pStatus = _pNSApplication->getStatusBar() ;

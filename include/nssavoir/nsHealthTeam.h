@@ -86,7 +86,7 @@
 # include "nsbb\nspatpat.h"
 # include "partage\NTArray.h"
 # include "nssavoir\nsvarray.h"
-# include "nsepisod\nsldvuti.h"
+# include "nsldv\nsldvuti.h"
 # include "nssavoir\nsRightsDefs.h"
 # include "nssavoir\nsTeamDefs.h"
 

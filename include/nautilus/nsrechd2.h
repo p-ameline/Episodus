@@ -11,7 +11,7 @@
 #include <owl\scrollba.h>
 
 //#include "nsbb\nsednum.h"
-#include "nautilus\nsanxary.h"
+#include "nsdn\nsanxary.h"
 #include "nsbb\nsutidlg.h"
 
 //---------------------------------------------------------------------------

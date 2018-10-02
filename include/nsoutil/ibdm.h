@@ -32,14 +32,17 @@ class _NSOUTILCLASSE InterfaceBdm : public NSRoot
     InterfaceBdm&	operator=(InterfaceBdm& src) ;
 
     bool				  init() ;
+    bool          findRecordForLeximed(string sLeximed) ;
     bool          updateCipForLeximed(string sCodeCIP, string sLeximed) ;
-    bool					insertElem(string sCodeCIP, string sExtension, string sLeximed, string sCodeVidal, string sLeximedOld) ;
+    bool          updateMedicabaseForLeximed(string sCodeMedicabase, string sLeximed) ;
+    bool					insertElem(string sCodeCIP, string sExtension, string sLeximed, string sCodeVidal, string sLeximedOld, string sGeneric) ;
     bool					close() ;
 
     bool          isInDB(string sCodeCIP, string sExtension, string sLexiMedSens, string sCodeVidal, string sLeximedOld) ;
     bool					isIDInDB(string sID) ;
     bool					isCodeCIPInDB(string sCodeCIP) ;
     bool					isCodeLexiMedInDB(string sLeximed) ;
+    bool					isCodegeneriqGrpeInDB(string sLeximedOld) ;
     bool					isCodeVidalInDB(string sCodeVidal) ;
     bool					isCodeLexiMedOldInDB(string sLeximedOld) ;
 

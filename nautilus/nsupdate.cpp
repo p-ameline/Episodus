@@ -18,7 +18,7 @@
 
 #include "nautilus\nsupdate.h"
 #include "partage\nsdivfct.h"    // fonction erreur
-#include "nsepisod\nsldvuti.h"
+#include "nsldv\nsldvuti.h"
 
 // ------------------------------------------------------------------------
 //                                 NSUpdate

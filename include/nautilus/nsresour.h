@@ -3,8 +3,9 @@
 
 // Dialogue IDD_NS_ABOUT
 #define IDC_APPNAME     101
-#define IDC_RELEASES    102
-#define IDC_HISTORY     103
+#define IDC_BAM_NAME    102
+#define IDC_RELEASES    103
+#define IDC_HISTORY     104
 
 // Dialogue IDD_ENREG_PATIENT
 #define IDC_ENREG_ADMIN	101

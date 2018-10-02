@@ -11,6 +11,7 @@
 #include <iostream.h>
 #include <cstring.h>
 
+#include "nssavoir\nsBdmDriver.h"
 #include "partage\nsdivfct.h"
 #include "nautilus\nssuper.h"
 #include "nautilus\nsdecode.h"
@@ -25,6 +26,7 @@
 #include "nautilus\nshistor.h"
 #include "nautilus\nsepicap.h"
 #include "nautilus\nscsdoc.h"
+#include "nautilus\nsdrugview.h"
 
 long NSHISTODocument::lObjectCount = 0 ;
 
@@ -350,12 +352,23 @@ NSHISTODocument::Rafraichir(NSDocumentInfo* pNSDocumentInfo,
       pContexte->getPredi()->LogDocument(pNSDocumentInfo, pNSPatPathoArray, false) ;
   }
 
+  // Show the new/updated tree to the blackboard
+  //
   if (bWarnBBk && pContexte->getBBinterface() && IsAttachedToOpenedPatient())
   {
     string sErrorText = string("Signal BBK that a patpatho was saved") ;
     pContexte->getSuperviseur()->trace(&sErrorText, 1, NSSuper::trDetails) ;
 
     pContexte->getBBinterface()->signalThatPatpathoWasSaved(pNSPatPathoArray, bNewDocument) ;
+  }
+
+  // Update the drug alert information
+  //
+  if (pContexte->_pAlertBoxWindow)
+  {
+    NSDrugView* pDrugView = pContexte->getPatient()->getDrugView() ;
+    if (pDrugView)
+      pDrugView->checkByBdm() ;
   }
 
   /* Code when non visible documents were not part of VectDocument

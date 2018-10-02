@@ -40,6 +40,7 @@ Boston, MA 02111-1307, USA.
 #include <assert.h>
 #include <windef.h>
 
+#include "nssavoir\nsBdmDriver.h"
 #include "nautilus\nssuper.h"
 #include "nsdn\nsdochis.h"
 #include "nautilus\nsldvvue.h"
@@ -125,10 +126,10 @@ NSWebTipWindow::EvTimer(uint timerId)
 	}
 }
 
-voidNSWebTipWindow::Show(NS_CLASSLIB::TRect rectTitle,											string* psURL,                      NS_CLASSLIB::TRect* pHoverRect /*= NULL*/,
+voidNSWebTipWindow::Show(NS_CLASSLIB::TRect rectTitle, string* psURL,                      NS_CLASSLIB::TRect* pHoverRect /*= NULL*/,
                       int time /* = -1 */)
 {
-	if (NULL != psURL)
+	if ((string*) NULL != psURL)
 	{
 		sURl = *psURL ;
 		Navigate() ;

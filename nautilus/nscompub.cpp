@@ -15,7 +15,7 @@
 #include <classlib/date.h>
 #include <classlib/time.h>
 
-#include "nautilus\nssuper.h"#include "nautilus\nsanxary.h"
+#include "nautilus\nssuper.h"// #include "nautilus\nsanxary.h"
 #include "partage\nsdivfct.h"
 #include "partage\nsdivfile.h"
 #include "partage\nsperson.h"

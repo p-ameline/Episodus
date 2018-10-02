@@ -3,12 +3,13 @@
 #include <cstring.h>
 #include <stdio.h>#include <assert.h>#include <vcl.h>
 #pragma hdrstop
-#include "ActiveX.h"
+#include "nautilus\ActiveX.h"
 
 #include <owl\gauge.h>
 
+#include "nssavoir\nspathor.h"
 #include "nautilus\nssuper.h"
-// #include "WebService.h"#include "nautilus\nsMailSvce.h"#include "nsbb\nslistwind.h"#include "nautilus\nsepicap.h"#include "nautilus\ns_html.h"#include "nautilus\nscsdoc.h"#include "nautilus\nscsvue.h"#include "nautilus\nsdocview.h"#include "nautilus\nsbrowse.h"// #include "partage\ole_utils.h"#include "nssavoir\nsFileCaptur.h"#include "nssavoir\nspathor.h"#include "nsepisod\nsldvuti.h"#include "partage\nsdivfile.h"#include "nautilus\psapi.h"#include "nautilus\nsMailBox.rh"
+// #include "WebService.h"#include "nautilus\nsMailSvce.h"#include "nsbb\nslistwind.h"#include "nautilus\nsepicap.h"#include "nautilus\ns_html.h"#include "nautilus\nscsdoc.h"#include "nautilus\nscsvue.h"#include "nautilus\nsdocview.h"#include "nautilus\nsbrowse.h"// #include "partage\ole_utils.h"#include "nssavoir\nsFileCaptur.h"#include "nsldv\nsldvuti.h"#include "partage\nsdivfile.h"#include "nautilus\psapi.h"#include "nautilus\nsMailBox.rh"
  /****************** classe NSImportWindow **************************/
 long NSNewMailObject::lObjectCount = 0 ;
 

@@ -31,6 +31,8 @@
 
 #include "partage\nsglobal.h"
 
+#include "nssavoir\nspathor.h"
+
 //#include "nsutil.h"
 #include "partage\nsapp.h"
 #include "nsutil\nscache.h"

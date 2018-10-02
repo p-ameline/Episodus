@@ -75,7 +75,8 @@ OBJFILES = ..\..\..\..\cvs\episodus\ObjNTIERS\nsm_ob1.obj \
 RESFILES = ..\..\..\..\cvs\episodus\ObjNTIERS\OB1.res nsm_ob1.res
 DEFFILE =
 RESDEPEN = $(RESFILES)
-LIBFILES = bidsvi.lib owlwvi.lib nsmutil.lib nsmbb.lib nsmepisod.lib nsmsavoir.lib
+LIBFILES = bidsvi.lib owlwvi.lib nsmutil.lib nsmbb.lib nsmldv.lib nsmepisod.lib \
+  nsmsavoir.lib
 IDLGENFILES =
 IDLFILES =
 LIBRARIES =

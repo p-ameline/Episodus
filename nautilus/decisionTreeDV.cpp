@@ -148,10 +148,10 @@ NSDecisionTreeView::SetupToolBar()
 	// TMyApp* pMyApp = pContexte->getSuperviseur()->getApplication() ;
 	// pMyApp->FlushControlBar() ;
 
-  pPaneSplitter->FlushControlBar() ;
+  _pPaneSplitter->FlushControlBar() ;
 
-  pPaneSplitter->_pGadgetPanelWindow->setButtonsStyle(uButtonsStyle) ;
-  pPaneSplitter->_pGadgetPanelWindow->insertMainGadgets() ;
+  _pPaneSplitter->_pGadgetPanelWindow->setButtonsStyle(uButtonsStyle) ;
+  _pPaneSplitter->_pGadgetPanelWindow->insertMainGadgets() ;
 
 /*
   if ((uButtonsStyle & MYWS_OK) == MYWS_OK)
@@ -162,7 +162,7 @@ NSDecisionTreeView::SetupToolBar()
   	pPaneSplitter->Insert(*new TButtonGadget(IDC_HELP_PANESPLIT,   IDC_HELP_PANESPLIT,   TButtonGadget::Command)) ;
 */
 
-  pPaneSplitter->LayoutSession() ;
+  _pPaneSplitter->LayoutSession() ;
 }
 
 void
@@ -220,17 +220,17 @@ try
     ps = psHeader + string("Splitted Window ") + string(szSplitted) ;
     pContexte->getSuperviseur()->trace(&ps, 1, NSSuper::trSubDetails) ;
   }
-  if (pPaneSplitter)
+  if (_pPaneSplitter)
   {
     char szPane[20] ;
-    sprintf(szPane, "%p", pPaneSplitter->HWindow) ;
+    sprintf(szPane, "%p", _pPaneSplitter->HWindow) ;
     ps = psHeader + string("PaneSplitter ") + string(szPane) ;
     pContexte->getSuperviseur()->trace(&ps, 1, NSSuper::trSubDetails) ;
 
-    if (pPaneSplitter->_pMDIChild)
+    if (_pPaneSplitter->_pMDIChild)
     {
       char szMdiChild[20] ;
-      sprintf(szMdiChild, "%p", pPaneSplitter->_pMDIChild->HWindow) ;
+      sprintf(szMdiChild, "%p", _pPaneSplitter->_pMDIChild->HWindow) ;
       ps = psHeader + string("PaneSplitter's Child ") + string(szMdiChild) ;
       pContexte->getSuperviseur()->trace(&ps, 1, NSSuper::trSubDetails) ;
     }
@@ -1060,7 +1060,7 @@ NSDecisionTreeView::EvSetFocus(THandle hWndLostFocus)
     pContexte->setAideCorps(sHelpUrl) ;
 
 	NSMUEView::EvSetFocus(hWndLostFocus) ;
-  pPaneSplitter->SetFrameTitle(getFunction(), sViewName) ;
+  _pPaneSplitter->SetFrameTitle(getFunction(), sViewName) ;
 
   pMyApp->setMenu(string("menubar"), &hAccelerator) ;
 }

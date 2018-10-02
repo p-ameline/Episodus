@@ -14,7 +14,7 @@
 #include "nsbb\nsutidlg.h"
 // #include "nautilus\nsdochis.h"
 #include "nautilus\nsperary.h"
-#include "nautilus\nsanxary.h"
+#include "nsdn\nsanxary.h"
 // #include "partage\ns_vector.h"
 // #include "nsbb\nsednum.h"
 // #include "nautilus\nsperary.h"
@@ -430,6 +430,7 @@ class NSResultReqDialog : public NSUtilDialog
     void CmOuvrir() ;
     void CmEnregistrer() ;
     void CmExcelExport() ;
+    void CmTextExport() ;
     void CmImprimer() ;
     void RequestTabKeyDown(TTabKeyDown& nmHdr) ;
     void RequestTabSelChange(TNotify far& nm) ;
@@ -482,6 +483,7 @@ class AboutDialog : public NSUtilDialog
 	public:
 
 		OWL::TStatic* _pAppName ;
+    OWL::TStatic* _pBamName ;
     OWL::TStatic* _pHistory ;
     OWL::TEdit*   _pReleasesViewer ;
 

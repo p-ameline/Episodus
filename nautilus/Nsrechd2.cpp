@@ -6,13 +6,13 @@
 #include <stdio.h>
 #include <string.h>
 
-#include "nautilus\nssuper.h"#include "nautilus\nsanxary.h"
+#include "nssavoir\nspathor.h"
+#include "nautilus\nssuper.h"// #include "nautilus\nsanxary.h"
 #include "nautilus\nsresour.h"
 #include "nautilus\nsrechd2.h"
 #include "partage\nsdivfct.h"
 #include "nautilus\cr.rh"
 #include "nautilus\nstypdoc.rh"
-#include "nssavoir\nspathor.h"
 #include "nssavoir\nsgraphe.h"
 #include "nsbb\nsednum.h"
 #include "nsbb\tagNames.h"

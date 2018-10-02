@@ -18,6 +18,7 @@
 #include <owl\validate.h>
 #include <owl\inputdia.h>
 
+#include "nssavoir\nsBdmDriver.h"
 #include "nautilus\nssuper.h"#include "partage\nsdivfct.h"
 #include "nsdn\nsdochis.h"
 #include "nautilus\nsdrughistoview.h"
@@ -142,13 +143,13 @@ drugSortByPrescrEndSup(NSLdvDrug *pDrug1, NSLdvDrug *pDrug2)
 bool
 drugSortByPrescrDateInf(NSLdvDrug *pDrug1, NSLdvDrug *pDrug2)
 {
-	return (pDrug1->getPrescriptionDate() < pDrug2->getPrescriptionDate()) ;
+	return (pDrug1->getLatestPrescriptionDate() < pDrug2->getLatestPrescriptionDate()) ;
 }
 
 bool
 drugSortByPrescrDateSup(NSLdvDrug *pDrug1, NSLdvDrug *pDrug2)
 {
-	return (pDrug1->getPrescriptionDate() > pDrug2->getPrescriptionDate()) ;
+	return (pDrug1->getLatestPrescriptionDate() > pDrug2->getLatestPrescriptionDate()) ;
 }
 
 // -----------------------------------------------------------------------------
@@ -260,7 +261,11 @@ NSDrugHistoView::getCodes()
 
   _sAtcCode   = selectionDlg.getAtcCode() ;
   if (string("") != _sAtcCode)
-    sViewName += string(" ATC = ") + _sAtcCode + string(" (") + selectionDlg.getAtcLabel() + string(")") ;
+  {
+    sViewName += string(" ATC = ") + _sAtcCode ;
+    if (string("") != selectionDlg.getAtcLabel())
+      sViewName += string(" (") + selectionDlg.getAtcLabel() + string(")") ;
+  }
 
   Parent->SetCaption(sViewName.c_str()) ;
   Parent->Invalidate() ;
@@ -342,7 +347,7 @@ NSDrugHistoView::initDrugsForConcept()
 
         if (VSEquivalent.contains(sCodeSensConcept))
         {
-          (*itDg)->setLatestPrescriptionDate((*itDg)->getPrescriptionDate()) ;
+          (*itDg)->setLatestPrescriptionDate(_pLdVDoc->getPrescriptionDate(*itDg)) ;
           _aDrugs.push_back(*itDg) ;
         }
       }
@@ -373,7 +378,7 @@ NSDrugHistoView::initDrugsForAtcCode()
 
         if ((iItCodeLen >= iCodeLen) && (string((*itDg)->getAtcCode(), 0, iCodeLen) == _sAtcCode))
         {
-          (*itDg)->setLatestPrescriptionDate((*itDg)->getPrescriptionDate()) ;
+          (*itDg)->setLatestPrescriptionDate(_pLdVDoc->getPrescriptionDate(*itDg)) ;
           _aDrugs.push_back(*itDg) ;
         }
       }
@@ -845,7 +850,7 @@ NSDrugHistoView::focusFct()
     pMyApp->SetToolBarWindow(GetWindow()) ;
   }
 
-  pPaneSplitter->SetFrameTitle(getFunction(), sViewName) ;
+  _pPaneSplitter->SetFrameTitle(getFunction(), sViewName) ;
   pContexte->setAideIndex("") ;
   pContexte->setAideCorps("medicaments.htm") ;
 }
@@ -853,17 +858,17 @@ NSDrugHistoView::focusFct()
 // SetupToolBarvoid
 NSDrugHistoView::SetupToolBar()
 {
-	pPaneSplitter->FlushControlBar() ;
+	_pPaneSplitter->FlushControlBar() ;
 
   TButtonGadget* pDrugHist = new TButtonGadget(CM_DRUG_HISTORY, CM_GENERAL_FCT7, TButtonGadget::Command) ;
-  pPaneSplitter->Insert(*pDrugHist) ;
+  _pPaneSplitter->Insert(*pDrugHist) ;
 
-  pPaneSplitter->LayoutSession() ;
+  _pPaneSplitter->LayoutSession() ;
 
   NSSuper* pSuper = pContexte->getSuperviseur() ;
   string sHist = pSuper->getText("drugManagement", "drugsHistory") ;
 
-  pPaneSplitter->SetTootipText(CM_GENERAL_FCT7, sHist) ;
+  _pPaneSplitter->SetTootipText(CM_GENERAL_FCT7, sHist) ;
 }
 
 void

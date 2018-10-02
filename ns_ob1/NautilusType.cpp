@@ -34,7 +34,7 @@
 */
 #include "ns_ob1\BB1BB.h"
 #include "ns_ob1\NautilusType.h"
-#include "nsepisod\nsldvuti.h"
+#include "nsldv\nsldvuti.h"
 
 //
 // ---------------------------- Class AnswerStatus ----------------------------

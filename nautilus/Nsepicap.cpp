@@ -107,6 +107,8 @@
 // #include <owl/dialog.h>
 
 #include "partage\Nsglobal.h"
+#include "nssavoir\nsBdmDriver.h"
+#include "nssavoir\nspathor.h"
 #include "nautilus\nssuper.h"
 #include "nsdn\nsdochis.h"
 

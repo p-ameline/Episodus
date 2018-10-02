@@ -20,7 +20,7 @@ class NVLdVTemps ;
 # include "nsbb\nsExport.h"
 # include "nsbb\nspatpat.h"
 # include "nsbb\nsmediccycle.h"
-# include "nsepisod\nsldvuti.h"
+# include "nsldv\nsldvuti.h"
 
 class _NSBBCLASSE NSphaseMedic : public NSRoot
 {

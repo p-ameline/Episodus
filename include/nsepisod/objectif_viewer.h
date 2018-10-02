@@ -7,7 +7,7 @@
 #include "nsbb\nsednum.h"
 #include "nsbb\nsedit.h"
 #include "nsbb\nscomboutil.h"
-#include "nautilus\nsldvgoal.h"
+#include "nsldv\nsldvgoal.h"
 
 #if defined(_EPISODUSDLL)
 	#define _EPISODUS __export

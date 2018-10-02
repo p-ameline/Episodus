@@ -41,23 +41,22 @@ RELEASELIBPATH = $(BCB)\lib\release
 USERDEFINES = STRICT;_OWLDLL;_USE_OWL_CM_EXIT;_BIDSDLL;_OWLALLPCH;BI_NAMESPACE;INC_OLE2;NO_SHDOCVW_GUIDS;_MUE;N_TIERS;__OB1__
 SYSDEFINES = _RTLDLL;NO_STRICT;USEPACKAGES
 # ---------------------------------------------------------------------------
-CFLAG1 = -Iinclude;dcodeur;nsbb;nautilus;partage;dzz;$(BCB)\include;$(BCB)\include\vcl;$(BCB)\include\owlfiles;"..\..\..\..\Program Files (x86)\Java\jdk1.6.0_30\include";"..\..\..\..\Program Files (x86)\Java\jdk1.6.0_30\include\win32" \
+CFLAG1 = -Idcodeur;dzz;include;$(BCB)\include;$(BCB)\include\vcl;$(BCB)\include\owlfiles;"..\..\..\..\Program Files (x86)\Java\jdk1.6.0_30\include";"..\..\..\..\Program Files (x86)\Java\jdk1.6.0_30\include\win32" \
   -WD -Od -w -Tkh30000 -r- -a8 -k -y -v -vi- -c -tWM -D$(SYSDEFINES);$(USERDEFINES)
-IDLCFLAGS = -Iinclude -Idcodeur -Insbb -Inautilus -Ipartage -Idzz -I$(BCB)\include \
-  -I$(BCB)\include\vcl -I$(BCB)\include\owlfiles \
+IDLCFLAGS = -Idcodeur -Idzz -Iinclude -I$(BCB)\include -I$(BCB)\include\vcl \
+  -I$(BCB)\include\owlfiles \
   -I"..\..\..\..\Program Files (x86)\Java\jdk1.6.0_30\include" \
   -I"..\..\..\..\Program Files (x86)\Java\jdk1.6.0_30\include\win32" \
   -src_suffixcpp -DSTRICT -D_OWLDLL -D_USE_OWL_CM_EXIT -D_BIDSDLL -D_OWLALLPCH \
   -DBI_NAMESPACE -DINC_OLE2 -DNO_SHDOCVW_GUIDS -D_MUE -DN_TIERS -D__OB1__
-PFLAGS = -U$(BCB)\Projects\Lib;dcodeur;dzz;..\..\..\..\cvs\episodus;$(BCB)\lib\obj;$(BCB)\lib;$(RELEASELIBPATH) \
-  -Iinclude;dcodeur;nsbb;nautilus;partage;dzz;$(BCB)\include;$(BCB)\include\vcl;$(BCB)\include\owlfiles;"..\..\..\..\Program Files (x86)\Java\jdk1.6.0_30\include";"..\..\..\..\Program Files (x86)\Java\jdk1.6.0_30\include\win32" \
+PFLAGS = -Idcodeur;dzz;include;$(BCB)\include;$(BCB)\include\vcl;$(BCB)\include\owlfiles;"..\..\..\..\Program Files (x86)\Java\jdk1.6.0_30\include";"..\..\..\..\Program Files (x86)\Java\jdk1.6.0_30\include\win32" \
+  -U$(BCB)\Projects\Lib;dcodeur;dzz;..\..\..\..\cvs\episodus;$(BCB)\lib\obj;$(BCB)\lib;$(RELEASELIBPATH) \
   -N2..\..\..\..\cvs\episodus\objNTIERS -N0..\..\..\..\cvs\episodus\objNTIERS \
   -DSTRICT;_OWLDLL;_USE_OWL_CM_EXIT;_BIDSDLL;_OWLALLPCH;BI_NAMESPACE;INC_OLE2;NO_SHDOCVW_GUIDS;_MUE;N_TIERS;__OB1__ \
   -$YD -$W -$O- -v -JPHNE -M
-RFLAGS = -iinclude;dcodeur;nsbb;nautilus;partage;dzz;$(BCB)\include;$(BCB)\include\vcl;$(BCB)\include\owlfiles;"..\..\..\..\Program Files (x86)\Java\jdk1.6.0_30\include";"..\..\..\..\Program Files (x86)\Java\jdk1.6.0_30\include\win32" \
+RFLAGS = -idcodeur;dzz;include;$(BCB)\include;$(BCB)\include\vcl;$(BCB)\include\owlfiles;"..\..\..\..\Program Files (x86)\Java\jdk1.6.0_30\include";"..\..\..\..\Program Files (x86)\Java\jdk1.6.0_30\include\win32" \
   -DSTRICT;_OWLDLL;_USE_OWL_CM_EXIT;_BIDSDLL;_OWLALLPCH;BI_NAMESPACE;INC_OLE2;NO_SHDOCVW_GUIDS;_MUE;N_TIERS;__OB1__
-AFLAGS = /iinclude /idcodeur /insbb /inautilus /ipartage /idzz /i$(BCB)\include \
-  /i$(BCB)\include\vcl /i$(BCB)\include\owlfiles \
+AFLAGS = /iinclude /i$(BCB)\include /i$(BCB)\include\vcl /i$(BCB)\include\owlfiles \
   /i"..\..\..\..\Program Files (x86)\Java\jdk1.6.0_30\include" \
   /i"..\..\..\..\Program Files (x86)\Java\jdk1.6.0_30\include\win32" /dSTRICT \
   /d_OWLDLL /d_USE_OWL_CM_EXIT /d_BIDSDLL /d_OWLALLPCH /dBI_NAMESPACE /dINC_OLE2 \
@@ -99,21 +98,23 @@ ProductVersion=5.11.0001
 Comments=
 
 [HistoryLists\hlIncludePath]
-Count=7
-Item0=include;dcodeur;nsbb;nautilus;partage;dzz;$(BCB)\include;$(BCB)\include\vcl;$(BCB)\include\owlfiles;..\..\..\..\Program Files (x86)\Java\jdk1.6.0_30\include;..\..\..\..\Program Files (x86)\Java\jdk1.6.0_30\include\win32
-Item1=include;dcodeur;nsbb;nautilus;partage;dzz;$(BCB)\include;$(BCB)\include\vcl;$(BCB)\include\owlfiles;..\..\Program Files (x86)\Java\jdk1.6.0_30\include;..\..\Program Files (x86)\Java\jdk1.6.0_30\include\win32
-Item2=include;dcodeur;nsbb;nautilus;partage;dzz;$(BCB)\include;$(BCB)\include\vcl;$(BCB)\include\owlfiles;C:\Program Files\Java\jdk1.6.0_17\include;C:\Program Files\Java\jdk1.6.0_17\include\win32
-Item3=include;dcodeur;nsbb;nautilus;partage;dzz;$(BCB)\include;$(BCB)\include\vcl;$(BCB)\include\owlfiles;..\..\j2sdk1.4.2\include;..\..\j2sdk1.4.2\include\win32
-Item4=include;dcodeur;nsbb;nautilus;partage;dzz;$(BCB)\include;$(BCB)\include\vcl;$(BCB)\include\owlfiles;..\..\j2sdk1.4.1\include;..\..\j2sdk1.4.1\include\win32
-Item5=include;dcodeur;nsbb;nautilus;partage;dzz;$(BCB)\include;$(BCB)\include\vcl;$(BCB)\include\owlfiles;C:\j2sdk1.4.1\include;C:\j2sdk1.4.1\include\win32
-Item6=include;dcodeur;nsbb;nautilus;partage;dzz;$(BCB)\include;$(BCB)\include\vcl;$(BCB)\include\owlfiles
+Count=8
+Item0=include;$(BCB)\include;$(BCB)\include\vcl;$(BCB)\include\owlfiles;..\..\..\..\Program Files (x86)\Java\jdk1.6.0_30\include;..\..\..\..\Program Files (x86)\Java\jdk1.6.0_30\include\win32
+Item1=include;dcodeur;nsbb;nautilus;partage;dzz;$(BCB)\include;$(BCB)\include\vcl;$(BCB)\include\owlfiles;..\..\..\..\Program Files (x86)\Java\jdk1.6.0_30\include;..\..\..\..\Program Files (x86)\Java\jdk1.6.0_30\include\win32
+Item2=include;dcodeur;nsbb;nautilus;partage;dzz;$(BCB)\include;$(BCB)\include\vcl;$(BCB)\include\owlfiles;..\..\Program Files (x86)\Java\jdk1.6.0_30\include;..\..\Program Files (x86)\Java\jdk1.6.0_30\include\win32
+Item3=include;dcodeur;nsbb;nautilus;partage;dzz;$(BCB)\include;$(BCB)\include\vcl;$(BCB)\include\owlfiles;C:\Program Files\Java\jdk1.6.0_17\include;C:\Program Files\Java\jdk1.6.0_17\include\win32
+Item4=include;dcodeur;nsbb;nautilus;partage;dzz;$(BCB)\include;$(BCB)\include\vcl;$(BCB)\include\owlfiles;..\..\j2sdk1.4.2\include;..\..\j2sdk1.4.2\include\win32
+Item5=include;dcodeur;nsbb;nautilus;partage;dzz;$(BCB)\include;$(BCB)\include\vcl;$(BCB)\include\owlfiles;..\..\j2sdk1.4.1\include;..\..\j2sdk1.4.1\include\win32
+Item6=include;dcodeur;nsbb;nautilus;partage;dzz;$(BCB)\include;$(BCB)\include\vcl;$(BCB)\include\owlfiles;C:\j2sdk1.4.1\include;C:\j2sdk1.4.1\include\win32
+Item7=include;dcodeur;nsbb;nautilus;partage;dzz;$(BCB)\include;$(BCB)\include\vcl;$(BCB)\include\owlfiles
 
 [HistoryLists\hlLibraryPath]
-Count=4
-Item0=..\..\..\..\cvs\episodus;$(BCB)\lib\obj;$(BCB)\lib
-Item1=..\..\Program Files (x86)\Borland\CBuilder4\Lib;$(BCB)\Projects\Lib;dcodeur;nsbb;nautilus;partage;dzz;$(BCB)\lib\obj;$(BCB)\lib
-Item2=$(BCB)\Projects\Lib;dcodeur;nsbb;nautilus;partage;dzz;$(BCB)\lib\obj;$(BCB)\lib
-Item3=dcodeur;nsbb;nautilus;partage;dzz;$(BCB)\lib\obj;$(BCB)\lib
+Count=5
+Item0=$(BCB)\Projects\Lib;dcodeur;dzz;..\..\..\..\cvs\episodus;$(BCB)\lib\obj;$(BCB)\lib
+Item1=..\..\..\..\cvs\episodus;$(BCB)\lib\obj;$(BCB)\lib
+Item2=..\..\Program Files (x86)\Borland\CBuilder4\Lib;$(BCB)\Projects\Lib;dcodeur;nsbb;nautilus;partage;dzz;$(BCB)\lib\obj;$(BCB)\lib
+Item3=$(BCB)\Projects\Lib;dcodeur;nsbb;nautilus;partage;dzz;$(BCB)\lib\obj;$(BCB)\lib
+Item4=dcodeur;nsbb;nautilus;partage;dzz;$(BCB)\lib\obj;$(BCB)\lib
 
 [HistoryLists\hlDebugSourcePath]
 Count=1
@@ -133,12 +134,18 @@ Item2=objMUE
 Item3=obj
 
 [HistoryLists\hlFinalOutputDir]
-Count=1
-Item0=..\..\..\..\cvs\episodus
+Count=4
+Item0=..\..\..\..\cvs\episodus\
+Item1=..\..\..\..\cvs\episodusItem1=..\..\..\..\cvs\episodusItem1=..\..\..\..\cvs\episodus
+Item2=
+Item3=
 
 [HistoryLists\hIBPIOutputDir]
-Count=1
-Item0=..\..\..\..\cvs\episodus
+Count=4
+Item0=C:\cvs\episodus\
+Item1=C:\cvs\episodusItem1=C:\cvs\episodusItem1=..\..\..\..\cvs\episodus
+Item2=
+Item3=
 
 [Debugging]
 DebugSourceDirs=$(BCB)\source\vcl

@@ -15,7 +15,7 @@
 #include "nautilus\nsresour.h"
 #include "nautilus\nautilus.rh"
 #include "nautilus\nsadmiwd.h"
-#include "nautilus\nsanxary.h"
+// #include "nautilus\nsanxary.h"
 #include "nautilus\nsperary.h"
 #include "nautilus\nspatdlg.h"
 #include "nsdn\nsdocdlg.h"

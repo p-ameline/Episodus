@@ -167,7 +167,7 @@ void
 NSWebServiceWindow::Action()
 {
 	IDispatch* pdisp = Form->Control->Document ;
-  if (!pdisp)
+  if ((IDispatch*) NULL == pdisp)
 		return ;
 
   sHtml = getHTMLsource(pdisp) ;
@@ -236,7 +236,7 @@ NSWebServiceWindow::captureInformation()
   // Get the capture array
 
   NSEpisodus* pEpisodus = pContexte->getEpisodus() ;
-  if (NULL == pEpisodus)
+  if ((NSEpisodus*) NULL == pEpisodus)
   	return ;
 
   NSCaptureArray* pNewCaptureArray = &(pEpisodus->newCaptureArray) ;

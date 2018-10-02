@@ -12,7 +12,7 @@
 #include <string>
 
 #include "ns_ob1\OB1Export.h"
-#include "nsepisod\nsldvuti.h"
+#include "nsldv\nsldvuti.h"
 // #include "nsbb\nspatpat.h"
 // #include "ns_ob1\BB1types.h"
 

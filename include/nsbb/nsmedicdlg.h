@@ -18,6 +18,8 @@
 # include <owl\listview.h>
 # include <vector>
 
+# include "nssavoir\nsBdmDriver.h"
+
 # include "nsbb\nsExport.h"
 # include "nsbb\nspatpat.h"
 # include "nsbb\nsedilex.h"
@@ -26,20 +28,9 @@
 
 //# include "nssavoir\nsvarray.h"
 
+# include "nsbb\nsmedicdlgbase.h"
 # include "nsbb\nsmedicphase.h"
 # include "nsbb\nsmediccycle.h"
-
-/*
-** Fonction qui renvoie l'unite de prise en fonction
-** du libele du medicament
-*/
-std::string _NSBBCLASSE initDispUnit(string sLang, string sCode, string sLib, NSContexte* pContexte) ;
-std::string _NSBBCLASSE initDispUnitFr(string sCode, string sLib, NSContexte* pContexte) ;
-
-/*
-** Cree le label à afficher pour la prescription par heure
-*/
-std::string CreateLabelForHour(std::string quant, std::string heure);
 
 class NSPosoManagerGroup ;
 
@@ -694,18 +685,11 @@ class NSPosologieBlock ;
 // Ancienne classe de base servant a la prescription d'un
 // médicament
 //-----------------------------------------------------
-class _NSBBCLASSE NSPosoIncludeDlg : public NSUtilDialog
+class _NSBBCLASSE NSPosoIncludeDlg : public NSPrescriptionBaseDlg
 {
 	public:
 
-  	std::string       sLexiqCode ;     // code lexique du médicament
-		std::string       sPriseUnit ;
-		std::string       sDateOuverture ; // date d'ouverture
-		std::string       sDateFermeture ; // date de fermeture
-
     NSPosologieBlock* _pPosoBlock ;
-
-    NSPatPathoArray*  _pPPT ;          // pathpatho racine contenant le médicament
 
     int               _topOfBottomControls ;  //debut du group box des phases
 
@@ -773,31 +757,31 @@ class _NSBBCLASSE NSPosologieBlock : public NSRoot
 
   protected:
 
-  	NSPosoIncludeDlg*                _pDialog ;
+  	NSPosoIncludeDlg*                 _pDialog ;
 
-    bool                             _LoadForChange ;       // Indique si la pat patho a ete charge
-    TButton*                         _ChangeCyle ;          // Boutton permettant le changment de mode
+    bool                              _LoadForChange ;       // Indique si la pat patho a ete charge
+    TButton*                          _ChangeCyle ;          // Boutton permettant le changment de mode
 
     //informations générales
-    NTComboBox<NSPatPathoArray>      *CycleSimple ;
+    NTComboBox<NSPatPathoArray>      *_CycleSimple ;
 
     std::vector<NSMedicCycleGlobal*> *_Cycles ;
-    int                              _currentCycle ; // Cyclecourrant
-    bool                             _Monocycle ;    // Cycle mono phase
+    int                               _currentCycle ; // Cyclecourrant
+    bool                              _Monocycle ;    // Cycle mono phase
 
     // ------------ Posologie ---------------
 
-    TGroupBox                     *_PosoGroup ;
-    TTabControl                   *tabPoso ;
+    TGroupBox                        *_PosoGroup ;
+    TTabControl                      *_tabPoso ;
 
     // rythme circadien  normal   (matin, midi, soir , coucher)
-    NSUpDownEdit   *pPriseMatin, *pPriseMidi, *pPriseSoir, *pPriseCoucher ;
+    NSUpDownEdit   *_pPriseMatin, *_pPriseMidi, *_pPriseSoir, *_pPriseCoucher ;
 
     // rythme cyrcadien avance  (Reveil, matin, midi, gouter, coucher, soir, nuit)
-    NSUpDownEdit   *pPriseReveil, *pPriseMatin2, *pPriseMidi2, *pPriseGouter, *pPriseCoucher2, *pPriseSoir2,  *pPriseNuit ;
+    NSUpDownEdit   *_pPriseReveil, *_pPriseMatin2, *_pPriseMidi2, *_pPriseGouter, *_pPriseCoucher2, *_pPriseSoir2,  *_pPriseNuit ;
 
-    NSUpDownEditHeureControle     *pPriseHeure ;   // Solution servant au prise par heure
-    NTTList<PriseHeure, NSPosoIncludeDlg> *ViewPriseHeure ; // Listbox recapitualant les prise médicamenteuse horaires
+    NSUpDownEditHeureControle* _pPriseHeure ;   // Solution servant au prise par heure
+    NTTList<PriseHeure, NSPosoIncludeDlg>* _ViewPriseHeure ; // Listbox recapitualant les prise médicamenteuse horaires
 
     NSUpDownEdit*  _quantRCycle ;  // Cycle Regulier
     NSUpDownEdit*  _freqRCycle ;   // Cycle Regulier
@@ -808,46 +792,46 @@ class _NSBBCLASSE NSPosologieBlock : public NSRoot
 		NSUpDownEdit*  _quantFreqFCycle ; // Cycle irregulier
 		NSComboBox*    _FCycleComboF ;    // Cycel irregulier
 
-    NSUpDownEdit   *priseUnique ; // Prise unique
+    NSUpDownEdit*  _priseUnique ; // Prise unique
 
-    NSTexteLibre   *pEditTextLibre ;  // texte libre pour les posologie
+    NSTexteLibre*  _pEditTextLibre ;  // texte libre pour les posologie
 
     // ------------ Cycle ---------------
 
     TGroupBox      *_CycleGroup ;
-    TTabControl    *tabCycle ;        // Tab
+    TTabControl    *_tabCycle ;        // Tab
     bool           _extendtedCycle ;  // Mode etendu avec gestion des cycles  A ne pas toucher
     bool           _Cycle ;           // Indique si on est en mode etendu ou en mode simple pour les cycles
 
-    int            iExtendedCycleGroupY, iExtendedCycleGroupH ;
-    int            iLimitedCycleGroupY,  iLimitedCycleGroupH ;
+    int            _iExtendedCycleGroupY, _iExtendedCycleGroupH ;
+    int            _iLimitedCycleGroupY,  _iLimitedCycleGroupH ;
 
     // Control servant a l'affichage des cycles par jours
-    NSCheckBoxControle    *pLundi, *pMardi, *pMercredi, *pJeudi, *pVendredi, *pSamedi, *pDimanche ;
+    NSCheckBoxControle    *_pLundi, *_pMardi, *_pMercredi, *_pJeudi, *_pVendredi, *_pSamedi, *_pDimanche ;
 
-    NSRadioButtonControle *pJour1, *pJour2 ;
+    NSRadioButtonControle *_pJour1, *_pJour2 ;
     NSUpDownEdit          *_numJour ;  // Cycle Regulier
     TStatic               *_numJourLabel ;
 
-		NSUpDownEdit   *pDureeCure ;      // rythme régulier
-		NSComboBox     *psymDureeCure ;   // rythme régulier
-		NSUpDownEdit   *pDureeCycleR ;    // rythme régulier
-		NSComboBox     *psymDureeCycleR ; // rythme régulier
+		NSUpDownEdit   *_pDureeCure ;      // rythme régulier
+		NSComboBox     *_psymDureeCure ;   // rythme régulier
+		NSUpDownEdit   *_pDureeCycleR ;    // rythme régulier
+		NSComboBox     *_psymDureeCycleR ; // rythme régulier
 
-		NSUpDownEdit   *pDureeCureF ;         // rythme libre
-		NSComboBox     *psymDureeCureF ;      // rythme libre
-		NSUpDownEdit   *pDureeCureFTime ;     // rythme libre
-		NSUpDownEdit   *pDureeCycleFreqF ;    // rythme libre
-		NSComboBox     *psymDureeCycleFreqF ; // rythme libre
+		NSUpDownEdit   *_pDureeCureF ;         // rythme libre
+		NSComboBox     *_psymDureeCureF ;      // rythme libre
+		NSUpDownEdit   *_pDureeCureFTime ;     // rythme libre
+		NSUpDownEdit   *_pDureeCycleFreqF ;    // rythme libre
+		NSComboBox     *_psymDureeCycleFreqF ; // rythme libre
 
-    NTTList<NSMedicCycleGlobal, NSPosoIncludeDlg> *viewCycle ;
+    NTTList<NSMedicCycleGlobal, NSPosoIncludeDlg> *_viewCycle ;
 
   protected:
 
-		NSPatPathoArray             *pPhasePPT ;     // pathpatho racine contenant le médicament
+		NSPatPathoArray             *_pPhasePPT ;     // pathpatho racine contenant le médicament
 
-		NSVectPatPathoArray         *prise_hours ;   // Tableau contenant les prescriptions horaires
-		char                        rythmIndex ;     // index des rythms
+		NSVectPatPathoArray         *_prise_hours ;   // Tableau contenant les prescriptions horaires
+		char                        _rythmIndex ;     // index des rythms
 
   public:
 
@@ -882,8 +866,8 @@ class _NSBBCLASSE NSPosologieBlock : public NSRoot
     void             KeyForRythme(int temp) ;
 
     void             buildPatPatho() ;
-    NSPatPathoArray* getPatPatho()                      { return pPhasePPT ; }
-    void             setPatPatho(NSPatPathoArray* pPpt) { pPhasePPT = pPpt ; }
+    NSPatPathoArray* getPatPatho()                      { return _pPhasePPT ; }
+    void             setPatPatho(NSPatPathoArray* pPpt) { _pPhasePPT = pPpt ; }
 
   // protected:
 
@@ -921,7 +905,7 @@ class _NSBBCLASSE NSPosologieBlock : public NSRoot
     NSPosoIncludeDlg* getDialog()                       { return _pDialog ; }
     void              setDialog(NSPosoIncludeDlg* pDlg) { _pDialog = pDlg ; }
 
-    NTTList<NSMedicCycleGlobal, NSPosoIncludeDlg>* getViewCycle() { return viewCycle ; }
+    NTTList<NSMedicCycleGlobal, NSPosoIncludeDlg>* getViewCycle() { return _viewCycle ; }
 
     int              getCurrentCycle() { return _currentCycle ; }
 
@@ -955,70 +939,48 @@ class _NSBBCLASSE NSMedicamentDlg : public NSPosoIncludeDlg
 
   protected:
 
-  	NSPatPathoArray*              pPPT ;
-
     std::string                   _sReferential ;
-    std::string                   _sFreeText ;      // texte libre
-    bool                          _bIsSubstituable, bIsRemboursable, bIsAld ;
+    bool                          _bIsRemboursable ;
 
     bool                          _LoadForChange ;       // Indique si la pat patho a ete charge
 
     //informations générales
-    OWL::TStatic                  *pModePriseTxt ;
-    NTComboBox<NSPatPathoArray>   *modedeprise ;  // Avant, pendant, après le repas
-    OWL::TStatic                  *pEnCasTxt ;
-    NSUtilLexique                 *pEnCasDe ;     // En cas de
-    OWL::TStatic                  *pUnitePriseTxt ;
-    NSUtilLexique                 *pUnitePrise ;  // pilule, goutte , comprimé
-    NSCheckBoxControle            *substituable, *remboursable ;
-
-    OWL::TStatic                  *pmedicnameTxt ;
-		NSUtilLexique                 *medicname ;
-
-    NSCheckBoxControle            *_pALD ;
-    OWL::TButton                  *_pFreeTextButton ;
+    OWL::TStatic                  *_pmedicnameTxt ;
+    OWL::TStatic                  *_pModePriseTxt ;
+    NTComboBox<NSPatPathoArray>   *_modedeprise ;  // Avant, pendant, après le repas
+    NSCheckBoxControle            *_remboursable ;
 
      // variables de phases
-    NSUpDownEdit                  *pDureePhase ;
-    NSComboBox                    *pCBDureePhase ;
-    NSUpDownEdit                  *pRenouvellement ;
-    OWL::TStatic                  *pDateDebPrescrTxt ;
-		NSUtilEditDateHeure           *pDateDebPrescr ;
-		OWL::TStatic                  *pDateFinPrescrTxt ;
-		NSUtilEditDateHeure           *pDateFinPrescr ;
+    NSUpDownEdit                  *_pDureePhase ;
+    NSComboBox                    *_pCBDureePhase ;
+    NSUpDownEdit                  *_pRenouvellement ;
+    OWL::TStatic                  *_pDateDebPrescrTxt ;
+		NSUtilEditDateHeure           *_pDateDebPrescr ;
+		OWL::TStatic                  *_pDateFinPrescrTxt ;
+		NSUtilEditDateHeure           *_pDateFinPrescr ;
 
-    TButton                       *ok, *cancel, *help ;
+    TButton                       *_ok, *_cancel, *_help ;
     TGroupBox                     *_PhaseGroup ;
     bool                          _extendedForm ;    // Mode etendu avec gestion des phases  A ne pas toucher
     bool                          _Phase ;           // Indique si on est en mode etendu ou en mode simple pour les cycles
 
-    OWL::TStatic                  *pDateDebTxt ;
-    NSUtilEditDateHeure           *pDateDeb, *pDateFin ;  // Date d'ouverture  et de fermeture
-    OWL::TGroupBox                *pDateFinGroup ;
-    OWL::TRadioButton             *pRChronique ;
-  	OWL::TRadioButton             *pRDans ;
-  	OWL::TRadioButton             *pRDuree ;
-  	OWL::TRadioButton             *pRLe ;
-  	NSEditNum                     *pNbJours ;
-  	NSComboBox                    *pCBDureeTtt ;
-
-    TStatic                       *idc_phase1,  *idc_static3, *idc_static2 ;
-    NTTList<NSphaseMedic, NSMedicamentDlg> *phaseBox ;
-    TButton                       *ModePhase ;
-    TButton                       *AddPhase ;       // Bouton permettatnd 'ajouter une phase
+    TStatic                       *_idc_phase1,  *_idc_static3, *_idc_static2 ;
+    NTTList<NSphaseMedic, NSMedicamentDlg> *_phaseBox ;
+    TButton                       *_ModePhase ;
+    TButton                       *_AddPhase ;       // Bouton permettatnd 'ajouter une phase
     // NTTList<NSMedicCycleGlobal, NSMedicamentDlg> *viewCycle ;
 
   protected:
-
-		std::string                 sEnCasDe_Code ;  // en cas de
 
 		// Pointeur sur les informations
 		NSphaseMedicArray           *_pPhases ;       // Tableau contenant les phases
 		NSphaseMedic                *_pCurrentPhase ;  // Phase courante
 
-		NSVectPatPathoArray         *prise_hours ;    // Tableau contenant les prescriptions horaires
-		char                        phaseIndex ;      // index des phases
-		char                        rythmIndex ;      // index des rythms
+		NSVectPatPathoArray         *_prise_hours ;    // Tableau contenant les prescriptions horaires
+		char                        _phaseIndex ;      // index des phases
+		char                        _rythmIndex ;      // index des rythms
+
+    NsSelectableDrug           *_pBdmDrugInformation ;
 
   public:
 
@@ -1038,10 +1000,13 @@ class _NSBBCLASSE NSMedicamentDlg : public NSPosoIncludeDlg
     void    EvKeyDown(uint key, uint repeatCount, uint flags) ;
     void    EvListBoxSelCycle() ;
     void    DeletePhase() ;
-    void    ExecutedAfterMedicamentSelection() ;  // Fonction s'executant apres la selection du medicament
+    void    ExecutedAfterDrugSelection() ;  // Fonction s'executant apres la selection du medicament
+    void    ExecutedAfterEventSelection() ;
+    void    ExecutedAfterRouteSelection() ;
     void    ExecutedAfterTrtBeginDate() ;
 		void    ExecutedAfterTrtEndDate() ;
     void    UserName(WPARAM wParam) ;
+
     /*
     ** Fonction qui controle l'aspect globale de la fenetre
     */
@@ -1057,7 +1022,7 @@ class _NSBBCLASSE NSMedicamentDlg : public NSPosoIncludeDlg
     void    CreateTree();
     bool    chercheNoeud(string sName) ;
     void    lanceCorrespondedTypeCycle(NSPatPathoArray *pPPTInt);
-    void    setDateOuverture(string sDateBrut)  { sDateOuverture = sDateBrut ; }  //affiche la date d'ouverture
+    void    setDateOuverture(string sDateBrut)  { _sDateOuverture = sDateBrut ; }  //affiche la date d'ouverture
     void    initPosoAndCycleForDrug() ;
     void    InitComboModedePrise();
     void    RedrawForm(bool extend);
@@ -1073,8 +1038,6 @@ class _NSBBCLASSE NSMedicamentDlg : public NSPosoIncludeDlg
     void    LoadPhaseOnViewAndConfigure(); // charge les phase dans la liste box
     void    ActualiseEndOfPrescription(); // Acutalise la date de fin de traitement
 
-    void    editFreeText() ;
-
   DECLARE_RESPONSE_TABLE(NSMedicamentDlg) ;
 };
 
@@ -1082,26 +1045,26 @@ class _NSBBCLASSE NSRenewMedicDlg : public NSUtilDialog
 {
 	public:
 
-		NSPatPathoArray     *pPPT ;
-		string              sLexique ;
-		string              sDateRenouvelement ;
-		int                 iDureeCycle ;
-		string              sUnitDureeCycle ;      // correspond au code lexique
-		int                 iNbRenouvelement ;
+		NSPatPathoArray     *_pPPT ;
+		string              _sLexique ;
+		string              _sDateRenouvelement ;
+		int                 _iDureeCycle ;
+		string              _sUnitDureeCycle ;      // correspond au code lexique
+		int                 _iNbRenouvelement ;
 
 		// variables de phases
-		NSUpDownEdit        *pDureeCycle ;
-		NSComboBox          *pCBDureeCycle ;
-		NSUpDownEdit        *pRenouvelement ;
+		NSUpDownEdit        *_pDureeCycle ;
+		NSComboBox          *_pCBDureeCycle ;
+		NSUpDownEdit        *_pRenouvelement ;
 
-    OWL::TStatic        *pDateDebPrescrTxt ;
-    NSUtilEditDateHeure *pDateDebPrescr ;
-    OWL::TStatic        *pDateFinPrescrTxt ;
-    NSUtilEditDateHeure *pDateFinPrescr ;
+    OWL::TStatic        *_pDateDebPrescrTxt ;
+    NSUtilEditDateHeure *_pDateDebPrescr ;
+    OWL::TStatic        *_pDateFinPrescrTxt ;
+    NSUtilEditDateHeure *_pDateFinPrescr ;
 
-		TButton              *pOK ;
-		TButton              *pCancel ;
-		TButton              *pHelp ;
+		TButton              *_pOK ;
+		TButton              *_pCancel ;
+		TButton              *_pHelp ;
 
 		// constructors/destructor
 		NSRenewMedicDlg(TWindow *parent, NSContexte *pCtx, NSPatPathoArray *pPPTinit) ;
@@ -1122,25 +1085,25 @@ class _NSBBCLASSE NSMedicModifPosoDlg : public NSPosoIncludeDlg
 {
 	public:
 
-		NSPatPathoArray *pPPT ;
-    NSPatPathoArray *pPPTGlobal ;
-		string          sLexique ;
-		string          sDateRenouvelement ;
-		int             iDureeCycle ;
-		string          sUnitDureeCycle ;      // correspond au code lexique
-		int             iNbRenouvelement ;
+		NSPatPathoArray *_pPPT ;
+    NSPatPathoArray *_pPPTGlobal ;
+		string          _sLexique ;
+		string          _sDateRenouvelement ;
+		int             _iDureeCycle ;
+		string          _sUnitDureeCycle ;      // correspond au code lexique
+		int             _iNbRenouvelement ;
 
 		// variables de phases
-		NSUpDownEdit    *pDureeCycle ;
-		NSComboBox      *pCBDureeCycle ;
-		NSUpDownEdit    *pRenouvelement ;
+		NSUpDownEdit    *_pDureeCycle ;
+		NSComboBox      *_pCBDureeCycle ;
+		NSUpDownEdit    *_pRenouvelement ;
 
-		NSUtilLexique   *pUnitePrise ;  // pilule, goutte , comrimé
-    NSUtilLexique   *medicname ;
+		NSUtilLexique   *_pUnitePrise ;  // pilule, goutte , comrimé
+    NSUtilLexique   *_medicname ;
 
-		TButton         *pOK ;
-		TButton         *pCancel ;
-		TButton         *pHelp ;
+		TButton         *_pOK ;
+		TButton         *_pCancel ;
+		TButton         *_pHelp ;
 
 		// constructors/destructor
 		NSMedicModifPosoDlg(TWindow *parent, NSContexte *pCtx, NSPatPathoArray *pPPPhaseToModify, NSPatPathoArray *pPPTmedic) ;
@@ -1155,6 +1118,12 @@ class _NSBBCLASSE NSMedicModifPosoDlg : public NSPosoIncludeDlg
 		void    CmOk() ;
 		void    CmCancel() ;
 		void    CmHelp() ;
+
+    void    ExecutedAfterDrugSelection()  {}
+    void    ExecutedAfterEventSelection() {}
+    void    ExecutedAfterRouteSelection() {}
+    void    ExecutedAfterTrtBeginDate()   {}
+		void    ExecutedAfterTrtEndDate()     {}
 
 	protected:
 

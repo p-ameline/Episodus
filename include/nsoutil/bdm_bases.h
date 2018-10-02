@@ -24,7 +24,7 @@
 # define BDM_LEXIMED_LEN  		5   // Code Leximed
 # define BDM_VIDAL_LEN    		7   // Code Vidal
 # define BDM_LEXOLD_LEN   		6   // Code ancien Leximed
-# define BDM_GRP_GENERIQ_LEN  5   // Groupe générique de substitution
+# define BDM_GRP_GENERIQ_LEN 10   // Groupe générique de substitution
 # define BDM_TYPE_GENERIQ_LEN 1   // Relation générique
 // Indice des champs du fichier BDM# define BDM_ID_FIELD					  1
 # define BDM_CIP_FIELD				  2

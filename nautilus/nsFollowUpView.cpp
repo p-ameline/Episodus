@@ -14,11 +14,13 @@
 #include <owl\validate.h>
 #include <owl\inputdia.h>
 
+#include "nssavoir\nsBdmDriver.h"
 #include "nautilus\nssuper.h"#include "partage\nsdivfct.h"
 #include "nsdn\nsdochis.h"
 #include "nautilus\nsldvdoc.h"
-#include "nautilus\nsldvvar.h"
-#include "nautilus\nsldvgoal.h"
+#include "nsldv\nsldvvar.h"
+#include "nsldv\nsldvgoal.h"
+#include "nsldv\nsldvdrug.h"
 #include "nautilus\nsFollowUpView.h"
 #include "nautilus\nautilus.rh"
 #include "nsbb\nspanesplitter.h"
@@ -829,7 +831,7 @@ NSFollowUpView::EvSetFocus(HWND hWndLostFocus)
     pMyApp->SetToolBarWindow(GetWindow()) ;
   }
 
-  pPaneSplitter->SetFrameTitle(getFunction(), sViewName) ;
+  _pPaneSplitter->SetFrameTitle(getFunction(), sViewName) ;
   pContexte->setAideIndex("") ;
   pContexte->setAideCorps("objectifs.htm") ;
 }

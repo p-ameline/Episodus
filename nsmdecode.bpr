@@ -24,10 +24,11 @@ OBJFILES = ..\..\..\..\cvs\episodus\ObjNTIERS\nsmdecode.obj \
   ..\..\..\..\cvs\episodus\ObjNTIERS\Nsphrobj.obj \
   ..\..\..\..\cvs\episodus\ObjNTIERS\Decordon.obj \
   ..\..\..\..\cvs\episodus\ObjNTIERS\NsCIM10.obj \
-  ..\..\..\..\cvs\episodus\ObjNTIERS\Nsannexe.obj \
   ..\..\..\..\cvs\episodus\ObjNTIERS\nsperary.obj \
   ..\..\..\..\cvs\episodus\ObjNTIERS\nscr_amx.obj \
-  ..\..\..\..\cvs\episodus\ObjNTIERS\Nscr_ama.obj
+  ..\..\..\..\cvs\episodus\ObjNTIERS\Nscr_ama.obj \
+  ..\..\..\..\cvs\episodus\ObjNTIERS\Nscr_anx.obj \
+  ..\..\..\..\cvs\episodus\ObjNTIERS\Nstxstyl.obj
 RESFILES = ..\..\..\..\cvs\episodus\ObjNTIERS\nsdecode.res \
   ..\..\..\..\cvs\episodus\ObjNTIERS\nsCIM10.res nsmdecode.res
 DEFFILE =

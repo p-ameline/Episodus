@@ -89,7 +89,7 @@ class VecteurString ;
 class Csteps ;
 class CguidelineStep ;
 
-# include "balise.h"
+# include "parseur\balise.h"
 // # include "nautilus\nssuper.h"
 // # include "nsbb\nspatpat.h"
 # include "partage\NTArray.h"

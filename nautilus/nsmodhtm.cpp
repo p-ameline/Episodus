@@ -15,7 +15,7 @@
 #include "nsdn\nsintrad.h"
 #include "nautilus\nsresour.h"
 #include "nautilus\nsmodhtm.h"
-#include "nautilus\nsanxary.h"
+// #include "nautilus\nsanxary.h"
 #include "nsbb\nstlibre.h"
 #include "nssavoir\nsgraphe.h"
 #include "nsbb\nsdico.h"
@@ -50,7 +50,8 @@ NSModHtml::NSModHtml(OperationType typeOp, NSNoyauDocument* pDocNoy, NSContexte*
   sBaseCompo    = string("") ;        // idem pour la composition
   pBaseImages   = (NSBaseImages*) 0 ; // pointeur initialisé par chargeBaseImages()
   pBaseCompo    = (NSBaseImages*) 0 ;
-  pDocBrut      = pDocNoy ;
+  _pDocBrut     = pDocNoy ;
+  _pLdvDoc      = (NSLdvDocument*) 0 ;
 
   lObjectCount++ ;
 }
@@ -70,7 +71,8 @@ NSModHtml::NSModHtml(OperationType typeOp, NSLdvDocument* pDocLdv, NSContexte* p
   sBaseCompo    = string("") ;        // idem pour la composition
   pBaseImages   = (NSBaseImages*) 0 ; // pointeur initialisé par chargeBaseImages()
   pBaseCompo    = (NSBaseImages*) 0 ;
-  pDocBrut      = (NSNoyauDocument*) 0 ;
+  _pDocBrut     = (NSNoyauDocument*) 0 ;
+  _pLdvDoc      = pDocLdv ;
 
   lObjectCount++ ;
 }
@@ -108,14 +110,14 @@ NSModHtml::ajoute(HtmlTypes th, string sNonHtmlTxt)
 void
 NSModHtml::addSignature()
 {
-  if ((NSNoyauDocument*) NULL == pDocBrut)
+  if ((NSNoyauDocument*) NULL == _pDocBrut)
   {
     ajoute(tSignature, string("")) ;
     ajoute(tOperateur, string("")) ;
     return ;
   }
 
-  NSDocumentInfo* pDocInfo = pDocBrut->DonneDocInfo() ;
+  NSDocumentInfo* pDocInfo = _pDocBrut->DonneDocInfo() ;
 
   if ((NSDocumentInfo*) NULL == pDocInfo)
   {
@@ -308,19 +310,19 @@ try
   //
   if ((NSDocumentInfo*) NULL == pTemplateInfo)
   {
-    if (NULL == pDocBrut)
+    if (NULL == _pDocBrut)
 		  return false ;
-    pTemplateInfo = pDocBrut->_pDocInfo ;
+    pTemplateInfo = _pDocBrut->_pDocInfo ;
   }
 
   if ((NSDocumentInfo*) NULL == pTemplateInfo)
     return false ;
 
-  string sCodeChemise = "" ;              // code chemise du document brut
-  string sCodeChemDoc = "" ;              // idem plus blancs pour la recherche
-  string sCodeDocChemise = "" ;           // code des documents de la chemise
+  string sCodeChemise      = string("") ;  // code chemise du document brut
+  string sCodeChemDoc      = string("") ;  // idem plus blancs pour la recherche
+  string sCodeDocChemise   = string("") ;  // code des documents de la chemise
   bool   chemiseAvecImages = false ;
-  bool   pathInit = false ;
+  bool   pathInit          = false ;
 
   if (sPathImages != "")
 		pathInit = true ;
@@ -487,24 +489,24 @@ try
   // If there is already an image index in the right location, we use it
   //
 	if ((toImprimer == typeOperation) || (toVisualiser == typeOperation))	{
-		if (string("") != pDocBrut->_sBaseImages)
+		if (string("") != _pDocBrut->_sBaseImages)
     {
       size_t iPathBaseLen = strlen(sPathBase.c_str()) ;
-      if ((strlen(pDocBrut->_sBaseImages.c_str()) > iPathBaseLen) &&
-          (string(pDocBrut->_sBaseImages, 0, iPathBaseLen) == sPathBase))
+      if ((strlen(_pDocBrut->_sBaseImages.c_str()) > iPathBaseLen) &&
+          (string(_pDocBrut->_sBaseImages, 0, iPathBaseLen) == sPathBase))
       {
         if ((NSBaseImages*) NULL == pBaseImages)
         {
       	  pBaseImages = new NSBaseImages(sBaseImages) ;
       	  if (pBaseImages->lire())
           {
-            sBaseImages = pDocBrut->_sBaseImages ;
+            sBaseImages = _pDocBrut->_sBaseImages ;
             return true ;
           }
         }
         else
         {
-          sBaseImages = pDocBrut->_sBaseImages ;
+          sBaseImages = _pDocBrut->_sBaseImages ;
           return true ;
         }
       }
@@ -868,7 +870,7 @@ NSModHtml::generePatPatho(NSPatPathoArray* pPatPathoArray)
 	}
 
 	_sOut += string("{PatPatho ") +
-           string("CN040") + // string(pDocBrut->pDocInfo->pDonnees->type) +
+           string("CN040") + // string(_pDocBrut->pDocInfo->pDonnees->type) +
            string("|") + pContexte->getPatient()->getNom() +
            string("|") + pContexte->getPatient()->getPrenom() +
            string("|") + pContexte->getPatient()->getNaissance() +
@@ -1385,7 +1387,7 @@ NSModHtml::scanPrintParams()
             if (NPOS != params)
             {
                 // Reset des paramètres d'impression du document
-                pDocBrut->_nspp.reset();
+                _pDocBrut->_nspp.reset();
 
                 int iLenTagParams = strlen("PrintParams");
                 sComment = string(sComment, iLenTagParams + 1, strlen(sComment.c_str()) - iLenTagParams - 1);
@@ -1436,36 +1438,36 @@ NSModHtml::scanPrintParams()
                     if (bParamsFound)
                     {
                         if (sTag == "PaperSize")
-                            pDocBrut->_nspp.sPaperSize = sValue;
+                            _pDocBrut->_nspp.sPaperSize = sValue;
                         else if (sTag == "PaperSource")
-                            pDocBrut->_nspp.sPaperSource = sValue;
+                            _pDocBrut->_nspp.sPaperSource = sValue;
                         else if (sTag == "Header")
-                            pDocBrut->_nspp.sHeader = sValue;
+                            _pDocBrut->_nspp.sHeader = sValue;
                         else if (sTag == "Footer")
-                            pDocBrut->_nspp.sFooter = sValue;
+                            _pDocBrut->_nspp.sFooter = sValue;
                         else if (sTag == "Orientation")
                         {
                             pseumaj(&sValue);
 
                             if ((sValue == "UNDEFINED") || (sValue == "PORTRAIT") || (sValue == "LANDSCAPE"))
-                                pDocBrut->_nspp.sOrientation = sValue;
+                                _pDocBrut->_nspp.sOrientation = sValue;
                         }
                         else if (sTag == "LeftMargin")
-                            pDocBrut->_nspp.sfLeftMargin = sValue;
+                            _pDocBrut->_nspp.sfLeftMargin = sValue;
                         else if (sTag == "TopMargin")
-                            pDocBrut->_nspp.sfTopMargin = sValue;
+                            _pDocBrut->_nspp.sfTopMargin = sValue;
                         else if (sTag == "RightMargin")
-                            pDocBrut->_nspp.sfRightMargin = sValue;
+                            _pDocBrut->_nspp.sfRightMargin = sValue;
                         else if (sTag == "BottomMargin")
-                            pDocBrut->_nspp.sfBottomMargin = sValue;
+                            _pDocBrut->_nspp.sfBottomMargin = sValue;
                         else if (sTag == "PrinterName")
-                            pDocBrut->_nspp.sPrinterName = sValue;
+                            _pDocBrut->_nspp.sPrinterName = sValue;
                         else if (sTag == "PrintToFile")
                         {
                             pseumaj(&sValue);
 
                             if ((sValue == "TRUE") || (sValue == "FALSE") || (sValue == "YES") || (sValue == "NO"))
-                                pDocBrut->_nspp.sbPrintToFile = sValue;
+                                _pDocBrut->_nspp.sbPrintToFile = sValue;
                         }
                         else if (sTag == "PrintRange")
                         {
@@ -1473,18 +1475,18 @@ NSModHtml::scanPrintParams()
 
                             if ((sValue == "UNDEFINED") || (sValue == "ALL") || (sValue == "PAGES") ||
                                 (sValue == "SELECTION"))
-                                pDocBrut->_nspp.sPrintRange = sValue;
+                                _pDocBrut->_nspp.sPrintRange = sValue;
                         }
                         else if (sTag == "PrintRangePagesFrom")
-                            pDocBrut->_nspp.slPrintRangePagesFrom = sValue;
+                            _pDocBrut->_nspp.slPrintRangePagesFrom = sValue;
                         else if (sTag == "PrintRangePagesTo")
-                            pDocBrut->_nspp.slPrintRangePagesTo = sValue;
+                            _pDocBrut->_nspp.slPrintRangePagesTo = sValue;
                         else if (sTag == "Collate")
                         {
                             pseumaj(&sValue);
 
                             if ((sValue == "TRUE") || (sValue == "FALSE") || (sValue == "YES") || (sValue == "NO"))
-                                pDocBrut->_nspp.sbCollate = sValue;
+                                _pDocBrut->_nspp.sbCollate = sValue;
                         }
                         else if (sTag == "PrintFrames")
                         {
@@ -1492,21 +1494,21 @@ NSModHtml::scanPrintParams()
 
                             if ((sValue == "UNDEFINED") || (sValue == "SCREEN") || (sValue == "SELECTED") ||
                                 (sValue == "INDIVIDUALLY"))
-                                pDocBrut->_nspp.sPrintFrames = sValue;
+                                _pDocBrut->_nspp.sPrintFrames = sValue;
                         }
                         else if (sTag == "PrintLinks")
                         {
                             pseumaj(&sValue);
 
                             if ((sValue == "TRUE") || (sValue == "FALSE") || (sValue == "YES") || (sValue == "NO"))
-                                pDocBrut->_nspp.sbPrintLinks = sValue;
+                                _pDocBrut->_nspp.sbPrintLinks = sValue;
                         }
                         else if (sTag == "PrintLinkTable")
                         {
                             pseumaj(&sValue);
 
                             if ((sValue == "TRUE") || (sValue == "FALSE") || (sValue == "YES") || (sValue == "NO"))
-                                pDocBrut->_nspp.sbPrintLinkTable = sValue;
+                                _pDocBrut->_nspp.sbPrintLinkTable = sValue;
                         }
                     }
 
@@ -1774,7 +1776,7 @@ NSModHtml::genereModele(string sFichHtml, NSDocumentInfo* pHtmlInfo, string sPat
       else if (string("patpatho") == typeElt)
       {
         NSPatPathoArray PptDocBrut(pContexte->getSuperviseur()) ;
-        pDocBrut->initFromPatPatho(&PptDocBrut) ;
+        _pDocBrut->initFromPatPatho(&PptDocBrut) ;
       	if (false == generePatPatho(&PptDocBrut))
         {
         	erreur("Impossible de générer la PatPatho", standardError, 0, pContexte->GetMainWindow()->GetHandle()) ;
@@ -1822,11 +1824,11 @@ NSModHtml::genereHtml(string sPathHtml, string& sBaseImg,
     sPathImg = sPathDest ;
   }
 
-	if ((string("") != pDocBrut->_sTemplate) &&
-      (false == lireModele(pDocBrut->_sTemplate, pDocBrut->_sEnTete)))
+	if ((string("") != _pDocBrut->_sTemplate) &&
+      (false == lireModele(_pDocBrut->_sTemplate, _pDocBrut->_sEnTete)))
   {
     char msg[255] ;
-    sprintf(msg, "Pb lecture du modele [%s].", (pDocBrut->_sTemplate).c_str()) ;
+    sprintf(msg, "Pb lecture du modele [%s].", (_pDocBrut->_sTemplate).c_str()) ;
     MessageBox(0, msg, 0, MB_OK) ;
     return false ;
   }
@@ -1841,12 +1843,12 @@ NSModHtml::genereHtml(string sPathHtml, string& sBaseImg,
   if (toComposer == typeOperation)
   {
     sBaseImg = sBaseCompo ;
-    pDocBrut->_sBaseImages = sBaseImages ;
+    _pDocBrut->_sBaseImages = sBaseImages ;
   }
   else
   {
     if (toExporter == typeOperation)
-      pDocBrut->_bConserveBase = true ;
+      _pDocBrut->_bConserveBase = true ;
 
     sBaseImg = sBaseImages ;
   }
@@ -1872,7 +1874,7 @@ NSModHtml::genereHtml(string sPathHtml, string& sBaseImg,
   if (false == lireModele(sFichierTemplate, sFichierEntete))
   {
     char msg[255] ;
-    sprintf(msg, "Pb lecture du modele [%s].", (pDocBrut->_sTemplate).c_str()) ;
+    sprintf(msg, "Pb lecture du modele [%s].", (_pDocBrut->_sTemplate).c_str()) ;
     MessageBox(0, msg, 0, MB_OK) ;
     return false ;
   }

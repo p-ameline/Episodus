@@ -1,5 +1,6 @@
 #include <stdio.h>
-#include "nautilus\nssuper.h"#include "nssavoir\nspathor.h"#include "nsbb\nsednum.h"
+#include "nssavoir\nspathor.h"
+#include "nautilus\nssuper.h"#include "nsbb\nsednum.h"
 #include "nsbb\nsutidlg.h"
 #include "nsbb\nsbb.h"
 #include "partage\nsdivfct.h"

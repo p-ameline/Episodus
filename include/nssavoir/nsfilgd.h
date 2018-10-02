@@ -33,6 +33,9 @@ class NsProposition ;
 class NSGenerateur ;
 class ChoixPathoDialog ;
 class NSPatholog ;
+#ifndef __NSPATHOR_H
+class NSPathoInfoArray ;
+#endif
 class NSLexiMed ;
 class NSPathologData ;
 class NSSavoir ;
@@ -123,9 +126,9 @@ class NSDico : public NSRoot
     // Donne la categorie
     static string CodeCategorie(string sChaine) ;
 
-    bool   isDrug(string* pCodeLexiqueOrSens) ;
-    bool   isDrugOrTreatment(string* pCodeLexiqueOrSens) ;
-    bool   isVirtualDrug(string sLang, string* pCodeLexiqueOrSens, string* pAfficheLabel) ;
+    static bool   isDrug(const string* pCodeLexiqueOrSens) ;
+    static bool   isDrugOrTreatment(const string* pCodeLexiqueOrSens) ;
+    bool          isVirtualDrug(string sLang, const string* pCodeLexiqueOrSens, string* pAfficheLabel) ;
 
     // Donne le code Sens en fonction du code lexique
     static void   donneCodeSens(const string* pCodeLexique, string* pCodeSens) ;
@@ -142,6 +145,8 @@ class NSDico : public NSRoot
 
     bool Decoder(string sLang, string sChemin, NSPatPathoArray* pSousPatPatho,
                        ClasseStringVector* pVect, DCODETYPE precision = dcTiret) ;
+
+    bool getAllSynonyms(const string sCode, NSPathoInfoArray* paSynonyms, const string sLang) ;
 
     NSPatholog*       getPatholog()	  { return _pPatho ; }
     NSLexiMed*        getLexiMed()    { return _pLexiMed ; }
@@ -337,12 +342,12 @@ class NSFilGuide : public NSSuperRoot
     // Get closest is_a that is a (0) generic anatomic element
     string GetClosestGenericIsA(string sCode) ;
 
+    string getVirtualDrug(const string sSpecialityCode, NSContexte* pContexte, bool bReturnLabel = false) ;
+
     BBChem*	  getBBFiche()  { return _pBBFiche ; }
     NSSavoir* getSavoir()   { return _pSavoir ; }
     string    getTypeBase() { return _sTypeBase ; }
 };
 
-#endif
-
-// __NSSAVOIR_H
+#endif     // __NSFILGD_H
 

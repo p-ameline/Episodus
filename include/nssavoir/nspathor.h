@@ -8,10 +8,10 @@ class NSPathologInfo ;
 #include <vector>
 
 #ifndef __linux__
-#include <owl/dialog.h>
-#include <owl/listbox.h>
-#include <owl/static.h>
-#include <owl/radiobut.h>
+  #include <owl/dialog.h>
+  #include <owl/listbox.h>
+  #include <owl/static.h>
+  #include <owl/radiobut.h>
 #endif
 
 #include "nssavoir/nspatho.h"
@@ -29,8 +29,7 @@ class NSPathologInfo ;
 
 using namespace std;
 
-
-typedef vector<NSPathologInfo*> NSPathoInfoArray ;
+typedef vector<NSPathologInfo*>          NSPathoInfoArray ;
 typedef NSPathoInfoArray::iterator       pthIter ;
 typedef NSPathoInfoArray::const_iterator pthConstIter ;
 

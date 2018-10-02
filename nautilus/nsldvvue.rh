@@ -61,58 +61,39 @@
 #define IDC_CIM             121
 
 // Dialogue NEW_DRUG
-#define DRUG_EDIT           101
-#define DRUG_DATE_DEB	      102
-#define DRUG_DATE_FIN	      103
-#define IDR_DRG_CHRONIQUE   104
-#define IDC_DRG_NBJOURS	    105
-#define IDR_DRG_DANS        106
-#define IDR_DRG_DUREE       107
-#define IDR_DRG_LE          108
-#define IDC_DRG_NBJOURS_TXT 109
-#define DATE_DEB_DRG_TEXT   110
-#define DATE_FIN_DRG_GROUP  111
-#define DATE_DEBPRESC_TEXT  112
-#define DATE_FINPRESC_TEXT  113
-#define PRESC_DATE_DEB      114
-#define PRESC_DATE_FIN      115
-#define TRT_GROUP           116
-#define DRG_UNIT            117
-#define DRG_UNIT_TXT        118
-#define PRESCR_GROUP        119
-#define PRESCR_DURA_TXT     120
-#define PRESCR_DURA         121
-#define PRESCR_DURA_UPDN    122
-#define PRESCR_DURA_UNIT    123
-#define PRESCR_RENEW_TXT    124
-#define PRESCR_RENEW        125
-#define PRESCR_RENEW_UPDN   126
-#define PRESCR_RENEW_NBTXT  127
-#define POSO_GROUP          128
-#define POSO_MORNING_TXT    129
-#define POSO_MORNING        130
-#define POSO_MORNING_UPDN   131
-#define POSO_NOON_TXT       132
-#define POSO_NOON           133
-#define POSO_NOON_UPDN      134
-#define POSO_NIGHT_TXT      135
-#define POSO_NIGHT          136
-#define POSO_NIGHT_UPDN     137
-#define POSO_BED_TXT        138
-#define POSO_BED            139
-#define POSO_BED_UPDN       140
-#define DRUG_COMPLEX_MODE   141
-#define FREE_TEXT_BUTTON    142
-#define ALD_BUTTON          143
-#define NS_BUTTON           144
-#define NR_BUTTON           145
-#define DRUG_INFORMATION    146
-#define BDM_SEARCH_INDIC    147
-#define BDM_SEARCH_SUBST    148
-#define BDM_SEARCH_ATC      149
-#define IDC_EVENT_EDIT      150
-#define IDC_EVENT_TXT       151
-#define IDC_ISSUE_BTN       152
+
+// Identifiers that are common to all NSPrescriptionBaseDlg derived dialogs
+// can be found at medicament.rh
+//
+// Identifiers that are specific to NEW_DRUG (use identifiers in range 200+)
+//
+
+#define DRUG_COMPLEX_MODE   200
+
+#define TRT_GROUP           210
+#define PRESCR_GROUP        220
+#define PRESCR_DURA_TXT     230
+#define PRESCR_DURA         231
+#define PRESCR_DURA_UPDN    232
+#define PRESCR_DURA_UNIT    233
+#define PRESCR_RENEW_TXT    234
+#define PRESCR_RENEW        235
+#define PRESCR_RENEW_UPDN   236
+#define PRESCR_RENEW_NBTXT  237
+#define POSO_GROUP          238
+#define POSO_MORNING_TXT    239
+#define POSO_MORNING        240
+#define POSO_MORNING_UPDN   241
+#define POSO_NOON_TXT       242
+#define POSO_NOON           243
+#define POSO_NOON_UPDN      244
+#define POSO_NIGHT_TXT      245
+#define POSO_NIGHT          246
+#define POSO_NIGHT_UPDN     247
+#define POSO_BED_TXT        248
+#define POSO_BED            249
+#define POSO_BED_UPDN       240
+#define NR_BUTTON           245
 
 // Dialogue PROP_PREO
 #define IDC_LISTVIEW_ACTUEL	101
@@ -126,9 +107,11 @@
 #define IDC_GLOBAL	        109
 #define IDC_LOCAL	          110
 #define IDC_ORDONNANCE	    111
-#define IDC_ORDO_SEL  	    112
-#define IDC_NEW_REF    	    113
-#define IDC_ADD_TO_REF    	114
+#define IDC_ORDO_DCI  	    112
+#define IDC_ORDO_SEL  	    113
+#define IDC_NEW_REF    	    114
+#define IDC_ADD_TO_REF    	115
+#define IDC_SWITCH_TO_VD    116
 
 // Dialogue NEW_MEDIC
 #define IDC_MEDIC_EDIT      101

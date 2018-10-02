@@ -17,7 +17,7 @@
 class NSDocumentsTank ;
 
 #include "nsdn\nsdochis.h"
-#include "nautilus\nsLdv_Vars.h"
+#include "nsldv\nsLdv_Vars.h"
 
 class _CLASSENSDN NSFrameDocuments : public NSRoot
 {

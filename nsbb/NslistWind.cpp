@@ -69,6 +69,7 @@
 // -----------------------------------------------------------------------------
 
 #include "partage\nsdivfct.h"
+#include "nssavoir\nspathor.h"
 #include "nsbb\nsbbtran.h"
 #include "nsbb\nsbbitem.h"
 #include "nsbb\nsbb.h"
@@ -86,7 +87,7 @@
 #include "nautilus\nssoapview.h"
 #include "nautilus\nshistdo.h"
 #include "nsbb\nsmanager.h"
-#include "nsepisod\nsldvuti.h"
+#include "nsldv\nsldvuti.h"
 #include "nsbb\ns_skins.h"
 #include "nsbb\nsbb_admin.rh"
 

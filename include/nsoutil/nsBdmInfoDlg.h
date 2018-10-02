@@ -146,6 +146,7 @@ class _NSOUTILCLASSE NSGenericBdmInfoDlg : public NSUtilDialog
     virtual void activatedInformation(int iIndex) = 0 ;
 
     bool isValidUrl(string sUrl) ;
+    bool isHtmlName(string sUrl) ;
     void openUrl(const string sUrl, const string sTitle) ;
 
   protected:
@@ -157,9 +158,12 @@ class _NSOUTILCLASSE NSGenericBdmInfoDlg : public NSUtilDialog
     void CmOk() ;
     void SetupWindow() ;
 
-    int  createButtons() ;
-    void resizeForButtons(int iCurrentBtnTopPos) ;
-    void relocateOkButton(int iCurrentBtnTopPos) ;
+    int    createButtons() ;
+    void   resizeForButtons(int iCurrentBtnTopPos) ;
+    void   relocateOkButton(int iCurrentBtnTopPos) ;
+
+    bool   isButtonableLink(const NsHtmlLink* pLink) const ;
+    size_t getButton4LinkCount() const ;
 
     virtual string            getTitle() = 0 ;
     virtual NsHtmlLinksArray* getLinks() = 0 ;

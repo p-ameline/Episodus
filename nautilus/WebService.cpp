@@ -12,9 +12,11 @@
 TWebServiceForm *WebServiceForm;
 //---------------------------------------------------------------------------
 __fastcall TWebServiceForm::TWebServiceForm(TComponent* Owner)
-	: TForm(Owner)
+	                         :TForm(Owner)
 {
+  pWebServicesWindow = (NSWebServiceWindow*) 0 ;
 }
+
 //---------------------------------------------------------------------------
 void __fastcall TWebServiceForm::ActionButtonClick(TObject *Sender)
 {
@@ -35,14 +37,11 @@ void __fastcall TWebServiceForm::pageNext(TObject *Sender)
 }
 //---------------------------------------------------------------------------
 
-
-
 void __fastcall TWebServiceForm::pageReload(TObject *Sender)
 {
 	Control->Refresh() ;
 }
 //---------------------------------------------------------------------------
-
 
 void __fastcall TWebServiceForm::loadStop(TObject *Sender)
 {
@@ -57,7 +56,7 @@ void __fastcall TWebServiceForm::NavigateErrorEvent(TObject *Sender,
   int iStatusCode = int(*StatusCode) ;
   AnsiString sUrl = AnsiString(*URL) ;
 
-  if (NULL != pWebServicesWindow)
+  if (pWebServicesWindow)
     pWebServicesWindow->NavigateErrorEvent(iStatusCode, string(sUrl.c_str())) ;
 }
 //---------------------------------------------------------------------------

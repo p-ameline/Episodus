@@ -30,6 +30,7 @@ class InterfaceLexiMed : public NSRoot
 	bool							isLibelleInDB(string sLibelle) ;
 	bool							isCodeInDB(string sCode) ;
 	string						getCode(string sLibelle, bool bAskUser = true, bool bForceAskUser = false) ;
+  string						getCodeForGeneric(string sLibelle, bool bAskUser = true, bool bForceAskUser = false) ;
 	bool							insertElem(string sLexique, string sCode, string sGrammaire, string sFreq) ;
 	bool							close() ;
 
@@ -43,8 +44,11 @@ class InterfaceLexiMed : public NSRoot
   bool              isUpper(char cToTest) ;
   void              removeBlanks(string *pLabel) ;
 
-	NSLexiMed					*pLexiMed ;
-  string            sNewFreeLMCode ;
+  bool              mustStopAfterThisOne() { return _bStopAfterThisOne ; }
+
+	NSLexiMed					*_pLexiMed ;
+  string            _sNewFreeLMCode ;
+  bool              _bStopAfterThisOne ;
 } ;
 
 #endif // __INTERFACELEXIMED_H__

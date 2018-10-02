@@ -39,7 +39,7 @@ PACKAGES = vclx40.bpi vcl40.bpi vcldb40.bpi vcldbx40.bpi bcbsmp40.bpi dclocx40.b
   qrpt40.bpi teeui40.bpi vclsmp40.bpi teedb40.bpi tee40.bpi ibsmp40.bpi \
   nmfast40.bpi inetdb40.bpi inet40.bpi
 # ---------------------------------------------------------------------------
-PATHCPP = .;ns_sgbd;nautilus;pilot
+PATHCPP = .;ns_sgbd;pilot
 PATHASM = .;
 PATHPAS = .;
 PATHRC = .;ns_sgbd;pilot

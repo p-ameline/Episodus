@@ -31,8 +31,8 @@ Boston, MA 02111-1307, USA.
 */
 
 #include "nautilus\nssuper.h"
-#include "nsdn\nsdochis.h"
-#include "nautilus\nsldvvue.h"
+// #include "nsdn\nsdochis.h"
+// #include "nautilus\nsldvvue.h"
 #include "nsbb\NSTip.h"
 
 #include <windef.h>

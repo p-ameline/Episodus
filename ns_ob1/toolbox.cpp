@@ -34,7 +34,7 @@
 */
 #include "ns_ob1\toolbox.h" // For function protypes
 #include "ns_ob1\BB1Object.h" // For BB1Object
-#include "nsepisod\nsldvuti.h"// For Time function
+#include "nsldv\nsldvuti.h"// For Time function
 #include "ns_ob1\BB1Types.h"  // For NULLPATHO
 #include "ns_ob1\BB1Class.h"
 

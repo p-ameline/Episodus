@@ -56,6 +56,7 @@ class NsFindDrugDialog : public NSUtilDialog
     bool           _bIsSelected ;
 
     string         _sOther ;
+    bool           _bStopAfterThisOne ;
 
     NsFindDrugDialog(TWindow* parent, NSContexte* pCtx, string *pLabel, NSPathoArray* pRecords) ;
     ~NsFindDrugDialog() ;
@@ -65,7 +66,10 @@ class NsFindDrugDialog : public NSUtilDialog
     void CmOk() ;
     void CmCancel() ;
     void CmOther() ;
+    void CmStop() ;
     void dblClick() ;
+
+    bool mustStopAfterThisOne() { return _bStopAfterThisOne ; }
 
     string getSelectedDrug() ;
 

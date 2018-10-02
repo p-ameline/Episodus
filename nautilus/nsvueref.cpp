@@ -84,6 +84,7 @@
 
 #include "nautilus\nsvueref.h"
 #include "nautilus\nscrdoc.h"		// pour récupérer sFichDecod
+#include "nautilus\nsmdiframe.h"
 
 #include "nsbb\nsattvaltools.h"
 

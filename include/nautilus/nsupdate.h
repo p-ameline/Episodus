@@ -12,7 +12,7 @@
 # define __NSUPDATE_H__
 
 # include "nautilus\nssuper.h"
-# include "nsepisod\nsldvuti.h"
+# include "nsldv\nsldvuti.h"
 # include "nsoutil\nsUpdateDlg.h"
 # include "curl\nscurl.h"
 

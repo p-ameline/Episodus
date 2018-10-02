@@ -71,6 +71,7 @@
 
 #include <owl\opensave.h>
 
+#include "nssavoir\nsBdmDriver.h"
 #include "nautilus\nssuper.h"
 #include "nautilus\nsrechdl.h"
 #include "nautilus\nsrechd2.h"
@@ -119,7 +120,7 @@
 #include "nsoutil\nsarcedit.h"
 // #include "nsoutil\nsInterfaces.h"
 #include "nautilus\nsInterface.h"
-#include "nsepisod\nsldvuti.h"
+#include "nsldv\nsldvuti.h"
 #include "nssavoir\nsgraphe.h"
 #include "dcodeur\decoder.h"
 #include "nsbb\nsdefArch.h"
@@ -127,7 +128,8 @@
 #include "nautilus\nsVenueDocView.h"
 #include "nautilus\nsCoopChartDV.h"
 #include "nautilus\nsVisual.h"
-#include "nautilus\nsPilotProxy.h"
+#include "nautilus\nsmdiframe.h"
+#include "nsepisod\nsPilotProxy.h"
 #include "nsepisod\nsToDo.h"
 
 # include "ns_ob1\nautilus-bbk.h"
@@ -2005,7 +2007,7 @@ NSPatientChoisi::goals_show(string sConcern)
 try
 {
 #ifndef __EPIPUMP__
-	if (NULL == _pDocLdv)
+	if ((NSLdvDocument*) NULL == _pDocLdv)
 		return ;
 	//
 	// On vérifie que la fenêtre n'est pas déjà ouverte
@@ -2059,7 +2061,7 @@ NSPatientChoisi::process_show(string sConcern)
 try
 {
 #ifndef __EPIPUMP__
-	if (NULL == _pDocLdv)
+	if ((NSLdvDocument*) NULL == _pDocLdv)
 		return ;
 	// On vérifie que la fenêtre n'est pas déjà ouverte
 	// Checking if the same window is not already open
@@ -2111,10 +2113,12 @@ NSPatientChoisi::followUp_show(string sConcern)
 try
 {
 #ifndef __EPIPUMP__
-	if (NULL == _pDocLdv)
+	if ((NSLdvDocument*) NULL == _pDocLdv)
 		return ;
+
 	// On vérifie que la fenêtre n'est pas déjà ouverte
 	// Checking if the same window is not already open
+  //
 	TView *pView = _pDocLdv->GetViewList() ;
   if (pView)
   {
@@ -2141,12 +2145,12 @@ try
 	}
 
 	NSDocViewManager dvManager(pContexte) ;
-	if (sConcern == "")
-		dvManager.createView(_pDocLdv, "FollowUp Management") ;
+	if (string("") == sConcern)
+		dvManager.createView(_pDocLdv, string("FollowUp Management")) ;
 	else
 	{
 		NSFollowUpView* pFUView = new NSFollowUpView(*_pDocLdv, sConcern) ;
-		dvManager.createView(_pDocLdv, "FollowUp Management", pFUView) ;
+		dvManager.createView(_pDocLdv, string("FollowUp Management"), pFUView) ;
 	}
 
 #endif // !__EPIPUMP__
@@ -2163,7 +2167,7 @@ NSPatientChoisi::curves_show(string sConcern)
 try
 {
 #ifndef __EPIPUMP__
-	if (NULL == _pDocLdv)
+	if ((NSLdvDocument*) NULL == _pDocLdv)
 		return ;
 
   if (string("") == sConcern)
@@ -2205,7 +2209,7 @@ try
 #ifndef __EPIPUMP__
 #ifndef __EPIBRAIN__
 
-	if (NULL == _pHealthDoc)
+	if ((NSHealthTeamDocument*) NULL == _pHealthDoc)
   	_pHealthDoc = new NSHealthTeamDocument(0, pContexte, _pHealthTeam) ;
 
 	TView* pView = _pHealthDoc->GetViewList() ;
@@ -2245,7 +2249,7 @@ try
 #ifndef __EPIPUMP__
 #ifndef __EPIBRAIN__
 
-	if (NULL == _pHealthDoc)
+	if ((NSHealthTeamDocument*) NULL == _pHealthDoc)
   	_pHealthDoc = new NSHealthTeamDocument(0, pContexte, _pHealthTeam) ;
 
 	TView* pView = _pHealthDoc->GetViewList() ;
@@ -5799,7 +5803,7 @@ try
 {
 #ifndef __EPIPUMP__
 
-  if ((NULL == pNodeArret) || pNodeArret->empty())
+  if (((VecteurString*) NULL == pNodeArret) || pNodeArret->empty())
     return false ;
 
   // temporairement on traite un seul noeud
@@ -5809,17 +5813,17 @@ try
   //
   LDVFRAME iFrame = ldvframeNotSpecified ;
   NSLdvDrug* pDrug = _pDocLdv->getTreatment(sNodeArret, iFrame) ;
-  if (NULL == pDrug)
+  if ((NSLdvDrug*) NULL == pDrug)
     return false ;
 
   iFrame = pDrug->getIFrame() ;
 
   NSFrameInformation* pFrameInfo = _pDocLdv->getFrames()->getFrameInformation(iFrame) ;
-  if (NULL == pFrameInfo)
+  if ((NSFrameInformation*) NULL == pFrameInfo)
     return false ;
 
   NSDocumentHisto* pDocument = pFrameInfo->findNode(sNodeArret) ;
-  if (NULL == pDocument)
+  if ((NSDocumentHisto*) NULL == pDocument)
     return false ;
 
 	// Health index found
@@ -5834,7 +5838,7 @@ try
   NSPatPathoArray PptNoyau(pContexte->getSuperviseur()) ;
   Noyau.initFromPatPatho(&PptNoyau) ;
 	if (PptNoyau.empty())
-		return false ;	//	// Recherche du noeud	//  PatPathoIter pptIt = PptNoyau.ChercherNoeud(sNodeArret) ;  if ((NULL == pptIt) || (PptNoyau.end() == pptIt))  	return false ;	// Recherche de la date de fermeture en sous-niveau du noeud	//	PatPathoIter pptItValeur ;	bool bDateTrouvee = false ;	int iColBase = (*pptIt)->getColonne() ;	pptIt++ ;	while ((PptNoyau.end() != pptIt) && ((*pptIt)->getColonne() > iColBase))	{
+		return false ;	//	// Recherche du noeud	//  PatPathoIter pptIt = PptNoyau.ChercherNoeud(sNodeArret) ;  if (((PatPathoIter) NULL == pptIt) || (PptNoyau.end() == pptIt))  	return false ;	// Recherche de la date de fermeture en sous-niveau du noeud	//	PatPathoIter pptItValeur ;	bool bDateTrouvee = false ;	int iColBase = (*pptIt)->getColonne() ;	pptIt++ ;	while ((PptNoyau.end() != pptIt) && ((*pptIt)->getColonne() > iColBase))	{
 		string sElemLex = (*pptIt)->getLexique() ;
 		string sSens ;
 		pContexte->getDico()->donneCodeSens(&sElemLex, &sSens) ;
@@ -5846,10 +5850,10 @@ try
       {
       	pptIt++ ;
         int iLigneBase = (*pptIt)->getLigne() ;
-        string sUnite  = "" ;
-        string sFormat = "" ;
-        string sValeur = "" ;
-        string sTemp   = "" ;
+        string sUnite  = string("") ;
+        string sFormat = string("") ;
+        string sValeur = string("") ;
+        string sTemp   = string("") ;
 
         while ((pptIt != PptNoyau.end()) &&
                             ((*pptIt)->getLigne() == iLigneBase))
@@ -5947,16 +5951,16 @@ try
 {
 #ifndef __EPIPUMP__
 
-	if ((NULL == pPPT) || (string("") == motherNode))
+	if (((NSPatPathoArray*) NULL == pPPT) || (string("") == motherNode))
 		return false ;
 
   LDVFRAME iFrame = ldvframeNotSpecified ;
   NSLdvDrug* pDrug = _pDocLdv->getTreatment(motherNode, iFrame) ;
-  if (NULL == pDrug)
+  if ((NSLdvDrug*) NULL == pDrug)
     return false ;
 
 	DocumentIter iterDoc = getFrameIndex(iFrame) ;
-	if (NULL == iterDoc)
+	if ((DocumentIter) NULL == iterDoc)
 		return false ;
 
 	// Health index found
@@ -5972,7 +5976,7 @@ try
   Noyau.initFromPatPatho(&PptNoyau) ;
 
   if (PptNoyau.empty())
-  	return false ;  //  // Recherche du noeud  //  PatPathoIter pptIt = PptNoyau.ChercherNoeud(motherNode) ;  if ((NULL == pptIt) || (PptNoyau.end() == pptIt))  	return false ;	PptNoyau.InserePatPathoFille(pptIt, pPPT) ;
+  	return false ;  //  // Recherche du noeud  //  PatPathoIter pptIt = PptNoyau.ChercherNoeud(motherNode) ;  if (((PatPathoIter) NULL == pptIt) || (PptNoyau.end() == pptIt))  	return false ;	PptNoyau.InserePatPathoFille(pptIt, pPPT) ;
 
 	if (false == bSave)
 		return true ;
@@ -6021,11 +6025,11 @@ try
 
   // temporairement on traite un seul noeud
 	string sNodeMedic = *(*(pNodeMedic->begin())) ;  LDVFRAME   iFrame = ldvframeNotSpecified ;  NSLdvDrug* pDrug  = _pDocLdv->getTreatment(sNodeMedic, iFrame) ;
-  if (NULL == pDrug)
+  if ((NSLdvDrug*) NULL == pDrug)
     return false ;
 
 	DocumentIter iterDoc = getFrameIndex(iFrame) ;
-	if (NULL == iterDoc)
+	if ((DocumentIter) NULL == iterDoc)
 		return false ;
 	if (pNodeMedic->empty())
   	return false ;
@@ -6043,7 +6047,7 @@ try
   Noyau.initFromPatPatho(&PptNoyau) ;
 
   if (PptNoyau.empty())
-  	return false ;  //  // Recherche du noeud  //  PatPathoIter pptIt = PptNoyau.ChercherNoeud(sNodeMedic) ;  if ((NULL == pptIt) || (PptNoyau.end() == pptIt))  	return false ;	// Recherche de la dernière phase en sous-niveau du noeud  //  PatPathoIter pptItValeur ;  bool bEnterPhase = false ;  int iColBase = (*pptIt)->getColonne() ;  int iColPhase ;  pptIt++ ;  while ((PptNoyau.end() != pptIt) && ((*pptIt)->getColonne() > iColBase))  {
+  	return false ;  //  // Recherche du noeud  //  PatPathoIter pptIt = PptNoyau.ChercherNoeud(sNodeMedic) ;  if (((PatPathoIter) NULL == pptIt) || (PptNoyau.end() == pptIt))  	return false ;	// Recherche de la dernière phase en sous-niveau du noeud  //  PatPathoIter pptItValeur ;  bool bEnterPhase = false ;  int iColBase = (*pptIt)->getColonne() ;  int iColPhase ;  pptIt++ ;  while ((PptNoyau.end() != pptIt) && ((*pptIt)->getColonne() > iColBase))  {
   	string sElemLex = (*pptIt)->getLexique() ;
     string sSens ;
     pContexte->getDico()->donneCodeSens(&sElemLex, &sSens) ;
@@ -6051,16 +6055,16 @@ try
     if ((*pptIt)->getColonne() == iColBase+1)
     {
     	// Dates
-      if (sSens == "KPHAT")
+      if (string("KPHAT") == sSens)
       {
-      	if (!bEnterPhase)
+      	if (false == bEnterPhase)
         	bEnterPhase = true ;
 
         iColPhase = (*pptIt)->getColonne() ;
         pptIt++ ;
 
         // on "skippe" la phase
-        while ((pptIt != PptNoyau.end()) && ((*pptIt)->getColonne() > iColPhase))
+        while ((PptNoyau.end() != pptIt) && ((*pptIt)->getColonne() > iColPhase))
         	pptIt++ ;
       }
       else if (bEnterPhase)
@@ -6166,8 +6170,66 @@ catch (...)
 }
 }
 
+/**
+ *  Replace Lexicon code for a given node
+ */
 bool
-NSPatientChoisi::CreeOrdonnance(bool bGereALD)
+NSPatientChoisi::SwitchElementLexicon(ArrayLdvDrugs* pModifiedDrugs)
+{
+  if (((ArrayLdvDrugs*) NULL == pModifiedDrugs) || pModifiedDrugs->empty())
+    return false ;
+
+  drugsIter it = pModifiedDrugs->begin() ;
+
+  string sNodeId = (*it)->getNoeud() ;
+
+try
+{
+	// Recherche du document
+	// Looking for document
+  //
+  NSFrameInformation* pFrameInfo = _pDocLdv->getFrameForNode(sNodeId) ;
+  if ((NSFrameInformation*) NULL == pFrameInfo)
+    return false ;
+
+  NSDocumentHisto* pDocHisto = pFrameInfo->findNode(sNodeId) ;
+  if ((NSDocumentHisto*) NULL == pDocHisto)
+    return false ;
+
+	// Health index found
+	NSDocumentInfo Docum(pContexte) ;
+
+  NSDocumentData InfoData ;
+  pDocHisto->initFromData(&InfoData) ;
+  Docum.setData(&InfoData) ;
+
+	NSNoyauDocument Noyau(0, &Docum, 0, pContexte, false, true) ;
+
+  NSPatPathoArray PptNoyau(pContexte->getSuperviseur()) ;
+  Noyau.initFromPatPatho(&PptNoyau) ;
+
+  if (PptNoyau.empty())
+  	return false ;  for ( ; pModifiedDrugs->end() != it ; it++)  {    //    // Finding the node to be modified and change its lexicon code    //    PatPathoIter pptIt = PptNoyau.ChercherNoeud((*it)->getNoeud()) ;    if (pptIt && (PptNoyau.end() != pptIt))      (*pptIt)->setLexique((*it)->getLexique()) ;  }  // Enregistrement du document modifié	Noyau.setPatPatho(&PptNoyau) ;
+  Noyau.enregistrePatPatho() ;
+
+	// Mise à jour de l'historique
+	/* bool bReload = */ Noyau.chargePatPatho() ;
+	Noyau.initFromPatPatho(&PptNoyau) ;
+	_pDocHis->Rafraichir(&Docum, &PptNoyau) ;
+
+	return true ;
+}
+catch (...)
+{
+	erreur("Exception SupprimerElement.", standardError, 0) ;
+	return false ;
+}
+}
+
+// Create a prescription document
+//
+bool
+NSPatientChoisi::CreeOrdonnance(bool bGereALD, bool bForceSecured)
 {
 try
 {
@@ -6206,6 +6268,8 @@ try
 
     if (false == PathoIndex.empty())
     {
+      // Initialize the list of nodes and Lexion codes for non ALD and ALD drugs 
+      //
       initNewPrescriptionArrays(&PathoIndex, bGereALD, &NewTraitement, &NewLexique, &NewTrtALD, &NewLexALD) ;
       initRenewPrescriptionArrays(&PathoIndex, bGereALD, &NewTraitement, &NewLexique, &NewTrtALD, &NewLexALD) ;
     }
@@ -6215,17 +6279,17 @@ try
   if (pTreatmentsDocs && (false == pTreatmentsDocs->empty()))
   {
     for (DocumentIter i = pTreatmentsDocs->begin() ; pTreatmentsDocs->end() != i ; i++)
-    if (*i)
-    {
-      NSPatPathoArray PathoDrug(pContexte->getSuperviseur()) ;
-      (*i)->initFromPatPatho(&PathoDrug) ;
-
-      if (false == PathoDrug.empty())
+      if (*i)
       {
-        initNewPrescriptionArrays(&PathoDrug, bGereALD, &NewTraitement, &NewLexique, &NewTrtALD, &NewLexALD) ;
-        initRenewPrescriptionArrays(&PathoDrug, bGereALD, &NewTraitement, &NewLexique, &NewTrtALD, &NewLexALD) ;
+        NSPatPathoArray PathoDrug(pContexte->getSuperviseur()) ;
+        (*i)->initFromPatPatho(&PathoDrug) ;
+
+        if (false == PathoDrug.empty())
+        {
+          initNewPrescriptionArrays(&PathoDrug, bGereALD, &NewTraitement, &NewLexique, &NewTrtALD, &NewLexALD) ;
+          initRenewPrescriptionArrays(&PathoDrug, bGereALD, &NewTraitement, &NewLexique, &NewTrtALD, &NewLexALD) ;
+        }
       }
-    }
   }
 
 	// Le traitement est constitué
@@ -6235,7 +6299,9 @@ try
 	// constitution de la patpatho correspondant au nouveau traitement
 	NSPatPathoArray PatPatho(pContexte->getSuperviseur()) ;
 
-  if (false == buildPrescriptionPatpatho(pFrameInformation, &PatPatho, bGereALD, &NewTraitement, &NewLexique, &NewTrtALD, &NewLexALD))
+  bool bSecuredPrescription = false ;
+
+  if (false == buildPrescriptionPatpatho(pFrameInformation, &PatPatho, bGereALD, &NewTraitement, &NewLexique, &NewTrtALD, &NewLexALD, false, bSecuredPrescription))
 		return false ;
 
   if (PatPatho.empty() == true)
@@ -6319,16 +6385,16 @@ catch (...)
 }
 
 bool
-NSPatientChoisi::CreeOrdonnanceFromSelection(bool bGereALD, VecteurString* pDrugsRefs)
+NSPatientChoisi::CreeOrdonnanceFromSelection(bool bGereALD, VecteurString* pDrugsRefs, bool bDCI, bool bForceSecured)
 {
 try
 {
 #ifndef __EPIPUMP__
 
-	if ((NULL == pDrugsRefs) || pDrugsRefs->empty())
+	if (((VecteurString*) NULL == pDrugsRefs) || pDrugsRefs->empty())
 		return false ;
 
-	if (!(pContexte->userHasPrivilege(NSContexte::createDocument, -1, -1, string(""), string(""), NULL, NULL)))
+	if (false == pContexte->userHasPrivilege(NSContexte::createDocument, -1, -1, string(""), string(""), NULL, NULL))
 	{
 		string sErrorText = pContexte->getSuperviseur()->getText("privilegeManagement", "insufficientRights") ;
     pContexte->getSuperviseur()->trace(&sErrorText, 1, NSSuper::trError) ;
@@ -6339,11 +6405,11 @@ try
   // Getting Frame information for Health
   //
   NSFrameInformationArray *pFrames = _pDocLdv->getFrames() ;
-  if (NULL == pFrames)
+  if ((NSFrameInformationArray*) NULL == pFrames)
     return false ;
 
   NSFrameInformation* pFrameInformation = pFrames->getFrameInformation(ldvframeHealth) ;
-  if (NULL == pFrameInformation)
+  if ((NSFrameInformation*) NULL == pFrameInformation)
     return false ;
 
 	VecteurString NewTraitement ;
@@ -6352,21 +6418,29 @@ try
 	VecteurString NewTrtALD ;
 	VecteurString NewLexALD ;
 
+  // Browse drugs' nodes to sort ALD and non ALD drugs
+  //
 	EquiItemIter itemsIter = pDrugsRefs->begin() ;
 	for ( ; pDrugsRefs->end() != itemsIter ; itemsIter++)
 	{
   	string sNodeMedic = **itemsIter ;
 
+    // Get the node in its tree
+    //
     NSDocumentHisto* pFoundDoc = pFrameInformation->findNode(sNodeMedic) ;
     if (pFoundDoc)
     {
+      // Get the project tree that contains this node
+      //
       NSPatPathoArray PathoIndex(pContexte->getSuperviseur()) ;
       pFoundDoc->initFromPatPatho(&PathoIndex) ;
 
       if (false == PathoIndex.empty())
       {
+        // Find the node in the project tree
+        //
         PatPathoIter pptIt = PathoIndex.ChercherNoeud(sNodeMedic) ;
-        if ((NULL != pptIt) && (PathoIndex.end() != pptIt))
+        if (((PatPathoIter) NULL != pptIt) && (PathoIndex.end() != pptIt))
         {
           string sCodeMedic = (*pptIt)->getLexique() ;
 
@@ -6400,7 +6474,9 @@ try
 	// constitution de la patpatho correspondant au nouveau traitement
 	NSPatPathoArray PatPatho(pContexte->getSuperviseur()) ;
 
-  if (false == buildPrescriptionPatpatho(pFrameInformation, &PatPatho, bGereALD, &NewTraitement, &NewLexique, &NewTrtALD, &NewLexALD))
+  bool bSecuredPrescription = false ;
+
+  if (false == buildPrescriptionPatpatho(pFrameInformation, &PatPatho, bGereALD, &NewTraitement, &NewLexique, &NewTrtALD, &NewLexALD, bDCI, bSecuredPrescription))
 		return false ;
 
   if (PatPatho.empty() == true)
@@ -6412,7 +6488,35 @@ try
 	NSCRDocument CRDoc(0, pContexte) ;
 	CRDoc.setPatPatho(&PatPatho) ;
 
-	bool existeInfo = CRDoc.Referencer("ZCN00", "Ordonnance", "", "", true, false) ;
+  // Add BdM version
+  //
+  NSPatPathoArray PatPathoSpecificInfo(pContexte->getSuperviseur()) ;
+  NSBdmDriver* pDriver = pContexte->getBdmDriver() ;
+  if (pDriver)
+  {
+    string sBamVersion = pDriver->getBamVersionId() ;
+
+    if (string("") != sBamVersion)
+    {
+      PatPathoSpecificInfo.ajoutePatho("0BDCM1", 0) ;
+
+      Message Msg ;
+      Msg.SetTexteLibre(sBamVersion) ;
+      PatPathoSpecificInfo.ajoutePatho(string("£?????"), &Msg, 1) ;
+    }
+  }
+
+	bool existeInfo = false ;
+
+  if (PatPathoSpecificInfo.empty())
+    existeInfo = CRDoc.Referencer(string("ZCN00"), string("Ordonnance"), string(""), string(""), true, false) ;
+  else
+    existeInfo = CRDoc.Referencer(string("ZCN00"), string("Ordonnance"), string(""),
+                     string(""), true, false, string(""),
+                     NSRootLink::personDocument, (NSPersonGraphManager*) 0,
+                     string("_User_"), string(""), string(""), string(""),
+                     string(""), string(""), NSRootLink::viewOfDocument,
+                     &PatPathoSpecificInfo) ;
 
 	if (existeInfo)
 		existeInfo = CRDoc.enregistrePatPatho() ;
@@ -6486,11 +6590,11 @@ catch (...)
 bool
 NSPatientChoisi::initNewPrescriptionArrays(NSPatPathoArray* pPpt, bool bGereALD, VecteurString* pNewTraitement, VecteurString* pNewLexique, VecteurString* pNewTrtALD, VecteurString* pNewLexALD)
 {
-	if ((NULL == pPpt) || (true == pPpt->empty()))
+	if (((NSPatPathoArray*) NULL == pPpt) || (true == pPpt->empty()))
 		return false ;
 
 	PatPathoIter pptIt = pPpt->ChercherItem("N00001") ;
-	if ((NULL == pptIt) || (pPpt->end() == pptIt))
+	if (((PatPathoIter) NULL == pptIt) || (pPpt->end() == pptIt))
 		return false ;   // cas aucun traitement déjà effectué
 
 	NSLinkManager* pGraphe = _GraphPerson.getLinkManager() ;
@@ -6593,9 +6697,9 @@ NSPatientChoisi::initNewPrescriptionArrays(NSPatPathoArray* pPpt, bool bGereALD,
       // On regarde ici si le médicament peut appartenir au nouveau traitement
       // vérification des dates d'ouverture et de fermeture
       // vérification des formats (sFormat est du type £D0;03)
-      if ((bAvecOuverture) && (sFormat1 != "") && ((sFormat1[1] == 'D') || (sFormat1[1] == 'T')) && (sValeur1 != ""))
+      if ((bAvecOuverture) && (string("") != sFormat1) && (('D' == sFormat1[1]) || ('T' == sFormat1[1])) && (string("") != sValeur1))
       {
-      	if ((sUnite1 == "2DA01") || (sUnite1 == "2DA02"))
+      	if ((string("2DA01") == sUnite1) || (string("2DA02") == sUnite1))
         {
         	// Si le date d'ouverture est >= dateJour - 1 :
           // on retient le noeud pour ajouter au nouveau traitement
@@ -6605,7 +6709,7 @@ NSPatientChoisi::initNewPrescriptionArrays(NSPatPathoArray* pPpt, bool bGereALD,
           {
           	// Si le médicament n'a pas de date de fermeture (cas chronique)
             // ou si la date de fermeture est future
-            if ((!bAvecFermeture) ||
+            if ((false == bAvecFermeture) ||
                         		  ((sFormat2 != "") && ((sFormat2[1] == 'D') || (sFormat2[1] == 'T')) &&
                                (sValeur2 != "") && ((sUnite2 == "2DA01") ||
                                											(sUnite2 == "2DA02")) &&
@@ -6791,29 +6895,61 @@ NSPatientChoisi::initRenewPrescriptionArrays(NSPatPathoArray* pPpt, bool bGereAL
 	return true ;
 }
 
+/**
+ * Build a prescription document patpatho
+ */
 bool
-NSPatientChoisi::buildPrescriptionPatpatho(NSFrameInformation* pFrameInfo, NSPatPathoArray* pPrescriPpt, bool bGereALD, VecteurString* pNewTraitement, VecteurString* pNewLexique, VecteurString* pNewTrtALD, VecteurString* pNewLexALD)
+NSPatientChoisi::buildPrescriptionPatpatho(NSFrameInformation* pFrameInfo, NSPatPathoArray* pPrescriPpt, bool bGereALD, VecteurString* pNewTraitement, VecteurString* pNewLexique, VecteurString* pNewTrtALD, VecteurString* pNewLexALD, bool bDCI, bool bMustSecure)
 {
-	if ((NULL == pFrameInfo) || (NULL == pPrescriPpt))
+	if (((NSFrameInformation*) NULL == pFrameInfo) || ((NSPatPathoArray*) NULL == pPrescriPpt))
 		return false ;
 
 	pPrescriPpt->vider() ;
-	pPrescriPpt->ajoutePatho("ZORDO1", 0) ;
+
+  string sRootCode = string("ZORDO1") ;
+
+  // Secured prescription
+  //
+  if (bMustSecure)
+    sRootCode = string("ZORDS1") ;
+
+  // Bizone ?
+  //
+  else if (bGereALD && pNewTrtALD && (false == pNewTrtALD->empty()))
+    sRootCode = string("ZORDB1") ;
+
+	pPrescriPpt->ajoutePatho(sRootCode, 0) ;
+
+  // Add known drug allergies
+  //
+  NSPatPathoArray allergiesPpt(pContexte->getSuperviseur()) ;
+  getDrugsAllergiesPatpatho(&allergiesPpt) ;
+
+  if (false == allergiesPpt.empty())
+  {
+    pPrescriPpt->ajoutePatho(string("EALMD1"), 1) ;
+    pPrescriPpt->InserePatPatho(pPrescriPpt->end(), &allergiesPpt, 2) ;
+  }
 
 	if (false == bGereALD)
-		return buildSimplePrescriptionPatpatho(pFrameInfo, pPrescriPpt, pNewTraitement, pNewLexique) ;
+		return buildSimplePrescriptionPatpatho(pFrameInfo, pPrescriPpt, pNewTraitement, pNewLexique, bDCI) ;
 	else
-  	return buildBizonePrescriptionPatpatho(pFrameInfo, pPrescriPpt, pNewTraitement, pNewLexique, pNewTrtALD, pNewLexALD) ;
+  	return buildBizonePrescriptionPatpatho(pFrameInfo, pPrescriPpt, pNewTraitement, pNewLexique, pNewTrtALD, pNewLexALD, bDCI) ;
 }
 
+/**
+ * Build a prescription document patpatho for ALD and non ALD drugs
+ */
 bool
-NSPatientChoisi::buildBizonePrescriptionPatpatho(NSFrameInformation* pFrameInfo, NSPatPathoArray* pPrescriPpt, VecteurString* pNewTraitement, VecteurString* pNewLexique, VecteurString* pNewTrtALD, VecteurString* pNewLexALD)
+NSPatientChoisi::buildBizonePrescriptionPatpatho(NSFrameInformation* pFrameInfo, NSPatPathoArray* pPrescriPpt, VecteurString* pNewTraitement, VecteurString* pNewLexique, VecteurString* pNewTrtALD, VecteurString* pNewLexALD, bool bDCI)
 {
-	if ((NULL == pFrameInfo) || (NULL == pPrescriPpt))
+	if (((NSFrameInformation*) NULL == pFrameInfo) || ((NSPatPathoArray*) NULL == pPrescriPpt))
 		return false ;
 
-	if ((NULL == pNewLexique) || (NULL == pNewTraitement) ||
-      (NULL == pNewLexALD)  || (NULL == pNewTrtALD))
+	if (((VecteurString*) NULL == pNewLexique) ||
+      ((VecteurString*) NULL == pNewTraitement) ||
+      ((VecteurString*) NULL == pNewLexALD)  ||
+      ((VecteurString*) NULL == pNewTrtALD))
 		return false ;
 
 	NSPatPathoArray SousPPT(pContexte->getSuperviseur()) ;
@@ -6827,7 +6963,7 @@ NSPatientChoisi::buildBizonePrescriptionPatpatho(NSFrameInformation* pFrameInfo,
   	EquiItemIter iALD = pNewLexALD->begin() ;
     EquiItemIter jALD = pNewTrtALD->begin() ;
 
-    pPrescriPpt->ajoutePatho("GPALD1", 1) ;
+    pPrescriPpt->ajoutePatho(string("GPALD1"), 1) ;
 
     while ((pNewLexALD->end() != iALD) && (pNewTrtALD->end() != jALD))
     {
@@ -6837,6 +6973,8 @@ NSPatientChoisi::buildBizonePrescriptionPatpatho(NSFrameInformation* pFrameInfo,
       //
       string sNodeId = *(*jALD) ;
 
+      // Get the project tree that contains this node
+      //
       NSDocumentHisto* pFoundDoc = pFrameInfo->findNode(sNodeId) ;
       if (pFoundDoc)
       {
@@ -6845,8 +6983,10 @@ NSPatientChoisi::buildBizonePrescriptionPatpatho(NSFrameInformation* pFrameInfo,
 
         if (false == PathoIndex.empty())
         {
+          // Get the node inside the project tree
+          //
           PatPathoIter pptItTrait = PathoIndex.ChercherNoeud(sNodeId) ;
-          if ((NULL != pptItTrait) && (PathoIndex.end() != pptItTrait))
+          if (((PatPathoIter) NULL != pptItTrait) && (PathoIndex.end() != pptItTrait))
           {
             string sElemLex = (*pptItTrait)->getLexique() ;
             string sSens ;
@@ -6873,10 +7013,21 @@ NSPatientChoisi::buildBizonePrescriptionPatpatho(NSFrameInformation* pFrameInfo,
             }
             else
             {
+              // Get the sub-patpatho of the node
+              //
               pContexte->getPatient()->DonneSousArray(*(*jALD), &SousPPT) ;
 
+              string sDrugCode = **iALD ;
+
+              if (bDCI)
+              {
+                sDrugCode = pContexte->getUtilisateur()->getVirtualDrug(sDrugCode) ;
+                if (string("") == sDrugCode)
+                  sDrugCode = **iALD ;
+              }
+
               // on reconstitue la patpatho à partir du noeud
-              pPrescriPpt->ajoutePatho(*(*iALD), 2) ;
+              pPrescriPpt->ajoutePatho(sDrugCode, 2) ;
               // Insertion en queue (iter doit être ici egal à end())
               pPrescriPpt->InserePatPatho(pPrescriPpt->end(), &SousPPT, 3) ;
             }
@@ -6897,7 +7048,7 @@ NSPatientChoisi::buildBizonePrescriptionPatpatho(NSFrameInformation* pFrameInfo,
   	EquiItemIter iNonALD = pNewLexique->begin() ;
     EquiItemIter jNonALD = pNewTraitement->begin() ;
 
-    pPrescriPpt->ajoutePatho("GPCOD1", 1) ;
+    pPrescriPpt->ajoutePatho(string("GPCOD1"), 1) ;
 
     while ((pNewLexique->end() != iNonALD) && (pNewLexALD->end() != jNonALD))
     {
@@ -6916,14 +7067,14 @@ NSPatientChoisi::buildBizonePrescriptionPatpatho(NSFrameInformation* pFrameInfo,
         if (false == PathoIndex.empty())
         {
           PatPathoIter pptItTrait = PathoIndex.ChercherNoeud(sNodeId) ;
-          if ((NULL != pptItTrait) && (PathoIndex.end() != pptItTrait))
+          if (((PatPathoIter) NULL != pptItTrait) && (PathoIndex.end() != pptItTrait))
           {
             string sElemLex = (*pptItTrait)->getLexique() ;
             string sSens ;
             pContexte->getDico()->donneCodeSens(&sElemLex, &sSens) ;
             SousPPT.vider() ;
 
-            if (sSens == "GRENT")
+            if (string("GRENT") == sSens)
             {
               // In which frame are we working?
               LDVFRAME iFrame = ldvframeNotSpecified ;
@@ -6945,8 +7096,17 @@ NSPatientChoisi::buildBizonePrescriptionPatpatho(NSFrameInformation* pFrameInfo,
             {
               pContexte->getPatient()->DonneSousArray(*(*jNonALD), &SousPPT) ;
 
+              string sDrugCode = **iNonALD ;
+
+              if (bDCI)
+              {
+                sDrugCode = pContexte->getUtilisateur()->getVirtualDrug(sDrugCode) ;
+                if (string("") == sDrugCode)
+                  sDrugCode = **iNonALD ;
+              }
+
               // on reconstitue la patpatho à partir du noeud
-              pPrescriPpt->ajoutePatho(*(*iNonALD), 2) ;
+              pPrescriPpt->ajoutePatho(sDrugCode, 2) ;
               // Insertion en queue (iter doit être ici egal à end())
               pPrescriPpt->InserePatPatho(pPrescriPpt->end(), &SousPPT, 3) ;
             }
@@ -6962,14 +7122,14 @@ NSPatientChoisi::buildBizonePrescriptionPatpatho(NSFrameInformation* pFrameInfo,
 }
 
 bool
-NSPatientChoisi::buildSimplePrescriptionPatpatho(NSFrameInformation* pFrameInfo, NSPatPathoArray* pPrescriPpt, VecteurString* pNewTraitement, VecteurString* pNewLexique)
+NSPatientChoisi::buildSimplePrescriptionPatpatho(NSFrameInformation* pFrameInfo, NSPatPathoArray* pPrescriPpt, VecteurString* pNewTraitement, VecteurString* pNewLexique, bool bDCI)
 {
-	if ((NULL == pFrameInfo) || (NULL == pPrescriPpt))
+	if (((NSFrameInformation*) NULL == pFrameInfo) || ((NSPatPathoArray*) NULL == pPrescriPpt))
 		return false ;
 
-	if ((NULL == pNewLexique) || (true == pNewLexique->empty()))
+	if (((VecteurString*) NULL == pNewLexique) || (true == pNewLexique->empty()))
 		return false ;
-	if ((NULL == pNewTraitement) || (true == pNewTraitement->empty()))
+	if (((VecteurString*) NULL == pNewTraitement) || (true == pNewTraitement->empty()))
 		return false ;
 
 	NSPatPathoArray SousPPT(pContexte->getSuperviseur()) ;
@@ -7024,8 +7184,17 @@ NSPatientChoisi::buildSimplePrescriptionPatpatho(NSFrameInformation* pFrameInfo,
             // constitution de la sous-patpatho du noeud
             pContexte->getPatient()->DonneSousArray(*(*j), &SousPPT) ;
 
+            string sDrugCode = **i ;
+
+            if (bDCI)
+            {
+              sDrugCode = pContexte->getUtilisateur()->getVirtualDrug(sDrugCode) ;
+              if (string("") == sDrugCode)
+                sDrugCode = **i ;
+            }
+
             // on reconstitue la patpatho à partir du noeud
-            pPrescriPpt->ajoutePatho(*(*i), 1) ;
+            pPrescriPpt->ajoutePatho(sDrugCode, 1) ;
             // Insertion en queue (iter doit être ici egal à end())
             pPrescriPpt->InserePatPatho(pPrescriPpt->end(), &SousPPT, 2) ;
           }
@@ -7039,6 +7208,62 @@ NSPatientChoisi::buildSimplePrescriptionPatpatho(NSFrameInformation* pFrameInfo,
   return true ;
 }
 
+void
+NSPatientChoisi::getDrugsAllergiesPatpatho(NSPatPathoArray* pAllergiesPpt)
+{
+  if ((NSPatPathoArray*) NULL == pAllergiesPpt)
+    return ;
+
+  // Find the proper chapter in synthesis
+  //
+  NSSearchStruct searchStruct ;
+  string sSynthesisPath = string("ZSYNT/QANTP/EALMD") ;
+
+  bool bOk = ChercheChemin(sSynthesisPath, &searchStruct) ;
+  if ((false == bOk) || (NSSearchStruct::foundNothing == searchStruct.getFoundStatus()))
+    return ;
+
+  std::string date   = string("") ;
+  std::string sNoeud = string("") ;
+
+  MappingNSSearchResult::MMapIt it = searchStruct.getFoundNodes()->begin() ;
+  searchStruct.getFoundNodes()->fullRData(it, date, sNoeud) ;
+
+  NSPatPathoArray Ppt(pContexte->getSuperviseur()) ;
+
+  // Get its ppt
+  //
+  DonneArray(sNoeud, &Ppt) ;
+  if (Ppt.empty())
+    return ;
+
+  for (PatPathoIter iter = Ppt.begin() ; Ppt.end() != iter ;  iter++)
+  {
+    // Get node label
+    //
+    string sElemLex = (*iter)->getLexique() ;
+
+    if (('_' == sElemLex[0]) || ('I' == sElemLex[0]) || ('8' == sElemLex[0]) ||
+        ('N' == sElemLex[0]) || ('O' == sElemLex[0]))
+    {
+      pAllergiesPpt->ajoutePatho(sElemLex, 0) ;
+    }
+    else
+    {
+      string sSens ;
+      pContexte->getDico()->donneCodeSens(&sElemLex, &sSens) ;
+
+      if ((string("£??") == sSens) || (string("£CL") == sSens))
+      {
+        Message Msg ;
+        Msg.SetLexique(sElemLex) ;
+        Msg.SetTexteLibre((*iter)->getTexteLibre()) ;
+        pAllergiesPpt->ajoutePatho(sElemLex, &Msg, 0) ;
+      }
+    }
+  }
+}
+
 DocumentIter
 NSPatientChoisi::getFrameIndex(LDVFRAME iFrame, bool bVerbose)
 {
@@ -7049,7 +7274,7 @@ DocumentIter
 NSPatientChoisi::findFrameIndex(string sRootCode, bool bVerbose)
 {
   if (string("") == sRootCode)
-    return NULL ;
+    return (DocumentIter) 0 ;
 
   string sRootSens = string("") ;
   pContexte->getDico()->donneCodeSens(&sRootCode, &sRootSens) ;
@@ -7060,15 +7285,18 @@ NSPatientChoisi::findFrameIndex(string sRootCode, bool bVerbose)
     pContexte->getSuperviseur()->trace(&sErrorText, 1, NSSuper::trError) ;
     if (bVerbose)
 		  erreur(sErrorText.c_str(), standardError, 0, pContexte->GetMainWindow()->GetHandle()) ;
-		return NULL ;
+		return (DocumentIter) 0 ;
 	}
-	if (_pDocHis->getVectDocument()->empty())
+
+  NSDocHistoArray* pVectDocument = _pDocHis->getVectDocument() ;
+
+	if (((NSDocHistoArray*) NULL == pVectDocument) || pVectDocument->empty())
 	{
     string sErrorText = pContexte->getSuperviseur()->getText("documentManagementErrors", "emptyHistoryManager") ;
     pContexte->getSuperviseur()->trace(&sErrorText, 1, NSSuper::trError) ;
     if (bVerbose)
 		  erreur(sErrorText.c_str(), standardError, 0, pContexte->GetMainWindow()->GetHandle()) ;
-		return NULL ;
+		return (DocumentIter) 0 ;
 	}
 
 	// Recherche du document "Index de santé"
@@ -7079,8 +7307,8 @@ NSPatientChoisi::findFrameIndex(string sRootCode, bool bVerbose)
 	while (bSearchIndex)
 	{
 		bool bContinuer = true ;
-		iterDoc = _pDocHis->getVectDocument()->begin() ;
-		while ((_pDocHis->getVectDocument()->end() != iterDoc) && bContinuer)
+		iterDoc = pVectDocument->begin() ;
+		while ((pVectDocument->end() != iterDoc) && bContinuer)
 		{
       NSPatPathoArray PPT(pContexte->getSuperviseur()) ;
       (*iterDoc)->initFromPatPatho(&PPT) ;
@@ -7098,7 +7326,7 @@ NSPatientChoisi::findFrameIndex(string sRootCode, bool bVerbose)
 		}
 
 		// Index de santé non trouvé - Health index not found
-		if (iterDoc == _pDocHis->getVectDocument()->end())
+		if (pVectDocument->end() == iterDoc)
 		{
 			// En MUE on signale une erreur car l'index de santé est normalement créé
       // lors de l'initialisation du patient (méthode NSPatientChoisi::CreeRootDocs())
@@ -7127,8 +7355,8 @@ NSPatientChoisi::findFrameIndex(string sRootCode, bool bVerbose)
 	}
 
     // ???????????????????
-	if (_pDocHis->getVectDocument()->end() == iterDoc)
-		return NULL ;
+	if (pVectDocument->end() == iterDoc)
+		return (DocumentIter) 0 ;
 
   return iterDoc ;
 }
@@ -7155,6 +7383,32 @@ DocumentIter
 NSPatientChoisi::findSocialIndex()
 {
   return findFrameIndex(string("ZPSOC1")) ;
+}
+
+/**
+ * Get the drugs view, if opened
+ */
+NSDrugView*
+NSPatientChoisi::getDrugView()
+{
+  if ((NSLdvDocument*) NULL == _pDocLdv)
+		return (NSDrugView*) 0 ;
+
+	TView* pView = _pDocLdv->GetViewList() ;
+  if (pView)
+  {
+		do
+		{
+			NSDrugView* pDrugView = TYPESAFE_DOWNCAST(pView, NSDrugView) ;
+			if (pDrugView)
+				return pDrugView ;
+
+			pView = _pDocLdv->NextView(pView) ;
+		}
+		while (pView) ;
+  }
+
+  return (NSDrugView*) 0 ;
 }
 
 void
@@ -12532,6 +12786,65 @@ NSUtilisateurChoisi::RenameUserFilesDirectory(string sPreviousID, string sNewID)
 	string sPersoDir    = pContexte->PathName("FGLO") + sNewID ;
 
   ::MoveFile(sPreviousDir.c_str(), sPersoDir.c_str()) ;
+}
+
+/**
+ * Get the virtual drug lexicon code from the lexicon code
+ */
+string
+NSUtilisateurChoisi::getVirtualDrug(const string sSpeciality)
+{
+  if (string("") == sSpeciality)
+    return string("") ;
+
+  // If already a virtual drug, return the code itself
+  //
+  string sLang = getLang() ;
+
+  string sLibelleTrouve = string("") ;
+  if (pContexte->getDico()->isVirtualDrug(sLang, &sSpeciality, &sLibelleTrouve))
+    return sSpeciality ;
+
+  // If there is a BDM driver, ask it to do the job
+  //
+  NSBdmDriver* pDriver = pContexte->getBdmDriver() ;
+  if (pDriver)
+  {
+    string sFoundCode = pDriver->getVirtualDrug(sSpeciality) ;
+    if (string("") != sFoundCode)
+      return sFoundCode ;
+  }
+
+  // Get all elements such as sSpeciality - is a -> element
+  //
+  string sCodeSens = pContexte->getDico()->donneCodeSens(&sSpeciality) ;
+
+  VecteurString aVecteurString ;
+  pContexte->getSuperviseur()->getFilGuide()->chercheEquivalent(sCodeSens, &aVecteurString, string("ES")) ;
+
+  if (aVecteurString.empty())
+    return string("") ;
+
+  // Find if there is a virtual in the list
+  //
+  EquiItemIter itCodes = aVecteurString.begin() ;
+  for ( ; itCodes != aVecteurString.end() ; itCodes++)
+  {
+    // Don't process the original concept
+    //
+    if (sCodeSens != **itCodes)
+    {
+      string sLibelleTrouve = string("") ;
+      if (pContexte->getDico()->isVirtualDrug(sLang, *itCodes, &sLibelleTrouve))
+      {
+        string sFoundCode = **itCodes ;
+        pContexte->getDico()->donneCodeComplet(sFoundCode) ;
+        return sFoundCode ;
+      }
+    }
+  }
+
+  return string("") ;
 }
 
 void

@@ -298,7 +298,7 @@ class CircBaseHeures : public BaseCirc
     std::string      IsValid() ;
 };
 
-class  CircBaseRegular : public BaseCirc
+class _NSBBCLASSE CircBaseRegular : public BaseCirc
 {
   protected:
 
@@ -312,13 +312,20 @@ class  CircBaseRegular : public BaseCirc
 
     static void      ReinitDialog(NSPosologieBlock* pPosoBlock) ;
     bool             Load(PatPathoIter& pptIter, PatPathoIter& pptend) ;
+    bool             ParseTree(PatPathoIter& pptIter, PatPathoIter& pptend) ;
     void             Load() ;
     void             save() ;
     NSPatPathoArray* CreateTree() ;
     std::string      IsValid() ;
+
+    double           getTakeCountPerDay(NSContexte *pContexte) ;
+
+    std::string      getQuantity()  { return _quantity ; }
+    std::string      getFrequency() { return _freq ;     }
+    std::string      getFreqUnit()  { return _codeFreq ; }
 };
 
-class CircBaseFree : public BaseCirc
+class _NSBBCLASSE CircBaseFree : public BaseCirc
 {
   protected:
 
@@ -333,10 +340,18 @@ class CircBaseFree : public BaseCirc
 
     static void      ReinitDialog(NSPosologieBlock* pPosoBlock) ;
     bool             Load(PatPathoIter& pptIter, PatPathoIter& pptend) ;
+    bool             ParseTree(PatPathoIter& pptIter, PatPathoIter& pptend) ;
     void             Load() ;
     void             save() ;
     NSPatPathoArray* CreateTree() ;
     std::string      IsValid() ;
+
+    double           getTakeCountPerDay(NSContexte *pContexte) ;
+
+    std::string      getQuantity()  { return _quantity ;  }
+    std::string      getCount()     { return _fois ;      }
+    std::string      getFrequency() { return _frequence ; }
+    std::string      getFreqUnit()  { return _codeFreq ;  }
 };
 
 class CircUnique : public BaseCirc

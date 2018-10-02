@@ -14,7 +14,7 @@ class NSUtilEditDate ;
 #include "nsbb\nsutidlg.h"
 // #include "nsbb\nsednum.h"
 #include "nsepisod\eptables.h"
-#include "nsepisod\nsldvuti.h"
+#include "nsldv\nsldvuti.h"
 
 #if defined(_EPISODUSDLL)
 	#define _EPISODUS __export

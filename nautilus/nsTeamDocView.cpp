@@ -308,7 +308,7 @@ NSHealthTeamRosaceView::EvSetFocus(HWND hWndLostFocus)
 		pMyApp->SetToolBarWindow(GetWindow()) ;
 	}
 
-	pPaneSplitter->SetFrameTitle(getFunction(), sViewName) ;	pContexte->setAideIndex("");	pContexte->setAideCorps("epi_soaping.htm");
+	_pPaneSplitter->SetFrameTitle(getFunction(), sViewName) ;	pContexte->setAideIndex("");	pContexte->setAideCorps("epi_soaping.htm");
 }
 
 voidNSHealthTeamRosaceView::SetupToolBar()
@@ -1383,7 +1383,7 @@ NSHealthTeamListView::focusFct()
     pMyApp->SetToolBarWindow(GetWindow()) ;
   }
 
-  pPaneSplitter->SetFrameTitle(getFunction(), sViewName) ;
+  _pPaneSplitter->SetFrameTitle(getFunction(), sViewName) ;
   pContexte->setAideIndex("") ;
   pContexte->setAideCorps("medicaments.htm") ;
 }
@@ -1402,7 +1402,7 @@ NSHealthTeamListView::SetupToolBar()
 
   // Setup pane splitter's control bar
   //
-	pPaneSplitter->FlushControlBar() ;
+	_pPaneSplitter->FlushControlBar() ;
 
 	// FlushControlBar destroys the buttons... we need to create them after
 	//
@@ -1413,12 +1413,12 @@ NSHealthTeamListView::SetupToolBar()
   sText = pSuper->getText("HealthTeamWindows", "removeCorrespondent") ;
 	_pBtClose  = new NSGadgetButton(this, CM_GENERAL_CLOSE, sText.c_str(), 0, 0, 200, 20) ;
 
-  pPaneSplitter->Insert(*new TControlGadget(*_pBtNew)) ;
-  pPaneSplitter->Insert(*new TControlGadget(*_pBtNewTrt)) ;
-	// pPaneSplitter->Insert(*new TSeparatorGadget) ;
-  pPaneSplitter->Insert(*new TControlGadget(*_pBtClose)) ;
+  _pPaneSplitter->Insert(*new TControlGadget(*_pBtNew)) ;
+  _pPaneSplitter->Insert(*new TControlGadget(*_pBtNewTrt)) ;
+	// _pPaneSplitter->Insert(*new TSeparatorGadget) ;
+  _pPaneSplitter->Insert(*new TControlGadget(*_pBtClose)) ;
 
-  pPaneSplitter->LayoutSession() ;
+  _pPaneSplitter->LayoutSession() ;
 }
 
 // -----------------------------------------------------------------------------

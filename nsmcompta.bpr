@@ -30,7 +30,6 @@ OBJFILES = ..\..\..\..\cvs\episodus\ObjNTIERS\nsmcompta.obj \
   ..\..\..\..\cvs\episodus\ObjNTIERS\Nsfsedlg.obj \
   ..\..\..\..\cvs\episodus\ObjNTIERS\Nsnoemie.obj \
   ..\..\..\..\cvs\episodus\ObjNTIERS\nsCptaRef.obj \
-  ..\..\..\..\cvs\episodus\ObjNTIERS\Nsannexe.obj \
   ..\..\..\..\cvs\episodus\ObjNTIERS\nsperary.obj \
   ..\..\..\..\cvs\episodus\ObjNTIERS\nsmodhtm.obj \
   ..\..\..\..\cvs\episodus\ObjNTIERS\nsgendlg.obj \
@@ -41,8 +40,9 @@ RESFILES = ..\..\..\..\cvs\episodus\ObjNTIERS\nscompta.res \
   ..\..\..\..\cvs\episodus\ObjNTIERS\nsresour.res nsmcompta.res
 DEFFILE =
 RESDEPEN = $(RESFILES)
-LIBFILES = nsmutil.lib nsm_sgbd.lib nsmsavoir.lib nsmbb.lib nsmdn.lib nsmdecode.lib \
-  nsmepisod.lib memmgr.lib cp32mti.lib bidsvi.lib owlwvi.lib ns_capture.lib
+LIBFILES = nsmutil.lib nsm_sgbd.lib nsmsavoir.lib nsmbb.lib nsmdn.lib nsmldv.lib \
+  nsmdecode.lib nsmepisod.lib ns_capture.lib memmgr.lib cp32mti.lib bidsvi.lib \
+  owlwvi.lib
 IDLGENFILES =
 IDLFILES =
 LIBRARIES =

@@ -234,12 +234,12 @@ class NSPatholog : public NSSuperRoot
     char					*donneCode() 	 				{ return _Donnees.code ; }
 #else
     string  			donneLibelleLexique() { return _Donnees.getLabel() ; }
+#endif
 
     string getLabel()     { return _Donnees.getLabel() ; }
     string getCode()      { return _Donnees.getCode() ; }
     string getGrammar()   { return _Donnees.getGrammar() ; }
     string getFrequency() { return _Donnees.getFrequency() ; }
-#endif
 
     virtual bool	Create() ;
     virtual bool	Modify() ;

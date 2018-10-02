@@ -15,15 +15,15 @@
 
 #include "nssavoir\nspatho.h"
 #include "nssavoir\ns_fic.h"
-#include "partage\ns_vector.h"
-
+#include "partage\ns_vector.h"
+#include "nsoutil/nsexport.h"
 //
 // Définition de NSSavoirArray (Array de NSSavoirInfo(s))
 //
 typedef vector<NSSavoirInfo*> NSSavInfoArray;
 typedef NSSavInfoArray::iterator SavInfoIter;
 
-class NSSavoirArray : public NSSavInfoArray
+class _NSOUTILCLASSE NSSavoirArray : public NSSavInfoArray
 {
 	public :
 		// Constructeurs
@@ -40,7 +40,7 @@ class NSSavoirArray : public NSSavInfoArray
 typedef vector<NSSavFicheInfo*> NSFicInfoArray;
 typedef NSFicInfoArray::iterator SavFichIter;
 
-class NSFicSavArray : public NSFicInfoArray
+class _NSOUTILCLASSE NSFicSavArray : public NSFicInfoArray
 {
 	public :
 

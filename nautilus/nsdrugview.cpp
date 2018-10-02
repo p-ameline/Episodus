@@ -19,6 +19,8 @@
 #include <owl\validate.h>
 #include <owl\inputdia.h>
 
+#include "nssavoir\nsBdmDriver.h"
+#include "nssavoir\nsPathor.h"
 #include "nautilus\nssuper.h"#include "partage\nsdivfct.h"
 #include "nsdn\nsdochis.h"
 #include "nautilus\nsdrugview.h"
@@ -26,7 +28,9 @@
 #include "nautilus\nscompub.h"
 #include "nautilus\nsldvvue.rh"
 #include "nautilus\nsdocview.h"
+#include "nautilus\nsAlertSvce.h"
 #include "nssavoir\nsgraphe.h"
+#include "nssavoir\nspatho.h"
 #include "nsbb\nsmedicdlg.h"
 #include "nsbb\nspanesplitter.h"
 #include "nsbb\nsattvaltools.h"
@@ -142,13 +146,13 @@ drugSortByPrescrEndSup(NSLdvDrug *pDrug1, NSLdvDrug *pDrug2)
 bool
 drugSortByPrescrDateInf(NSLdvDrug *pDrug1, NSLdvDrug *pDrug2)
 {
-	return (pDrug1->getPrescriptionDate() < pDrug2->getPrescriptionDate()) ;
+	return (pDrug1->getLatestPrescriptionDate() < pDrug2->getLatestPrescriptionDate()) ;
 }
 
 bool
 drugSortByPrescrDateSup(NSLdvDrug *pDrug1, NSLdvDrug *pDrug2)
 {
-	return (pDrug1->getPrescriptionDate() > pDrug2->getPrescriptionDate()) ;
+	return (pDrug1->getLatestPrescriptionDate() > pDrug2->getLatestPrescriptionDate()) ;
 }
 
 // -----------------------------------------------------------------------------
@@ -177,10 +181,13 @@ DEFINE_RESPONSE_TABLE1(NSDrugView, NSLDVView)
   EV_COMMAND(CM_DRUG_STOP,        CmClose),
   EV_COMMAND(CM_DRUG_DELETE,      CmSuppress),
   EV_COMMAND(IDC_ORDONNANCE,      CmFct1),
+  EV_COMMAND(IDC_ORDO_DCI,        CmFct8),
   // EV_COMMAND(IDC_ORDO_SEL,        CmFct4),
   EV_COMMAND(IDC_MANAGE_RIGHTS,   CmRights),
   EV_COMMAND(CM_IMPRIME,          CmPublish),
   EV_COMMAND(CM_DRUG_HISTORY,     CmHistory),
+  EV_COMMAND(CM_DRUG_ALERTS,      CmAlerts),
+  EV_COMMAND(IDC_SWITCH_TO_VD,    CmSwitchToVD),
 END_RESPONSE_TABLE ;
 
 // Constructeur
@@ -247,6 +254,9 @@ NSDrugView::SetupWindow()
 
   SetupColumns() ;
   AfficheListe() ;
+
+  if (pContexte->getBamType() != NSContexte::btNone)
+    checkByBdm() ;
 }
 
 void
@@ -308,6 +318,8 @@ catch (...)
 }
 */
 
+  _isBeingUpgraded = true ;
+
   initCurrentList() ;
 
 	VecteurString RelatedConcerns ;
@@ -365,6 +377,8 @@ catch (...)
 }
 */
 
+  _isBeingUpgraded = true ;
+
 	VecteurString RelatedConcerns ;
   if (sPreoccup != string(""))
   	RelatedConcerns.AddString(sPreoccup) ;
@@ -414,7 +428,10 @@ NSDrugView::CmContinue()
 
 	string sNodeToAlter = getDrugRefToModify() ;
   if (string("") != sNodeToAlter)
+  {
+    _isBeingUpgraded = true ;
   	_pLdVDoc->DrugRenewService(this, sNodeToAlter) ;
+  }
 }
 
 /*void
@@ -431,6 +448,8 @@ NSDrugView::autoAddInDrugView(string sConcern)
 
   if (PPT.empty())
   	return ;
+
+  _isBeingUpgraded = true ;
 
 	VecteurString NodeConcern ;
 	NodeConcern.AddString(sConcern) ;
@@ -568,15 +587,21 @@ NSDrugView::CmChange()
 
 	string sNodeToAlter = getDrugRefToModify() ;
   if (sNodeToAlter != string(""))
+  {
+    _isBeingUpgraded = true ;
   	_pLdVDoc->DrugModifyService(this, sNodeToAlter) ;
+  }
 }
 
 void
 NSDrugView::CmModifPoso()
 {
-	string sNodeToAlter = getDrugRefToModify() ;
+  string sNodeToAlter = getDrugRefToModify() ;
   if (string("") != sNodeToAlter)
+  {
+    _isBeingUpgraded = true ;
   	_pLdVDoc->DrugChangePosoService(this, sNodeToAlter) ;
+  }
 }
 
 void
@@ -658,27 +683,33 @@ NSDrugView::CmSuppress()
 
 	string sNodeToAlter = getDrugRefToModify(sWarningMsg) ;
   if (sNodeToAlter != string(""))
+  {
+    _isBeingUpgraded = true ;
 		_pLdVDoc->DrugDeleteService(this, sNodeToAlter) ;
+  }
 }
 
 void
 NSDrugView::CmPrevious()
 {
-  if (NULL == pContexte->getPatient())
+  if ((NSPatientChoisi*) NULL == pContexte->getPatient())
     return ;
 
   NSHISTODocument* pDocManager = pContexte->getPatient()->getDocHis() ;
-  if (NULL == pDocManager)
+  if ((NSHISTODocument*) NULL == pDocManager)
     return ;
 
   string sLexique = string("ZORDO1") ;
   DocumentIter iterPrevDoc = pDocManager->DonnePrevPatPathoDocument(sLexique, (NSPatPathoArray*) 0, 0) ;
-  if (NULL == iterPrevDoc)
+  if ((DocumentIter) NULL == iterPrevDoc)
     return ;
 
   pDocManager->AutoriserOuverture((NSDocumentInfo*) *iterPrevDoc) ;
 }
 
+/**
+ * Create a prescription document
+ */
 void
 NSDrugView::CmFct1()
 {
@@ -687,13 +718,47 @@ NSDrugView::CmFct1()
   if (_aCurrentDrugs.empty())
     return ;
 
-  VecteurString aRefStrings ;
+  bool bContainNarcotics = false ;
 
+  VecteurString aRefStrings ;
   for (drugsIter itDg = _aCurrentDrugs.begin() ; _aCurrentDrugs.end() != itDg ; itDg++)
     if ((*itDg)->isToPrescribe())
+    {
     	aRefStrings.AddString((*itDg)->getNoeud()) ;
 
-  _pLdVDoc->DrugCreatePrescriptionForSelectionService(this, &aRefStrings) ;
+      if ((*itDg)->isNarcotic())
+        bContainNarcotics = true ;
+    }
+
+  _pLdVDoc->DrugCreatePrescriptionForSelectionService(this, &aRefStrings, bContainNarcotics) ;
+
+  AfficheListe() ;
+}
+
+/**
+ * Create a prescription document using only international non trade labels
+ */
+void
+NSDrugView::CmFct8()
+{
+  // pLdVDoc->DrugCreatePrescriptionService(this) ;
+
+  if (_aCurrentDrugs.empty())
+    return ;
+
+  bool bContainNarcotics = false ;
+
+  VecteurString aRefStrings ;
+  for (drugsIter itDg = _aCurrentDrugs.begin() ; _aCurrentDrugs.end() != itDg ; itDg++)
+    if ((*itDg)->isToPrescribe())
+    {
+    	aRefStrings.AddString((*itDg)->getNoeud()) ;
+
+      if ((*itDg)->isNarcotic())
+        bContainNarcotics = true ;
+    }
+
+  _pLdVDoc->DrugCreateNoNamePrescriptionForSelectionService(this, &aRefStrings, bContainNarcotics) ;
 
   AfficheListe() ;
 }
@@ -783,6 +848,12 @@ NSDrugView::CmFct7()
 }
 
 void
+NSDrugView::CmFct9()
+{
+  CmAlerts() ;
+}
+
+void
 NSDrugView::CmPublish()
 {
   NSLdvPubli publiDriver ;
@@ -797,6 +868,29 @@ NSDrugView::CmHistory()
 {
   NSDocViewManager dvManager(pContexte) ;
   dvManager.createView(_pLdVDoc, "Drug History") ;
+}
+
+void
+NSDrugView::CmAlerts()
+{
+  checkByBdm(true) ;
+}
+
+void
+NSDrugView::CmSwitchToVD()
+{
+  ArrayCopyDrugs aDrugsToModify ;
+
+  // Switch all selected drugs to a virtual drug
+  //
+  int count = _pListeWindow->GetItemCount() ;
+	for (int i = 0 ; i < count ; i++)  	if (_pListeWindow->GetItemState(i, LVIS_SELECTED))
+      aDrugsToModify.push_back(_aCurrentDrugs[i]) ;
+
+  if (aDrugsToModify.empty())
+    return ;
+
+  _pLdVDoc->DrugSwitchToDciForSelectionService(this, &aDrugsToModify) ;
 }
 
 void
@@ -835,6 +929,8 @@ NSDrugView::reloadView(string sReason)
 void
 NSDrugView::initCurentDrugs()
 {
+  _isBeingUpgraded = true ;
+
   _aCurrentDrugs.vider() ;
 
   for (int i = 0 ; i < FRAMECOUNT ; i++)
@@ -851,9 +947,10 @@ NSDrugView::initCurentDrugs()
       {
         if (((*itDg)->_tDateFermeture.estNoLimit()) || ((*itDg)->_tDateFermeture >= tpsNow))
         {
-          if ((sPreoccup == "") || ((*itDg)->bIsLinkedConcern(sPreoccup)))
+          if ((string("") == sPreoccup) || ((*itDg)->bIsLinkedConcern(sPreoccup)))
           {
-            (*itDg)->setLatestPrescriptionDate((*itDg)->getPrescriptionDate()) ;
+            (*itDg)->setLatestPrescriptionDate(_pLdVDoc->getPrescriptionDate(*itDg)) ;
+
             adaptDrugToPrescribeList(*itDg) ;
 
             _aCurrentDrugs.push_back(*itDg) ;
@@ -862,6 +959,8 @@ NSDrugView::initCurentDrugs()
       }
     }
   }
+
+  _isBeingUpgraded = false ;
 }
 
 // Initialisation des colonnes de la ListWindowvoid
@@ -876,6 +975,7 @@ NSDrugView::SetupColumns()
   string sEndDate   = pContexte->getSuperviseur()->getText("drugManagement", "endingDate") ;
   string sPrEndDate = pContexte->getSuperviseur()->getText("drugManagement", "prescriptionEndingDate") ;
   string sPrescDate = pContexte->getSuperviseur()->getText("drugManagement", "prescriptionDate") ;
+  string sPrescCost = pContexte->getSuperviseur()->getText("drugManagement", "drugCost") ;
 
   _pListeWindow->InsertColumn(0, TListWindColumn((char*)sDrugName.c_str(), 300, TListWindColumn::Left, 0)) ;
   _pListeWindow->InsertColumn(1, TListWindColumn((char*)sDrugOrdo.c_str(),  20, TListWindColumn::Center,  1)) ;
@@ -886,6 +986,10 @@ NSDrugView::SetupColumns()
   _pListeWindow->InsertColumn(6, TListWindColumn((char*)sEndDate.c_str(),   80, TListWindColumn::Left, 6)) ;
   _pListeWindow->InsertColumn(7, TListWindColumn((char*)sPrEndDate.c_str(), 80, TListWindColumn::Left, 7)) ;
   _pListeWindow->InsertColumn(8, TListWindColumn((char*)sPrescDate.c_str(), 90, TListWindColumn::Left, 8)) ;
+
+  NSBdmDriver* pDriver = pContexte->getBdmDriver() ;
+  if (pDriver)
+    _pListeWindow->InsertColumn(9, TListWindColumn((char*)sPrescCost.c_str(), 90, TListWindColumn::Left, 8)) ;
 }
 
 // Affichage des éléments de la listevoid
@@ -930,7 +1034,7 @@ NSDrugView::DispInfoListe(TLwDispInfoNotify& dispInfo)
   NSLdvDrugPhase* pPhase     = (NSLdvDrugPhase*) 0 ;
   NSLdvDrugPhase* pLastPhase = (NSLdvDrugPhase*) 0 ;
 
-  if ((1 == iItem) || (2 == iItem) || (6 == iItem))
+  if ((1 == iItem) || (2 == iItem) || (6 == iItem) || (9 == iItem))
   {
     pPhase = pDrug->getCurrentActivePhase() ;
     if ((NSLdvDrugPhase*) NULL == pPhase)
@@ -942,7 +1046,35 @@ NSDrugView::DispInfoListe(TLwDispInfoNotify& dispInfo)
   // Affiche les informations en fonction de la colonne  switch (iItem)
   {
     case 1  : // to be prescribed
-
+      {
+        NsSelectableDrug* pBamDrug = pDrug->getBamDrug() ;
+        if (pBamDrug)
+        {
+          NsSelectableDrug::ALERTLEVEL iAlertLevel = pBamDrug->getMaxAlertLevel() ;
+          switch (iAlertLevel)
+          {
+            case NsSelectableDrug::alertUndefined :
+              sText = string("?") ;
+              break ;
+            case NsSelectableDrug::alertNone :
+              sText = string("0") ;
+              break ;
+            case NsSelectableDrug::alertLevel1 :
+              sText = string("1") ;
+              break ;
+            case NsSelectableDrug::alertLevel2 :
+              sText = string("2") ;
+              break ;
+            case NsSelectableDrug::alertLevel3 :
+              sText = string("3") ;
+              break ;
+            case NsSelectableDrug::alertLevel4 :
+              sText = string("4") ;
+              break ;
+          }
+        }
+      }
+/*
       if (pDrug->isToPrescribe())
       {
         sText = string("X") ;
@@ -950,6 +1082,7 @@ NSDrugView::DispInfoListe(TLwDispInfoNotify& dispInfo)
       }
       else
         dispInfoItem.SetStateImage(1) ;
+*/
 
       break ;
 
@@ -1051,11 +1184,12 @@ NSDrugView::DispInfoListe(TLwDispInfoNotify& dispInfo)
 
     case 8  : // prescription
 
-      // string sPrescriptionDate = pDrug->getPrescriptionDate() ;
-      string sPrescriptionDate = pDrug->getLatestPrescriptionDate() ;
+      {
+        // string sPrescriptionDate = pDrug->getPrescriptionDate() ;
+        string sPrescriptionDate = pDrug->getLatestPrescriptionDate() ;
 
-      if (string("") != sPrescriptionDate)
-        sText = donne_date(sPrescriptionDate, sLang) ;
+        if (string("") != sPrescriptionDate)
+          sText = donne_date(sPrescriptionDate, sLang) ;
 
 /*
 			NSLinkManager* pGraphe = pContexte->getPatient()->pGraphPerson->pLinkManager ;
@@ -1086,9 +1220,50 @@ NSDrugView::DispInfoListe(TLwDispInfoNotify& dispInfo)
         }
       }
 */
-      else
-      	sText = pContexte->getSuperviseur()->getText("drugManagement", "notPrescribed") ;
+        else
+      	  sText = pContexte->getSuperviseur()->getText("drugManagement", "notPrescribed") ;
+      }
 			break ;
+
+    case 9  : // cost
+      {
+        NSBdmDriver* pDriver = pContexte->getBdmDriver() ;
+        if (pDriver && pPhase)
+        {
+          NsSelectableDrug* pBamDrug = pDrug->getBamDrug() ;
+          if (pBamDrug)
+          {
+            string sMinRange = pBamDrug->getMinUcdRangePrice() ;
+            string sMaxRange = pBamDrug->getMaxUcdRangePrice() ;
+            if ((string("") != sMinRange) || (string("") != sMaxRange))
+            {
+              double dDosesCount = pPhase->getPhaseDose() ;
+
+              if (sMinRange == sMaxRange)
+              {
+                double dCost = dDosesCount * StringToDouble(sMaxRange) ;
+                sText = DoubleToString(&dCost, -1, 2) ;
+              }
+              else if (string("") == sMinRange)
+              {
+                double dCost = dDosesCount * StringToDouble(sMaxRange) ;
+                sText = string("<= ") + DoubleToString(&dCost, -1, 2) ;
+              }
+              else if (string("") == sMaxRange)
+              {
+                double dCost = dDosesCount * StringToDouble(sMinRange) ;
+                sText = string(">= ") + DoubleToString(&dCost, -1, 2) ;
+              }
+              else
+              {
+                double dMinCost = dDosesCount * StringToDouble(sMinRange) ;
+                double dMaxCost = dDosesCount * StringToDouble(sMaxRange) ;
+                sText = DoubleToString(&dMinCost, -1, 2) + string(" - ") + DoubleToString(&dMaxCost, -1, 2) ;
+              }
+            }
+          }
+        }
+      }
   }
 
   static char buffer[255] ;
@@ -1374,11 +1549,14 @@ NSDrugView::EvRButtonDown(uint modkeys, NS_CLASSLIB::TPoint& point)
 	string sModi = pSuper->getText("drugManagement", "modifyThisDrug") ;
 	string sRene = pSuper->getText("drugManagement", "renewThisDrug") ;
 	string sPres = pSuper->getText("drugManagement", "buildAPrescription") ;
-	string sPreS = pSuper->getText("drugManagement", "buildAPrescriptionFromSelectedDrugs") ;
+  string sPrDc = pSuper->getText("drugManagement", "buildADciPrescription") ;
+	string sPreS = pSuper->getText("drugManagement", "unSelectAll") ;
   string sProN = pSuper->getText("drugManagement", "buildAProtocolFromSelectedDrugs") ;
   string sProA = pSuper->getText("drugManagement", "addSelectedDrugsToAProtocol") ;
   string sRigh = pSuper->getText("rightsManagement", "manageRights") ;
   string sHist = pSuper->getText("drugManagement", "drugsHistory") ;
+  string sAler = pSuper->getText("drugManagement", "drugsAlerts") ;
+  string s2Dci = pSuper->getText("drugManagement", "convertToCommonDenomination") ;
 
 	menu->AppendMenu(MF_STRING, CM_DRUG_NEW,    sNewD.c_str()) ;
   menu->AppendMenu(MF_STRING, CM_REFERENTIAL, sProt.c_str()) ;
@@ -1390,15 +1568,19 @@ NSDrugView::EvRButtonDown(uint modkeys, NS_CLASSLIB::TPoint& point)
 	menu->AppendMenu(MF_STRING, CM_DRUG_CHANGE, sModi.c_str()) ;
 	menu->AppendMenu(MF_STRING, CM_DRUG_RENEW,  sRene.c_str()) ;
 	menu->AppendMenu(MF_SEPARATOR, 0, 0);
+  menu->AppendMenu(MF_STRING, IDC_SWITCH_TO_VD, s2Dci.c_str()) ;
+  menu->AppendMenu(MF_SEPARATOR, 0, 0);
   menu->AppendMenu(MF_STRING, IDC_MANAGE_RIGHTS,  sRigh.c_str()) ;
   menu->AppendMenu(MF_SEPARATOR, 0, 0);
 	menu->AppendMenu(MF_STRING, IDC_ORDONNANCE, sPres.c_str()) ;
+  menu->AppendMenu(MF_STRING, IDC_ORDO_DCI,   sPrDc.c_str()) ;
 	menu->AppendMenu(MF_STRING, IDC_ORDO_SEL,   sPreS.c_str()) ;
   menu->AppendMenu(MF_SEPARATOR, 0, 0);
   menu->AppendMenu(MF_STRING, IDC_NEW_REF,    sProN.c_str()) ;
   menu->AppendMenu(MF_STRING, IDC_ADD_TO_REF, sProA.c_str()) ;
   menu->AppendMenu(MF_SEPARATOR, 0, 0);
   menu->AppendMenu(MF_STRING, CM_DRUG_HISTORY, sHist.c_str()) ;
+  menu->AppendMenu(MF_STRING, CM_DRUG_ALERTS,  sAler.c_str()) ;
 
 	ClientToScreen(lp);
 	menu->TrackPopupMenu(TPM_LEFTALIGN|TPM_RIGHTBUTTON, lp, 0, HWindow);
@@ -1418,21 +1600,25 @@ NSDrugView::EvRButtonDownOut(uint modkeys, NS_CLASSLIB::TPoint& point)
 	string sNewD = pSuper->getText("drugManagement", "newDrug") ;
   string sProt = pSuper->getText("drugManagement", "newDrugFromGuideline") ;
   string sPres = pSuper->getText("drugManagement", "buildAPrescription") ;
-  string sPreS = pSuper->getText("drugManagement", "buildAPrescriptionFromSelectedDrugs") ;
+  string sPrDc = pSuper->getText("drugManagement", "buildADciPrescription") ;
+  string sPreS = pSuper->getText("drugManagement", "unSelectAll") ;
   string sProN = pSuper->getText("drugManagement", "buildAProtocolFromSelectedDrugs") ;
   string sProA = pSuper->getText("drugManagement", "addSelectedDrugsToAProtocol") ;
   string sHist = pSuper->getText("drugManagement", "drugsHistory") ;
+  string sAler = pSuper->getText("drugManagement", "drugsAlerts") ;
 
   menu->AppendMenu(MF_STRING, CM_DRUG_NEW,    sNewD.c_str()) ;
   menu->AppendMenu(MF_STRING, CM_REFERENTIAL, sProt.c_str()) ;
   menu->AppendMenu(MF_SEPARATOR, 0, 0) ;
   menu->AppendMenu(MF_STRING, IDC_ORDONNANCE, sPres.c_str()) ;
+  menu->AppendMenu(MF_STRING, IDC_ORDO_DCI,   sPrDc.c_str()) ;
   menu->AppendMenu(MF_STRING, IDC_ORDO_SEL,   sPreS.c_str()) ;
 	menu->AppendMenu(MF_SEPARATOR, 0, 0) ;
   menu->AppendMenu(MF_STRING, IDC_NEW_REF,    sProN.c_str()) ;
   menu->AppendMenu(MF_STRING, IDC_ADD_TO_REF, sProA.c_str()) ;
   menu->AppendMenu(MF_SEPARATOR, 0, 0) ;
   menu->AppendMenu(MF_STRING, CM_DRUG_HISTORY, sHist.c_str()) ;
+  menu->AppendMenu(MF_STRING, CM_DRUG_ALERTS,  sAler.c_str()) ;
 
   ClientToScreen(lp) ;
   menu->TrackPopupMenu(TPM_LEFTALIGN|TPM_RIGHTBUTTON, lp, 0, HWindow) ;
@@ -1451,7 +1637,7 @@ NSDrugView::focusFct()
     pMyApp->SetToolBarWindow(GetWindow()) ;
   }
 
-  pPaneSplitter->SetFrameTitle(getFunction(), sViewName) ;
+  _pPaneSplitter->SetFrameTitle(getFunction(), sViewName) ;
   pContexte->setAideIndex("") ;
   pContexte->setAideCorps("medicaments.htm") ;
 }
@@ -1473,7 +1659,7 @@ NSDrugView::SetupToolBar()
   pMyApp->cb2->LayoutSession() ;
 */
 
-	pPaneSplitter->FlushControlBar() ;
+	_pPaneSplitter->FlushControlBar() ;
 
   TButtonGadget* pDrugNew  = new TButtonGadget(CM_DRUG_NEW,     CM_GENERAL_ADD,      TButtonGadget::Command) ;
   TButtonGadget* pReferen  = new TButtonGadget(CM_REFERENTIAL,  CM_GENERAL_FCT3,     TButtonGadget::Command) ;
@@ -1482,27 +1668,31 @@ NSDrugView::SetupToolBar()
   TButtonGadget* pDrugChng = new TButtonGadget(CM_DRUG_CHANGE,  CM_GENERAL_MODIFY,   TButtonGadget::Command) ;
   TButtonGadget* pDrugRenw = new TButtonGadget(CM_DRUG_RENEW,   CM_GENERAL_CONTINUE, TButtonGadget::Command) ;
   TButtonGadget* pOrdoDate = new TButtonGadget(IDC_ORDONNANCE,  CM_GENERAL_FCT1,     TButtonGadget::Command) ;
+  TButtonGadget* pOrdoDci  = new TButtonGadget(IDC_ORDO_DCI,    CM_GENERAL_FCT8,     TButtonGadget::Command) ;
   TButtonGadget* pOrdoSele = new TButtonGadget(IDC_ORDO_SEL,    CM_GENERAL_FCT4,     TButtonGadget::Command) ;
   TButtonGadget* pNewRefer = new TButtonGadget(IDC_NEW_REF,     CM_GENERAL_FCT5,     TButtonGadget::Command) ;
   TButtonGadget* pAddRefer = new TButtonGadget(IDC_ADD_TO_REF,  CM_GENERAL_FCT6,     TButtonGadget::Command) ;
   TButtonGadget* pDrugHist = new TButtonGadget(CM_DRUG_HISTORY, CM_GENERAL_FCT7,     TButtonGadget::Command) ;
-	pPaneSplitter->Insert(*pDrugNew) ;
-  pPaneSplitter->Insert(*pReferen) ;
-  pPaneSplitter->Insert(*new TSeparatorGadget) ;
-	pPaneSplitter->Insert(*pDrugStop) ;
-  pPaneSplitter->Insert(*pModiPoso) ;
-	pPaneSplitter->Insert(*pDrugChng) ;
-	pPaneSplitter->Insert(*pDrugRenw) ;
-	pPaneSplitter->Insert(*new TSeparatorGadget) ;
-	pPaneSplitter->Insert(*pOrdoDate) ;
-  pPaneSplitter->Insert(*pOrdoSele) ;
-  pPaneSplitter->Insert(*new TSeparatorGadget) ;
-  pPaneSplitter->Insert(*pNewRefer) ;
-  pPaneSplitter->Insert(*pAddRefer) ;
-  pPaneSplitter->Insert(*new TSeparatorGadget) ;
-  pPaneSplitter->Insert(*pDrugHist) ;
+  TButtonGadget* pDrugAlrt = new TButtonGadget(CM_DRUG_ALERTS,  CM_GENERAL_FCT9,     TButtonGadget::Command) ;
+	_pPaneSplitter->Insert(*pDrugNew) ;
+  _pPaneSplitter->Insert(*pReferen) ;
+  _pPaneSplitter->Insert(*new TSeparatorGadget) ;
+	_pPaneSplitter->Insert(*pDrugStop) ;
+  _pPaneSplitter->Insert(*pModiPoso) ;
+	_pPaneSplitter->Insert(*pDrugChng) ;
+	_pPaneSplitter->Insert(*pDrugRenw) ;
+	_pPaneSplitter->Insert(*new TSeparatorGadget) ;
+	_pPaneSplitter->Insert(*pOrdoDate) ;
+  _pPaneSplitter->Insert(*pOrdoDci) ;
+  _pPaneSplitter->Insert(*pOrdoSele) ;
+  _pPaneSplitter->Insert(*new TSeparatorGadget) ;
+  _pPaneSplitter->Insert(*pNewRefer) ;
+  _pPaneSplitter->Insert(*pAddRefer) ;
+  _pPaneSplitter->Insert(*new TSeparatorGadget) ;
+  _pPaneSplitter->Insert(*pDrugHist) ;
+  _pPaneSplitter->Insert(*pDrugAlrt) ;
 
-  pPaneSplitter->LayoutSession() ;
+  _pPaneSplitter->LayoutSession() ;
 
   NSSuper* pSuper = pContexte->getSuperviseur() ;
 	string sNewD = pSuper->getText("drugManagement", "newDrug") ;
@@ -1513,22 +1703,26 @@ NSDrugView::SetupToolBar()
   string sModi = pSuper->getText("drugManagement", "modifyThisDrug") ;
   string sRene = pSuper->getText("drugManagement", "renewThisDrug") ;
   string sOrdo = pSuper->getText("drugManagement", "buildAPrescription") ;
+  string sPrDc = pSuper->getText("drugManagement", "buildADciPrescription") ;
   string sSele = pSuper->getText("drugManagement", "buildAPrescriptionFromSelectedDrugs") ;
   string sNPro = pSuper->getText("drugManagement", "buildAProtocolFromSelectedDrugs") ;
   string sAPro = pSuper->getText("drugManagement", "addSelectedDrugsToAProtocol") ;
   string sHist = pSuper->getText("drugManagement", "drugsHistory") ;
+  string sAlrt = pSuper->getText("drugManagement", "drugsAlerts") ;
 
-  pPaneSplitter->SetTootipText(CM_GENERAL_ADD, sNewD) ;
-  pPaneSplitter->SetTootipText(CM_GENERAL_FCT3, sNewR) ;
-  pPaneSplitter->SetTootipText(CM_GENERAL_CLOSE, sStop) ;
-  pPaneSplitter->SetTootipText(CM_GENERAL_FCT2, sPoso) ;
-  pPaneSplitter->SetTootipText(CM_GENERAL_MODIFY, sModi) ;
-  pPaneSplitter->SetTootipText(CM_GENERAL_CONTINUE, sRene) ;
-  pPaneSplitter->SetTootipText(CM_GENERAL_FCT1, sOrdo) ;
-  pPaneSplitter->SetTootipText(CM_GENERAL_FCT4, sSele) ;
-  pPaneSplitter->SetTootipText(CM_GENERAL_FCT5, sNPro) ;
-  pPaneSplitter->SetTootipText(CM_GENERAL_FCT6, sAPro) ;
-  pPaneSplitter->SetTootipText(CM_GENERAL_FCT7, sHist) ;
+  _pPaneSplitter->SetTootipText(CM_GENERAL_ADD, sNewD) ;
+  _pPaneSplitter->SetTootipText(CM_GENERAL_FCT3, sNewR) ;
+  _pPaneSplitter->SetTootipText(CM_GENERAL_CLOSE, sStop) ;
+  _pPaneSplitter->SetTootipText(CM_GENERAL_FCT2, sPoso) ;
+  _pPaneSplitter->SetTootipText(CM_GENERAL_MODIFY, sModi) ;
+  _pPaneSplitter->SetTootipText(CM_GENERAL_CONTINUE, sRene) ;
+  _pPaneSplitter->SetTootipText(CM_GENERAL_FCT1, sOrdo) ;
+  _pPaneSplitter->SetTootipText(CM_GENERAL_FCT8, sPrDc) ;
+  _pPaneSplitter->SetTootipText(CM_GENERAL_FCT4, sSele) ;
+  _pPaneSplitter->SetTootipText(CM_GENERAL_FCT5, sNPro) ;
+  _pPaneSplitter->SetTootipText(CM_GENERAL_FCT6, sAPro) ;
+  _pPaneSplitter->SetTootipText(CM_GENERAL_FCT7, sHist) ;
+  _pPaneSplitter->SetTootipText(CM_GENERAL_FCT9, sAlrt) ;
 }
 
 string
@@ -1582,9 +1776,9 @@ NSDrugView::markAddedDrugs()
 }
 
 void
-NSDrugView::checkByBdm()
+NSDrugView::fillCheckingMessage(NSPrescriptionCheckingMessage* pCM)
 {
-  if (_aCurrentDrugs.empty())
+  if ((NSPrescriptionCheckingMessage*) NULL == pCM)
     return ;
 
   // Get BDM driver
@@ -1596,7 +1790,25 @@ NSDrugView::checkByBdm()
   // Initialize the message
   //
   NSPrescriptionCheckingMessage checkingMessage ;
-  pDriver->initializeChecker(&checkingMessage) ;
+  pDriver->initializeChecker(pCM) ;
+
+  fillCheckingMessageBasics(pCM) ;
+  fillCheckingMessageProblems(pCM) ;
+  fillCheckingMessageAllergies(pCM) ;
+  fillCheckingMessageDrugs(pCM) ;
+}
+
+void
+NSDrugView::fillCheckingMessageBasics(NSPrescriptionCheckingMessage* pCM)
+{
+  if ((NSPrescriptionCheckingMessage*) NULL == pCM)
+    return ;
+
+  // Get BDM driver
+  //
+  NSBdmDriver* pDriver = pContexte->getBdmDriver() ;
+  if ((NSBdmDriver*) NULL == pDriver)
+    return ;
 
   // Get weight
   //
@@ -1604,7 +1816,7 @@ NSDrugView::checkByBdm()
   NSPatPathoArray* pAnswer = (NSPatPathoArray*) 0 ;
   bool bSuccess = pContexte->getBBinterface()->synchronousCall(string("VPOID1"), &pAnswer, (HWND) 0, &sAnswerDate) ;
   if (bSuccess && pAnswer && (false == pAnswer->empty()))
-    pDriver->addPatientInfoToChecker(&checkingMessage, pAnswer) ;
+    pDriver->addPatientInfoToChecker(pCM, pAnswer) ;
 
   // Get height
   //
@@ -1612,7 +1824,7 @@ NSDrugView::checkByBdm()
   NSPatPathoArray* pAnswerH = (NSPatPathoArray*) 0 ;
   bSuccess = pContexte->getBBinterface()->synchronousCall(string("VTAIL1"), &pAnswerH, (HWND) 0, &sAnswerDate) ;
   if (bSuccess && pAnswerH && (false == pAnswerH->empty()))
-    pDriver->addPatientInfoToChecker(&checkingMessage, pAnswerH) ;
+    pDriver->addPatientInfoToChecker(pCM, pAnswerH) ;
 
   // Get clearance
   //
@@ -1620,7 +1832,7 @@ NSDrugView::checkByBdm()
   NSPatPathoArray* pAnswerC = (NSPatPathoArray*) 0 ;
   bSuccess = pContexte->getBBinterface()->synchronousCall(string("VCLAM1"), &pAnswerC, (HWND) 0, &sAnswerDate) ;
   if (bSuccess && pAnswerC && (false == pAnswerC->empty()))
-    pDriver->addPatientInfoToChecker(&checkingMessage, pAnswerC) ;
+    pDriver->addPatientInfoToChecker(pCM, pAnswerC) ;
 
   // Pregnancy related information
   //
@@ -1658,7 +1870,7 @@ NSDrugView::checkByBdm()
         double dAgeSem = double(lDeltaDays) / 7 ;
         int iAgeSem = int(floor(dAgeSem)) ;
 
-        pDriver->addPatientInfoToChecker(&checkingMessage, string("weeksOfAmenorrhea"), IntToString(iAgeSem)) ;
+        pDriver->addPatientInfoToChecker(pCM, string("weeksOfAmenorrhea"), IntToString(iAgeSem), string("Semaines d'aménorrhée : " + IntToString(iAgeSem))) ;
       }
     }
 
@@ -1688,53 +1900,209 @@ NSDrugView::checkByBdm()
         unsigned long lDeltaDays = tNow.daysBetween(tBreastFeedStart) ;
 
         if (lDeltaDays < 31)
-          pDriver->addPatientInfoToChecker(&checkingMessage, string("breastFeeding"), string("LESS_THAN_ONE_MONTH")) ;
+          pDriver->addPatientInfoToChecker(pCM, string("breastFeeding"), string("LESS_THAN_ONE_MONTH"), string("Allaitement depuis moins d'un mois")) ;
         else
-          pDriver->addPatientInfoToChecker(&checkingMessage, string("breastFeeding"), string("MORE_THAN_ONE_MONTH")) ;
+          pDriver->addPatientInfoToChecker(pCM, string("breastFeeding"), string("MORE_THAN_ONE_MONTH"), string("Allaitement depuis plus d'un mois")) ;
       }
     }
     else
-      pDriver->addPatientInfoToChecker(&checkingMessage, string("breastFeeding"), string("NONE")) ;
+      pDriver->addPatientInfoToChecker(pCM, string("breastFeeding"), string("NONE"), string("Pas d'allaitement")) ;
   }
+}
+
+void
+NSDrugView::fillCheckingMessageProblems(NSPrescriptionCheckingMessage* pCM)
+{
+  if ((NSPrescriptionCheckingMessage*) NULL == pCM)
+    return ;
+
+  // Get BDM driver
+  //
+  NSBdmDriver* pDriver = pContexte->getBdmDriver() ;
+  if ((NSBdmDriver*) NULL == pDriver)
+    return ;
+
+  // Get current patient
+  //
+  NSPatientChoisi* pPatEnCours = pContexte->getPatient() ;
+  if ((NSPatientChoisi*) NULL == pPatEnCours)
+    return ;
 
   // Get active concerns
   //
   ArrayConcern* pConcerns = pPatEnCours->getLdvDocument()->getConcerns(ldvframeHealth) ;
-  if (pConcerns && (false == pConcerns->empty()))
+
+  if (((ArrayConcern*) NULL == pConcerns) || pConcerns->empty())
+    return ;
+
+  NVLdVTemps tNow ;
+  tNow.takeTime() ;
+
+  for (ArrayConcernIter it = pConcerns->begin() ; pConcerns->end() != it ; it++)
   {
-    for (ArrayConcernIter it = pConcerns->begin() ; pConcerns->end() != it ; it++)
-	  {
-      // If open now
-      //
-      if ((string("") != (*it)->_sCimCode) && ((*it)->_tDateOuverture <= tNow) &&
-                      ((*it)->_tDateFermeture.estNoLimit() ||
-                       ((*it)->_tDateFermeture > tNow)))
-        pDriver->addPathologyToChecker(&checkingMessage, (*it)->_sCimCode) ;
+    // If open now
+    //
+    if ((string("") != (*it)->_sCimCode) && ((*it)->_tDateOuverture <= tNow) &&
+                        ((*it)->_tDateFermeture.estNoLimit() ||
+                           ((*it)->_tDateFermeture > tNow)))
+      pDriver->addPathologyToChecker(pCM, (*it)->_sCimCode) ;
+  }
+}
+
+void
+NSDrugView::fillCheckingMessageAllergies(NSPrescriptionCheckingMessage* pCM)
+{
+  if ((NSPrescriptionCheckingMessage*) NULL == pCM)
+    return ;
+
+  // Get BDM driver
+  //
+  NSBdmDriver* pDriver = pContexte->getBdmDriver() ;
+  if ((NSBdmDriver*) NULL == pDriver)
+    return ;
+
+  // Find the proper chapter in synthesis
+  //
+  NSSearchStruct searchStruct ;
+  string sSynthesisPath = string("ZSYNT/QANTP/EALMD") ;
+
+  bool bOk = pContexte->getPatient()->ChercheChemin(sSynthesisPath, &searchStruct) ;
+  if ((false == bOk) || (NSSearchStruct::foundNothing == searchStruct.getFoundStatus()))
+    return ;
+
+  std::string date   = string("") ;
+  std::string sNoeud = string("") ;
+
+  MappingNSSearchResult::MMapIt it = searchStruct.getFoundNodes()->begin() ;
+  searchStruct.getFoundNodes()->fullRData(it, date, sNoeud) ;
+
+  NSPatPathoArray Ppt(pContexte->getSuperviseur()) ;
+
+  pContexte->getPatient()->DonneArray(sNoeud, &Ppt) ;
+  if (Ppt.empty())
+    return ;
+
+  for (PatPathoIter iter = Ppt.begin() ; Ppt.end() != iter ;  iter++)
+  {
+    // Get node label
+    //
+    string sElemLex = (*iter)->getLexique() ;
+    string sSens ;
+    pContexte->getDico()->donneCodeSens(&sElemLex, &sSens) ;
+
+    // Get all synonyms in order to compare them with the bdm return
+    //
+    VectString aSynonyms ;
+
+    if ((string("£??") == sSens) || (string("£CL") == sSens))
+      aSynonyms.add((*iter)->getTexteLibre()) ;
+    else
+    {
+      NSPathoInfoArray aSynRecords ;
+      if (pContexte->getDico()->getAllSynonyms(sSens, &aSynRecords, pContexte->getUserLanguage()))
+      {
+        if (false == aSynRecords.empty())
+          for (pthIter it = aSynRecords.begin() ; aSynRecords.end() != it ; it++)
+          {
+            string sLabel = string("") ;
+            (*it)->_Donnees.donneLibelleAffiche(&sLabel) ;
+            aSynonyms.add(pseumaj(sLabel)) ;
+          }
+      }
+    }
+
+    // Find in molecules
+    //
+    string sLabel = string("") ;
+    pContexte->getDico()->donneLibelle(pContexte->getUserLanguage(), &sElemLex, &sLabel) ;
+
+    NSBdmEntryArray aListeArray ;
+    pDriver->getListForSeed(&aListeArray, &sLabel, NSBdmDriver::bamTableAllergies) ;
+
+    if (false == aListeArray.empty())
+    {
+      for (NSBdmEntryIter molIter = aListeArray.begin() ; aListeArray.end() != molIter ; molIter++)
+      {
+        // if ((*molIter)->getLabel() == sLabel)
+        if (aSynonyms.contains(pseumaj((*molIter)->getLabel())))
+        {
+          string sCode = (*molIter)->getCode() ;
+          size_t iCodeLen = strlen(sCode.c_str()) ;
+
+          if      ((iCodeLen > 17) && (string("vidal://molecule/") == string(sCode, 0, 17)))
+            pDriver->addMoleculeToChecker(pCM, (*molIter)->getID(), sLabel) ;
+          else if ((iCodeLen > 16) && (string("vidal://allergy/") == string(sCode, 0, 16)))
+            pDriver->addAllergyToChecker(pCM, (*molIter)->getID(), sLabel) ;
+        }
+      }
     }
   }
+}
 
-  // Get allergies
+void
+NSDrugView::fillCheckingMessageDrugs(NSPrescriptionCheckingMessage* pCM)
+{
+  if ((NSPrescriptionCheckingMessage*) NULL == pCM)
+    return ;
+
+  // Get BDM driver
   //
+  NSBdmDriver* pDriver = pContexte->getBdmDriver() ;
+  if ((NSBdmDriver*) NULL == pDriver)
+    return ;
+
+  if (_aCurrentDrugs.empty())
+    return ;
 
   // Get active drugs
   //
   InterfaceBdm IBdm(pContexte) ;
 
+  NVLdVTemps tNow ;
+  tNow.takeTime() ;
+
+  int iIndex = 0 ;
+
   for (drugsIter it = _aCurrentDrugs.begin() ; _aCurrentDrugs.end() != it ; it++)
   {
-    // Is this drug referenced as having a CIS code?
+    NsSelectableDrug* pBamDrug = (*it)->getBamDrug() ;
+
+    string sBdmID = string("") ;
+
+    // Get Bdm ID from the Bdm information object
     //
-    string sDrugLexique = (*it)->getLexique() ;
+    if (pBamDrug)
+      sBdmID = pBamDrug->getBdmID() ;
 
-    string sDrugSens ;
-    pContexte->getDico()->donneCodeSens(&sDrugLexique, &sDrugSens) ;
-
-    if (IBdm.isCodeLexiMedInDB(sDrugSens) && (string("") != IBdm.pBdm->getCodeCIP()))
+    // Get Bdm ID from Cis code
+    //
+    if (string("") == sBdmID)
     {
-      string sCisCode = IBdm.pBdm->getCodeCIP() ;
+      // Is this drug referenced as having a CIS code?
+      //
+      string sCisCode = (*it)->getCiCode() ;
 
+      if (string("") == sCisCode)
+      {
+        string sDrugLexique = (*it)->getLexique() ;
+
+        string sDrugSens ;
+        pContexte->getDico()->donneCodeSens(&sDrugLexique, &sDrugSens) ;
+
+        if (IBdm.isCodeLexiMedInDB(sDrugSens) && (string("") != IBdm.pBdm->getCodeCIP()))
+          sCisCode = IBdm.pBdm->getCodeCIP() ;
+      }
+
+      if (string("") != sCisCode)
+        sBdmID = pDriver->getBamIdFromCisCode(sCisCode) ;
+    }
+
+    if (string("") != sBdmID)
+    {
       NSPresCheckPrescriptionLine precriptionLine ;
-      precriptionLine.setDrug(string("vidal://cip7/") + sCisCode) ;
+      precriptionLine.setDrugId(sBdmID) ;
+      precriptionLine.setDrugType(string("PRODUCT")) ;
+      precriptionLine.setDrugLabel((*it)->_sTitre) ;
 
       NSLdvDrugPhase* pPhase = (*it)->getCurrentActivePhase() ;
       if ((NSLdvDrugPhase*) NULL == pPhase)
@@ -1755,17 +2123,93 @@ NSDrugView::checkByBdm()
           if (pFirstCycle->_dDailyDose > 0)
           {
             precriptionLine.setDose(DoubleToString(&(pFirstCycle->_dDailyDose), 0, 3)) ;
-            precriptionLine.setDoseUnit(pPhase->_sIntakeUnitLib) ;
+            // precriptionLine.setDoseUnit(pPhase->_sIntakeUnitLib) ;
+            precriptionLine.setDoseUnit((*it)->_sIntakeUnit) ;
             precriptionLine.setFrequencyType(string("PER_DAY")) ;
           }
         }
       }
 
-      pDriver->addPrecriptionLineToChecker(&checkingMessage, &precriptionLine) ;
+      pDriver->addPrescriptionLineToChecker(pCM, &precriptionLine) ;
+
+      iIndex++ ;
+
+      if (pBamDrug)
+        pBamDrug->setCheckPrescriptionIndex(IntToString(iIndex)) ;
+    }
+  }
+}
+
+/**
+ * Ask the drugs database manager to check the list of active drugs
+ */
+void
+NSDrugView::checkByBdm(bool bForceOpenAlert)
+{
+  if (_aCurrentDrugs.empty() || _isBeingUpgraded)
+    return ;
+
+  // Get BDM driver
+  //
+  NSBdmDriver* pDriver = pContexte->getBdmDriver() ;
+  if ((NSBdmDriver*) NULL == pDriver)
+    return ;
+
+  // Initialize the message
+  //
+  NSPrescriptionCheckingMessage checkingMessage ;
+  pDriver->initializeChecker(&checkingMessage) ;
+
+  fillCheckingMessage(&checkingMessage) ;
+
+  // Check prescription
+  //
+  pDriver->checkPrescription(&checkingMessage, &_aCurrentDrugs) ;
+
+  // Get max alert level
+  //
+  NsSelectableDrug::ALERTLEVEL iMaxAlertLevel = NsSelectableDrug::alertUndefined ;
+
+  for (drugsIter it = _aCurrentDrugs.begin() ; _aCurrentDrugs.end() != it ; it++)
+  {
+    NsSelectableDrug* pBamDrug = (*it)->getBamDrug() ;
+    if (pBamDrug)
+    {
+      NsSelectableDrug::ALERTLEVEL iDrugMaxAlertLevel = pBamDrug->getMaxAlertLevel() ;
+      if (iDrugMaxAlertLevel > iMaxAlertLevel)
+        iMaxAlertLevel = iDrugMaxAlertLevel ;
     }
   }
 
-  pDriver->checkPrescription(&checkingMessage) ;
+  // Open the alert window if alert level > 2
+  //
+  if ((iMaxAlertLevel > NsSelectableDrug::alertLevel2) || bForceOpenAlert)
+    openAlertWindow(&checkingMessage) ;
+  else if (pContexte->_pAlertBoxWindow)
+    pContexte->_pAlertBoxWindow->reloadDrugs(&_aCurrentDrugs) ;
+}
+
+void
+NSDrugView::openAlertWindow(NSPrescriptionCheckingMessage* pMsg)
+{
+  if (pContexte->_pAlertBoxWindow)
+  {
+    pContexte->_pAlertBoxWindow->reloadDrugs(&_aCurrentDrugs) ;
+    pContexte->_pAlertBoxWindow->reloadElements(pMsg) ;
+  	pContexte->_pAlertBoxWindow->SetFocus() ;
+    return ;
+  }
+
+  NSSuper* pSuper = pContexte->getSuperviseur() ;
+
+  pContexte->_pAlertBoxWindow = new NSAlertServiceWindow(pContexte, pMsg, &_aCurrentDrugs, pSuper->getApplication()->GetMainWindow()) ;
+	pContexte->_pAlertBoxChild  = new NSAlertServiceChild(pContexte, *(pSuper->getApplication()->prendClient()), "", pContexte->_pAlertBoxWindow) ;
+	pContexte->_pAlertBoxChild->Create() ;
+}
+
+void
+NSDrugView::closeAlertWindow()
+{
 }
 
 unsigned long getDuration(NSLdvDrug* pLdvDrug)

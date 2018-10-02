@@ -15,32 +15,21 @@ VERSION = BCB.04.04
 # ---------------------------------------------------------------------------
 PROJECT = ..\..\..\..\cvs\episodus\nsmclient.exe
 OBJFILES = ..\..\..\..\cvs\episodus\ObjNTIERS\nsmclient.obj \
-  ..\..\..\..\cvs\episodus\ObjNTIERS\Dockinge.obj \
   ..\..\..\..\cvs\episodus\ObjNTIERS\nscompub.obj \
   ..\..\..\..\cvs\episodus\ObjNTIERS\ns_html.obj \
   ..\..\..\..\cvs\episodus\ObjNTIERS\nsbrowse.obj \
   ..\..\..\..\cvs\episodus\ObjNTIERS\nsGrabObjects.obj \
   ..\..\..\..\cvs\episodus\ObjNTIERS\nsbrowseSvce.obj \
-  ..\..\..\..\cvs\episodus\ObjNTIERS\ActiveX.obj \
-  ..\..\..\..\cvs\episodus\ObjNTIERS\Compos.obj \
-  ..\..\..\..\cvs\episodus\ObjNTIERS\Import.obj \
-  ..\..\..\..\cvs\episodus\ObjNTIERS\log_form.obj \
-  ..\..\..\..\cvs\episodus\ObjNTIERS\Lettre.obj \
-  ..\..\..\..\cvs\episodus\ObjNTIERS\EMail.obj \
-  ..\..\..\..\cvs\episodus\ObjNTIERS\Nssmtp.obj \
-  ..\..\..\..\cvs\episodus\ObjNTIERS\ImpImg.obj \
   ..\..\..\..\cvs\episodus\ObjNTIERS\Nsdocref.obj \
   ..\..\..\..\cvs\episodus\ObjNTIERS\nsmodhtm.obj \
   ..\..\..\..\cvs\episodus\ObjNTIERS\NstriHis.obj \
   ..\..\..\..\cvs\episodus\ObjNTIERS\nshistdo.obj \
-  ..\..\..\..\cvs\episodus\ObjNTIERS\nsvisual.obj \
   ..\..\..\..\cvs\episodus\ObjNTIERS\Nsttx.obj \
   ..\..\..\..\cvs\episodus\ObjNTIERS\Nschoisi.obj \
   ..\..\..\..\cvs\episodus\ObjNTIERS\nspatdlg.obj \
   ..\..\..\..\cvs\episodus\ObjNTIERS\NsHistor.obj \
   ..\..\..\..\cvs\episodus\ObjNTIERS\nsvueref.obj \
   ..\..\..\..\cvs\episodus\ObjNTIERS\Nsdocaga.obj \
-  ..\..\..\..\cvs\episodus\ObjNTIERS\NsAgaVar.obj \
   ..\..\..\..\cvs\episodus\ObjNTIERS\Nsdocview.obj \
   ..\..\..\..\cvs\episodus\ObjNTIERS\Nscrdoc2.obj \
   ..\..\..\..\cvs\episodus\ObjNTIERS\Nscrvue.obj \
@@ -48,32 +37,22 @@ OBJFILES = ..\..\..\..\cvs\episodus\ObjNTIERS\nsmclient.obj \
   ..\..\..\..\cvs\episodus\ObjNTIERS\nscsvue.obj \
   ..\..\..\..\cvs\episodus\ObjNTIERS\nsldvdoc.obj \
   ..\..\..\..\cvs\episodus\ObjNTIERS\nsldvvue.obj \
-  ..\..\..\..\cvs\episodus\ObjNTIERS\nsldvvuetech.obj \
-  ..\..\..\..\cvs\episodus\ObjNTIERS\nsldvvar.obj \
   ..\..\..\..\cvs\episodus\ObjNTIERS\Nsrechdl.obj \
   ..\..\..\..\cvs\episodus\ObjNTIERS\Nsrechd2.obj \
-  ..\..\..\..\cvs\episodus\ObjNTIERS\Nsannexe.obj \
   ..\..\..\..\cvs\episodus\ObjNTIERS\nsperary.obj \
-  ..\..\..\..\cvs\episodus\ObjNTIERS\Nstxstyl.obj \
-  ..\..\..\..\cvs\episodus\ObjNTIERS\Nstxstar.obj \
-  ..\..\..\..\cvs\episodus\ObjNTIERS\Nscr_anx.obj \
-  ..\..\..\..\cvs\episodus\ObjNTIERS\Nscr_ana.obj \
-  ..\..\..\..\cvs\episodus\ObjNTIERS\nscr_amx.obj \
-  ..\..\..\..\cvs\episodus\ObjNTIERS\Nscr_ama.obj \
   ..\..\..\..\cvs\episodus\ObjNTIERS\Nsepicap.obj \
   ..\..\..\..\cvs\episodus\ObjNTIERS\nsSOAPview.obj \
   ..\..\..\..\cvs\episodus\ObjNTIERS\nscaptview.obj \
+  ..\..\..\..\cvs\episodus\ObjNTIERS\nsvisual.obj \
   ..\..\..\..\cvs\episodus\ObjNTIERS\Nssuper.obj \
   ..\..\..\..\cvs\episodus\ObjNTIERS\nscache.obj \
-  ..\..\..\..\cvs\episodus\ObjNTIERS\adopt.obj \
   ..\..\..\..\cvs\episodus\ObjNTIERS\wordbasic.obj \
-  ..\..\..\..\cvs\episodus\ObjNTIERS\AutoWord.obj \
   ..\..\..\..\cvs\episodus\ObjNTIERS\EnumProc.obj \
   ..\..\..\..\cvs\episodus\ObjNTIERS\nsepisodview.obj \
-  ..\..\..\..\cvs\episodus\ObjNTIERS\nsldvgoal.obj \
   ..\..\..\..\cvs\episodus\ObjNTIERS\nscqdoc.obj \
   ..\..\..\..\cvs\episodus\ObjNTIERS\nscqvue.obj \
   ..\..\..\..\cvs\episodus\ObjNTIERS\naumain.obj \
+  ..\..\..\..\cvs\episodus\ObjNTIERS\nsmdiframe.obj \
   ..\..\..\..\cvs\episodus\ObjNTIERS\nsdrugview.obj \
   ..\..\..\..\cvs\episodus\ObjNTIERS\nsgoalview.obj \
   ..\..\..\..\cvs\episodus\ObjNTIERS\nsprocessview.obj \
@@ -87,24 +66,33 @@ OBJFILES = ..\..\..\..\cvs\episodus\ObjNTIERS\nsmclient.obj \
   ..\..\..\..\cvs\episodus\ObjNTIERS\nsstrcore.obj \
   ..\..\..\..\cvs\episodus\ObjNTIERS\nsstrex.obj \
   ..\..\..\..\cvs\episodus\ObjNTIERS\nswinstr.obj \
-  ..\..\..\..\cvs\episodus\ObjNTIERS\AutoWordExp.obj \
   ..\..\..\..\cvs\episodus\ObjNTIERS\html2word.obj \
-  ..\..\..\..\cvs\episodus\ObjNTIERS\AcroReader.obj \
   ..\..\..\..\cvs\episodus\ObjNTIERS\nsAcroRead.obj \
-  ..\..\..\..\cvs\episodus\ObjNTIERS\WebService.obj \
   ..\..\..\..\cvs\episodus\ObjNTIERS\nsMailSvce.obj \
   ..\..\..\..\cvs\episodus\ObjNTIERS\nsTeamDocView.obj \
   ..\..\..\..\cvs\episodus\ObjNTIERS\nsFollowUpView.obj \
   ..\..\..\..\cvs\episodus\ObjNTIERS\nsVenueDocView.obj \
   ..\..\..\..\cvs\episodus\ObjNTIERS\NsInterface.obj \
   ..\..\..\..\cvs\episodus\ObjNTIERS\nsCoopChartDV.obj \
-  ..\..\..\..\cvs\episodus\ObjNTIERS\stripeDock.obj \
   ..\..\..\..\cvs\episodus\ObjNTIERS\decisionTreeDV.obj \
   ..\..\..\..\cvs\episodus\ObjNTIERS\wordObjects.obj \
-  ..\..\..\..\cvs\episodus\ObjNTIERS\nsPilotProxy.obj \
+  ..\..\..\..\cvs\episodus\ObjNTIERS\nsdrughistoview.obj \
+  ..\..\..\..\cvs\episodus\ObjNTIERS\nsAlertSvce.obj \
+  ..\..\..\..\cvs\episodus\ObjNTIERS\nsAlertSvceActiveX.obj \
+  ..\..\..\..\cvs\episodus\ObjNTIERS\ActiveX.obj \
+  ..\..\..\..\cvs\episodus\ObjNTIERS\Compos.obj \
+  ..\..\..\..\cvs\episodus\ObjNTIERS\Import.obj \
+  ..\..\..\..\cvs\episodus\ObjNTIERS\log_form.obj \
+  ..\..\..\..\cvs\episodus\ObjNTIERS\Lettre.obj \
+  ..\..\..\..\cvs\episodus\ObjNTIERS\EMail.obj \
+  ..\..\..\..\cvs\episodus\ObjNTIERS\Nssmtp.obj \
+  ..\..\..\..\cvs\episodus\ObjNTIERS\ImpImg.obj \
+  ..\..\..\..\cvs\episodus\ObjNTIERS\AutoWord.obj \
+  ..\..\..\..\cvs\episodus\ObjNTIERS\AutoWordExp.obj \
+  ..\..\..\..\cvs\episodus\ObjNTIERS\WebService.obj \
   ..\..\..\..\cvs\episodus\ObjNTIERS\ExamHisto.obj \
   ..\..\..\..\cvs\episodus\ObjNTIERS\NsIndySmtp.obj \
-  ..\..\..\..\cvs\episodus\ObjNTIERS\nsdrughistoview.obj
+  ..\..\..\..\cvs\episodus\ObjNTIERS\nsTankSvce.obj
 RESFILES = ..\..\..\..\cvs\episodus\ObjNTIERS\nautilus.res \
   ..\..\..\..\cvs\episodus\ObjNTIERS\nauti_icons.res \
   ..\..\..\..\cvs\episodus\ObjNTIERS\nstypdoc.res \
@@ -118,18 +106,18 @@ RESFILES = ..\..\..\..\cvs\episodus\ObjNTIERS\nautilus.res \
   ..\..\..\..\cvs\episodus\ObjNTIERS\NsSOAP.res \
   ..\..\..\..\cvs\episodus\ObjNTIERS\NsMailBox.res \
   ..\..\..\..\cvs\episodus\ObjNTIERS\nsldvvue.res \
-  ..\..\..\..\cvs\episodus\ObjNTIERS\fonctions.res nsmclient.res \
+  ..\..\..\..\cvs\episodus\ObjNTIERS\fonctions.res \
   ..\..\..\..\cvs\episodus\ObjNTIERS\stripes_icons.res
 DEFFILE =
 RESDEPEN = $(RESFILES) nautilus\ActiveX.dfm nautilus\Compos.dfm nautilus\Import.dfm \
   nautilus\log_form.dfm nautilus\Lettre.dfm nautilus\EMail.dfm \
   nautilus\Nssmtp.dfm nautilus\ImpImg.dfm nautilus\AutoWord.dfm \
-  export\AutoWordExp.dfm AcroReader.dfm nautilus\WebService.dfm \
-  include\nautilus\ExamHisto.dfm nautilus\NsIndySmtp.dfm
+  export\AutoWordExp.dfm nautilus\WebService.dfm include\nautilus\ExamHisto.dfm \
+  nautilus\NsIndySmtp.dfm
 LIBFILES = nsmutil.lib nsm_sgbd.lib nsmsavoir.lib nsmbb.lib nsmdecode.lib nsmdn.lib \
-  nsmepisod.lib nsmoutil.lib nsmcompta.lib nsm_apicr.lib memmgr.lib cp32mti.lib \
-  bidsvi.lib owlwvi.lib ocfwvi.lib jvm.lib psapi.lib kernel32.lib nsm_ob1.lib \
-  ns_capture.lib
+  nsmepisod.lib nsmoutil.lib nsmcompta.lib nsm_apicr.lib nsmldv.lib nsm_ob1.lib \
+  memmgr.lib cp32mti.lib bidsvi.lib owlwvi.lib ocfwvi.lib jvm.lib psapi.lib \
+  kernel32.lib
 IDLGENFILES =
 IDLFILES =
 LIBRARIES = Indy40.lib dclusr40.lib
@@ -138,7 +126,7 @@ PACKAGES = vclx40.bpi vcl40.bpi vcldb40.bpi vcldbx40.bpi bcbsmp40.bpi dclocx40.b
   qrpt40.bpi teeui40.bpi vclsmp40.bpi teedb40.bpi tee40.bpi ibsmp40.bpi \
   nmfast40.bpi inetdb40.bpi inet40.bpi
 # ---------------------------------------------------------------------------
-PATHCPP = .;docking;nautilus;nscompta;nsutil;curl;partage;export;include\nautilus
+PATHCPP = .;nautilus;nsutil;curl;partage;export;include\nautilus
 PATHASM = .;
 PATHPAS = .;
 PATHRC = .;nautilus;docking
@@ -147,41 +135,41 @@ RELEASELIBPATH = $(BCB)\lib\release
 SYSDEFINES = NO_STRICT;_RTLDLL;USEPACKAGES
 USERDEFINES = STRICT;_OWLDLL;_USE_OWL_CM_EXIT;_BIDSDLL;_OWLALLPCH;BI_NAMESPACE;INC_OLE2;NO_SHDOCVW_GUIDS;_OCFDLL;_OCFPCH;BI_NO_OBJ_STREAMING;_MUE;N_TIERS;__OB1__;NO_EXT_CAPTURE;_IN_EXE;FOR_WINDOWS;BI_PLAT_WIN32;TIXML_USE_STL
 # ---------------------------------------------------------------------------
-CFLAG1 = -Iindy\c4;include\nautilus;curl;export;pilot;nsutil;nsbb;nscompta;partage;nautilus;nsdn;docking;include;parseur;$(BCB)\include;$(BCB)\include\owlfiles;$(BCB)\include\vcl;$(BCB)\lib;$(BCB)\imports;$(BCB)\include\Mfc;"..\..\..\..\Program Files (x86)\Java\jdk1.6.0_30\include";"..\..\..\..\Program Files (x86)\Java\jdk1.6.0_30\include\win32";libwkhtmltox\include \
+CFLAG1 = -Insoutil;indy\c4;include\nautilus;curl;export;pilot;nsutil;nsbb;nscompta;partage;nautilus;nsdn;docking;include;parseur;$(BCB)\include;$(BCB)\include\owlfiles;$(BCB)\include\vcl;$(BCB)\lib;$(BCB)\imports;$(BCB)\include\Mfc;"..\..\..\..\Program Files (x86)\Java\jdk1.6.0_30\include";"..\..\..\..\Program Files (x86)\Java\jdk1.6.0_30\include\win32";libwkhtmltox\include \
   -Od -w -Tkh30000 -r- -a8 -k -y -v -vi- -wuse -wucp -wstv -wstu -wsig -wpin \
   -w-par -wnod -wnak -wdef -wcln -wbbf -wasm -wamp -wamb -c -tW -tWM \
   -D$(SYSDEFINES);$(USERDEFINES)
 CFLAG2 =
 CFLAG3 =
-IDLCFLAGS = -Iindy\c4 -Iinclude\nautilus -Icurl -Iexport -Ipilot -Insutil -Insbb -Inscompta \
-  -Ipartage -Inautilus -Insdn -Idocking -Iinclude -Iparseur -I$(BCB)\include \
-  -I$(BCB)\include\owlfiles -I$(BCB)\include\vcl -I$(BCB)\lib -I$(BCB)\imports \
-  -I$(BCB)\include\Mfc \
+IDLCFLAGS = -Insoutil -Iindy\c4 -Iinclude\nautilus -Icurl -Iexport -Ipilot -Insutil -Insbb \
+  -Inscompta -Ipartage -Inautilus -Insdn -Idocking -Iinclude -Iparseur \
+  -I$(BCB)\include -I$(BCB)\include\owlfiles -I$(BCB)\include\vcl -I$(BCB)\lib \
+  -I$(BCB)\imports -I$(BCB)\include\Mfc \
   -I"..\..\..\..\Program Files (x86)\Java\jdk1.6.0_30\include" \
   -I"..\..\..\..\Program Files (x86)\Java\jdk1.6.0_30\include\win32" \
   -Ilibwkhtmltox\include -src_suffixcpp -DSTRICT -D_OWLDLL -D_USE_OWL_CM_EXIT \
   -D_BIDSDLL -D_OWLALLPCH -DBI_NAMESPACE -DINC_OLE2 -DNO_SHDOCVW_GUIDS -D_OCFDLL \
   -D_OCFPCH -DBI_NO_OBJ_STREAMING -D_MUE -DN_TIERS -D__OB1__ -DNO_EXT_CAPTURE \
   -D_IN_EXE -DFOR_WINDOWS -DBI_PLAT_WIN32 -DTIXML_USE_STL
-PFLAGS = -U"..\..\..\..\Program Files (x86)\Borland\CBuilder4\Lib";include\nautilus;export;partage;curl;nsutil;nscompta;nautilus;docking;..\..\..\..\cvs\episodus;indy\c4;$(BCB)\lib;$(BCB)\lib\obj;$(BCB)\Projects\Lib;$(BCB)\imports;"..\..\..\..\Program Files (x86)\Java\jdk1.6.0_30\lib";"..\..\..\..\Program Files (x86)\Java\jdk1.6.0_30\jre\bin\server";$(RELEASELIBPATH) \
-  -Iindy\c4;include\nautilus;curl;export;pilot;nsutil;nsbb;nscompta;partage;nautilus;nsdn;docking;include;parseur;$(BCB)\include;$(BCB)\include\owlfiles;$(BCB)\include\vcl;$(BCB)\lib;$(BCB)\imports;$(BCB)\include\Mfc;"..\..\..\..\Program Files (x86)\Java\jdk1.6.0_30\include";"..\..\..\..\Program Files (x86)\Java\jdk1.6.0_30\include\win32";libwkhtmltox\include \
+PFLAGS = -Unsoutil;"..\..\..\..\Program Files (x86)\Borland\CBuilder4\Lib";include\nautilus;export;partage;curl;nsutil;nscompta;nautilus;docking;..\..\..\..\cvs\episodus;indy\c4;$(BCB)\lib;$(BCB)\lib\obj;$(BCB)\Projects\Lib;$(BCB)\imports;"..\..\..\..\Program Files (x86)\Java\jdk1.6.0_30\lib";"..\..\..\..\Program Files (x86)\Java\jdk1.6.0_30\jre\bin\server";$(RELEASELIBPATH) \
+  -Insoutil;indy\c4;include\nautilus;curl;export;pilot;nsutil;nsbb;nscompta;partage;nautilus;nsdn;docking;include;parseur;$(BCB)\include;$(BCB)\include\owlfiles;$(BCB)\include\vcl;$(BCB)\lib;$(BCB)\imports;$(BCB)\include\Mfc;"..\..\..\..\Program Files (x86)\Java\jdk1.6.0_30\include";"..\..\..\..\Program Files (x86)\Java\jdk1.6.0_30\include\win32";libwkhtmltox\include \
   -N2..\..\..\..\cvs\episodus\ObjNTIERS -N0..\..\..\..\cvs\episodus\ObjNTIERS \
   -DSTRICT;_OWLDLL;_USE_OWL_CM_EXIT;_BIDSDLL;_OWLALLPCH;BI_NAMESPACE;INC_OLE2;NO_SHDOCVW_GUIDS;_OCFDLL;_OCFPCH;BI_NO_OBJ_STREAMING;_MUE;N_TIERS;__OB1__;NO_EXT_CAPTURE;_IN_EXE;FOR_WINDOWS;BI_PLAT_WIN32;TIXML_USE_STL \
   -$Y+ -$W -$O- -v -M -JPHNE
-RFLAGS = -iindy\c4;include\nautilus;curl;export;pilot;nsutil;nsbb;nscompta;partage;nautilus;nsdn;docking;include;parseur;$(BCB)\include;$(BCB)\include\owlfiles;$(BCB)\include\vcl;$(BCB)\lib;$(BCB)\imports;$(BCB)\include\Mfc;"..\..\..\..\Program Files (x86)\Java\jdk1.6.0_30\include";"..\..\..\..\Program Files (x86)\Java\jdk1.6.0_30\include\win32";libwkhtmltox\include \
+RFLAGS = -insoutil;indy\c4;include\nautilus;curl;export;pilot;nsutil;nsbb;nscompta;partage;nautilus;nsdn;docking;include;parseur;$(BCB)\include;$(BCB)\include\owlfiles;$(BCB)\include\vcl;$(BCB)\lib;$(BCB)\imports;$(BCB)\include\Mfc;"..\..\..\..\Program Files (x86)\Java\jdk1.6.0_30\include";"..\..\..\..\Program Files (x86)\Java\jdk1.6.0_30\include\win32";libwkhtmltox\include \
   -DSTRICT;_OWLDLL;_USE_OWL_CM_EXIT;_BIDSDLL;_OWLALLPCH;BI_NAMESPACE;INC_OLE2;NO_SHDOCVW_GUIDS;_OCFDLL;_OCFPCH;BI_NO_OBJ_STREAMING;_MUE;N_TIERS;__OB1__;NO_EXT_CAPTURE;_IN_EXE;FOR_WINDOWS;BI_PLAT_WIN32;TIXML_USE_STL
-AFLAGS = /iindy\c4 /iinclude\nautilus /icurl /iexport /ipilot /insutil /insbb /inscompta \
-  /ipartage /inautilus /insdn /idocking /iinclude /iparseur /i$(BCB)\include \
-  /i$(BCB)\include\owlfiles /i$(BCB)\include\vcl /i$(BCB)\lib /i$(BCB)\imports \
-  /i$(BCB)\include\Mfc \
+AFLAGS = /insoutil /iindy\c4 /iinclude\nautilus /icurl /iexport /ipilot /insutil /insbb \
+  /inscompta /ipartage /inautilus /insdn /idocking /iinclude /iparseur \
+  /i$(BCB)\include /i$(BCB)\include\owlfiles /i$(BCB)\include\vcl /i$(BCB)\lib \
+  /i$(BCB)\imports /i$(BCB)\include\Mfc \
   /i"..\..\..\..\Program Files (x86)\Java\jdk1.6.0_30\include" \
   /i"..\..\..\..\Program Files (x86)\Java\jdk1.6.0_30\include\win32" \
   /ilibwkhtmltox\include /dSTRICT /d_OWLDLL /d_USE_OWL_CM_EXIT /d_BIDSDLL \
   /d_OWLALLPCH /dBI_NAMESPACE /dINC_OLE2 /dNO_SHDOCVW_GUIDS /d_OCFDLL /d_OCFPCH \
   /dBI_NO_OBJ_STREAMING /d_MUE /dN_TIERS /d__OB1__ /dNO_EXT_CAPTURE /d_IN_EXE \
   /dFOR_WINDOWS /dBI_PLAT_WIN32 /dTIXML_USE_STL /mx /w2 /zi
-LFLAGS = -L"..\..\..\..\Program Files (x86)\Borland\CBuilder4\Lib";include\nautilus;export;partage;curl;nsutil;nscompta;nautilus;docking;..\..\..\..\cvs\episodus;indy\c4;$(BCB)\lib;$(BCB)\lib\obj;$(BCB)\Projects\Lib;$(BCB)\imports;"..\..\..\..\Program Files (x86)\Java\jdk1.6.0_30\lib";"..\..\..\..\Program Files (x86)\Java\jdk1.6.0_30\jre\bin\server";$(RELEASELIBPATH) \
-  -l"C:\cvs\episodus\" -aa -Tpe -x -Gn -v
+LFLAGS = -Lnsoutil;"..\..\..\..\Program Files (x86)\Borland\CBuilder4\Lib";include\nautilus;export;partage;curl;nsutil;nscompta;nautilus;docking;..\..\..\..\cvs\episodus;indy\c4;$(BCB)\lib;$(BCB)\lib\obj;$(BCB)\Projects\Lib;$(BCB)\imports;"..\..\..\..\Program Files (x86)\Java\jdk1.6.0_30\lib";"..\..\..\..\Program Files (x86)\Java\jdk1.6.0_30\jre\bin\server";$(RELEASELIBPATH) \
+  -l"C:\cvs\episodus\" -H:0x200000 -aa -Tpe -x -Gn -v
 IFLAGS =
 # ---------------------------------------------------------------------------
 ALLOBJ = c0w32.obj Memmgr.Lib $(PACKAGES) sysinit.obj $(OBJFILES)
@@ -219,69 +207,69 @@ Comments=
 
 [HistoryLists\hlIncludePath]
 Count=30
-Item0=indy\c4;include\nautilus;curl;export;pilot;nsutil;nsbb;nscompta;partage;nautilus;nsdn;docking;include;parseur;$(BCB)\include;$(BCB)\include\owlfiles;$(BCB)\include\vcl;$(BCB)\lib;$(BCB)\imports;$(BCB)\include\Mfc;..\..\..\..\Program Files (x86)\Java\jdk1.6.0_30\include;..\..\..\..\Program Files (x86)\Java\jdk1.6.0_30\include\win32;libwkhtmltox\include
-Item1=..\indy\c4;include\nautilus;curl;export;pilot;nsutil;nsbb;nscompta;partage;nautilus;nsdn;docking;include;parseur;$(BCB)\include;$(BCB)\include\owlfiles;$(BCB)\include\vcl;$(BCB)\lib;$(BCB)\imports;$(BCB)\include\Mfc;..\..\..\..\Program Files (x86)\Java\jdk1.6.0_30\include;..\..\..\..\Program Files (x86)\Java\jdk1.6.0_30\include\win32;libwkhtmltox\include
-Item2=include\nautilus;curl;export;pilot;nsutil;nsbb;nscompta;partage;nautilus;nsdn;docking;include;parseur;$(BCB)\include;$(BCB)\include\owlfiles;$(BCB)\include\vcl;$(BCB)\lib;$(BCB)\imports;$(BCB)\include\Mfc;..\..\Program Files (x86)\Java\jdk1.6.0_30\include;..\..\Program Files (x86)\Java\jdk1.6.0_30\include\win32;libwkhtmltox\include
-Item3=include\nautilus;curl;export;pilot;nsutil;nsbb;nscompta;partage;nautilus;nsdn;docking;include;parseur;$(BCB)\include;$(BCB)\include\owlfiles;$(BCB)\include\vcl;$(BCB)\lib;$(BCB)\imports;$(BCB)\include\Mfc;..\..\Program Files (x86)\Java\jdk1.6.0_30\include;..\..\Program Files (x86)\Java\jdk1.6.0_30\include\win32
-Item4=curl;export;pilot;nsutil;nsbb;nscompta;partage;nautilus;nsdn;docking;include;parseur;$(BCB)\include;$(BCB)\include\owlfiles;$(BCB)\include\vcl;$(BCB)\lib;$(BCB)\imports;$(BCB)\include\Mfc;..\..\Program Files (x86)\Java\jdk1.6.0_30\include;..\..\Program Files (x86)\Java\jdk1.6.0_30\include\win32
-Item5=curl;export;pilot;nsutil;nsbb;nscompta;partage;nautilus;nsdn;docking;include;parseur;$(BCB)\include;$(BCB)\include\owlfiles;$(BCB)\include\vcl;$(BCB)\lib;$(BCB)\imports;$(BCB)\include\Mfc;C:\Program Files\Java\jdk1.6.0_17\include;C:\Program Files\Java\jdk1.6.0_17\include\win32
-Item6=curl;export;pilot;nsutil;nsbb;nscompta;partage;nautilus;nsdn;docking;include;parseur;$(BCB)\include;$(BCB)\include\owlfiles;$(BCB)\include\vcl;$(BCB)\lib;$(BCB)\imports;$(BCB)\include\Mfc;..\..\j2sdk1.4.2\include;..\..\j2sdk1.4.2\include\win32
-Item7=curl;include\nautilus;..\..\Program Files\Borland\CBuilder4\Imports;export;pilot;nsutil;nsbb;nscompta;partage;nautilus;nsdn;docking;include;parseur;$(BCB)\include;$(BCB)\include\owlfiles;$(BCB)\include\vcl;$(BCB)\lib;$(BCB)\imports;$(BCB)\include\Mfc;..\..\j2sdk1.4.1\include;..\..\j2sdk1.4.1\include\win32
-Item8=include\nautilus;..\..\Program Files\Borland\CBuilder4\Imports;export;pilot;nsutil;nsbb;nscompta;partage;nautilus;nsdn;docking;include;parseur;$(BCB)\include;$(BCB)\include\owlfiles;$(BCB)\include\vcl;$(BCB)\lib;$(BCB)\imports;$(BCB)\include\Mfc;..\..\j2sdk1.4.1\include;..\..\j2sdk1.4.1\include\win32
-Item9=export;pilot;nsutil;nsbb;nscompta;partage;nautilus;nsdn;docking;include;parseur;$(BCB)\include;$(BCB)\include\owlfiles;$(BCB)\include\vcl;$(BCB)\lib;$(BCB)\imports;$(BCB)\include\Mfc;..\..\j2sdk1.4.1\include;..\..\j2sdk1.4.1\include\win32
-Item10=export;pilot;nsutil;nsbb;nscompta;partage;nautilus;nsdn;docking;include;parseur;$(BCB)\include;$(BCB)\include\owlfiles;$(BCB)\include\vcl;$(BCB)\lib;$(BCB)\imports;$(BCB)\include\Mfc;C:\j2sdk1.4.1\include;C:\j2sdk1.4.1\include\win32
-Item11=export;pilot;nsutil;nsbb;nscompta;partage;nautilus;nsdn;docking;include;parseur;$(BCB)\include;$(BCB)\include\owlfiles;$(BCB)\include\vcl;$(BCB)\lib;$(BCB)\imports;$(BCB)\include\Mfc;\win32
-Item12=export;pilot;nsutil;nsbb;nscompta;partage;nautilus;nsdn;docking;include;parseur;..\..\Program Files\Java\j2sdk1.4.2_04\include;..\..\Program Files\Java\j2sdk1.4.2_04\include\win32;$(BCB)\include;$(BCB)\include\owlfiles;$(BCB)\include\vcl;$(BCB)\lib;$(BCB)\imports;$(BCB)\include\Mfc
-Item13=pilot;nsutil;nsbb;nscompta;partage;nautilus;nsdn;docking;include;parseur;..\..\Program Files\Java\j2sdk1.4.2_04\include;..\..\Program Files\Java\j2sdk1.4.2_04\include\win32;$(BCB)\include;$(BCB)\include\owlfiles;$(BCB)\include\vcl;$(BCB)\lib;$(BCB)\imports;$(BCB)\include\Mfc
-Item14=pilot;nsutil;nsbb;nscompta;partage;nautilus;nsdn;docking;include;parseur;C:\Program Files\Java\j2sdk1.4.2_04\include;C:\Program Files\Java\j2sdk1.4.2_04\include\win32;$(BCB)\include;$(BCB)\include\owlfiles;$(BCB)\include\vcl;$(BCB)\lib;$(BCB)\imports;$(BCB)\include\Mfc
-Item15=pilot;nsutil;nsbb;nscompta;partage;nautilus;nsdn;docking;include;parseur;..\..\j2sdk1.4.1\include;..\..\j2sdk1.4.1\include\win32;$(BCB)\include;$(BCB)\include\owlfiles;$(BCB)\include\vcl;$(BCB)\lib;$(BCB)\imports;$(BCB)\include\Mfc
-Item16=pilot;nsutil;nsbb;nscompta;partage;nautilus;nsdn;docking;include;parseur;..\..\j2sdk1.4.1\include;..\..\j2sdk1.4.1\include\win32;$(BCB)\include;$(BCB)\include\owlfiles;$(BCB)\include\vcl;$(BCB)\lib;$(BCB)\imports
-Item17=pilot;nsutil;nsbb;nscompta;partage;nautilus;nsdn;docking;include;parseur;\j2sdk1.4.1\include;$(BCB)\include;$(BCB)\include\owlfiles;$(BCB)\include\vcl;$(BCB)\lib;$(BCB)\imports
-Item18=pilot;nsutil;nsbb;nscompta;partage;nautilus;nsdn;docking;include;parseur;\\j2sdk1.4.1\include;$(BCB)\include;$(BCB)\include\owlfiles;$(BCB)\include\vcl;$(BCB)\lib;$(BCB)\imports
-Item19=nsutil;nsbb;nscompta;partage;nautilus;nsdn;docking;include;$(BCB)\include;$(BCB)\include\owlfiles;$(BCB)\include\vcl;$(BCB)\lib;$(BCB)\imports;parseur
-Item20=..\..\Program Files\Borland\CBuilder4\Bin;ns_bbk\gcd;ns_bbk;..;Spying;..\Program Files\Borland\CBuilder4\Bin;nsutil;nsbb;nscompta;partage;nautilus;nsdn;docking;include;$(BCB)\include;$(BCB)\include\owlfiles;$(BCB)\include\vcl;$(BCB)\lib;$(BCB)\imports;parseur
-Item21=ns_bbk\gcd;ns_bbk;..;Spying;..\Program Files\Borland\CBuilder4\Bin;nsutil;nsbb;nscompta;partage;nautilus;nsdn;docking;include;$(BCB)\include;$(BCB)\include\owlfiles;$(BCB)\include\vcl;$(BCB)\lib;$(BCB)\imports;parseur
-Item22=ns_bbk\gcd;ns_bbk;..\;Spying;..\Program Files\Borland\CBuilder4\Bin;nsutil;nsbb;nscompta;partage;nautilus;nsdn;docking;include;$(BCB)\include;$(BCB)\include\owlfiles;$(BCB)\include\vcl;$(BCB)\lib;$(BCB)\imports;parseur
-Item23=..\Program Files\Borland\CBuilder4\Bin;nsutil;nsbb;nscompta;partage;nautilus;nsdn;docking;include;$(BCB)\include;$(BCB)\include\owlfiles;$(BCB)\include\vcl;$(BCB)\lib;$(BCB)\imports
-Item24=nsutil;nsbb;nscompta;partage;nautilus;nsdn;docking;include;$(BCB)\include;$(BCB)\include\owlfiles;$(BCB)\include\vcl;$(BCB)\lib;$(BCB)\imports
-Item25=nsutil;nsbb;nscompta;partage;nautilus;nsdn;docking;include;$(BCB)\include;$(BCB)\include\owlfiles;$(BCB)\include\vcl;$(BCB)\lib
-Item26=nsutil;nsbb;nscompta;partage;nautilus;nsdn;docking;include;$(BCB)\include;$(BCB)\include\owlfiles;$(BCB)\include\vcl
-Item27=nsutil;nsbb;nscompta;partage;nautilus;nsdn;docking;include;$(BCB)\include;$(BCB)\include\vcl;$(BCB)\include\owlfiles
-Item28=..\program files\borland\cbuilder3\lib;..\program files\borland\cbuilder3\bin;nsutil;nsbb;nscompta;partage;nautilus;nsdn;docking;include;$(BCB)\include;$(BCB)\include\vcl;$(BCB)\include\owlfiles
-Item29=include;$(BCB)\include;$(BCB)\include\vcl;$(BCB)\include\owlfiles
+Item0=nsoutil;indy\c4;include\nautilus;curl;export;pilot;nsutil;nsbb;nscompta;partage;nautilus;nsdn;docking;include;parseur;$(BCB)\include;$(BCB)\include\owlfiles;$(BCB)\include\vcl;$(BCB)\lib;$(BCB)\imports;$(BCB)\include\Mfc;..\..\..\..\Program Files (x86)\Java\jdk1.6.0_30\include;..\..\..\..\Program Files (x86)\Java\jdk1.6.0_30\include\win32;libwkhtmltox\include
+Item1=indy\c4;include\nautilus;curl;export;pilot;nsutil;nsbb;nscompta;partage;nautilus;nsdn;docking;include;parseur;$(BCB)\include;$(BCB)\include\owlfiles;$(BCB)\include\vcl;$(BCB)\lib;$(BCB)\imports;$(BCB)\include\Mfc;..\..\..\..\Program Files (x86)\Java\jdk1.6.0_30\include;..\..\..\..\Program Files (x86)\Java\jdk1.6.0_30\include\win32;libwkhtmltox\include
+Item2=..\indy\c4;include\nautilus;curl;export;pilot;nsutil;nsbb;nscompta;partage;nautilus;nsdn;docking;include;parseur;$(BCB)\include;$(BCB)\include\owlfiles;$(BCB)\include\vcl;$(BCB)\lib;$(BCB)\imports;$(BCB)\include\Mfc;..\..\..\..\Program Files (x86)\Java\jdk1.6.0_30\include;..\..\..\..\Program Files (x86)\Java\jdk1.6.0_30\include\win32;libwkhtmltox\include
+Item3=include\nautilus;curl;export;pilot;nsutil;nsbb;nscompta;partage;nautilus;nsdn;docking;include;parseur;$(BCB)\include;$(BCB)\include\owlfiles;$(BCB)\include\vcl;$(BCB)\lib;$(BCB)\imports;$(BCB)\include\Mfc;..\..\Program Files (x86)\Java\jdk1.6.0_30\include;..\..\Program Files (x86)\Java\jdk1.6.0_30\include\win32;libwkhtmltox\include
+Item4=include\nautilus;curl;export;pilot;nsutil;nsbb;nscompta;partage;nautilus;nsdn;docking;include;parseur;$(BCB)\include;$(BCB)\include\owlfiles;$(BCB)\include\vcl;$(BCB)\lib;$(BCB)\imports;$(BCB)\include\Mfc;..\..\Program Files (x86)\Java\jdk1.6.0_30\include;..\..\Program Files (x86)\Java\jdk1.6.0_30\include\win32
+Item5=curl;export;pilot;nsutil;nsbb;nscompta;partage;nautilus;nsdn;docking;include;parseur;$(BCB)\include;$(BCB)\include\owlfiles;$(BCB)\include\vcl;$(BCB)\lib;$(BCB)\imports;$(BCB)\include\Mfc;..\..\Program Files (x86)\Java\jdk1.6.0_30\include;..\..\Program Files (x86)\Java\jdk1.6.0_30\include\win32
+Item6=curl;export;pilot;nsutil;nsbb;nscompta;partage;nautilus;nsdn;docking;include;parseur;$(BCB)\include;$(BCB)\include\owlfiles;$(BCB)\include\vcl;$(BCB)\lib;$(BCB)\imports;$(BCB)\include\Mfc;C:\Program Files\Java\jdk1.6.0_17\include;C:\Program Files\Java\jdk1.6.0_17\include\win32
+Item7=curl;export;pilot;nsutil;nsbb;nscompta;partage;nautilus;nsdn;docking;include;parseur;$(BCB)\include;$(BCB)\include\owlfiles;$(BCB)\include\vcl;$(BCB)\lib;$(BCB)\imports;$(BCB)\include\Mfc;..\..\j2sdk1.4.2\include;..\..\j2sdk1.4.2\include\win32
+Item8=curl;include\nautilus;..\..\Program Files\Borland\CBuilder4\Imports;export;pilot;nsutil;nsbb;nscompta;partage;nautilus;nsdn;docking;include;parseur;$(BCB)\include;$(BCB)\include\owlfiles;$(BCB)\include\vcl;$(BCB)\lib;$(BCB)\imports;$(BCB)\include\Mfc;..\..\j2sdk1.4.1\include;..\..\j2sdk1.4.1\include\win32
+Item9=include\nautilus;..\..\Program Files\Borland\CBuilder4\Imports;export;pilot;nsutil;nsbb;nscompta;partage;nautilus;nsdn;docking;include;parseur;$(BCB)\include;$(BCB)\include\owlfiles;$(BCB)\include\vcl;$(BCB)\lib;$(BCB)\imports;$(BCB)\include\Mfc;..\..\j2sdk1.4.1\include;..\..\j2sdk1.4.1\include\win32
+Item10=export;pilot;nsutil;nsbb;nscompta;partage;nautilus;nsdn;docking;include;parseur;$(BCB)\include;$(BCB)\include\owlfiles;$(BCB)\include\vcl;$(BCB)\lib;$(BCB)\imports;$(BCB)\include\Mfc;..\..\j2sdk1.4.1\include;..\..\j2sdk1.4.1\include\win32
+Item11=export;pilot;nsutil;nsbb;nscompta;partage;nautilus;nsdn;docking;include;parseur;$(BCB)\include;$(BCB)\include\owlfiles;$(BCB)\include\vcl;$(BCB)\lib;$(BCB)\imports;$(BCB)\include\Mfc;C:\j2sdk1.4.1\include;C:\j2sdk1.4.1\include\win32
+Item12=export;pilot;nsutil;nsbb;nscompta;partage;nautilus;nsdn;docking;include;parseur;$(BCB)\include;$(BCB)\include\owlfiles;$(BCB)\include\vcl;$(BCB)\lib;$(BCB)\imports;$(BCB)\include\Mfc;\win32
+Item13=export;pilot;nsutil;nsbb;nscompta;partage;nautilus;nsdn;docking;include;parseur;..\..\Program Files\Java\j2sdk1.4.2_04\include;..\..\Program Files\Java\j2sdk1.4.2_04\include\win32;$(BCB)\include;$(BCB)\include\owlfiles;$(BCB)\include\vcl;$(BCB)\lib;$(BCB)\imports;$(BCB)\include\Mfc
+Item14=pilot;nsutil;nsbb;nscompta;partage;nautilus;nsdn;docking;include;parseur;..\..\Program Files\Java\j2sdk1.4.2_04\include;..\..\Program Files\Java\j2sdk1.4.2_04\include\win32;$(BCB)\include;$(BCB)\include\owlfiles;$(BCB)\include\vcl;$(BCB)\lib;$(BCB)\imports;$(BCB)\include\Mfc
+Item15=pilot;nsutil;nsbb;nscompta;partage;nautilus;nsdn;docking;include;parseur;C:\Program Files\Java\j2sdk1.4.2_04\include;C:\Program Files\Java\j2sdk1.4.2_04\include\win32;$(BCB)\include;$(BCB)\include\owlfiles;$(BCB)\include\vcl;$(BCB)\lib;$(BCB)\imports;$(BCB)\include\Mfc
+Item16=pilot;nsutil;nsbb;nscompta;partage;nautilus;nsdn;docking;include;parseur;..\..\j2sdk1.4.1\include;..\..\j2sdk1.4.1\include\win32;$(BCB)\include;$(BCB)\include\owlfiles;$(BCB)\include\vcl;$(BCB)\lib;$(BCB)\imports;$(BCB)\include\Mfc
+Item17=pilot;nsutil;nsbb;nscompta;partage;nautilus;nsdn;docking;include;parseur;..\..\j2sdk1.4.1\include;..\..\j2sdk1.4.1\include\win32;$(BCB)\include;$(BCB)\include\owlfiles;$(BCB)\include\vcl;$(BCB)\lib;$(BCB)\imports
+Item18=pilot;nsutil;nsbb;nscompta;partage;nautilus;nsdn;docking;include;parseur;\j2sdk1.4.1\include;$(BCB)\include;$(BCB)\include\owlfiles;$(BCB)\include\vcl;$(BCB)\lib;$(BCB)\imports
+Item19=pilot;nsutil;nsbb;nscompta;partage;nautilus;nsdn;docking;include;parseur;\\j2sdk1.4.1\include;$(BCB)\include;$(BCB)\include\owlfiles;$(BCB)\include\vcl;$(BCB)\lib;$(BCB)\imports
+Item20=nsutil;nsbb;nscompta;partage;nautilus;nsdn;docking;include;$(BCB)\include;$(BCB)\include\owlfiles;$(BCB)\include\vcl;$(BCB)\lib;$(BCB)\imports;parseur
+Item21=..\..\Program Files\Borland\CBuilder4\Bin;ns_bbk\gcd;ns_bbk;..;Spying;..\Program Files\Borland\CBuilder4\Bin;nsutil;nsbb;nscompta;partage;nautilus;nsdn;docking;include;$(BCB)\include;$(BCB)\include\owlfiles;$(BCB)\include\vcl;$(BCB)\lib;$(BCB)\imports;parseur
+Item22=ns_bbk\gcd;ns_bbk;..;Spying;..\Program Files\Borland\CBuilder4\Bin;nsutil;nsbb;nscompta;partage;nautilus;nsdn;docking;include;$(BCB)\include;$(BCB)\include\owlfiles;$(BCB)\include\vcl;$(BCB)\lib;$(BCB)\imports;parseur
+Item23=ns_bbk\gcd;ns_bbk;..\;Spying;..\Program Files\Borland\CBuilder4\Bin;nsutil;nsbb;nscompta;partage;nautilus;nsdn;docking;include;$(BCB)\include;$(BCB)\include\owlfiles;$(BCB)\include\vcl;$(BCB)\lib;$(BCB)\imports;parseur
+Item24=..\Program Files\Borland\CBuilder4\Bin;nsutil;nsbb;nscompta;partage;nautilus;nsdn;docking;include;$(BCB)\include;$(BCB)\include\owlfiles;$(BCB)\include\vcl;$(BCB)\lib;$(BCB)\imports
+Item25=nsutil;nsbb;nscompta;partage;nautilus;nsdn;docking;include;$(BCB)\include;$(BCB)\include\owlfiles;$(BCB)\include\vcl;$(BCB)\lib;$(BCB)\imports
+Item26=nsutil;nsbb;nscompta;partage;nautilus;nsdn;docking;include;$(BCB)\include;$(BCB)\include\owlfiles;$(BCB)\include\vcl;$(BCB)\lib
+Item27=nsutil;nsbb;nscompta;partage;nautilus;nsdn;docking;include;$(BCB)\include;$(BCB)\include\owlfiles;$(BCB)\include\vcl
+Item28=nsutil;nsbb;nscompta;partage;nautilus;nsdn;docking;include;$(BCB)\include;$(BCB)\include\vcl;$(BCB)\include\owlfiles
+Item29=..\program files\borland\cbuilder3\lib;..\program files\borland\cbuilder3\bin;nsutil;nsbb;nscompta;partage;nautilus;nsdn;docking;include;$(BCB)\include;$(BCB)\include\vcl;$(BCB)\include\owlfiles
 
 [HistoryLists\hlLibraryPath]
 Count=30
-Item0=..\..\..\..\Program Files (x86)\Borland\CBuilder4\Lib;include\nautilus;export;partage;curl;nsutil;nscompta;nautilus;docking;..\..\..\..\cvs\episodus;indy\c4;$(BCB)\lib;$(BCB)\lib\obj;$(BCB)\Projects\Lib;$(BCB)\imports;..\..\..\..\Program Files (x86)\Java\jdk1.6.0_30\lib;..\..\..\..\Program Files (x86)\Java\jdk1.6.0_30\jre\bin\server
-Item1=include\nautilus;export;partage;curl;nsutil;nscompta;nautilus;docking;..\..\..\..\cvs\episodus;indy\c4;$(BCB)\lib;$(BCB)\lib\obj;$(BCB)\Projects\Lib;$(BCB)\imports;..\..\..\..\Program Files (x86)\Java\jdk1.6.0_30\lib;..\..\..\..\Program Files (x86)\Java\jdk1.6.0_30\jre\bin\server
-Item2=include\nautilus;export;partage;curl;nsutil;nscompta;nautilus;docking;..\..\..\..\cvs\episodus;..\indy\c4;$(BCB)\lib;$(BCB)\lib\obj;$(BCB)\Projects\Lib;$(BCB)\imports;..\..\..\..\Program Files (x86)\Java\jdk1.6.0_30\lib;..\..\..\..\Program Files (x86)\Java\jdk1.6.0_30\jre\bin\server
-Item3=..\..\..\..\cvs\episodus;..\indy\c4;$(BCB)\lib;$(BCB)\lib\obj;$(BCB)\Projects\Lib;$(BCB)\imports;..\..\..\..\Program Files (x86)\Java\jdk1.6.0_30\lib;..\..\..\..\Program Files (x86)\Java\jdk1.6.0_30\jre\bin\server
-Item4=include\nautilus;..\..\Program Files (x86)\Borland\CBuilder4\Lib;curl;export;pilot;ns_bbk\gcd;ns_bbk;Spying;nsutil;nsbb;nscompta;partage;nsdn;docking;nautilus;$(BCB)\lib;$(BCB)\lib\obj;$(BCB)\Projects\Lib;$(BCB)\imports;..\..\Program Files (x86)\Java\jdk1.6.0_30\lib;..\..\Program Files (x86)\Java\jdk1.6.0_30\jre\bin\server
-Item5=..\..\Program Files (x86)\Borland\CBuilder4\Lib;curl;export;pilot;ns_bbk\gcd;ns_bbk;Spying;nsutil;nsbb;nscompta;partage;nsdn;docking;nautilus;$(BCB)\lib;$(BCB)\lib\obj;$(BCB)\Projects\Lib;$(BCB)\imports;..\..\Program Files (x86)\Java\jdk1.6.0_30\lib;..\..\Program Files (x86)\Java\jdk1.6.0_30\jre\bin\server
-Item6=curl;export;pilot;ns_bbk\gcd;ns_bbk;Spying;nsutil;nsbb;nscompta;partage;nsdn;docking;nautilus;$(BCB)\lib;$(BCB)\lib\obj;$(BCB)\Projects\Lib;$(BCB)\imports;..\..\Program Files (x86)\Java\jdk1.6.0_30\lib;..\..\Program Files (x86)\Java\jdk1.6.0_30\jre\bin\server
-Item7=curl;export;pilot;ns_bbk\gcd;ns_bbk;Spying;nsutil;nsbb;nscompta;partage;nsdn;docking;nautilus;$(BCB)\lib;$(BCB)\lib\obj;$(BCB)\Projects\Lib;$(BCB)\imports;C:\Program Files\Java\jdk1.6.0_17\lib;C:\Program Files\Java\jdk1.6.0_17\jre\bin\server
-Item8=..\..\Program Files\Borland\CBuilder4\Lib;curl;export;pilot;ns_bbk\gcd;ns_bbk;Spying;nsutil;nsbb;nscompta;partage;nsdn;docking;nautilus;$(BCB)\lib;$(BCB)\lib\obj;$(BCB)\Projects\Lib;$(BCB)\imports;..\..\j2sdk1.4.2\lib;..\..\j2sdk1.4.2\jre\bin\server
-Item9=curl;export;pilot;ns_bbk\gcd;ns_bbk;Spying;nsutil;nsbb;nscompta;partage;nsdn;docking;nautilus;$(BCB)\lib;$(BCB)\lib\obj;$(BCB)\Projects\Lib;$(BCB)\imports;..\..\j2sdk1.4.2\lib;..\..\j2sdk1.4.2\jre\bin\server
-Item10=curl;cur;cu\;c\;..\..\Program Files\Borland\CBuilder4\Lib;include\nautilus;..\..\Program Files\Borland\CBuilder4\Imports;export;pilot;ns_bbk\gcd;ns_bbk;Spying;nsutil;nsbb;nscompta;partage;nsdn;docking;nautilus;$(BCB)\lib;$(BCB)\lib\obj;$(BCB)\Projects\Lib;..\..\j2sdk1.4.1\lib;..\..\j2sdk1.4.1\jre\bin\server
-Item11=..\..\Program Files\Borland\CBuilder4\Lib;include\nautilus;..\..\Program Files\Borland\CBuilder4\Imports;export;pilot;ns_bbk\gcd;ns_bbk;Spying;nsutil;nsbb;nscompta;partage;nsdn;docking;nautilus;$(BCB)\lib;$(BCB)\lib\obj;$(BCB)\Projects\Lib;..\..\j2sdk1.4.1\lib;..\..\j2sdk1.4.1\jre\bin\server
-Item12=export;pilot;ns_bbk\gcd;ns_bbk;Spying;nsutil;nsbb;nscompta;partage;nsdn;docking;nautilus;$(BCB)\lib;$(BCB)\lib\obj;$(BCB)\Projects\Lib;..\..\j2sdk1.4.1\lib;..\..\j2sdk1.4.1\jre\bin\server
-Item13=export;pilot;ns_bbk\gcd;ns_bbk;Spying;nsutil;nsbb;nscompta;partage;nsdn;docking;nautilus;$(BCB)\lib;$(BCB)\lib\obj;$(BCB)\Projects\Lib;C:\j2sdk1.4.1\lib;C:\j2sdk1.4.1\jre\bin\server
-Item14=export;pilot;ns_bbk\gcd;ns_bbk;Spying;nsutil;nsbb;nscompta;partage;nsdn;docking;nautilus;$(BCB)\lib;$(BCB)\lib\obj;$(BCB)\Projects\Lib;..\..\Program Files\Java\j2sdk1.4.2_04\lib;..\..\Program Files\Java\j2sdk1.4.2_04\jre\bin\server
-Item15=pilot;ns_bbk\gcd;ns_bbk;Spying;nsutil;nsbb;nscompta;partage;nsdn;docking;nautilus;$(BCB)\lib;$(BCB)\lib\obj;$(BCB)\Projects\Lib;..\..\Program Files\Java\j2sdk1.4.2_04\lib;..\..\Program Files\Java\j2sdk1.4.2_04\jre\bin\server
-Item16=pilot;ns_bbk\gcd;ns_bbk;Spying;nsutil;nsbb;nscompta;partage;nsdn;docking;nautilus;$(BCB)\lib;$(BCB)\lib\obj;$(BCB)\Projects\Lib;..\..\Program Files\Java\j2sdk1.4.2_04\lib;C:\Program Files\Java\j2sdk1.4.2_04\jre\bin\server
-Item17=pilot;ns_bbk\gcd;ns_bbk;Spying;nsutil;nsbb;nscompta;partage;nsdn;docking;nautilus;$(BCB)\lib;$(BCB)\lib\obj;$(BCB)\Projects\Lib;..\..\Program Files\Java\j2sdk1.4.2_04\lib
-Item18=pilot;ns_bbk\gcd;ns_bbk;Spying;nsutil;nsbb;nscompta;partage;nsdn;docking;nautilus;$(BCB)\lib;$(BCB)\lib\obj;$(BCB)\Projects\Lib;C:\Program Files\Java\j2sdk1.4.2_04\lib
-Item19=pilot;ns_bbk\gcd;ns_bbk;Spying;nsutil;nsbb;nscompta;partage;nsdn;docking;nautilus;$(BCB)\lib;$(BCB)\lib\obj;$(BCB)\Projects\Lib;..\..\j2sdk1.4.1\lib
-Item20=pilot;ns_bbk\gcd;ns_bbk;Spying;nsutil;nsbb;nscompta;partage;nsdn;docking;nautilus;$(BCB)\lib;$(BCB)\lib\obj;$(BCB)\Projects\Lib;\j2sdk1.4.1\lib
-Item21=pilot;ns_bbk\gcd;ns_bbk;Spying;nsutil;nsbb;nscompta;partage;nsdn;docking;nautilus;$(BCB)\lib;$(BCB)\lib\obj;$(BCB)\Projects\Lib;\\j2sdk1.4.1\lib
-Item22=ns_bbk\gcd;ns_bbk;Spying;nsutil;nsbb;nscompta;partage;nsdn;docking;nautilus;$(BCB)\lib;$(BCB)\lib\obj;$(BCB)\Projects\Lib
-Item23=..\..\Program Files\Borland\CBuilder4\Lib;..\..\Program Files\Borland\CBuilder4\Bin;ns_bbk\gcd;ns_bbk;..;p;pa;par;part;parta;partag;Spying;..\Program Files\Borland\CBuilder4\Lib\Release;..\Program Files\Borland\CBuilder4\Bin;$(BCB)\Projects\Lib;..\builder4\cbuilder4\Lib;nsutil;nsbb;nscompta;partage;nsdn;docking;nautilus;$(BCB)\lib\obj;$(BCB)\lib
-Item24=ns_bbk\gcd;ns_bbk;..;p;pa;par;part;parta;partag;Spying;..\Program Files\Borland\CBuilder4\Lib\Release;..\Program Files\Borland\CBuilder4\Bin;$(BCB)\Projects\Lib;..\builder4\cbuilder4\Lib;nsutil;nsbb;nscompta;partage;nsdn;docking;nautilus;$(BCB)\lib\obj;$(BCB)\lib
-Item25=ns_bbk\gcd;ns_bbk;..\;p\;pa\;par;part;parta;partag;Spying;..\Program Files\Borland\CBuilder4\Lib\Release;..\Program Files\Borland\CBuilder4\Bin;$(BCB)\Projects\Lib;..\builder4\cbuilder4\Lib;nsutil;nsbb;nscompta;partage;nsdn;docking;nautilus;$(BCB)\lib\obj;$(BCB)\lib
-Item26=..\Program Files\Borland\CBuilder4\Lib\Release;..\Program Files\Borland\CBuilder4\Bin;$(BCB)\Projects\Lib;..\builder4\cbuilder4\Lib;nsutil;nsbb;nscompta;partage;nsdn;docking;nautilus;$(BCB)\lib\obj;$(BCB)\lib
-Item27=$(BCB)\Projects\Lib;..\builder4\cbuilder4\Lib;nsutil;nsbb;nscompta;partage;nsdn;docking;nautilus;$(BCB)\lib\obj;$(BCB)\lib
-Item28=..\builder4\cbuilder4\Lib;nsutil;nsbb;nscompta;partage;nsdn;docking;nautilus;$(BCB)\lib\obj;$(BCB)\lib
-Item29=nsutil;nsbb;nscompta;partage;nsdn;docking;nautilus;$(BCB)\lib\obj;$(BCB)\lib
+Item0=nsoutil;..\..\..\..\Program Files (x86)\Borland\CBuilder4\Lib;include\nautilus;export;partage;curl;nsutil;nscompta;nautilus;docking;..\..\..\..\cvs\episodus;indy\c4;$(BCB)\lib;$(BCB)\lib\obj;$(BCB)\Projects\Lib;$(BCB)\imports;..\..\..\..\Program Files (x86)\Java\jdk1.6.0_30\lib;..\..\..\..\Program Files (x86)\Java\jdk1.6.0_30\jre\bin\server
+Item1=..\..\..\..\Program Files (x86)\Borland\CBuilder4\Lib;include\nautilus;export;partage;curl;nsutil;nscompta;nautilus;docking;..\..\..\..\cvs\episodus;indy\c4;$(BCB)\lib;$(BCB)\lib\obj;$(BCB)\Projects\Lib;$(BCB)\imports;..\..\..\..\Program Files (x86)\Java\jdk1.6.0_30\lib;..\..\..\..\Program Files (x86)\Java\jdk1.6.0_30\jre\bin\server
+Item2=include\nautilus;export;partage;curl;nsutil;nscompta;nautilus;docking;..\..\..\..\cvs\episodus;indy\c4;$(BCB)\lib;$(BCB)\lib\obj;$(BCB)\Projects\Lib;$(BCB)\imports;..\..\..\..\Program Files (x86)\Java\jdk1.6.0_30\lib;..\..\..\..\Program Files (x86)\Java\jdk1.6.0_30\jre\bin\server
+Item3=include\nautilus;export;partage;curl;nsutil;nscompta;nautilus;docking;..\..\..\..\cvs\episodus;..\indy\c4;$(BCB)\lib;$(BCB)\lib\obj;$(BCB)\Projects\Lib;$(BCB)\imports;..\..\..\..\Program Files (x86)\Java\jdk1.6.0_30\lib;..\..\..\..\Program Files (x86)\Java\jdk1.6.0_30\jre\bin\server
+Item4=..\..\..\..\cvs\episodus;..\indy\c4;$(BCB)\lib;$(BCB)\lib\obj;$(BCB)\Projects\Lib;$(BCB)\imports;..\..\..\..\Program Files (x86)\Java\jdk1.6.0_30\lib;..\..\..\..\Program Files (x86)\Java\jdk1.6.0_30\jre\bin\server
+Item5=include\nautilus;..\..\Program Files (x86)\Borland\CBuilder4\Lib;curl;export;pilot;ns_bbk\gcd;ns_bbk;Spying;nsutil;nsbb;nscompta;partage;nsdn;docking;nautilus;$(BCB)\lib;$(BCB)\lib\obj;$(BCB)\Projects\Lib;$(BCB)\imports;..\..\Program Files (x86)\Java\jdk1.6.0_30\lib;..\..\Program Files (x86)\Java\jdk1.6.0_30\jre\bin\server
+Item6=..\..\Program Files (x86)\Borland\CBuilder4\Lib;curl;export;pilot;ns_bbk\gcd;ns_bbk;Spying;nsutil;nsbb;nscompta;partage;nsdn;docking;nautilus;$(BCB)\lib;$(BCB)\lib\obj;$(BCB)\Projects\Lib;$(BCB)\imports;..\..\Program Files (x86)\Java\jdk1.6.0_30\lib;..\..\Program Files (x86)\Java\jdk1.6.0_30\jre\bin\server
+Item7=curl;export;pilot;ns_bbk\gcd;ns_bbk;Spying;nsutil;nsbb;nscompta;partage;nsdn;docking;nautilus;$(BCB)\lib;$(BCB)\lib\obj;$(BCB)\Projects\Lib;$(BCB)\imports;..\..\Program Files (x86)\Java\jdk1.6.0_30\lib;..\..\Program Files (x86)\Java\jdk1.6.0_30\jre\bin\server
+Item8=curl;export;pilot;ns_bbk\gcd;ns_bbk;Spying;nsutil;nsbb;nscompta;partage;nsdn;docking;nautilus;$(BCB)\lib;$(BCB)\lib\obj;$(BCB)\Projects\Lib;$(BCB)\imports;C:\Program Files\Java\jdk1.6.0_17\lib;C:\Program Files\Java\jdk1.6.0_17\jre\bin\server
+Item9=..\..\Program Files\Borland\CBuilder4\Lib;curl;export;pilot;ns_bbk\gcd;ns_bbk;Spying;nsutil;nsbb;nscompta;partage;nsdn;docking;nautilus;$(BCB)\lib;$(BCB)\lib\obj;$(BCB)\Projects\Lib;$(BCB)\imports;..\..\j2sdk1.4.2\lib;..\..\j2sdk1.4.2\jre\bin\server
+Item10=curl;export;pilot;ns_bbk\gcd;ns_bbk;Spying;nsutil;nsbb;nscompta;partage;nsdn;docking;nautilus;$(BCB)\lib;$(BCB)\lib\obj;$(BCB)\Projects\Lib;$(BCB)\imports;..\..\j2sdk1.4.2\lib;..\..\j2sdk1.4.2\jre\bin\server
+Item11=curl;cur;cu\;c\;..\..\Program Files\Borland\CBuilder4\Lib;include\nautilus;..\..\Program Files\Borland\CBuilder4\Imports;export;pilot;ns_bbk\gcd;ns_bbk;Spying;nsutil;nsbb;nscompta;partage;nsdn;docking;nautilus;$(BCB)\lib;$(BCB)\lib\obj;$(BCB)\Projects\Lib;..\..\j2sdk1.4.1\lib;..\..\j2sdk1.4.1\jre\bin\server
+Item12=..\..\Program Files\Borland\CBuilder4\Lib;include\nautilus;..\..\Program Files\Borland\CBuilder4\Imports;export;pilot;ns_bbk\gcd;ns_bbk;Spying;nsutil;nsbb;nscompta;partage;nsdn;docking;nautilus;$(BCB)\lib;$(BCB)\lib\obj;$(BCB)\Projects\Lib;..\..\j2sdk1.4.1\lib;..\..\j2sdk1.4.1\jre\bin\server
+Item13=export;pilot;ns_bbk\gcd;ns_bbk;Spying;nsutil;nsbb;nscompta;partage;nsdn;docking;nautilus;$(BCB)\lib;$(BCB)\lib\obj;$(BCB)\Projects\Lib;..\..\j2sdk1.4.1\lib;..\..\j2sdk1.4.1\jre\bin\server
+Item14=export;pilot;ns_bbk\gcd;ns_bbk;Spying;nsutil;nsbb;nscompta;partage;nsdn;docking;nautilus;$(BCB)\lib;$(BCB)\lib\obj;$(BCB)\Projects\Lib;C:\j2sdk1.4.1\lib;C:\j2sdk1.4.1\jre\bin\server
+Item15=export;pilot;ns_bbk\gcd;ns_bbk;Spying;nsutil;nsbb;nscompta;partage;nsdn;docking;nautilus;$(BCB)\lib;$(BCB)\lib\obj;$(BCB)\Projects\Lib;..\..\Program Files\Java\j2sdk1.4.2_04\lib;..\..\Program Files\Java\j2sdk1.4.2_04\jre\bin\server
+Item16=pilot;ns_bbk\gcd;ns_bbk;Spying;nsutil;nsbb;nscompta;partage;nsdn;docking;nautilus;$(BCB)\lib;$(BCB)\lib\obj;$(BCB)\Projects\Lib;..\..\Program Files\Java\j2sdk1.4.2_04\lib;..\..\Program Files\Java\j2sdk1.4.2_04\jre\bin\server
+Item17=pilot;ns_bbk\gcd;ns_bbk;Spying;nsutil;nsbb;nscompta;partage;nsdn;docking;nautilus;$(BCB)\lib;$(BCB)\lib\obj;$(BCB)\Projects\Lib;..\..\Program Files\Java\j2sdk1.4.2_04\lib;C:\Program Files\Java\j2sdk1.4.2_04\jre\bin\server
+Item18=pilot;ns_bbk\gcd;ns_bbk;Spying;nsutil;nsbb;nscompta;partage;nsdn;docking;nautilus;$(BCB)\lib;$(BCB)\lib\obj;$(BCB)\Projects\Lib;..\..\Program Files\Java\j2sdk1.4.2_04\lib
+Item19=pilot;ns_bbk\gcd;ns_bbk;Spying;nsutil;nsbb;nscompta;partage;nsdn;docking;nautilus;$(BCB)\lib;$(BCB)\lib\obj;$(BCB)\Projects\Lib;C:\Program Files\Java\j2sdk1.4.2_04\lib
+Item20=pilot;ns_bbk\gcd;ns_bbk;Spying;nsutil;nsbb;nscompta;partage;nsdn;docking;nautilus;$(BCB)\lib;$(BCB)\lib\obj;$(BCB)\Projects\Lib;..\..\j2sdk1.4.1\lib
+Item21=pilot;ns_bbk\gcd;ns_bbk;Spying;nsutil;nsbb;nscompta;partage;nsdn;docking;nautilus;$(BCB)\lib;$(BCB)\lib\obj;$(BCB)\Projects\Lib;\j2sdk1.4.1\lib
+Item22=pilot;ns_bbk\gcd;ns_bbk;Spying;nsutil;nsbb;nscompta;partage;nsdn;docking;nautilus;$(BCB)\lib;$(BCB)\lib\obj;$(BCB)\Projects\Lib;\\j2sdk1.4.1\lib
+Item23=ns_bbk\gcd;ns_bbk;Spying;nsutil;nsbb;nscompta;partage;nsdn;docking;nautilus;$(BCB)\lib;$(BCB)\lib\obj;$(BCB)\Projects\Lib
+Item24=..\..\Program Files\Borland\CBuilder4\Lib;..\..\Program Files\Borland\CBuilder4\Bin;ns_bbk\gcd;ns_bbk;..;p;pa;par;part;parta;partag;Spying;..\Program Files\Borland\CBuilder4\Lib\Release;..\Program Files\Borland\CBuilder4\Bin;$(BCB)\Projects\Lib;..\builder4\cbuilder4\Lib;nsutil;nsbb;nscompta;partage;nsdn;docking;nautilus;$(BCB)\lib\obj;$(BCB)\lib
+Item25=ns_bbk\gcd;ns_bbk;..;p;pa;par;part;parta;partag;Spying;..\Program Files\Borland\CBuilder4\Lib\Release;..\Program Files\Borland\CBuilder4\Bin;$(BCB)\Projects\Lib;..\builder4\cbuilder4\Lib;nsutil;nsbb;nscompta;partage;nsdn;docking;nautilus;$(BCB)\lib\obj;$(BCB)\lib
+Item26=ns_bbk\gcd;ns_bbk;..\;p\;pa\;par;part;parta;partag;Spying;..\Program Files\Borland\CBuilder4\Lib\Release;..\Program Files\Borland\CBuilder4\Bin;$(BCB)\Projects\Lib;..\builder4\cbuilder4\Lib;nsutil;nsbb;nscompta;partage;nsdn;docking;nautilus;$(BCB)\lib\obj;$(BCB)\lib
+Item27=..\Program Files\Borland\CBuilder4\Lib\Release;..\Program Files\Borland\CBuilder4\Bin;$(BCB)\Projects\Lib;..\builder4\cbuilder4\Lib;nsutil;nsbb;nscompta;partage;nsdn;docking;nautilus;$(BCB)\lib\obj;$(BCB)\lib
+Item28=$(BCB)\Projects\Lib;..\builder4\cbuilder4\Lib;nsutil;nsbb;nscompta;partage;nsdn;docking;nautilus;$(BCB)\lib\obj;$(BCB)\lib
+Item29=..\builder4\cbuilder4\Lib;nsutil;nsbb;nscompta;partage;nsdn;docking;nautilus;$(BCB)\lib\obj;$(BCB)\lib
 
 [HistoryLists\hlDebugSourcePath]
 Count=1
@@ -318,9 +306,9 @@ Item1=user=coucou
 Item2=test=coucou
 
 [HistoryLists\hlFinalOutputDir]
-Count=9
-Item0=..\..\..\..\cvs\episodus\
-Item1=..\..\..\..\cvs\episodusItem1=C:\cvs\episodusItem1=..\..\..\..\cvs\episodusItem1=..\..\..\..\cvs\episodusItem1=..\..\..\..\cvs\episodusItem1=..\..\..\..\cvs\episodusItem1=..\..\..\..\cvs\episodusItem1=..\..\..\..\cvs\episodus
+Count=20
+Item0=C:\cvs\episodus\
+Item1=..\..\..\..\cvs\episodusItem1=..\..\..\..\cvs\episodusItem1=..\..\..\..\cvs\episodusItem1=C:\cvs\episodusItem1=
 Item2=
 Item3=
 Item4=
@@ -328,11 +316,22 @@ Item5=
 Item6=
 Item7=
 Item8=
+Item9=
+Item10=
+Item11=
+Item12=
+Item13=
+Item14=
+Item15=
+Item16=
+Item17=
+Item18=
+Item19=
 
 [HistoryLists\hIBPIOutputDir]
-Count=9
+Count=20
 Item0=C:\cvs\episodus\
-Item1=C:\cvs\episodusItem1=C:\cvs\episodusItem1=C:\cvs\episodusItem1=C:\cvs\episodusItem1=C:\cvs\episodusItem1=C:\cvs\episodusItem1=C:\cvs\episodusItem1=..\..\..\..\cvs\episodus
+Item1=C:\cvs\episodusItem1=C:\cvs\episodusItem1=C:\cvs\episodusItem1=C:\cvs\episodusItem1=
 Item2=
 Item3=
 Item4=
@@ -340,6 +339,17 @@ Item5=
 Item6=
 Item7=
 Item8=
+Item9=
+Item10=
+Item11=
+Item12=
+Item13=
+Item14=
+Item15=
+Item16=
+Item17=
+Item18=
+Item19=
 
 [Debugging]
 DebugSourceDirs=$(BCB)\source\vcl

@@ -10,6 +10,8 @@
 #include <fstream.h>
 #include <stdlib.h>
 
+#include "nssavoir\nsBdmDriver.h"
+#include "nssavoir\nspathor.h"
 #include "nautilus\nssuper.h"
 #include "nsdn\nsdochis.h"
 #include "nautilus\nsdocview.h"

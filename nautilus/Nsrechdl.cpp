@@ -8,6 +8,7 @@
 #include <owl\module.h>
 #include <bde.hpp>
 
+#include "nssavoir\nsBdmDriver.h"
 #include "nautilus\nsrechdl.h"
 #include "nautilus\nsrechd2.h"
 #include "nautilus\nssuper.h"
@@ -20,7 +21,7 @@
 #include "nsoutil\mexcel.h"
 #include "nsoutil\nsfilgui.h"
 #include "nsoutil\nsUpdateDlg.h"
-#include "nsepisod\nsldvuti.h"
+#include "nsldv\nsldvuti.h"
 #include "nssavoir\nsgraphe.h"
 #include "nsbb\nsedit.h"
 #include "nautilus\nshisto.rh"
@@ -343,18 +344,18 @@ NSPropDocDialog::SetupWindow()
 
 	string sLang = pContexte->getUserLanguage() ;
 
-	if (NULL == pInfos)
+	if ((NSDocumentInfo*) NULL == pInfos)
 		return ;
 
-	string sText = pContexte->getSuperviseur()->getText("documentProperties", "title") + string(" ") + sTitre + "\r\n" ;
-	sText += pContexte->getSuperviseur()->getText("documentProperties", "documentType") + string(" ") + pInfos->getTypeSem() + "\r\n" ;
+	string sText = pContexte->getSuperviseur()->getText("documentProperties", "title") + string(" ") + sTitre + string("\r\n") ;
+	sText += pContexte->getSuperviseur()->getText("documentProperties", "documentType") + string(" ") + pInfos->getTypeSem() + string("\r\n") ;
 	sText += pContexte->getSuperviseur()->getText("documentProperties", "documentID") + string(" ") + pInfos->getID() + string("\r\n") ;
 
 	string sDateAffiche = donne_date(pInfos->getCreDate(), sLang) ;
-	sText += pContexte->getSuperviseur()->getText("documentProperties", "creationDate") + string(" ") + sDateAffiche + "\r\n" ;
+	sText += pContexte->getSuperviseur()->getText("documentProperties", "creationDate") + string(" ") + sDateAffiche + string("\r\n") ;
 
   sDateAffiche = donne_date(pInfos->getDateExm(), sLang) ;
-	sText += pContexte->getSuperviseur()->getText("documentProperties", "executionDate") + string(" ") + sDateAffiche + "\r\n" ;
+	sText += pContexte->getSuperviseur()->getText("documentProperties", "executionDate") + string(" ") + sDateAffiche + string("\r\n") ;
 
   string sCreateur = string("") ;
   string sCreatorId = pInfos->getCreator() ;
@@ -365,23 +366,48 @@ NSPropDocDialog::SetupWindow()
       sCreateur = pPerson->getCivilite() ;
   }
 
-	sText += pContexte->getSuperviseur()->getText("documentProperties", "author") + string(" ") + sCreateur + "\r\n" ;
+	sText += pContexte->getSuperviseur()->getText("documentProperties", "author") + string(" ") + sCreateur + string("\r\n") ;
 
-	if (string("") != pInfos->getLocalis())		sText += pContexte->getSuperviseur()->getText("documentProperties", "filePath") + string(" ") + pInfos->getLocalis() + "\r\n" ;
+	if (string("") != pInfos->getLocalis())		sText += pContexte->getSuperviseur()->getText("documentProperties", "filePath") + string(" ") + pInfos->getLocalis() + string("\r\n") ;
 
 	if (string("") != pInfos->getFichier())
-  	sText += pContexte->getSuperviseur()->getText("documentProperties", "fileName") + string(" ") + pInfos->getFichier() + "\r\n" ;
+  	sText += pContexte->getSuperviseur()->getText("documentProperties", "fileName") + string(" ") + pInfos->getFichier() + string("\r\n") ;
 
   if (string("") != pInfos->getTemplate())
-  	sText += pContexte->getSuperviseur()->getText("documentProperties", "templateName") + string(" ") + pInfos->getTemplate() + "\r\n" ;
+  	sText += pContexte->getSuperviseur()->getText("documentProperties", "templateName") + string(" ") + pInfos->getTemplate() + string("\r\n") ;
 
-  if (string("") != pInfos->getEntete())  	sText += pContexte->getSuperviseur()->getText("documentProperties", "headerName") + string(" ") + pInfos->getEntete() + "\r\n" ;
+  if (string("") != pInfos->getEntete())  	sText += pContexte->getSuperviseur()->getText("documentProperties", "headerName") + string(" ") + pInfos->getEntete() + string("\r\n") ;
 
-  sText += pContexte->getSuperviseur()->getText("documentProperties", "importance") + string(" ") + pInfos->getInteret() + "\r\n" ;
+  sText += pContexte->getSuperviseur()->getText("documentProperties", "importance") + string(" ") + pInfos->getInteret() + string("\r\n") ;
   sText += pContexte->getSuperviseur()->getText("documentProperties", "Visible") + string(" ") ;
   if (pInfos->estVisible())  	sText += pContexte->getSuperviseur()->getText("generalLanguage", "yes") ;
   else
   	sText += pContexte->getSuperviseur()->getText("generalLanguage", "no") ;
+
+  // Additional information
+  //
+  ClasseStringVector* pAdditionalInformation = pInfos->getAdditionalInformation() ;
+  if (pAdditionalInformation && (false == pAdditionalInformation->empty()))
+  {
+    sText += string("\r\n") ;
+
+    string sLang = pContexte->getUserLanguage() ;
+
+    for (iterClassString it = pAdditionalInformation->begin() ; pAdditionalInformation->end() != it ; it++)
+    {
+      string sConcept = (*it)->getItem() ;
+      string sLabel   = string("") ;
+      pContexte->getDico()->donneLibelle(sLang, &sConcept, &sLabel) ;
+      if (string("") != sLabel)
+        sLabel[0] = pseumaj(sLabel[0]) ;
+
+      sText += sLabel ;
+
+      string sQualifier = (*it)->getQualifier() ;
+      if (string("") != sQualifier)
+        sText += string(" : ") + sQualifier + string("\r\n") ;
+    }
+  }
 
 	pProp->FormatLines(true) ;
 	pProp->SetText(sText.c_str()) ;
@@ -1633,6 +1659,7 @@ DEFINE_RESPONSE_TABLE1(NSResultReqDialog, NSUtilDialog)
   EV_BN_CLICKED(IDC_RESULTREQ_OUVRIR,   CmOuvrir),
   EV_BN_CLICKED(IDC_RESULTREQ_ENREG,    CmEnregistrer),
   EV_BN_CLICKED(IDC_RESULTREQ_EXCEL,    CmExcelExport),
+  EV_BN_CLICKED(IDC_RESULTREQ_EXP_TXT,  CmTextExport),
   EV_BN_CLICKED(IDC_RESULTREQ_IMPRIMER, CmImprimer),  EV_TCN_KEYDOWN(IDC_RESULTREQ_TABS,    RequestTabKeyDown),	EV_TCN_SELCHANGE(IDC_RESULTREQ_TABS,  RequestTabSelChange), 
 END_RESPONSE_TABLE;
 
@@ -2763,6 +2790,166 @@ NSResultReqDialog::CmExcelExport()
 }
 
 void
+NSResultReqDialog::CmTextExport()
+{
+	NSNomGdDialog* pNomGdDlg =
+        new NSNomGdDialog(this, pContexte->PathName("NREQ"), _sFileNameRes, "txt", pContexte) ;
+
+	if (pNomGdDlg->Execute() != IDOK)
+  {
+  	delete pNomGdDlg ;
+    return ;
+  }
+
+  string sLang = pContexte->getUserLanguage() ;
+
+	// on peut enregistrer sous le nom de fichier proposé
+  string sFileName = pNomGdDlg->sFichier ;
+  delete pNomGdDlg ;
+
+  // Opening file
+  //
+  ofstream outFile ;
+  outFile.open(sFileName.c_str()) ;
+  if (!outFile)
+  {
+    string sErrorText = pContexte->getSuperviseur()->getText("fileErrors", "errorOpeningOutputFile") + string("") + sFileName ;
+    erreur(sErrorText.c_str(), standardError, 0, GetHandle()) ;
+    return ;
+  }
+
+  CMiniExcel miniExcel ;
+
+  // Header
+	//
+  if (pContexte->getUtilisateur())
+  	outFile << string("Utilisateur : ") + pContexte->getUtilisateur()->donneSignature(pContexte) + NEWLINE ;
+
+  NVLdVTemps tNow ;
+  tNow.takeTime() ;
+
+  string sReqDate = donne_date(tNow.donneDateHeure(), sLang) ;
+  outFile << string("Date : ") + sReqDate + NEWLINE ;
+  outFile << NEWLINE ;
+
+	// Research criteria
+  //
+	if (pReqDlg)
+  {
+  	if (pReqDlg->useCritPat())
+		{
+    	outFile << string("Critères patients :") + NEWLINE ;
+
+      NSCritReqPatient* pCritPat = pReqDlg->getCritPat() ;
+
+      if (string("") != pCritPat->getNom())
+      	outFile << string("- Nom                    : ") + pCritPat->getNom() + NEWLINE ;
+      if (string("") != pCritPat->getPrenom())
+        outFile << string("- Prénom                 : ") + pCritPat->getPrenom() + NEWLINE ;
+      if (string("") != pCritPat->getSexe())
+        outFile << string("- Sexe                   : ") + pCritPat->getSexe() + NEWLINE ;
+      if (string("") != pCritPat->getDateN1())
+        outFile << string("- Date de naissance mini : ") + pCritPat->getDateN1() + NEWLINE ;
+      if (string("") != pCritPat->getDateN2())
+        outFile << string("- Date de naissance maxi : ") + pCritPat->getDateN2() + NEWLINE ;
+      if (string("") != pCritPat->getSitfam())
+        outFile << string("- Situation familiale    : ") + pCritPat->getSitfam() + NEWLINE ;
+      if (string("") != pCritPat->getCodePost())
+        outFile << string("- Code postal            : ") + pCritPat->getCodePost() + NEWLINE ;
+      if (string("") != pCritPat->getVille())
+        outFile << string("- Ville                  : ") + pCritPat->getVille() + NEWLINE ;
+
+      outFile << NEWLINE ;
+		}
+
+		// on écrit les critères document
+		if (pReqDlg->useCritDoc())
+		{
+      outFile << string("Critères documents :") + NEWLINE ;
+
+      NSCritReqDocum* pCritDoc = pReqDlg->getCritDoc() ;
+
+      if (string("") != pCritDoc->sTitreAuteur)
+        outFile << string("- Auteur    : ") + pCritDoc->sTitreAuteur + NEWLINE ;
+      if (string("") != pCritDoc->sCodeRoot)
+        outFile << string("- Type      : ") + pCritDoc->sCodeRoot + NEWLINE ;
+      if (string("") != pCritDoc->sDate1)
+        outFile << string("- Date mini : ") + donne_date(pCritDoc->sDate1, sLang) + NEWLINE ;
+      if (string("") != pCritDoc->sDate2)
+        outFile << string("- Date maxi : ") + donne_date(pCritDoc->sDate2, sLang) + NEWLINE ;
+
+      outFile << NEWLINE ;
+		}
+  }
+
+  outFile << string("Patients explorés :") + NEWLINE ;
+
+  outFile << string("- Total                  : ") + IntToString(_nbPatTotal) + NEWLINE ;
+  outFile << string("- Avec critères patient  : ") + IntToString(_nbPatCritPat) + NEWLINE ;
+  outFile << string("- Avec critères document : ") + IntToString(_nbPatCritDoc) + NEWLINE ;
+  outFile << string("- Retenus                : ") + IntToString(_nbPatResult) + NEWLINE ;
+
+	if (_bReqModeDoc)
+  {
+    outFile << string("Documents :") + NEWLINE ;
+    outFile << string("- Avec critères patient  : ") + IntToString(_nbDocCritPat) + NEWLINE ;
+    outFile << string("- Avec critères document : ") + IntToString(_nbDocCritDoc) + NEWLINE ;
+    outFile << string("- Retenus                : ") + IntToString(_nbDocResult) + NEWLINE ;
+	}
+
+  outFile << NEWLINE ;
+
+  if (false == _VectRequestResults.empty())
+  {
+  	NSRequestResultIter resIter = _VectRequestResults.begin() ;
+    for ( ; _VectRequestResults.end() != resIter ; resIter++)
+    {
+      outFile << string("Requête ") + (*resIter)->getRequestName() + NEWLINE ;
+
+      outFile << string("- Nombre de patients retenus : ") + IntToString((*resIter)->_nbPatResult) + NEWLINE ;
+      if (_bReqModeDoc)
+        outFile << string("- Nombre de documents retenus : ") + IntToString((*resIter)->_nbDocResult) + NEWLINE ;
+
+      if (_bReqModeDoc)
+      {
+        if (false == (*resIter)->_aVectDocumentResults.empty())
+        {
+          outFile << string("Résultats :") + NEWLINE ;
+
+          string sCurrentPatientId = string("") ;
+
+          for (DocumentConstIter it = (*resIter)->_aVectDocumentResults.begin() ; (*resIter)->_aVectDocumentResults.end() != it ; it++)
+          {
+            string sPatId = (*it)->getPatient() ;
+            if (sPatId != sCurrentPatientId)
+            {
+              sCurrentPatientId = sPatId ;
+              NSPatInfo* patInfo = (*resIter)->getPatientFromId(sCurrentPatientId) ;
+              if (patInfo)
+                outFile << patInfo->getNom() + string(" ") + patInfo->getPrenom() + NEWLINE ;
+              else
+                outFile << string("???? patient inconnu") + NEWLINE ;
+            }
+
+            string sDate = donne_date((*it)->getDateDoc(), sLang) ;
+            outFile << string("- ") + (*it)->getDocName() + string(" du ") + sDate + NEWLINE ;
+          }
+        }
+      }
+      else if (false == (*resIter)->_aVectPatientResults.empty())
+      {
+        for (PatientConstIter it = (*resIter)->_aVectPatientResults.begin() ; (*resIter)->_aVectPatientResults.end() != it ; it++)
+          outFile << (*it)->getNom() + string(" ") + (*it)->getPrenom() + NEWLINE ;
+      }
+
+      outFile << NEWLINE ;
+    }
+  }
+
+  outFile.close() ;
+}
+
+void
 NSResultReqDialog::CmImprimer()
 {
 	// On ne fait pas de delete du document
@@ -2827,6 +3014,7 @@ AboutDialog::AboutDialog(TWindow* pere, NSContexte* pCtx)
             :NSUtilDialog(pere, pCtx, "IDD_NS_ABOUT_MUE")
 {
 	_pAppName        = new OWL::TStatic(this, IDC_APPNAME) ;
+  _pBamName        = new OWL::TStatic(this, IDC_BAM_NAME) ;
   _pHistory        = new OWL::TStatic(this, IDC_HISTORY) ;
   _pReleasesViewer = new OWL::TEdit(this, IDC_RELEASES) ;
 }
@@ -2834,6 +3022,7 @@ AboutDialog::AboutDialog(TWindow* pere, NSContexte* pCtx)
 AboutDialog::~AboutDialog()
 {
   delete _pAppName ;
+  delete _pBamName ;
   delete _pReleasesViewer ;
   delete _pHistory ;
 }
@@ -2860,6 +3049,17 @@ void AboutDialog::SetupWindow()
     string sReleaseText = updateParams.getReleaseTxt() ;
     _pReleasesViewer->SetText(sReleaseText.c_str()) ;
   }
+
+  // Bam version
+  //
+  NSBdmDriver* pDriver = pContexte->getBdmDriver() ;
+  if (pDriver)
+  {
+    string sDriverVersion = pDriver->getBamVersionId() ;
+    _pBamName->SetText(sDriverVersion.c_str()) ;
+  }
+  else
+    _pBamName->SetText("Sana base de données médicamenteuse") ;
 }
 
 void AboutDialog::CmOk()
