@@ -1,0 +1,8 @@
+// ListWindow
+
+#define DRUGINFO    1040
+#define DRUGALERT1  1041
+#define DRUGALERT2  1042
+#define DRUGALERT3  1043
+#define DRUGALERT4  1044
+
