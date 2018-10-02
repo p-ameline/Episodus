@@ -38,8 +38,8 @@
 #include "dcodeur/nsphrase.h"
 #include "dcodeur/nsgenlan.h"
 #include "nsepisod/eptables.h"
-#include "nautilus/nscr_amx.h"
-#include "nautilus/nscr_ama.h"
+#include "dcodeur/nscr_amx.h"
+#include "dcodeur/nscr_ama.h"
 
 long dkdNoyau::lObjectCount = 0 ;
 long gereDate::lObjectCount = 0 ;
@@ -3299,19 +3299,29 @@ gereCode::donne_code(string* pMessage, bool bAvecCode)
     return ;
   }
 
-  // récupération de l'enregistrement
-  DBcurseur.lastError = DBcurseur.getRecord() ;
-  if (DBcurseur.lastError != DBIERR_NONE)
+  if (DBIERR_RECNOTFOUND == DBcurseur.lastError)
   {
-    erreur("classif.db -- erreur de lecture dans la base.", standardError, DBcurseur.lastError, pContexte->GetMainWindow()->GetHandle());
-    DBcurseur.close() ;
-    return ;
+    if (bAvecCode)
+      sLibelle = sCode ;
+    else
+      sLibelle = string("???") ;
   }
-
-  if (bAvecCode)
-    sLibelle = sCode + string(" (") + DBcurseur.getLabel() + string(")") ;
   else
-    sLibelle = DBcurseur.getLabel() ;
+  {
+    // récupération de l'enregistrement
+    DBcurseur.lastError = DBcurseur.getRecord() ;
+    if (DBcurseur.lastError != DBIERR_NONE)
+    {
+      erreur("classif.db -- erreur de lecture dans la base.", standardError, DBcurseur.lastError, pContexte->GetMainWindow()->GetHandle());
+      DBcurseur.close() ;
+      return ;
+    }
+
+    if (bAvecCode)
+      sLibelle = sCode + string(" (") + DBcurseur.getLabel() + string(")") ;
+    else
+      sLibelle = DBcurseur.getLabel() ;
+  }
 
   // on ferme la base
   DBcurseur.lastError = DBcurseur.close() ;
@@ -3320,8 +3330,6 @@ gereCode::donne_code(string* pMessage, bool bAvecCode)
 
   *pMessage = sLibelle ;
 #endif
-
-  return ;
 }
 
 #ifndef _ENTERPRISE_DLL

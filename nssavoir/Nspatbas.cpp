@@ -172,7 +172,7 @@ NSPathoBaseData::sameContentButInterest(const NSPathoBaseData& o) const
 void
 NSPathoBaseData::setFixedSizeValue(string *pValue, size_t iSize, string sNewValue)
 {
-  if ((NULL == pValue) || (0 == iSize))
+  if (((string *) NULL == pValue) || (0 == iSize))
     return ;
 
   if (strlen(sNewValue.c_str()) <= iSize)

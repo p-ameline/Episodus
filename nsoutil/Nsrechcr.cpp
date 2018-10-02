@@ -16,7 +16,7 @@
 #include "nsbb\nsednum.h"
 #include "nsbb\tagNames.h"
 #include "nsbb\nslistWind.h"
-#include "nsepisod\nsldvuti.h"
+#include "nsldv\nsldvuti.h"
 
 #define searchPathSeparator '|'
 #define searchNodeSeparator '/'
@@ -66,6 +66,19 @@ NSRequestResult::copyValues(const NSRequestResult* pSrc)
 	_sRequestBooleanLabel = pSrc->_sRequestBooleanLabel ;
 }
 
+NSPatInfo*
+NSRequestResult::getPatientFromId(const string sPatId)
+{
+  if (_aVectPatientResults.empty())
+    return (NSPatInfo*) 0 ;
+
+  for (PatientConstIter it = _aVectPatientResults.begin() ; _aVectPatientResults.end() != it ; it++)
+    if ((*it)->getNss() == sPatId)
+      return *it ;
+
+  return (NSPatInfo*) 0 ;
+}
+
 NSRequestResult&
 NSRequestResult::operator=(const NSRequestResult& src)
 {
@@ -85,7 +98,7 @@ NSRequestResult::operator=(const NSRequestResult& src)
 DEFINE_RESPONSE_TABLE1(NSRequeteWindow, TListWindow)    EV_WM_LBUTTONDBLCLK,
 END_RESPONSE_TABLE;
 
-NSRequeteWindow::NSRequeteWindow(NSRequeteDialog* pere, int resId) : TListWindow(pere, resId){
+NSRequeteWindow::NSRequeteWindow(NSRequeteDialog* pere, int resId, TModule* module)                :TListWindow(pere, resId, module){
 	pDlg = pere ;
 }
 
@@ -132,7 +145,7 @@ NSRequeteWindow::IndexItemSelect()
 DEFINE_RESPONSE_TABLE1(NSBooleanRequestsWindow, TListWindow)    EV_WM_LBUTTONDBLCLK,
 END_RESPONSE_TABLE;
 
-NSBooleanRequestsWindow::NSBooleanRequestsWindow(NSRequeteDialog* pere, int resId)                        :TListWindow(pere, resId){
+NSBooleanRequestsWindow::NSBooleanRequestsWindow(NSRequeteDialog* pere, int resId, TModule* module)                        :TListWindow(pere, resId, module){
 	pDlg = pere ;
 }
 
@@ -207,8 +220,8 @@ NSRequeteDialog::NSRequeteDialog(TWindow* pere, NSContexte* pCtx)              
 	_bDirty = false ;
 
   _pNomReq       = new NSUtilEdit2(pContexte, this, IDC_REQ_NOM, 80) ;
-  _pListeChem    = new NSRequeteWindow(this, IDC_REQ_LW) ;
-  _pRequestsList = new NSBooleanRequestsWindow(this, IDC_REQ_BOOL_LW) ;
+  _pListeChem    = new NSRequeteWindow(this, IDC_REQ_LW, pNSResModule) ;
+  _pRequestsList = new NSBooleanRequestsWindow(this, IDC_REQ_BOOL_LW, pNSResModule) ;
   _pChemArray    = new NSEltArray ;
   _nbChem = 0;
   _pEditReq      = new NSUtilEdit2(pContexte, this, IDC_REQ_EDIT, 255) ;
@@ -218,10 +231,11 @@ NSRequeteDialog::NSRequeteDialog(TWindow* pere, NSContexte* pCtx)              
   _pModeDoc      = new TRadioButton(this, IDC_REQ_MODDOC /*, pMode */) ;
   _pCritPatBox   = new TCheckBox(this, IDC_REQ_CRITPAT) ;
   _pCritDocBox   = new TCheckBox(this, IDC_REQ_CRITDOC) ;
+
   _pCritPat      = new NSCritReqPatient() ;
   _pCritDoc      = new NSCritReqDocum() ;
   _pLanceur      = new NSLanceReqDialog(this, pCtx, pNSResModule) ;
-  _pPersonList   = (NSPersonsAttributesArray*) 0 ;
+  _pPersonList   = (NSPersonsAttributesArray*) 0 ;
   _sLibReq       = string("") ;
   _bReqModeDoc   = true ;
   _bReqEnCours   = false ;
@@ -280,14 +294,14 @@ voidNSRequeteDialog::SetupWindow()
 
 	// Setting various titles
 	//
+  /*
   setTextForControl(IDC_REQ_STEP1_TXT, "searchingRequestForm", "stepOneDefinePatientsCriteria") ;
   setTextForControl(IDC_REQ_STEP2_TXT, "searchingRequestForm", "stepTwoDefineDocumentsCriteria") ;
   setTextForControl(IDC_REQ_STEP3_TXT, "searchingRequestForm", "stepThreeDefineClinicalCriteria") ;
   setTextForControl(IDC_REQ_STEP4_TXT, "searchingRequestForm", "stepFourDefineClinicalRequests") ;
   setTextForControl(IDC_REQ_STEP5_TXT, "searchingRequestForm", "stepFiveDefineHowToValidate") ;
   setTextForControl(IDC_REQ_STEP6_TXT, "searchingRequestForm", "stepSixRun") ;
-
-
+   */
 /************************
     if (InitChemArray())
         AfficheListeChem();
@@ -298,6 +312,9 @@ voidNSRequeteDialog::SetupWindow()
 
 voidNSRequeteDialog::InitListeChem()
 {
+  if ((NSRequeteWindow*) NULL == _pListeChem)
+    return ;
+
 	string sLocalText = pContexte->getSuperviseur()->getText("searchingRequestForm", "pathNum") ;
   TListWindColumn colNum((char*) sLocalText.c_str(), 20, TListWindColumn::Left, 0) ;
   _pListeChem->InsertColumn(0, colNum) ;
@@ -318,6 +335,9 @@ NSRequeteDialog::getResultPatient(size_t iIndex)
 
 voidNSRequeteDialog::AfficheListeChem()
 {
+  if ((NSRequeteWindow*) NULL == _pListeChem)
+    return ;
+
 	char elt[10] ;
 
 	_pListeChem->DeleteAllItems() ;
@@ -359,6 +379,9 @@ voidNSRequeteDialog::LvnGetDispInfo(TLwDispInfoNotify& dispInfo)
 void
 NSRequeteDialog::InitSearchList()
 {
+  if ((NSBooleanRequestsWindow*) NULL == _pRequestsList)
+    return ;
+
 	string sLocalText = pContexte->getSuperviseur()->getText("searchingRequestForm", "searchName") ;
   TListWindColumn colName((char*) sLocalText.c_str(), 150, TListWindColumn::Left, 0) ;
   _pRequestsList->InsertColumn(0, colName) ;
@@ -371,6 +394,9 @@ NSRequeteDialog::InitSearchList()
 void
 NSRequeteDialog::DisplaySearchList()
 {
+  if ((NSBooleanRequestsWindow*) NULL == _pRequestsList)
+    return ;
+
 	_pRequestsList->DeleteAllItems() ;
 
 	if (true == _aRequestResults.empty())
@@ -418,12 +444,12 @@ voidNSRequeteDialog::TrouveLibElement(string sElement, string& sLibElement)
 	string sCode, sLibelle;
 	string sCodeLex;
 
-	string sLang = "";
+	string sLang = string("") ;
 	if (pContexte && pContexte->getUtilisateur())
 		sLang = pContexte->getUtilisateur()->donneLang() ;
 
 	// on remet à "" sLibElement
-	sLibElement = "" ;
+	sLibElement = string("") ;
 
 	size_t pos1 = 0 ;
 	size_t pos2 = sElement.find(searchPathSeparator) ;
@@ -478,6 +504,23 @@ voidNSRequeteDialog::TrouveLibElement(string sElement, string& sLibElement)
         Msg.SetUnit(sUnite) ;
         Msg.SetComplement(sValeur) ;
         PatPatho.ajoutePatho(sFormat, &Msg, 0) ;
+      }
+      else if ('6' == sCode[0])
+      {
+      	string sClassification = string("") ;
+        string sCodage         = string("") ;
+
+        size_t pos3 = sCode.find(searchNodeSeparator) ;        if (NPOS != pos3)
+        {
+        	sClassification = string(sCode, 0, pos3) ;
+          sCodage         = string(sCode, pos3+2, strlen(sCode.c_str())-pos3-2) ;
+        }
+        else
+        	sClassification  = sCode ;
+
+        Message Msg ;
+        Msg.SetComplement(sCodage) ;
+        PatPatho.ajoutePatho(sClassification, &Msg, 0) ;
       }
       else
       {
@@ -1563,7 +1606,7 @@ NSRequeteDialog::ValeurEquivalente(string sVal1, string sVal2)
 bool
 NSRequeteDialog::CheminDansDocument(int numChemin)
 {
-	bool   bRes = false ;
+	bool bRes = false ;
 
 	if ((numChemin < 1) || (numChemin > _nbChem))  {
     // on laisse les messages d'erreur de 1er niveau
@@ -1595,62 +1638,189 @@ NSRequeteDialog::CheminDansDocument(int numChemin)
   else // cas en pratique impossible
     sLastElt = sChemRech ;
 
-  // Usual case, not a numerical value
+  // Usual case, not a numerical value or a classification code
   //
-  if ((string("") == sLastElt) || ('2' != sLastElt[0]))
+  if ((string("") == sLastElt) || (('2' != sLastElt[0]) && ('6' != sLastElt[0])))
     return DocPpt.CheminDansPatpatho(sChemRech, string(1, searchPathSeparator)) ;
 
-  // Numerical value
+  // Numerical value or classification code
   //
 
   // on reprend le chemin sans le dernier élément
+  //
   if (NPOS != pos)
     sChemRech = string(sChemRech, 0, pos) ;
   else
-    sChemRech = "" ;
+    sChemRech = string("") ;
 
-  // on extrait l'unité et la valeur recherchée
-  size_t pos1 = sLastElt.find(searchNodeSeparator) ;
-  if (NPOS == pos1)
+  // Numerical value
+  //
+  if ('2' == sLastElt[0])
   {
-    // on laisse les messages d'erreur de 1er niveau
-    erreur("Valeur chiffrée sans format dans un chemin de recherche.", standardError, 0, GetHandle()) ;
-    return false ;
-  }
+    // on extrait l'unité et la valeur recherchée
+    size_t pos1 = sLastElt.find(searchNodeSeparator) ;
+    if (NPOS == pos1)
+    {
+      // on laisse les messages d'erreur de 1er niveau
+      erreur("Valeur chiffrée sans format dans un chemin de recherche.", standardError, 0, GetHandle()) ;
+      return false ;
+    }
 
-  string sUniteElt = string(sLastElt, 0, pos1) ;
-  size_t pos2 = sLastElt.find(searchNodeSeparator, pos1+1) ;
-  if (NPOS == pos2)
-  {
-    erreur("Valeur chiffrée non instanciée dans un chemin de recherche.", standardError, 0, GetHandle()) ;
-    return false ;
-  }
+    string sUniteElt = string(sLastElt, 0, pos1) ;
+    size_t pos2 = sLastElt.find(searchNodeSeparator, pos1+1) ;
+    if (NPOS == pos2)
+    {
+      erreur("Valeur chiffrée non instanciée dans un chemin de recherche.", standardError, 0, GetHandle()) ;
+      return false ;
+    }
 
-  string sValeurElt = string(sLastElt, pos2+1, strlen(sLastElt.c_str())-pos2-1) ;
-  if ((string("") == sValeurElt) || ('$' != sValeurElt[0]))
-  {
-    // on laisse les messages d'erreur de 1er niveau
-    erreur("Valeur chiffrée incorrecte dans un chemin de recherche.", standardError, 0, GetHandle()) ;
-    return false ;
-  }
-  // on enlève le '$' pour pouvoir comparer avec la valeur du complement
-  sValeurElt = string(sValeurElt, 1, strlen(sValeurElt.c_str())-1) ;
+    string sValeurElt = string(sLastElt, pos2+1, strlen(sLastElt.c_str())-pos2-1) ;
+    if ((string("") == sValeurElt) || ('$' != sValeurElt[0]))
+    {
+      // on laisse les messages d'erreur de 1er niveau
+      erreur("Valeur chiffrée incorrecte dans un chemin de recherche.", standardError, 0, GetHandle()) ;
+      return false ;
+    }
+    // on enlève le '$' pour pouvoir comparer avec la valeur du complement
+    sValeurElt = string(sValeurElt, 1, strlen(sValeurElt.c_str())-1) ;
 
-  string sValeurDoc = string("") ;
-  string sUniteDoc  = string("") ;
-  bRes = DocPpt.CheminDansPatpatho(0, sChemRech, &sValeurDoc, &sUniteDoc, string(1, searchPathSeparator)) ;
+    string sValeurDoc = string("") ;
+    string sUniteDoc  = string("") ;
+    bRes = DocPpt.CheminDansPatpatho(0, sChemRech, &sValeurDoc, &sUniteDoc, string(1, searchPathSeparator)) ;
 
-  // si on a trouvé une valeur après sChemRech, on vérifie si
-  // elle correspond à la valeur recherchée
-  if (bRes)
-  {
+    if (false == bRes)
+      return false ;
+
+    // si on a trouvé une valeur après sChemRech, on vérifie si
+    // elle correspond à la valeur recherchée
+    //
     if (sUniteElt == sUniteDoc)
       bRes = ValeurEquivalente(sValeurElt, sValeurDoc) ;
     else
       bRes = false ;
-  }
 
-	return bRes ;
+	  return bRes ;
+  }
+  // Classification code
+  //
+  if ('6' == sLastElt[0])
+  {
+    string sClassification = string("") ;
+    string sCodage         = string("") ;
+
+    // on extrait l'unité et la valeur recherchée
+    size_t pos1 = sLastElt.find(searchNodeSeparator) ;
+    if (NPOS == pos1)
+      sClassification = sLastElt ;
+    else
+    {
+      sClassification = string(sLastElt, 0, pos1) ;
+      sCodage         = string(sLastElt, pos1+2, strlen(sLastElt.c_str())-pos1-2) ;
+    }
+
+    // Add the classification in the end of the searched path
+    //
+    sChemRech += searchPathSeparator + sClassification ;
+
+    if (string("") == sCodage)
+      return DocPpt.CheminDansPatpatho(sChemRech, string(1, searchPathSeparator)) ;
+
+    PatPathoIter Iter ;
+    bRes = DocPpt.CheminDansPatpatho(sChemRech, string(1, searchPathSeparator), &Iter) ;
+
+    if ((false == bRes) || ((PatPathoIter) NULL == Iter) || (DocPpt.end() == Iter))
+      return false ;
+
+    // Found a classification code ; check if it fits
+    //
+    string sFoundCodage = (*Iter)->getComplement() ;
+    if (string("") == sFoundCodage)
+      return false ;
+
+    size_t iCodageLen = strlen(sCodage.c_str()) ;
+    size_t iFoundLen  = strlen(sFoundCodage.c_str()) ;
+
+    size_t i         = 0 ;
+    size_t iPostStar = 0 ;
+    size_t jPostStar = 0 ;
+
+    char cModele = sCodage[i] ;
+
+    bool bStar = ('*' == cModele) ;
+    if (bStar)
+    {
+      while (('*' == cModele) && (i < iCodageLen))
+        i++ ;
+
+      // Model only contains stars, so any code is valid
+      //
+      if (i == iCodageLen)
+        return true ;
+
+      iPostStar = i ;
+    }
+
+    for (size_t j = 0 ; j < iFoundLen ; j++)
+    {
+      char cCurrent = sFoundCodage[j] ;
+      if ((cCurrent != cModele) && ('?' != cModele) && (false == bStar))
+        return false ;
+
+      // Caracter is OK, push model's cursor one step further
+      //
+      if ((cCurrent == cModele) || ('?' == cModele))
+      {
+        i++ ;
+
+        // model cursor is at end
+        //
+        if (i == iCodageLen)
+        {
+          // Also at end of found code, that's OK
+          //
+          if (j == iFoundLen - 1)
+            return true ;
+
+          // If not at end of found code and not in a star context, that's bad
+          //
+          if (false == bStar)
+            return false ;
+
+          // If not at end of found code and not in a star context, back to postStar
+          //
+          j = jPostStar ;
+          jPostStar++ ;
+
+          i = iPostStar ;
+        }
+
+        cModele = sCodage[i] ;
+
+        if ('*' == cModele)
+        {
+          while (('*' == cModele) && (i < iCodageLen))
+            i++ ;
+
+          if (i == iCodageLen)
+            return true ;
+
+          bStar = true ;
+          iPostStar = i ;
+        }
+      }
+      // Caracter is not OK, but we are in star mode, back to postStar
+      //
+      else
+      {
+        j = jPostStar ;
+        jPostStar++ ;
+
+        i = iPostStar ;
+      }
+    }
+
+	  return true ;
+  }
 }
 
 // Fonction qui vérifie si le patient en cours correspond aux critères patientbool
@@ -2689,8 +2859,8 @@ DEFINE_RESPONSE_TABLE1(NSEditReqDialog, NSUtilDialog)
 END_RESPONSE_TABLE ;
 NSEditReqDialog::NSEditReqDialog(TWindow* pere, NSContexte* pCtx, TModule* mod)                :NSUtilDialog(pere, pCtx, "IDD_EDITREQ", mod)
 {
-  pListePere = new NSEditReqWindow(this, IDC_EDITREQ_LWPERE) ;
-  pListeFils = new NSEditReqWindow(this, IDC_EDITREQ_LWFILS) ;
+  pListePere = new NSEditReqWindow(this, IDC_EDITREQ_LWPERE, mod) ;
+  pListeFils = new NSEditReqWindow(this, IDC_EDITREQ_LWFILS, mod) ;
   pPereArray = new NSEltArray ;
   pFilsArray = new NSEltArray ;
 
@@ -2966,7 +3136,7 @@ voidNSEditReqDialog::TrouveLibelleValeur(const string sCode, string& sLibelle, 
   size_t pos1 = sCode.find(searchNodeSeparator) ;
   size_t pos2, pos3 ;
 
-  string sLang = "" ;
+  string sLang = string("") ;
   if ((pContexte) && (pContexte->getUtilisateur()))
     sLang = pContexte->getUtilisateur()->donneLang() ;
 
@@ -3185,12 +3355,78 @@ voidNSEditReqDialog::TrouveLibelleValeur(const string sCode, string& sLibelle, 
   }
 }
 
+void
+NSEditReqDialog::findClassificationLabel(const string sCode, string& sLabel, bool bPere)
+{
+  if (string("") == sCode)
+  {
+    sLabel = string("") ;
+    return ;
+  }
+
+  string sClassification = string("") ;
+  string sCodage         = string("") ;
+
+  string sLang = string("") ;
+  if ((pContexte) && (pContexte->getUtilisateur()))
+    sLang = pContexte->getUtilisateur()->donneLang() ;
+
+  size_t pos1 = sCode.find(searchNodeSeparator) ;
+
+  string sClassifLabel = string("") ;
+
+  if (NPOS != pos1)
+  {
+    sClassification = string(sCode, 0, pos1) ;
+
+    if (strlen(sClassification.c_str()) == BASE_LEXI_LEN)
+      pContexte->getDico()->donneLibelle(sLang, &sClassification, &sClassifLabel) ;
+    else
+    {
+      erreur("Classificatoin incorrecte.", standardError, 0, GetHandle()) ;
+      sLabel = sCode ;
+      return ;
+    }
+
+    sCodage = string(sCode, pos1 + 1, strlen(sCode.c_str()) - pos1 - 1) ;
+
+    // on doit obligatoirement avoir une valeur
+    if (string("") == sCodage)
+    {
+      erreur("Code non précisé dans un chemin de recherche.", standardError, 0, GetHandle()) ;
+      sLabel = sCode ;
+      return ;
+    }
+    else if ('$' != sCodage[0])
+    {
+      erreur("Code incorrect dans un chemin de recherche.", standardError, 0, GetHandle()) ;
+      sLabel = sCode ;
+      return ;
+    }
+
+    sCodage = string(sCodage, 1, strlen(sCodage.c_str()) - 1) ;
+
+    sLabel = sClassifLabel + string(" : ") + sCodage ;
+  }
+  else
+  {
+    if (strlen(sCode.c_str()) == BASE_LEXI_LEN)
+      pContexte->getDico()->donneLibelle(sLang, &sCode, &sLabel) ;
+    else
+    {
+      erreur("Classificatoin incorrecte.", standardError, 0, GetHandle()) ;
+      sLabel = sCode ;
+      return ;
+    }
+  }
+}
+
 // Cette fonction traite aussi le décalage// pour les fils, on utilise la valeur de sDecal
 // pour les pères, le décalage est contenu dans les éléments du chemin
 void
 NSEditReqDialog::ParsingChemin(string sChem, bool bPere, string sDecal)
 {
-	string sUnitesDistinctes = "" ;  // pour traiter les fils valeurs chiffrées
+	string sUnitesDistinctes = string("") ;  // pour traiter les fils valeurs chiffrées
 	char   sep = searchPathSeparator ;  // séparateur de blocs pour les pères et les fils
 
 	// bool bVide = true;
@@ -3198,8 +3434,8 @@ NSEditReqDialog::ParsingChemin(string sChem, bool bPere, string sDecal)
 
 	bool bParsing = true ;
 	while (bParsing)	{
-		string sCode = ""  ;
-    string sLibelle = "" ;
+		string sCode    = string("")  ;
+    string sLibelle = string("") ;
 
     if (NPOS != pos2)
     	sCode = string(sChem, pos1, pos2-pos1) ;
@@ -3233,6 +3469,8 @@ NSEditReqDialog::ParsingChemin(string sChem, bool bPere, string sDecal)
     {
     	if ((string("") != sCode) && ('2' == sCode[0]))
       	TrouveLibelleValeur(sCode, sLibelle, bPere) ;
+      else if ((string("") != sCode) && ('6' == sCode[0]))
+        findClassificationLabel(sCode, sLibelle, bPere) ;
       else
       	TrouveLibelle(sCode, sLibelle, bPere) ;
 
@@ -3257,6 +3495,26 @@ NSEditReqDialog::ParsingChemin(string sChem, bool bPere, string sDecal)
         	// cas d'une nouvelle unité : on ajoute aux fils
           sUnitesDistinctes += sUnite + string(1, searchPathSeparator) ;
           TrouveLibelleValeur(sCode, sLibelle, bPere) ;
+          pFilsArray->push_back(new NSElement(sCode, sLibelle, sDecal)) ;
+          nbFils++ ;
+        }
+      }
+      if ((string("") != sCode) && ('6' == sCode[0]))
+      {
+      	// classification entry: find the classification
+        string sClassif = string("") ;
+        size_t pos = sCode.find(searchNodeSeparator) ;
+        if (NPOS != pos)
+        	sClassif = string(sCode, 0, pos) ;
+        else
+        	sClassif = sCode ;
+
+        // si la classification existe déjà, on ne traite pas l'élément
+        if (sUnitesDistinctes.find(sClassif) == NPOS)
+        {
+        	// cas d'une nouvelle unité : on ajoute aux fils
+          sUnitesDistinctes += sClassif + string(1, searchPathSeparator) ;
+          TrouveLibelleValeur(sClassif, sLibelle, bPere) ;
           pFilsArray->push_back(new NSElement(sCode, sLibelle, sDecal)) ;
           nbFils++ ;
         }
@@ -3410,9 +3668,13 @@ boolNSEditReqDialog::CalculeValeur(string& sCode)
   if ((pContexte) && (pContexte->getUtilisateur()))
     sLang = pContexte->getUtilisateur()->donneLang() ;
 
-  string  sValeur;
-  gereNum num = gereNum(pContexte->getSuperviseur(), sLang);
-  string  sUnit = "", sFmt = ""; // valeurs bidon pour pouvoir instancier le gereNum
+  string sValeur = string("") ;
+
+  // valeurs bidon pour pouvoir instancier le gereNum
+  string sUnit   = string("") ;
+  string sFmt    = string("") ;
+
+  gereNum num = gereNum(pContexte->getSuperviseur(), sLang) ;
 
   NSValeurChiffreeDialog VCDlg(this, 255, pContexte, pNSResModule) ;
 
@@ -3432,9 +3694,7 @@ boolNSEditReqDialog::CalculeValeur(string& sCode)
 
         // on instancie la valeur
         if (num.estExact())
-        {
           VCDlg.sValeurExacte = num.getNum() ;
-        }
         else
         {
           if (num.estInf())          {
@@ -3471,7 +3731,7 @@ boolNSEditReqDialog::CalculeValeur(string& sCode)
       sCode = string(sCode, 0, pos2) ;
   }
   else // cas d'erreur : on met un format bidon
-    sCode = VCDlg.sUnite + "£NXXXX" ;
+    sCode = VCDlg.sUnite + searchNodeSeparator + "£NXXXX" ;
 
   // on rajoute la valeur au code
   if (string("") != VCDlg.sValeurExacte)
@@ -3507,6 +3767,43 @@ boolNSEditReqDialog::CalculeValeur(string& sCode)
   return true ;
 }
 
+bool
+NSEditReqDialog::processClassificationCode(string& sCode)
+{
+  string sLang = string("") ;
+  if ((pContexte) && (pContexte->getUtilisateur()))
+    sLang = pContexte->getUtilisateur()->donneLang() ;
+
+  string sClassif = string("") ;
+  string sCodage  = string("") ;
+
+  //
+  // Parsing code, which is of the form classif/$code, ex 6CISP1/$R22
+  //
+  size_t pos1 = sCode.find(searchNodeSeparator) ;
+  if (NPOS != pos1)
+  {
+    sClassif = string(sCode, 0, pos1) ;
+    sCodage  = string(sCode, pos1+2, strlen(sCode.c_str())-pos1-2) ;
+  }
+  else // When the code has not been fixed yet
+    sClassif = sCode ;
+
+  NSClassificationCodeDlg codeDlg(this, pContexte, sCodage, pNSResModule) ;
+  if (codeDlg.Execute() == IDCANCEL)
+    return false ;
+
+  string sNewCodage = codeDlg.getCode() ;
+  if (sNewCodage == sCodage)
+    return true ;
+
+  sCode = sClassif ;
+  if (string("") != sNewCodage)
+    sCode += searchNodeSeparator + string("$") + sNewCodage ;
+
+  return true ;
+}
+
 // ************** Controlesvoid
 NSEditReqDialog::CmInserer()
 {
@@ -3518,9 +3815,30 @@ NSEditReqDialog::CmInserer()
     return ;
 
   string sCode = ModDlg.sCode ;
-  string sLibelle;
 
+  if (string("") == sCode)
+    return ;
+
+  string sLibelle = string("") ;
   TrouveLibelle(sCode, sLibelle, true) ;
+
+  char cCategory = sCode[0] ;
+
+  // Classification
+  //
+  if ('6' == cCategory)
+  {
+    if (processClassificationCode(sCode))
+      // on recalcule le nouveau libelle avec bPere == true
+      findClassificationLabel(sCode, sLibelle, true) ;
+  }
+  else if ('2' == cCategory)
+	{
+		// cas de l'ajout d'une valeur chiffrée : on doit instancier la valeur
+    if (CalculeValeur(sCode))
+    	// on recalcule le nouveau libelle avec bPere == true
+      TrouveLibelleValeur(sCode, sLibelle, true) ;
+  }
 
   pPereArray->push_back(new NSElement(sCode, sLibelle)) ;
   nbPere++ ;
@@ -3551,31 +3869,55 @@ voidNSEditReqDialog::CmModifier()
       string sElmtLabel = element.getLabel() ;
       TrouveLibelleValeur(sElmtCode, sElmtLabel, true) ;
 
+      element.setCode(sElmtCode) ;
+      element.setLabel(sElmtLabel) ;
+
       // on replace l'élément
       *((*pPereArray)[eltChoisi]) = element ;
       AfficheListePere() ;
     }
+
+    return ;
   }
-  else
+  if ((string("") != sElmtCode) && ('6' == sElmtCode[0]))
   {
-    NSModifFilGuideDialog* pModDlg =
-            new NSModifFilGuideDialog(this, sElmtCode, pContexte, pNSResModule) ;
-
-    if (pModDlg->Execute() == IDOK)
+    // Editing a classification entry
+    //
+    if (processClassificationCode(sElmtCode))
     {
-      string sCode = pModDlg->sCode ;
+      // on recalcule le nouveau libelle avec bPere == true
+      //
+      string sElmtLabel = element.getLabel() ;
+      findClassificationLabel(sElmtCode, sElmtLabel, true) ;
 
-      string sLibelle = string("") ;
-      TrouveLibelle(sCode, sLibelle, true) ;
+      element.setCode(sElmtCode) ;
+      element.setLabel(sElmtLabel) ;
 
-      element.setCode(sCode) ;
-      element.setLabel(sLibelle) ;
+      // on replace l'élément
       *((*pPereArray)[eltChoisi]) = element ;
-
       AfficheListePere() ;
     }
-    delete pModDlg ;
+
+    return ;
   }
+
+  NSModifFilGuideDialog* pModDlg =
+          new NSModifFilGuideDialog(this, sElmtCode, pContexte, pNSResModule) ;
+
+  if (pModDlg->Execute() == IDOK)
+  {
+    string sCode = pModDlg->sCode ;
+
+    string sLibelle = string("") ;
+    TrouveLibelle(sCode, sLibelle, true) ;
+
+    element.setCode(sCode) ;
+    element.setLabel(sLibelle) ;
+    *((*pPereArray)[eltChoisi]) = element ;
+
+    AfficheListePere() ;
+  }
+  delete pModDlg ;
 }
 
 voidNSEditReqDialog::CmDetruire()
@@ -3671,6 +4013,79 @@ voidNSEditReqDialog::CmCancel()
 {
 	TDialog::CmCancel() ;
 }
+
+/*****************************************************************************/
+/*                         Find a classification code                        */
+/*****************************************************************************/
+
+DEFINE_RESPONSE_TABLE1(NSClassificationCodeDlg, NSUtilDialog)
+  EV_COMMAND(IDOK,     CmOk),
+  EV_COMMAND(IDCANCEL, CmCancel),
+END_RESPONSE_TABLE ;
+
+NSClassificationCodeDlg::NSClassificationCodeDlg(TWindow* pParent, NSContexte *pCtx, string sCode, TModule* module)
+                        :NSUtilDialog(pParent, pCtx, "SELECT_CODE", module)
+{
+  _pCodeText = new OWL::TStatic(this, CONCEPT_TEXT) ;
+  _pCodeEdit = new OWL::TEdit(this, CONCEPT_EDIT) ;
+
+  _sCode = sCode ;
+}
+
+NSClassificationCodeDlg::~NSClassificationCodeDlg()
+{
+  delete _pCodeText ;
+  delete _pCodeEdit ;
+}
+
+void
+NSClassificationCodeDlg::SetupWindow()
+{
+  NSUtilDialog::SetupWindow() ;
+
+  NSSuper* pSuper = pContexte->getSuperviseur() ;
+
+  string sText = pSuper->getText("drugHistory", "concept") ;
+  _pCodeText->SetCaption(sText.c_str()) ;
+
+  _pCodeEdit->SetText(_sCode.c_str()) ;
+}
+
+void
+NSClassificationCodeDlg::fillCode()
+{
+  if ((OWL::TEdit*) NULL == _pCodeEdit)
+    return ;
+
+  size_t iBuffLen = _pCodeEdit->GetTextLen() ;
+  if (0 == iBuffLen)
+  {
+    _sCode = string("") ;
+    return ;
+  }
+
+	char far* str = new char[iBuffLen + 1] ;
+	_pCodeEdit->GetText(str, iBuffLen + 1) ;
+
+	_sCode = string(str) ;
+  
+	delete[] str ;
+}
+
+void
+NSClassificationCodeDlg::CmOk()
+{
+  fillCode() ;
+
+  NSUtilDialog::CmOk() ;
+}
+
+void
+NSClassificationCodeDlg::CmCancel()
+{
+  NSUtilDialog::CmCancel() ;
+}
+
 
 /*****************************************************************************//*                      GESTION DES CRITERES DE REQUETES                     */
 /*****************************************************************************/
@@ -4351,7 +4766,7 @@ END_RESPONSE_TABLE;
 
 NSReqListUtilDialog::NSReqListUtilDialog(TWindow* pere, NSContexte* pCtx, TModule* mod)                    :NSUtilDialog(pere, pCtx, "IDD_LISTUTI", mod)
 {
-  pListeUtil  = new NSReqListUtilWindow(this, IDC_LISTUTI_LW) ;
+  pListeUtil  = new NSReqListUtilWindow(this, IDC_LISTUTI_LW, mod) ;
   pUtilArray  = new NSUtiliArray ;
   pUtilSelect = new NSUtiliInfo(pContexte) ;
 }
@@ -4579,36 +4994,35 @@ NSValeurChiffreeDialog::SetupWindow()
   pUnite->setLabel(sUnite) ;
 }
 
-
-void
-NSValeurChiffreeDialog::CmAvecInf()
-{
-    if (bAvecInf)
-    {
-        bAvecInf = false;
-        pAvecInf->Uncheck();
-    }
-    else
-    {
-        bAvecInf = true;
-        pAvecInf->Check();
-    }
-}
-
-void
-NSValeurChiffreeDialog::CmAvecSup()
-{
-    if (bAvecSup)
-    {
-        bAvecSup = false;
-        pAvecSup->Uncheck();
-    }
-    else
-    {
-        bAvecSup = true;
-        pAvecSup->Check();
-    }
-}
+voidNSValeurChiffreeDialog::CmAvecInf()
+{
+  if (bAvecInf)
+  {
+    bAvecInf = false ;
+    pAvecInf->Uncheck() ;
+  }
+  else
+  {
+    bAvecInf = true ;
+    pAvecInf->Check() ;
+  }
+}
+
+void
+NSValeurChiffreeDialog::CmAvecSup()
+{
+  if (bAvecSup)
+  {
+    bAvecSup = false ;
+    pAvecSup->Uncheck() ;
+  }
+  else
+  {
+    bAvecSup = true ;
+    pAvecSup->Check() ;
+  }
+}
+
 voidNSValeurChiffreeDialog::CmEffacer()
 {
   // on ne touche pas à l'unité

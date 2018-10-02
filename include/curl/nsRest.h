@@ -13,38 +13,45 @@
 #endif
 
 #ifndef CURL_EXTERN
-  class CURL ;
+  // class CURL ;
 #endif
 
 #include "nsoutil\nsexport.h"
+#include "curl\curl.h"
 
 /** struct to contain the key and value for URL attributes or Body data */
 struct Var
 {
   public:
 
-    Var(const string& k, const string& v)
+    Var(const string& k, const string& v, bool bDontEscape = false)
     {
-      _sKey   = k ;
-      _sValue = v ;
+      _sKey        = k ;
+      _sValue      = v ;
+      _bDontEscape = bDontEscape ;
     }
 
     Var(const Var& rv)
     {
-      _sKey   = rv._sKey ;
-      _sValue = rv._sValue ;
+      _sKey        = rv._sKey ;
+      _sValue      = rv._sValue ;
+      _bDontEscape = rv._bDontEscape ;
     }
 
-    string getKey()   { return _sKey ; }
-    string getValue() { return _sValue ; }
+    string getKey()     { return _sKey ; }
+    string getValue()   { return _sValue ; }
+    bool   dontEscape() { return _bDontEscape ; }
 
-    void   setKey(string sK)   { _sKey   = sK ; }
-    void   setValue(string sV) { _sValue = sV ; }
+    void   setKey(string sK)      { _sKey        = sK ; }
+    void   setValue(string sV)    { _sValue      = sV ; }
+    void   setDontEscape(bool bD) { _bDontEscape = bD ; }
 
   protected:
 
     string _sKey ;
     string _sValue ;
+
+    bool   _bDontEscape ;
 };
 typedef struct Var Var ;
 
@@ -86,10 +93,15 @@ class _NSOUTILCLASSE Rest
     string add_vars_to_uri(const string& url, const vector<Var>& vars) const ;
     string add_escaped_vars_to_uri(NSLibCurl* pLibCurl, CURL *curl, const string& url, const vector<Var>& vars) const ;
 
+    CURLcode getLastError()      { return _lastError ; }
+
   private:
 
     /** Response buffer */
-    string _sBuffer ;
+    string   _sBuffer ;
+
+    /** Latest request return code */
+    CURLcode _lastError ;
 
     /** API URL and REST path - set in cpp */
     static const string API_URL ;

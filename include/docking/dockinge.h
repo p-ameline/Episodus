@@ -39,6 +39,8 @@
 #include <classlib/arrays.h>
 #endif
 
+#include "nsbb/nsexport.h"
+
 // ****************** Forward declaration *************************************
 struct TGridLine;
 class THarborEx;
@@ -56,7 +58,7 @@ void FillSolidRect(HDC hdc, int x, int y, int cx, int cy, COLORREF clr);
 
 // ****************** TDockableControlBarEx ***********************************
 
-class TDockableControlBarEx : public TDockableControlBar
+class _NSBBCLASSE TDockableControlBarEx : public TDockableControlBar
 {
   public:
 
@@ -135,7 +137,7 @@ public:
 };
 
 // ****************** THarborEx ***********************************************
-class THarborEx : public THarbor{
+class _NSBBCLASSE THarborEx : public THarbor{
   public:
 
     THarborEx(TDecoratedFrame& df,
@@ -190,7 +192,7 @@ class THarborEx : public THarbor{
 };
 
 // ****************** TFloatingSlipEx *****************************************
-class TFloatingSlipEx: public TFloatingSlip{
+class _NSBBCLASSE TFloatingSlipEx: public TFloatingSlip{
 public:
   TFloatingSlipEx(TWindow* parent, int x, int y, TWindow* clientWnd = 0,
     bool shrinkToClient = true, int captionHeight = DefaultCaptionHeight,
@@ -209,7 +211,7 @@ protected:
 };
 
 // ****************** TEdgeSlipEx *********************************************
-class TEdgeSlipEx : public TWindow, public TDockingSlip
+class _NSBBCLASSE TEdgeSlipEx : public TWindow, public TDockingSlip
 {
   public:
     TEdgeSlipEx(TDecoratedFrame& parent, TAbsLocation location, OWL::TModule* module = 0);

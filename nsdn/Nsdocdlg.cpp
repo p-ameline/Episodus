@@ -5,7 +5,7 @@
 #include <stdio.h>
 #include <string.h>
 
-#include "partage\nsdivfct.h"#include "nautilus\nssuper.h"#include "nautilus\nsannexe.h"
+#include "partage\nsdivfct.h"#include "nssavoir\nspathor.h"#include "nautilus\nssuper.h"// #include "nautilus\nsannexe.h"
 
 #include "nautilus\nsresour.h"
 #include "nautilus\nshistdo.h"

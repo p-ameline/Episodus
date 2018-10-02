@@ -1,6 +1,6 @@
 
 #include "nsepisod\objectif_viewer.rh"
-#include "nautilus\nsanxary.h"
+#include "nsdn\nsanxary.h"
 #include "nsdn\nsdochis.h"
 #include "nsepisod\objectif_viewer.h"
 #include "nsepisod\nsepisod.h"

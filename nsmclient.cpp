@@ -74,12 +74,70 @@
 #include <vcl.h>
 #pragma hdrstop
 
-USEUNIT("docking\Dockinge.cpp");
 USEUNIT("nautilus\nscompub.cpp");
 USEUNIT("nautilus\ns_html.cpp");
 USEUNIT("nautilus\nsbrowse.cpp");
 USEUNIT("nautilus\nsGrabObjects.cpp");
 USEUNIT("nautilus\nsbrowseSvce.cpp");
+USEUNIT("nautilus\Nsdocref.cpp");
+USEUNIT("nautilus\nsmodhtm.cpp");
+USEUNIT("nautilus\NstriHis.cpp");
+USEUNIT("nautilus\nshistdo.cpp");
+USEUNIT("nautilus\Nsttx.cpp");
+USEUNIT("nautilus\Nschoisi.cpp");
+USEUNIT("nautilus\nspatdlg.cpp");
+USEUNIT("nautilus\NsHistor.cpp");
+USEUNIT("nautilus\nsvueref.cpp");
+USEUNIT("nautilus\Nsdocaga.cpp");
+USEUNIT("nautilus\Nsdocview.cpp");
+USEUNIT("nautilus\Nscrdoc2.cpp");
+USEUNIT("nautilus\Nscrvue.cpp");
+USEUNIT("nautilus\nscsdoc.cpp");
+USEUNIT("nautilus\nscsvue.cpp");
+USEUNIT("nautilus\nsldvdoc.cpp");
+USEUNIT("nautilus\nsldvvue.cpp");
+USEUNIT("nautilus\Nsrechdl.cpp");
+USEUNIT("nautilus\Nsrechd2.cpp");
+USEUNIT("nautilus\nsperary.cpp");
+USEUNIT("nautilus\Nsepicap.cpp");
+USEUNIT("nautilus\nsSOAPview.cpp");
+USEUNIT("nautilus\nscaptview.cpp");
+USEUNIT("nautilus\nsvisual.cpp");
+USEUNIT("nautilus\Nssuper.cpp");
+USEUNIT("nsutil\nscache.cpp");
+USEUNIT("nautilus\wordbasic.cpp");
+USEUNIT("EnumProc.cpp");
+USEUNIT("nautilus\nsepisodview.cpp");
+USEUNIT("nautilus\nscqdoc.cpp");
+USEUNIT("nautilus\nscqvue.cpp");
+USEUNIT("nautilus\naumain.cpp");
+USEUNIT("nautilus\nsmdiframe.cpp");
+USEUNIT("nautilus\nsdrugview.cpp");
+USEUNIT("nautilus\nsgoalview.cpp");
+USEUNIT("nautilus\nsprocessview.cpp");
+USEUNIT("nautilus\nsprocess.cpp");
+USEUNIT("nautilus\nsbackup.cpp");
+USEUNIT("nautilus\nsupdate.cpp");
+USEUNIT("curl\nscurl.cpp");
+USEUNIT("nautilus\nsrcview.cpp");
+USEUNIT("nautilus\nsaddfunctions.cpp");
+USEUNIT("nautilus\WebBrowserPrint.cpp");
+USEUNIT("partage\nsstrcore.cpp");
+USEUNIT("partage\nsstrex.cpp");
+USEUNIT("partage\nswinstr.cpp");
+USEUNIT("export\html2word.cpp");
+USEUNIT("nautilus\nsAcroRead.cpp");
+USEUNIT("nautilus\nsMailSvce.cpp");
+USEUNIT("nautilus\nsTeamDocView.cpp");
+USEUNIT("nautilus\nsFollowUpView.cpp");
+USEUNIT("nautilus\nsVenueDocView.cpp");
+USEUNIT("nautilus\NsInterface.cpp");
+USEUNIT("nautilus\nsCoopChartDV.cpp");
+USEUNIT("nautilus\decisionTreeDV.cpp");
+USEUNIT("nautilus\wordObjects.cpp");
+USEUNIT("nautilus\nsdrughistoview.cpp");
+USEUNIT("nautilus\nsAlertSvce.cpp");
+USEUNIT("nautilus\nsAlertSvceActiveX.cpp");
 USEFORM("nautilus\ActiveX.cpp", WebProxy);
 USEFORM("nautilus\Compos.cpp", WebCompos);
 USEFORM("nautilus\Import.cpp", WebImport);
@@ -88,42 +146,11 @@ USEFORM("nautilus\Lettre.cpp", LettreType);
 USEFORM("nautilus\EMail.cpp", MailBox);
 USEFORM("nautilus\Nssmtp.cpp", ControlSMTP);
 USEFORM("nautilus\ImpImg.cpp", ImportImg);
-USEUNIT("nautilus\Nsdocref.cpp");
-USEUNIT("nautilus\nsmodhtm.cpp");
-USEUNIT("nautilus\NstriHis.cpp");
-USEUNIT("nautilus\nshistdo.cpp");
-USEUNIT("nautilus\nsvisual.cpp");
-USEUNIT("nautilus\Nsttx.cpp");
-USEUNIT("nautilus\Nschoisi.cpp");
-USEUNIT("nautilus\nspatdlg.cpp");
-USEUNIT("nautilus\NsHistor.cpp");
-USEUNIT("nautilus\nsvueref.cpp");
-USEUNIT("nautilus\Nsdocaga.cpp");
-USEUNIT("nscompta\NsAgaVar.cpp");
-USEUNIT("nautilus\Nsdocview.cpp");
-USEUNIT("nautilus\Nscrdoc2.cpp");
-USEUNIT("nautilus\Nscrvue.cpp");
-USEUNIT("nautilus\nscsdoc.cpp");
-USEUNIT("nautilus\nscsvue.cpp");
-USEUNIT("nautilus\nsldvdoc.cpp");
-USEUNIT("nautilus\nsldvvue.cpp");
-USEUNIT("nautilus\nsldvvuetech.cpp");
-USEUNIT("nautilus\nsldvvar.cpp");
-USEUNIT("nautilus\Nsrechdl.cpp");
-USEUNIT("nautilus\Nsrechd2.cpp");
-USEUNIT("nautilus\Nsannexe.cpp");
-USEUNIT("nautilus\nsperary.cpp");
-USEUNIT("nautilus\Nstxstyl.cpp");
-USEUNIT("nautilus\Nstxstar.cpp");
-USEUNIT("nautilus\Nscr_anx.cpp");
-USEUNIT("nautilus\Nscr_ana.cpp");
-USEUNIT("nautilus\nscr_amx.cpp");
-USEUNIT("nautilus\Nscr_ama.cpp");
-USEUNIT("nautilus\Nsepicap.cpp");
-USEUNIT("nautilus\nsSOAPview.cpp");
-USEUNIT("nautilus\nscaptview.cpp");
-USEUNIT("nautilus\Nssuper.cpp");
-USEUNIT("nsutil\nscache.cpp");
+USEFORM("nautilus\AutoWord.cpp", AutoWordForm);
+USEFORM("export\AutoWordExp.cpp", AutoWordFormEx);
+USEFORM("nautilus\WebService.cpp", WebServiceForm);
+USEFORM("include\nautilus\ExamHisto.cpp", ExamHistoForm);
+USEFORM("nautilus\NsIndySmtp.cpp", SMTP);
 USERC("nautilus\nautilus.rc");
 USERC("nautilus\nauti_icons.rc");
 USERC("nautilus\nstypdoc.rc");
@@ -136,6 +163,9 @@ USERC("nautilus\inputdia.rc");
 USERC("nautilus\nsepisod.rc");
 USERC("nautilus\NsSOAP.rc");
 USERC("nautilus\NsMailBox.rc");
+USERC("nautilus\nsldvvue.rc");
+USERC("nautilus\fonctions.rc");
+USERC("docking\stripes_icons.rc");
 USELIB("nsmutil.lib");
 USELIB("nsm_sgbd.lib");
 USELIB("nsmsavoir.lib");
@@ -146,6 +176,8 @@ USELIB("nsmepisod.lib");
 USELIB("nsmoutil.lib");
 USELIB("nsmcompta.lib");
 USELIB("nsm_apicr.lib");
+USELIB("nsmldv.lib");
+USELIB("nsm_ob1.lib");
 USELIB("memmgr.lib");
 USELIB("cp32mti.lib");
 USELIB("bidsvi.lib");
@@ -154,52 +186,7 @@ USELIB("ocfwvi.lib");
 USELIB("jvm.lib");
 USELIB("psapi.lib");
 USELIB("kernel32.lib");
-USEUNIT("adopt.cpp");
-USEUNIT("nautilus\wordbasic.cpp");
-USEFORM("nautilus\AutoWord.cpp", AutoWordForm);
-USEUNIT("EnumProc.cpp");
-USEUNIT("nautilus\nsepisodview.cpp");
-USERC("nautilus\nsldvvue.rc");
-USEUNIT("nautilus\nsldvgoal.cpp");
-USEUNIT("nautilus\nscqdoc.cpp");
-USEUNIT("nautilus\nscqvue.cpp");
-USEUNIT("nautilus\naumain.cpp");
-USEUNIT("nautilus\nsdrugview.cpp");
-USEUNIT("nautilus\nsgoalview.cpp");
-USEUNIT("nautilus\nsprocessview.cpp");
-USEUNIT("nautilus\nsprocess.cpp");
-USEUNIT("nautilus\nsbackup.cpp");
-USEUNIT("nautilus\nsupdate.cpp");
-USEUNIT("curl\nscurl.cpp");
-USEUNIT("nautilus\nsrcview.cpp");
-USEUNIT("nautilus\nsaddfunctions.cpp");
-USERC("nautilus\fonctions.rc");
-USEUNIT("nautilus\WebBrowserPrint.cpp");
-USEUNIT("partage\nsstrcore.cpp");
-USEUNIT("partage\nsstrex.cpp");
-USEUNIT("partage\nswinstr.cpp");
-USERES("nsmclient.res");
-USELIB("nsm_ob1.lib");
-USEFORM("export\AutoWordExp.cpp", AutoWordFormEx);
-USEUNIT("export\html2word.cpp");
-USELIB("ns_capture.lib");
-USEFORM("AcroReader.cpp", AcrobatProxy);
-USEUNIT("nautilus\nsAcroRead.cpp");
-USEFORM("nautilus\WebService.cpp", WebServiceForm);
-USEUNIT("nautilus\nsMailSvce.cpp");
-USEUNIT("nautilus\nsTeamDocView.cpp");
-USEUNIT("nautilus\nsFollowUpView.cpp");
-USEUNIT("nautilus\nsVenueDocView.cpp");
-USEUNIT("nautilus\NsInterface.cpp");
-USEUNIT("nautilus\nsCoopChartDV.cpp");
-USEUNIT("docking\stripeDock.cpp");
-USERC("docking\stripes_icons.rc");
-USEUNIT("nautilus\decisionTreeDV.cpp");
-USEUNIT("nautilus\wordObjects.cpp");
-USEUNIT("nautilus\nsPilotProxy.cpp");
-USEFORM("include\nautilus\ExamHisto.cpp", ExamHistoForm);
-USEFORM("nautilus\NsIndySmtp.cpp", IndySMTP);
-USEUNIT("nautilus\nsdrughistoview.cpp");
+USEUNIT("nautilus\nsTankSvce.cpp");
 //---------------------------------------------------------------------------
 #include "nautilus\nssuper.h"
 #include "ns_ob1\nautilus-bbk.h"
@@ -224,6 +211,8 @@ int OwlMain(int argc, char* argv[])
   // pContexte->setSuperviseur(pNSSuperviseur) ; // now done in NSSuper constructor
 
   TMyApp myApp(pContexte) ;
+
+  // myApp._pFormsApplication = Application ;
 
   // Adapt base directory to exe directory
   //
@@ -475,4 +464,5 @@ catch (xmsg& x)
 */
 }
 #define WinMain
+
 

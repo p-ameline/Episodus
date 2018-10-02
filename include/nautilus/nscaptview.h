@@ -30,8 +30,8 @@
 #include "nautilus\nsdocref.h"
 #include "nautilus\nautilus.rh"
 #include "nautilus\richedap.h"
-#include "nautilus\nscr_anx.h"
-#include "nautilus\nstxstar.h"
+#include "dcodeur\nscr_anx.h"
+#include "dcodeur\nstxstar.h"
 #include "nsbb\nsednum.h"
 #include "partage\NTArray.h"
 

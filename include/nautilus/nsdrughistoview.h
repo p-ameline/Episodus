@@ -23,7 +23,8 @@
 #include "nsbb\nsmview.h"
 #include "nsbb\nslistWind.h"
 #include "nautilus\nsldvdoc.h"
-#include "nautilus\nsldvvar.h"
+#include "nsldv\nsldvvar.h"
+#include "nsldv\nsldvdrug.h"
 
 #define _NSDRUGVIEWCLASS _USERCLASS
 

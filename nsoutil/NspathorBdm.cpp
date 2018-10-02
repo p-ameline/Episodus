@@ -6,6 +6,7 @@
 #include <stdio.h>
 #include <string.h>
 
+#include "nssavoir\nsBdmDriver.h"
 #include "nautilus\nssuper.h"
 #include "partage\nsdivfct.h"
 #include "nsoutil\nsPathorBdm.h"
@@ -326,6 +327,11 @@ ChoixBdmDialog::SetupListe()
   for (NSBdmEntryIter i = _aListeArray.begin() ; _aListeArray.end() != i ; i++)
   {
     string sLabel = (*i)->getLabel() ;
+
+    string sCode  = (*i)->getCode() ;
+    if (string("") != sCode)
+      sLabel += string(" (") + sCode + string(")") ; 
+
     _pListeBox->AddString(sLabel.c_str()) ;
   }
 }

@@ -19,6 +19,7 @@ class BB1BBInterfaceForKs ;
 #include "nsbb\nsMView.h"
 #include "nautilus\nsdocref.h"
 #include "nsbb\nsbb_glo.h"
+#include "partage\nsdivfct.h"
 
 enum ACTIVATIONSTATE { isBlank, isGreen, isRed } ;
 

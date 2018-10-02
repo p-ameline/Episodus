@@ -23,7 +23,8 @@
 #include "nsbb\nsmview.h"
 #include "nsbb\nslistWind.h"
 #include "nautilus\nsldvdoc.h"
-#include "nautilus\nsldvvar.h"
+#include "nsldv\nsldvvar.h"
+#include "nsldv\nsldvdrug.h"
 
 #define MAXCARS 100000      // Limite du texte pour RichEdit
 
@@ -55,9 +56,13 @@ class NSDrugView : public NSLDVView{ public:
   void CmFct5() ; // new guideline file from selection
   void CmFct6() ; // add selection to extisting guideline file
   void CmFct7() ; // drugs history
+  void CmFct8() ; // ordo DCI
+  void CmFct9() ; // drugs alerts
   void CmRights() ;
   void CmPublish() ;
   void CmHistory() ;
+  void CmAlerts() ;
+  void CmSwitchToVD() ;
 
   void CmOk() {}
   void CmCancel() {}
@@ -104,6 +109,12 @@ class NSDrugView : public NSLDVView{ public:
   void   setDrugPrescribeStatus(NSLdvDrug *pDrug, bool bToPrescribe) ;
   void   adaptDrugToPrescribeList(NSLdvDrug *pDrug) ;
 
+  void   openAlertWindow(NSPrescriptionCheckingMessage* pMsg) ;
+  void   closeAlertWindow() ;
+  void   checkByBdm(bool bForceOpenAlert = false) ;
+
+  void   switchToDci(NSLdvDrug *pDrug) ;
+
  protected:
 
 	// Remplissage de la vue
@@ -128,7 +139,11 @@ class NSDrugView : public NSLDVView{ public:
   void   initCurrentList() ;
   void   markAddedDrugs() ;
 
-  void   checkByBdm() ;
+  void   fillCheckingMessage(NSPrescriptionCheckingMessage* pCM) ;
+  void   fillCheckingMessageBasics(NSPrescriptionCheckingMessage* pCM) ;
+  void   fillCheckingMessageProblems(NSPrescriptionCheckingMessage* pCM) ;
+  void   fillCheckingMessageAllergies(NSPrescriptionCheckingMessage* pCM) ;
+  void   fillCheckingMessageDrugs(NSPrescriptionCheckingMessage* pCM) ;
 
   // Variables
   NSLdvDocument*         _pLdVDoc ;	// Pointeur sur document EPISOD  NSDrugsPropertyWindow* _pListeWindow ;  OWL::TControlBar*      _pToolBar ;	        // Barre d'outils
@@ -139,6 +154,8 @@ class NSDrugView : public NSLDVView{ public:
 
   bool                   _bNaturallySorted ;
   int                    _iSortedColumn ;
+
+  bool                   _isBeingUpgraded ;
 
 	DECLARE_RESPONSE_TABLE(NSDrugView) ;
 };

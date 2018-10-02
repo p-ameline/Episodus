@@ -32,7 +32,7 @@
   #include "nsepisod\nsepidiv.h"
 #endif
 
-#include "nsepisod/nsldvuti.h"
+#include "nsldv/nsldvuti.h"
 #include "nssavoir/nsfilgd.h"
 
 #ifndef __linux__
@@ -5091,9 +5091,9 @@ try
   if ((0 == iLibSize) || (iLibSize > FLECHIES_LIBELLE_LEN))
     return string("") ;
 
-  string sResult = "" ;
+  string sResult = string("") ;
 
-	if ((sLibelle == string("")) || (strlen(sLibelle.c_str()) > PATHO_LIBELLE_LEN))
+	if ((string("") == sLibelle) || (strlen(sLibelle.c_str()) > PATHO_LIBELLE_LEN))
 		return sResult ;
 
 #ifndef _ENTERPRISE_DLL
@@ -5108,14 +5108,14 @@ try
 	}
 
 	size_t _iLibSize = strlen(sLibelle.c_str()) ;
-  string sLibelleReq = "" ;
+  string sLibelleReq = string("") ;
 
   if (_iLibSize > 1)
 		sLibelleReq = ConvertitMajuscule(sLibelle) ;
 	else
     sLibelleReq = sLibelle ;
 
-	string sLibelleTemp = "" ;
+	string sLibelleTemp = string("") ;
 
 	dbFlechies.lastError = dbFlechies.chercheClef(&sLibelleReq, "LIBELLES", NODEFAULTINDEX, keySEARCHGEQ, dbiREADLOCK) ;
 	if ((dbFlechies.lastError != DBIERR_NONE) && (dbFlechies.lastError != DBIERR_RECNOTFOUND))

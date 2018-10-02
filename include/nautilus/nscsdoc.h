@@ -11,7 +11,7 @@
 	#define _CSDOCCLASSE __import
 #endif
 
-#include "nautilus\nsannexe.h"
+#include "ns_sgbd\nsannexe.h"
 #include "nautilus\nsdocref.h"
 #include "nsbb\nspatpat.h"
 

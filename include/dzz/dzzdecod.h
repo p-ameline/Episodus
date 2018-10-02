@@ -45,6 +45,8 @@ class decGeneral : public decodage
 
     // Lancement du décodage    void decode() ;
 
-    void versi(int colonne) ;};
+  protected:
+
+    void versi(int colonne) ;    int  countLines() ;};
 
 #endif  // __DZZDECOD_H

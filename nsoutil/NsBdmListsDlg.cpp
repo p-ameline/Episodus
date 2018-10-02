@@ -6,6 +6,7 @@
 #include <stdio.h>
 #include <string.h>
 
+#include "nssavoir\nsBdmDriver.h"
 #include "nautilus\nssuper.h"
 #include "partage\nsdivfct.h"
 #include "nsoutil\nsoutil.h"
@@ -125,7 +126,7 @@ try
   //
  	_aListeArray.vider() ;
 
-  //
+  // Get the entry
   //
   string sText = GetText() ;
   if (string("") == sText)
@@ -186,7 +187,7 @@ ChoixBdmListDialog::FillList()
 
   for (NSBdmEntryIter i = _aListeArray.begin() ; _aListeArray.end() != i ; i++)
   {
-    string sLabel = (*i)->getID() + string(" - ") + (*i)->getLabel() ;
+    string sLabel = (*i)->getCode() + string(" - ") + (*i)->getLabel() ;
     _pListeBox->AddString(sLabel.c_str()) ;
   }
 

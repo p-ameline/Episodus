@@ -9,7 +9,7 @@
 
 #include "nautilus\nssuper.h"
 #include "nsepisod\nsCsvParser.h"
-#include "nsbb\nsWhoIsThere.h"#include "nautilus\nsdocview.h"#include "nautilus\nsepicap.h"#include "nsoutil\nsoutdlg.h"#include "nsbb\nslistwind.h"#include "nsbb\nsPaneSplitter.h"#include "nssavoir\nscapture.h"#include "ns_sgbd\ns_odbc.h"#include "nsepisod\nsToDo.h"#include "partage\ns_timer.h"#include "partage\nsdivfile.h"#include "nsbb\nsbb.h"long NSInsidePersonInformation::lObjectCount = 0 ;long NSInsidePerson::lObjectCount = 0 ;long NSInPersonField::lObjectCount = 0 ;const int ID_PersonsList = 0x100 ;boolFieldSortOrderInf(NSInPersonField *pObj1, NSInPersonField *pObj2)
+#include "nsbb\nsWhoIsThere.h"#include "nautilus\nsdocview.h"#include "nautilus\nsepicap.h"#include "nautilus\nsmdiframe.h"#include "nsoutil\nsoutdlg.h"#include "nsbb\nslistwind.h"#include "nsbb\nsPaneSplitter.h"#include "nssavoir\nscapture.h"#include "ns_sgbd\ns_odbc.h"#include "nsepisod\nsToDo.h"#include "partage\ns_timer.h"#include "partage\nsdivfile.h"#include "nsbb\nsbb.h"long NSInsidePersonInformation::lObjectCount = 0 ;long NSInsidePerson::lObjectCount = 0 ;long NSInPersonField::lObjectCount = 0 ;const int ID_PersonsList = 0x100 ;boolFieldSortOrderInf(NSInPersonField *pObj1, NSInPersonField *pObj2)
 {
   if (((NSInPersonField*) NULL == pObj1) || ((NSInPersonField*) NULL == pObj2))
     return false ;

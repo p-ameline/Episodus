@@ -4,7 +4,7 @@ produced by Borland Resource Workshop
 ****************************************************************************/
 // #include "gg\gg.rh"
 // #include "nsbb\nsbb.rh"
-#include "..\episodus_modules\gg\gg.rh"
+#include "..\..\..\..\cvs\episodus_modules\gg\gg.rh"
 #include "nsbb\nsbb.rh"
 
 POMR_PROBLEM DIALOG 6, 16, 291, 114

@@ -5,6 +5,7 @@
 #include <stdio.h>
 #include <string.h>
 
+#include "nssavoir\nsBdmDriver.h"
 #include "nautilus\nssuper.h"
 #include "nsoutil\nsoutil.h"
 #include "nsoutil\nsBdmDlg.h"
@@ -33,6 +34,23 @@ DrugSortByPriceInf(const NsSelectableDrug *pObj1, const NsSelectableDrug *pObj2)
   if (((NsSelectableDrug*) NULL == pObj1) || ((NsSelectableDrug*) NULL == pObj2))
     return false ;
 
+  // No price = highest price
+  //
+  bool bEmpty1 = (string("") == pObj1->getMinUcdRangePrice()) && (string("") == pObj1->getMaxUcdRangePrice()) ;
+  bool bEmpty2 = (string("") == pObj2->getMinUcdRangePrice()) && (string("") == pObj2->getMaxUcdRangePrice()) ;
+
+  if (bEmpty2)
+  {
+    // No price for both, sort by alphabetic order
+    //
+    if (bEmpty1)
+      return DrugSortByLabelInf(pObj1, pObj2) ;
+    else
+      return true ;
+  }
+  if (bEmpty1)
+    return false ;
+
   double dMinFor1 = StringToDouble(pObj1->getMinUcdRangePrice()) ;
   double dMaxFor1 = StringToDouble(pObj1->getMaxUcdRangePrice()) ;
 
@@ -48,13 +66,33 @@ DrugSortByPriceInf(const NsSelectableDrug *pObj1, const NsSelectableDrug *pObj2)
   if (dMinFor1 < dMinFor2)
     return true ;
 
+  if ((dMinFor1 == dMinFor2) && (dMaxFor1 == dMaxFor2))
+    return DrugSortByLabelInf(pObj1, pObj2) ;
+
 	return false ;
 }boolDrugSortByPriceSup(const NsSelectableDrug *pObj1, const NsSelectableDrug *pObj2)
 {
   if (((NsSelectableDrug*) NULL == pObj1) || ((NsSelectableDrug*) NULL == pObj2))
     return false ;
 
-	return (pObj1->getPrice() > pObj2->getPrice()) ;
+  // No price = lowest price
+  //
+  bool bEmpty1 = (string("") == pObj1->getMinUcdRangePrice()) && (string("") == pObj1->getMaxUcdRangePrice()) ;
+  bool bEmpty2 = (string("") == pObj2->getMinUcdRangePrice()) && (string("") == pObj2->getMaxUcdRangePrice()) ;
+
+  if (bEmpty2)
+  {
+    // No price for both, sort by alphabetic order
+    //
+    if (bEmpty1)
+      return DrugSortByLabelInf(pObj1, pObj2) ;
+    else
+      return true ;
+  }
+  if (bEmpty1)
+    return false ;
+
+	// return (pObj1->getPrice() > pObj2->getPrice()) ;
 
   double dMinFor1 = StringToDouble(pObj1->getMinUcdRangePrice()) ;
   double dMaxFor1 = StringToDouble(pObj1->getMaxUcdRangePrice()) ;
@@ -71,6 +109,9 @@ DrugSortByPriceInf(const NsSelectableDrug *pObj1, const NsSelectableDrug *pObj2)
   if (dMinFor2 < dMinFor1)
     return true ;
 
+  if ((dMinFor1 == dMinFor2) && (dMaxFor1 == dMaxFor2))
+    return DrugSortByLabelInf(pObj1, pObj2) ;
+
 	return false ;
 }
 
@@ -84,6 +125,7 @@ DEFINE_RESPONSE_TABLE1(NSDrugResearchDlg, NSUtilDialog)
   EV_COMMAND(IDOK,                   CmOk),
   EV_COMMAND(IDCANCEL,               CmCancel),
   EV_COMMAND(IDC_DRGSRCH_SEARCH_BTN, CmSearch),
+  EV_CHILD_NOTIFY_AND_CODE(IDC_DRGSRCH_LIST, LBN_DBLCLK, CmDrugDblClk),
 END_RESPONSE_TABLE;
 
 //---------------------------------------------------------------------------
@@ -119,6 +161,19 @@ NSDrugResearchDlg::SetupWindow()
 	NSUtilDialog::SetupWindow() ;
 
   _pDrugSearchLabel->setGetCodeFunctor(new MemFunctor<NSDrugResearchDlg>((NSDrugResearchDlg*)this, &NSDrugResearchDlg::NewCodeSelected)) ;
+}
+
+/**
+ * Double-click on a drug: select it and close
+ */
+void
+NSDrugResearchDlg::CmDrugDblClk(WPARAM /* Cmd */)
+{
+  int iSelected = IndexItemSelect() ;
+  if (-1 == iSelected)
+    return ;
+
+  CmOk() ;
 }
 
 // -----------------------------------------------------------------------------
@@ -171,13 +226,24 @@ NSDrugResearchDlg::NewCodeSelected()
 void
 NSDrugResearchDlg::CmSearch()
 {
-  string sSearchSeed = _pDrugSearchLabel->getCode() ;
-  if (string("") == sSearchSeed)
-    return ;
-
   NSBdmDriver* pDriver = pContexte->getBdmDriver() ;
   if ((NSBdmDriver*) NULL == pDriver)
     return ;
+
+  string sSearchSeed = _pDrugSearchLabel->getCode() ;
+  if (string("") == sSearchSeed)
+  {
+    if (NSBdmDriver::bamTableATC != _iSearchBy)
+      return ;
+
+    string sCode = _pDrugSearchLabel->getTextAsString() ;
+    if (false == IsValidAtcCode(sCode))
+      return ;
+
+    sSearchSeed = pDriver->getBamIdForAtcCode(sCode) ;
+    if (string("") == sSearchSeed)
+      return ;
+  }
 
   NsSelectableDrugArray aDrugs ;
 
@@ -192,8 +258,6 @@ NSDrugResearchDlg::updateList()
   string sRoot = _pDrugSearchLabel->GetSelectedCode() ;
   if (string("") == sRoot)
     _pDrugsList->loadDrugs((NsSelectableDrugArray*) 0) ;
-
-
 }
 
 /**
@@ -243,6 +307,20 @@ NSDrugResearchListWindow::SetupWindow()
   skinSwitchOn("InPatientsListOn") ;
 
   SetupColumns() ;
+
+  switch(pContexte->getDrugSort())
+  {
+    case NSContexte::dsName :
+      _iSortedColumn = 0 ;
+      break ;
+    case NSContexte::dsPrice :
+      _iSortedColumn = 1 ;
+      break ;
+    default:
+      _iSortedColumn = 0 ;
+  }
+
+  _bNaturallySorted = true ;
 }
 
 void
@@ -372,6 +450,8 @@ NSDrugResearchListWindow::refreshList()
 
   if (_aDrugs.empty())
     return ;
+
+  sortBy(_iSortedColumn) ;
 
   // Attention : insert insère au dessus ; il faut inscrire les derniers en premier
   NsSelectableDrugReverseIter drugIt = _aDrugs.rbegin() ;

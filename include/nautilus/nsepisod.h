@@ -13,7 +13,7 @@
   #include "partage/nsglobal.h"
 #endif
 
-#include "nautilus\nscaptur.h"
+#include "nssavoir\nscaptur.h"
 
 //--------------------------------------------------------------------------
 //

@@ -17,7 +17,10 @@
 
 #define	ItemGenerique     string("~????") // peut remplacer n'importe quel item
 #define	ItemPsGenerique   string("~???~") // peut remplacer n'importe quel item
+
                                           // d'une catégorie donnee
+
+#include "nssavoir/nspathor.h"
 
 #ifdef _ENTERPRISE_DLL
   #include "enterpriseLus/nsglobalLus.h"
@@ -35,6 +38,7 @@
 #include "nssavoir/nsguide.h"
 #include "nssavoir/nsfilgd.h"
 #include "nssavoir/nspatho.h"
+
 #include "dcodeur/nsphrase.h"
 #include "nssavoir/nsfilgdEngine.h"
 #include "dcodeur/nsgenlan.h"
@@ -338,7 +342,7 @@ NSDico::donnePatholog(string sLang, const string* pCodeLexique)
 bool
 NSDico::donneLibelleLexique(string sLang, const string* pCodeLexique, string* pLibelleTrouve)
 {
-	if (((string *) NULL == pCodeLexique) || ((string *) NULL == pLibelleTrouve))
+	if (((string*) NULL == pCodeLexique) || ((string*) NULL == pLibelleTrouve))
 		return false ;
 
 	NSPatholog* pPathoLexique = donnePatholog(sLang, pCodeLexique) ;
@@ -584,7 +588,7 @@ NSDico::CodeCategorie(string sChaine)
 }
 
 bool
-NSDico::isDrug(string* pCodeLexiqueOrSens)
+NSDico::isDrug(const string* pCodeLexiqueOrSens)
 {
   if (((string*) NULL == pCodeLexiqueOrSens) || (string("") == *pCodeLexiqueOrSens))
     return false ;
@@ -597,7 +601,7 @@ NSDico::isDrug(string* pCodeLexiqueOrSens)
 }
 
 bool
-NSDico::isDrugOrTreatment(string* pCodeLexiqueOrSens)
+NSDico::isDrugOrTreatment(const string* pCodeLexiqueOrSens)
 {
   if (((string*) NULL == pCodeLexiqueOrSens) || (string("") == *pCodeLexiqueOrSens))
     return false ;
@@ -614,8 +618,11 @@ NSDico::isDrugOrTreatment(string* pCodeLexiqueOrSens)
   return false ;
 }
 
+/**
+ * Is the drug a virtual one (say an international no-name concept)
+ */
 bool
-NSDico::isVirtualDrug(string sLang, string* pCodeLexiqueOrSens, string* pAfficheLabel)
+NSDico::isVirtualDrug(string sLang, const string* pCodeLexiqueOrSens, string* pAfficheLabel)
 {
   if (((string*) NULL == pCodeLexiqueOrSens) || (string("") == *pCodeLexiqueOrSens))
     return false ;
@@ -829,6 +836,66 @@ NSDico::separe(const string* psChaine, string* psLexique, string* psCertitude, s
     else if (string(sChaine2, 0, 4) == "WPLU")
     	*psPluriel = sChaine2 ;
 	}
+}
+
+bool
+NSDico::getAllSynonyms(const string sCode, NSPathoInfoArray* paSynonyms, const string sLang)
+{
+  if (((NSPathoInfoArray*) NULL == paSynonyms) || (string("") == sCode))
+    return false ;
+
+  string sSens = donneCodeSens(&sCode) ;
+
+  size_t iSensLen = strlen(sSens.c_str()) ;
+
+  NSPatholog* pPathoLexique = donnePatholog(sLang, &sSens) ;
+  if ((NSPatholog*) NULL == pPathoLexique)
+    return false ;
+
+  // Search for the semantic root code
+  //
+  DBIResult lastError = pPathoLexique->chercheClef(&sSens, "CODE_INDEX", keySEARCHGEQ, dbiWRITELOCK) ;
+  if ((DBIERR_NONE != lastError) && (DBIERR_EOF != lastError))
+    return false ;
+
+  //
+	// Si on se trouve positionné en fin de fichier on recule
+	//
+	if (DBIERR_EOF == lastError)
+    lastError = pPathoLexique->precedent(dbiWRITELOCK) ;
+
+  lastError = pPathoLexique->getRecord() ;
+
+  if (DBIERR_NONE != lastError)  {
+    erreur("Erreur à la lecture du Lexique", standardError, lastError, pContexte->GetMainWindow()->GetHandle()) ;
+    return false ;
+  }
+
+  string sRecordCode = pPathoLexique->getCode() ;
+
+  while ((DBIERR_NONE == lastError) && (strlen(sRecordCode.c_str()) > iSensLen) && (string(sRecordCode, 0, iSensLen) == sSens))
+	{
+    // Add this record to the results array
+    //
+    paSynonyms->push_back(new NSPathologInfo(pPathoLexique)) ;
+
+    // Get next record
+    //
+    lastError = pPathoLexique->suivant(dbiWRITELOCK) ;
+    if (DBIERR_NONE == lastError)
+    {
+      lastError = pPathoLexique->getRecord() ;
+      if (DBIERR_NONE != lastError)
+      {
+        erreur("Erreur à la lecture du Lexique", standardError, lastError, pContexte->GetMainWindow()->GetHandle()) ;
+        return false ;
+      }
+
+      sRecordCode = pPathoLexique->getCode() ;
+    }
+	}
+
+  return true ;
 }
 
 //-----------------------------------------------------------------------
@@ -3563,7 +3630,9 @@ catch (...)
 #endif
 }
 
-// Get closest is_a that is a (0) generic anatomic element
+/**
+ * Get closest is_a that is a (0) generic anatomic element
+ */
 string
 NSFilGuide::GetClosestGenericIsA(string sCode)
 {
@@ -3579,6 +3648,45 @@ NSFilGuide::GetClosestGenericIsA(string sCode)
 	for (EquiItemIter EquiCode = EquivalentsCode.begin() ; EquivalentsCode.end() != EquiCode ; EquiCode++)
 	  if ((**EquiCode != sCode) && VraiOuFaux(**EquiCode, string("E0"), string("AGENE")))
       return **EquiCode ;
+
+  return string("") ;
+}
+
+/**
+ *  Get the virtual drug from a speciality (from speciality -is a-> virtuak drug)
+ */
+string
+NSFilGuide::getVirtualDrug(const string sSpecialityCode, NSContexte* pContexte, bool bReturnLabel)
+{
+  if ((string("") == sSpecialityCode) || ((NSContexte*) NULL == pContexte))
+    return string("") ;
+
+  // Get all elements such as sSpeciality - is a -> element
+  //
+  string sCodeSens = NSDico::donneCodeSens(&sSpecialityCode) ;
+
+  VecteurString aVecteurString ;
+  chercheEquivalent(sCodeSens, &aVecteurString, string("ES")) ;
+
+  if (aVecteurString.empty())
+    return string("") ;
+
+  // Find if there is a virtual in the list
+  //
+  EquiItemIter itCodes = aVecteurString.begin() ;
+  for ( ; itCodes != aVecteurString.end() ; itCodes++)
+  {
+    if (sCodeSens != **itCodes)
+    {
+      string sLibelleTrouve = string("") ;
+      if (pContexte->getDico()->isVirtualDrug(pContexte->getUserLanguage(), *itCodes, &sLibelleTrouve))
+      {
+        if (bReturnLabel)
+          return sLibelleTrouve ;
+        return **itCodes ;
+      }
+    }
+  }
 
   return string("") ;
 }

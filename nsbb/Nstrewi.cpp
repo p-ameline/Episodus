@@ -4,6 +4,7 @@
 
 #include "partage\nsdivfct.h"
 #include "partage\ns_timer.h"
+#include "nssavoir\nspathor.h"
 #include "nsbb\nsbbtran.h"
 #include "nsbb\nsbbitem.h"
 #include "nsbb\nsbb.h"
@@ -25,7 +26,7 @@
 #include "dcodeur\decoder.h"
 #include "nautilus\nssoapview.h"
 #include "nsdn\nsdochis.h"
-#include "nautilus\nsldvdoc.h"
+#include "nsldv\nsldvdoc_base.h"
 #include "nautilus\nscsdoc.h"
 #include "nautilus\nscsvue.h"
 #include "nsbb\ns_skins.h"

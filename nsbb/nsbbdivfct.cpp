@@ -70,6 +70,7 @@
 #include "partage\nsglobal.h"
 #include "partage\ns_search.h" // Keep it there or NSSearchStruct is badly initialized
 
+#include "nssavoir\nspathor.h"
 #include "nsbb\nsbbitem.h"#include "nsbb\nsbbsmal.h"#include "nsbb\nsbbtran.h"#include "nsbb\nsdlg.h"#include "nsbb\nsradiob.h"
 #include "nsbb\nstrewi.h"
 #include "nsbb\nsbouton.h"
@@ -80,7 +81,7 @@
 #include "nsbb\nsbbdivfct.h"
 #include "nsbb\nsbb_msg.h" //NSDLGRETOUR_DIRECT ..
 #include "partage\nsmatfic.h"
-#include "nsepisod\nsldvuti.h"
+#include "nsldv\nsldvuti.h"
 #include "nsbb\nsattval.h"
 #include "nsbb\nsarc.h"
 #include "nsbb\nsmanager.h"

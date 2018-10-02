@@ -6,12 +6,12 @@
 #include <stdio.h>
 #include <string.h>
 
-#include "nautilus\nssuper.h"
 #include "partage\nsdivfct.h"
+#include "nssavoir\nspathor.h"
+#include "nautilus\nssuper.h"
 #include "nssavoir\nspathor.rh"
 #include "nssavoir\nsfilgd.h"
 #include "nsbb\nsdicogl.h"
-#include "nssavoir\nspathor.h"
 #include "partage\nsglobal.h"
 #include "nsbb\nsbb.h"
 #include "nsbb\nstrewi.h"

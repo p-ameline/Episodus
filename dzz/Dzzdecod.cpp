@@ -37,33 +37,33 @@ decodage::BioLibre(int colonne, string decDeb, string decFin, int sautLigne)
 
 	while ((getCol() > colonne) && iBon())
 	{
-  	if 	  (getSt() ==	"#TLI#")
+  	if 	  (isTexteLibre())
     {
-    	// NSTlibre NSTlibre(pContexte) ;
-      Avance() ;
+    	Avance() ;
       while ((getCol() > refCol) && iBon())
       {
       	if (getSt() == "£??")
         {
-					// bool bOK = NSTlibre.RecupereTexte(pContexte->getPatient()->getNss(), *getCpl(), sDcodeur()) ;
-					Avance() ;
-          // if (bOK)
-          	metPhrase(decDeb, decFin, sautLigne) ;
-				}
+        	setDcodeur(getTexteLibre()) ;
+          Avance() ;
+          metPhrase(decDeb, decFin, sautLigne) ;
+        }
         else
         {
           setDcodeurFromLexique(getStL(), _sLangue) ;
           Avance() ;
-          addToDcodeur(string(".")) ;
+          if (getDcodeur() != string(""))
+          {
+          	setPseumajForFirstChar() ;
+            addToDcodeur(string(".")) ;
+          }
 					metPhrase(decDeb, decFin, sautLigne) ;
         }
-			}
-		}
+      }
+    }
     else
     	Recupere() ;
 	}
-
-	return ;
 }
 
 //  +-----------------------------------------------------------------+
@@ -81,7 +81,6 @@ decodage::lesionVide(string phrase, int colonne)
   addToDcodeur(string(".")) ;
   metPhrase() ;
   finPhrase() ;
-  return ;
 }
 
 decGeneral::decGeneral(NSContexte* pCtx)
@@ -101,6 +100,14 @@ decGeneral::decGeneral(decodageBase* pBase)
 void
 decGeneral::decode()
 {
+  // Is it necessary to change all numbers by their denomination in letters,
+  // as needed for prescriptions of narcotics
+  //
+  bool bAllLettersSentences = false ;
+
+  if (getSt() == string("ZORDS"))
+    bAllLettersSentences = true ;
+
   if (decodage::_pDocument)
   {
     gereDate dateExam(pContexte->getSuperviseur(), _sLangue) ;
@@ -109,11 +116,32 @@ decGeneral::decode()
     entete(&dateExam) ;
   }
 
+  // Prescription lines count
+  //
+  int iPrescriptionLineCount = countLines() ;
+
+  setDcodeur(string("")) ;
+  metPhrase("", ""/*, 1*/) ;
+
+  setDcodeur(string("Cette ordonnance comporte ")) ;
+  if (1 == iPrescriptionLineCount)
+    addToDcodeur(string("une ligne de prescription.")) ;
+  else
+  {
+    string sAllCharText = getAllCharsText(IntToString(iPrescriptionLineCount) + string(" lignes de prescription."), ',', ' ', 0) ;
+    addToDcodeur(sAllCharText) ;
+  }
+  metPhrase("", ""/*, 1*/) ;
+
+  //
+  //
   int refCol = getCol() ;
 
 	while ((getCol() >= refCol) && iBon())
 	{
-  	if 	    ((getSt() == "GPALD") || (getSt() == "GPCOD"))
+    // Concept "ALD" or "ACD"
+    //
+  	if 	    ((getSt() == string("GPALD")) || (getSt() == string("GPCOD")))
     {
     	NSPathologData Data ;
       string sLex = getStL() ;
@@ -128,28 +156,70 @@ decGeneral::decode()
       sTitre[0] = pseumaj(sTitre[0]) ;
       ajLL() ;
       Avance() ;
-      decPrescription Prescri(this) ;
+      decPrescription Prescri(this, bAllLettersSentences) ;
       Prescri.setLibelle(sTitre) ;
       Prescri.decode(refCol) ;
     }
+    // Drug
+    //
     else if (((getSt())[0] == '_') || ((getSt())[0] == 'I') ||
              ((getSt())[0] == 'N') || ((getSt())[0] == 'O') ||
              ((getSt())[0] == 'G'))
     {
-    	decSpecialite Specia(this, dcTiret) ;
+    	decSpecialite Specia(this, bAllLettersSentences, dcTiret) ;
       Specia.decode(refCol) ;
       Specia.donnePhrase() ;
     	setDcodeur(string("")) ;
       metPhrase() ;
     }
+    // Allergy
+    //
+    else if (getSt() == string("EALMD"))
+    {
+    	int refCol2 = getCol() ;
+
+      _pPhraseur->initialise() ;
+      _pGenerateur->reinitialise() ;
+
+      NSPhraseMot concept((*(getitDcode()))->getDataTank(), pContexte) ;
+
+      Avance() ;
+
+      if (getCol() > refCol2)
+        _pPhraseur->pDeuxPoints = new NSPhraseur(pContexte) ;
+
+      int iAllerCount = 0 ;
+
+	    while ((getCol() > refCol2) && iBon())
+	    {
+        NSPhraseMot allergy((*(getitDcode()))->getDataTank(), pContexte) ;
+        _pPhraseur->pDeuxPoints->addCOD(&allergy) ;
+        Avance() ;
+        iAllerCount++ ;
+      }
+
+      if (iAllerCount > 0)
+      {
+        if (iAllerCount > 1)
+          concept.setPluriel(string("WPLUS1")) ;
+
+        _pPhraseur->addCOD(new NSPhraseMot(concept)) ;
+
+        _pGenerateur->genereProposition(dcTiret) ;
+	      if (_pGenerateur->getPropositionPhrase() != string(""))
+	      {
+  	      _pGenerateur->termineProposition() ;
+          setDcodeur(_pGenerateur->getPropositionPhrase()) ;
+          metPhrase("", ""/*, 1*/) ;
+        }
+      }
+    }
 		else
-    	Recupere() ;
+    	BioLibre(refCol) ;
 	}
 
 	if (false == iBon())
 		return ;
-
-	return ;
 }
 
 /*  +-----------------------------------------------------------------+  */
@@ -209,7 +279,49 @@ decGeneral::versi(int colonne)
 
   if (string("") != getDcodeur())
   	metPhrase("", ""/*, 1*/) ;
-
-  return ;
 }
 
+/**
+ *  Count the prescription lines
+ */
+int
+decGeneral::countLines()
+{
+  MetMarque() ;
+
+  int iCount = 0 ;
+  int refCol = getCol() ;
+
+	while ((getCol() >= refCol) && iBon())
+	{
+  	if 	    ((getSt() == string("GPALD")) || (getSt() == string("GPCOD")))
+      Avance() ;
+
+    // Allergies, take care not to take into account
+    //
+    else if (getSt() == string("EALMD"))
+    {
+      int refCol2 = getCol() ;
+      Avance() ;
+      while ((getCol() > refCol2) && iBon())
+        Avance() ;
+    }
+    else if (((getSt())[0] == '_') || ((getSt())[0] == 'I') ||
+             ((getSt())[0] == 'N') || ((getSt())[0] == 'O') ||
+             ((getSt())[0] == 'G'))
+    {
+      iCount++ ;
+
+      int refCol2 = getCol() ;
+      Avance() ;
+      while ((getCol() > refCol2) && iBon())
+        Avance() ;
+    }
+		else
+    	Avance() ;
+	}
+
+  VaMarque() ;
+
+  return iCount ;
+}

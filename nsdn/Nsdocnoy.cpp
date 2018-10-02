@@ -39,7 +39,7 @@
 #include "nsbb\nsbbtran.h"
 #include "nssavoir\nsgraphe.h"
 #include "nssavoir\nsfilgd.h"
-#include "nautilus\nsanxary.h"
+// #include "nautilus\nsanxary.h"
 
 #include "pilot\NautilusPilot.hpp"
 #include "nsbb\tagnames.h"
@@ -1015,7 +1015,7 @@ catch (...)
 void
 NSNoyauDocument::updateAfterSave(string sTreeID, string sMetaID)
 {
-  if (NULL == pContexte->getPatient())
+  if ((NSPatientChoisi*) NULL == pContexte->getPatient())
     return ;
 
   NSPersonGraphManager* pGraphManager = pContexte->getPatient()->getGraphPerson() ;
@@ -1200,7 +1200,8 @@ NSNoyauDocument::Referencer(string typeDoc, string nomDoc, string nomFichier,
                           string sAuthorId, string tmplDoc, string enteteDoc,
                           string sDestinataire, string sCreationDate,
                           string sMasterDoc, NSRootLink::NODELINKTYPES masterLink,
-                          bool bMustConnectToFolder)
+                          bool bMustConnectToFolder,
+                          NSPatPathoArray* pSpecificInfoPatPatho)
 {
 try
 {
@@ -1254,6 +1255,10 @@ try
 	//
 	NSPatPathoArray PatPathoMeta(pContexte->getSuperviseur()) ;
   createMetaPatpatho(&NewDocument, &PatPathoMeta, sAuthorId, typeDoc) ;
+
+  if (pSpecificInfoPatPatho && (false == pSpecificInfoPatPatho->empty()))
+    PatPathoMeta.InserePatPatho(PatPathoMeta.end(), pSpecificInfoPatPatho, 1) ;
+
   setContent(&NewDocument, &PatPathoMeta, typeDoc) ;
 
 	//
@@ -2883,6 +2888,9 @@ NSNoyauDocument::createMetaPatpatho(NSDocumentInfo* pNewDocument, NSPatPathoArra
 	}
 }
 
+/**
+ * Add document type to the metadata tree
+ */
 void
 NSNoyauDocument::setContent(NSDocumentInfo* pNewDocument, NSPatPathoArray* pPatPathoMeta, string typeDoc)
 {

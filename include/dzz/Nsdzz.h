@@ -7,7 +7,7 @@ class NSDocumentData ;
 
 #include "nautilus\nssuper.h"
 #include "nsbb\nspatpat.h"
-#include "nautilus\nscr_ama.h"
+// #include "nautilus\nscr_ama.h"
 
 int _export dcodeKE(char Commande, NSPatPathoArray far *pPatPathoArray,
                     char far *Fichier, NSContexte far *pCtx,

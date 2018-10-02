@@ -12,6 +12,7 @@
 #include "dcodeur\nsphrase.h"
 #include "dcodeur\nsphrobj.h"
 #include "dcodeur\nsgenlan.h"
+#include "nsbb\nsbbtran.h"
 
 long NSPhraseObjet::lBaseObjectCount = 0 ;
 
@@ -504,18 +505,20 @@ NSPhraseGeste::operator=(const NSPhraseGeste& src)
 // -------------------------------------------------------------------------
 // ------------------ METHODES DE NSPhrasePrescript ------------------------
 // -------------------------------------------------------------------------
-NSPhrasePrescript::NSPhrasePrescript(NSContexte* pCtx, int iDecoType, string sLangue)
+NSPhrasePrescript::NSPhrasePrescript(NSContexte* pCtx, int iDecoType, string sLangue, bool bAllLettersSentences)
               	  :NSPhraseObjet(pCtx, iDecoType, sLangue), _Forme((decodageBase*)this), _Event((decodageBase*)this), _Dates(pCtx)
 {
-  _iQuantitePhases  = 0 ;
-  _sNonSubstituable = string("") ;
+  _iQuantitePhases      = 0 ;
+  _sNonSubstituable     = string("") ;
+  _bNumsAsText          = bAllLettersSentences ;
 }
 
-NSPhrasePrescript::NSPhrasePrescript(decodageBase* pBase, int iDecoType, string sLangue)
+NSPhrasePrescript::NSPhrasePrescript(decodageBase* pBase, int iDecoType, string sLangue, bool bAllLettersSentences)
 				          :NSPhraseObjet(pBase, iDecoType, sLangue), _Forme((decodageBase*)this), _Event((decodageBase*)this), _Dates(pBase->pContexte)
 {
-  _iQuantitePhases  = 0 ;
-  _sNonSubstituable = string("") ;
+  _iQuantitePhases      = 0 ;
+  _sNonSubstituable     = string("") ;
+  _bNumsAsText          = bAllLettersSentences ;
 }
 
 NSPhrasePrescript::~NSPhrasePrescript()
@@ -659,6 +662,30 @@ try
           Recupere() ;
       }
     }
+    else if ((getSt() == string("6CIS0")) ||   // CIS code
+             (getSt() == string("6CIP7")) ||
+             (getSt() == string("6CIPT")))
+      Avance() ;
+    else if (getSt() == string("6ATC0"))       // ATC code
+      Avance() ;
+    else if (getSt() == string("0MOTF"))       // Reason for prescription
+    {
+      Avance() ;
+      while ((getCol() > refCol) && iBon())
+        Avance() ;
+    }
+    else if (getSt() == string("LTYPA"))       // Drug type
+    {
+      Avance() ;
+      while ((getCol() > refCol) && iBon())
+      {
+        NSPhraseObjet Type(this) ;
+        Type.ammorce() ;
+        _Garbage.push_back(new NSPhraseObjet(Type)) ;
+        Avance() ;
+      }
+    }
+
     // Texte libre
     else if (getSt() == "#TLI#")
     {
@@ -702,8 +729,6 @@ try
     else
       Recupere() ;
   }
-
-	return ;
 }
 catch (...)
 {
@@ -717,6 +742,9 @@ NSPhrasePrescript::metPhrase(string decDeb, string decFin, int sautLigne)
   _pPhraseur->initialise() ;
   setDcodeur(string("")) ;
 
+  string sDecimalSeparator    = pContexte->getSuperviseur()->getText("0localInformation", "decimalSeparator") ;
+  string sDigitGroupSeparator = pContexte->getSuperviseur()->getText("0localInformation", "digitGroupSeparator") ;
+
   if (string("") != _Event._Objet.getLexique())
   {
     NSPhraseur* pPhraEvent = new NSPhraseur(pContexte) ;
@@ -727,7 +755,11 @@ NSPhrasePrescript::metPhrase(string decDeb, string decFin, int sautLigne)
     pPhraEvent->CCHypoth.push_back(new NSPhraseMot(_Event._Objet.getDataTank(), pContexte)) ;
     if (_pGenerateur->genereProposition(dcTiret, &PropEvent))
     {
-      setDcodeur(PropEvent.getPhrase()) ;
+      string sSentence = PropEvent.getPhrase() ;
+      if (_bNumsAsText)
+        sSentence = getAllCharsText(sSentence, sDecimalSeparator[0], sDigitGroupSeparator[0], 0) ;
+
+      setDcodeur(sSentence) ;
       if (getDcodeur() != string(""))
       {
         setPseumajForFirstChar() ;
@@ -743,6 +775,8 @@ NSPhrasePrescript::metPhrase(string decDeb, string decFin, int sautLigne)
     return ;
   }
 
+  // Phases
+  //
   iterPhraseObj iterPhrase = _Phases.begin() ;
   for ( ; _Phases.end() != iterPhrase ; iterPhrase++)
   {
@@ -750,7 +784,19 @@ NSPhrasePrescript::metPhrase(string decDeb, string decFin, int sautLigne)
     if (pPhase)
     {
       pPhase->metPhrase() ;
-      addToDcodeur(_pGenerateur->getPropositionPhrase()) ;
+
+      if (_bNumsAsText)
+      {
+        string sSentence = getAllCharsText(getDcodeur(), sDecimalSeparator[0], sDigitGroupSeparator[0], 0) ;
+        setDcodeur(sSentence) ;
+      }
+
+      string sProp = _pGenerateur->getPropositionPhrase() ;
+      if (_bNumsAsText)
+        sProp = getAllCharsText(sProp, sDecimalSeparator[0], sDigitGroupSeparator[0], 0) ;
+
+      addToDcodeur(sProp) ;
+      setPseumajForFirstChar() ;
       decodageBase::metPhrase(decDeb, decFin, sautLigne) ;
     }
   }
@@ -759,7 +805,11 @@ NSPhrasePrescript::metPhrase(string decDeb, string decFin, int sautLigne)
 
   if (string("") != _sNonSubstituable)
   {
-    setDcodeur(_sNonSubstituable) ;
+    string sSentence = _sNonSubstituable ;
+    if (_bNumsAsText)
+      sSentence = getAllCharsText(sSentence, sDecimalSeparator[0], sDigitGroupSeparator[0], 0) ;
+
+    setDcodeur(sSentence) ;
     decodageBase::metPhrase(decDeb, decFin, sautLigne) ;
   }
 
@@ -830,6 +880,9 @@ NSPhrasePrescript::metPhraseFreeText(string decDeb, string decFin, int sautLigne
   if (_FreeText.empty())
     return ;
 
+  string sDecimalSeparator    = pContexte->getSuperviseur()->getText("0localInformation", "decimalSeparator") ;
+  string sDigitGroupSeparator = pContexte->getSuperviseur()->getText("0localInformation", "digitGroupSeparator") ;
+
   iterPhraseObj iterPhrase = _FreeText.begin() ;
   for ( ; _FreeText.end() != iterPhrase ; iterPhrase++)
   {
@@ -837,22 +890,54 @@ NSPhrasePrescript::metPhraseFreeText(string decDeb, string decFin, int sautLigne
     string sSens ;
     pContexte->getDico()->donneCodeSens(&sCodeLexique, &sSens) ;
 
-    if ((sSens == "£??") || (sSens == "£C;"))
+    if ((string("£??") == sSens) || (string("£C;") == sSens))
     {
-      setDcodeur((*iterPhrase)->_Objet.getTexteLibre()) ;
+      string sSentence = (*iterPhrase)->_Objet.getTexteLibre() ;
+      if (_bNumsAsText)
+        sSentence = getAllCharsText(sSentence, sDecimalSeparator[0], sDigitGroupSeparator[0], 0) ;
+
+      setDcodeur(sSentence) ;
       decodageBase::metPhrase(decDeb, decFin, sautLigne) ;
     }
     else
     {
       setDcodeurFromLexique(sCodeLexique, _sLangue) ;
+
       if (string("") != getDcodeur())
       {
+        if (_bNumsAsText)
+        {
+          string sSentence = getAllCharsText(getDcodeur(), sDecimalSeparator[0], sDigitGroupSeparator[0], 0) ;
+          setDcodeur(sSentence) ;
+        }
+
         setPseumajForFirstChar() ;
         addToDcodeur(string(".")) ;
       }
       decodageBase::metPhrase(decDeb, decFin, sautLigne) ;
     }
   }
+}
+
+bool
+NSPhrasePrescript::isNarcotic()
+{
+  if (_Garbage.empty())
+    return false ;
+
+  iterPhraseObj iter = _Garbage.begin() ;
+  for ( ; _Garbage.end() != iter ; iter++)
+  {
+    string sCodeLexique = (*iter)->_Objet.getLexique() ;
+
+    string sSens ;
+    pContexte->getDico()->donneCodeSens(&sCodeLexique, &sSens) ;
+
+    if ((string("ISTUP") == sSens) || (string("ISTUA") == sSens))
+      return true ;
+  }
+
+  return false ;
 }
 
 NSPhrasePrescript::NSPhrasePrescript(const NSPhrasePrescript& rv)
@@ -875,6 +960,8 @@ NSPhrasePrescript::NSPhrasePrescript(const NSPhrasePrescript& rv)
   _FreeText         = rv._FreeText ;
 
   _sNonSubstituable = rv._sNonSubstituable ;
+
+  _bNumsAsText      = rv._bNumsAsText ;
 }
 
 NSPhrasePrescript&
@@ -900,6 +987,8 @@ NSPhrasePrescript::operator=(const NSPhrasePrescript& src)
   _FreeText         = src._FreeText ;
 
   _sNonSubstituable = src._sNonSubstituable ;
+
+  _bNumsAsText      = src._bNumsAsText ;
 
   return *this ;
 }
@@ -935,7 +1024,7 @@ NSPhrasePhase::decode(int colonne)
 {
 try
 {
-	NSPhraseTemporel* pTemps = 0 ;
+	NSPhraseTemporel* pTemps = (NSPhraseTemporel*) 0 ;
 
 	int refCol = getCol();
 
@@ -1133,7 +1222,7 @@ try
       // NSPhraseCycle* pCycle = TYPESAFE_DOWNCAST(*iterCycle, NSPhraseCycle) ;
       if (pCycle)
       {
-        // Cycle circadien
+        // Cycle circadien - Daily cycle ; how takes are organized during the day
         //
         if (false == pCycle->Cycle_circadien.empty())
         {
@@ -1152,9 +1241,15 @@ try
               NSPhraseur* pPhraCycle = new NSPhraseur(pContexte) ;
               NSPhraseMot* pMot = new NSPhraseMot(pPrescript->_Forme._Objet.getDataTank(), pContexte) ;
               pMot->initComplement() ;
+
+              // Dose count, ex "3 pills"
+              //
               pMot->getOrCreateFirstComplementPhr()->adjNumeralCardinal = NSPhraseMot(pPrise->nbDose.getDataTank(), pContexte) ;
               // NSPhraseMot* pMot = new NSPhraseMot(pPrise->nbDose.pDonnees, pContexte) ;
               pPhraCycle->COD.push_back(pMot) ;
+
+              // When to be taken
+              //
               if (string("") != pPrise->Moment.getLexique())
                 pPhraCycle->CCTemps.push_back(new NSPhraseMot(pPrise->Moment.getDataTank(), pContexte)) ;
               if (false == pPrise->Temporalite.estVide())
@@ -1166,6 +1261,16 @@ try
               {
                 NSPhraseMotTimeCycle* pMotCycle = new NSPhraseMotTimeCycle(pContexte) ;
                 pPrise->TempoCycle.initCycle(pMotCycle) ;
+
+                // Adaptation to the fact that it is a daily cycle.
+                // When number of actions = 0, it means that we want a sentence
+                // à la "2 injections per day" and not something like
+                // "2 injections once per day" that would mean that they have
+                // to occur in the same time
+                //
+                if (string("0") == pMotCycle->getNumberOfAction())
+                  pMotCycle->setNumberOfAction(string("")) ;
+
                 pPhraCycle->CCTemps.push_back(pMotCycle) ;
               }
 
@@ -1198,6 +1303,19 @@ try
 
               NSPhraseMotTimeCycle* pMotCycle = new NSPhraseMotTimeCycle(pContexte) ;
               pRythme->initCycle(pMotCycle) ;
+
+              // Adaptation to the fact that it is a daily cycle.
+              // If action duration is "1 day", ie the default action duration,
+              // we want a sentence à la "3 times a week" and not "3 times a day per week"
+
+              if ((pMotCycle->getActionDurationValue() == string("1")) &&
+                  (pMotCycle->getActionDurationUnit()  == string("2DAT01")))
+              {
+                pMotCycle->setActionDurationValue(string("")) ;
+                pMotCycle->setActionDurationUnit(string("")) ;
+                pMotCycle->setActionDurationFormat(string("")) ;
+              }
+
               pPhraRythme->CCTemps.push_back(pMotCycle) ;
 
               pPropRythmArray->push_back(pProposRythme) ;
@@ -1366,42 +1484,91 @@ try
           	if (getSt() == "KRYLI")
             {
             	Avance() ;
-              NSPhraseTempoCycle* pTmpCycle = new NSPhraseTempoCycle(this) ;
-              pTmpCycle->iTypeCycle = NSPhraseTempoCycle::Libre ;
-              pTmpCycle->decode(refCol3) ;
+              NSPhraseTempoCycle TmpCycle(this) ;
+              TmpCycle.iTypeCycle = NSPhraseTempoCycle::Libre ;
+              TmpCycle.decode(refCol3) ;
               if (iBon())
               {
               	NSPhrasePrise* pPrise = new NSPhrasePrise(this) ;
-                pPrise->TempoCycle = *pTmpCycle ;
+                pPrise->TempoCycle = TmpCycle ;
                 pPrise->decode(refCol2) ;
                 if (iBon())
                 	Cycle_circadien.push_back(pPrise) ;
                 else
                 	delete pPrise ;
               }
-              delete pTmpCycle ;
             }
             else if (getSt() == "KRYRE")
             {
             	Avance() ;
-              NSPhraseTempoCycle* pTmpCycle = new NSPhraseTempoCycle(this) ;
-              pTmpCycle->iTypeCycle = NSPhraseTempoCycle::Regulier ;
-              pTmpCycle->decode(refCol3) ;
+              NSPhraseTempoCycle TmpCycle(this) ;
+              TmpCycle.iTypeCycle = NSPhraseTempoCycle::Regulier ;
+              TmpCycle.decode(refCol3) ;
               if (iBon())
               {
               	NSPhrasePrise* pPrise = new NSPhrasePrise(this) ;
-                pPrise->TempoCycle = *pTmpCycle ;
+                pPrise->TempoCycle = TmpCycle ;
                 pPrise->decode(refCol2) ;
                 if (iBon())
                 	Cycle_circadien.push_back(pPrise) ;
                 else
                 	delete pPrise ;
               }
-              delete pTmpCycle ;
             }
             else
             	Recupere() ;
           }
+        }
+        // Daily dose = free cycle with
+        //
+        if (getSt() == string("VNBDO"))
+        {
+          int refCol2 = getCol() ;
+
+        	Avance() ;
+
+          NSPhrasePrise* pPrise = new NSPhrasePrise(this) ;
+
+          NSPatPathoInfo PPTinfo ;
+
+          while ((getCol() > refCol2) && iBon())
+          {
+            //
+            PPTinfo = *(*(getitDcode())) ;
+
+            string sLexique = PPTinfo.getLexique() ;
+            if ((string("") != sLexique) && ('£' == sLexique[0]))
+            {
+              pPrise->nbDose = PPTinfo ;
+              Avance() ;
+            }
+            else
+              Recupere() ;
+          }
+
+          if (iBon())
+          {
+            // Say that it is a daily dose (ie a dose "per day")
+            //
+            NSPhraseTempoCycle TmpCycle(this) ;
+            TmpCycle.iTypeCycle    = NSPhraseTempoCycle::Libre ;
+
+            // One day
+            //
+            Message msg(string(""), string("£N0;03"), string("1")) ;
+            msg.SetUnit(string("2DAT01")) ;
+
+            NSPatPathoInfo duration ;
+            duration.initFromMessage(&msg) ;
+
+            TmpCycle.cycleDuration = duration ;
+
+            pPrise->TempoCycle = TmpCycle ;
+
+          	Cycle_circadien.push_back(pPrise) ;
+          }
+          else
+          	delete pPrise ;
         }
         else
         {
@@ -1689,14 +1856,14 @@ NSPhrasePrise::decode(int colonne)
 {
 try
 {
-  NSPhraseTemporel* pTemps = 0 ;
+  NSPhraseTemporel* pTemps = (NSPhraseTemporel*) 0 ;
 
   int refCol = getCol() ;
 
   while ((getCol() > colonne) && iBon())
 	{
     // Nombre de doses
-    if      (getSt() == "VNBDO")
+    if      (getSt() == string("VNBDO"))
     {
       Avance() ;
 
@@ -1718,9 +1885,9 @@ try
       }
     }
     // Date de fermeture
-    else if (getSt() == "KFERM")
+    else if (getSt() == string("KFERM"))
     {
-      if (NULL == pTemps)
+      if ((NSPhraseTemporel*) NULL == pTemps)
       {
         pTemps = new NSPhraseTemporel(this) ;
         pTemps->ammorce() ;
@@ -1729,14 +1896,14 @@ try
       //
       // Date passée d'un évènement ponctuel
       //
-      pTemps->iTypeTps    = TpsDate;
-      pTemps->iFormeTps   = TpsInstant;
-      pTemps->iRepererTps = TpsFutur;
+      pTemps->iTypeTps    = TpsDate ;
+      pTemps->iFormeTps   = TpsInstant ;
+      pTemps->iRepererTps = TpsFutur ;
 
-      pTemps->decode(refCol, false);
+      pTemps->decode(refCol, false) ;
     }
     // Type d'administration
-    else if (getSt() == "0ADMI")
+    else if (getSt() == string("0ADMI"))
     {
       Avance() ;
       while ((getCol() > refCol) && iBon())
@@ -1749,7 +1916,7 @@ try
       }
     }
     // Voie d'administration
-    else if (getSt() == "0VADM")
+    else if (getSt() == string("0VADM"))
     {
       Avance();
       while ((getCol() > refCol) && iBon())
@@ -1782,8 +1949,6 @@ try
   if (pTemps)
     //Temporalite.push_back(new NSPhraseTemporel(*pTemps));
     delete pTemps ;
-
-	return ;
 }
 catch (...)
 {
@@ -2262,13 +2427,15 @@ NSPhraseTemporel::operator=(const NSPhraseTemporel& src)
 // ------------------- METHODES DE NSPhraseTempoCycle ----------------------
 // -------------------------------------------------------------------------
 NSPhraseTempoCycle::NSPhraseTempoCycle(NSContexte* pCtx, int iDecoType, string sLangue)
-                    :NSPhraseObjet(pCtx, iDecoType, sLangue)
+                   :NSPhraseObjet(pCtx, iDecoType, sLangue)
 {
+  iEventNb = 0 ;
 }
 
 NSPhraseTempoCycle::NSPhraseTempoCycle(decodageBase* pBase, int iDecoType, string sLangue)
-                    :NSPhraseObjet(pBase, iDecoType, sLangue)
+                   :NSPhraseObjet(pBase, iDecoType, sLangue)
 {
+  iEventNb = 0 ;
 }
 
 NSPhraseTempoCycle::~NSPhraseTempoCycle()
@@ -2336,7 +2503,7 @@ NSPhraseTempoCycle::decode(int colonne)
         donneDimension(refCol, &numNbEvent) ;
 
         if ((iBon()) && (numNbEvent.getUnite() == "2FOIS1"))
-            iEventNb = int(numNbEvent.getValeur()) ;
+          iEventNb = int(numNbEvent.getValeur()) ;
 
         /*
         if ((PPTinfo.pDonnees->lexique)[0] == '£')
@@ -2390,7 +2557,7 @@ NSPhraseTempoCycle::initCycle(NSPhraseMotTimeCycle* pCycle)
 	pCycle->setActionDurationFormat(eventDuration.getLexique()) ;
 	pCycle->setActionDurationUnit(eventDuration.getUnit()) ;
 
-	StringToInt(pCycle->getNumberOfAction()) ;
+  pCycle->setNumberOfAction(IntToString(iEventNb)) ;
 }
 
 bool

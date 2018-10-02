@@ -18,6 +18,7 @@
 #include <cstring.h>
 
 #include "partage\nsglobal.h"
+#include "nssavoir\nspathor.h"
 #include "nautilus\nssuper.h"
 #include "partage\nsdivfct.h"
 #include "nsoutil\nsoutil.h"
@@ -26,7 +27,6 @@
 #include "nsoutil\ns_arche.rh"
 
 #include "nssavoir\nsgraphe.h"
-#include "nssavoir\nspathor.h"
 #include "pilot\Pilot.hpp"
 #include "pilot\JavaSystem.hpp"
 #include "nsbb\tagNames.h"

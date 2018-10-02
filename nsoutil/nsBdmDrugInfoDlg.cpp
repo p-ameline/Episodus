@@ -4,6 +4,7 @@
 #include <stdio.h>
 #include <string.h>
 
+#include "nssavoir\nsBdmDriver.h"
 #include "nautilus\nssuper.h"
 #include "nsoutil\nsoutil.h"
 #include "nsoutil\nsBdmDrugInfoDlg.h"

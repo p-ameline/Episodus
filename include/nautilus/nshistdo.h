@@ -14,7 +14,7 @@ class NSCSDocument ;
 // #include "nautilus\nsannexe.h"
 // #include "nautilus\nsrechd2.h"
 # include "nsbb\nspatpat.h"
-# include "nautilus\nsanxary.h"
+// # include "nautilus\nsanxary.h"
 # include "nsdn\nsdochis.h"
 
 #define WM_RAFRAICHIR  WM_USER+2

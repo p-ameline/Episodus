@@ -9,6 +9,7 @@
 // FLP  - novembre 2003
 // -----------------------------------------------------------------------------
 
+#include "nssavoir/nsBdmDriver.h"
 #include "nsbb\nsmediccycle.h"
 #include "nsbb\nsmedicdlg.h"
 #include "nsbb\nsbb.h"
@@ -141,14 +142,14 @@ NSRythme::Load(bool /* test_if_simple */)
     	break ;
   }
 
-  if (_data != NULL)
+  if (_data)
 		_data->Load() ;
 }
 
 void
 NSRythme::ReinitDialog(NSPosologieBlock* win)
 {
-	if (NULL == win)
+	if ((NSPosologieBlock*) NULL == win)
 		return ;
 
   DayRythme::ReinitDialog(win) ;
@@ -161,7 +162,7 @@ NSRythme::ReinitDialog(NSPosologieBlock* win)
 NSPatPathoArray*
 NSRythme::SimplifiedTreeForInterpretation()
 {
-	if (_data != NULL)
+	if (_data)
   	return _data->SimplifiedTreeForInterpretation() ;
 	return (NSPatPathoArray*) 0 ;
 }
@@ -306,142 +307,192 @@ void save_func_for_circadien(BaseCirc** CircadienData,CircadienCycle& typeR ,Cir
 void
 NSCircadien::save()
 {
-	int tab = _parent->GetWindow()->tabPoso->GetSel();
+	int tab = _parent->GetWindow()->_tabPoso->GetSel() ;
+
 	switch(tab)
   {
     case 3:                        // Rythme journalier regulier
    //save_func_for_circadien<CircBaseRegular>(&_CircadienData,_Type,RegularCircadien ,_parent);
-      _Type  =  RegularCircadien ;
-   		if (NULL != _CircadienData)
+
+      _Type = RegularCircadien ;
+
+   		if (_CircadienData)
    		{
       	CircBaseRegular* temp = dynamic_cast<CircBaseRegular *>(_CircadienData) ;
-      	if (temp != NULL)
+      	if (temp)
         	temp->save() ;
       	else
         {
         	delete (_CircadienData) ;
           _CircadienData = new CircBaseRegular(_parent) ;
+          _CircadienData->save() ;
         }
       }
     	else
+      {
       	_CircadienData = new CircBaseRegular(_parent) ;
-    	_CircadienData->save() ;
+    	  _CircadienData->save() ;
+      }
+
     	break ;
 
     case 4:                             // Rythme regulier libre
     //save_func_for_circadien<CircBaseFree>(&_CircadienData,_Type,FreeCircadien ,_parent);
+
 			_Type = FreeCircadien ;
-			if (NULL != _CircadienData)
+
+			if (_CircadienData)
 			{
       	CircBaseFree* temp = dynamic_cast<CircBaseFree *>(_CircadienData) ;
-      	if (temp != NULL)
+      	if (temp)
         	temp->save() ;
       	else
         {
           delete (_CircadienData) ;
           _CircadienData = new CircBaseFree(_parent) ;
+          _CircadienData->save() ;
         }
       }
-    else
-      _CircadienData = new  CircBaseFree(_parent);
-    _CircadienData->save();
-    break;
+      else
+      {
+        _CircadienData = new CircBaseFree(_parent) ;
+        _CircadienData->save() ;
+      }
+
+      break;
 
     case 2:
-    _Type  =  HourCircadien;                                // Rythme par heure
-     if (NULL != _CircadienData)
-    {
-      CircBaseHeures* temp = dynamic_cast<CircBaseHeures *>(_CircadienData);
-      if (temp != NULL)
-        temp->save();
+
+      _Type = HourCircadien ;               // Rythme par heure
+
+      if (_CircadienData)
+      {
+        CircBaseHeures* temp = dynamic_cast<CircBaseHeures *>(_CircadienData) ;
+        if (temp)
+          temp->save() ;
         else
         {
-          delete (_CircadienData);
-          _CircadienData = new  CircBaseHeures(_parent);
+          delete _CircadienData ;
+          _CircadienData = new CircBaseHeures(_parent) ;
+          _CircadienData->Load() ;
+          _CircadienData->save() ;
         }
       }
-    else
-      _CircadienData = new  CircBaseHeures(_parent);
-    _CircadienData->Load();
-    _CircadienData->save();
-    break;
+      else
+      {
+        _CircadienData = new CircBaseHeures(_parent) ;
+        _CircadienData->Load() ;
+        _CircadienData->save() ;
+      }
+
+      break ;
 
     case 1:
-    // save_func_for_circadien<CircBaseMMS>(&_CircadienData,_Type,MMS ,_parent);
-    _Type  =  MMS;                                          // Matin Midi Soir
-    if (NULL != _CircadienData)
-    {
-      CircBaseMMS* temp = dynamic_cast<CircBaseMMS *>(_CircadienData);
-      if (temp != NULL)
-        temp->save();
-      else
+
+      // save_func_for_circadien<CircBaseMMS>(&_CircadienData,_Type,MMS ,_parent);
+
+      _Type = MMS ;
+                                                // Matin Midi Soir
+      if (_CircadienData)
+      {
+        CircBaseMMS* temp = dynamic_cast<CircBaseMMS *>(_CircadienData) ;
+        if (temp)
+          temp->save() ;
+        else
         {
-          delete (_CircadienData);
-          _CircadienData = new  CircBaseMMS(_parent);
+          delete (_CircadienData) ;
+          _CircadienData = new CircBaseMMS(_parent) ;
+          _CircadienData->save() ;
         }
       }
-    else
-      _CircadienData = new  CircBaseMMS(_parent);
-    _CircadienData->save();
-    break;
+      else
+      {
+        _CircadienData = new  CircBaseMMS(_parent) ;
+        _CircadienData->save() ;
+      }
+
+      break ;
 
     case 0:
-     //save_func_for_circadien<CircBasePeriode>(&_CircadienData,_Type,Period ,_parent);
-     _Type  =  Period;
-    if (NULL != _CircadienData)
-    {
-      CircBasePeriode* temp = dynamic_cast<CircBasePeriode *>(_CircadienData);
-      if (temp != NULL)
-        temp->save();
-      else
+
+      //save_func_for_circadien<CircBasePeriode>(&_CircadienData,_Type,Period ,_parent);
+
+      _Type = Period ;
+
+      if (_CircadienData)
+      {
+        CircBasePeriode* temp = dynamic_cast<CircBasePeriode *>(_CircadienData) ;
+        if (temp)
+          temp->save() ;
+        else
         {
-          delete (_CircadienData);
-          _CircadienData = new  CircBasePeriode(_parent);
+          delete (_CircadienData) ;
+          _CircadienData = new CircBasePeriode(_parent) ;
+          _CircadienData->save() ;
         }
       }
-    else
-      _CircadienData = new  CircBasePeriode(_parent);
-    _CircadienData->save();                                        // Par periode
-    break;
+      else
+      {
+        _CircadienData = new CircBasePeriode(_parent) ;
+        _CircadienData->save() ;                           // Par periode
+      }
+
+      break ;
 
     case 5:
-   // save_func_for_circadien<CircBaseText>(&_CircadienData,_Type,FreeTxt ,_parent);
-    _Type  =  FreeTxt;
-    if (NULL != _CircadienData)
-    {
-      CircBaseText* temp = dynamic_cast<CircBaseText *>(_CircadienData);
-      if (temp != NULL)
-        temp->save();
-      else
+
+      // save_func_for_circadien<CircBaseText>(&_CircadienData,_Type,FreeTxt ,_parent);
+
+      _Type = FreeTxt ;
+
+      if (_CircadienData)
+      {
+        CircBaseText* temp = dynamic_cast<CircBaseText *>(_CircadienData) ;
+        if (temp)
+          temp->save() ;
+        else
         {
-          delete (_CircadienData);
-          _CircadienData = new  CircBaseText(_parent);
+          delete (_CircadienData) ;
+          _CircadienData = new CircBaseText(_parent) ;
+          _CircadienData->save() ;
         }
       }
-    else
-      _CircadienData = new  CircBaseText(_parent);
-    _CircadienData->save();
-    break;
+      else
+      {
+        _CircadienData = new CircBaseText(_parent) ;
+        _CircadienData->save() ;
+      }
+
+      break ;
+
     case 6:
-     save_func_for_circadien<CircUnique>(&_CircadienData,_Type,PriseUnique ,_parent);
-    _Type  =  PriseUnique;
-    if (NULL != _CircadienData)
-    {
-      CircUnique* temp = dynamic_cast<CircUnique *>(_CircadienData);
-      if (temp != NULL)
-        temp->save();
-      else
+
+      save_func_for_circadien<CircUnique>(&_CircadienData, _Type, PriseUnique, _parent) ;
+
+      _Type = PriseUnique ;
+
+      if (_CircadienData)
+      {
+        CircUnique* temp = dynamic_cast<CircUnique *>(_CircadienData) ;
+        if (temp)
+          temp->save() ;
+        else
         {
-          delete (_CircadienData);
-          _CircadienData = new  CircUnique(_parent);
+          delete (_CircadienData) ;
+          _CircadienData = new  CircUnique(_parent) ;
+          _CircadienData->save() ;
         }
       }
-    else
-      _CircadienData = new  CircUnique(_parent);
-    _CircadienData->save();
-    	break;
+      else
+      {
+        _CircadienData = new CircUnique(_parent) ;
+        _CircadienData->save() ;
+      }
+
+    	break ;
+
     default:
-    	break;
+    	break ;
   };
 }
 
@@ -820,79 +871,94 @@ std::string CircBaseMMS::IsValid()
 
 void CircBaseMMS::ReinitDialog(NSPosologieBlock* win)
 {
-	if (NULL == win)
+	if ((NSPosologieBlock*) NULL == win)
 		return ;
 
-	win->pPriseMatin->getEditNum()->setText("0") ;
-  win->pPriseMidi->getEditNum()->setText("0") ;
-  win->pPriseSoir->getEditNum()->setText("0") ;
-  win->pPriseCoucher->getEditNum()->setText("0") ;
+	win->_pPriseMatin->getEditNum()->setText("0") ;
+  win->_pPriseMidi->getEditNum()->setText("0") ;
+  win->_pPriseSoir->getEditNum()->setText("0") ;
+  win->_pPriseCoucher->getEditNum()->setText("0") ;
 }
 
 void  CircBaseMMS::Load()
 {
-  _parent->GetWindow()->pPriseMatin->getEditNum()->setText(_matin);
-  _parent->GetWindow()->pPriseMidi->getEditNum()->setText(_midi);
-  _parent->GetWindow()->pPriseSoir->getEditNum()->setText(_soir);
-  _parent->GetWindow()->pPriseCoucher->getEditNum()->setText(_coucher);
+  NSPosologieBlock* pPosoBlock = _parent->GetWindow() ;
+  if ((NSPosologieBlock*) NULL == pPosoBlock)
+    return ;
+
+  pPosoBlock->_pPriseMatin->getEditNum()->setText(_matin) ;
+  pPosoBlock->_pPriseMidi->getEditNum()->setText(_midi) ;
+  pPosoBlock->_pPriseSoir->getEditNum()->setText(_soir) ;
+  pPosoBlock->_pPriseCoucher->getEditNum()->setText(_coucher) ;
 }
 
 void  CircBaseMMS::save()
 {
-  std::string temp = "";
-  _matin = _parent->GetWindow()->pPriseMatin->getEditNum()->getText();
-  if (temp != "" ) _matin = temp;
-  temp =_parent->GetWindow()->pPriseMidi->getEditNum()->getText();
-  if (temp != "" ) _midi = temp;
-  temp = _parent->GetWindow()->pPriseSoir->getEditNum()->getText();
-  if (temp != "" ) _soir = temp;
-  temp = _parent->GetWindow()->pPriseCoucher->getEditNum()->getText();
-  if (temp != "" ) _coucher = temp;
+  NSPosologieBlock* pPosoBlock = _parent->GetWindow() ;
+  if ((NSPosologieBlock*) NULL == pPosoBlock)
+    return ;
+
+  string sTemp = string("") ;
+  sTemp = pPosoBlock->_pPriseMatin->getEditNum()->getText() ;
+  if (string("") != sTemp)
+    _matin = sTemp ;
+
+  sTemp = pPosoBlock->_pPriseMidi->getEditNum()->getText() ;
+  if (string("") != sTemp)
+    _midi = sTemp ;
+
+  sTemp = pPosoBlock->_pPriseSoir->getEditNum()->getText() ;
+  if (string("") != sTemp)
+    _soir = sTemp ;
+
+  sTemp = pPosoBlock->_pPriseCoucher->getEditNum()->getText() ;
+  if (string("") != sTemp)
+    _coucher = sTemp ;
 }
 
 NSPatPathoArray* CircBaseMMS::CreateTree()
 {
 	NSPatPathoArray* result = new NSPatPathoArray(_parent->pContexte->getSuperviseur());
-  result->ajoutePatho("KRYTH1", 0) ;
+  result->ajoutePatho(string("KRYTH1"), 0) ;
 
 	if (isValidValue(&_matin))
-		func_create_patho_quant("KMATI1", _matin, result, 1);
+		func_create_patho_quant(string("KMATI1"), _matin, result, 1);
 
 	if (isValidValue(&_midi))
-		func_create_patho_quant("KMIDI1", _midi, result, 1) ;
+		func_create_patho_quant(string("KMIDI1"), _midi, result, 1) ;
 
 	if (isValidValue(&_soir))
-		func_create_patho_quant("KSOIR1", _soir, result, 1) ;
+		func_create_patho_quant(string("KSOIR1"), _soir, result, 1) ;
 
 	if (isValidValue(&_coucher))
-		func_create_patho_quant("KCOUC1", _coucher, result, 1) ;
+		func_create_patho_quant(string("KCOUC1"), _coucher, result, 1) ;
 
 	return result ;
 }
 
 CircUnique::CircUnique(NSMedicCycleGlobal*  parent):BaseCirc(parent)
 {
-  _quantity = "0" ;
+  _quantity = string("0") ;
 }
 
 std::string  CircUnique::IsValid()
 {
-  if ((_quantity == "") ||  (_quantity == "0"))
-    return "Cycle circadien unique incomplet" ;
-  return "" ;
+  if ((string("") == _quantity) || (string("0") == _quantity))
+    return string("Cycle circadien unique incomplet") ;
+  return string("") ;
 }
 
 NSPatPathoArray* CircUnique::CreateTree()
 {
   NSPatPathoArray* result = new NSPatPathoArray(_parent->pContexte->getSuperviseur()) ;
 
-  result->ajoutePatho("KRYTH1", 0) ;
+  result->ajoutePatho(string("KRYTH1"), 0) ;
 
 	Message CodeMsg ;
-  result->ajoutePatho("VNBDO1", 1) ;
-  CodeMsg.SetUnit("200001") ;
+  result->ajoutePatho(string("VNBDO1"), 1) ;
+  CodeMsg.SetUnit(string("200001")) ;
   CodeMsg.SetComplement(_quantity) ;
-  result->ajoutePatho("£N0;03", &CodeMsg, 2) ;
+  result->ajoutePatho(string("£N0;03"), &CodeMsg, 2) ;
 
   return result ;
 }
@@ -908,85 +974,102 @@ bool CircUnique::Load(PatPathoIter& pptIter, PatPathoIter& pptend)
 
 void  CircUnique::Load()
 {
-  _parent->GetWindow()->priseUnique->getEditNum()->setText(_quantity) ;
+  NSPosologieBlock* pPosoBlock = _parent->GetWindow() ;
+  if ((NSPosologieBlock*) NULL == pPosoBlock)
+    return ;
+
+  pPosoBlock->_priseUnique->getEditNum()->setText(_quantity) ;
 }
 
 void  CircUnique::save()
 {
-  std::string temp = _parent->GetWindow()->priseUnique->getEditNum()->getText() ;
-  if (temp != "")
-    _quantity = temp ;
+  NSPosologieBlock* pPosoBlock = _parent->GetWindow() ;
+  if ((NSPosologieBlock*) NULL == pPosoBlock)
+    return ;
+
+  std::string sTemp = pPosoBlock->_priseUnique->getEditNum()->getText() ;
+  if (string("") != sTemp)
+    _quantity = sTemp ;
 }
 
-void CircUnique::ReinitDialog(NSPosologieBlock* win)
+void CircUnique::ReinitDialog(NSPosologieBlock* pPosoBlock)
 {
-	if (NULL == win)
+	if ((NSPosologieBlock*) NULL == pPosoBlock)
 		return ;
 
-	win->priseUnique->getEditNum()->setText("0") ;
+	pPosoBlock->_priseUnique->getEditNum()->setText("0") ;
 }
 
-void CircBasePeriode::ReinitDialog(NSPosologieBlock* win)
+void CircBasePeriode::ReinitDialog(NSPosologieBlock* pPosoBlock)
 {
-	if (NULL == win)
+	if ((NSPosologieBlock*) NULL == pPosoBlock)
 		return ;
 
-  win->pPriseReveil->getEditNum()->setText("0") ;         // reveil
-  win->pPriseMatin2->getEditNum()->setText("0") ;         // matin
-  win->pPriseMidi2->getEditNum()->setText("0") ;          // midi
-  win->pPriseGouter->getEditNum()->setText("0") ;         // gouter
-  win->pPriseCoucher2->getEditNum()->setText("0") ;       // soir
-  win->pPriseSoir2->getEditNum()->setText("0") ;          // coucher
-  win->pPriseNuit->getEditNum()->setText("0") ;           // nuit
+  pPosoBlock->_pPriseReveil->getEditNum()->setText("0") ;         // reveil
+  pPosoBlock->_pPriseMatin2->getEditNum()->setText("0") ;         // matin
+  pPosoBlock->_pPriseMidi2->getEditNum()->setText("0") ;          // midi
+  pPosoBlock->_pPriseGouter->getEditNum()->setText("0") ;         // gouter
+  pPosoBlock->_pPriseCoucher2->getEditNum()->setText("0") ;       // soir
+  pPosoBlock->_pPriseSoir2->getEditNum()->setText("0") ;          // coucher
+  pPosoBlock->_pPriseNuit->getEditNum()->setText("0") ;           // nuit
 }
 
 void CircBasePeriode::Load()
 {
-  _parent->GetWindow()->pPriseReveil->getEditNum()->setText(_reveil) ; // reveil
-  _parent->GetWindow()->pPriseMatin2->getEditNum()->setText(_matin) ;  // matin
-  _parent->GetWindow()->pPriseMidi2->getEditNum()->setText(_midi) ;    // midi
-  _parent->GetWindow()->pPriseGouter->getEditNum()->setText(_gouter) ; // gouter
-  _parent->GetWindow()->pPriseCoucher2->getEditNum()->setText(_soir) ; // soir
-  _parent->GetWindow()->pPriseSoir2->getEditNum()->setText(_coucher) ; // coucher
-  _parent->GetWindow()->pPriseNuit->getEditNum()->setText(_nuit) ;
+  NSPosologieBlock* pPosoBlock = _parent->GetWindow() ;
+  if ((NSPosologieBlock*) NULL == pPosoBlock)
+    return ;
+
+  pPosoBlock->_pPriseReveil->getEditNum()->setText(_reveil) ; // reveil
+  pPosoBlock->_pPriseMatin2->getEditNum()->setText(_matin) ;  // matin
+  pPosoBlock->_pPriseMidi2->getEditNum()->setText(_midi) ;    // midi
+  pPosoBlock->_pPriseGouter->getEditNum()->setText(_gouter) ; // gouter
+  pPosoBlock->_pPriseCoucher2->getEditNum()->setText(_soir) ; // soir
+  pPosoBlock->_pPriseSoir2->getEditNum()->setText(_coucher) ; // coucher
+  pPosoBlock->_pPriseNuit->getEditNum()->setText(_nuit) ;
 }
 
 void CircBasePeriode::save()
 {
-  std::string temp = "" ;
+  NSPosologieBlock* pPosoBlock = _parent->GetWindow() ;
+  if ((NSPosologieBlock*) NULL == pPosoBlock)
+    return ;
 
-  temp = _parent->GetWindow()->pPriseReveil->getEditNum()->getText() ; // reveil
-  if (temp != "")
-  	_reveil = temp ;
+  std::string sTemp = string("") ;
 
-  temp = _parent->GetWindow()->pPriseMatin2->getEditNum()->getText() ;
-	if (temp != "")
-  	_matin = temp ;
+  sTemp = pPosoBlock->_pPriseReveil->getEditNum()->getText() ; // reveil
+  if (string("") != sTemp)
+  	_reveil = sTemp ;
 
-  temp = _parent->GetWindow()->pPriseMidi2->getEditNum()->getText() ; // midi
-  if (temp != "")
-  	_midi = temp ;
+  sTemp = pPosoBlock->_pPriseMatin2->getEditNum()->getText() ;
+	if (string("") != sTemp)
+  	_matin = sTemp ;
 
-  temp = _parent->GetWindow()->pPriseGouter->getEditNum()->getText() ; // gouter
-  if (temp != "")
-  	_gouter = temp ;
+  sTemp = pPosoBlock->_pPriseMidi2->getEditNum()->getText() ; // midi
+  if (string("") != sTemp)
+  	_midi = sTemp ;
 
-  temp =   _parent->GetWindow()->pPriseCoucher2->getEditNum()->getText() ; // soir
-  if (temp != "")
-  	_coucher = temp ;
+  sTemp = pPosoBlock->_pPriseGouter->getEditNum()->getText() ; // gouter
+  if (string("") != sTemp)
+  	_gouter = sTemp ;
 
-  temp= _parent->GetWindow()->pPriseSoir2->getEditNum()->getText() ;  // coucher
-  if (temp != "")
-  	_soir = temp ;
+  sTemp = pPosoBlock->_pPriseCoucher2->getEditNum()->getText() ; // soir
+  if (string("") != sTemp)
+  	_coucher = sTemp ;
 
-  temp = _parent->GetWindow()->pPriseNuit->getEditNum()->getText() ;
-  if (temp != "")
-  	_nuit = temp ;
+  sTemp = pPosoBlock->_pPriseSoir2->getEditNum()->getText() ;  // coucher
+  if (string("") != sTemp)
+  	_soir = sTemp ;
+
+  sTemp = pPosoBlock->_pPriseNuit->getEditNum()->getText() ;
+  if (string("") != sTemp)
+  	_nuit = sTemp ;
 }
 
-std::string CircBasePeriode::IsValid()
+std::string
+CircBasePeriode::IsValid()
 {
-  bool temp = false;
+  bool temp = false ;
   if ((_reveil != "") || (_reveil != "0"))
     temp = true ;
   if ((_matin != "") || (_matin != "0"))
@@ -1001,12 +1084,15 @@ std::string CircBasePeriode::IsValid()
     temp = true ;
   if ((_nuit != "") || (_nuit != "0"))
     temp = true ;
-  if (temp == false)
-    return "Cycle circadien non remplie\n" ;
-  return "" ;
+
+  if (false == temp)
+    return string("Cycle circadien non renseigné\n") ;
+
+  return string("") ;
 }
 
-CircBaseHeures::CircBaseHeures(NSMedicCycleGlobal*  parent):BaseCirc(parent)
+CircBaseHeures::CircBaseHeures(NSMedicCycleGlobal* parent)
+               :BaseCirc(parent)
 {
 	_prises = new std::vector<PriseHeure*>() ;
 }
@@ -1014,47 +1100,58 @@ CircBaseHeures::CircBaseHeures(NSMedicCycleGlobal*  parent):BaseCirc(parent)
 std::string CircBaseHeures::IsValid()
 {
   if (_prises->size() > 0)
-    return "" ;
-  return "Cycle circadien non rempli\n" ;
+    return string("") ;
+  return string("Cycle circadien non renseigné\n") ;
 }
 
 void CircBaseHeures::ReinitDialog(NSPosologieBlock* win)
 {
-	if (NULL == win)
+	if ((NSPosologieBlock*) NULL == win)
 		return ;
 
-  win->ViewPriseHeure->SetAssociatedData(NULL, false) ;
-  win->ViewPriseHeure->Clear() ;
-  win->ViewPriseHeure->PrintListAsNow() ;
+  win->_ViewPriseHeure->SetAssociatedData(NULL, false) ;
+  win->_ViewPriseHeure->Clear() ;
+  win->_ViewPriseHeure->PrintListAsNow() ;
 }
 
 CircBaseHeures::~CircBaseHeures()
 {
   for (size_t i = 0; i < _prises->size() ; i++)
-    delete( (*_prises)[i]) ;
+    delete((*_prises)[i]) ;
+
   _prises->clear() ;
   delete(_prises) ;
 }
 
 std::string CreateLabelForHour(std::string quant, std::string heure)
 {
-  std::string transform = "" ;
-  for (int i = 0;i <2; i++)
+  std::string transform = string("") ;
+
+  for (int i = 0 ; i < 2 ; i++)
     transform += heure[i] ;
-  transform +=':' ;
-	for (int i = 2;i <4; i++)
-    transform +=heure[i] ;
-  std::string toAffiche = quant + " à " + transform ;
-  return  toAffiche ;
+  transform += string(":") ;
+
+	for (int i = 2 ; i < 4 ; i++)
+    transform += heure[i] ;
+
+  std::string toAffiche = quant + string(" à ") + transform ;
+  return toAffiche ;
 }
 
-void  CircBaseHeures::Load()
+void
+CircBaseHeures::Load()
 {
-  _parent->GetWindow()->ViewPriseHeure->Clear() ;
-  _parent->GetWindow()->ViewPriseHeure->SetAssociatedData(_prises, false) ;
-	for (size_t i = 0; i < _prises->size(); i++ )
-  	_parent->GetWindow()->ViewPriseHeure->AddLabel ((char*)CreateLabelForHour((*_prises)[i]->getQuantity(), (*_prises)[i]->getHeure()).c_str() ) ;
-	_parent->GetWindow()->ViewPriseHeure->PrintListAsNow() ;
+  NSPosologieBlock* pPosoBlock = _parent->GetWindow() ;
+  if ((NSPosologieBlock*) NULL == pPosoBlock)
+    return ;
+
+  pPosoBlock->_ViewPriseHeure->Clear() ;
+  pPosoBlock->_ViewPriseHeure->SetAssociatedData(_prises, false) ;
+
+	for (size_t i = 0 ; i < _prises->size() ; i++)
+  	pPosoBlock->_ViewPriseHeure->AddLabel((char*)CreateLabelForHour((*_prises)[i]->getQuantity(), (*_prises)[i]->getHeure()).c_str() ) ;
+
+	pPosoBlock->_ViewPriseHeure->PrintListAsNow() ;
 }
 
 void  CircBaseHeures::save()
@@ -1065,12 +1162,12 @@ NSPatPathoArray* CircBaseHeures::CreateTree()
 {
 	NSPatPathoArray* result = new NSPatPathoArray(_parent->pContexte->getSuperviseur()) ;
 
- 	result->ajoutePatho("KRYTH1", 0) ;
- 	for (size_t i = 0; i < _prises->size(); i++)
+ 	result->ajoutePatho(string("KRYTH1"), 0) ;
+ 	for (size_t i = 0 ; i < _prises->size() ; i++)
  	{
     NSPatPathoArray* temp = (*_prises)[i]->CreateTree(_parent->pContexte) ;
     result->InserePatPatho(result->end(), temp, 1) ;
-   // delete (temp);
+    delete temp ;
  	}
 
  	return result ;
@@ -1078,13 +1175,14 @@ NSPatPathoArray* CircBaseHeures::CreateTree()
 
 PriseHeure *LoadPriseHeure(PatPathoIter& pptIter, PatPathoIter& pptend)
 {
-  std::string heure = "";
-  std::string quantity = "";
-  Avance(pptIter,pptend); // mange KHHM1
+  std::string heure    = string("") ;
+  std::string quantity = string("") ;
+
+  Avance(pptIter, pptend) ; // mange KHHM1
   if (pptIter !=  pptend)
   {
-    std::string temp = (*pptIter)->getLexique();
-    if  (temp == "£H0;04")
+    std::string temp = (*pptIter)->getLexique() ;
+    if (string("£H0;04") == temp)
     {
     	heure = (*pptIter)->getComplement() ;
       Avance(pptIter, pptend) ;
@@ -1100,78 +1198,89 @@ PriseHeure *LoadPriseHeure(PatPathoIter& pptIter, PatPathoIter& pptend)
     }
   }
 
-  if ((heure != "") && (quantity != ""))
+  if ((string("") != heure) && (string("") != quantity))
     return new PriseHeure(quantity, heure) ;
-  return NULL ;
+
+  return (PriseHeure*) 0 ;
 }
 
 bool CircBaseHeures::Load(PatPathoIter& pptIter, PatPathoIter& pptend )
 {
-	PriseHeure* temp = NULL ;
+	PriseHeure* temp = (PriseHeure*) 0 ;
   do
   {
     temp = LoadPriseHeure(pptIter, pptend) ;
-    if (temp != NULL)
+    if (temp)
     	_prises->push_back(temp) ;
   }
-  while (temp != NULL) ;
+  while (temp) ;
 
   return true ;
 }
 
-CircBaseFree::CircBaseFree(NSMedicCycleGlobal*  parent)  : BaseCirc(parent)
+CircBaseFree::CircBaseFree(NSMedicCycleGlobal*  parent)
+             :BaseCirc(parent)
 {
-  _quantity  = "0" ;
-  _fois      = "0" ;
-  _frequence = "0" ;
-  _codeFreq  = "" ;
+  _quantity  = string("0") ;
+  _fois      = string("0") ;
+  _frequence = string("0") ;
+  _codeFreq  = string("") ;
 }
 
 std::string  CircBaseFree::IsValid()
 {
-  if (_codeFreq =="")
-    return "Cycle circadien libre incomplet" ;
-  if ((_fois == "")&& (_fois == "0"))
-    return "Cycle circadien libre incomplet" ;
-  if ((_frequence == "")&& (_frequence == "0"))
-    return "Cycle circadien libre incomplet" ;
-  if ((_quantity == "")&& (_quantity == "0"))
-    return "Cycle circadien libre incomplet" ;
-  return "" ;
+  if (string("") == _codeFreq)
+    return string("Cycle circadien libre incomplet") ;
+  if ((string("") == _fois) || (string("0") == _fois))
+    return string("Cycle circadien libre incomplet") ;
+  if ((string("") == _frequence) || (string("0") == _frequence))
+    return string("Cycle circadien libre incomplet") ;
+  if ((string("") == _quantity) || (string("0") == _quantity))
+    return string("Cycle circadien libre incomplet") ;
+
+  return string("") ;
 }
 
 void CircBaseFree::Load()
 {
-	_parent->GetWindow()->_quantFCycle->getEditNum()->setText(_quantity) ;
-	_parent->GetWindow()->_quantFreqFCycle->getEditNum()->setText(_fois) ;
-	_parent->GetWindow()->_quantFoisCycle->getEditNum()->setText(_frequence) ;
-	_parent->GetWindow()->_FCycleComboF->setCode(_codeFreq) ;
+  NSPosologieBlock* pPosoBlock = _parent->GetWindow() ;
+  if ((NSPosologieBlock*) NULL == pPosoBlock)
+    return ;
+
+	pPosoBlock->_quantFCycle->getEditNum()->setText(_quantity) ;
+	pPosoBlock->_quantFreqFCycle->getEditNum()->setText(_fois) ;
+	pPosoBlock->_quantFoisCycle->getEditNum()->setText(_frequence) ;
+	pPosoBlock->_FCycleComboF->setCode(_codeFreq) ;
 }
 
 void CircBaseFree::save()
 {
-  std::string temp = "" ;
+  NSPosologieBlock* pPosoBlock = _parent->GetWindow() ;
+  if ((NSPosologieBlock*) NULL == pPosoBlock)
+    return ;
 
-  temp = _parent->GetWindow()->_quantFCycle->getEditNum()->getText() ;
-  if (temp != "")
-  	_frequence = temp ;
+  std::string sTemp = string("") ;
 
-  temp = _parent->GetWindow()->_quantFreqFCycle->getEditNum()->getText() ;
-  if (temp != "")
-  	_quantity = temp ;
+  sTemp = pPosoBlock->_quantFCycle->getEditNum()->getText() ;
+  if (string("") != sTemp)
+  	_frequence = sTemp ;
 
-  temp = _parent->GetWindow()->_quantFoisCycle->getEditNum()->getText() ;
-  if (temp != "")
-  	_fois = temp ;
+  sTemp = pPosoBlock->_quantFreqFCycle->getEditNum()->getText() ;
+  if (string("") != sTemp)
+  	_quantity = sTemp ;
 
-  temp = _parent->GetWindow()->_FCycleComboF->getSelCode() ;
-  if (temp != "")
-  	_codeFreq = temp ;
+  sTemp = pPosoBlock->_quantFoisCycle->getEditNum()->getText() ;
+  if (string("") != sTemp)
+  	_fois = sTemp ;
+
+  sTemp = pPosoBlock->_FCycleComboF->getSelCode() ;
+  if (string("") != sTemp)
+  	_codeFreq = sTemp ;
 }
 
 void CircBaseFree::ReinitDialog(NSPosologieBlock* win)
 {
-	if (NULL == win)
+	if ((NSPosologieBlock*) NULL == win)
 		return ;
 
 	win->_quantFCycle->getEditNum()->setText("0") ;
@@ -1182,45 +1291,58 @@ void CircBaseFree::ReinitDialog(NSPosologieBlock* win)
 
 bool isCircBaseFree(std::string& temp)
 {
-  return ( (temp == std::string("KDURC1")) || (temp == std::string("VAINC1")) || (temp == std::string("VNBDO1")));
+  return ((temp == std::string("KDURC1")) || (temp == std::string("VAINC1")) ||
+          (temp == std::string("VNBDO1"))) ;
 }
 
 bool
 CircBaseFree::Load(PatPathoIter& pptIter, PatPathoIter& pptend)
 {
-  int col ;
-  std::string temp = "" ;
-  if (pptIter != pptend)
-    temp = (*pptIter)->getLexique() ;
-  if (pptIter != pptend)
-  	Avance(pptIter, pptend) ;
-  if (pptIter != pptend)
-  	Avance(pptIter, pptend) ;
+  if (((PatPathoIter) NULL == *pptIter) || (pptIter == pptend))
+		return false ;
 
-  if (pptIter != pptend)
-  {
-   col  = (*pptIter)->getColonne() ;
-   temp = (*pptIter)->getLexique() ;
-  }
-  else
-  	return true ;
+  string sSens = (*pptIter)->getLexiqueSens() ;
+  if (string("KRYLI") != sSens)
+  	return false ;
 
-  int tempCol = col ;
-  while (col == tempCol)
+  Avance(pptIter, pptend) ;
+  if (pptIter == pptend)
+		return true ;
+
+  return ParseTree(pptIter, pptend) ;
+}
+
+bool
+CircBaseFree::ParseTree(PatPathoIter& pptIter, PatPathoIter& pptend)
+{
+  if (((PatPathoIter) NULL == *pptIter) || (pptIter == pptend))
+		return false ;
+
+  string sSens = (*pptIter)->getLexiqueSens() ;
+  if (string("KRYLI") != sSens)
+  	return false ;
+
+  int refCol = (*pptIter)->getColonne() ;
+
+  Avance(pptIter, pptend) ;
+  if (pptIter == pptend)
+		return false ;
+
+  while ((pptIter != pptend) && ((*pptIter)->getColonne() > refCol))
   {
-  	if (isCircBaseFree(temp) == false)
-    	return false;
-    if (std::string("KDURC1") == temp)
+    sSens = (*pptIter)->getLexiqueSens() ;
+
+  	if      (std::string("KDURC") == sSens)
     {
     	Avance(pptIter, pptend) ;
       if (pptIter != pptend)
       {
-      	_codeFreq =  (*pptIter)->getUnit();
-        _frequence = (*pptIter)->getComplement();
-        Avance(pptIter, pptend) ;
+      	_codeFreq  = (*pptIter)->getUnit() ;
+        _frequence = (*pptIter)->getComplement() ;
+        Avance( pptIter,pptend) ;
       }
     }
-    if (std::string("VAINC1") == temp)
+    else if (std::string("VAINC") == sSens)
     {
     	Avance(pptIter,pptend);
       if (pptIter != pptend)
@@ -1229,117 +1351,195 @@ CircBaseFree::Load(PatPathoIter& pptIter, PatPathoIter& pptend)
       	Avance(pptIter, pptend) ;
       }
     }
-    if (std::string("VNBDO1") == temp)
+    else if (std::string("VNBDO") == sSens)
     {
     	Avance(pptIter, pptend) ;
       if (pptIter != pptend)
       {
-      	_quantity = (*pptIter)->getComplement() ;
-        Avance(pptIter, pptend) ;
+      	_quantity =  (*pptIter)->getComplement() ;
+      	Avance(pptIter,pptend) ;
       }
     }
-
-    if (pptIter !=  pptend)
-    	temp = (*pptIter)->getLexique() ;
+    else
+      return false ;
   }
+
   return true ;
 }
 
-NSPatPathoArray* CircBaseFree::CreateTree()
+NSPatPathoArray*
+CircBaseFree::CreateTree()
 {
 	NSPatPathoArray* result = new NSPatPathoArray(_parent->pContexte->getSuperviseur()) ;
-	result->ajoutePatho("KRYTH1", 0) ;
-	result->ajoutePatho("KCYCI1", 1) ;
-	result->ajoutePatho("KRYLI1", 2) ;
+	result->ajoutePatho(string("KRYTH1"), 0) ;
+	result->ajoutePatho(string("KCYCI1"), 1) ;
+	result->ajoutePatho(string("KRYLI1"), 2) ;
 
 	Message CodeMsg ;
 
 	if (isValidValue(&_frequence))
 	{
-		result->ajoutePatho("KDURC1", 3) ;
+		result->ajoutePatho(string("KDURC1"), 3) ;
 		CodeMsg.SetUnit(_codeFreq) ;
 		CodeMsg.SetComplement(_frequence) ;
-		result->ajoutePatho("£N0;03", &CodeMsg, 4) ;
+		result->ajoutePatho(string("£N0;03"), &CodeMsg, 4) ;
 	}
 
 	if (isValidValue(&_fois))
 	{
-		result->ajoutePatho("VAINC1", 3) ;
+		result->ajoutePatho(string("VAINC1"), 3) ;
     CodeMsg.Reset() ;
-		CodeMsg.SetUnit("2FOIS1") ;
+		CodeMsg.SetUnit(string("2FOIS1")) ;
 		CodeMsg.SetComplement(_fois) ;
-		result->ajoutePatho("£N0;03", &CodeMsg, 4) ;
+		result->ajoutePatho(string("£N0;03"), &CodeMsg, 4) ;
 	}
 
 	if (isValidValue(&_quantity))
 	{
-		result->ajoutePatho("VNBDO1", 2) ;
+		result->ajoutePatho(string("VNBDO1"), 3) ;
     CodeMsg.Reset() ;
-		CodeMsg.SetUnit("200001") ;
+		CodeMsg.SetUnit(string("200001")) ;
 		CodeMsg.SetComplement(_quantity) ;
-		result->ajoutePatho("£N0;03", &CodeMsg, 3) ;
+		result->ajoutePatho(string("£N0;03"), &CodeMsg, 4) ;
 	}
 
 	return result ;
 }
 
-CircBaseRegular::CircBaseRegular(NSMedicCycleGlobal* parent) : BaseCirc(parent)
+double
+CircBaseFree::getTakeCountPerDay(NSContexte *pContexte)
 {
-  _quantity  = "0";
-  _freq      = "0";
-  _codeFreq  = "";
+  double dDosePerTAke = StringToDouble(_quantity) ;
+  if (0 == dDosePerTAke)
+    return 0 ;
+
+  double dTakeFrequency = StringToDouble(_frequence) ;
+  if (0 == dTakeFrequency)
+    return 0 ;
+
+  double dTakeCount = StringToDouble(_fois) ;
+  if (0 == dTakeCount)
+    return 0 ;
+
+  double dUnitCountPerDay = 0 ;
+
+  string sSens ;
+	pContexte->getDico()->donneCodeSens(&_codeFreq, &sSens) ;
+
+  if      (string("2HEUR") == sSens)
+    dUnitCountPerDay = 24 ;
+  else if (string("2MINU") == sSens)
+    dUnitCountPerDay = 1440 ;
+  else if (string("2SEC0") == sSens)
+    dUnitCountPerDay = 86400 ;
+
+  if (0 == dUnitCountPerDay)
+    return 0 ;
+
+  return (dUnitCountPerDay / dTakeFrequency) * dDosePerTAke * dTakeCount ;
+}
+
+/**
+ *  CircBaseRegular take every X duration units
+ */
+CircBaseRegular::CircBaseRegular(NSMedicCycleGlobal* parent)
+                :BaseCirc(parent)
+{
+  _quantity  = string("0") ;
+  _freq      = string("0") ;
+  _codeFreq  = string("") ;
 }
 
 std::string  CircBaseRegular::IsValid()
 {
-  if ((_freq =="") || (_freq =="0"))
-    return "Cycle circadien incomplet";
-  if (_codeFreq == "")
-    return "Cycle circadien incomplet";
-  if ((_quantity =="") || (_quantity =="0"))
-    return "Cycle circadien incomplet";
-  return "";
+  if ((string("") == _freq) || (string("0") == _freq))
+    return string("Cycle circadien incomplet") ;
+  if (string("") == _codeFreq)
+    return string("Cycle circadien incomplet") ;
+  if ((string("") == _quantity) || (string("0") == _quantity))
+    return string("Cycle circadien incomplet") ;
+
+  return string("") ;
 }
 
 void CircBaseRegular::Load()
 {
-  if (_quantity == "")  _quantity = "0";
-  _parent->GetWindow()->_quantRCycle->getEditNum()->setText(_quantity);
-  if (_freq == "")  _freq = "0";
-  _parent->GetWindow()->_freqRCycle->getEditNum()->setText(_freq);
-  if (_codeFreq == "")  _codeFreq = "0";
-  _parent->GetWindow()->_RCycleComboF->setCode(_codeFreq);
+  NSPosologieBlock* pPosoBlock = _parent->GetWindow() ;
+  if ((NSPosologieBlock*) NULL == pPosoBlock)
+    return ;
+
+  if (string("") == _quantity)
+    _quantity = string("0") ;
+  pPosoBlock->_quantRCycle->getEditNum()->setText(_quantity) ;
+
+  if (string("") == _freq)
+    _freq = string("0") ;
+  pPosoBlock->_freqRCycle->getEditNum()->setText(_freq) ;
+
+  if (string("") == _codeFreq)
+    _codeFreq = string("0") ;
+  pPosoBlock->_RCycleComboF->setCode(_codeFreq) ;
 }
 
 void CircBaseRegular::save()
 {
-  std::string temp = "";
-  temp  = _parent->GetWindow()->_quantRCycle->getEditNum()->getText() ;
-  if (temp != "") _quantity = temp;
-  temp      = _parent->GetWindow()->_freqRCycle->getEditNum()->getText();
-  if (temp != "") _freq = temp;
-  temp  = _parent->GetWindow()->_RCycleComboF->getSelCode();
-  if (temp != "") _codeFreq = temp;
+  NSPosologieBlock* pPosoBlock = _parent->GetWindow() ;
+  if ((NSPosologieBlock*) NULL == pPosoBlock)
+    return ;
+
+  std::string sTemp = string("") ;
+
+  sTemp = pPosoBlock->_quantRCycle->getEditNum()->getText() ;
+  if (string("") != sTemp)
+    _quantity = sTemp ;
+
+  sTemp = pPosoBlock->_freqRCycle->getEditNum()->getText() ;
+  if (string("") != sTemp)
+    _freq = sTemp ;
+
+  sTemp = pPosoBlock->_RCycleComboF->getSelCode() ;
+  if (string("") != sTemp)
+    _codeFreq = sTemp ;
 }
 
 bool
 CircBaseRegular::Load(PatPathoIter& pptIter, PatPathoIter& pptend)
 {
-  std::string temp = (*pptIter)->getLexique() ;
+  if (((PatPathoIter) NULL == *pptIter) || (pptIter == pptend))
+		return false ;
+
+  string sSens = (*pptIter)->getLexiqueSens() ;
+  if (string("KRYTP") != sSens)
+  	return false ;
+
   Avance(pptIter, pptend) ;
   if (pptIter == pptend)
 		return true ;
 
-  int col = (*pptIter)->getColonne() ;
+  return ParseTree(pptIter, pptend) ;
+}
+
+bool
+CircBaseRegular::ParseTree(PatPathoIter& pptIter, PatPathoIter& pptend)
+{
+  if (((PatPathoIter) NULL == *pptIter) || (pptIter == pptend))
+		return false ;
+
+  string sSens = (*pptIter)->getLexiqueSens() ;
+  if (string("KRYRE") != sSens)
+  	return false ;
+
+  int refCol = (*pptIter)->getColonne() ;
+
   Avance(pptIter, pptend) ;
   if (pptIter == pptend)
-		return true ;
+		return false ;
 
-  int tempCol = col ;
-  temp = (*pptIter)->getLexique() ;
-  while (col <= tempCol)
+  while ((pptIter != pptend) && ((*pptIter)->getColonne() > refCol))
   {
-  	if (std::string("KDURC1") == temp)
+    sSens = (*pptIter)->getLexiqueSens() ;
+
+  	if      (std::string("KDURC") == sSens)
     {
     	Avance(pptIter, pptend) ;
       if (pptIter != pptend)
@@ -1349,13 +1549,13 @@ CircBaseRegular::Load(PatPathoIter& pptIter, PatPathoIter& pptend)
         Avance( pptIter,pptend) ;
       }
     }
-    if (std::string("KDURA1") == temp)
+    else if (std::string("KDURA") == sSens)
     {
     	Avance(pptIter,pptend) ;
-      if (pptIter != pptend)
+      if (pptIter != pptend)       // always 1 time
       	Avance(pptIter,pptend) ;
     }
-    if (std::string("VNBDO1") == temp)
+    else if (std::string("VNBDO") == sSens)
     {
     	Avance(pptIter, pptend) ;
       if (pptIter != pptend)
@@ -1364,44 +1564,69 @@ CircBaseRegular::Load(PatPathoIter& pptIter, PatPathoIter& pptend)
       	Avance(pptIter,pptend) ;
       }
     }
-
-    if (pptIter != pptend)
-    {
-    	temp    = (*pptIter)->getLexique() ;
-    	tempCol = (*pptIter)->getColonne() ;
-    }
     else
-    	break ;
+      return false ;
   }
+
   return true ;
 }
 
-NSPatPathoArray* CircBaseRegular::CreateTree()
+double
+CircBaseRegular::getTakeCountPerDay(NSContexte *pContexte)
+{
+  double dDosePerTAke = StringToDouble(_quantity) ;
+  if (0 == dDosePerTAke)
+    return 0 ;
+
+  double dTakeFrequency = StringToDouble(_freq) ;
+  if (0 == dTakeFrequency)
+    return 0 ;
+
+  double dUnitCountPerDay = 0 ;
+
+  string sSens ;
+	pContexte->getDico()->donneCodeSens(&_codeFreq, &sSens) ;
+
+  if      (string("2HEUR") == sSens)
+    dUnitCountPerDay = 24 ;
+  else if (string("2MINU") == sSens)
+    dUnitCountPerDay = 1440 ;
+  else if (string("2SEC0") == sSens)
+    dUnitCountPerDay = 86400 ;
+
+  if (0 == dUnitCountPerDay)
+    return 0 ;
+
+  return (dUnitCountPerDay / dTakeFrequency) * dDosePerTAke ;
+}
+
+NSPatPathoArray*
+CircBaseRegular::CreateTree()
 {
 	NSPatPathoArray* result = new NSPatPathoArray(_parent->pContexte->getSuperviseur()) ;
 
-	result->ajoutePatho("KRYTH1", 0) ;
-	result->ajoutePatho("KCYCI1", 1) ;
-	result->ajoutePatho("KRYRE1", 2) ;
+	result->ajoutePatho(string("KRYTH1"), 0) ;
+	result->ajoutePatho(string("KCYCI1"), 1) ;
+	result->ajoutePatho(string("KRYRE1"), 2) ;
 
 	Message CodeMsg  ;
 
-  result->ajoutePatho("KDURC1", 3) ;    // duree de la cure premier edit
+  result->ajoutePatho(string("KDURC1"), 3) ;    // duree de la cure premier edit
 	CodeMsg.SetUnit(_codeFreq) ;
 	CodeMsg.SetComplement(_freq) ;
-	result->ajoutePatho("£N0;03", &CodeMsg, 4) ;
+	result->ajoutePatho(string("£N0;03"), &CodeMsg, 4) ;
 
-	result->ajoutePatho("KDURA1", 3) ;
+	result->ajoutePatho(string("KDURA1"), 3) ;
   CodeMsg.Reset() ;
-	CodeMsg.SetUnit("2FOIS1") ;
+	CodeMsg.SetUnit(string("2FOIS1")) ;
 	CodeMsg.SetComplement("1") ;
-	result->ajoutePatho("£N0;03", &CodeMsg, 4) ;
+	result->ajoutePatho(string("£N0;03"), &CodeMsg, 4) ;
 
-	result->ajoutePatho("VNBDO1", 2) ;
+	result->ajoutePatho(string("VNBDO1"), 3) ;
   CodeMsg.Reset() ;
-	CodeMsg.SetUnit("200001") ;
+	CodeMsg.SetUnit(string("200001")) ;
 	CodeMsg.SetComplement(_quantity) ;
-	result->ajoutePatho("£N0;03", &CodeMsg, 3) ;
+	result->ajoutePatho(string("£N0;03"), &CodeMsg, 4) ;
 
   return result;
 }
@@ -1409,7 +1634,7 @@ NSPatPathoArray* CircBaseRegular::CreateTree()
 
 void CircBaseRegular::ReinitDialog(NSPosologieBlock* win)
 {
-	if (NULL == win)
+	if ((NSPosologieBlock*) NULL == win)
 		return ;
 
   win->_quantRCycle->getEditNum()->setText("0") ;
@@ -1417,44 +1642,54 @@ void CircBaseRegular::ReinitDialog(NSPosologieBlock* win)
   win->_RCycleComboF->setCode("") ;
 }
 
-CircBaseText::CircBaseText(NSMedicCycleGlobal* parent) :BaseCirc(parent)
+CircBaseText::CircBaseText(NSMedicCycleGlobal* parent)
+             :BaseCirc(parent)
 {
-  _text = "" ;
+  _text = string("") ;
 }
 
 std::string  CircBaseText::IsValid()
 {
-  if (_text =="")
-    return "Cycle circadien : text libre imcomple\n";
-  return "";
+  if (string("") == _text)
+    return string("Cycle circadien : text libre imcomple\n") ;
+
+  return string("") ;
 }
 
 void CircBaseText::Load()
 {
-  _parent->GetWindow()->pEditTextLibre->setText(_text);
+  NSPosologieBlock* pPosoBlock = _parent->GetWindow() ;
+  if ((NSPosologieBlock*) NULL == pPosoBlock)
+    return ;
+
+  pPosoBlock->_pEditTextLibre->setText(_text) ;
 }
 
 void CircBaseText::save()
 {
-  _text = _parent->GetWindow()->pEditTextLibre->getTexte();
+  NSPosologieBlock* pPosoBlock = _parent->GetWindow() ;
+  if ((NSPosologieBlock*) NULL == pPosoBlock)
+    return ;
+
+  _text = pPosoBlock->_pEditTextLibre->getTexte() ;
 }
 
 void CircBaseText::ReinitDialog(NSPosologieBlock* win)
 {
-	if (NULL == win)
+	if ((NSPosologieBlock*) NULL == win)
 		return ;
 
-  win->pEditTextLibre->SetText("") ;
+  win->_pEditTextLibre->SetText("") ;
 }
 
 NSPatPathoArray* CircBaseText::CreateTree()
 {
 	NSPatPathoArray* result = new NSPatPathoArray(_parent->pContexte->getSuperviseur()) ;
 
-	result->ajoutePatho("KRYTH1", 0) ;
+	result->ajoutePatho(string("KRYTH1"), 0) ;
 	Message CodeMsg ;
 	CodeMsg.SetTexteLibre(_text) ;
-	result->ajoutePatho("£?????", &CodeMsg, 1) ;
+	result->ajoutePatho(string("£?????"), &CodeMsg, 1) ;
 
 	return result ;
 }
@@ -1469,99 +1704,118 @@ bool CircBaseText::Load(PatPathoIter& pptIter, PatPathoIter& pptend)
 void
 NSRythme::save()
 {
-  if (_parent->GetWindow()->tabCycle->IsWindowEnabled() == false)
+  NSPosologieBlock* pPosoBlock = _parent->GetWindow() ;
+  if ((NSPosologieBlock*) NULL == pPosoBlock)
+    return ;
+
+  if (pPosoBlock->_tabCycle->IsWindowEnabled() == false)
   {
   	_type = RythmSimple ;
-    if (NULL != _data)
+    if (_data)
     {
-    	RythmeSimple* temp =  dynamic_cast<RythmeSimple *>(_data) ;
-      if (temp != NULL)
+    	RythmeSimple* temp = dynamic_cast<RythmeSimple *>(_data) ;
+      if (temp)
       	temp->save() ;
       else
       {
       	delete(_data) ;
         _data = new RythmeSimple(_parent) ;
+        _data->save() ;
       }
     }
     else
-    	_data = new   RythmeSimple(_parent) ;
-    _data->save() ;
+    {
+    	_data = new RythmeSimple(_parent) ;
+      _data->save() ;
+    }
   }
   else
   {
-    int tab = _parent->GetWindow()->tabCycle->GetSel() ;
+    int tab = _parent->GetWindow()->_tabCycle->GetSel() ;
     switch(tab)
     {
     	case 0 :
       	_type = RegularRythm ;
-        if (NULL != _data)
+        if (_data)
         {
         	RythmeRegulier* temp = dynamic_cast<RythmeRegulier*>(_data) ;
-          if (temp != NULL)
+          if (temp)
           	temp->save() ;
           else
           {
           	delete(_data) ;
             _data = new RythmeRegulier(_parent) ;
+            _data->save() ;
           }
         }
         else
-        	_data = new  RythmeRegulier(_parent) ;
-        _data->save() ;
+        {
+        	_data = new RythmeRegulier(_parent) ;
+          _data->save() ;
+        }
         break ;
 
       case 1 :
       	_type = FreeRythm ;
-        if (NULL != _data)
+        if (_data)
         {
         	RythmeFree* temp = dynamic_cast<RythmeFree*>(_data) ;
-          if (temp != NULL)
+          if (temp)
           	temp->save() ;
           else
           {
           	delete(_data) ;
             _data = new RythmeFree(_parent) ;
+            _data->save() ;
           }
         }
         else
+        {
         	_data = new  RythmeFree(_parent) ;
-        _data->save() ;
+          _data->save() ;
+        }
         break ;
 
       case 2:
       	_type = DayRythm ;
-        if (NULL != _data)
+        if (_data)
         {
         	DayRythme* temp = dynamic_cast<DayRythme *>(_data) ;
-          if (temp != NULL)
+          if (temp)
           	temp->save() ;
           else
           {
           	delete(_data) ;
             _data = new DayRythme(_parent) ;
+            _data->save() ;
           }
         }
         else
+        {
         	_data = new  DayRythme(_parent) ;
-        _data->save() ;
+          _data->save() ;
+        }
         break ;
 
       case 3:
       	_type = Day1Day2Day3 ;
-        if (NULL != _data)
+        if (_data)
         {
         	Day1Day2Day3Rythme* temp = dynamic_cast<Day1Day2Day3Rythme *>(_data) ;
-          if (temp != NULL)
+          if (temp)
           	temp->save() ;
           else
           {
           	delete(_data) ;
             _data = new Day1Day2Day3Rythme(_parent) ;
+            _data->save() ;
           }
         }
         else
+        {
         	_data = new Day1Day2Day3Rythme(_parent) ;
-        _data->save() ;
+          _data->save() ;
+        }
         break ;
 
       default:
@@ -1577,21 +1831,29 @@ NSRythme::save()
 void
 RythmeSimple::Load()
 {
- _parent->GetWindow()->_extendtedCycle = !_parent->GetWindow()->_extendtedCycle ;
- _parent->GetWindow()->DrawCycleMode() ;
- _parent->GetWindow()->CycleSimple->SetSelIndex(_SelectedIndex) ;
+  NSPosologieBlock* pPosoBlock = _parent->GetWindow() ;
+  if ((NSPosologieBlock*) NULL == pPosoBlock)
+    return ;
+
+  pPosoBlock->_extendtedCycle = !_parent->GetWindow()->_extendtedCycle ;
+  pPosoBlock->DrawCycleMode() ;
+  pPosoBlock->_CycleSimple->SetSelIndex(_SelectedIndex) ;
 }
 
 void
 RythmeSimple::save()
 {
-	_SelectedIndex = _parent->GetWindow()->CycleSimple->GetSelIndex() ;
+  NSPosologieBlock* pPosoBlock = _parent->GetWindow() ;
+  if ((NSPosologieBlock*) NULL == pPosoBlock)
+    return ;
+
+	_SelectedIndex = pPosoBlock->_CycleSimple->GetSelIndex() ;
 }
 
 std::string
 RythmeSimple::IsValid()
 {
-  return "" ; // FIXME
+  return string("") ; // FIXME
 }
 
 bool
@@ -1603,16 +1865,25 @@ RythmeSimple::Equal(RythmeBase& /* temp */)
 NSPatPathoArray*
 RythmeSimple::SimplifiedTreeForInterpretation()
 {
-  return (*_parent->GetWindow()->CycleSimple)[_SelectedIndex]->getElement() ;
+  NSPosologieBlock* pPosoBlock = _parent->GetWindow() ;
+  if ((NSPosologieBlock*) NULL == pPosoBlock)
+    return (NSPatPathoArray*) 0 ;
+
+  NSPatPathoArray* local = (*pPosoBlock->_CycleSimple)[_SelectedIndex]->getElement() ;
+  if ((NSPatPathoArray*) NULL == local)
+    return (NSPatPathoArray*) 0 ;
+
+  return new NSPatPathoArray(*local) ;
 }
 
 //
 // ---------------------- DayRythme ----------------------
 //
 
-DayRythme::DayRythme(NSMedicCycleGlobal* temp) : RythmeBase(temp)
+DayRythme::DayRythme(NSMedicCycleGlobal* temp)
+          :RythmeBase(temp)
 {
-	for (int i = 0; i < 7; i++)
+	for (int i = 0 ; i < 7 ; i++)
   	_week[i] = false ;
 }
 
@@ -1621,11 +1892,11 @@ DayRythme::SimplifiedTreeForInterpretation()
 {
   char* temp[] = {"KJLUN1", "KJMAR1", "KJMER1", "KJJEU1", "KJVEN1", "KJSAM1", "KJDIM1"} ;
   NSPatPathoArray* result = new NSPatPathoArray(_parent->pContexte->getSuperviseur()) ;
-  result->ajoutePatho("KRYTP1", 0) ; //Ajoue du noeud principal
+  result->ajoutePatho(string("KRYTP1"), 0) ; //Ajoue du noeud principal
 
   for (int i = 0; i < 7; i++)
     if (_week[i] == true)
-      result->ajoutePatho(temp[i], 1) ;
+      result->ajoutePatho(string(temp[i]), 1) ;
 
   return result ;
 }
@@ -1706,9 +1977,10 @@ DayRythme::IsValid()
   for (int i =0; i < 7; i++)
     if (_week[i] == true)
       result = true ;
+
   if (result == false)
-    return "Rythme journalier non remplie" ;
-  return "" ;
+    return string("Rythme journalier non renseigné") ;
+  return string("") ;
 }
 
 bool
@@ -1720,47 +1992,56 @@ DayRythme::Equal(RythmeBase& /* temp */)
 void
 DayRythme::ReinitDialog(NSPosologieBlock* win)
 {
-	if (NULL == win)
+	if ((NSPosologieBlock*) NULL == win)
 		return ;
 
-  win->pLundi->setValue(BF_UNCHECKED );
-  win->pMardi->setValue(BF_UNCHECKED );
-  win->pMercredi->setValue(BF_UNCHECKED );
-  win->pJeudi->setValue(BF_UNCHECKED );
-  win->pVendredi->setValue(BF_UNCHECKED );
-  win->pSamedi->setValue(BF_UNCHECKED );
-  win->pDimanche->setValue(BF_UNCHECKED );
+  win->_pLundi->setValue(BF_UNCHECKED) ;
+  win->_pMardi->setValue(BF_UNCHECKED) ;
+  win->_pMercredi->setValue(BF_UNCHECKED) ;
+  win->_pJeudi->setValue(BF_UNCHECKED) ;
+  win->_pVendredi->setValue(BF_UNCHECKED) ;
+  win->_pSamedi->setValue(BF_UNCHECKED) ;
+  win->_pDimanche->setValue(BF_UNCHECKED) ;
 }
 
 void
 DayRythme::save()
 {
-  _week[0] = (bool)_parent->GetWindow()->pLundi->getValue() ;
-  _week[1] = (bool)_parent->GetWindow()->pMardi->getValue() ;
-  _week[2] = (bool)_parent->GetWindow()->pMercredi->getValue() ;
-  _week[3] = (bool)_parent->GetWindow()->pJeudi->getValue() ;
-  _week[4] = (bool)_parent->GetWindow()->pVendredi->getValue() ;
-  _week[5] = (bool)_parent->GetWindow()->pSamedi->getValue() ;
-  _week[6] = (bool)_parent->GetWindow()->pDimanche->getValue() ;
+  NSPosologieBlock* pPosoBlock = _parent->GetWindow() ;
+  if ((NSPosologieBlock*) NULL == pPosoBlock)
+    return ;
+
+  _week[0] = (bool) pPosoBlock->_pLundi->getValue() ;
+  _week[1] = (bool) pPosoBlock->_pMardi->getValue() ;
+  _week[2] = (bool) pPosoBlock->_pMercredi->getValue() ;
+  _week[3] = (bool) pPosoBlock->_pJeudi->getValue() ;
+  _week[4] = (bool) pPosoBlock->_pVendredi->getValue() ;
+  _week[5] = (bool) pPosoBlock->_pSamedi->getValue() ;
+  _week[6] = (bool) pPosoBlock->_pDimanche->getValue() ;
 }
 
 void
 DayRythme::Load()
 {
-  _parent->GetWindow()->pLundi->setValue( (_week[0] == true) ? BF_CHECKED : BF_UNCHECKED ) ;
-  _parent->GetWindow()->pMardi->setValue( (_week[1] == true) ? BF_CHECKED : BF_UNCHECKED ) ;
-  _parent->GetWindow()->pMercredi->setValue( (_week[2] == true) ? BF_CHECKED : BF_UNCHECKED ) ;
-  _parent->GetWindow()->pJeudi->setValue( (_week[3] == true) ? BF_CHECKED : BF_UNCHECKED ) ;
-  _parent->GetWindow()->pVendredi->setValue( (_week[4] == true) ? BF_CHECKED : BF_UNCHECKED ) ;
-  _parent->GetWindow()->pSamedi->setValue( (_week[5] == true) ? BF_CHECKED : BF_UNCHECKED ) ;
-  _parent->GetWindow()->pDimanche->setValue( (_week[6] == true) ? BF_CHECKED : BF_UNCHECKED ) ;
+  NSPosologieBlock* pPosoBlock = _parent->GetWindow() ;
+  if ((NSPosologieBlock*) NULL == pPosoBlock)
+    return ;
+
+  pPosoBlock->_pLundi->setValue( (_week[0] == true) ? BF_CHECKED : BF_UNCHECKED ) ;
+  pPosoBlock->_pMardi->setValue( (_week[1] == true) ? BF_CHECKED : BF_UNCHECKED ) ;
+  pPosoBlock->_pMercredi->setValue( (_week[2] == true) ? BF_CHECKED : BF_UNCHECKED ) ;
+  pPosoBlock->_pJeudi->setValue( (_week[3] == true) ? BF_CHECKED : BF_UNCHECKED ) ;
+  pPosoBlock->_pVendredi->setValue( (_week[4] == true) ? BF_CHECKED : BF_UNCHECKED ) ;
+  pPosoBlock->_pSamedi->setValue( (_week[5] == true) ? BF_CHECKED : BF_UNCHECKED ) ;
+  pPosoBlock->_pDimanche->setValue( (_week[6] == true) ? BF_CHECKED : BF_UNCHECKED ) ;
 }
 
 //
 // ---------------------- Day1Day2Day3Rythme ----------------------
 //
 
-Day1Day2Day3Rythme::Day1Day2Day3Rythme(NSMedicCycleGlobal* temp) : RythmeBase(temp)
+Day1Day2Day3Rythme::Day1Day2Day3Rythme(NSMedicCycleGlobal* temp)
+                   :RythmeBase(temp)
 {
 	bVoid   = false ;
 	iIndice = 0 ;     // 0 means not initialized
@@ -1770,21 +2051,22 @@ NSPatPathoArray*
 Day1Day2Day3Rythme::SimplifiedTreeForInterpretation()
 {
   NSPatPathoArray* result = new NSPatPathoArray(_parent->pContexte->getSuperviseur()) ;
-  result->ajoutePatho("KRYTP1", 0) ; //Ajoue du noeud principal
+  result->ajoutePatho(string("KRYTP1"), 0) ; //Ajoue du noeud principal
 
-	result->ajoutePatho("2DAT01", 1) ;
+	result->ajoutePatho(string("2DAT01"), 1) ;
   if (iIndice > 0)
   {
-		result->ajoutePatho("VNUMT1", 2) ;
+		result->ajoutePatho(string("VNUMT1"), 2) ;
 
 		Message CodeMsg  ;
-		CodeMsg.SetUnit("200001") ;
+		CodeMsg.SetUnit(string("200001")) ;
 		CodeMsg.SetComplement(IntToString(iIndice)) ;
-		result->ajoutePatho("£N0;03", &CodeMsg, 3) ;
+		result->ajoutePatho(string("£N0;03"), &CodeMsg, 3) ;
   }
 
   if (bVoid)
-  	result->ajoutePatho("9VOID1", 1) ;
+  	result->ajoutePatho(string("9VOID1"), 1) ;
+
   return result ;
 }
 
@@ -1835,7 +2117,7 @@ Day1Day2Day3Rythme::Load(PatPathoIter& pptIter, PatPathoIter& pptend)
 std::string
 Day1Day2Day3Rythme::IsValid()
 {
-  return "" ;
+  return string("") ;
 }
 
 bool
@@ -1847,31 +2129,39 @@ Day1Day2Day3Rythme::Equal(RythmeBase& /* temp */)
 void
 Day1Day2Day3Rythme::ReinitDialog(NSPosologieBlock* win)
 {
-	if (NULL == win)
+	if ((NSPosologieBlock*) NULL == win)
 		return ;
 
-  win->pJour1->setValue(BF_CHECKED) ;
-  win->pJour2->setValue(BF_UNCHECKED) ;
+  win->_pJour1->setValue(BF_CHECKED) ;
+  win->_pJour2->setValue(BF_UNCHECKED) ;
 }
 
 void
 Day1Day2Day3Rythme::save()
 {
+  NSPosologieBlock* pPosoBlock = _parent->GetWindow() ;
+  if ((NSPosologieBlock*) NULL == pPosoBlock)
+    return ;
+
 	std::string temp = "" ;
-  temp = _parent->GetWindow()->_numJour->getEditNum()->getText() ;
+  temp = pPosoBlock->_numJour->getEditNum()->getText() ;
   if (temp != std::string(""))
   	iIndice = atoi((char*) temp.c_str()) ;
 
-  bVoid = (bool)_parent->GetWindow()->pJour2->getValue() ;
+  bVoid = (bool) pPosoBlock->_pJour2->getValue() ;
 }
 
 void
 Day1Day2Day3Rythme::Load()
 {
-	_parent->GetWindow()->_numJour->getEditNum()->setText(IntToString(iIndice));
+  NSPosologieBlock* pPosoBlock = _parent->GetWindow() ;
+  if ((NSPosologieBlock*) NULL == pPosoBlock)
+    return ;
 
-  _parent->GetWindow()->pJour1->setValue( (bVoid == false) ? BF_CHECKED : BF_UNCHECKED ) ;
-  _parent->GetWindow()->pJour2->setValue( (bVoid == true) ? BF_CHECKED : BF_UNCHECKED ) ;
+	pPosoBlock->_numJour->getEditNum()->setText(IntToString(iIndice));
+
+  pPosoBlock->_pJour1->setValue((bVoid == false) ? BF_CHECKED : BF_UNCHECKED ) ;
+  pPosoBlock->_pJour2->setValue((bVoid == true) ? BF_CHECKED : BF_UNCHECKED ) ;
 }
 
 //
@@ -1881,27 +2171,28 @@ Day1Day2Day3Rythme::Load()
 void
 RythmeRegulier::ReinitDialog(NSPosologieBlock* win)
 {
-	if (NULL == win)
+	if ((NSPosologieBlock*) NULL == win)
 		return ;
 
-  win->pDureeCure->getEditNum()->setText("0") ;
-  win->psymDureeCure->setCode("2DAT01") ;
-  win->pDureeCycleR->getEditNum()->setText("0") ;
-  win->psymDureeCycleR->setCode("2DAT01") ;
+  win->_pDureeCure->getEditNum()->setText(string("0")) ;
+  win->_psymDureeCure->setCode(string("2DAT01")) ;
+  win->_pDureeCycleR->getEditNum()->setText(string("0")) ;
+  win->_psymDureeCycleR->setCode(string("2DAT01")) ;
 }
 
 std::string
 RythmeRegulier::IsValid()
 {
-	if (_symDureeCure == "")
-  	return "Rythme journalier imcomplet" ;
-	if (_SymDureeCycle == "")
-  	return "Rythme journalier imcomplet" ;
-	if ((_dureeCycle == "") || (_dureeCycle == "0"))
-  	return "Rythme journalier imcomplet" ;
-	if ((_dureeCure == "") || (_dureeCure == "0"))
-  	return "Rythme journalier imcomplet" ;
-	return "" ;
+	if (string("") == _symDureeCure)
+  	return string("Rythme journalier imcomplet") ;
+	if (string("") == _SymDureeCycle)
+  	return string("Rythme journalier imcomplet") ;
+	if ((string("") == _dureeCycle) || (string("0") == _dureeCycle))
+  	return string("Rythme journalier imcomplet") ;
+	if ((string("") == _dureeCure) || (string("0") == _dureeCure))
+  	return string("Rythme journalier imcomplet") ;
+
+	return string("") ;
 }
 
 bool
@@ -1916,7 +2207,7 @@ RythmeRegulier::Equal(RythmeBase& temp2)
 
 bool IsAllowweForREgularRythme(std::string& temp)
 {
-  return ((temp ==  std::string("KDURA1")) || (std::string("KDURC1") == temp));
+  return ((std::string("KDURA1") == temp) || (std::string("KDURC1") == temp)) ;
 }
 
 bool
@@ -1974,21 +2265,21 @@ CreateRegularRythme(std::string dure_cure, std::string symcure, std::string dure
 {
   NSPatPathoArray* result = new NSPatPathoArray(cont->getSuperviseur()) ;
 
-  result->ajoutePatho("KRYTP1", 0) ;
-  result->ajoutePatho("KRYRE1", 1) ;
+  result->ajoutePatho(string("KRYTP1"), 0) ;
+  result->ajoutePatho(string("KRYRE1"), 1) ;
 
   Message CodeMsg  ;
 
-  result->ajoutePatho("KDURA1", 2) ;    // duree de la cure premier edit
+  result->ajoutePatho(string("KDURA1"), 2) ;    // duree de la cure premier edit
 	CodeMsg.SetUnit(symcure) ;
 	CodeMsg.SetComplement(dure_cure) ;
-	result->ajoutePatho("£N0;03", &CodeMsg, 3) ;
+	result->ajoutePatho(string("£N0;03"), &CodeMsg, 3) ;
 
-	result->ajoutePatho("KDURC1", 2) ;     //duree du cycle
+	result->ajoutePatho(string("KDURC1"), 2) ;     //duree du cycle
   CodeMsg.Reset() ;
 	CodeMsg.SetUnit(SymCycle) ;
 	CodeMsg.SetComplement(duree_cycle) ;
-	result->ajoutePatho("£N0;03", &CodeMsg, 3) ;
+	result->ajoutePatho(string("£N0;03"), &CodeMsg, 3) ;
 
   return result ;
 }
@@ -2007,19 +2298,20 @@ RythmeRegulier::SimplifiedTreeForInterpretation()
 void
 RythmeFree::ReinitDialog(NSPosologieBlock* win)
 {
-	if (NULL == win)
+	if ((NSPosologieBlock*) NULL == win)
 		return ;
 
-  win->pDureeCureF->getEditNum()->setText("0");
-  win->psymDureeCureF->setCode("");
-  win->pDureeCureFTime->getEditNum()->setText("0");
-  win->pDureeCycleFreqF->getEditNum()->setText("0");
-  win->psymDureeCycleFreqF->setCode("");
+  win->_pDureeCureF->getEditNum()->setText("0") ;
+  win->_psymDureeCureF->setCode("") ;
+  win->_pDureeCureFTime->getEditNum()->setText("0") ;
+  win->_pDureeCycleFreqF->getEditNum()->setText("0") ;
+  win->_psymDureeCycleFreqF->setCode("") ;
 }
 
 bool IsAllowweForFreeRythme(std::string& temp)
 {
-  return ((temp ==  std::string("KDURA1")) || (std::string("KDURC1") == temp)|| (std::string("VAINC1") == temp));
+  return ((std::string("KDURA1") == temp) || (std::string("KDURC1") == temp) ||
+          (std::string("VAINC1") == temp)) ;
 }
 
 bool
@@ -2086,36 +2378,36 @@ RythmeFree::Load(PatPathoIter& pptIter, PatPathoIter& pptend)
 
 NSPatPathoArray* RythmeFree::SimplifiedTreeForInterpretation()
 {
-  NSPatPathoArray* result = new NSPatPathoArray(_parent->pContexte->getSuperviseur());
-  result->ajoutePatho("KRYTP1", 0);
-  result->ajoutePatho("KRYLI1", 1) ;
+  NSPatPathoArray* result = new NSPatPathoArray(_parent->pContexte->getSuperviseur()) ;
+  result->ajoutePatho(string("KRYTP1"), 0) ;
+  result->ajoutePatho(string("KRYLI1"), 1) ;
 
   Message CodeMsg ;
 
 	if (isValidValue(&_pDureeCureF))
 	{
-		result->ajoutePatho("KDURA1", 2) ;    // duree de la cure premier edit
+		result->ajoutePatho(string("KDURA1"), 2) ; // duree de la cure premier edit
     CodeMsg.SetUnit(_psymDureeCureF) ;
     CodeMsg.SetComplement(_pDureeCureF) ;
-    result->ajoutePatho("£N0;03", &CodeMsg, 3) ;
+    result->ajoutePatho(string("£N0;03"), &CodeMsg, 3) ;
 	}
 
 	if (isValidValue(&_pDureeCycleFreqF))
 	{
-    result->ajoutePatho("KDURC1", 2) ;     //duree du cycle
+    result->ajoutePatho(string("KDURC1"), 2) ;     //duree du cycle
     CodeMsg.Reset() ;
     CodeMsg.SetUnit(_psymDureeCycleFreqF) ;
     CodeMsg.SetComplement(_pDureeCycleFreqF) ;
-    result->ajoutePatho("£N0;03", &CodeMsg, 3) ;
+    result->ajoutePatho(string("£N0;03"), &CodeMsg, 3) ;
 	}
 
 	if (isValidValue(&_pDureeCureFTime))
 	{
-		result->ajoutePatho("VAINC1", 2) ;
+		result->ajoutePatho(string("VAINC1"), 2) ;
     CodeMsg.Reset() ;
-		CodeMsg.SetUnit("2FOIS1") ;
+		CodeMsg.SetUnit(string("2FOIS1")) ;
 		CodeMsg.SetComplement(_pDureeCureFTime) ;
-		result->ajoutePatho("£N0;03", &CodeMsg, 3) ;
+		result->ajoutePatho(string("£N0;03"), &CodeMsg, 3) ;
 	}
 
   return result ;
@@ -2140,75 +2432,92 @@ std::string RythmeFree::IsValid()
 bool
 RythmeFree::Equal(RythmeBase& /* temp */)
 {
-  return true; // FIXME
+  return true ; // FIXME
 }
 
 RythmeFree::RythmeFree(NSMedicCycleGlobal* temp)
            :RythmeBase(temp)
 {
-  _pDureeCureF = "0";
-  _psymDureeCureF = "";
-  _pDureeCureFTime = "0";
-  _pDureeCycleFreqF = "0";
-  _psymDureeCycleFreqF = "";
+  _pDureeCureF         = string("0") ;
+  _psymDureeCureF      = string("") ;
+  _pDureeCureFTime     = string("0") ;
+  _pDureeCycleFreqF    = string("0") ;
+  _psymDureeCycleFreqF = string("") ;
 }
 
 void RythmeFree::Load()
 {
-  _parent->GetWindow()->pDureeCureF->getEditNum()->setText(_pDureeCureF);
-  _parent->GetWindow()->psymDureeCureF->setCode(_psymDureeCureF);
-  _parent->GetWindow()->pDureeCureFTime->getEditNum()->setText(_pDureeCureFTime);
-  _parent->GetWindow()->pDureeCycleFreqF->getEditNum()->setText(_pDureeCycleFreqF);
-  _parent->GetWindow()->psymDureeCycleFreqF->setCode(_psymDureeCycleFreqF);
+  NSPosologieBlock* pPosoBlock = _parent->GetWindow() ;
+  if ((NSPosologieBlock*) NULL == pPosoBlock)
+    return ;
+
+  pPosoBlock->_pDureeCureF->getEditNum()->setText(_pDureeCureF) ;
+  pPosoBlock->_psymDureeCureF->setCode(_psymDureeCureF) ;
+  pPosoBlock->_pDureeCureFTime->getEditNum()->setText(_pDureeCureFTime) ;
+  pPosoBlock->_pDureeCycleFreqF->getEditNum()->setText(_pDureeCycleFreqF) ;
+  pPosoBlock->_psymDureeCycleFreqF->setCode(_psymDureeCycleFreqF) ;
 }
 
 void RythmeFree::save()
 {
+  NSPosologieBlock* pPosoBlock = _parent->GetWindow() ;
+  if ((NSPosologieBlock*) NULL == pPosoBlock)
+    return ;
+
   std::string temp = "" ;
-  temp = _parent->GetWindow()->pDureeCureF->getEditNum()->getText() ;
+  temp = pPosoBlock->_pDureeCureF->getEditNum()->getText() ;
   if (temp != "" )
 		_pDureeCureF = temp ;
 
-  temp = _parent->GetWindow()->psymDureeCureF->getSelCode() ;
+  temp = pPosoBlock->_psymDureeCureF->getSelCode() ;
   if (temp != "" )
 		_psymDureeCureF = temp ;
 
-  temp = _parent->GetWindow()->pDureeCureFTime->getEditNum()->getText() ;
+  temp = pPosoBlock->_pDureeCureFTime->getEditNum()->getText() ;
   if (temp != "" )
 		_pDureeCureFTime = temp ;
 
-  temp = _parent->GetWindow()->pDureeCycleFreqF->getEditNum()->getText() ;
+  temp = pPosoBlock->_pDureeCycleFreqF->getEditNum()->getText() ;
   if (temp != "" )
 		_pDureeCycleFreqF = temp ;
 
-  temp = _parent->GetWindow()->psymDureeCycleFreqF->getSelCode() ;
+  temp = pPosoBlock->_psymDureeCycleFreqF->getSelCode() ;
   if (temp != "" )
 		_psymDureeCycleFreqF = temp ;
 }
 
 
-RythmeRegulier::RythmeRegulier(NSMedicCycleGlobal* temp): RythmeBase(temp)
+RythmeRegulier::RythmeRegulier(NSMedicCycleGlobal* temp)
+               :RythmeBase(temp)
 {
-    _dureeCure = "0";
-    _symDureeCure = ""; // Combo
-    _dureeCycle = "0";
-    _SymDureeCycle = "";
+  _dureeCure     = string("0") ;
+  _symDureeCure  = string("") ; // Combo
+  _dureeCycle    = string("0") ;
+  _SymDureeCycle = string("") ;
 }
 
 void RythmeRegulier::Load()
 {
-  _parent->GetWindow()->pDureeCure->getEditNum()->setText(_dureeCure);
-  _parent->GetWindow()->psymDureeCure->setCode(_symDureeCure);
-  _parent->GetWindow()->pDureeCycleR->getEditNum()->setText(_dureeCycle);
-  _parent->GetWindow()->psymDureeCycleR->setCode(_SymDureeCycle);
+  NSPosologieBlock* pPosoBlock = _parent->GetWindow() ;
+  if ((NSPosologieBlock*) NULL == pPosoBlock)
+    return ;
+
+  pPosoBlock->_pDureeCure->getEditNum()->setText(_dureeCure) ;
+  pPosoBlock->_psymDureeCure->setCode(_symDureeCure) ;
+  pPosoBlock->_pDureeCycleR->getEditNum()->setText(_dureeCycle) ;
+  pPosoBlock->_psymDureeCycleR->setCode(_SymDureeCycle) ;
 }
 
 void RythmeRegulier::save()
 {
-  _dureeCure = _parent->GetWindow()->pDureeCure->getEditNum()->getText();
-  _symDureeCure = _parent->GetWindow()->psymDureeCure->getSelCode();
-  _dureeCycle = _parent->GetWindow()->pDureeCycleR->getEditNum()->getText();
- _SymDureeCycle =  _parent->GetWindow()->psymDureeCycleR->getSelCode();
+  NSPosologieBlock* pPosoBlock = _parent->GetWindow() ;
+  if ((NSPosologieBlock*) NULL == pPosoBlock)
+    return ;
+
+  _dureeCure     = pPosoBlock->_pDureeCure->getEditNum()->getText() ;
+  _symDureeCure  = pPosoBlock->_psymDureeCure->getSelCode() ;
+  _dureeCycle    = pPosoBlock->_pDureeCycleR->getEditNum()->getText() ;
+  _SymDureeCycle = pPosoBlock->_psymDureeCycleR->getSelCode() ;
 }
 
 //
@@ -2272,7 +2581,7 @@ NSCircadien::GetWindow()
 
 void NSMedicCycleGlobal::ReinitDialog(NSPosologieBlock* win)
 {
-	if (NULL == win)
+	if ((NSPosologieBlock*) NULL == win)
 		return ;
 
   NSRythme::ReinitDialog(win) ;
@@ -2302,7 +2611,7 @@ NSPatPathoArray*
 NSMedicCycleGlobal::CreateTree()
 {
 	NSPatPathoArray* result = new NSPatPathoArray(pContexte->getSuperviseur()) ;
-	result->ajoutePatho("KCYTR1", 0) ;                    // code lexique d'un cycle
+	result->ajoutePatho(string("KCYTR1"), 0) ;                    // code lexique d'un cycle
 
   NSPatPathoArray *pNewPPT = _cycleCircadien.CreateTree() ;
   if (pNewPPT)
@@ -2315,7 +2624,7 @@ NSMedicCycleGlobal::CreateTree()
   if (pNewPPT2)
   {
   	result->InserePatPatho(result->end(), pNewPPT2, 1) ;
-  	// delete pNewPPT2 ;
+  	delete pNewPPT2 ;
   }
 
   return result ;
@@ -2424,7 +2733,7 @@ NSMedicCycleGlobal::getContext()
 
 void createNodeComplement(NSPatPathoArray *pPPT, string sCode, string sUnit, string  sVal, int iColonne)
 {
-	if ((NULL == pPPT) || (string("") == sCode) || (string("") == sVal))
+	if (((NSPatPathoArray*) NULL == pPPT) || (string("") == sCode) || (string("") == sVal))
 		return ;
 
   Message	CodeMsg ;
@@ -2435,7 +2744,7 @@ void createNodeComplement(NSPatPathoArray *pPPT, string sCode, string sUnit, str
 
 void createNodeComplement(NSPatPathoArray *pPPT, string sCode, string sUnit, float fVal, int iColonne)
 {
-	if ((NULL == pPPT) || (string("") == sCode))
+	if (((NSPatPathoArray*) NULL == pPPT) || (string("") == sCode))
 		return ;
 
   double dVal = fVal ;
@@ -2449,7 +2758,7 @@ void createNodeComplement(NSPatPathoArray *pPPT, string sCode, string sUnit, flo
 
 void createNodeComplement(NSPatPathoArray *pPPT, string sCode, string sUnit, int iVal, int iColonne)
 {
-	if ((NULL == pPPT) || (string("") == sCode))
+	if (((NSPatPathoArray*) NULL == pPPT) || (string("") == sCode))
 		return ;
 
   char        pcVal[23] ;
@@ -2463,12 +2772,13 @@ void createNodeComplement(NSPatPathoArray *pPPT, string sCode, string sUnit, int
 
 std::string getValNodeComplement(NSPatPathoArray *pPPT, PatPathoIter *pptIter, int iColonneBase, string sCode, string sUnit)
 {
-  string sVal = "" ;
+  string sVal = string("") ;
 
-  if ((NULL == pPPT) || (NULL == pptIter) || (string("") == sCode) || (string("") == sUnit))
+  if (((NSPatPathoArray*) NULL == pPPT) || ((PatPathoIter*) NULL == pptIter) ||
+      (string("") == sCode) || (string("") == sUnit))
 		return sVal ;
 
-  if (((*pptIter) != pPPT->end()) && ((**pptIter)->getColonne() > iColonneBase))
+  if ((pPPT->end() != *pptIter) && ((**pptIter)->getColonne() > iColonneBase))
   {
     if (((**pptIter)->getLexique() == sCode) && ((**pptIter)->getUnit() == sUnit))
     {

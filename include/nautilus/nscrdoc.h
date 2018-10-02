@@ -8,12 +8,12 @@
 
 class NSDocumentHisto ;
 
-#include "nautilus\nsannexe.h"
-#include "nautilus\nstxstyl.h"
+#include "ns_sgbd\nsannexe.h"
+#include "dcodeur\nstxstyl.h"
 #include "nautilus\nsdocref.h"
 #include "nautilus\nsrechd2.h"
 
-#include "nautilus\nscr_ama.h"//#include "nsbb\nsbbsmal.h"
+#include "dcodeur\nscr_ama.h"//#include "nsbb\nsbbsmal.h"
 #include "nsbb\nspatpat.h"
 
 bool nouveauCompteRendu(NSContexte *pCtx) ;

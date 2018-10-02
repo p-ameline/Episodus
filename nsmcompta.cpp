@@ -30,9 +30,10 @@ USEUNIT("nscompta\Nsfseuti.cpp");
 USEUNIT("nscompta\Nsfsedlg.cpp");
 USEUNIT("nscompta\Nsnoemie.cpp");
 USEUNIT("nscompta\nsCptaRef.cpp");
-USEUNIT("nautilus\Nsannexe.cpp");
 USEUNIT("nautilus\nsperary.cpp");
 USEUNIT("nautilus\nsmodhtm.cpp");
+USEUNIT("nscompta\nsgendlg.cpp");
+USEUNIT("nautilus\Nsadmiwd.cpp");
 USERC("nscompta\nscompta.rc");
 USERC("nscompta\nsdepens.rc");
 USERC("nscompta\nsCptaRef.rc");
@@ -42,16 +43,16 @@ USELIB("nsm_sgbd.lib");
 USELIB("nsmsavoir.lib");
 USELIB("nsmbb.lib");
 USELIB("nsmdn.lib");
+USELIB("nsmldv.lib");
 USELIB("nsmdecode.lib");
 USELIB("nsmepisod.lib");
+USELIB("ns_capture.lib");
 USELIB("memmgr.lib");
 USELIB("cp32mti.lib");
 USELIB("bidsvi.lib");
 USELIB("owlwvi.lib");
-USEUNIT("nscompta\nsgendlg.cpp");
-USELIB("ns_capture.lib");
 USERES("nsmcompta.res");
-USEUNIT("nautilus\Nsadmiwd.cpp");
+
 //---------------------------------------------------------------------------
 int WINAPI DllEntryPoint(HINSTANCE hinstDll, unsigned long fdwReason, void*)
 {

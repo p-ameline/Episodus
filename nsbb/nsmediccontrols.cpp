@@ -1524,7 +1524,7 @@ try
 {
   _pText = pText ;
 
-  _pFreeText = new NSTexteLibre(this, pContexte, "£C;020", IDC_TEXTLIBRE) ;
+  _pFreeText = new NSTexteLibre(this, pContexte, "£C;020", IDC_FREETEXT_EDIT) ;
 }
 catch (...)
 {
@@ -1541,7 +1541,7 @@ void
 NSFreeTextDlg::SetupWindow()
 {
 	NSUtilDialog::SetupWindow() ;
-  if (NULL != _pText)
+  if (_pText)
     _pFreeText->setText(*_pText) ;
 }
 
@@ -1554,7 +1554,7 @@ try
 {
   string sText = _pFreeText->getTexte() ;
 
-  if (NULL != _pFreeText)
+  if (_pText)
     *_pText = sText ;
 
 	CloseWindow(IDOK) ;

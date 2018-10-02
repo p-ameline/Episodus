@@ -13,7 +13,7 @@
 class decSpecialite : public decLesion
 {  public:
 
-    decSpecialite(NSContexte* pCtx, int iDecodeType = dcPhrase) ;    decSpecialite(decodageBase* pBase, int iDecodeType = dcPhrase) ;
+    decSpecialite(NSContexte* pCtx, bool bAllLettersSentences, int iDecodeType = dcPhrase) ;    decSpecialite(decodageBase* pBase, bool bAllLettersSentences, int iDecodeType = dcPhrase) ;
 
     // Lancement du décodage
     void decode(int colonne) ;
@@ -22,8 +22,10 @@ class decSpecialite : public decLesion
   protected:
 
     NSPhrasePrescript _DkdPrescript ;
+    bool              _bAllLettersSentences ;
 
     string getVirtualDrug(const string sSpeciality) ;
+    string getDrugRootName(const string sDrugCode, const string sDrugLabel) ;
 };
 
 //-----------------------------------------------------------------
@@ -35,17 +37,18 @@ class decPrescription : public decodage
 {
   public:
 
-    decPrescription(NSContexte* pCtx) ;
-    decPrescription(decodageBase* pBase) ;
+    decPrescription(NSContexte* pCtx, bool bAllLettersSentences) ;
+    decPrescription(decodageBase* pBase, bool bAllLettersSentences) ;
 
     // Lancement du décodage
     void decode(int colonne) ;
 
-    void setLibelle(string sLib) { sLibelle = sLib ; }
+    void setLibelle(string sLib) { _sLibelle = sLib ; }
 
   protected:
 
-    string sLibelle ;
+    bool   _bAllLettersSentences ;
+    string _sLibelle ;
 };
 
 #endif  // __DZZSPECI_H

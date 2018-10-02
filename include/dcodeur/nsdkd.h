@@ -46,7 +46,7 @@ typedef VectorTTreeNode::iterator IterTTreeNode ;
 typedef NTArray<OWL::TTreeNode>   VectTTreeNode ;
 #endif
 
-# include "nautilus/nscr_ama.h"
+# include "dcodeur/nscr_ama.h"
 # include "nsbb/nspatpat.h"
 # include "partage/nsdivfct.h"
 

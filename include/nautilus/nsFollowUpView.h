@@ -24,8 +24,8 @@
 #include "nautilus\nautilus.rh"
 #include "nsbb\nsmview.h"
 #include "nsbb\nslistwind.h"
-#include "nautilus\nsldvdoc.h"
-#include "nautilus\nsldvvar.h"
+#include "nsldv\nsldvdoc_base.h"
+#include "nsldv\nsldvvar.h"
 
 class NSFollowUpElement : public NSRoot
 {

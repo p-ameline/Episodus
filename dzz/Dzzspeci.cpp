@@ -21,16 +21,18 @@
 #include "nautilus\nsepicap.h"
 #include "nssavoir\nspatho.h"
 
-decPrescription::decPrescription(NSContexte* pCtx)
+decPrescription::decPrescription(NSContexte* pCtx, bool bAllLettersSentences)
                 :decodage(pCtx)
 {
-	sLibelle = string("") ;
+	_sLibelle             = string("") ;
+  _bAllLettersSentences = bAllLettersSentences ;
 }
 
-decPrescription::decPrescription(decodageBase* pBase)
+decPrescription::decPrescription(decodageBase* pBase, bool bAllLettersSentences)
                 :decodage(pBase)
 {
-	sLibelle = string("") ;
+	_sLibelle             = string("") ;
+  _bAllLettersSentences = bAllLettersSentences ;
 }
 
 //  +-----------------------------------------------------------------+  */
@@ -40,11 +42,11 @@ decPrescription::decPrescription(decodageBase* pBase)
 void
 decPrescription::decode(int colonne)
 {
-	if (string("") != sLibelle)
+	if (string("") != _sLibelle)
   {
   	setDcodeur(string("")) ;
     metPhrase() ;
-    setDcodeur(sLibelle) ;
+    setDcodeur(_sLibelle) ;
     metPhrase("3", "3"/*, 1*/) ;
     setDcodeur(string("")) ;
     metPhrase() ;
@@ -58,7 +60,7 @@ decPrescription::decode(int colonne)
         ((getSt())[0] == 'N') || ((getSt())[0] == 'O') ||
         ((getSt())[0] == 'G'))
     {
-    	decSpecialite Specia(this, dcTiret) ;
+    	decSpecialite Specia(this, _bAllLettersSentences, dcTiret) ;
       Specia.decode(refCol) ;
 			Specia.donnePhrase() ;
 
@@ -66,9 +68,8 @@ decPrescription::decode(int colonne)
       metPhrase() ;
     }
 		else
-    	Recupere() ;
+    	BioLibre(colonne) ;
   }
-	return ;
 }
 
 //  +-----------------------------------------------------------------+
@@ -76,14 +77,16 @@ decPrescription::decode(int colonne)
 //  +-----------------------------------------------------------------+
 //  Créé le 07/11/1990 Dernière mise à jour 22/07/1992
 
-decSpecialite::decSpecialite(NSContexte* pCtx, int iDecodeType)
-              :decLesion(pCtx, iDecodeType), _DkdPrescript(pCtx, dcTiret)
+decSpecialite::decSpecialite(NSContexte* pCtx, bool bAllLettersSentences, int iDecodeType)
+              :decLesion(pCtx, iDecodeType), _DkdPrescript(pCtx, dcTiret, string("fr"), bAllLettersSentences)
 {
+  _bAllLettersSentences = bAllLettersSentences ;
 }
 
-decSpecialite::decSpecialite(decodageBase* pBase, int iDecodeType)
-              :decLesion(pBase, iDecodeType), _DkdPrescript(pBase, dcTiret)
+decSpecialite::decSpecialite(decodageBase* pBase, bool bAllLettersSentences, int iDecodeType)
+              :decLesion(pBase, iDecodeType), _DkdPrescript(pBase, dcTiret, string("fr"), bAllLettersSentences)
 {
+  _bAllLettersSentences = bAllLettersSentences ;
 }
 
 void
@@ -95,8 +98,9 @@ decSpecialite::decode(int /* colonne */)
 	//
 	ajLL() ;
 
-  NSPathologData Data ;
   string sLex = getStL() ;
+
+  NSPathologData Data ;
   bool bTrouve = pContexte->getDico()->trouvePathologData(_sLangue, &sLex, &Data) ;
   if (false == bTrouve)
   {
@@ -107,20 +111,50 @@ decSpecialite::decode(int /* colonne */)
   _iCompteur++ ;
   string sDrugNb = IntToString(_iCompteur) + string(". ") ;
 
+  string sDrugCaption = string("") ;
+
   setDcodeurFromData(&Data) ;
 	if (getDcodeur() != string(""))
 	{
 		setPseumajForFirstChar() ;
-    sDrugNb += getDcodeur() ;
 
     if (pContexte->getEpisodus() && pContexte->getEpisodus()->addVirtualDrug())
     {
       string sVirtualDrug = getVirtualDrug(sLex) ;
       if (string("") != sVirtualDrug)
-        sDrugNb += string(" (") + sVirtualDrug + string(")") ;
+      {
+        string sMsg = string("Virtual drug found: ") + sVirtualDrug ;
+        pContexte->getSuperviseur()->trace(&sMsg, 1) ;
+
+        string sRootName = getDrugRootName(sLex, getDcodeur()) ;
+        if (string("") == sRootName)
+          sRootName = getDcodeur() ;
+
+        sDrugCaption = sVirtualDrug + string(" (") + sRootName + string(")") ;
+      }
+      else
+      {
+        sDrugCaption = getDcodeur() ;
+
+        string sMsg = string("Virtual drug not found") ;
+        pContexte->getSuperviseur()->trace(&sMsg, 1) ;
+      }
+    }
+    else
+    {
+      sDrugCaption = getDcodeur() ;
+
+      string sMsg = string("Not in virtual drug mode") ;
+      pContexte->getSuperviseur()->trace(&sMsg, 1) ;
     }
 
-    setDcodeur(sDrugNb) ;
+    string sDecimalSeparator    = pContexte->getSuperviseur()->getText("0localInformation", "decimalSeparator") ;
+    string sDigitGroupSeparator = pContexte->getSuperviseur()->getText("0localInformation", "digitGroupSeparator") ;
+
+    if (_bAllLettersSentences)
+      sDrugCaption = getAllCharsText(sDrugCaption, sDecimalSeparator[0], sDigitGroupSeparator[0], 0) ;
+
+    setDcodeur(sDrugNb + sDrugCaption) ;
     metPhrase("4", "4") ;
   }
 
@@ -129,8 +163,6 @@ decSpecialite::decode(int /* colonne */)
 	Avance() ;
 
 	_DkdPrescript.decode(refCol) ;
-
-	return ;
 }
 
 void
@@ -145,6 +177,9 @@ decSpecialite::donnePhrase()
 string
 decSpecialite::getVirtualDrug(const string sSpeciality)
 {
+  return pContexte->getSuperviseur()->getFilGuide()->getVirtualDrug(sSpeciality, pContexte, true) ;
+
+/*
   if (string("") == sSpeciality)
     return string("") ;
 
@@ -172,5 +207,57 @@ decSpecialite::getVirtualDrug(const string sSpeciality)
   }
 
   return string("") ;
+*/
+}
+
+/**
+ *  Get the root drug name (the shortest one that is father of concept and a drug)
+ */
+string
+decSpecialite::getDrugRootName(const string sDrugCode, const string sDrugLabel)
+{
+  if ((string("") == sDrugCode) || (string("") == sDrugLabel))
+    return string("") ;
+
+  // Get all elements such as sSpeciality - is a -> element
+  //
+  string sCodeSens = pContexte->getDico()->donneCodeSens(&sDrugCode) ;
+
+  VecteurString aIsA ;
+  pContexte->getSuperviseur()->getFilGuide()->chercheEquivalent(sCodeSens, &aIsA, string("ES")) ;
+
+  if (aIsA.empty())
+    return string("") ;
+
+  size_t iDrugLabelLen = strlen(sDrugLabel.c_str()) ;
+  string sCandidate    = sDrugLabel ;
+  size_t iCandidateLen = iDrugLabelLen ;
+
+  string sLang = pContexte->getUserLanguage() ;
+
+  for (EquiItemIter it = aIsA.begin() ; aIsA.end() != it ; it++)
+  {
+    string sCompleteCode = **it ;
+    pContexte->getDico()->donneCodeComplet(sCompleteCode) ;
+
+    string sLabel = string("") ;
+
+    if (pContexte->getDico()->isDrug(&sCompleteCode))
+		  pContexte->getDico()->donneLibelle(sLang, &sCompleteCode, &sLabel) ;
+
+	  pContexte->getSuperviseur()->trace(&sLabel, 1) ;
+
+    if (string("") != sLabel)
+    {
+      size_t iLabelLen = strlen(sLabel.c_str()) ;
+      if ((iLabelLen < iCandidateLen) && (string(sCandidate, 0, iLabelLen) == sLabel))
+      {
+        sCandidate    = sLabel ;
+        iCandidateLen = iLabelLen ;
+      }
+    }
+  }
+
+  return sCandidate ;
 }
 

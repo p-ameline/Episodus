@@ -68,8 +68,8 @@
 // knowledge of the CeCILL license and that you accept its terms.
 // -----------------------------------------------------------------------------
 // #define IDD_DIALOG1	1
-// -----------------------------------------------------------------------------// Attention// -----------------------------------------------------------------------------// Les chemins des include doivent être en chemin relatif sur le cvs.// Si vous avez besoin de les modifier en chemin absolu pour pouvoir les// modifier avec Borland 5, vous devez les repasser en chemin relatif avant de// les remettre sur le cvs. // -----------------------------------------------------------------------------#include "c:\cvs\episodus\nscompta\nscompta.rh"
-// #include "nscompta\nscompta.rh"#include "c:\cvs\episodus\nscompta\nsCptaRef.rh"#include <owl\window.rh>
+// -----------------------------------------------------------------------------// Attention// -----------------------------------------------------------------------------// Les chemins des include doivent être en chemin relatif sur le cvs.// Si vous avez besoin de les modifier en chemin absolu pour pouvoir les// modifier avec Borland 5, vous devez les repasser en chemin relatif avant de// les remettre sur le cvs. // -----------------------------------------------------------------------------#include "nscompta\nscompta.rh"
+// #include "nscompta\nscompta.rh"#include "nscompta\nsCptaRef.rh"#include <owl\window.rh>
 IDD_CVITALE DIALOG 0, 0, 357, 218
 STYLE DS_MODALFRAME | DS_3DLOOK | DS_CONTEXTHELP | WS_POPUP | WS_VISIBLE | WS_CAPTION | WS_SYSMENU
 CAPTION "Carte Vitale"

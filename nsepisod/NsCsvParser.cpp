@@ -255,6 +255,8 @@ NSCsvParser::addChar(char cEntry, NSCsvParserManager* pParseManager, bool bStopW
 
     pParseManager->setInsideDoubleQuote(true) ;
     pParseManager->setWasDoubleQuote(false) ;    // This quote can't count
+
+    return true ;
   }
 
   if (cEntry == _cSeparator)

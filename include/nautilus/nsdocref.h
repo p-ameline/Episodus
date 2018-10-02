@@ -16,7 +16,7 @@ class NSSmallBrother ;
 // #include "nautilus\nsrechd2.h"
 // #include "nssavoir\nsgraphe.h"
 // #include "nautilus\nsbrowse.h"
-#include "nautilus\nsanxary.h"
+#include "nsdn\nsanxary.h"
 #include "nautilus\nsmodhtml.h"
 
 class NSPrintControl
@@ -106,7 +106,9 @@ class NSRefDocument : public NSNoyauDocument
                     NSPersonGraphManager* pGraphManager = 0, string sAuthorId = string("_User_"),
                     string tmplDoc = string(""), string enteteDoc = string(""),
                     string sDestinataire = string(""), string sCreationDate = string(""),
-                    string sMasterDoc = string(""), NSRootLink::NODELINKTYPES masterLink = NSRootLink::viewOfDocument) ;
+                    string sMasterDoc = string(""),
+                    NSRootLink::NODELINKTYPES masterLink = NSRootLink::viewOfDocument,
+                    NSPatPathoArray* pSpecificInfoPatPatho = (NSPatPathoArray*) 0) ;
 
 		// Referencement des fichiers Html dynamiques
 		bool ReferencerHtml(string typeDoc, string nomDoc, string tempDoc, string enteteDoc, bool bIsVisible = true) ;

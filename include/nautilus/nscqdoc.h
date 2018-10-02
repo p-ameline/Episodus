@@ -9,7 +9,7 @@ class nsarcParseur ;
 // #include <owl\owlpch.h>
 #include <owl\dc.h>
 
-#include "nautilus\nsannexe.h"
+// #include "nautilus\nsannexe.h"
 #include "nautilus\nsdocref.h"
 
 class NSCQDocument : public NSRefDocument

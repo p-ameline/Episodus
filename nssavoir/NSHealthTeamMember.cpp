@@ -78,7 +78,7 @@
   #include "enterpriseLus\superLus.h"
 #else
   #include "nautilus\nssuper.h"
-  #include "nsepisod\nsldvuti.h"
+  #include "nsldv\nsldvuti.h"
 #endif
 
 #include "nsbb\nsbbtran.h"

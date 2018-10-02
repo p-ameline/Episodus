@@ -16,13 +16,11 @@
 #include "nsepisod\nsepisod.h"
 
 USEUNIT("nsepisod\eptables.cpp");
-USEUNIT("nsepisod\nsldvuti.cpp");
 USEUNIT("nsepisod\nsepidiv.cpp");
 USEUNIT("nsepisod\nssoapdiv.cpp");
 USEUNIT("nsepisod\nsclasser.cpp");
 USEUNIT("nsepisod\nsCoopChart.cpp");
 USEUNIT("nsepisod\nsPrediDlg.cpp");
-USEUNIT("nautilus\nsannexe.cpp");
 USEUNIT("nsepisod\flechiesDB.cpp");
 USEUNIT("nsepisod\objectif_viewer.cpp");
 USEUNIT("nsepisod\nspatdlgknl.cpp");
@@ -30,22 +28,23 @@ USEUNIT("nsepisod\nsToDo.cpp");
 USEUNIT("nsepisod\NsPapyrus.cpp");
 USEUNIT("nsepisod\NsMailManager.cpp");
 USEUNIT("nsepisod\NsCsvParser.cpp");
+USEUNIT("nsepisod\nsPilotProxy.cpp");
 USERC("nsepisod\nspredi.rc");
 USERC("nsepisod\nsepidiv.rc");
 USERC("nsepisod\objectif_viewer.rc");
-USERES("nsmepisod.res");
 USELIB("nsmutil.lib");
 USELIB("nsm_sgbd.lib");
 USELIB("nsmsavoir.lib");
 USELIB("nsmbb.lib");
 USELIB("nsmdn.lib");
+USELIB("nsmldv.lib");
 USELIB("memmgr.lib");
 USELIB("cp32mti.lib");
 USELIB("bidsvi.lib");
 USELIB("owlwvi.lib");
 USELIB("nspr4.lib");
 USELIB("nsmdecode.lib");
-USEUNIT("nsepisod\nsldvstructs.cpp");
+USERES("nsmepisod.res");
 //---------------------------------------------------------------------------
 int WINAPI DllEntryPoint(HINSTANCE hinstDll, unsigned long fdwReason, void*)
 {

@@ -94,7 +94,7 @@ class TAcrobatProxy;class NSAcrobatView : public TWindowView
     void   resizeOleControl(NS_CLASSLIB::TRect clientRect) ;
 
   private:
-    TAcrobatProxy* _AcrobatForm ;    TWebProxy*     _IEForm ;    TMenuDescr*    _pMUEViewMenu ;    HACCEL         _hAccelerator ;
+    // TAcrobatProxy* _AcrobatForm ;    TWebProxy*     _IEForm ;    TMenuDescr*    _pMUEViewMenu ;    HACCEL         _hAccelerator ;
 	DECLARE_RESPONSE_TABLE(NSAcrobatView) ;};
 
 #endif

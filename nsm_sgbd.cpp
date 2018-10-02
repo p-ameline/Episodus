@@ -20,7 +20,7 @@ USEUNIT("ns_sgbd\nschemin.cpp");
 USEUNIT("ns_sgbd\nsrepare.cpp");
 USEUNIT("ns_sgbd\nsbdeuti.cpp");
 USEUNIT("ns_sgbd\ns_odbc.cpp");
-USEUNIT("nautilus\Nsannexe.cpp");
+USEUNIT("ns_sgbd\Nsannexe.cpp");
 USEUNIT("pilot\JavaSystem.cpp");
 USEUNIT("pilot\Pilot.cpp");
 USEUNIT("pilot\NautilusPilot.cpp");

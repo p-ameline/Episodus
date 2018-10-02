@@ -14,7 +14,7 @@
 // #include "nautilus\nsrechdl.h"
 #include "partage\nsdivfct.h"
 #include "nautilus\nspatdlg.h"
-#include "nautilus\nsanxary.h"
+// #include "nautilus\nsanxary.h"
 #include "nsdn\nsdocum.h"
 #include "nsdn\nsframedocs.h"
 #include "nautilus\nsepicap.h"

@@ -155,13 +155,17 @@ class _NSDKDCLASSE NSPhrasePrescript : public NSPhraseObjet
 
     string           _sNonSubstituable ;  // French only
 
+    bool             _bNumsAsText ;
+
     void decode(int colonne) ;
     void metPhrase(string decDeb = string(""), string decFin = string(""), int sautLigne = 0) ;
     void metPhraseFreeText(string decDeb = string(""), string decFin = string(""), int sautLigne = 0) ;
 
-    NSPhrasePrescript(NSContexte* pCtx, int iDecoType = dcPhrase, string sLangue = string("fr")) ;
-    NSPhrasePrescript(decodageBase* pBase, int iDecoType = dcPhrase, string sLangue = string("fr")) ;
+    NSPhrasePrescript(NSContexte* pCtx, int iDecoType = dcPhrase, string sLangue = string("fr"), bool bAllLettersSentences = false) ;
+    NSPhrasePrescript(decodageBase* pBase, int iDecoType = dcPhrase, string sLangue = string("fr"), bool bAllLettersSentences = false) ;
     ~NSPhrasePrescript() ;
+
+    bool isNarcotic() ;
 
     NSPhrasePrescript(const NSPhrasePrescript& rv) ;
 

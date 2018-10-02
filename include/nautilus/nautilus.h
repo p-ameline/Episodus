@@ -1,5 +1,6 @@
 #ifndef __NAUTILUS_H__# define __NAUTILUS_H__
 
+# include <process.h>
 # include <owl\mdi.h># include <owl\decmdifr.h>
 # include <owl\controlb.h>
 # include <owl\statusba.h>
@@ -11,6 +12,7 @@
 # include <owl\splashwi.h>
 
 class NSInPersonsChild ;
+class NSMDIFrame ;
 
 # include "docking\dockinge.h"
 # include "docking\stripeDock.h"
@@ -49,21 +51,6 @@ class NSMDIClient : public NSBasicMDIClient
 
 	DECLARE_RESPONSE_TABLE(NSMDIClient) ;
 } ;
-
-// class NSMDIFrame : public TOleMDIFrame
-class NSMDIFrame : public TDecoratedMDIFrame, public NSRoot
-{  protected:    time_t _startOfWaitingTime ;    bool   _bToDoOnDuty ;    NSInPersonsChild* _pInPersonsChild ;    void   openPilotProxy() ;  public:
-
-    enum TIMERIMPORTTYPES { isScan = 0, isImage } ;
-
-    NSPrinter* Printer;
-    bool       bEndSession;
-
-    NSMDIFrame(NSContexte* pCtx, const char far *title, TResId menuResId, TMDIClient &clientWnd = *new TMDIClient, bool trackMenuSelection = false, OWL::TModule* module = 0) ;
-    ~NSMDIFrame() ;
-    void SetupWindow() ;    bool EvQueryEndSession() ;
-    void EvTimer(uint timerId) ;
-    void EvEndSession(bool endSession, bool logOff /* used only by Win95 */) ;    void CloseStripes() ;    void CmToDo() ;    void ExecuteToDo(NSToDoTask *pToDo) ;    NSMDIClient*      GetClientWindow()      { return TYPESAFE_DOWNCAST(ClientWnd, NSMDIClient) ; }    NSBasicMDIClient* GetBasicClientWindow() { return TYPESAFE_DOWNCAST(ClientWnd, NSBasicMDIClient) ; }    HMENU             FindChildMenu(HMENU menu) ;    HWND              GetPopupMenuWindowHandle() ;    void InitAutomaticImportTimers() ;    void CheckForAutomaticImport(TIMERIMPORTTYPES iImportType) ;    void ToDo_Archetype(NSToDoTask* pToDo) ;    void ToDo_KS_Archetype(NSToDoTask* pToDo) ;    void ToDo_KS_DecisionTree(NSToDoTask* pToDo) ;    void ToDo_FermeArchetype(NSToDoTask* pToDo) ;    void ToDo_CreerBibArch(NSToDoTask* pToDo) ;    void ToDo_CreerBibChem(NSToDoTask* pToDo) ;    void ToDo_FermeDPIO(NSToDoTask* pToDo) ;    void ToDo_ActivateMUEView(NSToDoTask* pToDo) ;    void ToDo_NewPreoccup(NSToDoTask* pToDo) ;    void ToDo_NewPreoccupProposal(NSToDoTask* pToDo) ;    void ToDo_Message(NSToDoTask* pToDo, NsStripe::STRIPETYPE iStripeType) ;    void ToDo_NewPreoccupFromNode(NSToDoTask* pToDo) ;    void ToDo_NewDrugFromNode(NSToDoTask* pToDo) ;    void ToDo_ChangePreoccupFromNode(NSToDoTask* pToDo) ;    void ToDo_OpenNewWindow(NSToDoTask* pToDo) ;    void ToDo_ExportDocForDeletedCompt(NSToDoTask* pToDo) ;    void ToDo_GetPersonAsynch(NSToDoTask* pToDo) ;    void ToDo_OpenDocument(NSToDoTask* pToDo) ;    void openWhoIsThereWindow(string sInPatientsFileDesc) ;    void closeWhoIsThereWindow() ;    NSInPersonsChild* getInPersonsChild()                       { return _pInPersonsChild ; }    void              setInPersonsChild(NSInPersonsChild* pIPC) { _pInPersonsChild = pIPC ; } DECLARE_RESPONSE_TABLE(NSMDIFrame) ;} ;
 
 class NSContexte ;
 
@@ -132,6 +119,8 @@ class TMyApp : public OWL::TApplication
     TDockableControlBarEx* getMainControlBar()      { return _cb1 ; }
     TDockableControlBarEx* getSecondaryControlBar() { return _cb2 ; }
     TDockableControlBarEx* getTertiary()            { return _cb3 ; }
+
+    // Forms::TApplication* _pFormsApplication ;
 
     void CmBureau() ;
 
@@ -570,6 +559,20 @@ TMyApp::BeginModal(TWindow* window, TWindow* notBlockedWindow, int flags)
   // Return the result from the modal window's EndModal call
   //
   return result ;
+}
+
+bool
+TMyApp::isForegroundApplication()
+{
+  HWND hwnd = GetForegroundWindow() ;
+  if ((HWND) 0 == hwnd)
+    return false ;
+
+  DWORD foregroundPid ;
+  if (GetWindowThreadProcessId(hwnd, &foregroundPid) == 0)
+    return false ;
+
+  return (foregroundPid == getpid()) ;
 }
 
 /*

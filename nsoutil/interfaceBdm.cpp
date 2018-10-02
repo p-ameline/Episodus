@@ -201,6 +201,46 @@ catch (...)
 }
 
 bool
+InterfaceBdm::isCodegeneriqGrpeInDB(string sGenericGroup)
+{
+try
+{
+  pBdm->lastError = pBdm->chercheClef(&sGenericGroup, "CODESGENERIQUE", NODEFAULTINDEX, keySEARCHEQ, dbiREADLOCK) ;
+  if ((pBdm->lastError != DBIERR_NONE) && (pBdm->lastError != DBIERR_RECNOTFOUND))
+  {
+    erreur("InterfaceBdm::isCodegeneriqGrpeInDB -- erreur à la recherche dans la base bdm.db.", standardError, pBdm->lastError, pContexte->GetMainWindow()->GetHandle()) ;
+    return false ;
+  }
+
+  if (pBdm->lastError == DBIERR_RECNOTFOUND)
+    return false ;
+
+  pBdm->lastError = pBdm->getRecord() ;
+  if (pBdm->lastError != DBIERR_NONE)
+  {
+    erreur("InterfaceBdm::isCodegeneriqGrpeInDB -- erreur à la récupération de l'enregistrement", standardError, pBdm->lastError, pContexte->GetMainWindow()->GetHandle()) ;
+    return false ;
+  }
+
+  if (pBdm->getGeneriqGrpe() == sGenericGroup)
+    return true ;
+  else
+    return false ;
+}
+catch (const exception& e)
+{
+  string sExcept = "Exception InterfaceBdm::isCodegeneriqGrpeInDB." + string(e.what()) ;
+  erreur(sExcept.c_str(), standardError, 0) ;
+  return false ;
+}
+catch (...)
+{
+  erreur("Exception InterfaceBdm::isCodegeneriqGrpeInDB.", standardError, 0) ;
+  return false ;
+}
+}
+
+bool
 InterfaceBdm::isCodeVidalInDB(string sCodeVidal)
 {
 try
@@ -320,8 +360,11 @@ catch (...)
 }
 }
 
+/**
+ * Find the table line for a given leximed code
+ */
 bool
-InterfaceBdm::updateCipForLeximed(string sCodeCIP, string sLeximed)
+InterfaceBdm::findRecordForLeximed(string sLeximed)
 {
   if (string("") == sLeximed)
     return false ;
@@ -331,7 +374,7 @@ InterfaceBdm::updateCipForLeximed(string sCodeCIP, string sLeximed)
 		pBdm->lastError = pBdm->chercheClef(&sLeximed, "CODESLEXIMED", NODEFAULTINDEX, keySEARCHEQ, dbiREADLOCK) ;
 		if ((pBdm->lastError != DBIERR_NONE) && (pBdm->lastError != DBIERR_RECNOTFOUND))
 		{
-			erreur("InterfaceBdm::updateCipForLeximed -- erreur à la recherche dans la base bdm.db.", standardError, pBdm->lastError, pContexte->GetMainWindow()->GetHandle()) ;
+			erreur("InterfaceBdm::findRecordForLeximed -- erreur à la recherche dans la base bdm.db.", standardError, pBdm->lastError, pContexte->GetMainWindow()->GetHandle()) ;
 			return false ;
 		}
 
@@ -341,16 +384,40 @@ InterfaceBdm::updateCipForLeximed(string sCodeCIP, string sLeximed)
     pBdm->lastError = pBdm->getRecord() ;
     if (pBdm->lastError != DBIERR_NONE)
     {
-      erreur("InterfaceBdm::updateCipForLeximed -- erreur à la récupération de l'enregistrement", standardError, pBdm->lastError, pContexte->GetMainWindow()->GetHandle()) ;
+      erreur("InterfaceBdm::findRecordForLeximed -- erreur à la récupération de l'enregistrement", standardError, pBdm->lastError, pContexte->GetMainWindow()->GetHandle()) ;
       return false ;
     }
 
     if (pBdm->getLeximed() != sLeximed)
     {
-      erreur("InterfaceBdm::updateCipForLeximed -- erreur de cohérence à la récupération de l'enregistrement", standardError, 0, pContexte->GetMainWindow()->GetHandle()) ;
+      erreur("InterfaceBdm::findRecordForLeximed -- erreur de cohérence à la récupération de l'enregistrement", standardError, 0, pContexte->GetMainWindow()->GetHandle()) ;
       return false ;
     }
+  }
+	catch (const exception& e)
+	{
+		string sExcept = "Exception InterfaceBdm::findRecordForLeximed." + string(e.what()) ;
+		erreur(sExcept.c_str(), standardError, 0) ;
+		return false ;
+	}
+	catch (...)
+	{
+		erreur("Exception InterfaceBdm::findRecordForLeximed.", standardError, 0) ;
+		return false ;
+	}
+}
 
+/**
+ * Update (or set) the CISP code for a given leximed code
+ */
+bool
+InterfaceBdm::updateCipForLeximed(string sCodeCIP, string sLeximed)
+{
+  if (false == findRecordForLeximed(sLeximed))
+    return false ;
+
+  try
+	{
     pBdm->setCodeCIP(sCodeCIP) ;
 
     pBdm->lastError = pBdm->modifyRecord(TRUE) ;
@@ -364,13 +431,48 @@ InterfaceBdm::updateCipForLeximed(string sCodeCIP, string sLeximed)
 	}
 	catch (const exception& e)
 	{
-		string sExcept = "Exception InterfaceBdm::isCodeLexiMedInDB(string sLeximed)." + string(e.what()) ;
+		string sExcept = "Exception InterfaceBdm::updateCipForLeximed." + string(e.what()) ;
 		erreur(sExcept.c_str(), standardError, 0) ;
 		return false ;
 	}
 	catch (...)
 	{
-		erreur("Exception InterfaceBdm::isCodeLexiMedInDB(string sLeximed).", standardError, 0) ;
+		erreur("Exception InterfaceBdm::updateCipForLeximed.", standardError, 0) ;
+		return false ;
+	}
+}
+
+/**
+ * Update (or set) the Medicabase code for a given leximed code
+ */
+bool
+InterfaceBdm::updateMedicabaseForLeximed(string sCodeMedicabase, string sLeximed)
+{
+  if (false == findRecordForLeximed(sLeximed))
+    return false ;
+
+  try
+	{
+    pBdm->setGeneriqGrpe(sCodeMedicabase) ;
+
+    pBdm->lastError = pBdm->modifyRecord(TRUE) ;
+    if (pBdm->lastError != DBIERR_NONE)
+    {
+      erreur("InterfaceBdm::updateMedicabaseForLeximed -- erreur à la mise à jour de l'enregistrement", standardError, pBdm->lastError, pContexte->GetMainWindow()->GetHandle()) ;
+      return false ;
+    }
+
+    return true ;
+	}
+	catch (const exception& e)
+	{
+		string sExcept = "Exception InterfaceBdm::updateMedicabaseForLeximed." + string(e.what()) ;
+		erreur(sExcept.c_str(), standardError, 0) ;
+		return false ;
+	}
+	catch (...)
+	{
+		erreur("Exception InterfaceBdm::updateMedicabaseForLeximed.", standardError, 0) ;
 		return false ;
 	}
 }
@@ -416,7 +518,7 @@ catch (...)
 }
 
 bool
-InterfaceBdm::insertElem(string sCodeCIP, string sExtension, string sLeximed, string sCodeVidal, string sLeximedOld)
+InterfaceBdm::insertElem(string sCodeCIP, string sExtension, string sLeximed, string sCodeVidal, string sLeximedOld, string sGeneric)
 {
   if (string("") == sLeximed)
     return false ;
@@ -431,6 +533,7 @@ InterfaceBdm::insertElem(string sCodeCIP, string sExtension, string sLeximed, st
 		pBdm->setLeximed(sLeximed) ;
 		pBdm->setCodeVidal(sCodeVidal) ;
 		pBdm->setLeximedOld(sLeximedOld) ;
+    pBdm->setGeneriqGrpe(sGeneric) ;
 
 		// on l'insère dans la base Messages
 		pBdm->lastError = pBdm->appendRecord() ;

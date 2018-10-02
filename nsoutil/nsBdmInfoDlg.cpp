@@ -4,9 +4,11 @@
 #include <stdio.h>
 #include <string.h>
 
+#include "nssavoir\nsBdmDriver.h"
 #include "nautilus\nssuper.h"
 #include "nsoutil\nsoutil.h"
 #include "nsoutil\nsBdmDrugInfoDlg.h"
+#include "partage\nsdivfile.h"
 
 #include "nsoutil\nsBdmDlg.rh"
 
@@ -97,7 +99,7 @@ NSGenericBdmInfoDlg::createButtons()
 
   for (NsHtmlLinkIter it = pLinks->begin() ; pLinks->end() != it ; it++)
   {
-    if ((*it)->getRelTitle() == NsHtmlLink::relRelated)
+    if (isButtonableLink(*it))
     {
       // Increments all positioning information
       //
@@ -120,6 +122,8 @@ NSGenericBdmInfoDlg::createButtons()
       // Create the button
       //
       string sText = pContexte->getSuperviseur()->getText("drugInformationTags", (*it)->getTitle()) ;
+      if (string("") == sText)
+        sText = (*it)->getTitle() ;
 
       NSBdmInfoButton* pBtn = new NSBdmInfoButton(pContexte, this, iBtnResId++, sText.c_str(), cvtRect.Left(), cvtRect.Top(), cvtRect.Width(), cvtRect.Height(), /*isDefault*/ false, 0) ;
       pBtn->setUrl((*it)->getURL()) ;
@@ -170,6 +174,37 @@ NSGenericBdmInfoDlg::relocateOkButton(int iCurrentBtnTopPos)
   _pOkBtn->MoveWindow(btnRect.left, btnRect.top, btnRect.Width(), btnRect.Height()) ;
 }
 
+/**
+ * Is this link the kind of link that must be activable as a button
+ */
+bool
+NSGenericBdmInfoDlg::isButtonableLink(const NsHtmlLink* pLink) const
+{
+  if ((NsHtmlLink*) NULL == pLink)
+    return false ;
+
+  return (pLink->getRelTitle() == NsHtmlLink::relRelated) ;
+}
+
+/**
+ * Get the count of links that will be instantiated as a button
+ */
+size_t
+NSGenericBdmInfoDlg::getButton4LinkCount() const
+{
+  NsHtmlLinksArray* pLinks = getLinks() ;
+  if (((NsHtmlLinksArray*) NULL == pLinks) || pLinks->empty())
+    return 0 ;
+
+  int iBtnCount = 0 ;
+
+  for (NsHtmlLinkIter it = pLinks->begin() ; pLinks->end() != it ; it++)
+    if (isButtonableLink(*it))
+      iBtnCount++ ;
+
+  return iBtnCount ;
+}
+
 bool
 NSGenericBdmInfoDlg::isValidUrl(string sUrl)
 {
@@ -182,6 +217,30 @@ NSGenericBdmInfoDlg::isValidUrl(string sUrl)
     return false ;
 
   if ((string("http://") != string(sUrl, 0, 7)) && (string("https://") != string(sUrl, 0, 8)))
+    return false ;
+
+  return true ;
+}
+
+/**
+ * Is it a name in the form "blabla.html" or "blabla.htm"
+ */
+bool
+NSGenericBdmInfoDlg::isHtmlName(string sUrl)
+{
+  if (string("") == sUrl)
+    return false ;
+
+  string sRoot      = string("") ;
+  string sExtension = string("") ;
+  NsParseExtension(sUrl, sRoot, sExtension) ;
+
+  if ((string("") == sRoot) || (string("") == sExtension))
+    return false ;
+
+  string sMajExt = pseumaj(sExtension) ;
+
+  if ((string("HTML") != sMajExt) && (string("HTM") != sMajExt))
     return false ;
 
   return true ;
@@ -296,6 +355,12 @@ NSBdmInfoDlg::activatedInformation(int iIndex)
   //
   if (isValidUrl(sValue))
     NSGenericBdmInfoDlg::openUrl(sValue, pEntry->getField()) ;
+  else if (isHtmlName(sValue))
+  {
+    NSBdmDriver* pDriver = pContexte->getBdmDriver() ;
+    if (pDriver)
+      NSGenericBdmInfoDlg::openUrl(pDriver->getBasicPathForDocs() + sValue, pEntry->getField()) ;
+  }
 }
 
 // -----------------------------------------------------------------
@@ -413,7 +478,7 @@ NSBdmMultiInfoDlg::updateButtons()
 
   NsHtmlLinksArray* pLinks = pBlock->getLinks() ;
 
-  if (pLinks->size() == _aButtons.size())
+  if (getButton4LinkCount() == _aButtons.size())
     updateButtonsContents(pLinks) ;
   else
     updateButtons(pLinks) ;
@@ -422,9 +487,10 @@ NSBdmMultiInfoDlg::updateButtons()
 void
 NSBdmMultiInfoDlg::updateButtons(NsHtmlLinksArray* pLinks)
 {
+  _aButtons.vider() ;
+
   if (((NsHtmlLinksArray*) NULL == pLinks) || pLinks->empty())
   {
-    _aButtons.vider() ;
     resizeForButtons(_iTopStart) ;
     return ;
   }
@@ -443,10 +509,19 @@ NSBdmMultiInfoDlg::updateButtonsContents(NsHtmlLinksArray* pLinks)
   if (_aButtons.empty())
     return ;
 
-  NsHtmlLinkIter lnkIt = pLinks->begin() ;
+  NsHtmlLinkIter      lnkIt = pLinks->begin() ;
+  NSBdmInfoButtonIter btnIt = _aButtons.begin() ;
 
-  for (NSBdmInfoButtonIter btnIt = _aButtons.begin() ; (_aButtons.end() != btnIt) && (pLinks->begin() != lnkIt) ; btnIt++, lnkIt++)
-    (*btnIt)->Update((*lnkIt)->getURL(), (*lnkIt)->getTitle()) ;
+  for ( ; (_aButtons.end() != btnIt) && (pLinks->end() != lnkIt) ; lnkIt++)
+  {
+    if (isButtonableLink(*lnkIt))
+    {
+      (*btnIt)->Update((*lnkIt)->getURL(), (*lnkIt)->getTitle()) ;
+      btnIt++ ;
+    }
+  }
+
+  Invalidate() ;
 }
 
 void
@@ -564,6 +639,9 @@ void
 NSBdmInfoListWindow::InsertItems(const string sLabel, const string sValue, int iLine)
 {
   string sText = pContexte->getSuperviseur()->getText("drugInformationTags", sLabel) ;
+  if (string("") == sText)
+    sText = sLabel ;
+
   TListWindItem Item(sText.c_str(), 0) ;
   Item.SetIndex(iLine) ;
   InsertItem(Item) ;

@@ -29,7 +29,7 @@
 #include "nssavoir/nsfilgd.h"
 #include "nssavoir/nsguide.h"
 #include "nssavoir/nsconver.h"
-#include "nsepisod/nsldvuti.h"
+#include "nsldv/nsldvuti.h"
 
 long NSPatPathoData::lObjectCount = 0 ;
 long NSPatPathoInfo::lObjectCount = 0 ;
@@ -3575,7 +3575,7 @@ try
 
   // If there is no start iter, we start searching from start
   //
-  if ((NULL == pstartIter) || (begin() == *pstartIter))
+  if (((PatPathoConstIter*) NULL == pstartIter) || (begin() == *pstartIter))
     bStartIterWasMet = true ;
 
   bool bSubTreeIterWasMet = false ;
@@ -3893,43 +3893,84 @@ try
               if (string("") != *pValeur)
                 return true ;
 					  }
+
 					  //
-					  // Chercher éventuellement le fils de iterpVectTemp ayant
-					  // une valeur chiffrée
+					  // Pas un code, chercher éventuellement le fils de iterpVectTemp
+					  // ayant une valeur chiffrée
 					  //
 					  iterValeur = iterPatPath ;
-					  if (end() != iterValeur)
+					  if (end() == iterValeur)
+              return true ;
+
+            string sDesiredUnit     = string("") ;
+            string sDesiredUnitSens = string("") ;
+            if (pUnite && (string("") != *pUnite))
             {
-              string sLexique = (*iterValeur)->getLexique() ;
-              if ('£' != sLexique[0])
-						    iterValeur++ ;
+              sDesiredUnit = *pUnite ;
+              NSDico::donneCodeSens(&sDesiredUnit, &sDesiredUnitSens) ;
             }
 
-					  if (end() != iterValeur)
-					  {
-						  //
-              // Si valeur non chiffrée prendre iterValeur lui même
-              // sinon le complément contenu dans £N0;0..
-              //
-              string sLexique = (*iterValeur)->getLexique() ;
+            string sLexique = (*iterValeur)->getLexique() ;
+            if ('£' != sLexique[0])
+            {
+              int iRefCol = (*iterPatPath)->getColonne() ;
+              iterValeur++ ;
 
-						  if ('£' == sLexique[0])
-						  {
-            	  if (string("£CL") == string(sLexique, 0, 3))
-              	  *pValeur = (*iterValeur)->getTexteLibre() ;
-                else
-                {
-								  *pValeur = (*iterValeur)->getComplement() ;
-								  if (pUnite)
-									  *pUnite = (*iterValeur)->getUnit() ;
-                }
-              }
-              else
+              while ((end() != iterValeur) && ((*iterValeur)->getColonne() > iRefCol))
               {
-            	  *pValeur = sLexique ;
-                if (pUnite)
-              	  *pUnite = "" ;
+                if ((*iterValeur)->getColonne() == iRefCol + 1)
+                {
+						      //
+                  // Si valeur non chiffrée prendre iterValeur lui même
+                  // sinon le complément contenu dans £N0;0..
+                  //
+                  string sLexSearch = (*iterValeur)->getLexique() ;
+
+						      if ('£' == sLexSearch[0])
+						      {
+                    // Free text, is a valid return value only if no unit expected
+                    //
+            	      if (string("£CL") == string(sLexSearch, 0, 3))
+                    {
+                      if ((string*) NULL == pUnite)
+                      {
+              	        *pValeur = (*iterValeur)->getTexteLibre() ;
+                        return true ;
+                      }
+                    }
+                    // Value, is a valid return value if expected unit, or no
+                    // unit was transmited
+                    //
+                    else
+                    {
+								      *pValeur = (*iterValeur)->getComplement() ;
+								      if (pUnite)
+                      {
+                        if (string("") == sDesiredUnit)
+                        {
+									        *pUnite = (*iterValeur)->getUnit() ;
+                          return true ;
+                        }
+                        string sLocalUnit     = (*iterValeur)->getUnit() ;
+                        string sLocalUnitSens = string("") ;
+                        NSDico::donneCodeSens(&sLocalUnit, &sLocalUnitSens) ;
+                        if (sLocalUnitSens == sDesiredUnitSens)
+                        {
+                          *pUnite = (*iterValeur)->getUnit() ;
+                          return true ;
+                        }
+                      }
+                      else
+                        return true ;
+                    }
+                  }
+                }
+                iterValeur++ ;
               }
+
+              *pValeur = sLexique ;
+              if (pUnite)
+                *pUnite = string("") ;
 					  }
             return true ;
 				  }

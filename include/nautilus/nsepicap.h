@@ -103,7 +103,7 @@ class NSPrediDlg ;
 # include "nautilus\nssuper.h"
       // # include "partage\NTArray.h"
 # include "nssavoir\nscaptur.h"
-# include "nsepisod\nsldvuti.h"
+# include "nsldv\nsldvuti.h"
 # include "nsepisod\nsPapyrus.h"
 # include "nsepisod\nsPrediDlg.h"
       // # include "nautilus\nsbrowse.h"

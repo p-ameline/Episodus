@@ -67,9 +67,10 @@ NSDocumentHisto::NSDocumentHisto(const NSDocumentHisto& rv)
                 :NSDocumentInfo(rv.pContexte),
                       _PatPathoArray(rv._PatPathoArray)
 {
-	_pDocNoy = rv._pDocNoy ;
+	_pDocNoy                = rv._pDocNoy ;
 
-	_Donnees = rv._Donnees ;
+	_Donnees                = rv._Donnees ;
+  _aAdditionalInformation = rv._aAdditionalInformation ;
 
 	// strcpy(dateDoc, rv.dateDoc);
 	_sDateDoc = string("") ;    // pour forcer la relecture de la date dans la PatPatho
@@ -83,8 +84,9 @@ NSDocumentHisto::operator=(const NSDocumentHisto& src)
 	if (this == &src)
 		return *this ;
 
-	_pDocNoy = src._pDocNoy ;
-	_Donnees = src._Donnees ;
+	_pDocNoy                = src._pDocNoy ;
+	_Donnees                = src._Donnees ;
+  _aAdditionalInformation = src._aAdditionalInformation ;
 
 	// strcpy(dateDoc, rv.dateDoc);
 	_sDateDoc = string("") ;    // pour forcer la relecture de la date dans la PatPatho
@@ -351,6 +353,8 @@ NSDocumentHisto::initDocumentInfo(NSDocumentInfo *pNewDoc)
 
   pNewDoc->setCodeDocMeta(_sCodeDocMeta) ;
   pNewDoc->setCodeDocPres(_sCodeDocPres) ;
+
+  pNewDoc->setAdditionalInformation(_aAdditionalInformation) ;
 }
 
 void

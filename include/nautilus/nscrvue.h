@@ -14,13 +14,13 @@
 #include <owl\listbox.h>
 #include <classlib\arrays.h>
 
-#include "nautilus\nsannexe.h"
-#include "nautilus\nstxstyl.h"
-#include "nautilus\nstxstar.h"
+// #include "nautilus\nsannexe.h"
+// #include "nautilus\nstxstyl.h"
+// #include "nautilus\nstxstar.h"
 #include "nautilus\nsdocref.h"
 #include "nautilus\nsvueref.h"
 #include "nautilus\nscrdoc.h"
-#include "nautilus\nscr_ana.h"
+// #include "nautilus\nscr_ana.h"
 
 #define	IDC_CORRIGER      10
 #define IDC_REPRENDRE_CR  20

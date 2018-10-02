@@ -23,12 +23,6 @@
 
 HINSTANCE   hInstanceDll;
 
-USELIB("bidsvi.lib");
-USELIB("owlwvi.lib");
-USELIB("nsmutil.lib");
-USELIB("nsmbb.lib");
-USELIB("nsmepisod.lib");
-USELIB("nsmsavoir.lib");
 USEUNIT("ns_ob1\AttValPair.cpp");
 USEUNIT("ns_ob1\BB1API.cpp");
 USEUNIT("ns_ob1\BB1APIconst.cpp");
@@ -85,9 +79,17 @@ USEUNIT("ns_ob1\Transfer.cpp");
 USEUNIT("ns_ob1\toolbox.cpp");
 USEUNIT("ns_ob1\AgentManager.cpp");
 USEUNIT("ns_ob1\Agent.cpp");
+USEUNIT("ns_ob1\NSKS.cpp");
+USELIB("bidsvi.lib");
+USELIB("owlwvi.lib");
+USELIB("nsmutil.lib");
+USELIB("nsmbb.lib");
+USELIB("nsmldv.lib");
+USELIB("nsmepisod.lib");
+USELIB("nsmsavoir.lib");
 USERC("ns_ob1\OB1.rc");
 USERES("nsm_ob1.res");
-USEUNIT("ns_ob1\NSKS.cpp");
+
 //---------------------------------------------------------------------------
 #ifdef _NSVIDAL
 USELIB("ns_vidal.lib") ;

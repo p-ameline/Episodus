@@ -9,6 +9,7 @@
 // FLP  - novembre 2003
 // -----------------------------------------------------------------------------
 
+#include "nssavoir/nsBdmDriver.h"
 #include "nsbb\nsmedicphase.h"
 #include "nsbb\nsmedicdlg.h"
 #include "nsbb\nsbb.h"
@@ -520,9 +521,11 @@ NSPatPathoArray*
 NSphaseMedic::SimplifiedTreeForInterpretation()
 {
   int iColonne = 0 ;
-  int iColBasePhase = iColonne ;
+
   NSPatPathoArray* tree = new NSPatPathoArray(pContexte->getSuperviseur()) ;
-  tree->ajoutePatho("KPHAT1", iColonne) ;
+  tree->ajoutePatho("KPHAT1", iColonne++) ;
+
+  int iColBasePhase = iColonne ;
 
   // traitement des paramètres de la phase
   //
@@ -534,6 +537,7 @@ NSphaseMedic::SimplifiedTreeForInterpretation()
 		CodeMsg.SetComplement(_tStartingDate.donneDateHeure()) ;
 		tree->ajoutePatho("£D0;19", &CodeMsg, iColonne++) ;
 	}
+  iColonne = iColBasePhase ;
 
   if (false == _tClosingDate.estVide())
   {
@@ -543,21 +547,23 @@ NSphaseMedic::SimplifiedTreeForInterpretation()
 		CodeMsg.SetComplement(_tClosingDate.donneDateHeure()) ;
 		tree->ajoutePatho("£D0;19", &CodeMsg, iColonne++) ;
 	}
+  iColonne = iColBasePhase ;
 
   // pendant
-  iColonne = iColBasePhase + 1 ;
   if (iDureeCycle != 0)
   {
   	tree->ajoutePatho("VDURE2", iColonne++) ;              // code pour pendant
     createNodeComplement(tree, "£N0;03", sUnitDureeCycle, iDureeCycle, iColonne) ;
 	}
+  iColonne = iColBasePhase ;
 
-  iColonne = iColBasePhase + 1 ;
   if (iNbRenouvellement != 0)
   {
   	tree->ajoutePatho("VRENO1", iColonne++) ;            // code pour à renouveler
     createNodeComplement(tree, "£N0;03", "200001", iNbRenouvellement, iColonne) ;
 	}
+  iColonne = iColBasePhase ;
+
 	return tree ;
 }
 
@@ -580,6 +586,7 @@ NSphaseMedic::CreateTree()
       delete temp ;
     }
   }
+
   return result ;
 }
 

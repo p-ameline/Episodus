@@ -24,7 +24,7 @@
 #include "nautilus\nautilus.rh"
 #include "nsbb\nsmview.h"
 #include "nautilus\nsldvdoc.h"
-#include "nautilus\nsldvvar.h"
+#include "nsldv\nsldvvar.h"
 
 class NSGoalsPropertyWindow ;
 

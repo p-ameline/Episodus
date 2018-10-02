@@ -2,8 +2,9 @@
 #include <owl\control.h>
 #include <owl\gdiobjec.h>
 
-#include "nssavoir\nsfilgd.h"
 #include "nssavoir\nspathor.h"
+
+#include "nssavoir\nsfilgd.h"
 #include "nsbb\nsdicogl.h"
 #include "nsbb\nsbb.h"
 #include "partage\nsdivfct.h"

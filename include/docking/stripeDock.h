@@ -4,14 +4,16 @@
 
 #include <owl/glyphbtn.h>
 #include <owl/textgadg.h>
-#include <owl/buttonga.h>  
+#include <owl/buttonga.h>
 
 class NsStripe ;
 class NSContexte ;
 
 // #include "nautilus/nssuper.h"
 #include "docking/dockinge.h"
-class NsStripeTextGadget : public TTextGadget {
+#include "nsbb\nsexport.h" 
+
+class _NSBBCLASSE NsStripeTextGadget : public TTextGadget {
 
   public:
 
@@ -29,7 +31,7 @@ class NsStripeTextGadget : public TTextGadget {
     NsStripe* _pStripe ;
 } ;
 
-class NsCloseButtonGadget : public TButtonGadget {
+class _NSBBCLASSE NsCloseButtonGadget : public TButtonGadget {
 
   public:
 
@@ -47,7 +49,7 @@ class NsCloseButtonGadget : public TButtonGadget {
     NsStripe* _pStripe ;
 } ;
 
-class NsStripeButton : public OWL::TButton
+class _NSBBCLASSE NsStripeButton : public OWL::TButton
 {
   public:
 
@@ -75,7 +77,7 @@ class NsStripeButton : public OWL::TButton
 
 // ****************** NsStripe ***********************************
 
-class NsStripe : public TDockableControlBarEx
+class _NSBBCLASSE NsStripe : public TDockableControlBarEx
 {
   public:
 
@@ -146,7 +148,7 @@ class NsStripe : public TDockableControlBarEx
 
 // *********************** NsPreoccupStripe ***********************
 
-class NsPreoccupStripe : public NsStripe
+class _NSBBCLASSE NsPreoccupStripe : public NsStripe
 {
   public:
 
@@ -172,7 +174,7 @@ class NsPreoccupStripe : public NsStripe
 
 // *********************** NsPreoccupStripe ***********************
 
-class NsAlertStripe : public NsStripe
+class _NSBBCLASSE NsAlertStripe : public NsStripe
 {
   public:
 

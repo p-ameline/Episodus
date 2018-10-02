@@ -39,14 +39,12 @@
 void
 decodage::entete(gereDate* pDateExam)
 {
-  signed int age ;
-  string	   intitulePat;
 	//
 	// Facilite l'écriture
 	//
   NSPatientChoisi* pPatEnCours = pContexte->getPatient() ;
 
-  string sDatex = pDateExam->getDate() ;
+  string sDatex = string(pDateExam->getDate(), 0, 8) ;
 
 	//
 	// Titre de l'examen
@@ -60,51 +58,62 @@ decodage::entete(gereDate* pDateExam)
     return ;
   }
 
+  // Set title
+  //
   string sTitre = string("") ;
   Data.donneLibelleAffiche(&sTitre) ;
 
   for (size_t i = 0; i < strlen(sTitre.c_str()); i++)
     sTitre[i] = pseumaj(sTitre[i]) ;
 
-  setDcodeur(sTitre + string(" de ")) ;
+  setDcodeur(sTitre) ;
+
+  // Set document date
+  //
+  addToDcodeur(string(" du ") + donne_date(sDatex, _sLangue)) ;
+
 	//
 	// Intitulé du patient
 	//
-#ifndef _MUE
-  if (!(pPatEnCours->donneNaissance(dateNaiss)))
-    age = -1;
-  else
-    age = donne_age(datex, dateNaiss);
-
-	donne_intitule_patient(&intitulePat, age, pPatEnCours->estFeminin(), false, sLangue);
-
-	addToDcodeur(intitulePat;
-  addToDcodeur(pPatEnCours->pDonnees->nom) ;
-	strip(*sDcodeur(), stripRight, ' '); // sDcodeur()->strip(string::Trailing, ' ');
-  addToDcodeur(string(" ")) ;
-	addToDcodeur(pPatEnCours->pDonnees->prenom) ;
-	strip(*sDcodeur(), stripRight, ' '); // sDcodeur()->strip(string::Trailing, ' ');
-#else
   string sDateNaiss = pPatEnCours->donneNaissance() ;
-  if (string("00000000") == sDateNaiss)
-    age = -1;
-  else
+
+  signed int age = -1 ;
+  if (string("00000000") != sDateNaiss)
     age = donne_age(sDatex, sDateNaiss) ;
 
-	donne_intitule_patient(&intitulePat, age, pPatEnCours->estFeminin(), false, _sLangue) ;
+  string sIntitulePat = string("") ;
+	donne_intitule_patient(&sIntitulePat, age, pPatEnCours->estFeminin(), false, _sLangue) ;
 
-	addToDcodeur(intitulePat) ;
+	addToDcodeur(string(" pour ") + sIntitulePat) ;
   addToDcodeur(pPatEnCours->getNom()) ;
   stripDcodeur(stripRight, ' ') ;
   addToDcodeur(string(" ")) ;
 	addToDcodeur(pPatEnCours->getPrenom()) ;
 	stripDcodeur(stripRight, ' ') ;
-#endif
 
 	metPhrase("2", "2"/*, 1*/) ;
+
 	//
-	// Hospitalisé ou externe
+	// Birthdate and age
 	//
+	if (string("00000000") != sDateNaiss)
+	{
+		if (pPatEnCours->estFeminin())
+			setDcodeur(string("Née le ")) ;
+		else
+			setDcodeur(string("Né le ")) ;
+		addToDcodeur(donne_date(sDateNaiss, _sLangue)) ;
+		//if (age != -1)
+		//{
+		addToDcodeur(" (") ;
+
+		addToDcodeur(donne_intitule_age(sDatex, sDateNaiss)) ;
+		addToDcodeur(")") ;
+      //}
+
+    metPhrase("", ""/*, 1*/) ;
+	}
+
 	setDcodeur(string("")) ;
 }
 

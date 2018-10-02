@@ -19,6 +19,7 @@
 #include "nsbb\nspatpat.h"
 #include "nsdn\nsdocnoy.h"
 #include "nsdn\nsdocum.h"
+#include "dcodeur\decoder.h"
 // #include "nsdn\nsdocdlg.h"
 
 #include "nssavoir\nsgraphe.h"
@@ -280,6 +281,8 @@ try
 	_sCodeDocMeta = rv._sCodeDocMeta ;
 	_sCodeDocPres = rv._sCodeDocPres ;
 
+  _aAdditionalInformation = rv._aAdditionalInformation ;
+
   lObjectCount++ ;
 }
 catch (...)
@@ -336,7 +339,7 @@ NSDocumentInfo::operator=(const NSDocumentInfo& src)
 		return *this ;
 
 	_Donnees      = src._Donnees ;
-	_Meta         = src._Meta ;	_Pres         = src._Pres ;	_sCodeDocMeta = src._sCodeDocMeta ;	_sCodeDocPres = src._sCodeDocPres ;	pContexte 	  = src.pContexte ;
+	_Meta         = src._Meta ;	_Pres         = src._Pres ;	_sCodeDocMeta = src._sCodeDocMeta ;	_sCodeDocPres = src._sCodeDocPres ;	pContexte 	  = src.pContexte ;  _aAdditionalInformation = src._aAdditionalInformation ;
 	return *this ;}
 
 void
@@ -518,7 +521,7 @@ catch (...)
 //--------------------------------------------------------------------------//
 // parser les données du méta-document pour remplir les pDonnees//
 //--------------------------------------------------------------------------bool
-NSDocumentInfo::ParseMetaDonnees(){	if (_Meta.empty())		return false ;  PatPathoIter iter = _Meta.begin() ;
+NSDocumentInfo::ParseMetaDonnees(){  _aAdditionalInformation.vider() ;  // Don't do that since patient and document information have already been  // set in _Donnees at this moment  //  // _Donnees.metAZero() ;	if (_Meta.empty())		return false ;  PatPathoIter iter = _Meta.begin() ;
   _Donnees._sInteret = (*iter)->getInteret() ;
   _Donnees._sVisible = (*iter)->getVisible() ;
 
@@ -665,7 +668,34 @@ NSDocumentInfo::ParseMetaDonnees(){	if (_Meta.empty())		return false ;  Pat
       }
     }
     else
-    	iter++ ;
+    {
+      string sConcept = sElemLex ;
+
+      NSPatPathoArray PatPatho(pContexte->getSuperviseur()) ;
+      _Meta.ExtrairePatPatho(iter, &PatPatho) ;
+
+      iter++ ;
+
+      if ((_Meta.end() == iter) || ((*iter)->getColonne() <= iColBase + 1))
+        _aAdditionalInformation.push_back(new classString(sConcept)) ;
+      else
+      {
+        string sLang = string("") ;
+	      if (pContexte && pContexte->getUtilisateur())
+		      sLang = pContexte->getUtilisateur()->donneLang() ;
+
+        // On décode le noeud contenu dans pPatPatho :
+        // dans ce cas on passe un chemin (contextuel) vide
+        GlobalDkd Dcode(pContexte, sLang, "", &PatPatho) ;
+        Dcode.decodeNoeud() ;
+        string sLabel = Dcode.getDcodeur() ;
+
+        _aAdditionalInformation.push_back(new classString(sConcept, -1, false, sLabel)) ;
+
+        while ((_Meta.end() != iter) && ((*iter)->getColonne() > iColBase + 1))
+          iter++ ;
+      }
+    }
   }  if (_Pres.empty())    return true ;  // Parsing des données de présentation : template et en-tete  //  iter = _Pres.begin() ;  iColBase = (*iter)->getColonne() ;  iter++ ;  while ((_Pres.end() != iter) && ((*iter)->getColonne() > iColBase))  {
     string sElemLex = (*iter)->getLexique() ;
     string sSens    = (*iter)->getLexiqueSens() ;

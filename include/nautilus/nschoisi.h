@@ -30,9 +30,16 @@ class NSVenuesDocument ;
 class NSFrameInformation ;
 class NSToDoTask ;
 class NSCaptureArray ;
-# include <map># include <owl\gauge.h># include <owl\static.h># include "partage\ns_vector.h"# include "nautilus\nsldv_vars.h"# include "partage\nsdivfct.h"# include "partage\nsperson.h"
+class NSDrugView ;
+
+# include <map># include <owl\gauge.h># include <owl\static.h># include "partage\ns_vector.h"# include "nsldv\nsldv_vars.h"# include "partage\nsdivfct.h"# include "partage\nsperson.h"
 # include "nsbb\nsmview.h"
 # include "nsbb\nsutidlg.h"
+# include "nsldv\nsldvdoc_base.h"
+
+#ifndef __NSBDMDRIVER_H
+  class NsSelectableDrugArray ;
+#endif
 
 // # include "nautilus\nsanxary.h"
 // # include "nautilus\nsdocref.h"		// pour l'importation
@@ -221,7 +228,7 @@ class NSPatientChoisi : public NSPatInfo
     // void            	ChargeDonneesPatient(NSPatPathoArray *pPatPathoArray) ; // now in nsperson.h
     void            	PatientDataChanged(NSPatPathoArray *pPatPathoArray) ;
 
-    bool            	CreeObjectif(NSPatPathoArray *pPatPathoCree, string sDocument, string sRefId, string sGoalId, NSPatPathoArray *pPatPathoMotif, LDVFRAME iFrame, bool bSaveNow, string sGoal = "") ;
+    bool            	CreeObjectif(NSPatPathoArray *pPatPathoCree, string sDocument, string sRefId, string sGoalId, NSPatPathoArray *pPatPathoMotif, LDVFRAME iFrame, bool bSaveNow, string sGoal = string("")) ;
     bool            	SaveGoalsBatch(LDVFRAME iFrame) ;
     bool            	SaveGoalsBatch(NSDocumentHisto* pDocument, LDVFRAME iFrame) ;
     bool            	UpdateLdvForNewGoal(LDVFRAME iFrame, NSPatPathoArray *pFramePatPatho, int iGoalLine, int iGoalCol) ;
@@ -232,14 +239,16 @@ class NSPatientChoisi : public NSPatInfo
     bool            	ArreterElement(VecteurString *pNodeArret, string sDateFin, bool bSave = true) ;
     bool            	RenouvelerTraitement(VecteurString *pNodeMedic, NSPatPathoArray *pPPT) ;
     bool            	SupprimerElement(string sNodeArret, bool bAvecTransa = true) ;
+    bool            	SwitchElementLexicon(ArrayLdvDrugs* pModifiedDrugs) ;
 
-    bool            	CreeOrdonnance(bool bGereALD) ;
-    bool            	CreeOrdonnanceFromSelection(bool bGereALD, VecteurString* pDrugsRefs) ;
+    bool            	CreeOrdonnance(bool bGereALD, bool bForceSecured) ;
+    bool            	CreeOrdonnanceFromSelection(bool bGereALD, VecteurString* pDrugsRefs, bool bDCI = false, bool bForceSecured = false) ;
     bool              initNewPrescriptionArrays(NSPatPathoArray* pPpt, bool bGereALD, VecteurString* pNewTraitement, VecteurString* pNewLexique, VecteurString* pNewTrtALD, VecteurString* pNewLexALD) ;
     bool              initRenewPrescriptionArrays(NSPatPathoArray* pPpt, bool bGereALD, VecteurString* pNewTraitement, VecteurString* pNewLexique, VecteurString* pNewTrtALD, VecteurString* pNewLexALD) ;
-    bool              buildPrescriptionPatpatho(NSFrameInformation* pFrameInfo, NSPatPathoArray* pPrescriPpt, bool bGereALD, VecteurString* pNewTraitement, VecteurString* pNewLexique, VecteurString* pNewTrtALD, VecteurString* pNewLexALD) ;
-    bool              buildBizonePrescriptionPatpatho(NSFrameInformation* pFrameInfo, NSPatPathoArray* pPrescriPpt, VecteurString* pNewTraitement, VecteurString* pNewLexique, VecteurString* pNewTrtALD, VecteurString* pNewLexALD) ;
-    bool              buildSimplePrescriptionPatpatho(NSFrameInformation* pFrameInfo, NSPatPathoArray* pPrescriPpt, VecteurString* pNewTraitement, VecteurString* pNewLexique) ;
+    bool              buildPrescriptionPatpatho(NSFrameInformation* pFrameInfo, NSPatPathoArray* pPrescriPpt, bool bGereALD, VecteurString* pNewTraitement, VecteurString* pNewLexique, VecteurString* pNewTrtALD, VecteurString* pNewLexALD, bool bDCI, bool bMustSecure) ;
+    bool              buildBizonePrescriptionPatpatho(NSFrameInformation* pFrameInfo, NSPatPathoArray* pPrescriPpt, VecteurString* pNewTraitement, VecteurString* pNewLexique, VecteurString* pNewTrtALD, VecteurString* pNewLexALD, bool bDCI) ;
+    bool              buildSimplePrescriptionPatpatho(NSFrameInformation* pFrameInfo, NSPatPathoArray* pPrescriPpt, VecteurString* pNewTraitement, VecteurString* pNewLexique, bool bDCI) ;
+    void              getDrugsAllergiesPatpatho(NSPatPathoArray* pAllergiesPpt) ;
 
     bool            	addSubElement(string motherNode, NSPatPathoArray *pPPT, bool bSave = true) ;
     bool            	CreeRootDocs(NSPatPathoArray *pPatPathoAdmin) ;
@@ -268,6 +277,8 @@ class NSPatientChoisi : public NSPatInfo
     NSDocumentHisto** trouveIndexSante() ;
     NSDocumentHisto** findRiskIndex() ;
     NSDocumentHisto** findSocialIndex() ;
+
+    NSDrugView*       getDrugView() ;
 
     void              remplaceTagsChemin(string& sHtml, NSPatPathoArray* pPatPathoArray = (NSPatPathoArray*) NULL, map<string, string> *pTagsBuffer = (map<string, string>*) NULL, map<string, bool> *pCondBuffer = (map<string, bool>*) 0, HWND interfaceHandle = (HWND) 0) ;
     void              remplaceTagsIfElse(string& sHtml, NSPatPathoArray* pPatPathoArray = (NSPatPathoArray*) NULL, map<string, bool> *pCondBuffer = (map<string, bool>*) NULL) ;
@@ -513,6 +524,8 @@ class NSUtilisateurChoisi : public NSUtiliInfo
 
     void CreateUserFiles(string sUserID = string("")) ;
     void RenameUserFilesDirectory(string sPreviousID, string sNewID = string("")) ;
+
+    string getVirtualDrug(const string sSpeciality) ;
 
 		void setupToolbar() ;
     int  getIdFromString(string sTextId) ;

@@ -136,22 +136,15 @@ produced by Borland Resource Workshop
 #define IDC_ADMINPAT_CODE   108
 
 // Dialogue MEDICDLG
-#define IDC_PERIODECYCLE	            300
-#define IDC_MMS                       301
-#define IDC_HEURES	                  302
-#define IDC_FOISJOUR                  303
-#define IDC_TEXTLIBRE	                304
-#define IDC_MOMENTS                   310
-#define IDC_REGULIER                  305
-#define IDC_JOURS	                    307
-#define IDC_LIBRE                     306
-
-// Dialogue IDD_RENEW_MEDIC
-#define IDC_EDIT_PDT                    101
-#define IDC_UPDOWN_PDT                  102
-#define IDC_COMBOBOX_PDT                103
-#define IDC_EDIT_RNV                    104
-#define IDC_UPDOWN_RNV                  105
+// #define IDC_PERIODECYCLE	            300
+// #define IDC_MMS                       301
+// #define IDC_HEURES	                  302
+// #define IDC_FOISJOUR                  303
+// #define IDC_TEXTLIBRE	                304
+// #define IDC_MOMENTS                   310
+// #define IDC_REGULIER                  305
+// #define IDC_JOURS	                    307
+// #define IDC_LIBRE                     306
 
 //#define IDC_TEXTLIBRERYTHME             309
 //#define IDC_MOMENTS	                    310

@@ -640,8 +640,9 @@ dtoi(double dNbre)
 int
 donneDigit(char nbre)
 {
-	if (!isdigit(nbre))
+	if (false == isdigit(nbre))
 		return -1 ;
+    
 	return int(nbre) - int('0') ;
 }
 
@@ -1866,11 +1867,53 @@ IsValidDatePattern(const string &sName, const string sLocalDatePattern)
 
   // Digits only - Que des chiffres
   for (size_t i = 0 ; i < strlen(sName.c_str()) ; i++)
-    if (!isdigit(sName[i]) &&
+    if ((false == isdigit(sName[i])) &&
            (('J' == sFormat[i]) ||
             ('M' == sFormat[i]) ||
             ('A' == sFormat[i])))
       return false ;
+
+  return true ;
+}
+
+/**
+ * Check if this code looks like LCCLLCC or a valid subpart
+ */
+bool
+IsValidAtcCode(const string sCode)
+{
+  if (string("") == sCode)
+    return false ;
+
+  size_t iCodeLen = strlen(sCode.c_str()) ;
+  if ((1 != iCodeLen) && (3 != iCodeLen) && (5 != iCodeLen) && (7 != iCodeLen))
+    return false ;
+
+  string sMajCode = pseumaj(sCode) ;
+
+  string sValidFirstCodes = string("ABCDGHJLMNPRSV") ;
+  size_t iPosFirst = sValidFirstCodes.find(sMajCode[0]) ;
+  if (NPOS == iPosFirst)
+    return false ;
+
+  if (1 == iCodeLen)
+    return true ;
+
+  if ((false == isdigit(sMajCode[1])) || (false == isdigit(sMajCode[2])))
+    return false ;
+
+  if (3 == iCodeLen)
+    return true ;
+
+  if ((sMajCode[3] < 'A') || (sMajCode[3] > 'Z') ||
+      (sMajCode[4] < 'A') || (sMajCode[4] > 'Z'))
+    return false ;
+
+  if (5 == iCodeLen)
+    return true ;
+
+  if ((false == isdigit(sMajCode[5])) || (false == isdigit(sMajCode[6])))
+    return false ;
 
   return true ;
 }
@@ -1985,7 +2028,7 @@ donne_mois(string mois, string sLang)
   if (strlen(mois.c_str()) < 2)
   	return string("") ;
 
-  if ((!(isdigit(mois[0]))) || (!(isdigit(mois[1]))))
+  if ((false == isdigit(mois[0])) || (false == isdigit(mois[1])))
   	return string("") ;
 
   int i = 10 * donneDigit(mois[0]) + donneDigit(mois[1]) ;
@@ -2205,6 +2248,135 @@ hex_to_char(char car_hex[], unsigned char *car)
     if ((car_hex[i] >= 'A') && (car_hex[i] <= 'F'))
     	*car += (unsigned long) car_hex[i] - 55 ;
   }
+}
+
+/**
+ * Convert from utf8 to local iso-8859-15 equivalent charset
+ */
+string
+FromUTF8ToISO(const string sUTF8)
+{
+	// Shortcut if empty
+	if (string("") == sUTF8)
+		return string("") ;
+
+  size_t iUTF8Len = strlen(sUTF8.c_str()) ;
+
+  char* pIn  = new char[iUTF8Len + 1] ;
+  strcpy(pIn, sUTF8.c_str()) ;
+
+  char* pOut = new char[iUTF8Len + 1] ;
+
+	const char* p = pIn ;
+	// const char* q = pIn + iUTF8Len ;
+
+	unsigned long charlen = 0 ;
+	wchar_t       wc      = 0 ;
+
+  int iCursor = 0 ;
+	// while (p < q)
+  for (size_t i = 0 ; i < iUTF8Len ; i++)
+	{
+		unsigned char mask = 0x3f;
+
+    // If we are not already processing a multichar UTF8 char
+		if (charlen == 0)
+		{
+			// Determine length of utf8 encoded wchar_t
+			if ((*p & 0xf0 ) == 0xe0)
+			{
+				charlen = 3;
+				mask = 0x0f;
+			}
+			else if ((*p & 0xe0 ) == 0xc0)
+			{
+				charlen = 2;
+				mask = 0x1f;
+			}
+			else
+			{
+				charlen = 1;
+				mask = 0x7f;
+			}
+
+			// Reset char
+			wc = 0;
+		}
+
+		// Convert the byte
+		wc <<= 6;
+		wc |= (*p & mask);
+
+		// Bump ptr
+		p++;
+
+		// Reduce byte remaining count and write it out if done
+		if (0 == --charlen)
+		{
+			// Special for Euro
+			if (wc == 0x20AC)
+				// Use iso-8859-15 code for Euro
+				pOut[iCursor++] = 0xA4 ;
+			else if (wc > 0x00FF)
+				pOut[iCursor++] = '?' ;
+			else
+				pOut[iCursor++] = wc & 0x00FF ;
+		}
+	}
+
+  pOut[iCursor] = '\0' ;
+
+  string sOut = string(pOut) ;
+
+  delete[] pOut ;
+  delete[] pIn ;
+
+  return sOut ;
+}
+
+/**
+ * Convert from local iso-8859-15  to UTF8 equivalent charset
+ */
+string
+FromISOToUTF8(const string sISO)
+{
+  if (string("") == sISO)
+    return string("") ;
+
+  size_t iIsoLen = strlen(sISO.c_str()) ;
+
+  unsigned char* pIn  = new unsigned char[iIsoLen + 1] ;
+  const unsigned char* pIp = pIn ;
+
+  unsigned char* pIt = pIn ;
+  for (size_t i = 0 ; i < iIsoLen ; i++)
+    *pIt++ = sISO[i] ;
+  *pIt = '\0' ;
+
+
+  // For safety, ensure that output buffer is twice as large as input buffer
+  //
+  unsigned char* pOut = new unsigned char[(2 * iIsoLen) + 1] ;
+
+  const unsigned char* p = pOut ;
+
+  while (*pIn)
+  {
+    if (*pIn < 128)
+      *pOut++ = *pIn++ ;
+    else
+      *pOut++ = 0xc2 + (int(*pIn) > 0xbf),
+      *pOut++ = (*pIn++ & 0x3f) + 0x80 ;
+  }
+
+  *pOut = '\0' ;
+
+  string sOut = string((char*) p) ;
+
+  delete[] p ;
+  delete[] pIp ;
+
+  return sOut ;
 }
 
 /*
@@ -2500,8 +2672,44 @@ fileError(string sError)
 double
 StringToDouble(string sValeur, string *psError)
 {
-  // Extraction de la partie entière et de la partie décimale
+  if (string("") == sValeur)
+    return 0 ;
 
+  // First, check if it is a fraction
+  //
+  size_t iPos = sValeur.find("/") ;
+  if (NPOS != iPos)
+  {
+    string sNumerator   = string("0") ;
+    string sDenominator = string("1") ;
+
+    if (0 == iPos) // of the kind "/2" for 1/2
+    {
+      sNumerator   = string("1") ;
+      sDenominator = sValeur ;
+    }
+    else if (strlen(sValeur.c_str()) == iPos + 1) // of the kind "3/" for 3
+    {
+      sNumerator   = sValeur ;
+      sDenominator = string("1") ;
+    }
+    else
+    {
+      sNumerator   = string(sValeur, 0, iPos) ;
+      sDenominator = string(sValeur, iPos + 1, strlen(sValeur.c_str()) - iPos - 1) ;
+    }
+
+    double dNumerator   = StringToDouble(sNumerator) ;
+    double dDenominator = StringToDouble(sDenominator) ;
+
+    if (dDenominator > 0)
+      return dNumerator / dDenominator ;
+
+    return 0 ;
+  }
+
+  // Extraction de la partie entière et de la partie décimale
+  //
   size_t iSepar = sValeur.find(".") ;
   if (string::npos == iSepar)
     iSepar = sValeur.find(",") ;
@@ -2545,7 +2753,7 @@ StringToDouble(string sValeur, string *psError)
 
       return 0 ;
     }
-    
+
     multi = multi * 0.1 ;
     dValeur += double(donneDigit(sDecima[i])) * multi ;
   }
@@ -5367,5 +5575,387 @@ bool IsYes(string sText)
     return true ;
 
   return false ;
+}
+
+/**
+ *
+ */
+string getAllCharsText(const string sTextWithNum, const char cDecimalSeparator, const char cDigitGroupSeparator, size_t iStartFrom)
+{
+  string sResult = sTextWithNum ;
+
+  bool bInsideNum     = false ;
+  bool bSeenDeciSepar = false ;
+
+  size_t iNumStart     = 0 ;
+  size_t iBlockLen     = 0 ;
+  size_t iLastBlankPos = 0 ;
+
+  // Detect the first number block
+  //
+  size_t iTxtLen   = strlen(sResult.c_str()) ;
+
+  bool bProcessBlock = false ;
+
+  for (int i = 0 ; i < iTxtLen ; i++)
+  {
+    char cCurrent = sResult[i] ;
+
+    // Char that cannot be inside a num
+    //
+    if ((false == isdigit(cCurrent)) && (cCurrent != cDecimalSeparator) &&
+                                        (cCurrent != cDigitGroupSeparator))
+    {
+      if (bInsideNum)
+      {
+        if (' ' == sResult[i-1])
+        {
+          iBlockLen = i - iNumStart - 1 ;
+          bProcessBlock = true ;
+        }
+        else if (' ' != sResult[i])
+        {
+          bInsideNum     = false ;
+          bSeenDeciSepar = false ;
+        }
+      }
+    }
+    // Char that is valid inside a num
+    //
+    else
+    {
+      if (false == bInsideNum)
+      {
+        if (isdigit(cCurrent))
+        {
+          bInsideNum = true ;
+          iNumStart  = i ;
+        }
+      }
+      else
+      {
+        if (cCurrent == cDecimalSeparator)
+        {
+          if (false == bSeenDeciSepar)
+            bSeenDeciSepar = true ;
+          else
+          {
+            iBlockLen = i - iNumStart ;
+            bProcessBlock = true ;
+          }
+        }
+
+        // if (cCurrent == cDigitGroupSeparator) TODO check the last one was 3 digits before
+      }
+    }
+
+    if (bProcessBlock)
+    {
+      string sNum = string(sResult, iNumStart, iBlockLen) ;
+      string sNumAsText = getCharText(sNum, cDecimalSeparator, cDigitGroupSeparator) ;
+      if (string("") != sNumAsText)
+      {
+        sResult.replace(iNumStart, iBlockLen, sNumAsText) ;
+        return getAllCharsText(sResult, cDecimalSeparator, cDigitGroupSeparator, iNumStart + strlen(sNumAsText.c_str())) ;
+      }
+      return getAllCharsText(sResult, cDecimalSeparator, cDigitGroupSeparator, iNumStart + strlen(sNum.c_str())) ;
+    }
+  }
+
+  return sResult ;
+}
+
+string getOneDigitCharText(const string sNum)
+{
+  if (strlen(sNum.c_str()) != 1)
+    return string("") ;
+
+  if (string("1") == sNum)
+    return string("un") ;
+  if (string("2") == sNum)
+    return string("deux") ;
+  if (string("3") == sNum)
+    return string("trois") ;
+  if (string("4") == sNum)
+    return string("quatre") ;
+  if (string("5") == sNum)
+    return string("cinq") ;
+  if (string("6") == sNum)
+    return string("six") ;
+  if (string("7") == sNum)
+    return string("sept") ;
+  if (string("8") == sNum)
+    return string("huit") ;
+  if (string("9") == sNum)
+    return string("neuf") ;
+  return string("") ;
+}
+
+string getTwoDigitCharText(const string sNum)
+{
+  if (strlen(sNum.c_str()) != 2)
+    return string("") ;
+
+  // Number as a single word
+  //
+  if (string("10") == sNum)
+    return string("dix") ;
+  if (string("11") == sNum)
+    return string("onze") ;
+  if (string("12") == sNum)
+    return string("douze") ;
+  if (string("13") == sNum)
+    return string("treize") ;
+  if (string("14") == sNum)
+    return string("quatorze") ;
+  if (string("15") == sNum)
+    return string("quinze") ;
+  if (string("16") == sNum)
+    return string("seize") ;
+
+  // Tenth root
+  //
+  char cTenth = sNum[0] ;
+  char cUnit  = sNum[1] ;
+
+  // Prennent un trait d'union tous les nombres composés inférieurs à 100
+  // ne se terminant pas en 1 sauf 81 et 91 :
+  //
+  // dix-sept, quarante-huit...
+  // quatre cent cinquante-trois...
+  //
+  // Pour les nombres se terminant en 1, on ajoute la conjonction et :
+  //
+  // soixante et un
+  // soixante et onze
+  // cinquante et un
+  //
+  // 81 et 91 sont écrits avec un trait d'union:
+  //
+  // quatre-vingt-un
+  // quatre-vingt-onze
+  //
+  // Recommandation orthographique de 1990 :
+  // Tous les adjectifs numéraux composés sont systématiquement unis par un
+  // trait d'union : trois-cent-vingt-quatre
+  //
+  string sReturn = string("") ;
+
+  if      ('1' == cTenth)
+    sReturn = string("dix") ;
+  else if ('2' == cTenth)
+    sReturn = string("vingt") ;
+  else if ('3' == cTenth)
+    sReturn = string("trente") ;
+  else if ('4' == cTenth)
+    sReturn = string("quarante") ;
+  else if ('5' == cTenth)
+    sReturn = string("cinquante") ;
+  else if ('6' == cTenth)
+    sReturn = string("soixante") ;
+  else if ('8' == cTenth)
+    sReturn = string("quatre-vingt") ;
+
+  if (('0' == cUnit) && (string("") != sReturn))
+    return sReturn ;
+
+  // soixante-dix, soixante et onze, soixante-douze, etc
+  //
+  if ('7' == cTenth)
+  {
+    sReturn = string("soixante") ;
+    if ('1' == cUnit)
+      return sReturn + string(" et onze") ;
+  }
+
+  // quatre-vingt-dix, quatre-vingt-onze, quatre-vingt-douze, etc
+  //
+  if ('9' == cTenth)
+    sReturn = string("quatre-vingt") ;
+
+  if (('7' == cTenth) || ('9' == cTenth))
+  {
+    string sComplt = getTwoDigitCharText(string("1") + string(1, cUnit)) ;
+    if (string("") == sComplt)
+      return string("") ;
+    return sReturn + string("-") + sComplt ;
+  }
+
+  string sComplt = getOneDigitCharText(string(1, cUnit)) ;
+  if (string("") != sComplt)
+  {
+    // quatre-vingts
+    if (('8' == cTenth) && ('0' == cUnit))
+      sComplt += string("s") ;
+
+    return sReturn + string("-") + sComplt ;
+  }
+
+  return string("") ;
+}
+
+string getThreeDigitCharText(const string sNum)
+{
+  if (strlen(sNum.c_str()) != 3)
+    return string("") ;
+
+  // Number as a single word
+  //
+  if (string("100") == sNum)
+    return string("cent") ;
+
+  string sRest = string(sNum, 1, 2) ;
+
+  // Should we add a 's' to "cent"?
+  //
+  bool bAddS = false ;
+  if (string("00") == sRest)
+    bAddS = true ;
+
+  // Compose the text
+  //
+  string sReturn = string("") ;
+
+  char cHundredth = sNum[0] ;
+  if ('1' != cHundredth)
+  {
+    string sHundreds = getOneDigitCharText(string(1, cHundredth)) ;
+    if (string("") == sHundreds)
+      return string("") ;
+
+    sReturn = sHundreds + string(" cent") ;
+
+    if (bAddS)
+      return sReturn + string("s") ;
+  }
+  else
+    sReturn = string("cent") ;
+
+  string sTxtRest = getTwoDigitCharText(sRest) ;
+  if (string("") == sTxtRest)
+    return string("") ;
+
+  return sReturn + string(" ") + sTxtRest ;
+}
+
+/**
+ *  The text must have no separator ("1000" Ok, "1 000" not Ok)
+ */
+string getNDigitsCharText(const string sNum)
+{
+  size_t iLen = strlen(sNum.c_str()) ;
+
+  if (1 == iLen)
+    return getOneDigitCharText(sNum) ;
+  if (2 == iLen)
+    return getTwoDigitCharText(sNum) ;
+  if (3 == iLen)
+    return getThreeDigitCharText(sNum) ;
+
+  if (string("1000") == sNum)
+    return string("mille") ;
+
+  // Less than a million: count of thousands
+  //
+  if (iLen < 7)
+  {
+    string sCount = string(sNum, 0, iLen - 3) ;
+    string sRest  = string(sNum, iLen - 3, 3) ;
+
+    string sResult = string("") ;
+
+    string sCountTxt = string("") ;
+    if (string("1") != sCount)
+    {
+      sCountTxt = getNDigitsCharText(sCount) ;
+      if (string("") == sCountTxt)
+        return string("") ;
+
+      sResult = sCountTxt + string("-") ;
+    }
+    sResult += string("mille") ;
+
+    string sRestTxt = getNDigitsCharText(sRest) ;
+
+    if (string("") == sRestTxt)
+      return sResult ;
+
+    return sResult + string("-") + sRestTxt ;
+  }
+
+  // Less than a billion: count of millions
+  //
+  if (iLen < 10)
+  {
+    string sCount = string(sNum, 0, iLen - 6) ;
+    string sRest  = string(sNum, iLen - 6, 6) ;
+
+    string sResult = string("") ;
+
+    string sCountTxt = string("") ;
+    if (string("1") != sCount)
+    {
+      sCountTxt = getNDigitsCharText(sCount) ;
+      if (string("") == sCountTxt)
+        return string("") ;
+
+      sResult = sCountTxt + string("-millions") ;
+    }
+    else
+      sResult += string("un-million") ;
+
+    string sRestTxt = getNDigitsCharText(sRest) ;
+
+    if (string("") == sRestTxt)
+      return sResult ;
+
+    return sResult + string("-") + sRestTxt ;
+  }
+}
+
+string getCharText(const string sNum, const char cDecimalSeparator, const char cDigitGroupSeparator)
+{
+  // Extraction de la partie entière et de la partie décimale
+  //
+  size_t iSepar = sNum.find(cDecimalSeparator) ;
+
+  string sEntier = string("") ;
+  string sDecima = string("") ;
+
+  if ((string::npos == iSepar) || (iSepar > strlen(sNum.c_str())))
+    sEntier = sNum ;
+  else
+  {
+    if (iSepar > 0)
+      sEntier = string(sNum, 0, iSepar) ;
+    sDecima = string(sNum, iSepar + 1, strlen(sNum.c_str()) - iSepar - 1) ;
+  }
+
+  // Remove all digit group separators and blanks
+  //
+  for (int i = 0 ; i < strlen(sEntier.c_str()) ; i++)
+    if ((cDigitGroupSeparator == sEntier[i]) || (' ' == sEntier[i]))
+      sEntier = string(sEntier, 0, i) + string(sEntier, i + 1, strlen(sEntier.c_str()) - i - 1) ;
+
+  for (int i = 0 ; i < strlen(sDecima.c_str()) ; i++)
+    if ((cDigitGroupSeparator == sDecima[i]) || (' ' == sDecima[i]))
+      sDecima = string(sDecima, 0, i) + string(sDecima, i + 1, strlen(sDecima.c_str()) - i - 1) ;
+
+  string sReturn = string("") ;
+
+  if (string("0") == sEntier)
+    sReturn = string("zéro") ;
+  else
+    sReturn = getNDigitsCharText(sEntier) ;
+
+  if (string("") == sDecima)
+    return sReturn ;
+
+  string sDecimaTxt = getNDigitsCharText(sDecima) ;
+
+  if (string("") == sDecimaTxt)
+    return string("") ;
+
+  return sReturn + string(" virgule ") + sDecimaTxt ;
 }
 

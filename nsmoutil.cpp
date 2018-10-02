@@ -1,13 +1,10 @@
 //nsoutil.cpp : DLL de migration de Nautilus V2 à Nautilus V3
 //////////////////////////////////////////////////////////////
 
-#include <vcl.h>
-#pragma hdrstop
-
-#include <shellapi.h>
-#include <owl\applicat.h>
-#include <owl\window.h>
-#include <owl\owlpch.h>
+// #include <shellapi.h>
+// #include <owl\applicat.h>
+// #include <owl\window.h>
+// #include <owl\owlpch.h>
 
 #define _MAIN
 #define __MAIN
@@ -34,11 +31,19 @@ USEUNIT("nsoutil\NspathorBdm.cpp");
 USEUNIT("nsoutil\nsBdmDrugInfoDlg.cpp");
 USEUNIT("nsoutil\nsBdmInfoDlg.cpp");
 USEUNIT("nsoutil\NsBdmListsDlg.cpp");
+USEUNIT("nsoutil\bdm_bases.cpp");
+USEUNIT("nsoutil\interfaceBdm.cpp");
+USEUNIT("nsoutil\nsBdmDlg.cpp");
+USEUNIT("nsoutil\nsAlertSvceTools.cpp");
+USEUNIT("nsoutil\nsvisualView.cpp");
+USEUNIT("nsoutil\nssavary.cpp");
 USERC("Nsoutil\nsoutil.rc");
 USERC("Nsoutil\nsEpiOut.rc");
 USERC("Nsoutil\nsimport.rc");
 USERC("partage\nsmatfic.rc");
 USERC("nsoutil\ns_arche.rc");
+USERC("nsoutil\nsBdmDlg.rc");
+USERC("nsoutil\NsAlertBox.rc");
 USELIB("nsmutil.lib");
 USELIB("nsm_sgbd.lib");
 USELIB("nsmsavoir.lib");
@@ -46,6 +51,8 @@ USELIB("nsmbb.lib");
 USELIB("nsmdecode.lib");
 USELIB("nsmepisod.lib");
 USELIB("nsmdn.lib");
+USELIB("nsmldv.lib");
+USELIB("nsm_ob1.lib");
 USELIB("wkhtmltox.lib");
 USELIB("libcurl-4.lib");
 USELIB("memmgr.lib");
@@ -53,48 +60,67 @@ USELIB("cp32mti.lib");
 USELIB("bidsvi.lib");
 USELIB("owlwvi.lib");
 USERES("nsmoutil.res");
-USEUNIT("nsoutil\bdm_bases.cpp");
-USEUNIT("nsoutil\interfaceBdm.cpp");
-USEUNIT("nsoutil\nsBdmDlg.cpp");
-USERC("nsoutil\nsBdmDlg.rc");
+
+// Forms::TApplication* DllApp = (Forms::TApplication*) 0 ;
 
 //---------------------------------------------------------------------------
 int WINAPI DllEntryPoint(HINSTANCE hinstDll, unsigned long fdwReason, void*)
 {
-   switch (fdwReason)
-   {
-   	  case DLL_THREAD_ATTACH :
-      case DLL_THREAD_DETACH :
-      	// cas des threads : on ne fait rien
-      	break;
+  switch (fdwReason)
+  {
+    case DLL_THREAD_ATTACH :
+    case DLL_THREAD_DETACH :
+      // cas des threads : on ne fait rien
+      break ;
 
-      case DLL_PROCESS_ATTACH :
-      	// 1er appel : on instancie pResMod
-      	if (!pResMod)
-   			pResMod = new TModule(0, hinstDll);
+    case DLL_PROCESS_ATTACH :
+      // 1er appel : on instancie pResMod
+      if ((TModule*) NULL == pResMod)
+        pResMod = new TModule(0, hinstDll) ;
 
-         // si le new echoue : on renvoie false
-      	if (!pResMod)
-      		return 0;
+      // si le new echoue : on renvoie false
+      if ((TModule*) NULL == pResMod)
+        return 0 ;
 
-         pNSResModule = pResMod;
-         break;
+      pNSResModule = pResMod ;
+      break ;
 
-      case DLL_PROCESS_DETACH :
-      	// dernier appel : on libere pResMod
-       	if (pResMod)
-      	{
-      		delete pResMod;
-         	pResMod = 0;
-      	}
-         break;
+    case DLL_PROCESS_DETACH :
+      // dernier appel : on libere pResMod
+      if (pResMod)
+      {
+        delete pResMod ;
+        pResMod = (TModule*) 0 ;
+      }
 
-      default :
-      	return 0;
-   }
+      break ;
 
-	return 1;
+    default :
+      return 0 ;
+  }
+
+	return 1 ;
 }
+
+/*
+TWebProxy* ShowActiveXForm(Forms::TApplication* pMainApp, HWND Parent)
+{
+  // If the Application object for the DLL has not yet been saved then
+  // save it now and assign the Application object for the calling application
+  // to the DLL's Application object.
+  //
+  if ((Forms::TApplication*) NULL == DllApp)
+  {
+    DllApp      = Application ;
+    Application = pMainApp ;
+  }
+
+  // Create and show the MDI child form.
+  TWebProxy* child = new TWebProxy(Application->MainForm) ;
+
+  return child ;
+}
+*/
 
 /*
 void

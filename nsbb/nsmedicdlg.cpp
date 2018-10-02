@@ -10,14 +10,19 @@
 // -----------------------------------------------------------------------------
 
 #include <owl\window.h>
+
+#include "nssavoir/nsBdmDriver.h"
+#include "nsbb/nsednum.h"
+#include "nsbb/nscomboutil.h"
 #include "nsbb\nsmedicdlg.h"
 #include "nsbb\nsbb.h"
-#include "nsbb\nsbb.rh"
 #include "partage\nsdivfct.h"
-#include "medicament.rh"
 #include "nautilus\nssuper.h"
-#include "nsepisod\nsldvuti.h"
+#include "nsldv\nsldvuti.h"
 #include "nsbb\nsbbtran.h"
+
+// #include "nsbb\nsbb.rh"
+#include "medicament.rh"
 
 const std::string SECONDE 				= "2SEC01";        // code lexique pour l'unité de temps seconde
 const std::string FOIS 						= "2FOIS1";        // code lexique pour le terme fois : ex 3 fois pendant 2 jours
@@ -3154,6 +3159,7 @@ bool TestIfPathoOkForDialog(std::string& temp)
         || (std::string("KEVEI") == temp )    // en cas d'urgence
         || (std::string("KFERM") == temp )    // date de fermeture
         || (std::string("0MEDF") == temp )    //  mode d'emploie
+        || (std::string("0VADM") == temp )    // Route
         || (std::string("LSUBS") == temp )    // Non substituable
         || (std::string("LREMB") == temp )    // Nom remboursable
         || (std::string("LADMI") == temp )
@@ -3162,6 +3168,7 @@ bool TestIfPathoOkForDialog(std::string& temp)
         || (std::string("6CIP0") == temp )
         || (std::string("6CIP7") == temp )
         || (std::string("6CIPT") == temp )
+        || (std::string("0MOTF") == temp )
         || (std::string("£RE")   == temp )
         || (std::string("£C;")   == temp )
         || (std::string("£CX")   == temp )) ;
@@ -3876,87 +3883,85 @@ NSComplexMedicamentDlg::enableControl(int RessourceId, bool visible)
 // -----------------------------------------------------------------------------
 
 //Tableau de reponse des tab control
-int periodeTab[]   = {IDC_GROUPMATIN, IDC_GROUPMIDI , IDC_GROUPSOIR, IDC_MATED ,  IDC_UPDOWN3 ,
-                      IDC_MIDED,      IDC_UPDOWN2,    IDC_SOIRED,    IDC_UPDOWN1, IDC_UPDOWN4,
-                      IDC_EDSOIR,     IDC_GROUPCOUCHER};
+int periodeTab[]   = {IDC_GROUPMATIN,   IDC_MATED,     IDC_UPDOWN_MATIN,
+                      IDC_GROUPMIDI,    IDC_MIDED,     IDC_UPDOWN_MIDI,
+                      IDC_GROUPSOIR,    IDC_SOIRED,    IDC_UPDOWN_SOIR,
+                      IDC_GROUPCOUCHER, IDC_COUCHERED, IDC_UPDOWN_COUCHER} ;
 
-int CycleJour[]    = {IDC_LUNDI,      IDC_MARDI,      IDC_MERCREDI,  IDC_JEUDI,   IDC_VENDREDI,
-                      IDC_SAMEDI,     IDC_DIMANCHE};
+int CycleJour[]    = {IDC_LUNDI,     IDC_MARDI,  IDC_MERCREDI,  IDC_JEUDI,
+                      IDC_VENDREDI,  IDC_SAMEDI, IDC_DIMANCHE} ;
 
 int CycleJourAlt[] = {IDC_J1, IDC_J2, IDC_J3, IDC_J4, IDC_J5 };
 
-int regularDay[]   = {IDC_CMPSUNREGU, IDC_EDREGPOS,   IDC_UPDOWN12,  IDC_STATICTEXT4,
-                      IDC_FREQPOSREG, IDC_EDIT9,      IDC_UPDOWN14,  IDC_COMBREG2POS};
+int regularDay[]   = {IDC_CMPSUNREGU, IDC_EDREGPOS,  IDC_UPDOWN_REGPOS,  IDC_TXT_EVERY,
+                      IDC_FREQPOSREG, IDC_EDREGFREQ, IDC_UPDOWN_REGFREG, IDC_COMBREG2POS} ;
 
-int periodeCycle[] = {IDC_GROUPBOX4,  IDC_GROUPBOX7,  IDC_GROUPBOX10, IDC_GROUPBOX11,
-                      IDC_GROUPBOX12, IDC_EDREVEIL,   IDC_UPDOWN13,   IDC_EDMATIN2,
-                      IDC_UPDOWN15,   IDC_GROUPBOX13, IDC_EDMIDI2,    IDC_UPDOWN16,
-                      IDC_EDGOUTER2,  IDC_UPDOWN17,   IDC_EDSOIR2,    IDC_UPDOWN18,
-                      IDC_EDCOUCHER2, IDC_UPDOWN19,   IDC_GROUPBOX14, IDC_EDNUIT,
-                      IDC_UPDOWN20};
+int periodeCycle[] = {IDC_GROUPREVEIL,   IDC_EDREVEIL,   IDC_UPDOWN_REVEIL,
+                      IDC_GROUPMATIN2,   IDC_EDMATIN2,   IDC_UPDOWN_MATIN2,
+                      IDC_GROUPMIDI2,    IDC_EDMIDI2,    IDC_UPDOWN_MIDI2,
+                      IDC_GROUPGOUTER,   IDC_EDGOUTER2,  IDC_UPDOWN_GOUTER,
+                      IDC_GROUPSOIR2,    IDC_EDSOIR2,    IDC_UPDOWN_SOIR2,
+                      IDC_GROUPCOUCHER2, IDC_EDCOUCHER2, IDC_UPDOWN_COUCHER2,
+                      IDC_GROUPNUIT,     IDC_EDNUIT,     IDC_UPDOWN_NUIT} ;
 
-int hourCycle[]    = {IDC_GROUPBOX15, IDC_EDHOURTAKE, IDC_UPDOWN21,   IDC_GROUPBOX16,
-                      IDC_NUMHOURED,  IDC_UPDOWN22,   IDC_BUTTON3,    IDC_LISTVIEW3};
+int hourCycle[]    = {IDC_GROUPHOUR,     IDC_NUMHOURED,  IDC_UPDOWN_HOURQTE,
+                      IDC_GROUPHOURTAKE, IDC_EDHOURTAKE, IDC_UPDOWN_HOURTAKE,
+                      IDC_HOUR_ADD,      IDC_LIST_HOURS} ;
 
-int idcPosoLibre[] = {IDC_GROUPBOX17, IDC_GROUPBOX18, IDC_STATICTEXT5, IDC_UNITEDFOIS, IDC_PSOEDFOIS, IDC_UPDOWN23,
-                      IDC_UPDOWN24,   IDC_GROUPBOX19, IDC_EDFREQ3,     IDC_UPDOWN25,   IDC_COMBOFREQ3};
+int idcPosoLibre[] = {IDC_GROUPUNITFOIS, IDC_GROUPUNITCOUNT, IDC_STATICTEXT5, IDC_UNITEDFOIS, IDC_PSOEDFOIS, IDC_UPDOWN_UNITFOIS,
+                      IDC_UPDOWN_PSCOUNT,   IDC_GROUPBOX19, IDC_EDFREQ3,     IDC_UPDOWN_FREQ3,   IDC_COMBOFREQ3} ;
 
-int PosoUnique[]   = {IDC_GRUNIQUE,IDC_UPUNIQUE, IDC_EDUNIQUE };
+int PosoUnique[]   = {IDC_GRUNIQUE, IDC_UPUNIQUE, IDC_EDUNIQUE} ;
 
-int TxtLibre[]     = {IDC_TEXTLIBRE};
+int TxtLibre[]     = {IDC_FREETXT_CYCLE} ;
 
-int ExtendPhases[] = {IDC_LISTPHASE, IDC_ADDPHASE};
+int ExtendPhases[] = {IDC_LISTPHASE, IDC_ADDPHASE} ;
 
 int RegularCycle[] = {IDC_CUREED,     IDC_UPDOWN5,  IDC_COMCURE,  IDC_EDCURCYC,   IDC_UPDOWN6,
-                      IDC_DURCYCBOX,  IDC_DURCUR,   IDC_TOUTELES, IDC_COMBOBOX2};
+                      IDC_DURCYCBOX,  IDC_DURCUR,   IDC_TOUTELES, IDC_COMBOBOX2} ;
 
 int FreeCycle[]    = {IDC_NBCURELIBRE,   IDC_CUREEDLI,  IDC_UPDOWN9,  IDC_STATICECLI, IDC_EDLIBRE2,
                       IDC_UPDOWN10,      IDC_DURCUR2,   IDC_UPDOWN11, IDC_COMCUR2,    IDC_EDITCUR2,
-                      IDC_COMIREGCY2};
+                      IDC_COMIREGCY2} ;
 
-DEFINE_RESPONSE_TABLE1(NSPosoIncludeDlg, NSUtilDialog)
+DEFINE_RESPONSE_TABLE1(NSPosoIncludeDlg, NSPrescriptionBaseDlg)
 	EV_TCN_KEYDOWN(IDC_TABPSOLO,           KeyForCircadien),
 	EV_TCN_KEYDOWN(IDC_TABCYCLE,           KeyForRythme),
 	EV_TCN_SELCHANGE(IDC_TABPSOLO,         TabSelChangePso), // Changement de table de la posologie
 	EV_TCN_SELCHANGE(IDC_TABCYCLE,         TabSelChangeCyc), // Changement de table des cycles
 	EV_BN_CLICKED(IDC_CHANGECYCLE,         DrawCycleMode),
-	EV_BN_CLICKED(IDC_BUTTON3,             AddHour),       // Ajoute une heure de prise de médicament
+	EV_BN_CLICKED(IDC_HOUR_ADD,            AddHour),       // Ajoute une heure de prise de médicament
 	EV_BN_CLICKED(IDC_ADDRYTHM,            AddCRythm),    // Ajoute un rythme
-	EV_LBN_SELCHANGE(IDC_LISTVIEW3,        EvListBoxSelChange),   // Change heure
+	EV_LBN_SELCHANGE(IDC_LIST_HOURS,       EvListBoxSelChange),   // Change heure
 	EV_LBN_SELCHANGE(IDC_LISTVIEWFORCYCLE, EvListBoxSelCycle),
 END_RESPONSE_TABLE ;
 
 NSPosoIncludeDlg::NSPosoIncludeDlg(TWindow* parent, NSContexte *pCtx, NSPatPathoArray *pPPToInit, TResId resID, TModule* module)
-                 :NSUtilDialog(parent, pCtx, resID, module)
+                 :NSPrescriptionBaseDlg(parent, pCtx, resID, module)
 {
-	sLexiqCode     = string("") ;
-	sPriseUnit     = string("") ;
-	sDateOuverture = string("") ;
-	sDateFermeture = string("") ;
-
 	_pPPT       = pPPToInit ;
-  _pPosoBlock = 0 ;
+  _pPosoBlock = (NSPosologieBlock*) 0 ;
 }
 
 NSPosoIncludeDlg::~NSPosoIncludeDlg()
 {
-	if (NULL != _pPosoBlock)
+	if (_pPosoBlock)
 		delete _pPosoBlock ;
 }
 
 void
 NSPosoIncludeDlg::SetupWindow()
 {
-  NSUtilDialog::SetupWindow() ;
+  NSPrescriptionBaseDlg::SetupWindow() ;
 
-  if (NULL != _pPosoBlock)
+  if (_pPosoBlock)
 		_pPosoBlock->SetupWindow() ;
 }
 
 void
 NSPosoIncludeDlg::InitPosoControlsForPhase(NSphaseMedic* pPhase)
 {
-	if (NULL == pPhase)
+	if ((NSphaseMedic*) NULL == pPhase)
 		return ;
 
 	_pPosoBlock->getViewCycle()->Clear() ;
@@ -3964,7 +3969,7 @@ NSPosoIncludeDlg::InitPosoControlsForPhase(NSphaseMedic* pPhase)
   std::vector<NSMedicCycleGlobal*> *pCycles = pPhase->getCycles() ;
 
   _pPosoBlock->getViewCycle()->SetAssociatedData(pCycles, false) ;
-  if ((NULL == pCycles) || (true == pCycles->empty()))
+  if (((std::vector<NSMedicCycleGlobal*> *) NULL == pCycles) || (true == pCycles->empty()))
 		return ;
 
 /*
@@ -4012,19 +4017,19 @@ NSPosoIncludeDlg::loadDateOuverture(PatPathoIter& pptIter, PatPathoIter& pptEnd)
 	Avance(pptIter, pptEnd);
 
 	if (((*pptIter)->getColonne() > iColBaseOuverture)  &&
-      (((*pptIter)->getUnitSens() == "2DA02") ||
-                     ((*pptIter)->getUnitSens() == "2DA01")) &&
-       ((*pptIter)->getLexiqueSens() == "£D0"))
-		sDateOuverture = (*pptIter)->getComplement() ;
+      (((*pptIter)->getUnitSens() == string("2DA02")) ||
+                     ((*pptIter)->getUnitSens() == string("2DA01"))) &&
+       ((*pptIter)->getLexiqueSens() == string("£D0")))
+		_sDateOuverture = (*pptIter)->getComplement() ;
 
-  if (string("") == sDateOuverture)
+  if (string("") == _sDateOuverture)
   {
     NVLdVTemps tpsNow ;
   	tpsNow.takeTime() ;
-		sDateOuverture = tpsNow.donneDateHeure() ;
+		_sDateOuverture = tpsNow.donneDateHeure() ;
   }
   Avance(pptIter, pptEnd) ;
-  
+
   return true ;
 }
 
@@ -4035,20 +4040,20 @@ NSPosoIncludeDlg::loadDateFermeture(PatPathoIter& pptIter, PatPathoIter& pptEnd)
 
 	Avance(pptIter, pptEnd) ;
   if (((*pptIter)->getColonne() > iColBaseOuverture)  &&
-      (((*pptIter)->getUnitSens() == "2DA02") ||
-                    ((*pptIter)->getUnitSens() == "2DA01")) &&
-          ((*pptIter)->getLexiqueSens() == "£D0"))
-		sDateFermeture = (*pptIter)->getComplement() ;
+      (((*pptIter)->getUnitSens() == string("2DA02")) ||
+                    ((*pptIter)->getUnitSens() == string("2DA01"))) &&
+          ((*pptIter)->getLexiqueSens() == string("£D0")))
+		_sDateFermeture = (*pptIter)->getComplement() ;
 
-  if (string("") == sDateFermeture)
+  if (string("") == _sDateFermeture)
   {
     NVLdVTemps tpsNow ;
   	tpsNow.takeTime() ;
-		sDateFermeture = tpsNow.donneDateHeure() ;
+		_sDateFermeture = tpsNow.donneDateHeure() ;
   }
   Avance(pptIter, pptEnd) ;
 
-  return true;
+  return true ;
 }
 
 void
@@ -4069,7 +4074,7 @@ NSPosoIncludeDlg::EnableControl(int RessourceId, bool visible)
 void
 NSPosoIncludeDlg::TabSelChangePso(TNotify far& /* nm */)
 {
-	if (NULL == _pPosoBlock)
+	if ((NSPosologieBlock*) NULL == _pPosoBlock)
 		return ;
 
 	_pPosoBlock->TabSelChangePso() ;
@@ -4078,7 +4083,7 @@ NSPosoIncludeDlg::TabSelChangePso(TNotify far& /* nm */)
 void
 NSPosoIncludeDlg::TabSelChangeCyc(TNotify far& /* nm */)
 {
-	if (NULL == _pPosoBlock)
+	if ((NSPosologieBlock*) NULL == _pPosoBlock)
 		return ;
 
 	_pPosoBlock->TabSelChangeCyc() ;
@@ -4087,7 +4092,7 @@ NSPosoIncludeDlg::TabSelChangeCyc(TNotify far& /* nm */)
 void
 NSPosoIncludeDlg::MoveControl(TControl* cont, int left, int top, int h , int w)
 {
-	if (NULL == cont)
+	if ((TControl*) NULL == cont)
 		return ;
 
   NS_CLASSLIB::TRect recGen(left, top, h, w) ;
@@ -4098,7 +4103,7 @@ NSPosoIncludeDlg::MoveControl(TControl* cont, int left, int top, int h , int w)
 void
 NSPosoIncludeDlg::saveChangeHour()
 {
-	if (NULL == _pPosoBlock)
+	if ((NSPosologieBlock*) NULL == _pPosoBlock)
 		return ;
 
 	_pPosoBlock->saveChangeHour() ;
@@ -4107,7 +4112,7 @@ NSPosoIncludeDlg::saveChangeHour()
 void
 NSPosoIncludeDlg::FuncMoveForHour()
 {
-	if (NULL == _pPosoBlock)
+	if ((NSPosologieBlock*) NULL == _pPosoBlock)
 		return ;
 
 	_pPosoBlock->FuncMoveForHour() ;
@@ -4116,7 +4121,7 @@ NSPosoIncludeDlg::FuncMoveForHour()
 void
 NSPosoIncludeDlg::updateCyclePreview()
 {
-	if (NULL == _pPosoBlock)
+	if ((NSPosologieBlock*) NULL == _pPosoBlock)
 		return ;
 
 	_pPosoBlock->updateCyclePreview() ;
@@ -4125,7 +4130,7 @@ NSPosoIncludeDlg::updateCyclePreview()
 void
 NSPosoIncludeDlg::EvCycleKey()
 {
-	if (NULL == _pPosoBlock)
+	if ((NSPosologieBlock*) NULL == _pPosoBlock)
 		return ;
 
 	_pPosoBlock->EvCycleKey() ;
@@ -4134,7 +4139,7 @@ NSPosoIncludeDlg::EvCycleKey()
 void
 NSPosoIncludeDlg::EvListBoxSelChange()
 {
-	if (NULL == _pPosoBlock)
+	if ((NSPosologieBlock*) NULL == _pPosoBlock)
 		return ;
 
 	_pPosoBlock->EvListBoxSelChange() ;
@@ -4143,7 +4148,7 @@ NSPosoIncludeDlg::EvListBoxSelChange()
 void
 NSPosoIncludeDlg::EvListBoxSelCycle()
 {
-	if (NULL == _pPosoBlock)
+	if ((NSPosologieBlock*) NULL == _pPosoBlock)
 		return ;
 
 	_pPosoBlock->EvListBoxSelCycle() ;
@@ -4152,7 +4157,7 @@ NSPosoIncludeDlg::EvListBoxSelCycle()
 void
 NSPosoIncludeDlg::KeyForCircadien(TTabKeyDown& nmHdr)
 {
-	if (NULL == _pPosoBlock)
+	if ((NSPosologieBlock*) NULL == _pPosoBlock)
 		return ;
 
 	int temp = nmHdr.flags ;
@@ -4163,7 +4168,7 @@ NSPosoIncludeDlg::KeyForCircadien(TTabKeyDown& nmHdr)
 void
 NSPosoIncludeDlg::KeyForRythme(TTabKeyDown& nmHdr)
 {
-	if (NULL == _pPosoBlock)
+	if ((NSPosologieBlock*) NULL == _pPosoBlock)
 		return ;
 
 	int temp = nmHdr.flags ;
@@ -4174,7 +4179,7 @@ NSPosoIncludeDlg::KeyForRythme(TTabKeyDown& nmHdr)
 void
 NSPosoIncludeDlg::DrawCycleMode()
 {
-	if (NULL == _pPosoBlock)
+	if ((NSPosologieBlock*) NULL == _pPosoBlock)
 		return ;
 
   _pPosoBlock->DrawCycleMode() ;
@@ -4183,7 +4188,7 @@ NSPosoIncludeDlg::DrawCycleMode()
 void
 NSPosoIncludeDlg::AddHour()
 {
-	if (NULL == _pPosoBlock)
+	if ((NSPosologieBlock*) NULL == _pPosoBlock)
 		return ;
 
   _pPosoBlock->AddHour() ;
@@ -4192,7 +4197,7 @@ NSPosoIncludeDlg::AddHour()
 void
 NSPosoIncludeDlg::AddCRythm()
 {
-	if (NULL == _pPosoBlock)
+	if ((NSPosologieBlock*) NULL == _pPosoBlock)
 		return ;
 
   _pPosoBlock->AddCRythm() ;
@@ -4201,7 +4206,7 @@ NSPosoIncludeDlg::AddCRythm()
 void
 NSPosoIncludeDlg::SaveSimpleRythme()
 {
-	if (NULL == _pPosoBlock)
+	if ((NSPosologieBlock*) NULL == _pPosoBlock)
 		return ;
 
   _pPosoBlock->SaveSimpleRythme() ;
@@ -4210,6 +4215,9 @@ NSPosoIncludeDlg::SaveSimpleRythme()
 void
 NSPosoIncludeDlg::setMultiCycleMode(bool bNewMode)
 {
+  if ((NSPosologieBlock*) NULL == _pPosoBlock)
+		return ;
+
 	_pPosoBlock->setExtendedCycleMode(bNewMode) ;
 }
 
@@ -4238,136 +4246,136 @@ CompareMedicament(std::string* un, std::string* deu)
 NSPosologieBlock::NSPosologieBlock(NSContexte *pCtx, std::vector<NSMedicCycleGlobal*> *pCycles)
                  :NSRoot(pCtx)
 {
-	_pDialog         = 0 ;
+	_pDialog         = (NSPosoIncludeDlg*) 0 ;
 	_Cycles          = pCycles ;
   _currentCycle    = 0 ;
 
-	_LoadForChange   = false ;       // Indique si la pat patho a ete charge
-	_ChangeCyle      = 0 ;          // Boutton permettant le changment de mode
+	_LoadForChange   = false ;        // Indique si la patpatho a ete charge
+	_ChangeCyle      = (TButton*) 0 ; // Boutton permettant le changment de mode
 
-	CycleSimple      = 0 ;
+	_CycleSimple     = (NTComboBox<NSPatPathoArray>*) 0 ;
 
 	// ------------ Poso ---------------
 
-	_PosoGroup       = 0 ;
-	tabPoso          = 0 ;
+	_PosoGroup       = (TGroupBox*) 0 ;
+	_tabPoso         = (TTabControl*) 0 ;
 
-	pPriseMatin      = 0 ;
-  pPriseMidi       = 0 ;
-  pPriseSoir       = 0 ;
-  pPriseCoucher    = 0 ;
-	pPriseReveil     = 0 ;
-  pPriseMatin2     = 0 ;
-  pPriseMidi2      = 0 ;
-  pPriseGouter     = 0 ;
-  pPriseCoucher2   = 0 ;
-  pPriseSoir2      = 0 ;
-  pPriseNuit       = 0 ;
+	_pPriseMatin     = (NSUpDownEdit*) 0 ;
+  _pPriseMidi      = (NSUpDownEdit*) 0 ;
+  _pPriseSoir      = (NSUpDownEdit*) 0 ;
+  _pPriseCoucher   = (NSUpDownEdit*) 0 ;
+	_pPriseReveil    = (NSUpDownEdit*) 0 ;
+  _pPriseMatin2    = (NSUpDownEdit*) 0 ;
+  _pPriseMidi2     = (NSUpDownEdit*) 0 ;
+  _pPriseGouter    = (NSUpDownEdit*) 0 ;
+  _pPriseCoucher2  = (NSUpDownEdit*) 0 ;
+  _pPriseSoir2     = (NSUpDownEdit*) 0 ;
+  _pPriseNuit      = (NSUpDownEdit*) 0 ;
 
-	pPriseHeure      = 0 ;
-	ViewPriseHeure   = 0 ;
+	_pPriseHeure     = (NSUpDownEditHeureControle*) 0 ;
+	_ViewPriseHeure  = (NTTList<PriseHeure, NSPosoIncludeDlg>*) 0 ;
 
-	_quantRCycle     = 0 ;
-	_freqRCycle      = 0 ;
-	_RCycleComboF    = 0 ;
+	_quantRCycle     = (NSUpDownEdit*) 0 ;
+	_freqRCycle      = (NSUpDownEdit*) 0 ;
+	_RCycleComboF    = (NSComboBox*) 0 ;
 
-	_quantFCycle     = 0 ;
-	_quantFoisCycle  = 0 ;
-	_quantFreqFCycle = 0 ;
-	_FCycleComboF    = 0 ;
+	_quantFCycle     = (NSUpDownEdit*) 0 ;
+	_quantFoisCycle  = (NSUpDownEdit*) 0 ;
+	_quantFreqFCycle = (NSUpDownEdit*) 0 ;
+	_FCycleComboF    = (NSComboBox*) 0 ;
 
-	priseUnique      = 0 ;
+	_priseUnique     = (NSUpDownEdit*) 0 ;
 
-	pEditTextLibre   = 0 ;
+	_pEditTextLibre  = (NSTexteLibre*) 0 ;
 
 	// ------------ Cycle ---------------
 
-	_CycleGroup      = 0 ;
-	tabCycle         = 0 ;
+	_CycleGroup      = (TGroupBox*) 0 ;
+	_tabCycle        = (TTabControl*) 0 ;
 	_extendtedCycle  = false ;
 	_Cycle           = false ;
 
-	pLundi           = 0 ;
-  pMardi           = 0 ;
-  pMercredi        = 0 ;
-  pJeudi           = 0 ;
-  pVendredi        = 0 ;
-  pSamedi          = 0 ;
-  pDimanche        = 0 ;
+	_pLundi          = (NSCheckBoxControle*) 0 ;
+  _pMardi          = (NSCheckBoxControle*) 0 ;
+  _pMercredi       = (NSCheckBoxControle*) 0 ;
+  _pJeudi          = (NSCheckBoxControle*) 0 ;
+  _pVendredi       = (NSCheckBoxControle*) 0 ;
+  _pSamedi         = (NSCheckBoxControle*) 0 ;
+  _pDimanche       = (NSCheckBoxControle*) 0 ;
 
-	pJour1           = 0 ;
-  pJour2           = 0 ;
-	_numJour         = 0 ;
-	_numJourLabel    = 0 ;
+	_pJour1          = (NSRadioButtonControle*) 0 ;
+  _pJour2          = (NSRadioButtonControle*) 0 ;
+	_numJour         = (NSUpDownEdit*) 0 ;
+	_numJourLabel    = (TStatic*) 0 ;
 
-	pDureeCure       = 0 ;
-	psymDureeCure    = 0 ;
-	pDureeCycleR     = 0 ;
-	psymDureeCycleR  = 0 ;
+	_pDureeCure      = (NSUpDownEdit*) 0 ;
+	_psymDureeCure   = (NSComboBox*) 0 ;
+	_pDureeCycleR    = (NSUpDownEdit*) 0 ;
+	_psymDureeCycleR = (NSComboBox*) 0 ;
 
-	pDureeCureF      = 0 ;
-	psymDureeCureF   = 0 ;
-	pDureeCureFTime  = 0 ;
-	pDureeCycleFreqF = 0 ;
-	psymDureeCycleFreqF = 0 ;
+	_pDureeCureF      = (NSUpDownEdit*) 0 ;
+	_psymDureeCureF   = (NSComboBox*) 0 ;
+	_pDureeCureFTime  = (NSUpDownEdit*) 0 ;
+	_pDureeCycleFreqF = (NSUpDownEdit*) 0 ;
+	_psymDureeCycleFreqF = (NSComboBox*) 0 ;
 
-	viewCycle        = 0 ;
+	_viewCycle        = (NTTList<NSMedicCycleGlobal, NSPosoIncludeDlg>*) 0 ;
 
-	pPhasePPT        = 0 ;
+	_pPhasePPT        = (NSPatPathoArray*) 0 ;
 
-	prise_hours      = 0 ;
-	rythmIndex       = '\0' ;     // ind
+	_prise_hours      = (NSVectPatPathoArray*) 0 ;
+	_rythmIndex       = '\0' ;     // ind
 }
 
 NSPosologieBlock::~NSPosologieBlock()
 {
-  delete tabPoso ;
+  delete _tabPoso ;
   delete _freqRCycle ;
   delete _CycleGroup ;
   delete _RCycleComboF ;
-  delete pPriseMatin ;
-  delete pPriseMidi ;
-  delete pPriseSoir ;
-  delete pPriseCoucher ;
-  delete pPriseReveil ;
+  delete _pPriseMatin ;
+  delete _pPriseMidi ;
+  delete _pPriseSoir ;
+  delete _pPriseCoucher ;
+  delete _pPriseReveil ;
   delete _quantRCycle ;
-  delete pPriseMatin2 ;
-  delete pPriseMidi2 ;
-  delete pPriseGouter ;
-  delete CycleSimple ;
-  delete pPriseSoir2 ;
-  delete pPriseCoucher2 ;
-  delete pPriseNuit ;
-  delete pDureeCycleR ;
-  delete psymDureeCycleR ;
-  delete psymDureeCureF ;
+  delete _pPriseMatin2 ;
+  delete _pPriseMidi2 ;
+  delete _pPriseGouter ;
+  delete _CycleSimple ;
+  delete _pPriseSoir2 ;
+  delete _pPriseCoucher2 ;
+  delete _pPriseNuit ;
+  delete _pDureeCycleR ;
+  delete _psymDureeCycleR ;
+  delete _psymDureeCureF ;
   delete _quantFCycle ;
   delete _ChangeCyle ;
-  delete pLundi ;
-  delete pMardi ;
-  delete pMercredi ;
-  delete pJeudi ;
-  delete pVendredi ;
-  delete pSamedi ;
-  delete pDimanche ;
-  delete psymDureeCycleFreqF ;
-  delete pDureeCycleFreqF ;
-  delete pDureeCureFTime ;
-  delete priseUnique ;
-  delete pEditTextLibre ;
-  delete ViewPriseHeure ;
-  delete viewCycle ;
-  delete pDureeCureF ;
-  delete psymDureeCure ;
-  delete pDureeCure ;
+  delete _pLundi ;
+  delete _pMardi ;
+  delete _pMercredi ;
+  delete _pJeudi ;
+  delete _pVendredi ;
+  delete _pSamedi ;
+  delete _pDimanche ;
+  delete _psymDureeCycleFreqF ;
+  delete _pDureeCycleFreqF ;
+  delete _pDureeCureFTime ;
+  delete _priseUnique ;
+  delete _pEditTextLibre ;
+  delete _ViewPriseHeure ;
+  delete _viewCycle ;
+  delete _pDureeCureF ;
+  delete _psymDureeCure ;
+  delete _pDureeCure ;
   delete _FCycleComboF ;
   delete _quantFoisCycle ;
   delete _quantFreqFCycle ;
-  delete pPriseHeure ;
+  delete _pPriseHeure ;
   delete _numJourLabel ;
   delete _numJour ;
-  delete pJour1 ;
-  delete pJour2 ;
+  delete _pJour1 ;
+  delete _pJour2 ;
 }
 
 void
@@ -4380,13 +4388,13 @@ NSPosologieBlock::SetupWindow()
 void
 NSPosologieBlock::createControls()
 {
-	if (NULL == _pDialog)
+	if ((NSPosoIncludeDlg*) NULL == _pDialog)
 		return ;
 
 	NSUtilDialog* pUtilDlg = (NSUtilDialog*) _pDialog ;
 
 	_PosoGroup  = new TGroupBox(pUtilDlg, IDC_BUTPOSO) ;
-	tabPoso     = new TTabControl(pUtilDlg, IDC_TABPSOLO) ;     // Control des cycles circadiens
+	_tabPoso    = new TTabControl(pUtilDlg, IDC_TABPSOLO) ;     // Control des cycles circadiens
 
 	const char *champpLexiqCodesCB[] = { "2HEUR1", "2DAT01", "2DAT11", "2DAT21" } ;  // heure  jour semaine  mois
   VecteurString *pLexiqCodesCB = new VecteurString(champpLexiqCodesCB) ;
@@ -4396,109 +4404,109 @@ NSPosologieBlock::createControls()
   VecteurString *pLexiqJour = new VecteurString(champpLexiqJour) ;
   delete[] (champpLexiqJour) ;
 
-	pEditTextLibre  = new NSTexteLibre(pUtilDlg, pContexte, "£C;020", IDC_TEXTLIBRE) ;
+	_pEditTextLibre  = new NSTexteLibre(pUtilDlg, pContexte, "£C;020", IDC_FREETXT_CYCLE) ;
 
-	pPriseMatin     = new NSUpDownEdit(pUtilDlg, pContexte, "KMATI1", IDC_MATED,      IDC_UPDOWN3) ;
-	pPriseMidi      = new NSUpDownEdit(pUtilDlg, pContexte, "KMIDI1", IDC_MIDED,      IDC_UPDOWN2) ;
-	pPriseSoir      = new NSUpDownEdit(pUtilDlg, pContexte, "KSOIR1", IDC_SOIRED,     IDC_UPDOWN1) ;
-	pPriseCoucher   = new NSUpDownEdit(pUtilDlg, pContexte, "KCOUC1", IDC_EDSOIR,     IDC_UPDOWN4) ;
+	_pPriseMatin     = new NSUpDownEdit(pUtilDlg, pContexte, string("KMATI1"), IDC_MATED,      IDC_UPDOWN_MATIN) ;
+	_pPriseMidi      = new NSUpDownEdit(pUtilDlg, pContexte, string("KMIDI1"), IDC_MIDED,      IDC_UPDOWN_MIDI) ;
+	_pPriseSoir      = new NSUpDownEdit(pUtilDlg, pContexte, string("KSOIR1"), IDC_SOIRED,     IDC_UPDOWN_SOIR) ;
+	_pPriseCoucher   = new NSUpDownEdit(pUtilDlg, pContexte, string("KCOUC1"), IDC_COUCHERED,  IDC_UPDOWN_COUCHER) ;
 
-	pPriseReveil    = new NSUpDownEdit(pUtilDlg, pContexte, "KREVE1", IDC_EDREVEIL,   IDC_UPDOWN13) ;
-	pPriseMatin2    = new NSUpDownEdit(pUtilDlg, pContexte, "KMATI1", IDC_EDMATIN2,   IDC_UPDOWN15) ;
-	pPriseMidi2     = new NSUpDownEdit(pUtilDlg, pContexte, "KMIDI1", IDC_EDMIDI2,    IDC_UPDOWN16) ;
-	pPriseGouter    = new NSUpDownEdit(pUtilDlg, pContexte, "KGOUT1", IDC_EDGOUTER2,  IDC_UPDOWN17) ;
-	pPriseSoir2     = new NSUpDownEdit(pUtilDlg, pContexte, "KSOIR1", IDC_EDSOIR2,    IDC_UPDOWN18) ;
-	pPriseCoucher2  = new NSUpDownEdit(pUtilDlg, pContexte, "KCOUC1", IDC_EDCOUCHER2, IDC_UPDOWN19) ;
-	pPriseNuit      = new NSUpDownEdit(pUtilDlg, pContexte, "KNOCT3", IDC_EDNUIT,     IDC_UPDOWN20) ;
+	_pPriseReveil    = new NSUpDownEdit(pUtilDlg, pContexte, string("KREVE1"), IDC_EDREVEIL,   IDC_UPDOWN_REVEIL) ;
+	_pPriseMatin2    = new NSUpDownEdit(pUtilDlg, pContexte, string("KMATI1"), IDC_EDMATIN2,   IDC_UPDOWN_MATIN2) ;
+	_pPriseMidi2     = new NSUpDownEdit(pUtilDlg, pContexte, string("KMIDI1"), IDC_EDMIDI2,    IDC_UPDOWN_MIDI2) ;
+	_pPriseGouter    = new NSUpDownEdit(pUtilDlg, pContexte, string("KGOUT1"), IDC_EDGOUTER2,  IDC_UPDOWN_GOUTER) ;
+	_pPriseSoir2     = new NSUpDownEdit(pUtilDlg, pContexte, string("KSOIR1"), IDC_EDSOIR2,    IDC_UPDOWN_SOIR2) ;
+	_pPriseCoucher2  = new NSUpDownEdit(pUtilDlg, pContexte, string("KCOUC1"), IDC_EDCOUCHER2, IDC_UPDOWN_COUCHER2) ;
+	_pPriseNuit      = new NSUpDownEdit(pUtilDlg, pContexte, string("KNOCT3"), IDC_EDNUIT,     IDC_UPDOWN_NUIT) ;
 
   // Cycle horaire
-	pPriseHeure     = new NSUpDownEditHeureControle(pUtilDlg, pContexte, "KHHMM1", IDC_NUMHOURED, IDC_UPDOWN22, IDC_EDHOURTAKE, IDC_UPDOWN21) ;
-	pPriseHeure->getEditNum()->getEditNum()->SetLostFocusResponse(new MemFunctor<NSPosoIncludeDlg>( (NSPosoIncludeDlg*)_pDialog, &NSPosoIncludeDlg::saveChangeHour));
-	pPriseHeure->getEditNum()->getUpDown()->SetLostFocusResponse(new MemFunctor<NSPosoIncludeDlg>( (NSPosoIncludeDlg*)_pDialog, &NSPosoIncludeDlg::saveChangeHour));
+	_pPriseHeure     = new NSUpDownEditHeureControle(pUtilDlg, pContexte, string("KHHMM1"), IDC_NUMHOURED, IDC_UPDOWN_HOURQTE, IDC_EDHOURTAKE, IDC_UPDOWN_HOURTAKE) ;
+	_pPriseHeure->getEditNum()->getEditNum()->SetLostFocusResponse(new MemFunctor<NSPosoIncludeDlg>( (NSPosoIncludeDlg*)_pDialog, &NSPosoIncludeDlg::saveChangeHour));
+	_pPriseHeure->getEditNum()->getUpDown()->SetLostFocusResponse(new MemFunctor<NSPosoIncludeDlg>( (NSPosoIncludeDlg*)_pDialog, &NSPosoIncludeDlg::saveChangeHour));
   //prise_hours = new NSVectPatPathoArray();
-	ViewPriseHeure = new NTTList<PriseHeure, NSPosoIncludeDlg>(pUtilDlg, IDC_LISTVIEW3/*,prise_hours*/) ;
-	ViewPriseHeure->setKeyUpResponse(new MemFunctor<NSPosoIncludeDlg>( (NSPosoIncludeDlg*)_pDialog, &NSPosoIncludeDlg::FuncMoveForHour ) ) ;
-	ViewPriseHeure->setKeyDownResponse(new MemFunctor<NSPosoIncludeDlg>( (NSPosoIncludeDlg*)_pDialog, &NSPosoIncludeDlg::FuncMoveForHour ) ) ;
+	_ViewPriseHeure = new NTTList<PriseHeure, NSPosoIncludeDlg>(pUtilDlg, IDC_LIST_HOURS/*,prise_hours*/) ;
+	_ViewPriseHeure->setKeyUpResponse(new MemFunctor<NSPosoIncludeDlg>( (NSPosoIncludeDlg*)_pDialog, &NSPosoIncludeDlg::FuncMoveForHour ) ) ;
+	_ViewPriseHeure->setKeyDownResponse(new MemFunctor<NSPosoIncludeDlg>( (NSPosoIncludeDlg*)_pDialog, &NSPosoIncludeDlg::FuncMoveForHour ) ) ;
 
-  priseUnique = new  NSUpDownEdit(pUtilDlg, pContexte,"", IDC_EDUNIQUE, IDC_UPUNIQUE) ;  // rythme libre
+  _priseUnique = new  NSUpDownEdit(pUtilDlg, pContexte, string(""), IDC_EDUNIQUE, IDC_UPUNIQUE) ;  // Number of takes during the day with no timing specfied
 
-	_quantRCycle    = new NSUpDownEdit(pUtilDlg, pContexte, "", IDC_EDREGPOS, IDC_UPDOWN12) ;  // Cycle regulier
-	_freqRCycle     = new NSUpDownEdit(pUtilDlg, pContexte, "", IDC_EDIT9, IDC_UPDOWN14) ;     // Cycle Rythme regulier
+	_quantRCycle    = new NSUpDownEdit(pUtilDlg, pContexte, string(""), IDC_EDREGPOS,  IDC_UPDOWN_REGPOS) ;  // Cycle regulier
+	_freqRCycle     = new NSUpDownEdit(pUtilDlg, pContexte, string(""), IDC_EDREGFREQ, IDC_UPDOWN_REGFREG) ;     // Cycle Rythme regulier
 	const char *tempre[] = { "2SEC01", "2MINU1", "2HEUR1" } ;
 	VecteurString   *pLexiqJours = new VecteurString(tempre) ;
 	delete[] (tempre) ;
 	_RCycleComboF    = new NSComboBox(pUtilDlg, IDC_COMBREG2POS, pContexte, pLexiqJours) ;     // Cycle Rythme regulier
 
-	_quantFCycle     = new NSUpDownEdit(pUtilDlg, pContexte, "", IDC_EDFREQ3, IDC_UPDOWN25) ;        // Cycle irregulier
-	_quantFreqFCycle = new NSUpDownEdit(pUtilDlg, pContexte, "", IDC_UNITEDFOIS, IDC_UPDOWN23) ;     // Cycle irregulier
-	_quantFoisCycle  = new NSUpDownEdit(pUtilDlg, pContexte, "", IDC_PSOEDFOIS, IDC_UPDOWN24) ;      // Cycle irregulier
-	_FCycleComboF    = new NSComboBox(pUtilDlg, IDC_COMBOFREQ3, pContexte, pLexiqJour) ;           // Cycle irregulier
+	_quantFCycle     = new NSUpDownEdit(pUtilDlg, pContexte, string(""), IDC_EDFREQ3,    IDC_UPDOWN_FREQ3) ;    // Cycle irregulier
+	_quantFreqFCycle = new NSUpDownEdit(pUtilDlg, pContexte, string(""), IDC_UNITEDFOIS, IDC_UPDOWN_UNITFOIS) ; // Cycle irregulier
+	_quantFoisCycle  = new NSUpDownEdit(pUtilDlg, pContexte, string(""), IDC_PSOEDFOIS,  IDC_UPDOWN_PSCOUNT) ;  // Cycle irregulier
+	_FCycleComboF    = new NSComboBox(pUtilDlg, IDC_COMBOFREQ3, pContexte, pLexiqJour) ;                // Cycle irregulier
 
   // *********************** Cycle
   //
-	tabCycle    = new TTabControl(pUtilDlg, IDC_TABCYCLE) ;    // Control des cycles des rythmes
-	_CycleGroup = new TGroupBox(pUtilDlg, IDC_GROUPCYCLE) ;
-	_ChangeCyle = new TButton(pUtilDlg, IDC_CHANGECYCLE) ;
+	_tabCycle    = new TTabControl(pUtilDlg, IDC_TABCYCLE) ;    // Control des cycles des rythmes
+	_CycleGroup  = new TGroupBox(pUtilDlg, IDC_GROUPCYCLE) ;
+	_ChangeCyle  = new TButton(pUtilDlg, IDC_CHANGECYCLE) ;
 
-	CycleSimple = new NTComboBox<NSPatPathoArray>(pUtilDlg, IDC_SIMPLECYCLE) ;
+	_CycleSimple = new NTComboBox<NSPatPathoArray>(pUtilDlg, IDC_SIMPLECYCLE) ;
 
-	pLundi      = new NSCheckBoxControle(pUtilDlg, pContexte, "KJLUN1", IDC_LUNDI) ;
-	pLundi->setChangeResponse(new MemFunctor<NSPosoIncludeDlg>((NSPosoIncludeDlg*)_pDialog,    &NSPosoIncludeDlg::updateCyclePreview)) ;
-	pMardi      = new NSCheckBoxControle(pUtilDlg, pContexte, "KJMAR1", IDC_MARDI) ;
-	pMardi->setChangeResponse(new MemFunctor<NSPosoIncludeDlg>((NSPosoIncludeDlg*)_pDialog,    &NSPosoIncludeDlg::updateCyclePreview)) ;
-	pMercredi   = new NSCheckBoxControle(pUtilDlg, pContexte, "KJMER1", IDC_MERCREDI) ;
-	pMercredi->setChangeResponse(new MemFunctor<NSPosoIncludeDlg>((NSPosoIncludeDlg*)_pDialog, &NSPosoIncludeDlg::updateCyclePreview)) ;
-	pJeudi      = new NSCheckBoxControle(pUtilDlg, pContexte, "KJLEU1", IDC_JEUDI) ;
-	pJeudi->setChangeResponse(new MemFunctor<NSPosoIncludeDlg>((NSPosoIncludeDlg*)_pDialog,    &NSPosoIncludeDlg::updateCyclePreview)) ;
-	pVendredi   = new NSCheckBoxControle(pUtilDlg, pContexte, "KJVEN1", IDC_VENDREDI) ;
-	pVendredi->setChangeResponse(new MemFunctor<NSPosoIncludeDlg>((NSPosoIncludeDlg*)_pDialog, &NSPosoIncludeDlg::updateCyclePreview)) ;
-	pSamedi     = new NSCheckBoxControle(pUtilDlg, pContexte, "KJSAM1", IDC_SAMEDI) ;
-	pSamedi->setChangeResponse(new MemFunctor<NSPosoIncludeDlg>((NSPosoIncludeDlg*)_pDialog,   &NSPosoIncludeDlg::updateCyclePreview)) ;
-	pDimanche   = new NSCheckBoxControle(pUtilDlg, pContexte, "KJDIM1", IDC_DIMANCHE) ;
-	pDimanche->setChangeResponse(new MemFunctor<NSPosoIncludeDlg>((NSPosoIncludeDlg*)_pDialog, &NSPosoIncludeDlg::updateCyclePreview)) ;
+	_pLundi      = new NSCheckBoxControle(pUtilDlg, pContexte, "KJLUN1", IDC_LUNDI) ;
+	_pLundi->setChangeResponse(new MemFunctor<NSPosoIncludeDlg>((NSPosoIncludeDlg*)_pDialog,    &NSPosoIncludeDlg::updateCyclePreview)) ;
+	_pMardi      = new NSCheckBoxControle(pUtilDlg, pContexte, "KJMAR1", IDC_MARDI) ;
+	_pMardi->setChangeResponse(new MemFunctor<NSPosoIncludeDlg>((NSPosoIncludeDlg*)_pDialog,    &NSPosoIncludeDlg::updateCyclePreview)) ;
+	_pMercredi   = new NSCheckBoxControle(pUtilDlg, pContexte, "KJMER1", IDC_MERCREDI) ;
+	_pMercredi->setChangeResponse(new MemFunctor<NSPosoIncludeDlg>((NSPosoIncludeDlg*)_pDialog, &NSPosoIncludeDlg::updateCyclePreview)) ;
+	_pJeudi      = new NSCheckBoxControle(pUtilDlg, pContexte, "KJLEU1", IDC_JEUDI) ;
+	_pJeudi->setChangeResponse(new MemFunctor<NSPosoIncludeDlg>((NSPosoIncludeDlg*)_pDialog,    &NSPosoIncludeDlg::updateCyclePreview)) ;
+	_pVendredi   = new NSCheckBoxControle(pUtilDlg, pContexte, "KJVEN1", IDC_VENDREDI) ;
+	_pVendredi->setChangeResponse(new MemFunctor<NSPosoIncludeDlg>((NSPosoIncludeDlg*)_pDialog, &NSPosoIncludeDlg::updateCyclePreview)) ;
+	_pSamedi     = new NSCheckBoxControle(pUtilDlg, pContexte, "KJSAM1", IDC_SAMEDI) ;
+	_pSamedi->setChangeResponse(new MemFunctor<NSPosoIncludeDlg>((NSPosoIncludeDlg*)_pDialog,   &NSPosoIncludeDlg::updateCyclePreview)) ;
+	_pDimanche   = new NSCheckBoxControle(pUtilDlg, pContexte, "KJDIM1", IDC_DIMANCHE) ;
+	_pDimanche->setChangeResponse(new MemFunctor<NSPosoIncludeDlg>((NSPosoIncludeDlg*)_pDialog, &NSPosoIncludeDlg::updateCyclePreview)) ;
 
 	_numJourLabel   = new TStatic(pUtilDlg, IDC_J3) ;
 	_numJour        = new NSUpDownEdit(pUtilDlg, pContexte, "", IDC_J4, IDC_J5) ;  // Cycle regulier
-	pJour1          = new NSRadioButtonControle(pUtilDlg, pContexte, "2DAT01", IDC_J1) ;
-	pJour1->setChangeResponse(new MemFunctor<NSPosoIncludeDlg>( (NSPosoIncludeDlg*)_pDialog, &NSPosoIncludeDlg::updateCyclePreview )) ;
-	pJour2          = new NSRadioButtonControle(pUtilDlg, pContexte, "2DAT01", IDC_J2) ;
-	pJour2->setChangeResponse(new MemFunctor<NSPosoIncludeDlg>( (NSPosoIncludeDlg*)_pDialog, &NSPosoIncludeDlg::updateCyclePreview )) ;
+	_pJour1          = new NSRadioButtonControle(pUtilDlg, pContexte, "2DAT01", IDC_J1) ;
+	_pJour1->setChangeResponse(new MemFunctor<NSPosoIncludeDlg>( (NSPosoIncludeDlg*)_pDialog, &NSPosoIncludeDlg::updateCyclePreview )) ;
+	_pJour2          = new NSRadioButtonControle(pUtilDlg, pContexte, "2DAT01", IDC_J2) ;
+	_pJour2->setChangeResponse(new MemFunctor<NSPosoIncludeDlg>( (NSPosoIncludeDlg*)_pDialog, &NSPosoIncludeDlg::updateCyclePreview )) ;
 
-	pDureeCure       = new NSUpDownEdit(pUtilDlg, pContexte, "", IDC_CUREED, IDC_UPDOWN5) ;        // rythme régulier
-	pDureeCure->getEditNum()->SetLostFocusResponse(new MemFunctor<NSPosoIncludeDlg>( (NSPosoIncludeDlg*)_pDialog, &NSPosoIncludeDlg::updateCyclePreview )) ;
-	pDureeCure->getUpDown()->SetLostFocusResponse(new MemFunctor<NSPosoIncludeDlg>( (NSPosoIncludeDlg*)_pDialog, &NSPosoIncludeDlg::updateCyclePreview )) ;
+	_pDureeCure       = new NSUpDownEdit(pUtilDlg, pContexte, "", IDC_CUREED, IDC_UPDOWN5) ;        // rythme régulier
+	_pDureeCure->getEditNum()->SetLostFocusResponse(new MemFunctor<NSPosoIncludeDlg>( (NSPosoIncludeDlg*)_pDialog, &NSPosoIncludeDlg::updateCyclePreview )) ;
+	_pDureeCure->getUpDown()->SetLostFocusResponse(new MemFunctor<NSPosoIncludeDlg>( (NSPosoIncludeDlg*)_pDialog, &NSPosoIncludeDlg::updateCyclePreview )) ;
 
-	psymDureeCure    = new NSComboBox(pUtilDlg, IDC_COMCURE, pContexte, pLexiqCodesCB);    // rythme régulier
-	psymDureeCure->SetLostFocusResponse(new MemFunctor<NSPosoIncludeDlg>( (NSPosoIncludeDlg*)_pDialog, &NSPosoIncludeDlg::updateCyclePreview ));
+	_psymDureeCure    = new NSComboBox(pUtilDlg, IDC_COMCURE, pContexte, pLexiqCodesCB);    // rythme régulier
+	_psymDureeCure->SetLostFocusResponse(new MemFunctor<NSPosoIncludeDlg>( (NSPosoIncludeDlg*)_pDialog, &NSPosoIncludeDlg::updateCyclePreview ));
 
-	pDureeCycleR     = new NSUpDownEdit(pUtilDlg, pContexte,"",IDC_EDCURCYC  ,IDC_UPDOWN6);        // rythme régulier
-	pDureeCycleR->getEditNum()->SetLostFocusResponse(new MemFunctor<NSPosoIncludeDlg>( (NSPosoIncludeDlg*)_pDialog, &NSPosoIncludeDlg::updateCyclePreview ));
-	pDureeCycleR->getUpDown()->SetLostFocusResponse(new MemFunctor<NSPosoIncludeDlg>( (NSPosoIncludeDlg*)_pDialog, &NSPosoIncludeDlg::updateCyclePreview ));
+	_pDureeCycleR     = new NSUpDownEdit(pUtilDlg, pContexte,"",IDC_EDCURCYC  ,IDC_UPDOWN6);        // rythme régulier
+	_pDureeCycleR->getEditNum()->SetLostFocusResponse(new MemFunctor<NSPosoIncludeDlg>( (NSPosoIncludeDlg*)_pDialog, &NSPosoIncludeDlg::updateCyclePreview ));
+	_pDureeCycleR->getUpDown()->SetLostFocusResponse(new MemFunctor<NSPosoIncludeDlg>( (NSPosoIncludeDlg*)_pDialog, &NSPosoIncludeDlg::updateCyclePreview ));
 
-	psymDureeCycleR  = new NSComboBox(pUtilDlg, IDC_COMBOBOX2, pContexte, pLexiqCodesCB);    // rythme régulie
-	psymDureeCycleR->SetLostFocusResponse(new MemFunctor<NSPosoIncludeDlg>( (NSPosoIncludeDlg*)_pDialog, &NSPosoIncludeDlg::updateCyclePreview ));
+	_psymDureeCycleR  = new NSComboBox(pUtilDlg, IDC_COMBOBOX2, pContexte, pLexiqCodesCB);    // rythme régulie
+	_psymDureeCycleR->SetLostFocusResponse(new MemFunctor<NSPosoIncludeDlg>( (NSPosoIncludeDlg*)_pDialog, &NSPosoIncludeDlg::updateCyclePreview ));
 
-	pDureeCureF      = new NSUpDownEdit(pUtilDlg, pContexte,"", IDC_EDITCUR2, IDC_UPDOWN11) ;  // rythme libre
-	pDureeCureF->getEditNum()->SetLostFocusResponse(new MemFunctor<NSPosoIncludeDlg>( (NSPosoIncludeDlg*)_pDialog, &NSPosoIncludeDlg::updateCyclePreview ));
-	pDureeCureF->getUpDown()->SetLostFocusResponse(new MemFunctor<NSPosoIncludeDlg>( (NSPosoIncludeDlg*)_pDialog, &NSPosoIncludeDlg::updateCyclePreview ));
+	_pDureeCureF      = new NSUpDownEdit(pUtilDlg, pContexte,"", IDC_EDITCUR2, IDC_UPDOWN11) ;  // rythme libre
+	_pDureeCureF->getEditNum()->SetLostFocusResponse(new MemFunctor<NSPosoIncludeDlg>( (NSPosoIncludeDlg*)_pDialog, &NSPosoIncludeDlg::updateCyclePreview ));
+	_pDureeCureF->getUpDown()->SetLostFocusResponse(new MemFunctor<NSPosoIncludeDlg>( (NSPosoIncludeDlg*)_pDialog, &NSPosoIncludeDlg::updateCyclePreview ));
 
-	psymDureeCureF   = new NSComboBox(pUtilDlg, IDC_COMCUR2, pContexte, pLexiqCodesCB);        // rythme libre
-	psymDureeCureF->SetLostFocusResponse(new MemFunctor<NSPosoIncludeDlg>( (NSPosoIncludeDlg*)_pDialog, &NSPosoIncludeDlg::updateCyclePreview ));
+	_psymDureeCureF   = new NSComboBox(pUtilDlg, IDC_COMCUR2, pContexte, pLexiqCodesCB);        // rythme libre
+	_psymDureeCureF->SetLostFocusResponse(new MemFunctor<NSPosoIncludeDlg>( (NSPosoIncludeDlg*)_pDialog, &NSPosoIncludeDlg::updateCyclePreview ));
 
-	pDureeCureFTime  = new NSUpDownEdit(pUtilDlg, pContexte,"", IDC_CUREEDLI, IDC_UPDOWN9) ;    // rythme libre
-	pDureeCureFTime->getEditNum()->SetLostFocusResponse(new MemFunctor<NSPosoIncludeDlg>( (NSPosoIncludeDlg*)_pDialog, &NSPosoIncludeDlg::updateCyclePreview ));
-	pDureeCureFTime->getUpDown()->SetLostFocusResponse(new MemFunctor<NSPosoIncludeDlg>( (NSPosoIncludeDlg*)_pDialog, &NSPosoIncludeDlg::updateCyclePreview ));
+	_pDureeCureFTime  = new NSUpDownEdit(pUtilDlg, pContexte,"", IDC_CUREEDLI, IDC_UPDOWN9) ;    // rythme libre
+	_pDureeCureFTime->getEditNum()->SetLostFocusResponse(new MemFunctor<NSPosoIncludeDlg>( (NSPosoIncludeDlg*)_pDialog, &NSPosoIncludeDlg::updateCyclePreview ));
+	_pDureeCureFTime->getUpDown()->SetLostFocusResponse(new MemFunctor<NSPosoIncludeDlg>( (NSPosoIncludeDlg*)_pDialog, &NSPosoIncludeDlg::updateCyclePreview ));
 
-	pDureeCycleFreqF = new NSUpDownEdit(pUtilDlg, pContexte,"", IDC_EDLIBRE2, IDC_UPDOWN10) ;  // rythme libre
-	pDureeCycleFreqF->getEditNum()->SetLostFocusResponse(new MemFunctor<NSPosoIncludeDlg>( (NSPosoIncludeDlg*)_pDialog, &NSPosoIncludeDlg::updateCyclePreview ));
-	pDureeCycleFreqF->getUpDown()->SetLostFocusResponse(new MemFunctor<NSPosoIncludeDlg>( (NSPosoIncludeDlg*)_pDialog, &NSPosoIncludeDlg::updateCyclePreview ));
+	_pDureeCycleFreqF = new NSUpDownEdit(pUtilDlg, pContexte,"", IDC_EDLIBRE2, IDC_UPDOWN10) ;  // rythme libre
+	_pDureeCycleFreqF->getEditNum()->SetLostFocusResponse(new MemFunctor<NSPosoIncludeDlg>( (NSPosoIncludeDlg*)_pDialog, &NSPosoIncludeDlg::updateCyclePreview ));
+	_pDureeCycleFreqF->getUpDown()->SetLostFocusResponse(new MemFunctor<NSPosoIncludeDlg>( (NSPosoIncludeDlg*)_pDialog, &NSPosoIncludeDlg::updateCyclePreview ));
 
-	psymDureeCycleFreqF = new NSComboBox(pUtilDlg, IDC_COMIREGCY2, pContexte, pLexiqCodesCB) ;    // rythme libre
-	psymDureeCycleFreqF->SetLostFocusResponse(new MemFunctor<NSPosoIncludeDlg>( (NSPosoIncludeDlg*)_pDialog, &NSPosoIncludeDlg::updateCyclePreview )) ;
+	_psymDureeCycleFreqF = new NSComboBox(pUtilDlg, IDC_COMIREGCY2, pContexte, pLexiqCodesCB) ;    // rythme libre
+	_psymDureeCycleFreqF->SetLostFocusResponse(new MemFunctor<NSPosoIncludeDlg>( (NSPosoIncludeDlg*)_pDialog, &NSPosoIncludeDlg::updateCyclePreview )) ;
 
-	viewCycle        = new NTTList<NSMedicCycleGlobal, NSPosoIncludeDlg> (pUtilDlg, IDC_LISTVIEWFORCYCLE) ;
-	viewCycle->setKeyUpResponse(new MemFunctor<NSPosoIncludeDlg>( (NSPosoIncludeDlg*)_pDialog, &NSPosoIncludeDlg::EvCycleKey ) ) ;
-	viewCycle->setKeyDownResponse(new MemFunctor<NSPosoIncludeDlg>( (NSPosoIncludeDlg*)_pDialog, &NSPosoIncludeDlg::EvCycleKey ) ) ;
+	_viewCycle        = new NTTList<NSMedicCycleGlobal, NSPosoIncludeDlg> (pUtilDlg, IDC_LISTVIEWFORCYCLE) ;
+	_viewCycle->setKeyUpResponse(new MemFunctor<NSPosoIncludeDlg>( (NSPosoIncludeDlg*)_pDialog, &NSPosoIncludeDlg::EvCycleKey ) ) ;
+	_viewCycle->setKeyDownResponse(new MemFunctor<NSPosoIncludeDlg>( (NSPosoIncludeDlg*)_pDialog, &NSPosoIncludeDlg::EvCycleKey ) ) ;
 }
 
 void
@@ -4517,8 +4525,8 @@ NSPosologieBlock::addCycle()
 	char re = char('a') + char(val) ;
 	std::string CycleName2 = std::string("Cycle ") + string(1, re) ;
 
-	viewCycle->addItem(CycleName2.c_str(), new NSMedicCycleGlobal(pContexte, this)) ;
-	viewCycle->SetSelIndex(_Cycles->size()-1) ;
+	_viewCycle->addItem(CycleName2.c_str(), new NSMedicCycleGlobal(pContexte, this)) ;
+	_viewCycle->SetSelIndex(_Cycles->size()-1) ;
 	_currentCycle = _Cycles->size()-1 ;
 	_Monocycle = false ;
 }
@@ -4531,7 +4539,7 @@ NSPosologieBlock::buildPatPatho()
 void
 NSPosologieBlock::KeyForCircadien(int temp)
 {
-	int index = tabPoso->GetSel() ;
+	int index = _tabPoso->GetSel() ;
 
 	if ((temp == 333) && (index < 6))
 		index++ ;
@@ -4544,7 +4552,7 @@ NSPosologieBlock::KeyForCircadien(int temp)
 void
 NSPosologieBlock::KeyForRythme(int temp)
 {
-	int index = tabCycle->GetSel() ;
+	int index = _tabCycle->GetSel() ;
 
 	if ((temp == 333) && (index < 2))
   	index++ ;
@@ -4557,24 +4565,24 @@ NSPosologieBlock::KeyForRythme(int temp)
 void
 NSPosologieBlock::saveChangeHour()
 {
-  int selectIndex = ViewPriseHeure->GetSelIndex() ;
+  int selectIndex = _ViewPriseHeure->GetSelIndex() ;
   if (selectIndex < 0)
 		return ;
 
-	std::string heure = pPriseHeure->getHeure() ;
-	std::string quant = pPriseHeure->getValue() ;
-	PriseHeure* temp  = ViewPriseHeure->getDataAt(selectIndex) ;
+	std::string heure = _pPriseHeure->getHeure() ;
+	std::string quant = _pPriseHeure->getValue() ;
+	PriseHeure* temp  = _ViewPriseHeure->getDataAt(selectIndex) ;
 	temp->setHeure(heure) ;
 	temp->setQuantity(quant) ;
 	std::string toAff = CreateLabelForHour(quant,heure ) ;
-	ViewPriseHeure->ChangeLabel(toAff, selectIndex) ;
-	ViewPriseHeure->sortLabel(CompareMedicament) ;
+	_ViewPriseHeure->ChangeLabel(toAff, selectIndex) ;
+	_ViewPriseHeure->sortLabel(CompareMedicament) ;
 }
 
 void
 NSPosologieBlock::FuncMoveForHour()
 {
-  int index = ViewPriseHeure->GetSelIndex();
+  int index = _ViewPriseHeure->GetSelIndex();
   if (index >= 0)
   {
   }
@@ -4583,7 +4591,7 @@ NSPosologieBlock::FuncMoveForHour()
 void
 NSPosologieBlock::EvCycleKey()
 {
-	int index = viewCycle->GetSelIndex() ;
+	int index = _viewCycle->GetSelIndex() ;
   if (index < 0)
 		return ;
 
@@ -4603,21 +4611,21 @@ NSPosologieBlock::EvCycleKey()
 void
 NSPosologieBlock::updateCyclePreview()
 {
-	int index = viewCycle->GetSelIndex() ;
+	int index = _viewCycle->GetSelIndex() ;
   if ((index == -1) || (index >= (int)_Cycles->size()))
   	return ;
 
 	NSMedicCycleGlobal *pMedicCycle = (*_Cycles)[index] ;
-  if (NULL == pMedicCycle)
+  if ((NSMedicCycleGlobal*) NULL == pMedicCycle)
 		return ;
 
   pMedicCycle->save() ;
   std::string actua = pMedicCycle->GetRythme()->Decode() ;
-  viewCycle->ChangeLabel(actua, index) ;
+  _viewCycle->ChangeLabel(actua, index) ;
 
-  viewCycle->PrintListAsNow() ;
+  _viewCycle->PrintListAsNow() ;
 
-	viewCycle->SetSelIndex(index) ;
+	_viewCycle->SetSelIndex(index) ;
 }
 
 void
@@ -4630,18 +4638,19 @@ NSPosologieBlock::InitModeSimple()
   std::string temp5 = pContexte->getSuperviseur()->getText("drugDialog", "4DaysOutOf7") ;
   std::string temp6 = pContexte->getSuperviseur()->getText("drugDialog", "5DaysOutOf7") ;
   std::string temp7 = pContexte->getSuperviseur()->getText("drugDialog", "6DaysOutOf7") ;
-  CycleSimple->AddElement(temp1, NULL) ; // tous les jours
-  CycleSimple->AddElement(temp2, CreateRegularRythme("1", "2DAT01", "2", "2DAT01", pContexte)) ; // 1/2
-  CycleSimple->AddElement(temp3, CreateRegularRythme("1", "2DAT01", "3", "2DAT01", pContexte)) ; // 1/3
-  CycleSimple->AddElement(temp4, CreateRegularRythme("1", "2DAT01", "4", "2DAT01", pContexte)) ; // 1/4
-  CycleSimple->AddElement(temp5, CreateRegularRythme("4", "2DAT01", "7", "2DAT01", pContexte)) ; // 4/7
-  CycleSimple->AddElement(temp6, CreateRegularRythme("5", "2DAT01", "7", "2DAT01", pContexte)) ; // 5/7
-  CycleSimple->AddElement(temp7, CreateRegularRythme("6", "2DAT01", "7", "2DAT01", pContexte)) ; // 5/7
-  CycleSimple->SetLostFocus(new MemFunctor<NSPosoIncludeDlg>(_pDialog, &NSPosoIncludeDlg::SaveSimpleRythme)) ;
-  CycleSimple->PrintCombo() ;
-  CycleSimple->SetSelIndex(0) ;
 
-  tabPoso->SetSel(0) ;
+  _CycleSimple->AddElement(temp1, NULL) ; // tous les jours
+  _CycleSimple->AddElement(temp2, CreateRegularRythme("1", "2DAT01", "2", "2DAT01", pContexte)) ; // 1/2
+  _CycleSimple->AddElement(temp3, CreateRegularRythme("1", "2DAT01", "3", "2DAT01", pContexte)) ; // 1/3
+  _CycleSimple->AddElement(temp4, CreateRegularRythme("1", "2DAT01", "4", "2DAT01", pContexte)) ; // 1/4
+  _CycleSimple->AddElement(temp5, CreateRegularRythme("4", "2DAT01", "7", "2DAT01", pContexte)) ; // 4/7
+  _CycleSimple->AddElement(temp6, CreateRegularRythme("5", "2DAT01", "7", "2DAT01", pContexte)) ; // 5/7
+  _CycleSimple->AddElement(temp7, CreateRegularRythme("6", "2DAT01", "7", "2DAT01", pContexte)) ; // 5/7
+  _CycleSimple->SetLostFocus(new MemFunctor<NSPosoIncludeDlg>(_pDialog, &NSPosoIncludeDlg::SaveSimpleRythme)) ;
+  _CycleSimple->PrintCombo() ;
+  _CycleSimple->SetSelIndex(0) ;
+
+  _tabPoso->SetSel(0) ;
 }
 
 bool
@@ -4664,7 +4673,8 @@ void
 NSPosologieBlock::initPosoAndCycleForDrug()
 {
 	string sStarterSens = string("") ;
-  pContexte->getDico()->donneCodeSens(&(_pDialog->sLexiqCode), &sStarterSens) ;
+  string sLexiqCode   = _pDialog->getLexiqCode() ;
+  pContexte->getDico()->donneCodeSens(&sLexiqCode, &sStarterSens) ;
   if (sStarterSens == string(""))
   	return ;
 
@@ -4689,7 +4699,7 @@ NSPosologieBlock::initPosoAndCycleForDrug()
 void
 NSPosologieBlock::PrintTabCycle(bool print)
 {
-	if (NULL == _pDialog)
+	if ((NSPosoIncludeDlg*) NULL == _pDialog)
 		return ;
 
   _pDialog->EnableControl(IDC_TABCYCLE, print) ;
@@ -4701,10 +4711,10 @@ void
 NSPosologieBlock::InitTabPosologie()
 {
   char *OngletNoms[] = { "periodOfTime", "morningNoonNight", "hours", "regularCycle", "irregularCycle", "freeText", "singleTake"} ;
-  for (int i =0; i < 7; i++)
+  for (int i = 0 ; i < 7 ; i++)
 	{
     TTabItem tab(pContexte->getSuperviseur()->getText("drugDialog", OngletNoms[i]).c_str()) ;
-    tabPoso->Add(tab) ;
+    _tabPoso->Add(tab) ;
   }
   updatePosologie(1) ;
 }
@@ -4722,8 +4732,8 @@ NSPosologieBlock::InitCycleControls(bool bAddMode)
 
 	// Just for Day1Day2Day3
 	//
-	int index = tabCycle->GetSel() ;
-  if (index != 3)
+	int index = _tabCycle->GetSel() ;
+  if (3 != index)
 		return ;
 
 	// No current phase: init to Day 1
@@ -4775,7 +4785,7 @@ NSPosologieBlock::InitCycleControls(bool bAddMode)
 
 		_numJour->initControle(iRef) ;
   }
-  
+
 	return ;
 }
 
@@ -4786,7 +4796,7 @@ NSPosologieBlock::InitTabCycle()
   for (int i = 0 ; i < 4 ; i++)
   {
     TTabItem tab(pContexte->getSuperviseur()->getText("drugDialog", OngletCycle[i]).c_str()) ;
-    tabCycle->Add(tab) ;
+    _tabCycle->Add(tab) ;
   }
   updateCycle(4) ;
   PrintTabCycle(false) ;
@@ -4796,7 +4806,7 @@ void
 NSPosologieBlock::saveCycle()
 {
 	NSMedicCycleGlobal *pMedicCycle = (*_Cycles)[_currentCycle] ;
-	if (NULL == pMedicCycle)
+	if ((NSMedicCycleGlobal*) NULL == pMedicCycle)
 		return ;
 
 	pMedicCycle->save() ;
@@ -4805,7 +4815,7 @@ NSPosologieBlock::saveCycle()
 void
 NSPosologieBlock::TabSelChangePso()
 {
-	int index = tabPoso->GetSel() ;
+	int index = _tabPoso->GetSel() ;
 	saveCycle() ;
 	updatePosologie(index) ;
 	// NSCircadien::ReinitDialog(this);   // On reinitialise le medicament
@@ -4814,24 +4824,32 @@ NSPosologieBlock::TabSelChangePso()
 void
 NSPosologieBlock::updatePosologie(int index)
 {
-	if (NULL == _pDialog)
+	if ((NSPosoIncludeDlg*) NULL == _pDialog)
 		return ;
 
 	register unsigned int i ;
-	for (i = 0; i < 12; i++) _pDialog->EnableControl(periodeTab[i],   (index == 1)) ;
-	for ( i = 0; i < 1; i++) _pDialog->EnableControl(TxtLibre[i],     (index == 5)) ;
-	for ( i = 0; i < 8; i++) _pDialog->EnableControl(regularDay[i],   (index == 3)) ;
-	for (i = 0; i < 21; i++) _pDialog->EnableControl(periodeCycle[i], (index == 0)) ;
-	for (i = 0; i < 8;  i++) _pDialog->EnableControl(hourCycle[i],    (index == 2)) ;
-	for (i = 0; i < 11; i++) _pDialog->EnableControl(idcPosoLibre[i], (index == 4)) ;
-	for (i = 0; i < 3; i++)  _pDialog->EnableControl(PosoUnique[i],   (index == 6)) ;
-	tabPoso->SetSel(index) ;
+	for (i = 0; i < 12; i++)
+    _pDialog->EnableControl(periodeTab[i],   (index == 1)) ;
+	for ( i = 0; i < 1; i++)
+    _pDialog->EnableControl(TxtLibre[i],     (index == 5)) ;
+	for ( i = 0; i < 8; i++)
+    _pDialog->EnableControl(regularDay[i],   (index == 3)) ;
+	for (i = 0; i < 21; i++)
+    _pDialog->EnableControl(periodeCycle[i], (index == 0)) ;
+	for (i = 0; i < 8;  i++)
+    _pDialog->EnableControl(hourCycle[i],    (index == 2)) ;
+	for (i = 0; i < 11; i++)
+    _pDialog->EnableControl(idcPosoLibre[i], (index == 4)) ;
+	for (i = 0; i < 3; i++)
+    _pDialog->EnableControl(PosoUnique[i],   (index == 6)) ;
+
+	_tabPoso->SetSel(index) ;
 }
 
 void
 NSPosologieBlock::TabSelChangeCyc()
 {
-	register int index = tabCycle->GetSel() ;
+	register int index = _tabCycle->GetSel() ;
 	updateCycle(index) ;
 }
 
@@ -4839,7 +4857,7 @@ void
 NSPosologieBlock::EvListBoxSelCycle()
 {
 	saveCurrentCycle() ;
-	int index = viewCycle->GetSelIndex() ;
+	int index = _viewCycle->GetSelIndex() ;
 	_currentCycle = index ;
   EvCycleKey() ;
   // DrawCycleMode() ;
@@ -4848,34 +4866,39 @@ NSPosologieBlock::EvListBoxSelCycle()
 void
 NSPosologieBlock::updateCycle(int index)
 {
-	if (NULL == _pDialog)
+	if ((NSPosoIncludeDlg*) NULL == _pDialog)
 		return ;
 
 	register int i ;
-  for (i = 0; i < 5; i++)  _pDialog->EnableControl(CycleJourAlt[i], (index == 3)) ;
-	for (i = 0; i < 7; i++)  _pDialog->EnableControl(CycleJour[i],    (index == 2)) ;
-	for (i = 0; i < 9; i++)  _pDialog->EnableControl(RegularCycle[i], (index == 0)) ;
-	for (i = 0; i < 11; i++) _pDialog->EnableControl(FreeCycle[i],    (index == 1)) ;
-	tabCycle->SetSel(index) ;
+  for (i = 0; i < 5; i++)
+    _pDialog->EnableControl(CycleJourAlt[i], (index == 3)) ;
+	for (i = 0; i < 7; i++)
+    _pDialog->EnableControl(CycleJour[i],    (index == 2)) ;
+	for (i = 0; i < 9; i++)
+    _pDialog->EnableControl(RegularCycle[i], (index == 0)) ;
+	for (i = 0; i < 11; i++)
+    _pDialog->EnableControl(FreeCycle[i],    (index == 1)) ;
+
+	_tabCycle->SetSel(index) ;
 }
 
 void
 NSPosologieBlock::AddHour()
 {
-  std::string val       = pPriseHeure->getValue() ;
-  std::string heure     = pPriseHeure->getHeure() ;
+  std::string val       = _pPriseHeure->getValue() ;
+  std::string heure     = _pPriseHeure->getHeure() ;
   std::string toAffiche = CreateLabelForHour(val,heure ) ;
   PriseHeure* news = new PriseHeure(val, heure) ;
 
   bool result = true;
-  for (int i =0; i < ViewPriseHeure->Size(); i++)
-    if ( (*news == *ViewPriseHeure->getDataAt(i))== true)
+  for (int i =0; i < _ViewPriseHeure->Size(); i++)
+    if ( (*news == *_ViewPriseHeure->getDataAt(i))== true)
         result = false;
   if (result == true)
   {
-    ViewPriseHeure->addItem(toAffiche.c_str(), news) ;
-    ViewPriseHeure->sortLabel(CompareMedicament) ;
-    ViewPriseHeure->SetSelIndex(ViewPriseHeure->Index()) ;
+    _ViewPriseHeure->addItem(toAffiche.c_str(), news) ;
+    _ViewPriseHeure->sortLabel(CompareMedicament) ;
+    _ViewPriseHeure->SetSelIndex(_ViewPriseHeure->Index()) ;
   }
   else
   {
@@ -4887,11 +4910,11 @@ NSPosologieBlock::AddHour()
 void
 NSPosologieBlock::EvListBoxSelChange()
 {
-  int index = ViewPriseHeure->GetSelIndex() ;
+  int index = _ViewPriseHeure->GetSelIndex() ;
   if ( index >= 0)
   {
-    PriseHeure* prise = ViewPriseHeure->getDataAt(index) ;
-    pPriseHeure->initFromPriseHeure(prise) ;
+    PriseHeure* prise = _ViewPriseHeure->getDataAt(index) ;
+    _pPriseHeure->initFromPriseHeure(prise) ;
   }
 }
 
@@ -4922,15 +4945,15 @@ NSPosologieBlock::DrawCycleMode()
 void
 NSPosologieBlock::DrawCycleExtended(bool bForceRedraw)
 {
-	if (NULL == _pDialog)
+	if ((NSPosoIncludeDlg*) NULL == _pDialog)
 		return ;
 
-	if (_extendtedCycle && !bForceRedraw)
+	if (_extendtedCycle && (false == bForceRedraw))
 		return ;
 
 	_pDialog->EnableControl(IDC_GROUPCYCLE, true) ;
 
-	_pDialog->MoveControl(_CycleGroup, 4, iExtendedCycleGroupY, 412, iExtendedCycleGroupH) ;
+	_pDialog->MoveControl(_CycleGroup, 4, _iExtendedCycleGroupY, 412, _iExtendedCycleGroupH) ;
 	PrintTabCycle(1) ;
 	if (_LoadForChange == false)
   	updateCycle(0) ;
@@ -4945,13 +4968,13 @@ NSPosologieBlock::DrawCycleExtended(bool bForceRedraw)
 void
 NSPosologieBlock::DrawCycleLimited(bool bForceRedraw)
 {
-	if (NULL == _pDialog)
+	if ((NSPosoIncludeDlg*) NULL == _pDialog)
 		return ;
 
-	if (!_extendtedCycle && !bForceRedraw)
+	if (!_extendtedCycle && (false == bForceRedraw))
 		return ;
 
-	_pDialog->MoveControl(_CycleGroup, 4, iLimitedCycleGroupY, 412, iLimitedCycleGroupH) ;
+	_pDialog->MoveControl(_CycleGroup, 4, _iLimitedCycleGroupY, 412, _iLimitedCycleGroupH) ;
 
   // To simplify interface, the Cycle group is hidden in limited mode
   //
@@ -4970,16 +4993,16 @@ NSPosologieBlock::DrawCycleLimited(bool bForceRedraw)
 void
 NSPosologieBlock::setCycleGroupPositions(int iExtY, int iExtH, int iLimY, int iLimH)
 {
-	iExtendedCycleGroupY = iExtY ;
-	iExtendedCycleGroupH = iExtH ;
-	iLimitedCycleGroupY  = iLimY ;
-	iLimitedCycleGroupH  = iLimH ;
+	_iExtendedCycleGroupY = iExtY ;
+	_iExtendedCycleGroupH = iExtH ;
+	_iLimitedCycleGroupY  = iLimY ;
+	_iLimitedCycleGroupH  = iLimH ;
 }
 
 void
 NSPosologieBlock::lanceExtended()
 {
-	if (NULL == _pDialog)
+	if ((NSPosoIncludeDlg*) NULL == _pDialog)
 		return ;
 
 	_pDialog->RedrawForm(true) ;
@@ -4992,9 +5015,9 @@ NSPosologieBlock::AddCRythm()
   addCycle() ;
   NSMedicCycleGlobal::ReinitDialog(this) ;
 
-  int iPosoIndex = tabPoso->GetSel() ;
+  int iPosoIndex = _tabPoso->GetSel() ;
   updatePosologie(iPosoIndex) ;
-  int iCycleIndex = tabCycle->GetSel() ;
+  int iCycleIndex = _tabCycle->GetSel() ;
   updateCycle(iCycleIndex) ;
 
   InitPosoControls() ;
@@ -5019,6 +5042,7 @@ DEFINE_RESPONSE_TABLE1(NSMedicamentDlg, NSPosoIncludeDlg)
   EV_COMMAND_AND_ID(IDR_DRG_LE,          UserName),
 	EV_LBN_SELCHANGE(IDC_LISTPHASE,        EvListBoxSelPhase),    // Change phase
   EV_COMMAND(FREE_TEXT_BUTTON,           editFreeText),
+  EV_COMMAND(DRUG_INFORMATION,           drugInformation),
 END_RESPONSE_TABLE ;
 
 NSMedicamentDlg::NSMedicamentDlg(TWindow *parent, NSContexte *pCtx, NSPatPathoArray *pPPToInit)
@@ -5026,7 +5050,7 @@ NSMedicamentDlg::NSMedicamentDlg(TWindow *parent, NSContexte *pCtx, NSPatPathoAr
 {
   _sReferential = std::string("") ;
 
-  _bIsSubstituable = bIsRemboursable = bIsAld = false ;
+  _bIsRemboursable = false ;
 
 	_pPosoBlock = new NSPosologieBlock(pCtx, 0) ;
   _pPosoBlock->setCycleGroupPositions(165, 227, 148, 178) ;
@@ -5037,89 +5061,62 @@ NSMedicamentDlg::NSMedicamentDlg(TWindow *parent, NSContexte *pCtx, NSPatPathoAr
   _pPosoBlock->setExtendedCycle(true) ;
   _topOfBottomControls = 188 ;
 
-  pmedicnameTxt   = new OWL::TStatic(this, IDC_MEDOCNAME) ;
-	medicname       = new NSUtilLexique(pContexte, this,  IDC_MEDOCCHOICE, pContexte->getDico()) ;     // Nom du medicament
-  medicname->setLostFocusFunctor(new MemFunctor<NSMedicamentDlg>( (NSMedicamentDlg*)this, &NSMedicamentDlg::ExecutedAfterMedicamentSelection )) ;
-
-  pUnitePriseTxt  = new OWL::TStatic(this, IDC_GROUPPRISE) ;
-	pUnitePrise     = new NSUtilLexique (pContexte, this, IDC_COMPRIM, pContexte->getDico()) ;  // unité de la prise
-  pUnitePrise->setLostFocusFunctor(new MemFunctor<NSMedicamentDlg>( (NSMedicamentDlg*)this, &NSMedicamentDlg::FullPriseUnit )) ;
-
-  pDateDebTxt    = new OWL::TStatic(this, DATE_DEBPRESC_TEXT) ;
-  pDateDeb       = new NSUtilEditDateHeure(pContexte, this, DRUG_DATE_DEB) ;
-  pDateDeb->setLostFocusFunctor(new MemFunctor<NSMedicamentDlg>( (NSMedicamentDlg*)this, &NSMedicamentDlg::ExecutedAfterTrtBeginDate )) ;
-  pDateFinGroup  = new OWL::TGroupBox(this, DATE_FIN_DRG_GROUP) ;
-	pRChronique    = new OWL::TRadioButton(this, IDR_DRG_CHRONIQUE) ;
-	pRDans         = new OWL::TRadioButton(this, IDR_DRG_DANS) ;
-	pRDuree        = new OWL::TRadioButton(this, IDR_DRG_DUREE) ;
-	pRLe           = new OWL::TRadioButton(this, IDR_DRG_LE) ;
-	pNbJours       = new NSEditNum(pContexte, this, IDC_DRG_NBJOURS, 10) ;
-  pNbJours->setLostFocusFunctor(new MemFunctor<NSMedicamentDlg>( (NSMedicamentDlg*)this, &NSMedicamentDlg::ExecutedAfterTrtEndDate ));
-  char *temp1[] = {"2HEUR1","2DAT01","2DAT11","2DAT21"} ;
-  pCBDureeTtt    = new NSComboBox(this, IDC_DRG_NBJOURS_TXT, pContexte, temp1, 4) ;
-  pCBDureeTtt->SetLostFocusResponse(new MemFunctor<NSMedicamentDlg>( (NSMedicamentDlg*)this, &NSMedicamentDlg::ExecutedAfterTrtEndDate ));
-  pDateFin       = new NSUtilEditDateHeure(pContexte, this, DRUG_DATE_FIN) ;
-
-  pEnCasTxt      = new OWL::TStatic(this, IDC_GROUPBOX5) ;
-  pEnCasDe       = new NSUtilLexique(pContexte, this, IDC_EDIT1, pContexte->getDico()) ;
-  substituable   = new NSCheckBoxControle(this, pContexte, "LSUBS1", IDC_CHECKSUB) ;
-  remboursable   = new NSCheckBoxControle(this, pContexte, "LREMB1", IDC_REMBOURS) ;
-
-  pModePriseTxt  = new OWL::TStatic(this, IDC_GROUPRISEMODE) ;
-  modedeprise    = new NTComboBox<NSPatPathoArray>(this, IDC_COMMODPRISE) ;
-
-  _pALD            = new NSCheckBoxControle(this, pContexte, "LBARZ1", ALD_BUTTON) ;
-  _pFreeTextButton = new OWL::TButton(this, FREE_TEXT_BUTTON) ;                 
+  _pmedicnameTxt  = new TStatic(this, IDC_MEDOCNAME) ;
+  _pModePriseTxt  = new TStatic(this, IDC_GROUPRISEMODE) ;
+  _modedeprise    = new NTComboBox<NSPatPathoArray>(this, IDC_COMMODPRISE) ;
+  _remboursable   = new NSCheckBoxControle(this, pContexte, string("LREMB1"), IDC_REMBOURS) ;
 
   _LoadForChange = false ;
 
   // Phase
   //
   _PhaseGroup    = new TGroupBox(this, IDC_GROUPPHASE) ;
-  idc_phase1     = new TStatic(this, IDC_PHASE1) ;
-  idc_static3    = new TStatic(this, IDC_STATICTEXT3) ;
-  idc_static2    = new TStatic(this, IDC_STATICTEXT2) ;
-  AddPhase       = new TButton(this, IDC_ADDPHASE) ;
-  ModePhase      = new TButton(this, IDC_EXTENDPHASE) ;
+  _idc_phase1    = new TStatic(this, IDC_PHASE1) ;
+  _idc_static3   = new TStatic(this, IDC_STATICTEXT3) ;
+  _idc_static2   = new TStatic(this, IDC_RENEW_TXT) ;
+  _AddPhase      = new TButton(this, IDC_ADDPHASE) ;
+  _ModePhase     = new TButton(this, IDC_EXTENDPHASE) ;
 
 	// Temps pour les durée d'une phase
-  pDureePhase    = new NSUpDownEdit(this, pContexte, "", IDC_EDPHASEPEND, IDC_UPDOWN7) ;
-  pDureePhase->getEditNum()->SetLostFocusResponse(new MemFunctor<NSMedicamentDlg>( (NSMedicamentDlg*)this, &NSMedicamentDlg::ActualisePhasePreview ));
-  pDureePhase->getUpDown()->SetLostFocusResponse(new MemFunctor<NSMedicamentDlg>( (NSMedicamentDlg*)this, &NSMedicamentDlg::ActualisePhasePreview ));
+  _pDureePhase    = new NSUpDownEdit(this, pContexte, "", IDC_EDPHASEPEND, IDC_UPDOWN7) ;
+  _pDureePhase->getEditNum()->SetLostFocusResponse(new MemFunctor<NSMedicamentDlg>( (NSMedicamentDlg*)this, &NSMedicamentDlg::ActualisePhasePreview ));
+  _pDureePhase->getUpDown()->SetLostFocusResponse(new MemFunctor<NSMedicamentDlg>( (NSMedicamentDlg*)this, &NSMedicamentDlg::ActualisePhasePreview ));
 
-  pRenouvellement = new NSUpDownEdit(this, pContexte, "", IDC_EDRENEW, IDC_UPDOWN8) ;
-  pRenouvellement->getEditNum()->SetLostFocusResponse(new MemFunctor<NSMedicamentDlg>( (NSMedicamentDlg*)this, &NSMedicamentDlg::ActualisePhasePreview ));
-  pRenouvellement->getUpDown()->SetLostFocusResponse(new MemFunctor<NSMedicamentDlg>( (NSMedicamentDlg*)this, &NSMedicamentDlg::ActualisePhasePreview ));
+  _pRenouvellement = new NSUpDownEdit(this, pContexte, "", IDC_EDRENEW, IDC_UPDOWN8) ;
+  _pRenouvellement->getEditNum()->SetLostFocusResponse(new MemFunctor<NSMedicamentDlg>( (NSMedicamentDlg*)this, &NSMedicamentDlg::ActualisePhasePreview ));
+  _pRenouvellement->getUpDown()->SetLostFocusResponse(new MemFunctor<NSMedicamentDlg>( (NSMedicamentDlg*)this, &NSMedicamentDlg::ActualisePhasePreview ));
 
   _pPhases        = new NSphaseMedicArray() ;       // Creation  du tableau contenant les phases
-  phaseBox        = new NTTList<NSphaseMedic, NSMedicamentDlg>(this, IDC_LISTPHASE, _pPhases, false) ;  // initialisation de la liste affichant les différente phase
-  phaseBox->setKeyUpResponse(new MemFunctor<NSMedicamentDlg>( (NSMedicamentDlg*)this, &NSMedicamentDlg::EvListBoxSelPhase ) );
-  phaseBox->setKeyDownResponse(new MemFunctor<NSMedicamentDlg>( (NSMedicamentDlg*)this, &NSMedicamentDlg::EvListBoxSelPhase ) );
+  _phaseBox        = new NTTList<NSphaseMedic, NSMedicamentDlg>(this, IDC_LISTPHASE, _pPhases, false) ;  // initialisation de la liste affichant les différente phase
+  _phaseBox->setKeyUpResponse(new MemFunctor<NSMedicamentDlg>( (NSMedicamentDlg*)this, &NSMedicamentDlg::EvListBoxSelPhase ) );
+  _phaseBox->setKeyDownResponse(new MemFunctor<NSMedicamentDlg>( (NSMedicamentDlg*)this, &NSMedicamentDlg::EvListBoxSelPhase ) );
 
   // durée de la phase
   char *temp[] = {"2HEUR1","2DAT01","2DAT11","2DAT21"} ;
-  pCBDureePhase   = new NSComboBox(this, IDC_PHASECOMBO1, pContexte, temp, 4) ;
-  pCBDureePhase->SetLostFocusResponse(new MemFunctor<NSMedicamentDlg>( (NSMedicamentDlg*)this, &NSMedicamentDlg::ActualisePhasePreview ));
+  _pCBDureePhase   = new NSComboBox(this, IDC_PHASECOMBO1, pContexte, temp, 4) ;
+  _pCBDureePhase->SetLostFocusResponse(new MemFunctor<NSMedicamentDlg>( (NSMedicamentDlg*)this, &NSMedicamentDlg::ActualisePhasePreview ));
 
-  pDateDebPrescrTxt = new OWL::TStatic(this, DATE_DEB_DRG_TEXT) ;
-	pDateDebPrescr    = new NSUtilEditDateHeure(pContexte, this, PRESC_DATE_DEB) ;
-  pDateDebPrescr->setLostFocusFunctor(new MemFunctor<NSMedicamentDlg>( (NSMedicamentDlg*)this, &NSMedicamentDlg::ActualisePhasePreview )) ;
-	pDateFinPrescrTxt = new OWL::TStatic(this, DATE_FINPRESC_TEXT) ;
-	pDateFinPrescr    = new NSUtilEditDateHeure(pContexte, this, PRESC_DATE_FIN) ;
+  _pDateDebPrescrTxt = new OWL::TStatic(this, DATE_DEB_DRG_TEXT) ;
+	_pDateDebPrescr    = new NSUtilEditDateHeure(pContexte, this, PRESC_DATE_DEB) ;
+  _pDateDebPrescr->setLostFocusFunctor(new MemFunctor<NSMedicamentDlg>( (NSMedicamentDlg*)this, &NSMedicamentDlg::ActualisePhasePreview )) ;
+	_pDateFinPrescrTxt = new OWL::TStatic(this, DATE_FINPRESC_TEXT) ;
+	_pDateFinPrescr    = new NSUtilEditDateHeure(pContexte, this, PRESC_DATE_FIN) ;
 
   //groupe de bouton de controle
-  ok             = new TButton(this, IDOK) ;
-  cancel         = new TButton(this, IDCANCEL) ;
-  help           = new TButton(this, IDHELP) ;
+  _ok             = new TButton(this, IDOK) ;
+  _cancel         = new TButton(this, IDCANCEL) ;
+  _help           = new TButton(this, IDHELP) ;
 
 	// tableau contenant les heures
-  sLexiqCode     = "" ;
-  sDateOuverture = "" ;
+  _sLexiqCode     = string("") ;
+  _sDateOuverture = string("") ;
 
-  _pCurrentPhase = NULL ;
+  _pCurrentPhase  = (NSphaseMedic*) 0 ;
 
-  pPPT = pPPToInit ;
-  if ((NULL != pPPToInit) && (!(pPPToInit->empty()))) // Il y a un medicament a charger
+  _pBdmDrugInformation = (NsSelectableDrug*) 0 ;
+
+  _pPPT = pPPToInit ;
+  if (pPPToInit && (false == pPPToInit->empty())) // Il y a un medicament a charger
   {
     ParseMedicament() ;
     _LoadForChange = true ;
@@ -5128,7 +5125,7 @@ NSMedicamentDlg::NSMedicamentDlg(TWindow *parent, NSContexte *pCtx, NSPatPathoAr
   pContexte->getSuperviseur()->voidDebugPrintf(NSSuper::trSubSteps, "Initilisation médicament") ;
   // pContexte->getSuperviseur()->ReadConsole();
 
-  rythmIndex = phaseIndex = 'a' ;
+  _rythmIndex = _phaseIndex = 'a' ;
 
   if (_pPhases->empty())
   {
@@ -5142,46 +5139,29 @@ NSMedicamentDlg::NSMedicamentDlg(TWindow *parent, NSContexte *pCtx, NSPatPathoAr
 
 NSMedicamentDlg::~NSMedicamentDlg()
 {
-  delete pmedicnameTxt ;
-	delete medicname ;
-  delete pUnitePriseTxt ;
-  delete pUnitePrise ;
-  delete pDateDebTxt ;
-  delete pDateDeb ;
-  delete pDateFinGroup ;
-  delete pRChronique ;
-	delete pRDans ;
-	delete pRDuree ;
-	delete pRLe ;
-	delete pNbJours ;
-  delete pCBDureeTtt ;
-  delete pDateFin ;
-  delete pEnCasTxt ;
-  delete pEnCasDe ;
-  delete substituable ;
-  delete remboursable ;
-  delete pModePriseTxt ;
-  delete modedeprise ;
-  delete _pALD ;
-  delete _pFreeTextButton ;
+  delete _pmedicnameTxt ;
+  delete _remboursable ;
   delete _PhaseGroup ;
-  delete idc_phase1 ;
-  delete idc_static3 ;
-  delete idc_static2 ;
-  delete AddPhase ;
-  delete ModePhase ;
-  delete pDureePhase ;
-  delete pRenouvellement ;
+  delete _idc_phase1 ;
+  delete _idc_static3 ;
+  delete _idc_static2 ;
+  delete _AddPhase ;
+  delete _ModePhase ;
+  delete _pDureePhase ;
+  delete _pRenouvellement ;
   delete _pPhases ;
-  delete phaseBox ;
-  delete pCBDureePhase ;
-  delete pDateDebPrescrTxt ;
-	delete pDateDebPrescr ;
-	delete pDateFinPrescrTxt ;
-	delete pDateFinPrescr ;
-  delete ok ;
-  delete cancel ;
-  delete help ;
+  delete _phaseBox ;
+  delete _pCBDureePhase ;
+  delete _pDateDebPrescrTxt ;
+	delete _pDateDebPrescr ;
+	delete _pDateFinPrescrTxt ;
+	delete _pDateFinPrescr ;
+  delete _ok ;
+  delete _cancel ;
+  delete _help ;
+
+  if (_pBdmDrugInformation)
+    delete _pBdmDrugInformation ;
 }
 
 void
@@ -5192,36 +5172,13 @@ NSMedicamentDlg::SetupWindow()
   // InitTabPosologie() ;             // Initlaisation du tableau de posologie
   InitComboModedePrise() ;         // Initialisation de la combo ( modedeprise)
   // InitTabCycle() ;
-  std::string Forme  = "" ;
-  std::string sLabel = "" ;
+  std::string sForme = string("") ;
+  std::string sLabel = string("") ;
 
 	// Drug name
   //
   string sTxt = pContexte->getSuperviseur()->getText("drugDialog", "treatmentName") ;
-	pmedicnameTxt->SetText(sTxt.c_str()) ;
-
-  if (string("") != sLexiqCode)
-  {
-  	string sLang = pContexte->getUserLanguage() ;
-		pContexte->getDico()->donneLibelle(sLang, &sLexiqCode, &sLabel) ;
-    medicname->setLabel(sLexiqCode.c_str(), sLabel.c_str()) ;
-    Forme = initDispUnit(sLang, sLexiqCode, sLabel, pContexte) ;
-  }
-  else
-    medicname->SetText("") ;
-
-	// Unit
-  //
-  sTxt = pContexte->getSuperviseur()->getText("drugDialog", "takeUnit") ;
-	pUnitePriseTxt->SetText(sTxt.c_str()) ;
-
-  if (string("") != sPriseUnit)
-    pUnitePrise->setLabel(sPriseUnit) ;
-  else
-  {
-  	string sMsgTxt = pContexte->getSuperviseur()->getText("drugDialog", "missingInformation") ;
-    pUnitePrise->SetText(sMsgTxt.c_str()) ;
-  }
+	_pmedicnameTxt->SetText(sTxt.c_str()) ;
 
   //tabPoso->SetSel(1);
   EnableControl(IDC_LISTPHASE, false) ;
@@ -5231,33 +5188,11 @@ NSMedicamentDlg::SetupWindow()
   RedrawForm(false) ;
   // pPriseHeure->reinitControle() ;
 
-  NVLdVTemps tpNow ;
-	tpNow.takeTime() ;
 
-  if (string("") != sDateOuverture)
-		pDateDeb->setDate(sDateOuverture) ;
-  else
-		pDateDeb->setDate(tpNow.donneDateHeure()) ;
-
-  if (string("") != sDateFermeture)
-  {
-  	pRLe->SetCheck(BF_CHECKED) ;
-  	pDateFin->setDate(sDateFermeture) ;
-  }
-  else
-  	pRChronique->SetCheck(BF_CHECKED) ;
-
-  if (_bIsSubstituable)
-    substituable->SetCheck(BF_CHECKED) ;
-
-  if (bIsRemboursable)
-    remboursable->SetCheck(BF_CHECKED) ;
-
-  if (bIsAld)
-    _pALD->SetCheck(BF_CHECKED) ;
-
-  if (string("") != sEnCasDe_Code)
-  	pEnCasDe->setLabel(sEnCasDe_Code) ;
+  sTxt = pContexte->getSuperviseur()->getText("drugDialog", "notRefundable") ;
+  _remboursable->SetCaption(sTxt.c_str()) ;
+  if (_bIsRemboursable)
+    _remboursable->SetCheck(BF_CHECKED) ;
 
 	if (_pPhases->size() > 0)  // Il existe deja une phase courante provenant de l'initialisation
   	LoadPhaseOnViewAndConfigure() ;
@@ -5267,8 +5202,13 @@ NSMedicamentDlg::SetupWindow()
     _pPosoBlock->updatePosologie(1) ;
 	}                         // On l'ajoute dans la base
 
-  if ((NULL == pPPT) || (pPPT->empty()))
-		pDateDebPrescr->setDate(tpNow.donneDateHeure()) ;
+  if (((NSPatPathoArray*) NULL == _pPPT) || (_pPPT->empty()))
+  {
+    NVLdVTemps tpNow ;
+	  tpNow.takeTime() ;
+
+		_pDateDebPrescr->setDate(tpNow.donneDateHeure()) ;
+  }
 
 	if (_pPhases->size() > 1)
   	_Phase = true ;
@@ -5279,20 +5219,20 @@ NSMedicamentDlg::SetupWindow()
 void
 NSMedicamentDlg::InitControlsForPhase(NSphaseMedic* pPhase)
 {
-	if (NULL == pPhase)
+	if ((NSphaseMedic*) NULL == pPhase)
 		return ;
 
-	pDureePhase->initControle(pPhase->GetDureePhase()) ;
-	pCBDureePhase->setCode(pPhase->GetSymBolOfPhase()) ;
-	pRenouvellement->initControle(pPhase->GetNumberOfRenouvellement()) ;
-  pDateDebPrescr->setDate(pPhase->GetStartingDate().donneDateHeure()) ;
-  pDateFinPrescr->setDate(pPhase->GetClosingDate().donneDateHeure()) ;
+	_pDureePhase->initControle(pPhase->GetDureePhase()) ;
+	_pCBDureePhase->setCode(pPhase->GetSymBolOfPhase()) ;
+	_pRenouvellement->initControle(pPhase->GetNumberOfRenouvellement()) ;
+  _pDateDebPrescr->setDate(pPhase->GetStartingDate().donneDateHeure()) ;
+  _pDateFinPrescr->setDate(pPhase->GetClosingDate().donneDateHeure()) ;
 }
 
 void
 NSMedicamentDlg::DeletePhase()
 {
-  _pCurrentPhase = NULL ;
+  _pCurrentPhase = (NSphaseMedic*) 0 ;
   _pPosoBlock->setCycles(NULL) ;
 }
 
@@ -5320,12 +5260,13 @@ bool NSMedicamentDlg::RecupereData(PatPathoIter& pptIter, PatPathoIter& pptEnd)
 bool
 NSMedicamentDlg::ParseMedicament()
 {
-	if ((NULL == pPPT) || (true == pPPT->empty()))
+	if (((NSPatPathoArray*) NULL == _pPPT) || (true == _pPPT->empty()))
 		return false ;
 
-  PatPathoIter pptIter = pPPT->begin() ;
-  PatPathoIter pptEnd  = pPPT->end() ;
-	sLexiqCode = (*pptIter)->getLexique() ; // Recuperation du nom  du medicament
+  PatPathoIter pptIter = _pPPT->begin() ;
+  PatPathoIter pptEnd  = _pPPT->end() ;
+
+	_sLexiqCode = (*pptIter)->getLexique() ; // Recuperation du nom  du medicament
 
   Avance(pptIter, pptEnd) ;
 
@@ -5340,17 +5281,51 @@ NSMedicamentDlg::ParseMedicament()
     	if (loadDateOuverture(pptIter, pptEnd) == false)
       	return false ;
       else
-      	pDateDeb->setDate(sDateOuverture) ;
+      	_pDateDeb->setDate(_sDateOuverture) ;
 
     if (string("KFERM") == temp)
     	if (loadDateFermeture(pptIter, pptEnd) == false)
       	return false ;
       else
-      	pDateFin->setDate(sDateFermeture) ;
+      	_pDateFin->setDate(_sDateFermeture) ;
+
+    if (string("KEVEI") == temp)
+		{
+			int iColBase = (*pptIter)->getColonne() ;
+
+			pptIter++ ;
+      if (_pPPT->end() == pptIter)
+      	return false ;
+
+      string sElemLex = (*pptIter)->getLexique() ;
+      if (string("£?????") == sElemLex)
+        _sFreeTextEvent = (*pptIter)->getTexteLibre() ;
+      else
+        _sLexiqEvent = sElemLex ;
+
+			pptIter++ ;
+    }
 
     if ((string("0MEDF") == temp) && (LoadUniteDePrise(pptIter, pptEnd) == false))
     	if (RecupereData(pptIter, pptEnd) == false)
       	return false ;
+
+    if (string("0VADM") == temp)
+		{
+			int iColBase = (*pptIter)->getColonne() ;
+
+			pptIter++ ;
+      if (_pPPT->end() == pptIter)
+      	return false ;
+
+      string sElemLex = (*pptIter)->getLexique() ;
+      if (string("£?????") == sElemLex)
+        _sFreeTextRoute = (*pptIter)->getTexteLibre() ;
+      else
+        _sLexiqRoute = sElemLex ;
+
+			pptIter++ ;
+    }
 
     if (string("KPHAT") == temp) // Charge une phase
     {
@@ -5375,14 +5350,35 @@ NSMedicamentDlg::ParseMedicament()
       _sFreeText = (*pptIter)->getTexteLibre() ;
       Avance(pptIter, pptEnd) ;
     }
+
+    if (string("6ATC0") == temp)
+    {
+      _sATCCode = (*pptIter)->getComplement() ;
+      pptIter++ ;
+    }
+
+    if ((string("6CIS0") == temp) || (string("6CIP0") == temp) ||
+        (string("6CIP7") == temp) || (string("6CIPT") == temp))
+    {
+      _sCICode = (*pptIter)->getComplement() ;
+      pptIter++ ;
+    }
+
+    if ("0MOTF" == temp)
+    {
+      int iColBaseAdmin = (*pptIter)->getColonne() ;
+      pptIter++ ;
+      while ((_pPPT->end() != pptIter) && ((*pptIter)->getColonne() > iColBaseAdmin))
+        pptIter++ ;
+    }
   }
-  return true;
+  return true ;
 }
 
 bool
 NSMedicamentDlg::LoadAdmin(PatPathoIter& pptIter, PatPathoIter& pptEnd)
 {
-  std::string temp = "" ;
+  std::string temp = string("") ;
 
   int Col;
   if (pptIter != pptEnd)
@@ -5404,19 +5400,19 @@ NSMedicamentDlg::LoadAdmin(PatPathoIter& pptIter, PatPathoIter& pptEnd)
 
     if (std::string("LSUBS") == temp)
     {
-      _bIsSubstituable = true ;
+      _bNonSubstituable = true ;
       Avance(pptIter, pptEnd) ;
     }
 
-    if (std::string("LREMB") == temp)
+    else if (std::string("LREMB") == temp)
     {
-      bIsRemboursable = true ;
+      _bIsRemboursable = true ;
       Avance(pptIter, pptEnd) ;
     }
 
-    if (std::string("LBARZ") == temp)
+    else if (std::string("LBARZ") == temp)
     {
-      bIsAld = true ;
+      _sALD = string("LBARZ") ;
       Avance(pptIter, pptEnd) ;
     }
 
@@ -5434,7 +5430,7 @@ NSMedicamentDlg::LoadUniteDePrise(PatPathoIter& pptIter, PatPathoIter& pptEnd)
 
 	Avance(pptIter, pptEnd) ;
 	if (pptIter != pptEnd)
-		sPriseUnit = (*pptIter)->getLexique() ;
+		_sPriseUnit = (*pptIter)->getLexique() ;
 
 	Avance(pptIter, pptEnd) ;
   return true ;
@@ -5443,30 +5439,38 @@ NSMedicamentDlg::LoadUniteDePrise(PatPathoIter& pptIter, PatPathoIter& pptEnd)
 void
 NSMedicamentDlg::FullPriseUnit()
 {
-  sLexiqCode = medicname->getCode() ;
+  _sLexiqCode = _pDrug->getCode() ;
 }
 
 void
-NSMedicamentDlg::ExecutedAfterMedicamentSelection()
+NSMedicamentDlg::ExecutedAfterDrugSelection()
 {
-  sLexiqCode = medicname->getCode() ;
+  _sLexiqCode = _pDrug->getCode() ;
 
-  if (sLexiqCode != "")
+  if (string("") != _sLexiqCode)
   {
   	string sLabel ;
     string sLang = pContexte->getUserLanguage() ;
-    pContexte->getDico()->donneLibelle(sLang, &sLexiqCode, &sLabel) ;
+    pContexte->getDico()->donneLibelle(sLang, &_sLexiqCode, &sLabel) ;
+
+    if (pContexte->getBamType() != NSContexte::btNone)
+    {
+      getDrugInformation() ;
+
+      if (_pBdmDrugInformation)
+        checkDrugSafety() ;
+    }
 
     string sMITxt = pContexte->getSuperviseur()->getText("drugDialog", "missingInformation") ;
 
-    string sCodeDisp = initDispUnit(sLang, sLexiqCode, sLabel, pContexte) ;
+    string sCodeDisp = initDispUnit(sLang, _sLexiqCode, sLabel, pContexte) ;
     if (sCodeDisp != sMITxt) // Verifie que le code exite
     {
-    	pUnitePrise->setLabel(sCodeDisp) ;
-      sPriseUnit = sCodeDisp ;
+    	_pUnitePrise->setLabel(sCodeDisp) ;
+      _sPriseUnit = sCodeDisp ;
     }
     else
-    	pUnitePrise->SetText(sCodeDisp.c_str()) ;
+    	_pUnitePrise->SetText(sCodeDisp.c_str()) ;
 	}
     //FIXME reinite la fenetre
 
@@ -5477,7 +5481,7 @@ void
 NSMedicamentDlg::ExecutedAfterTrtBeginDate()
 {
 	std::string dateDeb ;
-  pDateDeb->getDate(&dateDeb) ;
+  _pDateDeb->getDate(&dateDeb) ;
   NVLdVTemps data ;
   data.initFromDate(dateDeb) ;
 
@@ -5491,26 +5495,26 @@ NSMedicamentDlg::ExecutedAfterTrtBeginDate()
 void
 NSMedicamentDlg::ExecutedAfterTrtEndDate()
 {
-	pNbJours->donneValeur() ;
-	int iTrtDurationValue = (int) pNbJours->_dValeur ;
+	_pNbJours->donneValeur() ;
+	int iTrtDurationValue = (int) _pNbJours->_dValeur ;
 	if (iTrtDurationValue <= 0)
 		return ;
 
-	string sTrtDurationUnit = pCBDureeTtt->getSelCode() ;
+	string sTrtDurationUnit = _pCBDureeTtt->getSelCode() ;
 	if (string("") == sTrtDurationUnit)
 		return ;
 
 	NVLdVTemps tDateFin ;
 
   std::string sDateDeb ;
-	pDateDeb->getDate(&sDateDeb) ;
+	_pDateDeb->getDate(&sDateDeb) ;
 
 	// si on dans le cas où "dans" est cochée
-  if (pRDans->GetCheck() == BF_CHECKED)
+  if (_pRDans->GetCheck() == BF_CHECKED)
     tDateFin.takeTime() ;
 
   // si on est dans le cas où "durée" est cochée
-  else if (pRDuree->GetCheck() == BF_CHECKED)
+  else if (_pRDuree->GetCheck() == BF_CHECKED)
     tDateFin.initFromDate(sDateDeb) ;
 
   else
@@ -5519,42 +5523,56 @@ NSMedicamentDlg::ExecutedAfterTrtEndDate()
 	tDateFin.ajouteTemps(iTrtDurationValue, sTrtDurationUnit, pContexte) ;
 	string sDateFin = tDateFin.donneDateHeure() ;
 
-  pDateFin->setDate(sDateFin) ;
+  _pDateFin->setDate(sDateFin) ;
 
   std::string dateDebPresc ;
-  pDateDebPrescr->getDate(&dateDebPresc) ;
+  _pDateDebPrescr->getDate(&dateDebPresc) ;
 
   // si on dans le cas où "dans" est cochée, on remplit la durée de prescription
-  if ((pRDans->GetCheck() == BF_CHECKED) ||
-      ((pRDuree->GetCheck() == BF_CHECKED) && (dateDebPresc == sDateDeb)))
+  if ((_pRDans->GetCheck() == BF_CHECKED) ||
+      ((_pRDuree->GetCheck() == BF_CHECKED) && (dateDebPresc == sDateDeb)))
 	{
-		pDureePhase->setValue(iTrtDurationValue) ;
-    pCBDureePhase->setCode(sTrtDurationUnit) ;
+		_pDureePhase->setValue(iTrtDurationValue) ;
+    _pCBDureePhase->setCode(sTrtDurationUnit) ;
     ActualiseEndOfPrescription() ;
   }
 }
 
 void
+NSMedicamentDlg::ExecutedAfterRouteSelection()
+{
+}
+
+/**
+ * Set of operation to be executed after an event has been selected
+ */
+void
+NSMedicamentDlg::ExecutedAfterEventSelection()
+{
+}
+
+void
 NSMedicamentDlg::ActualisePhasePreview()
 {
-  if (NULL != _pCurrentPhase)
+  if (_pCurrentPhase)
 	{
-    int selectedPhase = phaseBox->GetSelIndex() ;
+    int selectedPhase = _phaseBox->GetSelIndex() ;
     if (-1 == selectedPhase)
     	selectedPhase = _pCurrentPhase->GetPhasePreviewIndex() ;
 
     std::string sDateDeb ;
-		pDateDebPrescr->getDate(&sDateDeb) ;
+		_pDateDebPrescr->getDate(&sDateDeb) ;
     std::string sDateFin ;
-		pDateFinPrescr->getDate(&sDateFin) ;
-    _pCurrentPhase->save(pDureePhase->getValue(), pCBDureePhase->getSelCode(),
-                         pRenouvellement->getValue(), sDateDeb, sDateFin) ;
+		_pDateFinPrescr->getDate(&sDateFin) ;
+    _pCurrentPhase->save(_pDureePhase->getValue(), _pCBDureePhase->getSelCode(),
+                         _pRenouvellement->getValue(), sDateDeb, sDateFin) ;
 
     std::string decode = _pCurrentPhase->Decode() ;
     if (selectedPhase >= 0)
-    	phaseBox->ChangeLabel(decode, selectedPhase) ;
-    phaseBox->PrintListAsNow() ;
+    	_phaseBox->ChangeLabel(decode, selectedPhase) ;
+    _phaseBox->PrintListAsNow() ;
 	}
+
 	ActualiseEndOfPrescription() ;
 }
 
@@ -5592,18 +5610,18 @@ NSMedicamentDlg::AcutaliseCyclePreview()
 bool
 NSMedicamentDlg::checkValidity()
 {
-	sPriseUnit = pUnitePrise->getCode() ; // Recupere le code du mode de prise
+	_sPriseUnit = _pUnitePrise->getCode() ; // Recupere le code du mode de prise
 
-  std::string temp = "" ;
-  if (string("") == sLexiqCode)
+  std::string temp = string("") ;
+  if (string("") == _sLexiqCode)
     temp = pContexte->getSuperviseur()->getText("drugWindow", "noMedicNameErr") ;
-  else if (string("£?????") == sLexiqCode)
+  else if (string("£?????") == _sLexiqCode)
 		temp = pContexte->getSuperviseur()->getText("drugDialogErrors", "freeTextNotAllowedForTreatment") ;
 
-	std::string temp2 = "" ;
-  if (string("") == sPriseUnit)
+	std::string temp2 = string("") ;
+  if (string("") == _sPriseUnit)
     temp2 = pContexte->getSuperviseur()->getText("drugWindow", "noPriseUnitErr") ;
-  else if (string("£?????") == sPriseUnit)
+  else if (string("£?????") == _sPriseUnit)
   	temp2 = pContexte->getSuperviseur()->getText("drugDialogErrors", "freeTextNotAllowedForPrescriptionUnit") ;
 
   if ((string("") != temp) || (string("") != temp2))
@@ -5650,9 +5668,9 @@ NSMedicamentDlg::LoadPhaseOnViewAndConfigure()
   for (size_t i = 0; i < _pPhases->size(); i++)
   {
     std::string PhaseN = (*_pPhases)[i]->Decode() ;
-    phaseBox->AddLabel((char*)PhaseN.c_str()) ;
+    _phaseBox->AddLabel((char*)PhaseN.c_str()) ;
   }
-  phaseBox->PrintListAsNow() ;
+  _phaseBox->PrintListAsNow() ;
   _pCurrentPhase = (*_pPhases)[0] ;
   _pPosoBlock->setCycles(_pCurrentPhase->getCycles()) ;
 	// _pCurrentPhase->Load() ;
@@ -5670,8 +5688,8 @@ void
 NSMedicamentDlg::initPosoAndCycleForDrug()
 {
 	string sStarterSens = string("") ;
-  pContexte->getDico()->donneCodeSens(&sLexiqCode, &sStarterSens) ;
-  if (sStarterSens == string(""))
+  pContexte->getDico()->donneCodeSens(&_sLexiqCode, &sStarterSens) ;
+  if (string("") == sStarterSens)
   	return ;
 
 	VectString VSIsAList ;
@@ -5715,12 +5733,12 @@ NSMedicamentDlg::InitComboModedePrise()
   std::string val4 = pContexte->getSuperviseur()->getText("drugDialog", "awayFromLunch") ;
   std::string val5("") ;
 
-  modedeprise->AddElement(val5, nulli) ;
-  modedeprise->AddElement(val1, ava) ;
-  modedeprise->AddElement(val2, pend) ;
-  modedeprise->AddElement(val3, aft) ;
-  modedeprise->PrintCombo() ;
-  modedeprise->SetSelIndex(0) ;
+  _modedeprise->AddElement(val5, nulli) ;
+  _modedeprise->AddElement(val1, ava) ;
+  _modedeprise->AddElement(val2, pend) ;
+  _modedeprise->AddElement(val3, aft) ;
+  _modedeprise->PrintCombo() ;
+  _modedeprise->SetSelIndex(0) ;
 }
 
 void
@@ -5739,93 +5757,166 @@ NSMedicamentDlg::saveCycle()
 void
 NSMedicamentDlg::CreateTree()
 {
+  _pPPT->vider() ;
+
+  // Insert root (drug name)
+	//
   int iColonne = 0 ;
-  std::string sMEdicName = medicname->getCode() ;
-  pPPT->vider() ;
-  pPPT->ajoutePatho(sMEdicName, iColonne++) ;
+  std::string sMEdicName = _pDrug->getCode() ;
 
-  // (*pPPT)[0]->setNodeRight("droit pipo");
+  if (string("") == sMEdicName)
+		return ;
 
-  //pPPT->ajoutePatho(sLexiqCode, iColonne++, 0) ; // nom du medicament a la racine
+  _pPPT->ajoutePatho(sMEdicName, iColonne++) ;
+
   int iMedicRoot  = iColonne ;
+
   // Create Header
-  pDateDeb->getDate(&sDateOuverture) ;
-  if (sDateOuverture == "")
-  {
-        // (initialisation par défaut)
+
+  // Insert dates
+  //
+  string sDate ;
+
+  _pDateDeb->getDate(&_sDateOuverture) ;
+  if ((string("") != _sDateOuverture) &&
+          (string("19000000000000") != _sDateOuverture) &&
+          (string("00000000000000") != _sDateOuverture))
+	{
+    _pPPT->ajoutePatho(string("KOUVR1"), iColonne++) ;
+    Message CodeMsg ;
+	  CodeMsg.SetUnit(string("2DA021")) ;
+	  CodeMsg.SetComplement(_sDateOuverture) ;
+	  _pPPT->ajoutePatho(string("£D0;19"), &CodeMsg, iColonne++) ;
   }
-  pPPT->ajoutePatho("KOUVR1", iColonne++) ;
-  Message CodeMsg ;
-	CodeMsg.SetUnit("2DA021") ;
-	CodeMsg.SetComplement(sDateOuverture) ;
-	pPPT->ajoutePatho("£D0;19", &CodeMsg, iColonne++) ;
 	iColonne = iMedicRoot ;
 
-	pDateFin->getDate(&sDateFermeture) ;
-	if (sDateFermeture != "")
+	_pDateFin->getDate(&_sDateFermeture) ;
+	if ((string("") != _sDateFermeture) &&
+          (string("19000000000000") != _sDateFermeture) &&
+          (string("00000000000000") != _sDateFermeture))
 	{
   	// insertion de la date d'ouverture au sein de la patpatho
-    pPPT->ajoutePatho("KFERM1", iColonne++) ;
+    _pPPT->ajoutePatho(string("KFERM1"), iColonne++) ;
     Message CodeMsg2 ;
-		CodeMsg2.SetUnit("2DA021") ;
-		CodeMsg2.SetComplement(sDateFermeture) ;
-		pPPT->ajoutePatho("£D0;19", &CodeMsg2, iColonne++) ;
-
-		iColonne = iMedicRoot ;
+		CodeMsg2.SetUnit(string("2DA021")) ;
+		CodeMsg2.SetComplement(_sDateFermeture) ;
+		_pPPT->ajoutePatho(string("£D0;19"), &CodeMsg2, iColonne++) ;
 	}
 	iColonne = iMedicRoot ;
 
-	std::string sEnCas = pEnCasDe->getCode() ;
-	if (sEnCas != "")
-	{
-  	pPPT->ajoutePatho("KEVEI1", iColonne++) ;
-    pPPT->ajoutePatho(sEnCas, iColonne++) ;
-  }
-  iColonne = iMedicRoot ;
-
-	std::string sCode = pUnitePrise->getCode() ;
-	if (sCode != "")
+  // Event to take in case of
+  //
+  std::string sEventCode = _pEvent->getCode() ;
+  if (string("") != sEventCode)
   {
-  	pPPT->ajoutePatho("0MEDF1", iColonne++) ;
-    pPPT->ajoutePatho(sCode, iColonne++) ;
+    _pPPT->ajoutePatho(string("KEVEI2"), iColonne++) ;
+    if (string("£?????") != sEventCode)
+      _pPPT->ajoutePatho(sEventCode, iColonne++) ;
+    else
+    {
+      Message CodeMsg ;
+		  CodeMsg.SetTexteLibre(_pEvent->getRawText()) ;
+		  _pPPT->ajoutePatho(sEventCode, &CodeMsg, iColonne++) ;
+    }
   }
   iColonne = iMedicRoot ;
 
-	if ((remboursable->getValue() == BF_CHECKED) ||
-      (substituable->getValue() == BF_CHECKED) ||
-      (_pALD->getValue() == BF_CHECKED))
-	{
-  	pPPT->ajoutePatho("LADMI1", iColonne) ;
-
-    if (substituable->getValue() == BF_CHECKED)
-    {
-    	Message Msg ;
-      Msg.SetCertitude("WCE001") ;
-      pPPT->ajoutePatho("LSUBS1", &Msg, iColonne +1) ;
-    }
-    iColonne = iMedicRoot ;
-
-    if (remboursable->getValue() == BF_CHECKED)
-    {
-    	Message Msg ;
-      Msg.SetCertitude("WCE001") ;
-      pPPT->ajoutePatho("LREMB1", &Msg, iColonne + 1) ;
-    }
-    iColonne = iMedicRoot ;
-
-    if (_pALD->getValue() == BF_CHECKED)
-      pPPT->ajoutePatho("LBARZ1", iColonne + 1) ;
-    iColonne = iMedicRoot ;
+  // Codes
+  //
+  if (string("") != _sATCCode)
+  {
+    Message CodeMsg ;
+		CodeMsg.SetComplement(_sATCCode) ;
+		_pPPT->ajoutePatho(string("6ATC01"), &CodeMsg, iColonne++) ;
   }
+  iColonne = iMedicRoot ;
+
+  if (string("") != _sCICode)
+  {
+    string sLexique = string("6CIS01") ;
+    size_t iLen = strlen(_sCICode.c_str()) ;
+    if      (7 == iLen)
+      sLexique = string("6CIP71") ;
+    else if (13 == iLen)
+      sLexique = string("6CIPT1") ;
+
+    Message CodeMsg ;
+		CodeMsg.SetComplement(_sCICode) ;
+		_pPPT->ajoutePatho(sLexique, &CodeMsg, iColonne++) ;
+  }
+  iColonne = iMedicRoot ;
+
+  // Take unit
+  //
+	std::string sCode = _pUnitePrise->getCode() ;
+	if (string("") != sCode)
+  {
+  	_pPPT->ajoutePatho(string("0MEDF1"), iColonne++) ;
+    _pPPT->ajoutePatho(sCode, iColonne++) ;
+  }
+  iColonne = iMedicRoot ;
+
+  // Route
+  //
+  std::string sRouteCode = _pRoute->getCode() ;
+  if (string("") != sRouteCode)
+  {
+    _pPPT->ajoutePatho(string("0VADM1"), iColonne++) ;
+    if (string("£?????") != sRouteCode)
+      _pPPT->ajoutePatho(sRouteCode, iColonne++) ;
+    else
+    {
+      Message CodeMsg ;
+		  CodeMsg.SetTexteLibre(_pRoute->getRawText()) ;
+		  _pPPT->ajoutePatho(sRouteCode, &CodeMsg, iColonne++) ;
+    }
+  }
+  iColonne = iMedicRoot ;
+
+	if ((_remboursable->getValue() == BF_CHECKED) ||
+      (_pNonSubstituable->GetCheck() == BF_CHECKED) ||
+      (_pALD->GetCheck() == BF_CHECKED))
+	{
+  	_pPPT->ajoutePatho(string("LADMI1"), iColonne) ;
+
+    if (_pNonSubstituable->GetCheck() == BF_CHECKED)
+    {
+    	Message Msg ;
+      Msg.SetCertitude(string("WCE001")) ;
+      _pPPT->ajoutePatho(string("LSUBS1"), &Msg, iColonne + 1) ;
+    }
+
+    if (_remboursable->getValue() == BF_CHECKED)
+    {
+    	Message Msg ;
+      Msg.SetCertitude(string("WCE001")) ;
+      _pPPT->ajoutePatho(string("LREMB1"), &Msg, iColonne + 1) ;
+    }
+
+    // Prescribed for an exonerated condition
+    //
+    if (_pALD->GetCheck() == BF_CHECKED)
+      _pPPT->ajoutePatho(string("LBARZ1"), iColonne + 1) ;
+  }
+  iColonne = iMedicRoot ;
+
+  // Narcotic or assimilated to
+  //
+  if (_pBdmDrugInformation && _pBdmDrugInformation->isNarcotic())
+  {
+    _pPPT->ajoutePatho(string("LTYPA1"), iColonne++) ;
+    _pPPT->ajoutePatho(string("ISTUA1"), iColonne++) ;
+  }
+  iColonne = iMedicRoot ;
 
 	// Inserer mode de prise     FIXME
 
 	for (size_t i = 0; i < _pPhases->size(); i++)
 	{
 		NSPatPathoArray* phase_temp = (*_pPhases)[i]->CreateTree() ;
-    if (NULL != phase_temp)
+    if (phase_temp)
     {
-    	pPPT->InserePatPatho(pPPT->end(), phase_temp, iColonne) ;
+    	_pPPT->InserePatPatho(_pPPT->end(), phase_temp, iColonne) ;
       delete phase_temp ;
     }
 	}
@@ -5834,8 +5925,10 @@ NSMedicamentDlg::CreateTree()
 	{
     Message CodeMsg ;
 		CodeMsg.SetTexteLibre(_sFreeText) ;
-		pPPT->ajoutePatho("£C;020", &CodeMsg, iMedicRoot) ;
+		_pPPT->ajoutePatho(string("£C;020"), &CodeMsg, iMedicRoot) ;
 	}
+
+
 }
 
 void
@@ -5849,33 +5942,32 @@ NSMedicamentDlg::YAddPhase()
   if (_pCurrentPhase != NULL) // il existe une phase courrante
   {
   	std::string sDateDeb ;
-		pDateDebPrescr->getDate(&sDateDeb) ;
+		_pDateDebPrescr->getDate(&sDateDeb) ;
     std::string sDateFin ;
-		pDateFinPrescr->getDate(&sDateFin) ;
+		_pDateFinPrescr->getDate(&sDateFin) ;
 
-    _pCurrentPhase->save(pDureePhase->getValue(), pCBDureePhase->getSelCode(),
-                         pRenouvellement->getValue(), sDateDeb, sDateFin) ;
+    _pCurrentPhase->save(_pDureePhase->getValue(), _pCBDureePhase->getSelCode(),
+                         _pRenouvellement->getValue(), sDateDeb, sDateFin) ;
   }
 
 	NSphaseMedic* pNewPhase = new NSphaseMedic(this) ;
-	std::string   phaseName2 = "" ;
-	phaseName2 = std::string("phase ") + phaseIndex ;
-	phaseBox->addItem(phaseName2.c_str(), pNewPhase) ;
+	std::string   phaseName2 = string("phase ") + _phaseIndex ;
+	_phaseBox->addItem(phaseName2.c_str(), pNewPhase) ;
 	_pCurrentPhase = pNewPhase ;
   _pPosoBlock->setCycles(_pCurrentPhase->getCycles()) ;
 	// _pCurrentPhase->Load() ;
   InitPosoControlsForPhase(_pCurrentPhase) ;
   InitControlsForPhase(_pCurrentPhase) ;
 
-	phaseIndex++ ;
+	_phaseIndex++ ;
 
   std::string sDateDeb ;
-  pDateDebPrescr->getDate(&sDateDeb) ;
+  _pDateDebPrescr->getDate(&sDateDeb) ;
   std::string sDateFin ;
-  pDateFinPrescr->getDate(&sDateFin) ;
-	_pCurrentPhase->save(pDureePhase->getValue(), pCBDureePhase->getSelCode(),
-                       pRenouvellement->getValue(), sDateDeb, sDateFin) ;
-	phaseBox->SetSelIndex(_pPhases->size()-1) ;
+  _pDateFinPrescr->getDate(&sDateFin) ;
+	_pCurrentPhase->save(_pDureePhase->getValue(), _pCBDureePhase->getSelCode(),
+                       _pRenouvellement->getValue(), sDateDeb, sDateFin) ;
+	_phaseBox->SetSelIndex(_pPhases->size()-1) ;
 	_pCurrentPhase->SetPhasePreview(_pPhases->size()-1) ;
 }
 
@@ -5883,12 +5975,13 @@ void
 NSMedicamentDlg::EvListBoxSelPhase()
 {
 	std::string sDateDeb ;
-  pDateDebPrescr->getDate(&sDateDeb) ;
+  _pDateDebPrescr->getDate(&sDateDeb) ;
   std::string sDateFin ;
-  pDateFinPrescr->getDate(&sDateFin) ;
-	_pCurrentPhase->save(pDureePhase->getValue(), pCBDureePhase->getSelCode(),
-                       pRenouvellement->getValue(), sDateDeb, sDateFin) ;
-	int index = phaseBox->GetSelIndex() ;      // Recuperer la phase d'avant
+  _pDateFinPrescr->getDate(&sDateFin) ;
+	_pCurrentPhase->save(_pDureePhase->getValue(), _pCBDureePhase->getSelCode(),
+                       _pRenouvellement->getValue(), sDateDeb, sDateFin) ;
+
+	int index = _phaseBox->GetSelIndex() ;      // Recuperer la phase d'avant
 	if (index >= 0)
 	{
   	_pCurrentPhase = (*_pPhases)[index] ;
@@ -5900,10 +5993,10 @@ NSMedicamentDlg::EvListBoxSelPhase()
 		InitControlsForPhase(_pCurrentPhase) ;
 	}
 
-  pDateDebPrescr->getDate(&sDateDeb) ;
-  pDateFinPrescr->getDate(&sDateFin) ;
-  _pCurrentPhase->save(pDureePhase->getValue(), pCBDureePhase->getSelCode(),
-                       pRenouvellement->getValue(), sDateDeb, sDateFin) ;
+  _pDateDebPrescr->getDate(&sDateDeb) ;
+  _pDateFinPrescr->getDate(&sDateFin) ;
+  _pCurrentPhase->save(_pDureePhase->getValue(), _pCBDureePhase->getSelCode(),
+                       _pRenouvellement->getValue(), sDateDeb, sDateFin) ;
 }
 
 /*
@@ -5913,13 +6006,13 @@ void
 NSMedicamentDlg::ActualiseEndOfPrescription()
 {
   std::string date ;
-  pDateDebPrescr->getDate(&date) ;
+  _pDateDebPrescr->getDate(&date) ;
   NVLdVTemps data ;
   data.initFromDate(date) ;
 
   if ((data.estVide()) || (data.estNoLimit()))
   {
-  	pDateFinPrescr->setDate(data.donneDateHeure()) ;
+  	_pDateFinPrescr->setDate(data.donneDateHeure()) ;
     return ;
   }
 
@@ -5943,7 +6036,7 @@ NSMedicamentDlg::ActualiseEndOfPrescription()
   }
   date = data.donneDateHeure() ;
   // pDateFin->setDate(date) ;
-  pDateFinPrescr->setDate(date) ;
+  _pDateFinPrescr->setDate(date) ;
 }
 
 void
@@ -5963,30 +6056,30 @@ NSMedicamentDlg::lanceExtended()
 void
 NSMedicamentDlg::RedrawForm(bool extend)
 {
-  if (_extendedForm == false)  // Passer en mode etendu
+  if (false == _extendedForm)  // Passer en mode etendu
   {
-  	if (extend == true)
+  	if (true == extend)
     {
     	EnableControl(IDC_GROUPPHASE, true) ;
 
     	for (int i = 0; i < 2; i++)    // On fait apparaitre les controles
       	EnableControl(ExtendPhases[i], true) ;
       _extendedForm = true ;
-      ModePhase->SetCaption(pContexte->getSuperviseur()->getText("drugDialog", "singlePhaseMode").c_str()) ;
+      _ModePhase->SetCaption(pContexte->getSuperviseur()->getText("drugDialog", "singlePhaseMode").c_str()) ;
     }
     else
     	EnableControl(IDC_GROUPPHASE, false) ;
   }
   else //passer en mode simple
   {
-    if (extend == true)
+    if (true == extend)
     {
     	if (_pPhases->size() <= 1)
       {
       	for (int i = 0; i < 2; i++)    // On fait apparaitre les controles
         	EnableControl(ExtendPhases[i], false) ;
         _extendedForm = false;
-        ModePhase->SetCaption(pContexte->getSuperviseur()->getText("drugDialog", "multiplePhasesMode").c_str()) ;
+        _ModePhase->SetCaption(pContexte->getSuperviseur()->getText("drugDialog", "multiplePhasesMode").c_str()) ;
 
         // To simplify interface, the Phase group is hidden in limited mode
 				//
@@ -6000,24 +6093,24 @@ NSMedicamentDlg::RedrawForm(bool extend)
     }
   }
 
-  MoveControl(idc_phase1,                    18, _topOfBottomControls + 8,   44, _topOfBottomControls + 20) ;
-  MoveControl(pDureePhase->GetEdit(),        48, _topOfBottomControls + 8,   92, _topOfBottomControls + 20) ;
-  MoveControl(pDureePhase->GetUpdown(),      92, _topOfBottomControls + 8,  103, _topOfBottomControls + 20) ;
-  MoveControl(pCBDureePhase,                105, _topOfBottomControls + 8,  155, _topOfBottomControls + 61) ;
-  MoveControl(idc_static2,                  159, _topOfBottomControls + 8,  208, _topOfBottomControls + 20) ;
-  MoveControl(pRenouvellement->GetEdit(),   208, _topOfBottomControls + 8,  248, _topOfBottomControls + 20) ;
-  MoveControl(pRenouvellement->GetUpdown(), 248, _topOfBottomControls + 8,  259, _topOfBottomControls + 20) ;
-  MoveControl(idc_static3,                  266, _topOfBottomControls + 8,  298, _topOfBottomControls + 20) ;
+  MoveControl(_idc_phase1,                    18, _topOfBottomControls + 8,   44, _topOfBottomControls + 20) ;
+  MoveControl(_pDureePhase->GetEdit(),        48, _topOfBottomControls + 8,   92, _topOfBottomControls + 20) ;
+  MoveControl(_pDureePhase->GetUpdown(),      92, _topOfBottomControls + 8,  103, _topOfBottomControls + 20) ;
+  MoveControl(_pCBDureePhase,                105, _topOfBottomControls + 8,  155, _topOfBottomControls + 61) ;
+  MoveControl(_idc_static2,                  159, _topOfBottomControls + 8,  208, _topOfBottomControls + 20) ;
+  MoveControl(_pRenouvellement->GetEdit(),   208, _topOfBottomControls + 8,  248, _topOfBottomControls + 20) ;
+  MoveControl(_pRenouvellement->GetUpdown(), 248, _topOfBottomControls + 8,  259, _topOfBottomControls + 20) ;
+  MoveControl(_idc_static3,                  266, _topOfBottomControls + 8,  298, _topOfBottomControls + 20) ;
 
-  MoveControl(pDateDebPrescrTxt,             18, _topOfBottomControls + 23,  44, _topOfBottomControls + 35) ;
-	MoveControl(pDateDebPrescr,                48, _topOfBottomControls + 23, 128, _topOfBottomControls + 35) ;
-	MoveControl(pDateFinPrescrTxt,            147, _topOfBottomControls + 23, 173, _topOfBottomControls + 35) ;
-	MoveControl(pDateFinPrescr,               174, _topOfBottomControls + 23, 254, _topOfBottomControls + 35) ;
+  MoveControl(_pDateDebPrescrTxt,             18, _topOfBottomControls + 23,  44, _topOfBottomControls + 35) ;
+	MoveControl(_pDateDebPrescr,                48, _topOfBottomControls + 23, 128, _topOfBottomControls + 35) ;
+	MoveControl(_pDateFinPrescrTxt,            147, _topOfBottomControls + 23, 173, _topOfBottomControls + 35) ;
+	MoveControl(_pDateFinPrescr,               174, _topOfBottomControls + 23, 254, _topOfBottomControls + 35) ;
 
-  MoveControl(ModePhase,                    320, _topOfBottomControls + 10, 407, _topOfBottomControls + 25) ;
-  MoveControl(AddPhase,                     327, _topOfBottomControls + 27, 407, _topOfBottomControls + 41) ;
+  MoveControl(_ModePhase,                    320, _topOfBottomControls + 10, 407, _topOfBottomControls + 25) ;
+  MoveControl(_AddPhase,                     327, _topOfBottomControls + 27, 407, _topOfBottomControls + 41) ;
 
-  MoveControl(phaseBox,                       8, _topOfBottomControls + 45, 408, _topOfBottomControls + 80) ;
+  MoveControl(_phaseBox,                       8, _topOfBottomControls + 45, 408, _topOfBottomControls + 80) ;
 
   NS_CLASSLIB::TRect dlgWin ;  // Win
   GetWindowRect(dlgWin) ;      // win
@@ -6040,15 +6133,18 @@ NSMedicamentDlg::RedrawForm(bool extend)
   NS_CLASSLIB::TRect recOk(256, 0, 0, 0) ;
   NS_CLASSLIB::TRect recCancel(308, 0, 0, 0) ;
   NS_CLASSLIB::TRect recHelp(360, 0, 0, 0) ;
-  NS_CLASSLIB::TRect &rec2Ok  = ok->GetWindowRect() ;
-  NS_CLASSLIB::TRect &rec2Cancel = ok->GetWindowRect() ;
-  NS_CLASSLIB::TRect &rec2Help = ok->GetWindowRect() ;
+
+  NS_CLASSLIB::TRect &rec2Ok     = _ok->GetWindowRect() ;
+  NS_CLASSLIB::TRect &rec2Cancel = _cancel->GetWindowRect() ;
+  NS_CLASSLIB::TRect &rec2Help   = _help->GetWindowRect() ;
+
   MapDialogRect(recOk) ;
   MapDialogRect(recCancel) ;
   MapDialogRect(recHelp) ;
-  ok->MoveWindow(recOk.left, dlgRect.Height() - less, rec2Ok.Width(), rec2Ok.Height(), true) ;
-  cancel->MoveWindow(recCancel.left, dlgRect.Height() - less, rec2Cancel.Width(), rec2Cancel.Height(), true) ;
-  help->MoveWindow(recHelp.left, dlgRect.Height() - less, rec2Help.Width(), rec2Help.Height(), true) ;
+
+  _ok->MoveWindow(recOk.left, dlgRect.Height() - less, rec2Ok.Width(), rec2Ok.Height(), true) ;
+  _cancel->MoveWindow(recCancel.left, dlgRect.Height() - less, rec2Cancel.Width(), rec2Cancel.Height(), true) ;
+  _help->MoveWindow(recHelp.left, dlgRect.Height() - less, rec2Help.Width(), rec2Help.Height(), true) ;
 }
 
 void
@@ -6063,28 +6159,13 @@ NSMedicamentDlg::CmOk()
   killControlFocusOnReturnClose() ;
 
 	std::string sDateDeb ;
-	pDateDebPrescr->getDate(&sDateDeb) ;
+	_pDateDebPrescr->getDate(&sDateDeb) ;
 	std::string sDateFin ;
-	pDateFinPrescr->getDate(&sDateFin) ;
-	_pCurrentPhase->save(pDureePhase->getValue(), pCBDureePhase->getSelCode(),
-                         pRenouvellement->getValue(), sDateDeb, sDateFin) ;
+	_pDateFinPrescr->getDate(&sDateFin) ;
+	_pCurrentPhase->save(_pDureePhase->getValue(), _pCBDureePhase->getSelCode(),
+                         _pRenouvellement->getValue(), sDateDeb, sDateFin) ;
 	CreateTree() ;
 	TDialog::CmOk() ;
-}
-
-void
-NSMedicamentDlg::editFreeText()
-{
-  string sFreeText = _sFreeText ;
-
-  NSFreeTextDlg* pFreeTextDlg = new NSFreeTextDlg(this, pContexte, &sFreeText) ;
-  int iExecReturn = pFreeTextDlg->Execute() ;
-  delete pFreeTextDlg ;
-
-  if (iExecReturn != IDOK)
-    return ;
-
-  _sFreeText = sFreeText ;
 }
 
 void
@@ -6093,191 +6174,29 @@ NSMedicamentDlg::UserName(WPARAM wParam)
   switch (wParam)
   {
     case (IDR_DRG_CHRONIQUE) :
-    	pDateFin->SetReadOnly(true) ;
-      pNbJours->SetReadOnly(true) ;
+    	_pDateFin->SetReadOnly(true) ;
+      _pNbJours->SetReadOnly(true) ;
       //pCBDureeTtt->SetReadOnly(true) ;
       break ;
     case (IDR_DRG_DANS) :
-    	pDateFin->SetReadOnly(true) ;
-      pNbJours->SetReadOnly(false) ;
+    	_pDateFin->SetReadOnly(true) ;
+      _pNbJours->SetReadOnly(false) ;
       //pCBDureeTtt->SetReadOnly(false) ;
-      pNbJours->SetFocus() ;
+      _pNbJours->SetFocus() ;
       break ;
     case (IDR_DRG_DUREE) :
-    	pDateFin->SetReadOnly(true) ;
-      pNbJours->SetReadOnly(false) ;
+    	_pDateFin->SetReadOnly(true) ;
+      _pNbJours->SetReadOnly(false) ;
       //pCBDureeTtt->SetReadOnly(false) ;
-      pNbJours->SetFocus() ;
+      _pNbJours->SetFocus() ;
       break ;
     case (IDR_DRG_LE) :
-    	pNbJours->SetReadOnly(true) ;
+    	_pNbJours->SetReadOnly(true) ;
       //pCBDureeTtt->SetReadOnly(true) ;
-      pDateFin->SetReadOnly(false) ;
-      pDateFin->SetFocus() ;
+      _pDateFin->SetReadOnly(false) ;
+      _pDateFin->SetFocus() ;
       break ;
   }
-}
-
-std::string
-initDispUnit(string sLang, string sCode, string sLib, NSContexte* pContexte)
-{
-	return initDispUnitFr(sCode, sLib, pContexte) ;
-}
-
-std::string
-initDispUnitFr(string sCode, string sLib, NSContexte* pContexte)
-{
-	if ((string("") == sCode) && (string("") == sLib))
-		return string("") ;
-
-	//
-  // Sachets
-  //
-  if (sLib.find("sach-dose") != NPOS)
-  	return string("7SACH1") ;
-
-	// Cuillérées
-	//
-	if ((sLib.find(" sol buv") != NPOS) || (sLib.find(" solution buvable")!= NPOS) )
-	{
-  	if ((sLib.find("gts")!= NPOS) || (sLib.find("gouttes")!= NPOS))
-    	return string("2GOUT1") ;
-    if ((sLib.find("sach")!= NPOS) || (sLib.find("sachet")!= NPOS))
-    	return string("7SACH1") ;
-    return string("2CUIC2") ;
-  }
-  if ((sLib.find(" susp buv") != NPOS) || (sLib.find(" suspension buvable")!= NPOS) )
-  {
-  	if ((sLib.find("sach")!= NPOS) || (sLib.find("sachet")!= NPOS))
-    	return string("7SACH1") ;
-  	return string("2CUIC2") ;
-  }
-  if (sLib.find("sirop") != NPOS)
-  	return string("2CUIC2") ;
-  //
-  // Applications
-  //
-  if ((sLib.find(" pom ") != NPOS) ||  (sLib.find("pommade")!= NPOS) )
-  	return string("GAPPL1") ;
-  if (sLib.find(" crème ") != NPOS)
-  	return string("GAPPL1") ;
-  if ((sLib.find("appl cutanée") != NPOS)  ||  (sLib.find(" application cutanée")!= NPOS) )
-  	return string("GAPPL1") ;
-  if ((sLib.find("appl locale") != NPOS)   ||  (sLib.find(" application locale")!= NPOS) )
-  	return string("GAPPL1") ;
-  if (sLib.find(" gel ") != NPOS)
-  	return string("GAPPL1") ;
-  //
-  // Comprimés vaginaux
-  //
-  if ((sLib.find(" cp vaginal") != NPOS) || (sLib.find(" comprimé vaginal") != NPOS))
-  	return string("7CQMO1") ;
-  //
-  // Comprimés
-  //
-  if ((sLib.find(" cp pelliculé") != NPOS) || (sLib.find(" comprimé pelliculé")!= NPOS) )
-  	return string("7CQMN1") ;
-  if ((sLib.find(" cp enrobé") != NPOS) || (sLib.find(" comprimé enrobé")!= NPOS) )
-  	return string("7CQMN1") ;
-  if ((sLib.find(" cp efferv") != NPOS)  || (sLib.find(" comprimé effervescent")!= NPOS) )
-  	return string("7CQEF1") ;
-  if ((sLib.find(" cp sublingual") != NPOS) || (sLib.find(" comprimé sublingual")!= NPOS) )
-  	return string("7CQSL1") ;
-  if ((sLib.find(" cp dispersible") != NPOS)  || (sLib.find(" comprimé dispersible")!= NPOS) )
-  	return string("7CQMN1") ;
-  if ((sLib.find(" cp à croquer") != NPOS) || (sLib.find(" comprimé à croquer")!= NPOS) )
-  	return string("7CQMN1") ;
-  if ((sLib.find(" cp osmotique") != NPOS)  || (sLib.find(" comprimé osmotique")!= NPOS) )
-  	return string("7CQMN1") ;
-  if ((sLib.find(" cp séc ") != NPOS)   || (sLib.find(" comprimé sécable")!= NPOS) )
-  	return string("7CQSE1") ;
-  if ((sLib.find(" cp :") != NPOS)   || (sLib.find(" comprimé") != NPOS)  || (sLib.find(" cp ") != NPOS) )
-  	return string("7CQMN1") ;
-
-  //
-  // Gellules
-  //
-  if ((sLib.find(" gél ") != NPOS)  || (sLib.find("gélule")!= NPOS) )
-  	return string("7GELU1") ;
-  //
-  // Capsules
-  //
-  if ((sLib.find(" caps ") != NPOS) || (sLib.find("capsule")!= NPOS) )
-  	return string("7CAPS1") ;
-
-  //
-  // Lyophilisat oral
-  //
-  if ((sLib.find(" lyoph oral ") != NPOS) || (sLib.find("lyophilisat oral")!= NPOS) )
-  	return string("ILYOC2") ;
-
-	//
-	// Pastille et tablette
-  //
-  if (sLib.find("pastille")!= NPOS)
-  	return string("IPAST2") ;
-  if (sLib.find("tablette")!= NPOS)
-  	return string("IPAST1") ;
-
-  //
-  // Ovules
-  //
-  if (sLib.find(" ovule") != NPOS)
-  	return string("7OVUL1") ;
-  //
-  // Perfusion
-  //
-  if ((sLib.find(" perf IV") != NPOS) ||  (sLib.find("perfusion") != NPOS))
-  	return string("GINFR1") ;
-  //
-  // Injection
-  //
-  if (sLib.find(" inj IV") != NPOS)
-  	return string("GINJE1") ;
-  if ((sLib.find(" sol inj") != NPOS) || (sLib.find("solution injectable")!= NPOS) )
-  	return string("GINJE1") ;
-  //
-  // Pulvérisations
-  //
-  if ((sLib.find(" pulv buccale") != NPOS) || (sLib.find("pulverisation buccale")!= NPOS) || (sLib.find("pulvérisation buccale")!= NPOS) || (sLib.find(" fl préssurisé ")!= NPOS) )
-  	return string("GPULV1") ;
-  //
-  // Inhalations
-  //
-  if (sLib.find(" inhalation ") != NPOS)
-  	return string("NINHA1") ;
-  //
-  // Bains de bouche
-  //
-  if (sLib.find("bain de bouche") != NPOS)
-  	return string("NBAIN1") ;
-  //
-  // Suppositoire
-  //
-  if ((sLib.find(" suppos ") != NPOS)  || (sLib.find("suppositoire") != NPOS ) )
-  	return string("7SUPP1") ;
-
-  //
-  // Gouttes
-  //
-  if ((sLib.find("compte-gtes") != NPOS) || (sLib.find("compte-gouttes") != NPOS))
-  	return string("2GOUT1") ;
-  if (sLib.find("collyre") != NPOS)
-  	return string("2GOUT1") ;
-
-  //
-  // Ampoule
-  //
-	if ((sLib.find(" amp ") != NPOS) || (sLib.find(" ampoule ") != NPOS) )
-		return string("7AMPO1") ;
-
-  //
-  // Patch
-  //
-	if ((sLib.find(" patch ") != NPOS) || (sLib.find(" dispositif transdermique") != NPOS) )
-		return string("IPATC1") ;
-
-	return pContexte->getSuperviseur()->getText("drugDialog", "missingInformation") ;
 }
 
 //
@@ -6300,27 +6219,24 @@ NSRenewMedicDlg::NSRenewMedicDlg(TWindow *parent, NSContexte *pCtx, NSPatPathoAr
 {
 try
 {
-  sLexique            = "" ;
-  sDateRenouvelement  = "" ;
+  _sLexique            = string("") ;
+  _sDateRenouvelement  = string("") ;
 
   // codes lexiques correspondant aux combobox
-  VecteurString *pLexiqCodesCB = new VecteurString() ;
-  pLexiqCodesCB->AddString(string("2HEUR1")) ;  // heure
-  pLexiqCodesCB->AddString(string("2DAT01")) ;  // jour
-  pLexiqCodesCB->AddString(string("2DAT11")) ;  // semaine
-  pLexiqCodesCB->AddString(string("2DAT21")) ;  // mois
+  VecteurString aLexiqCodesCB ;
+  aLexiqCodesCB.AddString(string("2HEUR1")) ;  // heure
+  aLexiqCodesCB.AddString(string("2DAT01")) ;  // jour
+  aLexiqCodesCB.AddString(string("2DAT11")) ;  // semaine
+  aLexiqCodesCB.AddString(string("2DAT21")) ;  // mois
 
-  iDureeCycle       = 0 ;
-  sUnitDureeCycle   = "" ;
-  iNbRenouvelement  = 0 ;
+  _iDureeCycle       = 0 ;
+  _sUnitDureeCycle   = string("") ;
+  _iNbRenouvelement  = 0 ;
 
   //les contrles de la phase
-  pDureeCycle     = new NSUpDownEdit  (this, pContexte, "", IDC_EDIT_PDT, IDC_UPDOWN_PDT) ;
-  pCBDureeCycle   = new NSComboBox    (this, IDC_COMBOBOX_PDT, pContexte, pLexiqCodesCB) ;
-  pRenouvelement  = new NSUpDownEdit  (this, pContexte,"", IDC_EDIT_RNV, IDC_UPDOWN_RNV) ;
-
-  pLexiqCodesCB->vider() ;
-  delete pLexiqCodesCB ;
+  _pDureeCycle     = new NSUpDownEdit  (this, pContexte, "", IDC_EDIT_PDT, IDC_UPDOWN_PDT) ;
+  _pCBDureeCycle   = new NSComboBox    (this, IDC_COMBOBOX_PDT, pContexte, &aLexiqCodesCB) ;
+  _pRenouvelement  = new NSUpDownEdit  (this, pContexte,"", IDC_EDIT_RNV, IDC_UPDOWN_RNV) ;
 
 /*
   pDateDebPrescrTxt = new OWL::TStatic(this, DATE_DEB_DRG_TEXT) ;
@@ -6330,11 +6246,11 @@ try
 */
 
   // rustine bug NSUtilDialog
-  pOK     = new TButton(this, IDOK) ;
-  pCancel = new TButton(this, IDCANCEL) ;
-  pHelp   = new TButton(this, IDHELP) ;
+  _pOK     = new TButton(this, IDOK) ;
+  _pCancel = new TButton(this, IDCANCEL) ;
+  _pHelp   = new TButton(this, IDHELP) ;
 
-  pPPT = pPPTinit ;
+  _pPPT = pPPTinit ;
 }
 catch (...)
 {
@@ -6348,34 +6264,34 @@ catch (...)
 NSRenewMedicDlg::~NSRenewMedicDlg()
 {
   //phase
-  delete pRenouvelement ;
-  delete pCBDureeCycle ;
-  delete pDureeCycle ;
+  delete _pRenouvelement ;
+  delete _pCBDureeCycle ;
+  delete _pDureeCycle ;
 
-  delete pOK ;
-  delete pCancel;
-  delete pHelp;
+  delete _pOK ;
+  delete _pCancel ;
+  delete _pHelp ;
 }
 
 void
 NSRenewMedicDlg::SetupWindow()
 {
-    NSUtilDialog::SetupWindow();
+  NSUtilDialog::SetupWindow() ;
 }
 
 bool
 NSRenewMedicDlg::chercheNoeud(string sName)
 {
-    if ((!pPPT) || (pPPT->empty()))
-        return false ;
+  if (((NSPatPathoArray*) NULL == _pPPT) || _pPPT->empty())
+    return false ;
 
-    PatPathoIter pptIter = pPPT->begin();
-    while ((pptIter != pPPT->end())&& ((*pptIter)->getLexique() != sName))
-        pptIter++ ;
+  PatPathoIter pptIter = _pPPT->begin() ;
+  while ((_pPPT->end() != pptIter)&& ((*pptIter)->getLexique() != sName))
+    pptIter++ ;
 
-    if (pptIter == pPPT->end())
-        return false ;
-    return true ;
+  if (_pPPT->end() == pptIter)
+    return false ;
+  return true ;
 }
 
 void
@@ -6391,45 +6307,45 @@ NSRenewMedicDlg::CmOk()
 	// récupération de la date du jour au format AAAAMMJJHHMMSS
 	NVLdVTemps sez ;
 	sez.takeTime() ;
-	sDateRenouvelement = sez.donneDateHeure() ;
+	_sDateRenouvelement = sez.donneDateHeure() ;
 
 	// sauvegarde des données concernant la phase
-	if (pDureeCycle->getValue()     != iDureeCycle)
-		iDureeCycle      = pDureeCycle->getValue() ;
-	if (pCBDureeCycle->getSelCode() != sUnitDureeCycle)
-  	sUnitDureeCycle  = pCBDureeCycle->getSelCode() ;
-	if (pRenouvelement->getValue()  != iNbRenouvelement)
-  	iNbRenouvelement = pRenouvelement->getValue() ;
+	if (_pDureeCycle->getValue()     != _iDureeCycle)
+		_iDureeCycle      = _pDureeCycle->getValue() ;
+	if (_pCBDureeCycle->getSelCode() != _sUnitDureeCycle)
+  	_sUnitDureeCycle  = _pCBDureeCycle->getSelCode() ;
+	if (_pRenouvelement->getValue()  != _iNbRenouvelement)
+  	_iNbRenouvelement = _pRenouvelement->getValue() ;
 
-	if (iDureeCycle == 0)
+	if (0 == _iDureeCycle)
 	{
   	string sErrorMsg = pContexte->getSuperviseur()->getText("drugDialogErrors", "renewDurationNotSpecified") ;
     erreur(sErrorMsg.c_str(), warningError, 0) ;
     return ;
 	}
 
-	if (sUnitDureeCycle == "")
+	if (string("") == _sUnitDureeCycle)
 	{
   	string sErrorMsg = pContexte->getSuperviseur()->getText("drugDialogErrors", "renewDurationUnitNotSpecified") ;
     erreur(sErrorMsg.c_str(), warningError, 0) ;
     return ;
 	}
 
-	pPPT->ajoutePatho("GRENT1", 0) ;
+	_pPPT->ajoutePatho(string("GRENT1"), 0) ;
 
-	pPPT->ajoutePatho("KOUVR1", 1) ;
+	_pPPT->ajoutePatho(string("KOUVR1"), 1) ;
 	Message Msg ;
-  Msg.SetUnit("2DA021") ;
-  Msg.SetComplement(sDateRenouvelement.c_str()) ;
-  pPPT->ajoutePatho("£D0;19", &Msg, 2) ;
+  Msg.SetUnit(string("2DA021")) ;
+  Msg.SetComplement(_sDateRenouvelement.c_str()) ;
+  _pPPT->ajoutePatho(string("£D0;19"), &Msg, 2) ;
 
-	pPPT->ajoutePatho("VDURE2", 1) ;              // code pour pendant
- 	createNodeComplement(pPPT, "£N0;03", sUnitDureeCycle, iDureeCycle, 2) ;        //FIXME
+	_pPPT->ajoutePatho(string("VDURE2"), 1) ;              // code pour pendant
+ 	createNodeComplement(_pPPT, string("£N0;03"), _sUnitDureeCycle, _iDureeCycle, 2) ;        //FIXME
 
-	if (iNbRenouvelement != 0)
+	if (0 != _iNbRenouvelement)
 	{
-  	pPPT->ajoutePatho("VRENO1", 1) ;            // code pour à renouveler
-    createNodeComplement(pPPT, "£N0;03", "200001", iNbRenouvelement, 2) ;
+  	_pPPT->ajoutePatho(string("VRENO1"), 1) ;            // code pour à renouveler
+    createNodeComplement(_pPPT, string("£N0;03"), string("200001"), _iNbRenouvelement, 2) ;
 	}
 
 	NSUtilDialog::CmOk() ;
@@ -6462,25 +6378,25 @@ END_RESPONSE_TABLE ;
 NSMedicModifPosoDlg::NSMedicModifPosoDlg(TWindow *parent, NSContexte *pCtx, NSPatPathoArray *pPPPhaseToModify, NSPatPathoArray *pPPTmedic)
                     :NSPosoIncludeDlg(parent, pCtx, pPPTmedic, "POSO_MEDICAMENTDLG", pNSDLLModule)
 {
-	pPPT       = pPPPhaseToModify ;
-	pPPTGlobal = pPPTmedic ;
+	_pPPT       = pPPPhaseToModify ;
+	_pPPTGlobal = pPPTmedic ;
 
 	_pPosoBlock = new NSPosologieBlock(pCtx, 0) ;
   _pPosoBlock->setDialog(this) ;
   _pPosoBlock->createControls() ;
   _pPosoBlock->setCycleGroupPositions(121, 200, 96, 130) ;
 
-	medicname   = new NSUtilLexique(pContexte, this, IDC_MEDOCCHOICE, pContexte->getDico()) ;     // Nom du medicament
-	pUnitePrise = new NSUtilLexique(pContexte, this, IDC_COMPRIM, pContexte->getDico()) ;  // unité de la prise
+	_medicname   = new NSUtilLexique(pContexte, this, DRUG_EDIT, pContexte->getDico()) ;     // Nom du medicament
+	_pUnitePrise = new NSUtilLexique(pContexte, this, DRG_UNIT, pContexte->getDico()) ;  // unité de la prise
 
   // _extendedForm   = false ;
   _pPosoBlock->setExtendedCycle(true) ;
   _topOfBottomControls = 188 ;
 
   //groupe de bouton de controle
-  pOK     = new TButton(this, IDOK) ;
-  pCancel = new TButton(this, IDCANCEL) ;
-  pHelp   = new TButton(this, IDHELP) ;
+  _pOK     = new TButton(this, IDOK) ;
+  _pCancel = new TButton(this, IDCANCEL) ;
+  _pHelp   = new TButton(this, IDHELP) ;
 
 	_pPhases = new NSphaseMedicArray() ;
 
@@ -6501,13 +6417,13 @@ NSMedicModifPosoDlg::NSMedicModifPosoDlg(TWindow *parent, NSContexte *pCtx, NSPa
 
 NSMedicModifPosoDlg::~NSMedicModifPosoDlg()
 {
-	delete medicname ;
-  delete pUnitePrise ;
+	delete _medicname ;
+  delete _pUnitePrise ;
   delete _pPhases ;
 
-	delete pOK ;
-	delete pCancel ;
-	delete pHelp ;
+	delete _pOK ;
+	delete _pCancel ;
+	delete _pHelp ;
 }
 
 void
@@ -6515,24 +6431,25 @@ NSMedicModifPosoDlg::SetupWindow()
 {
 	NSPosoIncludeDlg::SetupWindow() ;
 
-  std::string Forme  = "" ;
-  std::string sLabel = "" ;
+  std::string sForme = string("") ;
+  std::string sLabel = string("") ;
 
-  if (sLexiqCode != "")
+  if (string("") != _sLexiqCode)
   {
   	string sLang = pContexte->getUserLanguage() ;
-		pContexte->getDico()->donneLibelle(sLang, &sLexiqCode, &sLabel) ;
-    medicname->setLabel(sLexiqCode.c_str(), sLabel.c_str()) ;
-    Forme = initDispUnit(sLang, sLexiqCode, sLabel, pContexte) ;
+		pContexte->getDico()->donneLibelle(sLang, &_sLexiqCode, &sLabel) ;
+    _medicname->setLabel(_sLexiqCode.c_str(), sLabel.c_str()) ;
+    sForme = initDispUnit(sLang, _sLexiqCode, sLabel, pContexte) ;
   }
   else
-    medicname->SetText("") ;
-  if (sPriseUnit != "")
-    pUnitePrise->setLabel(sPriseUnit) ;
+    _medicname->SetText("") ;
+
+  if (string("") != _sPriseUnit)
+    _pUnitePrise->setLabel(_sPriseUnit) ;
   else
   {
   	string sMsgTxt = pContexte->getSuperviseur()->getText("drugDialog", "missingInformation") ;
-    pUnitePrise->SetText(sMsgTxt.c_str()) ;
+    _pUnitePrise->SetText(sMsgTxt.c_str()) ;
   }
   //tabPoso->SetSel(1);
   EnableControl(IDC_LISTPHASE, false) ;
@@ -6584,16 +6501,16 @@ NSMedicModifPosoDlg::CmHelp()
 bool
 NSMedicModifPosoDlg::parsePhase()
 {
-	if ((NULL == pPPT) || (true == pPPT->empty()))
+	if ((NULL == _pPPT) || (true == _pPPT->empty()))
 		return false ;
 
-	PatPathoIter pptIter = pPPT->begin() ;
+	PatPathoIter pptIter = _pPPT->begin() ;
 	std::string temp = (*pptIter)->getLexiqueSens() ;
 
 	if ("KPHAT" != temp) // Phase
 		return false ;
 
-	PatPathoIter pptEnd = pPPT->end() ;
+	PatPathoIter pptEnd = _pPPT->end() ;
 	NSphaseMedic* pPhaseMedic = new NSphaseMedic(this, false) ;
 	if (false == pPhaseMedic->Load(pptIter, pptEnd, _pPosoBlock))
 		return false ;
@@ -6606,12 +6523,12 @@ NSMedicModifPosoDlg::parsePhase()
 bool
 NSMedicModifPosoDlg::ParseMedicament()
 {
-	if ((NULL == pPPTGlobal) || (true == pPPTGlobal->empty()))
+	if (((NSPatPathoArray*) NULL == _pPPTGlobal) || (true == _pPPTGlobal->empty()))
 		return false ;
 
-  PatPathoIter pptIter = pPPTGlobal->begin() ;
-  PatPathoIter pptEnd  = pPPTGlobal->end() ;
-	sLexiqCode = (*pptIter)->getLexique() ; // Recuperation du nom  du medicament
+  PatPathoIter pptIter = _pPPTGlobal->begin() ;
+  PatPathoIter pptEnd  = _pPPTGlobal->end() ;
+	_sLexiqCode = (*pptIter)->getLexique() ; // Recuperation du nom  du medicament
 
   Avance(pptIter, pptEnd) ;
 
@@ -6622,11 +6539,11 @@ NSMedicModifPosoDlg::ParseMedicament()
 
   while (pptIter != pptEnd)
   {
-    std::string temp = (*pptIter)->getLexiqueSens() ;
-    if (TestIfPathoOkForDialog(temp) == false)
+    string sTemp = (*pptIter)->getLexiqueSens() ;
+    if (TestIfPathoOkForDialog(sTemp) == false)
     	return false ;
 
-    if ("0MEDF" == temp)
+    if (string("0MEDF") == sTemp)
 		{
 			if (LoadUniteDePrise(pptIter, pptEnd) == false)
       	return false ;
@@ -6638,7 +6555,7 @@ NSMedicModifPosoDlg::ParseMedicament()
       	Avance(pptIter, pptEnd) ;
     }
   }
-  return true;
+  return true ;
 }
 
 bool
@@ -6649,7 +6566,7 @@ NSMedicModifPosoDlg::LoadUniteDePrise(PatPathoIter& pptIter, PatPathoIter& pptEn
 
 	Avance(pptIter, pptEnd) ;
 	if (pptIter != pptEnd)
-		sPriseUnit = (*pptIter)->getLexique() ;
+		_sPriseUnit = (*pptIter)->getLexique() ;
 
 	Avance(pptIter, pptEnd) ;
   return true ;
@@ -6658,12 +6575,12 @@ NSMedicModifPosoDlg::LoadUniteDePrise(PatPathoIter& pptIter, PatPathoIter& pptEn
 void
 NSMedicModifPosoDlg::createTree()
 {
-  pPPT->vider() ;
+  _pPPT->vider() ;
 
 	NSPatPathoArray* pPhase_temp = _pCurrentPhase->CreateTree() ;
-	if ((NULL != pPhase_temp) && (false == pPhase_temp->empty()))
+	if (pPhase_temp && (false == pPhase_temp->empty()))
 	{
-		*pPPT = *pPhase_temp ;
+		*_pPPT = *pPhase_temp ;
     delete pPhase_temp ;
 	}
 }

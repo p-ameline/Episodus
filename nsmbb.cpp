@@ -4,6 +4,7 @@
 #include <vcl.h>
 #pragma hdrstop
 
+#include <shellapi.h>
 #include <owl\applicat.h>
 #include <owl\window.h>
 
@@ -49,24 +50,7 @@ USEUNIT("nsbb\NSutiDlg.cpp");
 USEUNIT("nsbb\Ns_skins.cpp");
 USEUNIT("nsbb\NSTip.cpp");
 USEUNIT("nsbb\ns_cisp.cpp");
-USEFORM("nsbb\webTips.cpp", WebTip);
-USELIB("nsmutil.lib");
-USELIB("nsm_sgbd.lib");
-USELIB("nsmsavoir.lib");
-USELIB("nsmdn.lib");
-USELIB("nsmdecode.lib");
-USELIB("nsmepisod.lib");
-USELIB("nsmoutil.lib");
-USELIB("memmgr.lib");
-USERC("nsbb\nsbb.rc");
-USERC("nsbb\Nspathor.rc");
-USERC("nsbb\nsdivdlg.rc");
-USERC("nsbb\nsdrugdlg.rc");
-USERC("nsbb\nsmPids.rc");
-USERC("codeur\cod_bmp.rc");
-USELIB("cp32mti.lib");
-USELIB("bidsvi.lib");
-USELIB("owlwvi.lib");
+USEUNIT("docking\stripeDock.cpp");
 USEUNIT("nsbb\nsarc.cpp");
 USEUNIT("nsbb\nsattval.cpp");
 USEUNIT("nsbb\nsarcParseError.cpp");
@@ -74,7 +58,6 @@ USEUNIT("parseur\attribut.cpp");
 USEUNIT("parseur\valeur.cpp");
 USEUNIT("parseur\balise.cpp");
 USEUNIT("parseur\pre_parseur.cpp");
-USERC("nsbb\nsbb_admin.rc");
 USEUNIT("nsbb\nsattvalex.cpp");
 USEUNIT("nsbb\nsattvaltools.cpp");
 USEUNIT("nsbb\nstabwindow.cpp");
@@ -83,27 +66,21 @@ USEUNIT("nsbb\nsbbdivfct.cpp");
 USEUNIT("nsbb\nsmanager.cpp");
 USEUNIT("nsbb\NsRcDlg.cpp");
 USEUNIT("nsbb\nsmpidsobj.cpp");
-USEUNIT("nsbb\nsmedicdlg.cpp");
 USEUNIT("nsbb\nscombo.cpp");
 USEUNIT("nsbb\NslistWind.cpp");
 USEUNIT("nsbb\nsPaneSplitter.cpp");
-USEUNIT("nsbb\nsmediccycle.cpp");
 USEUNIT("nsbb\nsmpids.cpp");
+USEUNIT("nsbb\nsmedicdlgbase.cpp");
+USEUNIT("nsbb\nsmedicdlg.cpp");
+USEUNIT("nsbb\nsmediccycle.cpp");
 USEUNIT("nsbb\nsmedicphase.cpp");
 USEUNIT("nsbb\nsmediccontrols.cpp");
-USERC("nsbb\medicament.rc");
 USEUNIT("nsbb\NSLabel.cpp");
 USEUNIT("nsbb\nscomboutil.cpp");
 USEUNIT("nsbb\NTListBox.cpp");
 USEUNIT("nsbb\logpass.cpp");
-USERC("nsbb\NSHealthTeam.rc");
-USERC("nsbb\ns_cisp.rc");
 USEUNIT("nsbb\NSHTTeamDialog.cpp");
 USEUNIT("nsbb\NSHTMemberControls.cpp");
-USERC("nsbb\logpass.rc");
-USELIB("nsm_ob1.lib");
-USELIB("ns_capture.lib");
-USERES("nsmbb.res");
 USEUNIT("nsbb\NSTipBrowser.cpp");
 USEUNIT("nsbb\docViewMgr.cpp");
 USEUNIT("nsbb\nsarcCtrls.cpp");
@@ -114,6 +91,35 @@ USEUNIT("nsbb\NsTooltip.cpp");
 USEUNIT("nsbb\nsMdiChild.cpp");
 USEUNIT("nsbb\nsWhoIsThere.cpp");
 USEUNIT("nsbb\NsRichEdit.cpp");
+USEUNIT("docking\Dockinge.cpp");
+USERC("nsbb\nsbb_admin.rc");
+USERC("nsbb\NSHealthTeam.rc");
+USERC("nsbb\ns_cisp.rc");
+USERC("nsbb\logpass.rc");
+USERC("nsbb\medicament.rc");
+USERC("nsbb\nsbb.rc");
+USERC("nsbb\Nspathor.rc");
+USERC("nsbb\nsdivdlg.rc");
+USERC("nsbb\nsdrugdlg.rc");
+USERC("nsbb\nsmPids.rc");
+USERC("codeur\cod_bmp.rc");
+USEFORM("nsbb\webTips.cpp", WebTip);
+USELIB("nsmutil.lib");
+USELIB("nsm_sgbd.lib");
+USELIB("nsmsavoir.lib");
+USELIB("nsmdn.lib");
+USELIB("nsmldv.lib");
+USELIB("nsmdecode.lib");
+USELIB("nsmepisod.lib");
+USELIB("nsmoutil.lib");
+USELIB("memmgr.lib");
+USELIB("nsm_ob1.lib");
+USELIB("ns_capture.lib");
+USELIB("cp32mti.lib");
+USELIB("bidsvi.lib");
+USELIB("owlwvi.lib");
+USERES("nsmbb.res");
+
 //---------------------------------------------------------------------------
 int NSTreeWindow::TreeEditId = 500 ;
 

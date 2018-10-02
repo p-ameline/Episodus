@@ -45,13 +45,11 @@ decLesion::initPhrase()
 void
 decLesion::debutPhrase()
 {
-	return ;
 }
 
 void
 decLesion::finPhrase()
 {
-	return ;
 }
 
 void
@@ -89,7 +87,6 @@ decLesion::BioLibLoc(int colonne)
     	Recupere() ;
 */
 	}
-  return ;
 }
 
 //
@@ -142,5 +139,5 @@ decSousLesion::BioLibLoc(int colonne)
     else
     	Recupere() ;
 	}
-  return ;
 }
+

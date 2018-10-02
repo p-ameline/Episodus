@@ -3,6 +3,7 @@
 #include <owl\dc.h>
 #include <owl\edit.h>
 
+#include "nssavoir\nspathor.h"
 #include "nsbb\nsbbtran.h"
 #include "nsbb\nsbb.h"
 #include "nsbb\nsbbitem.h"
