@@ -2265,14 +2265,14 @@ NSEpisodus::loadParams()
 			sServiceUrl = sValAttrib ;
     else if ((sNomAttrib == "SERVICE_TITLE") && (string("") != sValAttrib))
 			sServiceTitle = sValAttrib ;
-    else if ((sNomAttrib == "AUTOSEARCH_DELAY") && (string("") != sValAttrib))
+    else if ((string("AUTOSEARCH_DELAY") == sNomAttrib) && (string("") != sValAttrib))
     {
       size_t i = 0 ;
       for ( ; (i < iValSize) && (isdigit(sValAttrib[i])) ; i++) ;
       if (i == iValSize)
 			  _iAutoSearchDelay = StringToInt(sValAttrib) ;
     }
-    else if ((sNomAttrib == "AUTOSEARCH_MINCHAR") && (string("") != sValAttrib))
+    else if ((string("AUTOSEARCH_MINCHAR") == sNomAttrib) && (string("") != sValAttrib))
     {
       size_t i = 0 ;
       for ( ; (i < iValSize) && (isdigit(sValAttrib[i])) ; i++) ;
@@ -2571,6 +2571,11 @@ try
     outFile << (string("SORT_DRUGS         ") + string("name") + string("\n")) ;
   else if (pContexte->getDrugSort() == NSContexte::dsPrice)
     outFile << (string("SORT_DRUGS         ") + string("price") + string("\n")) ;
+
+  if (_iAutoSearchDelay > 1000)
+    outFile << (string("AUTOSEARCH_DELAY   ") + IntToString(_iAutoSearchDelay) + string("\n")) ;
+  if (_iAutoSearchMinChar > 1)
+    outFile << (string("AUTOSEARCH_MINCHAR ") + IntToString(_iAutoSearchMinChar) + string("\n")) ;
 
   outFile.close() ;
 

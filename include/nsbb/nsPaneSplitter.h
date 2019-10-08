@@ -97,6 +97,7 @@ class _NSBBCLASSE NSPaneSplitter : public TPaneSplitter, public NSRoot
     void           CmChange()   { if (_pCurrentFocusedView) _pCurrentFocusedView->CmChange() ; }
     void           CmContinue() { if (_pCurrentFocusedView) _pCurrentFocusedView->CmContinue() ; }
     void           CmPrevious() { if (_pCurrentFocusedView) _pCurrentFocusedView->CmPrevious() ; }
+    void           CmAll()      { if (_pCurrentFocusedView) _pCurrentFocusedView->CmAll() ;  }
     void           CmFct1()     { if (_pCurrentFocusedView) _pCurrentFocusedView->CmFct1() ; }
     void           CmFct2()     { if (_pCurrentFocusedView) _pCurrentFocusedView->CmFct2() ; }
     void           CmFct3()     { if (_pCurrentFocusedView) _pCurrentFocusedView->CmFct3() ; }
@@ -154,6 +155,7 @@ class _NSBBCLASSE NSGadgetWindow : public TGadgetWindow, public NSRoot
     void           CmSuppress() { if (_pPaneSplitter) _pPaneSplitter->CmSuppress() ; }
     void           CmChange()   { if (_pPaneSplitter) _pPaneSplitter->CmChange() ; }
     void           CmContinue() { if (_pPaneSplitter) _pPaneSplitter->CmContinue() ; }
+    void           CmAll()      { if (_pPaneSplitter) _pPaneSplitter->CmAll() ;  }
     void           CmFct1()     { if (_pPaneSplitter) _pPaneSplitter->CmFct1() ; }
     void           CmFct2()     { if (_pPaneSplitter) _pPaneSplitter->CmFct2() ; }
     void           CmFct3()     { if (_pPaneSplitter) _pPaneSplitter->CmFct3() ; }
@@ -174,6 +176,7 @@ class _NSBBCLASSE NSGadgetWindow : public TGadgetWindow, public NSRoot
     void           CeHasChildSuppress(TCommandEnabler& commandHandler) ;
     void           CeHasChildChange(TCommandEnabler& commandHandler) ;
     void           CeHasChildContinue(TCommandEnabler& commandHandler) ;
+    void           CeHasChildAll(TCommandEnabler& commandHandler) ;
     void           CeHasChildFct1(TCommandEnabler& commandHandler) ;
     void           CeHasChildFct2(TCommandEnabler& commandHandler) ;
     void           CeHasChildFct3(TCommandEnabler& commandHandler) ;
@@ -200,6 +203,7 @@ class _NSBBCLASSE NSGadgetWindow : public TGadgetWindow, public NSRoot
     string         _sTextForCmSuppress ;
     string         _sTextForCmChange ;
     string         _sTextForCmContinue ;
+    string         _sTextForCmAll ;
     string         _sTextForCmFct1 ;
     string         _sTextForCmFct2 ;
     string         _sTextForCmFct3 ;

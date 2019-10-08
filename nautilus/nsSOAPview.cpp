@@ -1235,7 +1235,7 @@ NSSOAPView::GetWindow()
 void
 NSSOAPView::setViewName()
 {
-	sViewName = pContexte->getSuperviseur()->getText("SOAPManagement", "SOAPViewTitle") ;
+	_sViewName = pContexte->getSuperviseur()->getText("SOAPManagement", "SOAPViewTitle") ;
 
   addConcernTitle() ;
 }
@@ -1843,7 +1843,7 @@ NSSOAPView::EvSetFocus(HWND hWndLostFocus)
 		pMyApp->SetToolBarWindow(GetWindow());
 	}
 
-	_pPaneSplitter->SetFrameTitle(getFunction(), sViewName) ;	pContexte->setAideIndex("");	pContexte->setAideCorps("epi_soaping.htm");
+	_pPaneSplitter->SetFrameTitle(getFunction(), _sViewName) ;	pContexte->setAideIndex("");	pContexte->setAideCorps("epi_soaping.htm");
 }
 
 voidNSSOAPView::SetupToolBar()
@@ -1985,7 +1985,7 @@ NSSOAPTankView::~NSSOAPTankView(){
 void
 NSSOAPTankView::setViewName()
 {
-	sViewName = pContexte->getSuperviseur()->getText("SOAPManagement", "SOAPTankViewTitle") ;
+	_sViewName = pContexte->getSuperviseur()->getText("SOAPManagement", "SOAPTankViewTitle") ;
 
   addConcernTitle() ;
 }
@@ -1993,7 +1993,7 @@ NSSOAPTankView::setViewName()
 void
 NSSOAPTankView::addObject(SOAPObject* pObjectSOAP)
 {
-	if (!pObjectSOAP)
+	if ((SOAPObject*) NULL == pObjectSOAP)
   	return ;
 
   if (pMyListWindow->HWindow)
@@ -2022,7 +2022,7 @@ NSSOAPTankView::SetupWindow()
 	SetWindowPosit() ;
 
 	TWindow::SetupWindow() ;
-	TWindow::SetDocTitle(sViewName.c_str(), 0) ;
+	TWindow::SetDocTitle(_sViewName.c_str(), 0) ;
 
 	if (pContexte->getEpisodus()->bAutoFlocule)
 		floculer() ;
@@ -2227,7 +2227,7 @@ NSSOAPTankView::EvSetFocus(HWND hWndLostFocus)
 		pMyApp->SetToolBarWindow(GetWindow());
 	}
 
-  _pPaneSplitter->SetFrameTitle(getFunction(), sViewName);
+  _pPaneSplitter->SetFrameTitle(getFunction(), _sViewName);
 	pContexte->setAideIndex("");
 	pContexte->setAideCorps("epi_soaping.htm");
 }

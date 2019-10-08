@@ -9,7 +9,7 @@
 
 #include "nssavoir\nspathor.h"
 #include "nautilus\nssuper.h"
-// #include "WebService.h"#include "nautilus\nsTankSvce.h"#include "nsbb\nslistwind.h"#include "nautilus\nsepicap.h"#include "nautilus\ns_html.h"#include "nautilus\nscsdoc.h"#include "nautilus\nscsvue.h"#include "nautilus\nsdocview.h"#include "nautilus\nsbrowse.h"// #include "partage\ole_utils.h"#include "nssavoir\nsFileCaptur.h"#include "nsldv\nsldvuti.h"#include "partage\nsdivfile.h"#include "nautilus\psapi.h"#include "nautilus\nsMailBox.rh"
+// #include "WebService.h"#include "nautilus\nsTankSvce.h"#include "nsbb\nslistwind.h"#include "nautilus\nsepicap.h"#include "nautilus\ns_html.h"#include "nautilus\nscsdoc.h"#include "nautilus\nscsvue.h"#include "nautilus\nsdocview.h"#include "nautilus\nsbrowse.h"// #include "partage\ole_utils.h"#include "nssavoir\nsFileCaptur.h"#include "nsldv\nsldvuti.h"#include "partage\nsdivfile.h"#include "dcodeur\nsdkd.h"#include "nautilus\psapi.h"#include "nautilus\nsMailBox.rh"
  /****************** classe NSImportWindow **************************/
 long NSTankPerson::lObjectCount = 0 ;
 
@@ -392,7 +392,7 @@ NSTankListWindow::NSTankListWindow(NSContexte* pCtx, NSTankServiceWindow *parent
   _bDetailsOn = false ;
   _bLogOn     = false ;
 
-  _pProgressDlg = (NSMsgLoadProgressDlg*) 0 ;
+  _pProgressDlg = (NSTankLoadProgressDlg*) 0 ;
 }
 
 NSTankListWindow::~NSTankListWindow()
@@ -411,29 +411,12 @@ NSTankListWindow::SetupWindow()
 
   // AfficheListe() ;
 
-  // selectCurrentPatientFirstMessage() ;
+  selectCurrentPatient() ;
 }
 
 void
 NSTankListWindow::loadPatients()
 {
-try
-{
-  _pProgressDlg = new NSMsgLoadProgressDlg(this, pContexte) ;
-  _pProgressDlg->Create() ;
-  _pProgressDlg->ShowWindow(SW_SHOW) ;
-}
-catch(TWindow::TXWindow& e)
-{
-	string sErr = string("Exception NSTankListWindow::loadPatients : ") + e.why() ;
-	erreur(sErr.c_str(), standardError, 0) ;
-}
-catch (...)
-{
-	erreur("Exception NSTankListWindow::loadPatients.", standardError, 0) ;
-  return ;
-}
-
   // First, get files from buffer directory
   //
   string sTrace = string("External tank: get list from tank.csv") ;
@@ -466,10 +449,6 @@ catch (...)
   pContexte->getSuperviseur()->trace(&sTrace, 1, NSSuper::trDetails) ;
 
   // pContexte->getSuperviseur()->traceMemory() ;
-
-  _pProgressDlg->Destroy() ;
-  delete _pProgressDlg ;
-  _pProgressDlg = (NSMsgLoadProgressDlg*) 0 ;
 }
 
 void
@@ -533,7 +512,7 @@ NSTankListWindow::selectCurrentPatient()
 	if (_aPatients.empty())
     return ;
 
-  string sTrace = string("Mailbox selectCurrentPatientFirstMessage : Entering") ;
+  string sTrace = string("Mailbox selectCurrentPatient : Entering") ;
   pContexte->getSuperviseur()->trace(&sTrace, 1, NSSuper::trDetails) ;
 
 	sort(_aPatients.begin(), _aPatients.end(), tankObjSortByNameInf) ;
@@ -591,16 +570,13 @@ NSTankListWindow::selectCurrentPatient()
 void
 NSTankListWindow::SetupColumns()
 {
-	string sPatientName = pContexte->getSuperviseur()->getText("mailBox", "patient") ;
-  string sExamDate    = pContexte->getSuperviseur()->getText("mailBox", "date") ;
-  // string sFileDate    = pContexte->getSuperviseur()->getText("mailBox", "fileDate") ;
+	string sPatientName    = pContexte->getSuperviseur()->getText(string("generalLanguage"), string("famillyName")) ;
+  string sPatient2ndName = pContexte->getSuperviseur()->getText(string("generalLanguage"), string("givenName")) ;
+  string sBirthDate      = pContexte->getSuperviseur()->getText(string("generalLanguage"), string("birthDate")) ;
 
-  InsertColumn(0, TListWindColumn("!", 20, TListWindColumn::Left, 0)) ;
-  InsertColumn(1, TListWindColumn((char*)sPatientName.c_str(), 300, TListWindColumn::Left, 1)) ;
-  InsertColumn(2, TListWindColumn("H'", 25, TListWindColumn::Left, 2)) ;
-  InsertColumn(3, TListWindColumn("E", 20, TListWindColumn::Left, 3)) ;
-  InsertColumn(4, TListWindColumn((char*)sExamDate.c_str(), 80, TListWindColumn::Left, 4)) ;
-  // InsertColumn(2, TListWindColumn((char*)sFileDate.c_str(), 80, TListWindColumn::Left, 1)) ;
+  InsertColumn(0, TListWindColumn((char*) sPatientName.c_str(),    200, TListWindColumn::Left, 0)) ;
+  InsertColumn(1, TListWindColumn((char*) sPatient2ndName.c_str(), 200, TListWindColumn::Left, 1)) ;
+  InsertColumn(3, TListWindColumn((char*) sBirthDate.c_str(), 80, TListWindColumn::Left, 4)) ;
 }
 
 // Affichage des éléments de la liste
@@ -615,6 +591,26 @@ NSTankListWindow::AfficheListe()
   if (_aPatients.empty())
     return ;
 
+try
+{
+  _pProgressDlg = new NSTankLoadProgressDlg(this, pContexte) ;
+  _pProgressDlg->Create() ;
+  _pProgressDlg->ShowWindow(SW_SHOW) ;
+}
+catch(TWindow::TXWindow& e)
+{
+	string sErr = string("Exception NSTankListWindow::loadPatients : ") + e.why() ;
+	erreur(sErr.c_str(), standardError, 0) ;
+}
+catch (...)
+{
+	erreur("Exception NSTankListWindow::loadPatients.", standardError, 0) ;
+  return ;
+}
+
+  size_t iCount = 0 ;
+  size_t iMax   = _aPatients.size() ;
+
   // Attention : insert insère au dessus ; il faut inscrire les derniers en premier
   NSTankPersonIter itPat = _aPatients.end() ;
   do
@@ -624,9 +620,21 @@ NSTankListWindow::AfficheListe()
     string sPatName = (*itPat)->getPatientName() ;
     TListWindItem Item(sPatName.c_str(), 0) ;
 
+    if (_pProgressDlg)
+    {
+      iCount++ ;
+
+      char szProgresLevel[50] ;
+      sprintf(szProgresLevel, "%d/%d", iCount, iMax) ;
+      _pProgressDlg->fixePositionNew(100 * iCount / iMax) ;
+      _pProgressDlg->_pNewProgressBar->SetCaption(szProgresLevel) ;
+      _pProgressDlg->_pNewProgressBar->Invalidate(false) ;
+      pContexte->getSuperviseur()->getApplication()->PumpWaitingMessages() ;
+    }
+
     InsertItem(Item) ;
 	}
-  while (itPat != _aPatients.begin()) ;
+  while ((itPat != _aPatients.begin()) && _pProgressDlg->_bKeepLoading) ;
 
   int i = 0 ;
 	for (itPat = _aPatients.begin() ; _aPatients.end() != itPat ; i++, itPat++)
@@ -638,7 +646,24 @@ NSTankListWindow::AfficheListe()
     Item1.SetIndex(i) ;
     Item1.SetSubItem(1) ;
     SetItem(Item1) ;
+
+    // Col 2
+    //
+    string sLang = pContexte->getUserLanguage() ;
+
+		string sDateDisplay = string("") ;
+    if ((*itPat)->getPatientBirth() != string(""))
+    	sDateDisplay = donne_date((*itPat)->getPatientBirth(), sLang) ;
+
+    TListWindItem Item2(sDateDisplay.c_str(), 2) ;
+    Item2.SetIndex(i) ;
+    Item2.SetSubItem(2) ;
+    SetItem(Item2) ;
 	}
+
+  _pProgressDlg->Destroy() ;
+  delete _pProgressDlg ;
+  _pProgressDlg = (NSTankLoadProgressDlg*) 0 ;
 
   sTrace = string("NSTankListWindow::AfficheListe: Exiting.") ;
   pContexte->getSuperviseur()->trace(&sTrace, 1, NSSuper::trDetails) ;
@@ -980,9 +1005,16 @@ NSTankListWindow::EvKillFocus(HWND hWndGetFocus)
 // Méthodes de NSXmlTreeViewerWindow//
 // -----------------------------------------------------------------------------
 NSXmlTreeViewerWindow::NSXmlTreeViewerWindow(NSContexte* pCtx, NSTankServiceWindow *parent, int id, int x, int y, int w, int h, TModule* module)
-                  :TEditFile(parent, id, "", 0, 0, 0, 0), NSRoot(pCtx)
+                      :TTreeWindow(parent, id, x, y, w, h), NSRoot(pCtx)
 {
 	_pParentWindow = parent ;
+
+  uint32 ui32Style = GetStyle() ;
+  ui32Style |= TTreeWindow::twsHasLines | TTreeWindow::twsHasButtons | TTreeWindow::twsEditLabels ;
+#if defined(BI_PLAT_WIN32)
+	ui32Style |= TTreeWindow::twsLinesAtRoot ;
+#endif
+	SetStyle(ui32Style) ;
 }
 
 NSXmlTreeViewerWindow::~NSXmlTreeViewerWindow()
@@ -992,8 +1024,257 @@ NSXmlTreeViewerWindow::~NSXmlTreeViewerWindow()
 void
 NSXmlTreeViewerWindow::loadContent(string sFileCompleteName)
 {
+  DeleteAllItems() ;
+
 	if (string("") == sFileCompleteName)
 		return ;
+
+  ifstream inFile ;
+  inFile.open(sFileCompleteName.c_str()) ;
+	if (!inFile)
+	{
+    string sErrorText = pContexte->getSuperviseur()->getText("fileErrors", "errorOpeningInputFile") ;
+    sErrorText += string(" ") + sFileCompleteName ;
+    erreur(sErrorText.c_str(), standardError, 0, GetHandle()) ;
+		return ;
+	}
+
+  VectTTreeNode vectTTreeNode ;
+
+  std::vector<HTREEITEM> MagicCookiesVector ;
+
+  OWL::TTreeNode root = GetRoot() ;
+
+  size_t iLevel = 0 ;
+
+  while (!inFile.eof())
+  {
+    string sLine = string("") ;
+    getline(inFile, sLine) ;
+
+    std::string sTag     = string("") ;
+    std::string sParams  = string("") ;
+    std::string sValue   = string("") ;
+
+    bool bTagTerminated = getLineContent(&sLine, &sTag, &sParams, &sValue) ;
+
+    bool bEmptyValue = (0 == strlen(sValue.c_str())) ;
+
+    if (false == bEmptyValue)
+    {
+      sValue = FromUTF8ToISO(sValue) ;
+      sValue = texteCourant(sValue) ;
+    }
+
+    // Just a closing tag?
+    //
+    bool bSimplyClosingTag = (true == bTagTerminated) && bEmptyValue && (std::string("") == sParams) ;
+
+    // We have to part <tag/> or <tag></tag> from </tag>
+    //
+    if (bSimplyClosingTag)
+    {
+      size_t iTagLen = strlen(sTag.c_str()) ;
+
+      if ((std::string("") != sTag) && (string("/") == string(sTag, iTagLen - 1)))
+      {
+        bSimplyClosingTag = false ;
+        sTag = string(sTag, 0, iTagLen - 1) ;
+      }
+    }
+
+    // Just a closing tag
+    if (bSimplyClosingTag)
+    {
+      iLevel-- ;
+
+      if (false == vectTTreeNode.empty())
+      {
+        OWL::TTreeNode *pToDelete = vectTTreeNode.back() ;
+        if (pToDelete)
+          delete pToDelete ;
+        vectTTreeNode.pop_back() ;
+      }
+    }
+    else if (std::string("") != sTag)
+    {
+      string sLabel = std::string("") ;
+      if (pseumaj(sTag) != std::string("PARAGRAPHE"))
+      {
+        sLabel = sTag ;
+        if (std::string("") != sParams)
+          sLabel += std::string(" (") + sParams + std::string(")") ;
+
+        if (false == bEmptyValue)
+          sLabel += std::string(" : ") + sValue ;
+      }
+      else
+        sLabel = sValue ;
+
+      OWL::TTreeNode model = OWL::TTreeNode(*this, sLabel.c_str()) ;
+
+      OWL::TTreeNode *pFather ;
+      if (0 == iLevel)
+        pFather = &root ;
+      else
+        pFather = vectTTreeNode.back() ;
+
+      OWL::TTreeNode child = pFather->AddChild(model) ;
+
+      //
+      // On référence le noeud comme futur père
+      //
+      if (false == bTagTerminated)
+      {
+        vectTTreeNode.push_back(new OWL::TTreeNode(child)) ;
+        iLevel++ ;
+      }
+    }
+	}
+	inFile.close() ;
+}
+
+/**
+ * Parse a XML line, filling the tag name, its params and its content
+ *
+ * Returns true if the tag is closed or is a closing tag, false if not
+ */
+bool
+NSXmlTreeViewerWindow::getLineContent(const string* psLine, string* psTag, string* psParams, string* psContent)
+{
+  if (((string*) NULL == psLine) || ((string*) NULL == psTag) || ((string*) NULL == psParams) || ((string*) NULL == psContent))
+    return true ;
+
+  *psTag     = string("") ;
+  *psParams  = string("") ;
+  *psContent = string("") ;
+
+  if (string("") == *psLine)
+    return false ;
+
+  size_t iContentLen = strlen(psLine->c_str()) ;
+
+  int iLevel = 0 ;
+
+  size_t i = 0 ;
+
+  char c = '\0' ;
+
+  bool bEndingTag = false ;
+
+  // First step, find starting tag
+  //
+  bool bKeepSearching = true ;
+  while (bKeepSearching)
+  {
+    // Goto next '<'
+    //
+    c = (*psLine)[i++] ;
+    while ((i < iContentLen) && ('<' != c))
+      c = (*psLine)[i++] ;
+
+    if ('<' != c)
+      return bEndingTag ;
+
+    // Get content up to next '>'
+    //
+
+    // Get tag
+    //
+    do
+    {
+      c = (*psLine)[i++] ;
+      if ((' ' != c) && ('>' != c))
+        *psTag += string((size_t) 1, c) ;
+    }
+    while ((i < iContentLen) && (' ' != c) && ('>' != c)) ;
+
+    strip(*psTag, stripBoth) ;
+
+    if (string("") == *psTag)
+      return bEndingTag ;
+
+    // Not a real tag (found end of line before encountering a ' ' or a '>')
+    //
+    if ((' ' != c) && ('>' != c))
+      return false ;
+
+    if (('/' == (*psTag)[0]) || ('/' == (*psTag)[strlen(psTag->c_str())-1]))
+      bEndingTag = true ;
+
+    // Get params
+    //
+    if ('>' != c)
+    {
+      while ((i < iContentLen) && ('>' != c))
+      {
+        c = (*psLine)[i++] ;
+
+        if ('>' != c)
+          *psParams += string((size_t) 1, c) ;
+      }
+
+      strip(*psParams, stripBoth) ;
+
+      // Not a real tag (found end of line before encountering a '>')
+      //
+      if ('>' != c)
+        return bEndingTag ;
+
+      if ((string("") != *psParams) && ('/' == (*psParams)[strlen(psParams->c_str())-1]))
+        bEndingTag = true ;
+    }
+
+    bKeepSearching = false ;
+  }
+
+  string sCandidateEndingTag = string("/") + pseumaj(*psTag) ;
+
+  while (1)
+  {
+    // Goto next '<'
+    //
+    do
+    {
+      c = (*psLine)[i++] ;
+      if ('<' != c)
+        *psContent += string((size_t) 1, c) ;
+    }
+    while ((i < iContentLen) && ('<' != c)) ;
+
+    if ('<' != c)
+      return bEndingTag ;
+
+    string sEndTag = string("") ;
+
+    // Get all chars until we find a '>'
+    //
+    do
+    {
+      c = (*psLine)[i++] ;
+      if ('>' != c)
+        sEndTag += string((size_t) 1, c) ;
+    }
+    while ((i < iContentLen) && ('>' != c)) ;
+
+    if ('>' != c)
+    {
+      *psContent += string(" <") + sEndTag ;
+      return bEndingTag ;
+    }
+
+    if (pseumaj(sEndTag) == sCandidateEndingTag)
+    {
+      if (0 == iLevel)
+        return true ;
+      else
+        iLevel-- ;
+    }
+    else
+      iLevel++ ;
+  }
+
+  return bEndingTag ;
 }
 
 // -----------------------------------------------------------------------------
@@ -1006,7 +1287,12 @@ tankObjSortByNameInf(const NSTankPerson *pObj1, const NSTankPerson *pObj2)
   if (((NSTankPerson*) NULL == pObj1) || ((NSTankPerson*) NULL == pObj2))
     return false ;
 
-	return (pObj1->getPatientName() < pObj2->getPatientName()) ;
+  if (pObj1->getPatientName() < pObj2->getPatientName())
+    return true ;
+  if (pObj1->getPatientName() > pObj2->getPatientName())
+    return false ;
+
+	return (pObj1->getPatientSurname() < pObj2->getPatientSurname()) ;
 }
 
 bool
@@ -1015,7 +1301,12 @@ tankObjSortByNameSup(const NSTankPerson *pObj1, const NSTankPerson *pObj2)
   if (((NSTankPerson*) NULL == pObj1) || ((NSTankPerson*) NULL == pObj2))
     return false ;
 
-	return (pObj1->getPatientName() > pObj2->getPatientName()) ;
+  if (pObj1->getPatientName() > pObj2->getPatientName())
+    return true ;
+  if (pObj1->getPatientName() < pObj2->getPatientName())
+    return false ;
+
+	return (pObj1->getPatientSurname() > pObj2->getPatientSurname()) ;
 }
 
 bool
@@ -1099,64 +1390,51 @@ NSTankPerson::operator=(const NSTankPerson& rv)
 //***********************************************************************//
 //							Classe NSEnregProgressDlg
 //***********************************************************************//
-DEFINE_RESPONSE_TABLE1(NSMsgLoadProgressDlg, NSUtilDialog)
+DEFINE_RESPONSE_TABLE1(NSTankLoadProgressDlg, NSUtilDialog)
   EV_COMMAND(STOP_BTN, stopPressed),
 END_RESPONSE_TABLE;
 
-NSMsgLoadProgressDlg::NSMsgLoadProgressDlg(TWindow* parent, NSContexte* pCtx,
-															TModule* /* module */)
-                     :NSUtilDialog(parent, pCtx, "LOAD_MAILS")
+NSTankLoadProgressDlg::NSTankLoadProgressDlg(TWindow* parent, NSContexte* pCtx,
+															TModule* module)
+                      :NSUtilDialog(parent, pCtx, "LOAD_TANK")
 {
-	// pNewProgressBar = new TGauge(this, IDC_BAR_NEW) ;
-  pNewProgressBar = new TGauge(this, "%d%%", IDC_BAR_NEW, 217, 12, 190, 32) ;
-  pNewProgressBar->SetRange(0, 100) ;
-  pNewProgressBar->SetNativeUse(nuNever) ;
-  pNewProgressBar->SetColor(NS_CLASSLIB::TColor(0, 0, 128)) ;   // Blue
+  _pNewProgressBar = new TGauge(this, "%d%%", IDC_BAR_NEW, 217, 12, 190, 32) ;
+  _pNewProgressBar->SetRange(0, 100) ;
+  _pNewProgressBar->SetNativeUse(nuNever) ;
+  _pNewProgressBar->SetColor(NS_CLASSLIB::TColor(0, 0, 128)) ;   // Blue
 
-	// pOldProgressBar = new TGauge(this, IDC_BAR_OLD) ;
-  pOldProgressBar = new TGauge(this, "%d%%", IDC_BAR_OLD, 217, 68, 190, 32) ;
-  pOldProgressBar->SetRange(0, 100) ;
-  pOldProgressBar->SetNativeUse(nuNever) ;
-  pOldProgressBar->SetColor(NS_CLASSLIB::TColor(0, 0, 128)) ;   // Blue
+  _pNewText = new OWL::TStatic(this, IDC_TXT_NEW) ;
 
-  pNewText = new OWL::TStatic(this, IDC_TXT_NEW) ;
-  pOldText = new OWL::TStatic(this, IDC_TXT_OLD) ;
+  _pStopButton = new OWL::TButton(this, STOP_BTN) ;
 
-  pStopButton = new OWL::TButton(this, STOP_BTN) ;
-
-  bKeepLoading = true ;
+  _bKeepLoading = true ;
 }
 
-NSMsgLoadProgressDlg::~NSMsgLoadProgressDlg(){
-	delete pNewProgressBar ;
-	delete pOldProgressBar ;
-  delete pNewText ;
-  delete pOldText ;
-  delete pStopButton ;
+NSTankLoadProgressDlg::~NSTankLoadProgressDlg(){
+	delete _pNewProgressBar ;
+  delete _pNewText ;
+  delete _pStopButton ;
 }
 
-voidNSMsgLoadProgressDlg::SetupWindow()
+voidNSTankLoadProgressDlg::SetupWindow()
 {
 	NSUtilDialog::SetupWindow() ;
 
-  resetNewGauge() ;  resetOldGauge() ;
-
-  string sTitleText = pContexte->getSuperviseur()->getText("mailBoxProgress", "loadingMessages") ;
+  resetNewGauge() ;
+  string sTitleText = pContexte->getSuperviseur()->getText("tankBoxProgress", "loadingPatients") ;
   SetCaption(sTitleText.c_str()) ;
 
-  sTitleText = pContexte->getSuperviseur()->getText("mailBoxProgress", "loadingNewMessages") ;
-  pNewText->SetText(sTitleText.c_str()) ;
-  sTitleText = pContexte->getSuperviseur()->getText("mailBoxProgress", "loadingExistingMessages") ;
-  pOldText->SetText(sTitleText.c_str()) ;
+  sTitleText = pContexte->getSuperviseur()->getText("tankBoxProgress", "loadingNewPatients") ;
+  _pNewText->SetText(sTitleText.c_str()) ;
 
-  string sHalt = pContexte->getSuperviseur()->getText("mailBoxProgress", "halt") ;
-  pStopButton->SetCaption(sHalt.c_str()) ;
+  string sHalt = pContexte->getSuperviseur()->getText("tankBoxProgress", "halt") ;
+  _pStopButton->SetCaption(sHalt.c_str()) ;
 }
 
 void
-NSMsgLoadProgressDlg::stopPressed()
+NSTankLoadProgressDlg::stopPressed()
 {
-  bKeepLoading = false ;
+  _bKeepLoading = false ;
 }
 
 // -----------------------------------------------------------------------------

@@ -661,7 +661,7 @@ void
 NSCoopChartView::SetupWindow()
 {
   NSMUEView::SetupWindow() ;
-  Parent->SetCaption(sViewName.c_str()) ;
+  Parent->SetCaption(_sViewName.c_str()) ;
 
   NSCoopCardArray* pCardsArray = _pCoopDoc->getCards() ;
   if (pCardsArray->empty())
@@ -719,10 +719,10 @@ NSCoopChartView::setViewName()
   if (string("") != sRootLabel)
   {
     sRootLabel[0] = pseumaj(sRootLabel[0]) ;
-    sViewName = sRootLabel ;
+    _sViewName = sRootLabel ;
   }
   else
-	  sViewName = pContexte->getSuperviseur()->getText("coopCharts", "coopCharts") ;
+	  _sViewName = pContexte->getSuperviseur()->getText("coopCharts", "coopCharts") ;
 
   addConcernTitle() ;
 }
@@ -770,7 +770,8 @@ NSCoopChartView::focusFct()
     pMyApp->SetToolBarWindow(GetWindow()) ;
   }
 
-  _pPaneSplitter->SetFrameTitle(getFunction(), sViewName) ;
+  _pPaneSplitter->SetFrameTitle(getFunction(), _sViewName) ;
+  
   pContexte->setAideIndex("") ;
   pContexte->setAideCorps("coopChart.htm") ;
 }

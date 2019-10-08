@@ -3209,7 +3209,7 @@ try
 	string sTitre ;
 	ChercheListePatCorDialog* pListeCorDlg ;
 
-	pListeCorDlg = new ChercheListePatCorDialog(this, pContexte, pNSResModule) ;
+	pListeCorDlg = new ChercheListePatCorDialog(this, pContexte /*, pNSResModule*/) ;
 
 	if ((pListeCorDlg->Execute() == IDOK) && (pListeCorDlg->CorrespChoisi >= 0) &&
       (NULL != pListeCorDlg->pCorrespSelect))

@@ -184,6 +184,7 @@ class TMyApp : public OWL::TApplication
     void CmOpenTtext() ;
     void CmOpenTmpl() ;
     void CmMailBox() ;
+    void CmTankBox() ;
     void CmOutils() ;
     void CmBBK() ;
     void CmGroupGd() ;

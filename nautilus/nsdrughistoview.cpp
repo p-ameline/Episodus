@@ -188,8 +188,8 @@ try
 
 	initMUEViewMenu("menubar_drug") ;
 
-  _pToolBar     = (OWL::TControlBar*) 0 ;
-  bSetupToolBar = true ;
+  _pToolBar      = (OWL::TControlBar*) 0 ;
+  _bSetupToolBar = true ;
   uButtonsStyle = MYWS_ICONS ;
 
   _iSortedColumn = -1 ;
@@ -215,7 +215,7 @@ NSDrugHistoView::~NSDrugHistoView()
 void
 NSDrugHistoView::setViewName()
 {
-	sViewName = pContexte->getSuperviseur()->getText("drugHistory", "drugHistory") ;
+	_sViewName = pContexte->getSuperviseur()->getText("drugHistory", "drugHistory") ;
 
   addConcernTitle() ;
 }
@@ -231,7 +231,7 @@ TWindow
 NSDrugHistoView::SetupWindow()
 {
   NSMUEView::SetupWindow() ;
-  Parent->SetCaption(sViewName.c_str()) ;
+  Parent->SetCaption(_sViewName.c_str()) ;
 
   SetupColumns() ;
 
@@ -253,21 +253,21 @@ NSDrugHistoView::getCodes()
   if (selectionDlg.Execute() == IDCANCEL)
 	  return ;
 
-  sViewName = pContexte->getSuperviseur()->getText("drugHistory", "drugHistory") ;
+  _sViewName = pContexte->getSuperviseur()->getText("drugHistory", "drugHistory") ;
 
   _sLexiqCode = selectionDlg.getDrugCode() ;
   if (string("") != _sLexiqCode)
-    sViewName += string(" ") + selectionDlg.getDrugLabel() ;
+    _sViewName += string(" ") + selectionDlg.getDrugLabel() ;
 
   _sAtcCode   = selectionDlg.getAtcCode() ;
   if (string("") != _sAtcCode)
   {
-    sViewName += string(" ATC = ") + _sAtcCode ;
+    _sViewName += string(" ATC = ") + _sAtcCode ;
     if (string("") != selectionDlg.getAtcLabel())
-      sViewName += string(" (") + selectionDlg.getAtcLabel() + string(")") ;
+      _sViewName += string(" (") + selectionDlg.getAtcLabel() + string(")") ;
   }
 
-  Parent->SetCaption(sViewName.c_str()) ;
+  Parent->SetCaption(_sViewName.c_str()) ;
   Parent->Invalidate() ;
 
   initDrugs() ;
@@ -844,13 +844,14 @@ NSDrugHistoView::focusFct()
 	activateMUEViewMenu() ;
 
   TMyApp  *pMyApp = pContexte->getSuperviseur()->getApplication() ;
-  if (bSetupToolBar && (GetWindow() != pMyApp->GetToolBarWindow()))
+  if (_bSetupToolBar && (GetWindow() != pMyApp->GetToolBarWindow()))
   {
     SetupToolBar() ;
     pMyApp->SetToolBarWindow(GetWindow()) ;
   }
 
-  _pPaneSplitter->SetFrameTitle(getFunction(), sViewName) ;
+  _pPaneSplitter->SetFrameTitle(getFunction(), _sViewName) ;
+  
   pContexte->setAideIndex("") ;
   pContexte->setAideCorps("medicaments.htm") ;
 }

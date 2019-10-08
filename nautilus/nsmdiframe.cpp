@@ -1115,7 +1115,15 @@ try
   }
   if (string("SaveEpisodusData") == sWhatToDo)
   {
-    pContexte->getEpisodus()->saveParams(pToDo->getParam1()) ;
+    NSEpisodus* pEpisodus = pContexte->getEpisodus() ;
+    if ((NSEpisodus*) NULL == pEpisodus)
+      return ;
+
+    if (string("") == pToDo->getParam1())
+      pEpisodus->saveParams() ;
+    else
+      pEpisodus->saveParams(pToDo->getParam1()) ;
+
     return ;
   }
   if (string("SettleUser") == sWhatToDo)

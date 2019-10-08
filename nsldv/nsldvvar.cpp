@@ -2648,12 +2648,12 @@ catch (...)
 void
 NSSimpleNewDrugDlg::createInterfaceElements()
 {
-	_pTrtGroup          = new OWL::TGroupBox(this, TRT_GROUP) ;
+	_pTrtGroup              = new OWL::TGroupBox(this, TRT_GROUP) ;
 
-	_pPrescriptionGroup = new OWL::TGroupBox(this, PRESCR_GROUP) ;
+	_pPrescriptionGroup     = new OWL::TGroupBox(this, PRESCR_GROUP) ;
 
 	_pDureePhaseTxt         = new OWL::TStatic(this, PRESCR_DURA_TXT) ;
-	_pDureePhase            = new NSUpDownEdit(this, pContexte, "", PRESCR_DURA, PRESCR_DURA_UPDN) ;
+	_pDureePhase            = new NSUpDownEdit(this, pContexte, string(""), PRESCR_DURA, PRESCR_DURA_UPDN) ;
   _pDureePhase->getEditNum()->SetLostFocusResponse(new MemFunctor<NSSimpleNewDrugDlg>( (NSSimpleNewDrugDlg*)this, &NSSimpleNewDrugDlg::ActualisePhase )) ;
   _pDureePhase->getUpDown()->SetLostFocusResponse(new MemFunctor<NSSimpleNewDrugDlg>( (NSSimpleNewDrugDlg*)this, &NSSimpleNewDrugDlg::ActualisePhase )) ;
 
@@ -2662,7 +2662,7 @@ NSSimpleNewDrugDlg::createInterfaceElements()
   _pCBDureePhase->SetLostFocusResponse(new MemFunctor<NSSimpleNewDrugDlg>( (NSSimpleNewDrugDlg*)this, &NSSimpleNewDrugDlg::ActualisePhase ));
 	_pRenouvellementTxt     = new OWL::TStatic(this, PRESCR_RENEW_TXT) ;
 	_pRenouvellement        = new NSUpDownEdit(this, pContexte, "", PRESCR_RENEW, PRESCR_RENEW_UPDN) ;
-  _pNonRenouvelable      = new OWL::TCheckBox(this, NR_BUTTON) ;
+  _pNonRenouvelable       = new OWL::TCheckBox(this, NR_BUTTON) ;
 
 	_pRenouvellementTimeTxt = new OWL::TStatic(this, PRESCR_RENEW_NBTXT) ;
 
@@ -2673,10 +2673,10 @@ NSSimpleNewDrugDlg::createInterfaceElements()
 
   _pPosologieGroup        = new OWL::TGroupBox(this, POSO_GROUP) ;
 
-	_pPriseMatin            = new NSUpDownEdit(this, pContexte, "", POSO_MORNING, POSO_MORNING_UPDN) ;
-  _pPriseMidi             = new NSUpDownEdit(this, pContexte, "", POSO_NOON,    POSO_NOON_UPDN) ;
-  _pPriseSoir             = new NSUpDownEdit(this, pContexte, "", POSO_NIGHT,   POSO_NIGHT_UPDN) ;
-  _pPriseCoucher          = new NSUpDownEdit(this, pContexte, "", POSO_BED,     POSO_BED_UPDN) ;
+	_pPriseMatin            = new NSUpDownEdit(this, pContexte, string(""), POSO_MORNING, POSO_MORNING_UPDN) ;
+  _pPriseMidi             = new NSUpDownEdit(this, pContexte, string(""), POSO_NOON,    POSO_NOON_UPDN) ;
+  _pPriseSoir             = new NSUpDownEdit(this, pContexte, string(""), POSO_NIGHT,   POSO_NIGHT_UPDN) ;
+  _pPriseCoucher          = new NSUpDownEdit(this, pContexte, string(""), POSO_BED,     POSO_BED_UPDN) ;
 
 	_pPriseMatinTxt         = new OWL::TStatic(this, POSO_MORNING_TXT) ;
   _pPriseMidiTxt          = new OWL::TStatic(this, POSO_NOON_TXT) ;
@@ -6729,6 +6729,11 @@ NSDrugHistoryDlg::NSDrugHistoryDlg(TWindow* pView, NSContexte *pCtx)
     _pAtcText = new OWL::TStatic(this, ATC_TEXT) ;
     _pAtcCode = new NSEditBdm(pCtx, this, ATC_EDIT, NSBdmDriver::bamTableATC) ;
   }
+  else
+  {
+    _pAtcText = (OWL::TStatic*) 0 ;
+    _pAtcCode = (NSEditBdm*) 0 ;
+  }
 
   _sLexiqCode  = string("") ;
   _sLexiqLabel = string("") ;
@@ -6757,7 +6762,9 @@ NSDrugHistoryDlg::SetupWindow()
   string sText = pSuper->getText("drugHistory", "concept") ;
   _pDrugText->SetCaption(sText.c_str()) ;
   sText = pSuper->getText("drugHistory", "AtcCode") ;
-  _pAtcText->SetCaption(sText.c_str()) ;
+
+  if (_pAtcText)
+    _pAtcText->SetCaption(sText.c_str()) ;
 }
 
 string
@@ -6801,13 +6808,16 @@ NSDrugHistoryDlg::CmOk()
 {
   // An ATC code can be entered manually
   //
-  string sAtcCode = _pAtcCode->getCode() ;
-
-  if (string("") == sAtcCode)
+  if (_pAtcCode)
   {
-    string sCode = _pAtcCode->getTextAsString() ;
-    if (IsValidAtcCode(sCode))
-      _pAtcCode->injectCode(sCode) ;
+    string sAtcCode = _pAtcCode->getCode() ;
+
+    if (string("") == sAtcCode)
+    {
+      string sCode = _pAtcCode->getTextAsString() ;
+      if (IsValidAtcCode(sCode))
+        _pAtcCode->injectCode(sCode) ;
+    }
   }
 
   NSUtilDialog::CmOk() ;

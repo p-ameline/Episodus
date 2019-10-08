@@ -691,8 +691,12 @@ uintNSEditLexique::TempTransferer(CTRL_ACTIVITY* pActif, Message* pMessage)
     *pActif = activeCtrl ;
 
   //
-  //transferer les données
-  //  if (pMessage)  {    string sEtiquette = string("") ;
+  // Transferer les données si il n'existe pas de contrôle lexique dérivé
+  //
+  // S'il existe un contrôle lexique dérivé, le message de transfert contient
+  // le code Lexique de l'élément saisi et par l'étiquette du FilsItem (£C;020)
+  // Il ne faut surtout pas remplacer l'un par l'autre ici.
+  //  if (pMessage && ((NSEditLexiqueDerive*) NULL == pNSEdit))  {    string sEtiquette = string("") ;
     if (pControle->getTransfert() && pControle->getTransfert()->getFilsItem())
       sEtiquette = pControle->getTransfert()->getFilsItem()->getItemLabel() ;
 

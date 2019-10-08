@@ -134,7 +134,9 @@ class NSDico : public NSRoot
     static void   donneCodeSens(const string* pCodeLexique, string* pCodeSens) ;
     static void   donneCodeSens(string& sCode) ;
     static string donneCodeSens(const string* pCodeLexique) ;
+
     static void   donneCodeComplet(string& sCode) ;
+    static void   donneCodeComplet(const string* pCodeLexique, string* pCodeComplet) ;
 
     // chercher dans la patpatho de synthese le complement correspondant a sItem
     // exemple si sItem = VPOIDS retourner la valeur du poids

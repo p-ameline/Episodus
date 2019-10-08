@@ -99,6 +99,7 @@ DEFINE_RESPONSE_TABLE1(NSGadgetWindow, TGadgetWindow)
   EV_COMMAND(CM_GENERAL_MODIFY,    CmChange),
 	EV_COMMAND(CM_GENERAL_REMOVE,    CmSuppress),
 	EV_COMMAND(CM_GENERAL_CONTINUE,  CmContinue),
+  EV_COMMAND(CM_GENERAL_ALL,       CmAll),
 	EV_COMMAND(CM_GENERAL_FCT1,      CmFct1),
 	EV_COMMAND(CM_GENERAL_FCT2,      CmFct2),
 	EV_COMMAND(CM_GENERAL_FCT3,      CmFct3),
@@ -113,6 +114,7 @@ DEFINE_RESPONSE_TABLE1(NSGadgetWindow, TGadgetWindow)
   EV_COMMAND_ENABLE(CM_GENERAL_MODIFY,   CeHasChildChange),
   EV_COMMAND_ENABLE(CM_GENERAL_REMOVE,   CeHasChildSuppress),
   EV_COMMAND_ENABLE(CM_GENERAL_CONTINUE, CeHasChildContinue),
+  EV_COMMAND_ENABLE(CM_GENERAL_ALL,      CeHasChildAll),
   EV_COMMAND_ENABLE(CM_GENERAL_FCT1,     CeHasChildFct1),
   EV_COMMAND_ENABLE(CM_GENERAL_FCT2,     CeHasChildFct2),
   EV_COMMAND_ENABLE(CM_GENERAL_FCT3,     CeHasChildFct3),
@@ -163,6 +165,7 @@ NSGadgetWindow::NSGadgetWindow(NSContexte* pCtx, TWindow* parent, uint32 iBtnSty
 	_sTextForCmSuppress = string("") ;
 	_sTextForCmChange   = string("") ;
 	_sTextForCmContinue = string("") ;
+  _sTextForCmAll      = string("") ;
 	_sTextForCmFct1     = string("") ;
 	_sTextForCmFct2     = string("") ;
 	_sTextForCmFct3     = string("") ;
@@ -365,6 +368,12 @@ void
 NSGadgetWindow::CeHasChildPrevious(TCommandEnabler& commandHandler)
 {
 	commandHandler.Enable((_uButtonsStyle & MYWS_PREVIOUS) == MYWS_PREVIOUS) ;
+}
+
+void
+NSGadgetWindow::CeHasChildAll(TCommandEnabler& commandHandler)
+{
+	commandHandler.Enable(true) ;
 }
 
 void

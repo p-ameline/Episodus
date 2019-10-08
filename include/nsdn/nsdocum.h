@@ -268,6 +268,8 @@ class NSDocumentData
 		string _sTypeContenuSens ;
 		string _sDateExamen ;
 
+    string _sSecondOperator ;
+
 		string 	_sRights ;
 
 		void   metAZero() ;
@@ -357,6 +359,7 @@ class NSDocumentInfo : public NSRoot
     string getTemplate() { return _Donnees._sTemplate ; }
     string getEntete()   { return _Donnees._sEnTete ; }
     string getDestinat() { return _Donnees._sDestinataire ; }
+    string get2ndOper()  { return _Donnees._sSecondOperator ; }
 
     bool   estVisible()  { return _Donnees.estVisible() ; }
 
@@ -380,22 +383,23 @@ class NSDocumentInfo : public NSRoot
     string getDocTitleWithDate() ;
 
     void   setID(string sId)       { _Donnees.setID(sId) ; }
-    void   setPatient(string sPa)  { _Donnees._sCodePatient  = sPa ; }
-    void   setDocument(string sDo) { _Donnees._sCodeDocument = sDo ; }
+    void   setPatient(string sPa)  { _Donnees._sCodePatient    = sPa ; }
+    void   setDocument(string sDo) { _Donnees._sCodeDocument   = sDo ; }
     void   setType(string sTy) ;
-    void   setInteret(string sIn)  { _Donnees._sInteret      = sIn ; }
-    void   setVisible(string sVi)  { _Donnees._sVisible      = sVi ; }
-    void   setCreator(string sCr)  { _Donnees._sCreateur     = sCr ; }
-    void   setAuthor(string sAu)   { _Donnees._sAuteur       = sAu ; }
-    void   setNom(string sNo)      { _Donnees._sNom          = sNo ; }
-    void   setCreDate(string sCD)  { _Donnees._sDateCreation = sCD ; }
-    void   setDateExm(string sDa)  { _Donnees._sDateExamen   = sDa ; }
-    void   setLocalisa(string sLo) { _Donnees._sLocalisation = sLo ; }
-    void   setFichier(string sFi)  { _Donnees._sFichier      = sFi ; }
+    void   setInteret(string sIn)  { _Donnees._sInteret        = sIn ; }
+    void   setVisible(string sVi)  { _Donnees._sVisible        = sVi ; }
+    void   setCreator(string sCr)  { _Donnees._sCreateur       = sCr ; }
+    void   setAuthor(string sAu)   { _Donnees._sAuteur         = sAu ; }
+    void   setNom(string sNo)      { _Donnees._sNom            = sNo ; }
+    void   setCreDate(string sCD)  { _Donnees._sDateCreation   = sCD ; }
+    void   setDateExm(string sDa)  { _Donnees._sDateExamen     = sDa ; }
+    void   setLocalisa(string sLo) { _Donnees._sLocalisation   = sLo ; }
+    void   setFichier(string sFi)  { _Donnees._sFichier        = sFi ; }
     void   setContent(string sCo) ;
-    void   setTemplate(string sTp) { _Donnees._sTemplate     = sTp ; }
-    void   setEnTete(string sET)   { _Donnees._sEnTete       = sET ; }
-    void   setDestinat(string sDe) { _Donnees._sDestinataire = sDe ; }
+    void   setTemplate(string sTp) { _Donnees._sTemplate       = sTp ; }
+    void   setEnTete(string sET)   { _Donnees._sEnTete         = sET ; }
+    void   setDestinat(string sDe) { _Donnees._sDestinataire   = sDe ; }
+    void   set2ndOper(string s2o)  { _Donnees._sSecondOperator = s2o ; }
 
     // Obsolete
     //

@@ -53,7 +53,7 @@ class NSGoalView : public NSLDVView
     // Redéfiniton des fonctions virtuelles de TView et TRichEdit
     static LPCSTR         StaticName() { return "NSGoalView" ; }
 
-    const char            *GetViewName() { return sViewName.c_str() ; }
+    const char            *GetViewName() { return _sViewName.c_str() ; }
     TWindow               *GetWindow() ;
     bool                  SetDocTitle(const char far *docname, int index)
     {

@@ -62,6 +62,9 @@ class _EPISODUS NSNTiersListePatDialog : public NSUtilDialog
     OWL::TStatic*          pLibID ;
     OWL::TStatic*          pLibCode ;
 
+    OWL::TGlyphButton*     pNameEditParams ;
+    OWL::TBitmap*          pParamsBitmap ;
+
 		NSNTiersListPatWindow* pListe ;
 
     int                    iSortedColumn ;
@@ -84,6 +87,7 @@ class _EPISODUS NSNTiersListePatDialog : public NSUtilDialog
     void InitPatArrayForCode() ;
 		// void PosLastPatient();
 		void Rechercher() ;
+    void NameEditParams() ;
 
     void nameActiver(WPARAM wParam) ;
 
@@ -148,6 +152,10 @@ class _EPISODUS NSNTiersRechNomEdit : public NSUtilEdit
 	DECLARE_RESPONSE_TABLE(NSNTiersRechNomEdit) ;
 };
 
+// Liste correspondants
+#define IDC_LISTCOR_LW	        101
+#define IDC_LISTCOR_AUTRE	      102
+
 //
 // Classe ChercheListePatCorDialog -> pour la sélection d'un correspondant parmi
 //													les correspondants du patient
@@ -164,7 +172,7 @@ class _EPISODUS ChercheListePatCorDialog : public NSUtilDialog{
     int					 nbCorresp;
     int					 CorrespChoisi;
 
-    ChercheListePatCorDialog(TWindow* pere, NSContexte* pCtx, OWL::TModule* module = 0) ;
+    ChercheListePatCorDialog(TWindow* pere, NSContexte* pCtx) ;
     ~ChercheListePatCorDialog() ;
 
     void SetupWindow() ;

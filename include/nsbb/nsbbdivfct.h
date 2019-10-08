@@ -161,6 +161,7 @@ void _NSBBCLASSE CheckSurgicalHistory(NSDlgFonction *pNSFct, string sCutConcept 
 void _NSBBCLASSE CheckSurgicalHistoryChapter(NSDlgFonction *pNSFct, string sCutConcept = string("QANTC")) ;
 void _NSBBCLASSE CheckFamilyHistory(NSDlgFonction *pNSFct, string sCutConcept = string("QANTF")) ;
 void _NSBBCLASSE CheckFamilyHistoryChapter(NSDlgFonction *pNSFct, string sCutConcept = string("QANTF")) ;
+void             CheckElementsForPath(string sChapterPath, BBItem* pItem) ;
 void _NSBBCLASSE RecordInSynthesis(NSDlgFonction *pNSFct, string sContextPath, string sCutConcept = string("")) ;
 void _NSBBCLASSE RecordInSynthesis2(NSDlgFonction *pNSFct, HistoryConnector* pHC) ;
 void             SaveSynthesis(NSTreeWindow* pTreeWin, NSDocumentHisto* pSynthDoc) ;

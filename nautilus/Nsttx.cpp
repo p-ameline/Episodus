@@ -24,6 +24,7 @@
 #include "nautilus\nshistdo.h"
 #include "nsbb\nsattvaltools.h"
 #include "nsbb\nsfltbtnga.h"
+#include "nsoutil\nsFormules.h"
 #include "partage\ns_timer.h"
 
 #include "nautilus\nautilus.rh"
@@ -1271,7 +1272,12 @@ NSTtxDocument::GenereRawText(string& sRawText)
 
   pDialog->CmOk() ;
 
-  sRawText = string(str) ;
+  sRawText = getRawTextHeader() ;
+
+  if (string("") != sRawText)
+    sRawText += string(NEWLINE) + string(NEWLINE) ;
+
+  sRawText += string(str) ;
 
   return true ;
 }

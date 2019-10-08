@@ -2324,6 +2324,9 @@ NSTreeHistorique::OpenOutside()
     string sPathTxt = pContexte->PathName("NTTX") ;
     sDocUri = sPathTxt + sDocUri ;
 
+    string sMsg = string("NSTreeHistorique::OpenOutside, open a PDF outside for file ") + sDocUri ;
+    pContexte->getSuperviseur()->trace(&sMsg, 1, NSSuper::trDetails) ;
+
     ::ShellExecute(pContexte->GetMainWindow()->HWindow,
                  "open",
                  sDocUri.c_str(),

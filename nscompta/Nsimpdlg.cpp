@@ -60,7 +60,7 @@ bool NSImpDocument::Open(int /* mode */, LPCSTR /* path */)
 	if (false == LanceCriteres())
 		return false ;
 
-	if (!InitImpArray())		return false ;
+	if (false == InitImpArray())		return false ;
 
 	return true ;}
 
@@ -182,8 +182,11 @@ boolNSImpDocument::InitTPArray(string sNumCompt)
 
 boolNSImpDocument::SelectionCriteres(NSComptInfo* pComptInfo)
 {
+  if ((NSComptInfo*) NULL == pComptInfo)
+    return false ;
+
 	if (pCriteres->bActesPerso)
-  	if (strcmp(pComptInfo->_Donnees.operateur, pContexte->getUtilisateur()->getNss().c_str()))
+  	if (pComptInfo->getOperator() != pContexte->getUtilisateur()->getNss())
     	return false ;
 
 	if (string("") != pCriteres->sCodeExamen)
@@ -229,12 +232,12 @@ boolNSImpDocument::InitImpArray()
 
 	// on cherche les Compt par date
 	Compt.lastError = Compt.chercheClef(&(pCriteres->sDate1),
-                                            "DATE_COMPT",
-                                            NODEFAULTINDEX,
-                                            keySEARCHGEQ,
-                                            dbiWRITELOCK) ;
+                                      "DATE_COMPT",
+                                      NODEFAULTINDEX,
+                                      keySEARCHGEQ,
+                                      dbiWRITELOCK) ;
 
-	if (Compt.lastError == DBIERR_BOF)	// cas fichier vide
+	if (DBIERR_BOF == Compt.lastError)	// cas fichier vide
 	{
 		Compt.close() ;
 		return true ; // le tableau est vide
@@ -267,7 +270,7 @@ boolNSImpDocument::InitImpArray()
     progessDialog.SetNewDate(string(Compt._Donnees.date)) ;    progessDialog.SetNewCode(string(Compt._Donnees.numcompt)) ;    progessDialog.SetAck("Lecture OK.") ;
 
     // cas des fiches compt représentant des recettes et non des actes
-    // dans ce cas le nss patient est vide et on passe au suivant    // car une recette n'est forcement pas un impaye    if (strcmp(Compt._Donnees.patient, "") != 0)    {    	NSImpData ImpData(pContexte) ;
+    // dans ce cas le nss patient est vide et on passe au suivant    // car une recette n'est forcement pas un impayé    //    if (strcmp(Compt._Donnees.patient, "") != 0)    {    	NSImpData ImpData(pContexte) ;
 
     	// condition d'arret
       if (string(Compt._Donnees.date) > (pCriteres->sDate2))
@@ -619,7 +622,7 @@ voidNSListImpDialog::DispInfoListeImp(TLwDispInfoNotify& dispInfo)
 	int index = dispInfoItem.GetIndex() ;
 
   NSImpData* pImpData = (*(pDoc->pImpArray))[index] ;
-  if (NULL == pImpData)
+  if ((NSImpData*) NULL == pImpData)
   {
     dispInfoItem.SetText("") ;
     return ;
@@ -1028,22 +1031,21 @@ voidNSMultiCritImpDialog::CmPrescript()
 
 voidNSMultiCritImpDialog::CmOk()
 {
-	string 	sDate, sCode;
-  int	 	indexOrga;
-  char far cfTexte[7] = "";
-
+  // Get starting date
+  //
+  string sDate = string("") ;
 	pDate1->getDate(&sDate) ;
-
-	if (sDate == "")
+	if (string("") == sDate)
 	{
   	erreur("Vous devez saisir une date de début.", warningError, 0) ;
     return ;
 	}
   pCriteres->sDate1 = sDate ;
 
+  // Get ending date
+  //
   pDate2->getDate(&sDate) ;
-
-	if (sDate == "")
+	if (string("") == sDate)
 	{
   	erreur("Vous devez saisir une date de fin.", warningError, 0) ;
     return ;
@@ -1056,20 +1058,21 @@ voidNSMultiCritImpDialog::CmOk()
     return ;
 	}
 
+  char far cfTexte[7] = "" ;
 	pExamen->GetText(cfTexte, 7) ;
 	if (!strcmp(cfTexte, ""))
 	{
-  	pCriteres->sCodeExamen = "" ;
-    pCriteres->sSynExamen = "" ;
+  	pCriteres->sCodeExamen = string("") ;
+    pCriteres->sSynExamen  = string("") ;
 	}
 	else
 	{
-  	sCode = pExamen->getCode() ;
+  	string sCode = pExamen->getCode() ;
 	  pCriteres->sCodeExamen = string(sCode, 0, 5) ;
     pCriteres->sSynExamen = string(sCode, 5, 1) ;
 	}
 
-	if (pActesPerso->GetCheck() == BF_CHECKED)
+	if      (pActesPerso->GetCheck() == BF_CHECKED)
    	pCriteres->bActesPerso = true ;
 	else if (pActesTous->GetCheck() == BF_CHECKED)
 		pCriteres->bActesPerso = false ;
@@ -1095,7 +1098,7 @@ voidNSMultiCritImpDialog::CmOk()
     return ;
 	}
 
-	indexOrga = pOrga->GetSelIndex();
+	int indexOrga = pOrga->GetSelIndex();
 	if (indexOrga >= 0)
 	{
   	pCriteres->sCodeOrga     = string((*pCodeOrgaArray)[indexOrga]->_Donnees.code) ;
@@ -1103,7 +1106,7 @@ voidNSMultiCritImpDialog::CmOk()
     pCriteres->sLibLongOrga  = string((*pCodeOrgaArray)[indexOrga]->_Donnees.lib_long) ;
 	}
 
-   TDialog::CmOk();
+   TDialog::CmOk() ;
 }
 
 voidNSMultiCritImpDialog::CmCancel()

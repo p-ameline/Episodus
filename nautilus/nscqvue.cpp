@@ -63,7 +63,7 @@ END_RESPONSE_TABLE ;
 	// initMUEViewMenu("menubar") ;
 
   TMyApp* pMyApp = pContexte->getSuperviseur()->getApplication() ;
-  pMyApp->setMenu(string("menubar"), &hAccelerator) ;
+  pMyApp->setMenu(string("menubar"), &_hAccelerator) ;
 
 	_pToolBar      = (OWL::TControlBar*) 0 ;
 	_pBigBoss      = (NSSmallBrother*) 0 ;
@@ -115,7 +115,7 @@ NSCQWindowsView::~NSCQWindowsView()
 void
 NSCQWindowsView::setViewName()
 {
-	sViewName = string("") ;
+	_sViewName = string("") ;
 
 	if (NULL == _pDoc->_pDocInfo)
   {
@@ -133,20 +133,20 @@ NSCQWindowsView::setViewName()
     {
       Chead *pReferenceHead = pRefBlock->getHead(sLang) ;
       if (pReferenceHead)
-        sViewName = pReferenceHead->getTitle() ;
+        _sViewName = pReferenceHead->getTitle() ;
     }
 
     // If not found, have a look in the dialog box
     //
-    if (string("") == sViewName)
+    if (string("") == _sViewName)
     {
       Cdialogbox* pDialogBox = _pDoc->getParser()->getArchetype()->getDialogBox(sLang) ;
       if (pDialogBox)
-        sViewName = pDialogBox->getCaption() ;
+        _sViewName = pDialogBox->getCaption() ;
     }
 
-    if (string("") == sViewName)
-      sViewName = pContexte->getSuperviseur()->getText("archetypesManagement", "archetype") ;
+    if (string("") == _sViewName)
+      _sViewName = pContexte->getSuperviseur()->getText("archetypesManagement", "archetype") ;
 
     addConcernTitle() ;
   }
@@ -170,7 +170,7 @@ voidNSCQWindowsView::lanceArchetype(){try{  if (string("") == _pDoc->getArc
   _pBBItem = _pBigBoss->getBBItem() ;
 
   if ((_pDoc->getParser()) && (_pDoc->getParser()->getArchetype()))
-    sFonction = _pDoc->getParser()->getArchetype()->getFunction() ;
+    _sFonction = _pDoc->getParser()->getArchetype()->getFunction() ;
 
 	// pPaneSplitter->SetFrameTitle(getFunction(), sViewName) ;
 }
@@ -246,19 +246,19 @@ NSCQWindowsView::SetupWindow()
 
   NSBBMUEView::SetupWindow() ;
 
-  SetCaption(sViewName.c_str()) ;
+  SetCaption(_sViewName.c_str()) ;
 
-  if (pCreateWindow)
+  if (_pCreateWindow)
   {
     char szCreate[20] ;
-    sprintf(szCreate, "%p", pCreateWindow->HWindow) ;
+    sprintf(szCreate, "%p", _pCreateWindow->HWindow) ;
     ps = psHeader + string("Create Window ") + string(szCreate) ;
     pContexte->getSuperviseur()->trace(&ps, 1, NSSuper::trSubDetails) ;
   }
-  if (pSplittedWindow)
+  if (_pSplittedWindow)
   {
     char szSplitted[20] ;
-    sprintf(szSplitted, "%p", pSplittedWindow->HWindow) ;
+    sprintf(szSplitted, "%p", _pSplittedWindow->HWindow) ;
     ps = psHeader + string("Splitted Window ") + string(szSplitted) ;
     pContexte->getSuperviseur()->trace(&ps, 1, NSSuper::trSubDetails) ;
   }
@@ -277,10 +277,10 @@ NSCQWindowsView::SetupWindow()
       pContexte->getSuperviseur()->trace(&ps, 1, NSSuper::trSubDetails) ;
     }
   }
-  if (pGadgetPanelWindow)
+  if (_pGadgetPanelWindow)
   {
     char szGadget[20] ;
-    sprintf(szGadget, "%p", pGadgetPanelWindow->HWindow) ;
+    sprintf(szGadget, "%p", _pGadgetPanelWindow->HWindow) ;
     ps = psHeader + string("GadgetWindow ") + string(szGadget) ;
     pContexte->getSuperviseur()->trace(&ps, 1, NSSuper::trSubDetails) ;
   }
@@ -328,7 +328,7 @@ NSCQWindowsView::EvSetFocus(THandle hWndLostFocus)
 
 	TMyApp* pMyApp = pContexte->getSuperviseur()->getApplication() ;
 
-	if (bSetupToolBar && (GetWindow() != pMyApp->GetToolBarWindow()))
+	if (_bSetupToolBar && (GetWindow() != pMyApp->GetToolBarWindow()))
 	{
 		SetupToolBar() ;
 		pMyApp->SetToolBarWindow(GetWindow()) ;
@@ -339,9 +339,9 @@ NSCQWindowsView::EvSetFocus(THandle hWndLostFocus)
     pContexte->setAideCorps(sHelpUrl) ;
 
 	NSMUEView::EvSetFocus(hWndLostFocus) ;
-  _pPaneSplitter->SetFrameTitle(getFunction(), sViewName) ;
+  _pPaneSplitter->SetFrameTitle(getFunction(), _sViewName) ;
 
-  pMyApp->setMenu(string("menubar"), &hAccelerator) ;
+  pMyApp->setMenu(string("menubar"), &_hAccelerator) ;
 }
 
 void
@@ -684,7 +684,7 @@ NSCQWindowsView::askWantToSave()
       pPatient->updateIPPEnCours(pSuper->getIppSite(), sIPP) ;
 
     pMyApp->FlushControlBar() ;
-    bSetupToolBar = false ;
+    _bSetupToolBar = false ;
     return true ;
   }
   else
@@ -828,10 +828,10 @@ bool
 NSCQWindowsView::PreProcessMsg(MSG &msg)
 {
   PRECONDITION(GetHandle()) ;
-  if (NULL == hAccelerator)
+  if (NULL == _hAccelerator)
     return NSBBMUEView::PreProcessMsg(msg) ;
 
-  /* bool bTranslated = */ ::TranslateAccelerator(GetHandle(), hAccelerator, &msg) ;
+  /* bool bTranslated = */ ::TranslateAccelerator(GetHandle(), _hAccelerator, &msg) ;
 
   // if (bTranslated)
   //   return true ;
@@ -910,7 +910,7 @@ NSCQVue::~NSCQVue()
 void
 NSCQVue::setViewName()
 {
-	sViewName = string("") ;
+	_sViewName = string("") ;
 
 	if (NULL == pDoc->_pDocInfo)
   {
@@ -922,11 +922,11 @@ NSCQVue::setViewName()
     int res = clientWin->GetWindowText(szTitle, 255) ;
     if (!res)
 		{
-    	sViewName = pContexte->getSuperviseur()->getText("archetypesManagement", "archetype") ;
+    	_sViewName = pContexte->getSuperviseur()->getText("archetypesManagement", "archetype") ;
 			addConcernTitle() ;
 		}
     else
-    	sViewName = string(szTitle) ;
+    	_sViewName = string(szTitle) ;
   }
   else
 	{
@@ -952,7 +952,7 @@ voidNSCQVue::lanceArchetype(){try{  if (string("") == pDoc->getArchetype())
   clientWin->GetWindowRect(dlgRect) ;
 
   if ((pDoc->getParser()) && (pDoc->getParser()->getArchetype()))
-    sFonction = pDoc->getParser()->getArchetype()->getFunction() ;
+    _sFonction = pDoc->getParser()->getArchetype()->getFunction() ;
 
 	// pPaneSplitter->SetFrameTitle(getFunction(), sViewName) ;
 }
@@ -1046,7 +1046,7 @@ NSCQVue::EvSetFocus(THandle hWndLostFocus)
 	}
 
 	NSMUEView::EvSetFocus(hWndLostFocus) ;
-  _pPaneSplitter->SetFrameTitle(getFunction(), sViewName) ;
+  _pPaneSplitter->SetFrameTitle(getFunction(), _sViewName) ;
 
   if (clientWin)
 		clientWin->EvSetFocus(hWndLostFocus) ;
@@ -1110,24 +1110,24 @@ NSCQVue::PreProcessMsg(MSG &msg)
   PRECONDITION(GetHandle()) ;
   // return hAccelerator ? ::TranslateAccelerator(GetHandle(), hAccelerator, &msg) : false ;
 
-  if (NULL != hAccelerator)
+  if (_hAccelerator)
   {
-    bool bTranslated = ::TranslateAccelerator(GetHandle(), hAccelerator, &msg) ;
+    bool bTranslated = ::TranslateAccelerator(GetHandle(), _hAccelerator, &msg) ;
     if (bTranslated)
       return true ;
 
     if (WM_KEYDOWN == msg.message)
     {
-      bool bTranslated = ::TranslateAccelerator(GetHandle(), hAccelerator, &msg) ;
+      bool bTranslated = ::TranslateAccelerator(GetHandle(), _hAccelerator, &msg) ;
       if (bTranslated)
         return true ;
       else
       {
-        int cAccelerators = CopyAcceleratorTable(hAccelerator, NULL, 0);
+        int cAccelerators = CopyAcceleratorTable(_hAccelerator, NULL, 0);
         LPACCEL lpaccelNew = (LPACCEL) LocalAlloc(LPTR, cAccelerators * sizeof(ACCEL)) ;
         if (lpaccelNew != NULL)
         {
-          CopyAcceleratorTable(hAccelerator, lpaccelNew, cAccelerators) ;
+          CopyAcceleratorTable(_hAccelerator, lpaccelNew, cAccelerators) ;
           LPACCEL lpaccelPt = lpaccelNew ;
           for (int i = 0 ; i < cAccelerators ; i++)
             ACCEL accel = *lpaccelPt++ ;

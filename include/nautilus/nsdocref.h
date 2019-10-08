@@ -147,6 +147,9 @@ class NSRefDocument : public NSNoyauDocument
 		// Pour récupérer la date de l'examen dans un CR
 		string 	GetDateDoc(bool bDateClaire = true) ;
 
+    // Get second operator in report
+		string 	GetSecondOperator() ;
+
 		bool  	makeSOAP() ;
 
     // Getters for print params

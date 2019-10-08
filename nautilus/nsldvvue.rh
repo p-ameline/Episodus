@@ -92,8 +92,8 @@
 #define POSO_NIGHT_UPDN     247
 #define POSO_BED_TXT        248
 #define POSO_BED            249
-#define POSO_BED_UPDN       240
-#define NR_BUTTON           245
+#define POSO_BED_UPDN       250
+#define NR_BUTTON           255
 
 // Dialogue PROP_PREO
 #define IDC_LISTVIEW_ACTUEL	101

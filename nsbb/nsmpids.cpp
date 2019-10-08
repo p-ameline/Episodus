@@ -1292,7 +1292,7 @@ NSPersonArray::createPerson(NSContexte *pContexte, PIDSTYPE iTypePids)
 
   // on teste le code de retour du dialogue, qui est stocké dans le
   // BBItem root créé par le pBigBoss.
-  if (0 == BigBoss.getBBItem()->getRetourDlg())     // CmOK
+  if (BigBoss.getBBItem() && (0 == BigBoss.getBBItem()->getRetourDlg())) // CmOK
   {
     // on enregistre la patpatho du pBigBoss, qui contient les nouvelles données
     // si elle n'est pas vide.

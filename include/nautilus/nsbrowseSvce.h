@@ -15,11 +15,11 @@ class NSWebServiceWindow : public TWindow
 {
 	public:
 
-		bool        bNavOk ;
-		bool        bCanClose ;
-    string      sStartingURL ;
-  	string			sHtml ;
-    NSContexte* pContexte ;
+		bool        _bNavOk ;
+		bool        _bCanClose ;
+    string      _sStartingURL ;
+  	string			_sHtml ;
+    NSContexte* _pContexte ;
 
     NSWebServiceWindow(TWindow* parent, string sFirstURL, NSContexte* pCtx) ;
     ~NSWebServiceWindow() ;
@@ -45,7 +45,7 @@ class NSWebServiceWindow : public TWindow
 
 	private:
 
-		TWebServiceForm* Form ;
+		TWebServiceForm* _pForm ;
 	DECLARE_RESPONSE_TABLE(NSWebServiceWindow) ;
 };
 

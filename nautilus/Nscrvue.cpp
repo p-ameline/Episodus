@@ -1406,7 +1406,6 @@ try
 	TEXTMETRIC				  TextMetric ;
 	NSPage						  stylePage, *pStylePage ;
 	bool							  bGerePages = false ;
-	string						  line ;
 
 	NSCRPhraLesArray	  aLesBuf ;   // Localisation(s)
 	NSCRPhraLesArray	  aLesPath ;  // Chemin(s)
@@ -1414,7 +1413,7 @@ try
 	// Mise à zéro des phrases et des lignes
 	//
 	NSCRDocument* pCRDoc = dynamic_cast<NSCRDocument*>(_pDoc) ;
-  if (NULL == pCRDoc)
+  if ((NSCRDocument*) NULL == pCRDoc)
     return false ;
 
 	pCRDoc->_aCRPhrases.vider() ;
@@ -1430,9 +1429,10 @@ try
 	//
 	while (!inFile.eof())
 	{
-  	getline(inFile,line) ;
-    if (line != "")
-    	Chaine += line + "\n" ;
+    string sLine = string("") ;
+  	getline(inFile, sLine) ;
+    if (string("") != sLine)
+    	Chaine += sLine + string("\n") ;
 	}
 	//
 	inFile.close() ;

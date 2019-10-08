@@ -131,6 +131,7 @@
 #include "nautilus\nsmdiframe.h"
 #include "nsepisod\nsPilotProxy.h"
 #include "nsepisod\nsToDo.h"
+#include "nsoutil\nsProgress.h"
 
 # include "ns_ob1\nautilus-bbk.h"
 
@@ -1567,14 +1568,16 @@ try
 		return ;
 	}
 
-	int numModele = pChoixTemplateDlg->TemplateChoisi ;
-	if (numModele > 0)
+	int iNumModele = pChoixTemplateDlg->getTemplateChoisi() ;
+	if (iNumModele > 0)
 	{
 		// strcpy(nomModele, (*(pChoixTemplateDlg->pTemplateArray))[numModele-1]->pDonnees->fichier) ;
 		// strcpy(nomEnTete, (*(pChoixTemplateDlg->pTemplateArray))[numModele-1]->pDonnees->en_tete) ;
 
-    sNomModele = (*(pChoixTemplateDlg->pTemplateArray))[numModele-1]->getFichier() ;
-  	sNomEntete = (*(pChoixTemplateDlg->pTemplateArray))[numModele-1]->getEnTete() ;
+    NSTemplateArray* pTemplateArray = pChoixTemplateDlg->getTemplateArray() ;
+
+    sNomModele = (*pTemplateArray)[iNumModele-1]->getFichier() ;
+  	sNomEntete = (*pTemplateArray)[iNumModele-1]->getEnTete() ;
 	}
 	else
 	{
@@ -1585,11 +1588,12 @@ try
 	}
 
 	delete pChoixTemplateDlg ;
+  pChoixTemplateDlg = (ChoixTemplateDialog*) 0 ;
 
 	// on prend comme convention que le fichier template sera copié dans le fichier html dest
 	// => le nom template ne figure pas dans le HDHTM (il y figure par contre l'en-tete)
   // car un fichier HIHTM est lui-même sa propre template
-	sNomTemplate = pContexte->PathName("NTPL") + sNomModele ;
+	sNomTemplate   = pContexte->PathName("NTPL") + sNomModele ;
   sNomEnTeteBrut = sNomEntete ;
 
   NSRefDocument NewDoc(0, pContexte) ;
@@ -10428,7 +10432,7 @@ NSUtilisateurChoisi::createPatient(NSPatPathoArray *pPatPathoAdmin)
 	bool bRes = pNewPatient->getGraphPerson()->writeGraph(pContexte, pidsPatient, (NSDataGraph *) 0) ;
   if (false == bRes)
   {
-    string sErrorText = pSuper->getText("patientManagement", "patientIdCreationError") ;
+    string sErrorText = pSuper->getText("patientManagement", "patientCreationError") ;
     pSuper->trace(&sErrorText, 1, NSSuper::trError) ;
     erreur(sErrorText.c_str(), standardError, 0) ;
   	return false ;
@@ -13043,6 +13047,8 @@ NSUtilisateurChoisi::getIdFromString(string sTextId)
     return CM_VISUAL ;
   if (sTextId == "CM_MAILBOX")
     return CM_MAILBOX ;
+  if (sTextId == "CM_TANK")
+    return CM_TANK ;
   if (sTextId == "CM_OUTILS")
     return CM_OUTILS ;
   if (sTextId == "CM_ABOUT")
@@ -13121,39 +13127,6 @@ NSMailParams::NSMailParams()
 
   _bUseApiProxy = false ;
   _bUseAuthentification = false ;
-}
-
-//***********************************************************************//
-//							      Classe NSProgressAndMessageDlg
-//***********************************************************************//
-DEFINE_RESPONSE_TABLE1(NSProgressAndMessageDlg, NSUtilDialog)
-END_RESPONSE_TABLE;
-
-NSProgressAndMessageDlg::NSProgressAndMessageDlg(TWindow* parent, NSContexte* pCtx, TModule* module)
-                        :NSUtilDialog(parent, pCtx, "PROGRESS_DISPLAY", module)
-{
-	_pProgressBar = new TGauge(this, IDC_PROGRESS_BAR) ;
-	_pTextDisplay = new TStatic(this, IDC_PATCLOSE_TEXT) ;
-}
-
-NSProgressAndMessageDlg::~NSProgressAndMessageDlg(){
-	delete _pProgressBar ;
-	delete _pTextDisplay ;
-}
-
-voidNSProgressAndMessageDlg::SetupWindow()
-{
-	TDialog::SetupWindow() ;
-
-	_pProgressBar->SetRange(0, 100) ;  _pProgressBar->SetLed(4, 80) ;
-  _pProgressBar->SetStep(1) ;
-
-  resetProgressGauge() ;
-}
-
-voidNSProgressAndMessageDlg::resetProgressGauge()
-{
-	_pProgressBar->SetValue(0) ;
 }
 
 //***********************************************************************////							      Classe NSHistoryClosingDlg

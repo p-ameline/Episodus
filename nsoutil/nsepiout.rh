@@ -156,3 +156,9 @@
 #define IDC_TRACE_5          112
 #define IDC_TRACE_6          113
 
+// Dialogue IDD_PATSEARCHEDIT_PARAMS_DLG
+#define IDC_TXT_GRP          101
+#define IDC_TXT_CHARCNT      102
+#define IDC_ED_CHARCNT       103
+#define IDC_TXT_IDLETIME     104
+#define IDC_ED_IDLETIME      105

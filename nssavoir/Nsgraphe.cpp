@@ -1461,7 +1461,7 @@ try
       	// on cherche ici un texte libre
         sElemLex = (*iter)->getLexique() ;
 
-        if (sElemLex == string("£?????"))
+        if ((string("£?????") == sElemLex) || (string("??????") == sElemLex))
         	sFichArc = (*iter)->getTexteLibre() ;
 
         iter++;
@@ -1471,12 +1471,20 @@ try
     	iter++ ;
   }
 
+  if (string("") == sFichArc)
+	{
+		string sErrorText = string("Archetype file name not found for ID ") + sNomArc ;
+    _pSuper->trace(&sErrorText, 1, NSSuper::trError) ;
+		erreur(sErrorText.c_str(), standardError) ;
+		return string("") ;
+	}
+
   (*iterTree)->setModelName(sNomArc) ;
   (*iterTree)->setModelFileName(sFichArc) ;
   _aModelArray.push_back(new NSDataTree(*(*iterTree))) ;
 
 #ifndef _ENTERPRISE_DLL
-  if (bAvecChemin)
+  if (bAvecChemin && (string("") != (*iterTree)->getModelFileName()))
   	sPathName = _pSuper->PathName("IXML") + (*iterTree)->getModelFileName() ;
   else
 #endif

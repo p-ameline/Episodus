@@ -10,8 +10,8 @@
 #include "partage\ns_timer.h"
 #include "nssavoir\nsbloque.h"
 #include "nautilus\nsepicap.h"
-#include "nautilus\nscqdoc.h"#include "nsbb\nsarc.h"#include "nsbb\ns_skins.h"#include "nsutil\md5.h"   // Cryptage MD5#include "nssavoir\nsHealthTeamMemberInterface.h"#include "nsbb\logpass.h"#include "nsbb\nsdefArch.h"#include "nsepisod\nsepisod.h"#include "pilot\NautilusPilot.hpp"#include "nsbb\tagNames.h"
-#include "nsutil\md5.h"boolpatSortByNameInf(NSPatInfo *pPat1, NSPatInfo *pPat2)
+#include "nautilus\nscqdoc.h"#include "nsbb\nsarc.h"#include "nsbb\ns_skins.h"#include "nsutil\md5.h"   // Cryptage MD5#include "nssavoir\nsHealthTeamMemberInterface.h"#include "nsbb\logpass.h"#include "nsbb\nsdefArch.h"#include "nsoutil\nsEpiOut.h"#include "nsepisod\nsepisod.h"#include "pilot\NautilusPilot.hpp"#include "nsbb\tagNames.h"
+#include "nsutil\md5.h"#include "nsepisod\nspatdlgknlrc.h"boolpatSortByNameInf(NSPatInfo *pPat1, NSPatInfo *pPat2)
 {
   if (((NSPatInfo*) NULL == pPat1) || ((NSPatInfo*) NULL == pPat2))
     return false ;
@@ -87,6 +87,7 @@ DEFINE_RESPONSE_TABLE1(NSNTiersListePatDialog, NSUtilDialog)	EV_COMMAND(IDOK,  
 	EV_COMMAND(IDC_LISTPA_OUVRIR,       CmOk),
 	EV_COMMAND(IDCANCEL,                CmCancel),
 	EV_COMMAND(IDC_NTLISTPA_RECHPAT,    Rechercher),
+  EV_COMMAND(IDC_NAME_EDIT_PARAMS,    NameEditParams),
 	EV_LVN_GETDISPINFO(IDC_NTLISTPA_LW, LvnGetDispInfo),
 	EV_LVN_COLUMNCLICK(IDC_NTLISTPA_LW, LVNColumnclick),
   EV_WM_TIMER,
@@ -120,6 +121,9 @@ try
 	pListe 	         = new NSNTiersListPatWindow(this, pContexte, IDC_NTLISTPA_LW) ;
 	iSortedColumn    = 1 ;
   bNaturallySorted = true ; // in order to have it naturally sorted
+
+  pParamsBitmap    = new OWL::TBitmap(pNSResModule->GetHandle(), IDB_NAME_EDIT_PARAMS) ;
+  pNameEditParams  = new OWL::TGlyphButton(this, IDC_NAME_EDIT_PARAMS) ;
 
 	// on recupère le patient en cours
 	pPatEnCours = pPat ;
@@ -202,6 +206,7 @@ NSNTiersListePatDialog::~NSNTiersListePatDialog()
   delete pUseNom ;
   delete pUsePrenom ;
   delete pUseBirthdate ;
+  delete pNameEditParams ;
 }
 
 void
@@ -215,6 +220,7 @@ NSNTiersListePatDialog::SetupWindow()
 	pNom->SetText(_sNomPat) ;
 	pPrenom->SetText(_sPrenomPat) ;
   pDateNaiss->setDate(_sDateNaiss) ;
+  pNameEditParams->SetGlyph(pParamsBitmap) ;
 
   pUseNom->Check() ;
   if (string("") == _sPrenomPat)
@@ -593,6 +599,19 @@ NSNTiersListePatDialog::Rechercher()
 //	TWindow* pWnd = ChildWithId(IDC_LISTPA_OUVRIR) ;
 //  if (NULL != pWnd)
 //		SetControlFocus(pWnd->HWindow) ;
+}
+
+void
+NSNTiersListePatDialog::NameEditParams()
+{
+  NSPatSearchEditParamsDlg SearchParamsDlg(this, pContexte) ;
+  int iResult = SearchParamsDlg.Execute() ;
+
+  if (IDOK == iResult)
+  {
+    _iAutoSearchDelay   = pContexte->getEpisodus()->_iAutoSearchDelay ;
+    _iAutoSearchMinChar = pContexte->getEpisodus()->_iAutoSearchMinChar ;
+  }
 }
 
 void
@@ -1089,9 +1108,9 @@ DEFINE_RESPONSE_TABLE1(ChercheListePatCorDialog, NSUtilDialog)
     EV_LVN_GETDISPINFO(IDC_LISTCOR_LW, LvnGetDispInfo),
 END_RESPONSE_TABLE;
 
-ChercheListePatCorDialog::ChercheListePatCorDialog(TWindow* pere, NSContexte* pCtx, TModule* mod)                         :NSUtilDialog(pere, pCtx, "IDD_LISTCOR", mod)
+ChercheListePatCorDialog::ChercheListePatCorDialog(TWindow* pere, NSContexte* pCtx)                         :NSUtilDialog(pere, pCtx, "IDD_LISTCOR", pNSResModule)
 {
-	pListeCorresp  = new NSListPatCorWindow(this, IDC_LISTCOR_LW, mod) ;
+	pListeCorresp  = new NSListPatCorWindow(this, IDC_LISTCOR_LW, pNSResModule) ;
 	pCorrespArray  = new NSPersonArray(pContexte->getSuperviseur()) ;
 	pCorrespSelect = new NSPersonInfo(pContexte->getSuperviseur()) ;
 }
@@ -1231,7 +1250,7 @@ DEFINE_RESPONSE_TABLE1(NSListPatCorWindow, TListWindow)
     EV_WM_LBUTTONDBLCLK,
 END_RESPONSE_TABLE;
 
-NSListPatCorWindow::NSListPatCorWindow(ChercheListePatCorDialog* pere, int resId, TModule* module) : TListWindow(pere, resId, module){
+NSListPatCorWindow::NSListPatCorWindow(ChercheListePatCorDialog* pere, int resId, TModule* module)                   :TListWindow(pere, resId, module){
   pDlg = pere ;
 }
 

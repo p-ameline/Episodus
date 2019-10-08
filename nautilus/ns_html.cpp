@@ -179,23 +179,20 @@ NSHtmlCQ::~NSHtmlCQ()
 NSHtmlHisto::NSHtmlHisto(OperationType typeOp, NSNoyauDocument *pDocNoy, NSContexte *pCtx, string sDest)
             :NSModHtml(typeOp, pDocNoy, pCtx)
 {
-  string 	            sTitre ;
-  string 	            sDate ;
   string              sIntro, sMessage ;
   char 	              cDate[9] ;
   TDate 	            dateSys ;
   NSHistoRefDocument  *pHistoDoc = dynamic_cast<NSHistoRefDocument *>(pDocNoy) ;
 
-	string sLang = pContexte->getUserLanguage() ;
-
-  sTitre = string("Historique") ;
+	string sLang  = pContexte->getUserLanguage() ;
+  string sTitre = string("Historique") ;
 
   sprintf(cDate,"%4d%02d%02d", (int) dateSys.Year(), (int) dateSys.Month(), (int) dateSys.DayOfMonth()) ;
-  sDate = string(cDate) ;
+  string sDate = string(cDate) ;
   donne_date_claire(sDate, &sMessage, &sIntro, sLang) ;
 
-  if (sIntro != "")
-    sDate = sIntro + " " + sMessage ;
+  if (string("") != sIntro)
+    sDate = sIntro + string(" ") + sMessage ;
   else
     sDate = sMessage ;
 
@@ -2018,7 +2015,7 @@ try
   if ((NSNoyauDocument*) NULL == pDocNoy)
     return ;
 
-  NSCRDocument *pCRDoc  = dynamic_cast<NSCRDocument *>(pDocNoy) ;
+  NSCRDocument *pCRDoc = dynamic_cast<NSCRDocument *>(pDocNoy) ;
   if ((NSCRDocument*) NULL == pCRDoc)
     return ;
 
@@ -2043,10 +2040,11 @@ try
   // on prend la date du document
   string sDate = pCRDoc->GetDateDoc() ;
 
-  ajoute(tTitle,     sTitre) ;
-  ajoute(tOperateur, sCreateur) ;
-  ajoute(tDate,      sDate) ;
-  ajoute(tDest,      sDest) ;
+  ajoute(tTitle,        sTitre) ;
+  ajoute(tOperateur,    sCreateur) ;
+  ajoute(t2ndOperateur, pCRDoc->GetSecondOperator()) ;
+  ajoute(tDate,         sDate) ;
+  ajoute(tDest,         sDest) ;
   ajoute(pHtmlCR) ;
   addSignature() ;
   addPatient() ;

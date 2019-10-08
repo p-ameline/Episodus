@@ -681,7 +681,7 @@ NSDico::donneCodeSens(string& sCode)
 }
 
 //---------------------------------------------------------------------------
-//   Donne le code Sens en fonction du code lexique
+//   Donne le code Sens d'une chaine complexe
 //---------------------------------------------------------------------------
 void
 NSDico::donneCodeSens(const string* pCodeLexique, string* pCodeSens)
@@ -703,6 +703,8 @@ NSDico::donneCodeSens(const string* pCodeLexique, string* pCodeSens)
   // Chercher la position de intranodeSeparationMARK dans la chaine
   size_t positINod = pCodeLexique->find(string(1, intranodeSeparationMARK)) ;
 
+  // Single Lexique code
+  //
   if ((string::npos == positNode) && (string::npos == positChem) && (string::npos == positINod))
   {
   	sBuffer = *pCodeLexique ;
@@ -711,21 +713,38 @@ NSDico::donneCodeSens(const string* pCodeLexique, string* pCodeSens)
     return ;
 	}
 
+  // Composite code (multipath, path or complex concept)
+  //
   size_t posit = min(positChem, positNode) ;
   posit = min(posit, positINod) ;
+
   size_t debut = 0 ;
+  size_t iSize = strlen(pCodeLexique->c_str()) ;
 
-  char cSepare ;
-
-	while (((string::npos != positNode) || (string::npos != positChem) || (string::npos != positINod)) &&
-                                    (posit < strlen(pCodeLexique->c_str())))
+	while (((string::npos != positNode) ||
+          (string::npos != positChem) ||
+          (string::npos != positINod)) &&
+                                    (posit < iSize))
   {
-  	cSepare = (*pCodeLexique)[posit] ;
+  	char cSepare = (*pCodeLexique)[posit] ;
 
     sBuffer = string(*pCodeLexique, debut, posit - debut) ;
-    donneCodeSens(sBuffer) ;
+
+    // Don't call donneCodeSens if it is a complement (.$xxx)
+    //
+    bool bIsComplement = false ;
+    if ((debut > 0) && ('.' == (*pCodeLexique)[debut-1]) && ('$' == sBuffer[0]))
+      bIsComplement = true ;
+
+    if (false == bIsComplement)
+      donneCodeSens(sBuffer) ;
+
+    // Add to the new string
+    //
     *pCodeSens = *pCodeSens + sBuffer + string(1, cSepare) ;
 
+    // Find next separator
+    //
     debut = posit + 1 ;
     positChem = pCodeLexique->find(string(1, cheminSeparationMARK), debut) ;
     positNode = pCodeLexique->find(string(1, nodeSeparationMARK), debut) ;
@@ -735,8 +754,17 @@ NSDico::donneCodeSens(const string* pCodeLexique, string* pCodeSens)
     posit = min(posit, positINod) ;
   }
 
-	sBuffer = string(*pCodeLexique, debut, strlen(pCodeLexique->c_str()) - debut) ;
-  donneCodeSens(sBuffer) ;
+	sBuffer = string(*pCodeLexique, debut, iSize - debut) ;
+
+  // Don't call donneCodeSens if it is a complement (.$xxx)
+  //
+  bool bIsComplement = false ;
+  if ((debut > 0) && ('.' == (*pCodeLexique)[debut-1]) && ('$' == sBuffer[0]))
+    bIsComplement = true ;
+
+  if (false == bIsComplement)
+    donneCodeSens(sBuffer) ;
+
   *pCodeSens = *pCodeSens + sBuffer ;
 }
 
@@ -768,6 +796,94 @@ NSDico::donneCodeComplet(string& sCode)
   	sCode += string("001") ;
     return ;
   }
+}
+
+//---------------------------------------------------------------------------
+//   Donne le code complet d'une chaine complexe
+//---------------------------------------------------------------------------
+void
+NSDico::donneCodeComplet(const string* pCodeLexique, string* pCodeComplet)
+{
+	if ((string*) NULL == pCodeComplet)
+  	return ;
+
+  *pCodeComplet = string("") ;
+
+  if (((string*) NULL == pCodeLexique) || (string("") == *pCodeLexique))
+  	return ;
+
+  string sBuffer = string("") ;
+
+  // Chercher la position de cheminSeparationMARK dans la chaine
+  size_t positChem = pCodeLexique->find(string(1, cheminSeparationMARK)) ;
+  // Chercher la position de nodeSeparationMARK dans la chaine
+  size_t positNode = pCodeLexique->find(string(1, nodeSeparationMARK)) ;
+  // Chercher la position de intranodeSeparationMARK dans la chaine
+  size_t positINod = pCodeLexique->find(string(1, intranodeSeparationMARK)) ;
+
+  // Single Lexique code
+  //
+  if ((string::npos == positNode) && (string::npos == positChem) && (string::npos == positINod))
+  {
+  	sBuffer = *pCodeLexique ;
+    donneCodeComplet(sBuffer) ;
+    *pCodeComplet = sBuffer ;
+    return ;
+	}
+
+  // Composite code (multipath, path or complex concept)
+  //
+  size_t posit = min(positChem, positNode) ;
+  posit = min(posit, positINod) ;
+
+  size_t debut = 0 ;
+  size_t iSize = strlen(pCodeLexique->c_str()) ;
+
+	while (((string::npos != positNode) ||
+          (string::npos != positChem) ||
+          (string::npos != positINod)) &&
+                                    (posit < iSize))
+  {
+  	char cSepare = (*pCodeLexique)[posit] ;
+
+    sBuffer = string(*pCodeLexique, debut, posit - debut) ;
+
+    // Don't call donneCodeSens if it is a complement (.$xxx)
+    //
+    bool bIsComplement = false ;
+    if ((debut > 0) && ('.' == (*pCodeLexique)[debut-1]) && ('$' == sBuffer[0]))
+      bIsComplement = true ;
+
+    if (false == bIsComplement)
+      donneCodeComplet(sBuffer) ;
+
+    // Add to the new string
+    //
+    *pCodeComplet = *pCodeComplet + sBuffer + string(1, cSepare) ;
+
+    // Find next separator
+    //
+    debut = posit + 1 ;
+    positChem = pCodeLexique->find(string(1, cheminSeparationMARK), debut) ;
+    positNode = pCodeLexique->find(string(1, nodeSeparationMARK), debut) ;
+    positINod = pCodeLexique->find(string(1, intranodeSeparationMARK), debut) ;
+
+    posit = min(positChem, positNode) ;
+    posit = min(posit, positINod) ;
+  }
+
+	sBuffer = string(*pCodeLexique, debut, iSize - debut) ;
+
+  // Don't call donneCodeSens if it is a complement (.$xxx)
+  //
+  bool bIsComplement = false ;
+  if ((debut > 0) && ('.' == (*pCodeLexique)[debut-1]) && ('$' == sBuffer[0]))
+    bIsComplement = true ;
+
+  if (false == bIsComplement)
+    donneCodeComplet(sBuffer) ;
+
+  *pCodeComplet = *pCodeComplet + sBuffer ;
 }
 
 //---------------------------------------------------------------------------

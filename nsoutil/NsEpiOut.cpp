@@ -20,10 +20,10 @@
 // ***************************************************************************
 DEFINE_RESPONSE_TABLE1(NsEpisodusOutilDialog, TDialog)
 	EV_CHILD_NOTIFY(IDC_FLECHIES,   BN_CLICKED, lanceBuildFlechies),
-    EV_CHILD_NOTIFY(IDC_IMP_CISP,   BN_CLICKED, lanceImportCISP),
-    EV_CHILD_NOTIFY(IDC_IMP_CIM,    BN_CLICKED, lanceImportCIM),
-    EV_CHILD_NOTIFY(IDC_IMP_LISTE,  BN_CLICKED, lanceCodeList),
-    EV_CHILD_NOTIFY(IDC_CLASS_CTRL, BN_CLICKED, gereClassCtrl),
+  EV_CHILD_NOTIFY(IDC_IMP_CISP,   BN_CLICKED, lanceImportCISP),
+  EV_CHILD_NOTIFY(IDC_IMP_CIM,    BN_CLICKED, lanceImportCIM),
+  EV_CHILD_NOTIFY(IDC_IMP_LISTE,  BN_CLICKED, lanceCodeList),
+  EV_CHILD_NOTIFY(IDC_CLASS_CTRL, BN_CLICKED, gereClassCtrl),
 END_RESPONSE_TABLE;
 
 //---------------------------------------------------------------------------
@@ -48,10 +48,10 @@ NsEpisodusOutilDialog::~NsEpisodusOutilDialog()
 	// Suppression de tous les objets
 	//
 	delete pBuildFlechies ;
-    delete pImportCISP ;
-    delete pImportCIM ;
-    delete pCodeList ;
-    delete pClassCtrl ;
+  delete pImportCISP ;
+  delete pImportCIM ;
+  delete pCodeList ;
+  delete pClassCtrl ;
 }
 
 //---------------------------------------------------------------------------
@@ -60,7 +60,7 @@ NsEpisodusOutilDialog::~NsEpisodusOutilDialog()
 void
 NsEpisodusOutilDialog::SetupWindow()
 {
-    TDialog::SetupWindow();
+  TDialog::SetupWindow();
 }
 
 //---------------------------------------------------------------------------
@@ -69,12 +69,8 @@ NsEpisodusOutilDialog::SetupWindow()
 void
 NsEpisodusOutilDialog::lanceBuildFlechies()
 {
-	string sTypeDocument;
-    NSFlechiesBuildDlg* pDlg = new NSFlechiesBuildDlg(pContexte->GetMainWindow(),
-                                                      pContexte);
-    pDlg->Execute();
-    delete pDlg;
-    return;
+  NSFlechiesBuildDlg dlg(pContexte->GetMainWindow(), pContexte) ;
+  dlg.Execute() ;
 }
 
 //---------------------------------------------------------------------------
@@ -83,14 +79,12 @@ NsEpisodusOutilDialog::lanceBuildFlechies()
 void
 NsEpisodusOutilDialog::lanceImportCISP()
 {
-    int iResult = MessageBox("Vous devez disposer d'un fichier CISP.TXT dans le répertoire de lancement du logiciel. Ce fichier doit contenir le libellé et le code, séparés par une tabulation. Souhaitez vous continuer ?", "Import de la CISP", MB_YESNO);
-    if (iResult != IDYES)
-        return;
+  int iResult = MessageBox("Vous devez disposer d'un fichier CISP.TXT dans le répertoire de lancement du logiciel. Ce fichier doit contenir le libellé et le code, séparés par une tabulation. Souhaitez vous continuer ?", "Import de la CISP", MB_YESNO);
+  if (IDYES != iResult)
+    return ;
 
-    NSEpiClassifDB* pClassifDB = new NSEpiClassifDB(pContexte);
-    pClassifDB->rempliClassifCISP("CISP.TXT") ;
-    delete pClassifDB;
-    return;
+  NSEpiClassifDB classifDB(pContexte) ;
+  classifDB.rempliClassifCISP("CISP.TXT") ;
 }
 
 //---------------------------------------------------------------------------
@@ -99,14 +93,12 @@ NsEpisodusOutilDialog::lanceImportCISP()
 void
 NsEpisodusOutilDialog::lanceImportCIM()
 {
-    int iResult = MessageBox("Vous devez disposer d'un fichier CIM.TXT dans le répertoire de lancement du logiciel. Ce fichier doit contenir le libellé et le code, séparés par une tabulation. Souhaitez vous continuer ?", "Import CIM", MB_YESNO);
-    if (iResult != IDYES)
-        return;
+  int iResult = MessageBox("Vous devez disposer d'un fichier CIM.TXT dans le répertoire de lancement du logiciel. Ce fichier doit contenir le libellé et le code, séparés par une tabulation. Souhaitez vous continuer ?", "Import CIM", MB_YESNO);
+  if (IDYES != iResult)
+    return ;
 
-    NSEpiClassifDB* pClassifDB = new NSEpiClassifDB(pContexte);
-    pClassifDB->rempliClassifCIM("CIM.TXT") ;
-    delete pClassifDB;
-    return;
+  NSEpiClassifDB classifDB(pContexte) ;
+  classifDB.rempliClassifCIM(string("CIM.TXT")) ;
 }
 
 //---------------------------------------------------------------------------
@@ -115,11 +107,8 @@ NsEpisodusOutilDialog::lanceImportCIM()
 void
 NsEpisodusOutilDialog::lanceCodeList()
 {
-    NSCodeListDlg* pDlg = new NSCodeListDlg(pContexte->GetMainWindow(),
-                                                      pContexte);
-    pDlg->Execute();
-    delete pDlg;
-    return;
+  NSCodeListDlg dlg(pContexte->GetMainWindow(), pContexte) ;
+  dlg.Execute() ;
 }
 
 //---------------------------------------------------------------------------
@@ -128,25 +117,25 @@ NsEpisodusOutilDialog::lanceCodeList()
 void
 NsEpisodusOutilDialog::gereClassCtrl()
 {
-    string sFichier =   string("class") +
+  string sFichier = string("class") +
 #ifndef _MUE
                         string(pContexte->getUtilisateur()->pDonnees->indice) +
 #else
                         string(pContexte->getUtilisateurID()) +
 #endif
                         string(".xml") ;
-    sFichier = pContexte->PathName("BGLO") + sFichier;
+  sFichier = pContexte->PathName("BGLO") + sFichier ;
 
-    string sLine;
-    ifstream inFile ;
-    inFile.open(sFichier.c_str());
+  string sLine;
+  ifstream inFile ;
+  inFile.open(sFichier.c_str());
 
-    if (!inFile)
-   	{
-        string sErrMess = string("Erreur d'ouverture du fichier ") + sFichier;
-        erreur(sErrMess.c_str(), standardError, 0, pContexte->GetMainWindow()->GetHandle()) ;
-   		return ;
-   	}
+  if (!inFile)
+  {
+    string sErrMess = string("Erreur d'ouverture du fichier ") + sFichier ;
+    erreur(sErrMess.c_str(), standardError, 0, pContexte->GetMainWindow()->GetHandle()) ;
+    return ;
+  }
 
     string sSaveFile = string("class") + donne_date_duJour() + donne_heure() +
 #ifndef _MUE
@@ -298,7 +287,7 @@ NSFlechiesBuildDlg::demarre()
 void
 NSFlechiesBuildDlg::stoppe()
 {
-    bTourner = false;
+  bTourner = false ;
 }
 
 void
@@ -929,7 +918,7 @@ NSPrometheFile::Lancer()
   // ----------------Lance boîte de dialogue ----------------------
   //
   int iresult = pPrometheParams->Execute() ;
-  if (iresult == IDOK)
+  if (IDOK == iresult)
   {
     string sUserId = string("") ;
     NSUtilisateurChoisi* pUser = pContexte->getUtilisateur() ;
@@ -3117,5 +3106,99 @@ NSInitParamsDlg::getTraceLevel()
     return NSSuper::trSubDetails ;
 
   return NSSuper::trNone ;
+}
+
+//
+// ------------------------------- NSPatSearchEditParamsDlg ----------------------
+//
+
+DEFINE_RESPONSE_TABLE1(NSPatSearchEditParamsDlg, TDialog)
+  EV_COMMAND(IDOK, CmOk),
+  EV_COMMAND(IDCANCEL, CmCancel),
+END_RESPONSE_TABLE ;
+
+NSPatSearchEditParamsDlg::NSPatSearchEditParamsDlg(TWindow* pere, NSContexte* pCtx)
+                         :NSUtilDialog(pere, pCtx, "IDD_PATSEARCHEDIT_PARAMS_DLG", pNSResModule)
+{
+	_pParamsIDGroup = new TGroupBox(this, IDC_TXT_GRP) ;
+	_pCharCountTxt  = new TStatic(this, IDC_TXT_CHARCNT) ;
+	_pCharCountEdit = new NSEditNum(pContexte, this, IDC_ED_CHARCNT) ;
+	_pIdleTimeTxt   = new TStatic(this, IDC_TXT_IDLETIME) ;
+	_pIdleTimeEdit  = new NSEditNum(pContexte, this, IDC_ED_IDLETIME) ;
+}
+
+NSPatSearchEditParamsDlg::~NSPatSearchEditParamsDlg()
+{
+	delete _pParamsIDGroup ;
+	delete _pCharCountTxt ;
+	delete _pCharCountEdit ;
+	delete _pIdleTimeTxt ;
+	delete _pIdleTimeEdit ;
+}
+
+void
+NSPatSearchEditParamsDlg::SetupWindow()
+{
+	NSUtilDialog::SetupWindow() ;
+
+	// Set texts
+  //
+  string sTxt = pContexte->getSuperviseur()->getText("personSearchNameEditParams", "dialogCaption") ;
+  SetCaption(sTxt.c_str()) ;
+
+	sTxt = pContexte->getSuperviseur()->getText("personSearchNameEditParams", "groupCaption") ;
+  _pParamsIDGroup->SetCaption(sTxt.c_str()) ;
+	sTxt = pContexte->getSuperviseur()->getText("personSearchNameEditParams", "charCountBeforeSearch") ;
+  _pCharCountTxt->SetText(sTxt.c_str()) ;
+	sTxt = pContexte->getSuperviseur()->getText("personSearchNameEditParams", "idleTimeBeforeSearch") ;
+  _pIdleTimeTxt->SetText(sTxt.c_str()) ;
+
+  // Init Edits
+  //
+  int iAutoSearchDelay   = pContexte->getEpisodus()->_iAutoSearchDelay ;
+  int iAutoSearchMinChar = pContexte->getEpisodus()->_iAutoSearchMinChar ;
+
+  _pCharCountEdit->setNum((double) iAutoSearchMinChar) ;
+  _pIdleTimeEdit->setNum((double) iAutoSearchDelay) ;
+}
+
+void
+NSPatSearchEditParamsDlg::CmCancel()
+{
+	Destroy(IDCANCEL) ;
+}
+
+void
+NSPatSearchEditParamsDlg::CmOk()
+{
+  NSEpisodus* pEpisodus = pContexte->getEpisodus() ;
+  if ((NSEpisodus*) NULL == pEpisodus)
+  {
+    NSUtilDialog::CmOk() ;
+    return ;
+  }
+
+  int dAutoSearchDelay   = (double) pEpisodus->_iAutoSearchDelay ;
+  int dAutoSearchMinChar = (double) pEpisodus->_iAutoSearchMinChar ;
+
+  double dCharCount = _pCharCountEdit->getValue() ;
+  double dIdleTime  = _pIdleTimeEdit->getValue() ;
+
+  // No change
+  //
+  if ((dAutoSearchDelay == dIdleTime) && (dAutoSearchMinChar == dCharCount))
+  {
+    NSUtilDialog::CmOk() ;
+    return ;
+  }
+
+  pEpisodus->_iAutoSearchDelay   = (int) dIdleTime ;
+  pEpisodus->_iAutoSearchMinChar = (int) dCharCount ;
+
+  NSToDoTask *pToDoTask = new NSToDoTask ;
+  pToDoTask->setWhatToDo(string("SaveEpisodusData")) ;
+  pToDoTask->sendMe(pContexte->getSuperviseur()) ;
+
+  NSUtilDialog::CmOk() ;
 }
 

@@ -215,7 +215,7 @@ NSHealthTeamRosaceView::GetWindow()
 void
 NSHealthTeamRosaceView::setViewName()
 {
-	sViewName = pContexte->getSuperviseur()->getText("HealthTeamWindows", "healthTeamRosace") ;
+	_sViewName = pContexte->getSuperviseur()->getText("HealthTeamWindows", "healthTeamRosace") ;
 
   addConcernTitle() ;
 }
@@ -226,16 +226,16 @@ NSHealthTeamRosaceView::SetupWindow()
 {
 try
 {
-	if (bFirstSetup)
+	if (_bFirstSetup)
 		_pRosaceDrawer->MoveWindow(GetClientRect(), true) ;
 
 	TWindow::SetupWindow() ;
   _pRosaceDrawer->SetupWindow() ;
 
-  string sDocTitle = sViewName = pContexte->getSuperviseur()->getText("HealthTeamWindows", "healthTeamRosace") ;
+  string sDocTitle = _sViewName = pContexte->getSuperviseur()->getText("HealthTeamWindows", "healthTeamRosace") ;
 	TWindow::SetDocTitle(sDocTitle.c_str(), 0) ;
 
-	bFirstSetup = false ;
+	_bFirstSetup = false ;
 }
 catch (...)
 {
@@ -308,7 +308,7 @@ NSHealthTeamRosaceView::EvSetFocus(HWND hWndLostFocus)
 		pMyApp->SetToolBarWindow(GetWindow()) ;
 	}
 
-	_pPaneSplitter->SetFrameTitle(getFunction(), sViewName) ;	pContexte->setAideIndex("");	pContexte->setAideCorps("epi_soaping.htm");
+	_pPaneSplitter->SetFrameTitle(getFunction(), _sViewName) ;	pContexte->setAideIndex("");	pContexte->setAideCorps("epi_soaping.htm");
 }
 
 voidNSHealthTeamRosaceView::SetupToolBar()
@@ -565,7 +565,7 @@ NSHealthTeamListView::~NSHealthTeamListView()
 void
 NSHealthTeamListView::setViewName()
 {
-	sViewName = pContexte->getSuperviseur()->getText("HealthTeamWindows", "healthTeamMandateList") ;
+	_sViewName = pContexte->getSuperviseur()->getText("HealthTeamWindows", "healthTeamMandateList") ;
 
   addConcernTitle() ;
 }
@@ -581,7 +581,7 @@ TWindow
 NSHealthTeamListView::SetupWindow()
 {
   NSMUEView::SetupWindow() ;
-  Parent->SetCaption(sViewName.c_str()) ;
+  Parent->SetCaption(_sViewName.c_str()) ;
 
   SetupColumns() ;
   initCurentMembers() ;
@@ -1377,13 +1377,13 @@ NSHealthTeamListView::focusFct()
 	activateMUEViewMenu() ;
 
   TMyApp  *pMyApp = pContexte->getSuperviseur()->getApplication() ;
-  if (bSetupToolBar && (GetWindow() != pMyApp->GetToolBarWindow()))
+  if (_bSetupToolBar && (GetWindow() != pMyApp->GetToolBarWindow()))
   {
     SetupToolBar() ;
     pMyApp->SetToolBarWindow(GetWindow()) ;
   }
 
-  _pPaneSplitter->SetFrameTitle(getFunction(), sViewName) ;
+  _pPaneSplitter->SetFrameTitle(getFunction(), _sViewName) ;
   pContexte->setAideIndex("") ;
   pContexte->setAideCorps("medicaments.htm") ;
 }

@@ -51,7 +51,8 @@ class NSModHtml : public NSRoot
     OperationType     typeOperation ;	   // type d'opération de création du html
     NSBaseImages*     pBaseImages ;	     // pointeur sur la base d'images du document
     NSBaseImages*     pBaseCompo ;		   // pointeur sur la base d'images de composition
-    NSNoyauDocument*  pDocBrut ;		     // pointeur sur le document brut
+    NSNoyauDocument*  _pDocBrut ;		     // pointeur sur le document brut
+    NSLdvDocument*    _pLdvDoc ;
 
     // Le modèle Html est créé à partir d'un fichier (pDocRef = 0) ou d'un document
     // Si pDocRef != 0, on doit transmettre le superviseur pour l'accès aux bases (+ chemins)

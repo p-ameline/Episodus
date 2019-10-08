@@ -68,6 +68,7 @@
 
 // Dialogue IDD_LISTPA
 #define IDB_CREATEPAT	        1107
+#define IDB_NAME_EDIT_PARAMS  1114
 #define IDC_LISTPA_NUMERO	    105
 #define IDC_LISTPA_CODE	      106
 #define IDC_LISTPA_CREER	    107
@@ -90,6 +91,7 @@
 #define IDC_USENOM            110
 #define IDC_USEPRENOM         111
 #define IDC_USEBIRTHDATE      113
+#define IDC_NAME_EDIT_PARAMS  114
 #define IDC_RECH_EXACT		    201
 #define IDC_RECH_APPROCHE		  202
 #define IDS_NTLISTPA_NOM		  301
@@ -113,8 +115,6 @@
 #define NSE_MANUAL              106
 
 // Dialog PAT_CLOSING
-#define IDC_PROGRESS_BAR        101
-#define IDC_PATCLOSE_TEXT       102
 
 // dialogues
 
@@ -342,28 +342,6 @@
 #define IDC_PSC_PDF 				    108
 #define IDC_PSC_GROUPEPAT	      109
 #define IDC_PSC_PATIENT	        110
-
-// dialogue IDD_LTYP
-#define IDC_LTYP_INTRO          101
-#define IDC_LTYP_INTRO_EDIT	    102
-#define IDC_LTYP_INTRO_PREC	    103
-#define IDC_LTYP_INTRO_SUIV	    104
-#define IDC_LTYP_INTRO_SANS	    105
-#define IDC_LTYP_CORPS          106
-#define IDC_LTYP_CORPS_EDIT	    107
-#define IDC_LTYP_CORPS_PREC	    108
-#define IDC_LTYP_CORPS_SUIV	    109
-#define IDC_LTYP_CORPS_SANS	    110
-#define IDC_LTYP_POLIT          111
-#define IDC_LTYP_POLIT_EDIT	    112
-#define IDC_LTYP_POLIT_PREC	    113
-#define IDC_LTYP_POLIT_SUIV	    114
-#define IDC_LTYP_POLIT_SANS	    115
-
-// Dialogue IDD_LTYPEDIT
-#define IDC_LTYPEDIT_EDIT	      101
-#define IDC_LTYPEDIT_NEW	      102
-#define IDC_LTYPEDIT_DEL	      104
 
 // Dialogue IDD_LETTRECOR
 #define IDC_LETTRECOR_RICHEDIT	101

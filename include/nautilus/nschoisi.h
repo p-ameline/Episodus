@@ -31,6 +31,7 @@ class NSFrameInformation ;
 class NSToDoTask ;
 class NSCaptureArray ;
 class NSDrugView ;
+class NSProgressAndMessageDlg ;
 
 # include <map># include <owl\gauge.h># include <owl\static.h># include "partage\ns_vector.h"# include "nsldv\nsldv_vars.h"# include "partage\nsdivfct.h"# include "partage\nsperson.h"
 # include "nsbb\nsmview.h"
@@ -47,31 +48,6 @@ class NSDrugView ;
 // # include "nssavoir\nsHealthTeam.h"
 // # include "nautilus\nshistdo.h"
 //
-//// Dialog box objet used to display steps when closing a patient
-//
-//
-class NSProgressAndMessageDlg : public NSUtilDialog
-{
-  protected:
-
-    OWL::TGauge*  _pProgressBar ;
-    OWL::TStatic* _pTextDisplay ;
-
-  public:
-
-    NSProgressAndMessageDlg(TWindow* pere, NSContexte* pCtx, TModule* module = 0) ;
-    ~NSProgressAndMessageDlg() ;
-
-    void SetupWindow() ;
-
-    void resetProgressGauge() ;
-
-    void setProgress(int iPos) { _pProgressBar->SetValue(iPos) ; }
-    void setText(string sText) { _pTextDisplay->SetText(sText.c_str()) ; }
-    void setProgressAndText(int iPos, string sText) { _pProgressBar->SetValue(iPos) ; _pTextDisplay->SetText(sText.c_str()) ; }
-
-	DECLARE_RESPONSE_TABLE(NSProgressAndMessageDlg) ;
-};
 //---------------------------------------------------------------------------//  Classe NSPatientChoisi//      ANCETRE : NSPatient
 //---------------------------------------------------------------------------
 class NSPatientChoisi : public NSPatInfo

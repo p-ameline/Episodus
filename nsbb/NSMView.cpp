@@ -93,27 +93,27 @@ END_RESPONSE_TABLE ;
 try
 {
 	pDoc        = doc ;
-  sFonction   = sFunction ;
-  sPreoccup   = sPreoccu ;
-  sDocType    = sDoc ;
+  _sFonction   = sFunction ;
+  _sPreoccup   = sPreoccu ;
+  _sDocType    = sDoc ;
 
-  bFirstSetup = true ;
+  _bFirstSetup = true ;
   //
   // On référence cette fenêtre au niveau du Superviseur
   //
 
-  bSetupToolBar   = true ;
+  _bSetupToolBar    = true ;
 
-  pCreateWindow   = (TWindow *) 0 ;
-  pSplittedWindow = (TWindow *) 0 ;
-  pDialog         = NULL ;
-  splitDir        = psNone ;
-  percent         = 0.0 ;
-  uButtonsStyle   = MYWS_NONE ;
+  _pCreateWindow    = (TWindow *) 0 ;
+  _pSplittedWindow  = (TWindow *) 0 ;
+  pDialog           = NULL ;
+  _splitDir         = psNone ;
+  _percent          = 0.0 ;
+  uButtonsStyle     = MYWS_NONE ;
 
-  pMUEViewMenu    = (TMenuDescr *) 0 ;
+  _pMUEViewMenu     = (TMenuDescr *) 0 ;
 
-  _bClosing       = false ;
+  _bClosing         = false ;
 
   _pCreatedMDIChild = (NSMDIChild*) 0 ;
 }
@@ -138,8 +138,8 @@ catch (...)
     pContexte->getBBinterface()->DisconnectInterface(HWindow) ;
   }
 
-	if (pMUEViewMenu)
-  	delete pMUEViewMenu ;
+	if (_pMUEViewMenu)
+  	delete _pMUEViewMenu ;
 }
 
 void
@@ -165,7 +165,7 @@ try
   // Window posit is set by TMyApp::EvNewView
   // SetWindowPosit() ;
 
-  bFirstSetup = false ;
+  _bFirstSetup = false ;
 }
 catch (...)
 {
@@ -176,7 +176,7 @@ catch (...)
 void
 NSMUEView::InitBasicMetrics(Cdialogbox *pDialogBox)
 {
-  if (NULL == pDialogBox)
+  if ((Cdialogbox*) NULL == pDialogBox)
     return ;
 
   // Doesn't work properly because it is based on a claimed "system font"
@@ -209,7 +209,7 @@ NSMUEView::InitBasicMetrics(Cdialogbox *pDialogBox)
 void
 NSMUEView::SetFont(TDC& dc, Cdialogbox *pDialogBox)
 {
-  if (NULL == pDialogBox)
+  if ((Cdialogbox*) NULL == pDialogBox)
     return ;
 
   LOGFONT logFont ;
@@ -242,7 +242,7 @@ NSMUEView::SetFont(TDC& dc, Cdialogbox *pDialogBox)
 bool
 NSMUEView::isControlProperty(TWindow *pCtrl, uint32 StyleInfo)
 {
-  if (NULL == pCtrl)
+  if ((TWindow*) NULL == pCtrl)
     return false ;
 
   return ((pCtrl->GetStyle() & StyleInfo) == StyleInfo) ;
@@ -255,7 +255,7 @@ NSMUEView::CanClose()
 
 	TMyApp *pMyApp = pContexte->getSuperviseur()->getApplication() ;
   pMyApp->FlushControlBar() ;
-  bSetupToolBar = false ;
+  _bSetupToolBar = false ;
 
   return true ;
 }
@@ -273,7 +273,7 @@ NSMUEView::PreProcessMsg(MSG &msg)
 {
   PRECONDITION(GetHandle()) ;
   // return hAccelerator ? ::TranslateAccelerator(GetHandle(), hAccelerator, &msg) : false ;
-  /* bool bTranslate = */ hAccelerator ? ::TranslateAccelerator(GetHandle(), hAccelerator, &msg) : false ;
+  /* bool bTranslate = */ _hAccelerator ? ::TranslateAccelerator(GetHandle(), _hAccelerator, &msg) : false ;
 
   return TWindowView::PreProcessMsg(msg) ;
 }
@@ -281,7 +281,7 @@ NSMUEView::PreProcessMsg(MSG &msg)
 void
 NSMUEView::addConcernTitle()
 {
-	if (string("") == sPreoccup)
+	if (string("") == _sPreoccup)
 		return ;
 
 	NSLdvDocumentBase *pLdvDoc = (NSLdvDocumentBase*) pContexte->getPatient()->getLdvDocument() ;
@@ -295,10 +295,10 @@ NSMUEView::addConcernTitle()
   for (FrameInfoIter i = pFrames->begin() ; pFrames->end() != i ; i++)
   {
     ArrayConcern *pConcerns = (*i)->getConcernsArray() ;
-    NSConcern* pConcern = pConcerns->getConcern(sPreoccup) ;
+    NSConcern* pConcern = pConcerns->getConcern(_sPreoccup) ;
     if (pConcern)
     {
-      sViewName += string(" - ") + pConcern->getTitle() ;
+      _sViewName += string(" - ") + pConcern->getTitle() ;
       return ;
     }
   }
@@ -354,7 +354,7 @@ NSMUEView::SetWindowPosit()
 
 	pParentMdiChild->Show(SW_HIDE) ;
 
-  NSWindowProperty* pWinProp = pContexte->getUtilisateur()->getWindowProperty(sFonction) ;
+  NSWindowProperty* pWinProp = pContexte->getUtilisateur()->getWindowProperty(_sFonction) ;
   if (pWinProp)
 	{
     NS_CLASSLIB::TRect targetRect = pWinProp->getRect(pContexte->getSuperviseur()) ;
@@ -445,13 +445,13 @@ NSMUEView:: getDependance()
 TWindow*
 NSMUEView::getCreateWindow()
 {
-	return pCreateWindow ;
+	return _pCreateWindow ;
 }
 
 TWindow*
 NSMUEView::getSplittedWindow()
 {
-	return pSplittedWindow ;
+	return _pSplittedWindow ;
 }
 
 void
@@ -473,7 +473,7 @@ void
 NSMUEView::focusView()
 {
 	NSSuper* pSuper = pContexte->getSuperviseur() ;
-  string ps = string("NSMUEView is setting focus to window with function ") + sFonction ;  pSuper->trace(&ps, 1, NSSuper::trSubDetails) ;	NSToDoTask* pTask = new NSToDoTask ;
+  string ps = string("NSMUEView is setting focus to window with function ") + _sFonction ;  pSuper->trace(&ps, 1, NSSuper::trSubDetails) ;	NSToDoTask* pTask = new NSToDoTask ;
 	pTask->setWhatToDo(string("FocusWindow")) ;
 	pTask->setPointer1((void*) this, false) ;
 
@@ -507,32 +507,28 @@ NSMUEView::activateParent()
 	activateMUEViewMenu() ;
 	//_pPaneSplitter->pMDIChild->GetHandle()) ;
 	_pPaneSplitter->activateParent() ;
-  _pPaneSplitter->SetFrameTitle(getFunction(), sViewName) ;
+  _pPaneSplitter->SetFrameTitle(getFunction(), _sViewName) ;
 }
 
 void
 NSMUEView::initMUEViewMenu(string sMenuName)
 {
-	if (pMUEViewMenu)
-  	delete pMUEViewMenu ;
+	if (_pMUEViewMenu)
+  	delete _pMUEViewMenu ;
 
 	nsMenuIniter menuIter(pContexte) ;
-	pMUEViewMenu = new OWL::TMenuDescr ;
-  menuIter.initMenuDescr(pMUEViewMenu, sMenuName) ;
-
-	return ;
+	_pMUEViewMenu = new OWL::TMenuDescr ;
+  menuIter.initMenuDescr(_pMUEViewMenu, sMenuName) ;
 }
 
 void
 NSMUEView::activateMUEViewMenu()
 {
-	if (NULL == pMUEViewMenu)
+	if (NULL == _pMUEViewMenu)
 		return ;
 
 	TMyApp* pMyApp = pContexte->getSuperviseur()->getApplication() ;
-  pMyApp->GetMainWindow()->SetMenuDescr(*pMUEViewMenu) ;
-
-	return ;
+  pMyApp->GetMainWindow()->SetMenuDescr(*_pMUEViewMenu) ;
 }
 
 //-----------------------------------------------------------------------//

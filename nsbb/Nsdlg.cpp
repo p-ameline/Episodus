@@ -2348,6 +2348,16 @@ try
       {
         if ((*it)->getItemLabel() == string("#####1"))
         {
+          NSButton* pBtTla = new NSButton(pContexte, this, IDTL_ACTIF, "",
+                                         cvtRect.Left(), cvtRect.Top(),
+                                         cvtRect.Width(), cvtRect.Height(),
+                                         /*isDefault*/ false, (TModule*) 0) ;
+          pBtTla->pControle = new NSControle(pContexte, _pBBItem, (*it)->getItemLabel(), "") ;
+          pBtTla->pControle->setControle(dynamic_cast<void*>(pBtTla)) ;
+          pBtTla->pControle->setType(pBtTla->donneType()) ;
+          pBtTla->pControle->setNSDialog(this) ;
+          referenceControle(pBtTla->pControle) ;
+
           NSButton* pBtTl = new NSButton(pContexte, this, IDTL, "",
                                          cvtRect.Left(), cvtRect.Top(),
                                          cvtRect.Width(), cvtRect.Height(),

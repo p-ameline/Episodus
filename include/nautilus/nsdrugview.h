@@ -50,6 +50,7 @@ class NSDrugView : public NSLDVView{ public:
   void CmClose() ;
   void CmSuppress() ;
   void CmPrevious() ;
+  void CmAll() ;
   void CmFct1() ; // ordo
 	void CmFct3() ; // protocol
 	void CmFct4() ; // ordo sur sélection
@@ -63,6 +64,7 @@ class NSDrugView : public NSLDVView{ public:
   void CmHistory() ;
   void CmAlerts() ;
   void CmSwitchToVD() ;
+  void CmDisplayAll() ;
 
   void CmOk() {}
   void CmCancel() {}
@@ -70,7 +72,7 @@ class NSDrugView : public NSLDVView{ public:
   // Redéfiniton des fonctions virtuelles de TView et TRichEdit
   static LPCSTR   StaticName() { return "NSDrugView" ; }
   //const char      *GetViewName() {return StaticName();}
-  const char      *GetViewName() { return sViewName.c_str() ; }
+  const char      *GetViewName() { return _sViewName.c_str() ; }
   TWindow         *GetWindow();
   bool            SetDocTitle(const char far* docname, int index)
                   { return OWL::TWindow::SetDocTitle(docname, index) ; }
@@ -149,6 +151,7 @@ class NSDrugView : public NSLDVView{ public:
   NSLdvDocument*         _pLdVDoc ;	// Pointeur sur document EPISOD  NSDrugsPropertyWindow* _pListeWindow ;  OWL::TControlBar*      _pToolBar ;	        // Barre d'outils
   VecteurString          _aToPrescribe ;
   VecteurString          _aPreviousDrugs ;
+  bool                   _bOnlyActive ;       // Should ony active drugs be displayed
 
   bool                   _bSetupToolBar ;
 

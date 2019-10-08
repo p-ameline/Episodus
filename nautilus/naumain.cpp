@@ -136,6 +136,7 @@
 #include "nautilus\nsbrowseSvce.h"
 #include "nsepisod\nsPilotProxy.h"
 #include "nautilus\nsAlertSvce.h"
+#include "nautilus\nsTankSvce.h"
 
 //#include "nsoutil/nssmedit.h"
 #include "nsoutil/nsoutdlg.h"
@@ -211,6 +212,7 @@ DEFINE_RESPONSE_TABLE1(TMyApp, OWL::TApplication)
   EV_COMMAND(CM_NEWPAT,                         CmNewPat),
   EV_COMMAND(CM_BUREAU,                         CmBureau),
   EV_COMMAND(CM_MAILBOX,                        CmMailBox),
+  EV_COMMAND(CM_TANK,                           CmTankBox),
   EV_COMMAND(CM_OUTILS,                         CmOutils),
   EV_COMMAND(CM_BBK,                            CmBBK),
   EV_COMMAND(CM_GROUPGD,                        CmGroupGd),
@@ -1582,6 +1584,26 @@ TMyApp::CmMailBox()
 	pMailBox = new TMailBox(NULL, pm->sUrlPOP3, pm->iPortPOP3, pm->sUserPOP3, pm->sPassPOP3, _appContext) ;
 	pMailBox->Show() ;
 */
+}
+
+void
+TMyApp::CmTankBox()
+{
+	if (_appContext->_pMailBoxChild)
+	{
+  	SetFocus(_appContext->_pMailBoxChild->GetHandle()) ;
+		return ;
+	}
+
+  string ps = string("Opening tankbox") ;
+  _appContext->getSuperviseur()->trace(&ps, 1, NSSuper::trSteps) ;
+
+  _appContext->_pTankBoxWindow = new NSTankServiceWindow(_appContext, GetMainWindow()) ;
+	_appContext->_pTankBoxChild  = new NSTankServiceChild(_appContext, *(prendClient()), "", _appContext->_pTankBoxWindow) ;
+	_appContext->_pTankBoxChild->Create() ;
+
+  ps = string("Tankbox opened") ;
+  _appContext->getSuperviseur()->trace(&ps, 1, NSSuper::trSteps) ;
 }
 
 void

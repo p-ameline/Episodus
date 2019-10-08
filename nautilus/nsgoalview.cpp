@@ -278,7 +278,7 @@ NSGoalView::~NSGoalView()
 void
 NSGoalView::setViewName()
 {
-	sViewName = pContexte->getSuperviseur()->getText("goalsManagement", "goalViewTitle") ;
+	_sViewName = pContexte->getSuperviseur()->getText("goalsManagement", "goalViewTitle") ;
 
   addConcernTitle() ;
 }
@@ -787,7 +787,7 @@ NSGoalView::SetupWindow()
 {
 	NSMUEView::SetupWindow() ;
 
-	Parent->SetCaption(sViewName.c_str()) ;
+	Parent->SetCaption(_sViewName.c_str()) ;
 
 	SetupColumns() ;
 	AfficheListe() ;
@@ -914,7 +914,7 @@ NSGoalView::SelectedObjectifs()
   return selectionFound ;
 }
 bool
-NSGoalView::InitObjectif(NSObjectif *pObj, NSLdvGoal *pGoal){	if ((NULL == pObj) || (NULL == pGoal))		return false ;  // Si on cherche les objectifs d'une préoccupation précise, on vérifie  // que cet objectif est concerné  if ((string("") != sPreoccup) && (sPreoccup != pGoal->getConcern()))    return false ;	pObj->_pCorrespGoal = pGoal ;  // cas d'un objectif futur non prévisible  if (pGoal->_tOuvertLe.estVide())    return false ;  NVLdVTemps tToday ;  tToday.takeTime() ;  // cas d'un objectif déjà fermé  if ((false == pGoal->_tFermeLe.estVide()) && (pGoal->_tFermeLe <= tToday))    return false ;  bool IsOpened = (tToday >= pGoal->_tOuvertLe) ;	if (string("") != pGoal->_sComplementText)		pObj->_sName = pGoal->_sComplementText ;	else		pObj->_sName = pGoal->getTitle() ;  pObj->_sNode   = pGoal->getNode() ;  // le titre dans Goal est en clair (pas de code lexique)  pObj->_sCode   = "" ;  pObj->_sValue  = "" ;  pObj->_iLevel  = 0 ;  pObj->_iRythme = pGoal->_iRythme ;  // Note : un objectif cyclique non ouvert (futur) se comporte comme  // un objectif ponctuel  if      ((pGoal->_iRythme == NSLdvGoal::ponctuel) || (!IsOpened))  {    InitDateObjectifPonctuel(pObj->_sDateAuto,      pGoal, pGoal->_sDateDebutAutorise,   pGoal->_dDelaiDebutAutorise,   pGoal->_sUniteDebutAutorise) ;    InitDateObjectifPonctuel(pObj->_sDateCons,      pGoal, pGoal->_sDateDebutConseille,  pGoal->_dDelaiDebutConseille,  pGoal->_sUniteDebutConseille) ;    InitDateObjectifPonctuel(pObj->_sDateIdeal,     pGoal, pGoal->_sDateDebutIdeal,      pGoal->_dDelaiDebutIdeal,      pGoal->_sUniteDebutIdeal) ;    InitDateObjectifPonctuel(pObj->_sDateIdealMax,  pGoal, pGoal->_sDateDebutIdealMax,   pGoal->_dDelaiDebutIdealMax,   pGoal->_sUniteDebutIdealMax) ;    InitDateObjectifPonctuel(pObj->_sDateConsMax,   pGoal, pGoal->_sDateDebutConseilMax, pGoal->_dDelaiDebutConseilMax, pGoal->_sUniteDebutConseilMax) ;    InitDateObjectifPonctuel(pObj->_sDateCrit,      pGoal, pGoal->_sDateDebutCritique,   pGoal->_dDelaiDebutCritique,   pGoal->_sUniteDebutCritique) ;    string sDateOuvert = pGoal->_tOuvertLe.donneDate() ;    if      ((pGoal->_sDateDebutCritique    != "")  && (pGoal->_sDateDebutCritique    <= sDateOuvert))      pObj->_iLevel = NSLdvGoalInfo::AProuge ;
+NSGoalView::InitObjectif(NSObjectif *pObj, NSLdvGoal *pGoal){	if (((NSObjectif*) NULL == pObj) || ((NSLdvGoal*) NULL == pGoal))		return false ;  // Si on cherche les objectifs d'une préoccupation précise, on vérifie  // que cet objectif est concerné  if ((string("") != _sPreoccup) && (pGoal->getConcern() != _sPreoccup))    return false ;	pObj->_pCorrespGoal = pGoal ;  // cas d'un objectif futur non prévisible  if (pGoal->_tOuvertLe.estVide())    return false ;  NVLdVTemps tToday ;  tToday.takeTime() ;  // cas d'un objectif déjà fermé  if ((false == pGoal->_tFermeLe.estVide()) && (pGoal->_tFermeLe <= tToday))    return false ;  bool IsOpened = (tToday >= pGoal->_tOuvertLe) ;	if (string("") != pGoal->_sComplementText)		pObj->_sName = pGoal->_sComplementText ;	else		pObj->_sName = pGoal->getTitle() ;  pObj->_sNode   = pGoal->getNode() ;  // le titre dans Goal est en clair (pas de code lexique)  pObj->_sCode   = "" ;  pObj->_sValue  = "" ;  pObj->_iLevel  = 0 ;  pObj->_iRythme = pGoal->_iRythme ;  // Note : un objectif cyclique non ouvert (futur) se comporte comme  // un objectif ponctuel  if      ((pGoal->_iRythme == NSLdvGoal::ponctuel) || (!IsOpened))  {    InitDateObjectifPonctuel(pObj->_sDateAuto,      pGoal, pGoal->_sDateDebutAutorise,   pGoal->_dDelaiDebutAutorise,   pGoal->_sUniteDebutAutorise) ;    InitDateObjectifPonctuel(pObj->_sDateCons,      pGoal, pGoal->_sDateDebutConseille,  pGoal->_dDelaiDebutConseille,  pGoal->_sUniteDebutConseille) ;    InitDateObjectifPonctuel(pObj->_sDateIdeal,     pGoal, pGoal->_sDateDebutIdeal,      pGoal->_dDelaiDebutIdeal,      pGoal->_sUniteDebutIdeal) ;    InitDateObjectifPonctuel(pObj->_sDateIdealMax,  pGoal, pGoal->_sDateDebutIdealMax,   pGoal->_dDelaiDebutIdealMax,   pGoal->_sUniteDebutIdealMax) ;    InitDateObjectifPonctuel(pObj->_sDateConsMax,   pGoal, pGoal->_sDateDebutConseilMax, pGoal->_dDelaiDebutConseilMax, pGoal->_sUniteDebutConseilMax) ;    InitDateObjectifPonctuel(pObj->_sDateCrit,      pGoal, pGoal->_sDateDebutCritique,   pGoal->_dDelaiDebutCritique,   pGoal->_sUniteDebutCritique) ;    string sDateOuvert = pGoal->_tOuvertLe.donneDate() ;    if      ((pGoal->_sDateDebutCritique    != "")  && (pGoal->_sDateDebutCritique    <= sDateOuvert))      pObj->_iLevel = NSLdvGoalInfo::AProuge ;
     else if ((pGoal->_sDateDebutConseilMax  != "")  && (pGoal->_sDateDebutConseilMax  <= sDateOuvert))
       pObj->_iLevel = NSLdvGoalInfo::APjaune ;
     else if ((pGoal->_sDateDebutIdealMax    != "")  && (pGoal->_sDateDebutIdealMax    <= sDateOuvert))
@@ -1294,14 +1294,14 @@ NSGoalView::focusFct()
 {
 	activateMUEViewMenu() ;
 
-  TMyApp    *pMyApp = pContexte->getSuperviseur()->getApplication() ;
+  TMyApp *pMyApp = pContexte->getSuperviseur()->getApplication() ;
   if (bSetupToolBar && (GetWindow() != pMyApp->GetToolBarWindow()))
   {
     SetupToolBar() ;
     pMyApp->SetToolBarWindow(GetWindow()) ;
   }
 
-  _pPaneSplitter->SetFrameTitle(getFunction(), sViewName) ;
+  _pPaneSplitter->SetFrameTitle(getFunction(), _sViewName) ;
   pContexte->setAideIndex("") ;
   pContexte->setAideCorps("objectifs.htm") ;
 }

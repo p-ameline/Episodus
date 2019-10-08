@@ -59,34 +59,30 @@ class NSTankPerson
 // Objet "Boite de dialogue" utilisé pour montrer la progression du
 // chargement des messages
 //
-class NSMsgLoadProgressDlg : public NSUtilDialog
+class NSTankLoadProgressDlg : public NSUtilDialog
 {
   public:
 
-    OWL::TGauge*  pNewProgressBar ;
-    OWL::TStatic* pNewText ;
-    OWL::TGauge*  pOldProgressBar ;
-    OWL::TStatic* pOldText ;
-    OWL::TButton* pStopButton ;
+    OWL::TGauge*  _pNewProgressBar ;
+    OWL::TStatic* _pNewText ;
+    OWL::TButton* _pStopButton ;
 
-    bool bKeepLoading ;
+    bool          _bKeepLoading ;
 
-    NSMsgLoadProgressDlg(TWindow* pere, NSContexte* pCtx, TModule* module = 0) ;
-    ~NSMsgLoadProgressDlg() ;
+    NSTankLoadProgressDlg(TWindow* pere, NSContexte* pCtx, TModule* module = (TModule*) 0) ;
+    ~NSTankLoadProgressDlg() ;
 
     void SetupWindow() ;
 
-    void resetNewGauge() { pNewProgressBar->SetValue(0) ; }
-    void resetOldGauge() { pOldProgressBar->SetValue(0) ; }
+    void resetNewGauge() { _pNewProgressBar->SetValue(0) ; }
 
-    void fixePositionNew(int iPos) { pNewProgressBar->SetValue(iPos) ; }
-    void fixePositionOld(int iPos) { pOldProgressBar->SetValue(iPos) ; }
+    void fixePositionNew(int iPos) { _pNewProgressBar->SetValue(iPos) ; }
 
-    bool keepLoading() { return bKeepLoading ; }
+    bool keepLoading() { return _bKeepLoading ; }
 
     void stopPressed() ;
 
-	DECLARE_RESPONSE_TABLE(NSMsgLoadProgressDlg) ;
+	DECLARE_RESPONSE_TABLE(NSTankLoadProgressDlg) ;
 };
 
 typedef vector<NSTankPerson*>       NSTankPersonArray ;
@@ -204,12 +200,12 @@ class NSTankListWindow : public TListWindow, public NSRoot
 
     bool                  _bMustRestartFileProcess ;
 
-    NSMsgLoadProgressDlg* _pProgressDlg ;
+    NSTankLoadProgressDlg* _pProgressDlg ;
 
   DECLARE_RESPONSE_TABLE(NSTankListWindow) ;
 } ;
 
-class NSXmlTreeViewerWindow : public TEditFile, public NSRoot
+class NSXmlTreeViewerWindow : public TTreeWindow, public NSRoot
 {
   public:
 
@@ -221,6 +217,8 @@ class NSXmlTreeViewerWindow : public TEditFile, public NSRoot
 
     NSTankServiceWindow* _pParentWindow ;
     string               _sFileName ;
+
+    bool getLineContent(const string* psLine, string* psTag, string* psParams, string* psContent) ;
 
  // DECLARE_RESPONSE_TABLE(NSXmlTreeViewerWindow) ;
 } ;

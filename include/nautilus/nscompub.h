@@ -20,6 +20,7 @@ class TIndySMTP ;
 #include <owl\edit.h>
 #include <owl\scrollba.h>
 #include <owl\richedit.h>
+#include <owl\listwind.h>
 #include <owl\eventhan.h>
 
 #include <mapi.h>
@@ -40,18 +41,18 @@ class TIndySMTP ;
 class ChoixTemplateDialog : public NSUtilDialog{
 	public:
 
-		OWL::TListBox* 	 pTemplateBox ;		NSTemplateArray* pTemplateArray ;
-		string           sTypeDoc ;
-		string           sCodeSensRoot ;
-		VecteurString    VectTermeEquivalentRoot ;
+		OWL::TListBox* 	 _pTemplateBox ;		NSTemplateArray* _pTemplateArray ;
+		string           _sTypeDoc ;
+		string           _sCodeSensRoot ;
+		VecteurString    _aVectTermeEquivalentRoot ;
 
-		UINT             TemplateChoisi ;
+		UINT             _iTemplateChoisi ;
 		ChoixTemplateDialog(TWindow* pere, NSContexte* pCtx, string typeDoc, string codeSensRoot) ;		~ChoixTemplateDialog() ;
 
 		void SetupWindow() ;		void CmSelectTemplate(WPARAM Cmd) ;		void CmCancel() ;
 		void CmTemplateDblClk(WPARAM Cmd) ;
 
-		// void LanceTemplate(int NumDoc);
+		// void LanceTemplate(int NumDoc);    UINT             getTemplateChoisi() { return _iTemplateChoisi ; }    NSTemplateArray* getTemplateArray()  { return _pTemplateArray ;  }
 	DECLARE_RESPONSE_TABLE(ChoixTemplateDialog) ;};
 
 // dialogue utilisé pour choisir un nouveau nom de composition (ou l'ancien)////////////////////////////////////////////////////////////////////////////
@@ -59,10 +60,10 @@ class ChoixTemplateDialog : public NSUtilDialog{
 class NomCompoDialog : public NSUtilDialog{
 	public:
 
-		OWL::TEdit*        pNomDocHtml ;    OWL::TRadioButton* pNewCompo ;
-    OWL::TRadioButton* pOldCompo ;
+		OWL::TEdit*        _pNomDocHtml ;    OWL::TRadioButton* _pNewCompo ;
+    OWL::TRadioButton* _pOldCompo ;
 
-    string             sNomDocHtml ;
+    string             _sNomDocHtml ;
     NomCompoDialog(TWindow* pere, NSContexte* pCtx) ;    ~NomCompoDialog() ;
 
     void SetupWindow() ;    void CmClickNewCompo() ;
@@ -133,85 +134,25 @@ class NSChoixPubli{
     bool _bLettre ;
 };
 
-class LettreTypeEditDialog : public NSUtilDialog{
-	public :
+class TLettreType;
+class BasicPubliCorrespDialog : public NSUtilDialog
+{
+  public :
 
-    NSFormuleData* _pData ;    NSMultiEdit*   _pEdit ;
-    string         _sTexte ;
-    bool           _bNew ;
-    bool           _bDel ;
+    NSPersonArray      _aCorrespArray ;
+    NSPersonArray*     _pCorrespBaseArray ;    NSPublication*		 _pPubli ;    TLettreType*		   _pLettreType ;
+    UINT	             _iCorrespChoisi ;
 
-    LettreTypeEditDialog(TWindow* pere, NSContexte* pCtx) ;    ~LettreTypeEditDialog() ;
+    BasicPubliCorrespDialog(TWindow* pere, NSContexte* pCtx, TResId resID, NSPublication* pPublication) ;    virtual ~BasicPubliCorrespDialog() ;
 
-    void SetupWindow() ;    void CmNouveau() ;
-    void CmDetruire() ;
-    void CmOk() ;
-    void CmCancel() ;
+    void   SetupWindow() ;
+    void   CmOk() ;
+    void   CmCancel() ;
 
-	DECLARE_RESPONSE_TABLE(LettreTypeEditDialog) ;};
+	DECLARE_RESPONSE_TABLE(BasicPubliCorrespDialog) ;
+} ;
 
-class LettreTypeDialog : public NSUtilDialog{
-	public :
-
-    LettreTypeDialog(TWindow* pere, NSContexte* pCtx) ;    ~LettreTypeDialog() ;
-
-    void SetupWindow() ;    bool InitFormulesArray() ;
-    void RemplaceTags(string& sTexte) ;
-    void AfficheIntro() ;
-    void AfficheCorps() ;
-    void AffichePolit() ;
-    void CmIntroPrec() ;
-    void CmIntroSuiv() ;
-    void CmCorpsPrec() ;
-    void CmCorpsSuiv() ;
-    void CmPolitPrec() ;
-    void CmPolitSuiv() ;
-    void CmClickSansIntro() ;
-    void CmClickSansCorps() ;
-    void CmClickSansPolit() ;
-    void CmEditIntro() ;
-    void CmEditCorps() ;
-    void CmEditPolit() ;
-    void CmEditFormule(NSFormuleData* pFormData, string& sMode) ;
-
-    void CmOk() ;    void CmCancel() ;
-
-    string getIntroText()   { return _sIntro ; }
-    string getBodyText()    { return _sCorps ; }
-    string getPoliteText()  { return _sPolit ; }
-
-    bool	 existsIntro()    { return _choixIntro >= 0 ; }
-    bool	 existsBody()     { return _choixCorps >= 0 ; }
-    bool	 existsPolite()   { return _choixPolit >= 0 ; }
-
-  protected:
-    NSUtilEdit*			   _pIntro ;
-    NSUtilEdit*			   _pCorps ;
-    NSUtilEdit*			   _pPolit ;
-
-    OWL::TRadioButton* _pSansIntro ;    OWL::TRadioButton* _pSansCorps ;
-    OWL::TRadioButton* _pSansPolit ;
-
-    NSFormuleArray*		 _pIntroArray ;
-    NSFormuleArray*		 _pCorpsArray ;
-    NSFormuleArray*		 _pPolitArray ;
-
-    string				     _sIntro ;
-    string				     _sCorps ;
-    string			       _sPolit ;
-
-    int					       _choixIntro ;    int					       _choixCorps ;
-    int					       _choixPolit ;
-
-    int					       _nbIntro ;    int					       _nbCorps ;
-    int					       _nbPolit ;
-
-    string             _sLastCode ;
-
-	DECLARE_RESPONSE_TABLE(LettreTypeDialog) ;};
-
-class TLettreType;
-class PubliCorrespDialog : public NSUtilDialog{
+class PubliCorrespDialog : public BasicPubliCorrespDialog{
 	public :
 
 		OWL::TListBox*	   _pCorrespBox ;    NSUtilEdit*		     _pAdresse ;
@@ -227,11 +168,8 @@ class PubliCorrespDialog : public NSUtilDialog{
     OWL::TRadioButton* _pPubliPatient ;
     OWL::TRadioButton* _pPubliBlank ;
 
-    NSPersonArray      _aCorrespArray ;
-    NSPersonArray*     _pCorrespBaseArray ;    NSPublication*		 _pPubli ;    TLettreType*		   _pLettreType ;
-    UINT	             _CorrespChoisi ;
-
-    PubliCorrespDialog(TWindow* pere, NSContexte* pCtx, NSPublication* pPublication) ;    ~PubliCorrespDialog() ;
+    PubliCorrespDialog(TWindow* pere, NSContexte* pCtx, NSPublication* pPublication) ;
+    ~PubliCorrespDialog() ;
 
     void   SetupWindow() ;    void   InitCorrespArray() ;
     void   AfficheCorresp() ;
@@ -258,13 +196,32 @@ class PubliCorrespDialog : public NSUtilDialog{
     void   CmClickHtml() ;
     void   CmClickJoindre() ;
     void   CmLettreType() ;
-    void   CmOk() ;
-    void   CmCancel() ;
 
     NSPersonInfo* getSelectedPerson() ;
     NSChoixPubli* getSelectedPubli() ;
 
 	DECLARE_RESPONSE_TABLE(PubliCorrespDialog) ;};
+
+class NewPubliCorrespDialog : public BasicPubliCorrespDialog
+{
+	public :
+
+		OWL::TListWindow*	_pList ;
+    NewPubliCorrespDialog(TWindow* pere, NSContexte* pCtx, NSPublication* pPublication) ;
+    ~NewPubliCorrespDialog() ;
+
+    void   SetupWindow() ;    void   InitCorrespArray() ;
+
+    NSPersonInfo* getSelectedPerson() ;
+    NSChoixPubli* getSelectedPubli() ;
+
+  protected :
+
+    void   SetupColumns() ;
+    void   DisplayCorresps() ;
+    void   DisplayParams() ;
+
+	DECLARE_RESPONSE_TABLE(NewPubliCorrespDialog) ;};
 
 class PubliSansCorrespDialog : public NSUtilDialog{
 	public :

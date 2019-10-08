@@ -194,7 +194,10 @@ try
       pContexte->getPatient()->getDocHis()->initFromPatPathoDocument(sCodeDoc, &_PatPathoArray) ;
 
 			if (false == _PatPathoArray.empty())
+      {
 				_bDocumentValide = true ;
+        _pDocInfo->set2ndOper(GetSecondOperator()) ;
+      }
 			else
 				_bDocumentValide = false ;
     }
@@ -281,7 +284,7 @@ try
         if (false == pContexte->getPatient()->isClosing())
         {
           DocumentIter itDoc = pDocHis->TrouveDocHisto(_pDocInfo->getID()) ;
-          if (NULL != itDoc)
+          if ((DocumentIter) NULL != itDoc)
           {
             string ps2 = "Deleting a document still indexed in History." ;
             pContexte->getSuperviseur()->trace(&ps2, 1, NSSuper::trWarning) ;
@@ -508,7 +511,7 @@ catch (...)
 // Fonction qui renvoie la date stockée dans la PatPatho des datas en MUE
 // au format jj/mm/aaaa ou au format Nautilus (aaaammjj) selon bDateClaire
 string
-NSNoyauDocument::GetDateExamen(bool bDateClaire)
+NSNoyauDocument::GetDateExamen(bool bDateClaire) const
 {
 try
 {
@@ -536,13 +539,19 @@ catch (...)
 }
 }
 
+string
+NSNoyauDocument::GetSecondOperator()
+{
+  return _PatPathoArray.GetSecondOperator(pContexte) ;
+}
+
 // Fonction qui remet à jour la pDocInfo en fonction des données
 // issues de la patpatho du document (aujourd'hui date d'examen et type de contenu)
 // Si la pDocInfo est remise à jour, renvoie true, false sinon.
 bool
 NSNoyauDocument::DocInfoModified()
 {
-  if (NULL == _pDocInfo)
+  if ((NSDocumentInfo*) NULL == _pDocInfo)
     return false ;
 
 	bool bIsModified = false ;
@@ -587,6 +596,10 @@ NSNoyauDocument::DocInfoModified()
 		_pDocInfo->setDateExm(sDateExamen) ;
     bIsModified = true ;
 	}
+
+  string sSecondOperator = GetSecondOperator() ;
+  if (_pDocInfo->get2ndOper() != sSecondOperator)
+    _pDocInfo->set2ndOper(sSecondOperator) ;
 
 	if ((string("") != sLexique) && (_pDocInfo->getContent() != sLexique))
 	{
@@ -1089,7 +1102,7 @@ NSNoyauDocument::CreeDocument(NSDocumentInfo* pDoc, int typeLink,
 {
 try
 {
-  if (NULL == pDoc)
+  if ((NSDocumentInfo*) NULL == pDoc)
     return false ;
 
 	// on récupère en MUE un node chemise
@@ -1126,12 +1139,9 @@ try
 #ifndef _ENTERPRISE_DLL
 	if (bVerbose)
 	{
-		EnregDocDialog* pEnregDocDlg =
-		            new EnregDocDialog(pContexte->GetMainWindow(), &DocData,
+		EnregDocDialog enregDocDlg(pContexte->GetMainWindow(), &DocData,
                                             sNumChemise, sRights, pContexte) ;
-
-		int retVal = pEnregDocDlg->Execute() ;
-		delete pEnregDocDlg ;
+		int retVal = enregDocDlg.Execute() ;
 
 		if (IDCANCEL == retVal)			return false ;
 
@@ -1141,21 +1151,20 @@ try
 	{
     if (bMustConnectToFolder)
     {
-		  EnregDocDialog* pEnregDocDlg =
-		        new EnregDocDialog(0, &DocData, sNumChemise, sRights, pContexte) ;
+		  EnregDocDialog enregDocDlg(0, &DocData, sNumChemise, sRights, pContexte) ;
 
 		  //
 		  // Valeurs par défaut : Dernière chemise et importance de base
 		  // Default values : Last filer and basic interest
 		  //
-		  pEnregDocDlg->RemplirChemises() ;
+		  enregDocDlg.RemplirChemises() ;
 
-		  if (false == pEnregDocDlg->_aChemisesArray.empty())		  {
-			  NSChemiseInfo* pChemInfo = pEnregDocDlg->_aChemisesArray.back() ;
+		  if (false == enregDocDlg._aChemisesArray.empty())		  {
+			  NSChemiseInfo* pChemInfo = enregDocDlg._aChemisesArray.back() ;
 			  sNumChemise = pChemInfo->_sNodeChemise ;
 		  }
 
-		  delete pEnregDocDlg ;      pDoc->setData(&DocData) ;    }    pDoc->setInteret(string("A")) ;	}
+      pDoc->setData(&DocData) ;    }    pDoc->setInteret(string("A")) ;	}
 #endif // #ifndef _ENTERPRISE_DLL
 
 	//	// Vérification de la présence des éléments obligatoires
@@ -2802,48 +2811,48 @@ NSNoyauDocument::createMetaPatpatho(NSDocumentInfo* pNewDocument, NSPatPathoArra
 	Message Msg ;
 	Msg.SetInteret(pNewDocument->getInteret()) ;
 	Msg.SetVisible(pNewDocument->getVisible()) ;
-	pPatPathoMeta->ajoutePatho("ZDOCU1", &Msg, 0) ;
+	pPatPathoMeta->ajoutePatho(string("ZDOCU1"), &Msg, 0) ;
 
 	// Intitulé : nom du document
-	pPatPathoMeta->ajoutePatho("0INTI1", 1) ;
+	pPatPathoMeta->ajoutePatho(string("0INTI1"), 1) ;
   Msg.Reset() ;
 	Msg.SetTexteLibre(pNewDocument->getDocName()) ;
-	pPatPathoMeta->ajoutePatho("£?????", &Msg, 2) ;
+	pPatPathoMeta->ajoutePatho(string("£?????"), &Msg, 2) ;
 
 	if (string("") != pNewDocument->getCreator())
 	{
-  	pPatPathoMeta->ajoutePatho("DOPER1", 1) ;
+  	pPatPathoMeta->ajoutePatho(string("DOPER1"), 1) ;
 		Msg.Reset() ;
 		Msg.SetComplement(pNewDocument->getCreator()) ;
-		pPatPathoMeta->ajoutePatho("£SPID1", &Msg, 2) ;
+		pPatPathoMeta->ajoutePatho(string("£SPID1"), &Msg, 2) ;
 	}
 
 	// créateur != opérateur
 	if ((string("_User_") != sAuthorId) && (string("") != sAuthorId))
 	{
-		pPatPathoMeta->ajoutePatho("DAUTE1", 1) ;
+		pPatPathoMeta->ajoutePatho(string("DAUTE1"), 1) ;
 		Msg.Reset() ;
     if (string("") != pNewDocument->getAuthor())
     	Msg.SetComplement(pNewDocument->getAuthor()) ;
     else
 			Msg.SetComplement(sAuthorId) ;
-		pPatPathoMeta->ajoutePatho("£SPID1", &Msg, 2) ;
+		pPatPathoMeta->ajoutePatho(string("£SPID1"), &Msg, 2) ;
 	}
 
   // Destinataire
   //
   if (string("") != pNewDocument->getDestinat())
 	{
-  	pPatPathoMeta->ajoutePatho("DDEST1", 1) ;
+  	pPatPathoMeta->ajoutePatho(string("DDEST1"), 1) ;
 		Msg.Reset() ;
 		Msg.SetComplement(pNewDocument->getDestinat()) ;
-		pPatPathoMeta->ajoutePatho("£SPID1", &Msg, 2) ;
+		pPatPathoMeta->ajoutePatho(string("£SPID1"), &Msg, 2) ;
 	}
 
 	// Type : code lexique
 	string sTypeDocum = pNewDocument->getTypeSem() ;
   pContexte->getDico()->donneCodeComplet(sTypeDocum) ;
-	pPatPathoMeta->ajoutePatho("0TYPE1", 1) ;
+	pPatPathoMeta->ajoutePatho(string("0TYPE1"), 1) ;
 	pPatPathoMeta->ajoutePatho(sTypeDocum, 2) ;
 
 	// Localisation : champ complement
@@ -2851,41 +2860,45 @@ NSNoyauDocument::createMetaPatpatho(NSDocumentInfo* pNewDocument, NSPatPathoArra
   {
 	  Msg.Reset() ;
 	  Msg.SetComplement(pNewDocument->getLocalis()) ;
-	  pPatPathoMeta->ajoutePatho("0LFIC1", &Msg, 1) ;
+	  pPatPathoMeta->ajoutePatho(string("0LFIC1"), &Msg, 1) ;
   }
 
   // Nom de fichier (pour les fichiers statiques)
   if (string("") != pNewDocument->getFichier())
   {
-	  pPatPathoMeta->ajoutePatho("0NFIC1", 1) ;
+	  pPatPathoMeta->ajoutePatho(string("0NFIC1"), 1) ;
 	  Msg.Reset() ;
 	  Msg.SetTexteLibre(pNewDocument->getFichier()) ;
-	  pPatPathoMeta->ajoutePatho("£?????", &Msg, 2) ;
+	  pPatPathoMeta->ajoutePatho(string("£?????"), &Msg, 2) ;
   }
 
 	// Date de rédaction
-	pPatPathoMeta->ajoutePatho("KREDA1", 1) ;
+	pPatPathoMeta->ajoutePatho(string("KREDA1"), 1) ;
 	string sDateCreation = pNewDocument->getCreDate() ;
 	if (strlen(sDateCreation.c_str()) == 8)
 		sDateCreation += string("000000") ;
 	Msg.Reset() ;
-	Msg.SetUnit("2DA021") ;
+	Msg.SetUnit(string("2DA021")) ;
 	Msg.SetComplement(sDateCreation) ;
-	pPatPathoMeta->ajoutePatho("£T0;19", &Msg, 2) ;
+	pPatPathoMeta->ajoutePatho(string("£T0;19"), &Msg, 2) ;
 
 	// Date du document
 	string sDateExam = GetDateExamen(false) ;
 	if (string("") != sDateExam)
 	{
 		pNewDocument->setDateExm(sDateExam) ;
-		pPatPathoMeta->ajoutePatho("KCHIR2", 1) ;
+		pPatPathoMeta->ajoutePatho(string("KCHIR2"), 1) ;
     if (strlen(sDateExam.c_str()) == 8)
     	sDateExam += string("000000") ;
     Msg.Reset() ;
-    Msg.SetUnit("2DA021") ;
+    Msg.SetUnit(string("2DA021")) ;
     Msg.SetComplement(sDateExam) ;
-    pPatPathoMeta->ajoutePatho("£T0;19", &Msg, 2) ;
+    pPatPathoMeta->ajoutePatho(string("£T0;19"), &Msg, 2) ;
 	}
+
+  // Second operator
+  string sSecondOperator = GetSecondOperator() ;
+  pNewDocument->set2ndOper(sSecondOperator) ;
 }
 
 /**
@@ -2993,6 +3006,35 @@ NSNoyauDocument::getRootPathoInfo() const
     return (NSPatPathoInfo*) 0 ;
 
   return *(_PatPathoArray.begin()) ;
+}
+
+string
+NSNoyauDocument::getRawTextHeader() const
+{
+  if ((NSDocumentInfo*) NULL == _pDocInfo)
+    return string("") ;
+
+  string sRawText = string("") ;
+
+  string sNss = _pDocInfo->getAuthor() ;
+  if (string("") == sNss)
+    sNss = _pDocInfo->getCreator() ;
+  if (string("") != sNss)
+  {
+    NSPersonInfo* pUtil = pContexte->getPersonArray()->getPerson(pContexte, sNss, pidsUtilisat) ;
+    if (pUtil)
+      sRawText += pUtil->getCivilite() ;
+  }
+
+  string sExamDate = GetDateExamen(true) ;
+  if (string("") != sExamDate)
+  {
+    if (string("") != sRawText)
+      sRawText += string(" ") ;
+    sRawText += sExamDate ;
+  }
+
+  return sRawText ;
 }
 
 // Fin de NsdocNoy.cpp////////////////////////////////////////////////////////////////////////

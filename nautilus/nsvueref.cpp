@@ -88,6 +88,8 @@
 
 #include "nsbb\nsattvaltools.h"
 
+#define MAXSCREENRES 10000
+
 // -----------------------------------------------------------------------------
 //
 // class NSRefVue
@@ -116,12 +118,13 @@ NSRefVue::NSRefVue(NSRefDocument& doc, NSContexte* pCtx, TWindow* parent)      
   Attr.AccelTable = REFVIEW_ACCEL ;
 
 	_pDoc = &doc ;
+
 	_HautGcheFenetre.x = _HautGcheFenetre.y = 0 ;
 	_ToolBar 	 = (OWL::TControlBar*) 0 ;
 	_pBigBoss  = (NSSmallBrother*) 0 ;
-	_ImpDriver = "" ;
-	_ImpDevice = "" ;
-	_ImpOutput = "" ;
+	_ImpDriver = string("") ;
+	_ImpDevice = string("") ;
+	_ImpOutput = string("") ;
 	_LargeurPolice = 0 ;
 
   _iLigneEnCours = 0 ;
@@ -130,8 +133,30 @@ NSRefVue::NSRefVue(NSRefDocument& doc, NSContexte* pCtx, TWindow* parent)      
 
   _pMUEViewMenu = (TMenuDescr*) 0 ;
 
+  // Get an information DC for the screen
+  //
 	_pTIC = new TIC("DISPLAY", NULL, NULL) ;
+
+  // Switch to a mode where each logical unit is mapped to one device pixel.
+  // (Positive x is to the right, positive y is down)
+  //
+  _pTIC->SetMapMode(MM_TEXT) ;
+
+  // Get screen resolution in pixels
+  //
+  _iScreenResW = _pTIC->GetDeviceCaps(HORZRES) ;
+  _iScreenResH = _pTIC->GetDeviceCaps(VERTRES) ;
+
+  string ps = string("Detected screen resolution: ") + IntToString(_iScreenResW) + string("*") + IntToString(_iScreenResH) + string(" pixels") ;
+  pContexte->getSuperviseur()->trace(&ps, 1, NSSuper::trSubSteps) ;
+
+  // Switch to a mode where each logical unit is mapped to 0.1 millimeter.
+  // (Positive x is to the right, positive y is up)
+  //
 	_pTIC->SetMapMode(MM_LOMETRIC) ;
+
+  _iFontForScreenResH = MAXSCREENRES ;
+  _iFontForScreenResW = MAXSCREENRES ;
 }
 
 // -----------------------------------------------------------------------------
@@ -530,7 +555,7 @@ NSRefVue::InitialisePolicesImp()
   return true ;
 
   // si on a pas d'imprimante sélectionnée on sort
-  if ((_ImpDriver == "") || (_ImpDevice == "") || (_ImpOutput == ""))
+  if ((string("") == _ImpDriver) || (string("") == _ImpDevice) || (string("") == _ImpOutput))
   	return false ;
 
 	NSFont* 	          pPoliceImprimante ;
@@ -612,15 +637,17 @@ NSRefVue::InitialisePolicesImp()
 bool
 NSRefVue::InitialiseMode(char type)
 {
-	char	 		   nomFichier[20], buffer[201] ;
+	char	 		   buffer[201] ;
 	short	 		   etatEnCours ;
 	size_t	 		   recherche ;
-	NSFont*	 		   pPolice ;
-	NSStyleParagraphe* pParagraphe ;
-	NSCadreDecor* 	   pCadre ;
-  NSPage*			   pPage ;
-  string			   sPathMod = pContexte->PathName("FPER") ;
-  string             sFichierMod ;
+
+	NSFont*	 		       pPolice     = (NSFont*) 0 ;
+	NSStyleParagraphe* pParagraphe = (NSStyleParagraphe*) 0 ;
+	NSCadreDecor* 	   pCadre      = (NSCadreDecor*) 0 ;
+  NSPage*			       pPage       = (NSPage*) 0 ;
+
+  string			       sPathMod = pContexte->PathName("FPER") ;
+  string             sFichierMod = string("") ;
 
 	ifstream inFile ;
 	//
@@ -639,13 +666,17 @@ NSRefVue::InitialiseMode(char type)
 	{
     *****/
 
-    strcpy(nomFichier, "N.MOD") ;
-    nomFichier[0] = type ;
-    sFichierMod = sPathMod + string(nomFichier) ;
+    string sNomFichier = string("N.MOD") ;
+    sNomFichier[0] = type ;
+    sFichierMod = sPathMod + sNomFichier ;
     inFile.open(sFichierMod.c_str()) ;
     if (!inFile)
     {
-      erreur("Impossible d'ouvrir le fichier N.MOD", standardError, 0, GetHandle()) ;
+      string sErrorMsg = pContexte->getSuperviseur()->getText("fileErrors", "errorOpeningInputFile") ;
+      sErrorMsg += string(" ") + sFichierMod ;
+
+      pContexte->getSuperviseur()->trace(&sErrorMsg, 1, NSSuper::trWarning) ;
+      erreur(sErrorMsg.c_str(), standardError, 0, GetHandle()) ;
       return false ;
     }
 		/* if (!inFile)
@@ -678,10 +709,11 @@ NSRefVue::InitialiseMode(char type)
 			switch (etatEnCours)
 			{
       	case 1 :
-          if (pCadre)
+          if ((NSCadreDecor*) NULL == pCadre)
           {
             _Cadres.push_back(new NSCadreDecor(*pCadre)) ;
             delete pCadre ;
+            pCadre = (NSCadreDecor*) 0 ;
           }
           pCadre = 0 ;
           break ;
@@ -715,13 +747,26 @@ NSRefVue::InitialiseMode(char type)
 				/* pPolice = new NSFont(); */
 				if 	  (Chaine.find("par défaut") != NPOS)
 					etatEnCours = 2 ;
-				else if (Chaine.find(_ImpDevice) != NPOS)
+				else if ((string("") != _ImpDevice) && Chaine.find(_ImpDevice) != NPOS)
 				{
 					_StylesPolice.vider() ;
 					etatEnCours = 2 ;
 				}
 				else
-					etatEnCours = 0 ;
+        {
+          etatEnCours = 0 ;   // don't take into account
+
+          // Is it a screen resolution dedicated font selection?
+          //
+          string sMajChaine = pseumaj(Chaine) ;
+          size_t iPos = sMajChaine.find("SCREEN") ;
+
+          if ((NPOS != iPos) && isCloserScreen(Chaine, iPos))
+          {
+            _StylesPolice.vider() ;
+            etatEnCours = 2 ;
+          }
+        }
 			}
 			else if (Chaine.find("Paragraphe") != NPOS)
 			{
@@ -820,6 +865,95 @@ NSRefVue::InitialiseMode(char type)
   }
 	inFile.close() ;
 	return true ;
+}
+
+//
+// Get a String in the form "Screen 1920,1080" and determine if it is closer
+// from actual screen than the current selection (if yes, return true)
+//
+// When returning true, updates _iFontForScreenResH and _iFontForScreenResW
+//
+bool
+NSRefVue::isCloserScreen(const string sChapter, size_t iScreenPos)
+{
+  if (string("") == sChapter)
+    return false ;
+
+  size_t iChapterLen = strlen(sChapter.c_str()) ;
+
+  if ((NPOS == iScreenPos) || (iScreenPos >= iChapterLen - 8))
+    return false ;
+
+  // Res should be in the form "W,H"
+  //
+  string sRes = string(sChapter, iScreenPos + 7, iChapterLen - 1) ;
+  strip(sRes, stripRight, ']') ;
+  strip(sRes) ;
+
+  string sResW = string("") ;
+  string sResH = string("") ;
+  splitString(sRes, &sResW, &sResH, ',') ;
+  strip(sResW) ;
+  strip(sResH) ;
+
+  if ((string("") == sResW) && (string("") == sResH))
+    return false ;
+
+  int iResW = 0 ;
+  int iResH = 0 ;
+
+  if (string("") == sResW)
+    iResW = _iFontForScreenResW + 1 ;
+  else
+    iResW = StringToInt(sResW) ;
+
+  if (string("") == sResH)
+    iResH = _iFontForScreenResH + 1 ;
+  else
+    iResH = StringToInt(sResH) ;
+
+  // If screen target is set and is larger than actual screen, it is not OK
+  //
+  if (((iResW < MAXSCREENRES) && (iResW > _iScreenResW)) ||
+      ((iResH < MAXSCREENRES) && (iResH > _iScreenResH)))
+    return false ;
+
+  if (getExcessSurface(iResW, iResH) < getExcessSurface(_iFontForScreenResW, _iFontForScreenResH))
+  {
+    if (iResW < MAXSCREENRES)
+      _iFontForScreenResW = iResW ;
+    else
+      _iFontForScreenResW = MAXSCREENRES ;
+
+    if (iResH < MAXSCREENRES)
+      _iFontForScreenResH = iResH ;
+    else
+      _iFontForScreenResH = MAXSCREENRES ;
+
+    return true ;
+  }
+  else
+    return false ;
+}
+
+// Get surface in excess between a given resolution and actual resolution
+//
+int
+NSRefVue::getExcessSurface(int iResW, int iResH) const
+{
+  // If given resolution is greater than actual screen resolution, no way
+  //
+  if (((iResW < MAXSCREENRES) && (iResW > _iScreenResW)) ||
+      ((iResH < MAXSCREENRES) && (iResH > _iScreenResH)))
+    return -1 ;
+
+  if (iResW >= MAXSCREENRES)
+    iResW = 0 ;
+
+  if (iResH >= MAXSCREENRES)
+    iResH = 0 ;
+
+  return ((_iScreenResW - iResW) * (_iScreenResH - iResH)) ;
 }
 
 // -----------------------------------------------------------------------------// Function    : NSRefVue::InitModePolice(pPolice, ChaineNom, ChaineContenu)// Arguments   :	pPolice 		 : pointeur sur la NSFont à initialiser
@@ -1923,7 +2057,6 @@ NSCRPrintout::SetPrintParams(TPrintDC* pDC, NS_CLASSLIB::TSize pageSize)
 	ifstream 			      inFile;
 	UINT				        TraiteLigne, LargeurPossible, LargeurGauche, LargeurChaine;
 	NS_CLASSLIB::TSize	TailleChaine;
-	char*				        buffer;
 	NSFont		 		      PoliceVoulue;
   NSPage*				      pStylePage, stylePage;
   string				      sFichierCR;
@@ -1936,7 +2069,7 @@ NSCRPrintout::SetPrintParams(TPrintDC* pDC, NS_CLASSLIB::TSize pageSize)
 	//
 	// Tentative d'ouverture du fichier qui contient le compte rendu
 	//
-  NSCRDocument* pCRDoc = dynamic_cast<NSCRDocument*>(_pCRView->GetDoc()) ;  if (NULL == pCRDoc)    return ;
+  NSCRDocument* pCRDoc = dynamic_cast<NSCRDocument*>(_pCRView->GetDoc()) ;  if ((NSCRDocument*) NULL == pCRDoc)    return ;
   sFichierCR = pCRDoc->getTextFile() ;	inFile.open(sFichierCR.c_str()) ;
 	if (!inFile)
 		return;

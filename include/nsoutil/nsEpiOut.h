@@ -11,6 +11,7 @@
 
 #include "nsepisod\flechiesDB.h"
 #include "nsbb\nsutidlg.h"
+#include "nsbb\nsednum.h"
 #include "nsoutil\nsexport.h"
 
 //
@@ -638,6 +639,26 @@ class _NSOUTILCLASSE NSInitParamsDlg : public NSUtilDialog
     NSSuper::TRACETYPE getTraceLevel() ;
 
 	DECLARE_RESPONSE_TABLE(NSInitParamsDlg) ;
+};
+
+class _NSOUTILCLASSE NSPatSearchEditParamsDlg : public NSUtilDialog
+{
+	public:
+
+  	OWL::TGroupBox* _pParamsIDGroup ;
+    OWL::TStatic*   _pCharCountTxt ;
+    NSEditNum*      _pCharCountEdit ;
+    OWL::TStatic*   _pIdleTimeTxt ;
+		NSEditNum*      _pIdleTimeEdit ;
+
+    NSPatSearchEditParamsDlg(TWindow* pere, NSContexte* pCtx) ;
+    ~NSPatSearchEditParamsDlg() ;
+
+    void CmCancel() ;
+    void CmOk() ;
+    void SetupWindow() ;
+
+	DECLARE_RESPONSE_TABLE(NSPatSearchEditParamsDlg) ;
 };
 
 #endif

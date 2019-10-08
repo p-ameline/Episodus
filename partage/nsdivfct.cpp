@@ -4741,6 +4741,8 @@ texteCourant(string textHtml)
       textOut.replace(pos, 7, "Þ") ;
     else if ((len >= 7) && (string(textOut, pos, 7) == "&szlig;"))
       textOut.replace(pos, 7, "ß") ;
+    else if ((len >= 6) && (string(textOut, pos, 6) == "&apos;"))
+      textOut.replace(pos, 6, "'") ;
 
     else if ((len >= 6) && (string(textOut, pos, 6) == "&euro;"))
       textOut.replace(pos, 6, "€") ;

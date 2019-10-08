@@ -211,7 +211,7 @@ NSFollowUpView::~NSFollowUpView()
 void
 NSFollowUpView::setViewName()
 {
-	sViewName = pContexte->getSuperviseur()->getText("followUpManagement", "followUpBoard") ;
+	_sViewName = pContexte->getSuperviseur()->getText("followUpManagement", "followUpBoard") ;
 
   addConcernTitle() ;
 }
@@ -245,7 +245,7 @@ NSFollowUpView::SetupWindow()
 {
 	NSMUEView::SetupWindow() ;
 
-	Parent->SetCaption(sViewName.c_str()) ;
+	Parent->SetCaption(_sViewName.c_str()) ;
 
 	SetupColumns() ;
 	AfficheListe() ;
@@ -282,7 +282,7 @@ try
 	followUpValues.vider() ;
   followUpIndexes.vider() ;
 
-	if (string("") == sPreoccup)
+	if (string("") == _sPreoccup)
   {
     ps2 = "NSFollowUpView::initCurrentGoals: no concern, leaving" ;
     pContexte->getSuperviseur()->trace(&ps2, 1, NSSuper::trSubSteps) ;
@@ -290,7 +290,7 @@ try
   }
 
   NSFrameInformationArray *pFrames = pLdVDoc->getFrames() ;
-  if (NULL == pFrames)
+  if ((NSFrameInformationArray*) NULL == pFrames)
   {
     ps2 = "NSFollowUpView::initCurrentGoals: no frame, leaving" ;
     pContexte->getSuperviseur()->trace(&ps2, 1, NSSuper::trSubSteps) ;
@@ -308,7 +308,7 @@ try
 	    //
 	    for (ArrayGoalIter goalIt = pArrayOfGoals->begin() ;
                                 pArrayOfGoals->end() != goalIt ; goalIt++)
-		    if ((*goalIt)->getConcern() == sPreoccup)
+		    if ((*goalIt)->getConcern() == _sPreoccup)
     	    processGoal(*goalIt) ;
     }
   }
@@ -823,7 +823,7 @@ NSFollowUpView::EvSetFocus(HWND hWndLostFocus)
 {
 	activateMUEViewMenu() ;
 
-  TMyApp    *pMyApp = pContexte->getSuperviseur()->getApplication() ;
+  TMyApp *pMyApp = pContexte->getSuperviseur()->getApplication() ;
   NSMUEView::EvSetFocus(hWndLostFocus) ;
   if (bSetupToolBar && (GetWindow() != pMyApp->GetToolBarWindow()))
   {
@@ -831,7 +831,8 @@ NSFollowUpView::EvSetFocus(HWND hWndLostFocus)
     pMyApp->SetToolBarWindow(GetWindow()) ;
   }
 
-  _pPaneSplitter->SetFrameTitle(getFunction(), sViewName) ;
+  _pPaneSplitter->SetFrameTitle(getFunction(), _sViewName) ;
+
   pContexte->setAideIndex("") ;
   pContexte->setAideCorps("objectifs.htm") ;
 }

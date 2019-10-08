@@ -69,7 +69,7 @@ END_RESPONSE_TABLE ;
 	// initMUEViewMenu("menubar") ;
 
   TMyApp* pMyApp = pContexte->getSuperviseur()->getApplication() ;
-  pMyApp->setMenu(string("menubar"), &hAccelerator) ;
+  pMyApp->setMenu(string("menubar"), &_hAccelerator) ;
 
 	_pToolBar      = (OWL::TControlBar *) 0 ;
 	_bSetupToolBar = true ;
@@ -125,7 +125,7 @@ void
 NSDecisionTreeView::setViewName()
 {
 	// sViewName = "Guideline" ;
-  sViewName = _pDoc->findTitle() ;
+  _sViewName = _pDoc->findTitle() ;
 }
 
 voidNSDecisionTreeView::lanceArchetype(){try{  if (string("") == _pDoc->getArchetype())    return ;}catch (...)
@@ -204,19 +204,19 @@ try
 
   NSMUEView::SetupWindow() ;
 
-  SetCaption(sViewName.c_str()) ;
+  SetCaption(_sViewName.c_str()) ;
 
-  if (pCreateWindow)
+  if (_pCreateWindow)
   {
     char szCreate[20] ;
-    sprintf(szCreate, "%p", pCreateWindow->HWindow) ;
+    sprintf(szCreate, "%p", _pCreateWindow->HWindow) ;
     ps = psHeader + string("Create Window ") + string(szCreate) ;
     pContexte->getSuperviseur()->trace(&ps, 1, NSSuper::trSubDetails) ;
   }
-  if (pSplittedWindow)
+  if (_pSplittedWindow)
   {
     char szSplitted[20] ;
-    sprintf(szSplitted, "%p", pSplittedWindow->HWindow) ;
+    sprintf(szSplitted, "%p", _pSplittedWindow->HWindow) ;
     ps = psHeader + string("Splitted Window ") + string(szSplitted) ;
     pContexte->getSuperviseur()->trace(&ps, 1, NSSuper::trSubDetails) ;
   }
@@ -235,10 +235,10 @@ try
       pContexte->getSuperviseur()->trace(&ps, 1, NSSuper::trSubDetails) ;
     }
   }
-  if (pGadgetPanelWindow)
+  if (_pGadgetPanelWindow)
   {
     char szGadget[20] ;
-    sprintf(szGadget, "%p", pGadgetPanelWindow->HWindow) ;
+    sprintf(szGadget, "%p", _pGadgetPanelWindow->HWindow) ;
     ps = psHeader + string("GadgetWindow ") + string(szGadget) ;
     pContexte->getSuperviseur()->trace(&ps, 1, NSSuper::trSubDetails) ;
   }
@@ -1049,7 +1049,7 @@ NSDecisionTreeView::EvSetFocus(THandle hWndLostFocus)
 
 	TMyApp* pMyApp = pContexte->getSuperviseur()->getApplication() ;
 
-	if (bSetupToolBar && (GetWindow() != pMyApp->GetToolBarWindow()))
+	if (_bSetupToolBar && (GetWindow() != pMyApp->GetToolBarWindow()))
 	{
 		SetupToolBar() ;
 		pMyApp->SetToolBarWindow(GetWindow()) ;
@@ -1060,9 +1060,9 @@ NSDecisionTreeView::EvSetFocus(THandle hWndLostFocus)
     pContexte->setAideCorps(sHelpUrl) ;
 
 	NSMUEView::EvSetFocus(hWndLostFocus) ;
-  _pPaneSplitter->SetFrameTitle(getFunction(), sViewName) ;
+  _pPaneSplitter->SetFrameTitle(getFunction(), _sViewName) ;
 
-  pMyApp->setMenu(string("menubar"), &hAccelerator) ;
+  pMyApp->setMenu(string("menubar"), &_hAccelerator) ;
 }
 
 void
@@ -1141,7 +1141,7 @@ NSDecisionTreeView::CanClose()
 
   _pDoc->SetDirty(false) ;
   pMyApp->FlushControlBar() ;
-  bSetupToolBar = false ;
+  _bSetupToolBar = false ;
 
   if (pContexte->getBBinterface())
   {
@@ -1168,10 +1168,10 @@ NSDecisionTreeView::PreProcessMsg(MSG &msg)
   if (_pToolTip && _pToolTip->IsWindow())
     _pToolTip->RelayEvent(msg) ;
 
-  if (NULL == hAccelerator)
+  if (NULL == _hAccelerator)
     return false ;
 
-  bool bTranslated = ::TranslateAccelerator(GetHandle(), hAccelerator, &msg) ;
+  bool bTranslated = ::TranslateAccelerator(GetHandle(), _hAccelerator, &msg) ;
   if (bTranslated)
     return true ;
 

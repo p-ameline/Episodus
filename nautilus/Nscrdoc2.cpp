@@ -315,7 +315,10 @@ NSCRDocument::GenereHtmlText(string& sHtmlText)
 bool
 NSCRDocument::GenereRawText(string& sRawText)
 {
-  sRawText = string("") ;
+  sRawText = getRawTextHeader() ;
+
+  if (string("") != sRawText)
+    sRawText += string(NEWLINE) + string(NEWLINE) ;
 
   ifstream inFile ;
   inFile.open(_sFichDecod.c_str()) ;
@@ -619,7 +622,7 @@ try
 	// Si c'est un nouveau compte rendu on le crée en tant que document
 	//
 	bool bNewDoc ;
-	if (NULL == _pDocInfo)
+	if ((NSDocumentInfo*) NULL == _pDocInfo)
 		bNewDoc = true ;
 	else
 		bNewDoc = false ;

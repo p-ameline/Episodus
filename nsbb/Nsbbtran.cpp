@@ -196,6 +196,10 @@ Message::SetTemporaryLinks(NSLinkedNodeArray* pArray)
 //-----------------------------------------------------------------------
 // exemple si sEtiquette : PFONC1.WCE751
 //									---> patpatho : certitude : WCE751
+//
+// Take care that the separator is a '.' and it is also the separator for
+// numerical values (example "2MLM21.£N0;03.$49.75")
+//
 //-----------------------------------------------------------------------
 void
 Message::MettreAJourCertitudePluriel(string sEtiquette)
@@ -211,6 +215,10 @@ Message::MettreAJourCertitudePluriel(string sEtiquette)
 
   // si certitude = présence totale, ne rien mettre dans la case certitude de
   // la patpatho (c'est la valeur par défaut)
+  //
+  // If certainty = fully certain, don't put anything inside the certainty slot
+  // since it is the default value
+  //
   if (posWCEA0 != NPOS)
     SetCertitude(string("")) ;
   else
@@ -218,6 +226,9 @@ Message::MettreAJourCertitudePluriel(string sEtiquette)
       SetCertitude(string(sEtiquette, posWCE, BASE_CERTITUDE_LEN)) ;
 
   // on considère que le complement est toujours à la fin de sEtiquette
+  //
+  // by convention, the complement, if any, is always the final information
+  //
   if (posCompl != NPOS)
   {
     string sCompl = string(sEtiquette, posCompl+1, strlen(sEtiquette.c_str())-posCompl-1) ;

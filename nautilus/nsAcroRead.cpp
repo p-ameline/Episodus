@@ -45,7 +45,7 @@ END_RESPONSE_TABLE;
 ////////////////////////////////////////////////////////////////
 
 NSAcrobatView::NSAcrobatView(NSAcrobatDocument& doc, TWindow *parent)							:TWindowView(doc, parent), _pDoc(&doc){
-  // _AcrobatForm = (TAcrobatProxy*) 0 ;
+  _AcrobatForm = (TAcrobatProxy*) 0 ;
   _IEForm      = (TWebProxy*) 0 ;
 
   _pMUEViewMenu = (TMenuDescr*) 0 ;
@@ -69,8 +69,8 @@ NSAcrobatView::~NSAcrobatView(){
   	delete _pMUEViewMenu ;
 
 	// Delete de la Form
-  // if (_AcrobatForm)
-	//   delete _AcrobatForm ;
+  if (_AcrobatForm)
+	  delete _AcrobatForm ;
   if (_IEForm)
 	  delete _IEForm ;
 	//CoUninitialize();
@@ -104,7 +104,7 @@ boolNSAcrobatView::CanClose()
     sTrace = string("NSAcrobatView CanClose: killing the PDF control.") ;
     _pDoc->pContexte->getSuperviseur()->trace(&sTrace, 1, NSSuper::trDetails) ;
 
-/*
+
     if (false == pSuper->mustUseIeForPdf())
     {
       HWND hOleCtrlWin = GetOleControlWindow() ;
@@ -117,7 +117,6 @@ boolNSAcrobatView::CanClose()
     }
     else
     {
-*/
       HWND hOleCtrlWin = GetSonWindow(GetHandle(), 3) ;
       if (hOleCtrlWin)
         TerminateProcess(hOleCtrlWin) ;
@@ -125,7 +124,7 @@ boolNSAcrobatView::CanClose()
       // TWebBrowser* pIEControl = _IEForm->Control ;
       // if (pIEControl)
       //   pIEControl->Parent = (TWinControl*) 0 ;
-    // }
+    }
   }
 
 	return TWindow::CanClose() ;}
@@ -143,12 +142,12 @@ voidNSAcrobatView::PerformCreate(int /*menuOrId*/)
   string sFileToOpen = getFileName() ;
 try
 {
-/*
+
   if (false == pSuper->mustUseIeForPdf())
   {
     string sTrace = string("NSAcrobatView::PerformCreate Entering, using Acrobat Reader") ;
     pSuper->trace(&sTrace, 1, NSSuper::trDetails) ;
-*/
+
     /********************************************************************
     PRECONDITION(!Form);
 
@@ -172,18 +171,18 @@ voidNSAcrobatView::PerformCreate(int /*menuOrId*/)
     // on crée la Form pour servir de zone client (on lui passe le handle parent)
     // The Form is created as the client (it receaves the Parent handle)
     //
-/*
+
     _AcrobatForm = new TAcrobatProxy(Parent->GetHandle(), this) ;
-    _AcrobatForm->Visible = false ;
+    _AcrobatForm->Visible = true ;
     // _AcrobatForm->ParentWindow = Parent->HWindow ;
 
     // Give the OWL TWindow object the handle of the Windows object it aliases
     //
     SetHandle(_AcrobatForm->Handle) ;    // BCB Help: Some controls (such as ActiveX controls) are contained in    // non-VCL windows rather than in a parent control. For these controls,    // the value of Parent is NULL and the ParentWindow property specifies    // the non-VCL parent window.    //    // ::SetParent(Forms::Application->Handle, _pDoc->pContexte->GetMainWindow()->HWindow) ;
-*/    /*    if (string("") != sFileToOpen)  	  displayFile(sFileToOpen) ;    *//*    TAcroPDF* pPdfControl = _AcrobatForm->Control ;    if (pPdfControl)
+    /*    if (string("") != sFileToOpen)  	  displayFile(sFileToOpen) ;    */    TAcroPDF* pPdfControl = _AcrobatForm->Control ;    if (pPdfControl)
     {      TVariant pdfVersion = pPdfControl->GetVersions() ;      string sVersion = BSTRtoSTLstring(pdfVersion) ;
       sTrace = string("NSAcrobatView::PerformCreate: AcrobatReader version = ") + sVersion ;
-      pSuper->trace(&sTrace, 1, NSSuper::trDetails) ;    }    sTrace = string("NSAcrobatView::PerformCreate Leaving") ;    pSuper->trace(&sTrace, 1, NSSuper::trDetails) ;    return ;  }*/  // ****************** USING IE  //  string sTrace = string("NSAcrobatView::PerformCreate Entering, using Internet Explorer") ;  pSuper->trace(&sTrace, 1, NSSuper::trDetails) ;	//CoInitialize(NULL) ;	_IEForm = new TWebProxy(Parent->GetHandle(), 0) ;
+      pSuper->trace(&sTrace, 1, NSSuper::trDetails) ;    }    sTrace = string("NSAcrobatView::PerformCreate Leaving") ;    pSuper->trace(&sTrace, 1, NSSuper::trDetails) ;    return ;  }  // ****************** USING IE  //  string sTrace = string("NSAcrobatView::PerformCreate Entering, using Internet Explorer") ;  pSuper->trace(&sTrace, 1, NSSuper::trDetails) ;	//CoInitialize(NULL) ;	_IEForm = new TWebProxy(Parent->GetHandle(), 0) ;
 
   // TWebProxy* _IEForm = ShowActiveXForm(pSuper->getApplication()->_pFormsApplication, Parent->HWindow) ;
 
@@ -225,7 +224,7 @@ try
 
   // ******************** USING ACROBAT DLL
   //
-/*
+
   if (false == pSuper->mustUseIeForPdf())
   {
     TAcroPDF* pPdfControl = _AcrobatForm->Control ;
@@ -235,6 +234,19 @@ try
       pSuper->trace(&sTrace, 1, NSSuper::trError) ;
       return ;
     }
+
+    // View mode
+    //
+    // 'Fit'   — Fits the entire page within the window both vertically and horizontally.
+    // 'FitH'  — Fits the entire width of the page within the window.
+    // 'FitV'  — Fits the entire height of the page within the window.
+    // 'FitB'  — Fits the bounding box within the window both vertically and horizontally.
+    // 'FitBH' — Fits the width of the bounding box within the window.
+    // 'FitB'  — Fits the height of the bounding box within the window
+    //
+    wchar_t wMode[1024] ;
+    MultiByteToWideChar(CP_ACP, MB_PRECOMPOSED, "Fit", -1, wMode, sizeof(wMode)) ;
+    pPdfControl->setView(wMode) ;
 
     TOLEBOOL bResult = pPdfControl->LoadFile(buff) ;
     if (bResult == false)
@@ -254,12 +266,12 @@ try
   //
   else
   {
-*/
+
 	  Variant  Flags(navNoReadFromCache) ;
 	  TVariant VFlags = Flags.operator TVariant() ;
 
 	  _IEForm->Control->Navigate(buff, &VFlags) ;
-  // }
+  }
 }
 catch (Exception &ex)
 {
@@ -298,7 +310,7 @@ voidNSAcrobatView::SetupWindow()
 
   int W = 0 ;
   int H = 0 ;
-/*
+
   if (false == pSuper->mustUseIeForPdf())
   {
 	  W = _AcrobatForm->Width ;
@@ -306,32 +318,31 @@ voidNSAcrobatView::SetupWindow()
   }
   else
   {
-*/
     W = _IEForm->Width ;
     H = _IEForm->Height ;
-  // }
+  }
 
   Parent->SetWindowPos(0, X, Y, W, H, SWP_NOZORDER) ;
 	ModifyStyle(WS_BORDER, WS_CHILD) ;
-  NS_CLASSLIB::TRect clientRect = GetClientRect() ;/*  if (false == pSuper->mustUseIeForPdf())  {    TAcroPDF* pPdfControl = _AcrobatForm->Control ;    if ((TAcroPDF*) NULL == pPdfControl)
+  NS_CLASSLIB::TRect clientRect = GetClientRect() ;  if (false == pSuper->mustUseIeForPdf())  {    TAcroPDF* pPdfControl = _AcrobatForm->Control ;    if ((TAcroPDF*) NULL == pPdfControl)
     {
       string sTrace = string("NSAcrobatView::SetupWindow for file. Null Acrobat control, leaving.") ;
       pSuper->trace(&sTrace, 1, NSSuper::trError) ;
       return ;
-    }*/    /*    pPdfControl->Left   = 0 ;    pPdfControl->Top    = 0 ;
+    }    /*    pPdfControl->Left   = 0 ;    pPdfControl->Top    = 0 ;
     pPdfControl->Width  = clientRect.Width() - 5 ;
     pPdfControl->Height = clientRect.Height() - 5 ;
     pPdfControl->setViewRect(pPdfControl->Left, pPdfControl->Top, pPdfControl->Width, pPdfControl->Height) ;
     */
-/*
+
     // Form->Control->setViewRect(0, 0, r.Width() - 10, r.Height() - 10) ;
-    string sTrace = string("NSAcrobatView::SetupWindow, showing Acrobat Reader Form") ;    pSuper->trace(&sTrace, 1, NSSuper::trDetails) ;    _AcrobatForm->Show() ;    string sFileToOpen = getFileName() ;    if (string("") != sFileToOpen)  	  displayFile(sFileToOpen) ;    pPdfControl->setShowToolbar(false) ;    pPdfControl->setZoom(100) ;    pPdfControl->gotoFirstPage() ;    // Ne fait rien de visible :    // wchar_t buff[1024] ;    // MultiByteToWideChar(CP_ACP, MB_PRECOMPOSED, "FitH", -1, buff, sizeof(buff)) ;    // pPdfControl->setView(buff) ;    SetTimer(ID_PDF_TIMER, 1000) ;  }  else  {*/    TWebBrowser* pIEControl = _IEForm->Control ;    pIEControl->Left   = 0 ;    pIEControl->Top    = 0 ;
+    string sTrace = string("NSAcrobatView::SetupWindow, showing Acrobat Reader Form") ;    pSuper->trace(&sTrace, 1, NSSuper::trDetails) ;    pPdfControl->setShowToolbar(false) ;    string sFileToOpen = getFileName() ;    if (string("") != sFileToOpen)      displayFile(sFileToOpen) ;    _AcrobatForm->Show() ;    pPdfControl->setZoom(100) ;    pPdfControl->gotoFirstPage() ;    // Ne fait rien de visible :    // wchar_t buff[1024] ;    // MultiByteToWideChar(CP_ACP, MB_PRECOMPOSED, "FitH", -1, buff, sizeof(buff)) ;    // pPdfControl->setView(buff) ;    // The file doesn't show if the window is not resized after opening    //    SetTimer(ID_PDF_TIMER, 1000) ;  }  else  {    TWebBrowser* pIEControl = _IEForm->Control ;    pIEControl->Left   = 0 ;    pIEControl->Top    = 0 ;
     pIEControl->Width  = clientRect.Width() - 5 ;
     pIEControl->Height = clientRect.Height() - 5 ;
 
     // Form->Control->setViewRect(0, 0, r.Width() - 10, r.Height() - 10) ;
     string sTrace = string("NSAcrobatView::SetupWindow, showing Internet Explorer Form") ;    pSuper->trace(&sTrace, 1, NSSuper::trDetails) ;    _IEForm->Show() ;
-  // }
+  }
 
   MakeVisible() ;
 }
@@ -644,7 +655,6 @@ voidNSAcrobatView::EvSize(uint sizeType, NS_CLASSLIB::TSize& size){
 
   NSSuper *pSuper = _pDoc->pContexte->getSuperviseur() ;
 
-/*
   if (false == pSuper->mustUseIeForPdf())
   {
     _AcrobatForm->ClientWidth  = clientRect.Width() ;
@@ -691,13 +701,12 @@ voidNSAcrobatView::EvSize(uint sizeType, NS_CLASSLIB::TSize& size){
   }
   else
   {
-*/
     _IEForm->Left   = 0 ;
     _IEForm->Top    = 0 ;
     _IEForm->Width  = clientRect.Width() ;
     _IEForm->Height = clientRect.Height() ;
     _IEForm->Invalidate() ;
-  // }
+  }
 }
 
 //// Let the form process keystrokes in its own way.  Without
@@ -720,11 +729,11 @@ void
 NSAcrobatView::MakeVisible()
 {
   NSSuper *pSuper = _pDoc->pContexte->getSuperviseur() ;
-/*
+
   if (false == pSuper->mustUseIeForPdf())
 	  _AcrobatForm->Visible = true ;
   else
-*/
+
     _IEForm->Visible = true ;
 }
 

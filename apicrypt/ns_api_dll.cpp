@@ -66,9 +66,9 @@ catch (...)
 string
 NSApicrypt::getMailText(NSContexte far *pCtx, string sRawText, string sEMail, string sCorrespId, NSPatInfo *pPatInfo, NSNoyauDocument *pDoc)
 {
-  if ((NULL == pCtx) || (string("") == sRawText) ||
+  if (((NSContexte*) NULL == pCtx) || (string("") == sRawText) ||
       (string("") == sEMail) || (string("") == sCorrespId) ||
-      (NULL == pPatInfo) || (NULL == pDoc))
+      ((NSPatInfo*) NULL == pPatInfo) || ((NSNoyauDocument*) NULL == pDoc))
   {
     string sTrace = string("NSApicrypt::getMailText Bad parameters.") ;
     pCtx->getSuperviseur()->trace(&sTrace, 1, NSSuper::trError) ;
@@ -117,9 +117,9 @@ NSApicrypt::getMailText(NSContexte far *pCtx, string sRawText, string sEMail, st
 string
 NSApicrypt::getHprimText(NSContexte far *pCtx, string sRawText, string sEMail, string sCorrespId, NSPatInfo *pPatInfo, NSNoyauDocument *pDoc)
 {
-  if ((NULL == pCtx) || (string("") == sRawText) ||
+  if (((NSContexte*) NULL == pCtx) || (string("") == sRawText) ||
       (string("") == sEMail) || (string("") == sCorrespId) ||
-      (NULL == pPatInfo) || (NULL == pDoc))
+      ((NSPatInfo*) NULL == pPatInfo) || ((NSNoyauDocument*) NULL == pDoc))
     return string("") ;
 
   string sMailName = string("") ;
@@ -144,8 +144,9 @@ NSApicrypt::getHprimText(NSContexte far *pCtx, string sRawText, string sEMail, s
 long
 NSApicrypt::CrypteMessages(NSContexte far *pCtx, string far *pMessage, string far *pAdresse)
 {
-  if ((NULL == pCtx) || (NULL == pMessage) || (string("") == *pMessage) ||
-                        (NULL == pAdresse) || (string("") == *pAdresse))
+  if (((NSContexte*) NULL == pCtx) ||
+      ((string*) NULL == pMessage) || (string("") == *pMessage) ||
+      ((string*) NULL == pAdresse) || (string("") == *pAdresse))
     return -1 ;
 
   NSMailParams* pMailApicrypt = pCtx->getUtilisateur()->getMailApicrypt() ;
@@ -245,7 +246,7 @@ void
 NSApicrypt::donneAdresseUtile(const string sAdresseLongue, string& sAdresseUtile)
 {
   size_t posAt = sAdresseLongue.find('@') ;
-  if (NPOS != posAt)
+  if (posAt)
     sAdresseUtile = string(sAdresseLongue, 0, posAt) ;
   else
     sAdresseUtile = sAdresseLongue ;
@@ -294,8 +295,9 @@ NSApicrypt::isApicryptAddress(const string sEMail)
 string
 NSApicrypt::getHprimHeader(NSContexte far *pCtx, string sMailName, string sCorrespId, NSPatInfo *pPatInfo, NSNoyauDocument *pDoc)
 {
-  if ((NULL == pCtx) || (string("") == sMailName) ||
-      (string("") == sCorrespId) || (NULL == pPatInfo) || (NULL == pDoc))
+  if (((NSContexte*) NULL == pCtx) || (string("") == sMailName) ||
+      (string("") == sCorrespId) || ((NSPatInfo*) NULL == pPatInfo) ||
+      ((NSNoyauDocument*) NULL == pDoc))
   {
     string sTrace = string("NSApicrypt::getHprimHeader Bad parameters.") ;
     pCtx->getSuperviseur()->trace(&sTrace, 1, NSSuper::trError) ;
@@ -343,13 +345,13 @@ NSApicrypt::getHprimHeader(NSContexte far *pCtx, string sMailName, string sCorre
 string
 NSApicrypt::getHprimHeaderAddress(NSContexte far *pCtx, NSPatInfo *pPatInfo)
 {
-  if ((NULL == pCtx) || (NULL == pPatInfo))
+  if (((NSContexte*) NULL == pCtx) || ((NSPatInfo*) NULL == pPatInfo))
     return string("") ;
 
   // Get demographics tree
   //
   NSPersonGraphManager* pGraphPerson = pPatInfo->getGraphPerson() ;
-  if ((NULL == pGraphPerson) || (NULL == pGraphPerson->getDataGraph()))
+  if (((NSPersonGraphManager*) NULL == pGraphPerson) || (NULL == pGraphPerson->getDataGraph()))
     return string("") ;
 
   NSPatPathoArray PatPathoArray(pCtx->getSuperviseur()) ;

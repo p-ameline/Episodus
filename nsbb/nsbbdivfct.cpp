@@ -234,11 +234,12 @@ HistoryConnector::getPath()
 HistoryConnector*
 GetHistoryConnectorForPath(NSDlgFonction *pNSFct, HistoryConnectorArray *pHCa)
 {
-  if (((NSDlgFonction*) NULL == pNSFct) ||
-       ((HistoryConnectorArray*) NULL == pHCa) || pHCa->empty())
+  if (((NSDlgFonction*)          NULL == pNSFct) ||
+       ((HistoryConnectorArray*) NULL == pHCa)   || pHCa->empty())
     return (HistoryConnector*) 0 ;
 
-  if ((NULL == pNSFct->getControl()) || (NULL == pNSFct->getControl()->getTransfert()))
+  if (((NSControle*)     NULL == pNSFct->getControl()) ||
+      ((NSTransferInfo*) NULL == pNSFct->getControl()->getTransfert()))
     return (HistoryConnector*) 0 ;
 
   BBFilsItem* pFilsForValue = pNSFct->getControl()->getTransfert()->getFilsItem() ;
@@ -4174,7 +4175,7 @@ void SetGestationDates(NSDlgFonction *pNSFct)
 
 void CheckSurgicalHistory(NSDlgFonction *pNSFct, string sCutConcept)
 {
-  if (((NSDlgFonction*) NULL == pNSFct) || (NULL == pNSFct->getControl()))
+  if (((NSDlgFonction*) NULL == pNSFct) || ((NSControle*) NULL == pNSFct->getControl()))
 		return ;
 
   // Is the control already "activated"?
@@ -4225,7 +4226,7 @@ void CheckSurgicalHistoryChapter(NSDlgFonction *pNSFct, string sCutConcept)
 {
 try
 {
-  if (((NSDlgFonction *) NULL == pNSFct) || (NULL == pNSFct->getControl()))
+  if (((NSDlgFonction *) NULL == pNSFct) || ((NSControle*) NULL == pNSFct->getControl()))
 		return ;
 
   // Is the control already "activated"?
@@ -4318,6 +4319,8 @@ catch (...)
 }
 }
 
+// Search for a single familly history element in a previous report or in synthesis
+//
 void CheckFamilyHistory(NSDlgFonction *pNSFct, string sCutConcept)
 {
   if (((NSDlgFonction*) NULL == pNSFct) ||
@@ -4336,10 +4339,10 @@ void CheckFamilyHistory(NSDlgFonction *pNSFct, string sCutConcept)
   if ((BBFilsItem*) NULL == pBBFils)
 		return ;
 
-  string sElementPath = pBBFils->getLocalisation() ;
-
   // Find such an element in a previous report
   //
+  string sElementPath = pBBFils->getLocalisation() ;
+
   NSSearchStruct searchStruct ;
   bool bOk = pNSFct->pContexte->getPatient()->ChercheChemin(sElementPath, &searchStruct) ;
   if ((bOk) && (false == searchStruct.isEmpty()))
@@ -4366,6 +4369,108 @@ void CheckFamilyHistory(NSDlgFonction *pNSFct, string sCutConcept)
   bOk = pNSFct->pContexte->getPatient()->ChercheChemin(sSynthesisPath, &searchStruct2) ;
   if ((bOk) && (false == searchStruct2.isEmpty()))
     pTransfert->Active() ;
+}
+
+// Search, in a previous report or in synthesis, for all elements from the chapter
+//
+void CheckFamilyHistoryChapter(NSDlgFonction *pNSFct, string sCutConcept)
+{
+  if (((NSDlgFonction*) NULL == pNSFct) ||
+      ((NSControle*)    NULL == pNSFct->getControl()))
+		return ;
+
+  // Is the control already "activated"?
+  //
+  NSTransferInfo* pTransfert = pNSFct->getControl()->getTransfert() ;
+  // if (((NSTransferInfo*) NULL == pTransfert) || (1 == pTransfert->getActif()))
+  if ((NSTransferInfo*) NULL == pTransfert)
+    return ;
+
+  // Get element's path beyond "personal history" (QANTF)
+  //
+  BBFilsItem*	pBBFils = pTransfert->getFilsItem() ;
+  if ((BBFilsItem*) NULL == pBBFils)
+		return ;
+
+  if (pBBFils->VectorFils.empty())
+    return ;
+
+  BBiterFils petitFils1 = pBBFils->VectorFils.begin() ;
+
+  NSContexte* pContexte = pNSFct->pContexte ;
+
+  // Find such an element in a previous report
+  //
+  string sElementPath = pBBFils->getLocalisation() ;
+
+  CheckElementsForPath(sElementPath, *petitFils1) ;
+
+  // Find the proper chapter in synthesis
+  //
+  NSSearchStruct searchStruct ;
+  string sSynthesisPath = string("ZSYNT/QANTF") ;
+
+  CheckElementsForPath(sSynthesisPath, *petitFils1) ;
+}
+
+// Search, in a previous report or in synthesis, for all elements from the chapter
+//
+void CheckElementsForPath(string sChapterPath, BBItem* pItem)
+{
+  if (((BBItem*) NULL == pItem) || (string("") == sChapterPath))
+		return ;
+
+  if (pItem->_aBBItemFils.empty())
+    return ;
+
+  NSContexte* pContexte = pItem->pContexte ;
+
+  NSSearchStruct searchStruct ;
+  bool bOk = pContexte->getPatient()->ChercheChemin(sChapterPath, &searchStruct) ;
+
+  if ((false == bOk) || (NSSearchStruct::foundNothing == searchStruct.getFoundStatus()))
+    return ;
+
+  // Explore results
+  //
+  MappingNSSearchResult::MMapIt it = searchStruct.getFoundNodes()->begin() ;
+  for ( ; searchStruct.getFoundNodes()->end() != it ; it++)
+  {
+    std::string date   = string("") ;
+    std::string sNoeud = string("") ;
+
+    searchStruct.getFoundNodes()->fullRData(it, date, sNoeud) ;
+
+    // Get the patpatho for this result
+    //
+    NSPatPathoArray Ppt(pContexte->getSuperviseur()) ;
+
+    pContexte->getPatient()->DonneArray(sNoeud, &Ppt) ;
+    if (Ppt.empty())
+      return ;
+
+    // For each tree element, check if there is a corresponding control
+    //
+    for (PatPathoIter iter = Ppt.begin() ; Ppt.end() != iter ;  iter++)
+    {
+      // Get node label
+      //
+      string sElemLex = (*iter)->getLexique() ;
+      string sSens    = string("") ;
+      pContexte->getDico()->donneCodeSens(&sElemLex, &sSens) ;
+
+      BBiter iterChampEdit = pItem->_aBBItemFils.begin() ;
+      for ( ; pItem->_aBBItemFils.end() != iterChampEdit ; iterChampEdit++)
+      {
+        string sLabel     = (*iterChampEdit)->getItemLabel() ;
+        string sLabelSens = string("") ;
+        pContexte->getDico()->donneCodeSens(&sLabel, &sLabelSens) ;
+
+        if (sSens == sLabelSens)
+          (*iterChampEdit)->Active() ;
+      }
+    }
+  }
 }
 
 void RecordInSynthesis(NSDlgFonction *pNSFct, string sContextPath, string sCutConcept)
@@ -5003,15 +5108,15 @@ string getModelNodeFromDoc(NSPatPathoInfo* pCopyNode, string sModelDocId, NSCont
   if (string("") == sCopyNodeId)
     return string("") ;
 
-  if ((NULL == pCtx) || (NULL == pCtx->getPatient()))
+  if (((NSContexte*) NULL == pCtx) || (NULL == pCtx->getPatient()))
     return string("") ;
 
   NSPersonGraphManager* pGraphPerson = pCtx->getPatient()->getGraphPerson() ;
-  if (NULL == pGraphPerson)
+  if ((NSPersonGraphManager*) NULL == pGraphPerson)
     return string("") ;
 
   NSLinkManager* pLinkManager = pGraphPerson->getLinkManager() ;
-  if (NULL == pLinkManager)
+  if ((NSLinkManager*) NULL == pLinkManager)
     return string("") ;
 
   VecteurString VString ;
@@ -5030,19 +5135,19 @@ void CheckChronicConcern(NSDlgFonction *pNSFct)
 {
 try
 {
-  if (((NSDlgFonction *) NULL == pNSFct) || (NULL == pNSFct->getControl()))
+  if (((NSDlgFonction*) NULL == pNSFct) || ((NSControle*) NULL == pNSFct->getControl()))
 		return ;
 
   // Is the control already "activated"?
   //
   NSTransferInfo* pTransfert = pNSFct->getControl()->getTransfert() ;
-  if (((NSTransferInfo *) NULL == pTransfert) || (true == pTransfert->isActif()))
+  if (((NSTransferInfo*) NULL == pTransfert) || (true == pTransfert->isActif()))
 		return ;
 
   // Get element's path
   //
   BBFilsItem*	pBBFils = pTransfert->getFilsItem() ;
-  if ((BBFilsItem *) NULL == pBBFils)
+  if ((BBFilsItem*) NULL == pBBFils)
 		return ;
 
   string sElementPath = pBBFils->getLocalisation() ;
@@ -5077,19 +5182,19 @@ catch (...)
 
 void RecordChronicConcernInHealthIndex(NSDlgFonction *pNSFct)
 {
-  if (((NSDlgFonction *) NULL == pNSFct) || (NULL == pNSFct->getControl()))
+  if (((NSDlgFonction *) NULL == pNSFct) || ((NSControle*) NULL == pNSFct->getControl()))
 		return ;
 
   // Is the control "activated"? If not, there is nothing to get done
   //
   NSTransferInfo* pTransfert = pNSFct->getControl()->getTransfert() ;
-  if ((NULL == pTransfert) || (false == pTransfert->isActif()))
+  if (((NSTransferInfo*) NULL == pTransfert) || (false == pTransfert->isActif()))
 		return ;
 
   // Get element's path
   //
   BBFilsItem*	pBBFils = pTransfert->getFilsItem() ;
-  if ((BBFilsItem *) NULL == pBBFils)
+  if ((BBFilsItem*) NULL == pBBFils)
 		return ;
 
   string sElementPath = pBBFils->getLocalisation() ;
@@ -5170,19 +5275,19 @@ void SelectMaterial(NSDlgFonction *pNSFct)
 
 void InitTitleOfPerson(NSDlgFonction *pNSFct)
 {
-  if (((NSDlgFonction*) NULL == pNSFct) || (NULL == pNSFct->getControl()))
+  if (((NSDlgFonction*) NULL == pNSFct) || ((NSControle*) NULL == pNSFct->getControl()))
 		return ;
 
   NSTransferInfo* pTransfert = pNSFct->getControl()->getTransfert() ;
-  if ((NULL == pTransfert) || (NULL == pTransfert->getFilsItem()) || (NULL == pTransfert->getControl()->getControle()))
+  if (((NSTransferInfo*) NULL == pTransfert) || (NULL == pTransfert->getFilsItem()) || (NULL == pTransfert->getControl()->getControle()))
 		return ;
 
 	NSButton* pNSButton = static_cast<NSButton*>(pTransfert->getControl()->getControle()) ;
-  if (NULL == pNSButton)
+  if ((NSButton*) NULL == pNSButton)
 		return ;
 
   NSSmallBrother* pBigBoss = pNSFct->getItem()->_pBigBoss ;
-  if (NULL == pBigBoss)
+  if ((NSSmallBrother*) NULL == pBigBoss)
     return ;
 
 	string sCode = pTransfert->getFilsItem()->getItemLabel() ;
@@ -5191,19 +5296,19 @@ void InitTitleOfPerson(NSDlgFonction *pNSFct)
 
   string sCorrespId = string("") ;
 
-  if ((NULL != pTransfert->getTransfertMessage()) && (string("") != pTransfert->getTransfertMessage()->GetComplement()))
+  if (pTransfert->getTransfertMessage() && (string("") != pTransfert->getTransfertMessage()->GetComplement()))
     sCorrespId = pTransfert->getTransfertMessage()->GetComplement() ;
   else
   {
 	  NSPatPathoArray* pPPT = pBigBoss->getPatPatho() ;
-	  if (NULL == pPPT)
+	  if ((NSPatPathoArray*) NULL == pPPT)
   	  return ;
 
 	  //
 	  // chercher dans pPPT sCode
 	  //
 	  PatPathoIter iter = pPPT->ChercherItem(sCode) ;
-	  if ((NULL == iter) || (pPPT->end() == iter))
+	  if (((PatPathoIter) NULL == iter) || (pPPT->end() == iter))
 		  return ;
 
 	  sCorrespId = (*iter)->getComplement() ;
@@ -5212,12 +5317,12 @@ void InitTitleOfPerson(NSDlgFonction *pNSFct)
   }
 
 	NSPersonInfo* pPersonInfo = pBigBoss->pContexte->getPersonArray()->getPerson(pBigBoss->pContexte, sCorrespId, pidsCorresp) ;
-  if (NULL == pPersonInfo)
+  if ((NSPersonInfo*) NULL == pPersonInfo)
   	return ;
 
 	string sIdentite = pPersonInfo->getNom() + " " + pPersonInfo->getPrenom() ;
 
-	if (sIdentite != "")
+	if (string("") != sIdentite)
 		pNSButton->SetCaption(sIdentite.c_str()) ;
 	else
 		pNSButton->SetCaption("Préciser l'anesthésiste") ;
@@ -5225,7 +5330,7 @@ void InitTitleOfPerson(NSDlgFonction *pNSFct)
 
 void SelectPerson(NSDlgFonction *pNSFct)
 {
-  if ((NULL == pNSFct) || (NULL == pNSFct->getControl()))
+  if (((NSDlgFonction*) NULL == pNSFct) || ((NSControle*) NULL == pNSFct->getControl()))
 		return ;
 
 	NSTransferInfo* pTransfert = pNSFct->getControl()->getTransfert() ;

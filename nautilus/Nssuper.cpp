@@ -158,7 +158,7 @@ NSSuper::NSSuper()
 {
 try
 {
-	sNumVersion         = string("5.14.0013") ;
+	sNumVersion         = string("5.14.0040") ;
   _numInstance        = 0 ;
 	_pSuperContext      = (NSContexte*) 0 ;
   _bJavaOk            = false ;
@@ -219,6 +219,8 @@ try
   _sOdbcPatientsFileDesc = string("") ;
   _bUseIeForPdf          = true ;
   _bMustKillPdfProcess   = false ;
+  _bAddReportLetterToHistory = false ;
+  _bPut2ndOperatorInTemplate = false ;
 
   for (int i = 0 ; i < 9 ; i++)
     _sUserFctDll[i] = string("") ;
@@ -286,6 +288,8 @@ NSSuper::NSSuper(const NSSuper& srcNSSuper)
          _sDefaultFctUnitId(srcNSSuper._sDefaultFctUnitId),
          _sCarePlaceId(srcNSSuper._sCarePlaceId),
          _bUseIeForPdf(srcNSSuper._bUseIeForPdf),
+         _bAddReportLetterToHistory(srcNSSuper._bAddReportLetterToHistory),
+         _bPut2ndOperatorInTemplate(srcNSSuper._bPut2ndOperatorInTemplate),
          _bMustKillPdfProcess(srcNSSuper._bMustKillPdfProcess),
          _sInPatientsFileDesc(srcNSSuper._sInPatientsFileDesc),
          _sOdbcPatientsFileDesc(srcNSSuper._sOdbcPatientsFileDesc),
@@ -364,6 +368,8 @@ NSSuper::operator=(const NSSuper& srcNSSuper)
   _sDefaultFctUnitId     = srcNSSuper._sDefaultFctUnitId ;
   _sCarePlaceId          = srcNSSuper._sCarePlaceId ;
   _bUseIeForPdf          = srcNSSuper._bUseIeForPdf ;
+  _bAddReportLetterToHistory = srcNSSuper._bAddReportLetterToHistory ;
+  _bPut2ndOperatorInTemplate = srcNSSuper._bPut2ndOperatorInTemplate ;
   _bMustKillPdfProcess   = srcNSSuper._bMustKillPdfProcess ;
   _sInPatientsFileDesc   = srcNSSuper._sInPatientsFileDesc ;  _sOdbcPatientsFileDesc = srcNSSuper._sOdbcPatientsFileDesc ;
   for (int i = 0 ; i < 9 ; i++)
@@ -1351,7 +1357,7 @@ NSSuper::InitParite()
   // Opening file
   //
   ifstream inFile ;
-	inFile.open("euro.dat");
+	inFile.open("euro.dat") ;
 	if (!inFile)
 	{
     sMsg = string("Cannot open euro.dat") ;
@@ -1408,7 +1414,7 @@ NSSuper::InitParite()
     }
     else if ((string("MONNAIE") == sNomAttrib) && (string("") != sValAttrib))
     {
-    	if (sValAttrib == "EURO")
+    	if (string("EURO") == sValAttrib)
       	_monnaieRef = MONNAIE_EURO ;
       else
       	_monnaieRef = MONNAIE_LOCALE ;
@@ -1488,6 +1494,20 @@ NSSuper::InitParite()
         _bMustKillPdfProcess = false ;
       else
         _bMustKillPdfProcess = true ;
+    }
+    else if ((string("HISTOREPORTLETTERS") == sNomAttrib) && (string("") != sValAttrib))
+    {
+      if (IsNo(sValAttrib))
+        _bAddReportLetterToHistory = false ;
+      else
+        _bAddReportLetterToHistory = true ;
+    }
+    else if ((string("MOVE2NDOPERATORTOTEMPLATE") == sNomAttrib) && (string("") != sValAttrib))
+    {
+      if (IsNo(sValAttrib))
+        _bPut2ndOperatorInTemplate = false ;
+      else
+        _bPut2ndOperatorInTemplate = true ;
     }
     else if ((string("NOM_MODULE") == sNomAttrib) && (string("") != sValAttrib))
     {

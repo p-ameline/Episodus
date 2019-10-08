@@ -29,6 +29,8 @@ class NSMailServiceWindow ;
 class NSMailServiceChild ;
 class NSAlertServiceWindow ;
 class NSAlertServiceChild ;
+class NSTankServiceWindow ;
+class NSTankServiceChild ;
 class NSWebTipWindow ;
 class NSLocalChapterArray ;
 class TMyApp ;
@@ -158,6 +160,8 @@ class NSSuper
   string                _sOdbcPatientsFileDesc ;       //!< File name of odbc connector to an external patients repository
   bool                  _bUseIeForPdf ;                //!< Use PDF embedded in IE instead of PDF Com directly
   bool                  _bMustKillPdfProcess ;         //!< Must kill PDF process (when the usual close lags)
+  bool                  _bAddReportLetterToHistory ;   //!< Is the defaut behavior of letters joined to reports to be added to history
+  bool                  _bPut2ndOperatorInTemplate ;   //!< Should the second operator, if any, get moved from the report body to a template tag
 
   string                _sUserFctDll[9] ;              //!< User specific dll(s)
 
@@ -320,6 +324,8 @@ class NSSuper
   string                getCarePlaceId()          { return _sCarePlaceId ; }
   bool                  mustUseIeForPdf()         { return _bUseIeForPdf ; }
   bool                  mustKillPdfProcess()      { return _bMustKillPdfProcess ; }
+  bool                  mustAddReportLttrToHisto(){ return _bAddReportLetterToHistory ; }
+  bool                  mustMove2ndOperatorToTpl(){ return _bPut2ndOperatorInTemplate ; }
   string                getInPatientsFileDesc()   { return _sInPatientsFileDesc ; }
   string                getOdbcPatientsFileDesc() { return _sOdbcPatientsFileDesc ; }
   INDEXMANAGEMENT       getIndexManagementRule()  { return _iIndexManagementRule ; }
@@ -618,6 +624,9 @@ class NSContexte : public NSSuperRoot
 
   NSAlertServiceWindow*  _pAlertBoxWindow ;
   NSAlertServiceChild*   _pAlertBoxChild ;
+
+  NSTankServiceWindow*   _pTankBoxWindow ;
+  NSTankServiceChild*    _pTankBoxChild ;
 
 	TWindow* GetMainWindow() { return _pSuper->donneMainWindow() ; }
 
@@ -2465,6 +2474,7 @@ NSSuper::IDfromFunctionName(string sFctName)
   if (sFctName == string(".episodus:SystemTools"))                 return CM_OUTILS ;
   if (sFctName == string(".episodus:EpisodusTools"))               return CM_EPISO_STOP ;
   if (sFctName == string(".episodus:EpisodusMailBox"))             return CM_MAILBOX ;
+  if (sFctName == string(".episodus:EpisodusTankBox"))             return CM_TANK ;
   if (sFctName == string(".episodus:ArchetypeReferencing"))        return CM_REFARCH ;
   if (sFctName == string(".episodus:ArchetypeEditing"))            return CM_ARCHEDIT ;
   if (sFctName == string(".episodus:ReferentialEditing"))          return CM_REFEDIT ;

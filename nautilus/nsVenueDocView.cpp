@@ -450,7 +450,7 @@ NSVenuesView::~NSVenuesView()
 void
 NSVenuesView::setViewName()
 {
-	sViewName = pContexte->getSuperviseur()->getText("venuesWindows", "venuesManagement") ;
+	_sViewName = pContexte->getSuperviseur()->getText("venuesWindows", "venuesManagement") ;
 
   addConcernTitle() ;
 }
@@ -466,7 +466,7 @@ TWindow
 NSVenuesView::SetupWindow()
 {
   NSMUEView::SetupWindow() ;
-  Parent->SetCaption(sViewName.c_str()) ;
+  Parent->SetCaption(_sViewName.c_str()) ;
 
   SetupColumns() ;
   AfficheListe() ;
@@ -791,14 +791,14 @@ NSVenuesView::focusFct()
 {
 	activateMUEViewMenu() ;
 
-  TMyApp  *pMyApp = pContexte->getSuperviseur()->getApplication() ;
-  if (bSetupToolBar && (GetWindow() != pMyApp->GetToolBarWindow()))
+  TMyApp *pMyApp = pContexte->getSuperviseur()->getApplication() ;
+  if (_bSetupToolBar && (GetWindow() != pMyApp->GetToolBarWindow()))
   {
     SetupToolBar() ;
     pMyApp->SetToolBarWindow(GetWindow()) ;
   }
 
-  _pPaneSplitter->SetFrameTitle(getFunction(), sViewName) ;
+  _pPaneSplitter->SetFrameTitle(getFunction(), _sViewName) ;
   pContexte->setAideIndex("") ;
   pContexte->setAideCorps("medicaments.htm") ;
 }

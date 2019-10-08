@@ -271,7 +271,7 @@ NSEpisodRCView::~NSEpisodRCView()
 void
 NSEpisodRCView::setViewName()
 {
-	sViewName = pContexte->getSuperviseur()->getText("RCManagement", "RCEpisodViewTitle") ;
+	_sViewName = pContexte->getSuperviseur()->getText("RCManagement", "RCEpisodViewTitle") ;
 
   addConcernTitle() ;
 }
@@ -280,18 +280,18 @@ NSEpisodRCView::setViewName()
 TWindow*
 NSEpisodRCView::GetWindow()
 {
-	return (TWindow*) this;
+	return (TWindow*) this ;
 }
 
 // Appel de la fonction de remplissage de la vuevoid
 NSEpisodRCView::SetupWindow()
 {
-	NSMUEView::SetupWindow();
+	NSMUEView::SetupWindow() ;
 
-	Parent->SetCaption(sViewName.c_str()) ;
+	Parent->SetCaption(_sViewName.c_str()) ;
 
-	SetupColumns();
-	AfficheListe();
+	SetupColumns() ;
+	AfficheListe() ;
 }
 
 void
@@ -842,7 +842,7 @@ NSEpisodRCView::focusFct()
 		pMyApp->SetToolBarWindow(GetWindow()) ;
 	}
 
-	_pPaneSplitter->SetFrameTitle(getFunction(), sViewName) ;
+	_pPaneSplitter->SetFrameTitle(getFunction(), _sViewName) ;
 	pContexte->setAideIndex("") ;
 	pContexte->setAideCorps("rc_episode.htm") ;
 }
@@ -998,7 +998,7 @@ NSRCHistoryView::NSRCHistoryView(NSLdvDocument &doc, string sConcern)          
 void
 NSRCHistoryView::setViewName()
 {
-	sViewName = pContexte->getSuperviseur()->getText("RCManagement", "RCHistoryViewTitle") ;
+	_sViewName = pContexte->getSuperviseur()->getText("RCManagement", "RCHistoryViewTitle") ;
 
   addConcernTitle() ;
 }
@@ -1006,9 +1006,9 @@ NSRCHistoryView::setViewName()
 void
 NSRCHistoryView::concernChanged(string sConcern)
 {
-    sPreoccup = sConcern ;
+  _sPreoccup = sConcern ;
 
-    reInitParams() ;
+  reInitParams() ;
 }
 
 void
@@ -1066,50 +1066,50 @@ NSRCHistoryView::initArchetype()
 {
 try
 {
-    //
-    // Recherche de l'Archetype
-    //
-    if (sPreoccup == "")
-        return ;
+  //
+  // Recherche de l'Archetype
+  //
+  if (string("") == _sPreoccup)
+    return ;
 
-    // Localisation : ZPOMR / sConcern
-    string sNoeud1 = string("ZPOMR1") ;
-    string sCodeSens ;
-    NSSuper* pSuper = pContexte->getSuperviseur() ;
-    NSDico::donneCodeSens(&sNoeud1, &sCodeSens) ;
-    string sLocalisation = sCodeSens ;
+  // Localisation : ZPOMR / sConcern
+  string sNoeud1 = string("ZPOMR1") ;
+  string sCodeSens ;
+  NSSuper* pSuper = pContexte->getSuperviseur() ;
+  NSDico::donneCodeSens(&sNoeud1, &sCodeSens) ;
+  string sLocalisation = sCodeSens ;
 
-    //recherche du fil guide
+  //recherche du fil guide
 
-    NSConcern* pConcern = pLdVDoc->getConcerns(ldvframeHealth)->getConcern(sPreoccup);
-    if (!pConcern)
-        return ;
+  NSConcern* pConcern = pLdVDoc->getConcerns(ldvframeHealth)->getConcern(_sPreoccup);
+  if (!pConcern)
+    return ;
 
-    sConcernText = pConcern->_sTitre ;
+  sConcernText = pConcern->_sTitre ;
 
-    NSPatPathoArray* pPatho ;
-    PatPathoIter iter = pLdVDoc->donnePreoccup(pConcern, &pPatho) ;
-    if (iter == NULL)
-        return ;
+  NSPatPathoArray* pPatho ;
+  PatPathoIter iter = pLdVDoc->donnePreoccup(pConcern, &pPatho) ;
+  if (iter == NULL)
+    return ;
 
-    string sConcernLex = (*iter)->getLexique() ;
+  string sConcernLex = (*iter)->getLexique() ;
 
-    VecteurRechercheSelonCritere* pVecteurSelonCritere = new VecteurRechercheSelonCritere(GUIDE) ;
-    NSDico::donneCodeSens(&sConcernLex, &sCodeSens) ;
-    pVecteurSelonCritere->AjouteEtiquette(sCodeSens) ;
-    pSuper->getFilGuide()->chercheChemin(&sLocalisation ,
-                             pVecteurSelonCritere, NSFilGuide :: compReseau) ;
-    bool        trouve ;
-    BBItemData* pDonnees = new BBItemData ;
-    pVecteurSelonCritere->SetData(sCodeSens, &trouve, pDonnees) ;
-    string sEtiquette ;
-    if (trouve)
-    {
-        if (pDonnees->ouvreDialogue[0] == 'A')
-            sArchetype = string(pDonnees->fils) ;
-    }
-    delete pDonnees ;
-    delete pVecteurSelonCritere ;
+  VecteurRechercheSelonCritere* pVecteurSelonCritere = new VecteurRechercheSelonCritere(GUIDE) ;
+  NSDico::donneCodeSens(&sConcernLex, &sCodeSens) ;
+  pVecteurSelonCritere->AjouteEtiquette(sCodeSens) ;
+  pSuper->getFilGuide()->chercheChemin(&sLocalisation ,
+                           pVecteurSelonCritere, NSFilGuide :: compReseau) ;
+  bool        trouve ;
+  BBItemData* pDonnees = new BBItemData ;
+  pVecteurSelonCritere->SetData(sCodeSens, &trouve, pDonnees) ;
+  string sEtiquette ;
+  if (trouve)
+  {
+      if (pDonnees->ouvreDialogue[0] == 'A')
+          sArchetype = string(pDonnees->fils) ;
+  }
+  delete pDonnees ;
+  delete pVecteurSelonCritere ;
 
     if (sArchetype == "")
         return ;
@@ -1152,7 +1152,7 @@ NSRCHistoryView::SetupWindow()
 {
 	NSMUEView::SetupWindow();
 
-	Parent->SetCaption(sViewName.c_str()) ;
+	Parent->SetCaption(_sViewName.c_str()) ;
 
 	if ((nsarcParseur*) NULL == pParseur)
 		return ;
@@ -1171,7 +1171,7 @@ NSRCHistoryView::EvSetFocus(HWND hWndLostFocus)
 {
   NSMUEView::EvSetFocus(hWndLostFocus) ;
 
-  _pPaneSplitter->SetFrameTitle(getFunction(), sViewName) ;
+  _pPaneSplitter->SetFrameTitle(getFunction(), _sViewName) ;
   // pContexte->setAideIndex("") ;
   // pContexte->setAideCorps("objectifs.htm") ;
 }
@@ -1309,27 +1309,27 @@ NSRCHistoryView::initHistory()
 {
 try
 {
-  if (sPreoccup == "")
+  if (string("") == _sPreoccup)
     return ;
   if (Lignes.empty())
     return ;
 
   NSPatientChoisi* pPat = pContexte->getPatient();
-  if ((!pPat) || (!(pPat->getDocHis())))
+  if (((NSPatientChoisi*) NULL == pPat) || (!(pPat->getDocHis())))
     return ;
 
   //
   // On cherche tous les noeuds en relation "problemContactElement" avec la préoccupation
   // We look for every node linked to this concern with the "problemContactElement" relationship
   //
-  VecteurString vResult;
+  VecteurString vResult ;
 
 #ifndef N_TIERS
   NSGraphe* pGraphe = new NSGraphe(pContexte) ;
 #else
 	NSLinkManager* pGraphe = pContexte->getPatient()->getGraphPerson()->getLinkManager() ;
 #endif
-  pGraphe->TousLesVrais(sPreoccup, NSRootLink::problemContactElement, &vResult, "ENVERS");
+  pGraphe->TousLesVrais(_sPreoccup, NSRootLink::problemContactElement, &vResult, "ENVERS") ;
 #ifndef N_TIERS
   delete pGraphe;
 #endif
@@ -1337,7 +1337,7 @@ try
   if (vResult.empty())
     return ;
 
-  string sMaxDateDoc = "";
+  string sMaxDateDoc = string("") ;
 
   EquiItemIter iterLiens = vResult.begin();
   for (; iterLiens != vResult.end(); iterLiens++)
@@ -1356,7 +1356,7 @@ try
       if (sDateDoc >= sMaxDateDoc)
         sMaxDateDoc = sDateDoc ;
 
-      PatPathoIter pptIt = PPt.ChercherNoeud(**iterLiens);
+      PatPathoIter pptIt = PPt.ChercherNoeud(**iterLiens) ;
 
             if ((pptIt != NULL) && (pptIt != PPt.end()))
             {

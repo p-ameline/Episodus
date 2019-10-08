@@ -895,7 +895,7 @@ class _NSLDVCLASSE NSNewTrt : public NSUtilDialog
 
     // constructeur/destructeur
     //NSNewTrt(NSConcernPropertyDlg* pere, string* pTypeDocument, string sPreoccup, NSContexte* pCtx) ;
-    NSNewTrt(TWindow *pere, string *pTypeDocument, string sPreoccup, NSContexte *pCtx, string sArcCode, string sCaptionDlg = "") ;
+    NSNewTrt(TWindow *pere, string *pTypeDocument, string sPreoccup, NSContexte *pCtx, string sArcCode, string sCaptionDlg = string("")) ;
     ~NSNewTrt() ;
 
     // fonctions
@@ -948,7 +948,7 @@ class NSMultiDocsWindow : public TListWindow
   public:
 
     NSOpenMultiDocsDlg* pView;    int                 iRes;
-    NSMultiDocsWindow(NSOpenMultiDocsDlg* pere, int resId, TModule* module = 0) ;
+    NSMultiDocsWindow(NSOpenMultiDocsDlg* pere, int resId, TModule* module = (TModule*) 0) ;
     ~NSMultiDocsWindow() {}    void 	SetupWindow() ;
     void    EvLButtonDblClk(uint modKeys, NS_CLASSLIB::TPoint& point);    int     IndexItemSelect();
 

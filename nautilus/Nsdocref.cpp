@@ -155,32 +155,33 @@ NSRefDocument::operator=(const NSRefDocument& src)
 
 // Fonction qui renvoie la date stockée dans la PatPatho
 // au format jj/mm/aaaa ou au format Nautilus (aaaammjj) selon bDateClaire
+//
 string
 NSRefDocument::GetDateDoc(bool bDateClaire)
 {
 try
 {
-	string sDate = "" ;
-	string sMessage ;
-	string sIntro ;
-
+	string sDate = string("") ;
 	string sLang = pContexte->getUserLanguage() ;
 
 	if (_pDocInfo)
 	{
 		sDate = _pDocInfo->getDateExm() ;
 
-		if (sDate == "")
+		if (string("") == sDate)
 			sDate = _pDocInfo->getCreDate() ;
 	}
 
-	if ((!bDateClaire) || (sDate == ""))
+	if ((false == bDateClaire) || (string("") == sDate))
 		return sDate ;
+
+  string sMessage = string("") ;
+	string sIntro   = string("") ;
 
 	donne_date_claire(sDate, &sMessage, &sIntro, sLang) ;
 
-	if (sIntro != "")
-		sDate = sIntro + " " + sMessage ;
+	if (string("") != sIntro)
+		sDate = sIntro + string(" ") + sMessage ;
 	else
 		sDate = sMessage ;
 
@@ -189,34 +190,51 @@ try
 catch (...)
 {
 	erreur("Exception NSRefDocument::GetDateDoc.", standardError, 0) ;
-	return "" ;
+	return string("") ;
 }
 }
 
+// Get the second operator, if any
+//
+string
+NSRefDocument::GetSecondOperator()
+{
+try
+{
+	if (_pDocInfo)
+    return _pDocInfo->get2ndOper() ;
+    
+	return string("") ;
+}
+catch (...)
+{
+	erreur("Exception NSRefDocument::GetSecondOperator.", standardError, 0) ;
+	return string("") ;
+}
+}
 
 // Modele de la fonction GenereHtml// Cette méthode ne sert que pour les html statiques (ou documents images)// A priori ce type de document ne se compose pas et n'a pas de pHtmlInfobool
 NSRefDocument::GenereHtml(string sPathHtml, string& sNomHtml, OperationType typeOperation,
 									string sAdresseCorresp, string sPathDest)
 {
-	string    sFichierHtml ;
 	NSModHtml html(typeOperation, this, pContexte) ;
 	string    sBaseImg ;
 
 	// on trouve le nom du fichier temporaire à visualiser
 	sNomHtml = html.nomSansDoublons(sPathHtml, sNomHtml, "htm") ;
-	sFichierHtml = sPathHtml + sNomHtml ;
+	string sFichierHtml = sPathHtml + sNomHtml ;
 
 	// generation du fichier html (dans le repertoire du serveur)
 	if (_pHtmlInfo)
 	{
 		// cas des html dynamiques
-		if (!html.genereHtml(sFichierHtml, sBaseImg, _pHtmlInfo))
+		if (false == html.genereHtml(sFichierHtml, sBaseImg, _pHtmlInfo))
 			return false ;
 	}
 	else
 	{
 		// on fournit ici le pDocInfo car le document brut est un html statique
-		if (!html.genereHtml(sFichierHtml, sBaseImg, _pDocInfo))
+		if (false == html.genereHtml(sFichierHtml, sBaseImg, _pDocInfo))
 			return false ;
 	}
 
@@ -262,10 +280,10 @@ try
   string sNomEntete  = string("") ;
   string sTypeModele = string("") ;
 
-	int    numModele ;
+	size_t iNumModele ;
 	string sNomHtml ;
 	string sPathHtml ;
-	string codeDoc ;
+	string sCodeDoc ;
 	bool   bExisteImages = false ;
 
    	// si pas d'utilisateur ou pas de patient en cours : on sort
@@ -275,7 +293,7 @@ try
 	if (NULL == _pDocInfo)
 	{
   	string sCaption = string("Message ") + pContexte->getSuperviseur()->getAppName().c_str() ;
-    MessageBox(0, "Sauvegardez le document avant de le composer", sCaption.c_str(), MB_OK) ;
+    MessageBox(0, "Vous devez enregistrer le document avant de le composer", sCaption.c_str(), MB_OK) ;
     return ;
 	}
 
@@ -286,7 +304,7 @@ try
     return ;
 	}
 
-	if (!bExisteImages)
+	if (false == bExisteImages)
 	{
   	string sCaption = string("Message ") + pContexte->getSuperviseur()->getAppName().c_str() ;
     int idRet = MessageBox(0, "La chemise du document ne contient pas d'images. Voulez-vous continuer ?", sCaption.c_str(), MB_YESNO) ;
@@ -294,7 +312,7 @@ try
     	return ;
 	}
 
-	codeDoc = _pDocInfo->getID() ;
+	sCodeDoc = _pDocInfo->getID() ;
 	setNomDocHtml(string("")) ;
 
    	/**************************** création d'un fichier html simple
@@ -339,7 +357,7 @@ try
 
 		// Dialogue de choix du template
 		ChoixTemplateDialog* pChoixTemplateDlg =
-		    new ChoixTemplateDialog(pContexte->GetMainWindow(), pContexte, _pDocInfo->getTypeSem(), sCodeSensRoot);
+		    new ChoixTemplateDialog(pContexte->GetMainWindow(), pContexte, _pDocInfo->getTypeSem(), sCodeSensRoot) ;
 
 		if (IDCANCEL == pChoixTemplateDlg->Execute())
 		{
@@ -347,13 +365,16 @@ try
 			return ;
 		}
 
-		numModele = pChoixTemplateDlg->TemplateChoisi ;
+		iNumModele = pChoixTemplateDlg->getTemplateChoisi() ;
 
-		if (numModele)
+		if (iNumModele > 0)
 		{
-      int iCursor = numModele - 1 ;
-			sNomModele  = (*(pChoixTemplateDlg->pTemplateArray))[iCursor]->getFichier() ;			sNomEntete  = (*(pChoixTemplateDlg->pTemplateArray))[iCursor]->getEnTete() ;
-			sTypeModele = (*(pChoixTemplateDlg->pTemplateArray))[iCursor]->getType() ;
+      int iCursor = iNumModele - 1 ;
+
+      NSTemplateArray* pTemplateArray = pChoixTemplateDlg->getTemplateArray() ;
+
+			sNomModele  = (*pTemplateArray)[iCursor]->getFichier() ;			sNomEntete  = (*pTemplateArray)[iCursor]->getEnTete() ;
+			sTypeModele = (*pTemplateArray)[iCursor]->getType() ;
 		}
 		else
 		{
@@ -361,19 +382,19 @@ try
 			return;
 		}
 
-		delete pChoixTemplateDlg;
+		delete pChoixTemplateDlg ;    pChoixTemplateDlg = (ChoixTemplateDialog*) 0 ;
 		_sTemplate = pContexte->PathName("NTPL") + sNomModele ;		_sEnTete   = pContexte->PathName("NTPL") + sNomEntete ;
 	}
 	else
 	{
 		_sTemplate = pContexte->PathName(_pDocInfo->getLocalis()) + _pDocInfo->getFichier() ;
-		_sEnTete = "";
+		_sEnTete = string("") ;
 	}
 
-	// On récupère le chemin où on va générer le fichier de composition	sPathHtml = pContexte->PathName("SHTM");
-	sNomHtml = codeDoc;
+	// On récupère le chemin où on va générer le fichier de composition	sPathHtml = pContexte->PathName("SHTM") ;
+	sNomHtml  = sCodeDoc ;
 
-	if (!GenereHtml(sPathHtml, sNomHtml, toComposer))	{
+	if (false == GenereHtml(sPathHtml, sNomHtml, toComposer))	{
 		erreur("Impossible de créer le fichier html de composition", standardError, 0, pContexte->GetMainWindow()->GetHandle());
 		return;
 	}

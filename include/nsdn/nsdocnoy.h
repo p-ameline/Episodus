@@ -101,7 +101,8 @@ class _CLASSENSDN NSNoyauDocument : public NSRoot
     void 	updateAfterSave(string sTreeID, string sMetaID) ;
 
 		// Récupère la date stockée dans la patpatho
-		string	GetDateExamen(bool bDateClaire = true) ;
+		string	GetDateExamen(bool bDateClaire = true) const ;
+    string	GetSecondOperator() ;
 
 		// Mise à jour de la pDocInfo en fonction des données de la patpatho
 		bool    DocInfoModified() ;
@@ -226,6 +227,8 @@ class _CLASSENSDN NSNoyauDocument : public NSRoot
     void    setContent(NSDocumentInfo* pNewDocument, NSPatPathoArray* pPatPathoMeta, string typeDoc) ;
     void    initMetaContentFromPpt(NSDocumentInfo* pNewDocument) ;
     string  getMetaId(NSPersonGraphManager* pGraphManager, NSDocumentInfo* pNewDocument, string sCodeDoc) ;
+
+    string  getRawTextHeader() const ;
 } ;
 
 #endif // __NSDOCNOY_H

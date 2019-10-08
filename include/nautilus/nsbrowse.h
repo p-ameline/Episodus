@@ -5,7 +5,7 @@
 class NSContexte ;
 
 class NSRefDocument ;
-class TWebCompos ;class TWebImport ;class TWebLog ;class TImportImg ;class TLettreType ;
+class TWebCompos ;class TWebImport ;class TPdfImport ;class TWebLog ;class TImportImg ;class TLettreType ;
 // #include "nautilus\nssuper.h"#include "partage\ns_vector.h"
 #include "partage\NTArray.h"
 #include "nsbb\nsutidlg.h"
@@ -69,6 +69,9 @@ class NSImportWindow : public TWindow
 
     bool   CanClose() ;
     void   EvClose() ;
+    void   EvTimer(uint timerId) ;
+    void   EvSize(uint sizeType, NS_CLASSLIB::TSize& size) ;
+    void   resizeOleControl(NS_CLASSLIB::TRect clientRect) ;
     void   PerformCreate(int menuOrId) ;
     void   MakeVisible() ;
     void   SetupWindow() ;
@@ -101,9 +104,11 @@ class NSImportWindow : public TWindow
 
 		bool IsTabKeyMessage(MSG &msg) ;    bool PreProcessMsg(MSG &msg) ;
 
+    void displayFile(const string sFileName) ;
+
 	private:
 
-		TWebImport* _Form ;    HACCEL      _hAccelerator ;
+		TWebImport* _Form ;    TPdfImport* _PdfForm ;    HACCEL      _hAccelerator ;
 	DECLARE_RESPONSE_TABLE(NSImportWindow) ;
 };
 

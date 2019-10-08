@@ -1160,7 +1160,7 @@ NSMultiCaptView::~NSMultiCaptView()
 void
 NSMultiCaptView::setViewName()
 {
-	sViewName = pContexte->getSuperviseur()->getText("captureManagement", "captureViewTitle") ;
+	_sViewName = pContexte->getSuperviseur()->getText("captureManagement", "captureViewTitle") ;
 
   addConcernTitle() ;
 }
@@ -1180,7 +1180,7 @@ NSMultiCaptView::SetupWindow()
 {
   NSMUEView::SetupWindow() ;
 
-  Parent->SetCaption(sViewName.c_str()) ;
+  Parent->SetCaption(_sViewName.c_str()) ;
 
   initLines() ;
   if (aLignes.empty())
@@ -1194,7 +1194,7 @@ void
 NSMultiCaptView::EvSetFocus(HWND hWndLostFocus)
 {
   NSMUEView::EvSetFocus(hWndLostFocus) ;
-  _pPaneSplitter->SetFrameTitle(getFunction(), sViewName) ;
+  _pPaneSplitter->SetFrameTitle(getFunction(), _sViewName) ;
   CreateCaret(false /* isGray */, 2 /* width */, 10 /* height */) ;
   setCaretPosition() ;
   ShowCaret() ;

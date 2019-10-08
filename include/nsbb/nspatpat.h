@@ -474,7 +474,8 @@ class NSPatPathoArray : public NSPatPathoInfoArray, public NSSuperRoot
     void        	InserePatPathoFille(PatPathoIter iterPere, NSPatPathoArray* pPatpathoSource) ;
 
     // Semantic functions
-    string        GetDocDate() ;
+    string        GetDocDate() const ;
+    string        GetSecondOperator(NSContexte *pContexte) ;
 
     // autres
     int		        Taille() ;   // taille d'une patpatho en comptant les elements d'une meme ligne comme seul element

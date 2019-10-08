@@ -138,43 +138,46 @@ EnregDocDialog::SetupWindow()
 {
 	TDialog::SetupWindow() ;
 
-	// Mise du nom du document dans le contrôle Edit
-	if (strspn(_pDocData->_sNom.c_str(), " ") < strlen(_pDocData->_sNom.c_str()))
-		_pNomDoc->SetText(_pDocData->_sNom.c_str()) ;
-	else
-		_pNomDoc->SetText("") ;
-
-  // Type
-  if (string("") != _pDocData->_sTypeContenu)
-    _pType->setLabel(_pDocData->_sTypeContenu) ;
-
-	// Date de création
-	_pDateCreation->setDate(_pDocData->_sDateCreation) ;
-
-	// Ajout à l'historique
-  if (true == _pDocData->estVisible())
-  	_pHistorique->Check() ;
-  else
-  	_pHistorique->Uncheck() ;
-
-	// Initialisation de l'importance
-  _pImportance->SetRange(0, 4) ;
-  _pImportance->SetRuler(1, false) ;
-
-  int iImpo = 0 ;
-  if (string("") != _pDocData->_sInteret)
+  if (_pDocData)
   {
-  	switch (_pDocData->_sInteret[0])
-  	{
-    	case 'E'  : iImpo = 4 ; break ;
-    	case 'D'  : iImpo = 3 ; break ;
-    	case 'C'  : iImpo = 2 ; break ;
-    	case 'B'  : iImpo = 1 ; break ;
-    	case 'A'  : iImpo = 0 ; break ;
-		}
-  }
+    // Mise du nom du document dans le contrôle Edit
+    if (strspn(_pDocData->_sNom.c_str(), " ") < strlen(_pDocData->_sNom.c_str()))
+      _pNomDoc->SetText(_pDocData->_sNom.c_str()) ;
+    else
+      _pNomDoc->SetText("") ;
 
-	_pImportance->SetPosition(iImpo) ;
+    // Type
+    if (string("") != _pDocData->_sTypeContenu)
+      _pType->setLabel(_pDocData->_sTypeContenu) ;
+
+    // Date de création
+    _pDateCreation->setDate(_pDocData->_sDateCreation) ;
+
+    // Ajout à l'historique
+    if (true == _pDocData->estVisible())
+      _pHistorique->Check() ;
+    else
+      _pHistorique->Uncheck() ;
+
+    // Initialisation de l'importance
+    _pImportance->SetRange(0, 4) ;
+    _pImportance->SetRuler(1, false) ;
+
+    int iImpo = 0 ;
+    if (string("") != _pDocData->_sInteret)
+    {
+      switch (_pDocData->_sInteret[0])
+      {
+        case 'E' : iImpo = 4 ; break ;
+        case 'D' : iImpo = 3 ; break ;
+        case 'C' : iImpo = 2 ; break ;
+        case 'B' : iImpo = 1 ; break ;
+        case 'A' : iImpo = 0 ; break ;
+      }
+    }
+
+    _pImportance->SetPosition(iImpo) ;
+  }
 
 	RemplirChemises() ;
 	InitChemisesBox() ;

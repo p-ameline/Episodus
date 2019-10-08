@@ -42,7 +42,13 @@ class  NSRefVue : public TWindowView, public NSRoot
     TMenuDescr*         _pMUEViewMenu ;
     HACCEL              _hAccelerator ;
 
-    NSSmallBrother*   	_pBigBoss;
+    NSSmallBrother*   	_pBigBoss ;
+
+    int                 _iScreenResH, _iScreenResW ;
+    int                 _iFontForScreenResH, _iFontForScreenResW ;
+
+    bool isCloserScreen(const string sChapter, size_t iScreenPos) ;
+    int  getExcessSurface(int iResW, int iResH) const ;
 
 	public:
 

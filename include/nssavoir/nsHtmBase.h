@@ -28,7 +28,7 @@ enum HtmlTypes {
     tTable, tTableRow, tTableCell,
     tTexte, tGras, tSouligne, tItalic, tImage, tIndent,
     tPara, tParaCentre, tParaDroite, tIntitule, tIntituleNoBirth, tPolice,
-    tOperateur, tAdresse, tDest, tDate, tCR, tRTF, tSignature,
+    tOperateur, t2ndOperateur, tAdresse, tDest, tDate, tCR, tRTF, tSignature,
     tNomPatient, tPatientNom, tPatientPrenom, tPatientNomNaiss,
     tPatientNaiss, tPatientIPP, tPatientIEP, tPatientAdresse, tPatientGender,
     tConsult, tCS, tCQ, tTXT

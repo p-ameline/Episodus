@@ -494,29 +494,27 @@ try
 
   string sResultUnit   = _Donnees.getUnit() ;
 	string sResultMethod = _Donnees.getMethod() ;
+	string sFormule      = _Donnees.getFormula() ;
 
-	string sFormule = _Donnees.getFormula() ;
 	VectorCodeStructure Vector ;
-	size_t debut = 0 ;
-  size_t Crochet = sFormule.find("[") ;
-	string sItem ;
-	string sUnite ;
-	string sUnitSens ;
 
-	//
   // Récupération des données disponibles
   //
-
 	CodeStructure CodeStruct("") ;
 
-	//patpatho de la synthèse
+	// patpatho de la synthèse
+  //
 	NSPatPathoArray PathoSynthese(_pSuper) ;
+
+  size_t debut   = 0 ;
+  size_t Crochet = sFormule.find("[") ;
 
 	while (NPOS != Crochet)
 	{
-		sItem = string(sFormule, Crochet + 1, BASE_LEXI_LEN - 1) ;
+		string sItem = string(sFormule, Crochet + 1, BASE_LEXI_LEN - 1) ;
 		if (false == Vector.Appartient(sItem, &CodeStruct))
 		{
+      string sUnite  = string("") ;
 			string sValeur = NSDico::SetData(sItem, &sUnite, pPathoDocEnCours) ;
 
       // Information not found in provided Ppt, have a look in the synthesis
@@ -525,17 +523,17 @@ try
 			{
 #ifndef _ENTERPRISE_DLL
         NSPatientChoisi* pPatient = _pSuper->getContexte()->getPatient() ;
-        if (NULL == pPatient)
+        if ((NSPatientChoisi*) NULL == pPatient)
           return ;
 
         NSHISTODocument *pDocHis = pPatient->getDocHis() ;
 #else
-        if ((NULL == pCtx) || (NULL == pCtx->getPerson()))
+        if (((NSContexte*) NULL == pCtx) || (NULL == pCtx->getPerson()))
           return ;
 
         NSHISTODocument *pDocHis = pCtx->getPerson()->getDocHis() ;
 #endif
-        if ((NULL == pDocHis) || (pDocHis->getVectDocument()->empty()))
+        if (((NSHISTODocument*) NULL == pDocHis) || (pDocHis->getVectDocument()->empty()))
           return ;
 
 				bool continuer = true ;
@@ -566,11 +564,14 @@ try
 					return ;
 
 				sValeur = NSDico::SetData(sItem, &sUnite, &PathoSynthese) ;
-				if (sValeur == "")
+				if (string("") == sValeur)
 					return ;
 			}
 			double dVal = StringToDouble(sValeur) ;
+
+      string sUnitSens = string("") ;
 			NSDico::donneCodeSens(&sUnite, &sUnitSens) ;
+
 			Vector.push_back(new CodeStructure(sItem, dVal, sUnitSens)) ;
 		}
 		debut = Crochet + 1 + BASE_LEXI_LEN  ;

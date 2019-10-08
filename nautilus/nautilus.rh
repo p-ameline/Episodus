@@ -186,6 +186,8 @@
 #define CM_NEW_ENTETE     430
 #define CM_MOD_ENTETE     431
 
+#define CM_TANK           440
+
 #define CM_GROUPGD          450
 #define CM_REQUETE          451
 #define CM_RESULT           452
@@ -224,6 +226,7 @@
 #define CM_DRUG_DELETE      494
 #define CM_DRUG_HISTORY     495
 #define CM_DRUG_ALERTS      496
+#define CM_DRUG_VIEW_ALL    497
 
 #define CM_EPISO_START      500
 #define CM_EPISO_STOP       501
@@ -311,6 +314,7 @@
 #define CM_GENERAL_MODIFY       612
 #define CM_GENERAL_REMOVE       613
 #define CM_GENERAL_CONTINUE     614
+#define CM_GENERAL_ALL          615
 #define CM_GENERAL_FCT1         620
 #define CM_GENERAL_FCT2         621
 #define CM_GENERAL_FCT3         622

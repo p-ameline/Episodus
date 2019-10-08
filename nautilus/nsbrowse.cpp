@@ -3,7 +3,7 @@
 #include <cstring.h>#include <stdio.h>#include <assert.h>/** Includes spécifiques capture **/#include <string.h>#include <malloc.h>#include <windows.h>#include <wingdi.h>#include <mshtml.h>///////////////////////////////////
 #include <owl\clipboar.h>
 
-#include "Compos.h"#include "Import.h"#include "ImpImg.h"#include "Lettre.h"#include "log_form.h"#include "WebService.h"#include "nautilus\nsbrowse.h"#include "nautilus\nsbasimg.h"#include "nautilus\nsdocref.h"#include "nautilus\nautilus.rh"#include "nautilus\nssuper.h"#include "nautilus\nshistdo.h"#include "nautilus\nsmodhtm.h"#include "nautilus\ns_html.h"#include "nautilus\nsvisual.h"#include "nautilus\nsresour.h"#include "nautilus\nsdocview.h"#include "nautilus\nscsdoc.h"// #include "nautilus\nsannexe.h"#include "ns_grab\nsgrabfc.h"
+#include "Compos.h"#include "Import.h"#include "ImportPdf.h"#include "ImpImg.h"#include "Lettre.h"#include "log_form.h"#include "WebService.h"#include "nautilus\nsbrowse.h"#include "nautilus\nsbasimg.h"#include "nautilus\nsdocref.h"#include "nautilus\nautilus.rh"#include "nautilus\nssuper.h"#include "nautilus\nshistdo.h"#include "nautilus\nsmodhtm.h"#include "nautilus\ns_html.h"#include "nautilus\nsvisual.h"#include "nautilus\nsresour.h"#include "nautilus\nsdocview.h"#include "nautilus\nscsdoc.h"// #include "nautilus\nsannexe.h"#include "ns_grab\nsgrabfc.h"
 #include "nsbb\nsbbtran.h"
 #include "nsbb\nsattvaltools.h"
 #include "nssavoir\nsfilecaptur.h"
@@ -13,6 +13,8 @@
 
 #include "nautilus\nsepicap.h"
 #include "nautilus\nsacroread.h"
+
+#define  ID_PDF_IMPORT_TIMER 101
 
 /****************** classe NSComposView **************************/
 DEFINE_RESPONSE_TABLE1(NSComposView, TWindowView)  EV_WM_CLOSE,
@@ -280,6 +282,8 @@ voidNSComposView::CmCancel()
 
 DEFINE_RESPONSE_TABLE1(NSImportWindow, TWindow)
    EV_WM_CLOSE,
+   EV_WM_SIZE,
+   EV_WM_TIMER,
 END_RESPONSE_TABLE;
 
 NSImportWindow::NSImportWindow(TWindow* parent, string sFichier, NSContexte* pCtx, bool bAutoMode)
@@ -298,9 +302,10 @@ NSImportWindow::NSImportWindow(TWindow* parent, string sFichier, NSContexte* pCt
   _sTypeNautilus = string("") ;
 
 	_pContexte     = pCtx ;
-	_pNewDoc       = 0 ;
+	_pNewDoc       = (NSRefDocument*) 0 ;
 	_bCanClose     = false ;
-  _Form          = 0 ;
+  _Form          = (TWebImport*) 0 ;
+  _PdfForm       = (TPdfImport*) 0 ;
   _hAccelerator  = 0 ;
 
 	_bNavOk = InitInfosFichier() ;
@@ -308,20 +313,24 @@ NSImportWindow::NSImportWindow(TWindow* parent, string sFichier, NSContexte* pCt
   if (_bNavOk)
     _bNavOk = InitNautilusType() ;
 
-	if (_bNavOk)
+  NSSuper *pSuper = _pContexte->getSuperviseur() ;
+
+	if (_bNavOk && ((string("ZTPDF") != _sTypeNautilus) || pSuper->mustUseIeForPdf()))
 		_bNavOk = GenereHtml() ;
 
-  TMyApp* pMyApp = _pContexte->getSuperviseur()->getApplication() ;
+  TMyApp* pMyApp = pSuper->getApplication() ;
   if (pMyApp)    pMyApp->setMenu(string("menubar"), &_hAccelerator) ;
 }
 
 NSImportWindow::~NSImportWindow()
 {
+  NSSuper *pSuper = _pContexte->getSuperviseur() ;
+
   string sMsg = string("NSImportWindow entering destructor") ;
-  _pContexte->getSuperviseur()->trace(&sMsg, 1, NSSuper::trDetails) ;
+  pSuper->trace(&sMsg, 1, NSSuper::trDetails) ;
 
 	if (string("") != _sHtml)
-    NsDeleteTemporaryFile(_pContexte->getSuperviseur(), _sHtml) ;
+    NsDeleteTemporaryFile(pSuper, _sHtml) ;
 
 	if (_pNewDoc)
 		delete _pNewDoc ;
@@ -344,17 +353,17 @@ NSImportWindow::~NSImportWindow()
   if (0 != _hAccelerator)
   {
     sMsg = string("NSImportWindow destructor destroying accelerator") ;
-    _pContexte->getSuperviseur()->trace(&sMsg, 1, NSSuper::trSubDetails) ;
+    pSuper->trace(&sMsg, 1, NSSuper::trSubDetails) ;
 
     DestroyAcceleratorTable(_hAccelerator) ;
     _hAccelerator = 0 ;
   }
 
   if (_bImportSuccessful && _bAutomaticImportMode)
-    NsDeleteTemporaryFile(_pContexte->getSuperviseur(), _sFileName) ;
+    NsDeleteTemporaryFile(pSuper, _sFileName) ;
 
   sMsg = string("NSImportWindow leaving destructor") ;
-  _pContexte->getSuperviseur()->trace(&sMsg, 1, NSSuper::trDetails) ;
+  pSuper->trace(&sMsg, 1, NSSuper::trDetails) ;
 }
 
 bool
@@ -385,26 +394,46 @@ NSImportWindow::ClosingPatch()
 void
 NSImportWindow::EvClose()
 {
+  NSSuper *pSuper = _pContexte->getSuperviseur() ;
+
   // Delete de la Form
   if (_Form)
 	{
     string sMsg = string("NSImportWindow closing Form") ;
-    _pContexte->getSuperviseur()->trace(&sMsg, 1, NSSuper::trSubDetails) ;
+    pSuper->trace(&sMsg, 1, NSSuper::trSubDetails) ;
 
     _Form->Close() ;
 
     sMsg = string("NSImportWindow::EvClose deleting Form") ;
-    _pContexte->getSuperviseur()->trace(&sMsg, 1, NSSuper::trSubDetails) ;
+    pSuper->trace(&sMsg, 1, NSSuper::trSubDetails) ;
 
 		delete _Form ;
     _Form = (TWebImport*) 0 ;
 
     sMsg = string("NSImportWindow::EvClose Form deleted") ;
-    _pContexte->getSuperviseur()->trace(&sMsg, 1, NSSuper::trSubDetails) ;
+    pSuper->trace(&sMsg, 1, NSSuper::trSubDetails) ;
 
     // sMsg = string("TWebImport::Close Uninitializing Ole") ;
     // pContexte->getSuperviseur()->trace(&sMsg, 1, NSSuper::trSubDetails) ;
     // ::OleUninitialize() ;
+	}
+
+  // Delete de la Form PDF
+  if (_PdfForm)
+	{
+    string sMsg = string("NSImportWindow closing PDF Form") ;
+    pSuper->trace(&sMsg, 1, NSSuper::trSubDetails) ;
+
+    _PdfForm->Close() ;
+
+    sMsg = string("NSImportWindow::EvClose deleting PDF Form") ;
+    pSuper->trace(&sMsg, 1, NSSuper::trSubDetails) ;
+
+		delete _PdfForm ;
+    _PdfForm = (TPdfImport*) 0 ;
+
+    sMsg = string("NSImportWindow::EvClose PDF Form deleted") ;
+    pSuper->trace(&sMsg, 1, NSSuper::trSubDetails) ;
 	}
 
 	TWindow::EvClose() ;
@@ -418,8 +447,10 @@ NSImportWindow::EvClose()
 void
 NSImportWindow::PerformCreate(int /*menuOrId*/)
 {
+  NSSuper *pSuper = _pContexte->getSuperviseur() ;
+
   string sMsg = string("NSImportWindow entering PerformCreate ; creating Form TWebImport") ;
-  _pContexte->getSuperviseur()->trace(&sMsg, 1, NSSuper::trDetails) ;
+  pSuper->trace(&sMsg, 1, NSSuper::trDetails) ;
 
 /*
 try
@@ -454,6 +485,26 @@ catch (...)
   pContexte->getSuperviseur()->trace(&ps, 1, NSSuper::trError) ;
 	erreur(ps.c_str(), standardError, 0) ;
 }*/
+  if ((string("ZTPDF") == _sTypeNautilus) && (false == pSuper->mustUseIeForPdf()))
+  {
+    string sTrace = string("NSImportWindow::PerformCreate Entering, using Acrobat Reader") ;
+    pSuper->trace(&sTrace, 1, NSSuper::trDetails) ;
+
+    // on crée la Form pour servir de zone client (on lui passe le handle parent)
+    // The Form is created as the client (it receaves the Parent handle)
+    //
+
+    _PdfForm = new TPdfImport(Parent->GetHandle(), this) ;
+    _PdfForm->Visible = true ;
+    // _AcrobatForm->ParentWindow = Parent->HWindow ;
+
+    // Give the OWL TWindow object the handle of the Windows object it aliases
+    //
+    SetHandle(_PdfForm->Handle) ;
+
+    return ;
+  }
+
 try
 {
 	_Form = new TWebImport(Parent->GetHandle(), this) ;
@@ -463,7 +514,7 @@ try
 catch (...)
 {
   string ps = string("Exception NSImportWindow::PerformCreate Form creation") ;
-  _pContexte->getSuperviseur()->trace(&ps, 1, NSSuper::trError) ;
+  pSuper->trace(&ps, 1, NSSuper::trError) ;
 	erreur(ps.c_str(), standardError, 0) ;
 }
 
@@ -475,7 +526,7 @@ try
 catch (...)
 {
   string ps = string("Exception NSImportWindow::PerformCreate SetHandle") ;
-  _pContexte->getSuperviseur()->trace(&ps, 1, NSSuper::trError) ;
+  pSuper->trace(&ps, 1, NSSuper::trError) ;
 	erreur(ps.c_str(), standardError, 0) ;
 }
 
@@ -487,7 +538,7 @@ try
 catch (Exception &ex)
 {
   string ps = string("Exception NSImportWindow::PerformCreate Navigate (") + string(ex.Message.c_str()) + string(")") ;
-  _pContexte->getSuperviseur()->trace(&ps, 1, NSSuper::trError) ;
+  pSuper->trace(&ps, 1, NSSuper::trError) ;
   erreur(ps.c_str(), standardError, 0) ;
 }
 }
@@ -520,7 +571,6 @@ NSImportWindow::PreProcessMsg(MSG &msg)
 	if (result)
     return true ;
 
-
   // return TWindow::PreProcessMsg(msg) ;
 	PRECONDITION(GetHandle()) ;
   return _hAccelerator ? ::TranslateAccelerator(GetHandle(), _hAccelerator, &msg) : false ;
@@ -529,7 +579,10 @@ NSImportWindow::PreProcessMsg(MSG &msg)
 // Fonction MakeVisiblevoid
 NSImportWindow::MakeVisible()
 {
-  _Form->Visible = true ;
+  if (_Form)
+    _Form->Visible = true ;
+  if (_PdfForm)
+    _PdfForm->Visible = true ;
 }
 
 // Fonction SetupWindow
@@ -539,6 +592,27 @@ NSImportWindow::SetupWindow()
 {
 	TWindow::SetupWindow() ;
 
+  NSSuper *pSuper = _pContexte->getSuperviseur() ;
+
+  if ((string("ZTPDF") == _sTypeNautilus) && (false == pSuper->mustUseIeForPdf()))
+  {
+    string sMsg = string("NSImportWindow::SetupWindow showing the PdfForm") ;
+    _pContexte->getSuperviseur()->trace(&sMsg, 1, NSSuper::trSubDetails) ;
+
+    TAcroPDF* pPdfControl = _PdfForm->Control ;
+    if ((TAcroPDF*) NULL == pPdfControl)
+    {
+      string sTrace = string("NSImportWindow::SetupWindow for file. Null Acrobat control, leaving.") ;
+      pSuper->trace(&sTrace, 1, NSSuper::trError) ;
+      return ;
+    }
+
+    string sTrace = string("NSImportWindow::SetupWindow, showing Acrobat Reader Form") ;
+    pSuper->trace(&sTrace, 1, NSSuper::trDetails) ;    pPdfControl->setShowToolbar(false) ;    if (string("") != _sFileName)      displayFile(_sFileName) ;    _PdfForm->Show() ;    pPdfControl->setZoom(100) ;    pPdfControl->gotoFirstPage() ;    // The file doesn't show if the window is not resized after opening    //    SetTimer(ID_PDF_IMPORT_TIMER, 1000) ;
+
+    return ;
+  }
+
   string sMsg = string("NSImportWindow::SetupWindow showing the Form") ;
   _pContexte->getSuperviseur()->trace(&sMsg, 1, NSSuper::trSubDetails) ;
 
@@ -547,12 +621,118 @@ NSImportWindow::SetupWindow()
 	MakeVisible() ;
 }
 
+void
+NSImportWindow::EvTimer(uint timerId)
+{
+	if (ID_PDF_IMPORT_TIMER != timerId)
+    return ;
+
+  string sTrace = string("NSImportWindow::EvTimer woke up.") ;
+  _pContexte->getSuperviseur()->trace(&sTrace, 1, NSSuper::trSubDetails) ;
+
+  EvSize(SIZE_RESTORED, Parent->GetClientRect().Size()) ;
+
+  KillTimer(ID_PDF_IMPORT_TIMER) ;
+}
+
+// keep the control at full window size
+//
+voidNSImportWindow::EvSize(uint sizeType, NS_CLASSLIB::TSize& size){
+	TWindow::EvSize(sizeType, size) ;
+
+  NS_CLASSLIB::TRect clientRect = Parent->GetClientRect() ;
+
+  NSSuper *pSuper = _pContexte->getSuperviseur() ;
+
+  if ((string("ZTPDF") == _sTypeNautilus) && (false == pSuper->mustUseIeForPdf()))
+  {
+    if ((TPdfImport*) NULL == _PdfForm)
+      return ;
+
+    _PdfForm->ClientWidth  = clientRect.Width() ;
+    _PdfForm->ClientHeight = clientRect.Height() ;
+
+    _PdfForm->Left   = 0 ;
+    _PdfForm->Top    = 0 ;
+    _PdfForm->Width  = clientRect.Width() ;
+    _PdfForm->Height = clientRect.Height() ;
+
+    // TWindow(_AcrobatForm->ParentWindow).SetWindowPos(NULL, 0, 0, clientRect.Width(), clientRect.Height(), SWP_NOZORDER | SWP_NOMOVE) ;
+
+    TAcroPDF* pPdfControl = _PdfForm->Control ;
+    if (pPdfControl && pPdfControl->Visible)
+    {
+      pPdfControl->Left   = 0 ;
+      pPdfControl->Top    = 0 ;
+      pPdfControl->Width  = clientRect.Width() ;
+      pPdfControl->Height = clientRect.Height() ;
+
+      string sTrace = string("NSAcrobatView::EvSize") ;
+      switch(sizeType)
+      {
+        case SIZE_RESTORED  : sTrace += string(" (restored)") ; break ;
+        case SIZE_MINIMIZED : sTrace += string(" (minimized)") ; break ;
+        case SIZE_MAXIMIZED : sTrace += string(" (maximized)") ; break ;
+        case SIZE_MAXSHOW   : sTrace += string(" (maxshow)") ; break ;
+        case SIZE_MAXHIDE   : sTrace += string(" (maxhide)") ; break ;
+      }
+      pSuper->trace(&sTrace, 1, NSSuper::trDetails) ;
+
+      // Official hack from Adobe to have TAcroPDF resize when windows is resized
+      //
+      resizeOleControl(clientRect) ;
+    }
+
+    // This function is a zoom (size of the page displayed inside the view)
+    // pPdfControl->setViewRect(pPdfControl->Left, pPdfControl->Top,pPdfControl->Width, pPdfControl->Height) ;
+
+    _PdfForm->Invalidate() ;
+
+    if (SIZE_RESTORED == sizeType)
+      Parent->Invalidate() ;
+  }
+  else
+  {
+    if ((TWebImport*) NULL == _Form)
+      return ;
+
+    _Form->Left   = 0 ;
+    _Form->Top    = 0 ;
+    _Form->Width  = clientRect.Width() ;
+    _Form->Height = clientRect.Height() ;
+    _Form->Invalidate() ;
+  }
+}
+
+// Official hack from Adobe to have TAcroPDF resize when windows is resized
+//
+void
+NSImportWindow::resizeOleControl(NS_CLASSLIB::TRect clientRect)
+{
+  // Get the first child, as the OLE wrapper
+  //
+  HWND hChildWindow = ::GetWindow(GetHandle(), GW_CHILD) ;
+  if ((HWND) 0 == hChildWindow)
+    return ;
+
+  TWindow(hChildWindow).SetWindowPos(NULL, 0, 0, clientRect.Width(), clientRect.Height(), SWP_NOZORDER | SWP_NOMOVE) ;
+
+  // Get the first little child as the control itself
+  //
+  HWND hLittleChildWindow = ::GetWindow(hChildWindow, GW_CHILD) ;
+  if ((HWND) 0 == hLittleChildWindow)
+    return ;
+
+  TWindow(hLittleChildWindow).SetWindowPos(NULL, 0, 0, clientRect.Width(), clientRect.Height(), SWP_NOZORDER | SWP_NOMOVE) ;
+}
+
+
 // Fonction Navigate
 ////////////////////////////////////////////////////////////////
 void
 NSImportWindow::Navigate()
 {
-  if ((NULL == _Form) || (NULL == _Form->Control))
+  if (((TWebImport*) NULL == _Form) || (NULL == _Form->Control))
     return ;
 
   string sUrl ;
@@ -666,6 +846,81 @@ NSImportWindow::InitInfosFichier()
 	return true ;
 }
 
+void
+NSImportWindow::displayFile(const string sFileName)
+{
+  if (((TPdfImport*) NULL == _PdfForm) || ((TAcroPDF*) NULL == _PdfForm->Control))
+    return ;
+
+  NSSuper *pSuper = _pContexte->getSuperviseur() ;
+
+  if (string("") == sFileName)
+  {
+    string ps = string("NSImportWindow::displayFile with empty file name") ;
+	  pSuper->trace(&ps, 1, NSSuper::trWarning) ;
+		return ;
+  }
+
+try
+{
+  string sTrace = string("NSImportWindow::displayFile for file \"") + sFileName + string("\"") ;
+  pSuper->trace(&sTrace, 1, NSSuper::trDetails) ;
+
+	wchar_t buff[1024] ;
+  MultiByteToWideChar(CP_ACP, MB_PRECOMPOSED, sFileName.c_str(), -1, buff, sizeof(buff)) ;
+
+  // ******************** USING ACROBAT DLL
+  //
+
+  TAcroPDF* pPdfControl = _PdfForm->Control ;
+  if ((TAcroPDF*) NULL == pPdfControl)
+  {
+    string sTrace = string("NSImportWindow::displayFile for file \"") + sFileName + string("\". Null Acrobat control, leaving.") ;
+    pSuper->trace(&sTrace, 1, NSSuper::trError) ;
+    return ;
+  }
+
+  // View mode
+  //
+  // 'Fit'   — Fits the entire page within the window both vertically and horizontally.
+  // 'FitH'  — Fits the entire width of the page within the window.
+  // 'FitV'  — Fits the entire height of the page within the window.
+  // 'FitB'  — Fits the bounding box within the window both vertically and horizontally.
+  // 'FitBH' — Fits the width of the bounding box within the window.
+  // 'FitB'  — Fits the height of the bounding box within the window
+  //
+  wchar_t wMode[1024] ;
+  MultiByteToWideChar(CP_ACP, MB_PRECOMPOSED, "Fit", -1, wMode, sizeof(wMode)) ;
+  pPdfControl->setView(wMode) ;
+
+  TOLEBOOL bResult = pPdfControl->LoadFile(buff) ;
+  if (bResult == false)
+  {
+    string sTrace = string("NSImportWindow::displayFile: Acrobat failed to load file \"") + sFileName + string("\"") ;
+    pSuper->trace(&sTrace, 1, NSSuper::trError) ;
+    return ;
+  }
+  else if (bResult == true)
+  {
+    string sTrace = string("NSImportWindow::displayFile: Acrobat properly loaded file \"") + sFileName + string("\"") ;
+    pSuper->trace(&sTrace, 1, NSSuper::trDetails) ;
+    return ;
+  }
+}
+catch (Exception &ex)
+{
+  string sTrace = string("Exception NSImportWindow::displayFile") + string(ex.Message.c_str()) ;
+  pSuper->trace(&sTrace, 1, NSSuper::trError) ;
+	// erreur(sTrace.c_str(), standardError, 0) ;
+}
+catch (...)
+{
+  string sTrace = string("Exception NSImportWindow::displayFile") ;
+  pSuper->trace(&sTrace, 1, NSSuper::trError) ;
+	// erreur(sTrace.c_str(), standardError, 0) ;
+}
+}
+
 bool
 NSImportWindow::InitNautilusType()
 {
@@ -727,7 +982,7 @@ NSImportWindow::GenereHtml()
       return false ;
     }
   }
-	else if (_sTypeNautilus == string("ZTRTF"))
+	else if (string("ZTRTF") == _sTypeNautilus)
   {
 		// cas des RTF :
     // on construit un html temporaire dans le répertoire FPER
@@ -753,7 +1008,7 @@ NSImportWindow::GenereHtml()
       return false ;
     }
   }
-	else if (_sTypeNautilus == string("ZTTXT"))
+	else if (string("ZTTXT") == _sTypeNautilus)
 	{
   	// cas des TXT :
     // on construit un html temporaire dans le répertoire FPER
@@ -902,10 +1157,8 @@ bool
 NSImportWindow::importHPRIM2(NSCaptureArray* pCaptureArray, NSPatPathoArray* pPPT)
 {
 	ifstream inFile ;
-	string sLine ;
-	string sText = "" ;
-
-	inFile.open(_sFileName.c_str());	if (!inFile)
+	inFile.open(_sFileName.c_str());
+	if (!inFile)
 	{
   	string sErrorText = _pContexte->getSuperviseur()->getText("fileErrors", "errorOpeningInputFile") ;
     erreur(sErrorText.c_str(), standardError, 0, GetHandle()) ;
@@ -927,18 +1180,17 @@ NSImportWindow::importHPRIM2(NSCaptureArray* pCaptureArray, NSPatPathoArray* pPP
   //
   while (!inFile.eof() && !bLabTagFound)
 	{
+    string sLine = string("") ;
   	getline(inFile, sLine) ;
 
-    string sStripLine = sLine ;
-    strip(sStripLine, stripBoth) ;
-
-    if (sStripLine == string("****LAB****"))
+    strip(sLine, stripBoth) ;
+    if (string("****LAB****") == sLine)
     	bLabTagFound = true ;
 	}
 
   // no LAB tag : not HPRIM2
   //
-  if (!bLabTagFound)
+  if (false == bLabTagFound)
   {
   	inFile.close() ;
     return false ;
@@ -956,16 +1208,16 @@ NSImportWindow::importHPRIM2(NSCaptureArray* pCaptureArray, NSPatPathoArray* pPP
 
 	while (!inFile.eof())
 	{
-  	getline(inFile, sLine) ;
+    string sStripLine = string("") ;
+  	getline(inFile, sStripLine) ;
 
-    string sStripLine = sLine ;
     strip(sStripLine, stripBoth) ;
 
-    if (sStripLine == string("****FIN****"))
+    if      (string("****FIN****") == sStripLine)
     	bFinFound = true ;
-    else if (sStripLine == string("****FINFICHIER****"))
+    else if (string("****FINFICHIER****") == sStripLine)
     	bFinFichierFound = true ;
-    else if ((sStripLine != string("")) && (strlen(sStripLine.c_str()) > 4))
+    else if ((string("") != sStripLine) && (strlen(sStripLine.c_str()) > 4))
     {
       NSPatPathoArray PPTnum(_pContexte->getSuperviseur()) ;
 
@@ -986,7 +1238,7 @@ NSImportWindow::importHPRIM2(NSCaptureArray* pCaptureArray, NSPatPathoArray* pPP
       		sResult = flechiesDB.getCodeLexiq(sStripLine, 'Z') ;
 
       	// value
-      	if (sResult == string(""))
+      	if (string("") == sResult)
       	{
       		analysedCapture aCapt(_pContexte, sStripLine, (NSCaptureArray*) 0, FromMailBox) ;
       		ParseElemArray aRawParseResult ;
@@ -998,7 +1250,7 @@ NSImportWindow::importHPRIM2(NSCaptureArray* pCaptureArray, NSPatPathoArray* pPP
         	//
         	bool bFullSuccess ;
       		sPattern = aCapt.getNumPattern(&aRawParseResult, &aSemanticParseResult, &bFullSuccess) ;
-        	if (string("") != sPattern)
+        	if (sPattern != string(""))
           {
           	// We try to get the concept here, because sometimes, the RES
             // information only contains sender specific codes
@@ -1025,7 +1277,7 @@ NSImportWindow::importHPRIM2(NSCaptureArray* pCaptureArray, NSPatPathoArray* pPP
       		if (false == PPTnum.empty())
         	{
         		size_t posValue = sPattern.find("[V") ;
-          	if (posValue != NPOS)
+          	if (NPOS != posValue)
           		iCol = 0 ;
           	else
           		iCol = 1 ;
@@ -1056,22 +1308,22 @@ NSImportWindow::importHPRIM2(NSCaptureArray* pCaptureArray, NSPatPathoArray* pPP
           {
           	string sResData ;
 
-          	if (posPipe == NPOS)
+          	if (NPOS == posPipe)
             	sResData = sStripLine ;
             else
           		sResData = string(sStripLine, 0, posPipe) ;
 
-            if (sResData == string("N"))
+            if (string("N") == sResData)
             {
             	iNumSerie++ ;
               iNumInfo = -1 ;
             }
-            else if (sResData == string("L"))
+            else if (string("L") == sResData)
             {
             	iNumSerie++ ;
               iNumInfo = -1 ;
             }
-            else if (sResData == string("F"))
+            else if (string("F") == sResData)
             {
               iNumInfo = -1 ;
             }
@@ -1081,34 +1333,34 @@ NSImportWindow::importHPRIM2(NSCaptureArray* pCaptureArray, NSPatPathoArray* pPP
               {
                 // Value inside the series
                 case 0 :
-                	if (iNumSerie == 0)
+                	if (0 == iNumSerie)
                   {
                     string sResult = flechiesDB.getCodeLexiq(sResData, 'V') ;
-                    if (sResult != string(""))
+                    if (string("") != sResult)
                       sConcept = sResult ;
                   }
-                  else if (iNumSerie == 1)
+                  else if (1 == iNumSerie)
                     sValue = getEpisodusNumValueFromRawCapturedNum(sResData) ;
-                  else if (iNumSerie == 2)
+                  else if (2 == iNumSerie)
                     sValue2 = getEpisodusNumValueFromRawCapturedNum(sResData) ;
                   break ;
                 // Concept outside the series, unit inside
                 case 1 :
                 {
-                  if (iNumSerie == 0)
+                  if (0 == iNumSerie)
                   {
                     string sResult = flechiesDB.getCodeLexiq(sResData, 'V') ;
-                    if (sResult != string(""))
+                    if (string("") != sResult)
                       sConcept = sResult ;
                   }
                   else
                   {
                     string sResult = flechiesDB.getCodeLexiq(sResData, '2') ;
-                    if (sResult != string(""))
+                    if (string("") != sResult)
                     {
-                      if (iNumSerie == 1)
+                      if      (1 == iNumSerie)
                         sUnit = sResult ;
-                      else if (iNumSerie == 2)
+                      else if (2 == iNumSerie)
                         sUnit2 = sResult ;
                     }
                   }
@@ -1116,16 +1368,16 @@ NSImportWindow::importHPRIM2(NSCaptureArray* pCaptureArray, NSPatPathoArray* pPP
                 }
                 // lower normal value inside the series
                 case 2 :
-                	if (iNumSerie == 1)
+                	if      (1 == iNumSerie)
                     sNormInf = getEpisodusNumValueFromRawCapturedNum(sResData) ;
-                  else if (iNumSerie == 2)
+                  else if (2 == iNumSerie)
                     sNormInf2 = getEpisodusNumValueFromRawCapturedNum(sResData) ;
                   break ;
                 // upper normal value inside the series
                 case 3 :
-                	if (iNumSerie == 1)
+                	if      (1 == iNumSerie)
                     sNormSup = getEpisodusNumValueFromRawCapturedNum(sResData) ;
-                  else if (iNumSerie == 2)
+                  else if (2 == iNumSerie)
                     sNormSup2 = getEpisodusNumValueFromRawCapturedNum(sResData) ;
                   break ;
               }
@@ -1139,11 +1391,11 @@ NSImportWindow::importHPRIM2(NSCaptureArray* pCaptureArray, NSPatPathoArray* pPP
           else
           {
 						sStripLine = string(sStripLine, 1, strlen(sStripLine.c_str()) - 1) ;
-            if (iNumInfo == 1)
+            if (1 == iNumInfo)
             {
-            	if (iNumSerie == 1)
+            	if      (1 == iNumSerie)
               	sUnit = "200001" ;
-              else if (iNumSerie == 2)
+              else if (2 == iNumSerie)
               	sUnit2 = "200001" ;
             }
           }
@@ -1151,66 +1403,66 @@ NSImportWindow::importHPRIM2(NSCaptureArray* pCaptureArray, NSPatPathoArray* pPP
           iNumInfo++ ;
         }
 
-        if (sConcept != string(""))
+        if (string("") != sConcept)
         {
         	pPPT->ajoutePatho(sConcept, 1) ;
 
           bool bValuesFound = false ;
 
-        	if ((sValue != string("")) && (sUnit != string("")))
+        	if ((string("") != sValue) && (string("") != sUnit))
           {
           	bValuesFound = true ;
 
           	Message theMessage ;
       			theMessage.SetComplement(sValue) ;
             theMessage.SetUnit(sUnit) ;
-            pPPT->ajoutePatho("£N0;03", &theMessage, 2) ;
+            pPPT->ajoutePatho(string("£N0;03"), &theMessage, 2) ;
 
-          	if (sNormInf != string(""))
+          	if (string("") != sNormInf)
           	{
-          		pPPT->ajoutePatho("VNOMI1", 2) ;
+          		pPPT->ajoutePatho(string("VNOMI1"), 2) ;
 
             	Message theMessage ;
       				theMessage.SetComplement(sNormInf) ;
             	theMessage.SetUnit(sUnit) ;
-            	pPPT->ajoutePatho("£N0;03", &theMessage, 3) ;
+            	pPPT->ajoutePatho(string("£N0;03"), &theMessage, 3) ;
           	}
-          	if (sNormSup != string(""))
+          	if (string("") != sNormSup)
           	{
-          		pPPT->ajoutePatho("VNOMS1", 2) ;
+          		pPPT->ajoutePatho(string("VNOMS1"), 2) ;
 
             	Message theMessage ;
       				theMessage.SetComplement(sNormSup) ;
             	theMessage.SetUnit(sUnit) ;
-            	pPPT->ajoutePatho("£N0;03", &theMessage, 3) ;
+            	pPPT->ajoutePatho(string("£N0;03"), &theMessage, 3) ;
           	}
           }
-          if ((sValue2 != string("")) && (sUnit2 != string("")))
+          if ((string("") != sValue2) && (string("") != sUnit2))
           {
           	bValuesFound = true ;
 
           	Message theMessage ;
       			theMessage.SetComplement(sValue2) ;
             theMessage.SetUnit(sUnit2) ;
-            pPPT->ajoutePatho("£N0;03", &theMessage, 2) ;
+            pPPT->ajoutePatho(string("£N0;03"), &theMessage, 2) ;
 
-          	if (sNormInf2 != string(""))
+          	if (string("") != sNormInf2)
           	{
-          		pPPT->ajoutePatho("VNOMI1", 2) ;
+          		pPPT->ajoutePatho(string("VNOMI1"), 2) ;
 
             	Message theMessage ;
       				theMessage.SetComplement(sNormInf2) ;
             	theMessage.SetUnit(sUnit2) ;
-            	pPPT->ajoutePatho("£N0;03", &theMessage, 3) ;
+            	pPPT->ajoutePatho(string("£N0;03"), &theMessage, 3) ;
           	}
-          	if (sNormSup2 != string(""))
+          	if (string("") != sNormSup2)
           	{
-          		pPPT->ajoutePatho("VNOMS1", 2) ;
+          		pPPT->ajoutePatho(string("VNOMS1"), 2) ;
 
             	Message theMessage ;
       				theMessage.SetComplement(sNormSup2) ;
             	theMessage.SetUnit(sUnit2) ;
-            	pPPT->ajoutePatho("£N0;03", &theMessage, 3) ;
+            	pPPT->ajoutePatho(string("£N0;03"), &theMessage, 3) ;
           	}
           }
           if (bValuesFound)

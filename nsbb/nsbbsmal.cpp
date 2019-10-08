@@ -700,7 +700,7 @@ catch (...)
 void
 NSSmallBrother::InjectHistoryElements()
 {
-  if ((false == _pPatPathoArray->empty()) || (NULL == _pBBFiche))
+  if ((false == _pPatPathoArray->empty()) || ((BBFiche*) NULL == _pBBFiche))
     return ;
 
   BBFiche* pBBCommeFiche = static_cast<BBFiche*>(_pBBFiche) ;

@@ -67,9 +67,32 @@
 // The fact that you are presently reading this means that you have had
 // knowledge of the CeCILL license and that you accept its terms.
 // -----------------------------------------------------------------------------
-// -----------------------------------------------------------------------------// Attention// -----------------------------------------------------------------------------// Les chemins des include doivent être en chemin relatif sur le cvs.// Si vous avez besoin de les modifier en chemin absolu pour pouvoir les// modifier avec Borland 5, vous devez les repasser en chemin relatif avant de// les remettre sur le cvs. // -----------------------------------------------------------------------------
+// -----------------------------------------------------------------------------// Attention// -----------------------------------------------------------------------------// Les chemins des include doivent être en chemin relatif sur le cvs.// Si vous avez besoin de les modifier en chemin absolu pour pouvoir les// modifier avec Borland 5, vous devez les repasser en chemin relatif avant de// les remettre sur le cvs.// -----------------------------------------------------------------------------
+#include <owl\window.rh>
+#include <owl\mdi.rh>
+
 // #include "gg\gg.rh"
 #include "nsbb\nsbb.rh"
+#include "nsbb\medicament.rh"
+
+IDD_RENEW_MEDIC DIALOG 0, 0, 471, 70
+STYLE DS_MODALFRAME | DS_3DLOOK | DS_CONTEXTHELP | WS_POPUP | WS_VISIBLE | WS_CAPTION | WS_SYSMENU
+CAPTION "Médicament à renouveler"
+FONT 8, "MS Sans Serif"
+{
+ CONTROL "Durée de la phase", -1, "BorShade", BSS_RGROUP | BSS_CAPTION | BSS_LEFT | WS_CHILD | WS_VISIBLE | WS_GROUP, 13, 10, 379, 48
+ CONTROL "P&endant", -1, "BorStatic", SS_LEFT | WS_CHILD | WS_VISIBLE | WS_GROUP, 48, 35, 32, 8
+ CONTROL "1", IDC_EDIT_PDT, "edit", ES_RIGHT | WS_CHILD | WS_VISIBLE | WS_BORDER | WS_TABSTOP, 88, 31, 36, 14
+ CONTROL "", IDC_UPDOWN_PDT, "msctls_updown32", WS_CHILD | WS_VISIBLE, 124, 31, 11, 14
+ CONTROL "", IDC_COMBOBOX_PDT, "combobox", CBS_DROPDOWNLIST | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 140, 31, 76, 50
+ CONTROL "à renou&veler", -1, "BorStatic", SS_LEFT | WS_CHILD | WS_VISIBLE | WS_GROUP, 230, 34, 44, 8
+ CONTROL "0", IDC_EDIT_RNV, "edit", ES_RIGHT | WS_CHILD | WS_VISIBLE | WS_BORDER | WS_TABSTOP, 280, 32, 36, 14
+ CONTROL "", IDC_UPDOWN_RNV, "msctls_updown32", WS_CHILD | WS_VISIBLE, 315, 33, 11, 14
+ CONTROL "fois", -1, "BorStatic", SS_LEFT | WS_CHILD | WS_VISIBLE | WS_GROUP, 352, 34, 24, 8
+ CONTROL "OK", IDOK, "BUTTON", BS_PUSHBUTTON | BS_CENTER | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 406, 6, 50, 14
+ CONTROL "Cancel", IDCANCEL, "BUTTON", BS_PUSHBUTTON | BS_CENTER | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 406, 26, 50, 14
+ CONTROL "Help", IDHELP, "BUTTON", BS_PUSHBUTTON | BS_CENTER | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 406, 46, 50, 14
+}
 
 NEW_MEDIC DIALOG 124, 121, 422, 233
 STYLE DS_MODALFRAME | WS_POPUP | WS_VISIBLE | WS_CAPTION | WS_SYSMENU
@@ -620,10 +643,6 @@ FONT 8, "MS Sans Serif"
  CONTROL "&Ajouter", 251, "button", BS_PUSHBUTTON | BS_CENTER | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 447, 236, 38, 17
  CONTROL "&Réinitialiser", 252, "button", BS_PUSHBUTTON | BS_CENTER | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 447, 257, 38, 17
  CONTROL "S&upprimer", 253, "button", BS_PUSHBUTTON | BS_CENTER | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 448, 279, 38, 17
- CONTROL "", -1, "static", SS_ETCHEDFRAME | WS_CHILD | WS_VISIBLE, 509, 9, 1, 287
- CONTROL "OK", IDOK, "button", BS_PUSHBUTTON | BS_CENTER | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 517, 8, 50, 14
- CONTROL "Cancel", IDCANCEL, "BUTTON", BS_PUSHBUTTON | BS_CENTER | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 517, 29, 50, 14
- CONTROL "Help", IDHELP, "BUTTON", BS_PUSHBUTTON | BS_CENTER | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 517, 50, 50, 14
  CONTROL "Durée de la phase", -1, "BorShade", BSS_RGROUP | BSS_CAPTION | BSS_LEFT | WS_CHILD | WS_VISIBLE | WS_GROUP, 12, 224, 379, 48
  CONTROL "Cycle circadien", -1, "BorShade", BSS_GROUP | BSS_CAPTION | BSS_LEFT | WS_CHILD | WS_VISIBLE | WS_GROUP, 512, 73, 72, 83
  CONTROL "Periode", 300, "BorRadio", BS_AUTORADIOBUTTON | WS_CHILD | WS_VISIBLE, 515, 83, 69, 13
@@ -638,24 +657,9 @@ FONT 8, "MS Sans Serif"
  CONTROL "Jours", 307, "BorRadio", BS_AUTORADIOBUTTON | WS_CHILD | WS_VISIBLE, 516, 204, 67, 13
  CONTROL "Rythme libre", 306, "BorRadio", BS_AUTORADIOBUTTON | WS_CHILD | WS_VISIBLE, 516, 190, 67, 13
  CONTROL "", -1, "BorShade", BSS_HDIP | BSS_LEFT | WS_CHILD | WS_VISIBLE, 511, 67, 75, 1
-}
-
-IDD_RENEW_MEDIC DIALOG 0, 0, 471, 70
-STYLE DS_MODALFRAME | DS_3DLOOK | DS_CONTEXTHELP | WS_POPUP | WS_VISIBLE | WS_CAPTION | WS_SYSMENU
-CAPTION "Médicament à renouveler"
-FONT 8, "MS Sans Serif"
-{
- CONTROL "Durée de la phase", -1, "BorShade", BSS_RGROUP | BSS_CAPTION | BSS_LEFT | WS_CHILD | WS_VISIBLE | WS_GROUP, 13, 10, 379, 48
- CONTROL "P&endant", -1, "BorStatic", SS_LEFT | WS_CHILD | WS_VISIBLE | WS_GROUP, 48, 35, 32, 8
- CONTROL "1", IDC_EDIT_PDT, "edit", ES_RIGHT | WS_CHILD | WS_VISIBLE | WS_BORDER | WS_TABSTOP, 88, 31, 36, 14
- CONTROL "", IDC_UPDOWN_PDT, "msctls_updown32", WS_CHILD | WS_VISIBLE, 124, 31, 11, 14
- CONTROL "", IDC_COMBOBOX_PDT, "combobox", CBS_DROPDOWNLIST | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 140, 31, 76, 50
- CONTROL "à renou&veler", -1, "BorStatic", SS_LEFT | WS_CHILD | WS_VISIBLE | WS_GROUP, 230, 34, 44, 8
- CONTROL "0", IDC_EDIT_RNV, "edit", ES_RIGHT | WS_CHILD | WS_VISIBLE | WS_BORDER | WS_TABSTOP, 280, 32, 36, 14
- CONTROL "", IDC_UPDOWN_RNV, "msctls_updown32", WS_CHILD | WS_VISIBLE, 315, 33, 11, 14
- CONTROL "fois", -1, "BorStatic", SS_LEFT | WS_CHILD | WS_VISIBLE | WS_GROUP, 352, 34, 24, 8
- CONTROL "OK", IDOK, "BUTTON", BS_PUSHBUTTON | BS_CENTER | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 406, 6, 50, 14
- CONTROL "Cancel", IDCANCEL, "BUTTON", BS_PUSHBUTTON | BS_CENTER | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 406, 26, 50, 14
- CONTROL "Help", IDHELP, "BUTTON", BS_PUSHBUTTON | BS_CENTER | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 406, 46, 50, 14
+ CONTROL "", -1, "static", SS_ETCHEDFRAME | WS_CHILD | WS_VISIBLE, 509, 9, 1, 287
+ CONTROL "OK", IDOK, "button", BS_PUSHBUTTON | BS_CENTER | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 517, 8, 50, 14
+ CONTROL "Cancel", IDCANCEL, "BUTTON", BS_PUSHBUTTON | BS_CENTER | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 517, 29, 50, 14
+ CONTROL "Help", IDHELP, "BUTTON", BS_PUSHBUTTON | BS_CENTER | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 517, 50, 50, 14
 }
 

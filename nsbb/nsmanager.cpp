@@ -5291,6 +5291,9 @@ NSPersonGraphManager::trouveCivilite(NSContexte *pContexte, string& sInfo, strin
 bool
 NSPersonGraphManager::trouveObjectAdrPrinc(PIDSTYPE iTypePids, string& sObject, string& sChez)
 {
+  sObject = string("") ;
+	sChez   = string("") ;
+
 	NSPatPathoArray PatPathoArray(_pSuper) ;
 	NSDataTreeIter iterTree ;
 
@@ -5316,7 +5319,7 @@ NSPersonGraphManager::trouveObjectAdrPrinc(PIDSTYPE iTypePids, string& sObject, 
     	string sErrorText = _pSuper->getText("personErrors", "cannotFindProTreeInsideAdminGraph") ;
       sErrorText += string(" (person = ") + getPersonID() + string(")") ;
       _pSuper->trace(&sErrorText, 1, NSSuper::trError) ;
-    	erreur(sErrorText.c_str(), standardError) ;
+    	// erreur(sErrorText.c_str(), standardError) ;
       return false ;
     }
   }
@@ -5328,8 +5331,6 @@ NSPersonGraphManager::trouveObjectAdrPrinc(PIDSTYPE iTypePids, string& sObject, 
 
 	PatPathoIter    iter ;
 	string          sElemLex, sSens, sType;
-	sObject = "" ;
-	sChez   = "" ;
 
 	// Chaque patpatho est une adresse de racine fille d'un élément LADRE
 	// Les chapitres recherchés commencent en colonne 0
@@ -5626,7 +5627,7 @@ NSPersonGraphManager::trouveEMail(PIDSTYPE iTypePids, string& sInfo)
     	string sErrorText = _pSuper->getText("personErrors", "cannotFindProTreeInsideAdminGraph") ;
       sErrorText += string(" (person = ") + getPersonID() + string(")") ;
       _pSuper->trace(&sErrorText, 1, NSSuper::trError) ;
-    	erreur(sErrorText.c_str(), standardError) ;
+    	// erreur(sErrorText.c_str(), standardError) ;
       return false ;
     }
   }

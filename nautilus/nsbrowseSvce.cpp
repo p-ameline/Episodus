@@ -4,7 +4,7 @@
 #include <stdio.h>#include <assert.h>/** Includes spécifiques capture **/#include <string.h>#include <malloc.h>#include <windows.h>#include <wingdi.h>#include <mshtml.h>///////////////////////////////////
 #include <owl\clipboar.h>
 
-#include "WebService.h"#include "nautilus\nsbrowseSvce.h"#include "nautilus\nsbrowse.h"#include "nsbb\nsednum.h"#include "nautilus\nsepicap.h"#include "partage\ole_utils.h"#include "nautilus\nsvisual.h"
+#include "WebService.h"#include "nautilus\nsbrowseSvce.h"#include "nautilus\nsbrowse.h"// #include "nsbb\nsednum.h"#include "nautilus\nsepicap.h"#include "partage\ole_utils.h"#include "nautilus\nsvisual.h"
 /****************** classe NSImportWindow **************************/
 DEFINE_RESPONSE_TABLE1(NSWebServiceWindow, TWindow)
    EV_WM_CLOSE,
@@ -13,22 +13,20 @@ END_RESPONSE_TABLE;
 NSWebServiceWindow::NSWebServiceWindow(TWindow* parent, string sFirstURL, NSContexte* pCtx)
                    :TWindow(parent)
 {
-	sHtml        = "" ;
-	sStartingURL = sFirstURL ;
-	pContexte    = pCtx ;
-	bCanClose    = false ;
+	_sHtml        = string("") ;
+	_sStartingURL = sFirstURL ;
+	_pContexte    = pCtx ;
+	_bCanClose    = false ;
 
-  Form         = NULL ;
+  _pForm        = (TWebServiceForm*) 0 ;
 }
 
 NSWebServiceWindow::~NSWebServiceWindow()
 {
 	// Delete de la Form
-  if (NULL != Form)
-  {
-		delete Form ;
+  if (_pForm)
+		delete _pForm ;
 		// CoUninitialize() ;
-  }
 }
 
 void
@@ -46,14 +44,14 @@ void
 NSWebServiceWindow::PerformCreate(int /*menuOrId*/)
 {
 	//CoInitialize(NULL) ;
-	Form = new TWebServiceForm(Parent->GetHandle(), this) ;
-	Form->Visible = false ;
-	Form->ParentWindow = Parent->HWindow ;
-	SetHandle(Form->Handle) ;
-	::SetParent(Forms::Application->Handle, pContexte->GetMainWindow()->HWindow) ;
+	_pForm = new TWebServiceForm(Parent->GetHandle(), this) ;
+	_pForm->Visible = false ;
+	_pForm->ParentWindow = Parent->HWindow ;
+	SetHandle(_pForm->Handle) ;
+	::SetParent(Forms::Application->Handle, _pContexte->GetMainWindow()->HWindow) ;
 
 	// on navigue vers l'URL du service
-	Navigate(sStartingURL) ;
+	Navigate(_sStartingURL) ;
 }
 
 bool
@@ -90,7 +88,7 @@ NSWebServiceWindow::PreProcessMsg(MSG &msg)
 // Fonction MakeVisiblevoid
 NSWebServiceWindow::MakeVisible()
 {
-  Form->Visible = true ;
+  _pForm->Visible = true ;
 }
 
 // Fonction SetupWindow
@@ -101,7 +99,7 @@ NSWebServiceWindow::SetupWindow()
 	TWindow::SetupWindow() ;
 
 	ModifyStyle(WS_BORDER, WS_CHILD) ;
-	Form->Show() ;
+	_pForm->Show() ;
 	MakeVisible() ;
 }
 
@@ -110,10 +108,10 @@ NSWebServiceWindow::SetupWindow()
 void
 NSWebServiceWindow::Navigate(string sStartingURL)
 {
-	if (string("") == sStartingURL)
+	if (string("") == _sStartingURL)
   {
     string ps = string("NSWebServiceWindow::Navigate with empty URL") ;
-	  pContexte->getSuperviseur()->trace(&ps, 1, NSSuper::trWarning) ;
+	  _pContexte->getSuperviseur()->trace(&ps, 1, NSSuper::trWarning) ;
 		return ;
   }
 
@@ -123,20 +121,20 @@ try
 	TVariant VFlags = Flags.operator TVariant() ;
 
   wchar_t buff[1024] ;
-	MultiByteToWideChar(CP_ACP, MB_PRECOMPOSED, sStartingURL.c_str(), -1, buff, sizeof(buff)) ;
+	MultiByteToWideChar(CP_ACP, MB_PRECOMPOSED, _sStartingURL.c_str(), -1, buff, sizeof(buff)) ;
 
-	Form->Control->Navigate(buff, &VFlags) ;
+	_pForm->Control->Navigate(buff, &VFlags) ;
 }
 catch (Exception &ex)
 {
   string ps = string("NSWebServiceWindow::Navigate (") + string(ex.Message.c_str()) + string(")") ;
-  pContexte->getSuperviseur()->trace(&ps, 1, NSSuper::trError) ;
+  _pContexte->getSuperviseur()->trace(&ps, 1, NSSuper::trError) ;
   erreur(ps.c_str(), standardError, 0) ;
 }
 catch (...)
 {
   string ps = string("NSWebServiceWindow::Navigate Exception") ;
-  pContexte->getSuperviseur()->trace(&ps, 1, NSSuper::trError) ;
+  _pContexte->getSuperviseur()->trace(&ps, 1, NSSuper::trError) ;
   erreur(ps.c_str(), standardError, 0) ;
 }
 }
@@ -146,19 +144,19 @@ NSWebServiceWindow::NavigateErrorEvent(int iStatusCode, string sURL)
 {
 	string ps = string("Ev : NavigateError for URL \"") + sURL + string("\"") ;
   ps += string(" (") + getNavigateErrorShortMsg(iStatusCode) + string(")") ;
-	pContexte->getSuperviseur()->trace(&ps, 1, NSSuper::trError) ;
+	_pContexte->getSuperviseur()->trace(&ps, 1, NSSuper::trError) ;
 
   erreur(ps.c_str(), standardError, 0) ;
 }
 
 voidNSWebServiceWindow::CmAnnuler()
 {
-	string sCaption = string("Message ") + pContexte->getSuperviseur()->getAppName().c_str() ;
+	string sCaption = string("Message ") + _pContexte->getSuperviseur()->getAppName().c_str() ;
   int retVal = MessageBox("Voulez-vous vraiment annuler l'importation ?", sCaption.c_str(), MB_YESNO) ;
 
   if (retVal == IDYES)
   {
-  	bCanClose = true ;
+  	_bCanClose = true ;
     CloseWindow() ;
 	}
 }
@@ -166,15 +164,15 @@ voidNSWebServiceWindow::CmAnnuler()
 void
 NSWebServiceWindow::Action()
 {
-	IDispatch* pdisp = Form->Control->Document ;
+	IDispatch* pdisp = _pForm->Control->Document ;
   if ((IDispatch*) NULL == pdisp)
 		return ;
 
-  sHtml = getHTMLsource(pdisp) ;
+  _sHtml = getHTMLsource(pdisp) ;
 
   pdisp->Release() ;
 
-  if (sHtml == string(""))
+  if (string("") == _sHtml)
   	return ;
 
 	captureInformation() ;
@@ -210,12 +208,12 @@ NSWebServiceWindow::getHTMLsource(IDispatch* pDocument)
 void
 NSWebServiceWindow::captureInformation()
 {
-	if (sHtml == string(""))
+	if (string("") == _sHtml)
   	return ;
 
   // Get the list of episodus data
 
-  string sTags = getDataFromTag(&sHtml, string("<!-- episodus"), string("-->")) ;
+  string sTags = getDataFromTag(&_sHtml, string("<!-- episodus"), string("-->")) ;
 
   // parse it
 
@@ -235,7 +233,7 @@ NSWebServiceWindow::captureInformation()
 
   // Get the capture array
 
-  NSEpisodus* pEpisodus = pContexte->getEpisodus() ;
+  NSEpisodus* pEpisodus = _pContexte->getEpisodus() ;
   if ((NSEpisodus*) NULL == pEpisodus)
   	return ;
 
@@ -266,7 +264,7 @@ NSWebServiceWindow::captureInformation()
     // Put the capture information in the capture array
     if ((string("") != sPathString) && (string("") != sValueString))
     {
-    	pNewCaptureArray->ajouter(new NSCapture(pContexte, sPathString, sValueString, FromOutside, sClassifString, sUnitString, sInformationDate)) ;
+    	pNewCaptureArray->ajouter(new NSCapture(_pContexte, sPathString, sValueString, FromOutside, sClassifString, sUnitString, sInformationDate)) ;
       bCapturedElements = true ;
     }
 
@@ -274,7 +272,7 @@ NSWebServiceWindow::captureInformation()
   }
 
   if (bCapturedElements)
-  	pContexte->captureData(pNewCaptureArray) ;
+  	_pContexte->captureData(pNewCaptureArray) ;
 }
 
 void
@@ -336,7 +334,7 @@ NSWebServiceChild::~NSWebServiceChild()
 
 voidNSWebServiceChild::EvClose()
 {
-	if (!pClient->bCanClose)
+	if (false == pClient->_bCanClose)
 	{
 		string sCaption = string("Message ") + pContexte->getSuperviseur()->getAppName().c_str() ;
 		int retVal = MessageBox("Voulez-vous vraiment fermer ?", sCaption.c_str(), MB_YESNO) ;

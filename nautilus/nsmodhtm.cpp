@@ -1107,10 +1107,10 @@ NSModHtml::genereImageBase(int numImage, int largeur, int hauteur)
 //// Pour les types énumérés qui correspondent à des html structurés
 //
 void
-NSModHtml::remplaceTag(string sTag, string params, string sPath)
+NSModHtml::remplaceTag(string sTag, string sParams, string sPath)
 {
 	// on cherche d'abord les tags génériques
-	if (sTag == "nomPatient")
+	if (string("nomPatient") == sTag)
 	{
 		pContexte->getPatient()->fabriqueNomLong() ;
     _sOut += pContexte->getPatient()->getNomLong() ;
@@ -1136,8 +1136,8 @@ NSModHtml::remplaceTag(string sTag, string params, string sPath)
 
     	if (pHtml && (pHtml->getType() == sTag) && blocHtml[i]->occur())
       {
-      	if (string("") != params)
-          pHtml->initTitres(params) ;
+      	if (string("") != sParams)
+          pHtml->initTitres(sParams) ;
 
         pHtml->genere(_sOut) ;
 
@@ -1164,8 +1164,8 @@ NSModHtml::remplaceTag(string sTag, string params, string sPath)
 
         if (sPathSens == sPath)
         {
-        	if (string("") != params)
-          	pHtml->initTitres(params) ;
+        	if (string("") != sParams)
+          	pHtml->initTitres(sParams) ;
 
           pHtml->genere(_sOut) ;
 
@@ -1173,7 +1173,7 @@ NSModHtml::remplaceTag(string sTag, string params, string sPath)
           // blocHtml[i]->occur -= 1;
         }
         else
-        	remplacePathTag(sPath, params, pHtml) ;
+        	remplacePathTag(sPath, sParams, pHtml) ;
       }
     }
     if (bTagFound)
@@ -1184,8 +1184,8 @@ NSModHtml::remplaceTag(string sTag, string params, string sPath)
 	// à cause des tags XML de type [if ...] [endif].
 	// On replace donc simplement le tag tel quel
 	_sOut += string("[") + sTag ;
-	if (params != "")
-		_sOut += string(" ") + params ;
+	if (string("") != sParams)
+		_sOut += string(" ") + sParams ;
 	_sOut += string("]") ;
 }
 
@@ -1584,7 +1584,6 @@ voidNSModHtml::processTable()
 NSModHtml::genereModele(string sFichHtml, NSDocumentInfo* pHtmlInfo, string sPathBase,
 						string sPathImages, string sFichierExterne, string sTypeFichier)
 {
-
   int      numImage    = 0 ;
   bool     baseChargee = false ;
   bool     bExterne    = false ;
@@ -1621,6 +1620,8 @@ NSModHtml::genereModele(string sFichHtml, NSDocumentInfo* pHtmlInfo, string sPat
 
 	while (_il < strlen(sModele.c_str()))
 	{
+    // adding chars to the output until a '[' is found (usually means a tag)
+    //
   	while ((_il < strlen(sModele.c_str())) && ('[' != sModele[_il]))
     	_sOut += sModele[_il++] ;
 
@@ -1628,15 +1629,19 @@ NSModHtml::genereModele(string sFichHtml, NSDocumentInfo* pHtmlInfo, string sPat
     {
       // on analyse le tag
       _il++ ;
-      string typeElt = string("") ;
+      string sTypeElt = string("") ;
       string params  = string("") ;
       string sPath   = string("") ;
 
+      // Getting information in-between []
+      //
+      // A tag can be in the form tag|path|params
+      //
       while ((_il < strlen(sModele.c_str())) && (']' != sModele[_il]) &&
                                                 ('|' != sModele[_il]) &&
                                                 (' ' != sModele[_il]))
       	// récupération du type
-        typeElt += sModele[_il++] ;
+        sTypeElt += sModele[_il++] ;
 
       if ((_il < strlen(sModele.c_str())) && ('|' == sModele[_il]))
       {      	_il++ ;
@@ -1655,7 +1660,7 @@ NSModHtml::genereModele(string sFichHtml, NSDocumentInfo* pHtmlInfo, string sPat
       }
 
       if (_il >= strlen(sModele.c_str()))      {
-      	erreur("Erreur syntaxique dans le fichier modèle.",standardError,0,pContexte->GetMainWindow()->GetHandle()) ;
+      	erreur("Erreur syntaxique dans le fichier modèle.", standardError, 0, pContexte->GetMainWindow()->GetHandle()) ;
         outFile.close() ;
         return false ;
       }
@@ -1663,7 +1668,9 @@ NSModHtml::genereModele(string sFichHtml, NSDocumentInfo* pHtmlInfo, string sPat
       /* modele[i] == ']' */
       _il++ ;
 
-      if (string("image") == typeElt)
+      // Tag "image"
+      //
+      if (string("image") == sTypeElt)
       {
       	int iLargeur, iHauteur ;
 
@@ -1725,7 +1732,8 @@ NSModHtml::genereModele(string sFichHtml, NSDocumentInfo* pHtmlInfo, string sPat
         }
       }
       // cas des documents images ou vidéos (cf visualisation)
-      else if (string("docimage") == typeElt)
+      //
+      else if (string("docimage") == sTypeElt)
       {
       	string sImage, sTypeImage ;
         string sPathDestImage, sUrlImg ;
@@ -1773,7 +1781,8 @@ NSModHtml::genereModele(string sFichHtml, NSDocumentInfo* pHtmlInfo, string sPat
         genereImage(sUrlImg, sImage, sTypeImage) ;
       }
       // cas des compte-rendus : on ecrit la PatPatho
-      else if (string("patpatho") == typeElt)
+      //
+      else if (string("patpatho") == sTypeElt)
       {
         NSPatPathoArray PptDocBrut(pContexte->getSuperviseur()) ;
         _pDocBrut->initFromPatPatho(&PptDocBrut) ;
@@ -1784,9 +1793,45 @@ NSModHtml::genereModele(string sFichHtml, NSDocumentInfo* pHtmlInfo, string sPat
           return false ;
         }
       }
+      // Conditionnal bloc à la [if tag]to be kept if tag non empty[fi tag]
+      //
+      else if ((strlen(sTypeElt.c_str()) > 3) && (string("IF_") == pseumaj(string(sTypeElt, 0, 3))))
+      {
+        string sRealTag = string(sTypeElt, 3, strlen(sTypeElt.c_str()) - 3) ;
+
+        // Determine if this tag has a value
+        //
+        bool bTagNotEmpty = false ;
+        for (int i = 0 ; i < nbHtml ; i++)
+        {
+          NSHtml* pHtml = blocHtml[i]->getHtml() ;
+
+    	    if (pHtml && (pHtml->getType() == sRealTag) &&
+                       ((false == pHtml->isEmpty()) || (string("") != pHtml->getText())))
+          {
+            bTagNotEmpty = true ;
+            break ;
+          }
+        }
+
+        // Find the ending sequence "[fi tag]"
+        //
+        size_t iLower = sModele.find(string("[fi_") + sRealTag + string("]"), _il) ;
+        size_t iUpper = sModele.find(string("[FI_") + sRealTag + string("]"), _il) ;
+
+        if ((NPOS != iLower) || (NPOS != iUpper))
+        {
+          size_t iEndPos = min(iLower, iUpper) ;
+
+          if (bTagNotEmpty)
+            _sOut += string(sModele, _il, iEndPos - _il) ;
+
+          _il = iEndPos + strlen(sRealTag.c_str()) + 5 ;
+        }
+      }
       // cas des html structurés : on remplace le tag par un bloc du tableau blocHtml
       else
-      	remplaceTag(typeElt, params, sPath) ;
+      	remplaceTag(sTypeElt, params, sPath) ;
     }
 	}
 
@@ -1824,8 +1869,14 @@ NSModHtml::genereHtml(string sPathHtml, string& sBaseImg,
     sPathImg = sPathDest ;
   }
 
-	if ((string("") != _pDocBrut->_sTemplate) &&
-      (false == lireModele(_pDocBrut->_sTemplate, _pDocBrut->_sEnTete)))
+  if (string("") == _pDocBrut->_sTemplate)
+  {
+    string sMsg = string("Aucun modèle de publication n'est spécifié pour ce type de document.") ;
+    MessageBox(0, sMsg.c_str(), 0, MB_OK) ;
+    return false ;
+  }
+
+	if (false == lireModele(_pDocBrut->_sTemplate, _pDocBrut->_sEnTete))
   {
     char msg[255] ;
     sprintf(msg, "Pb lecture du modele [%s].", (_pDocBrut->_sTemplate).c_str()) ;

@@ -285,6 +285,11 @@ NSCSDocument::GenereRawText(string& sRawText)
   if (pSons->empty())
     return false ;
 
+  sRawText = getRawTextHeader() ;
+
+  if (string("") != sRawText)
+    sRawText += string(NEWLINE) + string(NEWLINE) ;
+
   string sDecal = string("") ;
 
   HtmlIter HtmlIt = pSons->begin() ;

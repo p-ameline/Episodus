@@ -508,21 +508,21 @@ NSHtml::marqueurFin()
       break;
     case tTitre17:
       if (_marqueurTitreFin[17] != "")
-        sm = _marqueurTitreFin[17];
+        sm = _marqueurTitreFin[17] ;
       else
-        sm = string("");
+        sm = string("") ;
       break;
     case tTitre18:
       if (_marqueurTitreFin[18] != "")
-        sm = _marqueurTitreFin[18];
+        sm = _marqueurTitreFin[18] ;
       else
-        sm = string("");
+        sm = string("") ;
       break;
     case tTitre19:
       if (_marqueurTitreFin[19] != "")
-        sm = _marqueurTitreFin[19];
+        sm = _marqueurTitreFin[19] ;
       else
-        sm = string("");
+        sm = string("") ;
       break;
     case tTable:
       sm = string("<TABLE>") ;
@@ -535,49 +535,49 @@ NSHtml::marqueurFin()
       break;
     case tTexte:
       if (string("") != _marqueurTitreFin[0])
-        sm = _marqueurTitreFin[0];
+        sm = _marqueurTitreFin[0] ;
       else
-        sm = string("");
+        sm = string("") ;
       break;
     case tIntitule:
     case tIntituleNoBirth:
       if (string("") != _marqueurTitreFin[3])
-        sm = _marqueurTitreFin[3];
+        sm = _marqueurTitreFin[3] ;
       else
-        sm = string("</H3>");
+        sm = string("</H3>") ;
       break;
     case tConsult:
-      sm = string("</LI>");
+      sm = string("</LI>") ;
       break;
     case tPolice:
-      sm = string("</FONT>");
+      sm = string("</FONT>") ;
       break;
     case tPara:
-      sm = string("</P>");
+      sm = string("</P>") ;
       break;
     case tParaCentre:
-      sm = string("</P>");
+      sm = string("</P>") ;
       break;
     case tParaDroite:
-      sm = string("</P>");
+      sm = string("</P>") ;
       break;
     case tGras:
-      sm = string("</B>");
+      sm = string("</B>") ;
       break;
     case tSouligne:
-      sm = string("</U>");
+      sm = string("</U>") ;
       break;
     case tItalic:
-      sm = string("</I>");
+      sm = string("</I>") ;
       break;
     case tIndent:
-      sm = string("</BLOCKQUOTE>");
+      sm = string("</BLOCKQUOTE>") ;
       break;
     case tSignature:
-      sm = string("</B>");
+      sm = string("</B>") ;
       break;
     default :
-      sm = string("");
+      sm = string("") ;
   }
 
   return sm ;
@@ -746,7 +746,7 @@ voidNSHtml::genere(string& sOut)
     // cas des listes, types tCS : tag consultation
     // et type tConsult : élément consultation (cf nscsvue.cpp)
     if ((tCS == _type) || (tConsult == _type))
-      genereTexte("<UL>", sOut) ;
+      genereTexte(string("<UL>"), sOut) ;
 
     for (HtmlIter i = _filsArray.begin() ; _filsArray.end() != i ; i++)
     {
@@ -755,7 +755,7 @@ voidNSHtml::genere(string& sOut)
     }
 
     if (tConsult == _type)
-      genereTexte("</UL>", sOut) ;
+      genereTexte(string("</UL>"), sOut) ;
   }
 
   genereTexte(sClosingTag, sOut) ;
@@ -822,77 +822,80 @@ NSHtml::typeString(const HtmlTypes th)
   switch (th)
   {
     case tCR :
-      sType = "CR" ;
+      sType = string("CR") ;
       break ;
     case tCS :
-      sType = "CS" ;
+      sType = string("CS") ;
       break ;
     case tCQ :
-      sType = "CQ" ;
+      sType = string("CQ") ;
       break ;
     case tRTF :
-      sType = "RTF" ;
+      sType = string("RTF") ;
       break ;
     case tTXT :
-      sType = "TXT" ;
+      sType = string("TXT") ;
       break ;
     case tXML :
-      sType = "XML" ;
+      sType = string("XML") ;
       break ;
     case tTitle :
-      sType = "titre" ;
+      sType = string("titre") ;
       break ;
     case tOperateur :
-      sType = "operateur" ;
+      sType = string("operateur") ;
+      break ;
+    case t2ndOperateur :
+      sType = string("2ndOperateur") ;
       break ;
     case tDate :
-      sType = "date" ;
+      sType = string("date") ;
       break ;
     case tDest :
-      sType = "destinataire" ;
+      sType = string("destinataire") ;
       break ;
     case tIntitule :
-      sType = "intitule" ;
+      sType = string("intitule") ;
       break ;
     case tIntituleNoBirth :
-      sType = "intituleNoBirth" ;
+      sType = string("intituleNoBirth") ;
       break ;
     case tSignature :
-      sType = "signature" ;
+      sType = string("signature") ;
       break ;
 
     // Patient tags
     //
     case tNomPatient :
-      sType = "nomPatient" ;
+      sType = string("nomPatient") ;
       break ;
     case tPatientNom :
-      sType = "patientNom" ;
+      sType = string("patientNom") ;
       break ;
     case tPatientPrenom :
-      sType = "patientPrenom" ;
+      sType = string("patientPrenom") ;
       break ;
     case tPatientNomNaiss :
-      sType = "patientNomNaiss" ;
+      sType = string("patientNomNaiss") ;
       break ;
     case tPatientNaiss :
-      sType = "patientNaiss" ;
+      sType = string("patientNaiss") ;
       break ;
     case tPatientIPP :
-      sType = "patientIPP" ;
+      sType = string("patientIPP") ;
       break ;
     case tPatientIEP :
-      sType = "patientIEP" ;
+      sType = string("patientIEP") ;
       break ;
     case tPatientAdresse :
-      sType = "patientAdresse" ;
+      sType = string("patientAdresse") ;
       break ;
     case tPatientGender :
-      sType = "patientGender" ;
+      sType = string("patientGender") ;
       break ;
 
     default :   // on doit introduire un type par défaut pour pouvoir gérer les XML
-      sType = "nautilus" ;
+      sType = string("nautilus") ;
   }
 
   return sType ;
@@ -917,6 +920,8 @@ HtmlTypesNSHtml::typeTag(const string sTag)
     return tTitle ;
   else if (sTag == string("operateur"))
     return tOperateur ;
+  else if (sTag == string("2ndOperateur"))
+    return t2ndOperateur ;
   else if (sTag == string("date"))
     return tDate ;
   else if (sTag == string("destinataire"))

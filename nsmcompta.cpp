@@ -37,7 +37,7 @@ USEUNIT("nautilus\Nsadmiwd.cpp");
 USERC("nscompta\nscompta.rc");
 USERC("nscompta\nsdepens.rc");
 USERC("nscompta\nsCptaRef.rc");
-USERC("nautilus\nsresour.rc");
+// USERC("nautilus\nsresour.rc");
 USELIB("nsmutil.lib");
 USELIB("nsm_sgbd.lib");
 USELIB("nsmsavoir.lib");

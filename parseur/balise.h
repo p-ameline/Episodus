@@ -71,6 +71,7 @@
 #ifndef __BALISE_H__
 # define __BALISE_H__
 
+/*
 # ifndef FOR_WINDOWS
 // #  include <stl.h>
 #  define FILESLASH "/"
@@ -82,6 +83,18 @@
 #  define NEWLINE   "\r\n"
 #  include "nsbb/nsarcParseError.h"
 # endif
+*/
+
+#ifndef __linux__
+  #include <vector.h>
+	#define FILESLASH "\\"
+	#define NEWLINE	"\r\n"
+  #include "nsbb/nsarcParseError.h"
+#else
+	#define FILESLASH	"/"
+	#define NEWLINE	"\n\n"
+  #include "ParseError.h"
+#endif
 
 # include <string>
 
@@ -113,10 +126,10 @@ class Cbalise
     string     _sAttributs ;
     string     _sValeurs ;
 
-#ifndef FOR_WINDOWS
-    parseError _iParsingError ;
-#else
+#ifndef __linux__
     nsarcParseError _iParsingError ;
+#else
+    parseError _iParsingError ;
 #endif
 
   public:
@@ -163,10 +176,11 @@ class Cbalise
     string  getValeurs()      { return texteCourant(_sValeurs) ; }
     string  getRawValeurs()   { return _sValeurs ; }
     string  getAttributes()   { return _sAttributs ; }
-#ifndef FOR_WINDOWS
-    parseError      getParsingError() { return _iParsingError ; }
-#else
+
+#ifndef __linux__
     nsarcParseError getParsingError() { return _iParsingError ; }
+#else
+    parseError      getParsingError() { return _iParsingError ; }
 #endif
 
     void    cleanValeurs() ;

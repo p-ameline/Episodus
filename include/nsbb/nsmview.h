@@ -71,7 +71,7 @@ class _NSBBCLASSE NSMUEView : public OWL::TWindowView, public NSRoot// class _N
 
     virtual void    setViewName() = 0 ;
     void						addConcernTitle() ;
-    string          getViewName() { return sViewName ; }
+    string          getViewName() { return _sViewName ; }
 
     // Overrides TWindows' in order to process our accelerators table
     bool            PreProcessMsg(MSG &msg) ;
@@ -100,34 +100,34 @@ class _NSBBCLASSE NSMUEView : public OWL::TWindowView, public NSRoot// class _N
     void            focusView() ;
     void            activate() ;
 
-    string          getConcern()    { return sPreoccup ; }
-    string          getFunction()   { return sFonction ; }
+    string          getConcern()    { return _sPreoccup ; }
+    string          getFunction()   { return _sFonction ; }
 
-    void            setConcern(string sPr)      { sPreoccup = sPr ; }
-    void            setFunction(string sFonct)  { sFonction = sFonct ; }
+    void            setConcern(string sPr)      { _sPreoccup = sPr ; }
+    void            setFunction(string sFonct)  { _sFonction = sFonct ; }
 
-    void            setDocType(string sType)  { sDocType = sType ; }
-    string          getDocType()              { return sDocType ; }
+    void            setDocType(string sType)  { _sDocType = sType ; }
+    string          getDocType()              { return _sDocType ; }
 
-    void            setPercent(float fPercent)  { percent = fPercent ; }
-    float           getPercent()                { return percent ; }
+    void            setPercent(float fPercent)  { _percent = fPercent ; }
+    float           getPercent()                { return _percent ; }
 
-    void            setSplitDirection(TSplitDirection dir)    { splitDir = dir ; }
-    TSplitDirection getSplitDirection()             { return splitDir ; }
+    void            setSplitDirection(TSplitDirection dir)    { _splitDir = dir ; }
+    TSplitDirection getSplitDirection()             { return _splitDir ; }
 
-    void            setSplittedWindow(TWindow *pWindow) { pSplittedWindow = pWindow ; }
+    void            setSplittedWindow(TWindow *pWindow) { _pSplittedWindow = pWindow ; }
     TWindow*        getSplittedWindow();
 
-    void            setCreateWindow(TWindow *pWindow) { pCreateWindow = pWindow ; }
+    void            setCreateWindow(TWindow *pWindow) { _pCreateWindow = pWindow ; }
     TWindow*        getCreateWindow() ;
 
-    void            setGadgetPanelWindow(NSGadgetWindow *pWindow) { pGadgetPanelWindow = pWindow ; }
-    NSGadgetWindow* getGadgetPanelWindow()  { return pGadgetPanelWindow ; }
+    void            setGadgetPanelWindow(NSGadgetWindow *pWindow) { _pGadgetPanelWindow = pWindow ; }
+    NSGadgetWindow* getGadgetPanelWindow()  { return _pGadgetPanelWindow ; }
 
     void            setPaneSplitter (NSPaneSplitter* pPane) { _pPaneSplitter = pPane ; }
     NSPaneSplitter* getPaneSplitter() { return _pPaneSplitter ; }
 
-    HACCEL          getAccelerator() { return hAccelerator ; }
+    HACCEL          getAccelerator() { return _hAccelerator ; }
 
     void            setCreatedMdiChild(NSMDIChild* pMdiC) { _pCreatedMDIChild = pMdiC ; }
     NSMDIChild*     getCreatedMdiChild()                  { return _pCreatedMDIChild ; }
@@ -150,6 +150,7 @@ class _NSBBCLASSE NSMUEView : public OWL::TWindowView, public NSRoot// class _N
     virtual void    CmChange()   { return ; }
     virtual void    CmContinue() { return ; }
     virtual void    CmPrevious() { return ; }
+    virtual void    CmAll()      { return ; }
     virtual void    CmFct1()     { return ; }
     virtual void    CmFct2()     { return ; }
     virtual void    CmFct3()     { return ; }
@@ -161,18 +162,18 @@ class _NSBBCLASSE NSMUEView : public OWL::TWindowView, public NSRoot// class _N
     virtual void    CmFct9()     { return ; }
 
 	protected:
-  	// Variables    string          sFonction ;    string          sPreoccup ;    string          sDocType ;    string          sViewName ;    bool            bFirstSetup ;
-    bool            bSetupToolBar ;
+  	// Variables    string          _sFonction ;    string          _sPreoccup ;    string          _sDocType ;    string          _sViewName ;    bool            _bFirstSetup ;
+    bool            _bSetupToolBar ;
 
-    TWindow*        pCreateWindow ;
-    TWindow*        pSplittedWindow ;
-    TSplitDirection splitDir ;
-    float           percent ;
+    TWindow*        _pCreateWindow ;
+    TWindow*        _pSplittedWindow ;
+    TSplitDirection _splitDir ;
+    float           _percent ;
     NSPaneSplitter* _pPaneSplitter ;
-    NSGadgetWindow* pGadgetPanelWindow ;
+    NSGadgetWindow* _pGadgetPanelWindow ;
 
-    TMenuDescr*     pMUEViewMenu ;
-    HACCEL          hAccelerator ;
+    TMenuDescr*     _pMUEViewMenu ;
+    HACCEL          _hAccelerator ;
 
     UINT            _cxSysChar ;
     UINT            _cySysChar ;

@@ -73,11 +73,10 @@ NSProcessView::~NSProcessView()
 void
 NSProcessView::setViewName()
 {
-	sViewName = pContexte->getSuperviseur()->getText("processManagement", "processViewTitle") ;
+	_sViewName = pContexte->getSuperviseur()->getText("processManagement", "processViewTitle") ;
 
   addConcernTitle() ;
 }
-
 
 // GetWindow renvoie this (à redéfinir car virtual dans TView)
 TWindow
@@ -86,18 +85,17 @@ TWindow
   return (TWindow *) this ;
 }
 
-
 // Appel de la fonction de remplissage de la vuevoid
 NSProcessView::SetupWindow()
 {
   NSMUEView::SetupWindow() ;
 
-  string sName = "Procédures en cours" ;
+  string sName = string("Procédures en cours") ;
 
-  if (sPreoccup != "")
+  if (string("") != _sPreoccup)
   {
     LDVFRAME iFrame = ldvframeNotSpecified ;
-    NSConcern *pConcern = pLdVDoc->getConcern(sPreoccup, iFrame) ;
+    NSConcern *pConcern = pLdVDoc->getConcern(_sPreoccup, iFrame) ;
     if (pConcern)
       sName += string(" - ") + pConcern->_sTitre ;
   }
@@ -107,7 +105,6 @@ NSProcessView::SetupWindow()
   SetupColumns() ;
   AfficheListe() ;
 }
-
 
 void
 NSProcessView::CmNouveau()
@@ -121,13 +118,13 @@ NSProcessView::CmNouveau()
 
 	string sChoixProcess ;
 
-	NSNewTrt  *pNewTrtDlg = new NSNewTrt(this, &sChoixProcess, sPreoccup, pContexte, "GDMEX1", "Type de procédure") ;
+	NSNewTrt *pNewTrtDlg = new NSNewTrt(this, &sChoixProcess, _sPreoccup, pContexte, "GDMEX1", "Type de procédure") ;
 
 	if (pNewTrtDlg->Execute() == IDCANCEL)
 		return ;
 
   	// on vérifie qu'on a récupéré un code lexique
-	if (sChoixProcess == "")
+	if (string("") == sChoixProcess)
     	return ;
 
 	// anciennement dans NSNewTrt
@@ -176,8 +173,8 @@ NSProcessView::CmNouveau()
 	pContexte->getPatient()->getDocHis()->Rafraichir(DocNewProcess._pDocInfo, &PptNewProcess) ;
 
 	// si on traite les procédures au niveau des préoccupations de la LdV, il faut faire un lien avec la préoccupation
-	if (string("") != sPreoccup)
-    pGraphe->etablirLien(sRootNode, NSRootLink::problemRelatedTo, sPreoccup) ;
+	if (string("") != _sPreoccup)
+    pGraphe->etablirLien(sRootNode, NSRootLink::problemRelatedTo, _sPreoccup) ;
 
 	displayChanges() ;
 }
@@ -401,7 +398,7 @@ NSProcessView::initCurentProcesses()
           initProcessFromPatho(pcNode, &NewProcess, &TmpPPT, **i) ;
         	pGraphe->TousLesVrais(NewProcess.getMetaNoeud(), NSRootLink::problemRelatedTo, &(NewProcess.aConcerns)) ;
 
-        	if ((sPreoccup == "") || (NewProcess.isLinkedWithConcern(sPreoccup)))
+        	if ((string("") == _sPreoccup) || (NewProcess.isLinkedWithConcern(_sPreoccup)))
           	aCurrentProcesses.push_back(new NSProcess(NewProcess)) ;
       	} //for
 			} //if
@@ -412,7 +409,7 @@ NSProcessView::initCurentProcesses()
     VecteurString ObjProcessVect ;
 
     NSFrameInformationArray *pFrames = pLdVDoc->getFrames() ;
-    if (NULL == pFrames)
+    if ((NSFrameInformationArray*) NULL == pFrames)
       return ;
     for (int i = 0 ; i < FRAMECOUNT ; i++)
     {
@@ -422,14 +419,14 @@ NSProcessView::initCurentProcesses()
   	    //recuperation des process liés aux objectifs
         ArrayGoals *pLdvGoals = pFrameInfo->getGoalsArray() ;
         if (pLdvGoals && (false == pLdvGoals->empty()))
-    	    for (ArrayGoalIter iterGoal = pLdvGoals->begin(); iterGoal != pLdvGoals->end(); iterGoal++)
+    	    for (ArrayGoalIter iterGoal = pLdvGoals->begin() ; pLdvGoals->end() != iterGoal ; iterGoal++)
       	    pGraphe->TousLesVrais((*iterGoal)->getNode(), NSRootLink::processWaitingFor, &ObjProcessVect) ;
       }
     }
 
     if (false == ObjProcessVect.empty())
     {
-    	for (EquiItemIter iterProc = ObjProcessVect.begin() ; iterProc != ObjProcessVect.end() ; iterProc++)
+    	for (EquiItemIter iterProc = ObjProcessVect.begin() ; ObjProcessVect.end() != iterProc ; iterProc++)
       {
       	// mainteant on veux un noeud qui correspond à une PPT
 
@@ -646,7 +643,7 @@ NSProcessView::EvSetFocus(HWND hWndLostFocus)
     pMyApp->SetToolBarWindow(GetWindow()) ;
   }
 
-  _pPaneSplitter->SetFrameTitle(getFunction(), sViewName) ;
+  _pPaneSplitter->SetFrameTitle(getFunction(), _sViewName) ;
   pContexte->setAideIndex("") ;
   pContexte->setAideCorps("process.htm") ;
 }

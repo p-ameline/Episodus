@@ -63,7 +63,7 @@ void NSDocumentData::metAZero()
 	_sType         = string("") ;
   _sTypeComplet  = string("") ;
 	_sLocalisation = string("") ;
-	_sFichier         = string("") ;  _sTemplate        = string("") ;  _sEnTete          = string("") ;  _sTypeContenu     = string("") ;  _sTypeContenuSens = string("") ;  _sDateExamen      = string("") ;  _sEmplacement  = string("") ;	_sInteret      = string("") ;
+	_sFichier         = string("") ;  _sTemplate        = string("") ;  _sEnTete          = string("") ;  _sTypeContenu     = string("") ;  _sTypeContenuSens = string("") ;  _sDateExamen      = string("") ;  _sSecondOperator  = string("") ;  _sEmplacement  = string("") ;	_sInteret      = string("") ;
 	_sCommentaire  = string("") ;
 	_sVisible      = string("") ;
 	_sTranNew      = string("") ;
@@ -101,7 +101,7 @@ NSDocumentData::NSDocumentData(const NSDocumentData& rv)
   _sTypeComplet  = rv._sTypeComplet ;
 	_sLocalisation = rv._sLocalisation ;
 
-  _sFichier         = rv._sFichier ;  _sTemplate        = rv._sTemplate ;  _sEnTete          = rv._sEnTete ;  _sTypeContenu     = rv._sTypeContenu ;  _sTypeContenuSens = rv._sTypeContenuSens ;  _sDateExamen      = rv._sDateExamen ;  _sEmplacement  = rv._sEmplacement ;	_sInteret      = rv._sInteret ;
+  _sFichier         = rv._sFichier ;  _sTemplate        = rv._sTemplate ;  _sEnTete          = rv._sEnTete ;  _sTypeContenu     = rv._sTypeContenu ;  _sTypeContenuSens = rv._sTypeContenuSens ;  _sDateExamen      = rv._sDateExamen ;  _sSecondOperator  = rv._sSecondOperator ;  _sEmplacement  = rv._sEmplacement ;	_sInteret      = rv._sInteret ;
 	_sCommentaire  = rv._sCommentaire ;
 	_sVisible      = rv._sVisible ;
 	_sTranNew      = rv._sTranNew ;
@@ -129,7 +129,7 @@ NSDocumentData& NSDocumentData::operator=(const NSDocumentData& src)
   _sTypeComplet  = src._sTypeComplet ;
 	_sLocalisation = src._sLocalisation ;
 
-  _sFichier         = src._sFichier ;  _sTemplate        = src._sTemplate ;  _sEnTete          = src._sEnTete ;  _sTypeContenu     = src._sTypeContenu ;  _sTypeContenuSens = src._sTypeContenuSens ;  _sDateExamen      = src._sDateExamen ;  _sEmplacement  = src._sEmplacement ;	_sInteret      = src._sInteret ;
+  _sFichier         = src._sFichier ;  _sTemplate        = src._sTemplate ;  _sEnTete          = src._sEnTete ;  _sTypeContenu     = src._sTypeContenu ;  _sTypeContenuSens = src._sTypeContenuSens ;  _sDateExamen      = src._sDateExamen ;  _sSecondOperator  = src._sSecondOperator ;  _sEmplacement  = src._sEmplacement ;	_sInteret      = src._sInteret ;
 	_sCommentaire  = src._sCommentaire ;
 	_sVisible      = src._sVisible ;
 	_sTranNew      = src._sTranNew ;
@@ -167,7 +167,7 @@ int NSDocumentData::operator == ( const NSDocumentData& o )
 		  (strcmp(fichier,		 	o.fichier)		 	== 0) &&
       (strcmp(entete,				o.entete)			  == 0) &&
 */
-      (_sFichier     == o._sFichier) &&      (_sTemplate    == o._sTemplate) &&      (_sEnTete      == o._sEnTete) &&      (_sTypeContenu == o._sTypeContenu) &&      (_sTypeContenuSens == o._sTypeContenuSens) &&      (_sDateExamen  == o._sDateExamen) &&      (_sRights      == o._sRights) &&/*		  (strcmp(emplacement, o.emplacement) == 0) &&		  (strcmp(interet,		 o.interet)		 	== 0) &&
+      (_sFichier         == o._sFichier) &&      (_sTemplate        == o._sTemplate) &&      (_sEnTete          == o._sEnTete) &&      (_sTypeContenu     == o._sTypeContenu) &&      (_sTypeContenuSens == o._sTypeContenuSens) &&      (_sDateExamen      == o._sDateExamen) &&      (_sSecondOperator  == o._sSecondOperator) &&      (_sRights          == o._sRights) &&/*		  (strcmp(emplacement, o.emplacement) == 0) &&		  (strcmp(interet,		 o.interet)		 	== 0) &&
 		  (strcmp(commentaire, o.commentaire) == 0) &&
       (strcmp(visible,     o.visible)			== 0) &&
       (strcmp(tranNew,		 o.tranNew)			== 0) &&

@@ -567,7 +567,7 @@ NSLdvDrugCycle::setTitleForNonCircadian(NSPatPathoArray* pTree, PatPathoIter ite
       {
         iDaysCountPerWeek++ ;
 
-        string sCode  = (*iter)->getLexiqueSens() ;
+        string sCode  = (*iter)->getLexique() ;
         string sLabel = string("") ;
         pContexte->getDico()->donneLibelle(sLang, &sCode, &sLabel) ;
 
@@ -575,6 +575,8 @@ NSLdvDrugCycle::setTitleForNonCircadian(NSPatPathoArray* pTree, PatPathoIter ite
           sRythmForDay += string(",") ;
 
         sRythmForDay += string(sLabel, 0, 2) ;
+
+        iter++ ;
       }
       // Irregular cycle
       //
@@ -1371,7 +1373,10 @@ NSLdvDrug::initPhases(NSPatPathoArray* pTree, PatPathoIter iterSource)
   // If the phase extends beyond the prescription scope, it means it has been
   // renewed. In this case, we have to update the closing date accordingly
   //
-  if (pPhase->_tDateFermeture > _tDateFermeture)
+  // Take care that an empty prescription ending date means a chronic treatment
+  // don't fix it here if it is empty
+  //
+  if ((false == _tDateFermeture.estVide()) && (pPhase->_tDateFermeture > _tDateFermeture))
     _tDateFermeture = pPhase->_tDateFermeture ;
 
   _aPhases.push_back(pPhase) ;

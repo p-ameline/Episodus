@@ -40,18 +40,27 @@
 bool
 drugSortByNameInf(NSLdvDrug *pDrug1, NSLdvDrug *pDrug2)
 {
+  if (((NSLdvDrug*) NULL == pDrug1) || ((NSLdvDrug*) NULL == pDrug2))
+    return false ;
+
 	return (pseumaj(pDrug1->_sTitre) < pseumaj(pDrug2->_sTitre)) ;
 }
 
 bool
 drugSortByNameSup(NSLdvDrug *pDrug1, NSLdvDrug *pDrug2)
 {
+  if (((NSLdvDrug*) NULL == pDrug1) || ((NSLdvDrug*) NULL == pDrug2))
+    return false ;
+
 	return (pseumaj(pDrug1->_sTitre) > pseumaj(pDrug2->_sTitre)) ;
 }
 
 bool
 drugSortByPrescribeInf(NSLdvDrug *pDrug1, NSLdvDrug *pDrug2)
 {
+  if (((NSLdvDrug*) NULL == pDrug1) || ((NSLdvDrug*) NULL == pDrug2))
+    return false ;
+
   if (pDrug1->isToPrescribe() == pDrug2->isToPrescribe())
 	  return (pseumaj(pDrug1->_sTitre) < pseumaj(pDrug2->_sTitre)) ;
 
@@ -61,6 +70,9 @@ drugSortByPrescribeInf(NSLdvDrug *pDrug1, NSLdvDrug *pDrug2)
 bool
 drugSortByPrescribeSup(NSLdvDrug *pDrug1, NSLdvDrug *pDrug2)
 {
+  if (((NSLdvDrug*) NULL == pDrug1) || ((NSLdvDrug*) NULL == pDrug2))
+    return false ;
+
 	if (pDrug1->isToPrescribe() == pDrug2->isToPrescribe())
 	  return (pseumaj(pDrug1->_sTitre) < pseumaj(pDrug2->_sTitre)) ;
 
@@ -70,54 +82,81 @@ drugSortByPrescribeSup(NSLdvDrug *pDrug1, NSLdvDrug *pDrug2)
 bool
 drugSortByAdminInf(NSLdvDrug *pDrug1, NSLdvDrug *pDrug2)
 {
+  if (((NSLdvDrug*) NULL == pDrug1) || ((NSLdvDrug*) NULL == pDrug2))
+    return false ;
+
 	return ((true == pDrug1->_bALD) && (false == pDrug2->_bALD)) ;
 }
 
 bool
 drugSortByAdminSup(NSLdvDrug *pDrug1, NSLdvDrug *pDrug2)
 {
+  if (((NSLdvDrug*) NULL == pDrug1) || ((NSLdvDrug*) NULL == pDrug2))
+    return false ;
+
 	return ((false == pDrug1->_bALD) && (true == pDrug2->_bALD)) ;
 }
 
 bool
 drugSortByDurationInf(NSLdvDrug *pDrug1, NSLdvDrug *pDrug2)
 {
+  if (((NSLdvDrug*) NULL == pDrug1) || ((NSLdvDrug*) NULL == pDrug2))
+    return false ;
+
 	return (getDuration(pDrug1) < getDuration(pDrug2)) ;
 }
 
 bool
 drugSortByDurationSup(NSLdvDrug *pDrug1, NSLdvDrug *pDrug2)
 {
+  if (((NSLdvDrug*) NULL == pDrug1) || ((NSLdvDrug*) NULL == pDrug2))
+    return false ;
+
 	return (getDuration(pDrug1) > getDuration(pDrug2)) ;
 }
 
 bool
 drugSortByBeginInf(NSLdvDrug *pDrug1, NSLdvDrug *pDrug2)
 {
+  if (((NSLdvDrug*) NULL == pDrug1) || ((NSLdvDrug*) NULL == pDrug2))
+    return false ;
+
 	return (pDrug1->_tDateOuverture < pDrug2->_tDateOuverture) ;
 }
 
 bool
 drugSortByBeginSup(NSLdvDrug *pDrug1, NSLdvDrug *pDrug2)
 {
+  if (((NSLdvDrug*) NULL == pDrug1) || ((NSLdvDrug*) NULL == pDrug2))
+    return false ;
+
 	return (pDrug1->_tDateOuverture > pDrug2->_tDateOuverture) ;
 }
 
 bool
 drugSortByEndInf(NSLdvDrug *pDrug1, NSLdvDrug *pDrug2)
 {
+  if (((NSLdvDrug*) NULL == pDrug1) || ((NSLdvDrug*) NULL == pDrug2))
+    return false ;
+
 	return (pDrug1->_tDateFermeture < pDrug2->_tDateFermeture) ;
 }
 
 bool
 drugSortByEndSup(NSLdvDrug *pDrug1, NSLdvDrug *pDrug2)
 {
+  if (((NSLdvDrug*) NULL == pDrug1) || ((NSLdvDrug*) NULL == pDrug2))
+    return false ;
+
 	return (pDrug1->_tDateFermeture > pDrug2->_tDateFermeture) ;
 }
 
 bool
 drugSortByPrescrEndInf(NSLdvDrug *pDrug1, NSLdvDrug *pDrug2)
 {
+  if (((NSLdvDrug*) NULL == pDrug1) || ((NSLdvDrug*) NULL == pDrug2))
+    return false ;
+
   NSLdvDrugPhase* pPhase1 = pDrug1->getCurrentActivePhase() ;
   NSLdvDrugPhase* pPhase2 = pDrug2->getCurrentActivePhase() ;
 
@@ -132,6 +171,9 @@ drugSortByPrescrEndInf(NSLdvDrug *pDrug1, NSLdvDrug *pDrug2)
 bool
 drugSortByPrescrEndSup(NSLdvDrug *pDrug1, NSLdvDrug *pDrug2)
 {
+  if (((NSLdvDrug*) NULL == pDrug1) || ((NSLdvDrug*) NULL == pDrug2))
+    return false ;
+
   NSLdvDrugPhase* pPhase1 = pDrug1->getCurrentActivePhase() ;
   NSLdvDrugPhase* pPhase2 = pDrug2->getCurrentActivePhase() ;
 
@@ -146,12 +188,18 @@ drugSortByPrescrEndSup(NSLdvDrug *pDrug1, NSLdvDrug *pDrug2)
 bool
 drugSortByPrescrDateInf(NSLdvDrug *pDrug1, NSLdvDrug *pDrug2)
 {
+  if (((NSLdvDrug*) NULL == pDrug1) || ((NSLdvDrug*) NULL == pDrug2))
+    return false ;
+
 	return (pDrug1->getLatestPrescriptionDate() < pDrug2->getLatestPrescriptionDate()) ;
 }
 
 bool
 drugSortByPrescrDateSup(NSLdvDrug *pDrug1, NSLdvDrug *pDrug2)
 {
+  if (((NSLdvDrug*) NULL == pDrug1) || ((NSLdvDrug*) NULL == pDrug2))
+    return false ;
+
 	return (pDrug1->getLatestPrescriptionDate() > pDrug2->getLatestPrescriptionDate()) ;
 }
 
@@ -182,12 +230,13 @@ DEFINE_RESPONSE_TABLE1(NSDrugView, NSLDVView)
   EV_COMMAND(CM_DRUG_DELETE,      CmSuppress),
   EV_COMMAND(IDC_ORDONNANCE,      CmFct1),
   EV_COMMAND(IDC_ORDO_DCI,        CmFct8),
-  // EV_COMMAND(IDC_ORDO_SEL,        CmFct4),
+  EV_COMMAND(IDC_ORDO_SEL,        CmFct4),
   EV_COMMAND(IDC_MANAGE_RIGHTS,   CmRights),
   EV_COMMAND(CM_IMPRIME,          CmPublish),
   EV_COMMAND(CM_DRUG_HISTORY,     CmHistory),
   EV_COMMAND(CM_DRUG_ALERTS,      CmAlerts),
   EV_COMMAND(IDC_SWITCH_TO_VD,    CmSwitchToVD),
+  EV_COMMAND(CM_DRUG_VIEW_ALL,    CmDisplayAll),
 END_RESPONSE_TABLE ;
 
 // Constructeur
@@ -201,12 +250,14 @@ try
 
   _pLdVDoc      = &doc ;
   _pListeWindow = new NSDrugsPropertyWindow(this, doc.pContexte, ID_DrugList, 0, 0, 0, 0) ;
+  _bOnlyActive  = true ;  // by default, only active drugs are displayed
 
 	initMUEViewMenu("menubar_drug") ;
 
-  _pToolBar     = (OWL::TControlBar*) 0 ;
-  bSetupToolBar = true ;
-  uButtonsStyle = MYWS_ICONS ;
+  _pToolBar      = (OWL::TControlBar*) 0 ;
+  _bSetupToolBar = true ;
+  uButtonsStyle  = MYWS_ICONS ;
+
 
   _iSortedColumn = -1 ;
 
@@ -234,7 +285,7 @@ NSDrugView::~NSDrugView()
 void
 NSDrugView::setViewName()
 {
-	sViewName = pContexte->getSuperviseur()->getText("drugManagement", "drugManagement") ;
+	_sViewName = pContexte->getSuperviseur()->getText("drugManagement", "drugManagement") ;
 
   addConcernTitle() ;
 }
@@ -250,7 +301,7 @@ TWindow
 NSDrugView::SetupWindow()
 {
   NSLDVView::SetupWindow() ;
-  Parent->SetCaption(sViewName.c_str()) ;
+  Parent->SetCaption(_sViewName.c_str()) ;
 
   SetupColumns() ;
   AfficheListe() ;
@@ -323,8 +374,8 @@ catch (...)
   initCurrentList() ;
 
 	VecteurString RelatedConcerns ;
-  if (string("") != sPreoccup)
-  	RelatedConcerns.AddString(sPreoccup) ;
+  if (string("") != _sPreoccup)
+  	RelatedConcerns.AddString(_sPreoccup) ;
 
 	_pLdVDoc->DrugNewService(this, string(""), &RelatedConcerns) ;
 }
@@ -338,8 +389,8 @@ NSDrugView::CmFct3()
   initCurrentList() ;
 
 	VecteurString RelatedConcerns ;
-  if (sPreoccup != string(""))
-  	RelatedConcerns.AddString(sPreoccup) ;
+  if (string("") != _sPreoccup)
+  	RelatedConcerns.AddString(_sPreoccup) ;
 
 	_pLdVDoc->DrugFromProtocolService(this, &RelatedConcerns) ;
 }
@@ -380,8 +431,8 @@ catch (...)
   _isBeingUpgraded = true ;
 
 	VecteurString RelatedConcerns ;
-  if (sPreoccup != string(""))
-  	RelatedConcerns.AddString(sPreoccup) ;
+  if (string("") != _sPreoccup)
+  	RelatedConcerns.AddString(_sPreoccup) ;
 
 	_pLdVDoc->DrugNewService(this, sLexiCode, &RelatedConcerns) ;
 }
@@ -586,7 +637,7 @@ NSDrugView::CmChange()
 */
 
 	string sNodeToAlter = getDrugRefToModify() ;
-  if (sNodeToAlter != string(""))
+  if (string("") != sNodeToAlter)
   {
     _isBeingUpgraded = true ;
   	_pLdVDoc->DrugModifyService(this, sNodeToAlter) ;
@@ -682,7 +733,7 @@ NSDrugView::CmSuppress()
   string sWarningMsg = pContexte->getSuperviseur()->getText("drugManagementWarnings", "doYouReallyWantToDeleteThisPrescription") ;
 
 	string sNodeToAlter = getDrugRefToModify(sWarningMsg) ;
-  if (sNodeToAlter != string(""))
+  if (string("") != sNodeToAlter)
   {
     _isBeingUpgraded = true ;
 		_pLdVDoc->DrugDeleteService(this, sNodeToAlter) ;
@@ -854,6 +905,12 @@ NSDrugView::CmFct9()
 }
 
 void
+NSDrugView::CmAll()
+{
+  CmDisplayAll() ;
+}
+
+void
 NSDrugView::CmPublish()
 {
   NSLdvPubli publiDriver ;
@@ -891,6 +948,29 @@ NSDrugView::CmSwitchToVD()
     return ;
 
   _pLdVDoc->DrugSwitchToDciForSelectionService(this, &aDrugsToModify) ;
+}
+
+void
+NSDrugView::CmDisplayAll()
+{
+  if (_bOnlyActive)
+    _bOnlyActive = false ;
+  else
+    _bOnlyActive = true ;
+
+  NSSuper* pSuper = pContexte->getSuperviseur() ;
+
+  string s2Vie = string("") ;
+  if (_bOnlyActive)
+    s2Vie = pSuper->getText("drugManagement", "drugsViewAll") ;
+  else
+    s2Vie = pSuper->getText("drugManagement", "drugsViewActive") ;
+  _pPaneSplitter->SetTootipText(CM_GENERAL_ALL, s2Vie) ;
+
+  _isBeingUpgraded = true ;
+
+  initCurentDrugs() ;
+	AfficheListe() ;
 }
 
 void
@@ -945,9 +1025,9 @@ NSDrugView::initCurentDrugs()
 
       for (drugsIter itDg = pDrugs->begin() ; pDrugs->end() != itDg ; itDg++)
       {
-        if (((*itDg)->_tDateFermeture.estNoLimit()) || ((*itDg)->_tDateFermeture >= tpsNow))
+        if (((*itDg)->_tDateFermeture.estNoLimit()) || ((*itDg)->_tDateFermeture >= tpsNow) || (false == _bOnlyActive))
         {
-          if ((string("") == sPreoccup) || ((*itDg)->bIsLinkedConcern(sPreoccup)))
+          if ((string("") == _sPreoccup) || ((*itDg)->bIsLinkedConcern(_sPreoccup)))
           {
             (*itDg)->setLatestPrescriptionDate(_pLdVDoc->getPrescriptionDate(*itDg)) ;
 
@@ -1558,6 +1638,12 @@ NSDrugView::EvRButtonDown(uint modkeys, NS_CLASSLIB::TPoint& point)
   string sAler = pSuper->getText("drugManagement", "drugsAlerts") ;
   string s2Dci = pSuper->getText("drugManagement", "convertToCommonDenomination") ;
 
+  string s2Vie = string("") ;
+  if (_bOnlyActive)
+    s2Vie = pSuper->getText("drugManagement", "drugsViewAll") ;
+  else
+    s2Vie = pSuper->getText("drugManagement", "drugsViewActive") ;
+
 	menu->AppendMenu(MF_STRING, CM_DRUG_NEW,    sNewD.c_str()) ;
   menu->AppendMenu(MF_STRING, CM_REFERENTIAL, sProt.c_str()) ;
   menu->AppendMenu(MF_SEPARATOR, 0, 0) ;
@@ -1575,6 +1661,8 @@ NSDrugView::EvRButtonDown(uint modkeys, NS_CLASSLIB::TPoint& point)
 	menu->AppendMenu(MF_STRING, IDC_ORDONNANCE, sPres.c_str()) ;
   menu->AppendMenu(MF_STRING, IDC_ORDO_DCI,   sPrDc.c_str()) ;
 	menu->AppendMenu(MF_STRING, IDC_ORDO_SEL,   sPreS.c_str()) ;
+  menu->AppendMenu(MF_SEPARATOR, 0, 0);
+  menu->AppendMenu(MF_STRING, CM_DRUG_VIEW_ALL, s2Vie.c_str()) ;
   menu->AppendMenu(MF_SEPARATOR, 0, 0);
   menu->AppendMenu(MF_STRING, IDC_NEW_REF,    sProN.c_str()) ;
   menu->AppendMenu(MF_STRING, IDC_ADD_TO_REF, sProA.c_str()) ;
@@ -1607,12 +1695,20 @@ NSDrugView::EvRButtonDownOut(uint modkeys, NS_CLASSLIB::TPoint& point)
   string sHist = pSuper->getText("drugManagement", "drugsHistory") ;
   string sAler = pSuper->getText("drugManagement", "drugsAlerts") ;
 
+  string s2Vie = string("") ;
+  if (_bOnlyActive)
+    s2Vie = pSuper->getText("drugManagement", "drugsViewAll") ;
+  else
+    s2Vie = pSuper->getText("drugManagement", "drugsViewActive") ;
+
   menu->AppendMenu(MF_STRING, CM_DRUG_NEW,    sNewD.c_str()) ;
   menu->AppendMenu(MF_STRING, CM_REFERENTIAL, sProt.c_str()) ;
   menu->AppendMenu(MF_SEPARATOR, 0, 0) ;
   menu->AppendMenu(MF_STRING, IDC_ORDONNANCE, sPres.c_str()) ;
   menu->AppendMenu(MF_STRING, IDC_ORDO_DCI,   sPrDc.c_str()) ;
   menu->AppendMenu(MF_STRING, IDC_ORDO_SEL,   sPreS.c_str()) ;
+  menu->AppendMenu(MF_SEPARATOR, 0, 0);
+  menu->AppendMenu(MF_STRING, CM_DRUG_VIEW_ALL, s2Vie.c_str()) ;
 	menu->AppendMenu(MF_SEPARATOR, 0, 0) ;
   menu->AppendMenu(MF_STRING, IDC_NEW_REF,    sProN.c_str()) ;
   menu->AppendMenu(MF_STRING, IDC_ADD_TO_REF, sProA.c_str()) ;
@@ -1630,14 +1726,14 @@ NSDrugView::focusFct()
 {
 	activateMUEViewMenu() ;
 
-  TMyApp  *pMyApp = pContexte->getSuperviseur()->getApplication() ;
-  if (bSetupToolBar && (GetWindow() != pMyApp->GetToolBarWindow()))
+  TMyApp *pMyApp = pContexte->getSuperviseur()->getApplication() ;
+  if (_bSetupToolBar && (GetWindow() != pMyApp->GetToolBarWindow()))
   {
     SetupToolBar() ;
     pMyApp->SetToolBarWindow(GetWindow()) ;
   }
 
-  _pPaneSplitter->SetFrameTitle(getFunction(), sViewName) ;
+  _pPaneSplitter->SetFrameTitle(getFunction(), _sViewName) ;
   pContexte->setAideIndex("") ;
   pContexte->setAideCorps("medicaments.htm") ;
 }
@@ -1661,19 +1757,21 @@ NSDrugView::SetupToolBar()
 
 	_pPaneSplitter->FlushControlBar() ;
 
-  TButtonGadget* pDrugNew  = new TButtonGadget(CM_DRUG_NEW,     CM_GENERAL_ADD,      TButtonGadget::Command) ;
-  TButtonGadget* pReferen  = new TButtonGadget(CM_REFERENTIAL,  CM_GENERAL_FCT3,     TButtonGadget::Command) ;
-  TButtonGadget* pDrugStop = new TButtonGadget(CM_DRUG_STOP,    CM_GENERAL_CLOSE,    TButtonGadget::Command) ;
-  TButtonGadget* pModiPoso = new TButtonGadget(CM_DRUG_MODIF_POSO, CM_GENERAL_FCT2, TButtonGadget::Command) ;
-  TButtonGadget* pDrugChng = new TButtonGadget(CM_DRUG_CHANGE,  CM_GENERAL_MODIFY,   TButtonGadget::Command) ;
-  TButtonGadget* pDrugRenw = new TButtonGadget(CM_DRUG_RENEW,   CM_GENERAL_CONTINUE, TButtonGadget::Command) ;
-  TButtonGadget* pOrdoDate = new TButtonGadget(IDC_ORDONNANCE,  CM_GENERAL_FCT1,     TButtonGadget::Command) ;
-  TButtonGadget* pOrdoDci  = new TButtonGadget(IDC_ORDO_DCI,    CM_GENERAL_FCT8,     TButtonGadget::Command) ;
-  TButtonGadget* pOrdoSele = new TButtonGadget(IDC_ORDO_SEL,    CM_GENERAL_FCT4,     TButtonGadget::Command) ;
-  TButtonGadget* pNewRefer = new TButtonGadget(IDC_NEW_REF,     CM_GENERAL_FCT5,     TButtonGadget::Command) ;
-  TButtonGadget* pAddRefer = new TButtonGadget(IDC_ADD_TO_REF,  CM_GENERAL_FCT6,     TButtonGadget::Command) ;
-  TButtonGadget* pDrugHist = new TButtonGadget(CM_DRUG_HISTORY, CM_GENERAL_FCT7,     TButtonGadget::Command) ;
-  TButtonGadget* pDrugAlrt = new TButtonGadget(CM_DRUG_ALERTS,  CM_GENERAL_FCT9,     TButtonGadget::Command) ;
+  TButtonGadget* pDrugNew  = new TButtonGadget(CM_DRUG_NEW,      CM_GENERAL_ADD,      TButtonGadget::Command) ;
+  TButtonGadget* pReferen  = new TButtonGadget(CM_REFERENTIAL,   CM_GENERAL_FCT3,     TButtonGadget::Command) ;
+  TButtonGadget* pDrugStop = new TButtonGadget(CM_DRUG_STOP,     CM_GENERAL_CLOSE,    TButtonGadget::Command) ;
+  TButtonGadget* pModiPoso = new TButtonGadget(CM_DRUG_MODIF_POSO, CM_GENERAL_FCT2,   TButtonGadget::Command) ;
+  TButtonGadget* pDrugChng = new TButtonGadget(CM_DRUG_CHANGE,   CM_GENERAL_MODIFY,   TButtonGadget::Command) ;
+  TButtonGadget* pDrugRenw = new TButtonGadget(CM_DRUG_RENEW,    CM_GENERAL_CONTINUE, TButtonGadget::Command) ;
+  TButtonGadget* pOrdoDate = new TButtonGadget(IDC_ORDONNANCE,   CM_GENERAL_FCT1,     TButtonGadget::Command) ;
+  TButtonGadget* pOrdoDci  = new TButtonGadget(IDC_ORDO_DCI,     CM_GENERAL_FCT8,     TButtonGadget::Command) ;
+  TButtonGadget* pOrdoSele = new TButtonGadget(IDC_ORDO_SEL,     CM_GENERAL_FCT4,     TButtonGadget::Command) ;
+  TButtonGadget* pNewRefer = new TButtonGadget(IDC_NEW_REF,      CM_GENERAL_FCT5,     TButtonGadget::Command) ;
+  TButtonGadget* pAddRefer = new TButtonGadget(IDC_ADD_TO_REF,   CM_GENERAL_FCT6,     TButtonGadget::Command) ;
+  TButtonGadget* pDrugHist = new TButtonGadget(CM_DRUG_HISTORY,  CM_GENERAL_FCT7,     TButtonGadget::Command) ;
+  TButtonGadget* pDrugAlrt = new TButtonGadget(CM_DRUG_ALERTS,   CM_GENERAL_FCT9,     TButtonGadget::Command) ;
+  TButtonGadget* pDrugView = new TButtonGadget(CM_DRUG_VIEW_ALL, CM_GENERAL_ALL,      TButtonGadget::Command) ;
+
 	_pPaneSplitter->Insert(*pDrugNew) ;
   _pPaneSplitter->Insert(*pReferen) ;
   _pPaneSplitter->Insert(*new TSeparatorGadget) ;
@@ -1685,6 +1783,8 @@ NSDrugView::SetupToolBar()
 	_pPaneSplitter->Insert(*pOrdoDate) ;
   _pPaneSplitter->Insert(*pOrdoDci) ;
   _pPaneSplitter->Insert(*pOrdoSele) ;
+  _pPaneSplitter->Insert(*new TSeparatorGadget) ;
+  _pPaneSplitter->Insert(*pDrugView) ;
   _pPaneSplitter->Insert(*new TSeparatorGadget) ;
   _pPaneSplitter->Insert(*pNewRefer) ;
   _pPaneSplitter->Insert(*pAddRefer) ;
@@ -1710,19 +1810,26 @@ NSDrugView::SetupToolBar()
   string sHist = pSuper->getText("drugManagement", "drugsHistory") ;
   string sAlrt = pSuper->getText("drugManagement", "drugsAlerts") ;
 
-  _pPaneSplitter->SetTootipText(CM_GENERAL_ADD, sNewD) ;
-  _pPaneSplitter->SetTootipText(CM_GENERAL_FCT3, sNewR) ;
+  string s2Vie = string("") ;
+  if (_bOnlyActive)
+    s2Vie = pSuper->getText("drugManagement", "drugsViewAll") ;
+  else
+    s2Vie = pSuper->getText("drugManagement", "drugsViewActive") ;
+
+  _pPaneSplitter->SetTootipText(CM_GENERAL_ADD,   sNewD) ;
+  _pPaneSplitter->SetTootipText(CM_GENERAL_FCT3,  sNewR) ;
   _pPaneSplitter->SetTootipText(CM_GENERAL_CLOSE, sStop) ;
-  _pPaneSplitter->SetTootipText(CM_GENERAL_FCT2, sPoso) ;
+  _pPaneSplitter->SetTootipText(CM_GENERAL_FCT2,  sPoso) ;
   _pPaneSplitter->SetTootipText(CM_GENERAL_MODIFY, sModi) ;
   _pPaneSplitter->SetTootipText(CM_GENERAL_CONTINUE, sRene) ;
-  _pPaneSplitter->SetTootipText(CM_GENERAL_FCT1, sOrdo) ;
-  _pPaneSplitter->SetTootipText(CM_GENERAL_FCT8, sPrDc) ;
-  _pPaneSplitter->SetTootipText(CM_GENERAL_FCT4, sSele) ;
-  _pPaneSplitter->SetTootipText(CM_GENERAL_FCT5, sNPro) ;
-  _pPaneSplitter->SetTootipText(CM_GENERAL_FCT6, sAPro) ;
-  _pPaneSplitter->SetTootipText(CM_GENERAL_FCT7, sHist) ;
-  _pPaneSplitter->SetTootipText(CM_GENERAL_FCT9, sAlrt) ;
+  _pPaneSplitter->SetTootipText(CM_GENERAL_FCT1,  sOrdo) ;
+  _pPaneSplitter->SetTootipText(CM_GENERAL_FCT8,  sPrDc) ;
+  _pPaneSplitter->SetTootipText(CM_GENERAL_FCT4,  sSele) ;
+  _pPaneSplitter->SetTootipText(CM_GENERAL_FCT5,  sNPro) ;
+  _pPaneSplitter->SetTootipText(CM_GENERAL_FCT6,  sAPro) ;
+  _pPaneSplitter->SetTootipText(CM_GENERAL_FCT7,  sHist) ;
+  _pPaneSplitter->SetTootipText(CM_GENERAL_FCT9,  sAlrt) ;
+  _pPaneSplitter->SetTootipText(CM_GENERAL_ALL,   s2Vie) ;
 }
 
 string

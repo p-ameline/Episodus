@@ -1094,14 +1094,14 @@ NSPatPathoArray::InserePatPathoFille(PatPathoIter iterPere,
 // Get the date of the document... if the tree is a document tree
 //
 string
-NSPatPathoArray::GetDocDate()
+NSPatPathoArray::GetDocDate() const
 {
   if (empty())
     return string("") ;
 
   // First, check if first element is a KCHIR
   //
-  PatPathoIter iterPpt = begin() ;
+  PatPathoConstIter iterPpt = begin() ;
   iterPpt++ ;
   if (end() == iterPpt)
     return string("") ;
@@ -1115,6 +1115,36 @@ NSPatPathoArray::GetDocDate()
     CheminDansPatpatho((NSSmallBrother *) 0, "LADMI/KCHIR", &sDocDate) ;
 
   return sDocDate ;
+}
+
+// Get the second operator (if any)
+//
+string
+NSPatPathoArray::GetSecondOperator(NSContexte *pContexte)
+{
+  if (empty())
+    return string("") ;
+
+  string sSecondOp = string("") ;
+
+  // Find a second operator from database
+  //
+  CheminDansPatpatho((NSSmallBrother *) 0, string("DOPE2/£SGDR"), &sSecondOp) ;
+  if (string("") != sSecondOp)
+  {
+    if ((NSContexte*) NULL == pContexte)
+      return sSecondOp ;
+
+    NSPersonInfo* pPersonInfo = pContexte->getPersonArray()->getPerson(pContexte, sSecondOp, pidsCorresp) ;
+    if (pPersonInfo)
+  	  return pPersonInfo->getCivilite() ;
+  }
+
+  // Get e free text second operator
+  //
+  CheminDansPatpatho((NSSmallBrother *) 0, string("DOPE2"), &sSecondOp) ;
+
+  return sSecondOp ;
 }
 
 //--------------------------------------------------------------------
@@ -1345,8 +1375,10 @@ try
 	if (string("") == sChaine)
 		return ;
 
-	int Colonne = 0 ;
-	int ColonnePere ;
+  bool bMustReplace = bEcraser ;
+
+	int Colonne     = 0 ;
+	int ColonnePere = 0 ;
 
   PatPathoIter suivant = (PatPathoIter) NULL ;
 
@@ -1384,8 +1416,8 @@ try
 			sChaineInsertion = sValeur ;
 		else
 		{
-			bEcraser = false ;
-			if (sousChaine != "")
+			bMustReplace = false ;
+			if (string("") != sousChaine)
 			{
 				int i = strlen(sousChaine.c_str()) ;
 				sChaineInsertion = string(sChaine, i + 1, strlen(sChaine.c_str()) - (i + 1)) ;
@@ -1398,7 +1430,7 @@ try
 			ColonnePere = (*iter)->getColonne() ;
 			Colonne     = ColonnePere + 1 ;
 			// bChaineDansPatpatho = true ;
-			if (bEcraser)//écraser ce qui vient après iter
+			if (bMustReplace) //écraser ce qui vient après iter
 			{
 				PatPathoIter suppr = begin() ;
 				suppr = iter ;
@@ -1416,7 +1448,7 @@ try
               PatPathoIter itFirstSon =	ChercherPremierFils(suppr) ;
               if (((PatPathoIter) NULL == itFirstSon) || (end() == itFirstSon))
               {
-                Message insertMsg ;
+                Message insertMsg = string("") ;
                 insertMsg.InitFromEtiquette(sValeur) ;
                 NSPatPathoInfo insertPptInfo ;
                 insertPptInfo.initFromMessage(&insertMsg) ;
@@ -1694,6 +1726,8 @@ try
 	if ((Message*) NULL == pMessage)
 		return ;
 
+  bool bMustReplace = bEcraser ;
+
 	int Colonne = 0 ;
 	int ColonnePere ;
 	PatPathoIter suivant = end() ;
@@ -1723,7 +1757,7 @@ try
 		sChaineInsertion = string("") ;
 	else
 	{
-		bEcraser = false ;
+		bMustReplace = false ;
 		if (string("") != sousChaine)
 		{
     	int i = strlen(sousChaine.c_str()) ;
@@ -1740,7 +1774,7 @@ try
   	ColonnePere = (*iter)->getColonne() ;
     Colonne = ColonnePere + 1 ;
     bChaineDansPatpatho = true ;
-    if (bEcraser) //écraser ce qui vient après iter
+    if (bMustReplace) //écraser ce qui vient après iter
     {
     	PatPathoIter suppr = begin() ;
       suppr = iter ;
@@ -1777,7 +1811,7 @@ try
     	//traiter le cas des étiquettes multiples
       ClasseStringVector VectEtiqMulti ;
       string sMultiLabel = (*iterpVect)->getItem() ;
-      DecomposeChaine(&sMultiLabel, &VectEtiqMulti, "/") ;
+      DecomposeChaine(&sMultiLabel, &VectEtiqMulti, string("/")) ;
       iterClassString iterpVectMulti = VectEtiqMulti.begin() ;
       int TailleEtiquette = VectEtiqMulti.size() ;
 
@@ -1798,7 +1832,7 @@ try
           	ajoutePatho(suivant, (*iterpVectMulti)->getItem(), Colonne, -1) ;
             Colonne++ ;
             if (end() != suivant)
-            	suivant++;
+            	suivant++ ;
 
             if (end() != suivant)
             	bSuivant = true ;
@@ -2780,13 +2814,23 @@ catch (...)
 void
 NSPatPathoArray::parseBlock(string sNodeBlock, Message* pMessage)
 {
-  if (NULL == pMessage)
+  if ((Message*) NULL == pMessage)
     return ;
 
   pMessage->Reset() ;
 
   if (string("") == sNodeBlock)
     return ;
+
+  string sCodeComplet = string("") ;
+  NSDico::donneCodeComplet(&sNodeBlock, &sCodeComplet) ;
+
+  pMessage->InitFromEtiquette(sNodeBlock) ;
+
+
+/*  All this code has a bug since it "cuts" numerical values with a decimal part
+    (à la VNOMB1/2ML001.£N0;02.$22.45)
+
 
   ClasseStringVector VectEtiqMulti ;
   DecomposeChaine(&sNodeBlock, &VectEtiqMulti, string(1, intranodeSeparationMARK)) ;
@@ -2852,6 +2896,7 @@ NSPatPathoArray::parseBlock(string sNodeBlock, Message* pMessage)
   pMessage->SetPluriel(sPluriel) ;
   pMessage->SetCertitude(sCertitude) ;
   pMessage->SetComplement(sComplement) ;
+*/
 }
 
 void
@@ -3606,7 +3651,7 @@ try
 	{
     // Have we reached the point we can start searching from?
     //
-    if ((false == bStartIterWasMet) && (NULL != pstartIter) && (NULL != *pstartIter) && (end() != pstartIter))
+    if ((false == bStartIterWasMet) && (NULL != pstartIter) && (NULL != *pstartIter) && (end() != *pstartIter))
     {
       const NSPatPathoInfo* pStartPptInfo = **pstartIter ;
       const NSPatPathoInfo* pCurrPptInfo  = *iterPatPath ;
@@ -3625,7 +3670,7 @@ try
 
     // Have we reached the point that delineates the subtree we are searching in?
     //
-    if ((false == bSubTreeIterWasMet) && (NULL != pSubTreeIter) && (NULL != *pSubTreeIter) && (end() != pSubTreeIter))
+    if ((false == bSubTreeIterWasMet) && (NULL != pSubTreeIter) && (NULL != *pSubTreeIter) && (end() != *pSubTreeIter))
     {
       const NSPatPathoInfo* pStartPptInfo = **pSubTreeIter ;
       const NSPatPathoInfo* pCurrPptInfo  = *iterPatPath ;
@@ -3878,8 +3923,22 @@ try
           //
 				  if (Vect.back() == *iterpVectTemp)
 				  {
+            // If no value to be returned, we are done
+            //
         	  if ((string*) NULL == pValeur)
           	  return true ;
+
+            // Easy case, this final element is a value, by example "2MLM2.£N0"
+            //
+            size_t iPoundPos = sCodeSens.find(".£") ;
+            if ((NPOS != iPoundPos) || ('£' == sCodeSens[0]))
+            {
+              if ((iPoundPos < strlen(sCodeSens.c_str()) - 2) && ('C' == sCodeSens[iPoundPos + 2]))
+                *pValeur = (*iterPatPath)->getTexteLibre() ;
+              else
+                *pValeur = (*iterPatPath)->getComplement() ;
+              return true ;
+            }
 
 					  // Si c'est un code, on regarde tout de suite s'il a un complement
 					  // if (pContexte && (pContexte->getFilGuide()->Prend()) && (pContexte->getFilGuide()->VraiOuFaux(sCodeSens, "ES", "0CODE")))
@@ -3916,6 +3975,11 @@ try
               int iRefCol = (*iterPatPath)->getColonne() ;
               iterValeur++ ;
 
+              // Basically, if we have to return something, it is the first son
+              //
+              if (end() != iterValeur)
+                sLexique = (*iterValeur)->getLexique() ;
+
               while ((end() != iterValeur) && ((*iterValeur)->getColonne() > iRefCol))
               {
                 if ((*iterValeur)->getColonne() == iRefCol + 1)
@@ -3930,7 +3994,7 @@ try
 						      {
                     // Free text, is a valid return value only if no unit expected
                     //
-            	      if (string("£CL") == string(sLexSearch, 0, 3))
+            	      if (string("£C") == string(sLexSearch, 0, 2))
                     {
                       if ((string*) NULL == pUnite)
                       {
@@ -3968,7 +4032,11 @@ try
                 iterValeur++ ;
               }
 
-              *pValeur = sLexique ;
+              // If there, it means that we didn't find a numerical value with
+              // the proper unit
+              //
+              // *pValeur = sLexique ;
+              *pValeur = string("") ;
               if (pUnite)
                 *pUnite = string("") ;
 					  }
@@ -4851,7 +4919,7 @@ NSPatPathoArray::isExpressionTrue(string sExpression, bool *pbExpressionIsValid)
   //
   if (empty())
   {
-    if ((bool*) NULL != pbExpressionIsValid)
+    if (pbExpressionIsValid)
       *pbExpressionIsValid = true ;
     return false ;
   }

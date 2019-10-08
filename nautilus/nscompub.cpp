@@ -34,6 +34,7 @@
 #include "nssavoir\nsgraphe.h"
 #include "nssavoir\nsHealthTeam.h"
 #include "nsdn\nsintrad.h"
+#include "nsoutil\nsFormules.h"
 #include "nsoutil\nsHtmlToPdf.h"
 #include "ns_crypt\ns_api_dll.h"
 
@@ -60,21 +61,21 @@ DEFINE_RESPONSE_TABLE1(ChoixTemplateDialog, NSUtilDialog)	EV_CHILD_NOTIFY_AND_C
 	EV_CHILD_NOTIFY_AND_CODE(IDC_TEMPLATEBOX, LBN_DBLCLK, CmTemplateDblClk),
 END_RESPONSE_TABLE;
 
-ChoixTemplateDialog::ChoixTemplateDialog(TWindow* pere, NSContexte* pCtx, string typeDoc, string codeSensRoot)                    :NSUtilDialog(pere, pCtx, "IDD_TEMPLATE")
+ChoixTemplateDialog::ChoixTemplateDialog(TWindow* pere, NSContexte* pCtx, string sTypeDoc, string sCodeSensRoot)                    :NSUtilDialog(pere, pCtx, "IDD_TEMPLATE")
 {
 try
 {
-	pTemplateBox   = new OWL::TListBox(this, IDC_TEMPLATEBOX) ;
-	pTemplateArray = new NSTemplateArray ;
-	sTypeDoc       = typeDoc ;
-	sCodeSensRoot  = codeSensRoot ;
+	_pTemplateBox   = new OWL::TListBox(this, IDC_TEMPLATEBOX) ;
+	_pTemplateArray = new NSTemplateArray ;
+	_sTypeDoc       = sTypeDoc ;
+	_sCodeSensRoot  = sCodeSensRoot ;
 
-	// on cherche les équivalents sémantiques du code Root	if (sCodeSensRoot != "")
-		pContexte->getSuperviseur()->getFilGuide()->chercheEquivalent(sCodeSensRoot, &VectTermeEquivalentRoot, "ES") ;
+	// on cherche les équivalents sémantiques du code Root	if (string("") != _sCodeSensRoot)
+		pContexte->getSuperviseur()->getFilGuide()->chercheEquivalent(sCodeSensRoot, &_aVectTermeEquivalentRoot, "ES") ;
 
-	TemplateChoisi = 0 ;
-	// fichiers d'aide	sHindex = "hi_doc.htm" ;
-	sHcorps = "h_compos.htm" ;
+	_iTemplateChoisi = 0 ;
+	// fichiers d'aide	sHindex = string("hi_doc.htm") ;
+	sHcorps = string("h_compos.htm") ;
 }
 catch (...)
 {
@@ -83,8 +84,8 @@ catch (...)
 }
 
 ChoixTemplateDialog::~ChoixTemplateDialog(){
-	delete pTemplateBox ;
-	delete pTemplateArray ;
+	delete _pTemplateBox ;
+	delete _pTemplateArray ;
 }
 
 voidChoixTemplateDialog::SetupWindow()
@@ -103,7 +104,7 @@ try
   string sTraitCons = string("_0OTPL") + string("_LNUCO");
   string sTraitRoot = string("_0OTPL") + string("_0TYPC");
   string sTraitComp = string("_0OTPL") + string("_0COMD");
-  string sTraitDefa = string("_0OTPL") + string("_0DEFA");  string sTraitLibelle = string("_0OTPL") + string("_0INTI");	NSPersonsAttributesArray ObjList ;	NSBasicAttributeArray AttrArray ;	string sTypeDocComplet = sTypeDoc ;  NSDico::donneCodeComplet(sTypeDocComplet) ;	AttrArray.push_back(new NSBasicAttribute(sTraitType, sTypeDocComplet)) ;
+  string sTraitDefa = string("_0OTPL") + string("_0DEFA");  string sTraitLibelle = string("_0OTPL") + string("_0INTI");	NSPersonsAttributesArray ObjList ;	NSBasicAttributeArray AttrArray ;	string sTypeDocComplet = _sTypeDoc ;  NSDico::donneCodeComplet(sTypeDocComplet) ;	AttrArray.push_back(new NSBasicAttribute(sTraitType, sTypeDocComplet)) ;
 	bool res = pContexte->getSuperviseur()->getPilot()->objectList(NautilusPilot::SERV_OBJECT_LIST_WITH_TRAITS.c_str(),
                                     &ObjList, &AttrArray) ;
 	if (false == res)
@@ -111,73 +112,73 @@ try
 		string sErrorText = pContexte->getSuperviseur()->getText("NTIERS", "templateNotFound") ;
 		erreur(sErrorText.c_str(), standardError, 0, 0) ;
 		return ;
-	}	NSPatPathoArray PatPathoArray(pContexte->getSuperviseur(), graphObject) ;	if (false == ObjList.empty())  {  	for (NSPersonsAttributeIter i = ObjList.begin() ; ObjList.end() != i ; i++)    {    	string sOIDS = (*i)->getAttributeValue(OIDS) ;      AttrArray.vider() ;      pGraph->graphReset() ;      if (string("") != sOIDS)      {
-      	//pList->push_back(new NSBasicAttribute("graphID", sOIDS)) ;
-        AttrArray.push_back(new NSBasicAttribute(OBJECT, sOIDS)) ;
-        res = pContexte->getSuperviseur()->getPilot()->invokeService(NautilusPilot::SERV_SEARCH_OBJECT_FROM_ID.c_str(), pGraph, &AttrArray) ;
-        if (false == res)
-        {
-        	string sErrorText = pContexte->getSuperviseur()->getText("NTIERS", "objectNotFound") ;
-          if (string("") == sErrorText)
-          	sErrorText = string("Echec service : Impossible de récupérer un objet dans la base") ;
-          sErrorText = string(" ") + sOIDS ;
-          pContexte->getSuperviseur()->trace(&sErrorText, 1, NSSuper::trError) ;
-          erreur(sErrorText.c_str(), standardError, 0) ;
-          return ;
-        }
+	}	NSPatPathoArray PatPathoArray(pContexte->getSuperviseur(), graphObject) ;	if (ObjList.empty())    return ;  for (NSPersonsAttributeIter i = ObjList.begin() ; ObjList.end() != i ; i++)  {    string sOIDS = (*i)->getAttributeValue(OIDS) ;    AttrArray.vider() ;    pGraph->graphReset() ;    if (string("") != sOIDS)    {
+      //pList->push_back(new NSBasicAttribute("graphID", sOIDS)) ;
+      AttrArray.push_back(new NSBasicAttribute(OBJECT, sOIDS)) ;
+      res = pContexte->getSuperviseur()->getPilot()->invokeService(NautilusPilot::SERV_SEARCH_OBJECT_FROM_ID.c_str(), pGraph, &AttrArray) ;
+      if (false == res)
+      {
+        string sErrorText = pContexte->getSuperviseur()->getText("NTIERS", "objectNotFound") ;
+        if (string("") == sErrorText)
+          sErrorText = string("Echec service : Impossible de récupérer un objet dans la base") ;
+        sErrorText = string(" ") + sOIDS ;
+        pContexte->getSuperviseur()->trace(&sErrorText, 1, NSSuper::trError) ;
+        erreur(sErrorText.c_str(), standardError, 0) ;
+        return ;
+      }
 
-        NSDataTreeIter iterTree ;
-        PatPathoArray.vider() ;
+      NSDataTreeIter iterTree ;
+      PatPathoArray.vider() ;
 
-        if (pGraph->getTrees()->ExisteTree("0OTPL1", pContexte->getSuperviseur(), &iterTree))
-        	(*iterTree)->getRawPatPatho(&PatPathoArray) ;
-        else
-        {
-        	erreur("Problème à la récupération du graphe d'un objet template.", standardError, 0);
-          continue ;
-        }
+      if (pGraph->getTrees()->ExisteTree("0OTPL1", pContexte->getSuperviseur(), &iterTree))
+        (*iterTree)->getRawPatPatho(&PatPathoArray) ;
+      else
+      {
+        erreur("Problème à la récupération du graphe d'un objet template.", standardError, 0);
+        continue ;
+      }
 
-        ObjectManager.ParseTemplate(&PatPathoArray, &AttrArray) ;
+      ObjectManager.ParseTemplate(&PatPathoArray, &AttrArray) ;
 
-        sCodeRootTmpl = AttrArray.getAttributeValue(sTraitRoot) ;
-        sTypeTmpl     = AttrArray.getAttributeValue(sTraitType) ;
-        sCompoTmpl    = AttrArray.getAttributeValue(sTraitComp) ;
-        sUtilTmpl     = AttrArray.getAttributeValue(sTraitOper) ;
-        sLibTmpl      = AttrArray.getAttributeValue(sTraitLibelle) ;
+      sCodeRootTmpl = AttrArray.getAttributeValue(sTraitRoot) ;
+      sTypeTmpl     = AttrArray.getAttributeValue(sTraitType) ;
+      sCompoTmpl    = AttrArray.getAttributeValue(sTraitComp) ;
+      sUtilTmpl     = AttrArray.getAttributeValue(sTraitOper) ;
+      sLibTmpl      = AttrArray.getAttributeValue(sTraitLibelle) ;
 
-        bTypeTmplOK = false ;
+      bTypeTmplOK = false ;
 
-        if (sCodeRootTmpl != "")        {
-        	// le code root de la base template est-il un équivalent du code root doc ?
-          NSDico::donneCodeSens(&sCodeRootTmpl, &sCodeSensTmpl) ;
+      if (string("") != sCodeRootTmpl)      {
+        // le code root de la base template est-il un équivalent du code root doc ?
+        NSDico::donneCodeSens(&sCodeRootTmpl, &sCodeSensTmpl) ;
 
-          for (EquiItemIter i = VectTermeEquivalentRoot.begin(); i != VectTermeEquivalentRoot.end(); i++)          {
-          	if (sCodeSensTmpl == (*(*i)))
-            {
-            	bTypeTmplOK = true ;
-              break ;
-            }
+        for (EquiItemIter i = _aVectTermeEquivalentRoot.begin() ; _aVectTermeEquivalentRoot.end() != i ; i++)        {
+          if (sCodeSensTmpl == **i)
+          {
+            bTypeTmplOK = true ;
+            break ;
           }
         }
-        else // cas codeRoot == "", on regarde le type
-        	if (sTypeDocComplet == sTypeTmpl)
-          	bTypeTmplOK = true ;
+      }
+      else // cas codeRoot == "", on regarde le type
+        if (sTypeDocComplet == sTypeTmpl)
+          bTypeTmplOK = true ;
 
-        // On remplit la TemplateBox et le TemplateArray si le type correspond au type Document        // On regarde si compo == 1 (car utilisé en composition)
-        // On regarde si on a le bon utilisateur ou aucun
+      // On remplit la TemplateBox et le TemplateArray si le type correspond au type Document      // On regarde si compo == 1 (car utilisé en composition)
+      // On regarde si on a le bon utilisateur ou aucun
 
-        if ((bTypeTmplOK)                      &&
-            (sCompoTmpl == "1")
-                      &&
-            ((sUtilTmpl == pContexte->getUtilisateur()->getNss()) ||
-                     (sUtilTmpl == "")
-              )
+      if ((bTypeTmplOK)                    &&
+          (string("1") == sCompoTmpl)
+                    &&
+          ((sUtilTmpl == pContexte->getUtilisateur()->getNss()) ||
+                   (string("") == sUtilTmpl)
             )
-        {
-        	pTemplateBox->AddString(sLibTmpl.c_str()) ;
-          pTemplateArray->push_back(new NSTemplateInfo(&AttrArray)) ;
-        }
-      }    }  }}catch (...)
+          )
+      {
+        _pTemplateBox->AddString(sLibTmpl.c_str()) ;
+        _pTemplateArray->push_back(new NSTemplateInfo(&AttrArray)) ;
+      }
+    }  }}catch (...)
 {
 	erreur("Exception ChoixTemplateDialog::SetupWindow.", standardError, 0) ;
 }
@@ -185,7 +186,7 @@ try
 
 void ChoixTemplateDialog::CmTemplateDblClk(WPARAM Cmd)
 {
-	TemplateChoisi = pTemplateBox->GetSelIndex() + 1;
+	_iTemplateChoisi = _pTemplateBox->GetSelIndex() + 1 ;
 	TDialog::CmOk();
 }
 
@@ -194,12 +195,12 @@ void ChoixTemplateDialog::CmSelectTemplate(WPARAM Cmd){
 	// Récupération de l'indice du template sélectionné
 	//
 
-	TemplateChoisi = pTemplateBox->GetSelIndex() + 1;}
+	_iTemplateChoisi = _pTemplateBox->GetSelIndex() + 1 ;}
 
 void ChoixTemplateDialog::CmCancel(){
-	TemplateChoisi = 0;
+	_iTemplateChoisi = 0 ;
 
-	TDialog::CmCancel();}
+	TDialog::CmCancel() ;}
 
 // -----------------------------------------------------------------//
 //  Méthodes de NomCompoDialog
@@ -216,11 +217,11 @@ NomCompoDialog::NomCompoDialog(TWindow* pere, NSContexte* pCtx)               :
 {
 try
 {
-  pNomDocHtml = new OWL::TEdit(this, IDC_EDITNOMCOMPO, DOC_NOM_LEN) ;
-  pNewCompo 	= new OWL::TRadioButton(this, IDC_NEWCOMPO, 0) ;
-  pOldCompo 	= new OWL::TRadioButton(this, IDC_OLDCOMPO, 0) ;
+  _pNomDocHtml = new OWL::TEdit(this, IDC_EDITNOMCOMPO, DOC_NOM_LEN) ;
+  _pNewCompo   = new OWL::TRadioButton(this, IDC_NEWCOMPO, 0) ;
+  _pOldCompo 	 = new OWL::TRadioButton(this, IDC_OLDCOMPO, 0) ;
 
-  sNomDocHtml = string("") ;}
+  _sNomDocHtml = string("") ;}
 catch (...)
 {
 	erreur("Exception NomCompoDialog ctor.", standardError, 0) ;
@@ -228,36 +229,36 @@ catch (...)
 }
 
 NomCompoDialog::~NomCompoDialog(){
-  delete pNomDocHtml ;
-  delete pNewCompo ;
-  delete pOldCompo ;
+  delete _pNomDocHtml ;
+  delete _pNewCompo ;
+  delete _pOldCompo ;
 }
 
 voidNomCompoDialog::SetupWindow()
 {
 	NSUtilDialog::SetupWindow() ;
 
-  pOldCompo->Check() ;  pNewCompo->Uncheck() ;
+  _pOldCompo->Check() ;  _pNewCompo->Uncheck() ;
 }
 
 voidNomCompoDialog::CmClickNewCompo()
 {
-	pOldCompo->Uncheck() ;
+	_pOldCompo->Uncheck() ;
 }
 
 voidNomCompoDialog::CmClickOldCompo()
 {
-	pNewCompo->Uncheck() ;
+	_pNewCompo->Uncheck() ;
 }
 
 voidNomCompoDialog::CmOk()
 {
 	char far cfNomDocHtml[DOC_NOM_LEN + 1] ;
 
-  pNomDocHtml->GetText(cfNomDocHtml,DOC_NOM_LEN) ;	sNomDocHtml = string(cfNomDocHtml) ;
+  _pNomDocHtml->GetText(cfNomDocHtml,DOC_NOM_LEN) ;	_sNomDocHtml = string(cfNomDocHtml) ;
 
-	if ((pNewCompo->GetCheck()) == BF_CHECKED)  {
-    if (string("") == sNomDocHtml)
+	if ((_pNewCompo->GetCheck()) == BF_CHECKED)  {
+    if (string("") == _sNomDocHtml)
     {
       MessageBox("Erreur : Vous n'avez pas saisi de nom pour le nouveau fichier") ;
       return ;
@@ -271,748 +272,7 @@ voidNomCompoDialog::CmCancel()
 	TDialog::CmCancel() ;
 }
 
-// -----------------------------------------------------------------//
-//  Méthodes de LettreTypeEditDialog
-//
 // -----------------------------------------------------------------
-
-DEFINE_RESPONSE_TABLE1(LettreTypeEditDialog, NSUtilDialog)   EV_BN_CLICKED(IDC_LTYPEDIT_NEW, CmNouveau),
-   EV_BN_CLICKED(IDC_LTYPEDIT_DEL, CmDetruire),
-   EV_COMMAND(IDOK, CmOk),
-   EV_COMMAND(IDCANCEL, CmCancel),
-END_RESPONSE_TABLE;
-
-LettreTypeEditDialog::LettreTypeEditDialog(TWindow* pere, NSContexte* pCtx)                     :NSUtilDialog(pere, pCtx, "IDD_LTYPEDIT")
-{
-try
-{
-  _sTexte = string("") ;
-
-	_pData = new NSFormuleData() ;
-	_pEdit = new NSMultiEdit(pContexte, this, IDC_LTYPEDIT_EDIT, FORM_TEXTE1_LEN +
-                                                     FORM_TEXTE2_LEN +
-                                                     FORM_TEXTE3_LEN +
-                                                     FORM_TEXTE4_LEN) ;
-  _bNew = false ;
-  _bDel = false ;
-}
-catch (...)
-{
-	erreur("Exception LettreTypeEditDialog ctor.", standardError, 0) ;
-}
-}
-
-LettreTypeEditDialog::~LettreTypeEditDialog(){
-	delete _pEdit ;
-  delete _pData ;
-}
-
-voidLettreTypeEditDialog::SetupWindow()
-{
-  NSUtilDialog::SetupWindow() ;
-
-  if (strcmp(_pData->code, ""))  {
-    _sTexte += _pData->texte1 ;
-    _sTexte += _pData->texte2 ;
-    _sTexte += _pData->texte3 ;
-    _sTexte += _pData->texte4 ;
-  }
-  else
-    _bNew = true ;
-
-  _pEdit->FormatLines(true) ;  _pEdit->SetText(_sTexte.c_str()) ;
-}
-
-voidLettreTypeEditDialog::CmNouveau()
-{
-  _sTexte = string("") ;
-
-  _pEdit->SetText("") ;
-  _bNew = true ;}
-
-voidLettreTypeEditDialog::CmDetruire()
-{
-  string sCaption = string("Message ") + pContexte->getSuperviseur()->getAppName().c_str();
-
-  int idRet = MessageBox("Etes vous sûr de vouloir détruire cette formule?", sCaption.c_str(), MB_YESNO);
-
-  if (IDYES != idRet)    return ;
-  _bDel = true;
-
-  if (_bNew)    TDialog::CmCancel() ;
-  else
-    TDialog::CmOk() ;
-}
-
-voidLettreTypeEditDialog::CmOk()
-{
-  _pEdit->GetText(_sTexte) ;
-
-  // test préalable  if (strlen(_sTexte.c_str()) > (FORM_TEXTE1_LEN + FORM_TEXTE2_LEN + FORM_TEXTE3_LEN + FORM_TEXTE4_LEN))
-  {
-    string sCaption = string("Message ") + pContexte->getSuperviseur()->getAppName().c_str();
-
-    int idRet = MessageBox("Attention le texte est trop long et va être tronqué. Voulez-vous continuer ?", sCaption.c_str(), MB_YESNO);
-    if (idRet == IDNO)      return ;
-  }
-
-  strcpy(_pData->texte1, "") ;  strcpy(_pData->texte2, "") ;
-  strcpy(_pData->texte3, "") ;
-  strcpy(_pData->texte4, "") ;
-
-  if (strlen(_sTexte.c_str()) > FORM_TEXTE1_LEN)  {
-    strcpy(_pData->texte1, string(_sTexte, 0, FORM_TEXTE1_LEN).c_str()) ;
-    _sTexte = string(_sTexte, FORM_TEXTE1_LEN, strlen(_sTexte.c_str()) - FORM_TEXTE1_LEN + 1) ;
-  }
-  else
-  {
-    strcpy(_pData->texte1, _sTexte.c_str()) ;
-    TDialog::CmOk() ;
-    return ;
-  }
-
-  if (strlen(_sTexte.c_str()) > FORM_TEXTE2_LEN)  {
-    strcpy(_pData->texte2, string(_sTexte, 0, FORM_TEXTE2_LEN).c_str()) ;
-    _sTexte = string(_sTexte, FORM_TEXTE2_LEN, strlen(_sTexte.c_str()) - FORM_TEXTE2_LEN + 1) ;
-  }
-  else
-  {
-    strcpy(_pData->texte2, _sTexte.c_str()) ;
-    TDialog::CmOk() ;
-    return ;
-  }
-
-  if (strlen(_sTexte.c_str()) > FORM_TEXTE3_LEN)  {
-    strcpy(_pData->texte3, string(_sTexte, 0, FORM_TEXTE3_LEN).c_str()) ;
-    _sTexte = string(_sTexte, FORM_TEXTE3_LEN, strlen(_sTexte.c_str()) - FORM_TEXTE3_LEN + 1) ;
-  }
-  else
-  {
-    strcpy(_pData->texte3, _sTexte.c_str()) ;
-    TDialog::CmOk() ;
-    return ;
-  }
-
-  if (strlen(_sTexte.c_str()) > FORM_TEXTE4_LEN)    strcpy(_pData->texte1, string(_sTexte, 0, FORM_TEXTE4_LEN).c_str()) ;
-  else
-    strcpy(_pData->texte1, _sTexte.c_str()) ;
-
-  TDialog::CmOk() ;}
-
-voidLettreTypeEditDialog::CmCancel()
-{
-  TDialog::CmCancel() ;
-}
-
-// -----------------------------------------------------------------
-//
-//  Méthodes de LettreTypeDialog
-//
-// -----------------------------------------------------------------
-DEFINE_RESPONSE_TABLE1(LettreTypeDialog, NSUtilDialog)
-   EV_BN_CLICKED(IDC_LTYP_INTRO_SANS, CmClickSansIntro),
-   EV_BN_CLICKED(IDC_LTYP_CORPS_SANS, CmClickSansCorps),
-   EV_BN_CLICKED(IDC_LTYP_POLIT_SANS, CmClickSansPolit),
-   EV_COMMAND(IDC_LTYP_INTRO_PREC, CmIntroPrec),
-   EV_COMMAND(IDC_LTYP_INTRO_SUIV, CmIntroSuiv),
-   EV_COMMAND(IDC_LTYP_INTRO_EDIT, CmEditIntro),
-   EV_COMMAND(IDC_LTYP_CORPS_PREC, CmCorpsPrec),
-   EV_COMMAND(IDC_LTYP_CORPS_SUIV, CmCorpsSuiv),
-   EV_COMMAND(IDC_LTYP_CORPS_EDIT, CmEditCorps),
-   EV_COMMAND(IDC_LTYP_POLIT_PREC, CmPolitPrec),
-   EV_COMMAND(IDC_LTYP_POLIT_SUIV, CmPolitSuiv),
-   EV_COMMAND(IDC_LTYP_POLIT_EDIT, CmEditPolit),
-   EV_COMMAND(IDOK, CmOk),
-   EV_COMMAND(IDCANCEL, CmCancel),
-END_RESPONSE_TABLE;
-
-LettreTypeDialog::LettreTypeDialog(TWindow* pere, NSContexte* pCtx)                 :NSUtilDialog(pere, pCtx, "IDD_LTYP")
-{
-try
-{
-  _pIntro      = new NSUtilEdit(pContexte, this, IDC_LTYP_INTRO) ;
-  _pCorps      = new NSUtilEdit(pContexte, this, IDC_LTYP_CORPS) ;
-  _pPolit      = new NSUtilEdit(pContexte, this, IDC_LTYP_POLIT) ;
-  _pSansIntro  = new OWL::TRadioButton(this, IDC_LTYP_INTRO_SANS, 0) ;
-  _pSansCorps  = new OWL::TRadioButton(this, IDC_LTYP_CORPS_SANS, 0) ;
-  _pSansPolit  = new OWL::TRadioButton(this, IDC_LTYP_POLIT_SANS, 0) ;
-  _pIntroArray = new NSFormuleArray ;
-  _pCorpsArray = new NSFormuleArray ;
-  _pPolitArray = new NSFormuleArray ;
-
-  _nbIntro = 0 ;
-  _nbCorps = 0 ;
-  _nbPolit = 0 ;
-
-  _choixIntro = 0 ;
-  _choixCorps = 0 ;
-  _choixPolit = 0 ;
-
-  _sIntro = string("") ;  _sCorps = string("") ;
-  _sPolit = string("") ;
-}
-catch (...)
-{
-  erreur("Exception LettreTypeDialog ctor.", standardError, 0) ;
-}
-}
-
-LettreTypeDialog::~LettreTypeDialog(){
-	delete _pIntro ;
-  delete _pCorps ;
-  delete _pPolit ;
-  delete _pSansIntro ;
-  delete _pSansCorps ;
-  delete _pSansPolit ;
-  delete _pIntroArray ;
-  delete _pCorpsArray ;
-  delete _pPolitArray ;
-}
-
-voidLettreTypeDialog::SetupWindow()
-{
-	NSUtilDialog::SetupWindow() ;
-
-  _pSansIntro->Uncheck() ;  _pSansCorps->Uncheck() ;
-  _pSansPolit->Uncheck() ;
-
-	if (InitFormulesArray())  {
-    _pIntro->FormatLines(true) ;
-    AfficheIntro() ;
-
-    _pCorps->FormatLines(true) ;    AfficheCorps() ;
-
-    _pPolit->FormatLines(true) ;    AffichePolit() ;
-  }
-  else
-    erreur("La base des formules est inaccessible.", standardError, 0, GetHandle()) ;
-}
-
-boolLettreTypeDialog::InitFormulesArray()
-{
-try
-{
-  // pour le cas base vide
-  _sLastCode = string("000") ;
-
-	NSFormule formule(pContexte->getSuperviseur()) ;
-	formule.lastError = formule.open() ;
-	if (DBIERR_NONE != formule.lastError)	{
-		erreur("Impossible d'ouvrir le fichier Formule.", standardError, formule.lastError, GetHandle()) ;
-		return false ;
-	}
-
-  formule.lastError = formule.debut(dbiWRITELOCK) ;
-  if (DBIERR_BOF == formule.lastError)  {
-    formule.close() ;
-		return true ;
-	}
-
-  while (DBIERR_EOF != formule.lastError)  {
-    formule.lastError = formule.getRecord() ;
-
-    if (DBIERR_NONE != formule.lastError)    {
-      erreur("Erreur à la lecture d'une formule.", standardError, formule.lastError, GetHandle()) ;
-      formule.close() ;
-			return false ;
-		}
-
-    _sLastCode = formule.pDonnees->code ;
-    switch (formule.pDonnees->type[0])    {
-      case 'A' :
-        _pIntroArray->push_back(new NSFormuleInfo(&formule)) ;
-        _nbIntro++ ;
-        break ;
-
-      case 'B' :        _pCorpsArray->push_back(new NSFormuleInfo(&formule)) ;
-        _nbCorps++ ;
-        break ;
-
-      case 'C':        _pPolitArray->push_back(new NSFormuleInfo(&formule)) ;
-        _nbPolit++ ;
-        break ;
-
-      default:        erreur("Type de formule non prévu dans la base", standardError, 0, GetHandle()) ;
-    }
-
-    // on passe à la formule suivante    formule.lastError = formule.suivant(dbiWRITELOCK) ;
-
-    if ((DBIERR_NONE != formule.lastError) && (DBIERR_EOF != formule.lastError))    {
-      erreur("Erreur d'accès à la formule suivante.", standardError, formule.lastError, GetHandle()) ;
-      formule.close() ;
-			return false ;
-		}
-  } // fin du while
-
-  // on ferme la base Formule
-  formule.lastError = formule.close() ;
-
-	if (DBIERR_NONE != formule.lastError)	{
-		erreur("Impossible de fermer le fichier Formule.", standardError, formule.lastError, GetHandle()) ;
-		return false ;
-	}
-
-  return true ;}
-catch (...)
-{
-	erreur("Exception LettreTypeDialog::InitFormulesArray.", standardError, 0) ;
-	return false ;
-}
-}
-
-voidLettreTypeDialog::RemplaceTags(string& sTexte)
-{
-  string sLang = pContexte->getUserLanguage() ;
-
-	// remplacement du tag [nomPatient]
-	//
-	string sNomLong    = string("") ;
-  string sEpisodusId = string("") ;
-  if (pContexte->getPatient())
-  {
-  	pContexte->getPatient()->fabriqueNomLong() ;
-    sNomLong = pContexte->getPatient()->getNomLong() ;
-  }
-	size_t pos = sTexte.find("[nomPatient]") ;
-	while (NPOS != pos)
-	{
-    sTexte.replace(pos, strlen("[nomPatient]"), sNomLong) ;
-		pos = sTexte.find("[nomPatient]", pos + 1) ;
-  }
-	// remplacement du tag [dateJour]  //  pos = sTexte.find("[dateJour]") ;
-	while (NPOS != pos)
-	{
-  	string sDateJ   = donne_date_duJour() ;
-		string sMessage = donne_date(sDateJ, sLang) ;
-
-		sTexte.replace(pos, strlen("[dateJour]"), sMessage) ;
-
-		pos = sTexte.find("[dateJour]", pos + strlen(sMessage.c_str())) ;
-	}
-}
-
-voidLettreTypeDialog::AfficheIntro()
-{
-	string sTexte = string("") ;
-
-  if (_nbIntro)  {
-    sTexte += ((*_pIntroArray)[_choixIntro])->pDonnees->texte1 ;
-    sTexte += ((*_pIntroArray)[_choixIntro])->pDonnees->texte2 ;
-    sTexte += ((*_pIntroArray)[_choixIntro])->pDonnees->texte3 ;
-    sTexte += ((*_pIntroArray)[_choixIntro])->pDonnees->texte4 ;
-
-    RemplaceTags(sTexte) ;    _sIntro = sTexte ;
-    _pIntro->SetText(sTexte.c_str()) ;
-  }
-  else
-    _pIntro->SetText("<vide>") ;
-}
-
-voidLettreTypeDialog::AfficheCorps()
-{
-	string sTexte = string("") ;
-
-  if (_nbCorps)  {
-    sTexte += ((*_pCorpsArray)[_choixCorps])->pDonnees->texte1 ;
-    sTexte += ((*_pCorpsArray)[_choixCorps])->pDonnees->texte2 ;
-    sTexte += ((*_pCorpsArray)[_choixCorps])->pDonnees->texte3 ;
-    sTexte += ((*_pCorpsArray)[_choixCorps])->pDonnees->texte4 ;
-
-    RemplaceTags(sTexte) ;
-    _sCorps = sTexte ;    _pCorps->SetText(sTexte.c_str()) ;
-  }
-  else
-    _pCorps->SetText("<vide>") ;
-}
-
-voidLettreTypeDialog::AffichePolit()
-{
-	string sTexte = string("") ;
-
-  if (_nbPolit)  {
-    sTexte += ((*_pPolitArray)[_choixPolit])->pDonnees->texte1 ;
-    sTexte += ((*_pPolitArray)[_choixPolit])->pDonnees->texte2 ;
-    sTexte += ((*_pPolitArray)[_choixPolit])->pDonnees->texte3 ;
-    sTexte += ((*_pPolitArray)[_choixPolit])->pDonnees->texte4 ;
-
-    RemplaceTags(sTexte) ;
-    _sPolit = sTexte ;    _pPolit->SetText(sTexte.c_str()) ;
-  }
-  else
-    _pPolit->SetText("<vide>") ;
-}
-
-voidLettreTypeDialog::CmIntroPrec()
-{
-	if (_nbIntro && (_choixIntro >= 0))
-  {
-    _choixIntro--;
-
-    if (_choixIntro < 0)      _choixIntro = _nbIntro - 1 ;
-
-    AfficheIntro() ;  }
-}
-
-voidLettreTypeDialog::CmIntroSuiv()
-{
-	if (_nbIntro && (_choixIntro >= 0))
-  {
-    _choixIntro++ ;
-
-    if (_choixIntro == _nbIntro)      _choixIntro = 0 ;
-
-    AfficheIntro() ;  }
-}
-
-voidLettreTypeDialog::CmCorpsPrec()
-{
-	if (_nbCorps && (_choixCorps >= 0))
-  {
-    _choixCorps-- ;
-
-    if (_choixCorps < 0)      _choixCorps =  _nbCorps - 1 ;
-
-    AfficheCorps() ;  }
-}
-
-voidLettreTypeDialog::CmCorpsSuiv()
-{
-	if (_nbCorps && (_choixCorps >= 0))
-  {
-    _choixCorps++ ;
-
-    if (_choixCorps == _nbCorps)      _choixCorps = 0 ;
-
-    AfficheCorps() ;  }
-}
-
-voidLettreTypeDialog::CmPolitPrec()
-{
-	if (_nbPolit && (_choixPolit >= 0))
-  {
-    _choixPolit-- ;
-
-    if (_choixPolit < 0)      _choixPolit = _nbPolit - 1 ;
-
-    AffichePolit() ;  }
-}
-
-voidLettreTypeDialog::CmPolitSuiv()
-{
-  if (_nbPolit && (_choixPolit >= 0))
-  {
-    _choixPolit++ ;
-
-    if (_choixPolit == _nbPolit)      _choixPolit = 0 ;
-
-    AffichePolit() ;  }
-}
-
-voidLettreTypeDialog::CmClickSansIntro()
-{
-	if (_choixIntro >= 0)
-  {
-    _sIntro = string("") ;
-    _pIntro->SetText("") ;
-    _pSansIntro->Check() ;
-    _choixIntro = -1 ;
-  }
-  else
-  {
-    _choixIntro = 0 ;
-    _pSansIntro->Uncheck() ;
-    AfficheIntro() ;
-  }
-}
-
-voidLettreTypeDialog::CmClickSansCorps()
-{
-	if (_choixCorps >= 0)
-  {
-    _sCorps = string("") ;
-    _pCorps->SetText("") ;
-    _pSansCorps->Check() ;
-    _choixCorps = -1 ;
-  }
-  else
-  {
-    _choixCorps = 0 ;
-    _pSansCorps->Uncheck() ;
-    AfficheCorps() ;
-  }
-}
-
-voidLettreTypeDialog::CmClickSansPolit()
-{
-	if (_choixPolit >= 0)
-  {
-    _sPolit = string("") ;
-    _pPolit->SetText("") ;
-    _pSansPolit->Check() ;
-    _choixPolit = -1 ;
-  }
-  else
-  {
-    _choixPolit = 0 ;
-    _pSansPolit->Uncheck() ;
-    AffichePolit() ;
-  }
-}
-
-voidLettreTypeDialog::CmEditIntro()
-{
-try
-{
-  NSFormuleInfo form ;
-  if (_pSansIntro->GetCheck() == BF_CHECKED)    return ;
-
-  if (_nbIntro)    *(form.pDonnees) = *(((*_pIntroArray)[_choixIntro])->pDonnees) ;
-
-  string sMode = string("") ;
-  CmEditFormule(form.pDonnees, sMode) ;
-  if (string("new") == sMode)  {
-    _pIntroArray->push_back(new NSFormuleInfo(form)) ;
-    _nbIntro++ ;
-    _choixIntro = _nbIntro - 1 ;
-    AfficheIntro() ;
-  }
-  else if (string("mod") == sMode)
-  {
-    *(((*_pIntroArray)[_choixIntro])->pDonnees) = *(form.pDonnees) ;
-    AfficheIntro() ;
-  }
-  else if (string("del") == sMode)
-  {
-    int j = 0 ;
-    if (false == _pIntroArray->empty())
-      for (NSFormuleIter it = _pIntroArray->begin() ; _pIntroArray->end() != it ; j++)      {
-        if (j == _choixIntro)
-        {
-          delete *it ;
-          _pIntroArray->erase(it) ;
-          _nbIntro-- ;
-          break ;
-        }
-        else
-          it++ ;
-      }
-
-    _choixIntro = 0 ;
-    AfficheIntro() ;
-  }
-}
-catch (...)
-{
-	erreur("Exception LettreTypeDialog::CmEditIntro.", standardError, 0) ;
-}
-}
-
-voidLettreTypeDialog::CmEditCorps()
-{
-try
-{
-  if (_pSansCorps->GetCheck() == BF_CHECKED)
-    return ;
-
-  NSFormuleInfo form ;
-  if (_nbCorps)    *(form.pDonnees) = *(((*_pCorpsArray)[_choixCorps])->pDonnees) ;
-
-  string sMode = string("") ;
-  CmEditFormule(form.pDonnees, sMode) ;
-  if (string("new") == sMode)  {
-    _pCorpsArray->push_back(new NSFormuleInfo(form)) ;
-    _nbCorps++ ;
-    _choixCorps = _nbCorps - 1 ;
-    AfficheCorps() ;
-  }
-  else if (string("mod") == sMode)
-  {
-    *(((*_pCorpsArray)[_choixCorps])->pDonnees) = *(form.pDonnees) ;
-    AfficheCorps() ;
-  }
-  else if (string("del") == sMode)
-  {
-    int j = 0 ;
-    if (false == _pCorpsArray->empty())
-      for (NSFormuleIter it = _pCorpsArray->begin() ; _pCorpsArray->end() != it ; j++)
-      {
-        if (j == _choixCorps)
-        {
-          delete *it ;
-          _pCorpsArray->erase(it) ;
-          _nbCorps-- ;
-          break ;
-        }
-        else
-          it++ ;
-      }
-
-    _choixCorps = 0 ;
-    AfficheCorps() ;
-  }
-}
-catch (...)
-{
-	erreur("Exception LettreTypeDialog::CmEditCorps.", standardError, 0) ;
-}
-}
-
-voidLettreTypeDialog::CmEditPolit()
-{
-try
-{
-	if (_pSansPolit->GetCheck() == BF_CHECKED)		return ;
-
-	NSFormuleInfo FormInfo ;
-
-	if (_nbPolit)  	*(FormInfo.pDonnees) = *(((*_pPolitArray)[_choixPolit])->pDonnees) ;
-
-  string sMode = string("") ;
-	CmEditFormule(FormInfo.pDonnees, sMode) ;
-	if (string("new") == sMode)	{
-  	_pPolitArray->push_back(new NSFormuleInfo(FormInfo)) ;
-    _nbPolit++ ;
-    _choixPolit = _nbPolit - 1 ;
-    AffichePolit() ;
-	}
-  else if (string("mod") == sMode)
-  {
-  	*(((*_pPolitArray)[_choixPolit])->pDonnees) = *(FormInfo.pDonnees) ;
-    AffichePolit() ;
-  }
-  else if (string("del") == sMode)
-  {
-    int j = 0 ;
-    if (false == _pPolitArray->empty())
-    	for (NSFormuleIter it = _pPolitArray->begin() ; _pPolitArray->end() != it ; j++)    	{
-    		if (j == _choixPolit)
-      	{
-      		delete *it ;
-        	_pPolitArray->erase(it) ;
-          _nbPolit-- ;
-        	break ;
-      	}
-        else
-          it++ ;
-    	}
-
-    _choixPolit = 0 ;
-    AffichePolit() ;
-  }
-}
-catch (...)
-{
-	erreur("Exception LettreTypeDialog::CmEditPolit.", standardError, 0) ;
-}
-}
-
-voidLettreTypeDialog::CmEditFormule(NSFormuleData* pFormData, string& sMode)
-{
-try
-{
-  LettreTypeEditDialog* pEditDlg = new LettreTypeEditDialog(this, pContexte) ;
-  *(pEditDlg->_pData) = *pFormData ;
-
-  sMode = string("annul") ;
-  if (pEditDlg->Execute() != IDOK)  {    delete pEditDlg ;    return ;  }
-  NSFormule Formule(pContexte->getSuperviseur()) ;
-
-  Formule.lastError = Formule.open() ;
-  if (Formule.lastError != DBIERR_NONE)
-  {
-    erreur("Impossible d'ouvrir le fichier Formule.", standardError, Formule.lastError, GetHandle()) ;
-    delete pEditDlg ;
-    return ;
-  }
-
-  if (pEditDlg->_bNew)  {
-    if (false == Formule.IncrementeCode(&_sLastCode))
-    {
-      erreur("Erreur à l'attribution d'un code formule.", standardError, Formule.lastError, GetHandle()) ;
-      Formule.close() ;
-      delete pEditDlg ;
-      return ;
-    }
-
-    *(Formule.pDonnees) = *(pEditDlg->_pData) ;    strcpy(Formule.pDonnees->code, _sLastCode.c_str()) ;
-
-    Formule.lastError = Formule.appendRecord() ;
-    if (Formule.lastError != DBIERR_NONE)    {
-      erreur("Erreur à l'ajout de la nouvelle formule.", standardError, Formule.lastError, GetHandle()) ;
-      Formule.close() ;
-      delete pEditDlg ;
-      return ;
-    }
-
-    *pFormData = *(pEditDlg->_pData) ;    sMode = "new" ;
-  }
-  else
-  {
-    // Attention la base est indexée sur code + type
-    string sCode = string(pEditDlg->_pData->code) + string(pEditDlg->_pData->type) ;
-
-    // on recherche la fiche dans la base    Formule.lastError = Formule.chercheClef(&sCode,
-                                            "",
-                                            0,
-                                            keySEARCHEQ,
-                                            dbiWRITELOCK) ;
-
-    if (Formule.lastError != DBIERR_NONE)    {
-      erreur("Erreur à la recherche de la formule.", standardError, Formule.lastError, GetHandle()) ;
-      Formule.close() ;
-      delete pEditDlg ;
-      return ;
-    }
-
-    if (pEditDlg->_bDel)    {
-      Formule.lastError = Formule.deleteRecord() ;
-
-      if (Formule.lastError != DBIERR_NONE)      {
-        erreur("Erreur à la destruction de la formule.", standardError, Formule.lastError, GetHandle()) ;
-        Formule.close() ;
-        delete pEditDlg ;
-        return ;
-      }
-
-      sMode = string("del") ;    }
-    else
-    {
-      *(Formule.pDonnees) = *(pEditDlg->_pData) ;
-
-      Formule.lastError = Formule.modifyRecord(TRUE) ;
-      if (Formule.lastError != DBIERR_NONE)      {
-        erreur("Erreur à la modification de la formule.", standardError, Formule.lastError, GetHandle()) ;
-        Formule.close() ;
-        delete pEditDlg ;
-        return ;
-      }
-
-      *pFormData = *(pEditDlg->_pData) ;      sMode = "mod" ;
-    }
-  }
-
-  Formule.lastError = Formule.close() ;
-  if (Formule.lastError != DBIERR_NONE)    erreur("Impossible de fermer le fichier Formule.", standardError, Formule.lastError, GetHandle()) ;
-
-  delete pEditDlg ;
-}
-catch (...)
-{
-	erreur("Exception LettreTypeDialog::CmEditFormule.", standardError, 0) ;
-}
-}
-
-voidLettreTypeDialog::CmOk()
-{
-	TDialog::CmOk() ;
-}
-
-voidLettreTypeDialog::CmCancel()
-{
-	TDialog::CmCancel() ;
-}
-
-// -----------------------------------------------------------------
 //
 //  Méthodes de NSPubliEdit
 //
@@ -1031,9 +291,8 @@ NSPubliEdit::~NSPubliEdit(){
 void
 NSPubliEdit::EvChar(uint key, uint repeatCount, uint flags)
 {
-	UINT 		correspSelect ;
-
-	PubliCorrespDialog* pPCDialog = dynamic_cast<PubliCorrespDialog*>(_pNSUtilDialog) ;	NSPersonInfo* pCorrespSelect = pPCDialog->getSelectedPerson() ;
+	PubliCorrespDialog* pPCDialog = dynamic_cast<PubliCorrespDialog*>(_pNSUtilDialog) ;
+	NSPersonInfo* pCorrespSelect = pPCDialog->getSelectedPerson() ;
 	NSUtilEdit::EvChar(key,repeatCount,flags) ;
 	if (IDC_PUBLIER_NBEXPL == iResId)	{
   	// GetText(sNbExpl, WF_NB_PUBLI_LEN + 1) ;
@@ -1111,12 +370,70 @@ NSChoixPubli::operator=(const NSChoixPubli& src)
   return *this ;
 }
 
+// -----------------------------------------------------------------
+//
+//  Méthodes de BasicPubliCorrespDialog
+//
+// -----------------------------------------------------------------
+DEFINE_RESPONSE_TABLE1(BasicPubliCorrespDialog, NSUtilDialog)
+  EV_COMMAND(IDOK,     CmOk),
+  EV_COMMAND(IDCANCEL, CmCancel),
+END_RESPONSE_TABLE;
+
+BasicPubliCorrespDialog::BasicPubliCorrespDialog(TWindow* pere, NSContexte* pCtx, TResId resID, NSPublication* pPublication)
+                        :NSUtilDialog(pere, pCtx, resID), _aCorrespArray(pCtx->getSuperviseur())
+{
+  _pLettreType = (TLettreType*) 0 ;
+	_pPubli      = pPublication ;
+	_pCorrespBaseArray = &(_pPubli->_aCorrespBaseArray) ;
+}
+
+BasicPubliCorrespDialog::~BasicPubliCorrespDialog()
+{
+  _pPubli            = (NSPublication*) 0 ;  // don't delete
+  _pCorrespBaseArray = (NSPersonArray*) 0 ;  // don't delete
+
+  if (_pLettreType)
+		delete _pLettreType ;
+}
+
+void
+BasicPubliCorrespDialog::SetupWindow()
+{
+	NSUtilDialog::SetupWindow() ;
+}
+
+void
+BasicPubliCorrespDialog::CmOk()
+{
+	if (_pLettreType)
+	{
+		_pLettreType->Close() ;
+
+		delete _pLettreType ;
+    _pLettreType = (TLettreType*) 0 ;
+	}
+
+	TDialog::CmOk() ;}
+
+voidBasicPubliCorrespDialog::CmCancel()
+{
+	if (_pLettreType)
+	{
+		_pLettreType->Close() ;
+
+		delete _pLettreType ;
+    _pLettreType = (TLettreType*) 0 ;
+	}
+
+	TDialog::CmCancel() ;}
+
 // -----------------------------------------------------------------//
 //  Méthodes de PubliCorrespDialog
 //
 // -----------------------------------------------------------------
 
-DEFINE_RESPONSE_TABLE1(PubliCorrespDialog, NSUtilDialog)	EV_CHILD_NOTIFY_AND_CODE(IDC_PUBLIER_CORRESPBOX, LBN_SELCHANGE, CmSelectCorresp),
+DEFINE_RESPONSE_TABLE1(PubliCorrespDialog, BasicPubliCorrespDialog)	EV_CHILD_NOTIFY_AND_CODE(IDC_PUBLIER_CORRESPBOX, LBN_SELCHANGE, CmSelectCorresp),
 	EV_CHILD_NOTIFY_AND_CODE(IDC_PUBLIER_CORRESPBOX, LBN_DBLCLK, CmCorrespDblClk),
 	EV_COMMAND(IDC_PUBLIER_SELECT,        LanceChoixCorrespDialog),
   EV_BN_CLICKED(IDC_PUBLIER_IMPRIMANTE, CmClickImprimante),
@@ -1128,12 +445,10 @@ DEFINE_RESPONSE_TABLE1(PubliCorrespDialog, NSUtilDialog)	EV_CHILD_NOTIFY_AND_CO
   EV_BN_CLICKED(IDC_PUBLIER_LETTRE,     CmLettreType),
   EV_BN_CLICKED(IDC_PUBLIER_PATIENT,    CmAjouterPatient),
   EV_BN_CLICKED(IDC_PUBLIER_BLANK,      CmAjouterBlank),
-  EV_COMMAND(IDOK, CmOk),
-  EV_COMMAND(IDCANCEL, CmCancel),
 END_RESPONSE_TABLE;
 
 PubliCorrespDialog::PubliCorrespDialog(TWindow* pere, NSContexte* pCtx, NSPublication* pPublication)
-                   :NSUtilDialog(pere, pCtx, "IDD_PUBLIER"), _aCorrespArray(pCtx->getSuperviseur())
+                   :BasicPubliCorrespDialog(pere, pCtx, "IDD_PUBLIER", pPublication)
 {
 try
 {
@@ -1152,8 +467,6 @@ try
 	_pPubliPatient = new OWL::TRadioButton(this, IDC_PUBLIER_PATIENT, 0) ;
 	_pPubliBlank   = new OWL::TRadioButton(this, IDC_PUBLIER_BLANK, 0) ;
 
-	_pLettreType   = 0 ;	_pPubli = pPublication ;
-	_pCorrespBaseArray = &(_pPubli->_aCorrespBaseArray) ;
 	pContexte->setAideIndex("hi_doc.htm") ;	pContexte->setAideCorps("h_publi.htm#Phase2") ;
 }
 catch (...)
@@ -1178,9 +491,7 @@ PubliCorrespDialog::~PubliCorrespDialog(){
 	delete _pNbExpl ;
 	delete _pCorrespBox ;
 
-	// le delete de pLettreType est pris en charge par CmOk et CmCancel	_pPubli = 0 ;					  // ne pas deleter
-	_pCorrespBaseArray = 0 ;    // ne pas deleter
-}
+	// le delete de pLettreType est pris en charge par CmOk et CmCancel}
 
 voidPubliCorrespDialog::InitCorrespArray()
 {
@@ -1253,7 +564,7 @@ voidPubliCorrespDialog::AfficheCorresp()
 
 voidPubliCorrespDialog::SetupWindow()
 {
-	NSUtilDialog::SetupWindow() ;
+	BasicPubliCorrespDialog::SetupWindow() ;
 	_pAdresse->FormatLines(true) ;
 
 	//	// Remplissage de CorrespBox avec le NSCorrespArray
@@ -1338,7 +649,9 @@ voidPubliCorrespDialog::AfficheChoixPubli(NSPersonInfo *pCorrespSelect){
     _pNbExpl->SetText("") ;
   }
 
-  _pUrl->SetText(pPubliForP->getMailAddress()) ;
+  string sEnteredUrl = _pUrl->GetText(COR_MESSAGERIE_LEN) ;
+  if (string("") == sEnteredUrl)
+    _pUrl->SetText(pPubliForP->getMailAddress()) ;
 
   if (pPubliForP->wantMail())  {
     if (string("") == pPubliForP->getMailAddress())
@@ -1353,17 +666,32 @@ voidPubliCorrespDialog::AfficheChoixPubli(NSPersonInfo *pCorrespSelect){
 
   // If unchecked and empty, reinitialize with mail
   //
-  if ((_pEmail->GetCheck() != BF_CHECKED) && (string("") == _pUrl->GetText(COR_MESSAGERIE_LEN)))
+  if (_pEmail->GetCheck() != BF_CHECKED)
   {
-    PIDSTYPE iTypePids = pidsCorresp ;
-    if ((pContexte->getPatient()) && (pCorrespSelect->getNss() == pContexte->getPatient()->getNss()))
-      iTypePids = pidsPatient ;
+    if (string("") == _pUrl->GetText(COR_MESSAGERIE_LEN))
+    {
+      PIDSTYPE iTypePids = pidsCorresp ;
+      if ((pContexte->getPatient()) && (pCorrespSelect->getNss() == pContexte->getPatient()->getNss()))
+        iTypePids = pidsPatient ;
 
-    string sEmail = string("") ;
-    pCorrespSelect->getPersonGraph()->trouveEMail(iTypePids, sEmail) ;
-    _pUrl->SetText(sEmail) ;
+      string sEmail = string("") ;
+      if (string("") != pCorrespSelect->getNss())
+      {
+        NSPersonGraphManager* pGraph = pCorrespSelect->getPersonGraph() ;
+        if (pGraph)
+        {
+          pGraph->trouveEMail(iTypePids, sEmail) ;
+          _pUrl->SetText(sEmail) ;
+        }
+      }
 
-    pPubliForP->_sUrl = sEmail ;
+      pPubliForP->_sUrl = sEmail ;
+    }
+    else if (pPubliForP->wantMail())
+    {
+      _pEmail->Check() ;
+      pPubliForP->_sUrl = _pUrl->GetText(COR_MESSAGERIE_LEN) ;
+    }
   }
 
   if (_pIntranet)  {    if (pPubliForP->wantIntranet())      _pIntranet->Check() ;
@@ -1826,35 +1154,15 @@ catch (...)
 }
 }
 
-voidPubliCorrespDialog::CmOk()
-{
-	if (_pLettreType)
-	{
-		_pLettreType->Close() ;
-		delete _pLettreType ;
-	}
-
-	TDialog::CmOk() ;}
-
-voidPubliCorrespDialog::CmCancel()
-{
-	if (_pLettreType)
-	{
-		_pLettreType->Close() ;
-		delete _pLettreType ;
-	}
-
-	TDialog::CmCancel() ;}
-
 NSPersonInfo*
 PubliCorrespDialog::getSelectedPerson()
 {
   if (_aCorrespArray.empty())
 		return (NSChoixPubli*) 0 ;
 
-  _CorrespChoisi = _pCorrespBox->GetSelIndex() ;
+  _iCorrespChoisi = _pCorrespBox->GetSelIndex() ;
 
-	return _aCorrespArray[_CorrespChoisi] ;
+	return _aCorrespArray[_iCorrespChoisi] ;
 }
 
 NSChoixPubli*
@@ -1866,6 +1174,122 @@ PubliCorrespDialog::getSelectedPubli()
     return (NSChoixPubli*) 0 ;
 
   return _pPubli->getChoixPubliForPerson(pCorrespSelect) ;
+}
+// -----------------------------------------------------------------//
+//  Méthodes de NewPubliCorrespDialog
+//
+// -----------------------------------------------------------------
+
+DEFINE_RESPONSE_TABLE1(NewPubliCorrespDialog, BasicPubliCorrespDialog)END_RESPONSE_TABLE;
+
+NewPubliCorrespDialog::NewPubliCorrespDialog(TWindow* pere, NSContexte* pCtx, NSPublication* pPublication)
+                      :BasicPubliCorrespDialog(pere, pCtx, "IDD_PUBLIER_NEW", pPublication)
+{
+try
+{
+	_pList = new OWL::TListWindow(this, IDC_PUBLIER_CORRESPBOX) ;
+
+	pContexte->setAideIndex("hi_doc.htm") ;	pContexte->setAideCorps("h_publi.htm#Phase2") ;
+}
+catch (...)
+{
+	erreur("Exception PubliCorrespDialog ctor.", standardError, 0) ;
+}
+}
+
+NewPubliCorrespDialog::~NewPubliCorrespDialog(){
+	delete _pList ;
+}
+
+voidNewPubliCorrespDialog::InitCorrespArray()
+{
+try
+{
+	_aCorrespArray.vider() ;
+
+	if (_pCorrespBaseArray->empty())
+		return ;
+
+	for (NSPersonIter i = _pCorrespBaseArray->begin() ; _pCorrespBaseArray->end() != i ; i++)
+    _aCorrespArray.push_back(new NSPersonInfo(**i)) ;}
+catch (...)
+{
+  pContexte->traceAndDisplayError(string("Exception PubliCorrespDialog::InitCorrespArray")) ;
+}
+}
+
+voidNewPubliCorrespDialog::DisplayCorresps()
+{
+	// on reprend le tableau à chaque coup à cause des changements de sélection
+  //
+	InitCorrespArray() ;
+
+	// on vide la liste si elle contient des items  //	// if (_pList->GetCount())
+		_pList->DeleteAllItems() ;
+
+	if (_aCorrespArray.empty())    return ;
+  for (NSPersonIter i = _aCorrespArray.begin() ; _aCorrespArray.end() != i ; i++)
+  {
+    // on remplit la CorrespListView
+    if (string("") == (*i)->getNss())
+    {
+      string sBlankAddressText = pContexte->getSuperviseur()->getText("publishingManagement", "blankAddress") ;
+      TListWindItem Item(sBlankAddressText.c_str(), 0) ;
+      _pList->InsertItem(Item) ;
+    }
+    else
+    {
+      string sCorresp = (*i)->getNom() + string(" ") + (*i)->getPrenom() ;
+      TListWindItem Item(sCorresp.c_str(), 0) ;
+      _pList->InsertItem(Item) ;
+    }
+  }
+}
+
+void
+NewPubliCorrespDialog::DisplayParams()
+{
+  if (_aCorrespArray.empty())
+    return ;
+  int iLine = 0 ;
+
+  for (NSPersonIter i = _aCorrespArray.begin() ; _aCorrespArray.end() != i ; i++)
+  {
+    RECT rect = {0} ;
+    ListView_GetSubItemRect(_pList->Handle, iLine, 1, LVIR_BOUNDS, &rect);
+    OWL::TRadioButton* pSelectionRadBut = new OWL::TRadioButton((TWindow*) _pList, 100 + iLine, "", rect.left, rect.top, rect.left - rect.right, rect.bottom - rect.top) ;
+    iLine++ ;
+  }
+}
+
+voidNewPubliCorrespDialog::SetupWindow()
+{
+	BasicPubliCorrespDialog::SetupWindow() ;
+
+	//	// Remplissage de CorrespListView avec le NSCorrespArray
+	//
+	DisplayCorresps() ;
+  DisplayParams() ;
+}
+
+void
+NewPubliCorrespDialog::SetupColumns()
+{
+  string sCorrName  = pContexte->getSuperviseur()->getText("publishingInterface", "publishTo") ;
+  string sSelected  = pContexte->getSuperviseur()->getText("publishingInterface", "selected") ;
+  string sLetter    = pContexte->getSuperviseur()->getText("publishingInterface", "letter") ;
+  string sToPrinter = pContexte->getSuperviseur()->getText("publishingInterface", "printer") ;
+  string sToMail    = pContexte->getSuperviseur()->getText("publishingInterface", "eMail") ;
+  string sHtmlFile  = pContexte->getSuperviseur()->getText("publishingInterface", "htmlFile") ;
+  string sPdfFile   = pContexte->getSuperviseur()->getText("publishingInterface", "pdfFile") ;
+
+  _pList->InsertColumn(0, TListWindColumn((char*)sCorrName.c_str(), 300, TListWindColumn::Left, 0)) ;
+  _pList->InsertColumn(1, TListWindColumn((char*)sSelected.c_str(),  20, TListWindColumn::Center, 1)) ;
+  _pList->InsertColumn(2, TListWindColumn((char*)sLetter.c_str(),   100, TListWindColumn::Left, 2)) ;
+  _pList->InsertColumn(3, TListWindColumn((char*)sToPrinter.c_str(), 50, TListWindColumn::Left, 3)) ;
+  _pList->InsertColumn(4, TListWindColumn((char*)sToMail.c_str(),   300, TListWindColumn::Left, 4)) ;
+  _pList->InsertColumn(5, TListWindColumn((char*)sHtmlFile.c_str(),  80, TListWindColumn::Left, 5)) ;
+  _pList->InsertColumn(6, TListWindColumn((char*)sPdfFile.c_str(),   80, TListWindColumn::Left, 6)) ;
 }
 // -----------------------------------------------------------------//
 //  Méthodes de PubliSansCorrespDialog
@@ -2458,12 +1882,12 @@ NSPublication::NSPublication(NSPatientChoisi* pPatientChoisi,
 	// Patient en cours
 	_pPatChoisi          = pPatientChoisi ;
 	_pDocMaitre          = pDocEnCours ;
-  _pDocMaitreLdv       = 0 ;
+  _pDocMaitreLdv       = (NSLdvDocument*) 0 ;
 	_bImpressionEnCours  = false ;
 
 	// Paramètres de tempo.dat	_bUseHook            = false ;
 	_bWaitImp            = false ;
-	_iTempImp            = 0 ;  //  _pXSMTP              = (TIndySMTP*) 0 ;  _pMapiSMTP           = (NSMapiCtrl*) 0 ;  _pLdvPubliDriver    = (NSLdvPubli*) 0 ;
+	_iTempImp            = 0 ;  //  _pXSMTP              = (TIndySMTP*) 0 ;  _pMapiSMTP           = (NSMapiCtrl*) 0 ;  _pLdvPubliDriver     = (NSLdvPubli*) 0 ;
   // NSChoixPubli has no constructor... so let's make sure there is some initialization
 	for (int i = 0 ; i < MAXSELECT ; i++)
 	{
@@ -2754,29 +2178,29 @@ catch (...)
 #ifndef N_TIERS
 boolNSPublication::RemplitWorkflow()
 {
-    for (int i = 0; i < MAXSELECT; i++)
+  for (int i = 0; i < MAXSELECT; i++)
+  {
+    if (aChoixPubli[i].select)
     {
-   	    if (aChoixPubli[i].select)
-        {
-            if (aChoixPubli[i].imprimante)
-         	    AppendWorkflow(aChoixPubli[i].corresp, "I", aChoixPubli[i].nb_expl,
-            				                entetePubli("I"), tempPubli("I"));
+      if (aChoixPubli[i].imprimante)
+        AppendWorkflow(aChoixPubli[i].corresp, "I", aChoixPubli[i].nb_expl,
+            				                entetePubli("I"), tempPubli("I")) ;
 
-            if (aChoixPubli[i].email)
-         	    AppendWorkflow(aChoixPubli[i].corresp, "E", "1",
-            				                entetePubli("E"), tempPubli("E"));
+      if (aChoixPubli[i].email)
+        AppendWorkflow(aChoixPubli[i].corresp, "E", "1",
+            				                entetePubli("E"), tempPubli("E")) ;
 
-            if (aChoixPubli[i].intranet)
-         	    AppendWorkflow(aChoixPubli[i].corresp, "R", "1",
-            				                entetePubli("R"), tempPubli("R"));
+      if (aChoixPubli[i].intranet)
+        AppendWorkflow(aChoixPubli[i].corresp, "R", "1",
+            				                entetePubli("R"), tempPubli("R")) ;
 
-            if (aChoixPubli[i].html)
-         	    AppendWorkflow(aChoixPubli[i].corresp, "H", "1",
-            				                entetePubli("H"), tempPubli("H"));
-        }
+      if (aChoixPubli[i].html)
+        AppendWorkflow(aChoixPubli[i].corresp, "H", "1",
+            				                entetePubli("H"), tempPubli("H")) ;
     }
+  }
 
-    return true;
+  return true ;
 }
 #endif
 
@@ -2917,7 +2341,7 @@ stringNSPublication::NomCorresp(string sCodeCorresp)
 	{
 		sNom = pCorrespSelect->getPrenom() ;
 		if (string("") != sNom)    	sNom += string(" ") ;		sNom += pCorrespSelect->getNom() ;	}	else // cas, par exemple, de l'impression sans correspondant
-		sNom = "XXX" ;
+		sNom = string("XXX") ;
 
 	return sNom ;}
 
@@ -3650,11 +3074,11 @@ boolNSPublication::SendMail(string sPathHtml, int index)
 {
 try
 {
-  string sNomDoc ;
-  string sFichierHtml ;
-  string sFichierImage ;
+  string sNomDoc       = string("") ;
+  string sFichierHtml  = string("") ;
+  string sFichierImage = string("") ;
 
-  NSBaseImages* pBase ;
+  NSBaseImages* pBase = (NSBaseImages*) 0 ;
 
   // generation du compte-rendu à la bonne adresse  //  string sEMail      = string("") ;  string sCodeLettre = string("") ;  string sNomHtml    = string("") ;  string sAdrCorresp = string("") ;  if (false == GetMailAndLetter(sEMail, sCodeLettre, sNomHtml, sAdrCorresp, index))    return false ;  string sNameExp     = string("") ;
   string sMailExp     = string("") ;
@@ -3830,15 +3254,17 @@ NSPublication::SendMapiMail(string sPathHtml, int index)
 {
 try
 {
-	string sAdrCorresp = string("") ;
-  string sNomHtml ;
-  string sNomDoc ;
-  string sFichierHtml ;
-  string sFichierImage ;
-  string sEMail ;
-  string sCodeLettre = "" ;
+	string sAdrCorresp   = string("") ;
+  string sNomHtml      = string("") ;
+  string sNomDoc       = string("") ;
+  string sFichierHtml  = string("") ;
+  string sFichierImage = string("") ;
+  string sEMail        = string("") ;
+  string sCodeLettre   = string("") ;
+
   char   nomFichHtml[1024] ;
-  NSBaseImages* pBase ;
+
+  NSBaseImages* pBase = (NSBaseImages*) 0 ;
 
   // generation du compte-rendu à la bonne adresse  // Correspondant  //  if (index >= 0)
   {

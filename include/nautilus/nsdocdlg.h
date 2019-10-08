@@ -24,33 +24,33 @@ class EnregDocDialog : public NSUtilDialog
 {
 	public:
 
-		NSDocumentData  *pDocData ;
+		NSDocumentData      *_pDocData ;
 
-		TEdit           *pNomDoc ;
-		NSUtilEditDateHeure *pDateCreation ;
-		TRadioButton    *pHistorique ;
-		TComboBox       *pChemiseBox ;
-		TGroupBox       *pInteretGroup ;
-		TVSlider        *pImportance ;
-		TButton         *pNSSlider0P ;
-		TButton         *pNSSlider1P ;
-		TButton         *pNSSlider2P ;
-		TButton         *pNSSlider3P ;
-		TButton         *pNSSlider4P ;
-		TEdit           *pCommentaire ;
-		NSRosaceGroupBox *pRosaceGroup ;
-    TCheckBox				 *_synchro_check ; // Checkbox pour dire que l'objet est synchronisable
-    TCheckBox				 *_note_check ;    // CheckBox pour dire que l'objet est une note personnelle
+		TEdit               *_pNomDoc ;
+		NSUtilEditDateHeure *_pDateCreation ;
+		TRadioButton        *_pHistorique ;
+		TComboBox           *_pChemiseBox ;
+		TGroupBox           *_pInteretGroup ;
+		TVSlider            *_pImportance ;
+		TButton             *_pNSSlider0P ;
+		TButton             *_pNSSlider1P ;
+		TButton             *_pNSSlider2P ;
+		TButton             *_pNSSlider3P ;
+		TButton             *_pNSSlider4P ;
+		TEdit               *_pCommentaire ;
+		NSRosaceGroupBox    *_pRosaceGroup ;
+    TCheckBox				    *_synchro_check ; // Checkbox pour dire que l'objet est synchronisable
+    TCheckBox				    *_note_check ;    // CheckBox pour dire que l'objet est une note personnelle
 
-		NSChemiseArray  *pChemisesArray ;
+		NSChemiseArray      *_pChemisesArray ;
 
-		int        	  	creation ;
+		int        	  	    _creation ;
 
-		int 		   			ChemiseChoisie ;
-		char            *pCodeChemiseChoisie ;
+		int 		   			    _ChemiseChoisie ;
+		char                *_pCodeChemiseChoisie ;
 
-		string					sRightsString ;
-		NSRosace* 		 	pRosace ;
+		string					    _sRightsString ;
+		NSRosace* 		 	    _pRosace ;
 
 		EnregDocDialog(TWindow *, NSDocumentData *, char *, string sRights, NSContexte *pCtx) ;
 		~EnregDocDialog() ;
@@ -81,6 +81,7 @@ class EnregDocDialog : public NSUtilDialog
 class NomChemiseDialog : public NSUtilDialog
 {
  public:
+
   TEdit         *pNomChem ;
   TRadioButton  *pChemDefaut ;
   TRadioButton  *pChemNew ;
@@ -102,8 +103,6 @@ class NomChemiseDialog : public NSUtilDialog
   DECLARE_RESPONSE_TABLE(NomChemiseDialog) ;
 } ;
 
-
-
 // -----------------------------------------------------------------------------
 //
 // dialogue utilisé pour créer un nouveau Séjour
@@ -112,6 +111,7 @@ class NomChemiseDialog : public NSUtilDialog
 class CreerSejourDialog : public NSUtilDialog
 {
  public:
+
   TEdit           *pNumSejour ;
   TEdit           *pNumUF ;
   NSUtilEditDate  *pDateDeb ;
@@ -133,8 +133,6 @@ class CreerSejourDialog : public NSUtilDialog
   DECLARE_RESPONSE_TABLE(CreerSejourDialog) ;
 } ;
 
-
-
 // -----------------------------------------------------------------------------
 //
 // Classe ListeSejoursDialog -> Séjours du patient
@@ -143,6 +141,7 @@ class CreerSejourDialog : public NSUtilDialog
 class ListeSejoursDialog : public NSUtilDialog
 {
  public:
+
   OWL::TListBox   *pListe ;
 
   string          sEnCours ;
