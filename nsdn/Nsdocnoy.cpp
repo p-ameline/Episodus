@@ -1139,11 +1139,22 @@ try
 #ifndef _ENTERPRISE_DLL
 	if (bVerbose)
 	{
-		EnregDocDialog enregDocDlg(pContexte->GetMainWindow(), &DocData,
-                                            sNumChemise, sRights, pContexte) ;
-		int retVal = enregDocDlg.Execute() ;
+    int iRetVal = 0 ;
 
-		if (IDCANCEL == retVal)			return false ;
+    if (string("") != DocData._sTypeContenu)
+    {
+		  EnregDocDialog enregDocDlg(pContexte->GetMainWindow(), &DocData,
+                                            sNumChemise, sRights, pContexte) ;
+		  iRetVal = enregDocDlg.Execute() ;
+    }
+    else
+    {
+		  EnregDocDialogCombo enregDocDlg(pContexte->GetMainWindow(), &DocData,
+                                            sNumChemise, sRights, pContexte) ;
+		  iRetVal = enregDocDlg.Execute() ;
+    }
+
+		if (IDCANCEL == iRetVal)			return false ;
 
     pDoc->setData(&DocData) ;
 	}
@@ -1159,8 +1170,9 @@ try
 		  //
 		  enregDocDlg.RemplirChemises() ;
 
-		  if (false == enregDocDlg._aChemisesArray.empty())		  {
-			  NSChemiseInfo* pChemInfo = enregDocDlg._aChemisesArray.back() ;
+      NSChemiseArray* pChemisesArray = enregDocDlg.getChemisesArray() ;
+		  if (pChemisesArray && (false == pChemisesArray->empty()))		  {
+			  NSChemiseInfo* pChemInfo = pChemisesArray->back() ;
 			  sNumChemise = pChemInfo->_sNodeChemise ;
 		  }
 

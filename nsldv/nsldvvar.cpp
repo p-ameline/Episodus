@@ -2657,7 +2657,7 @@ NSSimpleNewDrugDlg::createInterfaceElements()
   _pDureePhase->getEditNum()->SetLostFocusResponse(new MemFunctor<NSSimpleNewDrugDlg>( (NSSimpleNewDrugDlg*)this, &NSSimpleNewDrugDlg::ActualisePhase )) ;
   _pDureePhase->getUpDown()->SetLostFocusResponse(new MemFunctor<NSSimpleNewDrugDlg>( (NSSimpleNewDrugDlg*)this, &NSSimpleNewDrugDlg::ActualisePhase )) ;
 
-  char *temp[] = {"2HEUR1", "2DAT01", "2DAT11", "2DAT21"} ;
+  const char *temp[] = { "2HEUR1", "2DAT01", "2DAT11", "2DAT21" } ;
   _pCBDureePhase          = new NSComboBox(this, PRESCR_DURA_UNIT, pContexte, temp, 4) ;
   _pCBDureePhase->SetLostFocusResponse(new MemFunctor<NSSimpleNewDrugDlg>( (NSSimpleNewDrugDlg*)this, &NSSimpleNewDrugDlg::ActualisePhase ));
 	_pRenouvellementTxt     = new OWL::TStatic(this, PRESCR_RENEW_TXT) ;
@@ -6537,7 +6537,7 @@ try
 	pNbJoursTxt = new OWL::TStatic(this, IDR_DRG_DANS) ;
   pNbJours    = new NSEditNum(pContexte, this, IDC_DRG_NBJOURS, 10) ;
 
-  char *temp1[] = {"2HEUR1", "2DAT01", "2DAT11", "2DAT21", "2DAT31"} ;
+  const char *temp1[] = { "2HEUR1", "2DAT01", "2DAT11", "2DAT21", "2DAT31" } ;
 
   int iArraySize   = sizeof(temp1) ;
   int iElementSize = sizeof(temp1[0]) ;

@@ -141,19 +141,22 @@ typedef TDllLoader<NSRichEditModule> NSRichEditDll;
 
 */
 
-class _NSBBCLASSE NSRichEdit : public OWL::TRichEdit // public OWL::TEditFile
+class _NSBBCLASSE NSRichEdit : public OWL::TRichEdit, public NSRoot // public OWL::TEditFile
 {
   public:
 
-    NSRichEdit(TWindow*        parent,
+    NSRichEdit(NSContexte*     pCtx,
+               TWindow*        parent,
                int             id,
                const char far* text,
                int x, int y, int w, int h,
-               const char far* fileName = 0,
-               TModule*        module = 0) ;
-    NSRichEdit(TWindow*   parent,
-               int        resourceId,
-               TModule*   module = 0) ;
+               const char far* fileName = (char*) 0,
+               TModule*        module = (TModule*) 0) ;
+
+    NSRichEdit(NSContexte* pCtx,
+               TWindow*    parent,
+               int         resourceId,
+               TModule*    module = (TModule*) 0) ;
 
     void    ReplaceText(const size_t iStart, const size_t iLen, const string sNewText) ;
 
@@ -266,17 +269,17 @@ class _NSBBCLASSE NSRichEdit : public OWL::TRichEdit // public OWL::TEditFile
 
     // Override TEditFile's I/O
     //
-    bool    Read(const char far* fileName=0);
-    bool    Write(const char far* fileName=0);
+    bool    Read(const char far* fileName = (char*) 0) ;
+    bool    Write(const char far* fileName = (char*) 0) ;
 
-    bool    ReadFromStream(istream&, uint format = SF_RTF);
-    bool    WriteToStream(ostream&, uint format = SF_RTF);
+    DWORD   ReadFromStream(istream&, uint format = SF_RTF) ;
+    DWORD   WriteToStream(ostream&, uint format = SF_RTF) ;
 
   protected:
 
     // Data format of control
     //
-    uint    Format;
+    uint    _iFormat ;
 
     // Command response functions
     //
@@ -342,14 +345,14 @@ class _NSBBCLASSE NSRichEdit : public OWL::TRichEdit // public OWL::TEditFile
   DECLARE_RESPONSE_TABLE(NSRichEdit);
 };
 
-class _NSBBCLASSE ConvertRTFDialog : public TDialog
+class _NSBBCLASSE ConvertRTFDialog : public NSUtilDialog
 {
   public:
 
     NSRichEdit *_pRichEdit ;
     string      _sFileName ;
 
-    ConvertRTFDialog(TWindow *pere, string sFileName) ;
+    ConvertRTFDialog(NSContexte* pCtx, TWindow *pere, string sFileName) ;
     ~ConvertRTFDialog() ;
 
     void SetupWindow() ;

@@ -34,52 +34,58 @@ class _NSBBCLASSE NSComboBox : public OWL::TComboBox, NSRoot
     // TWindow *parent                : fenetre parent
     // NSContexte *pCtx               : contexte
     // VecteurString *pVecteurString  : vecteur contenant les codes lexiques
-    NSComboBox(TWindow *parent, int resId, NSContexte *pCtx, VecteurString *pVecteurString = NULL) ;
-    NSComboBox(TWindow *parent, int Id, NSContexte *pCtx, int x, int y, int w, int h, uint32 style, VecteurString *pVecteurString = NULL) ;
+    NSComboBox(TWindow *parent, int resId, NSContexte *pCtx, const VecteurString *pVecteurString = (VecteurString*) NULL, bool bAddNoChoice = false) ;
+    NSComboBox(TWindow *parent, int Id, NSContexte *pCtx, int x, int y, int w, int h, uint32 style, const VecteurString *pVecteurString = (VecteurString*) NULL, bool bAddNoChoice = false) ;
 
     // Constructeur par vecteur sémantique VectString (défini dans divfct.h)
     // TWindow *parent                : fenetre parent
     // NSContexte *pCtx               : contexte
     // VecteurString *pVecteurString  : vecteur contenant les codes lexiques
-    NSComboBox(TWindow *parent, int resId, NSContexte *pCtx, VectString *pVectString = NULL) ;
-    NSComboBox(TWindow *parent, int Id, NSContexte *pCtx, int x, int y, int w, int h, uint32 style, VectString *pVectString = NULL) ;
+    NSComboBox(TWindow *parent, int resId, NSContexte *pCtx, const VectString *pVectString = (VectString*) NULL, bool bAddNoChoice = false) ;
+    NSComboBox(TWindow *parent, int Id, NSContexte *pCtx, int x, int y, int w, int h, uint32 style, const VectString *pVectString = (VectString*) NULL, bool bAddNoChoice = false) ;
 
     // Constructeur par tableau
     // TWindow *parent                : fenetre parent
     // NSContexte *pCtx               : contexte
     // char *input[]                  : tableau contenant les codes lexiques
-    NSComboBox(TWindow *parent, int resId, NSContexte *pCtx, char *input[], int iInputSize) ;               // Constructeur
-    NSComboBox(TWindow *parent, int Id, NSContexte *pCtx, int x, int y, int w, int h, uint32 style, char *input[], int iInputSize) ;
+    NSComboBox(TWindow *parent, int resId, NSContexte *pCtx, const char *input[], int iInputSize, bool bAddNoChoice = false) ;               // Constructeur
+    NSComboBox(TWindow *parent, int Id, NSContexte *pCtx, int x, int y, int w, int h, uint32 style, const char *input[], int iInputSize, bool bAddNoChoice = false) ;
     ~NSComboBox() ;                                                                                       // Destructeur
 
     void   SetupWindow() ;
 
     string getSelCode() ;
-    void   setCode(string sValue) ;
+    void   setCode(const string sValue) ;
 
     void   EvKeyUp(uint key, uint repeatCount, uint flags) ;
     void   EvKeyDown(uint key, uint repeatCount, uint flags) ;
     uint   EvGetDlgCode(MSG far* msg);
 
-    bool   isVisible();
-    void   AddLexiqueCode(char *temp);         // Ajoute un code au lexique
-    void   AddLexiqueCode(std::string& temp);  // Ajoute un code au lexique
+    bool   isVisible() ;
+    bool   isEmpty() { return _aLexiqCodes.empty() ; }
+    void   AddLexiqueCode(const char *temp);         // Ajoute un code au lexique
+    void   AddLexiqueCode(const std::string& temp);  // Ajoute un code au lexique
 
-    void   SetLostFocusResponse(Functor* temp) {_LostFocusResponse = temp; } // Ajoute une reponse a la perte de focus
+    void   SetLostFocusResponse(Functor* temp) {_LostFocusResponse = temp ; } // Ajoute une reponse a la perte de focus
     void   EvKillFocus(HWND hWndGetFocus); // Fonction gerant la perte de focus
+
+    // Init or reload
+    //
+    void initLexiqCodes(const VecteurString *pVecteurString) ;
+    void initLexiqCodes(const VectString *pVectString) ;
+    void initLexiqCodes(const char *input[], int iInputSize) ;
 
   protected:
 
     Functor       *_LostFocusResponse ;
-    VecteurString *_pLexiqCodes ;  // code contenant les termes lexiques
+    VecteurString _aLexiqCodes ;  // code contenant les termes lexiques
     string        _sCode ;         //
     bool          _bWinStd ;       //
     TWindow       *_pDlgParent ;   // Parent de la combo
+    bool          _bAddNoChoice ;
 
     void initCommonData() ;
-    void initLexiqCodes(VecteurString *pVecteurString) ;
-    void initLexiqCodes(VectString *pVectString) ;
-    void initLexiqCodes(char *input[], int iInputSize) ;
+
 
   DECLARE_RESPONSE_TABLE(NSComboBox) ;
 } ;

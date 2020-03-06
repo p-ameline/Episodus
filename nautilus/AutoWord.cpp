@@ -2,6 +2,7 @@
 #pragma hdrstop
 
 #include "AutoWord.h"
+#include "nsbb\nsutidlg.h"
 #include "nautilus\nsttx.h"
 
 //---------------------------------------------------------------------------#pragma package(smart_init)

@@ -158,7 +158,7 @@ NSSuper::NSSuper()
 {
 try
 {
-	sNumVersion         = string("5.14.0040") ;
+	sNumVersion         = string("5.14.0056") ;
   _numInstance        = 0 ;
 	_pSuperContext      = (NSContexte*) 0 ;
   _bJavaOk            = false ;

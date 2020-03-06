@@ -164,4 +164,166 @@ NsFileExists(const std::string sFileName)
   }
   return string("") ;
 }
-
+string getFileError(){  return string(strerror(errno)) ;}string getErrorText(LONG lOsErr){  // NT Error codes	switch ((UINT)lOsErr)
+	{
+    case NO_ERROR:
+      return string("") ;
+    case ERROR_FILE_NOT_FOUND:
+      return string("File not found") ;
+    case ERROR_PATH_NOT_FOUND:
+      return string("Path not found") ;
+    case ERROR_TOO_MANY_OPEN_FILES:
+      return string("Too many open files") ;
+    case ERROR_ACCESS_DENIED:
+      return string("Access denied") ;
+    case ERROR_INVALID_HANDLE:
+      return string("Invalid handle") ;
+    case ERROR_BAD_FORMAT:
+      return string("Bad format");
+    case ERROR_INVALID_ACCESS:
+      return string("Invalid access");
+    case ERROR_INVALID_DRIVE:
+      return string("Invalid drive");
+    case ERROR_CURRENT_DIRECTORY:
+      return string("Remove current directory");
+    case ERROR_NOT_SAME_DEVICE:
+      return string("Bad path, not same device");
+    case ERROR_NO_MORE_FILES:
+      return string("File not found, no more file");
+    case ERROR_WRITE_PROTECT:
+      return string("Access denied, write protect");
+    case ERROR_BAD_UNIT:
+      return string("Bad unit");
+    case ERROR_NOT_READY:
+      return string("Not ready");
+    case ERROR_BAD_COMMAND:
+      return string("Bad command");
+    case ERROR_CRC:
+      return string("Wrong CRC");
+    case ERROR_BAD_LENGTH:
+      return string("Bad length");
+    case ERROR_SEEK:
+      return string("Bad seek");
+    case ERROR_NOT_DOS_DISK:
+      return string("Not DOS disk");
+    case ERROR_SECTOR_NOT_FOUND:
+      return string("Sector not found");
+    case ERROR_WRITE_FAULT:
+      return string("Write fault");
+    case ERROR_READ_FAULT:
+      return string("Read fault");
+    case ERROR_SHARING_VIOLATION:
+      return string("Sharing violation");
+    case ERROR_LOCK_VIOLATION:
+      return string("Lock violation");
+    case ERROR_WRONG_DISK:
+      return string("Wrong disk");
+    case ERROR_SHARING_BUFFER_EXCEEDED:
+      return string("Sharing buffer exceeded");
+    case ERROR_HANDLE_EOF:
+      return string("Handle end of file");
+    case ERROR_HANDLE_DISK_FULL:
+      return string("Disk full");
+    case ERROR_DUP_NAME:
+      return string("Duplicate name");
+    case ERROR_BAD_NETPATH:
+      return string("Bad net path");
+    case ERROR_NETWORK_BUSY:
+      return string("Network busy");
+    case ERROR_DEV_NOT_EXIST:
+      return string("Dev not exist");
+    case ERROR_ADAP_HDW_ERR:
+      return string("Adap hdw error");
+    case ERROR_BAD_NET_RESP:
+      return string("Bad net resp");
+    case ERROR_UNEXP_NET_ERR:
+      return string("Unexpected network error");
+    case ERROR_BAD_REM_ADAP:
+      return string("Bad rem adap");
+    case ERROR_NO_SPOOL_SPACE:
+      return string("No spool space");
+    case ERROR_NETNAME_DELETED:
+      return string("Netname deleted");
+    case ERROR_NETWORK_ACCESS_DENIED:
+      return string("Network access denied");
+    case ERROR_BAD_DEV_TYPE:
+      return string("Bad dev type");
+    case ERROR_BAD_NET_NAME:
+      return string("Bad net name");
+    case ERROR_TOO_MANY_NAMES:
+      return string("Too many names");
+    case ERROR_SHARING_PAUSED:
+      return string("Sharing paused");
+    case ERROR_REQ_NOT_ACCEP:
+      return string("Req not accep") ;
+    case ERROR_FILE_EXISTS:
+      return string("File exists");
+    case ERROR_CANNOT_MAKE:
+      return string("Cannot make");
+    case ERROR_ALREADY_ASSIGNED:
+      return string("Already assigned") ;
+    case ERROR_INVALID_PASSWORD:
+      return string("Invalid password");
+    case ERROR_NET_WRITE_FAULT:
+      return string("Network write fault");
+    case ERROR_DISK_CHANGE:
+      return string("Disk change");
+    case ERROR_DRIVE_LOCKED:
+      return string("Drive locked");
+    case ERROR_BUFFER_OVERFLOW:
+      return string("Buffer overflow") ;
+    case ERROR_DISK_FULL:
+      return string("Disk full");
+    case ERROR_NO_MORE_SEARCH_HANDLES:
+      return string("No more search handles") ;
+    case ERROR_INVALID_TARGET_HANDLE:
+      return string("Invalid target handle") ;
+    case ERROR_INVALID_CATEGORY:
+      return string("Invalid category") ;
+    case ERROR_INVALID_NAME:
+      return string("Invalid name") ;
+    case ERROR_INVALID_LEVEL:
+      return string("Invalid level") ;
+    case ERROR_NO_VOLUME_LABEL:
+      return string("No volume label") ;
+    case ERROR_NEGATIVE_SEEK:
+      return string("Negative seek") ;
+    case ERROR_SEEK_ON_DEVICE:
+      return string("Seek on device") ;
+    case ERROR_DIR_NOT_ROOT:
+      return string("Directory not found") ;
+    case ERROR_DIR_NOT_EMPTY:
+      return string("Directory not empty") ;
+    case ERROR_LABEL_TOO_LONG:
+      return string("Label too long") ;
+    case ERROR_BAD_PATHNAME:
+      return string("Bad path name") ;
+    case ERROR_LOCK_FAILED:
+      return string("Lock failed") ;
+    case ERROR_BUSY:
+      return string("Busy") ;
+    case ERROR_INVALID_ORDINAL:
+      return string("Invalid ordinal") ;
+    case ERROR_ALREADY_EXISTS:
+      return string("Already exists") ;
+    case ERROR_INVALID_EXE_SIGNATURE:
+      return string("Invalif exe signature") ;
+    case ERROR_BAD_EXE_FORMAT:
+      return string("Bad exe format") ;
+    case ERROR_FILENAME_EXCED_RANGE:
+      return string("Exced range") ;
+    case ERROR_META_EXPANSION_TOO_LONG:
+      return string("Expansion too long") ;
+    case ERROR_DIRECTORY:
+      return string("Bad directory") ;
+    case ERROR_OPERATION_ABORTED:
+      return string("Operation aborted") ;
+    case ERROR_IO_INCOMPLETE:
+      return string("IO incomplete") ;
+    case ERROR_IO_PENDING:
+      return string("IO pending") ;
+    case ERROR_SWAPERROR:
+      return string("Swap error") ;
+    default:
+      return string("") ;
+	}}

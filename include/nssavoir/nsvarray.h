@@ -20,8 +20,10 @@ class BBChemData ;
 //vecteur de string
 
 typedef vector<string*> EquiItem ;
-typedef EquiItem::iterator       EquiItemIter ;
-typedef EquiItem::const_iterator ConstEquiItemIter ;
+
+typedef EquiItem::iterator         EquiItemIter ;
+typedef EquiItem::reverse_iterator ReverseEquiItemIter ;
+typedef EquiItem::const_iterator   ConstEquiItemIter ;
 
 #ifndef __linux__
 class _CLASSELEXI VecteurString : protected EquiItem
@@ -40,17 +42,20 @@ class VecteurString : protected EquiItem
     VecteurString& operator=(const VecteurString& src) ;
     void vider() ;
 
-    bool              empty() const { return vector<string*>::empty() ; }
-    EquiItemIter      begin()       { return vector<string*>::begin() ; }
-    ConstEquiItemIter begin() const { return vector<string*>::begin() ; }
-    EquiItemIter      end()         { return vector<string*>::end() ; }
-    ConstEquiItemIter end() const   { return vector<string*>::end() ; }
-    size_t            size() const  { return vector<string*>::size() ; }
+    bool                empty() const { return vector<string*>::empty() ; }
+    EquiItemIter        begin()       { return vector<string*>::begin() ; }
+    ConstEquiItemIter   begin() const { return vector<string*>::begin() ; }
+    ReverseEquiItemIter rbegin()      { return vector<string*>::rbegin() ; }
+    EquiItemIter        end()         { return vector<string*>::end() ; }
+    ConstEquiItemIter   end() const   { return vector<string*>::end() ; }
+    ReverseEquiItemIter rend()        { return vector<string*>::rend() ; }
+    size_t              size() const  { return vector<string*>::size() ; }
 
     void         erase(EquiItemIter it) { vector<string*>::erase(it) ; }
 
     string       GetLast() const ;
     string       GetElementAt(size_t iIndex) const ;
+    void         SetElementAt(size_t iIndex, const string& sItem) ;
 
     void   AddString(const string& sStr) ;
     void   RemoveString(const string& sStr) ;

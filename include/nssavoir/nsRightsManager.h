@@ -269,8 +269,6 @@ inline void NSRosace::setSynchronalisable(bool s) {_synchro = s; }
 {
   public:
 
-    NSRosace* 		pRosace ;
-
     NSRosaceGroupBox(NSContexte *pCtx, TWindow* parent, int resId, NSRosace* pRose)  ;
     ~NSRosaceGroupBox() ;
 
@@ -287,23 +285,26 @@ inline void NSRosace::setSynchronalisable(bool s) {_synchro = s; }
     void 	ButtonDblClk() ;
     //  void EvTimer(uint timerId) ;
 
-  DECLARE_RESPONSE_TABLE(NSRosaceGroupBox) ;
+    NSRosace* getRosace() { return _pRosace ; }
 
-  public:
+  protected:
 
-  	NSTitleTip*         _pToolTip;      // toolTip
-  	int                 _time;
+    NSRosace* 		      _pRosace ;
+  	NSTitleTip*         _pToolTip ;      // toolTip
+  	int                 _time ;
     NSRightPosition*    _mouse_on ;
    	NS_CLASSLIB::TPoint _pos_tip ;
+
+  DECLARE_RESPONSE_TABLE(NSRosaceGroupBox) ;
 };
 
 class _CLASSELEXI RightsDialog : public NSUtilDialog
 {
   public :
 
-    NSRosace* 			  pRosace ;
-    NSRosaceGroupBox*	pRightsInterface ;
-    string* 	    	  pRightsString ;
+    NSRosace* 			  _pRosace ;
+    NSRosaceGroupBox*	_pRightsInterface ;
+    string* 	    	  _pRightsString ;
 
     RightsDialog(TWindow* pere, NSContexte* pCtx, string* pRightsStr) ;    ~RightsDialog() ;
 

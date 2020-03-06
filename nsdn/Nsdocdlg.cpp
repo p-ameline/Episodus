@@ -40,7 +40,7 @@ END_RESPONSE_TABLE ;
 // -----------------------------------------------------------------------------// Function     : EnregDocDialog::EnregDocDialog()
 // Description  : Constructeur
 // -----------------------------------------------------------------------------
-EnregDocDialog::EnregDocDialog(TWindow *pere, NSDocumentData *pDocuDonnees, string &sCodeChemise, string sRights, NSContexte *pCtx)
+EnregDocDialog::EnregDocDialog(TWindow *pere, NSDocumentData *pDocuDonnees, string &sCodeChemise, const string sRights, NSContexte *pCtx)
                :NSUtilDialog(pere, pCtx, "ID_LDV_NWDOC", pNSResModule)
 {
 try
@@ -48,38 +48,68 @@ try
 	_pDocData 	         = pDocuDonnees ;
 	_pCodeChemiseChoisie = &sCodeChemise ;
 
-	NSHealthTeamMandate* pMdt = (NSHealthTeamMandate*) 0 ;
+  InitializeRosace(sRights) ;
+  CreateControls() ;
+}
+catch (...){
+  erreur("Exception EnregDocDialog ctor.", standardError, 0) ;
+}
+}
 
-  NSHealthTeam* pHT = (NSHealthTeam*) 0 ;
-  if (pCtx->getPatient())
-    pHT = pCtx->getPatient()->getHealthTeam() ;
+// -----------------------------------------------------------------------------
+// Description  : Constructeur pour classes dérivées
+// -----------------------------------------------------------------------------
+EnregDocDialog::EnregDocDialog(TWindow *pere, NSDocumentData *pDocuDonnees, string &sCodeChemise, const string sRights, NSContexte *pCtx, TResId resID)
+               :NSUtilDialog(pere, pCtx, resID, pNSResModule)
+{
+try
+{
+	_pDocData 	         = pDocuDonnees ;
+	_pCodeChemiseChoisie = &sCodeChemise ;
 
-  if (pHT)
-  {
-    NSHealthTeamMember* pHTMember = pHT->getUserAsMember(pCtx) ;
-  	if (pHTMember)
-    {
-    	NSHTMMandateArray aMandates ;
-      pHTMember->getActiveMandates(&aMandates) ;
-    	if (false == aMandates.empty())
-      {
-      	NSHTMMandateIter mandateIter = aMandates.begin() ;
-        pMdt = *mandateIter ;
-        //
-        // We have to empty aMandates in order to avoid mandates deletion
-        //
-        for ( ; aMandates.end() != mandateIter ; )
-        	aMandates.erase(mandateIter) ;
-      }
-    }
-  }
+  InitializeRosace(sRights) ;
+  CreateControls() ;
+}
+catch (...){
+  erreur("Exception EnregDocDialog ctor 2.", standardError, 0) ;
+}
+}
 
-	_sRightsString = sRights ;
-	if (string("") == _sRightsString)
-		_pRosace = new NSRosace(pCtx, pMdt) ;
-	else
-		_pRosace = new NSRosace(pCtx, _sRightsString, pMdt) ;
+NSHealthTeamMandate*
+EnregDocDialog::GetMandate()
+{
+  if (NULL == pContexte->getPatient())
+    return (NSHealthTeamMandate*) 0 ;
 
+  NSHealthTeam* pHT = pContexte->getPatient()->getHealthTeam() ;
+  if ((NSHealthTeam*) NULL == pHT)
+    return (NSHealthTeamMandate*) 0 ;
+
+  NSHealthTeamMember* pHTMember = pHT->getUserAsMember(pContexte) ;
+  if ((NSHealthTeamMember*) NULL == pHTMember)
+    return (NSHealthTeamMandate*) 0 ;
+
+  NSHTMMandateArray aMandates ;
+  pHTMember->getActiveMandates(&aMandates) ;
+  if (aMandates.empty())
+    return (NSHealthTeamMandate*) 0 ;
+
+  NSHTMMandateIter mandateIter = aMandates.begin() ;
+  NSHealthTeamMandate* pMdt = *mandateIter ;
+  //
+  // We have to empty aMandates in order to avoid mandates deletion
+  //
+  for ( ; aMandates.end() != mandateIter ; )
+    aMandates.erase(mandateIter) ;
+
+  return pMdt ;
+}
+
+void
+EnregDocDialog::CreateControls()
+{
+try
+{
   _pNomDoc        = new TEdit(this, IDC_NWDOC_NOM, 1024) ;
   _pType          = new NSUtilLexique(pContexte, this, IDC_NWDOC_TYPE, pContexte->getDico()) ;
   _pDateCreation  = new NSUtilEditDateHeure(pContexte, this,  IDC_NWDOC_CREATION) ;
@@ -99,8 +129,21 @@ try
   _note_check     = new TCheckBox(this, IDC_NOTE);
 }
 catch (...){
-  erreur("Exception EnregDocDialog ctor.", standardError, 0) ;
+  erreur("Exception EnregDocDialog CreateControls.", standardError, 0) ;
 }}
+
+void
+EnregDocDialog::InitializeRosace(const string sRights)
+{
+  NSHealthTeamMandate* pMdt = GetMandate() ;
+
+  _sRightsString = sRights ;
+
+	if (string("") == _sRightsString)
+		_pRosace = new NSRosace(pContexte, pMdt) ;
+	else
+		_pRosace = new NSRosace(pContexte, _sRightsString, pMdt) ;
+}
 
 // -----------------------------------------------------------------------------
 // Function     : EnregDocDialog::~EnregDocDialog()
@@ -495,14 +538,14 @@ EnregDocDialog::CmOk()
 	}
 
 	if ((_note_check->GetCheck()) == BF_CHECKED)    // On verifie que c'est une note personnelle
-		_pRosaceGroup->pRosace->setPersonnalNote(true) ;
+		_pRosaceGroup->getRosace()->setPersonnalNote(true) ;
 	else
-  	_pRosaceGroup->pRosace->setPersonnalNote(false) ;
+  	_pRosaceGroup->getRosace()->setPersonnalNote(false) ;
 
 	if ((_synchro_check->GetCheck()) == BF_CHECKED)   // On verifie que le document est synchronisable
-		_pRosaceGroup->pRosace->setSynchronalisable(true) ;
+		_pRosaceGroup->getRosace()->setSynchronalisable(true) ;
 	else
-		_pRosaceGroup->pRosace->setSynchronalisable(false) ;
+		_pRosaceGroup->getRosace()->setSynchronalisable(false) ;
 
 	_pDocData->_sRights = _pRosaceGroup->getRigthsString() ;
 
@@ -658,6 +701,181 @@ void
 EnregDocDialog::TraitementInteret4P()
 {
 	_pImportance->SetPosition(4) ;
+}
+
+// -----------------------------------------------------------------------------
+//
+//  Méthodes de EnregDocDialogCombo
+//
+// -----------------------------------------------------------------------------
+
+DEFINE_RESPONSE_TABLE1(EnregDocDialogCombo, EnregDocDialog)
+  // EV_BN_CLICKED(IDC_NWDOC_SELECT,   CmCelectType),
+  EV_BN_CLICKED(IDC_NWDOC_TYPEEDIT, CmEditTypes),
+  EV_CBN_SELCHANGE(IDC_NWDOC_COMBO, CmTypeChanged),
+END_RESPONSE_TABLE ;
+
+// -----------------------------------------------------------------------------// Function     : EnregDocDialog::EnregDocDialog()
+// Description  : Constructeur
+// -----------------------------------------------------------------------------
+EnregDocDialogCombo::EnregDocDialogCombo(TWindow *pere, NSDocumentData *pDocuDonnees, string &sCodeChemise, const string sRights, NSContexte *pCtx)
+                    :EnregDocDialog(pere, pDocuDonnees, sCodeChemise, sRights, pCtx, "ID_LDV_NWDOC_COMBO")
+{
+try
+{
+  VecteurString aTypesVect ;
+  GetTypes(&aTypesVect) ;
+
+  // _pTypeGetCombo = new OWL::TButton(this, IDC_NWDOC_SELECT) ;
+  _pTypeFromList = new NSComboBox(this, IDC_NWDOC_COMBO, pContexte, &aTypesVect, true) ;
+  _pTypeEditList = new OWL::TGlyphButton(this, IDC_NWDOC_TYPEEDIT) ;
+}
+catch (...)
+{
+  erreur("Exception EnregDocDialogCombo ctor.", standardError, 0) ;
+}
+}
+
+EnregDocDialogCombo::~EnregDocDialogCombo()
+{
+  // delete _pTypeGetCombo ;
+  delete _pTypeFromList ;
+  delete _pTypeEditList ;
+}
+
+void
+EnregDocDialogCombo::SetupWindow()
+{
+  EnregDocDialog::SetupWindow() ;
+
+  if (false == _pTypeFromList->isEmpty())
+    _pTypeFromList->SetSelIndex(0) ;
+}
+
+string
+EnregDocDialogCombo::GetParamsFile()
+{
+  return pContexte->PathName("FPER") + string("documentTypes.dat") ;
+}
+
+void
+EnregDocDialogCombo::CmCelectType()
+{
+  string sCode = _pTypeFromList->getSelCode() ;
+  _pType->setLabel(sCode) ;
+
+  if (string("") == sCode)
+    return ;
+}
+
+void
+EnregDocDialogCombo::CmTypeChanged()
+{
+  string sCode = _pTypeFromList->getSelCode() ;
+  _pType->setLabel(sCode) ;
+
+  string sLabel = string("") ;
+  if (string("") != sCode)
+    pContexte->getDico()->donneLibelle(pContexte->getUserLanguage(), &sCode, &sLabel) ;
+
+  if (string("") != sLabel)
+    sLabel[0] = pseumaj(sLabel[0]) ;
+
+  _pNomDoc->SetText(sLabel.c_str()) ;
+}
+
+void
+EnregDocDialogCombo::CmEditTypes()
+{
+  VecteurString aVectTypes ;
+
+  // If can be normal not to have e types file yet, just warn
+  //
+  if (false == GetTypes(&aVectTypes))
+  {
+    string sFile = GetParamsFile() ;
+    string sErrorText = pContexte->getSuperviseur()->getText("fileErrors", "errorOpeningInputFile") + string(" ") + sFile ;
+  }
+
+  // Open edit editor dialog box
+  //
+  NSEditDocTypesDlg editTypesDlg(this, pContexte, &aVectTypes) ;
+  if (editTypesDlg.Execute() != IDOK)
+    return ;
+
+  // Save new list to file
+  //
+  SaveTypes(&aVectTypes) ;
+
+  // Reload combo cotrol
+  //
+  _pTypeFromList->initLexiqCodes(&aVectTypes) ;
+}
+
+bool
+EnregDocDialogCombo::GetTypes(VecteurString* pVect)
+{
+  if ((VecteurString*) NULL == pVect)
+    return false ;
+
+  string sTempoFile = GetParamsFile() ;
+
+  ifstream inFile ;
+  inFile.open(sTempoFile.c_str()) ;
+  if (!inFile)
+  {
+    string sErrorText = pContexte->getSuperviseur()->getText("fileErrors", "errorOpeningInputFile") + string(" ") + sTempoFile ;
+    pContexte->getSuperviseur()->trace(&sErrorText, 1, NSSuper::trError) ;
+    return false ;
+  }
+
+  while (!inFile.eof())
+  {
+    string sLine = string("") ;
+    getline(inFile, sLine) ;
+
+    if (string("") != sLine)
+    {
+      strip(sLine, stripBoth) ;
+      pVect->AddString(sLine) ;
+    }
+  }
+
+  inFile.close() ;
+
+  return true ;
+}
+
+bool
+EnregDocDialogCombo::SaveTypes(VecteurString* pVect)
+{
+  if ((VecteurString*) NULL == pVect)
+    return false ;
+
+  string sTempoFile = GetParamsFile() ;
+
+  ofstream outFile ;
+
+  outFile.open(sTempoFile.c_str()) ;
+	if (!outFile)
+  {
+    string sErrorText = pContexte->getSuperviseur()->getText("fileErrors", "errorOpeningOutputFile") + string(" ") + sTempoFile ;
+    pContexte->getSuperviseur()->trace(&sErrorText, 1, NSSuper::trError) ;
+    erreur(sErrorText.c_str(), standardError, 0) ;
+    return false ;
+  }
+
+  if (pVect->empty())
+    outFile << NEWLINE ;
+  else
+  {
+    for (ConstEquiItemIter iter = pVect->begin() ; pVect->end() != iter ; iter++)
+      outFile << (**iter + string(NEWLINE)) ;
+  }
+
+  outFile.close() ;
+
+  return true ;
 }
 
 // -----------------------------------------------------------------------------
@@ -1073,10 +1291,9 @@ void
 ListeSejoursDialog::CmCreer()
 {
 #ifndef N_TIERS
-  CreerSejourDialog *pCreerSejour = new CreerSejourDialog(this, pContexte) ;
-  if (pCreerSejour->Execute() == IDOK)
+  CreerSejourDialog creerSejour(this, pContexte) ;
+  if (creerSejour.Execute() == IDOK)
     AfficheListe() ;
-  delete pCreerSejour ;
 #endif
 }
 
@@ -1306,3 +1523,210 @@ EnregChemDialog::CmOk()
 
 */
 
+// -----------------------------------------------------------------
+//
+//  Méthodes de NSEditFilGuideDialog
+//
+// -----------------------------------------------------------------
+
+DEFINE_RESPONSE_TABLE1(NSEditDocTypesDlg, NSUtilDialog)
+  EV_COMMAND(IDOK,     CmOk),
+  EV_COMMAND(IDCANCEL, CmCancel),
+
+  EV_COMMAND(IDC_UP,     CmUp),
+  EV_COMMAND(IDC_DOWN,   CmDown),
+  EV_COMMAND(IDC_INSERT, CmInsert),
+  EV_COMMAND(IDC_UPDATE, CmUpdate),
+  EV_COMMAND(IDC_DELETE, CmDelete),
+END_RESPONSE_TABLE;
+
+NSEditDocTypesDlg::NSEditDocTypesDlg(TWindow* pere, NSContexte* pCtx, VecteurString* paTypes)
+                  :NSUtilDialog(pere, pCtx, "IDD_EDIT_TYPES", pNSResModule)
+{
+  _paTypes = paTypes ;
+
+  _pEdit = new NSUtilLexique(pContexte, this, IDC_EDIT, pContexte->getDico()) ;
+  _pList = new TListWindow(this, IDC_LW) ;
+}
+
+NSEditDocTypesDlg::~NSEditDocTypesDlg()
+{
+  delete _pEdit ;
+  delete _pList ;
+}
+
+void
+NSEditDocTypesDlg::SetupWindow()
+{
+	NSUtilDialog::SetupWindow() ;
+
+  InitList() ;
+  DisplayList() ;
+}
+
+voidNSEditDocTypesDlg::InitList()
+{
+	TListWindColumn colElt("Types", 500, TListWindColumn::Left, 0);
+  _pList->InsertColumn(0, colElt) ;
+}
+
+void
+NSEditDocTypesDlg::DisplayList()
+{
+  _pList->DeleteAllItems() ;
+
+  if (_paTypes->empty())
+    return ;
+
+	for (ReverseEquiItemIter iter = _paTypes->rbegin() ; _paTypes->rend() != iter ; iter++)
+  {
+    string sLexiqCode = (*iter)->c_str() ;
+
+    string sLabel ;
+    pContexte->getDico()->donneLibelle(pContexte->getUserLanguage(), &sLexiqCode, &sLabel) ;
+
+    if (string("") == sLabel)
+      sLabel = string("????") ;
+
+    TListWindItem Item(sLabel.c_str(), 0) ;
+    _pList->InsertItem(Item) ;
+  }
+
+  _pList->SetFocus() ;
+}
+
+voidNSEditDocTypesDlg::CmDown()
+{
+  int iSelected = IndexItemSelect() ;
+
+  if (-1 == iSelected)
+  {
+    erreur("Vous devez sélectionner un élément à déplacer.", standardError, 0) ;
+    return ;
+  }
+
+  if (_paTypes->size() - 1 == iSelected)
+    return ;
+
+  string sSelected = _paTypes->GetElementAt(iSelected) ;
+
+  _paTypes->SetElementAt(iSelected,     _paTypes->GetElementAt(iSelected + 1)) ;
+  _paTypes->SetElementAt(iSelected + 1, sSelected) ;
+
+  DisplayList() ;
+  _pList->SetSel(iSelected + 1, true) ;
+}
+
+voidNSEditDocTypesDlg::CmUp()
+{
+  int iSelected = IndexItemSelect() ;
+
+  if (-1 == iSelected)
+  {
+    erreur("Vous devez sélectionner un élément à déplacer.", standardError, 0) ;
+    return ;
+  }
+
+  if (0 == iSelected)
+    return ;
+
+  string sSelected = _paTypes->GetElementAt(iSelected) ;
+
+  _paTypes->SetElementAt(iSelected,     _paTypes->GetElementAt(iSelected - 1)) ;
+  _paTypes->SetElementAt(iSelected - 1, sSelected) ;
+
+  DisplayList() ;
+  _pList->SetSel(iSelected - 1, true) ;
+}
+
+void
+NSEditDocTypesDlg::CmInsert()
+{
+  string sCode = _pEdit->getCode() ;
+
+  if (string("") == sCode)
+  {
+    erreur("Vous devez saisir ci-dessus un élément à insérer.", standardError, 0) ;
+    return ;
+  }
+
+  if (_paTypes->ItemDansUnVecteur(sCode))
+  {
+    erreur("Cet élément existe déjà dans la liste.", standardError, 0) ;
+    return ;
+  }
+
+  _paTypes->AddString(sCode) ;
+
+  DisplayList() ;
+}
+
+voidNSEditDocTypesDlg::CmUpdate()
+{
+  int iSelected = IndexItemSelect() ;
+
+  if (-1 == iSelected)  {
+    erreur("Vous devez sélectionner un élément à modifier.", standardError, 0) ;
+    return ;
+  }
+
+  string sCode = _pEdit->getCode() ;
+
+  if (string("") == sCode)
+  {
+    erreur("Vous devez saisir ci-dessus un élément pour remplacer celui qui est sélectionné.", standardError, 0) ;
+    return ;
+  }
+
+  if (_paTypes->ItemDansUnVecteur(sCode))
+  {
+    erreur("L'élément que vous avez saisi existe déjà dans la liste.", standardError, 0) ;
+    return ;
+  }
+
+  _paTypes->SetElementAt(iSelected, sCode) ;
+
+  DisplayList() ;
+}
+
+void
+NSEditDocTypesDlg::CmDelete()
+{
+  int iSelected = IndexItemSelect() ;
+
+  if (-1 == iSelected)  {
+    erreur("Vous devez sélectionner un élément à supprimer.", standardError, 0) ;
+    return ;
+  }
+
+  _paTypes->RemoveString(_paTypes->GetElementAt(iSelected)) ;
+
+  DisplayList() ;
+}
+
+void
+NSEditDocTypesDlg::CmOk()
+{
+  NSUtilDialog::CmOk() ;
+}
+
+void
+NSEditDocTypesDlg::CmCancel()
+{
+	NSUtilDialog::CmCancel() ;
+}
+
+int
+NSEditDocTypesDlg::IndexItemSelect()
+{
+	int count = _pList->GetItemCount() ;
+	int index = -1 ;
+
+	for (int i = 0 ; i < count ; i++)  {
+  	if (_pList->GetItemState(i, LVIS_SELECTED))    {
+    	index = i ;
+      break ;
+    }
+  }
+
+  return index ;}

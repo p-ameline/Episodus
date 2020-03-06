@@ -2,6 +2,8 @@
 #include "nsbb\nscomboutil.h"
 #include "nautilus\nsepicap.h"
 
+#define NOCHOICE "--------"
+
 DEFINE_RESPONSE_TABLE1(NSComboBox, TComboBox)
    EV_WM_KEYUP,
    EV_WM_KEYDOWN,
@@ -9,49 +11,61 @@ DEFINE_RESPONSE_TABLE1(NSComboBox, TComboBox)
    EV_WM_KILLFOCUS ,
 END_RESPONSE_TABLE;
 
-NSComboBox::NSComboBox(TWindow *parent, int resId, NSContexte *pCtx, VecteurString *pVecteurString)
+NSComboBox::NSComboBox(TWindow *parent, int resId, NSContexte *pCtx, const VecteurString *pVecteurString, bool bAddNoChoice)
            :TComboBox(parent, resId), NSRoot(pCtx)
 {
+  _bAddNoChoice = bAddNoChoice ;
+
 	_pDlgParent = parent ;
   initCommonData() ;
   initLexiqCodes(pVecteurString) ;
 }
 
-NSComboBox::NSComboBox(TWindow *parent, int Id, NSContexte *pCtx, int x, int y, int w, int h, uint32 style, VecteurString *pVecteurString)
+NSComboBox::NSComboBox(TWindow *parent, int Id, NSContexte *pCtx, int x, int y, int w, int h, uint32 style, const VecteurString *pVecteurString, bool bAddNoChoice)
            :TComboBox(parent, Id, x, y, w, h, style, 0), NSRoot(pCtx)
 {
+  _bAddNoChoice = bAddNoChoice ;
+
 	_pDlgParent = parent ;
   initCommonData() ;
   initLexiqCodes(pVecteurString) ;
 }
 
-NSComboBox::NSComboBox(TWindow *parent, int resId, NSContexte *pCtx, VectString *pVectString)
+NSComboBox::NSComboBox(TWindow *parent, int resId, NSContexte *pCtx, const VectString *pVectString, bool bAddNoChoice)
            :TComboBox(parent, resId), NSRoot(pCtx)
 {
+  _bAddNoChoice = bAddNoChoice ;
+
   _pDlgParent = parent ;
   initCommonData() ;
   initLexiqCodes(pVectString) ;
 }
 
-NSComboBox::NSComboBox(TWindow *parent, int Id, NSContexte *pCtx, int x, int y, int w, int h, uint32 style, VectString *pVectString)
+NSComboBox::NSComboBox(TWindow *parent, int Id, NSContexte *pCtx, int x, int y, int w, int h, uint32 style, const VectString *pVectString, bool bAddNoChoice)
            :TComboBox(parent, Id, x, y, w, h, style, 0), NSRoot(pCtx)
 {
+  _bAddNoChoice = bAddNoChoice ;
+
   _pDlgParent = parent ;
   initCommonData() ;
   initLexiqCodes(pVectString) ;
 }
 
-NSComboBox::NSComboBox(TWindow *parent, int resId, NSContexte *pCtx, char *input[], int iInputSize)
+NSComboBox::NSComboBox(TWindow *parent, int resId, NSContexte *pCtx, const char *input[], int iInputSize, bool bAddNoChoice)
            :TComboBox(parent, resId), NSRoot(pCtx)
 {
+  _bAddNoChoice = bAddNoChoice ;
+
   _pDlgParent = parent ;
   initCommonData() ;
   initLexiqCodes(input, iInputSize) ;
 }
 
-NSComboBox::NSComboBox(TWindow *parent, int Id, NSContexte *pCtx, int x, int y, int w, int h, uint32 style, char *input[], int iInputSize)
+NSComboBox::NSComboBox(TWindow *parent, int Id, NSContexte *pCtx, int x, int y, int w, int h, uint32 style, const char *input[], int iInputSize, bool bAddNoChoice)
            :TComboBox(parent, Id, x, y, w, h, style, 0), NSRoot(pCtx)
 {
+  _bAddNoChoice = bAddNoChoice ;
+
   _pDlgParent = parent ;
   initCommonData() ;
   initLexiqCodes(input, iInputSize) ;
@@ -66,27 +80,27 @@ NSComboBox::initCommonData()
 }
 
 void
-NSComboBox::initLexiqCodes(VecteurString *pVecteurString)
+NSComboBox::initLexiqCodes(const VecteurString *pVecteurString)
 {
-	_pLexiqCodes = new VecteurString() ;
+  _aLexiqCodes.vider() ;
 
   if (((VecteurString*) NULL == pVecteurString) || (pVecteurString->empty()))
 		return ;
 
-	for (EquiItemIter iter = pVecteurString->begin() ; iter != pVecteurString->end() ; iter++)
-		_pLexiqCodes->AddString(**iter) ;
+	for (ConstEquiItemIter iter = pVecteurString->begin() ; iter != pVecteurString->end() ; iter++)
+		_aLexiqCodes.AddString(**iter) ;
 }
 
 void
-NSComboBox::initLexiqCodes(VectString *pVectString)
+NSComboBox::initLexiqCodes(const VectString *pVectString)
 {
-	_pLexiqCodes = new VecteurString() ;
+	_aLexiqCodes.vider() ;
 
   if (((VectString*) NULL == pVectString) || (pVectString->empty()))
 		return ;
 
-	for (IterString iter = pVectString->begin() ; iter != pVectString->end() ; iter++)
-		_pLexiqCodes->AddString(**iter) ;
+	for (IterStringConst iter = pVectString->begin() ; iter != pVectString->end() ; iter++)
+		_aLexiqCodes.AddString(**iter) ;
 }
 
 // The reason why iInputSize is passed is that the usual way to evaluate
@@ -95,15 +109,15 @@ NSComboBox::initLexiqCodes(VectString *pVectString)
 // sizeof(input) returns the size of the pointer (i.e. 4) instead of the
 // size of the array
 void
-NSComboBox::initLexiqCodes(char *input[], int iInputSize)
+NSComboBox::initLexiqCodes(const char *input[], int iInputSize)
 {
-	_pLexiqCodes = new VecteurString() ;
+	_aLexiqCodes.vider() ;
 
   if ((NULL == input) || (0 == iInputSize))
 		return ;
 
 	for (int i = 0 ; i < iInputSize ; i++)
-		_pLexiqCodes->AddString(std::string(input[i])) ;
+		_aLexiqCodes.AddString(std::string(input[i])) ;
 }
 
 void
@@ -117,8 +131,6 @@ NSComboBox::EvKillFocus(HWND hWndGetFocus)
 
 NSComboBox::~NSComboBox()
 {
-  _pLexiqCodes->vider() ;
-  delete _pLexiqCodes ;
 }
 
 void
@@ -132,40 +144,52 @@ NSComboBox::SetupWindow()
   }
 
   // ---------------------------------------------------------------------------
-  // la liste inclut dans pLexiqCodes correpond aux codes lexiques des libellés
+  // la liste incluse dans pLexiqCodes correpond aux codes lexiques des libellés
   // à mettre dans le combobox
   // ---------------------------------------------------------------------------
   // il faut donc faire des addstring à partir des libellés et non des codes
   // lexique
   // ---------------------------------------------------------------------------
-  if (false == _pLexiqCodes->empty())
+  if (_aLexiqCodes.empty())
+    return ;
+
+  if (_bAddNoChoice)
+    AddString(NOCHOICE) ;
+
+  for (EquiItemIter iter = _aLexiqCodes.begin() ; _aLexiqCodes.end() != iter ; iter++)
   {
-    for (EquiItemIter iter = _pLexiqCodes->begin() ; _pLexiqCodes->end() != iter ; iter++)
-    {
-      string sLabel ;
-      string sLexiqCode = (*iter)->c_str() ;
-      pContexte->getDico()->donneLibelle(pContexte->getUserLanguage(), &sLexiqCode, &sLabel) ;
-      if (string("") != sLabel)
-      	AddString(sLabel.c_str()) ;
-    }
+    string sLabel ;
+    string sLexiqCode = (*iter)->c_str() ;
+    pContexte->getDico()->donneLibelle(pContexte->getUserLanguage(), &sLexiqCode, &sLabel) ;
+
+    if (string("") != sLabel)
+      AddString(sLabel.c_str()) ;
   }
 }
 
 std::string
 NSComboBox::getSelCode()
 {
-  // récupétion de l'index de la sélection au sein du combobox
-  int index = GetSelIndex() ;
-  _sCode    = string("") ;
+  _sCode = string("") ;
 
-  // récupération du code lexique
-  EquiItemIter  iter ;
-  int           iIter ;
-  if (false == _pLexiqCodes->empty())
+  // récupétion de l'index de la sélection au sein du combobox
+  //
+  int index = GetSelIndex() ;
+  if (_bAddNoChoice && (0 == index))
+    return _sCode ;
+
+  if (_bAddNoChoice)
+    index-- ;
+
+  // récupération du code lexique situé à la position index
+  //
+  int iIter = 0 ;
+  EquiItemIter iter ;
+  if (false == _aLexiqCodes.empty())
   {
-    for (iter = _pLexiqCodes->begin(), iIter = 0 ; (iter != _pLexiqCodes->end()) && (index != iIter) ; iter++, iIter++)
+    for (iter = _aLexiqCodes.begin() ; (iter != _aLexiqCodes.end()) && (index != iIter) ; iter++, iIter++)
     ;
-    if ((_pLexiqCodes->end() != iter) && (iIter == index))
+    if ((_aLexiqCodes.end() != iter) && (iIter == index))
     	_sCode = **iter ;
   }
 
@@ -173,18 +197,18 @@ NSComboBox::getSelCode()
 }
 
 void
-NSComboBox::setCode(std::string sValue)
+NSComboBox::setCode(const std::string sValue)
 {
   EquiItemIter  iter ;
   int           iIter ;
 
-  if (false == _pLexiqCodes->empty())
+  if (false == _aLexiqCodes.empty())
   {
-    for (iter = _pLexiqCodes->begin(), iIter = 0 ;
-            (_pLexiqCodes->end() != iter) && ((**iter) != sValue) ;
+    for (iter = _aLexiqCodes.begin(), iIter = 0 ;
+            (_aLexiqCodes.end() != iter) && ((**iter) != sValue) ;
                                                         iter++, iIter++)
     ;
-    if ((_pLexiqCodes->end() != iter) && ((**iter) == sValue))
+    if ((_aLexiqCodes.end() != iter) && ((**iter) == sValue))
     {
     	SetSelIndex(iIter) ;
       _sCode = sValue ;
@@ -194,7 +218,6 @@ NSComboBox::setCode(std::string sValue)
   SetSelIndex(-1) ;
   _sCode = string("") ;
 }
-
 
 void
 NSComboBox::EvKeyUp(uint key, uint repeatcount, uint flags)
@@ -224,17 +247,16 @@ NSComboBox::EvKeyUp(uint key, uint repeatcount, uint flags)
    }
 }
 
-
 void
-NSComboBox::AddLexiqueCode(char *temp)
+NSComboBox::AddLexiqueCode(const char *temp)
 {
-  _pLexiqCodes->AddString(std::string(temp)) ;
+  _aLexiqCodes.AddString(std::string(temp)) ;
 }
 
 void
-NSComboBox::AddLexiqueCode(std::string& temp)
+NSComboBox::AddLexiqueCode(const std::string& temp)
 {
-  _pLexiqCodes->AddString(temp) ;
+  _aLexiqCodes.AddString(temp) ;
 }
 
 void

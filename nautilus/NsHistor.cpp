@@ -148,6 +148,15 @@ NsHistorique::Rafraichir(NSDocumentInfo* pNSDocumentInfo,
 void
 NsHistorique::AutoriserOuverture(NSDocumentInfo* pDocument)
 {
+  if ((NSDocumentInfo*) NULL == pDocument)
+		return ;
+
+  // No patient or patient being closed -> no way
+  //
+  NSPatientChoisi* pCurrentPatient = pContexte->getPatient() ;
+  if (((NSPatientChoisi*) 0 == pCurrentPatient) || pCurrentPatient->isClosing())
+    return ;
+
  	NSTreeHistorique* pNSTreeHistorique = this ;
 	pNSTreeHistorique->AutoriserOuverture(pDocument) ;
 }
@@ -157,6 +166,15 @@ NsHistorique::AutoriserOuverture(NSDocumentInfo* pDocument)
 void
 NsHistorique::AutoriserEdition(NSDocumentInfo* pDocument)
 {
+  if ((NSDocumentInfo*) NULL == pDocument)
+		return ;
+
+  // No patient or patient being closed -> no way
+  //
+  NSPatientChoisi* pCurrentPatient = pContexte->getPatient() ;
+  if (((NSPatientChoisi*) 0 == pCurrentPatient) || pCurrentPatient->isClosing())
+    return ;
+
  	NSTreeHistorique* pNSTreeHistorique = this ;
 	pNSTreeHistorique->AutoriserEdition(pDocument) ;
 }

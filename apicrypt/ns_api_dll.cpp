@@ -122,6 +122,8 @@ NSApicrypt::getHprimText(NSContexte far *pCtx, string sRawText, string sEMail, s
       ((NSPatInfo*) NULL == pPatInfo) || ((NSNoyauDocument*) NULL == pDoc))
     return string("") ;
 
+  // Récupération de la partie de l'adresse mail qui précède le '@'
+  //
   string sMailName = string("") ;
   donneAdresseUtile(sEMail, sMailName) ;
 
@@ -242,6 +244,9 @@ NSApicrypt::DecrypteFichiers(NSContexte far *pCtx, string far *pNomFich, string 
 {
 }
 
+/**
+ * Donne la partie de l'adresse mail qui précède le '@'
+ */
 void
 NSApicrypt::donneAdresseUtile(const string sAdresseLongue, string& sAdresseUtile)
 {

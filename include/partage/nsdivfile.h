@@ -25,6 +25,9 @@
 
   string _export getFileContent(const NSSuper *pSuper, const string sFileName) ;
 
+  string _export getFileError() ;
+  string _export getErrorText(LONG lOsErr) ;
+
 #else
 
   bool NsFileExists(const string sFileName) ;
@@ -36,6 +39,9 @@
   bool NsDeleteTemporaryFile(NSSuper *pSuper, const string sFileName) ;
 
   string getFileContent(const NSSuper *pSuper, const string sFileName) ;
+
+  string getFileError() ;
+  string getErrorText(LONG lOsErr) ;
 
 #endif
 

@@ -3977,7 +3977,8 @@ try
 
               // Basically, if we have to return something, it is the first son
               //
-              if (end() != iterValeur)
+              sLexique = string("") ;
+              if ((end() != iterValeur) && ((*iterValeur)->getColonne() > iRefCol))
                 sLexique = (*iterValeur)->getLexique() ;
 
               while ((end() != iterValeur) && ((*iterValeur)->getColonne() > iRefCol))
@@ -4035,10 +4036,14 @@ try
               // If there, it means that we didn't find a numerical value with
               // the proper unit
               //
-              // *pValeur = sLexique ;
-              *pValeur = string("") ;
-              if (pUnite)
-                *pUnite = string("") ;
+              if (pUnite && (string("$FirstSon$") == *pUnite))
+                *pValeur = sLexique ;
+              else
+              {
+                *pValeur = string("") ;
+                if (pUnite)
+                  *pUnite = string("") ;
+              }
 					  }
             return true ;
 				  }

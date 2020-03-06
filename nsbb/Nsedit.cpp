@@ -224,6 +224,9 @@ string
 NSEdit::GetText(size_t iSizeLimit)
 {
   size_t iBuffLen = GetTextLen() ;
+  if (0 == iBuffLen)
+    return string("") ;
+
   if ((0 != iSizeLimit) && (iBuffLen > iSizeLimit))
     iBuffLen = iSizeLimit ;
 
@@ -874,7 +877,7 @@ NSEdit::activeControle(int activation, Message* pMessage)
 
       _sContenuTransfert = string("") ;
       donneBrut() ;
-      SetText(_sContenuBrut.c_str()) ;
+      SetText(_sContenuBrut) ;
       break ;
   }
 }

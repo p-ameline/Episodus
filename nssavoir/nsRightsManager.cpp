@@ -1926,13 +1926,13 @@ catch (...)
 }
 
 DEFINE_RESPONSE_TABLE1(NSRosaceGroupBox, TButton)
-    EV_WM_PAINT,
-    EV_WM_LBUTTONDOWN,
-    EV_WM_MOUSEMOVE,
-    EV_WM_LBUTTONDBLCLK,
-  //  EV_WM_TIMER,
-    // EV_NOTIFY_AT_CHILD(WM_LBUTTONDBLCLK, ButtonDblClk),
-    // EV_NOTIFY_AT_CHILD(WM_LBUTTONDOWN, ButtonDblClk),
+  EV_WM_PAINT,
+  EV_WM_LBUTTONDOWN,
+  EV_WM_MOUSEMOVE,
+  EV_WM_LBUTTONDBLCLK,
+  // EV_WM_TIMER,
+  // EV_NOTIFY_AT_CHILD(WM_LBUTTONDBLCLK, ButtonDblClk),
+  // EV_NOTIFY_AT_CHILD(WM_LBUTTONDOWN, ButtonDblClk),
 END_RESPONSE_TABLE;
 
 //// Constructeur
@@ -1941,7 +1941,8 @@ NSRosaceGroupBox::NSRosaceGroupBox(NSContexte *pCtx, TWindow* parent, int resId,
 				 :TButton(parent, resId), NSRoot(pCtx)
 {
   DisableTransfer() ;
-  pRosace = pRose ;
+  _pRosace = pRose ;
+
   // initialisation des tooltip
   _pToolTip = new NSTitleTip(this, pContexte) ;
   _pToolTip->Create() ;
@@ -1962,18 +1963,21 @@ NSRosaceGroupBox::SetupWindow()
 {
 	TButton::SetupWindow() ;
 
-  NS_CLASSLIB::TRect rosaceRect = GetClientRect() ;
-  pRosace->prepare(&rosaceRect) ;
+  if (_pRosace)
+  {
+    NS_CLASSLIB::TRect rosaceRect = GetClientRect() ;
+    _pRosace->prepare(&rosaceRect) ;
+  }
  //  SetTimer(ROSACE_TIMER, 250);
 }
 
 string
 NSRosaceGroupBox::getRigthsString()
 {
-	if (NULL == pRosace)
+	if ((NSRosace*) NULL == _pRosace)
     return string("") ;
 
-	return pRosace->buildRosaceString() ;
+	return _pRosace->buildRosaceString() ;
 }
 
 void
@@ -1992,8 +1996,9 @@ NSRosaceGroupBox::Paint(TDC& dc, bool erase, NS_CLASSLIB::TRect& RectAPeindre)
 {
   TButton::Paint(dc, erase, RectAPeindre) ;
 
-  pRosace->draw(&dc, erase, RectAPeindre) ;
-}voidNSRosaceGroupBox::EvMouseMove(uint /* modKeys */, NS_CLASSLIB::TPoint& point){  _pos_tip = point ;  _time    = 0 ;  NSRightPosition*  temp = pRosace->getRightFromPoint(&_pos_tip) ;  if ((NULL != temp)&& (NULL != _mouse_on) &&(*temp == *_mouse_on))    return ;  else  {    _mouse_on = temp ;    _pToolTip->Hide() ;  }  if ( _mouse_on != NULL)
+  if (_pRosace)
+    _pRosace->draw(&dc, erase, RectAPeindre) ;
+}voidNSRosaceGroupBox::EvMouseMove(uint /* modKeys */, NS_CLASSLIB::TPoint& point){  _pos_tip = point ;  _time    = 0 ;  NSRightPosition* temp = (NSRightPosition*) 0 ;  if (_pRosace)    temp = _pRosace->getRightFromPoint(&_pos_tip) ;  if (temp && _mouse_on && (*temp == *_mouse_on))    return ;  _mouse_on = temp ;  _pToolTip->Hide() ;  if (_mouse_on)
   {
     NS_CLASSLIB::TPoint haut(_pos_tip.x + 16, _pos_tip.y + 16) ;
     NS_CLASSLIB::TPoint bas(_pos_tip.x + 120, _pos_tip.y + 120) ;
@@ -2017,16 +2022,21 @@ void
 NSRosaceGroupBox::EvLButtonDown(uint modKeys, NS_CLASSLIB::TPoint& point)
 {
 	NS_CLASSLIB::TRect rosaceRect = GetClientRect() ;
-	pRosace->EvLButtonDown(modKeys, point, &rosaceRect) ;
-    if (pRosace->bNeedPainting)
-    	Invalidate() ;
+
+  if (_pRosace)
+  {
+	  _pRosace->EvLButtonDown(modKeys, point, &rosaceRect) ;
+    if (_pRosace->bNeedPainting)
+      Invalidate() ;
+  }
 }
 
 void
 NSRosaceGroupBox::EvLButtonUp(uint modKeys, NS_CLASSLIB::TPoint& point)
 {
 	NS_CLASSLIB::TRect rosaceRect = GetClientRect() ;
-	pRosace->EvLButtonUp(modKeys, point, &rosaceRect) ;
+  if (_pRosace)
+	  _pRosace->EvLButtonUp(modKeys, point, &rosaceRect) ;
 }
 
 voidNSRosaceGroupBox::ButtonDblClk()
@@ -2044,9 +2054,9 @@ END_RESPONSE_TABLE;
 RightsDialog::RightsDialog(TWindow* parent, NSContexte* pCtx, string* pRightsStr)
              :NSUtilDialog(parent, pCtx, "RIGHTS_CHOICE", pNSResModule)
 {
-	pRightsString = pRightsStr ;
+	_pRightsString = pRightsStr ;
 
-  if ((NULL == pCtx) || (NULL == pCtx->getPatient()))
+  if (((NSContexte*) NULL == pCtx) || (NULL == pCtx->getPatient()))
     return ;
 
   NSHealthTeamMandate* pMdt = NULL ;
@@ -2059,7 +2069,7 @@ RightsDialog::RightsDialog(TWindow* parent, NSContexte* pCtx, string* pRightsStr
     {
       NSHTMMandateArray aMandates ;
       pHTMember->getActiveMandates(&aMandates) ;
-      if (!(aMandates.empty()))
+      if (false == aMandates.empty())
       {
         NSHTMMandateIter mandateIter = aMandates.begin() ;
         pMdt = *mandateIter ;
@@ -2072,18 +2082,18 @@ RightsDialog::RightsDialog(TWindow* parent, NSContexte* pCtx, string* pRightsStr
     }
   }
 
-  if (*pRightsString == "")
-    pRosace = new NSRosace(pCtx, pMdt) ;
+  if (string("") == *_pRightsString)
+    _pRosace = new NSRosace(pCtx, pMdt) ;
   else
-    pRosace = new NSRosace(pCtx, *pRightsString, pMdt) ;
+    _pRosace = new NSRosace(pCtx, *_pRightsString, pMdt) ;
 
-	pRightsInterface = new NSRosaceGroupBox(pCtx, this, IDC_ROSACE, pRosace) ;
+	_pRightsInterface = new NSRosaceGroupBox(pCtx, this, IDC_ROSACE, _pRosace) ;
 }
 
 RightsDialog::~RightsDialog()
 {
-  delete pRightsInterface ;
-  delete pRosace ;
+  delete _pRightsInterface ;
+  delete _pRosace ;
 }
 
 void
@@ -2095,7 +2105,7 @@ RightsDialog::SetupWindow()
 void
 RightsDialog::CmOk()
 {
-  *pRightsString = pRightsInterface->getRigthsString() ;
+  *_pRightsString = _pRightsInterface->getRigthsString() ;
 
 	CloseWindow(IDOK) ;
 }

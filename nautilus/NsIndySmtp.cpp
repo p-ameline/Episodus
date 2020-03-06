@@ -207,7 +207,6 @@ voidTIndySMTP::ComposeMessage(const string sSender, const string sNameFrom,   
   string            sFichLettre ;
   char					    msg[255] ;
   char far			 	  texte[2048] ;
-  ConvertRTFDialog* pConvert ;
 
   encours = AnsiString(sToAdr.c_str()) ;
   TextTo->Caption = encours ;
@@ -221,20 +220,19 @@ voidTIndySMTP::ComposeMessage(const string sSender, const string sNameFrom,   
     docInfo.InitDocumentBrut(&pDocTtxInfo) ;
     sPath = pContexte->PathName(pDocTtxInfo->getLocalis()) ;
     sFichLettre = sPath + pDocTtxInfo->getFichier() ;
-    pConvert = new ConvertRTFDialog(pContexte->GetMainWindow(), sFichLettre.c_str()) ;
-    pConvert->Create() ;
-    pConvert->getRichEdit()->GetText(texte, 2048) ;
+    ConvertRTFDialog convertDlg(pContexte, pContexte->GetMainWindow(), sFichLettre.c_str()) ;
+    convertDlg.Create() ;
+    convertDlg.getRichEdit()->GetText(texte, 2048) ;
 
     Message->Body->SetText(texte) ;
 
-    pConvert->CmOk() ;
-    delete pConvert ;
+    convertDlg.CmOk() ;
   }
   else
   {
     sNomDoc = pDoc->_pDocInfo->getDocName() ;
 
-    if (sNomDoc == "")
+    if (string("") == sNomDoc)
     {    	sprintf(msg, "le document concernant %s %s.",              pContexte->getPatient()->getszNom(),
             pContexte->getPatient()->getszPrenom()) ;
     }

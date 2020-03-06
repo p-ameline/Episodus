@@ -17,6 +17,7 @@ class NSChemiseData ;
 # include "ns_sgbd\nsannexe.h"
 # include "nsdn\nsanxary.h"
 # include "nsbb\nsednum.h"
+# include "nsbb\nscomboutil.h"
 # include "nsbb\nsutidlg.h"
 
 # include "nssavoir\nsRightsManager.h"
@@ -31,7 +32,17 @@ class _CLASSENSDN EnregDocDialog : public NSUtilDialog
 {
 	public:
 
-		NSDocumentData      *_pDocData ;
+		EnregDocDialog(TWindow *, NSDocumentData *, string &sChemise, const string sRights, NSContexte *pCtx) ;
+    EnregDocDialog(TWindow *, NSDocumentData *, string &sChemise, const string sRights, NSContexte *pCtx, TResId resID) ;
+		virtual ~EnregDocDialog() ;
+
+    void RemplirChemises() ;
+
+    NSChemiseArray* getChemisesArray() { return &_aChemisesArray ; }
+
+  protected:
+
+    NSDocumentData      *_pDocData ;
 
 		TEdit               *_pNomDoc ;
     NSUtilLexique       *_pType ;
@@ -60,12 +71,12 @@ class _CLASSENSDN EnregDocDialog : public NSUtilDialog
 		string					    _sRightsString ;
 		NSRosace* 		 	    _pRosace ;
 
-		EnregDocDialog(TWindow *, NSDocumentData *, string &sChemise, string sRights, NSContexte *pCtx) ;
-		~EnregDocDialog() ;
+    void                 SetupWindow() ;
 
-		void            SetupWindow() ;
+    NSHealthTeamMandate* GetMandate() ;
+    void                 CreateControls() ;
+    void                 InitializeRosace(const string sRights) ;
 
-		void            RemplirChemises() ;
 		void            InitChemisesBox() ;
 		void            CmHistorique() ;
 		void            CmOk() ;
@@ -81,6 +92,32 @@ class _CLASSENSDN EnregDocDialog : public NSUtilDialog
 	DECLARE_RESPONSE_TABLE(EnregDocDialog) ;
 } ;
 
+class _CLASSENSDN EnregDocDialogCombo : public EnregDocDialog
+{
+  public:
+
+    EnregDocDialogCombo(TWindow *, NSDocumentData *, string &sChemise, string sRights, NSContexte *pCtx) ;
+    ~EnregDocDialogCombo() ;
+
+    void            SetupWindow() ;
+    string          GetParamsFile() ;
+
+  protected:
+
+    TButton           *_pTypeGetCombo ;
+    NSComboBox        *_pTypeFromList ;
+    OWL::TGlyphButton *_pTypeEditList ;
+
+    void CmCelectType() ;
+    void CmEditTypes() ;
+    void CmTypeChanged() ;
+
+    bool GetTypes(VecteurString* pVect) ;
+    bool SaveTypes(VecteurString* pVect) ;
+
+  DECLARE_RESPONSE_TABLE(EnregDocDialogCombo) ;
+} ;
+
 // -----------------------------------------------------------------------------
 //
 // dialogue utilisé pour choisir un nouveau nom de chemise (ou defaut)
@@ -88,24 +125,24 @@ class _CLASSENSDN EnregDocDialog : public NSUtilDialog
 // -----------------------------------------------------------------------------
 class _CLASSENSDN NomChemiseDialog : public NSUtilDialog
 {
- public:
-  TEdit         *pNomChem ;
-  TRadioButton  *pChemDefaut ;
-  TRadioButton  *pChemNew ;
+  public:
+    TEdit         *pNomChem ;
+    TRadioButton  *pChemDefaut ;
+    TRadioButton  *pChemNew ;
 
-  string			  sNomChem ;
+    string			  sNomChem ;
 
-  NomChemiseDialog(TWindow *pere, NSContexte *pCtx) ;
-  ~NomChemiseDialog() ;
+    NomChemiseDialog(TWindow *pere, NSContexte *pCtx) ;
+    ~NomChemiseDialog() ;
 
-  void          SetupWindow() ;
+    void          SetupWindow() ;
 
-  void          CmClickChemDefaut() ;
-  void          CmClickChemNew() ;
-  void          CmChangeNomChem() ;
+    void          CmClickChemDefaut() ;
+    void          CmClickChemNew() ;
+    void          CmChangeNomChem() ;
 
-  void          CmOk() ;
-  void          CmCancel() ;
+    void          CmOk() ;
+    void          CmCancel() ;
 
   DECLARE_RESPONSE_TABLE(NomChemiseDialog) ;
 } ;
@@ -117,29 +154,29 @@ class _CLASSENSDN NomChemiseDialog : public NSUtilDialog
 // -----------------------------------------------------------------------------
 class _CLASSENSDN CreerSejourDialog : public NSUtilDialog
 {
- public:
+  public:
 
-  TEdit               *_pNumSejour ;
-  TEdit               *_pNumUF ;
-  NSUtilEditDateHeure *_pDateDeb ;
-  NSUtilEditDateHeure *_pDateFin ;
+    TEdit               *_pNumSejour ;
+    TEdit               *_pNumUF ;
+    NSUtilEditDateHeure *_pDateDeb ;
+    NSUtilEditDateHeure *_pDateFin ;
 
-  string			    sNumUF ;
+    string			    sNumUF ;
 
-  string					sPrevNum ;
-  string					sPrevCode ;
+    string					sPrevNum ;
+    string					sPrevCode ;
 
-  CreerSejourDialog(TWindow *pere, NSContexte *pCtx, NSSejourInfo *pVenue, string sDefaultVenueId) ;
-  ~CreerSejourDialog() ;
+    CreerSejourDialog(TWindow *pere, NSContexte *pCtx, NSSejourInfo *pVenue, string sDefaultVenueId) ;
+    ~CreerSejourDialog() ;
 
-  void            SetupWindow() ;
+    void            SetupWindow() ;
 
-  void            CmOk() ;
-  void            CmCancel() ;
+    void            CmOk() ;
+    void            CmCancel() ;
 
- protected:
+  protected:
 
-  NSSejourInfo *_pEditedVenue ;
+    NSSejourInfo *_pEditedVenue ;
 
   DECLARE_RESPONSE_TABLE(CreerSejourDialog) ;
 } ;
@@ -151,24 +188,25 @@ class _CLASSENSDN CreerSejourDialog : public NSUtilDialog
 // -----------------------------------------------------------------------------
 class _CLASSENSDN ListeSejoursDialog : public NSUtilDialog
 {
- public:
-  OWL::TListBox   *pListe ;
+  public:
 
-  string          sEnCours ;
+    OWL::TListBox   *pListe ;
 
-  ListeSejoursDialog(TWindow *pere, NSContexte *pCtx, TModule *pModule = 0) ;
-  ~ListeSejoursDialog() ;
+    string          sEnCours ;
 
-  void            SetupWindow() ;
-  void            AfficheListe() ;
+    ListeSejoursDialog(TWindow *pere, NSContexte *pCtx, TModule *pModule = 0) ;
+    ~ListeSejoursDialog() ;
 
-  void            CmOk() ;
-  void            CmCancel() ;
-  void            CmSupprimer() ;
-  void            CmCreer() ;
-  void            CmModifier() ;
-  void            CmSelectSejour() ;
-  void            CmSejourDblClk() ;
+    void            SetupWindow() ;
+    void            AfficheListe() ;
+
+    void            CmOk() ;
+    void            CmCancel() ;
+    void            CmSupprimer() ;
+    void            CmCreer() ;
+    void            CmModifier() ;
+    void            CmSelectSejour() ;
+    void            CmSejourDblClk() ;
 
   DECLARE_RESPONSE_TABLE(ListeSejoursDialog) ;
 } ;
@@ -182,30 +220,61 @@ class _CLASSENSDN EnregChemDialog : public NSUtilDialog
 {
 	public:
 
-  		NSChemiseData   *pChemData ;
+    NSChemiseData   *pChemData ;
 
-  		TEdit           *pNomChem ;
-  		TComboBox       *pArmoireBox ;
-  		TEdit           *pCommentaire ;
+    TEdit           *pNomChem ;
+    TComboBox       *pArmoireBox ;
+    TEdit           *pCommentaire ;
 
-  		// NSArmoireArray  *pArmoiresArray ;
+    // NSArmoireArray  *pArmoiresArray ;
 
-  		int        	    creation ;
+    int        	    creation ;
 
-  		int 		   	ArmoireChoisie ;
-  		char            *pCodeArmoireChoisie ;
+    int 		   	    ArmoireChoisie ;
+    char            *pCodeArmoireChoisie ;
 
-  		EnregChemDialog(TWindow *, NSChemiseData *, char *, NSContexte *pCtx) ;
-  		~EnregChemDialog() ;
+    EnregChemDialog(TWindow *, NSChemiseData *, char *, NSContexte *pCtx) ;
+    ~EnregChemDialog() ;
 
-  		void            SetupWindow() ;
+    void            SetupWindow() ;
 
-  		void            CmOk() ;
-  		void            CmCancel() ;
-  		void            CmNouvArmoire() ;
+    void            CmOk() ;
+    void            CmCancel() ;
+    void            CmNouvArmoire() ;
 
 	DECLARE_RESPONSE_TABLE(EnregChemDialog) ;
 } ;
+
+class _CLASSENSDN NSEditDocTypesDlg : public NSUtilDialog
+{
+	public:
+
+		NSEditDocTypesDlg(TWindow* pere, NSContexte* pCtx, VecteurString* paTypes) ;
+		~NSEditDocTypesDlg() ;
+
+  protected:
+
+    NSUtilLexique* _pEdit ;
+    TListWindow*   _pList ;
+    VecteurString* _paTypes ;
+
+    void SetupWindow() ;
+    void InitList() ;
+    void DisplayList() ;
+
+    void CmUp() ;
+    void CmDown() ;
+    void CmInsert() ;
+    void CmUpdate() ;
+    void CmDelete() ;
+
+    void CmOk() ;
+    void CmCancel() ;
+
+    int IndexItemSelect() ;
+
+	DECLARE_RESPONSE_TABLE(NSEditDocTypesDlg) ;
+};
 
 #endif // __NSDOCDLG_H__
 

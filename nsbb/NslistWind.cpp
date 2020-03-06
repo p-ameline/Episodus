@@ -1442,7 +1442,7 @@ NSTPersonListDialog::AfficheListe()
   if (pPersonArray->empty())
 		return ;
 
-	for (NSPersonReverseIter iterReverse = pPersonArray->rbegin(); iterReverse != pPersonArray->rend(); iterReverse++)  {
+	for (NSPersonReverseIter iterReverse = pPersonArray->rbegin() ; pPersonArray->rend() != iterReverse ; iterReverse++)  {
     sprintf(buffer, "%s", (*iterReverse)->getNom().c_str()) ;
     TListWindItem Item(buffer, 0) ;
     pListe->InsertItem(Item) ;

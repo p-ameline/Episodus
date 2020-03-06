@@ -4397,11 +4397,11 @@ NSPosologieBlock::createControls()
 	_tabPoso    = new TTabControl(pUtilDlg, IDC_TABPSOLO) ;     // Control des cycles circadiens
 
 	const char *champpLexiqCodesCB[] = { "2HEUR1", "2DAT01", "2DAT11", "2DAT21" } ;  // heure  jour semaine  mois
-  VecteurString *pLexiqCodesCB = new VecteurString(champpLexiqCodesCB) ;
+  VecteurString aLexiqCodesCB(champpLexiqCodesCB) ;
   delete[] (champpLexiqCodesCB) ;
 
   const char *champpLexiqJour[] = {"2SEC01", "2MINU1", "2HEUR1", "2DAT01", "2FOIS1"} ; // sec min  heure    jour fois
-  VecteurString *pLexiqJour = new VecteurString(champpLexiqJour) ;
+  VecteurString aLexiqJour(champpLexiqJour) ;
   delete[] (champpLexiqJour) ;
 
 	_pEditTextLibre  = new NSTexteLibre(pUtilDlg, pContexte, "£C;020", IDC_FREETXT_CYCLE) ;
@@ -4433,14 +4433,14 @@ NSPosologieBlock::createControls()
 	_quantRCycle    = new NSUpDownEdit(pUtilDlg, pContexte, string(""), IDC_EDREGPOS,  IDC_UPDOWN_REGPOS) ;  // Cycle regulier
 	_freqRCycle     = new NSUpDownEdit(pUtilDlg, pContexte, string(""), IDC_EDREGFREQ, IDC_UPDOWN_REGFREG) ;     // Cycle Rythme regulier
 	const char *tempre[] = { "2SEC01", "2MINU1", "2HEUR1" } ;
-	VecteurString   *pLexiqJours = new VecteurString(tempre) ;
+	VecteurString aLexiqJours(tempre) ;
 	delete[] (tempre) ;
-	_RCycleComboF    = new NSComboBox(pUtilDlg, IDC_COMBREG2POS, pContexte, pLexiqJours) ;     // Cycle Rythme regulier
+	_RCycleComboF    = new NSComboBox(pUtilDlg, IDC_COMBREG2POS, pContexte, &aLexiqJours) ;     // Cycle Rythme regulier
 
 	_quantFCycle     = new NSUpDownEdit(pUtilDlg, pContexte, string(""), IDC_EDFREQ3,    IDC_UPDOWN_FREQ3) ;    // Cycle irregulier
 	_quantFreqFCycle = new NSUpDownEdit(pUtilDlg, pContexte, string(""), IDC_UNITEDFOIS, IDC_UPDOWN_UNITFOIS) ; // Cycle irregulier
 	_quantFoisCycle  = new NSUpDownEdit(pUtilDlg, pContexte, string(""), IDC_PSOEDFOIS,  IDC_UPDOWN_PSCOUNT) ;  // Cycle irregulier
-	_FCycleComboF    = new NSComboBox(pUtilDlg, IDC_COMBOFREQ3, pContexte, pLexiqJour) ;                // Cycle irregulier
+	_FCycleComboF    = new NSComboBox(pUtilDlg, IDC_COMBOFREQ3, pContexte, &aLexiqJour) ;                // Cycle irregulier
 
   // *********************** Cycle
   //
@@ -4467,33 +4467,33 @@ NSPosologieBlock::createControls()
 
 	_numJourLabel   = new TStatic(pUtilDlg, IDC_J3) ;
 	_numJour        = new NSUpDownEdit(pUtilDlg, pContexte, "", IDC_J4, IDC_J5) ;  // Cycle regulier
-	_pJour1          = new NSRadioButtonControle(pUtilDlg, pContexte, "2DAT01", IDC_J1) ;
+	_pJour1         = new NSRadioButtonControle(pUtilDlg, pContexte, "2DAT01", IDC_J1) ;
 	_pJour1->setChangeResponse(new MemFunctor<NSPosoIncludeDlg>( (NSPosoIncludeDlg*)_pDialog, &NSPosoIncludeDlg::updateCyclePreview )) ;
-	_pJour2          = new NSRadioButtonControle(pUtilDlg, pContexte, "2DAT01", IDC_J2) ;
+	_pJour2         = new NSRadioButtonControle(pUtilDlg, pContexte, "2DAT01", IDC_J2) ;
 	_pJour2->setChangeResponse(new MemFunctor<NSPosoIncludeDlg>( (NSPosoIncludeDlg*)_pDialog, &NSPosoIncludeDlg::updateCyclePreview )) ;
 
-	_pDureeCure       = new NSUpDownEdit(pUtilDlg, pContexte, "", IDC_CUREED, IDC_UPDOWN5) ;        // rythme régulier
+	_pDureeCure     = new NSUpDownEdit(pUtilDlg, pContexte, "", IDC_CUREED, IDC_UPDOWN5) ;        // rythme régulier
 	_pDureeCure->getEditNum()->SetLostFocusResponse(new MemFunctor<NSPosoIncludeDlg>( (NSPosoIncludeDlg*)_pDialog, &NSPosoIncludeDlg::updateCyclePreview )) ;
 	_pDureeCure->getUpDown()->SetLostFocusResponse(new MemFunctor<NSPosoIncludeDlg>( (NSPosoIncludeDlg*)_pDialog, &NSPosoIncludeDlg::updateCyclePreview )) ;
 
-	_psymDureeCure    = new NSComboBox(pUtilDlg, IDC_COMCURE, pContexte, pLexiqCodesCB);    // rythme régulier
+	_psymDureeCure  = new NSComboBox(pUtilDlg, IDC_COMCURE, pContexte, &aLexiqCodesCB);    // rythme régulier
 	_psymDureeCure->SetLostFocusResponse(new MemFunctor<NSPosoIncludeDlg>( (NSPosoIncludeDlg*)_pDialog, &NSPosoIncludeDlg::updateCyclePreview ));
 
-	_pDureeCycleR     = new NSUpDownEdit(pUtilDlg, pContexte,"",IDC_EDCURCYC  ,IDC_UPDOWN6);        // rythme régulier
+	_pDureeCycleR   = new NSUpDownEdit(pUtilDlg, pContexte,"",IDC_EDCURCYC  ,IDC_UPDOWN6);        // rythme régulier
 	_pDureeCycleR->getEditNum()->SetLostFocusResponse(new MemFunctor<NSPosoIncludeDlg>( (NSPosoIncludeDlg*)_pDialog, &NSPosoIncludeDlg::updateCyclePreview ));
 	_pDureeCycleR->getUpDown()->SetLostFocusResponse(new MemFunctor<NSPosoIncludeDlg>( (NSPosoIncludeDlg*)_pDialog, &NSPosoIncludeDlg::updateCyclePreview ));
 
-	_psymDureeCycleR  = new NSComboBox(pUtilDlg, IDC_COMBOBOX2, pContexte, pLexiqCodesCB);    // rythme régulie
+	_psymDureeCycleR = new NSComboBox(pUtilDlg, IDC_COMBOBOX2, pContexte, &aLexiqCodesCB);    // rythme régulie
 	_psymDureeCycleR->SetLostFocusResponse(new MemFunctor<NSPosoIncludeDlg>( (NSPosoIncludeDlg*)_pDialog, &NSPosoIncludeDlg::updateCyclePreview ));
 
-	_pDureeCureF      = new NSUpDownEdit(pUtilDlg, pContexte,"", IDC_EDITCUR2, IDC_UPDOWN11) ;  // rythme libre
+	_pDureeCureF     = new NSUpDownEdit(pUtilDlg, pContexte,"", IDC_EDITCUR2, IDC_UPDOWN11) ;  // rythme libre
 	_pDureeCureF->getEditNum()->SetLostFocusResponse(new MemFunctor<NSPosoIncludeDlg>( (NSPosoIncludeDlg*)_pDialog, &NSPosoIncludeDlg::updateCyclePreview ));
 	_pDureeCureF->getUpDown()->SetLostFocusResponse(new MemFunctor<NSPosoIncludeDlg>( (NSPosoIncludeDlg*)_pDialog, &NSPosoIncludeDlg::updateCyclePreview ));
 
-	_psymDureeCureF   = new NSComboBox(pUtilDlg, IDC_COMCUR2, pContexte, pLexiqCodesCB);        // rythme libre
+	_psymDureeCureF  = new NSComboBox(pUtilDlg, IDC_COMCUR2, pContexte, &aLexiqCodesCB);        // rythme libre
 	_psymDureeCureF->SetLostFocusResponse(new MemFunctor<NSPosoIncludeDlg>( (NSPosoIncludeDlg*)_pDialog, &NSPosoIncludeDlg::updateCyclePreview ));
 
-	_pDureeCureFTime  = new NSUpDownEdit(pUtilDlg, pContexte,"", IDC_CUREEDLI, IDC_UPDOWN9) ;    // rythme libre
+	_pDureeCureFTime = new NSUpDownEdit(pUtilDlg, pContexte,"", IDC_CUREEDLI, IDC_UPDOWN9) ;    // rythme libre
 	_pDureeCureFTime->getEditNum()->SetLostFocusResponse(new MemFunctor<NSPosoIncludeDlg>( (NSPosoIncludeDlg*)_pDialog, &NSPosoIncludeDlg::updateCyclePreview ));
 	_pDureeCureFTime->getUpDown()->SetLostFocusResponse(new MemFunctor<NSPosoIncludeDlg>( (NSPosoIncludeDlg*)_pDialog, &NSPosoIncludeDlg::updateCyclePreview ));
 
@@ -4501,7 +4501,7 @@ NSPosologieBlock::createControls()
 	_pDureeCycleFreqF->getEditNum()->SetLostFocusResponse(new MemFunctor<NSPosoIncludeDlg>( (NSPosoIncludeDlg*)_pDialog, &NSPosoIncludeDlg::updateCyclePreview ));
 	_pDureeCycleFreqF->getUpDown()->SetLostFocusResponse(new MemFunctor<NSPosoIncludeDlg>( (NSPosoIncludeDlg*)_pDialog, &NSPosoIncludeDlg::updateCyclePreview ));
 
-	_psymDureeCycleFreqF = new NSComboBox(pUtilDlg, IDC_COMIREGCY2, pContexte, pLexiqCodesCB) ;    // rythme libre
+	_psymDureeCycleFreqF = new NSComboBox(pUtilDlg, IDC_COMIREGCY2, pContexte, &aLexiqCodesCB) ;    // rythme libre
 	_psymDureeCycleFreqF->SetLostFocusResponse(new MemFunctor<NSPosoIncludeDlg>( (NSPosoIncludeDlg*)_pDialog, &NSPosoIncludeDlg::updateCyclePreview )) ;
 
 	_viewCycle        = new NTTList<NSMedicCycleGlobal, NSPosoIncludeDlg> (pUtilDlg, IDC_LISTVIEWFORCYCLE) ;
@@ -5086,13 +5086,13 @@ NSMedicamentDlg::NSMedicamentDlg(TWindow *parent, NSContexte *pCtx, NSPatPathoAr
   _pRenouvellement->getEditNum()->SetLostFocusResponse(new MemFunctor<NSMedicamentDlg>( (NSMedicamentDlg*)this, &NSMedicamentDlg::ActualisePhasePreview ));
   _pRenouvellement->getUpDown()->SetLostFocusResponse(new MemFunctor<NSMedicamentDlg>( (NSMedicamentDlg*)this, &NSMedicamentDlg::ActualisePhasePreview ));
 
-  _pPhases        = new NSphaseMedicArray() ;       // Creation  du tableau contenant les phases
+  _pPhases         = new NSphaseMedicArray() ;       // Creation  du tableau contenant les phases
   _phaseBox        = new NTTList<NSphaseMedic, NSMedicamentDlg>(this, IDC_LISTPHASE, _pPhases, false) ;  // initialisation de la liste affichant les différente phase
   _phaseBox->setKeyUpResponse(new MemFunctor<NSMedicamentDlg>( (NSMedicamentDlg*)this, &NSMedicamentDlg::EvListBoxSelPhase ) );
   _phaseBox->setKeyDownResponse(new MemFunctor<NSMedicamentDlg>( (NSMedicamentDlg*)this, &NSMedicamentDlg::EvListBoxSelPhase ) );
 
   // durée de la phase
-  char *temp[] = {"2HEUR1","2DAT01","2DAT11","2DAT21"} ;
+  const char *temp[] = { "2HEUR1", "2DAT01", "2DAT11", "2DAT21" } ;
   _pCBDureePhase   = new NSComboBox(this, IDC_PHASECOMBO1, pContexte, temp, 4) ;
   _pCBDureePhase->SetLostFocusResponse(new MemFunctor<NSMedicamentDlg>( (NSMedicamentDlg*)this, &NSMedicamentDlg::ActualisePhasePreview ));
 

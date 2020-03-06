@@ -217,35 +217,34 @@ voidTControlSMTP::ComposeMessage(string sFromAdr, string sToAdr, string sObjet,
   string            sFichLettre ;
   char					    msg[255] ;
   char far			 	  texte[2048] ;
-  ConvertRTFDialog* pConvert ;
 
-  encours = AnsiString(sToAdr.c_str());
-  EditDest->Text = encours;
+  encours = AnsiString(sToAdr.c_str()) ;
+  EditDest->Text = encours ;
 
-  SMTP->ClearParameters();
-  SMTP->PostMessage->FromAddress = AnsiString(sFromAdr.c_str());
-  SMTP->PostMessage->ToAddress->Add(AnsiString(sToAdr.c_str()));
-  SMTP->PostMessage->Subject = AnsiString(sObjet.c_str());
+  SMTP->ClearParameters() ;
+  SMTP->PostMessage->FromAddress = AnsiString(sFromAdr.c_str()) ;
+  SMTP->PostMessage->ToAddress->Add(AnsiString(sToAdr.c_str())) ;
+  SMTP->PostMessage->Subject = AnsiString(sObjet.c_str()) ;
 
   // composition du Body en fonction du code lettre du document
-  if (sCodeLettre != "")
+  if (string("") != sCodeLettre)
   {
     NSDocumentInfo docInfo(sCodeLettre, pContexte, pContexte->getPatient()->getGraphPerson()) ;
     docInfo.InitDocumentBrut(&pDocTtxInfo) ;
     sPath = pContexte->PathName(pDocTtxInfo->getLocalis()) ;
     sFichLettre = sPath + pDocTtxInfo->getFichier() ;
-    pConvert = new ConvertRTFDialog(pContexte->GetMainWindow(), sFichLettre.c_str()) ;
-    pConvert->Create() ;
-    pConvert->getRichEdit()->GetText(texte, 2048) ;
+
+    ConvertRTFDialog convertDlg(pContexte, pContexte->GetMainWindow(), sFichLettre.c_str()) ;
+    convertDlg.Create() ;
+    convertDlg.getRichEdit()->GetText(texte, 2048) ;
     SMTP->PostMessage->Body->SetText(texte) ;
-    pConvert->CmOk() ;
-    delete pConvert ;
+    convertDlg.CmOk() ;
   }
   else
   {
     sNomDoc = pDoc->_pDocInfo->getDocName() ;
 
-    if (sNomDoc == "")
+    if (string("") == sNomDoc)
     {    	sprintf(msg, "le document concernant %s %s.",              pContexte->getPatient()->getszNom(),
             pContexte->getPatient()->getszPrenom()) ;
     }

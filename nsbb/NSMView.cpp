@@ -51,6 +51,7 @@
 #include "nautilus\nsmdiframe.h"
 #include "nsldv\nsldvdoc_base.h"
 #include "nautilus\nshistdo.h"
+#include "partage\nsdivfile.h"
 
 #include "ns_ob1\BB1BB.h"
 
@@ -3656,7 +3657,13 @@ ArrayWinProp::setProperty(string sUserId, string sFunction, NS_CLASSLIB::TRect r
   outFile.open(sFichier.c_str(), ios::out) ;
   if (!outFile)
   {
+    string sFileError = getFileError() ;
+
     string sErreur = "Erreur d'ouverture du fichier " + sFichier ;
+
+    if (string("") != sFileError)
+      sErreur += string(" (") + sFileError + string(")") ;
+
     erreur(sErreur.c_str(), standardError, 0) ;
     return ;
   }
@@ -3720,7 +3727,10 @@ ArrayWinProp::saveWindowProperty(string sUserId, string sPersoDirectory, NSWindo
 		outFile.open(sFichier.c_str(), ios::out) ;
 		if (!outFile)
 		{
+      string sFileError = getFileError() ;
 			string sErreur = "Erreur d'ouverture du fichier " + sFichier ;
+      if (string("") != sFileError)
+        sErreur += string(" (") + sFileError + string(")") ;
 			erreur(sErreur.c_str(), standardError, 0) ;
 			return ;
 		}

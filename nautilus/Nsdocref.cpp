@@ -461,9 +461,16 @@ NSRefDocument::Visualiser()
 {
 try
 {
+  string sMsg = string("Entering NSRefDocument::Visualiser (document ID: \"") + getDocId() + string("\").") ;
+  pContexte->getSuperviseur()->trace(&sMsg, 1, NSSuper::trSubDetails) ;
+
 	// si pas d'utilisateur ou pas de patient en cours : on sort
 	if ((pContexte->getUtilisateur() == 0) || (pContexte->getPatient() == 0))
+  {
+    sMsg = string("No user or patient, leaving.") ;
+    pContexte->getSuperviseur()->trace(&sMsg, 1, NSSuper::trSubDetails) ;
 		return ;
+  }
 
 	if ((NSDocumentInfo*) NULL == _pDocInfo)	{
   	string sErrorText = pContexte->getSuperviseur()->getText("documentManagement", "youMustSaveBeforeVisualization") ;
@@ -472,11 +479,33 @@ try
 		return ;
 	}
 
-	// S'il existe déjà une visualisation du document, on l'active et on sort
-	if (pContexte->getPatient()->getDocHis()->ActiveFenetre(_pDocInfo, "NSVisualView"))
+  NSHISTODocument* pDocHis = pContexte->getPatient()->getDocHis() ;
+  if ((NSHISTODocument*) NULL == pDocHis)
+	{
+  	string sErrorText = string("NSRefDocument::Visualiser: Error, null histo document.") ;
+    pContexte->getSuperviseur()->trace(&sErrorText, 1, NSSuper::trError) ;
+    erreur(sErrorText.c_str(), warningError, 0, 0) ;
 		return ;
+	}
 
-	pContexte->getPatient()->getGraphPerson()->getTemplatePres(_pDocInfo->getCodeDocPres(), _sTemplate, _sEnTete) ;
+	// S'il existe déjà une visualisation du document, on l'active et on sort
+	if (pDocHis->ActiveFenetre(_pDocInfo, "NSVisualView"))
+  {
+    sMsg = string("Document already opened, just activated its window.") ;
+    pContexte->getSuperviseur()->trace(&sMsg, 1, NSSuper::trSubDetails) ;
+		return ;
+  }
+
+  NSPersonGraphManager* pGraphPerson = pContexte->getPatient()->getGraphPerson() ;
+  if ((NSHISTODocument*) NULL == pGraphPerson)
+	{
+  	string sErrorText = string("NSRefDocument::Visualiser: Error, null person graph.") ;
+    pContexte->getSuperviseur()->trace(&sErrorText, 1, NSSuper::trError) ;
+    erreur(sErrorText.c_str(), warningError, 0, 0) ;
+		return ;
+	}
+
+	pGraphPerson->getTemplatePres(_pDocInfo->getCodeDocPres(), _sTemplate, _sEnTete) ;
 
 	if ((string("") == _sTemplate) || (string("") == _sEnTete))
 	{
@@ -501,10 +530,10 @@ try
 	else
 		_sEnTete = string("") ;
 
-	setNbImpress(0) ;  NSDocViewManager dvManager(pContexte) ;	dvManager.createView(this, "Visual Format") ;}
+	setNbImpress(0) ;  sMsg = string("Asking the DocViewManager to open a new window.") ;  pContexte->getSuperviseur()->trace(&sMsg, 1, NSSuper::trSubDetails) ;  NSDocViewManager dvManager(pContexte) ;	dvManager.createView(this, "Visual Format") ;}
 catch (...)
 {
-  string sErrorText = string("Exception Visualiser.") ;
+  string sErrorText = string("Exception NSRefDocument::Visualiser.") ;
   pContexte->getSuperviseur()->trace(&sErrorText, 1, NSSuper::trError) ;
 	erreur(sErrorText.c_str(), standardError, 0) ;
 }
@@ -712,12 +741,12 @@ try
 
 	string sNumChemise = string("") ;
 
-	NSDocumentInfo* pParamInfo ;
+	NSDocumentInfo paramInfo(pContexte) ;
 
 	if (_pHtmlInfo)
-  	pParamInfo = new NSDocumentInfo(*_pHtmlInfo) ;
+  	paramInfo = *_pHtmlInfo ;
 	else if (_pDocInfo)
-		pParamInfo = new NSDocumentInfo(*_pDocInfo) ;
+		paramInfo = *_pDocInfo ;
 	else
 	{
 		erreur("Document non initialisé.", standardError, 0, pContexte->GetMainWindow()->GetHandle()) ;
@@ -727,61 +756,60 @@ try
 	if (_pHtmlInfo)
 	{
 		erreur("Ce document est un document composé. Vous ne pouvez pas modifier ses paramètres.", standardError, 0, pContexte->GetMainWindow()->GetHandle()) ;
-    delete pParamInfo ;
     return false ;
 	}
 
-	// Note : Dans pParamInfo, on remplace codeDocument par le code du meta
+	// Note : Dans paramInfo, on remplace codeDocument par le code du meta
 	// ce qui permet de voir si on a un lien systeme (IsDocRoot) et permet
 	// aussi d'appeler EnregDocDialog avec le code du meta, pour rester
 	// cohérent avec Referencer() et pour pouvoir récupérer la chemise du document
 	string sNewCodeDoc = string(_pDocInfo->getCodeDocMeta(), PAT_NSS_LEN, DOC_CODE_DOCUM_LEN) ;
-	pParamInfo->setDocument(sNewCodeDoc) ;
+	paramInfo.setDocument(sNewCodeDoc) ;
 
-	string sCodeDoc = pParamInfo->getID() ;
+	string sCodeDoc = paramInfo.getID() ;
 	if (pContexte->getPatient()->IsDocRoot(sCodeDoc))
 	{
 		erreur("Ce document est un document système. Vous ne pouvez pas modifier ses paramètres.", standardError, 0, pContexte->GetMainWindow()->GetHandle()) ;
-    delete pParamInfo ;
 		return false ;
 	}
 
 	//
 	// Appel de la boite de dialogue de référencement
 	//
-	string         sRights = pParamInfo->getRights() ;
+	string         sRights = paramInfo.getRights() ;
+
   NSDocumentData DocData ;
-  pParamInfo->initFromData(&DocData) ;
+  paramInfo.initFromData(&DocData) ;
 
-	EnregDocDialog* EnregDocDl =
-		      new EnregDocDialog(pContexte->GetMainWindow(), &DocData,
+  int iRetVal = 0 ;
+
+  if (string("") != DocData._sTypeContenu)
+  {
+	  EnregDocDialog EnregDocDl(pContexte->GetMainWindow(), &DocData,
         									                sNumChemise, sRights, pContexte) ;
-	int retVal = EnregDocDl->Execute() ;
-	delete EnregDocDl ;
+	  iRetVal = EnregDocDl.Execute() ;
+  }
+  else
+  {
+	  EnregDocDialogCombo EnregDocDl(pContexte->GetMainWindow(), &DocData,
+        									                sNumChemise, sRights, pContexte) ;
+	  iRetVal = EnregDocDl.Execute() ;
+  }
 
-	if (IDCANCEL == retVal)
-	{
-  	delete pParamInfo ;
+	if (IDCANCEL == iRetVal)
 		return false ;
-	}
 
-  pParamInfo->setData(&DocData) ;
+  paramInfo.setData(&DocData) ;
 
 	//
 	// Vérification de la présence des éléments obligatoires
 	//
-  if ((string("") == pParamInfo->getDocName()) ||
-		  (string(strlen(pParamInfo->getDocName().c_str()), ' ') == pParamInfo->getDocName()))
-	{
-		delete pParamInfo ;
+  if ((string("") == paramInfo.getDocName()) ||
+		  (string(strlen(paramInfo.getDocName().c_str()), ' ') == paramInfo.getDocName()))
 		return false ;
-	}
 
 	if (string("") == sNumChemise)
-	{
-		delete pParamInfo ;
 		return false ;
-	}
 
   NSProgressDlg progressDialog(pContexte->GetMainWindow(), pContexte) ;
   progressDialog.Create() ;
@@ -790,11 +818,11 @@ try
 
 	string sElemLex, sSens ;
 
-  // on remet ici le codeDocument du data dans pParamInfo
+  // on remet ici le codeDocument du data dans paramInfo
   // pour pouvoir comparer les changements directement avec l'operateur ==
   // on doit le faire de toute façon avant de remettre à jour pDocInfo
   //
-	pParamInfo->setDocument(_pDocInfo->getDocument()) ;
+	paramInfo.setDocument(_pDocInfo->getDocument()) ;
 
   bool bMustSaveMeta = false ;
 
@@ -807,7 +835,7 @@ try
   string sPreviousNodeChemise = string("") ;
   string sNewNodeChemise      = sNumChemise ;
 
-  string sCodeDocMeta = pParamInfo->getCodeDocMeta() ;
+  string sCodeDocMeta = paramInfo.getCodeDocMeta() ;
 	NSLinkManager* pGraphe = pContexte->getPatient()->getGraphPerson()->getLinkManager() ;
   VecteurString VecteurString ;
 	pGraphe->TousLesVrais(sCodeDocMeta, NSRootLink::docFolder, &VecteurString, "ENVERS") ;
@@ -830,11 +858,11 @@ try
     bMustSaveMeta = true ;
   }
 
-  NSNoyauDocument* pDocMeta     = 0 ;
+  NSNoyauDocument* pDocMeta = 0 ;
 
   // Now we take into account the other modifications
   //
-	if ((false == ((*pParamInfo) == (*_pDocInfo))) || bMustSaveMeta)
+	if ((false == (paramInfo == *_pDocInfo)) || bMustSaveMeta)
 	{
     // on doit ré-enregistrer le document Meta pour changer les paramètres
     // Les paramètres modifiables sont : visible, interet, le nom et la chemise
@@ -859,7 +887,7 @@ try
 
   // Now we take into account the other modifications
   //
-	if (!((*pParamInfo) == (*_pDocInfo)))
+	if (false == (paramInfo == *_pDocInfo))
 	{
     ps = "ParamDoc: information modified..." ;
     pContexte->getSuperviseur()->trace(&ps, 1, NSSuper::trSubSteps) ;
@@ -871,9 +899,9 @@ try
     // ceci est fait par un setTree sur le Meta dans Referencer(). Ici on met à
     // jour directement le NSNodeRightArray pour le Meta, qui est envoyé ensuite au pilote.
     NSDataGraph* pDataGraph = pContexte->getPatient()->getGraphPerson()->getDataGraph() ;
-    pDataGraph->getRights()->set(_pDocInfo->getCodeDocMeta(), pParamInfo->getRights()) ;
+    pDataGraph->getRights()->set(_pDocInfo->getCodeDocMeta(), paramInfo.getRights()) ;
 
-    // on remplace les données visible et interet du noeud racine    //    NSPatPathoArray PptMeta(pContexte->getSuperviseur()) ;    pDocMeta->initFromPatPatho(&PptMeta) ;    PatPathoIter iterDoc = PptMeta.begin() ;    int iColBase = (*iterDoc)->getColonne() ;    string sTemp ;    (*iterDoc)->setVisible(pParamInfo->getVisible()) ;    (*iterDoc)->setInteret(pParamInfo->getInteret()) ;    // on remplace le nom (noeud suivant par construction)    iterDoc++ ;    while ((PptMeta.end() != iterDoc) && ((*iterDoc)->getColonne() > iColBase))
+    // on remplace les données visible et interet du noeud racine    //    NSPatPathoArray PptMeta(pContexte->getSuperviseur()) ;    pDocMeta->initFromPatPatho(&PptMeta) ;    PatPathoIter iterDoc = PptMeta.begin() ;    int iColBase = (*iterDoc)->getColonne() ;    string sTemp ;    (*iterDoc)->setVisible(paramInfo.getVisible()) ;    (*iterDoc)->setInteret(paramInfo.getInteret()) ;    // on remplace le nom (noeud suivant par construction)    iterDoc++ ;    while ((PptMeta.end() != iterDoc) && ((*iterDoc)->getColonne() > iColBase))
     {
     	sElemLex = (*iterDoc)->getLexique() ;
       sSens    = (*iterDoc)->getLexiqueSens() ;
@@ -881,7 +909,7 @@ try
       if (string("0INTI") == sSens)
       {
       	iterDoc++ ;
-        string sNom = "" ;
+        string sNom = string("") ;
         while ((PptMeta.end() != iterDoc) && ((*iterDoc)->getColonne() > iColBase+1))
         {
         	// on cherche ici un texte libre
@@ -890,8 +918,8 @@ try
           {
           	sNom = (*iterDoc)->getTexteLibre() ;
 
-            if (sNom != pParamInfo->getDocName())
-            	(*iterDoc)->setTexteLibre(pParamInfo->getDocName()) ;
+            if (paramInfo.getDocName() != sNom)
+            	(*iterDoc)->setTexteLibre(paramInfo.getDocName()) ;
 
             break ;
           }
@@ -900,7 +928,7 @@ try
         }
       }
       // date de rédaction
-      else if (sSens == string("KREDA"))
+      else if (string("KREDA") == sSens)
       {
       	iterDoc++ ;
         // int iLigneBase = (*iter)->pDonnees->getLigne() ;
@@ -918,9 +946,9 @@ try
         if (strlen(sValeur.c_str()) > 14)
         	sValeur = string(sValeur, 0, 14) ;
 
-        if (pParamInfo->getCreDate() != sValeur)
+        if (paramInfo.getCreDate() != sValeur)
         {
-        	string sDateReda = pParamInfo->getCreDate() ;
+        	string sDateReda = paramInfo.getCreDate() ;
           if (strlen(sDateReda.c_str()) == 8)
           	sDateReda += string("000000") ;
         	(*iterDoc)->setComplement(sDateReda) ;
@@ -939,7 +967,7 @@ try
 
   if (bMustSaveMeta)
   {
-    // on enregistre enfin le meta et on remet à jour pParamInfo
+    // on enregistre enfin le meta et on remet à jour paramInfo
 
     ps = "ParamDoc: information modified... saving the Meta" ;
     pContexte->getSuperviseur()->trace(&ps, 1, NSSuper::trSubSteps) ;
@@ -948,7 +976,7 @@ try
     progressDialog.setPosition(40) ;
 
     if (pDocMeta->enregistrePatPatho())
-    	pDocMeta->NSNoyauDocument::chargePatPatho() ;    ps = "ParamDoc: information modified... Meta saved" ;    pContexte->getSuperviseur()->trace(&ps, 1, NSSuper::trSubSteps) ;    NSPatPathoArray PptDocMeta(pContexte->getSuperviseur()) ;    pDocMeta->initFromPatPatho(&PptDocMeta) ;    pParamInfo->setMeta(&PptDocMeta) ;
+    	pDocMeta->NSNoyauDocument::chargePatPatho() ;    ps = "ParamDoc: information modified... Meta saved" ;    pContexte->getSuperviseur()->trace(&ps, 1, NSSuper::trSubSteps) ;    NSPatPathoArray PptDocMeta(pContexte->getSuperviseur()) ;    pDocMeta->initFromPatPatho(&PptDocMeta) ;    paramInfo.setMeta(&PptDocMeta) ;
   }
 
 	// En dernier lieu on vérifie si il faut restaurer le document
@@ -963,13 +991,12 @@ try
   	pGraphe->etablirLien(sNodeRoot, NSRootLink::personDocument, sCodeDocMeta) ;
   }
 
-	// Remise à jour des pDocInfo ou pHtmlInfo en mémoire d'après les pParamInfo
+	// Remise à jour des pDocInfo ou pHtmlInfo en mémoire d'après les paramInfo
+  //
 	if (_pHtmlInfo)
-  	*(_pHtmlInfo) = *(pParamInfo) ;
+  	*(_pHtmlInfo) = paramInfo ;
 	else if (_pDocInfo)
-  	*(_pDocInfo) = *(pParamInfo) ;
-
-	delete pParamInfo ;
+  	*(_pDocInfo)  = paramInfo ;
 
   progressDialog.updateTaskText(string("Opération achevée")) ;
   progressDialog.setPosition(100) ;

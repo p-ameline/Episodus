@@ -1,4 +1,4 @@
-#include "nautilus\nssuper.h"#include "nsbb\nsRichEdit.h"#include "nssavoir\nsHtmBase.h"
+#include "nautilus\nssuper.h"#include "nsbb\nsRichEdit.h"#include "nssavoir\nsHtmBase.h"#include "partage\nsdivfile.h"
 #define IDC_RICHECVT 168
 
 // Range of the editor's font size
@@ -20,12 +20,12 @@ const int MaxPointSize = 128;
 //-----------------------------------------------------------------------------//                            ConvertRTFDialog
 //            Just needed to work on an active RichEdit control
 //-----------------------------------------------------------------------------
-ConvertRTFDialog::ConvertRTFDialog(TWindow *pere, string sFileName)
-                 :TDialog(pere, "IDD_CONVRTF")
+ConvertRTFDialog::ConvertRTFDialog(NSContexte* pCtx, TWindow *pere, string sFileName)
+                 :NSUtilDialog(pere, pCtx, "IDD_CONVRTF")
 {
 try
 {
-  _pRichEdit = new NSRichEdit(this, IDC_RICHECVT, "", 12, 12, 450, 220) ;
+  _pRichEdit = new NSRichEdit(pContexte, this, IDC_RICHECVT, "", 12, 12, 450, 220) ;
   _sFileName = sFileName ;
 }
 catch (...)
@@ -47,7 +47,7 @@ ConvertRTFDialog::SetupWindow()
 }
 //-----------------------------------------------------------------------------//                            NSRichEdit
 //-----------------------------------------------------------------------------
-DEFINE_RESPONSE_TABLE1(NSRichEdit, TEditFile)  EV_COMMAND(CM_EDITCUT, CmEditCut),
+DEFINE_RESPONSE_TABLE1(NSRichEdit, TRichEdit)  EV_COMMAND(CM_EDITCUT, CmEditCut),
   EV_COMMAND(CM_EDITCOPY, CmEditCopy),
   EV_COMMAND(CM_EDITPASTE, CmEditPaste),
   EV_COMMAND(CM_EDITDELETE, CmEditDelete),
@@ -65,12 +65,13 @@ ConvertRTFDialog::SetupWindow()
   EV_WM_SETFOCUS,
   EV_WM_KILLFOCUS,
 END_RESPONSE_TABLE;
-NSRichEdit::NSRichEdit(TWindow*        parent,                       int             id,
+NSRichEdit::NSRichEdit(NSContexte*     pCtx,                       TWindow*        parent,                       int             id,
                        const char far* text,
                        int x, int y, int w, int h,
                        const char far* fileName,
                        TModule*        module)
-           :OWL::TRichEdit(parent, id, text, x, y, w, h, fileName, module)
+           :OWL::TRichEdit(parent, id, text, x, y, w, h, fileName, module),
+            NSRoot(pCtx)
 {
 }
 /*
@@ -93,11 +94,12 @@ END_RESPONSE_TABLE;
 }
 */
 
-NSRichEdit::NSRichEdit(TWindow* parent,
-                       int      resourceId,
-                       TModule* module)
+NSRichEdit::NSRichEdit(NSContexte* pCtx,
+                       TWindow*    parent,
+                       int         resourceId,
+                       TModule*    module)
            // :TEditFile(parent, resourceId, module ? *module : *parent->GetModule())
-           :TRichEdit(parent, resourceId, module)
+           :TRichEdit(parent, resourceId, module), NSRoot(pCtx)
 {}// Replaces a text segment (from iStart, with a size of iLen) with sNewText//// Before Insert, it is possible to write either//                                  DeleteSubText(iStart, iStart + iLen) ;//                                        or//                                  SetSelection(iStart, iStart + iLen) ;//// The former is visually better, and doesn't alter a current selection if any//voidNSRichEdit::ReplaceText(const size_t iStart, const size_t iLen, const string sNewText){  DeleteSubText(iStart, iStart + iLen) ;  Insert(sNewText.c_str()) ;}voidNSRichEdit::ConvertToHtml(NSHtml *pText, NSContexte *pContexte){  if (((NSHtml*) NULL == pText) || ((NSContexte*) NULL == pContexte))    return ;
 
   // constante MAXCARS dans nsttx.h
@@ -1168,12 +1170,12 @@ NSRichEdit::Transfer(void* /*buffer*/, TTransferDirection /*direction*/)
 // the current selection. Otherwise, the stream replaces the entire contents
 // of the control.
 //
-bool
+DWORD
 NSRichEdit::ReadFromStream(istream& is, uint fmt)
 {
-  TEditStream edStrm(DWORD((istream*)&is), RichEditStrmInWithIStream);
-  StreamIn(fmt, edStrm);
-  return edStrm.dwError == 0;
+  TEditStream edStrm(DWORD((istream*)&is), RichEditStrmInWithIStream) ;
+  StreamIn(fmt, edStrm) ;
+  return edStrm.dwError ;
 }
 
 //
@@ -1195,12 +1197,12 @@ NSRichEdit::ReadFromStream(istream& is, uint fmt)
 //       current selection are streamed out. Otherwise, the entire contents of
 //       the control are streamed out.
 //
-bool
+DWORD
 NSRichEdit::WriteToStream(ostream& os, uint fmt)
 {
   TEditStream edStrm(DWORD((ostream*)&os), RichEditStrmOutWithOstream);
   StreamOut(fmt, edStrm);
-  return edStrm.dwError == 0;
+  return edStrm.dwError ;
 }
 
 //
@@ -1210,27 +1212,62 @@ NSRichEdit::WriteToStream(ostream& os, uint fmt)
 bool
 NSRichEdit::Read(const char far* fileName)
 {
-  if (!fileName)
+  if ((char*) NULL == fileName)
+  {
     if (FileName)
-      fileName = FileName;
+      fileName = FileName ;
     else
-      return false;
+    {
+      erreur("Fichier inconnu.", standardError, 0) ;
+      return false ;
+    }
+  }
 
   ifstream ifs(fileName, ios::in|ios::binary);
-  if (ifs) {
+  if (ifs)
+  {
     // Could check for a valid file (eg. FileSize != 0)
     // before proceeding with a call to Clear() here.
     //
-    Clear();
+    Clear() ;
 
     // Stream in data from file
     //
-    if (ReadFromStream(ifs, TRichEdit::Format)) {
-      ClearModify();
-      return true;
+    DWORD result = ReadFromStream(ifs, TRichEdit::Format) ;
+    if (0 == result)
+    {
+      ClearModify() ;
+      return true ;
+    }
+    else
+    {
+      string sFileError = getErrorText((LONG) result) ;
+
+      string sErrorMsg = pContexte->getSuperviseur()->getText("fileErrors", "errorOpeningInputFile") ;
+      sErrorMsg += string(" ") + string(fileName) ;
+
+      if (string("") != sFileError)
+        sErrorMsg += string(" (") + sFileError + string(")") ;
+
+      pContexte->getSuperviseur()->trace(&sErrorMsg, 1, NSSuper::trError) ;
+  	  erreur(sErrorMsg.c_str(), standardError, 0, pContexte->GetMainWindow()->GetHandle()) ;
     }
   }
-  return false;
+  else
+  {
+    string sFileError = getFileError() ;
+
+    string sErrorMsg = pContexte->getSuperviseur()->getText("fileErrors", "errorOpeningInputFile") ;
+    sErrorMsg += string(" ") + string(fileName) ;
+
+    if (string("") != sFileError)
+      sErrorMsg += string(" (") + sFileError + string(")") ;
+
+    pContexte->getSuperviseur()->trace(&sErrorMsg, 1, NSSuper::trError) ;
+  	erreur(sErrorMsg.c_str(), standardError, 0, pContexte->GetMainWindow()->GetHandle()) ;
+  }
+
+  return false ;
 }
 
 //
@@ -1240,20 +1277,55 @@ NSRichEdit::Read(const char far* fileName)
 bool
 NSRichEdit::Write(const char far* fileName)
 {
-  if (!fileName)
+  if ((char*) NULL == fileName)
+  {
     if (FileName)
-      fileName = FileName;
+      fileName = FileName ;
     else
-      return false;
-
-  ofstream ofs(fileName, ios::out|ios::binary);
-  if (ofs) {
-    if (WriteToStream(ofs, TRichEdit::Format)) {
-      ClearModify();
-      return true;
+    {
+      erreur("Fichier inconnu.", standardError, 0) ;
+      return false ;
     }
   }
-  return false;
+
+  ofstream ofs(fileName, ios::out|ios::binary) ;
+  if (ofs)
+  {
+    DWORD result = WriteToStream(ofs, TRichEdit::Format) ;
+    if (0 == result)
+    {
+      ClearModify() ;
+      return true ;
+    }
+    else
+    {
+      string sFileError = getErrorText((LONG) result) ;
+
+      string sErrorMsg = pContexte->getSuperviseur()->getText("fileErrors", "errorOpeningInputFile") ;
+      sErrorMsg += string(" ") + string(fileName) ;
+
+      if (string("") != sFileError)
+        sErrorMsg += string(" (") + sFileError + string(")") ;
+
+      pContexte->getSuperviseur()->trace(&sErrorMsg, 1, NSSuper::trError) ;
+  	  erreur(sErrorMsg.c_str(), standardError, 0, pContexte->GetMainWindow()->GetHandle()) ;
+    }
+  }
+  else
+  {
+    string sFileError = getFileError() ;
+
+    string sErrorMsg = pContexte->getSuperviseur()->getText("fileErrors", "errorOpeningOutputFile") ;
+    sErrorMsg += string(" ") + fileName ;
+
+    if (string("") != sFileError)
+      sErrorMsg += string(" (") + sFileError + string(")") ;
+
+    pContexte->getSuperviseur()->trace(&sErrorMsg, 1, NSSuper::trError) ;
+  	erreur(sErrorMsg.c_str(), standardError, 0, pContexte->GetMainWindow()->GetHandle()) ;
+  }
+
+  return false ;
 }//-----------------------------------------------------------------------------//                            NSParaFormat2
 //-----------------------------------------------------------------------------
 NSParaFormat2::NSParaFormat2(ulong mask){
@@ -1286,7 +1358,7 @@ NSParaFormat2::ToggleMaskBit(ulong flag)
 void
 NSParaFormat2::SetNumbering(uint16 opt)
 {
-  PRECONDITION(opt == 0 || opt == PFN_BULLET);
+  PRECONDITION((0 == opt) || (PFN_BULLET == opt)) ;
 
   dwMask |= PFM_ALIGNMENT;
   wNumbering = opt;

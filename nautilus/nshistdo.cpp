@@ -366,9 +366,12 @@ NSHISTODocument::Rafraichir(NSDocumentInfo* pNSDocumentInfo,
   //
   if (pContexte->_pAlertBoxWindow)
   {
-    NSDrugView* pDrugView = pContexte->getPatient()->getDrugView() ;
-    if (pDrugView)
-      pDrugView->checkByBdm() ;
+    if (pContexte->getPatient())
+    {
+      NSDrugView* pDrugView = pContexte->getPatient()->getDrugView() ;
+      if (pDrugView)
+        pDrugView->checkByBdm() ;
+    }
   }
 
   /* Code when non visible documents were not part of VectDocument
@@ -450,7 +453,7 @@ voidNSHISTODocument::AjouteALdV(NSDocumentInfo* pNSDocumentInfo)
 		return ;
 
 	string sCodeDoc = pNSDocumentInfo->getID() ;
-  string sDate    = "" ;
+  string sDate    = string("") ;
   string sType    = pNSDocumentInfo->getTypeSem() ;
 	string sTitle   = pNSDocumentInfo->getDocName() ;
 
@@ -458,7 +461,7 @@ voidNSHISTODocument::AjouteALdV(NSDocumentInfo* pNSDocumentInfo)
 	if ((iterDoc) && (getVectDocument()->end() != iterDoc))
 		sDate = (*iterDoc)->getDateDoc() ;
 
-	pLdvDoc->addObjet(sTitle, sDate, sDate, "", sCodeDoc, sType, pNSDocumentInfo->getContent()) ;
+	pLdvDoc->addObjet(sTitle, sDate, sDate, string(""), sCodeDoc, sType, pNSDocumentInfo->getContent()) ;
 }
 
 //-----------------------------------------------------------------------// demander l'autorisation de l'ouverture du document
@@ -466,6 +469,15 @@ voidNSHISTODocument::AjouteALdV(NSDocumentInfo* pNSDocumentInfo)
 void
 NSHISTODocument::AutoriserOuverture(NSDocumentInfo* pDocument)
 {
+  if ((NSDocumentInfo*) NULL == pDocument)
+		return ;
+
+  // No patient or patient being closed -> no way
+  //
+  NSPatientChoisi* pCurrentPatient = pContexte->getPatient() ;
+  if (((NSPatientChoisi*) 0 == pCurrentPatient) || pCurrentPatient->isClosing())
+    return ;
+
 	NsHistorique* pNsHistorique = getHistorique() ;
   if ((NsHistorique*) NULL == pNsHistorique)
     return ;
@@ -480,6 +492,12 @@ NSHISTODocument::AutoriserEdition(NSDocumentInfo* pDocument)
 {
 	if ((NSDocumentInfo*) NULL == pDocument)
 		return ;
+
+  // No patient or patient being closed -> no way
+  //
+  NSPatientChoisi* pCurrentPatient = pContexte->getPatient() ;
+  if (((NSPatientChoisi*) 0 == pCurrentPatient) || pCurrentPatient->isClosing())
+    return ;
 
 	NsHistorique* pNsHistorique = getHistorique() ;
   if ((NsHistorique*) NULL == pNsHistorique)

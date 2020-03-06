@@ -8,8 +8,11 @@
 #include <classlib\filename.h>
 
 #include "nssavoir\nsBdmDriver.h"
-#include "nautilus\ns_html.h"
 #include "nautilus\nssuper.h"
+#include "nsbb\nsutidlg.h"
+
+#include "nautilus\ns_html.h"
+
 #include "partage\nsdivfct.h"
 #include "nautilus\nsresour.h"
 
@@ -2445,7 +2448,7 @@ try
   // En cas d'importation, il est normal de ne pas avoir de pDocNoy
   else if (typeOp == toImporter)
   {
-    _pDialog = new ConvertRTFDialog(pContexte->GetMainWindow(), sFileName) ;
+    _pDialog = new ConvertRTFDialog(pContexte, pContexte->GetMainWindow(), sFileName) ;
     _iAlignPrec = -1 ;
     return ;
   }
@@ -2453,7 +2456,7 @@ try
   {
     erreur("Le document texte ne peut pas être converti en html", warningError, 0, pContexte->GetMainWindow()->GetHandle()) ;
     // on initialise le dialogue de conversion pour éviter les bugs
-    _pDialog = new ConvertRTFDialog(pContexte->GetMainWindow(), sFileName) ;
+    _pDialog = new ConvertRTFDialog(pContexte, pContexte->GetMainWindow(), sFileName) ;
     _iAlignPrec = -1 ;
     return ;
   }
@@ -2461,7 +2464,7 @@ try
 	if (string("ZTRTF") == pTtxDoc->_pDocInfo->getTypeSem())
   {
     // on initialise le dialogue de conversion et l'alignement des paragraphes
-    _pDialog = new ConvertRTFDialog(pContexte->GetMainWindow(), sFileName) ;
+    _pDialog = new ConvertRTFDialog(pContexte, pContexte->GetMainWindow(), sFileName) ;
     _iAlignPrec = -1 ;
   }
 	else if (string("ZTHTM") == pTtxDoc->_pDocInfo->getTypeSem())

@@ -1472,6 +1472,12 @@ NSTreeHistorique::AutoriserOuverture(NSDocumentInfo* pNSDocumentInfo)
 	if ((NSDocumentInfo*) NULL == pNSDocumentInfo)
 		return ;
 
+  // No patient or patient being closed -> no way
+  //
+  NSPatientChoisi* pCurrentPatient = pContexte->getPatient() ;
+  if (((NSPatientChoisi*) 0 == pCurrentPatient) || pCurrentPatient->isClosing())
+    return ;
+
 	string codeDocBrut = pNSDocumentInfo->getID() ;
 	iterNSTreeNode iterNode = TrouveNoeud(codeDocBrut) ;
 

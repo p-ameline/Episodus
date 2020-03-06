@@ -125,7 +125,7 @@ NSPrescriptionBaseDlg::createInterfaceElements()
 	_pRLe           = new OWL::TRadioButton(this, IDR_DRG_LE) ;
 	_pNbJours       = new NSEditNum(pContexte, this, IDC_DRG_NBJOURS, 10) ;
   _pNbJours->setLostFocusFunctor(new MemFunctor<NSPrescriptionBaseDlg>((NSPrescriptionBaseDlg*)this, &NSPrescriptionBaseDlg::ExecutedAfterTrtEndDate ));
-  char *temp1[] = {"2HEUR1", "2DAT01", "2DAT11", "2DAT21"} ;
+  const char *temp1[] = { "2HEUR1", "2DAT01", "2DAT11", "2DAT21" } ;
   _pCBDureeTtt    = new NSComboBox(this, IDC_DRG_NBJOURS_TXT, pContexte, temp1, 4) ;
   _pCBDureeTtt->SetLostFocusResponse(new MemFunctor<NSPrescriptionBaseDlg>((NSPrescriptionBaseDlg*)this, &NSPrescriptionBaseDlg::ExecutedAfterTrtEndDate ));
 	_pDateFin       = new NSUtilEditDateHeure(pContexte, this, DRUG_DATE_FIN) ;

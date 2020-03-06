@@ -31,7 +31,7 @@ try
 	pObjectifLexicon    = new NSUtilLexique(pContexte, this, IDC_OBJECTIF_NAME,pContexte->getDico()) ;
 	pUnitValue          = new NSUtilLexique(pContexte, this, IDC_VALUE_UNIT,pContexte->getDico()) ;
 
-	char *tempsUnit[]   = {"2HEUR1", "2DAT01", "2DAT21", "2DAT11", "2DAT31"} ;
+	const char *tempsUnit[] = { "2HEUR1", "2DAT01", "2DAT21", "2DAT11", "2DAT31" } ;
 	pPeriodUnit         = new NSComboBox(this, IDC_PERIOD_UNIT, pContexte, tempsUnit, 5) ;
 	pStaticPeriod       = new TStatic((TWindow*)this, IDC_STATIC_PERIOD) ;
 	pStaticMoments      = new TStatic((TWindow*)this, IDC_STATIC_MOMMENTS) ;

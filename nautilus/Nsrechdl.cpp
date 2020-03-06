@@ -661,16 +661,25 @@ void
 ChoixChemiseDialog::OuvreDocument(int NumDoc)
 {
   NSDocumentInfo* pDocument = (*pDocusArray)[NumDoc-1] ;
+  if ((NSDocumentInfo*) NULL == pDocument)
+    return ;
+
+  // No patient or patient being closed -> no way
+  //
+  NSPatientChoisi* pCurrentPatient = pContexte->getPatient() ;
+  if (((NSPatientChoisi*) 0 == pCurrentPatient) || pCurrentPatient->isClosing())
+    return ;
+
   if (bEditer)
   {
     // cas des fichiers word...
-    pContexte->getPatient()->getDocHis()->AutoriserEdition(pDocument);
+    pCurrentPatient->getDocHis()->AutoriserEdition(pDocument);
   }
   else
   {
     //demander l'autorisation de l'ouverture de ce document, s'il est déjà ouvert,
     //il suffit de l'activer
-    pContexte->getPatient()->getDocHis()->AutoriserOuverture(pDocument);
+    pCurrentPatient->getDocHis()->AutoriserOuverture(pDocument);
   }
 }
 

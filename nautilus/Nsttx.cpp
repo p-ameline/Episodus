@@ -509,7 +509,7 @@ catch (...)
 }void NSAutoWordView::CmFileOpen(){
 try
 {
-  if ((NULL == _pCurrentDocument) || (false == _pCurrentDocument->IsBound()))
+  if (((T_DocumentProxy*) NULL == _pCurrentDocument) || (false == _pCurrentDocument->IsBound()))
     return ;
 
 	string sPath = _pDocTtx->pContexte->PathName("NLTR") ;
@@ -1262,22 +1262,145 @@ NSTtxDocument::GenereRawText(string& sRawText)
   if (false == IsOpen())
     return false ;
 
-  ConvertRTFDialog *pDialog = new ConvertRTFDialog(pContexte->GetMainWindow(), _sFileName) ;
-  pDialog->Create() ;
-
-  // Get text
+  // Fichier RTF
   //
-  char far str[MAXCARS + 1] ;
-  pDialog->getRichEdit()->GetSubText(str, 0, MAXCARS) ;
+  if (_pDocInfo->getTypeSem() == string("ZTRTF"))
+  {
+    ConvertRTFDialog rtfDialog(pContexte, pContexte->GetMainWindow(), _sFileName) ;
+    rtfDialog.Create() ;
 
-  pDialog->CmOk() ;
+    // Get text
+    //
+    char far str[MAXCARS + 1] ;
+    rtfDialog.getRichEdit()->GetSubText(str, 0, MAXCARS) ;
 
-  sRawText = getRawTextHeader() ;
+    rtfDialog.CmOk() ;
 
-  if (string("") != sRawText)
-    sRawText += string(NEWLINE) + string(NEWLINE) ;
+    sRawText = getRawTextHeader() ;
 
-  sRawText += string(str) ;
+    if (string("") != sRawText)
+      sRawText += string(NEWLINE) + string(NEWLINE) ;
+
+    sRawText += string(str) ;
+
+    return true ;
+  }
+
+  // Fichier HTML
+  //
+  if (_pDocInfo->getTypeSem() == string("ZTHTM"))
+  {
+    sRawText = getRawTextHeader() ;
+
+    if (string("") != sRawText)
+      sRawText += string(NEWLINE) + string(NEWLINE) ;
+
+    ifstream inFile ;
+    inFile.open(_sFileName.c_str()) ;
+    if (!inFile)
+      return false ;
+
+    while (!inFile.eof())
+    {
+      string sLine ;
+      getline(inFile, sLine) ;
+      if (string("") != sLine)
+        sRawText += sLine + string(NEWLINE) ;
+    }
+    inFile.close() ;
+
+    int iTagLevel = 0 ;
+
+    size_t cc   = 0 ;
+    size_t iDeb = 0 ;
+
+    while (cc < strlen(sRawText.c_str()))
+    {
+      // lecture jusqu'au prochain marqueur ou fin de fichier
+      //
+      size_t iRawTextLen = strlen(sRawText.c_str()) ;
+      while ((cc < iRawTextLen) && ('<' != sRawText[cc]) && ('>' != sRawText[cc]))
+        cc++ ;
+
+      // Opening tag
+      //
+      if ('<' == sRawText[cc])
+      {
+        if (0 == iTagLevel)
+          iDeb = cc ;
+        cc++ ;
+
+        iTagLevel++ ;
+      }
+      // Closing tag
+      //
+      else if ('>' == sRawText[cc])
+      {
+        iTagLevel-- ;
+
+        if (0 == iTagLevel)
+        {
+          if (cc < strlen(sRawText.c_str()) - 1)
+          {
+            // Tag ending a line, check if the full line should be removed
+            //
+            // Get tag
+            //
+            string sTag = "" ;
+            int i = iDeb + 1 ;
+            for ( ; (' ' != sRawText[i]) && ('>' != sRawText[i]) && ('/' != sRawText[i]) ; i++) ;
+            sTag = pseumaj(string(sRawText, iDeb + 1, i - iDeb -1)) ;
+
+            // Skip the whole <HEAD> block
+            //
+            if (string("HEAD") == sTag)
+            {
+              size_t iPos = sRawText.find("</head>", cc) ;
+              if (NPOS != iPos)
+                cc = iPos + 6 ;
+            }
+            // Skip <!--[IF ><![endif]--> blocks
+            //
+            else if (string("!--[IF") == sTag)
+            {
+              size_t iPos = sRawText.find("<![endif]-->", cc) ;
+              if (NPOS != iPos)
+                cc = iPos + 11 ;
+            }
+            // Skip the whole <XML> block in order not to get the variables it contains
+            //
+            else if (string("XML") == sTag)
+            {
+              size_t iPos = sRawText.find("</xml>", cc) ;
+              if (NPOS != iPos)
+                cc = iPos + 5 ;
+            }
+
+            string sTagReplacer = string("") ;
+            if ((string("BR") == sTag) || (string("P") == sTag))
+              sTagReplacer = string(NEWLINE) ;
+
+            if ((cc < strlen(sRawText.c_str()) - 1 - strlen(NEWLINE)) &&
+                (string(NEWLINE) == string(sRawText, cc + 1, strlen(NEWLINE))))
+            {
+              cc += strlen(NEWLINE) ;
+
+              if (string("") == sTagReplacer)
+                sTagReplacer = string(" ") ;
+            }
+
+            sRawText = string(sRawText, 0, iDeb) + sTagReplacer + string(sRawText, cc + 1, strlen(sRawText.c_str()) - cc - 1) ;
+          }
+          else
+            sRawText = string(sRawText, 0, iDeb) ;
+
+          cc = iDeb ;
+        }
+      }
+    }
+
+    return true ;
+  }
 
   return true ;
 }
@@ -1377,7 +1500,7 @@ END_RESPONSE_TABLE;
 // Constructeur NSTtxView
 ////////////////////////////////////////////////////////////////
 
-NSTtxView::NSTtxView(NSTtxDocument& doc, TWindow* parent)          :TView(doc), pDocTtx(&doc),           NSRichEdit(parent, GetNextViewId(), "", 0, 0, 0, 0){
+NSTtxView::NSTtxView(NSTtxDocument& doc, TWindow* parent)          :TView(doc), pDocTtx(&doc),           NSRichEdit(doc.pContexte, parent, GetNextViewId(), "", 0, 0, 0, 0){
 	Attr.AccelTable = IDA_RICHEDIT ;
 
   pMUEViewMenu = (TMenuDescr*) 0 ;

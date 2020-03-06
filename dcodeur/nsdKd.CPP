@@ -47,7 +47,7 @@ long numStorage::lObjectCount = 0 ;
 long gereNum::lObjectCount = 0 ;
 long gereHeure::lObjectCount = 0 ;
 long gereCode::lObjectCount = 0 ;
-long NSDkdPhrase::lObjectCount = 0 ;
+long NSDkdPhrase::_lObjectCount = 0 ;
 long decodageBase::lObjectCount = 0 ;
 
 //-------------------------------------------------------------------------
@@ -707,10 +707,10 @@ decodageBase::vidangeDkdPhrases()
   //
   for (NSDkdPhrArrayIter i = pArray->begin() ; pArray->end() != i ; i++)
   {
-    _pNoyau->setLocLesion((*i)->locLesion) ;
-    _pNoyau->setDcodeur((*i)->sTexte) ;
+    _pNoyau->setLocLesion((*i)->getLocLesion()) ;
+    _pNoyau->setDcodeur((*i)->getText()) ;
 
-    metPhrase((*i)->decDeb, (*i)->decFin, (*i)->sautLigne);
+    metPhrase((*i)->getDecDeb(), (*i)->getDecFin(), (*i)->getSautLigne());
   }
 
   // On remet en place les paramètres globaux
@@ -3700,33 +3700,33 @@ AdjIntens::AdjIntens()
 
 NSDkdPhrase::NSDkdPhrase()
 {
-  categorie  = -1 ;
-  sTexte     = "" ;
-  sEtiquette = "" ;
-  decDeb     = "" ;
-  decFin     = "" ;
-  sautLigne  = -1 ;
-  locLesion  = "" ;
+  _categorie  = -1 ;
+  _sTexte     = string("") ;
+  _sEtiquette = string("") ;
+  _decDeb     = string("") ;
+  _decFin     = string("") ;
+  _sautLigne  = -1 ;
+  _locLesion  = string("") ;
 
-  lObjectCount++ ;
+  _lObjectCount++ ;
 }
 
 NSDkdPhrase::NSDkdPhrase(const NSDkdPhrase& rv)
 {
-  categorie  = rv.categorie ;
-  sTexte     = rv.sTexte ;
-  sEtiquette = rv.sEtiquette ;
-  decDeb     = rv.decDeb ;
-  decFin     = rv.decFin ;
-  sautLigne  = rv.sautLigne ;
-  locLesion  = rv.locLesion ;
+  _categorie  = rv._categorie ;
+  _sTexte     = rv._sTexte ;
+  _sEtiquette = rv._sEtiquette ;
+  _decDeb     = rv._decDeb ;
+  _decFin     = rv._decFin ;
+  _sautLigne  = rv._sautLigne ;
+  _locLesion  = rv._locLesion ;
 
-  lObjectCount++ ;
+  _lObjectCount++ ;
 }
 
 NSDkdPhrase::~NSDkdPhrase()
 {
-  lObjectCount-- ;
+  _lObjectCount-- ;
 }
 
 NSDkdPhrase&
@@ -3735,13 +3735,13 @@ NSDkdPhrase::operator=(const NSDkdPhrase& src)
 	if (this == &src)
 		return *this ;
 
-	categorie  = src.categorie ;
-  sTexte     = src.sTexte ;
-  sEtiquette = src.sEtiquette ;
-  decDeb     = src.decDeb ;
-  decFin     = src.decFin ;
-  sautLigne  = src.sautLigne ;
-  locLesion  = src.locLesion ;
+	_categorie  = src._categorie ;
+  _sTexte     = src._sTexte ;
+  _sEtiquette = src._sEtiquette ;
+  _decDeb     = src._decDeb ;
+  _decFin     = src._decFin ;
+  _sautLigne  = src._sautLigne ;
+  _locLesion  = src._locLesion ;
 
 	return *this ;
 }
@@ -3749,8 +3749,8 @@ NSDkdPhrase::operator=(const NSDkdPhrase& src)
 int
 NSDkdPhrase::operator==(const NSDkdPhrase& o)
 {
-	if ((sTexte     == o.sTexte) &&
-      (sEtiquette == o.sEtiquette))
+	if ((_sTexte     == o._sTexte) &&
+      (_sEtiquette == o._sEtiquette))
 		return 1 ;
 	return 0 ;
 }

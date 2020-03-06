@@ -446,19 +446,19 @@ class NSDkdPhrase
 {
   protected:
 
-    static long lObjectCount ;
+    static long _lObjectCount ;
+
+    int     _categorie ;      // titre, sstitre, phrase ordinaire...
+    string  _sTexte ;
+
+    string  _sEtiquette ;     // pour le tri ulterieur
+
+    string  _decDeb ;
+    string  _decFin ;
+    int     _sautLigne ;
+    string  _locLesion ;
 
   public:
-
-    int     categorie ;      // titre, sstitre, phrase ordinaire...
-    string  sTexte ;
-
-    string  sEtiquette ;     // pour le tri ulterieur
-
-    string  decDeb ;
-    string  decFin ;
-    int     sautLigne ;
-    string  locLesion ;
 
     NSDkdPhrase() ;
     NSDkdPhrase(const NSDkdPhrase& rv) ;
@@ -467,8 +467,32 @@ class NSDkdPhrase
     int operator == (const NSDkdPhrase& o) ;
     int operator != (const NSDkdPhrase& o) { return !(*this==o) ; }
 
-    static long getNbInstance()	 { return lObjectCount ; }
-    static void initNbInstance() { lObjectCount = 0 ; }
+    bool isEmpty() { return (string("") == _sTexte) ; }
+
+    int    getCategory() const        { return _categorie ; }
+    void   setCategory(const int iC)  { _categorie = iC ; }
+
+    string getText() const            { return _sTexte ; }
+    void   setText(const string sTxt) { _sTexte = sTxt ; }
+    void   addText(const string sTxt) { _sTexte += sTxt ; }
+
+    string getDecDeb() const           { return _decDeb ; }
+    void   setDecDeb(const string sDB) { _decDeb = sDB ; }
+
+    string getDecFin() const           { return _decFin ; }
+    void   setDecFin(const string sDF) { _decFin = sDF ; }
+
+    int    getSautLigne() const        { return _sautLigne ; }
+    void   setSautLigne(const int iSL) { _sautLigne = iSL ; }
+
+    string getLocLesion() const           { return _locLesion ; }
+    void   setLocLesion(const string sLL) { _locLesion = sLL ; }
+
+    string getSortLabel() const           { return _sEtiquette ; }
+    void   setSortLabel(const string sSL) { _sEtiquette = sSL ; }
+
+    static long getNbInstance()	 { return _lObjectCount ; }
+    static void initNbInstance() { _lObjectCount = 0 ; }
 };
 
 typedef vector<NSDkdPhrase*> NSDkdPhrArray ;

@@ -25,8 +25,11 @@ VecteurString::VecteurString()
 
 VecteurString::VecteurString(const char* iniTab[])
 {
+  if (NULL == iniTab)
+    return ;
+
 	int size = sizeof(iniTab) ;
-  for (int i = 0; i < size; i++)
+  for (int i = 0 ; i < size ; i++)
     push_back(new std::string(iniTab[i])) ;
 }
 
@@ -87,6 +90,18 @@ VecteurString::GetElementAt(size_t iIndex) const
     return string("") ;
 
   return *((*this)[iIndex]) ;
+}
+
+void
+VecteurString::SetElementAt(size_t iIndex, const string& sItem)
+{
+  if (iIndex > size())
+    return ;
+
+  if (size() == iIndex)
+    AddString(sItem) ;
+
+  *((*this)[iIndex]) = sItem ;
 }
 
 void

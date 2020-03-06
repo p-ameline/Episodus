@@ -7,6 +7,9 @@
 #define IDC_NWDOC_INTGRP   164
 #define IDC_NWDOC_CREATION 165
 #define IDC_NWDOC_HISTOR   166
+#define IDC_NWDOC_SELECT   167
+#define IDC_NWDOC_COMBO    168
+#define IDC_NWDOC_TYPEEDIT 169
 #define IDC_DOCIMPORTANCE  171
 #define IDC_DOC0P          172
 #define IDC_DOC1P          173
@@ -24,4 +27,11 @@
 #define IDC_NWCHEM_COMMENT  191
 #define IDC_NWCHEM_CHGARMOI 192
 #define IDC_NWCHEM_NOM      193
+//// Dialogue IDD_EDIT_TYPES
+//#define IDC_LW	    101#define IDC_EDIT	  102
+#define IDC_UP	    110
+#define IDC_DOWN	  111
+#define IDC_INSERT	112
+#define IDC_UPDATE	113
+#define IDC_DELETE	114
 
